@@ -1,0 +1,102 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A01: Potenzgesetze}
+    \lang{en}{problem_1}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Vergleichen von Zahlen und einfache Addition}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+
+\lang{de}{
+	\title{A01: Potenzgesetze}
+}
+\lang{en}{
+	\title{Problem 1}
+}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9285}{Ticket 9285}
+\end{block}
+
+\begin{problem}
+	\begin{question}
+      \lang{de}{\text{Schreiben Sie den Ausdruck $\frac{\var{a}\cdot \var{a}^{\frac{2}{\var{n}}}}{\var{a}^{\frac{1}{\var{n}}}}$ 
+             in der Form
+            $\var{a}^{\frac{x}{y}}$, wobei $\frac{x}{y}$ ein vollständig gekürzter Bruch ist.}}
+      \lang{en}{\text{Write the expression $\frac{\var{a}\cdot \var{a}^{\frac{2}{\var{n}}}}{\var{a}^{\frac{1}{\var{n}}}}$ 
+             in the form
+            $\var{a}^{\frac{x}{y}}$, where $\frac{x}{y}$ is a simplified fraction.}}
+      \explanation{}
+      \type{input.number}
+      \field{rational}
+
+      \begin{variables}
+                   \randint[Z]{a}{2}{11}
+                   \randint[Z]{n}{2}{12}
+                   \function[calculate]{b}{n+1}
+                   
+       \end{variables}
+
+      \begin{answer}
+            \text{$x=$ }
+            \solution{b}
+      \end{answer}
+       \begin{answer}
+            \text{$y=$ }
+            \solution{n}
+      \end{answer}
+	\end{question}
+	
+	\begin{question}
+      \lang{de}{\text{Berechnen Sie $x=\sqrt{(-\var{a})^\var{b}}$ und $y=\sqrt[3]{(-\var{a})^\var{c}}$.}}
+      \lang{en}{\text{Calculate $x=\sqrt{(-\var{a})^\var{b}}$ and $y=\sqrt[3]{(-\var{a})^\var{c}}$.}}
+      \explanation{}
+
+      \type{input.number}
+      \precision{3}
+      \field{real}
+
+      \begin{variables}
+                   \randint[Z]{a}{2}{7}
+                   \randint[Z]{n}{1}{4}
+                   \randint[Z]{m}{1}{2}
+                   \function[calculate]{b}{2*n}
+                   \function[calculate]{c}{6*m}
+                   \function[calculate]{x}{a^n}
+                   \function[calculate]{y}{a^(2*m)}
+       \end{variables}
+
+      \begin{answer}
+            \text{$x=$ }
+            \solution{x}
+      \end{answer}
+       \begin{answer}
+            \text{$y=$ }
+            \solution{y}
+      \end{answer}
+	\end{question}
+	
+\end{problem}
+\embedmathlet{gwtmathlet}
+
+
+
+\end{content}

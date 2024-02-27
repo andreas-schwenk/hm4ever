@@ -1,0 +1,843 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Symmetrische reelle Matrizen}
+    \lang{en}{Symmetric real matrices}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T404_Hyperbola.meta.xml}{T404_Hyperbola}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T404_Ellipse_B.meta.xml}{T404_Ellipse_B}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T404_Ellipse_A.meta.xml}{T404_Ellipse_A}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T404_ConicSections.meta.xml}{T404_ConicSections}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+\end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T403a_Vektorraum/g_art_content_10c_Orthogonalbasen.meta.xml}{content_10c_Orthogonalbasen}
+    \link{generic_article}{content/rwth/HM1/T404_Eigenwerte,_Eigenvektoren/g_art_content_11_eigenwerte.meta.xml}{eigenwerte}
+    \link{generic_article}{content/rwth/HM1/T109_Skalar-_und_Vektorprodukt/g_art_content_31_skalarprodukt.meta.xml}{skalarprodukt}
+    \link{generic_article}{content/rwth/HM1/T108_Vektorrechnung/g_art_content_30_basen_eigenschaften.meta.xml}{basen}
+    \link{generic_article}{content/rwth/HM1/T109_Skalar-_und_Vektorprodukt/g_art_content_34_vektorprodukt.meta.xml}{vektorprodukt}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{4}
+\ombarticle{2}
+
+\title{\lang{de}{Symmetrische reelle Matrizen} \lang{en}{Symmetric real matrices}}
+
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/11467}{Ticket 11467}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\newcommand{\sproduct}[2]{\langle #1, #2 \rangle}
+
+\lang{de}{In diesem Abschnitt betrachten wir einen Spezialfall quadratischer Matrizen, nämlich die reellen symmetrischen Matrizen.
+Als Anwendung studieren wir die Hauptachsen-Transformation von Kegelschnitten.}
+\lang{en}{In this chapter we will we consider a special type of square matrices - the real symmetric matrices. As an application
+we study we main axis transformation of conic sections.}
+
+\section{\lang{de}{Symmetrische Matrizen} \lang{en}{Symmetric matrices}}
+
+\begin{definition}\label{def:symmetrischeMatrix}
+\lang{de}{Eine quadratische Matrix $A\in M(n;\K)$ heißt \notion{symmetrisch},
+wenn sie gleich ihrer transponierten Matrix ist, also
+\[ A^T=A.\]}
+\lang{en}{A square matrix $A\in M(n;\K)$ is called \notion{symmetric},
+if it is equal to its tranposed matrix, so
+\[ A^T=A.\]}
+\end{definition}
+
+\begin{example}
+\begin{enumerate}
+\item \lang{de}{Beim Transponieren von $(2\times 2)$-Matrizen wird lediglich
+der Eintrag an der Stelle $(1,2)$ mit dem Eintrag an der Stelle $(2,1)$
+vertauscht. Die $(2\times 2)$-Matrix $A=\left( \begin{smallmatrix}2 & 1 \\ 1 & -1\end{smallmatrix}\right) 
+\in M(2;\R)$ ist also symmetrisch, da die beiden Einträge gleich sind.
+Die Matrix $A=\left( \begin{smallmatrix}5 & -1 \\ 2 & 0\end{smallmatrix}\right) 
+\in M(2;\R)$ hingegen ist nicht symmetrisch.}
+\lang{en}{The transposition of a $(2\times 2)$-matrix only changes the entry $(1,2)$ with the entry $(2,1)$.
+The $(2\times 2)$-matrix $A=\left( \begin{smallmatrix}2 & 1 \\ 1 & -1\end{smallmatrix}\right) 
+\in M(2;\R)$ is symmetric, because those entries are equal.
+However the matrix $A=\left( \begin{smallmatrix}5 & -1 \\ 2 & 0\end{smallmatrix}\right) 
+\in M(2;\R)$ is not symmetric.}
+
+\item \lang{de}{Für die $(3\times 3)$-Matrix $A=\left( \begin{smallmatrix}2&0 & 1 \\ 0& 1 & -1\\ 0&1 & 3\end{smallmatrix}\right) $ gilt
+\[  A^T=\begin{pmatrix} 2&0 & 1 \\ 0& 1 & -1\\ 0&1 & 3\end{pmatrix}^T
+=\begin{pmatrix} 2&0&0 \\ 0 &1&1\\ 1&-1&3\end{pmatrix}. \]
+Also ist $A^T\neq A$ und daher $A$ nicht symmetrisch.}
+\lang{en}{For the $(3\times 3)$-matrix $A=\left( \begin{smallmatrix}2&0 & 1 \\ 0& 1 & -1\\ 0&1 & 3\end{smallmatrix}\right) $ holds
+\[  A^T=\begin{pmatrix} 2&0 & 1 \\ 0& 1 & -1\\ 0&1 & 3\end{pmatrix}^T
+=\begin{pmatrix} 2&0&0 \\ 0 &1&1\\ 1&-1&3\end{pmatrix}. \]
+So it is $A^T\neq A$ and therefore $A$ is not symmetric.}
+\item 
+\lang{de}{Jede Diagonalmatrix ist symmetrisch, da beim Transponieren die
+Diagonaleinträge fest bleiben und außerhalb der Diagonalen nur Nullen
+stehen.}
+\lang{en}{Every diagonal matrix is symmetric, because the diagonal entries are fix under the transposition and
+the entries outside the diagonal are all equal to zero.}
+\end{enumerate}
+\end{example}
+
+
+\begin{quickcheck}
+\text{\lang{de}{Markieren Sie alle symmetrischen Matrizen} \lang{de}{Mark all the symmetric matrices.}}
+\begin{choices}{multiple}
+
+        \begin{choice}
+            \text{$A=\begin{pmatrix}2&0\\0&-5\end{pmatrix}$}
+			\solution{true}
+		\end{choice}
+                    
+        \begin{choice}
+            \text{$B=\begin{pmatrix}2&3\\-3&-5\end{pmatrix}$}
+			\solution{false}
+		\end{choice} 
+        \begin{choice}
+            \text{$C=\begin{pmatrix}1&4&0\\4&5&1\\3&1&0\end{pmatrix}$}
+			\solution{false}
+		\end{choice} 
+        \begin{choice}
+            \text{$D=\begin{pmatrix}0&0&1\\0&1&0\\1&0&0\end{pmatrix}$}
+			\solution{true}
+		\end{choice}
+\end{choices}
+\lang{de}{\explanation{Nur $A$ und $D$ erfüllen die Symmetriebedingung $a_{ij}=a_{ji}$ (bzw. $d_{ij}=d_{ji}$) für \emph{alle} $i$ und $j$.}}
+\lang{en}{\explanation{Only $A$ and $D$ fulfill the erfüllen die symmetrie condition $a_{ij}=a_{ji}$ (respectively $d_{ij}=d_{ji}$) for \emph{all} $i$ and $j$.}}
+\end{quickcheck}
+
+
+\section{\lang{de}{Eigenwerte reeller symmetrischer Matrizen} \lang{en}{Eigenvalues of real symmetric matrices}}\label{sec:eigenwerteRellerSymmetrischerMatrizen}
+
+\lang{de}{Wir hatten im \ref[eigenwerte][letzten Abschnitt]{ex:keine-reellen-eigenwerte} gesehen, 
+dass es reelle Matrizen gibt, die keine oder nur wenige reelle Eigenwerte besitzen.
+Erst wenn man  solche Matrizen als komplexe Matrizen auffasst, findet man dann komplexe 
+Eigenwerte, wie wir in der
+\ref[eigenwerte][letzten Bemerkung im letzten Abschnitt]{rem:matrizen-ueber-c} gesehen haben.}
+\lang{en}{We have seen in the \ref[eigenwerte][last section]{ex:keine-reellen-eigenwerte}, 
+that it exist real matrices, that have only a few or no real eigenvalues.
+Only when we consider such matrices as complex matrix, we find complex eigenvalues, like we have seen in the
+\ref[eigenwerte][last remark in the last section]{rem:matrizen-ueber-c}.}
+
+\lang{de}{Bei symmetrischen Matrizen passiert das nicht. Hier sind alle potenziell komplexen Eigenwerte schon reell.}
+\lang{en}{This does not happen with symmetric matrices. All potential complex eigenvalues are already real.}
+
+\begin{theorem}\label{thm:reell-symm-eigenwerte}
+\lang{de}{Das charakteristische Polynom einer reellen, symmetrischen Matrix $A\in M(n;\R)$ zerfällt über $\R$ in $n$ Linearfaktoren, hat
+also (mit Vielfachheiten gezählt) $n$ Nullstellen.\\
+
+Insbesondere besitzt eine reelle symmetrische Matrix reelle Eigenwerte.}
+\lang{en}{The characteristic polynomial of a real, symmetric matrix $A\in M(n;\R)$
+decays over $\R$ in $n$ linear factors, has $n$ zeros (including the multiples).\\
+
+Especially a real symmetric matrix has real eigenvalues.}
+\end{theorem}
+
+\begin{proof*}
+\begin{showhide}
+\lang{de}{Wir fassen die reelle symmetrische Matrix $A$ zunächst als komplexe Matrix auf,
+also $A\in M(n;\C)$. Das charakteristische Polynom $p_A$ zerfällt über $\C$ in Linearfaktoren und hat entsprechend $n$ (nicht notwendigerweise verschiedene) Nullstellen, 
+egal ob $A$ symmetrisch ist oder nicht.
+Wir zeigen, dass für symmetrisches $A$ diese Nullstellen alle reell sind, also alle potenziell komplexen Eigenwerte von $A$ bereits zu $\R$ gehören.
+Dazu benutzen wir folgende Idee:}
+\lang{en}{To begin with we perceive the real symmetric matrix $A$ as a complex matric, so $A\in M(n;\C)$. 
+The characteristic polynomial $p_A$ decays over $\C$ in linear fectors and therefore has $n$ (not necessarily different) 
+zero, no matter if $A$ is symmetric or not.
+We shows, that for a symmetric $A$ those zeros are all real, so all potential complex eigenvalues von $A$ are already in $\R$.
+For this purpose we use the following idea:}
+
+\lang{de}{Für jeden Vektor $v\in \C^n$, $v\neq 0$, ist das Produkt 
+\[ \bar{v}^T\cdot v=\bar{v_1}\cdot v_1+\ldots +\bar{v_n}\cdot v_n={|v_1|}^2+\ldots+{|v_n|}^2>0\]
+eine positive reelle Zahl, deren Quadratwurzel man auch als (komplexe) \emph{Norm} $\vert\!\vert v\vert\!\vert$
+des Vektors $v$ bezeichnet (Dies ist die Verallgemeinerung der Euklidischen Norm des $\R^n$ auf den $\C^n$).
+Hierbei ist $\bar{v}=(\bar{v_1},\ldots,\bar{v_n})^T$ der zu $v=(v_1,\ldots, v_n)^T$ konjugiert komplexe Vektor, 
+dessen Einträge genau die konjugiert komplexen Zahlen zu den Einträgen von $v$ sind.}
+\lang{en}{For each vector $v\in \C^n$, $v\neq 0$, the product 
+\[ \bar{v}^T\cdot v=\bar{v_1}\cdot v_1+\ldots +\bar{v_n}\cdot v_n={|v_1|}^2+\ldots+{|v_n|}^2>0\]
+is a positive real number and its square root may be denominated also as a (complex) \emph{norm} $\vert\!\vert v\vert\!\vert$
+of the vector $v$. (This is a generalisation of the euclidian norm $\R^n$ over $\C^n$).
+In this connection is $\bar{v}=(\bar{v_1},\ldots,\bar{v_n})^T$ der zu $v=(v_1,\ldots, v_n)^T$ the complex conjugate of the vector, 
+whose entries are exactly the complex conjugated numbers of the entries of $v$.}
+
+\lang{de}{ Ist nun $\lambda\in \C$ irgendein  Eigenwert von $A$,  und  ist $v\in  \C^n$ ein zugehöriger
+ Eigenvektor, dann gilt einerseits
+ \begin{align*} 
+  (A\bar{v})^T \cdot v &= \bar{(Av)}^T \cdot v   & (A\text{ hat reelle Einträge}) \\
+  &  =\bar{(\lambda v)}^T \cdot v  & (v \text{ Eigenvektor zu }\lambda)\\
+  & =(\bar{\lambda} \bar{v}^T) \cdot v & (\text{Regeln für Konjugierte})\\
+  & =\bar{\lambda} \cdot \left( \bar{v}^T\cdot v\right) \qquad  & (\text{Regel für Matrixmultiplikation}),
+ \end{align*}
+aber  andererseits gilt auch
+\begin{align*}
+(A\bar{v})^T \cdot v &= \bar{v}^T A^T \cdot v& (\text{Regel für Transponierte})\\
+& =\bar{v}^T Av& (A\text{ symmetrisch})\\
+&=\bar{v}^T (\lambda v)  & (v \text{ Eigenvektor zu }\lambda)\\
+&=\lambda \cdot  \left( \bar{v}^T\cdot v\right) \qquad  & (\text{Regel für Matrixmultiplikation}).
+\end{align*}}
+\lang{en}{ If $\lambda\in \C$ is any eigenvalue of $A$, $v\in  \C^n$ is a corresponding eigenvalue, then holds
+ \begin{align*} 
+  (A\bar{v})^T \cdot v &= \bar{(Av)}^T \cdot v   & (A\text{ has real entries}) \\
+  &  =\bar{(\lambda v)}^T \cdot v  & (v \text{ Eigenvalue of }\lambda)\\
+  & =(\bar{\lambda} \bar{v}^T) \cdot v & (\text{Rules for the conjugate})\\
+  & =\bar{\lambda} \cdot \left( \bar{v}^T\cdot v\right) \qquad  & (\text{Rule for matrix multiplication}),
+ \end{align*}
+ but on the other hand holds also
+\begin{align*}
+(A\bar{v})^T \cdot v &= \bar{v}^T A^T \cdot v& (\text{Rules for the transpose})\\
+& =\bar{v}^T Av& (A\text{ symmetric})\\
+&=\bar{v}^T (\lambda v)  & (v \text{ eigenvector of }\lambda)\\
+&=\lambda \cdot  \left( \bar{v}^T\cdot v\right) \qquad  & (\text{Rule for matrix multiplication}).
+\end{align*}}
+
+\lang{de}{Da die reelle Zahl $\vert\!\vert v\vert\!\vert=\bar{v}^T\cdot v$ ungleich $0$ ist, 
+muss somit $\bar{\lambda}=\lambda$
+gelten, d.h. $\lambda$ ist reell.}
+\lang{en}{Since the real number $\vert\!\vert v\vert\!\vert=\bar{v}^T\cdot v$ is unequal to $0$, 
+it must hold $\bar{\lambda}=\lambda$, i.e. $\lambda$ is real.}
+\end{showhide}
+\end{proof*}
+
+\begin{example}
+\lang{de}{
+Wir betrachten wieder die
+symmetrische $(2\times 2)$-Matrix $A=\left( \begin{smallmatrix}2 & 1 \\ 1 & -1\end{smallmatrix}\right) 
+\in M(2;\R)$ von oben. Für sie gilt
+\[ p_A(t)=\det \big( \begin{pmatrix}2-t & 1 \\ 1 & -1-t
+\end{pmatrix} \big) = (2-t)(-1-t)-1=-2-2t+t+t^2-1=t^2-t-3.\]
+Die Nullstellen von $p_A(t)$ und daher die Eigenwerte von $A$ sind
+\[ t_{1,2}= \frac{1}{2}\pm \sqrt{\frac{1}{4}+3}=\frac{1}{2}\pm \frac{\sqrt{13}}{2},\]
+die in der Tat beide reell sind.}
+\lang{en}{
+We consider again the symmetric $(2\times 2)$-matrix $A=\left( \begin{smallmatrix}2 & 1 \\ 1 & -1\end{smallmatrix}\right) 
+\in M(2;\R)$ from above. Here holds
+\[ p_A(t)=\det \big( \begin{pmatrix}2-t & 1 \\ 1 & -1-t
+\end{pmatrix} \big) = (2-t)(-1-t)-1=-2-2t+t+t^2-1=t^2-t-3.\]
+The zeros of $p_A(t)$ and there the eigenvalues of $A$ are
+\[ t_{1,2}= \frac{1}{2}\pm \sqrt{\frac{1}{4}+3}=\frac{1}{2}\pm \frac{\sqrt{13}}{2},\]
+which are indeed both real.}
+\end{example}
+
+\begin{tabs*}[\initialtab{0}]
+\tab{\lang{de}{Allgemeine symmetrische $(2\times 2)$-Matrix über $\R$}\lang{en}{General symmetric $(2\times 2)$-matrix over $\R$}}
+\lang{de}{Die Rechnung, die wir für die Matrix $\left( \begin{smallmatrix}2 & 1 \\ 1 & -1\end{smallmatrix}\right)$ im vorigen Beispiel gemacht haben,
+lässt sich auch allgemein führen.
+Wir nutzen das als Möglichkeit,  Satz \ref{thm:reell-symm-eigenwerte} für $(2\times 2)$-Matrizen  explizit durchzurechnen.}
+\lang{en}{The calculation, which we have done for the matrix $\left( \begin{smallmatrix}2 & 1 \\ 1 & -1\end{smallmatrix}\right)$ in the above example,
+can be also done in general.
+We take this chance to use the theorem \ref{thm:reell-symm-eigenwerte} for $(2\times 2)$-matrices for a concrete example.}
+
+\lang{de}{
+Eine allgemeine symmetrische Matrix $A=\left( \begin{smallmatrix}a & b \\ b & d\end{smallmatrix}\right)\in M(2;\R)$  hat das
+charakteristische Polynom
+\[ p_A(t)=\det \big( \begin{pmatrix}
+a-t & b\\ b & d-t \end{pmatrix} \big)=(a-t)(d-t)-b^2
+=t^2-(a+d)t+ad-b^2.\]
+% Mittels quadratischer Ergänzung erhalten wir
+% \begin{eqnarray*}
+% p_A(t) &=& t^2-(a+d)t+ad-b^2
+% =\left( t- \frac{a+d}{2}\right)^2
+% -\frac{(a+d)^2}{4}+ad-b^2 \\
+% &=& \left( t- \frac{a+d}{2}\right)^2 -\frac{a^2+2ad+d^2}{4}+ad-b^2 \\
+% &=& \left( t- \frac{a+d}{2}\right)^2 -\frac{(a-d)^2}{4}-b^2.
+% \end{eqnarray*}
+Die Nullstellen des charakteristischen Polynoms $p_A$ sind also
+\[ t_{1,2}= \frac{a+d}{2} \pm \sqrt{\frac{(a+d)^2}{4}-(ad-b^2)}=\frac{a+d}{2} \pm \sqrt{\frac{(a-d)^2}{4}+b^2}. \]
+Beide sind reell, weil die Diskriminante  $\frac{(a-d)^2}{4}+b^2$  als Summe von
+Quadraten stets $\geq 0$ ist.}
+\lang{en}{
+A general symmetric matrix $A=\left( \begin{smallmatrix}a & b \\ b & d\end{smallmatrix}\right)\in M(2;\R)$ has
+the characteristic polynomial
+\[ p_A(t)=\det \big( \begin{pmatrix}
+a-t & b\\ b & d-t \end{pmatrix} \big)=(a-t)(d-t)-b^2
+=t^2-(a+d)t+ad-b^2.\]
+% Mittels quadratischer Ergänzung erhalten wir
+% \begin{eqnarray*}
+% p_A(t) &=& t^2-(a+d)t+ad-b^2
+% =\left( t- \frac{a+d}{2}\right)^2
+% -\frac{(a+d)^2}{4}+ad-b^2 \\
+% &=& \left( t- \frac{a+d}{2}\right)^2 -\frac{a^2+2ad+d^2}{4}+ad-b^2 \\
+% &=& \left( t- \frac{a+d}{2}\right)^2 -\frac{(a-d)^2}{4}-b^2.
+% \end{eqnarray*}
+The zeros of the characteristic polynomial $p_A$ are also
+\[ t_{1,2}= \frac{a+d}{2} \pm \sqrt{\frac{(a+d)^2}{4}-(ad-b^2)}=\frac{a+d}{2} \pm \sqrt{\frac{(a-d)^2}{4}+b^2}. \]
+Both are real, because the discriminant $\frac{(a-d)^2}{4}+b^2$ as a sum of squares is always $\geq 0$.}
+\end{tabs*}
+
+\section{\lang{de}{Eigenvektoren symmetrischer reeller Matrizen} \lang{en}{Eigenvectors of symmetric real matrices}}\label{sec:eigenvektorenRellerSymmetrischerMatrizen}
+\lang{de}{Reelle symmetrische Matrizen haben also reelle Eigenwerte. 
+Für die Eigenvektoren solcher Matrizen  gilt sogar noch mehr: 
+Wir versehen den $\R^n$ mit dem \link{skalarprodukt}{Standardskalarprodukt} $\langle\cdot,\cdot\rangle$, fassen ihn also als Euklidischen Vektorraum auf, in dem wir Abstände und Winkel messen können.
+Dann gilt der folgende Satz.}
+\lang{en}{Real symmetric matrices have real eigenvalues.
+For the eigenvectors of such matrices holds even more:
+We provide $\R^n$ with the \link{skalarprodukt}{standard scalar product} $\langle\cdot,\cdot\rangle$,
+so consider it as a euclidian vector space, in which we can measure angles and distances.
+Then holds the following theorem.}
+
+\begin{theorem}\label{thm:eigenvektoren-symm-reeller-matr}
+\lang{de}{Für eine symmetrische reelle Matrix $A\in M(n;\R)$ gilt:
+\begin{enumerate}
+\item Sind $v$ und $w$ in $\R^n$ Eigenvektoren von $A$ zu verschiedenen Eigenwerten, so
+stehen $v$ und $w$ senkrecht aufeinander.
+\item Es gibt eine Basis des $\R^n$, die aus paarweise zueinander orthogonalen Eigenvektoren von $A$ besteht.
+\end{enumerate}}
+\lang{en}{For a symmetric real matrix $A\in M(n;\R)$ holds:
+\begin{enumerate}
+\item If $v$ and $w$ in $\R^n$ are eigenvectors of $A$ for different eigenvalues, then
+$v$ and $w$ are perpendicular to each other.
+\item It exists a basis of $\R^n$, which consists of pairwise perpendicular eigenvectors of $A$.
+\end{enumerate}}
+\end{theorem}
+
+\lang{de}{Der zweite Teil von Satz \ref{thm:eigenvektoren-symm-reeller-matr} kann noch etwas strenger formuliert werden, in dem
+wir die Basis aus paarweise orthogonalen Eigenvektoren noch normieren:
+Zu jeder symmetrischen Matrix $A=A^T\in M(n;\R)$ gibt es eine Orthonormalbasis (ONB) $v_1,\ldots,v_n$ des $\R^n$ aus 
+Eigenvektoren von $A$.
+
+Das heißt eine reelle symmetrische Matrix können wir durch einen Basiswechsel immer durch eine Diagonalmatrix ersetzen.}
+
+\lang{en}{The second part of theorem \ref{thm:eigenvektoren-symm-reeller-matr} may be expressed more strict,
+by normalising the basis of pairwise perpendicular eigenvectors:
+To each symmetric matrix $A=A^T\in M(n;\R)$ exists a orthonormal basis $v_1,\ldots,v_n$ of $\R^n$ 
+consisting of eigenvectors of $A$.
+
+As a conclusion, we can always substitute a real symmetric matrix through a diagonal matrix by performing a basis transformation.}
+
+\begin{proof*}
+\begin{showhide}
+\lang{de}{Zur ersten Aussage: Wir benutzen die \ref[content_10c_Orthogonalbasen][Eigenschaften des Skalarprodukts]{def:vektorraum}
+ $\langle v,w\rangle=v^T\cdot w$.
+Es sei  $v$ Eigenvektor zum Eigenwert $\lambda$ und $w$ Eigenvektor von $A$ zum Eigenwert $\mu$.
+Unter Ausnutzung der Linearität des Skalarprodukts in jeder Komponente und der Symmetrie von $A$ gilt dann
+\begin{eqnarray*}
+\lambda \cdot \sproduct{v}{w} &=& \sproduct{\lambda \cdot v}{w}= \sproduct{A \cdot v}{w}\\
+&=&(Av)^T\cdot w = v^T\cdot A^T\cdot w = v^T\cdot A\cdot w\\
+&=& \sproduct{v}{A \cdot w}= \sproduct{v}{\mu \cdot w} \\
+&=& \mu \cdot \sproduct{v}{w}.
+\end{eqnarray*}
+Wenn nun $\lambda\neq \mu$ ist, muss daher das Skalarprodukt
+$\sproduct{v}{w}$ gleich $0$ sein, d.h. die Eigenvektoren stehen senkrecht
+zueinander.\\
+Die zweite Aussage zu beweisen, ist langwieriger. Wir verzichten hier darauf.}
+\lang{en}{First statement: We utilise the \ref[content_10c_Orthogonalbasen][characteristics of the scalar product]{def:vektorraum}
+ $\langle v,w\rangle=v^T\cdot w$.
+Let $v$ be an eigenvector for the eigenvalue $\lambda$ and $w$ eigenvector of $A$ for the eigenvalue $\mu$.
+With help of the linearity of the scalar product in each component and the symmetrie of $A$ holds
+\begin{eqnarray*}
+\lambda \cdot \sproduct{v}{w} &=& \sproduct{\lambda \cdot v}{w}= \sproduct{A \cdot v}{w}\\
+&=&(Av)^T\cdot w = v^T\cdot A^T\cdot w = v^T\cdot A\cdot w\\
+&=& \sproduct{v}{A \cdot w}= \sproduct{v}{\mu \cdot w} \\
+&=& \mu \cdot \sproduct{v}{w}.
+\end{eqnarray*}
+If it is $\lambda\neq \mu$, the scalarproduct
+$\sproduct{v}{w}$ must be equal to $0$, so the eigenvectors are perpendicular to each other.\\
+Since the proof of the second statement is more protracted, we resign the proof.}
+\end{showhide}
+\end{proof*}
+
+
+\begin{example}
+\lang{de}{Wir betrachten wieder die symmetrische reelle $(2\times 2)$-Matrix $A=\left( \begin{smallmatrix}2 & 1 \\ 1 & -1\end{smallmatrix}\right) 
+\in M(2;\R)$, für die wir die Eigenwerte
+\[ t_{1,2}= \frac{1}{2}\pm \sqrt{\frac{1}{4}+3}=\frac{1}{2}\pm \frac{\sqrt{13}}{2}\]
+berechnet hatten.
+Ein Eigenvektor zu $t_1=\frac{1}{2}+\frac{\sqrt{13}}{2}$ ist eine nicht-triviale Lösung des LGS
+\[  \begin{pmatrix} 2-t_1 & 1 \\ 1 & -1-t_1 \end{pmatrix}
+\cdot \begin{pmatrix} x_1 \\x_2\end{pmatrix}
+=\begin{pmatrix} 0 \\0\end{pmatrix}. \]
+Also zum Beispiel
+\[  v=\begin{pmatrix} 3+\sqrt{13} \\ 2\end{pmatrix}. \]}
+\lang{en}{We consider again the symmetric real $(2\times 2)$-matrix $A=\left( \begin{smallmatrix}2 & 1 \\ 1 & -1\end{smallmatrix}\right) 
+\in M(2;\R)$, for which we have calculated the eigenvalues
+\[ t_{1,2}= \frac{1}{2}\pm \sqrt{\frac{1}{4}+3}=\frac{1}{2}\pm \frac{\sqrt{13}}{2}.\]
+The eigenvector for $t_1=\frac{1}{2}+\frac{\sqrt{13}}{2}$ is a nontrivial solution of the linear system
+\[  \begin{pmatrix} 2-t_1 & 1 \\ 1 & -1-t_1 \end{pmatrix}
+\cdot \begin{pmatrix} x_1 \\x_2\end{pmatrix}
+=\begin{pmatrix} 0 \\0\end{pmatrix}. \]
+So for example
+\[  v=\begin{pmatrix} 3+\sqrt{13} \\ 2\end{pmatrix}. \]}
+
+
+Accordingly we get an eigenvector for $t_2=\frac{1}{2}-\frac{\sqrt{13}}{2}$ through
+\[ w=\begin{pmatrix} 3-\sqrt{13} \\ 2\end{pmatrix}. \]
+Now we cheack again, that those to vectore really are perpendicular to each other:
+\[  {\sproduct{v}{w}}= (3+\sqrt{13})(3-\sqrt{13})+2\cdot 2
+=3^2-\sqrt{13}^2+4=9-13+4=0.\]
+Since the vecotrs $v$ and $w$ are not linearly dependent, they automatically built
+a basis of $\R^2$ (see
+ \link{basen}{Property of basis}).
+\end{example}
+
+
+\begin{remark}
+\lang{de}{Die im \lref{thm:eigenvektoren-symm-reeller-matr}{obigem Satz} genannte Eigenschaft, dass Eigenvektoren zu verschiedenen
+Eigenwerten senkrecht zueinander stehen, wenn die reelle Matrix symmetrisch ist, kann auch dazu genutzt werden, die \emph{Eigenvektoren
+schneller zu berechnen}.}
+\lang{de}{The characteristic mentioned in the \lref{thm:eigenvektoren-symm-reeller-matr}{above theorem},
+that eigenvectors for different eigenvalues are perpendiculare to each other, when the real matrix is symmetrical,
+may be used to \emph{calculate the eigenvectors quicker}.}
+\begin{showhide}
+\lang{de}{
+Im vorigen Beispiel hatten wir uns Rechenaufwand lediglich dadurch gespart, dass wir gesehen haben, dass man durch entsprechende Rechnung
+mit $-\sqrt{13}$ statt $+\sqrt{13}$ den Eigenvektor zum anderen Eigenwert bekommt. Für allgemeinere symmetrische $(2\times 2)$-Matrizen
+ist ein solches Argument jedoch meist nicht möglich.}
+\lang{en}{
+We only saved calculation time in the previuos example, because we saw, that the according calculation with
+$-\sqrt{13}$ instead of $+\sqrt{13}$ gives us the eigenvector for the other eigenvalue.
+This argument is not possible for most of the general symmetric $(2\times 2)$-matrices.}\\
+
+\lang{de}{
+Der Satz sagt uns jedoch, dass die Eigenvektoren senkrecht aufeinander stehen müssen! Wenn wir den einen berechnet haben, im vorherigen 
+Beispiel z.B. den Vektor \[  v=\begin{pmatrix} 3+\sqrt{13} \\ 2\end{pmatrix}, \]
+so erhalten wir einen Eigenvektor zum anderen Eigenwert mittels
+\[ z=\begin{pmatrix} -2 \\ 3+\sqrt{13}\end{pmatrix} \]
+(also Vertauschen der Komponenten und negieren einer Komponente), weil dieser Vektor senkrecht auf dem anderen steht.}
+\lang{en}{
+But the theorem states, that the eigenvectors must be perpendicular to each other!
+If we have caluclated one, in the previous example e.g. the vector \[  v=\begin{pmatrix} 3+\sqrt{13} \\ 2\end{pmatrix}, \]
+we get an eigenvector to the other eigenvectro via
+\[ z=\begin{pmatrix} -2 \\ 3+\sqrt{13}\end{pmatrix} \]
+(so swapping the components and negating one component), because this vector is perpendicular to the other.}
+
+
+\lang{de}{
+In der Tat rechnet man leicht nach, dass dieser Vektor $z$ und der obige Vektor $w$ Vielfache voneinander sind, denn
+\[ \frac{3+\sqrt{13}}{2}\cdot w = \begin{pmatrix} \frac{3+\sqrt{13}}{2}\cdot (3-\sqrt{13}) \\ \frac{3+\sqrt{13}}{2}\cdot 2\end{pmatrix}
+= \begin{pmatrix} \frac{9-13}{2} \\ 3+\sqrt{13}\end{pmatrix} =z.\]}
+\lang{en}{
+Indeed we check again easily, that this vector $z$ and the above vector $w$ are multiples of each other, because
+\[ \frac{3+\sqrt{13}}{2}\cdot w = \begin{pmatrix} \frac{3+\sqrt{13}}{2}\cdot (3-\sqrt{13}) \\ \frac{3+\sqrt{13}}{2}\cdot 2\end{pmatrix}
+= \begin{pmatrix} \frac{9-13}{2} \\ 3+\sqrt{13}\end{pmatrix} =z.\]}
+\\ 
+
+\lang{de}{
+Für symmetrische reelle $(3\times 3)$-Matrizen kann man  den Rechenaufwand ebenfalls reduzieren. 
+Wenn man nämlich
+zwei Eigenvektoren berechnet hat, muss der dritte senkrecht zu den ersten beiden sein. 
+Ein solcher lässt sich aber leicht mit
+dem \link{vektorprodukt}{Vektorprodukt} berechnen.}
+\lang{en}{
+We can also reduce the calculation time for symmetric real $(3\times 3)$-matrices. 
+When we have two eigenvalues calculated, the third one must be perpendicular to those.
+Such a vector is easily caluclated with help of the
+\link{vektorprodukt}{vector product}.}
+\end{showhide}
+\end{remark}
+
+\begin{quickcheck}
+\lang{de}{\text{Die Matrix $A=\begin{pmatrix}0&1&0\\1&0&0\\0&0&1\end{pmatrix}$ hat den doppelten Eigenwert $\lambda=1$ sowie den Eigenwert $\mu=-1$.\\
+Gibt es eine Matrix $B$ so, dass $B^TAB=\begin{pmatrix}1&0&0\\0&1&0\\0&0&-1\end{pmatrix}$?}}
+\lang{en}{\text{The matrix $A=\begin{pmatrix}0&1&0\\1&0&0\\0&0&1\end{pmatrix}$ the double eigenvalue $\lambda=1$ as well as the eigenvalue $\mu=-1$.\\
+Is there a matrix $B$ such, that $B^TAB=\begin{pmatrix}1&0&0\\0&1&0\\0&0&-1\end{pmatrix}$?}}
+\begin{choices}{unique}
+
+        \begin{choice}
+            \text{\lang{de}{Ja.} \lang{en}{Yes.}}
+			\solution{true}
+		\end{choice}
+                    
+        \begin{choice}
+            \text{\lang{de}{Nein.} \lang{en}{No.}}
+			\solution{false}
+		\end{choice} 
+\end{choices}
+\lang{de}{\explanation{Ja, für jede reelle symmetrische Matrix existiert eine ONB aus Eigenvektoren, ganz egal wie oft ein Eigenwert auftritt.
+Die zugehörige Basiswechselmatrix ist $B$.}}
+\lang{en}{\explanation{yes, for every real symmetric matrix exists a orthonormal basis consisting of eigenvectors, no matter how often a eigenvalue appears.
+The corresponding basis transoformation matrix is $B$.}}
+\end{quickcheck}
+
+
+\lang{de}{Im nachfolgenden Video werden die bisherigen Abschnitte dieses Kapitels erläutert.
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10789&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}}\\
+~\\
+
+
+\section{\lang{de}{Anwendung: Hauptachsentransformation} \lang{en}{Application: Principal axes transformation}}\label{sec:hauptaschsentransformation}
+\lang{de}{Bisher haben wir quadratische reelle Matrizen $M(n;\R)$ immer als Abbildungsmatrizen von linearen Abbildungen auf dem $\R^n$ betrachtet. 
+Symmetrische reelle Matrizen sind das natürlich auch, dann ist ihre Symmetrie aber eine zufällige Eigenschaft.
+Meistens  interessiert man sich für sie, weil man mit ihnen sogenannte quadratische Formen definieren kann.}
+\lang{en}{So far we have considered square real matrices $M(n;\R)$ as matrices corresponding to a linear map over $\R^n$. 
+This already applies for symmetric real matrices, but here the symmetrie is just a random property.
+Usually we are interested in those, because with help of them we may define the so-called quadratic form.}
+
+\begin{definition}\label{def:quad_form}
+\lang{de}{Für eine symmetrische Matrix $A=A^T\in M(n;\R)$ nennen wir die Abbildung
+\[q_A:\R^n\to\R, \quad v\mapsto v^TAv,\]
+eine \notion{quadratische Form}. Dabei betrachten wir $v$ als Koordinatenvektor bezüglich der Standardbasis auf dem $\R^n$.
+Zu $q_A$ gehört eine sogenannte \notion{symmetrische Bilinearform}
+\[\beta_A: \R^n\times\R^n\to\R^n, \quad (v,w)\mapsto v^TAw.\]}
+\lang{en}{For a symmetric matrix $A=A^T\in M(n;\R)$ we call the map
+\[q_A:\R^n\to\R, \quad v\mapsto v^TAv,\]
+a \notion{quadratic form}. Thereby we consider $v$ as the coordinate vector with respect to the standard basis of $\R^n$.
+To $q_A$ belongs the so-called \notion{symmetric bilinear form}
+\[\beta_A: \R^n\times\R^n\to\R^n, \quad (v,w)\mapsto v^TAw.\]}
+\end{definition}
+
+\lang{de}{Die Abbildung $q_A$ heißt Form, weil sie in den Körper abbildet, quadratisch heißt sie, weil die
+Komponenten von $v$ eben quadratisch in $v^TAv$ auftreten. 
+Weil die Abbildungsvorschrift von $\beta_A$ ein Matrixprodukt ist, ist $\beta_A$ linear in jeder ihrer beiden Komponenten, 
+also bilinear. Weil für alle $v,w\in\R$ gilt 
+\[\beta_A(w,v)=w^TAv=(w^TAv)^T=v^TA^Tw=v^TAw=\beta_A(v,w),\]
+ist $\beta$ symmetrisch. Offensichtlich gilt $q_A(v)=\beta_A(v,v)$.}
+\lang{en}{The map $q_A$ is called form, because it maps into the field, quadratic, because the components of
+ $v$ appear quadratic in $v^TAv$. 
+Since the map intruction of $\beta_A$ is a matrix product, $\beta_A$ is linear in both its components, 
+so bilinear. For all $v,w\in\R$ holds 
+\[\beta_A(w,v)=w^TAv=(w^TAv)^T=v^TA^Tw=v^TAw=\beta_A(v,w),\]
+so $\beta$ is symmetric. Obviuosly holds $q_A(v)=\beta_A(v,v)$.}
+
+\begin{example}\label{ex:ellipse1}
+\lang{de}{Die Bilinearform zur symmetrischen Matrix $A=\begin{pmatrix}2&1\\1&2\end{pmatrix}\in M(2;\R)$ wird gegeben durch
+\[\beta_A(v,w)=v^T\begin{pmatrix}2&1\\1&2\end{pmatrix}w,\]
+und die quadratische Form durch
+\[q_A(\begin{pmatrix}x\\y\end{pmatrix})=\begin{pmatrix}x &y\end{pmatrix}\begin{pmatrix}2&1\\1&2\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix}
+=2x^2+2xy+2y^2.\]}
+\lang{en}{The bilinear form of the symmetric matrix $A=\begin{pmatrix}2&1\\1&2\end{pmatrix}\in M(2;\R)$ is given by
+\[\beta_A(v,w)=v^T\begin{pmatrix}2&1\\1&2\end{pmatrix}w,\]
+and the quadratic form by
+\[q_A(\begin{pmatrix}x\\y\end{pmatrix})=\begin{pmatrix}x &y\end{pmatrix}\begin{pmatrix}2&1\\1&2\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix}
+=2x^2+2xy+2y^2.\]}
+\end{example}
+
+\lang{de}{Wenn nun $B\in M(2;\R)$ eine beliebige Matrix ist, dann können wir  Vektoren  auch mit $B$ multiplizieren, bevor wir sie in
+$\beta_A$ oder $q_A$ einsetzen. Dann erhalten wir
+\[\beta_A(Bv,Bw)=(Bv)^TA(Bw)=v^TB^TABw=\beta_{B^TAB}(v,w),\]
+beziehungsweise  $q_A(Bv)=q_{B^TAB}(v)$. Wir haben die Formen zur symmetrischen Matrix $A$ in die zur symmetrischen Matrix $B^TAB$
+überführt. Ist $B$ invertierbar, dann können wir aus $\beta_{B^TAB}$ durch Anwenden von $B^{-1}$ natürlich $\beta_A$ zurückgewinnen.
+Insbesondere können  wir für $B$ eine Basiswechelmatrix einsetzen.
+Indem  wir dafür einen Basiswechsel von der Standardbasis zur Orthonormalbasis aus Eigenvektoren von $A$
+benutzen (siehe Satz \ref{thm:eigenvektoren-symm-reeller-matr}), erhalten wir den folgenden Satz.}
+\lang{en}{If $B\in M(2;\R)$ is any matrix, we my multiply vectors with $B$,
+bevor we insert them into $\beta_A$ oder $q_A$. Then we get
+\[\beta_A(Bv,Bw)=(Bv)^TA(Bw)=v^TB^TABw=\beta_{B^TAB}(v,w),\]
+respectively  $q_A(Bv)=q_{B^TAB}(v)$. 
+We transfered the forms of the symmetric matrix $A$ into those of the symmetric matrix $B^TAB$. 
+If $B$ is invertible, we may recreate $\beta_A$ by apply $B^{-1}$ on $\beta_{B^TAB}$.
+Especially, we may insert a basis transformation matrix for $B$.
+By utilising a basis transformation from the standard basis to the orthonormal basis of eigenvectors of $A$
+(see theorem \ref{thm:eigenvektoren-symm-reeller-matr}), we receive the following theorem.}
+
+\begin{theorem}[\lang{de}{Hauptachsentransformation} \lang{en}{Principal axes transformation}]\label{thm:hauptachsentransformation}
+\lang{de}{Jede quadratische Form $q_A$ zu einer reellen symmetrischen Matrix $A\in\M(n;\R)$ lässt sich durch eine invertierbare
+Matrix $B\in M(n;\R)$ überführen 
+in eine quadratische Form $q_D$ mit einer Diagonalmatrix $D=B^TAB\in M(n;\R)$,
+\[D=\begin{pmatrix}\lambda_1&0&\cdots&0\\0&\ddots&\ddots&\vdots\\\vdots&\ddots&\ddots&0\\0&\cdots&0&\lambda_n\end{pmatrix}
+ \in M(n;\R),\]
+ deren Diagonaleinträge die Eigenwerte von $A$ sind.}
+ \lang{en}{With help of an invertible matrix $B\in M(n;\R)$ every quadratic form $q_A$ of a real symmetric matrix $A\in\M(n;\R)$ may be transfered into 
+ a quadratic form $q_D$ with a diagonal matrix $D=B^TAB\in M(n;\R)$,
+\[D=\begin{pmatrix}\lambda_1&0&\cdots&0\\0&\ddots&\ddots&\vdots\\\vdots&\ddots&\ddots&0\\0&\cdots&0&\lambda_n\end{pmatrix}
+ \in M(n;\R),\]
+ which diagonal entries are the eigenvalues of $A$.}
+\end{theorem}
+
+\begin{example}\label{ex:ellipse2}
+\lang{de}{Wir führen Beispiel \ref{ex:ellipse1} weiter.}
+\lang{en}{We continue example \ref{ex:ellipse1}.}
+\begin{tabs*}[\initialtab{0}]
+\tab{\lang{de}{Hauptachsentransformation} \lang{en}{Principal axes transformation}}
+\lang{de}{Das charakteristische Polynom von $A=A^T=\begin{pmatrix}2&1\\1&2\end{pmatrix}\in M(2;\R)$  ist
+\[p_A(t)=\det(\begin{pmatrix}2-t&1\\1&2-t\end{pmatrix})=(2-t)^2-1=(t-3)(t-1).\]
+Die Eigenwerte sind also $\lambda_1=3$ und $\lambda_2=1$. 
+Dazu gehören die Eigenvektoren (bis auf Vielfache)
+$v_1=\frac{1}{\sqrt{2}}\begin{pmatrix}1\\1\end{pmatrix}$ und $v_2=\frac{1}{\sqrt{2}}\begin{pmatrix}-1\\1\end{pmatrix}$. Diese
+bilden eine Orthonormalbasis. (Rechnen  Sie das selbständig nach!)}
+\lang{en}{The characteristic polynomial of $A=A^T=\begin{pmatrix}2&1\\1&2\end{pmatrix}\in M(2;\R)$  is
+\[p_A(t)=\det(\begin{pmatrix}2-t&1\\1&2-t\end{pmatrix})=(2-t)^2-1=(t-3)(t-1).\]
+So the eigenvalues are $\lambda_1=3$ und $\lambda_2=1$. 
+To those belong the eigenvectors (expect multiples)
+$v_1=\frac{1}{\sqrt{2}}\begin{pmatrix}1\\1\end{pmatrix}$ and $v_2=\frac{1}{\sqrt{2}}\begin{pmatrix}-1\\1\end{pmatrix}$.
+Those form an orthonormal basis. (Check that again self-reliantly!)}
+
+\lang{de}{Mit der Basiswechselmatrix $B=\frac{1}{\sqrt{2}}\begin{pmatrix}-1&-1\\-1&1\end{pmatrix}$ von der Standardbasis zu dieser ONB
+finden wir in der Tat
+\[B^TAB=\frac{1}{\sqrt{2}}\begin{pmatrix}-1&-1\\-1&1\end{pmatrix} \begin{pmatrix}2&1\\1&2\end{pmatrix} \frac{1}{\sqrt{2}}\begin{pmatrix}-1&-1\\-1&1\end{pmatrix}
+=\begin{pmatrix}3&0\\0&1\end{pmatrix}.\]
+Die quadratische Form lautet nun
+\[q_{B^TAB}(\left(\begin{smallmatrix}x\\y\end{smallmatrix}\right)=3x^2+y^2.\]}
+\lang{en}{With help of the basis transformation matrix $B=\frac{1}{\sqrt{2}}\begin{pmatrix}-1&-1\\-1&1\end{pmatrix}$ of the standard basis to
+this orthonormal basis we find indeed
+\[B^TAB=\frac{1}{\sqrt{2}}\begin{pmatrix}-1&-1\\-1&1\end{pmatrix} \begin{pmatrix}2&1\\1&2\end{pmatrix} \frac{1}{\sqrt{2}}\begin{pmatrix}-1&-1\\-1&1\end{pmatrix}
+=\begin{pmatrix}3&0\\0&1\end{pmatrix}.\]
+The quadratic form is 
+\[q_{B^TAB}(\left(\begin{smallmatrix}x\\y\end{smallmatrix}\right)=3x^2+y^2.\]}
+
+\tab{\lang{de}{Ellipse} \lang{en}{Ellipse}}
+\lang{de}{Nun betrachten wir die Gleichung 
+\[q_A\left(\begin{smallmatrix}x\\y\end{smallmatrix}\right)=2x^2+2xy+2y^2=1.\]
+Die Lösungsmenge dieser Gleichung beschreibt eine Ellipse, deren Halbachsen in Richtung der Eigenvektoren zeigen.}
+\lang{en}{Now we consider the equation 
+\[q_A\left(\begin{smallmatrix}x\\y\end{smallmatrix}\right)=2x^2+2xy+2y^2=1.\]
+The solution set of this equation desciebs an ellipse, whose semi-axes point in the direction of the eigenvectors.}
+\begin{center}
+\image{T404_Ellipse_A}
+\end{center}
+
+
+\lang{de}{Entsprechend beschreibt die Gleichung
+\[q_{B^TAB}(\left(\begin{smallmatrix}x\\y\end{smallmatrix}\right)=3x^2+y^2=1\]
+eine Ellipse, deren Halbachsen in Richtung der Koordinatenachsen zeigen.
+Durch die Hauptachsentransformation haben wir das Koordinatensystem an die Hauptachsen der Ellipse
+angepasst.}
+\lang{en}{Accordingly the equation
+\[q_{B^TAB}(\left(\begin{smallmatrix}x\\y\end{smallmatrix}\right)=3x^2+y^2=1\]
+describes an ellipse, wose semi-axes point in the direction of the coordinate axes.
+With help of the principal axis transformation we fitted the coordinate axes onto the principal axes of the ellipse.}
+\begin{center}
+\image{T404_Ellipse_B}
+\end{center}
+
+%
+\end{tabs*}
+\end{example}
+\begin{remark}[\lang{de}{Kegelschnitte} \lang{en}{Conic sections}]\label{rem:kegelschnitte}
+\begin{enumerate}
+\item[(i)]
+\lang{de}{Kegelschnitte entstehen, indem man einen Doppelkegel (Kegelfläche) im $\R^3$ mit einer Ebene schneidet.
+Dabei unterscheidet man zwischen nicht-entarteten Kegelschnitten und endarteten.
+Die nicht-entarteten Kegelschnitten sind Ellipse, Hyperbel und Parabel. 
+Welchen man erhält, hängt vom Verhältnis der Neigungen von Schnittebene und Kegel ab.}
+\lang{en}{Conic sections arise, by section a double conic in $\R^3$ with a plane.
+Here differ in degenerate and nongenerate conic sections.
+The nongenerate sections are ellipse, hyperbola, parabola.
+Which on we get, depends on the proportion of the angular of plane and conic.}
+\begin{center}
+\image{T404_ConicSections}
+\end{center}
+
+
+
+%%%% HIER GEHT ES WEITER!!! %%%%%%%%%%%%
+\lang{de}{Entartete Kegelschnitte sind Grenzfälle, in denen die Schnittebene die Kegelspitze enthält. 
+Dann erhält man einen einzelnen Punkt (die Kegelspitze), ein Paar
+sich in der Kegelspitze schneidender Geraden oder eine einzelne Gerade.
+Wir nennen noch zwei weitere Fälle: Den Fall des leeren Schnitts und ein Paar paralleler Geraden. 
+Beide treten auf, wenn man die Kegelspitze ins Unendliche verschiebt. 
+Dann ist der \glqq Kegel\grqq{} ein Zylinder.}
+\lang{en}{Degenerate conic sections are borderline cases, in which 
+the cone-plane-intersection contains the apex (tip of the conic).
+Then we get a single point (the apex), a pair of lines crossing in the apex or a single linea.
+We name two other cases: The case of the empty cut and a pair of parallel lines. Both appear, wenn we move the
+apex into infinity.
+Then the \glqq cone\grqq{} is a cylinder.}
+
+\item[(ii)]
+\lang{de}{
+Ein Kegelschnitt heißt in \emph{Hauptachsenform}, wenn er in der $(x,y)$-Ebene durch eine der folgenden quadratischen 
+Gleichungen beschrieben werden kann.
+\begin{align*}
+&\bullet& \quad \frac{x^2}{a^2}+\frac{y^2}{b^2}=1,\: a,b\neq 0, &\quad \text{(Ellipse)}\\
+&\bullet& \quad \frac{x^2}{a^2}-\frac{y^2}{b^2}=1,\: a,b\neq 0, &\quad \text{(Hyperbel)}\\
+&\bullet& \quad y=ax^2,\: a\neq 0, &\quad \text{(Parabel)}\\
+&\bullet& \quad a^2x^2=y^2=\: a\neq 0, &\quad \text{(sich schneidendes Geradenpaar)}\\
+&\bullet& \quad x^2=0 &\quad \text{(Gerade)}\\
+&\bullet& \quad\frac{x^2}{a^2}+\frac{y^2}{b^2}=0,\: a,b\neq 0,   &\quad \text{(Punkt)}\\
+&\bullet& \quad x^2=a^2,\: a\neq 0,   &\quad \text{(paralleles Geradenpaar)}\\
+&\bullet& \quad a^2x^2+y^2=-1,\:    &\quad \text{(leere Menge).}
+\end{align*}}
+\lang{en}{
+A conis section is called in \emph{principal axes form}, if it can be described in the $(x,y)$-plane 
+through one of the following quadratic equations.
+\begin{align*}
+&\bullet& \quad \frac{x^2}{a^2}+\frac{y^2}{b^2}=1,\: a,b\neq 0, &\quad \text{(Ellipse)}\\
+&\bullet& \quad \frac{x^2}{a^2}-\frac{y^2}{b^2}=1,\: a,b\neq 0, &\quad \text{(Hyperbola)}\\
+&\bullet& \quad y=ax^2,\: a\neq 0, &\quad \text{(Parabola)}\\
+&\bullet& \quad a^2x^2=y^2=\: a\neq 0, &\quad \text{(A crossing pair of lines)}\\
+&\bullet& \quad x^2=0 &\quad \text{(Line)}\\
+&\bullet& \quad\frac{x^2}{a^2}+\frac{y^2}{b^2}=0,\: a,b\neq 0,   &\quad \text{(Point)}\\
+&\bullet& \quad x^2=a^2,\: a\neq 0,   &\quad \text{(Parallel pair of lines)}\\
+&\bullet& \quad a^2x^2+y^2=-1,\:    &\quad \text{(Empty set).}
+\end{align*}}
+
+\item[(iii)]
+\lang{de}{
+Ist $A\in M(2;\R)$ eine symmetrische Matrix  und $c\in\R$ eine Zahl, so beschreibt die Lösungsmenge der Gleichung
+\[v^TAv=c\]
+also das Urbild $q_A^{-1}(c)$, einen Kegelschnitt. Genauer: Mit $v^T=(x,y)$ und 
+$A=\left(\begin{smallmatrix}\alpha &\beta\\\beta&\gamma \end{smallmatrix}\right)$ finden wir die Gleichung
+\[v^TAv=\alpha x^2+2\beta xy+\beta y^2=c.\]}
+\lang{en}{
+If $A\in M(2;\R)$ is a symmetric matrix and $c\in\R$ a number, the solution set of the equation
+\[v^TAv=c\]
+describes the inverse image $q_A^{-1}(c)$, a conic section. More precisely: With $v^T=(x,y)$ and 
+$A=\left(\begin{smallmatrix}\alpha &\beta\\\beta&\gamma \end{smallmatrix}\right)$ we find an equation
+\[v^TAv=\alpha x^2+2\beta xy+\beta y^2=c.\]}
+
+\item[(iv)]
+\lang{de}{Durch Hauptachsentransformation \ref{thm:hauptachsentransformation} und (ggf. Normierung zu $c=\pm 1$) erhält man aus der Gleichung $v^TAv=c$
+eine der in (ii) aufgeführten Formen.}
+\lang{en}{With help of the principal axes transformation \ref{thm:hauptachsentransformation} and (if necessary normalisation to $c=\pm 1$)
+we get from the equation $v^TAv=c$
+one of the forms listed in (ii).}
+
+\item[(v)]
+\lang{de}{
+Offenbar können wir aber eine Parabel nicht durch eine Gleichung $q_A(v)=c$ beschreiben, denn in der Parabelgleichung
+tritt das Monom $y$ auf, während in $q_A(v)=c$  nur Monome vom Grad zwei auftreten.
+Abhilfe schafft hier die \emph{projektive Geometrie}
+durch das \emph{Homogenisieren} der Koordinaten, das aber den Rahmen dieses Kurses gewaltig sprengt.}
+\lang{en}{
+But obviously we can not describe a parabola trough an equation $q_A(v)=c$, 
+because the parabola equation contains the monomial $y$, while $q_A(v)=c$ only contains monomials with degree two.
+Only the \emph{projective geometry} through the \emph{homogenisation} of coordinates would make that
+possible, but this topic is too extensive for this course.}
+
+\item[(vi)]
+\lang{de}{
+Nebenbei: Um einen \emph{beliebigen} Kegelschnitt in Hauptachsenlage zu transformieren, muss man normalerweise
+nicht nur eine Hauptachsentransformation anwenden, 
+sondern auch noch eine Koordinatenverschiebung, um den Symmetriemittelpunkt in den Ursprung zu verschieben.
+Beschreibt man Kegelschnitte wie in (iii), so stimmen Symmetriemittelpunkt und Ursprung  automatisch überein.}
+\lang{en}{
+By the way: To transform \emph{any} conic section into principal axes  position,
+usually we do not only need to apply the main axes transformation, but also a coordinate shift, to move the
+center of symmetry onto the origion.
+If we describe conic section as seen in (iii), the center of symmetry and origin are already the same.}
+\end{enumerate}
+\end{remark}
+
+
+
+\begin{example}
+\lang{de}{Welchen der Fälle aus Bemerkung \ref{rem:kegelschnitte} (ii) die Gleichung $q_A(v)=c$ genau beschreibt, 
+hängt von $c\in\R$ ab und von den Eigenwerten $\lambda_1,\lambda_2\in\R$ der symmetrischen Matrix $A\in M(2;\R)$.
+Wir bezeichnen mit $q_D(v)=\lambda_1x^2+\lambda_2y^2$ die quadratische Form im Hauptachsengestalt.}
+\lang{en}{Which of the cases from remark \ref{rem:kegelschnitte} (ii) is described by the equation $q_A(v)=c$, 
+depends on $c\in\R$ and on the eigenvalues $\lambda_1,\lambda_2\in\R$ of the symmetric matrix $A\in M(2;\R)$.
+We denote with $q_D(v)=\lambda_1x^2+\lambda_2y^2$ the quadratic form in principal axes form.}
+\begin{tabs*}[\initialtab{0}]
+
+\tab{\lang{de}{Ellipse} \lang{en}{Ellipse}}
+\lang{de}{Im Fall, dass  beide Eigenwerte $\lambda_1$ und $\lambda_2$ dasselbe Vorzeichen haben, erhalten wir eine
+eine Ellipse, wenn $c\in \R$ ebenfalls dieses
+Vorzeichen hat (wie auch in Beispiel \ref{ex:ellipse2})
+\[\lambda_1x^2+\lambda_2y^2=c\Leftrightarrow \frac{x^2}{a^2}+\frac{y^2}{b^2}=1,\]
+wobei $a=\sqrt{\frac{c}{\lambda_1}}$ und $b=\sqrt{\frac{c}{\lambda_2}}$.
+Hat $c$ das entgegengesetzte Vorzeichen, so ist die Lösungsmenge der Gleichung leer,
+und ist $c=0$, dann erfüllt einzig der Punkt $(x,y)=(0,0)$ die Gleichung.}
+\lang{en}{In case, that both eigenvalues $\lambda_1$ and $\lambda_2$ have the same sign,
+we get an ellispe, if $c\in \R$ has the same sign (as seen in example \ref{ex:ellipse2})
+\[\lambda_1x^2+\lambda_2y^2=c\Leftrightarrow \frac{x^2}{a^2}+\frac{y^2}{b^2}=1,\]
+with $a=\sqrt{\frac{c}{\lambda_1}}$ and $b=\sqrt{\frac{c}{\lambda_2}}$.
+If $c$ has the opposite sign, the solution of the equation is empty and
+if $c=0$, then only the point $(x,y)=(0,0)$ fulfills the equation.}
+
+\tab{\lang{de}{Hyperbel} \lang{en}{Hyperbola}}
+\lang{de}{Haben $\lambda_1$ und $\lambda_2$ entgegengesetztes Vorzeichen, so liefert jedes $c\neq 0$ eine Hyperbel.
+Sind etwa $\lambda_1,c>0$ und $\lambda_2<0$ (ggf. muss man dafür $\lambda_1$ und $\lambda_2$ vertauschen oder die Gleichung mit $-1$ multiplizieren)
+\[\lambda_1x^2+\lambda_2y^2=c\Leftrightarrow \frac{x^2}{a^2}-\frac{y^2}{b^2}=1,\]
+mit $a=\sqrt{\frac{c}{\lambda_1}}$ und $b=\sqrt{\frac{c}{\vert{\lambda_2}\vert}}$.
+Ist hingegen $c=0$, dann gilt mit $a=\sqrt{\vert{\frac{\lambda_1}{\lambda_2}}\vert}$,
+\[\lambda_1x^2+\lambda_2y^2=0\Leftrightarrow a^2x^2-y^2=0.\]
+Das ist der Fall zweier sich schneidender Geraden mit Schnittpunkt $(0,0)$.}
+\lang{en}{If $\lambda_1$ and $\lambda_2$ have the oppositve sign, each $c\neq 0$ gives us an hyperbola.
+Are for example $\lambda_1,c>0$ and $\lambda_2<0$ (if necessary we need to swap $\lambda_1$ and $\lambda_2$ or multiply the equation with $-1$)
+\[\lambda_1x^2+\lambda_2y^2=c\Leftrightarrow \frac{x^2}{a^2}-\frac{y^2}{b^2}=1,\]
+with $a=\sqrt{\frac{c}{\lambda_1}}$ and $b=\sqrt{\frac{c}{\vert{\lambda_2}\vert}}$.
+Is however $c=0$, then holds with $a=\sqrt{\vert{\frac{\lambda_1}{\lambda_2}}\vert}$,
+\[\lambda_1x^2+\lambda_2y^2=0\Leftrightarrow a^2x^2-y^2=0.\]
+this is the case of two crossing lines with cut point $(0,0)$.}
+\\
+\lang{de}{
+Zum Beispiel wird die Gleichung $7x^2+8xy+y^2=1$ dargestellt durch die Matrix 
+$A=\left(\begin{smallmatrix} 7&4\\4&1\end{smallmatrix}\right)$, also $q_A(v)=1$.
+Die Eigenwerte von $A$ berechnen sich zu $\lambda_1=9$ und $\lambda_2=-1$ mit Eigenvektoren
+ $v_1=\frac{1}{\sqrt{5}}\left(\begin{smallmatrix}2\\1\end{smallmatrix}\right)$ bzw.
+$v_2=\frac{1}{\sqrt{5}}\left(\begin{smallmatrix}1\\-2\end{smallmatrix}\right)$. Somit ist $q_D(v)=9x^2-y^2$.
+Im Bild die zugehörige Hyperbel und ihre Transformierte jeweils mit Eigenvektoren.}
+\lang{en}{
+For example the equation $7x^2+8xy+y^2=1$ is displayed by the matrix 
+$A=\left(\begin{smallmatrix} 7&4\\4&1\end{smallmatrix}\right)$, so $q_A(v)=1$.
+The eigenvalues of $A$ are $\lambda_1=9$ and $\lambda_2=-1$ with eigenvectors
+ $v_1=\frac{1}{\sqrt{5}}\left(\begin{smallmatrix}2\\1\end{smallmatrix}\right)$ respectively
+$v_2=\frac{1}{\sqrt{5}}\left(\begin{smallmatrix}1\\-2\end{smallmatrix}\right)$. Therefore is $q_D(v)=9x^2-y^2$.
+In the image we see the corresponding hyperbola and its transform each with their eigenvectors.}
+
+\begin{center}
+\image{T404_Hyperbola}
+\end{center}
+
+\tab{\lang{de}{Paar paralleler Geraden} \lang{en}{Pair of parallel lines}}
+\lang{de}{Ist einer der Eigenwerte $\lambda_2=0$, so ist $q_D(v)=\lambda_1x^2$. Somit  beschreibt $\lambda_1x^2=c$ ein Paar paralleler Geraden, 
+wenn $\lambda_1$ und $c$ dieselben Vorzeichen haben, eine einzelne Gerade, wenn $c=0$, und die leere Menge sonst.}
+\lang{en}{Is one on the eigenvalues $\lambda_2=0$, so is $q_D(v)=\lambda_1x^2$. Therefore describes $\lambda_1x^2=c$ a pair of 
+parallel lines, if $\lambda_1$ and $c$ have the same sign, a single line, if $c=0$, and otherwise the empty set.}
+
+\lang{de}{Zum Beispiel wir die Gleichung $x^2+4xy+4y^2=1$ dargestellt durch die Matrix 
+$A=\left(\begin{smallmatrix} 1&2\\2&4\end{smallmatrix}\right)$, also $q_A(v)=1$. Die Eigenwerte von $A$ sind $\lambda_1=5$ und $\lambda_2=0$,
+die zugehörigen Eigenvektoren $v_1=\frac{1}{\sqrt{5}}\left(\begin{smallmatrix}1\\2\end{smallmatrix}\right)$ bzw.
+$v_2=\frac{1}{\sqrt{5}}\left(\begin{smallmatrix}2\\-1\end{smallmatrix}\right)$. Somit ist $q_A(v)=5x^2$.}
+\lang{en}{For example the equation $x^2+4xy+4y^2=1$ is displayed by the matrix 
+$A=\left(\begin{smallmatrix} 1&2\\2&4\end{smallmatrix}\right)$, so $q_A(v)=1$. The eigenvalues of $A$ are $\lambda_1=5$ and $\lambda_2=0$,
+the corresponding eigenvectors $v_1=\frac{1}{\sqrt{5}}\left(\begin{smallmatrix}1\\2\end{smallmatrix}\right)$ respectively
+$v_2=\frac{1}{\sqrt{5}}\left(\begin{smallmatrix}2\\-1\end{smallmatrix}\right)$. So is $q_A(v)=5x^2$.}
+\\
+\lang{de}{Ein Paar paralleler Geraden ist kein Kegelschnitt im engeren Sinne. Man versteht sie dennoch als Grenzfall eines solchen.
+Verschiebt man nämlich die Kegelspitze nach unendlich, dann erhält man einen Zylinder. 
+Das parallele Geradenpaar entsteht nun, indem man die Schnittebene parallel zur Zylinderachse 
+(und näher als den Zylinderradius an dieser) wählt.}
+\lang{en}{A pair of parallel lines is not a conic section. By moving the apex to infinity gives us a cylinder.
+The pair of parallel lines is created by choosing the cutting plane parallel to the cylinder axis (and closer as
+the cylinder radius).}
+\end{tabs*}
+\end{example}
+
+
+\begin{quickcheck}
+\lang{de}{\text{Die Gleichung $v^T\begin{pmatrix}4&0\\0&-2\end{pmatrix}v=1$ beschreibt einen Kegelschnitt.
+Von welchem Typ ist er?}}
+\lang{en}{\text{The equation $v^T\begin{pmatrix}4&0\\0&-2\end{pmatrix}v=1$ describes a conic section. What type is it?}}
+\begin{choices}{unique}
+
+        \begin{choice}
+            \text{\lang{de}{Ellipse} \lang{en}{Ellipse}}
+			\solution{false}
+		\end{choice}
+                    
+        \begin{choice}
+            \text{\lang{de}{Parabel} \lang{en}{Parabola}}
+			\solution{false}
+		\end{choice} 
+        \begin{choice}
+            \text{\lang{de}{Hyperbel} \lang{en}{Parabola}}
+			\solution{true}
+		\end{choice} 
+\end{choices}
+\explanation{\lang{de}{Ein Eigenwert ist positiv, der andere negativ. Also erhält man eine Hyperbel.} \lang{en}{The eigenvalues
+have opposite signs, so we have a hyperbola.}}
+\end{quickcheck}
+
+\lang{de}{
+Ebenso kann man Ellipsoide oder Hyperboloide im $\R^3$ auf ihre Hauptachsen transformieren.
+Die Hauptachsen (auch Hauptträgheitsachsen) sind Symmetrieachsen. Jeder Körper im $\R^3$ hat davon mindestens drei, 
+um die er unwuchtsfrei, also ohne ins Trudeln zu kommen, rotieren kann.
+Der gemeinsame Schnittpunkt aller Hauptachsen ist der Schwerpunkt des Körpers.}
+\lang{en}{
+
+Similarly we may transform ellipsoids or hyperboloids in $\R^3$ onto their main axes.
+The main axes are symmetry axes. Each body in $\R^3$ has at least drei, around which he may rotate without
+a tail spin (unbalance).
+The common intersection of all main axes is the center of gravitation.}
+
+\lang{de}{Das nachfolgende Video erläutert die Hauptachsentransformation.
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10790&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}}\\
+~\\
+
+
+\end{content}

@@ -1,0 +1,88 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A06: Orthogonalität}
+    \lang{en}{mc yes-no}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{description}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+
+\usepackage{mumie.genericproblem}
+\lang{de}{
+	\title{A06: Orthogonalität}
+}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9716}{Ticket 9716}
+\end{block}
+\begin{problem}
+
+	\begin{question}
+		\lang{de}{\text{
+			Prüfen Sie, ob folgende Vektoren orthogonal zueinander stehen. }}
+              \explanation[edited]{Zwei Vektoren sind genau dann orthognal zueinander, wenn ihr Skalarprodukt Null ist.}
+            
+    	\type{mc.yesno}
+    	\begin{variables}
+            \randint[Z]{v1}{-2}{3}
+            \randint{v2}{-2}{2}
+            \randint{f1}{0}{1}
+            \randint{f2}{0}{1}
+            \randint[Z]{w}{-4}{5}
+            \randint[Z]{x}{-4}{4}
+            \randint[Z]{y}{-4}{4}
+        
+            \function[calculate]{x_1}{x*v_1}
+            \function[calculate]{x_2}{x*v_2+f1*w}
+            
+            \function[calculate]{y_1}{y*v_2}
+            \function[calculate]{y_2}{-y*v_1-f1*w}
+
+            
+            \randint{z_1}{-10}{10}
+            \randint{z_2}{-10}{10}
+            \randint[Z]{z_3}{-1}{1}
+            
+            \randint{u_1}{-10}{10}
+            \randint{u_2}{-10}{10}
+            \function[calculate]{u_3}{f2*w-1/z_3*(u_1*z_1+u_2*z_2)}
+            
+            \function[calculate]{aa}{x_1*y_1+x_2*y_2}
+            \function[calculate]{bb}{u_1*z_1+u_2*z_2+u_3*z_3}
+      \end{variables}
+    	\begin{choice}
+    		\text{Sind $  \begin{pmatrix}\var{x_1}\\ \var{x_2} \end{pmatrix} \quad$ und 
+            $\quad \begin{pmatrix}\var{y_1}\\ \var{y_2} \end{pmatrix}$ orthogonal zueinander?}
+  			\solution{compute}
+			\iscorrect{aa}{=}{0}
+		\end{choice}
+		\begin{choice}
+    		\text{Sind $  \begin{pmatrix}\var{z_1}\\ \var{z_2} \\ \var{z_3} \end{pmatrix} \quad$ und 
+            $\quad \begin{pmatrix}\var{u_1}\\ \var{u_2}\\ \var{u_3} \end{pmatrix} $ orthogonal zueinander? }
+  			\solution{compute}
+			\iscorrect{bb}{=}{0}
+		\end{choice}
+		
+    \end{question}
+    
+	
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

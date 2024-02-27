@@ -1,0 +1,202 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü04: Substitution}
+    \lang{en}{Exercise 4: substitution}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\title{\lang{de}{Ü04: Substitution}
+    \lang{en}{Exercise 4: substitution}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24049}{Ticket 24049}
+\end{block}
+
+\usepackage{mumie.ombplus}
+
+
+
+\begin{block}[annotation]
+Kopie: hm4mint/T305_Integrationsetechniken/exercise 3
+
+Im Ticket-System: \href{http://team.mumie.net/issues/10921}{Ticket 10921}
+\end{block}
+
+%######################################################FRAGE_TEXT
+\lang{de}{Bestimmen Sie mit Hilfe der Substitutionsregel die folgenden Integrale:}
+\lang{en}{Use the substitution rule to calculate the following integrals:}
+
+\[ a)\quad \int_1^e \frac{\ln(x)}{x}\; dx, \qquad\qquad b)\quad \int_0^2 \frac{x}{2}e^{-x^2}\; dx, \qquad\qquad c)\quad \int_{0}^{1} 3x^3\sin(x^2)\; dx.  \]
+
+
+%##################################################ANTWORTEN_TEXT
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+\tab{\lang{de}{Antworten}  \lang{en}{Answers}}
+
+\begin{enumerate}[a)]
+\item a) $\ \int_1^e \frac{\ln(x)}{x}\; dx= \frac{1}{2}$.
+\item b) $\ \int_0^2 \frac{x}{2}e^{-x^2}\; dx = \frac{1}{4}- \frac{1}{4e^4}$.
+\item \lang{de}{c) $\ \int_{0}^{1} 3x^3\sin(x^2)\; dx= \frac{3}{2}(\sin(1)- \cos(1))
+\approx 0,4518$.}
+\lang{en}{c) $\ \int_{0}^{1} 3x^3\sin(x^2)\; dx= \frac{3}{2}(\sin(1)- \cos(1))
+\approx 0.4518$.}
+\end{enumerate}
+ 
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung a)    }  \lang{en}{Solution a)}}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   Um die Substitutionsregel anwenden zu können, müssen wir den Integranden in der
+Form $c\cdot g'(x)\cdot f(g(x))$ schreiben, wobei $c$ eine reelle Zahl ist, die wir dann vor
+das Integral ziehen können, und $g$ und $f$ geeignete Funktionen sind.
+
+Wählt man in diesem Fall $g(x)=\ln(x)$, so ist $g'(x)=\frac{1}{x}$ und der Integrand ist}
+\lang{en}{To use the substitution rule, we need to write the integrand in the form
+$c\cdot g'(x)\cdot f(g(x))$, where $c$ is a real number that can be pulled through
+the integral sign, and where $g$ and $f$ are appropriate functions.}
+
+\[  \frac{\ln(x)}{x}=g'(x)\cdot g(x). \]
+\step 
+\lang{de}{Wir können also $f(y)=y$ wählen und erhalten:}
+\lang{en}{We can choose $f(y)=y$ and find:}
+\begin{eqnarray*}
+ \int_1^e \frac{\ln(x)}{x}\; dx &=& \int_1^e g'(x)\cdot f(g(x))\; dx\\
+ &=& \int_{g(1)}^{g(e)} f(y)\; dy =  \int_{g(1)}^{g(e)} y\; dy \\
+ &=& \Big[ \frac{y^2}{2} \Big] _{g(1)}^{g(e)} = \Big[  \frac{g(x)^2}{2} \Big]_1^e\\
+ &=&  \Big[  \frac{\ln(x)^2}{2} \Big]_1^e = \frac{\ln(e)^2}{2}- \frac{\ln(1)^2}{2}=\frac{1}{2}.
+\end{eqnarray*}    
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung b)    }  \lang{en}{Solution b)}}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{  Um die Substitutionsregel anwenden zu können, müssen wir den Integranden in der
+Form $c\cdot g'(x)\cdot f(g(x))$ schreiben, wobei $c$ eine reelle Zahl ist, die wir dann vor
+das Integral ziehen können, und $g$ und $f$ geeignete Funktionen sind.
+
+Da der Problemterm $e^{-x^2}$ ist, ist der erste Versuch, $g(x)=-x^2$ zu setzen. Dann ist
+$g'(x)=-2x$ und daher}
+
+\lang{en}{To use the substitution rule, we need to write the integrand in the
+form $c\cdot g'(x)\cdot f(g(x))$, where $c$ is a real number that can be pulled through the integral
+sign, and where $g$ and $f$ are appropriate functions.
+Since $e^{-x^2}$ is the problematic term, our first attempt will be to set $g(x)=-x^2$.
+Then $g'(x)=-2x$ and therefore
+}
+\[   \frac{x}{2}e^{-x^2} =\frac{g'(x)}{-4}\cdot e^{g(x)}. \]
+\step 
+\lang{de}{Mit $f(y)=e^y$ erhalten wir also die gesuchte Form. Damit ist:}
+\lang{en}{So $f(y)=e^y$ yields the desired form. Therefore,}
+\begin{eqnarray*}
+\int_0^2 \frac{x}{2}e^{-x^2}\; dx &=& \int_0^2 \frac{g'(x)}{-4}\cdot f(g(x))\; dx
+=-\frac{1}{4}\cdot  \int_0^2 g'(x)\cdot f(g(x))\; dx\\
+&=& -\frac{1}{4}\cdot \int_{g(0)}^{g(2)} f(y)\; dy =   -\frac{1}{4}\cdot \int_{g(0)}^{g(2)} e^y\; dy \\
+&=&   -\frac{1}{4}\cdot \Big[ e^y \Big]_{g(0)}^{g(2)} =  \left[  -\frac{e^y}{4} \right]_{g(0)}^{g(2)} \\
+&=& \left[  -\frac{e^{-x^2}}{4} \right]_0^2 \\
+&=&  -\frac{e^{-4}}{4} +  \frac{e^{0}}{4} = \frac{1}{4}- \frac{1}{4e^4}.
+\end{eqnarray*}
+   
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung c)    } \lang{en}{Solution c)}}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   
+Um die Substitutionsregel anwenden zu können, müssen wir den Integranden in der
+Form $c\cdot g'(x)\cdot f(g(x))$ schreiben, wobei $c$ eine reelle Zahl ist, die wir dann vor
+das Integral ziehen können, und $g$ und $f$ geeignete Funktionen sind.
+
+Da der Problemterm $\sin(x^2)$ ist, ist der erste Versuch, $g(x)=x^2$ zu setzen. Dann ist
+$g'(x)=2x$ und daher }
+\lang{en}{To use the substitution rule, we need to write the integrand in the
+form $c\cdot g'(x)\cdot f(g(x))$, where $c$ is a real number that can be pulled through the integral
+sign, and where $g$ and $f$ are appropriate functions.
+Since $\sin(x^2)$ is the problematic term, our first attempt will be to set $g(x)=x^2$.
+Then $g'(x)=2x$ and therefore
+}
+\[ 3x^3\sin(x^2)=g'(x)\cdot \frac{3}{2}x^2\sin(g(x))=\frac{3}{2}\cdot g'(x)\cdot  g(x)\sin(g(x)).\]
+
+\step 
+\lang{de}{Setzt man also $f(y)=y\sin(y)$, so erhalten wir die gesuchte Form. Damit ist:}
+\lang{en}{So if we set $f(y)=y\sin(y)$, then we get the desired form. Therefore,}
+\begin{eqnarray*}
+\int_{0}^{1} 3x^3\sin(x^2)\; dx &=& \int_{0}^{1} \frac{3}{2} \cdot \textcolor{#CC6600}{2x} \cdot \textcolor{#0066CC}{x^2 \sin(x^2)} \; dx \\
+&=& \int_{0}^{1} \frac{3}{2}\cdot \textcolor{#CC6600}{g'(x)}\cdot \textcolor{#0066CC}{f(g(x))}\; dx\\
+&=& \int_{g(0)}^{g(1)} \frac{3}{2}\cdot f(y)\; dy =  \frac{3}{2}\cdot \int_{g(0)}^{g(1)}  y\sin(y) \; dy\, .
+\end{eqnarray*}
+\step 
+\lang{de}{Nun verbleibt, eine Stammfunktion für $y\sin(y)$ zu finden bzw. dieses Integral zu berechnen. Dies erreicht man am besten mittels partieller Integration, wie im vorigen Abschnitt erklärt}
+\lang{en}{We must still find an antiderivative for $y\sin(y)$, i.e. to compute the above integral. The best way to do this is via integration by parts, as explained in the previous section.}
+\lang{de}{mit $u(y)=y$ und $v'(y)=\sin(y)$ (und $u'(y)=1$, $v(y)=-\cos(y)$):}
+\lang{en}{Take $u(y)=y$ and $v'(y)=\sin(y)$ (and $u'(y)=1$, $v(y)=-\cos(y)$):}
+\begin{eqnarray*}
+ \int_ {\alpha}^{\beta}  y\sin(y) \; dy\, &=& \left[ y\cdot (-\cos(y)) \right]_ {\alpha}^{\beta}
+ -  \int_ {\alpha}^{\beta} 1\cdot (-\cos(y)) \; dy \\
+ &=&  \left[ -y\cos(y) \right]_ {\alpha}^{\beta} + \left[ \sin(y) \right]_ {\alpha}^{\beta} 
+ =  \left[ -y\cos(y)+ \sin(y) \right]_ {\alpha}^{\beta}.
+\end{eqnarray*}
+\lang{de}{D.\,h. $-y\cos(y)+\sin(y)$ ist eine Stammfunktion für $y\sin(y)$.}
+\lang{en}{In other words, $-y\cos(y)+\sin(y)$ is an antiderivative of $y\sin(y)$.}
+
+\step 
+\lang{de}{Damit ist schließlich:
+\begin{eqnarray*}
+\int_{0}^{1} 3x^3\sin(x^2)\; dx &=&  \frac{3}{2}\cdot \int_{g(0)}^{g(1)}  y\sin(y) \; dy \\
+&=&  \frac{3}{2}\cdot   \left[ -y\cos(y)+ \sin(y) \right]_{g(0)}^{g(1)} 
+=  \frac{3}{2}\cdot    \left[ -x^2\cos(x^2)+\sin(x^2) \right]_{0}^1 \\
+&=&   \frac{3}{2}\cdot \Big( -1\cdot \cos(1)+\sin(1) -(0+0) \Big) = \frac{3}{2}(\sin(1)- \cos(1))\\
+&\approx& 0,4518.
+\end{eqnarray*}
+}
+\lang{en}{Altogether,
+\begin{eqnarray*}
+\int_{0}^{1} 3x^3\sin(x^2)\; dx &=&  \frac{3}{2}\cdot \int_{g(0)}^{g(1)}  y\sin(y) \; dy \\
+&=&  \frac{3}{2}\cdot   \left[ -y\cos(y)+ \sin(y) \right]_{g(0)}^{g(1)} 
+=  \frac{3}{2}\cdot    \left[ -x^2\cos(x^2)+\sin(x^2) \right]_{0}^1 \\
+&=&   \frac{3}{2}\cdot \Big( -1\cdot \cos(1)+\sin(1) -(0+0) \Big) = \frac{3}{2}(\sin(1)- \cos(1))\\
+&\approx& 0.4518.
+\end{eqnarray*}
+}
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+
+%#############################################################ENDE
+
+    \tab{\lang{de}{Video: ähnliche Übungsaufgabe} \lang{en}{Video: similar exercise}}
+  \youtubevideo[500][300]{t97KM2yTnwQ}\\
+
+\end{tabs*}
+\end{content}

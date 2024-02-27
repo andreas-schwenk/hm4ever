@@ -1,0 +1,417 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Polynome}
+    \lang{en}{Polynomials}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T103_Polynomial_B.meta.xml}{T103_Polynomial_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T103_Polynomial_A.meta.xml}{T103_Polynomial_A}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{3}
+\ombarticle{1}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Polynome}\lang{en}{Polynomials}}
+
+\begin{block}[annotation]
+ Polynomfunktionen, Auswertung mit Horner-Schema, einzelne Linearfaktoren von Polynomen\\
+ 
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/8988}{Ticket 8988}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{\lang{de}{Einf"uhrung in Polynomfunktionen}\lang{en}{Introduction to polynomial functions}}\label{sec:polynomfkt}
+
+\begin{definition}[\lang{de}{Polynome}\lang{en}{Polynomials}] \label{polynomial}
+\lang{de}{
+Funktionen der Form
+}
+\lang{en}{
+Functions of the form
+}
+\begin{align*}
+p(x) = a_n\, x^n + a_{n-1} \, x^{n-1} + a_{n-2} \, x^{n-2} + \ldots + a_1 \, x + a_0
+\end{align*}
+\lang{de}{
+mit Koeffizienten $a_0,\, a_1,\,\ldots, a_{n-1},\, a_n \in \mathbb{R}$, wobei $a_n \neq 0$ ist, heißen 
+\notion{{Polynome $n$-ten Grades}}. 
+Die Zahl $a_n$ bezeichnet man als \textbf{Leitkoeffizienten}. Der Definitionsbereich jedes Polynoms ist $D_p = \mathbb{R}$. Mittels Summenzeichens lässt sich ein Polynom auch wie folgt darstellen:
+}
+\lang{en}{
+with coefficients $a_0,\, a_1,\,\ldots, a_{n-1},\, a_n \in \mathbb{R}$, where $a_n \neq 0$, are called \nowrap{\emph{polynomials of degree $n$}}. 
+The number $a_n$ is called the leading coefficient. The domain of all polynomials is $D_p = \mathbb{R}$. Using the sum symbol we get the following representation:
+}
+\[
+p(x) = \sum_{i=0}^n a_i x^i .
+\]
+\lang{de}{
+Das Polynom, das für alle Argumente $x \in \R$ den Wert Null annimmt, $p(x)=0$, heißt das \textbf{Nullpolynom}.
+Es hat keinen Grad.\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=114}{\image[75]{00_Videobutton_schwarz}}}\\~
+}
+\lang{en}{
+The polynomial that takes on the value  $p(x)=0$ for all $x \in \R$ is called the \emph{zero polynomial}.
+The zero polynomial has no degree.
+}
+\end{definition}
+
+\begin{remark}
+
+\begin{enumerate}
+
+\item \lang{de}{
+Polynome vom Grad null sind konstante Funktionen $p(x) = a_0\,x^0 = a_0 \neq 0$.   
+Hier sieht man, weshalb die Definition $0^0=1$ sinnvoll ist: $p(x)=a_0\,x^0=a_0$ soll für \emph{alle} Einsetzungen $x\in\R$ gelten.
+}
+\lang{en}{
+Polynomials of degree zero are constant functions $p(x) = a_0\,x^0 = a_0 \neq 0$.   
+For all polynomials, $p(0) = a_0$, so $a_0$ is the $y$-intercept of polynomials.
+}
+\item \lang{de}{
+Für alle Polynome gilt $p(0) = a_0$, d.h. $a_0$ ist der $y$-Achsenabschnitt des Graphen. Polynome vom Grad eins sind die linearen Funktionen oder Geraden. 
+Entsprechend sind Polynome vom Grad zwei quadratische Funktionen.
+}
+\lang{en}{
+Polynomials of degree one are linear functions, and polynomials of degree two are quadratic functions.
+}
+
+\item \lang{de}{
+Zwei Polynome sind genau dann gleich, wenn alle ihre Koeffizienten übereinstimmen.
+}
+\lang{en}{
+Two polynomials are considered equal if they have equal coefficients.
+}
+
+\end{enumerate}
+
+\end{remark}
+
+
+
+\begin{example}
+ \lang{de}{Polynome  unterschiedlichen Grades:}
+ \lang{en}{Polynomials of differing degrees:}
+\begin{align*}
+p_0(x) &= -2 && a_0 = -2, &\text{\lang{de}{Grad}\lang{en}{degree}} = 0,\\
+p_1(x) &= 3x-2 && a_0 = -2, a_1 = 3, &\text{\lang{de}{Grad}\lang{en}{degree}} = 1,\\
+p_2(x) &= 2x^2 + 3x-2 && a_0 = -2, a_1 = 3, a_2 = 2, &\text{\lang{de}{Grad}\lang{en}{degree}} = 2,\\
+p_3(x) &= -3x^3 + 2x^2 + 3x-2 && a_0 = -2, a_1 = 3, a_2 = 2, a_3 = -3, &\text{\lang{de}{Grad}\lang{en}{degree}} = 3,\\
+p_4(x) &= x^4 -3x^3 + 2x^2 + 3x-2 && a_0 = -2, a_1 = 3, a_2 = 2, a_3 = -3, a_4 = 1, &\text{\lang{de}{Grad}\lang{en}{degree}} = 4.
+\end{align*}
+\end{example} 
+
+ \begin{example}
+ \begin{genericGWTVisualization}[280][300]{mathlet1}
+\lang{de}{\title{Polynom}}\lang{en}{\title{Polynomials}}
+
+	\begin{variables}
+
+	\function[editable]{P5}{rational}{x^5}
+	\function[editable]{P4}{rational}{0}
+	\function[editable]{P3}{rational}{-4*x^3}
+	\function[editable]{P2}{rational}{x^2}
+	\function[editable]{P1}{rational}{3*x}
+	\function[editable]{P0}{rational}{-2}
+
+	\function{P5x}{rational}{var(P5)}
+	\function{P4x}{rational}{var(P4)}
+	\function{P3x}{rational}{var(P3)}
+	\function{P2x}{rational}{var(P2)}
+	\function{P1x}{rational}{var(P1)}
+	\function{P0x}{rational}{var(P0)}
+
+	\function{P}{rational}{var(P5)+var(P4)+var(P3)+var(P2)+var(P1)+var(P0)}
+	\end{variables}
+
+	%\label{P}{$P$}
+
+	% COLOR:
+
+	\color{P}{#0066CC}
+
+	\begin{canvas}
+	\plotSize{380}
+	\plotLeft{-5}
+	\plotRight{5}
+	\plot[coordinateSystem]{P}
+	\end{canvas}
+	\lang{de}{\text{Sie können hier ein Polynom beliebig hohen Grades mit bis zu fünf Termen anzeigen lassen.}}
+	\lang{en}{\text{Here you can input a polynomial of any degree with up to five terms in order to graph it.}}
+	\lang{de}{\text{Fügen Sie Terme des Polynoms ein, z.B. wie im Beispiel oben.}}
+	\lang{en}{\text{Input the terms of the polynomial just like in the example above.}}
+	\text{$p(x) = \var{P5}+ (\var{P4})+ (\var{P3})+ (\var{P2})+ (\var{P1})+ (\var{P0})$
+	\phantom{}}
+\text{$p(x) =  \var{P}$} 
+%\var{P5x}+(\var{P4x})+(\var{P3x})+(\var{P2x})+(\var{P1x})+(\var{P0x})$
+%\phantom{}}
+\end{genericGWTVisualization}
+\end{example}
+
+\begin{rule}\label{rule:polyn_null_unendl}
+\textbf{\lang{de}{Verhalten von Polynomfunktionen und ihren Graphen bei Null und bei
+   Unendlich:}\lang{en}{Behaviour of polynomial functions and their graphs at $0$ and at infinity:}}
+   \begin{itemize}
+   \item \lang{de}{Für $x \to \pm \infty$ hängt das Verhalten der
+     Polynomfunktion $p(x) = a_n x^n + \ldots + a_1 x + a_0$ vom
+     Summanden mit der größten Potenz ab: Der Graph verläuft wie der
+     des Terms $a_n x^n$, wobei $n$ der Grad des
+     Polynoms ist, also $a_n \neq 0$.}
+     \lang{en}{As $x \to \pm \infty$ the behaviour of the polynomial 
+     $p(x) = a_n x^n + \ldots + a_1 x + a_0$ depends on the summand
+     with the largest power: for large $\abs{x}$ the graph behaves like the term
+     $a_n x^n$ with the highest power, where $n$ is the degree of the polynomial and
+     $a_n \neq 0$.}
+   \item \lang{de}{Für $x \to 0$ hängt das Verhalten der Polynomfunktion $p(x) =
+     a_n x^n + \ldots + a_1 x + a_0$ von den Summanden mit den
+     niedrigen Potenzen ab. Sei $k \in \{1,...,n\}$ die kleinste Zahl für die $a_k \neq 0$ gilt. Dann verhält sich das Polynom bei der Grenzwertbildung $x \to 0$ wie $a_k x^k +a_0$: Ist $a_1 \neq 0$, so verläuft der Graph
+     wie der des Terms $a_1 x + a_0$; ist $a_1 = 0$, aber $a_2 \neq
+     0$, so verläuft der Graph wie der des Terms $a_2 x^2 + a_0$; sind
+     $a_1 = a_2 = 0$, aber $a_3 \neq 0$, so verläuft der Graph wie der
+     des Terms $a_3 x^3 + a_0$; und so weiter.}
+     \lang{en}{As $x \to 0$ the behaviour of the polynomial $p(x) =
+     a_n x^n + \ldots + a_1 x + a_0$ depends on the summands with the smallest powers: \\
+     if $a_1 \neq 0$, the graph behaves like the term $a_1 x + a_0$; \\
+     if $a_1 = 0$, but $a_2 \neq 0$, then the graph behaves like the term $a_2 x^2 + a_0$; \\
+     if $a_1 = a_2 = 0$, but $a_3 \neq 0$, then the graph behaves like the term $a_3 x^3 + a_0$; \\
+     and so on.}
+   \end{itemize}
+\end{rule}
+\begin{example}
+ \begin{tabs*}[\initialtab{1}\class{example}]
+ \tab{$P(x)= 3 x^5 + x^2-6x +2$}
+ \begin{center}
+\image{T103_Polynomial_A}
+  \end{center}
+  \lang{de}{Der Polynomgraph nähert sich für $x$ nahe Null dem Graphen von
+$f_1(x)= -6x +2$ und hat für $x\to \pm\infty$ das gleiche Verhalten
+wie der Graph von $f_2(x)= 3 x^5$.}
+  \lang{en}{The graph of the polynomial approaches the graph of 
+$f_1(x)= -6x +2$ for $x$ values close to $0$ and has the same behaviour as the graph of
+$f_2(x)= 3 x^5$ as $x\to \pm\infty$}
+ \tab{$P(x)= x^4 -0\lang{de}{,}\lang{en}{.}5x^3-3x^2+2$}
+ \begin{center}
+\image{T103_Polynomial_B}
+ \end{center}
+ \lang{de}{Der Polynomgraph nähert sich für $x$ nahe Null dem Graphen von
+$f_1(x)= -3x^2 +2$ und hat für $x\to \pm\infty$ das gleiche Verhalten 
+wie der Graph von $f_2(x)= x^4$.}
+ \lang{en}{The graph of the polynomial approaches the graph of
+$f_1(x)= -3x^2 +2$ for $x$ values close to $0$ and has the same behaviour as $f_2(x)= x^4$ as $x\to \pm\infty$.}
+ \end{tabs*}
+\end{example}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\randint{p1}{0}{1}
+			\randint{p2}{0}{1}
+			\randint{p3}{0}{2}
+			\randint[Z]{a}{-5}{5}
+			\randint{b1}{-3}{4}
+			\randint{b2}{-3}{4}
+			\randint[Z]{c}{-4}{4}
+			\randint{d}{1}{4}
+			\function[normalize]{ht}{p1*a*x^6+(1-p1)*a*x^5}  %ax^5 oder ax^6
+			\function[normalize]{mt}{(2-p3)*b1*x^4+p3*b2*x^3-p3*p2*(b1+b2)*x^2}  %x^4 und x^3-terme und evtl. auch x^2, wenn nt keinen hat.
+			\function[normalize]{nt}{(1-p2)*c*x^2+p2*c*x+d}   %cx^2+d oder cx+d
+		    \function[normalize,sort]{f}{ht+mt+nt}
+		    \function[normalize]{gr}{p1*6+(1-p1)*5}
+		    \function[normalize]{lc}{a}
+		    %\function[normalize]{f}{g}
+		\end{variables}
+		
+			\text{\lang{de}{
+      Die Polynomfunktion $f(x)=\var{f}$ hat\\ 
+			den Grad \ansref und den Leitkoeffizient \ansref.
+      }
+      \lang{en}{
+      The polynomial $f(x)=\var{f}$ has degree \ansref and leading coeffient \ansref.
+      }}
+			\text{\lang{de}{
+      Für $x\to \pm \infty$ verhält sie sich wie die Funktion \ansref \\ 
+			und für $x\to 0$ wie die Funktion \ansref.
+      }
+      \lang{en}{
+      For $x\to \pm \infty$ it behaves like \ansref \\ 
+      and for $x\to 0$ it behaves like \ansref.
+      }}
+            \explanation{\lang{de}{
+            Für den Grenzwert gegen $ \pm \infty$ benötigen Sie das Monom mit der höchsten Ordnung. 
+            Für den Grenzwert gegen Null jenes mit der kleinsten Ordnung und die Konstante.}
+            \lang{en}{
+            For the limit to $ \pm \infty$ we look at the term with the highest degree. 
+            Forthe limit to zero we look at the term with the lowest degree, often the constant.
+            }}
+		
+		\begin{answer}
+			\solution{gr}
+			\checkAsFunction{x}{-2}{2}{100}
+		\end{answer}
+		\begin{answer}
+			\solution{lc}
+			\checkAsFunction{x}{-2}{2}{100}
+		\end{answer}
+		\begin{answer}
+			\solution{ht}
+			\checkAsFunction{x}{-2}{2}{100}
+		\end{answer}
+		\begin{answer}
+			\solution{nt}
+			\checkAsFunction{x}{-2}{2}{100}
+		\end{answer}
+        
+%\begin{answer}
+
+
+%            Beide 
+%\end{answer}
+        
+       
+	\end{quickcheck}
+	
+
+
+\section{\lang{de}{Nullstellen und Faktorisierung von Polynomen}
+\lang{en}{Roots and linear factors of polynomials}}\label{sec:linearfaktor}
+
+\begin{theorem}
+\begin{enumerate}
+\item \lang{de}{
+Sei $p(x)$ ein Polynom vom Grad $n$. Dann besitzt $p(x)$ höchstens $n$ verschiedene reelle Nullstellen.
+}
+\lang{en}{
+Let $p(x)$ be a polynomial of degree $n$. Then $p(x)$ has at most $n$ real roots.
+}   
+   
+\item \lang{de}{
+Ist $p(x)=a_n x^n + \ldots + a_1 x + a_0$ ein Polynom vom Grad $n>0$, $c\in \R$ und $d=p(c)$,
+so gibt es ein Polynom $q$ vom Grad $n-1$ mit 
+}
+\lang{en}{
+If $p(x)=a_n x^n + \ldots + a_1 x + a_0$ is a polynomial of degree $n>0$, $c\in \R$ and $d=p(c)$, 
+then there exists a polynomial $q$ of degree $n-1$ with 
+}
+\[ p(x)=q(x)\cdot (x-c) + d \quad \text{\lang{de}{für alle }\lang{en}{for all }}x\in \R. \]
+\label{factorisation}
+\lang{de}{
+Insbesondere gilt: Ist $c$ eine Nullstelle von $p$, so gibt es ein Polynom $q$ vom Grad $n-1$ mit
+}
+\lang{en}{
+In particular, if $c$ is a root of $p$, then there exists a polynomial $q$ of degree $n-1$ with 
+}
+%\[ p(x)=q(x)\cdot (x-c) \quad \text{für alle }x\in \R. \]
+~\\
+\begin{center}$p(x)=q(x)\cdot (x-c) \quad \text{\lang{de}{für alle }\lang{en}{for all }}x\in \R.$\end{center}
+\end{enumerate}
+%\floatright{\href{https://www.hm-kompakt.de/video?watch=117}{}\image[75]{00_Videobutton_schwarz}}\\\\
+\lang{de}{
+\floatright{\href{https://www.hm-kompakt.de/video?watch=117}{\image[75]{00_Videobutton_schwarz}}}\\~
+}
+\lang{en}{
+\\
+}
+\end{theorem}
+
+\lang{de}{
+Wie man für ein gegebenes Polynom $p$ und eine reelle Zahl $c$ das Polynom $q$ berechnet, wird im nächsten Abschnitt
+gezeigt. An dieser Stelle soll die Bedeutung des Falles einer Nullstelle hervorgehoben werden.
+}
+\lang{en}{
+How we calculate such a polynomial $q$ for a given polynomal $p$ and real number $c$ is shown in the 
+next section, but first we remark on the case where $c$ is a root of $p$. 
+}
+
+\begin{remark}
+\begin{enumerate}
+\item \lang{de}{
+Ist $c$ eine Nullstelle des Polynoms $p$, so lässt sich nach obigem Satz $p$ als Produkt 
+$q(x)\cdot (x-c)$ schreiben. Man sagt auch, dass man den \emph{Linearfaktor} $(x-c)$ \emph{abspalten} kann. Liegt bei $c$ eine $k$-fache Nullstelle vor, so lässt sich $p$ als Produkt $p(x) = q(x) \cdot (x - c)^k$ schreiben.
+}
+\lang{en}{
+If $c$ is a root of the polynomial $p$, then by the above theorem we can write $p$ as a product 
+$q(x)\cdot (x-c)$. In this case we say that $(x-c)$ is a \emph{linear factor} of $p$. If there is a 
+repeated root at $c$, that is, a root which appears $k\in\mathbb{N}$ times, then $p$ can be written 
+as a product $p(x) = q(x) \cdot (x - c)^k$.
+} %Multiplicity has not yet been defined? - Niccolo
+\item \lang{de}{
+Umgekehrt sieht man auch durch Auswerten an der Stelle $c$: Wenn $p$ sich als $p(x)=q(x)\cdot (x-c)$
+schreiben lässt, ist $c$ eine Nullstelle von $p$.
+}
+\lang{en}{
+Conversely, if $p$ can be written as $p(x)=q(x)\cdot (x-c)$, then $c$ is a root of $p$.
+}
+\item \lang{de}{
+Für den Fall eines normierten quadratischen Polynoms (d.h. $a_2=1$) ist obiger Satz genau der Satz von Vieta. Ist $c$ die
+eine Nullstelle, dann ist der Faktor $q(x)$ genau $x-x_2$ mit der zweiten Nullstelle $x_2$.
+}
+\lang{en}{
+In the case of monic quadratic polynomials (that is, $a_2=1$ and $a_n=0$ for $n > 2$), the above 
+statement is precisely that of Vieta. If $c$ is a root, then the factor $q(x)$ is always $x-x_2$ 
+where $x_2$ is the other root.
+}
+\end{enumerate}
+\end{remark}
+
+\lang{de}{Zum Abschluss noch einfache Beispiele zur Faktorisierung von Polynomen.}
+\lang{en}{Finally, we have some simple examples of factorising polynomials.}
+
+\begin{example}
+\begin{enumerate}
+\item \lang{de}{
+Sei $p(x) = x^3 - x^2 + 2x - 1$ ein Polynom vom Grad $n=3$ und $c=2$. Dann kann $p$ auch geschrieben werden als $p(x)=q(x) \cdot (x-2) + d$ mit $q(x)=x^2 + x + 4$ und $d=7$.
+}
+\lang{en}{
+Let $p(x) = x^3 - x^2 + 2x - 1$ be a polynomial of degree $n=3$ and $c=2$. Then $p$ can also be 
+written as $p(x)=q(x) \cdot (x-2) + d$ with $q(x)=x^2 + x + 4$ and $d=7$.
+}
+\item \lang{de}{
+Sei $p(x) = 2x^3 + x^2 - 3x$ ein Polynom vom Grad $n=3$ und $c=1$. Dann kann $p$ auch geschrieben werden als $p(x)=q(x) \cdot (x-1)$ mit $q(x)=2x^2 + 3x$.
+}
+\lang{en}{
+Let $p(x) = 2x^3 + x^2 - 3x$ be a polynomial of degree $n=3$ and $c=1$. Then $p$ can also be written 
+as $p(x)=q(x) \cdot (x-1)$ with $q(x)=2x^2 + 3x$.
+}
+
+\end{enumerate}
+\end{example}
+
+\lang{de}{
+Im nachfolgenden Video werden nochmals Polynome besprochen. Dabei wird dort auch schon auf Stetigkeit und Differenzierbarkeit eingagangen, was erst später behandelt wird.
+\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10864&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+}
+\lang{en}{
+\\
+}
+
+
+\end{visualizationwrapper}
+
+\end{content}

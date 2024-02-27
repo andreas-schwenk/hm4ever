@@ -1,0 +1,364 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A01: Monotonie}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A01: Monotonie}}
+\lang{en}{\title{A01: Monotonicity}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24027}{Ticket 24027}
+\end{block}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+
+
+
+\begin{block}[annotation]
+ Kopie: hm4mint/T106_Defferentialrechnung/training 7     
+
+ Im Ticket-System: \href{http://team.mumie.net/issues/9472}{Ticket 9472}
+\end{block}
+
+\begin{problem}
+	
+\randomquestionpool{1}{3}
+\randomquestionpool{4}{6}
+\randomquestionpool{7}{8}
+	
+%Frage 1 von 8	
+\begin{question}
+	\lang{de}{
+		\text{Gegeben $f(x) =\var{f}$. Bestimmen Sie das Intervall $I$, 
+		auf dem $f$ monoton wachsend ist. }
+		\explanation{$f'(x)=\var{g}$.}
+	}
+	\lang{en}{
+		\text{Given $f(x) = \var{f}$, determine the interval $I$ on which $f$ is monotonically increasing.}
+		\explanation{$f'(x)=\var{g}$}
+	}
+	\begin{variables}
+		\randint[Z]{a}{-3}{5}
+	    \randint[Z]{b}{1}{7}
+    	\function[calculate]{h}{2*b}
+    	\function{f}{(x-a)^(h)}
+    	\derivative[normalize]{g}{f}{x}
+    	\functionNormalize{g}
+		\function{loes}{infinity}
+		\function[calculate]{s}{h-1}
+	\end{variables}
+	\type{input.number}
+	\begin{answer}
+    	\lang{de}{\text{ Die linke Intervallgrenze ist:}}
+       	\lang{en}{\text{The left interval boundary is:}}
+		\solution{a}
+	\end{answer}
+	\begin{answer}
+    	\lang{de}{\text{ Die rechte Intervallgrenze ist:}}
+       	\lang{en}{\text{The right interval boundary is:}}
+		\solution{loes}
+	\end{answer}
+\end{question}
+	
+%Frage 2 von 8
+\begin{question}
+	\lang{de}{
+		\text{Gegeben $f(x) =\var{f}$ auf $(-\infinity;\var{grenz}]$. Bestimmen Sie das Intervall $I$ in $(-\infinity;\var{grenz}]$, 
+		auf dem $f$ monoton wachsend ist. }
+		\explanation{$f'(x)=-\frac{\var{h}}{(x-\var{a})^{\var{s}}}$.}
+	}
+	\lang{en}{
+		\text{Given $f(x) =\var{f}$ on $(-\infinity,\var{grenz}]$, find the interval $I$ in $(-\infinity;\var{grenz}]$ on which $f$ is monotonically increasing.}
+		\explanation{$f'(x)=-\frac{\var{h}}{(x-\var{a})^{\var{s}}}$}
+	}
+	\begin{variables}
+		\randint[Z]{a}{1}{5}
+	   	\randint[Z]{b}{1}{7}
+		\function[calculate]{h}{2*b}
+		\function[calculate]{s}{h+1}
+		\function[calculate,2]{grenz}{a/2}
+		\function{f}{1/((x-a)^(h))}
+	   	\function{loes}{-infinity}
+	   	\functionNormalize{f}
+	\end{variables}
+	\type{input.number}
+	\begin{answer}
+    	\lang{de}{\text{ Die linke Intervallgrenze ist:}}
+       	\lang{en}{\text{The left interval boundary is:}}
+		\solution{loes}
+	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{ Die rechte Intervallgrenze ist:}}
+      	\lang{en}{\text{The right interval boundary is:}}
+		\solution{grenz}
+	\end{answer}
+\end{question}
+	
+%Frage 3 von 8
+\begin{question}
+	\lang{de}{
+		\text{Gegeben $f(x) =\var{f}$. Bestimmen Sie das Intervall $I$, 
+		auf dem $f$ monoton wachsend ist. }
+		\explanation{$f'(x)=\var{h}(x-\var{a})^{\var{s}}$.}
+	}
+	\lang{en}{
+		\text{Given $f(x) =\var{f}$, find the interval $I$ on which $f$ is monotonically increasing.}
+		\explanation{$f'(x)=\var{h}(x-\var{a})^{\var{s}}$}
+	}
+	\begin{variables}
+	    \randint[Z]{a}{-3}{5}
+	   	\randint[Z]{b}{1}{7}
+		\function[calculate]{h}{2*b+1}
+		\function[calculate]{s}{2*b}
+		\function{f}{(x-a)^(h)}
+	   	\function{loes}{infinity}
+	   	\function{loesz}{-infinity}
+	\end{variables}		
+	\type{input.number}
+	\begin{answer}
+  		\lang{de}{\text{ Die linke Intervallgrenze ist:}}
+   		\lang{en}{\text{The left interval boundary is:}}
+		\solution{loesz}
+	\end{answer}
+	\begin{answer}
+ 		\lang{de}{\text{ Die rechte Intervallgrenze ist:}}
+   		\lang{en}{\text{The right interval boundary is:}}
+		\solution{loes}
+	\end{answer}
+\end{question}
+	
+%Frage 4 von 8
+\begin{question}
+	\lang{de}{
+		\text{Gegeben $f(x) =\var{f}$ auf $[0;2\pi]$. Bestimmen Sie das Intervall $I$ in $[0;2\pi]$,\\
+		auf dem $f$ monoton wachsend ist.}
+		\explanation{$f'(x)=-\sin(x+\pi)$.}
+	}
+	\lang{en}{
+		\text{Given $f(x) =\var{f}$ on $[0,2\pi]$, find the interval $I$ in $[0,2\pi]$ on which $f$ is monotonically increasing.}
+		\explanation{$f'(x)=-\sin(x+\pi)$}
+	}
+	\begin{variables}
+		\function{f}{cos(x+pi)}
+   		\function{loes}{0}
+   		\function{loesz}{pi}
+	\end{variables}
+	\type{input.function}
+	\begin{answer}
+    	\lang{de}{\text{ Die linke Intervallgrenze ist:}}
+       	\lang{en}{\text{The left interval boundary is:}}
+		\solution{loes}
+		\checkAsFunction{x}{-10}{10}{100}	
+	\end{answer}
+	\begin{answer}
+    	\lang{de}{\text{ Die rechte Intervallgrenze ist:}}
+       	\lang{en}{\text{The right interval boundary is:}}
+		\solution{loesz}
+		\checkAsFunction{x}{-10}{10}{100}	
+	\end{answer}
+\end{question}
+	
+%Frage 5 von 8
+\begin{question}
+	\lang{de}{
+		\text{Gegeben $f(x) =\var{f}$ auf $\R$. Bestimmen Sie das Intervall $I$, 
+		auf dem $f$\\ monoton fallend ist. }
+		\explanation{$f'(x)=\frac{2x}{x^2+1}-1=-\frac{(x-1)^2}{x^2+1}\leq 0$.}
+	}
+	\lang{en}{
+		\text{Given $f(x) =\var{f}$ on $\R$, find the interval $I$ on which $f$ is monotonically decreasing.}
+		\explanation{$f'(x)=\frac{2x}{x^2+1}-1=-\frac{(x-1)^2}{x^2+1}\leq 0$}
+	}
+	\begin{variables}
+    	\randint[Z]{a}{-3}{5}
+		\function{f}{ln(x^2+1)-x}
+	   	\function{loes}{-infinity}
+	   	\function{loesz}{infinity}
+	\end{variables}
+	\type{input.number}
+	\begin{answer}
+    	\lang{de}{\text{ Die linke Intervallgrenze ist:}}
+       	\lang{en}{\text{The left interval boundary is:}}
+		\solution{loes}
+	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{ Die rechte Intervallgrenze ist:}}
+       	\lang{en}{\text{The right interval boundary is:}}
+		\solution{loesz}
+	\end{answer}
+\end{question}
+	
+%Frage 6 von 8
+\begin{question}
+	\lang{de}{
+		\text{Gegeben $f(x) =\var{f}$ auf $\R$. Bestimmen Sie das Intervall $I$, 
+		auf dem $f$\\ monoton wachsend ist. }
+		\explanation{$f'(x)=-2xe^{-x^2}$.}
+	}
+	\lang{en}{
+		\text{Given $f(x) =\var{f}$ on $\R$, find the interval $I$ on which $f$ is monotonically increasing.}
+		\explanation{$f'(x)=-2xe^{-x^2}$}
+	}
+	\begin{variables}
+    	\randint[Z]{a}{-3}{5}
+		\function{f}{exp(-x^2)}
+	   	\function{loes}{-infinity}
+	   	\number{loesz}{0}
+	\end{variables}
+	\type{input.number}
+	\begin{answer}
+  		\lang{de}{\text{ Die linke Intervallgrenze ist:}}
+   		\lang{en}{\text{The left interval boundary is:}}
+		\solution{loes}
+	\end{answer}
+	\begin{answer}
+  		\lang{de}{\text{ Die rechte Intervallgrenze ist:}}
+   		\lang{en}{\text{The right interval boundary is:}}
+		\solution{loesz}
+	\end{answer}
+\end{question} 
+    
+%Frage 7 von 8
+\begin{question} 
+  	\lang{de}{
+  		\text{Sei $f(x)=x^3-\var{abmall}x^2+\var{abmal}x+\var{idc}$. Wir betrachten nun sogenannte \emph{stationäre Stellen}, bei denen
+        es sich um die Nullstellen der Ableitungsfunktion handelt.}
+		\explanation{$f'(x)=3x^2-\var{s}x+\var{abmal}$.\\ Die station\"{a}ren Stellen sind die Nullstellen von $f'$.\\
+		$f'$ ist zwischen den station\"{a}ren Stellen negativ, dort f\"{a}llt $f$ also.}
+	}
+	\lang{en}{
+		\text{Let $f(x)=x^3-\var{abmall}x^2+\var{abmal}x+\var{idc}$.
+  We will now consider the so-called \emph{stationary points} of $f$, which are
+  the zeros of its derivative.}
+		\explanation{$f'(x)=3x^2-\var{s}x+\var{abmal}$\\ The stationary points are the roots of $f'$. 
+  \\ $f'$ is negative between its two stationary points so the function $f$ is decreasing there.}
+	}
+	\type{mc.multiple}
+	\begin{variables}
+		\randint[Z]{a}{1}{3}
+		\randint[Z]{c}{1}{10}
+		\randint[Z]{b}{4}{7}
+		\function[calculate]{zwida}{2*a}
+		\function[calculate]{zwidb}{2*b}
+		\function[calculate]{idc}{c}
+		\function[calculate]{abplus}{a+b}
+		\function[calculate]{abmall}{3*(a+b)}
+		\function[calculate]{abmal}{12*a*b}
+		\function[calculate]{zwidamin}{2*a-1}
+		\function[calculate]{zwidaminn}{2*a+1}
+		\function[calculate]{zwidbplus}{2*b+2}
+		\function[calculate]{zwidbpluss}{2*b+1}
+		\function[calculate]{hh}{c*b}
+		\function[calculate]{s}{6*(a+b)}
+	\end{variables}
+	\permutechoices{1}{4}
+	\begin{choice}
+		\lang{de}{\text{$f$ hat die station\"{a}ren Stellen $\var{zwida}$ und $\var{zwidb}$.}}
+		\lang{en}{\text{$f$ has stationary points at $x=\var{zwida}$ and $x=\var{zwidb}$.}}
+		\solution{true}
+	\end{choice}
+	\begin{choice}
+		\lang{de}{\text{$f$ hat die station\"{a}ren Stellen $\var{zwida}$ und $\var{zwidbpluss}$.}}
+		\lang{en}{\text{$f$ has stationary points at $x=\var{zwida}$ and $x=\var{zwidbpluss}$.}}
+		\solution{false}
+	\end{choice}
+	\begin{choice}
+		\lang{de}{\text{$f$ hat die station\"{a}ren Stellen $\var{zwidaminn}$ und $\var{zwidbpluss}$.}}
+		\lang{en}{\text{$f$ has stationary points at $x=\var{zwidaminn}$ and $x=\var{zwidbpluss}$.}}
+		\solution{false}
+	\end{choice}
+	\begin{choice}
+		\lang{de}{\text{$f$ hat die station\"{a}ren Stellen $\var{zwidaminn}$ und $\var{zwidb}$.}}
+		\lang{en}{\text{$f$ has stationary points at $x=\var{zwidaminn}$ and $x=\var{zwidb}$.}}
+		\solution{false}
+	\end{choice}
+	\begin{choice}
+		\lang{de}{\text{$f$ ist zwischen den station\"{a}ren Stellen monoton steigend.}}
+		\lang{en}{\text{$f$ is monotonically increasing between its critical points.}}
+		\solution{false}
+	\end{choice}
+\end{question}
+  
+%Frage 8 von 8
+ \begin{question} 
+  	\lang{de}{
+  		\text{Sei $f(x)=x^3-\var{abmall}x^2+\var{abmal}x+\var{idc}$. Wir betrachten nun sogenannte \emph{stationäre Stellen}, bei denen
+        es sich um die Nullstellen der Ableitungsfunktion handelt.}
+		\explanation{$f'(x)=3x^2-\var{s}x+\var{abmal}$.\\ Die station\"{a}ren Stellen sind die Nullstellen von $f'$.\\
+		$f'$ ist zwischen den station\"{a}ren Stellen negativ, dort f\"{a}llt $f$ also.}
+	}
+	\lang{en}{
+		\text{Let $f(x)=x^3-\var{abmall}x^2+\var{abmal}x+\var{idc}$.
+  We will now consider the so-called \emph{stationary points} of $f$, which are
+  the zeros of its derivative.}
+		\explanation{$f'(x)=3x^2-\var{s}x+\var{abmal}$\\
+		The stationary points are the roots of $f'$. $f'$ is negative between its two critical points so the function $f$ is decreasing there.}
+	}
+	\type{mc.multiple}
+	\begin{variables}
+		\randint[Z]{a}{1}{3}
+		\randint[Z]{c}{1}{10}
+		\randint[Z]{b}{4}{7}
+		\function[calculate]{zwida}{2*a}
+		\function[calculate]{zwidb}{2*b}
+		\function[calculate]{idc}{c}
+		\function[calculate]{abplus}{a+b}
+		\function[calculate]{abmall}{3*(a+b)}
+		\function[calculate]{abmal}{12*a*b}
+		\function[calculate]{zwidamin}{2*a-1}
+		\function[calculate]{zwidaminn}{2*a-2}
+		\function[calculate]{zwidbplus}{2*b+2}
+		\function[calculate]{zwidbpluss}{2*b+1}
+		\function[calculate]{hh}{c*b}
+		\function[calculate]{s}{6*(a+b)}
+	\end{variables}
+	\permutechoices{1}{4}
+	\begin{choice}
+		\lang{de}{\text{$f$ hat die station\"{a}ren Stellen $\var{zwida}$ und $\var{zwidb}$.}}
+		\lang{en}{\text{$f$ has stationary points at $x=\var{zwida}$ and $x=\var{zwidb}$.}}
+		\solution{true}
+	\end{choice}
+	\begin{choice}
+		\lang{de}{\text{$f$ hat die station\"{a}ren Stellen $\var{zwida}$ und $\var{zwidbplus}$.}}
+		\lang{en}{\text{$f$ has stationary points at $x=\var{zwida}$ and $x=\var{zwidbplus}$.}}
+		\solution{false}
+	\end{choice}
+	\begin{choice}
+		\lang{de}{\text{$f$ hat die station\"{a}ren Stellen $\var{zwidamin}$ und $\var{zwidbplus}$.}}
+		\lang{en}{\text{$f$ has stationary points at $x=\var{zwidamin}$ and $x=\var{zwidbplus}$.}}
+		\solution{false}
+	\end{choice}
+	\begin{choice}
+		\lang{de}{\text{$f$ hat die station\"{a}ren Stellen $\var{zwidamin}$ und $\var{zwidb}$.}}
+		\lang{en}{\text{$f$ has stationary points at $x=\var{zwidamin}$ and $x=\var{zwidb}$.}}
+		\solution{false}
+	\end{choice}
+	\begin{choice}
+		\lang{de}{\text{$f$ ist zwischen den station\"{a}ren Stellen monoton fallend.}}
+		\lang{en}{\text{$f$ is monotonically decreasing between its critical points.}}
+		\solution{true}
+	\end{choice}
+\end{question}
+    
+\end{problem}
+
+\embedmathlet{mathlet}
+\end{content}

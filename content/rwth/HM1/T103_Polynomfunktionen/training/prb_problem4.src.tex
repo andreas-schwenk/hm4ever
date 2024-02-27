@@ -1,0 +1,74 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A04: Faktorisierung}
+    \lang{en}{Exercise 4}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+
+\usepackage{mumie.genericproblem}
+
+\lang{de}{
+	\title{A04: Faktorisierung}
+}
+
+\lang{en}{
+	\title{Exercise 4}
+}
+
+\begin{block}[annotation]
+	 
+\end{block}
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9338}{Ticket 9338}
+\end{block}
+
+
+\begin{problem}
+	\begin{variables}
+			\randint{a0}{-5}{5}
+            \randint{a1}{-5}{5}
+            \randint{a2}{-5}{5}
+            \randint[Z]{a3}{-5}{5}
+            \randint[Z]{x0}{-2}{2}
+            \function{g0}{a3*x^3+a2*x^2+a1*x+a0}
+            \function[expand, normalize]{p}{(x-x0)*g0}
+            \function[expand, normalize]{b}{x-x0}
+	\end{variables}
+	\begin{question}
+		\lang{de}{
+			\text{Gegeben sei das Polynom $p(x)=\var{p}$ mit Nullstelle $x_0= \var{x0}$.
+			Bestimmen Sie $g(x)$, so dass $p(x)= (\var{b}) \cdot g(x)$.}
+			\explanation{Polynomdivision}
+		}
+		
+		\type{input.function}
+		\begin{answer}
+			\text{$g(x) =$}
+			\solution{g0}
+            \checkAsFunction{x}{-10}{10}{5}
+		\end{answer}
+		
+	\end{question}
+	
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

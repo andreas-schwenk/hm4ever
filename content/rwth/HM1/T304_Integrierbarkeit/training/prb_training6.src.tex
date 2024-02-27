@@ -1,0 +1,140 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A06: Stammfunktion}
+    \lang{en}{problem 6}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+
+\lang{de}{
+	\title{A06: Stammfunktion}
+}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10590}{Ticket 10590}
+\end{block}
+
+\begin{problem}
+	\begin{variables}
+	 	\randint[Z]{a}{-5}{3}
+	 	\randint[Z]{b}{-5}{4}
+	 	\randint[Z]{c}{-3}{5}
+	 	\randint[Z]{d}{-4}{5}
+	 	\randint[Z]{r}{-20}{20}
+
+		\function[normalize]{f}{a*cos(x)+ b*x^3+c*sin(x)+d*ln(x)}
+		\function[normalize]{f_7}{a*cos(x)+ b*x^3+c*sin(x)+d*ln(x)+r}
+		\derivative[normalize]{f_1}{f}{x}
+		\functionNormalize{f_1}
+
+	\end{variables}
+
+
+	\begin{question}
+		\lang{de}{
+			\text{
+
+
+			Gegeben sei die Funktion $f(x) = \var{f_1}$. \\
+		      Bestimmen Sie für $x>0$ eine Stammfunktion $F(x)$ von $f(x)$:}
+		}
+		 \lang{en}{\text{
+      Given is the function $f(x) = \var{f_1}$. \\
+      For $x > 0$, determine an antiderivative $F(x)$ of $f(x)$:
+     }}
+		\type{input.function}
+
+		\begin{answer}
+			\text{ $F(x) = $}
+			\solution{f}
+			\inputAsFunction{x}{inp}
+			\checkFuncForZero{D[inp]-f_1}{-10}{10}{100}
+            \lang{de}{\explanation{Benutzen Sie die Summen- und Faktorregel der Integralrechnung.}}
+            \lang{en}{\explanation{Use sum and factor rules of integral calculus.}}
+		\end{answer}
+	\end{question}
+
+
+	\begin{question}
+		\lang{de}{
+			\text{Gegeben sei nun die Funktion $g(x) = \var{f_7}$ für $x>0$. \\
+		       Leiten Sie $g(x)$ ab!}
+		}
+		 \lang{en}{\text{
+      Given is the function $g(x) = \var{f_7}$, $x>0$. \\
+      Find the derivative of $g(x)$!
+     }}
+		\type{input.function}
+
+		\begin{answer}
+			\text{ $g'(x) = $}
+			\solution{f_1}
+			\checkAsFunction{x}{-10}{10}{100}
+            \lang{de}{\explanation{Benutzen Sie die Summen- und Faktorregel der Differentialrechnung.}}
+            \lang{en}{\explanation{Use sum and factor rules of differential calculus.}}
+		\end{answer}
+
+	\end{question}
+
+	\begin{question}
+	   \lang{de}{
+	     \text{Vergleichen Sie nun $g'(x)$ mit $f(x)$.\\
+	     Wie können Sie die Gleichheit erklären, obwohl $g(x)$ und $F(x)$ unterschiedlich sind? }
+	   }
+	    \lang{en}{\text{
+        Now compare $g'(x)$ with $f(x)$. \\
+        How can we explain the fact that they are the same, even though $g(x)$ and $F(x)$ are different?
+      }}
+	   \permutechoices{1}{4}
+	   \type{mc.unique}
+	   \begin{choice}
+      \lang{de}{\text{Es ist Zufall.}}
+       \lang{en}{\text{It is coincidence.}}
+	    \solution{false}
+	   \end{choice}
+
+	   \begin{choice}
+      \lang{de}{\text{Es kann passieren, dass durch Rechenfehler die gleiche Stammfunktion entsteht.}}
+       \lang{en}{\text{It can happen that by calculation error we get the same antiderivatives.}}
+	    \solution{false}
+	   \end{choice}
+
+	   \begin{choice}
+      \lang{de}{	    \text{Stammfunktionen sind nicht eindeutig, es können Konstanten addiert werden.}
+}
+      \lang{en}{\text{Antiderivatives are not unique, we can always add a constant.}}
+      \solution{true}
+	   \end{choice}
+
+	   \begin{choice}
+      \lang{de}{	    \text{Es gibt immer genau zwei verschiedene Stammfunktionen zu einer Funktion.}
+}
+ \lang{en}{\text{There are always exactly two different antiderivatives for a function.}}
+      \solution{false}
+	   \end{choice}
+
+	\end{question}
+
+\end{problem}
+
+
+\embedmathlet{mathlet}
+\end{content}

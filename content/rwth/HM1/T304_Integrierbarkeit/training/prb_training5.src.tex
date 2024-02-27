@@ -1,0 +1,87 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A05: Integral bestimmen}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+
+\lang{de}{
+	\title{A05: Integral bestimmen}
+}
+\begin{block}[annotation]
+  
+      
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10589}{Ticket 10589}
+\end{block}
+
+
+\begin{problem}
+
+  \begin{variables}
+	\randint{b}{-8}{-1}
+	\randint{z}{2}{4}
+    \randint{w}{1}{3}
+	\randint{c}{1}{8}
+	\randint{d}{1}{2}
+    \randint{v}{-5}{5}
+	\function[calculate,3]{m}{c/d}
+	\function[normalize]{f}{m*x+b}
+    \function[calculate,3]{a1}{0}
+    \function[calculate,3]{a2}{z^2}
+    \function[calculate,3]{a3}{(z+w)^2}
+    \function[calculate,3]{z2}{z-1}
+    \function[normalize]{g}{sqrt(x)}
+	\function{L1}{m/2*a2^2+b*a2}
+    \function{L2}{2/3*(a3*(z+w)-a2*z)}
+    \function[calculate]{L}{L1+L2}
+  \end{variables}
+
+  \begin{question}
+    \text{Wir betrachten die Funktion\\
+    $f: [0;\var{a3}]\to \R, x \mapsto \begin{cases}\var{f}, & 0\leq x < \var{a2}, \\ \var{v}, & x = \var{a2}, \\ \var{g}, & x > \var{a2}.\end{cases}$\\
+    Bestimmen Sie $\int_{0}^{\var{a3}} f(x) \, dx$.}
+    \type{input.number}
+    \field{rational}
+
+    \explanation{Diese stückweise Funktion integriert man, indem man $\int_0^{\var{a2}} \var{f}\, dx + \int_{\var{a2}}^{\var{a3}} \var{g} \, dx$ rechnet.}
+    
+	\begin{answer}
+      \lang{de}{ \text{Lösung: }}
+       \lang{en}{\text{Solution: }}
+	 \solution{L}
+	\end{answer}
+
+  \end{question}
+
+
+
+\end{problem}
+
+
+\embedmathlet{mathlet}
+
+
+
+\end{content}

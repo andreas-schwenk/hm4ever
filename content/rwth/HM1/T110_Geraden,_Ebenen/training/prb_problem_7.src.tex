@@ -1,0 +1,141 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A08: Ebenenschnittgerade}
+    \lang{en}{input numbers}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A08: Ebenenschnittgerade}}
+\lang{en}{\title{Problem 8}}
+
+\begin{block}[annotation]
+	Schnittgerade zwischen zwei Ebenen
+\end{block}
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9644}{Ticket 9644}
+\end{block}
+
+\begin{problem}
+
+%Question 1 of 1
+\begin{question} 
+	\lang{de}{ 
+    	\text{Berechnen Sie die Schnittgerade $g=\{\vec{p}+t\vec{v} \vert t \in \R \}$ der Ebenen
+      	$E: \vec{x} = \begin{pmatrix} \var{Px}\\\var{Py}\\\var{Pz}\end{pmatrix} + \lambda\cdot \begin{pmatrix} \var{vx}\\\var{vy}\\\var{vz}\end{pmatrix} + \mu \cdot\begin{pmatrix} \var{xx}\\\var{xy}\\\var{xz}\end{pmatrix}$, $\lambda,\mu\in\R$\\
+		und
+		$F: \vec{x} = \begin{pmatrix} \var{Qx}\\\var{Qy}\\\var{Qz}\end{pmatrix} + \rho\cdot \begin{pmatrix} \var{wx}\\\var{wy}\\\var{wz}\end{pmatrix} + \sigma\cdot\begin{pmatrix}\var{ux}\\\var{uy}\\\var{uz}\end{pmatrix}$, $\rho,\sigma\in\R$.\\\\
+        $p_1 = $ \ansref , ~~~~~ $v_1 = $ \ansref, \\
+        $p_2 = $ \ansref , ~~~~~ $v_2 = $ \ansref, \\
+        $p_3 = $ \ansref , ~~~~~ $v_3 = $ \ansref. }
+    	\explanation{Ebenengleichungen gleichsetzen und das erhaltene Gleichungssystem lösen. Die erhaltenen Parameter in eine Ebenengleichung einsetzen und die Gerade ausrechnen.}
+    }
+    \lang{en}{
+    	\text{The two planes $E: \vec{x} = \begin{pmatrix} \var{Px}\\\var{Py}\\\var{Pz}\end{pmatrix} + \lambda\cdot \begin{pmatrix} \var{vx}\\\var{vy}\\\var{vz}\end{pmatrix} + \mu \cdot\begin{pmatrix} \var{xx}\\\var{xy}\\\var{xz}\end{pmatrix}$, $\lambda,\mu\in\R$\\
+		and
+		$F: \vec{x} = \begin{pmatrix} \var{Qx}\\\var{Qy}\\\var{Qz}\end{pmatrix} + \rho\cdot \begin{pmatrix} \var{wx}\\\var{wy}\\\var{wz}\end{pmatrix} + \sigma\cdot\begin{pmatrix}\var{ux}\\\var{uy}\\\var{uz}\end{pmatrix}$, $\rho,\sigma\in\R$\\
+		intersect in a line. Find a parametric representation of this line (i.e. find a starting point and a direction vector for the line).}
+		\explanation{Set the equations of the planes equal to each other and solve the resulting system. Substitute the parameters you get from solving into the equations of the planes in order to get the equation of the line.}
+    }
+    \begin{variables}
+      	\randint{Px}{-5}{5}
+      	\randint{Py}{-5}{5}
+      	\randint{Pz}{-5}{5}
+		\randint{l}{-3}{3}
+		\randint{m}{-3}{3}
+		\randint{r}{-3}{3}
+		\randint{s}{-3}{3}		
+		\randadjustIf{l,m,r,s}{(|l|+|m|)*(|r|+|s|) = 0}		
+      	\function[calculate]{Qx}{Px+l*vx+m*xx-r*wx-s*ux}
+      	\function[calculate]{Qy}{Py+l*vy+m*xy-r*wy-s*uy}
+      	\function[calculate]{Qz}{Pz+l*vz+m*xz-r*wz-s*uz}    	
+      	\randint{vx}{-5}{5}
+      	\randint{vy}{-5}{5}
+      	\randint[Z]{vz}{-5}{5}
+      	\randint{wx}{-5}{5}
+      	\randint{wy}{-5}{5}
+      	\randint{wz}{-5}{5}
+      	\randint{ux}{-5}{5}
+      	\randint{uy}{-5}{5}
+      	\randint{uz}{-5}{5}
+      	\randint{xx}{-5}{5}
+      	\randint{xy}{-5}{5}
+      	\randint{xz}{-5}{5}      	
+      	\randadjustIf{wx,wy,wz,ux,uy,uz}{wx*uy-wy*ux=0} 
+      	\randadjustIf{vx,vy,vz,xx,xy,xz}{vx*xy-vy*xx=0} 
+      	\randadjustIf{vx,vy,vz,wx,wy,wz,ux,uy,uz,xx,xy,xz}{|(vz*xx-vx*xz)*(wx*uy-wy*ux)-(vx*xy-vy*xx)*(wz*ux-wx*uz)|+|(vx*xy-vy*xx)*(wy*uz-wz*uy)-(vy*xz-vz*xy)*(wx*uy-wy*ux)|+|(vy*xz-vz*xy)*(wz*ux-wx*uz)-(vz*xx-vx*xz)*(wy*uz-wz*uy)|=0}      	
+      	\function[calculate]{Sx}{Px+l*vx+m*xx}
+      	\function[calculate]{Sy}{Py+l*vy+m*xy}
+      	\function[calculate]{Sz}{Pz+l*vz+m*xz}
+        
+      	\function[calculate]{Tx}{(vz*xx-vx*xz)*(wx*uy-wy*ux)-(vx*xy-vy*xx)*(wz*ux-wx*uz)}
+      	\function[calculate]{Ty}{(vx*xy-vy*xx)*(wy*uz-wz*uy)-(vy*xz-vz*xy)*(wx*uy-wy*ux)}
+      	\function[calculate]{Tz}{(vy*xz-vz*xy)*(wz*ux-wx*uz)-(vz*xx-vx*xz)*(wy*uz-wz*uy)}     	      	
+	\end{variables} 
+	\type{input.function}
+	\field{real}
+    \begin{answer}
+    	\lang{de}{\text{$x$-Koordinate eines Punktes von $g$:}}
+      	\lang{en}{\text{$x$-coordinate of a starting point on $g$:}}
+    	\solution{Sx}
+	    \inputAsFunction{}{ax} 
+    \end{answer}
+    \begin{answer}
+      	\lang{de}{\text{$x$-Koordinate eines Richtungsvektors von $g$:}}
+      	\lang{en}{\text{$x$-coordinate of its direction vector:}}
+    	\solution{Tx}
+	    \inputAsFunction{}{bx} 
+    \end{answer}
+   	\begin{answer}
+    	\lang{de}{\text{$y$-Koordinate eines Punktes von $g$:}}
+      	\lang{en}{\text{$y$-coordinate of a starting point on $g$:}}
+    	\solution{Sy}
+	    \inputAsFunction{}{ay} 
+    \end{answer}
+    \begin{answer}
+      	\lang{de}{\text{$y$-Koordinate eines Richtungsvektors von $g$:}}
+      	\lang{en}{\text{$y$-coordinate of its direction vector:}}
+    	\solution{Ty}
+	    \inputAsFunction{}{by} 
+    \end{answer}
+    \begin{answer}
+      	\lang{de}{\text{$z$-Koordinate eines Punktes von $g$:}}
+      	\lang{en}{\text{$z$-coordinate of a starting point on $g$:}}
+    	\solution{Sz}
+	    \inputAsFunction{}{az}
+        %Kreuzprodukt T x (S - P) = 0
+	    \checkFuncForZero{(Ty*(Sz-az)-Tz*(Sy-ay))^2+(Tz*(Sx-ax)-Tx*(Sz-az))^2 + (Tx*(Sy-ay)-Ty*(Sx-ax))^2}{-10}{10}{100}
+        \explanation[edited]{Ihr Stützvektor $\vec{p}$ ist nicht korrekt. Der Punkt liegt nicht auf der Schnittgeraden.}
+    \end{answer}
+    \begin{answer}
+      	\lang{de}{\text{$z$-Koordinate eines Richtungsvektors von $g$:}}
+      	\lang{en}{\text{$z$-coordinate of its direction vector:}}
+    	\solution{Tz}
+	    \inputAsFunction{}{bz} 
+	    \checkFuncForZero{(Ty*bz-Tz*by)^2+(Tz*bx-Tx*bz)^2 + (Tx*by-Ty*bx)^2 + (1-(sign(bx^2+by^2+bz^2))^2)^2}{-10}{10}{100} 
+        \explanation[edited]{Ihr angegebener Richtungsvektor $\vec{v}$ ist nicht korrekt.}
+    \end{answer}
+    
+\end{question}
+
+\end{problem}
+
+\embedmathlet{mathlet}
+\end{content}

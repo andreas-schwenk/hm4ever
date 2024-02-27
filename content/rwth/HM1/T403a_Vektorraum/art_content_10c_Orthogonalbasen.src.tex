@@ -1,0 +1,673 @@
+
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Orthogonalbasen, Orthonormalbasen}
+    \lang{en}{Orthogonal bases, orthonormal bases}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}          
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T109_Skalar-_und_Vektorprodukt/g_art_content_34_vektorprodukt.meta.xml}{vektorprodukt}
+    \link{generic_article}{content/rwth/HM1/T304_Integrierbarkeit/g_art_content_08_integral_eigenschaften.meta.xml}{integral_eigenschaften}
+    \link{generic_article}{content/rwth/HM1/T109_Skalar-_und_Vektorprodukt/g_art_content_31_skalarprodukt.meta.xml}{skalarprodukt}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/14361}{Ticket 14361}
+\end{block}
+\usepackage{mumie.ombplus}
+\ombchapter{4}
+\ombarticle{3}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+
+\lang{de}{\title{Orthogonalbasen, Orthonormalbasen}}
+\lang{en}{\title{Orthogonal bases, orthonormal bases}}
+ 
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/14361}{Ticket 14361}\\
+\end{block}
+
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{\lang{de}{Skalarprodukt} \lang{en}{Scalar product}}\label{sec:skalarprodukt}
+\lang{de}{Im folgenden Kapitel gehen wir der Frage nach, wie man konkret eine gegebene Menge $\{v_1 ; . . . ; v_m \}$ linear 
+unabh\"angiger Vektoren zu einer Basis ergänzen kann. Ein möglicher Ansatz wäre, sich zufällig einen Vektor $v_{m+1}$ 
+aus dem Vektorraum auszusuchen und zu prüfen, ob $v_1,\ldots, v_{m+1}$ noch linear unabhängig ist.
+Wir wollen aber nicht einfach eine beliebige Basis finden, sondern unser Ziel ist es, eine Basis zu konsturieren, bei der 
+je zwei Vektoren orthogonal aufeinander stehen.}
+\lang{en}{In the following chapter we want to answer the question, how we can complete a given set $\{v_1 ; . . . ; v_m \}$ linear 
+of linear independent vectors to a basis. A possible approach would be to take a random vector $v_{m+1}$ 
+out of the vector space and check, if $v_1,\ldots, v_{m+1}$ are still linearly independent.
+We do not only want to find any basis, but create a basis, in which two vectors each are orthogonal to each other.}
+
+%%% Video K.M. - 1. Teil von 10832 = 11287 (Koordinaten_6a)
+%  
+\lang{de}{\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11287&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}}\\
+\\
+
+\lang{de}{
+Hierzu müssen wir also zunächst den Begriff Orthogonalität für allgemeine Vektorräume definieren.
+Dazu wird der Begriff des Skalarprodukts benötigt, den wir bereits aus dem Kapitel über das
+\ref[skalarprodukt][Skalarprodukt für Vektoren des $\R^n$]{def:skalarprodukt}
+ kennen. Er lässt sich verallgemeinern auf allgemeine (reelle) Vektorräume
+und wird hierfür mit einer anderen Notation versehen:}
+\lang{en}{
+First of all we need to define the term orthogonality for general vector spaces.
+For this purpose we need the concept of the scalar product, which we introduced in the chapter about the
+\ref[skalarprodukt][scalar product for vectors in $\R^n$]{def:skalarprodukt}. 
+It can be generalised for general (real) vector spaces and therefore gets a different notation:}
+
+\begin{definition}[\lang{de}{Skalarprodukt} \lang{en}{Scalar product}] \label{def:vektorraum}\label{def:skalarprodukt}
+ \lang{de}{Es sei $\vectorspace{V}$ ein $\R$-Vektorraum. Eine Abbildung
+ \[
+  \langle \cdot , \cdot \rangle : V \times V \to \R, (x,y) \mapsto \langle x,y \rangle
+ \]
+ heißt \textit{Skalarprodukt}, falls für alle $x,y,z \in \vectorspace{V}$ und alle $ \lambda \in \R$ gilt
+ \begin{enumerate}
+ \item $\langle x+y,z \rangle = \langle x,z \rangle + \langle y,z \rangle$ und
+ $\langle \lambda x,y \rangle = \lambda \langle x,y\rangle$,
+ (Linearität in der ersten Komponente)
+  \item $\langle x,y+z \rangle = \langle x,y\rangle + \langle x,z\rangle$ und 
+  $\langle x, \lambda y \rangle = \lambda \langle x,y \rangle$, (Linearität in der zweiten Komponente)
+  \item $\langle x,y \rangle = \langle y,x \rangle$, (Symmetrie)
+  \item $\langle x,x \rangle \geq 0$,
+  \item $\langle x,x \rangle = 0 \Leftrightarrow x = 0$
+ \end{enumerate}}
+  \lang{en}{Let $\vectorspace{V}$ be a $\R$-vector space. A map
+ \[
+  \langle \cdot , \cdot \rangle : V \times V \to \R, (x,y) \mapsto \langle x,y \rangle
+ \]
+ is called \textit{scalar product}, if for all $x,y,z \in \vectorspace{V}$ and all $ \lambda \in \R$ holds
+ \begin{enumerate}
+ \item $\langle x+y,z \rangle = \langle x,z \rangle + \langle y,z \rangle$ and
+ $\langle \lambda x,y \rangle = \lambda \langle x,y\rangle$,
+ (linearity in the first component)
+  \item $\langle x,y+z \rangle = \langle x,y\rangle + \langle x,z\rangle$ and 
+  $\langle x, \lambda y \rangle = \lambda \langle x,y \rangle$, (linearity in the second component)
+  \item $\langle x,y \rangle = \langle y,x \rangle$, (symmetry)
+  \item $\langle x,x \rangle \geq 0$,
+  \item $\langle x,x \rangle = 0 \Leftrightarrow x = 0$
+ \end{enumerate}}
+\end{definition}
+\lang{de}{
+ Aufgrund der Symmetrie muss hier eigentlich nur die Linearität in der ersten Komponente 
+ gefordert werden, da die Linearität in der zweiten Komponente dann automatisch durch
+ die Symmetrie gegeben ist. Man bezeichnet Skalarprodukte daher auch als \emph{bilinear}.}
+ \lang{en}{
+ Because of the symmetry we only require linearity in the first component, since the linearity in the second
+ component follows right away because of the symmetry. Therefore scalar products
+ are called \emph{bilinear}.}
+ 
+ \begin{example} \label{bsp_skalarprodukt}
+  \begin{tabs}
+  \tab{\lang{de}{Standard-Skalarprodukt im $\R^n$} \lang{en}{Standard scalar product in $\R^n$}}
+  \lang{de}{Im \link{skalarprodukt}{Grundlagenteil} lernten wir das Standard-Skalarprodukt $x \bullet y$ für $x, y \in \R^n \,$ kennen.
+  Dies ist ein Skalarprodukt für den Vektorraum $\R^n$. Es erfüllt die Eigenschaften von Definiton \ref{def:vektorraum}.}
+  \lang{en}{In the \link{skalarprodukt}{basic part} we learned about the standard scalar product $x \bullet y$ for $x, y \in \R^n \,$.
+  This is a scalar product for the vector space $\R^n$ and fulfills the characteristics listed in defintion \ref{def:vektorraum}.}
+ 
+ \tab{\lang{de}{Polynomfunktionen} \lang{en}{Polynomial functions}}
+%  \begin{incremental}[\initialsteps{1}]
+%  \step 
+  \lang{de}{Auf dem Vektorraum der reellen Polynomfunktionen ist durch
+  \[
+  \langle p,q \rangle := \int_{-1}^1 p(x) q(x) dx
+  \]
+  ein Skalarprodukt definiert.}
+   \lang{en}{For the vector space of the real polynomial functions a scalar product ist defined by
+  \[
+  \langle p,q \rangle := \int_{-1}^1 p(x) q(x) dx
+  \].}
+  
+  
+  
+%  \step 
+\lang{de}{
+  \textbf{Erklärung:} Die Linearität in den beiden Komponenten folgt im Wesentlichen aus der 
+  \ref[integral_eigenschaften][Linearität des Integrals]{Linear_Integral}.
+  Die Linearität und die Symmetrie lassen sich damit leicht nachvollziehen.}
+  \lang{eb}{
+  \textbf{Explanation:} The linearity in both components is a consequence of the 
+  \ref[integral_eigenschaften][linearity of the integral]{Linear_Integral}.
+  With that the linearity and the symmetry are easy to understand.}
+  
+  \lang{de}{Wir gehen jetzt darauf ein, warum die Eigenschaften 4. und 5. eines Skalarprodukts erfüllt sind.
+  Betrachten wir also \[\langle p,p \rangle = \int_{-1}^1 p(x)^2 dx.\] 
+  Nun gilt für den Integranden $p(x)^2\geq 0$ für alle $x\in [-1,1]$.
+  Das Integral über nicht-negative Funktionen ist wieder nicht-negativ, weshalb 4. gilt.}
+  \lang{en}{We now discuss, why the $4$th and $5$th characteristics of being a scalar product are fulfilled.
+  So we consider \[\langle p,p \rangle = \int_{-1}^1 p(x)^2 dx.\] 
+  Now holds for the integrand $p(x)^2\geq 0$ for all $x\in [-1,1]$.
+  The integral over nonnegative functions is again nonnegative, which is why $4$ holds.}
+
+  \lang{de}{
+  Ist nun \[\langle p,p \rangle = \int_{-1}^1 p(x)^2 dx=0,\] so muss $p(x)=0$ gelten.
+  Ansonsten gäbe es eine Stelle $x_0\in [-1,1]$ mit $p(x_0)\neq 0$. Wegen der Stetigkeit von Polynomfunktionen
+  wäre $p(x)\neq 0$ für alle $x$, die nahe genug an der Stelle $x_0$ liegen.
+  Da der Integrand $p(x)^2$ nicht negativ werden kann, kann das Integral im Falle von $p \neq 0$ nicht Null werden und ist automatisch positiv.}
+  \lang{en}{
+ If it is \[\langle p,p \rangle = \int_{-1}^1 p(x)^2 dx=0,\] $p(x)=0$ must hold.
+  Otherwise there would be a spot $x_0\in [-1,1]$ with $p(x_0)\neq 0$. Because of the continuity
+  of polynomial functions would be $p(x)\neq 0$ for all $x$, close enough to the spot $x_0$.
+  Since the integrand $p(x)^2$ cannot be negative, the integral cannot be negative for $p \neq 0$ and is therefore positive.}
+
+  
+  \lang{de}{Wichtig zu erwähnen ist im letzten Fall, dass aus $p(x)=0$ im Intervall $[-1,1]$ bereits $p(x)=0$ für alle $x \in \R$ folgt, da $p$ ein Polynom ist.}
+  \lang{en}{It is important to mention in the last case, that from $p(x)=0$ for $x\in[-1,1]$ concludes $p(x)=0$ for all $x \in \R$, because $p$ is a polynomial. }
+%  \end{incremental}
+ \end{tabs}
+ \end{example}
+ 
+ \begin{definition}[\lang{de}{Orthogonalität zweier Vektoren} \lang{en}{Orthogonality of two vectors}]\label{def:orthogonaleVektoren}
+ \lang{de}{Gegeben sei ein reeller Vektorraum $\vectorspace{V}$ mit einem Skalarprodukt $\langle \cdot , \cdot \rangle$. \\
+ Ein Vektor $v \in \vectorspace{V}$ steht \textit{orthogonal} auf einem Vektor $w \in \vectorspace{V}$, wenn
+ $\langle v,w \rangle = 0$.}
+  \lang{en}{Given is a real vector space $\vectorspace{V}$ with a scalar product $\langle \cdot , \cdot \rangle$. \\
+ A vector $v \in \vectorspace{V}$ is \textit{orthogonal} to a vector $w \in \vectorspace{V}$, if
+ $\langle v,w \rangle = 0$.}
+\end{definition}
+
+\begin{example} \label{bsp_orthogonal}
+\begin{tabs}
+\tab{\lang{de}{Standard-Skalarprodukt im $\R^n$} \lang{en}{Standard scalar product for $\R^n$}}
+  \lang{de}{Bezüglich des Standard-Skalarproduktes $x \bullet y \,$ stehen zwei verschiedene Standard-Einheitsvektoren des $\R^n \,$ 
+  jeweils orthogonal zueinander.}
+  \lang{en}{Corresponding to the standard scalar product $x \bullet y \,$ two different standard unit vectors of $\R^n \,$  each
+  are orthogonal to each other.}
+
+  \lang{de}{
+  \textbf{Beispiel ($n=3$):} \\
+  Je zwei der Vektoren $\begin{pmatrix}1 \\ 0\\ 0 \end{pmatrix}, \begin{pmatrix}0 \\ 1\\ 0 \end{pmatrix}$
+  und $\begin{pmatrix} 0 \\ 0\\ 1 \end{pmatrix}$ sind orthogonal, denn
+  
+  $\begin{pmatrix}1 \\ 0\\ 0 \end{pmatrix} \bullet \begin{pmatrix}0 \\ 1\\ 0 \end{pmatrix} = 0 \,$ und 
+  $\, \begin{pmatrix}1 \\ 0\\ 0 \end{pmatrix} \bullet \begin{pmatrix}0 \\ 0\\ 1 \end{pmatrix} = 0 \,$ und 
+  $\, \begin{pmatrix}0 \\ 0\\ 1 \end{pmatrix} \bullet \begin{pmatrix}0 \\ 1\\ 0 \end{pmatrix} = 0.$}
+
+   \lang{en}{
+  \textbf{Example ($n=3$):} \\
+  Two vectors each of $\begin{pmatrix}1 \\ 0\\ 0 \end{pmatrix}, \begin{pmatrix}0 \\ 1\\ 0 \end{pmatrix}$
+  and $\begin{pmatrix} 0 \\ 0\\ 1 \end{pmatrix}$ are orthogonal, because
+  
+  $\begin{pmatrix}1 \\ 0\\ 0 \end{pmatrix} \bullet \begin{pmatrix}0 \\ 1\\ 0 \end{pmatrix} = 0 \,$ and 
+  $\, \begin{pmatrix}1 \\ 0\\ 0 \end{pmatrix} \bullet \begin{pmatrix}0 \\ 0\\ 1 \end{pmatrix} = 0 \,$ and 
+  $\, \begin{pmatrix}0 \\ 0\\ 1 \end{pmatrix} \bullet \begin{pmatrix}0 \\ 1\\ 0 \end{pmatrix} = 0.$}
+    
+  \tab{\lang{de}{Polynomfunktionen} \lang{en}{Polynomial functions}}
+   \lang{de}{Auf dem Vektorraum der reellen Polynomfunktionen ist durch
+  \[
+  \langle p,q \rangle := \int_{-1}^1 p(x) q(x) dx
+  \]
+  ein Skalarprodukt definiert (s. Beipiel \ref{bsp_skalarprodukt}).}
+ \lang{en}{For the vector space of polynomial functions
+  \[
+  \langle p,q \rangle := \int_{-1}^1 p(x) q(x) dx
+  \]
+  defines a scalar product (see example \ref{bsp_skalarprodukt}).}
+  
+  \lang{de}{Bezüglich dieses Skalarprodukts stehen die Polynome $p(x)=1$ und $q(x)=x$ orthogonal aufeinander, aber
+  $p(x)=1$ und $r(x)=x^2$ nicht.
+  Denn es gilt
+  \[
+  \langle p,q \rangle = \int_{-1}^1 1 \cdot x dx = \left[\frac{1}{2}x^2\right]_{-1}^1 = \frac{1}{2}-\frac{1}{2}=0
+  \]
+  \[
+  \langle p,r \rangle = \int_{-1}^1 1 \cdot x^2 = \left[\frac{1}{3}x^3\right]_{-1}^1 = \frac{1}{3}-\frac{-1}{3}= \frac{2}{3}
+  \]}
+   \lang{en}{With respect to this scalar product the polynomials $p(x)=1$ are $q(x)=x$ are orthogonal to each other, but
+   $p(x)=1$ and $r(x)=x^2$ are not.
+  Because it holds
+  \[
+  \langle p,q \rangle = \int_{-1}^1 1 \cdot x dx = \left[\frac{1}{2}x^2\right]_{-1}^1 = \frac{1}{2}-\frac{1}{2}=0
+  \]
+  \[
+  \langle p,r \rangle = \int_{-1}^1 1 \cdot x^2 = \left[\frac{1}{3}x^3\right]_{-1}^1 = \frac{1}{3}-\frac{-1}{3}= \frac{2}{3}
+  \]}
+  \end{tabs}
+\end{example}
+
+%%% Video K.M. - 2. Teil von 10832 = 11288 (Koordinaten_6b)
+%
+\lang{de}{
+\begin{example}
+Im Vektorraum $\R^n$ gibt es neben dem Standard-Skalarprodukt noch viele andere Skalarprodukte.
+So lernen wir im folgenden Video ein weiteres Skalarprodukt für den $\R^2$ kennen, das 
+zudem verdeutlicht, dass die Orthogonalität zweier Vektoren stets vom zugrundeliegenden
+Skalarprodukt abhängt.
+
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11288&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+\end{example}}
+
+\section{\lang{de}{Orthogonalbasen, Orthonormalbasen} \lang{en}{Orthogonal bases, orthonormal bases}}
+%%% Video K.M. - 1. Teil von 10833 = 11289 (Koordinaten_7a)
+%
+\lang{de}{
+Für einen beliebigen reellen Vektoraum $\vectorspace{V}$ mit Skalarprodukt können wir nun eine
+Basis definieren, die von ihren Eigenschaften der uns bekannten Standard-Einheitsbasis im $\R^n$ 
+mit dem Standard-Skalarprodukt und damit unserer favorisierten Anschauung eines 
+\textit{"`rechtwinkligen Koordinatensystems"'} entspricht.}
+\lang{en}{
+For any real vector space $\vectorspace{V}$ with scalar product we can define a basis,
+that corresponds to the characteristics of the known standard basis of $\R^n$ with the standard scalar product.
+This is then in line with our favoured illustration of a 
+\textit{"`right-angledd coordinate system"'}.}
+
+\lang{de}{\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11289&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}}\\
+\\
+
+\begin{definition}[\lang{de}{Orthogonalbasis, Orthonormalbasis} \lang{en}{Orthogonal basis, orthonormal basis}]\label{def:orthogonalbasis}
+ \lang{de}{Eine Menge von Vektoren $v_1,...,v_m$ eines reellen Vektorraums 
+ $\vectorspace{V}$ mit Skalarprodukt $\langle \cdot, \cdot \rangle$ heißt \emph{Orthogonalbasis}, wenn}
+ \lang{en}{A set of vectors $v_1,...,v_m$ of a real vector space $\vectorspace{V}$ with scalar product $\langle \cdot, \cdot \rangle$
+ is called \emph{orthogonal basis}, if}
+ \begin{enumerate}
+  \item[1.] \lang{de}{$\{ v_1;...;v_m\}$ eine Basis von $\vectorspace{V}$ bilden,}
+  \lang{de}{$\{ v_1;...;v_m\}$ are a basis of $\vectorspace{V}$,}\\
+  \item[2.] \lang{de}{jeweils zwei verschiedene Elemente $v_i$ und $v_j$ der Basis orthogonal aufeinander stehen \\ 
+        (d.h. $\langle v_i,v_j \rangle =0$ für $i \neq j$).}
+        \lang{en}{two different elements $v_i$ and $v_j$ of the basis each are orthogonal to each other,\\ 
+        (so $\langle v_i,v_j \rangle =0$ for $i \neq j$).}
+ \end{enumerate}
+ \lang{de}{
+Gilt zusätzlich $\langle v_i,v_i \rangle = 1$ für jedes Basiselement $v_i$,
+dann bezeichnet man $v_i$ auch als \emph{normierten} Vektor. Die Orthogonalbasis 
+heißt in diesem Fall \emph{Orthonormalbasis}.}
+\lang{en}{
+If in addition $\langle v_i,v_i \rangle = 1$ holds for every basis element $v_i$,
+then we call $v_i$ a \emph{normalised} vector (or unit vector). In this case the orthogonal basis is called 
+\emph{orthonormal basis}.}
+
+
+\end{definition}
+
+\begin{example}
+  
+  \lang{de}{Die Standard-Einheitsvektoren des $\R^n \,$ bilden bezüglich des 
+  Standard-Skalarproduktes  $\;x \bullet y\;$ eine Orthonormalbasis des $\R^n$.}
+  \lang{en}{The standard unit vectors of $\R^n \,$ are orthonormal basis of $\R^n$ with respect to the
+  standard scalar product $\;x \bullet y\;$.}\\
+
+  \lang{de}{
+  Für $n=3 \,$ haben wir in Beispiel \ref{bsp_orthogonal} \, bereits die paarweise Orthogonalität der
+  Standard-Einheitsvektoren des $\R^3 \,$ gezeigt. Zudem gilt für alle 3 Vektoren}
+  \lang{en}{
+  For $n=3 \,$ we have already shown the pairwise orthogonality of the standard unit vectors of $\R^3$ in example \ref{bsp_orthogonal} \,.
+  In addition to that holds for all $3$ vectors}
+ 
+  $\begin{pmatrix}1 \\ 0\\ 0 \end{pmatrix} \bullet \begin{pmatrix}1 \\ 0\\ 0 \end{pmatrix} = 
+   \begin{pmatrix}0 \\ 1\\ 0 \end{pmatrix} \bullet \begin{pmatrix}0 \\ 1\\ 0 \end{pmatrix} = 
+   \begin{pmatrix}0 \\ 0\\ 1 \end{pmatrix} \bullet \begin{pmatrix}0 \\ 0\\ 1 \end{pmatrix} = 1.$
+
+\end{example}
+
+  \lang{de}{Daneben lassen sich aber auch weitere Orthonormalbasen für den $\R^n$ finden. 
+  Hierzu zunächst wieder ein Beispiel für $\R^3$.}
+  \lang{de}{However, there are more orthonormal bases of $\R^n$. 
+  First of all an example for $\R^3$.}
+
+\begin{example} \label{ex:ONB}
+  \lang{de}{Gegeben sei $v = \begin{pmatrix}\frac{3}{5} \\ \frac{4}{5} \\ 0 \end{pmatrix}$ und $w=\begin{pmatrix} \frac{4}{5} \\ -\frac{3}{5} \\ 0 \end{pmatrix}$.
+  Diese beiden Vektoren stehen orthogonal aufeinander, denn $v \bullet w = \frac{3}{5} \cdot \frac{4}{5} + \frac{4}{5}\cdot \frac{-3}{5}=0$.
+  Sie sind linear unabhängig, da sie kein Vielfaches vom jeweils anderen Vektor sind.
+  Außerdem sind beide Vektoren normiert:}
+  \lang{en}{Given are $v = \begin{pmatrix}\frac{3}{5} \\ \frac{4}{5} \\ 0 \end{pmatrix}$ and $w=\begin{pmatrix} \frac{4}{5} \\ -\frac{3}{5} \\ 0 \end{pmatrix}$.
+  Those vectors are orthogonal to each other, because $v \bullet w = \frac{3}{5} \cdot \frac{4}{5} + \frac{4}{5}\cdot \frac{-3}{5}=0$.
+  They are linearly independet, because they are each no multiply of the other vector.
+  Both vectors are normalised:}
+  \[
+  v \bullet v = \frac{3^2}{5^2} + \frac{4^2}{5^2} = \frac{9}{25}+\frac{16}{25} = \frac{25}{25}=1,
+  \]
+  \[
+  w \bullet w = \frac{4^2}{5^2} + \frac{(-3)^2}{5^2} = \frac{25}{25}=1.
+  \]
+  \lang{de}{Nun betrachten wir das \ref[vektorprodukt][Vektorprodukt]{def:Vektorprodukt} von $v$ und $w$:
+  \[
+  u:= v \times w = \begin{pmatrix}\frac{4}{5} \cdot 0 - 0 \cdot (\frac{3}{5}) \\ 0 \cdot \frac{4}{5} - \frac{3}{5} \cdot 0 \\ \frac{3}{5} \cdot \frac{-3}{5} - \frac{4}{5}\cdot \frac{4}{5} \end{pmatrix}
+  = \begin{pmatrix} 0 \\ 0 \\ -1 \end{pmatrix}.
+  \]}
+  \lang{en}{Now we consider the \ref[vektorprodukt][vector product]{def:Vektorprodukt} of $v$ and $w$:
+  \[
+  u:= v \times w = \begin{pmatrix}\frac{4}{5} \cdot 0 - 0 \cdot (\frac{3}{5}) \\ 0 \cdot \frac{4}{5} - \frac{3}{5} \cdot 0 \\ \frac{3}{5} \cdot \frac{-3}{5} - \frac{4}{5}\cdot \frac{4}{5} \end{pmatrix}
+  = \begin{pmatrix} 0 \\ 0 \\ -1 \end{pmatrix}.
+  \]}
+  \lang{de}{
+  Wir sehen, dass $u$ wieder normiert ist. Es ist offenbar $u \bullet u=1$.
+  Die Menge $\{u; v; w \}$ ist linear unabhängig (die dritte Komponente von $u$ ist ungleich $0$),
+  sie bildet also eine Basis von $\R^3$. Zusätzlich gilt $u \bullet v = 0$ und $u \bullet w=0$, daher bildet
+  die Menge $\{u; v; w\}$ eine Orthonormalbasis.}
+  \lang{en}{
+  We see, that $u$ is normalised again. It obviously holds $u \bullet u=1$.
+  The set $\{u; v; w \}$ is linearly independent (the third component of $u$ is unequal to $0$),
+  so the set is a basis of $\R^3$. In addition to that holds $u \bullet v = 0$ and $u \bullet w=0$, therefore
+  the set $\{u; v; w\}$  is even a orthonormal basis.}
+  
+%  Es lässt sich zeigen, dass dies allgemein gilt: \\
+%  \textbf{Hat man zwei normierte Vektoren im Raum $\R^3$, die orthogonal aufeinander stehen, so
+%  erhält man eine Orthonormalbasis von $\R^3$, indem man das Vektorprodukt der beiden Vektoren als dritten Vektor hinzunimmt.}
+
+\end{example}
+
+\lang{de}{In Anlehnung an das vorstehenden Beispiel für den $\R^3$ lässt sich allgemein zeigen:}
+\lang{en}{Following the above example for the $\R^3$, it can be shown in general:}
+
+\begin{remark}\label{rem:omb_im_r3}
+\lang{de}{Aus zwei normierten Vektoren im Raum $\R^3$, die orthogonal aufeinander stehen, erhält man  
+eine Orthonormalbasis des $\R^3$, indem man das Vektorprodukt der beiden Vektoren 
+als dritten Vektor hinzunimmt.}
+\lang{en}{We can create a orthonormal basis for $\R^3$ from two normalised orthongonal vectors by 
+adding the vector product of both vectors as the third one.}
+\end{remark}
+
+\section{\lang{de}{Orthonormalisierungsverfahren von Gram-Schmidt} \lang{en}{Gram-Schmidt process for orthonormalisation}}
+ 
+\lang{de}{Um für beliebige Vektorräume Orthonormalbasen zu berechnen, eignet sich das Orthonormalisierungsverfahren von Gram-Schmidt.
+Im Gegensatz zur Berechnung im letzten Beispiel für Vektoren des $\R^3$ mit Hilfe des \ref[vektorprodukt][Vektorprodukts,]{def:Vektorprodukt} 
+funktioniert das folgende Verfahren auch für höhere Dimensionen.}
+\lang{en}{To calculate orthonormal bases for any vector space, it is suitable to utilise Gram-Schmidt for orthonormalisation.
+In contrast to the calculation in the last example for vectors of $\R^3$ with the help of the \ref[vektorprodukt][vector product,]{def:Vektorprodukt} 
+the following process works also for higher dimensions.}
+
+\begin{theorem}[\lang{de}{Orthonormalisierungsverfahren von Gram-Schmidt}\lang{en}{Gram-Schmidt process for orthonormalisation}] \label{gram_schmidt}
+\lang{de}{Gegeben sei ein reeller Vektorraum $\vectorspace{V}$ mit einem Skalarprodukt $\langle \cdot,\cdot \rangle$ und einer Basis $\{ v_1;...;v_k\}$. Dann ist eine Orthonormalbasis gegeben durch $\{u_1;...;u_k\}$ mit $u_i := \frac{1}{\sqrt{\langle u'_i,u'_i\rangle}}u'_i$, wobei die Vektoren $u'_i$ induktiv gegeben sind durch
+\[
+ u'_i := v_i - \sum_{j=1}^{i-1} \langle v_i,u_j \rangle u_j
+ \]
+für $i=1,...,k$.}
+\lang{en}{Given is a real vector space $\vectorspace{V}$ with a scalar product $\langle \cdot,\cdot \rangle$ and a basis $\{ v_1;...;v_k\}$. Then a orthonormal basis is given by $\{u_1;...;u_k\}$ with
+$u_i := \frac{1}{\sqrt{\langle u'_i,u'_i\rangle}}u'_i$, at which the vectors $u'_i$ are inductively given by
+\[
+ u'_i := v_i - \sum_{j=1}^{i-1} \langle v_i,u_j \rangle u_j
+ \]
+for $i=1,...,k$.}
+\end{theorem}
+
+\begin{proof*}[\lang{de}{Beweisansatz zum Orthonormaliserungsverfahren} \lang{en}{Proof outline for the Gram-Schmidt process}]
+% \begin{block}[explanation]
+\lang{de}{Wir wollen zeigen, dass man aus einer gegebenen Basis $\{ v_1; ...; v_k\}$ eines Vektorraums $\vectorspace{V}$
+durch Anwendung des Verfahrens nach Gram Schmidt induktiv (d.h.schrittweise Vektor für Vektor für $i=1$ bis $i=k$) 
+eine Orthonormalbasis $\{u_1 ; . . . ; u_k \}$ für diesen Vektorraum $\vectorspace{V}$ erzeugen kann.}
+\lang{en}{Given is a basis $\{ v_1; ...; v_k\}$ of a $\vectorspace{V}$. We want to show, that we can create
+a orthonormal basis $\{u_1 ; . . . ; u_k \}$ for this vectorspace inductively (so stepwise vector by vector for $i=1$ to $i=k$)
+from the given basis by using the the Gram-Schmidt process.}
+
+%Wir beginnen mit einer Basis $\{ v_1; ...; v_k\}$ eines Vektorraums $\vectorspace{V}$ und zeigen induktiv
+%(d.h. schrittweise beginnend mit $i=1$ bis $i=k$)
+%in eine Orthonormalbasis $\{u_1 ; . . . ; u_k \}$ umformen. Dazu machen wir folgende Schritte:
+
+ \begin{incremental}
+%  \begin{enumerate}
+ \step
+% \item  
+\lang{de}{1. Schritt:\\
+ Wir beginnen mit dem ersten Vektor $v_1$ der gegebenen Basis $\{ v_1; ...; v_k\}$. Um am Ende ein Orthonormalsystem zu 
+ erhalten, muss $\langle u_1, u_1 \rangle =1$ gelten.
+ Dies erreichen wir, indem wir einfach $u_1:=\frac{1}{ \sqrt{\langle v_1,v_1 \rangle}} v_1$ setzen, denn dann gilt
+ \[
+  \langle u_1,u_1 \rangle = \langle \frac{1}{\sqrt{\langle v_1,v_1 \rangle}} v_1,\frac{1}{\sqrt{\langle v_1,v_1 \rangle}} v_1 \rangle = \frac{1}{\sqrt{\langle v_1,v_1 \rangle}^2} \langle v_1,v_1 \rangle = 1.
+ \]
+ Damit ist unser erster Vektor gefunden.}
+ \lang{en}{1. Step:\\
+ We start with the first vector $v_1$ of the given basis $\{ v_1; ...; v_k\}$. To end up with a orthonormal system
+ must hold $\langle u_1, u_1 \rangle =1$.
+ We achieve this by defining $u_1:=\frac{1}{ \sqrt{\langle v_1,v_1 \rangle}} v_1$, because then it holds
+ \[
+  \langle u_1,u_1 \rangle = \langle \frac{1}{\sqrt{\langle v_1,v_1 \rangle}} v_1,\frac{1}{\sqrt{\langle v_1,v_1 \rangle}} v_1 \rangle = \frac{1}{\sqrt{\langle v_1,v_1 \rangle}^2} \langle v_1,v_1 \rangle = 1.
+ \]
+ So we have found our first vector.}
+ 
+ \step
+% \item  
+\lang{de}{2. Schritt: \\
+Wir nehmen nun den zweiten Vektor her. Dieser muss zunächst orthogonal auf dem ersten stehen. Es muss also
+$\langle u_2,u_1 \rangle = 0$ gelten.
+Dies ist für $v_2$ noch nicht unbedingt erfüllt. Wir setzen für $u_2$ eine Linearkombination aus $u_1$ und $v_2$ an. Setzen wir
+$u'_2 := v_2 - \langle v_2,u_1 \rangle u_1$, dann erfüllt $u'_2$ die Orthogonalitätsbedingung, denn
+\[
+ \langle u'_2,u_1 \rangle = \langle v_2 - \langle v_2,u_1 \rangle u_1, u_1 \rangle = \langle v_2,u_1 \rangle - \langle v_2,u_1 \rangle \cdot \underbrace{\langle u_1, u_1 \rangle}_{=1} = \langle v_2,u_1 \rangle -  \langle v_2,u_1 \rangle = 0.
+ \]}
+ \lang{en}{2. Step: \\
+Now we transform the second vector, which must be orthogonal to the first one.
+So it must hold
+$\langle u_2,u_1 \rangle = 0$.
+This is not necessary fulfilled for $v_2$. We set a linear combination of $u_1$ and $v_2$ for $u_2$.
+If we 
+$u'_2 := v_2 - \langle v_2,u_1 \rangle u_1$, then $u'_2$ fulfills the orthogonality condition, because
+\[
+ \langle u'_2,u_1 \rangle = \langle v_2 - \langle v_2,u_1 \rangle u_1, u_1 \rangle = \langle v_2,u_1 \rangle - \langle v_2,u_1 \rangle \cdot \underbrace{\langle u_1, u_1 \rangle}_{=1} = \langle v_2,u_1 \rangle -  \langle v_2,u_1 \rangle = 0.
+ \]}
+ 
+% \item 
+\lang{de}{3. Schritt: \\
+Der Vektor $u'_2$ ist noch nicht normiert, deshalb setzen wir wie im ersten Schritt $u_2 := \frac{1}{ \sqrt{\langle u'_2,u'_2 \rangle}} u'_2$.\\
+Es ist noch anzumerken, dass $u_1$ und $u_2$ linear unabhängig sind.}
+\lang{en}{3. Step: \\
+The vector $u'_2$ is not normalised yet, therefore we set up $u_2 := \frac{1}{ \sqrt{\langle u'_2,u'_2 \rangle}} u'_2$ like we have done it in the first step.\\
+Note, that $u_1$ and $u_2$ are linearly independent.}
+
+ \step
+% \item 
+\lang{de}{4. Schritt: \\
+Nehmen wir nun den dritten Vektor, können wir zunächst wieder die erste Orthogonalitätsbedingung ansetzen. Wir setzen also
+$\tilde{u_3} = v_3 - \langle v_3,u_1 \rangle u_1$. Dann haben wir
+\[
+ \langle \tilde{u_3},u_1 \rangle = \langle v_3 - \langle v_3,u_1 \rangle u_1, u_1 \rangle 
+ = \langle v_3,u_1 \rangle - \langle v_3,u_1 \rangle \cdot \underbrace{\langle u_1, u_1 \rangle}_{=1} 
+ = \langle v_3,u_1 \rangle -  \langle v_3,u_1 \rangle = 0.
+ \]
+Es steht damit $\tilde{u_3}$ orthogonal auf $u_1$.}
+\lang{en}{4. Step: \\
+Now we take the third vector, for which we set the first orthogonality condition, so
+$\tilde{u_3} = v_3 - \langle v_3,u_1 \rangle u_1$. Then we have
+\[
+ \langle \tilde{u_3},u_1 \rangle = \langle v_3 - \langle v_3,u_1 \rangle u_1, u_1 \rangle 
+ = \langle v_3,u_1 \rangle - \langle v_3,u_1 \rangle \cdot \underbrace{\langle u_1, u_1 \rangle}_{=1} 
+ = \langle v_3,u_1 \rangle -  \langle v_3,u_1 \rangle = 0.
+ \]
+Therefore $\tilde{u_3}$ is orthogonal to $u_1$.}
+
+% \item 
+\lang{de}{5. Schritt: \\
+Damit der gesuchte Vektor $u_3$ auch aber auch orthogonal auf $u_2$ steht, wiederholen wir nun mit $\tilde{u_3}$ diese Konstruktion, um einen auf $u_2$ 
+orthogonalen Vektor zu erhalten. Wir setzten also $u'_3 =\tilde{u_3} - \langle\tilde{u_3},u_2 \rangle u_2$.}
+\lang{en}{5. Step: \\
+The vector $u_3$ we are looking for is supposed to be orthogonal to $u_2$. Therefore we repeat this construction with $\tilde{u_3}$, 
+to receive a vector orthogonal to $u_2$. So we set $u'_3 =\tilde{u_3} - \langle\tilde{u_3},u_2 \rangle u_2$.}
+\lang{de}{
+Dann haben wir
+\[
+ \langle u'_3,u_2 \rangle = \langle \tilde{u_3} - \langle \tilde{u_3},u_2 \rangle u_2, u_2 \rangle 
+                          = \langle \tilde{u_3},u_2 \rangle - \langle \tilde{u_3},u_2 \rangle \underbrace{ \langle u_2, u_2 \rangle}_{=1} 
+                          = \langle \tilde{u_3},u_2 \rangle - \langle \tilde{u_3},u_2 \rangle = 0
+ \]
+Der Vektor $u'_3$ steht also orthogonal auf $u_2$. Außerdem steht $u'_3$ weiterhin orthogonal auf $u_1$, denn
+ \[
+ \langle u'_3,u_1 \rangle = \langle \tilde{u_3} - \langle \tilde{u_3},u_2 \rangle u_2, u_1 \rangle 
+                          = \underbrace{\langle \tilde{u_3},u_1 \rangle}_{=0} - \langle \tilde{u_3},u_2 \rangle \cdot \underbrace{\langle u_2, u_1 \rangle}_{=0} = 0.
+ \]}
+ \lang{en}{
+Then we have
+\[
+ \langle u'_3,u_2 \rangle = \langle \tilde{u_3} - \langle \tilde{u_3},u_2 \rangle u_2, u_2 \rangle 
+                          = \langle \tilde{u_3},u_2 \rangle - \langle \tilde{u_3},u_2 \rangle \underbrace{ \langle u_2, u_2 \rangle}_{=1} 
+                          = \langle \tilde{u_3},u_2 \rangle - \langle \tilde{u_3},u_2 \rangle = 0
+ \]
+The vector $u'_3$ is orthogonal to $u_2$. Furthermore is $u'_3$ orthogonal to $u_1$, because
+ \[
+ \langle u'_3,u_1 \rangle = \langle \tilde{u_3} - \langle \tilde{u_3},u_2 \rangle u_2, u_1 \rangle 
+                          = \underbrace{\langle \tilde{u_3},u_1 \rangle}_{=0} - \langle \tilde{u_3},u_2 \rangle \cdot \underbrace{\langle u_2, u_1 \rangle}_{=0} = 0.
+ \]}
+
+ 
+\lang{de}{
+  \textbf{Bemerkung:} Fasst man die beiden Herleitungsschritte 4. und 5. (von $v_3$ über $\tilde{u_3}$ nach $u'_3$) zusammen, entspricht dies genau der Gram-Schmidt-Formel in Satz \ref{gram_schmidt}, denn
+  \begin{align*}
+   u'_3 &= \underbrace{v_3 - \langle v_3,u_1 \rangle u_1}_{=\tilde{u_3}} - \langle \underbrace{v_3 - \langle v_3,u_1 \rangle u_1}_{=\tilde{u_3}},u_2 \rangle u_2 \\
+        &= v_3 - \langle v_3,u_1 \rangle u_1 - \left( \langle v_3,u_2 \rangle - \langle v_3,u_1 \rangle \cdot \underbrace{\langle u_2, u_1 \rangle}_{=0} \right) u_2 \\
+        &= v_3 - \langle v_3,u_1 \rangle u_1 - \langle v_3,u_2 \rangle u_2
+  \end{align*}}
+\lang{en}{
+  \textbf{Remark:} if we merge step $4$ and $5$ (from $v_3$ via $\tilde{u_3}$ to $u'_3$), this corresponds exactly to the Gram-Schmidt formula in theorem \ref{gram_schmidt}, because
+  \begin{align*}
+   u'_3 &= \underbrace{v_3 - \langle v_3,u_1 \rangle u_1}_{=\tilde{u_3}} - \langle \underbrace{v_3 - \langle v_3,u_1 \rangle u_1}_{=\tilde{u_3}},u_2 \rangle u_2 \\
+        &= v_3 - \langle v_3,u_1 \rangle u_1 - \left( \langle v_3,u_2 \rangle - \langle v_3,u_1 \rangle \cdot \underbrace{\langle u_2, u_1 \rangle}_{=0} \right) u_2 \\
+        &= v_3 - \langle v_3,u_1 \rangle u_1 - \langle v_3,u_2 \rangle u_2
+  \end{align*}}
+
+% \item 
+
+\lang{de}{6. Schritt: \\
+ Natürlich müssen wir $u'_3$ schließlich noch normieren. Wir setzen
+ $u_3:= \frac{1}{ \sqrt{\langle u'_3,u'_3 \rangle}} u'_3$.}
+ \lang{en}{6. Step: \\
+ We need to normalise $u'_3$. Therefore we set
+ $u_3:= \frac{1}{ \sqrt{\langle u'_3,u'_3 \rangle}} u'_3$.}\\
+ 
+\lang{de}{Nun sind $\{u_1;u_2;u_3\}$ eine Menge von orthonormalen Vektoren.}
+\lang{en}{Now are $\{u_1;u_2;u_3\}$ a set of orthonormal vectors. }
+
+ \step
+% \item 
+\lang{de}{
+Weitere Schritte: \\
+ Dieses Verfahren führen wir mit den restlichen Vektoren $v_4,...,v_k$ fort.}
+ \lang{en}{
+Further steps:
+We continue with this method for the remaining vectors $v_4,...,v_k$.}
+%   \end{enumerate}
+  \end{incremental}
+% \end{block}
+\end{proof*}
+%
+%%% Video K.M. - 2. Teil von 10833 (Dieser Schnitt ist vorerst zurückgestellt)
+%
+% Den vollständigen Beweis finden Sie auch nochmal in dem folgenden Video. Im Anschluss daran wird
+% das Orthonormalisierungsverfahren nach Gram-Schmidt an einem Beispiel ausführlich vorgeführt.
+
+% \floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10833&mode=iframe&speed=true}
+% {\image[75]{00_video_button_schwarz-blau}}}\\
+% \\
+
+\begin{example}
+
+ \lang{de}{Wir greifen das  
+ Beispiel im $\R^3$ aus \ref{ex:ONB}  
+ noch einmal auf. 
+ Sei $v_1:= \begin{pmatrix}\frac{3}{5} \\ \frac{4}{5} \\ 0 \end{pmatrix}$ und $v_2:=\begin{pmatrix} \frac{4}{5} \\ -\frac{3}{5} \\ 0 \end{pmatrix}$.
+ \\
+ Wir ergänzen diese beiden Vektoren noch mit $v_3:=\begin{pmatrix}1\\1\\1\end{pmatrix}$ zu einer Basis von $\R^3$.}
+  \lang{en}{We pick up the example of $\R^3$ from \ref{ex:ONB}.
+ Let be $v_1:= \begin{pmatrix}\frac{3}{5} \\ \frac{4}{5} \\ 0 \end{pmatrix}$ and $v_2:=\begin{pmatrix} \frac{4}{5} \\ -\frac{3}{5} \\ 0 \end{pmatrix}$.
+ \\
+ We complement those vectors with $v_3:=\begin{pmatrix}1\\1\\1\end{pmatrix}$ to a basis of $\R^3$.}
+
+ \lang{de}{
+ Jetzt führen wir das Orthonormalisierungsverfahren von Gram-Schmidt (mit dem Standard-Skalarprodukt) durch:
+ 
+ Zunächst ist $u'_1=v_1$. Da $v_1$ bereits normiert ist, gilt $u_1= u'_1=v_1$.
+ 
+ Wir fahren mit \[ 
+ u'_2= v_2 - \langle v_2,u_1\rangle u_1 = v_2 - \underbrace{\langle v_2,v_1 \rangle}_{=0} v_1 = v_2
+ \]
+ fort. Auch $v_2$ ist normiert, weshalb $u_2= u'_2=v_2$ gilt.}
+ \lang{en}{
+ Now we perform the Gramd-Schmidt process for orthonormalisation (with the standard scalar product):
+ 
+ To begin with it is $u'_1=v_1$. Since $v_1$ is normalised, it holds $u_1= u'_1=v_1$.
+ 
+ We continue with \[ 
+ u'_2= v_2 - \langle v_2,u_1\rangle u_1 = v_2 - \underbrace{\langle v_2,v_1 \rangle}_{=0} v_1 = v_2.
+ \]
+ $v_2$ is also normalised, which is why $u_2= u'_2=v_2$ holds.}
+
+ \lang{de}{
+ Nun ist
+ \[
+ u'_3 = v_3 - \langle v_3,u_1 \rangle u_1 - \langle v_3,u_2 \rangle u_2 = v_3 - \langle v_3,v_1 \rangle v_1 - \langle v_3,v_2 \rangle v_2.
+ \]
+ Wir berechnen
+ \[
+ \langle v_3,v_1 \rangle v_1 = \left( \frac{3}{5}+\frac{4}{5}+0 \right) \cdot \begin{pmatrix}\frac{3}{5} \\ \frac{4}{5} \\ 0 \end{pmatrix} = \begin{pmatrix}\frac{21}{25} \\ \frac{28}{25}\\ 0\end{pmatrix}
+ \]
+ und
+ \[
+ \langle v_3,v_2 \rangle v_2 = \left( \frac{4}{5}+\frac{-3}{5}+0 \right) \cdot \begin{pmatrix} \frac{4}{5} \\ -\frac{3}{5} \\ 0 \end{pmatrix} = \begin{pmatrix}\frac{4}{25} \\ \frac{-3}{25} \\ 0\end{pmatrix}.
+ \]
+ Damit ist
+ \[
+ u'_3 = \begin{pmatrix}1\\1\\1\end{pmatrix} - \begin{pmatrix}\frac{21}{25} \\ \frac{28}{25}\\ 0\end{pmatrix} - \begin{pmatrix}\frac{4}{25} \\ \frac{-3}{25} \\ 0\end{pmatrix} = \begin{pmatrix} 0 \\ 0 \\ 1\end{pmatrix}.
+ \]}
+ \lang{en}{
+ Now it is
+ \[
+ u'_3 = v_3 - \langle v_3,u_1 \rangle u_1 - \langle v_3,u_2 \rangle u_2 = v_3 - \langle v_3,v_1 \rangle v_1 - \langle v_3,v_2 \rangle v_2.
+ \]
+ We calculate
+ \[
+ \langle v_3,v_1 \rangle v_1 = \left( \frac{3}{5}+\frac{4}{5}+0 \right) \cdot \begin{pmatrix}\frac{3}{5} \\ \frac{4}{5} \\ 0 \end{pmatrix} = \begin{pmatrix}\frac{21}{25} \\ \frac{28}{25}\\ 0\end{pmatrix}
+ \]
+ and
+ \[
+ \langle v_3,v_2 \rangle v_2 = \left( \frac{4}{5}+\frac{-3}{5}+0 \right) \cdot \begin{pmatrix} \frac{4}{5} \\ -\frac{3}{5} \\ 0 \end{pmatrix} = \begin{pmatrix}\frac{4}{25} \\ \frac{-3}{25} \\ 0\end{pmatrix}.
+ \]
+ With that is
+ \[
+ u'_3 = \begin{pmatrix}1\\1\\1\end{pmatrix} - \begin{pmatrix}\frac{21}{25} \\ \frac{28}{25}\\ 0\end{pmatrix} - \begin{pmatrix}\frac{4}{25} \\ \frac{-3}{25} \\ 0\end{pmatrix} = \begin{pmatrix} 0 \\ 0 \\ 1\end{pmatrix}.
+ \]}
+
+ \lang{de}{
+ Schließlich erhalten wir $u_3 = \frac{1}{\sqrt{\langle u'_3,u'_3\rangle}}u'_3 = u'_3 = \begin{pmatrix}0\\0\\1\end{pmatrix}$.
+ Dass in diesem Fall $u'_3$ auch schon normiert ist, liegt an der (für diesen Fall günstigen) Wahl von $v_3$. Die Orthonormalbasis lautet somit
+ \[
+ \left\{  
+ \begin{pmatrix}\frac{3}{5} \\ \frac{4}{5} \\ 0 \end{pmatrix}; 
+ \begin{pmatrix} \frac{4}{5} \\ -\frac{3}{5} \\ 0 \end{pmatrix}; 
+ \begin{pmatrix}0\\0\\1\end{pmatrix}
+ \right\} 
+ \]}
+  \lang{en}{
+ Finally we get $u_3 = \frac{1}{\sqrt{\langle u'_3,u'_3\rangle}}u'_3 = u'_3 = \begin{pmatrix}0\\0\\1\end{pmatrix}$.
+ That fact, that $u'_3$is also already normalised, is a result of the (in this case smart) choice of $v_3$. So the orthonormal basis is
+ \[
+ \left\{  
+ \begin{pmatrix}\frac{3}{5} \\ \frac{4}{5} \\ 0 \end{pmatrix}; 
+ \begin{pmatrix} \frac{4}{5} \\ -\frac{3}{5} \\ 0 \end{pmatrix}; 
+ \begin{pmatrix}0\\0\\1\end{pmatrix}
+ \right\} 
+ \]}
+
+ \lang{de}{
+ \textbf{Bemerkung:} Bis auf das Vorzeichen erhalten wir hier nach dem Orthonormalisierungsverfahren von Gram-Schmidt 
+ den gleichen Vektor $v_3$ wie in Beispiel \ref{ex:ONB}.}
+ \lang{en}{
+ \textbf{Remark:} Except for the sign we receive the same vector $v_3$ with the Gram-Schmidt process as 
+ we have in example \ref{ex:ONB}.}
+\end{example}
+\end{visualizationwrapper}
+
+
+
+\end{content}

@@ -1,0 +1,98 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A08: Höhere Ableitungen}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A08: Höhere Ableitungen}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/10289}{Ticket 10289}
+\end{block}
+
+\begin{problem}
+	
+	 \randomquestionpool{1}{2}
+	
+%######################################################QUESTION_START	
+	\begin{question}	
+	%+++++++++++++++++++VARIABLES++++++++++++++++++++++
+		\begin{variables}
+			\randint[Z]{k}{2}{6}
+			\randint[Z]{l}{1}{4}
+			\function[calculate]{n}{l+k}
+			\randint[Z]{a}{2}{6}
+			
+			\function{func1}{a*x^k}
+			\function{sol}{0}
+			
+		\end{variables}
+        
+            \explanation{Hierbei handelt es sich um ein Monom. Es ist für $f(x) = a \cdot x^n$ stets $f'(x) = a \cdot n \cdot x^{n-1}$. Ist der Grad der Ableitung höher als der Grad des Monoms ist sie stets Null.}
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		\type{input.function} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+
+	%+++++++++++++++++++TITLE++++++++++++++++++++++++++	
+	    \lang{de}{\text{Was ist die $\var{n}$-te Ableitung der Funktion $f(x)=\var{func1}$}}
+	%+++++++++++++++++++ANSWERS++++++++++++++++++++++++    
+	    \begin{answer}
+	    	\text{Die Ableitung ist }
+			\solution{sol}
+			\checkAsFunction{x}{-1}{1}{100}
+	    \end{answer}    
+	\end{question}
+
+%######################################################QUESTION_END
+
+%######################################################QUESTION_START	
+	\begin{question}	
+	%+++++++++++++++++++VARIABLES++++++++++++++++++++++
+		\begin{variables}
+			\randint[Z]{n}{3}{5}
+			\randint[Z]{b}{2}{4}
+			\randint[Z]{a}{2}{4}
+			
+			\function{func1}{a*e^(b*x)}
+			\function{sol}{a*b^n*e^(b*x)}
+			
+		\end{variables}
+        
+        \explanation{Hier hilft die Kettenregel weiter mit $f(x) = g(h(x))$, wo $g(x) = e^x $ und $h(x) = a \cdot x$.}
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		\type{input.function} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+
+	%+++++++++++++++++++TITLE++++++++++++++++++++++++++	
+	    \lang{de}{\text{Was ist die $\var{n}$-te Ableitung der Funktion $f(x)=\var{func1}$}}
+	%+++++++++++++++++++ANSWERS++++++++++++++++++++++++    
+	    \begin{answer}
+	    	\text{Die Ableitung ist }
+			\solution{sol}
+			\checkAsFunction{x}{-1}{1}{100}
+	    \end{answer}    
+	\end{question}
+%######################################################QUESTION_END
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

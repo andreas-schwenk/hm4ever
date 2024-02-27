@@ -1,0 +1,119 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Exercise 5}
+    \lang{de}{A05: Gradient}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{Exercise 5}
+    \lang{de}{A05: Gradient}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+
+\title{A05: Gradient}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21862}{Ticket 21862}
+\end{block}
+
+
+\usepackage{mumie.genericproblem}
+
+\begin{problem}
+    \begin{question}
+        \type{input.generic}
+        \begin{variables}
+            \randint[Z]{a}{-5}{5}
+            \randint{b}{-4}{4}
+            \randint{c}{-4}{4}
+            \randint{d}{-4}{4}
+            \randint{aa}{-4}{4}
+            \randint{bb}{-4}{4}
+            \function[normalize]{f}{a*x^3+b*x*y+(c*x*y+d*z)^2+aa*z^3+bb*x*y*z}
+            \derivative[normalize]{g1}{f}{x}
+            \derivative[normalize]{g2}{f}{y}
+            \derivative[normalize]{g3}{f}{z}
+            
+            \randint{p1}{-4}{4}
+            \randint{p2}{-4}{4}
+            \randint[Z]{p3}{-3}{3}
+            \substitute{hg11}{g1}{x}{p1}
+            \substitute{hg12}{hg11}{y}{p2}
+            \substitute{h1}{hg12}{z}{p3}
+            \substitute{hg21}{g2}{x}{p1}
+            \substitute{hg22}{hg21}{y}{p2}
+            \substitute{h2}{hg22}{z}{p3}
+            \substitute{hg31}{g3}{x}{p1}
+            \substitute{hg32}{hg31}{y}{p2}
+            \substitute{h3}{hg32}{z}{p3}
+            \pmatrix{gr}{g1 \\ g2 \\ g3}
+            \pmatrix[calculate]{grp}{h1 \\ h2 \\ h3}
+            \randint[Z]{v1}{-3}{3}
+            \randint{v2}{-3}{3}
+            \randint{v3}{-3}{3}
+            \function[calculate]{grv}{h1*v1+h2*v2+h3*v3}
+            
+            \pmatrix[calculate]{v}{v1 \\ v2 \\ v3}
+
+        \end{variables}
+        
+        \text{Sei $f:\R^3\to \R, \, (x,y,z)^T \mapsto \var{f}.\;$ }
+        \begin{answer}
+            \type{input.matrix}
+%            \text{Bestimmen Sie $\nabla f(x,y,z)$:}
+            \text{Bestimmen Sie den Gradienten von $f: \quad \nabla f(x,y,z)=$}
+            \solution{gr}
+            \checkAsFunction{x,y,z}{-10}{10}{100}
+            \explanation{Der Gradient ist ein Spaltenvektor. In der ersten Zeile wird $f$ nach $x$ abgeleitet, in der zweiten nach $y$ usw.}
+        \end{answer}
+\\
+\\
+        \begin{answer}
+            \type{input.matrix}
+            %\field{rational}
+            \text{Berechnen Sie $\nabla f$ an der Stelle $a=(\var{p1},\var{p2},\var{p3})^T: \quad \nabla f(a)=$}
+            \solution{grp}
+            \explanation{Setzen Sie in die vorherige Antwort die Stelle $(x,y,z)=(\var{p1},\var{p2},\var{p3})$ ein.}
+        \end{answer}
+\\
+\\        
+        \begin{answer}
+            \type{input.number}
+            %\field{rational}
+%            \text{Sei $v=(\var{v1},\var{v2},\var{v3})^T$. Bestimmen Sie die Richtungsableitung $D_v f(a)=$}
+            \text{Bestimmen Sie die Richtungsableitung von $f$ im Punkt $a$ in Richtung $v=(\var{v1},\var{v2},\var{v3})^T: \quad D_v f(a)=$}
+            \solution{grv}
+%            \explanation[edited]{$f$ ist total differenzierbar. Damit ist D_v f(a)= \nabla f(a)\bullet v$.}
+%
+%QS-Vorschlag:
+%
+            \explanation{$f$ ist als Polynom total differenzierbar. Daher exisitert insbesondere in $a$
+                         die Richtungsableitung von $f$ in Richtung $v \; (\neq 0 )\;$ und es gilt das Matrix-Vektor-Produkt
+                         $\; D_v f(a)= Df (a)^T \cdot v$ bzw. das äquivalente Skalarprodukt $D_v f(a)=\nabla f(a)\bullet v %=\var{grp} \bullet \var{v}
+                         $.}
+%    
+        \end{answer}
+    \end{question}
+\end{problem}
+
+
+
+
+\embedmathlet{gwtmathlet}
+
+\end{content}
+
+
+
+

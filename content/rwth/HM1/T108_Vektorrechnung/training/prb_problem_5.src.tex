@@ -1,0 +1,111 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A05: Lineare Abhängigkeit}
+    \lang{en}{input numbers}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+\usepackage{mumie.ombplus}
+
+\lang{de}{\title{A05: Lineare Abhängigkeit}}
+\lang{en}{\title{Problem 5}}
+
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9510}{Ticket 9510}
+\end{block}
+
+\begin{problem}
+
+
+	\begin{question}
+ 		\lang{de}{
+			\text{Ist die folgende Menge im $\R^3$ linear abhängig?\\
+			$ \left\{ \begin{pmatrix} \var{a1} \\ \var{a2} \\ \var{a3}\end{pmatrix},
+			\begin{pmatrix} \var{b1} \\ \var{b2} \\ \var{b3}\end{pmatrix},
+			\begin{pmatrix} \var{c1} \\ \var{c2} \\ \var{c3}\end{pmatrix} \right\} $}
+
+% Erklärung abhängig vom Wert der Steuerungsvariablen \var{w}:
+%
+            \explanation[w=0]{ 
+            $ \lambda_1 \cdot \begin{pmatrix} \var{a1} \\ \var{a2} \\ \var{a3}\end{pmatrix}
+             + \lambda_2 \cdot \begin{pmatrix} \var{b1} \\ \var{b2} \\ \var{b3}\end{pmatrix}
+             + \lambda_3 \cdot \begin{pmatrix} \var{c1} \\ \var{c2} \\ \var{c3}\end{pmatrix} 
+             = \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix} $            
+            \\ hat zum Beispiel die L\"osung 
+            $\lambda_1=\var{mu}$, $\lambda_2=\var{lambda}$ und $\lambda_3=-1.$  % falls w=0
+            Die drei Vektoren sind also linear abhängig.
+           }
+            \explanation[w=1]{ 
+            $ \lambda_1 \cdot \begin{pmatrix} \var{a1} \\ \var{a2} \\ \var{a3}\end{pmatrix}
+             + \lambda_2 \cdot \begin{pmatrix} \var{b1} \\ \var{b2} \\ \var{b3}\end{pmatrix}
+             + \lambda_3 \cdot \begin{pmatrix} \var{c1} \\ \var{c2} \\ \var{c3}\end{pmatrix} 
+             = \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix} $            
+            \\ hat nur die L\"osung 
+            $\lambda_1=\lambda_2=\lambda_3 = 0. $                               % falls w=1
+            Die drei Vektoren sind also linear unabhängig.
+           }
+ 		}
+		
+		\field{rational}
+		
+		
+		\begin{variables}
+			\randint{a1}{-5}{5}
+			\randint{a2}{-6}{6}
+			\randint{a3}{-6}{6}
+			\randint[Z]{b1}{-5}{5}
+			\randint{b2}{-6}{6}
+			\randint{b3}{-6}{6}
+			\randadjustIf{a1,a2,a3}{a1=0 and a2=0 and a3=0}
+			\randadjustIf{b1,b2,b3}{b1=0 and b2=0 and b3=0}
+			
+			\randint{mu}{-2}{2}
+			\randint[Z]{lambda}{-2}{2}
+            \randint{w}{0}{1}
+            \randint{h}{1}{6}
+			\function[calculate]{c1}{mu*a1+lambda*b1+h*w}
+			\function[calculate]{c2}{mu*a2+lambda*b2}
+			\function[calculate]{c3}{mu*a3+lambda*b3}
+            
+            \function[calculate]{det}{a1*b2*c3+a2*b3*c1+a3*b1*c2-a3*b2*c1-a2*b1*c3-a1*b3*c2}
+					
+			
+		\end{variables}
+
+		\type{mc.yesno}
+
+        \begin{choice}
+        \text{}
+        \solution{compute}
+        \iscorrect{det}{=}{0}
+    \end{choice}
+    
+
+	\end{question}
+	
+
+	
+	
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

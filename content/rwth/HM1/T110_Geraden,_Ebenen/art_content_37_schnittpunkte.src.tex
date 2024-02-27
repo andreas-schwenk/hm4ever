@@ -1,0 +1,1048 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Lagebeziehungen}
+    \lang{en}{Intersections between points, lines and planes}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T110_ParallelPlanes.meta.xml}{T110_ParallelPlanes}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T110_IdenticalPlanes.meta.xml}{T110_IdenticalPlanes}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T110_IntersectingPlanes.meta.xml}{T110_IntersectingPlanes}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T110_LineParallelToPlane.meta.xml}{T110_LineParallelToPlane}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T110_LineInPlane.meta.xml}{T110_LineInPlane}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T110_LineIntersectingPlane.meta.xml}{T110_LineIntersectingPlane}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T110_ParallelLines.meta.xml}{T110_ParallelLines}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T110_IdenticalLines.meta.xml}{T110_IdenticalLines}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T110_SkewLines.meta.xml}{T110_SkewLines}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T110_IntersectingLines.meta.xml}{T110_IntersectingLines}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{10}
+\ombarticle{3}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Lagebeziehungen zwischen Punkten, Geraden und Ebenen}
+       \lang{en}{Intersections between points, lines and planes}}
+ 
+\begin{block}[annotation]
+  Inhalt: OMB+-Abschnitt X.6 ergänzt durch Lagebestimmungen mit Ebenen in Normalenform
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9054}{Ticket 9054}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\lang{de}{
+In diesem Abschnitt beschränken wir uns auf den dreidimensionalen Raum $\R^3$ und untersuchen
+die Lagebeziehungen zwischen Punkten, Geraden und Ebenen im $\R^3$.
+}
+\lang{en}{
+In this section we restrict ourselves to considering the intersections that can occur between points, 
+lines and planes in three-dimensional space $\R^3$.
+}
+
+
+\section{\lang{de}{Allgemeine Lagebeziehungen}\lang{en}{General relationships}}
+\label{sec:6_1_Allgemeine_Lagebeziehungen}
+%\lref{Allgemeine Lagebeziehungen}{Allgemeine Lagebeziehungen}}}
+
+\lang{de}{Für die Lagebeziehungen von Punkten, Geraden und Ebenen können folgende Fälle auftreten:}
+\lang{en}{The following cases can arise for the relationships between points, lines, and planes:}
+
+%\image{6_0_Lagebeziehung_P-g-E}
+
+\begin{table}
+	&    \lang{de}{Punkt}  \lang{en}{Point}  
+	&    \lang{de}{Gerade} \lang{en}{Line}   
+	&    \lang{de}{Ebene}  \lang{en}{Plane}     \\
+	     \lang{de}{Punkt}  \lang{en}{Point}
+	&    \lang{de}{Punkte sind identisch oder\newline verschieden} \lang{en}{Points are either identical or \newline distinct}
+	&    \lang{de}{Punkt liegt auf Gerade oder \newline nicht }    \lang{en}{Points either lie on a line or \newline do not lie on a line}
+	&    \lang{de}{Punkt liegt in Ebene oder \newline nicht}       \lang{en}{Points either lie on a plane or \newline do not lie on a plane}     \\
+	     \lang{de}{Gerade} \lang{en}{Line}
+	& 
+	&    \lang{de}{Geraden sind identisch,\newline liegen parallel,\newline schneiden sich in einem Punkt oder \newline liegen windschief }
+		 \lang{en}{Lines are identical,\newline parallel,\newline intersect each other at a point or are \newline skew}
+	&   \lang{de}{Gerade liegt in Ebene,\newline parallel zu Ebene oder \newline durchstößt Ebene }
+	    \lang{en}{Lines lie on a plane,\newline are parallel to a plane, or \newline intersect a plane}      \\
+	    \lang{de}{Ebene } \lang{en}{Plane}
+	& 
+	& 
+	&   \lang{de}{Ebenen sind identisch,\newline liegen parallel oder \newline schneiden sich in einer Geraden} 
+	    \lang{en}{Planes are identical,\newline parallel, or \newline intersect each other on a line}
+\end{table}
+
+
+\section{\lang{de}{Punkt - Punkt}\lang{en}{Point - Point}}
+\label{sec:6_2_Punkt-Punkt}
+
+\lang{de}{Zwei Punkte $P$ und $Q$ können entweder gleich oder verschieden sein.}
+\lang{en}{Two points can either be the same or different.}
+
+\begin{rule}
+  \lang{de}{
+  Zwei Punkte $P=(p_1;p_2;p_3)$ und $Q=(q_1;q_2;q_3)$ in $\R^3$ sind genau dann gleich, wenn sie in 
+  jeder Koordinate übereinstimmen, d. h. wenn
+  }
+  \lang{en}{
+  Two points $P=(p_1;p_2;p_3)$ and $Q=(q_1;q_2;q_3)$ in $\R^3$ are the same if and only if each of 
+  their coordinates is the same. That is, if
+  }
+	\[p_1 = q_1,\quad p_2=q_2,\quad\text{\lang{de}{und}\lang{en}{and}}\quad p_3=q_3\]
+	\lang{de}{gelten.	Ansonsten sind die Punkte verschieden.}
+	\lang{en}{If two points are not the same, they are different.}
+\end{rule}
+
+
+
+\section{\lang{de}{Punkt - Gerade}\lang{en}{Point - Line}}
+\label{sec:6_3_Punkt-Gerade}
+
+\lang{de}{Ein Punkt $P$ kann entweder auf einer Geraden $g$ liegen oder nicht.}
+\lang{en}{A point can either lie on a line or not lie on a line.}
+
+\begin{rule}
+  \lang{de}{Ein Punkt $P$ liegt genau dann auf der Geraden}
+  \lang{en}{Consider the line $g$}
+	\[g: \vec{x} = \vec{OQ} + \lambda\cdot \vec{v},\quad \lambda\in\R\]
+  \lang{de}{
+	durch $Q$ mit Richtungsvektor $\vec{v}$, wenn es eine reelle Zahl $\lambda\in\R$ gibt, so dass 
+  $\vec{OP} = \vec{OQ} + \lambda\cdot \vec{v}$ gilt, d. h.	wenn der Vektor $\vec{OP}$ zu den 
+  Vektoren $\vec{x}$ gehört, die die Gerade beschreiben.
+  }
+  \lang{en}{
+	which goes through the point $Q$ with direction vector $\vec{v}$. A point $P$ lies on $g$ if 
+  there is a real number $\lambda\in\R$ such that $\vec{OP} = \vec{OQ} + \lambda\cdot \vec{v}$. This 
+  is the same as saying that the vector $\vec{OP}$ is of the same form as $\vec{x}$ (as these are the 
+  vectors that describe the line $g$).
+  }
+\end{rule}
+
+\begin{example}
+  \lang{de}{
+  Wir prüfen, ob der Punkt $P=(1;2;3)$ auf der Geraden $g$ liegt, die durch den Punkt $Q=(-1;2;0)$ 
+  und den Richtungsvektor $\vec{v} = \begin{pmatrix} 2\\0\\3\end{pmatrix}$ gegeben ist, also
+  }
+  \lang{en}{
+  Suppose that the line $g$ goes through the point $Q=(-1,2,0)$ and has a direction vector of 
+  $\vec{v} = \begin{pmatrix} 2\\0\\3\end{pmatrix}$. Let us now check whether or not the point 
+  $P=(1,2,3)$ lies on this line.
+  }
+	\[g: \vec{x} = \begin{pmatrix} -1\\2\\0\end{pmatrix} + 
+    \lambda\cdot \begin{pmatrix} 2\\0\\3\end{pmatrix},\quad \lambda\in\R\lang{de}{.}\]
+	
+  \lang{de}{Der Ansatz}
+  \lang{en}{Substituting into the equation}
+	\[\vec{OP} = \vec{OQ} + \lambda\cdot \vec{v}\]
+  \lang{de}{liefert}
+  \lang{en}{gives us}
+	\[\begin{pmatrix} 1\\2\\3\end{pmatrix} = 
+    \begin{pmatrix} -1\\2\\0\end{pmatrix} + \lambda\cdot \begin{pmatrix} 2\\0\\3\end{pmatrix} = 
+    \begin{pmatrix} -1+2\lambda\\2\\3\lambda\end{pmatrix}.\]
+  \lang{de}{Dies ist ein lineares Gleichungssystem mit den drei Gleichungen}
+  \lang{en}{This is a system of linear equations with three equations}
+	\begin{align*}
+		1 & = -1+2\lambda\\
+		2 & = 2 \\
+		3 & = 3\lambda
+	\end{align*}
+  \lang{de}{
+  und der Unbekannten $\lambda$. Dieses Gleichungssystem besitzt genau eine Lösung $\lambda=1$. Also 
+  liegt der Punkt $P$ auf der Geraden $g$.
+  }
+	\lang{en}{
+  and a single unknown, $\lambda$. This system has exactly one solution $\lambda=1$, hence the point 
+  $P$ does lie on $g$.
+  }
+\end{example}
+
+\section{\lang{de}{Punkt - Ebene}\lang{en}{Point - Plane}}
+\label{sec:6_4_Punkt-Ebene}
+
+\lang{de}{Ein Punkt $P$ kann entweder in einer Ebene $E$ liegen oder nicht.}
+\lang{en}{A point can either lie in a plane or not lie in a plane.}
+
+\begin{rule}
+  \lang{de}{Ein Punkt $P$ liegt genau dann in der Ebene}
+  \lang{en}{A point $P$ lies on the plane}
+	\[E: \vec{x} = \vec{OQ} + \lambda\cdot \vec{v} + \mu\cdot\vec{w},\quad \lambda,\mu\in\R\]
+  \lang{de}{
+  durch $Q$ mit Richtungsvektoren $\vec{v}$ und $\vec{w}$, wenn es zwei reelle Zahlen 
+  $\lambda,\mu\in\R$ gibt, so dass $\vec{OP} = \vec{OQ} + \lambda\cdot \vec{v} + \mu\cdot\vec{w}$ 
+  gilt, d. h. wenn	der Vektor $\vec{OP}$ zu den Vektoren $\vec{x}$ gehört, die die Ebene beschreiben.
+  }
+	\lang{en}{
+  containing the point $Q$ with direction vectors $\vec{v}$ and $\vec{w}$ if and only if there exist 
+  two real numbers $\lambda,\mu\in\R$ such that 
+  $\vec{OP} = \vec{OQ} + \lambda\cdot \vec{v} + \mu\cdot\vec{w}$.
+	This is the same as	saying that the vector $\vec{OP}$ is of the same form as $\vec{x}$ (as these 
+  are the vectors that describe the plane).
+  }
+\end{rule}
+
+\lang{de}{
+Einfacher zu überprüfen ist es, wenn die Ebene $E$ in Normalenform oder Koordinatenform vorliegt.
+}
+\lang{en}{
+It is easier to check this if the plane $E$ is expressed in normal form or coordinate form.
+}
+\begin{rule}
+  \lang{de}{Ein Punkt $P=(p_1;p_2;p_3)$ liegt genau dann in der Ebene}
+  \lang{en}{A point $P=(p_1;p_2;p_3)$ lies on the plane}
+  \[ E= \{\vec{x}\in \R^3 \mid \vec{n} \bullet \vec{x}=d \} = 
+  \left\{\begin{pmatrix}x_1 \\ x_2\\ x_3 \end{pmatrix}\in \R^3\, \mid\, 
+  n_1x_1+n_2x_2+n_3x_3=d \right\}, \]
+  \lang{de}{wenn}\lang{en}{if and only if}
+	\[ \vec{n}\bullet \overrightarrow{OP} = d \]
+	\lang{de}{bzw.}\lang{en}{or}
+	\[ n_1p_1+n_2p_2+n_3p_3=d \]
+	\lang{de}{gilt.}\lang{en}{holds.}
+\end{rule}
+
+\begin{example}\label{ex:punkt-ebene}
+  \lang{de}{
+  Wir prüfen, ob der Punkt $P=(3;2;1)$ in der Ebene $E$ liegt, die durch den Punkt $Q=(1;2;0)$ und 
+  die Richtungsvektoren $\vec{v} = \begin{pmatrix} 1\\0\\1\end{pmatrix}$ und 
+  $\vec{w} = \begin{pmatrix} 1\\1\\-1\end{pmatrix}$ gegeben ist, also
+  }
+  \lang{en}{
+  Let $E$ be the plane that goes through the point $Q=(1,2,0)$ and has direction vectors 
+  $\vec{v} = \begin{pmatrix} 1\\0\\1\end{pmatrix}$ and 
+  $\vec{w} = \begin{pmatrix} 1\\1\\-1\end{pmatrix}$. 
+  We can now check whether the point $P=(3,2,1)$ lies in $E$.
+  }
+	\[E: \vec{x} = \begin{pmatrix} 1\\2\\0\end{pmatrix} + 
+    \lambda\cdot \begin{pmatrix} 1\\0\\1\end{pmatrix} + 
+    \mu\cdot\begin{pmatrix} 1\\1\\-1\end{pmatrix} ,\quad \lambda,\mu\in\R.\]
+\begin{tabs*}
+\tab{\lang{de}{mit Parameterform}\lang{en}{In parameter form}}    
+  \lang{de}{Der Ansatz}
+  \lang{en}{Substituting into the equation}
+	\[\vec{OP} = \vec{OQ} + \lambda\cdot \vec{v} + \mu\cdot\vec{w}\]
+  \lang{de}{liefert}
+  \lang{en}{gives us}
+	\[\begin{pmatrix} 3\\2\\1\end{pmatrix} = 
+    \begin{pmatrix} 1\\2\\0\end{pmatrix} + 
+    \lambda\cdot \begin{pmatrix} 1\\0\\1\end{pmatrix} + 
+    \mu\cdot\begin{pmatrix} 1\\1\\-1\end{pmatrix} = 
+    \begin{pmatrix} 1+\lambda + \mu\\2+\mu\\\lambda-\mu\end{pmatrix}.\]
+  \lang{de}{Dies ist ein lineares Gleichungssystem mit den drei Gleichungen}
+  \lang{en}{This is a linear system with three equations}
+	\begin{align*}
+		3 & = 1+\lambda + \mu\\
+		2 & = 2 + \mu\\
+		1 & = \lambda - \mu
+	\end{align*}
+  \lang{de}{
+  und den zwei Unbekannten $\lambda$ und $\mu$.	Dieses Gleichungssystem besitzt keine Lösung, weil 
+  die zweite Gleichung $\mu = 0$ und damit die erste Gleichung $\lambda = 2$ ergibt. Die dritte 
+  Gleichung liefert dann den Widerspruch $1=2$. Also liegt der Punkt $P$ nicht in der Ebene $E$.
+  }
+	\lang{en}{
+  and two unknowns, $\lambda$ and $\mu$. This system has no solution, because the second equation 
+  gives us $\mu=0$, which leads to $\lambda=2$ from the first equation. Under these conditions, the 
+  third equation leads to the contradiction $1=2$, hence the point $P$ does not lie in $E$.
+  }
+\tab{\lang{de}{mit Koordinatenform}\lang{en}{In coordinate form}}
+  \lang{de}{Ein Normalenvektor zu der Ebene $E$ ist}
+  \lang{en}{The vector}
+  \[\vec{n} = \vec{v}\times \vec{w} = 
+    \begin{pmatrix} 1\\ 0\\ 1\end{pmatrix} \times \begin{pmatrix} 1\\ 1\\ -1\end{pmatrix} = 
+    \begin{pmatrix} -1\\ 2\\ 1\end{pmatrix}. \]
+  \lang{de}{Weiter ist}
+  \lang{en}{is a normal vector of the plane $E$. Furthermore,}
+  \[\vec{n}\bullet \vec{OQ} = 
+    \begin{pmatrix} -1\\ 2\\ 1\end{pmatrix}\bullet \begin{pmatrix} 1\\2\\0\end{pmatrix}=3.\]
+  \lang{de}{Eine Koordinatenform für $E$ ist daher}
+  \lang{en}{Hence $E$ can be expressed in coordinate form as}
+  \[E=\left\{\begin{pmatrix}x_1 \\ x_2\\ x_3 \end{pmatrix}\in \R^3\, \mid\,-x_1+2x_2+x_3=3 \right\}.\]
+  \lang{de}{
+  Nun kann getestet werden, ob der Punkt $P=(3;2;1)$ in der Ebene $E$ liegt, indem man die 
+  Koordinaten von $P$ in die linke Seite der Gleichung einsetzt:
+  }
+  \lang{en}{
+  Now we can test whether the point $P=(3;2;1)$ lies on the plane $E$ by substituting the coordinates 
+  of $P$ into the left-hand side of the equation:
+  }
+  \[  -p_1+2p_2+p_3=-3+2\cdot 2+ 1=2\neq 3. \]
+  \lang{de}{Also liegt $P$ nicht in der Ebene $E$.}
+  \lang{en}{Hence $P$ does not lie on the plane $E$.}
+\end{tabs*}
+\end{example}
+
+
+\section{\lang{de}{Gerade - Gerade}\lang{en}{Line - Line}}
+\label{sec:6_5_Gerade-Gerade}
+
+\lang{de}{
+Zwei Geraden $g$ und $h$ können entweder identisch sein, oder parallel (aber nicht identisch) sein, 
+oder sich in genau einem Punkt schneiden, oder windschief sein.
+}
+\lang{en}{
+Two lines can either be identical, be parallel (but not identical), intersect each other at exactly 
+one point, or be skew to each other.
+}
+
+\begin{rule}\label{rule:lage_geraden}
+  \lang{de}{
+  Die zwei Geraden $g: \vec{x} = \vec{OP} + \lambda\cdot \vec{v},\; \lambda\in\R$ und 
+  $h: \vec{x} = \vec{OQ} + \mu\cdot \vec{w},\; \mu\in\R$ mit Stützpunkten $P$ bzw. $Q$ und 
+  Richtungsvektoren $\vec{v}$ bzw. $\vec{w}$
+  }
+  \lang{en}{
+  Let $g$ be the line $g: \vec{x} = \vec{OP} + \lambda\cdot \vec{v},\; \lambda\in\R$ that goes 
+  through the point $P$ and has direction vector $\vec{v}$ and let $h$ be the line 
+  $h: \vec{x} = \vec{OQ} + \mu\cdot \vec{w},\; \mu\in\R$ that goes through the point $Q$ and has 
+  direction vector $\vec{w}$. These two lines are:
+  }
+	\begin{itemize}
+		\item \lang{de}{
+          sind identisch, wenn $\vec{v}$ und $\vec{w}$ parallel sind und $P$ auf der Geraden $h$ 
+          liegt.
+          }
+      		\lang{en}{identical if $\vec{v}$ and $\vec{w}$ are parallel and $P$ lies on $h$.}
+		\item \lang{de}{
+          sind parallel (aber nicht identisch), wenn $\vec{v}$ und $\vec{w}$ parallel sind und $P$ 
+          nicht auf der Geraden $h$ liegt.
+          }
+      		\lang{en}{
+          parallel (but not identical) if $\vec{v}$ and $\vec{w}$ are parallel and $P$ does not lie 
+          on $h$.
+          }
+		\item \lang{de}{
+          schneiden sich in genau einem Punkt, wenn $\vec{v}$ und $\vec{w}$ nicht parallel sind und 
+          es zwei reelle Zahlen $\lambda,\mu\in\R$ gibt, so dass
+    			\[\vec{OP} + \lambda\cdot \vec{v} = \vec{OQ} + \mu\cdot \vec{w}\]
+    			gilt. Der zu diesem Vektor gehörende Punkt ist dann der gesuchte Schnittpunkt.
+          }
+    			\lang{en}{
+          intersect each other at exactly one point if $\vec{v}$ and $\vec{w}$ are not parallel, and 
+          there exist two real numbers $\lambda,\mu\in\R$ such that
+  			  \[\vec{OP} + \lambda\cdot \vec{v} = \vec{OQ} + \mu\cdot \vec{w}.\]
+    			The point that belongs to this vector is the desired intersection point.
+          }
+		\item \lang{de}{
+          liegen windschief zueinander, wenn $\vec{v}$ und $\vec{w}$ nicht parallel sind und sich die 
+          Geraden in keinem Punkt schneiden, es also keine solche Zahlen $\lambda,\mu\in\R$ gibt.
+          }
+      		\lang{en}{
+          skew to each other if $\vec{v}$ and $\vec{w}$ are not parallel and they do not intersect in 
+          a point (i.e. there are no such numbers $\lambda,\mu\in\R$).
+          }
+	\end{itemize}
+  \lang{de}{
+  Die ersten drei Fälle können auch in der Ebene auftreten, windschiefe Geraden gibt es nur im 
+  dreidimensionalen Raum $\R^3$ (und in höheren Dimensionen).
+  }
+  \lang{en}{
+  The first three cases can take place even in two dimensions. Skew lines can only occur in three 
+  dimensions ($\R^3$) or higher dimensions.
+  }
+\end{rule}
+
+\begin{example}
+\begin{tabs*}[\initialtab{0}]
+	\tab{\lang{de}{Identische Geraden}\lang{en}{Identical lines}}
+  	\lang{de}{In diesem Beispiel betrachten wir die beiden Geraden $g$ und $h$ gegeben durch}
+    \lang{en}{Let $g$ and $h$ be lines defined as follows:}
+  	\begin{align*}
+  		g: \vec{x} & = \begin{pmatrix} 0\\1\\2\end{pmatrix} + 
+         \lambda\cdot \begin{pmatrix} 1\\1\\1\end{pmatrix},\quad \lambda\in\R,\\
+  		h: \vec{x} & = \begin{pmatrix} 3\\4\\5\end{pmatrix} + 
+         \mu\cdot \begin{pmatrix} -1\\-1\\-1\end{pmatrix},\quad \mu\in\R.
+  	\end{align*}
+    \lang{de}{
+    Da die beiden Richtungsvektoren $\begin{pmatrix} 1\\1\\1\end{pmatrix}$ und 
+    $\begin{pmatrix} -1\\-1\\-1\end{pmatrix}$ parallel sind, können $g$ und $h$ entweder identisch 
+    oder parallel zueinander sein. Der Ansatz
+    }
+  	\lang{en}{
+    Because the two direction vectors $\begin{pmatrix} 1\\1\\1\end{pmatrix}$ and 
+    $\begin{pmatrix} -1\\-1\\-1\end{pmatrix}$ are parallel, $g$ and $h$ are either identical or 
+    parallel to each other. The equation
+    }
+  	\[\begin{pmatrix} 3\\4\\5\end{pmatrix} =\begin{pmatrix} 0\\1\\2\end{pmatrix} + 
+      \lambda\cdot \begin{pmatrix} 1\\1\\1\end{pmatrix}\]
+    \lang{de}{führt auf das Gleichungssystem}
+    \lang{en}{leads to the system}
+  	\begin{align*}
+  		3 & =\lambda \\
+  		4 & =1+\lambda \\
+  		5 & =2+\lambda,
+  	\end{align*}
+    \lang{de}{
+    welches die Lösung $\lambda=3$ besitzt. Der Stützpunkt $(3;4;5)$ der Geraden $h$ liegt somit auf 
+    der Geraden $g$, woraus folgt, dass $g$ und $h$ identisch sind.
+    }
+    \lang{en}{
+    which has solution $\lambda=3$. Therefore, the point $(3;4;5)$ on $h$ does not lie on $g$, which 
+    means that $g$ and $h$ are parallel.
+    }
+    \begin{center}
+    \image{T110_IdenticalLines}
+    \end{center}    
+	\tab{\lang{de}{Parallele Geraden}\lang{en}{Parallel lines}}
+		\lang{de}{In diesem zweiten Beispiel untersuchen wir die Lagebeziehung der beiden Geraden}
+    \lang{en}{Let $g$ and $h$ be the lines defined as follows:}
+  	\begin{align*}
+  		g: \vec{x} & = \begin{pmatrix} 0\\1\\1\end{pmatrix} + 
+         \lambda\cdot \begin{pmatrix} 1\\1\\1\end{pmatrix},\quad \lambda\in\R,\\
+  		h: \vec{x} & = \begin{pmatrix} 3\\4\\6\end{pmatrix} + 
+         \mu\cdot \begin{pmatrix} -1\\-1\\-1\end{pmatrix},\quad \mu\in\R.
+  	\end{align*}
+    \lang{de}{
+    Da die beiden Richtungsvektoren unverändert parallel sind, können $g$ und $h$ auch hier nur 
+    identisch oder parallel zueinander sein. Der Ansatz
+    }
+  	\lang{en}{
+    Because the two direction vectors are parallel, $g$ and $h$ are either identical or 
+    parallel to each other.	The equation
+    }
+  	\[\begin{pmatrix} 3\\4\\6\end{pmatrix} = 
+      \begin{pmatrix} 0\\1\\1\end{pmatrix} + \lambda\cdot \begin{pmatrix} 1\\1\\1\end{pmatrix}\]
+    \lang{de}{führt auf das Gleichungssystem}
+    \lang{en}{leads to the system}
+  	\begin{align*}
+  		3 & =\lambda \\
+  		4 & =1+\lambda \\
+  		6 & =1+\lambda,
+  	\end{align*}
+    \lang{de}{
+    welches keine Lösung besitzt, da die letzten beiden Gleichungen sich widersprechen. Der 
+    Stützpunkt $(3;4;6)$ der Geraden $h$ liegt somit nicht auf der Geraden $g$, woraus folgt, dass 
+    $g$ und $h$ parallel sind.
+    }
+    \lang{en}{
+    which has no solution. Therefore, the point $(3;4;6)$ on $h$ does not lie on $g$, which means 
+    that $g$ and $h$ are parallel.
+    }
+    \begin{center}
+    \image{T110_ParallelLines}
+    \end{center}
+	\tab{\lang{de}{Sich schneidende Geraden}\lang{en}{Intersecting lines}}
+		\lang{de}{
+    In diesem dritten Beispiel untersuchen wir die Lagebeziehung der beiden Geraden $g$ und $h$ 
+    gegeben durch
+    }
+    \lang{en}{
+    Let $g$ and $h$ be the lines defined as follows:
+    }
+  	\begin{align*}
+  		g: \vec{x} & = \begin{pmatrix} 1\\0\\1\end{pmatrix} + 
+         \lambda\cdot \begin{pmatrix} 1\\2\\3\end{pmatrix},\quad \lambda\in\R,\\
+  		h: \vec{x} & = \begin{pmatrix} 1\\1\\3\end{pmatrix} + 
+         \mu\cdot \begin{pmatrix} 1\\1\\1\end{pmatrix},\quad \mu\in\R.
+  	\end{align*}
+    \lang{de}{
+    Da $\begin{pmatrix} 1\\2\\3\end{pmatrix}$ und $\begin{pmatrix} 1\\1\\1\end{pmatrix}$ nicht 
+    parallel sind, können sich $g$ und $h$ entweder in genau einem Punkt schneiden, oder windschief 
+    zueinander sein. Der Ansatz
+    }
+  	\lang{en}{
+    Because $\begin{pmatrix} 1\\2\\3\end{pmatrix}$ and $\begin{pmatrix} 1\\1\\1\end{pmatrix}$ are not 
+    parallel, $g$ and $h$ either intersect each other at exactly one point, or are skew to each 
+    other. The equation
+    }
+  	\[\begin{pmatrix} 1\\0\\1\end{pmatrix} + \lambda\cdot \begin{pmatrix} 1\\2\\3\end{pmatrix} = 
+      \begin{pmatrix} 1\\1\\3\end{pmatrix} + \mu\cdot \begin{pmatrix} 1\\1\\1\end{pmatrix}\]
+    \lang{de}{führt auf das Gleichungssystem}
+    \lang{en}{leads to the system}
+  	\begin{align*}
+  		1+\lambda & = 1+\mu \\
+  		2\lambda & = 1+\mu \\
+  		1+3\lambda & = 3+\mu,
+  	\end{align*}
+    \lang{de}{also}
+    \lang{en}{which after some simplification is}
+    \begin{align*}
+  		\lambda - \mu & = 0 \\
+  		2\lambda - \mu & = 1 \\
+  		3\lambda -\mu & = 2.
+  	\end{align*}
+    \lang{de}{
+    Dieses Gleichungssystem besitzt die Lösung $\lambda=1$, $\mu=1$. Daher schneiden sich die Geraden 
+    in genau einem Punkt, der sich durch Einsetzen dieser Werte in die Geraden $g$ bzw. $h$ ergibt. 
+    Mit $\lambda = 1$ in der Geradengleichung von $g$ ergibt sich der Punkt $S$ mit dem Ortsvektor
+    }
+  	\lang{en}{
+    The solution of this system is $\lambda=1$, $\mu=1$, hence the lines intersect each other at 
+    exactly one point. Substituting these values into either equation $g$ or $h$ gives the same 
+    result. For example, substituting $\lambda=1$ into the equation of $g$ yields the point $S$ 
+    with position vector
+    }
+  	\[\vec{OS} = \begin{pmatrix} 1\\0\\1\end{pmatrix} + 1\cdot \begin{pmatrix} 1\\2\\3\end{pmatrix} = 
+      \begin{pmatrix}2\\2\\4\end{pmatrix}.\]
+    \lang{de}{
+    Derselbe Punkt ergibt sich natürlich auch durch Einsetzen von $\mu=1$ in die Geradengleichung von 
+    $h$:
+    }
+    \lang{en}{
+    The same point can be found by setting $\mu=1$ in the equation of $h$:
+    }
+  	\[\vec{OS} = \begin{pmatrix} 1\\1\\3\end{pmatrix} + 1\cdot \begin{pmatrix} 1\\1\\1\end{pmatrix} = 
+      \begin{pmatrix}2\\2\\4\end{pmatrix}.\]
+    \lang{de}{Also ist $S=(2;2;4)$ der Schnittpunkt der beiden Geraden.}
+    \lang{en}{The point $S=(2,2,4)$ is the intersection point of the two lines.}
+    \begin{center}
+    \image{T110_IntersectingLines}
+    \end{center}
+	\tab{\lang{de}{Windschiefe Geraden}\lang{en}{Skew lines}}
+		\lang{de}{In diesem letzten Beispiel betrachten wir die beiden Geraden}
+    \lang{en}{Let $g$ and $h$ be the lines defined as follows:}
+  	\begin{align*}
+  		g: \vec{x} & = \begin{pmatrix} 1\\3\\1\end{pmatrix} + 
+         \lambda\cdot \begin{pmatrix} 2\\-1\\0\end{pmatrix},\quad \lambda\in\R,\\
+  		h: \vec{x} & = \begin{pmatrix} 0\\2\\3\end{pmatrix} + 
+         \mu\cdot \begin{pmatrix} 1\\1\\0\end{pmatrix},\quad \mu\in\R.
+  	\end{align*}
+    \lang{de}{
+    Da $\begin{pmatrix} 2\\-1\\0\end{pmatrix}$ und $\begin{pmatrix} 1\\1\\0\end{pmatrix}$ nicht 
+    parallel sind, können sich $g$ und $h$ entweder nur in genau einem Punkt schneiden, oder 
+    windschief zueinander sein.	Der Ansatz
+    }
+	  \lang{en}{
+    Because $\begin{pmatrix} 2\\-1\\0\end{pmatrix}$ and $\begin{pmatrix} 1\\1\\0\end{pmatrix}$ are 
+    not parallel, $g$ and $h$ either intersect each other at exactly one point, or are skew to 
+    each other.	The equation}
+  	\[\begin{pmatrix} 1\\3\\1\end{pmatrix} + \lambda\cdot \begin{pmatrix} 2\\-1\\0\end{pmatrix} = 
+      \begin{pmatrix} 0\\2\\3\end{pmatrix} + \mu\cdot \begin{pmatrix} 1\\1\\0\end{pmatrix}\]
+    \lang{de}{führt auf das Gleichungssystem}
+    \lang{en}{leads to the system}
+  	\begin{align*}
+  		1+2\lambda & = \mu \\
+  		3-\lambda & = 2+\mu \\
+  		1 & = 3,
+  	\end{align*}
+    \lang{de}{
+    welches aufgrund der dritten Gleichung offensichtlich keine Lösung besitzt. Die beiden Geraden 
+    $g$ und $h$ sind daher windschief zueinander.
+    }
+    \lang{en}{
+    which has no solution. The two lines $g$ and $h$ are therefore skew.
+    }
+    \begin{center}
+    \image{T110_SkewLines}
+    \end{center}
+\end{tabs*}
+\end{example}
+
+\section{\lang{de}{Gerade - Ebene}\lang{en}{Line - Plane}}
+\label{sec:6_6_Gerade-Ebene}
+
+\lang{de}{
+Eine Gerade $g$ kann entweder in einer Ebene $E$ liegen, parallel zu $E$ liegen, oder die Ebene $E$ 
+in genau einem Punkt durchstoßen (also schneiden).
+}
+\lang{en}{
+A line can either lie on a plane, be parallel to a plane, or intersect a plane at exactly one point.
+}
+
+\begin{rule}
+  \lang{de}{
+  Gegeben seien eine Gerade $g: \vec{x} = \vec{OP} + \lambda\cdot \vec{u},\; \lambda\in\R$ mit 
+  Stützpunkt $P$ und Richtungsvektor $\vec{u}$ und eine Ebene 
+  $E: \vec{x} = \vec{OQ} + \mu\cdot \vec{v} + \sigma \cdot\vec{w},\; \mu,\sigma\in\R$ mit Stützpunkt 
+	$Q$ und Richtungsvektoren $\vec{v}$ und $\vec{w}$. Besitzt das Gleichungssystem gegeben durch
+  }
+	\lang{en}{
+  Let $g$ be the line $g: \vec{x} = \vec{OP} + \lambda\cdot \vec{u},\; \lambda\in\R$ which goes 
+  through the point $P$ and has direction vector $\vec{u}$,	and let $E$ be the plane 
+  $E: \vec{x} = \vec{OQ} + \mu\cdot \vec{v} + \sigma \cdot\vec{w},\; \mu,\sigma\in\R$ which goes 
+  through the point $Q$ and has direction vectors $\vec{v}$ and $\vec{w}$. If the system
+  }
+	\[\vec{OP} + \lambda\cdot \vec{u} = \vec{OQ} + \mu\cdot \vec{v} + \sigma \cdot\vec{w}\]
+  \lang{de}{f\"ur die reellen Zahlen $\lambda$, $\mu$ und $\sigma$ }
+  \lang{en}{with real numbers $\lambda$, $\mu$ and $\sigma$ has:}
+	\begin{itemize}
+		\item \lang{de}{unendlich viele Lösungen $(\lambda;\mu;\sigma)$, so liegt $g$ in der Ebene $E$,}
+      		\lang{en}{infinitely many solutions $(\lambda,\mu,\sigma)$, then $g$ lies in the plane.}
+		\item \lang{de}{
+          genau eine Lösung $(\lambda;\mu;\sigma)$, so durchstößt $g$ die Ebene $E$ in dem durch 
+      		genau diese Parameter festgelegten Punkt,
+          }
+      		\lang{en}{
+          exactly one solution $(\lambda,\mu,\sigma)$, then $g$ intersects the plane.
+          }
+		\item \lang{de}{keine Lösung, so liegt $g$ parallel zur Ebene $E$.}
+      		\lang{en}{no solution, then $g$ is parallel to the plane.}
+	\end{itemize}
+\end{rule}
+
+\lang{de}{Auch hier ist die Bestimmung einfacher, wenn die Ebene in Normalenform vorliegt.}
+\lang{en}{Here it is also easier if the plane is in normal form.}
+\begin{rule}
+\lang{de}{
+Gegeben seien eine Gerade $g: \vec{x} = \vec{OP} + \lambda\cdot \vec{u},\; \lambda\in\R$ 
+und eine Ebene $E= \{ \vec{x}\in \R^3 \mid \vec{n} \bullet \vec{x}=d \}$. Wenn die Gleichung
+}
+\lang{en}{
+Consider the line $g: \vec{x} = \vec{OP} + \lambda\cdot \vec{u},\; \lambda\in\R$ and the plane 
+$E= \{ \vec{x}\in \R^3 \mid \vec{n} \bullet \vec{x}=d \}$. If the equation
+}
+\[ \vec{n}\bullet \left(\vec{OP} + \lambda\cdot \vec{u}\right)=d \]
+\begin{itemize}
+\item \lang{de}{für alle $\lambda\in \R$ erfüllt ist, so liegt $g$ in der Ebene $E$,}
+      \lang{en}{holds for all $\lambda\in \R$, then $g$ lies on the plane $E$,}
+\item \lang{de}{
+      für genau ein $\lambda\in \R$ erfüllt ist, so durchstößt $g$ die Ebene $E$ in dem durch 
+      genau dieses $\lambda$ festgelegten Punkt,
+      }
+      \lang{en}{
+      holds for exaclty one $\lambda\in \R$, then $g$ intersects the plane $E$ precisely once, at the 
+      point given by this $\lambda$,
+      }
+\item \lang{de}{für kein $\lambda\in \R$ erfüllt ist, so liegt $g$ parallel zur Ebene $E$.}
+      \lang{en}{does not hold for any $\lambda\in \R$, then $g$ lies parallel to the plane $E$.}
+\end{itemize}
+\end{rule}
+
+\lang{de}{
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10797&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+}
+\lang{en}{}
+
+\begin{example}
+\begin{tabs*}[\initialtab{0}]
+	\tab{\lang{de}{Gerade in Ebene}\lang{en}{Line on plane}}
+    \lang{de}{Wir untersuchen die Lagebeziehung der Geraden $g$ gegeben durch}
+    \lang{en}{Let $g$ be the line}
+  	\[g: \vec{x} = \begin{pmatrix} 2\\-1\\1\end{pmatrix} + 
+         \lambda\cdot \begin{pmatrix} -1\\-1\\-1\end{pmatrix},\quad \lambda\in\R,\]
+    \lang{de}{und der Ebene $E$ gegeben durch}
+    \lang{en}{and $E$ be the plane}
+  	\[E: \vec{x} = \begin{pmatrix} -1\\-1\\-1\end{pmatrix} + 
+         \mu\cdot \begin{pmatrix} -1\\2\\0\end{pmatrix} + 
+         \sigma\cdot\begin{pmatrix} 0\\3\\1\end{pmatrix},\quad \mu,\sigma\in\R.\]
+    \lang{de}{Der Ansatz}
+    \lang{en}{The equation}
+  	\[\begin{pmatrix} 2\\-1\\1\end{pmatrix} + \lambda\cdot \begin{pmatrix} -1\\-1\\-1\end{pmatrix} = 
+      \begin{pmatrix} -1\\-1\\-1\end{pmatrix} + \mu\cdot \begin{pmatrix} -1\\2\\0\end{pmatrix} + 
+      \sigma\cdot\begin{pmatrix} 0\\3\\1\end{pmatrix}\]
+    \lang{de}{führt auf das Gleichungssystem}
+    \lang{en}{leads to the system}
+  	\begin{align*}
+  		2-\lambda & = -1-\mu \\
+  		-1-\lambda & = -1+2\mu+3\sigma \\
+  		1-\lambda & = -1+\sigma,
+  	\end{align*}
+    \lang{de}{also}
+    \lang{en}{which after simplification is}
+  	\begin{align*}
+	    \lambda  & = 3 +\mu\\
+  		\mu +\sigma & = -1 \\
+  		\mu +\sigma & = -1.
+  	\end{align*}
+    \lang{de}{
+    Das Gleichungssystem besteht somit aus nur zwei linear unabhängigen Gleichungen und hat unendlich 
+    viele Lösungen. Daraus folgt, dass die Gerade $g$ in der Ebene $E$ liegt.
+    }
+  	\lang{en}{
+    This system of equations has infinitely many solutions, hence the line $g$ lies on the plane $E$.
+    }
+\begin{center}
+\image{T110_LineInPlane}
+\end{center}
+	\tab{\lang{de}{Gerade durchstößt Ebene}\lang{en}{Line intersecting plane}}
+    \lang{de}{In diesem zweiten Beispiel betrachten wir die Gerade $g$ gegeben durch}
+    \lang{en}{In this second example we consider instead the line $g$ given by}
+  	\[g: \vec{x} = \begin{pmatrix} 0\\0\\-1\end{pmatrix} + 
+         \lambda\cdot \begin{pmatrix} -1\\-1\\-2\end{pmatrix},\quad \lambda\in\R,\]
+    \lang{de}{und weiterhin die Ebene $E$ gegeben durch}
+    \lang{en}{and continue to consider the plane $E$ given by}
+  	\[E: \vec{x} = \begin{pmatrix} -1\\-1\\-1\end{pmatrix} + 
+         \mu\cdot \begin{pmatrix} -1\\2\\0\end{pmatrix} + 
+         \sigma\cdot\begin{pmatrix} 0\\3\\1\end{pmatrix},\quad \mu,\sigma\in\R.\]
+  	\lang{de}{
+    Statt der Parameterform können wir auch die Normalenform der Ebene benutzen. Ein Normalenvektor 
+    zu der Ebene $E$ ist
+    }
+    \lang{en}{
+    Instead of the parametrised form of the plane, we can use the normal form. A normal vector to 
+    the plane $E$ is
+    }
+    \[\vec{n}=\begin{pmatrix}  -1\\2\\0\end{pmatrix} \times \begin{pmatrix}  0\\3\\1\end{pmatrix} = 
+      \begin{pmatrix} 2\\ 1\\ -3\end{pmatrix}. \]
+    \lang{de}{Weiter ist}\lang{en}{Furthermore,}
+    \[ \vec{n}\bullet \begin{pmatrix} -1\\-1\\-1\end{pmatrix} = 
+    \begin{pmatrix} 2\\ 1\\ -3\end{pmatrix}\bullet \begin{pmatrix} -1\\-1\\-1\end{pmatrix}=0.\]
+    \lang{de}{Eine Normalenform für $E$ ist daher}
+    \lang{en}{$E$ can hence be expressed in normal form as}
+    \[E=\left\{\begin{pmatrix}x_1 \\ x_2\\ x_3 \end{pmatrix}\in \R^3\, \mid\, 
+      \begin{pmatrix} 2\\ 1\\ -3\end{pmatrix}\bullet \vec{x}=0 \right\}. \]
+    \lang{de}{
+    Nun kann getestet werden, wie die Gerade $g$ zu der Ebene $E$ liegt, indem man die Parameterform 
+    von $g$ in die Gleichung von $E$ einsetzt:
+    }
+    \lang{en}{
+    Now we can test where the line $g$ lies relative to the plane $E$ by substituting the 
+    parameterised equation of $g$ into the equation of $E$:
+    }
+    \begin{align*}
+    	& & \hspace{1.5cm}\begin{pmatrix} 2\\ 1\\ -3\end{pmatrix}\bullet 
+      	\Big( \begin{pmatrix} 0\\0\\-1\end{pmatrix} + 
+          \lambda\cdot \begin{pmatrix} -1\\-1\\-2\end{pmatrix} \Big) &= 0 \\
+    	& \Leftrightarrow & \begin{pmatrix} 2\\ 1\\ -3\end{pmatrix}\bullet 
+        \begin{pmatrix} 0\\0\\-1\end{pmatrix} + 
+          \lambda \cdot \begin{pmatrix} 2\\ 1\\ -3\end{pmatrix}\bullet 
+            \begin{pmatrix} -1\\-1\\-2\end{pmatrix} &=0 \\
+    	& \Leftrightarrow & \hspace{6.25cm} 3 +3\lambda &=0 \\
+    	& \Leftrightarrow & \hspace{7.7cm} \lambda &=-1.
+    \end{align*}
+    \lang{de}{
+    Die Gleichung hat also genau eine Lösung $\lambda=-1$, weshalb die Gerade die Ebene schneidet. 
+    Der Schnittpunkt hat den Ortsvektor
+    }
+    \lang{en}{
+    The equation therefore has exactly one solution $\lambda=-1$, so the line intersects the plane. 
+    The point of intersection has position vector
+    }
+    \[\begin{pmatrix} 0\\0\\-1\end{pmatrix} + (-1)\cdot \begin{pmatrix} -1\\-1\\-2\end{pmatrix} = 
+      \begin{pmatrix} 1\\1\\1\end{pmatrix}, \]
+    \lang{de}{d.h. der Schnittpunkt ist $S = (1;1;1)$.}
+    \lang{en}{that is, the line intercepts the plane at $S = (1;1;1)$.}
+    \begin{center}
+    \image{T110_LineIntersectingPlane}
+    \end{center}    
+  \tab{\lang{de}{Gerade parallel zu Ebene}\lang{en}{Line parallel to plane}}
+    \lang{de}{
+    In diesem dritten Beispiel untersuchen wir die Lagebezieung der Gerade $g$ gegeben durch
+    }
+    \lang{en}{
+    In this thrid example we study the line $g$ given by
+    }
+  	\[g: \vec{x} = \begin{pmatrix} -1\\2\\2\end{pmatrix} + 
+      \lambda\cdot \begin{pmatrix} -1\\-1\\-1\end{pmatrix},\quad \lambda\in\R,\]
+    \lang{de}{und der bereits in den vorigen Beispielen verwendeten Ebene $E$ gegeben durch}
+    \lang{en}{and the plane $E$ already used in the previous examples}
+  	\[E: \vec{x} = \begin{pmatrix} -1\\-1\\-1\end{pmatrix} + 
+      \mu\cdot \begin{pmatrix} -1\\2\\0\end{pmatrix} + 
+      \sigma\cdot\begin{pmatrix} 0\\3\\1\end{pmatrix},\quad \mu,\sigma\in\R.\]
+    \lang{de}{
+    Wir testen, wie die Gerade $g$ zur Ebene $E$ liegt, indem wir die Parameterform von $g$ in 
+    Normalenform der Ebene einsetzen, die wir im letzten Beispiel bestimmt haben:
+    }
+    \lang{en}{
+    We test how the line $g$ lies in relation to the plane $E$ by substituting the parametrised 
+    equation of $g$ into the normal form of the plane, which we determined in the previous example:
+    }
+    \begin{align*}
+      & \hspace{1.5cm}\begin{pmatrix} 2\\ 1\\ -3\end{pmatrix}\bullet 
+        \Big( \begin{pmatrix} -1\\2\\2\end{pmatrix} + 
+          \lambda\cdot \begin{pmatrix} -1\\-1\\-1\end{pmatrix} \Big) &= 0 \\
+      \Leftrightarrow & \begin{pmatrix} 2\\ 1\\ -3\end{pmatrix}\bullet 
+        \begin{pmatrix} -1\\2\\2\end{pmatrix} + 
+          \lambda \cdot \begin{pmatrix} 2\\ 1\\ -3\end{pmatrix}\bullet 
+            \begin{pmatrix} -1\\-1\\-1\end{pmatrix} &=0 \\
+      \Leftrightarrow & \hspace{7.3cm}-6  &=0.
+    \end{align*}
+    \lang{de}{
+    Die Gleichung besitzt somit keine Lösung, woraus folgt, dass die Gerade parallel zur Ebene liegt.
+    }
+    \lang{en}{
+    This is a contradiction, so the equation has no solutions, and the line is parallel to the plane.
+    }
+\begin{center}
+\image{T110_LineParallelToPlane}
+\end{center}
+\end{tabs*}
+\end{example}
+
+\section{\lang{de}{Ebene - Ebene}\lang{en}{Plane - Plane}}
+\label{sec:6_7_Ebene-Ebene}
+
+\lang{de}{
+Zwei Ebenen können entweder identisch sein, oder parallel (aber nicht identisch sein), oder sich in 
+einer Geraden schneiden.
+}
+\lang{en}{
+Two planes can either be identical, be parallel (and not identical), or intersect each other at 
+a line.
+}
+
+\begin{rule}
+  \lang{de}{Gegeben seien die zwei Ebenen}
+  \lang{en}{Let $E$ and $F$ be the planes}
+	\begin{align*}
+		E: \vec{x} & = \vec{OP} + \lambda\cdot \vec{u} + \mu\cdot \vec{v},\; \lambda,\mu\in\R,\\
+		F: \vec{x} & = \vec{OQ} + \rho\cdot \vec{w} + \sigma \cdot\vec{y},\; \rho,\sigma\in\R\lang{en}{.}
+	\end{align*}
+  \lang{de}{
+  mit den Stützpunkten $P$ bzw. $Q$ und den Richtungsvektoren $\vec{u}$, $\vec{v}$ bzw. $\vec{w}$, 
+  $\vec{y}$. Besitzt das Gleichungssystem gegeben durch
+  }
+	\lang{en}{
+  It is easy to see that $E$ goes through the point $P$ and has direction vectors $\vec{u}$ and 
+  $\vec{v}$, whereas $F$ goes through the point $Q$ and has direction vectors $\vec{w}$ and 
+  $\vec{y}$. The linear system
+  }
+	\[\vec{OP} + \lambda\cdot \vec{u} + \mu\cdot \vec{v} = \vec{OQ} + \rho\cdot \vec{w} + 
+    \sigma \cdot\vec{y}\]
+  \lang{de}{f\"ur die vier reellen Zahlen $\lambda$, $\mu$, $\rho$ und $\sigma$}
+  \lang{en}{in $\lambda$, $\mu$, $\rho$, and $\sigma$ can have:}
+	\begin{itemize}
+		\item \lang{de}{
+          unendlich viele Lösungen $(\lambda;\mu;\rho;\sigma)$, wobei die Lösungsmenge durch 
+      		zwei reelle Parameter beschrieben wird, so sind die Ebenen $E$ und $F$ identisch,
+          }
+      		\lang{en}{
+          infinitely many solutions $(\lambda,\mu,\rho,\sigma)$, where the solution set is 
+      		described by varying two real parameters. In this case, the planes are identical.
+          } 
+		\item \lang{de}{
+          unendlich viele Lösungen $(\lambda;\mu;\rho;\sigma)$, wobei die Lösungsmenge durch einen 
+          reellen Parameter beschrieben wird, so besitzen die Ebenen $E$ und $F$ eine Schnittgerade, 
+          die durch Einsetzen ermittelt werden kann,
+          }
+      		\lang{en}{
+          infinitely many solutions $(\lambda,\mu,\rho,\sigma)$, where the solution set is described 
+      		by varying one real parameter. In this case, the planes intersect each other at a line.
+          }
+		\item \lang{de}{keine Lösung, so liegen $E$ und $F$ parallel zueinander.}
+      		\lang{en}{no solutions, in which case the planes are parallel to each other.}
+	\end{itemize}
+\end{rule}
+
+\lang{de}{
+Ist eine der beiden Ebenen in Normalenform gegeben, kann man die gegenseitige Lage einfacher folgendermaßen bestimmen:
+}
+\lang{en}{
+If one of the two planes is given in normal form, the relationship between them is more easily found, 
+by the following method:
+}
+
+\begin{rule}
+  \lang{de}{Gegeben seien die zwei Ebenen}
+  \lang{en}{Consider the two planes}
+  \[ E: \vec{x}  = \vec{OP} + \lambda\cdot \vec{u} + \mu\cdot \vec{v},\; \lambda,\mu\in\R, \]
+  \lang{de}{und}\lang{en}{and}
+  \[ F= \{ \vec{x}\in \R^3 \mid \vec{n} \bullet \vec{x}=d \}. \]
+  \lang{de}{Wenn die Gleichung}
+  \lang{en}{If the equation}
+  \[ \vec{n}\bullet \left(\vec{OP} + \lambda\cdot \vec{u} + \mu\cdot \vec{v} \right)=d \]
+  \lang{de}{mit $\lambda,\mu \in \R$}
+  \lang{en}{with $\lambda,\mu \in \R$}
+  \begin{itemize}
+    \item \lang{de}{
+          für alle $\lambda,\mu \in \R$ erfüllt ist, so sind die Ebenen $E$ und $F$ identisch,
+          }
+          \lang{en}{
+          holds for all $\lambda,\mu \in \R$, then the planes $E$ and $F$ are identical,
+          }
+    \item \lang{de}{
+          lösbar ist, aber nicht für alle Paare $(\lambda;\mu)$, so besitzen die Ebenen $E$ und $F$ 
+          eine Schnittgerade, die durch Einsetzen ermittelt werden kann,
+          }
+          \lang{en}{
+          holds only for some pairs $(\lambda;\mu)$, then the planes $E$ and $F$ intersect at a line, 
+          whose equation can be determined by substitution,
+          }
+    \item \lang{de}{
+          für keine Wahl von $\lambda,\mu\in \R$ erfüllt ist, so liegen die Ebenen $E$ und $F$ 
+          parallel zueinander.
+          }
+          \lang{en}{
+          does not hold for any $\lambda,\mu\in \R$, then the planes $E$ and $F$ lie parallel to each 
+          other.
+          }
+\end{itemize}
+\end{rule}
+
+\lang{de}{
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10797&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+}
+\lang{en}{}
+
+\begin{example}
+\begin{tabs*}[\initialtab{0}]
+	\tab{\lang{de}{Identische Ebenen}\lang{en}{Identical planes}}
+    \lang{de}{In diesem Beispiel untersuchen wir die Lagebeziehung der beiden Ebenen}
+    \lang{en}{What type of intersection do the following two planes have with each other?}
+  	\begin{align*}
+  		E: \vec{x} & = \begin{pmatrix} -2\\-2\\-3\end{pmatrix} + 
+         \lambda\cdot \begin{pmatrix} 1\\1\\2\end{pmatrix} + 
+         \mu\cdot\begin{pmatrix} 1\\0\\1\end{pmatrix},\quad \lambda,\mu\in\R,\\
+  		F: \vec{x} & = \begin{pmatrix} 2\\1\\4\end{pmatrix} + 
+         \rho\cdot \begin{pmatrix} -1\\-2\\-3\end{pmatrix} + 
+          \sigma\cdot\begin{pmatrix} -2\\1\\-1\end{pmatrix},\quad \rho,\sigma\in\R.
+  	\end{align*}
+    \lang{de}{Ein Normalenvektor zu der Ebene $F$ ist}
+    \lang{en}{A normal vector of the plane $F$ is}
+    \[\vec{n}=\begin{pmatrix} -1\\-2\\-3\end{pmatrix} \times \begin{pmatrix} -2\\1\\-1\end{pmatrix} = 
+    \begin{pmatrix} 5\\ 5\\ -5\end{pmatrix}. \]
+    \lang{de}{Weiter ist}
+    \lang{en}{Furthermore,}
+    \[\vec{n}\bullet \begin{pmatrix} 2\\1\\4\end{pmatrix} = 
+      \begin{pmatrix} 5\\ 5\\ -5\end{pmatrix}\bullet \begin{pmatrix} 2\\1\\4\end{pmatrix}=-5.\]
+    \lang{de}{Eine Normalenform für $F$ ist daher}
+    \lang{en}{Hence $F$ can be expressed in normal form as}
+    \[F=\left\{\begin{pmatrix}x_1 \\ x_2\\ x_3 \end{pmatrix}\in \R^3\, \mid\, 
+    \begin{pmatrix} 5\\ 5\\ -5\end{pmatrix}\bullet \vec{x}=-5 \right\}. \]
+    \lang{de}{
+    Nun kann getestet werden, wie die Ebene $E$ zu der Ebene $F$ liegt, indem man die Parameterform 
+    von $E$ in die Gleichung von $F$ einsetzt: 
+    }
+    \lang{en}{
+    Now we can test where the plane $E$ lies relative to the plane $F$ by substituting the 
+    parametrised equation of $E$ into the equation of $F$:
+    }
+    \begin{align*}
+      & \hspace{2.7cm}\begin{pmatrix} 5\\ 5\\ -5\end{pmatrix}\bullet 
+        \Big( \begin{pmatrix} -2\\-2\\-3\end{pmatrix} + 
+          \lambda\cdot \begin{pmatrix} 1\\1\\2\end{pmatrix} + 
+            \mu\cdot\begin{pmatrix} 1\\0\\1\end{pmatrix} \Big) &= -5 \\
+      \Leftrightarrow & \begin{pmatrix} 5\\ 5\\ -5\end{pmatrix}\bullet 
+        \begin{pmatrix} -2\\-2\\-3\end{pmatrix} + 
+          \lambda \cdot \begin{pmatrix} 5\\ 5\\ -5\end{pmatrix}\bullet 
+            \begin{pmatrix} 1\\1\\2\end{pmatrix} + 
+              \mu\cdot \begin{pmatrix} 5\\ 5\\ -5\end{pmatrix}\bullet 
+                \begin{pmatrix} 1\\0\\1\end{pmatrix} &=5 \\
+      \Leftrightarrow & \hspace{10.0cm}-5  &=-5 
+    \end{align*}
+    \lang{de}{
+    Die Gleichung ist somit für alle $\lambda,\mu\in\mathbb{R}$ erfüllt, woraus folgt, dass die 
+    Ebenen $E$ und $F$ identisch sind.
+    }
+    \lang{en}{
+    The equation is hence satisfied by all $\lambda,\mu\in\mathbb{R}$, so the planes $E$ and $F$ are 
+    identical.
+    }
+  	\begin{center}
+    \image{T110_IdenticalPlanes}
+    \end{center}
+  \tab{\lang{de}{Sich schneidende Ebenen}\lang{en}{Intersecting planes}}
+    \lang{de}{In diesem zweiten Beispiel betrachten wir die beiden Ebenen}
+    \lang{en}{What type of intersection do the following two planes have with each other?}
+  	\begin{align*}
+  		E: \vec{x} & = \begin{pmatrix} -2\\-2\\-3\end{pmatrix} + 
+         \lambda\cdot \begin{pmatrix} 1\\1\\2\end{pmatrix} + 
+         \mu\cdot\begin{pmatrix} 1\\0\\1\end{pmatrix},\quad \lambda,\mu\in\R,\\
+  		F: \vec{x} & = \begin{pmatrix} -1\\0\\3\end{pmatrix} + 
+         \rho\cdot \begin{pmatrix} 2\\-1\\0\end{pmatrix} + 
+         \sigma\cdot\begin{pmatrix} 0\\1\\-1\end{pmatrix},\quad \rho,\sigma\in\R.
+  	\end{align*}
+    \lang{de}{Der Ansatz}
+    \lang{en}{The equation}
+  	\[\begin{pmatrix} -2\\-2\\-3\end{pmatrix} + \lambda\cdot \begin{pmatrix} 1\\1\\2\end{pmatrix} + 
+        \mu\cdot\begin{pmatrix} 1\\0\\1\end{pmatrix} = 
+      \begin{pmatrix} -1\\0\\3\end{pmatrix} + \rho\cdot \begin{pmatrix} 2\\-1\\0\end{pmatrix} + 
+        \sigma\cdot\begin{pmatrix} 0\\1\\-1\end{pmatrix}\]
+    \lang{de}{führt auf das Gleichungssystem}
+    \lang{en}{leads to the system}
+  	\begin{align*}
+  		-2+\lambda + \mu & = -1+2\rho \\
+  		-2+\lambda & = -\rho + \sigma \\
+  		-3+2\lambda+\mu & = 3-\sigma,
+  	\end{align*}
+    \lang{de}{also}
+    \lang{en}{which after some simplification is}
+  	\begin{align*}
+  		\lambda + \mu  - 2\rho & = 1 \\
+  		\lambda +  \rho - \sigma & = 2 \\
+  		2\lambda + \mu +\sigma & = 6.
+  	\end{align*}
+    \lang{de}{
+    Dieses Gleichungssystem mit drei Gleichungen für vier Unbekannte besitzt die parameterabhängige 
+    Lösung
+    }
+  	\lang{en}{
+    This system, with three equations in four unknowns, has the parameter-dependent solution}
+  	\begin{align*}
+  		\lambda & = -1+3t\\
+  		\mu & = 8-7t\\
+  		\rho & = 3-2t\\
+  		\sigma & = t
+  	\end{align*}
+    \lang{de}{
+    mit $t\in\R$. Hieraus folgt, dass sich die beiden Ebenen in einer Geraden schneiden. Einsetzen 
+    von $\lambda$ und $\mu$ in die Ebenengleichung für $E$ bzw. von $\rho$ und $\sigma$ in die 
+    Ebenengleichung für $F$ ergibt in beiden Fällen die Schnittgerade
+    }
+    \lang{en}{
+    where $t\in\R$. Substituting $\lambda$ and $\mu$ into the equation for $E$, (or alternatively, 
+    substituting $\rho$ and $\sigma$ into $F$) yields the line
+    }
+  	\[g: \vec{x} = \begin{pmatrix} 5\\-3\\3\end{pmatrix} + 
+         t\cdot \begin{pmatrix} -4\\3\\-1\end{pmatrix},\quad t\in\R.\]
+    \begin{center}
+    \image{T110_IntersectingPlanes}
+    \end{center}
+	\tab{\lang{de}{Parallele Ebenen}\lang{en}{Parallel planes}}
+    \lang{de}{In diesem letzten Beispiel untersuchen wir die Lagebeziehung der beiden Ebenen}
+    \lang{en}{What type of intersection do the following two planes have with each other?}
+  	\begin{align*}
+  		E: \vec{x} & = \begin{pmatrix} -1\\-2\\0\end{pmatrix} + 
+         \lambda\cdot \begin{pmatrix} 2\\0\\-1\end{pmatrix} + 
+         \mu\cdot\begin{pmatrix} 2\\1\\-2\end{pmatrix},\quad \lambda,\mu\in\R,\\
+  		F: \vec{x} & = \begin{pmatrix} -1\\0\\3\end{pmatrix} + 
+         \rho\cdot \begin{pmatrix} 2\\-1\\0\end{pmatrix} + 
+         \sigma\cdot\begin{pmatrix} 0\\1\\-1\end{pmatrix},\quad \rho,\sigma\in\R.
+  	\end{align*}
+    \lang{de}{Ein Normalenvektor zu der Ebene $F$ ist}
+    \lang{en}{A normal vector to the plane $F$ is}
+    \[\vec{n}=\begin{pmatrix}  2\\-1\\0\end{pmatrix} \times \begin{pmatrix} 0\\1\\-1\end{pmatrix} = 
+      \begin{pmatrix} 1\\ 2\\ 2\end{pmatrix}. \]
+    \lang{de}{Weiter ist}
+    \lang{en}{Furthermore,}
+    \[\vec{n}\bullet \begin{pmatrix} -1\\0\\3\end{pmatrix} = 
+      \begin{pmatrix} 1\\ 2\\ 2\end{pmatrix}\bullet \begin{pmatrix} -1\\0\\3\end{pmatrix}=5.\]
+    \lang{de}{Eine Normalenform für $F$ ist daher}
+    \lang{en}{Hence the plane $F$ can be expressed in normal form as}
+    \[F=\left\{\begin{pmatrix}x_1 \\ x_2\\ x_3 \end{pmatrix}\in \R^3\, \mid\, 
+        \begin{pmatrix} 1\\ 2\\ 2\end{pmatrix}\bullet \vec{x}=5 \right\}. \]
+    \lang{de}{
+    Nun kann getestet werden, wie die Ebene $E$ zu der Ebene $F$ liegt, indem man die 
+    Parameterform von $E$ in die Gleichung von $F$ einsetzt:
+    }
+    \lang{en}{
+    Now we can test where the plane $E$ lies relative to the plane $F$ by substituting the 
+    parametrised equation of $E$ into the equation of $F$:
+    }
+    \begin{align*}
+      & \hspace{2.7cm}\begin{pmatrix} 1\\ 2\\ 2\end{pmatrix}\bullet 
+        \Big( \begin{pmatrix} -1\\-2\\0\end{pmatrix} + 
+          \lambda\cdot \begin{pmatrix} 2\\0\\-1\end{pmatrix} + 
+            \mu\cdot\begin{pmatrix} 2\\1\\-2\end{pmatrix} \Big) &= 5 \\
+      \Leftrightarrow & \begin{pmatrix} 1\\ 2\\ 2\end{pmatrix}\bullet 
+        \begin{pmatrix} -1\\-2\\0\end{pmatrix} + 
+          \lambda \cdot \begin{pmatrix} 1\\ 2\\ 2\end{pmatrix}\bullet 
+            \begin{pmatrix} 2\\0\\-1\end{pmatrix} + 
+              \mu\cdot \begin{pmatrix} 1\\ 2\\ 2\end{pmatrix}\bullet 
+                \begin{pmatrix} 2\\1\\-2\end{pmatrix} &=5 \\
+      \Leftrightarrow & \hspace{10.0cm}-5  &=5 
+    \end{align*}
+    \lang{de}{Da die Gleichung keine Lösung besitzt, liegen $E$ und $F$ parallel zueinander.}
+    \lang{en}{As the equation has no solutions, $E$ and $F$ lie parallel to each other.}
+\begin{center}
+\image{T110_ParallelPlanes}
+\end{center}
+\end{tabs*}
+\end{example}
+
+
+
+\end{visualizationwrapper}
+
+
+\end{content}

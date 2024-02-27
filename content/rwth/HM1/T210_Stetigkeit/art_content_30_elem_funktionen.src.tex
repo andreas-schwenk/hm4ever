@@ -1,0 +1,299 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Stetigkeit elementarer Funktionen}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T210_Discontinuity.meta.xml}{T210_Discontinuity}
+\end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_14_konvergenz.meta.xml}{content_14_konvergenz}
+    \link{generic_article}{content/rwth/HM1/T210_Stetigkeit/g_art_content_29_stetigkeit_definitionen.meta.xml}{stetigkeit}
+    \link{generic_article}{content/rwth/HM1/T209_Potenzreihen/g_art_content_27_konvergenzradius.meta.xml}{potenzreihen}
+    \link{generic_article}{content/rwth/HM1/T204_Abbildungen_und_Funktionen/g_art_content_12_reelle_funktionen_monotonie.meta.xml}{reelle-funktionen}
+    \link{generic_article}{content/rwth/HM1/T209_Potenzreihen/g_art_content_28_exponentialreihe.meta.xml}{exp}
+    \link{generic_article}{content/rwth/HM1/T104_weitere_elementare_Funktionen/g_art_content_15_exponentialfunktionen.meta.xml}{exponentialfunktion}
+    \link{generic_article}{content/rwth/HM1/T211_Eigenschaften_stetiger_Funktionen/g_art_content_33_zwischenwertsatz.meta.xml}{zwischenwertsatz}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{10}
+\ombarticle{2}
+
+\lang{de}{\title{Stetigkeit elementarer Funktionen}}
+ 
+\begin{block}[annotation]
+  
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9790}{Ticket 9790}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+In diesem Abschnitt werden wir zeigen, dass die unten aufgeführten elementaren Funktionen 
+alle auf ihrem Definitionsbereich stetig sind. Anschaulich ist das aus der Schule bekannt, weil
+ihre Graphen (außer bei Definitionslücken) keine Sprünge aufweisen.
+
+
+\section{Polynomfunktionen und rationale Funktionen}\label{sec:polynome-und-rationale-funk}
+
+Die "`einfachsten"' Funktionen sind die Polynomfunktionen und rationalen Funktionen.
+ 
+\begin{theorem}\label{thm:polynomstetig}
+Jede Polynomfunktion $f:\R\to \R, x\mapsto a_0+a_1x+\ldots+a_kx^k$ mit reellen Zahlen $a_0,a_1,\ldots, a_k$ ist auf ganz $\R$ stetig.
+\end{theorem}
+
+\begin{proof*}
+\begin{incremental}{0}
+\step
+Um dies zu sehen, verwenden wir das \ref[stetigkeit][Folgenkriterium]{sec:folgenkriterium} für Stetigkeit.
+
+Ist nämlich $x^*\in \R$ und $( x_n)_{n \geq 1}$ eine Folge, die gegen $x^*$ konvergiert, so gilt für die Funktionswerte:
+\begin{eqnarray*}
+ \lim_{n\to \infty} f(x_n) &=& \lim_{n\to \infty} (a_0+a_1x_n+\ldots+a_kx_n^k)
+=a_0+a_1 (\lim_{n\to \infty} x_n)+\ldots +a_k (\lim_{n\to \infty} x_n^k)\\ 
+&=&a_0+a_1 (\lim_{n\to \infty} x_n)+\ldots +a_k (\lim_{n\to \infty} x_n)^k= a_0+a_1x^*+\ldots+a_k(x^*)^k\\
+&=&f(x^*).
+\end{eqnarray*}
+Benutzt wurden hierbei die \ref[content_14_konvergenz][Grenzwertregeln]{sec:grenzwertregeln}.
+\end{incremental}
+\end{proof*}
+
+\begin{theorem}\label{thm:rationalstetig}
+Jede rationale Funktion $\frac{f}{g}$ mit Polynomfunktionen $f$ und $g$ ist stetig auf ihrem Definitionsbereich
+$D=\{ x\in \R | g(x)\neq 0 \}$. 
+\end{theorem}
+
+\begin{proof*}
+Mit der Stetigkeit der Polynomfunktionen erhält man dies direkt aus der \ref[stetigkeit][Regel zur Stetigkeit zusammengesetzter Funktionen]{rule:zusammengesetzte-funktionen}:
+\begin{incremental}{0}
+\step
+Die Polynomfunktionen $f$ und $g$ sind auf ganz $\R$ stetig, und daher ist ihr Quotient $\frac{f}{g}$ an
+allen Stellen $x^*$ stetig, an denen $g(x^*)\neq 0$ ist. Also auf dem kompletten Definitionsbereich.
+\end{incremental}
+\end{proof*}
+
+
+\section{Potenzreihen und Exponentialfunktion}\label{sec:potenzreihen}
+Die Exponentialfunktion ist ebenso stetig. Das wird über die Potenzreihe mit Konvergenzradius deutlich.
+\begin{theorem}\label{thm:ptenzreihen_stetig}
+Sei $x_0 \in \R$ und $\sum_{n = 0}^\infty  a_n ( x - x_0 )^n$ eine reelle \link{potenzreihen}{Potenzreihe} mit 
+\ref[potenzreihen][Konvergenzradius]{sec:konvergenzradius} $R > 0$. Dann ist die Funktion
+$f : U_R ( x_0 ) \to \R, x \mapsto \sum_{n = 0}^\infty  a_n ( x - x_0 )^n$
+stetig.
+Für $R=\infty$ ist hierbei $U_\infty ( x_0 )  = \R$ zu setzen.
+\end{theorem}
+
+\begin{proof*}
+Die Grenzwertregeln können nicht direkt wie bei den Polynomen angewandt werden, da es sich bei der
+Potenzreihe um eine unendliche Summe handelt.
+\begin{incremental}{0}
+\step
+Sei $x^*\in U_R ( x_0 )$, d.h. es gilt $|x^*-x_0|<R$. Wie schon beim Beweis zur absoluten Konvergenz
+der Potenzreihe wählen wir $r\in \R$ mit $|x^*-x_0|<r<R$ und zeigen zunächst, dass es ein $C\in \R$ gibt,
+so dass $|f(x_1)-f(x^*)|\leq C\cdot |x_1-x^*|$ für alle $x_1\in \R$ mit $|x_1-x_0|<r$:
+\step
+Nach der geometrischen Summenformel gilt für jedes $n\in \N$:
+\begin{eqnarray*}
+(x_1-x_0)^n -(x^*-x_0)^n &=& (x^*-x_0)^n\cdot \left( (\frac{x_1-x_0}{x^*-x_0})^n -1\right) \\
+&=& (x^*-x_0)^n\cdot  \left( \frac{x_1-x_0}{x^*-x_0} -1\right) \cdot 
+\sum_{k=0}^{n-1} (\frac{x_1-x_0}{x^*-x_0})^k \\
+&=& \big( (x_1-x_0)-(x^*-x_0) \big) \cdot \sum_{k=0}^{n-1} (x_1-x_0)^k (x^*-x_0)^{n-1-k} \\
+&=& (x_1-x^*)\cdot \sum_{k=0}^{n-1} (x_1-x_0)^k (x^*-x_0)^{n-1-k}.
+\end{eqnarray*}
+
+Daher gilt für jedes $N\in \N$:
+\begin{eqnarray*}
+| \sum_{n = 0}^N  a_n ( x_1 - x_0 )^n - \sum_{n = 0}^N  a_n ( x^* - x_0 )^n |
+&=& |\sum_{n = 1}^N  a_n \left( (x_1-x_0)^n -(x^*-x_0)^n\right) | \\
+&\leq & \sum_{n = 1}^N  {|a_n|} |(x_1-x_0)^n -(x^*-x_0)^n | \\
+&=& \sum_{n = 1}^N  {|a_n|} | (x_1-x^*)\cdot \sum_{k=0}^{n-1} (x_1-x_0)^k (x^*-x_0)^{n-1-k} |\\
+&\leq & |x_1-x^*| \cdot \sum_{n = 1}^N   {|a_n|} \sum_{k=0}^{n-1} |x_1-x_0|^k |x^*-x_0|^{n-1-k} \\
+&\leq & |x_1-x^*| \cdot \sum_{n = 1}^N   {|a_n|} \sum_{k=0}^{n-1} r^{n-1}\\
+&=&  |x_1-x^*| \cdot \frac{1}{r}\cdot \sum_{n = 1}^N  {|a_n|}nr^n.
+\end{eqnarray*}
+\step
+Nach dem \ref[potenzreihen][Abelschen Lemma]{thm:abelsches-lemma} konvergiert die
+Reihe $\sum_{n = 1}^\infty  {|a_n|}nr^n$ absolut, da die Folge $(|a_n|s^n)$ für beliebiges $s$ mit $r<s<R$ beschränkt ist.\\
+Setzen wir $C= \frac{1}{r}\cdot \sum_{n = 1}^\infty  {|a_n|}nr^n$, so erhalten wir aus obiger Rechnung
+\[ | \sum_{n = 0}^N  a_n ( x_1 - x_0 )^n - \sum_{n = 0}^N  a_n ( x^* - x_0 )^n | \leq C\cdot  {|x_1-x^*|}, \]
+und damit auch für den Grenzwert
+\begin{eqnarray*}
+ |f(x_1)-f(x^*)| &=&  |  \lim_{n\to \infty}  \sum_{n = 0}^N  a_n ( x_1 - x_0 )^n -  \lim_{n\to \infty} \sum_{n = 0}^N  a_n ( x^* - x_0 )^n |  \\
+&=& \lim_{n\to \infty} |  \sum_{n = 0}^N  a_n ( x_1 - x_0 )^n - \sum_{n = 0}^N  a_n ( x^* - x_0 )^n | \leq C \cdot  {|x_1-x^*|}
+\end{eqnarray*}
+für alle $x_1\in \R$ mit $|x_1-x_0|<r$.
+
+Ist nun $( x_n)_{n \geq 1}$ eine beliebige Folge, die gegen $x^*$ konvergiert, so gibt es ein $N\in \N$ mit 
+$|x_n-x^*|< r- |x^* - x_0|$ für alle $n\geq N$ und insbesondere mit 
+$|x_n-x_0|<r$ für alle $n\geq N$.
+
+Daher gilt:
+\[  \lim_{n\to \infty} |f(x_n)-f(x^*)| \leq  \lim_{n\to \infty} C\cdot  |x_n-x^*| =0, \]
+also
+\[  \lim_{n\to \infty} f(x_n) =f(x^*). \]
+Die Funktion $f$ ist somit in $x^*$ stetig.
+\end{incremental}
+\end{proof*}
+
+Im Abschnitt \link{exp}{Exponentialreihe} hatten wir die (komplexe) Exponentialfunktion $\exp$ definiert als die Funktion
+\[ \exp:\C\to \C, z \mapsto \sum_{n=0}^\infty \frac{z^n}{n!}. \]
+Durch Einschränkung auf reelle Werte erhalten wir die reelle Exponentialreihe
+\[ \exp:\R\to \R, x \mapsto \sum_{n=0}^\infty \frac{x^n}{n!} \]
+mit Wertemenge $\R_+^*=\{ x\in \R | x>0\}$.
+
+Nach dem Satz über die Stetigkeit von Potenzreihen gilt also:
+\begin{theorem}
+Die Exponentialfunktion $\exp$ ist auf ganz $\R$ stetig.
+\end{theorem}
+
+\begin{remark}
+Für rationale Zahlen $x=\frac{p}{q}\in \Q$ ist 
+\[ \exp(x)=\exp(\frac{p}{q})=e^x=e^{\frac{p}{q}}=\sqrt[q]{e^p} \]
+(vgl. Abschnitt \link{exp}{Exponentialreihe}), weshalb man auch für reelle Zahlen $x$ oft
+$e^x$ statt $\exp(x)$ schreibt.
+
+Die in der Schule übliche \link{exponentialfunktion}{intuitive Einführung} von $e^x$ bedeutet nichts anderes, als dass man für reelle Zahlen $x$, den Wert $e^x$ definiert als
+\[ e^x= \lim_{n\to \infty} e^{x_n} \]
+für eine beliebige Folge $(x_n)_{n\geq 1}$ von rationalen Zahlen, die gegen $x$ konvergiert.
+
+Damit diese Definition überhaupt sinnvoll ist, ist natürlich zu klären, dass der Grenzwert nicht von der gewählten Folge abhängt. Dies impliziert insbesondere zu zeigen, dass die $e$-Funktion als Funktion auf den rationalen Zahlen stetig ist, d.h. dass $\Q\to \R, x\mapsto e^x$ stetig ist.
+
+Darauf soll hier aber nicht näher eingegangen werden.
+\end{remark}
+
+\begin{quickcheck}
+    \field{real}
+        \type{input.function}
+            \begin{variables}
+                \function{a}{ln(2)}
+                \drawFromSet{b}{3,4,5,6}
+                \function[calculate]{bb}{b+b}
+            \end{variables}
+            \text{Berechnen Sie eine reelle Zahl a so, dass folgende Funktion für $x\in \R$
+                  stetig ist:\\
+                  \[f(x)=\begin{cases}
+                  \var{b}e^{ax}& \text{für } x<1\\
+                  \var{b}(x^2+1)& \text{für }x\geq 1
+                  
+                  \end{cases}\]
+                  Antwort:\quad $a=$\ansref}
+            \begin{answer}
+                \solution{a}
+                \end{answer}
+            \explanation{Die beiden Teilfunktionen sind auf $\R$ stetig, d.h. es muss lediglich die
+            Anschlussstelle $x=1$ untersucht werden: $f(1)=\var{bb}$, also muss gelten:\\
+            $\var{b}e^{a\cdot 1}=\var{bb} \iff e^a=2$ und somit $a=\ln(2)$.}
+
+\end{quickcheck}
+
+
+
+\section{Wurzelfunktionen und Logarithmusfunktion}\label{sec:wurzel-und-ln}
+
+Die $n$-te \ref[reelle-funktionen][Wurzelfunktion]{ex:n-te-wurzel} 
+$g:\R_+\to \R_+, x\mapsto \sqrt[n]{x}$ ist die Umkehrfunktion zur (eingeschränkten) $n$-ten Potenzfunktion $f:\R_+\to \R_+,x\mapsto x^n$.
+
+Ebenso ist die Logarithmusfunktion $\ln:\R_+^*\to \R$ die Umkehrfunktion zur Exponentialfunktion.
+
+Die Stetigkeit dieser beiden Funktionen folgt aus dem folgenden allgemeineren Satz über die Stetigkeit von Umkehrfunktionen streng monotoner Funktionen.
+
+\begin{theorem}[Stetigkeit der Umkehrfunktion]\label{thm:inverse-stetig}
+Sei $I \subseteq \R$ ein (evtl. unendliches) Intervall und $f : I \to \R$ eine streng monotone, stetige Funktion mit Wertemenge $W$. Dann ist die Umkehrfunktion $f^{-1}: W \to I$
+ebenfalls stetig.
+\end{theorem}
+
+\begin{proof*}
+%Wir betrachten den Fall, dass $f$ streng monoton wachsend ist. Der Fall einer streng monoton fallenden Funktion wird ganz ähnlich gezeigt.
+%
+Da $f$ stetig ist, ist nach dem % \link{zwischenwertsatz}{Zwischenwertsatz} 
+\ref[zwischenwertsatz][Zwischenwertsatz]{thm:zwischenwertsatz}
+das Bild des Intervalls $I$ ein Intervall, d.h. $W$ ist ein Intervall.
+\begin{incremental}{0}
+\step
+Da der Zwischenwertsatz erst in einem späteren Kapitel 
+behandelt wird, sei hier der Anschaulichkeit halber mit einem Gegenbeispiel gearbeitet: die folgende Abbildung
+zeigt eine \emph{unstetige} Funktion, deren Wertebereich des Intervalls $I=[1;3]$ eben kein Intervall ist,
+da die Funktionswerte $y\in [0;1)$ fehlen.
+
+\begin{center}
+\image{T210_Discontinuity}
+\end{center}
+
+Wegen der Monotonie von $f$ ist $x\in I$ genau dann ein Randpunkt von $I$, wenn $f(x)$ ein Randpunkt von $W$ ist.
+\step
+Sei nun zunächst $y^*\in W$ kein Randpunkt, sowie  $\epsilon>0$ beliebig.
+$x^*=f^{-1}(y^*)$ ist dann kein Randpunkt von $I$ und damit ist $x^*$ auch innerer Punkt
+des Intervalls $U_{\epsilon}(x^*)\cap I$. Wegen der Stetigkeit und Monotonie von $f$ ist dann $y^*=f(x^*)$ auch innerer Punkt des Bildes $J=f(U_{\epsilon}(x^*)\cap I)$.
+Es gibt daher ein $\delta>0$ mit $U_\delta(y^*)\subseteq J$. Damit gilt für alle $y\in U_\delta(y^*)$:
+\[  f^{-1}(y)\in f^{-1}(J)\subseteq \left( U_{\epsilon}(x^*)\cap I\right) \subseteq U_\epsilon(x^*)=U_\epsilon(f^{-1}(y^*)).\]
+Also ist $f^{-1}$ in $y^*$ stetig.
+
+Ist $y^*\in W$ ein unterer Randpunkt (d.h. $y\geq y^*$ für alle $y\in W$), so ändert sich lediglich, dass es ein $\delta>0$ gibt mit
+$[y^*; y^*+\delta)\subseteq J$. Da jedoch in diesem Fall $[y^*; y^*+\delta)=U_\delta(y^*)\cap W$ ist, folgt ebenfalls
+\[  f^{-1}(y) \in U_\epsilon(x^*)\quad \text{für alle }y \in U_\delta(y^*)\cap W. \]
+Daher ist $f^{-1}$ auch am unteren Randpunkt stetig.
+
+Ganz entsprechend folgt die Stetigkeit am oberen Randpunkt von $W$.
+\end{incremental}
+\end{proof*}
+
+
+\section{Kompositionen stetiger Funktionen}\label{sec:kompositionen}
+
+In der Schule hat man auch kompliziertere Funktionsvorschriften wie $h(x)=\exp(\cos(x))$ kennengelernt. 
+Dass auch diese auf ihrem Definitionsbereich stetige Funktionen beschreiben,
+ergibt sich aus dem Satz über die Komposition (Verkettung) stetiger Funktionen.
+
+
+\begin{theorem}[Komposition stetiger Funktionen]\label{thm:komposition_stetiger_fkt}
+Seien $f:D_f\to \R$ und $g:D_g\to \R$ reelle Funktionen mit $f(D_f)\subseteq D_g$. Weiter sei
+$f$ stetig an einer Stelle $x^*$ und $g$ stetig an der Stelle $y^*=f(x^*)$.
+
+Dann ist die Komposition $g\circ f:D_f\to \R$ stetig an der Stelle $x^*$.
+
+Sind $f$ und $g$ stetig auf ihrem ganzen Definitionsbereich, so ist auch $g\circ f$ auf dem ganzen Definitionsbereich $D_f$ stetig.
+\end{theorem}
+
+\begin{proof*}
+Dies zeigen wir mit dem Folgenkriterium für Stetigkeit:
+\begin{incremental}{0}
+\step
+Sei $( x_n)_{n \geq 1}$ eine beliebige Folge in $D_f$, die gegen $x^*$ konvergiert, und
+$y_n=f(x_n)$ für alle $n\in \N$.
+Wegen der Stetigkeit von $f$ bei $x^*$ folgt: 
+\[ \lim_{n\to \infty} y_n=\lim_{n\to \infty} f(x_n)=f(x^*)=y^*.\]
+Wegen der Stetigkeit von $g$ bei $y^*$ folgt weiter:
+\[ \lim_{n\to \infty} g(y_n)= g(y^*). \]
+Damit gilt:
+\[ \lim_{n\to \infty} (g\circ f)(x_n)=  \lim_{n\to \infty} g(y_n)=g(y^*)=g(f(x^*))=(g\circ f)(x^*).\]
+Also ist $g\circ f$ bei $x^*$ stetig.
+\end{incremental}
+\end{proof*}
+
+\begin{example}
+Die Funktion $h:\R\to \R, x\mapsto \exp(\cos(x))$ ist stetig.\\
+Wählt man nämlich $g:\R\to \R,x\mapsto \exp(x)$ und $f:\R\to \R, x\mapsto \cos(x)$, so ist $h$ genau die Komposition $h=g\circ f$, denn
+\[  (g\circ f)(x)=g(f(x))=g(\cos(x))=\exp(\cos(x))=h(x) \]
+für alle $x\in \R$.
+\end{example}
+
+
+\end{content}

@@ -1,0 +1,37 @@
+%This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)
+%https://creativecommons.org/licenses/by/4.0/legalcode
+\documentclass[rgb]{standalone}
+\usepackage{tkz-euclide}
+\usepackage{amsmath}
+\definecolor{myorange}{hsb}{0.0833, 1, 0.8}
+\definecolor{mygreen}{hsb}{0.3333, 1, 0.8}
+\definecolor{myblue}{hsb}{0.5833, 1, 0.8}
+\definecolor{mymagenta}{hsb}{0.8333, 1, 0.8}
+\usetikzlibrary{patterns}
+\begin{document}
+	\begin{tikzpicture}[scale=1.5, font=\Large]
+		% Coordinate system
+		\tkzInit[xmin=-8,xmax=2,ymin=-2,ymax=5,xstep=1,ystep=1]
+		\tkzGrid[color=lightgray]
+		\draw[dashed] (-6,3) -- (-2,3);
+		\draw[dashed] (-4,4) -- (-4,0);
+        \draw[fill,domain=-6:0, smooth, variable=\x, myblue] (-6,-2) -- plot ({\x}, {-1+1/6*cos(360*\x)}) -- (0,-2);
+		\draw[draw=none,fill,pattern=north east lines] (-8,3) -- (-6,3) -- (-6, -2) -- (-8, -2);
+		\draw[draw=none,fill,pattern=north east lines] (2,0) -- (0,0) -- (0, -2) -- (2, -2);
+        \draw[ultra thick] (-8,3) -- (-6,3) -- (-6, -2);
+        \draw[ultra thick] (2,0) -- (0,0) -- (0, -2);
+        \draw[very thick,domain=-6:0, smooth, variable=\x, myorange] plot ({\x}, {-1/4*\x*\x-2*\x});
+        \node[myorange, very thick, draw, circle,fill,inner sep=2] at (0,0) {};
+        \node[myorange, very thick, draw, circle,fill,inner sep=2] at (-6,3) {};
+        \node[myorange, very thick, draw, circle,fill,inner sep=2] at (-2,3) {};
+        \draw[very thick, densely dashed, latex-latex] (-6,0) -- (0,0);
+	    \draw[very thick, densely dashed, latex-latex] (-6,1.5) -- (-4,1.5);
+	    \draw[very thick, densely dashed, latex-latex] (-2,0) -- (-2,3);
+		\node[above left, myorange] at (-6,3){$P_1$};
+        \node[above right, myorange] at (0,0){$P_3$};
+        \node[above right, myorange] at (-2,3){$P_2$};
+        \node[below=0.5mm] at (-3,0){$30\,\text{m}$};
+        \node[below=0.5mm] at (-5,1.5){$10\,\text{m}$};
+        \node[left=0.5mm] at (-2,1.5){$15\,\text{m}$};
+	\end{tikzpicture}	
+\end{document}

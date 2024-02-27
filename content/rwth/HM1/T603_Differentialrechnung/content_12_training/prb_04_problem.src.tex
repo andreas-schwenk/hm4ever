@@ -1,0 +1,174 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A04: Extremstellen II}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A03: Extremstellen II}}
+\lang{en}{\title{A03: Extreme points II}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24071}{Ticket 24071}
+\end{block}
+
+
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+
+
+
+\begin{block}[annotation]
+Kopie: hm4mint/T106_Differentialrechnung/training 12  
+
+Im Ticket-System: \href{http://team.mumie.net/issues/9477}{Ticket 9477}
+\end{block}
+
+
+\begin{problem}
+
+\begin{variables}
+	\randint[Z]{s}{-1}{1}
+	\randint[Z]{t}{-1}{1}
+    \randint{a}{2}{6}
+	\randint{p}{1}{10}
+	\randint{c}{1}{10}
+	\randint{n}{2}{6}
+	\randint{q}{1}{10}
+	\function[calculate]{g}{s*a} 
+	\function[calculate]{b}{p*a}
+	\function[calculate]{l}{t*n}
+	\function[calculate]{m}{q*n}
+	\function[calculate]{erg}{-1-s*p}
+	\function[calculate]{ergzwei}{-t*q/2}
+	\function{f}{(g*x+b)*e^x} 
+	\function{h}{-e^(l*x^2+m*x+c)}
+\end{variables}
+
+%Frage 1 von 4
+\begin{question}
+	\lang{de}{
+		\text{Gegeben ist die Funktion $f(x)=\var{f}$. Wo hat $f$ eine station\"{a}re Stelle?}
+	    \explanation{Für die Berechnung müssen wir die Nullstellen der ersten Ableitung von $f$ berechnen. Da die vorgegebene Funktion sogar beliebig oft differnzierbar ist, 
+         kann dafür die Produktregel verwendet werden. Setzen wir hier $f'(x) = 0$ und lösen nach $x$ auf, so erhalten wir die stationären Stellen.}
+	}
+	\lang{en}{
+		\text{Let $f(x)=\var{f}$. Where does $f$ have a stationary point?}
+    \explanation{We need to find the zeros of the first derivative of $f$. Since $f$ is differentiable infinitely often,
+    we can use the product rule. By setting $f'(x)=0$ and solving for $x$, we find the stationary points.}
+	}
+	\type{input.number}
+	\begin{answer}
+		\lang{de}{\text{ Die station\"{a}re Stelle von $f$ ist $x_0=$}}
+   		\lang{en}{\text{The stationary point of $f$ is at $x_0=$}}
+		\solution{erg}
+	\end{answer}		
+\end{question}
+	 
+%Frage 2 von 4	 
+\begin{question}
+	 \lang{de}{
+		\text{Liegt in der stationären Stelle $x_0$ von $f$ ein Extremum vor? Falls ja, welcher Art ist es?}
+		\explanation{Um zu überprüfen, ob ein Extremum vorliegt, bilden wir die zweite Ableitung von $f$. 
+        Anschließend ermitteln wir, ob diese ausgewertet in den stationären Punkten negativ oder positiv ist. Gilt $f''(x_0) >0$, so liegt eine Minimalstelle vor. Ist hingegen $f''(x_0) <0$, so 
+        haben wir eine Maximalstelle gefunden.}
+	}
+	\lang{en}{
+		\text{Is there an extremum at the stationary point $x_0$ of $f$? If so, what type of extremum is it?}
+	}
+	\type{mc.unique}
+	\begin{choice}
+    	\lang{de}{\text{In $x_0$ liegt kein Extremum vor.}}
+		\lang{en}{\text{There is no extremum at $x_0$.}}
+  		\solution{false}
+	\end{choice}
+	\begin{choice}
+   		\lang{de}{\text{In $x_0$ liegt ein lokales Minimum vor.}}
+   		\lang{en}{\text{There is a local minimum at $x_0$.}}	
+   		\solution{compute}
+ 		\iscorrect{s}{=}{1}
+ 	\end{choice}
+ 	\begin{choice}
+ 		\lang{de}{\text{In $x_0$ liegt ein lokales Maximum vor.}}
+   		\lang{en}{\text{There is a local maximum at $x_0$.}}	
+   		\solution{compute}
+ 		\iscorrect{s}{=}{-1}
+ 	\end{choice}
+\end{question}
+
+%Frage 3 von 4
+\begin{question}
+	\lang{de}{
+		\text{Gegeben ist die Funktion $h(x)=\var{h}$. Wo hat $h$ eine station\"{a}re Stelle?}
+		 \explanation{Für die Berechnung müssen wir die Nullstellen der ersten Ableitung von $f$ berechnen. Da die vorgegebene Funktion sogar beliebig oft differnzierbar ist, 
+         kann dafür die Produktregel verwendet werden. Setzen wir hier $f'(x) = 0$ und lösen nach $x$ auf, so erhalten wir die stationären Stellen.}
+	}
+	\lang{en}{
+		\text{Let $h(x)=\var{h}$. Where does $h$ have a stationary point?}
+	}
+	\type{input.number}
+	\begin{answer}
+		\lang{de}{\text{ Die station\"{a}re Stelle von $h$ ist $x_0=$}}
+   		\lang{en}{\text{The stationary point of $h$ is $x_0=$}}
+		\solution{ergzwei}
+	\end{answer}
+\end{question}
+	 
+%Frage 4 von 4
+\begin{question}
+	\lang{de}{
+		\text{Liegt in der stationären Stelle $x_0$ von $h$ ein Extremum vor? Falls ja, welcher Art ist es?}
+		\explanation{Um zu überprüfen, ob ein Extremum vorliegt, bilden wir die zweite Ableitung von $f$. 
+        Anschließend ermitteln wir, ob diese ausgewertet in den stationären Punkten negativ oder positiv ist. Gilt $f''(x_0) >0$, so liegt eine Minimalstelle vor. Ist hingegen $f''(x_0) <0$, so 
+        haben wir eine Maximalstelle gefunden.}
+	}
+	\lang{en}{
+		\text{Is there an extremum at the stationary point $x_0$ of $h$? If so, what type of extremum is it?}
+  	\explanation{To test whether there is an extremum, we take the second derivative of $f$.
+     Then we determine whether it is negative or positive when evaluated in the stationary point. If $f''(x_0) > 0$, then we have a minimum.
+     On the other hand, if $f''(x_0) < 0$, then we have found a maximum.
+ }
+ }
+    \type{mc.unique}
+	\begin{choice}
+    	\lang{de}{\text{In $x_0$ liegt kein Extremum vor.}}
+		\lang{en}{\text{There is no extremum at $x_0$.}} 
+  		\solution{false}
+	\end{choice}
+	\begin{choice}
+   		\lang{de}{\text{In $x_0$ liegt ein lokales Minimum vor.}}
+   		\lang{en}{\text{There is a local minimum at $x_0$.}}	
+   		\solution{compute}
+ 		\iscorrect{t}{=}{-1}
+ 	\end{choice}
+ 	\begin{choice}
+ 		\lang{de}{\text{In $x_0$ liegt ein lokales Maximum vor.}}
+   		\lang{en}{\text{There is a local maximum at $x_0$.}}	
+   		\solution{compute}
+ 		\iscorrect{t}{=}{+1}
+ 	\end{choice}
+\end{question}
+
+\end{problem}
+
+
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

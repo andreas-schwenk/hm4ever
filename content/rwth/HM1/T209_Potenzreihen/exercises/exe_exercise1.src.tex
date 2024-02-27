@@ -1,0 +1,136 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü01: Konvergenzradius}
+    \lang{en}{Exercise X}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_14_konvergenz.meta.xml}{content_14_konvergenz}
+\link{generic_article}{content/rwth/HM1/T209_Potenzreihen/g_art_content_27_konvergenzradius.meta.xml}{content_27_konvergenzradius}
+\end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+
+\title{
+  \lang{de}{Ü01: Konvergenzradius}
+}
+
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9919}{Ticket 9919}
+\end{block}
+
+
+
+\lang{de}{ Bestimmen Sie für die folgenden Potenzreihen jeweils den Konvergenzradius.
+\begin{enumerate}[a)]
+\item a) \ $\sum_{k=1}^\infty\frac{k^3\cdot i}{2^k}z^k$
+\item b) \ $\sum_{k=0}^{\infty}{\frac{1+2^{k}}{3^{k}}z^{k}}$
+\item c) \ $\sum_{k=0}^\infty(\sqrt{2k^2+5k+3})z^k$
+\item d) \ $\sum_{k=1}^\infty\frac{k^5}{7^{2k}}z^k$
+\end{enumerate} }
+
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+\tab{\lang{de}{    Antworten    }}
+    \lang{de}{ \begin{enumerate}[a)]
+\item[a)] $ \ R = 2$.
+\item[b)] $ \ R = \frac{3}{2}$.
+\item[c)] $ \ R = 1$.
+\item[d)] $ \ R = 49$.
+\end{enumerate} }
+
+
+
+  \tab{\lang{de}{    Lösung a)    }}
+  %#################################
+  
+  
+  \begin{incremental}[\initialsteps{1}]
+  
+  
+    \step 
+    \lang{de}{Wir definieren $a_k:=\frac{k^3\cdot i}{2^k}$. 
+    Wir wollen die \ref[content_27_konvergenzradius][Formel von Cauchy-Hadamard]{thm:Cauchy-Hadamard} anwenden. Es gilt
+\[\sqrt[k]{|a_k|}=\sqrt[k]{\frac{k^3}{2^k}}\sqrt[k]{|i|}=\sqrt[k]{\frac{k^3}{2^k}}\cdot 1=\frac{\sqrt[k]{k}^3}{2}\xrightarrow{k\rightarrow\infty}\frac{1}{2}.\]
+Damit ist der Konvergenzradius gleich $\frac{1}{\frac{1}{2}}=2$ und $\sum_{k=1}^\infty\frac{k^3\cdot i}{2^k}z^k$ ist (absolut) konvergent für $|z|<2$ und divergent für $|z|>2$.    }
+     %#########################
+     
+  
+  \end{incremental}
+  
+  \tab{\lang{de}{    Lösung b)    }}
+  %#################################
+  
+  
+  \begin{incremental}[\initialsteps{1}]
+  
+  
+    \step 
+    \lang{de}{Wir definieren $a_k:=\frac{1+2^k}{3^k}$. Es ist $a_k \neq 0$ für alle $k\in \N$. 
+    Damit dürfen wir die \ref[content_27_konvergenzradius][Quotientenregel]{thm:quot-regel} anwenden und rechnen
+\begin{align*}\left| \frac{a_{k+1}}{a_k} \right| &= \frac{\frac{1+2^{k+1}}{3^{k+1}}}{\frac{1+2^{k}}{3^{k}}} =\frac{1+2^{k+1}}{1+2^k}\cdot\frac{3^k}{3^{k+1}}\\&=\frac{\frac{1}{2^k}+2}{\frac{1}{2^k}+1}\cdot\frac{1}{3}=\frac{(\frac{1}{2})^k+2}{(\frac{1}{2})^k+1}\cdot\frac{1}{3}\xrightarrow{k\to\infty}\frac{0+2}{0+1}\cdot\frac{1}{3}=\frac{2}{3}
+\end{align*}
+nach den \ref[content_14_konvergenz][Grenzwertregeln]{sec:grenzwertregeln}. Also hat die Reihe den Konvergenzradius $\frac{3}{2}$.}
+\step 
+    \lang{de}{
+\textbf{Alternativ mit \ref[content_27_konvergenzradius][Cauchy-Hadamard]{thm:Cauchy-Hadamard}:} Wir definieren für jedes $k\in\N$ das Folgenglied $a_{k}:=\frac{1+2^{k}}{3^{k}}$. Dann gilt
+\[\frac{2}{3}=\sqrt[k]{\left(\frac{2}{3}\right)^{k}}\leq\sqrt[k]{|a_{k}|}=\sqrt[k]{\frac{1+2^{k}}{3^{k}}}\leq \sqrt[k]{\frac{2^{k}+2^{k}}{3^{k}}}=\sqrt[k]{2}\cdot\sqrt[k]{\frac{2^{k}}{3^{k}}}=\sqrt[k]{2}\cdot\frac{2}{3}\xrightarrow{k\to\infty}\frac{2}{3}\text{.}\]
+Das impliziert $\lim_{k\to\infty}{\sqrt[k]{|a_{k}|}}=\frac{2}{3}$. Also besitzt die Reihe den Konvergenzradius
+\[R=\frac{1}{\lim_{n\to\infty}{\sqrt[k]{|a_{k}|}}}=\frac{1}{\frac{2}{3}}=\frac{3}{2}\text{.}\]
+Das heißt, dass die Reihe für alle $z\in\C$ mit $\vert z\vert<\frac{3}{2}$ (absolut) konvergent ist und für alle $z\in\C$ mit $\vert z\vert>\frac{3}{2}$ divergent ist.}
+     %#########################
+     
+  
+  \end{incremental}
+  
+    \tab{\lang{de}{    Lösung c)    }}
+  %#################################
+  
+  
+  \begin{incremental}[\initialsteps{1}]
+  
+  
+    \step 
+    \lang{de}{Wir definieren $a_k:= \sqrt{2k^2+5k+3}$. Es ist $a_k \neq 0$ für alle $k \geq 0$. 
+    Wir wollen die \ref[content_27_konvergenzradius][Quotientenregel]{thm:quot-regel} anwenden und erhalten
+\begin{align*}\vert \frac{a_{k+1}}{a_k}\vert =  \vert\frac{\sqrt{2(k+1)^2+5(k+1)+3}}{\sqrt{2k^2+5k+3}}\vert&=\sqrt{\frac{2k^2+4k+2+5k+5+3}{2k^2+5k+3}}\\
+&=\sqrt{\frac{2k^2+9k+10}{2k^2+5k+3}}=\sqrt{\frac{1+\frac{9}{2k}+\frac{5}{k^2}}{1+\frac{5}{2k}+\frac{3}{2k^2}}}\text{.}
+\end{align*}
+Nach den Grenzwertregeln sowie der Vertauschbarkeit von Wurzel und Grenzwert (siehe Abschnitt \ref[content_14_konvergenz][Konvergenz von Folgen]{}) konvergiert die Reihe für $k\to\infty$ gegen $\sqrt{\frac{1+0+0}{1+0+0}}=1$. Damit hat die Reihe den Konvergenzradius $1$.
+}
+     %#########################
+     
+  
+  \end{incremental}
+      \tab{\lang{de}{    Lösung d)    }}
+  %#################################
+  
+  
+  \begin{incremental}[\initialsteps{1}]
+  
+  
+    \step 
+    \lang{de}{Wir definieren $a_k:=\frac{k^5}{7^{2k}}$ und wollen die \ref[content_27_konvergenzradius][Formel von Cauchy-Hadamard]{thm:Cauchy-Hadamard} anwenden. Es gilt zunächst
+\[\sqrt[k]{|a_k|}=\sqrt[k]{\frac{k^5}{7^{2k}}}=\frac{\sqrt[k]{k}^5}{7^2}.\]
+Es gilt $\sqrt[k]{k} \to 1$ für $k\to\infty$. Nach den \ref[content_14_konvergenz][Grenzwertregeln]{sec:grenzwertregeln} erhalten wir somit als Grenzwert \[\lim_{k\to \infty} \sqrt[k]{|a_k|} = \frac{1^5}{7^2}=\frac{1}{49}.\]
+Damit ist der Konvergenzradius gleich $49$ und $\sum_{k=1}^\infty\frac{k^5}{7^{2k}}z^k$ ist (absolut) konvergent für $|z|<49$ und divergent für $|z|>49$.}
+     %#########################
+     
+  
+  \end{incremental}
+
+\end{tabs*}
+\end{content}

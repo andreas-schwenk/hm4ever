@@ -1,0 +1,157 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A06: Matrixgleichung}
+    \lang{en}{P06: Matrix equation}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Rechnen mit Matrizen}
+    \lang{en}{Calculating with matrices}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A06: Matrixgleichung}}
+\lang{en}{\title{P06: Matrix equation}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/11522}{Ticket 11522}
+\end{block}
+
+\begin{problem}
+	%\randomquestionpool{}{}
+	\begin{question}
+		
+		\begin{variables}
+		\begin{pool}
+		\begin{variables}
+			\number{s1}{1}
+			\number{s2}{0}
+			\number{s3}{1}
+			\number{s4}{0}
+			\string{t1}{$A\cdot A^T$}
+			\string{t2}{$B^T-A$}
+			\string{t3}{$B\cdot A$}
+			\string{t4}{$A\cdot B+A^T\cdot B^T$}
+		\end{variables}
+		\begin{variables}
+			\number{s1}{1}
+			\number{s2}{1}
+			\number{s3}{1}
+			\number{s4}{1}
+			\string{t1}{$A\cdot A^T$}
+			\string{t2}{$A-B^T$}
+			\string{t3}{$B\cdot A$}
+			\string{t4}{$B\cdot A+B^T\cdot A^T$}
+		\end{variables}
+		\begin{variables}
+			\number{s1}{0}
+			\number{s2}{1}
+			\number{s3}{0}
+			\number{s4}{1}
+			\string{t1}{$A^T\cdot A$}
+			\string{t2}{$A-B^T$}
+			\string{t3}{$A\cdot B$}
+			\string{t4}{$B^T\cdot A^T+B\cdot A$}
+		\end{variables}
+		\begin{variables}
+			\number{s1}{0}
+			\number{s2}{0}
+			\number{s3}{1}
+			\number{s4}{0}
+			\string{t1}{$A^T\cdot A$}
+			\string{t2}{$B^T-A$}
+			\string{t3}{$B\cdot A$}
+			\string{t4}{$A^T\cdot B^T+A\cdot B$}
+		\end{variables}
+		\end{pool}
+		\end{variables}
+		
+		\type{input.generic}
+        \field{real}
+		\correctorprecision{3}
+		\displayprecision{3}
+		\lang{de}{
+	    \text{Seien $A,B$ beliebige Matrizen, für die die linken Seiten der folgenden Gleichungen definiert sind. Welche dieser Gleichungen sind dann korrekt?}
+	    }
+     \lang{en}{
+	    \text{Let $A,B$ be any matrices, which fulfill the left side of the following equations. Which of the equations are correct then?
+	    }}
+	    %\permuteAnswers{1, 2, 3} 
+	    %http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+	    \begin{answer}
+            \type{mc.multiple}
+            \permutechoices{1}{3}
+	    	\begin{choice}
+	    	\text{$(A\cdot A^T)^T=$ \var{t1}}
+	    	\solution{compute}
+	    	\iscorrect{s1}{=}{1}
+	    	\end{choice}
+	    	\begin{choice}
+	    	\text{$(A^T- B)^T=$ \var{t2} }
+	    	\solution{compute}
+	    	\iscorrect{s2}{=}{1}
+	    	\end{choice}
+	    	\begin{choice}
+	    	\text{$(A^T\cdot B^T)^T=$ \var{t3}}
+	    	\solution{compute}
+	    	\iscorrect{s3}{=}{1}
+	    	\end{choice}
+	    	\begin{choice}
+	    	\text{$(A\cdot B+ A^T\cdot  B^T)^T=$\var{t4}}
+	    	\solution{compute}
+	    	\iscorrect{s4}{=}{1}
+	    	\end{choice}
+	      \lang{de}{
+            \explanation{ 
+                Zunächst löst man die Klammern auf der linken Seite auf, 
+                indem man die Rechenregeln für transponierte Matrizen anwendet. 
+                ~\\
+                $(A \cdot A^T)^T = ( (A^T)^T \cdot A^T ) = A \cdot A^T$
+                ~\\
+                $(A^T-B)^T = (A^T)^T - B^T = A - B^T$
+                ~\\
+                $(A^T \cdot B^T)^T = (B^T)^T \cdot (A^T)^T = B \cdot A$
+                ~\\
+                $(A \cdot B + A^T \cdot B^T)^T = (A \cdot B)^T + (A^T \cdot B^T)^T = B^T \cdot A^T + (B^T)^T \cdot (A^T)^T = B^T \cdot A^T + B \cdot A$
+                ~\\
+                Nun vergleicht man die Terme auf beiden Seiten.
+            }}
+          \lang{en}{
+            \explanation{ 
+                After dissolving the brackets, the calculating rules for transposes can be applied:
+                ~\\
+                $(A \cdot A^T)^T = ( (A^T)^T \cdot A^T ) = A \cdot A^T$
+                ~\\
+                $(A^T-B)^T = (A^T)^T - B^T = A - B^T$
+                ~\\
+                $(A^T \cdot B^T)^T = (B^T)^T \cdot (A^T)^T = B \cdot A$
+                ~\\
+                $(A \cdot B + A^T \cdot B^T)^T = (A \cdot B)^T + (A^T \cdot B^T)^T = B^T \cdot A^T + (B^T)^T \cdot (A^T)^T = B^T \cdot A^T + B \cdot A$
+                ~\\
+                Now, both sides of each equation can be compared.
+            }}
+        
+        \end{answer}    
+
+        
+	    %generic viz: http://team.mumie.net/projects/support/wiki/Example
+	    
+	\end{question}
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

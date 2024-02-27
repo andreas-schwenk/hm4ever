@@ -1,0 +1,222 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{}
+    \lang{de}{Linearkombination grafisch berechnen}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+  \begin{taxonomy}
+        \difficulty{2}
+        \usage{FH Aachen, Mathematische Grundlagen}
+        \objectives{apply,remember,understand}
+        \topic{linear_algebra/vector_space_linear_maps/vector_space_and_the_Kn/vector_space/vs_def_basic}
+  \end{taxonomy}
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/32490}{Ticket 32490}
+\end{block}
+\begin{block}[annotation]
+Copy of : /home/mumie/checkin/content/playground/HM4mint-Testaufgaben/T108_Vektorrechnung/prb_jsx_VecLinKombin.src.tex
+\end{block}
+
+
+\begin{block}[annotation]
+(B. Guyet)\\
+Weiterentwicklung auf Basis von:\\
+/home/mumie/checkin/content/playground/Andreas_Maurischat/grafischeAufgaben/prb_Vektor_A12.2.src.tex
+\\
+/home/mumie/checkin/content/pool/fh_aachen/MGI/Vektorrechnung_Grundlagen/prb_Vektor_A12.2.src.tex
+\end{block}
+
+\begin{block}[annotation]
+Grafische Bestimmung eines Vektors, der als Linearkombination zweier Vektoren dargestellt ist
+\end{block}
+
+
+\lang{de}{
+	\title{Linearkombination grafisch berechnen}
+}
+
+ Allgemeiner Hinweis: Die Parallelverschiebung eines Vektors, ohne seine Länge oder Richtung zu ändern,
+ erfolgt durch Ansetzen des Mauszeigers direkt am Pfeil. 
+\\
+
+\usepackage{mumie.genericproblem}
+
+\begin{visualizationwrapper}
+
+
+\begin{genericJSXVisualization}
+	\begin{variables}
+        \question{1}{a}{rational}
+        \question{1}{b}{rational}
+        \question{1}{c}{rational}
+        \question{1}{d}{rational}
+        \point[editable]{O1}{rational}{0,0}
+        \point[editable]{O2}{rational}{0,0}
+
+        \function{g1}{real}{b/a*(x-O1[x])+O1[y]}
+        \function{g2}{real}{d/c*(x-O2[x])+O2[y]}
+        \pointOnCurve[editable]{P1}{real}{var(g1)}{var(a)}
+     		\pointOnCurve[editable]{P2}{real}{var(g2)}{var(c)}
+        \affine[editable]{v1}{rational}{var(O1),var(P1)}
+        \affine[editable]{v2}{rational}{var(O2),var(P2)}
+        \point[editable]{P}{rational}{-3,-6}
+        \point[editable]{Q}{rational}{-2,-5}
+        \affine[editable]{z}{rational}{var(P),var(Q)}
+        \number{v1x}{rational}{v1[x]}
+        \number{v1y}{rational}{v1[y]}
+        \number{v2x}{rational}{v2[x]}
+        \number{v2y}{rational}{v2[y]}
+        \number{zx}{rational}{z[x]}
+        \number{zy}{rational}{z[y]}
+
+       % bewegliche Vektoren zum Rechnen
+        \point[editable]{A1}{rational}{-5,-6}
+        \point[editable]{A2}{rational}{-4,-5}
+        \affine[editable]{va}{rational}{var(A1),var(A2)}
+	\end{variables}
+
+\label{v1}{v}
+\label{v2}{w}
+\label{z}{z}
+\color{P}{RED}
+\color{Q}{RED}
+\color{z}{RED}
+\color[0.7]{A1}{GREEN}
+\color[0.7]{A2}{GREEN}
+\color[0.7]{va}{GREEN}
+
+\answer{v1x}{1,1}
+\answer{v1y}{1,2}
+\answer{v2x}{1,3}
+\answer{v2y}{1,4}
+\answer{zx}{1,5}
+\answer{zy}{1,6}
+
+	\begin{canvas}
+        \snapToGrid{0.25,0.25}
+        \plotSize{400,400}
+        \plotLeft{-6.5}
+        \plotRight{6.5}
+        \plotTop{6.5}
+        \plotBottom{-6.5}
+        \plot[coordinateSystem]{v1,v2,va,A1,A2,O1,O2,P1,P2,P,Q,z}
+	\end{canvas}
+
+\end{genericJSXVisualization}
+
+\end{visualizationwrapper}
+
+ \begin{problem} 
+ 
+
+      \begin{question}
+      \correctorprecision{2}
+      \field{rational}
+      \begin{variables}
+           \randint[Z]{a}{-3}{3}
+           \randint{b}{-3}{-1}
+           \randint[Z]{c}{-3}{3}
+           \randint{d}{1}{3}
+           \randadjustIf{a,c}{|a|+|b|<1 OR |c|+|d|<1 OR |b-d|+|a-c|<1 OR |b+d|+|a+c|<1 OR a*d-b*c=0}
+           % \function{a}{a0/4}
+           % \function{b}{b0/4}
+           % \function{c}{c0/4}
+           % \function{d}{d0/4}
+           \randint[Z]{l1z}{-3}{3}
+           \randint[Z]{l1n}{1}{2}
+           \randint[Z]{l2z}{1}{3}
+           \randint[Z]{l2n}{1}{2}
+           \function[normalize]{lambda1}{l1z/l1n}
+           \function[normalize]{lambda2}{l2z/l2n}           
+           \function[normalize]{v1x0}{lambda1*a}
+           \function[normalize]{v1y0}{lambda1*b}
+           \function[normalize]{v2x0}{lambda2*c}
+           \function[normalize]{v2y0}{lambda2*d}           
+           \function[normalize]{zx0}{lambda1*a+lambda2*c}
+           \function[normalize]{zy0}{lambda1*b+lambda2*d}
+           \function{eins}{1}
+           \function{fal1x}{-lambda1*a}
+           \function{fal1y}{-lambda1*b}
+           \function{fal2x}{lambda2*c-lambda1*a}
+           \function{fal2y}{lambda2*d-lambda1*b}
+           \function{fal3x}{-lambda2*c-lambda1*a}
+           \function{fal3y}{-lambda2*d-lambda1*b}
+      \end{variables}
+      \lang{de}{
+           \text{Bestimmen Sie grafisch die Linearkombination $\vec{z}=\var{lambda1} \cdot \vec{v} +\var{lambda2} \cdot \vec{w}$
+                 aus den beiden blauen Vektoren $\vec{v}=\begin{pmatrix} \var{a} \\ \var{b} \end{pmatrix}$ und
+                 $\vec{w}=\begin{pmatrix} \var{c} \\ \var{d} \end{pmatrix}$ in der Grafik. \\
+                 \\
+                 Bestimmen Sie hierzu zunächst die Vektoren $\var{lambda1} \cdot \vec{v}$ aus v und 
+                 $\var{lambda2} \cdot \vec{w}$ aus w als Ortsvektoren, indem Sie v und w an ihren Endpunkten 
+                 entsprechend verlängern oder verkürzen und bei Bedarf die Richtung ändern. Die neu 
+                 entstandenen Vektoren werden in der Grafik nach wie vor mit v und w bezeichnet, lassen sich 
+                 aber nicht parallel verschieben. Legen Sie deshalb den grünen Hilfsvektor exakt auf einen der 
+                 beiden neuen Vektoren v oder w, um diesen zu duplizieren. Das (grüne) Duplikat von v kann dann 
+                 parallel an den Endpunkt von w verschoben werden. Alternativ kann auch das (grüne) Duplikat von w 
+                 an den Endpunkt von v verschoben werden. So können Sie schließlich mit dem roten Vektor den gesuchten 
+                 Summenvektor $\vec{z}$ markieren, indem Sie seinen Anfangs- und Endpunkt entsprechend platzieren.}}   
+
+      \begin{answer}
+        \type{graphics.number}
+        % \type{graphics.fuction}
+        \solution{v1x0}
+        % \checkAsFunction{x}{-1}{1}{100}
+      \end{answer}
+      \begin{answer}
+        \type{graphics.number}
+        \solution{v1y0}
+      \end{answer}
+      \begin{answer}
+        \type{graphics.number}
+        \solution{v2x0}
+      \end{answer}
+      \begin{answer}
+        \type{graphics.number}
+        \solution{v2y0}
+      \end{answer}
+      \begin{answer}
+        \type{graphics.number}
+        \solution{zx0}
+      \end{answer}
+      \begin{answer}
+        \type{graphics.number}
+        \solution{zy0}
+      \end{answer}
+      \explanation[[NOT equal(ans_1,v1x0) OR NOT equal(ans_2,v1y0)] AND [NOT equal(ans_1,fal1x) OR NOT equal(ans_2,fal1y)]]
+                  {$\var{lambda1} \cdot \vec{v}$ wurde wurde nicht korrekt markiert.}
+      \explanation[equal(ans_1,fal1x) AND equal(ans_2,fal1y)]{Der Vektor v zeigt in die falsche Richtung.
+                  Es ist der Vektor v$\,=-(\var{lambda1} \cdot \vec{v})$ dargestellt.}                  
+      \explanation[[NOT equal(ans_3,v2x0) OR NOT equal(ans_4,v2y0)] ]
+                  {$\var{lambda2} \cdot \vec{w}$ wurde wurde nicht korrekt markiert.}
+      \explanation[edited AND [equal(ans_1,v1x0) AND equal(ans_2,v1y0) AND equal(ans_3,v2x0) AND equal(ans_4,v2y0)] AND [equal(ans_5,eins) AND equal(ans_6,eins)]]
+                  {Markieren Sie die Summe mit dem roten Vektor.}
+      \explanation[[equal(ans_1,v1x0) AND equal(ans_2,v1y0) AND equal(ans_3,v2x0) AND equal(ans_4,v2y0)] AND [equal(ans_5,fal2x) AND equal(ans_6,fal2y)]]
+                  {Sie haben die Differenz $\var{lambda2} \cdot \vec{w} -(\var{lambda1} \cdot \vec{v})$ markiert.}
+      \explanation[equal(ans_5,fal3x) AND equal(ans_6,fal3y)]{Sie haben den Gegenvektor $-(\var{lambda1} \cdot \vec{v} + \var{lambda2} \cdot \vec{w})$ von $\vec{z}$ markiert.}
+      \explanation[edited AND NOT[equal(ans_5,eins) AND equal(ans_6,eins)] AND NOT[equal(ans_5,fal2x) AND equal(ans_6,fal2y)] AND NOT[equal(ans_5,fal3x) AND equal(ans_6,fal3y)]]
+                  {Der rote Vektor markiert nicht die gesuchte Linearkombination $\vec{z}$.}
+
+      \end{question}
+ \end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

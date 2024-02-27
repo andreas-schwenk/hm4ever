@@ -1,0 +1,183 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A01: Abbildungen}
+    \lang{en}{Problem 1}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+\lang{de}{\title{A01: Abbildungen}}
+\lang{en}{\title{Problem 1}}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9812}{Ticket 9812}
+\end{block}
+
+\begin{problem}
+ \randomquestionpool{1}{4}
+ \randomquestionpool{5}{6}
+% Q1 
+  \begin{question}
+  \text{Sind die folgenden Zuordnungen Abbildungen?}
+  \explanation{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, 
+  die jedem Element des Definitionsbereich genau ein Element des Zielbereichs zuordnet.}
+  
+  \permutechoices{1}{2}
+      \type{mc.yesno}
+   \begin{variables}
+   			\randint{a}{1}{5}
+   			\randint[Z]{b}{-3}{3}
+   			\randint{c}{3}{7}
+   			\function[normalize]{fn}{a*n}
+       \end{variables}
+       
+  \begin{choice}
+      \text{$T:\R\to \R, x\mapsto \sqrt{x}$}
+      \solution{false}
+	  \end{choice}
+    \begin{choice}
+      \text{$T:\N\to \N, n\mapsto \var{fn}$}
+      \solution{true}
+	\end{choice}
+	\explanation[equalChoice(1?)]{Die Wurzel einer negativen reellen Zahl ist keine reelle Zahl bzw. zunächst auch nicht definiert.}	
+ \end{question}
+% Q2 
+ \begin{question}
+  \text{Sind die folgenden Zuordnungen Abbildungen?}
+  \explanation{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereich genau ein Element des Zielbereichs zuordnet.}
+  
+  \permutechoices{1}{2}
+      \type{mc.yesno}
+   \begin{variables}
+   			\randint{a}{-3}{5}
+   			\randint[Z]{b}{-3}{3}
+   			\randint{c}{3}{7}
+       \end{variables}	
+      \begin{choice}
+      \text{$T:\Z\to \Q, n\mapsto \frac{\var{b}}{n}$}
+      \solution{false}
+		\end{choice}
+      \begin{choice}
+      \text{$S:\{1;\ldots; \var{c}\} \to \{1;\ldots; \var{c}\},i\mapsto $ alle 
+      Zahlen der Menge $\ne i$}
+      \solution{false}
+		\end{choice}
+      \explanation[equalChoice(1?)]{$T(0)$ ist nicht definiert, da nicht durch $0$ geteilt werden darf.}
+      \explanation[equalChoice(?1)]{$S$ bildet jeweils auf mehrere Elemente (Zahlen) ab.}
+  \end{question}
+% Q3  
+ \begin{question}
+  \text{Sind die folgenden Zuordnungen Abbildungen?}
+  \explanation{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereich genau ein Element des Zielbereichs zuordnet.}
+  
+  \permutechoices{1}{2}
+      \type{mc.yesno}
+   \begin{variables}
+   			\randint{a}{-3}{5}
+   			\randint[Z]{b}{-3}{3}
+   			\randint{c}{3}{7}
+       \end{variables}
+       
+  \begin{choice}
+      \text{$S:\{x\in \R\,|\, x>0\} \to \R, x\mapsto \pm \sqrt{x}$}
+      \solution{false}
+		\end{choice}
+      \begin{choice}
+      \text{$T:\R\to \Z, r\mapsto $ größte ganze Zahl $\leq r$}
+      \solution{true}
+		\end{choice}
+	\explanation[equalChoice(1?)]{$S(1)=\pm 1$, d.h. dem Element $1$ werden zwei Zahlen zugeordnet.}
+\end{question}
+% Q4
+ \begin{question}
+  \text{Sind die folgenden Zuordnungen Abbildungen?}
+  \explanation{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereich genau ein Element des Zielbereichs zuordnet.}
+  
+  \permutechoices{1}{2}
+      \type{mc.yesno}
+   \begin{variables}
+   			\randint{a}{-3}{5}
+   			\randint[Z]{b}{-3}{3}
+   			\randint{c}{3}{7}
+       \end{variables}	
+      \begin{choice}
+            \text{$T:\Q\to \Z,$ jedem Bruch wird sein Nenner zugeordnet.}
+            \solution{false}
+		\end{choice}
+        \begin{choice}
+      \text{$S:\{1;2\} \to \{1;2\},i\mapsto $ alle 
+      Zahlen der Menge $\ne i$}
+        \solution{true}
+      \end{choice}
+      \explanation[equalChoice(1?)]{Es ist zum Beispiel $\frac{1}{2}=\frac{2}{4}=\frac{-1}{-2}$. Um die Zuordnung $T(x)$ eindeutig zu machen, müsste es heißen: Jedem \textbf{vollständig gekürzten} Bruch wird sein (positiver) Nenner zugeordnet.}
+      \explanation[equalChoice(?1)]{$S$ bildet jeweils auf mehrere Elemente (Zahlen) ab.}
+
+  \end{question}
+% Q5  
+  \begin{question}
+  \text{Bestimmen Sie die Wertemenge der Abbildung \\
+  $ f:\{1;3; \var{b}; \var{c}\}\to \N, n\mapsto \var{fn} $ }
+  \explanation{Die Wertemenge besteht aus den Elementen des Zielbereichs, die Funktionswerte
+  sind, d.h. aus $f(1); f(3); \cdots$.}
+  
+    \precision{0}
+  
+      \type{input.finite-number-set}
+   \begin{variables}
+   			\randint{a}{1}{5}
+   			\randint{b}{4}{6}
+   			\randint{c}{7}{10}
+   			\function[normalize]{fn}{a*n}
+   			\function[calculate]{s1}{a}
+   			\function[calculate]{s2}{3*a}
+   			\function[calculate]{s3}{a*b}
+   			\function[calculate]{s4}{a*c} 			
+       \end{variables}
+  \begin{answer}
+  \text{Die Wertemenge ist $W_f=$ }
+  \solution{s1, s2, s3, s4}
+\end{answer}
+\end{question}
+% Q6 
+ \begin{question}
+  \text{Bestimmen Sie die Wertemenge der Abbildung \\
+  $ f:\{3; \var{b}; \var{c}\}\to \N, n\mapsto \var{d}-\var{fn}  $}
+  \explanation{Die Wertemenge besteht aus den Elementen des Zielbereichs, die Funktionswerte
+  sind, d.h. aus $f(3); f(\var{b}); \cdots$.}
+  
+  \precision{0}
+      \type{input.finite-number-set}
+   \begin{variables}
+   			\randint{a}{1}{5}
+   			\randint{b}{4}{6}
+   			\randint{c}{7}{10}
+   			\randint{f}{4}{10}
+   			\function[normalize]{fn}{a*n}
+   			\function[calculate]{d}{a*c+f}
+   			\function[calculate]{s2}{d-3*a}
+   			\function[calculate]{s3}{d-a*b}
+   			\function[calculate]{s4}{d-a*c} 			
+       \end{variables}
+  \begin{answer}
+  \text{Die Wertemenge ist $W_f=$ }
+  \solution{s2, s3, s4}
+\end{answer}
+\end{question}
+\end{problem}
+\embedmathlet{mathlet}
+\end{content}

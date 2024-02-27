@@ -1,0 +1,79 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A01: Rentenbarwert}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A01: Rentenbarwert}}
+\lang{en}{\title{A01: Present value of an annuity}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22689}{Ticket 22689}
+\end{block}
+
+
+\usepackage{mumie.genericproblem}
+
+     \begin{problem}
+          \begin{variables}
+               \randint{a}{2}{5}
+               \function[calculate]{r}{500*a}
+               \randint{n}{4}{6}
+               \randint{p}{2}{4}
+               \function[calculate,2]{q}{1+p/100}
+               \function[calculate,2]{r0}{r*(q^n-1)/(q^(n+1)-q^n)}
+          \end{variables}       
+          \begin{question}
+               \type{input.function}
+               \lang{de}{\text{Ein Student erhält von seinem Onkel $\var{n}$ Jahre lang nachschüssig
+               $\var{r}$ \euro pro Jahr, die er mit einem Zinssatz zu $\var{p}$ \% anspart. Wieviel
+               ist diese Rente, Stand heute, wert?\\
+               Rentenbarwert: $R_0=$\ansref\euro}}
+               \lang{en}{\text {A student receives $\var{r}$ \euro per year from his uncle,
+               paid in arrears, over a period of $\var{n}$ years.
+               He saves it in an account that earns interest at the rate of $\var{p}$ \%. How much
+               is this annuity worth as of today?\\
+               Annuity cash value: $R_0=$\ansref\euro}}
+               \begin{answer}
+                     \solution{r0}
+               \end{answer} 
+               \lang{de}{\explanation[edited]{Für den nachschüssigen Rentenendwert $R_n$ ergibt sich über die 
+               geometrische Reihe: $R_n=r\frac{q^n-1}{q-1}$. Um den Rentenbarwert zu berechnen, muss $R_n$ mit
+               $q^{-n}$ abgezinst werden:\\
+               $R_0=r\frac{q^n-1}{q-1}\cdot\frac{1}{q^n}$
+               %=r\frac{q^n-1}{q^{n+1}-q^n}
+               %=\var{r}\frac{\var{q}^{\var{n}}-1}{\var{q}^{\var{n}+1}-\var{q}^{\var{n}}}=\var{r0}$ \euro.
+               }}
+               \lang{en}{\explanation[edited]{The final value of the annuity in arrears, $R_n$, is obtained via the 
+               geometric series: $R_n=r\frac{q^n-1}{q-1}$. To calculate the annuity's present value, $R_n$ must be discounted
+               by the factor $q^{-n}$:\\
+               $R_0=r\frac{q^n-1}{q-1}\cdot\frac{1}{q^n}$
+               %=r\frac{q^n-1}{q^{n+1}-q^n}
+               %=\var{r}\frac{\var{q}^{\var{n}}-1}{\var{q}^{\var{n}+1}-\var{q}^{\var{n}}}=\var{r0}$ \euro.
+               }}
+          \end{question}     
+     \end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

@@ -1,0 +1,613 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+  \lang{en}{...}
+  \lang{de}{Vektoren}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/32384}{Ticket 32384}
+\end{block}
+\usepackage{mumie.ombplus}
+\ombchapter{4}
+\ombarticle{1}
+
+\lang{de}{\title{Vektoren}}
+\begin{block}[info-box]
+  \tableofcontents
+\end{block}
+\section{Eine Prozessanalyse}\label{sec:prozessanalyse}
+In einem Herstellungsprozess werden aus vier Zutaten $Z_1$, $Z_2$, $Z_3$, $Z_4$ 
+(Rohstoffe, vorgefertigte Komponenten, Energie o.ä.) zwei Produkte $P_1$, $P_2$ gefertigt. 
+Dabei werden von $Z_1$ etwa $a_{11}$ Einheiten für das Produkt $P_1$ pro Herstellungseinheit benötigt,
+für das Produkt $P_2$ sind es dagegen  $a_{12}$ Einheiten. 
+Ähnlich gestalten sich die Verbräuche der anderen Zutaten für die Produkte. 
+Wir erhalten folgende Tabelle von Verbräuchen $a_{ij}$ für die Produkte $P_1$ und $P_2$:
+%%
+%% Tabelle einfügen.
+%%
+Wir können dies kurz in einer Verbrauchsmatrix
+\[
+A=\begin{pmatrix}a_{11}&a_{12}\\a_{21}&a_{22}\\a_{31}&a_{32}\\a_{41}&a_{42}\end{pmatrix}
+\]
+notieren. Pro Einheit  von $Z_j$, $j\in\{1;2;3;4\}$ enstehen Kosten $k_j$, 
+die wir in einen Kostenvektor $k=\begin{pmatrix}k_1\\k_2\\k_3\\k_4\end{pmatrix}$ schreiben.
+Schließlich werden die fertigen Produkte $P_j$, $j\in\{1,2\}$, zum Preis $p_j$ verkauft, was wir im Preisvektor $p=\begin{pmatrix}p_1\\p_2\end{pmatrix}$
+zusammenfassen.
+Werden nun $x_1$ Einheiten von $P_1$ und $x_2$ Einheiten von $P_2$ hergestellt, 
+dann werden dazu $y_j$ Einheiten von $Z_j$, $j\in\{1;2;3;4\}$, benötigt. 
+Dabei ergibt sich $y_j$, $j\in\{1;2;3;4\}$,  aus Verbrauch und Herstellungsmenge zu
+\begin{eqnarray*}
+a_{11}x_1+a_{12}x_2&=&y_1,\\
+a_{21}x_1+a_{22}x_2&=&y_2,\\
+a_{31}x_1+a_{32}x_2&=&y_3,\\
+a_{41}x_1+a_{42}x_2&=&y_4.
+\end{eqnarray*}
+Das können wir abkürzend beschreiben durch
+\[
+A\cdot x=y,\quad \text{ wobei }\: x=\begin{pmatrix}x_1\\x_2\end{pmatrix} \text { und } 
+y=\begin{pmatrix}y_1\\y_2\\y_3\\y_4\end{pmatrix}.
+\]
+Die Gesamtkosten $K$ entstehen aus dem Kostenvektor $k$ zu
+\[
+K=k_1\cdot y_1+k_2\cdot y_2+k_3\cdot y_3+k_4\cdot y_4, \quad \text{ kurz }\: K=k^T\cdot y,
+\]
+wobei $k^T=\begin{pmatrix}k_1&k_2&k_3&k_4\end{pmatrix}$, also $K=k^T\cdot A\cdot x$.
+Dabei wird der Umsatz
+\[
+U=p_1x_1+p_2x_2=p^T\cdot x,\quad \text{ mit }\: p^T=\begin{pmatrix}p_1&p_2\end{pmatrix},
+\]
+erzielt, was den Gewinn
+\[
+G=U-K=p^T\cdot x-k^T\cdot A\cdot x=(p^T-k^T\cdot A)\cdot x=(p-A^T\cdot y)^T\cdot x
+\]
+ergibt. Dabei bezeichnet $A^T=\begin{pmatrix}a_{11}&a_{21}&a_{31}&a_{41}\\a_{12}&a_{22}&a_{32}&a_{42}\end{pmatrix}$
+die zu $A$ transponierte Matrix.
+
+Mit dieser schematischen Schreibweise haben wir eine übersichtliche Anordnung aller 
+beteiligten Größen des Herstellungsprozesses erreicht. In dieser Form lässt er sich rasch verallgemeinern.
+Werden nicht zwei sondern fünf Produkte hergestellt, und dazu nicht vier sondern zwanzig Zutaten benötigt,
+so ergibt sich statt der Verbrauchsmatrix $A$ mit den Abmessungen $4\times 2$ eben eine mit den Abmessungen $20\times 5$, und die Vektoren $k$, $x$, $y$ und $p$
+verlängern sich entsprechend. Das Berechnungsschema für den Gewinn $G=(p-A\cdot y)^T\cdot x$ bleibt hingegen dasselbe.
+
+Die Stärke der Mathematik  liegt hier darin, hochdimensionale Probleme strukturiert 
+abzubilden und eine einfache Berechnungsmöglichkeit bereitzustellen. 
+In diesem Kapitel erklären wir die dazu nötigen mathematischen Begriffe.
+\section{Vektoren}
+\begin{definition}\label{def:vektoren}
+Sind Zahlen $x_1,x_2,\ldots,x_n\in\R$ gegeben, dann bezeichnen wir mit
+\begin{itemize}
+\item $x=\begin{pmatrix}x_1\\x_2\\\ldots\\x_n\end{pmatrix}$ den \notion{(Spalten-)vektor} mit den 
+\notion{Komponenten} $x_1$, $x_2$,...,$x_n$, und mit
+\item $x^T=\begin{pmatrix}x_1&x_2&\cdots &x_n\end{pmatrix}$ den \notion{Zeilenvektor} mit den 
+Komponenten $x_1$, $x_2$,...,$x_n$.
+\item
+Dabei heißt $n$ die \notion{Dimension} des Vektors.
+\item
+$x_i$ heißt $i$-te Komponente des Vektors, $i\in\{i;\ldots;n\}$.
+\item Die Menge aller $n$-dimensionalen Spaltenvektoren wird mit $R^n$ bezeichnet.
+\end{itemize}
+\end{definition}
+
+%\begin{quickcheckcontainer}
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{a}{-3}{-1}
+            \randint{b}{2}{5}
+            \number{n}{4}
+            \function{f}{n}
+            \function{a2}{a}
+		\end{variables}
+		
+		\text{Der Spaltenvektor $\begin{pmatrix}6\\\var{a}\\\var{b}\\-4\end{pmatrix}$ hat die Dimension \ansref.
+  Seine zweite Komponente ist \ansref.}
+	
+		\begin{answer}
+			\solution{f}
+		\end{answer}
+        \begin{answer}
+			\solution{a2}
+		\end{answer}
+  	\end{quickcheck}
+% \end{quickcheckcontainer}
+Einige häufig benutzte Vektoren erhalten eigene Namen.
+\begin{definition}
+\begin{enumerate}
+\item[(i)] Der $n$-dimensionale \notion{Nullvektor} ist $0_n=\begin{pmatrix} 0\\\vdots\\0\end{pmatrix}\in\R^n$ ist der Vektor, 
+der komponentenweise gleich Null ist.
+Der $n$-dimensionale \notion{Einsvektor}  $1_n=\begin{pmatrix} 1\\\vdots\\1\end{pmatrix}\in\R^n$ ist der Vektor, 
+der komponentenweise gleich Eins ist.
+\item[(ii)]
+Der \notion{$i$-te Standardvektor} $e_i$, $i\in\{1;\ldots;n\}$ (auch der $i$-te Einheitsvektor) des $\R^n$ ist 
+der Vektor, dessen $i$-te Komponente gleich Eins ist, dessen andere Komponenten aber gleich Null sind, also
+$e_i=\left(\begin{smallmatrix}0\\\vdots\\0\\1\\0\\\vdots\\0\end{smallmatrix}\right)$ $\leftarrow$ $i$-te Stelle.
+
+\end{enumerate}
+\end{definition}
+So ist zum Beispiel $e_2=\begin{pmatrix}0\\1\\0\end{pmatrix}$ der zweite Standardvektor des $\R^3$.
+
+Die Räume $\R^2$ und $\R^3$ sind aus der Schule bekannt. 
+Vektoren werden dann oft durch Pfeile im zwei- bzw. dreidimensionalen Raum dargestellt, die im Ursprung 
+$0_2=\begin{pmatrix}0\\0\end{pmatrix}$ bzw. $0_3=\begin{pmatrix}0\\0\\0\end{pmatrix}$ beginnen.
+%%
+%% Abbildung einfügen!!
+%%
+Zwei- oder dreidimensionale Vektoren haben Sie in der Schule bereits addiert, so ist zum Beispiel
+\[
+\begin{pmatrix} 1\\2\\-2\end{pmatrix}+\begin{pmatrix}-3\\5\\1 \end{pmatrix}=\begin{pmatrix}1-3\\2+5\\-2+1 \end{pmatrix}
+=\begin{pmatrix}-2\\7\\-1 \end{pmatrix}.
+\]
+Bildlich heißt das, dass man die zwei Vektoren aneinander setzt, und als Summe den Vektor erhält, 
+der die Diagonale des aufgespannten Parallelogramms darstellt.
+Ebenso ist zum Beispiel das fünffache des Vektors $\begin{pmatrix} -1\\2\\1\end{pmatrix}$ gegeben durch 
+$5\cdot\begin{pmatrix} -1\\2\\1\end{pmatrix}=\begin{pmatrix} -5\\10\\5\end{pmatrix}$. Der Vektor wird gestreckt.
+
+%%%
+%% jsx-Graphs "quickcheck" zur Addition von Vektoren und Skalarmultiplikation.
+%%%
+\begin{definition}\label{def:vec_operation}
+\begin{enumerate}
+\item[(i)]
+Die \notion{Summe} zweier $n$-dimensionaler Vektoren 
+$x=\begin{pmatrix} x_1\\\vdots\\x_n\end{pmatrix}$ und $y=\begin{pmatrix} y_1\\\vdots\\y_n\end{pmatrix}$ ist 
+gegeben durch komponentenweise Addition
+ \[
+x+y=\begin{pmatrix} x_1+y_1\\\vdots\\x_n+y_n\end{pmatrix}.
+\]
+\item[(ii)] Ist $\lambda\in\R$ eine Zahl (ein sogenannter \notion{Skalar}), so ist das \notion{$\lambda$-Fache} des Vektors 
+$x=\begin{pmatrix} x_1\\\vdots\\x_n\end{pmatrix}$  der  durch komponentenweise Multiplikation entstehende Vektor
+\[
+\lambda x=\lambda \begin{pmatrix} x_1\\\vdots\\x_n\end{pmatrix}=
+\begin{pmatrix} \lambda x_1\\\vdots\\\lambda x_n\end{pmatrix}.
+\]
+\end{enumerate}
+\end{definition}
+\begin{block}[warning]
+Man kann nur Vektoren derselben Größe addieren!
+\end{block}
+\begin{example}
+Das Negative  eines Vektors $x=\begin{pmatrix} x_1\\\vdots\\x_n\end{pmatrix}$ ist $-x=\begin{pmatrix} -x_1\\\vdots\\-x_n\end{pmatrix}$.
+Wir rechnen  $x-x=x+(-x)=\begin{pmatrix} x_1-x_1\\\vdots\\x_n-x_n\end{pmatrix}=\begin{pmatrix} 0\\\vdots\\0\end{pmatrix}$.
+\end{example}
+
+\begin{remark}[Eigenschaften der Vektorrechnung]
+Für Vektoren $x,y,z\in\R^n$ und Skalare $\lambda,\mu\in\R$ gilt:
+\begin{enumerate}
+\item[(i)]
+Die Vektoren $x$ und $y$ sind genau dann gleich, wenn alle ihre Komponenten übereinstimmen. 
+Also: $x=y$ genau dann, wenn $x_i=y_i$ für alle $i\in\{1;\ldots;n\}$.
+\item[(ii)]
+Die Vektoraddition  ist \emph{kommutativ}
+\[x+y=y+x.\]
+\item[(iii)]
+Für den Nullvektor $0_n\in\R^n$ gilt
+\[x+0_n=x=0_n+x.\]
+\item[(iv)]
+Die Vektoraddition ist \emph{assoziativ}
+\[x+(y+z)=x+y+z=(x+y)+z.\]
+\item[(v)]
+Die Multiplikation mit Skalaren ist assoziativ
+\[\lambda(\mu x)=\lambda\mu x=(\lambda\mu)x.\]
+\item[(vi)]
+Die Multiplikation mit Skalaren und die Vektoraddition sind distributiv
+\[(\lambda+\mu)x=\lambda x+\mu x\quad\text{ sowie }\quad \lambda(x+y)=\lambda x+\lambda y.\]
+\end{enumerate}
+\end{remark}
+
+\section{Lineare Unabhängigkeit}
+\begin{definition}
+Es seien $v_1,\ldots,v_r\in\R^n$ Vektoren und $\lambda_1,\ldots,\lambda_n\in\R$ Zahlen.
+Die Summe 
+\[
+\sum_{i=1}^n\lambda_iv_i=\lambda_1v_1+\ldots+\lambda_rv_r
+\]
+heißt eine \notion{Linearkombination der Vektoren $v_1,\ldots,v_r$.}
+\end{definition}
+\begin{example}\label{ex:lin_comb}
+\begin{enumerate}
+\item[(a)]
+Ist $v_1=\begin{pmatrix} 1\\0\\1\end{pmatrix}$ und $v_2=\begin{pmatrix}2\\2\\-1\end{pmatrix}$, so ist
+\[
+3v_1+2v_2=3\begin{pmatrix} 1\\0\\1\end{pmatrix}+2\begin{pmatrix}2\\2\\-1\end{pmatrix}=
+\begin{pmatrix}7\\4\\1\end{pmatrix}
+\]
+eine Linearkombination von $v_1,v_2$. Eine weitere Linearkombination von $v_1,v_2$ ist zum Beispiel
+\[\begin{pmatrix}9\\10\\-6\end{pmatrix}=-v_1+5v_2.\]
+\item[(b)]
+Jeder Vektor $x\in\R^n$ ist eine Linearkombination der Standardvektoren $e_1,\ldots,e_n$, denn
+\[
+x=\begin{pmatrix}x_1\\\vdots\\\vdots\\x_n\end{pmatrix}=
+\begin{pmatrix}x_1\\0\\\vdots\\0\end{pmatrix}+\ldots+\begin{pmatrix}0\\\vdots\\0\\x_n\end{pmatrix}=x_1e_1+\ldots+x_ne_n.
+\]
+\end{enumerate}
+\end{example}
+\begin{definition}
+Vektoren $v_1,\ldots,v_r\in\R^n$ heißen \notion{linear unabhängig}, wenn die Gleichung
+\[\lambda_1v_1+\ldots+\lambda_rv_r=0_n\]
+nur für die Koeffizienten $\lambda_1=\ldots=\lambda_r=0$ erfüllt ist.
+
+Sind die Vektoren $v_1,\ldots,v_r$ nicht linear unabhängig, dann nennt man sie \notion{linear abhängig}.
+\end{definition}
+Es gilt stets $0_n=0v_1+\ldots+0v_r$. Es könnte aber auch andere Zahlen $\lambda_1,\ldots,\lambda_r$ geben so,
+dass $\lambda_1v_1+\ldots+\lambda_rv_r=0_n$.
+Die Vektoren $v_1,\ldots,v_r$ sind also genau dann linear unabhängig, wenn $0_n=0v_1+\ldots+0v_r$ die \emph{einzige}
+Linearkombination von $v_1,\ldots,v_r$ des Nullvektors ist.
+\begin{example}[Standardvektoren]\label{ex:standard_vectors}
+Die Standardvektoren $e_1,\ldots,e_n\in\R^n$
+% \[ e_1=\begin{pmatrix} 1\\ 0\\ \vdots \\ 0\end{pmatrix},\quad e_2=\begin{pmatrix} 0\\ 1\\ \vdots \\ 0\end{pmatrix}
+% ,\quad \ldots, \quad e_n=\begin{pmatrix} 0\\ \vdots \\ 0\\ 1\end{pmatrix} \]
+sind linear unabhängig. Es ist nämlich
+\[ \lambda_1 \cdot e_1+\lambda_2 \cdot e_2+\ldots +\lambda_n \cdot e_n=
+\begin{pmatrix} \lambda_1\\ \lambda_2\\ \vdots \\ r_n\end{pmatrix} \]
+nur dann der Nullvektor, wenn $\lambda_1=\lambda_2= \ldots =\lambda_n=0$ gilt.
+\end{example}
+\begin{example}
+\begin{tabs*}
+\tab{$\begin{pmatrix}2\\1\end{pmatrix}$, $\begin{pmatrix}-4\\-2\end{pmatrix}$ linear abhängig}
+Die Vektoren $\begin{pmatrix}2\\1\end{pmatrix}$ und $\begin{pmatrix}-4\\-2\end{pmatrix}$
+sind linear abhängig, denn mit
+\[2\begin{pmatrix}2\\1\end{pmatrix}+1\begin{pmatrix}-4\\-2\end{pmatrix}=\begin{pmatrix}0\\0\end{pmatrix}\]
+existiert eine Linearkombination des Nullvektors, deren Koeffizienten nicht alle Null sind.
+\tab{$\begin{pmatrix}2\\1\end{pmatrix}$, $\begin{pmatrix}4\\-2\end{pmatrix}$ linear unabhängig}
+Die Vektoren $\begin{pmatrix}2\\1\end{pmatrix}$ und $\begin{pmatrix}4\\-2\end{pmatrix}$ sind linear unabhängig.
+Denn die Gleichung
+\[
+\lambda_1\begin{pmatrix}2\\1\end{pmatrix}+\lambda_2\begin{pmatrix}4\\-2\end{pmatrix}=\begin{pmatrix}0\\0\end{pmatrix}
+\]
+ist ein lineares Gleichungssystem in $\lambda_1,\lambda_2$:
+\begin{eqnarray*}
+2\lambda_1+4\lambda_2&=&0\\
+1\lambda_1-2\lambda_2&=&0.
+\end{eqnarray*}
+Die zweite Gleichung ist nur für $\lambda_1=2\lambda_2$ erfüllt. 
+Setzt man dies  in die erste Gleichung ein, so ergibt sich  $6\lambda_2=0$, also $\lambda_2=0$ und folglich $\lambda_1=0$.
+Also ist $\lambda_1=\lambda_2=0$ die einzige Möglichkeit, 
+um aus den beiden Vektoren den Nullvektor zu kombinieren.
+\end{tabs*}
+Geometrisch bedeutet die lineare Abhängigkeit zweier Vektoren im $\R^2$, 
+dass sie auf einer gemeinsamen Ursprungsgeraden liegen. 
+In der Schule haben Sie solche Vektoren vielleicht kollinear genannt.
+Sind zwei Vektoren im $\R^2$ linear unabhängig, dann liegen sie auf zwei verschiedenen Ursprungsgeraden.
+%%
+%% Bild einfügen!!
+%%
+%%
+\end{example}
+\begin{remark}
+\begin{enumerate}
+\item[(i)] Ist von den Vektoren $v_1,\ldots, v_r$ einer der Nullvektor, dann sind sie linear abhängig.
+\begin{incremental}[\initialsteps{0}]
+\step
+Ist nämlich etwa $v_j=0_n$, dann ist
+\[
+0_n=0v_1+\ldots+0v_{i-1}+1v_i+0v_{i+1}+\ldots+0v_r
+\]
+eine Linearkombination des Nullvektors, bei der nicht alle Koeffizienten gleich Null sind.
+\end{incremental}
+\item[(ii)] Vektoren $v_1,\ldots,v_r$, von denen keiner der Nullvektor ist, sind genau dann linear abhängig, wenn sich einer von ihnen als 
+Linearkombination der anderen schreiben lässt.
+\begin{incremental}[\initialsteps{0}]
+\step
+Denn ist $\lambda_1v_1+\ldots+\lambda_rv_r=0_n$ eine Linearkombination, in der nicht alle $\lambda_j$ gleich null sind,
+so ist $\lambda_i\neq 0$. Dann können wir die Gleichung nach $v_i$ auflösen,
+\[
+v_i=\frac{ \lambda_1}{\lambda_i}v_1+\ldots+\frac{ \lambda_{i-1}}{\lambda_i}v_{i-1}+
+\frac{ \lambda_{i+1}}{\lambda_i}v_{i+1}+\ldots+\frac{ \lambda_r}{\lambda_i}v_r,
+\]
+und haben $v_i$ als Linearkombination der anderen Vektoren dargestellt.
+\step
+Ist umgekehrt $v_i$ als eine solche Linearkombination 
+$v_i=\mu_1v_1+\ldots+ \mu_{i-1}v_{i-1}+\mu_{i+1}v_{i+1}+\ldots\mu_rv_r$ gegeben, dann ist
+$0_n=\mu_1v_1+\ldots+ \mu_{i-1}v_{i-1}-v_i+\mu_{i+1}v_{i+1}+\ldots\mu_rv_r$. 
+Also sind $v_1,\ldots, v_r$ linear abhängig.
+\end{incremental}
+Achtung: Es ist nicht unbedingt \emph{jeder} Vektor eine Linearkombination der anderen, 
+sondern lediglich (mindestens) \emph{einer}! 
+\end{enumerate}
+\end{remark}
+
+%%
+%% Quickcheck: Sind die Vektoren 
+%$v_1=\begin{pmatrix}0\\1\\1\end{pmatrix}$, $v_2=\begin{pmatrix}2\\0\\1\end{pmatrix}$ und 
+%$v_3=\begin{pmatrix}2\\2\\3\end{pmatrix}$ linear abhängig oder linear unabhängig?
+%% Antwort: lin abhängig, denn $v_3=2v_1+v_2$.
+
+
+\begin{remark}
+Sind $v_1,\ldots,v_m\in\R^n$ Vektoren mit $m\leq n$, so gilt:
+\begin{itemize}
+\item Wenn $v_1,\ldots,v_m$ linear unabhängig sind, 
+so sind auch die ersten Vektoren $v_1,\ldots,v_k$ linear unabhängig für jedes $k< m$.
+\\
+Allgemein: Jede Teilauswahl dieser Vektoren ist wieder linear unabhängig.
+\item
+Sind hingegen $v_1,\ldots,v_k$ bereits linear abhängig für ein $k<m$, so auch $v_1,\ldots,v_k,v_{k+1},\ldots,v_m$.
+\\
+Allgemein: Jede Ergänzung linear abhängiger Vektoren um weitere Vektoren ist wieder linear abhängig.
+\item 
+Wenn $v_1,\ldots,v_m$ linear unabhängig sind und $\lambda\in\R\setminus\{0\}$, so sind auch
+$v_1,\ldots,\lambda v_k,\ldots,v_m$ linear unabhängig.
+\\
+Das heißt, Multiplikation eines Vektors mit einer Zahl ungleich Null ändert nichts an der linearen Unabhängigkeit der Vektoren.
+\item 
+Sind $v_1,\ldots,v_m$ linear unabhängig, und sind $v_i, v_j$ zwei von ihnen ($i\neq j$) sowie $\lambda\in\R$, so sind auch
+$v_1,\ldots,v_i,\ldots,v_j+\lambda v_i,\ldots,v_m$ linear unabhängig.\\
+Das heißt, Addition eines Vielfachen eines Vektors zu einem \emph{anderen} Vektor ändert nichts an der linearen Unabhängigkeit der Vektoren.
+\end{itemize}
+\end{remark}
+\begin{quickcheck}
+\begin{variables}
+    \randint{n}{2}{8}
+    \randint{m}{2}{8}
+    \randint{a}{2}{8}
+\end{variables}
+\text{Markieren Sie alle richtigen Aussagen.}
+      \begin{choices}{multiple} 
+           \field{integer}
+           \begin{choice}
+           \text{Die Vektoren $v_1=\begin{pmatrix}1\\0\end{pmatrix}$ und $v_2=\begin{pmatrix}\var{n}\\1\end{pmatrix}$ sind linear unabhängig.}
+             \solution{true} 
+             
+           \end{choice}
+
+           \begin{choice}
+                \text{Die Vektoren $w_1=\begin{pmatrix}\var{m}\\0\end{pmatrix}$ und $w_2=\begin{pmatrix}0\\1\end{pmatrix}$ sind linear unabhängig.}
+                 \solution{true} % Correct answer is yes
+            \end{choice}
+           
+           \begin{choice}
+                \text{Die Vektoren $u_1=\begin{pmatrix}\var{a}\\0\\0\end{pmatrix}$, $u_1=\begin{pmatrix}1\\0\\0\end{pmatrix}$
+                und $u_3=\begin{pmatrix}0\\1\\1\end{pmatrix}$ sind linear unabhängig.}
+                 \solution{false} 
+           \end{choice}
+         
+\end{choices}
+           \explanation{Es ist $v_1=e_1$ und $v_2=\var{n}e_1+e_2$. Weil $e_1,e_2$ linear unabhängig sind, sind es auch $v_1,v_2$.\\
+         Es ist $w_1=\var{m}e_1$ und $v_2=e_2$. Weil $e_1,e_2$ linear unabhängig sind und $\var{m}\neq 0$, sind es auch $v_1,v_2$.\\
+        Es ist $u_1=\var{a}u_1$. Also sind $u_1,u_2,u_3$ linear abhängig.}
+
+\end{quickcheck}
+%%%
+%%
+\section{Basis}
+\begin{definition}
+Eine Menge $\{v_1,\ldots,v_n\}\subset\R^n$ heißt \notion{Basis} des $\R^n$, wenn die beiden folgenden Bedingungen erfüllt sind:
+\begin{itemize}
+\item[(i)] Die Vektoren $v_1,\ldots,v_n$ sind linear unabhängig.
+\item[(ii)] Jeder Vektor $x\in\R^n$ ist eine Linearkombination von $v_1,\ldots,v_n$.
+\end{itemize}
+\end{definition}
+\begin{remark}
+\begin{enumerate}
+\item[(i)]
+Die Menge $\{e_1,\ldots,e_n\}\subset \R^n$ der Einheitsvektoren ist eine Basis des $\R^n$, die sogenannte \notion{Standardbasis}.
+\\
+Denn wir haben in Beispiel \ref{ex:standard_vectors} gesehen, dass $e_1,\ldots,e_n$ linear unabhängig sind, und in Beispiel
+\ref{ex:lin_comb}, dass jeder Vektor eine Linearkombination von ihnen ist.
+\item[(ii)]
+Je $n$ linear unabhängige Vektoren des $\R^n$ bilden eine Basis des $\R^n$.
+\end{enumerate}
+\end{remark}
+\begin{example}
+\begin{enumerate}
+\item[(i)]
+Die Standardvektoren $e_1=\begin{pmatrix}1\\0\\0\end{pmatrix}$, $e_2=\begin{pmatrix}0\\1\\0\end{pmatrix}$ und
+$e_3=\begin{pmatrix}0\\0\\1\end{pmatrix}$ bilden eine Basis des $\R^3$.
+Es ist zum Beispiel $\begin{pmatrix}1\\2\\3\end{pmatrix}=1e_1+2e_2+3e_3$.
+\item[(ii)]
+Auch die Vektoren $v_1=\begin{pmatrix}1\\-1\\0\end{pmatrix}$, $v_2=\begin{pmatrix}0\\1\\-1\end{pmatrix}$ und 
+$v_3=\begin{pmatrix}1\\1\\1\end{pmatrix}$, bilden eine Basis des $\R^3$. 
+Die Darstellung von $\begin{pmatrix}1\\2\\3\end{pmatrix}$ bezüglich dieser Basis ist
+\[\begin{pmatrix}1\\2\\3\end{pmatrix}=-v_1-v_2+2v_3.\]
+\begin{incremental}[\initialsteps{1}]
+\step
+Wie erhält man diese Basisdarstellung?
+\step
+Man löst das lineare Gleichungssystem in den Unbestimmten $\lambda_1,\lambda_2,\lambda_3$:
+\[
+\begin{pmatrix}1\\2\\3\end{pmatrix}=\lambda_1\begin{pmatrix}1\\-1\\0\end{pmatrix}+\lambda_2\begin{pmatrix}0\\1\\-1\end{pmatrix}
++\lambda_3\begin{pmatrix}1\\1\\1\end{pmatrix}.
+\]
+\step
+Dies ist gleichbedeutend zu
+\begin{align*}
+\lambda_1&=-\lambda_3+1,\\
+\lambda_2&=\lambda_3-3,\\
+\lambda_3&=\lambda_1-\lambda_2+2,
+\end{align*}
+beziehungsweise (indem man die ersten zwei Gleichungen in die dritte einsetzt und
+den so erhaltenen Wert für $\lambda_3$ wiederum in die ersten beiden) zu
+\[
+\lambda_3=2,\:\lambda_2=-1,\: \lambda_1=-1\:.
+\]
+\step
+Ebenso erhält man die Koeffizienten für jeden Vektor:% $\begin{pmatrix}x\\y\\z\end{pmatrix}$:
+\[
+\begin{pmatrix}x\\y\\z\end{pmatrix}=\lambda_1v_1+\lambda_2v_2+\lambda_3v_3
+%\lambda_1\begin{pmatrix}1\\-1\\0\end{pmatrix}+\lambda_2\begin{pmatrix}0\\1\\-1\end{pmatrix}
+%+\lambda_3\begin{pmatrix}1\\1\\1\end{pmatrix}
+\]
+wird gelöst durch
+\[
+\lambda_3=\frac{1}{3}(x+y+z),\:\lambda_2=\frac{1}{3}(x+y-2z),\:\lambda_1=\frac{1}{3}(2x-y-z)\:.
+\]
+\end{incremental}
+\end{enumerate}
+\end{example}
+\begin{remark}
+\begin{itemize}
+\item Die Darstellung eines Vektors als Linearkombination einer Basis ist eindeutig.
+\item Eine Basis ist eine kleinst mögliche Auswahl von Vektoren, 
+so dass \emph{jeder} andere Vektor des $\R^n$ als Linearkombination  dieser darstellbar ist.
+\item Eine Basis ist eine größtmögliche Auswahl linear unabhängiger Vektoren des $\R^n$. 
+\end{itemize}
+\end{remark}
+\begin{example}
+Für die Vektoren $v_1=\begin{pmatrix} 1\\0\\0\\0\end{pmatrix}$, $v_2=\begin{pmatrix}1\\2\\0\\0\end{pmatrix}$,
+$v_3=\begin{pmatrix}1\\1\\3\\0\end{pmatrix}$ und $v_4=\begin{pmatrix} 3\\3\\3\\0\end{pmatrix}\in\R^4$ gilt:
+\begin{itemize}
+\item Die Vektoren $v_1,v_2,v_3$ sind linear unabhängig.
+\begin{incremental}[\initialsteps{0}]
+\step
+Denn für $0_4=\lambda_1v_1+\lambda_2v_2+\lambda_3v_3$ muss, wie man an der dritten Komponente sieht, 
+$\lambda=3=0$ gelten. Ebenso muss dann für $0_4=\lambda_1v_1+\lambda_2v_2$ auch $\lambda_2=0$ sein, 
+und schließlich auch $\lambda_1=0$.
+\end{incremental}
+\item
+$v_1,v_2,v_3,v_4$ sind linear abhängig, (denn $v_4=v_1+v_2+v_3$).
+Nimmt man irgendeinen weiteren vierdimensionalen Vektor hinzu, so bleiben die Vektoren linear abhängig.
+\item
+Auch $v_1,v_2-v_1,v_3$ sind linear unabhängig, ebenso wie $v_1=e_1$, 
+$\frac{1}{2}v_2-\frac{1}{2}v_1=e_2$, $\frac{1}{3}v_3-\frac{1}{6}v_2-\frac{1}{6}v_1=e_3$.
+\item Die Vektoren $v_1,v_2,v_3,e_4$ bilden einen Basis des $\R^4$, das heißt zu jedemVektor $w\in\R^$
+gibt es eindeutig bestimmte 
+Koeffizienten $\lambda_1,\lambda_2,\lambda_3,\lambda_4\in\R$ so, dass $w=\lambda_1v_1+\lambda_2v_2+\lambda_3v_3+\lambda_4e_4$.
+\begin{incremental}[\initialsteps{0}]
+\step
+Denn diese vier Vektoren sind linear unabhängig. Wieder betrachtet man dazu in $0_4=\lambda_1v_1+\lambda_2v_2+\lambda_3v_3+\lambda_4e_4$ 
+die Komponenten von unten nach oben, um sukzessive zu sehen, dass $\lambda_4=0,\ldots,\lambda_1=0$.
+\end{incremental}
+
+\end{itemize}
+\end{example}
+\begin{quickcheck}
+\begin{variables}
+    \randint{num}{2}{8}
+\end{variables}
+\text{Bilden die Vektoren $\begin{pmatrix}1\\1\end{pmatrix}$ und $\begin{pmatrix}1\\-\var{num}\end{pmatrix}$ eine Basis des $\R^2$?}
+      \begin{choices}{unique} % every choice allows a yes or no answer
+          % \permutechoices{1}{2} % permutes choices {1}{2}{3} randomly.
+           \field{integer}
+           \begin{choice}
+                 \text{Nein.}
+                 \solution{false} % Correct answer is yes
+           \end{choice}
+
+           \begin{choice}
+                 \text{Ja.}
+                 \solution{true} % Correct answer is yes
+           \end{choice}
+\end{choices}
+ \explanation{Die zwei Vektoren im $\R^2$ sind linear unabhängig, bilden also eine Basis.}
+\end{quickcheck}
+\section{Skalarprodukt und Norm}
+\begin{definition}
+Es seien $x=\begin{pmatrix}x_1\\\vdots\\x_n\end{pmatrix}$ und $y=\begin{pmatrix}y_1\\\vdots\\ y_n\end{pmatrix}$ Vektoren im $\R^n$.
+\begin{enumerate}
+\item[(i)]
+Der Zeilenvektor
+\[
+x^T=\begin{pmatrix}x_1&\ldots&x_n\end{pmatrix}
+\]
+heißt der zu $x$ \notion{transponierte Vektor}.
+\item[(ii)]
+Das Skalarprodukt von $x$ und $y$ ist definiert als
+\[
+x^T\cdot y=\begin{pmatrix}x_1&\ldots&x_n\end{pmatrix}\cdot \begin{pmatrix}y_1\\\vdots\\y_n\end{pmatrix}=\sum_{j=1}^n x_jy_j=x_1y_1+\ldots+x_ny_n.
+\]
+\item[(iii)]
+Die Vektoren $x$ und $y$ heißen \notion{orthogonal} (zu einander), wenn $x^T\cdot y=0$.
+\item[(iv)]
+Die \notion{Länge} oder \notion{Norm} von $x$ ist 
+\[
+{\Vert {x}\Vert} =\sqrt{x^T\cdot x}=\sqrt{x_1^2+\ldots+x_n^2}.
+\]
+\end{enumerate}
+\end{definition}
+\begin{block}[warning]
+Das Skalarprodukt ist nur für Vektoren derselben Größe definiert!
+\end{block}
+Manchmal schreibt man $\vert x\vert$ statt $\Vert x\Vert$. Wir bevorzugen die letztere Schreibweise, 
+weil es mehrere Arten von Normen eines Vektors gibt (die Sie im späteren Studium kennenlernen werden),
+während es nur einen einzigen Absolutbetrag auf den reellen Zahlen gibt. Die hier angegebene Borm heißt auch \notion{euklidische} Norm.
+\begin{example}
+\begin{enumerate}
+\item[(i)]
+Der zu $\begin{pmatrix}1\\2\\3\end{pmatrix}$ transponierte Vektor ist $x^T=\begin{pmatrix}1&2&3\end{pmatrix}$.
+\item[(ii)]
+Das Skalarprodukt von $\begin{pmatrix}1\\2\\3\end{pmatrix}$ und $\begin{pmatrix}4\\5\\6\end{pmatrix}$ ist
+\[
+\begin{pmatrix}1&2&3\end{pmatrix}\cdot\begin{pmatrix}4\\5\\6\end{pmatrix}=1\cdot4+2\cdot 5+3\cdot 6=32.
+\]
+\item[(iii)]
+Die Standardvektoren $e_1$ und $e_2$ des $\R^n$ ist orthogonal
+\[
+e_1^T\cdot e_2=\begin{pmatrix}1&0&\ldots &0\end{pmatrix}\cdot\begin{pmatrix}0\\1\\0\\\vdots\\0\end{pmatrix}=1\cdot 0+0\cdot 1+0\cdot 0+\ldots+0\cdot0=0.
+\]
+Genauso sind die Standardvektoren $e_i$ und $e_j$ für $i\neq j$ orthogonal, da dann $e_i^T\cdot e_j=0$.
+\item[(iv)]
+Die Länge des Standardvektors $e_i$ des $\R^n$ ist
+\[
+{\Vert e_i\Vert}=e_i^T\cdot e_i=\sqrt{0^2+\ldots+0+1^2+0^2+\ldots+0^2}=\sqrt{1}=1.
+\]
+\end{enumerate}
+\end{example}
+\begin{remark}
+Im $\R^2$ sind zwei Vektoren orthogonal (bezüglich des Skalarprodukts), wenn senkrecht auf einander stehen.
+Die Norm eines Vektors $\begin{pmatrix}a\\b\end{pmatrix}$ mit den Koordinaten $a$ und $b$ entspricht genau der Länge, die wir durch den Satz des Pythagoras im rechtwinkligen Koordinatendreieck erhalten.
+\[
+\Vert x\Vert^2 =c^2=\sqrt{a^2+b^2}
+\]
+%%
+%% Bilder einfügen, Beispiel ganz ausführen!
+%%
+\end{remark}
+\begin{quickcheck}
+\begin{variables}
+\function{x2}{3}
+\function{l}{5}
+\end{variables}
+\text{Bestimmen Sie $x_2$ so, dass $x=\begin{pmatrix}4\\x_2\end{pmatrix}$ orthogonal zu $\begin{pmatrix}3\\-4\end{pmatrix}$ ist: $\:x_2=$\ansref .
+\\
+Berechnen Sie die Länge des Vektors $\begin{pmatrix}3\\-4\end{pmatrix}$. Es ist $\Vert \begin{pmatrix}3\\-4\end{pmatrix}\Vert=$\ansref .}
+\type{input.function}
+\begin{answer}
+\solution{x2}
+\end{answer}
+\begin{answer}
+\solution{l}
+\end{answer}
+\explanation{Es ist $\begin{pmatrix}4&x_2\end{pmatrix}\cdot\begin{pmatrix}3\\-4\end{pmatrix}=12-4x_2$. Die Vektoren sind also genau dann orthogonal, 
+wenn $x_2=3$.\\
+Es ist $\Vert \begin{pmatrix}3\\-4\end{pmatrix}\Vert=\sqrt{3^3+(-4)^2}=\sqrt{25}=5$.}
+\end{quickcheck}
+\begin{example}
+In der eingänglichen Prozessanalyse \ref{sec:prozessanalyse} ist der Umsatz $U=p^T\cdot x $ das Skalarprodukt von Preisvektor $p$ und Produktionseinheitenvektor $x$.
+Die Gesamtkosten $G=k^T\cdot y$ sind das Skalarprodukt des Kostenvektors $v$ mit dem Vektor $y$ der benötigten Zutateneinheiten, etc.
+\end{example}
+\begin{theorem}\label{thm:skalarprodukt}
+Es seien $u,v,w\in\R^n$ Vektoren und $\lambda\in\R$ ein Skalar. Dann gilt für das Skalarprodukt:
+\begin{enumerate}
+\item[(i)] $v^T\cdot w=w^T\cdot v$ (Symmetrie),
+\item[(ii)] $v^T\cdot(u+w)=v^T\cdot u+v^T\cdot w$,
+\item[(iii)] $\lambda(v^T\cdot w)=(\lambda v)^T\cdot w=v^T\cdot (\lambda w)$,
+\item[(iv)] $v^T\cdot 0_n=0$,
+\item[(v)] $v^T\cdot e_i=v_i$, wobei $v_i$ die $i$-te Koordinate von $v$ ist,
+\item[(vi)] $v^T\cdot 1_n=\sum_{i=1}^nv_i$.
+\end{enumerate}
+\end{theorem}
+\begin{example}
+Kombiniert man \ref{thm:skalarprodukt}(i) und (ii), so erhält man auch $(u+w)^T\cdot v=u^T\cdot v+w^T\cdot v$.
+In der eingänglichen Prozessanalyse \ref{sec:prozessanalyse} wurde dies bereits benutzt: Der Gewinn errechnete als
+$G=U-K=p^T\cdot x-k^T\cdot  y=p^T\cdot x-k^T\cdot A\cdot x=(p+A^T\cdot k)^T\cdot x$.
+\\
+Die dort ebenfalls verwendete Matrix-Vektor-Multiplikation kümmern wir uns im nächsten Abschnitt.
+\end{example}
+\end{content}

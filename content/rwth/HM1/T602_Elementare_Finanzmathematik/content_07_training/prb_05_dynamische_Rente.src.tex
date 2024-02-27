@@ -1,0 +1,88 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A05: dynamische Rente}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A05: dynamische Rente}}
+\lang{en}{\title{A05: variable annuity}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22673}{Ticket 22673}
+\end{block}
+
+
+\usepackage{mumie.genericproblem}
+
+     \begin{problem}
+     \begin{variables}
+        \randint{m}{3}{6}
+        \randint{w}{1}{2}
+        \function[calculate]{r0}{100000*m}
+        \function[calculate,2]{p}{0.5*m}
+        \function[calculate,2]{pw}{0.5*w}
+        \function[calculate,2]{rew}{(p-pw)*r0/100}
+        \function{q}{1+p/100}
+        \function[calculate,3]{qw}{1+pw/100}
+        \function[calculate,2]{r20}{r0*(qw-q)/((qw/q)^(20)-1)}
+     \end{variables}
+          \begin{question}
+          \type{input.number}
+         \lang{de}{\text{Herr L. hat den Rest seines Lottogewinnes von $\var{r0}$
+          \euro am Jahresbeginn zu einem festen Zinssatz von $p=\var{p}$ \% angelegt. Die Rente soll 
+          jährlich nachschüssig um 
+          $\var{pw}$ \% steigen. Es handelt sich also um eine dynamische Rente mit dem Faktor $w=\var{qw}$. 
+          Wie hoch ist der (erste) Rentenbetrag bei einer ewigen Rente,
+          die er jährlich nachschüssig abheben kann?\\
+          Berechnen Sie im Vergleich dazu die erste Rentenrate bei 20-jähriger Laufzeit.\\
+          $r_{\text{ewig}}=$\ansref \euro\\
+          $r_{20}=$\ansref \euro
+          }}
+          \lang{en}{\text{Mr L. invested the rest of his lottery winnings of $\var{r0}$
+          \euro at the beginning of the year at a fixed interest rate of $p=\var{p}$ \%. The annuity is to 
+          increase by $\var{pw}$ \% after it is paid. It is therefore a variable annuity with the factor $w=\var{qw}$. 
+          What is the (first) annuity amount in the case of a perpetual annuity
+          that he can withdraw annually in arrears?\\
+          In comparison, calculate the first annuity instalment for a 20-year term.\\
+          $r_{\text{eternal}}=$\ansref \euro\\
+          $r_{20}=$\ansref \euro
+          }}
+               \begin{answer}
+                    \solution{rew}
+               \end{answer} 
+               \begin{answer}
+                    \solution{r20}
+               \end{answer}               
+          \lang{de}{\explanation{(vgl. exercises)Die jährliche Rentenrate ist der Zinsbetrag abzüglich der Steigerung:
+          $r_{\text{ewig}}=R_0\cdot\frac{p-w}{100}=\var{rew}$ \euro; bei begrenzter Laufzeit gilt:
+          $r_{20}=R_0\cdot\frac{w-q}{\left(\frac{w}{q}\right)^m-1}=\var{r20}$ \euro.}}
+          \lang{en}{\explanation{(cf. exercises)The annual annuity rate is the interest amount minus the increase:
+          $r_{\text{ewig}}=R_0\cdot\frac{p-w}{100}=\var{rew}$ \euro; for a limited term:
+          $r_{20}=R_0\cdot\frac{w-q}{\left(\frac{w}{q}\right)^m-1}=\var{r20}$ \euro.}}
+          \end{question}
+          
+     \end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

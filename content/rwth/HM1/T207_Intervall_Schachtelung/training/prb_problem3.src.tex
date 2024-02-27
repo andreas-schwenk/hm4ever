@@ -1,0 +1,309 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A03: abgeschlossene/offene Mengen}
+    \lang{en}{mc unique}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A03: abgeschlossene/offene Mengen}}
+\lang{en}{\title{Problem 3}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9994}{Ticket 9994}
+\end{block}
+
+\begin{problem}
+	
+	
+	\begin{variables}
+			\randint{a}{-10}{9}
+			\randint{b}{10}{30}
+			\randint{c}{-20}{-6}
+			\randint{d}{-5}{15}
+	\end{variables}
+		
+	\randomquestionpool{1}{2}
+	\randomquestionpool{3}{6}
+	\randomquestionpool{7}{8}
+    \randomquestionpool{9}{10}
+    
+    % Pool mit 1&2
+	\begin{question}
+		\lang{de}{ 
+      		\text{Entscheiden Sie, ob die nachfolgenden Mengen offen oder abgeschlossen sind und kreuzen Sie alle korrekten Aussagen an.\\
+      		 $(\var{a};\var{b})$
+      		}
+			}
+    	\explanation[edited]{Das Intervall ist an beiden Grenzen offen, deshalb ist die Menge offen. Die Menge ist nicht abgeschlossen, 
+        weil z.B. die Folge $x_n=\var{b}-\frac{1}{n}$ einen Grenzwert außerhalb der Menge hat, nämlich den Randpunkt $\var{b}$.
+        }	
+    	\type{mc.multiple}
+    	\begin{choice}
+    		\text{offen}
+  			\solution{true}
+		\end{choice}
+		\begin{choice}
+  			\text{abgeschlossen}
+  			\solution{false}
+		\end{choice}
+		\begin{choice}
+			\text{weder noch}
+  			\solution{false}
+		\end{choice}
+    \end{question}
+    
+    
+    \begin{question}
+		\lang{de}{ 
+      		\text{Entscheiden Sie, ob die nachfolgenden Mengen offen oder 
+            abgeschlossen sind und kreuzen Sie alle korrekten Aussagen an.\\
+      		 $ [\var{c};\var{d})$
+      		}
+			}
+    	\explanation[edited]{Das Intervall ist nicht an beiden Grenzen offen bzw.
+        abgeschlossen. Deshalb kann die Menge weder abgeschlossen noch offen sein.} 
+        \type{mc.multiple}
+    	\begin{choice}
+    		\text{offen}
+  			\solution{false}
+		\end{choice}
+		\begin{choice}
+  			\text{abgeschlossen}
+  			\solution{compute}
+  			\iscorrect{c}{=}{d}
+		\end{choice}
+		\begin{choice}
+			\text{weder noch}
+  			\solution{compute}
+  			\iscorrect{c}{!=}{d}
+		\end{choice}
+    \end{question}
+    
+    % Pool mit 3-6
+    \begin{question}
+		\lang{de}{ 
+      		\text{
+      		 $\mathbb{R}$
+      		}
+			}
+    	\explanation[edited]{$\R$ ist offen, weil jede reelle Zahl eine $\epsilon$-Umgebung besitzt, die ganz in $\R$ liegt. $\R$ ist
+        auch abgeschlossen, weil das Komplement (die leere Menge) offen ist.}	
+    	\type{mc.multiple}
+    	\begin{choice}
+    		\text{offen}
+  			\solution{true}
+		\end{choice}
+		\begin{choice}
+  			\text{abgeschlossen}
+  			\solution{true}
+		\end{choice}
+		\begin{choice}
+			\text{weder noch}
+  			\solution{false}
+		\end{choice}
+    \end{question}
+    
+    \begin{question}
+		\lang{de}{ 
+      		\text{
+      		 $\mathbb{N}$
+      		}
+			}
+    	\explanation[edited]{$\N$ ist nicht offen, 
+        denn kein einziges  Element ist ein innerer Punkt. $\N$ ist abgeschlossen, 
+        weil Folgen natürlicher Zahlen nur Grenzwerte in $\N$ haben können.}	
+    	\type{mc.multiple}
+    	\begin{choice}
+    		\text{offen}
+  			\solution{false}
+		\end{choice}
+		\begin{choice}
+  			\text{abgeschlossen}
+  			\solution{true}
+		\end{choice}
+		\begin{choice}
+			\text{weder noch}
+  			\solution{false}
+		\end{choice}
+    \end{question}
+    
+    \begin{question}
+		\lang{de}{ 
+      		\text{
+      		 $\mathbb{Z}$
+      		}
+			}
+    	\explanation[edited]{$\Z$ ist nicht offen, denn kein einziges  Element ist ein innerer Punkt. 
+        Die ganzen Zahlen sind abgeschlossen, weil Folgen ganzer Zahlen nur Grenzwerte in $\Z$ haben können.}	
+    	\type{mc.multiple}
+    	\begin{choice}
+    		\text{offen}
+  			\solution{false}
+		\end{choice}
+		\begin{choice}
+  			\text{abgeschlossen}
+  			\solution{true}
+		\end{choice}
+		\begin{choice}
+			\text{weder noch}
+  			\solution{false}
+		\end{choice}
+    \end{question}
+    
+    \begin{question}
+		\lang{de}{ 
+      		\text{
+      		 $\mathbb{Q}$
+      		}
+			}
+    	\explanation[edited]{$\Q$ ist nicht offen, weil in jeder Umgebung einer rationalen Zahl auch reelle Zahlen liegen.
+        $\Q$ ist aber auch nicht abgeschlossen, weil Folgen in $\Q$ durchaus einen 
+        Grenzwert in $\R \setminus \Q $ haben können.}	
+    	\type{mc.multiple}
+    	\begin{choice}
+    		\text{offen}
+  			\solution{false}
+		\end{choice}
+		\begin{choice}
+  			\text{abgeschlossen}
+  			\solution{false}
+		\end{choice}
+		\begin{choice}
+			\text{weder noch}
+  			\solution{true}
+		\end{choice}
+    \end{question}
+    
+    % Pool mit 7-10
+    \begin{question}
+		\lang{de}{ 
+      		\text{
+      		 $\{\var{a}+\frac{1}{n} \vert n \in \N \}$
+      		}
+			}
+    	\explanation[edited]{Betrachten wir die Folge $x_n=\var{a}+\frac{1}{n}$: Der Grenzwert $\lim_{n\to\infty}x_n=\var{a}$ ist  
+        nicht in der Menge  enthalten, die Menge kann also keine abgeschlossene Menge sein. Andererseits ist die Menge auch 
+        nicht offen, da sie keine inneren Punkte besitzt.}	
+    	\type{mc.multiple}
+    	\begin{choice}
+    		\text{offen}
+  			\solution{false}
+		\end{choice}
+		\begin{choice}
+  			\text{abgeschlossen}
+  			\solution{false}
+		\end{choice}
+		\begin{choice}
+			\text{weder noch}
+  			\solution{true}
+		\end{choice}
+    \end{question}
+    
+    \begin{question}
+		\lang{de}{ 
+      		\text{
+      		 $ \R \setminus \left( \{\var{a}\} \cup \{\var{a}+\frac{\var{b}}{n}\vert n\in\N \}  \right) $
+      		}
+			}
+        \explanation[edited]{Für eine offene Menge ist zu zeigen, dass es zu jedem Element der Menge eine 
+        $\epsilon$-Umgebung gibt, die in der Menge enthalten ist. Das ist aber kein Problem, da $\var{a}$ herausgenommen ist und die Folge
+        gegen $\var{a}$ konvergiert: jedes (ab jetzt feste) Element der Menge (ohne $\var{a}$) 
+        hat eine positive Distanz zu $\var{a}$. Wählen wir $\epsilon=$Distanz/2, so gibt es
+        höchstens endlich viele Folgenglieder in einer $\epsilon-$Umgebung des Elementes 
+        (alle bis auf endlich viele liegen in der $\epsilon-$Umgebung von $\var{a}$ wegen der 
+        Konvergenz). Davon hat eines eine kleinste Entfernung zum Element. Wähle eine 
+        Umgebung mit Radius kleiner dieser kleinsten Entfernung - und die ist vollständig 
+        in der Menge. Also ist das Element ein innerer Punkt. Die Menge ist offen.\\
+        Die Menge ist nicht abgeschlossen, da z.B. die Folge $x_n=\var{a}+\frac{1}{n}$ mit $\lim_{n\to\infty}x_n=\var{a}$ 
+        einen Grenzwert außerhalb der Menge hat.}	
+    	\type{mc.multiple}
+    	\begin{choice}
+    		\text{offen}
+  			\solution{true}
+		\end{choice}
+		\begin{choice}
+  			\text{abgeschlossen}
+  			\solution{false}
+		\end{choice}
+		\begin{choice}
+			\text{weder noch}
+  			\solution{false}
+		\end{choice}
+    \end{question}
+    
+    \begin{question}
+		\lang{de}{ 
+      		\text{
+      		 $\emptyset$
+      		}
+			}
+    	\explanation[edited]{Die leere Menge 
+        ist sowohl offen als auch abgeschlossen. Da sie keine Elemente 
+        enthält, ist jedes Element ein innerer Punkt; sie ist offen. Auch die Eigenschaft, dass jeder Grenzwert einer
+        Zahlenfolge in der leeren Menge zur leeren Menge gehört, ist erfüllt: Es gibt ja gar keine Folgen!
+        konvergiert gegen einen Grenzwert in der leeren Menge.}	
+        \type{mc.multiple}
+    	\begin{choice}
+    		\text{offen}
+  			\solution{true}
+		\end{choice}
+		\begin{choice}
+  			\text{abgeschlossen}
+  			\solution{true}
+		\end{choice}
+		\begin{choice}
+			\text{weder noch}
+  			\solution{false}
+		\end{choice}
+    \end{question}
+    
+    \begin{question}
+		\lang{de}{ 
+      		\text{
+      		 $ \{ \var{a};\var{b};\var{c}\} $
+      		}
+			}
+    	\explanation[edited]{Dies ist eine abgeschlossene Menge mit drei
+        Elementen. Jede Zahlenfolge kann auch nur diese drei Zahlen als 
+        Grenzwert haben. Innere Punkte existieren nicht.}	
+    	\type{mc.multiple}
+    	\begin{choice}
+    		\text{offen}
+  			\solution{false}
+		\end{choice}
+		\begin{choice}
+  			\text{abgeschlossen}
+  			\solution{true}
+		\end{choice}
+		\begin{choice}
+			\text{weder noch}
+  			\solution{false}
+		\end{choice}
+    \end{question}
+    
+    
+	
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

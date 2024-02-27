@@ -1,0 +1,156 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A02: uneigentliche Integrale}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A02: uneigentliche Integrale}}
+\lang{en}{\title{A02: improper integrals}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24094}{Ticket 24094}
+\end{block}
+\begin{block}[annotation]
+	Kopie: hm4mint/T304_Integrierbarkeit/training 10
+    
+    Im Ticket-System: \href{http://team.mumie.net/issues/10644}{Ticket 10644}
+\end{block}
+
+
+\usepackage{mumie.genericproblem}
+
+
+
+\begin{problem}
+	\randomquestionpool{1}{2}
+	
+
+	\begin{question}	
+	%+++++++++++++++++++VARIABLES++++++++++++++++++++++
+		\begin{variables}
+			\randint[Z]{a}{-2}{2}
+			\randint{k}{1}{3}
+			\randint[Z]{c}{-6}{6}
+			\randint{l}{1}{20}
+			\function[normalize]{f}{x-a}
+			\function[calculate]{b}{a+k}
+			\function[calculate,1]{n}{l/5}
+			\function[calculate,1]{n1}{n+1}
+            \function[calculate]{cm}{-c}
+			
+			%\function{sol}{-c/(n*k^n)}
+			\function{sol}{infinity}
+		\end{variables}
+
+		
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		\type{input.function} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+		\field{real} 
+		\precision{1}
+	%+++++++++++++++++++TITLE++++++++++++++++++++++++++	
+	    \lang{de}{\text{
+			Bestimmen Sie das folgende uneigentliche Integral, sofern es existiert (als exakten Ausdruck oder auf 2 Stellen
+            nach dem Komma gerundet). 
+			Falls es nicht existiert, geben Sie \textit{infinity} ein.\\
+$\int_{\var{a}}^{\var{b}} \frac{\var{c}}{(\var{f})^{\var{n1}}} dx=$ \ansref \\
+Hinweis: Eine Stammfunktion des Integranden ist 
+$\frac{\var{cm}}{\var{n}(\var{f})^{\var{n}}}$.
+		}}
+   \lang{en}{\text{Determine the following improper integral, if it exists (as an exact expression or rounded to 2 places
+            after the decimal point). 
+			If it does not exist, enter \textit{infinity}. \\
+$\int_{\var{a}}^{\var{b}} \frac{\var{c}}{(\var{f})^{\var{n1}}} dx=$ \ansref \\
+Hint: an antiderivative of the integrand is 
+$\frac{\var{cm}}{\var{n}(\var{f})^{\var{n}}}$.
+		}}
+	%+++++++++++++++++++ANSWERS++++++++++++++++++++++++    
+	    \begin{answer}
+			\solution{sol}
+			\checkAsFunction{x}{-10}{10}{10}
+	    \end{answer}    
+	     \lang{de}{\explanation{Bezeichnet man die angegebene Stammfunktion mit $F$, so ist das uneigentliche Integral gleich 
+	    $\lim_{a\searrow \var{a}} ( F(\var{b})-F(a) )=F(\var{b}) -\lim_{a\searrow \var{a}} F(a)$, falls der Grenzwert existiert,
+	    und ansonsten existiert das Integral nicht.
+	    }}
+     \lang{en}{\explanation{If the given primitive function is denoted by $F$, then the improper integral is equal to 
+	    $\lim_{a\searrow \var{a}} ( F(\var{b})-F(a) )=F(\var{b}) -\lim_{a\searrow \var{a}} F(a)$ if the limit exists,
+	    and otherwise the integral does not exist.
+	    }}
+	\end{question}
+	
+	\begin{question}	
+	%+++++++++++++++++++VARIABLES++++++++++++++++++++++
+		\begin{variables}
+			\randint[Z]{a}{-2}{2}
+			\randint{k}{1}{3}
+			\randint{l}{-4}{-1}
+			\function[normalize]{f}{x-a}
+			\randint[Z]{c}{-6}{6}
+			\function[calculate]{b}{a+k}
+			\function[calculate,1]{n}{l/5}
+			\function[calculate,1]{n1}{n+1}
+			\function[calculate,1]{cm}{-c}
+			\function[normalize]{sol}{-c/(n*k^n)}
+			%\string{sol}{infinity}
+		\end{variables}
+    
+		
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		\type{input.function} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+		\field{real} 
+		\precision{1}
+	%+++++++++++++++++++TITLE++++++++++++++++++++++++++	
+	    \lang{de}{\text{
+			Bestimmen Sie das folgende uneigentliche Integral, sofern es existiert (als exakten Ausdruck oder auf 2 Stellen
+            nach dem Komma gerundet). 
+			Falls es nicht existiert, geben Sie \textit{infinity} ein.\\
+$\int_{\var{a}}^{\var{b}} \frac{\var{c}}{(\var{f})^{\var{n1}}} dx=$ \ansref \\
+Hinweis: Eine Stammfunktion des Integranden ist 
+$\frac{\var{cm}}{\var{n}(\var{f})^{\var{n}}}$.
+		}}
+   \lang{en}{\text{
+			Determine the following improper integral, if it exists (as an exact expression or rounded to 2 places
+            after the decimal point). 
+			If it does not exist, enter \textit{infinity}. \\
+$\int_{\var{a}}^{\var{b}} \frac{\var{c}}{(\var{f})^{\var{n1}}} dx=$ \ansref \\
+Hint: an antiderivative of the integrand is 
+$\frac{\var{cm}}{\var{n}(\var{f})^{\var{n}}}$.
+		}}
+	%+++++++++++++++++++ANSWERS++++++++++++++++++++++++    
+	    \begin{answer}
+			\solution{sol}
+			\checkAsFunction[1E-2]{x}{-10}{10}{10}
+	    \end{answer}    
+	    \lang{de}{\explanation{Bezeichnet man die angegebene Stammfunktion mit $F$, so ist das uneigentliche Integral gleich 
+	    $\lim_{a\searrow \var{a}} ( F(\var{b})-F(a) )=F(\var{b}) -\lim_{a\searrow \var{a}} F(a)$, falls der Grenzwert existiert,
+	    und ansonsten existiert das Integral nicht.
+	    }}
+     \lang{en}{\explanation{If the given primitive function is denoted by $F$, then the improper integral is equal to 
+	    $\lim_{a\searrow \var{a}} ( F(\var{b})-F(a) )=F(\var{b}) -\lim_{a\searrow \var{a}} F(a)$ if the limit exists,
+	    and otherwise the integral does not exist.
+	    }}
+	\end{question}
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+
+\end{content}

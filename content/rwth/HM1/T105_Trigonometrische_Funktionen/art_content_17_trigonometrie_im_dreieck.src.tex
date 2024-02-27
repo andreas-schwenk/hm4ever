@@ -1,0 +1,813 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Trigonometrie im Dreieck}
+    \lang{en}{Introduction to trigonometry}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T105_PythagorasProof.meta.xml}{T105_PythagorasProof}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T105_Triangle_E.meta.xml}{T105_Triangle_E}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T105_Triangle_D.meta.xml}{T105_Triangle_D}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T105_Triangle_C.meta.xml}{T105_Triangle_C}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T105_Triangle_B.meta.xml}{T105_Triangle_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T105_Pythagoras.meta.xml}{T105_Pythagoras}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T105_Triangle_A.meta.xml}{T105_Triangle_A}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T105_Trigonometrische_Funktionen/g_art_content_18_grad_und_bogenmass.meta.xml}{link-gradmass}
+    \link{generic_article}{content/rwth/HM1/T105_Trigonometrische_Funktionen/g_art_content_19_allgemeiner_sinus_cosinus.meta.xml}{link-sinus-reell}
+    \link{generic_article}{content/rwth/HM1/T209_Potenzreihen/g_art_content_28_exponentialreihe.meta.xml}{trig-reihe}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{5}
+\ombarticle{1}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Trigonometrie im Dreieck}\lang{en}{Introduction to trigonometry}}
+ 
+\begin{block}[annotation]
+  übungsinhalt
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9028}{Ticket 9028}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\newcommand{\grad}{\circ}
+
+\section{\lang{de}{Einführung und Motivation}\lang{en}{Introduction and motivation}}
+\lang{de}{
+Typische trigonometrische Funktionen sind die aus der Schule bekannten Abbildungen Sinus, Kosinus und Tangens. 
+Diese Funktionen können unter anderem herangezogen werden, um Winkel und Längen in Dreiecken ins Verhältnis zu 
+setzen (vgl. Bedeutung des Wortes \emph{Trigonometrie} mit Herkunft aus dem Griechischen: trígonon ‚Dreieck‘ und métron ‚Maß‘). 
+Zusätzlich zu diesen grundlegenden Zusammenhängen finden die trigonometrischen Funktionen häufig Anwendung in 
+einer Vielzahl von wissenschaftlichen Fragestellungen, beispielsweise in der Konstruktion (Bestimmung von Winkeln 
+und Längen), der Mechanik (Analyse von schwingfähigen Systemen) oder aber auch in der Elektrotechnik (Verwendung 
+des Wechselstroms).\\
+Im Rahmen des folgenden Kapitels wollen wir uns die Grundlagen der trigonometrischen Funktionen erarbeiten und erste Beispielprobleme lösen.
+}
+\lang{en}{
+The main trigonometric functions are the sine, cosine and tangent functions familiar from school. 
+These functions can be, amongst other uses, applied to relate the angles and side lengths of a 
+triangle (the word \emph{trigonometry} comes from the Greek words trigonom 'triangle' and métron 
+'measure'). Trigonometric functions appear in many applications in various fields, particularly in 
+construction (for finding angles and lengths), mechanics (analysing oscillatory motion) and 
+electronics (for AC power and signal processing). In this chapter we lay down the basic definitions 
+and rules of trigenometry and solve some example problems.
+}
+
+\section{\lang{de}{Bezeichnungen im rechtwinkligen Dreieck und Satz des Pythagoras}
+         \lang{en}{Notation and the Pythagorean theorem}}\label{bezeichnungen}
+\lang{de}{
+  Wir betrachten ein rechtwinkliges Dreieck $ABC$ mit
+  rechtem Winkel bei $C$, und verwenden die in der folgenden Abbildung
+  angegebenen Notationen.
+  }
+  \lang{en}{
+  Throughout this section we will refer to the right-angled triangle $ABC$ with a right angle
+  $\gamma$ at $C$, and will use the notation shown in the following image.
+  }
+\begin{figure}
+ \image{T105_Triangle_A}
+\caption{\lang{de}{Notation im rechtwinkligen Dreieck}
+         \lang{en}{Notation for right-angled triangles}}
+\end{figure}
+
+\begin{definition}[\lang{de}{Bezeichnungen im rechtwinkligen Dreieck}
+                   \lang{en}{Definitions for right-angled triangles}]\label{def:rechtw_Dreieck}
+\lang{de}{Im rechtwinkligen Dreieck haben die Seiten besondere Namen:}
+\lang{en}{The sides of a right-angled triangle have special names:}\\
+\begin{itemize}
+\item \lang{de}{
+      Die \textbf{Hypotenuse} ist die dem rechten Winkel gegen"uberliegende Seite.
+      }
+      \lang{en}{
+      the \textit{hypotenuse} is the side opposite the right angle,
+      }
+\item \lang{de}{
+      Die \textbf{Katheten} sind die am rechten Winkel anliegenden Seiten.
+      }
+      \lang{en}{
+      the \textit{legs} (or \textit{catheti}, singular: \textit{cathetus}) are the sides adjacent to 
+      the right angle,
+      }
+\item \lang{de}{
+      Die \textbf{Ankathete} von $\alpha$ ist die am Winkel $\alpha$ anliegende Kathete (also die 
+      Seite $b$), entsprechend ist die Ankathete von $\beta$ die dem Winkel $\beta$ anliegende 
+      Kathete (also die Seite $a$).
+      }
+      \lang{en}{
+      side $a$ is \textit{opposite} the angle $\alpha$ and \textit{adjacent} to the angle $\beta$, 
+      and similarly,
+      }
+\item \lang{de}{
+      die \textbf{Gegenkathete} von $\alpha$ ist dem Winkel $\alpha$ gegen"uberliegende Kathete 
+      (also die Seite $a$), entsprechend ist die Gegenkathete von $\beta$ die dem Winkel $\beta$ 
+      gegen"uberliegende Kathete (also die Seite $b$).
+      }
+      \lang{en}{
+      side $b$ is \textit{opposite} the angle $\beta$ and \textit{adjacent} to the angle $\alpha$.
+      }
+\end{itemize}
+\end{definition}
+
+ 
+\lang{de}{
+Die Ankathete von $\beta$ ist also zugleich die Gegenkathete von $\alpha$, und die Gegenkathete von 
+$\beta$ ist die Ankathete von $\alpha$.
+\\\\
+Ein wichtiger Satz, der die Seitenlängen eines rechtwinkligen Dreiecks miteinander in Verbindung bringt,
+ist der Satz des Pythagoras.
+}
+\lang{en}{
+The Pythaogrean theorem is important because it states a relationship between the side lengths of 
+a right-angled triangle.
+}
+
+\label{satz-des-pythagoras}
+\begin{theorem}[\lang{de}{Satz des Pythagoras}\lang{en}{Pythagorean theorem}]
+%  \textbf{Satz des Pythagoras:}\\
+  \lang{de}{
+  Im rechtwinkligen Dreieck ist die Summe der Quadrate "uber den Katheten gleich
+  dem Quadrat "uber der Hypotenuse.
+  \\\\
+  Mit den obigen Bezeichnungen gilt also
+  }
+  \lang{en}{
+  In a right-angled triangle, the sum of the squares of both legs is equal to the square of the 
+  hypotenuse.
+  \\\\
+  With the above notation,
+  }
+  \[ a^2+b^2=c^2.\]
+\end{theorem}
+\begin{figure}
+  \image{T105_Pythagoras}
+\caption{\lang{de}{Satz des Pythagoras}\lang{en}{The Pythagorean theorem}}
+\end{figure}
+
+% \begin{proof}[Beweis]
+% \begin{showhide}
+%  \lang{de}{Eine Möglichkeit, dies einzusehen, ist durch Betrachtung der folgenden Abbildung.}
+%  \lang{en}{The simplest way to visualize this is by looking at the following image.}
+%  \begin{figure} \image{T105_Pythagoras} \end{figure}
+%  \lang{de}{Hier wird auf jede Seite eines Quadrats $PQRS$ der Seitenlänge $c$ das gegebene rechtwinklige Dreieck aufgesetzt.
+%  Da das Dreieck rechtwinklig ist, bilden die Strecken der Länge $a$ und $b$, die sich bei einem der Eckpunkte $P$, $Q$, $R$ oder $S$ treffen,
+%  eine Seite des roten Quadrats, da die Innnenwinkelsumme im Dreieck stets $180^\circ$ beträgt. Für den vorliegenden
+%  Fall gilt foglich $\beta+90^\circ+\alpha=180^\circ$. Die gesamt Figur ist also ein Quadrat mit
+%  Seitenlänge $a+b$. Da der Flächeninhalt eines Quadrats gerade das Quadrat einer Seitenlänge ist und der Flächeninhalt der rechtwinkligen Dreiecke
+%  gerade $\frac{1}{2}ab$, ist daher $(a+b)^2$
+%  (=Flächeninhalt des großen Quadrats) gleich groß wie $c^2+4\cdot (\frac{1}{2}ab)$ (=Flächeninhalt des kleinen 
+%  Quadrats und der vier rechtwinkligen Dreiecke).\\
+%  Aufgrund der ersten binomischen Formel erhält man noch $(a+b)^2=a^2+2ab+b^2$, und daher
+%  \[   a^2+2ab+b^2= c^2+4\cdot \left(\frac{1}{2}ab\right)=c^2+2ab. \]
+%  Subtraktion von $2ab$ auf beiden Seiten ergibt schließlich
+%  \[ a^2+b^2= c^2.\]
+%  }
+% \end{showhide}
+% \end{proof}
+%
+
+\begin{proof}[\lang{de}{Beweis}\lang{en}{Proof}]
+ \begin{showhide}
+  \lang{de}{Eine Möglichkeit, dies einzusehen, ist durch Betrachtung der folgenden Abbildung.}
+  \lang{en}{The simplest way to visualize this is by looking at the following image.}
+  \begin{figure} 
+  \image{T105_PythagorasProof}
+  \end{figure}
+  \lang{de}{
+  Hier wird auf jede Seite des (schwarzen) Quadrats $PQRS$ der Seitenlänge $c$ das gegebene rechtwinklige Dreieck 
+  (in orange) aufgesetzt. Da das Dreieck rechtwinklig ist, bilden die Katheten $a$ und $b$ jeweils zweier benachbarter Dreiecke, 
+  die sich in einem der Eckpunkte P, Q, R oder S treffen, eine Strecke der Länge $a+b$. Dies resultiert
+  aus der Tatsache, dass die Summe der Innenwinkel eines Dreicks stets $180^\circ$ beträgt, im vorliegenden Fall also 
+  $\alpha + 90^\circ + \beta=180^\circ$ ist. Die gesamte Figur ergibt daher ein neues Quadrat mit Seitenlänge $a+b$ und
+  Flächeninhalt $(a+b)^2 $. Da sich die Fläche dieses Quadrats aber gerade aus den Flächen des kleineren 
+  Quadrats (mit Flächeninhalt $c^2$) und der vier rechtwinkligen Dreiecke (mit Flächeninhalt von je $\frac{1}{2}ab$)
+  zusammensetzt, ergibt sich die zu beweisende Formel
+  }
+  \lang{en}{
+  The sides of the (black) square $PQRS$ have the same length $c$ as the hypotenuse of the triangle 
+  which is superimposed on each side of the square (orange). Thanks to the right angle, the legs of 
+  each triangle form a line of length $a+b$ with the leg of each neighbouring triangle where they 
+  meet at the points $P$, $Q$, $R$ and $S$. In particular, the sum of the interior angles of a 
+  triangle is $180^\circ$, so $\alpha + 90^\circ + \beta=180^\circ$, giving us the straight lines. 
+  There is hence a new, larger square formed by the edges of the triangles (orange), with sides of 
+  length $a+b$. As the area of this new square is simply the sum of the area of the smaller square 
+  ($c^2$) and the areas of the triangles ($\frac{1}{2}ab$ each), we have the formula 
+  }
+  
+  \begin{align*}
+                   \;  & (a+b)^2 &= c^2+4\cdot \left(\frac{1}{2}ab\right) \quad &\vert 
+                   \text{\lang{de}{1. binomische Formel}\lang{en}{expanding on both sides}}\\
+   \Leftrightarrow \;  & a^2+2ab+b^2 \; &= c^2+2ab  &\vert -2ab \\
+   \Leftrightarrow \;  & a^2+b^2 &= c^2  &
+   \end{align*}
+  
+ \end{showhide}
+\end{proof}
+
+
+% \begin{center}
+%     \lang{de}{\iframe[400][225][S]{https://www.stream24.net/vod/getVideo.php?id=10962-1-5533&mode=iframe}}
+% \end{center}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{2}
+\begin{quickcheck}
+	\begin{variables}	
+	% Pythagoräische Tripel:
+	\randint{v}{1}{3}
+	\randint{u0}{1}{2}
+	\function[calculate]{u}{u0+v}
+	\function[calculate]{a}{(u^2-v^2)/10}
+	\function[calculate]{b}{(2*u*v)/10}
+	\function[calculate]{c}{(u^2+v^2)/10}
+	\function[calculate]{c2}{c^2}
+	\end{variables}
+
+	\type{input.number}	
+	\field{real}
+	\displayprecision{2}
+	\correctorprecision{2}
+
+	\text{\lang{de}{
+        In einem rechtwinkligen Dreieck sind die Kathetenl"angen $\var{a}\text{ cm}$ und 
+        $\var{b}\text{ cm}$ gegeben.\\
+        Bestimmen Sie die L"ange der Hypotenuse des Dreiecks (in $\text{cm}$ und auf zwei Stellen 
+        nach dem Komma gerundet).\\ \\
+      	Die L"ange der Hypotenuse beträgt gerundet \ansref cm.
+        }
+        \lang{en}{
+        Consider a right-angled triangle with legs of length $\var{a}\text{ cm}$ and 
+        $\var{b}\text{ cm}$.\\
+        Find the length of the hypotenuse of the triangle (in $\text{cm}$ and rounded to two decimal 
+        places).\\\\
+        The length of the hypotenuse is \ansref cm.
+        }}
+
+	\begin{answer}
+		\solution{c}
+	\end{answer}
+	\explanation{\lang{de}{Nach dem Satz des Pythagoras ist die Hypotenusenlänge in cm gleich }
+               \lang{en}{By the Pythagorean theorem, the length of the hypotenuse is }
+                $\sqrt{\var{a}^2+\var{b}^2}=\sqrt{\var{c2}}=\var{c}$.}
+	\end{quickcheck}
+
+	
+	\begin{quickcheck}
+	\begin{variables}	
+	% Pythagoräische Tripel:
+	\randint{v}{1}{3}
+	\randint{u0}{1}{2}
+	\function[calculate]{u}{u0+v}
+	\function[calculate]{a}{(u^2-v^2)/10}
+	\function[calculate]{b}{(2*u*v)/10}
+	\function[calculate]{c}{(u^2+v^2)/10}
+	\function[calculate]{b2}{b^2}
+	\end{variables}
+
+
+	\type{input.number}	
+	\field{real}
+	\displayprecision{2}
+	\correctorprecision{2}
+
+	\text{\lang{de}{
+        Im rechtwinkligen Dreieck $ABC$ sind die Kathetenlänge $\var{a}\text{ cm}$ und die 
+        Hypotenusenlänge $\var{c}\text{ cm}$ gegeben.\\
+    		Bestimmen Sie die L"ange der anderen Kathete des Dreiecks (in $\text{cm}$ und auf zwei 
+        Stellen nach dem Komma gerundet).\\ \\
+        Die L"ange der zweiten Kathete beträgt gerundet \ansref cm.
+        }
+        \lang{en}{
+        Consider the right-angled triangle $ABC$ with a leg of length $\var{a}\text{ cm}$ and the 
+        hypotenuse of length $\var{c}\text{ cm}$.\\
+        Find the length of the other leg of the triangle (in $\text{cm}$ and rounded to two decimal 
+        places).\\\\
+        The length of the other leg of the triangle is \ansref cm.
+        }}
+
+	\begin{answer}
+		\solution{b}
+	\end{answer}
+	\explanation{\lang{de}{Nach dem Satz des Pythagoras ist die zweite Kathetenlänge in cm gleich }
+               \lang{en}{By the Pythagorean theorem, the length of the other leg of the triangle is }
+               $\sqrt{\var{c}^2-\var{a}^2}=\sqrt{\var{b2}}=\var{b}$.}
+
+	\end{quickcheck}
+	
+\end{quickcheckcontainer}
+	
+
+
+
+\section{\lang{de}{Sinus, Kosinus und Tangens}\lang{en}{Sine, cosine, and tangent}}\label{sinus}
+
+\lang{de}{
+Im rechtwinkligen Dreieck hat man auch besondere Zusammenh"ange zwischen den
+Seitenl"angen und den Innenwinkeln, welche mithilfe der Winkelfunktionen 
+Sinus, Kosinus und Tangens beschrieben werden.
+}
+\lang{en}{
+In a right triangles there are special relationships between the side lengths and inner angles which 
+can be described with the help of the sine, cosine, and tangent functions.
+}
+
+% Obwohl diese Funktionen zun"achst 
+% "uber die Seitenverh"altnisse definiert werden, k"onnen sie auch ohne Kenntnis der
+% Dreieckseiten berechnet werden 
+% (vgl. \href{http://de.wikipedia.org/wiki/Sinus_und_Kosinus#Analytische_Definition}{Analytische 
+% Definition von Sinus und Kosinus auf Wikipedia}).
+% %Abschnitt \link{link2}{Trigonometrische Funktionen}
+% %in \link{overview-el-functions}{Kapitel VI}).
+% Damit liefern sie die M"oglichkeit, auch aus Kenntnis einer Seite und einem Winkel
+% weitere Seiten des rechtwinkligen Dreiecks zu berechnen.
+
+\begin{definition}[\lang{de}{Sinus, Kosinus und Tangens}
+                   \lang{en}{Sine, cosine, and tangent}] \label{def-trigFkt}
+\lang{de}{
+\textbf{Sinus}, \textbf{Kosinus} und \textbf{Tangens} ordnen einem Winkel im rechtwinkligen
+Dreieck die L"angenverh"altnisse der Katheten und Hypotenuse zu.
+F"ur die Definition betrachtet man zun"achst ein rechtwinkliges
+Dreieck $ABC$ wie in der Abbildung.
+} 
+\lang{en}{
+Sine, cosine and tangent help us relate the side lengths of a triangle with its interior angles.
+Consider first a right-angled triangle $ABC$ as in the figure.
+}
+
+\label{sin-cos-im-dreieck}
+\begin{figure}
+  \image{T105_Triangle_B}
+\caption{\lang{de}{Rechtwinkliges Dreieck $ABC$}\lang{en}{Right-angled triangle $ABC$}}
+\end{figure}
+
+\lang{de}{
+Man definiert dann \textbf{Sinus}, \textbf{Kosinus} und \textbf{Tangens} von $\alpha$ durch
+}
+\lang{en}{
+We define the sine, cosine, and tangent of the angle $\alpha$ by:
+}
+  \begin{eqnarray*}
+  \lang{de}{
+    \sin(\alpha) &:=& \frac{\text{L"ange der Gegenkathete von }\alpha}
+                           {\text{L"ange der Hypotenuse}}
+                 =  \frac{a}{c}, \\
+    \cos(\alpha) &:=& \frac{\text{L"ange der Ankathete von }\alpha}
+                           {\text{L"ange der Hypotenuse}}
+                 =  \frac{b}{c}, \\
+    \tan(\alpha) &:=& \frac{\text{L"ange der Gegenkathete von }\alpha}
+                           {\text{L"ange der Ankathete von }\alpha}
+                 =  \frac{a}{b} = \frac{\sin(\alpha)}{\cos(\alpha)}.
+    }
+    \lang{en}{
+    \sin(\alpha) &:=& \frac{a}{c}= \frac{\text{Length of the opposite leg of }\alpha}
+                                        {\text{Length of the hypotenuse}} \\
+    \cos(\alpha) &:=& \frac{b}{c}= \frac{\text{Length of the adjacent leg to }\alpha}
+                                        {\text{Length of the hypotenuse}} \\
+    \tan(\alpha) &:=& \frac{a}{b}= \frac{\text{Length of the opposite leg of }\alpha}
+                                        {\text{Length of the adjacent leg to }\alpha} 
+                                 = \frac{\sin(\alpha)}{\cos(\alpha)}
+    }
+  \end{eqnarray*}
+  \lang{de}{Analoge Zusammenhänge gelten für den Winkel $\beta$.
+  \\
+  \floatright{\href{https://www.hm-kompakt.de/video?watch=127}{\image[75]{00_Videobutton_schwarz}}}\\\\
+  }
+  \lang{en}{Analogous definitions hold for the angle $\beta$.}
+\end{definition}
+%Eine Zusammenfassung der in Definition \ref{def-trigFkt} gegebenen Zusammenhänge, samt kurzen Rechenbeispielen, kann folgendem Video entnommen werden:\\
+
+\begin{remark}
+\lang{de}{
+Die Werte $\sin(\alpha)$, $\cos(\alpha)$ und $\tan(\alpha)$ hängen nicht von der Gr"o"se des 
+Dreiecks ab, sondern nur von der Winkelgr"o"se von $\alpha$.
+}
+\lang{en}{
+The values $\sin(\alpha)$, $\cos(\alpha)$ and $\tan(\alpha)$ do not depend on the size of the 
+triangle, but rather only on the angle $\alpha$.
+}
+\end{remark}
+
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+
+\begin{variables}
+	% Pythagoräische Tripel:
+	\randint{v}{1}{3}
+	\randint{u0}{1}{2}
+	\function[calculate]{u}{u0+v}
+	\function[calculate]{a}{(u^2-v^2)}
+	\function[calculate]{b}{(2*u*v)}
+	\function[calculate]{c}{(u^2+v^2)}
+\function[calculate]{ca}{b/c}
+\function[calculate]{sa}{a/c}
+\function[calculate]{ta}{a/b}
+\end{variables}
+\text{\lang{de}{
+Im rechtwinkligen Dreieck $ABC$ sind die Kathetenl"angen $a=\var{a}\text{ cm}$
+und $b=\var{b}\text{ cm}$ bekannt.\\
+Dann sind $\cos(\alpha)$=\ansref, $\sin(\alpha)$=\ansref und $\tan(\alpha)$=\ansref (Die Ergebnisse können als Bruch angegeben werden).\\ 
+}
+\lang{en}{
+Consider a right-angled triangle $ABC$ with leg lengths $a=\var{a}\text{ cm}$ and 
+$b=\var{b}\text{ cm}$. \\
+Then $\cos(\alpha)$=\ansref, $\sin(\alpha)$=\ansref, and $\tan(\alpha)$=\ansref (the results may be 
+submitted as fractions).
+}}
+
+
+\begin{answer}
+		\solution{ca}
+	\end{answer}
+
+	\begin{answer}
+		\solution{sa}
+	\end{answer}
+	
+	\begin{answer}
+		\solution{ta}
+	\end{answer}
+\end{quickcheck}
+
+
+\lang{de}{
+Auf diese Weise sind also Sinus, Kosinus und Tangens f"ur alle spitzen Winkel (d.h. Winkel kleiner 
+als $90^\grad$) definiert.\\
+Betrachtet man statt $\alpha$ den Winkel $\beta$ und beachtet, dass wegen der Winkelsumme im Dreieck 
+$\alpha+\beta+90^\circ=180^\circ\; \Leftrightarrow\; \beta=90^\grad-\alpha\;$ gilt, so erh"alt man 
+die Gleichungen
+}
+\lang{en}{
+In this way the sine, cosine, and tangent of an angle are defined for all acute angles (angles below 
+$90^\grad$).\\
+Consider the angle $\beta$ instead of the angle $\alpha$, and notice that as the sum of angles in a 
+triangle is $180^\grad$, we have $\beta=90^\grad-\alpha$. Hence:
+}
+\begin{rule}\label{rule:sin_cos}
+  \begin{eqnarray*}
+    \lang{de}{\sin(90^\grad-\alpha) &=& \cos(\alpha), \\
+    \cos(90^\grad-\alpha) &=& \sin(\alpha).}
+    \lang{en}{\sin(90^\grad-\alpha) &=& \cos(\alpha) \\
+    \cos(90^\grad-\alpha) &=& \sin(\alpha)} 
+  \end{eqnarray*}
+
+\end{rule}
+
+\lang{de}{
+Aus dem \lref{satz-des-pythagoras}{Satz des Pythagoras} erh"alt man noch einen Zusammenhang zwischen 
+$\sin(\alpha)$ und $\cos(\alpha)$, n"amlich
+}
+\lang{en}{
+From the \lref{satz-des-pythagoras}{Pythagorean theorem} we get another relationship between
+$\sin(\alpha)$ and $\cos(\alpha)$, namely:
+}
+
+\begin{rule}\label{rule-trigon-pythagoras}
+\[(\sin(\alpha))^2+(\cos(\alpha))^2=1\lang{de}{.} \]
+\end{rule}
+\begin{proof*}
+\begin{showhide}
+\lang{de}{Nach dem Satz des Pythagoras ist $a^2+b^2=c^2$. Daraus folgt}
+\lang{en}{By the Pythagorean Theorem, $a^2+b^2=c^2$. It follows that}
+\[(\sin(\alpha))^2+(\cos(\alpha))^2=\big(\frac{a}{c}\big)^2+\big(\frac{b}{c}\big)^2
+=\frac{a^2+b^2}{c^2}=1. \]
+\end{showhide}
+\end{proof*}
+
+
+
+\begin{example}
+\label{right-angled-abb4}
+  \begin{figure}
+    \image{T105_Triangle_C}
+	\caption{\lang{de}{Sinus und Kosinus von $45^\grad$.}\lang{en}{Sine and cosine of $45^\grad$.}}
+  \end{figure}
+  \begin{enumerate}
+    \item \label{bsp-sinus-45-grad}
+    \lang{de}{
+    Betrachten wir ein rechtwinkliges Dreieck mit $\alpha=45^\grad$. Dann
+    ist auch $\beta=90^\grad-\alpha=45^\grad$. Das heißt, die beiden Winkel sind
+    gleich gro"s und damit sind auch die beiden Katheten gleich lang. Ein solches 
+    Dreieck wird als \emph{\notion{gleichschenklig}} bezeichnet. Aus dem
+    Satz des Pythagoras erh"alt man nun
+    \[ c^2=a^2+b^2=2\cdot a^2 .\]
+    Teilt man die Gleichung durch $a^2$ und zieht die Wurzel, erh"alt man somit
+    \[ \frac{c}{a}=\sqrt{2}. \]
+    Also gilt
+    \[ \cos(45^\grad)=\sin(45^\grad)=
+      \frac{a}{c}=\frac{1}{\sqrt{2}}=\frac{\sqrt{2}}{2}. \]
+    }
+    \lang{en}{
+    Consider the right triangle with $\alpha=45^\grad$. Clearly $\beta$ is also 
+    $\beta=90^\grad-\alpha=45^\grad$. Both angles are the same and hence both legs are also the 
+    same length. From the Pythagorean theorem we get 
+    \[ c^2=a^2+b^2=2\cdot a^2\]
+    If we divide the equation by $a^2$ and then take the square root we get
+    \[ \frac{c}{a}=\sqrt{2} \]
+    and hence
+    \[ \cos(45^\grad)=\sin(45^\grad)=
+      \frac{a}{c}=\frac{1}{\sqrt{2}}=\frac{\sqrt{2}}{2} \]
+    }
+  \begin{figure}
+    \image{T105_Triangle_D}
+	\caption{\lang{de}{Sinus und Kosinus von $30^\grad$ und $60^\grad$.}
+           \lang{en}{Sine and cosine of $30^\grad$ and $60^\grad$.}}
+  \end{figure}
+  \item \label{bsp-sinus-60-grad}\label{right-angled-abb5}
+    \lang{de}{
+    Betrachten wir ein rechtwinkliges Dreieck mit $\alpha=30^\grad$. Dann
+    gilt unter Berücksichtigung der Innenwinkelsumme in Dreiecken
+    $\beta=90^\grad-\alpha=60^\grad$. Spiegelt man das Dreieck an der Seite $b$,
+    so erh"alt man ein Dreieck $ABB'$, dessen Innenwinkel s"amtlich
+    $60^\grad$ betragen, das also gleichseitig ist. Daher gilt:
+    \[
+    a=\overline{BC}=\frac{1}{2}\overline{BB'}=\frac{1}{2}\overline{AB}=\frac{1}{2}\cdot
+    c \]
+    Somit erh"alt man
+    \[ \sin(30^\grad)=\frac{a}{c}=\frac{1}{2}, \]
+    sowie
+    \[ \cos(60^\grad)=\sin(30^\grad)=\frac{1}{2}. \]
+    $\sin(60^\grad)$ und $\cos(30^\grad)$ ergeben sich nach Regel 
+    \ref{rule:sin_cos} als
+    \[
+    \sin(60^\grad)= \cos(30^\grad)= \sqrt{1-\sin(30^\grad)^2}=\sqrt{\frac{3}{4}}=\frac{\sqrt{3}}{2}.
+    \]
+    }
+    \lang{en}{
+    Consider a right triangle with $\alpha=30^\grad$, so $\beta=90^\grad-\alpha=60^\grad$. If we 
+    mirror the triangle along the side $b$, we get a triangle $ABB'$ whose angles are all
+    $60^\grad$ and thus which is an equilateral triangle. Hence we have:
+    \[
+    a=\overline{BC}=\frac{1}{2}\overline{BB'}=\frac{1}{2}\overline{AB}=\frac{1}{2}\cdot c. 
+    \]
+    Using this we get that
+    \[ \sin(30^\grad)=\frac{a}{c}=\frac{1}{2} \]
+    and
+    \[ \cos(60^\grad)=\sin(30^\grad)=\frac{1}{2}. \]
+    Rule \ref{rule-trigon-pythagoras} also gives us $\sin(60^\grad)$ and $\cos(30^\grad)$:
+    \[ \sin(60^\grad)= \cos(30^\grad)= \sqrt{1-\sin(30^\grad)^2
+      }=\sqrt{\frac{3}{4}}=\frac{\sqrt{3}}{2}\]
+    }
+  \end{enumerate}
+
+\end{example}
+
+%\textbf{\lang{de}{Anmerkung:}\lang{en}{Remark}} 
+\begin{remark}
+\lang{de}{
+Sinus, Kosinus und Tangens eines Winkels lassen sich mit
+Hilfe analytischer Methoden berechnen, ohne vorher die Seitenl"angen des Dreiecks
+kennen zu m"ussen. Diese werden wir noch im % \link{trig-reihe}{zweiten Teil} 
+\ref[trig-reihe][zweiten Teil]{sec:sinus-kosinus}
+dieses Kurses kennenlernen.
+%(vgl. \href{http://de.wikipedia.org/wiki/Sinus_und_Kosinus#Analytische_Definition}{Analytische 
+%Definition von Sinus und Kosinus auf Wikipedia}).
+%(vgl. Abschnitt \link{link2}{Trigonometrische Funktionen}
+%in \link{overview-el-functions}{Kapitel VI}).
+Diese Methoden verwendet zum Beispiel der Taschenrechner.\\
+Ist beispielsweise einer der spitzen Winkel eines rechtwinkligen Dreiecks bekannt, kann man 
+hieraus den Sinus oder den Kosinus bestimmen. Ist zusätzlich noch die Länge einer beliebigen 
+Seite dieses Dreiecks gegeben, lässt sich mithilfe der Formeln aus Definition \ref{def-trigFkt} 
+das Dreieck komplett bestimmen, beispielweise gilt
+%Man kann daher Sinus, Kosinus und Tangens auch benutzen, um aus gegebenen
+%%Winkeln und einer Seitenl"ange eines rechtwinkligen Dreiecks die anderen
+%Seiten zu berechnen. Dazu m"ussen nur die Gleichungen aus der ersten
+%Definition nach den entsprechenden Seiten aufgel"ost werden, also zum Beispiel
+}
+\lang{en}{
+The sine, cosine, and tangent of an angle can be calculated with the help of analytical methods 
+without worrying about the side lengths of triangles (see the 
+\href{http://en.wikipedia.org/wiki/Trigonometric_functions#Series_definitions}{analytical 
+definition of sine and cosine on Wikipedia}). 
+Pocket calculators and most software based-calculators, like those found on your cell phone, utilize 
+these analytical methods to calculate sine and cosine. We can also use sine, cosine, and tangent to 
+determine the side lengths of a right triangle when one (non right) angle and one side length are 
+given. To do so, we simply solve for the component in the above definition that we need to 
+determine, e.g.
+}
+
+\[
+\text{\lang{de}{L"ange der Ankathete von }\lang{en}{{Length of side adjacent to }}}\alpha 
+= \cos(\alpha)\cdot \text{\lang{de}{L"ange der Hypotenuse}\lang{en}{Length of hypotenuse}}.
+\]
+\end{remark}
+
+\begin{block}[warning]
+\lang{de}{
+Da au"ser dem Gradma"s auch das Bogenma"s als Ma"seinheit für Winkel gebräuchlich ist (s. \link{link-gradmass}{nächster Abschnitt}),
+ist bei der Verwendung der trigonometrischen Funktionen auf dem Taschenrechner darauf zu achten, dass die richtige
+Ma"seinheit (\textit{deg} für Gradma"s und \textit{rad} für Bogenma"s) eingestellt ist.
+}
+\lang{en}{
+As both degrees and radians can be used as a unit for measuring angles (see the 
+\link{link-gradmass}{next section}), be careful that your calculator is set to the correct unit 
+(\textit{deg} for degrees and \textit{rad} for radians)!
+}
+\end{block}
+
+\lang{de}{
+Folgende Wertetabelle enthält die Werte der Sinus- und der Kosinusfunktion für spezielle Winkel:
+}
+\lang{en}{
+The following table of values contains the values for sine and cosine for some useful angles:
+}
+\begin{center}
+\begin{table} \label{tbl:trigData}
+\head[ccccccccc]
+\lang{de}{Winkel in Grad}\lang{en}{Angle in Degrees} &
+  $\;\; 0^{\circ}\;\;$&$\;\; 30 ^{\circ}\;\;$ &$\;\; 45 ^{\circ}\;\;$&$\;\; 60 ^{\circ}\;\;$& 
+    $\;90^{\circ} \;$\\
+\lang{de}{Winkel in Bogenmaß}\lang{en}{Angle in Radians} &
+  $0$& $\frac{\pi}{6}$ & $\frac{\pi}{4}$ & $\frac{\pi}{3}$ & 
+    $\frac{\pi}{2}$\\
+\body
+$\sin(x)$& $0$&$\frac{1}{2}$&$\frac{\sqrt{2}}{2}$&$\frac{\sqrt{3}}{2}$&$1$\\
+$\cos(x)$& $1$&$\frac{\sqrt{3}}{2}$&$\frac{\sqrt{2}}{2}$&$\frac{1}{2}$&$0$\\
+\end{table}
+\end{center}
+\lang{de}{
+Eine kurze Zusammenfassung der in Abschnitt \ref{sinus} angesprochenen Themen kann dem folgenden Video entnommen werden:\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10923&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+}
+\lang{en}{
+All of these values can be found without a calculator like in the example above.
+}
+
+\section{\lang{de}{Umkehrung von Sinus, Kosinus und Tangens}
+         \lang{en}{Inverse of sine, cosine and tangent}}\label{sec:arc-functions}
+\lang{de}{
+Wir wollen uns im Rahmen des nachfolgenden Abschnitts mit den Umkehrungen von Sinus, Kosinus und 
+Tangens beschäftigen und starten mit der folgenden Fragestellung: Angenommen in einem rechtwinkligen 
+Dreieck sind die Seitenlängen $c=2$ und $b=1$ bekannt (siehe Abbildung). Wie groß ist der Winkel 
+$\beta$?
+}
+\lang{en}{
+In this section we define the inverse functions of sine, cosine and tangent, and how these can be 
+used to find the size of an angle given two side lengths of a triangle. For example, suppose that 
+we are given side lengths $c=2$ and $b=1$ for the figure below, and want to find the angle $\beta$.
+}
+\begin{figure}
+ \image{T105_Triangle_E}
+\end{figure}
+\lang{de}{Nach Definition \ref{def-trigFkt} gilt}
+\lang{en}{By definition \ref{def-trigFkt},}
+\begin{equation*}
+    \sin(\beta)=\frac{\text{\lang{de}{L"ange der Gegenkathete von }
+                            \lang{en}{Length of the side opposite }}\beta}
+                     {\text{\lang{de}{L"ange der Hypotenuse}
+                            \lang{en}{Length of the hypotenuse}}}=\frac{b}{c}=\frac{1}{2}.
+\end{equation*}
+\lang{de}{
+Wir haben eine Gleichung mit einer Unbekannten. Augenscheinlich sollte sich das Problem also lösen 
+lassen. Wie lässt sich diese Gleichung umstellen?\\
+Wir erkennen, dass wir die Umkehrung der trigonometrischen Ausdrücke (im vorliegen Beispiel die Umkehrung des Sinus) benötigen. 
+Diese Umkehrfunktionen werden mit dem Präfix \textbf{Arcus} bezeichnet.
+Die Umkehrung des Sinus lautet Arcus-Sinus, die des Kosinus Arcus-Kosinus und die des Tangens Arcus-Tangens. Für die Verwendung dieser Funktionen haben sich folgende Kurzschreibweisen etabliert:
+}
+\lang{en}{
+This is an equation with an unknown $\beta$, which by visual inspection has a solution. How can we 
+rearrange this equation for $\beta$? 
+We recognise that we need an inverse for the trigonometric functions (sine in this case). To denote 
+the inverse we use the prefix \textit{arc}:
+}
+\begin{itemize}
+    \item \notion{\lang{de}{Arcus-Sinus}\lang{en}{Inverse sine}}: 
+      $\quad \arcsin(x)$ \lang{de}{oder}\lang{en}{or} $\sin^{-1}(x)$
+    \item \notion{\lang{de}{Arcus-Kosinus}\lang{en}{Inverse cosine}}: 
+      $\arccos(x)$ \lang{de}{oder}\lang{en}{or} $\cos^{-1}(x)$
+    \item \notion{\lang{de}{Arcus-Tangens}\lang{en}{Inverse tangent}}:
+      $\arctan(x)$ \lang{de}{oder}\lang{en}{or} $\tan^{-1}(x)$
+\end{itemize}
+\lang{de}{
+Die Arcus-Ausdrücke lassen sich also verwenden, um aus einem gegebenen Sinus-, Kosinus- oder Tangens-Wert wieder den zugrundeliegenden Winkel zu bekommen.\\
+Mit diesem Wissen lässt sich unsere Ausgangsfragestellung nun beantworten:
+}
+\lang{en}{
+The purpose of these inverse functions is by definition for finding the angle that has a given sine, cosine or tangent value. They can be used to rearrange the above equation:
+}
+\begin{align*}
+    & \sin(\beta)&=\frac{1}{2} \\
+    \Leftrightarrow &\quad \beta&=\arcsin\left(\frac{1}{2}\right)=30^\circ
+\end{align*}
+\lang{de}{Der Winkel $\beta$ des gegebenen Dreiecks beträgt also $30^\circ$.}
+\lang{en}{Hence the angle $\beta$ of the triangle is $30^\circ$.}
+%\begin{example}
+%Da $\sin(60^\circ)=\frac{\sqrt{3}}{2}=\cos(30^\circ)$ ist (vgl. Beispiel \ref{bsp-sinus-60-grad}), gelten
+%\[  \arcsin\big(\frac{\sqrt{3}}{2}\big) = 60^\circ \quad\text{und}\quad \arccos\big(\frac{\sqrt{3}}{2}\big) = 30^\circ. \]
+%\end{example}
+\begin{block}[warning]
+\lang{de}{
+Taschenrechner verwenden zumeist jeweils die zweite Notationsoption bei
+der Darstellung der Arcus-Ausdrücke, sprich 
+$\sin^{-1}(x)$, $\cos^{-1}(x)$ und $\tan^{-1}(x)$.
+Zudem ist bei der Verwendung der Arcus-Ausdrücke natürlich
+wieder darauf zu achten, dass die ''richtige''
+Ma"seinheit (Gradmaß oder Bogenmaß) im Taschenrechner eingestellt wird.
+}
+\lang{en}{
+Most calculators use the notation $\sin^{-1}(x)$, $\cos^{-1}(x)$ und $\tan^{-1}(x)$ for the inverse 
+trigonometric functions. For inverse trigonometric functions it is still important to set the 
+correct unit for angles in the calculator.
+}
+\end{block}
+
+
+
+\begin{remark}
+\lang{de}{
+Im rechtwinkligen Dreieck liegen die Sinus- und Kosinuswerte im Intervall $[0;1]$.
+Damit sind der Arcus-Sinus und der 
+Arcus-Kosinus zunächst nur auf diesem Intervall definiert.\\
+Die Tangenswerte erstrecken sich hingegen auf alle positiven 
+reellen Zahlen,  
+% weshalb die Werte des Arcus-Tangens im Intervall $(0;\infty)$ liegt.\\
+% neu
+weshalb der Arcus-Tangens hier zunächst nur auf dem Intervall $(0;\infty)$ definiert wird.
+\\\\
+Im Abschnitt \link{link-sinus-reell}{Allgemeine trigonometrische Funktionen} werden 
+Sinus und Kosinus als reelle Funktionen
+auf ganz $\R$ (d.h. für alle Winkel im Bogenmaß) definiert. Für diese erweiterten 
+Funktionen vergrößert sich auch die Wertemenge, wodurch
+die zugehörigen Arcus-Funktionen auch auf einem größeren Bereich definiert sind.
+}
+\lang{en}{
+The sine and cosine values of interior angles of a right-angled triangle lie in the interval 
+$[0;1]$. Inverse sine and inverse cosine are therefore only defined on this interval for now.\\
+The tangent on the other hand can be any positive real number, so the inverse tangent function is 
+defined on the interval $(0;\infty)$.
+}
+\end{remark}
+
+
+
+\begin{quickcheck}
+		\field{real}
+		\displayprecision{3}
+		\type{input.number}
+		\begin{variables}
+			\randint{w}{1}{80}
+			\function[calculate]{s}{sin(w*pi/180)}
+		\end{variables}
+
+			\text{\lang{de}{
+            Bestimmen Sie mit dem Taschenrechner den Winkel $\alpha$ zwischen $0^\circ$ und 
+            $90^\circ$ (auf ganze Grad gerundet) mit 
+            }
+            \lang{en}{
+            Using a calculator, calculate the angle $\alpha$ between $0^\circ$ and $90^\circ$, 
+            rounded to the nearest degree, with 
+            }
+            $\sin(\alpha)=\var{s}$.\\ $\alpha\approx$\ansref${\phantom{|}}^\circ$.}
+
+		\begin{answer}
+			\solution{w}
+		\end{answer}
+	\end{quickcheck}
+% 
+% 
+% 	\begin{genericGWTVisualization}[550][1000]{mathlet1}
+% 		\begin{variables}
+% 			\randint{randomA}{1}{2}
+% 
+% 			\point[editable]{P}{rational}{var(randomA),var(randomA)}
+% 		\end{variables}
+% 		\color{P}{BLUE}
+% 		\label{P}{$\textcolor{BLUE}{P}$}
+% 
+% 		\begin{canvas}
+% 			\plotSize{300}
+% 			\plotLeft{-3}
+% 			\plotRight{3}
+% 			\plot[coordinateSystem]{P}
+% 		\end{canvas}
+% 		\text{Der Punkt hat die Koordinaten $(\var{P}[x],\var{P}[y])$.}
+% 	    	\end{genericGWTVisualization}
+
+\end{visualizationwrapper}
+
+
+\end{content}

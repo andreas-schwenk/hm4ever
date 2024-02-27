@@ -1,0 +1,528 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Polardarstellung und komplexe Wurzeln}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T211_PolarCoordinates.meta.xml}{T211_PolarCoordinates}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T211_FithRoots.meta.xml}{T211_FithRoots}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T203_PolarCoordinates.meta.xml}{T203_PolarCoordinates}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T211_SquareRoots.meta.xml}{T211_SquareRoots}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T203_komplexe_Zahlen/g_art_content_08bneu_komplexeZahlen_geom.meta.xml}{content_08bneu_komplexeZahlen_geom}
+   % \link{generic_article}{content/rwth/HM1/T203_komplexe_Zahlen/g_art_content_09_geometrische_interpretation.meta.xml}{c-geom}
+    \link{generic_article}{content/rwth/HM1/T209_Potenzreihen/g_art_content_28_exponentialreihe.meta.xml}{expreihe}
+    \link{generic_article}{content/rwth/HM1/T102neu_Einfache_Reelle_Funktionen/g_art_content_06_funktionsbegriff_und_lineare_funktionen.meta.xml}{def:linear_func}
+    \link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_05_loesen_gleichungen_und_lgs.meta.xml}{nullst-quad-funk}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{11}
+\ombarticle{4}
+
+ \lang{de}{\title{Polardarstellung, Potenzen und Wurzeln
+komplexer Zahlen}}
+
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9796}{Ticket 9796}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+In diesem Teil werden wir einige wichtige stetige Funktionen, die in den letzten Teilen besprochen wurden,
+verwenden, um komplexe Zahlen und ihre Eigenschaften in der Polardarstellung vorzustellen.
+
+\section{Polardarstellung}\label{sec:polardarst}
+
+Von großer Bedeutung ist die Polardarstellung für komplexe Zahlen. Für
+eine komplexe Zahl $z = a+ib \neq 0$ haben 
+wir einen Winkel $\phi \in (-\pi;\pi]$ (das sogenannte \ref[content_08bneu_komplexeZahlen_geom][Argument]{sec:polar} von $z$) definiert, so dass
+%
+\begin{align*} \label{eq-KompZ.42}
+\cos(\phi) \ = \frac{a}{\sqrt{a^2+b^2}} \ = \frac{\Re(z)}{|z|}
+\quad\quad \text{und} \quad\quad
+\sin(\phi) \ = \frac{b}{\sqrt{a^2+b^2}} \ = \frac{\Im(z)}{|z|}
+\end{align*}
+%
+gelten. In der Gaußschen Zahlenebene ist $\phi$ der von der Abszisse
+und dem zu $z$ gehörigen Vektor eingeschlossene Winkel, wie im folgenden Bild dargestellt.
+
+\begin{figure}
+\image{T203_PolarCoordinates}
+\caption{$z=a+ib=r\cdot e^{i\phi}$}
+\end{figure}
+
+
+Mit diesem Winkel gilt dann
+%
+\begin{align*} \label{eq-KompZ.43}
+z \ = {\vert z\vert} \, \big( \cos(\phi) \: + \: i \, \sin(\phi) \big) .
+\end{align*}
+%
+Durch den \ref[expreihe][Zusammenhang der komplexen Exponentialfunktion mit 
+dem Sinus und Kosinus]{sec:sinus-kosinus}, nämlich
+\[ \exp(i\phi)=e^{i \phi} \ = \cos(\phi) \: + \: i \, \sin(\phi), \]
+lässt sich obige Gleichung schreiben als
+\[ z \ = {\vert z\vert} \cdot e^{i \phi} .\]
+
+
+Mit Hilfe des Potenzgesetzes $e^x e^y = e^{x+y}$ sieht man dann einfach, dass die 
+Multiplikation zweier komplexer Zahlen dadurch erfolgt, dass man ihre Beträge multipliziert
+und die Argumente addiert.
+%
+Ist nämlich weiter $\tilde{z}=|\tilde{z}|\cdot e^{i \psi}$, so gilt:
+\begin{align*} \label{eq-KompZ.48,1}
+z \cdot \tilde{z}
+\ =
+\big( {\vert z\vert} \cdot e^{i \phi} \big) \cdot \big( {\vert \tilde{z}\vert} \cdot e^{i \psi} \big)
+\ =
+{\vert z\vert} \cdot |{\tilde{z}}| \cdot \big( e^{i \phi}  \cdot e^{i \psi} \big)
+\ =
+{\vert z\vert} \cdot {\vert \tilde{z}\vert} \cdot e^{i (\phi+\psi)} .
+\end{align*}
+%
+Mit $r := |z|$ wird obige Gleichung zur \notion{Polardarstellung}
+%
+\begin{align*} \label{eq-KompZ.48,2}
+z \ = r \cdot e^{i \phi} 
+\end{align*}
+%
+der komplexen Zahl $z$. (Diese ist auch für $z=0$ gültig, da in diesem
+Fall $r=0$ ist und $\phi$ beliebig gewählt werden kann.) 
+%
+
+Als wichtigen Spezialfall betrachten wir die Zahl $-1$ in Polardarstellung. Deren Betrag ist $\vert-1\vert=1$,
+und ihr Argument ist $\phi=\pi$. Damit erhalten wir die \ref[expreihe][Eulersche Formel]{rem:euler_formel}
+\[ e^{i\pi}=-1.\]
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{example}\label{bsp-KompZ.07}
+Wir unterstreichen die obigen Aussagen mit einem Zahlenbeispiel. \\
+Sind $w = 2+i$ und $z = -3-4i$, so sind $w = {\vert w\vert} \cdot e^{i \alpha}$
+und $z = {\vert z\vert}\cdot e^{i \beta}$ mit
+%
+\begin{align*} \label{eq-KompZ.51} 
+{\vert{w}\vert} \: = \: \sqrt{5} , \quad
+\cos(\alpha) = \frac{2}{\sqrt{5}}, \ \sin(\alpha) = \frac{1}{\sqrt{5}}
+\ \Rightarrow 
+\alpha \approx 0,46
+\ \Rightarrow  &
+\ w \: \approx \: \sqrt{5} \cdot e^{i \cdot (0,46)}  ,
+ \label{eq-KompZ.52} \\
+{\vert z\vert}\: = \: 5 , \quad
+\cos(\beta) = \frac{-3}{5},  \sin(\beta) = \frac{-4}{5}
+\ \Rightarrow 
+\beta \approx 4,07
+\ \Rightarrow  &
+\ z \: \approx \: 5 \cdot e^{i \cdot (4,07)} .
+\end{align*}
+%
+Andererseits können wir direkt ausrechnen, dass \\
+$w \cdot z = {\vert w\cdot z\vert} \cdot e^{i \gamma}$ mit
+%
+\begin{align*} \label{eq-KompZ.53} 
+ & w \cdot z \ =  -2  -11i ,
+ \label{eq-KompZ.54} \\
+&{\vert w\cdot z\vert}
+\ =
+\sqrt{(-2)^2 + (-11)^2} 
+\ =
+\sqrt{125}
+\ =
+5 \cdot \sqrt{5} , 
+ \label{eq-KompZ.55} \\
+&\cos(\gamma) = \frac{-2}{\sqrt{125}}, 
+\ \sin(\gamma) =  \frac{-11}{\sqrt{125}}
+\quad \Rightarrow \quad
+\gamma \approx 4,53, 
+ \label{eq-KompZ.56} \\ 
+ \Rightarrow \quad
+& w \cdot z \: \approx \: \sqrt{125} \cdot e^{i \cdot (4,53)}  
+\ =
+\sqrt{5} \cdot e^{i \cdot (0,46)} \cdot 5 \cdot e^{i \cdot (4,07)} .
+\end{align*}
+%
+\end{example}
+
+
+\section{Potenzen und Wurzeln komplexer Zahlen}
+
+Die wahre Stärke der Polardarstellung $z = r \cdot e^{i \phi}$ einer
+komplexen Zahl $z$ liegt in der Vereinfachung der Berechnung von
+Potenzen $z^n$ und Wurzeln "$\sqrt[n]{z}$" von $z$. 
+
+\begin{definition}[\lang{de}{komplexe Potenz}]\label{def:komplexe-potenz}
+Für eine nichtnegative ganze Zahl $n \in \N_0$ ist nämlich 
+%
+\begin{align*} \label{eq-KompZ.57}
+z^n \ = &
+\big( r \cdot e^{i \phi} \big)^n
+\ =
+r^n \cdot \big( e^{i \phi} \big)^n
+\ =
+r^n \cdot e^{i \cdot n \phi} ,
+\end{align*}
+%
+und für $z \neq 0$ gilt dies auch für negative $n$, also für alle
+ganzen Zahlen $n \in \Z$.
+\end{definition}
+Um die Potenz einer komplexen Zahl zu berechnen, muss also der Betrag $r$ potenziert werden, 
+wohingegen die Winkel $\phi$ nur vervielfacht werden.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{example}\label{bsp-KompZ.08}
+Sind etwa $z = 3+4i$ und $n=4$, so kann man ausmultiplizieren und
+erhält
+%
+\begin{align*} \label{eq-KompZ.58}
+z^4 \ = & (3+4i)^4 \ = \big( (3+4i)^2 \big)^2
+\ =
+\big( 3^2 + 2 \cdot 3 \cdot 4i + (4i)^2 \big)^2
+\ =
+\big( 9 + 24i - 16 \big)^2 \\
+ \quad
+\ = &
+(-7 + 24i )^2
+\ =
+(-7)^2 + 2 \cdot (-7) \cdot 24i + (24i)^2
+\ =
+49 - 336i - 576
+\ =
+-527 - 336i
+\end{align*}
+%
+durch mühsame Rechnung. Schreibt man aber $z$ in Polardarstellung, $z
+\approx 5 \cdot e^{i \cdot 0,927}$, so erhält man ganz einfach \\
+%
+\begin{align*} \label{eq-KompZ.59}
+z^4 \ \approx \ & \big( 5 \cdot e^{i \cdot 0,927} \big)^4
+\ =
+5^4 \cdot \big( e^{i \cdot 0,927} \big)^4
+\ =
+5^4 \cdot e^{i \cdot 4 \cdot 0,927}
+\ =
+625 \cdot e^{i \cdot 3,71} .
+\end{align*}
+%
+Um die Übereinstimmung der Ergebnisse zu überprüfen, beobachtet man,
+dass $\cos(3,71) \approx -0,843$ und $\sin(3,71) \approx -0,538$
+sind und daher
+%
+\begin{align*} \label{eq-KompZ.60}
+625 \cdot e^{i \cdot 3,71}
+\ = &
+625 \cdot \cos(3,71) + 625 \cdot \sin(3,71) i
+\ \approx 
+625 \cdot (-0,843) + i \, 625 \cdot (-0,538) \\
+\quad
+\ = &
+- 526,875 - (336,25) i
+\ \approx
+-527 - 336i
+\end{align*}
+%
+gilt, wobei die Fehler nur durch das Runden von Sinus und Kosinus entstehen -- und nicht
+durch falsche Rechnung.
+\end{example}
+
+
+\begin{definition}[\lang{de}{komplexe Wurzel}]\label{def:komplexe-wurzel}
+
+Für $n\in\N$, $r>0$ und $\phi\in [0;2\pi)$ erhalten wir zu $z=re^{i\phi} $ genau n verschiedene \notion{komplexe n-te Wurzeln} $w_k$ mit
+\[w_k=\sqrt[n]{r}\cdot e^{i\frac{\phi+2k\pi}{n}} \ \text{ f\"ur } \ k=0, 1, 2, \ldots, n-1. \]
+
+Die Wurzel, bei der $k=0$ gewählt ist, also $w_0=\sqrt[n]{r}\cdot e^{i\frac{\phi}{n}}$ bekommt 
+einen besonderen Namen: sie heißt \notion{Hauptwert} der n-ten Wurzel von $z=re^{i\phi}$.
+Mit $\sqrt[n]{z}$ ist der Hauptwert gemeint.
+
+\end{definition}
+
+Warum es sich bei dieser Festlegung um den \glqq richtigen\grqq Wurzelbegriff handelt, wird im Folgenden beschrieben. 
+Um Fallunterscheidungen zu vermeiden, rechnen wir hier mit Argumenten
+$\phi$ im Bereich $[0;2\pi)$. Sollte der Wert von $\phi$ außerhalb des Intervalls liegen, gehen wir stillschweigend davon
+aus, dass der Wert durch Addition/Subtraktion eines Vielfachen von $2 \pi$ wieder im genannten Bereich liegt. 
+
+Ist $z = r \cdot e^{i \phi}$ eine komplexe Zahl mit
+$r >0$ und $0\leq \phi < 2\pi$, so sind die Quadratwurzeln von $z$
+alle komplexen Zahlen $w$, für die $w^2 = z$ gilt. In Polardarstellung
+$w = s \cdot e^{i \alpha}$ muss also
+%
+\begin{align*} \label{eq-KompZ.61}
+s^2 \cdot e^{i 2 \alpha} \ = r \cdot e^{i \phi}
+\end{align*}
+%
+gelten, wobei $s \geq 0$ und $0\leq  \alpha<  2\pi$. Somit ist $s =
+\sqrt{r} > 0$, und es muss $e^{i 2 \alpha} = e^{i \phi}$
+gelten. 
+
+Wegen $e^{2\pi i} = 1$ sind die Lösungen dieser Gleichung alle
+Zahlen $\alpha = \frac{\phi}{2} + k\pi$ mit $k\in \Z$.
+Also hat letztere Gleichung zwei Lösungen im Intervall $[0; 2\pi)$,
+nämlich
+%
+\begin{align*} \label{eq-KompZ.62}
+\alpha_1 \: = \: \frac{\phi}{2}
+\quad \text{und} \quad
+\alpha_2 \: = \: \frac{\phi}{2} + \pi.
+\end{align*}
+
+Außerdem ist $e^{\pi i} = -1$, und wir erhalten
+$z = w_1^2 = w_2^2$ mit
+%
+\begin{align*} \label{eq-KompZ.63}
+w_1 \ = \sqrt{r} \cdot e^{i \phi/2}
+\quad \text{und} \quad
+w_2 \ = \sqrt{r} \cdot e^{i (\pi + \phi/2)}
+\ = \sqrt{r} \cdot e^{i \pi} \cdot e^{i \phi/2}
+\ = - \sqrt{r} \cdot e^{i \phi/2}
+\ = - w_1,
+\end{align*}
+
+wie gewohnt.
+
+
+\begin{figure}
+\image{T211_SquareRoots}
+\caption{$z = 3 + 4i$ in Gaußscher Zahlenebene mit Quadratwurzeln
+  $w_1$ und $w_2$.}
+\end{figure}
+
+Wenn man die oben beschriebene Berechnung der Quadratwurzel und
+insbesondere den Grund für die Existenz genau zweier Lösungen
+$\alpha_1, \alpha_2$ von $e^{i 2 \alpha} = e^{i \phi}$ verstanden
+hat, dann ist das Ziehen der allgemeinen $n$-ten Wurzel auch nicht
+viel schwerer:
+
+Ist $z = r \cdot e^{i \phi} \neq 0$ eine komplexe und $n \geq 2$
+eine natürliche Zahl, wobei wir abermals $r>0$ und $0 \leq \phi <
+2\pi$ annehmen können, so sind die $n$-ten Wurzeln von $z$ alle komplexen
+Zahlen $w$, für die $w^n = z$ gilt. In Polardarstellung $w = s \cdot
+e^{i \alpha}$ mit $s \geq 0$ und $0 \leq \alpha < 2\pi$ muss also
+wieder $s^n \cdot e^{i n \alpha} = r \cdot e^{i \phi}$ gelten, was
+auf $s = \sqrt[n]{r} = r^{1/n} > 0$ und
+%
+\begin{align*} \label{eq-KompZ.64}
+e^{i n \alpha} \ = e^{i \phi}
+\quad \Leftrightarrow \quad
+e^{i (n \alpha - \phi)} \ = 1
+\end{align*}
+%
+führt. Daher muss $n \alpha - \phi$ ein ganzzahliges Vielfaches
+von $2 \pi$ sein, und die möglichen Lösungen haben die Gestalt
+%
+\begin{align*} \label{eq-KompZ.65}
+\alpha_k \: = \: \frac{\phi}{n} + \frac{2\pi(k-1)}{n} ,
+\end{align*}
+%
+wobei $k \in \Z$ eine ganze Zahl ist. Da wir außerdem $0 \leq
+\alpha_k < 2\pi$ fordern, gibt es für $\alpha$ genau $n$ Lösungen,
+nämlich
+%
+\begin{align*} \label{eq-KompZ.66}
+\alpha_1 \: = \: \frac{\phi}{n}, 
+ \ \alpha_2 \: = \: \frac{\phi}{n} + \frac{2\pi}{n},
+\ \ldots, 
+ \ \alpha_n \: = \: \frac{\phi}{n} + \frac{2\pi(n-1)}{n} .
+\end{align*}
+%
+Daher besitzt $z$ genau die $n$-ten Wurzeln
+%
+%\begin{align*} \label{eq-KompZ.67}
+%w_1 \: = \: \sqrt[n]{r} \cdot e^{\frac{i\phi}{n}}, \quad
+%w_2 \: = \: \sqrt[n]{r} \cdot e^{\frac{i\phi}{n} + \frac{2\pi}{n}},
+%\quad \ldots \quad , \quad
+%w_n \: = \: \sqrt[n]{r} \cdot e^{\frac{i\phi}{n} + \frac{2\pi(n-1)}{n}}.
+%\end{align*}
+%
+\begin{align*} \label{eq-KompZ.67}
+w_1 \: = \: \sqrt[n]{r} \cdot e^{\frac{i\phi}{n}}, \quad
+w_2 \: = \: \sqrt[n]{r} \cdot e^{\frac{i\phi}{n} + \frac{2i\pi}{n}},
+\quad \ldots \quad , \quad
+w_n \: = \: \sqrt[n]{r} \cdot e^{\frac{i\phi}{n} + \frac{2i\pi(n-1)}{n}}.
+\end{align*}
+
+Die Bedeutung der Polardarstellung unterstreicht nochmals das folgende Video, in dem n-te Einheitswurzeln
+berechnet werden und die Potenzgesetze bei komplexen Zahlen unter die Lupe genommen werden:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10873&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+\begin{example}
+Wir untersuchen die Zahl $z=4e^{\frac{3\pi}{4}i}$. \\Damit ist $r=4$.\\ 
+Der Winkel ist $\phi=\frac{3\pi}{4}=135^\circ$ und somit ist  
+
+\[z=4e^{\frac{3\pi}{4}i}=4\left(\cos\left(\frac{3\pi}{4}\right)+i\cdot \sin\left(\frac{3\pi}{4}\right)\right)
+=4\left(-\frac{\sqrt{2}}{2}+i\cdot \frac{\sqrt{2}}{2}\right)=-2\sqrt{2}+i\cdot 2\sqrt{2}.\]
+
+Jetzt berechnen wir von $z$ die 5. Wurzeln 
+
+\[w_k=\sqrt[5]{4}e^{\frac{1}{5}\cdot\left(\frac{3\pi}{4}+2\pi\left(k-1\right)\right)i} \ \text{ mit } \ k=1, 2, 3, 4, 5.\]
+
+Damit sind die Wurzeln\\
+\begin{align*}
+w_1&=\sqrt[5]{4}\cdot e^{\frac{1}{5}\cdot\frac{3\pi}{4}i} &\approx +1,18&+0,60\cdot i,\\
+w_2&=\sqrt[5]{4}\cdot e^{\frac{1}{5}\cdot\left(\frac{3\pi}{4}+2\pi\right)i}&\approx-0,21&+1,30\cdot i,\\
+w_3&=\sqrt[5]{4}\cdot e^{\frac{1}{5}\cdot\left(\frac{3\pi}{4}+4\pi\right)i}&\approx-1,30&+0,21\cdot i,\\
+w_4&=\sqrt[5]{4}\cdot e^{\frac{1}{5}\cdot\left(\frac{3\pi}{4}+6\pi\right)i}&\approx-0,60&-1,18\cdot i,\\
+w_5&=\sqrt[5]{4}\cdot e^{\frac{1}{5}\cdot\left(\frac{3\pi}{4}+8\pi\right)i}&\approx+0,93&-0,93\cdot i.\\
+\end{align*}
+Mit Hilfe der Gleichung $r\cdot e^{i\phi}=r(\cos\phi + i\sin\phi)$ wurden die $w_i$ in die Form $w=a+ib$ gebracht, um sie grafisch 
+darzustellen. Um überprüfen zu können, ob die Rechnungen auch stimmen, berechnen wir die Winkel $\phi_i$ in Grad: $\phi_1=\frac{135^\circ}{5}=27^\circ$. Wenn wir den Vollkreis in 5 Teile teilen,
+erhalten wir $\frac{360^\circ}{5}=72^\circ$, so dass sich die anderen Winkel zu $\phi_2=99^\circ$, $\phi_3=171^\circ$,
+$\phi_4=243^\circ$ und $\phi_5=315^\circ$ berechnen. $\phi_6=387^\circ$ entspricht wieder $\phi_1$. Diese Winkel finden sich in 
+der Abbildung wieder, ebenso wie der neue Radius $r=\sqrt[5]{4}\approx 1,32$. Die Rechnung stimmt also.
+\end{example}
+
+\begin{figure}
+\image{T211_FithRoots}
+\caption{$z =4e^{\frac{3\pi}{4}i}$ in
+    Gaußscher Zahlenebene mit 5. Wurzeln $w_1, w_2, w_3, w_4, w_5$.}
+\end{figure}
+
+\begin{quickcheck}
+    \field{real}
+        \type{input.function}
+            \text{Berechnen Sie alle dritten Wurzeln von $z=2$.}
+            \begin{variables}
+                \function{z0}{2^(1/3)}
+                \function{z1}{2^(1/3)*exp(2pi*i/3)}
+                \function{z2}{2^(1/3)*exp(4pi*i/3)}
+            \end{variables}
+            \text{Geben Sie die Antworten bitte mit aufsteigendem Winkel an (komplexe Zahlen in Polardarstellung): \\
+            $w_1=$\ansref;  $\ w_2=$\ansref;  $ \ w_3=$\ansref}
+            \begin{answer}
+                \solution{z0}
+            \end{answer}
+            \begin{answer}
+                \solution{z1}
+            \end{answer}
+            \begin{answer}
+                \solution{z2}
+            \end{answer}
+            \explanation{Es gibt drei komplexe Wurzeln. Da $z^3=2$ die rein reelle Lösung $2^{\frac{1}{3}}$ hat,
+            ist die erste Wurzel auch rein reell: $w_1=2^{\frac{1}{3}}$, $\phi_1=0$.\\
+            Die beiden anderen Winkel sind damit $\phi_2=120^\circ$ und $\phi_3=240^\circ$, also\\
+            $w_2=2^{\frac{1}{3}}e^{\frac{2\pi i}{3}}$ und\\
+            $w_3=2^{\frac{1}{3}}e^{\frac{4\pi i}{3}}$.
+            }
+
+\end{quickcheck}
+
+Um eine komplexe Zahl grafisch darzustellen, kann sie entweder in der Form $z=a+ib$ dargestellt werden 
+oder in der Form $z=re^{i\phi}$. Dabei werden dann $r$ und $\phi$ abgetragen. Wir betrachten die Zahl $z_1=1+1,73i$ 
+mit $r_1=2$ und $\phi_1=60^\circ$ bzw. im Bogenmaß $\phi_1=\frac{2}{3}\frac{\pi}{2}=\frac{\pi}{3}$. 
+\\
+Weiter sei $z_2=z_1^2$. Dann hat $z_2$ also $r_2=4$ und den neuen Winkel finden wir einfach, indem wir den alten Winkel verdoppeln: $\phi_2=\frac{2\pi}{3}$.
+\\
+Die komplexen Quadratwurzeln von $z_1$ seien $z_3$ und $z_4$. Damit ist $r_3=\sqrt{2}$ und $\phi_3$ der halbe ursprüngliche Winkel, also 
+$\phi_3=\frac{\pi}{6}$ und $\phi_4=\frac{\pi}{6}+\frac{2\pi}{2}$.
+\\
+Im \notion{Polardiagramm}, wo $r$ und $\phi$ abgetragen werden,
+ ist das sehr einfach darzustellen.
+
+\begin{center}
+\image{T211_PolarCoordinates}
+\end{center}
+
+\section{Fundamentalsatz der Algebra}\label{sec:fundamentalsatzAlgebra}
+
+
+Die obigen Überlegungen zeigen, dass eine komplexe Zahl $z \neq 0$
+stets $n$ (voneinander verschiedene) $n$-te Wurzeln besitzt -- im
+Gegensatz zu den reellen Zahlen, in denen etwa $-1$ keine reelle
+Quadratwurzel besitzt (sondern nur die komplexen Wurzeln $\pm i$,
+wobei wir dann aber schon wieder $-1$ als komplexe Zahl mit
+Imaginärteil null betrachten). Diese bemerkenswerte Eigenschaft der
+komplexen Zahlen führt letztendlich dazu, dass jedes komplexe Polynom
+in Linearfaktoren zerfällt. Genauer gilt der folgende Satz.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{theorem}[Fundamentalsatz der Algebra] \label{thm-KompZ.03}
+Für $n \in \N$ seien $c_0, c_1, \ldots, c_{n-1} \in \C$ komplexe
+Zahlen und $p$ das Polynom
+%
+\begin{align*} \label{eq-KompZ.26}
+p(z) \ := 
+z^n + c_{n-1} z^{n-1} + \ldots + c_1 z + c_0 .
+\end{align*}
+%
+Dann gibt es komplexe Zahlen $\lambda_1, \lambda_2, \ldots, \lambda_n \in
+\C$ so, dass
+%
+\begin{align*} \label{eq-KompZ.27}
+p(z) \ := 
+(z - \lambda_1) \cdot (z - \lambda_2)
+\cdots (z - \lambda_n)
+\end{align*}
+%
+für alle $z \in \C$ gilt, d.\,h.\ $\lambda_1, \lambda_2, \ldots,
+\lambda_n$ sind die (nicht notwendig voneinander verschiedenen)
+Nullstellen des Polynoms $p$.\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=212}{\image[75]{00_Videobutton_schwarz}}}\\\\
+\end{theorem}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{example}\label{bsp-KompZ.09} 
+%
+\begin{itemize}
+\item Das \textit{reelle} Polynom $p(x) = x^2 + 1$ besitzt keine
+  \textit{reellen} Nullstellen und lässt sich nicht in der Form $p(x)
+  = (x-x_1)(x-x_2)$ mit $x_1, x_2 \in \R$ zerlegen. Der
+  Fundamentalsatz der Algebra ist für reelle Zahlen also falsch.
+
+\item Das \textit{komplexe} Polynom $p(z) = z^2 + 1$ (mit $1 = 1+ 0
+  \cdot i$ als komplexe Zahl) besitzt die \textit{komplexen}
+  Nullstellen $\pm i$ und zerfällt in Linearfaktoren $p(z) = (z-i)(z+i)$, 
+  wie es der Fundamentalsatz der Algebra auch aussagt.
+\end{itemize}
+%
+\end{example}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{remark} Der Fundamentalsatz der Algebra 
+  sichert zwar für jedes Polynom $p(z) = z^n + c_{n-1} z^{n-1} +
+  \ldots + c_1 z + c_0$ vom Grad $n$ die Existenz von $n$ Nullstellen
+  $\lambda_1, \lambda_2, \ldots, \lambda_n \in \C$, beinhaltet aber
+  keine Lösungsformel oder ein anderes Verfahren zu ihrer Bestimmung.
+
+  Für Grad $n=1$ ist $p(z) = z + c_0$, und offensichtlich gilt die
+  Lösungsformel $\lambda_1 = -c_0$ (s. Abschnitt \ref[def:linear_func][Lösen linearer Gleichungen]{def:linear_func}).
+  
+
+  Für Grad $n=2$ ist $p(z) = z^2 + c_1z + c_0$, und $\lambda_1$ und
+  $\lambda_2$ können mit Hilfe der \ref[nullst-quad-funk][p-q-Formel]{rule:pqFormel}
+  bestimmt werden:
+  $\lambda_1 = -\frac{c_1}{2} + \sqrt{ \frac{c_1^2}{4} - c_0}$ und
+  $\lambda_2 = -\frac{c_1}{2} - \sqrt{ \frac{c_1^2}{4} - c_0}$.
+
+  Für Grad $n=3, 4$ gibt es allgemeine Lösungsformeln, welche aber sehr kompliziert
+  sind.
+  
+  Vor etwa zweihundert Jahren haben zwei (leider jung verstorbene)
+  Mathematiker, der Norweger Niels Henrik Abel (1802-1829) und der
+  Franzose Evariste Galois (1811-1832), die bemerkenswerte Tatsache
+  bewiesen, dass es Lösungsformeln für die Bestimmung der Nullstellen
+  von Polynomem vom Grad $n \geq 5$ \uline{prinzipiell nicht geben
+    kann!}
+\end{remark}
+\end{content}

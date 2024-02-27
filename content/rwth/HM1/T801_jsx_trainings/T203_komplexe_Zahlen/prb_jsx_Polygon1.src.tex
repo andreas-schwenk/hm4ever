@@ -1,0 +1,154 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+  \lang{en}{...}
+  \lang{de}{Polygon1}
+  \lang{zh}{...}
+  \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/32292}{Ticket 32292}
+\end{block}
+\begin{block}[annotation]
+Copy of : /home/mumie/checkin/content/playground/HM4mint-Testaufgaben/T203_komplexe_Zahlen/prb_jsx_Polygon1.src.tex
+\end{block}
+
+\begin{block}[annotation]
+(Dagmar Schumacher)\\
+Copy of : /home/mumie/checkin/content/playground/Dagmar_Schumacher/prb_jsx-Polygon1.src.tex
+\end{block}
+
+  \usepackage{mumie.genericproblem}
+
+\title{Polygon 1 in der komplexen Ebene}
+\\
+
+  \begin{visualizationwrapper}
+    \begin{genericJSXVisualization}
+      \begin{variables}
+
+        \question{1}{r}{real}
+        
+        \point{A1}{real}{0,r}
+        \point{B1}{real}{-r,0}
+        \point{C1}{real}{0,-r}
+        \point{D1}{real}{r,0}
+        \point[editable]{B2}{real}{-r,0.5}
+        \point[editable]{C2}{real}{-0.5,-r}
+        \point[editable]{A2}{real}{0.5,r}
+        \point[editable]{D2}{real}{r,-0.5}
+        \segment[editable]{A}{real}{var(A2),var(A1)}
+        \segment[editable]{B}{real}{var(B2),var(B1)}
+        \segment[editable]{C}{real}{var(C2),var(C1)}
+        \segment[editable]{D}{real}{var(D2),var(D1)}
+
+        \number{a2x}{real}{A2[x]}
+        \number{a2y}{real}{A2[y]}
+        \number{b2x}{real}{B2[x]}
+        \number{b2y}{real}{B2[y]}
+        \number{c2x}{real}{C2[x]}
+        \number{c2y}{real}{C2[y]}
+        \number{d2x}{real}{D2[x]}
+        \number{d2y}{real}{D2[y]}
+      \end{variables}
+
+        \answer{a2x}{1,1}
+        \answer{a2y}{1,2}
+        \answer{b2x}{1,3}
+        \answer{b2y}{1,4}
+        \answer{c2x}{1,5}
+        \answer{c2y}{1,6}
+        \answer{d2x}{1,7}
+        \answer{d2y}{1,8}
+        
+        \color{v1}{#000077} %quite dark blue
+        \color{z1}{#000077} %quite dark blue
+      
+       \begin{canvas}
+        \snapToGrid{0.1,0.1}
+        \plotSize{500,500}
+        \plotLeft{-5.5}
+        \plotRight{5.5}
+        \plot[coordinateSystem,showPointCoords]{A,B,C,D,A2,B2,C2,D2}
+      \end{canvas}
+ 
+    \end{genericJSXVisualization}
+  \end{visualizationwrapper}
+
+  \begin{problem}
+    \begin{variables}
+      \randint{r}{1}{5}
+      \number{null}{0}
+      \function{mr}{-r}
+      
+    \end{variables}
+    \begin{question}
+    \text{Skizzieren Sie in der obigen Grafik das Polygon, das durch 
+    $|\Re(z)|+|\Im(z)|=\var{r}$ festgelegt ist, indem Sie die vier blauen Punkte 
+    in ihrem jeweiligen Quadranten verschieben.\\ 
+    \textit{Starten Sie Ihre Überlegungen am besten im ersten
+    Quadranten mit $\Re(z)>0,\Im(z)>0$.}
+    }
+    \begin{answer} %A2
+      \type{graphics.number}
+      \solution{r}
+     \end{answer}
+    \begin{answer}
+      \type{graphics.number}
+      \solution{null}
+     \end{answer} 
+     \begin{answer} %B2
+      \type{graphics.number}
+      \solution{null}
+     \end{answer}
+    \begin{answer}
+      \type{graphics.number}
+      \solution{r}
+     \end{answer}
+     \begin{answer} %C2
+      \type{graphics.number}
+      \solution{mr}
+     \end{answer}
+    \begin{answer}
+      \type{graphics.number}
+      \solution{null}
+     \end{answer}  
+    \begin{answer} %D2
+      \type{graphics.number}
+      \solution{null}
+     \end{answer}
+    \begin{answer}
+      \type{graphics.number}
+      \solution{mr}
+     \end{answer}
+
+    \explanation[NOT[correct(ans_1)] OR NOT[correct(ans_2)]]{Polygonzug im 1. Quadranten fehlerhaft.}
+    \explanation[NOT[correct(ans_3)] OR NOT[correct(ans_4)]]{Polygonzug im 2. Quadranten fehlerhaft.}
+    \explanation[NOT[correct(ans_5)] OR NOT[correct(ans_6)]]{Polygonzug im 3. Quadranten fehlerhaft.}
+    \explanation[NOT[correct(ans_7)] OR NOT[correct(ans_8)]]{Polygonzug im 4. Quadranten fehlerhaft.}
+              
+   \end{question} 
+  \end{problem}
+  
+  \embedmathlet{gwtmathlet}
+  
+\end{content}

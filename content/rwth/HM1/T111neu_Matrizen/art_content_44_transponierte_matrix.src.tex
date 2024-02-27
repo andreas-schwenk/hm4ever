@@ -1,0 +1,381 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Transponierte Matrix}
+    \lang{en}{Matrix transposition and symmetric matrices}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T401_Matrizenrechnung/g_art_content_03_transponierte.meta.xml}{content_03_transponierte}
+    \link{generic_article}{content/rwth/HM1/T109_Skalar-_und_Vektorprodukt/g_art_content_31_skalarprodukt.meta.xml}{skalarprodukt}
+    \link{generic_article}{content/rwth/HM1/T111neu_Matrizen/g_art_content_43_matrizenmultiplikation.meta.xml}{matrix-mult}
+    \link{generic_article}{content/rwth/HM1/T112neu_Lineare_Gleichungssysteme/g_art_content_41_gauss_verfahren.meta.xml}{gauss-verfahren}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21333}{Ticket 21333}
+\end{block}
+\begin{block}[annotation]
+Copy of \href{http://team.mumie.net/issues/9061}{Ticket 9061}: content/rwth/HM1/T112_Rechnen_mit_Matrizen/art_content_44_transponierte_matrix.src.tex
+\end{block}
+
+\usepackage{mumie.ombplus}
+\ombchapter{11}
+\ombarticle{5}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Transponierte Matrix, Symmetrische Matrix}
+       \lang{en}{Matrix transposition and symmetric matrices}}
+ 
+%\begin{block}[annotation]
+%  übungsinhalt
+%  
+%\end{block}
+% \begin{block}[annotation]
+%   Im Ticket-System: \href{http://team.mumie.net/issues/9061}{Ticket 9061}\\
+% \end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\lang{de}{
+In diesem Kapitel wird mit dem \textit{Transponieren einer Matrix} eine weitere
+Matrizenoperation eingeführt.
+Wie die transponierte Matrix zur Charakterisierung von Matrizen beitragen kann,
+wird exemplarisch anhand der \textit{symmetrischen} Matrix gezeigt.
+}
+\lang{en}{
+In this section we will introduce the \textit{transpose of a matrix}, another matrix operation. The 
+transpose can contribute to the characterisation of matrices by naturally following into the 
+definition of \textit{symmetric} matrices.
+}
+
+
+
+\section{\lang{de}{Transponierte Matrix}\lang{en}{Matrix transposition}}
+
+\lang{de}{
+Das Transponieren ist eine Operation, bei der wir die Einträge an der Diagonalen spiegeln.
+Die Zeilen der Ursprungsmatrix werden zu den Spalten der Transponierten.
+Formal aufgeschrieben bedeutet das:
+}
+\lang{en}{
+Transposition is an operation performed on a single matrix, in which the entries are reflected in the 
+\emph{'leading diagonal'}. The rows of a matrix are the columns of its transpose. Formally:
+}
+
+\begin{definition}[\lang{de}{Transponierte Matrix}\lang{en}{Matrix transpose}]\label{def:transp_matrix}
+
+\lang{de}{
+Es sei $A=\left( a_{ij} \right)_{1 \leq i \leq m, 1 \leq j \leq n}$ eine $(m\times n)$-Matrix:
+%Sei $A=\left(a_{ij}\right) \in M(m,n;\R)$ eine Matrix
+}
+\lang{en}{
+Let $A=\left( a_{ij} \right)_{1 \leq i \leq m, 1 \leq j \leq n}$ be a $(m\times n)$-matrix:
+}
+\begin{equation*}
+A =
+\begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{pmatrix}.
+\end{equation*}
+\lang{de}{
+Die folgende $(n\times m)$-Matrix $A^T$ heißt dann \textbf{Transponierte} der Matrix $A$:
+%=\left( a_{ji} \right)_{1 \leq j \leq n, 1 \leq i \leq m}$
+%, dann hei"st die Matrix
+}
+\lang{en}{
+The following $(n\times m)$-matrix $A^T$ is then called the \textbf{transpose} of the matrix $A$:
+}
+\begin{equation*}
+A^{T} := 
+%(a_{ij})^T_{1 \leq i \leq m, 1 \leq j \leq n} :=
+\begin{pmatrix}
+a_{11} & a_{21} & \cdots & a_{m1} \\
+a_{12} & a_{22} & \cdots & a_{m2} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{1n} & a_{2n} & \cdots & a_{mn}
+\end{pmatrix}. % = (a_{ji}) \in M(n,m;\R)
+\end{equation*}
+
+\lang{de}{
+Die Spalten von $A^T$ sind also die Zeilen der Matrix $A$ und die Zeilen von $A^T$ sind die Spalten 
+von $A$.\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=824}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{
+The columns of $A^T$ are the rows of $A$ and the rows of $A^T$ are the columns of $A$.\\
+}
+\end{definition}
+
+\lang{de}{In der Literatur ist auch die Notation $A^{tr}$ für die transponierte Matrix verbreitet.}
+\lang{en}{In the literature, the notation $A^{tr}$ is also used for the transpose of a matrix $A$.}
+
+\begin{example}
+\begin{enumerate}
+\item \lang{de}{Die transponierte Matrix zu}
+      \lang{en}{The transpose of}
+      $\begin{pmatrix} 
+       \textcolor{#CC6600}{1} & \textcolor{#CC6600}{2} & \textcolor{#CC6600}{3}  \\ 
+       \textcolor{#0066CC}{4} & \textcolor{#0066CC}{5} & \textcolor{#0066CC}{6} 
+       \end{pmatrix} $
+      \lang{de}{ist}
+      \lang{en}{is}
+      $\begin{pmatrix} \textcolor{#CC6600}{1} & \textcolor{#0066CC}{4} \\ 
+                       \textcolor{#CC6600}{2} & \textcolor{#0066CC}{5} \\ 
+                       \textcolor{#CC6600}{3} & \textcolor{#0066CC}{6} \end{pmatrix} .$ \\
+      \lang{de}{Die transponierte Matrix zu}
+      \lang{en}{The transpose of}
+      $ \begin{pmatrix} 1 & 4 \\ 
+                        2 & 5 \\ 
+                        3 & 6 \end{pmatrix} $ 
+      \lang{de}{ist}\lang{en}{is} 
+      $  \begin{pmatrix} 1 & 2 & 3  \\ 
+                         4 & 5 & 6 \end{pmatrix}$.
+\item \lang{de}{
+      Die Transponierte eines Spaltenvektors (also einer $(m\times 1)$-Matrix) ist ein Zeilenvektor, 
+      also eine $(1\times m)$-Matrix, und umgekehrt:
+      }
+      \lang{en}{
+      The transpose of a column vector (an $(m\times 1)$-matrix) is a row vector (an 
+      $(1\times m)$-matrix), and conversely
+      }
+\[  \begin{pmatrix} 1 \\ -3 \\ 2 \end{pmatrix}^T =\begin{pmatrix} 1 & -3 & 2 \end{pmatrix}. \]
+\end{enumerate}
+\end{example}
+
+\begin{remark}
+\begin{enumerate}
+\item \lang{de}{
+      Es ist leicht zu sehen, dass die Transponierte der Transponierten einer jeden Matrix wieder die 
+      Matrix selbst ist, d.\,h. für jede Matrix $A$ ist
+      }
+      \lang{en}{
+      It is easy to see that the transpose of the transpose of a matrix is always just the matrix 
+      itself again, that is for every matrix $A$ we have
+      }
+      \[ (A^{T})^{T} =A. \]
+\item \lang{de}{
+      Mit Hilfe der transponierten Matrix lässt sich das \link{skalarprodukt}{Skalarprodukt} 
+      $(\bullet)$ zweier Spaltenvektoren im $\R^n$ auch als \link{matrix-mult}{Matrizenprodukt} 
+      $(\cdot)$ schreiben:
+      }
+      \lang{en}{
+      Using the matrix transpose we can write the \link{skalarprodukt}{scalar product} $(\bullet)$ 
+      of two column vectors in $\R^n$ as a \link{matrix-mult}{product of matrices}: 
+      }
+      \[\begin{pmatrix} v_1 \\ v_2\\ \vdots \\ v_n  \end{pmatrix}\bullet 
+        \begin{pmatrix} w_1 \\ w_2\\ \vdots \\ w_n  \end{pmatrix} = 
+        \begin{pmatrix} v_1 \\ v_2\\ \vdots \\ v_n  \end{pmatrix}^T \cdot 
+        \begin{pmatrix} w_1 \\ w_2\\ \vdots \\ w_n  \end{pmatrix}, \]
+      \lang{de}{denn Letzteres ist}
+      \lang{en}{as the right-hand side is}
+      \[\begin{pmatrix} v_1 \\ v_2\\ \vdots \\ v_n  \end{pmatrix}^T \cdot 
+        \begin{pmatrix} w_1 \\ w_2\\ \vdots \\ w_n  \end{pmatrix} = 
+        \begin{pmatrix} v_1 & v_2& \cdots & v_n  \end{pmatrix}\cdot 
+        \begin{pmatrix} w_1 \\ w_2\\ \vdots \\ w_n  \end{pmatrix} = v_1w_1+\ldots+v_nw_n. \]
+\end{enumerate}
+\end{remark}
+
+\begin{block}[warning]
+\lang{de}{Achtung: Es gilt}
+\lang{en}{Warning: in general we have}
+\[
+    v^T \cdot w \quad \neq \quad v \cdot w^T.
+\]
+\end{block}
+
+\begin{example}
+    \begin{tabs*}
+        \tab{\lang{de}{Zu Bemerkung 1}\lang{en}{For remark 1}}
+            \[
+                A = 
+                \begin{pmatrix}
+                    1 & 2 \\
+                    3 & 4
+                \end{pmatrix},
+                \quad
+                A^T =
+                \begin{pmatrix}
+                    1 & 3 \\
+                    2 & 4
+                \end{pmatrix},
+            \]
+            \[
+                (A^T)^T = 
+                \begin{pmatrix}
+                    1 & 3 \\
+                    2 & 4
+                \end{pmatrix}
+                ^T
+                =
+                \begin{pmatrix}
+                    1 & 2 \\
+                    3 & 4
+                \end{pmatrix}
+                =
+                A.
+            \]
+        \tab{\lang{de}{Zu Bemerkung 2}\lang{en}{For remark 2}}
+        \lang{de}{Für}
+        \lang{en}{For}
+            \[
+                v =
+                \begin{pmatrix}
+                    6 \\
+                    2
+                \end{pmatrix}
+                ,\quad w =
+                \begin{pmatrix}
+                    1 \\
+                    3
+                \end{pmatrix}
+            \]
+           \lang{de}{gilt}
+           \lang{en}{we have}
+            \[
+                v \bullet w = v^T \cdot w =
+                \begin{pmatrix}
+                    6 & 2
+                \end{pmatrix}
+                \cdot
+                \begin{pmatrix}
+                    1 \\
+                    3
+                \end{pmatrix}
+                = 6 \cdot 1 + 2 \cdot 3 = 12.
+            \]
+        \tab{\lang{de}{Zur Warnung}\lang{en}{For warning}}
+        %Achtung:
+        \lang{de}{Für}
+        \lang{en}{For}
+            \[
+                v =
+                \begin{pmatrix}
+                    6 \\
+                    2
+                \end{pmatrix}
+                ,\quad w =
+                \begin{pmatrix}
+                    1 \\
+                    3
+                \end{pmatrix}
+            \]
+           \lang{de}{gilt}
+           \lang{en}{we have}
+            \[
+                v \cdot w^T =
+                \begin{pmatrix}
+                    6 \\
+                    2
+                \end{pmatrix}
+                \cdot
+                \begin{pmatrix}
+                    1 & 3
+                \end{pmatrix}
+                =
+                \begin{pmatrix}
+                    6 & 18 \\
+                    2 & 6
+                \end{pmatrix}
+                \neq
+                v \bullet w.
+            \]
+    \end{tabs*}
+\end{example}
+
+\lang{de}{
+Rechenregeln für transponierte Matrizen werden im Kursteil \link{content_03_transponierte}{3b} behandelt.
+}
+\lang{en}{
+We will cover the rules for calculating with transposed matrices in the later section 
+\link{content_03_transponierte}{3b}.
+}
+
+
+
+\section{\lang{de}{Symmetrische Matrix}\lang{en}{Symmetric matrices}}
+
+\lang{de}{Die folgende Definition legt fest, wann eine Matrix \textit{symmetrisch} ist.}
+\lang{en}{Now we use the transpose to define whether a matrix is \textit{symmetric} or not.}
+
+\begin{definition}\label{def:symmetrische_matrix}
+\lang{de}{
+Eine quadratische Matrix $A\in M(n;\R)$ heißt \notion{symmetrisch}, wenn sie gleich ihrer 
+transponierten Matrix ist, also im Fall
+}
+\lang{en}{
+A square matrix $A\in M(n;\R)$ is called \notion{symmetric} if it is equal to its own transpose, i.e.
+}
+\[ A^T=A.\]
+\end{definition}
+
+\begin{example}
+\begin{enumerate}
+\item \lang{de}{
+      Beim Transponieren von $(2\times 2)$-Matrizen wird lediglich der Eintrag an der Stelle 
+      $(1, 2)$ mit dem Eintrag an der Stelle $(2, 1)$ vertauscht. Die $(2\times 2)$-Matrix 
+      $A=\left( \begin{smallmatrix}2 & 1 \\ 1 & -1\end{smallmatrix}\right) \in M(2;\R)$ ist also 
+      symmetrisch, da die beiden Einträge gleich sind. Die Matrix 
+      $A=\left( \begin{smallmatrix}5 & -1 \\ 2 & 0\end{smallmatrix}\right) \in M(2;\R)$ hingegen ist 
+      nicht symmetrisch.
+      }
+      \lang{en}{
+      When transposing $(2\times 2)$-matrices we only need to swap the entries at $(1, 2)$ and at 
+      $(2, 1)$. The $(2\times 2)$-matrix 
+      $A=\left( \begin{smallmatrix}2 & 1 \\ 1 & -1\end{smallmatrix}\right) \in M(2;\R)$ is hence 
+      symmetric, as these two entries are equal. On the other hand, the matrix 
+      $A=\left( \begin{smallmatrix}5 & -1 \\ 2 & 0\end{smallmatrix}\right) \in M(2;\R)$ is not 
+      symmetric.
+      }
+\item \lang{de}{Für die $(3\times 3)$-Matrix }
+      \lang{en}{For the $(3\times 3)$-matrix }
+      $A=\left(\begin{smallmatrix}2&0 & 1 \\ 0& 1 & -1\\ 0&1 & 3\end{smallmatrix}\right) $ 
+      \lang{de}{gilt}
+      \lang{en}{we have}
+      \[A^T=\begin{pmatrix} 2&0 & 1 \\ 0& 1 & -1\\ 0&1 & 3\end{pmatrix}^T = 
+        \begin{pmatrix} 2&0&0 \\ 0 &1&1\\ 1&-1&3\end{pmatrix}. \]
+      \lang{de}{Also ist $A^T\neq A$ und daher $A$ nicht symmetrisch.}
+      \lang{en}{Thus $A^T\neq A$ and $A$ is not symmetric.}
+\item \lang{de}{Jede Diagonalmatrix}
+      \lang{en}{Every diagonal matrix}
+      \[\begin{pmatrix} a_{11} & 0 & 0 & ... & 0 \\ 0 & a_{22} & 0 & ... & 0 \\ 
+        0 & 0 & a_{33} & ... & 0\\ &&& ... &0 \\ 0 & 0 & 0 & ... & a_{nn} \end{pmatrix}\]
+      \lang{de}{
+      ist symmetrisch, da beim Transponieren die Diagonaleinträge $a_{ii}$ fest bleiben und 
+      außerhalb der Diagonalen nur Nullen stehen.
+      }
+      \lang{en}{
+      is symmetric, as the diagonal entries $a_{ii}$ always remain unchanged by composition, and all 
+      other entries are equal to zero.
+      }
+\end{enumerate}
+\end{example}
+
+
+
+\end{visualizationwrapper}
+
+
+\end{content}

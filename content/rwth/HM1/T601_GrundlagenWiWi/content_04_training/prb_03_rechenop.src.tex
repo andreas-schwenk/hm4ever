@@ -1,0 +1,107 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A03: Verknüpfungen von Funktionen}
+    \lang{en}{Problem 3}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A03: Verknüpfungen von Funktionen}}
+\lang{en}{\title{A03: Operations on functions}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/23827}{Ticket 23827}
+\end{block}
+\usepackage{mumie.genericproblem}
+
+\begin{block}[annotation]
+Kopie: hm4mint/T204_Abbildungen_und_Funktionen/training 6
+
+Im Ticket-System: \href{http://team.mumie.net/issues/9817}{Ticket 9817}
+\end{block}
+\begin{problem}
+    \begin{variables}
+      \randint[Z]{a}{-9}{9}
+      \randint[Z]{c}{-9}{9}
+      \randint{b}{2}{4}
+      \randint[Z]{q}{-9}{9}
+      \randint{z}{-5}{5}
+      \randint{d}{-10}{10}
+      \function[normalize]{f}{a*x^b +c*x +d}
+      \function[normalize]{g}{q*x^b + a/(x-z)}
+      \function[normalize]{l}{(a+q)*x^b+c*x+a/(x-z)+d}
+      \function[normalize]{k}{a*q*x^(2*b) + (a^2*x^b +a*c*x+a*d)/(x-z) +q*c*x^(b+1) +d*q*x^b}
+	\end{variables} 
+    
+    \begin{question}
+% QS  \explanation{Führen Sie eine Addition bzw. Multiplikation der gegebenen Funktionen durch.}
+      \type{input.function}
+      \field{rational}
+      \lang{de}{\text{Berechnen Sie $(f+g)(x)$ und $(f\cdot g)(x)$ für 
+      \begin{align*}
+       f : & \R \to \R, \ f(x) =  \var{f} , \\
+       g: & \R\setminus\{\var{z} \} \to \R , \ g(x) =  \var{g}.
+      \end{align*}
+      Kürzen Sie, falls möglich, vollständig und geben Sie nur die Vorschrift der gesuchten Funktionen ein. }}
+      \lang{en}{\text{Calculate $(f+g)(x)$ and $(f\cdot g)(x)$ for 
+      \begin{align*}
+       f : & \R \to \R, \ f(x) = \var{f} , \\
+         g: & \R\setminus\{\var{z} \} \to \R , \ g(x) =  \var{g}.
+      \end{align*}
+      Simplify completely, if possible, and enter only the rule of the functions in question.}}
+      \begin{answer}
+          \text{$(f+g)(x)=$}
+          \solution{l}
+          \checkAsFunction{x}{-10}{10}{100}
+% QS neu          
+          \lang{de}{\explanation{Überprüfen Sie die Addition der gegebenen Funktionen.}}
+          \lang{en}{\explanation{Check the sum of the given functions.}}
+% QS  
+      \end{answer}
+      \begin{answer}
+          \text{$(f \cdot g)(x)=$}
+          \solution{k}
+          \checkAsFunction{x}{-20}{-10}{100}
+% QS neu           
+          \lang{de}{\explanation{Überprüfen Sie die Multiplikation der gegebenen Funktionen.}}
+          \lang{en}{\explanation{Check the product of the given functions.}}
+      
+% QS           
+      \end{answer}
+	\end{question}
+    
+    \begin{question}
+      \lang{de}{\explanation{Der maximale Definitionsbereich ergibt sich aus der Schnittmenge der Definitionsbereiche der Funktionen $f$ und $g$.}}
+      \lang{en}{\explanation{The maximum domain of definition is given by the intersection of the domains of the functions $f$ and $g$.}}
+      \lang{de}{\text{Was ist der maximale Definitionsbereich, auf dem sowohl $f+g$ als auch $f \cdot g$ definiert sind? Kreuzen Sie die richtige Antwort an.}}
+     \lang{en}{\text{What is the maximum domain of definition on which both $f+g$ and $f \cdot g$ are defined? Tick the correct answer.}}
+      \type{mc.unique}
+      \permuteAnswers{1}{2}
+      \begin{choice}
+        \text{$\R$}
+        \solution{false}
+      \end{choice}
+      \begin{choice}
+          \text{$\R\setminus \{ \var{z}\}$}
+          \solution{true}
+      \end{choice}             
+    \end{question}
+
+\end{problem}
+
+\embedmathlet{mathlet}
+\end{content}

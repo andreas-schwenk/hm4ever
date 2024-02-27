@@ -1,0 +1,37 @@
+%This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)
+%https://creativecommons.org/licenses/by/4.0/legalcode
+\documentclass[rgb]{standalone}
+\usepackage{tkz-euclide}
+\definecolor{myorange}{hsb}{0.0833, 1, 0.8}
+\definecolor{mygreen}{hsb}{0.3333, 1, 0.8}
+\definecolor{myblue}{hsb}{0.5833, 1, 0.8}
+\definecolor{mymagenta}{hsb}{0.8333, 1, 0.8}
+\begin{document}
+\begin{tikzpicture}[scale=1.5, font=\Large]
+	% Coordinate system
+	\tkzInit[xmin=-3,xmax=3,ymin=-3,ymax=3]
+	\tkzGrid[color=lightgray]
+	\tkzDrawX[thick,label=Re]
+	\tkzDrawY[thick,label=Im]
+	\draw[mygreen,fill,fill opacity=0.1] (0,0) -- (0.75,0) arc (0:50:0.75);
+	\draw[gray,thick] (0,0) circle (2cm);
+	\draw[thick] (0,0) -- ({2*cos(50)},{2*sin(50)});
+	\draw[dashed] (0,{2*sin(50)}) -- ({2*cos(50)},{2*sin(50)});
+	\draw[dashed] ({2*cos(50)},0) -- ({2*cos(50)},{2*sin(50)});
+	\draw[ultra thick, myblue] (0,0) -- (0,{2*sin(50)});
+	\draw[ultra thick, myorange] (0,0) -- ({2*cos(50)},0);
+	\node[very thick, draw, circle,fill,inner sep=2] at (0,0) {};
+	\node[very thick, draw, circle,fill,inner sep=2] at (2,0) {};
+	\node[very thick, draw, circle,fill,inner sep=2] at (0,2) {};
+	\node[very thick, draw, circle,fill,inner sep=2] at ({2*cos(50)},{2*sin(50)}) {};
+	\node[very thick, draw, circle,fill,inner sep=2, myorange] at ({2*cos(50)},0) {};
+	\node[very thick, draw, circle,fill,inner sep=2, myblue] at (0,{2*sin(50)}) {};
+	% Labels
+	\node[above right] at (0,2){$i$};
+	\node[above right] at (2,0){$1$};
+	\node[above right] at ({2*cos(50)},{2*sin(50)}) {$e^{i\varphi}$};
+	\node[above,mygreen] at (0.475,0){$\varphi$};
+	\node[below left,myorange] at ({2*cos(50)},0){$\cos(\varphi)$};
+	\node[below left,myblue] at (0,{2*sin(50)}){$i\sin(\varphi)$};
+\end{tikzpicture}	
+\end{document}

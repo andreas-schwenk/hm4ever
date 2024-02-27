@@ -1,0 +1,514 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Konvergenzkriterien}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+\end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T208_Reihen/g_art_content_25_konvergenz_kriterien.meta.xml}{content_25_konvergenz_kriterien}
+    \link{generic_article}{content/rwth/HM1/T104_weitere_elementare_Funktionen/g_art_content_15_exponentialfunktionen.meta.xml}{content_15_exponentialfunktionen}
+    \link{generic_article}{content/rwth/HM1/T208_Reihen/g_art_content_24_reihen_und_konvergenz.meta.xml}{reihen-und-konv}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_16_konvergenzkriterien.meta.xml}{konv-krit-folgen}
+    \link{generic_article}{content/rwth/HM1/T206_Folgen_II/g_art_content_20_komplexe_folgen.meta.xml}{komplexe-folgen}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_15_monotone_konvergenz.meta.xml}{monot-konv}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{8}
+\ombarticle{2}
+
+\lang{de}{\title{Konvergenzkriterien für Reihen}}
+ 
+\begin{block}[annotation]
+  
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9682}{Ticket 9682}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+\section{Konvergenzkriterien für reelle Reihen mit nicht-negativen Gliedern}
+
+
+
+Sind die Folgenglieder $a_k$ alle größer oder gleich $0$, so ist die
+Folge der Partialsummen $s_n=\sum_{k=1}^n a_k$ monoton wachsend. Selbst wenn die Folgenglieder $a_k$
+erst für $k\geq k_0$ nicht-negativ sind, so ist die Folge der Partialsummen ab $n=k_0$ monoton wachsend.
+Aus der \link{monot-konv}{monotonen Konvergenz} von Folgen erhält man
+damit:
+
+\begin{theorem}\label{positive-reihen}
+\begin{enumerate}
+\item 
+Ist $k_0\in \N$ und $\sum_{k=1}^\infty a_k$ eine reelle Reihe mit $a_k\geq 0$ für alle $k\geq k_0$, so ist die Reihe genau dann konvergent, wenn die
+Folge der Partialsummen $s_n=\sum_{k=1}^n a_k$ beschränkt ist.
+\item (Schwaches Majorantenkriterium bzw. Minorantenkriterium) 
+Ist $k_0\in \N$ und sind $\sum_{k=1}^\infty a_k$ und $\sum_{k=1}^\infty b_k$ reelle Reihen mit 
+$b_k\geq a_k\geq 0$ für alle $k\geq k_0$, so gilt:
+\begin{itemize}
+\item Ist $\sum_{k=1}^\infty b_k$ konvergent, so ist auch $\sum_{k=1}^\infty a_k$ konvergent.
+%Falls sogar $b_k\geq a_k\geq 0$ für alle $k\geq 1$ ist, gilt zudem
+%\[ \sum_{k=1}^\infty a_k\leq \sum_{k=1}^\infty b_k.\]
+\item Ist $\sum_{k=1}^\infty a_k$ divergent, so ist auch $\sum_{k=1}^\infty b_k$ divergent.
+\end{itemize}
+\end{enumerate}
+\floatright{\href{https://www.hm-kompakt.de/video?watch=320}{\image[75]{00_Videobutton_schwarz}}}\\\\
+\end{theorem}
+
+Wenn von Majoranten- bzw. Minorantenkriterium gesprochen wird, ist häufig 
+bereits obige Aussage gemeint. Wir bezeichnen sie hier jedoch als schwache Version, weil sie nur 
+für reelle Reihen gilt.
+
+
+\begin{example}\label{ex:weitere-reihen}
+\begin{tabs*}
+\tab{$\sum_{k=1}^\infty \frac{1}{k^2}$ konvergiert}
+Wir hatten im \ref[reihen-und-konv][letzten Abschnitt]{ex:erste-reihen}{} 
+gesehen, dass die Reihe 
+$ \sum_{k=1}^\infty \frac{1}{k(k+1)}$
+konvergiert mit Grenzwert $1$ und daher ist
+\[ \sum_{k=1}^\infty \frac{2}{k(k+1)}=2\cdot  \sum_{k=1}^\infty \frac{1}{k(k+1)} =2.\]
+Für alle $k\in \N$ ist nun $k^2\geq k\cdot \frac{k+1}{2}$, d.\,h. $\frac{1}{k^2}\leq \frac{2}{k(k+1)}$.
+Nach dem schwachen Majorantenkriterium ist also auch die Reihe $\sum_{k=1}^\infty \frac{1}{k^2}$ konvergent.
+Außerdem ist ihr Grenzwert $\leq 2$. 
+
+Um ihren Grenzwert exakt zu bestimmen (welcher $\frac{\pi^2}{6}$ ist), 
+benötigt man jedoch andere Methoden.
+\tab{$\sum_{k=1}^\infty \frac{1}{\sqrt{k}}$ divergiert}
+Für alle $k\in \N$ ist $\sqrt{k}\leq k$, d.h. $\frac{1}{\sqrt{k}}\geq \frac{1}{k}$.
+Da die \ref[reihen-und-konv][Harmonische Reihe]{ex:erste-reihen} $\sum_{k=1}^\infty \frac{1}{k}$ 
+divergiert, ist nach dem
+Minorantenkriterium auch die Reihe $\sum_{k=1}^\infty \frac{1}{\sqrt{k}}$ divergent.
+\end{tabs*}
+\end{example}
+
+
+
+\section{Absolute Konvergenz}
+
+Die absolute Konvergenz ist eine Spezialität von Reihen, die
+bei Folgen nicht auftritt. Sie definiert eine stärkere Form der Konvergenz.
+
+\begin{definition}\label{def:abolut-konvergenz}
+Eine (komplexe) Reihe $\sum_{k=1}^\infty a_k$ heißt \notion{absolut konvergent}, 
+wenn die Reihe der Absolutbeträge $\sum_{k=1}^\infty |a_k|$ konvergiert. 
+Eine Reihe, die konvergiert, aber nicht absolut konvergiert, nennt man \notion{bedingt konvergent}.
+\end{definition}
+
+\begin{example}\label{ex:absolut-konvergenz}
+\begin{tabs*}
+\tab{geometrische Reihen mit $|q|<1$}
+Es sei $q$ eine komplexe Zahl mit $|q|<1$.
+Die \ref[reihen-und-konv][geometrische Reihe]{ex:konvergenz-geo-reihe}  $\sum_{k=0}^\infty q^k$ ist dann absolut konvergent, denn die Reihe
+ \[ \sum_{k=0}^\infty {|q^k|} = \sum_{k=0}^\infty {|q|}^k \]
+ ist konvergent (mit Grenzwert $\frac{1}{1-|q|}$).
+ \tab{Alternierende harmonische Reihe}
+Die \ref[reihen-und-konv][alternierende harmonische Reihe]{ex:alter-harm-reihe}
+$\sum_{k=1}^\infty \frac{(-1)^{k+1}}{k} $ aus dem letzten Abschnitt ist nach dem Leibniz-Kriterium konvergent. Die Reihe der Absolutbeträge ist die harmonische Reihe $\sum_{k=1}^\infty \frac{1}{k} $, welche nicht konvergiert.\\
+Die alternierende harmonische Reihe ist also nur bedingt konvergent, aber nicht absolut konvergent.
+\end{tabs*}
+\end{example}
+
+Absolute Konvergenz mit den beiden obigen Beispielen wird auch im folgenden Video behandelt.
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10907&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+\\
+Konvergenz einer Reihe impliziert also nicht die absolute Konvergenz. Die Umkehrung gilt jedoch:
+
+\begin{theorem}\label{thm:absolutekonvergenz_staerker}
+Ist $\sum_{k=1}^\infty a_k$ eine absolut konvergente Reihe, so ist die Reihe auch konvergent.
+\end{theorem}
+
+
+\begin{proof*}
+\begin{incremental}[\initialsteps{1}]
+\step
+Wir betrachten zunächst reelle Reihen. Ist also $\sum_{k=1}^\infty a_k$ eine absolut konvergente reelle Reihe, betrachten wir die beiden Reihen
+\[ \sum_{k=1}^\infty b_k\quad \text{mit}\quad b_k=\max {\{a_k;0\}} \]
+und
+\[ \sum_{k=1}^\infty c_k\quad \text{mit}\quad c_k=\max \left\{-a_k;0\right\}. \]
+Dann sind beides Reihen mit nicht-negativen Summanden und es gilt
+$b_k\leq |a_k|$, sowie $c_k\leq |a_k|$ für alle $k\in \N$.
+\step
+Nach dem \ref[content_25_konvergenz_kriterien][schwachen Majorantenkriterium]{positive-reihen} konvergieren also die Reihen $\sum_{k=1}^\infty b_k$
+und $\sum_{k=1}^\infty c_k$, da die Reihe $\sum_{k=1}^\infty |a_k|$ konvergiert. 
+
+Für alle $k\in \N$ gilt nach Definition von $b_k$ und $c_k$ die Gleichheit 
+\[  a_k=b_k-c_k. \]
+Sind $B=\sum_{k=1}^\infty b_k$ und $C=\sum_{k=1}^\infty c_k$ die Grenzwerte, dann gilt also nach 
+den \ref[reihen-und-konv][Grenzwertregeln]{sec:grenzwertregeln}
+\[ \sum_{k=1}^\infty a_k=\sum_{k=1}^\infty (b_k-c_k)
+=B-C. \]
+Insbesondere ist die Reihe $\sum_{k=1}^\infty a_k$ konvergent.
+
+\\
+\step
+
+Für eine komplexe absolut konvergente  Reihe $\sum_{k=1}^\infty a_k$
+betrachten wir die reellen Reihen  $\sum_{k=1}^\infty \Re(a_k)$
+und $\sum_{k=1}^\infty \Im(a_k)$. Wegen $0\leq |\Re(a_k)|\leq |a_k|$ und $0\leq |\Im(a_k)|\leq |a_k|$ 
+sind diese Reihen nach dem \ref[content_25_konvergenz_kriterien][schwachen Majorantenkriterium]{positive-reihen} auch absolut konvergent. Dies sind aber reelle Reihen, d.\,h. nach dem bisher Gezeigten sind sie dann auch 
+konvergent.
+Mit den \ref[reihen-und-konv][Grenzwertregeln]{sec:grenzwertregeln} erhält man schließlich
+\[ \sum_{k=1}^\infty a_k = \sum_{k=1}^\infty (\Re(a_k)+i \Im(a_k))=\sum_{k=1}^\infty \Re(a_k)+
+i\cdot \sum_{k=1}^\infty \Im(a_k). \]
+Insbesondere ist die Reihe $\sum_{k=1}^\infty a_k$ konvergent.
+\end{incremental}
+\end{proof*}
+
+
+Aus dem \ref[content_25_konvergenz_kriterien][schwachen Majorantenkriterium]{positive-reihen} erhält man
+direkt die folgende Aussage, die als \emph{Majorantenkriterium} bekannt ist.
+
+\begin{theorem}[Majoranten-/Minorantenkriterium]\label{thm:majoranten-krit}
+Es sei $\sum_{k=1}^\infty a_k$ eine komplexe Reihe.
+\begin{enumerate}
+\item Ist $k_0\in \N$ und $\sum_{k=1}^\infty c_k$ eine konvergente reelle Reihe mit
+\[  |a_k|\leq c_k \quad \text{für alle }k\geq k_0, \]
+so ist die Reihe $\sum_{k=1}^\infty a_k$ absolut konvergent und es gilt
+\[\vert\sum_{k=k_0}^\infty a_k\vert\leq \sum_{k=k_0}^\infty c_k.\]
+\item Ist $k_0\in \N$ und $\sum_{k=1}^\infty d_k$ eine divergente reelle Reihe mit $d_k\geq 0$ für alle $k\in \N$, so dass
+\[  |a_k|\geq d_k \quad \text{für alle }k\geq k_0, \]
+so ist die Reihe $\sum_{k=1}^\infty a_k$ nicht absolut konvergent. 
+\end{enumerate}
+\end{theorem}
+
+\begin{example}[Dreiecksungleichung für Reihen]\label{ex:dreiecksungl-reihen}
+Als Spezialfall des Majorantenkriteriums erhält man die Dreiecksungleichung für absolut konvergente Reihen
+\[\vert \sum_{n=1}^\infty a_n\vert\leq\sum_{n=1}^\infty {\vert a_n\vert}.\]
+\end{example}
+
+All dies kann in folgendem Video nochmal angeschaut werden:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10908&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+
+\begin{example}
+\begin{incremental}[\initialsteps{1}]
+\step
+Wir zeigen mit dem Majorantenkriterium, dass die komplexe Reihe 
+$\sum_{k=1}^\infty \frac{1}{(k-i)^2}=\frac{1}{(1-i)^2}+ \frac{1}{(2-i)^2}+\ldots\quad$ absolut konvergiert.
+(Hier bezeichnet $i$ die imaginäre Einheit.)
+\\
+\step
+Für alle $k\in \N$ ist
+\[ |  \frac{1}{(k-i)^2}| =\frac{1}{|k-i|^2}=\frac{1}{k^2+1^2}\leq \frac{1}{k^2}. \]
+Wir hatten im \ref[reihen-und-konv][letzten Abschnitt]{ex:weitere-reihen} gesehen, dass die Reihe $ \sum_{k=1}^\infty \frac{1}{k^2}$
+konvergiert.
+Nach dem Majorantenkriterium ist also die Reihe $\sum_{k=1}^\infty \frac{1}{(k-i)^2}$ absolut konvergent.
+\end{incremental}
+\end{example}
+
+
+\begin{quickcheck}
+  \text{Wählen Sie alle richtigen Antworten aus:\\ 
+ Wenn eine Reihe absolut konvergiert, dann...}
+ 
+ 
+  \begin{choices}{multiple}
+    \begin{choice}
+      \text{ist ihr Grenzwert $\geq 0$.}
+      \solution{false}
+    \end{choice}
+    \begin{choice}
+      \text{divergiert die Reihe, aber die Reihe der Absolutbeträge konvergiert.}
+      \solution{false}
+    \end{choice}
+    \begin{choice}
+    \text{  ist die Reihe selbst und die Reihe der Absolutbeträge konvergent.}
+      \solution{true}
+    \end{choice}
+    \end{choices}
+  
+\end{quickcheck}
+
+
+
+
+\section{Quotientenkriterium und Wurzelkriterium}
+
+
+Wir wollen hinreichende Kriterien für absolute Konvergenz herleiten.
+
+
+\begin{theorem}[Quotientenkriterium] \label{thm:quotientenkriterium}
+Es sei $\sum_{k=1}^\infty a_k$ eine komplexe Reihe mit $a_k\ne 0$ für alle $k\in \N$.
+\begin{enumerate}
+\item Falls es ein $\beta\in \R$ mit $0<\beta<1$ gibt und $k_0\in \N$, sodass
+\[   |\frac{a_{k+1}}{a_k}|\leq \beta \]
+für alle $k\geq k_0$ gilt, so ist die Reihe $\sum_{k=1}^\infty a_k$ absolut konvergent.
+\item Falls es ein $k_0 \in \mathbb{N}$ gibt, sodass für alle $k\geq k_0$
+\[   |\frac{a_{k+1}}{a_k}|\geq 1 \]
+erfüllt ist, so ist die Reihe $\sum_{k=1}^\infty a_k$ divergent.
+\item Ist keine der beiden Bedingungen erfüllt, so lässt sich auf diesem Weg keine Aussage zur Konvergenz treffen.
+\end{enumerate}
+\end{theorem}
+
+
+\begin{proof*}
+\begin{incremental}[\initialsteps{1}]
+\step
+Wir betrachten den ersten Fall etwas genauer: Eine äquivalente Umformulierung der Aussage liefert
+\[
+|a_k| \leq \beta |a_{k-1}|.
+\]
+Nun können wir diese Ungleichung erneut auf $a_{k-1}$ anwenden und erhalten
+\[
+|a_k| \leq \beta |a_{k-1}|\leq \beta^2 |a_{k-2}|.
+\]
+Induktiv erhalten wir
+\[  |a_k|\leq |a_{k_0}|\cdot \beta^{k-k_0}. \]
+Damit kann man das Majorantenkriterium für $\sum_{k=1}^\infty a_k$ mit der geometrischen Reihe $\sum_{k=k_0}^\infty |a_{k_0}|\cdot \beta^{k-k_0}=|a_{k_0}|\cdot \sum_{j=0}^\infty \beta^{j}$ anwenden, da die geometrische Reihe wegen $0<\beta<1$ konvergiert.
+Also ist die Reihe $\sum_{k=1}^\infty a_k$ absolut konvergent.
+\step
+Im zweiten Fall erhält man entsprechend
+\[  |a_k|\geq |a_{k_0}|. \]
+Die Folgenglieder bilden also keine Nullfolge, weshalb die Reihe divergiert.
+\end{incremental}
+\end{proof*}
+
+\begin{block}[warning]
+Wichtig beim ersten Fall des Quotientenkriteriums ist, dass es in der Tat ein $\beta<1$ gibt mit $|\frac{a_{k+1}}{a_k}|\leq \beta $.
+Die Bedingung $|\frac{a_{k+1}}{a_k}|<1$ für alle $k\geq k_0$ reicht nicht aus, wie das Beispiel der \ref[reihen-und-konv][Harmonischen Reihe]{ex:erste-reihen} $\sum_{k=1}^\infty \frac{1}{k}$ zeigt. Hier ist
+\[ |\frac{a_{k+1}}{a_k}|=  \frac{\frac{1}{k+1}}{ \frac{1}{k}} =\frac{k}{k+1}<1 \]
+für alle $k\in \N$. Die Reihe divergiert jedoch.
+
+Man sieht aber auch, dass es kein $\beta<1$ gibt mit $|\frac{a_{k+1}}{a_k}|\leq \beta $ für alle $k$, da
+\[ \lim_{k\to \infty} |\frac{a_{k+1}}{a_k}| = \lim_{k\to \infty} \frac{k}{k+1} =\lim_{k\to \infty} \frac{1}{1+\frac{1}{k}}=1. \]
+\end{block}
+
+\begin{remark}
+Es sei $\sum_{k=1}^\infty a_k$ eine komplexe Reihe mit $a_k\ne 0$ für alle $k\in \N$.
+Falls $\lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| < 1$, dann existieren
+ein $\beta\in \R$ mit $0<\beta<1$ und $k_0\in \N$, so dass
+\[   |\frac{a_{k+1}}{a_k}|\leq \beta \]
+für alle $k\geq k_0$ gilt. 
+Der Satz impliziert, dass die Reihe $\sum_{k=1}^\infty a_k$ absolut konvergiert.
+Es reicht also $\lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| < 1$ für die absolute Konvergenz zu zeigen.
+Ist der Grenzwert größer $1$, dann folgt analog die Divergenz der Reihe.
+Im Falle, dass der Grenzwert gleich $1$ ist oder gar nicht existiert, ist keine Aussage möglich (wie obige Warnung zeigt).
+\end{remark}
+
+Das Quotientenkriterium wird ausführlich in folgendem Video behandelt:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10909&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+\\
+Eine wichtige Reihe, deren Konvergenz mit dem Quotientenkriterium gezeigt werden kann, ist die sogenannte
+\emph{Exponentialreihe} für $z\in \C$.\\\\
+
+\begin{example}[Exponentialreihe]\label{ex:exp-reihe}
+\begin{incremental}[\initialsteps{1}]
+\step
+Für jede beliebige komplexe Zahl $z$ ist die Reihe
+\[ \exp(z)=\sum_{n=0}^\infty \frac{z^n}{n!} \]
+absolut konvergent. 
+\step
+
+Für $z=0$ ist die Reihe trivialerweise absolut konvergent, weil alle Glieder bis 
+auf das erste gleich $0$ sind. Für $z\neq 0$ benutzen wir das Quotientenkriterium und 
+betrachten den Quotienten
+\begin{eqnarray*}
+ |\frac{a_{k+1}}{a_k}| &=& |\frac{\frac{z^{k+1}}{(k+1)!}}{\frac{z^{k}}{k!}}|=
+\frac{|z|^{k+1}\cdot k!}{(k+1)!\cdot |z|^k}  \\
+&=& \frac{|z|\cdot k!}{(k+1)\cdot k!\cdot 1}= \frac{|z|}{k+1}.
+\end{eqnarray*}
+Es sei nun $k_0\geq \vert z\vert$ eine  natürliche Zahl. Setzen wir $\beta:=\frac{|z|}{k_0+1}<1$,
+so gilt für alle $k\geq k_0$:
+\[  |\frac{a_{k+1}}{a_k}| =\frac{|z|}{k+1}\leq \frac{|z|}{k_0+1}=\beta. \]
+Nach dem Quotientenkriterium ist die Reihe also absolut konvergent.
+
+In der Tat kann man zeigen, dass die Exponentialreihe die \ref[content_15_exponentialfunktionen][Exponentialfunktion]{sec:nat-exp-fct}  $\exp(z)=e^z$ darstellt. 
+\end{incremental}
+\end{example}
+
+\begin{example}\label{ex:ableitungen-der-geom-reihe}
+\begin{incremental}[\initialsteps{1}]
+\step
+Für eine ganze Zahl $l$ und eine komplexe Zahl $z\neq 0$ betrachten wir die Reihe
+\[  \sum_{n=1}^\infty n^l z^n. \]
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10910&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\step
+Wir betrachten zunächst den Quotienten
+\begin{eqnarray*}
+|\frac{a_{k+1}}{a_k}| &=& |\frac{(k+1)^l z^{k+1}}{k^l z^{k}}|= \left( \frac{k+1}{k}\right)^l \cdot {\vert z \vert} \\
+&=& \left( 1+ \frac{1}{k}\right)^l \cdot {\vert z \vert}.
+\end{eqnarray*}
+Dieser Quotient konvergiert also gegen $|z|$ für $k\to \infty$. 
+\step
+Ist nun $|z|>1$, so gibt es ein $k_0\in \N$ mit $|\frac{a_{k+1}}{a_k}|\geq 1$ für alle $k\geq k_0$ und nach dem Quotientenkriterium
+ist die Reihe $\sum_{n=1}^\infty n^l z^n$ divergent.
+
+Ist $|z|<1$, und $\beta\in \R$ mit $|z|<\beta<1$, so gibt es ein $k_0\in \N$ mit $|\frac{a_{k+1}}{a_k}|\leq \beta$ für alle $k\geq k_0$ und 
+nach dem Quotientenkriterium ist die Reihe $\sum_{n=1}^\infty n^l z^n$ absolut konvergent.
+\end{incremental}
+\end{example}
+%\begin{theorem}[\lang{de}{Quotientenkriterium für Reihen}
+%\lang{en}{quotient criterion for series}]
+%
+%\lang{de}{Seien $a_k\in\R$ oder $\C$ reelle oder komplexe Zahlen, $k\in\N_0$, und $\sum_{k=0}^\infty\;a_k$
+%  eine Reihe.}
+%  \lang{en}{Let $a_k\in\R$ or $\C$ be real or complex numbers, $k\in\N_0$, and $\sum_{k=0}^\infty\;a_k$ be a
+%  series (of numbers).}
+%Wenn $a_k\neq 0$ und wenn der folgende Grenzwert existiert:}
+%  \lang{en}{If $a_k\neq 0$ and if the following limit exists:}
+%  \\
+%  \[ Q\;\coloneq\; \lim_{k\to\infty}\;\left|\frac{a_{k+1}}{a_k}\right|\,,
+%  \]
+%  \\
+%  \lang{de}{dann gilt:
+%  \begin{itemize}
+%    \item Aus $Q<1$ folgt die absolute Konvergenz der Reihe,
+%    \item aus $Q>1$ folgt die Divergenz der Reihe,
+%    \item wenn $Q=1$ oder wenn der Grenzwert nicht existiert, dann kann mit dieser Methode keine Aussage \"uber 
+%    Konvergenz der Reihe gemacht werden.
+%  \end{itemize}
+%  }
+%  \lang{en}{then we have:
+%  \begin{itemize}
+%    \item $Q<1$ implies absolute convergence of the series,
+%    \item $Q>1$ implies divergence of the series,
+%    \item if $Q=1$ or if the limit does not exist, then this method does not yield information about convergence of the series.
+%  \end{itemize}
+%  }
+%\end{theorem}
+%
+%\begin{remarks}
+%  \begin{enumerate}
+%  \item \lang{de}{Wenn endlich viele Summanden einer Reihe ge\"andert werden, dann beeinflusst das die Konvergenz oder Divergenz
+%    einer Reihe nicht. Insbesondere ist es hinreichend f\"ur die Konvergenz, wenn die Bedingung \nowrap{$|a_k|\neq 0$} 
+%    f\"ur \nowrap{$k\geq K$} gilt,
+%    \nowrap{$K\in\N_0$} geeignet gew\"ahlt.}
+%    \lang{en}{If finitely many summands in a series are changed then the convergence or divergence of a series is not affected.
+%    In particular, it is sufficient if the inequality $|a_k|\neq 0$ holds for \nowrap{$k\geq K,$} \nowrap{$K\in\N_0$} 
+%    suitably chosen.}
+%  \item 
+%    \lang{de}{Gew\"ohnlich versucht man als erstes, mit dieser Methode Informationen \"uber die Konvergenz oder Divergenz einer
+%    Reihe zu erhalten.}
+%    \lang{en}{Usually one tries this method first to obtain information about convergence or divergence of a series.}
+%  \end{enumerate}
+%\end{remarks}
+%
+%\begin{block}[explanation]
+%
+%    \item
+%    \lang{de}{Das Kriterium beruht auf dem \link{comparison-series}{Vergleich} mit der
+%    \link{geometric-series}{geometrischen Reihe}. }
+%    \lang{en}{The criterion is based on \link{comparison-series}{comparison} with the \link{geometric-series}{geometric series}.}
+%\end{block}
+
+\begin{theorem}[Wurzelkriterium] \label{thm:wurzelkriterium}
+Es sei $\sum_{k=1}^\infty a_k$ eine komplexe Reihe. % mit $a_k\ 0$ für alle $k\in \N$.
+\begin{enumerate}
+\item Falls es ein $\beta\in \R$ mit $0<\beta<1$ gibt und $k_0\in \N$, sodass
+\[  \sqrt[k]{|a_k|}\leq \beta \]
+für alle $k\geq k_0$ gilt, so ist die Reihe $\sum_{k=1}^\infty a_k$ absolut konvergent.
+\item Falls für unendlich viele $k \in \mathbb{N}$ 
+\[   \sqrt[k]{|a_k|} \geq 1 \]
+erfüllt ist, so ist die Reihe $\sum_{k=1}^\infty a_k$ divergent.
+\item Ist keine der beiden Bedingungen erfüllt, so lässt sich auf diesem Weg keine Aussage zur Konvergenz treffen.
+\end{enumerate}
+\end{theorem}
+
+
+
+\begin{proof*}
+Wieder folgt der erste Teil durch Majorantenkriterium mit der geometrischen Reihe $\sum_{k=0}^\infty \beta^k$. 
+Hier erhält man
+aus der Ungleichung die Abschätzung $|a_k|\leq \beta^k$ für alle $k\geq k_0$.
+
+Der zweite Teil folgt wieder aus der Tatsache, dass die Folge $(a_k)_{k\in \N}$ keine Nullfolge bildet.
+\end{proof*}
+
+
+\begin{block}[warning]
+Wichtig beim ersten Fall des Wurzelkriteriums ist, dass es in der Tat ein $\beta<1$ gibt mit $\sqrt[k]{|a_k|}\leq \beta $.
+Die Bedingung $\sqrt[k]{|a_k|}<1$ für alle $k\geq k_0$ reicht nicht aus, wie das Beispiel der \ref[reihen-und-konv][Harmonischen Reihe]{ex:erste-reihen} $\sum_{k=1}^\infty \frac{1}{k}$ zeigt. Hier ist
+\[ \sqrt[k]{|a_k|}=  \sqrt[k]{\frac{1}{k}}<1 \]
+für alle $k\in \N$. Die Reihe divergiert jedoch.
+
+Man sieht aber auch, dass es kein $\beta<1$ gibt mit $\sqrt[k]{|a_k|}\leq \beta $ für alle $k\geq k_0$, da
+\[ \lim_{k\to \infty}\sqrt[k]{|a_k|}= \lim_{k\to \infty}\sqrt[k]{\frac{1}{k}} 
+=\lim_{k\to \infty} \frac{1}{\sqrt[k]{k}}=1. \]
+(Zum Grenzwert von $\sqrt[k]{k}$ vgl. 
+\ref[konv-krit-folgen][Abschnitt "`Konvergenzkriterien von Folgen"']{sec:wichtige-beispiele}.)
+\end{block}
+Auch für das Wurzelkriterium reicht es, $\lim_{k\to \infty}\sqrt[k]{|a_k|}<1$ für die absolute Konvergenz zu zeigen.\\
+
+Das Wurzelkriterium wird auch in diesem Video behandelt:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10911&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+
+\begin{example}
+\begin{incremental}[\initialsteps{1}]
+\step
+Wir betrachten die Reihe
+\[  \sum_{k=0}^\infty \frac{1}{3^k+(-2)^k}, \]
+das heißt $a_k=\frac{1}{3^k+(-2)^k}$.
+\step
+Alle Reihenglieder $a_k$ sind positiv. Wir schätzen die Nenner nach unten  ab und klammern anschließend $2^k$ aus,
+\[3^k+(-2)^k\geq 3^k-2^k=2^k((\frac{3}{2})^k-1).\]
+Damit  und durch die Monotonie der $k$-ten Wurzel erhalten wir
+\[ \sqrt[k]{\vert a_k\vert}=%\sqrt[k]{|\frac{1}{3^k+(-2)^k}|}=
+\sqrt[k]{\frac{1}{3^k+(-2)^k}}\leq % \sqrt[k]{\frac{1}{3^k-2^k}}=
+\frac{1}{2}\cdot \sqrt[k]{\frac{1}{(\frac{3}{2})^k-1}}
+<\frac{1}{2}\]
+für alle $k\geq 2$, da $(3/2)^k-1\geq (3/2)^2-1=5/4>1$. Nach dem Wurzelkriterium ist die Reihe also (absolut) konvergent.
+\end{incremental}
+\end{example}
+
+Das folgende Video erläutert das {Quotienten-} und {Wurzelkriterium}:
+\floatright{\href{https://www.hm-kompakt.de/video?watch=323}{\image[75]{00_Videobutton_schwarz}}}\\
+
+\begin{quickcheck}
+\text{ Wählen Sie alle richtigen Antworten aus! \\
+Für alle natürlichen Zahlen $n\geq 2$ gilt für die Reihe $\sum_{k=0}^\infty a_k=\sum_{k=0}^\infty ((\frac{1}{n})^k +(-1)^k(\frac{1}{n})^k)$:}
+\begin{choices}{multiple}
+\begin{choice}
+\text{ Die Reihe konvergiert absolut, weil die Reihe $2\cdot\sum_{k=0}^\infty(\frac{1}{n})^k$ eine konvergente Majorante ist.}
+\solution{true}
+\end{choice}
+\begin{choice}
+\text{ Die Reihe konvergiert absolut, weil die Koeffizienten eine Nullfolge bilden.}
+\solution{false}
+\end{choice}
+\begin{choice}
+\text{Die Reihe konvergiert absolut auf Grund des Wurzelkriteriums, denn $\lim_{k\to\infty}\sqrt[2k]{(\frac{1}{n})^{2k}} =\frac{1}{n}<1$.}
+\solution{true}
+\end{choice}
+\begin{choice}
+\text{ Die Reihe konvergiert absolut auf Grund des Quotientenkriteriums, denn $\lim_{k\to\infty}\frac{a_{k+1}}{a_k}=\frac{1}{n}<1$.}
+\solution{false}
+\end{choice}
+\begin{choice}
+\text{Die Reihe divergiert. }
+\solution{false}
+% \explanation{Die Reihe konvergiert absolut. Das lässt sich durch das Majorantenkriterium beweisen, 
+% denn die Reihe $2\cdot\sum_{k=0}^\infty(\frac{1}{n})^k$ ist eine Majorante und das Vielfache  einer konvergenten geometrischen Reihe.
+% \\Auch das Wurzelkriterium liefert die absolute Konvergenz. Hier bemerkt man noch, dass jeder zweite Summand gleich null ist, es also reicht, die Teilreihe der geraden Summanden $k$ zu betrachten.\\
+% Das Quotientenkriterium hingegen wurde falsch angewendet. Ebenso folgt allein aus der Tatsache, dass die Reihen glieder eine Nullfolge bilden, noch nicht die Konvergenz der Reihe.\\
+% }
+\end{choice}
+
+\end{choices}
+\end{quickcheck}
+
+\end{content}

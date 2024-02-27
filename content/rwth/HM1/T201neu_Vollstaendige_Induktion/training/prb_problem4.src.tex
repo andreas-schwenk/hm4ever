@@ -1,0 +1,141 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A04: Summen}
+    \lang{en}{input numbers}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22127}{Ticket 22127}
+\end{block}
+\begin{block}[annotation]
+Copy of \href{http://team.mumie.net/issues/9770}{Ticket 9770}: content/rwth/HM1/T201_Vollstaendige_Induktion_wichtige_Ungleichungen/training/prb_problem4.src.tex
+\end{block}
+
+
+\usepackage{mumie.genericproblem}
+\usepackage{mumie.ombplus}
+
+
+\lang{de}{
+	\title{A04: Binomialkoeffizienten}
+}
+
+\lang{en}{
+	\title{Problem 4}
+}
+
+
+
+\begin{problem}
+\randomquestionpool{1}{4}
+	\begin{question}
+	\text{Berechnen Sie den folgenden Zahlenwert.}
+	
+	\begin{variables}
+		\randint{q}{-6}{6}
+		\randadjustIf{q}{q=0}
+		\randint{n}{0}{2}
+		\function[calculate]{f}{(q^(n+1)-1)/(q-1)}
+		\function{qk}{q^k}
+	\end{variables}
+	
+	\type{input.number} 
+        \field{rational}
+		
+		\begin{answer}
+			\text{ $\sum_{k=0}^\var{n} \var{qk} =$}
+			\solution{f}
+            \explanation{Tipp: Verwenden Sie die Geometrische Summenformel.}
+		\end{answer}
+	
+	\end{question}
+	
+	\begin{question}
+	\text{Berechnen Sie den folgenden Zahlenwert.}
+	
+	\begin{variables}
+		\randint{qh}{-6}{6}
+		\randadjustIf{qh}{qh=0 OR qh=2}
+		\function[calculate]{q}{qh/2}
+		\randint{n}{3}{4}
+		\function[calculate]{f}{(q^(n+1)-1)/(q-1)}
+		\function{qk}{q^k}
+	\end{variables}
+	
+	\type{input.number} 
+        \field{rational}
+		
+		\begin{answer}
+			\text{ $\sum_{k=0}^\var{n} \var{qk} =$}
+			\solution{f}
+            \explanation{Tipp: Verwenden Sie die Geometrische Summenformel.}
+		\end{answer}
+	
+	\end{question}
+	
+		\begin{question}
+	\text{Berechnen Sie den folgenden Zahlenwert.}
+	
+	\begin{variables}
+		\randint{qh}{-4}{4}
+		\randadjustIf{qh}{qh=0 OR qh=2}
+		\function[calculate]{q}{qh/2}
+		\randint{n}{5}{9}
+		\function[calculate]{f}{(q^(n+1)-1)/(q-1)}
+		\function{qk}{q^k}		
+	\end{variables}
+	
+	\type{input.number} 
+        \field{rational}
+		
+		\begin{answer}
+			\text{ $\sum_{k=0}^\var{n} \var{qk} =$}
+			\solution{f}
+            \explanation{Tipp: Verwenden Sie die Geometrische Summenformel.}
+		\end{answer}
+	
+	\end{question}
+	
+		
+			\begin{question}
+	\text{Berechnen Sie den folgenden Zahlenwert.}
+	
+	\begin{variables}
+		\randint{n}{0}{9}
+		\function[calculate]{f}{2^n}
+	\end{variables}
+	
+	\type{input.number} 
+        \field{rational}
+		
+		\begin{answer}
+			\text{ $ \sum_{k=0}^\var{n} \binom{\var{n}}{k} =$ }
+			\solution{f}
+            \explanation{Tipp: Verwenden Sie die Regel über binomische Koeffizienten.}
+		\end{answer}
+	
+	\end{question}
+	
+\end{problem}
+
+\embedmathlet{mathlet}
+
+
+\end{content}

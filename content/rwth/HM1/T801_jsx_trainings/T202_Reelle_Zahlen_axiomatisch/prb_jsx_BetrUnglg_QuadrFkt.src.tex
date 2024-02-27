@@ -1,0 +1,293 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Name}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}    
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+%  
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/32493}{Ticket 32493}
+\end{block}
+\begin{block}[annotation]
+Copy of : /home/mumie/checkin/content/playground/HM4mint-Testaufgaben/T202_Reelle_Zahlen_axiomatisch/prb_jsx_BetrUnglg_QuadrFkt.src.tex
+\end{block}
+
+\begin{block}[annotation]
+(B. Guyet)\\
+Copy of : /home/mumie/checkin/content/playground/BarbaraGuyet/JSX-Aufgaben/prb_jsx_BetrUnglg_QuadrFkt.src.tex
+\end{block}
+
+\begin{block}[annotation]
+Grapfische Lösung einer Betragsungleichung mit einfacher quadratischer Funktion im Betrag.
+\end{block}
+
+\usepackage{mumie.genericproblem}
+\lang{de}{
+\title{Betragsungleichung grafisch lösen}
+}
+\begin{visualizationwrapper}
+
+
+\begin{genericJSXVisualization}
+	\begin{variables}
+    		\point[editable]{S}{real}{2,3}
+        \function{f0}{real}{abs((x-S[x])^2+S[y])}
+        \function{f}{real}{(x-S[x])^2+S[y]}
+        \point[editable]{P}{real}{0,5}
+        \function{g}{real}{P[y]}
+        \function{xaxis}{real}{0*x}
+        \pointOnCurve{W}{real}{xaxis}{-4}
+        \parametricFunction{v}{real}{W[x]+0*t,t,0,22}
+	\end{variables}
+\color{f0}{RED}
+\color[0.7]{f}{RED}
+\color{S}{RED}
+\label{S}{S}
+\color[0.7]{g}{GREEN}
+\color{P}{GREEN}
+%\label{P}{P}
+\label{g}{g}
+\color{W}{GREEN}
+\color[0.7]{v}{GREEN}
+
+	\begin{canvas}
+        \snapToGrid{0.1,0.1}
+        \plotSize{500,500}
+        \plotLeft{-25}
+        \plotRight{25}
+        \plot[coordinateSystem,showPointCoords]{S,P,f0,f,g,W,v}
+	\end{canvas}
+
+\end{genericJSXVisualization}
+
+\end{visualizationwrapper}
+
+
+\begin{problem}
+
+% Betragsungleichung (neu)
+% 
+  \randomquestionpool{1}{4} % (hier zunächst nur die Fälle mit |...| <= od >= b, 
+                            % ggf. noch duplizieren für |...| < od > b
+                            % oder mit "case" arbeiten)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Q1  |(x+c)^2-a|<=b und a<b => 1 Intervall
+%
+  \begin{question}
+  
+    \type{input.interval}
+    \field{real}
+    \precision{2}
+
+    \text{Bestimmen Sie grafisch alle Lösungen $x \in \R$ der Ungleichung     
+        $\;  \abs{(\var{term})^2 -\var{a}} \leq \var{b}. $ \\\\
+        
+        Verschieben Sie hierzu den roten Punkt $S$ in den Scheitelpunkt 
+        des Funktionsgraphen $f(x)=(\var{term})^2 -\var{a}$. Durch Spiegelung
+        an der $x-$Achse entsteht dabei automatisch $\abs{f(x)}=\abs{(\var{term})^2 -\var{a}}$. \\
+        
+        \textit{Tipp: Verwenden Sie die grünen Hilfslinien und Punkte zur Bestimmung und zum Ablesen
+                der Intervallgrenzen für die Lösungsmenge.}
+        }
+%
+        \explanation{Prüfen Sie die Intervallgrenzen und beachten Sie, ob die gesuchten
+         Funktionswerte von $\abs{f(x)}$ oberhalb oder unterhalb der Begrenzungsgeraden $g$ liegen sollen.}
+%        
+    \begin{variables}
+    %Für den Fall a<b
+      \drawFromSet{qp}{4,9,16,25} % qp=(a+b)^2
+      \randint{a}{1}{10}
+      \randint[Z]{c}{-10}{10}      
+      \function[normalize]{term}{x+c}
+      \function[calculate,2]{b}{qp-a}
+      \randadjustIf{a}{a>=b OR b<=0}
+    %Intervallgrenzen
+      \function[normalize]{l1}{-sqrt(a+b)-c}
+      \function[normalize]{r1}{sqrt(a+b)-c}
+
+    \end{variables}
+%
+%\debug[qp,c,a,b,l1,r1]
+%
+    \begin{answer}
+          \text{$\mathbb{L}=$}    
+          \allowIntervalUnionsForInput
+          \solution{[l1;r1]}
+    \end{answer}
+%
+  \end{question}
+
+%
+% Q2  |(x+c)^2-a|>=b und a<b => 2 Intervalle
+%
+  \begin{question}
+  
+    \type{input.interval}
+    \field{real}
+    \precision{2}
+
+    \text{Bestimmen Sie grafisch alle Lösungen $x \in \R$ der Ungleichung     
+        $\;  \abs{(\var{term})^2 -\var{a}} \leq \var{b}. $ \\\\
+
+        Verschieben Sie hierzu den roten Punkt $S$ in den Scheitelpunkt 
+        des Funktionsgraphen $f(x)=(\var{term})^2 -\var{a}$. Durch Spiegelung
+        an der $x-$Achse entsteht dabei automatisch $\abs{f(x)}=\abs{(\var{term})^2 -\var{a}}$. \\
+        
+        \textit{Tipp: Verwenden Sie die grünen Hilfslinien und Punkte zur Bestimmung und zum Ablesen
+                der Intervallgrenzen für die Lösungsmenge.}
+        }
+%
+        \explanation{Prüfen Sie die Intervallgrenzen und beachten Sie, ob die gesuchten
+         Funktionswerte von $\abs{f(x)}$ oberhalb oder unterhalb der Begrenzungsgeraden $g$ liegen sollen.}
+%        
+    \begin{variables}
+    %Für den Fall a<b
+      \drawFromSet{qp}{4,9,16,25} % qp=(a+b)
+      \randint{a}{1}{10}
+      \randint[Z]{c}{-10}{10}
+      \function[normalize]{term}{x+c}      
+      \function[calculate,2]{b}{qp-a}
+      \randadjustIf{a}{a>=b OR b<=0}
+    %Intervallgrenzen
+      \function[normalize]{l1}{-sqrt(a+b)-c}
+      \function[normalize]{r1}{sqrt(a+b)-c}
+
+    \end{variables}
+%
+%\debug[qp,qm,a,b,l1,r1]
+%
+    \begin{answer}
+          \text{$\mathbb{L}=$}    
+          \allowIntervalUnionsForInput
+          \solution{(-infty;l1],[r1;infty)}
+    \end{answer}
+%
+  \end{question}
+
+%
+% Q3  |(x+c)^2-a|<=b und a>b => 2 Intervalle
+%
+  \begin{question}
+  
+    \type{input.interval}
+    \field{real}
+    \precision{2}
+
+    \text{Bestimmen Sie grafisch alle Lösungen $x \in \R$ der Ungleichung     
+        $\;  \abs{(\var{term})^2 -\var{a}} \leq \var{b}. $ \\\\
+
+        Verschieben Sie hierzu den roten Punkt $S$ in den Scheitelpunkt 
+        des Funktionsgraphen $f(x)=(\var{term})^2 -\var{a}$. Durch Spiegelung
+        an der $x-$Achse entsteht dabei automatisch $\abs{f(x)}=\abs{(\var{term})^2 -\var{a}}$. \\
+        
+        \textit{Tipp: Verwenden Sie die grünen Hilfslinien und Punkte zur Bestimmung und zum Ablesen
+                der Intervallgrenzen für die Lösungsmenge.}
+
+        }
+%
+        \explanation{Prüfen Sie die Intervallgrenzen und beachten Sie, ob die gesuchten
+         Funktionswerte von $\abs{f(x)}$ oberhalb oder unterhalb der Begrenzungsgeraden $g$ liegen sollen.}
+%        
+    \begin{variables}
+    %Für den Fall a>b    
+      \drawFromSet{qp}{4,9,16,25} % qp=(a+b)
+      \drawFromSet{qm}{1,4,9,16}  % qm=(a-b)
+      \randadjustIf{qp,qm}{qp<=qm}
+      \randint[Z]{c}{-10}{10}
+      \function[normalize]{term}{x+c}            
+      \function[calculate,2]{a}{(qp+qm)/2}
+      \function[calculate,2]{b}{(qp-qm)/2}
+    %Intervallgrenzen
+      \function[normalize]{l1}{-sqrt(a+b)-c}
+      \function[normalize]{r1}{-sqrt(a-b)-c}
+
+      \function[normalize]{l2}{sqrt(a-b)-c}
+      \function[normalize]{r2}{sqrt(a+b)-c}
+    \end{variables}
+%
+%\debug[qp,qm,a,b,l1,r1,l2,r2]
+%
+    \begin{answer}
+          \text{$\mathbb{L}=$}    
+          \allowIntervalUnionsForInput
+          \solution{[l1;r1],[l2;r2]}
+    \end{answer}
+%
+  \end{question}
+
+%
+% Q4  |(x+c)^2-a|>=b und a>b => 3 Intervalle
+%
+  \begin{question}
+  
+    \type{input.interval}
+    \field{real}
+    \precision{2}
+
+    \text{Bestimmen Sie grafisch alle Lösungen $x \in \R$ der Ungleichung     
+        $\;  \abs{(\var{term})^2 -\var{a}} \geq \var{b}. $ \\\\
+
+        Verschieben Sie hierzu den roten Punkt $S$ in den Scheitelpunkt 
+        des Funktionsgraphen $f(x)=(\var{term})^2 -\var{a}$. Durch Spiegelung
+        an der $x-$Achse entsteht dabei automatisch $\abs{f(x)}=\abs{(\var{term})^2 -\var{a}}$. \\
+        
+        \textit{Tipp: Verwenden Sie die grünen Hilfslinien und Punkte zur Bestimmung und zum Ablesen
+                der Intervallgrenzen für die Lösungsmenge.}
+        }
+%
+        \explanation{Prüfen Sie die Intervallgrenzen und beachten Sie, ob die gesuchten
+         Funktionswerte von $\abs{f(x)}$ oberhalb oder unterhalb der Begrenzungsgeraden $g$ liegen sollen.}
+%        
+    \begin{variables}
+    %Für den Fall a>b    
+      \drawFromSet{qp}{4,9,16,25} % qp=(a+b)
+      \drawFromSet{qm}{1,4,9,16}  % qm=(a-b)
+      \randadjustIf{qp,qm}{qp<=qm}
+      \randint[Z]{c}{-10}{10}
+      \function[normalize]{term}{x+c}                  
+      \function[calculate,2]{a}{(qp+qm)/2}
+      \function[calculate,2]{b}{(qp-qm)/2}
+    %Intervallgrenzen
+      \function[normalize]{r1}{-sqrt(a+b)-c}
+      \function[normalize]{l2}{-sqrt(a-b)-c}
+      \function[normalize]{r2}{sqrt(a-b)-c}
+      \function[normalize]{l3}{sqrt(a+b)-c}
+
+    \end{variables}
+%
+%\debug[qp,qm,a,b,r1,l2,r2, l3]
+%
+    \begin{answer}
+          \type{input.interval}
+          \text{$\mathbb{L}=$}    
+          \allowIntervalUnionsForInput
+          \solution{(-infty;r1],[l2;r2],[l3;infty)}
+    \end{answer}
+%
+  \end{question}
+
+  
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

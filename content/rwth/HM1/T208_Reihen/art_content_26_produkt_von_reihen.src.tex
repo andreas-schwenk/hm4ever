@@ -1,0 +1,267 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Produkt von Reihen}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+\end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T201neu_Vollstaendige_Induktion/g_art_content_03_binomischer_lehrsatz.meta.xml}{content_03_binomischer_lehrsatz}
+    \link{generic_article}{content/rwth/HM1/T201neu_Vollstaendige_Induktion/g_art_content_02_vollstaendige_induktion.meta.xml}{content_02_vollstaendige_induktion}
+    \link{generic_article}{content/rwth/HM1/T208_Reihen/g_art_content_26_produkt_von_reihen.meta.xml}{content_26_produkt_von_reihen}
+    \link{generic_article}{content/rwth/HM1/T104_weitere_elementare_Funktionen/g_art_content_15_exponentialfunktionen.meta.xml}{content_15_exponentialfunktionen}
+    \link{generic_article}{content/rwth/HM1/T208_Reihen/g_art_content_24_reihen_und_konvergenz.meta.xml}{reihen-und-konv}
+    %\link{generic_article}{content/rwth/HM1/T201_Vollstaendige_Induktion_wichtige_Ungleichungen/g_art_content_02_vollstaendige_induktion.meta.xml}{vollst-ind}
+    \link{generic_article}{content/rwth/HM1/T208_Reihen/g_art_content_25_konvergenz_kriterien.meta.xml}{abs-konv}
+    %\link{generic_article}{content/rwth/HM1/T201_Vollstaendige_Induktion_wichtige_Ungleichungen/g_art_content_03_binomialkoeffizienten.meta.xml}{binom-koeff}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{8}
+\ombarticle{3}
+
+
+
+
+\lang{de}{\title{Umordnung und Produkt von Reihen}}
+ 
+\begin{block}[annotation]
+ Im Ticket-System: \href{http://team.mumie.net/issues/9683}{Ticket 9683}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+\section{Umordnung von Reihen}\label{sec:reihen-umordnung}
+
+
+In einer früheren \ref[reihen-und-konv][Bemerkung]{rem:reihenfolge-summation} haben wir bereits gesehen, 
+dass es bei der Summation einer unendlichen Reihe anders als bei 
+einer endlichen Summe auf die Reihenfolge der Summanden ankommt. 
+Durch die Definition einer Reihe als Folge ihrer Partialsummen haben wir eine Reihenfolge festgelegt.
+Eine Umordnung der natürlichen Zahlen ist eine
+bijektive Abbildung $\sigma\colon \N\to\N$. Diese benutzen wir, um die Umordnung einer Reihe 
+\[\sum_{n=1}^\infty a_n\mapsto \sum_{n=1}^\infty a_{\sigma(n)}\]
+zu beschreiben. Bei nur bedingt konvergenten Reihen kann bei einer Umordnung alles passieren: 
+Je nach Umordnung kann der Grenzwert derselbe bleiben oder sich ändern, aber die Reihe kann auch divergieren.
+
+
+\begin{tabs*}[\initialtab{0}]
+\tab{Unveränderter Grenzwert}
+Es sei $\sum_{n=1}^\infty a_n$ eine konvergente komplexe Reihe, und es sei
+ $\sigma:\N\to\N$ eine Umordnung, die die Zahlen $1,\ldots,N$ unter sich vertauscht, 
+die anderen Zahlen aber fest lässt, d.\,h. $\sigma(n)=n$ für $n>N$. 
+Dann konvergiert die umgeordnete Reihe $\sum_{n=1}^\infty a_{\sigma(n)}$  gegen denselben Grenzwert.
+Denn wir können die beiden Reihen schreiben als
+\[\sum_{n=1}^\infty a_n=\sum_{n=1}^N a_n+\sum_{n=N+1}^\infty a_n \text{ bzw.} 
+\sum_{n=1}^\infty a_{\sigma(n)}=\sum_{n=1}^N a_{\sigma(n)}+\sum_{n=N+1}^\infty a_{\sigma(n)}.\]
+Die jeweils vorderen Summen sind endlich, deshalb können wir sie beliebig umordnen. 
+Sie sind also gleich. Die beiden hinteren Reihen sind gleich, 
+weil dort stets $a_n=a_{\sigma(n)}$ gilt. Also haben die beiden Reihen denselben Grenzwert.
+\tab{Divergenz}
+Die \ref[reihen-und-konv][alternierende Reihe]{ex:alter-harm-reihe} $\sum_{k=1}^\infty \frac{(-1)^{k+1}}{k}$ ist bedingt konvergent.
+Wir zeigen, dass es eine Umordnung $\sigma:\N\to\N$ gibt, sodass $\sum_{n=1}^\infty \frac{(-1)^{\sigma(k)+1}}{\sigma(k)}$ divergiert.
+Betrachten wir dazu die Reihenglieder mit ungerader Ordnung $k=2^n+1,\ldots, 2^{n+1}-1$. 
+Das sind $2^{n-1}$ Stück. Für ihre Teilsumme finden wir also
+\[\frac{1}{2^n+1}+\frac{1}{2^n+3}+\ldots+\frac{1}{2^{n+1}-1}>2^{n-1}\cdot\frac{1}{2^{n+1}}=\frac{1}{4}.\]
+Ordnen wir die alternierende Reihe um in
+\[1-\frac{1}{2}+\frac{1}{3}-\frac{1}{4}+\left(\frac{1}{5}+\frac{1}{7}\right)-\frac{1}{6}+\left(\frac{1}{9}+\frac{1}{11}+\frac{1}{13}+\frac{1}{15}\right)-\frac{1}{8}+\ldots,\]
+dann ist die so entstandene Partialsummenfolge, d.\,h. die umgeordnete Reihe, divergent.
+\end{tabs*}
+
+Für absolut konvergente Reihen hat man hingegen das folgende Ergebnis.
+\begin{theorem}
+Es sei $\sum_{n=1}^\infty a_n$ eine absolut konvergente komplexe Reihe mit Grenzwert $A$. 
+Dann konvergiert jede ihrer Umordnungen ebenfalls gegen den Grenzwert $A$.\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=325}{\image[75]{00_Videobutton_schwarz}}}\\\\
+\end{theorem}
+\begin{proof*}
+\begin{incremental}[\initialsteps{0}]
+\step
+Weil die Reihe $\sum_{n=1}^\infty \vert a_n\vert$ konvergiert,
+gibt es zu jedem $\epsilon >0$ eine natürliche Zahl $N$ so, dass gilt
+\[  \sum_{n=N+1}^\infty {\vert a_n\vert} <\frac{\epsilon}{2}.\]
+Unter Verwendung der \ref[abs-konv][Dreiecksungleichung für absolut konvergente Reihen]{ex:dreiecksungl-reihen}   folgt 
+\[\vert A-\sum_{n=1}^{N}a_n\vert
+=\vert \sum_{n=N+1}^\infty a_n\vert \leq \sum_{n=N+1}^\infty {\vert a_n\vert}<\frac{\epsilon}{2}.\]
+
+\step
+Es sei nun $\sigma:\N\to\N$ eine Umordnung. 
+Wir wählen eine natürliche Zahl $M\geq N$ derart, dass die Menge $\{1, 2,\ldots N\}$ enthalten ist in der Menge
+der Bilder $\{\sigma(1), \sigma(2), \ldots, \sigma(M)\}$.
+Dann gilt für alle $m>M$ mit Hilfe der Dreiecksungleichung
+\[\vert \sum_{n=1}^m a_{\sigma(n)} -A\vert\leq \vert \sum_{n=1}^m a_{\sigma(n)} -\sum_{n=1}^{N}a_n\vert+
+\vert \sum_{n=1}^{N}a_n-A\vert.\]
+Den hinteren Term haben wir bereits durch $\frac{\epsilon}{2}$ abgeschätzt.
+Im vorderen Term tritt keines der Glieder $a_1,\ldots, a_N$ mehr auf. 
+Deshalb gilt die Abschätzung
+\[\vert \sum_{n=1}^m a_{\sigma(n)} -\sum_{n=1}^{N}a_n\vert\leq 
+ \sum_{n=N+1}^\infty{\vert a_n\vert}<\frac{\epsilon}{2}.\]
+ 
+\step 
+Wir erhalten insgesamt
+\[\vert \sum_{n=1}^m a_{\sigma(n)} -A\vert<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon\]
+für alle $m>M\geq N$. Da $\epsilon$ beliebig war, 
+folgt die Konvergenz der Reihe $\sum_{n=1}^\infty a_{\sigma(n)}$ gegen $A$.
+\end{incremental}
+\end{proof*}
+
+Umordnung von Reihen ist auch Thema des folgenden Videos:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10912&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}
+
+\section{Cauchy-Produkt}
+
+
+Hat man zwei konvergente Reihen $\sum_{k=0}^\infty a_k=A$ und $\sum_{k=0}^\infty b_k=B$ gegeben, möchte man
+oft daraus eine Reihe $\sum_{k=0}^\infty c_k$ konstruieren, die gegen $A\cdot B$ konvergiert.
+
+Das \emph{Cauchy-Produkt} ist eine solche Konstruktion. Sie liefert allerdings nur für absolut konvergente Reihen den
+gewünschten Grenzwert! Insbesondere ist das Cauchy-Produkt nicht das Produkt der Partialsummenfolgen.
+
+
+\begin{definition}[Cauchy-Produkt]\label{def:cauchy-prod}
+Das  \notion{Cauchy-Produkt} zweier (komplexer) Reihen  $\sum_{k=0}^\infty a_k$ und $\sum_{k=0}^\infty b_k$ 
+ist die Reihe $\sum_{k=0}^\infty c_k$, die gegeben ist durch
+\[   c_k=\sum_{j=0}^k a_jb_{k-j}. \]
+Ins besondere ist $c_0=a_0b_0$, $c_1=a_0b_1+a_1b_0$, $c_2=a_0b_2+a_1b_1+a_2b_0$, etc.. 
+\end{definition}
+
+\begin{remark}
+Generell gilt: Man erhält das $k$-te Glied $c_k$, indem man alle Produkte $a_jb_l$ aufsummiert, bei denen die Summe der Indizes $j+l$ gleich $k$ ist.
+Beginnen die Reihen nicht bei $0$, sondern bei anderen Zahlen, ändert sich entsprechend die Summationsmenge von $c_k$.
+Das Cauchy-Produkt der Reihen $\sum_{k=1}^\infty a_k$ und $\sum_{k=2}^\infty b_k$ ist also $\sum_{k=3}^\infty c_k$  mit
+\[ c_k=\sum_{j=1}^{k-2} a_jb_{k-j} \]
+für $k\geq 3$. Die Reihe fängt hier bei $3$ an, da es keine Produkte $a_jb_l$ gibt, deren Indizes sich zu $0$, $1$ oder $2$ summieren.
+\end{remark}
+
+
+\begin{theorem}\label{thm:cauchy-prod}
+Sind $\sum_{k=0}^\infty a_k=A$ und $\sum_{k=0}^\infty b_k=B$ zwei absolut konvergente Reihen 
+und $\sum_{k=0}^\infty c_k$ ihr Cauchy-Produkt,
+so ist auch $\sum_{k=0}^\infty c_k$ absolut konvergent und es gilt
+\[ \sum_{k=0}^\infty c_k =A\cdot B. \]
+\end{theorem}
+
+\begin{block}[warning]
+\begin{incremental}[\initialsteps{1}]
+\step
+Sind die Reihen $\sum_{k=0}^\infty a_k=A$ und $\sum_{k=0}^\infty b_k=B$ nur bedingt konvergent, so kann man zwar ihr
+Cauchy-Produkt $\sum_{k=0}^\infty c_k$ wie oben definieren, doch kann diese Reihe divergent sein. Selbst wenn sie konvergent ist, muss ihr Grenzwert
+nicht $A\cdot B$ sein.
+\step
+
+Als Beispiel betrachte man die Reihen $\sum_{k=1}^\infty a_k$ und $\sum_{k=1}^\infty b_k$ mit 
+$a_k=b_k=\frac{(-1)^k}{\sqrt{k}}$.
+Nach dem \ref[reihen-und-konv][Leibniz-Kriterium]{thm:leibnizkriterium} sind die beiden Reihen konvergent, 
+da $(\frac{1}{\sqrt{k}})_{k\in \N}$ eine monoton fallende Nullfolge ist.
+Für die Glieder $c_k$ ($k\geq 2$) des Cauchy-Produkts gilt:
+\[   c_k=\sum_{j=1}^{k-1} \frac{(-1)^j}{\sqrt{j}}\cdot \frac{(-1)^{k-j}}{\sqrt{k-j}}
+=(-1)^k\cdot \sum_{j=1}^{k-1}\frac{1}{\sqrt{j(k-j)}}. \]
+Wegen der \ref[content_02_vollstaendige_induktion][Ungleichung zwischen geometrischem und arithmetischem Mittel]{sec:wichtige-beispiele} ist $\sqrt{j(k-j)}\leq \frac{j+(k-j)}{2}=\frac{k}{2}$ für alle $j=1,\ldots, k-1$, und damit gilt:
+\begin{eqnarray*}  
+{|c_k|} &=& \left|  (-1)^k\cdot \sum_{j=1}^{k-1}\frac{1}{\sqrt{j(k-j)}}\right| 
+= \sum_{j=1}^{k-1}\frac{1}{\sqrt{j(k-j)}} \\
+&\geq &  \sum_{j=1}^{k-1}\frac{\,1\,}{\frac{k}{2}}
+= \sum_{j=1}^{k-1}\frac{2}{k}=\frac{(k-1)\cdot 2}{k}=2-\frac{2}{k}.
+\end{eqnarray*}
+ Wegen $\lim_{k\to \infty} (2-\frac{2}{k})=2$ bilden die $c_k$ also keine Nullfolge, und insbesondere ist die Reihe $\sum_{k=2}^\infty c_k$ nicht konvergent.
+\end{incremental}
+\end{block}
+
+\begin{remark}
+Die $n$-te Partialsumme des Cauchy-Produkts $\sum_{k=0}^\infty c_k$ ist \textbf{nicht} das Produkt der $n$-ten Partialsummen der Reihen
+$\sum_{k=0}^\infty a_k$ und $\sum_{k=0}^\infty b_k$. Letzteres ist nämlich
+\[ \left( \sum_{j=0}^n a_j \right)\cdot \left( \sum_{l=0}^n b_l \right) = \sum_{j=0}^n  \sum_{l=0}^n a_jb_l, \]
+wohingegen für Ersteres gilt: 
+\[  \sum_{k=0}^n c_k =\sum_{k=0}^n \sum_{j=0}^k a_jb_{k-j} = \sum_{j,l\geq 0; j+l\leq n} a_jb_l. \]
+Bei der $n$-ten Partialsumme des Cauchy-Produkts werden also nur die Produkte $a_jb_l$ aufsummiert, bei denen $j+l\leq n$ ist, wohingegen beim
+Produkt der $n$-ten Partialsummen alle $a_jb_l$ aufsummiert werden, bei denen $j\leq n$ und $l\leq n$ ist.
+
+Dies bedeutet aber auch, dass im Grenzübergang $\lim_{n\to \infty} \left( \sum_{k=0}^n c_k \right)$ die gleichen Elemente aufsummiert werden wie bei
+$ \lim_{n\to \infty}  \left( \sum_{j=0}^n a_j \right)\cdot \left( \sum_{l=0}^n b_l \right) $, jedoch in einer anderen Reihenfolge!
+
+Bei absolut konvergenten Reihen kann die Summation beliebig vertauscht werden, ohne den Grenzwert zu ändern.
+Bei bedingt konvergenten Reihen ist jedoch die Reihenfolge der Summation wichtig! 
+(Vergleiche den \ref[content_26_produkt_von_reihen][vorhergehenden Abschnitt]{sec:reihen-umordnung}.)
+
+Dies ist der Grund, weshalb das Cauchy-Produkt nur bei absolut konvergenten Reihen mit Sicherheit das richtige Ergebnis liefert.
+\end{remark}
+
+
+\begin{example}
+Sei $q\in \C$ mit $0<|q|<1$. Wir betrachten die geometrische Reihe $\sum_{k=0}^\infty q^k$.
+Diese ist absolut konvergent und ihr Grenzwert ist 
+\[ \sum_{k=0}^\infty q^k =\frac{1}{1-q}. \]
+Als Cauchy-Produkt dieser geometrischen Reihe mit sich selbst erhalten wir die Reihe $\sum_{k=0}^\infty c_k$ mit
+\[ c_k= \sum_{j=0}^k q^j\cdot q^{k-j}=\sum_{j=0}^k q^k =(k+1)q^k\]
+für alle $k\geq 0$, also die Reihe
+\[  \sum_{k=0}^\infty  (k+1)q^k.\]
+Nach obigem Satz konvergiert das Cauchy-Produkt gegen das Produkt der Grenzwerte, also ist
+\[  \sum_{k=0}^\infty  (k+1)q^k =\left( \frac{1}{1-q}\right)^2=\frac{1}{(1-q)^2}. \]
+\end{example}
+
+\begin{example}[Funktionalgleichung der Exponentialreihe] \label{ex:funktionalgleichung-exp}
+Seien $z$ und $w$ komplexe Zahlen. Wir betrachten die \ref[abs-konv][Exponentialreihen]{ex:exp-reihe} zu $z$ und $w$
+\[ \exp(z)=\sum_{n=0}^\infty \frac{z^n}{n!}\quad \text{bzw.} \quad \exp(w)=\sum_{n=0}^\infty \frac{w^n}{n!}. \]
+Beide sind absolut konvergent und ihr Cauchy-Produkt $\sum_{k=0}^\infty c_k$ ist gegeben durch
+\begin{eqnarray*}
+ c_k &=&  \sum_{j=0}^k \frac{z^j}{j!}\cdot \frac{w^{k-j}}{(k-j)!} =\frac{1}{k!}\cdot \sum_{j=0}^k \binom{k}{j} z^jw^{k-j}\\
+  &=& \frac{1}{k!}(z+w)^k
+   \end{eqnarray*}
+nach der Definition der \link{content_03_binomischer_lehrsatz}{Binomialkoeffizienten} und der allgemeinen \ref[content_03_binomischer_lehrsatz][binomischen Formel]{thm:binom}.
+
+Das Cauchy-Produkt ist also genau die Exponentialreihe zu $z+w$:
+\[ \exp(z+w)=\sum_{k=0}^\infty \frac{(z+w)^k}{k!} .\]
+Wir haben die sogenannte Funktionalgleichung $\exp(z+w)=\exp(z)\cdot\exp(w)$ für die Exponentialreihe gezeigt. 
+Vergleiche mit dem \ref[content_15_exponentialfunktionen][Potenzgesetz für Exponentialfunktionen]{{functional_eqn_exp}}!
+\end{example}
+
+Der Abschnitt zum Cauchy-Produkt mit dem Beispiel der Exponentialreihe ist in folgendem Video zusammengefasst:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10913&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+
+\begin{quickcheck}
+ \type{input.number}
+  \field{rational}
+ 
+  \begin{variables}
+   \randint{n}{2}{5}
+   \randint{m}{2}{5}
+   \function[calculate]{c0}{1}
+   \function[calculate]{c1}{m+1/n}
+   \function[calculate]{c2}{m^2/2+m/n+1/n^2}
+  \end{variables}
+  
+\text{
+Berechnen Sie die ersten drei Koeffizienten des Cauchy-Produkts der Reihen $\sum_{k=0}^\infty (\frac{1}{\var{n}})^k$ und $\sum_{j=0}^\infty\frac{\var{m}^j}{j!}$.
+
+$c_0=$ \ansref ,
+$c_1=$ \ansref ,
+$c_2=$ \ansref .
+}
+\begin{answer}
+\solution{c0}
+\end{answer}
+\begin{answer}
+\solution{c1}
+\end{answer}
+\begin{answer}
+\solution{c2}
+\end{answer}
+\end{quickcheck}
+
+\end{content}

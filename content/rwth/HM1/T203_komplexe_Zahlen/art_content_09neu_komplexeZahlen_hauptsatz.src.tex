@@ -1,0 +1,366 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{Nullstellen von Polynomen}
+   }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \begin{components}
+  \component{generic_image}{content/rwth/HM1/images/g_tkz_T203_ComplexMultiplication.meta.xml}{T203_ComplexMultiplication}
+  \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+  \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+   \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T103_Polynomfunktionen/g_art_content_10_polynomdivision.meta.xml}{content_10_polynomdivision}
+    \link{generic_article}{content/rwth/HM1/T209_Potenzreihen/g_art_content_28_exponentialreihe.meta.xml}{content_28_exponentialreihe}
+    \link{generic_article}{content/rwth/HM1/T203_komplexe_Zahlen/g_art_content_09neu_komplexeZahlen_hauptsatz.meta.xml}{content_03_komplexeZahlen_hauptsatz}
+    \link{generic_article}{content/rwth/HM1/T103_Polynomfunktionen/g_art_content_09_polynome.meta.xml}{polynome}
+    \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21564}{Ticket 21564}
+\end{block}
+\begin{block}[annotation]
+Copy of \href{https://team.mumie.net/issues/21007}{Ticket 21007}: content/rwth/HM1/T203_komplexe_Zahlen/art_content_09_komplexeZahlen_hauptsatz.src.tex
+\end{block}
+
+
+
+\usepackage{mumie.ombplus}
+\ombchapter{3}
+\ombarticle{3}
+
+% \lang{de}{\title{Multiplikation, Quadratwurzeln und Fundamentalsatz der Algebra}}
+\lang{de}{\title{Nullstellen von Polynomen}}
+\lang{en}{\title{Zeros of polynomials}}
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\section{
+\lang{de}{Multiplikation in Polarkoordinaten}
+\lang{en}{Multiplication in polar coordinates}}\label{sec:multiplikation-polar}
+
+\lang{de}{Wir betrachten die beiden komplexen Zahlen $z,w\in\C$ mit
+\[z=|z|\cdot(\cos(\beta)+i\sin(\beta))\ \text{ und } \ w=|w|\cdot(\cos(\alpha)+i\sin(\alpha)). \]
+Von den \ref[content_28_exponentialreihe][Additionstheoremen]{rem:sin_cos_exp} für die trigonomerischen Funktionen,
+die später aus der komplexen Exponentialfunktion folgen, benötigen wir hier zwei Formeln:
+}
+\lang{en}{
+Consider two complex numbers $z,w\in\C$, with
+\[z=|z|\cdot(\cos(\beta)+i\sin(\beta))\ \text{ and } \ w=|w|\cdot(\cos(\alpha)+i\sin(\alpha)). \]
+We will need two of the \ref[content_28_exponentialreihe][addition theorems]{rem:sin_cos_exp}
+for trigonometric functions (which will follow from the complex exponential):
+}
+\begin{align*}
+\cos(\alpha+\beta)&=&\cos(\alpha)\cos(\beta)-\sin(\alpha)\sin(\beta)\\
+\sin(\alpha+\beta)&=&\sin(\alpha)\cos(\beta)+\cos(\alpha)\sin(\beta)
+\end{align*}
+\lang{de}{
+Für das Produkt $z\cdot w$ gilt dann:
+}
+\lang{en}{
+The product $z \cdot w$ is then
+}
+\begin{eqnarray*}
+z\cdot w &=&|z|\cdot(\cos(\beta)+i\sin(\beta))\cdot |w|\cdot(\cos(\alpha)+i\sin(\alpha))\\
+&=& |z|\cdot|w|\cdot(\cos(\beta)\cos(\alpha)+i\cos(\beta)\sin(\alpha)+
+i\sin(\beta)\cos(\alpha)-\sin(\beta)\sin(\alpha))\\
+&=&|z|\cdot|w|\cdot(\cos(\beta)\cos(\alpha)-\sin(\beta)\sin(\alpha)
++i(\cos(\beta)\sin(\alpha)+\sin(\beta)\cos(\alpha)))\\
+&=&|z\cdot w|\cdot(\cos(\alpha+\beta)+i \sin(\alpha+\beta))
+\end{eqnarray*}
+\lang{de}{
+Hier wird die Eleganz der Polarkoordinaten deutlich: Die Multiplikation komplexer Zahlen
+entspricht einer Addition der Argumente und einer Multiplikation der Beträge.
+}
+\lang{en}{
+Here, the elegance of polar coordinates is clear: multiplication of two complex numbers
+corresponds to adding their arguments and multiplying their magnitudes.
+}
+
+\begin{rule}[
+\lang{de}{Multiplikation in Polardarstellung}
+\lang{en}{Multiplying in polar coordinates}]
+Bei Multiplikation zweier komplexer Zahlen werden also die \notion{Beträge multipliziert} und
+die \notion{Argumente addiert}. 
+
+Genauer: Für das Argument des Produktes $z\cdot w$ gilt
+ \[\arg(z\cdot w)=\begin{cases}\arg(z)+\arg(w), & \text{falls }-\pi<\arg(z)+\arg(w)\leq \pi, \\
+ \arg(z)+\arg(w)-2\pi, & \text{falls }\arg(z)+\arg(w)>\pi, \\
+ \arg(z)+\arg(w)+2\pi,& \text{falls }\arg(z)+\arg(w)\leq -\pi. \\
+ \end{cases}\]
+Die Terme $-2\pi$ und $+2\pi$ dienen lediglich dazu, dass das Argument wieder im
+Hauptbereich $(-\pi,\pi]$ liegt.
+
+\begin{center}
+\image{T203_ComplexMultiplication}
+\end{center}
+
+Anschaulich bedeutet das, dass die Multiplikation mit einer komplexen Zahl $z\neq 0$ auf der Gaußschen Zahlenebene eine Drehstreckung
+ um den Ursprung bewirkt mit Drehwinkel $\arg(z)$ und Streckfaktor $|z|$.
+\end{rule}
+
+\begin{example}
+	\begin{genericGWTVisualization}[550][800]{mathlet1}
+		\begin{variables}
+			\point{A}{rational}{1,0}
+			\point{B}{rational}{2,-1}
+			\point{C}{rational}{3,1}
+			\point[editable]{z}{rational}{-1,2}
+			\point{zA}{rational}{var(z)[x],var(z)[y]}
+			\point{zB}{rational}{var(z)[x]*var(B)[x]-var(z)[y]*var(B)[y],var(z)[x]*var(B)[y]+var(z)[y]*var(B)[x]}
+			\point{zC}{rational}{var(z)[x]*var(C)[x]-var(z)[y]*var(C)[y],var(z)[x]*var(C)[y]+var(z)[y]*var(C)[x]}
+
+			\segment{AB}{rational}{var(A),var(B)}
+			\segment{BC}{rational}{var(B),var(C)}
+			\segment{AC}{rational}{var(A),var(C)}
+			
+		\end{variables}
+
+
+		\color{A}{#0066CC}
+		\color{B}{#0066CC}
+		\color{C}{#0066CC}
+%		\label{A}{$\textcolor{BLUE}{A}$}
+		\color{z}{#CC6600}
+		\color{zA}{#CC6600}
+		\color{zB}{#CC6600}
+		\color{zC}{#CC6600}
+		\label{z}{$\textcolor{#CC6600}{z}$}
+
+		\begin{canvas}
+			\updateOnDrag[false]
+			\plotSize{400}
+			\plotLeft{-7}
+			\plotRight{7}
+			\plot[coordinateSystem]{A,B,C, z,zA, zB, zC}
+		\end{canvas}
+		\text{Blau sind die komplexen Zahlen $1$, $2-i$ und $3+i$ dargestellt. Orange dargestellt sind ihre Bilder nach der Multiplikation
+		mit $z=\var{z}[x]+\var{z}[y]i$, also die Zahlen\\
+		$ (\var{zA}[x]+\var{zA}[y]i)\cdot 1= \var{zA}[x]+\var{zA}[y]i$,\\
+		$ (\var{zA}[x]+\var{zA}[y]i)\cdot (2-i)= \var{zB}[x]+\var{zB}[y]i$,\\
+		$ (\var{zA}[x]+\var{zA}[y]i)\cdot (3+i)= \var{zC}[x]+\var{zC}[y]i$.}
+	    	\end{genericGWTVisualization}
+
+\end{example}
+
+\begin{example}
+Wir berechnen das Produkt der komplexen Zahl $z=\sqrt{3}+i$ mit sich selbst:
+\[|z|=\sqrt{\sqrt{3}^2+1^2}=\sqrt{3+1}=2 \ \text{ und } \ \tan\phi=\frac{1}{\sqrt{3}}=\frac{\frac{1}{2}}{\frac{\sqrt{3}}{2}}, \text{ also }\]
+\[\phi=\frac{\pi}{6}\hat{=}30^\circ\text{, denn } \sin(30^\circ)=\frac{1}{2} \ \text{ und } \ \cos(30^\circ)=\frac{\sqrt{3}}{2}. \]
+\[\text{ Damit folgt: } \ z\cdot z=2\cdot 2 \cdot (\cos\left(\frac{\pi}{3}\right)+i\sin\left(\frac{\pi}{3}\right))=4\left(\frac{1}{2}+i\frac{\sqrt{3}}{2}\right)=2+2\sqrt{3}i.\]
+Die Probe liefert
+\[(\sqrt{3}+i)\cdot(\sqrt{3}+i)=\sqrt{3}^2+\sqrt{3}i+\sqrt{3}i+i^2=3+2\sqrt{3}i-1=2+2\sqrt{3}i.\]
+\end{example}
+
+
+\begin{quickcheck}
+\field{complex}
+\type{input.function}
+    \begin{variables}
+        \randint{a}{1}{2}
+        \randint{b}{3}{7}
+        \function[calculate]{c}{a*b}
+        \function{z}{a(cos(pi/6)+i*sin(pi/6))}
+        \function{w}{b(cos(pi/6)+i*sin(pi/6))}
+        \function{sol}{c(cos(2*pi/6)+i*sin(2*pi/6))}
+     \end{variables}
+     \text{Berechnen Sie das Produkt der Zahlen $z=\var{z} \ $ und $ \ w=\var{w}$.\\
+     $z\cdot w=$\ansref}
+     \begin{answer}
+        \solution{sol}
+     \end{answer}
+     \explanation{Die Beträge werden multipliziert, die Argumente addiert.}
+\end{quickcheck}
+
+\section{Komplexe Lösungen quadratischer Gleichungen}\label{sec:komplexe-quadratische-gleichungen}
+
+
+Die Gleichung $x^2+1=0$ hat über den komplexen Zahlen die Lösungsmenge $\mathbb{L}=\{i;-i\}$, denn $(\pm i)^2=-1$.\\ 
+Die Gleichung $x^2+a=0$ hat für $a>0$ die Lösungsmenge $\mathbb{L}=\{i\sqrt{a};-i\sqrt{a}\}$, 
+denn $(\pm i\sqrt{a})^2=i^2a=-a$. \\ 
+
+Die quadratische Gleichung $x^2+px+q=0$ hat über $\R$ die Lösungen
+\[x_1=-\frac{p}{2}+\sqrt{D} \ \text{ und } \ x_2=-\frac{p}{2}-\sqrt{D},\]
+falls $D=\left(\frac{p}{2}\right)^2-q\geq 0$ erfüllt ist.
+
+Falls $D<0$ gilt, hat die quadratische Gleichung zwei Lösungen in $\C$, denn für $D$ finden 
+wir die Quadratwurzeln $i\sqrt{|D|}$ sowie $-i\sqrt{|D|}$. Weitere Lösungen sind nach dem
+\ref[content_03_komplexeZahlen_hauptsatz][Fundamentalsatz der Algebra]{sec:fundamentalsatz-der-algebra} nicht möglich.\\ 
+Im Fall, dass die Diskriminante $D$ negativ ist, gilt: $(\pm i\sqrt{|D|})^2=i^2|D|=-1|D|=-1\cdot(-D)=D$.\\
+Die Lösungen über $\C$ lauten daher 
+\[z_1=-\frac{p}{2}+i\sqrt{|D|} \ \text{  und  } \ z_2=-\frac{p}{2}-i\sqrt{|D|}.\]
+
+
+\begin{proof}[Beweis Quadratwurzeln]
+\begin{showhide}
+Wir setzen $z_1$ und $z_2$ in $x^2+px+q$ ein:
+\begin{eqnarray*}
+z_{1/2}^2+p\cdot z_{1/2}+q &=& \left(-\frac{p}{2}\pm i\sqrt{|D|}\right)^2+p\cdot \left(-\frac{p}{2}\pm i\sqrt{|D|}\right)+q\\
+&=&\frac{p^2}{4}\mp2\frac{p}{2}i\sqrt{|D|}+i^2|D|-\frac{p^2}{2}\pm ip\sqrt{|D|}+q\\
+&=&-\frac{p^2}{4}-|D|+q=-\frac{p^2}{4}+\left(\left(\frac{p}{2}\right)^2-q \right)+q\\
+&=&0
+\end{eqnarray*}
+\end{showhide}
+\end{proof}
+
+\begin{theorem}[komplexe Quadratwurzeln]
+Über der Grundmenge $\C$ hat jedes quadratische Polynom $z^2+pz+q$ zwei Nullstellen
+$z_1,z_2\in\C$, die gleich sein können. Es gilt außerdem die Linearfaktorzerlegung
+\[z^2+pz+q=(z-z_1)\cdot(z-z_2).\]
+\end{theorem}
+
+\begin{block}[warning]
+Die Potenzgesetze gelten nur für positive, reelle Basen!\\
+Bei negativen oder komplexen Basen treten Fehler auf. 
+
+Beispiel: 
+\[
+-3 = -3^1 = (-3)^{\frac{2}{2}} \neq ((-3)^2)^{\frac{1}{2}} =  \sqrt{(-3)^2}=\sqrt{9}=3
+\]  
+
+Dieser Widerspruch liegt in den Argumenten komplexer Zahlen begründet.
+\end{block}
+
+\begin{quickcheck}
+\field{complex}
+\type{input.number}
+\displayprecision{2}
+\correctorprecision{2}
+\begin{variables}
+    \drawFromSet{p}{2,4,6}
+    \drawFromSet{q}{10,11,12,13}
+    \function{tmp1}{-p/2}
+    \function{tmp2}{q-(p/2)^2}
+    \function[normalize]{sol1}{tmp1+sqrt(tmp2)*i}
+    \function[normalize]{sol2}{tmp1-sqrt(tmp2)*i}
+\end{variables}
+%Leider noch nicht für Quickchecks verfügbar.
+%\permuteAnswers{1,2}
+\text{Bestimmen Sie die Lösungen der quadratischen Gleichung
+\[z^2+\var{p}z+\var{q}=0.\]
+Geben Sie Ihre Lösung auf 2 Nachkommastellen gerundet an.\\
+(positiver Wurzelterm) $z_1=$\ansref und \\
+(negativer Wurzelterm) $z_2=$\ansref
+}
+\explanation{Die Lösungen sind $z_{1/2}=\var{tmp1}\pm\sqrt{\var{tmp2}}\cdot i$.}
+
+\begin{answer}
+    \solution{sol1}
+\end{answer}
+\begin{answer}
+    \solution{sol2}
+\end{answer}
+\end{quickcheck}
+
+\section{Der Fundamentalsatz der Algebra}\label{sec:fundamentalsatz-der-algebra}
+
+Abschließend gehen wir noch einmal auf den anfangs genannten Grund für die Einführung der komplexen
+Zahlen ein, nämlich das Problem, dass gewisse Polynomgleichungen über den reellen Zahlen keine
+Lösung haben. In den komplexen Zahlen haben solche Gleichungen jedoch immer (mindestens) eine Lösung. Diese Tatsache
+nennt man den \notion{Fundamentalsatz der Algebra}.
+
+\begin{theorem}[Fundamentalsatz der Algebra]
+Ist $n\geq 1$ und $p(x)=x^n+a_{n-1}x^{n-1}+\ldots + a_1x+a_0$ ein Polynom mit komplexen Koeffizienten 
+(d.\,h. $a_0, a_1, \ldots, a_{n-1}\in \C$), so besitzt $p(x)$ eine Nullstelle, d.\,h. es gibt eine komplexe Zahl $c\in \C$ mit
+\[  p(c)=c^n+a_{n-1}c^{n-1}+\ldots + a_1c+a_0=0. \]
+\end{theorem}
+
+Aus dem Fundamentalsatz der Algebra erhält man direkt folgende stärkere Aussage über Polynome mit komplexen Koeffizienten: 
+\begin{theorem}
+Ist $n\geq 1$ und $p(x)=x^n+a_{n-1}x^{n-1}+\ldots + a_1x+a_0$ ein Polynom mit komplexen Koeffizienten 
+(d.\,h. $a_0, a_1,\ldots, a_{n-1}\in \C$), dann gibt es komplexe Zahlen $c_1, c_2, \ldots, c_n\in \C$ (welche auch gleich sein können) so,
+dass
+\[ p(x)=(x-c_1)\cdot (x-c_2)\cdots (x-c_n). \]
+\end{theorem}
+
+\begin{proof*}
+\begin{incremental} 
+\step
+Ist nämlich $c_1$ eine Nullstelle von $p(x)$, so kann man von $p$ einen Linearfaktor $x-c_1$ abspalten, d.\,h. ein Polynom $q(x)$ berechnen
+mit $p(x)=q(x)\cdot (x-c_1)$. Die Abspaltung von Linearfaktoren kennen wir bereits vom 
+Horner-Schema, vgl. \link{content_10_polynomdivision}{Kapitel zu Polynomdivision}. Nun besitzt $q(x)$, wenn sein Grad mindestens 1 ist, nach dem Fundamentalsatz 
+der Algebra wiederum eine
+Nullstelle, d.\,h. man kann von $q(x)$ wieder einen Linearfaktor $(x-c_2)$ abspalten etc. Dies führt man fort, bis das zuletzt berechnete 
+Polynom auch linear ist, also von der Form $ax+b$ mit $a\neq 0$.
+\step
+Dann ist
+\[ p(x)=(x-c_1)\cdot (x-c_2)\cdots (x-c_{m-1})\cdot (ax+b). \]
+Multipliziert man die rechte Seite aus und vergleicht mit $p(x)$, so sieht man am höchsten Koeffizienten, dass zum einen $m=n$ sein muss und
+zum anderen $a=1$. Setzt man $c_n=-b$, so erhält man schließlich die Form
+\[ p(x)=(x-c_1)\cdot (x-c_2)\cdots (x-c_n). \]
+\end{incremental}
+\end{proof*}
+
+Es sei noch angemerkt, dass man die Aussage der obigen Theoreme auch leicht auf Polynome $p(x) = a_n x^n + ... + a_0$ mit $a_n \neq 0$ erweitern kann,
+indem wir die Theoreme auf $\frac{1}{a_n} p(x) = x^n + \frac{1}{a_n} a_{n-1}x^{n-1}+...+\frac{1}{a_n}a_0$ anwenden.
+
+\begin{quickcheck}
+\field{real}
+\type{input.number}
+\begin{variables}
+    \randint{a}{1}{5}
+    \number{b}{i}
+    \number{c}{-i}
+    \randint{d}{2}{3}
+    \function[expand,normalize]{p}{(x^2+1)(x-a)}
+    \function[expand,normalize]{q}{d*(x^2+1)(x-a)}
+\end{variables}
+\text{Bestimmen Sie die (einzige) reelle Nullstelle des folgenden Polynoms: 
+\[p(x)=\var{p}\]
+$c_1=$\ansref
+}
+\begin{answer}
+    \solution{a}
+\end{answer}
+\text{Schreiben Sie das Polynom nun als Produkt von Linearfaktoren
+\[p(x)=(x-c_1)(x-c_2)(x-c_3).\]
+Geben Sie zuerst die reelle Nullstelle ein.
+
+$p(x)=(x-$\ansref$)(x-$\ansref$)(x-$\ansref$)$
+}
+\begin{answer}
+    \solution{a}
+\end{answer}
+\begin{answer}
+    \solution{b}
+\end{answer}
+\begin{answer}
+    \solution{c}
+\end{answer}
+\explanation{Die einzige reelle Nullstelle ist $c_1=\var{a}$. Ein Hinweis darauf ist der letzte Term des Polynoms. 
+Damit lautet das Polynom dann $p(x)=(x-\var{a})(x-i)(x+i)$.
+}
+\text{Betrachten Sie nun ein zweites Polynom:
+\[q(x)=\var{q}\]
+Es hat dieselben Nullstellen wie $p(x)$, 
+unterscheidet sich lediglich um den Faktor \ansref vom ersten Polynom.
+}
+\begin{answer}
+    \solution{d}
+\end{answer}
+\end{quickcheck}
+
+Das Kapitel ist im folgenden Video nochmals dargestellt:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10826&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+
+\end{visualizationwrapper}
+\end{content}
+

@@ -1,0 +1,163 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+  \lang{en}{...}
+  \lang{de}{Polygon2}
+  \lang{zh}{...}
+  \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/32289}{Ticket 32289}
+\end{block}
+\begin{block}[annotation]
+Copy of : /home/mumie/checkin/content/playground/HM4mint-Testaufgaben/T203_komplexe_Zahlen/prb_jsx_Polygon2.src.tex
+\end{block}
+
+\begin{block}[annotation]
+(Dagmar Schumacher)\\
+Copy of : /home/mumie/checkin/content/playground/Dagmar_Schumacher/prb_jsx_Polygon2.src.tex
+\end{block}
+
+  \usepackage{mumie.genericproblem}
+  
+\title{Polygon 2 in der komplexen Ebene}
+\\
+
+  \begin{visualizationwrapper}
+    \begin{genericJSXVisualization}
+      \begin{variables}
+
+        \question{1}{r}{real}
+        
+        \point{A1}{real}{0,r}
+        \point{B1}{real}{r,0}
+        \point[editable]{B2}{real}{r-0.5,0.3}
+        \point[editable]{A2}{real}{0.3,r-0.5}
+        \segment[editable]{A}{real}{var(A2),var(A1)}
+        \segment[editable]{B}{real}{var(B2),var(B1)}
+        
+        \number{a2x}{real}{A2[x]}
+        \number{a2y}{real}{A2[y]}
+        \number{b2x}{real}{B2[x]}
+        \number{b2y}{real}{B2[y]}
+      \end{variables}
+
+        \answer{a2x}{1,1}
+        \answer{a2y}{1,2}
+        \answer{b2x}{1,3}
+        \answer{b2y}{1,4}
+        
+        \color{v1}{#000077} %quite dark blue
+        \color{z1}{#000077} %quite dark blue
+      
+       \begin{canvas}
+        \snapToGrid{0.1,0.1}
+        \plotSize{500,500}
+        \plotLeft{-5.5}
+        \plotRight{5.5}
+        \plot[coordinateSystem,showPointCoords]{A,B,A2,B2}
+      \end{canvas}
+ 
+    \end{genericJSXVisualization}
+  \end{visualizationwrapper}
+
+  \begin{problem}
+    \begin{variables}
+      \randint{r}{1}{5}
+      \number{null}{0}
+      \function{mr}{-r}
+      
+    \end{variables}
+    \begin{question}
+    \text{Markieren Sie in der obigen Grafik die Funktion \\ 
+    $f(z)=\max\{|\Re(z)|,|\Im(z)|\}=\var{r}$ \\
+    für den 1. Quadranten, indem Sie die zwei blauen Punkte verschieben.\\
+    %\max\{\vert x\vert, \vert y\vert\}<r\}
+    }
+    \begin{answer} %A2
+      \type{graphics.number}
+      \solution{r}
+     \end{answer}
+    \begin{answer}
+      \type{graphics.number}
+      \solution{r}
+     \end{answer} 
+     \begin{answer} %B2
+      \type{graphics.number}
+      \solution{r}
+     \end{answer}
+    \begin{answer}
+      \type{graphics.number}
+      \solution{r}
+     \end{answer}
+    \explanation[NOT[correct(ans_1)] OR NOT[correct(ans_2)]]{Die Polygonkante am Punkt $(0;\var{r})$ ist nicht korrekt markiert.}
+    \explanation[NOT[correct(ans_3)] OR NOT[correct(ans_4)]]{Die Polygonkante am Punkt $(\var{r};0)$ ist nicht korrekt markiert.}    
+   \end{question}
+   
+   \begin{question}
+      \text{Nun soll die Funktion auf der ganzen Gaußschen 
+      Zahlenebene betrachtet werden:\\
+      $f(z)=\max\{|\Re(z)|,|\Im(z)|\}=\var{r}$\\
+      Geben Sie für das entstehende Polygon die Eckpunkte im 2., 3. und 4.
+      Quadranten an.\\
+
+      $P_2=($\ansref ;\ansref$)$\\
+      $P_3=($\ansref ;\ansref$)$\\
+      $P_4=($\ansref ;\ansref$)$\\
+
+      \textit{Bei der Eingabe von Brüchen ist zu beachten, dass diese soweit wie möglich zu kürzen sind!}\\
+      }
+      \begin{answer}
+        \type{input.number}
+        \solution{mr}
+      \end{answer}
+     \begin{answer}
+        \type{input.number}
+        \solution{r}
+      \end{answer} 
+      \begin{answer}
+        \type{input.number}
+        \solution{mr}
+      \end{answer}
+     \begin{answer}
+        \type{input.number}
+        \solution{mr}
+      \end{answer}
+      \begin{answer}
+        \type{input.number}
+        \solution{r}
+      \end{answer}
+     \begin{answer}
+        \type{input.number}
+        \solution{mr}
+      \end{answer} 
+ 
+  \explanation[NOT[correct(ans_1)] OR NOT[correct(ans_2)]]{Der Polygon-Eckpunkt $P_2$ im 2. Quadraten ist falsch.}
+  \explanation[NOT[correct(ans_3)] OR NOT[correct(ans_4)]]{Der Polygon-Eckpunkt $P_3$ im 3. Quadraten ist falsch.}
+  \explanation[NOT[correct(ans_5)] OR NOT[correct(ans_6)]]{Der Polygon-Eckpunkt $P_4$ im 4. Quadraten iat falsch.}
+  
+  \end{question}   
+  \end{problem}
+  
+  \embedmathlet{gwtmathlet}
+  
+\end{content}

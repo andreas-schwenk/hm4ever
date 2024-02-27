@@ -1,0 +1,106 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A06: Produkte }
+    \lang{en}{Problem 6}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+\lang{de}{\title{A06: Produkte}}
+\lang{en}{\title{Problem 6}}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9756}{Ticket 9756}
+\end{block}
+
+\begin{problem}
+  \begin{question}
+    \lang{de}{\text{
+    Berechnen Sie die folgende Potenz: \\
+    $z = (\var{z})^2.$ 
+    }}
+    \lang{de}{\explanation{
+    Das Quadrat einer komplexen Zahl kann man berechnen, indem man die Zahl mit sich selbst multipliziert: 
+    $z=(\var{a})^2-(\var{b})^2+2\cdot(\var{a})\cdot(\var{b})i$}
+    }
+    
+    \begin{tabs*}[\initialtab{0}]
+  \tab{
+    \lang{en}{...}
+    \lang{de}{...}
+  }
+  \tab{
+    \lang{en}{...}
+    \lang{de}{...}
+  }
+\end{tabs*}
+
+    
+    \type{input.number}
+    \field{complex}
+    \begin{variables}
+      \randint{a}{-10}{10}
+      \randint{b}{-10}{10}
+      \function{z}{a + b*i}
+      \function[calculate]{a2}{a*a - b*b}
+      \function[calculate]{b2}{2*a*b}
+      \function{z2}{a2 + b2*i}
+    \end{variables}
+
+    \begin{answer}
+      \text{$z =$}
+      \solution{z2}
+    \end{answer}
+
+  \end{question} 
+
+\begin{question}  
+                \field{complex}
+                %\displayprecision{1}
+                %\correctorprecision{1}
+                \type{input.function}
+                \text{Berechnen Sie das Produkt der Zahlen $z=\var{z1}$ und $w=\var{w1}$.
+                  \\ $z\cdot w=$\ansref}
+                \begin{variables}
+                        \randint{a}{1}{2}
+                        \randint{b}{3}{7}
+                        \function[calculate]{c}{a*b}
+                        \function{z1}{a*(cos(pi/6)+i*sin(pi/6))}
+                        \function{w1}{b*(cos(pi/6)+i*sin(pi/6))}
+                        \function[expand,normalize]{sol}{c*(cos(2*pi/6)+i*sin(2*pi/6))}
+                        \function[calculate]{f}{z1*w1}
+                        \function{f2}{z1*w1}
+               \end{variables}          
+               \begin{answer}
+                    \solution{sol}
+                    \inputAsFunction{}{antwort}
+                    \checkFuncForZero{sol-antwort}{1}{2}{1}
+                    %\solution{f}
+                    %\inputAsFunction{}{antwort}
+                    %\checkStringsForRelation{count(i,antwort) <= 2}
+                    %\checkFuncForZero[1E-2]{f-antwort}{1}{2}{1}
+                    
+               \end{answer}
+               \explanation{Bei Polarkoordinaten addieren sich die Winkel 
+               und die Beträge werden multipliziert.}
+          \end{question}     
+
+\end{problem}
+
+\embedmathlet{mathlet}
+\end{content}

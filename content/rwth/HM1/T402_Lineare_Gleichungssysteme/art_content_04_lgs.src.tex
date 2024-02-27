@@ -1,0 +1,845 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Lineare Gleichungssysteme}
+    \lang{en}{System of linear equations}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T112neu_Lineare_Gleichungssysteme/g_art_content_40_lineare_gleichungssysteme.meta.xml}{{def:lgs}}
+    \link{generic_article}{content/rwth/HM1/T401_Matrizenrechnung/g_art_content_01_matrizen.meta.xml}{matrizen}
+    \link{generic_article}{content/rwth/HM1/T108_Vektorrechnung/g_art_content_29_linearkombination.meta.xml}{lin-komb}
+    \link{generic_article}{content/rwth/HM1/T402_Lineare_Gleichungssysteme/g_art_content_05_gaussverfahren.meta.xml}{gauss-verfahren}
+    \link{generic_article}{content/rwth/HM1/T403a_Vektorraum/g_art_content_10a_vektorraum.meta.xml}{def:Unter_VR}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{2}
+\ombarticle{1}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Lineare Gleichungssysteme über allgemeinen Körpern} \lang{en}{Systems of linear equations over general fields}}
+
+\begin{block}[annotation]
+ 
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/11195}{Ticket 11195}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{\lang{de}{Lineare Gleichungssysteme}\lang{en}{Systems of Linear Equations}}\label{lgs}
+
+\lang{de}{
+In \link{def:lgs}{Teil 1} haben wir bereits lineare Gleichungssysteme (LGS) über dem Körper der reellen Zahlen
+kennengelernt. 
+Analog dazu lassen sich LGS mit Koeffizienten eines beliebigen 
+Körpers $\mathbb{K}$ (beispielsweise den komplexen Zahlen) 
+definieren und entsprechende Lösungen
+in dem jeweiligen Körper finden. 
+Auch hier lässt sich die Lösungsmenge systematisch mit dem \link{gauss-verfahren}{Gauß-Verfahren} bestimmen.\\
+
+Die Verallgemeinerung des Körpers der reellen Zahlen zu einem beliebigen Körper wird hier vor allem in den Beispielen deutlich. 
+Außerdem werden lineare Gleichungssysteme in diesem Teil stets in Matrixschreibweise betrachtet.}
+
+\lang{en}{
+In \link{def:lgs}{Part 1} we already got to know to systems of linear equations (or linear systems) over the field of real
+numbers. By analogy, we can define linear systems with coefficients in any field $\K$ (e.g. the complex numbers) and find 
+solutions for the system.
+The solution set can here be determined with the \link{gauss-verfahren}{Gaussian elimination} too.
+The generalisation from real numbers to any field will be performed by discussing various examples.
+Furthermore, systems of linear equations are considered in matrix notation in this part.}
+
+
+\begin{definition}[\lang{de}{Koeffizientenmatrix} \lang{en}{Coefficient matrix}]\label{def:koeffizientenmatrix}
+\lang{de}{
+Ein \notion{lineares Gleichungssystem} (kurz \notion{LGS}) über einem Körper $\mathbb{K}$ mit $m$ Gleichungen und $n$ Unbestimmten $x_1,\ldots,x_n$ ist ein Gleichungssystem, welches durch Umformungen
+der einzelnen Gleichungen stets in die Form
+\begin{equation*} 
+\begin{mtable}[\cellaligns{ccccccccc}]
+ a_{11} x_1 & + & a_{12} x_2 & + & \cdots & + & a_{1n} x_n & = & b_1 \\
+ a_{21} x_1 & + & a_{22} x_2 & + & \cdots & + & a_{2n} x_n & = & b_2 \\
+ \vdots     &   & \vdots     &   &        &   & \vdots     &   & \vdots \\
+ a_{m1} x_1 & + & a_{m2} x_2 & + & \cdots & + & a_{mn} x_n & = & b_m
+\end{mtable} 
+\end{equation*}
+mit Elementen $a_{ij}\in \mathbb{K}$ für $1 \leq i \leq m$ und $1 \leq j \leq n$, sowie $b_1, \ldots, b_m\in \mathbb{K}$ gebracht werden kann.\\
+Für ein solches lineares Gleichungssystem werden die zum linearen Gleichungssystem geh"origen Matrizen
+\begin{equation*}
+A=\underbrace{\left( \begin{smallmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{smallmatrix} \right)}_{ \in M(m,n;\mathbb{K})}
+ \quad \text{ und } \quad 
+\end{equation*}
+\begin{equation*}
+(A \ \mid \ b) = \underbrace{\left(  \begin{smallmatrix}
+                                      a_{11} & a_{12} & \cdots & a_{1n} & | & b_1\\
+                                      a_{21} & a_{22} & \cdots & a_{2n} & | &b_2\\
+                                      \vdots & \vdots & \ddots & \vdots & \mid &\vdots\\
+                                      a_{m1} & a_{m2} & \cdots & a_{mn} &| & b_m
+                                      \end{smallmatrix} \right) }_{
+\in M(m,n+1;\mathbb{K})}
+\end{equation*}
+\notion{Koeffizientenmatrix} und \notion{erweiterte Koeffizientenmatrix} genannt.\\
+Die Trennstriche bei der erweiterten Koeffizientenmatrix
+dienen nur der besseren Übersicht und können auch weggelassen werden.}\\
+
+\lang{en}{
+Any \notion{system of linear equations} over a field $\K$  with $m$ equations and in $n$ unknowns $x_1,\ldots,x_n$ can
+be written in the following form, by manipulating each individual equation:
+\begin{equation*} 
+\begin{mtable}[\cellaligns{ccccccccc}]
+ a_{11} x_1 & + & a_{12} x_2 & + & \cdots & + & a_{1n} x_n & = & b_1 \\
+ a_{21} x_1 & + & a_{22} x_2 & + & \cdots & + & a_{2n} x_n & = & b_2 \\
+ \vdots     &   & \vdots     &   &        &   & \vdots     &   & \vdots \\
+ a_{m1} x_1 & + & a_{m2} x_2 & + & \cdots & + & a_{mn} x_n & = & b_m
+\end{mtable} 
+\end{equation*}
+The entries $a_{ij}$ and $b_i$ for $1 \leq i \leq m$ and $1 \leq j \leq n$ have their values in $\K$.\\
+For such a linear system, there are the matrices
+\begin{equation*}
+A=\underbrace{\left( \begin{smallmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{smallmatrix} \right)}_{ \in M(m,n;\mathbb{K})}
+ \quad \text{ and } \quad 
+\end{equation*}
+\begin{equation*}
+(A \ \mid \ b) = \underbrace{\left(  \begin{smallmatrix}
+                                      a_{11} & a_{12} & \cdots & a_{1n} & | & b_1\\
+                                      a_{21} & a_{22} & \cdots & a_{2n} & | &b_2\\
+                                      \vdots & \vdots & \ddots & \vdots & \mid &\vdots\\
+                                      a_{m1} & a_{m2} & \cdots & a_{mn} &| & b_m
+                                      \end{smallmatrix} \right). }_{
+\in M(m,n+1;\mathbb{K})}
+\end{equation*}
+They are called \notion{coefficient matrix} and \notion{augmented matrix}.\\
+The vertical dividing line in the augmented matrix is useful notation, but may also be omitted.}\\
+
+
+\end{definition}
+
+\lang{de}{
+Mit der \ref[matrizen][Matrix-Vektor-Multiplikation]{sec:produkt} kann das obige lineare Gleichungssystem 
+dann kompakt geschrieben werden als
+\[ A\cdot x = b \qquad \text{mit}\quad b=\left(  \begin{smallmatrix}  b_1 \\    \vdots\\ b_m  \end{smallmatrix} \right) \quad \text{und}\quad x=\left(  \begin{smallmatrix}  x_1 \\    \vdots\\ x_n  \end{smallmatrix} \right). \]
+Diese Schreibweise werden wir im Folgenden stets benutzen.}
+
+\lang{en}{
+Using \ref[matrizen][matrix-vector multiplication]{sec:produkt} the linear systems above can be written as
+\[ A\cdot x = b \qquad \text{with}\quad b=\left(  \begin{smallmatrix}  b_1 \\    \vdots\\ b_m  \end{smallmatrix} \right) \quad \text{and}\quad x=\left(  \begin{smallmatrix}  x_1 \\    \vdots\\ x_n  \end{smallmatrix} \right). \]
+By now, we will always use this notation.}
+
+\begin{example}
+\begin{tabs*}
+\tab{\lang{de}{1. Beispiel} \lang{en}{1. Example}} 
+\lang{de}{
+Das lineare Gleichungssystem 
+\[ \begin{mtable}[\cellaligns{crcrcr}]
+(I)&\qquad 2 \cdot  x & - & 4 \cdot  y & = & 10 \\
+(II)&-3 \cdot  x & + & 6\cdot y & =  & -15
+\end{mtable} \]
+mit Koeffizienten in $\Q$ (oder in $\R$) hat als Koeffizientenmatrix 
+$A=\begin{pmatrix} 2 & -4 \\ -3 & 6\end{pmatrix}$ und als rechte Seite $b=\begin{pmatrix} 10\\ -15\end{pmatrix}$ 
+sowie die erweiterte Koeffizientenmatrix
+\[ (A \mid b )= \begin{pmatrix} 2 & -4& | & 10 \\ -3 & 6& | & -15\end{pmatrix}  .\]
+In Matrixschreibweise lautet das LGS daher
+\[   \begin{pmatrix} 2 & -4 \\ -3 & 6\end{pmatrix}\cdot \begin{pmatrix} x\\ y\end{pmatrix}= \begin{pmatrix} 10\\ -15\end{pmatrix}.\]}
+\lang{en}{
+For the linear system
+\[ \begin{mtable}[\cellaligns{crcrcr}]
+(I)&\qquad 2 \cdot  x & - & 4 \cdot  y & = & 10 \\
+(II)&-3 \cdot  x & + & 6\cdot y & =  & -15
+\end{mtable} \]
+with its coefficients in $\Q$ (or in $\R$), we have the coefficient matrix 
+$A=\begin{pmatrix} 2 & -4 \\ -3 & 6\end{pmatrix}$ and the right side $b=\begin{pmatrix} 10\\ -15\end{pmatrix}$. 
+So, the augmented matrix is given by
+\[ (A \mid b )= \begin{pmatrix} 2 & -4& | & 10 \\ -3 & 6& | & -15\end{pmatrix}  .\]
+In matrix notation the system is 
+\[   \begin{pmatrix} 2 & -4 \\ -3 & 6\end{pmatrix}\cdot \begin{pmatrix} x\\ y\end{pmatrix}= \begin{pmatrix} 10\\ -15\end{pmatrix}.\]}
+
+\tab{\lang{de}{2. Beispiel} \lang{en}{2. Example}} 
+\lang{de}{
+Das lineare Gleichungssystem 
+\[ \begin{mtable}[\cellaligns{crcrcr}]
+(I)&\qquad i \cdot  x & - & 4 \cdot  y & = & 4+2i \\
+(II)&-2 \cdot  x & + & (8-8i)\cdot y & =  & -4
+\end{mtable} \]
+mit Koeffizienten in $\C$ hat als Koeffizientenmatrix 
+$A=\begin{pmatrix} i & -4 \\ -2 & 8-8i\end{pmatrix}$ und als rechte Seite $b=\begin{pmatrix} 4+2i\\ -4\end{pmatrix}$ 
+sowie die erweiterte Koeffizientenmatrix
+\[ (A \mid b )= \begin{pmatrix} i & -4& | & 4+2i \\ -2 & 8-8i& | & -4\end{pmatrix}  .\]
+In Matrixschreibweise lautet das LGS daher
+\[   \begin{pmatrix} i & -4 \\ -2& 8-8i\end{pmatrix}\cdot \begin{pmatrix} x\\ y\end{pmatrix}= \begin{pmatrix} 4+2i\\ -4\end{pmatrix}.\]}
+\lang{en}{
+For the linear system 
+\[ \begin{mtable}[\cellaligns{crcrcr}]
+(I)&\qquad i \cdot  x & - & 4 \cdot  y & = & 4+2i \\
+(II)&-2 \cdot  x & + & (8-8i)\cdot y & =  & -4
+\end{mtable} \]
+with its coefficients in $\C$, we have 
+$A=\begin{pmatrix} i & -4 \\ -2 & 8-8i\end{pmatrix}$ for the coefficient matrix and $b=\begin{pmatrix} 4+2i\\ -4\end{pmatrix}$ for the right side.
+So, the augmented matrix is given by
+\[ (A \mid b )= \begin{pmatrix} i & -4& | & 4+2i \\ -2 & 8-8i& | & -4\end{pmatrix}  .\]
+In matrix notation the system is 
+\[   \begin{pmatrix} i & -4 \\ -2& 8-8i\end{pmatrix}\cdot \begin{pmatrix} x\\ y\end{pmatrix}= \begin{pmatrix} 4+2i\\ -4\end{pmatrix}.\]}
+
+\tab{\lang{de}{3. Beispiel} \lang{en}{3. Example}}
+\lang{de}{
+Das lineare Gleichungssystem 
+\[ \begin{mtable}[\cellaligns{ccrcrcrcr}]
+(I)&&x_{1}&+&2x_{2}&+&x_{3}&=&4\\
+(II)&&x_{1}&-&x_{2}&+&\frac{3}{2}x_{3}&=&-7\\
+(III)&\qquad-&4x_{1}&+&2x_{2}&&&=&-2
+\end{mtable} \]
+hat als Koeffizientenmatrix
+$ A=\begin{pmatrix} 1 & 2 & 1 \\ 1 & -1 & \frac{3}{2} \\ -4 & 2 & 0\end{pmatrix} $
+und als rechte Seite $b=\begin{pmatrix} 4 \\ -7 \\ -2 \end{pmatrix} $ sowie die erweiterte Koeffizientenmatrix
+\[ (A \mid b )= \begin{pmatrix} 1 & 2 & 1 & | & 4 \\ 1 & -1 & \frac{3}{2}& | & -7\\ -4 & 2 & 0& | &-2\end{pmatrix}.\]
+In Matrixschreibweise lautet das LGS daher
+\[ \begin{pmatrix} 1 & 2 & 1 \\ 1 & -1 & \frac{3}{2} \\ -4 & 2 & 0\end{pmatrix}\cdot \begin{pmatrix}x_1 \\x_2\\ x_3\end{pmatrix}
+= \begin{pmatrix} 4 \\ -7 \\ -2 \end{pmatrix}. \]}
+\lang{en}{
+For the linear system 
+\[ \begin{mtable}[\cellaligns{ccrcrcrcr}]
+(I)&&x_{1}&+&2x_{2}&+&x_{3}&=&4\\
+(II)&&x_{1}&-&x_{2}&+&\frac{3}{2}x_{3}&=&-7\\
+(III)&\qquad-&4x_{1}&+&2x_{2}&&&=&-2
+\end{mtable} \]
+the coefficient matrix is given by
+$ A=\begin{pmatrix} 1 & 2 & 1 \\ 1 & -1 & \frac{3}{2} \\ -4 & 2 & 0\end{pmatrix} $. With the right side given by
+$b=\begin{pmatrix} 4 \\ -7 \\ -2 \end{pmatrix} $, the augmented matrix is then given by
+\[ (A \mid b )= \begin{pmatrix} 1 & 2 & 1 & | & 4 \\ 1 & -1 & \frac{3}{2}& | & -7\\ -4 & 2 & 0& | &-2\end{pmatrix}.\]
+In matrix notation the system is
+\[ \begin{pmatrix} 1 & 2 & 1 \\ 1 & -1 & \frac{3}{2} \\ -4 & 2 & 0\end{pmatrix}\cdot \begin{pmatrix}x_1 \\x_2\\ x_3\end{pmatrix}
+= \begin{pmatrix} 4 \\ -7 \\ -2 \end{pmatrix}. \]}
+\end{tabs*}
+\end{example}
+
+\lang{de}{
+Allgemein gibt man die Lösungsmenge eines LGS wie folgt an, wobei hier zusätzlich zu beachten ist, über welchem Körper $\K$ das LGS betrachtet wird 
+und in welchem Vektorraum $\mathbb{K}^n$ damit die entsprechenden Lösungsvektoren liegen.}
+\lang{en}{
+In general, the solution set of a linear system is given as follows. Here, it must also be taken into account over which field $\K$ the system is considered 
+and to which vector space $\K^n$ the solution vectors belong.}
+
+\begin{definition}[\lang{de}{Lösungsmenge} \lang{en}{Solution set}]\label{def:loesungsmenge}
+\lang{de}{Eine \notion{L\"osung} eines solchen linearen Gleichungssystems über $\mathbb{K}$ 
+mit $n$ Unbekannten ist ein $n$-Tupel $(x_1; x_2; \ldots; x_n)$ mit $n$ Elementen $x_1, x_2, \ldots, x_n\in \mathbb{K}$, das alle Gleichungen des Systems erf\"ullt.}
+\lang{en}{A \notion{solution} to a linear system of equations over $\mathbb{K}$ in $n$ knowns is called an $n$-tuple $(x_1, x_2, \ldots, x_n)$ comprised of $n$ elements $x_1$, $x_2$, $\ldots$, $x_n\in \mathbb{K}$ which fulfill all the equations in the system.}
+\lang{de}{
+Oft schreiben wir diese Lösungen als  \emph{Spaltenvektoren}
+\[ \left(\begin{smallmatrix} x_1\\ \vdots \\ x_n\end{smallmatrix}\right).\]
+
+Die \notion{Lösungsmenge} eines linearen Gleichungssystems $Ax=b$ ist dann die Menge aller Lösungen, also
+\[ \mathbb{L}=\Big\lbrace \left(\begin{smallmatrix} x_1\\ \vdots  \\ x_n\end{smallmatrix}\right) \in \K^{n}\ \Big\vert \ 
+\left(\begin{smallmatrix} x_1\\ \vdots \\ x_n\end{smallmatrix}\right) \text{ erf\"ullt } Ax=b \Big\rbrace .
+\]}
+
+\lang{en}{
+The solutions are often written as  \emph{column vectors}
+\[ \left(\begin{smallmatrix} x_1\\ \vdots \\ x_n\end{smallmatrix}\right).\]
+
+The \notion{solution set} of a linear system $Ax=b$ is the set of all solution, so
+\[ \mathbb{L}=\Big\lbrace \left(\begin{smallmatrix} x_1\\ \vdots  \\ x_n\end{smallmatrix}\right) \in \K^{n}\ \Big\vert \ 
+\left(\begin{smallmatrix} x_1\\ \vdots \\ x_n\end{smallmatrix}\right) \text{ fulfills } Ax=b \Big\rbrace .
+\]}
+\end{definition}
+
+%\begin{remark}
+%Die Lösungsmenge des linearen Gleichungssystems hängt also auch davon ab, über welchem Körper $\mathbb{K}$
+%man das LGS betrachtet, da man nach Lösungen im Vektorraum $\mathbb{K}^n$ sucht.\\
+%Beim \link{gauss-verfahren}{Gauß-Verfahren} werden wir aber sehen, dass sich alle Rechnungen im kleinsten Körper abspielen,
+%in dem alle Koeffizienten liegen. Bei der Beschreibung der Lösungsmenge in einer parametrisierten Form, 
+%wie man sie aus
+%dem Gauß-Verfahren erhält, unterscheidet sich diese dann nur darin, welchen Körper man als Werte für die Parameter zulässt 
+%(vgl. auch die \lref{ex:lsgsmenge-homogen}{Beispiele}).
+%\end{remark}
+
+%Um im nächsten Abschnitt explizite Lösungen zu berechnen zu können, 
+%unterscheiden wir zunächst zwischen homogenen und inhomogenen 
+%linearen Gleichungssystemen.
+\lang{de}{
+Um eine Struktur der Lösungsmenge anzugeben, 
+unterscheiden wir zwischen homogenen und inhomogenen linearen Gleichungssystemen:\\ 
+
+\begin{definition}[homogenes/inhomogenes LGS] \label{def:homogen-inhomogen}
+Ein lineares Gleichungssystem $Ax=b$ heißt \notion{homogenes LGS}, wenn $b$ gleich dem Nullvektor ist, also
+$b_1= \cdots = b_m =0$ gilt. Anderenfalls spricht man von einem
+\notion{inhomogenen LGS}.
+
+Ist $Ax=b$ ein inhomogenes LGS, so nennt man das lineare Gleichungssystem $Ax=0$ das \notion{zugehörige
+homogene LGS}.
+\end{definition}}
+
+\lang{en}{
+To structure the solution set, we distinguish the systems in homogeneous and nonhomogeneous linear systems:
+
+\begin{definition}[(Non-)Homogeneous system of linear equations]\label{def:homogen-inhomogen}
+A linear system $Ax=b$ is called \notion{homogeneous system}, when $b$ is the zero vector, so 
+$b_1= \cdots = b_m =0$ holds. Otherwise, it is called \notion{nonhomogeneous linear system.}
+
+If $Ax=b$ is a nonhomogeneous linear system, we call the system $Ax=0$ the \notion{corresponding homogeneous linear system}.
+\end{definition}}
+
+\begin{example}
+\begin{tabs*}
+\tab{\lang{de}{1. Beispiel} \lang{en}{1. Example}}
+\lang{de}{
+Das obige LGS
+\[ \begin{pmatrix} 2 & -4 \\ -3 & 6\end{pmatrix}\cdot \begin{pmatrix} x\\ y\end{pmatrix}= \begin{pmatrix} 10\\ -15\end{pmatrix}\]
+ist inhomogen, da die rechte Seite $b=\begin{pmatrix} 10\\ -15\end{pmatrix}$ nicht der Nullvektor ist. Das zugehörige homogene LGS
+lautet
+\[ \begin{pmatrix} 2 & -4 \\ -3 & 6\end{pmatrix}\cdot \begin{pmatrix} x\\ y\end{pmatrix}= \begin{pmatrix} 0\\ 0\end{pmatrix}.\]}
+\lang{en}{
+The above linear system 
+\[ \begin{pmatrix} 2 & -4 \\ -3 & 6\end{pmatrix}\cdot \begin{pmatrix} x\\ y\end{pmatrix}= \begin{pmatrix} 10\\ -15\end{pmatrix}\]
+is nonhomogeneous, because the right side $b=\begin{pmatrix} 10\\ -15\end{pmatrix}$ is not the zero vector. The corresponding homogeneous system is
+\[ \begin{pmatrix} 2 & -4 \\ -3 & 6\end{pmatrix}\cdot \begin{pmatrix} x\\ y\end{pmatrix}= \begin{pmatrix} 0\\ 0\end{pmatrix}.\]}
+
+\tab{\lang{de}{2. Beispiel} \lang{en}{2. Example}}
+\lang{de}{
+Das obige LGS
+\[   \begin{pmatrix} i & -4 \\ -2& 8-8i\end{pmatrix}\cdot \begin{pmatrix} x\\ y\end{pmatrix}= \begin{pmatrix} 4+2i\\ -4\end{pmatrix}\]
+ist inhomogen, da die rechte Seite $b=\begin{pmatrix} 4+2i\\ -4\end{pmatrix}$ nicht der Nullvektor ist. Das zugehörige homogene LGS
+lautet
+\[   \begin{pmatrix} i & -4 \\ -2& 8-8i\end{pmatrix}\cdot \begin{pmatrix} x\\ y\end{pmatrix}= \begin{pmatrix} 0\\ 0\end{pmatrix}.\]}
+\lang{en}{
+The above linear system
+\[   \begin{pmatrix} i & -4 \\ -2& 8-8i\end{pmatrix}\cdot \begin{pmatrix} x\\ y\end{pmatrix}= \begin{pmatrix} 4+2i\\ -4\end{pmatrix}\]
+is nonhomogeneous, because the right side $b=\begin{pmatrix} 4+2i\\ -4\end{pmatrix}$ is not the zero vector. The corresponding homogeneous system
+is
+\[   \begin{pmatrix} i & -4 \\ -2& 8-8i\end{pmatrix}\cdot \begin{pmatrix} x\\ y\end{pmatrix}= \begin{pmatrix} 0\\ 0\end{pmatrix}.\]}
+
+\tab{\lang{de}{3. Beispiel} \lang{en}{3. Example}}
+\lang{de}{
+Das obige LGS 
+\[ \begin{pmatrix} 1 & 2 & 1 \\ 1 & -1 & \frac{3}{2} \\ -4 & 2 & 0\end{pmatrix}\cdot \begin{pmatrix}x_1 \\x_2\\ x_3\end{pmatrix}
+= \begin{pmatrix} 4 \\ -7 \\ -2 \end{pmatrix} \]
+ist inhomogen, da die rechte Seite $b=\begin{pmatrix} 4 \\ -7 \\ -2 \end{pmatrix}$ nicht der Nullvektor ist. Das zugehörige homogene LGS
+lautet
+\[ \begin{pmatrix} 1 & 2 & 1 \\ 1 & -1 & \frac{3}{2} \\ -4 & 2 & 0\end{pmatrix}\cdot \begin{pmatrix}x_1 \\x_2\\ x_3\end{pmatrix}
+= \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}. \]}
+\lang{en}{
+The above linear system 
+\[ \begin{pmatrix} 1 & 2 & 1 \\ 1 & -1 & \frac{3}{2} \\ -4 & 2 & 0\end{pmatrix}\cdot \begin{pmatrix}x_1 \\x_2\\ x_3\end{pmatrix}
+= \begin{pmatrix} 4 \\ -7 \\ -2 \end{pmatrix} \]
+is nonhomogeneous, because the right side $b=\begin{pmatrix} 4 \\ -7 \\ -2 \end{pmatrix}$ is not the zero vector. The corresponding homogeneous linear system
+is
+\[ \begin{pmatrix} 1 & 2 & 1 \\ 1 & -1 & \frac{3}{2} \\ -4 & 2 & 0\end{pmatrix}\cdot \begin{pmatrix}x_1 \\x_2\\ x_3\end{pmatrix}
+= \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}. \]}
+\end{tabs*}
+\end{example}
+
+\lang{de}{
+\begin{quickcheck}
+		\type{input.interval}
+        \field{rational}
+        \precision{3}
+      \field{real}
+      \begin{variables}
+           \randint[Z]{a}{2}{6}
+           \randint[Z]{b}{2}{8}
+           \randint[Z]{c}{2}{8}
+           \randint[Z]{d}{2}{8}
+           \end{variables}
+      \text{Das folgende lineare Gleichungssystem
+\[ \begin{mtable}[\cellaligns{crcrcr}]
+(I)&\qquad \var{a} \cdot  x & - & \var{b}  & = & -\var{b} \\
+(II)&   &  & \var{c}\cdot y & =  &-\var{d} \cdot  x 
+\end{mtable} \]
+ist
+        } 
+    \begin{choices}{unique}
+
+        \begin{choice}
+            \text{homogen.}
+			\solution{true}
+		\end{choice}
+                    
+        \begin{choice}
+            \text{inhomogen.}
+			\solution{false}
+		\end{choice}
+    \end{choices}{unique}
+ \explanation{Das lineare Gleichungssystem ist homogen, da es sich in der folgenden Form darstellen lässt:
+ \[ \begin{mtable}[\cellaligns{crcrcr}]
+(I)&\qquad \var{a} \cdot  x &  &   & = & 0 \\
+(II)&  \var{d} \cdot  x & + & \var{c}\cdot y & =&0
+\end{mtable} \]
+ }
+	\end{quickcheck}}
+
+ 
+\lang{en}{
+\begin{quickcheck}
+		\type{input.interval}
+        \field{rational}
+        \precision{3}
+      \field{real}
+      \begin{variables}
+           \randint[Z]{a}{2}{6}
+           \randint[Z]{b}{2}{8}
+           \randint[Z]{c}{2}{8}
+           \randint[Z]{d}{2}{8}
+           \end{variables}
+      \text{The following system of linear equations
+\[ \begin{mtable}[\cellaligns{crcrcr}]
+(I)&\qquad \var{a} \cdot  x & - & \var{b}  & = & -\var{b} \\
+(II)&   &  & \var{c}\cdot y & =  &-\var{d} \cdot  x 
+\end{mtable} \]
+is
+        } 
+    \begin{choices}{unique}
+
+        \begin{choice}
+            \text{homogeneous.}
+			\solution{true}
+		\end{choice}
+                    
+        \begin{choice}
+            \text{nonhomogeneous.}
+			\solution{false}
+		\end{choice}
+    \end{choices}{unique}
+ \explanation{The linear system is homogeneous, because it can be written as:
+ \[ \begin{mtable}[\cellaligns{crcrcr}]
+(I)&\qquad \var{a} \cdot  x &  &   & = & 0 \\
+(II)&  \var{d} \cdot  x & + & \var{c}\cdot y & =&0
+\end{mtable} \]
+ }
+	\end{quickcheck}}
+
+\lang{de}{
+Im folgenden Video wird ein lineares Gleichungssystem in Matrixschreibweise dargestellt und anschließend mit den bereits bekannten Methoden gelöst. \\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10840&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}}\\ \\
+
+
+\section{\lang{de}{Die L"osungsmenge homogener linearer Gleichungssysteme} \lang{en}{The solution set of homogeneous linear systems}}\label{sec:homogen}
+
+\lang{de}{
+Auch in Fällen, in denen lineare Gleichungssysteme nicht eindeutig lösbar sind, 
+kann die Lösungsmenge strukturiert angegeben werden.}
+\lang{en}{
+The solution set can be notated in a structured way, even if the linear system does not have a single unique solution.}
+
+\begin{rule}\label{rule-lgs_raum}
+\lang{de}{
+Für  ein homogenes LGS $Ax=0$ mit $m$ Gleichungen und $n$ Unbekannten gilt:
+\begin{enumerate}
+\item Es besitzt stets die Lösung $x_1=\ldots=x_n=0$. Diese wird die \notion{triviale Lösung} genannt.
+\item Die Lösungsmenge bildet einen \ref[def:Unter_VR][Untervektorraum]{supp:allg-vektorraum}, d.\,h. entweder ist $\mathbb{L}=\{ 0\}$ oder
+es gibt %eine natürliche Zahl $k\leq n$ und
+$k \leq n$ linear unabhängige Lösungen
+\[ v_1=\begin{pmatrix}v_{11}\\ \vdots \\ v_{1n} \end{pmatrix},\quad v_2=\begin{pmatrix}v_{21}\\ \vdots \\ v_{2n} \end{pmatrix},\quad \ldots
+\quad v_k=\begin{pmatrix}v_{k1}\\ \vdots \\ v_{kn}\end{pmatrix}, \]
+so dass
+\[ \mathbb{L}= \left\{ r_1v_1+r_2v_2+\cdots + r_kv_k \mid r_1,r_2,\ldots, r_k\in \mathbb{K} \right\}.\]
+\item Jedes homogene LGS mit mehr Variablen als Gleichungen hat mindestens eine nichttriviale L"osung. 
+\end{enumerate}
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11012&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}}\\
+
+\lang{en}{
+For a homogeneous linear system with $m$ equations and $n$ unknowns holds:
+\begin{enumerate}
+\item $x_1=\ldots=x_n=0$ is always a solution. It is called the \notion{trivial solution}.
+\item The solution set is a \ref[def:Unter_VR][linear subspace.]{supp:allg-vektorraum}. So, it is either $\mathbb{L}=\{ 0\}$ or
+there exist %eine natürliche Zahl $k\leq n$ und
+$k \leq n$ linear independent solutions
+\[ v_1=\begin{pmatrix}v_{11}\\ \vdots \\ v_{1n} \end{pmatrix},\quad v_2=\begin{pmatrix}v_{21}\\ \vdots \\ v_{2n} \end{pmatrix},\quad \ldots
+\quad v_k=\begin{pmatrix}v_{k1}\\ \vdots \\ v_{kn}\end{pmatrix}, \]
+such that
+\[ \mathbb{L}= \left\{ r_1v_1+r_2v_2+\cdots + r_kv_k \mid r_1,r_2,\ldots, r_k\in \mathbb{K} \right\}.\]
+\item Every homogeneous linear system with more variables than equations has at least one non-trivial solution. 
+\end{enumerate}}
+\end{rule}
+
+\begin{proof*}[\lang{de}{Beweis Regel} \lang{en}{Proof for the rule}]
+\begin{showhide}
+\lang{de}{
+\begin{enumerate}
+\item Bei einem homogenen LGS entspricht $b$ dem Nullvektor. Wählt man nun für $x$ ebenfalls den Nullvektor, so ist die Gleichung
+\[Ax=A\cdot \begin{pmatrix} 0 \\ 0 \\ \vdots \\ 0 \end{pmatrix}= \begin{pmatrix} 0 \\ 0 \\ \vdots \\ 0 \end{pmatrix}=b\]
+stets erfüllt.
+\item Sind $v_1,\ldots, v_{\ell}$ Lösungen des LGS $Ax=0$, dann sieht man aufgrund der 
+\ref[matrizen][Rechenregeln für die Matrix-Vektor-Multiplikation]{sec:rechenregeln}, dass für beliebige Elemente
+$r_1,\ldots, r_{\ell} \in\mathbb{K}$ die Gleichung
+\[ A(r_1v_1+\ldots +r_{\ell} v_{\ell})=r_1\cdot Av_1+\ldots + r_{\ell}\cdot Av_{\ell}=0+\ldots +0=0 \]
+erfüllt ist. Damit ist jede Linearkombination der Lösungen $v_1,\ldots, v_{\ell}$ auch eine Lösung.
+
+Um alle Lösungen darzustellen, müssen hinreichend viele linear unabhängige Vektoren gefunden werden, so dass alle Lösungen als Linearkombination dieser Vektoren
+geschrieben werden können. Praktisch wird dies mit dem \link{gauss-verfahren}{Gauß-Verfahren} durchgeführt.
+\item Hat ein homogenes LGS $m$ Gleichungen und $n$ Variablen mit $m<n$, so lässt sich das LGS höchstens nach $m$ Variablen auflösen.
+Die übrigen Variablen lassen sich frei wählen. Damit besitzt ein solches LGS mindestens eine nichttriviale Lösung. \\
+Im nächsten Kapitel \link{gauss-verfahren}{Gauß-Verfahren} werden wir diese Variablen genauer kennenlernen.
+\end{enumerate}}
+
+\lang{en}{
+\begin{enumerate}
+\item In a homogeneous linear system $b$ corresponds to the zero vector. If we choose the zero vector for $x$, the equation
+\[Ax=A\cdot \begin{pmatrix} 0 \\ 0 \\ \vdots \\ 0 \end{pmatrix}= \begin{pmatrix} 0 \\ 0 \\ \vdots \\ 0 \end{pmatrix}=b\]
+is always solved.
+\item If $v_1,\ldots, v_{\ell}$ are solutions for the linear system $Ax=0$, then we see 
+(using the \ref[matrizen][calculation rules for matrix-vector multiplication]{sec:rechenregeln}) that for any $r_1,\ldots, r_{\ell} \in\mathbb{K}$ 
+the equation
+\[ A(r_1v_1+\ldots +r_{\ell} v_{\ell})=r_1\cdot Av_1+\ldots + r_{\ell}\cdot Av_{\ell}=0+\ldots +0=0 \]
+is solved. This shows, that any linear combination of the solutions $v_1,\ldots, v_{\ell}$ is a solution too.
+
+To display all solutions, sufficiently many linearly independent vectors need to be found, such that all solutions can be written
+as linear combinations of these vectors.
+In practise, this is done using the \link{gauss-verfahren}{Gaussian elimination}.
+\item If a homogeneous linear system has $m$ equations and $n$ variables with $m<n$, the linear system can at most be solved for $m$ variables.
+The remaining variables can be chosen freely. Thus, such an LGS has at least one non-trivial solution. \\
+In the next chapter, about the \link{gauss-verfahren}{Gaussian elimination}, we will get to know these variables more detailed.
+\end{enumerate}}
+
+\end{showhide}
+\end{proof*}
+
+\lang{de}{
+\begin{example}\label{ex:lsgsmenge-homogen}
+\begin{tabs*}
+\tab{1. Beispiel}
+Das homogene LGS
+\[ \begin{pmatrix} 2 & -4 \\ -3 & 6\end{pmatrix}\cdot \begin{pmatrix} x\\ y\end{pmatrix}= \begin{pmatrix} 0\\ 0\end{pmatrix}\]
+über $\Q$ hat als Lösungsmenge
+\[ \mathbb{L}=\left\{ r\cdot \begin{pmatrix} 2 \\ 1 \end{pmatrix} \, \big| \, r\in \mathbb{Q} \right\}. \]
+%wie man mit den bereits bekannten Verfahren berechnen kann. 
+
+Hier ist also $k=1$ und $v_1=\begin{pmatrix} 2 \\ 1 \end{pmatrix}$ eine Lösung, so dass die Lösungsmenge
+des LGS geschrieben werden kann als $\mathbb{L}= \left\{ r_1v_1 \, | \, r_1\in \mathbb{Q} \right\}$,
+mit $r_1 = r$.
+
+Betrachtet man das lineare Gleichungssystem als LGS über den reellen Zahlen, wäre die Lösungsmenge 
+$\mathbb{L}= \left\{ r_1v_1 | r_1\in \R \right\}$. Sie unterscheidet sich also darin, welche Werte für den
+Parameter $r_1$ zugelassen werden.
+
+Das bedeutet beispielsweise, dass für $r=\sqrt{2}$ der Vektor $\begin{pmatrix} 2\sqrt{2} \\ \sqrt{2} \end{pmatrix}$ in der Lösungsmenge liegt, wenn das LGS über den reellen Zahlen betrachtet wird. 
+Wird das LGS über den rationalen Zahlen betrachtet, stellt er keinen Lösungsvektor dar.
+\tab{2. Beispiel}Die erweiterte Koeffizientenmatrix des homogenen LGS
+\[   \begin{pmatrix} i & -4 \\ -2& 8-8i\end{pmatrix}\cdot \begin{pmatrix} x\\ y\end{pmatrix}= \begin{pmatrix} 0\\ 0\end{pmatrix} \]
+
+lässt sich durch Multiplikation der ersten Zeile mit $-2i$ und anschließender Addition zur zweiten Gleichung in Stufenform bringen:
+\[ \begin{pmatrix} i & -4 & | & 0 \\ 0& 8 & | & 0 \end{pmatrix}\]
+
+Aus der zweiten Zeile folgt $y=0$ und durch Einsetzen in die erste Gleichung muss damit auch $x=0$ sein.
+Das homogene LGS besitzt folglich nur die triviale Lösung:
+\[ \mathbb{L}=\left\{ r\cdot \begin{pmatrix} 0 \\ 0 \end{pmatrix} \, \big| \, r\in \mathbb{C} \right\} =\left\{\begin{pmatrix} 0 \\ 0 \end{pmatrix}\right\}. \]
+
+
+\tab{3. Beispiel}
+Für das homogene LGS 
+\[ \begin{pmatrix} 1 & 2 & 1 \\ 1 & -1 & \frac{3}{2} \\ -4 & 2 & 0\end{pmatrix}\cdot \begin{pmatrix}x_1 \\x_2\\ x_3\end{pmatrix}
+= \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix} \]
+über $\R$ (oder über $\Q$) zeigt eine Rechnung (siehe Abschnitt \link{gauss-verfahren}{Gauß-Verfahren}), dass es nur die 
+triviale Lösung als Lösung besitzt.
+\end{tabs*}
+\end{example}}
+
+
+\lang{en}{
+\begin{example}\label{ex:lsgsmenge-homogen}
+\begin{tabs*}
+\tab{1. Example}
+The solution set of the homogeneous linear system
+\[ \begin{pmatrix} 2 & -4 \\ -3 & 6\end{pmatrix}\cdot \begin{pmatrix} x\\ y\end{pmatrix}= \begin{pmatrix} 0\\ 0\end{pmatrix}\]
+over $\Q$ is
+\[ \mathbb{L}=\left\{ r\cdot \begin{pmatrix} 2 \\ 1 \end{pmatrix} \, \big| \, r\in \mathbb{Q} \right\}. \]
+%wie man mit den bereits bekannten Verfahren berechnen kann. 
+
+Here we have $k=1$ and $v_1=\begin{pmatrix} 2 \\ 1 \end{pmatrix}$ is a solution. The solution set can then be written
+as $\mathbb{L}= \left\{ r_1v_1 \, | \, r_1\in \mathbb{Q} \right\}$,
+with $r_1 = r$.
+
+
+If we consider the linear system as a system over the real numbers, the solution set would be 
+$\mathbb{L}= \left\{ r_1v_1 | r_1\in \R \right\}$. The difference is therefore which values are allowed for the parameter $r_1$.
+
+For example, for $r=\sqrt{2}$ the vector $\begin{pmatrix} 2\sqrt{2} \\ \sqrt{2} \end{pmatrix}$ is in the solution set, when the linear 
+system is considered over the real numbers. But is the system considered as a system over $\Q$, the vector is no solution and therefore no
+element of the solution set, because $\sqrt{2}\notin\Q$.
+
+\tab{2. Example}
+The first equation of the homogeneous linear system
+\[   \begin{pmatrix} i & -4 \\ -2& 8-8i\end{pmatrix}\cdot \begin{pmatrix} x\\ y\end{pmatrix}= \begin{pmatrix} 0\\ 0\end{pmatrix} \]
+
+can be multiplied with $-2i$ and added to the second equation. The augmented matrix is then in row echelon form:
+\[ \begin{pmatrix} i & -4 & | & 0 \\ 0& 8 & | & 0 \end{pmatrix}\]
+
+From the second line follows $y=0$. By inserting $y$ in the first equation, we see, that $x=0$ holds.
+Hence, the homogeneous linear system has only the trivial solution:
+\[ \mathbb{L}=\left\{ r\cdot \begin{pmatrix} 0 \\ 0 \end{pmatrix} \, \big| \, r\in \mathbb{C} \right\} =\left\{\begin{pmatrix} 0 \\ 0 \end{pmatrix}\right\}. \]
+
+
+\tab{3. Example}
+The homogeneous linear system
+\[ \begin{pmatrix} 1 & 2 & 1 \\ 1 & -1 & \frac{3}{2} \\ -4 & 2 & 0\end{pmatrix}\cdot \begin{pmatrix}x_1 \\x_2\\ x_3\end{pmatrix}
+= \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix} \]
+over $\R$ (or over $\Q$) has only the trivial solution. This can be seen by applying the \link{gauss-verfahren}{Gaussian elimination}).
+\end{tabs*}
+\end{example}}
+
+
+\section{\lang{de}{Die L"osungsmenge inhomogener linearer Gleichungssysteme} \lang{en}{The solution set of nonhomogeneous linear systems}}\label{sec:inhomogen}
+
+\lang{de}{
+Die Lösungsmengen inhomogener LGS und der zugehörigen homogenen LGS sind eng miteinander verbunden.}
+\lang{en}{
+The solution sets of inhomogeneous LGS and the corresponding homogeneous LGS are closely related.}
+
+\begin{rule}
+\lang{de}{
+Es sei $Ax=b$ ein inhomogenes LGS über $\mathbb{K}$ mit $m$ Gleichungen und $n$ Variablen und $\mathbb{L}_0$ die
+Lösungsmenge des zugehörigen homogenen LGS $Ax=0$. Dann gilt für die Lösungsmenge $\mathbb{L}$ des inhomogenen LGS:
+\begin{itemize}
+    \item Entweder ist die Lösungsmenge leer, d.\,h.~$\mathbb{L}=\emptyset$, oder es gilt
+    \item $\mathbb{L}= v +\mathbb{L}_0=\left\{ v+ w \mid w\in \mathbb{L}_0 \right\}$, 
+    wobei $v$ eine beliebige Lösung des inhomogenen LGS $Ax=b$ ist. 
+\end{itemize}
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11013&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}}\\
+
+\lang{en}{
+Let $Ax=b$ be a nonhomogeneous linear system over $\mathbb{K}$ with $m$ equations and $n$ unknowns and $\mathbb{L}_0$ the
+solution set of the corresponding homogeneous linear system $Ax=0$. Then for the solution set $\mathbb{L}$ of the inhomogeneous LGS applies:
+\begin{itemize}
+    \item The solution set is empty, i.\,e.~$\mathbb{L}=\emptyset$, or
+    \item $\mathbb{L}= v +\mathbb{L}_0=\left\{ v+ w \mid w\in \mathbb{L}_0 \right\}$, 
+    with $v$ being any solution of the inhomogeneous linear system $Ax=b$. 
+\end{itemize}}
+\end{rule}
+
+
+\begin{proof*}[\lang{de}{Beweis Regel} \lang{en}{Proof of the rule}]
+\begin{showhide}
+\lang{de}{
+Diese Aussage erhält man wieder aus den \ref[matrizen][Rechenregeln für die Matrix-Vektor-Multiplikation]{sec:rechenregeln}.
+Wenn nämlich die Lösungsmenge $\mathbb{L}$ nicht leer ist und $v\in \mathbb{L}$ eine beliebige Lösung ist, dann gilt $Av=b$.\\
+Für jede Lösung $w\in \mathbb{L}_0$ des zugehörigen homogenen LGS $Ax=0$ gilt dann
+\[  A(v+w)=Av+Aw=b+0=b. \]
+Also ist $v+w\in \mathbb{L}$.
+
+Ist andererseits $v' \in \mathbb{L}$ eine weitere Lösung des LGS $Ax=b$, so gilt
+\[  A(v'-v)=Av'-Av=b-b=0. \]
+Die Differenz $w=v'-v$ ist also eine Lösung des zugehörigen homogenen LGS $Ax=0$. Damit gilt $v'=v+(v'-v)=v+w$ 
+und folglich lässt sich jede Lösung $v'$ des inhomogenen Systems als Summe einer festen inhomogenen Lösung $v$ 
+und einer homogenen Lösung $w$ schreiben.}
+
+\lang{en}{
+This statement is again obtained from the \ref[matrizen][calculating rules for matrix-vector multiplication]{sec:rechenregeln}.
+It is $Av=b$ for any $v\in\mathbb{L}$, when the solution set $\mathbb{L}$ is not empty.\\
+For every solution $w\in \mathbb{L}_0$ of the corresponding homogeneous linear system $Ax=0$ we have
+\[  A(v+w)=Av+Aw=b+0=b. \]
+So, it is $v+w\in \mathbb{L}$.
+
+Is on the other hand $v' \in \mathbb{L}$ another solution of the linear system $Ax=b$, we have
+\[  A(v'-v)=Av'-Av=b-b=0. \]
+So, the difference $w=v'-v$ is a solution of the corresponding homogeneous linear system $Ax=0$. Therefore it holds $v'=v+(v'-v)=v+w$
+and any solution $v'$ of the nonhomogeneous system can be written as the sum of a fixed inhomogeneous solution $v$ and
+and a homogeneous solution $w$.}
+\end{showhide}
+\end{proof*}
+
+
+\lang{de}{
+\begin{example}
+\begin{tabs*}
+\tab{1. Beispiel}
+Das inhomogene LGS
+\[ \begin{mtable}[\cellaligns{crcrcr}]
+(I)&\qquad 2 \cdot  x & - & 4 \cdot  y & = & 10 \\
+(II)&-3 \cdot  x & + & 6\cdot y & =  & -15
+\end{mtable} \]
+über $\R$ bzw. in Matrixform
+\[   \begin{pmatrix} 2 & -4 \\ -3 & 6\end{pmatrix}\cdot \begin{pmatrix} x\\ y\end{pmatrix}= \begin{pmatrix} 10\\ -15\end{pmatrix}\]
+hat die Lösungsmenge
+\[ \mathbb{L}=\left\{ \begin{pmatrix}5\\ 0 \end{pmatrix}+r\cdot \begin{pmatrix} 2 \\ 1 \end{pmatrix} \, \big| \, r\in \mathbb{R} \right\}. \]
+Hierbei ist $v=\begin{pmatrix}5\\ 0 \end{pmatrix}$ eine spezielle Lösung und die Lösungsmenge des zugehörigen homogenen LGS
+ist 
+\[ \mathbb{L}_0=\left\{ r\cdot \begin{pmatrix} 2 \\ 1 \end{pmatrix} \, \big| \, r\in \mathbb{R} \right\} \]
+(siehe \lref{ex:lsgsmenge-homogen}{oben}).
+\tab{2. Beispiel}
+Die erweiterte Koeffizientenmatrix des inhomogenen LGS
+\[   \begin{pmatrix} i & -4 \\ -2& 8-8i\end{pmatrix}\cdot \begin{pmatrix} x\\ y\end{pmatrix}= \begin{pmatrix} 4+2i\\ -4\end{pmatrix}\]
+
+lässt sich durch Multiplikation der ersten Zeile mit $-2i$ und anschließender Addition zur zweiten Gleichung in Stufenform bringen:
+\[ \begin{pmatrix} i & -4 & | & 4+2i \\ 0& 8 & | & -8i \end{pmatrix}\]
+
+Aus der zweiten Zeile folgt $y=-i$ und durch Einsetzen in die erste Zeile ergibt sich
+\[i\cdot x+4i=4+2i\Leftrightarrow x=\frac{4-2i}{i}=-4i-2.\]
+(Im letzten Schritt wurde der Bruch mit $-i$ erweitert.)
+
+Das inhomogene LGS besitzt damit als spezielle Lösung $v=\begin{pmatrix} -4i-2 \\ -i\end{pmatrix}$. 
+Das dazugehörige homogene LGS (siehe \lref{ex:lsgsmenge-homogen}{oben}) besitzt nur die triviale Lösung.
+Die Lösungsmenge enthält damit nur den Vektor $v$:
+\[ \mathbb{L}=\{ \begin{pmatrix} -4i-2 \\ -i \end{pmatrix} \}. \]
+\tab{3. Beispiel}
+Das LGS 
+\[ \begin{pmatrix} 1 & 2 & 1 \\ 1 & -1 & \frac{3}{2} \\ -4 & 2 & 0\end{pmatrix}\cdot \begin{pmatrix}x_1 \\x_2\\ x_3\end{pmatrix}
+= \begin{pmatrix} 4 \\ -7 \\ -2 \end{pmatrix} \]
+über $\R$ besitzt die Lösung $\begin{pmatrix} 2 \\ 3 \\ -4 \end{pmatrix}$, wie man leicht nachrechnet.
+Das zugehörige homogene LGS 
+\[ \begin{pmatrix} 1 & 2 & 1 \\ 1 & -1 & \frac{3}{2} \\ -4 & 2 & 0\end{pmatrix}\cdot \begin{pmatrix}x_1 \\x_2\\ x_3\end{pmatrix}
+= \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix} \]
+besitzt nur die triviale Lösung als Lösung (siehe \lref{ex:lsgsmenge-homogen}{oben}). Also ist die Lösungsmenge des inhomogenen LGS
+\[ \mathbb{L}=\{ \begin{pmatrix} 2 \\ 3 \\ -4 \end{pmatrix} \}. \]
+\end{tabs*}
+\end{example}}
+
+\lang{en}{
+\begin{example}
+\begin{tabs*}
+\tab{1. Example}
+The inhomogeneous linear system
+\[ \begin{mtable}[\cellaligns{crcrcr}]
+(I)&\qquad 2 \cdot  x & - & 4 \cdot  y & = & 10 \\
+(II)&-3 \cdot  x & + & 6\cdot y & =  & -15
+\end{mtable} \]
+over $\R$ or in matrix representation
+\[   \begin{pmatrix} 2 & -4 \\ -3 & 6\end{pmatrix}\cdot \begin{pmatrix} x\\ y\end{pmatrix}= \begin{pmatrix} 10\\ -15\end{pmatrix}\]
+has the solution set
+\[ \mathbb{L}=\left\{ \begin{pmatrix}5\\ 0 \end{pmatrix}+r\cdot \begin{pmatrix} 2 \\ 1 \end{pmatrix} \, \big| \, r\in \mathbb{R} \right\}. \]
+ $v=\begin{pmatrix}5\\ 0 \end{pmatrix}$ is a particular solution and the solution set of the corresponding homogeneous linear system 
+is
+\[ \mathbb{L}_0=\left\{ r\cdot \begin{pmatrix} 2 \\ 1 \end{pmatrix} \, \big| \, r\in \mathbb{R} \right\} \]
+(see \lref{ex:lsgsmenge-homogen}{above}).
+\tab{2. Example}
+In augmented matrix of the inhomogeneous system
+\[   \begin{pmatrix} i & -4 \\ -2& 8-8i\end{pmatrix}\cdot \begin{pmatrix} x\\ y\end{pmatrix}= \begin{pmatrix} 4+2i\\ -4\end{pmatrix}\]
+
+the first row can be multiplied with $-2i$. After adding the result to the second equation, we get the row echelon form:
+\[ \begin{pmatrix} i & -4 & | & 4+2i \\ 0& 8 & | & -8i \end{pmatrix}\]
+
+From the second row follows $y=-i$. Inserting this in the first row, we have
+\[i\cdot x+4i=4+2i\Leftrightarrow x=\frac{4-2i}{i}=-4i-2.\]
+(In the last step we multiplied  the numerator and denominator with $-i$.)
+
+The nonhomogeneous system has the particular solution
+$v=\begin{pmatrix} -4i-2 \\ -i\end{pmatrix}$. 
+The corresponding homogeneous linear system (see \lref{ex:lsgsmenge-homogen}{above}) only has the trivial solution.
+The solutions set only contains the vector $v$:
+\[ \mathbb{L}=\{ \begin{pmatrix} -4i-2 \\ -i \end{pmatrix} \}. \]
+\tab{3. Example}
+The system of linear equations
+\[ \begin{pmatrix} 1 & 2 & 1 \\ 1 & -1 & \frac{3}{2} \\ -4 & 2 & 0\end{pmatrix}\cdot \begin{pmatrix}x_1 \\x_2\\ x_3\end{pmatrix}
+= \begin{pmatrix} 4 \\ -7 \\ -2 \end{pmatrix} \]
+over $\R$ has the solution $\begin{pmatrix} 2 \\ 3 \\ -4 \end{pmatrix}$. This can be calculated easily.
+The corresponding homogeneous linear system 
+\[ \begin{pmatrix} 1 & 2 & 1 \\ 1 & -1 & \frac{3}{2} \\ -4 & 2 & 0\end{pmatrix}\cdot \begin{pmatrix}x_1 \\x_2\\ x_3\end{pmatrix}
+= \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix} \]
+only has the trivial solution (see \lref{ex:lsgsmenge-homogen}{above}). Hence, the solution set of the nonhomogeneous system is
+\[ \mathbb{L}=\{ \begin{pmatrix} 2 \\ 3 \\ -4 \end{pmatrix} \}. \]
+\end{tabs*}
+\end{example}}
+
+\lang{de}{
+\begin{quickcheck}
+
+    \begin{variables}
+    
+      \randint[Z]{a}{2}{2}
+      \randint[Z]{b}{6}{9}
+      \randint[Z]{c}{2}{5}
+      
+    
+      \function[calculate]{a3}{a*3}
+      \function[calculate]{b3}{b*3}
+      \function[calculate]{c2}{c*2}
+       \function[calculate]{c4}{c*4}
+      \function[calculate]{x}{(c2-b*2)/a}
+     
+    \end{variables}
+       \text{Betrachte die erweiterte Koeffizientenmatrix
+
+\[ \begin{pmatrix} \var{a} & \var{b}  &| & \var{c2}  \\ \var{a3} & \var{b3}  & |& \var{c4} \\\end{pmatrix}\cdot \]
+Was gilt für die dazugehörige Lösungsmenge?
+ 
+        } 
+    \begin{choices}{unique}
+
+      \begin{choice}
+        \text{$\mathbb{L}=\left\{ r\cdot \begin{pmatrix} \var{x} \\ 2 \end{pmatrix} \mid\, r\in \R \right\}$}
+        \solution{false}
+      \end{choice}
+
+      \begin{choice}
+        \text{\text{$\mathbb{L}=\left\{\begin{pmatrix} \var{x} \\ 2 \end{pmatrix}\right\}$}}
+        \solution{false}
+        \end{choice}
+      \begin{choice}
+        \text{\text{$\mathbb{L}=\emptyset$}}
+        \solution{true}
+      \end{choice}
+\end{choices}{unique}
+\explanation{Die Lösungsmenge entspricht der leeren Menge, da durch $(II)-3\cdot(I)$ die Zeile $0=-\var{c2}$ entsteht. Somit besitzt das LGS keine Lösung.}
+\end{quickcheck}}
+
+
+\lang{en}{
+\begin{quickcheck}
+
+    \begin{variables}
+    
+      \randint[Z]{a}{2}{2}
+      \randint[Z]{b}{6}{9}
+      \randint[Z]{c}{2}{5}
+      
+    
+      \function[calculate]{a3}{a*3}
+      \function[calculate]{b3}{b*3}
+      \function[calculate]{c2}{c*2}
+       \function[calculate]{c4}{c*4}
+      \function[calculate]{x}{(c2-b*2)/a}
+     
+    \end{variables}
+       \text{Consider the augmented matrix
+
+\[ \begin{pmatrix} \var{a} & \var{b}  &| & \var{c2}  \\ \var{a3} & \var{b3}  & |& \var{c4} \\\end{pmatrix}\cdot \]
+What is true for the corresponding solution set?
+ 
+        } 
+    \begin{choices}{unique}
+
+      \begin{choice}
+        \text{$\mathbb{L}=\left\{ r\cdot \begin{pmatrix} \var{x} \\ 2 \end{pmatrix} \mid\, r\in \R \right\}$}
+        \solution{false}
+      \end{choice}
+
+      \begin{choice}
+        \text{\text{$\mathbb{L}=\left\{\begin{pmatrix} \var{x} \\ 2 \end{pmatrix}\right\}$}}
+        \solution{false}
+        \end{choice}
+      \begin{choice}
+        \text{\text{$\mathbb{L}=\emptyset$}}
+        \solution{true}
+      \end{choice}
+\end{choices}{unique}
+\explanation{The solution set is the empty set, because the operation $(II)-3\cdot(I)$ creates the row $0=-\var{c2}$ is created. Therefore, the linear system has no solution.}
+\end{quickcheck}}
+
+\end{visualizationwrapper}
+
+\end{content}

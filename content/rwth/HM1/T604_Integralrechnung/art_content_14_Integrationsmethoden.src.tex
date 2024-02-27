@@ -1,0 +1,724 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Integrationsmethoden}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+
+\end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T305_Integrationstechniken/g_art_content_11_partielle_integration.meta.xml}{content_11_partielle_integration}
+    \link{generic_article}{content/rwth/HM1/T604_Integralrechnung/g_art_content_13_Integralbegriff.meta.xml}{content_13_Integralbegriff}
+    \link{generic_article}{content/rwth/HM1/T304_Integrierbarkeit/g_art_content_09_integrierbare_funktionen.meta.xml}{stammfunktion}
+    \link{generic_article}{content/rwth/HM1/T301_Differenzierbarkeit/g_art_content_02_ableitungsregeln.meta.xml}{abl-regeln}
+    \link{generic_article}{content/rwth/HM1/T211_Eigenschaften_stetiger_Funktionen/g_art_content_34_exp_und_log.meta.xml}{content_34_exp_und_log}
+    \link{generic_article}{content/rwth/HM1/T107_Integralrechnung/g_art_content_26_flaechen_zwischen_graphen.meta.xml}{lin-sub}
+    \link{generic_article}{content/rwth/HM1/T305_Integrationstechniken/g_art_content_13_partialbruchzerlegung.meta.xml}{content_13_partialbruchzerlegung}
+    \link{generic_article}{content/rwth/HM1/T103_Polynomfunktionen/g_art_content_10_polynomdivision.meta.xml}{polydiv}
+    \link{generic_article}{content/rwth/HM1/T305_Integrationstechniken/g_art_content_12_substitutionsregel.meta.xml}{substitution}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{4}
+\ombarticle{2}
+
+\lang{de}{\title{Integrationsmethoden}}
+\lang{en}{\title{Methods of integration}}
+ 
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22703}{Ticket 22703}
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\lang{de}{
+Wir haben im vorigen Kapitel  gesehen, dass
+die Bestimmung des Integrals einer Funktion $f$ über einem Intervall $[a;b]$
+am einfachsten ist, wenn man zu $f$ eine Stammfunktion $F$ kennt oder sie berechnen kann,
+weil dann nach dem \ref[content_13_Integralbegriff][Hauptsatz der Differential- und Integralrechnung]{sec:hauptsatz} gilt:
+\[  \int_a^b f(x)\, dx =[F(x)]_a^b=F(b)-F(a). \]
+Für einige elementare Funktionen wie die Potenzfunktionen, die Exponentialfunktion, Sinus und Kosinus haben wir 
+dort auch die Stammfunktionen gesehen. Für kompliziertere Funktionen, etwa wenn verschiedene Funktionen miteinander
+multipliziert werden, haben wir bisher kein Verfahren, um eine Stammfunktion zu ermitteln. 
+Die Produktregel und die Kettenregel führen auf Techniken, um in vielen dieser Fälle
+Stammfunktionen zu bestimmen.
+Diese behandeln wir nun. 
+}
+\lang{en}{
+We saw in the last chapter that integrating a function $f$ over an interval $[a, b]$
+is easiest if an antiderivative $F$ of $f$ is known or can be computed.
+In this case, the \ref[content_13_Integralbegriff][fundamental theorem of calculus]{sec:hauptsatz}
+states that \[  \int_a^b f(x)\, dx =[F(x)]_a^b=F(b)-F(a). \]
+We already know antiderivatives of certain elementary functions, such as the power functions, exponential, sine and cosine.
+However, we do not yet have any methods to determine
+antiderivatives of more complicated functions, such as when functions of different types
+are multiplied together. The product and chain rules yield techniques for determining
+antiderivatives in many such cases. We will consider this now.
+}
+
+
+\section{
+\lang{de}{Partielle Integration}
+\lang{en}{Integration by parts}
+}
+
+\lang{de}{
+Wir behandeln hier zunächst die \textit{partielle Integration}, die aus der Produktregel entstanden ist.
+}
+\lang{en}{
+First, we will discuss \textit{integration by parts}. This arises from the
+product rule.
+}
+
+
+\begin{theorem}[
+\lang{de}{Partielle Integration}
+\lang{en}{Integration by parts}]\label{thm:partint}
+\lang{de}{Es seien $u,v\colon [c,d]\to \R$ stetig differenzierbar (d.\,h. differenzierbar mit stetiger Ableitung). Dann gilt für alle $a,b\in [c,d]$ 
+ \[ \int_a^b u(x)\,v'(x)\;dx = \left[ u(x)\,v(x)\right]_a^b - \int_a^b u'(x)\,v(x)\;dx.
+  \]
+}
+\lang{en}{
+Let $u,v\colon [c,d]\to \R$ be continuously differentiable (i.e. differentiable with continuous derivatives).
+For all $a,b \in [c,d]$,
+ \[ \int_a^b u(x)\,v'(x)\;dx = \left[ u(x)\,v(x)\right]_a^b - \int_a^b u'(x)\,v(x)\;dx.
+  \]
+}
+  %\floatright{\href{https://www.hm-kompakt.de/video?watch=624}{\image[75]{00_Videobutton_schwarz}}}\\\\
+\end{theorem}
+
+\begin{proof*}
+\lang{de}{
+Aus der Produktregel wird die Gleichheit 
+\ref[content_11_partielle_integration][hier]{thm:partint}
+kurz hergeleitet.
+}
+\lang{en}{
+A short derivation of this identity from the product rule is given
+\ref[content_11_partielle_integration][here]{thm:partint}.
+}
+\end{proof*}
+
+\lang{de}{
+Die \textit{partielle Integration} \"uberf\"uhrt ein Integral in ein anderes, das (hoffentlich) 
+    einfacher zu l\"osen ist. Manchmal muss man die partielle Integration mehrmals anwenden, um zum Ziel zu kommen.
+    Aussichtsreiche Strategien lernt man durch typische Beispiele wie die folgenden.
+}
+
+\lang{en}{
+Integration by parts replaces an integral by a different integral that is (hopefully)
+easier to solve. In some cases, integration by parts must be applied more than once before it is successful.
+Effective strategies for integrating by parts can be learned by working through typical
+examples, such as the following:
+}
+
+\begin{example}\label{ex:1}
+\begin{tabs*}[\initialtab{0}]
+\tab{$\int_0^{2\pi} x\cdot \cos(x)\, dx$} 
+\lang{de}{
+Wir betrachten das Integral $\int_0^{2\pi} x\cdot \cos(x)\, dx$. \\
+W\"ahlen wir $u(x)=x$ und $v'(x)=\cos(x)$ mit $u'(x)=1$ und $v(x)=\sin(x),$ so erhalten wir
+\[ \int_0^{2\pi} x \cos(x)\; dx = [x \sin(x)]_0^{2\pi} - \int_0^{2\pi} 1\cdot\sin(x)\; dx.\]
+Für die Funktion $\sin(x)$ kennen wir aber eine Stammfunktion, nämlich $-\cos(x)$, d.\,h.
+\[ \int_0^{2\pi} x \cos(x)\; dx = [x \sin(x)]_0^{2\pi} - [-\cos(x)]_0^{2\pi} = [ x \sin(x) + \cos(x)]_0^{2\pi}.
+\]
+Zum einen zeigt dies, dass $x \sin(x) + \cos(x)$ eine Stammfunktion von $x\cos(x)$ ist, und zum anderen können wir schließlich das Integral berechnen als
+\[ \int_0^{2\pi} x \cos(x)\; dx= 2\pi\cdot \sin(2\pi)+\cos(2\pi) -\big( 0\cdot \sin(0)+\cos(0)\big)
+= 0+1-0-1=0.\]
+}
+\lang{en}{
+Consider the integral $\int_0^{2\pi} x\cdot \cos(x)\, dx$. \\
+If we take $u(x)=x$ and $v'(x)=\cos(x)$, with $u'(x)=1$ and $v(x)=\sin(x)$, then we find
+\[ \int_0^{2\pi} x \cos(x)\; dx = [x \sin(x)]_0^{2\pi} - \int_0^{2\pi} 1\cdot\sin(x)\; dx.\]
+We already know an antiderivative for $\sin(x)$, namely $-\cos(x)$. Therefore,
+\[ \int_0^{2\pi} x \cos(x)\; dx = [x \sin(x)]_0^{2\pi} - [-\cos(x)]_0^{2\pi} = [ x \sin(x) + \cos(x)]_0^{2\pi}.
+\]
+For one thing, this shows that $x \sin(x) + \cos(x)$ is an antiderivative of $x\cos(x)$. It also shows that we can evaluate the integral as
+\[ \int_0^{2\pi} x \cos(x)\; dx= 2\pi\cdot \sin(2\pi)+\cos(2\pi) -\big( 0\cdot \sin(0)+\cos(0)\big)
+= 0+1-0-1=0.\]
+}
+
+\tab{$\int_1^2 x^2\;e^x\;dx$} 
+\lang{de}{Wir betrachten das Integral $\int_1^2 x^2\;e^x\;dx$.\\
+Mit dem Ansatz $u(x)=x^2$ und $v'(x)=e^x$ ist $u'(x)=2x$ sowie $v(x)=e^x$ und damit
+\[ \int_1^2 x^2\;e^x\;dx = [x^2e^x]_1^2 - \int_1^2 2x e^x\;dx= [x^2e^x]_1^2 -2\int_1^2 x e^x\;dx  .\]
+Da wir auch keine Stammfunktion von $xe^x$ kennen, wenden wir für den letzten Term erneut partielle Integration an, diesmal mit
+\[ u(x)=x,\, v'(x)=e^x, \quad u'(x)=1,\, v(x)=e^x, \]
+und erhalten 
+\[\int_1^2 x e^x\;dx =[x\cdot e^x]_1^2 - \int_1^2 1\cdot e^x\;dx =[x\cdot e^x]_1^2 
+- [e^x]_1^2 =[xe^x-e^x]_1^2. \]
+Insgesamt also
+\begin{eqnarray*}
+  \int_1^2 x^2\;e^x\;dx &=& [x^2e^x]_1^2 - 2\cdot [xe^x-e^x]_1^2=[x^2e^x-2xe^x+2e^x]_1^2\\
+&=& [(x^2-2x+2)e^x]_1^2=(2^2-4+2)e^2-(1^2-2+2)e^1=2e^2-e.
+\end{eqnarray*}
+}
+\lang{en}{
+Considerthe integral $\int_1^2 x^2\;e^x\;dx$.
+Setting $u(x)=x^2$ and $v'(x)=e^x$, we have $u'(x)=2x$
+and $v(x)=e^x$ and therefore
+\[ \int_1^2 x^2\;e^x\;dx = [x^2e^x]_1^2 - \int_1^2 2x e^x\;dx= [x^2e^x]_1^2 -2\int_1^2 x e^x\;dx  .\]
+Since we do not know an antiderivative of $xe^x$ either,
+so we integrate the latter term by parts again, now with
+\[ u(x)=x,\, v'(x)=e^x, \quad u'(x)=1,\, v(x)=e^x. \]
+We find
+\[\int_1^2 x e^x\;dx =[x\cdot e^x]_1^2 - \int_1^2 1\cdot e^x\;dx =[x\cdot e^x]_1^2 
+- [e^x]_1^2 =[xe^x-e^x]_1^2. \]
+Altogether, 
+\begin{eqnarray*}
+  \int_1^2 x^2\;e^x\;dx &=& [x^2e^x]_1^2 - 2\cdot [xe^x-e^x]_1^2=[x^2e^x-2xe^x+2e^x]_1^2\\
+&=& [(x^2-2x+2)e^x]_1^2=(2^2-4+2)e^2-(1^2-2+2)e^1=2e^2-e.
+\end{eqnarray*}
+}
+
+\tab{$\int_1^e x\ln(x)\,dx$} 
+\lang{de}{Um das Integral $\int_1^e x\ln(x)\,dx$ zu berechnen, führt der Ansatz mit $u(x)=x$ und
+$v'(x)=\ln(x)$ nicht zum Erfolg, weil wir keine Stammfunktion von $\ln(x)$ kennen.
+Setzen wir jedoch $u(x)=\ln(x)$ und $v'(x)=x$, so erhalten wir $u'(x)=\frac{1}{x}$ und $v(x)=\frac{x^2}{2}$ und damit mit partieller Integration
+\begin{eqnarray*}
+ \int_1^e x\ln(x)\,dx &=& [\frac{x^2}{2}\cdot \ln(x)]_1^e -\int_1^e \frac{x^2}{2}\cdot \frac{1}{x} \, dx \\
+ &=& \left[\frac{x^2}{2}\cdot \ln(x)\right]_1^e -\frac{1}{2}\int_1^e x\, dx\\
+ &=&  \left[\frac{x^2}{2}\cdot \ln(x)\right]_1^e -\frac{1}{2}\cdot \left[\frac{x^2}{2}\right]_1^e =  \left[\frac{x^2}{2}\cdot \ln(x) -\frac{x^2}{4}\right]_1^e \\
+&=& \left( \frac{e^2}{2}\cdot 1- \frac{e^2}{4}\right) -\left( \frac{1}{2}\cdot 0- \frac{1}{4}\right) =  \frac{e^2}{4} +\frac{1}{4}.
+\end{eqnarray*}
+Da wir die Grenzen erst am Schluss eingesetzt haben, sehen wir auch, dass 
+$F(x)=\frac{x^2}{2}\cdot \ln(x) -\frac{x^2}{4}$ eine Stammfunktion für die Funktion
+$f(x)=x\ln(x)$ ist.
+}
+\lang{en}{
+Setting $u(x)=x$ and $v'(x)=\ln(x)$ 
+in the integral $\int_1^e x\ln(x)\,dx$ does not work because
+we do not know an antiderivative of $\ln(x)$.
+If we instead set $u(x)=\ln(x)$ and $v'(x)=x$,
+then $u'(x)=\frac{1}{x}$ and $v(x)=\frac{x^2}{2}$,
+and integration by parts yields
+\begin{eqnarray*}
+ \int_1^e x\ln(x)\,dx &=& [\frac{x^2}{2}\cdot \ln(x)]_1^e -\int_1^e \frac{x^2}{2}\cdot \frac{1}{x} \, dx \\
+ &=& \left[\frac{x^2}{2}\cdot \ln(x)\right]_1^e -\frac{1}{2}\int_1^e x\, dx\\
+ &=&  \left[\frac{x^2}{2}\cdot \ln(x)\right]_1^e -\frac{1}{2}\cdot \left[\frac{x^2}{2}\right]_1^e =  \left[\frac{x^2}{2}\cdot \ln(x) -\frac{x^2}{4}\right]_1^e \\
+&=& \left( \frac{e^2}{2}\cdot 1- \frac{e^2}{4}\right) -\left( \frac{1}{2}\cdot 0- \frac{1}{4}\right) =  \frac{e^2}{4} +\frac{1}{4}.
+\end{eqnarray*}
+Since we did not use the integration bounds until
+the final step, we see that
+$F(x)=\frac{x^2}{2}\cdot \ln(x) -\frac{x^2}{4}$
+is an antiderivative of $f(x)=x \ln(x)$.
+}
+\end{tabs*}
+\end{example}
+
+\lang{de}{
+Wir fassen die Strategien aus den ersten beiden Beispielen in der folgenden Bemerkung zusammen.
+}
+\lang{en}{
+The strategies used in the first two examples are
+summarized in the following remark.
+}
+
+
+\begin{remark}
+
+\lang{de}{Hat man das Produkt eines Polynoms $n$-ten Grades mit $\sin(x)$, $\cos(x)$ oder $e^x$, so führt partielle Integration nach $n$-facher Anwendung zum Erfolg.
+}
+\lang{en}{
+The product of a polynomial of degree $n$ with $\sin(x))$,
+$\cos(x)$ or $e^x$ can be integrated by integrating
+by parts $n$ times.
+}
+\end{remark}
+
+\begin{quickcheck}
+\lang{de}{\text{Wie wählen Sie $u$ und $v$, um $\int_a^b \sin(x)\cdot(x+1)\, dx$ mit partieller Integration in einem Schritt zu bestimmen?}
+}
+\lang{en}{
+\text{How should you choose $u$ and $v$ to integrate
+$\int_a^b \sin(x) \cdot (x+1) \, dx$, using 
+a single integration by parts?}
+}
+%\type{mc.unique}
+\lang{de}{
+\explanation{Wie in obiger Bemerkung erklärt, ist es geschickt, $u$ als Polynom zu wählen, damit $u'$ eine Konstante wird.}
+}
+\lang{en}{
+\explanation{As explained in the remark above,
+it is better to choose $u$ to be a polynomial,
+such that $u'$ is a constant.}
+}
+\begin{choices}{unique}
+\begin{choice}
+\text{$u(x) = \sin(x)$, $v'(x)=x+1$}
+\solution{false}
+\end{choice}
+\begin{choice}
+\text{$u(x) = x+1$, $v'(x)=\sin(x)$}
+\solution{true}
+\end{choice}
+\end{choices}
+\end{quickcheck}
+
+\begin{example}[
+\lang{de}{Faktor-1-Trick}
+\lang{en}{Introducing a 1}]\label{ex:int-ln}
+
+\lang{de}{Wir wollen eine Stammfunktion von $\ln(x)$ finden. Da es im obigen Beispiel von Erfolg gekrönt war, beim Integral von $x\ln(x)$ den Faktor $\ln(x)$ als $u(x)$ zu setzen, schreiben
+wir $\ln(x)=1\cdot \ln(x)$ und setzen $v'(x)=1$ und $u(x)=\ln(x)$.
+Damit sind $v(x)=x$ und $u'(x)=\frac{1}{x}$ und wir erhalten
+\begin{eqnarray*}
+ \int_a^b 1 \cdot \ln(x)\,dx &=& \left[ x\ln(x)\right]_a^b - \int_a^b x\cdot \frac{1}{x} \,dx
+= \left[ x\ln(x)\right]_a^b -\int_a^b 1\, dx \\
+&=&  \left[ x\ln(x)\right]_a^b - [x]_a^b
+= \left[ x\ln(x) -x \right]_a^b. 
+\end{eqnarray*}
+Also ist $x\ln(x) -x $ eine Stammfunktion von $\ln(x)$.
+}
+\lang{en}{
+Suppose we want to find an antiderivative of $\ln(x)$.
+In the example earlier, we were able to integrate
+$x\ln(x)$ by taking $u(x)$ to be the factor $\ln(x)$.
+Therefore, we write $\ln(x) = 1\cdot \ln(x)$ and set
+$v'(x)=1$ and $u(x)=\ln(x)$. Then $v(x)=x$ and $u'(x)=\frac{1}{x}$,
+and we find
+\begin{eqnarray*}
+ \int_a^b 1 \cdot \ln(x)\,dx &=& \left[ x\ln(x)\right]_a^b - \int_a^b x\cdot \frac{1}{x} \,dx
+= \left[ x\ln(x)\right]_a^b -\int_a^b 1\, dx \\
+&=&  \left[ x\ln(x)\right]_a^b - [x]_a^b
+= \left[ x\ln(x) -x \right]_a^b. 
+\end{eqnarray*}
+Hence, $x\ln(x) - x$ is an antiderivative of $\ln(x)$.
+}
+
+\end{example}
+
+\lang{de}{
+Manchmal erhält man bei der partiellen Integration auch ein reelles Vielfaches des ursprünglichen Integrals wieder. Durch Umformen der Gleichung kommt man dann auch zum Ziel (sofern der reelle Faktor nicht gleich $1$ ist).
+}
+
+\lang{en}{
+It sometimes happens that the result of integration by parts
+involves a real multiple of the original integral.
+In these cases, we can rearrange the equation to solve
+for the integral (as long as the multiple is not $1$).
+}
+
+
+\begin{example}
+\lang{de}{
+Wir betrachten wieder das Integral $\int_1^e x\ln(x)\,dx$ aus dem \lref{ex:1}{obigen Beispiel }. Da wir in Beispiel \ref{ex:int-ln} eine Stammfunktion $F(x)=x\ln(x) -x$ von $\ln(x)$ berechnet haben, können
+wir nun zur partiellen Integration auch den Ansatz $u(x)=x$, $v'(x)=\ln(x)$ machen mit $u'(x)=1$ und $v(x)=x\ln(x) -x$. Dann ist
+\begin{eqnarray*}
+  \int_1^e \textcolor{#0066CC}{x\ln(x)}\,dx &=& \left[ x(x\ln(x) -x)\right]_1^e - \int_1^e 1\cdot (x\ln(x) -x)\, dx\\
+&=&  \left[ x(x\ln(x) -x)\right]_1^e - \int_1^e x\ln(x) \, dx +  \int_1^e x\, dx \\
+&=&  \left[ x(x\ln(x) -x)\right]_1^e- \int_1^e \textcolor{#0066CC}{x\ln(x)} \, dx + \left[ \frac{x^2}{2}\right]_1^e .
+\end{eqnarray*}
+Das Integral $\int_1^e x\ln(x) \, dx $ können wir durch Addition auf die linke Seite bringen und erhalten 
+\[ 2\cdot  \int_1^e x\ln(x)\,dx  =\left[ x(x\ln(x) -x) +  \frac{x^2}{2}\right]_1^e, \]
+d.\,h.
+\[   \int_1^e x\ln(x)\,dx  =\left[ \frac{x}{2}(x\ln(x) -x) +  \frac{x^2}{4}\right]_1^e. \]
+Als Stammfunktion von $x\ln(x)$ erhalten wir also
+\[ \frac{x}{2}(x\ln(x) -x) +  \frac{x^2}{4}= \frac{x^2}{2}\cdot\ln(x) -\frac{x^2}{4},\]
+ was mit dem Ergebnis \lref{ex:1}{oben} übereinstimmt.
+}
+\lang{en}{
+We will consider the integral $\int_1^e x\ln(x)\,dx$ from \lref{ex:1}{the earlier example} again.
+In Example \ref{ex:int-ln}, we found the antiderivative
+$F(x) = x\ln(x) - x$ of $\ln(x)$. Therefore, we can now
+integrate by parts by setting $u(x)=x$ and $v'(x)=\ln(x)$,
+such that $u'(x)=1$ and $v(x)=x\ln(x)-x$. This yields
+\begin{eqnarray*}
+  \int_1^e \textcolor{#0066CC}{x\ln(x)}\,dx &=& \left[ x(x\ln(x) -x)\right]_1^e - \int_1^e 1\cdot (x\ln(x) -x)\, dx\\
+&=&  \left[ x(x\ln(x) -x)\right]_1^e - \int_1^e x\ln(x) \, dx +  \int_1^e x\, dx \\
+&=&  \left[ x(x\ln(x) -x)\right]_1^e- \int_1^e \textcolor{#0066CC}{x\ln(x)} \, dx + \left[ \frac{x^2}{2}\right]_1^e .
+\end{eqnarray*}
+After adding the integral $\int_1^e x\ln(x) \, dx $ to both sides, we find
+\[ 2\cdot  \int_1^e x\ln(x)\,dx  =\left[ x(x\ln(x) -x) +  \frac{x^2}{2}\right]_1^e, \]
+i.\,e.
+\[   \int_1^e x\ln(x)\,dx  =\left[ \frac{x}{2}(x\ln(x) -x) +  \frac{x^2}{4}\right]_1^e. \]
+This gives us the antiderivative
+\[ \frac{x}{2}(x\ln(x) -x) +  \frac{x^2}{4}= \frac{x^2}{2}\cdot\ln(x) -\frac{x^2}{4},\]
+of $x\ln(x)$, which agrees with our result \lref{ex:1}{above}.
+}
+\end{example}
+
+
+\section{
+\lang{de}{Allgemeine Substitutionsregel}
+\lang{en}{Integration by substitution}
+}
+
+\lang{de}{
+In diesem Abschnitt werden wir eine Integrationstechnik behandeln, die sich aus der
+Kettenregel ergibt.
+}
+\lang{en}{
+The integration technique described in this section
+is derived from the chain rule.
+}
+
+\begin{theorem}[
+\lang{de}{Substitutionsregel}
+\lang{en}{Integration by substitution}]\label{thm:substitutionsregel}
+\lang{de}{Es sei $I\subseteq \R$ ein Intervall und  $f\colon I\to\R$ habe eine Stammfunktion  $F.$\\
+  Weiter seien $\alpha < \beta$ und $g\colon [\alpha;\beta] \to I, \;x\mapsto g(x),$ stetig differenzierbar mit Ableitung $g'(x).$
+  Dann gilt: 
+    \[
+  \int_\alpha^\beta \;f(\,g(x)\,)\cdot g'(x)\;dx = \int_{g(\alpha)}^{g(\beta)}\; f(y)\;dy
+  = \left[ F(y) \right]_{g(\alpha)}^{g(\beta)}= \left[ F(g(x)) \right]_\alpha^\beta.
+  \]
+}
+\lang{en}{
+Let $I \subseteq \R$ be an interval and let $f\colon I\to\R$ have antiderivative $F$.
+Let $\alpha < \beta$ and let $g\colon [\alpha,\beta] \to I, \;x\mapsto g(x)$
+be continuously differentiable with derivative $g'(x)$. Then
+  \[
+  \int_\alpha^\beta \;f(\,g(x)\,)\cdot g'(x)\;dx = \int_{g(\alpha)}^{g(\beta)}\; f(y)\;dy
+  = \left[ F(y) \right]_{g(\alpha)}^{g(\beta)}= \left[ F(g(x)) \right]_\alpha^\beta.
+  \]
+}
+  %\floatright{\href{https://www.hm-kompakt.de/video?watch=628}{\image[75]{00_Videobutton_schwarz}}}\\\\
+\end{theorem}
+
+\begin{proof*}
+\lang{de}{Eine kurze Herleitung findet sich \ref[substitution][hier]{thm:substitutionsregel}.
+}
+\lang{en}{
+A short proof is given \ref[substitution][here]{thm:substitutionsregel}.
+}
+\end{proof*}
+
+\lang{de}{
+Wir diskutieren Anwendungen der Substitutionsregel.
+}
+\lang{en}{
+We will discuss some applications of integration
+by substitution.
+}
+\begin{example}
+\begin{tabs*}[\initialtab{0}]
+\tab{$\int_1^3 \frac{10}{(3-5x)^2}\;dx$} 
+\lang{de}{Wir betrachten das Integral $\int_1^3 \frac{10}{(3-5x)^2}\;dx$.\\
+Setzen wir $g:[1;3]\to (-\infty;0), \ g(x) = 3-5x$ und $f:(-\infty;0) \to \R, \ f(x) = \frac{-2}{x^2}$, dann ist
+\[ f(\,g(x)\,)\cdot g'(x)= \frac{-2}{g(x)^2}\cdot g'(x)=\frac{-2}{(3-5x)^2}\cdot (-5)
+= \frac{10}{(3-5x)^2} \]
+genau der angegebene Integrand. Eine Stammfunktion von $f$ ist gegeben durch
+$F(x)=\frac{2}{x}$ und daher ist
+\begin{align*}
+\int_1^3 \frac{10}{(3-5x)^2}\;dx &= \int_1^3\;f(g(x))\cdot g'(x)\;dx
+= \int_{g(1)}^{g(3)} f(y)\, dy \\
+&= \left[ F(y) \right]_{g(1)}^{g(3)} = \left[ \frac{2}{y} \right]_{-2}^{-12} \\ 
+&= -\frac{2}{12}+\frac{2}{2}=\frac{5}{6}\,.
+\end{align*}
+}
+\lang{en}{
+Consider the integral $\int_1^3 \frac{10}{(3-5x)^2}\;dx$.\\
+If we set $g:[1,3]\to(-\infty,0), \ g(x)=3-5x$ and $f:(-\infty,0)\to\R$, $f(x)=-\frac{2}{x^2}$, then
+\[ f(\,g(x)\,)\cdot g'(x)= \frac{-2}{g(x)^2}\cdot g'(x)=\frac{-2}{(3-5x)^2}\cdot (-5)
+= \frac{10}{(3-5x)^2} \]
+is exactly the given integrand.
+Since $f$ has antiderivative $F(x)=\frac{2}{x}$,
+\begin{align*}
+\int_1^3 \frac{10}{(3-5x)^2}\;dx &= \int_1^3\;f(g(x))\cdot g'(x)\;dx
+= \int_{g(1)}^{g(3)} f(y)\, dy \\
+&= \left[ F(y) \right]_{g(1)}^{g(3)} = \left[ \frac{2}{y} \right]_{-2}^{-12} \\ 
+&= -\frac{2}{12}+\frac{2}{2}=\frac{5}{6}\,.
+\end{align*}
+}
+
+\tab{$\int_0^1\; r\;\exp (-r^2/2)\;dr$} 
+\lang{de}{Wir betrachten das Integral $\int_0^1\; r\;\exp (-r^2/2)\;dr$.\\
+Hier bietet sich an, als innere Funktion $g(r)=-r^2/2$ zu setzen, wodurch $g'(r)=-r$ ist.
+Der Integrand ist dann
+\[ r\;\exp (-r^2/2)=-g'(r)\cdot e^{g(r)}. \]
+Also ist
+\[ \int_0^1\; r\;\exp (-r^2/2)\;dr =-\int_0^1 e^{g(r)}\cdot g'(r)\, dr
+= -\int_{g(0)}^{g(1)} e^{x}\;dx =- \left[ e^x\right]_{0}^{-1/2}
+= -\frac{1}{\sqrt{e}} +1.
+\]
+Analog kann man so Funktionen der Art  $x\cdot f(x^2)$ oder allgemeiner $x^{n-1}\cdot f(x^n)$ integrieren, wenn f\"ur
+$f$ eine Stammfunktion bekannt ist.
+}
+\lang{en}{
+Consider the integral $\int_0^1\; r\;\exp (-r^2/2)\;dr$.
+It is natural to take $g(r) = -r^2 / 2$ as the inner function,
+such that $g'(r) = -r$. The integrand is then
+\[ r\;\exp (-r^2/2)=-g'(r)\cdot e^{g(r)}. \]
+Therefore,
+\[ \int_0^1\; r\;\exp (-r^2/2)\;dr =-\int_0^1 e^{g(r)}\cdot g'(r)\, dr
+= -\int_{g(0)}^{g(1)} e^{x}\;dx =- \left[ e^x\right]_{0}^{-1/2}
+= -\frac{1}{\sqrt{e}} +1.
+\]
+Functions of the form $x \cdot f(x^2)$ or more generally
+$x^{n-1} \cdot f(x^n)$ can be integrated similarly,
+as long as an antiderivative of $f$ is known.
+}
+%\tab{$\int_0^{\pi/4} \tan(t)\,dt$} Wir betrachten das Integral  $\int_0^{\pi/4} \tan(t)\,dt$.\\
+%Zunächst ist ja $\tan(t)= \frac{\sin(t)}{\cos(t)}=\sin(t)\cdot (\cos(t))^{-1}$.
+%Weil die Ableitung von $\cos(t)$ die Funktion $-\sin(t)$ ist, gilt also
+%$\tan(t)=-g'(t)\cdot g(t)^{-1}$ für $g(t)=\cos(t)$. Wir müssen aber auch aufpassen, dass wir nicht über eine 
+%Definitionslücke der Funktion $x \mapsto x^{-1}$ integrieren und auch eine richtige Stammfunktion finden. 
+%Daher betrachten wir den Wertebereich von $g(x)$: Für jeden Wert $x \in [0 ; \frac{\pi}{4}]$ ist $g(x)$ positiv. Damit ist
+%\begin{align*} 
+%\int_0^{\pi/4} \tan(t)\;dt \ &= \int_0^{\pi/4}-g'(t)\cdot g(t)^{-1} \;dt = 
+%-\int_{g(0)}^{g(\pi/4)} x^{-1}\; dx\\
+% &= - \big[ \ln({|x|})\big]_{g(0)}^{g(\pi/4)} = -\big[ \ln({|\cos(t)|})\big]_0^{\pi/4} \\
+% &= - \ln({|\cos(\frac{\pi}{4})|}) + \ln({|\cos(0)|})=-\ln(\frac{\sqrt{2}}{2}) + \ln(1)\\
+% & =-\ln(2^{-1/2})=\frac{1}{2}\cdot \ln(2).
+%\end{align*}
+%Hier wurden im letzten Schritt die \ref[content_34_exp_und_log][Eigenschaften des Logarithmus]{rule:ln} genutzt.
+\end{tabs*}
+\end{example}
+
+
+\section{
+\lang{de}{Anmerkungen zur Substitution}
+\lang{en}{Remarks on substitution}
+}
+
+\lang{de}{
+Häufig zu finden ist auch eine einfachere Version der Substitutionsregel, die 
+\emph{lineare Substitution}. Diese ist der Spezialfall
+ der allgemeineren Substitutionsregel, wenn die innere Funktion $g(x)=mx+b$ ist.
+Die Aussage lautet dann wie folgt:
+}
+\lang{en}{
+A simpler version of integration by substitution,
+\emph{integration by linear substitution}, is often useful.
+This is the special case of integration by substitution
+where the inner function is $g(x)=mx+b$. The rule is then:
+}
+ 
+
+ \begin{rule}[
+ \lang{de}{Lineare Substitution}
+ \lang{en}{Integration by linear substitution}]
+ \label{rule:lin-subst}
+ \lang{de}{Wenn $F(x)$ eine Stammfunktion von $f(x)$ ist und Konstanten $m \neq 0$ und 
+ $b \in \mathbb{R}$ gegeben sind, so ist
+ \[ 
+ \frac{1}{m} F(mx+b)
+ \]
+ eine Stammfunktion von $f(mx+b)$.
+ }
+ \lang{en}{
+  Let $F(x)$ be an antiderivative of $f(x)$, and suppose $m \neq 0$
+  and $b \in \mathbb{R}$ are constants. Then
+  \[ 
+ \frac{1}{m} F(mx+b)
+ \]
+ is an antiderivative of $f(mx+b)$.
+ }
+ \end{rule}
+
+ \lang{de}{
+Auch bei der Frage, wie man die Substitution aufschreibt, gibt es verschiedene Möglichkeiten. Die folgende Bemerkung behandelt eine 
+nützliche und weit verbreitete Schreibweise. 
+}
+\lang{en}{
+There are also various ways to write out an
+integration by substitution. We will describe a common
+one in the following remark.
+}
+\begin{remark}
+\lang{de}{
+Weit verbreitet in der Literatur ist das folgende Kalkül:
+Bestimmen möchten wir $\int_a^b f(g(x)) g'(x) \, dx$. Wir wählen als Substitution $t = \textcolor{#0066CC}{g(x)}$.
+Die Ableitung können wir auch als $\frac{dt}{dx} = g'(x)$ schreiben.
+Umgeformt ergibt dies $\textcolor{#CC6600}{dx} = \frac{dt}{g'(x)}$.
+Durch Ersetzen der Ausdrücke mit $x$ und entsprechendem Kürzen bekommen wir die bekannte Formel
+\[
+\int_{x=a}^{x=b} f(\textcolor{#0066CC}{g(x)}) \cdot g'(x)\, \textcolor{#CC6600}{dx} = \int_{t=g(a)}^{t=g(b)} f(t)\, dt.
+\]
+Daher stammt auch der Name der Substitutionsregel.
+}
+\lang{en}{
+The following procedure is commonly used in the literature.
+Suppose we want to find $\int_a^b f(g(x)) g'(x) \, dx$.
+Take $t = \textcolor{#0066CC}{g(x)}$ as our substitution.
+The derivative can also be written as $\frac{dt}{dx} = g'(x)$.
+Rearranging this, we obtain $\textcolor{#CC6600}{dx} = \frac{dt}{g'(x)}$.
+After substituting the expressions involving $x$
+and simplifying appropriately, we obtain the familiar formula
+\[
+\int_{x=a}^{x=b} f(\textcolor{#0066CC}{g(x)}) \cdot g'(x)\, \textcolor{#CC6600}{dx} = \int_{t=g(a)}^{t=g(b)} f(t)\, dt.
+\]
+This is incidentally the source of the name "integration by substitution".
+}
+
+\lang{de}{
+Hier sollte aber darauf geachtet werden, dass die Substitution umkehrbar ist, d.\,h. $g:[a;b]\to \R$ injektiv. Ebenso 
+darf die ursprüngliche Variable nach der Substitution nicht mehr im Integral auftauchen.
+}
+\lang{en}{
+Be careful to ensure that the substitution is invertible,
+i.e. that $g:[a,b]\to\R$ is one-to-one. The original variable
+must also have disappeared completely from the integral after the substitution.
+}
+\end{remark}
+\lang{de}{
+Wir diskutieren ein Beispiel dazu.
+}
+\lang{en}{
+Let us consider an example.
+}
+\begin{example}
+\lang{de}{
+Wir möchten das Integral $\int_0^{\pi/4} \frac{2\sin(x)}{\cos(x)^2}\, dx$ bestimmen.
+Wir wählen $g(x)=\cos(x)$. Dann ist
+\[
+\int_0^{\pi/4} \frac{-2g'(x)}{g(x)^2} \, dx = -2\cdot \int_{g(0)}^{g(\pi/4)} \frac{1}{u^2}\, du = \left[\frac{2}{u}\right]_{1}^{1/\sqrt{2}}= 2\sqrt{2} -2.
+\]
+In anderer Schreibweise gestaltet sich die Rechnung folgendermaßen: Wir substituieren 
+$t = h(x) =  \textcolor{#0066CC}{\cos(x)}$ und haben dann
+\[
+\frac{dt}{dx} = h'(x) = -\sin(x) \Leftrightarrow \textcolor{#CC6600}{dx} = \frac{dt}{-\sin(x)}.
+\]
+Wenn wir dies im Integral einsetzen, erhalten wir
+\[
+\frac{2 \sin(x) \, \textcolor{#CC6600}{dx}}{\textcolor{#0066CC}{\cos(x)}^2} = \frac{2\sin(x) dt}{-\sin(x) t^2} = \frac{2 dt}{-t^2}
+\]
+und erhalten das Integral als
+\[
+\int_0^{\pi/4} \frac{2 \sin(x)}{\cos(x)^2} \, dx = \int_{h(0)}^{h(\pi/4)} \frac{2}{-t^{2}}\, dt = \left[2\cdot \frac{1}{{t}}\right]_{h(0)}^{h(\pi/4)}
+= \left[\frac{2}{{\cos(x)}}\right]_{0}^{\pi/4}=2\sqrt{2}-2.
+\]
+Dies ist das gleiche Ergebnis wie oben. Wie die Rechnung zeigt, ist es auch möglich und auch häufig sinnvoll, am Ende
+wieder zur ursprünglichen Variable und den ursprünglichen Integralgrenzen zurückzukehren. 
+}
+\lang{en}{
+Suppose we want to compute the integral $\int_0^{\pi/4} \frac{2\sin(x)}{\cos(x)^2}\, dx$.
+Take $g(x)=\cos(x)$. Then,
+\[
+\int_0^{\pi/4} \frac{-2g'(x)}{g(x)^2} \, dx = -2\cdot \int_{g(0)}^{g(\pi/4)} \frac{1}{u^2}\, du = \left[\frac{2}{u}\right]_{1}^{1/\sqrt{2}}= 2\sqrt{2} -2.
+\]
+In the other notation, the calculation is as follows.
+We substitute $t = h(x) =  \textcolor{#0066CC}{\cos(x)}$, such that
+\[
+\frac{dt}{dx} = h'(x) = -\sin(x) \Leftrightarrow \textcolor{#CC6600}{dx} = \frac{dt}{-\sin(x)}.
+\]
+Plugging this into the integrand, we find
+\[
+\frac{2 \sin(x) \, \textcolor{#CC6600}{dx}}{\textcolor{#0066CC}{\cos(x)}^2} = \frac{2\sin(x) dt}{-\sin(x) t^2} = \frac{2 dt}{-t^2}
+\]
+and obtain the integral
+\[
+\int_0^{\pi/4} \frac{2 \sin(x)}{\cos(x)^2} \, dx = \int_{h(0)}^{h(\pi/4)} \frac{2}{-t^{2}}\, dt = \left[2\cdot \frac{1}{{t}}\right]_{h(0)}^{h(\pi/4)}
+= \left[\frac{2}{{\cos(x)}}\right]_{0}^{\pi/4}=2\sqrt{2}-2.
+\]
+This is the same result as before. As this computation shows,
+it is possible and often worthwhile to revert
+back to the original variable and the original bounds
+of integration at the end.
+}
+\end{example}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{1}
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{a}{3}{5}
+            \randint[Z]{n}{-1}{4}
+		    \function[normalize]{f}{n*2*a*x*cos(a*x^2)}
+            \function[normalize]{g}{a*x^2}
+			\function[normalize]{ff}{n*sin(a*x^2)}
+			\function[calculate]{ffupper}{n*sin(a*(pi/2))}
+			\function[calculate]{fflower}{0}
+			\function[calculate]{sol}{ffupper-fflower}
+		\end{variables}
+        
+            \lang{de}{\text{Bestimmen Sie den Wert des folgenden Integrals:\\ 
+			$\int_{0}^{\sqrt{\frac{\pi}{2}}} (\var{f})dx=$\ansref.}}	
+           \lang{en}{\text{Evaluate the following integral:\\
+           $\int_{0}^{\sqrt{\frac{\pi}{2}}} (\var{f})dx=$\ansref.}}
+
+		\begin{answer}
+			\solution{sol}
+		\end{answer}
+		\explanation{ \lang{de}{Eine Stammfunktion von $f(x)=\var{f}$ ist $F(x)=\var{ff}$ (substituiere $g(x)=\var{g}$).\\
+		Damit ist $\int_{0}^{\sqrt{\frac{\pi}{2}}} (\var{f})dx=F(\sqrt{\frac{\pi}{2}})-F(0)=\var{ffupper}-\var{fflower}=\var{sol}$.
+    \lang{en}{$F(x)=\var{ff}$ is an antiderivative of $f(x)=\var{f}$. (Substitute $g(x)=\var{g}$.)\\
+    Hence, $\int_{0}^{\sqrt{\frac{\pi}{2}}} (\var{f})dx=F(\sqrt{\frac{\pi}{2}})-F(0)=\var{ffupper}-\var{fflower}=\var{sol}$.}}
+		}
+
+	\end{quickcheck}
+\end{quickcheckcontainer}
+
+\lang{de}{
+Für die Funktionen $f(x)=\frac{1}{x^n}$ mit fester natürlicher Zahl $n$ haben wir
+Stammfunktionen kennengelernt. Diese waren gegeben durch
+\begin{align*}
+  F(x) &=\ln(|x|),\quad \text{falls } &f(x)=\frac{1}{x},\\
+  F(x) &=\frac{1}{(1-n)x^{n-1}},\quad \text{falls } &f(x)=\frac{1}{x^n}\,\text{ mit }n>1.
+\end{align*}
+}
+\lang{en}{
+We have already seen antiderivatives of the functions
+$f(x)=\frac{1}{x^n}$, where $n$ is a fixed natural number. Namely,
+\begin{align*}
+  F(x) &=\ln(|x|),\quad \text{if } &f(x)=\frac{1}{x},\\
+  F(x) &=\frac{1}{(1-n)x^{n-1}},\quad \text{if } &f(x)=\frac{1}{x^n}\,\text{ with }n>1.
+\end{align*}
+}
+
+\lang{de}{
+Mit Hilfe der linearen Substitution lassen sich
+auch Stammfunktionen für negative Potenzen beliebiger linearer Funktionen $g(x)=mx+b$ angeben.
+}
+\lang{en}{
+Using the linear substitution rule, we can state
+antiderivatives for negative powers of arbitrary linear
+functions $g(x)=mx+b$.
+}
+
+\begin{rule}\label{rule:linearrational}
+\lang{de}{
+Es seien $n\in \N$ eine natürliche Zahl und $m,b\in \R$ reelle Zahlen mit $m\neq 0$. Weiter sei
+ \[ h:\R\setminus \{-\frac{b}{m}\}\to \R, \ \ h(x) =  \frac{1}{(mx+b)^{n}}. \]
+ Dann ist eine Stammfunktion von $h$ gegeben durch
+ \[ H(x)=\left\{ \begin{matrix} \frac{\ln{(|mx+b|)}}{m}, & \text{falls }n=1,\\
+ \frac{(mx+b)^{-n+1}}{(1-n)m},& \text{falls }n>1.
+ \end{matrix} \right. \]
+}
+\lang{en}{
+Let $n\in \N$ be a natural number and let $m,b \in \R$ be
+real numbers with $m \ne 0$. Define
+ \[ h:\R\setminus \{-\frac{b}{m}\}\to \R, \ \ h(x) =  \frac{1}{(mx+b)^{n}}. \]
+ Then $h$ has antiderivative
+  \[ H(x)=\left\{ \begin{matrix} \frac{\ln{(|mx+b|)}}{m}, & \text{if }n=1,\\
+ \frac{(mx+b)^{-n+1}}{(1-n)m},& \text{if }n>1.
+ \end{matrix} \right. \]
+}
+ \end{rule}
+
+ \begin{proof*}
+ \lang{de}{
+ Schreibt man $h(x)=f(g(x))$ mit äußerer Funktion $f(x)=x^{-n}$ und innerer Funktion $g(x)=mx+b$, so
+ ist nach der linearen Substitution die
+ Stammfunktion genau die angegebene Funktion.
+ }
+ \lang{en}{
+  Write $h(x)=f(g(x))$ with the outer function
+  $f(x)=x^{-n}$ and inner function $g(x)=mx+b$.
+  The claimed antiderivative results from the
+  linear substitution rule.
+ }
+ \end{proof*}
+
+ 
+
+
+\end{content}

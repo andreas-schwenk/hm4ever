@@ -1,0 +1,215 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Problem 3.2}
+    \lang{de}{Quadratische Funktionen: Scheitelform bestimmen und Parabel anpassen}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+  \begin{taxonomy}
+        \difficulty{3}
+        \usage{FH Aachen, Mathematische Grundlagen}
+        \objectives{analyze,understand}
+        \topic{analysis1/functions/graph_of_function}
+  \end{taxonomy}
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/32294}{Ticket 32294}
+\end{block}
+\begin{block}[annotation]
+Copy of : /home/mumie/checkin/content/playground/HM4mint-Testaufgaben/T102neu_Einfache_Reelle_Funktionen/prb_jsx_QuadFunk_SPF.src.tex
+\end{block}
+
+
+\begin{block}[annotation]
+(B. Guyet)\\
+Weiterentwicklung basierend auf Kopien von: \\
+/home/mumie/checkin/content/playground/Andreas_Maurischat/grafischeAufgaben/prb_QuadFunk_A3.3.src.tex
+\\
+/home/mumie/checkin/content/pool/fh_aachen/MGI/Quadratische_Funktionen/prb_QuadFunk_A3.3.src.tex
+\end{block}
+
+\begin{block}[annotation]
+ Bestimmung einiger Parabeleigenschaften und verschiedener Punkten auf der Parabel, insbesondere des
+ Scheitelpunkts. Grafische Bestimmung der Lage der Parabel unter Verwendung der berechneten Punkte.
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+\begin{visualizationwrapper}
+
+
+\begin{genericJSXVisualization}
+	\begin{variables}
+  		\point[editable]{S}{real}{0,0}
+		\point[editable]{P}{real}{1,1}
+        \function{f}{real}{(P[y]-S[y])/((P[x]-S[x])*(P[x]-S[x]))*(x-S[x])*(x-S[x])+S[y]}
+        \number{sx}{real}{S[x]}
+        \number{sy}{real}{S[y]}
+        \number{px}{real}{P[x]}
+        \number{py}{real}{P[y]}
+    \end{variables}
+\color{f}{RED}
+\label{S}{S}
+\label{P}{P}
+\label{f}{f}
+\answer{sx}{3,1}
+\answer{sy}{3,2}
+\answer{px}{3,3}
+\answer{py}{3,4}
+
+	\begin{canvas}
+        \snapToGrid{0.05,0.05}
+        \plotSize{400,400}
+        \plotLeft{-5}
+        \plotRight{5}
+        \plot[coordinateSystem,showPointCoords]{S,P,f}
+	\end{canvas}
+
+\end{genericJSXVisualization}
+
+\end{visualizationwrapper}
+
+   \begin{problem} 
+    \begin{variables}
+              \randint[Z]{mz}{-10}{10}
+              \randint{mn}{1}{5}
+              \function[calculate]{m}{mz/mn}  % Steckungsfaktor der Parabel
+              \randint{ys}{-3}{3}             % y-Koordinate des Scheitelpunkts
+              \randint{xs}{-3}{3}             % x-Koordinate des Scheitelpunkts
+              \randadjustIf{mz}{m=1 AND xs=0 AND ys=0}
+            % Scheitelpunktform der Parabel
+              \function{f0}{m*(x-xs)^2+ys}          % Scheitelpunktform der Parabel
+              \function[expand, normalize]{f}{f0}  % expandiert zu ax^2+bx+c                
+              \function[calculate]{px0}{xs+1}      
+              \substitute[calculate]{py0}{f0}{x}{px0}                     
+            % Parameter der Parabel f(x)=ax^2+bx+c
+              \function[calculate, normalize]{a}{m}
+              \function[calculate, normalize]{b}{-2*m*xs}
+              \function[calculate, normalize]{c}{m*xs^2+ys}
+            % Anzahl Nullstellen              
+              \function[calculate, normalize]{D}{-4*m*ys}      % Diskriminante Mitternachtsformel b^2-4*a*c
+              \randint{nst}{0}{2}    % Anzahl Nullstellen
+              \begin{switch}  
+               \begin{case}{D<0}
+                \number{nst}{0}
+               \end{case} 
+               \begin{case}{D=0}
+                \number{nst}{1}
+               \end{case} 
+               \begin{default}
+                \number{nst}{2}
+                \end{default}         
+              \end{switch}       
+         \end{variables}
+% (a)         
+     \begin{question}
+     \text{Gegeben ist die quadratische Funktion $f:\, \R \rightarrow \R$,  $\; f(x)=\var{f}$.\\ 
+           Geben Sie an, wie oft der Funktionsgraph von 
+           $f$ die $x-$Achse schneidet: \ansref ,\\
+           an welcher Stelle er die $y-$Achse schneidet: $\;y_0=$ \ansref \\
+           und berechnen Sie den Funktionswert von $f$ an der Stelle $x_1=\var{px0}$.
+           \\
+           $\; f(\var{px0})=$\ansref 
+           }
+     \field{rational}
+% \debug[a,b,c,nst,xs,ys,px0,py0]
+      \begin{answer}
+        \type{input.number}
+        \solution{nst}
+        \explanation{Die Anzahl der Nullstellen kann mithilfe der Diskriminante 
+                    aus der Mitternachtsformel % $\,(D=b^2-4ac)\,$ 
+                    bestimmt werden. }
+      \end{answer}   
+      \begin{answer}
+        \type{input.function}
+        \solution{c}
+        \checkAsFunction[5E-1]{}{-1}{1}{10}
+        \explanation{Die Schnittstelle mit der $y-$Achse entspricht dem 
+                    Funktionswert von $f$ an der Stelle $x_0=0$.}
+       \end{answer}
+       \begin{answer}
+        \type{input.function}
+        \solution{py0}
+        \checkAsFunction[5E-1]{}{-1}{1}{10}
+        \explanation{Das ist nicht $\,f(\var{px0})$. }
+       \end{answer}
+
+     \end{question}         
+% (b)         
+     \begin{question}
+     \text{Bringen Sie den Funktionsterm von $f$ in Scheitelpunktform:\\
+     $f(x)=$ \ansref.}
+     
+     \field{rational}
+     
+       \begin{answer}
+        \type{input.function}
+        \solution{f0}
+        \inputAsFunction{x}{ant1}
+        \checkStringsForRelation{count(x,ant1)=1 AND equal(ant1,f0)}
+        \checkAsFunction{x}{-1}{1}{10}
+       \end{answer} 
+       \explanation[count(x,ans_1)!=1]{Das ist keine Scheitelpunktform.}
+       \explanation[count(x,ans_1)=1]{Leider falsch. Klammern Sie zuerst den Vorfaktor $\var{m}$ aus und 
+                   machen Sie dann eine quadratische Ergänzung.}
+     \end{question}
+% (c)      
+     \begin{question}
+       \begin{variables}
+        \earlierAnswer{f}{2,1}
+       \end{variables}          
+       \precision{1}
+          \type{input.generic}
+          \field{real}
+               \text{Verschieben Sie anschließend in der Grafik den Punkt $S$ in den Scheitelpunkt
+               der Parabel und den Punkt $P$ in einen beliebigen anderen der zuvor berechneten Punkte,
+               so dass der Funktionsgraph der Funktion $f(x)$ entsteht.}        
+     \begin{answer}
+      \type{graphics.number}
+      \solution{xs}
+     \end{answer}          
+     \begin{answer}
+      \type{graphics.number}
+      \solution{ys}
+     \end{answer}                    
+     \begin{answer}
+      \type{graphics.function}
+      \solution{px0}
+      \inputAsFunction{}{px}
+     \end{answer}
+     \begin{answer}
+      \type{graphics.function}
+      \solution{py0}
+      \inputAsFunction{}{py}
+      \checkFuncForZero[1e-1]{f[px]-py}{1}{2}{2}
+     \end{answer}
+     \explanation[NOT[equal(ans_1,xs)] AND NOT[equal(ans_2,ys)]]{Der Scheitelpunkt ist falsch.}
+     \explanation[NOT[equal(ans_1,xs)] AND [equal(ans_2,ys)]]{Der Scheitelpunkt hat die richtige $y$-Koordinate, 
+     aber nicht die richtige $x$-Koordinate.}
+     \explanation[NOT[equal(ans_2,ys)] AND [equal(ans_1,xs)]]{Der Scheitelpunkt hat die richtige $x$-Koordinate, 
+     aber nicht die richtige $y$-Koordinate.}
+     \explanation[[equal(ans_1,xs)] AND [equal(ans_2,ys)]]{Der Scheitelpunkt ist richtig, aber der Punkt $P$ 
+     stimmt noch nicht.}
+   \end{question}
+
+   
+ \end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

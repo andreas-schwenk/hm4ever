@@ -1,0 +1,64 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{}
+    \lang{de}{A02: Produktionsmenge}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A02: Produktionsmenge}}
+\lang{en}{\title{A02: Production quantity}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24075}{Ticket 24075}
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+     \begin{problem}
+          \begin{variables}
+                \drawFromSet{P}{3000,3500,4000,4500,5000}
+                \drawFromSet{n}{7,8,9,10,11,12}
+                \drawFromSet{c}{70,75,80,85}
+                \function{f}{c-n^0,5}
+                \function{cp}{P+c*n-2*n^1,5/3}
+                \function{sol}{floor(cp)}
+          \end{variables}
+         
+          \begin{question}
+               \type{input.number}
+               \lang{de}{\text{Ein Unternehmen produziert \var{P} Stück eines Gutes am Tag. Die 
+               Grenzproduktivität für zusätzlich eingesetzte Arbeitskräfte beträgt 
+               $f'(r)=\var{c}-\sqrt{r}$. Wieviel Stück können produziert werden, wenn 
+               \var{n} zusätzliche Arbeitskräfte eingesetzt werden?\\$S=$\ansref}}
+               \lang{en}{\text{A company produces \var{P} units of a good per day. The 
+               marginal productivity for additional labour employed is 
+               $f'(r)=\var{c}-\sqrt{r}$. How many units can be produced if 
+               \var{n} additional labour is used?\\$S=$\ansref}}
+               \begin{answer}
+                    \solution{sol}
+               \end{answer}
+               \lang{de}{\explanation{Mit Hilfe des Integrals $\int_0^{\var{n}}(\var{c}-\sqrt{r})dr$ kann die 
+               zusätzlich produzierte Stückzahl errechnet werden. }}
+               \lang{en}{\explanation{The additional number of pieces produced can be 
+               calculated using the integral $\int_0^{\var{n}}(\var{c}-\sqrt{r})dr$. }}
+          \end{question}     
+     \end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

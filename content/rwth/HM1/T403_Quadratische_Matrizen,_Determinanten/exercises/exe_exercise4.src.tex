@@ -1,0 +1,506 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü04: Inverse Matrix}
+    \lang{en}{Ex04: The inverse matrix}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+
+\title{\lang{de}{Ü04: Inverse Matrix}  \lang{en}{Ex04: The inverse matrix}}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/11359}{Ticket 11359}
+\end{block}
+
+%######################################################FRAGE_TEXT
+\lang{de}{ 
+Untersuchen Sie jede der folgenden Matrizen auf Invertierbarkeit und
+bestimmen Sie gegebenenfalls die inverse Matrix.
+\begin{align*}
+\text{a) }
+\left( \begin{smallmatrix}
+0 & 0 & 1 & 0 \\
+0 & -1 & 0 & -3 \\
+1 & 2 & 0 & 6 \\
+0 & 0 & 0 & 1 
+\end{smallmatrix} \right), \qquad
+\text{b) }
+\left( \begin{smallmatrix}
+3 & 4 \\
+-1 & 2 
+\end{smallmatrix} \right) \\
+\text{c) }
+\left( \begin{smallmatrix}
+2 & 3 & -4 \\
+3 & 3 & -1 \\
+0 & 3 & -10 
+\end{smallmatrix} \right), \qquad
+\text{d) }
+\left( \begin{smallmatrix}
+2 & -1 & 3 \\
+7 & 3 & 0 \\
+-1 & 2 & -4 
+\end{smallmatrix} \right).
+\end{align*}
+}
+
+\lang{en}{ 
+Examine each of the following matrices for invertibility and determine if applicable the inverse matrix.
+\begin{align*}
+\text{a) }
+\left( \begin{smallmatrix}
+0 & 0 & 1 & 0 \\
+0 & -1 & 0 & -3 \\
+1 & 2 & 0 & 6 \\
+0 & 0 & 0 & 1 
+\end{smallmatrix} \right), \qquad
+\text{b) }
+\left( \begin{smallmatrix}
+3 & 4 \\
+-1 & 2 
+\end{smallmatrix} \right) \\
+\text{c) }
+\left( \begin{smallmatrix}
+2 & 3 & -4 \\
+3 & 3 & -1 \\
+0 & 3 & -10 
+\end{smallmatrix} \right), \qquad
+\text{d) }
+\left( \begin{smallmatrix}
+2 & -1 & 3 \\
+7 & 3 & 0 \\
+-1 & 2 & -4 
+\end{smallmatrix} \right).
+\end{align*}
+}
+
+%##################################################ANTWORTEN_TEXT
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{   Antwort   } \lang{en}{Answer}}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   Die Matrix in c) ist nicht invertierbar.
+Die Inversen der übrigen Matrizen sind:
+\[
+\text{a) } \left( \begin{smallmatrix}0 & 2 & 1 & 0 \\ 0 & -1 & 0 & -3 \\ 1 & 0 & 0 & 0 \\ 0 & 0 & 0 & 1 \end{smallmatrix} \right), \quad
+\text{b) } \left( \begin{smallmatrix} \frac{1}{5} & -\frac{2}{5} \\ \frac{1}{10} & \frac{3}{10} \end{smallmatrix} \right), \quad
+\text{d) } \left( \begin{smallmatrix} 12 & -2 & 9 \\ -28 & 5 & -21 \\ -17 & 3 & -13  \end{smallmatrix} \right).
+\]
+    }
+\lang{en}{   The matrix in c) is not invertible.
+The inverse matrices of the other matrices are:
+\[
+\text{a) } \left( \begin{smallmatrix}0 & 2 & 1 & 0 \\ 0 & -1 & 0 & -3 \\ 1 & 0 & 0 & 0 \\ 0 & 0 & 0 & 1 \end{smallmatrix} \right), \quad
+\text{b) } \left( \begin{smallmatrix} \frac{1}{5} & -\frac{2}{5} \\ \frac{1}{10} & \frac{3}{10} \end{smallmatrix} \right), \quad
+\text{d) } \left( \begin{smallmatrix} 12 & -2 & 9 \\ -28 & 5 & -21 \\ -17 & 3 & -13  \end{smallmatrix} \right).
+\]
+    }
+
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung a)    }   \lang{en}{Solution a)}}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   
+Um Invertierbarkeit zu überprüfen und gegebenfalls die Inverse zu bestimmen, wendet man das Gauß-Verfahren auf 
+die um die Einheitsmatrix erweiterte Matrix an:
+\begin{eqnarray*}
+&& \begin{pmatrix} 
+0 & 0 & 1 & 0 &|&  1 & 0 & 0 & 0\\
+0 & -1 & 0 & -3 &|&  0 & 1 & 0 & 0\\
+1 & 2 & 0 & 6 &|&  0 & 0 & 1& 0\\
+0 & 0 & 0 & 1  &|&  0 & 0 & 0& 1
+\end{pmatrix} \begin{matrix} \uparrow \\  \downarrow \\   \phantom{1}\end{matrix} \\
+& \rightsquigarrow & 
+ \begin{pmatrix} 
+1 & 2 & 0 & 6 &|&  0 & 0 & 1& 0\\
+0 & -1 & 0 & -3 &|&  0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0 &|&  1 & 0 & 0 & 0\\
+0 & 0 & 0 & 1  &|&  0 & 0 & 0& 1
+\end{pmatrix} \begin{matrix}/  -6\cdot \text{(IV)} \\  /  +3\cdot \text{(IV)} \\  \phantom{1} \\  \phantom{1} \end{matrix} \\
+& \rightsquigarrow & 
+ \begin{pmatrix} 
+1 & 2 & 0 & 0 &|&  0 & 0 & 1& -6\\
+0 & -1 & 0 & 0 &|&  0 & 1 & 0 & 3\\
+0 & 0 & 1 & 0 &|&  1 & 0 & 0 & 0\\
+0 & 0 & 0 & 1  &|&  0 & 0 & 0& 1
+\end{pmatrix} \begin{matrix}/  +2\cdot \text{(II)} \\  \phantom{1}  \\  \phantom{1} \\  \phantom{1} \end{matrix} \\
+& \rightsquigarrow & 
+ \begin{pmatrix} 
+1 & 0 & 0 & 0 &|&  0 & 2 & 1& 0\\
+0 & -1 & 0 & 0 &|&  0 & 1 & 0 & 3\\
+0 & 0 & 1 & 0 &|&  1 & 0 & 0 & 0\\
+0 & 0 & 0 & 1  &|&  0 & 0 & 0& 1
+\end{pmatrix} \begin{matrix} \phantom{1} \\ / \cdot (-1) \\  \phantom{1} \\  \phantom{1} \end{matrix} \\
+& \rightsquigarrow & 
+\begin{pmatrix} 
+1 & 0 & 0 & 0 &|&  0 & 2 & 1& 0\\
+0 & 1 & 0 & 0 &|&  0 & -1 & 0 & -3\\
+0 & 0 & 1 & 0 &|&  1 & 0 & 0 & 0\\
+0 & 0 & 0 & 1  &|&  0 & 0 & 0& 1
+\end{pmatrix}
+\end{eqnarray*}
+Wir haben bei der reduzierten Zeilenstufenform auf der linken Seite die Einheitsmatrix erreicht. Daher ist die
+ursprüngliche Matrix invertierbar und ihre inverse Matrix steht auf der rechten Seite:
+\[ \left( \begin{smallmatrix}
+0 & 0 & 1 & 0 \\
+0 & -1 & 0 & -3 \\
+1 & 2 & 0 & 6 \\
+0 & 0 & 0 & 1 
+\end{smallmatrix} \right)^{-1} = \left( \begin{smallmatrix}0 & 2 & 1 & 0 \\ 0 & -1 & 0 & -3 \\ 1 & 0 & 0 & 0 \\ 0 & 0 & 0 & 1 \end{smallmatrix} \right). \]
+    }
+
+\lang{en}{   
+We use Gaussian elimination for the matrix augmented with the identity matrix. In doing so we check if
+the matrix is invertible and if applicable we already determine the inverse:
+\begin{eqnarray*}
+&& \begin{pmatrix} 
+0 & 0 & 1 & 0 &|&  1 & 0 & 0 & 0\\
+0 & -1 & 0 & -3 &|&  0 & 1 & 0 & 0\\
+1 & 2 & 0 & 6 &|&  0 & 0 & 1& 0\\
+0 & 0 & 0 & 1  &|&  0 & 0 & 0& 1
+\end{pmatrix} \begin{matrix} \uparrow \\  \downarrow \\   \phantom{1}\end{matrix} \\
+& \rightsquigarrow & 
+ \begin{pmatrix} 
+1 & 2 & 0 & 6 &|&  0 & 0 & 1& 0\\
+0 & -1 & 0 & -3 &|&  0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0 &|&  1 & 0 & 0 & 0\\
+0 & 0 & 0 & 1  &|&  0 & 0 & 0& 1
+\end{pmatrix} \begin{matrix}/  -6\cdot \text{(IV)} \\  /  +3\cdot \text{(IV)} \\  \phantom{1} \\  \phantom{1} \end{matrix} \\
+& \rightsquigarrow & 
+ \begin{pmatrix} 
+1 & 2 & 0 & 0 &|&  0 & 0 & 1& -6\\
+0 & -1 & 0 & 0 &|&  0 & 1 & 0 & 3\\
+0 & 0 & 1 & 0 &|&  1 & 0 & 0 & 0\\
+0 & 0 & 0 & 1  &|&  0 & 0 & 0& 1
+\end{pmatrix} \begin{matrix}/  +2\cdot \text{(II)} \\  \phantom{1}  \\  \phantom{1} \\  \phantom{1} \end{matrix} \\
+& \rightsquigarrow & 
+ \begin{pmatrix} 
+1 & 0 & 0 & 0 &|&  0 & 2 & 1& 0\\
+0 & -1 & 0 & 0 &|&  0 & 1 & 0 & 3\\
+0 & 0 & 1 & 0 &|&  1 & 0 & 0 & 0\\
+0 & 0 & 0 & 1  &|&  0 & 0 & 0& 1
+\end{pmatrix} \begin{matrix} \phantom{1} \\ / \cdot (-1) \\  \phantom{1} \\  \phantom{1} \end{matrix} \\
+& \rightsquigarrow & 
+\begin{pmatrix} 
+1 & 0 & 0 & 0 &|&  0 & 2 & 1& 0\\
+0 & 1 & 0 & 0 &|&  0 & -1 & 0 & -3\\
+0 & 0 & 1 & 0 &|&  1 & 0 & 0 & 0\\
+0 & 0 & 0 & 1  &|&  0 & 0 & 0& 1
+\end{pmatrix}
+\end{eqnarray*}
+In the reduced row echelon form on the left side we have the identity matrix. Therefore the original matrix is invertible and
+its inverse matrix is on the right side:
+\[ \left( \begin{smallmatrix}
+0 & 0 & 1 & 0 \\
+0 & -1 & 0 & -3 \\
+1 & 2 & 0 & 6 \\
+0 & 0 & 0 & 1 
+\end{smallmatrix} \right)^{-1} = \left( \begin{smallmatrix}0 & 2 & 1 & 0 \\ 0 & -1 & 0 & -3 \\ 1 & 0 & 0 & 0 \\ 0 & 0 & 0 & 1 \end{smallmatrix} \right). \]
+    }
+    
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung b)    } \lang{en}{Solution b)}}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   
+Auch hier wenden wir das Gauß-Verfahren auf 
+die um die Einheitsmatrix erweiterte Matrix an:
+\begin{eqnarray*}
+&& \begin{pmatrix} 
+3 & 4 &|&  1 & 0  \\
+-1 & 2 &|&  0 & 1 
+\end{pmatrix} \begin{matrix} \updownarrow \end{matrix} \\
+& \rightsquigarrow & 
+ \begin{pmatrix} 
+-1 & 2 &|&  0 & 1 \\
+3 & 4 &|&  1 & 0  
+\end{pmatrix} \begin{matrix} \phantom{1}\\  /  +3\cdot \text{(I)} \end{matrix} \\
+& \rightsquigarrow & 
+ \begin{pmatrix} 
+-1 & 2 &|&  0 & 1 \\
+0 & 10 &|&  1 & 3  
+\end{pmatrix} \begin{matrix}  /  \cdot (-1) \\  /  \cdot \frac{1}{10} \end{matrix} \\
+& \rightsquigarrow & 
+ \begin{pmatrix} 
+1 & -2 &|&  0 & -1 \\
+0 & 1 &|&  1/10 & 3/10  
+\end{pmatrix} \begin{matrix} /  +2\cdot \text{(II)} \\ \phantom{1} \end{matrix} \\
+& \rightsquigarrow & 
+ \begin{pmatrix} 
+1 & 0 &|&  1/5 & -2/5 \\
+0 & 1 &|&  1/10 & 3/10  
+\end{pmatrix}
+\end{eqnarray*}
+Wir haben bei der reduzierten Zeilenstufenform auf der linken Seite die Einheitsmatrix erreicht. Daher ist die
+ursprüngliche Matrix invertierbar und ihre inverse Matrix steht auf der rechten Seite:
+\[ \begin{pmatrix}
+3 & 4 \\
+-1 & 2 
+ \end{pmatrix} ^{-1} =  \begin{pmatrix}\, \frac{1}{5} & -\frac{2}{5} \\ \frac{1}{10} & \frac{3}{10} \end{pmatrix}. \]
+    }
+
+ \lang{en}{
+ Here we also use Gaussian elimination for the matrix augmented with the identity matrix:
+\begin{eqnarray*}
+&& \begin{pmatrix} 
+3 & 4 &|&  1 & 0  \\
+-1 & 2 &|&  0 & 1 
+\end{pmatrix} \begin{matrix} \updownarrow \end{matrix} \\
+& \rightsquigarrow & 
+ \begin{pmatrix} 
+-1 & 2 &|&  0 & 1 \\
+3 & 4 &|&  1 & 0  
+\end{pmatrix} \begin{matrix} \phantom{1}\\  /  +3\cdot \text{(I)} \end{matrix} \\
+& \rightsquigarrow & 
+ \begin{pmatrix} 
+-1 & 2 &|&  0 & 1 \\
+0 & 10 &|&  1 & 3  
+\end{pmatrix} \begin{matrix}  /  \cdot (-1) \\  /  \cdot \frac{1}{10} \end{matrix} \\
+& \rightsquigarrow & 
+ \begin{pmatrix} 
+1 & -2 &|&  0 & -1 \\
+0 & 1 &|&  1/10 & 3/10  
+\end{pmatrix} \begin{matrix} /  +2\cdot \text{(II)} \\ \phantom{1} \end{matrix} \\
+& \rightsquigarrow & 
+ \begin{pmatrix} 
+1 & 0 &|&  1/5 & -2/5 \\
+0 & 1 &|&  1/10 & 3/10  
+\end{pmatrix}
+\end{eqnarray*}
+In the reduced row echelon form on the left side we have the identity matrix. Therefore the original matrix is invertible and
+its inverse matrix is on the right side:
+\[ \begin{pmatrix}
+3 & 4 \\
+-1 & 2 
+ \end{pmatrix} ^{-1} =  \begin{pmatrix}\, \frac{1}{5} & -\frac{2}{5} \\ \frac{1}{10} & \frac{3}{10} \end{pmatrix}. \]
+    }
+    
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung c)    }  \lang{en}{ Solution c)}}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   
+Wie vorher wendet man das Gauß-Verfahren auf 
+die um die Einheitsmatrix erweiterte Matrix an:
+\begin{eqnarray*}
+&& \begin{pmatrix} 
+2 & 3 & -4 &|&  1 & 0 & 0 \\
+3 & 3 & -1  &|&  0 & 1 & 0 \\
+0 & 3 & -10  &|&  0 & 0 & 1
+\end{pmatrix} \begin{matrix} \phantom{1}\\  /  -\frac{3}{2}\cdot \text{(I)} \\   \phantom{1}\end{matrix} \\
+& \rightsquigarrow & 
+ \begin{pmatrix} 
+2 & 3 & -4 &|&  1 & 0 & 0 \\
+0 & -\frac{3}{2} & 5  &|&  -\frac{3}{2} & 1 & 0 \\
+0 & 3 & -10  &|&  0 & 0 & 1
+\end{pmatrix} \begin{matrix} \phantom{1}\\ \phantom{1}\\ /  +2\cdot \text{(II)} \end{matrix} \\
+& \rightsquigarrow & 
+ \begin{pmatrix} 
+2 & 3 & -4 &|&  1 & 0 & 0 \\
+0 & -\frac{3}{2} & 5  &|&  -\frac{3}{2} & 1 & 0 \\
+0 & 0 & 0  &|&  -3 & 2 & 1
+\end{pmatrix}
+\end{eqnarray*}
+Auf der linken Seite ist eine Nullzeile entstanden. Die ursprüngliche Matrix hat daher keinen vollen Rang und ist
+daher nicht invertierbar.    }
+
+\lang{en}{   
+Here we also use Gaussian elimination for the matrix augmented with the identity matrix:
+\begin{eqnarray*}
+&& \begin{pmatrix} 
+2 & 3 & -4 &|&  1 & 0 & 0 \\
+3 & 3 & -1  &|&  0 & 1 & 0 \\
+0 & 3 & -10  &|&  0 & 0 & 1
+\end{pmatrix} \begin{matrix} \phantom{1}\\  /  -\frac{3}{2}\cdot \text{(I)} \\   \phantom{1}\end{matrix} \\
+& \rightsquigarrow & 
+ \begin{pmatrix} 
+2 & 3 & -4 &|&  1 & 0 & 0 \\
+0 & -\frac{3}{2} & 5  &|&  -\frac{3}{2} & 1 & 0 \\
+0 & 3 & -10  &|&  0 & 0 & 1
+\end{pmatrix} \begin{matrix} \phantom{1}\\ \phantom{1}\\ /  +2\cdot \text{(II)} \end{matrix} \\
+& \rightsquigarrow & 
+ \begin{pmatrix} 
+2 & 3 & -4 &|&  1 & 0 & 0 \\
+0 & -\frac{3}{2} & 5  &|&  -\frac{3}{2} & 1 & 0 \\
+0 & 0 & 0  &|&  -3 & 2 & 1
+\end{pmatrix}
+\end{eqnarray*}
+We have a zero-row on the left side. The original matrix does not have full rank and therefore the matrix
+is not invertible.    }
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung d)    }  \lang{en}{Solution d)}}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   
+Wie in den anderen Teilen wendet man das Gauß-Verfahren auf 
+die um die Einheitsmatrix erweiterte Matrix an:
+\begin{eqnarray*}
+&& \begin{pmatrix} 
+2 & -1 & 3 &|&  1 & 0 & 0 \\
+7 & 3 & 0  &|&  0 & 1 & 0 \\
+-1 & 2 & -4  &|&  0 & 0 & 1
+\end{pmatrix} \begin{matrix} \phantom{1}\\  /  -\frac{7}{2}\cdot \text{(I)} \\  /  +\frac{1}{2}\cdot \text{(I)}\end{matrix} \\
+& \rightsquigarrow & 
+\begin{pmatrix} 
+2 & -1 & 3 &|&  1 & 0 & 0 \\
+0 & 13/2 & -21/2  &|&  -7/2 & 1 & 0 \\
+0 & 3/2 & -5/2  &|&  1/2 & 0 & 1
+\end{pmatrix} \begin{matrix} \phantom{1}\\  /  \cdot 2 \\  /  \cdot \frac{2}{3}\end{matrix} \\
+& \rightsquigarrow & 
+\begin{pmatrix} 
+2 & -1 & 3 &|&  1 & 0 & 0 \\
+0 & 13 & -21  &|&  -7 & 2 & 0 \\
+0 & 1 & -5/3  &|&  1/3 & 0 & 2/3
+\end{pmatrix} \begin{matrix} \\   \updownarrow \\ \end{matrix} \\
+& \rightsquigarrow & 
+\begin{pmatrix} 
+2 & -1 & 3 &|&  1 & 0 & 0 \\
+0 & 1 & -5/3  &|&  1/3 & 0 & 2/3\\
+0 & 13 & -21  &|&  -7 & 2 & 0 
+\end{pmatrix} \begin{matrix} \phantom{1} \\ \phantom{1} \\  /  -13\cdot \text{(II)} \end{matrix} \\
+& \rightsquigarrow & 
+\begin{pmatrix} 
+2 & -1 & 3 &|&  1 & 0 & 0 \\
+0 & 1 & -5/3  &|&  1/3 & 0 & 2/3\\
+0 & 0 & 2/3  &|&  -34/3 & 2 & -26/3 
+\end{pmatrix} \begin{matrix} /  \cdot \frac{1}{2} \\ \phantom{1} \\  /  \cdot \frac{3}{2} \end{matrix} \\
+& \rightsquigarrow & 
+\begin{pmatrix} 
+1 & -1/2 & 3/2 &|&  1/2 & 0 & 0 \\
+0 & 1 & -5/3  &|&  1/3 & 0 & 2/3\\
+0 & 0 & 1   &|&  -17 & 3 & -13 
+\end{pmatrix} \begin{matrix} /  -\frac{3}{2}\cdot \text{(III)}\\  /  +\frac{5}{3}\cdot \text{(III)} \\ \phantom{1}  \end{matrix} \\
+& \rightsquigarrow & 
+\begin{pmatrix} 
+1 & -1/2 & 0 &|&  26 & -9/2 & 39/2 \\
+0 & 1 & 0  &|&  -28 & 5 & -21\\
+0 & 0 & 1   &|&  -17 & 3 & -13 
+\end{pmatrix} \begin{matrix} /  +\frac{1}{2}\cdot \text{(II)}\\  \phantom{1}  \\ \phantom{1}  \end{matrix} \\
+& \rightsquigarrow & 
+\begin{pmatrix} 
+1 & 0 & 0 &|&  12 & -2 & 9 \\
+0 & 1 & 0  &|&  -28 & 5 & -21\\
+0 & 0 & 1   &|&  -17 & 3 & -13 
+\end{pmatrix} 
+\end{eqnarray*}
+
+
+Also ist die gesuchte inverse Matrix: 
+$\begin{pmatrix} 12 & -2 & 9 \\  -28 & 5 & -21\\  -17 & 3 & -13 \end{pmatrix}$.
+    }
+
+
+\lang{en}{  
+Here we also use Gaussian elimination for the matrix augmented with the identity matrix:
+\begin{eqnarray*}
+&& \begin{pmatrix} 
+2 & -1 & 3 &|&  1 & 0 & 0 \\
+7 & 3 & 0  &|&  0 & 1 & 0 \\
+-1 & 2 & -4  &|&  0 & 0 & 1
+\end{pmatrix} \begin{matrix} \phantom{1}\\  /  -\frac{7}{2}\cdot \text{(I)} \\  /  +\frac{1}{2}\cdot \text{(I)}\end{matrix} \\
+& \rightsquigarrow & 
+\begin{pmatrix} 
+2 & -1 & 3 &|&  1 & 0 & 0 \\
+0 & 13/2 & -21/2  &|&  -7/2 & 1 & 0 \\
+0 & 3/2 & -5/2  &|&  1/2 & 0 & 1
+\end{pmatrix} \begin{matrix} \phantom{1}\\  /  \cdot 2 \\  /  \cdot \frac{2}{3}\end{matrix} \\
+& \rightsquigarrow & 
+\begin{pmatrix} 
+2 & -1 & 3 &|&  1 & 0 & 0 \\
+0 & 13 & -21  &|&  -7 & 2 & 0 \\
+0 & 1 & -5/3  &|&  1/3 & 0 & 2/3
+\end{pmatrix} \begin{matrix} \\   \updownarrow \\ \end{matrix} \\
+& \rightsquigarrow & 
+\begin{pmatrix} 
+2 & -1 & 3 &|&  1 & 0 & 0 \\
+0 & 1 & -5/3  &|&  1/3 & 0 & 2/3\\
+0 & 13 & -21  &|&  -7 & 2 & 0 
+\end{pmatrix} \begin{matrix} \phantom{1} \\ \phantom{1} \\  /  -13\cdot \text{(II)} \end{matrix} \\
+& \rightsquigarrow & 
+\begin{pmatrix} 
+2 & -1 & 3 &|&  1 & 0 & 0 \\
+0 & 1 & -5/3  &|&  1/3 & 0 & 2/3\\
+0 & 0 & 2/3  &|&  -34/3 & 2 & -26/3 
+\end{pmatrix} \begin{matrix} /  \cdot \frac{1}{2} \\ \phantom{1} \\  /  \cdot \frac{3}{2} \end{matrix} \\
+& \rightsquigarrow & 
+\begin{pmatrix} 
+1 & -1/2 & 3/2 &|&  1/2 & 0 & 0 \\
+0 & 1 & -5/3  &|&  1/3 & 0 & 2/3\\
+0 & 0 & 1   &|&  -17 & 3 & -13 
+\end{pmatrix} \begin{matrix} /  -\frac{3}{2}\cdot \text{(III)}\\  /  +\frac{5}{3}\cdot \text{(III)} \\ \phantom{1}  \end{matrix} \\
+& \rightsquigarrow & 
+\begin{pmatrix} 
+1 & -1/2 & 0 &|&  26 & -9/2 & 39/2 \\
+0 & 1 & 0  &|&  -28 & 5 & -21\\
+0 & 0 & 1   &|&  -17 & 3 & -13 
+\end{pmatrix} \begin{matrix} /  +\frac{1}{2}\cdot \text{(II)}\\  \phantom{1}  \\ \phantom{1}  \end{matrix} \\
+& \rightsquigarrow & 
+\begin{pmatrix} 
+1 & 0 & 0 &|&  12 & -2 & 9 \\
+0 & 1 & 0  &|&  -28 & 5 & -21\\
+0 & 0 & 1   &|&  -17 & 3 & -13 
+\end{pmatrix} 
+\end{eqnarray*}
+
+So the inverse matrix is:
+$\begin{pmatrix} 12 & -2 & 9 \\  -28 & 5 & -21\\  -17 & 3 & -13 \end{pmatrix}$.
+    }
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+
+%#############################################################ENDE
+
+% \tab{\lang{de}{Video: ähnliche Übungsaufgabe}}	
+%    \youtubevideo[500][300]{jbJK9fbMf8M}\\
+
+\end{tabs*}
+\end{content}

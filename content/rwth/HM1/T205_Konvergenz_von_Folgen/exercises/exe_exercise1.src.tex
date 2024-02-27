@@ -1,0 +1,88 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü01: Folgeneigenschaften}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Hier die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+\component{generic_sound}{content/rwth/HM1/T205_Konvergenz_von_Folgen/Audios/g_snd_Beispielaugabe_1_a.meta.xml}{Beispielaugabe_1_a}
+\end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T208_Reihen/g_art_content_24_reihen_und_konvergenz.meta.xml}{content_24_reihen_und_konvergenz}
+\link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_13_reelle_folgen.meta.xml}{content_13_reelle_folgen}
+\end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\title{
+\lang{de}{Ü01: Folgeneigenschaften}
+}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9853}{Ticket 9853}
+\end{block}
+ 
+\lang{de}{\begin{enumerate}[(a)]
+ \item a) Gegeben sei die Folge $(a_{n})_{n\in\N}$ mit $a_{n}=n^{2}-n$ für alle $n\in\N$. Untersuchen Sie diese auf Monotonie und Beschränktheit.
+ \item b) Sei $(f_n)_{n\in\Nzero}$ die \ref[content_13_reelle_folgen][Fibonacci-Folge]{ex:fibonacci}. Beweisen Sie mittels vollständiger Induktion die Aussage $f_{n}\geq n$ für alle $n\in\N_0$. Folgern Sie daraus, dass $(f_{n})_{n\geq 0}$ nicht nach oben beschränkt ist.
+ \item c) Gegeben sei die Folge $(a_{n})_{n\geq 1}$ durch  $a_{n}=2\cdot(-1/2)^{n}$ für alle $n\in\N$. Untersuchen Sie diese auf Monotonie und Beschränktheit.
+\end{enumerate}}
+
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+  \tab{
+  \lang{de}{Lösung a)}}
+  
+  \begin{incremental}[\initialsteps{1}]
+    \step 
+    \lang{de}{Eine reelle Folge ist genau dann monoton steigend, wenn $a_{n+1}-a_{n}\geq 0$ für alle $n\in\N$ gilt. In unserem Fall haben wir also den Ausdruck
+	\[a_{n+1}-a_{n}=(n+1)^{2}-(n+1)-(n^{2}-n)=(n+1)^{2}-n^{2}-1\]
+	für alle $n\in\N$ zu untersuchen.}
+     
+    \step \lang{de}{Nach der ersten binomischen Formel gilt nun
+	\[(n+1)^{2}-n^{2}-1=n^{2}+2n+1-n^{2}-1=2n\geq 0\quad\text{für alle }n\in\N\,.\]
+	Also haben wir sogar gezeigt, dass $a_{n+1}>a_{n}$ für alle $n\in\N$ gilt. 
+	Daher ist die Folge streng monoton steigend und als solche natürlich auch nach unten beschränkt durch $a_{1}=0$.}
+    \step \lang{de}{Weiter gilt für jedes $n\in\N$ mit $n\geq 2$
+	\[a_{n}=n(n-1)\geq n\,.\]
+	Dies zeigt, dass für jedes $M >0$ ein $N\in\N$ existiert mit $a_{n}> M$ für alle $n\geq N$. Also ist die Folge nach oben unbeschränkt. }
+  \end{incremental}
+
+  \tab{
+  \lang{de}{Lösung b)}
+  }
+  \begin{incremental}[\initialsteps{1}]
+     \step \lang{de}{Wir beweisen die Aussage $A(n)$ für alle $n\in\N_0$, wobei
+	\[A(n):f_{n}\geq n\]
+	ist. Dazu machen wir eine Induktion nach $n\in\N_0$. }
+     \step \lang{de}{\textbf{Induktionsanfang:} $n=0,1$.\\
+     Es gilt $f_{1}=f_{0}=1\geq n$. Also gilt die Aussage in diesem Fall. }
+     \step \lang{de}{\textbf{Induktionsschritt:} Es sei $n\in\N_0$ mit $n\geq 2$.\\ Wir nehmen an, dass die Aussage $A(k)$ für
+     alle $k\in\N_0$ mit $k\leq n$ gelte.  Dann folgt daraus mit der Definition der \ref[content_13_reelle_folgen][Fibonacci-Folge]{ex:fibonacci}
+	\[f_{n+1}=f_{n}+f_{n-1}\geq n+(n-1)\geq n+1\,.\]
+	Dies ist genau die Aussage $A(n+1)$.\\
+	Damit haben wir die Behauptung mit Hilfe des Prinzips der vollständigen Induktion gezeigt. 
+	Wie in Teil (a) folgern wir daraus, dass die Fibonacci-Folge nach oben unbeschränkt ist. }
+  \end{incremental}
+
+  \tab{
+  \lang{de}{Lösung c)}
+  }
+  \begin{incremental}[\initialsteps{1}]
+    \step \lang{de}{ Bei der Folge handelt es sich um eine \ref[content_13_reelle_folgen][geometrische Folge]{ex:monotone-folgen} mit $q<0$, die nicht monoton ist, da für jedes $n\in\N$ die Folgeglieder $c_{n}$ und $c_{n+1}$ unterschiedliche Vorzeichen haben. 
+     Weil $|q|=1/2$ gilt, ist die Wertemenge der Folge gemäß Vorlesung nach oben durch $2$ beschränkt. 
+     Damit ist die Folge insgesamt beschränkt, aber nicht monoton.}
+    
+    
+  \end{incremental}
+
+\end{tabs*}
+
+\end{content}

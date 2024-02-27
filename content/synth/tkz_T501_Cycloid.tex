@@ -1,0 +1,41 @@
+%This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)
+%https://creativecommons.org/licenses/by/4.0/legalcode
+\documentclass[rgb]{standalone}
+\usepackage{tkz-euclide}
+\definecolor{myorange}{hsb}{0.0833, 1, 0.8}
+\definecolor{mygreen}{hsb}{0.3333, 1, 0.8}
+\definecolor{myblue}{hsb}{0.5833, 1, 0.8}
+\definecolor{mymagenta}{hsb}{0.8333, 1, 0.8}
+\begin{document}
+\begin{tikzpicture}[scale=1.5, font=\Large]
+	% Coordinate system
+	\tkzInit[xmin=0,xmax=6,ymin=0,ymax=3,ystep=1]
+	\tkzGrid[color=lightgray]
+	\tkzDrawX[thick,label=$x$]
+	\tkzDrawY[thick,label=$y$]
+	% Cycloid and Circle
+	\draw[very thick,domain=0:5, smooth, variable=\x, myblue] plot ({\x-2.5/pi*sin(72*\x)}, {2.5/pi*(1-cos(72*\x))});
+	\tkzDefPoint(0,0){O}
+	\tkzDefPoint(2,2.5/pi){M}
+	\tkzDefPoint(2-2.5/pi*sin(2*pi/2.5),2.5/pi*(1-cos(2*pi/2.5))){P}
+	\tkzDefPoint(2-1.25/pi*sin(2*pi/2.5),2.5/pi-1.25/pi*cos(2*pi/2.5)){S}
+	\tkzDefPoint(2,0){Q}
+	\tkzDrawCircle[very thick](M,P)
+	\draw[fill,fill opacity=0.1] (M) -- (S) arc (125:270:1.25/pi);
+	\tkzDrawSegment(M,Q)
+	\tkzDrawSegment(M,P)
+	\tkzDrawSegment[very thick,myorange](O,Q)
+	\node[very thick, draw, circle,fill,myblue,inner sep=2] at (P) {};
+	\node[very thick, draw, circle,fill,inner sep=2] at (O) {};
+	\node[very thick, draw, circle,fill,inner sep=2] at (M) {};
+	% Labels
+	\node[above left] at (O){$O$};
+	\node[above right] at (M){$M$};
+	\node[above left, myblue] at (P){$P$};
+	\node[right] at (2,0.795775/2){$r$};	
+	\node at (1.8,0.75){$\theta$};
+	\node[below] at (0,0){$0$};
+	\node[below] at (2,0){$\theta r$};
+	\node[below] at (5,0){$2\pi r$};
+\end{tikzpicture}	
+\end{document}

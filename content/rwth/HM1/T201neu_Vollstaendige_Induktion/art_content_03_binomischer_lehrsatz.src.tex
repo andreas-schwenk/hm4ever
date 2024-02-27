@@ -1,0 +1,406 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Binomialkoeffizienten}
+    \lang{en}{Binomial Coefficients}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T201_PascalsTriangle_C.meta.xml}{T201_PascalsTriangle_C}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T201_PascalsTriangle_D.meta.xml}{T201_PascalsTriangle_D}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T201_PascalsTriangle_B.meta.xml}{T201_PascalsTriangle_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T201_PascalsTriangle_A.meta.xml}{T201_PascalsTriangle_A}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_01_zahlenmengen.meta.xml}{zahlenmengen}
+    \link{generic_article}{content/rwth/HM1/T201neu_Vollstaendige_Induktion/g_art_content_02_vollstaendige_induktion.meta.xml}{vollst-ind}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22235}{Ticket 22235}
+     
+    Nachfolger von: \href{http://team.mumie.net/issues/9637}{Ticket 9637}\\
+\end{block}
+\usepackage{mumie.ombplus}
+\ombchapter{1}
+\ombarticle{3}
+
+\lang{de}{\title{Binomischer Lehrsatz}}
+\lang{en}{\title{Binomial Theorem}}
+
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{Motivation}
+\lang{de}{Das Ziel dieses Abschnitts ist es, die binomische Formel $(a+b)^2=a^2+2ab+b^2$ zu verallgemeinern. 
+Hier wollen wir also für zwei reelle Zahlen $a$ und $b$ und eine natürliche Zahl $n$ Potenzen der Form 
+$(a + b)^n$ in eine Summe von Produkten auflösen. Betrachten wir die folgenden 
+Multiplikationen von $(a+b)$ mit sich selbst:}
+\lang{en}{The goal of this section is to generalise the binomial formula $(a+b)^2=a^2+2ab+b^2$. For two real 
+numbers $a$ and $b$ and a natural number $n$, we wish to expand a power of the form $(a + b)^n$ into a sum of products.
+Consider the following multiplications of $(a+b)$ with itself:}
+
+ \begin{align*}
+    (a+b)^2 & = & (a+b)(a+b)=a^2+2ab+b^2\\
+    (a+b)^3 & = & (a+b)(a+b)^2=(a+b)(a^2+2ab+b^2)=a^3+3a^2b+3ab^2+b^3\\
+    (a+b)^4 & = & (a+b)(a+b)^3=(a+b)(a^3+3a^2b+3ab^2+b^3)=a^4+4a^3b+6a^2b^2+4ab^3+b^4\\
+          &\vdots&\\
+    (a+b)^n & = & (a+b)(a+b)^{n-1} =\text{?}
+  \end{align*}
+
+
+  \lang{de}{Wie man sieht, kommt in diesem iterativ beschriebenen Prozess bei Multiplikation des Binoms $(a+b)$ mit der 
+  zuvor berechneten Potenz $(a+b)^{n-1}$ in der Summenformel zu jedem Summanden je einmal $a$ und einmal $b$ als
+  weiterer Faktor hinzu. Darum besteht die berechnete n-fache Multiplikation von $(a+b)$ mit sich selbst aus 
+  einer Summe von Termen der Form $a^{n}b^{0}, a^{n-1}b^{1},...,a^{1}b^{n-1},a^{0}b^{n}$. Lassen Sie uns für 
+  die Anzahl des Vorkommens des Terms $a^{k}b^{n-k}$ in der berechneten 
+  Summenformel von $(a+b)^n$ den Ausdruck $\binom{n}{k}$ verwenden. Diese Koeffizienten nennt man die 
+  \notion{Binomialkoeffizienten}. Für $n=3$ wird beispielsweise der Binomialkoeffizient von $a^{1}b^{2}$ mit 
+  $\binom{3}{1}$ gezeigt und ist, wie der obigen Formel für $(a+b)^3$ zu entnehmen ist, gleich $3$.
+  Die Frage ist nun, wie man Binomialkoeffizienten allgemein berechnen kann. Diese Fragestellung gehört zur 
+  Kombinatorik, einer mathematischen Disziplin, die sich unter anderem mit dem Abzählen von Objekten beschäftigt.
+  }
+  \lang{en}{As one can see in this iterative process, with the multiplication of the binomial $(a+b)$ with the previously calculated 
+  power $(a+b)^{n-1}$, an extra factor of both $a$ and $b$ is introduced to each summand. Thus multiplying $(a+b)$ with itself n times yields 
+  a sum of terms of the form $a^{n}b^{0}, a^{n-1}b^{1},...,a^{1}b^{n-1},a^{0}b^{n}$. Let us denote the coefficient of the term $a^{k}b^{n-k}$ by the expression $\binom{n}{k}$.
+   These coefficients are called the \notion{binomial coefficients}. For $n=3$, for example, the binomial coefficient of $a^{1}b^{2}$ is denoted 
+  $\binom{3}{1}$ and, as one can see from the above formula for $(a+b)^3$, is equal to $3$. Now one may ask how to calculate general binomial coefficients. 
+  The answer lies in combinatorics, a mathematical discipline which concerns itself with the counting of objects, among other things,}
+  
+\begin{remark}  \label{rem:pascal_dreieck}
+\lang{de}{Das Problem der Berechnung von Binomialkoeffizienten kann mit einem äquivalenten kombinatorischen Problem verglichen werden, 
+das anschaulicher ist, nämlich dem Problem der Konstruktion eines Pascalschen Dreiecks.}
+\lang{en}{The problem of calculating binomial coefficients can be compared to an equivalent combinatorial problem, namely the construction of Pascal's triangle.}
+
+\begin{center}
+\image{T201_PascalsTriangle_A}
+\end{center}
+\end{remark}
+
+\begin{proof*}[\lang{de}{Erklärung}\lang{en}{Explanation}]
+\begin{showhide}
+\lang{de}{Betrachten Sie dazu das Dreieck in der Abbildung. 
+Die Frage, die es zu beantworten gibt, ist: Wie viele Wege führen von dem einzelnen Punkt an der Spitze des Dreiecks zu einem beliebigen 
+Punkt im Dreieck. Ein Weg zu einem Zielpunkt startet von dem einzelnen Punkt an der Spitze und geht immer nach links- oder rechtsunten vom 
+aktuellen Punkt, bis er am Zielpunkt ankommt.}
+\lang{en}{In order to do this, consider the triangle in the diagram. The question to be answered is: how many ways lead from the single point
+at the top of the triangle to an arbitrary point in the triangle. A 'way' to a target point begins from the single point at the top, and always 
+goes down and either to the left or to the right at each step, until it reaches the target point.}
+
+\begin{center}
+\image{T201_PascalsTriangle_B}
+\end{center}
+
+\lang{de}{Wenn man an die Position jedes Punktes die Anzahl der Wege schreibt, die zu ihm führen, erhält man das sogenannte 
+Pascalsche Dreieck. Dabei gilt der Punkt an der Spitze des Dreiecks als der Weg zu sich selbst.}
+\lang{en}{If one counts at the position of each point how many different ways exist to reach it, one gets Pascal's triangle. 
+  In doing so, we take the point at the top of the triangle to have a single 'way' to itself.}
+
+\begin{center}
+\image{T201_PascalsTriangle_C}
+\end{center}
+
+\lang{de}{Das Problem der Anzahl der Wege vom Punkt an der Spitze des Dreiecks zu einem Punkt im Dreieck ist äquivalent zum Problem der 
+Berechnung der Binomialkoeffizienten, denn:}
+\lang{en}{The problem of counting the ways from the point at the top of the triangle to a point in the triangle is equivalent to the
+problem of calculating binomial coefficients, because:}
+\begin{itemize}
+
+ 
+ \item \lang{de}{Bei der Berechnung der Binomialkoeffizienten müssen wir bei jeder Multiplikation des Binoms $(a+b)$ mit 
+    der Summenformel aus $(a+b)^{n-1}$ (gemäß dem obigen Beispiel) entscheiden, ob wir $a$ oder $b$ anwenden, 
+    d.h. ob wir den einzelnen Summanden mit dem Faktor $a$ oder dem Faktor $b$ multiplizieren. }
+    \lang{en}{When calculating binomial coefficients, we need to decide every time we multiply $(a+b)$ with the summation formula for $(a+b)^{n-1}$ (as in the example above)
+    whether we multiply each term by $a$ or by $b$.}
+
+ \item \lang{de}{Beim Zählen der Wege im Dreieck müssen wir bei jeder Bewegung entscheiden, ob wir nach links- oder nach 
+    rechtsunten gehen.}
+    \lang{en}{When counting the ways in the triangle, we need to decide with each downward move whether we move to the left or to the right.}
+
+\end{itemize} 
+\end{showhide}
+\end{proof*}
+
+\lang{de}{Der Ausdruck $\binom{n}{k}$ gibt also die Anzahl der Wege vom Punkt an der Spitze des Dreiecks zu dem $k$-ten Punkt von links in der 
+$n$-ten Ebene des Pascalschen Dreiecks, wobei $n,k\in\Nzero=\{0;1;2;\ldots\}$. Das Pascalsche Dreieck sieht dann folgendermaßen aus:}
+\lang{en}{Therefore the expression $\binom{n}{k}$ gives the number of ways from the point at the top of the triangle to the $k$th point in the $n$th row of Pascal's triangle, 
+where $n,k\in\Nzero=\{0;1;2;\ldots\}$. Pascal's triangle then looks as follows:}
+
+\begin{center}
+\image{T201_PascalsTriangle_D}
+\end{center}
+
+\begin{remark}
+
+  \lang{de}{Betrachten wir die Anzahl der Wege von der Spitze zu einem bestimmten Punkt im Pascalschen Dreieck, ist  
+  festzustzellen, dass dieser Punkt ausschließlich über die maximal zwei darüberliegende Punkte erreicht 
+  werden kann. Damit ist die Anzahl verschiedener Wege von der Spitze zu diesem Punkt gleich der Summe der 
+  jeweils verschiedenen Wege von der Dreiecks-Spitze zu den darüberliegenden Punkten.
+  Aus dieser Überlegung und unter Berücksichtigung der Bemerkung \ref{rem:pascal_dreieck} 
+  kann man für $n,k\in\Nzero=\{0;1;2;\ldots\}$ ableiten:}
+  \lang{en}{If we look at the number of ways to reach a certain point in Pascal's triangle from the top, 
+  it is clear that this point can only be reached from the at most two points above it. Thus the number of different ways to reach this point 
+  is the sum of the number of ways to reach the points above it. Considering this and remark \ref{rem:pascal_dreieck}, one can deduce that for $n,k\in\Nzero=\{0;1;2;\ldots\}$:}
+
+
+\begin{itemize}
+
+ \item $\binom{0}{0}=1$,
+ \item $\binom{n}{k}=0$ \lang{de}{für}\lang{en}{for} $k>n$,
+ \item $\binom{n}{k}=\binom{n-1}{k-1}+\binom{n-1}{k}$.
+
+\end{itemize}
+\end{remark}
+
+\lang{de}{Im Folgenden werden sowohl die genaue Definition von $\binom{n}{k}$ als auch die oben genannten Eigenschaften als Ergebnisse seiner 
+Definition vorgestellt.}
+\lang{en}{In the following section we will establish the precise definition of $\binom{n}{k}$, as well as proving the above properties as consequences of this definition.}
+
+\section{\lang{de}{Fakultät und Binomialkoeffizienten}\lang{en}{Factorials and binomial coefficients}}
+
+
+\lang{de}{In der Mathematik und vor allem in der Kombinatorik und der Wahrscheinlichkeitstheorie kommt bei Rechnungen 
+oft das Produkt der ersten $n$ natürlichen Zahlen vor,
+also z.B. $1\cdot 2\cdot 3\cdot 4$. Deshalb gibt es für solche Produkte eine Kurzschreibweise, die \emph{Fakultät}.}
+\lang{en}{In mathematics, and especially in combinatorics and probability theory, the producct of the first $n$ natural numbers often comes up, for example $1\cdot 2\cdot 3\cdot 4$.
+ Because of this, such products have been given a shorthand notation- the factorial.}
+
+\begin{definition}[\lang{de}{Fakultät}\lang{en}{Factorial}]\label{def:fakultaet}
+\lang{de}{F"ur $n\in\Nzero$ definieren wir}
+  \lang{en}{For $n\in\Nzero=\{0,1,2,\ldots\}$ we define}
+
+    \[ n! \coloneq \begin{cases}1\cdot2\cdot3\cdot\ldots\cdot(n-1)\cdot n= \prod_{k=1}^n\,k \quad \phantom{m} &  \text{\lang{de}{f"ur}\lang{en}{for}} \;\;n\geq 1,\\
+    1 & \text{\lang{de}{f"ur}\lang{en}{for}}\;\; n=0.
+    \end{cases} \]
+\end{definition}
+
+\begin{example}
+ \begin{enumerate}
+       \item $3!=1\cdot2\cdot3=6\, , \quad 2!=1\cdot 2=2$.
+       \item $7!= \prod_{k=1}^7\,k=1\cdot2\cdot3\cdot 4\cdot 5 \cdot 6 \cdot 7=5040.$ 
+    \end{enumerate}
+ \end{example}
+
+ \begin{remark}\label{rem:fakultaet}
+    \begin{enumerate}
+       \item \lang{de}{F"ur alle $n\in\Nzero$ gilt die Gleichung}
+       \lang{en}{For all $n\in\Nzero$ we have}
+    \[ (n+1)! = n!\cdot (n+1) \; .
+    \]
+	\lang{de}{Dadurch erhält man eine sogenannte \emph{rekursive Definition} der Fakultät $(n+1)!$, \\
+    d.h. eine Definition, die sich auf die Definition für kleinere Werte bezieht.}
+    \lang{en}{From this, one obtains a so-called \emph{recursive definition} of the factorial $(n+1)!$, i.e. a definition which relates to the definition for smaller values.}
+    \item
+    \lang{de}{Die Konvention $0!=1$ ist sehr zweckm"a"sig. Mit ihr gelten die Rekursion sowie die Formel mit dem
+    Produktzeichen ab $n=0$.}
+    \lang{en}{The convention $0!=1$ is very convenient. Using it, the recursion and the formula with the product sign hold starting 
+    from $n=0$.}
+  
+    \end{enumerate}
+ \end{remark}
+
+\begin{rule}\label{rule:fakultaet-kombinatorisch}
+\lang{de}{Die Zahl $\, n! \, $ ist genau die Anzahl an Möglichkeiten, $n$ verschiedene Objekte in eine Reihenfolge zu bringen.}
+\lang{en}{The number $\, n! \, $ is exactly the number of ways one can order $n$ different objects.}
+\end{rule}
+
+\begin{proof*}[Erklärung]
+\lang{de}{Will man $n$ verschiedene Objekte reihen, so hat man $n$ Möglichkeiten, welches Objekt man an den Anfang stellt. Für die zweite Stelle
+hat man dann stets die Auswahl aus den $(n-1)$ verbleibenden Objekten. Für die dritte Stelle sind es dann noch $(n-2)$ Möglichkeiten und so weiter,
+bis man für die vorletzte Stelle noch aus $2$ Objekten wählen kann, und für die letzte Stelle noch $1$ Objekt bleibt.
+
+Die Gesamtanzahl an Möglichkeiten ist also}
+\lang{en}{If one wants to put $n$ different objects in order, then one has $n$ possible choices for which will be the first object. 
+For the second position, one then chooses from the remaining $(n-1)$ objects. For the third position there remain $(n-2)$ possibilities and so on, 
+until for the penultimate position one has $2$ objects left to choose from, and the final position is then determined, as only $1$ object remains.
+
+The total number of ways to order them is then}
+\[ n\cdot (n-1)\cdot (n-2)\cdots 2\cdot 1= n! \,.\]
+\end{proof*}
+
+
+
+
+ \begin{definition}[\lang{de}{Binomialkoeffizient}\lang{en}{Binomial coefficients}]\label{def:Binomcoeff}
+  \lang{de}{Sei $n,k\in\Nzero$ und $n\geq k$. Die Zahl}
+  \lang{en}{Let $n,k\in\Nzero$ and $n\geq k$. The number}
+\[  \binom{n}{k}\coloneq\frac{n!}{k!(n-k)!} \]
+  \lang{de}{hei"st \notion{\emph{Binomialkoeffizient}} und wird "`$n$ "uber $k$"' ausgesprochen. }
+  \lang{en}{is called a \notion{binomial coefficient}, and is read as '$n$ choose $k$'.}
+%  \lang{de}{Er kommt in der Mathematik an vielen Stellen vor, besonders in der Kombinatorik und 
+%    Wahrscheinlichkeitstheorie. }    
+  \end{definition}
+
+\lang{de}{Der Binomialkoeffizient kommt in der Mathematik an vielen Stellen vor, besonders in der Kombinatorik und Wahrscheinlichkeitstheorie.}
+ \lang{en}{Binomial coefficients appear in many places of mathematics, particularly in probability theory and combinatorics.}
+
+\begin{example} \label{ex:spezialfaelle}
+\begin{enumerate}
+\item 
+\[ \binom{3}{2}=\frac{3!}{2!(3-2)!}=\frac{6}{2\cdot 1}=3,\quad  \binom{4}{2}=\frac{4!}{2!(4-2)!}=\frac{24}{2\cdot 2}=6,\quad 
+\binom{5}{3}=\frac{5!}{3!(5-3)!}=\frac{120}{6\cdot 2}=10, \] 
+\item \lang{de}{für alle $n\in\Nzero$ ist}\lang{en}{for all $n\in\Nzero$ we have} \[ \binom{n}{0}=\frac{n!}{0!\cdot n!}=1\quad \text{und} \quad \binom{n}{n}=\frac{n!}{n!\cdot 0!}=1, \]
+\item {für alle $n\in\Nzero$ ist}\lang{en}{for all $n\in\Nzero$ we have}  \[\binom{n}{1}=\frac{n!}{1!\cdot (n-1)!}=n\quad \text{und} \quad \binom{n}{n-1}=\frac{n!}{(n-1)!\cdot 1!}=n.\]
+\end{enumerate}
+\end{example}
+
+\begin{theorem}
+\lang{de}{Für $n,k\in\Nzero$ mit $n\geq k\;$ gibt der Binomialkoeffizient $\binom{n}{k}$ die Anzahl der Teilmengen mit 
+$k$ Elementen an, die aus einer 
+    $n-$elementigen Menge ausgew"ahlt werden k"onnen.
+    
+    Insbesondere ist der Binomialkoeffizient stets eine ganze Zahl.}
+\lang{en}{For $n,k\in\Nzero$ with $n\geq k\;$, the binomial coefficient $\binom{n}{k}$ gives the number of $k$-element subsets of a $n$-element set.
+
+In particular, binomial coefficients are always whole numbers.}
+\end{theorem}
+
+\begin{proof*}[\lang{de}{Erklärung}\lang{en}{Explanation}]
+\lang{de}{Es gibt stets genau eine Teilmenge mit $0$ Elementen, nämlich die leere Menge. Für beliebiges $n\in \Nzero$ und 
+$k=0$ ist daher die Anzahl der Teilmengen mit $0$ Elementen stets $1$. 
+Ebenso ist $\binom{n}{0}=\frac{n!}{0!\cdot (n-0)!}=\frac{n!}{n!}=1$.
+
+Nehmen wir also nun an, dass $k>0$ ist. Wir versuchen nun die $k-$elementige Teilmengen $\{a_1;a_2;\ldots; a_k\}$  einer $n$-elementigen Menge $M$ zu zählen. Dafür muss man
+die Anzahl der Möglichkeiten zählen: Für $a_1$ hat man $n$ Möglichkeiten (jedes beliebige Element von $M$), für $a_2$ noch $n-1$ Möglichkeiten 
+(jedes beliebige Element von $M$ außer $a_1$), für $a_3$ noch $n-2$ Möglichkeiten, \ldots und für $a_k$ noch $n-k+1$ Möglichkeiten.
+
+Dies ergibt ingesamt $n\cdot (n-1)\cdots (n-k+1)$ Möglichkeiten. Jedoch wurden hier Teilmengen mehrfach gezählt, da die Reihenfolge der Elemente in der Teilmenge
+keine Rolle spielt. Da die Anzahl der Möglichkeiten, die $k$ Elemente zu reihen, genau $k!$ ist, 
+wurde also jede Teilmenge ebenso oft gezählt, weshalb die tatsächliche Anzahl an $k$-elementigen Teilmengen genau}
+\lang{en}{There is always exactly one subset with $0$ elements, namely the empty set. For any $n\in \Nzero$ and $k=0$ the number of $0$-element subsets is therefore $1$. Indeed, we have  
+$\binom{n}{0}=\frac{n!}{0!\cdot (n-0)!}=\frac{n!}{n!}=1$.
+
+Let us now suppose that $k>0$. We will count the $k$-element subsets $\{a_1;a_2;\ldots; a_k\}$ of an $n$-element set $M$. To do this, we must count the number of possible choices: For $a_1$ 
+there are $n$ choices (any element of $M$ may be chosen), for $a_2$ there are $n-1$ choices (any element of $M$ aside from $a_1$), for $a_3$ there are $n-2$ choices, ... and for $a_k$ there are $n-k+1$ choices.
+
+This gives a total of $n\cdot (n-1)\cdots (n-k+1)$ possible choices. However, we counted some subsets more than once, since the order of the elements in a set does not matter.
+Since the number of ways to order $k$ elements is exactly $k!$, each subset was counted $k!$ times. Thus the actual count of $k$-element subsets is}
+
+\[ \frac{n\cdot (n-1)\cdots (n-k+1)}{k!}=\frac{n\cdot (n-1)\cdots (n-k+1)\cdot (n-k)!}{k!(n-k)!}=\frac{n!}{k!(n-k)!}=\binom{n}{k} \lang{en}{.}\]
+\lang{de}{ist.}
+\end{proof*}
+
+
+
+\section{\lang{de}{Binomialidentitäten und der binomische Lehrsatz}\lang{en}{Binomial identities and the binomial theorem}}
+
+\lang{de}{Die Binomialkoeffizienten erfüllen verschiedene Gleichungen. Einige davon werden hier aufgeführt.}
+\lang{en}{The binomial coefficients satisfy several equations. Some of them will be presented here.}
+
+\begin{theorem}\label{thm:identitaeten}
+\begin{enumerate}
+\item \lang{de}{Für $n,k\in\Nzero$ mit $k\leq n$ gilt $\binom{n}{k}=\binom{n}{n-k}$.}\lang{en}{For $n,k\in\Nzero$ with $k\leq n$ we have $\binom{n}{k}=\binom{n}{n-k}$.}
+\item \lang{de}{Für $n,k\in\Nzero$ mit $k\leq n-1$ gilt: $\binom{n}{k}+\binom{n}{k+1} = \binom{n+1}{k+1}$.}\lang{en}{For $n,k\in\Nzero$ with $k\leq n-1$ we have: $\binom{n}{k}+\binom{n}{k+1} = \binom{n+1}{k+1}$.}
+\end{enumerate}
+\end{theorem}
+
+\begin{proof*}[\lang{de}{Erklärung}\lang{en}{Explanation}]
+\lang{de}{Die erste Gleichung sieht man durch Verwendung von $k=n-(n-k)$ direkt aus der Definition:}
+\lang{en}{The first equality can be seen from applying $k=n-(n-k)$ directly to the definition:}
+\[ \binom{n}{k}=\frac{n!}{k!(n-k)!}=\frac{n!}{(n-k)!k!}=\binom{n}{n-k}. \]
+\lang{de}{Für die zweite Gleichung berechnet man:}
+\lang{en}{For the second equality we calculate:}
+\begin{eqnarray*}
+\binom{n}{k}+\binom{n}{k+1} &=& \frac{n!}{k!(n-k)!}+\frac{n!}{(k+1)!(n-(k+1))!} \\
+&=& \frac{n!}{k!(n-k-1)!\cdot (n-k)}+\frac{n!}{(k+1)\cdot k!(n-k-1)!} \\
+&=& \frac{(k+1)\cdot n! }{(k+1)\cdot k!(n-k-1)!\cdot (n-k)}+\frac{n!\cdot (n-k)}{(k+1)\cdot k!(n-k-1)!\cdot (n-k)} \\
+&=& \frac{n!\cdot \big((k+1)+(n-k)\big)}{(k+1)!(n-k)!}=\frac{(n+1)!}{(k+1)!\big((n+1)-(k+1)\big)!}\\
+&=& \binom{n+1}{k+1}
+\end{eqnarray*}
+\end{proof*}
+
+
+\begin{theorem}[\lang{de}{Binomischer Lehrsatz}\lang{en}{Binomial theorem}]\label{thm:binom}
+\lang{de}{F"ur alle  $n\in\Nzero$ und alle reellen Zahlen $a,\, b$, gilt die
+folgende Gleichung:}
+\lang{en}{For all $n\in\Nzero$ and for all real numbers $a,\, b$, the following
+equation holds:}
+
+\[
+\quad(a+b)^n=\sum^n_{k=0}\,\binom{n}{k}\; a^{n-k}\,b^k.
+\]
+\lang{de}{Hierbei werden $a^0$, $b^0$ und $(a+b)^0$ stets gleich $1$ gesetzt, selbst wenn $a$, $b$ oder $a+b$ gleich $0$ sind.}
+\lang{en}{Here we always set $a^0$, $b^0$ and $(a+b)^0$ to be equal to $1$, even when $a$, $b$ or $a+b$ are equal to $0$.}
+\end{theorem}
+
+\begin{proof*}[\lang{de}{Erklärung}\lang{en}{Explanation}]
+\lang{de}{Mit Hilfe obiger Gleichungen lässt sich diese Aussage gut mit der Beweismethode durch \link{vollst-ind}{vollständige Induktion} zeigen.
+Hierfür ist zu zeigen, dass für alle $n\in\Nzero$ die Aussage }
+\lang{en}{With the help of the above equations, this proposition can be shown using \link{vollst-ind}{mathematical induction}. We must show that for all $n\in\Nzero$, the equality }
+\[  A(n):\quad(a+b)^n=\sum^n_{k=0}\binom{n}{k}\; a^{n-k}\,b^k \]
+\lang{de}{gilt.}
+\lang{en}{holds.}
+ \begin{enumerate}
+    \item[\textbf{(\lang{de}{IA}\lang{en}{BC})}] $n=0$: \lang{de}{Die linke Seite ist $(a+b)^0$ also per Definition $=1$. Die rechte Seite ist}
+    \lang{en}{The left side is $(a+b)^0$ so by definition $=1$. The right side is}
+    \[ \sum^0_{k=0}\,\binom{0}{k}\; a^{0-k}\,b^k= \binom{0}{0}\; a^{0}\,b^0=1\cdot 1\cdot 1=1. \]
+    \item[\textbf{(IS)}] $n\rightarrow n+1$: \lang{de}{F"ur ein festes $n\in\Nzero$ setzen wir voraus:}
+    \lang{en}{For a fixed $n\in\Nzero$ we suppose that:}
+    \begin{center}\textbf{(\lang{de}{IV}\lang{en}{IH})} \lang{de}{Es gelte} $A(n):\quad(a+b)^n=\sum^n_{k=0}\,\binom{n}{k}\; a^{n-k}\,b^k$ \lang{en}{ holds},\end{center}
+    \lang{de}{und zeigen, dass f"ur dieses $n$ die Aussage }
+    \lang{en}{and we show that for this $n$ the proposition }
+    \[ A(n+1): \quad(a+b)^{n+1}=\sum^{n+1}_{k=0}\binom{n+1}{k}\; a^{n+1-k}\,b^k\]
+    \lang{de}{ gilt:}
+    \lang{en}{ holds:}
+    \begin{align*}
+      (a+b)^{n+1} &= (a+b)^n\cdot (a+b) &\\
+      &= \left( \sum^n_{k=0}\,\binom{n}{k}\; a^{n-k}\,b^k \right)\cdot (a+b)  \;\;\; &\vert \text{nach (IV)}\\
+      &= \sum^n_{k=0}\,\binom{n}{k}\; a^{n+1-k}\,b^k \,+\, \sum^{n}_{k=0}\,\binom{n}{k}\; a^{n-k}\,b^{k+1} & \\
+      &= \sum^n_{k=0}\,\binom{n}{k}\; a^{n+1-k}\,b^k \,+\, \sum^{n+1}_{j=1}\,\binom{n}{j-1}\; a^{n-(j-1)}\,b^{j} \;\;\; &\vert \text{mittels } j=k+1\\
+	  &=  \binom{n}{0}\; a^{n+1}\,b^0 + \sum^n_{i=1}\,\left( \binom{n}{i}+ \binom{n}{i-1} \right) \; a^{n+1-i}\,b^i \,+\, \binom{n}{n+1-1}\;\; 
+	  a^{0}\,b^{n+1}  \;\;\; &\vert \text{durch Umsortieren}\\
+	  &= \binom{n+1}{0}\;\; a^{n+1}\,b^0+ \sum^n_{i=1}\,\binom{n+1}{i}\;\; a^{n+1-i}\,b^i \,+\, \binom{n+1}{n+1}\;\; 
+	  a^{0}\,b^{n+1}  \;\;\; &\vert \text{wegen Bsp.} \ref{ex:spezialfaelle} \text{ u. Satz} \ref{thm:identitaeten}  \\
+	  &= \sum^{n+1}_{i=0}\,\binom{n+1}{i}\;\; a^{n+1-i}\,b^i&
+    \end{align*}
+  \end{enumerate}
+\end{proof*}
+
+%Video
+\lang{de}{Das folgende Video enthält einen weiteren Beweis für den binomischen Lehrsatz.
+
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10953&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+}
+
+
+\begin{example}
+\lang{de}{Für kleine $n$ erhält man durch Berechnen der Binomialkoeffizienten dann folgende Formeln}
+\lang{en}{For a small $n$ calculating the binomial coefficients gives the following formulas}
+\[  \begin{mtable}
+    (a+b)^0 & = & 1\\
+    (a+b)^1 & = & 1a+1b\\
+    (a+b)^2 & = & 1a^2+2ab+1b^2\\
+    (a+b)^3 & = & 1a^3+3a^2b+3ab^2+1b^3\\
+    (a+b)^4 & = & 1a^4+4a^3b+6a^2b^2+4ab^3+1b^4
+  \end{mtable}\]
+\lang{de}{Für $n=2$ ist dies natürlich die in der Schule gelernte binomische Formel.}
+\lang{en}{For $n=2$ this is of course the binomial formula learned in school.}
+\end{example}
+
+\begin{rule}
+\lang{de}{Setzt man in obigem Satz $a=b=1$ bzw. $a=-1$, $b=1$ ein, erhält man noch zwei wichtige Identitäten für Binomialkoeffizienten:}
+\lang{en}{Setting $a=b=1$ in the above statement, or respectively $a=-1$, $b=1$, one obtains two more important identities for binomial coefficients:}
+\begin{enumerate}
+\item \lang{de}{Für alle $n\in \Nzero$ ist $ \sum^n_{k=0}\binom{n}{k}=2^n $.}
+\lang{en}{For all $n\in \Nzero$ we have $ \sum^n_{k=0}\binom{n}{k}=2^n $.}
+\item \lang{de}{Für alle $n\in \N$ ist $ \sum^n_{k=0}\binom{n}{k}\;(-1)^k=0$.}
+\lang{en}{For all $n\in \N$ we have $ \sum^n_{k=0}\binom{n}{k}\;(-1)^k=0$.}
+
+\end{enumerate}
+\end{rule}
+\end{content}

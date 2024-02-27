@@ -1,0 +1,104 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A04: Inverse Matrix}
+    \lang{en}{P04: Inverse matrix}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A04: Inverse Matrix}}
+\lang{en}{\title{P04: Inverse matrix}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/11440}{Ticket 11440}
+\end{block}
+
+\begin{problem}
+	%\randomquestionpool{}{}
+	\begin{question}
+		
+		\begin{variables}
+		
+
+		\randint[Z]{a}{-3}{3} 
+		\randint[Z]{b}{-3}{3} 
+		\randint[Z]{c}{-3}{3} 
+		\randint[Z]{d}{-3}{3} 
+		\randint[Z]{f}{-3}{3} 
+		\randint[Z]{g}{-3}{3} 
+		\randint[Z]{h}{-3}{3} 		
+		\randint[Z]{i}{-3}{3} 
+			
+\matrix[calculate]{aa}{a*f + 1 &  a*c*f + a*g + c  & a*d*f + a + d\\
+a*f*h + b*f + h &  (a*h+ b)*(c*f + g) +c*h + 1 &
+   (a*h+ b)*(d*f + 1)+ d*h\\
+a*f*i + f + i &  (a*i+1)*(c*f + g) + c*i   & (a*i+1)*(d*f + 1)+ d*i
+}
+\matrix[calculate]{bb}{ (a*i+1)*(d*f+ 1) + d*i  + (c - d*g)*(h - b*i) &  
+ d*g-c   &  b*(c - d*g) -a*(d*f+1)  - d\\
+b*i - h &  1 &  -b\\
+(-a*f - b*g)*i - f + g*h - i &  -g &  a*f + b*g + 1
+}
+		\end{variables}
+		
+		\type{input.generic}
+        \field{real}
+		\correctorprecision{3}
+		\displayprecision{3}
+		\lang{de}{
+	    \text{Bestimmen Sie die inverse Matrix zu  $A=\var{aa}$.}
+	    }
+     \lang{en}{
+	    \text{Determine the inverse matrix of $A=\var{aa}$.}
+	    }
+	    %\permuteAnswers{1, 2, 3} 
+	    %http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+     \lang{de}{
+	    \begin{answer}
+            \type{input.matrix}
+	    	\text{$A^{-1}=$}
+            \format{3}{3}
+            \solution{bb}
+			%\checkAsFunction{x}{-10}{10}{100} 
+            %\inputAsFunction{x}{s3}
+			%\checkFuncForZero{D[s3]-h}{-10}{10}{100}
+           \explanation{Formen Sie mit Hilfe elementarer Zeilenumformungen $(A| E_3)$ in $(E_3| A^{-1})$ um. \\Die inverse Matrix ist dann $A^{-1}=\var{bb}$.}    
+	    \end{answer}}
+     \lang{en}{
+	    \begin{answer}
+            \type{input.matrix}
+	    	\text{$A^{-1}=$}
+            \format{3}{3}
+            \solution{bb}
+			%\checkAsFunction{x}{-10}{10}{100} 
+            %\inputAsFunction{x}{s3}
+			%\checkFuncForZero{D[s3]-h}{-10}{10}{100}
+           \explanation{Transform $(A| I_3)$ into $(I_3| A^{-1})$ using elementary row transformations.\\
+           The inverse matrix is $A^{-1}=\var{bb}$.}    
+	    \end{answer}}
+	 
+	    %generic viz: http://team.mumie.net/projects/support/wiki/Example
+	    
+	\end{question}
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

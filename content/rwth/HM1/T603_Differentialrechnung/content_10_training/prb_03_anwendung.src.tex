@@ -1,0 +1,128 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A03: Grenzkosten vs. Grenzproduktivität}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A03: Grenzkosten vs. Grenzproduktivität}}
+\lang{en}{\title{A03: Marginal costs vs. marginal productivity}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24005}{Ticket 24005}
+\end{block}
+\usepackage{mumie.genericproblem}
+
+
+     \begin{problem}
+        \begin{variables}
+            \drawFromSet{a}{2,3,4}
+            
+            \function[normalize]{p}{a*(30-2*x)}
+            \function{dk}{k/x}
+            \function{gk}{6*a}
+            \function{er}{p*x}
+            \derivative{ger}{er}{x}
+            \number{n}{6}
+            \string{k}{qx,xq,q*x,x*q}
+            \string{kder}{qg'(y),g'(y)q,qg',g'q,q*g',g'*q,q*g'(y),g'(y)*q}
+            \string{gder}{f'(x)}
+            \string{kder2}{q/f'(x),q/f'}
+        \end{variables}
+          \begin{question}
+          \type{input.text}
+          \lang{de}{\text{Für eine Unternehmung gelte die Produktionsfunktion $y=f(x)$. Hierbei ist
+          y der Output, x der Input eines Produktionsfaktors. Der Faktorpreis (Preis pro Einheit des 
+          Produktionsfaktors) sei 
+          konstant und betrage $q$.\\
+          Ziel dieser Aufgabe ist, in mehreren Schritten den folgenden Zusammenhang herzuleiten:\\
+          $\text{Grenzkosten}=\frac{\text{Faktorpreis}}{\text{Grenzproduktivität}}$
+          }}
+          \lang{en}{\text{Suppose a company's productivity is described by the production function $y=f(x)$. Here
+          y is the output and x the input of a production factor. Let the factor price (price per unit of the 
+          factor of production) be the constant $q$.\\
+          The aim of this task is to derive the following relationship in several steps:\\
+          $\text{marginal costs}=\frac{\text{factor price}}{\text{marginal productivity}}$
+          }}
+               \begin{answer}
+                    \lang{de}{
+                    \text{Die Kostenfunktion lautet: $K(x)$=}
+                    }
+                    \lang{en}{
+                    \text{The cost function is $K(x)$=}
+                    }
+                    \solution{k}
+                    \inputAsString{A1}
+                    \checkStringsForRelation[,]{equalIgnoreCaseString(A1,k)} 
+               \end{answer}
+               \explanation{$K(x)=qx$}
+          \end{question} 
+         
+          
+          \begin{question}
+          \type{input.text}
+          \lang{de}{\text{Die Menge $x$ lässt sich aus der Umkehrfunktion zu $y=f(x)$ berechnen: 
+          $x=f^{-1}(y)=g(y)$.
+          Bestimmen Sie nun die Grenzkostenfunktion in Abhängigkeit von $y$: 
+          }}
+          \lang{en}{\text{The quantity $x$ can be calculated from the inverse function of $y=f(x)$: \\
+          $x=f^{-1}(y)=g(y)$. \\
+          Now determine the marginal cost function as a function of $y$: 
+          }}
+               \begin{answer}
+                    \text{$K'(y)=$}
+                    \solution{kder}
+                    \inputAsString{A2}
+                    \checkStringsForRelation[,]{equalIgnoreCaseString(A2,kder)} 
+               \end{answer}
+              
+               \explanation{$K'(y)=qg'(y)$}
+         \end{question}
+         
+            \begin{question}
+            \type{input.text}
+            \lang{de}{\text{Für die Ableitung der Umkehrfunktion gilt:\\ $g'(y(x))=1/$\ansref}}
+            \lang{en}{\text{The derivative of the inverse function satisfies\\ $g'(y(x))=1/$\ansref}}
+            \begin{answer}
+                    %\text{$g'(y(x))=$}
+                    \solution{gder}
+                    \inputAsString{A3}
+                    \checkStringsForRelation[,]{equalIgnoreCaseString(A3,gder)} 
+               \end{answer}
+            \explanation{$g'(y(x))=\frac{1}{f'(x)}$}
+         \end{question}
+         
+         \begin{question}
+            \type{input.text}
+            \lang{de}{\text{Das Ergebnis aus c) setzen wir nun in b) ein und erhalten den 
+            gewünschten Zusammenhang:}}
+            \lang{en}{\text{Substitute the result from c) into b) to obtain the desired relationship:}}
+            \begin{answer}
+                    \text{$K'(y(x))=$}
+                    \solution{kder2}
+                    \inputAsString{A4}
+                    \checkStringsForRelation[,]{equalIgnoreCaseString(A4,kder2)} 
+               \end{answer}
+            \explanation{$K'(y(x))=\frac{q}{f'(x)}$}
+         \end{question}
+         
+     \end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

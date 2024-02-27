@@ -1,0 +1,115 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A04: Parabelgleichung}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{
+	\title{A04: Parabelgleichung}
+}
+\lang{en}{
+	\title{Problem 4}
+}
+
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21359}{Ticket 21359}
+\end{block}
+\begin{block}[annotation]
+Copy of \href{http://team.mumie.net/issues/9584}{Ticket 9584}: content/rwth/HM1/T111_Matrizen,_lineare_Gleichungssysteme/training/prb_problem7.src.tex
+\end{block}
+
+\begin{problem}
+
+	\begin{question} 
+        \lang{de}{\text{Durch die Punkte $P=(\var{p1}; \var{p2})$ und $Q=(\var{q1}; \var{q2})$ gehen unendlich viele Parabeln, die wir nun ermitteln wollen. Stellen Sie ein lineares Gleichungssystem
+        für die Koeffizienten $a$, $b$ und $c$ der Parabelgleichung $y=ax^2+bx+c$ auf und bestimmen Sie dessen Lösungsmenge.\\
+        Setzen Sie dabei bitte die von Ihnen gewählte frei wählbare Variable gleich $t$, damit Ihre Lösung vom System richtig korrigiert werden kann. Verwenden Sie bitte außerdem Brüche und keine gerundeten Werte.
+        }}
+        \lang{en}{\text{Infinitely many parabolas go through the points $P=(\var{p1}, \var{p2})$ and $Q=(\var{q1}, \var{q2})$. Create a linear
+        system of equations for the coefficients $a$, $b$ and $c$ of the parabola with equation $y=ax^2+bx+c$ and determine its solution set.\\
+        Set the parameter you introduce for one of the variables equal to $t$ so that the system can check your answer properly. When inputting your answer use fractions instead of rounded values.
+        }}
+        \lang{de}{\explanation{Das lineare Gleichungssystem erhalten Sie durch Einsetzen der $x$- und $y$-Koordinaten der gegebenen Punkte in die Parabelgleichung.
+        Bringen Sie dieses lineare Gleichungssystem dann mit dem Gauß-Verfahren auf Stufenform und lösen Sie es anschließend durch Rückwärtseinsetzen.}}
+        \lang{en}{\explanation{You can get the linear system by substituting the $x$- and $y$-coordinates of the given points into the parabola equation.
+        Reduce this linear system to row echelon form with Gaussian Elimination and solve it with back substitution then.}}
+        
+        \type{input.function}
+        \field{rational}
+        
+        \begin{variables}
+            \randint[Z]{p1}{-5}{5}
+            \randint{p2}{-5}{5}
+            \randint[Z]{q1}{-5}{5}
+            \randint{q2}{-5}{5}
+            \randadjustIf{p1,q1}{p1=q1}
+                        
+            \function[calculate]{a}{p1*p1}
+            \function[calculate]{b}{p1}
+            \function[calculate]{c}{1}
+            \function[calculate]{d}{q1*q1}
+            \function[calculate]{d1}{q1}
+            \function[calculate]{f}{1}
+            
+            \function[calculate]{j}{p2}
+            \function[calculate]{k}{q2}
+                                    
+            \function[calculate]{g}{0}
+            \function[calculate]{h}{0}
+            \function[calculate]{i1}{0}
+                     
+            \function[calculate]{l}{0}
+                      
+            \function[normalize]{lsg1}{(j*d1-k*b)/(a*d1-b*d)+t*(f*b-c*d1)/(a*d1-b*d)}
+            \function[normalize]{lsg2}{(a*k-d*j)/(a*d1-b*d)+t*(d*c-a*f)/(a*d1-b*d)}
+            \function{lsg3}{t}     
+        \end{variables}
+        
+        \begin{answer}
+              \text{$a=$}
+              \solution{lsg1}
+              \inputAsFunction{t}{u}
+        \end{answer}
+        
+        \begin{answer}
+        	  \text{$b=$}
+              \solution{lsg2} 
+              \inputAsFunction{t}{v}
+              
+        \end{answer}
+        
+        \begin{answer}
+        	  \text{$c=$}
+              \solution{lsg3} 
+              \inputAsFunction{t}{w}
+              
+              \checkFuncForZero{abs(a*u[x]+b*v[x]+c*w[x]-j)+abs(d*u[x]+d1*v[x]+f*w[x]-k)+abs(g*u[x]+h*v[x]+i1*w[x]-l)+abs((x-u[x])*(x-v[x])*(x-w[x]))}{-10}{10}{100} 
+        \end{answer}
+        
+	\end{question}
+	
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

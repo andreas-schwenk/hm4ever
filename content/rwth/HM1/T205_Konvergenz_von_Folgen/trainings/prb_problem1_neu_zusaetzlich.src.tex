@@ -1,0 +1,138 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A01: Folgenglieder}
+    \lang{en}{input numbers}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/18864}{Ticket 18864}
+\end{block}
+
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A01: Folgenglieder}}
+\lang{en}{\title{Problem 1}}
+
+\begin{problem}
+
+% neue TA1
+
+	\begin{question}
+		\lang{de}{
+			\text{Berechnen Sie die ersten vier Folgenglieder der Folge 
+            $(a_n)_{n\in\N}$ mit $a_{n}= \var{afo}$.
+		\\\\
+        Geben Sie die Werte so weit gekürzt wie möglich ein.
+ 		}
+       		}
+		\type{input.number}
+		\field{rational}
+
+             \explanation{Setzen Sie in die Definition der Folge die ersten vier $n\in\N$ ein.}
+
+    	\begin{variables}
+			\randint[Z]{x1}{2}{8}
+            \randint[Z]{x2}{2}{4}	
+            \randint[Z]{x3}{1}{3}
+          						
+			\function[normalize]{afo}{(x1*n)/(x2*n+x3)}	
+            \function[normalize]{loes1}{x1/(x2*1+x3)}
+            \function[normalize]{loes2}{(x1*2)/(x2*2+x3)}
+            \function[normalize]{loes3}{(x1*3)/(x2*3+x3)}
+            \function[normalize]{loes4}{(x1*4)/(x2*4+x3)}
+                      
+		\end{variables}
+		
+		\begin{answer}
+			\text{$a_1 = $}
+			\solution{loes1}
+		\end{answer}
+        
+        \begin{answer}
+			\text{$a_2 = $}
+			\solution{loes2}
+		\end{answer}
+        
+        \begin{answer}
+			\text{$a_3 = $}
+			\solution{loes3}
+		\end{answer}
+        
+        \begin{answer}
+			\text{$a_4 = $}
+			\solution{loes4}
+		\end{answer}
+		
+	\end{question}
+
+\begin{question}
+		\lang{de}{
+			\text{Geben Sie die ersten drei Folgenglieder der rekursiven Folge 
+            $(b_n)_{n\in\N}$ an mit $b_1=1$ und $b_{n+1}= b_n + \var{afo}$ für $n\geq 1$.
+		\\\\
+        Geben Sie die Werte so weit gekürzt wie möglich ein.
+ 		}
+       		}
+		\type{input.number}
+		\field{rational}
+            
+            \explanation{Da es sich um eine rekursive Folge handelt, brauchen Sie bei der 
+            Berechnung des nächsten Folgenglieds das vorherige. }
+
+
+    	\begin{variables}
+			\randint[Z]{x1}{2}{5}
+            \randint[Z]{x2}{2}{4}	
+               						
+			\function[normalize]{afo}{x1/(x2^n)}
+            \function{loes0}{1}
+            \function[normalize]{loes1}{1+x1/x2^1}
+            \function[normalize]{loes2}{(1+x1/x2^1)+x1/x2^2}
+                                         
+		\end{variables}
+	
+    	\begin{answer}
+			\text{$b_1 = $}
+			\solution{loes0}
+		\end{answer}
+            
+		\begin{answer}
+			\text{$b_2 = $}
+			\solution{loes1}
+		\end{answer}
+        
+        \begin{answer}
+			\text{$b_3 = $}
+			\solution{loes2}
+		\end{answer}
+        
+       % \begin{answer}
+		%	\text{$b_4 = $}
+		%	\solution{loes3}
+		%\end{answer}
+        
+    \end{question}
+
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

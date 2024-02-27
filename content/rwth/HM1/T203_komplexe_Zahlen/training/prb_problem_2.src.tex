@@ -1,0 +1,100 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A02: komplex konjugiert}
+    \lang{en}{P02: The complex conjugate}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+\title{\lang{de}{A02: komplex konjugiert} \lang{en}{P02: The complex conjugate}}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9752}{Ticket 9752}
+\end{block}
+
+\begin{problem}
+  \begin{question}
+    \lang{de}{\text{
+    Bestimmen Sie die konjugiert komplexe Zahl $\bar{z}$ zu \\
+    $z = \var{z}.$}}
+    \lang{en}{\text{
+    Determine the complex conjugate $\bar{z}$ of \\
+    $z = \var{z}.$}}
+    \lang{de}{\explanation{
+    Bei der konjugiert komplexen Zahl ändert sich 
+    das Vorzeichen des Imaginärteils.
+    }}
+    \lang{en}{\explanation{The imaginary part of the complex conjugate has the opposite sign.
+    }}
+    \type{input.number}
+    \field{complex}
+    \begin{variables}
+      \randint{a}{-10}{10}
+      \randint{b}{-10}{10}
+      \function{z}{a + b*i}
+      \function{zquer}{a - b*i}
+    \end{variables}
+
+    \begin{answer}
+      \text{$\bar{z} = $}
+      \solution{zquer}
+    \end{answer}
+
+  \end{question}
+
+  \begin{question}
+    \lang{de}{\text{
+    Bestimmen Sie den Realteil und den Imaginärteil von \\
+    $\var{z}.$}}
+    \lang{en}{\text{
+    Determine the real part and the imaginary part of \\
+    $\var{z}.$}}
+    \lang{de}{\explanation{Der Realteil ist der Summand, der kein \glqq $i$\grqq besitzt. \\
+    Der Imaginärteil ist der Faktor vor dem \glqq $i$\grqq. \\
+    In beiden Fällen gehört das Vorzeichen dazu.
+    }}
+    \lang{en}{\explanation{
+    The real part is the summand, that does not have an \glqq $i$\grqq. \\
+    The imaginary part is the factor in front of the \glqq $i$\grqq. \\
+    For both parts the sign belongs to it.
+    }}
+    \type{input.number}
+    \field{complex}
+    \begin{variables}
+      \randint{a}{-10}{10}
+      \randint{b}{-10}{10}
+      \function{z}{b*i + a}
+    \end{variables}
+
+    \begin{answer}
+
+      \solution{a}
+    \end{answer}
+
+    \begin{answer}
+          \lang{de}{\text{Imaginärteil:}} 
+    \lang{en}{\text{Imaginary part:}}
+      \solution{b}
+    \end{answer}
+
+  \end{question}
+
+\end{problem}
+
+\embedmathlet{mathlet}
+\end{content}

@@ -1,0 +1,972 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Eigenwerte, Eigenvektoren}
+    \lang{en}{Eigenvalues, eigenvectors}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T404_RotationXY-Plane.meta.xml}{T404_RotationXY-Plane}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+\end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T203_komplexe_Zahlen/g_art_content_08aneu_komplexeZahlen_intro.meta.xml}{content_08aneu_komplexeZahlen_intro}
+    \link{generic_article}{content/rwth/HM1/T402_Lineare_Gleichungssysteme/g_art_content_05_gaussverfahren.meta.xml}{content_05_gaussverfahren}
+    \link{generic_article}{content/rwth/HM1/T403a_Vektorraum/g_art_content_10b_lineare_abb.meta.xml}{content_10b_lineare_abb}
+    \link{generic_article}{content/rwth/HM1/T402_Lineare_Gleichungssysteme/g_art_content_04_lgs.meta.xml}{lgs}
+    \link{generic_article}{content/rwth/HM1/T403_Quadratische_Matrizen,_Determinanten/g_art_content_07_quadratische_matrizen.meta.xml}{quadrat-matrizen}
+    \link{generic_article}{content/rwth/HM1/T403_Quadratische_Matrizen,_Determinanten/g_art_content_09_determinante.meta.xml}{determinante}
+    \link{generic_article}{content/rwth/HM1/T404_Eigenwerte,_Eigenvektoren/g_art_content_12_symmetrische_matrizen.meta.xml}{symmetrische-matrix}
+%     \link{generic_article}{content/rwth/HM1/T203_komplexe_Zahlen/g_art_content_08_algebraische_darstellung.meta.xml}{c-algebraisch}
+    \link{generic_article}{content/rwth/HM1/T403_Quadratische_Matrizen,_Determinanten/g_art_content_10_cramersche_regel.meta.xml}{cramersche-regel}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{4}
+\ombarticle{1}
+
+\title{\lang{de}{Eigenwerte, Eigenvektoren und charakteristisches Polynom}\lang{en}{Eigenvalues, eigenvectors and characteristic polynormial}}
+
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/11466}{Ticket 11466}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\lang{de}{
+Auch in diesem Themenblock beschäftigen wir uns mit \link{quadrat-matrizen}{quadratischen Matrizen} 
+über beliebigen Körpern $\mathbb{K}$.}
+\lang{en}{Also in this part we will deal with \link{quadrat-matrizen}{square matrices} over any fields $\mathbb{K}$.}
+
+\section{\lang{de}{Eigenwerte und Eigenvektoren} \lang{en}{Eigenvalues and eigenvectors}}\label{sec:eigenwerte_eigenvektoren}
+
+\lang{de}{Im Kapitel \link{content_10b_lineare_abb}{Lineare Abbildungen} haben wir die Multiplikation eines Vektors
+mit einer quadratischen $(n\times n)$-Matrix $A$ als lineare Abbildung 
+ auf dem Vektorraum $\R^n$ der Spaltenvektoren der Länge $n$ kennengelernt.
+\[  f:\mathbb{K}^n\to \mathbb{K}^n, \left( \begin{smallmatrix}
+x_1\\ x_2\\ \vdots \\ x_n
+\end{smallmatrix}\right) \mapsto A\cdot  \left( \begin{smallmatrix}
+x_1\\ x_2\\ \vdots \\ x_n
+\end{smallmatrix}\right) .\]}
+
+\lang{en}{In the chapter \link{content_10b_lineare_abb}{linear maps} we got to know multiplication of a vector
+with a square $(n\times n)$-matrix $A$ as a linear map over the vector space $\R^n$ (column vectors with the length $n$).
+\[  f:\mathbb{K}^n\to \mathbb{K}^n, \left( \begin{smallmatrix}
+x_1\\ x_2\\ \vdots \\ x_n
+\end{smallmatrix}\right) \mapsto A\cdot  \left( \begin{smallmatrix}
+x_1\\ x_2\\ \vdots \\ x_n
+\end{smallmatrix}\right) .\]}
+
+\lang{de}{
+In diesem Zusammenhang stellen wir die folgende Frage:
+Gibt es Vektoren, 
+die auf ein Vielfaches von sich selbst abgebildet werden? 
+Die Kenntnis solcher Vektoren erleichtert uns die Anschauung der linearen Abbildung sehr.}
+\lang{en}{
+In this context we ask the following question:
+In diesem Zusammenhang stellen wir die folgende Frage:
+Are there vectors, that map onto a multiple of themself?
+The knowledge of such vectors makes it a lot easier for us to illustrate the linear map.}
+
+\lang{de}{
+Zum Beispiel beschreibt die Matrix
+\[A=\begin{pmatrix}\cos\phi&-\sin\phi&0\\\sin\phi&\cos\phi&0\\0&0&1\end{pmatrix}\]
+eine Drehung um die $z$-Achse im $\R^3$, und zwar um den Winkel $\phi$ gegen den Uhrzeigersinn. 
+Der Vektor $e_3$ in Richtung $z$-Achse bleibt dabei wie die gesamte $z$-Achse fest.
+Damit sind aber auch schon alle solchen Vektoren gefunden. Denn jeder andere Vektor hat eine nicht-verschwindende 
+$(x,y)$-Komponente, die im Gegensatz zur $z$-Komponente nicht festbleiben. 
+(Außer $\phi$ ist ein Vielfaches von $2\pi$, dann ist die Matrix die Einheitsmatrix und alle Vektoren bleiben fest.)}
+
+\lang{en}{
+For example the matrix 
+\[A=\begin{pmatrix}\cos\phi&-\sin\phi&0\\\sin\phi&\cos\phi&0\\0&0&1\end{pmatrix}\]
+describes a counterclockwise rotation around the $z$-axis in $\R^3$ by the angle $\phi$. 
+The vector $e_3$ in direction of the $z$-axis is fix, just as the entire $z$-axis.
+But then we have already found all such vectors. Every other vector has a non-zero 
+$(x,y)$-component, which cannot be fix (in contrast to the $z$-component). 
+(Besides $\phi$ is a multiple of $2\pi$, then the matrix is the identity matrix and all vectors are fix under the rotation.)}
+\begin{center}
+\image{T404_RotationXY-Plane}
+\end{center}
+
+\begin{definition}
+\lang{de}{Sei $A\in M(n;\K)$ eine quadratische $(n\times n)$-Matrix mit Einträgen in einem Körper $\K$.
+Gilt für einen Vektor $v\in \K^n$, $v\neq 0$, und ein Skalar $\lambda\in  \K$ die
+Gleichung
+\[    A\cdot v=\lambda v, \]
+so heißen $v$ \notion{Eigenvektor} von $A$ und $\lambda$ \notion{Eigenwert} von $A$.}
+\lang{en}{Let $A\in M(n;\K)$ be a square $(n\times n)$-matrix with entries in the field $\K$.
+If for a vector $v\in \K^n$, $v\neq 0$, and a scalar $\lambda\in  \K$ holds the equation
+\[A\cdot v=\lambda v, \]
+then $v$ is called \notion{eigenvector} of $A$ and $\lambda$ \notion{eigenvalue} of $A$.}
+
+\lang{de}{
+Man nennt dann auch $\lambda$ den Eigenwert zum Eigenvektor $v$, und $v$ einen
+Eigenvektor zum Eigenwert $\lambda$.}
+\lang{en}{
+The always say, that $\lambda$ is the eigenvalue to the eigencevtor $v$, and $v$ is the eigenvector
+to the eigenvalue $\lambda$.}
+\end{definition}
+
+\begin{remark}
+\begin{enumerate}
+\item \lang{de}{Für den Nullvektor $v=0$ ist natürlich die Gleichung $A v=\lambda v$ für beliebige $\lambda\in \K$ immer erfüllt. 
+Dieser Fall ist in der Definition daher explizit ausgeschlossen. Ein Eigenwert $\lambda=0$ ist jedoch durchaus möglich,
+so ist zum Beispiel $e_2\in\K^2$ ein Eigenvektor zum Eigenwert $\lambda=0$ der Matrix 
+$\left(\begin{smallmatrix}1&0\\0&0\end{smallmatrix}\right)$.}
+\lang{en}{For the zero vector $v=0$ the equation $A v=\lambda v$ for any $\lambda\in \K$ is always fulfilled. 
+Therefore this case is explizitly excluded in the definition. But an eigenvalue $\lambda=0$ is still possible,
+for example $e_2\in\K^2$ ist an eigenvector of the eigenvalue $\lambda=0$ of the matrix 
+$\left(\begin{smallmatrix}1&0\\0&0\end{smallmatrix}\right)$.}
+
+\item \lang{de}{Während es zu einem Eigenvektor $v$ nur genau einen Eigenwert $\lambda$ gibt, gibt es zu
+einem Eigenwert $\lambda$  mehrere Eigenvektoren. Ist nämlich $v$ ein Eigenvektor zu $\lambda$, d.h. gilt 
+$Av=\lambda v$, dann ist auch jedes von Null verschiedene Vielfache $rv$ ein Eigenvektor zu $\lambda$ für beliebiges $r\in \K$, $r\neq 0$, denn
+\[  A\cdot(r\cdot v)=r\cdot(A\cdot v)=r\cdot\lambda\cdot v=\lambda \cdot(r\cdot v).\]
+Und manchmal gibt es zu einem Eigenwert sogar mehrere linear unabhängige Vektoren. So sind
+z.B. $e_1$, $e_2$, $e_3$ drei linear unabhängige Eigenvektoren der Einheitsmatrix $E_3$ 
+zum Eigenwert $\lambda=1$.}
+\lang{en}{While there is exactly one eigenvalue $\lambda$ for a given eigenvector $v$,
+there may be several eigenvectors to a certain eigenvalue $\lambda$. Is $v$ an eigenvector of $\lambda$, 
+so holds $Av=\lambda v$, then is also every multiple (unequal to zero) $rv$ an eigenvector of $\lambda$
+for any $r\in \K$, $r\neq 0$, because
+\[  A\cdot(r\cdot v)=r\cdot(A\cdot v)=r\cdot\lambda\cdot v=\lambda \cdot(r\cdot v).\]
+Sometimes there are even several linear independent vectors for an eigenvalue. So are for example
+$e_1$, $e_2$, $e_3$ three linearly independent eigenvectors of the identity matrix $E_3$ 
+for the eigenvalue $\lambda=1$.}
+\end{enumerate}
+\end{remark}
+
+
+\lang{de}{Die Bezeichnung Eigenwert und Eigenvektor lassen vermuten, dass sie Eigenschaften eines Systems
+kodieren. Das ist in der Tat richtig. Später werden wir das am Beispiel von Planetenbahnen sehen.
+Vielleicht haben Sie schon einmal etwas über Eigenschwingung eines Systems gehört. 
+Auch das sind Eigenvektoren (im mathematisch tiefer liegenden Sinn der Fourieranalyse). 
+Die Eigenschwingungen eines Instruments bestimmen seinen charakteristischen Klang. 
+Gerät eine Brücke in Eigenschwingung (Resonanz), so kann sie schlimmsten Falls einstürzen. 
+Es ist äußerst nützlich, diese zu kennen und vermeiden zu können.}
+
+\lang{en}{The denomination eigenvalue and eigenvector may tell, that they code
+characteristics of a system. This is a right assumptoion. Later on
+we will see that in the example of the orbit of planets-
+Maybe you have already heard something of the natural oscillation of a system.
+These are also eigenvectors (in a mathematical deeper meaning of the Fourier analysis). 
+The natural osciallations of an instruments determine its characteristic sound.
+If a bridge is in its natural oscillation (resonance), it might collapse in the worst case.
+So it is very useful, to know these and avoid them.}
+
+
+
+\begin{example}\label{ex:beispiel-eigenwert}
+\lang{de}{Wir betrachten die Matrix $A= \left( \begin{smallmatrix}2 & 1 \\ 4 & -1\end{smallmatrix}\right) 
+\in M(2;\R)$. Dann ist
+\[  \begin{pmatrix} 2 & 1 \\ 4 & -1\end{pmatrix}\cdot \begin{pmatrix}1 \\ 1\end{pmatrix} 
+=\begin{pmatrix}3 \\ 3\end{pmatrix}
+= 3\cdot \begin{pmatrix} 1 \\ 1 \end{pmatrix}. 
+\]}
+\lang{en}{We consider the matrix $A= \left( \begin{smallmatrix}2 & 1 \\ 4 & -1\end{smallmatrix}\right) 
+\in M(2;\R)$. Then it is
+\[  \begin{pmatrix} 2 & 1 \\ 4 & -1\end{pmatrix}\cdot \begin{pmatrix}1 \\ 1\end{pmatrix} 
+=\begin{pmatrix}3 \\ 3\end{pmatrix}
+= 3\cdot \begin{pmatrix} 1 \\ 1 \end{pmatrix}. 
+\]}
+
+\lang{de}{
+Also ist $v=\left( \begin{smallmatrix}1 \\ 1\end{smallmatrix}\right) $ ein Eigenvektor zu $A$ und
+$\lambda=3$ ein Eigenwert. Ebenso ist z.B. $\left( \begin{smallmatrix}5 \\ 5\end{smallmatrix}\right)$
+ein Eigenvektor zum Eigenwert $3$, denn
+\[  \begin{pmatrix} 2 & 1 \\ 4 & -1\end{pmatrix}\cdot \begin{pmatrix}5 \\ 5\end{pmatrix} 
+=\begin{pmatrix}10+5 \\ 20-5\end{pmatrix}=  \begin{pmatrix} 15 \\ 15 \end{pmatrix}
+= 3\cdot \begin{pmatrix} 5 \\ 5 \end{pmatrix}. 
+\]}
+\lang{en}{
+So $v=\left( \begin{smallmatrix}1 \\ 1\end{smallmatrix}\right) $ is an eigenvector of $A$ and
+$\lambda=3$ an eigenvalue. Also is for example $\left( \begin{smallmatrix}5 \\ 5\end{smallmatrix}\right)$
+an eigenvector for the eigenvalue $3$, because
+\[  \begin{pmatrix} 2 & 1 \\ 4 & -1\end{pmatrix}\cdot \begin{pmatrix}5 \\ 5\end{pmatrix} 
+=\begin{pmatrix}10+5 \\ 20-5\end{pmatrix}=  \begin{pmatrix} 15 \\ 15 \end{pmatrix}
+= 3\cdot \begin{pmatrix} 5 \\ 5 \end{pmatrix}. 
+\]}
+\end{example}
+
+
+\begin{quickcheck}
+\lang{de}{\text{Ist $v=\begin{pmatrix}1\\1\end{pmatrix}$ ein Eigenvektor von $A=\begin{pmatrix} 4&-2\\1&1\end{pmatrix}$
+zum Eigenwert $\lambda=2$?}}
+\lang{en}{\text{Is $v=\begin{pmatrix}1\\1\end{pmatrix}$ an eigenvector of $A=\begin{pmatrix} 4&-2\\1&1\end{pmatrix}$
+to the eigenvalue $\lambda=2$?}}
+\begin{choices}{unique}
+
+        \begin{choice}
+            \text{\lang{de}{Ja.} \lang{en}{Yes.}}
+			\solution{true}
+		\end{choice}
+                    
+        \begin{choice}
+            \text{\lang{de}{Nein.} \lang{en}{No.}}
+			\solution{false}
+		\end{choice}
+      
+\end{choices}{unique}
+\lang{de}{\explanation{Weil $A\cdot v=\begin{pmatrix}2\\2\end{pmatrix}=2\cdot \begin{pmatrix}1\\1\end{pmatrix}$, ist $v$ Eigenvektor zum Eigenwert $\lambda=2$.}}
+\lang{de}{\explanation{Because $A\cdot v=\begin{pmatrix}2\\2\end{pmatrix}=2\cdot \begin{pmatrix}1\\1\end{pmatrix}$, $v$ is eigenvector for the eigenvalue $\lambda=2$.}}
+\end{quickcheck}
+\begin{quickcheck}
+\type{input.number}
+        \field{rational}
+        \precision{3}
+      \begin{variables}
+           \function{f}{5}
+      \end{variables}
+\lang{de}{\text{Der Vektor $e_2=\left(\begin{smallmatrix} 0\\1 \end{smallmatrix}\right)$ ist ein Eigenvektor der Matrix
+$A=\left(\begin{smallmatrix} 3&0\\0&5 \end{smallmatrix}\right)$. Wie lautet sein  Eigenwert $\lambda$?
+Antwort: $\lambda=$\ansref.}}
+\lang{en}{\text{The vector $e_2=\left(\begin{smallmatrix} 0\\1 \end{smallmatrix}\right)$ is an eigenvector of the matrix
+$A=\left(\begin{smallmatrix} 3&0\\0&5 \end{smallmatrix}\right)$. What is the corresponding eigenvalue $\lambda$?
+Answer: $\lambda=$\ansref.}} 
+      \begin{answer}
+    \solution{f}
+   \end{answer}
+   \lang{de}{\explanation{ Weil $A\cdot e_2=5\cdot e_2$, ist der Eigenwert $\lambda=5$.}}
+   \lang{en}{\explanation{ Because of $A\cdot e_2=5\cdot e_2$, the eigenvalue is $\lambda=5$.}}
+\end{quickcheck}
+
+
+\lang{de}{Möchten wir Eigenvektoren und Eigenwerte einer Matrix bestimmen, so wäre der direkte Weg
+das Gleichungssystem $Ax=\lambda x$ in den Variablen $x_1,\ldots,x_n$ und $\lambda$ zu lösen.
+Dies ist jedoch kein lineares Gleichungssystem (wegen der auftretenden Produkte $\lambda x_1$ etc.),
+und wir haben $n+1$ Unbestimmte aus $n$ Gleichungen. Also müssen wir anders vorgehen.}
+\lang{en}{If we want to determine the eigenvectors and eigenvalues of a matrix, the direct way
+would be to solve the linear system $Ax=\lambda x$ for the variables $x_1,\ldots,x_n$ and $\lambda$.
+Because of products like $\lambda x_1$, this is not a $\underline{\text{linear}}$ system and we have $n+1$ 
+unknowns in $n$ equations. So we need to find a different way.}
+
+\lang{de}{Schreiben wir $E_n\cdot x$ statt $x$ mit der $(n\times n)$-Einheitsmatrix $E_n$ (da ja $E_n\cdot x=x$ ist), 
+so können wir die Gleichung  $Ax=\lambda x$ geschickt umformen
+\begin{align*}
+ &&\quad Ax = \lambda E_n x \\
+&\Leftrightarrow &\: Ax-( \lambda E_n) x = 0\\
+ &\Leftrightarrow &\: (A-\lambda E_n)\cdot x  = 0.
+\end{align*}}
+\lang{en}{We write $I_n\cdot x$ instead $x$ with the $(n\times n)$-identity matrix $I_n$ (because it is $I_n\cdot x=x$), 
+so we can rewrite the equation  $Ax=\lambda x$ to
+\begin{align*}
+ &&\quad Ax = \lambda I_n x \\
+&\Leftrightarrow &\: Ax-( \lambda I_n) x = 0\\
+ &\Leftrightarrow &\: (A-\lambda I_n)\cdot x  = 0.
+\end{align*}}
+The value $\lambda$ is eigenvalue of $A$, if the \ref[lgs][homogeneous linear system]{def:homogen-inhomogen}
+$(A-\lambda E_n)\cdot x  = 0$ has a nontrivial solution $x$ (i.e. $x\neq 0$).
+
+\lang{de}{Im \ref[cramersche-regel][Abschnitt Cramersche Regel]{thm:lgs-mit-quadrat-matrix} wurde festgestellt, dass ein LGS mit quadratischer Matrix genau dann eine eindeutige Lösung besitzt,
+wenn die Determinante der Matrix nicht Null ist. Im Umkehrschluss heißt dies, dass das
+LGS $(A-\lambda E_n)\cdot x  = 0$ genau dann auch eine nicht-triviale Lösung $x$ besitzt, wenn die
+Determinante der Matrix  $(A-\lambda E_n)$ gleich $0$ ist.
+
+Dies formulieren wir als Satz.}
+
+\lang{en}{In the \ref[cramersche-regel][section Cramer's rule]{thm:lgs-mit-quadrat-matrix} we found out, that a linear system with
+a square matrix has exactly one solution if and only if the determinant of the matrix is unequal to zero.
+The reverse conclusion is, that the linear system $(A-\lambda E_n)\cdot x  = 0$ has also a nontrivial solution $x$ if and only if
+the determinant of the matrix $(A-\lambda i_n)$ is equal to $0$.
+
+We will put this into a theorem.}
+
+\begin{theorem}\label{thm:eigenwert-von-A}
+\lang{de}{
+Für eine $(n\times n)$-Matrix $A\in M(n;\K)$ gilt:
+
+Ein Zahl $\lambda\in \K$ ist genau dann ein Eigenwert von $A$, wenn
+\[  \det( A-\lambda E_n)=0. \]}
+\lang{en}{
+For a $(n\times n)$-matrix $A\in M(n;\K)$ holds:
+
+A number $\lambda\in \K$ is en eigenvalue of $A$, if and only if
+\[  \det( A-\lambda I_n)=0. \]}
+
+\lang{de}{
+Die Eigenvektoren zu einem Eigenwert $\lambda$ sind  genau die nicht-trivialen Lösungen des
+homogenen LGS $(A-\lambda E_n)\cdot x  = 0$.}
+\lang{en}{
+The eigenvectors to an eigenvalue $\lambda$ are exactly the nontrivial solutions of the homogeneous linear
+system $(A-\lambda I_n)\cdot x  = 0$.}
+\end{theorem}
+
+\begin{example}
+\lang{de}{
+Wir hatten im letzten Beispiel gesehen, dass $\lambda=3$ ein Eigenwert der Matrix $A= \left( \begin{smallmatrix}2 & 1 \\ 4 & -1\end{smallmatrix}\right) 
+\in M(2;\R)$ ist.
+Auf der anderen Seite ist auch
+\[  \det \big( \begin{pmatrix} 2 & 1 \\ 4 & -1 \end{pmatrix}-\begin{pmatrix}
+3 & 0 \\ 0 & 3 \end{pmatrix} \big) = \det \big(  \begin{pmatrix} -1 & 1 \\ 4 & -4 \end{pmatrix}\big)
+= -1\cdot (-4)- 1\cdot 4=0,\]
+was unseren Satz bestätigt.}
+\lang{en}{
+We have seen in the last example, that $\lambda=3$ is an eigenvalue of the matrix $A= \left( \begin{smallmatrix}2 & 1 \\ 4 & -1\end{smallmatrix}\right) 
+\in M(2;\R)$.
+On the other hand is also
+\[  \det \big( \begin{pmatrix} 2 & 1 \\ 4 & -1 \end{pmatrix}-\begin{pmatrix}
+3 & 0 \\ 0 & 3 \end{pmatrix} \big) = \det \big(  \begin{pmatrix} -1 & 1 \\ 4 & -4 \end{pmatrix}\big)
+= -1\cdot (-4)- 1\cdot 4=0,\]
+which conforms our theorem.}
+\end{example}
+%%
+\begin{quickcheck}
+\lang{de}{\text{Markieren Sie alle Zahlen, die Eigenwerte von  $A=\begin{pmatrix} 3&1\\-1&1\end{pmatrix}$ sind.}}
+\lang{en}{\text{Mark all the numbers, that are eigenvalues of  $A=\begin{pmatrix} 3&1\\-1&1\end{pmatrix}$.}}
+\begin{choices}{multiple}
+
+        \begin{choice}
+            \text{$\lambda=3$}
+			\solution{false}
+		\end{choice}                    
+        \begin{choice}
+            \text{$\lambda=2$}
+			\solution{true}
+		\end{choice}  
+        \begin{choice}
+            \text{$\lambda=1$}
+			\solution{false}
+		\end{choice} 
+\end{choices}
+\explanation{\lang{de}{Wir berechnen die Determinanten $\det(A-\lambda\cdot E_2)$
+für die verschiedenen Möglichkeiten von $\lambda$. Ist die Determinante gleich Null, so ist $\lambda$ Eigenwert, sonst nicht.
+Es ist $\det(A-3\cdot E_2)=1\neq 0$, $\det(A-2\cdot E_2)=0$ und $\det(A-1\cdot E_2)=1\neq 0$.}
+\lang{en}{We calculate the determinants $\det(A-\lambda\cdot E_2)$
+for the different options of $\lambda$. Is the determinant is equal to zero, then $\lambda$ is an eigenvalue, otherwise not.
+It is $\det(A-3\cdot E_2)=1\neq 0$, $\det(A-2\cdot E_2)=0$ and $\det(A-1\cdot E_2)=1\neq 0$.}}
+\end{quickcheck}
+\lang{de}{
+Bevor wir eine effektive Methode kennenlernen, die Eigenwerte einer Matrix zu bestimmen,
+halten wir weitere Eigenschaften von Eigenvektoren und Eigenwerten fest.}
+\lang{en}{Before we learn an effective method for determining the eigenvalues of matrix,
+we note some more characteristics of eigenvectors and eigenvalues.}
+
+
+\begin{remark}
+\lang{de}{Es sei $A\in M(n;\K)$ eine quadratische Matrix.}
+\lang{en}{Let $A\in M(n;\K)$ be a square matrix.}
+
+\begin{enumerate}[(i)]
+\item[(i)] \lang{de}{Der Eigenwert zu einem Eigenvektor $v$ ist eindeutig bestimmt, denn aus $Av=\lambda v$ und $Av=\mu v$
+folgt $\lambda v=\mu v$, also $\lambda=\mu$, weil $v\neq 0$.}
+\lang{en}{The eigenvalue for a eigenvector $v$ is uniquely determined, because from $Av=\lambda v$ and $Av=\mu v$
+results $\lambda v=\mu v$, so $\lambda=\mu$, because $v\neq 0$.}
+
+\item[(ii)] \lang{de}{Sind $v,w $ Eigenvektoren zum selben Eigenwert $\lambda$, dann ist auch jede nicht-triviale Linearkombination
+$\alpha v+\beta w\neq 0$ (mit $\alpha,\beta\in\K$) ein Eigenvektor zum Eigenwert $\lambda$,
+denn die Matrix-Vektor-Multiplikation ist linear, 
+\[A(\alpha v+\beta w)=\alpha Av+\beta Aw=\alpha\lambda v+\beta\lambda w=\lambda(\alpha v+\beta w).\]}
+\lang{en}{Are $v,w $ eigenvectors to the same eigenvalue $\lambda$, then every nontrivial
+linear combination $\alpha v+\beta w\neq 0$ (with $\alpha,\beta\in\K$) is an eigenvector for the eigenvalue $\lambda$,
+because the matrix-vector multiplication is linear, 
+\[A(\alpha v+\beta w)=\alpha Av+\beta Aw=\alpha\lambda v+\beta\lambda w=\lambda(\alpha v+\beta w).\]}
+
+\item[(iii)] \lang{de}{Folglich bilden die Eigenvektoren zu einem festen Eigenwert $\lambda$ unter Hinzunahme von Null
+einen Untervektorraum $V_\lambda$ von $V=\K^n$.}
+\lang{en}{As a consequence, the eigenvectors of a fix eigenvalue $\lambda$ form with the zero vector
+a vector subspace $V_\lambda$ of $V=\K^n$.}
+
+\item[(iv)] \lang{de}{Ist $\lambda\neq\mu$, dann ist $V_\lambda\cap V_\mu=\{0\}$ nach (i). 
+Insbesondere sind Eigenvektoren zu verschiedenen Eigenwerten linear unabhängig.}
+\lang{en}{Is $\lambda\neq\mu$, then is $V_\lambda\cap V_\mu=\{0\}$ because od (i). 
+Especially the eigenvectors for different eigenvalues are linearly independent.}
+
+\item[(v)] \lang{de}{Es kann also höchstens $n$ linear unabhängige Eigenvektoren und damit auch höchstens $n$ verschiedene
+Eigenwerte geben.}
+\lang{en}{We can have at most $n$ linearly independent eigenvectors and therefore at most $n$ 
+different eigenvalues.}
+\end{enumerate}
+\end{remark}
+
+\lang{de}{Das nachfolgende Video zeigt eine Einleitung zum Thema der Eigenwerte und Eigenvektoren. 
+Anhand von $2 \times 2$ Matrizen werden die Konzepte anschaulich verdeutlicht.
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10786&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}}\\
+
+
+
+\section{\lang{de}{Charakteristisches Polynom} \lang{en}{Characterstic polynomial}}\label{sec:charakteristischesPolynom}
+
+\lang{de}{Nach dem \lref{thm:eigenwert-von-A}{obigen Satz} sind die Eigenwerte
+einer Matrix $A\in M(n;\K)$ genau die Werte $\lambda\in \K$, für die $\det( A-\lambda E_n)=0$ gilt. Dies motiviert die folgende Definition.}
+\lang{en}{Because of the \lref{thm:eigenwert-von-A}{above theorem}, the eigenvalues of a matrix
+ $A\in M(n;\K)$ are exactly the values $\lambda\in \K$, for which $\det( A-\lambda I_n)=0$ holds. This motivates the following defnition.}
+
+\begin{definition}\label{def:char_pol}
+\lang{de}{Sei $A\in M(n;\K)$ und $t$ eine Variable. Dann heißt
+\[   p_A(t):=\det( A-t\cdot E_n) \]
+das \notion{charakteristische Polynom} von $A$.}
+\lang{en}{Let be $A\in M(n;\K)$ and $t$ be a variable. Then
+\[   p_A(t):=\det( A-t\cdot I_n) \]
+is called the \notion{characteristic polynomial} of $A$.}
+\end{definition}
+
+\lang{de}{
+Die Eigenwerte von $A$ sind also genau die Nullstellen der Polynomfunktion
+$p_A(t)$.}
+\lang{en}{
+The eigenvalues of $A$ are exactly the zeros of the polynomial function
+$p_A(t)$.}
+
+\begin{remark}
+\lang{de}{
+Indem man die Determinante $\det( A-t\cdot E_n)$ zum Beispiel \ref[determinante][Laplace-entwickelt]{rule:Laplace},
+sieht man, dass $p_A$ in der Tat eine Polynomfunktion ist, und
+dass der Grad genau durch die Größe $n$ der Matrix gegeben wird.
+Für $n=2$ und $n=3$ sieht man dies einfach auch aus den \ref[determinante][Formeln für die Determinante]{sec:determinanten-kleine-matrizen}.}
+\lang{en}{
+By using for example the \ref[determinante][Laplace expansion]{rule:Laplace} for the calculation of the determinant $\det( A-t\cdot I_n)$,#
+we see, that $p_A$ is indeed a polynomial function and that the degree is given by the size $n$ of the matrix.
+For $n=2$ and $n=3$ we see this right away with the \ref[determinante][formulas for the determinant]{sec:determinanten-kleine-matrizen}.}
+%Für $A=\left( \begin{smallmatrix}a & b \\ c & d\end{smallmatrix}\right) 
+%\in M(2;\K)$ ist
+%\begin{eqnarray*}
+%p_A(t) &=& \det \big( \begin{pmatrix} a & b \\ c & d
+%\end{pmatrix} - \begin{pmatrix}
+%t & 0 \\ 0 & t \end{pmatrix} \big)
+%= \det \big(  \begin{pmatrix} a-t & b \\ c & d-t
+%\end{pmatrix}\big) \\
+%&=& (a-t)\cdot(d-t)-b\cdot c=ad-at-td+t^2-bc\\
+%&=& t^2-(a+d)t+(ad-bc)
+%\end{eqnarray}
+\end{remark}
+%%
+
+
+\begin{quickcheck}
+\type{input.function}
+        \field{rational}
+        \precision{3}
+      \begin{variables}
+           \function{f}{(t-3)*(t-5)}
+      \end{variables}
+      \lang{de}{\text{Wie lautet das charakteristische Polynom von $A=\left(\begin{smallmatrix}3&0\\0&5
+\end{smallmatrix}\right)$?\\
+Antwort: $p_A(t)=$\ansref.}}   
+\lang{en}{\text{What is the charactersistic polynomial of $A=\left(\begin{smallmatrix}3&0\\0&5
+\end{smallmatrix}\right)$?\\
+Answer: $p_A(t)=$\ansref.}} 
+      \begin{answer}
+    \solution{f}
+   \end{answer}
+   \lang{de}{\explanation{Es ist $p_A(t)=\det(\begin{pmatrix} 3-t & 0 \\ 0 & 5-t \end{pmatrix})=(3-t)(5-t)$ (Diagonalmatrix!).}}
+\lang{en}{\explanation{It is $p_A(t)=\det(\begin{pmatrix} 3-t & 0 \\ 0 & 5-t \end{pmatrix})=(3-t)(5-t)$ (diagonal matrix!).}}
+\end{quickcheck}
+%%
+
+\begin{example}
+\begin{tabs*}[\initialtab{0}]
+\tab{\lang{de}{$(2\times 2)$-Matrix} \lang{en}{$(2\times 2)$-matrix}} 
+\lang{de}{
+Für die reelle $(2\times 2)$-Matrix $A=\left( \begin{smallmatrix}
+2 & 1 \\ 4 & -1 \end{smallmatrix}\right)$ berechnen wir  das charakteristische
+ Polynom}
+ \lang{en}{
+For the real $(2\times 2)$-matrix $A=\left( \begin{smallmatrix}
+2 & 1 \\ 4 & -1 \end{smallmatrix}\right)$ we calculate the characteristic polynomial}
+\begin{eqnarray*}
+ p_A(t) &=& \det \big( \begin{pmatrix} 2 & 1 \\ 4 & -1 \end{pmatrix}-\begin{pmatrix}
+t & 0 \\ 0 & t \end{pmatrix} \big) = \det \big(  \begin{pmatrix} 2-t & 1 \\ 4 & -1-t \end{pmatrix}\big)\\
+&=& (2-t)\cdot (-1-t)- 1\cdot 4=-2-2t+t+t^2-4=t^2-t-6.
+\end{eqnarray*}
+\lang{de}{
+Die Eigenwerte sind  genau die Nullstellen dieses quadratischen
+Polynoms, die wir mit der pq-Formel berechnen können,
+\begin{eqnarray*}
+&& t^2-t-6= 0 \\ &\Leftrightarrow & 
+t_{1,2}=-\frac{-1}{2}\pm \sqrt{\left(\frac{-1}{2}\right)^2-(-6)}=\frac{1}{2}\pm \sqrt{\frac{1+24}{4}}
+ = \frac{1}{2}\pm \frac{5}{2}.\\
+&\Leftrightarrow & t_1=3 \quad \text{oder} \quad t_2=-2.
+\end{eqnarray*}}
+\lang{en}{
+The eigenvalues are exactly the zeros of this square polynomial, which we calculate with help of the
+$pq-formula$,
+\begin{eqnarray*}
+&& t^2-t-6= 0 \\ &\Leftrightarrow & 
+t_{1,2}=-\frac{-1}{2}\pm \sqrt{\left(\frac{-1}{2}\right)^2-(-6)}=\frac{1}{2}\pm \sqrt{\frac{1+24}{4}}
+ = \frac{1}{2}\pm \frac{5}{2}.\\
+&\Leftrightarrow & t_1=3 \quad \text{or} \quad t_2=-2.
+\end{eqnarray*}}
+\lang{de}{
+Den Eigenwert $3$ haben wir erwartet, denn wir haben ihn schon im Beispiel \lref{ex:beispiel-eigenwert}{oben} untersucht.
+Außerdem besitzt die Matrix $A$ aber auch noch den Eigenwert $-2$. Die Eigenvektoren zu $-2$ erhalten wir als nicht-triviale Lösungen
+des LGS $(A-2\cdot E_2)x=0$, also
+\[ \begin{pmatrix} 2-(-2) & 1 \\ 4 & -1-(-2) \end{pmatrix}\cdot \begin{pmatrix} x_1 \\ x_2 \end{pmatrix} 
+=\begin{pmatrix} 0\\ 0\end{pmatrix}, \]
+beziehungsweise
+\[\begin{mtable}[\cellaligns{crcrcl}]
+\text{(I)}&\qquad 4 \cdot  x_1 & + & x_2 & = & 0 \\
+\text{(II)}&4 \cdot  x_1 & + & x_2 & =  & 0,
+\end{mtable}. \]}
+\lang{en}{
+We expected the eigenvalue $3$, because we already discussed it in the example \lref{ex:beispiel-eigenwert}{above}.
+Furthermore the matrix $A$ has also the eigenvalue $-2$. We get the eigenvectors coressponding to $-2$ as the nontrivial solutions
+of the linear system $(A-2\cdot I_2)x=0$, so
+\[ \begin{pmatrix} 2-(-2) & 1 \\ 4 & -1-(-2) \end{pmatrix}\cdot \begin{pmatrix} x_1 \\ x_2 \end{pmatrix} 
+=\begin{pmatrix} 0\\ 0\end{pmatrix}, \]
+respectively
+\[\begin{mtable}[\cellaligns{crcrcl}]
+\text{(I)}&\qquad 4 \cdot  x_1 & + & x_2 & = & 0 \\
+\text{(II)}&4 \cdot  x_1 & + & x_2 & =  & 0,
+\end{mtable}. \]}
+
+\lang{de}{Das heißt, $x_2=-4x_1$. Die nicht-trivialen Lösungen (und damit die Eigenvektoren zum Eigenwert $-2$) sind also die 
+Vektoren $r\cdot \left(\begin{smallmatrix}1 \\ -4
+\end{smallmatrix}\right)$ für $r\neq 0$.
+Fassen wir $A$ wie bisher als reelle Matrix auf, $A\in M(2;\R)$, dann sind diese Vielfachen reelle Vielfache, $r\in\R\setminus\{0\}$.}
+\lang{en}{That means, $x_2=-4x_1$. The nontrivial solutions (and therefore the eigenvectors for the eigenvalue $-2$) 
+are the vectors $r\cdot \left(\begin{smallmatrix}1 \\ -4
+\end{smallmatrix}\right)$ for $r\neq 0$.
+If we still consider $A$ as a real matrix, $A\in M(2;\R)$, then the multiples are real multiples, $r\in\R\setminus\{0\}$.}
+\\
+
+\lang{de}{Wir können aber ebenso gut $A\in M(2;\C)$ als komplexwertige Matrix begreifen. 
+Die Eigenvektoren sind dann alle $r \cdot \left(\begin{smallmatrix}1 \\ -4
+\end{smallmatrix}\right)\in \C^2$ mit $r\in\C\setminus\{0\}$ für den Eigenwert $-2$.
+Analog sind die komplexen Eigenvektoren zum Eigenwert $3$ gegeben durch  $r \cdot \left(\begin{smallmatrix}1 \\ 1
+\end{smallmatrix}\right)\in \C^2$ mit $r\in\C\setminus\{0\}$.}
+\lang{en}{But we can also consider $A\in M(2;\C)$ as a complex-valued matrix. 
+Then the eigenvectors are all $r \cdot \left(\begin{smallmatrix}1 \\ -4
+\end{smallmatrix}\right)\in \C^2$ with $r\in\C\setminus\{0\}$ for the eigenvalue $-2$.
+Analogously are the comples eigenvectors for the eigenvalue $3$ are given by $r \cdot \left(\begin{smallmatrix}1 \\ 1
+\end{smallmatrix}\right)\in \C^2$ wir $r\in\C\setminus\{0\}$.}
+
+\tab{\lang{de}{$(3\times 3)$-Matrix}\lang{en}{$(3\times 3)$-matrix}}\label{ex:eigenwerte-3x3}
+\lang{de}{Für die reelle $(3\times 3)$-Matrix $A=\left( \begin{smallmatrix}
+ 7 & 4&3 \\ 1& 4 & 1\\ -8&-8&-4 \end{smallmatrix}\right)$ berechnen wir das charakteristische
+ Polynom mit Hilfe der Regel von Sarrus}
+ \lang{en}{For the real $(3\times 3)$-matrix $A=\left( \begin{smallmatrix}
+ 7 & 4&3 \\ 1& 4 & 1\\ -8&-8&-4 \end{smallmatrix}\right)$ we calculate the characteristic
+ polynomial with help of the rule of Sarrus}
+\begin{eqnarray*}
+ p_A(t) &=& \det \big( \begin{pmatrix}  7-t & 4&3 \\ 1& 4-t & 1\\ -8&-8&-4-t  \end{pmatrix}\big)\\
+&=& (7-t)\cdot (4-t)\cdot (-4-t)+(-32)+(-24) - (-24)\cdot(4-t)
+- (-8)\cdot (7-t)- 4\cdot (-4-t) \\
+&=& -t^3+7t^2-12t =-t\cdot (t^2-7t+12)=-t\cdot (t-3)\cdot (t-4).
+\end{eqnarray*}
+\lang{de}{Die Eigenwerte von $A$ sind die Nullstellen dieses Polynoms, also
+$t_1=0$, $t_2=3$ und $t_3=4$.}
+\lang{en}{The eigenvalues of $A$ are the zero of this polynomial, so
+$t_1=0$, $t_2=3$ and $t_3=4$.}
+\\
+\lang{de}{
+Wer möchte, kann jetzt noch zu jedem Eigenwert die Eigenvektoren berechnen. 
+Wir gehen wieder davon aus, dass jeder die entsprechenden LGS $(A-t_j)x=0$ lösen kann, wie es im Kapitel zum 
+\link{content_05_gaussverfahren}{Gauß-Verfahren} ausführlich besprochen wird.}
+\lang{en}{
+Optionally, you may determine the eigenvectors for each eigenvalue. 
+We act on the assumption, that everyone is capable of soving the corresponding linear systems $(A-t_j)x=0$, as it was discussed in the chapter about 
+\link{content_05_gaussverfahren}{Gaussian elimination}.}
+
+\tab{\lang{de}{$(4\times 4)$-Matrix} \lang{en}{$(4\times 4)$-matrix}}\label{ex:eigenwerte-4x4}
+\lang{de}{Wir betrachten die reelle $(4\times 4)$-Matrix
+\[ A=\begin{pmatrix} 2&1&0 &0\\ 1&3&0&0\\ 1&-1&0&1\\ 1&2&5&4  \end{pmatrix}. \]
+Um dessen charakteristisches Polynom zu berechnen, verwenden wir die Formel für die 
+\ref[determinante][Determinante von Blockmatrizen]{rule:rechenregeln}}
+\lang{en}{We consider the real $(4\times 4)$-matrix
+\[ A=\begin{pmatrix} 2&1&0 &0\\ 1&3&0&0\\ 1&-1&0&1\\ 1&2&5&4  \end{pmatrix}. \]
+We use the formula for the \ref[determinante][determinant of block matrices]{rule:rechenregeln}
+to calculate the characteristic polynomial}
+\begin{eqnarray*}
+p_A(t) &=& \det \bigg( \begin{pmatrix} 2-t&1&0 &0\\ 1&3-t&0&0\\ 1&-1&0-t&1\\ 1&2&5&4-t  \end{pmatrix}\bigg) \\
+&=& \det \big( \begin{pmatrix} 2-t&1\\ 1&3-t\end{pmatrix}\big) \cdot \det \big( \begin{pmatrix}0-t&1\\ 5&4-t  \end{pmatrix}\big)\\
+&=& \big( (2-t)(3-t)-1\big)\cdot \big( -t(4-t)-5 \big) \\
+&=& (t^2-5t+5)\cdot (t^2-4t-5).
+\end{eqnarray*}
+
+\lang{de}{Man könnte jetzt das Produkt noch ausmultiplizieren, um ein Polynom in der Standardform zu bekommen. Aber das wollen wir gar nicht!\\
+Weil wir  an den Eigenwerten von $A$, also den Nullstellen des Polynoms interessiert sind, ist diese vorfaktorisierte
+Darstellung \emph{wesentlich} praktischer. Eine Zahl ist ja genau dann Nullstelle des Produkts, wenn sie Nullstelle
+eines der Faktoren ist.}
+\lang{en}{We could expand the product to get the polynomial in its standardform. But we do not want that!\\
+Since we are interested in the eigenvalues of $A$, so the zeros of the polynomials, we prefer this
+factorised representation. A number is a zero of the product exactly
+if it is zero of one of the factors.}
+
+\lang{de}{Die Eigenwerte sind also die Nullstellen von $t^2-5t+5$ und von $t^2-4t-5$, also
+\begin{eqnarray*}
+ t_{1,2} &=& \frac{5}{2} \pm \sqrt{(\frac{5}{2})^2-5 }=\frac{5}{2} \pm \sqrt{\frac{25-20}{4}}=\frac{5\pm\sqrt{5}}{2},\\
+ t_{3,4} &=& \frac{4}{2} \pm \sqrt{(\frac{4}{2})^2+5 }=2 \pm \sqrt{4+5}=2\pm 3.
+ %t_1 &=& \frac{5}{2} +\frac{1}{2}\cdot \sqrt{5}, \qquad t_2 = \frac{5}{2} -\frac{1}{2}\cdot \sqrt{5},
+ %t_3 = 2+3=5,\qquad t_4 = 2-3=-1.
+ \end{eqnarray*}
+Die Eigenwerte sind also $\frac{5+\sqrt{5}}{2}$, $\frac{5-\sqrt{5}}{2}$, $5$ und $-1$.}
+\lang{en}{So the eigenvalues are the zeros of $t^2-5t+5$ and $t^2-4t-5$, so
+\begin{eqnarray*}
+ t_{1,2} &=& \frac{5}{2} \pm \sqrt{(\frac{5}{2})^2-5 }=\frac{5}{2} \pm \sqrt{\frac{25-20}{4}}=\frac{5\pm\sqrt{5}}{2},\\
+ t_{3,4} &=& \frac{4}{2} \pm \sqrt{(\frac{4}{2})^2+5 }=2 \pm \sqrt{4+5}=2\pm 3.
+ %t_1 &=& \frac{5}{2} +\frac{1}{2}\cdot \sqrt{5}, \qquad t_2 = \frac{5}{2} -\frac{1}{2}\cdot \sqrt{5},
+ %t_3 = 2+3=5,\qquad t_4 = 2-3=-1.
+ \end{eqnarray*}
+The eigenvalues are $\frac{5+\sqrt{5}}{2}$, $\frac{5-\sqrt{5}}{2}$, $5$ and $-1$.}
+\\
+\lang{en}{
+Anyone who wants, can calcute the eigenvectors corresponding to each of those eigenvalues $\lambda$. 
+Wir gehen wieder davon aus, dass jeder die entsprechenden LGS $(A-\lambda E_2)x=0$ lösen kann.}
+\end{tabs*}
+\end{example}
+
+\lang{de}{
+Ob eine Matrix $A\in M(n;\K)$ Eigenwerte besitzt, ist im Allgemeinen vom betrachteten Körper $\K$ abhängig.
+Es kann sogar vorkommen, dass eine Matrix überhaupt keine Eigenwerte in $\K$ hat, nämlich wenn das
+charakteristische Polynom keine Nullstellen in $\K$ hat. Dementsprechend gibt es dann auch keine Eigenvektoren.
+Um trotzdem über die Eigenwerte sprechen zu können, vergrößert man dann oft den Körper, in dem das charakteristische Polynom
+dann Nullstellen bekommt.}
+\lang{en}{
+In general it depends on the considered field $\K$ if a matrix $A\in M(n;\K)$ has eigenvalues.
+It can happen, that a matrix does not have any eigenvalues in $\K$ hat. This is the case if the characteristic polynomial
+does not have zeros in $\K$ hat. Therefore there are no eigenvectors.
+To still be able to talk about eigenvalues, we extend the field to receive zeros of the polynomial.}
+
+\lang{de}{
+Kann man keine Nullstellen in den rationalen Zahlen finden, so kann man nach reellen suchen. Dann betrachtet man statt $\Q$ den größeren Körper $\R$, der $\Q$ enthält.
+Findet man keine reellen Nullstellen, dann kann man sie in den komplexen Zahlen suchen. Dabei ersetzt man dann  $\R$ durch den größeren Körper $\C$.
+\\ 
+Ob das von der Problemstellung her sinnvoll ist, muss im Einzelfall entschieden werden.}
+\lang{en}{
+If we cannot find zeros in the rational numbers, we can search for real ones. Then we consider $\R$ instead of $\Q$, because $\Q\subset\R$.
+If we cannot find real zeros, then we can look for them in the complex number. Therefore we replace $\R$ by $\C$.
+\\
+If this makes sence though depends on the problem.}
+
+
+
+\begin{example}\label{ex:keine-reellen-eigenwerte}
+\begin{tabs*}[\initialtab{0}]
+\tab{\lang{de}{Keine EW über $\Q$} \lang{en}{No eigenvalues over $\Q$}}
+\lang{de}{
+Die rationale Matrix $A=\left(\begin{smallmatrix}2&1\\1&-2\end{smallmatrix}\right)\in M(2;\Q)$ hat das charakteristische Polynom
+\[ p_A(t)=\det    \left(\begin{smallmatrix}2-t&1\\1&-2-t \end{smallmatrix}\right)=t^2-5.\]
+Weil $\sqrt{5}$ nicht rational ist, hat $p_A$ keine rationalen Nullstellen.
+Dementsprechend hat $A$ keine Eigenwerte in $\Q$ und keine Eigenvektoren in $\Q^2$.}
+\lang{en}{
+The rational matrix $A=\left(\begin{smallmatrix}2&1\\1&-2\end{smallmatrix}\right)\in M(2;\Q)$ has the characteristic polynomial
+\[ p_A(t)=\det    \left(\begin{smallmatrix}2-t&1\\1&-2-t \end{smallmatrix}\right)=t^2-5.\]
+Since $\sqrt{5}$ is not rational, $p_A$ does not have rational zeros.
+Therefore $A$ does not have eigenvalues in $\Q$ and no eigenvectors in $\Q^2$.}
+
+\lang{de}{Erst wenn  wir  $A$ als reelle Matrix begreifen, also $A\in M(2;\R)$ betrachten,
+dann finden wir die reellen Eigenwerte $\lambda=\sqrt{5}$ und $\mu=-\sqrt{5}$.
+Und dann gibt es die Eigenvektoren $v_\lambda=\left(\begin{smallmatrix}2-\sqrt{5}\\1\end{smallmatrix}\right)\in\R^2$ zum
+Eigenwert $\lambda$ und $v_\mu=\left(\begin{smallmatrix}2+\sqrt{5}\\1\end{smallmatrix}\right)\in\R^2$ zum Eigenwert $\mu$.
+Jedes reelle Vielfache $rv_\mu$ bzw. $rv_\nu$ mit $r\in\R\setminus\{0\}$ ist ebenfalls
+ein Eigenvektor, aber keines dieser Vielfachen liegt in $\Q^2$.}
+\lang{en}{Only if we consider $A$ as a real matrix, so $A\in M(2;\R)$,
+then we find the real eigenvalues $\lambda=\sqrt{5}$ und $\mu=-\sqrt{5}$.
+As a consequence we have the eigenvectors $v_\lambda=\left(\begin{smallmatrix}2-\sqrt{5}\\1\end{smallmatrix}\right)\in\R^2$ 
+for the eigenvalue $\lambda$ and $v_\mu=\left(\begin{smallmatrix}2+\sqrt{5}\\1\end{smallmatrix}\right)\in\R^2$ for the eigenvalue $\mu$.
+Each real multiple $rv_\mu$, respectively $rv_\nu$ $r\in\R\setminus\{0\}$ is also an eigenvectore,
+but non of the multiplies is an element of $\Q^2$.}
+%%
+
+\tab{\lang{de}{Keine EW über $\Q$ und $\R$} \lang{en}{No eigenvalues over $\Q$ and $\R$}}
+\lang{de}{Die rationale Matrix $B=\left(\begin{smallmatrix}1&1\\-1&1\end{smallmatrix}\right)\in M(2;\Q)$ hat das charakteristische Polynom
+\[ p_B(t)=\det    \left(\begin{smallmatrix}1-t&1\\-1&1-t \end{smallmatrix}\right)=t^2-2t+2.\]
+Dieses Polynom hat weder in $\Q$ noch in $\R$ Nullstellen,
+denn wir finden die komplexen Nullstellen $\lambda=1+i$ und $\mu=1-i$.
+Dementsprechend hat $B$ keine Eigenwerte in $\Q$ und keine Eigenvektoren in $\Q^2$.}
+\lang{en}{The rational matrix $B=\left(\begin{smallmatrix}1&1\\-1&1\end{smallmatrix}\right)\in M(2;\Q)$ has the characteristic polynomial
+\[ p_B(t)=\det    \left(\begin{smallmatrix}1-t&1\\-1&1-t \end{smallmatrix}\right)=t^2-2t+2.\]
+This polynomial neither has zeros in $\Q$ nor in $\R$,
+because we find the complex zeros  $\lambda=1+i$ and $\mu=1-i$.
+Accordingly $B$ does not have eigenvalues in $\Q$ and no eigenvectors in $\Q^2$.}
+\\
+\lang{de}{
+Selbst wenn wir $B$ als reelle Matrix auffassen, $B\in M(2;\R)$ finden wir keine Eigenwerte und Eigenvektoren.}
+\lang{en}{
+Even we consider $B$ as a real matrix, $B\in M(2;\R)$ we do not find eigenvalues and eigenvectors.}
+\\
+\lang{de}{
+Erst wenn wir $B\in M(2;\C)$ betrachten finden wir die Eigenwerte $\lambda$ und $\mu$. Und erst in $\C^2$
+gibt es Eigenvektoren, nämlich zu $\lambda=1+i$ die Eigenvektoren 
+$r\cdot \left(\begin{smallmatrix}1\\i \end{smallmatrix}\right)$, $r\in\C\setminus\{0\}$,
+und zu $\mu=1-i$ die Eigenvektoren $r\cdot \left(\begin{smallmatrix}i\\1 \end{smallmatrix}\right)$, $r\in\C\setminus\{0\}$.}
+\lang{en}{
+We need to consider $B\in M(2;\C)$ to find the eigenvalues $\lambda$ and $\mu$. 
+And not till we consider $\C^2$ we find the eigenvectors, so for $\lambda=1+i$ the eigenvectors 
+$r\cdot \left(\begin{smallmatrix}1\\i \end{smallmatrix}\right)$, $r\in\C\setminus\{0\}$,
+and for $\mu=1-i$ the eigenvectors $r\cdot \left(\begin{smallmatrix}i\\1 \end{smallmatrix}\right)$, $r\in\C\setminus\{0\}$.}
+% Für die reelle $(2\times 2)$-Matrix $A=\left( \begin{smallmatrix}
+%   1&2 \\ -1& 1 \end{smallmatrix}\right)\in M(2;\R)$ ist das charakteristische
+%  Polynom:
+% \[ p_A(t)=\det   \big( \begin{pmatrix}1-t & 2 \\ -1& 1-t \end{pmatrix}\big)=(1-t)^2+2.\] 
+% Da Quadrate reeller Zahlen immer $\geq 0$ sind, besitzt dieses 
+% Polynom offensichtlich keine reellen Nullstellen. Somit besitzt
+% die Matrix $A$ keine reellen Eigenwerte und auch keine reellen
+% Eigenvektoren.
+
+% Würde man die Matrix über dem Körper $\C$ der komplexen Zahlen 
+% betrachten, sähe dies anders aus. Dann hat das charakteristische
+% Polynom die komplexen Nullstellen $1-i\sqrt{2}$ und $1+i\sqrt{2}$.
+% Durch Lösen der Gleichungssysteme sieht man dann weiter, dass 
+% alle (komplexen) Eigenvektoren zu $1-i\sqrt{2}$ von der Form
+% $c\cdot \left( \begin{smallmatrix}i\sqrt{2} \\ 1\end{smallmatrix}\right)$ mit $c\in \C\setminus \{0\}$ sind, und
+% alle (komplexen) Eigenvektoren zu $1+i\sqrt{2}$ von der Form
+% $c\cdot \left( \begin{smallmatrix} i\sqrt{2} \\ -1\end{smallmatrix}\right)$ mit $c\in \C\setminus \{0\}$.
+% Aber es lässt sich kein $c\in \C\setminus\{0\}$ so finden, dass eines der Vielfachen zu $\R^2$ gehört.
+\end{tabs*}
+\end{example}
+
+\lang{de}{
+Im \link{symmetrische-matrix}{nächsten Abschnitt} werden wir  eine
+Art von reellen Matrizen kennenlernen, die stets reelle Eigenwerte
+hat.}
+\lang{en}{
+In the \link{symmetrische-matrix}{next section} we will get to know a type of reail matrices,
+that always has real eigenvectors.}
+
+\lang{de}{
+Um im Allgemeinen sicher zu gehen, dass eine Matrix Eigenwerte und Eigenvektoren besitzt, reicht es, 
+sie über den komplexen Zahlen zu betrachten.}
+\lang{en}{
+To make sure, that a matrix has eigenvalues and eigenvectors, in general we consider it over the complex numbers.}
+
+\begin{remark}\label{rem:matrizen-ueber-c}
+\lang{de}{Für jede Matrix $A\in M(n;\C)$ mit Einträgen in den komplexen Zahlen zerfällt das charakteristische Polynom $p_A(t)$ von $A$ in Linearfaktoren, 
+und insbesondere besitzt $A$ (mindestens) einen Eigenwert.
+Dies folgt direkt daraus, dass über den komplexen Zahlen jedes Polynom in Linearfaktoren zerfällt
+(siehe \ref[content_08aneu_komplexeZahlen_intro][Abschnitt Komplexe Zahlen]{sec:fundamentalsatz-der-algebra}).}
+\lang{en}{For each matrix $A\in M(n;\C)$ with entries in the complex numbers
+the characteristic polynomial $p_A(t)$ of $A$ can be displayed as a product of linear factors,
+and especially $A$ has (at least) one eigenvalue.
+The reason why is given in the section about the \ref[content_08aneu_komplexeZahlen_intro][complex numbers]{sec:fundamentalsatz-der-algebra}.}
+\end{remark}
+
+\lang{de}{
+Für reelle Matrizen mit (potentiell) komplexen Eigenwerten gilt der folgende Satz, 
+den wir im \link{symmetrische-matrix}{nächsten Abschnitt} benutzen werden.}
+\lang{en}{
+For real matrices with (potentielly) complex eigenvalues holds the following theorem,
+which we willl use in the \link{symmetrische-matrix}{next section}.}
+
+\begin{theorem}
+\lang{de}{
+Ist $A$ eine reelle $(n \times n)$ Matrix und $\lambda \in \C$ ein Eigenwert von $A$,
+dann ist auch $\overline{\lambda}$ ein Eigenwert von $A$.}
+\lang{en}{
+Is $A$ a real $(n \times n)$-matrix and und $\lambda \in \C$ an eigenvalue of $A$,
+the $\overline{\lambda}$ is an eigenvalue of $A$.}
+\end{theorem}
+
+\begin{proof*}
+\begin{showhide}
+\lang{de}{Wenn $\lambda$ ein Eigenwert ist, dann gilt $p_A(\lambda)=0$.
+Nun betrachten wir die komplex konjugierte Gleichung $\overline{p_A(\lambda)}=0$.
+Es ist also
+\[
+0 = \overline{p_A(\lambda)} = \overline{\det(A-\lambda \cdot E_n)}
+= \det(\overline{A}- \overline{\lambda} \cdot E_n) = \det(A- \overline{\lambda}\cdot E_n),
+\]
+weil $A$ eine reelle Matrix ist, d.h. $A = \overline{A}$. Damit ist $\overline{\lambda}$ auch ein Eigenwert.}
+\lang{en}{If $\lambda$ is an eigenvalue, then holds $p_A(\lambda)=0$.
+Now we consider the complex conjugated equation $\overline{p_A(\lambda)}=0$.
+So it is
+\[
+0 = \overline{p_A(\lambda)} = \overline{\det(A-\lambda \cdot I_n)}
+= \det(\overline{A}- \overline{\lambda} \cdot I_n) = \det(A- \overline{\lambda}\cdot I_n),
+\]
+because $A$ is a real matrix, i.e. $A = \overline{A}$. Therefore $\overline{\lambda}$ is also an eigenvalue.}
+\end{showhide}
+\end{proof*}
+
+\lang{de}{
+Dass es nicht immer sinnvoll ist, eine reelle Matrix von vornherein über den komplexen Zahlen zu betrachten,
+ um die Existenz von Eigenwerten zu sichern, zeigt das folgende Beispiel.}
+ \lang{en}{
+It is not always useful to consider a real matrix over the complex numbers right away.
+This shows the following example.}
+ 
+ \begin{example}[\lang{de}{Drehmatrizen} \lang{en}{Rotation matrices}]
+\lang{de}{Wir betrachten Matrizen der Form
+ \[D_\phi=\begin{pmatrix}\cos\phi&-\sin\phi\\\sin\phi&\cos\phi\end{pmatrix}\in M(2;\R)\]
+ mit $\phi\in\R$.
+ Wie wir wissen, beschreiben solche Matrizen \ref[quadrat-matrizen][Drehungen]{ex:drehmatrix} $f_\phi:\R^2\to\R^2$.} 
+ \lang{en}{We consider matrices of the form
+ \[D_\phi=\begin{pmatrix}\cos\phi&-\sin\phi\\\sin\phi&\cos\phi\end{pmatrix}\in M(2;\R)\]
+ with $\phi\in\R$.
+ As we know, that such matrices describe \ref[quadrat-matrizen][rotations]{ex:drehmatrix} $f_\phi:\R^2\to\R^2$.}
+ \begin{incremental}[\initialsteps{0}]
+ 
+ \step
+ \lang{de}{
+ Wenn wir den Fall $\phi\in\{\pi k\mid k\in\Z\}$ ausschließen (denn dafür ist $D_{\pi k}=\pm E_2$),
+ bleibt kein Vektor $v\in\R^2\setminus\{0\}$  bei der Drehung $D_\phi$ fest oder wird auf ein Vielfaches geschickt.
+ Die Matrix $D_\phi$ kann  also keine reellen Eigenwerte haben.
+ Das können wir natürlich am charakteristischen Polynom bestätigen
+ \[p_{D_\phi}(t)=\det    \left(\begin{smallmatrix}\cos\phi-t&-\sin\phi\\\sin\phi&\cos\phi-t \end{smallmatrix}\right)=
+ (\cos\phi-t)^2+(\sin\phi)^2=t^2-2\cos\phi\cdot t+1.\]
+ Die Diskriminante dieses quadratischen Polynoms ist $(\cos\phi)^2-1<0$, 
+ wann immer $\phi\notin\{\pi k\mid\pi\in\Z\}$, also gibt es keine reellen Nullstellen.}
+ \lang{en}{
+ If we exlude the case $\phi\in\{\pi k\mid k\in\Z\}$ (because then it is $D_{\pi k}=\pm I_2$),
+ there is no vector $v\in\R^2\setminus\{0\}$ left, that is fix for the rotation $D_\phi$ oder mapped onto a multiple.
+ So the matrix $D_\phi$ cannot have real eigenvalues.
+ We can confirm that with the characteristic polynomial
+ \[p_{D_\phi}(t)=\det    \left(\begin{smallmatrix}\cos\phi-t&-\sin\phi\\\sin\phi&\cos\phi-t \end{smallmatrix}\right)=
+ (\cos\phi-t)^2+(\sin\phi)^2=t^2-2\cos\phi\cdot t+1.\]
+ The diskriminant of this square polynomial is $(\cos\phi)^2-1<0$, 
+ whenever $\phi\notin\{\pi k\mid\pi\in\Z\}$, so there are no real zeros of the polynomial.}
+ 
+ \step
+ \lang{de}{Die komplexen Nullstellen des charakteristischen Polynoms sind $\lambda_{\pm}=\cos\phi\pm i\sin\phi=e^{\pm i\phi}$, 
+ und zu diesen Eigenwerten finden wir Eigenvektoren in $\C^2$, nämlich die nicht-trivialen
+ Vielfachen von $v_+=\left(\begin{smallmatrix}i\\1 \end{smallmatrix}\right)$ 
+ bzw. von $v_-=\left(\begin{smallmatrix}1\\i \end{smallmatrix}\right)$.}
+  \lang{en}{The complex zeros of the characteristic polynomial are $\lambda_{\pm}=\cos\phi\pm i\sin\phi=e^{\pm i\phi}$, 
+ an for those eigenvalues we find eigenvectors in $\C^2$, namely the nontrivial
+ multiples of $v_+=\left(\begin{smallmatrix}i\\1 \end{smallmatrix}\right)$ 
+ respectively of $v_-=\left(\begin{smallmatrix}1\\i \end{smallmatrix}\right)$.}
+ \\
+ \lang{de}{Betrachtet man die $f_\phi:\C^2\to\C^2$, $x\mapsto D_\phi x$ bezüglich der Basis $v_+,v_-$, so
+ ist die \ref[content_10b_lineare_abb][Abbildungsmatrix]{abb_matrix}  gegeben durch
+ \[\begin{pmatrix}e^{ i\phi}&0\\0&e^{-i\phi}\end{pmatrix}.\]
+ Um aus dieser komplexen Abbildungsmatrix abzulesen, dass es sich ursprünglich um eine reelle Drehung handelte,
+ braucht es doch ein gutes Maß Erfahrung.}
+  \lang{en}{If we consider $f_\phi:\C^2\to\C^2$, $x\mapsto D_\phi x$ with respect to the basis $v_+,v_-$, 
+  the \ref[content_10b_lineare_abb][matrix of the map]{abb_matrix} is given by
+ \[\begin{pmatrix}e^{ i\phi}&0\\0&e^{-i\phi}\end{pmatrix}.\]
+ To read off this complex matrix of the linear map, that it is originally a real rotation, we need quite some experience.}
+\\
+lang{de}{Der Übergang zu den komplexen Zahlen hat uns  zwar mit Eigenwerten und Eigenvektoren versorgt,
+aber unsere geometrische Interpretation ist dabei verloren gegangen.}
+lang{de}{The transition to the complex numbers gave us eigenvalues and eigenvectors, but we lost
+the geometrical interpretation.}
+\end{incremental}
+\end{example}
+
+\lang{de}{Im letzten Beispiel haben wir gesehen, dass die Eigenwerte der Matrix $A$ aufgefasst als lineare Abbildung sich nicht ändern, 
+wenn man die Basis wechselt.}
+\lang{en}{We have seen in the last example, that the eigenvalues of the matrix $A$ cosidere as a linear map do not change,
+if we change the basis.}
+\begin{remark}
+\begin{enumerate}
+\item[(i)]
+\lang{de}{
+Es seien $A,B\in M(n;\K)$ quadratische Matrizen, und $B$ sei invertierbar. 
+Dann haben die Matrizen $A$ und $B^{-1}AB$ dasselbe charakteristische Polynom, also auch dieselben Eigenwerte.}
+\lang{en}{
+Let $A,B\in M(n;\K)$ be square matrices, and $B$ be invertible. 
+Then the matrices $A$ and $B^{-1}AB$ have the same characteristic polynom, so also the same eigenvalues.}
+\item[(ii)]
+\lang{de}{Es sei $V$ ein $n$-dimensionaler $\K$-Vektorraum und $\phi:V\to V$ eine lineare Abbildung auf $V$.
+Ein Vektor $v\in V\setminus\{0\}$ heißt Eigenvektor von $\phi$ zum Eigenwert $\lambda\in\K$, wenn gilt $\phi(v)=\lambda v$.}
+\lang{en}{Let $V$ be a $n$-dimensional $\K$-vector space and $\phi:V\to V$ a linear map.
+A vector $v\in V\setminus\{0\}$ is called eigenvector of $\phi$ for the eigenvaluet $\lambda\in\K$, if it holds $\phi(v)=\lambda v$.}
+\item[(iii)]
+\lang{de}{Ist $v_1,\ldots, v_n$ irgendeine Basis von $V$ und $A$ die Abbildungsmatrix von $\phi$ bezüglich dieser Basis,
+dann sind die Eigenwerte von $\phi$ genau die Eigenwerte von $A$.}
+\lang{en}{Is $v_1,\ldots, v_n$ any basis of $V$ and $A$ matrix of the linear map $\phi$ with respect to this basis,
+then the eigenvalues of $\phi$ are exactly the eigenvalues of $A$.}
+\item[(iv)]
+\lang{de}{Das charakteristische Polynom der linearen Abbildung $\phi$ ist das einer beliebigen Abbildungsmatrix zu $\phi$.}
+\lang{en}{The characteristic polynomial of the linear map $\phi$ is the characteristic polynomial of a random matrix of the linear map $\phi$.}
+\end{enumerate}
+\end{remark}
+
+\begin{proof*}
+\begin{showhide}
+\lang{de}{Zu (i): Wir bemerken $B^{-1}(A-tE_n)B=B^{-1}AB-tB^{-1}E_n B=B^{-1}AB-tE_n$. 
+Mit Hilfe des \ref[determinante][Determinantenmultiplikationssatzes und der Determinante einer inversen Matrix]{rule:rechenregeln}
+sehen wir also
+\[p_{B^{-1}AB}(t)=\det(B^{-1}AB-tE_n)=\det(B^{-1})\cdot \det(A-tE_n)\cdot\det(B)=\det(A-tE_n)=p_A(t).\]
+Die Eigenwerte von $B^{-1}AB$ und $A$ sind jeweils die Nullstellen des charakteristischen Polynoms, also gleich.}
+\lang{en}{(i): We note $B^{-1}(A-tI_n)B=B^{-1}AB-tB^{-1}I_n B=B^{-1}AB-tI_n$. 
+With the help of the\ref[determinante][ Multiplicative property of determinants and the determinant of an inverse]{rule:rechenregeln}
+we see, that
+\[p_{B^{-1}AB}(t)=\det(B^{-1}AB-tI_n)=\det(B^{-1})\cdot \det(A-tI_n)\cdot\det(B)=\det(A-tI_n)=p_A(t).\]
+The eigenvalues of $B^{-1}AB$ and $A$ are the zeros of the characteristic polynomials, so the same.}
+
+\lang{de}{(ii) ist eine Definition, und (iii) ist eine Tautologie, die uns aber zeigt, dass Eigenwerte unabhängig von der Basiswahl sind.}
+\lang{en}{(ii) is a definition, und (iii) is a tautology (formally true proposition), but it shows, that the eigenvalues do not dependent on the choice of the basis.}
+
+\lang{de}{Für (iv) wenden wir (i) an. Jeder Basiswechsel erzeugt eine Basiswechselmatrix $B$, 
+mit der sich die neue Abbildungsmatrix bestimmen lässt als $B^{-1}AB$. 
+Die charakteristischen Polynome aller möglichen Abbildungsmatrizen sind also dieselben, 
+und somit ist das charakteristische Polynom der linearen Abbildung wohldefiniert.}
+\lang{en}{For (iv) we apply (i). Each basis transformations generates a basis transformation matrix $B$, 
+with which the new matrix of the linear map is determined as $B^{-1}AB$. 
+The characteristic polynomials of all possible matrices corresponding the linear map are identical,
+and therefore the characteristic polynomial of a linear map is well-defined.}
+\end{showhide}
+\end{proof*}
+
+\lang{de}{Wir können  Eigenvektoren also dazu benutzen, zu einer linearen Abbildung eine Basis des $\K^n$ so zu wählen, dass
+die Abbildungsmatrix möglichst einfach wird. Dem sind manchmal allerdings Grenzen gesetzt, wie das nächste Beispiel zeigt.}
+\lang{en}{We can utilise eigenvectors to choose the basis of $\K^n$ of a  linear map such, that the corresponding matrix is
+as easy as possible. However, sometimes there are limits to that, as we will see in the next example.}
+
+\begin{example}
+\lang{de}{Betrachten wir die lineare Abbildung $f:\K^n\to\K^n$ und nehmen an, dass das charakteristische Polynom von $f$
+über $\K$ bereits $n$ Nullstellen $\lambda_1,\cdots,\lambda_n$ hat. Diese müssen nicht notwendig alle verschieden sein.}
+\lang{en}{If we consider the linear map $f:\K^n\to\K^n$ and assume, that the characteristic polynomial of $f$
+already has $n$ zeros $n$ Nullstellen $\lambda_1,\cdots,\lambda_n$ in $\K$. They do not necessarily need to be different.}
+
+\begin{tabs*}[\initialtab{0}]
+\tab{\lang{de}{$n$ verschiedene Eigenwerte} \lang{en}{$n$ different eigenvalues}}
+\lang{de}{Nehmen wir an, wir haben $n$ (paarweise) verschiedene Eigenwerte $\lambda_1,\cdots,\lambda_n$ zu $f$ gefunden.
+Zu jedem Eigenwert $\lambda_j$ gibt es einen Eigenvektor $v_j\neq 0$, $j=1,\ldots,n$, und diese Eigenvektoren sind linear unabhängig. 
+Sie bilden also eine Basis $B$ von $\K^n$. Die Abbildungsmatrix $A=\!{\phantom{f}}_{B}f_{B}$ hat dann Diagonalform mit den Eigenwerten auf der Diagonalen
+ \[A=\begin{pmatrix}\lambda_1&0&\cdots&0\\0&\ddots&\ddots&\vdots\\\vdots&\ddots&\ddots&0\\0&\cdots&0&\lambda_n\end{pmatrix}
+ \quad{ \in }M(n;\K).\]}
+\lang{en}{We assume, that we have found $n$ (pairwise) different eigenvalues $\lambda_1,\cdots,\lambda_n$ to $f$.
+For each eigenvalue $\lambda_j$ we have an eigenvector $v_j\neq 0$, $j=1,\ldots,n$, and those eigenvectors are linearly independent.
+So they form a basis $B$ of $\K^n$. The matrix displaying the linear map $A=\!{\phantom{f}}_{B}f_{B}$ is in diagonal form and has the eigenvalues on its diagonal
+ \[A=\begin{pmatrix}\lambda_1&0&\cdots&0\\0&\ddots&\ddots&\vdots\\\vdots&\ddots&\ddots&0\\0&\cdots&0&\lambda_n\end{pmatrix}
+ \quad{ \in }M(n;\K).\]}
+ 
+\tab{\lang{de}{Doppelter Eigenwert} \lang{en}{Double eigenvalue}}
+\lang{de}{Nehmen wir an, dass unter den Nullstellen des charakteristischen Polynoms mindestens eine doppelt auftritt.
+Um zu illustrieren, was passieren kann, betrachten wir der Einfachheit halber Beispiele von $(2\times 2)$-Matrizen, also Abbildungen von $\K^2\to\K^2$ bezüglich der Standardbasis.
+Wir betrachten
+\[A=\begin{pmatrix}\lambda&0\\0&\lambda\end{pmatrix}\quad \text{ und }\quad B=\begin{pmatrix}\lambda&1\\0&\lambda\end{pmatrix}.\]
+Beide Matrizen haben dasselbe charakteristische Polynom
+\[p_A(t)=\det(\left(\begin{smallmatrix}\lambda-t&0\\0&\lambda-t\end{smallmatrix}\right))=(\lambda-t)^2=
+\det(\left(\begin{smallmatrix}\lambda-t&1\\0&\lambda-t\end{smallmatrix}\right))=p_B(t).\]
+Für $A$ existieren offensichtlich zwei linear unabhängige Eigenvektoren zum Eigenwer $\lambda$, zum Beispiel $e_1,e_2$ (oder irgendzwei andere linear unabhängige Vektoren in $\K^2$), und die lineare Abbildung hat Diagonalform.
+Für $B$ ist das nicht der Fall. Zwar ist $e_1$ ein Eigenvektor zu $\lambda$, aber jeder andere ist ein Vielfaches von $e_1$.
+Das sehen wir, in dem wir die Eigenvektorgleichung lösen
+\[(B-\lambda E_2)v=0\Leftrightarrow \left(\begin{smallmatrix}0&1\\0&0\end{smallmatrix}\right)v=0\Leftrightarrow 
+v\in\K\cdot\left(\begin{smallmatrix}1\\0\end{smallmatrix}\right).\]
+Für $B$ finden wir also keine Basis von $\K^2$ aus Eigenvektoren:
+Es gibt keine Basis, bezüglich derer die zugehörige lineare Abbildung Diagonalform hätte.}
+\lang{en}{We assume, that we have at least one double zero within the zeros of the characteristic polynomial.
+For convienience we consider examples of $(2\times 2)$-Matrizen, so maps from $\K^2\to\K^2$ with respect
+to the standard basis, to illustrate the consequence of double zeros.
+We consider
+\[A=\begin{pmatrix}\lambda&0\\0&\lambda\end{pmatrix}\quad \text{ und }\quad B=\begin{pmatrix}\lambda&1\\0&\lambda\end{pmatrix}.\]
+Both matrices have the same characteristic polynomial
+\[p_A(t)=\det(\left(\begin{smallmatrix}\lambda-t&0\\0&\lambda-t\end{smallmatrix}\right))=(\lambda-t)^2=
+\det(\left(\begin{smallmatrix}\lambda-t&1\\0&\lambda-t\end{smallmatrix}\right))=p_B(t).\]
+For $A$ exist obviously to linearly independent eigenvector for the eigenvalue $\lambda$, for example $e_1,e_2$ (or any other two linearly independent vectors in $\K^2$), and the matrix corresponding to the lienar map is in diagonal form.
+This is not the case for $B$. Though $e_1$ is an eigenvector for $\lambda$, any other is a multiple of $e_1$.
+We see that by solving the eigenvector eqution
+\[(B-\lambda I_2)v=0\Leftrightarrow \left(\begin{smallmatrix}0&1\\0&0\end{smallmatrix}\right)v=0\Leftrightarrow 
+v\in\K\cdot\left(\begin{smallmatrix}1\\0\end{smallmatrix}\right).\]
+So for $B$ we do not find a basis of $\K^2$ consisting of eigenvectors:
+There is no basis, regarding to which the matrix of the corresponding linear map is a diagonal matrix.}
+\end{tabs*}
+\end{example}
+
+\lang{de}{Das nachfolgende Video führt das charakteristische Polynom ein
+und zeigt, wie man Eigenwerte mit den zugehörigen Eigenvektoren systematisch berechnet.
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10787&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+~\\
+Weitere Beispiele für $3 \times 3$-Matrizen und $4 \times 4$-Matrizen findet man im nächsten Video.
+%Unter anderem wird darauf eingegangen, wie Eigenwerte über die Determinante von Blockmatrizen bestimmt werden können.
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10788&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}}\\
+
+
+\end{content}

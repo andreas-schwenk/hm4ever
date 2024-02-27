@@ -1,0 +1,73 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A05: Geradenbestimmung}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22078}{Ticket 22078}
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+\begin{block}[annotation]
+	Trainingsaufgaben zur Bestimmung einer Geraden aus einem Punkt und der Steigung
+            
+\end{block}
+
+\lang{de}{\title{A05: Geradenbestimmung}}
+\lang{en}{\title{Problem 5}}
+
+\begin{problem}
+%
+  \begin{question} 
+      \text{Wie lautet die Geradengleichung der Geraden, die durch den Punkt 
+        $P = (\var{p1x} ; \var{p1y})$ verl"auft und die Steigung $m= \var{m}$ besitzt?}
+%       
+	\begin{variables}
+       	\randint{p1x}{-10}{10}
+      	\randint{p1y}{-10}{10}
+       	\randint[Z]{m}{-10}{10}       	   	
+       	\function[calculate]{b}{p1y-(m*p1x)}  
+       	\function[normalize]{f}{m * x+b}
+       	\function[normalize]{g}{y - p1y}
+       	\function{h}{m * (x - p1x)}           	        	
+    \end{variables}
+%    
+	\type{input.function}
+  	\field{rational}
+%    
+	\begin{answer}
+        \text{$g: \; y=$}
+        \solution{f}
+        \checkAsFunction{x}{-10}{10}{100} 
+        
+        \explanation{$\,m= \var{m}$ und $\, P = (\var{p1x} ; \var{p1y}), \,$
+                    eingesetzt in die Geradengleichung $\, y= mx+b, \,$ liefern den 
+                    fehlenden Parameter $\,b.$}
+     \end{answer}
+%    
+\end{question}
+	
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

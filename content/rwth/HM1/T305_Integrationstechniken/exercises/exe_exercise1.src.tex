@@ -1,0 +1,111 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü01: Partielle Integration}
+    \lang{en}{Exercise 1}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+
+\title{\lang{de}{Ü01: Partielle Integration}}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10919}{Ticket 10919}
+\end{block}
+
+%######################################################FRAGE_TEXT
+\lang{de}{ Bestimmen Sie  mit Hilfe der partiellen Integration die folgenden Integrale.
+\begin{enumerate}[alph]
+\item $\ \int_0^1 xe^{-x}\; dx$ 
+\item $\ \int_{\pi/2}^{\pi} (2x+3)\sin(x)\; dx$
+\end{enumerate}
+}
+
+%##################################################ANTWORTEN_TEXT
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Antwort    }}
+    \lang{de}{  \begin{enumerate}[a)]
+\item a) $\ \int_0^1 xe^{-x}\; dx= -\frac{2}{e}+1$.
+\item b) $\ \int_{\pi/2}^{\pi} (2x+3)\sin(x)\; dx=2\pi+1  $. 
+\end{enumerate}    }
+  	 %------------------------------------END_STEP_X
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung a)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+Um partielle Integration anzuwenden, ist ein Faktor als $u(x)$ zu identifizieren und der
+andere als $v'(x)$. Von dem zweiten muss dann eine Stammfunktion $v(x)$ bestimmt werden und das neue Integral hat als Integrand das Produkt $u'(x)v(x)$.
+
+Würde man $u(x)=e^{-x}$ und $v'(x)=x$ wählen, erhielte man $u'(x)=-e^{-x}$ und
+zum Beispiel $v(x)=\frac{x^2}{2}$. Der neue Integrand wäre dann aber 
+$u'(x)v(x)=-e^{-x}\frac{x^2}{2}$, was eher komplizierter zu integrieren ist.
+
+Also wählen wir $u(x)=x$ und $v'(x)=e^{-x}$. Dann ist $u'(x)=1$ und wir suchen noch eine Stammfunktion von $e^{-x}$. 
+Da wie eben berechnet die Ableitung von $e^{-x}$ gleich $-e^{-x}$ ist, ist die Ableitung von $-e^{-x}$ gleich $e^{-x}$. Also ist $-e^{-x}$ eine Stammfunktion von $e^{-x}$, und wir können $v(x)=-e^{-x}$
+wählen. 
+\step Damit gilt:
+\begin{eqnarray*}
+\int_0^1 xe^{-x}\; dx &=& \int_0^1 u(x)v'(x)\; dx= \left[ u(x)v(x)\right]_0^1 -\int_0^1 u'(x)v(x)\; dx \\
+&=&  \left[ x\cdot (-e^{-x})\right]_0^1 - \int_0^1 1\cdot (-e^{-x}) \; dx\\
+&=&  \left[ -xe^{-x}\right]_0^1 +  \int_0^1 e^{-x}\; dx\\
+&=&  \left[ -xe^{-x}\right]_0^1 +  \left[ -e^{-x}\right]_0^1 = \left[  -xe^{-x}-e^{-x}\right]_0^1 \\
+&=& (-1\cdot e^{-1}-e^{-1})-(-0\cdot e^0- e^0) =-\frac{2}{e}+1 .
+\end{eqnarray*}
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung b)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+Um partielle Integration anzuwenden, müssen wir wieder den Integranden als Produkt $u(x)v'(x)$ schreiben.  Bei Produkten von Polynomen mit der Sinus-, Kosinus- oder Exponentialfunktion ist es meist erfolgreich, das Polynom als $u(x)$ zu setzen und den anderen Faktor als $v'(x)$, also hier
+\[  u(x)=2x+3\quad\text{und}\quad v'(x)=\sin(x). \]
+Dann ist $u'(x)=2$ und eine Stammfunktion von $v'(x)=\sin(x)$ ist $v(x)=-\cos(x)$.
+
+\step Damit gilt:
+\begin{eqnarray*}
+\int_{\pi/2}^{\pi} (2x+3)\sin(x)\; dx &=&  \int_{\pi/2}^{\pi} u(x)v'(x)\; dx= \left[ u(x)v(x)\right]_{\pi/2}^{\pi} -\int_{\pi/2}^{\pi} u'(x)v(x)\; dx \\
+&=&  \left[ (2x+3)\cdot(-\cos(x))\right]_{\pi/2}^{\pi} -\int_{\pi/2}^{\pi}2\cdot (-\cos(x))\; dx \\
+&=&  \left[ -(2x+3)\cos(x)\right]_{\pi/2}^{\pi} +\int_{\pi/2}^{\pi}2\cos(x)\; dx \\
+&=&  \left[ -(2x+3)\cos(x)\right]_{\pi/2}^{\pi} + \left[ 2\sin(x) \right]_{\pi/2}^{\pi} \\
+&=&  \left[ -(2x+3)\cos(x)+2\sin(x) \right]_{\pi/2}^{\pi} \\
+&=& \Big( -(2\pi+3)\cos(\pi)+2\sin(\pi) \Big)- \Big(  -(\pi+3)\cos(\pi/2)+2\sin(\pi/2) \Big)\\
+&=& 2\pi+3-2=2\pi+1,
+\end{eqnarray*}
+da $\cos(\pi)=-1$, $\sin(\pi)=0$, $\cos(\pi/2)=0$ und $\sin(\pi/2)=1$.
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+
+
+%#############################################################ENDE
+%    \tab{\lang{de}{Video: ähnliche Übungsaufgabe}}
+%  \youtubevideo[500][300]{GOaUAANsXh8}\\
+
+\end{tabs*}
+\end{content}

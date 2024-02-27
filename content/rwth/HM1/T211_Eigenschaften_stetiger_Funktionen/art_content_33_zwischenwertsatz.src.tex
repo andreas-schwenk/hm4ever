@@ -1,0 +1,381 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Sätze zu stetigen Funktionen}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T211_IntermediateValueZero.meta.xml}{T211_IntermediateValueZero}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T211_IntermediateValue.meta.xml}{T211_IntermediateValue}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T211_MinMax.meta.xml}{T211_MinMax}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T303_Approximationen/g_art_content_05_newtonverfahren.meta.xml}{content_05_newtonverfahren}
+    \link{generic_article}{content/rwth/HM1/T210_Stetigkeit/g_art_content_29_stetigkeit_definitionen.meta.xml}{stetigkeit}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_16_konvergenzkriterien.meta.xml}{konv-krit}
+    \link{generic_article}{content/rwth/HM1/T207_Intervall_Schachtelung/g_art_content_23_intervallschachtelung.meta.xml}{intervallschachtelung}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{11}
+\ombarticle{1}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\lang{de}{\title{Sätze zu stetigen Funktionen}}
+ 
+\begin{block}[annotation]
+  fehlt noch Beispiel?
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9793}{Ticket 9793}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+\section{Funktionsverhalten in kleinen Umgebungen}
+
+In diesem Paragraphen geht es um das Verhalten einer Funktion $f$ in einer kleinen Umgebung
+einer Stelle $x^*$, an der die Funktion stetig ist.
+Die Aussagen sind direkte Folgerungen aus dem \ref[stetigkeit][$\epsilon$-$\delta$-Kriterium]{sec:eps-delta} für Stetigkeit.
+
+\begin{theorem}
+Ist $f:D\to \R$ eine reelle Funktion, die an einer Stelle $x^*\in D$ stetig ist, dann gibt es ein $\delta>0$ und
+$c\in \R$, so dass
+\[    |f(x)|< c\quad \text{für alle }x\in D\text{ mit }|x-x^*|<\delta. \]
+Anders ausgedrückt: Es gibt eine $\delta$-Umgebung von $x^*$, auf welcher $f$ beschränkt ist.
+\end{theorem}
+
+
+\begin{proof*}
+Beweisskizze:
+Wir benutzen die Definition der Stetigkeit. Wir wählen ein $\epsilon$ mit einem zugehörigen
+$\delta$. Mit diesem $\epsilon$ ist ein bestimmter, nicht-unendlicher Abstand der Funktionswerte 
+festgelegt. Damit ist die Funktion über dem Intervall $(x^*-\delta;x^*+\delta)$ beschränkt.
+\begin{incremental}
+\step
+Da $f$ in $x^*$ stetig ist, gibt es zu jedem $\epsilon>0$ ein $\delta>0$ mit 
+\[ |f(x) - f(x^*)| < \epsilon \quad \text{f"ur alle }
+  \nowrap{x\in D \text{ mit } |x-x^*|<\delta.}
+  \]
+Dies bedeutet aber, dass
+\[  f(x^*)-\epsilon< f(x) < f(x^*)+\epsilon \]
+für alle $  x\in D$ mit $|x-x^*|<\delta$. 
+  
+Wählt man zum Beispiel $\epsilon=1$ (und ein zugehöriges $\delta$) sowie
+\[   c=\max\{ |  f(x^*)-1|; |  f(x^*)+1| \}, \]
+so gilt
+\[  -c\leq - |  f(x^*)-1|\leq  f(x^*)-1< f(x) <  f(x^*)+1 \leq c\]
+und damit $|f(x)|< c$ für alle $  x\in D$ mit $|x-x^*|<\delta$.
+\end{incremental}
+\end{proof*}
+
+
+\begin{theorem}
+Es sei $f:D\to \R$ eine reelle Funktion, die an einer Stelle $x^*\in D$ stetig ist, und $f(x^*)> 0$.
+Dann gibt es ein $\delta>0$ und $\rho>0$, so dass
+\[    f(x)> \rho \quad \text{für alle }x\in D\text{ mit }|x-x^*|<\delta. \]
+
+Entsprechend gilt für eine  an einer Stelle $x^*\in D$ stetige reelle Funktion $f:D\to \R$ mit $f(x^*)<0$:
+Es gibt ein $\delta>0$ und $\rho>0$, so dass
+\[    f(x)< -\rho \quad \text{für alle }x\in D\text{ mit }|x-x^*|<\delta. \]
+
+Anschaulich gesprochen: Hat $f$ an einer Stelle, an der sie stetig ist, keine Nullstelle, dann besitzt sie
+auch in einer kleinen Umgebung keine Nullstelle.
+\end{theorem}
+
+\begin{proof*}
+Beweisskizze:
+Für $f(x^*)>f(x)$ und $f(x^*)>0$ folgt aus $\vert f(x)-f(x^*)\vert < \epsilon$ die Ungleichung
+$f(x)>f(x^*)-\epsilon$. Da $f(x^*)$ positiv ist und $\epsilon$ klein gewählt werden kann, 
+gilt auch  $f(x)>0$.
+\begin{incremental}
+\step
+Die zweite Aussage mit $f(x^*)<0$ erhält man direkt aus der ersten Aussage für  $f(x^*)> 0$, indem man zu der Funktion $-f$ übergeht.
+
+Um die erste Aussage zu zeigen, wählen wir $\epsilon=\frac{1}{2}f(x^*)$. Wegen der Stetigkeit von $f$
+an der Stelle $x^*$ gibt es ein $\delta>0$, so dass
+\[ |f(x) - f(x^*)| < \epsilon \quad \text{f"ur alle }
+  \nowrap{x\in D \text{ mit } |x-x^*|<\delta.}
+  \]
+Dies impliziert jedoch
+\[  f(x) > f(x^*)-\epsilon=\frac{1}{2}f(x^*) \]
+ für alle $  x\in D$ mit $|x-x^*|<\delta$. Wählt man nun $\rho=\epsilon=\frac{1}{2}f(x^*)>0$, so
+ erhält man die gewünschte Aussage.
+\end{incremental}
+\end{proof*}
+
+Der Sachverhalt dieses Abschnittes kann im folgenden Video nochmals angesehen werden.
+
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10917&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+\section{Stetige Funktionen auf abgeschlossenen Intervallen}
+
+Im Folgenden betrachten wir eine stetige reelle Funktion $f$ auf einem abgeschlossenen
+Intervall $[a;b]$ mit reellen Zahlen $a<b$. Die Aussagen hier gelten natürlich auch für allgemeinere
+stetige Funktionen $g:D\to \R$, sofern $D$ ein abgeschlossenes Intervall enthält, indem man die
+Funktion $g$ dann auf einem solchen Intervall $[a;b]\subseteq D$ 
+betrachtet.
+
+\begin{theorem}[Satz vom Minimum und Maximum]\label{thm:minmax}
+Es sei $f:[a;b]\to \R$ eine stetige Funktion. Dann ist die Wertemenge $W_f=f([a;b])$ beschränkt, und
+$f$ nimmt auf dem Intervall $[a;b]$ Minimum und Maximum an, d.\,h. 
+\[  m=\min W_f = \min \{ f(x) \mid x\in [a;b]\}\quad \text{und}\quad M=\max W_f= \max \{ f(x) \mid x\in [a;b]\}\]
+existieren. Das bedeutet, es gibt Stellen $x_1, x_2\in [a;b]$
+mit
+\[   f(x_1)=m= \min \{ f(x) \mid x\in [a;b]\}\quad \text{und}\quad f(x_2)=M=\max \{ f(x) \mid x\in [a;b]\} .\]
+\end{theorem}
+
+
+
+\begin{proof*}
+\begin{incremental}
+\step
+Wir zeigen die Beschränktheit nach oben und die Existenz des Maximums in einem Schritt:\\
+Es sei $s=\sup (W_f) \in \R\cup \{\infty \}$. Nach der Definition des Supremums gibt es eine Folge
+$(y_n)_{n\in \N}$ in $W_f$, die gegen $s$ konvergiert (bzw. im Fall $s=\infty$ bestimmt divergiert).
+Da $y_n\in W_f$ ist, gibt es zu jedem $y_n$ ein $x_n\in [a;b]$ mit $f(x_n)=y_n$.
+
+Die Folge $(x_n)_{n\in \N}$ ist beschränkt (da die Glieder in $[a;b]$ liegen), und daher gibt es nach dem
+\ref[konv-krit][Satz von Bolzano-Weierstrass]{thm:bolzano-weierstrass}
+eine Teilfolge $(x_{n_k})_{k\in \N}$, die konvergiert. Wir definieren $x^*=\lim_{k\to \infty} x_{n_k}$. Dann ist auch $x^*\in [a;b]$ und es gilt wegen der Stetigkeit von $f$:
+\[   f(x^*)= \lim_{k\to \infty} f( x_{n_k}).\]
+Andererseits gilt
+\[  \lim_{k\to \infty} f( x_{n_k})=\lim_{k\to \infty}y_{n_k} = s= \sup (W_f). \]
+Somit ist $f(x^*)=\sup (W_f)$ und insbesondere ist $W_f$ nach oben beschränkt. 
+Wegen $f(x^*)\in W_f$ ist
+\[ f(x^*)=\max W_f. \]
+
+Für die Beschränktheit nach unten und  die Existenz des Minimums geht man ganz genauso vor.
+
+\end{incremental}
+\end{proof*}
+
+
+
+\begin{remark}
+Wesentlich für die Aussage ist außer der Stetigkeit, dass das Intervall $[a;b]$ abgeschlossen und beschränkt ist. 
+Wegen der Beschränktheit konnte im Beweis ein Grenzwert $x^*$ genutzt werden und wegen der Abgeschlossenheit 
+lag dieser Grenzwert $x^*$ auch innerhalb des Intervalls, welches der Definitionsbereich von $f$ ist.
+
+Betrachtet man zum Beispiel die Funktion $h:(0;1]\to \R, \ x\mapsto \frac{1}{x}$, so ist diese unbeschränkt, da $\lim_{x\searrow 0} f(x)=\infty$. 
+
+\end{remark}
+
+Die folgende Grafik soll den Satz von Minimum und Maximum, Satz 11.1.3, und den Satz 11.1.6 illustrieren.
+Satz 11.1.3 besagt, dass eine auf dem Intervall $[a;b]$ stetige Funktion ein Minimum $m$ und ein Maximum $M$ annimmt.
+Das Maximum $M$ wird an Punkt B angenommen, das Minimum $m$ an Punkt C.
+Wir werden außerdem in Satz 11.1.6 sehen, dass der Wertebereich der Funktion auf $[a;b]$ das Intervall $[m;M]$ ist. Aus der Grafik ist
+zu entnehmen, dass alle Werte zwischen $m$ und $M$ auftauchen, aber eben keine anderen.
+
+\begin{center}
+\image{T211_MinMax}
+\end{center}
+
+
+Ein zweiter wichtiger Satz ist der Zwischenwertsatz.
+
+\begin{theorem}[Zwischenwertsatz]\label{thm:zwischenwertsatz}
+\begin{enumerate}
+\item
+Es sei $f:[a;b]\to \R$ eine stetige Funktion mit $f(a)\neq f(b)$ und $\mu\in \R$ zwischen $f(a)$ und $f(b)$ (d.\,h.
+$f(a)<\mu<f(b)$ oder $f(a)>\mu>f(b)$).
+Dann existiert eine Zahl $c\in (a;b)$ mit
+\[  f(c)= \mu. \]
+\item Speziell gilt: Ist $f:D\to \R$ stetig, $[a;b]\subseteq D$ und $f(a)<0<f(b)$ oder
+$f(a)>0>f(b)$, so besitzt $f$ im Intervall $(a;b)$ eine Nullstelle.
+\end{enumerate}
+\end{theorem}
+
+
+\begin{proof*}[Beweis Zwischenwertsatz]
+\begin{incremental}
+\step
+Der Beweis des Zwischenwertsatzes verläuft ganz analog zum \ref[intervallschachtelung][Intervallhalbierungsverfahren]{sec:intervallhalbierung} zur Nullstellenbestimmung, welches im Abschnitt
+\link{intervallschachtelung}{Intervallschachtelung} beschrieben ist:
+Wir betrachten den Fall, dass $f(a)<f(b)$ und daher $f(a)<\mu<f(b)$.
+\step
+Dann definiert man eine Intervallschachtelung $I_n=[a_n; b_n]$, $n\in \N$ folgendermaßen: 
+%Folgen $(a_n)_{n\in \N}$ und $(b_n)_{n\in \N}$,
+
+  \[ a_1 = a,\; b_1 = b.\]
+
+Für alle $n\in \N$ definiert man weiter:
+   \begin{align*} a_{n+1} &= \frac{a_n + b_n}{2}\, ,\qquad &b_{n+1} = b_n, \quad &\text{falls } \,
+     f(\frac{a_n + b_n}{2}) < \mu,\\
+a_{n+1} &= a_n\, ,\qquad &b_{n+1} = \frac{a_n + b_n}{2}, \quad &\text{falls } \,
+     f(\frac{a_n + b_n}{2}) > \mu,\\
+   a_{n+1} &= \frac{a_n + b_n}{2}\, ,\qquad &b_{n+1} = \frac{a_n + b_n}{2}, \quad &\text{falls } \,
+     f(\frac{a_n + b_n}{2}) = \mu.
+   \end{align*}
+Diese Intervallschachtelung definiert dann eine Stelle 
+\[x^*= \sup \left\{ a_n\, |\,n\in \N\right\}= \lim_{n\to \infty}  a_n = 
+\inf\left\{ b_n\, |\,n\in \N\right\} = \lim_{n\to \infty} b_n  \]
+im Intervall $[a;b]$.
+Nun gilt für alle $n\in \N$ nach Konstruktion
+\[   f(a_n)\leq \mu \quad \text{und} \quad f(b_n)\geq \mu. \]
+Wegen der Stetigkeit von $f$ gilt damit zum einen
+\[ f(x^*)=\lim_{n\to \infty}   f(a_n)\leq \mu\]
+und zum anderen
+\[ f(x^*)=\lim_{n\to \infty}  f(b_n)\geq \mu. \]
+Also ist $f(x^*)=\mu$.\\
+Schließlich liegt $x^*$ tatsächlich im Inneren des Intervalls $[a;b]$, da nach Voraussetzung $f(a)\neq \mu$ und
+$f(b)\neq \mu$.
+\end{incremental}
+\end{proof*}
+
+Die folgende Grafik soll den Zwischenwertsatz veranschaulichen. Dargestellt ist die auf $[a;b]$
+stetige Funktion $f$ mit den Funktionswerten $f(a)$ und $f(b)$. Der Abbildung kann man entnehmen, dass alle
+\emph{Zwischenwerte} zwischen den Punkten $D$ und $E$ durchlaufen werden.
+
+\begin{center}
+\image{T211_IntermediateValue}
+\end{center}
+
+Ausdrücklich sei hier noch einmal auf den Nutzen des Zwischenwertsatzes bzgl. 
+Nullstellen hingewiesen. Wenn die Funktionswerte $f(a)$ und $f(b)$ unterschiedliche Vorzeichen haben, 
+so kann auf die Existenz einer
+Nullstelle im Intervall $(a;b)$ geschlossen werden. Wenn man also weiß, dass eine
+Nullstelle existiert, kann man eine grobe Schätzung machen und sich dann mit Hilfe des
+\ref[content_05_newtonverfahren][Newton-Verfahrens]{newton} schrittweise, 
+also iterativ, der Nullstelle annähern.
+
+\begin{center}
+\image{T211_IntermediateValueZero}
+\end{center}
+
+Der Zwischenwertsatz und der Satz über Minimum und Maximum ergeben den folgenden Satz über das
+Bild eines abgeschlossenen Intervalls unter einer stetigen Funktion.
+
+\begin{theorem}
+Es sei $f:[a;b]\to \R$ eine stetige Funktion,
+\[  m=\min W_f = \min \{ f(x) \mid x\in [a;b]\}\quad \text{und}\quad M=\max W_f= \max \{ f(x) \mid x\in [a;b]\}.\]
+Dann ist
+\[  W_f=[m;M]. \]
+\end{theorem}
+
+\begin{proof*}
+\begin{showhide}
+Zunächst ist nach Definition von $m$ und $M$ die Wertemenge $W_f$ eine Teilmenge von $[m;M]$.
+
+Aufgrund des Satzes über Minimum und Maximum gibt es $x_1\in [a;b]$ mit $f(x_1)=m$
+und $x_2\in [a;b]$ mit $f(x_2)=M$ und wir setzen $\alpha=\min \{ x_1;x_2\}$ und $\beta=\max \{ x_1;x_2\}$.\\
+Der Zwischenwertsatz, angewandt auf die eingeschränkte Funktion $f:[\alpha;\beta]\to \R$, liefert dann, dass jeder Wert $\mu$ zwischen
+$f(\alpha)$ und $f(\beta)$ in $W_f$ liegt, also jeder Wert zwischen $m$ und $M$. Daher ist auch $[m;M]\subseteq W_f$.
+
+Insgesamt ist damit die Gleichheit der Mengen gezeigt.
+\end{showhide}
+\end{proof*}
+
+Die oben beschriebenen Themen werden im nachstehenden Video erläutert.
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10918&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+\begin{quickcheck}
+    \field{rational}
+    \type{input.number}
+    \begin{variables}
+            \function[calculate]{k}{2}
+    \end{variables}
+    \text{Untersuchen Sie, ob ein $x\in[0;\pi]$ existiert, so dass gilt:
+            \[2\sin(x)=3x^2-8\]}
+\begin{choices}{multiple}
+    \begin{choice}
+        \text{Es gibt keine solche Stelle im Intervall.}
+        \solution{false}
+    \end{choice}
+    \begin{choice}
+        \text{Es gibt eine solche Stelle im Intervall.}
+        \solution{true}
+    \end{choice}
+\end{choices}
+\explanation{Wir untersuchen die \emph{stetige} Funktion $f(x)=2\sin(x)-3x^2+8$ auf Nullstellen: $f(x)=0$.
+        Wir benutzen den Zwischenwertsatz und berechnen die Funktionswerte an den Intervallrändern:
+        $f(0)=8>0$ und $f(\pi)=2 \sin(\pi)-3\pi^2+8=0-3\pi^2+8<0$, d.\,h. ein Funktionswert ist positiv, 
+        einer negativ. Aufgrund der Stetigkeit werden alle Zwischenwerte angenommen, d.\,h. es gibt in $[0;\pi]$ eine Nullstelle.
+        Also gibt es eine Stelle im Intervall, an der die obige Gleichheit gilt.
+        }
+\end{quickcheck}
+
+
+\begin{example}
+Wir betrachten die Funktion $f:\R\to \R, \ x\mapsto \frac{1}{1+x^2}$.
+
+Da $\R$ kein endliches abgeschlossenes Intervall ist, können wir den vorigen Satz nicht direkt anwenden.
+Wir können ihn aber anwenden auf jedes Intervall $[-R;R]$ mit $R\in\R_{>0}$.\\
+
+Um die Wertemenge $f([-R;R])$ zu bestimmen, müssen wir also Maximum und Minimum der Funktion auf diesem Bereich bestimmen.\\
+Für alle $x\in \R$ gilt $x^2\geq 0$ und daher ist
+\[ f(x)=\frac{1}{1+x^2}\leq \frac{1}{1}=f(0)\]
+für alle $x\in \R$.
+Wir haben also $\max W_f=1=f(0)$.
+
+Sind $0\leq x_1<x_2$, so gilt $1\leq 1+x_1^2<1+x_2^2$ und daher 
+\[  \frac{1}{1+x_1^2}>\frac{1}{1+x_2^2}. \]
+Die Funktion $f$ ist also im positiven Bereich $\R_+$ streng monoton fallend.
+
+Für $0\geq x_1>x_2$ gilt ebenfalls  $1\leq 1+x_1^2<1+x_2^2$ und daher 
+\[ \frac{1}{1+x_1^2}>\frac{1}{1+x_2^2}. \]
+Im negativen Bereich ist die Funktion also streng monoton wachsend.
+
+Für das Minimum auf dem Intervall $[-R;R]$ kommen daher nur die Werte $f(-R)$ und $f(R)$ in Frage.
+Da $f(-R)=\frac{1}{1+(-R)^2}=\frac{1}{1+R^2}=f(R)$ gilt, ist dies also das Minimum, weshalb
+\[  f([-R;R])= \left[\frac{1}{1+R^2}; 1\right]. \]
+
+Die gesamte Wertemenge von $f$ ist dann die Vereinigung all der Intervalle $[\frac{1}{1+R^2}; 1]$, da
+$\R$ die Vereinigung der Intervalle $[-R;R]$ mit $R>0$ ist.
+
+Wegen $\lim_{R\to \infty} 1+R^2=\infty$ und daher $\lim_{R\to \infty} \frac{1}{1+R^2}=0$ ist
+\[ W_f=f(\R)=(0;1]. \]
+
+Man beachte, dass $0$ nicht zur Wertemenge gehört, da stets  $\frac{1}{1+R^2}>0$ ist.
+
+\begin{genericGWTVisualization}[550][800]{mathlet1}
+ 		\begin{variables}
+ 			\function{f}{real}{1/(1+x^2)}  
+			\point{O}{real}{0,0} 			
+			\point{P}{real}{1,0} 	
+			\point{Q}{real}{0,1}		
+			\point{R}{real}{1,1}		
+ 			\line{l}{real}{var(O),var(P)}
+ 			\line{l2}{real}{var(Q),var(R)}
+ 			
+ 		\end{variables}
+ 		\color{l}{#00CC00}
+ 		\color{l2}{#0066CC}
+ 		\color{Q}{#0066CC}
+ 		
+ 		\begin{canvas}
+ 			\plotSize{400,300}
+ 			\plotLeft{-4}
+ 			\plotRight{4}
+ 			\plot[coordinateSystem]{f,l ,Q, l2}
+ 		\end{canvas}
+ 		\text{Die schwarze Kurve ist der Graph der Funktion $f:\R\to \R$ mit 
+ 		$f(x)=\frac{1}{1+x^2}$. Die grüne Gerade ist die waagerechte Asymptote $y=0$, die 
+ 		den Funktionsgraphen nach unten beschränkt, die blaue Gerade ist die waagerechte Gerade durch
+ 		das Maximum von $f$, die den Graphen nach oben beschränkt.
+ 		}
+ 	 \end{genericGWTVisualization}
+
+\end{example}
+
+\end{visualizationwrapper}
+\end{content}

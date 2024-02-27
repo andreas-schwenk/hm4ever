@@ -1,0 +1,311 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Intervall-Schachtelung}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+ \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+\end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_15_monotone_konvergenz.meta.xml}{monot-konv}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_16_konvergenzkriterien.meta.xml}{konv-krit}
+    \link{generic_article}{content/rwth/HM1/T210_Stetigkeit/g_art_content_29_stetigkeit_definitionen.meta.xml}{stetig}
+    \link{generic_article}{content/rwth/HM1/T211_Eigenschaften_stetiger_Funktionen/g_art_content_33_zwischenwertsatz.meta.xml}{zwischenwertsatz}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{7}
+\ombarticle{3}
+
+\lang{de}{\title{Intervall-Schachtelung}}
+ 
+\begin{block}[annotation]
+  Links zu stetigen Funktionen müssen noch eingefügt werden
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9680}{Ticket 9680}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+\section{Intervall-Schachtelung}
+Eine Abfolge  von Intervallen mit reellen Intervallgrenzen nennt man eine 
+Intervallschachtelung, wenn jedes Intervall ganz im vorhergehenden enthalten ist und
+wenn die Intervalllängen gegen 0 gehen. Aufgrund der Vollständigkeit von $\R$ führt eine 
+Interallschachtelung auf ein Element von $\R$.
+
+\begin{definition}
+Eine Folge abgeschlossener Intervalle $I_n=[a_n;b_n]$, $n\in \N$ heißt genau dann \notion{Intervallschachtelung},
+wenn 
+\begin{itemize}
+\item jedes Intervall das nachfolgende enthält, d.h. $I_{n+1}\subseteq I_n$ für alle $n\in \N$, und
+\item die Folge der Intervalllängen $(b_n-a_n)_{n\in \N}$ gegen $0$ konvergiert.
+\end{itemize} 
+\end{definition}
+
+\begin{example}
+\begin{enumerate}
+\item 
+Die Intervalle $I_n=[0;\frac{1}{n}]$ für $n\in \N$ bilden eine Intervallschachtelung: Wegen $\frac{1}{n+1}<\frac{1}{n}$
+ist $[0;\frac{1}{n+1}]\subseteq [0;\frac{1}{n}]$ und für die Intervalllängen gilt:
+\[ \lim_{n\to \infty} \frac{1}{n} =0. \]
+\item Die Intervalle $I_n=[\frac{1}{n};\frac{2}{n}]$ für $n\in \N$ bilden \textbf{keine} Intervallschachtelung, da die Intervalle nicht ineinander enthalten sind:
+$I_1=[1;2], I_2=[\frac{1}{2};1], I_3=[\frac{1}{3};\frac{2}{3}]$.
+\item Die Intervalle $I_n=[1- \frac{1}{n};2+ \frac{1}{n}]$ für $n\in \N$ bilden \textbf{keine} Intervallschachtelung, da die Intervalllängen nicht gegen $0$ konvergieren.
+\end{enumerate}
+\end{example}
+
+\begin{rule}
+Eine Folge abgeschlossener Intervalle $I_n=[a_n; b_n]$, $n\in \N$ ist genau dann eine Intervallschachtelung, wenn
+für die Folgen $(a_n)_{n\in \N}$ und  $(b_n)_{n\in \N}$ die folgenden Bedingungen gelten
+\begin{itemize}
+\item Für alle $n\in \N$ ist $a_n\leq b_n$,
+\item die Folge $(a_n)_{n\in \N}$ ist monoton wachsend und die Folge $(b_n)_{n\in \N}$ ist monoton fallend,
+\item die  Folgen $(a_n)_{n\in \N}$ und $(b_n)_{n\in \N}$ konvergieren gegen denselben Grenzwert.
+%\item $\sup \{ a_n | n\in \N \} = \inf \{ b_n | n\in \N \}$.
+\end{itemize}
+\end{rule}
+
+
+\begin{proof*}[Beweis (Intervallschachtelung)]
+Wenn $I_n=[a_n; b_n]$ ein Intervall darstellt, dann muss $a_n\leq b_n$ gelten.
+\begin{incremental}{0}
+\step
+Für Intervalle $I_{n+1}$ und $I_n$ mit $I_{n+1}\subseteq I_n$ bedeutet das auch, dass $a_{n+1}\geq a_n$ und $b_{n+1}\leq b_n$ gilt.
+Die Intervalle sind also alle ineinander enthalten, wenn die Folge $(a_n)_{n\in \N}$ monoton wachsend und die Folge $(b_n)_{n\in \N}$ monoton fallend ist.
+\step
+Die ersten beiden Punkte implizieren, dass die Folgen $(a_n)_{n\in \N}$ und $(b_n)_{n\in \N}$ konvergieren, denn
+für alle $n\in \N$ gilt dann:
+\[   a_n\leq b_n\leq b_1\quad \text{sowie}\quad b_n\geq a_n\geq a_1. \]
+Das heißt die Folge $(a_n)_{n\in \N}$ ist monoton wachsend und nach oben durch $b_1$ beschränkt, also konvergent 
+(vgl. Abschnitt \link{monot-konv}{Monotone Konvergenz}).
+Die Folge $(b_n)_{n\in \N}$ ist monoton fallend und nach unten durch $a_1$ beschränkt, also konvergent.
+
+Wegen $\lim_{n\to \infty} (b_n-a_n)= \lim_{n\to \infty} b_n -  \lim_{n\to \infty}  a_n$, ist schließlich die Bedingung, dass die
+Intervalllängen gegen $0$ konvergieren äquivalent dazu, dass die Folgen den gleichen Grenzwert haben.
+\end{incremental}
+\end{proof*}
+
+Mit Intervallverschachtelungen lassen sich beispielsweise die reellen Zahlen definieren.
+
+\begin{theorem}[Intervall-Schachtelungsprinzip]\label{thm:intervallschachtelungsprinzip}
+Ist  $I_n=[a_n;b_n]$, $n\in \N$ eine Intervallschachtelung, so gibt es genau eine reelle Zahl $r\in \R$ mit
+\[  r\in I_n \quad \text{für alle }n\in \N.\]
+Diese Zahl $r$ ergibt sich als
+\[  r= \sup\{ a_n |n\in \N\}= \lim_{n\to \infty}  a_n, \]
+bzw. 
+\[ r = \inf\{ b_n |n\in \N\} = \lim_{n\to \infty} b_n. \]
+\end{theorem}
+
+
+\begin{proof*}
+\begin{incremental}{0}
+\step
+Eine reelle Zahl $s$ liegt genau dann in allen Intervallen $I_n$, wenn $a_n\leq s\leq b_n$ für alle $n\in \N$, wenn also 
+\[  \sup\{ a_n |n\in \N\} \leq s \leq  \inf\{ b_n |n\in \N\}\]
+gilt. Da aber $(a_n)_{n\in \N}$ eine monoton wachsende Folge und $(b_n)_{n\in \N}$ eine monoton fallende Folge ist,
+gilt $\sup\{ a_n |n\in \N\}= \lim_{n\to \infty}  a_n$ und $\inf\{ b_n |n\in \N\} = \lim_{n\to \infty} b_n$. Weil die $I_n$ eine 
+Intervallschachtelung bilden, sind nach obiger Regel die Grenzwerte gleich. Also folgt
+\[ s= \lim_{n\to \infty}  a_n = \lim_{n\to \infty} b_n.\]
+Dieser Grenzwert ist also genau die reelle Zahl, die in allen Intervallen liegt.
+\end{incremental}
+\end{proof*}
+
+Das folgende Video behandelt die Intervallschachtelungen umfassend und benutzt das Intervallhalbierungsverfahren
+, um eine Näherung für $\sqrt{2}$ zu finden:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10819&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+
+\section{Intervallhalbierungsverfahren}\label{sec:intervallhalbierung}
+
+Ein spezielles Beispiel für eine Intervallschachtelung ergibt sich beim Intervallhalbierungsverfahren 
+zur Bestimmung von Nullstellen sogenannter \link{stetig}{stetiger Funktionen}. Dieses Verfahren ist auch 
+unter dem Namen \notion{Bisektionsverfahren} bekannt.
+
+\begin{theorem}
+  Für eine reellwertige und stetige Funktion $f$, definiert auf dem Intervall \nowrap{$I \subseteq \R$,} seien 
+  $a,b\in I$ mit $a<b$ und $f(a)<0<f(b)$.
+
+Dann definiert man eine Intervallschachtelung $I_n=[a_n; b_n]$, $n\in \N$ folgendermaßen: 
+%Folgen $(a_n)_{n\in \N}$ und $(b_n)_{n\in \N}$,
+
+  \[ a_1 \coloneq a,\; b_1 \coloneq b.\]
+
+Für alle $n\in \N$ definiert man weiter:
+   \begin{align*} a_{n+1} &= \frac{a_n + b_n}{2}\, ,\qquad &b_{n+1} = b_n, \quad &\text{falls }
+     f(\frac{a_n + b_n}{2}) < 0,\\
+a_{n+1} &= a_n\, ,\qquad &b_{n+1} = \frac{a_n + b_n}{2}, \quad &\text{falls }
+     f(\frac{a_n + b_n}{2}) > 0,\\
+   a_{n+1} &= \frac{a_n + b_n}{2}\, ,\qquad &b_{n+1} = \frac{a_n + b_n}{2}, \quad &\text{falls }
+     f(\frac{a_n + b_n}{2}) = 0.
+   \end{align*}
+
+Die durch die Intervallschachtelung definierte Stelle \[x_0= \sup\{ a_n |n\in \N\}= \lim_{n\to \infty}  a_n = 
+\inf\{ b_n |n\in \N\} = \lim_{n\to \infty} b_n  \]
+ist dann eine Nullstelle der Funktion $f$.\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=408}{\image[75]{00_Videobutton_schwarz}}}\\\\
+\end{theorem}
+
+\begin{remarks}
+  \begin{enumerate}
+    \item Normalerweise lässt man im Sonderfall $f(\frac{a_n + b_n}{2}) = 0$ die Folge abbrechen, weil man dann direkt eine Nullstelle gefunden hat.
+	\item 
+    \lang{de}{Solange der Algorithmus nicht abbricht, gilt für die  Werte der Funktion $f$ an den Rändern der 
+    Intervalle $[a_n,b_n]$: \nowrap{$f(a_n) < 0 < f(b_n)$.} 
+    Nach dem \ref[zwischenwertsatz][Zwischenwertsatz]{thm:zwischenwertsatz} existiert 
+    somit mindestens eine Nullstelle von $f$ in jedem der Intervalle.
+    }
+    \lang{en}{As long as the algorithm does not terminate the values of the function $f$ at the boundaries of 
+    the invervals $[a_n,b_n]$ satisfy the inequalities \nowrap{$f(a_n) < 0 < f(b_n)$.} 
+    Due to the intermediate value theorem there is at least one root 
+    in each of the intervalls \nowrap{$[a_n,b_n]$.}}  
+     \item 
+    \lang{en}{The sequence of lengths of the invervals $[a_n,b_n]$ converges to zero exponentially:}
+    \lang{de}{Die Folge der Längen der Intervalle $[a_n,b_n]$ konvergiert \emph{exponentiell} gegen Null:}
+    \[
+    \text{Länge von }[a_n;b_n]\text{ ist } \frac{b-a}{2^{n-1}}\, .
+    \]
+     \item 
+    \lang{en}{If $f$ satisfies $f(a) > 0 > f(b)$ then apply the above algorithm to $\, -f$.}
+    % Analogous statements hold for functions with \nowrap{$f(a) > 0 > f(b)$.}
+    \lang{de}{Falls $f$ die Ungleichung $f(a) > 0 > f(b)$ erfüllt, dann wende den Algorithmus auf \nowrap{$\, -f$} an.}
+   \end{enumerate}
+
+\end{remarks}
+
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10820&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+
+\begin{example}
+Wir suchen eine Nullstelle der Funktion
+\[ f(x) = (x-2)^2 -3 .
+\]
+
+Für die Berechnung der exakten Nullstellen, lässt sich $$f(x)$$ ausmultiplizieren zu
+\[f(x)=x^2-4x+1\]
+Mit der pq-Formel folgt direkt
+\[x_{1,2}=2 \pm \sqrt{3}\]
+
+
+Wir wissen also, dass $2+\sqrt{3}\approx 3,732$ eine Nullstelle ist, wollen aber die Intervallhalbierung illustrieren. 
+\\\\
+Wir starten den Algorithmus mit folgenden Werten:
+\[ a=a_1 =2,\quad f(a) = f(2) = -3 <0;
+\]
+\[b=b_1=4, \quad f(b) = f(4) = 1 >0.
+\]
+Jetzt bestimmen wir den Punkt in der Mitte zwischen $a_1$ und $b_1$ und berechnen den Wert von $f$ dort:
+\[ \frac{a_1 + b_1}{2} = \frac{2+4}{2} = 3, \qquad f\left(\frac{a_1 + b_1}{2}\right) = f(3)= -2 <0.
+\]
+Nach den Regeln des Algorithmus ist das neue Intervall $\,[a_2;\,b_2]\,$ von folgenden Punkten begrenzt.
+\[ a_2 = \frac{a_1 + b_1}{2} = 3,\qquad b_2 = b_1 =4,
+\]
+mit $\,f(a_2)<0<f(b_2)$. Wir wiederholen diesen Schritt mit den neuen Werten.
+\[ \frac{a_2 + b_2}{2} = \frac{3+4}{2} = 3,5,\qquad f(3,5) = -\frac{3}{4} <0,
+\]
+\[ a_3 = \frac{a_2 + b_2}{2} = \frac{7}{2} = 3,5,\qquad b_3 = b_2 = 4.
+\]
+Der nächste Schritt ist
+\[ \frac{a_3 + b_3}{2} = \frac{3,5+4}{2} = 3,75, \qquad f(3,75) = \frac{1}{16} > 0,
+\]
+\[ a_4 = a_3 = 3,5,\qquad b_4 = \frac{a_3 + b_3}{2}= \frac{15}{4} = 3,75.
+\]
+Das Anfangsintervall $\,[a_1;\,b_1] = [2;\,4]\,$ hat Länge $\textcolor{#0066CC}{2}$. Nach $\textcolor{#CC6600}{3}$ Schritten
+wissen wir, dass eine Nullstelle im Intervall $\,[a_4;\,b_4] = [3,5;\,3,75]\,$ der Länge $\textcolor{#0066CC}{2}/ 2^{\textcolor{#CC6600}{3}} = 1/4$
+liegt, (vgl. mit dem berechneten Wert von 3,73).\\
+Der Algorithmus kann fortgesetzt werden bis die gewünschte Genauigkeit erreicht ist.
+\end{example}
+
+
+Ein weiteres Beispiel, bei dem ein Intervallhalbierungsverfahren angewandt wird, ist für den im Abschnitt
+\link{konv-krit}{Weitere Konvergenzkriterien} angegebenen Satz.
+
+\begin{theorem}
+Ist $(x_n)_{n\in \N}$ eine beschränkte Folge, so gibt es eine Teilfolge $(x_{n_k})_{k\in \N}$, die konvergiert. 
+\end{theorem}
+
+\begin{proof*}[Beweis (Satz von Bolzano-Weierstraß)]
+Beweisskizze:
+Nach Voraussetzung existieren $a,b\in \R$ mit $a\leq x_n\leq b$ für alle $n\in \N$. Wir unterteilen nun das Intervall $[a;b]$ sukzessive 
+durch Halbierung in Teilintervalle und machen stets mit einem Teilintervall weiter, in dem unendlich viele Folgenglieder liegen. So entsteht eine
+Intervallschachtelung. Die Teilfolge $x_{n_k}$, die entsteht, wenn man bei jeder Intervallteilung
+das nächste Folgenglied auswählt, das im ausgewählten Teilintervall liegt, konvergiert gegen den Punkt $x*$, der in
+allen ausgewählten Teilintervallen liegt.\\
+\begin{incremental}{0}
+\step
+Sei $a$ eine untere Schranke für die Folge $(x_n)_{n\in \N}$ und $b$ eine obere Schranke, d.h.
+$x_n\in [a;b]$ für alle $n\in \N$. Wir definieren nun induktiv eine Intervallschachtelung $I_k=[a_k; b_k]$, $k\in \N$ folgendermaßen: 
+
+Zunächst setzen wir $[a_1;b_1]=[a;b]$. Für $k\geq 1$ setzen wir 
+\[ [a_{k+1};b_{k+1}] = [ a_k; \frac{a_k + b_k}{2} ], \]
+falls es unendlich viele $n$ gibt mit $a_k\leq x_n\leq \frac{a_k + b_k}{2} $. Zusätzlich setzten wir
+\[ [a_{k+1};b_{k+1}] = [ \frac{a_k + b_k}{2}; b_k],\]
+falls im Intervall $[ a_k; \frac{a_k + b_k}{2} ]$ nur endlich viele $x_n$ liegen.
+
+Auf diese Weise ist sichergestellt, dass in allen Intervallen $[a_{k+1};b_{k+1}]$ unendlich viele Folgenglieder $x_n$ liegen. 
+Wir definieren nun die Indizes $n_k$ ($k\in \N$) für die Teilfolge induktiv durch $n_1=1$ und
+\[  n_{k+1}= \min \{ n>n_k \mid x_n\in  [a_{k+1};b_{k+1}] \} \]
+für alle $k\geq 1$.
+Da jedes Intervall $[a_{k+1};b_{k+1}]$ unendlich viele $x_n$ enthält, ist garantiert, dass es stets ein $n>n_k$ gibt mit $x_n\in [a_{k+1};b_{k+1}]$. Insbesondere ist nach
+Konstruktionstets $x_{n_{k+1}}\in [a_{k+1};b_{k+1}]$ (und natürlich auch $x_{n_1}=x_1\in [a_1;b_1]$).
+\step
+Zuletzt ist noch nachzuweisen, dass die so definierte Teilfolge $(x_{n_k})_{k\in \N}$ tatsächlich konvergiert.
+
+Die Intervallschachtelung definiert eine reelle Zahl $x^*$ durch
+\[   x^*=\lim_{k\to \infty}  a_k = \lim_{k\to \infty} b_k. \]
+Da für alle $k\in \N$ nach Konstruktion der Teilfolge 
+\[  a_k\leq x_{n_k}\leq b_k \]
+gilt, folgt aus dem \ref[konv-krit][Sandwich-Lemma]{thm:sandwich}, dass die Teilfolge 
+$(x_{n_k})_{k\in \N}$ konvergent ist, und es gilt:
+\[ \lim_{k\to \infty} x_{n_k} =x^*. \]
+\end{incremental}
+\end{proof*}
+
+Das folgende Video zeigt den Beweis nicht nur für reelle Folgen, sondern auch für komplexe Folgen 
+sowie eine kleine Anekdote.
+
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10821&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+
+\begin{quickcheck}
+    
+    \type{input.number}
+        \begin{variables}
+            \number{nu}{1,414}
+            \number{no}{1,415}
+        \end{variables}
+    \text{Bestimmen Sie mittels einer einfachen Intervallschachtelung (Quadrieren von 
+    Dezimalzahlen mit immer mehr Nachkommastellen) die dritte
+    Nachkommastelle von $\sqrt{2}$.\\
+    Starten Sie mit dem Intervall für die erste Nachkommastelle:
+    $[1,4;1,5]$. \\
+    Das dritte Intervall lautet:[\ansref;\ansref]
+    }
+    \begin{answer}
+        \solution{nu}
+    \end{answer}
+    \begin{answer}
+        \solution{no}
+    \end{answer}
+    \explanation{$1,414^2=1,9993$ und $1,415^2=2.0022$\\
+    Eine Folge, die sehr schnell gegen $\sqrt{2}$ konvergiert ist $a_n=\frac{1}{2}(a_n+\frac{2}{a_n})$.
+    }
+\end{quickcheck}
+\end{content}

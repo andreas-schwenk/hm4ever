@@ -1,0 +1,319 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{Lokale Umkehrbarkeit von Funktionen}
+   }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \begin{components}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T306_Reelle_Quadratische_Matrizen/g_art_content_15_inverse_matrix.meta.xml}{content_15_inverse_matrix}
+\link{generic_article}{content/rwth/HM1/T502_Stetigkeit_Diffbarkeit-n-dim/g_art_content_54_Differentiation.meta.xml}{content_54_Differentiation}
+\end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21547}{Ticket 21547}
+\end{block}
+\begin{block}[annotation]
+ToDo: Bessere Motivationen und Anschauungen einpflegen.
+\end{block}
+\usepackage{mumie.ombplus}
+\ombchapter{2}
+\ombarticle{3}
+\usepackage{mumie.genericvisualization}
+\lang{de}{\title{Lokale Umkehrbarkeit von Funktionen}}
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{Lokale Umkehrbarkeit von Funktionen}
+Zu entscheiden, ob eine Funktion in mehreren Veränderlichen eine Umkehrfunktion besitzt und welche 
+Eigenschaften diese dann hat, ist im allgemeinen viel schwieriger zu beantworten als im eindimensionalen Fall.
+Wir beschränken uns hier auf einige Bemerkungen und ein positives Resultat im Falle stetiger
+Differenzierbarkeit. Auf Beweise verzichten wir an vielen Stellen.
+\begin{remark}
+Ist $f:U\to V$ eine stetige bijektive Abbildung zwischen zwei offenen (nicht leeren) Mengen
+$U\subset \R^n$ und $V\subset \R^m$, dann ist $m=n$.
+
+Das entspricht unserer Vorstellung davon, dass eine offene Kugel im $\R^n$ etwas quantitativ Anderes ist als
+eine im $\R^m$ für $m\neq n$. Zum Beispiel lässt sich eine Kreisscheibe im $\R^2$ nicht
+stetig bijektiv auf eine Vollkugel im $\R^3$ abbilden.
+\end{remark}
+Wenn wir bereits viel über eine umkehrbare Funktion wissen, 
+berechnet sich die totale Ableitung der Umkehrfunktion ganz ähnlich zum eindimensionalen Fall.
+\begin{rule}[Totale Ableitung der Umkehrfunktion]\label{tot_Abl_Umkehrf}
+Es sei $U\subset \R^n$ offen und $f:U\to\R^n$ sei injektiv und stetig differenzierbar 
+mit offenem Bild $V:=f(U)\subset\R^n$.
+Weiter sei die Umkehrabbildung $g:=f^{-1}:V\to U$ total differenzierbar.
+Dann gilt für alle $y\in V$
+\[\text{D}f(g(y))\cdot \text{D}g(y)=E_n\in M(n,n;\R).\]
+Insbesondere ist die Jacobi-Matrix $\text{D}f(g(y))$ invertierbar mit
+\[\big(\text{D}f(g(y))\big)^{-1}=\text{D}g(y).\]
+\end{rule}
+\begin{proof*}
+Das ist eine direkte Folge der \ref[content_54_Differentiation][Kettenregel]{thm:kettenregel_mehrdim},
+die wir nach Voraussetzung anwenden können.
+\begin{incremental}[\initialsteps{0}]
+\step
+Die Verkettung $f\circ g=\text{id}_V:V\to V$ ist die Identität $y\mapsto y$. Insbesondere ist $f\circ g$
+die lineare Abbildung, die durch die Einheitsmatrix beschrieben wird, $E_n\cdot y=y$. 
+Deshalb gilt (siehe \ref[content_54_Differentiation][Beispiel]{ex:lin_Abb})
+\[\text{D}(f\circ g)(y)=E_n\]
+für alle $y\in V$. 
+Nach der Kettenregel ist aber auch $\text{D}(f\circ g)(y)=\text{D}f(g(y))\cdot \text{D}g(y)$, und damit folgt die Behauptung.
+\end{incremental}
+\end{proof*}
+%%
+\begin{example}
+Die Funktion $f:\R_{>0}\times\R_{>0}\to\R_{>0}\times\R_{>0}$,
+$\begin{pmatrix}x\\ y\end{pmatrix} \mapsto \begin{pmatrix}y^2\\ x^2\end{pmatrix}$ 
+ist bijektiv und stetig differenzierbar mit 
+$\text{D}f(\begin{pmatrix}x\\ y\end{pmatrix}) = \begin{pmatrix}0&2y\\2x& 0\end{pmatrix}$.
+Ihre Umkehrabbildung $g:\begin{pmatrix}x\\ y\end{pmatrix} \mapsto \begin{pmatrix}y^{\frac{1}{2}}\\ x^{\frac{1}{2}}\end{pmatrix}$
+ist ebenfalls total differenzierbar mit 
+$\text{D}g(\begin{pmatrix}x\\ y\end{pmatrix} )= \begin{pmatrix}0&\frac{1}{2} y^{-\frac{1}{2}}\\\frac{1}{2}x^{-\frac{1}{2}}&0\end{pmatrix}$.
+Offensichtlich gilt also
+\[\text{D}g(\begin{pmatrix}a\\ b\end{pmatrix} )=\text{D}f(\begin{pmatrix}b^{\frac{1}{2}}\\ a^{\frac{1}{2}}\end{pmatrix} )^{-1}
+=\begin{pmatrix}0&2a^{\frac{1}{2}}\\2b^{\frac{1}{2}}& 0\end{pmatrix}^{-1}
+=\begin{pmatrix}0&\frac{1}{2}b^{-\frac{1}{2}}\\\frac{1}{2}a^{-\frac{1}{2}}& 0\end{pmatrix}.
+\]
+\end{example}
+%Video
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10925&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+
+%%
+\begin{quickcheck}
+\text{Es sei $f:\R^2\to\R^2$, $x\mapsto \begin{pmatrix}2&0\\0&3\end{pmatrix}\cdot x$.
+Dann gilt für die Ableitung $\text{D}g(a)$ der Umkehrfunktion $g=f^{-1}$ im Punkt $a=e_1$:}
+\begin{choices}{unique}
+    \begin{choice}
+      \text{$\begin{pmatrix}\frac{1}{2}&0\\0&\frac{1}{3}\end{pmatrix}$}
+      \solution{true}
+    \end{choice}
+    \begin{choice}
+      \text{$\begin{pmatrix}\frac{1}{2}&0\\0&\frac{1}{3}\end{pmatrix}\cdot a=\begin{pmatrix}\frac{1}{2}\\0\end{pmatrix}$}
+      \solution{false}
+    \end{choice}
+    \begin{choice}
+      \text{Die Funktion $f$ ist nicht umkehrbar, also exisiert $\text{D}g(a)$ gar nicht.}
+      \solution{false}
+    \end{choice}
+    \begin{choice}
+      \text{$\frac{1}{2}\cdot \begin{pmatrix}2&0\\0&3\end{pmatrix} $}
+      \solution{false}
+    \end{choice}   
+  \end{choices}
+  \explanation{Die Abbildung $f:x\mapsto Ax$ ist linear und bijektiv ($\det A=6\neq 0$), also ist $\text{D}f(x)=A$ in \emph{jedem} Punkt $x\in\R^2$.
+  Somit ist $\text{D}g(y)=A^{-1}$ in \emph{jedem} Punkt $y\in\R^2$.}
+\end{quickcheck}
+%%
+Wir kommen nun zu unserer Hauptaussage über die Existenz von lokalen Umkehrfunktionen.
+\begin{theorem}[Lokale Umkehrbarkeit]\label{thm:lokale-umkehrbarkeit}\label{thrm:lokale_umkehrbarkeit}
+Es sei $M\subset\R^n$ offen, und es sei $f:M\to\R^n$ stetig differenzierbar.
+Weiter sei die Jacobi-Matrix $\text{D}f(a)\in M(n,n;\R)$ in einem Punkt $a\in M$ invertierbar.
+Dann existieren offene Teilmengen $U\subset M$, mit $a\in U$, und $V\subset f(M)$, mit  $b=f(a)\in V$, 
+so dass für die Einschränkung 
+\[f\mid_U:U\to V\]
+gilt
+\begin{itemize}
+\item
+$f\mid_U$ ist bijektiv,
+\item
+die Jacobi-Matrix $\text{D}f(x)$ ist invertierbar für alle $x\in U$, 
+\item
+die Umkehrabbildung $g:=(f\mid_U)^{-1}:V\to U$ ist stetig differenzierbar mit
+\[\text{D}g(y)=\big(\text{D}f(g(y))\big)^{-1} \quad \text{bzw. }\quad \text{D}g(f(x))=\big(\text{D}f(x)\big)^{-1}.\]
+\end{itemize}
+\end{theorem}
+Der Satz hat seine bekannte Entsprechung im Eindimensionalen: 
+Ist $f:\R\to\R$ eine stetig differenzierbaren Funktion und gilt $f'(a)\neq 0$ für ein $a\in \R$,
+dann folgt aus der Stetigkeit von $f'$, dass $f'(x)\neq 0$ für alle $x$ in einer kleinen Umgebung $U=U_{\epsilon}(a)$.
+Auf $U$ ist $f$ also streng monoton und natürlich stetig, somit ist $f\mid_U:U\to f(U)$ umkehrbar, die Umkehrfunktion $f^{-1}$ ist wiederum differenzierbar mit
+bekannter Ableitung $(f^{-1})'(y)=\frac{1}{f'(f^{-1}(y))}$.
+\\
+Im Falle mehrerer Veränderlicher müssen wir analog die Invertierbarkeit der Jacobi-Matrix fordern, 
+um die Funktion lokal umkehren zu können.
+\begin{block}[warning]%[important]
+Satz \ref{thm:lokale-umkehrbarkeit} liefert die lokale Umkehrbarkeit einer \glqq hinreichend glatten\grqq{} Funktion.
+Es ist aber nicht davon auszugehen, dass die Funktion eine globale Umkehrfunktion besitzt!
+\end{block}
+
+%%
+\begin{example}
+Es sei $f:\R^2\to\R^2$, 
+$\begin{pmatrix}x\\ y\end{pmatrix}\mapsto \begin{pmatrix}x\cos y\\ x\sin y\end{pmatrix}$.
+Offensichtlich ist $f$ stetig differenzierbar mit Jacobi-Matrix
+\[\text{D}f((x,y)^T)=\begin{pmatrix}\cos y&-x\sin y\\ \sin y&x\cos y\end{pmatrix}.\]
+Deren Determinante ist
+\[\det\big(\text{D}f((x,y)^T)\big)=
+x(\cos^2 y+\sin^2y)=x.\]
+Die Jacobi-Matrix ist also in allen $\begin{pmatrix}x\\y\end{pmatrix}$ mit $x\neq 0$ invertierbar.
+Wählen wir  ein beliebiges $ \begin{pmatrix}a\\ b\end{pmatrix}\in\R^2$ mit $a\neq 0$, so gibt es nach Satz \ref{thm:lokale-umkehrbarkeit}
+eine offene Menge $U$, die $ \begin{pmatrix}a\\ b\end{pmatrix}$ enthält, und auf der $f$ umkehrbar ist mit differenzierbarer
+Umkehrfunktion $g:f(U)\to U$ und Jacobi-Matrix
+\[\text{D}g(f(\begin{pmatrix}a\\ b\end{pmatrix}))=\big(\text{D}f(\begin{pmatrix}a\\ b\end{pmatrix})\big)^{-1}
+=\frac{1}{a}\begin{pmatrix}a\cos b&a\sin b\\-\sin b&\cos b\end{pmatrix}.\]
+Dabei haben wir die \ref[content_15_inverse_matrix][Formel]{rule:inverse-2x2}
+für die Inverse einer invertierbaren $(2\times 2)$-Matrix benutzt.
+\\
+Die Funktion $f$ besitzt aber \emph{keine globale Umkehrfunktion}, denn sie ist nicht injektiv.
+So ist $\begin{pmatrix}x\cos y\\ x\sin y\end{pmatrix}=\begin{pmatrix}x\cos (y+2\pi k)\\ x\sin (y+2\pi k)\end{pmatrix}$
+für alle $k\in\Z$.
+\end{example}
+%Video
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10926&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+
+%%
+\begin{quickcheck}
+\text{Es sei $f:\R^2\to\R^2$, $\begin{pmatrix}x\\y\end{pmatrix}\mapsto \begin{pmatrix}\cos x\\\sin y\end{pmatrix}$.
+Markieren Sie alle wahren Aussagen.}
+\begin{choices}{multiple}
+    \begin{choice}
+      \text{Die Funktion $f$ ist umkehrbar mit $f^{-1}((x,y)^T)=\begin{pmatrix}\arccos x\\\arcsin y\end{pmatrix}$.}
+      \solution{false}
+    \end{choice}
+    \begin{choice}
+      \text{Die Funktion $f$ ist umkehrbar auf der Menge $\{(x,y)^T\mid x\neq 2\pi k\text{ und } y\neq \pi+2\pi l \text{ für } k,l\in\Z\}$,
+      denn dort ist die Jabobi-Matrix $\text{D}f((x,y)^T)=\begin{pmatrix}-\sin x&0\\0&\cos y\end{pmatrix}$ invertierbar.}
+      \solution{false}
+    \end{choice}
+    \begin{choice}
+    \text{Die Funktion $f$ ist lokal umkehrbar in jedem Punkt der Menge $\{(x,y)^T\mid x\neq \pi k\text{ und } y\neq \frac{\pi}{2}+\pi l \text{ für } k,l\in\Z\}$.}
+      \solution{true}
+     \end{choice}
+    \begin{choice}
+      \text{Die Funktion $f$ ist nicht global umkehrbar.}
+      \solution{true}
+    \end{choice}
+    \end{choices}
+\end{quickcheck}
+%%
+Der folgende Satz über implizite Funktionen ist ein häufig genutztes Instrument der 
+mehrdimensionalen Analysis, um die Lösbarkeit anspruchsvoller Gleichungen zu sichern.
+Nur die theoretische Lösbarkeit sicherzustellen scheint für Anwender 
+auf den ersten Blick wenig attraktiv. 
+Sie ist aber essentiell, um zum Beispiel den Erfolg einer numerischen Näherung zu garantieren.
+\begin{theorem}[Satz über implizite Funktionen]\label{thm:implizite_fkten}
+Es sei $M\subset \R^{m+n} $ eine offene Teilmenge, und es sei 
+\[f=\:\begin{pmatrix}f_1\\\vdots\\ f_n\end{pmatrix}\::M\to\R^n\]
+eine stetig differenzierbare Funktion.
+Mit $x\in\R^m$ und $y\in\R^n$ schreiben wir $z=\begin{pmatrix}x\\y\end{pmatrix}\in\R^{m+n}$. 
+Wir setzen für die ersten $m$ partiellen Ableitungen von $f$
+\[\text{D}_xf(z):=\big(\text{D}_{1}f(z),\ldots,\text{D}_{m}f(z)\big)\in M(n,m;\R),\]
+und für die letzten $n$ partiellen Ableitungen von $f$
+\[\text{D}_yf(z):=\big(\text{D}_{m+1}f(z),\ldots,\text{D}_{m+n}f(z)\big)\in M(n,n;\R).\]
+Es seien $a\in\R^m$ und $b\in\R^n$ gegeben mit  $c=\begin{pmatrix}a\\b\end{pmatrix}\in M$, weiter sei
+\[f(c)=0\quad\text{  und }\quad \text{D}_yf(c) \text{ invertierbar}.\]
+Dann
+lässt sich die Gleichung
+\[f(\begin{pmatrix}x\\y\end{pmatrix})=0\]
+in einer Umgebung von $c$ eindeutig nach $y$ auflösen. Das heißt, es gibt eine Umgebung $U\subset\R^m$ von $a$ und
+eine Umgebung $V\subset\R^n$ von $b$ sowie eine stetig differenzierbare Funktion $g:U\to V$ (eine sog. Auflösung) mit den folgenden
+Eigenschaften.
+\begin{enumerate}
+\item[(i)]
+$U\times V:=\{\begin{pmatrix}x\\y\end{pmatrix}\mid x\in U, y\in V\}\subset M$.
+\item[(ii)]
+$f(\begin{pmatrix}x\\g(x)\end{pmatrix})=0$ für alle $x\in U$.
+\item[(iii)]
+Aus $\begin{pmatrix}x\\y\end{pmatrix}\in U\times V$ mit $f(\begin{pmatrix}x\\y\end{pmatrix})=0$ folgt $y=g(x)$.
+\item[(iv)]
+$\text{D}g(x)=-\big(\text{D}_yf(\begin{pmatrix}x\\g(x)\end{pmatrix})\big)^{-1}\big(\text{D}_xf(\begin{pmatrix}x\\g(x)\end{pmatrix})\big)$
+für alle $x\in U$.
+\end{enumerate}
+Insbesondere gilt $\text{D}g(a)=-\big(\text{D}_yf(c)\big)^{-1}\big(\text{D}_xf(c)\big)$.
+\end{theorem}
+%%
+\begin{remark}
+\begin{itemize}
+\item
+Der Satz über implizite Funktionen trägt seinen Namen zurecht.
+Denn er stellt nur die Existenz der Auflösung $g$ sicher.
+Diese Funktion $g$ ist eine nur implizit definierte Funktion, denn eine explizite Abbildungsvorschrift der Form $g(x)=\ldots$ liefert der Satz nicht. 
+Er gibt auch keine Auskunft darüber, wie groß die offenen Mengen $U$ und $V$ sind.
+\item
+Der Satz über implizite Funktionen  lässt sich sofort auf Ausgangsgleichungen $f(c)=r$ 
+für $r\in \R^n$ beliebig verallgemeinern, indem man im Satz $f$ durch $\tilde{f}=f-r$ ersetzt.
+Weil $\text{D}\tilde{f}(x)=\text{D}f(x)$ für alle $x\in M$ gilt, übertragen sich alle Aussagen direkt.
+Die Voraussetzung, dass $\text{D}_yf(c)$ invertierbar ist, ist hingegen wesentlich.
+\end{itemize}
+\end{remark}
+%Video
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10927&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+
+\begin{example}
+\begin{tabs*}[\initialtab{0}]
+\tab{Beispiel a)}
+Wir betrachten $f:\R^2\to\R$, $\begin{pmatrix} x\\ y\end{pmatrix}\mapsto x^2+xy+y^2-1$.
+Als Polynom ist $f$ stetig differenzierbar mit $\text{D}_xf=2x+y$ und $\text{D}_yf=x+2y$.
+Wir wollen den Satz über implizite Funktionen anwenden und wählen uns deshalb ein 
+$c=\begin{pmatrix} a\\ b\end{pmatrix}$ mit $\text{D}_yf(c)=a+2b\neq 0$, zum Beispiel $c=\begin{pmatrix}0\\1\end{pmatrix}$. 
+Für dieses $c$ ist auch $f(c)=0$, somit gibt es auf einer Umgebung $U$ von $a=0$  eine Auflösung, also eine Funktion
+$g:U\to\R$, sodass
+\[f(\begin{pmatrix} x\\ y\end{pmatrix})=0\quad\Leftrightarrow\quad y=g(x)\]
+in einer Umgebung von $c$. Die Funktion $g$ hat die Ableitung
+\[g'(x)=-\frac{\text{D}_xf(\begin{pmatrix} x\\ g(x)\end{pmatrix})}{\text{D}_yf(\begin{pmatrix} x\\ g(x)\end{pmatrix})}
+=-\frac{2x+g(x)}{x+2g(x)},\]
+also speziell $g'(0)=-\frac{1}{2}$.
+\\
+In diesem speziellen Beispiel kann man eine spezielle Auflösung auch direkt finden, in dem man die 
+quadratische Gleichung 
+\[f(\begin{pmatrix} x\\ y\end{pmatrix})=y^2+xy+(x^2-1)=0,\]
+in $y$ löst, also $x\mapsto \frac{1}{2}\big(-x\pm\sqrt{x^2-4(x^2-1)}\big)$. 
+Weil dies eine in der Nähe von $a=1$ differenzierbare Funktion definieren soll,
+müssen wir uns für ein Vorzeichen entscheiden. Und weil $g(0)=1$ gelten muss, kommt nur $g(x)=\frac{1}{2}\big(-x+\sqrt{x^2-4(x^2-1)}\big)$
+in Frage.
+\\
+Die Verwendung des Satzes spart hier trotz der explizit angebbaren Auflösung immer noch Rechenarbeit, 
+zum Beispiel bei der Berechnung $g'(0)$. Zur Bestätigung können Sie jetzt gerne $g'(0)$ aus der
+expliziten Formel für $g$ bestimmen.
+\tab{Beispiel b)}
+Wir betrachten die stetig differenzierbare Funktion
+\[f:\R^3\to\R,\quad x\mapsto e^{x_1}\sin x_2+e^{x_2}\sin x_3+e^{x_3}\sin x_1\]
+mit totaler Ableitung
+\[\text{D}f(x)=\begin{pmatrix} e^{x_1}\sin x_2+e^{x_3}\cos x_1,&
+e^{x_1}\cos x_2+e^{x_2}\sin x_3,& e^{x_2}\cos x_3+e^{x_3}\sin x_1\end{pmatrix}.\]
+Für $c=0$ ist $f(c)=0$ und $\text{D}f(c)=\begin{pmatrix} 1&1&1\end{pmatrix}$.
+Die partielle Ableitung $\text{D}_{x_3}f(c)=1$ nach $x_3$ ist invertierbar in $c=0$.
+Also gibt es nach dem Satz über implizite Funktionen eine Umgebung von $c=0$ und dort eine Auflösung
+$g$, also eine differenzierbare Funktion in $\begin{pmatrix}x_1\\x_2\end{pmatrix}$ so,
+dass $f(x)=0$ genau dann erfüllt ist, wenn $x_3=g(x_1,x_2)$. Die totale Ableitung von $g$ ist
+\[\text{D}g((x_1,x_2)^T)=
+%-\text{D}_3f(\begin{pmatrix} x_1\\x_2\\g((x_1,x_2)^T)\end{pmatrix})^{-1}\cdot
+%\begin{pmatrix}\text{D}_2f(\begin{pmatrix} x_1\\x_2\\g((x_1,x_2)^T)\end{pmatrix}),
+%&\text{D}_2f(\begin{pmatrix} x_1\\x_2\\g((x_1,x_2)^T)\end{pmatrix})\end{pmatrix},\]
+%korrigiert:
+-\text{D}_{x_3}f(\begin{pmatrix} x_1\\x_2\\g((x_1,x_2)^T)\end{pmatrix})^{-1}\cdot
+\begin{pmatrix}\text{D}_{x_1}f(\begin{pmatrix} x_1\\x_2\\g((x_1,x_2)^T)\end{pmatrix}),
+&\text{D}_{x_2}f(\begin{pmatrix} x_1\\x_2\\g((x_1,x_2)^T)\end{pmatrix})\end{pmatrix},\]
+also speziell $\text{D}g(0)=(-1)\cdot\begin{pmatrix}1&1\end{pmatrix}=\begin{pmatrix}-1&-1\end{pmatrix}$.
+
+\tab{Beispiel c)}
+%Video
+Im folgenden Video finden Sie ein weiteres explizites Beispiel für den
+Satz über implizite Funktion.
+
+\center{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10928&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+
+\end{tabs*}
+\end{example}
+
+\end{content}
+

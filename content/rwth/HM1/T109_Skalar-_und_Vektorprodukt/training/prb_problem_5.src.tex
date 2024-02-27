@@ -1,0 +1,131 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A05: Abstand}
+    \lang{en}{mc yes-no}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{description}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+
+\usepackage{mumie.genericproblem}
+\lang{de}{
+	\title{A05: Abstand}
+}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9715}{Ticket 9715}
+\end{block}
+
+\textit{Hinweis: Benutzen Sie sqrt() um die Wurzel einzugeben.}
+
+\begin{problem}
+
+
+
+	\begin{question}
+		\lang{de}{\text{
+			~\\Bestimmen Sie den Abstand der Punkte $P_1=(\var{x_1};\var{x_2})$ und $P_2=(\var{y_1};\var{y_2})$. Es ist $d(P_1,P_2)=$\ansref \\
+			Bestimmen Sie weiterhin den Abstand der Punkte $P_3=(\var{z_1};\var{z_2};\var{z_3})$ und $P_4=(\var{u_1};\var{u_2};\var{u_3})$. Es ist $d(P_3,P_4)=$\ansref \\
+		
+			}
+			}
+            
+         \explanation{Den Abstand zweier Punkte können Sie bestimmen, indem Sie die Länge des Verbindungsvektors von $P_1$ nach $P_2$ bestimmen.}
+         \explanation[edited]{Die Länge des Verbindungsvektors berechnen Sie, indem Sie jeden Eintrag des Verbindungsvektors 
+         quadrieren, alle Quadrate aufsummieren und aus der Summe die Wurzel ziehen.}
+            
+		\type{input.function}
+      	\field{real} 
+ 
+      \begin{variables}
+            \randint{x_1}{-10}{10}
+            \randint{x_2}{-10}{10}
+            
+            \randint{y_1}{-10}{10}
+            \randint{y_2}{-10}{10}
+            
+            \randint{z_1}{-10}{10}
+            \randint{z_2}{-10}{10}
+            \randint{z_3}{-10}{10}
+            
+            \randint{u_1}{-10}{10}
+            \randint{u_2}{-10}{10}
+            \randint{u_3}{-10}{10}
+            
+            \function[calculate]{a1}{(y_1-x_1)^2+(y_2-x_2)^2}
+            \function[calculate]{b1}{(u_1-z_1)^2+(u_2-z_2)^2+(u_3-z_3)^2}
+            
+            \function{aa}{sqrt(a1)}
+            \function{bb}{sqrt(b1)}
+      \end{variables}
+      \begin{answer}
+            \text{1.) $d(P_1,P_2)=$}
+            \solution{aa}
+            \inputAsFunction{x}{ax} 
+            \checkFuncForZero{ax-aa}{-10}{10}{100}
+      \end{answer}
+
+      \begin{answer}
+            \text{2.) $d(P_3,P_4)=$}
+            \solution{bb}
+            \inputAsFunction{y}{by} 
+            \checkFuncForZero{by-bb}{-10}{10}{100}
+      \end{answer}
+             
+\end{question}
+
+\begin{question} 
+	\lang{de}{
+		\text{
+      Bestimmen Sie den Parameter $x>0$ so, dass die beiden Punkte $A=(5;\var{b};0)$ und $B=(2;3;x)$ zueinander 
+        einen Abstand von $\var{d}$ Einheiten haben.\\\\
+        
+        Es muss gelten: $x=$\ansref.
+                        
+        }}
+         \explanation{Den Abstand zweier Punkte können Sie bestimmen, indem Sie die Länge des Verbindungsvektors von $P_1$ nach $P_2$ 
+         bestimmen. Hier berechnen Sie diese Länge in Abhängigkeit von $x>0$ und setzen die Gleichung gleich dem gesuchten Abstand. 
+         Anschließend lösen Sie die Wurzelgleichung durch Quadrieren und Umformen nach $x$ auf.}
+         %\explanation[edited]{Die Länge des Verbindungsvektors berechnen Sie, indem sie jeden Eintrag des Verbindungsvektors 
+         %quadrieren, alle Quadrate aufsummieren und aus der Summe die Wurzel ziehen.}
+            
+ 
+	\begin{variables}
+      
+       \randint{b}{2}{5}
+       \randint{d}{5}{8}     
+       \function[normalize]{loes}{sqrt(d^2-b^2+6*b-18)}  
+      
+    \end{variables}
+	\type{input.function}
+ 	\field{rational}
+    
+    \begin{answer}
+    	\solution{loes}
+         \checkAsFunction{x}{-10}{10}{10}
+    \end{answer}
+   
+  \end{question}
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+
+
+\end{content}

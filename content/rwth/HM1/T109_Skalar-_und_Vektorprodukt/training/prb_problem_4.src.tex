@@ -1,0 +1,130 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A04: Normalisierte Länge}
+    \lang{en}{mc yes-no}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{description}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+
+\usepackage{mumie.genericproblem}
+\lang{de}{
+	\title{A04: Normalisierte Länge}
+}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9714}{Ticket 9714}
+\end{block}
+
+\textit{Hinweis: Benutzen Sie \texttt{sqrt()} um die Wurzel einzugeben.}
+
+\begin{problem}
+
+	\begin{question}
+		\lang{de}{\text{
+			Bestimmen Sie $x>0$ so, dass der Vektor \\
+			$
+   			\begin{pmatrix}\var{y}\\ x \end{pmatrix}
+   			$  \\
+  			Länge 1 besitzt. 
+			}
+			}
+            
+         \explanation[edited]{Bestimmen Sie die Länge des Vektors in Abhängigkeit von $x>0$. Die Länge eines Vektors berechnen Sie, indem Sie jeden Eintrag des Vektors 
+         quadrieren, alle Quadrate aufsummieren und aus der Summe die Wurzel ziehen. Setzen Sie Ihr von $x$ abhängiges Ergebnis gleich $1$ und lösen Sie die Gleichung nach $x>0$ auf.\\
+         Beispiel: Damit der Vektor $\begin{pmatrix} 0.4\\x\end{pmatrix}$ für $x>0$ die Länge $1$ hat, muss folgendes gelten: $\sqrt{0.4^2+x^2}=1$. Quadrieren der Gleichung, Umformen nach $x^2$ und anschließendes Wurzelziehen liefern: 
+         $x=\sqrt{1-0.4^2}=\sqrt{0.84}$.}
+         
+		\type{input.function}
+      	\field{rational} 
+ 
+      \begin{variables}
+            \randint{ya}{15}{30}
+            \randint{yb}{1}{14}
+            \function[normalize]{y}{yb/ya}
+            
+            \randint{y_1}{-10}{10}
+            \randint{y_2}{-10}{10}
+            \randint{y_3}{-10}{10}
+            
+            \function[calculate]{a1}{1-y^2}
+            \function[calculate]{b1}{y_1^2+y_2^2+y_3^2}
+            
+            \function{aa}{sqrt(a1)}
+            \function{bb}{sqrt(b1)}
+      \end{variables}
+      \begin{answer}
+            \text{$x=$}
+            \solution{aa}
+            \inputAsFunction{x}{ax} 
+            \checkFuncForZero{ax-aa}{-10}{10}{100}
+      \end{answer}
+             
+\end{question}
+
+\begin{question}
+		\lang{de}{\text{
+			Bestimmen Sie $x>0$ so, dass der Vektor \\
+			$
+   			\begin{pmatrix}\frac{\var{y_1}}{x} \\ \frac{\var{y_2}}{x} \\ \frac{\var{y_3}}{x} \end{pmatrix}
+   			$ \\
+   			Länge 1 besitzt.  
+			}
+			}
+            
+         \explanation[edited]{Bestimmen Sie die Länge des Vektors in Abhängigkeit von $x>0$. Die Länge eines Vektors berechnen Sie, indem Sie jeden Eintrag des Vektors 
+         quadrieren, alle Quadrate aufsummieren und aus der Summe die Wurzel ziehen. Setzen Sie Ihr von $x$ abhängiges Ergebnis gleich $1$ und lösen Sie die Gleichung nach $x>0$ auf.\\
+         Beispiel: Damit der Vektor $\begin{pmatrix} 0.4\\x\end{pmatrix}$ für $x>0$ die Länge $1$ hat, muss folgendes gelten: $\sqrt{0.4^2+x^2}=1$. Quadrieren der Gleichung, Umformen nach $x^2$ und anschließendes Wurzelziehen liefern: 
+         $x=\sqrt{1-0.4^2}=\sqrt{0.84}$.}
+         
+		\type{input.function}
+      	\field{rational} 
+ 
+      \begin{variables}
+            \randint{ya}{15}{30}
+            \randint{yb}{1}{14}
+            \function[normalize]{y}{yb/ya}
+            
+            \randint{y_1}{-10}{10}
+            \randint{y_2}{-10}{10}
+            \randint{y_3}{-10}{10}
+            
+            \function[calculate]{a1}{1-y^2}
+            \function[calculate]{b1}{y_1^2+y_2^2+y_3^2}
+            
+            \function{aa}{sqrt(a1)}
+            \function{bb}{sqrt(b1)}
+      \end{variables}
+  
+      \begin{answer}
+            \text{$x=$}
+            \solution{bb}
+            \inputAsFunction{y}{by} 
+            \checkFuncForZero{by-bb}{-10}{10}{100}
+      \end{answer}
+             
+\end{question}
+
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+
+
+\end{content}

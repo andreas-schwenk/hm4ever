@@ -1,0 +1,795 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Abstände Punkte-Geraden-Ebenen}
+    \lang{en}{Distances between points, lines and planes}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T110_DistancePointLineExample.meta.xml}{T110_DistancePointLineExample}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T110_Pyramid.meta.xml}{T110_Pyramid}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T110_DistanceSkewLines.meta.xml}{T110_DistanceSkewLines}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T110_DistancePointPlaneRule.meta.xml}{T110_DistancePointPlaneRule}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T110_DistancePointLineRule.meta.xml}{T110_DistancePointLineRule}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T110_DistancePointPlane.meta.xml}{T110_DistancePointPlane}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T110_DistancePointLine.meta.xml}{T110_DistancePointLine}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T110_Geraden,_Ebenen/g_art_content_37_schnittpunkte.meta.xml}{lagebeziehungen}
+    \link{generic_article}{content/rwth/HM1/T110_Geraden,_Ebenen/g_art_content_35_parameterformen.meta.xml}{parameterformen}
+    \link{generic_article}{content/rwth/HM1/T110_Geraden,_Ebenen/g_art_content_36_normalenformen.meta.xml}{normalenformen}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{10}
+\ombarticle{4}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Abstände zwischen Punkten, Geraden und Ebenen}
+       \lang{en}{Distances between points, lines and planes}}
+ 
+\begin{block}[annotation]
+  übungsinhalt
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9055}{Ticket 9055}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\lang{de}{
+Ziel dieses Abschnitts ist es, Abst"ande von Punkten zu Geraden oder Ebenen, sowie Abst"ande zwischen 
+zwei Geraden, Geraden und Ebenen bzw. zwei Ebenen zu berechnen, sofern sie sich nicht schneiden. 
+Solche Abstände sind stets durch Verbindungen gegeben, die orthogonal zu den Geraden und/oder Ebenen 
+sind.
+}
+\lang{en}{
+The aim of this section is to introduce methods for calculating the distance between a point and a 
+line, between two lines, between a line and a point and between two planes, provided that they do 
+not intersect. The minimal such distances are those that interest us, and these are given by the 
+lengths of vectors that are orthogonal to the line/plane being considered.
+}
+
+\section{\lang{de}{Lot und Lotfu"spunkt}\lang{en}{Orthogonal line through a point}}\label{sec:lot}
+
+\begin{definition}
+\begin{enumerate}
+\item \lang{de}{
+      Seien im $\R^2$ oder $\R^3$ eine Gerade $g$ und ein Punkt $P$, der nicht auf $g$ liegt, 
+      gegeben. Dann ist das \emph{Lot von $P$ auf $g$} definiert als die Gerade $l$ durch $P$, die 
+      $g$ senkrecht schneidet.\\
+      Der \emph{Lotfu"spunkt} (oder auch Fu"spunkt des Lotes) $L$ ist definiert als der Schnittpunkt 
+      des Lotes mit der Geraden $g$.
+      }
+      \lang{en}{
+      Consider a line $g$ and point $P$ that does not lie on $G$, in $\R^2$ or $\R^3$. Then there 
+      exists a line $l$ through $P$ that is orthogonal to $g$.
+      }
+
+\begin{center}
+\image{T110_DistancePointLine}
+\end{center}
+
+\item \lang{de}{
+      Seien im $\R^3$ eine Ebene $E$ und ein Punkt $P$, der nicht auf $E$ liegt, gegeben. Dann ist 
+      das \emph{Lot von $P$ auf $E$} definiert als die Gerade $l$ durch $P$, die $E$ senkrecht 
+      schneidet, also senkrecht auf den beiden Richtungsvektoren von $E$ steht.\\
+      Der \emph{Lotfu"spunkt} $L$ ist definiert als der Schnittpunkt des Lotes mit der Ebene $E$.
+      }
+      \lang{en}{
+      Consder a plane $E$ and point $P$ that does not lie on $E$, in $\R^3$. Then there exists a 
+      line $l$ through $P$ that is orthogonal to $E$, i.e. orthogonal to the direction vectors of 
+      $E$.
+      }
+
+\begin{center}
+\image{T110_DistancePointPlane}
+\end{center}
+\end{enumerate}
+\end{definition}
+
+
+\begin{rule}
+\lang{de}{
+Sei $P$ ein Punkt mit Ortsvektor $\vec{p}$ und 
+$g = \left\{\vec{u} + r\vec{v} \, | \, r \in \R \right\}$ eine Gerade. Wenn $P$ nicht auf $g$ liegt, 
+dann gilt f"ur den Lotfu"spunkt $L$ 
+}
+\lang{en}{
+Let $P$ be a point with position vector $\vec{p}$ and 
+$g = \left\{\vec{u} + r\vec{v} \, | \, r \in \R \right\}$ a line. If $P$ does not lie on $g$, then 
+there is a line $l$ through $P$ orthogonal to $g$. Say $L$ is the othogonal intersection of this 
+line with $g$, then
+}
+\[ \overrightarrow{OL}= \vec{u}+r_0\vec{v},\] 
+\lang{de}{wobei $r_0$ die L"osung der Gleichung}
+\lang{en}{where $r_0$ is the solution of the equation}
+\[ \left(  \vec{u}+r \vec{v}-\vec{p}\right) \bullet\vec{v} =0 \]
+\lang{de}{
+ist.\\
+Das hei"st:
+}
+\lang{en}{
+in $r$.\\
+Therefore, by distributivity:
+}
+\[ r_0= \frac{(\vec{p}-\vec{u})\bullet \vec{v}}{\|\vec{v}\|^2}.\] 
+
+\begin{center}
+\image{T110_DistancePointLineRule}
+\end{center}
+
+\lang{de}{Das Lot $l$ von $P$ auf $g$ ist dann die Gerade durch $P$ und $L$, d.h.}
+\lang{en}{The line $l$ through $P$ and orthogonal to $g$ goes through $P$ and $L$, so}
+\[ l=\left\{\vec{p} + s\overrightarrow{PL}\, \, | \,\, s \in \R \right\}.\] 
+\end{rule}
+
+\begin{example}\label{ex:lot-auf-gerade}
+\lang{de}{
+Wir betrachten den Punkt $P=(1;3)$ und die Gerade $g=\left\{  \begin{pmatrix} 0 \\ 2 \end{pmatrix} + 
+r  \begin{pmatrix} 1 \\ 2 \end{pmatrix}  \, \, | \, \, r \in \R \right\}$.
+\\\\
+Der Punkt $P=(1;3)$ liegt nicht auf $g$, denn die Gleichung 
+$\begin{pmatrix} 1 \\ 3 \end{pmatrix}=\begin{pmatrix} 0 \\ 2 \end{pmatrix} + 
+r  \begin{pmatrix} 1 \\ 2 \end{pmatrix} $, führt zu den zwei Gleichungen $1=0+ 1\cdot r$ und 
+$3=2+2\cdot r$, d.h. zu $1=r$ und $1=2\cdot r$, welche nicht beide gleichzeitig erfüllbar sind.
+\\\\
+Wir berechnen den Lotfu"spunkt:
+Nach der Formel ist $\overrightarrow{OL}=  \begin{pmatrix} 0 \\ 2 \end{pmatrix}  + 
+r_0  \begin{pmatrix} 1 \\ 2 \end{pmatrix} $ mit
+}
+\lang{en}{
+Consider the point $P=(1;3)$ and the line $g=\left\{  \begin{pmatrix} 0 \\ 2 \end{pmatrix} + 
+r  \begin{pmatrix} 1 \\ 2 \end{pmatrix}  \, \, | \, \, r \in \R \right\}$.
+\\\\
+The point $P=(1;3)$ does not lie on $g$, as the equation 
+$\begin{pmatrix} 1 \\ 3 \end{pmatrix}=\begin{pmatrix} 0 \\ 2 \end{pmatrix} + 
+r  \begin{pmatrix} 1 \\ 2 \end{pmatrix} $, leads to the two equations $1=0+ 1\cdot r$ and 
+$3=2+2\cdot r$, that is, $1=r$ and $1=2\cdot r$. Together, these yield a contradiction.
+\\\\
+Hence we can find a point $L$ on $g$ such that $\overrightarrow{PL}$ is orthogonal to $g$. 
+By the above rule, $\overrightarrow{OL} =  \begin{pmatrix} 0 \\ 2 \end{pmatrix}  + 
+r_0  \begin{pmatrix} 1 \\ 2 \end{pmatrix}$, where
+}
+\[r_0 = \frac{\Big(\begin{pmatrix} 1 \\ 3 \end{pmatrix} - 
+  \begin{pmatrix} 0 \\ 2 \end{pmatrix}  \Big)\bullet  
+  \begin{pmatrix} 1 \\ 2 \end{pmatrix} }{\| \begin{pmatrix} 1 \\ 2 \end{pmatrix} \|^2 } = 
+  \frac{(1-0)\cdot 1+(3-2)\cdot 2}{(1^2+2^2)}=\frac{3}{5}.\]
+
+\lang{de}{Also}\lang{en}{Thus}
+\[\overrightarrow{OL}=  \begin{pmatrix} 0 \\ 2 \end{pmatrix}  + 
+  \frac{3}{5}  \begin{pmatrix} 1 \\ 2 \end{pmatrix} = 
+  \begin{pmatrix}3/5 \\ 16/5 \end{pmatrix}. \]
+\lang{de}{Die Lotgerade $l$ ist dann:}
+\lang{en}{The line $l$ through $P$ and $L$ is therefore:}
+\begin{eqnarray*}
+ l &=& \left\{  \begin{pmatrix} 1 \\ 3 \end{pmatrix} + s \begin{pmatrix} -2/5 \\ 1/5 \end{pmatrix} \, \, | \,\, s\in \R \right\} \\
+ &=& \left\{  \begin{pmatrix} 1 \\ 3 \end{pmatrix} + t \begin{pmatrix} -2 \\ 1 \end{pmatrix} \, \, | \,\, t\in \R \right\}.
+ \end{eqnarray*}
+ 
+\begin{center}
+\image{T110_DistancePointLineExample}
+\end{center}
+
+\end{example}
+
+\begin{rule}\label{rule:lot-auf-ebene}
+\lang{de}{
+Seien ein Punkt $P$ und eine Ebene $E=\{\vec{x} \mid \vec{x}\bullet \vec{n}= d \}$ gegeben und $P$ 
+liege nicht auf $E$, dann ist das Lot $l$ von $P$ auf $E$ gegeben durch
+}
+\lang{en}{
+Consider a plane $E = \{\vec{x} \mid \vec{x}\bullet \vec{n}= d \}$ and a point $P$ not on $E$. Then 
+the line through $P$ orthogonal to $E$ is given by
+}
+\[ l=\left\{\vec{p} + s\vec{n} \mid s \in \R \right\}.\] 
+
+\lang{de}{
+Der Lotfu"spunkt $L$ ist der Schnittpunkt von $l$ mit $E$, d.h. 
+$\overrightarrow{OL}=\vec{p} + s_0\vec{n}$, wobei $s_0$ die L"osung der Gleichung
+}
+\lang{en}{
+The intersection of $l$ with $E$ is the point with position vector 
+$\overrightarrow{OL}=\vec{p} + s_0\vec{n}$ where $s_0$ is the solution of
+}
+\[ \left( \vec{p} + s\vec{n}\right) \bullet \vec{n}= d \]
+\lang{de}{ist. Das hei"st:}
+\lang{en}{in $s$. That means}
+\[ s_0= \frac{d- \vec{p}  \bullet \vec{n}}{\|\vec{n}\|^2}. \]
+
+\begin{center}
+\image{T110_DistancePointPlaneRule}
+\end{center}
+\end{rule}
+
+\begin{example}\label{ex:lot-auf-ebene}
+\lang{de}{Wir betrachten den Punkt $P=(3;2;1)$ und die Ebene}
+\lang{en}{Consider the point $P=(3;2;1)$ and the plane}
+\[E = \left\{   \begin{pmatrix}x_1 \\ x_2\\ x_3 \end{pmatrix}\in \R^3\, \mid\,  
+  \begin{pmatrix}-1 \\ 2\\ 1 \end{pmatrix}\bullet 
+  \begin{pmatrix}x_1 \\ x_2\\ x_3 \end{pmatrix}=3 \right\} \]
+\lang{de}{
+(vgl. \ref[lagebeziehungen][Abschnitt Lagebeziehungen]{ex:punkt-ebene}).
+\\\\
+Für die Lotgerade hat man dann als Stützvektor den Ortsvektor von $P$ und als Richtungsvektor 
+den Normalenvektor $\vec{n}=\begin{pmatrix}-1 \\ 2\\ 1 \end{pmatrix}$ der Ebene $E$. Also
+}
+\lang{en}{
+(see \ref[lagebeziehungen][previous section]{ex:punkt-ebene}).
+\\\\
+To find the line $l$ through $P$ and orthogonal to $E$, we start with $P$ as the position vector of 
+a point on the line, and take the normal vector $\vec{n}=\begin{pmatrix}-1 \\ 2\\ 1 \end{pmatrix}$ 
+of the plane to be the direction vector. So
+}
+
+\[l=\left\{ \begin{pmatrix}3\\ 2\\ 1 \end{pmatrix} + 
+  s\cdot \begin{pmatrix}-1 \\ 2\\ 1 \end{pmatrix} \mid  s\in \R \right\}. \]
+\lang{de}{
+Für den Lotfußpunkt $L$ bestimmen wir den Schnittpunkt von $l$ mit $E$, d.h. wir setzen die 
+Parameterform von $l$ in die Gleichung von $E$ ein und erhalten
+}
+\lang{en}{
+To find the point $L$ where the line $l$ intersects the plane, we substitute the parametrised form 
+of $l$ into the equation for $E$ to obtain
+}
+\begin{align*}
+ && \hspace{1cm} \begin{pmatrix}-1 \\ 2\\ 1 \end{pmatrix}\bullet 
+\Big(  \begin{pmatrix}3\\ 2\\ 1 \end{pmatrix}+s\cdot \begin{pmatrix}-1 \\ 2\\ 1 \end{pmatrix} \Big) &= 3 \\
+&\Leftrightarrow & \begin{pmatrix}-1 \\ 2\\ 1 \end{pmatrix}\bullet \begin{pmatrix}3\\ 2\\ 1 \end{pmatrix}
++s\cdot \begin{pmatrix}-1 \\ 2\\ 1 \end{pmatrix}\bullet \begin{pmatrix}-1 \\ 2\\ 1 \end{pmatrix} &= 3 \\
+&\Leftrightarrow & \hspace{4cm} s\cdot \left\| \begin{pmatrix}-1 \\ 2\\ 1 \end{pmatrix}\right\|^2 &=3- 
+\begin{pmatrix}-1 \\ 2\\ 1 \end{pmatrix}\bullet \begin{pmatrix}3\\ 2\\ 1 \end{pmatrix} \\
+&\Leftrightarrow & \hspace{7cm} s &= \frac{3- 
+\begin{pmatrix}-1 \\ 2\\ 1 \end{pmatrix}\bullet \begin{pmatrix}3\\ 2\\ 1 \end{pmatrix}}{\left\| \begin{pmatrix}-1 \\ 2\\ 1 \end{pmatrix}\right\|^2}
+ \\
+&\Leftrightarrow & \hspace{7cm} s &= \frac{3- (-1\cdot 3+2^2+1^2)}{(-1)^2+2^2+1^2}= \frac{1}{6}
+\end{align*}
+\lang{de}{
+(Die vorletzte Zeile ist übrigens genau die Formel in obiger Regel und die hier gemachten 
+Umformungen liefern die Begründung, weshalb die Formel in der Regel gilt.)
+\\\\
+Der Lotfußpunkt hat also den Ortsvektor
+}
+\lang{en}{
+(The penultimate row is in fact the formula from the above rule, and the above manipulation 
+motivate why the formula from the rule works.)
+\\\\
+The point $L$ therefore has the position vector
+}
+\[ \vec{OL}= \begin{pmatrix}3\\ 2\\ 1 \end{pmatrix}+\frac{1}{6}\cdot \begin{pmatrix}-1 \\ 2\\ 1 \end{pmatrix}
+=\begin{pmatrix}17/6 \\ 14/6 \\ 7/6 \end{pmatrix},\]
+\lang{de}{und daher ist }
+\lang{en}{and thus }
+$L=(\frac{17}{6};\frac{14}{6};\frac{7}{6})$.
+\end{example}
+
+
+\begin{remark}
+\lang{de}{
+Der Lotfußpunkt und die Lotgerade lassen sich auch im Fall eines Punktes und einer Ebene in 
+Parameterform ähnlich wie für den Fall eines Punktes und einer Geraden berechnen. Die Rechnung wird 
+jedoch etwas komplizierter.
+}
+\lang{en}{
+The line $l$ through a point $P$ and orthogonal to a plane $E$ expressed in parametrised form can be 
+found using a similar method to the case with a point $P$ and line $g$. The calculation itself is 
+however somewhat more complicated.
+}
+\end{remark}
+
+\section{\lang{de}{Abst"ande von Punkten zu Geraden und Ebenen}
+         \lang{en}{Distances between points and lines or planes}}
+
+\lang{de}{
+Da Abstände immer durch orthogonale Verbindungen gegeben sind, erhalten wir folgende 
+Abstandsberechnungen.
+}
+\lang{en}{
+As distances between points and lines or planes are always given by the orthogonal line between two 
+graphs, we obtain the following rules.
+}
+
+%Den \emph{Abstand $d(P,g)$} eines Punkte $P$ von einer Geraden $g$  zu bestimmen, ist nun einfach:
+
+\begin{rule}\label{rule:abst_pkt_gerade}\label{rule:abst_pkt_ebene}
+\lang{de}{
+Der \emph{Abstand $d(P,g)$} eines Punktes $P$ von einer Geraden $g$ ist genau der Abstand von $P$ 
+zum Lotfu"spunkt $L$ von $P$ auf $g$, also
+}
+\lang{en}{
+The \emph{distance $d(P,g)$} of a point $P$ from a line $g$ is exactly the distance from $P$ to the 
+closest point on that line, which is the point $L$ where the line $l$ through $P$ and orthogonal to 
+$g$ intersects $g$. So,
+}
+\[ d(P,g)=d(P,L). \]
+
+\lang{de}{
+Ebenso erh"alt man den \emph{Abstand $d(P,E)$} eines Punktes $P$ von einer Ebene $E$ als den Abstand 
+von $P$ zum Lotfu"spunkt $L$ von $P$ auf $E$, d.h.
+}
+\lang{en}{
+Similarly, the \emph{distance $d(P,E)$} of a point $P$ from a plane $E$ is exactly the distance from 
+$P$ to the closest point on that plane, line, which is the point $L$ where the line $l$ through $P$ 
+and orthogonal to $E$ intersects $E$. So,
+}
+\[ d(P,E)=d(P,L)=\|s_0\cdot\vec{n}\|=\frac{|d-\vec{p}\bullet \vec{n}|}{\|\vec{n}\|}, \]
+\lang{de}{
+wobei die Ebene $E$ die Normalenform $E=\{\vec{x} \mid \vec{x}\bullet \vec{n}= d \}$ hat und $s_0$ 
+wie in Regel \ref{rule:lot-auf-ebene} gegeben ist.
+\\\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10794&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+}
+\lang{en}{
+where the plane $E$ is given in the normal form 
+$E=\{\vec{x} \mid \vec{x}\bullet \vec{n}= d \}$ and $s_0$ is given as in rule 
+\ref{rule:lot-auf-ebene}.
+}
+\end{rule}
+
+\begin{remark}
+\begin{enumerate}
+\item \lang{de}{
+      In der letzten Formel für den Abstand $d(P,E)$ des Punktes zur Ebene taucht der Lotfußpunkt 
+      gar nicht mehr auf. Man kann in diesem Fall also auch direkt den Abstand ausrechnen, ohne den 
+      Lotfußpunkt vorher bestimmen zu müssen.
+      }
+      \lang{en}{
+      The point $L$ does not even appear in the final formula for the distance $d(P,E)$ of a point 
+      from a plane. In this case the distance can be calculated without needing to find $L$.
+      }
+\item \lang{de}{
+      Die angegebenen Verfahren zur Bestimmung des Lotfu"spunktes funktionieren auch, wenn der Punkt 
+      $P$ auf der Geraden bzw. auf der Ebene liegt. In diesem Fall erh"alt man $L=P$ und der Abstand 
+      ist $0$.\\
+      Die Lotgerade zur Geraden im $\R^3$ existiert in diesem Fall jedoch nicht.
+      }
+      \lang{en}{
+      The methods given above for determining $L$ also technically work if $P$ lies on the line $g$ 
+      (in $\R^2$) or the plane $E$ (in $\R^3$). They yield $L=P$ so the distance is $0$.\\
+      However, if $P$ lies on a line $g$ in $\R^3$, there is no unique line through $P$ and with 
+      orthogonal intersection with $g$.
+      }
+\end{enumerate}
+\end{remark}
+
+\begin{example}
+\begin{enumerate}
+\item \lang{de}{
+      In Beispiel \ref{ex:lot-auf-gerade}, hatten wir den Punkt $P=(1;3)$ und die Gerade 
+      $g=\left\{\begin{pmatrix} 0 \\ 2 \end{pmatrix} + 
+      r  \begin{pmatrix} 1 \\ 2 \end{pmatrix} \, \, | \, \, r \in \R \right\}$. 
+      Der Lotfußpunkt von $P$ auf $g$ war $L=(\frac{3}{5}; \frac{16}{5})$.
+      \\\\
+      Daher ist der Abstand von $P$ zu $g$:
+      }
+      \lang{en}{
+      In example \ref{ex:lot-auf-gerade} we considered the point $P=(1;3)$ and the line 
+      $g=\left\{\begin{pmatrix} 0 \\ 2 \end{pmatrix} + 
+      r  \begin{pmatrix} 1 \\ 2 \end{pmatrix} \, \, | \, \, r \in \R \right\}$. 
+      The point $L$ at which the line $l$ through $P$ intersects $g$ orthogonally was 
+      $L=(\frac{3}{5}; \frac{16}{5})$.
+      \\\\
+      Hence the distance from $P$ to $G$ is:
+      }
+      \[d(P,g)=d(P,L)=\left\| \vec{PL}\right\| = 
+        \left\| \begin{pmatrix} 3/5 -1 \\ 16/5-3 \end{pmatrix} \right\| = 
+        \sqrt{(-\frac{2}{5})^2+(\frac{1}{5})^2} = \sqrt{\frac{5}{25}} = \frac{\sqrt{5}}{5}. \]
+\item \lang{de}{In Beispiel \ref{ex:lot-auf-ebene}, hatten wir den Punkt $P=(3;2;1)$ und die Ebene }
+      \lang{en}{In example \ref{ex:lot-auf-ebene} we considered the point $P=(3;2;1)$ and the plane }
+      $E=\left\{\begin{pmatrix}x_1 \\ x_2\\ x_3 \end{pmatrix}\in \R^3\, \mid\, 
+      \begin{pmatrix}-1 \\ 2\\ 1 \end{pmatrix}\bullet 
+      \begin{pmatrix}x_1 \\ x_2\\ x_3 \end{pmatrix} = 3 \right\}$.
+
+
+\lang{de}{Daher ist der Abstand von $P$ zu $E$ nach obiger Formel:}
+\lang{en}{Hence, using the above formula, the distance from $P$ to $E$ is:}
+\[d(P,E)=\frac{|3- \begin{pmatrix}3 \\ 2\\ 1 \end{pmatrix} \bullet 
+  \begin{pmatrix}-1 \\ 2\\ 1 \end{pmatrix}|}{\|\begin{pmatrix}-1 \\ 2\\ 1 \end{pmatrix}\|} = 
+  \frac{|3- (-1\cdot 3+2^2+1^2)|}{\sqrt{(-1)^2+2^2+1^2}} = \frac{1}{\sqrt{6}}. \]
+  \end{enumerate}
+  \end{example}
+
+\lang{de}{Gerade in geometrischen Anwendungen müssen oft Abstände berechnet werden.}
+\lang{en}{Geometric applications often require distances to be found.}
+
+\begin{example}
+\lang{de}{
+Im $\R^3$ seien die Punkte $A=(1; 1; 0)$, $B=(2; 1; 2)$, $C=(3; 3; 4)$ und $S=(4; 0; 0)$ gegeben. 
+Bestimmen Sie das Volumen der dreiseitigen Pyramide mit Spitze $S$ und Grundfl"ache Dreieck $ABC$.
+}
+\lang{en}{
+Consider the points $A=(1; 1; 0)$, $B=(2; 1; 2)$, $C=(3; 3; 4)$ and $S=(4; 0; 0)$ in $\R^3$. 
+Determine the volume of the three-sided pyramid with tip $S$ and the triangle $ABC$ as its base.
+}
+
+\begin{center}
+\image{T110_Pyramid}
+\end{center}
+
+\begin{tabs*}
+\tab{\lang{de}{Formel f"ur das Volumen $V$ der Pyramide}
+     \lang{en}{Formula for the volume $V$ of the pyramid}}
+\begin{eqnarray*}
+V &=& \frac{1}{3}\cdot \text{\lang{de}{Grundfl"ache}\lang{en}{Base area}}\cdot 
+\text{\lang{de}{H"ohe}\lang{en}{Height}} = \frac{1}{3}\cdot 
+\text{\lang{de}{Fl"ache}\lang{en}{Area}}(\Delta ABC)\cdot d(S,E_{ABC}),
+\end{eqnarray*} 
+\lang{de}{wobei $E_{ABC}$ die Ebene durch die drei Punkte $A$, $B$ und $C$ ist.}
+\lang{en}{where $E_{ABC}$ is the plane containing the three points $A$, $B$ and $C$.}
+\tab{\lang{de}{Formel f"ur die Fl"ache $F$ der dreieckigen Grundseite}
+     \lang{en}{Formula for the area $F$ of the triangular base}}
+\begin{eqnarray*}
+F &=& \frac{1}{2}\cdot \text{\lang{de}{Grundseite}\lang{en}{Base}}\cdot 
+\text{\lang{de}{H"ohe}\lang{en}{Height}} = \frac{1}{2}\cdot d(A,B)\cdot d(C,g_{AB}),
+\end{eqnarray*}
+\lang{de}{wobei $g_{AB}$ die Gerade durch $A$ und $B$ ist.}
+\lang{en}{where $g_{AB}$ is the line containing $A$ and $B$.}
+\end{tabs*}
+\lang{de}{Das Volumen der Pyramide ist}\lang{en}{The volume of the pyramid is}
+\begin{eqnarray*}
+V &=& \frac{1}{3}\big(\frac{1}{2}\cdot d(A,B)\cdot d(C,g_{AB})\big)\cdot d(S,E_{ABC}) \\
+&=& \frac{1}{6}d(A,B)\cdot d(C,g_{AB})\cdot d(S,E_{ABC}),
+\end{eqnarray*} 
+\lang{de}{
+wobei $g_{AB}$ die Gerade durch die Punkte $A$ und $B$ ist und $E_{ABC}$ die Ebene durch die Punkte 
+$A$, $B$ und $C$.
+}
+\lang{en}{
+where $g_{AB}$ is the line containing $A$ and $B$ and $E_{ABC}$ is the plane containing $A$, $B$ and 
+$C$.
+}
+
+\begin{enumerate}
+\item $d(A,B)=\|\overrightarrow{AB}\|=\left\| \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix}  \right\| =\sqrt{1+4}=\sqrt{5}$.
+\item \lang{de}{
+      Berechnung von $d(C,g_{AB})$:\\
+      Die Gerade durch die Punkte $A$ und $B$ ist gegeben durch (vgl. 
+      \ref[parameterformen][Abschnitt Parameterformen]{sec:geraden})
+      }
+      \lang{en}{
+      Calculating $d(C,g_{AB})$:\\
+      The line through the points $A$ and $B$ is given by (see the 
+      \ref[parameterformen][section on parametrised lines and planes]{sec:geraden})
+      }
+      \[ g_{AB}=\left\{  \begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix} + 
+      r  \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix} \, | \, r \in \R \right\}. \]
+      \lang{de}{
+      Der Lotfu"spunkt $L_C$ von $C$ auf $g_{AB}$ ist daher 
+      }
+      \lang{en}{
+      The line $l_C$ through $C$ and orthogonal to $g_{AB}$ intersects (orthogonally) with 
+      $g_{AB}$ at the point $L_C$ given by 
+      }
+      $\overrightarrow{OL_C}=\overrightarrow{OA}+r_0\vec{v}$ mit $\vec{v}=\overrightarrow{AB} =
+      \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix}$ 
+      \lang{de}{und}\lang{en}{and}
+      \[ r_0=\frac{\overrightarrow{AC}\bullet \vec{v}}{\|\vec{v}\|^2} =
+      \frac{ \begin{pmatrix} 2 \\ 2 \\ 4 \end{pmatrix} \bullet 
+      \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix} }{\sqrt{5}^2} = \frac{2+8}{5} = 2. \]
+      \lang{de}{Also ist }\lang{en}{Thus}
+      $d(C,g_{AB})=d(C,L_C)=\left\|  \begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix} + 
+      2 \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix} -  
+      \begin{pmatrix} 3 \\ 3 \\ 4 \end{pmatrix}  \right\| = 
+      \left\|  \begin{pmatrix} 0 \\ -2 \\ 0 \end{pmatrix} \right\| = 2.$
+\item \lang{de}{
+      Berechnung von $d(S,E_{ABC})$:\\
+      Die Ebene durch die Punkte $A$, $B$ und $C$ ist gegeben durch (vgl. 
+      \ref[parameterformen][Abschnitt Parameterformen]{sec:ebenen})
+      }
+      \lang{en}{
+      Calculating $d(S,E_{ABC})$:\\
+      The plane containing the points $A$, $B$ and $C$ is given by (see the 
+      \ref[parameterformen][section on parametrised lines and planes]{sec:ebenen})
+      }
+      \[E_{ABC}=\left\{  \begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix} + 
+      r \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix} + 
+      s  \begin{pmatrix} 2 \\ 2 \\ 4 \end{pmatrix}  \, | \, r, s \in \R \right\}. \]
+      \lang{de}{
+      Daraus lässt sich eine Normalenform von $E$ berechnen als (vgl. 
+      \ref[normalenformen][Abschnitt Normalenformen]{sec:ebenen})
+      }
+      \lang{en}{
+      Using this we can calculate a normal form of $E$ as (see the 
+      \ref[normalenformen][section on the normal form of lines and planes]{sec:ebenen})
+      }
+      \[E = \left\{  \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} \, | \,
+      \begin{pmatrix} -4 \\ 0 \\ 2 \end{pmatrix} \bullet \vec{x}    =-4 \right\}\]
+      \lang{de}{Der Lotfu"spunkt $L_S$ von $S$ auf $E_{ABC}$ erfüllt daher }
+      \lang{en}{
+      The line $l_S$ through $S$ and orthogonal to $E_{ABC}$ intersects (orthogonally) with 
+      $E_{ABC}$ at the point $L_S$ given by 
+      }
+      $\overrightarrow{OL_S}=\overrightarrow{OS}+t_0\vec{n}$ 
+      \lang{de}{mit}\lang{en}{with} 
+      $\vec{n}= \begin{pmatrix} -4 \\ 0 \\ 2 \end{pmatrix} $ 
+      \lang{de}{und}\lang{en}{and} 
+      \[ t_0=\frac{d-\overrightarrow{OS}\bullet \vec{n}}{\|\vec{n}\|^2} = 
+      \frac{-4- \begin{pmatrix} 4 \\ 0 \\ 0 \end{pmatrix} \bullet 
+      \begin{pmatrix} -4 \\ 0 \\ 2 \end{pmatrix}}
+      {\left\| \begin{pmatrix} -4 \\ 0 \\ 2 \end{pmatrix}\right\|^2} = \frac{-4-(-16)}{16+0+4} = 
+      \frac{12}{20}=\frac{3}{5}. \]
+      \lang{de}{Also ist}\lang{en}{Thus} 
+      $d(S,E_{ABC})=d(S,L_S)=\|\overrightarrow{SL_S}\ |= \|t_0\vec{n}\|=|t_0|\sqrt{20} = 
+      \frac{6}{5}\sqrt{5}$.
+\end{enumerate}
+\lang{de}{Insgesamt also}
+\lang{en}{In general we therefore have}
+\[ V=\frac{1}{6}d(A,B) d(C,g_{AB}) d(S,E_{ABC})
+=\frac{1}{6}\cdot \sqrt{5}\cdot 2\cdot \frac{6}{5}\sqrt{5}=2.\] 
+\end{example}
+
+\section{\lang{de}{Abst"ande paralleler Geraden bzw. Ebenen}
+         \lang{en}{Distances between parallel lines or planes}}
+
+\begin{rule}\label{rule:abst_ebene_ebene}
+\lang{de}{
+Wenn sich zwei Ebenen $E_1$ und $E_2$ im $\R^3$ nicht schneiden, sind sie \textbf{parallel}. 
+In diesem Fall kann man ihren \emph{Abstand $d(E_1,E_2)$} berechnen, indem man einen Punkt auf einer 
+der beiden Ebenen w"ahlt und dessen Abstand zur anderen Ebene berechnet.\\
+Sind beide Ebenen in Normalenform gegeben $E_1=\{\vec{x} \mid \vec{x}\bullet \vec{n}= d_1 \}$ 
+und $E_2=\{\vec{x} \mid \vec{x}\bullet \vec{n}= d_2 \}$ mit demselben Normalenvektor $\vec{n}$, 
+so kann man den Abstand auch direkt berechnen durch
+}
+\lang{en}{
+If two planes $E_1$ and $E_2$ in $\R^3$ do not intersect, they are \textbf{parallel}. In this case 
+we can calculate the \emph{distance $d(E_1,E_2)$} between them by choosing any point on one of the 
+two planes, then finding the distance between this point and the other plane.\\
+If the two planes are given in normal form, $E_1=\{\vec{x} \mid \vec{x}\bullet \vec{n}= d_1 \}$ 
+and $E_2=\{\vec{x} \mid \vec{x}\bullet \vec{n}= d_2 \}$, with the same normal vector $\vec{n}$, 
+then the distance between them can also be directly calculated by
+}
+\[ d(E_1,E_2) = \frac{|d_2-d_1|}{\|\vec{n}\|}. \]  
+\end{rule}
+
+\begin{example}
+\lang{de}{Wir betrachten die Ebenen}
+\lang{en}{Consider the planes}
+\[E=\left\{   \begin{pmatrix}x_1 \\ x_2\\ x_3 \end{pmatrix}\in \R^3\, \mid\, 
+\begin{pmatrix}-1 \\ 2\\ 1 \end{pmatrix}\bullet \begin{pmatrix}x_1 \\ x_2\\ x_3 \end{pmatrix} = 
+3 \right\}\]
+\lang{de}{und}\lang{en}{and}
+\[F=\left\{\begin{pmatrix}x_1 \\ x_2\\ x_3 \end{pmatrix}\in \R^3\, \mid\, 
+\begin{pmatrix}-2 \\ 4\\ 2 \end{pmatrix}\bullet \begin{pmatrix}x_1 \\ x_2\\ x_3 \end{pmatrix} = 
+4 \right\}.\]
+\lang{de}{
+Da die Normalenvektoren Vielfache voneinander sind, sind die Ebenen parallel.
+\\\\
+Um den Abstand der Ebenen zu berechnen gibt es jetzt im Wesentlichen drei Möglichkeiten
+}
+\lang{en}{
+As the normal vectors are multiples of each other, the two planes are parallel.
+\\\\
+We now have three methods with which we could calculate the distance between the planes.
+}
+\begin{tabs*}
+\tab{\lang{de}{mit Punkt auf $F$}\lang{en}{with a point on $F$}}
+\lang{de}{
+Wir suchen einen Punkt auf $F$, z.B. $Q=(0;1;0)$ und berechnen mit der Punkt-Ebenen-Abstandsformel
+}
+\lang{en}{
+We look for a point on $F$, for example $Q=(0;1;0)$, and use the formula for the distance between 
+a point and a plane:
+}
+\[d(E,F)=d(E,Q)=\frac{\left|3-\begin{pmatrix}-1 \\ 2\\ 1 \end{pmatrix}\bullet 
+\begin{pmatrix}0 \\ 1\\ 0 \end{pmatrix}\right|}
+{\left\Vert \begin{pmatrix}-1 \\ 2\\ 1 \end{pmatrix}\right\Vert} = 
+\frac{|3-2|}{\sqrt{6}}=\frac{1}{\sqrt{6}}.\]
+\tab{\lang{de}{mit Punkt auf $E$}\lang{en}{with a point on $E$}}
+\lang{de}{
+Wir suchen einen Punkt auf $E$, z.B. $P=(0;0;3)$ und berechnen mit der Punkt-Ebenen-Abstandsformel
+}
+\lang{en}{
+We look for a point on $E$, for example $P=(0;0;3)$, and use the formula for the distance between 
+a point and a plane:
+}
+\[ d(E,F)=d(P,F)=\frac{\left|4-\begin{pmatrix}-2 \\ 4\\ 2 \end{pmatrix}\bullet 
+\begin{pmatrix}0 \\ 0\\ 3 \end{pmatrix}\right|}
+{\left\|\begin{pmatrix}-2 \\ 4\\ 2 \end{pmatrix}\right\Vert} = 
+\frac{|4-6|}{\sqrt{24}}=\frac{2}{\sqrt{24}}=\frac{1}{\sqrt{6}}.\]
+\tab{\lang{de}{mit gleichen Normalenvektoren}\lang{en}{by scaling the normal vectors}}
+\lang{de}{
+Wir skalieren die Normalenform von $F$ (oder analog die von $E$) so, dass sie den gleichen 
+Normalenvektor hat wie die Normalenform von $E$:
+}
+\lang{en}{
+We scale the normal form of $F$ (or analogously the normal form of $E$) so that it has the same 
+normal vector as in the normal form of $E$:
+}
+\[ \begin{pmatrix}-2 \\ 4\\ 2 \end{pmatrix}\bullet \begin{pmatrix}x_1 \\ x_2\\ x_3 \end{pmatrix}=4 \Leftrightarrow
+\begin{pmatrix}-1 \\ 2\\ 1 \end{pmatrix}\bullet \begin{pmatrix}x_1 \\ x_2\\ x_3 \end{pmatrix}=2 \quad (\text{Teilen durch }2). \]
+\lang{de}{Dann verwenden wir die obige Abstandsformel:}
+\lang{en}{Then we apply the formula given in the above rule:}
+\[ d(E,F)= \frac{\left|3-2\right|}{\left\|\begin{pmatrix}-1 \\ 2\\ 1 \end{pmatrix}\right\Vert}
+= \frac{1}{\sqrt{6}}.\]
+\end{tabs*}
+%\begin{center}
+%\image{T110_DistanceParallelPlanes}
+%\end{center}
+\end{example}
+
+
+\begin{rule}\label{rule:abst_gerade_gerade}\label{rule:abst_gerade_ebene}
+\lang{de}{
+F"ur eine Gerade $g$, die zu einer Ebene $E$ \textbf{parallel} ist, erhält man deren 
+\emph{Abstand $d(g,E)$}, indem man einen Punkt auf der Geraden $g$ w"ahlt und dessen Abstand zur 
+Ebene $E$ berechnet.
+\\\\
+Auch f"ur zwei zueinander \textbf{parallele} Geraden $g$ und $h$ berechnet man deren  
+\emph{Abstand $d(g,h)$}, indem man einen Punkt auf einer der beiden Geraden w"ahlt und dessen 
+Abstand zur anderen Geraden berechnet.
+}
+\lang{en}{
+We obtain the \emph{distance $d(g,E)$} between a line $g$ and a plane $E$ to which it is 
+\textbf{parallel} by choosing a point on the line $g$ and calculating its distance from $E$.
+\\\\
+Similarly, the \emph{distance $d(g,h)$} between two \textbf{parallel} lines $g$ and $h$ is obtained 
+by choosing a point on one of the lines and calculating its distance from the other line.
+}
+\end{rule}
+
+
+\section{\lang{de}{Abstand windschiefer Geraden im $\R^3$}
+         \lang{en}{Distance between skew lines in $\R^3$}}\label{def:abst_windschief_gerade}
+
+\begin{definition}
+\lang{de}{
+Sind $g= \left\{ \vec{p} + r \vec{v}\mid r \in \R \right\}$ und 
+$h= \left\{ \vec{q} + s \vec{w} \mid s \in \R \right\}$ zwei Geraden, die nicht parallel sind, so 
+gibt es auf $g$ und $h$ jeweils einen eindeutigen Punkt $L_g$ bzw.~$L_h$ so, dass der Abstand 
+$d(L_g,L_h)$ minimal ist unter allen Abst"anden von Punkten auf $g$ und Punkten auf $h$. Per 
+Definition ist dann
+}
+\lang{en}{
+Let $g= \left\{ \vec{p} + r \vec{v}\mid r \in \R \right\}$ and 
+$h= \left\{ \vec{q} + s \vec{w} \mid s \in \R \right\}$ be two lines that are not parallel. Then 
+there are points $L_g$ and ~$L_h$ on the lines $g$ and $h$ that minimise the distance $d(L_g,L_h)$. 
+By definition we then have
+}
+\[d(g,h)=d(L_g,L_h).\]
+\lang{de}{
+$L_g$ und $L_h$ sind eindeutig dadurch charakterisiert, dass die Gerade durch $L_g$ und $L_h$ sowohl 
+auf $g$ als auch auf $h$ senkrecht steht.
+}
+\lang{en}{
+$L_g$ and $L_h$ are uniquely characterised by the following property: the line through $L_g$ and 
+$L_h$ is orthogonal to both $g$ and $h$.
+}
+\end{definition}
+
+\begin{rule}
+\lang{de}{
+Die Punkte $L_g$ und $L_h$ sind gegeben durch $\overrightarrow{OL_g}= \vec{p} + r_0\vec{v}$ und 
+$\overrightarrow{OL_h}= \vec{q} + s_0\vec{w}$, wobei $ \begin{pmatrix} r_0 \\ s_0 \end{pmatrix} $ 
+die eindeutige L"osung des Gleichungssystems
+}
+\lang{en}{
+The points $L_g$ and $L_h$ are given by $\overrightarrow{OL_g}= \vec{p} + r_0\vec{v}$ and 
+$\overrightarrow{OL_h}= \vec{q} + s_0\vec{w}$, where $ \begin{pmatrix} r_0 \\ s_0 \end{pmatrix} $ 
+is the solution to the system of equations
+}
+ \[ \begin{bmatrix} ( \vec{p} + r \vec{v} -  \vec{q} - s\vec{w}) \bullet \vec{v} &=& 0 \\
+ ( \vec{p} + r \vec{v} -  \vec{q} - s\vec{w}) \bullet \vec{w} &=& 0
+\end{bmatrix} \quad  \Leftrightarrow \] 
+\[ \begin{bmatrix} 
+\left\|\vec{v}\right\|^2\cdot r & -& (\vec{v}\bullet \vec{w})\cdot s &=&  (\vec{q}-\vec{p})\bullet \vec{v} \\
+  (\vec{v}\bullet \vec{w})\cdot r  & -&  \left\|\vec{w}\right\|^2\cdot s &=& (\vec{q}-\vec{p})\bullet \vec{w}\end{bmatrix} \]
+\lang{de}{ist.}
+\lang{en}{which is unique.}
+
+\begin{center}
+\image{T110_DistanceSkewLines}
+\end{center}
+\end{rule}
+
+\begin{example}
+\lang{de}{Wir betrachten die beiden Geraden }
+\lang{en}{Consider the two lines }
+$g=\left\{  \begin{pmatrix} 1\\ 1 \\ 0 \end{pmatrix}  
++ r \cdot  \begin{pmatrix} 1 \\ 0\\ 2 \end{pmatrix}  \, | \,\, r\in \R \right\}$ 
+\lang{de}{und}\lang{en}{and} 
+$h=\left\{  \begin{pmatrix} 2\\ 3 \\ 4 \end{pmatrix}  
++ s \cdot  \begin{pmatrix} 1 \\ 1\\ 2 \end{pmatrix}  \, | \,\, s\in \R \right\}$, 
+\lang{de}{
+welche zueinander windschief sind. % (vgl.~Bsp. im \link{lagebeziehungen}{vorigen Abschnitt}).
+\\\\
+Welchen Abstand haben diese zwei Geraden zueinander?
+\\\\
+F"ur die Lotfu"spunkte $L_g$ und $L_h$ ist also das folgende Gleichungssystem zu l"osen:
+}
+\lang{en}{
+which are skew.
+\\\\
+What is the distance between these two lines?
+\\\\
+To find the closest points $L_g$ and $L_h$ on each line, we solve the following system of equations:
+}
+\[ \begin{bmatrix}  \Big(  \begin{pmatrix} 1\\ 1 \\ 0 \end{pmatrix}  
++ r \cdot  \begin{pmatrix} 1 \\ 0\\ 2 \end{pmatrix} -  \begin{pmatrix} 2\\ 3 \\ 4 \end{pmatrix}  
+- s \cdot  \begin{pmatrix} 1 \\ 1\\ 2 \end{pmatrix}  \Big)\bullet
+  \begin{pmatrix} 1 \\ 0\\ 2 \end{pmatrix}  =0 \\
+\Big(  \begin{pmatrix} 1\\ 1 \\ 0 \end{pmatrix}  
++ r \cdot  \begin{pmatrix} 1 \\ 0\\ 2 \end{pmatrix} -  \begin{pmatrix} 2\\ 3 \\ 4 \end{pmatrix}  
+- s \cdot  \begin{pmatrix} 1 \\ 1\\ 2 \end{pmatrix}  \Big)\bullet 
+ \begin{pmatrix} 1 \\ 1\\ 2 \end{pmatrix}  =0 \end{bmatrix} 
+\Leftrightarrow  \begin{bmatrix}
+ 5r &-& 5s &=& 9 \\  5r& - & 6s &=& 11
+\end{bmatrix} \]
+\lang{de}{
+Zieht man die zweite Gleichung von der ersten ab, erhält man $s=-2$. 
+Setzt man nun $s=-2$ in die erste Gleichung und löst nach $r$ auf, erhält man 
+$r=\frac{1}{5}(9-10)=-\frac{1}{5}$.
+Die Lotfußpunkte sind also $L_g=(\frac{4}{5}; 1; -\frac{2}{5})$ und $L_h=(0; 1; 0)$.
+Der Abstand betr"agt damit:
+}
+\lang{en}{
+Subtracting the second equation from the first gives $s=-2$. Setting $s=-2$ in the first equation 
+and rearranging for $r$ yields $r=\frac{1}{5}(9-10)=-\frac{1}{5}$. 
+The required points are hence $L_g=(\frac{4}{5}; 1; -\frac{2}{5})$ and $L_h=(0; 1; 0)$. 
+The distance between the two lines is therefore:
+}
+\[ d(g,h)=d(L_g,L_h)=\sqrt{(0-\frac{4}{5})^2+(1-1)^2+(0+\frac{2}{5})^2}=  \sqrt{\frac{16}{25}+\frac{4}{25}}=\frac{2}{5}\sqrt{5}. \]
+\end{example}
+
+\lang{de}{
+Wenn man die Lotfu"spunkte nicht ben"otigt, sondern nur den Abstand zwischen den windschiefen 
+Geraden sucht, gibt es auch folgende Formel:
+}
+\lang{en}{
+If we do not need to find the points on the two lines that are the closest to each other, we can 
+also use the following formula:
+}
+\begin{rule}\label{def:abst_windschief_gerade_n}
+\lang{de}{
+Sind $g= \left\{ \vec{p} + r \vec{v}\mid r \in \R \right\}$ und 
+$h= \left\{ \vec{q} + s \vec{w} \mid s \in \R \right\}$ zwei Geraden im $\R^3$, die nicht parallel 
+sind, und $\vec{n}$ ein Vektor, der zu beiden Geraden orthogonal ist, so l"asst sich der Abstand von 
+$g$ und $h$ berechnen durch
+}
+\lang{en}{
+If $g= \left\{ \vec{p} + r \vec{v}\mid r \in \R \right\}$ and 
+$h= \left\{ \vec{q} + s \vec{w} \mid s \in \R \right\}$ are two non-parallel lines in $\R^3$, and 
+$\vec{n}$ is a vector orthogonal to both lines, then the distance between $g$ and $h$ is given by
+}
+\[ d(g,h)= \frac{\left| (\vec{q}-\vec{p})\bullet \vec{n} \right|}{\|\vec{n}\|}. \]
+\end{rule}
+
+\begin{example}
+\lang{de}{Im Beispiel mit }
+\lang{en}{In the example with }
+$g=\left\{  \begin{pmatrix} 1\\ 1 \\ 0 \end{pmatrix}  
++ r  \begin{pmatrix} 1 \\ 0\\ 2 \end{pmatrix}  \, | \,\, r\in \R \right\}$ 
+\lang{de}{und}\lang{en}{and} 
+$h=\left\{  \begin{pmatrix} 2\\ 3 \\ 4 \end{pmatrix}  
++ s  \begin{pmatrix} 1 \\ 1\\ 2 \end{pmatrix}  \, | \,\, s\in \R \right\}$ 
+\lang{de}{ist}\lang{en}{we have}
+\[ \vec{n}= \vec{v}\times \vec{w}= \begin{pmatrix} 1 \\ 0\\ 2 \end{pmatrix}  \times 
+ \begin{pmatrix} 1 \\ 1\\ 2 \end{pmatrix} 
+%= \begin{pmatrix} 0\cdot 2-2\cdot 1 \\ 2\cdot 1-1\cdot 2\\ 1\cdot 1-0\cdot 1 \end{pmatrix} 
+= \begin{pmatrix} -2 \\ 0\\ 1 \end{pmatrix}  \quad\text{\lang{de}{und}\lang{en}{and}}\quad \|\vec{n}\|=\sqrt{(-2)^2+1^2}=\sqrt{5} \]
+\lang{de}{und daher}\lang{en}{and thus}
+\[ d(g,h)= \frac{1}{\sqrt{5}}\cdot \left| \Big( \begin{pmatrix} 2\\ 3 \\ 4 \end{pmatrix} -  \begin{pmatrix} 1\\ 1 \\ 0 \end{pmatrix}  \Big)\bullet  \begin{pmatrix} -2 \\ 0\\ 1 \end{pmatrix}  \right|
+= \frac{1}{\sqrt{5}} \big(1\cdot (-2)+3\cdot 0+4\cdot 1\big)=\frac{2}{\sqrt{5}}
+=\frac{2}{5}\sqrt{5}. 
+\]
+\end{example}
+
+\end{visualizationwrapper}
+
+
+\end{content}

@@ -1,0 +1,361 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{Kurven im $n$-dimensionalen Raum}
+   }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \begin{components}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T501_Cycloid.meta.xml}{T501_Cycloid}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T501_Loop_B.meta.xml}{T501_Loop_B}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T501_SemicubicalParabola_B.meta.xml}{T501_SemicubicalParabola_B}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T501_Helix.meta.xml}{T501_Helix}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T501_TwistedCubic.meta.xml}{T501_TwistedCubic}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T501_Loop_A.meta.xml}{T501_Loop_A}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T501_SemicubicalParabola_A.meta.xml}{T501_SemicubicalParabola_A}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T501_Ellipse.meta.xml}{T501_Ellipse}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T501_Parabola.meta.xml}{T501_Parabola}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T501_Circle.meta.xml}{T501_Circle}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T501_Segment.meta.xml}{T501_Segment}
+\end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T404_Eigenwerte,_Eigenvektoren/g_art_content_12_symmetrische_matrizen.meta.xml}{content_12_symmetrische_matrizen}
+\link{generic_article}{content/rwth/HM1/T110_Geraden,_Ebenen/g_art_content_36_normalenformen.meta.xml}{content_36_normalenformen}
+\end{links}
+  \creategeneric
+\end{metainfo}
+
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21403}{Ticket 21403}
+\end{block}
+\usepackage{mumie.ombplus}
+
+\ombchapter{1}
+\ombarticle{1}
+\usepackage{mumie.genericvisualization}
+\begin{visualizationwrapper}
+\title{Kurven im $n$-dimensionalen Raum}
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+Ein Wort vorab zur Notation: Inzwischen haben Sie einen Lern- und Wissensstand erreicht, der es Ihnen ermöglicht,
+Schreibweisen zu verstehen und zu interpretieren, die vorher nicht vollständig erklärt wurden.
+So schreiben wir zum Beispiel oft kompakt $f(x_1,x_2,\ldots,x_n)$ für den Funktionsterm einer Funktion $f:\R^n\to M$, wo
+wir streng genommen $f(\left(\begin{smallmatrix}x_1\\\vdots\\x_n\end{smallmatrix}\right))$ schreiben müssten.
+Oft trennen wir Einträge in Tupeln der Einfachheit halber durch Kommata, nicht durch Semikola, wenn keine Verwechslungsgefahr besteht, etc..
+\section{Kurven im $\R^n$}
+% Eingangsbeispiel einfügen
+%
+%Ich hätte hier so gerne eine Fliege, deren Ortsvektor über die Bildschirm summt.
+%
+\begin{definition}[Kurven]\label{def:kurve}
+Es sei $n\in\N$, $n\geq 2$, eine natürliche Zahl und es sei $I\subset \R$ ein nichtausgeartetes Intervall.
+(Das heißt, das Intervall $I$ enthält zumindest ein kleines Teilintervall $(a;b)$ mit $a<b$.)
+Weiter seien $\varphi_1,\ldots,\varphi_n: I\to\R$ Funktionen.
+\begin{enumerate}
+\item[(i)]
+Die Abbildung
+\begin{equation*}
+\varphi: I\to \R^n,\quad t\mapsto \begin{pmatrix}\varphi_1(t)\\\vdots\\\varphi_n(t)\end{pmatrix},
+\end{equation*}
+heißt \notion{Kurve} im $\R^n$.
+\\
+Ist $I=[a;b]$ ein abgeschlossenes Intervall endlicher Länge, dann heißt $\varphi(a)$ Anfangspunkt und $\varphi(b)$ Endpunkt der Kurve.
+\item[(ii)]
+Die Kurve $\varphi$ heißt \notion{stetig im Punkt} $t_0\in I$, wenn alle $\varphi_1,\ldots,\varphi_n$ in $t_0\in I$ sind.
+Ebenso heißt $\varphi$ \notion{stetig} (auf ganz $I$), wenn alle $\varphi_1,\ldots,\varphi_n$ stetig sind.
+\item[(iii)]
+Analog heißt $\varphi$ \notion{ (stetig) differenzierbar in} $t_0\in I$, wenn alle $\varphi_1,\ldots,\varphi_n$ (stetig) differenzierbar in $t_0$ sind.
+Und die Kurve $\varphi$ heißt \notion{(stetig) differenzierbar} (auf ganz $I$), wenn alle $\varphi_1,\ldots,\varphi_n$ (stetig) differenzierbar auf $I$ sind.
+\item[(iv)]
+Ist $\varphi:I\to\R^n$ eine in $t_0\in I$ differenzierbare Kurve, dann nennt man ihre Ableitung
+\[
+\varphi'(t_0)=\begin{pmatrix}\varphi_1'(t_0)\\\vdots\\\varphi_n'(t_0)\end{pmatrix}
+\]
+den \notion{Tangentialvektor} \label{def:tangentialvektor} an die Kurve im Punkt $\varphi(t_0)$.
+\item[(v)]
+Das Bild $\varphi(I)=\{\varphi(t)\mid t\in I\}\subset\R^n$ heißt \notion{Spur} der Kurve $\varphi$.
+\end{enumerate}
+\end{definition}
+%
+% Einfache Beispiele
+%
+\begin{example}[Einfache Kurven]\label{ex1:kurven}
+\begin{tabs*}[\initialtab{0}]
+\tab{Strecke}
+Es seien $u,v\in\R^n$  zwei Punkte im $\R^n$. Dann wird durch $\varphi:[0;1]\to\R^n$, $t\mapsto(1-t)u+tv$, 
+eine stetig differenzierbare Kurve gegeben, deren Spur die Strecke zwischen $u$ und $v$ ist. Der Anfangspunkt ist $\varphi(0)=u$, der Endpunkt ist $\varphi(1)=v$.
+Der Tangentialvektor $\varphi'(t)=v-u$ ist konstant und gibt an, in welcher Richtung diese Strecke durchlaufen wird.
+\begin{center}
+\image{T501_Segment}
+\end{center}
+\tab{Parabel}
+Die Kurve $\varphi:\R\to\R^2, t\mapsto \begin{pmatrix}t\\t^2\end{pmatrix}$ hat die Spur $\varphi(\R)=\{\begin{pmatrix}x\\y\end{pmatrix}\in\R^2\mid y=x^2\}$.
+Sie beschreibt also eine Parabel. Die Kurve ist stetig differenzierbar mit Tangentialvektor $\varphi'(t)=\begin{pmatrix}1\\2t\end{pmatrix}$. 
+Das entspricht dem Richtungsvektor der Tangenten $T: \begin{pmatrix}t\\t^2\end{pmatrix}+\lambda\begin{pmatrix}1\\2t\end{pmatrix}$
+an den Graphen der Funktion $\R\to\R$, $x\mapsto x^2$ (in $x=t$).
+\begin{center}
+\image{T501_Parabola}
+\end{center}
+\tab{Graph einer Funktion}
+Allgemeiner: Ist $f:I\to\R$ eine reelle Funktion auf einem Intervall $I$, dann kann man den Graphen $\text{Graph}(f)=\{(x;f(x))^T\mid x\in I\}\subset\R^2$
+auffassen als Kurve $\varphi:I\to\R^2$, $\varphi(t)\mapsto\begin{pmatrix} t\\f(t)\end{pmatrix}$.
+Ist die Funktion $f$ (stetig) differenzierbar, dann gilt das auch für die Kurve $\varphi$.
+Der Tangentialvektor $\varphi'(t)=\begin{pmatrix}1\\f'(t)\end{pmatrix}$  gibt die Richtung der Tangenten an den Graphen an.
+\tab{Kreislinie}
+Die Kurve $\varphi:[0;2\pi]\to\R^2$, $t\mapsto\begin{pmatrix} \cos t\\\sin t\end{pmatrix}$ hat als Spur die Einheitskreislinie
+$\varphi([0;2\pi])=\{\begin{pmatrix}x_1\\x_2\end{pmatrix}\mid x_1^2+x_2^2=1\}$ Anfangs- und Endpunkt ist $\varphi(0)=\begin{pmatrix}1\\0\end{pmatrix}=\varphi(2\pi)$.
+Die Kurve ist stetig differenzierbar mit Tangentenvektor $\varphi'(t)=\begin{pmatrix} -\sin t\\\cos t\end{pmatrix}$. Er beschreibt die Richtung der Tangenten
+$T: \begin{pmatrix} \cos t\\\sin t\end{pmatrix}+\lambda \begin{pmatrix} -\sin t\\\cos t\end{pmatrix}$ an die Kreislinie und steht senkrecht auf dem Ortvektor $\varphi(t)$.
+\begin{center}
+\image{T501_Circle}
+\end{center}
+\end{tabs*}
+\end{example}
+
+%Video
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10835&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+
+%%%
+%%% Quickcheck
+\begin{quickcheck}
+\text{Welche der folgenden Kurven hat als Spur die Strecke zwischen $\begin{pmatrix} 0\\2 \end{pmatrix}$ und $\begin{pmatrix} 2\\3 \end{pmatrix}$?}
+\begin{choices}{unique}
+ \begin{choice}
+      \text{$\varphi:[0;1]\to\R^2$, $t\mapsto \begin{pmatrix} 2t^2\\2+t \end{pmatrix}$}
+      \solution{false}
+    \end{choice}
+    \begin{choice}
+      \text{$\psi:[0;1]\to\R^2$, $t\mapsto \begin{pmatrix} 2t\\2+t \end{pmatrix}$}
+      \solution{true}
+    \end{choice}
+\begin{choice}
+      \text{$\eta:[0;1]\to\R^2$, $t\mapsto \begin{pmatrix} 2t\\2+2t \end{pmatrix}$}
+      \solution{false}
+    \end{choice}
+
+  \end{choices}
+  \explanation{Die Kurve $\varphi$ hat zwar den richtigen Anfangs- und Endpunkt, 
+  aber der Tangentialvektor $\varphi'(t)=\begin{pmatrix} 4t\\1 \end{pmatrix}$ hat keine konstante Richtung, 
+  also beschreibt $\varphi$ keine Strecke.
+  Die Kurve $\eta$ ist eine Strecke mit Anfangspunkt $\begin{pmatrix} 0\\2 \end{pmatrix}$, 
+  aber Endpunkt $\begin{pmatrix} 2\\4 \end{pmatrix}$.
+  Die Kurve $\psi$ hingegen ist eine Strecke mit passendem Anfangs- und Endpunkt.}
+\end{quickcheck}
+%%%
+\begin{remark}[Parametrisierung]\label{rem:parametrisierung}
+\begin{enumerate}
+\item[(i)]
+An den obigen Beispielen sieht man, dass sich die Anforderung oft genau andersherum stellt: 
+Es ist eine Linie $L$ im $\R^n$ gegeben, und man möchte diese
+als Kurve darstellen. Man möchte also ein Intervall $I\subset\R$ und eine Kurve $\varphi:I\to\R^n$ so angeben, dass
+die Spur von $\varphi$ genau Linie $L$ ist $\varphi(I)=L$.
+Dann hat man die Linie \notion{parametrisiert}, d.h. jedem $y\in L$ wurde (mindestens) ein $t\in I$ zugeordnet mit $\varphi(t)=y$.
+\item[(ii)]
+Eine solche Parametrisierung ist niemals eindeutig, d.h. \emph{wenn} es eine Kurve gibt, welche die Spur $L$ hat, dann gibt es beliebig viele weitere solche.
+Es sei etwa $\varphi:[a;b]\to\R^n$, $t\mapsto \varphi(t)$, eine Kurve mit Spur $L=\varphi([a;b])$.
+Dann ist 
+\begin{itemize}
+\item
+$\psi_1:[a;b]\to\R^n$, $t\mapsto \psi_1(t)=\varphi(a+b-t)$, die rückwärts durchlaufene Kurve,
+\item
+$\psi_2:[a;\frac{a+b}{2}]\to\R^n$, $t\mapsto \psi_2(t)=\varphi(2t-a)$, die in doppelter Geschwindigkeit durchlaufene Kurve,
+\item
+$\psi_3:[a;2b-a]\to\R^n$, $t\mapsto \psi_3(t)=\varphi(\frac{t+a}{2})$, die in halber Geschwindigkeit durchlaufene Kurve,
+\item
+$\psi_4:[a;2b-a]\to\R^n$, $t\mapsto \psi_4(t)=\varphi(t)$ für $t\in[a;b]$ 
+und $\psi_4(t)=\varphi(2b-t)$ für $t\in[b;2b-a]$, die hin und zurück durchlaufene Kurve,
+\item
+$\psi_5:[0;1]\to\R^n$, $t\mapsto\psi_5(t)=\varphi(a+(b-a)t)$, eine auf dem Standardintervall $[0;1]$ parametrisierte Kurve.
+\end{itemize}
+und für alle $j=1,\ldots,5$ hat die Kurve $\psi_j$ die Spur $L$. Alle diese Kurven parametrisieren somit $L$.
+\end{enumerate}
+%
+% Hier wäre eine Animation mit der Kreislinie wunderschön!
+%
+\end{remark}
+\begin{quickcheck}
+\text{Welche der folgenden Kurven parametrisieren die Strecke zwischen $\begin{pmatrix} 0\\2 \end{pmatrix}$ und $\begin{pmatrix} 2\\3 \end{pmatrix}$?}
+\begin{choices}{multiple}
+ \begin{choice}
+      \text{$\psi_0:[0;1]\to\R^2$, $t\mapsto \begin{pmatrix} 2t\\2+t \end{pmatrix}$}
+      \solution{true}
+    \end{choice}
+    \begin{choice}
+      \text{$\psi_1:[0;1]\to\R^2$, $t\mapsto \begin{pmatrix} 2-2t\\3-t \end{pmatrix}$}
+      \solution{true}
+    \end{choice}
+    \begin{choice}
+      \text{$\psi_2:[0;1]\to\R^2$, $t\mapsto \begin{pmatrix} 2+2t\\3+t \end{pmatrix}$}
+      \solution{false}
+    \end{choice}
+    \begin{choice}
+      \text{$\psi_3:[0;2]\to\R^2$, $t\mapsto \begin{pmatrix} t\\2-t \end{pmatrix}$}
+      \solution{false}
+    \end{choice}
+    \begin{choice}
+      \text{$\psi_4:[1;2]\to\R^2$, $t\mapsto \begin{pmatrix} 2t-2\\1+t \end{pmatrix}$}
+      \solution{true}
+    \end{choice}
+      \begin{choice}
+      \text{$\psi_5:[0;2]\to\R^2$, $t\mapsto \begin{pmatrix} t\\2+\frac{t}{2} \end{pmatrix}$}
+      \solution{true}
+    \end{choice}
+\end{choices}
+\end{quickcheck}
+\begin{remark}\label{rem:param_polynom_kurven}
+Besonders häufig werden Spuren von Kurven durch polynomiale Gleichungen \label{rem:polyGl} in den Koordinaten beschrieben.
+So ist die Einheitskreislinie die Lösungsmenge der Gleichung $x_1^2+x_2^2=1$. Dann ist die Parametrisierung eine gute Möglichkeit, 
+deren Eigenschaften mit analytischen Methoden (Stetigkeit, Differenzierbarkeit, Länge,...) zu studieren.
+\begin{tabs*}[\initialtab{0}]
+\tab{Geraden}
+Ein prominentes Beispiel kennen Sie bereits:
+Die Umrechnung von \ref[content_36_normalenformen][Normal- in Parameterform von Geraden]{sec:normalform_geraden} im $\R^2$.
+\tab{Ellipsen}
+Ellipsen werden beschrieben als Lösungsmenge von Gleichungen der Form $\alpha x_1^2+\beta x_2^2 =\gamma$ mit
+positiven Konstanten $\alpha,\beta,\gamma\in\R_{>0}$.  Indem wir $a=\sqrt{\frac{\gamma}{\alpha}}$ und 
+$b=\sqrt{\frac{\gamma}{\beta}}$ setzen,
+erhalten wir die äquivalente Gleichung $\frac{x_1^2}{a^2}+\frac{x_2^2}{b^2}=1$. 
+Das ist die Kreisgleichung in $\frac{x_1}{a}$ und $\frac{x_2}{b}$ statt $x$ und $y$. 
+Wir bedienen uns der Parametrisierung des Einheitskreises aus Beispiel~\ref{ex1:kurven} und erhalten daraus
+eine Parametrisierung der Ellipse
+\[\varphi:[0;2\pi]\to\R^2, \quad t\mapsto \begin{pmatrix}a\cos t\\b\sin t\end{pmatrix}.\]
+\begin{center}
+\image{T501_Ellipse}
+\end{center}
+
+Allgemeiner lässt sich jeder \ref[content_12_symmetrische_matrizen][Kegelschnitt]{rem:kegelschnitte}  parametrisieren.
+\tab{Neilsche Parabel}
+Die Lösungsmenge der Gleichung $y^2=x^3$ ist die Spur der Kurve $\varphi:\R\to\R^2$, 
+$t\mapsto \begin{pmatrix} t^2\\t^3\end{pmatrix}$.
+\begin{center}
+\image{T501_SemicubicalParabola_A}
+\end{center}
+\tab{Schleife}
+Die Lösungsmenge Gleichung $y^2=x^2(x+1)$ läßt sich parametrisieren durch die Kurve
+$\varphi:\R\to\R^2$, $t\mapsto \begin{pmatrix}t^2-1\\t(t^2-1)\end{pmatrix}$.
+\begin{center}
+\image{T501_Loop_A}
+\end{center}
+\end{tabs*}
+\end{remark}
+%%
+%%Weitere Beispiele -> ToDo: ausformulieren
+Bisher haben wir uns auf ebene Kurven beschränkt, aber natürlich ist der Kurvenbegriff in belieber Dimension sinnvoll. Hier einige anschauliche Beispiele im $\R^3$.
+\begin{example}[Einige dreidimensionale Kurven]
+\begin{tabs*}[\initialtab{0}]
+\tab{Getwistete kubische Parabel}
+\begin{center}
+\[\phi:\R\to\R^3,\quad t\mapsto \begin{pmatrix}t\\t^2\\t^3\end{pmatrix}.\]
+\image{T501_TwistedCubic}
+\end{center}
+\tab{Helix}
+\[\psi:\R\to\R^3, \quad t\mapsto \begin{pmatrix} \cos t\\\sin t\\t\end{pmatrix}.\]
+\begin{center}
+\image{T501_Helix}
+\end{center}
+\end{tabs*}
+\end{example}
+
+%Video
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10836&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+%
+%
+\begin{remark}[Tangentialvektoren]
+Der Tangentialvektor einer differenzierbaren Kurve gibt im  Großen und Ganzen die Richtung der Tangenten an die Spur der Kurve an.
+Allerdings muss man ein wenig aufpassen:
+\begin{enumerate}
+\item[(a)]
+Weil die Kurve $\varphi: I\to \R^n$ nicht injektiv ist, kann es in einem Punkt der Spur mehr als einen Tangentialvektor und mehr als eine Tangente geben.
+\begin{tabs*}[\initialtab{0}]
+\tab{Doppelpunkt}
+So wird z.B. für $\varphi:\R\to\R^2$, $t\mapsto \begin{pmatrix}t^2-1\\t(t^2-1)\end{pmatrix}$, der Ursprung angenommen für $t_1=1$ und $t_2=-1$. 
+Dazu gibt es zwei Tangentialvektoren $\varphi'(t_1)=\begin{pmatrix}2\\2\end{pmatrix}$ und $\varphi'(t_2)=\begin{pmatrix}-2\\2\end{pmatrix}$, 
+denen zwei sinnvolle Tangenten an die Kurve im Ursprung entsprechen.
+\begin{center}
+\image{T501_Loop_B}
+\end{center}
+\end{tabs*}
+\item[(b)]
+Der Tangentialvektor kann in einem Punkt gleich null sein. Dann läßt sich keine  Tangente an die Kurve legen.
+\begin{tabs*}[\initialtab{0}]
+\tab{Spitze}
+Die \notion{Neilsche Parabel}
+$\varphi:\R\to\R^2$, $t\mapsto \begin{pmatrix} t^2\\t^3\end{pmatrix},$
+hat die Richtungsableitung $\varphi'(t)=\begin{pmatrix} 2t\\3t^2\end{pmatrix}$. Diese wird null in $t=0$.
+Die Spur der Kurve hat hier eine  sogenannte Spitze  im Ursprung $\varphi(0)$. 
+Jede beliebige Gerade durch den Ursprung wäre eine mögliche Tangente, was keinen sinnvollen Tangentenbegriff ermöglicht.
+\begin{center}
+\image{T501_SemicubicalParabola_B}
+\end{center}
+\end{tabs*}
+\end{enumerate}
+
+%Video
+\center{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10837&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+\end{remark} 
+
+Zum Abschluss bestimmen wir die Bahn  eines festen Punkts auf einem rollenden Reifen.
+\begin{example}[Zykloide]\label{ex:zykloide}
+%
+% Bekomme ich wohl eine Zykloiden-Animation hin?
+%
+Wir werden die Bahn eines Punktes auf einem rollenden Reifen beschreiben.
+Dazu nehmen wir an, dass der Reifen von Radius $r$ mit konstanter Geschwindigkeit $v$ entlang der $x$-Achse rollt.
+Der Ortsvektor des Reifenmittelpunkts ist demnach $M(t)=\begin{pmatrix}v\cdot t\\r\end{pmatrix}$.
+\\
+Es soll uns reichen, die Bahn eines Punktes während einer Umdrehung des Reifens zu beschreiben. Zur Zeit $t=0$ sei dieser Punkt im Ursprung $O=\begin{pmatrix}0\\0\end{pmatrix}$.
+\begin{center}
+\image{T501_Cycloid}
+\end{center}
+Wenn der Ball ein bisschen weitergerollt ist, ist die vom Reifenmittelpunkt zurückgelegte Strecke genauso lang, wie der Kreisbogen, der bis dahin abgerollt ist.
+Wenn wir den zurückgelegten Winkel mit $\theta$ bezeichnen, gilt somit
+\[v\cdot t = r\cdot\theta \qquad\text{oder}\qquad \theta=\frac{v}{r}\cdot t.\]
+Mit Hilfe der Winkelfunktionen erhalten wir außerdem die Koordinaten von $P$ in Abhängigkeit von $\theta$
+\[
+P(\theta)=r\cdot\begin{pmatrix}\theta-\sin\theta\\1-\cos\theta\end{pmatrix}.\]
+Schließlich gilt für den Zeitpunkt $t_1$, zu dem der Punkt am Reifen zum ersten Mal wieder unten ist, dass
+\[2\pi r=vt_1 \qquad\text{oder}\qquad t_1=\frac{2\pi r}{v}.\]
+%Wenn der Ball ein bisschen weitergerollt ist, ist der Punkt dann in $P=\begin{pmatrix}\overline{OT}-\overline{PQ}\\
+%\overline{MT}-\overline{MQ}\end{pmatrix}$.
+%Dabei ist das Streckenstück $\overline{OT}$ genauso lang, wie der Kreisbogen von $P$ bis $T$, der bis dahin abgerollt ist.
+%Den geben wir in Abhängigkeit vom Winkel $\theta$ an: $\overline{OT}=r\cdot\theta$. 
+%So erhalten wir mit Hilfe der Winkelfunktionen $P$ in Abhängigkeit von $\theta$
+%\[
+%P(\theta)=r\cdot\begin{pmatrix}\theta-\sin\theta\\1-\cos\theta\end{pmatrix}.
+%\]
+%Dabei können wir sogar noch $\theta$ durch die Zeit $t$ ausdrücken, denn $\overline{OT}$ ist auch die $x$-Komponente des Mittelpunkts $M(t)$, also
+%$r\cdot\theta=v\cdot t$ oder $\theta=\frac{v}{r}\cdot t$. Und der Zeitpunkt $t_1$, zu dem der Punkt am Reifen zum ersten Mal wieder unten ist, erfüllt
+%$2\pi r=vt_1$.
+Zusammenfassend finden wir somit folgende Kurve als erste Zykloide
+\[
+P:[0;\frac{2\pi r}{v}]\to\R^2, \quad t\mapsto P(t)=
+\begin{pmatrix}v\cdot t-r\sin(\frac{v}{r}\cdot t)\\r-r\cos(\frac{v}{r}\cdot t)\end{pmatrix}.
+\]
+\notion{Bemerkung:} Keplers Leistung für sein erstes Gesetz (\glqq Die Planeten kreisen auf Elipsenbahnen, in deren gemeinsamem Brennpunkt die Sonne steht.\grqq{})
+ging genau in die umgekehrte Richtung unseres Beispiels. Solchen Zykloiden -- und den komplizierten Epizykeln der Planeten am Himmelgewölbe -- liegt eine einfache Kreis- bzw. 
+Ellipsenbahn um einen Fokus zugrunde. Kepler hat diese erkannt und so genau berechnet, dass er seine Gesetze aufstellen konnte.
+\end{example} 
+
+%Video
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10838&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+	
+
+\end{visualizationwrapper}
+%%%
+%%%
+\end{content}

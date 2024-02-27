@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>hm4ever</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+      integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+      integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      :root {
+        --primary-color: rgb(77, 0, 150);
+        --primary-color-light: rgb(165, 69, 255);
+      }
+      html {
+        overflow-x: hidden;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      body {
+        overflow-x: hidden;
+        max-width: 768px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .index {
+        background-color: white;
+      }
+
+      .indexPartContainer {
+        background-color: var(--primary-color);
+        color: white;
+        margin-top: 32px;
+        margin-bottom: 15px;
+        padding: 8px 8px;
+        text-align: center;
+        font-size: 20pt;
+      }
+
+      .indexContainer {
+        justify-content: center;
+        cursor: pointer;
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .indexChapterBox {
+        font-size: 10pt /* 3vw*/;
+        /*background-color: rgb(230, 230, 230);*/
+        background: rgb(230, 230, 230);
+        background: linear-gradient(
+          0deg,
+          rgba(255, 255, 255, 1) 0%,
+          rgba(235, 235, 235, 1) 35%
+        );
+        color: black;
+        margin: 2px;
+        padding: 0px;
+        width: 48%;
+        /*transition: transform 0.2s;*/
+      }
+
+      @media screen and (min-width: 640px) {
+        .indexChapterBox {
+          font-size: 10pt /* 1vw*/;
+          width: 24%;
+        }
+      }
+
+      .indexChapterBox:hover {
+        background-color: white;
+        background: linear-gradient(
+          0deg,
+          rgba(255, 255, 255, 1) 0%,
+          rgba(255, 255, 255, 1) 35%
+        );
+      }
+
+      .indexLink {
+        text-align: center;
+        font-weight: bold;
+        color: white;
+        background-color: rgb(45, 45, 45);
+        cursor: pointer;
+        margin-bottom: 8px;
+        padding-top: 12px;
+        text-decoration: underline;
+      }
+
+      .indexChapterTitle {
+        padding: 8px 6px;
+        height: 30px;
+        background-color: black;
+        color: white;
+      }
+      .indexChapterIcon {
+        transform: scale(1);
+      }
+
+      .lectureLink {
+        cursor: pointer;
+      }
+      .section {
+        margin-top: 64px;
+        margin-bottom: 5px;
+        margin-left: 2px;
+        padding: 0;
+        font-weight: bold;
+        font-size: 24pt;
+      }
+      p {
+        line-height: 175%;
+        padding: 0px 0px;
+        margin: 2px 0px;
+        /* debug: */
+        /*border-style: solid;
+              border-radius: 5px;
+              border-color: pink;
+              min-height: 3px;*/
+      }
+      .p2 {
+        /*line-height: 125%;*/
+        padding: 0px 4px;
+        margin: 2px 0px;
+      }
+      ul {
+        padding-left: 0;
+        margin-left: 20px;
+      }
+      ol {
+        padding-left: 0;
+        margin-left: 20px;
+      }
+      img {
+        width: 100%;
+        padding-top: 2px;
+        padding-bottom: 2px;
+      }
+      hr {
+        border: 1px solid black;
+        border-radius: 5px;
+      }
+      .hrPrimary {
+        border-style: solid;
+        border-width: 3px;
+        border-color: var(--primary-color);
+        height: 0px;
+      }
+      table {
+        width: 100%;
+      }
+      td {
+        padding: 3px;
+        /*background-color: rgb(240, 240, 240);*/
+      }
+      .chapterTitleNo {
+        color: var(--primary-color);
+        text-align: center;
+        font-size: 48pt;
+        font-weight: lighter;
+        padding-top: 24px;
+        padding-bottom: 12px;
+      }
+      .chapterTitle {
+        color: var(--primary-color);
+        text-align: center;
+        font-size: 28pt;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        line-height: 100%;
+        word-wrap: break-word;
+      }
+      .tocHeadline {
+        font-size: large;
+        text-align: center;
+      }
+      .tocEntry {
+        line-height: 200%;
+        cursor: pointer;
+      }
+      .tocEntry:hover {
+        background-color: black;
+        color: white;
+        padding: 0px 5px;
+        border-radius: 2px;
+      }
+      .scrollToTop {
+        padding-left: 2px;
+        text-align: start;
+        font-size: small;
+        text-decoration: underline;
+        margin-bottom: 12px;
+        cursor: pointer;
+      }
+      .showHide {
+        border-left-style: solid;
+        border-left-width: 2px;
+        border-left-color: black;
+        padding-left: 5px;
+      }
+      .box {
+        margin: 25px 0px;
+        background-color: rgb(248, 248, 248);
+        border-bottom-style: solid;
+        border-bottom-color: var(--primary-color);
+        border-bottom-width: 2px;
+        animation-duration: 0.5s;
+      }
+      /*.box:hover {
+        -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+      }*/
+      .boxContents {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        padding: 0px 8px;
+      }
+      .boxTitle {
+        padding: 4px 8px;
+        font-size: large;
+        color: white;
+        background-color: rgb(60, 0, 105);
+      }
+      .remarkTitle {
+        background-color: rgb(130, 130, 130);
+      }
+      .remarkBox {
+        background-color: rgb(250, 250, 250);
+        border-bottom-color: rgb(130, 130, 130);
+      }
+      .exampleBox {
+        border-left-style: solid;
+        border-left-color: rgb(0, 121, 0);
+        border-left-width: 6px;
+        border-bottom-style: none;
+      }
+      .exampleTitle {
+        font-weight: bold;
+        background-color: rgb(252, 252, 252);
+        color: black;
+      }
+      .exampleBox {
+        background-color: rgb(254, 254, 254);
+      }
+      .warningTitle {
+        background-color: rgb(121, 0, 0);
+      }
+      .warningBox {
+        background-color: rgb(255, 248, 248);
+      }
+      .infoTitle {
+        background-color: rgb(0, 0, 0);
+      }
+      .infoBox {
+        background-color: rgb(230, 230, 230);
+        border-bottom-color: rgb(0, 0, 0);
+      }
+      .link {
+        text-decoration: underline;
+        font-weight: bold;
+        color: black;
+        cursor: pointer;
+      }
+      .footer {
+        color: rgb(75, 75, 75);
+        text-align: start;
+        font-size: small;
+      }
+      .tabTitle {
+        background-color: white;
+        color: black;
+        padding: 3px;
+        margin: 3px;
+        cursor: pointer;
+        padding: 0px 4px;
+        border-radius: 4px;
+        border-style: solid;
+        border-color: black;
+        border-width: 1px;
+      }
+      .tabTitle:hover {
+        background-color: black;
+        color: white;
+      }
+      .tabTitleActive {
+        background-color: black;
+        color: white;
+      }
+      .nav {
+        color: white;
+        background-color: rgb(45, 45, 45);
+        padding: 8px;
+      }
+      .navPart {
+        text-align: center;
+        margin: 4px 0px;
+      }
+      .navChapter {
+        text-align: center;
+        font-size: 20pt;
+        text-transform: uppercase;
+        margin: 8px 0px;
+        word-wrap: break-word;
+      }
+      .navLecture {
+        cursor: pointer;
+        display: flex;
+        line-height: 150%;
+        word-wrap: break-word;
+      }
+      .navLectureSelected {
+        font-weight: bold;
+        color: var(--primary-color-light);
+      }
+      .navLecture:hover {
+        font-weight: bold;
+      }
+      .navSectionTitle {
+        cursor: pointer;
+        font-weight: bold;
+        margin: 10px 0px 4px 0px;
+        word-wrap: break-word;
+      }
+    </style>
+  </head>
+  <body>
+    <a id="pageTop"></a>
+    <h1 id="error" style="color: red; display: none"></h1>
+
+    <div
+      style="
+        font-size: 10pt;
+        text-align: end;
+        margin-bottom: 12px;
+        padding: 5px 0px;
+      "
+    >
+      <span style="color: red"> pre-alpha </span>
+      &nbsp;&mdash;&nbsp;
+      <span>
+        rechtliche Hinweise
+        <a href="https://github.com/andreas-schwenk/hm4ever/blob/main/README.md"
+          >hier</a
+        >
+        &nbsp;
+      </span>
+    </div>
+
+    <div class="hrPrimary"></div>
+
+    <div
+      id="indexLink"
+      style="
+        font-size: 48pt;
+        font-weight: lighter;
+        margin: 4px 0;
+        padding: 0;
+        text-align: center;
+        color: var(--primary-color);
+        cursor: pointer;
+      "
+    >
+      hm4ever
+    </div>
+
+    <div id="welcome">
+      <div class="p2">
+        Zweck dieser Seite ist die langfristige Archivierung des Onlinekurses
+        für die Höherer Mathematik
+        <a href="https://hm4mint.nrw">hm4mint.nrw</a> mittels
+        <i>Freier und Open-Source basierter Software (FOSS).</i> Alle im Projekt
+        erstellten Inhalte sind unter der Lizenz
+        <i
+          >Creative Commons License Attribution 4.0 International (CC-BY 4.0)</i
+        >
+        entstanden, und dürfen daher für beliebige Zwecke weiterverwendet
+        werden, solange die Namen der Verfasser erwähnt werden. &nbsp;<b
+          >Achtung:</b
+        >
+        Diese Seite enthält im Vergleich zum offiziellen Kurs KEINE Möglichkeit
+        zum Erwerb von ECTS Punkten.
+      </div>
+    </div>
+
+    <div class="index" id="index"></div>
+
+    <div class="nav" id="navigation"></div>
+
+    <br />
+
+    <div id="content"></div>
+
+    <br />
+    <div class="hrPrimary"></div>
+    <br />
+    <div class="footer">
+      Freie und Open-Source Software (FOSS) basierte Darstellung des
+      <a href="https://hm4mint.nrw">HM4MINT.nrw-Kurses</a><br />
+      Lizenz des Lehrmaterials: &nbsp;
+      <i>Creative Commons License Attribution 4.0 International (CC-BY 4.0)</i
+      ><br />
+      Lizenz der Software dieser Seite: &nbsp;
+      <i>The GNU General Public License v3.0</i> <br /><br />
+      2024 by <a href="https://github.com/andreas-schwenk">Andreas Schwenk</a>
+    </div>
+    <!-- @begin(test) -->
+    <script type="module">
+      import "./src/index.js";
+    </script>
+    <!-- @end(test) -->
+  </body>
+</html>

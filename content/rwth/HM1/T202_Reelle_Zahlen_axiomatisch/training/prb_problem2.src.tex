@@ -1,0 +1,88 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A02: Infimum/Supremum}
+    \lang{en}{input numbers}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A02: Infimum/Supremum}}
+\lang{en}{\title{Problem 2}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9785}{Ticket 9785}
+\end{block}
+
+\begin{problem}
+
+	\begin{question}
+		\lang{de}{
+			\text{Gegeben sei die folgende Menge\\
+			$M:=\left\{\var{a}+\frac{\var{b}}{n}\,|\,n\in\N\right\}\,.$\\
+			Es sei $c:=\inf(M), C:=\sup(M)$. Geben Sie $c$ und $C$ an.
+				}
+		}
+		\explanation{}
+		\type{input.number}
+		\field{rational}
+		
+
+    \precision[false]{3}
+    \displayprecision{3}
+    \correctorprecision{3}
+		
+		\begin{variables}
+			\randint{x}{1}{20}
+			\randint{y}{1}{20}
+			\randadjustIf{x,y}{x=y}
+			\function[calculate]{a}{1/2*(x+y-abs(x-y))}
+			\function[calculate]{b}{1/2*(x+y+abs(x-y))}
+			\function[calculate]{c}{a}
+			\function[calculate]{C}{a+b}
+		\end{variables}
+		
+		\begin{answer}
+			\text{$C=$}
+			\solution{C}
+			\explanation{ Für alle $n\in\N$ gilt $\var{a}+\frac{\var{b}}{n+1}<\var{a}+\frac{\var{b}}{n}$. \\
+			Also gilt für alle $n\in\N$ die Ungleichung $\var{a}+\frac{\var{b}}{n}\leq \var{a}+\var{b}$. \\
+			Daher ist $C$ sogar das Maximum von $M$.}
+		\end{answer}
+		\begin{answer}
+			\text{$c=$}
+			\solution{c}
+			\explanation{ Wir behaupten, dass $\var{a}=c$ ist. 
+			Zunächst gilt offensichtlich $x\leq c$ für alle $x\in M$. \\
+			Angenommen, $c$ ist nicht die größte untere Schranke. 
+			Dann gibt es ein $h>\var{a}$ mit der Eigenschaft $x\geq h$ für alle $x\in M$. \\
+			Aus der Vorlesung wissen wir, dass es ein $n_{0}\in\N$ gibt mit der Eigenschaft $n_{0}>\frac{\var{b}}{h-\var{a}}$. 
+			Damit erhalten wir \\
+			$h=\var{a}+(h-\var{a})=\var{a}+\frac{\var{b}}{\var{b}/(h-\var{a})}>\var{a}+\frac{\var{b}}{n_{0}}=:x_{0}\in M$\\
+			als Widerspruch. Also ist $\var{a}$ bereits die kleinste untere Schranke.}
+		\end{answer}
+	\end{question}
+	
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+
+\end{content}

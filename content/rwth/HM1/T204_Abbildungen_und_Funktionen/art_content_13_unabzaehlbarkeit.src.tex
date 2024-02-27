@@ -1,0 +1,299 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Abzählbarkeit}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \component{generic_image}{content/rwth/HM1/images/g_tkz_T204_DiagonalScheme.meta.xml}{T204_DiagonalScheme}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T207_Intervall_Schachtelung/g_art_content_23_intervallschachtelung.meta.xml}{content_23_intervallschachtelung}
+    \link{generic_article}{content/rwth/HM1/T204_Abbildungen_und_Funktionen/g_art_content_11_injektiv_surjektiv_bijektiv.meta.xml}{content_11_injektiv_surjektiv_bijektiv}
+    \link{generic_article}{content/rwth/HM1/T202_Reelle_Zahlen_axiomatisch/g_art_content_07_vollstaendigkeit.meta.xml}{Vollständigkeit}
+    \link{generic_article}{content/rwth/HM1/T201neu_Vollstaendige_Induktion/g_art_content_01_indirekter_widerspruchsbeweis.meta.xml}{indbeweis}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+
+%
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22236}{Ticket 22236}.
+     Dieser Abschnitt ist neu. Zunächst wird die Mächtigkeit und Abzählbarkeit einer Menge definiert.
+     Im Anschluß daran wird die Abzählbarkeit von $\Z,\N\times\N$ und $\Q$ und zum Schluß
+     die Unabzählbarkeit von $\R$ gezeigt.
+\end{block}
+\usepackage{mumie.ombplus}
+\ombchapter{4}
+\ombarticle{4}
+
+\lang{de}{\title{Die Überabzählbarkeit von $\R$}}
+ 
+
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+Die \ref[Vollständigkeit][{Vollständigkeit}]{def:vollstaendigkeit} von $\R$ gibt Anlass zur Vermutung, dass die Anzahl der Elemente von $\R$ größer ist als die Anzahl der 
+Elemente in $\N$, obwohl beide Mengen unendlich viele Elemente haben. Georg Cantor (1845-1918) war der erste Mathematiker, der dieser
+Idee auf den Grund ging und mathematisch bewies, dass es mehr als eine Art von Unendlichkeit gibt. Im Folgenden stellen wir kurz 
+seine Ideen zum Zählen der Elemente und zum Vergleich der Mächtigkeit von Mengen der natürlichen und reellen Zahlen vor.  
+
+
+\section{Abzählbarkeit}
+
+\begin{definition}[Mächtigkeit und endliche Menge]\label{def:maechtigkeit}
+Sei $M$ eine Menge, so bezeichnet \#$M$ die Anzahl ihrer (verschiedenen) Elemente. Wenn wir sagen, 
+$M$ hat $n$ Elemente mit $n\in\N$, bedeutet das, dass $M$ eine \notion{endliche Menge} ist und eine Bijektion
+$f:M\rightarrow\{1;2;3;\ldots ;n\}$ existiert, andernfalls bezeichnet man $M$ als \notion{unendliche Menge} . \\
+
+Die Mächtigkeit von $M$ wird auch mit $ord(M)$ und $\vert M\vert$ bezeichnet.
+
+\end{definition}
+
+
+\begin{example}[Mächtigkeit]
+ \begin{enumerate}
+ \item  \#$\emptyset=0$.
+ \item  \#$\N=\infty$, 
+ 
+ \#$\{2n\vert n\in\N\}=\infty$, 
+ 
+ \#$\Q=\infty$, 
+ 
+ \#$\R=\infty$. 
+ 
+ $\N$, $\{2n\vert n\in\N\}$, $\Q$ und $\R$ sind unendliche Mengen. 
+ \item  \#$\{1;0;5;5;2;1\}=4$.
+ \end{enumerate}
+
+\end{example}
+Obwohl $\N$ und $\R$ beide die Mächtigkeit gleich unendlich haben, werden wir am Ende dieses Teils sehen, dass sie nicht die gleiche 
+Anzahl von Elementen haben. Das heißt, sie haben nicht die gleiche Mächtigkeit und wir sprechen hier von \textit{unterschiedlichen 
+Unendlichkeiten}. Dazu werden wir in der nächsten Definition sehen, wann zwei Mengen die gleiche Mächtigkeit haben.
+
+\begin{definition}[Gleichmächtigkeit zweier Mengen]\label{def:Gleichmaechtigkeit}
+Seien $X$ und $Y$ zwei Mengen.  Wir sagen, dass \#$X=$\#$Y$, wenn es eine bijektive Abbildung $f:X\rightarrow Y$ gibt
+und bezeichnet in dem Fall die beiden Mengen $X$ und $Y$ als \notion{gleichmächtig.}
+\end{definition}
+
+\begin{definition}[Abzählbarkeit]\label{def:abzaehlbarkeit}
+
+Eine Menge $X$ ist \notion{abzählbar}, wenn entweder $X$ \emph{endlich} ist oder \#$X=$\#$\N$ gilt. Wenn 
+\#$X=$\#$\N$ gilt, bezeichnet man $X$ auch als \notion{abzählbar unendlich.}
+Ist $X$ weder \emph{endlich} noch \emph{abzählbar unendlich}, so sagen wir, dass $X$ \notion{überabzählbar} ist.
+
+\end{definition}
+
+\begin{example}[Abzählbarkeit]
+ \begin{enumerate}
+  \item $\N$ ist abzählbar unendlich, weil $id:\N\rightarrow\N$ eine bijektive Abbildung ist, also
+    nach \ref{def:maechtigkeit} \#$\N=$\#$\N$ gilt. 
+
+  \item $\Z$ ist auch abzählbar unendlich, da die Funktion
+    \[  f:\N\to \Z, \text{ } n \mapsto \begin{cases} \frac{n}{2} & \text{falls }n \text{ gerade,} \\
+    \frac{1-n}{2} & \text{falls }n \text{ ungerade,} \end{cases}\]
+    bijektiv ist und somit nach Definition \ref{def:maechtigkeit} \#$\Z=$\#$\N$ gilt.
+ \end{enumerate}  
+\end{example}
+
+
+\begin{theorem}\label{thm:abzbedingungen}
+Sei $X$ eine nichtleere Menge. Die folgenden Aussagen sind äquivalent:
+ \begin{enumerate}
+ \item[$(1)$] $X$ ist abzählbar.
+ \item[$(2)$] Es existiert eine surjektive Abbildung $f:\N\rightarrow X$.
+ \item[$(3)$] Es existiert eine injektive Abbildung $g:X\rightarrow\N$.
+ \end{enumerate}
+\end{theorem}
+
+\begin{proof*}
+\begin{showhide}
+Um die Äquivalenz der drei Aussagen zu zeigen, beweisen wir, dass $(1) \Rightarrow (2)$, $(2) \Rightarrow (3)$ und $(3) \Rightarrow (1)$.
+ \begin{enumerate}
+
+ \item[$(1) \Rightarrow (2):$] Nehmen wir an, dass $X$ abzählbar ist.  Wir wollen zeigen, dass es eine surjektive Abbildung $f:\N\rightarrow X$ gibt. 
+ Wir müssen hier zwei Fälle betrachten:
+ 
+ 1. $\, X$ ist endlich. Dann gibt es nach Definition \ref{def:maechtigkeit} für ein $n\in\N$ und 
+    eine bijektive Abbildung $h_{1}:\{1;2;\ldots;n\}\rightarrow X$.  Man wähle nun ein beliebiges  $a\in X$ und definiere:
+ \[ f:\N\rightarrow X,\text{ } k \mapsto \begin{cases} h_{1}(k) & \text{falls }1\leq k\leq n\\
+    a & \text{falls }k\geq n+ 1 \end{cases}.\]
+    Es gilt $f(\{1;2;\ldots;n\})=h_{1}(\{1;2;\ldots;n\})=X$, weil $h_{1}$ bijektiv ist. Hieraus folgt aber, dass $f$  eine surjektive Abbildung ist.
+
+ 2. $\, X$ ist unendlich und nach Voraussetzung $(1)$ abzählbar, daher nach Definition \ref{def:abzaehlbarkeit}
+ abzählbar unendlich und es gilt #$X=$#$\N$. Nach Definition \ref{def:Gleichmaechtigkeit} existiert folglich eine 
+ bijektive Abbildung $\, f:\N \rightarrow X$, die 
+ \ref[content_11_injektiv_surjektiv_bijektiv][definitionsgemäß]{def:in-sur-bi} insbesondere auch eine surjektive Abbildung ist.
+   
+ \item[$(2) \Rightarrow (3):$]  
+ Sei $f:\N\rightarrow X$ eine surjektive Funktion. Falls $f$ zudem auch injektiv ist, 
+ dann ist $f$  \ref[content_11_injektiv_surjektiv_bijektiv][definitionsgemäß]{def:in-sur-bi} eine bijektive Abbildung, ebenso wie die 
+ Umkehrfunktion $f^{-1}$. Insbesondere ist somit $g:=f^{-1}:X\rightarrow\N$ eine injektive Abbildung. 
+ 
+ 
+ Andernfalls, falls also $f$ nicht injektiv ist, gibt es eine Menge $M\subset\N$, für 
+ die gilt $f(M)=X$. Dann ist die Restriktion von $f$ auf $M$ eine Bijektion. Daraus folgt, dass die Abbildung $g:X\rightarrow M$ mit der 
+ gleichen Abbildungsvorschrift wie von $f^{-1}$ eine Bijektion ist. So ist $g:X\rightarrow\N$ mit dieser Abbildungsvorschrift eine injektive Abbildung.
+  
+ \item[$(3) \Rightarrow (1):$]
+ Sei $g:X\rightarrow\N$ eine injektive Funktion. Wir wollen zeigen, dass $X$ abzählbar ist. Falls $X$ endlich ist, gilt dies bereits per 
+ Definition \ref{def:abzaehlbarkeit}. Falls $X$ eine unendliche Menge ist, ist gemäß derselben Definition zu zeigen, dass 
+ #$X=$#$\N$. Wir betrachten hierzu die Menge $M:=g(X)\subseteq\N$. Da $X$  unendlich und $g$ injektiv ist, ist diese Menge $M$
+ ebenfalls unendlich und als Teilmenge von $\N$ ist sie auch abzählbar. 
+    \begin{showhide}
+    Wir beweisen, dass $M$ abzählbar ist, indem wir die Elemente von $M$ abzählbar auflisten und somit eine bijektive Abbildung zwischen 
+    $\N$ und $M$ aufzeigen.
+     Sei $m_{i}$ für $i\in\N$ wie folgt definiert: 
+    \[ m_{1}:= min(M), m_{2}:= min(M\setminus\{m_{1}\}), m_{3}:= min(M\setminus\{m_{1},m_{2}\}),
+    \ldots.\]
+     So haben wir gezeigt, dass $M:=\{m_{1};m_{2};m_{3};\ldots\}$ abzählbar ist.
+    \end{showhide}
+ Damit gilt nach Definition \ref{def:abzaehlbarkeit} $\;$#$M=\,$#$\N$. 
+ 
+ Außerdem ist die Funktion $h_{2}:X\rightarrow M,$ mit $h_{2}(x) =g(x)$ für alle $x\in X$ offensichtlich bijektiv.
+ Daher ist nach \ref{def:abzaehlbarkeit} $\;$#$X=\,$#$M \underset{(s.o.)}{=} $#$\N$,
+ womit die Abzählbarkeit von $X$ gezeigt ist.
+ 
+  \end{enumerate}
+\end{showhide}
+\end{proof*}
+
+\section{$\Q$ ist abzählbar}
+
+Um zu beweisen, dass die Menge der rationalen Zahlen eine abzählbar unendliche Menge ist, müssen wir vorher zeigen, dass eine abzählbare 
+Vereinigung von abzählbaren Mengen abzählbar ist. Dazu ist allerdings zunächst der folgende Satz notwendig.
+
+\begin{theorem}\label{thm:abzcartesisch}
+$\N\times\N$ ist abzählbar.
+\end{theorem}
+
+Hinter dem Beweis dieses Satzes steckt als Idee das sogenannte Cantorsche Diagonalverfahren. Visualisiert man $\N\times\N$ als die Menge der 
+positiv ganzzahligen Punkte in der Koordinatenebene, dann ist das „Durchlaufen“ von $\N\times\N$ gut zu veranschaulichen und der Name
+Diagonalverfahren wird verständlich.
+\begin{center}
+\image{T204_DiagonalScheme}
+\end{center}
+
+\begin{proof*}
+\begin{showhide}
+Wir wollen zeigen, dass $F$, so wie es unten definiert ist, eine Bijektion darstellt:
+  \[  F:\N\rightarrow\N\times\N,\text{ } n\mapsto (l,m+2-l), \]
+ wobei
+  \[ m\in\N_{0}\text{ und } 1\leq l\leq m+1 \text{ mit } n=\frac{m(m+1)}{2}+l. \]
+ Dafür müssen wir zunächst beweisen, dass $F$ eine Funktion ist. Wenn wir beweisen können, dass zu jedem $n\in\N$ 
+ genau ein Paar $(m,l) \in \N\times\N$ mit  $m\in\N_{0}$ und $1\leq l\leq m+1$ existiert, so dass
+  \[ n=\frac{m(m+1)}{2}+l, \]
+
+  erhalten wir das angestrebte Resultat als Folgerung. \\
+    
+  Betrachten wir hierzu die Mengen 
+  $A_{k}=\{n\in\N \,\vert\, \frac{k(k+1)}{2}<n\leq\frac{(k+1)(k+2)}{2}\}$ für $k\in\N_{0}$. 
+  Dann ist offenbar $\N$ die disjunkte Vereinigung aller $A_{k}$ (für $k\in\N_{0}$) und folglich liegt jede natürliche Zahl $n$ 
+  (aufgrund der Disjunktheit) in genau einer dieser Mengen. Es gibt also zu jedem $n \in \N$ eine eindeutige Zahl 
+  $m \in \N_{0}$, so dass $n \in A_m$ und daher 
+  \[0 < n-\frac{m(m+1)}{2}\leq\frac{(m+2)(m+1)}{2}-\frac{m(m+1)}{2}=m+1. \]
+  Wählen wir zudem $\,l:=n-\frac{m(m+1)}{2}\,$ können wir auf diese Weise für jedes $n\in\N$ ein eindeutiges 
+  Paar $(m,l)$ mit den gewünschten Eigenschaften finden. 
+
+
+  $F$ ist surjektiv, weil ein Urbild von dem beliebigen Paar der natürlichen Zahlen $(j,k)$ ist
+  \[ \frac{(j+k-2)(j+k-1)}{2}+j,\]
+  was wiederum eine natürliche Zahl ist.
+  
+  Hiermit ist nach Satz \ref{thm:abzbedingungen} bewiesen, dass $\N\times\N$ abzählbar ist. 
+  Wir werden trotzdem noch zeigen, dass $F$ auch injektiv ist. Seien 
+  \[ n=\frac{m(m+1)}{2}+l\text{ und } n\prime=\frac{m\prime(m\prime+1)}{2}+l\prime\text{ mit } F(n)=F(n\prime) \]
+  wobei
+  \[n,n\prime,m,m\prime\in\N\text{  und  }l,l\prime\in\N_{0}.\]
+  Daraus folgt $(l,m+2-l)=(l\prime,m\prime+2-l\prime)$, also $l=l\prime$ und $m+2-l=m\prime+2-l\prime$. Die Kombination der 
+  letzten beiden Gleichungen ergibt $l=l\prime$ und $m=m\prime$. Wir haben also $n=n\prime$ und somit haben wir gezeigt, dass $F$ 
+  injektiv ist.
+\end{showhide}
+\end{proof*}
+
+\begin{theorem}\label{thm:abzvereinigung}
+Eine abzählbare Vereinigung abzählbarer Mengen ist abzählbar.
+\end{theorem}
+
+\begin{proof*}
+\begin{showhide}
+Seien $M_{1},M_{2},M_{3},\ldots$ nicht-leere abzählbare Mengen und $M=\bigcup^{\infty}_{n=1}M_{n}$. Wir wollen beweisen, dass 
+$M$ eine abzählbare Menge ist. Nach Satz \ref{thm:abzbedingungen} gibt es für jedes $n\in\N$ eine surjektive Abbildung $f_{n}:\N\rightarrow 
+M_{n}$. Betrachten Sie die Abbildung $F$ aus Satz \ref{thm:abzcartesisch}:
+\[  F:\N\rightarrow\N\times\N,\text{ } n\mapsto (l,m+2-l) \]
+mit
+\[ m\in\N_{0}\text{ und } 1\leq l\leq m+1 \text{ mit } n=\frac{m(m+1)}{2}+l. \]
+Sie kann kommponentenweise mit $F(n)=(F_{1}(n),F_{2}(n))$ angegeben werden, wobei $F_{1}(n)=l$ und $F_{2}(n)=m+2-l$. Wir definieren
+\[ g:\N\rightarrow M\]
+durch
+\[g(n)=f_{F_{1}(n)}(F_{2}(n)).\]
+
+Nach Satz \ref{thm:abzcartesisch} für jedes $n\in\N$ gibt es nur ein $F_{1}(n)$ und $F_{2}(n)$. Also ist $g$ eine Abbildung. 
+
+Zu zeigen ist nun, dass $g$ surjektiv ist. Nach der Definition der Vereinigung gibt es für jedes $x\in M$ ein $l\in\N$, so dass $x\in M_{l}$.  
+Das bedeutet aber, dass für eine natürliche Zahl $k$ gilt $f_{l}(k)=x$. Wählt man $m$ so, dass $k=m+2-l$, so gibt es nach Satz \ref{thm:abzcartesisch} 
+ein eindeutiges $n$ mit $g(n)=f_{l}(m+2-l)=f_{l}(k)=x$. Das heißt, $g$ ist surjektiv.
+\end{showhide}
+\end{proof*}
+
+\begin{theorem}
+$\Q$ ist abzählbar.
+\end{theorem}
+
+\begin{proof*}
+Man hat
+\[\Q=\bigcup^{\infty}_{n=1}M_{n}, \text{ }\text{ }M_{n}:=\{\frac{x}{n}\vert x\in\Z\}.\]
+Mit $\Z$ ist jedes $M_{n}$ abzählbar, also nach Satz \ref{thm:abzvereinigung} auch $\Q$.
+\end{proof*}
+
+\section{$\R$ ist überabzählbar}\label{sec:R_ueberabz}
+
+\begin{theorem}[Überabzählbarkeit von $\R$]
+$\R$ ist überabzählbar.
+\end{theorem}
+
+\begin{proof*}
+Wir verwenden einen \ref[indbeweis][{indirekten Beweis}]{indirekten Beweis}, um die Überabzählbarkeit 
+von $\R$ zu zeigen. \\
+
+Nehmen wir also an, $\R$ sei abzählbar.
+Das bedeutet, dass man die Elemente von $\R$ in der Form $\{x_{1};x_{2};x_{3};\ldots\}$ auflisten kann. Zu dieser Aufstellung 
+der reellen Zahlen definieren wir eine Liste von Intervallen $I_{n}$, so dass
+\[ x_{n}\notin I_{n}\text{ für jedes } n\in\N.\]
+Wir definieren die $I_{n}$ rekursiv. Zunächst ist $I_{1}:=[x_{1}+1;x_{1}+2]$. Dann wird $I_{n+1}$  aus $I_{n}$ wie folgt konstruiert.
+Wir teilen $I_{n}$ in drei gleichlange Intervalle. Dann wählen wir als $I_{n+1}$ ein geschlossenes Teilintervall, das $x_{n+1}$ nicht enthält. Für jedes 
+$n\in \N$ ist also $I_{n+1}$ eine Teilmenge von $I_{n}$. Die Schnittmenge dieser abzählbar vielen geschlossenen Intervalle ist nicht 
+leer, weil keins davon leer ist. Nach dem 
+\ref[content_23_intervallschachtelung][Intervallschachtelungsprinzip]{thm:intervallschachtelungsprinzip}
+gibt also eine reelle Zahl, die in allen Intervallen liegt.
+\\
+Es sei nun $a$ die reelle Zahl, die in allen Intervallen liegt, d.h.
+\begin{center}
+$a\in I_{n} \quad$  für alle $\,n\in\N.$
+\end{center}
+Da $a$ eine reelle Zahl ist, kommt sie in der obigen Auflistung $\R=\{x_{1};x_{2};x_{3};\ldots\}$ vor. Sei $k\in\N$ die Zahl, für 
+die gilt $a=x_{k}$. Daraus folgt jedoch $x_{k}\in I_{k}$. Das widerspricht aber der Definition von $I_{k}$. $\R$ kann daher nicht 
+abzählbar sein.
+\end{proof*}
+
+%Video
+
+Das folgende Video enthält eine Erklärung des Inhalts dieses Teils.
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10822&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+
+\end{content}
+

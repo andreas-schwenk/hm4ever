@@ -1,0 +1,103 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A02: Matrix-Vektor-Multiplikation}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21346}{Ticket 21346}
+\end{block}
+\begin{block}[annotation]
+Copy of \href{http://team.mumie.net/issues/9581}{Ticket 9581}: content/rwth/HM1/T111_Matrizen,_lineare_Gleichungssysteme/training/prb_problem4.src.tex
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+\lang{de}{
+	\title{A02: Matrix-Vektor-Multiplikation}
+}
+\lang{en}{
+	\title{Problem 2}
+}
+
+
+
+
+
+\begin{problem}
+
+
+\begin{question}
+
+	
+\begin{variables}
+	\randint[Z]{aa}{-8}{8}
+	\randint[Z]{ab}{-8}{8}
+	\randint[Z]{ac}{-8}{8}
+	\randint[Z]{ad}{-8}{8}
+	
+	\randint[Z]{xa}{-8}{8}
+	\randint[Z]{xb}{-8}{8}
+	
+	\function[calculate]{sa}{aa*xa+ab*xb}
+	\function[calculate]{sb}{ac*xa+ad*xb}
+	
+\end{variables}
+\lang{de}{\explanation{
+        Führen Sie eine Matrix-Vektor-Multiplikation durch:
+        Da der Vektor $x$ genau so viele Einträge hat,
+        wie die Matrix $A$ Spalten besitzt,
+        ist die Multiplikation erlaubt.
+        Der Zielvektor besteht aus zwei Einträgen,
+        wobei für Eintrag $b_i$ ($i \in \{1, 2\}$) jeweils das Skalarprodukt
+        aus der $i$-ten Zeile der Matrix und dem Vektor
+        $x$ bestimmt wird.
+    }}
+
+	\type{input.number}
+	\field{real} 
+	\precision{1}
+    \lang{de}{
+	    \text{
+	    Es sei $A=\begin{pmatrix}
+           \var{aa}&\var{ab}\\\var{ac}&\var{ad}
+          \end{pmatrix}$ und $x=\begin{pmatrix}\var{xa}\\\var{xb}\end{pmatrix}$.\\
+	    Bestimmen Sie $b=\begin{pmatrix}b_{1}\\b_{2}\end{pmatrix}$, sodass $A \cdot x = b$ erfüllt ist.
+    }}
+    
+    \begin{answer}
+	    \text{$b_{1} =$}
+	    \solution{sa}
+    \end{answer}
+        \begin{answer}
+	    \text{$b_{2} =$}
+	    \solution{sb}
+    \end{answer}
+    
+    
+\end{question}
+    
+
+\end{problem}
+
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

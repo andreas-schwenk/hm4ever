@@ -1,0 +1,388 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Abbildungen und Verkettungen}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T204_Map_C.meta.xml}{T204_Map_C}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T204_Map_B.meta.xml}{T204_Map_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T204_Map_A.meta.xml}{T204_Map_A}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T204_Graph_C.meta.xml}{T204_Graph_C}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T204_Graph_B.meta.xml}{T204_Graph_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T204_Graph_A.meta.xml}{T204_Graph_A}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T204_Abbildungen_und_Funktionen/g_art_content_11_injektiv_surjektiv_bijektiv.meta.xml}{content_11_injektiv_surjektiv_bijektiv}
+    \link{generic_article}{content/rwth/HM1/T204_Abbildungen_und_Funktionen/g_art_content_10_abbildungen_verkettung.meta.xml}{content_10_abbildungen_verkettung}
+    \link{generic_article}{content/rwth/HM1/T102neu_Einfache_Reelle_Funktionen/g_art_content_06_funktionsbegriff_und_lineare_funktionen.meta.xml}{funktionsbegriff_und_lineare_funktionen}
+% alt    \link{generic_article}{content/rwth/HM1/T102_Einfache_Funktionen,_grundlegende_Begriffe/g_art_content_04_lineare_funktionen.meta.xml}{link-reelle-funktionen}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{4}
+\ombarticle{1}
+
+\lang{de}{\title{Abbildungen und ihre Verkettungen}}
+ 
+\begin{block}[annotation]
+  Aus OMB+-Kapitel Logik kopiert (ohne Ergänzung "injektiv etc.", aber mit allgemeinerer Komposition)
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9652}{Ticket 9652}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+Im Rahmen dieses Kapitels wollen wir die Grundlagen der bereits bekannten reellen Funktionen 
+aus 
+% \link{link-reelle-funktionen}{Teil 1, Kapitel 2.1} 
+\link{funktionsbegriff_und_lineare_funktionen}{Funktionsbegriff reeller Funktionen}
+auf Zuordnungen zwischen allgemeinen Mengen 
+übertragen. Im Speziellen beschäftigen wir uns mit einer besonderen Form der Zuordnung, der sogenannten 
+Abbildung.  
+
+
+
+
+\section{Abbildungen}\label{sec:abbildungen}
+
+\begin{definition}[Abbildung] \label{def:Abbildungen}
+  Seien $M$ und $N$ Mengen. \\
+  
+  Eine Vorschrift $T$, die jedem $x$ aus der Menge $M$ \emph{genau ein} $y$ aus 
+  der Menge $N$ zuordnet, heißt \emph{\notion{Abbildung}}$ \,$ (oder auch 
+  \emph{\notion{Funktion}}, 
+  \emph{\notion{Operator}} bzw. \emph{\notion{Transformation}}) von $M$ nach $N$.
+
+  Das Element $y$, das einem Element $x$ zugeordnet wird, nennt man dann \notion{\emph{Bild}} oder 
+  \emph{\notion{Funktionswert} von $x$ unter der
+  Abbildung $T, \,$} und schreibt für dieses Element oft $T(x)$.
+
+  Für $\,$ \emph{"`$T$ ist eine Abbildung von $M$ nach $N$"'} $\,$ schreibt man
+  \begin{center}
+    $ T:M\to N \quad $ oder ausführlicher $\quad T:M\to N,\, x\mapsto T(x).$
+  \end{center}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{definition}
+
+\begin{example}\label{example:abbildungen}
+\begin{enumerate}
+\item Aus der Schule bekannte reelle Funktionen
+(vgl. 
+% \link{link-reelle-funktionen}{Abschnitt "`Lineare Funktionen"'}), 
+\link{funktionsbegriff_und_lineare_funktionen}{Abschnitt "`Reelle Funktionen"'}), 
+wie
+\begin{enumerate}
+\item $f:\R\to \R,\, x\mapsto x^2$,
+\item $g:\R\setminus \{0\}\to \R\setminus \{0\},\, x\mapsto \frac{1}{x}$.
+\end{enumerate}
+\item Die Identitätsabbildung $\text{id}_M$ auf einer Menge $M$, die jedem Element $x$ das Element selbst zuordnet. In Formeln
+\[  \text{id}_M:M\to M, x\mapsto x. \]
+\item Sei $S$ die Menge der Studenten an der Universität X. Dann ist 
+\[ m:S\to \N, s\mapsto \text{Matrikelnummer des Studenten }s \]
+eine Abbildung von der Menge $S$ in die Menge der natürlichen Zahlen. 
+\item Für $M=\{0;1;3\}$ und $N=\{1;2\}$ ist die Vorschrift $T$:
+\[ 0\mapsto 1,\quad 1\mapsto 1,\quad 3\mapsto 2  \]
+eine Abbildung.
+\end{enumerate}
+\end{example}
+
+Nach diesen Beispielen für Abbildungen stellt sich die Frage: Welche Vorschriften sind denn keine Abbildungen?
+
+\begin{example}\label{example:keine-abbildung}
+Für $M=\{0;1;3\}$ und $N=\{1;2\}$ ist die Vorschrift $F$
+\begin{center}"{}Ordne jeder Zahl $x$ in $M$ die Zahlen in $N$ zu, die größer als $x$ sind."\end{center}
+keine Abbildung. Dies hat sogar zwei Gründe. Zum einen werden nach dieser Vorschrift der Zahl $0$ in $M$ zwei Zahlen
+in $N$ zugeordnet, nämlich die $1$ und die $2$. Bei einer Abbildung $F:M\to N$ darf jedem Element im $M$ aber nur \emph{ein} Element
+in $N$ zugeordnet werden. Zum anderen wird nach dieser Vorschrift der Zahl $3$ in $M$ keine Zahl in $N$ zugeordnet. Bei einer
+Abbildung $F:M\to N$ muss aber \emph{jedem} Element in $M$ ein Element in $N$ zugeordnet werden.
+\end{example}
+
+\begin{quickcheck}
+    \text{Welche der folgenden Vorschriften ist eine Abbildung?}
+    \begin{choices}{multiple}
+        \begin{choice}
+            \text{$S:\{x\in \R\,|\, x>0\} \to \R, \; x\mapsto \pm \sqrt{x}$}
+            \solution{false}
+		\end{choice}
+        \begin{choice}
+            \text{$T:\R\to \Z, \; r\mapsto $ kleinste ganze Zahl $\geq r$}
+            \solution{true}
+		\end{choice}
+ \end{choices}
+ \explanation{Es gilt $\, S(1)=\pm 1$, d.h. dem Element $1 \in \{x\in \R\,|\, x>0\} \,$ 
+        werden zwei Zahlen in $\R$ zugeordnet. Daher ist $S$ keine Abbildung. 
+        $T$ hingegen ist eine wohldefinierte Abbildung, denn sie rundet auf die nächstgrößere 
+        ganze Zahl. So ist z.B. $\, T(\frac{1}{2})=1$.}
+
+\end{quickcheck}
+
+\begin{definition}[Definitionsbereich, Zielbereich und Wertemenge]\label{def:Wertemenge}
+Für eine Abbildung $T:M\to N$ heißt die Menge $M$ der \emph{\notion{Definitionsbereich}} von $T$ (auch bezeichnet mit $D_T$)
+und $N$ der \emph{\notion{Zielbereich}} von $T$. Der Zielbereich sollte nicht mit der \emph{\notion{Wertemenge}} von $T$ (bezeichnet mit 
+$W_T$) verwechselt werden, welcher definiert ist als
+\[ W_T=\{ y\in N\,|\, \text{es gibt ein }x\in M\text{ mit }T(x)=y \}.\]
+Die Wertemenge (auch bekannt als \emph{\notion{Bildmenge}}) ist also eine Teilmenge des Zielbereichs $N$. Ihre Elemente sind genau diejenigen Elemente in $N$, welche 
+Funktionswerte von Elementen $x$ aus $M$ unter der Abbildung $T$ sind.
+\end{definition}
+
+\begin{remark}
+Die Begriffe \emph{Zielbereich}, \emph{Wertebereich bzw. Wertemenge} und \emph{Bildbereich bzw. Bildmenge} sind
+in der Literatur nicht einheitlich definiert. Wir verwenden die Begriffe gemäß der oben aufgeführten Definition \ref{def:Wertemenge}. 
+\end{remark}
+
+\begin{definition}[Urbild]\label{def:urbild}
+  Ist $T:M\to N$ eine Abbildung, dann heißt für $y\in N$ die Menge
+  \[ T^{-1}(y):=\{x\in M| T(x)=y\}\]
+  das \textbf{Urbild} von $y$.
+  Analog heißt für eine Teilmenge $U\subset N$ die Menge
+  \[T^{-1}(U):=\{x\in M| T(x)\in U\}\]
+  das Urbild von $U$.
+\end{definition}
+
+\begin{remark}
+     Die Notation $T^{-1}$ in der Definition des Urbilds \ref{def:urbild} ist identisch mit der
+     Notation für die
+     \ref[content_11_injektiv_surjektiv_bijektiv][Umkehrabbildung]{sec:umkehrabbildung}.\\
+     Sie kann zur Darstellung des Urbildes auch dann verwendet werden, wenn die Umkehrabbildung
+     nicht existiert.
+\end{remark}
+
+\begin{example}\label{example:bereiche}
+\begin{enumerate}
+\item Die Abbildung $f:\R\to \R,\, x\mapsto x^2$ hat als Definitionsbereich und Zielbereich $\R$. Die Wertemenge besteht
+jedoch nur aus den reellen Zahlen, die $\geq 0$ sind, d.h. $W_f=[0,\infty)$.\\
+Das Urbild für die Menge $U_1=\{1\}$ ist beispielsweise $f^{-1}(U_1)=\{-1,1\}$. 
+Das Urbild für die Menge $U_2=\R_{<0}$ ist beispielsweise leer.
+\item Die Abbildung $g:\R\setminus \{0\}\to \R^*,\, x\mapsto \frac{1}{x}$ hat als Definitionsbereich und 
+Zielbereich die Menge $\R\setminus \{0\}$. Hier ist die Wertemenge sogar gleich dem Zielbereich, weil jede Zahl $y\ne 0$
+der Funktionswert einer Zahl $x$ aus der Menge $\R\setminus \{0\}$ ist, nämlich von der Zahl $x=\frac{1}{y}$, d.h. $W_g=\R\setminus \{0\}$.
+\item Für die Abbildung
+\[ T:S\to \N, s\mapsto \text{Matrikelnummer des Studenten }s \]
+aus Beispiel \ref{example:abbildungen}, ist die Menge $S$, also die Menge der 
+Studenten an der Universität X, der
+Definitionsbereich und die Menge aller natürlichen Zahlen $\N$ ist der Zielbereich.
+Die Wertemenge besteht jedoch nur aus den natürlichen Zahlen, die tatsächlich als Matrikelnummer vergeben sind.
+\end{enumerate}
+\end{example}
+
+\begin{block}[warning]
+Beim Rechnen mit reellen Funktionen wird oft nur die Funktionsvorschrift angegeben, z.B. $f(x)=x^2$ oder $g(x)=\frac{1}{x}$, 
+ohne Definitionsbereich und Zielbereich explizit zu nennen. Man impliziert damit dann, dass der Zielbereich $\R$ ist, und 
+der Definitionsbereich der sogenannte \emph{maximale Definitionsbereich} ist, d.h. die Teilmenge der reellen Zahlen, 
+die als Wert f"ur die Variable $x$ in die Funktionsvorschrift $f(x)$ bzw. $g(x)$ eingesetzt werden d"urfen
+(vgl. 
+% \ref[link-reelle-funktionen][Abschnitt "`Lineare Funktionen"']{max-defbereich}).
+\ref[funktionsbegriff_und_lineare_funktionen][Abschnitt "`Reelle Funktionen"']{max-defbereich}).
+
+%Im 1. Beispiel von \ref{example:bereiche} wäre der Definitionsbereich von $f$ also 
+%gleich $\R$. Der Definitionsbereich von $g$ im 2. Beispiel von \ref{example:bereiche} 
+%lautet $D_g=\R\setminus \{0\}=\R^*$.
+\end{block}
+Eine kurze Zusammenfassung des Abbildungsbegriffs kann dem folgenden Video entnommen werden:\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10806&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+
+\section{Grafische Darstellung von Abbildungen}\label{sec:graphik}
+
+Um Abbildungen anschaulich darzustellen, gibt es im Wesentlichen zwei Möglichkeiten, wobei nicht jede der beiden
+Möglichkeiten immer verwendet werden kann.
+
+Eine Möglichkeit ist es, den sogenannten \emph{Graph einer Abbildung} zu zeichnen/skizzieren, was insbesondere bei 
+Abbildungen verwendet wird, deren Definitions- und Zielbereich Teilmengen der reellen Zahlen sind.
+
+\begin{definition}[Graph]
+Sei $f:M\to N$ eine Abbildung.
+Der \emph{Graph der Abbildung $f$} ist die Menge aller Paare $(x;y)$ in $M\times N$, für die $y=f(x)$ gilt, also
+\[ \text{Graph}(f)=\{ (x;y)\in M\times N\,|\, y=f(x) \} = \{ (x;f(x))\in M\times N\,|\, x\in M \}.  \]
+\end{definition}
+
+\begin{example}
+Für die Abbildung $f_1:\R\to \R,x\mapsto x^2$ ist der Graph von $f_1$ die Menge
+\[ \text{Graph}(f_1)= \{ (x; x^2)\,|\, x\in \R\} \subseteq \R^2,  \]
+da ja $f_1(x)=x^2$ für jedes $x\in \R$ gilt. Die Punkte des Graphen sind also genau die Punkte auf der Normalparabel, welche
+in der Zeichnung orange eingezeichnet ist. 
+
+\begin{center}
+\image{T204_Graph_A}
+\end{center}
+
+Entsprechend sind die grüne und die blaue Kurve, die Punkte, die auf dem Graphen der Funktion 
+$f_2:\R\to \R, x\mapsto x^2+2$ bzw. der Funktion $f_3:\R\to \R, x\mapsto x^2-1$ liegen.
+\end{example}
+
+\begin{example}
+Man betrachte die Abbildung $f:\N\to \{ -1; 1\}, n\mapsto (-1)^n$. Definitionsbereich und Zielbereich sind beides Teilmengen
+von $\R$, weshalb wir auch hier wieder den Graph als Punkte in der Ebene darstellen können wie in folgender Zeichnung:
+
+\begin{center}
+\image{T204_Graph_B}
+\end{center}
+
+\end{example}
+
+\begin{remark}
+Aus der graphischen Darstellung einer Zuordnung von einer Teilmenge von $\R$ in eine Teilmenge von $\R$ kann man Folgendes visuell ablesen: %An dem Graphen im $\R^2$ einer Zuordnung von einer Teilmenge von $\R$ in eine Teilmenge von $\R$ kann man auch einiges ablesen:
+\begin{enumerate}
+\item Der Definitionsbereich $D$ ist die Menge aller $x\in \R$, f"ur die die senkrechte Gerade durch den Punkt $(x;0)$ den Graphen schneidet.
+\item Die Zuordnung ist genau dann eine Abbildung, wenn f"ur jedes $x\in D$ die senkrechte Gerade durch den Punkt $(x;0)$, den 
+Graphen in genau einem Punkt schneidet.
+\end{enumerate}
+\end{remark}
+
+\begin{example}
+In der folgenden Grafik beschreibt die blaue Kurve keinen Graphen einer Abbildung. Dies wird ersichtlich, wenn bspw. die senkrechte Gerade an der $x$-Koordinate $x=4$ betrachtet wird. Die Gerade schneidet die blaue Kurve an zwei Stellen, folglich liegt keine Abbildung vor.\\ %denn zum Beispiel die senkrechte Gerade durch den Punkt $(4;0)$ schneidet die Kurve in zwei Punkten.\\
+Die rote Kurve beschreibt jedoch eine Abbildung, da jede senkrechte Gerade die Kurve in h"ochstens einem Punkt schneidet. Da eine
+senkrechte Gerade die rote Kurve genau dann schneidet, wenn die $x$-Koordinate zwischen $-2$ und $2$ (jeweils einschließlich) liegt,
+ist der Definitionsbereich die Menge $\{x\in \R\,|\, -2\leq x\leq 2 \}$, also das Intervall $[-2;2]$. 
+
+\begin{center}
+\image{T204_Graph_C}
+\end{center}
+
+\end{example}
+
+
+Die einleitend erwähnte zweite Möglichkeit, Abbildungen grafisch darzustellen, wird vor allem bei Abbildungen zwischen
+endlichen Mengen verwendet. Hierbei werden die zwei Mengen durch Aufzählung in einer kreisähnlichen Fläche 
+%(ähnlich wie bei den \ref[link-mengen][Mengen-Diagrammen]{sec:mengen-diagramme}) 
+dargestellt und die Zuordnung mittels Pfeilen zwischen den Elementen.
+
+\begin{example}\label{example-abb-graphik}
+Für $M=\{0;1;3\}$ und $N=\{1;2\}$ und die Abbildung $T$ mit
+\[ 0\mapsto 1,\quad 1\mapsto 1,\quad 3\mapsto 2  \]
+ist die grafische Darstellung:
+
+\begin{center}
+\image{T204_Map_A}
+\end{center}
+\end{example}
+
+Anhand der grafischen Darstellung kann man direkt erkennen, ob eine Zuordnung wirklich eine Abbildung ist.
+\begin{rule}
+Die Zuordnung ist eine Abbildung, wenn \textbf{bei jedem Element} des Definitionsbereichs \textbf{genau ein Pfeil startet}.
+\end{rule}
+
+\begin{example}\label{example-graphik-nicht-abbildung}
+Die grafische Darstellung der Zuordnung aus Beispiel \ref{example:keine-abbildung} ist die Folgende.
+Es ist leicht zu erkennen, dass diese Zuordnung keine Abbildung ist. Ein Grund ist, dass bei der Zahl $0$ zwei Pfeile starten,
+ein anderer Grund ist, dass bei der Zahl $3$ kein Pfeil startet. Beides ist 
+% - QS-Vorschlag
+gemäß Definition \ref{def:Abbildungen}
+%
+bei Abbildungen nicht zulässig.
+
+\begin{figure}
+\image{T204_Map_B}
+\caption{Eine Zuordnung, die keine Abbildung ist.}
+\end{figure}
+\end{example}
+
+\section{Komposition von Abbildungen}
+
+\begin{definition}[Komposition]\label{kompositionv}
+Sind $T:L\to M$ und $S:M\to N$ Abbildungen. \\
+Dann ist die \emph{\notion{zusammengesetzte Abbildung} $S\circ T$},
+gelesen "`$S$ nach $T$"' (auch \emph{\notion{Komposition der Abbildungen}} $T$ und $S$ genannt), eine Abbildung von $L$ nach 
+$N$ definiert durch
+\[    S\circ T: L\to N, x\mapsto S(T(x)). \]
+Man bildet also zunächst ein Element in $L$ mittels $T$ auf ein Element in $M$ ab und anschließend dieses Element
+mittels $S$ auf ein Element in $N$.\\
+
+Allgemeiner definiert man die Komposition zweier Abbildungen $T:L\to M$ und $S:M'\to N$ auch dann, wenn die \emph{Werte}menge von $T$ lediglich
+eine \emph{Teil}menge des Definitionsbereich von $S$ ist. In diesem Fall ist nämlich $T(x)\in M'$ für alle $x\in L$, weshalb $S(T(x))$ 
+ein wohldefinierte Ausdruck
+und daher
+\[    S\circ T: L\to N, x\mapsto S(T(x)) \]
+eine wohldefinierte Abbildung ist.
+\end{definition}
+
+\begin{remark}
+Manche Autoren verwenden die Begriffe \emph{Hintereinanderausführung} oder \emph{Verkettung}. Diese Begriffe sind äquivalent zu \emph{Komposition}.
+\end{remark}
+
+% \begin{block}[warning]
+% Bei der Komposition $S\circ T$ zweier Abbildungen $S$ und $T$ muss immer sicher gestellt sein, dass $T$ in den (oder einen Teil des) Definitionsbereich(es) von $S$ abbildet.
+% \end{block}
+
+\begin{example}\label{ex:kompositionen}
+\begin{enumerate}
+\item Seien $f:\R\to \R, x\mapsto x^2$ und $g:\R\to \R, x\mapsto x+1$, dann sind
+\[   (g\circ f)(x)=g(f(x))=g(x^2)=x^2+1 \]
+ und 
+\[  (f\circ g)(x)=f(g(x))=f(x+1)=(x+1)^2. \]
+für alle reellen Zahlen $x$.
+\item Für $L=\{0; 2\}$, $M=\{0;1;3\}$ und $N=\{1;2\}$ mit den Abbildungen $T:L\to M$ gegeben durch
+\[ 0\mapsto 3,\quad 2\mapsto 0 \]
+und $S:M\to N$ gegeben durch
+\[ 0\mapsto 1,\quad 1\mapsto 1,\quad 3\mapsto 2  \]
+ist die zusammengesetzte Abbildung gegeben durch
+\[ 0\mapsto S(T(0))=S(3)=2,\quad 2\mapsto S(T(2))=S(0)=1. \]
+Grafisch sieht dies folgendermaßen aus:
+
+\begin{center}
+\image{T204_Map_C}
+\end{center}
+
+Die Pfeile für $S\circ T$ erhält man also, wenn ausgehend von der Menge $L$ den Pfeilen gefolgt 
+wird. Hier im Beispiel wären das die Pfade \emph{von der $0$ über die $3$ zur $2$} und 
+\emph{von der $2$ über die $0$ zur $1$}.
+\end{enumerate}
+\end{example}
+
+\begin{block}[warning]
+Sind $f$ und $g$ zwei Abbildungen, dann sind im Allgemeinen $f\circ g$ und $g\circ f$ \textbf{nicht} gleich, selbst wenn
+beide Kompositionen definiert sind.\\
+Dies ist in Punkt 1 des vorigen Beispiels gut zu sehen.
+\end{block}
+
+
+
+
+\begin{quickcheck}
+    \begin{variables}
+      		\randint{a}{-3}{3}
+      		\randint[Z]{b}{-2}{2}
+      		\randint{c}{1}{4}
+      		\randint[Z]{d}{-2}{2}
+      		\function[normalize]{f}{x^2+a*x+b}
+      		\function[normalize]{g}{c*x+d}
+      		\function[normalize]{fg}{(c*x+d)^2+a*(c*x+d)+b}
+      		\function[normalize]{gf}{c*(x^2+a*x+b)+d}
+      \end{variables}
+
+      \type{input.function}
+      \field{real}
+      \text{Bestimmen Sie die Komposition $f\circ g$ der Abbildungen\\
+      $f:\R\to \R, x\mapsto \var{f}$ und $g:\R\to \R, x\mapsto \var{g}$.\\ $(f\circ g)(x)=$\ansref}
+   
+      \begin{answer}
+          \solution{fg}
+          \checkAsFunction{x}{-10}{10}{10}
+      \end{answer}
+\end{quickcheck}
+Die folgenden Videos erläutern den Begriff der \ref[content_10_abbildungen_verkettung][Komposition]{kompositionv} nochmals anhand von kurzen Beispielen:\\
+\floatright{
+    \href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10808&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}
+    \href{https://www.hm-kompakt.de/video?watch=155}{\image[75]{00_Videobutton_schwarz}}
+  }
+\end{content}

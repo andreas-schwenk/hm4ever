@@ -1,0 +1,2059 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Trigonometrische Funktionen}
+    \lang{en}{Trigonometric functions}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T105_Tangent.meta.xml}{T105_Tangent}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T105_SineCosine_B.meta.xml}{T105_SineCosine_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T105_SineCosine_A.meta.xml}{T105_SineCosine_A}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+    %\component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+    %\component{js_lib}{content/rwth/HM1/mathlets/VisualizationSineCosineCircleMathlet.meta.xml}{SinCos-mathlet}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T104_weitere_elementare_Funktionen/g_art_content_14_potenzregeln.meta.xml}{power-rules}
+    \link{generic_article}{content/rwth/HM1/T105_Trigonometrische_Funktionen/g_art_content_17_trigonometrie_im_dreieck.meta.xml}{content_17_trigonometrie_im_dreieck}
+    \link{generic_article}{content/rwth/HM1/T105_Trigonometrische_Funktionen/g_art_content_18_grad_und_bogenmass.meta.xml}{content_18_grad_und_bogenmass}
+
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{5}
+\ombarticle{3}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Allgemeine trigonometrische Funktionen}
+       \lang{en}{Trigonometric functions}}\label{allg-trig-funk}
+ 
+\begin{block}[annotation]
+  übungsinhalt\\
+  ToDo: Kotangens wieder entfernen?
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9030}{Ticket 9030}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{\lang{de}{Sinus und Kosinus im Einheitskreis}
+         \lang{en}{Sine and cosine in the unit circle}} \label{sin-cos-Einheitskreis}
+\lang{de}{
+Die bisher behandelten \ref[content_17_trigonometrie_im_dreieck][Zusammenhänge]{def-trigFkt} 
+von Sinus und Kosinus fußen auf den
+geometrischen Abhängigkeiten im rechtwinkligen Dreieck. Folglich wurden nur Winkel im Bereich
+$[0^\circ;90^\circ]$ bzw. $[0;\pi/2]$ betrachtet.
+Wir können allerdings Sinus und Kosinus auch für alle reelle Zahlen definieren.
+}
+\lang{en}{
+The \ref[content_17_trigonometrie_im_dreieck][definitions]{def-trigFkt} of sine and cosine given 
+in the previous chapter are given in the context of the relationships between angles and sides in 
+a right-angled triangle. Because of this, they are only defined for angles in the range 
+$[0^\circ;90^\circ]$ or $[0;\pi/2]$. 
+We can however define sine and cosine for any angle.
+}
+\begin{figure}\label{fig:1}
+ \image{T105_SineCosine_A}
+	\caption{\lang{de}{Sinus und Kosinus am Einheitskreis}
+           \lang{en}{Cosine and sine on the unit circle}}
+\end{figure}
+\lang{de}{
+Sinus und Kosinus können mit Hilfe des Einheitskreises definiert 
+werden (siehe obige Abbildung). Ein auf dem Rand des Einheitskreises beweglicher
+Punkt C wird in den definierten Startpunkt $(1;0)$ gelegt und definitionsgemäß 
+entgegen des Uhrzeigersinns (mathematisch positiver Drehsinn) gedreht.
+Zu jeder Position von C auf dem Einheitskreis, außer den Schnittpunkten mit der x- 
+und der y-Achse, lässt sich ein rechtwinkliges Dreieck ABC gemäß obiger
+Abbildung konstruieren. Dabei liegt also A im Koordinatenursprung $(0;0)$, 
+B in $(0;c)$ auf der x-Achse, senkrecht verbunden mit C. 
+Der Punkt C besitzt die Koordinaten $(c;a)$ und hat zum Punkt A 
+den Abstand $b=1$. Für den Winkel $\alpha$ in diesem Dreieck gilt dann gemäß 
+\ref[content_17_trigonometrie_im_dreieck][Definition 1.4]{def-trigFkt}
+}
+\lang{en}{
+Sine and cosine can be defined using the unit circle instead of a right-angled triangle (see the 
+figure above). A point $C$ that can move along the edge of the unit circle is placed at $(1;0)$, 
+then moved around the circle anti-clockwise (in mathematics, this is the positive direction of 
+rotation). For every position of $C$ on the edge of the unit circle, besides its intersections with 
+the axes, we can construct a right-angled triangle $ABC$, calling the origin $(0;0)$ $A$, and 
+the point $(0;c)$ on the $x$-axis $B$, where the point $C$ has the coordinates $(c;a)$. The 
+side from $A$ to $C$ is $1$ by definition of the unit circle, and this side is the hypotenuse of 
+the triangle. The angle $\alpha$ in this triangle is the one between $AC$ and $AB$, and by 
+\ref[content_17_trigonometrie_im_dreieck][definition 1.4]{def-trigFkt},
+}
+\begin{align*}
+    &\cos(\alpha)=\frac{c}{b} \quad &\Leftrightarrow& \quad c=b\cdot \cos(\alpha)\\
+    &\sin(\alpha)=\frac{a}{b} \quad &\Leftrightarrow& \quad a=b\cdot \sin(\alpha).
+\end{align*}
+\lang{de}{Wegen $b=1$ (Radius des Einheitskreises) folgt}
+\lang{en}{As $b=1$ (the radius of the unit circle),}
+\begin{align*}
+    c=\cos(\alpha)\\
+    a=\sin(\alpha)
+\end{align*}
+\lang{de}{
+Folglich besitzt Punkt C die allgemeinen Koordinaten $(\cos(\alpha);\sin(\alpha))$.
+Mit dieser Idee können Sinus und Kosinus für beliebige Winkel $\alpha$ 
+zwischen $0^\circ$ und $360^\circ$ bzw. $0$ und $2\pi$ folgendermaßen
+definiert werden.
+}
+\lang{en}{
+Therefore the point $C$ has in general the coordinates $(\cos(\alpha);\sin(\alpha))$. With this 
+idea we can define sine and cosine for any angle $\alpha$ between $0^\circ$ and $360^\circ$, that 
+is, between $0$ and $2\pi$, as follows.
+}
+
+\begin{definition}[\lang{de}{Sinus- und Kosinusfunktionen}
+                   \lang{en}{Sine and cosine functions}]\label{def_trig1}
+  \lang{de}{
+  Für beliebige Winkel $\alpha\in\mathbb{R}$ definiert man den \notion{Sinus} und \notion{Kosinus} 
+  von $\alpha$ wie folgt: 
+  Ein Punkt C auf dem Rand des Einheitskreises wird mit dem Koordinatenursprung 
+  $(0;0)$ über eine Strecke verbunden. Zwischen positiver x-Achse und zuvor konstruierter 
+  Strecke wird in mathematisch positiver Drehrichtung der als $\alpha$ definierte Winkel 
+  eingeschlossen (siehe obige Abbildung). Die Koordinaten des Punktes C werden nun als 
+  $(\cos(\alpha);\sin(\alpha))$ festgelegt.\\
+  Für Winkel größer als $360^\circ$ oder kleiner als $0^\circ$ definiert man 
+  }
+  \lang{en}{
+  For any angle $\alpha\in\mathbb{R}$ we define \notion{sine} and \notion{cosine} of $\alpha$ as 
+  follows. Consider a line $OC$ from the origin $(0;0)$ to a point $C$ on the edge of the unit 
+  circle. Let the angle measured anti-clockwise between the positive $x-axis$ and $OC$ be $\alpha$ 
+  (see the above figure). The coordinates of the point $C$ are $(\cos(\alpha);\sin(\alpha))$.\\
+  For angles larger than $360^\circ$ or smaller than $0^\circ$ we define 
+  }
+  \begin{align*}
+    &\sin(\alpha+k \cdot 360^\circ) := \sin(\alpha) \\
+    &\cos(\alpha+k \cdot 360^\circ) := \cos(\alpha) 
+  \end{align*}
+  \lang{de}{
+  für $k\in\mathbb{Z}$ und $\alpha \in [0^\circ; 360^\circ)\;$ und erhält so die Defininition \\
+  der \notion{Sinus-Funktion}: $ \quad \sin:\mathbb{R}\rightarrow[-1;1], \; x \mapsto \sin(x) \;$ 
+  und \\
+  der \notion{Kosinus-Funktion}: $ \quad \cos:\mathbb{R}\rightarrow[-1;1], \; x \mapsto \cos(x) .$\\
+  Das heißt die Wertemenge von Sinus und Kosinus sind identisch und ergeben sich zu 
+  }
+  \lang{en}{
+  for $k\in\mathbb{Z}$ and $\alpha \in [0^\circ; 360^\circ)$, and now can define \\
+  the \notion{sine function}: $ \quad \sin:\mathbb{R}\rightarrow[-1;1], \; x \mapsto \sin(x) \;$ 
+  and \\
+  the \notion{cosine function}: $ \quad \cos:\mathbb{R}\rightarrow[-1;1], \; x \mapsto \cos(x)$. \\
+  Hence the images of sine and cosine functions are the same, 
+  }
+  $W_{\sin(x)}=W_{\cos(x)}=[-1;1]$.
+\end{definition}
+\lang{de}{
+Mit Hilfe der folgenden Animation lässt sich die zugrundeliegende Idee interaktiv nachvollziehen.
+}
+\lang{en}{
+The animation below visually represents the above definitions.
+}
+\\
+
+% Beginn des jsxgraph-Teils
+\lang{de}{
+\begin{jsxgraph}
+
+% werden die Tabellen mit den jxgboxen.
+% im script wird der Inhalt geändert.
+\jxgbox[300][0]{out-0}
+\jxgbox[600][510]{out-1}
+
+\button[ansichtButton]{Ansicht 2}{changeView(aktAnsicht)}
+\button[speedButton]{1x}{changeSpeed(speed)}
+\button[startPauseButton]{>}{animating(animationRunning)}
+\button[resetButton]{Zurücksetzen}{resetView()}
+
+% java-script-code für die Visualisierung
+\begin{code}
+// create new css-class:
+const style = document.createElement('style');
+style.type = 'text/css';
+style.innerHTML = '.hideDiv { display: none; }';
+document.getElementsByTagName('head')[0].appendChild(style);
+
+// make a table of jxgboxes out of the jxgbox "out-0"
+  const firstView =  document.getElementById("out-0");
+  firstView.classList.remove("jxgbox");
+  firstView.removeAttribute("style");
+  firstView.innerHTML = '<table><tr><td>' +
+  '<div id="jsx-board-master-0" class="MuiBox-root jss2 jss1 jxgbox" style="width:500px; height:140px"></div>'+
+  '</td></tr><tr><td>'+
+  '<div id="jsx-board-sine-0" class="MuiBox-root jss2 jss1 jxgbox" style="width:500px; height:140px"></div>'+
+  '</td></tr><tr><td>'+
+  '<div id="jsx-board-cosine-0" class="MuiBox-root jss2 jss1 jxgbox" style="width:500px; height:140px"></div>'+
+  '</td></tr></table>';
+// make a table of jxgboxes out of the jxgbox "out-1" 
+  const secondView =  document.getElementById("out-1");
+  secondView.classList.remove("jxgbox");
+  secondView.removeAttribute("style");	
+  secondView.innerHTML = '<table><tr><td>'+
+  '<div id="jsx-board-master-1" class="MuiBox-root jss2 jss1 jxgbox" style="width:116px; height:116px"></div>'+
+  '</td><td>'+
+  '<div id="jsx-board-sine-1" class="MuiBox-root jss2 jss1 jxgbox" style="width:450px; height:116px"></div>'+
+  '</td></tr><tr><td>'+
+  '<div id="jsx-board-cosine-1" class="MuiBox-root jss2 jss1 jxgbox" style="width:116px; height:386px"></div>'+
+  '</td></tr></table>'; 
+  
+// ----------------------------------
+// global variables
+// ----------------------------------
+const maxSpeed = 8;
+var aktAnsicht = 0; // 0 (wenn aktuell Ansicht 1), 1 (wenn aktuell Ansicht 2)
+var speed = 1;
+var animationRunning = false;
+var tValue = Math.PI / 6;
+var intervalID = null;
+// ----------------------------------
+// functions for button-events
+// ----------------------------------
+function changeView(n) {
+  var jxgboxes = [
+    [
+      document.getElementById('jsx-board-master-0'),
+      document.getElementById('jsx-board-sine-0'),
+      document.getElementById('jsx-board-cosine-0'),
+    ],
+    [
+      document.getElementById('jsx-board-master-1'),
+      document.getElementById('jsx-board-sine-1'),
+      document.getElementById('jsx-board-cosine-1'),
+    ],
+  ];
+  for (var i = 0; i < 3; i++) {
+    jxgboxes[n][i].classList.add('hideDiv');
+    jxgboxes[1-n][i].classList.remove('hideDiv');
+  }
+  aktAnsicht = 1-n;
+  document.getElementById('ansichtButton').value = 'Ansicht ' + (2 - aktAnsicht);
+  document.getElementById('ansichtButton').innerHTML = 
+        document.getElementById('ansichtButton').value;
+}
+
+function changeSpeed(n) {
+  if (n < maxSpeed) {
+    speed = 2 * speed;
+  } else {
+    speed = 1;
+  }
+  document.getElementById('speedButton').setAttribute('value', speed + 'x');
+  document.getElementById('speedButton').innerHTML = 
+        document.getElementById('speedButton').value;
+  animating(!animationRunning);
+}
+
+function animating(isRunning) {
+  animationRunning = !isRunning;
+  if (intervalID != null) {
+    // stop current animation.
+    clearInterval(intervalID);
+  }
+  if (isRunning) {
+    document.getElementById('startPauseButton').setAttribute('value', '>');
+    intervalID = null;
+  } else {
+    document.getElementById('startPauseButton').setAttribute('value', '||');
+    // start animation.
+    intervalID = setInterval(() => {
+      increaseTValue(speed);
+    }, 80);
+    console.log('interval started with ID:', intervalID, 'and speed', speed);
+  }
+  document.getElementById('startPauseButton').innerHTML = 
+        document.getElementById('startPauseButton').value;
+}
+
+function increaseTValue(stepwidth) {
+  tValue = tValue + stepwidth / 200;
+  if (tValue > 2 * Math.PI) {
+    showExtraCircle(true);
+//    tValue = tValue - 2 * Math.PI;
+    console.log('tValue reduced to ', tValue);
+  }
+  masterBoard[0].elementsByName['p'].moveTo([Math.cos(tValue), Math.sin(tValue)]);
+  masterBoard[1].elementsByName['p'].moveTo([Math.cos(tValue), Math.sin(tValue)]);
+}
+
+function resetView() {
+  changeView(1);
+  animating(true);
+  changeSpeed(maxSpeed);
+  tValue = Math.PI / 6;
+  masterBoard[0].elementsByName['p'].moveTo([Math.cos(tValue), Math.sin(tValue)]);
+  masterBoard[1].elementsByName['p'].moveTo([Math.cos(tValue), Math.sin(tValue)]);
+  showExtraCircle(false);
+}
+
+// ----------------------------------
+// function which is called when 'point' is dragged:
+//  * tValue is adjusted,
+//  * corresp. point in second board is synchronised.
+// ----------------------------------
+function setTValue(point) {
+  tValue = Math.atan2(point.Y(), point.X());
+  if (tValue < 0) {
+    tValue += 2 * Math.PI;
+  }
+  var p2;
+  if (point.board == masterBoard[0]) {
+    p2 = masterBoard[1].elementsByName[point.name];
+  }
+  if (point.board == masterBoard[1]) {
+    p2 = masterBoard[0].elementsByName[point.name];
+  }
+  p2.moveTo([point.X(), point.Y()]);
+  showExtraCircle(false);
+}
+
+function showExtraCircle(bool) {
+    masterBoard.forEach((brd)=> {
+        brd.elementsByName['extraKreis'].setAttribute({visible: bool});
+    });
+}
+// ----------------------------------
+// attributes for boards
+// ----------------------------------
+const attributesMaster = [
+  {
+    boundingBox: [-5, 1.4, 5, -1.4],
+    axis: true,
+    keepaspectratio: true,
+    showZoom: false,
+    showNavigation: false,
+    showCopyright: false,
+  },
+  {
+    boundingBox: [-1.4, 1.4, 1.4, -1.4],
+    axis: true,
+    keepaspectratio: true,
+    showZoom: false,
+    showNavigation: false,
+    showCopyright: false,
+  },
+];
+
+const attributesSine = [
+  {
+    boundingBox: [-1.5, 1.4, 8.5, -1.4],
+    axis: true,
+    keepaspectratio: true,
+    showZoom: false,
+    showNavigation: false,
+    showCopyright: false,
+    defaultAxes: {
+      x: { ticks: {
+          scale: Math.PI,
+          scaleSymbol: '\u03c0',
+          ticksDistance: 1,
+          insertTicks: false
+      }}}
+  },
+  {
+    boundingBox: [-1.5, 1.4, 8.5, -1.4],
+    axis: true,
+    keepaspectratio: true,
+    showZoom: false,
+    showNavigation: false,
+    showCopyright: false,
+    defaultAxes: {
+      x: { ticks: {
+          scale: Math.PI,
+          scaleSymbol: '\u03c0',
+          ticksDistance: 1,
+          insertTicks: false
+      }}}
+  },
+];
+const attributesCosine = [
+  {
+    boundingBox: [-1.5, 1.4, 8.5, -1.4],
+    axis: true,
+    keepaspectratio: true,
+    showZoom: false,
+    showNavigation: false,
+    showCopyright: false,
+    defaultAxes: {
+      x: { ticks: {
+          scale: Math.PI,
+          scaleSymbol: '\u03c0',
+          ticksDistance: 1,
+          insertTicks: false
+      }}}
+  },
+  {
+    boundingBox: [-1.4, 1.5, 1.4, -6],
+    axis: false,
+    grid: false,
+    keepaspectratio: true,
+    showZoom: false,
+    showNavigation: false,
+    showCopyright: false,
+  },
+];
+
+// ----------------------------------
+// boards: master, sine and cosine for each view
+// ----------------------------------
+const masterBoard = [
+  JXG.JSXGraph.initBoard('jsx-board-master-0', attributesMaster[0]),
+  JXG.JSXGraph.initBoard('jsx-board-master-1', attributesMaster[1]),
+];
+const sineBoard = [
+  JXG.JSXGraph.initBoard('jsx-board-sine-0', attributesSine[0]),
+  JXG.JSXGraph.initBoard('jsx-board-sine-1', attributesSine[1]),
+];
+const cosineBoard = [
+  JXG.JSXGraph.initBoard('jsx-board-cosine-0', attributesCosine[0]),
+  JXG.JSXGraph.initBoard('jsx-board-cosine-1', attributesCosine[1]),
+];
+
+// enable MathJax in Text-Elements
+JXG.Options.text.useMathJax = true;
+
+// ----------------------------------
+// initializations of the boards;
+// has to be put in subroutines for correctly distinguished variables.
+// ----------------------------------
+for (i = 0; i < 2; i++) {
+  initializeMasterBoard(masterBoard[i], i);
+}
+for (var i = 0; i < 2; i++) {
+  initializeSineBoard(sineBoard[i], masterBoard[i], 'p');
+}
+initializeFirstCosineBoard(cosineBoard[0], masterBoard[0], 'p');
+initializeSecondCosineBoard(cosineBoard[1], masterBoard[1], 'p');
+
+// apply changeView(1) to hide the second set of boards.
+changeView(1);
+
+// ----------------------------------
+// uncomment the following to see color deficiencies:
+// * 'defic' is a string equal to either 'protanopia', 'deuteranopia' or 'tritanopia'.
+// ----------------------------------
+/* 
+  const defic='tritanopia';
+  for (var i=0;i<2;i++) { 
+  masterBoard[i].emulateColorblindness(defic);
+  sineBoard[i].emulateColorblindness(defic);
+  cosineBoard[i].emulateColorblindness(defic);
+} 
+*/
+
+// ----------------------------------
+// Master configuration:
+// ----------------------------------
+function initializeMasterBoard(brd, n) {
+  const origin = brd.create('point', [0, 0], { visible: false });
+  const eins = brd.create('point', [1, 0], { visible: false });
+  const kreis = brd.create('circle', [origin, 1], {
+    strokeWidth: 2,
+    strokeColor: 'black',
+    fixed: true,
+    highlight: false,
+  });
+  const extraKreis = brd.create('circle', [origin, 1], {
+    name: 'extraKreis',
+    strokeWidth: 4,
+    strokeColor: 'blue',
+    fixed: true,
+    highlight: false,
+    visible:false,
+  });
+
+  var p = brd.create('glider', [Math.cos(tValue), Math.sin(tValue), kreis], {
+    name: 'p',
+    color: 'black',
+    size: 4,
+    withLabel: false,
+  });
+  p.on('drag', function() {
+    setTValue(p);
+  });
+  var bogen = brd.create('arc', [origin, eins, p], {
+    strokeWidth: 4,
+    strokeColor: 'blue',
+    highlight: false,
+  });
+  var xText = brd.create(
+    'text',
+    [
+      () => {
+        const r = 1.21;
+        return r * Math.cos(tValue / 2);
+      },
+      () => {
+        const r = 1.21;
+        return r * Math.sin(tValue / 2);
+      },
+      'x',
+    ],
+    {
+      color: 'blue',
+      fixed: true,
+      highlight: false,
+      name: 'xText',
+    }
+  );
+  xText.addParents([p]); // p has to be set as a parent so that xText will be updated, when p is.
+  var px = brd.create(
+    'point',
+    [
+      () => {
+        return p.X();
+      },
+      0,
+    ],
+    { visible: false }
+  );
+  var py = brd.create(
+    'point',
+    [
+      0,
+      () => {
+        return p.Y();
+      },
+    ],
+    { visible: false }
+  );
+  var l1 = brd.create('segment', [py, p], {
+    color: 'green',
+    strokeWidth: 4,
+    highlight: false,
+  });
+  var l2 = brd.create('segment', [p, px], {
+    color: 'red',
+    strokeWidth: 4,
+    highlight: false,
+  });
+  if (i == 0) {
+    l1.setAttribute({ withLabel: true, labelColor: 'green' });
+    l1.setAttribute({ label: { position: 'bot' } });
+    l1.setLabelText('cos(x)');
+    l2.setAttribute({ withLabel: true, labelColor: 'red' });
+    l2.setLabelText('sin(x)');
+    l2.setAttribute({ label: { position: 'top' } });
+  }
+}
+// ----------------------------------
+// sineBoards
+// ----------------------------------
+function initializeSineBoard(brd, parent, point) {
+  parent.addChild(brd); // so that brd is updated, when parent is.
+  var pcopy = parent.elementsByName[point];
+  var origin = brd.create('point', [0, 0], { visible: false });
+  var bb = brd.getBoundingBox();
+  var f = brd.create('functiongraph', [Math.sin, bb[0], bb[2]], {
+    strokeWidth: 2,
+    strokeColor: 'black',
+    fixed: true,
+    highlight: false,
+  });
+  var qx = brd.create(
+    'point',
+    [
+      function() {
+        return tValue;
+      },
+      0,
+    ],
+    { visible: false }
+  );
+  var q = brd.create(
+    'point',
+    [
+      function() {
+        return tValue;
+      },
+      function() {
+        return Math.sin(tValue);
+      },
+    ],
+    { visible: false }
+  );
+  qx.addParents([pcopy]);
+  q.addParents([pcopy]); // for correct update
+  var l1 = brd.create('segment', [origin, qx], {
+    color: 'blue',
+    strokeWidth: 4,
+    highlight: false,
+    withLabel: false,
+  });
+  brd.create(
+    'text',
+    [
+      function() {
+        return qx.X() / 2;
+      },
+      -0.1,
+      'x',
+    ],
+    { color: 'blue' }
+  );
+  var l2 = brd.create('segment', [q, qx], {
+    color: 'red',
+    strokeWidth: 4,
+    highlight: false,
+    withLabel: false,
+  });
+  var tt = brd.create('text', [bb[0] + 0.1, bb[1] - 0.2, 'sin(x)'], {
+    color: 'red',
+    fixed: true,
+    highlight: false,
+  });
+}
+
+// ----------------------------------
+// first cosineBoard:
+// ----------------------------------
+function initializeFirstCosineBoard(brd, parent, point) {
+  parent.addChild(brd);
+  console.log('parent', parent);
+  console.log('Elemente', parent.elementsByName);
+  var pcopy = parent.elementsByName[point];
+  console.log('pcopy', pcopy);
+  var origin = brd.create('point', [0, 0], { visible: false });
+  var bb = brd.getBoundingBox();
+  console.log(bb);
+  var f = brd.create('functiongraph', [Math.cos, bb[0], bb[2]], {
+    strokeWidth: 2,
+    strokeColor: 'black',
+    fixed: true,
+    highlight: false,
+  });
+  var qx = brd.create(
+    'point',
+    [
+      function() {
+        return tValue;
+      },
+      0,
+    ],
+    { visible: false }
+  );
+  var q = brd.create(
+    'point',
+    [
+      function() {
+        return tValue;
+      },
+      function() {
+        return Math.cos(tValue);
+      },
+    ],
+    { visible: false }
+  );
+  qx.addParents([pcopy]);
+  q.addParents([pcopy]); // for correct update
+  brd.create(
+    'text',
+    [
+      () => {
+        return qx.X() / 2;
+      },
+      0.2,
+      'x',
+    ],
+    { color: 'blue' }
+  );
+  var l1 = brd.create('segment', [origin, qx], {
+    color: 'blue',
+    strokeWidth: 4,
+    highlight: false,
+    withLabel: false,
+  });
+  var l2 = brd.create('segment', [q, qx], {
+    color: 'green',
+    strokeWidth: 4,
+    highlight: false,
+    withLabel: false,
+  });
+  var tt = brd.create('text', [bb[0] + 0.1, bb[1] - 0.2, 'cos(x)'], {
+    color: 'green',
+    fixed: true,
+    highlight: false,
+  });
+}
+
+// ----------------------------------
+// second cosineBoard
+// ----------------------------------
+function initializeSecondCosineBoard(brd, parent, point) {
+  parent.addChild(brd);
+  console.log('parent', parent);
+  console.log('Elemente', parent.elementsByName);
+  var pcopy = parent.elementsByName[point];
+  console.log('pcopy', pcopy);
+  var origin = brd.create('point', [0, 0], { visible: false });
+  // im Vergleich zur anderen Visualisierung: Alles um -pi/2 gedreht.
+  var xachse = brd.create(
+    'axis',
+    [
+      [0, 0],
+      [0, -1],
+    ],
+    { strokeOpacity: 1 }
+  );
+  var yachse = brd.create('axis', [
+    [0, 0],
+    [1, 0],
+  ]);
+  xachse.removeTicks(xachse.defaultTicks);
+  var tic = brd.create('ticks', [xachse, Math.PI], {
+    minorTicks: 1,
+    drawZero: true,
+  });
+  tic.setAttribute({ strokeOpacity: 0.3, minorHeight: 5, majorHeight: -1 }); // negativ value for whole board
+  brd.create('text', [
+    -0.3,
+    -Math.PI,
+    () => {
+      return '\u03c0';
+    },
+  ]);
+  brd.create('text', [
+    -0.4,
+    -2 * Math.PI,
+    () => {
+      return '2'+'\u03c0';
+    },
+  ]);
+  var bb = brd.getBoundingBox();
+  console.log(bb);
+  var f = brd.create(
+    'curve',
+    [
+      t => {
+        return Math.cos(t);
+      },
+      t => {
+        return t;
+      },
+      bb[3],
+      bb[1],
+    ],
+    {
+      strokeWidth: 2,
+      strokeColor: 'black',
+      fixed: true,
+      highlight: false,
+    }
+  );
+  var qx = brd.create(
+    'point',
+    [
+      0,
+      function() {
+        return -tValue;
+      },
+    ],
+    { visible: false }
+  );
+  var q = brd.create(
+    'point',
+    [
+      function() {
+        return Math.cos(tValue);
+      },
+      function() {
+        return -tValue;
+      },
+    ],
+    { visible: false }
+  );
+  qx.addParents([pcopy]);
+  q.addParents([pcopy]); // for correct update
+  brd.create(
+    'text',
+    [
+      0.2,
+      () => {
+        return qx.Y() / 2;
+      },
+      'x',
+    ],
+    { color: 'blue' }
+  );
+  var l1 = brd.create('segment', [origin, qx], {
+    color: 'blue',
+    strokeWidth: 4,
+    highlight: false,
+    withLabel: false,
+  });
+  var l2 = brd.create('segment', [q, qx], {
+    color: 'green',
+    strokeWidth: 4,
+    highlight: false,
+    withLabel: false,
+  });
+  var tt = brd.create('text', [bb[0] + 0.1, bb[1] - 0.2, 'cos(x)'], {
+    color: 'green',
+    fixed: true,
+    highlight: false,
+  });
+}
+\end{code}
+\end{jsxgraph}
+}
+\lang{en}{
+\begin{jsxgraph}
+
+% werden die Tabellen mit den jxgboxen.
+% im script wird der Inhalt geändert.
+\jxgbox[300][0]{out-0}
+\jxgbox[600][510]{out-1}
+
+\button[ansichtButton]{View 2}{changeView(aktAnsicht)}
+\button[speedButton]{1x}{changeSpeed(speed)}
+\button[startPauseButton]{>}{animating(animationRunning)}
+\button[resetButton]{Reset}{resetView()}
+
+% java-script-code für die Visualisierung
+\begin{code}
+// create new css-class:
+const style = document.createElement('style');
+style.type = 'text/css';
+style.innerHTML = '.hideDiv { display: none; }';
+document.getElementsByTagName('head')[0].appendChild(style);
+
+// make a table of jxgboxes out of the jxgbox "out-0"
+  const firstView =  document.getElementById("out-0");
+  firstView.classList.remove("jxgbox");
+  firstView.removeAttribute("style");
+  firstView.innerHTML = '<table><tr><td>' +
+  '<div id="jsx-board-master-0" class="MuiBox-root jss2 jss1 jxgbox" style="width:500px; height:140px"></div>'+
+  '</td></tr><tr><td>'+
+  '<div id="jsx-board-sine-0" class="MuiBox-root jss2 jss1 jxgbox" style="width:500px; height:140px"></div>'+
+  '</td></tr><tr><td>'+
+  '<div id="jsx-board-cosine-0" class="MuiBox-root jss2 jss1 jxgbox" style="width:500px; height:140px"></div>'+
+  '</td></tr></table>';
+// make a table of jxgboxes out of the jxgbox "out-1" 
+  const secondView =  document.getElementById("out-1");
+  secondView.classList.remove("jxgbox");
+  secondView.removeAttribute("style");	
+  secondView.innerHTML = '<table><tr><td>'+
+  '<div id="jsx-board-master-1" class="MuiBox-root jss2 jss1 jxgbox" style="width:116px; height:116px"></div>'+
+  '</td><td>'+
+  '<div id="jsx-board-sine-1" class="MuiBox-root jss2 jss1 jxgbox" style="width:450px; height:116px"></div>'+
+  '</td></tr><tr><td>'+
+  '<div id="jsx-board-cosine-1" class="MuiBox-root jss2 jss1 jxgbox" style="width:116px; height:386px"></div>'+
+  '</td></tr></table>'; 
+  
+// ----------------------------------
+// global variables
+// ----------------------------------
+const maxSpeed = 8;
+var aktAnsicht = 0; // 0 (wenn aktuell Ansicht 1), 1 (wenn aktuell Ansicht 2)
+var speed = 1;
+var animationRunning = false;
+var tValue = Math.PI / 6;
+var intervalID = null;
+// ----------------------------------
+// functions for button-events
+// ----------------------------------
+function changeView(n) {
+  var jxgboxes = [
+    [
+      document.getElementById('jsx-board-master-0'),
+      document.getElementById('jsx-board-sine-0'),
+      document.getElementById('jsx-board-cosine-0'),
+    ],
+    [
+      document.getElementById('jsx-board-master-1'),
+      document.getElementById('jsx-board-sine-1'),
+      document.getElementById('jsx-board-cosine-1'),
+    ],
+  ];
+  for (var i = 0; i < 3; i++) {
+    jxgboxes[n][i].classList.add('hideDiv');
+    jxgboxes[1-n][i].classList.remove('hideDiv');
+  }
+  aktAnsicht = 1-n;
+  document.getElementById('ansichtButton').value = 'View ' + (2 - aktAnsicht);
+  document.getElementById('ansichtButton').innerHTML = 
+        document.getElementById('ansichtButton').value;
+}
+
+function changeSpeed(n) {
+  if (n < maxSpeed) {
+    speed = 2 * speed;
+  } else {
+    speed = 1;
+  }
+  document.getElementById('speedButton').setAttribute('value', speed + 'x');
+  document.getElementById('speedButton').innerHTML = 
+        document.getElementById('speedButton').value;
+  animating(!animationRunning);
+}
+
+function animating(isRunning) {
+  animationRunning = !isRunning;
+  if (intervalID != null) {
+    // stop current animation.
+    clearInterval(intervalID);
+  }
+  if (isRunning) {
+    document.getElementById('startPauseButton').setAttribute('value', '>');
+    intervalID = null;
+  } else {
+    document.getElementById('startPauseButton').setAttribute('value', '||');
+    // start animation.
+    intervalID = setInterval(() => {
+      increaseTValue(speed);
+    }, 80);
+    console.log('interval started with ID:', intervalID, 'and speed', speed);
+  }
+  document.getElementById('startPauseButton').innerHTML = 
+        document.getElementById('startPauseButton').value;
+}
+
+function increaseTValue(stepwidth) {
+  tValue = tValue + stepwidth / 200;
+  if (tValue > 2 * Math.PI) {
+    showExtraCircle(true);
+//    tValue = tValue - 2 * Math.PI;
+    console.log('tValue reduced to ', tValue);
+  }
+  masterBoard[0].elementsByName['p'].moveTo([Math.cos(tValue), Math.sin(tValue)]);
+  masterBoard[1].elementsByName['p'].moveTo([Math.cos(tValue), Math.sin(tValue)]);
+}
+
+function resetView() {
+  changeView(1);
+  animating(true);
+  changeSpeed(maxSpeed);
+  tValue = Math.PI / 6;
+  masterBoard[0].elementsByName['p'].moveTo([Math.cos(tValue), Math.sin(tValue)]);
+  masterBoard[1].elementsByName['p'].moveTo([Math.cos(tValue), Math.sin(tValue)]);
+  showExtraCircle(false);
+}
+
+// ----------------------------------
+// function which is called when 'point' is dragged:
+//  * tValue is adjusted,
+//  * corresp. point in second board is synchronised.
+// ----------------------------------
+function setTValue(point) {
+  tValue = Math.atan2(point.Y(), point.X());
+  if (tValue < 0) {
+    tValue += 2 * Math.PI;
+  }
+  var p2;
+  if (point.board == masterBoard[0]) {
+    p2 = masterBoard[1].elementsByName[point.name];
+  }
+  if (point.board == masterBoard[1]) {
+    p2 = masterBoard[0].elementsByName[point.name];
+  }
+  p2.moveTo([point.X(), point.Y()]);
+  showExtraCircle(false);
+}
+
+function showExtraCircle(bool) {
+    masterBoard.forEach((brd)=> {
+        brd.elementsByName['extraKreis'].setAttribute({visible: bool});
+    });
+}
+// ----------------------------------
+// attributes for boards
+// ----------------------------------
+const attributesMaster = [
+  {
+    boundingBox: [-5, 1.4, 5, -1.4],
+    axis: true,
+    keepaspectratio: true,
+    showZoom: false,
+    showNavigation: false,
+    showCopyright: false,
+  },
+  {
+    boundingBox: [-1.4, 1.4, 1.4, -1.4],
+    axis: true,
+    keepaspectratio: true,
+    showZoom: false,
+    showNavigation: false,
+    showCopyright: false,
+  },
+];
+
+const attributesSine = [
+  {
+    boundingBox: [-1.5, 1.4, 8.5, -1.4],
+    axis: true,
+    keepaspectratio: true,
+    showZoom: false,
+    showNavigation: false,
+    showCopyright: false,
+    defaultAxes: {
+      x: { ticks: {
+          scale: Math.PI,
+          scaleSymbol: '\u03c0',
+          ticksDistance: 1,
+          insertTicks: false
+      }}}
+  },
+  {
+    boundingBox: [-1.5, 1.4, 8.5, -1.4],
+    axis: true,
+    keepaspectratio: true,
+    showZoom: false,
+    showNavigation: false,
+    showCopyright: false,
+    defaultAxes: {
+      x: { ticks: {
+          scale: Math.PI,
+          scaleSymbol: '\u03c0',
+          ticksDistance: 1,
+          insertTicks: false
+      }}}
+  },
+];
+const attributesCosine = [
+  {
+    boundingBox: [-1.5, 1.4, 8.5, -1.4],
+    axis: true,
+    keepaspectratio: true,
+    showZoom: false,
+    showNavigation: false,
+    showCopyright: false,
+    defaultAxes: {
+      x: { ticks: {
+          scale: Math.PI,
+          scaleSymbol: '\u03c0',
+          ticksDistance: 1,
+          insertTicks: false
+      }}}
+  },
+  {
+    boundingBox: [-1.4, 1.5, 1.4, -6],
+    axis: false,
+    grid: false,
+    keepaspectratio: true,
+    showZoom: false,
+    showNavigation: false,
+    showCopyright: false,
+  },
+];
+
+// ----------------------------------
+// boards: master, sine and cosine for each view
+// ----------------------------------
+const masterBoard = [
+  JXG.JSXGraph.initBoard('jsx-board-master-0', attributesMaster[0]),
+  JXG.JSXGraph.initBoard('jsx-board-master-1', attributesMaster[1]),
+];
+const sineBoard = [
+  JXG.JSXGraph.initBoard('jsx-board-sine-0', attributesSine[0]),
+  JXG.JSXGraph.initBoard('jsx-board-sine-1', attributesSine[1]),
+];
+const cosineBoard = [
+  JXG.JSXGraph.initBoard('jsx-board-cosine-0', attributesCosine[0]),
+  JXG.JSXGraph.initBoard('jsx-board-cosine-1', attributesCosine[1]),
+];
+
+// enable MathJax in Text-Elements
+JXG.Options.text.useMathJax = true;
+
+// ----------------------------------
+// initializations of the boards;
+// has to be put in subroutines for correctly distinguished variables.
+// ----------------------------------
+for (i = 0; i < 2; i++) {
+  initializeMasterBoard(masterBoard[i], i);
+}
+for (var i = 0; i < 2; i++) {
+  initializeSineBoard(sineBoard[i], masterBoard[i], 'p');
+}
+initializeFirstCosineBoard(cosineBoard[0], masterBoard[0], 'p');
+initializeSecondCosineBoard(cosineBoard[1], masterBoard[1], 'p');
+
+// apply changeView(1) to hide the second set of boards.
+changeView(1);
+
+// ----------------------------------
+// uncomment the following to see color deficiencies:
+// * 'defic' is a string equal to either 'protanopia', 'deuteranopia' or 'tritanopia'.
+// ----------------------------------
+/* 
+  const defic='tritanopia';
+  for (var i=0;i<2;i++) { 
+  masterBoard[i].emulateColorblindness(defic);
+  sineBoard[i].emulateColorblindness(defic);
+  cosineBoard[i].emulateColorblindness(defic);
+} 
+*/
+
+// ----------------------------------
+// Master configuration:
+// ----------------------------------
+function initializeMasterBoard(brd, n) {
+  const origin = brd.create('point', [0, 0], { visible: false });
+  const eins = brd.create('point', [1, 0], { visible: false });
+  const kreis = brd.create('circle', [origin, 1], {
+    strokeWidth: 2,
+    strokeColor: 'black',
+    fixed: true,
+    highlight: false,
+  });
+  const extraKreis = brd.create('circle', [origin, 1], {
+    name: 'extraKreis',
+    strokeWidth: 4,
+    strokeColor: 'blue',
+    fixed: true,
+    highlight: false,
+    visible:false,
+  });
+
+  var p = brd.create('glider', [Math.cos(tValue), Math.sin(tValue), kreis], {
+    name: 'p',
+    color: 'black',
+    size: 4,
+    withLabel: false,
+  });
+  p.on('drag', function() {
+    setTValue(p);
+  });
+  var bogen = brd.create('arc', [origin, eins, p], {
+    strokeWidth: 4,
+    strokeColor: 'blue',
+    highlight: false,
+  });
+  var xText = brd.create(
+    'text',
+    [
+      () => {
+        const r = 1.21;
+        return r * Math.cos(tValue / 2);
+      },
+      () => {
+        const r = 1.21;
+        return r * Math.sin(tValue / 2);
+      },
+      'x',
+    ],
+    {
+      color: 'blue',
+      fixed: true,
+      highlight: false,
+      name: 'xText',
+    }
+  );
+  xText.addParents([p]); // p has to be set as a parent so that xText will be updated, when p is.
+  var px = brd.create(
+    'point',
+    [
+      () => {
+        return p.X();
+      },
+      0,
+    ],
+    { visible: false }
+  );
+  var py = brd.create(
+    'point',
+    [
+      0,
+      () => {
+        return p.Y();
+      },
+    ],
+    { visible: false }
+  );
+  var l1 = brd.create('segment', [py, p], {
+    color: 'green',
+    strokeWidth: 4,
+    highlight: false,
+  });
+  var l2 = brd.create('segment', [p, px], {
+    color: 'red',
+    strokeWidth: 4,
+    highlight: false,
+  });
+  if (i == 0) {
+    l1.setAttribute({ withLabel: true, labelColor: 'green' });
+    l1.setAttribute({ label: { position: 'bot' } });
+    l1.setLabelText('cos(x)');
+    l2.setAttribute({ withLabel: true, labelColor: 'red' });
+    l2.setLabelText('sin(x)');
+    l2.setAttribute({ label: { position: 'top' } });
+  }
+}
+// ----------------------------------
+// sineBoards
+// ----------------------------------
+function initializeSineBoard(brd, parent, point) {
+  parent.addChild(brd); // so that brd is updated, when parent is.
+  var pcopy = parent.elementsByName[point];
+  var origin = brd.create('point', [0, 0], { visible: false });
+  var bb = brd.getBoundingBox();
+  var f = brd.create('functiongraph', [Math.sin, bb[0], bb[2]], {
+    strokeWidth: 2,
+    strokeColor: 'black',
+    fixed: true,
+    highlight: false,
+  });
+  var qx = brd.create(
+    'point',
+    [
+      function() {
+        return tValue;
+      },
+      0,
+    ],
+    { visible: false }
+  );
+  var q = brd.create(
+    'point',
+    [
+      function() {
+        return tValue;
+      },
+      function() {
+        return Math.sin(tValue);
+      },
+    ],
+    { visible: false }
+  );
+  qx.addParents([pcopy]);
+  q.addParents([pcopy]); // for correct update
+  var l1 = brd.create('segment', [origin, qx], {
+    color: 'blue',
+    strokeWidth: 4,
+    highlight: false,
+    withLabel: false,
+  });
+  brd.create(
+    'text',
+    [
+      function() {
+        return qx.X() / 2;
+      },
+      -0.1,
+      'x',
+    ],
+    { color: 'blue' }
+  );
+  var l2 = brd.create('segment', [q, qx], {
+    color: 'red',
+    strokeWidth: 4,
+    highlight: false,
+    withLabel: false,
+  });
+  var tt = brd.create('text', [bb[0] + 0.1, bb[1] - 0.2, 'sin(x)'], {
+    color: 'red',
+    fixed: true,
+    highlight: false,
+  });
+}
+
+// ----------------------------------
+// first cosineBoard:
+// ----------------------------------
+function initializeFirstCosineBoard(brd, parent, point) {
+  parent.addChild(brd);
+  console.log('parent', parent);
+  console.log('Elemente', parent.elementsByName);
+  var pcopy = parent.elementsByName[point];
+  console.log('pcopy', pcopy);
+  var origin = brd.create('point', [0, 0], { visible: false });
+  var bb = brd.getBoundingBox();
+  console.log(bb);
+  var f = brd.create('functiongraph', [Math.cos, bb[0], bb[2]], {
+    strokeWidth: 2,
+    strokeColor: 'black',
+    fixed: true,
+    highlight: false,
+  });
+  var qx = brd.create(
+    'point',
+    [
+      function() {
+        return tValue;
+      },
+      0,
+    ],
+    { visible: false }
+  );
+  var q = brd.create(
+    'point',
+    [
+      function() {
+        return tValue;
+      },
+      function() {
+        return Math.cos(tValue);
+      },
+    ],
+    { visible: false }
+  );
+  qx.addParents([pcopy]);
+  q.addParents([pcopy]); // for correct update
+  brd.create(
+    'text',
+    [
+      () => {
+        return qx.X() / 2;
+      },
+      0.2,
+      'x',
+    ],
+    { color: 'blue' }
+  );
+  var l1 = brd.create('segment', [origin, qx], {
+    color: 'blue',
+    strokeWidth: 4,
+    highlight: false,
+    withLabel: false,
+  });
+  var l2 = brd.create('segment', [q, qx], {
+    color: 'green',
+    strokeWidth: 4,
+    highlight: false,
+    withLabel: false,
+  });
+  var tt = brd.create('text', [bb[0] + 0.1, bb[1] - 0.2, 'cos(x)'], {
+    color: 'green',
+    fixed: true,
+    highlight: false,
+  });
+}
+
+// ----------------------------------
+// second cosineBoard
+// ----------------------------------
+function initializeSecondCosineBoard(brd, parent, point) {
+  parent.addChild(brd);
+  console.log('parent', parent);
+  console.log('Elemente', parent.elementsByName);
+  var pcopy = parent.elementsByName[point];
+  console.log('pcopy', pcopy);
+  var origin = brd.create('point', [0, 0], { visible: false });
+  // im Vergleich zur anderen Visualisierung: Alles um -pi/2 gedreht.
+  var xachse = brd.create(
+    'axis',
+    [
+      [0, 0],
+      [0, -1],
+    ],
+    { strokeOpacity: 1 }
+  );
+  var yachse = brd.create('axis', [
+    [0, 0],
+    [1, 0],
+  ]);
+  xachse.removeTicks(xachse.defaultTicks);
+  var tic = brd.create('ticks', [xachse, Math.PI], {
+    minorTicks: 1,
+    drawZero: true,
+  });
+  tic.setAttribute({ strokeOpacity: 0.3, minorHeight: 5, majorHeight: -1 }); // negativ value for whole board
+  brd.create('text', [
+    -0.3,
+    -Math.PI,
+    () => {
+      return '\u03c0';
+    },
+  ]);
+  brd.create('text', [
+    -0.4,
+    -2 * Math.PI,
+    () => {
+      return '2'+'\u03c0';
+    },
+  ]);
+  var bb = brd.getBoundingBox();
+  console.log(bb);
+  var f = brd.create(
+    'curve',
+    [
+      t => {
+        return Math.cos(t);
+      },
+      t => {
+        return t;
+      },
+      bb[3],
+      bb[1],
+    ],
+    {
+      strokeWidth: 2,
+      strokeColor: 'black',
+      fixed: true,
+      highlight: false,
+    }
+  );
+  var qx = brd.create(
+    'point',
+    [
+      0,
+      function() {
+        return -tValue;
+      },
+    ],
+    { visible: false }
+  );
+  var q = brd.create(
+    'point',
+    [
+      function() {
+        return Math.cos(tValue);
+      },
+      function() {
+        return -tValue;
+      },
+    ],
+    { visible: false }
+  );
+  qx.addParents([pcopy]);
+  q.addParents([pcopy]); // for correct update
+  brd.create(
+    'text',
+    [
+      0.2,
+      () => {
+        return qx.Y() / 2;
+      },
+      'x',
+    ],
+    { color: 'blue' }
+  );
+  var l1 = brd.create('segment', [origin, qx], {
+    color: 'blue',
+    strokeWidth: 4,
+    highlight: false,
+    withLabel: false,
+  });
+  var l2 = brd.create('segment', [q, qx], {
+    color: 'green',
+    strokeWidth: 4,
+    highlight: false,
+    withLabel: false,
+  });
+  var tt = brd.create('text', [bb[0] + 0.1, bb[1] - 0.2, 'cos(x)'], {
+    color: 'green',
+    fixed: true,
+    highlight: false,
+  });
+}
+\end{code}
+\end{jsxgraph}
+}
+
+\lang{de}{
+Die Inhalte aus Abschnitt \ref{sin-cos-Einheitskreis} sind in folgendem Video zusammengefasst:\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=129}{\image[75]{00_Videobutton_schwarz}}}
+\\\\
+Eine Wiederholung der Verläufe der Funktionsgraphen von Sinus und Kosinus ist in folgendem Video gegeben:\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=131}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{
+\\
+}
+
+
+\section{\lang{de}{Eigenschaften von Sinus und Kosinus}\lang{en}{Properties of sine and cosine}}\label{sec:sin_cos_props}
+\lang{de}{
+Die folgenden Resultate werden alle im Bogenmaß formuliert. Durch eine jeweilige
+\ref[content_18_grad_und_bogenmass][Umrechnung ins Gradmaß]{winkelmasse} 
+könnte man die Resultate auch für das Gradmaß formulieren.
+\\\\
+Der Umfang eines Einheitskreises ist bekanntlich $2\pi$. Addiert man daher $2\pi$ 
+zu dem Winkel in der Grafik \ref{fig:1}, so gelangt man wieder zum gleichen Punkt $(c;a)$. Deshalb folgt:
+} 
+\lang{en}{
+The following results are all formulated in radians. They could of course all also be  
+\ref[content_18_grad_und_bogenmass][expressed using degrees]{winkelmasse}. 
+\\\\
+The circumference of the unit circle is of course $2\pi$. Adding $2\pi$ to the angle in the figure 
+\ref{fig:1} therefore brings us to the same point $(c;a)$. The following rule for the two functions 
+follows:
+}
+\begin{rule}[\lang{de}{Periodizität von Sinus und Kosinus}
+             \lang{en}{Periodicity of sine and cosine}]\label{sin_cos_periodic}
+\lang{de}{Es gilt}\lang{en}{We have}
+\begin{eqnarray*}
+\sin(x + 2 \pi) &= &\sin(x)\,\lang{de}{,}\\
+\cos(x + 2 \pi) &= &\cos(x)\;
+\end{eqnarray*}
+\lang{de}{
+für alle $x \in \mathbb{R}$, das heißt, dass die Sinus- und Kosinusfunktion beide 
+\textbf{periodisch} mit Periode $2\pi$ sind.
+}
+\lang{en}{
+for all $x \in \mathbb{R}$, i.e. sine and cosine are both \textbf{periodic} with periods $2\pi$.
+}
+\end{rule}
+
+\begin{remark}\label{trig-pythagoras}
+\lang{de}{
+Wird der Satz des Pythagoras auf die Gegebenheiten aus Abbildung \ref{fig:1} angewendet folgt die 
+Identität
+}
+\lang{en}{
+Applying the Pythagorean theorem to the triangle in figure \ref{fig:1} yields the identity
+}
+\[
+\sin(x)^2+\cos(x)^2 = 1
+\]
+\lang{de}{
+für alle $x\in \R$, denn der Punkt $(\cos(x);\sin(x))$ liegt immer auf dem Rand des Einheitskreises.\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=135}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{
+for all $x\in \R$, as the point $(\cos(x);\sin(x))$ always lies on the edge of the unit circle.
+}
+\end{remark}
+
+\lang{de}{
+Der Sinus und der Kosinus haben gleichartige Verläufe. Die beiden Graphen sind zueinander um das Bogenmaß $x=\frac{\pi}{2}$ verschoben.
+}
+\lang{en}{
+Sine and cosine have the same graphs, but shifted along the $x$-axis by $x=\frac{\pi}{2}$.
+}\\
+\begin{rule}[\lang{de}{Verschiebung zwischen Sinus und Kosinus}
+             \lang{en}{Shift between sine and cosine}]\label{sin_cos_verschiebung}
+\lang{de}{Für alle $x\in \R$ gilt}
+\lang{en}{For all $x\in \R$ we have}
+\[
+\sin(x+\frac{\pi}{2})=\cos(x).
+\]
+\end{rule}
+
+
+\lang{de}{
+Der Definitionsbereich von Sinus und Kosinus ist $D_{\sin}=D_{\cos}=\R$ und die Wertemenge ist das 
+Intervall $W_{\sin}=W_{\cos}=[-1 ; 1]$.
+\\\\
+Um sich den Funktionsverlauf der Sinus- und der Kosinusfunktion gut zu merken, sind die folgenden 
+speziellen Werte sehr hilfreich:
+}
+\lang{en}{
+The domain of the sine and cosine functions is $D_{\sin}=D_{\cos}=\R$ and the image is the interval 
+$W_{\sin}=W_{\cos}=[-1 ; 1]$.
+\\\\
+The following special values of the sine and cosine functions are useful to remember.
+}
+\begin{center}
+\begin{table}
+\head[ccccccccc]
+\lang{de}{Winkel in Grad}\lang{en}{Angle in degrees} &
+  $\;\; 0^{\circ}\;\;$& $\;90^{\circ} \;$& $180^{\circ}$& $270^{\circ}$&$360^{\circ}$\\
+\lang{de}{Winkel in Bogenmaß}\lang{en}{Angle in radians} &
+  $0$ & $\frac{\pi}{2}$ &$\pi$& $\frac{3}{2}\pi$&$2 \pi$\\
+\body
+$\sin(x)$& $0$&$1$&$0$&$-1$&$0$\\
+$\cos(x)$& $1$&$0$& $-1$&$0$&$1$\\
+\end{table}
+\end{center}
+
+\lang{de}{
+Mit der Periodizität erhält man dadurch direkt die Nullstellen der Sinus- und der Kosinusfunktion 
+wie sie auch in der obigen Animation zu sehen sind.\\
+Alle  ganzzahligen Vielfachen von $\pi$ sind Nullstellen des Sinus 
+$\{0, \pm \pi, \pm 2 \pi, \ldots\}$.
+Alle ungeradzahligen Vielfachen von $\frac{\pi}{2}$ sind Nullstellen des Kosinus $\{\pm
+\frac{1}{2}\pi, \pm\frac{3}{2}\pi, \pm\frac{5}{2}\pi, \ldots\}$.
+}
+\lang{en}{
+With the help of the above animation, we can visually determine the roots of the sine and cosine 
+functions. \\
+All integer multiples of $\pi$ are roots of the sine function: $(0, \pm \pi, \pm 2 \pi, \ldots)$.
+All odd multiples of $\frac{\pi}{2}$ are the roots of the cosine function: 
+$(\pm\frac{1}{2}\pi, \pm\frac{3}{2}\pi, \pm\frac{5}{2}\pi, \ldots)$.
+}
+\\
+\begin{rule}[\lang{de}{Nullstellen von Sinus und Kosinus}
+             \lang{en}{Roots of sine and cosine}]\label{sin_cos_roots}
+\lang{de}{Allgemein gilt für $k \in \mathbb{Z}$:}
+\lang{en}{In general, for integer $k$:}
+\begin{eqnarray*}
+&\sin(k \pi) =  0\,,&\\
+&\cos\left(\frac{\pi}{2} + k\pi \right) = 0.&
+\end{eqnarray*}
+\begin{center}
+\image{T105_SineCosine_B}
+\end{center}
+\end{rule}
+\\
+\lang{de}{
+Wie zu erkennen ist, ist die Sinusfunktion punktsymmetrisch zum Ursprung $x=0$. Die Kosinusfunktion 
+ist achsensymmetrisch zur $y$- Achse. In Formeln ausgedrückt, heißt das:
+}
+\lang{en}{
+The roots of sine are the critical points (maxima and minima) of cosine, and vice versa.\\
+As can be seen from the graphs, sine is 'symmetric about the origin' $x=0$ and is hence an 
+\emph{odd function}; cosine is symmetric about the $y$-axis and is hence an \emph{even function}. 
+In terms of formulas, this means:
+}
+
+\begin{rule}[\lang{de}{Symmetrieverhalten von Sinus und Kosinus}
+             \lang{en}{Parity of sine and cosine}]\label{sin_cos_symmetry}
+\lang{de}{Für alle $x \in \R$ gilt}
+\lang{en}{For all $x \in \R$,}
+\begin{eqnarray*}
+\sin(-x) &= & -\sin(x)\lang{de}{,}\\
+\cos(-x) &= & \cos(x)\lang{de}{.}
+\end{eqnarray*}
+\end{rule}
+\lang{de}{
+Eine ausführlichere Erklärung zum Symmetrieverhalten von Sinus und Kosinus ist in folgendem Video gegeben:\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=134}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{
+\\
+}
+
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{2}
+\begin{quickcheck}
+		\field{real}
+		\type{input.number}
+        
+		\begin{variables}
+			\randint[Z]{k1}{-2}{2}			
+			\function[calculate]{k2}{k1+3}
+			\function[normalize]{lb}{k1*pi}
+			\function[normalize]{ub}{k2*pi}
+			\function[normalize]{x1}{k1*pi}
+			\function[normalize]{x2}{(k1+1)*pi}
+			\function[normalize]{x3}{(k1+2)*pi}
+			\function[normalize]{x4}{k2*pi}
+		\end{variables}
+
+			\text{\lang{de}{
+            Welche Nullstellen hat die Funktion $\sin(x)$ im Intervall $[\var{k1}\pi;\var{k2}\pi]$? 
+    				Die Nullstellen sind (in aufsteigender Reihenfolge):
+            }
+            \lang{en}{
+            Which roots does the function $\sin(x)$ have in the interval 
+            $[\var{k1}\pi;\var{k2}\pi]$? The roots are (in increasing order):
+            }\\ 
+                $x_1=$\ansref,\\
+                $x_2=$\ansref,\\
+                $x_3=$\ansref,\\
+                $x_4=$\ansref.\\
+    				\lang{de}{
+            (Geben Sie die Nullstellen als Vielfache von $\pi$ an durch Eingabe von z.B. $2*pi$).
+            }
+            \lang{en}{
+            (Give the roots as multiples of $\pi$ by entering e.g. $2*pi$).
+            }}
+        \begin{answer}
+			\solution{x1}
+		\end{answer}
+		\begin{answer}
+			\solution{x2}
+		\end{answer}
+		\begin{answer}
+			\solution{x3}
+		\end{answer}
+		\begin{answer}
+			\solution{x4}
+		\end{answer}
+	\end{quickcheck}
+\begin{quickcheck}
+		\field{real}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{k1}{-2}{2}			
+			\function[calculate]{k2}{k1+4}
+			\function[normalize]{lb}{k1*pi}
+			\function[normalize]{ub}{k2*pi}
+			\function[normalize]{x1}{(k1+1/2)*pi}
+			\function[normalize]{x2}{(k1+3/2)*pi}
+			\function[normalize]{x3}{(k1+5/2)*pi}
+			\function[normalize]{x4}{(k1+7/2)*pi}
+		\end{variables}
+
+			\text{\lang{de}{
+            Welche Nullstellen hat die Funktion $\cos(x)$ im Intervall $[\var{k1}\pi;\var{k2}\pi]$?
+    				Die Nullstellen sind (in aufsteigender Reihenfolge):
+            }
+            \lang{en}{
+            Which roots does the function $\cos(x)$ have in the interval 
+            $[\var{k1}\pi;\var{k2}\pi]$? The roots are (in increasing order):
+            }\\
+                $x_1=$\ansref,\\
+                $x_2=$\ansref,\\
+                $x_3=$\ansref,\\
+                $x_4=$\ansref.\\
+            \lang{de}{
+    				(Geben Sie die Nullstellen als Vielfache von $\pi$ an durch Eingabe von z.B. $2*pi$).
+            }
+            \lang{en}{
+            (Give the roots as multiples of $\pi$ by entering e.g. $2*pi$).
+            }}
+
+		\begin{answer}
+			\solution{x1}
+		\end{answer}
+		\begin{answer}
+			\solution{x2}
+		\end{answer}
+		\begin{answer}
+			\solution{x3}
+		\end{answer}
+		\begin{answer}
+			\solution{x4}
+		\end{answer}
+	\end{quickcheck}
+\end{quickcheckcontainer}
+
+
+\section{\lang{de}{Tangens- und Kotangensfunktion}\lang{en}{Tangent and cotangent function}}
+\begin{definition}[Tangens- und Kotagensfunktion]\label{def:tan_cot}
+\lang{de}{
+Die \emph{Tangensfunktion} $\tan(x)$ ist definiert durch
+\begin{align*}
+\tan(x) = \frac{\sin(x)}{\cos(x)} ,
+\end{align*}
+wobei $x \in \mathbb{R}$ nicht die Werte $\;\ldots, \frac{-5\pi}{2},
+\frac{-3\pi}{2}, \frac{-\pi}{2}, \frac{\pi}{2}, \frac{3\pi}{2},
+\frac{5\pi}{2}, \ldots\;$ annehmen darf, das heißt, ihr Definitionsbereich
+ist gegeben durch $D_{\tan} = \mathbb{R} \setminus \big\{
+ k\pi + \frac{\pi}{2} \; \big| \; k \in \mathbb{Z} \big\}$.
+\\
+Die \emph{Kotangensfunktion} $\cot(x)$ ist definiert durch
+\begin{align*}
+\cot(x) = \frac{\cos(x)}{\sin(x)} ,
+\end{align*}
+wobei $x \in \mathbb{R}$ nicht die Werte
+$\;\ldots, -2\pi, -\pi, 0, \pi, 2\pi, \ldots\;$
+annehmen darf, das heißt, ihr Definitionsbereich ist
+gegeben durch $D_{\cot} = \mathbb{R} \setminus \big\{ k\pi \; \big| \; k \in  \mathbb{Z} \big\}$. \\
+Beide Funktionen haben die Menge der reellen Zahlen als Wertemenge: $W_{\tan}=W_{\cot}=\R$.
+\begin{center}
+\image{T105_Tangent}
+\end{center}
+}
+\lang{en}{
+The \emph{tangent} of an angle $x$ is defined by
+\begin{align*}
+\tan(x) = \frac{\sin(x)}{\cos(x)} ,
+\end{align*}
+where $x \in \mathbb{R}$ may not take on the values $\;\ldots, \frac{-5\pi}{2}, \frac{-3\pi}{2}, 
+\frac{-\pi}{2}, \frac{\pi}{2}, \frac{3\pi}{2}, \frac{5\pi}{2}, \ldots\;$. 
+In set notation, the domain is given by 
+$D_{\tan} = \mathbb{R} \setminus U$ where 
+$U = \big\{k\pi + \frac{\pi}{2} \; \big| \; k \in \mathbb{Z} \big\}$.
+\\
+The \emph{cotangent} of an angle $x$ is defined by
+\begin{align*}
+\cot(x) = \frac{\cos(x)}{\sin(x)} ,
+\end{align*}
+where $x \in \mathbb{R}$ may not take on the values 
+$\;\ldots, -2\pi, -\pi, 0, \pi, 2\pi, \ldots\;$. 
+In set notation the domain is given by $D_{\cot} = \mathbb{R} \setminus G$ where
+$G= \big\{ k\pi \; \big| \; k \in  \mathbb{Z} \big\}$. \\
+Both functions ranges have the set of real numbers as their images: $W_{\tan}=W_{\cot}=\R$.
+\begin{center}
+\image{T105_Tangent}
+\end{center}
+}
+\end{definition}
+\lang{de}{
+\\
+Eine ausführliche Erklärung der Tagensfunktion kann folgendem Video entnommen werden:\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=132}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{}
+
+
+\begin{remark}
+\lang{de}{
+Die in \ref{def_trig1} und \ref{def:tan_cot} definierten Sinus-, Kosinus- und Tangensfunktion 
+werden auch unter der Bezeichnung \textbf{trigonometrische Funktionen} zusammengefasst.
+\\\\
+Durch die Lücken in den Definitionsbereichen der Tangens- und Kotangensfunktion besteht der Graph
+beider Funktionen aus mehreren "`Ästen"'. Den Ast des Tangens um $x=0$ und den des Kotangens um
+$x=\frac{\pi}{2}$ bezeichnet
+man als den Hauptast der jeweiligen Funktion.
+\\\\
+Für Tangens und Kotangens existieren ähnliche Beziehungen wie für Sinus und
+Kosinus.
+\\\\
+Die Graphen von Tangens und Kotangens sind an der $x$-Achse gespiegelt und um $\frac{\pi}{2}$ zueinander verschoben.
+}
+\lang{en}{
+The sine, cosine and tangent function as defined in \ref{def_trig1} and \ref{def:tan_cot} are also 
+fall under the umbrella of \textbf{trigonometric functions}.
+\\\\
+Because of the gaps in the domains of the tangent and cotangent functions, the graphs of these 
+consist of multiple "branches". The branch of tan centered $x=0$ and the branch of cot centered at 
+$x=\frac{\pi}{2}$ are called the principle branches of each respective function.
+\\\\
+Similarly to sin and cos, the graphs of tan and cot are mirrored and shifted copies of each other; 
+mirrored about the $x$-axis and shifted by $\frac{\pi}{2}$.
+}
+\end{remark}
+
+
+\begin{rule}[\lang{de}{Verschiebung, Periodizität und Symmetrieverhalten von Tangens und Kotangens}
+             \lang{en}{Shifting, periodicity and symmetry of tangent and cotangent}
+              ]\label{tan_eigenschaften}
+
+\lang{de}{Für alle $x$ im Definitionsbereich der jeweiligen Funktionen gilt}
+\lang{en}{For all $x$ in the domains of the respective functions we have}
+\begin{align*}
+\tan\left(x + \frac{\pi}{2}\right) &= &-\cot(x),\\
+\cot\left(x + \frac{\pi}{2}\right) &= &-\tan(x).
+\end{align*}
+\lang{de}{Tangens und Kotangens sind $\pi$-periodisch}
+\lang{en}{The tangent and cotangent functions are periodic with period $\pi$, that is,}
+\begin{align*}
+\tan(x + k\,\pi) &= &\tan(x),\\
+\cot(x + k\,\pi) &= &\cot(x),\quad k\in\mathbb{Z},
+\end{align*}
+\lang{de}{und beide sind ungerade Funktionen}
+\lang{en}{and both are odd functions:}
+\begin{align*}
+\tan(-x) &= &-\tan(x),\\
+\cot(-x) &= &-\cot(x).
+\end{align*}
+
+\end{rule}
+
+\lang{de}{
+Die Nullstellen der Sinusfunktion bestimmen die Nullstellen der Tangensfunktion und
+entsprechend bestimmen die Nullstellen der Kosinusfunktion die Nullstellen der Kotangensfunktion:
+}
+\lang{en}{
+The roots of the sine function are the roots of the tangent function, and the roots of the
+cosine function are the roots of the cotangent function.
+}
+\\
+\begin{rule}[\lang{de}{Nullstellen von Tangens und Kotangens}
+             \lang{en}{Roots of tangent and cotangent}]\label{tan_roots}
+\lang{de}{Allgemein gilt für $k \in \mathbb{Z}$:}
+\lang{en}{In general, for integer $k$:}
+\begin{align*}
+\tan(k \pi) &= & 0\lang{de}{,}\\
+\cot\left(\frac{\pi}{2} + k\pi \right)& = &0\lang{de}{.}
+\end{align*}
+\end{rule}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{2}
+\begin{quickcheck}
+		\field{real}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{k1}{-2}{2}			
+			\function[calculate]{k2}{k1+3}
+			\function[normalize]{lb}{k1*pi}
+			\function[normalize]{ub}{k2*pi}
+			\function[normalize]{x1}{k1*pi}
+			\function[normalize]{x2}{(k1+1)*pi}
+			\function[normalize]{x3}{(k1+2)*pi}
+			\function[normalize]{x4}{k2*pi}
+		\end{variables}
+
+			\text{\lang{de}{
+        Für welche Zahlen $x$ im Intervall $[\var{k1}\pi;\var{k2}\pi]$ ist $\cot(x)$ nicht 
+        definiert? 
+				Die Zahlen sind (in aufsteigender Reihenfolge):
+        }
+        \lang{en}{
+        For which numbers $x$ in the interval $[\var{k1}\pi;\var{k2}\pi]$ is $\cot(x)$ not 
+        defined? 
+        The numbers are (in increasing order):
+        }\\
+                $x_1=$\ansref,\\
+                $x_2=$\ansref,\\
+                $x_3=$\ansref,\\
+                $x_4=$\ansref.\\
+				\lang{de}{
+        (Geben Sie die Definitionslücken als Vielfache von $\pi$ an durch Eingabe von z.B. $2*pi$).
+        }
+        \lang{en}{
+        (Give the gaps in the domain as multiples of $\pi$ by entering e.g. $2*pi$).
+        }}
+
+		\begin{answer}
+			\solution{x1}
+		\end{answer}
+		\begin{answer}
+			\solution{x2}
+		\end{answer}
+		\begin{answer}
+			\solution{x3}
+		\end{answer}
+		\begin{answer}
+			\solution{x4}
+		\end{answer}
+	\end{quickcheck}
+\begin{quickcheck}
+		\field{real}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{k1}{-2}{2}			
+			\function[calculate]{k2}{k1+4}
+			\function[normalize]{lb}{k1*pi}
+			\function[normalize]{ub}{k2*pi}
+			\function[normalize]{x1}{(k1+1/2)*pi}
+			\function[normalize]{x2}{(k1+3/2)*pi}
+			\function[normalize]{x3}{(k1+5/2)*pi}
+			\function[normalize]{x4}{(k1+7/2)*pi}
+		\end{variables}
+
+			\text{\lang{de}{
+        Für welche Zahlen $x$ im Intervall $[\var{k1}\pi;\var{k2}\pi]$ ist $\tan(x)$ nicht 
+        definiert?
+				Die Zahlen sind (in aufsteigender Reihenfolge):
+        }
+        \lang{en}{
+        For which numbers $x$ in the interval $[\var{k1}\pi;\var{k2}\pi]$ is $\tan(x)$ not 
+        defined? 
+        The numbers are (in increasing order):
+        }\\
+                $x_1=$\ansref,\\
+                $x_2=$\ansref,\\
+                $x_3=$\ansref,\\
+                $x_4=$\ansref.\\
+        \lang{de}{
+        (Geben Sie die Definitionslücken als Vielfache von $\pi$ an durch Eingabe von z.B. $2*pi$).
+        }
+        \lang{en}{
+        (Give the gaps in the domain as multiples of $\pi$ by entering e.g. $2*pi$).
+        }}
+
+		\begin{answer}
+			\solution{x1}
+		\end{answer}
+		\begin{answer}
+			\solution{x2}
+		\end{answer}
+		\begin{answer}
+			\solution{x3}
+		\end{answer}
+		\begin{answer}
+			\solution{x4}
+		\end{answer}
+	\end{quickcheck}
+\end{quickcheckcontainer}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{2}
+\begin{quickcheck}
+		\field{real}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{k1}{-2}{2}			
+			\function[calculate]{k2}{k1+3}
+			\function[normalize]{lb}{k1*pi}
+			\function[normalize]{ub}{k2*pi}
+			\function[normalize]{x1}{k1*pi}
+			\function[normalize]{x2}{(k1+1)*pi}
+			\function[normalize]{x3}{(k1+2)*pi}
+			\function[normalize]{x4}{k2*pi}
+		\end{variables}
+
+			\text{\lang{de}{
+        Geben Sie alle Nullstellen von $\tan(x)$ im Intervall $[\var{k1}\pi;\var{k2}\pi]$ an.
+				Die Nullstellen sind (in aufsteigender Reihenfolge):
+        }
+        \lang{en}{
+        Which roots does the function $\tan(x)$ have in the interval $[\var{k1}\pi;\var{k2}\pi]$? 
+        The roots are (in increasing order):
+        }\\
+                $x_1=$\ansref,\\
+                $x_2=$\ansref,\\
+                $x_3=$\ansref,\\
+                $x_4=$\ansref.\\
+				\lang{de}{
+        (Geben Sie die Nullstellen als Vielfache von $\pi$ an durch Eingabe von z.B. $2*pi$).
+        }
+        \lang{en}{
+        (Give the roots as multiples of $\pi$ by entering e.g. $2*pi$).
+        }}
+
+		\begin{answer}
+			\solution{x1}
+		\end{answer}
+		\begin{answer}
+			\solution{x2}
+		\end{answer}
+		\begin{answer}
+			\solution{x3}
+		\end{answer}
+		\begin{answer}
+			\solution{x4}
+		\end{answer}
+	\end{quickcheck}
+\begin{quickcheck}
+		\field{real}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{k1}{-2}{2}			
+			\function[calculate]{k2}{k1+4}
+			\function[normalize]{lb}{k1*pi}
+			\function[normalize]{ub}{k2*pi}
+			\function[normalize]{x1}{(k1+1/2)*pi}
+			\function[normalize]{x2}{(k1+3/2)*pi}
+			\function[normalize]{x3}{(k1+5/2)*pi}
+			\function[normalize]{x4}{(k1+7/2)*pi}
+		\end{variables}
+
+			\text{\lang{de}{
+        Geben Sie alle Nullstellen von $\cot(x)$ im Intervall $[\var{k1}\pi;\var{k2}\pi]$ an.
+				Die Nullstellen sind (in aufsteigender Reihenfolge):
+        }
+        \lang{en}{
+        Which roots does the function $\cot(x)$ have in the interval $[\var{k1}\pi;\var{k2}\pi]$? 
+        The roots are (in increasing order):
+        }\\
+                $x_1=$\ansref,\\
+                $x_2=$\ansref,\\
+                $x_3=$\ansref,\\
+                $x_4=$\ansref.\\
+				\lang{de}{
+        (Geben Sie die Nullstellen als Vielfache von $\pi$ an durch Eingabe von z.B. $2*pi$).
+        }
+        \lang{en}{
+        (Give the roots as multiples of $\pi$ by entering e.g. $2*pi$).
+        }}
+
+		\begin{answer}
+			\solution{x1}
+		\end{answer}
+		\begin{answer}
+			\solution{x2}
+		\end{answer}
+		\begin{answer}
+			\solution{x3}
+		\end{answer}
+		\begin{answer}
+			\solution{x4}
+		\end{answer}
+	\end{quickcheck}
+\end{quickcheckcontainer}
+\lang{de}{
+Eine kurze Zusammenfassung der in \lref{allg-trig-funk}{Kapitel 3} angesprochenen Themen kann dem folgenden Video entnommen werden (der Videoteil mit den Ableitungen kann aktuell noch ignoriert werden):\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10924&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+}
+\lang{en}{
+\\
+}
+
+
+\end{visualizationwrapper}
+
+
+\end{content}

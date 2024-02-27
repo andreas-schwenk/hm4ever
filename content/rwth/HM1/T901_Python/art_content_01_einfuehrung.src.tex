@@ -1,0 +1,498 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Python Einführung}
+    \lang{en}{...}
+   }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Python Einführung}
+    \lang{en}{...}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+%\\link{generic_article}{content/rwth/HM1/T901_Python/g_art_content_01_einfuehrung.meta.xml}{content_01_einfuehrung}
+\link{generic_article}{content/rwth/HM1/T901_Python/g_art_content_03_programmablauf.meta.xml}{content_03_programmablauf}
+%\link{generic_article}{content/rwth/HM1/T901_Python/g_art_content_05_kursverlinkungen.meta.xml}{content_05_kursverlinkungen}
+\end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/18344}{Ticket 18344}
+\end{block}
+\usepackage{mumie.ombplus}
+%\usepackage{listings}
+\ombchapter{12}
+\ombarticle{1}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+
+\begin{block}[annotation]
+DIESER KURSTEIL BEFINDET SICH NOCH IM AUFBAU!
+\end{block}
+
+\lang{de}{\title{Einführung in Python}}
+
+%\begin{block}[annotation]
+%  Im Ticket-System: \href{http://team.mumie.net/issues/18325}{Ticket 18325}\\
+%\end{block}
+
+\begin{remark}
+Die Inhalte dieses Python-Kurses sind \textit{nicht} prüfungsrelevant.
+\end{remark}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+\section{Motivation}
+
+In der Praxis ist es meist sinnvoll,
+Berechnungen automatisiert durchzuführen. 
+Während die Beispiele und Trainingsaufgaben
+in diesem Kurs meist so gewählt sind,
+dass die Rechnung möglichst einfach ist,
+treten im experimentellen Kontext nur sehr selten 
+ganzzahlige Koeffizienten und Konstanten auf.
+Darüber hinaus sind die
+die vorkommenden Terme meist eher lang.
+Es gibt weiterhin sogar Aufgabenstellungen, 
+für die gar kein geschlossener
+Lösungsweg bekannt ist. 
+In diesen Fällen kann die Lösung nur
+numerisch angenähert werden.
+
+\begin{example}
+\begin{tabs*}[\initialtab{1}]
+\tab{Integral} 
+    Das folgende Integral lässt sich 
+    mit den im Kurs aufgezeigten Ansätzen nicht bestimmen:
+    \[ \int_0^1 e^{-x^2} dx \]
+\tab{Nullstellen}
+    Die Nullstellen von Polynomen höherer Ordnung
+    können (abgesehen von Spezialfällen) nur numerisch 
+    bestimmt werden.
+\end{tabs*}
+\end{example}
+
+Ensprechend setzt man bei praktischen Problemstellen
+fast immer auf \textit{rechnergestützte} Lösungen.
+
+\subsection{Die Programmiersprache Python}
+
+In diesem Kapitel werden die Grundzüge der 
+\textit{Programmierung mit Python} aufgezeigt.
+
+\begin{definition}[Python]
+\textbf{Python} ist eine höhere \textit{Programmiersprache} in imperativer Form (Befehlsform).
+\end{definition}
+
+Die Syntax ist im Vergleich zu anderen Programmiersprachen eher einfach
+zu lernen.
+Durch die Vielzahl an verfügbaren Software-Bibliotheken, 
+liegt für sehr viele Teilprobleme bereits eine fertige Lösung vor,
+die in wenigen Schritten verwendet werden kann.
+Die in diesem Kurs behandelten Themengebiete lassen sich also meist 
+durch sehr kurze Programme ausdrücken.
+
+Nachteilig ist die geringere Ausführungsgeschwindigkeit im Vergleich zu anderen
+Programmiersprachen. Insbesondere bei selbst umgesetzten numerischen Verfahren ist dies
+zu beachten.
+
+
+%Vor allem im Bereich \textbf{Data Science} wird Python großflächig eingesetzt.
+
+
+%\begin{remark}
+%Diese Kurzeinführung gibt erste Einblicke in die grundlegenden Konzepte 
+%der Programmierung mittels Python.
+%Der der Fokus liegt auf den Inhalten dieses Mathematikonlinekurses.
+%Auf weiterführende Aspekte, \textit{wie zum Beispiel objektorientierte Programmierung,}
+%wird hier nicht weiter eingegangen.
+%\end{remark}
+%Sie finden am Ende vieler Kurskapitel \textbf{Programmierbeipiele}.
+%Verlinkungen zu allen im Kurs integrierten Beispielen findet man HIER: TODO: kommt später :-)% \link{content_05_kursverlinkungen}{hier}.
+
+\begin{example}
+\begin{tabs*}[\initialtab{1}]
+
+\tab{"Hallo Welt"} 
+    Traditionell wird eine neue Programmiersprache über 
+    ein "Hallo-Welt"-Programm eingeführt.
+    Das folgende kurze Python-Programm gibt nach Ausführung den Text "Hello, World!" aus.\\
+
+    (Im Abschnitt \textit{Werkzeuge} findet man Informationen
+    darüber, wie man das Programm ausführen kann.)
+\begin{block}[code]
+print("Hello, World!")
+\end{block}
+
+\tab{Determinante}
+    Bestimme die Determinante einer Matrix $A \in M(2;\C)$:
+    \[
+        A=
+        \begin{pmatrix}
+            1+2i & 3 \\
+            4 & 5
+        \end{pmatrix}
+    \]
+    \[
+        det(A)
+    \]
+\begin{block}[code]
+import numpy
+A = [ [complex(1,2), 3], [4,5] ]
+print( numpy.linalg.det( A ) )
+\end{block}
+
+\end{tabs*}
+\end{example}
+
+
+\subsection{Aufbau dieses Kursteils}
+
+Der weitere Aufbau dieses Kursteils ist wie folgt:
+\begin{itemize}
+    \item \textbf{Kapitel 1} (dieses Kapitel) definiert den Begriff \textbf{Algorithmus}.
+    \item \textbf{Kapitel 2} führt arithmetische \textbf{Ausdrücke}, sowie das Konzept der \textbf{Variablen} ein.
+    \item \textbf{Kapitel 3} beschäftigt sich mit dem \textbf{Ablauf von Programmen}.
+    \item \textbf{Kapitel 4} zeigt die grundlegenden mathematischen Software-\textbf{Bibliotheken} die hier relevant sind.
+\end{itemize}
+Themenspezifische Beispiele und Aufgaben sind über den gesamten Kurs verteilt.
+Diese findet man meist am Ende eines Vorlesungskapitels.
+
+
+\section{Algorithmen}
+
+Innerhalb des Kurses haben wir bereits einige \textit{Rechenverfahren} kennengelernt.
+Zum Beispiel können lineare Gleichungssysteme mit dem \textit{Gauß-Verfahren}
+gelöst werden.
+
+Nun sind wir daran interessiert, die Verfahren so exakt zu formulieren, 
+dass diese auch von Rechnern verarbeitet werden können:
+
+\begin{definition}[Algorithmus]
+    Ein {Algorithmus} ist eine 
+    \textbf{eindeutige Handlungsvorschrift}
+    für eine gegebene Problemstellung.
+
+    Er beschreibt \textbf{exakt} und in \textbf{Einzelschritten}, 
+    wie eine gegebene \textit{Eingabe} in eine \textit{Ausgabe} überführt wird.
+\end{definition}
+
+Die folgenden Beispiele zeigen sehr einfache Algorithmen.
+
+\begin{example}
+\begin{tabs*}
+
+\tab{Maximum}
+Bestimmen des Maximum einer Menge bestehend aus ganzen Zahlen:
+\begin{itemize}
+    \item \textbf{Eingabe:} 
+        \begin{itemize}
+            %\item $x = \{x_1, x_2, \cdots, x_n\}, \quad x_{1 \leq i \leq n} \in \mathbb{Z}$
+            \item $x = \{x_i ~|~ x_i \in \Z; 1 \leq i \leq n \}$
+        \end{itemize}
+    \item \textbf{Ausgabe:}
+        \begin{itemize}
+            \item $y = \max\{x\}$
+        \end{itemize}
+    \item \textbf{Wertspeicher (Variablen):}
+        \begin{itemize}
+            \item Anzahl der Elemente der Menge $n \in \N$.
+            \item Elemente der Menge $x_1, x_2, \cdots, x_n$.
+            \item (Zwischen-)Lösung $y \in \Z$.
+            \item Hilfsvariable: 
+                Index $i \in \N$ zur Adressierung von $x_i$ mit $1 \leq i \leq n$.
+        \end{itemize}
+    \item \textbf{Einzelschritte:}
+        \begin{enumerate}
+            \item Lese $n$ und $\{ x_1, x_2, \cdots, x_n \}$ ein.
+            \item Setze die Zwischenlösung $y$ auf $-\infty$.
+            \item Setze den Index $i$ auf $1$.
+            \item Wenn $i$ größer als $n$ ist, dann gehe zu Schritt 8.
+            \item Wenn $x_i$ größer als $y$ ist, dann setze $y := x_i$.
+            \item Erhöhe $i$ um 1.
+            \item Gehe zurück zu Schritt 4.
+            \item Gebe $y$ aus.
+            \item ENDE.
+        \end{enumerate}
+    \item \textbf{Ausblick:}\\
+        In Python kann man beispielsweise das folgende Programm schreiben:
+\begin{block}[code]
+x = [ 3, 4, 43, 1, 4, 54 ]
+y = max(x)
+print(y)
+\end{block}
+        Ohne die Nutzung von \texttt{max} könnte die Lösung beispielsweise wie folgt aussehen:
+\begin{block}[code]
+x = [ 3, 4, 43, 1, 4, 54 ]
+y = float("-inf")
+i = 0
+while i < len(x):
+	if x[i] > y:
+		y = x[i]
+	i = i + 1
+print(y)
+\end{block}
+\end{itemize}
+
+
+%\tab{Schriftliche Addition}
+%Schriftliche Addition zweier natürlicher Zahlen $a, b \in \mathbb{N}$:
+%\begin{itemize}
+%    \item \textbf{Eingabedaten:} $a, b \in \mathbb{N}$
+%    \item \textbf{Ausgabedaten:} $c = a + b$
+%    %\item \textbf{Algorithmus:} Funktion $f : \mathbb{N}^2 \to \mathbb{N}, \quad n \mapsto f(n), \quad f(a,b) = a + b$.
+%\end{itemize}
+%Der \textbf{Algorithmus} besteht aus den folgenden Einzelschritten.
+%Wir nehmen im folgenden an, dass $100 \leq a, b < 1000$:
+%\begin{enumerate}
+%    \item Setze eine Hilfsvariable $k$ zur Beschreibung der akutell betrachteten Stelle auf den Wert 3. 
+%    \item Addiere die beiden Ziffern der Stelle $k$.
+%    \item Schreibe das Ergebnis XXX TODO
+%\end{enumerate}
+
+\tab{Fakultät}
+Berechnung der Fakultät einer Zahl $n \in \mathbb{N}$:
+\[ n! = \prod_{k=1}^{n} k \]
+\begin{itemize}
+    \item \textbf{Eingabe:}
+        \begin{itemize}
+            \item $n \in \mathbb{N}$
+        \end{itemize}
+    \item \textbf{Ausgabe:}
+        \begin{itemize}
+            \item $y = n!$
+        \end{itemize}
+    %\item \textbf{Algorithmus:}
+    %    \begin{itemize}
+    %        \item Funktion $f : \mathbb{N} \to \mathbb{N}, \quad n \mapsto f(n), \quad f(n) = 1 \cdot 2 \cdot \cdots \cdot n$
+    %    \end{itemize}
+    \item \textbf{Wertspeicher (Variablen)}:
+    \begin{itemize}
+        \item Eingabe $n \in \N$.
+        \item Hilfsvariable $k \in \N$ für den Laufindex des Produkts.
+    \end{itemize}
+    \item \textbf{Einzelschrite:}
+        \begin{enumerate}
+            \item Lese $n$ ein.
+            \item Setze die Zwischenlösung $y$ auf 1.
+            \item Setze die Hilfsvariable $k$ auf 1.
+            \item Wenn $k$ größer als $n$ ist, dann gehe zu Schritt 8.
+            \item Setze $y_{neu}$ auf den Wert $y_{alt} \cdot k$.\\
+                Hierzu schreiben wir kurz $y := y \cdot k$
+            \item Erhöhe $k$ um 1.
+            \item Gehe zu Schritt 4.
+            \item Gebe das Ergebnis $y$ aus.
+            \item ENDE.
+        \end{enumerate}
+
+    \item \textbf{Ausblick:}\\
+        In Python kann man beispielsweise das folgende Programm schreiben:
+\begin{block}[code]
+import math
+n = 4
+y = math.factorial(n)
+print(y)
+\end{block}
+        Ohne die Nutzung von \texttt{math.factorial} könnte die Lösung beispielsweise wie folgt aussehen:
+\begin{block}[code]
+n = 4
+y = 1
+for k in range(1, n+1):
+    y = y * k
+print(y)
+\end{block}
+
+\end{itemize}
+
+\end{tabs*}
+\end{example}
+
+
+
+\begin{quickcheck}
+  \type{input.number}
+  \displayprecision{3}
+  \correctorprecision{3}
+  \begin{variables}
+    \randint{num}{1}{6}
+    \function[calculate]{ergebnis}{13}
+  \end{variables}
+  \text{
+    Gegeben sei der folgende Algorithmus:
+    \begin{enumerate}
+        \item $x$ := 0, ~~ $y$ := 1, ~~ $z$ := 0.
+        \item Wenn $z$ > 10, dann gehe zu Schritt 7.
+        \item $z$ := $x$ + $y$.
+        \item $x$ := $y$.
+        \item $y$ := $z$.
+        \item Gehe zu Schritt 3.
+        \item Gebe $z$ aus.
+    \end{enumerate}
+    Welcher Wert wird ausgegeben? \ansref  
+  }
+  \explanation{
+    Der Algorithmus berechnet die ersten Glieder der 
+    \textit{Fibonacci-Folge}:
+    Das jeweils nächste Glied berechnet sich aus der
+    Summe der beiden vorangegangenen Glieder.
+    Hier erhält der Wertspeicher $z$ nacheinander die Werte 
+    0, 1, 1, 2, 3, 5, 8, 13.
+    Sobald $z$ größer als 10 ist, 
+    terminiert (= beendet sich) der Algorithmus.
+    Es wird 13 ausgegeben.
+  }
+  \begin{answer}
+    \solution{ergebnis}
+  \end{answer}
+\end{quickcheck}
+
+
+\section{Programme}
+
+Bisher haben wir Algorithmen als eine Folge von Einzelschritten angegeben.
+Die Darstellungen waren noch nicht auf eine bestimmte Programmiersprache bezogen.
+\begin{definition}[Programm]
+    Ein \textbf{Programm} ist eine konkrete Umsetzung eines Algorithmus in einer 
+    \textbf{Programmiersprache} in Form einer Folge von Anweisungen.
+\end{definition}
+
+Beispiele für Programmiersprachen sind C, C++, Java, JavaScript, Python, Rust usw.
+
+
+\begin{example}
+Das folgende \textbf{Programm} besteht aus 3 \textbf{Zeilen} korrektem Python-Code.
+\begin{block}[code]
+x = 4
+y = 5
+z = x*x + y
+\end{block}
+Bei Ausführung des Programmes werden die Zeilen im Allgemeinen von oben nach unten ausgewertet.
+Auf der linken Seite steht jeweils ein Bezeicher für einen Wertspeicher (Variable).
+Zunächst wird jeweils der Term auf der rechten Seite ausgewertet 
+und der Ergebniswet in den Wertspeicher der linken Seite zugewiesen.
+
+In diesem Beispiel sind die Schritte im Einzelnen:
+\begin{enumerate}
+    \item Weise der Variablen $x$ den Wert 4 zu.
+    \item Weise der Variablen $y$ den Wert 5 zu.
+    \item Weise der Variablen $z$ den Wert von $x^2 + y$, also $4^2 + 5 = 21$ zu.
+\end{enumerate}
+\end{example}
+
+%\begin{remark}
+%Im Unterkaptitel über \link{content_03_programmablauf}{Programmabläufe} werden wir alternative Folgen von Operationen kennenlernen.
+%\end{remark}
+
+\begin{block}[warning]
+Hier wird \textbf{nicht} im mathematischen Sinne ein Gleichungssystem definiert und gelöst.
+Auf dem Papier (nicht in Python selbst) schreibt man daher auch häufig $x := t$, 
+um zu verdeutlichen, dass der aus Term $t$ berechnete Ergebniswert
+den Wertspeicher $x$ geschrieben wird.
+\end{block}
+
+\begin{quickcheck}
+    \type{input.number}
+      \precision{3}
+      \field{real}
+      \begin{variables}
+            \number{a}{7}
+            \number{b}{18}
+       \end{variables}
+      \text{
+Gegeben sei das folgende Python-Programm:
+\begin{block}[code]
+a = 4 + 2*3
+b = (a-1) * 2 
+a = a - 3
+\end{block}
+      Nach Ausführung enthält Variable $a$ den Wert \ansref und
+      Variable $b$ den Wert \ansref.
+        }
+      \explanation{Die Zeilen von oben nach unten abarbeiten. Zunächst jeweils die
+      Seite rechts des Gleichheitszeichens auswerten und dann dem Wertspeicher 
+      der linken Seite zuweisen.}
+      \begin{answer}
+            \solution{a}
+      \end{answer}
+       \begin{answer}
+            \solution{b}
+      \end{answer}
+\end{quickcheck}
+
+
+%\begin{remark}
+%Man bezeichnet eine Programmiersprache als \textbf{imperativ}, 
+%wenn ein Programm als Folge von Anweisungen definiert ist,
+%die nacheinander ausgeführt werden.
+%Python ist ein Beispiel für eine imperative Sprache.
+%\end{remark}
+
+
+
+\section{Werkzeuge}
+
+Es gibt vielfältige Möglichkeiten Python zu verwenden.
+
+Während sich die hier im Kurs gestellten Programmieraufgaben 
+direkt in den bereitgestellten Eingabefeldern lösen lassen, 
+hat man im Allgemeinen die folgenden Optionen:
+\begin{itemize}
+    \item Nutzung von sogenannten \textbf{Online-Interpretern}.
+    Diese können direkt im Browser, also ohne Installation auf dem Rechner,
+    ausprobiert werden:
+    \begin{itemize}
+        \item \href{https://www.python.org/shell/}{https://www.python.org/shell/}
+        \item \href{https://jupyter.org/try}{https://jupyter.org/try}
+    \end{itemize}
+    \item Download der Software von der \textbf{offiziellen Python-Seite} 
+    mit anschließender Installation auf dem Rechner:
+    \begin{itemize}
+        \item \href{https://www.python.org/downloads/}{https://www.python.org/downloads/}
+    \end{itemize}
+    \item Download von \textbf{Distributionen} mit umfangreichen Softwarepaketen:
+    \begin{itemize}
+        \item Z.B. \href{https://www.anaconda.com}{Anaconda}.
+        \item Eine vollständige Liste findet man \href{https://wiki.python.org/moin/PythonDistributions}{hier}.
+    \end{itemize}
+\end{itemize}
+
+\begin{block}[warning]
+In diesem Kurs wird Python in der \textbf{Versionsnummer 3} verwendet.
+Programme die für die frühere Versionen 2 geschrieben wurden, 
+sind teilsweise nicht kompatibel.
+
+Python 2 wird seit längerem nicht mehr weiterentwickelt und 
+sollte in der Praxis nicht weiter verwendet werden.
+\end{block}
+
+
+
+\section{Literatur}
+
+Diese Einführung beschränkt sich auf wesentliche Grundlagen.
+Sie können beispielsweise die folgenden Quellen nutzen, 
+um sich tiefer in die Thematik einzuarbeiten.
+Weiterhin findet man im Netz eine Vielzahl an kostenlosen Kursen.
+
+\begin{itemize}
+    \item Edmund Weitz, "Konkrete Mathematik (nicht nur) für Informatiker", Springer Spektrum, ISBN 978-3-658-21564-4, \href{https://doi.org/10.1007/978-3-658-21565-1}{DOI}.
+    \item Python Software Foundation, "Python Documentation", \href{https://docs.python.org/3/}{Link}.
+\end{itemize}
+
+
+\end{visualizationwrapper}
+
+\end{content}

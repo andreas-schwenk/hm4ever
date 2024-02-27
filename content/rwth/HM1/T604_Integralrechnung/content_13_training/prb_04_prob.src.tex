@@ -1,0 +1,130 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A04: unterschiedliche Kostenarten}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A04: Unterschiedliche Kostenarten}}
+\lang{en}{\title{A04: Different types of costs}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24088}{Ticket 24088}
+\end{block}
+\usepackage{mumie.genericproblem}
+
+     \begin{problem}
+            \begin{variables}
+                \drawFromSet{a}{2,3,4}
+                \drawFromSet{b}{7,8,9}
+                \drawFromSet{c}{7,8,9}
+                \drawFromSet{f}{4,5,6}
+                \drawFromSet{d}{10,11,12}
+                \drawFromSet{h}{2,3,4}
+                \function{gk}{a*x^2-b*x+c}
+                \function{gu}{-h*x+d}
+                \function{sumk}{a*x^3/3-b*x^2/2+c*x+f}
+                \function{sumu}{-h*x^2/2+d*x}
+                \function{avk}{a*x^2/3-b*x/2+c+f/x}
+                \function[normalize,expand]{win}{-sumk+sumu}
+            \end{variables}
+          \begin{question}
+               \type{input.function} 
+               \lang{de}{\text{Gegeben seien 
+               \begin{table}%[\class{layout}]
+               eine Grenzkostenfunktion: &  &$K'(x)=\var{gk}$\\ 
+               fixe Kosten: &  &$K_f=\var{f}$ \\
+               eine Grenzerlösfunktion: &  &$E'(x)=\var{gu}$
+        
+               \end{table}
+               
+               
+               Berechnen Sie 
+               \begin{itemize}
+               \item
+               die Gesamtkostenfunktion: $K_{total}(x)=$\ansref und 
+               \item
+               die Durchschnittskostenfunktion: $k_{total}(x)=$\ansref.
+               \end{itemize}
+               }}
+               \lang{en}{\text{Given
+               \begin{table}%[\class{layout}]
+               a marginal cost function: & &$K'(x)=\var{gk}$\\ 
+               a fixed cost: & &$K_f=\var{f}$\\
+               a marginal revenue function: & &$E'(x)=\var{gu}$
+              \end{table}
+               Calculate 
+               \begin{itemize}
+               \item
+               the total cost function: $K_{total}(x)=$\ansref and 
+               \item
+               the average cost function: $k_{total}(x)=$\ansref.
+               \end{itemize}
+               }}
+               
+               \explanation{$K_{ges}=\int_0^xK'(r)dr+K_f$ 
+               \lang{de}{\text{und}}
+                \lang{en}{\text{and}}
+               $k_{ges}(x)=\frac{K_{ges}(x)}{x}$.
+               }
+               \begin{answer}
+                    \solution{sumk}
+                    \checkAsFunction{x}{-10}{10}{100}
+               \end{answer}
+               \begin{answer}
+                    \solution{avk}
+                    \checkAsFunction{x}{-10}{10}{100}
+               \end{answer}
+          \end{question}
+          
+           \begin{question}
+               \type{input.function} 
+               \lang{de}{\text{Berechnen Sie nun
+               \begin{itemize}
+               \item
+               die Erlösfunktion: $E_{total}(x)=$\ansref, sowie
+               \item
+               die Gewinnfunktion: $G(x)=$\ansref.
+               \end{itemize}
+               }}
+              \lang{en}{\text{Now calculate
+               \begin{itemize}
+               \item
+               the revenue function: $E_{ges}(x)=$\ansref, as well as
+               \item
+               the profit function: $G(x)=$\ansref.
+               \end{itemize}
+               }}
+               \explanation{$E_{ges}=\int_0^xE'(r)dr$ 
+               \lang{de}{\text{und}}
+                \lang{en}{\text{and}}
+                $G(x)=E_{ges}(x)-K_{ges}(x)$.}
+               \begin{answer}
+                    \solution{sumu}
+                     \checkAsFunction{x}{-10}{10}{100}
+               \end{answer}
+              \begin{answer}
+                    \solution{win}
+                     \checkAsFunction{x}{-10}{10}{100}
+               \end{answer}   
+          \end{question}  
+     \end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

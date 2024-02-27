@@ -1,0 +1,35 @@
+%This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)
+%https://creativecommons.org/licenses/by/4.0/legalcode
+\documentclass[rgb]{standalone}
+\usepackage{tkz-euclide}
+\usepackage[utf8]{inputenc}
+\definecolor{myorange}{hsb}{0.0833, 1, 0.8}
+\definecolor{mygreen}{hsb}{0.3333, 1, 0.8}
+\definecolor{myblue}{hsb}{0.5833, 1, 0.8}
+\definecolor{mymagenta}{hsb}{0.8333, 1, 0.8}
+\begin{document}
+	\begin{tikzpicture}[scale=1.5, font=\Large]
+		% Coordinate system
+		\tkzInit[xmin=-4,xmax=4,ymin=-3,ymax=3]
+		\tkzGrid[color=lightgray]
+		\tkzDrawX[thick]
+		\tkzDrawY[thick]
+		\draw[dashed] (-4,1) -- (4,1);
+		\draw[very thick,domain=-360:360, smooth, samples=500, variable=\x,myblue] plot ({\x/90}, {2*cos(\x)});
+		\node[very thick, draw=myorange,circle,fill,inner sep=2] at ({2/3},1) {};
+		\node[very thick, draw,circle,fill,inner sep=2] at ({-10/3},1) {};
+		\node[very thick, mygreen, draw,circle,fill,inner sep=2] at ({10/3},1) {};
+		\node[very thick, mygreen, draw,circle,fill,inner sep=2] at ({-2/3},1) {};
+		\node[below=0.5mm] at (1,0){$\frac{\pi}{2}$};
+		\node[below=0.5mm] at (3,0){$\frac{3\pi}{2}$}; 
+		\node[below=0.5mm] at (-1,0){$-\frac{\pi}{2}$}; 
+		\node[below=0.5mm] at (-3,0){$-\frac{3\pi}{2}$};
+		\node[left=0.5mm] at (0,2){$1$};
+		\node[left=0.5mm] at (0,-2){$-1$}; 
+		\node[above right] at ({2/3},1){$x_{1,0}=\frac{\pi}{3}$};
+		\node[above,myorange] at (1.5,1.5){"Taschenrechnerlösung"};
+		\node[above right] at ({-10/3},1){$x_{1,-1}=-\frac{5\pi}{3}$}; 
+		\node[below left, mygreen] at ({10/3},){$x_{2,0}=\frac{5\pi}{3}$};
+		\node[below left, mygreen] at ({-2/3},){$x_{2,-1}=-\frac{\pi}{3}$};
+	\end{tikzpicture}	
+\end{document}

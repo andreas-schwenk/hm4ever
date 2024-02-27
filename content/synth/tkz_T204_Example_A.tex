@@ -1,0 +1,28 @@
+%This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)
+%https://creativecommons.org/licenses/by/4.0/legalcode
+\documentclass[rgb]{standalone}
+\usepackage{tkz-euclide}
+\definecolor{myorange}{hsb}{0.0833, 1, 0.8}
+\definecolor{mygreen}{hsb}{0.3333, 1, 0.8}
+\definecolor{myblue}{hsb}{0.5833, 1, 0.8}
+\definecolor{mymagenta}{hsb}{0.8333, 1, 0.8}
+\begin{document}
+\begin{tikzpicture}[scale=1.5, font=\Large]
+	% Coordinate system
+	\tkzInit[xmin=-2,xmax=4,ymin=-2,ymax=4]
+	\tkzGrid[color=lightgray]
+	\tkzDrawX[thick,label=$x$]
+	\tkzDrawY[thick,label=$y$]
+	\foreach \i in {-1,...,4} {
+		\node[very thick, draw,circle,fill,myblue,inner sep=2] at (\i, \i) {};
+		\draw[very thick, myblue] ({\i-1},{\i-1}) -- ({\i},{\i-1});
+	}
+	% Labels
+	\node[below=0.5mm] at (-1,0){$-1$};
+	\node[below=0.5mm] at (1,0){$1$};
+	\node[below=0.5mm] at(3,0){$3$};
+	\node[left=0.5mm] at (0,-1){$-1$};
+	\node[left=0.5mm] at (0,1){$1$};
+	\node[left=0.5mm] at (0,3){$3$};
+\end{tikzpicture}
+\end{document}

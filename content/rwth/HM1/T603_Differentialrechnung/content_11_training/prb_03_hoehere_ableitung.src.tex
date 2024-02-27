@@ -1,0 +1,124 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A03: höhere Ableitungen}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A03: höhere Ableitungen}}
+\lang{en}{\title{A03: higher derivatives}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24029}{Ticket 24029}
+\end{block}
+\usepackage{mumie.genericproblem}
+
+
+
+\begin{block}[annotation]
+Kopie: hm4mint/T301_Differenzierbarkeit/training 8
+
+Im Ticket-System: \href{http://team.mumie.net/issues/10289}{Ticket 10289}
+\end{block}
+
+\begin{problem}
+	
+	 \randomquestionpool{1}{2}
+	
+%######################################################QUESTION_START	
+	\begin{question}	
+	%+++++++++++++++++++VARIABLES++++++++++++++++++++++
+		\begin{variables}
+			\randint[Z]{k}{2}{6}
+			\randint[Z]{l}{1}{4}
+			\function[calculate]{n}{l+k}
+			\randint[Z]{a}{2}{6}
+			
+			\function{func1}{a*x^k}
+			\function{sol}{0}
+
+     \begin{switch} % "3th" vermeiden
+     \begin{case}{n=3}
+     \string{th}{rd}
+     \end{case}
+     \begin{default}
+     \string{th}{th}
+     \end{default}
+     \end{switch}
+			
+		\end{variables}
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		\type{input.function} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+
+	%+++++++++++++++++++TITLE++++++++++++++++++++++++++	
+	    \lang{de}{\text{Was ist die $\var{n}$-te Ableitung der Funktion $f(x)=\var{func1}$?}}
+      \lang{en}{\text{What is the $\var{n}$\var{th} derivative of the function $f(x)=\var{func1}$?}}
+	%+++++++++++++++++++ANSWERS++++++++++++++++++++++++    
+	    \begin{answer}
+	    	\lang{de}{\text{Die Ableitung ist }}
+        \lang{en}{\text{The derivative is }}
+			\solution{sol}
+			\checkAsFunction{x}{-1}{1}{100}
+	    \end{answer}    
+	\end{question}
+%######################################################QUESTION_END
+
+%######################################################QUESTION_START	
+	\begin{question}	
+	%+++++++++++++++++++VARIABLES++++++++++++++++++++++
+		\begin{variables}
+			\randint[Z]{n}{3}{5}
+			\randint[Z]{b}{2}{4}
+			\randint[Z]{a}{2}{4}
+			
+			\function{func1}{a*e^(b*x)}
+			\function{sol}{a*b^n*e^(b*x)}
+
+     \begin{switch} % "3th" vermeiden
+     \begin{case}{n=3}
+     \string{th}{rd}
+     \end{case}
+     \begin{default}
+     \string{th}{th}
+     \end{default}
+     \end{switch}
+			
+		\end{variables}
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		\type{input.function} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+
+	%+++++++++++++++++++TITLE++++++++++++++++++++++++++	
+	    \lang{de}{\text{Was ist die $\var{n}$-te Ableitung der Funktion $f(x)=\var{func1}$?}}
+
+     \lang{en}{\text{What is the $\var{n}$\var{th} derivative of the function $f(x)=\var{func1}$?}}
+
+ %+++++++++++++++++++ANSWERS++++++++++++++++++++++++    
+	    \begin{answer}
+	    	\lang{de}{\text{Die Ableitung ist }}
+      \lang{en}{\text{The derivative is }}
+			\solution{sol}
+			\checkAsFunction{x}{-1}{1}{100}
+	    \end{answer}    
+	\end{question}
+%######################################################QUESTION_END
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

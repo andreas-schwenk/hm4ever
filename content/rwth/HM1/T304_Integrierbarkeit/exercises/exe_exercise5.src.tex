@@ -1,0 +1,92 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü05: Zwischensummen}
+    \lang{en}{exercise 5}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Hier die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \link{generic_article}{content/rwth/HM1/T304_Integrierbarkeit/g_art_content_09_integrierbare_funktionen.meta.xml}{link1}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\title{
+  \lang{de}{Ü05: Zwischensummen}
+}
+
+
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10580}{Ticket 10580}
+\end{block}
+
+Es sei $f(x)=x^2-2x$ und $Z$ die Zerlegung von $[0;3]$ mit den Zwischenstellen $1$ und $\frac{5}{2}$.
+\begin{enumerate}
+\item[a)] Berechnen Sie die Ober- und Untersumme zur Zerlegung $Z$.
+\item[b)] Berechnen Sie die Riemannsche Zwischensumme $S(Z;0, 1, 3)$.
+\item[c)] Berechnen Sie mit dem Hauptsatz der Differential- und Integralrechnung $\int_0^3 f(x)\, dx$.
+\item[d)] Vergleichen Sie die Ergebnisse aus a)-c).
+\end{enumerate}
+
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+  \tab{\lang{de}{Antworten}}
+  a) $\ O(Z)=\frac{27}{8}$, $U(Z) = -\frac{15}{8}$,\\
+  b) $\ S(Z;0, 1, 3)=0$, \\
+  c) $\ \int_0^3 f(x)\, dx = 0$, \\
+  d) $\, $ Wert von Zwischensumme und Integral stimmen überein.
+  
+  \tab{Lösung a)}
+  \begin{incremental}[\initialsteps{1}]
+  \step Zunächst gilt $f(x) = x^2-2x = (x-1)^2-1$. Damit ist $f$ eine verschobene Normalparabel.
+  \step Auf dem Intervall $[0;1]$ ist $f$ monoton fallend und auf dem Intervall $[1;3]$ monoton steigend.
+  \step Damit ist die Obersumme gegeben durch
+  \[
+  O(Z) = (1-0)\cdot f(0) + (\frac{5}{2}-1)\cdot f(\frac{5}{2})+ (3-\frac{5}{2})\cdot f(3) = 0 + \frac{3}{2} \cdot \frac{5}{4} + \frac{1}{2}\cdot 3 = \frac{27}{8}
+  \]
+  und die Untersumme durch
+  \[
+  U(Z) = (1-0) \cdot f(1) + (\frac{5}{2}-1)\cdot f(1) + (3-\frac{5}{2})\cdot f(\frac{5}{2})  = 1 \cdot (-1) + \frac{3}{2}\cdot (-1) + \frac{1}{2} \cdot \frac{5}{4} = - \frac{15}{8}.
+  \]
+  \end{incremental}
+  
+  \tab{Lösung b)}
+  Die Riemannsche Zwischensumme berechnet sich zu
+  \[
+  S(Z;0, 1, 3) = (1-0) f(0) + (\frac{5}{2}-1)\cdot f(1) + (3-\frac{5}{2})\cdot f(3) = 1 \cdot 0 + \frac{3}{2}\cdot (-1) + \frac{1}{2} \cdot 3 = 0.
+  \]
+  
+  \tab{Lösung c)}
+  Mit dem \ref[link1][Hauptsatz zur Differential- und Integralrechnung]{thm:fundamental} erhalten wir
+  \[
+  \int_0^3 f(x)\, dx  = \left[\frac{1}{3}x^3-x^2\right]_0^3 = \frac{1}{3} \cdot 27 - 9 = 0.
+  \]
+  \tab{Lösung d)}
+  Aus dem Vorlesungstext wissen wir
+  \[
+  U(Z) \leq \int_0^3 f(x)\, dx \leq O(Z)
+  \]
+  und
+  \[
+  U(Z)\leq S(Z;0, 1, 3) \leq O(Z).
+  \]
+  In diesem Beispiel sind die Ungleichungen gültig. Dass die Zwischensumme gleich dem Integral ist,
+  liegt an der speziellen Wahl der Zerlegung und der Zwischenstellen.
+  Die Zerlegung ist weder äquidistant noch sind die Zwischenstellen äquidistant verteilt.
+  
+  Das Beispiel zeigt, dass es möglich ist, Zerlegungen und Zwischenstellen zu wählen, sodass der Integralwert
+  genau gleich ist oder diesen zumindest sehr gut approximieren kann.
+  Das setzt aber voraus, dass man die Funktion schon gut kennt.
+  \end{tabs*}
+
+
+\end{content}

@@ -1,0 +1,115 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A04: Integrierbarkeit}
+    \lang{en}{Aufgabe 4}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{description}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/10588}{Ticket 10588}
+\end{block}
+
+\lang{de}{
+	\title{A04: Integrierbarkeit}
+}
+
+\begin{problem}
+% 	
+
+     \begin{question}
+     
+     \begin{variables}
+%      $a1\in \{ 0,\ldots, 3\}$, $b1\in \{ 5,\ldots, 10\}$, $c1\in \{-3,\ldots, 3\}\setminus \{0\}$, 
+% $c2\in \{0,\ldots, 8\}$\\
+% $f1=\frac{c1}{x^2-c_2^2}$, $con1=(a1-c2)(b1-c2)$.
+% 
+% $i\in \{-3,\ldots, 3\}$, $j\in \{ 1,\ldots, 4\}$, $a2=\frac{i\cdot \pi}{2}$, $b2=\frac{(i+j)\cdot \pi}{2}$,\\
+% $m=(a2+b2)/2$.
+% 
+% $b3 \in \{ 1,\ldots, 6\}$, $a3=-b3$, $c0\in \{-3,\ldots, 3\}\setminus \{0\}$, $c=b+c0$,\\
+% $k\in \{0,1\}$, $con3=k\cdot c0$,\\
+% $f3=k\cdot \ln(|x-c|)+(1-k)\cdot \exp(-1/|x-c|)$.
+			\randint{a1}{0}{3}
+			\randint[Z]{b1}{5}{10}
+			\randint[Z]{c1}{-3}{3}
+
+			\randint{c2}{0}{8}
+			\function[expand,normalize]{f1}{c1/(x^2-c2^2)}
+			\function[calculate]{con1}{(a1-c2)*(b1-c2)}
+
+			
+			\randint{i}{-3}{3}
+			\randint[Z]{j}{1}{4}
+			\function[normalize]{a2}{(i*pi)/2}
+			\function[normalize]{b2}{((i+j)*pi)/2}
+			\function[normalize]{m}{(a2+b2)/2}
+			
+			\randint[Z]{b3}{3}{6}
+			\function[calculate]{a3}{-b3}
+			\randint[Z]{c0}{-3}{3}
+
+			\function[calculate]{c}{b3+c0}
+			\randint{k}{0}{1}
+			\function[calculate]{con3}{k*c0}
+
+			\function[expand,normalize]{f3}{k*ln(abs(x-c))+(1-k)*(e^(-1/abs(x-c)))}
+     
+     
+     
+     \end{variables}
+     \field{rational}
+      
+     \lang{de}{ 
+      	\text{Existieren die folgenden Integrale?}
+      }
+    	\type{mc.yesno}
+        \permutechoices{1}{3}
+		\begin{choice}
+  			\text{$\int_{\var{a1}}^{\var{b1}} \var{f1} \, dx$} % Antwort ist ja, wenn $\var{con1}>0$.
+  			\solution{compute}
+  			 \iscorrect{con1}{>}{0}
+             \explanation[con1 > 0]{Die Definitionslücke der rationalen Funktion liegt außerhalb des Integrationsbereichs. Auf dem Integrationsbereich ist der Integrand beschränkt und stetig.}
+             \explanation[con1 <= 0]{Die Definitionslücke der rationalen Funktion liegt innerhalb des Integrationsbereichs.}
+		\end{choice}
+		\begin{choice}
+			\text{$\int_{\var{a2}}^{\var{b2}} f(x)\, dx$ mit $f(x)=\left\{ \begin{mtable}[\cellaligns{cc}] \cos(x) & \var{a2}\leq x\leq \var{m}, \\
+\sin(x) \quad & \var{m}< x\leq \var{b2}. 
+\end{mtable} \right.$}
+  			\solution{true}
+            \explanation{Die Funktion $f$ ist beschränkt und stückweise stetig.}
+		\end{choice}
+		\begin{choice}
+			\text{$\int_{\var{a3}}^{\var{b3}} g(x)\, dx$ mit $g(x)=\left\{ \begin{mtable}[\cellaligns{cc}] \var{f3} & x\neq \var{c}, \\
+0 \quad & x=\var{c}. 
+\end{mtable} \right.$}
+  			\solution{compute}
+  			 \iscorrect{con3}{>=}{0}  %Antwort ist ja, wenn $\var{con3}\geq 0$.
+             \explanation[con3 >= 0]{Die Funktion $g$ ist beschränkt und stetig auf dem Integrationsbereich.}
+             \explanation[con3 < 0]{Die Funktion $g$ hat zwar keine Definitionslücke, sie ist aber unbeschränkt.}
+		\end{choice}
+    \end{question}
+
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

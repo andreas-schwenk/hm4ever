@@ -1,0 +1,153 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A05: Vergleich Zinsarten}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A05: Vergleich Zinsarten}}
+\lang{en}{\title{A05: Comparison of interest types}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22679}{Ticket 22679}
+\end{block}
+
+
+\usepackage{mumie.genericproblem}
+
+
+\begin{problem}
+     \begin{variables}
+        \randint{p}{1}{5}
+        \randint{n}{3}{7}
+        \randint{mal}{2}{3}
+        \function[calculate]{k0}{mal*10000}
+        \function[calculate,2]{ke}{k0*(1+n*p/100)}
+        \function[calculate,2]{k1}{k0*(1+p/100)^n}
+        \function[calculate,2]{k2}{k0*(1+p/200)^(2*n)}
+        \function[calculate,2]{k4}{k0*(1+p/400)^(4*n)}
+        \function[calculate,2]{ks}{k0*e^(n*p/100)}
+     \end{variables}
+     
+
+        \begin{question}
+          \type{input.number}
+          \lang{de}{\text{Ein Sparer legt $\var{k0}$\euro bei einer Bank 
+          zu $\var{p}$\% Zinsen für $\var{n}$ Jahre an. 
+          Welchen Betrag erhält er bei:\\
+         \begin{itemize}
+          \item[\textbf{(a)}]
+          einfacher Verzinsung: $K_e=$\ansref \euro\\
+         \item[\textbf{(b)}]
+         bei unterjähriger Verzinsung:  $K_{\var{n};1}=$ \ansref \euro\\
+         bei halbjährlicher Verzinsung:  $K_{\var{n};2}=$ \ansref \euro\\
+         bei quartalsmäßiger Verzinsung: $K_{\var{n};4}=$ \ansref \euro \\
+         \item[\textbf{(c)}]
+         bei stetiger Verzinsung: $K_s=$ \ansref \euro
+         \end{itemize}
+       }}
+       \lang{en}{\text{A customer deposits $\var{k0}$\euro with a bank 
+          at $\var{p}$\% interest for $\var{n}$ years. 
+          What amount will he have assuming:\\
+           \begin{itemize}
+          \item[\textbf{(a)}]
+          simple interest: $K_e=$\ansref \euro\\
+         \item[\textbf{(b)}]
+         annually compounded interest: $K_{\var{n};1}=$ \ansref \euro\\
+         half-yearly compounded interest: $K_{\var{n};2}=$ \ansref \euro\\
+         quarterly compounded interest: $K_{\var{n};4}=$ \ansref \euro \\
+         \item[\textbf{(c)}]
+         continuous interest: $K_s=$ \ansref \euro
+         \end{itemize}
+       }}
+       
+       
+       
+       \begin{answer}
+                    \solution{ke}
+               \end{answer}
+            \begin{answer}
+                \solution{k1}
+            \end{answer}
+            \begin{answer}
+                \solution{k2}
+            \end{answer}
+            \begin{answer}
+                \solution{k4}
+            \end{answer}
+            \begin{answer}
+               \solution{ks}
+            \end{answer}
+               \lang{de}{\explanation[edited(ans_1)]{Die anfallenden Zinsen müssen nur addiert werden.}}
+               \lang{en}{\explanation[edited(ans_1)]{The accrued interest only has to be added}}
+               %$K_e=\var{k0}(1+\frac{\var{n}\cdot\var{p}}{100})=\var{ke}$\euro
+               \lang{de}{\explanation[edited(ans_2)]{Achten Sie darauf, wie oft verzinst wird.}}
+               \lang{en}{\explanation[edited(ans_2)]{Pay attention to how often interest is paid}}
+               %Es ist: 
+         %\begin{eqnarray*}
+         %K_{\var{n};1}&=&\var{k0}(1+\frac{\var{p}}{100})^{\var{n}}=\var{k1}\text{ \euro}\\
+         %K_{\var{n};2}&=&\var{k0}(1+\frac{\var{p}}{200})^{\var{n}\cdot 2}=\var{k2}\text{ \euro}\\
+         %K_{\var{n};4}&=&\var{k0}(1+\frac{\var{p}}{400})^{\var{n}\cdot 4}=\var{k4}\text{ \euro}
+        %\end{eqnarray*}                     
+         
+                \lang{de}{\explanation[edited(ans_5)]{Hier muss ein exponentieller Term ausgewertet werden.}}
+                \lang{en}{\explanation[edited(ans_5)]{An exponential term must be evaluated here.}}
+                %$K_s=\var{k0}\cdot e^{\frac{\var{p}\cdot\var{n}}{100}}=\var{ks}$ \euro
+        \end{question}
+          
+  %      \begin{question}
+  %       \type{input.number}
+  %       \text{\\bei unterjähriger Verzinsung:  $K_{\var{n};1}=$ \ansref \euro\\
+  %       bei halbjährlicher Verzinsung:  $K_{\var{n};2}=$ \ansref \euro\\
+  %       bei quartalsmäßiger Verzinsung: $K_{\var{n};4}=$ \ansref \euro
+  %        }
+  %       \begin{answer}
+  %         \solution{k1}
+  %       \end{answer}
+  %       \begin{answer}
+  %         \solution{k2}
+  %       \end{answer}
+  %       \begin{answer}
+  %         \solution{k4}
+  %       \end{answer}
+  %       \explanation{Es ist: 
+  %       \begin{eqnarray*}
+  %       K_{\var{n};1}&=&\var{k0}(1+\frac{\var{p}}{100})^{\var{n}}=\var{k1}\text{ \euro}\\
+  %       K_{\var{n};2}&=&\var{k0}(1+\frac{\var{p}}{200})^{\var{n}\cdot 2}=\var{k2}\text{ \euro}\\
+  %       K_{\var{n};4}&=&\var{k0}(1+\frac{\var{p}}{400})^{\var{n}\cdot 4}=\var{k4}\text{ \euro}
+  %       \end{eqnarray*}                     
+  %       }
+  %     \end{question}
+  %     
+  %     \begin{question}
+  %         \type{input.number}
+  %         \text{\\bei stetiger Verzinsung: $K_s=$\ansref \euro}
+  %         \begin{answer}
+  %             \solution{ks}
+  %         \end{answer}
+  %      \explanation[edited(ans_1)]{$K_s=\var{k0}\cdot e^{\frac{\var{p}\cdot\var{n}}{100}}=\var{ks}$ \euro}
+  %      \end{question}
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

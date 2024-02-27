@@ -1,0 +1,113 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+  \lang{en}{...}
+  \lang{de}{QuadratKomplex}
+  \lang{zh}{...}
+  \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+   \begin{components}
+     \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+   \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/32299}{Ticket 32299}
+\end{block}
+\begin{block}[annotation]
+Copy of : /home/mumie/checkin/content/playground/HM4mint-Testaufgaben/T203_komplexe_Zahlen/prb_jsx_komplex.src.tex
+\end{block}
+
+\begin{block}[annotation]
+(Dagmar Schumacher)\\
+Copy of : /home/mumie/checkin/content/playground/Dagmar_Schumacher/prb_komplexjsx.src.tex
+\end{block}
+
+  \usepackage{mumie.genericproblem}
+  
+  \begin{visualizationwrapper}
+
+\title{Quadrat einer komplexen Zahl}
+
+\begin{genericJSXVisualization}
+  \begin{variables}
+      \question{1}{x}{real}
+      \question{1}{y}{real}
+      %%%
+      \point{z1}{real}{x,y}
+      \vector{v1}{real}{z1}
+      \point[editable]{R}{real}{-2.5,-1}
+      %\vector[editable]{v2}{real}{R} 
+      %%%
+      \number{Rx}{real}{R[x]}
+      \number{Ry}{real}{R[y]}
+  \end{variables}
+  
+  \color{v1}{#000077} %quite dark blue
+  \color{z1}{#000077} %quite dark blue
+  \color{R}{GREEN}
+  \label{z1}{z}
+  \label{R}{z_quadrat}
+  \answer{Rx}{1,1}
+  \answer{Ry}{1,2}
+
+  	\begin{canvas}
+    \snapToGrid{0.1,0.1}
+		\plotSize{300,300}
+		\plotLeft{-3.5}
+		\plotRight{3.5}
+		\plot[coordinateSystem,showPointCoords]{z1,v1,R}
+	\end{canvas}
+
+\end{genericJSXVisualization}
+
+\end{visualizationwrapper}
+
+\begin{problem}
+  \begin{question}
+  \begin{variables}
+    \randint{x}{-1}{1}
+    \randint[Z]{y}{-1}{1} % y=0 darf nicht sein bei der Berechnung von phi 
+    \function[calculate]{px}{(x^2+y^2)*cos(2*acos(x/(x^2+y^2)^0.5)*y/abs(y))}  %r^2cos(2*phi)
+    \function[calculate]{py}{(x^2+y^2)*sin(2*acos(x/(x^2+y^2)^0.5)*y/abs(y))}  %r^2sin(2*phi)
+    \function[normalize]{z}{x+y*i}   
+  \end{variables}
+  \correctorprecision{1}
+  \precision{1}
+    \text{Berechnen Sie graphisch zu $z=\var{z}$ das Quadrat $z^2$, indem Sie 
+          den grünen Punkt an die Koordinaten von $z^2$ in der Gaußschen
+          Zahlenebene ziehen.}
+% \debug[px,py]  
+  \explanation{Betrachten Sie die Polarkoordinaten-Darstellung von 
+              $z=|z|\cdot(cos(\phi)+i \cdot sin(\phi))$ zur graphischen Bestimmung von $z^2$. 
+              Wie verändert sich der Winkel $\phi$ und welche Länge hat $z^2$?
+           %  Der Winkel $\phi$ von $z$ muss verdoppelt werden, der Betrag $r$ muss quadriert werden. 
+              }
+   \begin{answer}
+      \type{graphics.number}
+      \solution{px}
+     \end{answer}
+    \begin{answer}
+      \type{graphics.number}
+      \solution{py}
+     \end{answer} 
+   \end{question}     
+\end{problem}
+
+ \embedmathlet{gwtmathlet}
+  
+\end{content}

@@ -1,0 +1,104 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A05: Newton}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A05: Newton}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/10408}{Ticket 10408}
+\end{block}
+
+\begin{problem}
+
+	\begin{variables}
+		
+			\randint[Z]{az}{-6}{-2}
+			\randint[Z]{an}{2}{5}
+			\function{a}{az/an}
+		
+			\randint[Z]{b0}{1}{4}
+			\function{b}{b0/2}
+		
+			\randint[Z]{c0}{3}{6}
+			\function{c}{c0/2}
+		
+			\randint[Z]{d}{1}{4}
+			
+			\function[expand,normalize]{f}{(x-a)*(x-b)*(x-c)*(x-d)}
+			\derivative[normalize]{f1}{f}{x}
+			
+			\function{g}{x-(f/f1)}
+			
+			\function[calculate]{x1}{floor(a)-1}
+			\substitute{x2}{g}{x}{x1}
+			\substitute{x3}{g}{x}{x2}
+			
+	\end{variables}
+
+	\begin{question}	
+		
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++
+		
+		\type{input.function} 
+		\field{rational}
+	    \lang{de}{\text{Wir betrachten das Newton-Verfahren zur Bestimmung einer Nullstelle der Funktion $f=\var{f}$.
+Geben Sie die Rekursionsformel für das Newton-Verfahren an (schreiben sie lediglich $x$ statt $x_n$). }}
+    	\explanation{Wenden sie die Rekursionsformel des Newton-Verfahrens auf die gegebene Funktion an.}
+
+	    \begin{answer}
+	    	\text{$x_{n+1}= $}
+			\solution{g}
+			\checkAsFunction{x}{-10}{10}{100} 
+	    \end{answer}  
+    
+	\end{question}
+	 
+	\begin{question}	
+		
+		\type{input.number} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+		\field{real}
+		\precision{3}
+		
+	    \lang{de}{\text{ Berechnen Sie die Folgeglieder $x_2$ und $x_3$ (auf drei Stellen nach dem Komma), wenn $x_1=\var{x1}$ ist.}}
+    	\explanation{Wenden sie die Rekursionsformel des Newton-Verfahrens auf die gegebene Funktion an.}
+
+	    \begin{answer}
+	    
+		\text{$x_{2}= $}
+			\solution{x2}
+		\end{answer}
+
+		\begin{answer}
+	    
+		\text{$x_{3}= $}
+			\solution{x3}
+		\end{answer}  
+    
+	\end{question}   
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

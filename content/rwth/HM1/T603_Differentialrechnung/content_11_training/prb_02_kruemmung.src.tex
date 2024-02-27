@@ -1,0 +1,99 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A02: Krümmungsverhalten}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A02: Krümmungsverhalten}}
+\lang{en}{\title{A02: Concavity}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24028}{Ticket 24028}
+\end{block}
+\usepackage{mumie.genericproblem}
+
+
+\embedmathlet{gwtmathlet}
+
+\begin{problem}
+        \begin{variables}
+            \randint{a}{1}{4}
+            \function{f}{x^4/12+a*x^3+4,5*x} %f''(x)=x^2+6ax
+            \function[calculate]{sol}{-6*a}
+        \end{variables}
+        \begin{question}
+            \lang{de}{\text{Bestimmen Sie das Krümmungsverhalten der Funktion $f(x)=\var{f}$.\\
+            Auf welchem Bereich ist die Funktion rechtsgekrümmt?}}
+            \lang{en}{\text{Determine the concavity of the function $f(x)=\var{f}$.\\
+            For which $x$ is the function concave down?}}
+            \lang{de}{\explanation{$f''(x)$ ist für die Krümmung ausschlaggebend.}}
+            \lang{en}{\explanation{$f''(x)$ determines the concavity.}}
+            \begin{answer}
+                \type{mc.unique}
+                \begin{choice}
+                    \text{$x>0$}
+                    \solution{false}
+                \end{choice}
+                \begin{choice}
+                    \text{$\var{sol}<x<0$}
+                    \solution{true}
+                \end{choice}
+                \begin{choice}
+                    \text{$x<\var{sol}$}
+                    \solution{false}
+                \end{choice}
+            \end{answer}
+        \end{question}
+        
+        \begin{question}
+            \lang{de}{\text{Im Bereich der Rechtskrümmung ist die Funktion $f(x)$:}}
+            \lang{en}{\text{Wherever it is concave down, the function $f(x)$ is:}}
+            \lang{de}{\explanation{Zusätzlich zur Krümmung muss noch die Monotonie der Funktion
+            berücksichtigt werden.}}
+            \lang{en}{\explanation{In addition to concavity, the monotonicity of the function
+            must be taken into account}}
+            \begin{answer}
+                \type{mc.unique}
+                \begin{choice}
+                    \lang{de}{\text{progressiv steigend}}
+                    \lang{en}{\text{growing increasingly quickly}}
+                    \solution{false}
+                \end{choice}
+                \begin{choice}
+                    \lang{de}{\text{progressiv fallend}}
+                    \lang{en}{\text{falling increasingly quickly}}
+                    \solution{false}
+                \end{choice}
+                \begin{choice}
+                    \lang{de}{\text{degressiv steigend}}
+                    \lang{en}{\text{growing increasingly slowly}}
+                    \solution{true}
+                \end{choice}
+                \begin{choice}
+                    \lang{de}{\text{degressiv fallend}}
+                    \lang{en}{\text{falling increasingly slowly}}
+                    \solution{false}
+                \end{choice}
+            \end{answer}
+        \end{question}
+
+\end{problem}
+
+\end{content}

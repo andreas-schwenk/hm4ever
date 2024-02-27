@@ -1,0 +1,72 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A06: komplexe Potenzen}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21512}{Ticket 21512}
+\end{block}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A06: komplexe Potenzen}}
+
+     \begin{problem}
+     
+        \begin{variables}
+            \randint[Z]{a}{2}{5}
+            \function[expand,normalize]{z}{a*exp(i*pi)}
+            \function{z2}{a^2}
+            %\function[calculate, expand,normalize]{z3}{a^3*e^(i*pi)}
+            \function{z3}{a^3*e^(i*pi)}
+            \function[calculate]{z3b}{a^3*e^(i*pi)}
+            \function[expand,normalize]{r3}{a^3}
+        \end{variables}
+        
+        \begin{question}
+               \type{input.function}
+               \field{complex}
+               \text{Berechnen Sie zu $z=\var{a}e^{i\pi}$ das Quadrat sowie die dritte Potenz:\\
+               $z^2=$\ansref \\
+               $z^3=$\ansref
+               }
+               \begin{answer}
+                    \solution{z2}
+                    \inputAsFunction{x}{antwort2}
+                    \checkFuncForZero{z2-antwort2}{1}{2}{1}
+               \end{answer}
+               \begin{answer}
+                    \solution{z3b}
+                    \inputAsFunction{x}{antwort3}
+                    \checkStringsForRelation{equal(antwort3,z3) OR equal(antwort3,z3b)}
+                    %\checkFuncForZero{z3-antwort3}{1}{2}{1}
+               \end{answer}               
+               \explanation{Für $z^2$ gilt $r=\var{a}^2$ und $\phi=2\pi$, also ist das Quadrat
+               eine reelle Zahl. Für $z^3$ gilt $r=\var{a}^3$ und $\phi=3\pi$. 
+               Dies ist wie $\phi=\pi$ und entspricht einer negativen, reellen Zahl, also $z^3=-\var{r3}$.}
+          \end{question}
+          
+     \end{problem}
+
+
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

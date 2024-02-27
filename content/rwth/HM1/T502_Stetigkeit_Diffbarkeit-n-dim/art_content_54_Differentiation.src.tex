@@ -1,0 +1,876 @@
+
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{Mehrdimensionale Differentiation}
+   }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \begin{components}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T502_Affensattel.meta.xml}{T501_Affensattel}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T502_WeirdExample.meta.xml}{T501_WeirdExample}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T502_Surface_B.meta.xml}{T501_Surface_B}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T502_Surface_A.meta.xml}{T501_Surface_A}
+\end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T301_Differenzierbarkeit/g_art_content_03_hoehere_ableitungen.meta.xml}{content_03_hoehere_ableitungen}
+\link{generic_article}{content/rwth/HM1/T106_Differentialrechnung/g_art_content_22_extremstellen.meta.xml}{content_22_extremstellen}
+\link{generic_article}{content/rwth/HM1/T502_Stetigkeit_Diffbarkeit-n-dim/g_art_content_54_Differentiation.meta.xml}{content_54_Differentiation}
+\link{generic_article}{content/rwth/HM1/T501_Orientierung_im_n-dim_Raum/g_art_content_52_Abstaende.meta.xml}{content_52_Abstaende}
+\link{generic_article}{content/rwth/HM1/T303_Approximationen/g_art_content_04_taylor_polynom.meta.xml}{content_04_taylor_polynom}
+\end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21496}{Ticket 21496}
+\end{block}
+\usepackage{mumie.ombplus}
+\ombchapter{2}
+\ombarticle{2}
+\usepackage{mumie.genericvisualization}
+\lang{de}{\title{Mehrdimensionale Differentiation}}
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+Die Eigenschaften mehrdimensionaler Funktionen, die wir bisher betrachtet haben, 
+entstanden in kompletter Analogie zu denen eindimensionaler Funktionen. 
+Für die Differenzierbarkeit benötigen wir nun zum ersten Mal wirklich tiefergehende Betrachtungen.
+Das hat einen anschaulichen Grund. 
+Unsere geometrische Deutung der Differenzierbarkeit einer reellen Funktion $f:\R\to\R$ in $a\in\R$ ist das Anlegen einer eindeutig bestimmten Tangenten an den Funktionsgraphen im Punkt $(a,f(a))$.
+Betrachten wir nun zum Beispiel den Graphen einer Funktion $f:\R^2\to\R$, so erhalten wir ein \glqq Funktionsgebirge\grqq{}. 
+Daran können wir in einem Punkt viele Tangenten legen. Welche davon soll(en) unserem Ableitungsbegriff entsprechen?
+Der Antwort darauf werden wir uns im Folgenden Schritt für Schritt annähern.
+\begin{center}
+\begin{figure}
+\image[500]{T501_Surface_A}
+\caption{$f(x_1,x_2)=(x_1^2+2x_2^2)e^{1-x_1^2-x_2^2}$}
+\end{figure}
+\end{center}
+\section{Richtungsableitung und partielle Ableitungen}
+Zunächst betrachten wir einen Begriff, der dem uns vertrauten Begriff eindimensionaler Differentiation am nächsten kommt. 
+Wir beschränken uns dabei nämlich auf eine Richtung. 
+%%
+\begin{definition}[Richtungsableitung]\label{def:richtungsableitung}
+Es sei $M\subset\R^n$ eine offene Teilmenge und $f:M\to\R^m$ eine Funktion. 
+Weiter sei $a\in M$ und $v\in \R^n\setminus\{0\}$.
+Wir wählen $\rho>0$ so, dass die Strecke $\{a+tv\mid \vert t\vert<\rho\}\subset M$ ganz in $M$ liegt, und definieren die Kurve
+\[\varphi_{a,v}:(-\rho;\rho)\to\R^m, \quad t\mapsto\varphi_{a,v}(t)=f(a+tv).\]
+Wenn der Grenzwert
+\[\text{D}_vf(a):=\varphi_{a,v}'(0)=\lim_{h\to 0}\frac{f(a+hv)-f(a)}{h}\]
+existiert, so nennen wir $\text{D}_vf(a)$ die \notion{Richtungsableitung} von $f$ im Punkt $a$ in Richtung $v$.
+\begin{center}
+\begin{figure}
+\image[500]{T501_Surface_B}
+\caption{$f(x_1,x_2)=(x_1^2+2x_2^2)e^{1-x_1^2-x_2^2}$}
+\end{figure}
+\end{center}
+\end{definition}
+
+\begin{remark}\label{rem:normierte_richtungsableitungen}
+\begin{itemize}
+\item Die Richtungsableitung einer Funktion in einem Punkt in Richtung $v$ hängt also von zwei Größen ab,
+der Raumrichtung von $v$ und von der Länge von $v$. 
+\item
+Oft ist es sinnvoll, Richtungsableitungen in normierte Richtungen zu betrachten, also den Vektor $v$ zu normieren 
+$\tilde{v}=\frac{v}{\Vert v\Vert}$ mit $\Vert \tilde{v}\Vert=1$. Denn dann kann man Ableitungen in verschiedene Richtungen miteinander vergleichen und z.B.
+Aussagen darüber treffen, in welcher Richtung die Funktion am steilsten ansteigt.
+Dazu muss man  eine  Norm festlegen, bezüglich der man diesen Vergleich anstellen möchte.
+\end{itemize}
+
+\end{remark}
+%%
+\begin{example}\label{ex:1_richtungsableitung}
+Es sei $f:\R^2\to\R$, $x\mapsto x_1e^{x_2}-\sin(x_1^2x_2^3)$.
+\begin{enumerate}
+\item[(i)]
+Für $a=\begin{pmatrix}0\\0\end{pmatrix}$ und die Richtung $v=\begin{pmatrix}1\\2\end{pmatrix}$ ist 
+$\varphi_{a,v}(t)=f(a+tv)=te^{2t}-\sin(8t^5)$ differenzierbar auf $\R$ mit Ableitung
+\[\varphi_{a,v}'(t)=e^{2t}+2te^{2t}-\cos(8t^5)\cdot 40t^4.\]
+Insbesondere ist $\varphi_{a,v}'(0)=1$ und damit existiert die Richtungsableitung von $f$ in 
+$a=\begin{pmatrix}0\\0\end{pmatrix}$ in Richtung $v=\begin{pmatrix}1\\2\end{pmatrix}$ 
+und ist gleich $\text{D}_v f(\begin{pmatrix}0\\0\end{pmatrix})=1$.
+\item[(ii)] Für beliebiges $a=\begin{pmatrix}a_1\\a_2\end{pmatrix}\in\R^2$ und die Richtung $v=e_1=\begin{pmatrix}1\\0\end{pmatrix}$
+gilt
+\begin{align*}
+\varphi_{a,e_1}(t)&=(a_1+t)e^{a_2}-\sin((a_1+t)^2a_2^3)\\
+\varphi_{a,e_1}'(t)&=e^{a_2}-\cos((a_1+t)^2a_2^3)\cdot 2(a_1+t)a_2^3.
+\end{align*}
+Also ist $\text{D}_{e_1}f(a)=e^{a_2}-2a_1a_2^3\cos(a_1^2a_2^3)$.
+\item[(iii)]
+Für  beliebiges $a=\begin{pmatrix}a_1\\a_2\end{pmatrix}\in\R^2$ und die Richtung $v=e_2=\begin{pmatrix}0\\1\end{pmatrix}$
+gilt
+\begin{align*}
+\varphi_{a,e_2}(t)&=a_1e^{a_2+t}-\sin(a_1^2(a_2+t)^3)\\
+\varphi_{a,e_2}'(t)&=a_1e^{a_2+t}-\cos(a_1^2(a_2+t)^3)\cdot a_1^2\cdot 3(a_2+t)^2.
+\end{align*}
+Also ist $\text{D}_{e_2}f(a)=a_1e^{a_2}-3a_1^2a_2^2\cos(a_1^2a_2^3)$.
+\end{enumerate}
+\end{example}
+%Video
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10775&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+
+%%
+\begin{quickcheck}
+\type{input.function}
+  \field{rational}
+ 
+  \begin{variables}
+  \function[calculate]{D}{6}
+  \end{variables}
+\text{Bestimme die Richtungsableitung der Funktion $f:\R^2\to\R$, 
+$x\mapsto 2 x_1+x_2^2$ im Punkt $a=\begin{pmatrix}1\\1\end{pmatrix}$ in Richtung 
+$v=\begin{pmatrix}1\\2\end{pmatrix}$.
+Es ist $\text{D}_{v}f(a)=$\ansref.}
+\begin{answer}
+\solution{D}
+\end{answer}
+\explanation{Es ist $\text{D}_{v}f(a)=\lim_{h\to 0}\frac{f(a+hv)-f(a)}{h}=\lim_{h\to 0}\frac{2(1+h)+(1+2h)^2-3}{h}=6$.}
+\end{quickcheck}
+%%
+\begin{example}[Ein seltsames Beispiel]\label{ex:2_richtungsableitung}
+\begin{center}
+\image[500]{T501_WeirdExample}
+\end{center}
+Wir setzen $g:\R^2\to\R$,
+\[x\mapsto g(x)=\left\{\begin{matrix}0,& \text{ falls } x_1=0 \text{ oder } x_2=0,\\
+1&\text{ sonst.}\end{matrix}\right.\]
+in $a=\begin{pmatrix}0\\0\end{pmatrix}$ ist $g$ nicht stetig, zum Beispiel ist
+$\lim_{t\to 0}g(\begin{pmatrix}t\\t\end{pmatrix})=1$, aber $g(a)=0$.
+\\
+Trotzdem existieren die Richtungsableitungen in Richtung $e_1$ und $e_2$ im Punkt $a$:
+Es ist $\varphi_{a,e_1}(t)=g(te_1)=0$ für alle $t\in\R$, und ebenso $\varphi_{a,e_2}(t)=g(te_2)=0$.
+Somit ist auch $\text{D}_{e_1}g(a)=0=\text{D}_{e_2}g(a)$.
+
+%Video
+\center{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10778&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+\end{example}
+
+
+%%
+Eine Richtungsableitung in Richtung $v$ beschreibt also, wie sich die Funktion in Richtung $v$ ändert. 
+Über die anderen Richtungen wird dabei gar keine Aussage gemacht.
+Das obige Beispiel \ref{ex:2_richtungsableitung} zeigt dies sehr anschaulich: Entlang der Koordinatenachsen ist die Funktion identisch null, 
+also ändert sie sich entlang der Koordinatenachsen nicht und die entsprechenden
+Richtungsableitungen verschwinden. Hier existieren aber die Ableitungen in andere Richtungen als $e_1$ und $e_2$ (in null) nicht, 
+denn dort stürzt die Funktion $g$ jäh ab.
+%%
+\begin{remark}\label{rem:berechnung_richtungsableitung}
+Betrachten wir noch einmal das Beispiel \ref{ex:1_richtungsableitung} mit
+\[f(x)=x_1e^{x_2}-\sin(x_1^2x_2^3),\]
+dann gibt es folgende Alternative zur Berechnung der Richtungsableitungen mit $v=e_1$ bzw. $v=e_2$ im Punkt $a\in\R^2$.
+\begin{itemize}
+\item
+Für festen \glqq Parameter\grqq{} $x_2$ leitet man die Funktion
+\[x_1\mapsto x_1e^{x_2}-\sin(x_1^2x_2^3)\]
+in der Variablen $x_1$ ab (Ergebnis: $e^{x_2}-2x_1x_2^3\cos(x_1^2x_2^3)$) und ersetzt $x$ durch $a$.
+Das liefert $\text{D}_{e_1}f(a)$.
+\item
+Ebenso in Richtung $e_2$: Für festen \glqq Parameter\grqq{} $x_1$ leitet man die Funktion
+\[x_2\mapsto x_1 e^{x_2}-\sin(x_1^2x_2^3)\]
+in der Variablen $x_2$ ab (Ergebnis: $x_1e^{x_2}-3x_1^2x_2^2\cos(x_1^2x_2^3)$) und ersetzt $x$ durch $a$.
+Das liefert $\text{D}_{e_2}f(a)$.
+\end{itemize}
+Dahinter steckt ein allgemeines Prinzip, auf das wir gleich zurückkommen.
+\end{remark}
+Im Folgenden bezeichnet $e_1,\ldots,e_n$ stets die Standardbasis des $\R^n$. 
+Die Richtungsableitung in Richtung $e_k$ nennt man auch die partielle Ableitung bezüglich der Variablen $x_k$. Genauer:
+\begin{definition}[Partielle Differenzierbarkeit]\label{def:part_abl}
+Es sei $M\subset\R^n$ offen, $a=(a_1,\ldots,a_n)^T\in M$ und $f:M\to\R^m$ eine Funktion.
+\begin{enumerate}
+\item[(i)]
+Die Funktion $f$ heißt \notion{partiell differenzierbar bezüglich der $k$-ten Koordinate}, $k=1,\ldots,n$, im Punkt $a$
+wenn die Richtungsableitung in Richtung $e_k$ in $a$ existiert
+\begin{align*}
+\text{D}_k f(a)&:=\frac{\partial f}{\partial x_k}(a):= \text{D}_{e_k}f(a)\\
+&=\lim_{t\to a_k}\frac{f((a_1,\ldots,a_{k-1},t,a_{k+1},\ldots,a_n)^T)-f(a)}{t-a_k}\\
+&= \lim_{h\to 0}\frac{f(a+he_k)-f(a)}{h}.
+\end{align*}
+Insbesondere ist $\text{D}_kf(a)\in\R^m$, und $\text{D}_kf(a)=\frac{\partial f}{\partial x_k}(a)$ berechnet sich als Ableitung nach $x_k$ der Funktion $f$, die in den anderen Koordinaten festgehalten wird.
+\item[(ii)]
+Die Funktion $f$ heißt \notion{partiell differenzierbar} in $a\in M$, wenn alle partiellen Ableitungen $\text{D}_k f(a)$, $k=1,\ldots,n$, existieren.
+Die Funktion $f$ heißt partiell differenzierbar (auf ganz $M$), wenn sie in jedem Punkt $a\in M$ partiell differenzierbar ist.
+\\
+Die Funktionen $\text{D}_k f:M\to\R^m$ heißen dann die \notion{partiellen Ableitungen} von $f$.
+Existieren alle partiellen Ableitungen auf $M$, dann setzt man für $x\in M$
+\[\text{D} f(x):=\big(\text{D}_1 f(x),\ldots,\text{D}_n f(x)\big)\in M(m,n;\R).\]
+Die Matrix $\text{D}f(x)$ heißt \notion{Funktionalmatrix}, oder \notion{Jacobi-Matrix} oder das
+\notion{Differential} von $f$ an der Stelle $x$.
+\item[(iii)]
+Die Funktion $f$ heißt \notion{stetig partiell differenzierbar} in $a\in M$, 
+wenn $f$ auf einer Umgebung $U(a)\subset M$ von $a$ partiell differenzierbar ist
+und alle so entstehenden partiellen Ableitungsfunktionen stetig sind in $a$.
+Ebenso heißt $f$ stetig partiell differenzierbar (auf ganz $M$), wenn $f$ in jedem Punkt $a\in M$ stetig partiell differenzierbar ist.
+\end{enumerate}
+\end{definition}
+Im eindimensionalen Fall, also $n=m=1$, stimmt der Begriff der partiellen Differenzierbarkeit mit dem Differenzierbarkeitsbegriff in einer Variablen überein.
+%%
+\begin{example}
+Wir betrachten die Funktion $f:\R^2\to\R$, $x\mapsto x_1^2x_2$.
+Für die partielle Ableitung von $f$ nach $x_1$ nehmen wir $x_2$ als Konstante an. Dann ist $f(x)$ ein Polynom in $x_1$, also differenzierbar.
+Analog verfahren wir für $\text{D}_2f(x)$. Wir finden so die partiellen Ableitungen
+\[\text{D}_1f(x)=\frac{\partial f}{\partial x_1}(x)=\frac{\partial x_1^2x_2}{\partial x_1}=2x_1x_2
+\quad\text{ und }\quad 
+\text{D}_2f(x)=\frac{\partial f}{\partial x_2}(x)=\frac{\partial x_1^2x_2}{\partial x_2}=x_1^2.\]
+Die Jacobi-Matrix in $a=(1,1)^T$ ist damit
+\[\text{D}f(a)=\begin{pmatrix} 2x_1x_2&x_1^2\end{pmatrix}\mid_{x=a}=\begin{pmatrix} 2&1\end{pmatrix}\in M(1,2;\R).\]
+\end{example}
+%%
+\begin{quickcheck}
+\type{input.function}
+  \begin{variables}
+  \function{f1}{(2*x*z)/(y^2+1)}
+  \function{f2}{(-2*x^2*y*z)/(y^2+1)^2}
+  \function{f3}{x^2/(y^2+1)}
+  \end{variables}
+\text{Bestimme die partiellen Ableitungen der Funktion $f:\R^3\to \R$, 
+$\left(\begin{smallmatrix}x\\y\\z\end{smallmatrix}\right)\mapsto \frac{x^2z}{y^2+1}$.
+Es ist $\frac{\partial f}{\partial x}((x,y,z)^T)=$\ansref,
+$\frac{\partial f}{\partial y}((x,y,z)^T)=$\ansref,
+$\frac{\partial f}{\partial z}((x,y,z)^T)=$\ansref.}
+\begin{answer}
+        \solution{f1}
+        %\inputAsFunction{x,y,z}{k1}
+        %\checkAsFunction{x,y,z}{-10}{10}{100}
+\end{answer}
+\begin{answer}
+    \solution{f2}
+    %\inputAsFunction{x,y,z}{k2}
+    %\checkFuncForZero{f2-k2}{-10}{10}{100}
+    %\checkAsFunction{x,y,z}{-10}{10}{100}
+\end{answer}
+\begin{answer}
+        \solution{f3}
+%         \inputAsFunction{x,y,z}{k3}
+%         \checkFuncForZero{f3-k3}{-10}{10}{100}
+        %\checkAsFunction{x,y,z}{-10}{10}{100}
+\end{answer}
+\end{quickcheck}
+%%
+\begin{remark}
+Es sei $M\subset \R^n$ und es seien $f,g:M\to\R^m$ partiell differenzierbar in $a\in M$. 
+Weiter seien $\alpha,\beta\in \R$.
+Dann ist auch $\alpha \cdot f+\beta \cdot g$ partiell differenzierbar und für die Jacobi-Matrizen gilt
+\[\text{D}(\alpha \cdot f+\beta \cdot g)(a)=\alpha\cdot\text{D}f(a)+\beta\cdot \text{D}g(a).\]
+Weil die Einträge der Jacobi-Matrix durch die partiellen Ableitungen der Koordinatenfunktionen gegeben sind,
+folgt dies sofort aus der eindimensionalen Regel.
+\end{remark}
+%%
+Wir halten noch eine Aussage fest, die direkt aus der Definition \ref{def:richtungsableitung} der Richtungsableitung folgt.
+\begin{remark}
+Es sei $M\subset \R^n$ offen und $a=(a_1,\ldots, a_n)^T\in M$. 
+\begin{enumerate}
+\item[(a)]
+Es sei $f:M\to\R^m$ eine Funktion mit den Komponentenfunktionen $f_j:M\to\R$, $j=1,\ldots,m$,
+also $f=(f_1,\ldots, f_m)^T$.
+Die Funktion $f$ ist genau dann in $a$ bezüglich der $k$-ten Koordinate partiell differenzierbar,
+wenn jedes $f_j$, $j=1,\ldots,m$, dies ist. Dann gilt
+\[\text{D}_kf(a)=\begin{pmatrix} \text{D}_kf_1(a)\\\vdots\\\text{D}_kf_m(a)\end{pmatrix}.\]
+Ist $f$ partiell differenzierbar in $a$, dann gilt für den $(j,k)$-ten Eintrag der Jacobi-Matrix
+\[\text{D}f(a)_{jk}=\text{D}_kf_j(a).\]
+\item[(b)]
+Es sei $g:M\to\R$ eine weitere Funktion und $1\leq k\leq n$.
+Weiter sei $\rho>0$ so, dass die Strecke $\{a+te_k\mid \vert t\vert<\rho\}$ ganz in $M$ enthalten ist.
+Dann ist $g$ genau dann in $a$ bezüglich der $k$-ten Koordinate partiell differenzierbar,
+wenn die Funktion
+\[\varphi_k:(a_k-\rho;a_k+\rho)\to\R,\quad t\mapsto g((a_1,\ldots,a_{k-1},t,a_{k+1},\ldots,a_n)^T)\]
+in $a_k$ differenzierbar ist. in dem Fall gilt
+\[\text{D}_kg(a)=\varphi_k'(a_k).\]
+\end{enumerate}
+\end{remark}
+%%
+\begin{example}\label{ex:weitere_part_abl}
+\begin{tabs*}[\initialtab{0}]
+\tab{Beispiel a)}
+Es sei  $M=\{x\in\R^2\mid x_1>0\}$ und $g:M\to\R$, $x\mapsto \exp(x_1+x_2^2)+\ln(x_1+\sin^2(x_1-x_2))$.
+Wir bestimmen die partiellen Ableitungen.
+Für $\text{D}_1f(x)$ halten wir $x_2$ fest (und sehen $x_2$ als Konstante an). Dann ist
+$f$ eine aus $\exp$, $\ln$, $\sin$ und Polynomen zusammengesetzte Funktion in $x_1$, die wir differenzieren können
+\[\text{D}_1f(x)=\frac{\partial f}{\partial x_1}(x)=
+\exp(x_1+x_2^2)+\frac{1+2\sin(x_1-x_2)\cos(x_1-x_2)}{x_1+\sin^2(x_1-x_2)}.\]
+Entsprechend  verfahren wir für $\text{D}_2f(x)$: 
+Wir halten $x_1$ fest und erhalten eine differenzierbare Funktion in $x_2$, also
+\[\text{D}_2f(x)=\frac{\partial f}{\partial x_2}(x)=
+2x_2\exp(x_1+x_2^2)+\frac{-2\sin(x_1-x_2)\cos(x_1-x_2)}{x_1+\sin^2(x_1-x_2)}.\]
+\tab{Beispiel b)}
+Wir berechnen die Jacobi-Matrix der Funktion
+\[f:\R^3\to\R^2,\quad \begin{pmatrix}x\\y\\z\end{pmatrix}\mapsto \begin{pmatrix}e^y\sin x\\y^2z+xz^2\end{pmatrix}.\]
+Halten wir jeweils zwei von $x,y,z$ fest, 
+dann sind die Komponentenfunktionen von $f$ differenzierbar in der jeweils verbleibenden Variablen.
+Also gilt
+\[
+\text{D}f(\begin{pmatrix}x\\y\\z\end{pmatrix})=\begin{pmatrix}\frac{\partial f_1}{\partial x}&
+\frac{\partial f_1}{\partial y}&\frac{\partial f_1}{\partial z}\\
+\frac{\partial f_2}{\partial x}&
+\frac{\partial f_2}{\partial y}&\frac{\partial f_2}{\partial z}
+\end{pmatrix}=
+\begin{pmatrix}
+e^y\cos x&e^y\sin x&0\\z^2&2yz&y^2+2xz\end{pmatrix}.\]
+\tab{Beispiel c)}
+Wir betrachten die Funktion
+\[f:\R^2\to\R,\quad \begin{pmatrix}x\\y\end{pmatrix}\mapsto \left\{
+\begin{matrix}
+\frac{xy}{x^2+y^2},&\text{ falls }(x,y)\neq (0,0),\\
+0,& \text{ falls } (x,y)= (0,0).
+\end{matrix}\right.\]
+Die Funktion ist nicht stetig in null, denn für alle $t\neq 0$ gilt $f((t;t)^T)=\frac{1}{2}$,
+insbesondere ist also $\lim_{t\to 0}f((t;t)^T)=\frac{1}{2}\neq 0=f((0,0)^T)$.
+Allerdings ist $f$ in null partiell differenzierbar mit
+\[\text{D}_1f((0;0)^T)=\lim_{x\to 0}\frac{f((x;0)^T)-f((0,0)^T)}{x}=\lim_{x\to 0}\frac{0}{x}=0\]
+und (analog)
+\[\text{D}_2f((0,0)^T)=0.\]
+\tab{Euklidische Norm}
+Nun untersuchen wir die partiellen Ableitungen der Euklidischen Norm
+\[{\vert\!\vert\cdot\vert\!\vert_2}:\R^n\to\R, x\mapsto\sqrt{x_1^2+\ldots+x_n^2}.\]
+Für $1\leq k\leq n$ und $x\neq 0$ können wir die $k$-te partielle Ableitung bilden
+\[\text{D}_k{\vert\!\vert x\vert\!\vert_2}=\frac{2x_k}{2\sqrt{x_1^2+\ldots+x_n^2}}=\frac{x_k}{\vert\!\vert x\vert\!\vert_2}.\]
+Somit finden wir die Jacobi-Matrix
+\[\text{D}{\vert\!\vert x\vert\!\vert_2}=\frac{1}{\vert\!\vert x\vert\!\vert_2}\cdot x^T \quad \text{ für } x\neq 0.\]
+Aber in $x=0$ ist die Norm nicht partiell differenzierbar, denn für den $k$-ten Differzenquotienten erhalten wir
+\[\frac{\vert\!\vert te_k\vert\!\vert_2-\vert\!\vert 0\vert\!\vert_2}{t}=\frac{\sqrt{t^2}}{t}=\frac{\vert t\vert}{t}.\]
+Der Limes $\lim_{t\to 0}\frac{\vert t\vert}{t}$ existiert nicht, also existiert die Richtungsableitung in Richtung $e_k$ nicht in $x=0$ für $k=1,\ldots,n$.
+\end{tabs*}
+\end{example}
+%Video
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10776&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+
+%%
+\begin{definition}[Gradient]\label{def:gradient}
+Ist für $M\subset \R^n$ die Funktion $f:M\to\R$ (also $m=1$)  partiell differenzierbar
+in $a\in M$, 
+dann heißt die Transponierte der Jakobimatrix $\text{D}f(a)\in M(1,n;\R)$ auch der \notion{Gradient}
+von $f$ in $a$
+\[\nabla f(a)=\text{D}f(a)^T=\begin{pmatrix}\text{D}_1f(a)\\\vdots\\\text{D}_nf(a)\end{pmatrix}\in \R^n.\]
+\end{definition}
+\begin{example}
+Der Gradient der Euklidischen Norm in $x\neq 0$ ist $\nabla {\vert\!\vert x\vert\!\vert_2}=\frac{1}{\vert\vert x\vert\vert_2}\cdot x$.
+\end{example}
+
+%Video
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10777&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+%%
+%
+% Bemerkung einfügen: Der Gradient zeigt in Richtung der stärksten Änderung der Funktion.
+%
+%%
+\section{Totale Differenzierbarkeit}
+An den Beispielen \ref{ex:2_richtungsableitung} und \ref{ex:weitere_part_abl} sehen wir, 
+dass die partielle Differenzierbarkeit allein nicht ausreicht, 
+um das Änderungsverhalten einer Funktion zu beschreiben. 
+Dafür müssen wir uns  auf den Aspekt der linearen Approximation einer Funktion durch ihre Ableitung konzentrieren, 
+ den wir aus dem eindimensionalen Fall ebenfalls bereits kennen:
+%
+Die Funktion $f:M\to\R$ mit $M\subset \R$ ist differenzierbar in $a\in M$ genau dann, wenn es eine
+Zahl $L$ gibt (nämlich $L=f'(a)$) und eine in $a$ stetige Funktion $\phi:M\to\R$ mit $\phi(a)=0$, so dass
+\[f(x)=f(a)+L\cdot(x-a)+\vert x-a\vert\cdot\phi(x).\]
+(Der Term $\vert x-a\vert\cdot\phi(x)$ ist dabei das \ref[content_04_taylor_polynom][Restglied des Taylorpolynoms]{def:restglied} erster Ordnung in $a$.)
+%
+Dies verallgemeinern wir nun auf mehrdimensionale Funktionen. 
+Dazu muss für $f:M\to\R^m$ mit $M\subset \R^m$ einiges  angepasst werden.
+Die Konstante $L$ ist nun eine $(m\times n)$-Matrix, 
+der Betrag wird durch eine Norm auf dem $\R^n$ ersetzt, 
+und die Funktion hat denselben Definitions- und Zielbereich wie $f$ selbst.
+%%
+\begin{definition}[Totale Differenzierbarkeit]\label{def:total-diffbar}
+Es sei $M\subset\R^n$ offen, $a\in M$ ein Punkt. Die Funktion $f:M\to\R^m$ heißt \notion{total differenzierbar} in $a$, 
+wenn es eine Matrix $L\in M(m,n;\R)$ gibt sowie eine in $a$ stetige Funktion $\phi:M\to\R^n$ mit $\phi(a)=0$,
+so dass für $x\in M$ gilt
+\[f(x)=f(a)+L\cdot(x-a)+\vert\!\vert x-a\vert\!\vert\cdot\phi(x).\]
+Die Matrix $L$ heißt die \notion{totale Ableitung} von $f$ in $a$.
+Die Funktion $f$ heißt total differenzierbar (auf ganz $M$), wenn $f$ in allen Punkten $a\in M$ total differenzierbar ist.
+\end{definition}
+%%
+Anders formuliert heißt das: Die Funktion $f$ ist genau dann in $a$ total differenzierbar, wenn es ein 
+$L\in M(m,n;\R)$ gibt derart, dass
+\begin{equation}\label{eq:alternativ_def_tot_diffbar}
+\lim_{x\to a}\frac{f(x)-f(a)-L\cdot(x-a)}{\vert\!\vert x-a\vert\!\vert}=0.
+\end{equation}
+%%
+\begin{block}[warning]
+Für die totale Differenzierbarkeit existiert keine Formulierung durch einen Differenzenquotienten wie im Eindimensionalen.
+Da dort durch $(x-a)$ geteilt wird, ist das für $(x-a)\in\R^n$ ein sinnloses Unterfangen.
+Die Beschreibung der totalen Differenzierbarkeit wie in (\ref{eq:alternativ_def_tot_diffbar}) kommt 
+dem eindimensionalen Differenzenquotienten am nächsten.
+\end{block}
+%%
+\begin{example}\label{ex:erstes-bsp-total-diffbar}
+Es sei $f:\R^2\to\R$, $x=(x_1,x_2)^T\mapsto x_1^2+x_2^2$.
+Wir zeigen, dass $f$ in $a=(a_1,a_2)\in\R^2$ total differenzierbar ist mit totaler Ableitung $L=(2a_1, 2a_2)$.
+\begin{incremental}{0}
+\step
+Dazu  bemerken wir zunächst $f(x)=\vert\!\vert x \vert\!\vert_2^2$. Daraus folgt dann
+\[
+f(x-a)=f(x)+f(a)-2a_1x_1-2a_2x_2,
+\]
+\step
+also
+\begin{align*}
+f(x)&=f(a)+2a_1x_1+2a_2x_2-2f(a)+f(x-a)\\
+&= f(a)+\begin{pmatrix} 2a_1 &2a_2\end{pmatrix}\cdot\begin{pmatrix}x_1-a_1\\x_2-a_2\end{pmatrix}+
+{\vert\!\vert x-a \vert\!\vert_2\cdot \vert\!\vert x-a \vert\!\vert_2}\\
+&=f(a)+L\cdot(x-a)+{\vert\!\vert x-a \vert\!\vert_2\cdot\phi(x)},
+\end{align*}
+mit der Matrix $L=\begin{pmatrix}2a_1&2a_2\end{pmatrix}\in M(1,2;\R)$ und der stetigen Funktion $\phi:\R^2\to\R$,
+$\phi(x)=\vert\!\vert x-a \vert\!\vert_2$, mit $\phi(a)=0$.
+\end{incremental}
+\end{example}
+%Video
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10779&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+
+%%
+\begin{remark}\label{rmk:totale_koordinatenableitungen}
+Eine Funktion $f:M\to\R^m$ ist genau dann total differenzierbar, 
+wenn ihre Koordinatenfunktionen $f_j$, $j=1,\ldots,n$, das sind.
+\begin{incremental}{0}
+\step
+Denn ist $f$ total differenzierbar mit totalem Differential $L$, dann gibt es eine Funktion $\phi:M\to\R^m$,
+die stetig ist in $a$ mit $\phi(a)=0$, so dass
+\[f(x)=f(a)+L\cdot(x-a)+\Vert x-a\Vert\phi(x).\]
+Sind $\phi_j$ die Komponenten von $\phi$, insbesondere $\phi_j$ stetig $a$ mit $\phi_j(a)=0$, und sind $l_j$ die $j$-te Zeile von $L$, so gilt diese Gleichung natürlich auch komponentenweise für  $j=1,\ldots,n$,
+\[f_j(x)=f_j(a)+l_j\cdot(x-a)+\Vert x-a\Vert\phi_j(x),\]
+also sind die Zeilen $l_j$ die totalen Ableitungen der Koordinatenfunktionen $f_j$.
+\step
+Sind umgekehrt die $f_j$ total differenzierbar, so sind $l_j$ die totalen Ableitungen  von $f_j$ in $a$ gegeben zusammen mit Funktionen 
+$\phi_j:M\to\R$, die in $a$ stetig sind und $\phi_j(a)=0$ erfüllen mit
+\[f_j(x)=f_j(a)+l_j\cdot(x-a)+\Vert x-a\Vert\phi_j(x).\]
+Diese Gleichungen bilden die Komponenten der Gleichung
+\[f(x)=f(a)+L\cdot(x-a)+\Vert x-a\Vert\phi(x).\]
+Darin ist $L$ die Matrix mit den Zeilen $l_j$ und die Funktion $\phi$ ist stetig in $a$ mit $\phi(a)=0$, weil dies für alle Komponenten gilt. 
+Also ist $f$ total differenzierbar in $a$.
+\end{incremental}
+\end{remark}
+Die partiellen Ableitungen können zwar nicht zur Definition der totalen Ableitungen gebraucht werden,
+ein Zusammenhang zwischen den beiden Begriffen besteht allerdings schon.
+\begin{theorem}\label{thm:zshg_total_diffbar-Differential}
+Es sei $M\subset \R^n$ offen, $a\in M$ ein Punkt und $f:M\to\R^m$ eine Funktion.
+\begin{enumerate}
+\item[(a)]
+Es sei $f$ in $a$ total differenzierbar, also
+\[f(x)=f(a)+L\cdot(x-a)+\Vert x-a\Vert\cdot\phi(x)\]
+mit einer Matrix $L\in M(m,n;\R)$ und einem  $\phi:M\to\R^m$ in $a$ stetig mit $\phi(a)=0$. Dann gilt:
+\begin{itemize}
+\item[(i)]
+Die Funktion $f$ ist stetig in $a$.
+\item[(ii)]
+Die Funktion $f$ ist in $a$ auch partiell differenzierbar.
+\item[(iii)]
+Die Matrix $L$ ist eindeutig bestimmt. Sie stimmt mit der Jacobi-Matrix von $f$ überein
+\[L=\text{D}f(a)=\big(\frac{\partial f_i}{\partial x_j}(a)\big)_{1\leq i\leq m; 1\leq j\leq n}.\]
+\end{itemize}
+\item[(b)]
+Es sei $f:M\to\R^m$  in $a$ \ref[content_54_Differentiation][stetig partiell differenzierbar]{def:part_abl}.
+Dann ist $f$ in $a$ total differenzierbar.
+\end{enumerate}
+\end{theorem}
+%%
+\begin{proof*}
+\begin{incremental}{0}
+\step
+Zu (a): Ist $f$ in $a$ total differenzierbar, so gilt
+\[\lim_{x\to a}f(x)-f(a)=\lim_{x\to a}[L\cdot(x-a)+{\vert\!\vert x-a\vert\!\vert}\cdot\phi(x)]=0,\]
+denn die (affin) lineare Abbildung $L\cdot(x-a)$ ist stetig ebenso wie die Norm $\vert\!\vert x-a\vert\!\vert$ und $\phi$ in $a$ nach Voraussetzung.
+Also ist $f$ stetig in $a$, d.h. (i) ist bewiesen.
+\step
+Nun betrachten wir die $i$-te Komponentenfunktion $f_i$ und halten alle Komponenten von $x$ außer der $j$-ten fest, 
+also $x=(a_1,\ldots,a_{j-1},t,a_{j+1},\ldots, a_n)$. Dann gilt mit $L=(l_{ij})_{ij}$
+\begin{align*}
+f_i(x)&=f_i(a)+\big(L\cdot(0,\ldots,0,t-a_j,0,\ldots,0)^T)_i+
+\vert\!\vert (0,\ldots,0,t-a_j,0,\ldots,0)^T\vert\!\vert\cdot\phi_i(x)\\
+&=f_i(a)+l_{ij}(t-a_j)+\vert t-a_j\vert \cdot \phi_i(x).
+\end{align*}
+Daraus lesen wir ab
+\[\lim_{t\to a_j}\frac{f_i((a_1,\ldots,a_{j-1},t,a_{j+1},\ldots,a_n)^T-f_i(a)}{t-a_j}=l_{ij}.\]
+Das heißt, die $j$-te partielle Ableitung $\frac{\partial f_i}{\partial x_j}(a)$ der $i$-ten Komponentenfunktion 
+$f_i$ exisitiert und ist gleich dem Eintrag $l_{ij}$ der Matrix $L$ für $i=1,\ldots,m$ und $j=1,\ldots,n$, also
+\[L=\big(\frac{\partial f_i}{\partial x_j}(a)\big)_{ij}.\]
+Damit haben wir (ii) und (iii) bewiesen.
+\step
+%Auf den Beweis von (b) verzichten wir an dieser Stelle.
+%
+% Beweis vervollständigen ??
+%
+Zu (b): Zunächst bemerken wir, dass es dank  \ref[content_54_Differentiation][obiger Bemerkung]{rmk:totale_koordinatenableitungen} reicht, dies für Funktionen $f:M\to\R$ zu zeigen. 
+Nun nehmen wir einen offenen Quader $Q\subset M$, der $a$ enthält. (Wir können dafür zum Beispiel eine $\epsilon$-Umgebung von $a$
+bezüglich der Maximumsnorm nehmen.) 
+Jeder Punkt $a+h\in Q$ kann durch einen Streckenzug mit $a$ derart verbunden werden, dass die Strecken
+achsenparallel verlaufen. Dazu wählen wir $a^{(0)}=a$ und setzen dann Rekursiv $a^{(j)}=a^{(j-1)}+h_je_j$, $j=1,\ldots,n$, 
+wobei $h=(h_1,\ldots,h_n)$.
+Insbesondere gilt $a^{(n)}=a+h$, also
+\[f(a+h)-f(a)=\sum_{j=1}^n f(a^{(j)})-f(a^{(j-1)}).\]
+\step
+Für die Differenzen in der Teleskopsumme rechts gewinnen wir nun mit Hilfe des \ref[content_03_hoehere_ableitungen][Mittelwertsatzes]{thm:mittelwertsatz} der eindimensionalen Analysis  
+eine andere Schreibweise: Die Funktionen $\phi_j:[0;1]\to\R$, $\phi_j(t)=f(a^{(j-1)}+th_je_j)$, sind differenzierbar, also existiert
+nach dem Mittelwertsatz eine Stelle $\tau_j\in[0;1]$ mit
+\[\phi_j(1)-\phi_j(0)=\phi_j'(\tau_j)=h_j\frac{\partial f}{\partial x_j}(a^{(j-1)}+\tau_j h_je_j).\]
+Setzen wir zur Abkürzung $\xi^{(j)}:=a^{(j-1)}+\tau_j h_je_j$, dann gilt somit für $j=1,\ldots,n$
+\[f(a^{(j)})-f(a^{(j-1)})=h_j\frac{\partial f}{\partial x_j}(\xi^{(j)}).\]
+\step
+ Dies ersetzen wir in der Teleskopsumme, setzen $L:=(\frac{\partial f}{\partial x_j}(a))_j\in M(1,m,\R)$ und erhalten
+ \[f(a+h)-f(a)-L\cdot h= \sum_{j=1}^n\left(\frac{\partial f}{\partial x_j}(\xi^{(j)})-\frac{\partial f}{\partial x_j}(a)\right)\cdot h_j\]
+\step
+Dies führt uns zur betragsmäßigen Abschätzung
+\[0\leq {\vert {f(a+h)-f(a)-L\cdot h}\vert}\leq
+{\Vert {h}\Vert_\infty}\cdot\sum_{j=1}^n\vert {\frac{\partial f}{\partial x_j}(\xi^{(j)})-\frac{\partial f}{\partial x_j}(a)}\vert.\]
+Im Limes $h\to 0$ (also $\xi^{(j)}\to a$ für $j=1,\ldots,n$) geht jeder Summand rechts gegen Null, weil die partiellen Ableitungen
+nach Voraussetzung stetig in $a$ sind. Es folgt
+\[\lim_{h\to 0}\frac{\vert f(a+h)-f(a)-L\cdot h\vert}{\Vert h\Vert_\infty}=0.\]
+Dies ist nichts anderes als die definierende Gleichung  (\ref{eq:alternativ_def_tot_diffbar}) der totalen Ableitung in der Schreibweise $x=a+h$.
+Also ist $f$ in $a$ total differenzierbar.
+\end{incremental}
+\end{proof*}
+\begin{definition}[Stetige Differenzierbarkeit]\label{def:stetig_diffbar}
+Eine Funktion $f:M\to\R^m$ heißt \notion{stetig differenzierbar} auf  $M\subset\R^n$, 
+wenn  auf  ganz $M$  alle partiellen Ableitungen existieren und stetig sind, also wenn $f$ in jedem $a\in M$ stetig partiell differenzierbar ist.
+\\
+(Insbesondere ist dann $f$ auf $M$ total differenzierbar.) 
+\end{definition}
+%%
+Satz \ref{thm:zshg_total_diffbar-Differential} gibt uns  im Falle von stetiger Differenzierbarkeit ein
+praktisches Rezept an, die totale Ableitung zu bestimmen.
+%%
+\begin{example}
+Die Funktion $f:\R^2\to\R$, $x=(x_1,x_2)^T\mapsto x_1^2+x_2^2$ aus Beispiel \ref{ex:erstes-bsp-total-diffbar} ist als Polynom stetig partiell differenzierbar in jedem Punkt
+$a$. Ihre totale Ableitung können wir also als die Jacobi-Matrix $\text{D}f(a)=\begin{pmatrix} 2a_1&2a_2\end{pmatrix}$ bestimmen.
+Sie stimmt natürlich mit der in Beispiel \ref{ex:erstes-bsp-total-diffbar} gefundenen totalen Ableitung überein.
+\end{example}
+%Video
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10780&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+
+%%
+Wir unterstreichen die Bedeutung der Stetigkeit der partiellen Ableitungen für die totale Differenzierbarkeit durch 
+das folgende Beispiel, in dem in einem Punkt nicht nur alle partiellen Ableitungen sondern sogar alle Richtungsableitungen existieren, 
+aber nicht stetig sind, so dass die Funktion nicht total differenzierbar ist.
+\begin{example}\label{ex:DAS_gegenbsp_der_diffbarkeit}
+Sei $f:\R^2\to\R$ die Funktion mit $f(0,0)=0$ und für $(x,y)\neq(0,0)$
+\[f(x,y)=\frac{x^2y}{x^2+y^2}.\]
+Wir bestimmen die Richtungsableitungen im Nullpunkt.
+Für alle $t\in\R$ und für alle $x,y\in\R$ gilt $f(tx,ty)=t\cdot f(x,y)$, somit folgt für die
+Richtungsableitung in Richtung $v$
+\[\text{D}_vf(0,0)=\lim_{t\to 0}\frac{f(tv_1,tv_2)-f(0,0)}{t}=f(v_1,v_2).\]
+Insbesondere sind die partiellen Richtungsableitungen null,
+$D_1f(0,0)=\frac{\partial f}{\partial x}(0,0)=0=D_2f(0,0)=\frac{\partial f}{\partial y}(0,0)$, und
+die Jacobi-Matrix ist $(0,0)$. Falls $f$ also im Nullpunkt total differenzierbar sein sollte, so
+kommt für die Matrix $L$ nach Satz \ref{thm:zshg_total_diffbar-Differential} nur $L=(0,0)$ in Frage.
+Es gilt aber auf der Diagonalen $x=y$ und $x\neq 0$
+\[\frac{f(x,x)-f(0,0)-L(x,x)^T}{\vert\!\vert (x,x)\vert\!\vert_\infty}=\frac{x^3}{2x^2\cdot\vert x\vert}=\pm\frac{1}{2},\]
+je nachdem ob $x>0$ oder $x<0$.
+Insbesondere kann der Grenzwert (\ref{eq:alternativ_def_tot_diffbar}) nicht existieren: $f$ ist nicht total differenzierbar im Nullpunkt, 
+obwohl alle Richtungsableitungen existieren.
+\end{example}
+%Video
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10781&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+
+%%
+\begin{remark}\label{rem:lin_Abb}
+Die Ableitung einer in einem Punkt $a\in M$ total differenzierbaren Funktion $f:M\to\R^m$ ist also die Jacobi-Matrix (oder das Differential)
+$\text{D}f(a)=L\in M(m,n;\R)$. Das ist eine \notion{lineare Abbildung} (geschrieben bezüglich der Standardbasis).
+Durch diese lineare Abbildung wird die Funktion in der Nähe des Punktes $a$ approximiert, 
+wie es die Tangentensteigung bei einer eindimensionalen Funktion tut
+\[f(x)-f(a)=L\cdot(x-a)+\text{Rest}_a(x),\]
+wobei $\text{Rest}_a(x)=\Vert x-a\Vert\phi(x)$ eine in $a$ stetige Funktion ist, die dort schneller als $\Vert x-a\Vert$ gegen null geht.
+\end{remark}
+%%
+\begin{remark}\label{rem:richtg_abl_mv_produkt}
+Es sei $M\subset\R^n$ und $f:M\to\R^m$ eine in $a\in M$ total differenzierbare Funktion.
+Dann existieren in $a$ alle Richtungsableitungen $\text{D}_vf(a)$, $v=(v_1,\ldots,v_n)^T\in\R^n\setminus\{0\}$.
+Sie sind gegeben als Matrix-Vektor-Produkt mit der Jacobi-Matrix,
+und es gilt
+\[\text{D}_vf(a)=(\text{D}f(a))\cdot v=\sum_{i=1}^n D_if(a)\cdot v_i\in\R^n.\]
+Denn weil $f$ total differenzierbar ist in $a$, gilt mit $L=\text{D}f(a)$
+\[\lim_{t\to 0}\frac{f(a+tv)-f(a)}{t}=\lim_{t\to 0}\frac{L\cdot (tv)+\Vert tv\Vert\phi(a+tv)}{t}=L\cdot v.\]
+\end{remark}
+%%
+\begin{example}[Lineare Abbildungen]\label{ex:lin_Abb}
+\begin{incremental}[\initialsteps{1}]
+\step
+Es sei $f:\R^n\to\R^m$ eine lineare Abbildung. 
+Es existiert also eine Matrix $A\in M(m,n;\R)$, so dass $f(x)=A\cdot x$ (bezüglich der Standardbasis).
+Dann ist $f$ total differenzierbar mit Jacobi-Matrix $\text{D}f(a)=A$ in jedem Punkt $a\in\R^n$.
+\step
+Das heißt, die Ableitung einer linearen Abbildung ist sie selbst.
+\step
+Denn: Die Linearität impliziert $A\cdot(x-a)=A\cdot x - A\cdot a$ für alle $x,a\in\R^n$. Also gilt
+\[f(x)=A\cdot x= A\cdot a +A\cdot (x-a)+\Vert x-a\Vert\cdot 0.\]
+Das ist die definierende Gleichung für totale Differenzierbarkeit mit $L=A$ und $\phi\equiv 0$.
+\step
+Die Richtungsableitung von $f$ in eine Richtung $v\neq 0$ ist somit als $A\cdot v$ gegeben.
+\end{incremental}
+\end{example}
+%Video
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10782&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+
+%
+\section{Ableitungsregeln}\label{sec:Ableitungsregeln}
+%%
+Einige aus der eindimensionalen Analysis bekannte Ableitungsregeln haben Entsprechungen in mehreren Dimensionen.
+Die Ableitungsregel für Linearkombinationen von Funktionen überträgt sich immer,
+für die Produktregel benötigt man den Zielbereich $\R$ -- sonst ist das Produkt zweier Funktionen gar nicht definiert.
+\begin{theorem}\label{thm:summen-und-produktregel}
+Es sei $M\subset \R^n$. Dann gilt: 
+\begin{enumerate}
+\item[(a)]\notion{Summenregel}
+ Sind $f,g:M\to\R^m$ total differenzierbare Funktionen in $a\in M$ und sind $\alpha,\beta\in\R$,
+ dann ist auch $\alpha f+\beta g:M\to\R^m$ total differenzierbar in $a$ und es gilt
+ \[\text{D}(\alpha f+\beta g)(a)=\alpha\text{D}f(a)+\beta\text{D}g(a).\]
+\item[(b)]\notion{Produktregel}
+Sind $f,g:M\to\R$ total differenzierbare Funktionen in $a\in M$, 
+dann ist auch das Produkt $f\cdot g:M\to\R$ total differenzierbar in $a$ und es gilt
+\[\text{D}(f\cdot g)(a)=g(a)\text{D}f(a)+f(a)\text{D}g(a).\]
+\end{enumerate}
+\end{theorem}
+Es gilt auch eine  Quotientenregel, die wir weiter unten mit Hilfe der Kettenregel zeigen werden.
+\begin{proof*}
+\begin{incremental}
+\step
+Zu (a):
+Weil $f$ und $g$ total differenzierbar sind in $a$ gibt es in $a$ stetige Funktionen $\phi,\psi:M\to\R^m$
+mit $\phi(a)=0=\psi(a)$ und Matrizen $L=\text{D}f(a), M=\text{D}g(a)\in M(m,n;\R)$ mit
+\begin{align*}
+f(x)&=f(a)+L\cdot(x-a)+\Vert x-a\Vert\cdot \phi(x)\\
+g(x)&=g(a)+M\cdot(x-a)+\Vert x-a\Vert\cdot \psi(x).
+\end{align*}
+Also gilt unter Ausnutzung der Linearität des Matrix-Vektor-Produkts
+\[(\alpha f+\beta g)(x)=(\alpha f+\beta g)(a)+(\alpha L+\beta M)\cdot(x-a)+
+\Vert x-a\Vert\cdot (\alpha\phi(x)+\beta\psi(x)),\]
+wobei $\alpha\phi+\beta\psi$ in $a$ stetig ist mit $\alpha\phi(a)+\beta\psi(a)=0$.
+Also ist $\alpha f+\beta g$ total differenzierbar in $a$ mit Differential $\alpha L+\beta M=\alpha\text{D}f(a)+\beta\text{D}g(a)$.
+\step
+In Teil (b) ist $m=1$. 
+Wir multiplizieren  die definierenden Identitäten für die totalen Ableitungen
+von $f$ und $g$ von eben miteinander und ordnen für $x\neq a$ um:
+\begin{align*}
+f(x)g(x)&=f(a)g(a)+\big(g(a)\cdot L+f(a)\cdot M\big)(x-a)\\
+&\quad + \Vert x-a\Vert \cdot \big(g(a)\phi(x)+f(a)\psi(x)+L(x-a)\psi(x)\\
+&\quad \quad\quad \quad\quad +\Vert x-a\Vert\phi(x)\psi(x)+M(x-a)\phi(x)\\
+&\quad \quad\quad \quad\quad +
+ \frac{1}{\Vert x-a\Vert}\cdot L(x-a)\cdot M(x-a)\big),
+\end{align*}
+\step
+Nun bemerken wir, dass durch $\frac{1}{\Vert x-a\Vert}\cdot L(x-a)\cdot M(x-a)$ eine in $x=a$
+durch $0$ stetig fortsetzbare Funktion
+definiert wird, denn es gilt mit dem Einheitsvektor $e_{x-a}$ in Richtung $x-a$
+\[\lim_{x\to a}\frac{1}{\Vert x-a\Vert}\cdot L(x-a)\cdot M(x-a)=
+\lim_{x\to a}{\Vert x-a\Vert}\cdot Le_{x-a}\cdot Me_{x-a} =0.\]
+Dabei haben wir benutzt, dass die Menge $\{Le_{x-a}\cdot Me_{x-a}\mid x\neq a\}$ beschränkt ist,
+zum Beispiel durch $\sum_{i=1}^n {\vert l_i\vert}\cdot \sum_{i=1}^n {\vert m_i\vert}$.
+Für die obige Gleichung folgt damit: Der gesamte Faktor des Produkts mit $\Vert x-a\Vert$ definiert eine in $a$ stetig Funktion
+mit Funktionswert $0$ in $a$.
+Nach Definition ist $f\cdot g$ total differenzierbar in $a$ mit totaler Ableitung $g(a)\cdot L+f(a)\cdot M$.
+\end{incremental}
+\end{proof*}
+\begin{example}
+Die Funktion $h:\R^2\to\R$, $x\mapsto x_1^2(\cos x_2+e^{x_1})$ ist das Produkt der Funktionen
+$f$ und $g$ mit $f(x)=x_1^2$ und $g(x)=\cos x_2+e^{x_1}$. Weiter ist
+$\text{D}f(a)=\begin{pmatrix}2a_1,&0\end{pmatrix}$ und 
+$\text{D}g(a)=\begin{pmatrix}e^{a_1},&-\sin a_2\end{pmatrix}$.
+Somit ist
+\begin{align*}\text{D}(fg)(a)&=a_1^2\begin{pmatrix}e^{a_1},&-\sin a_2\end{pmatrix}+
+(\cos a_2+e^{a_1})\begin{pmatrix}2a_1,&0\end{pmatrix}\\
+&=\begin{pmatrix}(a_1^2+2a_1)e^{a_1}+2a_1\cos a_2, & -a_1^2\sin a_2 \end{pmatrix}
+\end{align*}
+\end{example}
+%Video
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10783&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+
+%%
+Auch für die Komposition von Funktionen gibt es eine mehrdimensionale Ableitungsregel.
+\begin{theorem}\label{thm:kettenregel_mehrdim}
+\begin{enumerate}
+\item[(a)]\notion{Kettenregel}
+Es seien $M\subset \R^n$  und $N\subset \R^m$ offene Teilmengen. 
+Es sei $g:M\to\R^m$ eine in $a\in M$ total differenzierbare Funktion und $g(M)\subset N$,
+sowie $f:N\to\R^p$ eine total differenzierbare Funktion in $b=g(a)$.
+Dann ist die Komposition $h=f\circ g:M\to\R^p$ total differenzierbar in $a$ mit
+\[\text{D}(f\circ g)(a)=\text{D}f(g(a))\cdot\text{D}g(a).\]
+Das bedeutet für die $j$-te partielle Ableitung der $i$-ten Koordinatenfunktion
+\[\frac{\partial h_i}{\partial x_j}(a)=\sum_{k=1}^m\frac{\partial f_i}{\partial y_k}(g(a))\cdot \frac{\partial g_k}{\partial x_j}(a),\]
+für alle $i=1,\ldots,p$ und alle $j=1,\ldots,n$.
+\item[(b)]\notion{Quotientenregel}
+Es sei $M\subset\R^n$ eine offene Teilmenge und $g:M\to\R\setminus\{0\}$ eine in $a\in M$ total differenzierbare Funktion.
+Dann ist auch $\frac{1}{g}:M\to \R$ total differenzierbar mit
+\[\text{D}(\frac{1}{g})(a)=\frac{-1}{g(a)^2}\cdot \text{D}g(a).\]
+\end{enumerate}
+\end{theorem}
+%%
+\begin{block}[warning]
+Für die Jacobi-Matrizen in der mehrdimensionalen Kettenregel \ref{thm:kettenregel_mehrdim} 
+gilt $(\text{D}f)(g(a))\in M(p,m;\R)$ und $\text{D}g(a)\in M(m,n;\R)$ und
+$\text{D}(f\circ g)(a)\in M(p,n;\R)$.
+Es werden also Matrizen multipliziert. Weil Matrizenmultiplikation nicht kommutativ ist, 
+ist die Reihenfolge der Faktoren im Gegensatz zur eindimensionalen Regel
+wichtig und festgelegt, selbst im Fall $m=n=p$.
+\end{block}
+%%
+\begin{proof*}[Beweis von Satz \ref{thm:kettenregel_mehrdim}]
+\begin{incremental}
+\step
+Schreiben wir $v=x-a$ und $w=y-b$, dann folgt aus der totalen Differenzierbarkeit von $g$ in $a$ und von $f$ in $b$
+\begin{align*}
+g(a+v)&=g(a)+\text{D}g(a)\cdot v+\Vert v\Vert \phi_1(v),\\
+f(b+w)&=f(b)+\text{D}f(b)\cdot w+\Vert w\Vert\phi_2(w), 
+\end{align*}
+wobei $\phi_1$, $\phi_2$ in Null stetige Funktionen sind mit $\lim_{v\to 0}\phi_1(v)=0$ und $\lim_{w\to 0}\phi_2(w)=0$.
+(Die Funktionen $\phi_1$, $\phi_2$ sind nicht genau die, die in der  \ref[content_54_Differentiation][Definition der totalen Ableitung]{def:total-diffbar} auftreten, 
+sondern um $a$ bzw. $b$ dazu verschoben.) 
+\step
+Setzen wir in der zweite Gleichung speziell $w=\text{D}g(a)\cdot v+\Vert v\Vert \phi_1(v)$ ein 
+und verwenden $b=g(a)$, so erhalten wir
+\begin{align*}f\big(g(a)+\text{D}g(a)\cdot v+\Vert v\Vert \phi_1(v)\big)
+\:=&\:
+f\big(g(a)\big)+ \text{D}f(g(a))\cdot\big(\text{D}g(a)\cdot v+\Vert v\Vert \phi_1(v)\big)\\
+&\:+
+\Vert \text{D}g(a)\cdot v+{\Vert v\Vert} \phi_1(v)\Vert\cdot\phi_2\big(\text{D}g(a)\cdot v+\Vert v\Vert \phi_1(v)\big).
+\end{align*}
+Nun verwenden wir die erste Gleichung, um die linke Seite zu vereinfachen. Dann erhalten wir
+\begin{equation}\label{eq:kettenregel-gleichung}
+f\circ g(a+v)=f\big(g(a)\big)+\text{D}f(g(a))\cdot\text{D}g(a)\cdot v +\text{Rest}(v),
+\end{equation}
+mit der komplizierten Restfunktion
+\[\text{Rest}(v)={\Vert v\Vert}(\text{D}f)(g(a))\cdot\phi_1(v)+
+\Vert {\text{D}g(a)\cdot v+\Vert v\Vert \phi_1(v)}\Vert\cdot 
+\phi_2\big(\text{D}g(a)\cdot v+{\Vert v\Vert} \phi_1(v)\big).\]
+\step
+Diese Restfunktion schätzen wir nun ab:
+Mit der \ref[content_52_Abstaende][Operatornorm]{rem:operatornorm} $\Vert\text{D}g(a)\Vert$ und der \ref[content_52_Abstaende][Dreiecksungleichung]{def:norm_allgemein}
+finden wir 
+\[\Vert {\text{D}g(a)\cdot v+\Vert v\Vert \phi_1(v)}\Vert\leq
+{\Vert v\Vert}\cdot ({\Vert \text{D}g(a)\Vert}+ {\Vert \phi_1(v)\Vert}).\]
+Es gilt also
+\[\text{Rest}(v)=\Vert v\Vert\cdot \phi_3(v)\]
+mit einer Funktion $\phi_3$ so, dass
+\[\lim_{v\to 0}{\Vert \phi_3(v)\Vert}\leq \lim_{v\to 0}\:
+({\Vert\text{D}g(a)\Vert}+ {\Vert \phi_1(v)\Vert})\cdot
+\Vert{\phi_2\big(\text{D}g(a)\cdot v+{\Vert v\Vert }\phi_1(v)\big)}\Vert=0,\]
+wobei wir die obige Abschätzung, die Stetigkeit der Norm so wie der linearen Abbildungen (Matrizen) $\text{D}g(a)$ und $(\text{D}f)(g(a))$ und das Grenzwertverhalten von $\phi_1$ und $\phi_2$ für $v\to 0$ benutzt haben.
+\step
+Damit haben wir gezeigt, dass (\ref{eq:kettenregel-gleichung}) die definierende Gleichung 
+für die totale Ableitung der Komposition
+$f\circ g$ ist. Daraus lesen wir die totale Ableitung (Jacobi-Matrix) ab
+\[\text{D}(f\circ g)(a)=\text{D}f(g(a))\cdot\text{D}g(a).\]
+\step
+Die partiellen Ableitungen der Komposition ergeben sich nun wie behauptet aus denen von $f$ und $g$, 
+indem man das Matrixprodukt der Jacobi-Matrizen ausschreibt.
+\step
+Die Quotientenregel (b) ist eine Anwendung der Kettenregel (a) mit $f(y)=\frac{1}{y}$,
+\[\text{D}(f\circ g)(a)=(\text{D}f)(g(a))\cdot\text{D}g(a)=\frac{-1}{g(a)^2}\cdot \text{D}g(a).\]
+\end{incremental}
+\end{proof*}
+\begin{example}
+\begin{tabs*}[\initialtab{0}]
+\tab{Rotationssymmetrische Funktionen}
+Es sei $I\subset \R_{\geq 0}$ ein Intervall. Dann ist die Menge
+\[K(I)=\{x\in\R^n\mid \Vert x\Vert_2\in I\}\]
+eine sogenannte \notion{Kugelschale}.
+Eine Funktion $f:K(I)\to\R$ heißt \notion{rotationssymmetrisch}, wenn sie nur von der Euklidischen 
+Länge (oder: dem Radius) $r(x)=\Vert x\Vert_2$ von $x\in K(I)$ abhängt.
+Ein solches $f$ lässt sich darstellen als Komposition einer eindimensionalen Funktion $F:I\to\R$ 
+und der Funktion $r:K(I)\to I$,
+\[f(x)=F\circ r(x)=F(\Vert x\Vert_2).\]
+In Beispiel \ref{ex:weitere_part_abl} haben wir bereits die Jacobi-Matrix $\text{D}r(x)=\frac{1}{r(x)}\cdot x^T$ berechnet für alle $x\neq 0$
+Also gilt mit der Kettenregel
+\[\text{D}f(x)=\text{D}F(r(x))\cdot \big(\frac{1}{r(x)}\cdot x^T\big)
+=\frac{F'(\Vert x\Vert_2)}{\Vert x\Vert_2}\cdot(x_1,\ldots,x_n)\]
+\tab{Rationale Funktionen}
+Es sei $M\subset \R^n$ offen und es sei $r:M\to\R$ eine rationale Funktion. Es gebe also Polynome $p$ und $q$ auf dem $\R^n$
+mit $r(x)=\frac{p(x)}{q(x)}$. Insbesondere enthalte $M$ keine Nullstellen von $q$.
+Aus Produkt- und Quotientenregel folgt, dass  $r$ total differenzierbar ist in jedem $x\in M$ und dass für 
+das Differential gilt
+\begin{align*}
+\text{D}r(x)&= p(x)\text{D}(\frac{1}{q})(x)+\frac{1}{q(x)}\text{D}p(x)\\
+&=\frac{-p(x)}{q^2(x)}\text{D}q(x)+ \frac{1}{q(x)}\text{D}p(x)\\
+&=\frac{1}{q^2(x)}\big(q(x)\text{D}p(x)-p(x)\text{D}q(x)\big).
+\end{align*}
+\tab{Weiteres Beispiel}
+Es sei $g:\R^3\to\R^2$, $x\mapsto\begin{pmatrix}x_1x_3^2\\ x_2\end{pmatrix}$ und 
+$f:\R^2\to\R$, $y\mapsto y_1y_2$. Dann ist $f\circ g:\R^3\to\R$ total differenzierbar. 
+Wir berechnen die Ableitungen:
+\[\text{D}g(x)=\big(\frac{\partial g_i}{\partial x_j}\big)_{i=1,2; j=1,2,3}=
+\begin{pmatrix}x_3^2&0&2x_1x_3\\ 0&1&0\end{pmatrix},\]
+\[\text{D}f(y)=\big(\frac{\partial f}{\partial y_j}\big)_{j=1,2}=
+\begin{pmatrix}y_2,&y_1\end{pmatrix},\]
+also
+\begin{align*}
+\text{D}(f\circ g)(x)&=\text{D}f(g(x))\cdot\text{D}g(x)\\
+&= \begin{pmatrix}x_2,&x_1x_3^2\end{pmatrix}\cdot\begin{pmatrix}x_3^2&0&2x_1x_3\\ 0&1&0\end{pmatrix}\\
+&=\begin{pmatrix} x_2x_3^2,&x_1x_3^2,&2x_1x_2x_3\end{pmatrix}
+\end{align*}
+\notion{Probe:}
+Wir können die Komposition $f\circ g$ hier natürlich auch direkt ausrechnen 
+$f(g(x))=x_1x_2x_3^2$ und dieses simple Polynom ableiten. Wir erhalten dasselbe Ergebnis.
+\end{tabs*}
+\end{example}
+%Video
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10784&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+
+\section{Lokale Extremstellen}
+F\"ur Funktionen $f:\R^n\to\R$ ist es ebenso sinnvoll von lokalen Extremstellen zu reden, 
+wie im \ref[content_22_extremstellen][eindimensionalen Fall]{def:extremstellen}. 
+\begin{definition}[lokale Extremstellen]\label{def:extremstellen}
+Es sei $M\subset\R^n$ nicht leer, und es sei $f:M\to\R$ eine Funktion. 
+Ein Punkt $a\in M$ heißt \notion{lokale Maximalstelle} (bzw. lokale Minimalstelle)
+von $f$, wenn es eine offene Menge $U\subset M$ gibt, die $a$ enthält, so dass für alle
+$x\in U$ gilt $f(x)\leq f(a)$ (bzw. $f(x)\geq f(a)$).
+Der Wert $f(a)$ heißt dann \notion{lokaler Maximalwert} (bzw. lokaler Minimalwert), und man sagt,
+$f$ habe in $a$ ein lokales Maximum (bzw. lokales Minimum).
+\end{definition}
+Für reelle Funktionen einer Variablen kennen wir als ein \ref[content_03_hoehere_ableitungen][notwendiges Kriterium]{thm:NB_extrema}
+für eine lokale Extremstelle einer differenzierbaren Funktion $f$ im Punkt $a$, 
+dass die Ableitung dort verschwindet, $f'(a)=0$.
+Daraus kann man einfach das entsprechende Kriterium für mehrdimensionale Funktionen folgern.
+Ist nämlich $a$ eine lokale Extremstelle von $f:U\to\R$ (wobei $a\in U\subset\R^n$), und ist $f$ differenzierbar in $a$,
+dann sind auch alle Funktionen \[g_j:t\mapsto g_j(t)=f(a+te_j)\] differenzierbar in $t=0$ und haben dort eine lokale Extremstelle für $j=1,\ldots,n$.
+Also gilt $g_j'(0)=0$. Weil aber $g_j'(0)=\frac{\partial f}{\partial x_j}(a)$ nach Definition der partiellen Ableitung für $j=1,\ldots,n$,
+haben wir folgenden Satz bewiesen.
+\begin{theorem}[Notwendige Bedingung für lokale Extrema]\label{thm:notwendig_Bed_lok_Extremum}
+Es sei $U$ eine offene Teilmenge des $\R^n$, und es sei $f:U\to\R$ eine Funktion, 
+die im Punkt $a\in U$ partiell differenzierbar ist.
+Wenn $f$ in $a$ ein lokales Extremum hat, dann gilt für den \ref[content_03_hoehere_ableitungen][Gradienten]{def:gradient} von $f$ in $a$
+\[\nabla f(a)=0.\]
+\end{theorem}
+\begin{example}
+\begin{tabs*}
+\tab{Parabelkreuz}
+Die Funktion $f:\R^2\to\R$, $f(x,y)=x^2y^2$, hat in $a=(x,y)=(0,0)$ ein lokales Minimum. (Es sind sogar alle Punkte des
+Koordinatenkreuzes lokale Minimalstellen.) Weil $f$ als Polynomfunktion differenzierbar ist, muss $\nabla f(a)=(0,0)^T$ gelten.
+In der Tat ist 
+\[\nabla f(x,y)=Df(x,y)=\begin{pmatrix}2xy^2\\2x^2y\end{pmatrix},\]
+also ist der Gradient in $a$ gleich Null. (Ebenso wie in allen anderen Punkten des Koordinatenkreuzes.)
+\tab{Affensattel}
+Es sei $f:\R^2\to \R$ gegeben durch $f(x,y)=3x^2y-y^3$. Der Gradient von $f$ ist 
+\[\nabla f(x,y)=\begin{pmatrix}6xy\\3x^2-3y^2\end{pmatrix}.\]
+In $a=(0,0)$ gilt somit $\nabla f(a)=0$. Trotzdem hat $f$ in $a$ kein lokales Extremum, sondern einen Sattelpunkt.
+Die Bedingung $\nabla f(a)=0$ ist also wirklich nur notwendig, aber nicht hinreichend, für eine lokale Extremstelle.
+\begin{center}
+\image{T501_Affensattel}
+\end{center}
+
+\end{tabs*}
+\end{example}
+%Video
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10785&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+
+\end{content}
+

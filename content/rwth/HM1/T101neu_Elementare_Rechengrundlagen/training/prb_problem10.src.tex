@@ -1,0 +1,298 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A10: Aussageformen bewerten}
+    \lang{en}{Problem 10}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{description}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22332}{Ticket 22332}
+\end{block}
+
+\begin{block}[annotation]
+    Bewertung von Formeln und Verknüpfungen
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A10: Aussageformen bewerten}}
+\lang{en}{\title{Problem 10}}
+
+\begin{problem}
+
+	\randomquestionpool{1}{5}
+%
+% Q1	
+	\begin{question}
+   \text{Welche Zusammenhänge bestehen zwischen den Aussagen $A$, $B$ und $C$ für jede
+   reelle Zahl $x$?\\
+   $A:\,  x=\var{b}$\\
+   $B:\,  \var{f}=0$\\
+   $C:\,  x=\var{a}$
+   }
+   
+   \begin{variables}
+   \randint[Z]{a}{-2}{2}
+   \function[normalize]{b}{-a}
+   \function[normalize]{f}{x^2+2*a*x+a^2}
+   \end{variables}
+    \permutechoices{1}{6}
+      \type{mc.multiple}
+      \field{real}
+      \precision{3}
+  	\explanation{Beachten Sie bei der Bewertung der Formeln: Die einzige Lösung der Gleichung $\var{f}=0$ ist $x=\var{b}$.}
+ 
+    \begin{choice}
+        \text{$A\Rightarrow B$}
+          \solution{true}  
+        \end{choice}      
+    \begin{choice}
+        \text{$C\Rightarrow B$}
+          \solution{false}  
+        \end{choice}      
+    \begin{choice}
+        \text{$B\Rightarrow A$}
+          \solution{true}  
+        \end{choice}      
+    \begin{choice}
+        \text{$B\Rightarrow (A\vee C)$}
+          \solution{true}
+        \end{choice}     
+    \begin{choice}
+        \text{$A\Leftrightarrow \neg C$}
+          \solution{false}
+        \end{choice}
+        \begin{choice}
+        \text{$\neg B\Rightarrow \neg A$}
+          \solution{true}
+        \end{choice}         
+  \end{question}
+
+%
+% Q2	  
+  \begin{question}
+   \text{Welche Zusammenhänge bestehen zwischen den Aussagen $A$, $B$ und $C$ für jede
+   reelle Zahl $x$?\\
+   $A:\,  \var{b}=\var{r}$\\
+   $B:\,  \var{f}=\var{d}$\\
+   $C:\,  \var{b}=-\var{r}$
+   }
+   
+   \begin{variables}
+   \randint[Z]{a}{-2}{2}
+   \function[normalize]{b}{x+a}
+   \function[normalize]{amin}{-a}
+   \function[normalize]{f}{x^2+2*a*x+a^2}
+   \randint{r}{1}{4}
+   \function[calculate]{d}{r^2}
+   \end{variables}
+    \permutechoices{1}{6}
+      \type{mc.multiple}
+      \field{real}
+      \precision{3}
+    \explanation{Beachten Sie bei der Bewertung der Formeln: Die Lösungen der Gleichung $\var{f}=\var{d}$ sind $x=\var{amin}+\var{r}$ und
+    $x=\var{amin}-\var{r}$.}
+ 
+    \begin{choice}
+        \text{$A\Rightarrow B$}
+          \solution{true}  
+        \end{choice}      
+    \begin{choice}
+        \text{$C\Rightarrow B$}
+          \solution{true}  
+        \end{choice}      
+    \begin{choice}
+        \text{$B\Rightarrow C$}
+          \solution{false}  
+        \end{choice}      
+    \begin{choice}
+        \text{$B\Rightarrow (A\vee C)$}
+          \solution{true}
+        \end{choice}     
+    \begin{choice}
+        \text{$A\Leftrightarrow \neg C$}
+          \solution{false}
+        \end{choice}
+        \begin{choice}
+        \text{$\neg B\Rightarrow \neg A$}
+          \solution{true}
+        \end{choice}  
+  \end{question}
+  
+%
+% Q3 (nochmal die gleiche Frage wie Q2, um dieser weniger Gewicht zu verleihen.)
+% 
+ \begin{question}
+   \text{Welche Zusammenhänge bestehen zwischen den Aussagen $A$, $B$ und $C$ für jede
+   reelle Zahl $x$?\\
+   $A:\,  \var{b}=\var{r}$\\
+   $B:\,  \var{f}=\var{d}$\\
+   $C:\,  \var{b}=-\var{r}$
+   }
+   
+   \begin{variables}
+   \randint[Z]{a}{-2}{2}
+   \function[normalize]{b}{x+a}
+   \function[normalize]{amin}{-a}
+   \function[normalize]{f}{x^2+2*a*x+a^2}
+   \randint{r}{1}{4}
+   \function[calculate]{d}{r^2}
+   \end{variables}
+    \permutechoices{1}{6}
+      \type{mc.multiple}
+      \field{real}
+      \precision{3}
+      
+	  \explanation{Beachten Sie bei der Bewertung der Formeln: Die Lösungen der Gleichung $\var{f}=\var{d}$ sind $x=\var{amin}+\var{r}$ und
+    	$x=\var{amin}-\var{r}$.}
+ 
+    \begin{choice}
+        \text{$A\Rightarrow B$}
+          \solution{true}  
+        \end{choice}      
+    \begin{choice}
+        \text{$C\Rightarrow B$}
+          \solution{true}  
+        \end{choice}      
+    \begin{choice}
+        \text{$B\Rightarrow C$}
+          \solution{false}  
+        \end{choice}      
+    \begin{choice}
+        \text{$B\Rightarrow (A\vee C)$}
+          \solution{true}
+        \end{choice}     
+    \begin{choice}
+        \text{$A\Leftrightarrow \neg C$}
+          \solution{false}
+        \end{choice}
+        \begin{choice}
+        \text{$\neg B\Rightarrow \neg A$}
+          \solution{true}
+        \end{choice}  
+         
+  \end{question}
+
+%
+% Q4            
+   \begin{question}
+   \text{Welche Zusammenhänge bestehen zwischen den Aussagen $A$, $B$ und $C$ für jede
+   reelle Zahl $x$?\\
+   $A:\,  \var{b}=\var{r}$\\
+   $B:\,  \var{f}=\var{d}$\\
+   $C:\,  \var{b}=-\var{r}$
+   }
+   
+   \begin{variables}
+   \randint[Z]{a}{-2}{2}
+   \function[normalize]{b}{x+a}
+   \function[normalize]{f}{(x+a)^3}
+   \randint{r}{1}{3}
+   \function[calculate]{d}{r^3}
+   \end{variables}
+    \permutechoices{1}{6}
+      \type{mc.multiple}
+      \field{real}
+      \precision{3}
+  
+ \explanation{Beachten Sie bei der Bewertung der Formeln: Wenn die dritten Potenzen zweier Zahlen gleich sind, müssen die Zahlen selbst
+ gleich sein.}
+    \begin{choice}
+        \text{$A\Rightarrow B$}
+          \solution{true}  
+        \end{choice}      
+    \begin{choice}
+        \text{$C\Rightarrow B$}
+          \solution{false}  
+        \end{choice}      
+    \begin{choice}
+        \text{$B\Rightarrow A$}
+          \solution{true}  
+        \end{choice}      
+    \begin{choice}
+        \text{$(A\vee C)\Rightarrow B$}
+          \solution{false}
+        \end{choice}     
+    \begin{choice}
+        \text{$A\Leftrightarrow \neg C$}
+          \solution{false}
+        \end{choice}
+        \begin{choice}
+        \text{$\neg B\Rightarrow \neg A$}
+          \solution{true}
+        \end{choice}  
+         
+  \end{question}
+%
+% Q5 (nochmal die gleiche Frage wie Q4, um dieser weniger Gewicht zu verleihen.)
+% 
+  \begin{question}
+   \text{Welche Zusammenhänge bestehen zwischen den Aussagen $A$, $B$ und $C$ für jede
+   reelle Zahl $x$?\\
+   $A:\,  \var{b}=\var{r}$\\
+   $B:\,  \var{f}=\var{d}$\\
+   $C:\,  \var{b}=-\var{r}$
+   }
+   
+   \begin{variables}
+   \randint[Z]{a}{-2}{2}
+   \function[normalize]{b}{x+a}
+   \function[normalize]{f}{(x+a)^3}
+   \randint{r}{1}{3}
+   \function[calculate]{d}{r^3}
+   \end{variables}
+    \permutechoices{1}{6}
+      \type{mc.multiple}
+      \field{real}
+      \precision{3}
+  
+ \explanation{Beachten Sie bei der Bewertung der Formeln: Wenn die dritten Potenzen zweier Zahlen gleich sind, müssen die Zahlen selbst
+ gleich sein.}
+ 
+    \begin{choice}
+        \text{$A\Rightarrow B$}
+          \solution{true}  
+        \end{choice}      
+    \begin{choice}
+        \text{$C\Rightarrow B$}
+          \solution{false}  
+        \end{choice}      
+    \begin{choice}
+        \text{$B\Rightarrow A$}
+          \solution{true}  
+        \end{choice}      
+    \begin{choice}
+        \text{$(A\vee C)\Rightarrow B$}
+          \solution{false}
+        \end{choice}     
+    \begin{choice}
+        \text{$A\Leftrightarrow \neg C$}
+          \solution{false}
+        \end{choice}
+        \begin{choice}
+        \text{$\neg B\Rightarrow \neg A$}
+          \solution{true}
+        \end{choice}  
+         
+  \end{question}
+\end{problem}
+
+\embedmathlet{mathlet}
+\end{content}

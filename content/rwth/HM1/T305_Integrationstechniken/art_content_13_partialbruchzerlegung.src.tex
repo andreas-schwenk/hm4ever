@@ -1,0 +1,885 @@
+%$Id:  $
+\documentclass{mumie.article}
+\begin{metainfo}
+  \name{
+    \lang{de}{Partialbruchzerlegung}
+    \lang{en}{Partial fraction decomposition}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T305_Chart.meta.xml}{T305_Chart}
+    \component{generic_image}{content/rwth/HM1/images/g_img_T305_summary.meta.xml}{image}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T305_Integrationstechniken/g_art_content_13_partialbruchzerlegung.meta.xml}{content_13_partialbruchzerlegung}
+    \link{generic_article}{content/rwth/HM1/T304_Integrierbarkeit/g_art_content_09_integrierbare_funktionen.meta.xml}{stammfunktion}
+    \link{generic_article}{content/rwth/HM1/T103_Polynomfunktionen/g_art_content_10_polynomdivision.meta.xml}{polydiv}
+    \link{generic_article}{content/rwth/HM1/T305_Integrationstechniken/g_art_content_12_substitutionsregel.meta.xml}{substitution}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{4}
+\ombarticle{3}
+
+\title{\lang{de}{Partialbruchzerlegung}\lang{en}{Partial fraction decomposition}}
+ 
+\begin{block}[annotation]
+  
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10040}{Ticket 10040}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\lang{de}{
+In diesem Abschnitt geht es darum, Stammfunktionen zu rationalen Funktionen zu bestimmen, um
+Integrale über solchen berechnen zu können. 
+Es stellt sich heraus, dass es im Allgemeinen schwierig ist, von rationalen Funktionen
+Stammfunktionen zu bestimmen.
+Ein wichtiges Hilfsmittel ist dabei die
+\notion{Partialbruchzerlegung}, bei der eine rationale Funktion in kleinere Bausteine bestimmter Form
+zerlegt wird. Wir geben hier das allgemeine Verfahren an. Die Resultate decken alle theoretischen Fälle ab
+und sind teilweise nicht einfach zu lesen. Die Beispiele decken aber einen Großteil der in der Anwendung auftretenden Fälle ab.
+Wir beginnen mit den verschiedenen Bausteinen. Am Ende des Kapitels, in Abschnitt \ref{sec:summary},
+geben wir eine Zusammenfassung.
+}
+\lang{en}{
+In this section we study how to determine antiderivatives of rational functions in order to be able 
+to integrate them. It turns out that in general, it is difficult to find antiderivatives of rational 
+functions. \notion{Partially decomposing} a rational function into smaller expressions of 
+a particular form can be a useful tool for this, and here we give the general method for doing so. 
+The results cover every theoretical case and can be difficult to read. The examples cover most cases 
+that appear in application. We begin with the individual components. At the end of the chapter, in 
+section \ref{sec:summary}, we give a summary.
+}
+
+\section{\lang{de}{Stammfunktionen negativer Potenzen linearer Funktionen}
+         \lang{en}{Antiderivatives of negative powers of linear functions}
+         }\label{sec:partialbruch_int}
+
+\lang{de}{
+Für die Funktionen $f(x)=\frac{1}{x^n}$ mit fester natürlicher Zahl $n$ haben wir
+\link{stammfunktion}{Stammfunktionen} kennengelernt. Diese waren gegeben durch
+}
+\lang{en}{
+We already know antiderivatives for functions $f(x)=\frac{1}{x^n}$ where $n$ is some constant:
+}
+\begin{align}
+  F(x) &=\ln(|x|),\quad \text{\lang{de}{falls }\lang{en}{if }} &f(x)=\frac{1}{x},\\
+  F(x) &=\frac{1}{(1-n)x^{n-1}},\quad \text{\lang{de}{falls }\lang{en}{if }} &f(x)=\frac{1}{x^n}\,\text{\lang{de}{ mit }\lang{en}{ where }}n>1.
+\end{align}
+
+\lang{de}{
+Mit Hilfe der \ref[substitution][Substitutionsregel für lineare Funktionen]{rule:lin-subst} lassen 
+sich auch Stammfunktionen für negative Potenzen beliebiger linearer Funktionen $g(x)=mx+b$ angeben.
+}
+\lang{en}{
+Using the \ref[substitution][substitution rule for linear functions]{rule:lin-subst} we can also 
+find antiderivatives for negative powers of a linear function $g(x)=mx+b$.
+}
+
+\begin{rule}\label{rule:linearrational}
+ \lang{de}{
+ Es seien $n\in \N$ eine natürliche Zahl und $m,b\in \R$ reelle Zahlen mit $m\neq 0$. Weiter sei
+ }
+ \lang{en}{
+ Let $n\in \N$ be a natural number and $m,b\in \R$ real numbers with $m\neq 0$. Furthermore, let
+ }
+ \[ h:\R\setminus \{-\frac{b}{m}\}\to \R, \ \ x\mapsto \frac{1}{(mx+b)^{n}}. \]
+ \lang{de}{Dann ist eine Stammfunktion von $h$ gegeben durch}
+ \lang{en}{Then the following function is an antiderivative of $h$:}
+ \[ H(x)=\left\{ \begin{matrix} \frac{\ln{(|mx+b|)}}{m}, & \text{\lang{de}{falls }\lang{en}{if }}n=1,\\
+ \frac{(mx+b)^{-n+1}}{(1-n)m},& \text{\lang{de}{falls }\lang{en}{if }}n>1.
+ \end{matrix} \right. \]
+ \end{rule}
+
+ \begin{proof*}
+ \lang{de}{
+ Schreibt man $h(x)=f(g(x))$ mit äußerer Funktion $f(x)=x^{-n}$ und innerer Funktion $g(x)=mx+b$, so
+ ist nach der \ref[substitution][linearen Substitutionsregel]{rule:lin-subst} die
+ Stammfunktion genau die angegebene Funktion.
+ }
+ \lang{en}{
+ If we write $h(x)=f(g(x))$ with outer function $f(x)=x^{-n}$ and inner function $g(x)=mx+b$, then 
+ by the \ref[substitution][linear substitution rule]{rule:lin-subst}, the given function is an 
+ antiderivative.
+ }
+ \end{proof*}
+
+% \begin{remark}
+% Zum Rechnen ist es oft übersichtlicher, mit Integralen mit variablen Grenzen $\alpha$ und $\beta$ zu rechnen. 
+% Die Umformungen für obige Regel ist dann im Fall $n>1$ mit $g(x)=mx+b$ und $g'(x)=m$:
+% \begin{eqnarray*}
+%  \int_{\alpha}^{\beta} (mx+b)^{-n}\; dx &=& \int_{\alpha}^{\beta} g(x)^{-n}\; dx=\int_{\alpha}^{\beta} \frac{g'(x)}{m}g(x)^{-n}\; dx\\
+%  &=&   \int_{g(\alpha)}^{g(\beta)} \frac{y^{-n}}{m}\; dy = \left[ \frac{y^{-n+1}}{(-n+1)m}\right]_{g(\alpha)}^{g(\beta)} \\
+%  &=& \left[ \frac{(mx+b)^{-n+1}}{(-n+1)m}\right]_{\alpha}^{\beta}.
+%  \end{eqnarray*}
+% \end{remark}
+
+ \section{\lang{de}{Stammfunktionen rationaler Funktionen mit quadratischen Nennern}
+          \lang{en}{Antiderivatives of rational functions with quadratic denominators}
+          }\label{sec:stammf-rat-fkt-quad}
+
+\lang{de}{
+Wir betrachten eine rationale Funktion $f(x)=\frac{p(x)}{q(x)}$, wobei $q(x)=ax^2+bx+c$ ein 
+quadratisches Polynom ist. Ist der Grad von $p$ größer oder gleich dem Grad von $q$, so kann man 
+zunächst eine \link{polydiv}{Polynomdivision} durchführen und erhält
+}
+\lang{en}{
+Consider a rational function $f(x)=\frac{p(x)}{q(x)}$, where $q(x)=ax^2+bx+c$ is a quadratic 
+polynomial. If the degree of $p$ is greater than or equal to the degree of $q$, then we can begin 
+by performing \link{polydiv}{polynomial division} to obtain
+}
+ \[ f(x)=g(x)+\frac{r(x)}{q(x)} \]
+\lang{de}{
+mit Polynomfunktionen $g(x)$ und $r(x)$, wobei der Grad von $r$ echt kleiner als der von $q$ ist 
+(oder sogar $r=0$ gilt). Eine Stammfunktion von $f$ erhält man dann als Summe von Stammfunktionen 
+von $g$ und von $\frac{r}{q}$.
+\\\\
+Da wir Stammfunktionen von Polynomen schon behandelt haben, beschränken wir uns in diesem 
+Paragraphen auf die Bestimmung einer Stammfunktion für eine rationale Funktion $\frac{r}{q}$ mit 
+$\deg(r)<\deg(q)$. Da $q$ als quadratisch angenommen wurde, ist $r$ dann also konstant oder linear.
+}
+\lang{en}{
+where $g(x)$ and $r(x)$ are polynomials, and the degree of $r$ is strictly smaller than the degree 
+of $q$ (or even $r=0$). An antiderivative of $f$ can now be found as the sum of antiderivatives 
+of $g$ and $\frac{r}{q}$.
+\\\\
+We already have a method of finding antiderivatives of polynomials, so we restrict ourselves in this 
+section to determining antiderivatives of rational functions $\frac{r}{q}$ where $\deg(r)<\deg(q)$. 
+As $q$ is supposed to be quadratic, $r$ must be constant or linear.
+}
+
+
+\begin{theorem}\label{thm:stammfkt_rationale}
+\lang{de}{
+Es sei $q(x)=ax^2+bx+c$ eine Polynomfunktion vom Grad $2$ mit $a,b,c\in \R$ und $a\neq 0$.\\ 
+Weiter setzen wir 
+}
+\lang{en}{
+Let $q(x)=ax^2+bx+c$ be a polynomial of degree $2$ with $a,b,c\in \R$ und $a\neq 0$.\\ 
+Let 
+}
+$d:=\left(\frac{b}{2a}\right)^2-\frac{c}{a}$.
+% $d:=-\frac{c}{a}$.
+\lang{de}{Dann gelten:}
+\lang{en}{Then:}
+\begin{enumerate}
+\item \lang{de}{Eine Stammfunktion von $\frac{2ax+b}{ax^2+bx+c}$ ist gegeben durch}
+      \lang{en}{The function $\frac{2ax+b}{ax^2+bx+c}$ has an antiderivative}
+      \[\ln(|ax^2+bx+c|). \]
+\item \lang{de}{Für eine Stammfunktion von $\frac{1}{ax^2+bx+c}$ gibt es drei Fälle:}
+      \lang{en}{There are three cases concerning the function $\frac{1}{ax^2+bx+c}$:}
+\begin{itemize}
+\item \lang{de}{
+      Besitzt das Polynom $ax^2+bx+c$ keine reelle Nullstelle (genau in diesem Fall ist $d<0$), so 
+      ist eine Stammfunktion gegeben durch
+      }
+      \lang{en}{
+      If the polynomial $ax^2+bx+c$ does not have any real roots (which is precisely when $d<0$), 
+      then the following function is an antiderivative:
+      }
+      \[ \frac{\arctan\left(\frac{x+\frac{b}{2a}}{\sqrt{-d}}\right)}{a\cdot \sqrt{-d}}.\]
+\item \lang{de}{
+      Besitzt das Polynom $ax^2+bx+c$ genau eine reelle Nullstelle (in diesem Fall ist $d=0$ und die 
+      Nullstelle ist gegeben durch $x_0=-b/(2a)$), so ist $ax^2+bx+c=a(x-x_0)^2$ und eine 
+      Stammfunktion von $\frac{1}{ax^2+bx+c}=\frac{1}{a(x-x_0)^2}$ ist gegeben durch
+      }
+      \lang{en}{
+      If the polynomial $ax^2+bx+c$ has exactly one real root (which is precisely when $d=0$ and 
+      in this case the root is $x_0=-b/(2a)$), then $ax^2+bx+c=a(x-x_0)^2$ and so the following 
+      function is an antiderivative of $\frac{1}{ax^2+bx+c}=\frac{1}{a(x-x_0)^2}$:
+      }
+      \[ \frac{1}{-a(x-x_0)}.\]
+\item \lang{de}{
+      Besitzt das Polynom $ax^2+bx+c$ zwei verschiedene reelle Nullstellen $x_1$ und $x_2$ (genau in 
+      diesem Fall ist $d>0$ und die Nullstellen sind gegeben durch $x_{1/2}=-b/(2a)\pm \sqrt{d}$), 
+      so ist eine Stammfunktion von $\frac{1}{ax^2+bx+c}=\frac{1}{a(x-x_1)(x-x_2)}$ gegeben durch
+      }
+      \lang{en}{
+      If the polynomial $ax^2+bx+c$ has two distinct roots $x_1$ and $x_2$ (which is precisely 
+      when $d>0$ and in this case the roots are $x_{1/2}=-b/(2a)\pm \sqrt{d}$), then the following 
+      function is an antiderivative of $\frac{1}{ax^2+bx+c}=\frac{1}{a(x-x_1)(x-x_2)}$:
+      }
+\[ \frac{1}{a(x_1-x_2)} \ln\left( |\frac{x-x_1}{x-x_2}|\right). \]
+\end{itemize}
+\end{enumerate}
+\end{theorem}
+
+\lang{de}{
+Wichtiger als sich die Formeln zu merken, ist eigentlich die Herangehensweise zur Bestimmung der 
+Stammfunktionen, die im Folgenden erklärt wird.
+}
+\lang{en}{
+It is more important to learn the strategy for determining antiderivatives than it is to memorise 
+formulas.
+}
+
+\begin{proof*}
+\begin{enumerate}
+\item \lang{de}{
+      Bei der Funktion $f(x)=\frac{2ax+b}{ax^2+bx+c}$ steht im Zähler genau die Ableitung des 
+      Nenners, d.\,h. $f(x)=\frac{q'(x)}{q(x)}=q'(x)\cdot q(x)^{-1}=q'(x)\cdot h(q(x))$ mit 
+      $h(x)=x^{-1}$. Da $H(x)=\ln(|x|)$ eine Stammfunktion von $h(x)$ ist, ist nach der 
+      \ref[substitution][Substitutionsregel]{thm:substitutionsregel} eine Stammfunktion von $f$ 
+      gegeben durch $F(x)=H(q(x))=\ln(|ax^2+bx+c|)$.
+      }
+      \lang{en}{
+      Consider the function $f(x)=\frac{2ax+b}{ax^2+bx+c}$. The numerator is precisely the 
+      derivative of the denominator, that is, 
+      $f(x)=\frac{q'(x)}{q(x)}=q'(x)\cdot q(x)^{-1}=q'(x)\cdot h(q(x))$ where 
+      $h(x)=x^{-1}$. As $H(x)=\ln(|x|)$ is an antiderivative of $h(x)$, by the 
+      \ref[substitution][substitution rule]{thm:substitutionsregel} the function 
+      $F(x)=H(q(x))=\ln(|ax^2+bx+c|)$ is an antiderivative of $f$.
+      }
+
+\item
+\begin{itemize}
+\item \lang{de}{
+      Um die Stammfunktionen für $\frac{1}{ax^2+bx+c}$ im ersten Fall zu bestimmen, erinnern wir 
+      zunächst daran, dass $\arctan(x)$ eine Stammfunktion von $\frac{1}{x^2+1}$ ist.
+      }
+      \lang{en}{
+      In order to determine the antiderivatives of $\frac{1}{ax^2+bx+c}$ in the first case, we 
+      firstly recall that $\arctan(x)$ is an antiderivative of $\frac{1}{x^2+1}$.
+      }
+\begin{incremental}
+\step \lang{de}{
+      Die Stammfunktion von $f(x)=\frac{1}{ax^2+bx+c}$ ergibt sich daraus wieder durch die 
+      Substitutionsregel und die Faktorregel:\\
+      Mittels quadratischer Ergänzung und geschicktem Ausklammern erhält man nämlich
+      }
+      \lang{en}{
+      An antiderivative of $f(x)=\frac{1}{ax^2+bx+c}$ can be found using the substitution 
+      rule and the constant factor rule:\\
+      By completing the square and carefully factoring, we obtain
+      }
+      \[ ax^2+bx+c =a\cdot \left( \left(x+\frac{b}{2a}\right)^2 +\frac{c}{a}- \left(\frac{b}{2a}\right)^2 \right)
+= a\sqrt{-d}^2\cdot  \left(  \left( \frac{x+\frac{b}{2a}}{\sqrt{-d}}\right)^2 +1 \right), \]
+\lang{de}{
+      wobei $d=\left(\frac{b}{2a}\right)^2-\frac{c}{a}<0$ nach Annahme.\\
+      Setzt man nun $g(x)=\frac{x+b/(2a)}{\sqrt{-d}}$ und daher $g'(x)=\frac{1}{\sqrt{-d}}$,
+      so ist
+      }
+      \lang{en}{
+      where $d=\left(\frac{b}{2a}\right)^2-\frac{c}{a}<0$ by the assumption.\\
+      If we now set $g(x)=\frac{x+b/(2a)}{\sqrt{-d}}$ and thus $g'(x)=\frac{1}{\sqrt{-d}}$, we have
+      }
+      \[  f(x)=\frac{1}{ax^2+bx+c}=\frac{1}{a\sqrt{-d}^2}\cdot  \left(  \left( \frac{x+\frac{b}{2a}}{\sqrt{-d}}\right)^2 +1 \right)^{-1} 
+= \frac{g'(x)}{a\sqrt{-d}}\cdot \frac{1}{g(x)^2+1}.\]
+      \lang{de}{Mit der Substitutionsregel ist dann also}
+      \lang{en}{By the substitution rule,}
+      \[ F(x)=\frac{1}{a\sqrt{-d}} \cdot \arctan (g(x)) \ = \ \frac{\arctan\left(\frac{x+\frac{b}{2a}}{\sqrt{-d}}\right)}{a\cdot \sqrt{-d}}\]
+      \lang{de}{eine Stammfunktion von $f(x)$.}
+      \lang{en}{is an antiderivative of $f(x)$.}
+\end{incremental}
+\item \lang{de}{
+      Der zweite Fall, in welchem $f(x)=\frac{1}{ax^2+bx+c}=\frac{1}{a(x-x_0)^2}$ gilt, ist 
+      ein Spezialfall von \ref[content_13_partialbruchzerlegung][obiger Regel]{rule:linearrational}.
+      }
+      \lang{en}{
+      The second case $f(x)=\frac{1}{ax^2+bx+c}=\frac{1}{a(x-x_0)^2}$ is a special case of the 
+      \ref[content_13_partialbruchzerlegung][above rule]{rule:linearrational}.
+      }
+\item \lang{de}{
+      Der dritte Fall ergibt sich aus der Partialbruchzerlegung, die im nächsten Paragraphen 
+      behandelt wird; siehe unten stehendes \lref{ex:deg2}{Beispiel}.
+      }
+      \lang{en}{
+      The third case derives from the partial fraction decomposition discussed below; see the 
+      \lref{ex:deg2}{example} below.
+      }
+\end{itemize}
+\end{enumerate}
+\end{proof*}
+
+
+\begin{remark}
+\begin{enumerate}
+\item \lang{de}{
+      Um eine Stammfunktion von $\frac{rx+s}{ax^2+bx+c}$ zu bestimmen (mit $r \neq 0$),
+      zerlegt man die rationale Funktion in eine Summe zweier rationaler Funktionen mit Nenner
+      $ax^2+bx+c$, so dass der Zähler des einen Summanden ein Vielfaches von $2ax+b$ und der Zähler 
+      des anderen Summanden konstant ist. Für diese zwei Typen lässt sich nämlich der obige Satz 
+      anwenden.\\
+      Das heißt, es lassen sich stets $\alpha, \beta \in \R$ berechnen, sodass
+      }
+      \lang{en}{
+      In order to determine an antiderivative of $\frac{rx+s}{ax^2+bx+c}$ (where $r \neq 0$), 
+      we decompose the rational function into the sum of two rational functions with denominator 
+      $ax^2+bx+c$, such that the numerator of one of these is a multiple of $2ax+b$ and the 
+      numerator of the other is constant. The above theorem can then be applied to each summand.\\
+      We can always find $\alpha, \beta \in \R$ such that
+      }
+\[
+\frac{rx+s}{ax^2+bx+c}= \alpha \cdot  \frac{2ax+b}{ax^2+bx+c} + \beta \cdot \frac{1}{ax^2+bx+c}.
+\]
+
+\begin{incremental}
+\step \lang{de}{Eine solche Zerlegung ist stets möglich, da}
+      \lang{en}{Such a decomposition is always possible, as}
+\begin{align*}
+\frac{rx+s}{ax^2+bx+c} &= \frac{r}{2a}\frac{2ax+\frac{2as}{r}+b-b}{ax^2+bx+c}\\
+&=\frac{r}{2a}\left(\frac{2ax+b}{ax^2+bx+c}\right) + \frac{r}{2a}\left(\frac{\frac{2as}{r}-b}{ax^2+bx+c}\right).
+\end{align*}
+\end{incremental}
+
+\item \lang{de}{
+      Als Bausteine in der Partialbruchzerlegung treten die Funktionen $\frac{rx+s}{ax^2+bx+c}$ nur 
+      in dem Fall auf, dass $ax^2+bx+c$ keine reelle Nullstelle hat. In den anderen Fällen wäre ein 
+      solcher Bruch schon weiter zerlegt.
+      }
+      \lang{en}{
+      When decomposing partial fractions, functions of the form $\frac{rx+s}{ax^2+bx+c}$ only appear 
+      in the case where $ax^2+bx+c$ does not have real roots. In every other case, such a fraction 
+      could be further decomposed.
+      }
+\end{enumerate}
+\end{remark}
+
+\begin{example}
+\lang{de}{
+Um eine Stammfunktion für die rationale Funktion $R(x)=\frac{x+2}{x^2-x+3}$ zu bestimmen, zerlegen 
+wir den Zähler als Summe $x+2=\alpha (2x-1)+\beta$ mit reellen Zahlen $\alpha$ und $\beta$, da 
+$2x-1$ genau die Ableitung von $x^2-x+3$ ist.\\
+Die Zahlen $\alpha$ und $\beta$ bestimmen wir mit Koeffizientenvergleich:
+}
+\lang{en}{
+In order to determine an antiderivative of the rational function $R(x)=\frac{x+2}{x^2-x+3}$, we 
+decompose the numerator into the sum $x+2=\alpha (2x-1)+\beta$ for some real numbers $\alpha$ and 
+$\beta$, as $2x-1$ is the derivative of $x^2-x+3$.\\
+}
+\begin{align*}
+& \textcolor{#0066CC}{1} \cdot x+\textcolor{#CC6600}{2} &=\alpha (2x-1)+\beta= \textcolor{#0066CC}{2\alpha} x+ (\textcolor{#CC6600}{\beta-\alpha}) \\
+\Leftrightarrow  & \ \textcolor{#0066CC}{1=2\alpha} &\text{\lang{de}{ und }\lang{en}{ and }} \ \textcolor{#CC6600}{2=\beta-\alpha} \\
+\Leftrightarrow  & \ \alpha=\frac{1}{2} &\text{\lang{de}{ und }\lang{en}{ and }} \ \beta= \frac{5}{2}\, .
+\end{align*}
+\lang{de}{Also ist}
+\lang{en}{Hence}
+\[ \frac{x+2}{x^2-x+3} = \frac{1}{2}\cdot \frac{2x-1}{x^2-x+3}+  \frac{5}{2}\cdot \frac{1}{x^2-x+3}. \]
+\lang{de}{
+Eine Stammfunktion für $\frac{2x-1}{x^2-x+3}$ ist $\ln{|x^2-x+3|}$.
+Weiter erhält man für das $d$ aus obiger Formel $d=(1/2)^2-3=-11/4<0$, weshalb
+$x^2-x+3$ keine reelle Nullstelle hat. Eine Stammfunktion
+für $\frac{1}{x^2-x+3}$ ist daher gegeben durch
+}
+\lang{en}{
+The function $\ln{|x^2-x+3|}$ is an antiderivative of $\frac{2x-1}{x^2-x+3}$. 
+For $d$ we obtain the formula $d=(1/2)^2-3=-11/4<0$, by which we know that 
+$x^2-x+3$ does not have any real roots. The following function is therefore an antiderivative of 
+$\frac{1}{x^2-x+3}$:
+}
+\[ \sqrt{\frac{4}{11}}\cdot\arctan\left( \frac{x-\frac{1}{2}}{\sqrt{\frac{11}{4}}}\right)=\frac{2}{\sqrt{11}}\cdot\arctan\left( \frac{2x-1}{\sqrt{11}}\right). \]
+\lang{de}{Insgesamt erhält man also als Stammfunktion von $R(x)$:}
+\lang{en}{To conclude, $R(x)$ has the following antiderivative:}
+\[   \frac{1}{2}\cdot \ln{|x^2-x+3|} + \frac{5}{\sqrt{11}} \arctan\left( \frac{2x-1}{\sqrt{11}}\right). \]
+\end{example}
+
+
+\begin{remark}
+\lang{de}{Ein weiterer Baustein für die Partialbruchzerlegung sind rationale Funktionen der Form}
+\lang{en}{Another component of partial fraction decomposition are the rational functions of the form}
+\[ r(x)=\frac{p(x)}{(x^2+bx+c)^n}, \]
+\lang{de}{
+wobei $p(x)$ ein konstantes oder lineares Polynom ist, der Nenner keine reellen Nullstellen hat und 
+$n>1$ ist. Wie in der vorherigen Bemerkung kann man $p(x)$ dann noch zerlegen in 
+$\alpha (2x+b)+\beta$ mit reellen Zahlen $\alpha$ und $\beta$, wodurch man sich auf die zwei Fälle
+}
+\lang{en}{
+where $p(x)$ is a constant or linear polynomial, the denominator has no real roots and $n>1$. As 
+in the earlier remark, we can decompose $p(x)$ into $\alpha (2x+b)+\beta$ for some real numbers 
+$\alpha$ and $\beta$. We arrive at one of two cases:
+}
+\[ \frac{2x+b}{(x^2+bx+c)^n}\quad\text{\lang{de}{und}\lang{en}{and}}\quad \frac{1}{(x^2+bx+c)^n} \]
+\lang{de}{
+zurückziehen kann. 
+Für das erstere erhält man mit der Substitutionsregel als Stammfunktion direkt
+}
+\lang{en}{
+In the first case, the substitution rule immediately yields an antiderivative,
+}
+\[ \frac{1}{(1-n)(x^2+bx+c)^{n-1}}. \]
+\lang{de}{
+Die Bestimmung der Stammfunktion von $ \frac{1}{(x^2+bx+c)^n}$ ist deutlich schwieriger und 
+behandeln wir in diesem Kurs nicht.
+}
+\lang{en}{
+Determining an antiderivative of $ \frac{1}{(x^2+bx+c)^n}$ is significantly more difficult, and is 
+not considered in this course.
+}
+% . Das Prinzip beruht darauf, 
+% zunächst die Substitution
+% \[ t=\arctan \left(\frac{x+b/(2)}{\sqrt{-d}}\right) \]
+% durchzuführen und das resultierende unbestimmte Integral (welches dann $\cos(t)$ und/oder $\sin(t)$ enthält) 
+% geschickt partiell zu integrieren.
+\end{remark}
+
+
+\section{\lang{de}{Partialbruchzerlegung}
+         \lang{en}{Partial fraction decomposition}}\label{sec:partbruchzerl}
+
+\lang{de}{
+Jedes reelle Polynom $q(x)$ hat eine Zerlegung in ein Produkt linearer und quadratischer Polynome,
+wobei die quadratischen Polynome keine reellen Nullstellen haben, d.\,h.
+}
+\lang{en}{
+Every real polynomial $q(x)$ has a decomposition into a product of linear and quadratic polynomials, 
+where the quadratic polynomials do not have any real roots, that is,
+}
+\[ q(x) = (x-a_1)^{k_1}\cdots (x-a_s)^{k_s}\cdot(x^2+p_1\,x+q_1)^{l_1}\cdots(x^2+p_t\,x+q_t)^{l_t}\lang{de}{,}
+\]
+\lang{de}{wobei }
+\lang{en}{where }
+$k_1+\ldots+k_s+2l_1+\ldots+2l_t = n = \text{\lang{en}{degree}\lang{de}{Grad}}(q(x))$, 
+$a_j,\;p_j,\;q_j\in\R,\; p_j^2<4q_j\,$
+\lang{de}{
+und die Nullstellen $a_j$ von $q$ paarweise verschieden sind (dieses Resultat nennt man den Fundamentalsatz der Algebra).
+\\\\
+Eine solche Produkt-Zerlegung wird benutzt, um rationale Funktionen $ r(x) = \frac{p(x)}{q(x)}$ in 
+eine Summe der oben genannten Bausteine zu zerlegen und damit Stammfunktionen bzw. Integrale zu 
+bestimmen.
+}
+\lang{en}{
+and the roots $a_j$ of $q$ are pairwise different (this result is called the fundamental theorem of 
+algebra).
+\\\\
+Such a decomposition into a product is used to decompose a rational function of the form 
+$ r(x) = \frac{p(x)}{q(x)}$ into a sum of components of the forms mentioned above, with the aim of 
+finding antiderivatives and computing intervals.
+}
+
+\begin{theorem}[\lang{de}{Partialbruchzerlegung}
+                \lang{en}{Partial fraction decomposition}]\label{thm:pzb}
+\lang{de}{Für die rationale Funktion}
+\lang{en}{Given the rational function}
+\[ r(x) = \frac{p(x)}{q(x)}\qquad
+\text{\lang{de}{mit Grad$(p(x))<$ Grad$(q(x))=n$}\lang{en}{with degree$(p(x))<$ degree$(q(x))=n$,}}
+\]
+\lang{de}{
+sei die Produkt-Zerlegung des Polynoms $q(x)$ im Nenner gegeben durch
+}
+\lang{en}{
+let the decomposition of the polynomial $q(x)$ into a product of linear factors and irreducible 
+quadratic factors be given by
+}
+\[ q(x) = (x-a_1)^{k_1}\cdots (x-a_s)^{k_s}\cdot(x^2+p_1\,x+q_1)^{l_1}\cdots(x^2+p_t\,x+q_t)^{l_t}\lang{de}{,}
+\]
+\lang{de}{wobei }
+\lang{en}{where }
+$k_1+\ldots+k_s+2l_1+\ldots+2l_t = n = \text{\lang{en}{degree}\lang{de}{Grad}}(q(x))$.
+\lang{de}{Dann gibt es eindeutige reelle Zahlen}
+\lang{en}{Then there exist unique real numbers}
+\[
+A_{1,1},\ldots,A_{1,k_1},\ldots,A_{s,1},\ldots,A_{s,k_s},
+\,B_{1,1},C_{1,1},\ldots ,B_{t,l_t},C_{t,l_t}\lang{de}{,}
+\]
+\lang{de}{so dass}
+\lang{en}{such that}
+\begin{eqnarray*}
+r(x)&=& \frac{A_{1,1}}{(x-a_1)} +\ldots + \frac{A_{1,k_1}}{(x-a_1)^{k_1}} +\ldots+
+	\frac{A_{s,1}}{(x-a_s)} +\ldots + \frac{A_{s,k_s}}{(x-a_s)^{k_s}} \\
+	&&+\frac{B_{1,1}x+C_{1,1}}{(x^2+p_1\,x+q_1)} +\ldots + \frac{B_{1,l_1}x+C_{1,l_1}}{(x^2+p_1\,x+q_1)^{l_1}}
+	+\ldots + \frac{B_{t,l_t}x+C_{t,l_t}}{(x^2+p_t\,x+q_t)^{l_t}} .
+\end{eqnarray*}
+\lang{de}{
+Um die Zahlen $A_{1,1},\ldots,A_{s,k_s},\,B_{1,1},C_{1,1},\ldots ,B_{t,l_t},C_{t,l_t}$ zu berechnen, 
+bringt man dies auf den Hauptnenner $q(x)$ und vergleicht die Koeffizienten der Zählerpolynome links 
+und rechts. Dies führt zu einem linearen Gleichungssystem mit $n=\deg(q)$ Gleichungen für die $n$ 
+Variablen $A_{1,1},\ldots,A_{s,k_s},\,B_{1,1},C_{1,1},\ldots ,B_{t,l_t},C_{t,l_t}$, welches man 
+lösen muss (siehe Beispiele).
+}
+\lang{en}{
+To calculate the numbers $A_{1,1},\ldots,A_{s,k_s},\,B_{1,1},C_{1,1},\ldots ,B_{t,l_t},C_{t,l_t}$, 
+we add the terms on the RHS (for which we use the common denominator $q(x)$), and compare the 
+coefficients on both sides of the equation. This leads to a uniquely solvable system of $n=\deg(q)$ 
+linear equations in the variables 
+$A_{1,1},\ldots,A_{s,k_s},\,B_{1,1},C_{1,1},\ldots ,B_{t,l_t},C_{t,l_t}$ (see the examples).}
+\end{theorem}
+
+\lang{ded}{
+Das Resultat deckt alle theoretischen Fälle ab.
+Die Faktorisierung des Nennerpolynoms ist häufig schon ein sehr schweres Problem, sodass
+in der Praxis nur Polynome kleinen Grades berechnet werden können.
+Die auftretenden Summanden bleiben überschaubar.
+Wichtig ist, dass Sie die bisher besprochenen Bausteine wiedererkennen.
+Wir berechnen nun explizite Beispiele einer Partialbruchzerlegung.
+}
+\lang{en}{
+This result covers every case in theory. 
+Factorising the polynomial in the denominators is often a difficult problem on its own, so in 
+practice this is only done for polynomials of small degree. 
+Furthermore, this way, the summands remain managable. 
+It is important to recognise the different forms the summands come in. 
+We now give some explicit examples of partial fraction decomposition.
+}
+
+\begin{example}\label{ex:deg2}
+\begin{tabs*}
+\tab{$\frac{1}{x^2-2x-3}$}
+\lang{de}{
+Wir bestimmen die Partialbruchzerlegung von $R(x)=\frac{1}{x^2-2x-3}$.\\
+Die Nullstellen des Nenners sind $x_1=-1$ und $x_2=3$, weshalb
+}
+\lang{en}{
+We will decompose $R(x)=\frac{1}{x^2-2x-3}$ into partial fractions.\\
+The denominator has roots $x_1=-1$ and $x_2=3$, so
+}
+\[ R(x)=\frac{1}{(x+1)(x-3)}. \]
+\lang{de}{Für die Partialbruchzerlegung müssen wir also reelle Zahlen $A_1$ und $A_2$ finden mit}
+\lang{en}{We need to find real numbers $A_1$ and $A_2$ such that}
+\[   \frac{1}{(x+1)(x-3)} =\frac{A_{1}}{x+1} + \frac{A_{2}}{x-3}=
+\frac{A_{1}\cdot (x-3)+A_{2}\cdot (x+1) }{(x+1)(x-3)}. \]
+\lang{de}{Wir vergleichen die Zählerpolynome}
+\lang{en}{We compare the numerators}
+\[
+\textcolor{#0066CC}{0} \cdot x + \textcolor{#CC6600}{1} = (\textcolor{#0066CC}{A_1+A_2})\cdot x 
++(\textcolor{#CC6600}{-3A_1 + A_2}).
+\]
+\lang{de}{Vergleich der Koeffizienten ergibt}
+\lang{en}{Equating coefficients yields}
+\[  \left[  \begin{mtable}[\cellaligns{llr}] \textcolor{#0066CC}{0} &=& \textcolor{#0066CC}{A_{1}+A_{2}} \\
+\textcolor{#CC6600}{1} &=& \textcolor{#CC6600}{-3A_{1} +A_{2}}
+\end{mtable} \right]. \]
+\lang{de}{
+Löst man das Gleichungssystem auf, erhält man $A_{1}=-\frac{1}{4}$ und $A_{2}=\frac{1}{4}$.
+\\\\
+Die Partialbruchzerlegung von $R(x)=\frac{1}{x^2-2x-3}$ ist also
+}
+\lang{en}{
+Solving the system of equations gives us $A_{1}=-\frac{1}{4}$ and $A_{2}=\frac{1}{4}$.
+\\\\
+Hence $R(x)=\frac{1}{x^2-2x-3}$ decomposes into 
+}
+\[  \frac{1}{(x+1)(x-3)} = -\frac{1}{4}\cdot \frac{1}{x+1} + \frac{1}{4}\cdot \frac{1}{x-3}. \]
+
+\tab{$\frac{1}{(x-x_1)(x-x_2)}$} 
+\lang{de}{
+Betrachten wir allgemeiner eine rationale Funktion $R(x)=\frac{1}{(x-x_1)(x-x_2)}$ mit zwei 
+verschiedenen reellen Zahlen $x_1$ und $x_2$, so berechnet man die Partialbruchzerlegung ganz 
+entsprechend:
+}
+\lang{en}{
+Consider more generally a rational function $R(x)=\frac{1}{(x-x_1)(x-x_2)}$ where $x_1$ and $x_2$ 
+are distinct real numbers. The partial fraction decomposition is computed in the same way:
+}
+\[  \frac{1}{(x-x_1)(x-x_2)} =\frac{A_{1}}{x-x_1} + \frac{A_{2}}{x-x_2}=
+\frac{A_{1}\cdot (x-x_2)+A_{2}\cdot (x-x_1) }{(x-x_1)(x-x_2)}. \]
+\lang{de}{Vergleich der Koeffizienten im Zähler ergibt}
+\lang{en}{Equating coefficients in the numerator yields}
+\[  \left[  \begin{mtable}[\cellaligns{llr}] 0 &=& A_{1}+A_{2} \\
+1 &=& -x_2A_{1} -x_1A_{2}
+\end{mtable} \right]. \]
+\lang{de}{
+Die erste Zeile erhalten wir durch Vergleich der Koeffizienten von $x$ und die zweite Zeile durch 
+Vergleich der konstanten Terme.
+\\\\
+Löst man das Gleichungssystem auf, erhält man $A_{1}=\frac{1}{x_1-x_2}$ und 
+$A_{2}=-\frac{1}{x_1-x_2}$.
+\\\\
+Die Partialbruchzerlegung von $R(x)=\frac{1}{(x-x_1)(x-x_2)}$ ist also
+}
+\lang{en}{
+The first row is obtained by comparing the coefficients of $x$, and the second by comparing the 
+constant terms.
+\\\\
+Solving the system of equations yields $A_{1}=\frac{1}{x_1-x_2}$ and $A_{2}=-\frac{1}{x_1-x_2}$.
+\\\\
+Hence $R(x)=\frac{1}{(x-x_1)(x-x_2)}$ decomposes into
+}
+\[  \frac{1}{(x-x_1)(x-x_2)} = \frac{1}{x_1-x_2}\cdot \frac{1}{x-x_1} - \frac{1}{x_1-x_2}\cdot \frac{1}{x-x_2}. \]
+\end{tabs*}
+\end{example}
+
+\lang{de}{
+Beispiele zu den verschiedenen, auftretenden Fällen bei einer Partialbruchzerlegung sind auch in den folgenden Videos zu finden:
+\floatright{
+\href{https://www.hm-kompakt.de/video?watch=122}{\image[75]{00_Videobutton_schwarz}}
+\href{https://www.hm-kompakt.de/video?watch=123}{\image[75]{00_Videobutton_schwarz}}
+\href{https://www.hm-kompakt.de/video?watch=124}{\image[75]{00_Videobutton_schwarz}}}\\
+}
+\lang{en}{}
+
+\begin{quickcheck}
+    \begin{variables}
+        \randint[Z]{a}{-2}{2}
+        \randint[Z]{b}{-3}{3}
+        \randint[Z]{c}{-5}{5}
+        \function[normalize]{f}{x^2+b*x+c}
+        \function[normalize]{n}{(x-a)^2}
+        \function[normalize]{m}{x-a}
+    \end{variables}
+    \text{\lang{de}{
+    Wir wollen eine Partialbruchzerlegung von $\frac{\var{f}}{\var{n} (x^2+x+1)}$
+    durchführen. Welcher Ansatz für den zu berechnenden Koeffizientenvergleich ist zu wählen?
+    }
+    \lang{en}{
+    Suppose we wish to decompose $\frac{\var{f}}{\var{n} (x^2+x+1)}$ into partial fractions using 
+    the above method. What form of expression do we choose with the aim of comparing coefficients?
+    }}
+    %\permuteChoices{1}{4}
+    \begin{choices}{unique}
+        \begin{choice}
+            \text{$\frac{a}{\var{n}}+\frac{b}{\var{m}}+\frac{c}{(x^2+x+1)}$}
+            \solution{false}
+        \end{choice}
+        \begin{choice}
+            \text{$\frac{a}{\var{n}}+\frac{b}{\var{m}}+\frac{cx+d}{(x^2+x+1)}$}
+            \solution{true}
+        \end{choice}
+        \begin{choice}
+            \text{$\frac{ax+b}{\var{n}}+\frac{c}{\var{m}}+\frac{d}{(x^2+x+1)}$}
+            \solution{false}
+        \end{choice}
+        \begin{choice}
+            \text{$\frac{a}{\var{n}}+\frac{bx+c}{(x^2+x+1)}+ \frac{d}{2x+1}$}
+            \solution{false}
+        \end{choice}
+    \end{choices}
+\end{quickcheck}
+
+\begin{remark}
+\begin{itemize}
+\item \lang{de}{
+      Wir haben oben angenommen, dass $q(x)$ von der Form $q(x) = x^n + $ Terme niedrigerer Ordnung 
+      ist. Wenn der Nenner von der Form $a_n\,x^n + \ldots$ mit $a_n\neq 0$ ist, dann teile zuerst 
+      Zähler und Nenner durch $a_n$.
+      }
+      \lang{en}{
+      We have assumed above that $q(x)$ is of the form $q(x) = x^n + $ lower order terms. If instead 
+      the denominator is of the form $a_n\,x^n + \ldots$ with $a_n\neq 0$, then we can simply divide 
+      the numerator and denominator by $a_n$ to satisfy this assumption.
+      }
+\item \lang{de}{
+      Wenn bei der rationalen Funktion $R(x)= P(x)/q(x)$ der Grad des Polynoms im Zähler nicht 
+      kleiner als im Nenner ist, also Grad$(P(x))\geq $ Grad$(q(x))$, dann wende zunächst die 
+      \link{polydiv}{Polynomdivision} an, um ein Polynom $P_1(x)$ so abzuspalten, dass
+      }
+      \lang{en}{
+      If in the rational function $R(x)= P(x)/q(x)$ the degree of the polynomial in the numerator is 
+      not less than the degree of the polynomial in the denominator, that is, if 
+      $\text{degree}(P(x)) \geq \text{degree}(q(x))$, then we begin by applying 
+      \link{polydiv}{polynomial division} to split off a polynomial $P_1(x)$ such that
+      }
+      \[ R(x)= P_1(x) + \frac{p(x)}{q(x)}, \quad \text{\lang{de}{Grad}\lang{en}{degree}}(p(x)) <
+      \text{\lang{de}{Grad}\lang{en}{degree}}(q(x)).
+      \]
+\end{itemize}
+\end{remark}
+
+\section{\lang{de}{Zusammenfassung: Stammfunktionen von rationalen Funktionen}
+         \lang{en}{Overview: antiderivatives of rational functions}}\label{sec:summary}
+
+\lang{de}{Wir fassen die Resultate und das Vorgehen in einem Schaubild zusammen:}
+\lang{en}{We summarise the results and methods in the following chart:}
+\begin{center}
+\image{T305_Chart}
+\end{center}
+
+\lang{de}{
+Die wichtigsten Fälle, die bei der Bestimmung einer Stammfunktion oder eines Integrals einer 
+gebrochen-rationalen Funktion auftreten, werden auch in den beiden folgenden Videos behandelt und 
+erklärt:
+  \floatright{\href{https://www.hm-kompakt.de/video?watch=632}{\image[75]{00_Videobutton_schwarz}}
+  \href{https://www.hm-kompakt.de/video?watch=633}{\image[75]{00_Videobutton_schwarz}}}\\
+}
+\lang{en}{}  
+  
+
+
+\begin{example}
+\lang{de}{
+Um eine Stammfunktion der Funktion $R(x)=\frac{1}{(x-x_1)(x-x_2)}$ mit verschiedenen reellen Zahlen 
+$x_1$ und $x_2$ zu berechnen, bestimmen wir zunächst die Partialbruchzerlegung (siehe 
+\lref{ex:deg2}{obiges Beispiel}):
+}
+\lang{en}{
+In order to determine an antiderivative of a function $R(x)=\frac{1}{(x-x_1)(x-x_2)}$ with distinct 
+real numbers $x_1$ and $x_2$, we firstly decompose it into partial fractions (see 
+\lref{ex:deg2}{above example}):
+}
+\[  \frac{1}{(x-x_1)(x-x_2)} = \frac{1}{x_1-x_2}\cdot \frac{1}{x-x_1} - \frac{1}{x_1-x_2}\cdot \frac{1}{x-x_2}. \]
+\lang{de}{
+Stammfunktionen von $\frac{1}{x-x_1}$ und $ \frac{1}{x-x_2}$ sind gegeben durch
+$\ln(|x-x_1|)$ bzw. $\ln(|x-x_2|)$ und daher ist eine gesuchte Stammfunktion
+}
+\lang{en}{
+The functions $\ln(|x-x_1|)$ and $\ln(|x-x_2|)$ are antiderivatives of $\frac{1}{x-x_1}$ and 
+$ \frac{1}{x-x_2}$ respectively, so an antiderivative of $R(x)$ is
+}
+\begin{eqnarray*} 
+\frac{1}{x_1-x_2}\cdot  \ln({|x-x_1|}) - \frac{1}{x_1-x_2}\cdot \ln({|x-x_2|})
+&=& \frac{1}{x_1-x_2}\cdot \left(  \ln({|x-x_1|}) - \ln({|x-x_2|})\right) \\
+&=& \frac{1}{x_1-x_2}\cdot \ln  \left( \frac{|x-x_1|}{|x-x_2|}\right). \end{eqnarray*}
+\end{example}
+
+
+
+\begin{example}
+\begin{tabs*}[\initialtab{0}]
+\tab{$\frac{x^3+x^2-3x+7}{x^2+x-2}$}
+\begin{enumerate}
+\item \lang{de}{Wir bestimmen eine Stammfunktion von $R(x)=\frac{x^3+x^2-3x+7}{x^2+x-2}$.}
+      \lang{en}{Suppose we wish to find an antiderivative of $R(x)=\frac{x^3+x^2-3x+7}{x^2+x-2}$.}
+\begin{itemize}
+\item \lang{de}{
+      Bei der rationalen Funktion $R(x)$ ist der Grad des Polynoms im Zähler nicht kleiner als im 
+      Nenner. Deshalb müssen wir zunächst die \link{polydiv}{Polynomdivision} anwenden, um den 
+      polynomialen Anteil $\,P_1(x)$ von $R$ abzuspalten:
+      }
+      \lang{en}{
+      The degree of the polynomial in the numerator of $R(x)$ is not smaller than that in the 
+      denominator. Hence we begin via \link{polydiv}{polynomial division} to split a polynomial 
+      $\,P_1(x)$ from $R$:
+      }
+      \[ R(x) = \frac{x^3+x^2-3x+7}{x^2+x-2} = x + \frac{-x+7}{x^2+x-2}\eqcolon P_1(x)+r(x).\]
+      \lang{de}{
+      Der polynomiale Anteil ist $\,P_1(x)=x\,$ und der Rest $\,r(x)\,$ erfüllt 
+      \nowrap{Grad$(-x+7)=1 < $ Grad$(x^2+x-2)=2$.}
+      }
+      \lang{en}{
+      The polynomial part is $P_1(x)=x\,$ and the remainder $\,r(x)\,$ satisfies 
+      \nowrap{degree$(-x+7)=1 < $ degree$(x^2+x-2)=2$.}
+      }
+\item \lang{de}{
+      Als zweiten Schritt berechnen wir die Nullstellen des Nenners, welche $x_1=1$ und $x_2=-2$ 
+      sind. Also ist
+      }
+      \lang{en}{
+      The second step is to calculate the roots of the denominator, which turn out to be $x_1=1$ and 
+      $x_2=-2$. Hence
+      }
+      \[ x^2+x-2 = (x-1)\cdot (x+2).\]
+\item \lang{de}{Danach berechnen wir die Partialbruchzerlegung von $\,r(x)$.}
+      \lang{en}{Next we compute the decomposition of $\,r(x)$ into partial fractions.}\\
+\begin{align*} &&r(x) &=& \frac{-x+7}{(x-1)\cdot (x+2)} = \frac{A_1}{x-1}+\frac{A_2}{x+2}\\
+	&&&=& \frac{A_1(x+2)+A_2(x-1)}{(x-1)\cdot (x+2)} = \frac{(A_1+A_2)\,x+(2A_1-A_2)}{(x-1)\cdot (x+2)}\\
+	&\Longleftrightarrow&&& A_1+A_2 = -1,\qquad 2A_1-A_2 = 7\\
+	&\Longleftrightarrow&&& A_1=2,\qquad A_2=-3.\\
+\end{align*}
+\lang{de}{Somit $\qquad r(x) =\frac{-x+7}{(x-1)\cdot (x+2)} = \frac{2}{x-1}-\frac{3}{x+2}$.}
+\lang{en}{Hence $\qquad r(x) =\frac{-x+7}{(x-1)\cdot (x+2)} = \frac{2}{x-1}-\frac{3}{x+2}$.}
+\item \lang{de}{
+      Da $R(x)=x + \frac{2}{x-1} - \frac{3}{x+2}$ gilt, ist eine Stammfunktion gegeben durch
+      }
+      \lang{en}{
+      As $R(x)=x + \frac{2}{x-1} - \frac{3}{x+2}$, we have an antiderivative
+      }
+      \[  \frac{x^2}{2}+2\,\ln{|x-1|}-3\,\ln{|x+2|}. \]
+\end{itemize}
+\item \lang{de}{Wir wollen nun das bestimmte Integral}
+      \lang{en}{Now suppose we wish to compute the definite integral}
+      \[ \int_{-1}^0\,R(x)\,dx=\int_{-1}^0\,\frac{x^3+x^2-3x+7}{x^2+x-2}\; dx\lang{de}{}\lang{en}{.}\]
+      \lang{de}{
+      berechnen. Zu beachten ist, dass das Integral definiert ist, da keine Nullstelle des Nenners 
+      im Integrationsintervall $\,[-1;\,0]\,$ liegt.
+      }
+      \lang{en}{
+      We remark that the integral is defined, the denominator has no roots in the 
+      interval $\,[-1;\,0]\,$.
+      }
+      \begin{align*} \int_{-1}^0\,R(x)\,dx&=&\left[\frac{x^2}{2}+2\,\ln{|x-1|}-3\,\ln{|x+2|}\right]_{-1}^0\\
+    	&=& -\frac{1}{2}+2\left(\ln(1)-\ln(2)\,\right)-3(\ln(2)-\ln(1)\,)\\
+    	&=& -\frac{1}{2} -5\ln(2)=-\frac{1}{2} -\ln(32).
+      \end{align*}
+\end{enumerate}
+\tab{$\frac{2x^3-2x^2+12x-3}{(x^2-x+3)^2}$}
+\begin{enumerate}
+\item \lang{de}{
+      Wir bestimmen eine Stammfunktion von $R(x)=\frac{2x^3-2x^2+12x-3}{(x^2-x+3)^2}$.
+      }
+      \lang{en}{
+      Suppose we wish to find an antiderivative of $R(x)=\frac{2x^3-2x^2+12x-3}{(x^2-x+3)^2}$.
+      }
+\begin{itemize}
+  \item \lang{de}{
+        Zunächst ist der Grad des Polynoms im Zähler kleiner als im Nenner: 
+        \nowrap{Grad$(2x^3-2x^2+12x-3)=3 < $ Grad$((x^2-x+3)^2)=4$.} 
+        Deshalb brauchen wir keine \link{polydiv}{Polynomdivision} anzuwenden, um einen polynomialen 
+        Anteil von $R$ abzuspalten.
+        }
+        \lang{en}{
+        Firstly, we remark that the degree of the polynomial in the numerator is smaller than that 
+        in the denominator: 
+        \nowrap{Grad$(2x^3-2x^2+12x-3)=3 < $ Grad$((x^2-x+3)^2)=4$.} 
+        Thus no \link{polydiv}{polynomial division} is needed.
+        }
+\item \lang{de}{
+      Anschließend versuchen wir Nullstellen des Nenners zu finden: 
+      Mit der pq-Formel erhält man jedoch
+      }
+      \lang{en}{
+      Finally we look for roots of the denominator. The pq-formula yields
+      }
+      \[ x_{1/2}=\frac{1}{2}\pm \sqrt{\frac{1}{4}-3}=\frac{1}{2}\pm \sqrt{-\frac{11}{4}}. \]
+      \lang{de}{
+      Da es aber keine reellen Wurzeln einer negativen Zahl gibt, besitzt der Nenner keine reellen 
+      Nullstellen, deshalb gibt es keine weitere reelle Faktorisierung.
+      }
+      \lang{en}{
+      As there are no real square roots of a negative number, the denominator has no real roots. 
+      Hence there is no further real factorisation.
+      }
+\item \lang{de}{Nun berechnen wir die Partialbruchzerlegung von $\,R(x)$.}
+      \lang{en}{Now we decompose $\,R(x)\,$ into partial fractions.}
+      \begin{align*} &R(x) &=& \frac{2x^3-2x^2+12x-3}{(x^2-x+3)^2}\\
+      	&&=&\frac{B_1x+C_1}{(x^2-x+3)} + \frac{B_2x+C_2}{(x^2-x+3)^2}\\
+      	&&=& \frac{(B_1x+C_1)\cdot(x^2-x+3) + B_2x+C_2}{(x^2-x+3)^2}\\
+      	&&=&\frac{B_1\,x^3 + (-B_1+C_1)\,x^2 + (3B_1-C_1+B_2)\,x +(3C_1+C_2)}{(x^2-x+3)^2},\\
+      	\Longleftrightarrow&&& B_1=2,\quad -B_1+C_1=-2,\quad 3B_1-C_1+B_2=12,\quad 3C_1+C_2=-3,\\
+      	\Longleftrightarrow&&& B_1=2,\quad C_1=0,\quad B_2=6,\quad C_2=-3.\\
+      \end{align*}
+      \lang{de}{Somit $\qquad R(x)= \frac{2x}{(x^2-x+3)}+\frac{6x-3}{(x^2-x+3)^2}$.}
+      \lang{en}{Hence $\qquad R(x)= \frac{2x}{(x^2-x+3)}+\frac{6x-3}{(x^2-x+3)^2}$.}
+\item \lang{de}{
+      Schließlich zerlegen wir die Terme so, dass möglichst der Zähler die Ableitung des 
+      quadratischen Terms im Nenner ist.
+      }
+      \lang{en}{
+      Finally we break up the summands.
+      }
+      \begin{align*} R(x)&=& \frac{2x}{(x^2-x+3)}+\frac{6x-3}{(x^2-x+3)^2}\\
+       &=& \frac{2x-1}{(x^2-x+3)}+\frac{1}{(x^2-x+3)}+3\frac{2x-1}{(x^2-x+3)^2}.
+      \end{align*}
+\item \lang{de}{
+      Dann können wir schließlich eine Stammfunktion als Summe der Stammfunktionen der Bausteine 
+      berechnen: Stammfunktion von
+      }
+      \lang{en}{
+      Finally, we can compute the sum of antiderivatives of the components in order to determine 
+      the antiderivative of the original function. The derivative of
+      }
+      \[ R(x)= \frac{2x-1}{(x^2-x+3)}+\frac{1}{(x^2-x+3)}+3\frac{2x-1}{(x^2-x+3)^2}\]
+      \lang{de}{ist}
+      \lang{en}{is}
+      \[ \ln{\left|x^2-x+3\right|} + \frac{2}{\sqrt{11}}\arctan\left(\frac{2x-1}{\sqrt{11}}\right)-\frac{3}{(x^2-x+3)}. \]
+\end{itemize}
+\item \lang{de}{Wir wollen nun das bestimmte Integral}
+      \lang{en}{Now suppose we wish to compute the definite integral}
+      \[ \int_{0}^2\,R(x)\,dx= \int_{0}^2\,\frac{2x^3-2x^2+12x-3}{(x^2-x+3)^2}\; dx\]
+      \lang{de}{berechnen.}
+      \lang{en}{using the antiderivative.}
+\begin{align*} \int_{0}^2\,R(x)\,dx&=& 
+\left[ \ln{\left|x^2-x+3\right|} + \frac{2}{\sqrt{11}}\arctan\left(\frac{2x-1}{\sqrt{11}}\right)-\frac{3}{(x^2-x+3)}\right]_0^2\\
+	&=& (\ln(5)-\ln(3)) + \frac{2}{\sqrt{11}}\left(\arctan\left(\frac{3}{\sqrt{11}}\right)-\arctan\left(\frac{-1}{\sqrt{11}}\right)\,\right)
+	-(\frac{3}{5}-1)\\
+	&=& \ln\left(\frac{5}{3}\right) +
+	\frac{2}{\sqrt{11}}\left(\arctan\left(\frac{3}{\sqrt{11}}\right)-\arctan\left(\frac{-1}{\sqrt{11}}\right)\,\right) +\frac{2}{5}.
+\end{align*}
+\end{enumerate}
+\end{tabs*}
+\end{example}
+
+\end{content}

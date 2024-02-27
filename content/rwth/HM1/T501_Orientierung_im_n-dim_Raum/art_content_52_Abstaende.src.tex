@@ -1,0 +1,602 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{Abstände, Normen, Konvergenz}
+   }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \begin{components}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T501_ClosedCuboid.meta.xml}{T501_ClosedCuboid}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T501_OpenCuboid.meta.xml}{T501_OpenCuboid}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T501_HalfOpenCuboid.meta.xml}{T501_HalfOpenCuboid}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T501_Norms.meta.xml}{T501_Norms}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T501_OpenBall.meta.xml}{T501_OpenBall}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T501_TriangleInequality.meta.xml}{T501_TriangleInequality}
+\end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T207_Intervall_Schachtelung/g_art_content_22_offene_abgeschlossene_teilmengen.meta.xml}{content_22_offene_abgeschlossene_teilmengen}
+\link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_16_konvergenzkriterien.meta.xml}{content_16_konvergenzkriterien}
+\link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_14_konvergenz.meta.xml}{content_14_konvergenz}
+\link{generic_article}{content/rwth/HM1/T204_Abbildungen_und_Funktionen/g_art_content_12_reelle_funktionen_monotonie.meta.xml}{content_12_reelle_funktionen_monotonie}
+\link{generic_article}{content/rwth/HM1/T109_Skalar-_und_Vektorprodukt/g_art_content_32_laenge_norm.meta.xml}{content_32_laenge_norm}
+\end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21415}{Ticket 21415}
+\end{block}
+\usepackage{mumie.ombplus}
+
+\ombchapter{1}
+\ombarticle{2}
+\lang{de}{\title{Abstände, Normen, Konvergenz}}
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{Normen}
+Um im $\R^n$ Längen und Abstände zu messen, bedient man sich einer Verallgemeinerung des 
+Absolutbetrags auf $\R=\R^1$, einer sogenannten Norm.
+\begin{definition}[Norm]\label{def:norm_allgemein}
+Eine \notion{Norm} auf dem $\R^n$ ist eine Abbildung $\Vert \cdot \Vert:\R^n\to\R$, 
+die die folgenden Eigenschaften erfüllt.
+\begin{enumerate}
+\item[(N1)] \notion{Positive Definitheit:}
+Für alle $x\in \R^n$ ist $\Vert x \Vert\geq 0$, 
+und $\Vert x \Vert = 0$ gilt genau dann, wenn $x=0$.
+\item[(N2)] Für alle $x\in\R^n$ und alle $c\in\R$ gilt
+$\Vert c\cdot x \Vert=\vert c\vert\cdot \Vert x \Vert$.
+\item[(N3)]\notion{Dreiecksungleichung:}
+Für alle $x,y\in\R^n$ gilt
+$\Vert x+y \Vert\leq \Vert x \Vert+\Vert y \Vert$.
+\begin{center}
+\image{T501_TriangleInequality}
+\end{center}
+\end{enumerate}
+\end{definition}
+%%
+Dabei ist (N2) eine Verallgemeinerung der Multiplikativität des Absolutbetrags 
+$\vert c\cdot x\vert=\vert c\vert\cdot \vert x\vert$ für alle $c,x\in \R$.
+\\
+Aus (N3) lässt sich sofort auch die \emph{zweite Dreiecksungleichung} herleiten: Für alle $x,y\in\R^n$ gilt
+\[\big| {\Vert x \Vert-\Vert y \Vert}\big| \leq {\Vert x-y \Vert}.\]
+Setzt man nämlich statt $x$ in (N3)  $\tilde{x}=x-y$ ein, so erhält man für alle $x,y\in\R^n$
+$\Vert x \Vert -\Vert y \Vert\leq \Vert x-y \Vert$.
+Da diese Gleichung für alle $x,y\in\R^n$ gilt, gilt sie auch, wenn man die Rollen von $x$ und $y$ vertauscht.
+Also gilt für alle $x,y\in\R^n$ ebenfalls
+$\Vert y \Vert -\Vert x \Vert\leq \Vert x-y \Vert$.
+Beide Ungleichungen zusammen ergeben nun die zweite Dreiecksungleichung.
+
+Die berühmteste Norm kennen Sie bereits, 
+nämlich die \ref[content_32_laenge_norm][Euklidische]{sec:euklidische_norm} $\Vert\cdot \Vert_2$: 
+Für $x=(x_1,\ldots,x_n)^T\in\R^n$
+ist
+\[{\Vert x \Vert_2}=\sqrt{x_1^2+\ldots+x_n^2}.\]
+Es gibt aber weitere, oft benutzte Normen.
+%%
+\begin{theorem}\label{thm:weitere_normen}
+Die folgenden Abbildungen definieren Normen auf dem $\R^n$.
+\begin{enumerate}
+\item[(a)] \notion{Maximumsnorm} $\Vert\cdot \Vert_\infty:\R^n\to\R$, 
+$\Vert x\Vert_\infty=\max_{1\leq i\leq n}\vert x_i\vert$.
+\item[(b)]\notion{$1$-Norm} $\Vert\cdot \Vert_1:\R^n\to\R$, 
+$\Vert x\Vert_1=\sum_{i=1}^n\vert x_i\vert$.
+\end{enumerate}
+\end{theorem}
+%%
+\begin{proof*}[Beweis von Satz \ref{thm:weitere_normen}]
+Diese Aussagen folgen direkt mit Hilfe der grundlegenden Eigenschaften des reellen Absolutbetrags.
+\begin{incremental}{1}
+\step
+Zu (a):  Für alle $x\in\R^n$ gilt offensichtlich $\Vert x\Vert_\infty\geq 0$, und ist 
+$\Vert x\Vert_\infty=\max_i \vert x_i\vert=0$,
+so müssen alle $x_i=0$ sein.
+\\
+Für eine reelle Zahl $c$ und $x\in\R^n$ ist $\max_i \vert cx_i\vert=\vert c\vert \max_i \vert x_i\vert$, also gilt 
+$\Vert c\cdot x \Vert_\infty=\vert c\vert\cdot \Vert x \Vert_\infty$.
+\\
+Wird für $x,y\in\R^n$ das Maximum $\max_i \vert x_i+y_i\vert$ in der $j$-ten Komponente angenommen, so folgt mit der Dreiecksungleichung des Absolutbetrags
+\begin{align*}
+\Vert x+y\Vert_\infty&= \vert x_j+y_j\vert\leq \vert x_j\vert+\vert y_j\vert\\
+&\leq \max_i \vert x_i\vert +\max_i \vert y_i\vert \\
+&=\Vert x\Vert_\infty+\Vert y\Vert_\infty.
+\end{align*}
+Damit sind die drei Norm-Eigenschaften nachgerechnet, und die Maximumsnorm ist wirklich eine Norm auf dem $\R^n$.
+\step
+Zu (b): Offensichtlich ist $\sum_i\vert x_i\vert\geq 0$ für alle $x\in\R^n$. Und  $\sum_i\vert x_i\vert= 0$ kann nur dann gelten, wenn alle Summanden gleich null sind,
+also wenn $x_i=0$ für alle $i$, das heißt wenn $x=0$.
+\\
+Für alle $x\in\R^n$ und alle $c\in\R$ rechnet man
+\[{\Vert c\cdot x\Vert_1}=\sum_{i=1}^n {\vert c\cdot x_i\vert}=\sum_{i=1}^n {\vert c\vert\cdot \vert x_i\vert}
+={\vert c\vert}\cdot\sum_{i=1}^n {\vert  x_i\vert}={\vert c\vert\cdot\Vert x\Vert_1}.\]
+Zuletzt rechnet man auch noch die Dreicksungleichung nach
+\[{\Vert  x+y\Vert_1}=\sum_{i=1}^n {\vert x_i+y_i\vert}
+\leq \sum_{i=1}^n {(\vert x_i\vert+\vert y_i\vert)}={\Vert  x\Vert_1+\Vert  y\Vert_1}.
+\]
+Somit hat auch die $1$-Norm die Bezeichnung als Norm verdient.
+\end{incremental}
+\end{proof*}
+%
+%Video
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10733&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+\begin{quickcheck}
+\type{input.number}
+  \field{rational}
+ 
+  \begin{variables}
+  \function[calculate]{N2}{3}
+  \function[calculate]{Ninfty}{2}
+  \function[calculate]{N1}{5}
+  \end{variables}
+\text{ Es sei $x=\begin{pmatrix}1\\-2\\2\end{pmatrix}\in\R^3$. Berechne 
+$\Vert  x\Vert_2$=\ansref, $\Vert x\Vert_\infty=$\ansref, 
+$\Vert  x\Vert_1=$\ansref.}
+\begin{answer}
+\solution{N2}
+\end{answer}
+\begin{answer}
+\solution{Ninfty}
+\end{answer}
+\begin{answer}
+\solution{N1}
+\end{answer}
+\end{quickcheck}
+%%
+\begin{theorem}[Norm-Abschätzungen]\label{thm:norm-equivalence}
+Für alle $x\in\R^n$ gelten die folgenden Abschätzungen.
+\begin{equation}\label{eq:Eins-Max-Norm-Abschätzung}
+\Vert  x\Vert_\infty \leq \Vert  x\Vert_1\leq  n\cdot \Vert  x\Vert_\infty,
+\end{equation}
+sowie
+\begin{equation}\label{eq:Maximumnorm-Abschätzung}
+\Vert  x\Vert_\infty \leq \Vert  x\Vert_2\leq \sqrt{n}\cdot \Vert  x\Vert_\infty
+\end{equation}
+und
+\begin{equation}\label{eq:Einsnorm-Abschätzung}
+\frac{1}{\sqrt{n}}\cdot{\Vert  x\Vert_1 \leq \Vert  x\Vert_2\leq  \Vert  x\Vert_1}.
+\end{equation}
+\end{theorem}
+%
+\begin{quickcheck}
+\type{input.number}
+  \field{rational}
+\begin{variables}
+  \function[calculate]{N2}{5}
+  \function[calculate]{Ninfty}{4}
+  \function[calculate]{N1}{7}
+  \function[calculate]{ZNinfty}{8}
+  \end{variables}
+\text{Berechne die verschiedenen Normen von $x=\begin{pmatrix}3\\-4\end{pmatrix}\in\R^2$ 
+und verifiziere die Ungleichungen.\\
+$\Vert x\Vert_2=$\ansref, $\Vert  x\Vert_\infty=$\ansref und $\Vert  x\Vert_1=$\ansref.
+\\
+Die zugehörigen Ungleichungen lauten
+\\
+$\Vert x\Vert_\infty \leq \Vert  x\Vert_1\leq  n\cdot \Vert  x\Vert_\infty$:$\:$
+\ansref $\leq$ \ansref $\leq $\ansref,
+\\
+$\Vert x\Vert_\infty \leq \Vert  x\Vert_2\leq \sqrt{n}\cdot \Vert  x\Vert_\infty$: $\:$
+\ansref $\leq$  \ansref $\leq\sqrt{2}$ \ansref,
+\\
+$\frac{1}{\sqrt{n}}\cdot{\Vert  x\Vert_1 \leq \Vert  x\Vert_2\leq  \Vert  x\Vert_1}$: $\:$ 
+$\frac{1}{\sqrt{2}}$\ansref $\leq$ \ansref $\leq$ \ansref.}
+\begin{answer}
+\solution{N2}
+\end{answer}
+\begin{answer}
+\solution{Ninfty}
+\end{answer}
+\begin{answer}
+\solution{N1}
+\end{answer}
+%
+\begin{answer}
+\solution{Ninfty}
+\end{answer}
+\begin{answer}
+\solution{N1}
+\end{answer}
+\begin{answer}
+\solution{ZNinfty}
+\end{answer}
+%
+\begin{answer}
+\solution{Ninfty}
+\end{answer}
+\begin{answer}
+\solution{N2}
+\end{answer}
+\begin{answer}
+\solution{Ninfty}
+\end{answer}
+%
+\begin{answer}
+\solution{N1}
+\end{answer}
+\begin{answer}
+\solution{N2}
+\end{answer}
+\begin{answer}
+\solution{N1}
+\end{answer}
+\end{quickcheck}
+%
+%
+\begin{proof*}
+\begin{incremental}{0}
+\step
+Zunächst erhält man (\ref{eq:Eins-Max-Norm-Abschätzung}) aus
+\[
+{\Vert  x\Vert_\infty}=\max_{i=1,\ldots,n}{\vert x_i\vert}\leq\sum_{i=1}^n{\vert x_i\vert}={\Vert  x\Vert_1},
+\]
+und
+\[
+{\Vert  x\Vert_1}=\sum_{i=1}^n{\vert x_i\vert}\leq  n\cdot \max_{i=1,\ldots,n}{\vert x_i\vert}=n\cdot{\Vert x\Vert_\infty}.
+\]
+\step
+Weiter ergibt sich aus der \ref[content_12_reelle_funktionen_monotonie][Monotonie der Quadratwurzel]{ex:monotone_funktionen}.
+\[
+{\Vert  x\Vert_\infty}=\max_{i=1,\ldots,n}{\vert x_i\vert}=\sqrt{\max_{i=1,\ldots,n} x_i^2}
+\leq \sqrt{\sum_{i=1}^nx_i^2}={\Vert  x\Vert_2}
+\]
+und
+\[
+{\Vert  x\Vert_2}=\sqrt{\sum_{i=1}^nx_i^2}\leq \sqrt{n\cdot \max_{i=1,\ldots,n} x_i^2}=\sqrt{n}\cdot\max_{i=1,\ldots,n}{\vert x_i\vert}=\sqrt{n}\cdot{\Vert  x\Vert_\infty}
+\]
+die Abschätzung (\ref{eq:Maximumnorm-Abschätzung}).
+\step
+Schließlich sehen wir für die  letzte Abschätzung (\ref{eq:Einsnorm-Abschätzung})  
+zunächst ein, dass $\Vert  x\Vert_2\leq \Vert  x\Vert_1$ wahr ist, denn für reelle Zahlen $a$ und $b$ 
+ gilt stets $a^2+b^2\leq (|a|+|b|)^2 $. Damit folgt (induktiv über die Anzahl der Summanden)
+\[
+\sum_{i=1}^n x_i^2\leq \big(\sum_{i=1}^n {\vert x_i\vert}\big)^2.
+% \big(=\sum_{i=1}^n {\vert x_i\vert^2}+
+% \sum_{i\neq j\in\{1,\ldots,n\}} {\vert x_i\vert\vert y_j\vert}
+% \big)
+% \Leftrightarrow 
+% 0\leq \sum_{i\neq j\in\{1,\ldots,n\}} {\vert x_i\vert\vert y_j\vert}.
+\]
+%Die letzte Aussage ist offensichtlich wahr, und somit ist das zweite Ungleichheitszeichen in (\ref{eq:Einsnorm-Abschätzung}) bewiesen.
+Für das erste Ungleichheitszeichen bemerken wir zunächst die Ungleichung aus quadratischem und arithmetischen Mittel:
+Für $a,b\geq 0$ ist $\sqrt{ab}\leq \frac{a+b}{2}$, denn es gilt $0\leq (\sqrt{a}-\sqrt{b})^2=a-2\sqrt{ab}+b$.
+Damit formen wir um, schätzen ab und summieren um
+\begin{align*}
+\Vert  x\Vert_1^2&=\sum_{i,j=1}^n{ \vert x_i\vert\cdot\vert x_j\vert}=\sum_{i,j=1}^n\sqrt{ x^2_i\cdot x_j^2}\\
+&\leq \sum_{i,j=1}^n\frac{x_i^2+x_j^2}{2}=\frac{n}{2}\sum_{i=1}^nx_i^2+\frac{n}{2}\sum_{j=1}^nx_j^2\\
+&=n\cdot \Vert  x\Vert_2^2.
+\end{align*}
+Wurzelziehen an beiden Enden dieser Ungleichung ergibt die gewünschte letzte Abschätzung.
+\end{incremental}
+\end{proof*}
+\begin{remark}
+Die Abschätzungen (\ref{eq:Maximumnorm-Abschätzung}) und (\ref{eq:Einsnorm-Abschätzung}) sind \emph{scharf}, das heißt
+man kann an jeder Stelle \glqq$\leq$\grqq{} ein $x\in\R^n$, $x\neq 0$, angeben, für das Gleichheit \glqq$=$\grqq{} gilt.
+\begin{incremental}{0}
+\step
+Für 
+ $x=(x_{1},0,\ldots,0)^T$ ist $\Vert  x\Vert_\infty =\vert x_1\vert=\Vert  x\Vert_1=\Vert  x\Vert_2$,
+\step
+Für  $x=(x_1,\ldots,x_1)$ ist $\Vert  x\Vert_1=n\cdot\vert x_1\vert=n\cdot\Vert  x\Vert_\infty=
+\sqrt{n}\cdot \Vert  x\Vert_2$.
+\end{incremental}
+\end{remark}
+
+%Video
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10734&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\\\
+
+
+\begin{remark}[Operatornorm]\label{rem:operatornorm}
+Auch für Matrizen kann man Normen definieren. Zum Beispiel könnten wir den Raum der $(m\times n)$-Matrizen $M(m,n;\R)$
+identifizieren mit dem $\R^{m\cdot n}$ und ihn dann mit einer der oben genannten Normen  versehen.
+Weil Matrizen aber Abbildungen, also Operatoren, zwischen $\R^n$ und $\R^m$ sind, betrachtet man
+oft sogenannte Operatornormen:
+
+Es sei $\Vert \cdot \Vert_{(n)}$ eine Norm auf dem $\R^n$ und es sei $\Vert\cdot\Vert_{(m)}$ eine Norm auf
+dem $\R^m$. Für eine Matrix $A\in M(m,n;\R)$ definiert man die \notion{Operatornorm}
+\[{\Vert A\Vert}=\text{sup}_\limits{x\in\R^n \text{ mit } \Vert x\Vert_{(n)}=1}{\Vert A\cdot x\Vert_{(m)}}.\]
+Die Operatornorm ist wohldefiniert und wirklich eine Norm. (Dies zeigen wir hier nicht.)
+
+Für die Operatornorm, jede Matrix $A\in M(m,n;\R)$ und alle $x\in\R^n$ gilt die Abschätzung
+\[\Vert A\cdot x\Vert_{(m)}\leq \Vert A\Vert \cdot \Vert x\Vert_{(n)}\:.\]
+
+
+%Video
+\center{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10735&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+\end{remark}
+%%%%%
+%%%%%
+%%%%%
+\section{Konvergenz}
+Nun haben  wir einen Abstandsbegriff im $\R^n$, mit dem wir ausdrücken können , wann sich zwei Objekte annähern. 
+Wir betrachten Folgen und definieren aufbauend auf die 
+\ref[content_14_konvergenz][Konvergenz reeller Folgen]{def:folgenkonvergent}, wann sie konvergieren.
+\begin{definition}[Konvergenz]\label{def:folge_im_R_n}
+\begin{itemize}
+\item[(a)]
+Eine \notion{Folge} im $\R^n$ ist eine Abbildung $\N\to\R^n$. Anders als in $\R$ selbst, ist es hier ungünstig, die Folgeglieder
+mit Indices $x_k$ durchzunummerieren, denn damit werden bereits die Komponenten eines Elements $x\in\R^n$ bezeichnet.
+Wir schreiben daher eine Folge im $\R^n$ als $(x^{(k)})_{k\in\N}$. Jedes Folgeglied $x^{(k)}$ läßt sich in Komponenten
+zerlegen $x^{(k)}=(x_1^{(k)},\ldots,x_n^{(k)})$. Die einzelnen Komponenten bilden dann selbst Folgen $(x_i^{(k)})_{k\in\N}$ in $\R$,
+$i=1,\ldots,n$.
+\item[(b)] Eine Folge $x^{(k)}$ im $\R^n$ heißt \notion{konvergent} gegen den Grenzwert $a\in\R^n$ bezüglich einer Norm $\Vert\cdot\Vert$,
+wenn
+\[
+\lim_{k\to\infty}\:{\Vert x^{(k)}-a\Vert=0. }
+\]
+Das heißt, wir definieren die Konvergenz der Folge $x^{(k)}$ über die Konvergenz der reellen Bildfolge
+$(\Vert x^{(k)}-a\Vert)_{k\in\N}$ gegen den Grenzwert null.
+\item[(c)]
+Eine Folge $x^{(k)}$ im $\R^n$ heißt \notion{divergent}, wenn sie nicht konvergiert.
+\end{itemize}
+\end{definition}
+\begin{example}
+Die Folge $\Big(\begin{pmatrix}2\\1+\frac{1}{k}\\-\frac{1}{k^2}\end{pmatrix}^{(k)}\Big)_{k\in\N}$ konvergiert bezüglich der
+Euklidischen Norm gegen den
+Grenzwert $\begin{pmatrix}2\\1\\0\end{pmatrix}$, denn
+\[\lim_{k\to\infty}\Vert \begin{pmatrix}2\\1+\frac{1}{k}\\-\frac{1}{k^2}\end{pmatrix}-\begin{pmatrix}2\\1\\0\end{pmatrix}\Vert_2
+=\lim_{k\to\infty}\Vert \begin{pmatrix}0\\\frac{1}{k}\\-\frac{1}{k^2}\end{pmatrix}  \Vert_2
+=\lim_{k\to\infty} \sqrt{\frac{1}{k^2}+\frac{1}{k^4}}=0,\]
+was aus der Stetigkeit der Quadratwurzel und  den Grenzwertsätzen folgt.
+\end{example}
+%
+\begin{remark}[Äquivalenz der Normen]\label{remark:norm-equivalence}
+\begin{itemize}
+\item 
+Man kann  sogar stärker als Satz \ref{thm:norm-equivalence} folgendes zeigen: 
+Sind $\Vert\cdot\Vert$ und $\Vert \cdot\Vert'$ zwei \emph{beliebige} Normen auf dem $\R^n$,
+dann gibt es Konstanten $c,C>0$ so, dass für alle $x\in\R^n$ gilt
+\begin{equation}\label{eq:Norm-Ungleichung}
+c\cdot\Vert x\Vert\leq \Vert x\Vert'\leq C\cdot\Vert x\Vert.
+\end{equation}
+\item
+Diese Verallgemeinerung von Satz \ref{thm:norm-equivalence} wird dann oft so formuliert:
+\\
+\notion{Auf dem $\R^n$ sind alle Normen äquivalent.}
+\\
+\item
+Das heißt \emph{nicht}, dass ein Element $x\in\R^n$ in allen Normen dieselbe Länge hat (dann wären die Normen ja alle gleich).
+Das heißt auch \emph{nicht}, dass eine Länge in einer Norm kürzer ist als eine andere, genau dann, wenn sie es in irgendeiner anderen Norm ist.
+\\
+Vielmehr heißt es: 
+\\
+Wenn eine Folge von Abständen in einer Norm beliebig klein wird, dann wird diese Folge in jeder Norm beliebig klein.
+Also: Ist $(x^{(k)})_{k\in\N}$ eine Folge im $\R^n$, und sind $\Vert\cdot \Vert_a$ und $\Vert \cdot \Vert_b$
+zwei Normen auf dem $\R^n$, dann gilt
+\[
+\lim_{k\to\infty}\:{\Vert x^{(k)}\Vert_a}=0\quad\Leftrightarrow\quad \lim_{k\to\infty}\:{\Vert x^{(k)}\Vert_b}=0.
+\]
+Dies folgt sofort  aus der Abschätzung (\ref{eq:Norm-Ungleichung}) zusammen mit dem 
+\ref[content_16_konvergenzkriterien][Sandwich-Lemma]{rule:sandwich-lemma}.
+\end{itemize}
+\end{remark}
+%%
+\begin{theorem}
+Eine Folge $(x^{(k)})_{k\in\N}$ im $\R^n$ konvergiert genau dann (bezüglich irgendeiner Norm),
+wenn alle Komponentenfolgen $(x_i^{(k)})_{k\in\N}$, $i=1,\ldots,n$, in $\R$ konvergieren.
+\end{theorem}
+\begin{proof*}
+\begin{incremental}{0}
+\step
+Nach Bemerkung \ref{remark:norm-equivalence} konvergiert die Folge $(x^{(k)})_{k\in\N}$ gegen den Grenzwert $a=(a_1,\ldots,a_n)^T\in\R^n$ genau dann, 
+wenn sie  bezüglich der Maximumsnorm gegen $a$ konvergiert.
+\step
+Dann gilt aber für alle Glieder  Komponentenfolgen $(x_i^{(k)})_{k\in\N}$, $i=1,\ldots,n$,
+\[
+0\leq {\vert x_i^{(k)}-a_i\vert }\leq \Vert x^{(k)}-a\Vert_{\infty}.
+\]
+Weil die Folge auf der rechte Seite gegen $0$ konvergiert, konvergiert also auch die mittlere Folge nach dem 
+\ref[content_16_konvergenzkriterien][Sandwich-Lemma]{rule:sandwich-lemma} gegen null.
+Also ist $\lim_{k\to\infty}x_i^{(k)}=a_i$.
+\step
+Sind andererseits alle Komponentenfolgen konvergent, $\lim_{k\to\infty}x_i^{(k)}=a_i$, $i=1,\ldots,n$,
+dann konvergiert die Folge $(x^{(k)})_{k\in\N}$ bezüglich der $1$-Norm gegen $a=(a_1,\ldots,a_n)^T$,
+\[
+\lim_{k\to\infty}\: {\vert\!\vert x^{(k)}-a\vert\!\vert_1} =\lim_{k\to\infty}\sum_{i=1}^n{\vert x_i^{(k)}-a_i\vert}=
+\sum_{i=1}^n \lim_{k\to\infty}{\vert x_i^{(k)}-a_i\vert}=\sum_{i=1}^n 0=0.
+\]
+Wiederum nach Bemerkung \ref{remark:norm-equivalence} konvergiert die Folge $(x^{(k)})_{k\in\N}$ in jeder Norm gegen $a$.
+\end{incremental}
+\end{proof*}
+
+%Video
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10736&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+%%
+\begin{quickcheck}
+\type{input.number}
+  \field{rational}
+\begin{variables}
+  \function[calculate]{c1}{1}
+  \function[calculate]{c2}{5}
+  \function[calculate]{c3}{0}
+  \end{variables}
+\text{Bestimmen Sie
+$\lim_{k\to\infty}\begin{pmatrix}\frac{3k^2+k+3}{3k^2+1}\\5-\frac{1}{3k}\\\frac{13k+1}{3k^3+1}\end{pmatrix}=
+\begin{pmatrix}c_1\\c_2\\c_3\end{pmatrix}$.\\
+Es ist $c_1=$\ansref, $c_2=$\ansref und $c_3=$\ansref.}
+\begin{answer}
+\solution{c1}
+\end{answer}
+\begin{answer}
+\solution{c2}
+\end{answer}
+\begin{answer}
+\solution{c3}
+\end{answer}
+\end{quickcheck}
+%
+\section{Offene Teilmengen des $\R^n$}
+Wir haben bereits  \ref[content_22_offene_abgeschlossene_teilmengen][offene und abgeschlossene Teilmengen]{sec:offene_mengen}
+von $\R$ behandelt. Nun verallgemeinern wir diese Begriffe im $\R^n$.
+\begin{definition}[Offene und abgeschlossene Mengen]\label{def:offen_abgeschlossen}
+\begin{enumerate}
+\item[(a)]
+Es sei $a\in\R^n$ und $r>0$. Dann heißt
+\[U_r(a)=\{x\in\R^n\mid \Vert x-a\Vert<r\}\]
+die \notion{offene Kugel} mit Mittelpunkt $a$ und Radius $r$ bezüglich der Norm 
+$\Vert\cdot\Vert$.
+\item[(b)]
+Sei sei $a\in\R^n$. Eine Teilmenge $U$ des $\R^n$ heißt \notion{Umgebung} von $a$, wenn es ein $r>0$ gibt so, 
+dass $U_r(a)\subset U$ (bezüglich irgendeiner Norm) gilt. Insbesondere ist $a\in U$.
+\item[(c)]
+Es sei $M\subset \R^n$ eine Teilmenge. Dann heißt $a\in M$ \notion{innerer Punkt} von $M$, 
+wenn es eine Umgebung $U$ von $a$ gibt so, dass $U\subset M$.
+\item[(d)]
+Eine Teilmenge $M\subset\R^n$ heißt \notion{offen}, wenn jeder Punkt von $M$ ein innerer Punkt ist.
+(Das heißt, dass $M$ entweder leer ist oder mit einem Element auch eine volle offene Kugel um dieses Element enthält.)
+\item[(e)]
+Eine Teilmenge $A\subset\R^n$ heißt \notion{abgeschlossen}, wenn ihr Komplement $M=\R^n\setminus A$ offen ist.
+\item[(f)]
+Ein Punkt $x\in\R^n$ heißt \notion{Randpunkt} einer (nicht leeren) Menge $M\subset\R^n$, wenn jede offene
+Umgebung von $x$ sowohl Punkte aus $M$ als auch Punkte aus dem Komplement $\R^n\setminus M$ enthält.
+\end{enumerate}
+\end{definition}
+\begin{remark}[Offene Kugeln]\label{rem:offene_Kugeln}
+\begin{itemize}
+\item 
+Wir benutzen die Bezeichnung \emph{offen} für \emph{Kugeln} in Teil (a) der Definition bereits, bevor wir in Teil (d) definieren, 
+was wir unter einer \emph{offenen Menge} verstehen. Daher folgt jetzt die wichtige Feststellung, 
+dass wir in Teil (a) keine Parallelbezeichnung geschaffen haben, sondern lediglich eine Bezeichnung ein paar Zeilen vorweggenommen haben. Es gilt nämlich:
+\item
+Die offene Kugel $U_r(a)$ ist offen.
+\begin{center}
+\image{T501_OpenBall}
+\end{center}
+\begin{incremental}{0}
+\step
+ Dazu müssen wir zeigen, dass zu jedem $b\in U_r(a)$ eine kleine offene Kugel $U_\rho(b)$
+ganz zu $U_r(a)$ gehört.
+\step
+Wir zeigen, dass dies für  $\rho:=r-\Vert b-a\Vert>0$, also den Abstand von $b$ zum Rand, erfüllt ist
+\step
+Es sei $x\in U_\rho(b)$. Dann gilt mit der Dreiecksungleichung (N3) (siehe Definition \ref{def:norm_allgemein})
+\[ \Vert x-a\Vert=\Vert (x-b)+(b-a)\Vert\leq
+\Vert x-b\Vert+\Vert b-a\Vert < \rho +\Vert b-a\Vert=r. \]
+Also gilt $x\in U_r(a)$.
+\end{incremental}
+\item Offene Kugeln zu verschiedenen Normen:
+Die genaue Gestalt einer offenen Kugel hängt von der Wahl der Norm ab. 
+Für die Maximumsnorm und die $1$-Norm sind die offenen Kugeln zum Beispiel nicht rund.
+Das folgende Bild zeigt die \glqq Kugeln\grqq{}  $U_r(0)$ vom Radius $r$ in drei verschiedenen
+Normen im $\R^2$. Dabei ist
+\begin{align*}
+U_r^{(2)}(0)\:&=\{(x,y)^T\in\R^2\mid \Vert (x,y)^T\Vert_2=\sqrt{x^2+y^2}<r\},\\
+U_r^{(\infty)}(0)\:&=\{(x,y)^T\in\R^2\mid \Vert (x,y)^T\Vert_\infty=
+\max\{\vert x\vert, \vert y\vert\}<r\},\\
+U_r^{(1)}(0)\:&=\{(x,y)^T\in\R^2\mid \Vert (x,y)^T\Vert_1=\vert x\vert+ \vert y\vert<r\}.\\
+\end{align*}
+\begin{center}
+\image{T501_Norms}
+\end{center}
+\item
+Jedoch ist die Eigenschaft einer Menge \notion{offen zu sein  unabhängig} von der Wahl der Norm. 
+Denn wenn $\Vert \cdot\Vert$ und $\Vert \cdot\Vert'$ zwei Normen auf dem $\R^n$ sind, dann folgt
+aus der Abschätzung in Bemerkung \ref{remark:norm-equivalence} für die zugehörigen offenen Kugeln
+\[U_{\frac{r}{C}}(a)\subseteq U_r'(a)\subseteq U_{\frac{r}{c}}(a).\]
+Eine offene Kugel zu der einen Norm enthält also immer eine offene Kugel zur anderen Norm und umgekehrt. Lediglich die Radien variieren.
+Das gibt einem in der Praxis viel Freiheit beim Nachweis, dass eine Menge offen ist, denn es reicht, offene Kugeln um Punkte 
+zu einer beliebigen Norm zu finden.
+\end{itemize}
+\end{remark}
+%
+%
+\begin{example}[Offene und abgeschlossene Quader]\label{ex:quader}
+\begin{itemize}
+\item
+Es seien $a_i<b_i$ reelle Zahlen für $i=1,\ldots,n$. Dann nennt man das Kartesische Produkt
+\[Q=(a_1;b_1)\times \ldots \times (a_n;b_n)\]
+einen \notion{offenen Quader}. Er ist offen, denn für $x\in Q$ wählt man
+$\rho:=\min_{i=1,\ldots,n}\{\vert x_i-a_i\vert, \vert x_i-b_i\vert\}$  und erhält mit $U^{(\infty)}_\rho(x)\subset Q$
+eine offene Kugel um $x$ bezüglich der Maximumsnorm, die ganz in $Q$ enthalten ist.
+\begin{center}
+\image{T501_OpenCuboid}
+\end{center}
+\item
+Analog definiert man den \notion{abgeschlossenen Quader}
+\[\overline{Q}=[a_1;b_1]\times \ldots \times [a_n;b_n].\]
+Er ist abgeschlossen, denn sein Komplement $C=\R^n\setminus \overline{Q}$ ist offen: 
+Ist $x\notin \overline{Q}$, dann gibt es (mindestens) ein $j$ so, dass $x_j\notin [a_j;b_j]$. 
+Wir setzen $\rho:=\min\{\vert x_j-a_j\vert; \vert x_j-b_j\vert\}$. 
+Dann ist $U_\rho^{(1)}(x)$ eine offene Kugel bezüglich der $1$-Norm, die ganz im Komplement $C$ enthalten ist. 
+Denn es gilt
+\[{\Vert y-x\Vert_1}<\rho\Rightarrow\sum_{i=1}^n {\vert y_i-x_i\vert}<\rho\Rightarrow 
+{\vert y_j-x_j\vert}<\rho\Rightarrow y_j\notin[a_j;b_j]\Rightarrow y\notin\overline{Q}.\]
+\begin{center}
+\image{T501_ClosedCuboid}
+\end{center}
+\end{itemize}
+\end{example}
+Exakt wie für \ref[content_22_offene_abgeschlossene_teilmengen][offene und abgeschlossene Teilmengen]{thm:eigenschaften_off_mengen} von $\R$
+zeigt man den folgenden Satz.
+%
+\begin{theorem}\label{thm:topologie}
+Es gilt für offene Teilmengen im $\R^n$:
+\begin{itemize}
+\item Beliebige Vereinigungen offener Mengen sind offen.
+\item Der Schnitt endlich vieler offener Mengen ist offen.
+\item Die leere Menge $\emptyset$ und $\R^n$ selbst sind offen.
+\end{itemize}
+Es gilt für abgeschlossene Teilmengen im $\R^n$:
+\begin{itemize}
+\item Beliebige Schnitte abgeschlossener Mengen sind abgeschlossen.
+\item Die Vereinigung endlich vieler abgeschlossener Mengen ist abgeschlossen.
+\item Die leere Menge $\emptyset$ und $\R^n$ selbst sind abgeschlossen.
+\end{itemize}
+\end{theorem}
+\begin{remark}
+Wie auch für $\R$ gilt im $\R^n$:
+\begin{itemize}
+\item 
+Die Mengen $\emptyset$ und $\R^n$ sind die einzigen beiden Mengen, die offen und abgeschlossen zugleich sind.
+\item
+Es ist im allgemeinen falsch, dass der Schnitt unendlich vieler offener Mengen offen ist, denn der
+Durchschnitt $\bigcap _{n\in\N} U_{\frac{1}{n}}(0)=\{0\}$ ist nicht offen.
+\item
+Es gibt Mengen, die weder offen noch abgeschlossen sind, zum Beispiel halb offene Quader wie
+\[\widetilde{Q}=(a_1;b_1]\times\ldots\times (a_n;b_n].\]
+Hier gehören nicht alle Randpunkte zu $\widetilde{Q}$.
+\begin{center}
+\image{T501_HalfOpenCuboid}
+\end{center}
+\end{itemize}
+\end{remark}
+
+%Video
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10737&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\\\
+
+\begin{quickcheck}
+\text{Markiere alle offenen Mengen.}
+\begin{choices}{multiple}
+    \begin{choice}
+      \text{$\{x\in\R^3\mid \Vert x-(1,2,3)^T\Vert_1\leq 1\}$}
+      \solution{false}
+    \end{choice}
+    \begin{choice}
+      \text{$\{x\in\R^3\mid \Vert x-(1,2,3)^T\Vert_\infty> 1\}$}
+      \solution{true}
+    \end{choice}
+    \begin{choice}
+      \text{$\{x\in\R^3\mid \Vert x-(1,2,3)^T\Vert_2<1\}\cup \{x\in\R^3\mid \Vert x-(-1,-2,-3)^T\Vert_1<1\}$}
+      \solution{true}
+    \end{choice}
+    \begin{choice}
+      \text{$\{x\in\R^3\mid \Vert x-(1,2,3)^T\Vert_2<1\}\cap \{x\in\R^3\mid \Vert x-(-1,-2,-3)^T\Vert_\infty<1\}$}
+      \solution{true}
+    \end{choice}
+  \end{choices}
+
+\end{quickcheck}
+\end{content}

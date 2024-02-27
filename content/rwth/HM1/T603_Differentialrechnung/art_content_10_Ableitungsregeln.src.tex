@@ -1,0 +1,971 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Berechnung der Ableitung}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T601_GrundlagenWiWi/g_art_content_04_Funktionsbegriff.meta.xml}{content_04_Funktionsbegriff}
+    \link{generic_article}{content/rwth/HM1/T301_Differenzierbarkeit/g_art_content_02_ableitungsregeln.meta.xml}{content_02_ableitungsregeln}
+    \link{generic_article}{content/rwth/HM1/T301_Differenzierbarkeit/g_art_content_01_differenzenquotient.meta.xml}{diffbarkeit}
+    \link{generic_article}{content/rwth/HM1/T210_Stetigkeit/g_art_content_31_grenzwerte_von_funktionen.meta.xml}{grenzw-funk}
+    \link{generic_article}{content/rwth/HM1/T204_Abbildungen_und_Funktionen/g_art_content_11_injektiv_surjektiv_bijektiv.meta.xml}{umkehrfkt}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22698}{Ticket 22698}
+\end{block}
+
+
+\usepackage{mumie.ombplus}
+\ombchapter{3}
+\ombarticle{2}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{
+\lang{de}{Berechnung der Ableitung}
+\lang{en}{Computing derivatives}
+}
+ 
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{
+\lang{de}{Ableitungsregeln}
+\lang{en}{Differentiation rules}
+}
+
+\lang{de}{In diesem Kapitel beschäftigen wir uns mit der Frage, wie man die Ableitung von Funktionen konkret berechnen kann. 
+Dazu werden wir für einige Funktionen die Ableitung angeben und Regeln formulieren, wie man Summen, Produkte, Quotienten, etc. dieser 
+Funktionen ableiten kann. Dadurch werden wir bereits eine große Anzahl an Funktionen ableiten können, ohne dass wir 
+den komplizierten Rechenweg mit dem Differenzenquotienten aus dem vorherigen Kapitel wählen müssen. 
+}
+\lang{en}{
+In this chapter, we will consider the problem of actually
+computing the derivative of a given function.
+We will first find the derivatives of a number of functions
+and then give rules for computing the derivatives of their
+sums, products, quotients, etc.
+This will allow us to calculate the derivatives
+of a wide variety of functions without using the more
+difficult method of difference quotients from the previous chapter.
+}
+
+
+\lang{de}{Nichtsdestotrotz gilt aber auch: Wenn wir es mit einer Funktion zu tun haben, bei der wir keine Ableitungsregel anwenden können, 
+bleibt nur der Grenzwert des Differenzenquotienten, also die Definition der Ableitung, um zumindest einen Näherungswert für 
+die Ableitung zu erhalten. }
+\lang{en}{
+Nevertheless: when we are faced with a function to which none
+of the rules of differentiation can be applied, the limit of
+difference quotients, i.e. the definition of the derivative,
+will remain the only option to compute the derivative or at least
+an approximation to it.
+}
+
+\lang{de}{Zur Erinnerung sind hier noch einmal die Ableitungen der Funktionen dargestellt, die wir nun als \glqq bekannt\grqq\ ansehen wollen.
+}
+\lang{en}{
+Here are the derivatives of a number
+of functions that we have seen before
+and that we will assume to be known from now on:
+}
+
+%\begin{rule}
+\begin{align*}
+\underline{\text{\lang{de}{Funktion}\lang{en}{Function}}\; f(x)}&\hspace{20pt}&  \underline{\text{\lang{de}{Ableitung}\lang{en}{Derivative}}\; f'(x)}&\hspace{20pt}&\underline{\text{\lang{de}{Bedingung an }\lang{en}{Conditions on }}\, x}\\
+c \;(c\in\R) &&0&&\\
+x^n\;( n\in\N)&&nx^{n-1}&&\\
+x^n\;(n\in\Z, n<0)&&nx^{n-1}&& x\neq 0\\
+x^r\;( r\in\R)&&rx^{r-1}&& x>0\\
+\sqrt{x}=x^{1/2} &&\frac{1}{2\sqrt{x}}=\frac{1}{2}x^{-1/2}&& x>0\\
+e^x&&e^x&&\\
+\ln(x)&&\frac{1}{x}&&x>0\\
+a^x \;(a>0)&&\ln a\cdot a^x&&\\
+\sin(x)&&\cos(x)&&\\
+\cos(x)&&-\sin(x)&&\\
+\tan(x)&& \frac{1}{\cos(x)^2} = 1 + \tan(x)^2 && \cos(x) \neq 0 
+\end{align*}
+%\end{rule}
+
+\lang{de}{Die ersten Ableitungsregeln behandeln den Fall, dass Funktionen addiert werden oder eine Funktion mit einer Zahl multipliziert wird. }
+\lang{en}{
+The first differentiation rules will involve adding functions or multiplying a function by a constant.
+}
+
+\begin{rule}[\lang{de}{Summen- und Faktorregel} \lang{en}{Addition and scalar multiplication rule}] \label{rule:summenregel}
+
+\lang{de}{Es seien $f$ und $g$ zwei Funktionen, die auf einem offenen Intervall $I$ differenzierbar sind, und es sei $c\in \R$ eine reelle Zahl. 
+}
+\lang{en}{
+Suppose $f$ and $g$ are functions that are differentiable on
+an open interval $I$, and let $c \in \R$ be a real number.
+}
+
+
+\lang{de}{Dann sind auch die Funktionen
+$f+g$, $f-g$ und $c \cdot f$ auf $I$ differenzierbar und für alle $x\in I$ gelten
+\begin{align*}
+(f+g)'(x) &= f'(x) + g'(x),  &\quad & \text{(Summenregel)} \\
+(f-g)'(x) &= f'(x) - g'(x), && \\
+(c \cdot f)'(x) &= c\cdot  f'(x).  &\quad & \text{(Faktorregel)}
+\end{align*}
+}
+\lang{en}{
+Then the functions $f+g$, $f-g$ and $c \cdot f$
+are also differentiable on $I$, and for any $x \in I$,
+\begin{align*}
+(f+g)'(x) &= f'(x) + g'(x),  &\quad & \text{(Addition rule)} \\
+(f-g)'(x) &= f'(x) - g'(x), && \\
+(c \cdot f)'(x) &= c\cdot  f'(x).  &\quad & \text{(Scalar multiplication rule)}
+\end{align*}
+}
+
+\lang{de}{
+Damit gilt auch
+\[
+\left( c_1 \cdot f_1 + c_2 \cdot f_2 + \ldots + c_n \cdot f_n \right)'(x) = c_1 \cdot f_1'(x) + c_2 \cdot f_2'(x) + \ldots + c_n \cdot f_n'(x)
+\]
+für Summen von differenzierbaren Funktionen.
+}
+
+\lang{en}{
+In particular, for the sum of differentiable functions,
+we have 
+\[
+\left( c_1 \cdot f_1 + c_2 \cdot f_2 + \ldots + c_n \cdot f_n \right)'(x) = c_1 \cdot f_1'(x) + c_2 \cdot f_2'(x) + \ldots + c_n \cdot f_n'(x).
+\]
+}
+
+
+\end{rule}
+
+\lang{de}{Zu beachten ist, dass die Regel nicht nur aussagt, wie die Ableitung berechnet wird, sondern auch, dass die Ableitung 
+überhaupt existiert. }
+
+\lang{en}{
+Note that the above rule does not only describe how the
+derivative is computed; it also claims that the derivative
+exists in the first place.
+}
+
+\begin{proof*}
+\lang{de}{
+Ein Beweis der Summen- und Faktorregel findet sich im \ref[content_02_ableitungsregeln][Hauptkurs HM4MINT]{rule:summenregel}.
+}
+\lang{en}{
+A proof of the addition and scalar multiplication rules
+can be found in the \ref[content_02_ableitungsregeln][main HM4MINT course]{rule:summenregel}.
+}
+\end{proof*}
+
+\begin{example}
+\begin{tabs*}[\initialtab{0}]
+
+\tab{\lang{de}{Gerade} \lang{en}{Lines}}
+\lang{de}{
+Wir berechnen die Ableitung einer allgemeinen Gerade $f(x) = mx + b$ mit festen Zahlen $m$ und $b$. 
+Nach der Tabelle oben ist die Ableitung von $x^1$ das gleiche wie $1 \cdot x^0 = 1$ und die Ableitung von $b$ ist $0$. Mit 
+Summen- und Faktorregel folgt daher 
+\[
+f'(x) = m \cdot 1 + 0 = m.
+\]
+Die Ableitung einer Gerade ist also genau ihre Steigung. 
+}
+\lang{en}{
+Let us consider the derivative of the equation defining a general
+line, $f(x) = mx + b$, for fixed numbers $m$ and $b$.
+According to the above table, the derivative of $x^1$ is simply $1 \cdot x^0 = 1$ and the
+derivative of $b$ is $0$. Using the rule for addition and scalar multiplication,
+\[
+f'(x) = m \cdot 1 + 0 = m.
+\]
+In other words, the derivative of the equation of a line is its slope.
+}
+
+
+\tab{\lang{de}{Polynom} \lang{en}{Polynomial}}
+\lang{de}{Wir berechnen die Ableitung der Funktion $f(x)=x^3+2x+5$. Diese Funktion ist die Summe der 
+Funktionen $x^3$ und $2x$ und der konstanten Funktion $5$. Die Ableitung von $x^3$ ist nach der Tabelle oben $3x^2$, die
+Ableitung von $2x$ ist $2$ und die Ableitung der konstanten Funktion $5$ ist $0$. Mit der Summenregel erhalten wir
+}
+\lang{en}{
+We will compute the derivative of the
+function $f(x) = x^3 + 2x + 5$.
+This function is the sum of the functions
+$x^3$ and $2x$ and the constant function $5$.
+According to the table above, the derivative
+of $x^3$ is $3x^2$, the derivative of $2x$
+is $2$, and the derivative of the constant
+function $5$ is $0$. Using the addition rule,
+we find
+}
+\[f'(x)=3x^2+2+0=3x^2+2.\]
+
+\tab{\lang{de}{Grenzgewinn} \lang{en}{Marginal profit}}
+\lang{de}{Bei der Produktion von $x$ Einheiten eines Gutes steht der Erlös $E(x) = \sqrt{x} + x$ Kosten 
+in Höhe von $K(x) = 0,5 \cdot x$ gegenüber. Die Gewinnfunktion erhalten wir als Differenz
+\[
+G(x) = E(x) - K(x) = \sqrt{x} + x - 0,5x = \sqrt{x} + 0,5x = x^{\frac{1}{2}} + 0,5x .
+\]}
+\lang{en}{
+The production of $x$ units of a good yields
+a revenue of $E(x) = \sqrt{x} + x$ but
+entails costs of $K(x) = 0.5 \cdot x$.
+The profit function is obtained as the difference
+\[
+G(x) = E(x) - K(x) = \sqrt{x} + x - 0.5x = \sqrt{x} + 0.5x = x^{\frac{1}{2}} + 0.5x .
+\]
+}
+
+
+\lang{de}{Der \emph{Grenzgewinn} gibt den zusätzlichen Gewinn an, wenn eine weitere Einheit 
+des Gutes verkauft wird. Bei einem steilen Anstieg der Gewinnfunktion ist der Grenzgewinn hoch, 
+bei einem flachen Verlauf der Gewinnfunktion ist der Grenzgewinn niedrig. 
+Mathematisch können wir den Grenzgewinn als Ableitung der Gewinnfunktion berechnen. 
+}
+\lang{en}{The \emph{marginal profit} indicates
+the additional profit obtained by
+selling one more unit of the good.
+The marginal profit is high when the
+profit function increases steeply and is
+low when the profit function is flat.
+We can calculate the marginal profit
+mathematically as the derivative of the
+profit function.
+}
+
+
+\lang{de}{In diesem Fall können wir die Grenzgewinnfunktion mit Hilfe der Summen- und Faktorregel und 
+der obigen Tabelle berechnen:
+\[
+G'(x) = \frac{1}{2} x^{-\frac{1}{2}} + 0,5 = \frac{1}{2 \sqrt{x}} + 0,5.
+\]}
+\lang{en}{
+In this case, we can compute the marginal
+profit function using the addition and
+scalar multiplication rules and the table above:
+\[
+G'(x) = \frac{1}{2} x^{-\frac{1}{2}} + 0.5 = \frac{1}{2 \sqrt{x}} + 0.5.
+\]
+}
+
+\end{tabs*}
+\end{example}
+
+
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{2}
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\randint[Z]{n}{-9}{9}
+			\randint[Z]{a}{2}{9}
+			\randint[Z]{b}{-6}{9}
+		    \function[normalize]{f}{a*sin(x)+b*x^n}
+			\function[normalize]{ff}{a*cos(x)+n*b*x^(n-1)}
+            \function[normalize]{g}{n*x^(n-1)}
+		\end{variables}
+
+    \lang{de}{
+		\text{Die Ableitungsfunktion der Funktion $f(x)=\var{f}$ ist $f'(x)= $\ansref.}
+    }
+    \lang{en}{
+    \text{The derivative of the function $f(x)=\var{f}$ is\\ $f'(x)= $\ansref.}
+    }
+    
+		\begin{answer}
+			\solution{ff}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+
+    \lang{de}{
+		\explanation{Die Ableitungsfunktion von $\sin(x)$ ist $\cos(x)$ und die von $x^{\var{n}}$
+        ist $\var{g}$. Dann muss man die Summen- und Faktorregel anwenden.
+		}
+    \lang{en}{
+    \explanation{The derivative of $\sin(x)$ is $\cos(x)$
+    and the derivative of $x^{\var{n}}$ is $\var{g}$.
+    Now use the rules for addition and scalar multiplication.}
+    }
+    }
+	\end{quickcheck}
+    
+   \begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\randint[Z]{n}{-9}{9}
+			\randint[Z]{a}{2}{9}
+			\randint[Z]{b}{-6}{9}
+		    \function[normalize]{f}{a*cos(x)+b*x^n}
+			\function[normalize]{ff}{-a*sin(x)+n*b*x^(n-1)}
+            \function[normalize]{g}{n*x^(n-1)}
+		\end{variables}
+
+    \lang{de}{
+		\text{Die Ableitungsfunktion der Funktion $f(x)=\var{f}$ ist $f'(x)= $\ansref.}
+		}
+    \lang{en}{
+    \text{The derivative of the function $f(x)=\var{f}$ is $f'(x)= $\ansref.}
+    }
+  
+		\begin{answer}
+			\solution{ff}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+    \lang{de}{
+		\explanation{Die Ableitungsfunktion von $\cos(x)$ ist $-\sin(x)$ und die von $x^{\var{n}}$
+        ist $\var{g}$. Dann muss man die Summen- und Faktorregel anwenden.
+        }
+    }
+    \lang{en}{
+    \explanation{The derivative of $\cos(x)$ is $-\sin(x)$
+    and the derivative of $x^{\var{n}}$ is $\var{g}$.
+    Now use the rules for addition and scalar multiplication.}
+    }
+	\end{quickcheck}
+    
+    
+\end{quickcheckcontainer} 
+
+\lang{de}{Wie Produkte und Quotienten differenzierbarer Funktionen abgeleitet werden, beschreiben die \emph{Produktregel} und die \emph{Quotientenregel}.}
+\lang{en}{The \emph{product rule} and \emph{quotient rule} describe
+how to differentiate products and quotients of differentiable functions.}
+\begin{rule}[
+\lang{de}{Produkt- und Quotientenregel}
+\lang{en}{Product and quotient rules}]
+\lang{de}{Es seien $f$ und $g$ zwei Funktionen, die auf einem offenen Intervall $I$ differenzierbar sind. 
+}
+\lang{en}{Let $f$ and $g$ be two functions
+that are differentiable on an open interval $I$.}
+
+\lang{de}{Dann ist auch das Produkt $f\cdot g$ auf $I$ differenzierbar und f\"ur alle $x\in I$ gilt 
+ \[(f\cdot g)'(x)=f'(x)\cdot g(x)+f(x)\cdot g'(x).\]
+}
+\lang{en}{
+Then the product $f \cdot g$ is also differentiable on $I$,
+and for every $x \in I$,
+ \[(f\cdot g)'(x)=f'(x)\cdot g(x)+f(x)\cdot g'(x).\]
+}
+
+\lang{de}{Ist außerdem $g(x) \neq 0$ für alle $x \in I$, dann ist auch der Quotient $\frac{f}{g}$ auf $I$ differenzierbar mit
+\[ \left(\frac{f}{g}\right)^'(x)= \frac{f'(x)\cdot g(x)-f(x)\cdot g'(x)}{g(x)^2} \]
+für alle $x \in I$. }
+\lang{en}{
+If in addition $g(x) \ne 0$ for all $x \in I$,
+then the quotient $\frac{f}{g}$ is also
+differentiable on $I$ and
+\[ \left(\frac{f}{g}\right)^'(x)= \frac{f'(x)\cdot g(x)-f(x)\cdot g'(x)}{g(x)^2} \]
+for all $x \in I$.
+}
+
+\end{rule}
+\lang{de}{Die Bedingung $g(x) \neq 0$ wird nur gebraucht, um sicherzustellen, dass man nicht durch $0$ teilt. 
+}
+\lang{en}{The condition $g(x) \neq 0$ is
+only necessary to ensure that we never divide by $0$.}
+
+\begin{proof*}
+\lang{de}{Ein Beweis der Produkt- und der Quotientenregel findet sich im \ref[content_02_ableitungsregeln][Hauptkurs HM4MINT]{rule:produkt_quotient_regel}.
+}
+\lang{en}{A proof of the product and quotient
+rules can be found in the \ref[content_02_ableitungsregeln][main HM4MINT course]{rule:produkt_quotient_regel}}.
+\end{proof*}
+
+ \begin{example}%\textit{Beispiel:}\\
+ \begin{tabs*}[\initialtab{0}]
+\tab{$x^2\cdot \sin(x)$}
+\lang{de}{Wir berechnen als erstes Beispiel die Ableitung der Funktion $f(x)={x^2}\cdot \sin x$. Diese ist das Produkt der differenzierbaren Funktionen 
+$g(x)={x^2}$ und $h(x)=\sin(x)$. Die Ableitung von $g(x)$ ist $2x$, die Ableitung von $h(x)$ ist $\cos(x)$. Dann ist 
+\[f'(x)=g'(x)\cdot h(x)+g(x)\cdot h'(x)=2x\cdot\sin(x)+{x^2}\cdot \cos(x).\]
+}
+\lang{en}{
+As a first example, we will compute the derivative of the function
+$f(x) = x^2 \cdot \sin(x)$. This is the product of the
+differentiable functions $g(x)={x^2}$ and $h(x)=\sin(x)$.
+The derivative of $g(x)$ is $2x$ and the derivative
+of $h(x)$ is $\cos(x)$. Therefore,
+\[f'(x)=g'(x)\cdot h(x)+g(x)\cdot h'(x)=2x\cdot\sin(x)+{x^2}\cdot \cos(x).\]
+}
+
+
+\tab{\lang{de}{Potenz $x^n$}
+\lang{en}{Powers $x^n$}}
+\lang{de}{Für die Funktion $f$ mit $f(x) = x^2$ können wir einerseits oben nachsehen, dass die Ableitung 
+durch $f'(x) = 2x$ gegeben ist. Wir können aber auch mit der Produktregel die Ableitung berechnen und 
+brauchen dann nur zu wissen, dass $x$ abgeleitet zu $1$ wird. Dann folgt mit Produktregel:
+\[
+f(x) = x \cdot x, \quad f'(x) = 1 \cdot x  + x \cdot 1 = 2x.
+\]}
+\lang{en}{Let $f$ be the function $f(x) = x^2$.
+On one hand, we can see from above that its derivative
+is given by $f'(x) = 2x$. However, we can
+also compute the derivative using the product
+rule, using only the fact that the derivative
+of $x$ is $1$. The product rule yields
+\[
+f(x) = x \cdot x, \quad f'(x) = 1 \cdot x  + x \cdot 1 = 2x.
+\]}
+
+
+\lang{de}{Für die Funktion $g(x) = \frac{1}{x}$ können wir die Ableitung aus der obigen Tabelle ablesen, indem wir
+die Funktion umformen zu $g(x) = x^{-1}$. Wir können aber auch die Ableitung mit der Quotientenregel bestimmen.
+Es gilt dann: 
+\[
+g'(x) = \frac{0 \cdot x - 1 \cdot 1}{x^2} = \frac{-1}{x^2}.
+\]}
+\lang{en}{
+Let $g$ be the function $g(x) = \frac{1}{x}$.
+We can find its derivative from the above table
+by rewriting it in the form $g(x) = x^{-1}$.
+However, we can also compute its derivative
+using the quotient rule. We have:
+\[
+g'(x) = \frac{0 \cdot x - 1 \cdot 1}{x^2} = \frac{-1}{x^2}.
+\]
+}
+
+\lang{de}{
+Dieses Beispiel soll demonstrieren, dass es häufig unterschiedliche Rechenwege gibt, die aber 
+alle auf das gleiche Ergebnis führen. }
+\lang{en}{
+This example demonstrates that
+there can often be different ways to compute a derivative,
+all of which lead to the same solution.
+}
+
+\tab{\lang{de}{Grenzerlös}
+\lang{en}{Marginal revenue}}
+\lang{de}{Gegeben ist die Preis-Absatz-Funktion $p(x) = \ln(x) + 10$, die zugehörige Erlösfunktion ist
+\[
+E(x) = p(x) \cdot x = (\ln(x) + 10) \cdot x = x \ln(x) + 10x.
+\]}
+\lang{en}{
+Suppose we are given the inverse demand
+function $p(x) = \ln(x) + 10$,
+with associated revenue function
+\[
+E(x) = p(x) \cdot x = (\ln(x) + 10) \cdot x = x \ln(x) + 10x.
+\]
+}
+
+\lang{de}{Der \emph{Grenzerlös} gibt den zusätzlichen Erlös an, wenn eine weitere Einheit 
+des Gutes verkauft wird. 
+Mathematisch können wir den Grenzerlös als Ableitung der Erlösfunktion berechnen. Mit Hilfe der 
+Produktregel erhalten wir: }
+\lang{en}{
+The \emph{marginal revenue} indicates the
+additional revenue obtained from selling
+one additional unit of the good.
+We can compute the marginal revenue
+mathematically as the derivative of the
+revenue function. Using the product rule,
+we find:
+}
+\[
+E'(x) = 1 \cdot \ln(x) + x \cdot \frac{1}{x} + 10 = \ln(x) + 11.
+\]
+\end{tabs*}
+\end{example}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{1}
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\randint[Z]{a}{-2}{2}
+			\randint[Z]{b}{1}{4}
+			\randint{l}{1}{4}
+			\function[calculate]{l1}{l-1}
+			
+			\randint{k}{1}{4}	% Zufallsvariable zum Vertauschen:
+			\function[calculate]{d1}{-(k-2)*(k-3)*(k-4)/6}  % "Dirac"-funktionen
+			\function[calculate]{d2}{(k-1)*(k-3)*(k-4)/2}
+			\function[calculate]{d3}{-(k-1)*(k-2)*(k-4)/2}
+			\function[calculate]{d4}{(k-1)*(k-2)*(k-3)/6}
+			
+			\function[normalize]{f1}{sin(x)}
+			\function[normalize]{f2}{cos(x)}
+			\function[normalize]{f3}{e^x}
+			\function[normalize]{f4}{ln(x)}
+
+			\function[expand,normalize]{g}{d1*f1+d2*f2+d3*f3+d4*f4}						
+			\function[expand,normalize]{dg}{d1*f2+d2*(-f1)+d3*f3+d4*(1/x)}
+
+			\function[normalize]{p}{a*x^l+b}
+			\function[normalize]{dp}{l*a*x^(l-1)}
+		    \function[normalize]{f}{p*g}
+			\function[normalize]{df}{dp*g+p*dg}
+		\end{variables}
+
+      \lang{de}{
+			\text{Die Ableitungsfunktion der
+			Funktion $f(x)=\var{f}$ ist $f'(x)=$ \ansref.}
+      }
+      \lang{en}{
+      \text{The derivative of the function
+      $f(x)=\var{f}$ is $f'(x)=$ \ansref.}
+      }
+		\begin{answer}
+			\solution{df}
+			\checkAsFunction{x}{-2}{2}{20}
+		\end{answer}
+    \lang{de}{
+		\explanation{Nach der Produktregel gilt $f'(x)=(\var{p})'\cdot \var{g}+(\var{p})\cdot (\var{g})'$. 
+		}
+    \lang{en}{
+    \explanation{By the product rule, $f'(x)=(\var{p})'\cdot \var{g}+(\var{p})\cdot (\var{g})'$. }
+    }
+    }
+		
+	\end{quickcheck}
+\end{quickcheckcontainer}
+
+
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\randint[Z]{n}{-9}{9}
+			\randint[Z]{a}{-9}{9}
+			\randint[Z]{b}{-6}{9}
+			\randint[Z]{c}{-6}{9}
+			\randint[Z]{d}{-6}{9}
+		    \function[normalize]{f}{(x^2+a*x+b)/(c*x+d)}            
+			\derivative[normalize]{df}{f}{x}
+            \function[normalize]{dfz}{(2*x+a)*(c*x+d)-(x^2+a*x+b)*c}
+            \function[normalize]{dfn}{(c*x+d)^2}
+		\end{variables}
+
+      \lang{de}{
+			\text{Die Ableitungsfunktion der
+			Funktion $f(x)=\var{f}$ ist $f'(x)=$ \ansref.}
+  		}
+      \lang{en}{
+      \text{The derivative of the function
+      $f(x)=\var{f}$ is $f'(x)=$ \ansref.}
+      }
+    \begin{answer}
+			\solution{df}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+    \lang{de}{
+		\explanation{Nach der Quotientenregel ist die Ableitungsfunktion gegeben durch
+        $\frac{\var{dfz}}{\var{dfn}}$.
+        }
+    }
+    \lang{en}{
+    \explanation{By the quotient rule, the derivative
+    is given by $\frac{\var{dfz}}{\var{dfn}}$.}
+    }
+	\end{quickcheck}
+
+
+
+\lang{de}{Ein sehr wichtiger Fall betrifft Funktionen, die ineinander eingesetzt sind, also \ref[content_04_Funktionsbegriff][verkettete]{kompositionv} Funktionen. 
+Die Ableitung solcher Funktionen lässt sich mit der 
+\emph{Kettenregel} berechnen.}
+\lang{en}{
+Functions that have been substituted into one another,
+i.e. \ref[content_04_Funktionsbegriff][compositions]{kompositionv} of functions,
+are a very important family of examples.
+The derivative of such a function can be computed
+with the \emph{chain rule}.
+}
+
+\begin{rule}[
+\lang{de}{Kettenregel}
+\lang{en}{Chain rule}]
+
+\lang{de}{Es seien $g$ und $h$ Funktionen mit der Eigenschaft, dass $h$ differenzierbar an $x_0 \in \R$ und $g$ differenzierbar an $h(x_0) \in \R$ ist. 
+}
+\lang{en}{
+Let $g$ and $h$ be functions with the property
+that $h$ is differentiable in $x_0 \in \R$
+and $g$ is differentiable in $h(x_0) \in \R$.
+}
+
+\lang{de}{
+Dann ist auch die Verkettung $f = g \circ h$, $f(x) = g(h(x))$, an der Stelle $x_0$ differenzierbar und es gilt
+\[f'(x_0)=g'(h(x_0))\cdot h'(x_0).\]
+}
+\lang{en}{
+Then the composition $f = g \circ h$,
+$f(x) = g(h(x))$ is also differentiable
+in $x_0$, and \[f'(x_0)=g'(h(x_0))\cdot h'(x_0).\]
+}
+
+\end{rule}
+\lang{de}{Die Kettenregel wird auch häufig mit dem Slogan \notion{ \glqq innere Ableitung mal äußere Ableitung\grqq} beschrieben. Die äußere Funktion ist $g$, 
+in die der Wert der inneren Funktion $h$ eingesetzt wird.}
+\lang{en}{
+The chain rule can be described by the catchphrase
+"inner derivative times outer derivative".
+The outer function is $g$, and the value of the
+inner function $h$ is substituted into it.
+}
+
+\begin{proof*}
+\lang{de}{Ein Beweis der Kettenregel findet sich im \ref[content_02_ableitungsregeln][Hauptkurs HM4MINT]{rule:kettenregel}.
+}
+\lang{en}{A proof of the chain rule can
+be found in \ref[content_02_ableitungsregeln][the main HM4MINT course]{rule:kettenregel}.
+}
+
+\end{proof*}
+
+
+\begin{example}
+\begin{tabs*}[\initialtab{0}]
+\tab{$\sin(x^2)$}
+\lang{de}{Wir berechnen als Beispiel die Ableitung der Funktion $f(x)=\sin(x^2)$. Setzen wir als \"{a}u{\ss}ere Funktion $g(y)=\sin(y)$ und als innere Funktion 
+$h(x)=x^2$, so ist $g(h(x))=\sin(x^2)$. Wir k\"{o}nnen also die Kettenregel benutzen. Zun\"{a}chst ist $g'(y)=\cos(y)$. 
+F\"{u}r $y=h(x)=x^2$ ergibt das 
+\[g'(h(x))=\cos(h(x))=\cos(x^2).\] Nun m\"{u}ssen wir noch die Ableitung von $h$ berechnen. Wir erhalten
+\[h'(x)=2x.\]
+Nach der Kettenregel ist dann die Ableitung von $f(x) = g(h(x))$ gegeben durch
+\[(g\circ h)'(x)=g'(h(x))\cdot h'(x)=\cos(x^2)\cdot 2x=2x\cos (x^2).\]
+Wenn man ein wenig Erfahrung beim Ableiten von Funktionen gesammelt hat, braucht man nat\"{u}rlich nicht mehr diese vielen kleinen Einzelschritte 
+zu gehen! Die Rechnung kann man in etwa auf die letzte Zeile des Beispieles reduzieren.}
+\lang{en}{
+As an example, we will compute the derivative of the function $f(x)=\sin(x^2)$. We set
+$g(y)=\cos(y)$ as the outer function and $h(x)=x^2$ as the inner function,
+such that $g(h(x))=\sin(x^2)$, and then we use the chain rule.
+First we observe that $g'(y)=-\sin(y)$. For $y=h(x)=x^2$, this implies
+\[g'(h(x))=\cos(h(x))=\cos(x^2).\]
+We still have to compute the derivative of $h$; we find
+\[h'(x)=2x.\]
+By the chain rule, the derivative of $f(x) = g(h(x))$ is given by
+\[(g\circ h)'(x)=g'(h(x))\cdot h'(x)=\cos(x^2)\cdot 2x=2x\cos (x^2).\]
+Once we have accumulated some experience differentiating functions, we will
+not need to explain all of the steps in this level of detail!
+The computation could be reduced to the last line of the example above.
+}
+
+\tab{$2^x$} 
+\lang{de}{
+F\"ur die Exponentialfunktion $f(x)=2^x$ können wir die Ableitung mit Hilfe der Kettenregel 
+bestimmen. Dazu schreiben wir 
+\[
+f(x) = 2^x = e^{\ln(2^x)} = e^{x \cdot \ln(2)},
+\] 
+wobei wir ein Logarithmus-Gesetz benutzt haben und die Tatsache, dass $e$-Funktion und natürlicher Logarithmus sich gegenseitig aufheben. 
+Für $g(x)=e^x$ als \"au"sere Funktion 
+und $h(x)=x\cdot \ln(2)$ als innere Funktion ist
+\[ f'(x)=g'(h(x))\cdot h'(x)=e^{h(x)}\cdot \ln(2)=e^{x\cdot \ln(2)}\cdot \ln(2) =2^x\cdot \ln(2). \]
+}
+\lang{en}{
+We can compute the derivative of the
+exponential function $f(x)=2^x$ using
+the chain rule. First we write
+\[
+f(x) = 2^x = e^{\ln(2^x)} = e^{x \cdot \ln(2)},
+\] 
+using a logarithm rule and the fact that the
+exp function and natural logarithm cancel each other out.
+With $g(x) = e^x$ as the outer function and
+$h(x) = x\cdot \ln(2)$ as the inner function,
+we have
+\[ f'(x)=g'(h(x))\cdot h'(x)=e^{h(x)}\cdot \ln(2)=e^{x\cdot \ln(2)}\cdot \ln(2) =2^x\cdot \ln(2).\]
+}
+\end{tabs*}
+\end{example}
+
+
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\randint{k}{1}{3}	% Zufallsvariable f\"ur Auswahl:
+			\function[calculate]{d1}{-(k-2)*(k-3)*(k-4)/6}  % "Dirac"-funktionen
+			\function[calculate]{d2}{(k-1)*(k-3)*(k-4)/2}
+			\function[calculate]{d3}{-(k-1)*(k-2)*(k-4)/2}
+
+			\randint{l}{1}{2}   %Zufallsvariable f\"ur Auswahl
+			\function[calculate]{l1}{-(l-2)}  % "Dirac"-funktionen
+			\function[calculate]{l2}{(l-1)}
+
+			\function{h0}{x^2+1}
+			\function[normalize]{h}{l1*x+l2*h0}
+
+			\function[normalize]{f1}{sin(h)}
+			\function[normalize]{f2}{cos(h)}
+			\function[normalize]{f3}{exp(h)}
+			\function[expand,normalize]{f}{d1*f1+d2*f2+d3*f3}
+			\function[normalize]{df}{d1*f2+d2*(-f1)+d3*f3}  % Ableitung von f an der Stelle h
+
+			% g=h0°f (falls l1=1) oder g=f°h0 (falls l2=1) mit f in fi
+			\function[normalize]{g}{l2*f+l1*(f^2+1)}
+			\function[expand,normalize]{dg}{l2*df*2*x+l1*(2*df*f)}
+            \function[normalize]{ss}{l2*h0+l1*f}            
+		\end{variables}
+
+      \lang{de}{
+			\text{Bestimmen Sie mit der Kettenregel die Ableitung der Funktion $f(x)=\var{g}$.\\
+				Die Ableitung ist $f'(x)=$ \ansref.}
+      }
+      \lang{en}{
+      \text{Using the chain rule, find the derivative of the function $f(x)=\var{g}$.\\
+      The derivative is $f'(x)=$ \ansref.}
+      }
+
+     \begin{answer}
+          \solution{dg}
+%		  \allowForInput[false]{)}
+          \checkAsFunction{x}{-2}{2}{20}
+      \end{answer}
+      \lang{de}{
+      \explanation{Wählen Sie als innere Funktion die Funktion $h(x)=\var{ss}$.}
+      }
+      \lang{en}{
+      \explanation{Use $h(x)=\var{ss}$ as the inner function.}
+      }
+\end{quickcheck}
+
+
+%\begin{example}
+%Mit Hilfe der Ableitung des Logarithmus (s.u.) und der Kettenregel lassen sich auch die Ableitungen reeller Potenzfunktionen $f(x)=x^r$ bestimmen.
+%Hierzu beachte man, dass die reelle Potenz $x^r$ definiert ist als $\exp(r\cdot \ln(x))$. Damit gilt f\"ur die Ableitung
+%\begin{eqnarray*}
+%f'(x) &=& \exp'(r\ln(x))\cdot r\cdot \ln'(x) \\
+%&=&  \exp(r\ln(x))\cdot r\cdot \frac{1}{x}\\ 
+%&=& x^r\cdot r\cdot x^{-1}=rx^{r-1}
+%\end{eqnarray*}
+%\end{example}
+
+
+\section{
+\lang{de}{Regeln für Potenzreihen und Umkehrfunktionen}
+\lang{en}{Rules for power series and inverse functions}
+}
+
+\lang{de}{Für Funktionen, die durch Potenzreihen gegeben sind, ist die Ableitung durch
+summandenweises Ableiten gegeben. Dies können wir allerdings im Rahmen dieses Kurses nicht beweisen 
+(die Summenregel oben gilt zunächst nur für Summen mit endlich vielen Summanden). Formal lautet die Aussage für Reihen wie folgt:
+}
+\lang{en}{
+The derivative of a function that is given as a power series
+can be found by differentiating each summand.
+We will not be able to prove this in our course.
+(The summation rule above only holds for sums with
+finitely many summands). The formal statement for
+series is as follows:
+}
+
+\begin{rule}[
+\lang{de}{Ableitung von Potenzreihen}
+\lang{en}{Differentiating power series}
+]
+\lang{de}{Ist $I$ ein offenes Intervall und $f:I\to \R$ eine Funktion, die auf $I$
+ durch eine Potenzreihe der Form
+\[  f(x)= \sum_{n=0}^\infty c_n(x-x_0)^n \]
+gegeben ist, so ist $f$ auf $I$ differenzierbar und die Ableitung von $f$ ist gegeben durch
+\[  f'(x)= \sum_{n=1}^\infty n\cdot c_n(x-x_0)^{n-1}.  \]
+}
+\lang{en}{
+Let $I$ be an open interval and let $f:I\to \R$ be a function that
+is represented on $I$ by a power series of the form
+\[  f(x)= \sum_{n=0}^\infty c_n(x-x_0)^n. \]
+Then $f$ is differentiable on $I$ with derivative
+\[  f'(x)= \sum_{n=1}^\infty n\cdot c_n(x-x_0)^{n-1}.  \]
+}
+\end{rule}
+
+\begin{example}[
+\lang{de}{$e$-Funktion}
+\lang{en}{Exponential function}]\label{ex:abl-umkehrfunktion}
+\lang{de}{Wir kennen bereits die Reihendarstellung \[e^x = \sum_{n=0}^\infty \frac{1}{n!} \, x^n\]
+der $e$-Funktion. Der Summand $\frac{1}{n!} x^n$ hat die Ableitung
+\[
+\frac{n}{n!} \, x^{n-1} = \frac{n}{1 \cdot 2 \cdots (n-1) \cdot n} \, x^{n-1} = \frac{1}{1 \cdot 2 \cdots (n-1)} \, x^{n-1} = \frac{1}{(n-1)!} \, x^{n-1}
+\]
+und nach obiger Regel erhalten wir nun
+\[
+\left( e^x \right)' \,=\, \sum_{n=1}^\infty \frac{1}{(n-1)!} \, x^{n-1} \,=\, \sum_{m=0}^\infty \frac{1}{m!} \, x^m \,=\, e^x,
+\]
+wobei im letzten Schritt der Summenindex $m=n-1$ eingesetzt wurde. 
+}
+\lang{en}{
+We already know the series representation
+\[e^x = \sum_{n=0}^\infty \frac{1}{n!} \, x^n\]
+of the exponential function. Each summand $\frac{1}{n!}x^n$
+has the derivative 
+\[
+\frac{n}{n!} \, x^{n-1} = \frac{n}{1 \cdot 2 \cdots (n-1) \cdot n} \, x^{n-1} = \frac{1}{1 \cdot 2 \cdots (n-1)} \, x^{n-1} = \frac{1}{(n-1)!} \, x^{n-1}.
+\]
+Therefore, the above rule yields
+\[
+\left( e^x \right)' \,=\, \sum_{n=1}^\infty \frac{1}{(n-1)!} \, x^{n-1} \,=\, \sum_{m=0}^\infty \frac{1}{m!} \, x^m \,=\, e^x.
+\]
+In the last step, we substituted $m=n-1$ in the index.
+}
+
+\lang{de}{Damit haben wir nun auch selbst nachrechnen können, dass die Ableitung der $e$-Funktion wieder die $e$-Funktion ist. 
+}
+\lang{en}{
+We are thus able to verify that the derivative of $e^x$ is again $e^x$.
+}
+
+\end{example}
+
+\lang{de}{Wenn wir es mit einer differenzierbaren Funktion zu tun haben, die eine \ref[content_04_Funktionsbegriff][Umkehrfunktion]{def:functionprops}  besitzt, dann können 
+wir mit Hilfe der Kettenregel eine Formel f\"ur die Ableitung der Umkehrfunktion herleiten.
+}
+\lang{en}{
+When we are given a differentiable function that admits
+an \ref[content_04_Funktionsbegriff][inverse function]{def:functionprops},
+the chain rule leads to a formula for the derivative of the inverse function.
+}
+
+
+\begin{rule}[
+\lang{de}{Ableitung der Umkehrfunktion}
+\lang{en}{Derivative of an inverse function}
+]
+\lang{de}{Ist $f$ umkehrbar und differenzierbar in $x_0$ und ist außerdem $f'(x_0)\neq 0$, so ist auch die Umkehrfunktion $f^{-1}$ differenzierbar in $y_0=f(x_0)$ und es gilt
+}
+\lang{en}{
+Let $f$ be invertible and differentiable in $x_0$ and suppose $f'(x_0) \ne 0$.
+Then the inverse function $f^{-1}$ is differentiable in $y_0 = f(x_0)$, and
+}
+\[  (f^{-1})'(y_0)=\frac{1}{f'(f^{-1}(y_0))}. \]
+\end{rule}
+
+\begin{proof*}
+\lang{de}{Nach Definition der Umkehrfunktion ist $x=f^{-1}(f(x))$. Wenn wir beide Seiten der Gleichung ableiten und $x_0$ für $x$ einsetzen, 
+ergibt sich mit der Kettenregel 
+\[ 1= (f^{-1})'(f(x_0))\cdot f'(x_0). \]
+Teile dann beide Seiten der Gleichung durch $f'(x_0)$ und ersetze $f(x_0)$ durch $y_0$ bzw. $x_0$ durch $f^{-1}(y_0)$:
+\[ (f^{-1})'(y_0)=\frac{1}{f'(f^{-1}(y_0))}. \]
+Den technischen Beweis, dass die Umkehrfunktion wirklich bei $y_0$ differenzierbar ist, lassen wir hier weg.
+}
+\lang{en}{
+By definition, $x = f^{-1}(f(x))$. Differentiating both sides of
+this equation and evaluating it at $x_0$ yields
+\[ 1= (f^{-1})'(f(x_0))\cdot f'(x_0) \]
+with the chain rule. Now we divide both sides of the
+equation by $f'(x_0)$ and substitute $y_0$ for $f(x_0)$
+and $f^{-1}(y_0)$ for $x_0$ to obtain
+\[ (f^{-1})'(y_0)=\frac{1}{f'(f^{-1}(y_0))}. \]
+The technical proof that the inverse function actually
+exists is omitted here.
+}
+\end{proof*}
+
+
+
+\begin{example}\label{ex:abl-umkehrfunktion}
+\begin{tabs*}[\initialtab{0}]
+\tab{$\sqrt[n]{x}$}
+\lang{de}{Die $n$-te Wurzelfunktion $g(x)=\sqrt[n]{x}=x^{\frac{1}{n}}$ ist die Umkehrfunktion der $n$-ten Potenzfunktion $f(x)=x^n$.
+F\"ur $x>0$ ist letztere differenzierbar mit $f'(x)=nx^{n-1}\neq 0$. Also ist auch die Wurzelfunktion f\"ur alle $x>0$ differenzierbar und es gilt:
+}
+\lang{en}{
+The $n$th root function $g(x) = \sqrt[n]{x} = x^{\frac{1}{n}}$
+is the inverse function of the $n$th power $f(x) = x^n$.
+The latter is differentiable for $x > 0$ with $f'(x) = nx^{n-1} \ne 0$.
+Therefore, the $n$th root function is also differentiable for $x > 0$,
+and
+}
+\begin{eqnarray*}
+g'(x) &=& \frac{1}{f'(g(x))}=\frac{1}{n(g(x))^{n-1}} \\
+&=& \frac{1}{n\cdot \sqrt[n]{x}^{n-1}}=\frac{1}{n}\cdot x^{- \frac{n-1}{n}}\\
+&=& \frac{1}{n}\cdot x^{\frac{1}{n}-1}.
+\end{eqnarray*} 
+\tab{$\ln(x)$}
+\lang{de}{Der nat\"urliche Logarithmus $g(x)=\ln(x)$ ist die Umkehrfunktion der Exponentialfunktion $f(x)= \exp(x)=e^x$. Wegen $\exp'(x)=\exp(x)>0$ f\"ur alle $x\in \R$ ist
+auch der nat\"urliche Logarithmus auf seinem gesamten Definitionsbereich $\R^+ =\{ x\in \R\,|\, x>0\}$ differenzierbar und es gilt}
+\lang{en}{
+The natural logarithm $g(x)=\ln(x)$ is the inverse function of the exponential function $f(x) = \exp(x) = e^x$.
+Since $\exp'(x) = \exp(x) > 0$ for all $x \in \R$, the natural logarithm is differentiable
+on its entire domain $\R^+ =\{ x\in \R\,|\, x>0\}$, and
+}
+\[ \left(\ln(x)\right)' =  \frac{1}{f'(g(x))}= \frac{1}{\exp(\ln(x))}=\frac{1}{x}, \]
+\lang{de}{wie es auch in der Tabelle oben steht.}
+\lang{en}{as in the table above.}
+\end{tabs*}
+\end{example}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\randint[Z]{a0}{1}{5}
+            \number{a1}{1}
+            \function[calculate]{a}{1+a0/a1}
+            \function[calculate]{b}{a+1/a}
+		    \function[normalize]{f}{x+1/x}            
+			\derivative[normalize]{df}{f}{x}
+            \function[calculate]{dgb}{a^2/(a^2-1)}
+		\end{variables}
+
+    \lang{de}{
+		\text{Die Funktion $f:(1,\infty)\to \R$ mit $f(x)=x+\frac{1}{x}$ besitzt eine reelle
+        Umkehrfunktion $g:(2,\infty)\to \R$.
+        
+        Bestimmen Sie die Ableitung von $g$ an der 
+        Stelle $y=f(\var{a})=\var{b}$.\\ Die Ableitungsfunktion von $f$ ist $f'(x)=$ \ansref.\\
+          Damit ist $g'(\var{b})=$\ansref. }
+          }
+    \lang{en}{
+    \text{The function $f:(1,\infty)\to \R$, $f(x) = x + \frac{1}{x}$ admits a real inverse function
+    $g:(2,\infty)\to \R$.
+    
+    Determine the derivative of $g$ in the point $y=f(\var{a})=\var{b}$.\\
+    The derivative of $f$ is $f'(x)=$ \ansref.\\
+    Therefore, $g'(\var{b})=$\ansref.}
+    }
+		\begin{answer}
+			\solution{df}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\begin{answer}
+			\solution{dgb}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+    \lang{de}{
+		\explanation{Nach der Regel für die Ableitung der Umkehrfunktion ist
+        $g'(\var{b})=\frac{1}{f'(\var{a})}=\frac{1}{1-\frac{1}{\var{a}^2}}=\frac{\var{a}^2}{\var{a}^2-1}$.
+        }
+        }
+    \lang{en}{
+    \explanation{By the rule for the derivative of an inverse function,
+        $g'(\var{b})=\frac{1}{f'(\var{a})}=\frac{1}{1-\frac{1}{\var{a}^2}}=\frac{\var{a}^2}{\var{a}^2-1}$.
+    }
+    }
+	\end{quickcheck}
+    
+    
+
+
+
+
+\end{visualizationwrapper}
+
+
+\end{content}

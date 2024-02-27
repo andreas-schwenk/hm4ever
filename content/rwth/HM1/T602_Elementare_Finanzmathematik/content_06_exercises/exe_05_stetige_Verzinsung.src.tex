@@ -1,0 +1,100 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Ü05: continuous compounding}
+    \lang{de}{Ü05: stetige Verzinsung}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\title{\lang{en}{Ü05: continuous compounding}
+    \lang{de}{Ü05: stetige Verzinsung}
+    \lang{zh}{...}
+    \lang{fr}{...}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22683}{Ticket 22683}
+\end{block}
+
+
+
+\lang{de}{Berechnen Sie für ein Kapital von $K_0=500.000$ \euro das Kapital nach 10 Jahren
+bei einem Zinssatz von $i=2\%$ bei stetiger Verzinsung. Vergleichen Sie dies
+mit dem Endkapital bei jährlicher Verzinsung.}
+
+\lang{en}{Given a starting capital of $K_0 = 500,000$ \euro, compute its value after 10 years
+of continuously compounding interest at a rate of $i=2\%$. Compare this with the ending capital
+after annually compounding interest.
+}
+
+  \begin{tabs*}[\initialtab{0}\class{exercise}]
+    \tab{
+      \lang{de}{Lösung} \lang{en}{Solution}
+    }
+
+\lang{de}{Wir verwenden hierzu die Formel für unterjährige Verzinsung und entwickeln sie 
+entsprechend weiter, indem wir die Anzahl der Zinsperioden pro Jahr gegen $\infty$
+gehen lassen. \\
+Weiterhin benutzen wir den bekannten Grenzwert:
+
+\[\lim_{n\to\infty}\left(1+\frac{1}{n}\right)^n=e\approx 2,718\ldots \text{ und setzen }\frac{1}{k}=\frac{p}{m\cdot 100}: \]}
+\lang{en}{We use the formula for periodic compound interest, letting the number of
+interest periods per year tend to $\infty$.
+Also, we use the familiar limit:
+
+\[\lim_{n\to\infty}\left(1+\frac{1}{n}\right)^n=e\approx 2.718\ldots \text{ and set }\frac{1}{k}=\frac{p}{m\cdot 100}: \]
+}
+ 
+
+\begin{eqnarray*}
+K_n&=&\lim_{m\to\infty}K_0\left(1+i_m\right)^{mn}\\
+&=&\lim_{m\to\infty}K_0\left(1+\frac{p}{100\cdot m}\right)^{mn}\\
+&=&\lim_{m\to\infty}K_0\left[\left(1+\frac{p}{100\cdot m}\right)^m\right]^n\\
+&=&\lim_{k\to\infty}K_0\left[\left(1+\frac{1}{k}\right)^{\frac{kp}{100}}\right]^n\\
+&=&\lim_{k\to\infty}K_0\left[\left(1+\frac{1}{k}\right)^k\right]^{\frac{pn}{100}}\\
+&=&K_0\cdot e^{\frac{pn}{100}}
+\end{eqnarray*}
+\lang{de}{Dann gilt:
+\begin{align*}
+K_{10}&=&500.000\cdot e^{\frac{2\cdot 10}{100}}\\
+&=&500.000\cdot e^{0,2}\\
+&=&610.701,38 \text{ \euro}
+\end{align*}}
+\lang{en}{Then:
+\begin{align*}
+K_{10}&=&500,000\cdot e^{\frac{2\cdot 10}{100}}\\
+&=&500,000\cdot e^{0.2}\\
+&=&610,701.38 \text{ \euro}
+\end{align*}}
+\lang{de}{Im Vergleich dazu gilt bei jährlicher Verzinsung:}
+\lang{en}{We compare this to annually compounding interest:}
+\lang{de}{\begin{align*}
+K_{10}&=&500.000\left(1+\frac{2}{100}\right)^{10}\\
+&=&500.000\cdot 1,02^{10}\\
+&=&609.497,21 \text{ \euro}
+\end{align*}
+Der Unterschied beträgt über 1000 \euro!}
+\lang{en}{\begin{align*}
+K_{10}&=&500,000\left(1+\frac{2}{100}\right)^{10}\\
+&=&500,000\cdot 1.02^{10}\\
+&=&609,497.21 \text{ \euro}
+\end{align*}
+The difference is more than 1000 \euro!}
+\end{tabs*}
+\end{content}
+

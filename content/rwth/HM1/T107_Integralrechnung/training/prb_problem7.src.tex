@@ -1,0 +1,132 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A07: Stammfunktion}
+    \lang{en}{problem 7}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+
+\lang{de}{
+	\title{A07: Stammfunktion}
+}
+\lang{en}{
+	\title{Problem 7}
+}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9615}{Ticket 9615}
+\end{block}
+
+\begin{problem}
+
+	\begin{question}
+    \type{input.generic}
+	
+       \begin{variables}
+       		\randint{ahilf}{2}{5}
+       		\randint{bhilf}{1}{2}
+       		\function[calculate]{a}{(-1)^bhilf*ahilf}
+        	\function[calculate]{z}{a^2+1}
+			\function[calculate]{y}{a^2-1}    
+       \end{variables}
+
+       
+
+      
+      
+
+	
+%begin-cosh
+	   \lang{de}{
+	     \text{ Welcher der hier gegebenen Funktionsterme gehört zu einer Stammfunktion
+	     der Funktion $f$ mit $f(x)=\sin(x) \cdot e^{\var{a}x} \, $? \\
+%ende-cosh	     
+	     \textit{Tipp: Ableitungen bestimmen.}
+
+	     }
+	   }
+	    \lang{en}{
+        \text{
+          Which of the following terms defines an antiderivative of the function $f$ where $f(x)=\sin(x) \cdot e^{\var{a}x} \, $? \\
+          \textit{Hint: Calculate the derivatives of each option.}
+        }
+      }
+      \begin{answer}
+	   %\permutechoices{1}{6}
+	   \type{mc.multiple}
+
+	   \begin{choice}
+	    \text{$ \frac{1}{\var{z}} e^{\var{a}x} (\var{a}\sin(x)-\cos(x))$ }
+	    \solution{true}
+	   \end{choice}
+
+	   \begin{choice}
+	    \text{$ \frac{1}{\var{z}} e^{\var{a}x} (\var{a}\sin(x)+\cos(x))$ }
+	    \solution{false}
+	   \end{choice}
+
+	   \begin{choice}
+	    \text{$ \frac{1}{\var{y}} e^{\var{a}x} (\var{a}\sin(x)-\cos(x))$ }
+	    \solution{false}
+	   \end{choice}
+
+	   \begin{choice}
+	    \text{$ \frac{1}{\var{y}} e^{\var{a}x} (\var{a}\sin(x)+\cos(x))$ }
+	    \solution{false}
+	   \end{choice}
+
+	   \begin{choice}
+	    \text{$ \frac{1}{\var{a}} e^{\var{a}x} (\var{a}\sin(x)+\cos(x))$ }
+	    \solution{false}
+	   \end{choice}
+
+	   \begin{choice}
+	    \text{$ \frac{1}{\var{a}} e^{\var{a}x} \cdot \cos(x)$ }
+	    \solution{false}
+	   \end{choice}
+  
+  
+\lang{de}{
+\explanation[equalChoice(ans,0?????)]{Leiten Sie $ \frac{1}{\var{z}} e^{\var{a}x} (\var{a}\sin(x)-\cos(x))$ mit der Produktregel ab. Sie sollten die Ableitung vereinfachen können. }
+\explanation[equalChoice(ans,?1????)]{Leiten Sie $ \frac{1}{\var{z}} e^{\var{a}x} (\var{a}\sin(x)+\cos(x))$ mit der Produktregel ab. Die Ableitung sollte nicht gleich $f(x)$ sein.}
+\explanation[equalChoice(ans,??1???)]{Leiten Sie $ \frac{1}{\var{y}} e^{\var{a}x} (\var{a}\sin(x)-\cos(x))$ mit der Produktregel ab. Die Ableitung sollte nicht gleich $f(x)$ sein.}
+\explanation[equalChoice(ans,???1??)]{Leiten Sie $ \frac{1}{\var{y}} e^{\var{a}x} (\var{a}\sin(x)+\cos(x))$ mit der Produktregel ab. Die Ableitung sollte nicht gleich $f(x)$ sein.}
+\explanation[equalChoice(ans,????1?)]{Leiten Sie $ \frac{1}{\var{a}} e^{\var{a}x} (\var{a}\sin(x)+\cos(x))$ mit der Produktregel ab. Die Ableitung sollte nicht gleich $f(x)$ sein.}
+\explanation[equalChoice(ans,?????1)]{Achtung: Die Ableitung eines Produkts ist nicht direkt das Produkt der Ableitungen.}
+}
+
+\lang{en}{
+\explanation[equalChoice(ans,0?????)]{Whether $ \frac{1}{\var{z}} e^{\var{a}x} (\var{a}\sin(x)-\cos(x))$ is an antiderivative of $f(x)=\sin(x) \cdot e^{\var{a}x}$, can be checked by computing the derivative.}
+\explanation[equalChoice(ans,?1????)]{Whether $ \frac{1}{\var{z}} e^{\var{a}x} (\var{a}\sin(x)+\cos(x))$ is an antiderivative of $f(x)=\sin(x) \cdot e^{\var{a}x}$, can be checked by computing the derivative.}
+\explanation[equalChoice(ans,??1???)]{Whether $ \frac{1}{\var{y}} e^{\var{a}x} (\var{a}\sin(x)-\cos(x))$ is an antiderivative of $f(x)=\sin(x) \cdot e^{\var{a}x}$, can be checked by computing the derivative.}
+\explanation[equalChoice(ans,???1??)]{Whether $ \frac{1}{\var{y}} e^{\var{a}x} (\var{a}\sin(x)+\cos(x))$ is an antiderivative of $f(x)=\sin(x) \cdot e^{\var{a}x}$, can be checked by computing the derivative.}
+\explanation[equalChoice(ans,????1?)]{Whether $ \frac{1}{\var{a}} e^{\var{a}x} (\var{a}\sin(x)+\cos(x))$ is an antiderivative of $f(x)=\sin(x) \cdot e^{\var{a}x}$, can be checked by computing the derivative.}
+\explanation[equalChoice(ans,?????1)]{Whether $ \frac{1}{\var{a}} e^{\var{a}x} \cdot \cos(x)$ is an antiderivative of $f(x)=\sin(x) \cdot e^{\var{a}x}$, can be checked by computing the derivative.}
+}
+    \end{answer}
+	\end{question}
+
+\end{problem}
+
+
+\embedmathlet{mathlet}
+\end{content}

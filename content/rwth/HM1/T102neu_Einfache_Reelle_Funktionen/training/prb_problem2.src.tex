@@ -1,0 +1,127 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A02: Lineare Funktionen}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{Bestimmung der Parameter einer Geraden}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+
+%
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22071}{Ticket 22071}
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+\begin{block}[annotation]
+
+	Bestimmung der linearen Funktion oder auch der Geradengleichung 
+    aus graphischer Darstellung durch Ablesen der Parameter und der
+    Nullstelle (NEU)\\
+        
+\end{block}
+
+\lang{de}{\title{A02: Lineare Funktionen}}
+\lang{en}{\title{Problem 2}}
+
+\begin{problem}
+%######################################################QUESTION_START	
+
+%+++++++++++++++++++++++QUESTION+++++++++++++++++++++++++++++		
+
+  \begin{question}  
+     
+     \text{Beschreiben Sie die Lage der nachfolgend dargestellten Geraden $g$ durch
+      ihre bekannten Charakteristika und bestimmen Sie die lineare Funktion 
+      $\,f:\R\to \R, \; x\mapsto mx+b$, 
+      deren Graph durch die Gerade $\,g\,$ dargestellt wird. }
+ 
+      \begin{variables}
+        \randint[Z]{b}{-5}{5}
+        \randint[Z]{nst}{-5}{5}
+        \function[calculate]{m}{-b/nst}
+       	\function{g}{m*x+b}    
+    \end{variables}
+
+
+%++++++++++++++++VISUALISATION+++++++++++++++++++++++++++
+
+        \plotF{1}{g} % % the function a1 is defined in 'variables' in the usual way
+        \plotFrom{1}{-6} % % and is plotted starting from 0.0
+        \plotTo{1}{6} % % and ending in 1.0 , it's a quarter of a circle
+        \plotColor{1}{blue} % % colored blu
+        \plotLeft{-6} % % defines the canvas bound left
+        \plotRight{6}
+        \plotSize{600}
+        \plotRatio{keep}
+
+
+%++++++++++++++++++++++ANSWERS++++++++++++++++++++++++    
+
+     \type{input.number} 
+     \field{rational}            
+
+%        
+	    \begin{answer}
+%            \type{input.number} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+%            \field{rational} 
+        	\text{1.$\quad$ Der $y-$Achsenabschnitt von $g$ ist $\;b=$}
+			\solution{b}
+            \explanation{Der $y-$Achsenabschnitt ist die Schnittstelle der 
+                        Geraden mit der $y-$Achse. Bitte erneut ablesen.}
+	    \end{answer}  
+%        
+        \begin{answer}
+%            \type{input.number} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+%            \field{rational} 
+           	\text{2.$\quad$ Die Nullstelle von $g$ liegt in $\;x_0=$}
+			\solution{nst}
+            \explanation{Die Nullstelle ist die Schnittstelle der Geraden
+                        mit der $x-$Achse. Bitte erneut ablesen.}
+	    \end{answer}  
+%
+	    \begin{answer}   
+%            \type{input.number} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+%            \field{rational} 
+           	\text{3.$\quad$  Die Steigung von $g$ ist $\;m=$}
+			\solution{m}
+            \explanation{Die Steigung kann aus der Nullstelle und dem $y-$Achsenabschnitt
+                        berechnet werden, denn wegen $g(x_0)=0$ gilt $\,m=-\frac{b}{x_0}$.}
+	    \end{answer} 
+%
+        \begin{answer}
+	    	\type{input.function} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+            \text{Die lineare Funktion, die diese Gerade beschreibt, lautet
+                 $\; f(x)=$}
+			\solution{g}
+            \checkAsFunction{x}{-10}{10}{100}  
+          \explanation{Die Funktionsvorschrift für die lineare Funktion $\,f\,$ entspricht 
+                    der allgemeinen Form der Geradengleichung $\,y=mx+b.$}
+	    \end{answer} 
+
+	\end{question}	
+
+%######################################################QUESTION_END
+
+
+\end{problem}
+
+\embedmathlet{gwtmathlet}                                         
+
+\end{content}

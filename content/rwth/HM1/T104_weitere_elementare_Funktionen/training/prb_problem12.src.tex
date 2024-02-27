@@ -1,0 +1,110 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Problem 12}
+    \lang{de}{A12: Logarithmusfunktion}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+  \begin{taxonomy}
+        \difficulty{2}
+        \usage{FH Aachen, Mathematische Grundlagen}
+        \objectives{analyze,apply,understand}
+        \topic{analysis1/functions/graph_of_function}
+  \end{taxonomy}
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/30083}{Ticket 30083}
+\end{block}
+\begin{block}[annotation]
+Copy of : /home/mumie/checkin/content/rwth/HM1/T104_weitere_elementare_Funktionen/training/prb_problem11.src.tex
+\end{block}
+
+\begin{block}[annotation]
+Copy of : /home/mumie/checkin/content/pool/fh_aachen/MGI/Logarithmusfunktionen/prb_Log_A7.2.src.tex
+\end{block}
+
+
+\usepackage{mumie.genericproblem}
+\lang{de}{\title{A12: Logarithmusfunktion}}
+\begin{visualizationwrapper}
+
+
+\begin{genericJSXVisualization}
+	\begin{variables}
+        \parametricFunction{k}{real}{t,0*t,-20,20,1000} %geht nicht mit infinity als Grenzen
+        \pointOnCurve{P}{real}{k}{0.5}
+        \point[editable]{A}{real}{-0.5,0}
+        \point[editable]{B}{real}{-0.5,1}
+        \line[editable]{l}{real}{var(A), var(B)}
+        \function{g}{real}{log((x-A[x])/(P[x]-A[x]))}
+        \number{b0}{real}{A[x]}
+        \number{c0}{real}{P[x]-A[x]}
+        \number{px}{real}{P[x]}
+	\end{variables}
+\color{g}{RED}
+\label{l}{l}
+%\label{g}{g}
+\label{P}{P}
+\answer{b0}{1,1}
+\answer{px}{1,2}
+
+	\begin{canvas}
+    \snapToGrid{0.1,0.1}
+        \plotSize{500,500}
+        \plotLeft{-5.5}
+        \plotRight{5.5}
+        \plot[coordinateSystem,showPointCoords]{P,l,g}
+	\end{canvas}
+
+\end{genericJSXVisualization}
+
+\end{visualizationwrapper}
+
+     \begin{problem} 
+          \begin{question}
+          \type{input.function}
+          \field{real}
+          \begin{variables}
+                \randint{b}{-3}{3}
+                \randint[Z]{c}{-3}{3}
+                \randadjustIf{b,c}{|b+c|=6}
+                \function{f}{ln((x-b)/c)}
+                \function[calculate]{px}{b+c}
+           \end{variables}
+          \lang{de}{
+               \text{Verändern Sie die Kurve in der Grafik, sodass der Graph der Funktion $f(x)=\var{f}$ zu sehen ist.\\
+                Beweglich sind dabei der Punkt $P$ auf der $x$-Achse und die senkrechte Asymptote.}}        
+          \begin{answer}
+            \type{graphics.number}
+            \solution{b}
+          \end{answer}
+          \begin{answer}
+            \type{graphics.number}
+            \solution{px}
+          \end{answer}
+         \explanation[equal(ans_1,b)]{Die Asymptote ist richtig gewählt.}
+         \explanation[edited AND NOT [equal(ans_1,b)]]{Die Asymptote ist falsch.}
+         \explanation[equal(ans_2,px)]{Der Punkt $P$ ist richtig gewählt.}
+         \explanation[edited AND NOT [equal(ans_2,px)]]{Der Punkt $P$ ist falsch.}
+          \end{question}
+     \end{problem}
+     
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

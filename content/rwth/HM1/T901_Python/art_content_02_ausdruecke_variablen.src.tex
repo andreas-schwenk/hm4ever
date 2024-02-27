@@ -1,0 +1,384 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ausdrücke und Datentypen}
+    \lang{en}{...}
+   }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{PAusdrücke und Datentypen}
+    \lang{en}{...}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+    \end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/18345}{Ticket 18345}
+\end{block}
+\usepackage{mumie.ombplus}
+%\usepackage{listings}
+\ombchapter{12}
+\ombarticle{1}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\begin{block}[annotation]
+DIESER KURSTEIL BEFINDET SICH NOCH IM AUFBAU!
+\end{block}
+
+
+\lang{de}{\title{Ausdrücke und Datentypen}}
+
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+In diesem Kapitel werden einfache Ausdrücke und einige intrinsiche Datentypen von Python behandelt.
+
+
+\section{Ausdrücke}
+
+\subsection{Arithmetische Ausdrücke}
+
+Ein mathematischer Term kann in Python ählich wie auf dem Papier in
+\textbf{Infixform} notiert werden. 
+
+Die folgende Tabelle fasst die wichtigsten Operatoren zusammen.
+Der \textbf{Operatorvorrang} ist wie üblich. Es gilt z.B. Punkt-vor-Strichrechnung.
+Durch eine Klammerung kann der Vorrang explizit geändert werden.
+
+\begin{table}
+  \texttt{+ - * /} & Grundrechenarten\\
+  \texttt{//} & Division ohne Rest (z.B. \texttt{7 // 3 = 2})\\
+  \texttt{\%} & Rest einer ganzzahligen Division (z.B. \texttt{7 \% 3 = 1}) \\
+  \texttt{**} & Potenzierung (z.B. \texttt{2 ** 3 = 8})\\
+\end{table}
+
+\begin{example}
+Der Term $3^5 + (4 + 3) \cdot 5 + \frac{1}{24}$ kann in Python wie folgt geschrieben werden:
+\begin{block}[code]
+    3**5 + (4 + 3) * 5 + 1/24
+\end{block}
+Die Auswertung erfolgt durch den Interpreter von links nach rechts unter
+Beachtung der üblichen Rechenregeln.
+\end{example}
+
+\begin{remark}
+Auf der Kommandozeile kann Python auch als \textit{Taschenrechner} eingesetzt werden.
+Jeder eingegebene Ausdruck wird sofort ausgewertet.
+\end{remark}
+
+\subsection{Logische Ausdrücke}
+
+Weiterhin können auch \textbf{logische Ausdrücke} ausgewertet werden.
+Im nächsten Kapitel wird gezeigt, wie logische Audrücke im bedingten Programmablauf eingesetzt werden.
+%werden wir sehen, wie logische Bedingungen zur Steuerung des
+%Programmablaufs eingesetzt werden können.
+
+\begin{table}
+  \texttt{==} & Gleichheitsoperator\\
+  \texttt{!=} & Ungleich\\
+  \texttt{< <= > >=} & Kleiner als, kleiner gleich, größer als, größer gleich\\
+  \texttt{and} & Logisches Und \\
+  \texttt{or} & Logisches Oder \\
+  \texttt{not} & Logisches Nicht (unärer Operator) \\
+\end{table}
+
+\begin{example}
+Die Aussage $3 > 4 \lor 2 \leq 3$ wird in Python wie folgt geschrieben:
+\begin{block}[code]
+    3 > 4 or 2 <= 3
+\end{block}
+Der Ausdruck ist insgesamt wahr, denn ~~ \quad falsch $\lor$ wahr ~~ ist wahr.
+\end{example}
+
+\begin{remark}
+    Die Bool'schen Werte \textbf{wahr} und \textbf{falsch} können explizit
+    durch \texttt{True} und \texttt{False} angegeben werden.
+\end{remark}
+
+
+\begin{quickcheck}
+  \field{rational}
+  \type{input.number}
+  \begin{variables}
+  \end{variables}
+      \text{Ist der folgende Ausdruck wahr?}\\
+      \begin{choices}{multiple}
+          \begin{choice}
+            \text{\texttt{2**2 > 2 and 3 <= 7}}
+            \solution{true}
+          \end{choice}
+       \end{choices}
+  \explanation{$(2^2 > 2) \land (3 \leq 7) \quad:=\quad $ wahr $ \land $ wahr $ \quad:=\quad $ wahr = \texttt{True}}
+\end{quickcheck}
+
+
+%TODO: Gleichheitsoperator: = vs ==. Vgl mit d. Mathmatik (= vs :=)
+
+
+
+
+\section{Variablen und Datentypen}
+
+Bei einer \textbf{Zuweisung} in der Form $x = y$ wird die rechte Seite $y$ zunächst ausgewertet und
+das Ergebnis an die linke Seite zugewiesen.
+In der Regel steht auf der linken Seite eine \textbf{Variable}.
+Dieser Wertspeicher kann in nachfolgenden Anweisungen wieder ausgelesen werden.
+%Auf der linken Seite darf also keine Konstante stehen.
+
+\begin{example}
+\begin{block}[code]
+x = (3+4) * 5
+y = x + 1
+\end{block}
+Nach Ausführung der Anweisung steht in der Variablen \texttt{x} der ganzzahlige Wert 35,
+sowie in der Variablen \texttt{y} der Wert 36.
+\end{example}
+
+Datentypen werden in Python nicht explizit angegeben, 
+sondern ergeben sich aus dem Kontext.
+Ist also $y \in \Z$, so ist der \textbf{Datentyp} der Variablen $x$ fortan auch ganzzahlig.
+
+\begin{remark}
+Wir beschränken uns in diesem Abschnitt auf die grundlegensten Datentypen.
+Zum Beispiel Vektoren und Matrizen dort im Kurs eingeführt, wo sie benötigt werden.
+\end{remark}
+
+
+\subsection{Skalare Datentypen}
+
+\begin{definition}[int, float]
+Ganzzahlige Konstanten und Variablen sind vom Typ \texttt{int} ("Integer").
+Nicht ganzzahlige Konstanten und Variablen sind vom Typ \texttt{float} ("Floating Point").
+\end{definition}
+
+Beispiele
+\begin{tabs*}
+    \tab{Integer}
+
+\begin{block}[code]
+1 + 3 * 4
+\end{block}
+Das Ergebnis \texttt{13} ist vom Typ \texttt{int}.
+
+    \tab{Float}
+\begin{block}[code]
+1 + 2.71 + 3.14
+\end{block}
+Das Ergebnis \texttt{6.85} ist vom Typ \texttt{float}. Das dezimale Komma wird also wie im englischen durch einen Punkt ausgedrückt.
+
+    \tab{Division}
+\begin{block}[code]
+1 / 7
+\end{block}
+Das Ergebnis der Division ist grundsätzlich vom Typ \texttt{float}.
+
+\end{tabs*}
+
+
+\begin{block}[warning]
+Man beachte, das ein Rechner im Allgemeinen keine reellen Zahlen speichern kann,
+da für jede Variable nur endlich viel Speicherplatz (in der Regel 64 Bit) zur Verfügung steht.
+Beim Entwurf von Algorithmen ist also stets darauf zu achten, wie sich Rundungsfehler auswirken.
+\end{block}
+
+\begin{example}
+\begin{block}[code]
+1 - 1/13374711 * 13374711
+\end{block}
+Man erhält als Ergebnis nicht Null, sondern \texttt{1.1102230246251565e-16} (also $\approx 1.11022 \cdot 10^{-16}$).
+(Anmerkung: Abhängig vom Rechner kann das Ergebnis geringfügig ander lauten).
+\end{example}
+
+
+\subsection{Zeichenketten}
+
+Für Ausgaben auf dem Bildschirm ist es nötig mit Zeichenketten (Strings) zu arbeiten.
+Stringskonstanten werden in einfache oder doppelte Hochkommata eingebettet.
+
+Beispiele
+\begin{tabs*}
+    \tab{Einfache Zuweisung}
+\begin{block}[code]
+x = "Hallo, Welt!"
+\end{block}
+Der Variablen \texttt{x} wird die Zeichenfolge \texttt{"Hallo, Welt"} zugewiesen.
+Somit ist die Variable vom Datentyp \texttt{string}.
+
+    \tab{Verkettung}
+\begin{block}[code]
+x = 2 * 3 * 4
+z = "Ergebnis = " + str(x) + "."
+\end{block}
+In der zweiten Anweisung wird die \textit{Verkettung} von drei Strings berechnet.
+Der Inhalt von Variable \texttt{x} ist muss zunächst per \texttt{str(x)} in einen String konvertiert werden.
+Das Resultat \texttt{"Ergebnis = 24."} wird in Variable \texttt{z} gespeichert.
+
+\end{tabs*}
+
+
+\begin{remark}
+Gibt man über den Befehl \texttt{print()} nur eine Zahl aus, so ist eine Konvertierung per \texttt{str()} optional.
+\end{remark}
+
+\begin{example}
+\begin{block}[code]
+x = 3 * 4
+print(x)
+\end{block}
+Das Ergebnis \texttt{12} wird auf der Kommandozeile ausgegeben.
+\end{example}
+
+%TODO:  Teile der folgednen Inhalte können noch aufgenommen werden.
+% Vielleicht in das Kapitel "weiteres", um den/die LeserIn zunächst
+% nicht zu überfordern
+
+
+%\begin{definition}\label{integer}
+%\notion{Der Datentyp Integer}\\
+%Um ganze Zahlen darzustellen bedient man sich entweder des Typs
+%\emph{longinteger} oder \emph{integer}. Je nach gewähltem Zahlensystem ist die Darstellung eine andere.
+
+%\textbf{Zahlen vom Typ integer}
+%\begin{table}  
+%    \notion{Zahlensystem} & \notion{Ziffern} & \notion{Werte} & \notion{Basis}&\notion{Beispiel} \\
+%    Dezimalsystem & digit & 0,1,2,3,4,5,6,7,8,9 & 10 & 123\\
+%    Oktalsystem   & octdigit & 0,1,2,3,4,5,6,7 & 8 & \notion{0}173\\
+%    \rowspan{2}Hexadezimalsystem & \rowspan{2}hexdigit & 0,1,...,9,a,b,c,d,e,f & \rowspan{2}16 & \notion{0x}7b\\
+%    0,1,...,9A,B,C,D,E,F&\notion{0X}7b\\
+%\end{table}
+%BEMERKUNG: a=10, b=11, c=12, d=13, e=14, f=15 \\
+%Eine integer-Zahl entstammt aus einem der o.g. Zahlensysteme.\\
+%Also \emph{müssen} Oktal- und Hexdezimalzahlen eine führende "0" haben, Dezimalzahlen dagegen \emph{nicht}.
+
+%\begin{table}
+%    integer:= & decimalinteger oder octinteger oder hexinteger & z.B.123 \\
+%    longinteger:= & integer + 'l' (oder +'L') & z.B.123L\\
+%\end{table}
+%\end{definition}
+
+%Bei einer 32-bit-Verarbeitung ist ein bit dem Vorzeichen vorbehalten, d.h. es lassen sich $2^31=2147483648$
+%unterschiedliche Zahlen darstellen, also die Zahlen von 0 bis 2147483647. Höhere Zahlen benötigen mehr als 1 byte
+%und sind damit vom Typ "Longinteger". Eine Zahl $>2147483647$ wird automatisch als longinteger interpretiert.
+
+%\begin{example}
+%\notion{Wie funktioniert die Umrechnung in die verschiedenen Zahlensysteme?}\\
+%Dezimalzahl 123: $3\cdot 10^0 + 2\cdot 10^1 + 1\cdot 10^2= 3 + 20 +100=123_{dec}$\\
+%Oktalzahl 0173: $3\cdot 8^0+7\cdot 8^1+1\cdot 8^2=3+56+64=123_{dec}$\\
+%Hexadezimalzahl 07b: $b\cdot 16^0+7\cdot 16^1=11+112=123_{dec}$\\
+%\end{example}
+
+%\begin{remark}
+%In Python kann man sich die Dezimalzahlen von Oktal- oder Hexadezimalzahlen 
+%ausgeben lassen: z.B.\\
+%>>>0x11\\
+%17
+%\end{remark}
+
+%\begin{definition}\label{float}
+%\notion{Der Datentyp Float}
+%Um Dezimalbrüche darzustellen bedient man sich des Typs \emph{float}. Im Gegensatz zu tatsächlichen Dezimalzahlen 
+%mit einer bliebigen Anzahl von Nachkommastellen, haben die Gleitkommazahlen nur ein begrenzte Anzahl an Dezimalstellen.
+%Aufgrund dieses Rundungsfehlers müssen bei manchen Berechnungen numerische Aspekte berücksichtigt werden.\\
+
+%Zahlen des Typs float beinhalten keine Oktal- oder Hexadezimalzahlen, sondern nur Dezimalzahlen. Sie sind
+%folgendermaßen aufgebaut:\\
+
+%\textbf{Zahlen vom Typ float}
+%  \begin{table}
+    
+%       \notion{Name} & \notion{Aufbau} & \notion{Beispiel}\\
+    
+%       \rowspan{2}pointfloat:= & Dezimalbruch  & 3.14 oder .0012 oder 03.14\\
+%                   integer + '.' &2.\\
+%    \rowspan{2}exponentfloat:=&pointfloat + exponent & 1.0E-10 oder 2.1e+7 oder .2e0\\
+%                    integer + exponent & 1e2\\
+%  \end{table}
+%\end{definition}
+
+%Für rationale Zahlen, die sehr klein oder sehr groß sind wird in der wissenschaftlichen Notation 
+%die Exponentialschreibweise genutzt:
+%\[ x=m\cdot 10^a \longrightarrow  mEa \]
+%wobei m die Mantisse ist, die mit einer Zehnerpotenz multipliziert wird.
+%Die float-Zahl besteht aus 'm', einem Dezimalbruch, dem 'e' oder 'E' und 
+%dem Exponenten a, der eine ganze Zahl sein muss (...-2,-1,0,1,2,...).
+
+%Die float-Zahl besteht aus $mEa=\begin{cases}
+%m &, \text{m ist Dezimalbruch}\\
+%\text{e oder E}&, \\
+%a &, \text{a ist ganze Zahl}
+%end{cases}$
+
+%\begin{example}
+%\notion{Umrechnung von Zahlen in den Typ float:}\\
+%\begin{table}
+%$103.7\cdot 10^5$ & $\longrightarrow$ &$1.037e7$\\
+%$3$ & $\longrightarrow$& $.3e+1$\\
+%$2.3\cdot 10^{-2}$&$\longrightarrow$&  $23e-3$\\
+%\end{table}
+
+%\begin{align*}
+%103.7 \cdot 10^5 & \longrightarrow & 1.037e7\\
+%3 & \longrightarrow & .3e+1\\
+%2.3\cdot 10^{-2}&\longrightarrow & 23e-3
+%\end{align*}
+
+
+
+%Offensichtlich gibt es, je nach gewähltem Exponenten, 
+%mehr als nur eine Möglichkeit der Umwandlung. 
+%\end{example}
+
+%\begin{remark}
+%Die begrenzte Genauigkeit von float-Zahlen zeigt sich bei folgender Eingabe in Python:\\
+%>>> 0.5\\
+%0.49999999999999998
+%\end{remark}
+
+%\begin{definition}\label{string}
+%\notion{Der Datentyp String}
+
+%Ein \emph{string} ist eine Zeichenkette, wie z.B. "hallo" oder 'ab7'. Unterschieden werden
+%kurze und lange Zeichenketten.
+%\begin{table}
+%Typ & Einrahmung & Verbote\\
+%\rowspan{2}kurz &'...'& kein ' ,kein linefeed, kein backslash\\
+
+%"..." & kein ", kein linefeed, kein backslash\\
+%\rowspan{2}lang & '''...''' &\\
+ %                 """...""" &
+%\end{table}
+%\end{definition}
+%\begin{remark}
+%\begin{table}
+%>>>print ('Hallo Welt') & Hallo Welt\\
+%>>>'Hallo'              & 'Hallo'\\
+%>>>"""Hallo \newline Welt""" &   'Hallo\backslash nWelt'\\
+%>>>"""Hal\backslash lo"""&'Hal\backslash\backslash lo'
+%\end{table}
+
+%Lange Zeichenketten können also über mehr als eine Zeile gehen. 
+%Das linefeed-Zeichen \backslash n wird dann mit in den string eingefügt.\\ 
+%Der \backslash im 4. Beispiel wird dann doppelt dargestellt. Man sagt, er ist "escaped".
+%\end{remark}
+
+%TODO: int, float, string
+
+
+
+\end{visualizationwrapper}
+
+\end{content}
+

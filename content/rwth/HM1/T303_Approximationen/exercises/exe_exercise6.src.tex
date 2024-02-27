@@ -1,0 +1,165 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü07: l'Hospital}
+    \lang{en}{Exercise 7}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+
+\title{\lang{de}{Ü07: l'Hospital}}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10497}{Ticket 10497}
+\end{block}
+
+%######################################################FRAGE_TEXT
+\lang{de}{ 
+1) Bestimmen Sie mit Hilfe der Regel von de l'Hospital die folgenden Grenzwerte:
+\begin{enumerate}[a)]
+\item a) $\lim_{x\to 2} \frac{x^2-4x+4}{x^4-16}$
+\item b) $\lim_{x\to 0} \frac{e^x-x-1}{\cos(x)-1}$
+\item c) $\lim_{x\nearrow 1} \frac{-\ln(1-x)}{\tan(\frac{\pi}{2}x)}$
+\end{enumerate}
+
+2) Bestimmen Sie die folgenden Grenzwerte:
+\begin{enumerate}[a)]
+\item a) $\lim_{x\to 1} \frac{\ln(x)}{1-x}$
+\item b) $\lim_{x\to 0} \frac{\cosh(x)-1}{\cos(x)-1}$
+\item c) $\lim_{x\to \infty} \frac{\ln(\sqrt{x})}{\sqrt{\ln(x)}}$
+\item d) $\lim_{x\to \infty} x\cdot \ln\left(1+\frac{1}{x}\right)$
+\end{enumerate}
+
+}
+
+%##################################################ANTWORTEN_TEXT
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+\tab{\lang{de}{Antworten}}   
+    \lang{de}{ 
+      Aufgabe 1
+      \begin{enumerate}[a)]
+      \item a) $\lim_{x\to 2} \frac{x^2-4x+4}{x^4-16}=0$
+      \item b) $\lim_{x\to 0} \frac{e^x-x-1}{\cos(x)-1}=-1$
+      \item c) $\lim_{x\nearrow 1} \frac{-\ln(1-x)}{\tan(\frac{\pi}{2}x)}=0$
+      \end{enumerate}
+      Aufgabe 2
+      \begin{enumerate}[a)]
+      \item a) $\lim_{x\to 1} \frac{\ln(x)}{1-x}=-1$
+      \item b) $\lim_{x\to 0} \frac{\cosh(x)-1}{\cos(x)-1}=-1$
+      \item c) $\lim_{x\to \infty} \frac{\ln(\sqrt{x})}{\sqrt{\ln(x)}}=\infty$
+      \item d) $\lim_{x\to \infty} x\cdot \ln\left(1+\frac{1}{x}\right)=1$
+      \end{enumerate}
+    } 
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung 1a)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   Zähler wie Nenner sind als Polynome beliebig oft differenzierbar.
+    Die Grenzwerte des Zählers und des Nenners sind beide gleich $0$, da
+\[ \lim_{x\to 2}{(x^2-4x+4)} =2^2-4\cdot 2+4=0 \]
+und
+\[ \lim_{x\to 2}{(x^4-16)}=2^4-16=0.\]
+Also lässt sich die Regel von de l'Hospital anwenden, womit der gesuchte Grenzwert
+gleich dem Grenzwert des Quotienten der Ableitungen ist. Wegen
+$(x^2-4x+4)'=2x-4$ und $(x^4-16)'=4x^3$ ist also
+\[\lim_{x\to 2} \frac{x^2-4x+4}{x^4-16}=\lim_{x\to 2} \frac{2x-4}{4x^3}=\frac{2\cdot 2-4}{4\cdot 2^3}
+=\frac{0}{32}=0.\]
+
+\textit{Bemerkung:} In diesem Beispiel wäre man auch ohne die Regel von de l'Hospital zum Ziel gekommen, wenn
+man Zähler und Nenner jeweils durch den Linearfaktor $x-2$ geteilt hätte.
+    }
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung 1b)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{  Die Grenzwerte des Zählers und des Nenners sind beide gleich $0$, da
+\[ \lim_{x\to 0}{(e^x-x-1)}=1-0-1=0\quad \text{und}\quad \lim_{x\to 0} (\cos(x)-1)=1-1=0.\]
+Der Grenzwert des Bruchs lässt sich also nicht direkt bestimmen. Um die Regel von de l'Hospital
+anzuwenden, müssen zunächst die Ableitungen der beliebig oft differenzierbaren Funktionen bestimmt werden:
+\[ (e^x-x-1)'=e^x-1\quad \text{und}\quad (\cos(x)-1)'=-\sin(x). \]
+Nun sind aber
+\[ \lim_{x\to 0}{(e^x-1)}=1-1=0\quad \text{und}\quad \lim_{x\to 0} (-\sin(x))=0,\]
+weshalb man erneut die Ableitungen bestimmt:
+\[ (e^x-1)'=e^x\quad \text{und}\quad (-\sin(x))'=-\cos(x). \]
+Dann gilt
+\[ \lim_{x\to 0} \frac{e^x}{-\cos(x)}=\frac{e^0}{-\cos(0)}=\frac{1}{-1}=-1.\]
+Nach der Regel von de l'Hospital ist also
+\[ \lim_{x\to 0} \frac{e^x-x-1}{\cos(x)-1}=\lim_{x\to 0} \frac{e^x-1}{-\sin(x)}
+=\lim_{x\to 0} \frac{e^x}{-\cos(x)}=-1.\]
+ }
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung 1c)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{ Wegen $\lim_{x\nearrow 1} (-\ln(1-x))=\lim_{y\searrow 0} (-\ln(y))=\infty$ und 
+$\lim_{x\nearrow 1} \tan(\frac{\pi}{2}x)=\infty$ lässt sich die Regel von de l'Hospital anwenden,
+den beide Funktionen sind beliebig oft differenzierbar.
+
+Wir berechnen also zunächst die Ableitungen des Zählers $f(x)=-\ln(1-x)$ und des Nenners $g(x)=\tan(\frac{\pi}{2}x)$.
+\[ f'(x)=-\frac{1}{1-x}\cdot (-1)=\frac{1}{1-x}, \]
+nach der Kettenregel, und ebenfalls mit der Kettenregel und der Formel für die Ableitung des Tangens ist
+\[ g'(x)=(1/\cos(\frac{\pi}{2}x)^2)\cdot \frac{\pi}{2}.\]
+
+Also ist 
+\[ \frac{f'(x)}{g'(x)}=\frac{1/(1-x)}{\frac{\pi}{2}/\cos(\frac{\pi}{2}x)^2}
+=\frac{\cos(\frac{\pi}{2}x)^2}{\frac{\pi}{2}(1-x)}. \]
+
+Wegen $\lim_{x\nearrow 1} \cos(\frac{\pi}{2}x)^2=0$ und $\lim_{x\nearrow 1} \frac{\pi}{2}(1-x)=0$,
+lässt sich der Grenzwert $\lim_{x\nearrow 1} \frac{f'(x)}{g'(x)}$ auch nicht direkt berechnen, und wir bestimmen
+wieder die Ableitungen von $f'(x)=\cos(\frac{\pi}{2}x)^2$ und $g'(x)=\frac{\pi}{2}(1-x)$.
+\[ f''(x)=2 \cos(\frac{\pi}{2}x)\cdot (-\sin(\frac{\pi}{2}x))\cdot \frac{\pi}{2}\]
+und
+\[ g''(x)=-\frac{\pi}{2}. \]
+Damit gilt also
+\begin{eqnarray*}
+ \lim_{x\nearrow 1} \frac{-\ln(1-x)}{\tan(\frac{\pi}{2}x)} &=& \lim_{x\nearrow 1} \frac{f'(x)}{g'(x)}
+=\lim_{x\nearrow 1} \frac{\cos(\frac{\pi}{2}x)^2}{\frac{\pi}{2}(1-x)}\\
+&=&\lim_{x\nearrow 1} \frac{f''(x)}{g''(x)}
+=\lim_{x\nearrow 1} \frac{2 \cos(\frac{\pi}{2}x)\cdot (-\sin(\frac{\pi}{2}x))\cdot \frac{\pi}{2}}{-\frac{\pi}{2}}\\
+&=& \lim_{x\nearrow 1} 2 \cos(\frac{\pi}{2}x)\cdot \sin(\frac{\pi}{2}x)=2\cdot 0\cdot 1=0.
+\end{eqnarray*}
+ }
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+%#############################################################ENDE
+
+ \tab{\lang{de}{Lösungsvideo 2)}}
+  Die Lösungswege zu Aufgabe 2 können dem folgenden Video entnommen werden:\\
+  \youtubevideo[500][300]{DjTg8lCVUmI}\\
+\end{tabs*}
+\end{content}

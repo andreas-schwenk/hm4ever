@@ -1,0 +1,191 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A02: Funktionengrenzwerte}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{
+	\title{A02: Funktionengrenzwerte}
+}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9976 }{Ticket 9976}
+\end{block}
+
+
+
+\begin{problem}
+
+    \begin{question}
+	
+		
+		\begin{variables}
+		
+			\randint[Z]{a}{1}{3}
+		
+			\randint[Z]{c}{-9}{9}
+			\randadjustIf{c}{c=0}
+			
+			\function{xy}{-c}
+			
+			\randint[Z]{d}{-9}{9}
+			\randadjustIf{d}{c=0 OR c+d=0}
+			
+			\function[calculate]{tmp}{c*d}
+			
+			\function[calculate]{h}{c+d}
+			\function{f}{a*((x^2+h*x+(tmp))/(x+c))}
+			\function{g}{a*(x+c)(x+d)}
+            
+			\function[calculate]{sol}{a*(-c+d)}
+			
+		\end{variables}
+	    
+        \explanation[edited]{Der Zähler von $f(x)$ kann aufgespalten werden in 
+        $\var{g}$. Dann kann gekürzt werden und $f(\var{xy})$ berechnet
+        werden.}
+		\type{input.number}
+		\field{real} 
+		\precision{3}
+	    \lang{de}{
+		    \text{
+	Betrachten Sie die Funktion 
+	 $ f: \R \setminus\{\var{xy}\} \to \R; x \mapsto \var{f}.$\\
+	 Bestimmen Sie: 
+	    }}
+	    
+	    %up- und downarrow gehen nicht :S
+	    \begin{answer}
+	    	\text{$ \lim_{x \nearrow \var{xy}} f(x) = $}
+		    \solution{sol}
+	    \end{answer}
+	    
+	    \begin{answer}
+	    	\text{$ \lim_{x \searrow \var{xy}} f(x) = $ }
+		    \solution{sol}
+	    \end{answer}
+	    
+	\end{question}
+	
+	\begin{question}
+	
+		
+		\begin{variables}
+		
+			\randint[Z]{a}{1}{3}
+		
+			\randint[Z]{c}{-9}{9}
+			\randadjustIf{c}{c=0}
+			
+			\function{xy}{-c}
+			
+			\randint[Z]{d}{-9}{9}
+			\randadjustIf{d}{c=0 OR c+d=0}
+			
+			\function[normalize]{f}{a*((x^2-c^2)/abs(x+c))}
+            \function{g}{a*(x+c)(x-c)}
+			
+			\function[calculate]{sol1}{2*c*a}
+			\function[calculate]{sol2}{-2*c*a}
+			
+		\end{variables}
+	    
+        \explanation{Mit Hilfe der 3. binomischen Formel kann der Zähler der Funktion 
+        geschrieben werden als $\var{g}$. Beim Kürzen müssen die Betragsstriche berücksichtigt werden: 
+        will man $ \lim_{x \nearrow \var{xy}} f(x)  $ berechnen, kommt ein zusätzliches Minuszeichen hinzu:
+        Der Term $(x+\var{c})$ ist für $x<\var{xy}$ negativ.
+        }
+		\type{input.number}
+		\field{real} 
+		\precision{3}
+	    \lang{de}{
+		    \text{
+	Betrachten Sie die Funktion 
+	 $ f: \R \setminus\{\var{xy}\} \to \R; x \mapsto \var{f}.$\\
+	 Bestimmen Sie: 
+	    }}
+	    
+	    \begin{answer}
+	    	\text{$ \lim_{x \nearrow \var{xy}} f(x) = $}
+		    \solution{sol1}
+	    \end{answer}
+	    
+	    \begin{answer}
+	    	\text{$ \lim_{x \searrow \var{xy}} f(x) = $ }
+		    \solution{sol2}
+	    \end{answer}
+	    
+	\end{question}
+    
+    \begin{question}
+        
+        
+        \begin{variables}
+       
+            \randint[Z]{a}{2}{4}
+            
+            \function{f1}{x^2-a}
+            \function{f2}{ln((1+x)/e^a)}
+            
+            \function[calculate]{sol}{-a}
+            
+        \end{variables}
+        
+        \explanation{Der Zahlenwert 0 kann in beide Teilfunktionen eingesetzt werden:
+        $\ln \frac{1}{e^\var{a}}=\var{sol}$.}
+        \type{input.number}
+		\field{real} 
+		\precision{3}
+	    \lang{de}{
+		    \text{
+Betrachten Sie die Funktion
+  
+  $ f: \R \setminus\{0\} \to \R; x \mapsto 
+	 
+  
+  
+  \begin{cases}
+  \var{f1}&x<0\\
+  \var{f2}&x>0.\\     
+  \end{cases}$\\
+Bestimmen Sie:
+    }}
+    \begin{answer}
+	    	\text{$ \lim_{x \searrow 0} f(x) = $}
+		    \solution{sol}
+	\end{answer}
+    
+    \begin{answer}
+	    	\text{$ \lim_{x \nearrow 0} f(x) = $}
+		    \solution{sol}
+	\end{answer}
+    
+    
+    
+    \end{question}
+    
+\end{problem}
+
+
+\embedmathlet{mathlet}
+
+\end{content}

@@ -1,0 +1,90 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Exercise 1}
+    \lang{de}{Ü01: Stetigkeit}
+  }
+\begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  
+  \begin{components}
+  \end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T109_Skalar-_und_Vektorprodukt/g_art_content_32_laenge_norm.meta.xml}{content_32_laenge_norm}
+\link{generic_article}{content/rwth/HM1/T202_Reelle_Zahlen_axiomatisch/g_art_content_05_anordnungsaxiome.meta.xml}{content_05_anordnungsaxiome}
+\link{generic_article}{content/rwth/HM1/T301_Differenzierbarkeit/g_art_content_03_hoehere_ableitungen.meta.xml}{content_03_hoehere_ableitungen}
+\link{generic_article}{content/rwth/HM1/T502_Stetigkeit_Diffbarkeit-n-dim/g_art_content_53_Stetigkeit.meta.xml}{content_53_Stetigkeit}
+\end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22634}{Ticket 22634}
+\end{block}
+  \title{
+    \lang{en}{Exercise 1}
+    \lang{de}{Ü01: Stetigkeit}
+  }
+  
+Gegeben sei die Funktion
+\[
+f:\R^2 \to \R^2, x \mapsto \begin{pmatrix}\sin(x_1)\sin(x_2)\\ x_2 \end{pmatrix}
+\]
+Zeigen Sie nur mit Hilfe der Definition, dass $f$ stetig ist.
+  
+  \begin{tabs*}[\initialtab{0}\class{exercise}]
+    \tab{
+      Lösung
+    }
+    \begin{incremental}[\initialsteps{1}]
+      \step Wir zeigen, dass $f$ an jeder Stelle stetig ist und zwar nur mit Hilfe dieser \ref[content_53_Stetigkeit][Definition]{def:stetigkeit_n-dim}. Da die Funktion $\sin$ auf $\R$ stetig differenzierbar ist,
+      erhalten wir aus dem \ref[content_03_hoehere_ableitungen][Mittelwertsatz]{thm:mittelwertsatz}
+      für beliebige $x_{1},x_{2}$ die Abschätzung
+\[|\sin(x_{1})-\sin(x_{2})|\leq \sup_{\zeta\in\R}|\cos(\zeta)|\cdot|x_{1}-x_{2}|\leq |x_{1}-x_{2}|\,.\]
+
+\step Daraus folgt mit Hilfe der \ref[content_05_anordnungsaxiome][Dreiecksungleichung]{rule:anordnungsregeln}
+für $x_{1},x_{2},y_{1},y_{2}\in\R$
+\begin{align*}
+&|\sin(x_{1})\sin(x_{2})-\sin(y_{1})\sin(y_{2})|&\\
+&=|\sin(x_1)\sin(x_2) - \sin(y_1)\sin(x_2) + \sin(y_1)\sin(x_2) - \sin(y_1)\sin(y_2)|& \\
+&\leq |\sin(x_{1})-\sin(y_{1})||\sin(x_{2})|+|\sin(x_2)-\sin(y_{2})||\sin(y_{1})|&\\
+&\leq |x_{1}-y_{1}|+|x_{2}-y_{2}|&\,.   
+\end{align*}
+
+\step
+Die Definition der \ref[content_32_laenge_norm][euklidischen Norm]{def:euklidische_norm} liefert nun die Abschätzung
+\begin{align*}
+ &\Vert f(x)-f(y)\Vert^{2}&& = \Vert \begin{pmatrix} \sin(x_1)\sin(x_2) - \sin(y_1)\sin(y_2)\\ x_2 - y_2\end{pmatrix}\Vert^2 &\\
+%QS falsch (?):
+%QS &&& = |x_{1}-y_{1}|+|x_{2}-y_{2}|^2 + |x_2-y_2|^2 & \\
+%QS &&& \leq (|x_{1}-x_{2}|+|y_{1}-y_{2}|)^{2}+|y_{1}-y_{2}|^{2}&\\
+%QS
+%QS neu:
+ &&&    = (\sin(x_1)\sin(x_2) - \sin(y_1)\sin(y_2))^{2} + (x_2-y_2)^2 & \\
+ &&&    = | \sin(x_1)\sin(x_2) - \sin(y_1)\sin(y_2)|^{2} + |x_2-y_2|^2 & \\ 
+ &&& \leq ( |x_{1}-y_{1}|+|x_{2}-y_{2}|)^{2} + |x_2-y_2|^2 & \\
+ &&& \leq 2(|x_{1}-y_{1}|)^{2}+2(|x_{2}-y_{2}|)^{2} + |x_2-y_2|^2 & \\
+%QS 
+
+ &&& \leq 3(|x_{1}-y_1|^{2}+|x_{2}-y_{2}|^{2})& \\
+ &&&   =  3 \Vert \begin{pmatrix} x_1 - y_1 \\ x_2 - y_2 \end{pmatrix}\Vert^2 &\\
+ &&&   =  3 \Vert x-y \Vert^{2}.&  
+\end{align*}
+Hierbei haben wir die Ungleichung $(a+b)^{2}\leq 2a^{2}+2b^{2}$ verwendet, die für alle reellen Zahlen $a,b\in\R$ gültig ist, wie man mit Hilfe der binomischen Formeln nachprüft.
+\step Nun sei $a\in\R^{2}$ beliebig und $\varepsilon >0$. Dann wählen wir $\delta:=\frac{\varepsilon}{\sqrt{3}}$. Es gilt nun für alle $x\in\R^{2}$  mit $\Vert x-a\Vert <\delta$
+\[\Vert f(x)-f(a)\Vert \leq \sqrt{3}\Vert x-a \Vert <\sqrt{3}\delta=\varepsilon\,.\]
+Daher ist $f$ stetig in $a$. 
+       
+    \end{incremental}
+  \end{tabs*}
+\end{content}
+

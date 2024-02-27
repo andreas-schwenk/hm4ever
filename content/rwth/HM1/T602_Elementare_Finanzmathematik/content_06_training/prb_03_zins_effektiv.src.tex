@@ -1,0 +1,79 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A03: effektiver Zinssatz}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A03: effektiver Zinssatz}}
+\lang{en}{\title{A03: Effective interest rate}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22684}{Ticket 22684}
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+  
+    \begin{problem} 
+    \begin{variables}
+           %\randint{k}{2}{4}
+           \drawFromSet{k}{1,2,3,4,6,12}
+           %\randint{pstern}{1}{2}
+           \drawFromSet{pstern}{0.8,0.9,1,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,2}
+           \drawFromSet{k0}{2000,3000,4000,5000,6000,7000,8000,9000}
+           \function[calculate,2]{peff}{100*((1+pstern/100)^k-1)}
+           \function[calculate,2]{p}{k*pstern}
+     \end{variables}
+          \begin{question}
+               \type{input.number}
+               \lang{de}{\text{Für einen relativen Periodenzinssatz $i_m=\var{pstern}$ \%  bei 
+               $m=\var{k}$ Perioden ist der nominelle Jahreszins $i_{\text{nom}}$ und der effektive
+               Jahreszins $i_{\text{eff}}$ zu berechnen:\\
+               $i_{\text{nom}}=$\ansref\%\\
+               $i_{\text{eff}}=$\ansref\%
+               }}
+               \lang{en}{\text{For a relative period interest rate $i_m=\var{pstern}$ \% over
+               $m=\var{k}$ periods, calculate the nominal annual interest rate $i_{\text{nom}}$ and the effective
+               annual interest rate $i_{\text{eff}}$:\\
+               $i_{\text{nom}}=$\ansref\%\\
+               $i_{\text{eff}}=$\ansref\%
+               }}
+               \begin{answer}
+                    \solution{p}
+               \end{answer}
+               \begin{answer}
+                    \solution{peff}
+               \end{answer}               
+               \lang{de}{\explanation[edited]{Der effektive Jahreszins mit jährlicher Verzinsung führt zum gleichen 
+               Ergebnis wie  die periodische Verzinsung.}}
+               \lang{en}{explanation[edited]{The effective interest rate with annual interest leads to the same result 
+               result as the periodic interest rate.}}
+               %$i_{\text{nom}}=\var{k}\cdot\var{pstern}\text{\%}=\var{p}$ \% und 
+               %$i_{\text{eff}}=(1+i_m)^m-1=\var{peff}$ \%.\\
+               %Speziell für $m=1$ gilt: $i_{\text{nom}}=i_{\text{eff}}$.
+          \end{question}     
+     \end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

@@ -1,0 +1,217 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Monotone Konvergenz}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_15_monotone_konvergenz.meta.xml}{content_15_monotone_konvergenz}
+    \link{generic_article}{content/rwth/HM1/T202_Reelle_Zahlen_axiomatisch/g_art_content_07_vollstaendigkeit.meta.xml}{vollst}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_14_konvergenz.meta.xml}{konv-folgen}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_13_reelle_folgen.meta.xml}{reelle-folgen}
+    \link{generic_article}{content/rwth/HM1/T201neu_Vollstaendige_Induktion/g_art_content_02_vollstaendige_induktion.meta.xml}{vollst-ind}
+    \link{generic_article}{content/rwth/HM1/T201neu_Vollstaendige_Induktion/g_art_content_03_binomischer_lehrsatz.meta.xml}{binom}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{5}
+\ombarticle{3}
+
+\lang{de}{\title{Monotone Konvergenz}}
+ 
+\begin{block}[annotation]
+  Beschränkte monotone Folgen konvergieren; Grenzwertberechnung bei rekursiv definierten monotonen Folgen;
+  eulersche Zahl $e$ als $\lim_{n\to \infty} (1+1/n)^n$.
+    
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9674}{Ticket 9674}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{Beschränkte monotone Folgen}
+
+Im letzten Abschnitt hatten wir bemerkt, dass konvergente Folgen beschränkt sind.
+Für monotone Folgen gilt aber auch die Umkehrung.
+
+\begin{theorem}\label{the:beschmon-folge}
+Ist $(a_n)_{n\in \N}$ eine beschränkte monotone Folge, dann ist $(a_n)_{n\in \N}$ konvergent und es gilt
+\begin{align*}
+ \lim_{n\to \infty} a_n &= \sup \{ a_n| n\in \N\}, & \text{ falls }(a_n)_{n\in \N}\text{ monoton wachsend ist,}\\
+ \lim_{n\to \infty} a_n &= \inf \{ a_n| n\in \N\}, & \text{ falls }(a_n)_{n\in \N}\text{ monoton fallend ist.}
+\end{align*}
+\floatright{\href{https://www.hm-kompakt.de/video?watch=304}{\image[75]{00_Videobutton_schwarz}}}\\\\
+\end{theorem}
+
+\begin{remark}
+Im Allgemeinen ist es schwierig, das Supremum bzw. das Infimum direkt zu bestimmen. Wir werden aber unten eine
+Methode sehen, wie man über Umwege den Grenzwert dennoch bestimmen kann.
+\end{remark}
+
+\begin{proof*}[Erklärung]
+Für eine beschränkte monoton wachsende Folge $(a_n)_{n\in \N}$ ist zu zeigen, dass $a=\sup \{ a_n| n\in \N\}$ die Bedingung eines Grenzwertes
+erfüllt, dass es also zu jedem $\epsilon>0$ ein $N_\epsilon\in \N$ gibt, so dass $|a_n-a|<\epsilon$ für alle $n\geq N_\epsilon$.\\
+Sei $W=\{ a_n| n\in \N\}$.
+Nach einer \ref[vollst][Charakterisierung des Supremums]{thm:charakterisierung-sup} ist $a_m\leq a$ für alle $a_m\in W$ und es gibt 
+für jedes $\epsilon>0$ ein Element $a_m\in W$, so dass $a-\epsilon< a_m$. Setzen wir $N_\epsilon=m$, so gilt wegen der Monotonie
+$a_n\geq a_m>a-\epsilon$ für alle $n\geq N_\epsilon$, sowie $a_n\leq a$, und daher
+\[ |a_n-a|=a-a_n< \epsilon\quad \text{für alle }n\geq N_\epsilon. \]
+
+Für monoton fallende Folgen funktioniert der Beweis ganz analog. Eine ähnliche Beweisführung findet sich auch im folgenden Video.\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11281&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}\\\\
+\end{proof*}
+
+\begin{example}\label{ex:beispiele}
+\begin{enumerate}
+\item Die Folge $(a_n)_{n\geq 1}$ mit $a_1=2$ und
+$a_{n+1}=\frac{a_n}{2}+\frac{1}{a_n}$ für alle $n\in \N $
+aus dem Abschnitt \ref[reelle-folgen][Reelle Folgen]{ex:sqrt-2} ist monoton fallend und nach unten durch $1$ beschränkt, wie
+dort gezeigt wurde. Die Folge konvergiert also nach obigem Satz und es gilt 
+\[ 2\geq \lim_{n\to \infty} a_n \geq 1. \]
+Zur Berechnung des Grenzwerts $a=\lim_{n\to \infty} a_n$ verwendet man folgenden Trick:\\
+Die Folge $(a_{n+1})_{n\geq 1}$ besitzt die gleichen Folgeglieder (außer $a_1$), nur dass der Index verschoben ist. Deshalb
+konvergiert auch sie und hat denselben Grenzwert $a$. Aus der Rekursionsgleichung erhält man dann mit den
+\ref[konv-folgen][Grenzwertregeln]{sec:grenzwertregeln}:
+\[ a= \lim_{n\to \infty} a_{n+1} =\lim_{n\to \infty} \left( \frac{a_n}{2}+\frac{1}{a_n} \right)
+=\frac{a}{2}+\frac{1}{a}. \]
+Diese Gleichung löst man nach $a$ auf:
+\begin{eqnarray*}
+  a &=& \frac{a}{2}+\frac{1}{a} \\
+ \Leftrightarrow \qquad a^2 &=& \frac{a^2}{2}+1 \\
+ \Leftrightarrow \qquad \frac{a^2}{2} &=& 1\\
+ \Leftrightarrow\qquad  a^2 &=& 2 \\
+ \Leftrightarrow  a=\sqrt{2}  &\text{ oder }& a=-\sqrt{2} 
+\end{eqnarray*}
+Da aber $a\geq 1$ ist, ist daher $a=\sqrt{2}$.
+\item Die geometrische Folge $(a_n)_{n\geq 0}= (q^n)_{n\geq 0}$ mit $0<q<1$ ist nach unten beschränkt, denn
+$a_n>0$ für alle $n\geq 0$, und monoton fallend, denn 
+$a_{n+1}=q^{n+1}=qa_n<a_n$ für alle $n\geq 0$. Damit ist die Folge konvergent. Für den Grenzwert $a$ gilt:
+\[ a= \lim_{n\to \infty} a_{n+1} =\lim_{n\to \infty} qa_n =qa, \]
+und daher $a(1-q)=0$, d.h. $a=0$. Es ist also
+\[ \lim_{n\to \infty} q^n =0, \]
+wenn $0<q<1$. 
+Für $-1<q<0$ erhält man ebenfalls $\lim_{n\to \infty} q^n =0$, denn dies ist äquivalent dazu, dass 
+$\lim_{n\to \infty} |q^n-0| =0$ (vgl. \ref[konv-folgen][Regel aus vorigem Abschnitt]{rule:folge--limes-nullfolge}), aber 
+$|q^n-0|=|q|^n$ ist eine geometrische Folge mit $0<|q|<1$.
+
+Mit den Grenzwertregeln erhält man nun schließlich für beliebiges $u\in \R^*$, dass auch die 
+geometrische Folge $(uq^n)_{n\geq 0}$ für $|q|<1$ gegen $0$ konvergiert.
+\item Für eine natürliche Zahl $m\in \N$ betrachten wir die Folge $\left(\frac{1}{\sqrt[m]{n}}\right)_{n\in \N}$.
+
+Wegen $0<\frac{1}{\sqrt[m]{n}}$ für alle $n\in \N$ ist die Folge nach unten beschränkt. Außerdem gilt wegen der Monotonie der
+Wurzel, dass $\sqrt[m]{n}<\sqrt[m]{n+1}$ für alle $n$, d.h. $\frac{1}{\sqrt[m]{n}}>\frac{1}{\sqrt[m]{n+1}}$ für alle $n\in \N$.
+Die Folge ist also monoton fallend und beschränkt und besitzt daher einen Grenzwert.\\
+Ist $a$ dieser Grenzwert, dann gilt
+\[   a^m=\left( \lim_{n\to \infty} \frac{1}{\sqrt[m]{n}} \right)^m=\lim_{n\to \infty}\left(\frac{1}{\sqrt[m]{n}}\right)^m
+=\lim_{n\to \infty}\frac{1}{n}=0. \]
+Also ist $a=0$, d.h.
+\[   \lim_{n\to \infty} \frac{1}{\sqrt[m]{n}}  =0. \]
+\end{enumerate}
+\end{example}
+
+Diese Beispiele werden auch im folgenden Video anschaulich erläutert:\\\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11282&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}\\\\
+
+\begin{block}[warning]
+Die in den vorigen Beispielen angewendete Methode, den Grenzwert zu berechnen, funktioniert nur, wenn man schon weiß, 
+dass es einen Grenzwert gibt.
+Ansonsten liefert sie höchstens eine Möglichkeit, die Werte für den Grenzwert einzuschränken.
+
+Man betrachte zum Beispiel die Folge $(a_n)_{n\geq 1}$ mit $a_1=-1$ und $a_{n+1}=-a_n$. Für einen Grenzwert $a$ hätte man dann:
+\[ a= \lim_{n\to \infty}a_{n+1} =\lim_{n\to \infty} (-a_n)=-a, \]
+also $a=0$. Dies besagt, dass $a=0$ der einzige mögliche Grenzwert ist. In der Tat hat diese Folge aber keinen Grenzwert, denn man 
+kann leicht sehen, dass es genau die Folge $((-1)^n)_{n\in \N}$ ist.
+\end{block}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{1}
+\begin{quickcheck}
+\type{input.number}
+		\field{rational}
+            
+       	\begin{variables}
+			%\randint{a}{2}{6} 						
+			%\function[normalize]{loes0}{a}
+            \drawFromSet{loes0}{0}
+        \end{variables}
+	
+		\lang{de}{
+			\text{Gegeben sei die Folge $(a_n)_{n\in\N}$ mit $a_0=1$ sowie $a_{n+1}=\frac{2a_n}{2+a_n}$ für 
+            $n\geq 1$. Überlegen Sie sich, wie sie die Konvergenz der Folge begründen können und geben Sie den Grenzwert $a$ der Folge an.\\\\
+                        
+            Die Folge $(a_n)_{n\in\N}$ konvergiert gegen $a=$\ansref.}}
+		
+    	\begin{answer}
+		\solution{loes0}
+		\end{answer}
+            
+		\explanation{Verwenden Sie obigen \ref[content_15_monotone_konvergenz][Satz]{the:beschmon-folge} und dass für den Grenzwert $a$ gilt: $a=\lim\limits_{n\to\infty}a_n=\lim\limits_{n\to\infty}a_{n+1}$}
+	\end{quickcheck}
+\end{quickcheckcontainer}
+
+\section{Die eulersche Zahl $e$}\label{sec:eulersche-zahl}
+
+Es gibt mehrere Möglichkeiten, die Eulersche Zahl $e=2,7182818284\ldots$ einzuführen, da sie in mehreren Bereichen der Mathematik
+eine Rolle spielt.
+Hier definieren wir sie als Grenzwert einer beschränkten monoton wachsenden Folge.
+
+\begin{theorem}\label{thm:ezahl}
+Die Folge $\left( (1+\frac{1}{n})^n \right)_{n\in \N}$ ist monoton wachsend und erfüllt
+\[   2\leq \left(1+\frac{1}{n}\right)^n < 3\quad \text{für alle }n\in \N. \]
+
+Ihr Grenzwert 
+\[  e:= \lim_{n\to \infty} \left(1+\frac{1}{n}\right)^n \approx 2,7182818284 \]
+wird \notion{Eulersche Zahl} genannt.
+\end{theorem}
+
+\begin{proof*}[Erklärung]
+Sei $a_n=(1+\frac{1}{n})^n$, dann ist $a_1=2$ und $a_n\geq 1$ für alle $n\in \N$. Wenn wir die Monotonie zeigen, ist
+also auch die linke Ungleichung $2=a_1\leq a_n$ für alle $n\in \N$ gezeigt.\\
+Dazu betrachten wir den Quotienten $\frac{a_{n+1}}{a_n}$:
+\begin{eqnarray*}
+\frac{a_{n+1}}{a_n} &=& \frac{(1+\frac{1}{n+1})^{n+1}}{(1+\frac{1}{n})^n} 
+= (1+\frac{1}{n})\left( \frac{1+\frac{1}{n+1}}{1+\frac{1}{n}}\right)^{n+1} \\
+&=& \frac{n+1}{n} \left(  \frac{\,\,\frac{n+2}{n+1}\,\,}{\frac{n+1}{n}} \right)^{n+1}
+=\frac{n+1}{n} \left(  \frac{ (n+2)n}{(n+1)(n+1)} \right)^{n+1} \\
+&=& \frac{n+1}{n} \left(  \frac{ ((n+1)+1)((n+1)-1)}{(n+1)^2} \right)^{n+1} 
+= \frac{n+1}{n} \left(  \frac{ (n+1)^2-1}{(n+1)^2} \right)^{n+1} \\
+&=& \frac{n+1}{n} \left( 1- \frac{ 1}{(n+1)^2} \right)^{n+1} \\
+&\geq & \frac{n+1}{n}\left( 1-  \frac{ n+1}{(n+1)^2} \right)\quad \text{nach Bernoulli-Ungl.}\\
+&=& \frac{n+1}{n}\left( 1- \frac{ 1}{n+1} \right)= \frac{n+1}{n} \frac{n+1 -1}{n+1} =1. 
+\end{eqnarray*}
+Also ist $a_{n+1}\geq a_n$ für alle $n\in \N$.\\
+Für die Abschätzung $a_n<3$ verwenden wir die \ref[binom][allgemeine binomische Formel]{thm:binom}
+\[ a_n = \left(1+\frac{1}{n}\right)^n=\sum_{k=0}^n \binom{n}{k} \left(\frac{1}{n}\right)^k 
+= 1+ \sum_{k=1}^n \frac{n(n-1)\cdot (n-k+1)}{1\cdot 2\cdots k \cdot n^k}. \]
+Für die einzelnen Summanden gilt nun 
+\[ \frac{n(n-1)\cdot (n-k+1)}{1\cdot 2\cdots k \cdot n^k}\leq \frac{1}{1\cdot 2\cdots k}\leq \frac{1}{1\cdot 2^{k-1}}=\left(\frac{1}{2}\right)^{k-1}, \]
+und daher mit Hilfe der \ref[vollst-ind][geometrischen Summenformel]{rule:geom-summe}
+\[ a_n \leq 1+ \sum_{k=1}^n \left(\frac{1}{2}\right)^{k-1}=1+\sum_{j=0}^{n-1} \left(\frac{1}{2}\right)^j=1+ \frac{1-\left(\frac{1}{2}\right)^n}{1-\frac{1}{2}}
+=1+  2-2\cdot (\frac{1}{2})^n<3.\]
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11283&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}\\\\
+\end{proof*}
+
+
+
+\end{content}

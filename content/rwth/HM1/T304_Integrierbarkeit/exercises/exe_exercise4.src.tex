@@ -1,0 +1,130 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü04: Integrierbarkeit}
+    \lang{en}{Exercise 4}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+
+\title{\lang{de}{Ü04: Integrierbarkeit}}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10579}{Ticket 10579}
+\end{block}
+
+%######################################################FRAGE_TEXT
+\lang{de}{ Wir betrachten die Funktion $f(x)=\frac{1}{x}$ auf dem Intervall $[1;5]$.\\
+\begin{enumerate}[a)]
+\item a) Geben Sie zu jedem $n\in \N$ die Ober- und Untersumme von $f$ bezüglich der
+äquidistanten Zerlegung $Z_n$ in $n$ Teilintervalle an.
+\item b) Berechnen Sie die Differenzen $O(Z_n)-U(Z_n)$.
+Wieso folgt aus dieser Berechnung, dass $f$ auf $[1;5]$ integrierbar ist?
+\item c) Für welche $n$ ist mit Sicherheit $|\int_1^5 f(x)\, dx - O(Z_n)|\leq 0,01$?
+\end{enumerate}
+
+\textit{Hinweis:} Nutzen Sie aus, dass die Funktion monoton fallend ist.
+ }
+
+%##################################################ANTWORTEN_TEXT
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+\tab{\lang{de}{    Antworten    }}
+    \lang{de}{ \begin{enumerate}[a)]
+\item a) Obersumme und Untersumme sind
+\[ O(Z_n)= \sum_{l=0}^{n-1}  \frac{4}{n+4l}, \quad U(Z_n)= \sum_{k=1}^{n}  \frac{4}{n+4k}. \]
+
+
+\item b) Die Differenz beträgt
+\[  O(Z_n)-U(Z_n) = \frac{16}{5n}.\]
+Für Begründung der Integrierbarkeit siehe Lösung b).
+
+\item c) Für $n\geq 320$ ist die Bedingung erfüllt.
+\end{enumerate} }
+
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung a)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step  
+Da das Intervall $[1;5]$ die Länge $4$ hat, sind die Längen der Teilintervalle bei der
+äquidistanten Zerlegung $Z_n$ jeweils $\frac{4}{n}$, und die Teilungsstellen sind
+\[  x_k=1+\frac{4k}{n}=\frac{n+4k}{n}\quad \text{für }k=0,\ldots, n. \]
+\step
+Da die Funktion monoton fallend ist, wird das Supremum auf den Teilintervallen stets
+am linken Rand angenommen und das Infimimum stets am rechten Rand.
+\step
+Als Obersumme zur Zerlegung $Z_n$ erhält man daher 
+\[ O(Z_n)= \sum_{k=1}^n f(x_{k-1}) \cdot \frac{4}{n}
+=  \frac{4}{n} \cdot\sum_{k=1}^n  \frac{n}{n+4(k-1)}
+= \frac{4}{n} \cdot\sum_{l=0}^{n-1}  \frac{n}{n+4l}=\sum_{l=0}^{n-1}  \frac{4}{n+4l},
+\]
+wobei wir im vorletzten Schritt den Summationsindex $k$ durch den Summationsindex $l$ mittels $l=k-1$ ersetzt haben.
+\step
+Für die Untersumme zur Zerlegung $Z_n$ erhält man entsprechend
+\[ U(Z_n)=\sum_{k=1}^n f(x_{k}) \cdot \frac{4}{n}=
+ \frac{4}{n} \cdot\sum_{k=1}^{n}  \frac{n}{n+4k}= \sum_{k=1}^{n}  \frac{4}{n+4k}. \]
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung b)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step  
+Aus Teil a) haben wir die Formeln $O(Z_n) =\sum_{l=0}^{n-1}  \frac{4}{n+4l}$ und
+$U(Z_n)= \sum_{k=1}^{n}  \frac{4}{n+4k}$.
+\step
+Da sich die beiden Summen lediglich um den Summanden mit $l=0$ bzw. mit $k=n$ unterscheiden, erhält man direkt
+\[  O(Z_n)-U(Z_n) = \sum_{l=0}^{n-1}  \frac{4}{n+4l} - \sum_{k=1}^{n}  \frac{4}{n+4k} = \frac{4}{n}- \frac{4}{n+4n}=\frac{4}{n}-\frac{4}{5n}=\frac{16}{5n}.\]
+
+\step
+Nach der Definition von Integrierbarkeit benötigt man zu jedem $\epsilon>0$ eine Zerlegung $Z$, für welche $O(Z)-U(Z)<\epsilon$ gilt. Für gegebenes $\epsilon>0$ muss man hier lediglich ein $n$ wählen, das so groß ist, dass $ \frac{16}{5n}<\epsilon$ ist.
+Dies ist möglich, da die Folge $( \frac{16}{5n})_{n\in \N}$ eine Nullfolge ist. Explizit kann
+man eine natürliche Zahl $n>\frac{16}{5\epsilon}$ wählen.
+
+Also ist $f$ auf dem Intervall $[1;5]$ integrierbar.
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung c)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+\step 
+Der Integralwert liegt stets zwischen Ober- und Untersumme. Ist also deren Abstand höchstens $0,01$, so ist auch der Abstand der Obersumme zum Integral  höchstens $0,01$.
+
+\step
+Wir haben also mit Sicherheit $|\int_1^5 f(x)\, dx - O(Z_n)|\leq 0,01$, wenn
+$\frac{16}{5n}\leq 0,01=\frac{1}{100}$, d.\,h. wenn $n\geq 320$.
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+
+%#############################################################ENDE
+\end{tabs*}
+\end{content}

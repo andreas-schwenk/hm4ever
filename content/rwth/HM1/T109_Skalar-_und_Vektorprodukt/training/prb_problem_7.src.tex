@@ -1,0 +1,135 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A08: Vektorprodukt}
+    \lang{en}{mc yes-no}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{description}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_1_9_Vektorprodukt_1.meta.xml}{1_9_Vektorprodukt_1}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+
+\usepackage{mumie.genericproblem}
+\lang{de}{
+	\title{A08: Vektorprodukt}
+}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9717}{Ticket 9717}
+\end{block}
+\begin{problem}
+
+	\begin{question}
+		\lang{de}{\text{
+			Berechnen Sie
+  			$
+   			\vec{x} = \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} = \begin{pmatrix} \var{z_1}\\ \var{z_2}\\ \var{z_3} \end{pmatrix} \times \begin{pmatrix}\var{u_1}\\ \var{u_2}\\ \var{u_3} \end{pmatrix}.
+  			$
+			}
+			}
+              \explanation[edited]{Verwenden Sie zur Berechnung des Vektorprodukts zweier Vektoren $\vec{v}$ und $\vec{w}$ das folgende Schema:\\
+              \image{1_9_Vektorprodukt_1}}
+              
+		\type{input.number}
+      	\field{rational} 
+ 
+      \begin{variables}
+            
+            \randint{z_1}{-10}{10}
+            \randint{z_2}{-10}{10}
+            \randint{z_3}{-10}{10}
+            
+            \randint{u_1}{-10}{10}
+            \randint{u_2}{-10}{10}
+            \randint{u_3}{-10}{10}
+            
+            \function[calculate]{x1}{z_2*u_3-u_2*z_3}
+            \function[calculate]{x2}{z_3*u_1-u_3*z_1}
+            \function[calculate]{x3}{z_1*u_2-u_1*z_2}
+      \end{variables}
+      \begin{answer}
+            \text{$x_1=$}
+            \solution{x1}
+      \end{answer}
+
+      \begin{answer}
+            \text{$x_2=$}
+            \solution{x2}
+      \end{answer}
+             
+       \begin{answer}
+       \text{$x_3=$}
+       \solution{x3}
+      \end{answer}
+\end{question}
+
+	\begin{question}
+		\lang{de}{\text{
+			Für welche Werte von $a, b, c \in \R$ ~ gilt:\\\\
+  			$
+   			\begin{pmatrix} a\\ \var{z_2}\\ b \end{pmatrix} \times \begin{pmatrix}\var{u_1}\\ c\\ \var{u_3} \end{pmatrix} = \begin{pmatrix} \var{x_1} \\ \var{x_2} \\ \var{x_3} \end{pmatrix}
+            $ ? \\
+			}
+			}
+              \explanation[edited]{Bestimmen Sie das Vektorprodukt der beiden linken Vektoren in Abhängigkeit der drei Parameter $a,b$ und $c$. 
+              Setzen Sie den sich ergebenden Vektor gleich dem Vektor der rechten Seite. Lösen Sie anschließend das entstandene Gleichungssystem.}
+         
+		\type{input.number}
+      	\field{rational} 
+ 
+      \begin{variables}
+            
+            \randint{z_1}{-5}{5}
+            \randint{z_2}{-5}{5}
+            \randint{z_3}{-5}{5}
+            
+            \randint{u_1}{-5}{5}
+            \randint[Z]{u_2}{-5}{5}
+            \randint{u_3}{-5}{5}
+            
+            \randadjustIf{z_1,z_3,u_1,u_3}{z_3*u_1-u_3*z_1=0}
+            
+            \function[calculate]{x1}{z_2*u_3-u_2*z_3}
+            \function[calculate]{x2}{z_3*u_1-u_3*z_1}
+            \function[calculate]{x3}{z_1*u_2-u_1*z_2}
+
+      \end{variables}
+      
+      \begin{answer}
+            \text{$a=$}
+            \solution{z_1}
+      \end{answer}
+
+      \begin{answer}
+            \text{$b=$}
+            \solution{z_3}
+      \end{answer}
+
+      \begin{answer}
+            \text{$c=$}
+            \solution{u_2}
+      \end{answer}
+
+\end{question}
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+
+
+\end{content}

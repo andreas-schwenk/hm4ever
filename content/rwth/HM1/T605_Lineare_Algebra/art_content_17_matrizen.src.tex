@@ -1,0 +1,653 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+  \lang{en}{...}
+  \lang{de}{Matrizen}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T605_Lineare_Algebra/g_art_content_16_vektoren.meta.xml}{content_16_vektoren}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/32568}{Ticket 32568}
+\end{block}
+\usepackage{mumie.ombplus}
+\ombchapter{4}
+\ombarticle{1}
+\lang{de}{\title{Matrizen}}
+\begin{block}[info-box]
+  \tableofcontents
+\end{block}
+\section{Matrizen}
+\begin{definition}
+\begin{enumerate}
+\item[(i)]
+Eine \notion{Matrix (Pl. Matrizen)} ist ein rechteckiges Zahlenschema 
+\[
+A=\begin{pmatrix}a_{11}&a_{12}&\cdots&a_{1n}\\a_{21}&a_{22}&\cdots&a_{2n}\\
+\vdots&\vdots&&\vdots\\
+a_{m1}&a_{m2}&\cdots&a_{mn}\end{pmatrix}
+\]
+mit $m$ Zeilen und $n$ Spalten. Dabei heißt $m\times n$ die \notion{Größe} (oder auch Dimension) der Matrix.
+Man schreibt $A=(a_{ij})_{1\leq i\leq m,1\leq j\leq n}$, 
+bzw. kurz $A=(a_{ij})_{ij}=(a_{ij})$, wenn die Größe der Matrix klar ist.
+\item[(ii)]
+Die Menge aller $(m\times n)$-Matrizen wird mit $M_{m,n}(\R)$ bezeichnet.
+\item[(iii)] Die \notion{Koeffizienten oder Einträge} $a_{ij}$ sind reelle Zahlen.
+\item[(iv)] Für eine Matrix $A=(a_{ij})$ heißt $i$ der \notion{Zeilenindex} und $j$ der \notion{Spaltenindex}.\\
+Merkregel: "Zeilen zuerst, Spalten später."
+Der Vektor $\begin{pmatrix}a_{1j}\\\vdots\\a_{mj}\end{pmatrix}$ heißt der $j$-te \notion{Spaltenvektor} von $A=(a_{ij})$,
+und $\begin{pmatrix}a_{i1}&\cdots&a_{in}\end{pmatrix}$ der $i$-te \notion{Zeilenvektor}.
+\end{enumerate}
+\end{definition}
+\begin{example}
+\begin{enumerate}
+\item[(i)]
+Es ist $A=\begin{pmatrix}1&2&3\\4&5&6\end{pmatrix}$ eine $(2\times 3)$-Matrix. 
+Der Eintrag in der ersten Zeile und zweiten Spalte ist $a_{12}=2$, 
+während Koeffizient $a_{21}=4$ der Eintrag in der zweiten Zeile und ersten Spalte bezeichnet.
+\item[(ii)]
+Eine $(1\times n)$-Matrix ist eine Matrix mit einer Zeile und $n$ Spalten, also ein Zeilenvektor.
+\item[(iii)] 
+Eine $(m\times 1)$-Matrix hat $m$ Zeilen und eine Spalte, ist ein Spaltenvektor der Dimension $m$. 
+Somit ist $M_{m,1}(\R)=\R^m$.
+\end{enumerate}
+\end{example}
+\begin{quickcheck}
+\type{input.number}
+\begin{variables}
+\function{m}{4}
+\function{n}{3}
+\function{a}{7}
+\end{variables}
+\text{Die Matrix $A=\begin{pmatrix}2&3&1\\4&-1&5\\3&7&-2\\0&1&4\end{pmatrix}$ ist eine $($\ansref$\times$\ansref$)$-Matrix mit
+Koeffizient $a_{32}=$\ansref.}
+\begin{answer}
+\solution{m}
+\end{answer}
+\begin{answer}
+\solution{n}
+\end{answer}
+\begin{answer}
+\solution{a}
+\end{answer}
+\end{quickcheck}
+Einige häufig benutzte Matrizen erhalten eigene Namen:
+\begin{definition}
+\begin{enumerate}
+\item[(i)] Die $(m\times n)$-Matrix, deren Koeffizienten alle gleich Null sind heißt \notion{Nullmatrix}
+\[
+0_{mn}=\begin{pmatrix}0&\cdots&0\\\vdots&&\vdots\\0&\cdots&0\end{pmatrix}.
+\]
+\item[(ii)] Gilt $m=n$, so spricht man von einer \notion{quadratischen} Matrix.
+\item[(iii)] Eine spezielle quadratische $(n\times n)$-Matrix ist die \notion{Einheitsmatrix} $E_n=(e_{ij})$. 
+Sie hat Einsen auf der (Haupt-)Diagonalen, $e_{ii}=1$ (für $i=1,\ldots,n$), und Nullen sonst, $e_{ij}=0$ für $i\neq j$. 
+\[
+E_n=\begin{pmatrix} 1&0&\cdots&\cdots&0\\0&1&0&\cdots&0\\\vdots&0&\ddots&\ddots&0\\\vdots&&\ddots&\ddots&\vdots\\
+0&\cdots&\cdots&0&1\end{pmatrix}.
+\]
+\item[(iv)]
+Allgemeiner ist eine \notion{Diagonalmatrix} eine quadratische Matrix, 
+falls $a_{ij}=0$ für $i\neq j$ für (für $i,j=1,\ldots,n$), das heißt
+\[
+A=\begin{pmatrix} a_{11}&0&\cdots&\cdots&0\\0&a_{22}&0&\cdots&0\\\vdots&0&\ddots&\ddots&0\\\vdots&&\ddots&\ddots&\vdots\\
+0&\cdots&\cdots&0&a_{nn}\end{pmatrix}=\text{diag}(a_{11},\ldots,a_{nn})\in M_{n,n}(\R).
+\]
+\item[(v)]
+Eine quadratische Matrix $A=(a_{ij})\in M_{n,n}(\R)$ heißt \notion{obere Dreiecksmatrix}, 
+wenn alle Koeffizienten unterhalb der Diagonalen verschwinden, also $a_{ij}=0$ für $i>j$.
+Eine quadratische Matrix $B=(b_{ij})\in M_{n,n}(\R)$ heißt \notion{untere Dreiecksmatrix}, 
+wenn alle Koeffizienten oberhalb der Diagonalen verschwinden, also $b_{ij}=0$ für $i>j$.
+\[
+A=\begin{pmatrix} \textcolor{#0066CC}{a_{11}}&\textcolor{#0066CC}{a_{12}}&\textcolor{#0066CC}{\cdots}&\textcolor{#0066CC}{\cdots}&\textcolor{#0066CC}{a_{1n}}
+\\0&\textcolor{#0066CC}{a_{22}}&&&\textcolor{#0066CC}{\ldots}\\0&\ddots&\textcolor{#0066CC}{\ddots}&&\textcolor{#0066CC}{\vdots}
+\\
+\vdots&&\ddots&\textcolor{#0066CC}{\ddots}&\textcolor{#0066CC}{\vdots}\\
+0&\cdots&\cdots&0&\textcolor{#0066CC}{a_{nn}}\end{pmatrix}
+\text{ bzw. }
+B=\begin{pmatrix} \textcolor{#0066CC}{b_{11}}&0&\cdots&\cdots&0\\\textcolor{#0066CC}{a_{21}}&\textcolor{#0066CC}{a_{22}}&0&&\vdots\\
+\textcolor{#0066CC}{\vdots}&&\textcolor{#0066CC}{\ddots}&\ddots&\vdots\\
+\textcolor{#0066CC}{\vdots}&&&\textcolor{#0066CC}{\ddots}&0\\
+\textcolor{#0066CC}{a_{n1}}&\textcolor{#0066CC}{\cdots}&\textcolor{#0066CC}{\cdots}&\textcolor{#0066CC}{a_{n,n-1}}&\textcolor{#0066CC}{a_{nn}}\end{pmatrix}.
+\]
+\end{enumerate}
+\end{definition}
+\begin{example}
+\begin{itemize}
+\item Es ist $0_{3,2}=\begin{pmatrix}0&0\\0&0\\0&0\end{pmatrix}$ die Nullmatrix in $\mathcal{M}_{3,2}$.
+\item Die Einheitsmatrix in $\mathcal{M}_{3,3}$ ist $E_3=\begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix}$.
+\item Die Matrix $\begin{pmatrix}2&0&0&0\\0&1&0&0\\0&0&0&0\\0&0&0&5\end{pmatrix}\in M_{4,4}(\R)$ ist eine Diagonalmatrix.
+Die Matrix $\begin{pmatrix}0&0&0&2\\0&0&1&0\\0&1&0&0\\5&0&0&0\end{pmatrix}\in M_{4,4}(\R)$ ist keine Diagonalmatrix.
+Hier stehen die Einträge nicht auf der (Haupt-)Diagonalen der Matrix, die dadurch gekennzeichnet ist, 
+dass Zeilen- und Spaltenindices übereinstimmen.
+\end{itemize}
+\end{example}
+Matrizen kann man ähnlich wie Vektoren \notion{komponentenweise} (koeffizientenweise) addieren und mit Skalaren multiplizieren.
+Die einzige Änderung dabei ist, dass die Koeffizienten bei Matrizen rechteckig angeordnet und bei Vektoren in Spalten.
+\begin{definition}
+Es sei $\lambda\in\R$ ein Skalar und $A=(a_{ij})$ und $B=(b_{ij})$ Matrizen in $M_{m,n}(\R)$ Matrizen derselben Größe.
+\begin{enumerate}
+\item[(i)]
+Die Summe der Matrizen $A$ und $B$ ist
+\[
+A+B=(a_{ij}+b_{ij})=
+\begin{pmatrix}a_{11}+b_{11}&a_{12}+b_{12}&\cdots&a_{1n}+b_{1n}\\a_{21}+b_{21}&a_{22}+b_{22}&\cdots&a_{2n}+b_{2n}\\
+\vdots&\vdots&&\vdots\\
+a_{m1}+b_{m1}&a_{m2}+b_{m2}&\cdots&a_{mn}+b_{mn}\end{pmatrix}.
+\]
+\item[(ii)]
+Das $\lambda$-fache der Matrix $A$ ist
+\[
+\lambda A=\begin{pmatrix}\lambda a_{11}&\lambda a_{12}&\cdots&\lambda a_{1n}\\
+\lambda a_{21}&\lambda a_{22}&\cdots&\lambda a_{2n}\\
+\vdots&\vdots&&\vdots\\
+\lambda a_{m1}&\lambda a_{m2}&\cdots&\lambda a_{mn}\end{pmatrix}.
+\]
+\end{enumerate}
+\end{definition}
+\begin{block}[warning]
+Man kann nur Matrizen derselben Größe addieren!
+\end{block}
+\begin{example}
+\begin{enumerate}
+\item[(i)]$
+\begin{pmatrix}1&2&3\\4&5&6\end{pmatrix}=\begin{pmatrix}2&-1&0\\4&0&-2\end{pmatrix}
+=\begin{pmatrix}3&1&3\\8&5&4\end{pmatrix}$
+\item[(ii)]
+$5\begin{pmatrix}1&2&3\\4&5&6\end{pmatrix}=\begin{pmatrix}5&10&15\\20&25&30\end{pmatrix}$.
+\item[(iii)]
+Man kan die Regel für die Multiplikation mit einem Skalar auch benutzen, um eine Matrix zu vereinfachen, 
+indem man einen gemeinsamen Faktor aller Koeffizienten ausklammert. Zum Beispiel ist in der folgenden Matrix
+jeder Koeffizient durch $13$ teilbar:
+\[
+\begin{pmatrix}26&39\\169&-13\end{pmatrix}=13\begin{pmatrix}2&3\\13&-1\end{pmatrix}.
+\]
+\end{enumerate}
+\end{example}
+%%
+%% Füge Quickcheck zu Matrixaddition und Skalarmultiplikation ein!
+%%
+Die Matrixaddition und die Multiplikation mit Skalaren gehorcht wie die Vektorrechnung folgenden Rechenregeln.
+\begin{rule}[Eigenschaften der Matrizenrechnung]
+Es seien $A,B,C \in M_{m,n}(\R)$ und $\lambda,\mu\in\R$.
+\begin{enumerate}
+\item[(i)] $A=(a_{ij})$ und $B=(b_{ij})$ sind genau dann gleich, 
+wenn die Koeffizienten an jeder Stelle übereinstimmen: $a_{ij}=b_{ij}$ für $i=1,\ldots,m$ und $j=1,\ldots,n$.
+Zwei Matrizen können höchstens dann gleich sein, wenn sie dieselbe Größe haben.
+\item[(ii)]
+Die Matrixaddition  ist \emph{kommutativ}
+\[A+B=B+A.\]
+\item[(iii)]
+Für die Nullmatrix $0_{m,n}\in\R^n$ gilt
+\[A+0_{m,n}=A=0_{m,n}+A.\]
+\item[(iv)]
+Die Matrixaddition ist \emph{assoziativ}
+\[A+(B+C)=A+B+C=(A+B)+C.\]
+\item[(v)]
+Die Multiplikation mit Skalaren ist assoziativ
+\[\lambda(\mu A)=\lambda\mu A=(\lambda\mu)A.\]
+\item[(vi)]
+Die Multiplikation mit Skalaren und die Matrixaddition sind distributiv
+\[(\lambda+\mu)A=\lambda A+\mu A\quad\text{ sowie }\quad \lambda(A+B)=\lambda A+\lambda B.\]
+\end{enumerate}
+\end{rule}
+%%
+%% Quickcheck zu einer Rechnung aA+bB=??.
+%%
+\section{Transponierte Matrix}
+Ähnlich wie einen Vektor kann man auch Matrizen transponieren:
+\begin{definition}
+\begin{enumerate}
+\item[(i)]
+Die \notion{Transponierte} einer Matrix $A=(a_{ij})\in M_{m,n}(\R)$ ist die Matrix
+\[
+A^T=(a_{ji})=\begin{pmatrix}a_{11}&a_{21}&\cdots&a_{1m}\\a_{12}&a_{22}&\cdots&a_{m2}\\
+\vdots&\vdots&&\vdots\\
+a_{1n}&a_{2n}&\cdots&a_{mn}\end{pmatrix}\in M_{n,m}(\R).
+\]
+Die zu $A$ transponierte Matrix $A^T$ entsteht also aus $A$, indem man die Zeilen von $A$ zu Spalten von $A^T$ macht. 
+(Damit werden dann auch die Spalten von $A$ zu den Zeilen von $A^T$.)
+\item[(ii)]
+Eine Matrix heißt \notion{symmetrisch}, wenn $A=A^T$. Eine symmetrische Matrix ist also notweniger Weise quadratisch.
+\end{enumerate}
+\end{definition}
+\begin{example}
+\begin{itemize}
+\item
+Die zu
+$A=\begin{pmatrix} 
+       \textcolor{#CC6600}{1} & \textcolor{#CC6600}{2} & \textcolor{#CC6600}{3}  \\ 
+       \textcolor{#0066CC}{4} & \textcolor{#0066CC}{5} & \textcolor{#0066CC}{6} 
+       \end{pmatrix} \in M_{2,3}(\R)$
+      \lang{de}{ist}
+      \lang{en}{is}
+      $A^T=\begin{pmatrix} \textcolor{#CC6600}{1} & \textcolor{#0066CC}{4} \\ 
+                       \textcolor{#CC6600}{2} & \textcolor{#0066CC}{5} \\ 
+                       \textcolor{#CC6600}{3} & \textcolor{#0066CC}{6} \end{pmatrix}\in M_{2,3}(\R) .$
+% Die zu $A=\begin{pmatrix}1&2&3\\4&5&6\end{pmatrix}\in M_{2,3}(\R)$ transponierte Matrix ist
+% $A^T=\begin{pmatrix}1&4\\2&5\\3&6\end{pmatrix}\in M_{3,2}(\R)$.
+\item
+Die Matrix $B=\begin{pmatrix} 2&1\\1&3\end{pmatrix}$ ist symmetrisch, denn es ist
+$B^T=\begin{pmatrix} 2&1\\1&3\end{pmatrix}=B$.
+\end{itemize}
+\end{example}
+%%
+%%
+%% Quickcheck zur Transponierten.
+%%
+%%
+\begin{remark}[Regeln für transponierte Matrizen]
+Es seien $A,B \in M_{m,n}(\R)$ und $\lambda\in\R$.
+\begin{enumerate}
+\item[(i)] 
+Zweifaches Transponieren liefert die ursprüngliche Matrix
+\[ (A^T)^T=A.\]
+\item[(ii)] Transponieren ist verträglich mit Matrixaddition und Multiplikation mit Skalaren
+\[(A+B)^T=A^T+B^T \quad \text{ sowie }\quad (\lambda A)^T=\lambda A^T.\]
+\end{enumerate}
+\end{remark}
+%%
+%%
+%%
+\section{Matrix-Vektor-Multiplikation}
+\begin{definition}
+Das Produkt einer Matrix $A=(a_{ij})\in M_{m,\textcolor{#CC6600}{n}}(\R)$ mit einem Spaltenvektor 
+$x=\begin{pmatrix}x_1\\\vdots\\x_n\end{pmatrix}\in\R^n=M_{\textcolor{#CC6600}{n},1}(\R)$ ist der Vektor
+\[
+A\cdot x=\underbrace{\begin{pmatrix}a_{11}&a_{12}&\cdots&a_{1n}\\a_{21}&a_{22}&\cdots&a_{2n}\\
+\vdots&\vdots&&\vdots\\
+a_{m1}&a_{m2}&\cdots&a_{mn}\end{pmatrix}}_{\textcolor{#0066CC}{m}\times \textcolor{#CC6600}{n}}\cdot
+\underbrace{\begin{pmatrix}x_1\\\vdots\\x_n\end{pmatrix}}_{\textcolor{#CC6600}{n}\times 1}=
+\underbrace{\begin{pmatrix}b_1\\\vdots\\b_m\end{pmatrix}}_{\textcolor{#0066CC}{m}\times 1}=b\in \R^m=M_{\textcolor{#0066CC}{m},1}(\R)
+\]
+mit den Koordinaten (für $i=1,\ldots,m$)
+\[
+b_i=\underbrace{\begin{pmatrix}a_{i1}&\ldots&a_{in}\end{pmatrix}}_{i-\text{ter Zeilenvektor}}\cdot\begin{pmatrix}x_1\\\vdots\\x_n\end{pmatrix}
+=\sum_{j=1}^n
+a_{ij}x_j=a_{i1}x_1+\ldots+a_{in}x_n.
+\]
+\end{definition}
+Die Matrix-Vektor-Multiplikation $A\cdot x$ wird also aufs Skalarprodukt zurückgeführt: 
+Die $i$-te Koordinate $b_i$ des Ergebnisvektors ist das Skalarprodukt des $i$-ten Zeilenvektors von $A$
+mit $x$.
+\begin{remark}
+Die Matrix-Vektor-Multiplikation $A\cdot x=b$ ist nur definiert für eine Matrix $A$, 
+die genauso viele Spalten hat wie $x$ Zeilen.\\
+Das Ergebnis $b$ hat genauso viele Zeilen wie die Matrix $A$ selbst.
+\end{remark}
+\begin{example}
+\begin{enumerate}
+\item[(i)]
+\lang{de}{Wir berechnen}
+\lang{en}{Consider}
+\[ \underbrace{\begin{pmatrix} 2 & -3 & 1 \\ 0 & 4 & 5 \end{pmatrix}}_{\textcolor{#0066CC}{2}\times \textcolor{#CC6600}{3}} \cdot
+\underbrace{\begin{pmatrix} 1 \\ 3 \\ -2\end{pmatrix}}_{\textcolor{#CC6600}{3}\times 1}=
+\begin{pmatrix} 2\cdot 1+(-3)\cdot 3+1\cdot (-2) \\ 0\cdot 1+4\cdot 3 +5\cdot (-2)\end{pmatrix} 
+=\underbrace{\begin{pmatrix} -9\\ 2\end{pmatrix}}_{\textcolor{#0066CC}{2}\times 1}.
+\]
+\item[(ii)]
+Für eine Matrix $A=(a_{ij})\in M_{m,n}(\R)$ und den $j$-ten Standardvektor $e_j\in R^n$ ist
+\[A\cdot e_i= \begin{pmatrix}a_{11}&a_{12}&\cdots&a_{1n}\\a_{21}&a_{22}&\cdots&a_{2n}\\
+\vdots&\vdots&&\vdots\\
+a_{m1}&a_{m2}&\cdots&a_{mn}\end{pmatrix}\cdot \begin{pmatrix}0\\\vdots\\0\\1\\0\\\vdots\\0\end{pmatrix}
+= \begin{pmatrix} 
+0+\ldots+a_{1j}+0+\ldots+0\\\vdots\\0+\ldots+a_{mj}+0+\ldots+0\end{pmatrix}
+=\begin{pmatrix} 
+a_{1j}\\\vdots\\a_{mj}\end{pmatrix}
+\]
+der $j$-te Spaltenvektor von $A$.
+\end{enumerate}
+\end{example}
+\begin{quickcheck}
+       \precision{3}
+      \field{real}
+      \begin{variables}
+           \randint[Z]{a}{2}{4}
+           \randint[Z]{b}{2}{5}
+           \randint[Z]{m}{2}{4}
+           \randint[Z]{n}{5}{6}
+           \randint[Z]{k}{7}{8}
+           \randint[Z]{l}{2}{4}
+           \randint[Z]{o}{5}{6}
+           \randint[Z]{p}{7}{8}
+           \randint[Z]{l1}{3}{3}
+           \function[expand]{l2}{o*a+l*b}
+           var
+       \end{variables}
+      \text{\lang{de}{
+      Für 
+      $A=\begin{pmatrix} \var{n} & \var{m} \\ \var{o} &\var{l}\\ \var{k} & \var{p} \end{pmatrix}$ und 
+      $x=\begin{pmatrix} \var{a} \\ \var{b} \end{pmatrix}$ hat der resultierende Vektor $A\cdot x$ genau 
+      \ansref Koordinaten. Die zweite Koordinate dieses Vektors lautet \ansref.
+      }
+      \lang{en}{
+      Let 
+      $A=\begin{pmatrix} \var{n} & \var{m} \\ \var{o} &\var{l}\\ \var{k} & \var{p} \end{pmatrix}$ and 
+      $x=\begin{pmatrix} \var{a} \\ \var{b} \end{pmatrix}$. The vector $A\cdot x$ has exactly \ansref 
+      coordinates. The second coordinate of this vector is \ansref.
+      }}
+%      \explanation{}
+      \begin{answer}
+         \type{input.number}
+            \solution{l1}
+      \end{answer}
+      \begin{answer}
+      \type{input.function}
+            \solution{l2}
+      \end{answer}
+\end{quickcheck}
+\begin{remark}
+Ebenso erhalten wir das Produkt  eines Zeilenvektors
+$x=\begin{pmatrix} x_1&\ldots&x_m\end{pmatrix}\in M_{1,m}(\R)$ mit einer Matrix $A\in M_{m,n}(\R)$ als
+Zeilenvektor $b\in M_{1,n}(\R)$:
+\[x\cdot A=\underbrace{\begin{pmatrix} x_1&\ldots&x_m\end{pmatrix}}_{1\times \textcolor{#CC6600}{m}}\cdot 
+\underbrace{\begin{pmatrix}a_{11}&a_{12}&\cdots&a_{1n}\\a_{21}&a_{22}&\cdots&a_{2n}\\
+\vdots&\vdots&&\vdots\\
+a_{m1}&a_{m2}&\cdots&a_{mn}\end{pmatrix}}_{\textcolor{#CC6600}{m}\times \textcolor{#0066CC}{ n}}
+=\underbrace{\begin{pmatrix}b_1\\\vdots\\b_n\end{pmatrix}}_{1\times\textcolor{#0066CC}{n}}=b
+\]
+hat die Koordinaten (für $j=1,\ldots, n$)
+$b_j=\begin{pmatrix} x_1&\ldots&x_m\end{pmatrix}\cdot \begin{pmatrix}a_{1j}\\\vdots\\a_{mj}\end{pmatrix}=
+x_1a_{1j}+\ldots+x_ma_{mj}$.
+\\
+Hier ist $b_j$ das Skalarprodukt von $x$ mit dem $j$-ten Spaltenvektor von $A$.
+\end{remark}
+\begin{example}
+Wir berechnen
+\begin{align*}
+\underbrace{\begin{pmatrix}1&-1\end{pmatrix}}_{1\times \textcolor{#CC6600}{2}}\cdot
+\underbrace{\begin{pmatrix}2&3&-4&1\\0&2&1&-3\end{pmatrix}}_{\textcolor{#CC6600}{2}\times \textcolor{#0066CC}{4}}\:=&
+\begin{pmatrix}1\cdot 2-1\cdot 0,&1\cdot 3-1\cdot 2,&1\cdot(-4)-1\cdot 1,&1\cdot 1-1\cdot(-3)\end{pmatrix}\\
+=&
+\underbrace{\begin{pmatrix}2&1&-5&4\end{pmatrix}}_{1\times \textcolor{#0066CC}{4}}.
+\end{align*}
+Nebenbei: Rutschen die Einträge in einer Spalte optisch so eng zusammen, dass die Lesbarkeit leidet, 
+so trennen wir sie wie oben durch Kommata.
+\end{example}
+\begin{example}
+In der \ref[content_16_vektoren][Prozessanalyse]{sec:prozessanalyse} war der Gewinn gegeben durch
+$G=U-K=p^T\cdot x-k^T\cdot  y=p^T\cdot x-k^T\cdot A\cdot x=(p+A^T\cdot k)^T\cdot x$.
+\end{example}
+\begin{example}[Einstufiger Produktionsprozess]\label{ex:einstufiger_prod_prozess}
+Die Produkte $P_1, P_2, P_3$ werden aus den Zutaten $Z_1,Z_2,Z_3,Z_4$ hergestellt.
+%%
+%% Bildchen einfügen!!
+%%
+Dabei werden pro Liter fertigem Produkt $P_j$ die Zutaten in (in ml angegebenen, neben Wasser) den Mengen benötigt
+\begin{table}
+    Verbrauch & $P_1$ & $P_2$ &$P_3$ \\ 
+     $Z_1$& $200$ &$300$  &$350$  \\
+    $Z_2$& $0$ &$450$  &$200$  \\
+    $Z_3$&$350$ & $150$& $200$\\
+    $Z_4$& $250$& $40$& $0$
+    \end{table}
+Die gewünschten Produktionsmenge von $P_j$ bezeichnen wir mit $x_j$ (für $j=1,\ldots,3$). 
+Damit erhalten wir Formeln für die benötigten Mengen $b_i$ der Zutaten $Z_i$ (für $i=1,\ldots,4$):
+\begin{align*}
+200x_1&\:+\:&300x_2&\:+\:&350x_3&\:=\:&b_1,\\
+&&450x_2&\:+\:&200x_3&\:=\:&b_2,\\
+350x_1&\:+\:&150x_2&\:+\:&200x_3&\:=\:&b_3,\\
+250x_1&\:+\:&40x_2&& &\:=\:&b_4.
+\end{align*}
+Dies notieren wir kürzer mit
+\[
+A=\begin{pmatrix}200&300&350\\0&450&200\\350&150&200\\250&40&0\end{pmatrix},\quad x=\begin{pmatrix}x_1\\x_2\\x_3\end{pmatrix}
+\quad \text{ und }\quad b=\begin{pmatrix}b_1\\b_2\\b_3\\b_4\end{pmatrix},
+\]
+so dass wir dafür kompakt schreiben können
+\[
+A\cdot x=b.
+\]
+sollen zum Beispiel $x_1=1000$ Liter von $P_1$, $x_2=500$ Liter von $P_2$ 
+und $x_3=7500$ Liter von $P_3$ hergestellt werden, dann berechnet sich der Bedarf $b_j$ der Zutat $Z_j$ zu
+\begin{align*}
+\begin{pmatrix}200&300&350\\0&450&200\\350&150&200\\250&40&0\end{pmatrix}
+\cdot \begin{pmatrix}1000\\500\\7500\end{pmatrix}
+&\:=\:&\begin{pmatrix}200\cdot 1000+300\cdot 500+350\cdot 7500\\
+0\cdot 1000+450\cdot 500+200\cdot 7500\\
+350\cdot 1000+150\cdot500+200\cdot 7500\\
+250\cdot 1000+40\cdot 500+0\cdot 7500\end{pmatrix}\\
+&\:=\:&
+\begin{pmatrix}2975000\\1725000\\575000\\270000\end{pmatrix}=
+1000\cdot\begin{pmatrix}2975\\1725\\575\\270\end{pmatrix}
+=\begin{pmatrix}b_1\\b_2\\b_3\\b_4\end{pmatrix}.
+\end{align*}
+Der Vektor $\begin{pmatrix}2975\\1725\\575\\270\end{pmatrix}$ gibt 
+den Bedarf in Litern statt Millilitern an.
+Geben wir sinnvoller bereits die Matrix $A$ in Litern an, so
+ ersetzen wir $A$ durch 
+$\tilde{A}= \begin{pmatrix}0,2&0,3&0,35\\0&0,45&0,2\\0,35&0,15&0,2\\0,25&0,04&0\end{pmatrix}$. 
+Es gilt also $A=1000 \cdot\tilde{A}$.
+Dann ist $\tilde{A}\cdot x=\tilde{b}$, also in unserem Beispiel
+\[\begin{pmatrix}0,2&0,3&0,35\\0&0,45&0,2\\0,35&0,15&0,2\\0,25&0,04&0\end{pmatrix}
+\cdot \begin{pmatrix}1000\\500\\7500\end{pmatrix}=\begin{pmatrix}2975\\1725\\575\\270\end{pmatrix}.
+\]
+\end{example}
+%%
+%%
+\section{Matrix-Matrix-Produkt}
+\begin{definition}
+Es seien $A\in M_{m,n}(\R)$ und $B\in M_{n,r}(\R)$ Matrizen.
+Das \notion{Matrixprodukt}  $A\cdot B$ ist eine Matrix $C\in M_{m,r}(\R)$,
+\[
+A\cdot B=\begin{pmatrix}a_{11}&\cdots &a_{1n}\\
+\vdots&&\vdots\\
+a_{m1}&\cdots &a_{mn}\end{pmatrix}
+\cdot
+\begin{pmatrix}b_{11}&\cdots &b_{1r}\\
+\vdots &&\vdots\\
+b_{n1}&\cdots &b_{nr}
+\end{pmatrix}
+=
+\begin{pmatrix}c_{11}&\cdots&c_{1r}\\
+\vdots&&\vdots\\
+c_{m1}&\cdots &c_{mr}\end{pmatrix},
+\]
+deren Einträge $c_{ik}$ (für $i=1,\ldots,m$ und $k=1,\ldots,r$) gegeben werden durch
+\[
+c_{ik}=\underbrace{\begin{pmatrix}a_{i1}&\ldots& a_{in}\end{pmatrix}}_{i-\text{te Zeile von }A}
+\cdot
+\underbrace{\begin{pmatrix}b_{1k}\\\vdots\\b_{nk}\end{pmatrix}}_{k-\text{te Spalte von }B}
+=a_{i1}b_{1k}+\ldots+a_{in}c_{nk}=\sum_{j=1}^n a_{ij}b_{jk}.
+\]
+\end{definition}
+\begin{remark}
+Zwei Matrizen $A$ und $B$ kann man nur dann multiplizieren, wenn $A$ genauso viele Spalten hat wie $B$ Zeilen, 
+wenn also  $A\in M_{m,\textcolor{#CC6600}{n}}(\R)$ und $B\in M_{\textcolor{#CC6600}{n},r}(\R)$.\\
+Die entstehende Matrix $C=A\cdot B$ hat so viele Zeilen wie $A$ und soviele Spalten wie $B$.\\
+Die der Koeffizient $c_{ik}$ der Produktmatrix $C=(c_{ik})=A\cdot B$ ist das Skalarprodukt des $i$-ten Zeilenvektors von $A$
+mit dem $k$-ten Spaltenvektor von $B$.
+\[
+\begin{pmatrix}a_{11}&\cdots &a_{1n}\\
+\vdots&&\vdots\\
+\textcolor{#CC6600}{a_{i1}}&\textcolor{#CC6600}{\ldots}&\textcolor{#CC6600}{ a_{in}}\\
+\vdots&&\vdots\\
+a_{m1}&\cdots &a_{mn}\end{pmatrix}
+\cdot
+\begin{pmatrix}b_{11}&\cdots&\textcolor{#CC6600}{b_{1k}}&\cdots &b_{1r}\\
+\vdots &&\textcolor{#CC6600}{\vdots}&&\vdots\\
+b_{n1}&\cdots&\textcolor{#CC6600}{b_{nk}}&\cdots &b_{nr}
+\end{pmatrix}
+=
+\begin{pmatrix}c_{11}&\cdots&\cdots&\cdots&c_{1r}\\
+\vdots&&&&\vdots\\
+\vdots&&\textcolor{#CC6600}{\sum_{j=1}^na_{ij}b_{jk}}&&\vdots\\
+\vdots&&&&\vdots\\
+c_{m1}&\cdots&\cdots&\cdots &c_{mr}\end{pmatrix}
+\]
+\end{remark}
+\begin{quickcheck}
+    \type{input.number}
+      \precision{3}
+      \field{real}
+      \begin{variables}
+           \randint[Z]{m}{2}{4}
+           \randint[Z]{n}{5}{6}
+           \randint[Z]{k}{7}{8}
+       \end{variables}
+      \text{\lang{de}{
+            Wird eine $(\var{m}\times \var{n})$-Matrix
+            mit einer $(\var{n}\times \var{k})$-Matrix multipliziert,\\
+            so ist das Ergebnis eine \ansref $\times$ \ansref-Matrix.
+            }
+            \lang{en}{
+            If a $(\var{m}\times \var{n})$-matrix
+            is multiplied with a $(\var{n}\times \var{k})$-matrix,\\
+            the result is a \ansref $\times$ \ansref-matrix.
+            }}
+%      \explanation{}
+      \begin{answer}
+            \solution{m}
+      \end{answer}
+       \begin{answer}
+            \solution{k}
+      \end{answer}
+\end{quickcheck}
+
+\begin{example}
+\begin{enumerate}
+\item[(i)]
+Wir berechnen
+\begin{align*}
+&\begin{pmatrix}1&2&3\\4&5&6\end{pmatrix}\cdot
+\begin{pmatrix}1&0&1&0\\0&2&-1&3\\0&1&0&1\end{pmatrix}
+\\
+&=\:\begin{pmatrix} 
+1\cdot 1+ 0+0,& 0+2\cdot 2+3\cdot 1,&
+1\cdot 1+2\cdot(-1)+ 0,& 0+2\cdot 3+3\cdot1\\
+4\cdot 1+ 0+ 0,& 0+5\cdot 2+6\cdot 1,&
+4\cdot 1+5\cdot(-1)+ 0,& 0+5\cdot 3+6\cdot1
+\end{pmatrix}\\
+&=\:
+\begin{pmatrix}1&7&-1&9\\4&16&-1&21\end{pmatrix}.
+\end{align*}
+\item[(ii)]
+Die Matrix-Vektor-Multiplikation ist ein Spezialfall der Matrix-Matrix-Multiplikation,
+bei der eine der beteiligten Matrizen nur eine Spalte (oder nur eine Zeile) hat.
+\end{enumerate}
+\end{example}
+\begin{block}[warning]
+Selbst wenn sowohl das Matrixprodukt $A\cdot B$ als auch das Matrixprodukt $B\cdot A$
+sinnvoll definiert sind, ist meist $A\cdot B\neq B\cdot A$.
+\begin{itemize}
+\item
+Damit beide Produkte sinnvoll sind, muss  $A\in M_{m,n}(\R)$ und $B\in M_{n,m}(\R)$ gelten.
+Dann ist $A\cdot B\in M_{m,m}(\R)$ eine $(m\times m)$-Matrix, aber
+$B\cdot A\in M_{n,n}(\R)$ eine $(n\times n)$-Matrix.
+Ist nun $m\neq n$, dann sind die Matrizen offenbar verschieden.
+\item 
+Selbst wenn $m=n$ gelten sollte, ist zu erwarten, dass die Produkte $A\cdot B$ und $B\cdot A$
+verschieden sind:
+\notion{Matrizenmultiplikation ist nicht kommutativ!}
+\\
+Beispiel: Es ist 
+$\begin{pmatrix} 1&2\\0&1\end{pmatrix}\cdot \begin{pmatrix}0&1\\1&1\end{pmatrix}=
+\begin{pmatrix}2&3\\1&1\end{pmatrix}$, 
+hingegen ist das Produkt in umgekehrter Reihenfolge
+$ \begin{pmatrix}0&1\\1&1\end{pmatrix}\cdot \begin{pmatrix} 1&2\\0&1\end{pmatrix}=
+\begin{pmatrix}0&1\\1&3\end{pmatrix}$.
+\end{itemize}
+\end{block}
+Weitere Beispiele finden sich im 
+%\ref{entsprechenden Kapitel des HM4mint.nrw}{https://hm4mint.nrw/hm1/link/HoeherMathem1/Teil1Grundl/11Matriz/Matrix/1#anchor-section-Multiplikation-zweier-Matrizen-1.
+
+
+Die meisten anderen Rechenregeln gelten aber auch für die Matrix-Matrix-Multiplikation.
+Weil die Matrix-Vektor-Multiplikation ein Spezialfall davon ist, gelten diese Regeln natürlich auch dafür.
+\begin{rule}[Rechenregeln der Matrix-Matrix-Multiplikation]
+Es seien $A\in M_{m,n}(\R)$, $B,C\in M_{n,r}(\R)$ und $D\in M_{r,s}(\R)$ Matrizen
+und $\lambda\in\R$ ein Skalar. Dann gilt:
+\begin{enumerate}
+\item[(i)] Multiplikation mit einer (passenden) Einheitsmatrix ändert die Matrix nicht
+\[ E_m\cdot A=A=A\cdot E_n.\]
+\item[(ii)] Multiplikation irgendeiner Matrix mit einer passenden Nullmatrix ergibt eine Nullmatrix
+\[A\cdot 0_{n,r}=0_{m,p}\quad \text{ sowie }\quad 0_{k,m}\cdot A=0_{k,n}.\]
+\item 8(iii) Matrixmultiplikation ist assoziativ
+\[A\cdot(B\cdot D)=A\cdot B\cdot D=(A\cdot B)\cdot D.\]
+\item[(iv)]
+Matrixmultiplikation und Multiplikation mit Skalaren sind assoziativ und vertauschbar
+\[(\lambda A)\cdot B=\lambda A\cdot B=\lambda(A\cdot B)=A\cdot(\lambda B).\]
+\item[(v)] Matrixmultiplikation und -addition sind distributiv
+\[A\cdot(B+C)=A\cdot B+A\cdot C\quad \text{ sowie } (B+C)\cdot D=B\cdot D+C\cdot D. \]
+\item[(vi)] Transponieren vertauscht die Reihenfolge in einem Matrix-Matrix-Produkt
+\[(A\cdot B)^T=B^T\cdot A^T.\]
+\item[(vii)] Wenn $B=C$, dann ist $B\cdot D=C\cdot D$ und $A\cdot B=A\cdot C$.\\
+Aber die umgekehrte Aussage von (vii) ist falsch: Aus $A\cdot B=A\cdot C$ folgt im allgemeinen nicht $B=C$. 
+Zum Beispiel ist für $A=0_{m,n}$ nach (ii) $A\cdot B=0_{m,r}=A\cdot C$ für \emph{alle} $B,C\in M_{n,r}(\R)$.
+\end{enumerate}
+\end{rule}
+%%
+%%
+%%
+%%
+\section{Ein mehrstufiger Produktionsprozess}
+Der einstufige Produktionsprozess aus Beispiel \ref{ex:einstufiger_prod_prozess} soll erweitert werden, 
+indem aus den Produkten $P_1, P_2, P_3$ anschließend Endprodukte $E_1$ und $E_2$ hergestellten werden.
+Die Produkte  werden aus den Zutaten $Z_1,Z_2,Z_3,Z_4$ hergestellt.
+%%
+%% Bildchen einfügen!! erweitern
+%%
+Die erste Produktionsstufe hatten wir bereits durch die Matrix (in Litern)
+\[A=\begin{pmatrix}0,2&0,3&0,35\\0&0,45&0,2\\0,35&0,15&0,2\\0,25&0,04&0\end{pmatrix}\]
+beschrieben. 
+Für die  zweite Produktionsstufe erhalten wir die Produktionsmatrix 
+\[
+B=\begin{pmatrix}
+0,2&0,1\\0,5&0,3\\0,25&0,45
+\end{pmatrix}.
+\]
+Die Gesamtproduktionsmatrix $G$ ergibt sich aus dem Produkt von $A$ und $B$
+\begin{align*}G&\:=\:&%A\cdot B\\
+%&\:=\:&
+\begin{pmatrix}0,2&0,3&0,35\\0&0,45&0,2\\0,35&0,15&0,2\\0,25&0,04&0\end{pmatrix}
+\cdot
+\begin{pmatrix}
+0,2&0,1\\0,5&0,3\\0,25&0,45
+\end{pmatrix}=
+%&\:=\:&
+\begin{pmatrix}
+0,2775&0,2675\\
+0,275&0,225\\
+0,195&0,17\\
+0,07&0,037
+\end{pmatrix}.
+\end{align*}
+Durch die Matrix-Schreibweise haben wir die Produktionsschritte übersichtlich beschrieben 
+und den gesamten Produktionsprozess in der Matrix $G$ zusammengefasst. 
+
+Für die Herstellung von jeweils $100$ Litern der beiden Endprodukte $E_1$ und $E_2$
+benötigt man somit die durch den folgenden Vektor angegebenen Mengen (in Litern) der Ausgangsstoffe $Z_1,\ldots,Z_4$:
+\[G\cdot\begin{pmatrix}100\\100\end{pmatrix}=\begin{pmatrix}
+0,2775&0,2675\\
+0,275&0,225\\
+0,195&0,17\\
+0,07&0,037
+\end{pmatrix}\cdot \begin{pmatrix}100\\100\end{pmatrix}=
+\begin{pmatrix}
+54,5\\50\\36,5\\4,4
+\end{pmatrix}.
+\]
+Wir könnten auch anders fragen: Wennn  die Mengen $b_1,\ldots, b_4$ der 
+Zutaten $Z_1,\ldots, Z_4$ vorhanden sind, 
+wie viel der Endprodukte $E_1$, $E_2$ kann man dann herstellen?
+Dann gilt es das \emph{lineare Gleichungssystem $G\cdot x =b$} in $x=\begin{pmatrix}x_1\\x_2\end{pmatrix}$ 
+zulösen,
+wobei $b=\begin{pmatrix}b_1\\b_2\\b_3\\b_4\end{pmatrix}$.
+
+Lineare Gleichungssysteme werden im nächsten Kapitel besprochen.
+
+
+\end{content}

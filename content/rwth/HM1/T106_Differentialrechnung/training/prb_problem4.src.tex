@@ -1,0 +1,556 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A04: Kettenregel}
+    \lang{en}{problem_4}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+
+\lang{de}{
+	\title{A04: Kettenregel}
+}
+\lang{en}{
+	\title{Problem 4}
+}
+
+\begin{block}[annotation]
+      
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9469}{Ticket 9469}
+\end{block}
+
+\begin{problem}	
+
+\randomquestionpool{1}{2}
+\randomquestionpool{3}{4}
+\randomquestionpool{5}{7}
+
+%Frage 1 von 7
+\begin{question}
+	\lang{de}{
+		\text{Verwenden Sie die Kettenregel, um die Ableitung der Funktion\\
+		$h(x) = f\circ g (x) = f(g(x)) = \var{h} ,\quad x \in \R$ zu bestimmen.}
+	}
+	\lang{en}{
+		\text{Use the chain rule to find the derivative of the function \\
+		$h(x) = f\circ g(x) = f(g(x)) = \var{h} , \quad x \in \R$.}
+	}
+ 	\begin{variables}
+  		\randint{n}{2}{9}
+ 		\randint{l}{2}{9}
+ 		\function{f}{l*e^(y)}
+ 		\function{g}{n*x^(2)}
+ 		\function{h}{l*e^(n*x^(2))}
+ 	   	\function{df}{l*e^(y)}
+   		\function[calculate]{p}{2*n}
+   		\function{dg}{p*x}
+    	\function{dfg}{l*e^(n*x^(2))}
+    	\function{Dfg}{l*e^(n*x^(2))*p*x}
+ 	\end{variables}
+    \explanation{Die Kettenregel lautet $(f \circ g)\prime(x) = f'(g(x)) \cdot g'(x)$. }
+    
+	\type{input.function}
+ 	\field{real}
+ 	\begin{answer}
+      	\lang{de}{\text{Äußere Funktion: $f(y) = $}}
+      	\lang{en}{\text{Outer function: $f(y) = $}}
+ 		\solution{f}
+ 		\inputAsFunction{y}{f_s0}
+ 	\end{answer}
+ 	\begin{answer}
+      	\lang{de}{\text{Innere Funktion: $g(x) = $}}
+      	\lang{en}{\text{Inner function: $g(x) = $}}
+ 		\solution{g}
+ 		\inputAsFunction{x}{g_s0}
+ 		\checkFuncForZero{f_s0[g_s0] - h}{-10}{10}{100}
+		\score{0.2}
+ 	\end{answer}
+ 	\begin{answer}
+      	\lang{de}{\text{Äußere Ableitung: $f\prime(y) = $}}
+      	\lang{en}{\text{Outer derivative: $f\prime(y) = $}}
+ 		\solution{df}
+ 		\inputAsFunction{y}{f_s1}
+ 		\checkFuncForZero{f_s1 - D[f_s0]}{1}{10}{100}
+ 		\score{0.2}
+ 	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{Einsetzen: $\quad f\prime(g(x)) = $}}
+      	\lang{en}{\text{Substitute: $\quad f\prime(g(x)) = $}}
+ 		\solution{dfg}
+ 		\inputAsFunction{x}{f_s2}
+ 		\checkFuncForZero{f_s2 - f_s1[g_s0]}{-1}{1}{100}
+ 		\score{0.2}
+ 	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{Innere Ableitung: $g\prime(x) = $}}
+      	\lang{en}{\text{Inner derivative: $g\prime(x) = $}}
+ 		\solution{dg}
+ 		\inputAsFunction{x}{g_s1}
+ 		\checkFuncForZero{g_s1 - D[g_s0]}{-1}{1}{100}
+ 		\score{0.2}
+ 	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{Ableitung der Komposition: $(f \circ g)\prime(x) = $}}
+      	\lang{en}{\text{Derivative of the composition: $(f\circ g)\prime(x) = $}}
+ 		\solution{Dfg}
+ 		\checkAsFunction{x}{-10}{10}{100}
+ 		\score{0.2}
+ 	\end{answer}
+\end{question}
+
+%Frage 2 von 7
+\begin{question}
+	\lang{de}{
+		\text{Verwenden Sie die Kettenregel, um die Ableitung der Funktion\\
+		$h(x) = f\circ g (x) = f(g(x)) = \var{h} ,\quad x \in \R$ zu bestimmen.}
+	}
+	\lang{en}{
+		\text{Use the chain rule to find the derivative of the function \\
+		$h(x) = f\circ g(x) = f(g(x)) = \var{h} , \quad x \in \R$.}
+	}
+    \begin{variables}
+ 		\randint{l}{2}{9}
+ 		\function{f}{e^(y)}
+ 		\function{g}{1/l*x^(2)}
+ 		\function{h}{e^(1/l*x^(2))}
+ 	   	\function{df}{e^(y)}
+   		\function[calculate]{p}{2/l}
+   		\function{dg}{p*x}
+    	\function{dfg}{e^(1/l*x^(2))}
+    	\function{Dfg}{e^(1/l*x^(2))*p*x}
+ 	\end{variables}
+    \explanation{Die Kettenregel lautet $(f \circ g)\prime(x) = f'(g(x)) \cdot g'(x)$. }
+	\type{input.function}
+ 	\field{rational}
+ 	\begin{answer}
+      	\lang{de}{\text{Äußere Funktion: $f(y) = $}}
+      	\lang{en}{\text{Outer function: $f(y) = $}}
+ 		\solution{f}
+ 		\inputAsFunction{y}{f_s0}
+ 	\end{answer}
+ 	\begin{answer}
+      	\lang{de}{\text{Innere Funktion: $g(x) = $}}
+      	\lang{en}{\text{Inner function: $g(x) = $}}
+ 		\solution{g}
+ 		\inputAsFunction{x}{g_s0}
+ 		\checkFuncForZero{f_s0[g_s0] - h}{-1}{1}{100}
+		\score{0.2}
+ 	\end{answer}
+ 	\begin{answer}
+      	\lang{de}{\text{Äußere Ableitung: $f\prime(y) = $}}
+      	\lang{en}{\text{Outer derivative: $f\prime(y) = $}}
+ 		\solution{df}
+ 		\inputAsFunction{y}{f_s1}
+ 		\checkFuncForZero{f_s1 - D[f_s0]}{1}{3}{100}
+ 		\score{0.2}
+ 	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{Einsetzen: $\quad f\prime(g(x)) = $}}
+      	\lang{en}{\text{Substitute: $\quad f\prime(g(x)) = $}}
+ 		\solution{dfg}
+ 		\inputAsFunction{x}{f_s2}
+ 		\checkFuncForZero{f_s2 - f_s1[g_s0]}{-1}{1}{100}
+ 		\score{0.2}
+ 	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{Innere Ableitung: $g\prime(x) = $}}
+      	\lang{en}{\text{Inner derivative: $g\prime(x) = $}}
+ 		\solution{dg}
+ 		\inputAsFunction{x}{g_s1}
+ 		\checkFuncForZero{g_s1 - D[g_s0]}{-1}{1}{100}
+ 		\score{0.2}
+ 	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{Ableitung der Komposition: $(f \circ g)\prime(x) = $}}
+      	\lang{en}{\text{Derivative of the composition: $f(\circ g)\prime(x) = $}}
+ 		\solution{Dfg}
+ 		\checkAsFunction{x}{-10}{10}{100}
+ 		\score{0.2}
+ 	\end{answer}
+\end{question}
+
+%Frage 3 von 7
+\begin{question}
+	\lang{de}{
+		\text{Verwenden Sie die Kettenregel, um die Ableitung der Funktion\\
+		$h(x) = f\circ g (x) = f(g(x)) = \var{h} ,\quad x \in \R$ zu bestimmen.}
+	}
+	\lang{en}{
+		\text{Use the chain rule to find the derivative of the function \\
+		$h(x) = f\circ g(x) = f(g(x)) = \var{h} , \quad x \in \R$.}
+	}
+ 	\begin{variables}
+  		\randint{n}{2}{9}
+ 		\randint{k}{2}{9}
+ 		\randint{l}{3}{9}
+ 		\function{f}{y^l}
+ 		\function{g}{n*x^(3)+k}
+ 		\function{h}{(n*x^(3)+k)^l}
+   		\function[calculate]{p}{3*n}
+   		\function[calculate]{r}{l-1}
+		\function{df}{l*y^(r)}
+   		\function{dg}{p*x^(2)}
+    	\function{dfg}{l*(n*x^(3) + k)^(r)}
+    	\function{Dfg}{l*(n*x^(3) + k)^(r)*p*x^(2)}
+ 	\end{variables}
+    \explanation{Die Kettenregel lautet $(f \circ g)\prime(x) = f'(g(x)) \cdot g'(x)$. }
+	\type{input.function}
+ 	\field{real}
+ 	\begin{answer}
+      	\lang{de}{\text{Äußere Funktion: $f(y) = $}}
+      	\lang{en}{\text{Outer function: $f(y) = $}}
+ 		\solution{f}
+ 		\inputAsFunction{y}{f_s0}
+ 	\end{answer}
+ 	\begin{answer}
+      	\lang{de}{\text{Innere Funktion: $g(x) = $}}
+      	\lang{en}{\text{Inner function: $g(x) = $}}
+ 		\solution{g}
+ 		\inputAsFunction{x}{g_s0}
+ 		\checkFuncForZero{f_s0[g_s0] - h}{-10}{10}{100}
+		\score{0.2}
+ 	\end{answer}
+ 	\begin{answer}
+      	\lang{de}{\text{Äußere Ableitung: $f\prime(y) = $}}
+      	\lang{en}{\text{Outer derivative: $f\prime(y) = $}}
+ 		\solution{df}
+ 		\inputAsFunction{y}{f_s1}
+ 		\checkFuncForZero{f_s1 - D[f_s0]}{1}{3}{100}
+ 		\score{0.2}
+ 	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{Einsetzen: $\quad f\prime(g(x)) = $}}
+      	\lang{en}{\text{Substitute: $\quad f\prime(g(x)) = $}}
+ 		\solution{dfg}
+ 		\inputAsFunction{x}{f_s2}
+ 		\checkFuncForZero{f_s2 - f_s1[g_s0]}{-1}{1}{100}
+ 		\score{0.2}
+ 	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{Innere Ableitung: $g\prime(x) = $}}
+      	\lang{en}{\text{Inner derivative: $g\prime(x) = $}}
+ 		\solution{dg}
+ 		\inputAsFunction{x}{g_s1}
+ 		\checkFuncForZero{g_s1 - D[g_s0]}{-1}{1}{100}
+ 		\score{0.2}
+ 	\end{answer}
+	\begin{answer}
+      \lang{de}{\text{Ableitung der Komposition: $(f \circ g)\prime(x) = $}}
+      \lang{en}{\text{Derivative of the composition: $(f \circ g)\prime(x) = $}}
+ 		\solution{Dfg}
+ 		\checkAsFunction{x}{-10}{10}{100}
+ 		\score{0.2}
+ 	\end{answer}
+\end{question}
+
+%Frage 4 von 7
+\begin{question}
+	\lang{de}{
+		\text{Verwenden Sie die Kettenregel, um die Ableitung der Funktion\\
+		$h(x) = f\circ g (x) = f(g(x)) = \var{h} ,\quad x \in \R$ zu bestimmen.}
+	}
+	\lang{en}{
+		\text{Use the chain rule to find the derivative of the function \\
+		$h(x) = f\circ g(x) = f(g(x)) = \var{h} , \quad x \in \R$.}
+	}
+	\begin{variables}
+  		\randint{n}{2}{9}
+ 		\randint{m}{2}{9}
+ 		\randint{k}{2}{9}
+ 		\randint{s}{1}{9}
+ 		\function[calculate,1]{l}{s/10}
+ 		\function{f}{y^l}
+ 		\function{g}{n*x^(2) + k}
+ 		\function{h}{(n*x^(2) + k)^l}
+   		\function[calculate]{p}{2*n}
+   		\function[calculate]{r}{l-1}
+   		\function{df}{l*y^(r)}
+   		\function{dg}{p*x}
+    	\function{dfg}{l*(n*x^(2) + k)^(r)}
+    	\function{Dfg}{l*(n*x^(2) +k)^(r)*p*x}
+ 	\end{variables}
+    \explanation{Die Kettenregel lautet $(f \circ g)\prime(x) = f'(g(x)) \cdot g'(x)$. }
+	\type{input.function}
+ 	\field{real}
+	\correctorprecision{1}
+ 	\begin{answer}
+      	\lang{de}{\text{Äußere Funktion: $f(y) = $}}
+      	\lang{en}{\text{Outer function: $f(y) = $}}
+ 		\solution{f}
+ 		\inputAsFunction{y}{f_s0}
+ 	\end{answer}
+ 	\begin{answer}
+      	\lang{de}{\text{Innere Funktion: $g(x) = $}}
+      	\lang{en}{\text{Inner function: $g(x) = $}}
+ 		\solution{g}
+ 		\inputAsFunction{x}{g_s0}
+ 		\checkFuncForZero{f_s0[g_s0] - h}{-1}{1}{100}
+		\score{0.2}
+ 	\end{answer}
+ 	\begin{answer}
+      	\lang{de}{\text{Äußere Ableitung: $f\prime(y) = $}}
+      	\lang{en}{\text{Outer derivative: $f\prime(y) = $}}
+ 		\solution{df}
+ 		\inputAsFunction{y}{f_s1}
+ 		\checkFuncForZero{f_s1 - D[f_s0]}{1}{3}{100}
+ 		\score{0.2}
+ 	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{Einsetzen: $\quad f\prime(g(x)) = $}}
+      	\lang{en}{\text{Substitute: $\quad f\prime(g(x)) = $}}
+ 		\solution{dfg}
+ 		\inputAsFunction{x}{f_s2}
+ 		\checkFuncForZero{f_s2 - f_s1[g_s0]}{-1}{1}{100}
+ 		\score{0.2}
+ 	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{Innere Ableitung: $g\prime(x) = $}}
+      	\lang{en}{\text{Inner derivative: $g\prime(x) = $}}
+ 		\solution{dg}
+ 		\inputAsFunction{x}{g_s1}
+ 		\checkFuncForZero{g_s1 - D[g_s0]}{-1}{1}{100}
+ 		\score{0.2}
+ 	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{Ableitung der Komposition: $(f \circ g)\prime(x) = $}}
+      	\lang{en}{\text{Derivative of the composition: $(f \circ g)\prime(x) = $}}
+ 		\solution{Dfg}
+ 		\checkAsFunction{x}{-1}{1}{100}
+ 		\score{0.2}
+ 	\end{answer}
+\end{question}
+%begin-cosh
+%Frage 5 von 7
+\begin{question}
+	\lang{de}{
+		\text{Verwenden Sie die Kettenregel, um die Ableitung der Funktion\\
+		$h(x) = f\circ g (x) = f(g(x)) = \var{h} ,\quad x >1$ zu bestimmen.}
+	}
+	\lang{en}{
+		\text{Use the chain rule to find the derivative of the function \\
+		$h(x) = f\circ g(x) = f(g(x)) = \var{h} , \quad x >1$.}
+	}
+ 	\begin{variables}
+  		\randint{n}{2}{9}
+ 		\randint{l}{2}{9}
+ 		\function{f}{sqrt(y)}
+ 		\function{g}{ln(x)}
+ 		\function{h}{sqrt(ln(x))}
+ 	   	\function{df}{1/(2*sqrt(y))}
+   		\function{dg}{1/x}
+    	\function{Dfg}{1/(2*x*sqrt(ln(x)))}
+    	\function{dfg}{1/(2*sqrt(ln(x)))}
+ 	\end{variables}
+    \explanation{Die Kettenregel lautet $(f \circ g)\prime(x) = f'(g(x)) \cdot g'(x)$. }
+	\type{input.function}
+ 	\field{real}
+ 	\begin{answer}
+      	\lang{de}{\text{Äußere Funktion: $f(y) = $}}
+      	\lang{en}{\text{Outer function: $f(y) = $}}
+ 		\solution{f}
+ 		\inputAsFunction{y}{f_s0}
+ 	\end{answer}
+ 	\begin{answer}
+      	\lang{de}{\text{Innere Funktion: $g(x) = $}}
+      	\lang{en}{\text{Inner function: $g(x) = $}}
+ 		\solution{g}
+ 		\inputAsFunction{x}{g_s0}
+ 		\checkFuncForZero{f_s0[g_s0] - h}{1.1}{3}{100}
+		\score{0.2}
+ 	\end{answer}
+ 	\begin{answer}
+      	\lang{de}{\text{Äußere Ableitung: $f\prime(y) = $}}
+      	\lang{en}{\text{Outer derivative: $f\prime(y) = $}}
+ 		\solution{df}
+ 		\inputAsFunction{y}{f_s1}
+ 		\checkFuncForZero{f_s1 - D[f_s0]}{1.1}{3}{100}
+ 		\score{0.2}
+ 	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{Einsetzen: $\quad f\prime(g(x)) = $}}
+      	\lang{en}{\text{Substitute: $\quad f\prime(g(x)) = $}}
+ 		\solution{dfg}
+ 		\inputAsFunction{x}{f_s2}
+ 		\checkFuncForZero{f_s2 - f_s1[g_s0]}{1.1}{3}{100}
+ 		\score{0.2}
+ 	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{Innere Ableitung: $g\prime(x) = $}}
+      	\lang{en}{\text{Inner derivative: $g\prime(x) = $}}
+ 		\solution{dg}
+ 		\inputAsFunction{x}{g_s1}
+ 		\checkFuncForZero{g_s1 - D[g_s0]}{1.1}{3}{100}
+ 		\score{0.2}
+ 	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{Ableitung der Komposition: $(f \circ g)\prime(x) = $}}
+      	\lang{en}{\text{Derivative of the composition: $(f\circ g)\prime(x) = $}}
+ 		\solution{Dfg}
+ 		\checkAsFunction{x}{1.1}{3}{100}
+ 		\score{0.2}
+ 	\end{answer}
+\end{question}
+
+%Frage 6 von 7
+\begin{question}
+	\lang{de}{
+		\text{Verwenden Sie die Kettenregel, um die Ableitung der Funktion\\
+		$h(x) = f\circ g (x) = f(g(x)) = \var{h} ,\quad x >0$ zu bestimmen.}
+	}
+	\lang{en}{
+		\text{Use the chain rule to find the derivative of the function \\
+		$h(x) = f\circ g(x) = f(g(x)) = \var{h} , \quad x >0$.}
+	}
+ 	\begin{variables}
+  		\function{f}{sin(y)}
+ 		\function{g}{ln(x)}
+ 		\function{h}{sin(ln(x))}
+ 	   	\function{df}{cos(y)}
+   		\function{dg}{1/x}
+    	\function{Dfg}{cos(ln(x))/x}
+    	\function{dfg}{cos(ln(x))}
+ 	\end{variables}
+    \explanation{Die Kettenregel lautet $(f \circ g)\prime(x) = f'(g(x)) \cdot g'(x)$. }
+	\type{input.function}
+ 	\field{real}
+ 	\begin{answer}
+      	\lang{de}{\text{Äußere Funktion: $f(y) = $}}
+      	\lang{en}{\text{Outer function: $f(y) = $}}
+ 		\solution{f}
+ 		\inputAsFunction{y}{f_s0}
+ 	\end{answer}
+ 	\begin{answer}
+      	\lang{de}{\text{Innere Funktion: $g(x) = $}}
+      	\lang{en}{\text{Inner function: $g(x) = $}}
+ 		\solution{g}
+ 		\inputAsFunction{x}{g_s0}
+ 		\checkFuncForZero{f_s0[g_s0] - h}{0.1}{3}{100}
+		\score{0.2}
+ 	\end{answer}
+ 	\begin{answer}
+      	\lang{de}{\text{Äußere Ableitung: $f\prime(y) = $}}
+      	\lang{en}{\text{Outer derivative: $f\prime(y) = $}}
+ 		\solution{df}
+ 		\inputAsFunction{y}{f_s1}
+ 		\checkFuncForZero{f_s1 - D[f_s0]}{0.1}{3}{100}
+ 		\score{0.2}
+ 	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{Einsetzen: $\quad f\prime(g(x)) = $}}
+      	\lang{en}{\text{Substitute: $\quad f\prime(g(x)) = $}}
+ 		\solution{dfg}
+ 		\inputAsFunction{x}{f_s2}
+ 		\checkFuncForZero{f_s2 - f_s1[g_s0]}{-10}{3}{100}
+ 		\score{0.2}
+ 	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{Innere Ableitung: $g\prime(x) = $}}
+      	\lang{en}{\text{Inner derivative: $g\prime(x) = $}}
+ 		\solution{dg}
+ 		\inputAsFunction{x}{g_s1}
+ 		\checkFuncForZero{g_s1 - D[g_s0]}{0.1}{3}{100}
+ 		\score{0.2}
+ 	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{Ableitung der Komposition: $(f \circ g)\prime(x) = $}}
+      	\lang{en}{\text{Derivative of the composition: $(f\circ g)\prime(x) = $}}
+ 		\solution{Dfg}
+ 		\checkAsFunction{x}{0.1}{10}{100}
+ 		\score{0.2}
+ 	\end{answer}
+\end{question}
+%Frage 7 von 7
+\begin{question}
+	\lang{de}{
+		\text{Verwenden Sie die Kettenregel, um die Ableitung der Funktion\\
+		$h(x) = f\circ g (x) = f(g(x)) = \var{h} ,\quad x >1$ zu bestimmen.}
+	}
+	\lang{en}{
+		\text{Use the chain rule to find the derivative of the function \\
+		$h(x) = f\circ g(x) = f(g(x)) = \var{h} , \quad x >1$.}
+	}
+ 	\begin{variables}
+  		\function{f}{1/y}
+ 		\function{g}{ln(x)}
+ 		\function{h}{1/ln(x)}
+ 	   	\function{df}{-1/y^2}
+   		\function{dg}{1/x}
+    	\function{Dfg}{-1/((ln(x))^2*x)}
+    	\function{dfg}{-1/((ln(x))^2)}
+ 	\end{variables}
+    \explanation{Die Kettenregel lautet $(f \circ g)\prime(x) = f'(g(x)) \cdot g'(x)$. }
+	\type{input.function}
+ 	\field{real}
+ 	\begin{answer}
+      	\lang{de}{\text{Äußere Funktion: $f(y) = $}}
+      	\lang{en}{\text{Outer function: $f(y) = $}}
+ 		\solution{f}
+ 		\inputAsFunction{y}{f_s0}
+ 	\end{answer}
+ 	\begin{answer}
+      	\lang{de}{\text{Innere Funktion: $g(x) = $}}
+      	\lang{en}{\text{Inner function: $g(x) = $}}
+ 		\solution{g}
+ 		\inputAsFunction{x}{g_s0}
+ 		\checkFuncForZero{f_s0[g_s0] - h}{1.1}{3}{100}
+		\score{0.2}
+ 	\end{answer}
+ 	\begin{answer}
+      	\lang{de}{\text{Äußere Ableitung: $f\prime(y) = $}}
+      	\lang{en}{\text{Outer derivative: $f\prime(y) = $}}
+ 		\solution{df}
+ 		\inputAsFunction{y}{f_s1}
+ 		\checkFuncForZero{f_s1 - D[f_s0]}{1.1}{3}{100}
+ 		\score{0.2}
+ 	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{Einsetzen: $\quad f\prime(g(x)) = $}}
+      	\lang{en}{\text{Substitute: $\quad f\prime(g(x)) = $}}
+ 		\solution{dfg}
+ 		\inputAsFunction{x}{f_s2}
+ 		\checkFuncForZero{f_s2 - f_s1[g_s0]}{1.1}{3}{100}
+ 		\score{0.2}
+ 	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{Innere Ableitung: $g\prime(x) = $}}
+      	\lang{en}{\text{Inner derivative: $g\prime(x) = $}}
+ 		\solution{dg}
+ 		\inputAsFunction{x}{g_s1}
+ 		\checkFuncForZero{g_s1 - D[g_s0]}{1.1}{3}{100}
+ 		\score{0.2}
+ 	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{Ableitung der Komposition: $(f \circ g)\prime(x) = $}}
+      	\lang{en}{\text{Derivative of the composition: $(f\circ g)\prime(x) = $}}
+ 		\solution{Dfg}
+ 		\checkAsFunction{x}{1.1}{3}{100}
+ 		\score{0.2}
+ 	\end{answer}
+\end{question}
+%ende-cosh 
+
+\end{problem}	
+
+\embedmathlet{mathlet}           	   
+
+\end{content}

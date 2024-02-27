@@ -1,0 +1,133 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+  \lang{en}{...}
+  \lang{de}{ProduktKomplex}
+  \lang{zh}{...}
+  \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/32297}{Ticket 32297}
+\end{block}
+\begin{block}[annotation]
+Copy of : /home/mumie/checkin/content/playground/HM4mint-Testaufgaben/T203_komplexe_Zahlen/prb_jsx_produkt_komplex.src.tex
+\end{block}
+
+\begin{block}[annotation]
+(Dagmar Schuacher)\\
+Copy of : /home/mumie/checkin/content/playground/Dagmar_Schumacher/prb_produkt_komplex_jsx.src.tex
+\end{block}
+
+  \usepackage{mumie.genericproblem}
+  \begin{visualizationwrapper}
+
+\title{Produkt zweier komplexer Zahlen}
+\\
+\begin{genericJSXVisualization}
+  \begin{variables}
+      \question{1}{x1}{real}
+      \question{1}{y1}{real}
+      \question{1}{x2}{real}
+      \question{1}{y2}{real}
+      %%%
+      \point{z1}{real}{x1,y1}
+      \point{z2}{real}{x2,y2}
+      \vector{v1}{real}{z1}
+      \vector{v2}{real}{z2}
+      \point[editable]{R}{real}{-2.5,-1}
+      %%%
+      \number{Rx}{real}{R[x]}
+      \number{Ry}{real}{R[y]}
+  \end{variables}
+  
+  \color{v1}{#000077} %quite dark blue
+  \color{v2}{#000077} %quite dark blue
+  \label{z1}{z1}
+  \label{z2}{z2}
+  \color{R}{GREEN}
+  \label{R}{z}
+  \answer{Rx}{1,1}
+  \answer{Ry}{1,2}
+
+  	\begin{canvas}
+    \snapToGrid{0.1,0.1}
+		\plotSize{300,300}
+		\plotLeft{-3.5}
+		\plotRight{3.5}
+		\plot[coordinateSystem,showPointCoords]{z1,z2,v1,v2,R}
+	\end{canvas}
+
+\end{genericJSXVisualization}
+
+\end{visualizationwrapper}
+
+\begin{problem}
+
+  \begin{question}
+  \field{complex}
+  %debug
+  \begin{variables}
+    \randint{x1}{-1}{1}
+    \randint[Z]{y1}{-1}{1} % y=0 darf nicht sein bei der Berechnung von phi 
+    \randint{x2}{-1}{1}
+    \randint[Z]{y2}{-1}{1}
+    \randadjustIf{x2,y2}{x1=x2 AND y1=y2}
+    \function[normalize]{z1}{x1+y1*i}
+    \function[normalize]{z2}{x2+y2*i}
+    \function{r1}{(x1^2+y1^2)^0.5}
+    \function{r2}{(x2^2+y2^2)^0.5}
+    \function{re12}{r1*r2}
+    \function{arg1}{acos(x1/(x1^2+y1^2)^0.5)*y1/abs(y1)}
+    \function{arg2}{acos(x2/(x2^2+y2^2)^0.5)*y2/abs(y2)}
+    \function{arge}{arg1+arg2}
+    \function{pex}{re12*cos(arge)}
+    \function{pey}{re12*sin(arge)}
+  \end{variables}
+  
+  \correctorprecision{1}
+  \precision{1}
+%  \text{Bestimmen Sie graphisch das Produkt $z=z_1\cdot z_2$ der beiden komplexen 
+%        Zahlen $z_1=\var{z1}$ und $z_2=\var{z2}$. \\
+%        Ziehen Sie dazu den grünen Punkt auf die Zahl $z$.} 
+%
+  \text{Bestimmen Sie graphisch das Produkt $z=z_1\cdot z_2$ der beiden komplexen 
+        Zahlen $z_1=\var{z1}$ und $z_2=\var{z2}$ unter Verwendung ihrer Polarkoordinaten.
+        Leiten Sie hierzu, falls möglich, die Polarkoordinaten (Winkel und Länge) von $z_1$ 
+        und $z_2$ aus der Graphik ab, um hieraus Winkel und Länge ihres Produktes $z$
+        zu berechnen. Markieren Sie das Ergebnis für $z$ in der Graphik mit dem grünen Punkt.} 
+  
+  \explanation{Multiplikation in Polarkoordinaten heißt, die Winkel von $z_1$ und $z_2$ müssen
+              addiert und ihre Längen $(|z_1|$ und $|z_2|)$ müssen multipliziert werden. }
+   \begin{answer}
+      \type{graphics.number}
+      \solution{pex}
+     \end{answer}
+    \begin{answer}
+      \type{graphics.number}
+      \solution{pey}
+     \end{answer} 
+   \end{question}     
+\end{problem}
+ 
+  \embedmathlet{gwtmathlet}
+  
+\end{content}

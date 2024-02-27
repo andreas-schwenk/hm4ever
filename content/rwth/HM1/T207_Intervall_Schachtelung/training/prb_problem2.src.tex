@@ -1,0 +1,445 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A02: Intervallschreibweise}
+    \lang{en}{input interval}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{description}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A02: Intervallschreibweise}}
+\lang{en}{\title{Problem 2}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9993}{Ticket 9993}
+\end{block}
+
+Geben Sie die nachfolgenden Mengen in Intervallschreibweise an. Verwenden Sie
+\textit{infty} für $\infty$ und \textit{-infty}~ für $-\infty$, wenn nötig. Auch die 
+Intervallgrenzen lassen sich durch Anklicken ändern!
+ 
+\begin{problem}
+	\randomquestionpool{1}{2}
+	\randomquestionpool{3}{4}
+	\randomquestionpool{5}{8}
+	\randomquestionpool{9}{10}
+	
+
+    \begin{question} %1
+     
+      \lang{de}{
+      	\text{%
+        %Geben Sie die nachfolgende Menge in Intervallschreibweise an.\\
+      	 $[\var{a};\var{b}) \cup [\var{b};\var{c}) =$\ansref
+              }}
+
+      \type{input.interval}
+      
+      \field{rational}
+      \begin{variables}
+      \randint{a}{-30}{-15}
+      \randint{b}{-14}{15}
+      \randint{c}{16}{30}
+      
+      \end{variables}
+     
+     \begin{answer}
+             \solution{[a;c)} 
+             \explanation[edited]{Durch die Vereinigung gehen beide Intervalle nahtlos ineinander über.}
+        \end{answer}
+%      \type{mc.unique}
+%      	\begin{choice}
+%     	 	\text{ $[\var{a},\var{c})$ }
+%   		 	\solution{true}
+% 		\end{choice}
+		
+% 		\begin{choice}
+%     	 	\text{ $(\var{a},\var{c})$ }
+%   		 	\solution{false}
+% 		\end{choice}
+		
+% 		\begin{choice}
+%     	 	\text{ $(\var{a},\var{c}]$ }
+%   		 	\solution{false}
+% 		\end{choice}
+     
+    \end{question}
+    
+    
+    \begin{question} %2
+     
+      \lang{de}{
+      	\text{%
+        %Geben Sie die nachfolgende Menge in Intervallschreibweise an.\\
+      	 $(\var{d}; \var{dk}) \cap [\var{d}; \var{f} ]=$\ansref
+              }}
+
+      \type{input.interval}
+      \field{rational}
+      \begin{variables}
+      \randint{d}{-30}{30}
+      \randint{k}{3}{10}
+      \randint{l}{1}{2}
+      \function[calculate]{dk}{d+k}
+      \function[calculate]{f}{d+k-l}
+      
+      \end{variables}
+      
+        \begin{answer}
+             \solution{(d;f]} 
+             \explanation[edited]{Die linke Intervallgrenze ist nur in einem der beiden 
+             Intervalle enthalten.}
+        \end{answer}
+
+%       \type{mc.unique}
+%       \begin{choice}
+%     	 	\text{ $[\var{d},\var{dkl})$ }
+%   		 	\solution{false}
+% 		\end{choice}
+     
+%      	\begin{choice}
+%     	 	\text{ $(\var{d},\var{dkl})$ }
+%   		 	\solution{false}
+% 		\end{choice}
+		
+		
+% 		\begin{choice}
+%     	 	\text{ $(\var{d},\var{dkl}]$ }
+%   		 	\solution{true}
+% 		\end{choice}
+      
+%      	\begin{choice}
+%     	 	\text{ $[\var{d},\var{dkl}]$ }
+%   		 	\solution{false}
+% 		\end{choice}
+
+
+    \end{question}
+
+
+\begin{question} %3
+%f=mx,m>0
+     
+      \lang{de}{
+      	\text{ $\{ x\in \R \vert \:\var{m} x \le \var{t} \}=$\ansref
+              }}
+      
+      \type{input.interval}      
+      \field{rational}
+      \begin{variables}
+      \randint{t}{1}{10}
+      \randint{m}{2}{5}
+      \function[calculate]{tm}{t/m}
+      
+      \end{variables}
+      
+        \begin{answer}
+             \solution{(-infinity;tm]} 
+        \end{answer}      
+     
+%         \type{mc.unique}
+%      	\begin{choice}
+%     	 	\text{ $(- \infty, \var{t} ]$ }
+%   		 	\solution{false}
+% 		\end{choice}
+		
+% 		\begin{choice}
+%     	 	\text{ $(- \infty, \frac{\var{t}}{\var{m}} )$ }
+%   		 	\solution{false}
+% 		\end{choice}
+		
+% 		\begin{choice}
+%     	 	\text{ $(- \infty, \frac{\var{t}}{\var{m}} ]$ }
+%   		 	\solution{true}
+% 		\end{choice}
+		
+% 		\begin{choice}
+%     	 	\text{ $[- \infty, \frac{\var{t}}{\var{m}} ]$ }
+%   		 	\solution{false}
+% 		\end{choice}
+     
+    \end{question}
+    
+    \begin{question} %4
+%f=mx,m<0
+     
+      \lang{de}{
+      	\text{ $\{ x\in \R \vert\: \var{m} x \le \var{t} \}=$\ansref
+              }}
+      
+      \type{input.interval}      
+      \field{rational}
+      \begin{variables}
+      \randint{t}{1}{10}
+      \randint{m}{-5}{-2}
+      \function[calculate]{tm}{t/m}
+      
+      \end{variables}
+      
+        \begin{answer}
+             \solution{[tm;infinity)} 
+             \explanation[edited]{Bei Multiplikation mit $-1$ dreht sich das Vorzeichen
+             der Ungleichung um.}
+        \end{answer}      
+     
+     	
+		
+%       \type{mc.unique}
+% 		\begin{choice}
+%     	 	\text{ $(\frac{\var{t}}{\var{m}}, \infty)$ }
+%   		 	\solution{false}
+% 		\end{choice}
+		
+% 		\begin{choice}
+%     	 	\text{ $[\var{t}, \infty)$ }
+%   		 	\solution{false}
+% 		\end{choice}
+		
+% 		\begin{choice}
+%     	 	\text{ $[\frac{\var{t}}{\var{m}}, \infty]$ }
+%   		 	\solution{false}
+% 		\end{choice}
+		
+% 		\begin{choice}
+%     	 	\text{ $[\frac{\var{t}}{\var{m}}, \infty)$ }
+%   		 	\solution{true}
+% 		\end{choice}
+     
+    \end{question}
+    
+    
+    
+    \begin{question} %5
+%f=x^2
+     
+      \lang{de}{
+      	\text{ $\{ x\in \R \vert \:x^2 \le \var{t} \}=$\ansref
+              }}
+      
+      \type{input.interval}      
+      \field{rational}
+      \begin{variables}
+      \randint{s}{1}{10}
+      \randint{m}{1}{4}
+      \function[calculate]{sm}{s/m}
+      \function[calculate]{t}{sm^2}
+      \function[calculate]{msm}{-sm}
+      
+      \end{variables}
+      
+      \begin{answer}
+             \solution{[msm;sm]} 
+      \end{answer}          
+     	
+		
+%       \type{mc.unique}
+% 		\begin{choice}
+%     	 	\text{ $ ( - \sqrt{\var{t}}, \sqrt{\var{t}} )$ }
+%   		 	\solution{false}
+% 		\end{choice}
+		
+% 			\begin{choice}
+%     	 	\text{ $[ -\var{t}, \var{t} ]$ }
+%   		 	\solution{false}
+% 		\end{choice}
+		
+% 		\begin{choice}
+%     	 	\text{ $[ - \sqrt{\var{t}}, \sqrt{\var{t}} ]$ }
+%   		 	\solution{true}
+% 		\end{choice}
+		
+% 	\begin{choice}
+%     	 	\text{ $( -\var{t}, \var{t} )$ }
+%   		 	\solution{false}
+% 		\end{choice}
+     
+    \end{question}
+    
+        \begin{question} %6
+%f=x^2
+     
+      \lang{de}{
+      	\text{ $\{ x\in \R \vert \:x^2 < \var{t} \}=$\ansref
+              }}
+      
+      \type{input.interval}      
+      \field{rational}
+      \begin{variables}
+      \randint{s}{1}{10}
+      \randint{m}{1}{4}
+      \function[calculate]{sm}{s/m}
+      \function[calculate]{t}{sm^2}
+      \function[calculate]{msm}{-sm}
+      
+      \end{variables}
+      
+      \begin{answer}
+             \solution{(msm;sm)} 
+      \end{answer}          
+     	
+		
+     
+    \end{question}
+    
+    \begin{question} %7
+%f=|x|
+     
+      \lang{de}{
+      	\text{ $\{ x\in \R \vert |x| \le \var{t} \}=$\ansref
+              }}
+
+      \type{input.interval}      
+      \field{rational}
+      \begin{variables}
+      \randint{s}{1}{10}
+      \randint{m}{1}{4}
+      \function[calculate]{sm}{s/m}
+      \function[calculate]{t}{sm^2}
+      \function[calculate]{mt}{-t}
+      
+      \end{variables}
+      
+      \begin{answer}
+             \solution{[mt;t]} 
+      \end{answer}              
+     	
+%       \type{mc.unique}		
+% 		\begin{choice}
+%     	 	\text{ $ ( - \infty, \var{t} ]$ }
+%   		 	\solution{false}
+% 		\end{choice}
+		
+% 			\begin{choice}
+%     	 	\text{ $[ -\var{t}, \var{t} ]$ }
+%   		 	\solution{true}
+% 		\end{choice}
+		
+% 		\begin{choice}
+%     	 	\text{ $( - \infty, \var{t} )$ }
+%   		 	\solution{false}
+% 		\end{choice}
+		
+% 	    \begin{choice}
+%     	 	\text{ $( -\var{t}, \var{t} )$ }
+%   		 	\solution{false}
+% 		\end{choice}
+     
+    \end{question}
+    
+        \begin{question} %8
+%f=|x|
+     
+      \lang{de}{
+      	\text{ $\{ x\in \R \vert\: |x| < \var{t} \}=$\ansref
+              }}
+
+      \type{input.interval}      
+      \field{rational}
+      \begin{variables}
+      \randint{s}{1}{10}
+      \randint{m}{1}{4}
+      \function[calculate]{sm}{s/m}
+      \function[calculate]{t}{sm^2}
+      \function[calculate]{mt}{-t}
+      
+      \end{variables}
+      
+      \begin{answer}
+             \solution{(mt;t)} 
+      \end{answer}       
+    \end{question}
+    
+    
+
+    \begin{question} %9
+
+     
+      \lang{de}{
+      	\text{ $ \{ x\in \R \vert \:(\var{auf})^3 < \var{q} \}=$\ansref
+              }}
+      
+      \type{input.interval}      
+      \field{rational}
+      \begin{variables}
+      \randint[Z]{qq}{-3}{3}
+      \function[normalize]{q}{qq*qq*qq}
+      \randint{n}{-5}{5}
+      \function[normalize]{n1}{-n}
+      \function[normalize]{auf}{x-n}
+      \function[calculate]{ub}{n+qq}      
+      \end{variables}
+      
+      \begin{answer}
+             \solution{(-infinity;ub)} 
+      \end{answer}       
+
+% 		\type{mc.unique}
+%       \begin{choice}
+%     	 	\text{ $(- \infty,\var{n}+ \sqrt[3]{\var{q}}) $ }
+%   		 	\solution{true}
+% 		\end{choice}
+		
+% 			\begin{choice}
+%     	 	\text{ $(- \infty, \var{q}) $ }
+%   		 	\solution{false}
+% 		\end{choice}
+		
+% 		\begin{choice}
+%     	 	\text{ $(\var{n1}-\sqrt[3]{\var{q}},\var{n}+ \sqrt[3]{\var{q}}) $ }
+%   		 	\solution{false}
+% 		\end{choice}
+		
+% 	    \begin{choice}
+%     	 	\text{ $[\var{n1}-\sqrt[3]{\var{q}}, \var{n}+\sqrt[3]{\var{q}}] $ }
+%   		 	\solution{false}
+% 		\end{choice}
+     
+    \end{question}
+
+    \begin{question} %10
+
+     
+      \lang{de}{
+      	\text{ $ \{ x\in \R \vert\: (\var{auf})^3 \le \var{q} \}=$\ansref
+              }}
+      
+      \type{input.interval}      
+      \field{rational}
+      \begin{variables}
+      \randint[Z]{qq}{-3}{3}
+      \function[normalize]{q}{qq*qq*qq}
+      \randint{n}{-5}{5}
+      \function[normalize]{n1}{-n}
+      \function[normalize]{auf}{x-n}
+      \function[calculate]{ub}{n+qq}      
+      \end{variables}
+      
+      \begin{answer}
+             \solution{(-infinity;ub]} 
+      \end{answer}       
+
+    \end{question}
+
+
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

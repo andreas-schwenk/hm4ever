@@ -1,0 +1,94 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A06: Hauptsatz der Integralrechnung}
+    \lang{en}{problem 6}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+
+\lang{de}{
+	\title{A06: Hauptsatz der Integralrechnung}
+}
+\lang{en}{
+	\title{Problem 6}
+}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9614}{Ticket 9614}
+\end{block}
+
+\begin{problem}
+	\begin{variables}
+	 	\randint{a}{0}{8}
+	 	\randint{b}{1}{9}
+	 	\randadjustIf{a,b}{b<=a}
+
+	 	\randint{c}{1}{9}
+	 	\randint{d}{1}{9}
+
+		\function{f}{x^2+c*x+d}
+		\derivative[normalize]{f_1}{f}{x}
+		\functionNormalize{f_1}
+
+        %\substitute[normalize]{fx0}{f}{x}{x0} % if you want to have the value computed, use this option
+        \substitute[normalize]{Fb}{f}{x}{b}
+        \substitute[normalize]{Fa}{f}{x}{a}
+        \function[calculate]{L}{Fb-Fa}
+
+	\end{variables}
+
+
+	\begin{question}
+		\lang{de}{
+			\text{In dieser Aufgabe sei die Funktion $f(x) = 2x+c$ gegeben.\\
+			Dabei ist $ c \in \R$ eine reelle Zahl, die noch zu bestimmen ist. \\
+			Dazu ist das Integral $\int_{\var{a}}^{\var{b}} f(x) \, dx = \var{L}$ gegeben.\\
+			Nutzen Sie den Hauptsatz der Differential- und Integralrechnung, um den Wert\\
+			von $c$ zu bestimmen.}
+		}
+		 \lang{en}{\text{
+      In this problem, we are given the function $f(x) = 2x + c$. \\
+      Here, $c \in \R$ is a real number that we will have to determine. \\
+      We are also given the integral $\int_{\var{a}}^{\var{b}} f(x) \, dx = \var{L}$. \\
+      Using the fundamental theorem of calculus, determine the value of $c$.
+     }}
+
+		\type{input.number}
+		\begin{answer}
+			\text{ $c \, = $ }
+			\solution{c}
+            
+            \lang{de}{
+            \explanation{Die Antwort ist nicht korrekt. Für eine Stammfunktion $F$ von $f$ ist die Gleichung $[F(x)]_{\var{a}}^{\var{b}} = \var{L}$ zu lösen. Dies ist eine lineare Gleichung in $c$.}
+	        }
+            \lang{en}{
+            \explanation{The answer is not correct. You have to find a value for $c$, such that the equation $\int_{\var{a}}^{\var{b}} (2x+c)dx=\var{L}$ holds true. After computing the integral, this gives a linear equation in $c$.}
+            }	
+        \end{answer}
+
+	\end{question}
+
+\end{problem}
+
+
+\embedmathlet{mathlet}
+\end{content}

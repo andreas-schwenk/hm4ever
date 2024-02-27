@@ -1,0 +1,123 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü08: Höhere Ableitungen}
+    \lang{en}{Exercise 8}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+
+\title{\lang{de}{Ü08: Höhere Ableitungen}}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10281}{Ticket 10281}
+\end{block}
+
+%######################################################FRAGE_TEXT
+\lang{de}{  
+Bestimmen Sie die erste, zweite und dritte Ableitung der folgenden Funktionen. Versuchen Sie
+auch, jeweils eine Formel für die $n$-te Ableitung zu finden.
+
+\[ \text{a) } h(x)=xe^{-x}\qquad\qquad \text{ b)} f(x) = xe^x \qquad\qquad \text{c)} f(x) = \sin(x^2) \qquad\qquad   \text{ d) } g(x)=\frac{1}{x} \]   }
+
+%##################################################ANTWORTEN_TEXT
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung a)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   Mit der Kettenregel und Produktregel erhält man als Ableitungen:
+\begin{eqnarray*}
+h'(x) &=& 1\cdot e^{-x}+x\cdot ((-1)\cdot e^{-x})=1\cdot e^{-x}-xe^{-x}=(1-x)e^{-x}, \\
+h''(x) &=& -1\cdot e^{-x}+ (1-x)\cdot ((-1)\cdot e^{-x})=(x-2)e^{-x},\\
+h'''(x) &=& 1\cdot e^{-x}+(x-2)\cdot ((-1)\cdot e^{-x})=(3-x)e^{-x}.
+\end{eqnarray*}    }
+  	 %------------------------------------END_STEP_X
+  	 
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   Für die ersten drei Ableitungen (also für $n=1$, $2$ und $3$ gilt die Formel
+\[  h^{(n)}(x)=(-1)^n(x-n)e^{-x}. \]
+Dass diese Formel auch für alle $n>3$ gilt, erhält man induktiv:    }
+  	 %------------------------------------END_STEP_X
+  	 
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   Wenn sie nämlich für ein $n$ gilt, so folgt:
+\begin{eqnarray*}
+h^{(n+1)}(x) &=& (h^{(n)})'(x) \\
+&=& ((-1)^n(x-n)e^{-x})'\quad \text{nach Voraussetzung}\\
+&=& (-1)^n\left( 1\cdot e^{-x}+(x-n)\cdot ((-1)\cdot e^{-x})\right) \\
+&=& (-1)^{n+1}\left( -1\cdot e^{-x}+(x-n)\cdot e^{-x}\right) \\
+&=&(-1)^{n+1}(x-n-1)e^{-x}
+\end{eqnarray*}    }
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{Lösungsvideo b) und c)}}
+   \youtubevideo[500][300]{pcadMVcIocU}\\
+  
+  
+  \tab{\lang{de}{    Lösung d)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   Wegen $g(x)=\frac{1}{x}=x^{-1}$ erhält man mit der Formel für Potenzen:
+\begin{eqnarray*}
+g'(x)&=& (-1)x^{-2}, \\
+g''(x)&=& (-1)(-2)x^{-3}=2x^{-3}, \\
+g'''(x)&=& 2(-3)x^{-4}.
+\end{eqnarray*}    }
+  	 %------------------------------------END_STEP_X
+  	 
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   
+Für $n\in \{1;2;3\}$ gilt damit
+\[  g^{(n)}(x) = (-1)^n\cdot n!\cdot x^{-n-1}. \]
+Dass diese Formel auch für alle $n>3$ gilt, erhält man induktiv:    }
+  	 %------------------------------------END_STEP_X
+  	 
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   Wenn sie nämlich für ein $n$ gilt, so folgt:
+\begin{eqnarray*}
+g^{(n+1)}(x) &=& (g^{(n)})'(x) \\
+&=& \left((-1)^n n!x^{-n-1}\right)'\quad \text{nach Voraussetzung}\\
+&=& (-1)^n n! \left((-n-1)x^{-n-2}\right) \\
+&=& (-1)^{n+1} n! (n+1)x^{-n-2} \\
+&=&  (-1)^{n+1} (n+1)! x^{-n-2}
+\end{eqnarray*}    }
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+
+%#############################################################ENDE
+
+  
+
+\end{tabs*}
+\end{content}

@@ -1,0 +1,1502 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Monotonie und Extremstellen}
+    \lang{en}{Monotonicity and extrema}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T106_Quartic.meta.xml}{T106_Quartic}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T106_LinearFunction_B.meta.xml}{T106_LinearFunction_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T106_Parabola_B.meta.xml}{T106_Parabola_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T106_ParabolaTangents.meta.xml}{T106_ParabolaTangents}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T106_LinearFunction_A.meta.xml}{T106_LinearFunction_A}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T106_Parabola_A.meta.xml}{T106_Parabola_A}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T106_SquareRootFunction.meta.xml}{T106_SquareRootFunction}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T106_Cubic.meta.xml}{T106_Cubic}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T106_Sine.meta.xml}{T106_Sine}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T106_Differentialrechnung/g_art_content_22_extremstellen.meta.xml}{content_22_extremstellen}
+    \link{generic_article}{content/rwth/HM1/T301_Differenzierbarkeit/g_art_content_03_hoehere_ableitungen.meta.xml}{content_03_hoehere_ableitungen}
+    \link{generic_article}{content/rwth/HM1/T106_Differentialrechnung/g_art_content_23_kurvendiskussion.meta.xml}{content_23_kurvendiskussion}
+    \link{generic_article}{content/rwth/HM1/T104_weitere_elementare_Funktionen/g_art_content_14_potenzregeln.meta.xml}{power-rules}
+    \link{generic_article}{content/rwth/HM1/T102neu_Einfache_Reelle_Funktionen/g_art_content_06_funktionsbegriff_und_lineare_funktionen.meta.xml}{link9}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{6}
+\ombarticle{3}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Monotonie und Extremstellen}\lang{en}{Monotonicity and extrema}}
+ 
+\begin{block}[annotation]
+  übungsinhalt
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9033}{Ticket 9033}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{\lang{de}{Monotonie}\lang{en}{Monotonicity} }\label{Monotonie}
+
+\begin{definition}[\lang{de}{monoton, streng monoton}\lang{en}{Monotonic, strictly monotonic}]
+\lang{de}{
+Eine Funktion ist auf einem Intervall im Definitionsbereich \notion{\emph{monoton wachsend}} genau 
+dann, wenn für ein beliebiges Paar $x_1, x_2$ von Argumenten im Intervall, für die die Ungleichung 
+$x_1 \leq x_2$ gilt, die Ungleichung $f(x_1)\leq f(x_2)$ für die zugehörigen Funktionswerte folgt.
+\\\\
+Sie heißt \notion{\emph{streng monoton wachsend}} genau dann, falls aus der strengeren Ungleichung 
+$x_1 < x_2$ die strengere Ungleichung $f(x_1) < f(x_2)$ folgt.
+\\\\		 
+Eine Funktion ist auf einem Intervall im Definitionsbereich \notion{\emph{monoton fallend}} genau 
+dann, wenn die Ungleichung $x_1 \leq x_2$ für ein beliebiges Paar von Argumenten aus dem Intervall 
+die entsprechende Ungleichung $f(x_1)\geq f(x_2)$ für die zugehörigen Werte nach sich zieht.
+\\\\
+Sie heißt \notion{\emph{streng monoton fallend}} genau dann, wenn aus $x_1<x_2$ stets 
+$f(x_1)> f(x_2)$ folgt.
+\\\\
+Eine Funktion heißt auf einem Intervall \notion{\emph{monoton}}, wenn sie dort monoton wachsend 
+oder fallend ist.
+}
+\lang{en}{
+Consider a function $f$.
+\\\\
+$f$ is said to be \emph{monotonically increasing} on an interval of its domain if for any 
+given pair of arguments $x_1, x_2$ in the interval such that $x_1 \leq x_2$, we have 
+$f(x_1)\leq f(x_2)$.
+\\\\
+$f$ is said to be \emph{strictly monotonically increasing} on an interval of its domain if for any 
+given pair of arguments $x_1, x_2$ in the interval satisfying the strict inequality $x_1 < x_2$, 
+the strict inequality $f(x_1) < f(x_2)$ is also satisfied. Note that a strict inequality is an 
+inequality that does not allow equality, e.g. $<$ rather than $\leq$.
+\\\\
+$f$ is said to be \emph{monotonically decreasing} on an interval of the domain if for any 
+given pair of arguments $x_1, x_2$ in that interval such that $x_1 \leq x_2$, we have 
+$f(x_1)\geq f(x_2)$.
+\\\\
+$f$ is said to be \emph{strictly monotonically decreasing} on an interval of its domain if for any 
+given pair of arguments $x_1, x_2$ in the interval satisfying the strict inequality $x_1 < x_2$, 
+the strict inequality $f(x_1) > f(x_2)$ is also satisfied. Note that a strict inequality is an 
+inequality that does not allow equality, e.g. $>$ rather than $\geq$.
+\\\\
+$f$ is called \emph{monotone} or \emph{monotonic} on an interval if it is either 
+monotonically increasing or monotonically decreasing on the interval.
+}
+\end{definition} 
+
+
+% \begin{example}
+% \begin{tabs*}[\initialtab{1}\class{example}]
+% \end{tabs*}
+% \end{example}
+ 
+ 
+%  \begin{remark}
+%   \lang{de}{Funktionen haben in der Regel nicht ein einheitliches Steigungsverhalten auf 
+%  		dem ganzen Definitionsbereich, sondern sind nur abschnittsweise monoton.}
+%  
+%  \lang{en}{Functions, in general, do not have one unified slope behaviour on their entire domain. They are normally only
+%  		monotonic on specific intervals.}
+%  
+%  \end{remark}
+%  
+
+ \begin{example}
+\begin{tabs*}[\initialtab{1}\class{example}]
+\tab{$f(x) = x^2 $}
+
+   \lang{de}{
+   Die Funktion $f(x) = x^2 $ mit einer Parabel als Graph ist f"ur $x$-Werte $\leq 0$ (also auf dem 
+   Intervall $(-\infty; 0]$) streng monoton fallend und f"ur $x$-Werte $\geq 0$ (also auf dem 
+   Intervall $[0;\infty)$) streng monoton steigend.
+   }
+	\lang{en}{
+  The function $f(x) = x^2 $ (whose graph is a parabola) is strictly monotonically decreasing on 
+  the interval $(-\infty; 0]$ and strictly monotonically increasing on the interval $[0;\infty)$.
+  }
+	
+\begin{center}
+\image{T106_Parabola_A}
+\end{center}
+
+\tab{$f(x)= \sin(x)$}
+
+    \lang{de}{
+    Betrachte die Sinusfunktion $f(x)= \sin(x)$ mit Definitionsbereich 
+    $D_f = \left[ -2\pi; 2\pi \right]$.
+    \\\\
+    $f(x)= \sin(x)$ ist streng monoton fallend auf den Intervallen \\
+    $\left[ -\frac{3}{2}\pi; -\frac{1}{2}\pi  \right]$, $\left[ \frac{1}{2}\pi; 
+    \frac{3}{2}\pi  \right]$
+    \\\\
+    $f(x)= \sin(x)$ ist streng monoton steigend auf den Intervallen \\
+    $\left[-2\pi; -\frac{3}{2}\pi \right]$, $\left[ -\frac{1}{2}\pi; \frac{1}{2}\pi  \right]$ und 
+    $\left[ \frac{3}{2}\pi; 2\pi  \right]$.
+    }
+    \lang{en}{
+    Consider $f(x) = \sin(x)$ on the domain $D_f = \left[ -2\pi, 2\pi \right]$.
+    \\\\
+    $f(x)= \sin(x)$ is strictly monotonically decreasing on the intervals 
+    $\left[ -\frac{3}{2}\pi, -\frac{1}{2}\pi  \right]$, $\left[ \frac{1}{2}\pi, 
+    \frac{3}{2}\pi  \right]$
+    \\\\
+    $f(x)= \sin(x)$ is strictly monotonically increasing on the intervals 
+    $\left[-2\pi, -\frac{3}{2}\pi \right]$, $\left[ -\frac{1}{2}\pi, \frac{1}{2}\pi  \right]$, and 
+    $\left[ \frac{3}{2}\pi, 2\pi  \right]$.
+    }
+
+\begin{center}
+\image{T106_Sine}
+\end{center}
+
+\tab{$f(x) = a x + b$}
+
+  	\lang{de}{
+    \ref[link9][Der Funktionsgraph einer linearen Funktion]{geraden.example.1} 
+    $\;f(x) = a x + b$ ist eine Gerade mit der Steigung $a$ und $y$-Achsenabschnitt $b$ 
+    (Schnittpunkt mit der $y$-Achse). Die linearen Funktionen $f(x) = ax+b$ sind auf ganz $\R$ 
+    streng monoton steigend, wenn die Steigung größer Null ist, d.h. $a > 0$, und auf ganz $\R$ 
+    streng monoton fallend, wenn die Steigung negativ ist, d.h. $a<0$. Für $a=0$ sind sie konstant 
+    und damit sowohl monoton steigend wie auch monoton fallend. Strenge Monotonie liegt in diesem 
+    Falle aber \emph{nicht} vor. 
+    }
+    \lang{en}{
+    \ref[link9][The graph of a linear function]{geraden.example.1} $\;f(x)=a x + b$ is a line with 
+    gradient $a$ and $y$-intercept $b$ (the intersection point with the $y$-axis). Linear functions 
+    $f(x) = ax+b$ are strictly monotonically increasing if the slope is greater than zero ($a>0$) 
+    and strictly monotonically decreasing if the slope is negative ($a<0$). If $a=0$ linear 
+    functions are constant and hence both monotonically increasing and monotonically decreasing.
+    }
+    
+\begin{center}
+\image{T106_LinearFunction_A}
+\end{center}
+
+\tab{$f(x) = a x^3$}\label{ex:cubic}
+    \lang{de}{
+    Eine Funktion der Form $f(x) = a x^3$ (Polynom 3. Grades) ist streng monoton steigend auf ganz 
+    $\R$, wenn der Koeffizient $a$ positiv ist, $a > 0$, und streng monoton fallend auf ganz $\R$, 
+    wenn $a < 0$ ist.
+    }
+	  \lang{en}{
+    A function of the form $f(x) = ax^3$ (a third degree polynomial) is strictly monotonically 
+    increasing if the coefficient $a$ is positive ($a>0$) and strictly monotonically decreasing if 
+    $a<0$.
+    }
+	 
+\begin{center}
+\image{T106_Cubic}
+\end{center}
+
+\tab{$f(x) = \sqrt{x}$}
+    \lang{de}{
+    Die Quadratwurzelfunktion $f(x) = \sqrt{x}$ ist auf ihrem ganzen Definitionsbereich (also auf 
+    $[0;\infty)$) streng monoton steigend.
+    }
+    \lang{en}{
+    The square root $f(x) = \sqrt{x}$ is strictly monotonically increasing on its whole domain 
+    $[0;\infty)$.
+    }
+\begin{center}
+\image{T106_SquareRootFunction}
+\end{center}
+
+\end{tabs*}
+\end{example}
+ 
+
+\section{
+\lang{de}{Monotonie und Ableitung}
+\lang{en}{Monotonicity and differentiation}}
+
+\lang{de}{
+Bei der graphischen Darstellung von Funktionen gibt die Tangente an den Funktionsgraphen ersten 
+Aufschluss "uber das Steigungsverhalten: Die Funktion ist monoton steigend (fallend) in Bereichen, 
+wo sie eine steigende (fallende) Tangente hat.
+}
+	
+\lang{en}{
+In the graphical representation of a function, its tangent gives a first glimpse of the 
+behaviour of the slope:	a function is strictly monotonically increasing (decreasing) in regions 
+where it has a growing (decreasing) tangent.
+} 
+
+
+\begin{theorem}\label{thm:abl_monotonie}
+\lang{de}{Ist $f$ eine auf einem Intervall $I$ differenzierbare Funktion, so gelten:}
+\lang{en}{Let $f$ be a function differentiable on an interval $I$. Then}
+\begin{align*}
+    \lang{de}{&\underline{f'(x)\;\text{ auf}\;I}&& 
+      \underline{\text{Monotonieverhalten von}\;f\;\text{auf}\;I}}
+    \lang{en}{&\underline{f'(x)\;\text{ on}\;I}&& 
+      \underline{\text{Monotonicity of}\;f\;\text{on}\;I}}
+    \\
+    \lang{de}{&f'(x)\geq 0 &\Leftrightarrow &\:f\;\text{monoton wachsend}}
+    \lang{en}{&f'(x)\geq 0 &\Leftrightarrow &\:f\;\text{monotonically increasing}}
+    \\
+    \lang{de}{&f'(x)\leq 0 &\Leftrightarrow &\:f\;\text{monoton fallend}}
+    \lang{en}{&f'(x)\leq 0 &\Leftrightarrow &\:f\;\text{monotonically decreasing}}
+    \\
+    \lang{de}{\text{und}&&&}
+    \lang{en}{\text{and}&&&}
+    \\
+    \lang{de}{&f'(x)> 0 &\Rightarrow &\:f\;\text{streng monoton wachsend}}
+    \lang{en}{&f'(x)> 0 &\Rightarrow &\:f\;\text{strictly monotonically increasing}}
+    \\
+    \lang{de}{&f'(x)< 0 &\Rightarrow &\:f\;\text{streng monoton fallend}}
+    \lang{en}{&f'(x)< 0 &\Rightarrow &\:f\;\text{strictly monotonically decreasing}}
+    \\
+\end{align*}
+\lang{de}{
+\floatright{\href{https://www.hm-kompakt.de/video?watch=520}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{}
+\end{theorem}
+
+\label{Warning}
+\begin{block}[warning]
+\lang{de}{
+Die Funktion $f$ kann streng monoton wachsen bzw. streng monoton fallen, auch wenn an manchen 
+Stellen die Ableitung gleich Null ist, wie am \lref{ex:cubic}{Beispiel $f(x)=ax^3$} (mit $a>0$ bzw. 
+mit $a<0$) zu sehen ist.
+}
+\lang{en}{
+The function $f$ can be strictly monotonically increasing or decreasing even if the derivative is 
+equal to zero at some points, such as in the \lref{ex:cubic}{example $f(x)=ax^3$} (where $a>0$ or 
+$a<0$).
+}
+\end{block}
+
+
+\begin{example}
+
+	
+	\begin{center}
+   \image{T106_ParabolaTangents}
+    \end{center}
+	\lang{de}{
+  Die Funktion $f(x)=x^2$ ist monoton fallend auf $(-\infty;0]$ und monoton steigend auf 
+  $[0;\infty)$. An einer Stelle $x_0$ mit $x_0\leq 0$ hat also die Tangente eine Steigung 
+  $f'(x_0)\leq 0$, an einer Stelle $x_1$ mit $x_1\geq 0$ hat die Tangente eine positive Steigung 
+  $f'(x_1)\geq 0$.\\
+	Da die Tangente in $x_0 <0$ sogar eine negative Steigung hat, ist $f'(x) <0$ f\"{u}r 
+  $x\in (-\infty;0)$, und damit ist $f$ auf $(-\infty;0)$ streng monoton fallend. Analog gilt 
+  $f'(x)>0$ auf $(0;\infty)$ und $f$ ist dort streng monoton steigend. Tatsächlich ist $f(x)$ sogar 
+  auf $(-\infty;0]$ streng monoton fallend und auf $[0;\infty)$ streng monton wachsend. Siehe hierzu 
+  obige \ref[content_22_extremstellen][Warnung]{Warning}.
+    }
+	\lang{en}{
+  The function $f(x)=x^2$ is monotonically decreasing on $(-\infty,0]$ and monotonically increasing 
+  on $[0,\infty)$. The gradient of the tangent at any point $x_0$ with $x_0\leq 0$ is 
+  $f'(x_0)\leq 0$. The gradient of the tangent at any point $x_1$ with $x_1\geq 0$ is positive: 
+  $f'(x_1)\geq 0$.\\
+	Because the tangent at $x_0<0$ has a negative gradient, $f'(x) <0$ for $x\in (-\infty,0)$, and 
+  hence $f$ is strictly monotonically decreasing on $(-\infty,0)$. An analagous result holds for 
+  $f'(x)>0$ on $(0,\infty)$: $f$ is strictly monotonically increasing on $(0,\infty)$.
+  }
+\end{example}
+
+
+
+
+
+% 
+% \lang{de}{Verschwindet die Ableitung einer Funktion $f$ an einer Stelle $x_0$, so ist die Tangente an den Graphen
+% in diesem Punkt waagerecht. Eine solche Stelle nennt man auch eine station\"{a}re Stelle.}
+% \lang{en}{If the first derivative of a function $f$ vanishes at a point $x_0$, then the tangent
+% of the graph at that point is horizontal.
+% Points on the graph of a function where the the tangent line is horizontal are called critical or stationary points.}
+
+\begin{definition}\label{def:krit_pkt}
+	\label{stat}
+	\lang{de}{
+  Eine Stelle $x$, an der $f'(x)=0$ gilt, hei{\ss}t \notion{\emph{kritische}} oder 
+  \notion{\emph{stationäre Stelle}} von $f$. Den dazugeh\"{o}rigen Punkt $(x;f(x))$ auf dem Graphen 
+  nennt man einen \notion{\emph{kritischen}} oder \notion{\emph{station\"{a}ren Punkt}}.
+  }
+	\lang{en}{
+  A point $x$ at which $f'(x)=0$ is called a \textit{critical point} or a \textit{stationary point} 
+  of $f$. We say that $f$ has a critical point at $x$ or at the point $(x,f(x))$.
+  }
+\end{definition}
+
+\begin{example}
+  	\lang{de}{
+    Die Stelle $x=0$ ist eine kritische Stelle der Funktion $f(x)=x^3$, denn $f'(x)=3x^2$ und 
+    $f'(0)=0$. Der kritische Punkt ist $(0, 0)$.
+    \\\\
+  	Die Funktion $g(x)=x^3-3x$ hat die Ableitung $g'(x)=3x^2-3$, also sind wegen $g'(1)=0=g'(-1)$ 
+    die Stellen $x=1$ und $x=-1$ kritische Stellen von $g$. Die kritischen Punkte wären damit 
+    $(1, -2)$ und $(-1, 2)$.
+    }
+   	\lang{en}{
+    The function $f(x)=x^3$ has a critical point at $x=0$, since $f'(x)=3x^2$ and $f'(0)=0$. 
+    The function $g(x)=x^3-3x$ has a first derivative of $g'(x)=3x^2-3$, and since $g'(1)=0=g'(-1)$, 
+    $g$ has critical points at $x=1$ and $x=-1$. The coordinates of these critical points are 
+    $(1, -2)$ and $(-1, 2)$.
+    }
+\end{example}
+
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\number{c}{1}   % einfacher zu rechnen mit c=1 (auf jeden Fall muss c>0 sein.)
+			\randint{ns1}{-2}{0}
+			\randint{ns2}{1}{2}
+			\randint{a}{-3}{3}
+			\function[normalize]{dfak}{c*(x-ns1)*(x-ns2)}
+			\function[expand,normalize]{d}{c*(x-ns1)*(x-ns2)}
+			\function[normalize]{dd}{(c/3)*x^3-(c/2)*(ns1+ns2)*x^2+c*ns1*ns2*x+a}
+		
+		\end{variables}
+		
+			\text{\lang{de}{
+      Bestimmen Sie mit Hilfe der Ableitung den Bereich, in dem die Funktion $f(x)=\var{dd}$ monoton 
+      fällt.\\
+			Sie fällt im Bereich \ansref$\leq x\leq $\ansref.
+      }
+      \lang{en}{
+      By calculating its derivative, determine the interval in which the function $f(x)=\var{dd}$ 
+      decreases monotonically.\\
+      $f$ decreases monotonically on the interval \ansref$\leq x\leq $\ansref.
+      }}
+		
+		\begin{answer}
+			\solution{ns1}
+		\end{answer}
+		\begin{answer}
+			\solution{ns2}
+		\end{answer}
+		\explanation{\lang{de}{
+    Die Funktion fällt in dem Bereich, indem ihre Ableitung $\leq 0$ ist. Wegen 
+		$f'(x)=\var{d}=\var{dfak}$ ist dies der Bereich $\var{ns1}\leq x\leq \var{ns2}$.
+    }
+    \lang{en}{
+    The function decreases monotonically on the interval in which its derivative is $\leq 0$. 
+    As $f'(x)=\var{d}=\var{dfak}$, this interval is $\var{ns1}\leq x\leq \var{ns2}$.
+    }}
+	\end{quickcheck}
+
+
+	\begin{genericGWTVisualization}[550][1000]{mathlet1}
+		\begin{variables}
+			\number[editable]{x0}{real}{1}
+			\point{P}{rational}{var(x0),0}
+			%\pointOnCurve{P}{rational}{0}{1}  % verschiebbarer Punkt auf der x-Achse, initial p=(1;0)
+			%\number{x0}{rational}{var(P)[x]}
+			\number{xc}{rational}{var(x0)}  % nicht editierbare Kopie von x0.
+			\function{f0}{rational}{x^5+x^4-2*x^3-2*x^2+x}
+			\function{f1}{rational}{5*x^4+4*x^3-6*x^2-4*x+1}
+			\number{y0}{rational}{var(x0)^5+var(x0)^4-2*var(x0)^3-2*var(x0)^2+var(x0)}
+			\number{y1}{rational}{5*var(x0)^4+4*var(x0)^3-6*var(x0)^2-4*var(x0)+1}
+			\number{y2}{rational}{20*var(x0)^3+12*var(x0)^2-12*var(x0)-4}
+			\number{y3}{rational}{60*var(x0)^2+24*var(x0)-12}
+			\point{Pc}{rational}{var(P)[x],var(P)[y]}   % Kopien von P zum anzeigen in verschiedenen canvas.
+			\point{Pcc}{rational}{var(P)[x],var(P)[y]}
+			\point{P0}{rational}{var(x0),var(y0)}
+			\point{P1}{rational}{var(x0),var(y1)}
+			\point{P2}{rational}{var(x0),var(y2)}
+%% ---- Tangente an Graph(f) am Punkt P0; funktioniert nicht mit \parametricFunction wegen Variablen in der Definition.
+%			\parametricFunction{Ta}{rational}{var(xc)+t, var(y0)+t*var(y1),-0.3,0.3,60}
+			\point{Q1}{rational}{var(xc)-1/3, var(y0)-1/3*var(y1)}
+			\point{Q2}{rational}{var(xc)+1/3, var(y0)+1/3*var(y1)}
+			\segment{Ta}{rational}{var(Q1),var(Q2)}
+		\end{variables}
+		
+		\color{f0}{#0066CC}
+		%\color{P0}{BLACK}
+		\color{f1}{#00CC00}
+%		\color{P1}{DARK_CYAN}
+		%\color{P1}{#CC6600}  
+ 		\color{Ta}{#CC6600}
+% 		\label{f0}{@2d[$\textcolor{BLUE}{f(x)}$]}
+% 		\label{f1}{@2d[$\textcolor{CYAN}{f'(x)}$]}
+% 		\label{f2}{@2d[$\textcolor{GREEN}{f''(x)}$]}
+
+		\lang{de}{\text{
+    Um $x=\var{x0}$ \IFELSE{|var(y1)|<0.02}{\IFELSE{var(y2)=0}{ist der Graph der Funktion 
+		$f(x)=\var{f0}$ streng monoton \IFELSE{var(y3)<0}{fallend}{steigend}. Hat jedoch im Punkt 
+		$(\var{xc}; \var{y0})$ eine waagrechte Tangente.}{geht 
+		der Graph der Funktion $f(x)=\var{f0}$ vom \IFELSE{var(y2)<0}{Steigen}{Fallen} ins 
+		\IFELSE{var(y2)<0}{Fallen}{Steigen} über und hat im Punkt $(\var{xc}; \var{y0})$ eine waagrechte 
+		Tangente.}}{ist der Graph der Funktion $f(x)=\var{f0}$ streng
+		monoton \IFELSE{var(y1)<0}{fallend}{steigend}.}
+		}}
+    \lang{en}{\text{
+    Around $x=\var{x0}$ \IFELSE{|var(y1)|<0.02}{\IFELSE{var(y2)=0}{the graph of the function 
+		$f(x)=\var{f0}$ is strictly monotonically \IFELSE{var(y3)<0}{decreasing}{increasing} and has a 
+    horizontal tangent at the point $(\var{xc}; \var{y0})$.}{the graph of the function 
+    $f(x)=\var{f0}$ changes from \IFELSE{var(y2)<0}{increasing}{decreasing} to 
+		\IFELSE{var(y2)<0}{decreasing}{increasing} and has a horizontal tangent at the point 
+    $(\var{xc}; \var{y0})$.}}{the graph of the function $f(x)=\var{f0}$ is strictly monotonically 
+		\IFELSE{var(y1)<0}{decreasing}{increasing}.}
+		}}
+    
+		
+		\begin{canvas}
+			\updateOnDrag[false]
+			\plotSize{250,400}
+			\plotLeft{-2.5}
+			\plotRight{2.5}
+			\plot[coordinateSystem]{P, Ta, f0, P0}
+		\end{canvas}
+		\lang{de}{\text{
+    \IFELSE{|var(y1)|<0.02}{\IFELSE{var(y2)=0}{Dass der Graph streng monoton 
+    \IFELSE{var(y3)<0}{fällt}{steigt}, ist gleichbedeutend dazu, dass die Ableitungsfunktion 
+    $f'(x)=\var{f1}$ um $x=\var{xc}$ 
+		\IFELSE{var(y3)<0}{kleiner oder gleich $0$ ist}{größer oder gleich $0$ ist}. Wegen der 
+    waagrechten Tangente im Punkt $(\var{xc}; \var{y0})$ ist die Ableitung an der Stelle 
+    $x=\var{xc}$ sogar gleich $0$, also $f'(\var{xc})=0$.}
+		{Dass der Graph der Funktion $f(x)=\var{f0}$ vom \IFELSE{var(y2)<0}{Steigen}{Fallen} ins 
+		\IFELSE{var(y2)<0}{Fallen}{Steigen} übergeht, ist gleichbedeutend	dazu, dass die 
+    Ableitungsfunktion $f'(x)=\var{f1}$ links von $x=\var{xc}$ 
+    \IFELSE{var(y2)<0}{positiv}{negativ} ist,	und rechts von $x=\var{xc}$ 
+    \IFELSE{var(y2)<0}{negativ}{positiv}.
+		Insbesondere ist die Ableitung an der Stelle $x=\var{xc}$ sogar gleich $0$, also 
+    $f'(\var{xc})=0$.}}
+		{Dass  der Graph der Funktion $f(x)=\var{f0}$ streng monoton \IFELSE{var(y1)<0}{fällt}{steigt}, 
+    ist gleichbedeutend dazu, dass die Ableitungsfunktion $f'(x)=\var{f1}$ um $x=\var{xc}$ 
+		\IFELSE{var(y1)<0}{kleiner}{größer} oder gleich $0$ ist. Hier ist sie sogar echt 
+		\IFELSE{var(y1)<0}{kleiner}{größer} als $0$.}
+		}}
+    \lang{en}{\text{
+    \IFELSE{|var(y1)|<0.02}{\IFELSE{var(y2)=0}{The graph being strictly monotonically 
+    \IFELSE{var(y3)<0}{decreasing}{increasing} is equivalent to the derivative 
+    $f'(x)=\var{f1}$ being \IFELSE{var(y3)<0}{less than}{greater than} or equal to $0$ at 
+    $x=\var{xc}$. By the horizontal tangent at the point $(\var{xc}; \var{y0})$, we know that the 
+    derivative at the point $x=\var{xc}$ is equal to $0$, so $f'(\var{xc})=0$.}
+		{The graph of the function $f(x)=\var{f0}$ changing from 
+    \IFELSE{var(y2)<0}{increasing}{decreasing} to 
+		\IFELSE{var(y2)<0}{decreasing}{increasing} at $x=\var{xc}$ is equivalent to the derivative 
+    $f'(x)=\var{f1}$ being \IFELSE{var(y2)<0}{positive}{negative} to the left of $x=\var{xc}$,	
+    and \IFELSE{var(y2)<0}{negative}{positive} to the right of $x=\var{xc}$.
+		In particular, the derivative at the point $x=\var{xc}$ is equal to $0$, so 
+    $f'(\var{xc})=0$.}}
+		{The graph of the function $f(x)=\var{f0}$ being strictly monotonically 
+    \IFELSE{var(y1)<0}{decreasing}{increasing} is equivalent to the derivative $f'(x)=\var{f1}$ 
+    at $x=\var{xc}$ being
+		\IFELSE{var(y1)<0}{less than}{greater than} or equal to $0$. Here it is in fact 
+		\IFELSE{var(y1)<0}{less than}{greater than} $0$.}
+		}}
+		
+		\begin{canvas}
+			\updateOnDrag[false]
+			\plotSize{250,400}
+			\plotLeft{-2.5}
+			\plotRight{2.5}
+			\plot[coordinateSystem]{Pc, f1, P1}
+		\end{canvas}
+	    	\end{genericGWTVisualization}
+
+
+
+\section{\lang{de}{Extremal-, Minimal-, Maximalstellen}
+         \lang{en}{Extrema, minima and maxima}}\label{Extrema}
+
+ 
+\begin{definition}[\lang{de}{Maximalstellen, lokale Maximalstellen, Minimalstellen, lokale 
+                             Minimalstellen}
+                  \lang{en}{Maxima, local maxima, minima and local minima}] \label{def:extremstellen}
+		\begin{itemize}
+		  \item[(a)]
+		    \lang{de}{
+        Das Argument $x_\max$ im Definitionsbereich $D_f$ heißt
+				\notion{\emph{globale Maximalstelle}} oder kurz \notion{\emph{Maximalstelle}} der Funktion 
+        $f$, falls alle Funktionswerte kleiner oder gleich dem Wert der Funktion an der Stelle 
+        $x_\max$ sind: $f(x_\max) \geq f(x)$ für alle $x \in D_f$.
+        }
+        \lang{en}{
+        A function $f$ is said to have a \emph{global maximum} (plural: maxima) at $x_\max \in D_f$
+				if all of the values of the function are less than or equal to the value of the function at 
+        the point $x=x_\max$, that is, if $f(x_\max) \geq f(x)$ for all $x \in D_f$.
+        }
+		  \item[(b)] 
+		    \lang{de}{
+        $x_\max$ heißt \notion{\emph{lokale Maximalstelle}} von $f$, falls 
+				\notion{\emph{in einer Umgebung}} von $x_\max$ alle Funktionswerte kleiner oder gleich 
+				dem Wert der Funktion an der Stelle $x_\max$ sind oder genauer, wenn $x_\max$ zu einem 
+        offenen Intervall $I$ gehört, so dass $f(x_\max) \geq f(x)$ für alle $x \in D_f \cap I$.
+        }
+        \lang{en}{
+        A function $f$ is said to have a \textit{local maximum} at $x_\max \in D_f$ if, \emph{in a 
+        neighbourhood} around $x_\max$, the values of the function are less than or equal to the 
+        value of the function at the point $x=x_\max$. More precisely, $x_\max$ is a local maximum 
+        if $x_\max$ is an element of an open interval $I$, such that $f(x_\max) \geq f(x)$ for all 
+        $x \in D_f \cap I$.
+        }
+		  \item[(c)]
+        \lang{de}{
+			  Das Argument $x_\min$ im Definitionsbereich $D_f$ heißt \notion{\emph{globale 
+        Minimalstelle}} oder kurz \notion{\emph{Minimalstelle}} der Funktion $f$, falls alle 
+				Funktionswerte größer oder gleich dem Wert der Funktion an der Stelle $x_\min$ sind: 
+				$f(x_\min) \leq f(x)$ für alle $x \in D_f$,
+        }
+        \lang{en}{
+        A function $f$ is said to have a \emph{global minimum} (plural: minima) at $x_\min \in D_f$
+				if all of the values of the function are greater than or equal to the value of the function 
+        at the point $x=x_\min$, that is, if $f(x_\min) \leq f(x)$ for all $x \in D_f$.
+        }
+		  \item[(d)]
+        \lang{de}{
+			  $x_\min$ heißt \notion{\emph{lokale Minimalstelle}} von $f$, falls \emph{in einer Umgebung} 
+        von $x_\min$ alle Funktionswerte größer oder gleich dem Wert der Funktion an der Stelle 
+        $x_\min$ sind oder genauer, wenn $x_\min$ zu einem offenen Intervall $I$ gehört, so dass 
+        $f(x_\min) \leq f(x)$ für alle $x \in D_f \cap I$.
+        }
+        \lang{en}{
+        A function $f$ is said to have a \textit{local minimum} at $x_\min \in D_f$ if, \emph{in a 
+        neighbourhood} around $x_\min$, the values of the function are greater than or equal to the 
+        value of the function at the point $x=x_\min$. More precisely, $x_\min$ is a local minimum 
+        if $x_\min$ is an element of an open interval $I$, such that $f(x_\min) \leq f(x)$ for all 
+        $x \in D_f \cap I$.
+        }
+		  \item[(e)]
+        \lang{de}{
+        Eine lokale (globale) Maximal- oder Minimalstelle bezeichnet man auch als lokale (globale) 
+        \notion{\emph{Extremalstelle}}.
+        }
+        \lang{en}{
+        Local and global maxima and minima are also called extrema (singular: extremum).
+        }
+		  \item[(f)]
+        \lang{de}{
+		  	Die Werte der Funktion $f$ an einer lokalen (globalen) Maximalstelle heißen 
+        \notion{\emph{lokales (globales) Maximum}}. Analog sind die Begriffe  \notion{\emph{lokales 
+        (globales) Minumum}} und \notion{\emph{lokales (globales) Extremum}} definiert.
+        }
+        \lang{en}{
+        If $f$ has a global or local maximum at $x_\max$, the value $f(x_\max)$ is called the global 
+        \textit{maximum} or a local \textit{maximum} or more explicitly the \textit{maximal value} 
+        of $f$. If $f$ has a global or local minimum at $x_\min$, the value $f(x_\min)$ is called 
+        the global \textit{minimum} or a local \textit{minimum} or more explicitly the 
+        \textit{minimal value} of $f$.
+        }
+		  \end{itemize}
+      \lang{de}{
+      \floatright{\href{https://www.hm-kompakt.de/video?watch=521}
+      {\image[75]{00_Videobutton_schwarz}}}\\\\
+      }
+      \lang{en}{}
+	 \end{definition}
+
+
+ \begin{example}
+	\begin{tabs*}[\initialtab{1}\class{example}]
+  
+        \tab{\lang{de}{Beispiel 1:}\lang{en}{Example 1}}
+        \lang{de}{
+        Das globale Minimum der Funktion $f(x) = x^2 + 1$ ist $y=1$. Dies ist der
+			  Funktionswert an der Minimalstelle $x_{\min}=0$. Jeder andere Funktionswert
+			  ist gr"o"ser, da er noch den Summanden $x^2 > 0$ enth"alt.\\
+			  Die Funktion besitzt kein Maximum, da f"ur gro"se $x$-Werte auch die
+			  Funktionswerte beliebig gro"s werden.
+        }
+        \lang{en}{
+        The global minimum of the function $f(x) = x^2 + 1$ is $y=1$. This is the value of the 
+        function at the point $x=x_{\min}=0$. The function is greater than $1$ at every other $x$ 
+        value, because there is still a tern $x^2>0$ in the function.\\
+        The function does not have a maximum, since we can always choose a larger $x$-value to get 
+        an arbitrarily large $f(x)$.
+        }
+        
+		\begin{center}
+		\image{T106_Parabola_B}
+		\end{center}
+	
+        \tab{\lang{de}{Beispiel 2:}\lang{en}{Example 2}}
+        \lang{de}{
+        Die Funktion $f(x) = \sqrt{x}$ besitzt das globale Minimum $y=0$,
+			  das ist der Funktionswert an der Minimalstelle $x_{\min}=0$ dieser Funktion. Die
+			  Funktion hat kein Maximum, da die Quadratwurzelwerte f"ur 
+			  steigendes $x$ beliebig gro"s werden.
+        }
+        \lang{en}{
+        The function $f(x) = \sqrt{x}$ has a global minimum of $y=0$, which is the value of the 
+        function at the point $x=x_{\min}=0$. The function does not have a maximum, since we can 
+        always choose a larger $x$-value to get an arbitrarily large $f(x)$.
+        }
+			 
+		
+		\begin{center}
+		\image{T106_SquareRootFunction}
+		\end{center}
+	
+        \tab{\lang{de}{Beispiel 3:}\lang{en}{Example 3}}
+        \lang{de}{
+        Lineare Funktionen $f(x) = mx + b$ haben keine Extremwerte (weder 
+			  Maxima noch Minima), es sei denn, die Steigung ist $m=0$. Dann ist 
+			  die Funktion konstant, und $b$ ist zugleich Maximum und Minimum der 
+			  Funktion.
+        }
+        \lang{en}{
+        Linear functions $f(x) = mx+b$ have no extreme values (neither minima nor maxima) unless the 
+        slope is equal to zero ($m=0$). If the slope is zero, the function is a constant, and $b$ is 
+        both the maximum and the minimum of the function.
+        }
+			 
+			 
+		\begin{center}
+		\image{T106_LinearFunction_B}
+		\end{center}
+        
+        
+        \tab{\lang{de}{Beispiel 4:}\lang{en}{Example 4}}
+        \lang{de}{
+        Wir betrachten die Funktion $f(x) = x^4 - 2x^2$ auf dem Intervall $ I = (-1, 1,5]$. 
+        Wir setzen die Ableitung $f'(x) = 4x^3 - 4x$ gleich Null und erhalten $x(x^2 -1) = 0$. 
+        Folglich bekommen wir die kritischen Stellen $1$ und $0$. Beachte dabei, dass $-1$ nicht 
+        mehr im Intervall $I$ liegt. Bei Null haben wir ein lokales Maximum mit $f(0) = 0$. 
+        Allerdings ist das kein globales Maximum, da $f(1,5) = \frac{9}{16} \geq f(x)$ für alle 
+        $ x \in I$.
+        }
+        \lang{en}{
+        We consider the function $f(x) = x^4 - 2x^2$ on the interval $ I = (-1, 1,5]$, and set its 
+        derivative $f'(x) = 4x^3 - 4x$ to equal zero, so $x(x^2 -1) = 0$. From this we obtain the 
+        critical points $1$ and $0$. Note that $-1$ does not lie in the interval $I$. At zero there 
+        is a local maximum with $f(0) = 0$. This is not, however, a global maximum, as 
+        $f(1,5) = \frac{9}{16} \geq f(x)$ for all $ x \in I$.
+        }
+        
+        \begin{center}
+        \image{T106_Quartic}
+        \end{center}
+        
+	\end{tabs*}
+\end{example}
+
+% \section{
+% \lang{de}{Globale und lokale Extrema}
+% \lang{en}{Global and Local Extrema}
+% }
+% \lang{de}{In den Anwendungen ist man oft an m\"{o}glichst gro{\ss}en
+% oder kleinen Werten einer Funktion interessiert. Dabei unterscheidet
+% man, ob zum Vergleich alle Werte der Variablen $x$ herangezogen werden
+% (globale Extrema) oder nur benachbarte Werte von $x$ (lokale Extrema).}
+% \lang{en}{In applications, we are often interested in the largest possible or smallest
+% possible values of a function. Here, we differentiate whether the value is being compared to all of the values of the $x$ variable (a global extrema) or only neighbouring values of $x$
+% (local extrema).}
+% \begin{definition}\textit{
+%   \lang{de}{Globale Extrema:}
+%   \lang{en}{Global Extrema:}
+%   }\\
+% 	\lang{de}{Wenn an einer Stelle $x_1$ gilt \[f(x_1)\geq f(x)\]
+% 	für alle $x$ im Definitionsbereich von $f$, dann heißt $x_1$ eine
+% 	\textit{globale Maximalstelle} und der Funktionswert $f(x_1)$ ein
+% 	\textit{globales Maximum} von $f$. }
+% 	\lang{en}{If \[f(x_1)\geq f(x)\] at a given point $x_1$ for all $x$ in the domain of $f$, then $f$ is said to have a \textit{global maximum} at $x_1$. The \textit{global maximum}
+% 	of $f$ is the value of the function at that point, $f(x_1)$.} 
+%   	\\
+%   	\lang{de}{Entsprechend definiert man eine \textit{globale Minimalstelle} $x_2$ und ein 
+% 	\textit{globales Minimum} $f(x_2)$, falls $f(x_2) \leq f(x)$ für alle
+% 	$x$ im Definitionsbereich von $f$ gilt.\\\\
+% 	Globale Maxima und Minima werden zusammen als \textit{globale
+% 	Extrema} bezeichnet.}
+% 	\lang{en}{In a similar fashion, we say that $f$ has a \textit{global minimum} at $x_2$ if $f(x_2) \leq f(x)$ for all $x$ in the domain of $f$. The value $f(x_2)$ is 
+% 	called the \textit{global minimum} of $f$.}
+% \end{definition}
+% 
+% \lang{de}{Es h\"{a}ngt von der Funktion ab, ob sie ein globales Maximum und/oder
+% Minimum hat. $f(x)=x^2,\, x\in\R$ hat ein globales Minimum Null bei
+% $x=0$ aber kein globales Maximum, $x=0$ ist die einzige globale
+% Minimalstelle. $g(x)=\cos(x),\, x\in\R$ hat das globale Maximum $1$ und
+% das globale Minimum $-1$ mit unendlich vielen globalen Maximalstellen
+% $x_k = k\cdot 2\pi,\, k\in\Z$ und Minimalstellen $x_l =\pi + l\cdot 2\pi,\,
+% l\in\Z$. Die Funktion $h(x)=x, \, x\in\R$ hat keine globalen Extrema.
+% 
+% Bei lokalen Extrema lassen wir nur Werte der Variablen $x$ im
+% Definitionsbereich von $f$ zu, deren Abstand von $x_1$ eine (kleine)
+% Schranke $\delta >0$ nicht \"{u}berschreitet: $x_1 -\delta < x <x_1+\delta$.}
+% \lang{en}{Whether a function has a global maximum and/or minimum depends on the function.
+% The function $f(x)=x^2,\, x\in\R$ has a global minimum of zero at $x=0$, but does not have a global maximum. $x^2$ reaches its global minimum at only one point.
+% The function $g(x)=\cos(x),\, x\in\R$ has a global minimum of $1$ and a global minimum of $-1$.
+% The minima exist at points $x_l=\pi + l\cdot 2\pi,\,l\in\Z$ and the maxima exist at points $x_k = k\cdot 2\pi,\, k\in\Z$. Note as well that $\cos(x)$ has
+% infinitely many minima and maxima.
+% The function $h(x)=x, \, x\in\R$ has no global extrema.
+% 
+% At local extrema, we only allow values of the variable $x$ in the domain of $f$ that are in a neighbourhood
+% of the local extrema. If $f$ has a local extremum at $x_1$, then we let $\delta > 0$ be a small 
+% positive difference, and examine the function in the region $x_1 -\delta < x < x_1 + \delta$.}
+% 
+% \begin{definition}\textit{
+%   \lang{de}{Lokale Extrema:}
+%   \lang{en}{Local Extrema:}
+%   }\\
+% 	\lang{de}{Wenn es zu einer Stelle $x_1$ ein $\delta>0$ gibt, so dass f\"{u}r $x$ im
+% 	Definitionsbereich von $f$ gilt 
+% 	\[
+% 	f(x_1)\geq f(x)\quad\text{wenn}\quad x_1 -\delta < x <x_1+\delta, 
+% 	\]
+% 	dann ist $x_1$ eine \textit{lokale Maximalstelle} und $f(x_1)$ ein
+% 	\textit{lokales Maximum} von $f$. \\
+% 	Entsprechend geht man f\"{u}r \textit{lokale Minimalstellen} und \textit{lokale
+% 	Minima} vor.}
+% 	\lang{en}{If at a given point $x_1$ there is a $\delta>0$ such that for all $x$
+% 	in the domain of $f$
+% 	\[
+% 	f(x_1)\geq f(x)\quad\text{for}\quad x_1 -\delta <x<x_1+\delta,
+% 	\]
+% 	then $f$ has a \textit{local maximum} of $f(x_1)$ at $x_1$.
+% 	\textit{Local minima} can be defined in a similar fashion.}
+% 	
+%   	\\
+% 	\image{image-extrema1}
+% \end{definition}
+% 
+% \lang{de}{Jedes globale Extremum ist auch ein lokales Extremum. Die Umkehrung
+% gilt im Allgemeinen nicht, wie das Bild illustriert.
+% 
+% Wenn aus dem Zusammenhang klar ist, ob lokale oder globale Extrema
+% gemeint sind, wird das Adjektiv lokal oder global oft weggelassen.}
+% \lang{en}{Every global extremum is also a local extremum. The converse is in general not true, as the image above illustrates.
+% 
+% If it is clear from the context whether local or global extrema are being referred to, 
+% the adjectives "local" and "global" are often left out.}
+
+\section{
+\lang{de}{Die notwendige Bedingung f\"{u}r lokale Extrema}
+\lang{en}{The necessary condition for local extrema}
+}\label{sec:notw_bedg_lok_extremum}
+
+\begin{block}[info]
+	\lang{de}{
+  Wir setzen jetzt voraus, dass $f$ auf einem \textit{offenen Intervall} $I$ definiert ist (d.h. 
+  $I=\R$, $I=(a;b)$, $I= (a;\infty)$ oder	$I=(-\infty;b)$) und dass $f$ auf $I$ 
+  \textit{differenzierbar} ist.\\
+	Polynome, Sinus, Kosinus, Exponentialfunktion und viele weitere	Funktionen erf\"{u}llen diese 
+  Voraussetzung, sie sind sogar alle zweimal differenzierbar.\\
+	Damit steht uns die Ableitung als effizientes Hilfsmittel zur	Verf\"{u}gung. F\"{u}r Intervalle 
+  mit Randpunkten (z.B. $[a;b]$) siehe Bemerkung am Ende des Unterabschnitts \"{u}ber die 
+  hinreichende Bedingung f\"{u}r lokale Extrema.
+  }
+	\lang{en}{
+  We require in advance that $f$ is defined on an \textit{open interval} $I$, (i.e. $I=\R$, 
+  $I=(a,b)$, $I= (a,\infty)$ or	$I=(-\infty,b)$) and that $f$ is \textit{differentiable} on $I$.\\
+	Polynomials, sine, cosine, exponential functions, and many other functions fulfill these 
+  requirements, and all of these examples given are even twice differentiable.\\
+	With the above conditions fulfilled, the derivative is a very convenient method for writing down 
+  the necessary conditions for local extrema. 
+	For intervals with boundary points (e.g. $[a,b]$) see the note at the end of this section.
+  }
+\end{block}
+
+\lang{de}{
+Wenn $x_1\in I$ eine lokale Maximalstelle ist, dann gilt $f(x_1
++h)\leq f(x_1)$ f\"{u}r alle $h$ mit $-\delta < h < \delta$. Daraus
+folgt, dass die Funktion links von der Maximalstelle ($h<0$) steigt und
+rechts davon ($h>0$) fällt.
+}
+\lang{en}{
+If $f$ has a local maximum at $x_1\in I$, then $f(x_1+h)\leq f(x_1) $ for all $h$ where 
+$-\delta < h < \delta$. From this, it follows that for the function increases on the left ($h<0$) of 
+this point and decreases on the right ($h>0$).
+}
+% \[ \frac{f(x_1+h)-f(x_1)}{h} \geq 0, \quad h<0, \quad\text{\lang{de}{und} \lang{en}{and} }\]
+% \[\frac{f(x_1+h)-f(x_1)}{h} \leq 0, \quad h>0.
+% \phantom{\quad\text{und}} \]
+% \lang{de}{Dann gilt auch:}
+% \lang{en}{In addition:}
+% \[\lim_{h\rightarrow 0-}\frac{f(x+h)-f(x)}{h}\geq 0\;\;\;\text{\lang{de}{und} \lang{en}{and} }\;\;\;\lim_{h\rightarrow 0+}\frac{f(x+h)-f(x)}{h}\leq 0.\]
+% \lang{de}{Der Grenzwert $f'(x_1)$ muss daher sowohl $f'(x_1)\geq 0$
+% als auch  $f'(x_1)\leq 0$ erf\"{u}llen, also ist $f'(x_1)=0$. Die Stelle
+% $x_1$ ist eine station\"{a}re Stelle.\\
+% Geometrisch sind die Sekanten links von der Maximalstelle
+% steigend oder waagerecht und rechts davon fallend oder waagerecht.
+\lang{de}{
+Dann kann die Tangente an der Maximalstelle nur waagerecht sein.\\
+An einer Minimalstelle ist es (mit vertauschten Rollen von rechts und
+links) entsprechend. \\
+Die lokalen Extremalstellen differenzierbarer Funktionen sind
+\textit{kritischen Stellen}, wie sie oben
+definiert wurden.}
+\lang{en}{
+% The limit $f'(x_1)$ satisfies both $f'(x_1)\geq 0$ and $f'(x_1)\leq 0$, from which we can conclude that $f'(x_1)=0$. 
+% The point $x_1$ is a critical point.\\
+% Geometrically, the secants to the left of a maximum are increasing or horizontal, and to the right of that point are 
+% either decreasing or horizontal. Similarly, the secants to the left of a minimum are decreasing or horizontal, and to the right of that point 
+% are either increasing or horizontal. 
+At a local minimum we have the same, with left and right switched.\\
+Hence at minima and maxima the tangent lines must be horizontal.\\
+If a differentiable function $f$ has an extremum at a point $x$, then $x$ is a \textit{critical 
+point} of the function (the derivative of $f$ is zero at $x$).
+}
+
+\begin{theorem}[\lang{de}{Notwendige Bedingung}
+                \lang{en}{A necessary condition for local extrema}]\label{thm:notw_bedg_lok_extremum}
+
+
+
+\label{def:Notwendige_Bedingung}
+
+
+
+  \lang{de}{
+  Sei $f$ auf $(a;b)$ differenzierbar. In einer lokalen Extremalstelle $x\in (a;b)$ von $f$ gilt 
+  notwendig
+  \[f'(x)=0.\]
+  \lang{de}{\floatright{\href{https://www.hm-kompakt.de/video?watch=522}{\image[75]{00_Videobutton_schwarz}}}\\~}
+  }
+  \lang{en}{
+  Let $f$ be differentiable on $(a,b)$. If $f$ has a local extremum at a point $x\in (a,b)$, then
+  \[f'(x)=0\]
+  at that point.
+  }
+  
+\end{theorem}
+
+\begin{example}
+	\begin{enumerate}
+		
+	\item 
+		\lang{de}{
+    Sei $f(x)=\sin(x)$. Da $\sin(x)\leq 1$ ist f\"{u}r alle $x\in \R$ und $\sin(\frac{\pi}{2})=1$, 
+    liegt in $x=\frac{\pi}{2}$ ein lokales Maximum vor. Die Ableitung von $f$ ist $f'(x)=\cos(x)$. 
+    In der lokalen Extremalstelle $\frac{\pi}{2}$ gilt $\cos (\frac{\pi}{2})=0$.
+    }
+	  \lang{en}{
+    Let $f(x)=\sin(x)$. Because $\sin(x)\leq 1$ for all $x\in\R$ and $\sin(\frac{\pi}{2})=1$, the 
+    point $x=\frac{\pi}{2}$ is a local maximum.	The derivative of $f$ is $f'(x)=\cos(x)$. At the 
+    local extremum $x=\frac{\pi}{2}$, $f'(\frac{\pi}{2})=\cos(\frac{\pi}{2})=0$.
+    } %Surely this is a global maximum too - Niccolo
+  \item 
+		\lang{de}{
+    F\"{u}r die Funktion $f(x)=x^3$ mit $f'(x) = 3x^2$ ist $x=0$ eine
+		kritische Stelle, aber keine Extremalstelle, denn $f(x)>0$ f\"{u}r alle
+		$x>0$ und $f(x)<0$ für alle  $x<0$. Die kritischen Stellen - die
+		Nullstellen der Ableitung - sind nur Kandidaten für Extremalstellen. Ob
+		eine kritische Stelle eine Extremalstelle ist und ob sie dann eine
+		Minimal- oder Maximalstelle ist, erfordert weitere Untersuchungen.
+    }
+    \lang{en}{
+    If $f(x)=x^3$, then $f'(x)=3x^2$ and $x=0$ is a critical point. However, there is no extremum 
+    there, since $f(x)>0$ for all $x>0$ and $f(x)<0$ for all $x<0$. The critical points - the roots 
+    of the derivative - are only candidates for points at which extrema can exist. Whether or not
+		a critical point is indeed an extremum, and then whether it is a minimum or maximum, needs to be 
+    investigated further.
+		}
+		
+	\end{enumerate}
+\end{example}
+
+ \begin{quickcheckcontainer}
+\randomquickcheckpool{1}{1}
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{k}{1}{2}  % Vorzeichen des höchsten Koeff (-1)^k
+			\randint{l}{1}{2}  % Vorzeichen der Extremstelle: (-1)^(l+1)
+			\function[calculate]{l1}{2-l}  % Dirac-Funktionen
+			\function[calculate]{l2}{l-1}
+			
+			\randint{a}{1}{3}
+			\randint{b}{1}{4}
+			\randint{c}{-4}{4}
+		    \function[expand,normalize]{f}{(-1)^k*(a*x^4+(-1)^l*b*x^3+c)}
+		    \number{n1}{0}
+			\function[calculate]{n2}{(-1)^(l+1)*3*b/(4*a)}
+			\function[calculate]{ns1}{l1*n1+l2*n2}
+			\function[calculate]{ns2}{l1*n2+l2*n1}
+
+		    \function[expand,normalize]{df}{(-1)^k*(4*a*x^3+3*(-1)^l*b*x^2)}
+			\function[expand,normalize]{lin}{4*a*x+3*(-1)^l*b}
+			\function[normalize]{x2}{(-1)^k*x^2}
+			\function[calculate]{vz}{(-1)^(l+1)}
+			\function[calculate]{zae}{3*b}
+			\function[calculate]{nen}{4*a}
+
+		\end{variables}
+		
+			\text{\lang{de}{
+      Bestimmen Sie mögliche lokale Extremstellen der Funktion $f(x)=\var{f}$, indem Sie
+			die Nullstellen ihrer Ableitungsfunktion bestimmen.\\
+			Die möglichen Extremstellen sind (in aufsteigender Reihenfolge): \ansref und \ansref.
+      }
+      \lang{en}{
+      Determine the possible points at which extrema of the function $f(x)=\var{f}$ may lie, by 
+      determining the  roots of its derivative.\\
+      The candidates for points at which extrema lie are (in increasing order): \ansref and \ansref.
+      }}
+		
+		\begin{answer}
+			\solution{ns1}
+		\end{answer}
+		\begin{answer}
+			\solution{ns2}
+		\end{answer}
+		\explanation{\lang{de}{
+    Die Ableitung von $f$ ist $f'(x)=\var{df}=\var{x2}\cdot (\var{lin})$.\\
+		Die Ableitung hat also die doppelte Nullstelle $x=0$ und die Nullstelle $x=\var{n2}$.		
+		}
+    \lang{en}{
+    The derivative of $f$ is $f'(x)=\var{df}=\var{x2}\cdot (\var{lin})$.\\
+    This has the repeated root $x=0$ and the root $x=\var{n2}$.
+    }}
+	\end{quickcheck}
+\end{quickcheckcontainer}
+
+
+\section{
+\lang{de}{Hinreichende Bedingungen f\"{u}r lokale Extrema}
+\lang{en}{Sufficient conditions for local extrema}
+}\label{sec:hinr_bedg_lok_extremum}
+\lang{de}{
+      Oben haben wir gesehen, wie das Vorzeichen von $f'$
+      das Monotonieverhalten von $f$ beeinflusst.  Angenommen, $f'$
+      wechselt in $x_1$ das Vorzeichen von positiv zu negativ. Dann
+      steigt $f$ links von $x_1$ und f\"{a}llt rechts von $x_1$.
+      Folglich muss in $x_1$ ein lokales Maximum vorliegen. Ist die 
+      Ableitung links von $x_2$ negativ und rechts von $x_2$ positiv, so ist
+      $x_2$ eine Minimalstelle. Es gen\"{u}gt wieder, nur benachbarte $x$
+      mit $x_1 -h < x <x_1+h$ etc. für ein kleines
+      $h>0$ zu betrachten.
+      }
+\lang{en}{
+In the paragraph above we saw how the sign of $f'$ influences the monotonicity of $f$. Assume that 
+$f'$ changes sign at $x_1$ from positive to negative. Then $f$ increases to the left of $x_1$ and 
+decreases to the right of $x_1$. It follows that $f$ must have a local maximum at $x_1$. If the 
+derivative to the left of $x_2$ is negative and positive to the right	of $x_2$, then $f$ has a 
+minimum at $x_2$. When doing this analysis, it suffices to only look at neighbouring $x$-values, 
+i.e. $x_1 -h < x <x_1+h$ for some small $h>0$. 
+}
+
+\begin{theorem}[\lang{de}{Hinreichende Bedingung f\"{u}r lokale Minima und Maxima}
+                \lang{en}{A sufficient condition for local minima and maxima}]
+  \lang{de}{
+    Sei $f$ auf dem offenen Intervall $I$ differenzierbar und
+    $f'(x_0)=0$.
+    Wenn f\"{u}r ein $h>0$ gilt:\\\\
+    $f'(x)>0$ für $x_0-h < x < x_0$ und $f'(x)<0$ f\"{u}r $x_0<x<x_0
+    +h$, dann ist $x_0$ eine lokale \emph{Maximalstelle} von $f$,\\
+    $f'(x)<0$ f\"{u}r $x_0-h < x < x_0$ und $f'(x)>0$ f\"{u}r $x_0<x<x_0
+    +h$, dann ist $x_0$ eine lokale \emph{Minimalstelle} von $f$.
+    }
+    \lang{en}{
+    Let $f$ be differentiable on an open interval $I$, let $f'(x_0)=0$, and let $\delta>0$.
+    If $f'(x)>0$ for $x_0-h < x < x_0$ and $f'(x)<0$ for $x_0<x<x_0
+    +h$, then $f$ has a local \emph{maximum} at $x_0$. \\
+    If $f'(x)<0$ for $x_0-h < x < x_0$ and $f'(x)>0$ for $x_0<x<x_0
+    +h$ then $f$ has a local \emph{minimum} at $x_0$.
+    }
+\end{theorem}
+
+\begin{example}
+  	\lang{de}{
+    Sei $f(x)=e^{-x^2}$. Dann ist $f'(x)=-2xe^{-x^2}$. Da $e^{-x^2}>0$ f\"{u}r alle $x\in\R$ ist, 
+    ist $0$ die einzige Nullstelle von $f'(x)$. In $0$ wechselt $f'$ zudem das Vorzeichen von 
+    positiv zu negativ. Also liegt in $0$ eine Maximalstelle von $f$ vor.
+    }
+  	\lang{en}{
+    Let $f(x)=e^{-x^2}$, and hence $f'(x)=-2xe^{-x^2}$. Because $e^{-x^2}>0$ for all $x\in\R$, $x=0$ 
+    is the only root of $f'(x)$. At $x=0$ the sign of $f'$ changes from positive to negative, hence 
+    $f$ has a maximum at $x=0$.
+    }
+\end{example}
+
+
+\lang{de}{
+      Ein Wechsel der
+      Ableitung nahe bei einer kritischen Stelle von positiven zu
+      negativen Werten bedeutet, dass $f'(x)$ dort streng monoton
+      fallend ist. Das ist sicher dann der Fall, wenn die Ableitung
+      der Ableitung, also die zweite Ableitung von $f$ negativ ist.\\
+      Wir setzen deshalb jetzt voraus, dass $f$ auf dem Intervall $I$
+      nicht nur differenzierbar, sondern 
+      \ref[content_23_kurvendiskussion][zweimal differenzierbar]{def:zweimaldiffbar} 
+      ist. F\"{u}r fast alle unserer Beispielfunktionen ist das
+      erf\"{u}llt.
+      }
+      \lang{en}{
+      A change in the derivative near a critical point from positive values to negative values 
+      clearly means that $f'(x)$ is strictly monotonically decreasing in that neighbourhood. That is 
+      certainly the case when the derivative of the derivative (the second derivative) is negative.\\
+      We now require that $f$ is not only differentiable on an interval $I$, but 
+      \ref[content_23_kurvendiskussion][twice differentiable]{def:zweimaldiffbar}. For almost 
+      all of our example functions, this condition is satisfied.
+      }
+
+\begin{theorem}[\lang{de}{Hinreichende Bedingung f\"{u}r lokale Minima und Maxima}
+                \lang{en}{A sufficient condition for local minima and maxima}]
+ \label{def:HinreichendeBedingung}
+	\lang{de}{
+  Sei $f$ auf dem offenen Intervall $I$ zweimal differenzierbar und $f'(x_0)=0$. \\
+	Ist $f''(x_0)<0$, so ist $x_0$ eine lokale Maximalstelle von $f$.\\
+	Ist $f''(x_0)>0$, so ist $x_0$ eine lokale Minimalstelle von $f$.
+  }
+	\lang{en}{
+  Let $f$ be twice differentiable on the open interval $I$ and let $f'(x_0)=0$.\\
+	If $f''(x_0)<0$ then $f$ has a local maximum at $x_0$.\\
+	If $f''(x_0)>0$ then $f$ has a local minimum at $x_0$.
+  }
+\end{theorem}
+
+\lang{de}{
+Die beiden hinreichenden Bedingungen für lokale Extremstellen werden in den folgenden Videos 
+veranschaulicht.
+\\
+\floatright{
+\href{https://www.hm-kompakt.de/video?watch=523}{\image[75]{00_Videobutton_schwarz}}
+\href{https://www.hm-kompakt.de/video?watch=524}{\image[75]{00_Videobutton_schwarz}}
+}
+\\\\
+%\end{center}
+Mittels \ref[content_03_hoehere_ableitungen][höherer Ableitungen]{def:höhere_Ableitungen} lassen sich obige Sätze auch folgendermaßen formulieren und zusammenfassen:
+}
+\lang{en}{
+Using \ref[content_03_hoehere_ableitungen][higher derivatives]{def:höhere_Ableitungen} we can 
+summarise the above theorems.
+}
+
+\begin{theorem}
+\label{def:Extrema}
+\lang{de}{
+Sei $n \in \N$, $n \leq 2$, $f$ sei auf $I$ $n$-mal differenzierbar und $x_0 \in I$ sei ein innerer Punkt. Weiter gelte:
+$f'(x_0) = f''(x_0) = ... = f^{(n-1)}(x_0) = 0$ und $f^{(n)}(x_0) \neq 0$. Dann gilt:
+\\\\
+Ist $n$ gerade und $f^{(n)}(x_0) > 0$, so ist $x_0$ eine lokale Maximalstelle.
+\\\\
+Ist $n$ gerade und $f^{(n)}(x_0) < 0$, so ist $x_0$ eine lokale Minimalstelle.
+\\\\
+Ist $n$ ungerade, so hat $f$ in $x_0$ keine lokale Extremstelle.
+}
+\lang{en}{
+Let $n \in \N$, $n \leq 2$. Suppose $f$ is $n$-times differentiable on $I$ and let $x_0 \in I$ be 
+a point inside the interval, with $f'(x_0) = f''(x_0) = ... = f^{(n-1)}(x_0) = 0$ and $f^{(n)}(x_0) 
+\neq 0$. Then we have:
+\\\\
+If $n$ is even and $f^{(n)}(x_0) > 0$, then $x_0$ is a local maximum.
+\\\\
+If $n$ is even and $f^{(n)}(x_0) < 0$, then $x_0$ is a local minimum.
+\\\\
+If $n$ is odd, then $f$ has neither a maximum nor a minimum at $x_0$.
+}
+
+\end{theorem}
+
+\begin{remark}[\lang{de}{Erg\"{a}nzende Bemerkung} \lang{en}{Expanded note}]
+\begin{incremental}[\initialsteps{0}]
+\step
+  \lang{de}{
+  Die Bedingungen in den letzten beiden Sätzen \ref{def:Extrema} und \ref{def:HinreichendeBedingung} 
+  sind \textit{hinreichend} für das Vorliegen von lokalen Maxima bzw.	Minima, d.h. die Existenz 
+  lokaler Extrema folgt aus diesen Voraussetzungen. Diese	Bedingungen sind jedoch \textit{nicht 
+  notwendig}: es gibt Funktionen, die lokale Extrema haben, obwohl eine der Voraussetzungen nicht 
+  erf\"{u}llt ist (z.B. die Funktion $f(x)=x^4$, die bei $x=0$ ein Minimum hat, obwohl $f''(0) =0$ 
+  nicht	positiv ist).\\
+  Andererseits ist f\"{u}r ein Extremum einer in einem offenen Intervall (keine Randpunkte!)  
+	differenzierbaren Funktion \textit{notwendig}, dass die Ableitung eine Nullstelle hat 
+  \ref{def:Notwendige_Bedingung}. Wenn $f'(x_0)\neq 0$, ist $x_0$ sicher keine Extremstelle.
+  }
+	\lang{en}{
+  The conditions in theorems \ref{def:Extrema} and \ref{def:HinreichendeBedingung} are 
+  \textit{sufficient} conditions for a function to have	a local maximum or minimum, i.e. the 
+  existence of local extrema follows from these requirements. These conditions are however 
+  \textit{not necessary}: there are functions that have local extrema that do not satisfy these 
+  conditions. For example, the function $f(x)=x^4$ has a minimum at $x=0$, even though $f''(0)=0$ is 
+  not positive.\\
+	On the other hand, it is \textit{necessary} an extremum of a function $f$ at a point $x_0$ in an 
+  open interval to satisfy $f'(x_0)=0$ by \ref{def:Notwendige_Bedingung}. Equivalently, if 
+  $f'(x_0)\neq 0$, then the function definitely has no extremum at $x_0$. This result is not true 
+  for closed intervals!
+  }
+\end{incremental}
+\end{remark}
+
+\begin{example}
+	\begin{enumerate}	
+  \item 
+    \lang{de}{
+	    Sei $f(x)=-2x^3+3x^2$. Dann ist $f'(x)=-6x^2+6x=-6x(x-1)$. Kritische Stellen sind also $x=0$ 
+      und $x=1$. $f'$ besitzt einen Vorzeichenwechsel in $0$ von negativ zu positiv und einen 
+      Vorzeichenwechsel in $1$ von positiv zu negativ. Also liegt nach 
+      \ref{def:HinreichendeBedingung} in $0$ ein lokales Minimum und in $1$ ein lokales Maximum 
+      vor.
+    }
+  	\lang{en}{
+      Let $f(x)=-2x^3+3x^2$, and hence $f'(x)=-6x^2+6x=-6x(x-1)$. Note that $f$ has critical 
+      points at $x=0$ and $x=1$. $f'$ changes sign at	$x=0$ from negative to positive, and changes 
+      sign at $x=1$ from positive to negative. According to theorem 
+      \ref{def:HinreichendeBedingung}, $f$ has a local minimum at $x=0$	and a local maximum at 
+      $x=1$.
+    }
+
+	\item 
+		\lang{de}{
+      Sei wieder $f(x)=-2x^3+3x^2$ mit $f'(x)=-6x^2+6x=-6x(x-1)$ und den kritischen Stellen $0$ und 
+      $1$. Nun soll Satz 7.7 zur Untersuchung auf Extremalstellen angewendet werden. Es ist 
+      $f''(x)=-12x+6$, damit $f''(0)=6>0$ und $f''(1)=-6<0$. Nach \ref{def:Extrema} liegt also in 
+      $0$ ein lokales Minimum und in $1$ ein lokales Maximum vor.
+      }
+  	\lang{en}{
+      Let $f(x)=-2x^3+3x^2$ again, where $f'(x)=-6x^2+6x=-6x(x-1)$ with critical points $x=0$ and 
+      $x=1$. This time, theorem 7.7 will be used to investigate the points at which $f$ has an 
+      extrema. Note that $f''(x)=-12x+6$, and with that: $f''(0)=6>0$ and $f''(1)=-6<0$. As per 
+      \ref{def:Extrema}, $f$ has a local minimum at $x=0$ and a local maximum at $x=1$.
+      }
+
+	\item 
+		\lang{de}{
+      Sei $f(x)=1-(x+2)^4$. Dann ist $f'(x)=-4(x+2)^3$. Die einzige kritische Stelle ist $x=-2$. 
+      Offensichtlich wechselt $f'$ in $-2$ das Vorzeichen von positiv zu negativ. Damit liegt in 
+      $-2$ ein lokales Maximum vor.\\
+  		Da $f''(x)=-12(x+2)^2$, ist $f''(-2)=0$. Mit Hilfe von Satz \ref{def:Extrema} kann man also 
+      bei dieser Funktion keine Aussage \"{u}ber Extremalstellen treffen.\\
+  		Eine M\"{o}glichkeit, sofort und ohne Differenzialrechnung die Extrema dieser Funktion zu 
+      bestimmen, ist die Betrachtung der Funktionswerte. Es ist $f(-2)=1$ und $f(x)\leq 1$ f\"{u}r 
+      alle $x\in\R$. Damit liegt in $-2$ sogar ein globales Maximum vor.
+      }
+  		\lang{en}{
+      Let $f(x)=1-(x+2)^4$ and hence $f'(x)=-4(x+2)^3$. The only critical point is at $x=-2$. 
+      Obviously $f'$ changes sign at $x=-2$ from positive to negative, hence $f$ has a local maximum 
+      at $x=-2$.\\
+  		Because $f''(x)=-12(x+2)^2$, $f''(-2)=0$. According to theorem \ref{def:Extrema}, nothing can 
+      be said about the extrema of the function based off of this information.\\
+  		One way of finding the extrema of this function without using differential calculus is to 
+      consider the values of the function near the point $x=-2$. $f(-2)=1$ and $f(x)\leq 1$ for all 
+      $x\in\R$, hence $f$ has a global maximum at $x=-2$.
+      }
+	\end{enumerate}
+\end{example}
+
+\lang{de}{In folgender Tabelle sind hinreichende Bedingungen f\"{u}r lokale Extrema zusammengefasst:}
+\lang{en}{The following table has a summarised list of sufficient conditions for local extrema:}
+
+\begin{block}[info]
+\begin{align}
+  f' \;\text{   
+    \lang{de}{wechselt in}  
+    \lang{en}{changes sign at} }
+    \; x_1 \;\text{
+    \lang{de}{das Vorzeichen von pos. zu neg.}
+    \lang{en}{from positive to negative}
+    }&\Rightarrow &\text{
+    \lang{de}{lokales Maximum in}
+    \lang{en}{local maximum at}
+    }\; x_1\\
+  f' \;\text{ 
+   \lang{de}{wechselt in} 
+    \lang{en}{changes sign at} }
+    \; x_2 \;\text{
+    \lang{de}{das Vorzeichen von neg. zu pos.}
+    \lang{en}{from negative to positive}}
+    &\Rightarrow &\text{
+    \lang{de}{lokales Minimum in}
+    \lang{en}{local minimum at}}
+    \; x_2\\
+\end{align}
+
+  \lang{de}{oder alternativ}
+  \lang{en}{or alternatively}
+\begin{align}
+  f'(x_1)=0 \;\text{  \lang{de}{und} \lang{en}{and} }\; f''(x_1)<0 \:&\Rightarrow& 
+    \text{ \lang{de}{lokales Maximum in} \lang{en}{local maximum at} }\; x_1\\
+  f'(x_2)=0 \;\text{  \lang{de}{und} \lang{en}{and} }\; f''(x_2)>0 \:&\Rightarrow&
+    \text{ \lang{de}{lokales Minimum in} \lang{en}{local minimum at} }\; x_2.\\
+\end{align}
+\end{block}
+
+ \begin{quickcheckcontainer}
+\randomquickcheckpool{1}{2}
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\number{k}{1}
+%			\randint{k}{1}{2}  % Vorzeichen des höchsten Koeff (-1)^k
+			\randint{l}{1}{2}  % Vorzeichen der Extremstelle: (-1)^(l+1)
+			\function[calculate]{l1}{2-l}  % Dirac-Funktionen
+			\function[calculate]{l2}{l-1}
+			
+			\randint{a}{1}{3}
+			\randint{b}{1}{4}
+			\randint{c}{-4}{4}
+		    \function[normalize]{f}{(-1)^k*(a*x^4+(-1)^l*b*x^3+c)}
+		    \number{n1}{0}
+			\function[calculate]{n2}{(-1)^(l+1)*3*b/(4*a)}
+			
+			\function[calculate]{ns1}{l1*n1+l2*n2}
+			\function[calculate]{ns2}{l1*n2+l2*n1}
+			
+			\function[expand,normalize]{df}{(-1)^k*(4*a*x^3+3*(-1)^l*b*x^2)}
+			\function[expand,normalize]{lin}{4*a*x+3*(-1)^l*b}
+			\function[normalize]{x2}{(-1)^k*x^2}
+% 			\function[calculate]{vz}{(-1)^(l+1)}
+% 			\function[calculate]{zae}{3*b}
+% 			\function[calculate]{nen}{4*a}
+		\end{variables}
+		
+			\text{\lang{de}{
+      Bestimmen Sie mögliche lokale Extremstellen der Funktion $f(x)=\var{f}$, indem Sie
+			die Nullstellen ihrer Ableitungsfunktion bestimmen.\\
+			Die möglichen lokalen Extremstellen sind (in aufsteigender Reihenfolge): \ansref und \ansref.\\
+			Von diesen beiden Stellen, ist nur die Stelle \ansref tatsächlich eine lokale Extremstelle.\\
+			Hat $f$ dort (1) ein Maximum oder (2) ein Minimum? \ansref
+      }
+      \lang{en}{
+      Determine the possible points at which there are local extrema of the function $f(x)=\var{f}$ 
+      by finding the roots of the derivative of $f$.\\
+      The possible points with local extrema are (in increasing order): \ansref und \ansref.\\
+      Out of these two points, there is only an actual extremum at \ansref.\\
+      Does $f$ have a (1) maximum or a (2) minimum? \ansref
+      }}
+		
+		\begin{answer}
+			\solution{ns1}
+		\end{answer}
+		\begin{answer}
+			\solution{ns2}
+		\end{answer}
+		\begin{answer}
+			\solution{n2}
+		\end{answer}
+		\begin{answer}
+			\solution{k}
+		\end{answer}
+		\explanation{\lang{de}{
+    Die Ableitung von $f$ ist $f'(x)=\var{df}=\var{x2}\cdot (\var{lin})$.\\
+		Die Funktion hat also die möglichen lokalen Extremstellen $x=0$ und $x=\var{n2}$.\\
+		Bei $x=\var{n2}$ wechselt die Ableitung ihr Vorzeichen von positiv nach negativ, die
+		Funktion $f$ hat dort also ein Maximum. Um $x=0$ bleibt das Vorzeichen der Ableitung
+		das gleiche. Dort hat $f$ also kein lokales Extremum.
+    }
+    \lang{en}{
+    The derivative of $f$ is $f'(x)=\var{df}=\var{x2}\cdot (\var{lin})$.\\
+    The function hence possibly has local extrema at $x=0$ and $x=\var{n2}$.\\
+    At $x=\var{n2}$ the derivative changes from positive to negative, so $f$ has a maximum there. 
+    To both sides of $x=0$ the sign of the derivative is the same, so $f$ has no local extremum 
+    there.
+    }}
+	\end{quickcheck}
+	
+	\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\number{k}{2}
+%			\randint{k}{1}{2}  % Vorzeichen des höchsten Koeff (-1)^k
+			\randint{l}{1}{2}  % Vorzeichen der Extremstelle: (-1)^(l+1)
+			\function[calculate]{l1}{2-l}  % Dirac-Funktionen
+			\function[calculate]{l2}{l-1}
+			
+			\randint{a}{1}{3}
+			\randint{b}{1}{4}
+			\randint{c}{-4}{4}
+		    \function[normalize]{f}{(-1)^k*(a*x^4+(-1)^l*b*x^3+c)}
+		    \number{n1}{0}
+			\function[calculate]{n2}{(-1)^(l+1)*3*b/(4*a)}
+			
+			\function[calculate]{ns1}{l1*n1+l2*n2}
+			\function[calculate]{ns2}{l1*n2+l2*n1}
+			
+			\function[expand,normalize]{df}{(-1)^k*(4*a*x^3+3*(-1)^l*b*x^2)}
+			\function[expand,normalize]{lin}{4*a*x+3*(-1)^l*b}
+			\function[normalize]{x2}{(-1)^k*x^2}
+% 			\function[calculate]{vz}{(-1)^(l+1)}
+% 			\function[calculate]{zae}{3*b}
+% 			\function[calculate]{nen}{4*a}
+		\end{variables}
+		
+			\text{\lang{de}{
+      Bestimmen Sie mögliche lokale Extremstellen der Funktion $f(x)=\var{f}$, indem Sie
+			die Nullstellen ihrer Ableitungsfunktion bestimmen.\\
+			Die möglichen lokalen Extremstellen sind (in aufsteigender Reihenfolge): \ansref und \ansref.\\
+			Von diesen beiden Stellen, ist nur die Stelle \ansref tatsächlich eine lokale Extremstelle.\\
+			Hat $f$ dort (1) ein Maximum oder (2) ein Minimum? \ansref
+      }
+      \lang{en}{
+      Determine the possible points at which there are local extrema of the function $f(x)=\var{f}$ 
+      by finding the roots of the derivative of $f$.\\
+      The possible points with local extrema are (in increasing order): \ansref und \ansref.\\
+      Out of these two points, there is only an actual extremum at \ansref.\\
+      Does $f$ have a (1) maximum or a (2) minimum? \ansref
+      }}
+		
+		\begin{answer}
+			\solution{ns1}
+		\end{answer}
+		\begin{answer}
+			\solution{ns2}
+		\end{answer}
+		\begin{answer}
+			\solution{n2}
+		\end{answer}
+		\begin{answer}
+			\solution{k}
+		\end{answer}
+		\explanation{\lang{de}{
+    Die Ableitung von $f$ ist $f'(x)=\var{df}=\var{x2}\cdot (\var{lin})$.\\
+		Die Ableitung hat also die möglichen Extremstellen $x=0$ und $x=\var{n2}$.\\
+		Bei $x=\var{n2}$ wechselt die Ableitung ihr Vorzeichen von negativ nach positiv, die
+		Funktion $f$ hat dort also ein Minimum. Um $x=0$ bleibt das Vorzeichen der Ableitung
+		das gleiche. Dort hat $f$ also kein Extremum.
+    }
+    \lang{en}{
+    The derivative of $f$ is $f'(x)=\var{df}=\var{x2}\cdot (\var{lin})$.\\
+    The function hence possibly has local extrema at $x=0$ and $x=\var{n2}$.\\
+    At $x=\var{n2}$ the derivative changes from negative to positive, so $f$ has a minimum there. 
+    To both sides of $x=0$ the sign of the derivative is the same, so $f$ has no local extremum 
+    there.
+    }}
+	\end{quickcheck}		
+\end{quickcheckcontainer}
+
+\begin{remark}[\lang{de}{Erg\"{a}nzende Bemerkung zu Extrema auf Intervallen mit Randpunkten}
+               \lang{en}{Expanded note on extrema in intervals with boundary points}]
+\begin{incremental}[\initialsteps{1}]
+\step
+\lang{de}{
+Mitunter m\"{u}ssen auch Extrema einer Funktion $f$ bestimmt werden, die auf einem Intervall mit 
+Randpunkten definiert ist. Wie man dann vorzugehen hat, soll an folgendem Beispiel erl\"{a}utert 
+werden.
+}
+\lang{en}{
+Sometimes the extrema of a function $f$ need to be determined on an interval that includes its 
+boundary points. This case will be examined below.
+}
+\step
+\lang{de}{
+Sei $f(x)=x^2$ auf dem Intervall $[-1;2]$. Um alle lokalen und globalen Extremalstellen zu 
+bestimmen, bestimmt man zun\"{a}chst alle lokalen Extremalstellen. Ein lokales Extremum kann in 
+$-1$, $2$ oder dem Intervall $(-1;2)$ liegen. Da das Intervall $(-1;2)$ offen ist, kann man dort 
+alle lokalen Extrema mit Hilfe der ersten Ableitung bestimmen. Aus $f'(x)=2x$ folgt die einzige 
+kritische Stelle $x=0$. Aus $f''(x)=2$ folgt $f''(0)=2>0$, und damit liegt in $0$ eine lokale 
+Minimalstelle von $f$ auf dem Intervall $(-1;2)$ und damit auch auf dem Intervall $[-1;2]$ vor.
+}
+\lang{en}{
+Let $f(x)=x^2$ on the interval $[-1,2]$. In order to find all the local and global extrema, we first 
+need to find all of the local extrema. A local extremum can be at $-1$, $2$, or on the interval 
+$(-1,2)$. Because the interval $(-1,2)$ is open, the local extrema on that interval can be found 
+with the help of the first derivative. From the fact that $f'(x)=2x$, the only critical point is 
+$x=0$. Because $f''(x)=2$, it follows that $f''(0)=2>0$, and hence there is a local minimum of $f$ 
+at $x=0$.
+}
+\step
+\lang{de}{
+Nun muss noch untersucht werden, ob an den Stellen $-1$ und $2$ lokale Extrema vorliegen. 
+Da $f$ auf $[-1;0)$ streng monoton fallend ist, liegt in $-1$ ein lokales Maximum vor. Da $f$ auf 
+$(0;2]$ streng monoton wachsend ist, liegt in $2$ ein lokales Maximum vor. Hier kann man also mit 
+dem Monotonieverhalten von $f$ auf das Vorliegen von Extremalstellen schlie{\ss}en - da $-1$ und $2$ 
+jeweils an einem Randpunkt des Definitionsbereiches von $f$ liegen, kann man hier auch gar nicht mit 
+den oben erlernten Methoden argumentieren.
+}
+\lang{en}{
+Now, we need to determine whether $f$ has local extrema at the points $x=-1$ and $x=2$. Because $f$ 
+is strictly monotonically decreasing on $[-1,0)$, there is a local maximum at $-1$. Because $f$ is 
+strictly monotonically increasing on $(0,2]$, $f$ has a local maximum at $x=2$. Here, we can also 
+use the monotonicity of $f$ to prove the existence of local extrema - because $x=-1$ and $x=2$ are 
+the boundary points of the domain of $f$, we cannot argue using the above method.
+}
+\step
+\lang{de}{
+Will man nun noch bestimmen, was das globale Maximum und was das globale Minimum ist, so bildet man 
+die Funktionswerte an den entsprechenden lokalen Extremalstellen und vergleicht diese dann 
+miteinander. Diese Vorgehensweise f\"{u}hrt hier zum Erfolg, da auf abgeschlossenen Intervallen die 
+globalen Extrema stets angenommen werden, und da zudem jedes globale Extremum ein lokales Extremum 
+ist.\\
+Lokale Maximalstellen sind $-1$ und $2$. $f$ hat dort die Funktionswerte $f(-1)=1$ und $f(2)=4$. Da 
+$f(2)=4>1=f(-1)$, liegt in $2$ das globale Maximum $4$ vor. Da es nur die lokale Minimalstelle $0$ 
+gibt, ist $0$ auch die globale Minimalstelle, und das globale Minimum ist $f(0)=0$.
+}
+\lang{en}{
+If we now want to find the global maximum and global minimum, we compare the value of the function 
+at each of the corresponding local extrema. This method is successful only because on closed 
+intervals, the global extrema will always exist; every global extremum is also a local 
+extremum.\\
+The points at $x=-1$ and $x=2$ are both local maxima; $f$ takes on the values $f(-1)=1$ and $f(2)=4$ 
+there. Because $f(2)=4>1=f(-1)$, $f$ has its global maximum of $4$ at $x=2$. Because there is only 
+one local minimum, namely at $x=0$, this is also the global minimum of $f$, $f(0)=0$.
+}
+\step
+\lang{de}{
+Ver\"{a}ndert man die Aufgabenstellung leicht, indem man die Funktion $f(x)=x^2$ auf dem Intervall 
+$(-\infty;2]$ betrachtet, so muss man etwas anders argumentieren. Die einzige kritische Stelle von 
+$f$ auf $(-\infty;2)$ ist wieder die $0$, und dort liegt ein lokales Minimum vor. Man macht sich 
+leicht klar, dass dieses auch das globale Minimum sein muss, denn $f(x)$ nimmt stets Werte $\geq 0$ 
+an, und $f(0)=0$.\\
+In $2$ liegt wieder ein lokales Maximum vor, da die Funktion auf $(0;2]$ streng monoton steigt. Dies 
+ist jedoch kein globales Maximum, da z.B. $f(-3)=9>4=f(2)$ ist. Die Funktion hat auf diesem 
+Definitionsbereich kein globales Maximum, da $\lim_{x\rightarrow-\infty}f(x)=\infty$.
+}
+\lang{en}{
+If we change the original problem slightly by considering the function $f(x)=x^2$ on the interval 
+$(-\infty,2]$, then we need to argue these points differently. The only critical point of $f$ on 
+$(-\infty,2)$ is $x=0$, and there is a local minimum there. It can easily be seen that this is also 
+the global minimum, because $f(x)$ only takes positive values $\geq 0$, and $f(0)=0$.\\
+At $x=2$ there is a local maximum, because the function is strictly monotonically increasing on 
+$(0,2]$. This point is not the global maximum; take for example the value of the function at $x=-3$: 
+$f(-3)=9>4=f(2)$. The function has no global maximum on this new domain, since 
+$\lim_{x\rightarrow-\infty}f(x)=\infty$.
+}
+\end{incremental}
+\end{remark}
+
+
+
+
+
+% \begin{quickcheckcontainer}
+% \randomquickcheckpool{1}{1}
+% \begin{quickcheck}
+% 		\field{rational}
+% 		\type{input.number}
+% 		\begin{variables}
+% 			\randint[Z]{a}{-5}{5}
+% 			\randint[Z]{b}{1}{4}
+% 			\randint{c}{-4}{4}
+% 			\randint[Z]{d}{1}{4}
+% 		    \function[normalize]{f}{(a/b)*x+c/d}
+% 			\function[calculate]{ns}{-(c*b)/(a*d)}
+% 		\end{variables}
+% 		
+% 			\text{Die Nullstelle der linearen Funktion $f(x)=\var{f}$ ist \ansref.}
+% 		
+% 		\begin{answer}
+% 			\solution{ns}
+% 		\end{answer}
+% 	\end{quickcheck}
+% \end{quickcheckcontainer}
+% 
+% 
+% 	\begin{genericGWTVisualization}[550][1000]{mathlet1}
+% 		\begin{variables}
+% 			\randint{randomA}{1}{2}
+% 
+% 			\point[editable]{P}{rational}{var(randomA),var(randomA)}
+% 		\end{variables}
+% 		\color{P}{BLUE}
+% 		\label{P}{$\textcolor{BLUE}{P}$}
+% 
+% 		\begin{canvas}
+% 			\plotSize{300}
+% 			\plotLeft{-3}
+% 			\plotRight{3}
+% 			\plot[coordinateSystem]{P}
+% 		\end{canvas}
+% 		\text{Der Punkt hat die Koordinaten $(\var{P}[x],\var{P}[y])$.}
+% 	    	\end{genericGWTVisualization}
+
+\end{visualizationwrapper}
+
+
+\end{content}

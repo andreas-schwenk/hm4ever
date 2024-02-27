@@ -1,0 +1,94 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A03: Polstellen}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{
+	\title{A03: Polstellen}
+}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9977}{Ticket 9977}
+\end{block}
+
+
+
+\begin{problem}
+
+
+\begin{question}
+	
+\begin{variables}
+	\randint[Z]{a}{1}{10}
+	\randint[Z]{c}{1}{10}
+	\randint[Z]{q}{1}{5}
+	
+	\function[calculate]{b}{q*a}
+	\function{xy}{b/a}
+	
+	\function[calculate]{tmp}{a*c}
+	\function[calculate]{tmp2}{b*c}
+	
+	\function{f}{(a*x+b)/((tmp)*x-(tmp2))}
+	\function[calculate]{sol1}{xy}
+	\function{sol2}{-infty}
+	\function{sol3}{infty}
+	
+\end{variables}
+    
+	\type{input.number}
+	\field{rational} 
+	\precision{3}
+    \lang{de}{
+	    \text{
+	    Bestimmen Sie den maximalen Definitionsbereich für 
+ $f(x) = \var{f}$, sowie den links- bzw. rechtsseitigen Grenzwert der Funktion für die vorhandene Polstelle $p$.\\
+ (Tipp: Für $\infty$ / -$\infty$ schreiben Sie bitte $infty$ / -$infty$)
+    }}
+    \explanation[edited]{für $x<\var{sol1}$ ist der Nenner negativ und damit der
+    Grenzwert $\var{sol2}$.}
+    \begin{answer}
+    \text{Der Definitionsbereich ist $\R \setminus \{p\}$ mit der Polstelle $p$ =}
+	    \solution{sol1}
+    \end{answer}
+    
+    \begin{answer}
+	    	\text{$ \lim_{x \nearrow p} f(x) = $}
+		    \solution{sol2}
+            
+	    \end{answer}
+	    
+	    \begin{answer}
+	    	\text{$ \lim_{x \searrow p} f(x) = $ }
+		    \solution{sol3}
+            
+	    \end{answer}
+    
+\end{question}
+    
+\end{problem}
+
+
+\embedmathlet{mathlet}
+
+\end{content}

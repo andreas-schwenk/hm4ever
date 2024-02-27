@@ -1,0 +1,126 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A05: Punktprobe}
+    \lang{en}{input function}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{description}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A05: Punktprobe}}
+\lang{en}{\title{Problem 5}}
+
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9659}{Ticket 9659}
+\end{block}
+
+\begin{problem}
+
+	\begin{question}
+		\lang{de}{\text{
+			Gegeben sei die Ebene 
+			$ E= \left\{\begin{pmatrix}x_1 \\ x_2\\ x_3 \end{pmatrix} \in \R^3 \,\,\vert \,\, \var{f} = \var{d} \right\} $
+			und der Punkt $P=\begin{pmatrix} \var{p_1} \\ \var{p_2} \\ \var{p_3} \end{pmatrix}$. 
+		}
+		}
+		\explanation[edited]{Überprüfen Sie durch Einsetzen, ob der Punkt $P$ die Koordinatengleichung der Ebene $E$ erfüllt. Wenn ja, dann liegt der Punkt $P$ auf
+        der Ebene $E$; ansonsten nicht.}
+		
+		\type{mc.yesno}
+				
+		
+		\begin{variables}
+            
+			\randint{n_1}{-9}{9}
+			\randint{n_2}{-9}{9}
+			\randint{n_3}{-9}{9}
+			\randadjustIf{n_1,n_2,n_3}{n_1^2+n_2^2+n_3^2=0}
+			
+            \function[normalize]{f}{n_1*x_1+n_2*x_2+n_3*x_3}
+			\randint[Z]{p_1}{-10}{10}
+			\randint[Z]{p_2}{-10}{10}
+			\randint[Z]{p_3}{-10}{10}
+			\randint[Z]{d0}{-5}{5}
+            \randint{w}{0}{1}
+			\function[calculate]{d}{p_1*n_1+p_2*n_2+p_3*n_3+w*d0}
+
+		\end{variables}
+		
+		\begin{choice}
+			\text{Liegt $P$ in der Ebene $E$?}
+			\solution{compute}
+			\iscorrect{w}{=}{0}
+		\end{choice}
+		
+		
+	\end{question}
+	
+	\begin{question}
+		\lang{de}{\text{
+			Gegeben sei die Gerade 
+			$ g= \{ \begin{pmatrix} \var{u_1} \\ \var{u_2} \end{pmatrix}+s\begin{pmatrix} \var{v_1} \\ \var{v_2} \end{pmatrix} \vert s\in \R \} $ und der Punkt
+			$P= \begin{pmatrix} \var{p_1} \\ \var{p_2} \end{pmatrix}$. \\
+		}
+		}
+		\explanation[edited]{Überprüfen Sie durch Gleichsetzen des Punktes $P$ mit der Geradengleichung $g$, ob der Punkt $P$ auf der Geraden 
+        $g$ liegt. Falls das entstehende Gleichungssystem lösbar ist, liegt der Punkt $P$ auf
+        der Geraden; ansonsten nicht.}
+		
+		\type{mc.yesno}
+		\field{rational}
+		
+		\begin{variables}
+			
+			\randint{sz}{-3}{3}
+			\randint[Z]{sn}{-4}{4}
+			
+			\randint{u_1}{-9}{9}
+			\randint{u_2}{-9}{9}
+			
+			\randint[Z]{v_1}{-9}{9}
+			\randint[Z]{v_2}{-9}{9}
+
+			\randint[Z]{d}{-5}{5}
+            \randint{w}{0}{1}
+			\function[calculate]{p_1}{u_1+sz*v_1/sn +w*d}
+			\function[calculate]{p_2}{u_2+sz*v_2/sn }
+
+		\end{variables}
+		
+		
+		
+		\begin{choice}
+			\text{Liegt $P$ auf der Geraden $g$?}
+			\solution{compute}
+			\iscorrect{w}{=}{0}
+		\end{choice}
+		
+		
+		
+	\end{question}
+	
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+
+
+
+\end{content}

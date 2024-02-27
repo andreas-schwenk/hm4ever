@@ -1,0 +1,1573 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Stetigkeitsbegriff}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  %Links alte Version:
+  % \begin{components}
+  %   \component{generic_image}{content/rwth/HM1/images/g_tkz_T204_Example_A.meta.xml}{T204_Example_A}
+  %   \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+  %   \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  %   \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  % \end{components}
+  % \begin{links}
+   %     \link{generic_article}{content/rwth/HM1/T210_Stetigkeit/g_art_content_31_grenzwerte_von_funktionen.meta.xml}{content_31_grenzwerte_von_funktionen1}
+  %   \link{generic_article}{content/rwth/HM1/T210_Stetigkeit/g_art_content_30_elem_funktionen.meta.xml}{elem-funk-stetig}
+  %   \link{generic_article}{content/rwth/HM1/T204_Abbildungen_und_Funktionen/g_art_content_12_reelle_funktionen_monotonie.meta.xml}{reelle-funk}
+  %   \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_16_konvergenzkriterien.meta.xml}{konv-krit}
+  % \end{links}
+    \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T210_Heaviside.meta.xml}{T210_Heaviside}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T210_sprung.meta.xml}{T210_sprung}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T204_Example_A.meta.xml}{T204_Example_A}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+   % \link{generic_article}{content/playground/Kathrin_Maurischat/g_art_content_31_grenzwerte_von_funktionen_neu.meta.xml}{content_31_grenzwerte_von_funktionen_neu}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_14_konvergenz.meta.xml}{content_14_konvergenz1}
+    \link{generic_article}{content/rwth/HM1/T202_Reelle_Zahlen_axiomatisch/g_art_content_07_vollstaendigkeit.meta.xml}{content_07_vollstaendigkeit}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_14_konvergenz.meta.xml}{content_14_konvergenz}
+    \link{generic_article}{content/rwth/HM1/T210_Stetigkeit/g_art_content_31_grenzwerte_von_funktionen.meta.xml}{content_31_grenzwerte_von_funktionen}
+    \link{generic_article}{content/rwth/HM1/T210_Stetigkeit/g_art_content_30_elem_funktionen.meta.xml}{elem-funk-stetig}
+    \link{generic_article}{content/rwth/HM1/T204_Abbildungen_und_Funktionen/g_art_content_12_reelle_funktionen_monotonie.meta.xml}{reelle-funk}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_16_konvergenzkriterien.meta.xml}{konv-krit}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{10}
+\ombarticle{1}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\lang{de}{\title{Stetigkeitsbegriff}}
+ 
+\begin{block}[annotation]
+  Dieses Kapitel ist das neue zweite Kapitel im großen Kapitel "Stetigkeit" und steht dort nach den Funktionsgrenzwerten. 
+  Es ist umgestellt worden: Zunächst wird das Folgenkriterium zur Einführung in die Stetigkeit benutzt. Erst anschließend folgt das epsilon-delta-Kriterium.
+
+  JSX-Graphs: Alle Visualisierungen werden ersetzt. Die Farben werden für rot-grün-Sehschwäche unterscheidbar gewählt.
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9789}{Ticket 9789}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+Viele Vorgänge in der Natur lassen sich mit stetigen Funktionen beschreiben. Betrachtet
+man z.B. in einem Weg-Zeit-Diagramm die zurückgelegte Wegstrecke als Funktion
+der Zeit, so wird es hier keine Sprünge geben. Die Weg-Zeit-Funktion ist stetig.
+
+Es gibt im wesentlichen zwei Möglichkeiten, die Stetigkeit von Funktionen zu definieren. Die eine verwendet ein sogenanntes
+$\epsilon$-$\delta$-Kriterium, die andere verwendet Folgen. Beide Definitionen sind gleichwertig, da der 
+identische Begriff definiert wird. Stetigkeit ist ein punktweiser Begriff, von dem sich Stetigkeit auf 
+einer Menge ableitet.
+
+Anschaulich wird eine stetige Funktion manchmal dadurch charakterisiert, dass man ihren Graphen
+„ohne Absetzten durchzeichnen“ kann, dass also keine Sprünge auftreten. Diese Anschauung ist höchstens auf \emph{Intervallen} gerechtfertigt.
+
+ 
+
+
+\section{Folgenstetigkeit}\label{sec:folgenkriterium}
+In Abschnitt \link{content_31_grenzwerte_von_funktionen}{Folgen von Funktionswerten} haben wir
+bereits den Begriff des 
+\ref[content_31_grenzwerte_von_funktionen][Funktionsgrenzwerts]{def:funktionsgrenzwert} für $x$ gegen $x^\ast$ kennen gelernt.
+Existiert dieser Funktionsgrenzwert, so beschreibt er das Verhalten der Funktion um die Stelle $x^\ast$ herum. 
+Stimmt der Funktionsgrenzwert $\lim_{x\to x^\ast}f(x)$ zusätzlich mit dem Funktionswert $f(x^\ast)$ überein, 
+so sprechen wir von Stetigkeit an der Stelle $x^\ast$:
+\begin{definition}[Folgenkriterium für Stetigkeit]\label{def:Folgenstetigkeit}
+Es sei $f : D \to \R$ eine Funktion und $x^* \in D$. Die Funktion
+$f$ heißt  \notion{stetig an der Stelle $x^*$}, wenn die folgende Bedingung erfüllt ist:
+\\
+Für jede Folge $( x_n)_{n \in\N}$ in $D$ mit 
+$\lim_{n \to \infty} x_n = x^*$ gilt
+\[ \lim_{n \to \infty} f ( x_n ) = f ( \lim_{n \to \infty} x_n) 
+= f ( x^* ) .\]
+
+Eine Funktion, die in \notion{jeder} Stelle $x^\ast\in D$ stetig ist, heißt (überall) \notion{stetig}.
+Allgemeiner heißt $f$ stetig auf einer Teilmenge $\tilde{D}\subset D$, wenn $f$ an jeder Stelle $x^\ast\in \tilde{D}$ stetig ist.
+\end{definition}
+\begin{remark}
+Eine Funktion $f:D\to\R$ ist also genau dann stetig, wenn für alle in $D$ konvergenten Folgen $(x_n)_{n\in\N}$ gilt
+\[
+\lim_{n\to\infty}f(x_n)=f(\lim_{n\to\infty}x_n).
+\]
+\end{remark}
+\begin{remark}
+Das Folgenkriterium für Stetigkeit beinhaltet zwei Bedingungen:
+\begin{enumerate}
+\item[(i)] Für jede Folge $( x_n)_{n \geq 1}$, die gegen $x^*$ konvergiert, ist die Folge $(f(x_n))_{n \geq 1}$ konvergent.
+\item[(ii)] Jede der nach (i) konvergenten Folgen $(f(x_n))_{n \geq 1}$ hat tatsächlich den Funktionswert $f(x^*)$ als Grenzwert.
+\end{enumerate}
+Um zu zeigen, dass eine Funktion unstetig (nicht stetig) an einer Stelle ist, 
+reicht es somit zu zeigen, dass eine dieser beiden Bedingungen verletzt ist.
+\end{remark}
+
+\begin{example}[Einfache Beispiele]\label{ex:einfach_stetig}
+Mithilfe der \ref[content_14_konvergenz][Grenzwertregeln]{sec:grenzwertregeln} 
+für Folgenkonvergenz lassen sicht leicht Beispiele für stetige Funktionen finden.
+\begin{tabs*}[\initialtab{0}]
+\tab{Lineare und konstante Funktionen} Für feste reelle Zahlen $a,b\in \R$ sei $f: \R \to \R$, $x \mapsto ax + b$, eine 
+lineare Funktion (falls $a\neq 0$) oder eine konstante Funktion (falls $a=0$).
+Für eine beliebige feste Stelle $x^* \in \R$ und jede Folge $( x_n)_{n \geq 1}$ mit $\lim_{n\to \infty} x_n=x^*$ gilt dann:
+\[  \lim_{n\to \infty} f(x_n)= \lim_{n\to \infty} (ax_n+b)=a \lim_{n\to \infty} x_n + b =ax^*+b=f(x^*). \]
+Also sind lineare und konstante Funktionen stetig in jedem Punkt.
+\tab{$f(x)=x^2$} Die Funktion $f : \R \to \R, x \mapsto x^2$ ist auf ganz $\R$ stetig. Denn für beliebiges $x^*\in \R$ und
+ jede Folge $( x_n)_{n \geq 1}$ mit $\lim_{n\to \infty} x_n=x^*$ gilt:
+ \[  \lim_{n\to \infty} f(x_n)= \lim_{n\to \infty} x_n^2 =\left( \lim_{n\to \infty} x_n\right)^2 =(x^*)^2 =f(x^*). \]
+\end{tabs*}
+\end{example}
+
+\begin{example}[Elementare Funktionen] %\label{ex:einfach_stetig}
+Die meisten elementaren Funktionen sind auf ihrer gesamten Definitionsmenge stetig, 
+was wir im \link{elem-funk-stetig}{nächsten Abschnitt} zeigen.
+\end{example}
+\begin{example}[Gegenbeispiele]\label{ex:unstetig}
+\begin{tabs*}[\initialtab{0}]
+\tab{Heaviside-Funktion} Die Heaviside-Funktion 
+\[
+H:\R\to\R,\: x\mapsto\begin{cases}0& \text{ falls } x<0\\ 1& \text{ falls } x\geq 0\end{cases},
+\]
+ist an der Stelle $x^*=0$ nicht stetig.
+Dazu zeigen wir, dass der linksseitige Funktionsgrenzwert gegen $x^\ast=0$ existiert, 
+aber nicht mit dem Funktionswert $f(x^\ast)=1$ übereinstimmt.
+\\
+Es sei  $( x_n)_{n \in\N}$ eine beliebige Folge mit $x_n<x^*$ für alle $n\in\N$ und $\lim_{n\to\infty}x_n=0$.
+Dann ist
+\[ \lim_{n\to \infty} H(x_n) =\lim_{n\to\infty} 0=0\neq 1 =f(0).\]
+Also ist $H$ nicht stetig in $x^\ast=0$.
+\begin{center}
+\image[350]{T210_Heaviside}
+\end{center}
+\tab{Dirichletsche Sprungfunktion} Es sei 
+\[  D:\R\to {\{0;1\}}, x \mapsto \begin{cases} 1 & \text{falls }x\in \Q \\
+0 & \text{falls }x\notin \Q \end{cases}.\]
+die \ref[reelle-funk][Dirichletsche Sprungfunktion]{ex:unstetige-funktionen}.
+Sie ist in keinem einzigen Punkt stetig, nämlich:
+\\
+Für jede irrationale Stelle $x^*$ gibt es  eine Folge rationaler Zahlen $( x_n)_{n \geq 1}$, die gegen $x^*$ konvergiert. 
+Dies ist eine Eigenschaft der \link{content_07_vollstaendigkeit}{Vollständigkeit der reellen Zahlen}.
+Für diese Folge gilt dann
+\[ \lim_{n\to \infty} D(x_n)= \lim_{n\to \infty} 1\neq 0=D(x^*),\]
+weshalb $D$ in $x^*\in\R\setminus\Q$ nicht stetig ist.
+\\
+Ebenso gibt es für jede rationale Stelle $x^*$ eine Folge irrationaler Zahlen 
+$( x_n)_{n \geq 1}$, die gegen $x^*$ konvergiert. Für diese gilt dann
+\[ \lim_{n\to \infty} D(x_n)= \lim_{n\to \infty} 0\neq 1=D(x^*),\]
+weshalb $D$ in $x^*\in\Q$ nicht stetig ist.
+\end{tabs*}
+\end{example}
+
+\begin{example}[Noch eine Sprungfunktion]
+Die Funktion
+\[
+f:\R\setminus{\{0\}}\to\R,\: x\mapsto\begin{cases}0& \text{ falls } x<0\\ 1& \text{ falls } x>0\end{cases},
+\]
+ist überall stetig. Denn sei $x^\ast\in\R\setminus\{0\}$ beliebig und $(x_n)_{n\in\N}$ eine Folge mit $\lim_{n\to\infty}=x^\ast$.
+Weil die Folge gegen $x^\ast$ \ref[content_14_konvergenz1][konvergiert]{def:folgenkonvergent}, gibt es zu $\epsilon:=\frac{\vert x^\ast\vert}{2}$ ein $N\in\N$ so, dass für alle $n\geq N$ gilt
+$\vert x^\ast-x_n\vert<\epsilon$. Insbesondere haben alle diese $x_n$ dasselbe Vorzeichen wie $x^\ast$.
+Somit gilt
+\[
+\lim_{n\to\infty}f(x_n)=\lim_{n\to\infty, n\geq N}f(x_n)=f(x^\ast),
+\]
+d.h. $f$ ist stetig in $x^\ast$.\\
+Anders formuliert: Die Unstetigkeitsstelle der Heaviside-Funktion wurde aus dem Definitionsbereich entfernt.
+Für $x>0$ wie für $x<0$ ist $f$ konstant, also stetig. Somit ist $f$ insgesamt stetig -- obwohl ihr Graph einen Sprung macht.
+\begin{center}
+\image[350]{T210_sprung}
+\end{center}
+\end{example}
+
+
+
+
+
+% \begin{remark}
+% In den Beispielen hatten wir zum Beweis der Unstetigkeit Folgen verwendet, bei denen die Folge der 
+% Funktionswerte gegen einen Wert konvergieren, der vom Funktionswert der Stelle verschieden ist. 
+% Im Allgemeinen muss aber die Folge der Funktionswerte nicht einmal konvergieren.
+% \end{remark}
+
+Die \ref[content_14_konvergenz][Grenzwertregeln]{sec:grenzwertregeln} zeigen ganz allgemein (also allgemeiner als in obigen Beispielen)
+die Stetigkeit zusammengesetzter Funktionen:
+
+\begin{theorem}\label{rule:zusammengesetzte-funktionen}
+Seien $f:D\to \R$ und $g:D\to \R$ reelle Funktionen, die an einer Stelle $x^*\in D$ stetig sind, sowie $r\in \R$.
+
+Dann sind auch die Funktionen $f+g$, $f-g$, $f\cdot g$ und $rf$ in $x^*$ stetig.
+
+Ist zudem $g(x^*)\neq 0$, dann ist auch die Funktion $\frac{f}{g}$ an der Stelle $x^*$ stetig. \\
+
+\end{theorem}
+  
+\begin{quickcheck}
+%\type{mc.multiple}%
+\lang{de}{\text{Wählen Sie alle richtigen Aussagen aus:}
+}
+
+\begin{choices}{multiple}
+    \begin{choice}
+        \text{1) Eine Funktion, die an der Stelle $x_0$ nicht definiert ist, 
+            kann dort stetig sein.}
+        \solution{false}
+    \end{choice}
+    \begin{choice}
+        \text{2) Die Funktion $f:\R\to\R$, $x\mapsto x^4-1$ ist überall stetig.}
+        \solution{true}
+    \end{choice}
+    % \begin{choice}
+    %     \text{Am ersten Tag geht ein Bergwanderer morgens um 8 Uhr los und erreicht den Berggipfel um 17 Uhr.
+    %     Am zweiten Tag läuft er von 8 bis 17 Uhr den Berg über dieselbe Strecke wieder hinunter. 
+    %     Es gibt auf dem Weg eine Stelle, an der er 
+    %     zur selben Tageszeit wie am Vortag wieder vorbeikommt.}
+    %     \solution{true}
+    % \end{choice}
+\end{choices}
+
+\explanation{Aussage 1) ist falsch, denn damit $f(x)$ an einer Stelle $x_0$ stetig ist, 
+            muss $x_0 \in D$ gelten.\\
+            Aussage 2) ist wahr, denn wie gesehen sind die Funktionen $g:x\mapsto x^2$ und 
+            $h:x\mapsto -1$ auf ganz $\R$ stetig. Satz \ref{rule:zusammengesetzte-funktionen} liefert
+            die Stetigkeit der zusammengesetzten Funktion $f(x)=g(x)^2+h(x)$.}
+%   zu 2) Trägt man die Höhenmeter über der Zeit auf, so ist der Aufstieg eine stetige, monoton steigende Funktion und der Abstieg
+%   eine stetige, monoton fallende Funktion, d.h. es gibt genau einen Kreuzungspunkt. \\Aussage 2) ist damit richtig.}
+
+ \end{quickcheck}  
+
+
+Das Folgenkriterium für Stetigkeit wird mit vielen Beispielen im folgenden Video erläutert:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10900&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+
+
+
+
+
+
+
+
+\section{Das $\epsilon$-$\delta$-Kriterium für Stetigkeit}\label{sec:eps-delta}
+
+\begin{definition}[$\epsilon$-$\delta$-Kriterium]
+Sei $f$ eine auf $D\subset\R$ definierte reelle Funktion und sei $x^*\in D$.
+ \lang{de}{Man sagt $f$ \notion{erfüllt das $\epsilon$-$\delta$-Kriterium an der Stelle} $x^*\in D$, 
+ wenn es zu jedem $\epsilon >0$ ein \nowrap{$\delta = \delta(\epsilon) >0$} gibt, so dass }
+  \[ |f(x) - f(x^*)| < \epsilon \quad \text{f"ur alle }
+  \nowrap{x\in D\text{ mit } |x-x^*|<\delta(\epsilon).}
+  \]
+\end{definition}
+
+\begin{remark}
+Da die Menge aller $x$ mit $|x-x^*|<\delta$ genau die $\delta$-Umgebung $U_\delta(x^*)$ von $x^*$ ist, lässt sich diese Definition auch mit Umgebungen formulieren:
+
+$f:D\to \R$ erfüllt das $\epsilon$-$\delta$-Kriterium an der Stelle $x^*\in D$, wenn es f"ur jedes $\epsilon >0$ ein \nowrap{$\delta = \delta(\epsilon) >0$} gibt, so dass
+  \[ f(x)\in U_{\epsilon}(f(x^*))\quad \text{f"ur alle }
+x\in D\cap U_\delta(x^*).
+  \]
+% Oder in Quantoren-Schreibweise:
+% \[
+% \forall \epsilon>0\:\exists \delta=\delta(\epsilon)>0\:\forall x\in D\cap U_\delta(x^\ast): f(x)\in U_\epsilon(f(x^\ast))
+% \]
+\end{remark}
+
+Das folgende Video erläutert  das $\epsilon$-$\delta$-Kriterium und beweist die Unstetigkeit
+der Dirichlet'schen Sprungfunktion.
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10915&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+Bevor wir wichtige Visualisierungen des $\epsilon$-$\delta$-Kriteriums betrachten, zeigt der folgende Satz seine Relevanz.
+
+
+\begin{theorem}\label{thm:stetigkeit_folgenkrit_aequiv_epsilon-delta}
+Sei $f : D \to \R$ eine Funktion und $x^* \in D$. Die Funktion
+$f$ ist genau dann an der Stelle $x^*$ stetig, wenn sie dort das $\epsilon$-$\delta$-Kriterium erfüllt.
+\end{theorem}
+
+
+\begin{proof*}%[Beweis (Stetigkeit)]
+
+Beweisskizze: Die Äquivalenz des Satzes wird in zwei Schritten gezeigt: Die Hin-Richtung
+benutzt nur das $\epsilon$-$\delta$-Kriterium, um daraus die Stetigkeit, also die Konvergenz
+der Folgen der Funktionswerte gegen den Funktionswert, zu zeigen. 
+\\Die Rück-Richtung wird mittels indirektem Beweis gezeigt: Unter der
+Annahme, dass $f$ an der Stelle $x^*$ das $\epsilon$-$\delta$-Kriterium verletzt, finden wir, dass die Folge der Funktionswerte
+nicht gegen $f(x^*)$ konvergiert. Dies ist im Widerspruch zur  Stetigkeit der Funktion in $x^*$.\\
+\begin{incremental}{0}
+\step
+Wir nehmen zunächst an, dass $f$ in $x^*\in D$ das  $\epsilon$-$\delta$-Kriterium erfüllt, und betrachten eine beliebige Folge $( x_n)_{n \geq 1}$ in $D$ mit 
+$\lim_{n \to \infty} x_n = x^*$.
+Dann ist zu zeigen, dass  $\lim_{n \to \infty} f ( x_n ) =f(x^*)$,
+d.h. dass es zu jedem $\epsilon>0$ ein $N\in \N$ gibt mit
+\[ |f(x_n)-f(x^*)|<\epsilon\quad \text{für alle }n\geq N.\]
+
+Da $f$ das  $\epsilon$-$\delta$-Kriterium erfüllt ist, gibt es zu $\epsilon>0$ ein $\delta>0$ mit
+\[ |f(x)-f(x^*)|<\epsilon\quad\text{für alle }x\in D\text{ mit }|x-x^*|<\delta. \]
+Wegen $\lim_{n \to \infty} x_n = x^*$ gibt es zu diesem $\delta>0$ ein $N\in \N$ mit
+\[ |x_n-x^*|<\delta\quad\text{für alle }n\geq N,\]
+und daher auch
+\[ |f(x_n)-f(x^*)|<\epsilon\quad\text{für alle }n\geq N.\]
+Also ist auch das Folgenkriterium für Stetigkeit erfüllt.
+\step
+
+Nimmt man umgekehrt an, dass $f$ an der Stelle $x^*$ das  $\epsilon$-$\delta$-Kriterium verletzt, so ist zu zeigen, 
+dass es eine Folge $( x_n)_{n \geq 1}$ in $D$ mit 
+$\lim_{n \to \infty} x_n = x^*$ gibt, so dass die Folge $(f(x_n))_{n \geq 1}$ nicht gegen $f(x^*)$ konvergiert.
+
+Da $f$  in $x^*$ das  $\epsilon$-$\delta$-Kriterium verletzt, gibt es (mindestens) ein $\epsilon>0$, 
+% Vorschlag: %
+zu dem kein $\delta>0$ existiert, welches das $\epsilon$-$\delta$-Kriterium erfüllt.
+% statt: % so, dass kein gewünschtes $\delta>0$ existiert. 
+Für dieses $\epsilon$ gilt also insbesondere, dass für $\delta=\frac{1}{n}$ ein $x_n\in D\cap U_\delta(x^*)$ existiert mit $|f(x_n)-f(x^*)|\geq \epsilon$.
+Diese Wahl liefert also eine Folge $( x_n)_{n \geq 1}$ mit
+\[ \lim_{n\to \infty} |x_n-x^*| \leq \lim_{n\to \infty} \frac{1}{n}
+=0,\]
+d.h. $\lim_{n\to \infty} x_n=x^*$.
+Andererseits ist $|f(x_n)-f(x^*)|\geq \epsilon$ für alle $n\in \N$, weshalb die Folge $(f(x_n))_{n \geq 1}$ nicht gegen $f(x^*)$ konvergiert.
+\end{incremental}
+\end{proof*}
+
+
+\begin{example}
+Visualisierungen zur Stetigkeit einer Funktion an einer Stelle.
+\begin{tabs*}
+\tab{1. Visualisierung}
+\begin{genericJSXVisualization}[550][800]{epsilon1}
+		
+		\begin{variables}
+			\function{f}{rational}{x^2/2-x+1}  
+%			\pointOnCurve{a1}{rational}{var(f)}{1}
+%			\number{a}{rational}{2}
+			\parametricFunction{ax}{real}{0, 1+t, 0.02, 2, 100}
+			\pointOnParametricCurve[editable]{P}{real}{var(ax)}{0.8}
+			\number{ups}{real}{var(P)[y]-1}
+%-------------------variante mit editierbarem epsilon
+%			\number[editable]{ups}{real}{1}
+%			\point{P}{real}{0,var(ups)}
+%-----------------------------------------------------
+			\function{gr}{real}{1}
+%			\function{l1}{real}{1+var(ups)}
+%			\function{l2}{real}{1-var(ups)}
+%			\number{b}{real}{1+2*var(ups)}
+			\number{d}{real}{2*var(ups)/(2+var(ups))}
+			\point{c00}{real}{2-var(d),1-var(ups)}
+			\point{c01}{real}{2-var(d),1+var(ups)}
+			\point{c10}{real}{2+var(d),1-var(ups)}
+			\point{c11}{real}{2+var(d),1+var(ups)}
+			% \line{v0}{real}{var(c00), var(c01)}
+			% \line{v1}{real}{var(c10), var(c11)}
+%			\set{s}{real}{|y-1|<var(ups) AND |x-2|<var(d)}
+%			\set{s}{real}{|x-2|<var(d)}
+      \verticalStrip{s}{real}{2,d}
+      \horizontalStrip{H}{real}{1,ups}
+			\point{m}{real}{2,0}
+			\point{pc}{real}{2,1}
+			
+		\end{variables}
+		\color{P}{#CC6600}
+		%\label{P}{$\textcolor{BLUE}{P}$}
+		\color{s}{#0066CC}%{#00CC00}
+	%	\color{l1}{#CC6600}
+	%	\color{l2}{#CC6600}
+   \color{H}{#CC6600}
+		\color{gr}{black}%{#0066CC}
+    \style{gr}{dash:3}
+		\color{m}{#0066CC}
+		\color{pc}{BLACK}%{#0066CC}
+		% \color{v0}{#00CC00}
+		% \color{v1}{#00CC00}
+		\color{f}{BLACK}
+        
+		\begin{canvas}
+			\plotLeft{-0.3}
+			\plotRight{4.3}
+      \plotTop{2.5}
+			\plotSize{400,300}
+			\plot[coordinateSystem]{m, pc, s, gr,  P, f, H}%l1,l2, v0, v1,
+		\end{canvas}
+\end{genericJSXVisualization}
+Die schwarze Kurve ist der Graph der Funktion $f:\R\to \R, x\mapsto \frac{x^2}{2}-x+1$, die an der Stelle $x^*=2$ den
+		Funktionswert $f(x^*)=f(2)=1$ hat. Zur Visualisierung der Stetigkeit von $f$ an der Stelle $x^*=2$ wird hier für jedes $\epsilon>0$ ein
+		passendes $\delta$ angegeben. 
+  Graphisch ist ein passendes $\delta$ daran zu erkennen, dass innerhalb des $x$-Bereiches, der durch
+		$2-\delta$ und $2+\delta$ beschränkt wird (blauer vertikaler Balken), der Funktionsgraph 
+  im horizontalen orangenen $\epsilon$-Balken liegt.\\
+	Für $\epsilon$ ist $\delta(\epsilon)$ eine Zahl, so dass
+		$|f(x)-f(x^*)|<\epsilon$ für alle $x$ mit $|x-x^*|<\delta(\epsilon)$ erfüllt ist.\\ \\
+		\textcolor{#0066CC}{Sie können den Wert von $\epsilon$ ändern, indem Sie den orangenen Punkt auf der $y$-Achse verschieben.}
+	
+
+
+\tab{2. Visualisierung}   	
+%    	\begin{genericJSXVisualization}[550][800]{epsilon2}
+		
+% 		\begin{variables}
+% 			\function{f}{rational}{x^2/2-x+1}  
+% %			\pointOnCurve{a1}{rational}{var(f)}{1}
+% %			\number{a}{rational}{2}
+% 			\parametricFunction{ax}{real}{2+t, 0, 0.02, 2, 100}
+% 			\pointOnParametricCurve[editable]{Q}{real}{var(ax)}{1.5}	
+% 			\number{ups}{real}{var(Q)[x]-2}
+% %-------------------variante mit editierbarem epsilon
+% 			% \number[editable]{ups}{real}{0.8}
+% 			% \number{ups1}{real}{var(ups)}
+% 			% \point{P}{real}{0,var(ups)}
+% %-----------------------------------------------------
+%  			\function{gr}{real}{1}
+% 			\function{l1}{real}{1.5}
+% 			\function{l2}{real}{0.5}
+% %			\number{b}{real}{1+2*var(ups)}
+% 			\number{d}{real}{2*var(ups)/(2+var(ups))}
+%       \point{c00}{real}{2-var(ups),1-var(ups)}
+%       \point{c01}{real}{2-var(ups),1+var(ups)}
+% 			\point{c10}{real}{2+var(ups),1-var(ups)}
+% 			\point{c11}{real}{2+var(ups),1+var(ups)}
+%  		  \line{v0}{real}{var(c00), var(c01)}
+%   		\line{v1}{real}{var(c10), var(c11)}
+% % %			\set{s}{real}{|y-1|<var(ups) AND |x-2|<var(d)}
+%  			\set{s}{real}{|x-2|<var(ups)}
+%  			\point{m}{real}{2,0}
+%  			\point{pc}{real}{2,1}
+
+% 			% \number{x1}{real}{2+var(d)-0.01}  % -0.01 als Toleranz. 
+% 			% \number{fx1}{real}{(var(x1))^2/2-var(x1)+1}
+% 			% \number{t}{real}{var(fx1)-1-var(ups)-0.01} % -0.01 als Toleranz. 
+% 			% \number{lb}{real}{2-var(d)}
+% 			% \number{ub}{real}{2+var(d)}
+
+			
+% 		\end{variables}
+% 		\color{P}{#CC6600}
+% 		\color{Q}{#00CC00}
+% 		%\label{P}{$\textcolor{BLUE}{P}$}
+% 		\color{s}{#00CC00}
+% 		\color{l1}{#CC6600}
+% 		\color{l2}{#CC6600}
+% 		\color{gr}{#0066CC}
+% 		\color{m}{#0066CC}
+% 		\color{pc}{#0066CC}
+% 		\color{v0}{#00CC00}
+% 		\color{v1}{#00CC00}
+%         \color{f}{BLACK}
+
+% 		\begin{canvas}
+% 			\updateOnDrag[false]
+% 			\plotLeft{-0.3}
+% 			\plotRight{4.3}
+% 			\plotSize{400,300}
+% 			\plot[coordinateSystem]{m, pc, s, gr,l1,l2, v0, v1, Q, f}
+% 		\end{canvas}
+% \end{genericJSXVisualization}
+%% Kathrin neu:
+  	\begin{genericJSXVisualization}[550][800]{stetigkeit_2}
+		
+		\begin{variables}
+			\function{f}{rational}{x^2/2-x+1}  
+%			\pointOnCurve{a1}{rational}{var(f)}{1}
+%			\number{a}{rational}{2}
+			\parametricFunction{ax}{real}{2+t, 0, 0.02, 2}
+			\pointOnParametricCurve[editable]{Q}{real}{var(ax)}{1.5}		
+			\number{d}{real}{var(Q)[x]-2}
+%-------------------variante mit editierbarem epsilon
+			\number[editable]{ups}{real}{0.8}
+			\number{ups1}{real}{var(ups)}
+			\point{P}{real}{0,var(ups)}
+%-----------------------------------------------------
+			\function{gr}{real}{1}
+%			\function{l1}{real}{1+var(ups)}
+%			\function{l2}{real}{1-var(ups)}
+      \horizontalStrip{H}{real}{1,ups}
+%			\number{b}{real}{1+2*var(ups)}
+%			\number{d}{real}{2*var(ups)/(2+var(ups))}
+			% \point{c00}{real}{2-var(d),1-var(ups)}
+			% \point{c01}{real}{2-var(d),1+var(ups)}
+			% \point{c10}{real}{2+var(d),1-var(ups)}
+			% \point{c11}{real}{2+var(d),1+var(ups)}
+			% \line{v0}{real}{var(c00), var(c01)}
+			% \line{v1}{real}{var(c10), var(c11)}
+%			\set{s}{real}{|y-1|<var(ups) AND |x-2|<var(d)}
+%			\set{s}{real}{|x-2|<var(d)}
+      \verticalStrip{s}{real}{2,d}
+			\point{m}{real}{2,0}
+			\point{pc}{real}{2,1}
+
+			\number{x1}{real}{2+var(d)-0.01}  % -0.01 als Toleranz. 
+			\number{fx1}{real}{(var(x1))^2/2-var(x1)+1}
+			\number{T}{real}{var(fx1)-1-var(ups)-0.01} % -0.01 als Toleranz. 
+			\number{lb}{real}{2-var(d)}
+			\number{ub}{real}{2+var(d)}
+   %für die roten Abschnitte des Graphen, wenn das Kriterium nicht erfüllt ist:
+       %linke Grenze des rechten roten Abschnitts:
+       \number{minrechts}{real}{(1+sqrt(1+2*ups)+2+d-|1+sqrt(1+2*ups)-2-d|)/2}
+       \parametricFunction{frechts}{real}{x,f,minrechts,2+d}
+      %\number{minimum}{real}{1-d+theta(1-2*ups)*(d-1+1+sqrt(|1-2*ups|))}
+      %rechte Grenze des linken roten Abschnitts wird nur angezeigt, wenn epsilon<1/2. 
+      \number{minimum}{real}{2-d+(1- sqrt(|1-2*ups|)-2+d)*theta(1-2*ups)*theta(1-sqrt(|1-2*ups|)-2+d)}
+      \parametricFunction{flinks}{real}{x,f,2-d,minimum}
+      %Kosmetik dient dazu, dass auf Rand der delta-Umgebung kein roter Punkt erscheint.
+      \point{kosmetikrechts}{real}{2+d,(2+d)^2/2-(2+d)+1}
+      \point{kosmetiklinks}{real}{2-d,(2-d)^2/2-(2-d)+1}
+
+			
+		\end{variables}
+		\color{P}{#CC6600}
+		\color{Q}{#0066CC}%{#00CC00}
+		%\label{P}{$\textcolor{BLUE}{P}$}
+		\color{s}{#0066CC}%{#00CC00}
+		% \color{l1}{#CC6600}
+		% \color{l2}{#CC6600}
+    \color{H}{#CC6600}
+		\color{gr}{BLACK}
+    \style{gr}{dash:3}
+		\color{m}{#0066CC}%
+		\color{pc}{BLACK}%{#0066CC}
+		% \color{v0}{#00CC00}
+		% \color{v1}{#00CC00}
+    \color{f}{BLACK}
+    \color{frechts}{RED}
+    \color{flinks}{RED}
+    \color[0.1]{kosmetikrechts}{#0066CC}
+    \style{kosmetikrechts}{size:0.1,strokeWidth:0}
+    \color[0.1]{kosmetiklinks}{#0066CC}
+    \style{kosmetiklinks}{size:0.1,strokeWidth:0}
+    
+
+		\begin{canvas}
+			\updateOnDrag[false]
+			\plotLeft{-0.3}
+			\plotRight{4.3}
+     \plotTop{2.5}
+			\plotSize{400,300}
+			\plot[coordinateSystem]{m, pc, s, gr, H,  Q, f, frechts, flinks, kosmetikrechts, kosmetiklinks} %l1,l2, v0, v1,
+		\end{canvas}
+		\text{Die schwarze Kurve ist wieder der Graph der Funktion $f:\mathbb{R}\to \mathbb{R}, x\mapsto \frac{x^2}{2}-x+1$, die an der Stelle $x^*=2$ den
+		Funktionswert $f(x^*)=f(2)=1$ hat.
+  	Nun sollen Sie selbst zu gegebenem $\epsilon>0$ ein passendes $\delta>0$ finden, so dass
+		$|f(x)-f(x^*)|<\epsilon$ für alle $x$ mit $|x-x^*|<\delta$.}
+  \text{Wählen Sie dazu zunächst den Wert: $\epsilon= \var{ups}$.}
+  \text{Passen Sie anschließend $\delta$ durch Verschieben des rechten blauen Punktes in der Graphik an.}
+  \text{	\IFELSE{var(T) < 0}{
+   	 Richtig! Sie haben ein geeignetes $\delta$ gefunden, 
+    denn für $\delta=\var{d}$ gilt: Für alle $x$ zwischen $x^*-\delta=\var{lb}$ und $x^*+\delta=\var{ub}$
+		ist $|f(x)-f(x^*)|<\epsilon=\var{ups1}$.}{
+  Für Ihre Wahl 
+   $\delta=\var{d}$ 
+  ist die Bedingung
+		$|f(x)-f(x^*)|<\epsilon=\var{ups1}$ nicht für alle $x$ mit $|x-x^*|<\delta$
+		
+  erfüllt. Es gibt $x$ im blauen vertikalen $\delta$-Streifen, deren Werte $f(x)$ nicht 
+  im orangenen horizontalen $\epsilon$-Streifen liegen,
+    für die also $\vert f(x)-f(x^\ast)\vert\geq\epsilon$ gilt. Entsprechende Graphenstücke sind rot markiert. 
+    Passen Sie $\delta$ an, um das zu vermeiden.
+  		}}
+   	\end{genericJSXVisualization}
+% Die schwarze Kurve ist wieder der Graph der Funktion $f:\R\to \R, x\mapsto \frac{x^2}{2}-x+1$, welche an der Stelle $x^*=2$ den
+% 		Funktionswert $f(x^*)=f(2)=1$ hat.\\
+% 		In dieser Visualisierung sollen Sie selbst zu gegebenem $\epsilon>0$ ein passendes $\delta>0$ finden, so dass
+% 		$|f(x)-f(x^*)|<\epsilon$ für alle $x$ mit $|x-x^*|<\delta$.\\ 
+ 	%	Wählen Sie dazu zunächst den Wert: $\epsilon= \var{ups}$.\\ 
+ 	% 	Passen Sie anschließend $\delta$ durch Verschieben des grünen Punktes in der Graphik an.\\ \\		 
+		% \IFELSE{var(t) < 0}{\textcolor{#0066CC}{Richtig!} Für $\delta=\var{d}$ gilt: Für alle $x$ zwischen $x^*-\delta=\var{lb}$ und $x^*+\delta=\var{ub}$
+		% gilt $|f(x)-f(x^*)|<\epsilon=\var{ups1}$}{\textcolor{#CC6600}{Für }$\delta=\var{d}$ \textcolor{#CC6600}{ ist die Bedingung }\\
+		% $|f(x)-f(x^*)|<\epsilon=\var{ups1}$ für alle $x$ mit $|x-x^*|<\delta$ \\
+		% \textcolor{#CC6600}{nicht erfüllt. Zum Beispiel ist für }$x=\var{x1}<2+\delta=\var{ub}$:\\  $f(x)\approx\var{fx1}\geq 1+\var{ups1}= f(x^*)+\epsilon$.  	
+   	\end{tabs*}
+\end{example}
+   	
+\begin{example}   	
+Visualisierung zur Unstetigkeit einer Funktion an einer Stelle.
+\begin{genericJSXVisualization}[550][800]{unstetig}
+		
+		\begin{variables}
+			\function{f}{real}{abs(x-3)/(x^2-3*x)+sqrt(x)-x/sqrt(x)}   % +-sqrt(x) um auf R_+ einzuschränken.
+%			\pointOnCurve{a1}{rational}{var(f)}{1}
+%			\number{a}{rational}{2}
+			\parametricFunction{ax}{real}{3+t, 0, 0.02, 2}
+			\pointOnParametricCurve[editable]{Q}{real}{var(ax)}{2}		
+			\number{d}{real}{var(Q)[x]-3}
+%-------------------variante mit editierbarem epsilon
+			\number[editable]{ups}{real}{1}
+			\number{ups1}{real}{var(ups)}
+			\point{P}{real}{0,var(ups)}
+%-----------------------------------------------------
+			\function{gr}{real}{1/3}
+			% \function{l1}{real}{1/3+var(ups)}
+			% \function{l2}{real}{1/3-var(ups)}
+       \horizontalStrip{H}{real}{1/3,ups}
+%			\number{b}{real}{1+2*var(ups)}
+%			\number{d}{real}{2*var(ups)/(2+var(ups))}
+			\point{c00}{real}{3-var(d),1/3-var(ups)}
+			\point{c01}{real}{3-var(d),1/3+var(ups)}
+			\point{c10}{real}{3+var(d),1/3-var(ups)}
+			\point{c11}{real}{3+var(d),1/3+var(ups)}
+			\line{v0}{real}{var(c00), var(c01)}
+			\line{v1}{real}{var(c10), var(c11)}
+%			\set{s}{real}{|y-1|<var(ups) AND |x-2|<var(d)}
+%			\set{s}{real}{|x-3|<var(d)}
+       \verticalStrip{s}{real}{3,d}
+			\point{m}{real}{3, 0}
+			
+			\number{ed}{real}{1/3}
+			\point{pc}{real}{3, var(ed)}
+
+			\number{x1}{real}{3-var(d)+0.01}  % -0.01 als Toleranz. 
+			\number{fx1}{real}{(3-var(x1))/(var(x1)^2-3*var(x1))}
+			\number{T}{real}{1/3-var(fx1)-var(ups)-0.01} % -0.01 als Toleranz. 
+			\number{lb}{real}{3-var(d)}
+			\number{ub}{real}{3+var(d)}
+			\number{x2}{real}{3-var(d)/2}
+			\number{fx2}{real}{(3-var(x2))/(var(x2)^2-3*var(x2))}
+     %Nur für große ups>=2/3 wird fex rot:
+      \number{hilfswert}{real}{ups-1/3+dirac(ups-1/3)*1/3}
+       \number{untererWert}{real}{1/(ups-1/3)}
+     %\number{minimum}{real}{3+theta(3/2*ups-1)*(1/(hilfswert)-3)}
+     \number{minimum}{real}{3-d+theta(1/(ups-1/3)-3+d)*(1/(ups-1/3)-3+d)}
+     %\number{minimum}{real}{3+theta(3/2*ups-1)*theta(1/(ups-1/3)-3+d)*(1/(ups-1/3)-3)}
+     \parametricFunction{fex}{real}{x, f,  3-d,minimum}
+     %Nur für kleinere ups<2/3 wird fex2 rot:
+     \number{maximum}{real}{3+theta(3/2*ups-1)*(-d)}
+     \parametricFunction{fex2}{real}{x, f,  3-d,maximum}
+      %Kosmetik dient dazu, dass auf Rand der delta-Umgebung kein roter Punkt erscheint.
+      \point{kosmetik}{real}{3-d,-1/(3-d)}
+			
+		\end{variables}
+		\color{P}{#CC6600}
+		\color{Q}{BLUE}
+		%\label{P}{$\textcolor{BLUE}{P}$}
+		\color[0.9]{s}{#0066CC}%grün:{#00CC00}
+		% \color{l1}{#CC6600}
+		% \color{l2}{#CC6600}
+      \color[0.9]{H}{#CC6600}
+		\color{gr}{BLACK}% blau:{#0066CC}
+    \style{gr}{dash:3}
+		\color{m}{#0066CC}
+		\color{pc}{BLACK}
+		% \color{v0}{#00CC00}
+		% \color{v1}{#00CC00}
+    \color{fex}{RED}
+    \color{fex2}{RED}
+    \color{f}{BLACK}
+    \color[0.1]{kosmetik}{#0066CC}
+    \style{kosmetik}{size:0.1,strokeWidth:0}    
+
+		\begin{canvas}
+			\updateOnDrag[false]
+			\plotLeft{0.7}
+			\plotRight{5.3}
+			\plotSize{400,300}
+			\plot[coordinateSystem]{m, pc, s, gr, H,  Q, f, fex, fex2, kosmetik}%l1,l2,v0, v1,
+		\end{canvas}
+		\text{Die schwarze Kurve ist der Graph der Funktion $f:\mathbb{R}_{>0}\to \mathbb{R}$ mit $f(x)=\frac{|x-3|}{x^2-3x}$ für $x\neq 3$ und $f(3)=\frac{1}{3}$. 
+		Wir betrachten die Stelle $x^*=3$ mit dem Funktionswert $f(x^*)=f(3)=\frac{1}{3}$, an der die Funktion nicht stetig ist.}
+  \text{		In dieser Visualisierung sollen Sie selbst zu gegebenem $\epsilon>0$ ein passendes $\delta>0$ suchen, so dass
+		$|f(x)-f(x^*)|<\epsilon$ für alle $x$ mit $|x-x^*|<\delta$.}
+  \text{
+ 		Wählen Sie dazu zunächst den Wert: $\epsilon= \var{ups}$. (Sie sollten insbesondere auch kleine Werte wählen.)}
+   \text{Passen Sie anschließend $\delta$ durch Verschieben des rechten blauen Punktes in der Graphik an.}	
+   \text{
+  \IFELSE{var(ups)<= 2/3}{Für dieses $\epsilon=\var{ups1}$ können Sie ausprobieren, so lange Sie wollen: 
+     Sie finden kein $\delta$ so, dass die Bedingung $f(x)\in (\frac{1}{3}-\epsilon;\frac{1}{3}+\epsilon)=(\frac{1}{3}-\var{ups1};\frac{1}{3}+\var{ups1})$
+     erfüllt ist für alle $x$ in im Intervall $(x^*-\delta;x^*+\delta)$. Für alle $x$ aus dem Teilintervall $(x^\ast-\delta;x^\ast)$ 
+     ist nämlich  $f(x)<\frac{1}{3}-\var{ups1})\frac{1}{3}-\epsilon$. 
+     Der entsprechende Abschnitt des Graphen ist rot markiert.
+ 		Da es für dieses $\epsilon$ kein passendes $\delta$ gibt, ist diese Funktion $f$ an der Stelle $x^*=3$ nicht stetig.
+ 		}{
+		\IFELSE{var(T) < 0}{Sie haben für dieses $\epsilon=\var{ups1}$ ein geeignetes  $\delta=\var{d}$ gefunden: 
+    Für alle $x$ im Intervall  $(x^*-\delta=\var{lb};x^*+\delta=\var{ub})$
+		gilt $|f(x)-f(x^*)|<\epsilon=\var{ups1}$. Wählen Sie nun ein kleineres $\epsilon$ und versuchen Sie erneut,
+    $\delta$ anzupassen.
+    }{Für $\epsilon=\var{ups1}$ ist Ihre Wahl von $\delta=\var{d}$ nicht ausreichend. 
+    Im Intervall $(x^*-\delta;x^*+\delta)=(x^*-\var{lb};x^*+\var{ub})$ gibt es Funktionswerte, 
+    die nicht zu $(\frac{1}{3}-\epsilon;\frac{1}{3}+\epsilon)=(\frac{1}{3}-\var{ups1};\frac{1}{3}+\var{ups1})$ gehören. 
+    Der entsprechende Abschnitt des Graphen ist rot markiert. 
+    Verkleinern Sie $\delta$ solange, bis der rote Abschnitt verschwindet.}
+		} }
+  	\end{genericJSXVisualization}
+\end{example}
+
+Das folgende Video erläutert den Begriff der Stetigkeit sehr anschaulich und verdeutlicht ihn an Beispielen:
+\floatright{\href{https://www.hm-kompakt.de/video?watch=407}{\image[75]{00_Videobutton_schwarz}}}\\\\
+ 
+\begin{example}
+Wir zeigen das $\epsilon$-$\delta$-Kriterium für die Funktionen aus Beispiel \ref{ex:einfach_stetig}.
+\begin{tabs*}
+\tab{konstante Funktionen} Für festes $c\in \R$ ist die konstante Funktion $f:\R\to \R,x\mapsto c$ stetig auf ganz $D=\R$.\\
+Ist $x^*\in \R$ eine beliebige Stelle, so gilt für jedes $\epsilon>0$:
+\[   |f(x)-f(x^*)|=|c-c|=0<\epsilon \]
+für alle $x\in \R$. Insbesondere kann man stets $\delta=1$ wählen (oder irgendeinen anderen Wert $>0$) und erhält:
+\[   |f(x)-f(x^*)|=|c-c|=0<\epsilon \quad \text{f"ur alle }
+  \nowrap{x\in D,\text{ mit } |x-x^*|<\delta}. \]
+\tab{lineare Funktionen} Für feste reelle Zahlen $a,b\in \R$ mit
+$a \neq 0$ sei $f: \R \to \R, x \mapsto ax + b$. Sei $x^* \in \R$ und $\epsilon > 0$. Wir wählen
+$\delta  = \frac{\epsilon}{| a |}$ . Für alle $x \in \R$ mit $| x - x^* | < \delta$ gilt dann
+\[ |f ( x ) - f ( x^* )| = |ax + b - ax^* - b| = | a | \cdot | x - x^* | < | a | \cdot \delta = \epsilon. \]
+Also ist $f$ stetig auf $\R$.
+\tab{$f(x)=x^2$} Sei $f : [-1; 1 ] \to \R, x \mapsto x^2$ .\\
+Für $x^* \in [-1; 1 ]$ und $\epsilon > 0$ sei $\delta =\frac{\epsilon}{2}> 0$.\\
+Dann gilt für alle
+$x \in [-1; 1 ]$ mit $| x - x^* | < \delta$:
+\[ |f ( x ) - f ( x^* )| = |x^2 - (x^*)^2| = | x+x^* |\cdot | x - x^* | 
+ \leq 2 | x - x^* | < 2\delta = \epsilon.\]
+Also ist $f$ stetig auf $[-1; 1 ]$.
+\end{tabs*}
+\end{example}   	
+
+\begin{example}\label{ex:gauss-klammer}
+Wir zeigen, dass das $\epsilon$-$\delta$-Kriterium in den Fällen aus Beispiel \ref{ex:unstetig} verletzt ist.
+\begin{tabs*}
+\tab{Gauß-Klammer-Funktion} 
+Allgemeiner als für die Heaviside-Funktionen zeigen wir die Unstetigkeit für die durch die Gauß-Klammer gegebene Funktion
+\[   f:\R\to \Z, x\mapsto [x]:=\max\{ n\in \Z | n\leq x\}. \]
+Deren Graph weist sehr viele \emph{Sprünge} auf. 
+
+\begin{center}
+\image{T204_Example_A}
+\end{center}
+
+An den \emph{Sprungstellen} ist diese Funktion nicht stetig:\\
+Ist nämlich $x^*=n\in \Z$, so ist $[x^*]=n$ und für jedes $x\in \R$ mit $x<x^*$ gilt $[x]\leq n-1$.\\
+Insbesondere ist $|f(x)-f(x^*)|=|[x]-n|\geq 1$ für alle $x<x^*$.
+
+Wählt man also ein $\epsilon\in (0;1]$ (z.B. $\epsilon=\frac{1}{2}$), so gilt für alle $x<x^*$
+\[  |f(x)-f(x^*)|\geq 1\geq \epsilon. \]
+Da es aber für jedes $\delta>0$ auch ein $x<x^*$ mit $|x-x^*|<\delta$ gibt (z.B. $x=x^*-\delta/2$), gibt es also zu keinem $\epsilon\in (0;1]$ ein gewünschtes $\delta$. Die Gauß-Klammer-Funktion ist also an der Stelle $x^*\in \Z$ nicht stetig.
+
+Für $x^*\in \R\setminus \Z$ ist die Funktion an der Stelle $x^*$ jedoch stetig. In einer kleinen Umgebung von $x^*$ ist die Funktion nämlich konstant.
+
+\begin{incremental}[\initialsteps{0}]
+\step Genauer: Wählt man $\delta=\min\{x^*-[x^*]; [x^*]+1-x^*\}$, so gilt
+\[ f(x)=[x]=[x^*]=f(x^*)\quad \text{für alle }x\text{ mit }|x-x^*|<\delta \]
+(denn $x< x^*+\delta\leq x^*+[x^*]+1-x^*=[x^*]+1$ und
+$x>x^*-\delta\geq x^*-(x^*-[x^*])=[x^*]$ nach Definition von $\delta$.)
+Insbesondere gilt für beliebiges $\epsilon>0$
+\[ |f(x)-f(x^*)|=0<\epsilon\quad \text{für alle }x\text{ mit }|x-x^*|<\delta. \]
+\end{incremental}
+\tab{Dirichletsche Sprungfunktion} 
+Sei 
+\[  D:\R\to {\{0;1\}}, x \mapsto \begin{cases} 1 & \text{falls }x\in \Q \\
+0 & \text{falls }x\notin \Q \end{cases}.\]
+die \ref[reelle-funk][Dirichletsche Sprungfunktion]{ex:unstetige-funktionen}.
+
+Ist $x^*$ eine rationale Zahl, so gibt es in jeder $\delta$-Umgebung $U_{\delta}(x^*)$ von $x^*$ eine irrationale Zahl $x_1$. Das bedeutet, dass es zu jedem $\delta>0$ ein $x_1$ mit $|x_1-x^*|<\delta$ gibt, so dass
+\[ |D(x_1)-D(x^*)| =|0 -1|=1. \]
+Wählt man also zum Beispiel $\epsilon = \frac{1}{2}$, dann gibt es
+kein $\delta>0$ mit
+\[ |D(x)-D(x^*)|<\epsilon\quad\text{für alle }x\text{ mit }|x-x^*|<\delta, \]
+da es für die irrationalen $x$ nicht erfüllt ist.
+
+Also ist die Dirichletsche Sprungfunktion an jeder rationalen Stelle nicht stetig.
+
+Ganz entsprechend sieht man, dass diese Funktion auch an den irrationalen Stellen $x^* \in \R \setminus \Q$ nicht stetig ist, da es in jeder $\delta$-Umgebung einer irrationalen Zahl auch immer eine rationale Zahl gibt.
+\end{tabs*}
+\end{example}
+
+\begin{remark}
+Sei $x^*$ ein \emph{isolierter Punkt} von $D$, d. h. ein Punkt, für den es ein $\delta > 0$ gibt mit $U_{\delta}( x^*)\cap D =
+\{ x^* \}$. Dann ist $f$ stetig in $x^*$ (weil man für jedes $\epsilon > 0$ dieses $\delta$ wählen kann). Dies wird in der Literatur zum Teil anders definiert.
+\end{remark}
+
+\section{Links- und Rechtsseitige Stetigkeit}\label{sec:einseitige-stetigkeit}
+
+Als Verallgemeinerung zur Stetigkeit führen wir noch die links- bzw. rechtsseitige Stetigkeit ein. Hierbei werden nur Folgen betrachtet, deren Folgeglieder auf dem Zahlenstrahl alle links bzw. alle rechts der betrachteten Stelle liegen.
+Dies steht in Analogie zum Begriff des 
+\ref[content_31_grenzwerte_von_funktionen][einseitigen Grenzwerts]{sec:einseitige-grenzwerte}
+\begin{definition} 
+Sei $f : D \to \R$ eine Funktion und $x^* \in D$.
+\begin{enumerate}
+\item[(i)] $f$ ist \notion{linksseitig stetig} in $x^*$, wenn für jede Folge $( x_n )_{n \geq 1}$ in $D$ mit
+$\lim_{n \to \infty} x_n = x^*$ und $x_n \leq x^*$  für alle $n \in \N$ gilt 
+\[ \lim_{n \to \infty} f ( x_n ) = f ( x^* ) .\]
+\item[(ii)] $f$ ist \notion{rechtsseitig stetig} in $x^*$, wenn für jede Folge $( x_n )_{n \geq 1}$ in $D$ mit
+$\lim_{n \to \infty} x_n = x^*$ und $x_n \geq x^*$  für alle $n \in \N$ gilt 
+\[ \lim_{n \to \infty} f ( x_n ) = f ( x^* ) .\]
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+\begin{itemize}
+\item[(a)]
+Mit dem Begriff des \ref[content_31_grenzwerte_von_funktionen][einseitigen Funktionsgrenzwerts]{sec:einseitige-grenzwerte}
+lässt sich die einseitige Stetigkeit kompakt formulieren:
+\begin{enumerate}
+\item[(i)] 
+$f$ ist linksseitig stetig in $x^\ast$, genau dann wenn der linksseitige Grenzwert gegen $x^\ast$ existiert und mit dem
+Funktionswert übereinstimmt, $\lim_{x\nearrow x^*} f(x)=f(x^\ast)$.
+\item[(ii)]
+$f$ ist rechtsseitig stetig in $x^\ast$ genau dann, wenn der rechtsseitige Grenzwert gegen $x^\ast$ existiert und mit dem
+Funktionswert übereinstimmt, $\lim_{x\searrow x^*} f(x)=f(x^\ast)$.
+\end{enumerate}
+\item[(b)]
+Wie auch die Stetigkeit, so lässt sich die einseitige Stetigkeit durch ein 
+$\epsilon$-$\delta$-Kriterium darstellen:
+\begin{enumerate}
+\item[(i)]
+$f$ ist linksseitig stetig in $x^*$, wenn es f"ur jedes $\epsilon >0$ ein \nowrap{$\delta = \delta(\epsilon) >0$} gibt, so dass 
+  \[ |f(x) - f(x^*)| < \epsilon \quad \text{f"ur alle }
+  \nowrap{x\in D,\text{ mit } x^*-\delta(\epsilon)< x\leq x^*.}
+  \]
+  \item[(ii)]
+$f$ ist rechtsseitig stetig in $x^*$, wenn es f"ur jedes $\epsilon >0$ ein \nowrap{$\delta = \delta(\epsilon) >0$} gibt, so dass 
+  \[ |f(x) - f(x^*)| < \epsilon \quad \text{f"ur alle }
+  \nowrap{x\in D,\text{ mit } x^*\leq x< x^*+\delta(\epsilon).}
+  \]
+  \end{enumerate}
+\end{itemize}
+\end{remark}
+
+\begin{example}
+\begin{enumerate}
+\item
+Ist eine Funktion $f$ stetig in $x^*$ ist sie natürlich auch linksseitig und rechtsseitig stetig, da die Bedingung für die Folgen der Funktionswerte lediglich für weniger Folgen $( x_n )_{n \geq 1}$ erfüllt sein müssen.
+\item Die Gauß-Klammer-Funktion $[\cdot]$ ist an allen Stellen rechtsseitig stetig. An den ganzzahligen Stellen ist sie jedoch nicht linksseitig stetig, wie oben gezeigt wurde.
+\\
+Ebenso ist die Heaviside-Funktion in $x^\ast=0$ nur rechtsseitig stetig.
+\item Die Dirichletsche Sprungfunktion ist an keiner Stelle linksseitig stetig und auch nicht rechtsseitig stetig.
+\end{enumerate}
+\end{example}
+
+Die Bedeutung der links- und rechtsseitigen Stetigkeit wird ersichtlich durch
+
+\begin{theorem}
+$f:D\to \R$ ist genau dann stetig in $x^*\in D$ , wenn $f$ linksseitig und rechtsseitig stetig in $x^*$ ist.
+\end{theorem}
+
+\begin{proof*}
+Dass Stetigkeit die links- und rechtsseitige Stetigkeit impliziert, wurde ja schon erklärt.
+\begin{incremental}{0}
+\step
+Sei nun $f$ in $x^*$ links- und rechtsseitig stetig. Für  
+$\epsilon>0$ muss dann ein passendes $\delta$ gefunden werden.
+Da $f$ in $x^*$ links- und rechtsseitig stetig ist, gibt es $\delta_1>0$ mit
+  \[ |f(x) - f(x^*)| < \epsilon \quad \text{f"ur alle }
+  x\in D,\text{ mit } x^*-\delta_1< x\leq x^*
+  \]
+ und $\delta_2>0$ mit
+  \[ |f(x) - f(x^*)| < \epsilon \quad \text{f"ur alle }
+  x\in D,\text{ mit } x^*\leq x< x^*+\delta_2.
+  \]
+Daher ist
+  \[ |f(x) - f(x^*)| < \epsilon \quad \text{f"ur alle }
+  x\in D,\text{ mit } x^*-\delta_1< x< x^*+\delta_2.
+  \]
+Wählt man nun $\delta=\min\{\delta_1;\delta_2\}$, so ist insbesondere
+  \[ |f(x) - f(x^*)| < \epsilon \quad \text{f"ur alle }
+  x\in D,\text{ mit } x^*-\delta< x< x^*+\delta,
+  \]
+  d.h. für alle $x\in D$ mit $|x-x^*|<\delta$. 
+\end{incremental}
+\end{proof*}
+
+\begin{example}
+Wir  zeigen, dass die Betragsfunktion $f:\R\to \R, x\mapsto |x|$ auf ganz $\R$ stetig ist.
+
+Betrachten wir zunächst die Stelle $x^*=0$.\\ Für alle gegen $0$ konvergente Folgen $( x_n )_{n \geq 1}$ mit $x_n\leq 0$ gilt hier
+\[ \lim_{n \to \infty} {|x_n|} =\lim_{n \to \infty} -x_n =- \lim_{n \to \infty} x_n=-0={|0|}. \]
+Also ist die Betragsfunktion in $0$ linksseitig stetig.
+
+Für alle gegen $0$ konvergente Folgen $( x_n )_{n \geq 1}$ mit $x_n\geq 0$ gilt hier
+\[ \lim_{n \to \infty} {|x_n|} =\lim_{n \to \infty} x_n =0={|0|}. \]
+Also ist die Betragsfunktion in $0$ rechtsseitig stetig.
+
+Damit ist die Betragsfunktion in $0$ auch stetig.\\ \\
+
+Für alle anderen Stellen verwenden wir ein Mittel, das häufig hilfreich ist: Um Stetigkeit an einer bestimmten Stelle 
+$x^*$ zu untersuchen, reicht es gegen $x^*$ konvergente Folgen $( x_n )_{n \geq 1}$ zu betrachten, deren
+Folgeglieder alle in einer kleinen Umgebung von $x^*$ liegen. Das liegt daran, dass wir nur an dem Grenzwert
+der Folge $( f(x_n) )_{n \geq 1}$ interessiert sind, und daher die "`ersten Folgeglieder"' uninteressant sind.
+Da die Folge $( x_n )_{n \geq 1}$ aber gegen $x^*$ konvergiert, liegen ab einem bestimmten $N\in \N$ alle Folgeglieder
+$x_n$ mit $n\geq N$ in dieser kleinen Umgebung von $x^*$, und wir hätten direkt mit der Folge $( x_n )_{n \geq N}$ starten
+können.
+
+Betrachten wir nun zunächst eine Stelle $x^*>0$: In einer Umgebung von $x^*$ (genauer sogar auf
+dem Intervall $(0;2x^*)=U_{x^*}(x^*)$ ist die Betragsfunktion identisch mit der linearen Funktion $x\mapsto x$.
+Da letztere bei $x^*$ stetig ist, ist die Betragsfunktion bei $x^*$ stetig.
+
+Entsprechend ist die Betragfunktion an allen negativen Stellen $x^*$ stetig, weil sie auf der Umgebung $(2x^*;0)=U_{-x^*}(x^*)$
+mit der linearen Funktion $x\mapsto -x$ identisch ist.
+
+Somit ist die Betragsfunktion auf ganz $\R$ stetig.
+\end{example}
+
+\begin{quickcheck}
+%\type{mc.multiple}%
+    \lang{de}{\text{Unter Beispiel \ref{ex:gauss-klammer} findet sich der Graph der Gauß-Klammer-Funktion. Wir betrachten jetzt:
+    \[   f:\R\to \Z, x\mapsto [-x] \]\\Welche der folgenden Aussagen ist wahr?}}
+    \begin{choices}{multiple}
+        \begin{choice}
+            \text{Die Funktion $f(x)$ ist unstetig an $x_0=1$.}
+            \solution{true}
+        \end{choice}
+        \begin{choice}
+            \text{Die Funktion $f(x)$ ist linksseitig stetig an $x_0=1$.}
+            \solution{true}
+        \end{choice}
+        \begin{choice}
+            \text{Die Funktion $f(x)$ ist rechtsseitig stetig an $x_0=1$.}
+            \solution{false}
+        \end{choice}
+        \begin{choice}
+            \text{Die Funktion $f(x)$ ist stetig an $x_0=1$.}
+            \solution{false}
+        \end{choice}
+        
+     \end{choices}
+     \explanation{Die hier betrachtete Funktion ist die an der y-Achse gespiegelte Gauß-Klammer-Funktion.
+     Deshalb ist sie an $x_0=1$ linksseitig stetig, aber nicht rechtsseitig stetig. Demnach ist sie insgesamt unstetig.}
+\end{quickcheck}
+
+Wie sich der Stetigkeitsbegriff auf komplexe Funktionen erweitern lässt, zeigt das folgende Video:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10921&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+
+% Alte Version
+% Viele Vorgänge in der Natur lassen sich mit stetigen Funktionen beschreiben. Betrachtet
+% man z.B. in einem Weg-Zeit-Diagramm die zurückgelegte Wegstrecke als Funktion
+% der Zeit, so wird es hier keine Sprünge geben. Die Weg-Zeit-Funktion ist stetig.
+
+% Es gibt im wesentlichen zwei Möglichkeiten, die Stetigkeit von Funktionen zu definieren. Die eine verwendet ein sogenanntes
+% $\epsilon$-$\delta$-Kriterium, die andere verwendet Folgen. Beide Definitionen sind gleichwertig, da der 
+% identische Begriff definiert wird. Stetigkeit ist ein punktweiser Begriff, von dem sich Stetigkeit auf 
+% einer Menge ableitet.
+
+% Anschaulich gesprochen wird eine stetige Funktion auf einem \emph{Intervall} dadurch charakterisiert, dass man ihren Graphen
+% „ohne Absetzten durchzeichnen“ kann, dass also keine Sprünge auftreten.
+
+
+% \section{$\epsilon$-$\delta$-Kriterium}\label{sec:eps-delta}
+
+% \begin{definition}
+% Sei $f$ eine auf $D\subset\R$ definierte reelle Funktion und sei $x^*\in D$.
+%  \lang{de}{$f$ heißt \notion{stetig an der Stelle} $x^*\in D$, wenn es f"ur jedes $\epsilon >0$ ein \nowrap{$\delta = \delta(\epsilon) >0$} gibt, so dass }
+%   \[ |f(x) - f(x^*)| < \epsilon \quad \text{f"ur alle }
+%   \nowrap{x\in D,\text{ mit } |x-x^*|<\delta(\epsilon).}
+%   \]
+
+%   \lang{de}{$f$ ist \notion{stetig}, falls
+%     $f$ f\"ur alle \nowrap{$x^*\in D$} stetig ist.}
+    
+%  Allgemeiner sagt man für eine Teilmenge $E$ des Definitionsbereichs $D$:
+   
+%   \lang{de}{$f$ ist \notion{stetig auf $E$}, falls
+%     $f$ f\"ur alle \nowrap{$x^*\in E$} stetig ist.}
+    
+% \end{definition}
+
+% \begin{remark}
+% Da die Menge aller $x$ mit $|x-x^*|<\delta$ genau die $\delta$-Umgebung $U_\delta(x^*)$ von $x^*$ ist, lässt sich diese Definition auch mit Umgebungen formulieren:
+
+% $f:D\to \R$ ist stetig an der Stelle $x^*\in D$, wenn es f"ur jedes $\epsilon >0$ ein \nowrap{$\delta = \delta(\epsilon) >0$} gibt, so dass
+%   \[ f(x)\in U_{\epsilon}(f(x^*))\quad \text{f"ur alle }
+% x\in D\cap U_\delta(x^*).
+%   \]
+% \end{remark}
+
+% Das folgende Video erläutert nochmal das $\epsilon$-$\delta$-Kriterium und beweist die Unstetigkeit
+% der Dirichlet'schen Sprungfunktion.
+% \floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10915&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+
+
+% \begin{example}
+% Visualisierungen zur Stetigkeit einer Funktion an einer Stelle.
+% \begin{tabs*}
+% \tab{1. Visualisierung}
+% \begin{genericGWTVisualization}[550][800]{mathlet1}
+		
+% 		\begin{variables}
+% 			\function{f}{rational}{x^2/2-x+1}  
+% %			\pointOnCurve{a1}{rational}{var(f)}{1}
+% %			\number{a}{rational}{2}
+% 			\parametricFunction{ax}{real}{0, 1+t, 0.02, 2, 100}
+% 			\pointOnParametricCurve[editable]{P}{real}{var(ax)}{0.8}		
+% 			\number{ups}{real}{var(P)[y]-1}
+% %-------------------variante mit editierbarem epsilon
+% %			\number[editable]{ups}{real}{1}
+% %			\point{P}{real}{0,var(ups)}
+% %-----------------------------------------------------
+% 			\function{gr}{real}{1}
+% 			\function{l1}{real}{1+var(ups)}
+% 			\function{l2}{real}{1-var(ups)}
+% %			\number{b}{real}{1+2*var(ups)}
+% 			\number{d}{real}{2*var(ups)/(2+var(ups))}
+% 			\point{c00}{real}{2-var(d),1-var(ups)}
+% 			\point{c01}{real}{2-var(d),1+var(ups)}
+% 			\point{c10}{real}{2+var(d),1-var(ups)}
+% 			\point{c11}{real}{2+var(d),1+var(ups)}
+% 			\line{v0}{real}{var(c00), var(c01)}
+% 			\line{v1}{real}{var(c10), var(c11)}
+% %			\set{s}{real}{|y-1|<var(ups) AND |x-2|<var(d)}
+% 			\set{s}{real}{|x-2|<var(d)}
+% 			\point{m}{real}{2,0}
+% 			\point{pc}{real}{2,1}
+			
+% 		\end{variables}
+% 		\color{P}{#CC6600}
+% 		%\label{P}{$\textcolor{BLUE}{P}$}
+% 		\color{s}{#00CC00}
+% 		\color{l1}{#CC6600}
+% 		\color{l2}{#CC6600}
+% 		\color{gr}{#0066CC}
+% 		\color{m}{#0066CC}
+% 		\color{pc}{#0066CC}
+% 		\color{v0}{#00CC00}
+% 		\color{v1}{#00CC00}
+% 		\color{f}{BLACK}
+        
+% 		\begin{canvas}
+% 			\plotLeft{-0.3}
+% 			\plotRight{4.3}
+% 			\plotSize{400,300}
+% 			\plot[coordinateSystem]{m, pc, s, gr,l1,l2, v0, v1, P, f}
+% 		\end{canvas}
+% 		\text{Die schwarze Kurve ist der Graph der Funktion $f:\R\to \R, x\mapsto \frac{x^2}{2}-x+1$, welche an der Stelle $x^*=2$ den
+% 		Funktionswert $f(x^*)=f(2)=1$ hat. Zur Untersuchung der Stetigkeit von $f$ an der Stelle $x^*=2$ werden hier für jedes $\epsilon>0$ ein
+% 		passendes $\delta$ berechnet. Graphisch ist ein passendes $\delta$ daran zu erkennen, dass innerhalb des $x$-Bereiches, der durch
+% 		$2-\delta$ und $2+\delta$ beschränkt wird (schraffierter Bereich), der Funktionsgraph zwischen den horizontalen grünen Geraden liegt.\\
+% 		Für $\epsilon= \var{ups}$ ist $\delta(\epsilon)=\var{d}$ eine Zahl, so dass
+% 		$|f(x)-f(x^*)|<\var{ups}$ für alle $x$ mit $|x-x^*|<\var{d}$.\\ \\
+% 		\textcolor{#0066CC}{Sie können den Wert von $\epsilon$ ändern, indem Sie den orangenen Punkt auf der $y$-Achse verschieben.}
+% 		}
+%    	\end{genericGWTVisualization}
+
+% \tab{2. Visualisierung}   	
+%    	\begin{genericGWTVisualization}[550][800]{mathlet1}
+		
+% 		\begin{variables}
+% 			\function{f}{rational}{x^2/2-x+1}  
+% %			\pointOnCurve{a1}{rational}{var(f)}{1}
+% %			\number{a}{rational}{2}
+% 			\parametricFunction{ax}{real}{2+t, 0, 0.02, 2, 100}
+% 			\pointOnParametricCurve[editable]{Q}{real}{var(ax)}{1.5}		
+% 			\number{d}{real}{var(Q)[x]-2}
+% %-------------------variante mit editierbarem epsilon
+% 			\number[editable]{ups}{real}{0.8}
+% 			\number{ups1}{real}{var(ups)}
+% 			\point{P}{real}{0,var(ups)}
+% %-----------------------------------------------------
+% 			\function{gr}{real}{1}
+% 			\function{l1}{real}{1+var(ups)}
+% 			\function{l2}{real}{1-var(ups)}
+% %			\number{b}{real}{1+2*var(ups)}
+% %			\number{d}{real}{2*var(ups)/(2+var(ups))}
+% 			\point{c00}{real}{2-var(d),1-var(ups)}
+% 			\point{c01}{real}{2-var(d),1+var(ups)}
+% 			\point{c10}{real}{2+var(d),1-var(ups)}
+% 			\point{c11}{real}{2+var(d),1+var(ups)}
+% 			\line{v0}{real}{var(c00), var(c01)}
+% 			\line{v1}{real}{var(c10), var(c11)}
+% %			\set{s}{real}{|y-1|<var(ups) AND |x-2|<var(d)}
+% 			\set{s}{real}{|x-2|<var(d)}
+% 			\point{m}{real}{2,0}
+% 			\point{pc}{real}{2,1}
+
+% 			\number{x1}{real}{2+var(d)-0.01}  % -0.01 als Toleranz. 
+% 			\number{fx1}{real}{(var(x1))^2/2-var(x1)+1}
+% 			\number{t}{real}{var(fx1)-1-var(ups)-0.01} % -0.01 als Toleranz. 
+% 			\number{lb}{real}{2-var(d)}
+% 			\number{ub}{real}{2+var(d)}
+
+			
+% 		\end{variables}
+% 		\color{P}{#CC6600}
+% 		\color{Q}{#00CC00}
+% 		%\label{P}{$\textcolor{BLUE}{P}$}
+% 		\color{s}{#00CC00}
+% 		\color{l1}{#CC6600}
+% 		\color{l2}{#CC6600}
+% 		\color{gr}{#0066CC}
+% 		\color{m}{#0066CC}
+% 		\color{pc}{#0066CC}
+% 		\color{v0}{#00CC00}
+% 		\color{v1}{#00CC00}
+%         \color{f}{BLACK}
+
+% 		\begin{canvas}
+% 			\updateOnDrag[false]
+% 			\plotLeft{-0.3}
+% 			\plotRight{4.3}
+% 			\plotSize{400,300}
+% 			\plot[coordinateSystem]{m, pc, s, gr,l1,l2, v0, v1, Q, f}
+% 		\end{canvas}
+% 		\text{Die schwarze Kurve ist wieder der Graph der Funktion $f:\R\to \R, x\mapsto \frac{x^2}{2}-x+1$, welche an der Stelle $x^*=2$ den
+% 		Funktionswert $f(x^*)=f(2)=1$ hat.\\
+% 		In dieser Visualisierung sollen Sie selbst zu gegebenem $\epsilon>0$ ein passendes $\delta>0$ finden, so dass
+% 		$|f(x)-f(x^*)|<\epsilon$ für alle $x$ mit $|x-x^*|<\delta$.\\ 
+%  		Wählen Sie dazu zunächst den Wert: $\epsilon= \var{ups}$.\\ 
+%  		Passen Sie anschließend $\delta$ durch Verschieben des grünen Punktes in der Graphik an.\\ \\		 
+% 		\IFELSE{var(t) < 0}{\textcolor{#0066CC}{Richtig!} Für $\delta=\var{d}$ gilt: Für alle $x$ zwischen $x^*-\delta=\var{lb}$ und $x^*+\delta=\var{ub}$
+% 		gilt $|f(x)-f(x^*)|<\epsilon=\var{ups1}$}{\textcolor{#CC6600}{Für }$\delta=\var{d}$ \textcolor{#CC6600}{ ist die Bedingung }\\
+% 		$|f(x)-f(x^*)|<\epsilon=\var{ups1}$ für alle $x$ mit $|x-x^*|<\delta$ \\
+% 		\textcolor{#CC6600}{nicht erfüllt. Zum Beispiel ist für }$x=\var{x1}<2+\delta=\var{ub}$:\\  $f(x)\approx\var{fx1}\geq 1+\var{ups1}= f(x^*)+\epsilon$.}
+% 		}
+%    	\end{genericGWTVisualization}
+%    	\end{tabs*}
+% \end{example}
+   	
+% \begin{example}   	
+% Visualisierung zur Unstetigkeit einer Funktion an einer Stelle.
+% \begin{genericGWTVisualization}[550][800]{mathlet1}
+		
+% 		\begin{variables}
+% 			\function{f}{real}{|x-3|/(x^2-3*x)+sqrt(x)-x/sqrt(x)}   % +-sqrt(x) um auf R_+ einzuschränken.
+% %			\pointOnCurve{a1}{rational}{var(f)}{1}
+% %			\number{a}{rational}{2}
+% 			\parametricFunction{ax}{real}{3+t, 0, 0.02, 2, 100}
+% 			\pointOnParametricCurve[editable]{Q}{real}{var(ax)}{2}		
+% 			\number{d}{real}{var(Q)[x]-3}
+% %-------------------variante mit editierbarem epsilon
+% 			\number[editable]{ups}{real}{1}
+% 			\number{ups1}{real}{var(ups)}
+% 			\point{P}{real}{0,var(ups)}
+% %-----------------------------------------------------
+% 			\function{gr}{real}{1/3}
+% 			\function{l1}{real}{1/3+var(ups)}
+% 			\function{l2}{real}{1/3-var(ups)}
+% %			\number{b}{real}{1+2*var(ups)}
+% %			\number{d}{real}{2*var(ups)/(2+var(ups))}
+% 			\point{c00}{real}{3-var(d),1/3-var(ups)}
+% 			\point{c01}{real}{3-var(d),1/3+var(ups)}
+% 			\point{c10}{real}{3+var(d),1/3-var(ups)}
+% 			\point{c11}{real}{3+var(d),1/3+var(ups)}
+% 			\line{v0}{real}{var(c00), var(c01)}
+% 			\line{v1}{real}{var(c10), var(c11)}
+% %			\set{s}{real}{|y-1|<var(ups) AND |x-2|<var(d)}
+% 			\set{s}{real}{|x-3|<var(d)}
+% 			\point{m}{real}{3, 0}
+			
+% 			\number{ed}{real}{1/3}
+% 			\point{pc}{real}{3, var(ed)}
+
+% 			\number{x1}{real}{3-var(d)+0.01}  % -0.01 als Toleranz. 
+% 			\number{fx1}{real}{(3-var(x1))/(var(x1)^2-3*var(x1))}
+% 			\number{t}{real}{1/3-var(fx1)-var(ups)-0.01} % -0.01 als Toleranz. 
+% 			\number{lb}{real}{3-var(d)}
+% 			\number{ub}{real}{3+var(d)}
+% 			\number{x2}{real}{3-var(d)/2}
+% 			\number{fx2}{real}{(3-var(x2))/(var(x2)^2-3*var(x2))}
+
+			
+% 		\end{variables}
+% 		\color{P}{#CC6600}
+% 		\color{Q}{#00CC00}
+% 		%\label{P}{$\textcolor{BLUE}{P}$}
+% 		\color{s}{#00CC00}
+% 		\color{l1}{#CC6600}
+% 		\color{l2}{#CC6600}
+% 		\color{gr}{#0066CC}
+% 		\color{m}{#0066CC}
+% 		\color{pc}{BLACK}
+% 		\color{v0}{#00CC00}
+% 		\color{v1}{#00CC00}
+%         \color{f}{BLACK}
+        
+
+% 		\begin{canvas}
+% 			\updateOnDrag[false]
+% 			\plotLeft{0.7}
+% 			\plotRight{5.3}
+% 			\plotSize{400,300}
+% 			\plot[coordinateSystem]{m, pc, s, gr,l1,l2, v0, v1, Q, f}
+% 		\end{canvas}
+% 		\text{Die schwarze Kurve ist der Graph der Funktion $f:\R_+\to \R$ mit $f(x)=\frac{|x-3|}{x^2-3x}$ für $x\neq 3$ und $f(3)=\frac{1}{3}$. 
+% 		Wir betrachten die Stelle $x^*=3$ mit dem Funktionswert $f(x^*)=f(3)=\frac{1}{3}$, an der die Funktion nicht stetig ist.\\
+% 		In dieser Visualisierung sollen Sie selbst zu gegebenem $\epsilon>0$ ein passendes $\delta>0$ suchen, so dass
+% 		$|f(x)-f(x^*)|<\epsilon$ für alle $x$ mit $|x-x^*|<\delta$.\\ 
+%  		Wählen Sie dazu zunächst den Wert: $\epsilon= \var{ups}$. (Sie sollten insbesondere auch kleine Werte wählen.) \\ 
+%  		Passen Sie anschließend $\delta$ durch Verschieben des grünen Punktes in der Graphik an.\\ \\	
+%  		\IF{var(ups)<= 2/3}{\textcolor{red}{Für dieses $\epsilon$ können Sie ausprobieren, so lange Sie wollen.}\\ 
+%  		Links von $x^*=3$ sind die Funktionswerte zu weit von $f(3)= \frac{1}{3}$ entfernt.\\
+%  		Zum Beispiel für $x=\var{x2}>3-\delta=\var{lb}$ ist $f(x)\approx \var{fx2}\leq \frac{1}{3}-\var{ups1}=f(x^*)-\epsilon$.\\
+%  		Da es hier kein passendes $\delta$ gibt, ist diese Funktion $f$ an der Stelle $x^*=3$ nicht stetig.
+%  		}
+%  		\IF{var(ups)> 2/3}{
+% 		\IFELSE{var(t) < 0}{\textcolor{#0066CC}{Richtig!} Für $\delta=\var{d}$ gilt: Für alle $x$ zwischen $x^*-\delta=\var{lb}$ und $x^*+\delta=\var{ub}$
+% 		ist $|f(x)-f(x^*)|<\epsilon=\var{ups1}$}{\textcolor{#CC6600}{Für }$\delta=\var{d}$ \textcolor{#CC6600}{ ist die Bedingung }\\
+% 		$|f(x)-f(x^*)|<\epsilon=\var{ups1}$ für alle $x$ mit $|x-x^*|<\delta$ \\
+% 		\textcolor{#CC6600}{nicht erfüllt. Zum Beispiel ist für }$x=\var{x1}>3-\delta=\var{lb}$:\\  $f(x)\approx\var{fx1}\leq \frac{1}{3}-\var{ups1}
+% 		= f(x^*)-\epsilon$.}
+% 		}
+% 		}
+%    	\end{genericGWTVisualization}
+% \end{example}
+
+% Das folgende Video erläutert den Begriff der Stetigkeit sehr anschaulich und verdeutlicht ihn an Beispielen:
+% \floatright{\href{https://www.hm-kompakt.de/video?watch=407}{\image[75]{00_Videobutton_schwarz}}}\\\\
+ 
+% \begin{example}
+% Die meisten elementaren Funktionen sind auf ihrer gesamten Definitionsmenge stetig (vgl. auch den \link{elem-funk-stetig}{nächsten Abschnitt}).
+% \begin{tabs*}
+% \tab{konstante Funktionen} Für festes $c\in \R$ ist die konstante Funktion $f:\R\to \R,x\mapsto c$ stetig auf ganz $D=\R$.\\
+% Ist $x^*\in \R$ eine beliebige Stelle, so gilt für jedes $\epsilon>0$:
+% \[   |f(x)-f(x^*)|=|c-c|=0<\epsilon \]
+% für alle $x\in \R$. Insbesondere kann man stets $\delta=1$ wählen (oder irgendeinen anderen Wert $>0$) und erhält:
+% \[   |f(x)-f(x^*)|=|c-c|=0<\epsilon \quad \text{f"ur alle }
+%   \nowrap{x\in D,\text{ mit } |x-x^*|<\delta}. \]
+% \tab{lineare Funktionen} Für feste reelle Zahlen $a,b\in \R$ mit
+% $a \neq 0$ sei $f: \R \to \R, x \mapsto ax + b$. Sei $x^* \in \R$ und $\epsilon > 0$. Wir wählen
+% $\delta  = \frac{\epsilon}{| a |}$ . Für alle $x \in \R$ mit $| x - x^* | < \delta$ gilt dann
+% \[ |f ( x ) - f ( x^* )| = |ax + b - ax^* - b| = | a | \cdot | x - x^* | < | a | \cdot \delta = \epsilon. \]
+% Also ist $f$ stetig auf $\R$.
+% \tab{$f(x)=x^2$} Sei $f : [-1; 1 ] \to \R, x \mapsto x^2$ .\\
+% Für $x^* \in [-1; 1 ]$ und $\epsilon > 0$ sei $\delta =\frac{\epsilon}{2}> 0$.\\
+% Dann gilt für alle
+% $x \in [-1; 1 ]$ mit $| x - x^* | < \delta$:
+% \[ |f ( x ) - f ( x^* )| = |x^2 - (x^*)^2| = | x+x^* |\cdot | x - x^* | 
+%  \leq 2 | x - x^* | < 2\delta = \epsilon.\]
+% Also ist $f$ stetig auf $[-1; 1 ]$.
+% \end{tabs*}
+% \end{example}   	
+
+% \begin{example}
+% Wir haben auch schon Funktionen kennengelernt, die nicht an allen Stellen stetig sind.
+% \begin{tabs*}
+% \tab{Gauß-Klammer-Funktion} 
+% Die durch die Gauß-Klammer gegebene Funktion
+% \[   f:\R\to \Z, x\mapsto [x]:=\max\{ n\in \Z | n\leq x\} \]
+% hat einen Graph, der viele \emph{Sprünge} aufweist. 
+
+% \begin{center}
+% \image{T204_Example_A}
+% \end{center}
+
+% An den \emph{Sprungstellen} ist diese Funktion nicht stetig:\\
+% Ist nämlich $x^*=n\in \Z$, so ist $[x^*]=n$ und für jedes $x\in \R$ mit $x<x^*$ gilt $[x]\leq n-1$.\\
+% Insbesondere ist $|f(x)-f(x^*)|=|[x]-n|\geq 1$ für alle $x<x^*$.
+
+% Wählt man also ein $\epsilon\in (0;1]$ (z.B. $\epsilon=\frac{1}{2}$), so gilt für alle $x<x^*$
+% \[  |f(x)-f(x^*)|\geq 1\geq \epsilon. \]
+% Da es aber für jedes $\delta>0$ auch ein $x<x^*$ mit $|x-x^*|<\delta$ gibt (z.B. $x=x^*-\delta/2$), gibt es also zu keinem $\epsilon\in (0;1]$ ein gewünschtes $\delta$. Die Gauß-Klammer-Funktion ist also an der Stelle $x^*\in \Z$ nicht stetig.
+
+% Für $x^*\in \R\setminus \Z$ ist die Funktion an der Stelle $x^*$ jedoch stetig. In einer kleinen Umgebung von $x^*$ ist die Funktion nämlich konstant.
+
+% \begin{incremental}[\initialsteps{0}]
+% \step Genauer: Wählt man $\delta=\min\{x^*-[x^*]; [x^*]+1-x^*\}$, so gilt
+% \[ f(x)=[x]=[x^*]=f(x^*)\quad \text{für alle }x\text{ mit }|x-x^*|<\delta \]
+% (denn $x< x^*+\delta\leq x^*+[x^*]+1-x^*=[x^*]+1$ und
+% $x>x^*-\delta\geq x^*-(x^*-[x^*])=[x^*]$ nach Definition von $\delta$.)
+% Insbesondere gilt für beliebiges $\epsilon>0$
+% \[ |f(x)-f(x^*)|=0<\epsilon\quad \text{für alle }x\text{ mit }|x-x^*|<\delta. \]
+% \end{incremental}
+% \tab{Dirichlet'sche Sprungfunktion} 
+% Sei 
+% \[  D:\R\to {\{0;1\}}, x \mapsto \begin{cases} 1 & \text{falls }x\in \Q \\
+% 0 & \text{falls }x\notin \Q \end{cases}.\]
+% die \ref[reelle-funk][Dirichlet'sche Sprungfunktion]{ex:unstetige-funktionen}.
+
+% Ist $x^*$ eine rationale Zahl, so gibt es in jeder $\delta$-Umgebung $U_{\delta}(x^*)$ von $x^*$ eine irrationale Zahl $x_1$. Das bedeutet, dass es zu jedem $\delta>0$ ein $x_1$ mit $|x_1-x^*|<\delta$ gibt, so dass
+% \[ |D(x_1)-D(x^*)| =|0 -1|=1. \]
+% Wählt man also zum Beispiel $\epsilon = \frac{1}{2}$, dann gibt es
+% kein $\delta>0$ mit
+% \[ |D(x)-D(x^*)|<\epsilon\quad\text{für alle }x\text{ mit }|x-x^*|<\delta, \]
+% da es für die irrationalen $x$ nicht erfüllt ist.
+
+% Also ist die Dirichlet'sche Sprungfunktion an jeder rationalen Stelle nicht stetig.
+
+% Ganz entsprechend sieht man, dass diese Funktion auch an den irrationalen Stellen $x^* \in \R \setminus \Q$ nicht stetig ist, da es in jeder $\delta$-Umgebung einer irrationalen Zahl auch immer eine rationale Zahl gibt.
+% \end{tabs*}
+% \end{example}
+
+% \begin{remark}
+% Sei $x^*$ ein \emph{isolierter Punkt} von $D$, d. h. ein Punkt, für den es ein $\delta > 0$ gibt mit $U_{\delta}( x^*)\cap D =
+% \{ x^* \}$. Dann ist $f$ stetig in $x^*$ (weil man für jedes $\epsilon > 0$ dieses $\delta$ wählen kann). Dies wird in der Literatur zum Teil anders definiert.
+% \end{remark}
+
+% \section{Folgen-Kriterium}\label{sec:folgenkriterium}
+
+% Anstelle des $\epsilon$-$\delta$-Kriteriums von oben, wird die Stetigkeit von Funktionen auch oft über Folgen definiert.
+% Wir formulieren dies als Satz.
+
+% \begin{theorem}\label{thm:stetigkeit_folgenkrit_aequiv_epsilon-delta}
+% Sei $f : D \to \R$ eine Funktion und $x^* \in D$. Die Funktion
+% $f$ ist genau dann an der Stelle $x^*$ stetig, wenn die folgende Bedingung erfüllt ist:
+
+% Für jede Folge $( x_n)_{n \geq 1}$ in $D$ mit 
+% $\lim_{n \to \infty} x_n = x^*$ gilt
+% \[ \lim_{n \to \infty} f ( x_n ) = f ( \lim_{n \to \infty} x_n) 
+% = f ( x^* ) .\]
+% \end{theorem}
+
+
+% \begin{proof*}[Beweis (Stetigkeit)]
+
+% Beweisskizze: Die Äquivalenz des Satzes wird in zwei Schritten gezeigt: Die Hin-Richtung
+% benutzt nur die $\epsilon-\delta-$Definition der Stetigkeit und es folgt daraus die Konvergenz
+% der Folge der Funktionswerte. Die Rückrichtung wird mittels indirektem Beweis gezeigt: unter der
+% Annahme, dass $f$ an der Stelle $x^*$ nicht stetig ist, finden wir, dass dann die Folge der Funktionswerte
+% nicht gegen $f(x^*)$ konvergiert. Dies ist im Widerspruch zur Voraussetzung der konvergenten Folge
+% der Funktionswerte und somit folgt eben daraus die Stetigkeit an $x^*$.\\
+% \begin{incremental}{0}
+% \step
+% Wir nehmen zunächst an, dass $f$ in $x^*\in D$ stetig ist, und betrachten eine beliebige Folge $( x_n)_{n \geq 1}$ in $D$ mit 
+% $\lim_{n \to \infty} x_n = x^*$.
+% Dann ist zu zeigen, dass  $\lim_{n \to \infty} f ( x_n ) =f(x^*)$,
+% d.h. dass es zu jedem $\epsilon>0$ ein $N\in \N$ gibt mit
+% \[ |f(x_n)-f(x^*)|<\epsilon\quad \text{für alle }n\geq N.\]
+
+% Da $f$ stetig ist, gibt es zu $\epsilon>0$ ein $\delta>0$ mit
+% \[ |f(x)-f(x^*)|<\epsilon\quad\text{für alle }x\in D\text{ mit }|x-x^*|<\delta. \]
+% Wegen $\lim_{n \to \infty} x_n = x^*$ gibt es zu diesem $\delta>0$ ein $N\in \N$ mit
+% \[ |x_n-x^*|<\delta\quad\text{für alle }n\geq N,\]
+% und daher auch
+% \[ |f(x_n)-f(x^*)|<\epsilon\quad\text{für alle }n\geq N.\]
+
+% \step
+
+% Nimmt man umgekehrt an, dass $f$ nicht stetig an der Stelle $x^*$ ist, so ist zu zeigen, dass es eine Folge $( x_n)_{n \geq 1}$ in $D$ mit 
+% $\lim_{n \to \infty} x_n = x^*$ gibt, so dass die Folge $(f(x_n))_{n \geq 1}$ nicht gegen $f(x^*)$ konvergiert.
+
+% Da $f$ nicht stetig in $x^*$ ist, gibt es ein $\epsilon>0$ so, dass kein gewünschtes $\delta>0$ existiert. Für dieses $\epsilon$ gilt also insbesondere, dass für $\delta=\frac{1}{n}$ ein $x_n\in D\cap U_\delta(x^*)$ existiert mit $|f(x_n)-f(x^*)|\geq \epsilon$.
+% Diese Wahl liefert also eine Folge $( x_n)_{n \geq 1}$ mit
+% \[ \lim_{n\to \infty} |x_n-x^*| \leq \lim_{n\to \infty} \frac{1}{n}
+% =0,\]
+% d.h. $\lim_{n\to \infty} x_n=x^*$.
+% Andererseits ist $|f(x_n)-f(x^*)|\geq \epsilon$ für alle $n\in \N$, weshalb die Folge $(f(x_n))_{n \geq 1}$ nicht gegen $f(x^*)$ konvergiert.
+% \end{incremental}
+% \end{proof*}
+
+% \begin{remark}
+% Das Folgenkriterium beinhaltet zwei Bedingungen:
+% \begin{enumerate}
+% \item Für jede Folge $( x_n)_{n \geq 1}$, die gegen $x^*$ konvergiert, ist die Folge $(f(x_n))_{n \geq 1}$ konvergent.
+% \item Die nach 1. konvergente Folge $(f(x_n))_{n \geq 1}$ hat tatsächlich $f(x^*)$ als Grenzwert.
+% \end{enumerate}
+% In den nachfolgenden Beispielen, die nicht stetig sind, werden wir auch sehen, dass schon 1. verletzt sein kann.
+% \end{remark}
+
+
+% \begin{example}
+% Die obigen Beispiele lassen sich über dieses Kriterium mit Hilfe der \ref[konv-krit][Grenzwertregeln]{sec:grenzwertregeln} leichter erfassen.
+% \begin{tabs*}[\initialtab{0}]
+% \tab{Lineare und konstante Funktionen} Für feste reelle Zahlen $a,b\in \R$ sei $f: \R \to \R, x \mapsto ax + b$ eine lineare Funktion (falls $a\neq 0$) oder konstante Funktion (falls $a=0$).
+% Für eine beliebige Stelle $x^* \in \R$ und jede Folge $( x_n)_{n \geq 1}$ mit $\lim_{n\to \infty} x_n=x^*$ gilt dann:
+% \[  \lim_{n\to \infty} f(x_n)= \lim_{n\to \infty} (ax_n+b)=a \lim_{n\to \infty} x_n + b =ax^*+b=f(x^*). \]
+% Also sind lineare und konstante Funktionen stetig.
+% \tab{$f(x)=x^2$} Die Funktion $f : \R \to \R, x \mapsto x^2$ ist auf ganz $\R$ stetig. Denn für beliebiges $x^*\in \R$ und
+%  jede Folge $( x_n)_{n \geq 1}$ mit $\lim_{n\to \infty} x_n=x^*$ gilt:
+%  \[  \lim_{n\to \infty} f(x_n)= \lim_{n\to \infty} x_n^2 =\left( \lim_{n\to \infty} x_n\right)^2 =(x^*)^2 =f(x^*). \]
+% \tab{Gauß-Klammer-Funktion} Die Gauß-Klammerfunktion ist an ganzzahligen Stellen $k=x^*\in \Z$ nicht stetig, denn für jede Folge $( x_n)_{n \geq 1}$ mit $x_n<x^*$, 
+% die gegen $x^*$ konvergiert, ist
+% \[ \lim_{n\to \infty} [x_n] =k-1\neq k=[x^*].\]
+% \begin{incremental}[\initialsteps{0}]
+% \step Es gibt hier auch Folgen $( x_n)_{n \geq 1}$, die gegen $k=x^*\in \Z$ konvergieren, für welche jedoch der Grenzwert $\lim_{n\to \infty} [x_n]$ nicht 
+% existiert. Dies ist zum Beispiel bei der durch $x_n=k+\frac{(-1)^n}{n}$ definierten Folge der Fall. Hier ist
+% \[  [x_n]= \begin{cases} k-1 & \text{falls }n\text{ ungerade} \\
+% k & \text{falls }n\text{ gerade}. \end{cases}\]
+% \end{incremental}
+% \tab{Dirichletsche Sprungfunktion} Für die Dirichletsche Sprungfunktion $D$ sieht man es auch direkt:
+% Für jede reelle Stelle $x^*$ kann man eine Folge $( x_n)_{n \geq 1}$ konstruieren, die gegen $x^*$ konvergiert und deren Glieder abwechselnd
+% rational und irrational sind. Die Folge der Funktionswerte $( D(x_n))_{n \geq 1}$ ist dann aber die Folge, deren Glieder abwechselnd $0$ und $1$ sind.
+% Insbesondere konvergiert die Folge $( D(x_n))_{n \geq 1}$ nicht.\\
+% Also ist die Dirichletsche Sprungfunktion an keiner Stelle stetig.
+% \begin{incremental}[\initialsteps{0}]
+% \step Alternativ kann man auch folgendermaßen vorgehen:\\
+% Für jede rationale Stelle $x^*$ gibt es eine Folge irrationaler Zahlen $( x_n)_{n \geq 1}$, die gegen $x^*$ konvergiert. Für diese gilt dann
+% \[ \lim_{n\to \infty} D(x_n)= \lim_{n\to \infty} 0\neq 1=D(x^*),\]
+% weshalb $D$ in $x^*$ nicht stetig ist.
+
+% Ebenso gibt es für eine irrationale Stelle $x^*$ eine Folge rationaler Zahlen $( x_n)_{n \geq 1}$, die gegen $x^*$ konvergiert. Für diese gilt dann
+% \[ \lim_{n\to \infty} D(x_n)= \lim_{n\to \infty} 1\neq 0=D(x^*),\]
+% weshalb $D$ in $x^*$ nicht stetig ist.
+% \end{incremental}
+% \end{tabs*}
+% \end{example}
+
+% % \begin{remark}
+% % In den Beispielen hatten wir zum Beweis der Unstetigkeit Folgen verwendet, bei denen die Folge der 
+% % Funktionswerte gegen einen Wert konvergieren, der vom Funktionswert der Stelle verschieden ist. 
+% % Im Allgemeinen muss aber die Folge der Funktionswerte nicht einmal konvergieren.
+% % \end{remark}
+
+% Wir hatten die \ref[konv-krit][Grenzwertregeln]{sec:grenzwertregeln} für Folgen schon verwendet, um die Stetigkeit obiger Beispiele zu zeigen. 
+% Allgemeiner folgert man daraus direkt die Stetigkeit zusammengesetzter Funktionen:
+
+% \begin{rule}\label{rule:zusammengesetzte-funktionen}
+% Seien $f:D\to \R$ und $g:D\to \R$ reelle Funktionen, die an einer Stelle $x^*\in D$ stetig sind, sowie $r\in \R$.
+
+% Dann sind auch die Funktionen $f+g$, $f-g$, $f\cdot g$ und $rf$ in $x^*$ stetig.
+
+% Ist zudem $g(x^*)\neq 0$, dann ist auch die Funktion $\frac{f}{g}$ an der Stelle $x^*$ stetig. \\
+
+% \end{rule}
+  
+% \begin{quickcheck}
+% %\type{mc.multiple}%
+% \lang{de}{\text{Wählen Sie alle richtigen Aussagen aus:}
+% }
+
+% \begin{choices}{multiple}
+%     \begin{choice}
+%         \text{Eine Funktion, die an der Stelle $x_0$ nicht definiert ist, 
+%             kann dort stetig sein.}
+%         \solution{false}
+%     \end{choice}
+%     \begin{choice}
+%         \text{Am ersten Tag geht ein Bergwanderer morgens um 8 Uhr los und erreicht den Berggipfel um 17 Uhr.
+%         Am zweiten Tag läuft er von 8 bis 17 Uhr den Berg über dieselbe Strecke wieder hinunter. 
+%         Es gibt auf dem Weg eine Stelle, an der er 
+%         zur selben Tageszeit wie am Vortag wieder vorbeikommt.}
+%         \solution{true}
+%     \end{choice}
+% \end{choices}
+
+% \explanation{zu 1) Damit $f(x)$ an einer Stelle $x_0$ stetig ist, muss $x_0 \in D$ sein. \\Aussage 1) ist also falsch.\\
+%   zu 2) Trägt man die Höhenmeter über der Zeit auf, so ist der Aufstieg eine stetige, monoton steigende Funktion und der Abstieg
+%   eine stetige, monoton fallende Funktion, d.h. es gibt genau einen Kreuzungspunkt. \\Aussage 2) ist damit richtig.}
+
+% \end{quickcheck}  
+
+
+% Wie Stetigkeit mit dem Folgenkriterium zu beweisen ist, erläutert das folgende Video:
+% \floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10900&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+
+% \section{Links- und Rechtsseitige Stetigkeit}\label{sec:einseitige-stetigkeit}
+
+% Als Verallgemeinerung zur Stetigkeit führen wir noch die links- bzw. rechtsseitige Stetigkeit ein. Hierbei werden nur Folgen betrachtet, deren Folgeglieder auf dem Zahlenstrahl alle links bzw. alle rechts der betrachteten Stelle liegen.
+
+% \begin{definition} 
+% Sei $f : D \to \R$ eine Funktion und $x^* \in D$.
+% \begin{enumerate}
+% \item $f$ ist \notion{linksseitig stetig} in $x^*$, wenn für jede Folge $( x_n )_{n \geq 1}$ in $D$ mit
+% $\lim_{n \to \infty} x_n = x^*$ und $x_n \leq x^*$  für alle $n \in \N$ gilt 
+% \[ \lim_{n \to \infty} f ( x_n ) = f ( x^* ) .\]
+% \item $f$ ist \notion{rechtsseitig stetig} in $x^*$, wenn für jede Folge $( x_n )_{n \geq 1}$ in $D$ mit
+% $\lim_{n \to \infty} x_n = x^*$ und $x_n \geq x^*$  für alle $n \in \N$ gilt 
+% \[ \lim_{n \to \infty} f ( x_n ) = f ( x^* ) .\]
+% \end{enumerate}
+% \end{definition}
+
+% \begin{remark}
+% Wie auch schon bei Stetigkeit, lässt sich die links- und rechtsseitige Stetigkeit auch über ein $\epsilon$-$\delta$-Kriterium definieren:
+
+% $f$ ist linksseitig stetig in $x^*$, wenn es f"ur jedes $\epsilon >0$ ein \nowrap{$\delta = \delta(\epsilon) >0$} gibt, so dass 
+%   \[ |f(x) - f(x^*)| < \epsilon \quad \text{f"ur alle }
+%   \nowrap{x\in D,\text{ mit } x^*-\delta(\epsilon)< x\leq x^*.}
+%   \]
+% $f$ ist rechtsseitig stetig in $x^*$, wenn es f"ur jedes $\epsilon >0$ ein \nowrap{$\delta = \delta(\epsilon) >0$} gibt, so dass 
+%   \[ |f(x) - f(x^*)| < \epsilon \quad \text{f"ur alle }
+%   \nowrap{x\in D,\text{ mit } x^*\leq x< x^*+\delta(\epsilon).}
+%   \]
+% \end{remark}
+
+% \begin{example}
+% \begin{enumerate}
+% \item
+% Ist eine Funktion $f$ stetig in $x^*$ ist sie natürlich auch linksseitig und rechtsseitig stetig, da die Bedingung für die Folgen der Funktionswerte lediglich für weniger Folgen $( x_n )_{n \geq 1}$ erfüllt sein müssen.
+% \item Die Gauß-Klammer-Funktion $[\cdot]$ ist an allen Stellen rechtsseitig stetig. An den ganzzahligen Stellen ist sie jedoch nicht linksseitig stetig, wie oben gezeigt wurde.
+% \item Die Dirichletsche Sprungfunktion ist an keiner Stelle linksseitig stetig und auch nicht rechtsseitig stetig.
+% \end{enumerate}
+% \end{example}
+
+% Die Bedeutung der links- und rechtsseitigen Stetigkeit wird ersichtlich durch
+
+% \begin{theorem}
+% $f:D\to \R$ ist genau dann stetig in $x^*\in D$ , wenn $f$ linksseitig und rechtsseitig stetig in $x^*$ ist.
+% \end{theorem}
+
+% \begin{proof*}
+% Dass Stetigkeit die links- und rechtsseitige Stetigkeit impliziert, wurde ja schon erklärt.
+% \begin{incremental}{0}
+% \step
+% Sei nun $f$ in $x^*$ links- und rechtsseitig stetig. Für  
+% $\epsilon>0$ muss dann ein passendes $\delta$ gefunden werden.
+% Da $f$ in $x^*$ links- und rechtsseitig stetig ist, gibt es $\delta_1>0$ mit
+%   \[ |f(x) - f(x^*)| < \epsilon \quad \text{f"ur alle }
+%   x\in D,\text{ mit } x^*-\delta_1< x\leq x^*
+%   \]
+%  und $\delta_2>0$ mit
+%   \[ |f(x) - f(x^*)| < \epsilon \quad \text{f"ur alle }
+%   x\in D,\text{ mit } x^*\leq x< x^*+\delta_2.
+%   \]
+% Daher ist
+%   \[ |f(x) - f(x^*)| < \epsilon \quad \text{f"ur alle }
+%   x\in D,\text{ mit } x^*-\delta_1< x< x^*+\delta_2.
+%   \]
+% Wählt man nun $\delta=\min\{\delta_1;\delta_2\}$, so ist insbesondere
+%   \[ |f(x) - f(x^*)| < \epsilon \quad \text{f"ur alle }
+%   x\in D,\text{ mit } x^*-\delta< x< x^*+\delta,
+%   \]
+%   d.h. für alle $x\in D$ mit $|x-x^*|<\delta$. 
+% \end{incremental}
+% \end{proof*}
+
+% \begin{example}
+% Wir wollen zeigen, dass die Betragsfunktion $f:\R\to \R, x\mapsto |x|$ auf ganz $\R$ stetig ist.
+
+% Betrachten wir zunächst die Stelle $x^*=0$.\\ Für alle gegen $0$ konvergente Folgen $( x_n )_{n \geq 1}$ mit $x_n\leq 0$ gilt hier
+% \[ \lim_{n \to \infty} |x_n| =\lim_{n \to \infty} -x_n =- \lim_{n \to \infty} x_n=-0=|0|. \]
+% Also ist die Betragsfunktion in $0$ linksseitig stetig.
+
+% Für alle gegen $0$ konvergente Folgen $( x_n )_{n \geq 1}$ mit $x_n\geq 0$ gilt hier
+% \[ \lim_{n \to \infty} |x_n| =\lim_{n \to \infty} x_n =0=|0|. \]
+% Also ist die Betragsfunktion in $0$ rechtsseitig stetig.
+
+% Damit ist die Betragsfunktion in $0$ auch stetig.\\ \\
+
+% Für alle anderen Stellen verwenden wir eine Mittel, das häufig hilfreich ist: Um Stetigkeit an einer bestimmten Stelle 
+% $x^*$ zu untersuchen, reicht es gegen $x^*$ konvergente Folgen $( x_n )_{n \geq 1}$ zu betrachten, deren
+% Folgeglieder alle in einer kleinen Umgebung von $x^*$ liegen. Das liegt daran, dass wir nur an dem Grenzwert
+% der Folge $( f(x_n) )_{n \geq 1}$ interessiert sind, und daher die "`ersten Folgeglieder"' uninteressant sind.
+% Da die Folge $( x_n )_{n \geq 1}$ aber gegen $x^*$ konvergiert, liegen ab einem bestimmten $N\in \N$ alle Folgeglieder
+% $x_n$ mit $n\geq N$ in dieser kleinen Umgebung von $x^*$, und wir hätten direkt mit der Folge $( x_n )_{n \geq N}$ starten
+% können.
+
+% Betrachten wir nun zunächst eine Stelle $x^*>0$: In einer Umgebung von $x^*$ (genauer sogar auf
+% dem Intervall $(0;2x^*)=U_{x^*}(x^*)$ ist die Betragsfunktion identisch mit der linearen Funktion $x\mapsto x$.
+% Da letztere bei $x^*$ stetig ist, ist die Betragsfunktion bei $x^*$ stetig.
+
+% Entsprechend ist die Betragfunktion an allen negativen Stellen $x^*$ stetig, weil sie auf der Umgebung $(2x^*;0)=U_{-x^*}(x^*)$
+% mit der linearen Funktion $x\mapsto -x$ identisch ist.
+
+% Somit ist die Betragsfunktion auf ganz $\R$ stetig.
+% \end{example}
+
+% \begin{quickcheck}
+% %\type{mc.multiple}%
+%     \lang{de}{\text{Unter Beispiel 1.6 findet sich der Graph der Gauß-Klammer-Funktion. Wir betrachten jetzt:
+%     \[   f:\R\to \Z, x\mapsto [-x] \]\\Welche der folgenden Aussagen ist wahr?}}
+%     \begin{choices}{multiple}
+%         \begin{choice}
+%             \text{Die Funktion $f(x)$ ist unstetig an $x_0=1$.}
+%             \solution{false}
+%         \end{choice}
+%         \begin{choice}
+%             \text{Die Funktion $f(x)$ ist linksseitig stetig an $x_0=1$.}
+%             \solution{true}
+%         \end{choice}
+%         \begin{choice}
+%             \text{Die Funktion $f(x)$ ist rechtsseitig stetig an $x_0=1$.}
+%             \solution{false}
+%         \end{choice}
+%         \begin{choice}
+%             \text{Die Funktion $f(x)$ ist stetig an $x_0=1$.}
+%             \solution{false}
+%         \end{choice}
+        
+%      \end{choices}
+%      \explanation{Die hier betrachtete Funktion ist die an der y-Achse gespiegelte Gauß-Klammer-Funktion.
+%      Deshalb ist sie an $x_0=1$ linksseitig stetig.}
+% \end{quickcheck}
+
+% Wie sich der Stetigkeitsbegriff für komplexe Funktionen erweitern lässt, zeigt das folgende Video:
+% \floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10921&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+
+\end{visualizationwrapper}
+
+\end{content}

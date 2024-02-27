@@ -1,0 +1,664 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü02: Gauß-Verfahren}
+    \lang{en}{Exercise 2}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Hier die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\title{
+  \lang{de}{Ü02: Gauß-Verfahren}
+  \lang{en}{Ex02: Gaussian elimination}
+}
+
+\begin{block}[annotation]
+	Matritzen, Lineare Gleichungen: Übungen
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/11289}{Ticket 11289}
+\end{block}
+
+\lang{de}{Bestimmen Sie die Lösungsmenge der folgenden linearen Gleichungssysteme.
+    Stellen Sie zunächst jeweils die erweiterte Koeffizientenmatrix auf
+    und wenden Sie dann das Gauß-Verfahren an.}
+\lang{en}{Determine the solution set of the following linear system. First of all, set up of the augmented matrix and then
+apply the Gaussian elimination.}
+    
+\lang{de}{Aufgabenteil (c) ist komplexwertig. Wie üblich ist $i\in \C$ die imaginäre Einheit.
+Die Aufgabenteile (a), (b) und (d) sind über $\R$ zu lösen.}
+\lang{en}{Exercise Part (c) is complex-valued with $i\in\C$ the imaginary unit. The exercise Parts (a), (b) and (d) should
+be solved over $\R$.}
+
+    
+%\lang{en}{Determine the solution set of each of the following linear systems. Use Gaussian Elimination.}
+\begin{table}[\class{items}]
+  \nowrap{(a) \begin{displaymath}
+\begin{mtable}[\cellaligns{ccrcrcrcr}]
+(I)&\qquad&x_1&+&4x_2&+&6x_3&=&1\\
+(II)&&2x_1&+&3x_2&+&7x_3&=&1\\
+(III)&&3x_1&+&2x_2&+&8x_3&=&2
+\end{mtable}
+\end{displaymath}
+}\\
+  \nowrap{(b) \begin{displaymath}
+\begin{mtable}[\cellaligns{ccrcrcrcr}]
+(I)&\qquad&3x_1&-&2x_2&+&5x_3&=&8\\
+(II)&&6x_1&+&5x_2&-&2x_3&=&-5\\
+(III)&&9x_1&-&3x_2&-&x_3&=&-31
+\end{mtable}
+\end{displaymath}
+}\\
+  \nowrap{(c) \begin{displaymath}
+\begin{mtable}[\cellaligns{ccrcrcrcr}]
+%\text{(I)}&\qquad&x_1&-&2x_2&+&4x_3&=&-6\\
+%\text{(II)}&&2x_1&-&2x_2&+&3x_3&=&0\\
+%\text{(III)}&&3x_1&-&4x_2&+&7x_3&=&-6
+(I)&\qquad&x_1&-&x_2& & &=&2\\
+(II)&&x_1&+&x_2&+&2i x_3&=&0\\
+(III)&&2x_1& & &+&2i x_3&=&2
+\end{mtable}
+\end{displaymath}
+}\\
+\nowrap{(d) \begin{displaymath}
+\begin{mtable}[\cellaligns{ccrcrcrcr}]
+(I)&\qquad&x_1&+&2x_2&-&5x_3&=&3\\
+(II)&&&&&&0&=&0\\
+(III)&&&&&&0&=&0
+\end{mtable}
+\end{displaymath}
+}
+\end{table}
+
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+  \tab{
+  \lang{de}{Antwort}
+  \lang{en}{Answer}
+  }
+\begin{table}[\class{items}]
+    \nowrap{(a) $\mathbb{L}=\emptyset$}\\
+    \nowrap{(b) $\mathbb{L}=\{(-2\lang{de}{;}\lang{en}{,}  3\lang{de}{;}\lang{en}{,}  4)\}$}\\
+    %\nowrap{(c) $\mathbb{L}=\{(6+t\lang{de}{;}\lang{en}{,} 6+\frac{5}{2}t\lang{de}{;}\lang{en}{,} t)| t\in\R\}$ \lang{de}{(Andere Darstellungen der Lösungsmenge sind möglich!)}\lang{en}{(Other representations of the 
+    %solution set are possible!)}}\\
+    \nowrap{(c) $\mathbb{L}=\{(1-it\lang{de}{;}\lang{en}{,} -1-it\lang{de}{;}\lang{en}{,} t)~|~ t\in\C\}$ 
+        \lang{de}{(Andere Darstellungen der Lösungsmenge sind möglich!)} \lang{en}{(There are several representations of the solution set!)}}\\
+    \nowrap{(d) $\mathbb{L}=\{(3-2s+5t\lang{de}{;}\lang{en}{,} s\lang{de}{;}\lang{en}{,} t)~|~ s, t\in\R\}$ \lang{de}{(Andere Darstellungen der Lösungsmenge sind möglich!)}\lang{en}{(Other representations of the 
+    solution set are possible!)}}
+\end{table}
+
+  \tab{
+  \lang{de}{Lösung (a)}
+  \lang{en}{Solution (a)}
+  }
+  
+  \begin{incremental}[\initialsteps{1}]
+    \step 
+    
+    \lang{de}{Zunächst stellen wir die erweiterte Koeffizientenmatrix auf.
+    Das LGS ist in der folgenden Form gegeben:
+\[
+\begin{mtable}[\cellaligns{cccccccc}]
+ a_{11} x_1 & + & a_{12} x_2 & + & a_{13} x_3 & = & b_1 \\
+ a_{21} x_1 & + & a_{22} x_2 & + & a_{23} x_3 & = & b_2 \\
+ a_{31} x_1 & + & a_{32} x_2 & + & a_{33} x_3 & = & b_3
+\end{mtable}
+\]
+Die Einträge $a_{ij}\in \mathbb{R}$ für $1 \leq i \leq 3$ und $1 \leq j \leq 3$
+schreiben wir als Matrix $A$.
+Die Einträge $b_i \in \mathbb{R}$ für $1 \leq i \leq 3$ stellen wir als rechte Seite $b$ dar.
+Damit lautet die erweiterte Koeffizientenmatrix:
+\[
+(A \mid b) ~=~
+\begin{pmatrix}
+    1 & 4 & 6 &|& 1 \\
+    2 & 3 & 7 &|& 1 \\
+    3 & 2 & 8 &|& 2
+\end{pmatrix}
+\]   }
+
+ \lang{en}{First of all we built the augmented matrix. The linear system is given as follows:
+\[
+\begin{mtable}[\cellaligns{cccccccc}]
+ a_{11} x_1 & + & a_{12} x_2 & + & a_{13} x_3 & = & b_1 \\
+ a_{21} x_1 & + & a_{22} x_2 & + & a_{23} x_3 & = & b_2 \\
+ a_{31} x_1 & + & a_{32} x_2 & + & a_{33} x_3 & = & b_3
+\end{mtable}
+\]
+We write the entries $a_{ij}\in\R$ for $1 \leq i \leq 3$ and $1 \leq j \leq 3$ as a matrix $A$.
+The entries $b_i \in \mathbb{R}$ for $1 \leq i \leq 3$ belong to the right side $b$.
+Therefore the augmented matrix is:
+\[
+(A \mid b) ~=~
+\begin{pmatrix}
+    1 & 4 & 6 &|& 1 \\
+    2 & 3 & 7 &|& 1 \\
+    3 & 2 & 8 &|& 2
+\end{pmatrix}
+\]
+    
+    }
+  
+    
+    \lang{de}{Um nun die Lösungsmenge des angegebenen linearen Gleichungssystems zu bestimmen, bringen wir es zunächst mit dem Gauß-Verfahren auf Stufenform.}
+    \lang{en}{In order to determine the solution set of a given linear system we need to first bring it into row echelon form using Gaussian Elimination.}
+     
+   \step \lang{de}{Suche die erste Spalte, die einen Eintrag ungleich 0 besitzt.
+   Dies trifft hier direkt bei der ersten Spalte zu.
+   %Da keine der Einträge der ersten Spalte 0 ist,
+   Es ist kein Zeilentausch nötig.
+   Der aktuelle \textit{Stufeneintrag} ist nun $a_{11}$ und wird im Folgenden orange markiert:}
+   \lang{en}{Search the first non-zero column. In this case it is already the first column, so we do not neet to swap columns.
+  
+   The \textit{leading coefficient} is now $a_{11}$ and is colored orange in the following:}
+   \[
+    \rightsquigarrow~~
+\begin{pmatrix}
+    \textcolor{#CC6600}{1} & 4 & 6 &|& 1 \\
+    \textcolor{#0066CC}{2} & 3 & 7 &|& 1 \\
+    \textcolor{#0066CC}{3} & 2 & 8 &|& 2
+\end{pmatrix}
+\]
+   
+   \step \lang{de}{Ziel ist es, alle Einträge unter dem aktuellen Stufeneintrag auf 0 zu setzen.
+    Dies sind die oben blau markierten Einträge, also $a_{21}$ und $a_{31}$.
+    Dazu addiert man jeweils passende Vielfache der ersten Zeile zu den darunter liegenden Zeilen.}
+    \lang{en}{ The aim is to transform all entries below $a_{11}$ to $0$. Those are the blue colored entries, $a_{21}$ and $a_{31}$.
+    Therefore, we add the appropriate multiple of the first row to the rows below.}
+    
+      \lang{de}{Hier addiert man zur zweiten Zeile das $(-2)$-fache der ersten Zeile:}
+      \lang{de}{Here we add $(-2)$-times the first row to the second row:}
+   \[
+   \rightsquigarrow~~
+\begin{pmatrix}
+    1 & 4 & 6 &|& 1 \\
+    2 & 3 & 7 &|& 1 \\
+    3 & 2 & 8 &|& 2
+\end{pmatrix}
+~
+\begin{matrix}
+     \\
+    |(-2) \cdot (I) + (II) \\
+    \\
+\end{matrix}
+\]
+    \lang{de}{Man erhält:}
+    \lang{en}{We get:}
+\[
+\rightsquigarrow~~
+\begin{pmatrix}
+    1 & 4 & 6 &|& 1 \\
+    0 & \textcolor{#0066CC}{-5} & \textcolor{#0066CC}{-5} &|& \textcolor{#0066CC}{-1} \\
+    3 & 2 & 8 &|& 2
+\end{pmatrix}
+\]
+      \lang{de}{Danach addiert man zur dritten Zeile das $(-3)$-fache der ersten Zeile, also:}
+      \lang{en}{Afterwards we add $(-3)$-times the first row to the third row:}
+\[
+\rightsquigarrow~~
+\begin{pmatrix}
+    1 &  4 &  6 &|&  1 \\
+    0 & -5 & -5 &|& -1 \\
+    3 &  2 &  8 &|&  2
+\end{pmatrix}
+~
+\begin{matrix}
+      \phantom{}\\
+  \phantom{}\\
+    |(-3) \cdot (I) + (III) 
+\end{matrix}
+\]
+    \lang{de}{Man erhält:}
+    \lang{en}{We get:}
+\[
+\rightsquigarrow~~
+\begin{pmatrix}
+    1 & 4 & 6 &|& 1 \\
+    0 & -5 & -5 &|& -1 \\
+    0 & \textcolor{#0066CC}{-10} & \textcolor{#0066CC}{-10} &|& \textcolor{#0066CC}{-1}
+\end{pmatrix}
+\]
+
+   \step \lang{de}{Nun wird die Teilmatrix ab der zweiten Zeile betrachtet.
+   Die erste Spalte, die einen Eintrag ungleich 0 besitzt, ist die zweite Spalte.
+   Ein Zeilentausch ist wieder nicht notwendig.
+   Der neue Stufeneintrag ist $a_{22}$ (orange).
+   Man eliminiert die sich darunter befindlichen Einträge.
+   Dies ist hier lediglich $a_{32}$ (blau):
+   }
+   \lang{de}{Now, we only consider the submatrix starting at the second row. The first non-zero column is the second column, so again
+   we do not need to swap any rows. The new leading coefficient is $a_{22}$ (orange). We then eliminate the entries below. In this case, it
+   is only $a_{32}$ (blue):
+   }
+\[
+\rightsquigarrow~~
+\begin{pmatrix}
+    1 & 4 & 6 &|& 1 \\
+    0 & \textcolor{#CC6600}{-5} & -5 &|& -1 \\
+    0 & \textcolor{#0066CC}{-10} & -10 &|& -1
+\end{pmatrix}
+\]
+
+   \lang{de}{Man addiert das $(-2)$-fache der zweiten Zeile zur dritten Zeile:}
+   \lang{en}{We add $(-2)$-times the second row to the third row:}
+\[
+\rightsquigarrow~~
+\begin{pmatrix}
+    1 & 4 & 6 &|& 1 \\
+    0 & -5 & -5 &|& -1 \\
+    0 & -10 & -10 &|& -1
+\end{pmatrix}
+~
+\begin{matrix}
+  \phantom{}\\
+  \phantom{}\\
+    |(-2) \cdot (II) + (III)
+\end{matrix}
+\]
+   \lang{de}{Man erhält:}
+   \lang{en}{We get:}
+\[
+\rightsquigarrow~~
+\begin{pmatrix}
+    1 & 4 & 6 &|& 1 \\
+    0 & -5 & -5 &|& -1 \\
+    0 & \textcolor{#0066CC}{0} & \textcolor{#0066CC}{0} &|& \textcolor{#0066CC}{1}
+\end{pmatrix}
+\]
+
+   \step \lang{de}{Nun steht in der dritten Zeile die folgende Gleichung:}
+   \lang{en}{Now the have the following equation in the third row:}
+\[
+    0 \cdot x_1 + 0 \cdot x_2 + 0 \cdot x_3 = 1 ~\Leftrightarrow~ 0=1
+\]
+    \lang{de}{Dies ist eine falsche Aussage. Das lineare Gleichungssystem ist nicht lösbar
+    und somit $\mathbb{L}=\emptyset$.}
+    \lang{en}{This is a false statement. The linear system is not solvable and the solution set is $\mathbb{L}=\emptyset$.}
+
+%     OLD:
+%    \step \lang{de}{Multiplizieren Sie beispielsweise die erste Gleichung auf beiden Seiten mit $-2$ bzw. $-3$ und addieren Sie sie dann zur zweiten  bzw. dritten Gleichung, so dass in diesen $x$ nicht mehr vorkommt.}
+    %\lang{en}{Multiply both sides of the first equation by $-2$ and add it to the second equation; multiply both sides of the first equation by $-3$ and add it to the third. In equations two and three, the variable $x$ won't appear anymore.}
+%    \step \lang{de}{Das lineare Gleichungssystem sieht dann wie folgt aus:}
+    %\lang{en}{The linear system then looks as follows:}
+%    \begin{displaymath}
+%\begin{mtable}[\cellaligns{ccrcrcrcr}]
+%\text{(I)}&\qquad&x&+&4y&+&6z&=&1\phantom{.}\\
+%\text{(II)}&&&-&5y&-&5z&=&-1\phantom{.}\\
+%\text{(III)}&&&-&10y&-&10z&=&-1\lang{de}{.}\lang{en}{\phantom{.}}
+%\end{mtable}
+%\end{displaymath}
+    
+%    \step \lang{de}{Im nächsten Schritt bietet es sich an, die zweite Gleichung mit $-2$ zu multiplizieren und dann zur dritten Gleichung zu addieren, damit dort schließlich $y$ nicht mehr vorkommt.\\
+%    Das lineare Gleichungssystem sieht dann wie folgt aus:}
+    %\lang{en}{In the next step it's easiest to multiply the second equation by $-2$ and then add it to the third equation so that the variable $y$ doesn't appear anymore.\\
+    %The linear system then looks as follows:}
+%    \begin{displaymath}
+%\begin{mtable}[\cellaligns{ccrcrcrcr}]
+%\text{(I)}&\qquad&x&+&4y&+&6z&=&1\phantom{.}\\
+%\text{(II)}&&&-&5y&-&5z&=&-1\phantom{.}\\
+%\text{(III)}&&&&&&0&=&1\lang{de}{.}\lang{en}{\phantom{.}}
+%\end{mtable}
+%\end{displaymath}
+    
+%    \step \lang{de}{Das lineare Gleichungssystem ist jetzt in Stufenform. Da die dritte Gleichung eine falsche Aussage enthält, ist das lineare Gleichungssystem unlösbar und somit $\mathbb{L}=\emptyset$.}
+    %\lang{en}{The linear system is now in row echelon form. Because the third equation contains a false statement, the linear system is unsolvable and hence $\mathbb{L}=\emptyset$.}  
+  \end{incremental}
+
+
+
+  \tab{
+  \lang{de}{Lösung (b)}\lang{en}{Solution (b)}
+  %\lang{en}{Solution b}
+  }
+  \begin{incremental}[\initialsteps{1}]
+
+\step 
+    
+    %\lang{de}{In dieser Lösung sind die einzelnen Schritte weniger detailliert
+    %als in Aufgabenteil a) beschrieben. Für Details schaut man dort nach.}
+    
+    \lang{en}{To begin with, we set up the augmented matrix:
+\[
+(A \mid b) ~=~
+\begin{pmatrix}
+    3 & -2 & 5 &|& 8 \\
+    6 & 5 & -2 &|& -5 \\
+    9 & -3 & -1 &|& -31
+\end{pmatrix}
+\]
+    
+    }
+
+  \lang{de}{Zunächst stellen wir die erweiterte Koeffizientenmatrix auf:
+\[
+(A \mid b) ~=~
+\begin{pmatrix}
+    3 & -2 & 5 &|& 8 \\
+    6 & 5 & -2 &|& -5 \\
+    9 & -3 & -1 &|& -31
+\end{pmatrix}
+\]
+    
+    }
+    
+    \lang{de}{Um nun die Lösungsmenge des angegebenen linearen Gleichungssystems zu bestimmen, bringen wir es zunächst mit dem Gauß-Verfahren auf Stufenform.}
+    \lang{en}{In order to determine the solution set of a given linear system we need to first bring it into row echelon form using Gaussian Elimination.}
+     
+   \step \lang{de}{Der aktuelle \textit{Stufeneintrag} ist $a_{11}$ und wird im Folgenden orange markiert.
+   Um die Einträge $a_{21}$ und $a_{31}$ (blau) zu eliminieren, werden die folgenden Zeilenoperationen
+   durchgeführt:}
+   \lang{en}{Right now the \textit{leading coefficient} is $a_{11}$ and is colored orange in the following.
+   To eliminate the entries $a_{21}$ and $a_{31}$ (blue), we perform the following row transformations:}
+   \[
+   \rightsquigarrow~~
+\begin{pmatrix}
+    \textcolor{#CC6600}{3} & -2 & 5 &|& 8 \\
+    \textcolor{#0066CC}{6} & 5 & -2 &|& -5 \\
+    \textcolor{#0066CC}{9} & -3 & -1 &|& -31
+\end{pmatrix}
+~
+\begin{matrix}
+    \\
+    |(-2) \cdot (I) + (II)\\
+    |(-3) \cdot (I) + (III)
+\end{matrix}
+\]
+   
+    \lang{de}{Man erhält:}
+    \lang{en}{We get:}
+\[
+\rightsquigarrow~~
+\begin{pmatrix}
+    3 & -2 & 5 &|& 8 \\
+    0 & \textcolor{#0066CC}{9} & \textcolor{#0066CC}{-12} &|& \textcolor{#0066CC}{-21} \\
+    0 & \textcolor{#0066CC}{3} & \textcolor{#0066CC}{-16} &|& \textcolor{#0066CC}{-55} \\
+\end{pmatrix}
+\]
+
+    \step \lang{de}{Der neue \textit{Stufeneintrag} ist $a_{22}$. Man eliminiert
+    nun $a_{32}$:}
+    \lang{en}{The new \textit{leading coefficient} is $a_{22}$. We now eliminate $a_{32}$:}
+\[
+\rightsquigarrow~~
+\begin{pmatrix}
+    3 & -2 &   5 &|&   8 \\
+    0 & \textcolor{#CC6600}{9} & -12 &|& -21 \\
+    0 &  \textcolor{#0066CC}{3} & -16 &|& -55
+\end{pmatrix}
+~
+\begin{matrix}
+    \\
+    \\
+    |(-\frac{1}{3}) \cdot (II) + (III)
+\end{matrix}
+\]
+
+    \lang{de}{Man erhält:}
+    \lang{en}{We get:}
+\[
+\rightsquigarrow~~
+\begin{pmatrix}
+    3 & -2 &   5 &|&   8 \\
+    0 &  9 & -12 &|& -21 \\
+    0 & \textcolor{#0066CC}{0} & \textcolor{#0066CC}{-12} &|& \textcolor{#0066CC}{-48}
+\end{pmatrix}
+\]
+      
+    \lang{de}{Nun liegt die Stufenform vor. Durch Rückwärtseinsetzen bestimmt
+    man nacheinander $x_3$, $x_2$ und $x_1$:}
+    \lang{en}{The matrix is now in row echelon form. By using the back substitution we can determine $x_3$, $x_2$ and $x_1$:}
+
+
+\[
+\begin{mtable}[\cellaligns{l}]
+    -12 x_3 = -48 ~\Leftrightarrow~ x_3 = 4 \\
+    9 x_2 - 12 x_3 = -21 ~\Rightarrow~ x_2 = 3 \\
+    3 x_1 - 2 x_2 + 5 x_3 = 8 ~\Rightarrow~ x_1 = -2
+\end{mtable}
+\]
+
+    \lang{de}{Das lineare Gleichungssystem ist also eindeutig lösbar mit 
+    %$\mathbb{L}=\{(-2; 3; 4)\}$.
+    $\mathbb{L}=\{\begin{pmatrix} -2\\ 3\\ 4\end{pmatrix}\}$.}
+    
+    \lang{en}{The linear system has exactly one solution, which is
+    $\mathbb{L}=\{\begin{pmatrix} -2\\ 3\\ 4\end{pmatrix}\}$.}
+
+    %OLD:
+    %\step \lang{de}{Um die Lösungsmenge des angegebenen linearen Gleichungssystems zu bestimmen, bringen Sie es zunächst mit dem Gauß-Verfahren auf Stufenform.}
+    %\lang{en}{In order to determine the solution set of a given linear system we need to first bring it into row echelon form using Gaussian Elimination.}
+     
+    %\step \lang{de}{Multiplizieren Sie beispielsweise die erste Gleichung auf beiden Seiten mit $-2$ bzw. $-3$ und addieren Sie sie dann zur zweiten  bzw. dritten Gleichung, so dass in diesen $x$ nicht mehr vorkommt.}
+    %\lang{en}{Multiply both sides of the first equation by $-2$ and add it to the second equation; multiply both sides of the first equation by $-3$ and add it to the third equation. Equations two and three now don't have
+    %the variable $x$ in them anymore.}
+    %\step \lang{de}{Das lineare Gleichungssystem sieht dann wie folgt aus:}
+    %\lang{en}{The linear system now looks as follows:}
+    %\begin{displaymath}
+%\begin{mtable}[\cellaligns{ccrcrcrcr}]
+%\text{(I)}&\qquad&3x&-&2y&+&5z&=&8\phantom{.}\\
+%\text{(II)}&&&&9y&-&12z&=&-21\phantom{.}\\
+%\text{(III)}&&&&3y&-&16z&=&-55\lang{de}{.}\lang{en}{\phantom{.}}
+%\end{mtable}
+%\end{displaymath}
+    
+    %\step \lang{de}{Im nächsten Schritt bietet es sich an, die zweite Gleichung mit $-\frac{1}{3}$ zu multiplizieren und dann zur dritten Gleichung zu addieren, damit dort schließlich $y$ nicht mehr vorkommt.\\
+    %Das lineare Gleichungssystem sieht dann wie folgt aus:}
+    %\lang{en}{In the next step it's easiest to multiply the second equation by $-\frac{1}{3}$ and add it to the third so that the variable $y$ doesn't appear in the third equation anymore.\\
+    %The linear system then looks as follows:}
+    %\begin{displaymath}
+%\begin{mtable}[\cellaligns{ccrcrcrcr}]
+%\text{(I)}&\qquad&3x&-&2y&+&5z&=&8\phantom{.}\\
+%\text{(II)}&&&&9y&-&12z&=&-21\phantom{.}\\
+%\text{(III)}&&&&&-&12z&=&-48\lang{de}{.}\lang{en}{\phantom{.}}
+%\end{mtable}
+%\end{displaymath}
+    
+    %\step \lang{de}{Das lineare Gleichungssystem ist jetzt in Stufenform und kann durch Rückwärtseinsetzen gelöst werden. Aus der dritten Gleichung erhält man $z=4$. Setzt man dies in die zweite Gleichung ein, 
+    %so ergibt sich $y=3$. Schließlich erhält man $x$ durch Einsetzen von $y$ und $z$ in die erste Gleichung; es ist $x=-2$. Das lineare Gleichungssystem ist also eindeutig lösbar mit $\mathbb{L}=\{(-2; 3; 4)\}$.}
+    %\lang{en}{The linear system is now in row echelon form and we can use back substitution in order to solve it. From the third equation we get $z=4$. Substituting this into the second equation gives us
+    %$y=3$. As our last step, inserting the known values for $y$ and $z$ into the first equation we can solve for $x$; the result is $x=-2$. The linear system is uniquely solvable with $\mathbb{L}=\{(-2, 3, 4)\}$.}
+
+  \end{incremental}
+
+
+
+  \tab{
+  \lang{de}{Lösung (c)}
+  \lang{en}{Solution (c)}
+  }
+  \begin{incremental}[\initialsteps{1}]
+    \step 
+    
+    \lang{de}{Zunächst stellen wir die erweiterte Koeffizientenmatrix des komplexen LGS auf:
+\[
+(A \mid b) ~=~
+\begin{pmatrix}
+    1 & -1 &  0 &|& 2 \\
+    1 &  1 & 2i &|& 0 \\
+    2 &  0 & 2i &|& 2
+\end{pmatrix}
+\]
+    
+    }
+
+\lang{en}{To begin with we set up the augmented matrix of the complex-valued linear system:
+\[
+(A \mid b) ~=~
+\begin{pmatrix}
+    1 & -1 &  0 &|& 2 \\
+    1 &  1 & 2i &|& 0 \\
+    2 &  0 & 2i &|& 2
+\end{pmatrix}
+\]
+    
+    }
+    
+    \lang{de}{Um nun die Lösungsmenge des angegebenen linearen Gleichungssystems zu bestimmen, bringen wir es zunächst mit dem Gauß-Verfahren auf Stufenform.}
+    \lang{en}{In order to determine the solution set of a given linear system we need to first bring it into row echelon form using Gaussian Elimination.}
+     
+   \step \lang{de}{Der aktuelle \textit{Stufeneintrag} ist $a_{11}$ und wird im Folgenden orange markiert.
+   Um die Einträge $a_{21}$ und $a_{31}$ (blau) zu eliminieren, werden die folgenden Zeilenoperationen
+   durchgeführt:}
+   \lang{en}{Right now $a_{11}$ is the \textit{leading coeffcient} and is colored orange. To eliminate the entries $a_{21}$ and $a_{31}$ (blue),
+   the following row operations are necessary:}
+   \[
+   \rightsquigarrow~~
+\begin{pmatrix}
+    \textcolor{#CC6600}{1} & -1 & 0 &|& 2 \\
+    \textcolor{#0066CC}{1} & 1 & 2i &|& 0 \\
+    \textcolor{#0066CC}{2} & 0 & 2i &|& 2
+\end{pmatrix}
+~
+\begin{matrix}
+    \\
+    |(-1) \cdot (I) + (II)\\
+    |(-2) \cdot (I) + (III)
+\end{matrix}
+\]
+
+    \lang{de}{Man erhält:}
+    \lang{en}{We get:}
+\[
+\rightsquigarrow~~
+\begin{pmatrix}
+    1 & -1 & 0 &|& 2 \\
+    0 & \textcolor{#0066CC}{2} & \textcolor{#0066CC}{2i} &|& \textcolor{#0066CC}{-2} \\
+    0 & \textcolor{#0066CC}{2} & \textcolor{#0066CC}{2i} &|& \textcolor{#0066CC}{-2} \\
+\end{pmatrix}
+\]
+
+   
+    \step \lang{de}{Der neue \textit{Stufeneintrag} ist $a_{22}$. Man eliminiert
+    nun $a_{32}$:}
+    \lang{en}{The new \textit{leading coefficient} is $a_{22}$. Now we eliminate $a_{32}$:}
+\[
+\rightsquigarrow~~
+\begin{pmatrix}
+    1 & -1 &   0 &|&   2 \\
+    0 & \textcolor{#CC6600}{2} & 2i &|& -2 \\
+    0 &  \textcolor{#0066CC}{2} & 2i &|& -2
+\end{pmatrix}
+~
+\begin{matrix}
+    \\
+    \\
+   | - (II) + (III)
+\end{matrix}
+\]
+
+    \lang{de}{Da in der zweiten und dritten Zeile alle Einträge identisch waren, entspricht die dritte Zeile nun dem Nullvektor:}
+    \lang{en}{Because all entries in the second and third row, the third row is a zero-row:}
+\[
+\rightsquigarrow~~
+\begin{pmatrix}
+    1 & -1 &   0 &|&  2 \\
+    0 &  2 &  2i &|& -2 \\
+    0 & \textcolor{#0066CC}{0} & \textcolor{#0066CC}{0} &|& \textcolor{#0066CC}{0}
+\end{pmatrix}
+\]
+      
+    \step \lang{de}{Das lineare Gleichungssystem ist jetzt in Stufenform und man erkennt, dass eine Variable frei wählbar ist.
+    Das lineare Gleichungssystem ist lösbar, aber nicht eindeutig lösbar. 
+    Setzt man z.\,B. $x_3=t\in\C$, so ergibt sich durch Rückwärtseinsetzen $x_2=-1 - it$ und schließlich $x_1=1-it$.
+    Die Lösung ist somit:} 
+    \lang{en}{The linear system is now in row echelon form and we see, that one variable is free. There exists a solution, but it is not unique.
+    We set e.g. $x_3=t\in\C$. With back substition we get $x_2=-1 - it$ and finally $x_1=1-it$.
+    Therefore the solution set is:} %$\mathbb{L}=\{ (1-it; -1-it; t) ~|~ t\in\C \}$.
+
+    \[
+        \mathbb{L}=\{ \begin{pmatrix} 1-it\\ -1-it\\ t\end{pmatrix} ~|~ t\in\C \}
+    \]
+    
+    \lang{de}{(Andere Darstellungen der Lösungsmenge sind möglich. Dies hängt von der konkreten Wahl der freien Variable ab.)}
+    \lang{en}{(Other representations of the solution set are possible. This depends on the choice of the free variable. )}
+    
+  
+    % ----- OLD -----
+    %Um die Lösungsmenge des angegebenen linearen Gleichungssystems zu bestimmen, bringen Sie es zunächst mit dem Gauß-Verfahren auf Stufenform.}
+    %\lang{en}{In order to determine the solution set of a given linear system we need to first bring it into row echelon form using Gaussian Elimination.}
+     
+    %\step \lang{de}{Multiplizieren Sie beispielsweise die erste Gleichung auf beiden Seiten mit $-2$ bzw. $-3$ und addieren Sie sie dann zur zweiten  bzw. dritten Gleichung, so dass in diesen $x$ nicht mehr vorkommt.}
+    %\lang{en}{Multiply both sides of the first equation by $-2$ and add it to the second; multiply both sides of the first equation by $-3$ and add it to the thrid. The variable $x$ doesn't appear in equations two or three anymore then.}
+    %\step \lang{de}{Das lineare Gleichungssystem sieht dann wie folgt aus:}
+    %\lang{en}{The linear system now looks as follows:}
+    %\begin{displaymath}
+%\begin{mtable}[\cellaligns{ccrcrcrcr}]
+%\text{(I)}&\qquad&x&-&2y&+&4z&=&-6\phantom{.}\\
+%\text{(II)}&&&&2y&-&5z&=&12\phantom{.}\\
+%\text{(III)}&&&&2y&-&5z&=&12\lang{de}{.}\lang{en}{\phantom{.}}
+%\end{mtable}
+%\end{displaymath}
+    
+%    \step \lang{de}{Im nächsten Schritt bietet es sich an, die zweite Gleichung mit $-1$ zu multiplizieren und dann zur dritten Gleichung zu addieren, damit dort schließlich $y$ nicht mehr vorkommt.\\
+%    Das lineare Gleichungssystem sieht dann wie folgt aus:}
+    %\lang{en}{In the next step it's easiest to multiply the second equation by $-1$ and add it to the third equation so that the variable $y$ disappears.\\
+    %The linear system then looks as follows:}
+ %   \begin{displaymath}
+%\begin{mtable}[\cellaligns{ccrcrcrcr}]
+%\text{(I)}&\qquad&x&-&2y&+&4z&=&-6\phantom{.}\\
+%\text{(II)}&&&&2y&-&5z&=&12\phantom{.}\\
+%\text{(III)}&&&&&&0&=&0\lang{de}{.}\lang{en}{\phantom{.}}
+%\end{mtable}
+%\end{displaymath}
+    
+ %   \step \lang{de}{Das lineare Gleichungssystem ist jetzt in Stufenform und man erkennt, dass eine Variable frei wählbar ist, d.h. das lineare Gleichungssystem ist lösbar, aber nicht eindeutig lösbar. 
+  %  Setzt man z.B. $z=t\in\R$, so ergibt sich durch Rückwärtseinsetzen $y=6+\frac{5}{2}t$ und schließlich $x=6+t$ und somit $\mathbb{L}=\{(6+t; 6+\frac{5}{2}t; t)| t\in\R\}$.
+    
+   % (Andere Darstellungen der Lösungsmenge sind möglich, je nachdem, welche Variable frei gewählt wird und wie sie gewählt wird.)}
+    %\lang{en}{The linear system is now in row echelon form and it's easy to see that one variable can be chosen freely. This means the linear system is non-uniquely solvable. 
+    %Let $z=t\in\R$, then via back substitution $y=6+\frac{5}{2}t$ and finally $x=6+t$ and hence $\mathbb{L}=\{(6+t, 6+\frac{5}{2}t, t)| t\in\R\}$.
+    
+    %(Other representations of the solution set are possible depending on which variable is chosen as a parameter and how it is chosen.)}
+  \end{incremental}
+  
+  \tab{
+  \lang{de}{Lösung (d)}
+  \lang{en}{Solution (d)}
+  }
+  \begin{incremental}[\initialsteps{1}]
+    \step 
+    \lang{de}{Dieses lineare Gleichungssystem liegt bereits in Stufenform vor.
+    Zwei Variablen werden frei gewählt. Beispielsweise wählt man $x_2=s\in\R$ und $x_3=t\in\R$.}
+    \lang{en}{This system is already in row echelon form, and we can recognize right away that two variables can be chosen freely. Let, for example, $y=s\in\R$ and $z=t\in\R$.}
+     
+    \step \lang{de}{Durch Einsetzen von $x_2=s$ und $x_3=t$ in die erste Gleichung erhält man $x_1=3-2s+5t$ und somit}
+    
+    %$\mathbb{L}=\{(3-2s+5t; s;t)| s, t\in\R\}$.
+
+    \[
+        \mathbb{L}=\{ \begin{pmatrix} 3-2s+5t\\ s\\ t\end{pmatrix} ~|~ s,t\in\R \}.
+    \]
+
+    \lang{de}{(Andere Darstellungen der Lösungsmenge sind möglich, je nachdem, welche Variablen frei gewählt werden und wie sie gewählt werden.)}
+	\lang{en}{By substituting $y=s$ and $z=t$ into the first equation we get $x=3-2s+5t$ and hence 
+   \[
+        \mathbb{L}=\{ \begin{pmatrix} 3-2s+5t\\ s\\ t\end{pmatrix} ~|~ s,t\in\R \}.
+    \]
+(Other representations of the solution set are possible depending on which variables are chosen as a parameter and how they are chosen.)}
+  \end{incremental} 
+
+\tab{
+  \lang{de}{Hinweis}
+  \lang{en}{Note}
+  }
+  
+  \lang{de}{Beachten Sie, dass es auch andere Möglichkeiten gibt, die linearen Gleichungssysteme mit dem Gauß-Verfahren auf Stufenform zu bringen. Die aufgeführten Wege sind nur eine Variante. Außerdem ist die Stufenform nicht eindeutig. 
+  Die Lösungsmenge der linearen Gleichungssysteme in (c) und (d) haben darüber hinaus verschiedene Darstellungsmöglichkeiten. Abgesehen davon sind die Lösungsmengen in der jeweiligen Teilaufgabe jedoch immer gleich.} 
+
+  \lang{en}{Note that there are other possibilities for reducing the linear system to row echelon form using Gaussian Elimination. The steps performed here are only one option. Also, the row echelon form of a system is not unique, but the answers aren't influenced by this at all.
+  The solution sets of the linear systems in (c) and (d) have different possibilities for their representation, however the different representations for the solution set of (c) are equivalent; all different representations for (d) are also equivalent.}
+
+
+\end{tabs*}
+\end{content}

@@ -1,0 +1,391 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Potenzreihen und Konvergenzradius}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T209_ConversionRadius.meta.xml}{T209_ConversionRadius}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T209_Potenzreihen/g_art_content_27_konvergenzradius.meta.xml}{content_27_konvergenzradius}
+    \link{generic_article}{content/rwth/HM1/T303_Approximationen/g_art_content_04_taylor_polynom.meta.xml}{content_04_taylor_polynom}
+    \link{generic_article}{content/rwth/HM1/T209_Potenzreihen/g_art_content_28_exponentialreihe.meta.xml}{content_28_exponentialreihe}
+    \link{generic_article}{content/rwth/HM1/T208_Reihen/g_art_content_25_konvergenz_kriterien.meta.xml}{konv-krit}
+    \link{generic_article}{content/rwth/HM1/T208_Reihen/g_art_content_24_reihen_und_konvergenz.meta.xml}{reihen-und-konv}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{9}
+\ombarticle{1}
+
+\lang{de}{\title{Potenzreihen und deren Konvergenzradius}}
+ 
+\begin{block}[annotation]
+  
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9684}{Ticket 9684}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+\section{Potenzreihen}
+
+
+Potenzreihen sind Reihen, deren Glieder eine besondere Form, zum Beispiel $a_n z^n$, haben,
+wobei die $a_n$ komplexe Zahlen sind und $z$ eine Unbestimmte. Ihre Partialsummen sind also Polynome in $z$.
+Potenzreihen definieren, wenn sie denn konvergieren, Funktionen. 
+Die prominentesten Beispiele  $\exp$, $\sin$, $\cos$ betrachten wir ausführlich im 
+\ref[content_28_exponentialreihe][nächsten Abschnitt]{sec:exp-reihe}.
+Umgekehrt erlauben die meisten "{gutartigen}" Funktionen wenigstens in der Nähe eines gewählten Punktes 
+eine Darstellung als Potenzreihe. Das ist die sogenannte 
+\ref[content_04_taylor_polynom][Taylor-Reihe]{sec:polynom}, die im Kapitel Approximation besprochen wird.
+
+
+\begin{definition}\label{def:Potenzreihe}
+Es sei $z_0\in \C$ und $(a_n)_{n\geq 0}$ eine komplexe Folge.  Dann heißt
+eine Reihe der Form
+\[   \sum_{n=0}^\infty a_n(z-z_0)^n \]
+eine \notion{Potenzreihe in $z$ mit Entwicklungspunkt $z_0$}. Die Zahlen $a_n$ nennt
+man die \notion{Koeffizienten} der Potenzreihe.
+Sind alle auftretenden Zahlen reell, so spricht man von einer \notion{reellen Potenzreihe}.
+
+Hierbei ist stets $(z-z_0)^0=1$, selbst für $z=z_0$. Im Falle $z=z_0$ besitzt die Potenzreihe dann
+lediglich einen von Null verschiedenen Summanden, nämlich $a_0$.
+\end{definition}
+
+\begin{remark}
+\begin{enumerate}
+\item Die Zahlen $z_0$ und $a_n$ werden bei Potenzreihen als fest gewählt angesehen, wohingegen $z$ als Variable gesehen wird. Indem man zunächst  $z_0$ und $(a_n)_{n\geq 0}$ fest wählt und dann
+verschiedene Werte für $z$ einsetzt, erhält man komplexe (oder reelle) Funktionen
+\[  f:D_f\to \C, \ z\mapsto \sum_{n=0}^\infty a_n(z-z_0)^n. \]
+Der Definitionsbereich dieser Funktion ist dann die Menge aller $z$, für die die entsprechende Reihe konvergiert 
+(siehe \lref{sec:konvergenzradius}{Konvergenzradius}).
+\item Setzt man $w=z-z_0$, so ist
+\[  \sum_{n=0}^\infty a_n(z-z_0)^n =\sum_{n=0}^\infty a_n w^n \]
+eine Potenzreihe in $w$ mit Entwicklungspunkt $0$, und die eine Reihe konvergiert genau dann, wenn die
+andere Reihe konvergiert. Wir werden daher im Folgenden nur Potenzreihen mit Entwicklungspunkt $0$
+betrachten.
+\end{enumerate}
+\end{remark}
+
+\begin{example}
+\begin{enumerate}
+\item
+Die \ref[konv-krit][Exponentialreihe]{ex:exp-reihe} für beliebiges $z\in \C$ 
+\[ \exp(z)=\sum_{n=0}^\infty \frac{z^n}{n!} \]
+ist eine Potenzreihe in $z$ mit Entwicklungspunkt $0$.
+\item Die \ref[reihen-und-konv][geometrische Reihe]{ex:geom-reihe}
+\[ \sum_{k=0}^\infty q^k \]
+ist eine Potenzreihe in $q$ mit Entwicklungspunkt $0$.
+\end{enumerate}
+\end{example}
+
+Das folgende Abelsche Lemma ist unser Schlüssel zum Konvergenzverhalten von Potenzreihen.
+
+\begin{theorem}[Abelsches Lemma] \label{thm:abelsches-lemma}
+Es sei $(a_n)_{n\geq 0}$ eine komplexe Folge und $r>0$ so, dass die Folge $(a_n r^n)_{n\geq 0}$ beschränkt ist. Dann konvergiert die Potenzreihe
+\[  \sum_{n=0}^\infty a_n z^n \]
+absolut für alle $z\in \C$ mit $|z|<r$.
+
+Etwas allgemeiner gilt sogar: Für beliebiges $j\in \Nzero$ konvergiert dann die Potenzreihe
+\[  \sum_{n=0}^\infty a_n n^j z^n \]
+absolut für alle $z\in \C$ mit $|z|<r$.
+\end{theorem}
+
+\begin{remark}
+Es ist wichtig zu bemerken, dass die absolute Konvergenz nur für solche $z$ mit $|z|<r$ gezeigt werden kann.
+Im Beweis werden wir benutzen, dass $\frac{\vert z\vert}{r}<1$. Für  $z$ mit $\vert z\vert =r$, also Punkten auf dem Kreis (d.h. der Kreislinie) selbst, kann keine allgemeine Aussage gemacht werden!
+Die Menge der $z\in\C$, für die hier die absolute Konvergenz gezeigt wird, ist also eine Kreisscheibe mit Radius $r$, deren Rand, das heißt der Kreis mit Radius $r$, nicht dazugehört.
+
+Wenn die Reihe $\sum_{n=0}^\infty a_n n^j z^n$ absolut konvergiert, dann konvergiert auch die Reihe $\sum_{n=0}^\infty a_n z^n $
+absolut nach dem Majorantenkriterium. Das Abelsche Lemma liefert sozusagen eine Umkehrung für den Spezialfall aus dem Satz. 
+
+Häufig wird als Abelsches Lemma daher auch die Aussage bezeichnet, dass die beiden Potenzreihen $\sum_{n=0}^\infty a_n n^j z^n$ und 
+$\sum_{n=0}^\infty a_n z^n$ innerhalb des gleichen Radius konvergieren. 
+\end{remark}
+
+\begin{proof*}[Beweis des Abelschen Lemmas]
+\begin{incremental}[\initialsteps{0}]
+\step
+Wir zeigen gleich die allgemeinere Aussage mit dem \ref[konv-krit][Wurzelkriterium]{thm:wurzelkriterium}.\\
+Da $(a_n r^n)_{n\geq 0}$ beschränkt ist, gibt es ein $K\in \R$ mit $K\geq |a_n r^n|$ für alle $n\geq 0$.
+Für $z\in \C\setminus \{0\}$ mit $|z|<r$ gilt dann für alle $n\geq 0$
+\[ \sqrt[n]{|a_nn^j z^n|}=\sqrt[n]{n^j \, | \, a_n r^n \, | \, \cdot \left(\frac{|z|}{r}\right)^n}\leq \sqrt[n]{n}^j\cdot 
+\sqrt[n ]{K}\cdot \frac{|z|}{r}. \]
+
+\step
+Es ist $\frac{r}{|z|}>1$ und wir wählen nun noch ein $s\in (1;\frac{r}{|z|})$.
+Da $\lim_{n\to \infty} \sqrt[n]{n}=1$ und $\lim_{n\to \infty} \sqrt[n]{K}=1$ ist (s. Abschnitt
+\ref[konv-krit][Konvergenzkriterien für Folgen]{sec:wichtige-beispiele}),
+gibt es ein $n_0\in \N$ so, dass
+$\sqrt[n]{n}^j \cdot \sqrt[n]{K}<s$ für alle $n\geq n_0$. 
+Damit gilt für alle $n\geq n_0$
+\[ \sqrt[n]{|a_nn^j z^n|}\leq  \sqrt[n]{n}^j \cdot\sqrt[n]{K}\cdot \frac{|z|}{r}<s \cdot \frac{|z|}{r}=:\beta. \]
+Wir wählen also $\beta:=s\cdot \frac{|z|}{r}$ und für den Beweis der absoluten Konvergenz ist es hinreichend, wenn $\beta<1$ sein sollte.
+Dies ist aber der Fall, da wir $s < \frac{r}{|z|}$ gewählt hatten.
+
+Also ist die Reihe $\sum_{n=0}^\infty a_n n^j z^n$ absolut konvergent.
+\end{incremental}
+\end{proof*}
+
+\begin{example}
+Für die geometrische Reihe $\sum_{n=0}^\infty z^n$ ist die Folge der Koeffizienten gerade die konstante
+Folge $(1)_{n\in \N}$. Diese ist beschränkt, weshalb wir den Satz mit $z=1$ anwenden können.
+Die geometrische Reihe ist also für alle $z$ mit $|z|<1$ absolut konvergent, was wir auch schon
+im Abschnitt \ref[konv-krit][Konvergenzkriterien für Reihen]{ex:absolut-konvergenz} direkt gesehen haben.
+
+Genau genommen wurde für den Beweis der obigen Aussage auch schon benutzt, dass die geometrische
+Reihe für $|z|<1$ absolut konvergiert.
+\end{example}
+
+Die Konvergenz von Potenzreihen wird auch im folgenden Video behandelt:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10868&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+\section{Konvergenzradius}\label{sec:konvergenzradius}
+
+
+
+In diesem Paragraphen beschäftigen wir uns genauer mit dem Bereich derjenigen $z$, für die eine
+gegebene Potenzreihe $\sum_{n=0}^\infty a_n z^n$ bzw. allgemeiner eine Potenzreihe 
+$\sum_{n=0}^\infty a_n(z-z_0)^n$  konvergiert.
+
+Wir werden sehen, dass dieser Bereich in der komplexen Ebene eine Kreisscheibe mit dem Entwicklungspunkt $z_0$ als Mittelpunkt ist.
+Dabei lassen wir für den Radius $R$ dieser Kreisscheibe die beiden Extreme $R=0$ und $R=\infty$ zu. 
+Im ersten Fall besteht die Kreischeibe dann aus einem einzigen Punkt, dem Entwicklungspunkt der Reihe, 
+während im zweiten Fall die unendlich große Kreischeibe die gesamte komplexe Ebene meint.
+
+\begin{definition}\label{def:konvergenzradius}
+Für eine Potenzreihe $\sum_{n=0}^\infty a_n(z-z_0)^n$ ist der \notion{Konvergenzradius} $R\in \R_{\geq 0}\cup \{\infty\}$ definiert durch
+\[   R= \sup\{ r\in \R_{\geq 0} \,|\,  \text{Die Folge }(a_nr^n)_{n\geq 0}\text{ ist beschränkt} \}. \]
+\end{definition}
+Man beachte, dass die obige Menge, deren Supremum den Konvergenzradius bestimmt, immer $r=0$ enthält, also nicht leer ist.
+
+
+
+\begin{example}\label{ex:geom-und-exp-reihe}
+\begin{tabs*}[\initialtab{0}]
+\tab{geometrische Reihe} Für die geometrische Reihe  $\sum_{n=0}^\infty z^n$ ist die Folge $(1\cdot r^n)_{n\geq 0}$ genau dann beschränkt, 
+wenn $|r|\leq 1$ ist. Also ist ihr Konvergenzradius $R=\sup\{ r\in \R_{\geq 0} | r\leq 1\}=\sup [0;1] =1$.
+\tab{Exponentialreihe} Um den Konvergenzradius für die Exponentialreihe $\sum_{n=0}^\infty \frac{z^n}{n!}$ zu berechnen,
+müssen wir Folgen $(  \frac{r^n}{n!})_{n\geq 0}$ für feste reelle Zahlen $r>0$ betrachten.
+
+Jede dieser Folgen hat positive Glieder, und für $n+1>r$ (also $n>r-1$) gilt
+\[  \frac{r^{n+1}}{(n+1)!}= \frac{r^n}{n!}\cdot \frac{r}{n+1}< \frac{r^n}{n!}. \]
+Die Folge ist für $n>r-1$ also monoton fallend und damit insbesondere beschränkt.
+Weil für Konvergenzaussagen die ersten, endlichen vielen Glieder mit $n\leq r-1$ keine Rolle spielen,
+ist der Konvergenzradius $R=\sup\{ r\in \R_{\geq 0}\}=\infty$.
+\end{tabs*}
+\end{example}
+
+Der Begriff \emph{Konvergenzradius} ist gerechtfertigt durch den folgenden Satz zur Aussage über die
+Konvergenz der Potenzreihe.
+
+
+\begin{theorem}\label{thm:konvergenzbereich}
+Es sei $\sum_{n=0}^\infty a_n (z-z_0)^n$ eine komplexe Potenzreihe mit Entwicklungspunkt $z_0$ und
+$R$ ihr Konvergenzradius. Dann gelten:
+\begin{enumerate}
+\item Ist $R=0$, so konvergiert die Reihe nur für $z=z_0$.
+\item Ist $0<R<\infty$, so ist die Reihe für $|z - z_0|<R$ absolut konvergent und für $|z - z_0|>R$ divergent.
+\item Ist $R=\infty$, so ist die Reihe für alle $z\in \C$ absolut konvergent.
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}
+Der Bereich, in dem die Potenzreihe $\sum_{n=0}^\infty a_n (z-z_0)^n$ konvergiert, 
+umfasst also die Punkte im Innern der Kreisscheibe mit Mittelpunkt $z_0$  und Radius $R$. 
+Eventuell gehören auch noch Punkte dazu, die auf dem Rand liegen, d.\,h. solche $z\in \C$ mit $|z-z_0|=R$.
+
+\begin{figure}
+\image{T209_ConversionRadius}
+\caption{Die Menge aller Punkte $z$ mit $|z-3|<2$ ist ein Kreis um $z_0=3$ mit Radius $2$.}
+\end{figure}
+
+Der Satz macht keine Aussage über die Konvergenz auf dem Rand, und in der Tat treten auch mehrere verschiedene Fälle auf: 
+Konvergenz bei keinem Randpunkt, Konvergenz bei allen Randpunkten oder auch Konvergenz bei manchen Randpunkten 
+(s. \lref{ex:konvergenz-auf-rand}{Beispiele}).
+\end{remark}
+
+\begin{proof*}[Beweis des Theorems]
+\begin{incremental}[\initialsteps{1}]
+\step
+Wie bereits oben beschrieben, kann man durch die Ersetzung $w=z-z_0$ den allgemeinen Fall auf den Fall $z_0=0$ zurückführen.
+
+\step
+Es sei also $\sum_{n=0}^\infty a_n z^n$ eine Potenzreihe mit Entwicklungspunkt $0$ und $R$ ihr Konvergenzradius.
+Die Definition von $R$ als Supremum besagt, dass die Folge  $(a_nr^n)_{n\geq 0}$ beschränkt ist für alle 
+$r<R$ und unbeschränkt ist für alle $r>R$.
+
+\step
+Ist nun $|z|>R$ (falls $R<\infty$), so ist also die Folge $(a_n |z|^n)_{n\geq 0}$ unbeschränkt, und daher kann auch die Folge
+$(a_n z^n)_{n\geq 0}$ nicht beschränkt sein. Für eine konvergente Reihe $\sum_{n=0}^\infty a_n z^n$ müsste aber die Folge 
+$(a_n z^n)_{n\geq 0}$ eine Nullfolge und insbesondere beschränkt sein.\\
+Folglich konvergiert die Potenzreihe für $|z|>R$ nicht.
+
+Ist $|z|<R$ (falls $R\neq 0$), so können wir ein $r\in \R$ mit $|z|<r<R$ wählen. Dann ist aber die Folge $(a_nr^n)_{n\geq 0}$ beschränkt 
+und nach  \lref{thm:abelsches-lemma}{obigem Satz} konvergiert die Potenzreihe
+für alle $w$ mit $|w|<r$, also insbesondere für $z$.
+
+Im speziellen Fall $R=0$ ist noch zu bemerken, dass die Potenzreihe $\sum_{n=0}^\infty a_n z^n$ für $z=0$ konvergiert, 
+da außer dem ersten Summanden $a_0z^0=a_0$ alle anderen gleich $0$ sind. 
+\end{incremental}
+\end{proof*}
+
+
+Wie schon oben erwähnt, gibt es keine allgemeine Aussage über die Konvergenz auf dem Rand.
+
+\begin{example}\label{ex:konvergenz-auf-rand}
+\begin{tabs*}[\initialtab{0}]
+\tab{geometrische Reihe $\sum_{n=0}^\infty z^n$}
+Für die geometrische Reihe $\sum_{n=0}^\infty z^n$ hatten wir als Konvergenzradius $R=1$ berechnet.
+Für $|z|=1$ bilden die Glieder keine Nullfolge, weshalb insbesondere die Reihe $\sum_{n=0}^\infty z^n$
+für diese $z$ nicht konvergiert. Die geometrische Reihe konvergiert also an keinem Randpunkt.
+\tab{Logarithmusreihe $\sum_{n=1}^\infty \frac{(-1)^{n+1}z^n}{n}$}
+Betrachtet man die sogenannte Logarithmusreihe $\sum_{n=1}^\infty \frac{(-1)^{n+1}z^n}{n}$, so ist
+die zugehörige Folge $(\frac{(-1)^{n+1}r^n}{n})_{n\geq 1}$ für $r=1$ beschränkt, d.\,h., der Konvergenzradius $R$ ist mindestens $1$.
+Andererseits erhalten wir für $z=-1$ das Negative der harmonischen Reihe, welche nicht konvergiert.
+Daher kann der Konvergenzradius auch nicht größer als $1$ sein. Also ist $R=1$.
+
+Für $z=1$ erhält man jedoch die \ref[reihen-und-konv][alternierende harmonischen Reihe]{ex:alter-harm-reihe}, welche konvergiert. 
+
+
+Für diese Potenzreihe gibt es also Werte auf dem Rand, für die die Reihe konvergiert (z.\,B. $z=1$), und Werte auf dem Rand, für die die Reihe nicht konvergiert (z.B. $z=-1$).
+
+\emph{Bemerkung:} Der Begriff "`Logarithmusreihe"' kommt daher, dass sie mit der Logarithmusfunktion $\ln$ zusammenhängt. Genauer gilt für alle reellen Zahlen $z$ mit $-1<z\leq 1$:
+\[   \sum_{n=1}^\infty \frac{(-1)^{n+1}z^n}{n} = \ln(1+z). \]
+Den Grenzwert der alternierenden harmonischen Reihe erkennen wir  nun als $\ln(2)$.
+\tab{$\sum_{n=1}^\infty \frac{z^n}{n^2}$}
+Auch für diese Potenzreihe ist der Konvergenzradius $1$, denn wir haben im Abschnitt \ref[konv-krit][Konvergenzkriterien für Reihen]{ex:ableitungen-der-geom-reihe} gesehen, dass die Reihe für $|z|<1$ konvergiert und für $|z|>1$ divergiert.
+Wir haben auch schon \ref[konv-krit][gesehen]{ex:weitere-reihen}, dass die Reihe
+$\sum_{n=1}^\infty \frac{1}{n^2}$ konvergiert. Insbesondere ist die Reihe
+$\sum_{n=1}^\infty \frac{z^n}{n^2}$ für alle $z$ mit $|z|=1$ absolut konvergent und damit auch konvergent.
+
+In diesem Beispiel konvergiert die Potenzreihe also für alle Punkte auf dem Rand.
+\end{tabs*}
+\end{example}
+
+Die Definition des Konvergenzradius wird mit Beispielen in diesem Video erläutert:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10869&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+\\
+
+Wir haben den Konvergenzradius als Supremum, also als kleinste obere Schranke einer Menge, kennengelernt.
+Das legt nahe, dass er sich oft als Grenzwert explizit bestimmen lässt. 
+Die folgenden Sätze geben  solche Grenzwertformeln an.
+%In vielen Fällen lässt sich der Konvergenzradius auch als Grenzwert berechnen.
+
+
+
+\begin{theorem}[Cauchy-Hadamard]\label{thm:Cauchy-Hadamard}
+%\textbf{Satz von Cauchy-Hadamard}\\
+Es sei $\sum_{n=0}^\infty a_n (z-z_0)^n$ eine Potenzreihe. Wenn der Grenzwert
+\[  \lim_{n\to \infty} {\sqrt[n]{|a_n|}} \]
+existiert (oder $=\infty$ ist), dann gilt für den Konvergenzradius $R$ der Potenzreihe
+\[  R=   \frac{1}{\lim_{n\to \infty}\sqrt[n]{|a_n|}}. \]
+\end{theorem}
+
+\begin{proof*}
+Ist $A={\lim_{n\to \infty}\sqrt[n]{|a_n|}}$, dann gilt
+\[ \lim_{n\to\infty}\sqrt[n]{|a_nz^n|}={\vert z\vert} \cdot \lim_{n\to \infty}\sqrt[n]{|a_n|}={\vert z\vert}\cdot A
+%\:\begin{cases} <1 &\text{ falls } \vert z\vert <\rho\\>1&\text{ falls }\vert z\vert >\rho
+%\end{cases}
+.\]
+Nach dem \ref[konv-krit][Wurzelkriterium]{thm:wurzelkriterium} konvergiert die Reihe für ${\vert z\vert}<\frac{1}{A}$ absolut, 
+und sie divergiert für ${\vert z\vert}>\frac{1}{A}$. Also ist $R=\frac{1}{A}$ der Konvergenzradius.
+(Hierbei haben wir symbolisch $\frac{1}{A}=0$ im Fall $A=\infty$ gesetzt, bzw. $\frac{1}{A}=\infty$ im Fall $A=0$.)
+\end{proof*}
+
+Mit dem Quotientenkriterium zeigt man:
+\begin{theorem}[Quotientenregel]\label{thm:quot-regel}
+Es sei $\sum_{n=0}^\infty a_n (z-z_0)^n$ eine Potenzreihe und es gelte $a_n \neq 0$ für alle genügend großen $n \geq n_0$. Wenn der Grenzwert
+\[  q=\lim_{n\to \infty} {\vert\frac{a_{n+1}}{a_n}\vert} \]
+existiert (oder $=\infty$ ist), dann gilt für den Konvergenzradius $R$ der Potenzreihe
+\[  R=   \frac{1}{q}. \]
+\end{theorem}
+
+\begin{remark}
+Ersetzt man im Satz von Cauchy-Hadamard den Limes durch den Limes superior, 
+so zeigt man sogar die folgende Aussage:
+Der Konvergenzradius $R$ der Potenzreihe ist gegeben durch 
+\[ \frac{1}{R}=   {\underset{n\to \infty}{\lim \sup}\sqrt[n]{|a_n|}}.\]
+Manchmal wird der Konvergenzradius durch diese Cauchy-Hadamard-Formel definiert 
+und dann die Äquivalenz zu unserer Definition gezeigt.
+\end{remark}
+
+Die Theoreme zur Berechnung des Konvergenzradius werden auch im folgenden Video bewiesen und erklärt:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10870&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+
+\begin{quickcheck}
+\text{ Wählen Sie die richtige Antwort aus! \\
+Der Konvergenzbereich einer komplexen Potenzreihe mit Konvergenzradius $R>0$ ist...
+}
+\begin{choices}{unique}
+\begin{choice}
+\text{ein Intervall der Breite $2R$.}
+\solution{false}
+\end{choice}
+\begin{choice}
+\text{ein Kreis mit Radius $R$.}
+\solution{false}
+\end{choice}
+\begin{choice}
+\text{eine Kreisscheibe mit Radius $R$.}
+\solution{true}
+\end{choice}
+\begin{choice}
+\text{ein Quadrat mit Seitenlänge $R$.}
+\solution{false}
+\end{choice}
+\end{choices}
+\end{quickcheck}
+%%%
+\begin{quickcheck}
+\type{input.number}
+\field{rational}
+\begin{variables}
+   \randint{q}{2}{9}
+   \function[calculate]{R1}{1}
+   \function[calculate]{R2}{q}
+   \function[calculate]{R3}{1/q}
+  \end{variables}
+ 
+  \text{
+    Bestimmen Sie die Konvergenzradien der folgenden Reihen.\\
+    $\sum_{k=0}^\infty z^k$ hat Konvergenzradius $R_1=$\ansref,\\
+    $\sum_{k=0}^\infty \frac{z^k}{\var{q}^k}$ hat Konvergenzradius $R_2=$\ansref,\\
+    $\sum_{k=0}^\infty \var{q}^k{z^k}$ hat Konvergenzradius $R_3=$\ansref.
+    }
+    \begin{answer}
+    \solution{R1}
+    \end{answer}
+    \begin{answer}
+    \solution{R2}
+    \end{answer}
+    \begin{answer}
+    \solution{R3}
+    \end{answer}
+
+\end{quickcheck}
+
+Das folgende Video behandelt als Zusatz die Frage nach der Stetigkeit von Potenzreihen:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10874&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}
+\end{content}

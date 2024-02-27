@@ -1,0 +1,487 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü06: Rang}
+    \lang{en}{Exercise 6}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Rechnen mit Matritzen}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21351}{Ticket 21351}
+\end{block}
+\begin{block}[annotation]
+Copy of \href{http://team.mumie.net/issues/18630}{Ticket 18630}: content/rwth/HM1/T112_Rechnen_mit_Matrizen/exercises/exe_exercise5.src.tex
+\end{block}
+
+\usepackage{mumie.ombplus}
+
+\title{
+  \lang{de}{Ü06: Rang}
+  \lang{en}{Exercise 6}
+}
+
+\begin{block}[annotation]
+  Rechnen mit Matritzen
+     
+\end{block}
+
+
+
+
+\lang{de}{
+    Welchen Rang haben die folgenden Matrizen über $\mathbb{R}$? 
+    Welche der Matrizen haben \textit{vollen} Rang?
+}
+\begin{enumerate}
+
+    \item[(a)]
+        \[
+            A = 
+            \begin{pmatrix}
+                2 & 0 & 4 \\ 
+                0 & 1 & 1 \\
+                1 & 0 & 2 \\
+           \end{pmatrix}
+        \]
+        
+    \item[(b)]
+        \[
+            B = 
+            \begin{pmatrix}
+                2 & 3 & 7 \\ 
+                0 & 2 & 1 \\
+                0 & 0 & -2 \\
+           \end{pmatrix}
+        \]
+
+    \item[(c)]
+        \[
+            C = 
+            \begin{pmatrix}
+                1 & 2 & 4 \\ 
+                0 & 0 & 1 \\
+           \end{pmatrix}
+        \]
+        
+    \item[(d)] 
+        \[
+            D = 
+            \begin{pmatrix}
+                1 & 3 & 0 \\ 
+                0 & 1 & 2 \\
+                -1 & -2 & c \\
+           \end{pmatrix}
+        \]     
+        mit $c \in \mathbb{R}$
+\end{enumerate}
+
+
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+  \tab{
+  \lang{de}{Antwort}
+  }
+\begin{itemize}
+\item[(a)] Rang(A) = 2, kein voller Rang
+\item[(b)] Rang(B) = 3, voller Rang
+\item[(c)] Rang(C) = 2, voller Rang
+\item[(d)] Rang(D) = 2 für c=2, kein voller Rang und\\
+ Rang(D)=3 für $c \neq 2$, voller Rang
+\end{itemize}
+    \tab{\lang{de}{Lösung (a)}}
+    \lang{de}{
+        Wir bestimmen zunächst den Zeilenrang der $(3 \times 3)$-Matrix $A$.
+        Mit dem Gauß-Verfahren bringt man die Matrix
+        durch elementare Umformungen der Zeilen auf Stufenform.
+        Durch Multiplikation der letzten Zeile mit dem Faktor 2 erhalten wir:
+        \[
+            \begin{pmatrix}
+                2 & 0 & 4 \\ 
+                0 & 1 & 1 \\
+                2 & 0 & 4 \\
+           \end{pmatrix}
+              ~
+\begin{matrix}
+    \\
+    \\
+    |-(I)+(III)
+\end{matrix}\]
+        Subtraktion der ersten Zeile von der letzten Zeile ergibt:
+        \[\rightsquigarrow~~
+            \begin{pmatrix}
+                2 & 0 & 4 \\ 
+                0 & 1 & 1 \\
+                0 & 0 & 0 \\
+           \end{pmatrix}
+        \]
+        Der Zeilenrang von $A$ ergibt sich nun durch die Anzahl an Zeilen,
+        die ungleich der Nullzeile sind. Also ist der Zeilenrang hier
+        gleich 2. 
+        
+        Alternativ hätte man auch den Spaltenrang von $A$ bestimmen können.
+        Der Spaltenrang ist definiert durch den Zeilenrang von $A^T$.
+        \[
+            A^T = 
+            \begin{pmatrix}
+                2 & 0 & 1 \\ 
+                0 & 1 & 0 \\
+                4 & 1 & 2 \\
+           \end{pmatrix}
+              ~
+\begin{matrix}
+    \\
+    \\
+    |-2(I)-(II)+(III)
+\end{matrix}\]
+        Die dritte Zeile entspricht dem 2-fachen der ersten Zeile plus
+        der zweiten Zeile. Man erhält:
+        \[\rightsquigarrow~~
+            \begin{pmatrix}
+                2 & 0 & 1 \\ 
+                0 & 1 & 0 \\
+                0 & 0 & 0 \\
+           \end{pmatrix}
+        \]
+        Der Spaltenrang ist somit ebenfalls 2.
+        %\end{remark}
+        
+        Zeilenrang und Spaltenrang einer Matrix sind immer gleich.
+        Matrix $A$ hat also Rang 2.
+        Eine $(3 \times 3)$-Matrix hat vollen Rang, wenn ihr Rang 3 ist.
+        Dies ist hier nicht der Fall.
+    }
+    
+    \tab{\lang{de}{Lösung (b)}}
+    \lang{de}{
+        Die $(3 \times 3)$-Matrix $B$ liegt bereits in Stufenform vor.
+        Der Zeilenrang von $A$ ergibt sich durch die Anzahl an Zeilen,
+        die ungleich der Nullzeile sind.
+        Also ist der Zeilenrang und damit auch der Rang 3.
+        Die Matrix $B$ hat also vollen Rang.
+    }
+
+    \tab{\lang{de}{Lösung (c)}}
+    \lang{de}{
+        Die $(2 \times 3)$-Matrix $C$ liegt bereits in Stufenform vor.
+        Der Zeilenrang von $A$ ergibt sich durch die Anzahl an Zeilen,
+        die ungleich der Nullzeile sind. 
+        Also ist der Zeilenrang und damit auch
+        der Rang 2.
+        
+        Eine $(m \times n)$-Matrix hat vollen Rang,
+        wenn der Rang von $A$ gleich der kleineren der beiden
+        Zahlen $m$ und $n$ ist.
+        Wir bestimmen $\min\{m,n\}=\min\{2, 3\}=2$ und stellen fest,
+        dass dies mit dem Rang übereinstimmt.
+        Matrix $C$ hat also auch vollen Rang.
+    }
+
+ \tab{\lang{de}{Lösungsvideo (d)}}
+  \youtubevideo[500][300]{lBT5RV9MS2w}\\
+
+
+\end{tabs*}
+
+
+
+
+
+
+
+% ALTE AUFGABEN:
+
+%\lang{de}{ Welche der folgenden Aussagen sind für Matrizen $A, B, C \in \mathbb{M}(n,n;\mathbb{R})$ wahr?
+%\begin{enumerate}
+% \item[a)]
+%\[
+%    (A \cdot B) \cdot C = A \cdot (B \cdot C)
+%\]
+% \item[b)]
+%\[
+%    A \cdot (B + C) = AB + AC
+%\]
+% \item[c)] 
+%\[
+%    A \cdot B \cdot C = A \cdot C \cdot B
+%\]
+%\end{enumerate}}
+%
+%\begin{tabs*}[\initialtab{0}\class{exercise}]
+%  \tab{\lang{de}{Lösung a)}}
+%  \lang{de}{
+%wahr (Assoziativregel).
+%\begin{example}
+%\[
+%A = \begin{pmatrix}
+%  0 & -2 \\ 
+%  3 & -5
+% \end{pmatrix}
+%,~
+%B = \begin{pmatrix}
+%  1 & 3 \\ 
+%  0 & 2
+% \end{pmatrix}
+%,~
+%C = \begin{pmatrix}
+%  1 & -1 \\ 
+%  3 & 2
+% \end{pmatrix}
+%\]
+%
+%\[
+%(A \cdot B) \cdot C = 
+%\left(
+%\begin{pmatrix}
+%  0 & -2 \\ 
+%  3 & -5
+%\end{pmatrix}
+%\cdot
+%\begin{pmatrix}
+%  1 & 3 \\ 
+%  0 & 2
+%\end{pmatrix}
+%\right)
+%\cdot
+%\begin{pmatrix}
+%  1 & -1 \\ 
+%  3 & 2
+%\end{pmatrix}
+%=
+%\begin{pmatrix}
+%  0 & -4 \\ 
+%  3 & -1
+%\end{pmatrix}
+%\cdot
+%\begin{pmatrix}
+%  1 & -1 \\ 
+%  3 & 2
+%\end{pmatrix}
+%=
+%\begin{pmatrix}
+%  -12 & -8 \\ 
+%  0 & -5
+%\end{pmatrix}
+%\]
+%
+%\[
+%A \cdot (B \cdot C) = 
+%\begin{pmatrix}
+%  0 & -2 \\ 
+%  3 & -5
+%\end{pmatrix}
+%\cdot
+%\left(
+%\begin{pmatrix}
+%  1 & 3 \\ 
+%  0 & 2
+%\end{pmatrix}
+%\cdot
+%\begin{pmatrix}
+%  1 & -1 \\ 
+%  3 & 2
+%\end{pmatrix}
+%\right)
+%=
+%\begin{pmatrix}
+%  0 & -2 \\ 
+%  3 & -5
+%\end{pmatrix}
+%\cdot
+%\begin{pmatrix}
+%  10 & 5 \\ 
+%  6 & 4
+%\end{pmatrix}
+%=
+%\begin{pmatrix}
+%  -12 & -8 \\ 
+%  0 & -5
+%\end{pmatrix}
+%\]
+%\end{example}
+%
+%}
+%
+% \tab{\lang{de}{Lösung b)}}
+%  \lang{de}{
+%wahr (Distributivregel).
+%
+%\begin{example}
+%\[
+%A = \begin{pmatrix}
+%  0 & -2 \\ 
+%  3 & -5
+% \end{pmatrix}
+%,~
+%B = \begin{pmatrix}
+%  1 & 3 \\ 
+%  0 & 2
+% \end{pmatrix}
+%,~
+%C = \begin{pmatrix}
+%  1 & -1 \\ 
+%  3 & 2
+% \end{pmatrix}
+%\]
+%
+%\[
+%A \cdot (B + C) = 
+%\begin{pmatrix}
+%  0 & -2 \\ 
+%  3 & -5
+%\end{pmatrix}
+%\cdot
+%\left(
+%\begin{pmatrix}
+%  1 & 3 \\ 
+%  0 & 2
+%\end{pmatrix}
+%+
+%\begin{pmatrix}
+%  1 & -1 \\ 
+%  3 & 2
+%\end{pmatrix}
+%\right)
+%=
+%\begin{pmatrix}
+%  0 & -2 \\ 
+%  3 & -5
+%\end{pmatrix}
+%\cdot
+%\begin{pmatrix}
+%  2 & 2 \\ 
+%  3 & 4
+%\end{pmatrix}
+%=
+%\begin{pmatrix}
+%  -6 & -8 \\ 
+%  -9 & -14
+%\end{pmatrix}
+%\]
+%
+%\[
+%AB + AC = 
+%\begin{pmatrix}
+%  0 & -2 \\ 
+%  3 & -5
+%\end{pmatrix}
+%\cdot
+%\begin{pmatrix}
+%  1 & 3 \\ 
+%  0 & 2
+%\end{pmatrix}
+%+
+%\begin{pmatrix}
+%  0 & -2 \\ 
+%  3 & -5
+%\end{pmatrix}
+%\cdot
+%\begin{pmatrix}
+%  1 & -1 \\ 
+%  3 & 2
+%\end{pmatrix}
+%=
+%\begin{pmatrix}
+%  0 & -4 \\ 
+%  3 & -1
+%\end{pmatrix}
+%\cdot
+%\begin{pmatrix}
+%  -6 & -4 \\ 
+%  -12 & -13
+%\end{pmatrix}
+%=
+%\begin{pmatrix}
+%  -6 & -8 \\ 
+%  -9 & -14
+%\end{pmatrix}
+%\]
+%\end{example}
+%
+%}
+%
+% \tab{\lang{de}{Lösung c)}}
+%  \lang{de}{
+%falsch: die Matrizenmultiplikation ist \textbf{nicht} kommutativ!
+%
+%\begin{example}
+%\[
+%A = \begin{pmatrix}
+%  0 & -2 \\ 
+%  3 & -5
+% \end{pmatrix}
+%,~
+%B = \begin{pmatrix}
+%  1 & 3 \\ 
+%  0 & 2
+% \end{pmatrix}
+%,~
+%C = \begin{pmatrix}
+%  1 & -1 \\ 
+%  3 & 2
+% \end{pmatrix}
+%\]
+%
+%\[
+%A \cdot B \cdot C = 
+%\begin{pmatrix}
+%  0 & -2 \\ 
+%  3 & -5
+%\end{pmatrix}
+%\cdot
+%\begin{pmatrix}
+%  1 & 3 \\ 
+%  0 & 2
+%\end{pmatrix}
+%\cdot
+%\begin{pmatrix}
+%  1 & -1 \\ 
+%  3 & 2
+%\end{pmatrix}
+%=
+%\begin{pmatrix}
+%  -12 & -8 \\ 
+%  0 & -5
+%\end{pmatrix}
+%\]
+%
+%\[
+%A \cdot C \cdot B = 
+%\begin{pmatrix}
+%  0 & -2 \\ 
+%  3 & -5
+%\end{pmatrix}
+%\cdot
+%\begin{pmatrix}
+%  1 & -1 \\ 
+%  3 & 2
+%\end{pmatrix}
+%\cdot
+%\begin{pmatrix}
+%  1 & 3 \\ 
+%  0 & 2
+%\end{pmatrix}
+%=
+%\begin{pmatrix}
+%  -6 & -26 \\ 
+%  -12 & -62
+%\end{pmatrix}
+%\]
+%\end{example}
+%
+%}
+%\end{tabs*}
+
+
+\end{content}

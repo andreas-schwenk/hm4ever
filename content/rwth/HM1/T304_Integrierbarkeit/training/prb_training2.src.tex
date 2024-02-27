@@ -1,0 +1,412 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A02: Ober- und Untersummen}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A02: Ober- und Untersummen}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/10586}{Ticket 10586}
+\end{block}
+
+\begin{problem}
+	\randomquestionpool{1}{3}
+	
+%######################################################QUESTION_START	
+	\begin{question}	
+	% Fall s\leq a
+	%+++++++++++++++++++VARIABLES++++++++++++++++++++++
+		\begin{variables}
+
+		\randint[Z]{s}{-2}{2}
+		\randint[Z]{c}{-2}{2}
+		\randint{k}{0}{2}
+		
+		\randint[Z]{d1}{4}{12}
+		\randint[Z]{d2}{4}{12}
+		\randint[Z]{d3}{4}{12}
+		\function[calculate,3]{dx1}{d1/10}
+		\function[calculate,3]{dx2}{d2/10}
+		\function[calculate,3]{dx3}{d3/10}
+		
+		\function[calculate,3]{a}{s+(2*k)/10}
+		\function[calculate,3]{x1}{a+dx1}
+		\function[calculate,3]{x2}{x1+dx2}
+		\function[calculate,3]{b}{x2+dx3}
+		
+		\function[expand,normalize]{f}{(x-s)^2+c}
+		
+		\function[calculate,3]{fa}{(a-s)^2+c}
+		\function[calculate,3]{fb}{(b-s)^2+c}
+		\function[calculate,3]{fx1}{(x1-s)^2+c}
+		\function[calculate,3]{fx2}{(x2-s)^2+c}
+		
+				
+		\function[calculate,3]{s1}{fx1}
+		\function[calculate,3]{s2}{fx2}
+		\function[calculate,3]{s3}{fb}
+		\function[calculate,3]{i1}{fa}
+		\function[calculate,3]{i2}{fx1}
+		\function[calculate,3]{i3}{fx2}
+		
+		
+		\function[calculate,3]{U}{i1*dx1+i2*dx2+i3*dx3}
+		\function[calculate,3]{O}{s1*dx1+s2*dx2+s3*dx3}
+
+		\end{variables}
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		\type{input.number} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+		\field{rational} 
+		\precision{3}
+	%+++++++++++++++++++TITLE++++++++++++++++++++++++++	
+	    \lang{de}{
+	    \text{Für die Funktion $f(x)=\var{f}$ (s. Grafik) auf dem Intervall $[\var{a};\var{b}]$
+sollen die Ober- und Untersumme bezüglich der Zerlegung 
+$\var{a}<\var{x1}<\var{x2}<\var{b}$ berechnet werden.}}
+	%+++++++++++++++++++ANSWERS++++++++++++++++++++++++    
+	    \begin{answer}
+	    	\text{
+$\sup \{f(x) | x\in [\var{a};\var{x1}] \}=$}   
+			\solution{s1}
+	    \end{answer}    
+	    \begin{answer}
+	    	\text{
+$\inf \{f(x) | x\in [\var{a};\var{x1}] \}=$} 
+			\solution{i1}
+	    \end{answer}   
+	    \begin{answer}
+	    	\text{
+$\sup \{f(x) | x\in [\var{x1};\var{x2}] \}=$}   
+			\solution{s2}
+	    \end{answer}    
+	    \begin{answer}
+	    	\text{
+$\inf \{f(x) | x\in [\var{x1};\var{x2}] \}=$} 
+			\solution{i2}
+	    \end{answer}   
+	    \begin{answer}
+	    	\text{
+$\sup \{f(x) | x\in [\var{x2};\var{b}] \}=$}   
+			\solution{s3}
+	    \end{answer}    
+	    \begin{answer}
+	    	\text{
+$\inf \{f(x) | x\in [\var{x2};\var{b}] \}=$} 
+			\solution{i3}
+	    \end{answer}   
+	    
+	    \begin{answer}
+	    	\text{Die Längen der Teilintervalle  sind\\
+$\Delta x_1=$}
+			\solution{dx1}
+            \explanation{Gefragt ist nach der Länge von $[\var{a};\var{x1}]$.}
+	    \end{answer} 
+        \begin{answer}
+	    	\text{$\Delta x_2=$}
+			\solution{dx2}
+            \explanation{Gefragt ist nach der Länge von $[\var{x1};\var{x2}]$.}
+	    \end{answer}
+        \begin{answer}
+	    	\text{$\Delta x_3=$}
+			\solution{dx3}
+            \explanation{Gefragt ist nach der Länge von $[\var{x2};\var{b}]$.}
+	    \end{answer}
+	    \begin{answer}
+		    %\type{input.number} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+	    	\text{Die Obersumme ist damit: $O=$}
+			\solution{O}
+	    \end{answer}  
+	    \begin{answer}
+	    	\text{Die Untersumme ist damit: $U=$}
+			\solution{U}
+	    \end{answer}  
+	    \explanation{Die Funktion $f$ ist auf $[\var{a};\var{b}]$ monoton steigend.}
+        
+	    \plotF{1}{f}           %%domain
+        \plotFrom{1}{-4}
+        \plotTo{1}{6}
+        \plotColor{4}{red}      %%domain color
+
+        \plotLeft{-4}            %%defines the canvas bound left
+        \plotRight{6}           %%and right
+        \plotSize{400}          %%function plot canvas 
+	    
+	    
+	\end{question}
+%######################################################QUESTION_END
+	
+%######################################################QUESTION_START	
+	\begin{question}	
+	% Fall a<s< x1
+    %+++++++++++++++++++VARIABLES++++++++++++++++++++++
+		\begin{variables}
+% $s,c\in \{-2,-1,1,2\}$ und $f=(x-s)^2+c$ (mit expand,normalize)\\
+% $d_i\in \{4,\ldots, 12\}$ und $dx_i=d_i/10$ für $i=1,2,3$.\\
+% $O=sup_1\cdot dx_1+sup_2\cdot dx_2+ sup_3\cdot dx_3$\\
+% $U=inf_1\cdot dx_1+inf_2\cdot dx_2+ inf_3\cdot dx_3$\\
+		\randint[Z]{s}{-2}{2}
+		\randint[Z]{c}{-2}{2}
+		\randint[Z]{k}{0}{2}
+		
+		\randint[Z]{d1}{2}{6}
+		\randint[Z]{d2}{4}{12}
+		\randint[Z]{d3}{4}{12}
+		\function[calculate,3]{dx1}{d1/5}
+		\function[calculate,3]{dx2}{d2/10}
+		\function[calculate,3]{dx3}{d3/10}
+		
+		\function[calculate,3]{a}{s-dx1/2}
+		\function[calculate,3]{x1}{a+dx1}
+		\function[calculate,3]{x2}{x1+dx2}
+		\function[calculate,3]{b}{x2+dx3}
+		
+		\function[expand,normalize]{f}{(x-s)^2+c}
+		
+		\function[calculate,3]{fa}{(a-s)^2+c}
+		\function[calculate,3]{fb}{(b-s)^2+c}
+		\function[calculate,3]{fx1}{(x1-s)^2+c}
+		\function[calculate,3]{fx2}{(x2-s)^2+c}
+
+		\function[calculate,3]{s1}{(fa+fx1+|fa-fx1|)/2} %=max(fa,fx1)
+		\function[calculate,3]{s2}{fx2}
+		\function[calculate,3]{s3}{fb}
+		\function[calculate,3]{i1}{c}
+		\function[calculate,3]{i2}{fx1}
+		\function[calculate,3]{i3}{fx2}
+
+		
+		
+		\function[calculate,3]{O}{s1*dx1+s2*dx2+s3*dx3}
+		\function[calculate,3]{U}{i1*dx1+i2*dx2+i3*dx3}
+
+		\end{variables}
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		\type{input.number} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+		\field{rational} 
+		\precision{3}
+	%+++++++++++++++++++TITLE++++++++++++++++++++++++++	
+	    \lang{de}{
+	    \text{Für die Funktion $f(x)=\var{f}$ (s. Grafik) auf dem Intervall $[\var{a};\var{b}]$
+sollen die Ober- und Untersumme bezüglich der Zerlegung 
+$\var{a}<\var{x1}<\var{x2}<\var{b}$ berechnet werden.}}
+	%+++++++++++++++++++ANSWERS++++++++++++++++++++++++    
+		    \begin{answer}
+	    	\text{
+$\sup \{f(x) | x\in [\var{a};\var{x1}] \}=$}   
+			\solution{s1}
+	    \end{answer}    
+	    \begin{answer}
+	    	\text{
+$\inf \{f(x) | x\in [\var{a};\var{x1}] \}=$} 
+			\solution{i1}
+	    \end{answer}   
+	    \begin{answer}
+	    	\text{
+$\sup \{f(x) | x\in [\var{x1};\var{x2}] \}=$}   
+			\solution{s2}
+	    \end{answer}    
+	    \begin{answer}
+	    	\text{
+$\inf \{f(x) | x\in [\var{x1};\var{x2}] \}=$} 
+			\solution{i2}
+	    \end{answer}   
+	    \begin{answer}
+	    	\text{
+$\sup \{f(x) | x\in [\var{x2};\var{b}] \}=$}   
+			\solution{s3}
+	    \end{answer}    
+	    \begin{answer}
+	    	\text{
+$\inf \{f(x) | x\in [\var{x2};\var{b}] \}=$} 
+			\solution{i3}
+	    \end{answer}   
+	    
+	   \begin{answer}
+	    	\text{Die Längen der Teilintervalle  sind\\
+$\Delta x_1=$}
+			\solution{dx1}
+            \explanation{Gefragt ist nach der Länge von $[\var{a};\var{x1}]$.}
+	    \end{answer} 
+        \begin{answer}
+	    	\text{$\Delta x_2=$}
+			\solution{dx2}
+            \explanation{Gefragt ist nach der Länge von $[\var{x1};\var{x2}]$.}
+	    \end{answer}
+        \begin{answer}
+	    	\text{$\Delta x_3=$}
+			\solution{dx3}
+            \explanation{Gefragt ist nach der Länge von $[\var{x2};\var{b}]$.}
+	    \end{answer}
+	    \begin{answer}
+		    %\type{input.number} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+	    	\text{Die Obersumme ist damit: $O=$}
+			\solution{O}
+	    \end{answer}  
+	    \begin{answer}
+	    	\text{Die Untersumme ist damit: $U=$}
+			\solution{U}
+	    \end{answer}  
+	    
+        \explanation{Die Funktion $f$ ist auf $[\var{a};\var{s}]$ monoton fallend und auf $[\var{s};\var{b}]$ monoton steigend.}
+        
+	    \plotF{1}{f}           %%domain
+        \plotFrom{1}{-4}
+        \plotTo{1}{6}
+        \plotColor{4}{red}      %%domain color
+
+        \plotLeft{-4}            %%defines the canvas bound left
+        \plotRight{6}           %%and right
+        \plotSize{400}          %%function plot canvas 
+	\end{question}
+%######################################################QUESTION_END
+	
+%######################################################QUESTION_START	
+	\begin{question}	
+   	% Fall x1<s< x2
+	%+++++++++++++++++++VARIABLES++++++++++++++++++++++
+		\begin{variables}
+% $s,c\in \{-2,-1,1,2\}$ und $f=(x-s)^2+c$ (mit expand,normalize)\\
+% $d_i\in \{4,\ldots, 12\}$ und $dx_i=d_i/10$ für $i=1,2,3$.\\
+% $O=sup_1\cdot dx_1+sup_2\cdot dx_2+ sup_3\cdot dx_3$\\
+% $U=inf_1\cdot dx_1+inf_2\cdot dx_2+ inf_3\cdot dx_3$\\
+		\randint[Z]{s}{-2}{2}
+		\randint[Z]{c}{-2}{2}
+		\randint[Z]{k}{0}{2}
+		
+		\randint[Z]{d1}{4}{12}
+		\randint[Z]{d2}{2}{6}
+		\randint[Z]{d3}{4}{12}
+		\function[calculate,3]{dx1}{d1/10}
+		\function[calculate,3]{dx2}{d2/5}
+		\function[calculate,3]{dx3}{d3/10}
+		
+		\function[calculate,3]{a}{s-dx2/2-dx1}
+		\function[calculate,3]{x1}{a+dx1}
+		\function[calculate,3]{x2}{x1+dx2}
+		\function[calculate,3]{b}{x2+dx3}
+		
+		\function[expand,normalize]{f}{(x-s)^2+c}
+		
+		\function[calculate,3]{fa}{(a-s)^2+c}
+		\function[calculate,3]{fb}{(b-s)^2+c}
+		\function[calculate,3]{fx1}{(x1-s)^2+c}
+		\function[calculate,3]{fx2}{(x2-s)^2+c}
+		
+
+		\function[calculate,3]{s1}{fa}
+		\function[calculate,3]{s2}{(fx1+fx2+|fx1-fx2|)/2} %=max(fx1,fx2)
+		\function[calculate,3]{s3}{fb}
+		\function[calculate,3]{i1}{fx1}
+		\function[calculate,3]{i2}{c}
+		\function[calculate,3]{i3}{fx2}
+		
+		
+		\function[calculate,3]{O}{s1*dx1+s2*dx2+s3*dx3}
+		\function[calculate,3]{U}{i1*dx1+i2*dx2+i3*dx3}
+
+		\end{variables}
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		\type{input.number} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+		\field{rational} 
+		\precision{3}
+	%+++++++++++++++++++TITLE++++++++++++++++++++++++++	
+	    \lang{de}{
+	    \text{Für die Funktion $f(x)=\var{f}$ (s. Grafik) auf dem Intervall $[\var{a};\var{b}]$
+sollen die Ober- und Untersumme bezüglich der Zerlegung 
+$\var{a}<\var{x1}<\var{x2}<\var{b}$ berechnet werden.}}
+	%+++++++++++++++++++ANSWERS++++++++++++++++++++++++    
+	    \begin{answer}
+	    	\text{
+$\sup \{f(x) | x\in [\var{a};\var{x1}] \}=$}   
+			\solution{s1}
+	    \end{answer}    
+	    \begin{answer}
+	    	\text{
+$\inf \{f(x) | x\in [\var{a};\var{x1}] \}=$} 
+			\solution{i1}
+	    \end{answer}   
+	    \begin{answer}
+	    	\text{
+$\sup \{f(x) | x\in [\var{x1};\var{x2}] \}=$}   
+			\solution{s2}
+	    \end{answer}    
+	    \begin{answer}
+	    	\text{
+$\inf \{f(x) | x\in [\var{x1};\var{x2}] \}=$} 
+			\solution{i2}
+	    \end{answer}   
+	    \begin{answer}
+	    	\text{
+$\sup \{f(x) | x\in [\var{x2};\var{b}] \}=$}   
+			\solution{s3}
+	    \end{answer}    
+	    \begin{answer}
+	    	\text{
+$\inf \{f(x) | x\in [\var{x2};\var{b}] \}=$} 
+			\solution{i3}
+	    \end{answer}   
+	    
+	    \begin{answer}
+	    	\text{Die Längen der Teilintervalle  sind\\
+$\Delta x_1=$}
+			\solution{dx1}
+            \explanation{Gefragt ist nach der Länge von $[\var{a};\var{x1}]$.}
+	    \end{answer} 
+        \begin{answer}
+	    	\text{$\Delta x_2=$}
+			\solution{dx2}
+            \explanation{Gefragt ist nach der Länge von $[\var{x1};\var{x2}]$.}
+	    \end{answer}
+        \begin{answer}
+	    	\text{$\Delta x_3=$}
+			\solution{dx3}
+            \explanation{Gefragt ist nach der Länge von $[\var{x2};\var{b}]$.}
+	    \end{answer}
+	    \begin{answer}
+		    %\type{input.number} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+	    	\text{Die Obersumme ist damit: $O=$}
+			\solution{O}
+	    \end{answer}  
+	    \begin{answer}
+	    	\text{Die Untersumme ist damit: $U=$}
+			\solution{U}
+	    \end{answer}
+        
+        \explanation{Die Funktion $f$ ist auf $[\var{a};\var{s}]$ monoton fallend und auf $[\var{s};\var{b}]$ monoton steigend.}
+	    
+	    \plotF{1}{f}           %%domain
+        \plotFrom{1}{-4}
+        \plotTo{1}{6}
+        \plotColor{4}{red}      %%domain color
+
+        \plotLeft{-4}            %%defines the canvas bound left
+        \plotRight{6}           %%and right
+        \plotSize{400}          %%function plot canvas 
+        
+	\end{question}
+%######################################################QUESTION_END
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

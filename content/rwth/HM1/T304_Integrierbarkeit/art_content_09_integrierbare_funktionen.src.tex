@@ -1,0 +1,543 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Stammfunktion}
+    \lang{en}{Antiderivatives}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T304_MeanValue_B.meta.xml}{T304_MeanValue_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T304_MeanValue_A.meta.xml}{T304_MeanValue_A}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+\end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T304_Integrierbarkeit/g_art_content_08_integral_eigenschaften.meta.xml}{link1}
+    \link{generic_article}{content/rwth/HM1/T301_Differenzierbarkeit/g_art_content_02_ableitungsregeln.meta.xml}{link2}
+    \link{generic_article}{content/rwth/HM1/T107_Integralrechnung/g_art_content_25_stammfunktion.meta.xml}{teil1}
+    \link{generic_article}{content/rwth/HM1/T301_Differenzierbarkeit/g_art_content_01_differenzenquotient.meta.xml}{link3}
+    \link{generic_article}{content/rwth/HM1/T211_Eigenschaften_stetiger_Funktionen/g_art_content_33_zwischenwertsatz.meta.xml}{link4}
+    \link{generic_article}{content/rwth/HM1/T301_Differenzierbarkeit/g_art_content_03_hoehere_ableitungen.meta.xml}{link5}
+    \link{generic_article}{content/rwth/HM1/T107_Integralrechnung/g_art_content_24_integral_als_flaeche.meta.xml}{link6}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{3}
+\ombarticle{3}
+
+\title{\lang{de}{Stammfunktion und Hauptsatz der Differential- und Integralrechnung}
+       \lang{en}{Antiderivatives and fundamental theorem of calculus}}
+ 
+\begin{block}[annotation]
+  
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10038}{Ticket 10038}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{\lang{de}{Stammfunktionen}\lang{en}{Antiderivatives}}\label{stamm}
+
+\lang{de}{
+Im \link{link1}{vorigen Abschnitt} haben wir gelernt, wann eine Funktion auf einem Intervall 
+integrierbar ist. Da die Berechnung des Integral mittels der Definition recht umständlich ist, sind 
+Formeln zur Berechnung wünschenswert. Zwar lassen sich nicht einmal für alle elementaren Funktionen 
+Formeln angeben, z.\,B. nicht für das Integral von $f(x)=e^{-x^2}$ auf einem Intervall $[a;b]$, aber 
+bei manchen Funktionen helfen \emph{Stammfunktionen} und der 
+\emph{Hauptsatz der Differential- und Integralrechnung}.
+\\\\
+Stammfunktionen haben wir auch schon im \ref[teil1][ersten Teil]{def:stammfkt} kennengelernt.
+Wir setzen die Kenntnisse von jenem Abschnitt hier voraus und werden sie hier etwas vertiefen und 
+erweitern. Zunächst erinnern wir an die Definition:
+}
+\lang{en}{
+In the \link{link1}{previous section} we defined the integrability of a function on an interval. 
+As the computation of the integral via the definitions is cumbersome, some formulas and rules to 
+this end are helpful to know. We should also keep in mind that not every elementary function can 
+be so simply integrated, for example $f(x)=e^{-x^2}$ on the interval $[a;b]$. For some functions 
+though, their \emph{antiderivatives} and the \emph{fundamental theorem of calculus} can be very 
+helpful.
+\\\\
+Antiderivatives were already introduced in the \ref[teil1][first section]{def:stammfkt}. We revisit 
+these here and will further investigate them. Firstly we recall the definition:
+}
+
+\begin{definition}\label{def:stammf}
+\lang{de}{
+Eine differenzierbare Funktion $F(x)$ heißt Stammfunktion von $f(x)$ auf einem Intervall $I$, falls 
+gilt:
+}
+\lang{en}{
+A differentiable function $F(x)$ is called the antiderivative of $f(x)$ on an interval $I$ if:
+}
+\[ F'(x) = f(x) \, \, \text{ \lang{de}{für alle}\lang{en}{for all} } x \in I . \]
+\end{definition}
+
+% \begin{example}
+% %\emph{Beispiel:} 
+% \lang{de}{Sei $f(x)=x^2+1$. Dann ist $F(x)=\frac{1}{3}x^3+x$ eine Stammfunktion
+% von $f(x)$ auf $\mathbb{R}$, denn es gilt $F'(x)=x^2+1=f(x)$.}
+% \lang{en}{If $f(x)=x^2+1$ then $F(x)=\frac{1}{3}x^3+x$ is an antiderivative of $f(x)$ on $\mathbb{R}$, since
+% $F'(x)=x^2+1=f(x)$.}
+% \end{example} 
+% \lang{de}{Wie bestimmt man eine Stammfunktion
+% $F(x)$, wenn nur $f(x)$ gegeben ist? Durch Umkehrung der Ableitung, d.h. man
+%  sucht eine Funktion, deren Ableitung $f(x)$ ist. \\
+%  }
+% \lang{en}{How do we calculate an antiderivative
+% $F(x)$ if we're only given $f(x)$? By working backwards from derivatives, i.e.
+%  we look for a function whose derivative is $f(x)$. \\
+%  }
+
+\lang{de}{
+Aus \ref[link3][den Ableitungsregeln]{rule:diffregeln} erhalten wir für einige Funktionen die 
+Stammfunktion.
+}
+\lang{en}{
+Using the \ref[link3][rules for differentiation]{rule:diffregeln} we can already obtain the 
+antiderivatives of certain functions.
+}
+\begin{rule}\label{rule:diffregeln}
+\begin{align*}
+\underline{\text{\lang{de}{Funktion}\lang{en}{Function}}\; f(x)}&\hspace{20pt}&  \underline{\text{\lang{de}{Stammfunktion}\lang{en}{Antiderivative}}\; F(x) }&&\underline{\text{\lang{de}{Bedingung}\lang{en}{Conditions}}\, }\\
+c\; (c \in \R) && cx && \\
+x^n\;( n\in\N_0)&& \frac{1}{n+1} x^{n+1}&&\\
+x^n\;(n\in\Z, n<-1)&&\frac{1}{n+1}x^{n+1}&& x\neq 0\\
+x^r\;( r\in\R, r \neq -1)&&\frac{1}{r+1}x^{r+1}&& x>0\\
+\sqrt{x}=x^{1/2} &&\frac{2}{3}x^{\frac{3}{2}}=\frac{2}{3}x\sqrt{x} \ \ \ \ \ \ \ \ \ \ \ \ && x>0\\
+e^x&&e^x&&\\
+\frac{1}{x}&&\ln|x|&&x\neq 0\\
+a^x \;(a>0)&&\frac{1}{\ln a}\cdot a^x&&\\
+\sin(x)&&-\cos(x)&&\\
+\cos(x)&&\sin(x)&&\\
+\frac{1}{\cos(x)^2}&& \tan(x) && x\notin \{ \frac{\pi}{2}+k\pi \,|\, k\in\Z \}\\
+\frac{1}{1+x^2} && \arctan(x) && \\
+\tan(x) && -\ln|\cos(x)| && x\notin \{ \frac{\pi}{2}+k\pi \,|\, k\in\Z \}
+\end{align*}
+
+\lang{de}{
+\floatright{\href{https://www.hm-kompakt.de/video?watch=621}{\image[75]{00_Videobutton_schwarz}}}\\
+}
+\lang{en}{}
+\end{rule}
+
+\begin{block}[warning]
+\lang{de}{
+Stammfunktionen sind nur auf Intervallen definiert und bei der Integration darf nicht über 
+Definitionslücken hinweg integriert werden. Die obige Regel ist deshalb so zu lesen, dass die 
+Bedingung an $x$ auch eine Bedingung an das Intervall $I$ ist!
+}
+\lang{en}{
+Antiderivatives are only defined on certain intervals, and we must be careful not to integrate 
+across gaps in the domain of definition. The conditions in the above rule should thus be 
+interpreted as conditions on the interval $I$ on which the function is defined.
+}
+\end{block}
+
+\lang{de}{
+Wir erinnern uns außerdem daran, dass Stammfunktionen nicht eindeutig sind.
+Die Menge aller Stammfunktionen von $f(x)$ lässt sich 
+genau beschreiben: Wenn $F_1(x)$ und $F_2(x)$ zwei beliebige
+Stammfunktionen von $f(x)$ auf dem Intervall $I$ sind, so gilt
+}
+\lang{en}{
+We recall that antiderivatives are not necessarily unique. 
+The set of all antiderivatives of $f(x)$ can be precisely described: If $F_1(x)$ and $F_2(x)$ 
+are any two antiderivatives of $f(x)$ on the interval $I$, then we have
+}
+\[  F_1'(x) - F_2'(x)= f(x) - f(x) = 0 . \]
+
+\lang{de}{
+Die Ableitung von $F_1(x)-F_2(x)$ ist also konstant gleich $0$.
+Die Funktion $F_1(x)-F_2(x)$ ändert sich auf dem Intervall $I$ nicht und ist daher gleich 
+einer konstanten Funktion: $F_1(x)-F_2(x) = C$, oder auch:
+$F_1(x)=F_2(x)+C$. Zwei Stammfunktionen unterscheiden sich
+also auf dem Intervall $I$ immer nur um eine konstante Verschiebung des Funktionswertes. \\
+}
+\lang{en}{
+The derivative of $F_1(x)-F_2(x)$ is equal to $0$ on the whole interval. 
+Hence the function $F_1(x)-F_2(x)$ does not change on the interval $I$ and is therefore equal 
+to a constant $F_1(x)-F_2(x) = C$, or alternnatively $F_1(x)=F_2(x)+C$. Therefore any two 
+antiderivatives of the same function only differ on the interval $I$ by a constant.
+}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{1}
+\begin{quickcheck}
+		\field{real}
+		\type{input.function}
+		\begin{variables}
+			\randint{v}{0}{1}
+			\randint[Z]{a}{-5}{5}
+			\randint[Z]{b}{1}{4}
+			\randint{c}{-4}{4}
+		    \function[normalize]{f}{4*a*x^3+v*b*sin(x)+(1-v)*b*cos(x)+c*exp(x)}
+			\function[normalize]{sol}{a*x^4-v*b*cos(x)+(1-v)*b*sin(x)+c*exp(x)+v*b-c}
+		\end{variables}
+
+
+         \text{\lang{de}{
+         Bestimmen Sie diejenige Stammfunktion $F(x)$ von $f(x) =\var{f}$, 
+         für die $F(0) = 0$ gilt. \\ Antwort: $F(x)=$\ansref.
+         }
+         \lang{en}{
+         Determine the unique antiderivative $F(x)$ of $f(x) =\var{f}$ 
+         such that $F(0) = 0$ holds. \\ Answer: $F(x)=$\ansref.
+         }}
+
+
+		\begin{answer}
+			\solution{sol}
+			\checkAsFunction{x}{-5}{5}{50}
+		\end{answer}
+		\explanation{\lang{de}{
+        $F(x)$ ist nach Definition eine Stammfunktion von $f(x)$, wenn $F'(x)=f(x)$ gilt.
+        Außerdem ist $F(0)=0$, also ist $F(x)=\var{sol}$.
+        }
+        \lang{en}{
+        $F(x)$ is by definition an antiderivative of $f(x)$ if $F'(x)=f(x)$ holds.
+        Adding the condition $F(0)=0$ gives us $F(x)=\var{sol}$.
+        }} 
+	\end{quickcheck}
+\end{quickcheckcontainer}
+
+\section{\lang{de}{Der Hauptsatz der Differential- und Integralrechnung}
+         \lang{en}{The fundamental theorem of calculus}}\label{sec:hauptsatz}
+
+\lang{de}{
+In diesem Abschnitt stellen wir nun die Verbindung zwischen dem \emph{bestimmten
+Integral} $\big\int_a^b f(x)\, dx$ und den Stammfunktionen her.
+\\\\
+Zunächst beschäftigen wir uns mit dem \emph{Mittelwertsatz der Integralrechnung}.
+}
+\lang{en}{
+In this section we develop the connection between the \emph{definite integral} 
+$\big\int_a^b f(x)\, dx$ and the antiderivative. This will also clarify why the set of 
+antiderivatives of $f(x)$ is called the \emph{indefinite integral}.
+\\\\
+Firstly we consider the \emph{mean value theorem for integrals}.
+}
+
+\begin{theorem}[\lang{de}{Mittelwertsatz der Integralrechnung}
+                \lang{en}{Mean value theorem for integrals}]\label{thm:mittelwertsatz}
+\lang{de}{
+Es seien $a < b$ reelle Zahlen und $f:[a;b]\to \R$ eine stetige Funktion. Dann existiert ein 
+Zwischenwert $x_0 \in (a;b)$, sodass
+}
+\lang{en}{
+Let $a < b$ be real numbers and $f:[a;b]\to \R$ a continuous function. Then there exists a point 
+$x_0 \in (a;b)$ such that
+}
+\[
+\int_a^b f(x)\, dx = (b-a) \cdot f(x_0).
+\]
+\end{theorem}
+
+\begin{example}
+\lang{de}{Die Aussage lässt sich anschaulich am nächsten Bild erklären.}
+\lang{en}{The theorem is visualised in the following image.}
+\begin{center}
+\image{T304_MeanValue_A}
+\end{center}
+\lang{de}{
+Das Bild zeigt den Graphen von $f(x) = x^3$.
+Die orangene Fläche ist genauso groß wie die
+blaue Fläche. Es ist $\int_0^1 f(x)\, dx = \frac{1}{4}$.
+Also ist die Höhe des blauen Rechtecks $f(x_0)=\frac{1}{4}$.
+Der Mittelwertsatz gibt keine Aussage über die genaue Lage von $x_0$. In diesem Beispiel
+wäre $x_0 = \frac{1}{\sqrt[3]{4}}$.
+}
+\lang{en}{
+The image shows the graph of $f(x) = x^3$. 
+The size of the orange area is the same as that of the blue area. 
+It is $\int_0^1 f(x)\, dx = \frac{1}{4}$, and so the height of the blue rectangle is 
+$f(x_0)=\frac{1}{4}$. The mean value theorem does not tell us what $x_0$ is. In this 
+example, it is $x_0 = \frac{1}{\sqrt[3]{4}}$.
+}
+\end{example}
+
+\begin{proof*}[\lang{de}{Beweis des Mittelwertsatzes der Integralrechnung}
+               \lang{en}{Proof of the mean value theorem for integrals}]
+\lang{de}{
+Der Mittelwertsatz ist im Wesentlichen eine Folgerung des 
+\ref[link4][Zwischenwertsatzes]{thm:zwischenwertsatz}.
+}
+\lang{en}{
+The mean value theorem is a consequence of the 
+\ref[link4][intermediate value theorem]{thm:zwischenwertsatz}.
+}
+
+\begin{incremental}
+\step
+\lang{de}{
+Wir betrachten das Intervall $[a;b]$. Wir betrachten die Ober- und Untersumme von $f$ auf dem Intervall ohne Zwischenstellen. (Wir betrachten also eine Zerlegung von $[a;b]$ ohne echte Teilintervalle.)
+Dann ist
+}
+\lang{en}{
+Consider the interval $[a;b]$. We will consider the lower and upper sums of $f$ on the partition 
+into the whole interval (rather than on a partition into subintervals). Then
+}
+\[
+U([a;b]) = \min_{x \in [a;b]} f(x) \cdot (b-a)
+\]
+\lang{de}{und}
+\lang{en}{and}
+\[
+O([a;b]) = \max_{x \in [a;b]} f(x) \cdot (b-a).
+\]
+\lang{de}{Es gilt}
+\lang{en}{We have}
+\[
+U([a;b]) \leq \int_a^b f(x) \, dx \leq O([a;b]).
+\]
+\lang{de}{Äquivalent umformuliert heißt das}
+\lang{en}{Equivalently,}
+\[
+\min_{x \in [a;b]} f(x) \leq \frac{1}{b-a} \int_a^b f(x) \, dx \leq \max_{x \in [a;b]} f(x).
+\]
+\step
+\lang{de}{
+Nach dem \ref[link4][Zwischenwertsatz]{thm:zwischenwertsatz} (da $f$ stetig ist) existiert also eine
+Zwischenstelle $x_0$ mit
+}
+\lang{en}{
+By the \ref[link4][intermediate value theorem]{thm:zwischenwertsatz} (as $f$ is continuous), there 
+exists a point $x_0$ between $a$ and $b$ such that
+}
+\[
+f(x_0) = \frac{1}{b-a} \int_a^b f(x) \, dx.
+\]
+\end{incremental}
+\end{proof*}
+
+\lang{de}{Eine Folgerung aus dieser Beobachtung ist der Hauptsatz.}
+\lang{en}{A consequence of this observation is the main theorem of this section.}
+
+\begin{theorem}[\lang{de}{Hauptsatz der Differential- und Integralrechnung}
+                \lang{en}{The fundamental theorem of calculus}]\label{thm:fundamental}
+
+\lang{de}{
+Ist $f(x)$ auf dem Intervall $[a;b]$ stetig, dann %(d.h. eine kontinuierliche Funktion ohne Sprungstellen oder Lücken), dann 
+existiert eine Stammfunktion $F(x)$ von $f(x)$ und 
+für eine beliebige Stammfunktion $F(x)$ gilt
+}
+\lang{en}{
+Let $f(x)$ be continuous on an interval $[a,b]$. Then there exists an antiderivative $F(x)$ of 
+$f(x)$ (so $F'(x)=f(x)$), and for any antiderivative $F(x)$ of $f(x)$ we have
+}
+\[ \int_a^b f(x)\, dx = F(b) - F(a) .\]
+%\lang{de}{\floatright{\href{https://www.hm-kompakt.de/video?watch=615}{\image[75]{00_Videobutton_schwarz}}}\\~}
+\end{theorem}
+
+\lang{de}{
+Das bestimmte Integral kann also durch Einsetzen der Grenzen in eine Stammfunktion ausgerechnet 
+werden. Für die Differenz $F(b)-F(a)$ schreibt man auch $\big[F(x)\big]_a^b$. Der Hauptsatz
+der Differential- und Integralrechnung besagt also
+}
+\lang{en}{
+The definite integral can therefore be calculated by evaluating the antiderivative at both limits 
+and taking the difference. To denote $F(b)-F(a)$ in this context we often write 
+$\big[F(x)\big]_a^b$. The fundamental theorem of calculus essentially states that
+}
+\[ \int_a^b f(x)\, dx = \Big[\, F(x)\, \Big]_a^b  . \]
+
+\begin{proof*}[\lang{de}{Beweis des Hauptsatzes}
+               \lang{en}{Proof of the fundamental theorem of calculus}]
+\lang{de}{Wir zeigen zunächst, dass eine Stammfunktion existiert.}
+\lang{en}{We firstly prove that an antiderivative exists.}
+\begin{incremental}
+\step
+\lang{de}{Dazu betrachten wir}
+\lang{en}{We consider}
+\[
+F : [a;b] \to \R, \, \, x \mapsto \int_a^x f(t)\, dt.
+\]
+\lang{de}{
+Wir zeigen, dass $F$ eine Stammfunktion von $f$ ist. Wir zeigen mit der Definition, dass $F'(x)=f(x)$ gilt.
+}
+\lang{en}{
+We show that $F$ is an antiderivative of $f$. Using the definition, we verify that $F'(x)=f(x)$.
+}
+\[
+\frac{F(x+h)-F(x)}{h} = \frac{\int_a^{x+h} f(t)\, dt - \int_a^x f(t)\, dt}{h}
+= \frac{\int_x^{x+h} f(t)\, dt}{h}.
+\]
+\step
+\lang{de}{
+Der Mittelwertsatz \ref{thm:mittelwertsatz} liefert uns eine Zwischenstelle $x_0 \in (x;x+h)$ mit
+}
+\lang{en}{
+The mean value theorem \ref{thm:mittelwertsatz} gives us a point $x_0 \in (x;x+h)$ such that
+}
+\[
+\int_x^{x+h} f(t)\, dt = f(x_0)\cdot h.
+\]
+\lang{de}{Dann ist}
+\lang{en}{Then}
+\[
+\lim_{h \to 0} \, \frac{F(x+h)-F(x)}{h} = \lim_{h \to 0} \, \frac{f(x_0)\cdot h}{h} = \lim_{h \to 0} \, f(x_0) = f(x),
+\]
+\lang{de}{
+denn für $h \to 0$ läuft die Zwischenstelle $x_0 \to x$. (Hier geht wieder die Stetigkeit von $f$ ein.)
+Damit ist $F$ eine Stammfunktion von $f$.
+}
+\lang{en}{
+as taking $h \to 0$ results in $x_0 \to x$. (We use the continuity of $f$ for this.) 
+Hence $F$ is an antiderivative of $f$.
+}
+
+\step
+\lang{de}{
+Der Wert hängt nicht von der Wahl einer Stammfunktion ab. In der Tat würde eine konstante
+Verschiebung von $F(x)$ (d.\,h. $F(x)+C$ statt $F(x)$) bei der Bildung der Differenz wieder wegfallen!
+}
+\lang{en}{
+The value of the difference of the antiderivative evaluated at the two limit points does not depend 
+on the choice of antiderivative. This is because any constant added to the antiderivative $F(x)$ 
+(i.e. using $F(x)+C$ instead of $F(x)$) is cancelled in the process of finding the difference.
+}
+\end{incremental}
+\end{proof*}
+
+\begin{remark}
+\lang{de}{
+Der Mittelwertsatz der Integralrechnung \ref{thm:mittelwertsatz} lässt sich zusammen mit dem Hauptsatz
+der Integral- und Differentialrechnung \ref{thm:fundamental} so lesen:
+\\\\
+Für eine stetige Funktion $f:[a;b]\to \R$ mit Stammfunktion $F$ existiert eine Zwischenstelle $x_0 \in (a;b)$, sodass
+}
+\lang{en}{
+The mean value theorem for integrals \ref{thm:mittelwertsatz} can be combined with the 
+fundamental theorem of calculus \ref{thm:fundamental} to give:
+\\\\
+Given a continuous function $f:[a;b]\to \R$ with antiderivative $F$, there exists a point 
+$x_0 \in (a;b)$ such that 
+}
+\[
+f(x_0)= \frac{1}{b-a} \int_a^b f(x)\, dx = \frac{F(b)-F(a)}{b-a}.
+\]
+\lang{de}{
+Das ist die gleiche Aussage wie vom 
+\ref[link5][Mittelwertsatz der Differentialrechnung]{thm:mittelwertsatz} angewendet auf $F$.
+}
+\lang{en}{
+This is simply the 
+\ref[link5][mean value theorem for integrals]{thm:mittelwertsatz} applied to $F$.
+}
+\end{remark}
+
+\begin{example}
+\lang{de}{
+Die Geschwindigkeit (in km/h) eines Wanderers in einem Beobachtungszeitraum von $2$ Stunden kann
+näherungsweise durch die Funktion $f(t)= \frac{5}{t+1}+t +\cos(4\pi t)$
+beschrieben werden.
+\\\\
+Wir wollen die Durchschnittsgeschwindigkeit ermitteln.
+In der folgenden Abbildung ist die Funktion dargestellt:
+}
+\lang{en}{
+Suppose that the speed (in km/h) of a hiker over an interval of $2$ hours can be approximated by 
+the function $f(t)= \frac{5}{t+1}+t +\cos(4\pi t)$.
+\\\\
+We want to calculate the average speed of the hiker. 
+The function is grapheed in the following diagram.
+}
+\begin{center}
+\image{T304_MeanValue_B}
+\end{center}
+
+\lang{de}{
+Die Durchschnittsgeschwindigkeit berechnen wir, indem
+wir die zurückgelegte Strecke durch die verstrichene Zeit dividieren.
+Die zurückgelegte Strecke in Kilometern seit Beobachtungsbeginn
+ist durch die Fläche unter dem Graphen von $f$ gegeben. (Zur Begründung verweisen wir
+auf \ref[link6][dieses Beispiel aus dem ersten Teil]{weg}.)
+\\\\
+Die blaue Fläche ist ungefähr $\approx 7,49$. Der Wanderer legt also circa $7,49$ km in den 2 Stunden zurück.
+Die Durchschnittsgeschwindigkeit beträgt also $\frac{7,49 km}{2 h} \approx 3,75 \frac{km}{h}.$
+\\\\
+In der Grafik ist die Durchschnittsgeschwindigkeit in Orange eingezeichnet. Das orangene Rechteck in der Zeichnung ist genauso groß wie die blaue Fläche.
+\\\\
+Mit Hilfe des Hauptsatzes der Differential- und Integralrechnung können wir dies verifizieren:
+Eine Stammfunktion $F$ von $f$ ist beispielsweise
+}
+\lang{en}{
+The mean velocity is calculated by dividing the amount of distance covered by the hiker by the 
+amount of time that has passed. The distance in kilometres covered by the hiker is given by the 
+area under the graph of $f$. (The justification for this can be found in 
+\ref[link6][this example from the first part]{weg}.)
+\\\\
+The blue area is approximately $\approx 7.49$. The hiker therefore covers about $7.49$ km in those 
+two hours. The mean speed of the hiker is therefore $\frac{7.49 km}{2 h} \approx 3.75 \frac{km}{h}.$
+\\\\
+In the diagram the mean speed is denoted in orange. The orange rectangle has the exact same area as 
+the blue shape under the graph.
+\\\\
+Using the fundamental theorem of calculus, we can verify this. The following function can easily be 
+verified to be an antiderivative of $f$:
+}
+\[
+F(t) = 5 \cdot \ln(t+1) + \frac{1}{2}t^2+ \frac{1}{4\pi} \sin(4\pi t).
+\]
+\lang{de}{Damit gilt für die Durchschnittsgeschwindigkeit $d$}
+\lang{en}{Hence the mean speed is}
+\[
+d = \frac{F(2)-F(0)}{2-0} = \frac{5}{2}\cdot \ln(3)+ 1 \approx 3\lang{de}{,}\lang{en}{.}75.
+\]
+
+\lang{de}{
+Die Aussage des Mittelwertsatzes können wir so interpretieren:
+Es gibt einen Zeitpunkt, zu dem der Wanderer genau die Durchschnittsgeschwindigkeit $d$ schnell ist.
+Dies ist offenbar mehrmals in den 2 Stunden der Fall.
+}
+\lang{en}{
+The mean value theorem for integrals can be interpreted as follows: 
+There exists a moment in time at which the hiker is travelling precisely at his mean speed. 
+This visibly occurs multiple times across the two hours in this example.
+}
+\end{example}
+
+\lang{de}{
+Eine Zusammenfassung des Abschnitts findet sich in diesem Video:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10815&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+}
+\lang{en}{}
+
+% \begin{example}
+% %\emph{Beispiel:} 
+% \lang{de}{$f(x)=\frac{2}{x^2} - 6 x^2$ ist auf dem Intervall $[1;2]$ stetig. Die Funktion
+% $F(x)=- \frac{2}{x} - 2x^3 + 20$ ist eine Stammfunktion und
+% \[ \int_1^2 \Big(\frac{2}{x^2} - 6 x^2 \Big)\, dx =
+% \Big[- \frac{2}{x} - 2x^3 + 20 \Big]_1^2 = 3 - 16 = -13. \]
+
+% Die Funktion $f(x)$, die Stammfunktion $F(x)$ und der orientierte Flächeninhalt 
+% $\big\int_1^2 f(x)\, dx = F(2)-F(1)=-13$ sind
+% in der folgenden Abbildung dargestellt:}
+% \lang{en}{$f(x)=\frac{2}{x^2} - 6 x^2$ is continuous on the interval $[1,2]$. The function
+% $F(x)=- \frac{2}{x} - 2x^3 + 20$ is an antiderivative and
+% \[ \int_1^2 \Big(\frac{2}{x^2} - 6 x^2 \Big)\, dx =
+% \Big[- \frac{2}{x} - 2x^3 + 20 \Big]_1^2 = 3 - 16 = -13. \]
+
+% The function $f(x)$, the antiderivative $F(x)$ and the signed area 
+% $\big\int_1^2 f(x)\, dx = F(2)-F(1)=-13$ are depicted
+% in the following image:}
+% \begin{center}
+% \image{image2}
+% \end{center}
+% \end{example}
+
+\end{content}

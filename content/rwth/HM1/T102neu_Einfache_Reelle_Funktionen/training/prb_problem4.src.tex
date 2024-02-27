@@ -1,0 +1,115 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A04: Geradenbestimmung}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22077}{Ticket 22077}
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+\begin{block}[annotation]
+	Trainingsaufgaben zur Zweipunktform einer Geraden \\
+    Bestimmung einer Geraden aus zwei Punkten
+         
+\end{block}
+
+\lang{de}{\title{A04: Geradenbestimmung}}
+\lang{en}{\title{Problem 4}}
+
+\begin{problem}
+%
+% variablen
+%
+    \begin{variables}
+       	\randint[Z]{deltax}{-8}{8}
+       	\randint[Z]{p1x}{-5}{5}
+       	\function[calculate]{p2x}{p1x+deltax}
+      	\randint[Z]{deltay}{-8}{8}
+       	\randint{p1y}{-5}{5}
+       	\function[calculate]{p2y}{p1y+deltay}
+       	\function[normalize]{m}{((p2y)-(p1y))/((p2x)-(p1x))}   
+       	\function[normalize]{b}{p1y-(((p2y)-(p1y))/((p2x)-(p1x)))p1x}         	        	
+    	\function{f1}{(p2y-p1y)/(p2x-p1x)}
+    	\function{f2}{p1y-m*p1x}
+        \function{g}{m*x+b}
+    \end{variables}
+			
+%Frage 1 von 2
+    \begin{question}  
+	 	\text{Gesucht sei die Gerade, die durch die Punkte 
+ 		$\,P_1 = (x_1 ; y_1) = (\var{p1x} \, ; \, \var{p1y})\,$ und
+ 		$\,P_2 = (x_2 ; y_2) = (\var{p2x} \, ; \, \var{p2y})\,$ 
+ 		verläuft. Bestimmen Sie über die Zweipunktform der Geraden
+        ihre Steigung $\,m\,$ und den Ordinatenabschnitt $\,b$. \\
+        (Geben Sie die gesuchten Zahlen als Brüche oder ganze Zahlen an.)}
+
+% tpye    
+	\type{input.number}
+ 	\field{rational}
+%    
+% answer 1 von 2
+%
+ 	\begin{answer}
+    	\lang{de}{\text{$\qquad m=$}}
+        \solution{m}
+		\explanation{Die Steigung $\,m\,$ ergibt sich aus dem Steigungsdreieck 
+        $\,\frac{y_2 - y_1}{x_2 - x_1}.$}
+    \end{answer}
+%    
+% answer 2 von 2
+%
+ 	\begin{answer}
+      	\lang{de}{\text{$\qquad b=$}}
+        \solution{b}        
+ 		\explanation{Der Ordinatenabschnitt $\,b\,$ berechnet sich aus 
+                    $\,b= y_1-\frac{y_2 - y_1}{x_2 - x_1} \cdot x_1.$}                
+	\end{answer}
+
+\end{question}
+
+%Frage 2 von 2
+
+\begin{question} 
+ 	\text{Wie lautet die Geradengleichung in der Punkt-Steigungsform?}
+
+
+    \type{input.function}
+ 	\field{rational}
+%    
+% answer
+%    
+ 	\begin{answer}
+      	\lang{de}{\text{$\qquad y=$}}
+        \solution{g}
+        \checkAsFunction{x}{-10}{10}{100} 
+        \explanation{Die Punkt-Steigungsform der Geraden ist $\,y=mx+b$.}
+        
+    \end{answer}
+
+\end{question}
+	
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

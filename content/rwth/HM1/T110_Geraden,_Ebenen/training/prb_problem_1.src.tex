@@ -1,0 +1,122 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A01: Geradengleichung}
+    \lang{en}{problem_1}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Vergleichen von Zahlen und einfache Addition}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{
+	\title{A01: Geradengleichung}
+}
+\lang{en}{\title{Problem 1}}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9639}{Ticket 9639}
+\end{block}
+
+
+\begin{problem}
+
+\begin{question}
+       \lang{de}{
+       		\text{
+       		Bestimmen Sie eine Parameterform 
+            $g= \left\{ \begin{pmatrix} p_1 \\ p_2 \\ p_3 \end{pmatrix}+\lambda \begin{pmatrix} v_1 \\ v_2 \\ v_3 \end{pmatrix} \vert \lambda \in \R \right\}$\\\\
+			der Geraden, die durch die Punkte $A=\begin{pmatrix} \var{a1} \\ \var{a2} \\ \var{a3} \end{pmatrix} \text{ und } B=\begin{pmatrix} \var{b1} \\ \var{b2} \\ \var{b3} \end{pmatrix} $
+			verläuft. \\\\
+            $p_1 = $ \ansref , ~~~~~ $v_1 = $ \ansref \\
+            $p_2 = $ \ansref , ~~~~~ $v_2 = $ \ansref \\
+            $p_3 = $ \ansref , ~~~~~ $v_3 = $ \ansref }
+		}
+        \explanation[edited]{Eine Geradengleichung durch die Punkte $A$ und $B$ lässt sich zum Beispiel durch
+        $g= \left\{ \vec{OA}+\lambda\cdot \vec{AB} \vert \lambda \in \R \right\}$ 
+        darstellen, wobei $O$ der Ursprung des Koordinatensystems, $\vec{OA}$ der Ortsvektor zum Punkt $A$ (und damit ein Stützvektor der Geraden $g$) und 
+        $\vec{AB}$ der Verbindungsvektor der beiden Punkte $A$ und $B$ (und damit ein Richtungsvektor der Geraden $g$) ist.}
+	
+      \type{input.function}
+      \field{real}
+
+      \begin{variables}
+      % A ist Punkt der Gerade
+            \randint{a1}{-9}{9}
+            \randint{a2}{-9}{9}
+            \randint{a3}{-9}{9}
+            \randadjustIf{a1,a2,a3}{a1^2+a2^2+a3^2=0}
+      % B ist Punkt der Gerade
+            \randint{b1}{-5}{15}
+            \randint{b2}{-5}{15}
+            \randint{b3}{-5}{15}
+            \randadjustIf{b1,b2,b3}{b1^2+b2^2+b3^2=0}
+            \randadjustIf{a1,a2,a3,b1,b2,b3}{(a1-b1)^2+(a2-b2)^2+(a3-b3)^2=0}
+      % v ist der Richtungsvektor B-A
+            \function[calculate]{v1}{b1-a1}
+            \function[calculate]{v2}{b2-a2}
+            \function[calculate]{v3}{b3-a3}
+      % P ist der Punkt A
+            \function[calculate]{p1}{a1}
+            \function[calculate]{p2}{a2}
+            \function[calculate]{p3}{a3}
+       \end{variables}
+
+      
+       \begin{answer}
+           \solution{p1}
+           \inputAsFunction{x}{p11}
+      \end{answer}
+      \begin{answer}
+            \solution{v1}
+            \inputAsFunction{x}{v11}
+      \end{answer}
+      \begin{answer}
+            \solution{p2}
+            \inputAsFunction{x}{p22}
+      \end{answer}
+      \begin{answer}
+            \solution{v2}
+            \inputAsFunction{x}{v22}
+      \end{answer}
+      \begin{answer}
+            \solution{p3}
+            \inputAsFunction{x}{p33}
+% (Ortsvektor - P) muss linear abhängig zum Richtungsvektor sein (Test über Vektorprodukt von Differenzvektor und Richtungsvektor)            
+            \checkFuncForZero{(v1*(p2-p22)-v2*(p1-p11))^2+(v2*(p3-p33)-v3*(p2-p22))^2+(v3*(p1-p11)-v1*(p3-p33))^2}{-10}{10}{100}
+      \end{answer}
+      \begin{answer}
+            \solution{v3}
+            \inputAsFunction{x}{v33}
+%
+% Richtungsvektoren (Eingabe vii und Vorgabe vi) linear abhängig? (Test über Vektorprodukt von Lösung vi und Eingabe vii)            
+%
+% 25.1.2021 HC: Abfrage angepasst: der eingegebene Richtungsvektor darf nicht der Nullvektor sein!
+%                + 1 - (sign(v11^2+v22^2+v33^2))^2 ---> wenn vii der Nullvektor ist, ist (sign(...))^2 <> 1
+%
+            \checkFuncForZero{(v1*v22-v2*v11)^2+(v2*v33-v3*v22)^2+(v3*v11-v1*v33)^2 + 1 - (sign(v11^2+v22^2+v33^2))^2}{-10}{10}{100}
+      \end{answer}
+      
+	\end{question}
+	
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+ 
+
+
+\end{content}

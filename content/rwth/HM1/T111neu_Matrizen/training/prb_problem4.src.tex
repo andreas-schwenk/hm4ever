@@ -1,0 +1,131 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A04: Matrizenoperation}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{
+	\title{A04: Matrizenoperation}
+}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21347}{Ticket 21347}
+\end{block}
+\begin{block}[annotation]
+Copy of \href{http://team.mumie.net/issues/9671}{Ticket 9671}: content/rwth/HM1/T112_Rechnen_mit_Matrizen/training/prb_problem4.src.tex
+\end{block}
+
+
+
+\begin{problem}
+
+\begin{question}
+
+	\begin{variables}
+		\randint{a}{-3}{3}
+		\randint{b}{-3}{3}
+		\randint{c}{-3}{3}
+		\randint{d}{-3}{3}
+		
+		\randint{ee}{-3}{3}
+		\randint{f}{-3}{3}
+		\randint{g}{-3}{3}
+		\randint{h}{-3}{3}
+		
+		\randint{u}{-3}{3}
+		\randint{v}{-3}{3}
+		\randint{w}{-3}{3}
+		\randint{x}{-3}{3}
+		
+		\randint{y}{-3}{3}
+		\randint{z}{-3}{3}
+		
+		\randint{r}{2}{4}
+		
+		\matrix[calculate]{aa}{
+  			a & b \\ 
+  			c & d
+      	}
+      	
+      	\matrix[calculate]{bb}{
+  			ee & f \\ 
+  			g & h
+      	}
+		
+		\matrix[calculate]{zz}{
+			u & v\\
+			w & x
+		}
+			
+		\matrix[calculate]{uu}{
+			y\\
+			z
+		}	
+		
+		\matrix[calculate]{m}{
+  			((a+ee*r)*u+(b+f*r)*w)*y+((a+ee*r)*v+(b+f*r)*x)*z\\
+  			((c+g*r)*u+(d+h*r)*w)*y+((c+g*r)*v+(d+h*r)*x)*z
+      	} 
+		
+		
+		
+	\end{variables}
+
+	\type{input.matrix}
+	
+    \field{rational}
+    
+    \lang{de}{
+	    \text{Bestimmen Sie:\\$
+\left(\var{aa}+\var{r}\cdot\var{bb}\right)\cdot\var{zz}\cdot\var{uu}$}}
+    
+    \begin{answer}
+	    \solution{m}
+      
+      \explanation{
+            In dieser Aufgabe werden die Operationen Matrixmultiplikation,
+            Matrixaddition und die Skalarmultiplikation durchgeführt.
+            Zunächst berechnet man den Term in den Klammern
+            also die skalare Multiplikation, sowie die Summe.
+            Man erhält eine $2 \times 2$-Matrix.
+            Danach kann die Matrixmultiplikation mit den verbleibenden
+            beiden Matrizen nacheinander durchgeführt werden.
+            Man erhält zunächst eine $2 \times 2$-Matrix und als
+            Ergebnis eine eine $2 \times 1$-Matrix.
+            Da die Matrixmultiplikation assoziativ ist, 
+            darf man alternativ auch zunächst die beiden hinteren
+            Matrizen miteinander multiplizieren, denn: 
+            $(A \cdot B) \cdot C = A \cdot (B \cdot C)$.
+            Man beachte jedoch stets, dass die Matrixmultiplikation nicht 
+            kommutativ ist. Im Allgemeinen gilt: $A \cdot B \neq B \cdot A$.
+      }
+	\end{answer}
+    
+\end{question}
+
+\end{problem}
+
+
+
+\embedmathlet{gwtmathlet}
+
+\end{content}
+

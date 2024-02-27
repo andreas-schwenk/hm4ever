@@ -1,0 +1,736 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Vektorprodukt}
+    \lang{en}{Cross product}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T109_RightHand.meta.xml}{T109_RightHand}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T109_TripleProduct.meta.xml}{T109_TripleProduct}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T109_AreaParalellogram.meta.xml}{T109_AreaParalellogram}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T109_CrossProduct_C.meta.xml}{T109_CrossProduct_C}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T109_CrossProduct_B.meta.xml}{T109_CrossProduct_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T109_CrossProduct_A.meta.xml}{T109_CrossProduct_A}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T108_Vektorrechnung/g_art_content_29_linearkombination.meta.xml}{content_29_linearkombination}
+\link{generic_article}{content/rwth/HM1/T109_Skalar-_und_Vektorprodukt/g_art_content_33_winkel.meta.xml}{content_33_winkel}
+\end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{9}
+\ombarticle{4}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Vektorprodukt}\lang{en}{Cross product}}
+ 
+\begin{block}[annotation]
+  übungsinhalt
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9051}{Ticket 9051}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{\lang{de}{Definition des Vektorprodukts}\lang{en}{Definition of the cross product}}
+
+\lang{de}{
+Oft benötigt man zu zwei Vektoren $\vec{v}$ und $\vec{w}$ im dreidimensionalen Raum $\R^3$
+einen Vektor, der zu beiden senkrecht steht. Einen solchen kann man mit dem Vektorprodukt berechnen.
+}
+\lang{en}{
+Given two vectors $\vec{v}$ and $\vec{w}$ in three-dimensional space $\R^3$, we are often asked to 
+find a third vector that is orthogonal to both. This can be calculated using the cross product.
+}
+
+\begin{definition} \label{def:Vektorprodukt}
+\lang{de}{
+Seien $\vec{v}=\left( \begin{smallmatrix} v_1 \\ v_2  \\ v_3\end{smallmatrix}\right)$ 
+und $\vec{w}=\left( \begin{smallmatrix} w_1 \\ w_2  \\ w_3\end{smallmatrix}\right) \in \R^3$ 
+zwei beliebige Vektoren, dann ist das 
+\emph{Vektorprodukt} von $\vec{v}$ und $\vec{w}$ (oder \emph{Kreuzprodukt}), geschrieben als
+$\vec{v} \times \vec{w}$, der Vektor
+}
+\lang{en}{
+Let $\vec{v}=\left( \begin{smallmatrix} v_1 \\ v_2  \\ v_3\end{smallmatrix}\right)$ 
+and $\vec{w}=\left( \begin{smallmatrix} w_1 \\ w_2  \\ w_3\end{smallmatrix}\right) \in \R^3$ 
+be two vectors. Then the \emph{cross product} of $\vec{v}$ and $\vec{w}$ (or \emph{vector product}), 
+denoted by $\vec{v} \times \vec{w}$, is the vector
+}
+\[
+\vec{v} \times \vec{w} = \begin{pmatrix} v_2 w_3 - v_3 w_2 \\  v_3 w_1 - v_1 w_3  \\ 
+v_1 w_2 - v_2 w_1 \end{pmatrix}. %\neq \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}.
+\]
+\lang{de}{
+\floatright{\href{https://www.hm-kompakt.de/video?watch=720}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{}
+\end{definition}
+
+\lang{de}{
+Anschaulich ist das Vektorprodukt $\vec{v}\times\vec{w}$ derjenige Vektor, der sowohl rechtwinklig 
+zum Vektor $\vec{v}$ als auch zum Vektor $\vec{w}$ steht. Die folgende Abbildung zeigt dies im 
+$\mathbb{R}^3$.
+}
+\lang{en}{
+It is easily verified that the cross product $\vec{v}\times\vec{w}$ is orthogonal to both $\vec{v}$ 
+and $\vec{w}$. The following image demonstrates this in $\mathbb{R}^3$.
+}
+\begin{center}
+\image{T109_CrossProduct_A}
+\end{center}
+
+%alte Bemerkung
+%\begin{remark}
+%Das folgende Bild dient als Merkhilfe für das Vektorprodukt
+
+%\image[400]{vektorprodukt2}
+
+%Für den ersten Eintrag des Vektorprodukts streicht man die erste Zeile und bildet
+%die Produkte über Kreuz. Das Produkt zur gestrichelten Linie wird von dem Produkt zur durchgezogenen
+%Linie abgezogen.\\
+%Für die anderen Zeilen verfährt man entsprechend. Die durchgezogene Linie ist dabei diejenige, die
+%links unter der gestrichenen Zeile beginnt (bzw. ganz links oben, wenn die letzte Zeile
+%gestrichen wurde).
+%\end{remark}
+
+%neue bemerkung
+\begin{remark}
+\lang{de}{Das folgende Bild dient als Merkhilfe für das Vektorprodukt.}
+\lang{en}{The following image helps to remember the definition of the cross product.}
+\begin{center}
+\image{T109_CrossProduct_B}
+\end{center}
+\lang{de}{
+Für den ersten Eintrag des Vektorprodukts streicht man die erste Zeile und bildet die Produkte über 
+Kreuz, wobei das eine Produkt vom anderen Produkt, wie in der Abbildung dargestellt, subtrahiert 
+wird. Für die anderen Zeilen verfährt man entsprechend.
+}
+\lang{en}{
+The first component of the cross product is calculated by ignoring the first components of $\vec{v}$ 
+and $\vec{w}$, and combining remaining components as shown by the 'cross', where one product is 
+subtracted from the other product. The other components of the cross product are calculated 
+analogously.
+}
+\end{remark}
+
+\begin{example}
+\[ \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix} \times \begin{pmatrix} 2\\ 2\\ 4 \end{pmatrix}
+= \begin{pmatrix} 0\cdot 4-2\cdot 2 \\ 2\cdot 2- 1\cdot 4 \\ 1\cdot 2-0\cdot 2 \end{pmatrix}
+= \begin{pmatrix} -4 \\ 0 \\ 2 \end{pmatrix} \]
+\end{example}
+
+\begin{block}[warning]
+\lang{de}{Das Vektorprodukt ist nur für Vektoren im $\R^3$ definiert.}
+\lang{en}{The cross product has only been defined for vectors in $\R^3$.}
+\end{block}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{v1}{-5}{5}
+			\randint{v2}{-5}{5}
+			\randint{v3}{-5}{5}
+			\randint{w1}{-5}{5}
+			\randint{w2}{-5}{5}
+			\randint{w3}{-5}{5}
+			\function[calculate]{t11}{v2*w3}
+			\function[calculate]{t12}{v3*w2}
+			\function[calculate]{t21}{v3*w1}
+			\function[calculate]{t22}{v1*w3}
+			\function[calculate]{t31}{v1*w2}
+			\function[calculate]{t32}{v2*w1}			
+			\function{t1}{t11-t12}
+			\function{t2}{t21-t22}
+			\function{t3}{t31-t32}
+			\function[calculate]{s1}{v2*w3-v3*w2}
+			\function[calculate]{s2}{v3*w1-v1*w3}
+			\function[calculate]{s3}{v1*w2-v2*w1}
+		\end{variables}
+		
+			\text{\lang{de}{Das Vektorprodukt der Vektoren}
+            \lang{en}{The cross product of the vectors}
+			$\vec{v}=\begin{pmatrix} \var{v1}\\ \var{v2} \\ \var{v3}
+			\end{pmatrix}$ und $\vec{w}=\begin{pmatrix} \var{w1}\\ \var{w2} \\ \var{w3}
+			\end{pmatrix}$
+			\lang{de}{ist}\lang{en}{is}
+			\begin{table}[\class{no-padding}]
+			\rowspan[l][m]{3} $\vec{v}\times \vec{w}=\begin{pmatrix} \var{v1}\\ \var{v2} \\ \var{v3}
+			\end{pmatrix} \times \begin{pmatrix} \var{w1}\\ \var{w2} \\ \var{w3}
+			\end{pmatrix} =
+			\left(\begin{matrix} \\ \\ \\ \\ \end{matrix}\right.$ &  
+			\ansref & \rowspan[l][m]{3} $\left.\begin{matrix} \\ \\ \\ \\  \end{matrix}\right)$. & \\ 
+			\ansref & \\ 
+			\ansref & 
+			\end{table}			
+			}
+		
+		\begin{answer}
+			\solution{s1}
+		\end{answer}
+		\begin{answer}
+			\solution{s2}
+		\end{answer}
+		\begin{answer}
+			\solution{s3}
+		\end{answer}
+		\explanation{\lang{de}{Die Berechnung folgt nach obiger Regel, also}
+                 \lang{en}{By the definition of the cross product,}\\
+		$ \begin{pmatrix} \var{v1}\\ \var{v2} \\ \var{v3} \end{pmatrix} 
+			\times \begin{pmatrix} \var{w1}\\ \var{w2} \\ \var{w3} \end{pmatrix} 
+			=\begin{pmatrix}(\var{v2})\cdot (\var{w3})-(\var{v3})\cdot (\var{w2})\\ 
+			(\var{v3})\cdot (\var{w1})-(\var{v1})\cdot (\var{w3})\\
+			(\var{v1})\cdot (\var{w2})-(\var{v2})\cdot (\var{w1}) \end{pmatrix}
+			=\begin{pmatrix}\var{t1}\\ \var{t2} \\ \var{t3} \end{pmatrix}
+			=\begin{pmatrix}\var{s1}\\ \var{s2} \\ \var{s3} \end{pmatrix}. $
+		}
+	\end{quickcheck}
+
+
+\section{\lang{de}{Eigenschaften des Vektorprodukts}
+         \lang{en}{Properties of the cross product}}\label{sec:eigenschaften}
+
+\begin{theorem}\label{thm:eigenschaften}
+\lang{de}{
+Seien $\vec{v}$ und $\vec{w}$ Vektoren im $\R^3$ und $\vec{n}=\vec{v} \times \vec{w}$ ihr
+Vektorprodukt. Dann gelten:
+}
+\lang{en}{
+Let $\vec{v}$ andd $\vec{w}$ be vectors in $\R^3$ and $\vec{n}=\vec{v} \times \vec{w}$ their cross 
+product.
+}
+\begin{enumerate}
+\item \lang{de}{
+      $\vec{v} \times \vec{w}= \vec{0}$ $\Leftrightarrow$ $\vec{v}$ und $\vec{w}$ sind 
+      \ref[content_29_linearkombination][linear abhängig]{def:linearcomb}.\\
+      Insbesondere ist stets $\vec{v} \times \vec{v}=\vec{0}$.
+      }
+      \lang{en}{
+      $\vec{v} \times \vec{w}= \vec{0}$ $\Leftrightarrow$ $\vec{v}$ and $\vec{w}$ are 
+      \ref[content_29_linearkombination][linearly dependent]{def:linearcomb}.\\
+      In particular, we always have $\vec{v} \times \vec{v}=\vec{0}$.
+      }
+\item \lang{de}{
+      $\vec{v} \times \vec{w}$ ist stets \ref[content_33_winkel][orthogonal]{def:orthogonal} zu 
+      $\vec{v}$ und zu $\vec{w}$.
+      }
+      \lang{en}{
+      $\vec{v} \times \vec{w}$ is always \ref[content_33_winkel][orthogonal]{def:orthogonal} to 
+      $\vec{v}$ and to $\vec{w}$.
+      }
+\item \lang{de}{Sei $\varphi$ der Winkel zwischen den Vektoren $\vec{v}$ und $\vec{w}$, dann gilt}
+      \lang{en}{Let $\varphi$ be the angle between the vectors $\vec{v}$ and $\vec{w}$. Then}
+\[  \left\| \vec{n}\right\| =\left\| \vec{v}\right\| \cdot \left\| \vec{w}\right\|\cdot \sin(\varphi). \]
+\end{enumerate}
+\lang{de}{
+\floatright{\href{https://www.hm-kompakt.de/video?watch=723}{\image[75]{00_Videobutton_schwarz}}
+\href{https://www.hm-kompakt.de/video?watch=724}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{}
+\end{theorem}
+
+
+\lang{de}{
+Die in dem Satz angegebenen Eigenschaften bestimmen den Vektor $\vec{n}=\vec{v} \times \vec{w}$
+schon fast. Lediglich der Gegenvektor $-\vec{n}$ besitzt auch diese Eigenschaften.
+Die letzte Eigenschaft, mit der man den Vektor $\vec{n}$ dann eindeutig identifizieren kann, ist 
+die folgende:
+}
+\lang{en}{
+The properties of the cross product given in the above theorem are almost enough to uniquely 
+determine the vector $\vec{n}=\vec{v} \times \vec{w}$. Only the vector $-\vec{n}$ shares these 
+properties. The final property required to uniquely determine the vector $\vec{n}$ is the following:
+}
+
+\begin{rule}
+\lang{de}{
+Die drei Vektoren $\vec{v}$, $\vec{w}$ und $\vec{n}=\vec{v} \times \vec{w}$ bilden ein 
+sogenanntes \emph{Rechtsystem}, d.h. dass $\vec{v}$, $\vec{w}$ und $\vec{n}$ in
+Richtungen wie Daumen, Zeige- und Mittelfinger der rechten Hand zeigen, wenn Daumen und Zeigefinger 
+gestreckt und der Mittelfinger geknickt ist.
+}
+\lang{en}{
+The three vectors $\vec{v}$, $\vec{w}$ and $\vec{n}=\vec{v} \times \vec{w}$ form a so-called 
+\emph{right-handed orthogonal system}, that is, $\vec{v}$, $\vec{w}$ and $\vec{n}$ point in the 
+directions of the thumb, index and middle finger of a right hand with its thumb and index finger 
+extended and its middle finger bent as in the image below.
+}
+\begin{center}
+\image{T109_RightHand}
+\end{center}
+\end{rule}
+
+
+\begin{example}
+\lang{de}{Für $\vec{e}_1=\begin{pmatrix}1\\ 0\\ 0 \end{pmatrix}$ und 
+$\vec{e}_2=\begin{pmatrix}0\\ 1\\ 0 \end{pmatrix}$ ist}
+\lang{en}{For $\vec{e}_1=\begin{pmatrix}1\\ 0\\ 0 \end{pmatrix}$ and 
+$\vec{e}_2=\begin{pmatrix}0\\ 1\\ 0 \end{pmatrix}$ we have}
+\[ \vec{e}_1\times \vec{e}_2 
+=\begin{pmatrix}0\cdot 0-0\cdot 1 \\ 0\cdot 0-1\cdot 0\\ 1\cdot 1-0\cdot 0 \end{pmatrix}
+=\begin{pmatrix}0\\ 0\\ 1 \end{pmatrix}=\vec{e}_3. \]
+\begin{center}
+\image{T109_CrossProduct_C}
+\end{center}
+\end{example}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\randint{nv}{1}{7}
+			\randint{nw}{1}{7}
+			\function[calculate]{s}{nv*nw}
+
+% 			\function[calculate]{nac2}{(a1-c1)^2+(a2-c2)^2}
+% 			\function[calculate]{nbc2}{(c1-b1)^2+(c2-b2)^2}
+% 			\function{ab}{sqrt(nab2)}
+% 			\function{ac}{sqrt(nac2)}
+% 			\function{bc}{sqrt(nbc2)}
+		\end{variables}
+		
+			\text{\lang{de}{
+      Seien $\vec{v}$ und $\vec{w}$ zwei Vektoren der Längen
+			$\left\|\vec{v}\right\|=\var{nv}$ und $\left\|\vec{w}\right\|=\var{nw}$.
+			Welche Länge kann das Vektorprodukt $\vec{v}\times \vec{w}$ der beiden Vektoren
+			höchstens haben?\\
+			Die maximal mögliche Länge ist \ansref.
+      }
+      \lang{en}{
+      Let $\vec{v}$ and $\vec{w}$ be two vectors of lengths
+			$\left\|\vec{v}\right\|=\var{nv}$ and $\left\|\vec{w}\right\|=\var{nw}$. 
+      What is the maximum possible length of the cross product $\vec{v}\times \vec{w}$?\\
+      The maximum possible length is \ansref.
+      }}
+  	
+		\begin{answer}
+			\solution{s}
+		\end{answer}
+		\explanation{\lang{de}{Für die Länge des Vektorprodukts gilt die Gleichung}
+                 \lang{en}{We have an equality concerning the length of the cross product,}\\
+		$ \left\| \vec{v}\times \vec{w}\right\|=\left\| \vec{v}\right\| \cdot 
+\left\| \vec{w}\right\|\cdot \sin(\varphi), $\\
+		\lang{de}{
+    wobei $\varphi$ der Winkel zwischen $\vec{v}$ und $\vec{w}$ ist.\\
+		Da für alle $\varphi$ bereits $\sin(\varphi)\leq 1$ ist, ist also 
+    }
+    \lang{en}{
+    where $\varphi$ is the angle between $\vec{v}$ and $\vec{w}$.\\
+    As $\sin(\varphi)\leq 1$ for all $\varphi$,
+    }\\
+		$ \left\| \vec{v}\times \vec{w}\right\|\leq \left\| \vec{v}\right\| \cdot \left\| \vec{w}\right\|
+		=\var{nv}\cdot \var{nw}=\var{s}. $\\
+    \lang{de}{
+		Sind $\vec{v}$ und $\vec{w}$ zueinander senkrecht, so ist $\varphi=\pi/2$ und $	\sin(\varphi)=1$. 
+    In diesem	Fall gilt also sogar Gleichheit.
+    }
+    \lang{en}{
+    If $\vec{v}$ and $\vec{w}$ are orthogonal, then $\varphi=\pi/2$ and $	\sin(\varphi)=1$. In this 
+    case we even have equality.
+    }}
+	\end{quickcheck}
+
+
+
+\section{\lang{de}{Rechenregeln für das Vektorprodukt}
+         \lang{en}{Rules for the cross product}}\label{sec:rechenregeln}
+
+\begin{block}[warning]
+\lang{de}{
+Die für die Multiplikation in den reellen Zahlen bekannte Assoziativität und Kommutativität ist für 
+das Vektorprodukt nicht erfüllt, d.h. im Allgemeinen gelten für Vektoren $\vec{v}$, $\vec{w}$ und 
+$\vec{u}$ im $\R^3$
+}
+\lang{en}{
+The associativity and commutativity that we know from multiplication in the real numbers are not 
+properties of the cross product, that is, for most vectors $\vec{v}$, $\vec{w}$ and 
+$\vec{u}$ in $\R^3$ we have
+}
+\[ (\vec{v}\times \vec{w})\times \vec{u} \neq \vec{v}\times (\vec{w}\times \vec{u}) \]
+\lang{de}{und}\lang{en}{and}
+\[ \vec{w}\times \vec{v} \neq \vec{v}\times \vec{w} \quad !\]
+\end{block}
+
+\begin{example}
+\begin{tabs*}
+\tab{$\vec{w}\times \vec{v} \neq \vec{v}\times \vec{w}$}
+\lang{de}{Für}\lang{en}{For} 
+$\vec{v}=\begin{pmatrix}1\\ 0\\ 0 \end{pmatrix}$
+\lang{de}{und}\lang{en}{and} 
+$\vec{w}=\begin{pmatrix}1\\ 1\\ 0 \end{pmatrix}$ 
+\lang{de}{ist}\lang{en}{we have}
+\[ \vec{w}\times \vec{v} = 
+\begin{pmatrix}1\\ 1\\ 0 \end{pmatrix}\times \begin{pmatrix}1\\ 0\\ 0 \end{pmatrix} = 
+\begin{pmatrix}0\\ 0\\ -1 \end{pmatrix},\]
+\lang{de}{aber}\lang{en}{but}
+\[ \vec{v}\times \vec{w}=\begin{pmatrix}1\\ 0\\ 0 \end{pmatrix}\times \begin{pmatrix}1\\ 1\\ 0 \end{pmatrix}
+=\begin{pmatrix}0\\ 0\\ 1 \end{pmatrix}. \]
+\tab{$(\vec{v}\times \vec{w})\times \vec{u} \neq \vec{v}\times (\vec{w}\times \vec{u})$}
+\lang{de}{Für}\lang{en}{For} 
+$\vec{v}=\begin{pmatrix}1\\ 0\\ 0 \end{pmatrix}$, 
+$\vec{w}=\begin{pmatrix}1\\ 1\\ 0 \end{pmatrix}$ 
+\lang{de}{und}\lang{en}{and} 
+$\vec{u}=\begin{pmatrix}1\\ 1\\ 1 \end{pmatrix}$ 
+\lang{de}{ist}\lang{en}{we have}
+\[ (\vec{v}\times \vec{w})\times \vec{u} = 
+\left( \begin{pmatrix}1\\ 0\\ 0 \end{pmatrix} \times 
+\begin{pmatrix}1\\ 1\\ 0 \end{pmatrix}\right) \times \begin{pmatrix}1\\ 1\\ 1 \end{pmatrix} = 
+\begin{pmatrix}0\\ 0\\ 1 \end{pmatrix}\times \begin{pmatrix}1\\ 1\\ 1 \end{pmatrix} = 
+\begin{pmatrix}-1\\ 1\\ 0 \end{pmatrix}, \]
+\lang{de}{aber}\lang{en}{or} 
+\[ \vec{v}\times (\vec{w}\times \vec{u}) = 
+\begin{pmatrix}1\\ 0\\ 0 \end{pmatrix}\times \left( \begin{pmatrix}1\\ 1\\ 0 \end{pmatrix} \times 
+\begin{pmatrix}1\\ 1\\ 1 \end{pmatrix}\right) =
+\begin{pmatrix}1\\ 0\\ 0 \end{pmatrix}\times \begin{pmatrix}1\\ -1\\ 0 \end{pmatrix} = 
+\begin{pmatrix}0\\ 0\\ -1 \end{pmatrix}. \]
+\end{tabs*}
+\end{example}
+
+\lang{de}{
+Im vorigen Beispiel gilt für die gegebenen Vektoren $\vec{v}$ und $\vec{w}$ die Gleichung
+$\vec{w}\times \vec{v}=- (\vec{v}\times \vec{w})$. Dass dies kein Zufall ist, sondern generell gilt, 
+kann man allgemein nachrechnen. Es lässt sich auch mit Hilfe der 
+\lref{thm:eigenschaften}{Eigenschaften des Vektorprodukts} anschaulich erklären:
+}
+\lang{en}{
+For the vectors $\vec{v}$ and $\vec{w}$ given in the previous example we have 
+$\vec{w}\times \vec{v}=- (\vec{v}\times \vec{w})$. It can be shown that this is not a coincidence, 
+and holds generally. It can also be visually explained using the 
+\lref{thm:eigenschaften}{properties of the cross product}:
+}
+%\begin{tabs*}[\initialtab{0}]
+%\tab{Erklärung}
+\begin{proof*}[\lang{de}{Erklärung zu}
+               \lang{en}{Explanation for} $\vec{w}\times \vec{v}=- (\vec{v}\times \vec{w})$]
+\begin{showhide}
+\lang{de}{
+$\vec{n_1}=\vec{v}\times \vec{w}$ und $\vec{n_2}=\vec{w}\times \vec{v}$ sind beides Vektoren, die 
+sowohl auf $\vec{v}$ als auch auf $\vec{w}$ senkrecht stehen und die gleiche Länge, nämlich 
+$\left\| \vec{v}\right\| \cdot \left\| \vec{w}\right\|\cdot \sin(\varphi)$, haben. Außerdem bilden 
+$\vec{v}$, $\vec{w}$, $\vec{n_1}$ und $\vec{w}$, $\vec{v}$, $\vec{n_2}$ jeweils ein Rechtssystem.\\
+Wenn man im ersten System $\vec{v}$ und $\vec{w}$ vertauscht, erhält man also ein Linkssystem 
+$\vec{w}$, $\vec{v}$, $\vec{n_1}$. Ersetzt man $\vec{n_1}$ durch seinen Gegenvektor $-\vec{n_1}$ 
+erhält man wieder ein Rechtssystem $\vec{w}$, $\vec{v}$, $-\vec{n_1}$.
+\\\\
+$-\vec{n_1}$ und $\vec{n_2}$ erfüllen also beide die oben genannten charakterisierenden Eigenschaften 
+des Vektorprodukts, weshalb sie gleich sind.
+}
+\lang{en}{
+$\vec{n_1}=\vec{v}\times \vec{w}$ and $\vec{n_2}=\vec{w}\times \vec{v}$ are vectors that are 
+orthogonal to both $\vec{v}$ and $\vec{w}$, and have the same length, namely
+$\left\| \vec{v}\right\| \cdot \left\| \vec{w}\right\|\cdot \sin(\varphi)$. Furthermore, 
+$\vec{v}$, $\vec{w}$, $\vec{n_1}$ and $\vec{w}$, $\vec{v}$, $\vec{n_2}$ form a right-handed 
+orthogonal system.\\
+If we swap $\vec{v}$ and $\vec{w}$ in the prior, we obtain a left-handed orthogonal system
+$\vec{w}$, $\vec{v}$, $\vec{n_1}$. Replacing $\vec{n_1}$ with its negative vector $-\vec{n_1}$ 
+gives us a right-handed orthogonal system again, $\vec{w}$, $\vec{v}$, $-\vec{n_1}$.
+\\\\
+$-\vec{n_1}$ and $\vec{n_2}$ both fulfil the unique characteristics of a cross product, so they must 
+be equal.
+}
+\end{showhide}
+\end{proof*}
+%\end{tabs*}
+
+\lang{de}{Das Vektorprodukt erfüllt noch weitere Rechenregeln.}
+\lang{en}{The cross product also satisfies other rules.}
+
+\begin{theorem}
+\lang{de}{
+Für Vektoren $\vec{v}$, $\vec{w}$ und $\vec{u}$ im $\R^3$ und eine reelle Zahl $r\in \R$ gelten:
+}
+\lang{en}{
+For vectors $\vec{v}$, $\vec{w}$ and $\vec{u}$ in $\R^3$ and any real number $r\in \R$ we have:
+}
+\begin{enumerate}
+\item $\vec{w}\times \vec{v}=- (\vec{v}\times \vec{w})=-\vec{v}\times \vec{w}$,
+\item $(r\vec{v})\times \vec{w}=r(\vec{v}\times \vec{w})$ 
+\lang{de}{und}\lang{en}{and} 
+$\vec{v}\times (r\vec{w})=r(\vec{v}\times \vec{w})$,
+\item $\vec{v}\times (\vec{w}+\vec{u})=\vec{v}\times \vec{w}+ \vec{v}\times \vec{u}$, 
+\lang{de}{sowie}\lang{en}{and}
+$(\vec{v}+\vec{w})\times \vec{u}=\vec{v}\times \vec{u}+ \vec{w}\times \vec{u}$.
+\end{enumerate}
+\lang{de}{
+Wobei auch hier wieder \glqq{}Punkt vor Strich\grqq{} zu rechnen ist.\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=725}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{
+Where the cross product (like in the order of operations of normal multiplication) is calculated 
+before the addition.
+}
+\end{theorem}
+
+\begin{example}
+\lang{de}{
+Um das Vektorprodukt der Vektoren $\vec{v}=\begin{pmatrix} 3/7 \\ 4/5 \\ 1/2 \end{pmatrix}$ und 
+$\vec{w}=\begin{pmatrix}3/7 \\ 4/5 \\ 5/2 \end{pmatrix}$ zu berechnen, kann man die dritte und zweite 
+Regel verwenden, um die Rechnung zu vereinfachen. Hier ist nämlich 
+}
+\lang{en}{
+If we want to find the cross product of the vectors 
+$\vec{v}=\begin{pmatrix} 3/7 \\ 4/5 \\ 1/2 \end{pmatrix}$ and 
+$\vec{w}=\begin{pmatrix}3/7 \\ 4/5 \\ 5/2 \end{pmatrix}$, 
+we can apply the third and the second rules to simplify the calculation, as 
+}
+\[ \vec{w}=\begin{pmatrix}3/7 \\ 4/5 \\ 5/2 \end{pmatrix}=\begin{pmatrix} 3/7 \\ 4/5 \\ 1/2 \end{pmatrix}
++\begin{pmatrix} 0 \\ 0 \\ 2 \end{pmatrix}=\vec{v}+2\cdot \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}. \]
+\lang{de}{Damit gilt:}\lang{en}{Hence}
+\begin{eqnarray*}
+\vec{v}\times \vec{w} &=& \vec{v}\times \vec{v}
+\,\, +\,\, 2\cdot \begin{pmatrix} 3/7 \\ 4/5 \\ 1/2 \end{pmatrix}\times\begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix} \quad \text{\lang{de}{nach 2. und 3.}\lang{en}{by 2. and 3.}}\\
+&=& \vec{o} \,\, +\,\, 2\cdot \begin{pmatrix} 4/5 \\ -3/7 \\ 0 \end{pmatrix}
+\,\, =\,\, \begin{pmatrix} 8/5 \\ -6/7 \\ 0 \end{pmatrix}.
+\end{eqnarray*}
+
+
+\end{example}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{k}{1}{3}	% Zufallsvariable zum Vertauschen:
+			\function[calculate]{d1}{(k-2)*(k-3)/2}  % "Dirac"-funktionen
+			\function[calculate]{d2}{-(k-1)*(k-3)}
+			\function[calculate]{d3}{(k-1)*(k-2)/2}		
+
+			\randint{r}{1}{3}		
+			\randrat[Z]{a1}{-5}{5}{4}{11}
+			\randrat[Z]{a2}{-5}{5}{4}{11}
+			\randrat[Z]{a3}{-5}{5}{4}{11}
+			\function[calculate]{v1}{a1}
+			\function[calculate]{v2}{a2}
+			\function[calculate]{v3}{a3}
+			\function[calculate]{w1}{a1+r*d1}
+			\function[calculate]{w2}{a2+r*d2}
+			\function[calculate]{w3}{a3+r*d3}
+
+			\function[calculate]{s1}{v2*w3-v3*w2}
+			\function[calculate]{s2}{v3*w1-v1*w3}
+			\function[calculate]{s3}{v1*w2-v2*w1}
+		\end{variables}
+		
+			\text{\lang{de}{Bestimmen Sie das Vektorprodukt von}
+            \lang{en}{Determine the cross product of}
+			$\vec{v}=\begin{pmatrix} \var{v1}\\ \var{v2} \\ \var{v3} \end{pmatrix}$ 
+      \lang{de}{und}\lang{en}{and} 
+      $\vec{w}=\begin{pmatrix} \var{w1}\\ \var{w2} \\ \var{w3} \end{pmatrix}$ 
+      \lang{de}{möglichst geschickt wie im vorangegangenen Beispiel.}
+      \lang{en}{by simplifying like in the previous example.}\\
+			
+			\begin{table}[\class{no-padding}]
+			\rowspan[l][m]{3} $\vec{v}\times \vec{w}=\begin{pmatrix} \var{v1}\\ \var{v2} \\ \var{v3}
+			\end{pmatrix} \times \begin{pmatrix} \var{w1}\\ \var{w2} \\ \var{w3}
+			\end{pmatrix} =
+			\left(\begin{matrix} \\ \\ \\ \\ \end{matrix}\right.$ &  
+			\ansref & \rowspan[l][m]{3} $\left.\begin{matrix} \\ \\ \\ \\  \end{matrix}\right)$. & \\ 
+			\ansref & \\ 
+			\ansref & 
+			\end{table}			
+			}
+		
+		\begin{answer}
+			\solution{s1}
+		\end{answer}
+		\begin{answer}
+			\solution{s2}
+		\end{answer}
+		\begin{answer}
+			\solution{s3}
+		\end{answer}
+		\explanation{\lang{de}{Hier gilt}\lang{en}{We have} 
+      $\vec{w}=\vec{v}+\var{r}\cdot \begin{pmatrix} \var{d1}\\ \var{d2} \\ \var{d3} \end{pmatrix}$.\\ 
+			\lang{de}{Also ist unter Berücksichtigung der Rechenregeln und von }
+      \lang{en}{Hence, using the rules introduced above and }
+      $\vec{v}\times \vec{v}=\vec{0}$:\\
+			$\vec{v}\times \vec{w}=\vec{v}\times \left( \vec{v}
+				+ \var{r}\cdot \begin{pmatrix} \var{d1}\\ \var{d2} \\ \var{d3} \end{pmatrix}\right)
+			= \var{r}\cdot  \vec{v}\times \begin{pmatrix} \var{d1}\\ \var{d2} \\ \var{d3} \end{pmatrix}
+			=\begin{pmatrix}\var{s1}\\ \var{s2} \\ \var{s3} \end{pmatrix}. $
+		}
+	\end{quickcheck}
+
+\end{visualizationwrapper}
+
+\section{\lang{de}{Anwendungen des Vektorprodukts}\lang{en}{Applications of the cross product}}\label{sec:anwendung_geometrie}
+
+\begin{remark}\label{rem:parallelogram}
+\lang{de}{
+Die Länge des Vektorprodukts hat auch eine geometrische Bedeutung. Für zwei
+Vektoren $\vec{v}$ und $\vec{w}$ im $\R^3$ mit eingeschlossenem Winkel $\varphi$ ist
+der Wert
+}
+\lang{en}{
+The length of a cross product of two vectors has a geometric interpretation. For two vectors 
+$\vec{v}$ and $\vec{w}$ in $\R^3$ with an angle of $\varphi$ between them, the value
+}
+\[ \left\| \vec{v}\times \vec{w}\right\|=\left\| \vec{v}\right\| \cdot 
+\left\| \vec{w}\right\|\cdot \sin(\varphi) \]
+\lang{de}{
+genau die Fläche des von $\vec{v}$ und $\vec{w}$ aufgespannten Parallelogramms, da die Grundseite
+in der Skizze $\left\| \vec{v}\right\|$ beträgt und die Höhe 
+$\sin(\varphi)\cdot \left\| \vec{w}\right\|$.
+}
+\lang{en}{
+is exactly the area of the parallelogram spanned by (with edges) $\vec{v}$ and $\vec{w}$, as its 
+base edge in the sketch has length $\left\| \vec{v}\right\|$, and the parallelogram has height 
+$\sin(\varphi)\cdot \left\| \vec{w}\right\|$.
+}
+
+
+\begin{center}
+\image{T109_AreaParalellogram}
+\end{center}
+
+\end{remark}
+
+\begin{example}
+\lang{de}{
+Um den Flächeninhalt des Parallelogramms zu bestimmen, das durch die Vektoren 
+$\vec{a}=\begin{pmatrix} 4 \\ 2 \end{pmatrix}$ und $\vec{b}=\begin{pmatrix} 2 \\ 3 \end{pmatrix}$ 
+aufgespannt wird, kann die Situation ins Dreidimensionale eingebettet werden und das Vektorprodukt zu 
+Hilfe genommen werden.
+\\\\
+Beim Einbetten ins Dreidimensionale ergänzt man eine dritte Koordinate in den beiden Vektoren mit 
+Wert $0$: $\vec{a}=\begin{pmatrix} 4 \\ 2 \\ 0 \end{pmatrix}$ und 
+$\vec{b}=\begin{pmatrix} 2 \\ 3 \\ 0 \end{pmatrix}$. Den Flächeninhalt des durch die beiden Vektoren 
+aufgespannten Parallelogramms erhält man nun als Länge des Vektorprodukts $\vec{a}\times\vec{b}$:
+}
+\lang{en}{
+To determine the area of the parallelogram spanned by the vectors 
+$\vec{a}=\begin{pmatrix} 4 \\ 2 \end{pmatrix}$ and $\vec{b}=\begin{pmatrix} 2 \\ 3 \end{pmatrix}$, 
+we can embed the problem into three dimensions so that we may use the cross product.
+\\\\
+To embed it into three dimensions, we add a third component $0$: 
+$\vec{a}=\begin{pmatrix} 4 \\ 2 \\ 0 \end{pmatrix}$ and 
+$\vec{b}=\begin{pmatrix} 2 \\ 3 \\ 0 \end{pmatrix}$. The area of the parallelogram spanned by these 
+is now the length of the cross product $\vec{a}\times\vec{b}$:
+}
+\\\\
+\[\left\| \vec{a}\times\vec{b} \right\|=\left\| \begin{pmatrix} 4 \\ 2 \\ 0 \end{pmatrix} \times \begin{pmatrix} 2 \\ 3 \\ 0 \end{pmatrix} 
+\right\|=\left\| \begin{pmatrix} 0 \\ 0 \\ 8 \end{pmatrix} \right\|=\sqrt{64}=8\]
+\end{example}
+
+\begin{remark}\label{rem:spatprodukt}
+\lang{de}{
+Das sogenannte Spatprodukt ist das Skalarprodukt aus dem Vektorprodukt zweier Vektoren $\vec{v}$ und 
+$\vec{w}$ und einem dritten Vektor $\vec{u}$. Der Betrag des Spatprodukts entspricht dem Volumen des 
+durch die drei Vektoren $\vec{v},\vec{w}$ und $\vec{u}$ aufgespannten Spats.
+}
+\lang{en}{
+The so-called \emph{scalar triple product} is the scalar product of the cross product of $\vec{v}$ 
+and $\vec{w}$ with a third vector $\vec{u}$. The absolute value of this corresponds to the volume of 
+the parallelopiped (three-dimensional parallelogram) spanned by the vectors.
+}
+\begin{center}
+\image{T109_TripleProduct}
+\end{center}
+\lang{de}{
+Damit ergibt sich das Volumen $V(\vec{v},\vec{w},\vec{u})$ des durch die drei Vektoren 
+$\vec{v},\vec{w},\vec{u}$ aufgespannten Spats zu:
+}
+\lang{en}{
+Hence the volume $V(\vec{v},\vec{w},\vec{u})$ of the parallelopiped spanned by the vectors 
+$\vec{v},\vec{w},\vec{u}$ is:
+}\\
+\[V(\vec{v},\vec{w},\vec{u})=\left|(\vec{v}\times\vec{w})\bullet\vec{u}\right|\]
+\end{remark}
+
+\begin{example}
+\lang{de}{
+Um das Volumen $V$ des durch die drei Vektoren $\vec{a}=\begin{pmatrix} 4 \\ 2 \\ 0 \end{pmatrix}$, 
+$\vec{b}=\begin{pmatrix} 1 \\ 1 \\ -1 \end{pmatrix}$ und 
+$\vec{c}=\begin{pmatrix} 0 \\ 2 \\ 3 \end{pmatrix}$ aufgespannten Spats zu bestimmen, können Skalar- 
+und Vektorprodukt zu Hilfe genommen werden:
+}
+\lang{en}{
+To determine the volume $V$ of the parallelopiped spanned by the vectors 
+$\vec{a}=\begin{pmatrix} 4 \\ 2 \\ 0 \end{pmatrix}$, 
+$\vec{b}=\begin{pmatrix} 1 \\ 1 \\ -1 \end{pmatrix}$ and 
+$\vec{c}=\begin{pmatrix} 0 \\ 2 \\ 3 \end{pmatrix}$, we use both the scalar product and the cross 
+product:
+}\\
+\[V=\left|(\vec{a}\times\vec{b})\bullet\vec{c}\right|=\left|\begin{pmatrix} -2 \\ 4 \\ 2 \end{pmatrix}\bullet\begin{pmatrix} 0 \\ 2 \\ 3 \end{pmatrix}\right|
+=\left| (-2)\cdot 0+4\cdot 2+2\cdot 3 \right|=14\]
+\end{example}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{a}{2}{9}
+            \number{AB1}{5}
+            \number{AB2}{-1*AB1}
+            \number{AB3}{0}
+            \function[normalize]{AC1}{a+1}
+            \function[normalize]{AC2}{a-3}
+            \number{AC3}{0}
+            
+            \number{Vektorprodukt1}{0}
+            \number{Vektorprodukt2}{0}
+            \function[normalize]{Vektorprodukt3}{10*a-10}
+            
+            \function[normalize]{flaeche}{Vektorprodukt3/2}            
+            
+		\end{variables}
+		
+			\text{\lang{de}{
+            Bestimmen Sie den Flächeninhalt des Dreiecks mit den Eckpunkten $A=(-1;3)$, $B=(4;-2)$ 
+            und $C=(\var{a};\var{a})$.
+            \\\\
+            Der Flächeninhalt des Dreiecks beträgt \ansref.
+            }
+            \lang{en}{
+            Determine the area of the triangle with vertices $A=(-1;3)$, $B=(4;-2)$ and 
+            $C=(\var{a};\var{a})$.
+            \\\\
+            The area of the triangle is \ansref.
+            }
+			}
+		
+		\begin{answer}
+			\solution{flaeche}
+		\end{answer}
+		
+		\explanation{\lang{de}{
+        Um die Fläche des Dreiecks zu bestimmen, können Sie die Verbindungsvektoren der Eckpunkte 
+        nehmen und sie ins Dreidimensionale einbetten. Dann verwenden Sie das Vektorprodukt, um die 
+        Fläche des von den Verbindungsvektoren aufgespannten Parallelogramms zu bestimmen. Die 
+        Dreiecksfläche ergibt sich dann als die Hälfte der Parallelogrammfläche. Also ist die Fläche 
+        gleich
+        }
+        \lang{en}{
+        To determine the area of the triangle, two of the vectors representing the edges of the 
+        triangle (those between the vertices) can be embedded into three dimensions, and their cross 
+        product taken to find the area of the parallelogram spanned by them. The area of the triangle 
+        is simply half of this. Hence the area of the triangle is
+        }\\
+        $
+        \frac{1}{2}\cdot \left| \begin{pmatrix}5\\-5\\ 0\end{pmatrix} \times 
+        \begin{pmatrix}\var{AC1} \\ \var{AC2} \\ \var{AC3}\end{pmatrix}\right|.
+        $
+    		}
+	\end{quickcheck}
+
+\end{content}

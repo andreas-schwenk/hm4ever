@@ -1,0 +1,347 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A04: Grenzwert $x\to\infty$}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{
+	\title{A04: Grenzwert $x\to\infty$}
+}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9978}{Ticket 9978}
+\end{block}
+
+
+
+\begin{problem}
+
+\randomquestionpool{1}{8}
+%1111111111111111111111111111
+\begin{question}
+
+	
+\begin{variables}
+	\randint[Z]{a}{-10}{10}
+	\randint{b}{-10}{10}
+	\randint{c}{-10}{10}
+	\randint[Z]{ee}{-10}{10}
+	\randint{h}{-10}{10}
+	\randint[Z]{g}{-10}{10}
+	
+	
+	\function[normalize]{f}{(a*x^2+b*x+c)/(ee*x^2+h*x+g)}
+	
+	\function[calculate]{sol}{a/ee}
+	
+\end{variables}
+
+	\type{input.function}
+	\field{rational} 
+    \lang{de}{
+	    \text{
+	     Bestimmen Sie den Grenzwert $g$ für $x\to \infty$ für 
+$ f:\R\to\R, x\mapsto \var{f}. $ Schreiben Sie $infty$ bzw. $-infty$, falls die Funktion
+bestimmt gegen unendlich bzw. minus unendlich divergiert.
+    }}
+    
+    \begin{answer}
+    \text{Der Grenzwert $g$ ist gegeben durch $g$ = }
+	    \solution{sol}
+        \checkAsFunction{x}{-10}{10}{10}
+        \explanation[edited]{Zählergrad = Nennergrad, also nicht bestimmt divergent.}
+    \end{answer}
+    
+\end{question}
+    %222222222222222222222222222222222
+\begin{question}
+
+	
+\begin{variables}
+	\function[calculate]{a}{0}
+	\randint{b}{-10}{10}
+	\randint[Z]{c}{-10}{10}
+	\randint[Z]{ee}{-10}{10}
+	\randint{h}{-10}{10}
+	\randint{g}{-10}{10}
+	
+	
+	\randadjustIf{ee}{ee=0}
+	\randadjustIf{h,g}{h=0 AND g=0}
+	
+	\function[normalize]{f}{(a*x^2+b*x+c)/(ee*x^2+h*x+g)}
+	
+	\function[calculate]{sol}{0}
+	
+\end{variables}
+
+	\type{input.function}
+	\field{rational} 
+    \lang{de}{
+	    \text{
+	     Bestimmen Sie den Grenzwert $g$ für $x\to \infty$ für 
+$ f:\R\to\R, x\mapsto \var{f}. $ Schreiben Sie $infty$ bzw. $-infty$, falls die Funktion
+bestimmt gegen unendlich bzw. minus unendlich divergiert.
+    }}
+    
+    \begin{answer}
+    \text{Der Grenzwert $g$ ist gegeben durch $g$ = }
+	    \solution{sol}
+        \checkAsFunction{x}{-10}{10}{10}
+        \explanation[edited]{Zählergrad < Nennergrad, also $g=0$.}
+    \end{answer}
+    
+\end{question}
+    %33333333333333333333333333333333333 aaaaaaaaaaaaa
+    \begin{question}
+
+	
+\begin{variables}
+	\function[calculate]{ee}{0}
+	\randint{b}{-10}{10}
+	\randint{c}{-10}{10}
+	\randint[Z]{a}{1}{10}
+	\randint[Z]{h}{1}{10}
+	\randint{g}{-10}{10}
+	
+		
+	\function[normalize]{f}{(a*x^2+b*x+c)/(ee*x^2+h*x+g)}
+	
+	\function{sol}{infty}
+	
+\end{variables}
+
+	\type{input.function}
+	\field{rational} 
+    \lang{de}{
+	    \text{
+	     Bestimmen Sie den Grenzwert $g$ für $x\to \infty$ für 
+$ f:\R\to\R, x\mapsto \var{f}. $ Schreiben Sie $infty$ bzw. $-infty$, falls die Funktion
+bestimmt gegen unendlich bzw. minus unendlich divergiert.
+    }}
+    
+    \begin{answer}
+    \text{Der Grenzwert $g$ ist gegeben durch $g$ = }
+	    \solution{sol}
+        \checkAsFunction{x}{-10}{10}{10}
+         \explanation[edited]{Zählergrad > Nennergrad, also bestimmt divergent.}
+    \end{answer}
+    
+\end{question}
+
+%333333333333333333 bbbbbbbbbbbbbbb
+   \begin{question}
+
+	
+\begin{variables}
+	\function[calculate]{ee}{0}
+	\randint{b}{-10}{10}
+	\randint[Z]{c}{-10}{10}
+	\randint[Z]{a}{-10}{-1}
+	\randint[Z]{h}{1}{10}
+	\randint{g}{-10}{10}
+	
+	
+	\randadjustIf{h,g}{h=0 AND g=0}
+	
+	\function[normalize]{f}{(a*x^2+b*x+c)/(ee*x^2+h*x+g)}
+	
+	\function{sol}{-infty}
+	
+\end{variables}
+
+	\type{input.function}
+   	\field{rational} 
+
+    \lang{de}{
+	    \text{
+	     Bestimmen Sie den Grenzwert $g$ für $x\to \infty$ für 
+$ f:\R\to\R, x\mapsto \var{f}. $ Schreiben Sie $infty$ bzw. $-infty$, falls die Funktion
+bestimmt gegen unendlich bzw. minus unendlich divergiert.
+    }}
+    
+    \begin{answer}
+    \text{Der Grenzwert $g$ ist gegeben durch $g$ = }
+	    \solution{sol}
+        \checkAsFunction{x}{-10}{10}{10}
+        \explanation[edited]{Zählergrad > Nennergrad, also bestimmt divergent.}
+        
+    \end{answer}
+    
+\end{question}
+    
+    %44444444444444444444444
+    \begin{question}
+
+	
+\begin{variables}
+	\function[calculate]{a}{0}
+	\randint[Z]{b}{-10}{10}
+	\randint[Z]{c}{-10}{10}
+	\function[calculate]{ee}{0}
+	\randint[Z]{h}{-10}{10}
+	\randint[Z]{g}{-10}{10}
+	
+	
+	\function[normalize]{f}{(a*x^2+b*x+c)/(ee*x^2+h*x+g)}
+	
+	\function[calculate]{sol}{b/h}
+	
+\end{variables}
+
+	\type{input.function}
+	\field{rational} 
+    \lang{de}{
+	    \text{
+	     Bestimmen Sie den Grenzwert $g$ für $x\to \infty$ für 
+$ f:\R\to\R, x\mapsto \var{f}. $ Schreiben Sie $infty$ bzw. $-infty$, falls die Funktion
+bestimmt gegen unendlich bzw. minus unendlich divergiert.
+    }}
+    
+    \begin{answer}
+    \text{Der Grenzwert $g$ ist gegeben durch $g$ = }
+	    \solution{sol}
+        \checkAsFunction{x}{-10}{10}{10}
+        \explanation[edited]{Zählergrad = Nennergrad, also nicht bestimmt divergent.}
+    \end{answer}
+    
+\end{question}
+    %5555555555555555
+    \begin{question}
+
+	
+\begin{variables}
+	\function[calculate]{a}{0}
+	\function[calculate]{b}{0}
+	\randint[Z]{c}{-10}{10}
+	\function[calculate]{ee}{0}
+	\randint[Z]{h}{-10}{10}
+	\randint[Z]{g}{-10}{10}
+	
+	
+	\function[normalize]{f}{(a*x^2+b*x+c)/(ee*x^2+h*x+g)}
+	
+	\function[calculate]{sol}{0}
+	
+\end{variables}
+
+	\type{input.function}
+	\field{rational} 
+	\precision{3}
+    \lang{de}{
+	    \text{
+	     Bestimmen Sie den Grenzwert $g$ für $x\to \infty$ für 
+$ f:\R\to\R, x\mapsto \var{f}. $ Schreiben Sie $infty$ bzw. $-infty$, falls die Funktion
+bestimmt gegen unendlich bzw. minus unendlich divergiert.
+    }}
+    
+    \begin{answer}
+    \text{Der Grenzwert $g$ ist gegeben durch $g$ = }
+	    \solution{sol}
+        \checkAsFunction{x}{-10}{10}{10}
+        \explanation[edited]{Zählergrad < Nennergrad, also $g=0$.}
+    \end{answer}
+    
+\end{question}
+    
+    %6666666666666 aaaaaaaaaaaaaaaa
+    \begin{question}
+
+	
+\begin{variables}
+	\function[calculate]{a}{0}
+	\function[calculate]{h}{0}
+	\randint[Z]{c}{-10}{10}
+	\function[calculate]{ee}{0}
+	\randint[Z]{b}{-10}{-1}
+	\randint[Z]{g}{1}{10}
+	
+	\function[normalize]{f}{(a*x^2+b*x+c)/(ee*x^2+h*x+g)}
+	
+	\function{sol}{-infty}
+	
+\end{variables}
+
+	\type{input.function}
+   	\field{rational} 
+
+    \lang{de}{
+	    \text{
+	     Bestimmen Sie den Grenzwert $g$ für $x\to \infty$ für 
+$ f:\R\to\R, x\mapsto \var{f}. $ Schreiben Sie $infty$ bzw. $-infty$, falls die Funktion
+bestimmt gegen unendlich bzw. minus unendlich divergiert.
+    }}
+    
+    \begin{answer}
+    \text{Der Grenzwert $g$ ist gegeben durch $g$ = }
+	    \solution{sol}
+        \checkAsFunction{x}{-10}{10}{10}
+        \explanation[edited]{Zählergrad > Nennergrad, also bestimmt divergent.}
+    \end{answer}
+    
+\end{question}
+
+%66666666666666666666666 bbbbbbbbbbbbbbb
+\begin{question}
+
+	
+\begin{variables}
+	\function[calculate]{a}{0}
+	\function[calculate]{h}{0}
+	\randint[Z]{c}{-10}{10}
+	\function[calculate]{ee}{0}
+	\randint[Z]{b}{1}{10}
+	\randint[Z]{g}{1}{10}
+	
+	
+	\function[normalize]{f}{(a*x^2+b*x+c)/(ee*x^2+h*x+g)}
+	
+	\function{sol}{infty}
+	
+\end{variables}
+
+	\type{input.function}
+   	\field{rational} 
+
+    \lang{de}{
+	    \text{
+	     Bestimmen Sie den Grenzwert $g$ für $x\to \infty$ für 
+$ f:\R\to\R, x\mapsto \var{f}. $ Schreiben Sie $infty$ bzw. $-infty$, falls die Funktion
+bestimmt gegen unendlich bzw. minus unendlich divergiert.
+    }}
+    
+    \begin{answer}
+    \text{Der Grenzwert $g$ ist gegeben durch $g$ = }
+	    \solution{sol}
+        \checkAsFunction{x}{-10}{10}{10}
+        \explanation[edited]{Zählergrad > Nennergrad, also bestimmt divergent.}
+    \end{answer}
+    
+\end{question}
+        
+    
+\end{problem}
+
+
+\embedmathlet{mathlet}
+
+\end{content}

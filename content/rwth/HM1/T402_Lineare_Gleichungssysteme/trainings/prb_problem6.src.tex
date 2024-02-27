@@ -1,0 +1,1019 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A04: Elementarmatrizen}
+    \lang{en}{P04: Elementary matrices}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A04: Elementarmatrizen}}
+\lang{en}{\title{P04: Elementary matrices}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/11519}{Ticket 11519}
+\end{block}
+
+\begin{problem}
+	 \randomquestionpool{1}{3}
+     \randomquestionpool{4}{6}
+     \randomquestionpool{7}{9}
+
+%%----- Addition einer Zeile zu einer anderen ------
+\lang{de}{\begin{question}
+		
+		\begin{variables}
+
+            \number{m}{2}  %$m=2$-Fall
+
+            \randint{n}{2}{5} 
+            \randint[Z]{r1}{-4}{5} 
+            \randint[Z]{r2}{-4}{5} 
+            \function[calculate]{r}{r1/r2}
+
+            % $k2\in \{1,2\}$ \% Zufallsvariable für $m=2$-Fall \\
+            \randint{k2}{1}{2}
+
+            \function[calculate]{i}{k2}
+		    \function[calculate]{j}{3-k2}
+		    \matrix[calculate]{mm}{1 & (2-i)*r \\ (i-1)*r & 1}
+
+		\end{variables}
+		
+        \type{input.matrix}
+        \field{rational}
+		
+	    \text{Gegeben sei eine $(\var{m}\times \var{n})$-Matrix $A$ mit reellen Einträgen.
+        In einer Zeilenoperation soll das
+        $(\var{r})$-fache der $\var{j}$-ten Zeile zur $\var{i}$-ten Zeile addiert werden.\\
+
+        Geben Sie die Elementarmatrix $B$ an, so dass die durch die Zeilenoperation
+        entstehende Matrix gleich $B\cdot A$ ist.\\
+        
+        Bestimmen Sie zunächst das Format (also die Anzahl an Zeilen und Spalten) von $B$ und bestimmen
+        Sie dann die Einträge wertmäßig.}
+	    
+	    \begin{answer}
+	    	\text{$B=$}
+			\solution{mm}
+            \explanation{Die gesuchte Matrix $B$ hat das Format $(m \times m)$,
+            wobei $m$ der Anzahl der Zeilen von $A$ entspricht.
+            Der Eintrag $(i,j)$ ist mit $\var{r}$ zu wählen.
+            Hierbei ist $i$ die zu ändernde Zeile, zu welcher
+            das $\var{r}$-fache der Zeile $j$ hinzuaddiert wird.
+            Die Einträge auf der Hauptdiagonalen sind $1$.
+            Die restlichen Einträge der Matrix sind $0$.            
+            }
+	    \end{answer}    
+	    	    
+\end{question}
+
+\begin{question}
+		
+	\begin{variables}
+        \number{m}{3}
+
+        \randint{n}{2}{5} 
+        \randint[Z]{r1}{-4}{5} 
+        \randint[Z]{r2}{-4}{5} 
+        \function[calculate]{r}{r1/r2}
+
+        % $k3,l3\in \{1,2,3\}$ \% Zufallsvariablen für $m=3$-Fall \\
+        \randint{k3}{1}{3}
+        \randint{l3}{1}{3}
+        \randadjustIf{k3,l3}{k3=l3}
+
+		\function[calculate]{i}{k3}
+		\function[calculate]{j}{l3}
+		\function[calculate]{d12}{(1-|sign(i-1)|)*(1-|sign(j-2)|)}
+		\function[calculate]{d13}{(1-|sign(i-1)|)*(1-|sign(j-3)|)}
+		\function[calculate]{d21}{(1-|sign(i-2)|)*(1-|sign(j-1)|)}
+		\function[calculate]{d23}{(1-|sign(i-2)|)*(1-|sign(j-3)|)}
+		\function[calculate]{d31}{(1-|sign(i-3)|)*(1-|sign(j-1)|)}
+		\function[calculate]{d32}{(1-|sign(i-3)|)*(1-|sign(j-2)|)}
+		\matrix[calculate]{mm}{1 & d12*r & d13*r \\ d21*r & 1 & d23*r\\ d31*r & d32*r & 1}
+
+    \end{variables}
+		
+        \type{input.matrix}
+        \field{rational}
+		
+	    %\text{Bei der $(\var{m}\times \var{n})$-Matrix $A$ mit reellen Einträgen soll
+%das $(\var{r})$-fache der $\var{j}$-ten Zeile zur $\var{i}$-ten Zeile addiert werden.\\
+%Geben Sie die Elementarmatrix $B$ an, so dass die entstandene Matrix gleich $B\cdot A$ ist.}
+
+	    \text{Gegeben sei eine $(\var{m}\times \var{n})$-Matrix $A$ mit reellen Einträgen.
+        In einer Zeilenoperation soll das
+        $(\var{r})$-fache der $\var{j}$-ten Zeile zur $\var{i}$-ten Zeile addiert werden.\\
+
+        Geben Sie die Elementarmatrix $B$ an, so dass die durch die Zeilenoperation
+        entstehende Matrix gleich $B\cdot A$ ist.\\
+        
+        Bestimmen Sie zunächst das Format (also die Anzahl an Zeilen und Spalten) von $B$ und bestimmen
+        Sie dann die Einträge wertmäßig.}
+
+	    
+	    \begin{answer}
+	    	\text{$B=$}
+			\solution{mm}
+            \explanation{Die gesuchte Matrix $B$ hat das Format $(m \times m)$,
+            wobei $m$ der Anzahl der Zeilen von $A$ entspricht.
+            Der Eintrag $(i,j)$ ist mit $\var{r}$ zu wählen.
+            Hierbei ist $i$ die zu ändernde Zeile, zu welcher
+            das $\var{r}$-fache der Zeile $j$ hinzuaddiert wird.
+            Die Einträge auf der Hauptdiagonalen sind $1$.
+            Die restlichen Einträge der Matrix sind $0$.            
+            }
+	    \end{answer}    
+	    
+\end{question}
+	
+\begin{question}
+		
+	\begin{variables}        
+        \number{m}{4}
+
+
+        \randint{n}{2}{5} 
+        \randint[Z]{r1}{-4}{5} 
+        \randint[Z]{r2}{-4}{5} 
+        \function[calculate]{r}{r1/r2}
+
+        % $k4,l4\in \{1,2,3,4\}$ \% Zufallsvariablen für $m=4$-Fall \\
+        \randint{k4}{1}{4}
+        \randint{l4}{1}{4}
+        \randadjustIf{k4,l4}{k4=l4}
+
+        \function[calculate]{i}{k4}
+		\function[calculate]{j}{l4}
+		\function[calculate]{d12}{(1-|sign(i-1)|)*(1-|sign(j-2)|)}
+		\function[calculate]{d13}{(1-|sign(i-1)|)*(1-|sign(j-3)|)}
+		\function[calculate]{d14}{(1-|sign(i-1)|)*(1-|sign(j-4)|)}
+		\function[calculate]{d21}{(1-|sign(i-2)|)*(1-|sign(j-1)|)}
+		\function[calculate]{d23}{(1-|sign(i-2)|)*(1-|sign(j-3)|)}
+		\function[calculate]{d24}{(1-|sign(i-2)|)*(1-|sign(j-4)|)}
+		\function[calculate]{d31}{(1-|sign(i-3)|)*(1-|sign(j-1)|)}
+		\function[calculate]{d32}{(1-|sign(i-3)|)*(1-|sign(j-2)|)}
+		\function[calculate]{d34}{(1-|sign(i-3)|)*(1-|sign(j-4)|)}
+		\function[calculate]{d41}{(1-|sign(i-4)|)*(1-|sign(j-1)|)}
+		\function[calculate]{d42}{(1-|sign(i-4)|)*(1-|sign(j-2)|)}
+		\function[calculate]{d43}{(1-|sign(i-4)|)*(1-|sign(j-3)|)}
+		\matrix[calculate]{mm}{1 & d12*r & d13*r & d14*r \\ d21*r & 1 & d23*r & d24*r \\ d31*r & d32*r & 1 & d34*r \\ d41*r & d42*r & d43*r & 1}
+
+
+	\end{variables}
+		
+        \type{input.matrix}
+        \field{rational}
+		
+	    %\text{Bei der $(\var{m}\times \var{n})$-Matrix $A$ mit reellen Einträgen soll
+%das $(\var{r})$-fache der $\var{j}$-ten Zeile zur $\var{i}$-ten Zeile addiert werden.\\
+%Geben Sie die Elementarmatrix $B$ an, so dass die entstandene Matrix gleich $B\cdot A$ ist.}
+	    \text{Gegeben sei eine $(\var{m}\times \var{n})$-Matrix $A$ mit reellen Einträgen.
+        In einer Zeilenoperation soll das
+        $(\var{r})$-fache der $\var{j}$-ten Zeile zur $\var{i}$-ten Zeile addiert werden.\\
+
+        Geben Sie die Elementarmatrix $B$ an, so dass die durch die Zeilenoperation
+        entstehende Matrix gleich $B\cdot A$ ist.\\
+        
+        Bestimmen Sie zunächst das Format (also die Anzahl an Zeilen und Spalten) von $B$ und bestimmen
+        Sie dann die Einträge wertmäßig.}
+
+	    
+	    \begin{answer}
+	    	\text{$B=$}
+			\solution{mm}
+            \explanation{Die gesuchte Matrix $B$ hat das Format $(m \times m)$,
+            wobei $m$ der Anzahl der Zeilen von $A$ entspricht.
+            Der Eintrag $(i,j)$ ist mit $\var{r}$ zu wählen.
+            Hierbei ist $i$ die zu ändernde Zeile, zu welcher
+            das $\var{r}$-fache der Zeile $j$ hinzuaddiert wird.
+            Die Einträge auf der Hauptdiagonalen sind $1$.
+            Die restlichen Einträge der Matrix sind $0$.            
+            }
+	    \end{answer}    
+	    
+\end{question}
+	
+    
+%%--- Vertauschung zweier Zeilen ---
+%%----------------------------------
+\begin{question}
+		
+	\begin{variables}
+        \number{m}{2}
+ 
+        \randint{n}{2}{5} 
+        % $k2\in \{1,2\}$ \% Zufallsvariable für $m=2$-Fall \\
+        \randint{k2}{1}{2}
+
+		\function[calculate]{i}{k2}
+		\function[calculate]{j}{3-k2}
+		\matrix[calculate]{mm}{ 0 & 1 \\ 1 & 0 }
+
+		\end{variables}
+		
+            \type{input.matrix}
+            \field{rational}
+
+	    \text{Gegeben sei eine $(\var{m}\times \var{n})$-Matrix $A$ mit reellen Einträgen.
+        In einer Zeilenoperation sollen die
+        $\var{i}$-te und die $\var{j}$-te Zeile vertauscht werden.\\
+
+        Geben Sie die Elementarmatrix $B$ an, so dass die durch die Zeilenoperation
+        entstehende Matrix gleich $B\cdot A$ ist.\\
+        
+        Bestimmen Sie zunächst das Format (also die Anzahl an Zeilen und Spalten) von $B$ und bestimmen
+        Sie dann die Einträge wertmäßig.}
+	    
+	    \begin{answer}
+	    	\text{$B=$}
+			\solution{mm}
+            \explanation{Die gesuchte Matrix $B$ hat das Format $(m \times m)$,
+            wobei $m$ der Anzahl der Zeilen von $A$ entspricht.
+            %Jede Zeile von Matrix $B$ enthält einen Eintrag mit dem Wert $1$.
+            %Alle anderen Einträge sind jeweils $0$.
+            Alle Einträge der Matrix sind $0$, außer die folgenden Ausnahmen:
+            Falls die $k$-te Zeile $(1 \leq k \leq m)$ nicht zu den zu tauschenden
+            Zeilen gehört, dann ist der Eintrag $(k,k)$ mit 1 zu wählen.
+            Weiterhin sind die Einträge $(i,j)$ und $(j,i)$ mit 1 zu belegen,
+            wobei $i$ und $j$ die Indizes für die zu tauschenden Zeilen sind.            
+            }
+	    \end{answer}    
+ \end{question}
+
+\begin{question}
+		
+	\begin{variables}
+        \number{m}{3}
+
+        \randint{n}{2}{5} 
+            
+        % $k3,l3\in \{1,2,3\}$ \% Zufallsvariablen für $m=3$-Fall \\
+        \randint{k3}{1}{3}
+        \randint{l3}{1}{3}
+        \randadjustIf{k3,l3}{k3=l3}
+
+        \function[calculate]{i}{k3}
+		\function[calculate]{j}{l3}
+		\function[calculate]{i1}{(1-|sign(i-1)|)}
+		\function[calculate]{i2}{(1-|sign(i-2)|)}
+		\function[calculate]{i3}{(1-|sign(i-3)|)}
+		\function[calculate]{j1}{(1-|sign(j-1)|)}
+		\function[calculate]{j2}{(1-|sign(j-2)|)}
+		\function[calculate]{j3}{(1-|sign(j-3)|)}
+		\matrix[calculate]{mm}{1-i1-j1 & i1*j2+i2*j1 &i1*j3+i3*j1 \\ i2*j1+i1*j2 & 1-i2-j2 & i2*j3+i3*j2\\ i3*j1+i1*j3 & i3*j2+i2*j3 & 1-i3-j3}
+
+	\end{variables}
+		
+            \type{input.matrix}
+            \field{rational}
+		    
+%            \text{Bei der $(\var{m}\times \var{n})$-Matrix $A$ mit reellen Einträgen sollen
+%die $\var{i}$-te und die $\var{j}$-te Zeile vertauscht werden.\\
+%Geben Sie die Elementarmatrix $B$ an, so dass die entstandene Matrix gleich $B\cdot A$ ist.}
+\text{Gegeben sei eine $(\var{m}\times \var{n})$-Matrix $A$ mit reellen Einträgen.
+        In einer Zeilenoperation sollen die
+        $\var{i}$-te und die $\var{j}$-te Zeile vertauscht werden.\\
+
+        Geben Sie die Elementarmatrix $B$ an, so dass die durch die Zeilenoperation
+        entstehende Matrix gleich $B\cdot A$ ist.\\
+        
+        Bestimmen Sie zunächst das Format (also die Anzahl an Zeilen und Spalten) von $B$ und bestimmen
+        Sie dann die Einträge wertmäßig.}
+        
+        
+	    \begin{answer}
+	    	\text{$B=$}
+			\solution{mm}
+            \explanation{Die gesuchte Matrix $B$ hat das Format $(m \times m)$,
+            wobei $m$ der Anzahl der Zeilen von $A$ entspricht.
+            %Jede Zeile von Matrix $B$ enthält einen Eintrag mit dem Wert $1$.
+            %Alle anderen Einträge sind jeweils $0$.
+            Alle Einträge der Matrix sind $0$, außer die folgenden Ausnahmen:
+            Falls die $k$-te Zeile $(1 \leq k \leq m)$ nicht zu den zu tauschenden
+            Zeilen gehört, dann ist der Eintrag $(k,k)$ mit 1 zu wählen.
+            Weiterhin sind die Einträge $(i,j)$ und $(j,i)$ mit 1 zu belegen,
+            wobei $i$ und $j$ die Indizes für die zu tauschenden Zeilen sind.            
+            }
+	    \end{answer}    
+	    
+\end{question}
+
+\begin{question}
+		
+	\begin{variables}
+        \number{m}{4}
+        
+        \randint{n}{2}{5}
+        % $k4,l4\in \{1,2,3,4\}$ \% Zufallsvariablen für $m=4$-Fall \\
+        \randint{k4}{1}{4}
+        \randint{l4}{1}{4}
+        \randadjustIf{k4,l4}{k4=l4}
+
+		\function[calculate]{i}{k4}
+		\function[calculate]{j}{l4}
+		\function[calculate]{i1}{(1-|sign(i-1)|)}
+		\function[calculate]{i2}{(1-|sign(i-2)|)}
+		\function[calculate]{i3}{(1-|sign(i-3)|)}
+		\function[calculate]{i4}{(1-|sign(i-4)|)}
+		\function[calculate]{j1}{(1-|sign(j-1)|)}
+		\function[calculate]{j2}{(1-|sign(j-2)|)}
+		\function[calculate]{j3}{(1-|sign(j-3)|)}
+		\function[calculate]{j4}{(1-|sign(j-4)|)}
+		\matrix[calculate]{mm}{1-i1-j1 & i1*j2+i2*j1 &i1*j3+i3*j1 &i1*j4+i4*j1 \\ 
+        i2*j1+i1*j2 & 1-i2-j2 & i2*j3+i3*j2& i2*j4+i4*j2\\ i3*j1+i1*j3 & i3*j2+i2*j3 & 
+        1-i3-j3 & i3*j4+i4*j3\\ i4*j1+i1*j4 & i4*j2+i2*j4 & i4*j3+i3*j4 & 1-i4-j4}
+
+	\end{variables}
+		
+            \type{input.matrix}
+            \field{rational}
+		    
+%            \text{Bei der $(\var{m}\times \var{n})$-Matrix $A$ mit reellen Einträgen sollen
+%die $\var{i}$-te und die $\var{j}$-te Zeile vertauscht werden.\\
+%Geben Sie die Elementarmatrix $B$ an, so dass die entstandene Matrix gleich $B\cdot A$ ist.}
+\text{Gegeben sei eine $(\var{m}\times \var{n})$-Matrix $A$ mit reellen Einträgen.
+        In einer Zeilenoperation sollen die
+        $\var{i}$-te und die $\var{j}$-te Zeile vertauscht werden.\\
+
+        Geben Sie die Elementarmatrix $B$ an, so dass die durch die Zeilenoperation
+        entstehende Matrix gleich $B\cdot A$ ist.\\
+        
+        Bestimmen Sie zunächst das Format (also die Anzahl an Zeilen und Spalten) von $B$ und bestimmen
+        Sie dann die Einträge wertmäßig.}
+
+	    \begin{answer}
+	    	\text{$B=$}
+			\solution{mm}
+            \explanation{Die gesuchte Matrix $B$ hat das Format $(m \times m)$,
+            wobei $m$ der Anzahl der Zeilen von $A$ entspricht.
+            %Jede Zeile von Matrix $B$ enthält einen Eintrag mit dem Wert $1$.
+            %Alle anderen Einträge sind jeweils $0$.
+            Alle Einträge der Matrix sind $0$, außer die folgenden Ausnahmen:
+            Falls die $k$-te Zeile $(1 \leq k \leq m)$ nicht zu den zu tauschenden
+            Zeilen gehört, dann ist der Eintrag $(k,k)$ mit 1 zu wählen.
+            Weiterhin sind die Einträge $(i,j)$ und $(j,i)$ mit 1 zu belegen,
+            wobei $i$ und $j$ die Indizes für die zu tauschenden Zeilen sind.            
+            }
+	    \end{answer}    
+	    
+\end{question}
+
+%%-- Multiplikation einer Zeile mit Faktor ---
+%%--------------------------------------------
+\begin{question}
+		
+	\begin{variables}
+        \number{m}{2}
+        
+        \randint{n}{2}{5} 
+        \randint[Z]{r1}{-4}{5} 
+        \randint[Z]{r2}{-4}{5} 
+        %\randadjustIf{r1,r2}{r1=r2}
+        \function[calculate]{r}{r1 + r2*i}
+        
+        % $k2\in \{1,2\}$ \% Zufallsvariable für $m=2$-Fall \\
+        \randint{k2}{1}{2}
+
+        \function[calculate]{ii}{k2}
+		\function[calculate]{d1}{2-ii}
+		\function[calculate]{d2}{ii-1}
+		\matrix[calculate]{mm}{1+d1*(r-1) & 0 \\ 0 & 1+d2*(r-1) }
+
+	\end{variables}
+		
+        \type{input.matrix}
+        \field{complex} % rational
+        
+		%\text{Bei der $(\var{m}\times \var{n})$-Matrix $A$ mit reellen Einträgen soll
+%die $\var{i}$-te Zeile mit $\var{r}$ multipliziert werden.\\
+%Geben Sie die Elementarmatrix $B$ an, so dass die entstandene Matrix gleich $B\cdot A$ ist.}
+
+\text{Gegeben sei eine $(\var{m}\times \var{n})$-Matrix $A$ mit komplexen Einträgen.
+        Wie üblich ist $i \in \C$ die imaginäre Einheit.\\
+        
+        In einer Zeilenoperation soll
+        die $\var{ii}$-te Zeile mit dem Faktor $(\var{r})$ multipliziert werden.\\
+
+        Geben Sie die Elementarmatrix $B$ an, so dass die durch die Zeilenoperation
+        entstehende Matrix gleich $B\cdot A$ ist.\\
+        
+        Bestimmen Sie zunächst das Format (also die Anzahl an Zeilen und Spalten) von $B$ und bestimmen
+        Sie dann die Einträge wertmäßig.}
+        
+
+	    \begin{answer}
+	    	\text{$B=$}
+			\solution{mm}
+            \explanation{Die gesuchte Matrix $B$ hat das Format $(m \times m)$,
+            wobei $m$ der Anzahl der Zeilen von $A$ entspricht.
+            Der Eintrag $(k,k)$ ist mit $\var{r}$ zu wählen.
+            Hierbei ist $k$ die zu ändernde Zeile. 
+            Alle anderen Einträge auf der Hauptdiagonalen sind $1$.
+            Die restlichen Einträge der Matrix sind $0$.            
+            }
+	    \end{answer}    
+	    	    
+\end{question}
+
+
+
+\begin{question}
+		
+	\begin{variables}
+        \number{m}{3}
+        
+        \randint{n}{2}{5} 
+        \randint[Z]{r1}{-4}{5} 
+        \randint[Z]{r2}{-4}{5} 
+        %\randadjustIf{r1,r2}{r1=r2}
+        \function[calculate]{r}{r1 + r2*i}
+        
+        % $k3\in \{1,2,3\}$ \% Zufallsvariable für $m=3$-Fall \\
+        \randint{k3}{1}{3}
+
+        \function[calculate]{ii}{k3}
+		\function[calculate]{d1}{(1-|sign(ii-1)|)}
+		\function[calculate]{d2}{(1-|sign(ii-2)|)}
+		\function[calculate]{d3}{(1-|sign(ii-3)|)}
+		\matrix[calculate]{mm}{ 1+d1*(r-1) & 0 &0 \\ 0 & 1+d2*(r-1) &0\\ 0&0& 1+d3*(r-1) }
+
+		\end{variables}
+		
+        \type{input.matrix}
+        \field{complex} % rational
+
+%\text{Bei der $(\var{m}\times \var{n})$-Matrix $A$ mit reellen Einträgen soll
+%die $\var{i}$-te Zeile mit $\var{r}$ multipliziert werden.\\
+%Geben Sie die Elementarmatrix $B$ an, so dass die entstandene Matrix gleich $B\cdot A$ ist.}
+\text{Gegeben sei eine $(\var{m}\times \var{n})$-Matrix $A$ mit komplexen Einträgen.
+        Wie üblich ist $i \in \C$ die imaginäre Einheit.\\
+        
+        In einer Zeilenoperation soll
+        die $\var{ii}$-te Zeile mit dem Faktor $(\var{r})$ multipliziert werden.\\
+
+        Geben Sie die Elementarmatrix $B$ an, so dass die durch die Zeilenoperation
+        entstehende Matrix gleich $B\cdot A$ ist.\\
+        
+        Bestimmen Sie zunächst das Format (also die Anzahl an Zeilen und Spalten) von $B$ und bestimmen
+        Sie dann die Einträge wertmäßig.}
+        
+        
+	    \begin{answer}
+	    	\text{$B=$}
+			\solution{mm}
+            \explanation{Die gesuchte Matrix $B$ hat das Format $(m \times m)$,
+            wobei $m$ der Anzahl der Zeilen von $A$ entspricht.
+            Der Eintrag $(k,k)$ ist mit $\var{r}$ zu wählen.
+            Hierbei ist $k$ die zu ändernde Zeile.
+            Alle anderen Einträge auf der Hauptdiagonalen sind $1$.
+            Die restlichen Einträge der Matrix sind $0$.            
+            }
+	    \end{answer}    
+	    
+\end{question}
+
+
+
+
+\begin{question}
+		
+	\begin{variables}
+        \number{m}{4}
+        
+        \randint{n}{2}{5} 
+        \randint[Z]{r1}{-4}{5} 
+        \randint[Z]{r2}{-4}{5} 
+        %\randadjustIf{r1,r2}{r1=r2}        
+        \function[calculate]{r}{r1 + r2*i}
+        
+        % $k4\in \{1,2,3,4\}$ \% Zufallsvariable für $m=4$-Fall \\
+        \randint{k4}{1}{4}
+        
+		\function[calculate]{ii}{k4}
+		\function[calculate]{d1}{(1-|sign(ii-1)|)}
+		\function[calculate]{d2}{(1-|sign(ii-2)|)}
+		\function[calculate]{d3}{(1-|sign(ii-3)|)}
+		\function[calculate]{d4}{(1-|sign(ii-4)|)}
+		\matrix[calculate]{mm}{1+d1*(r-1) & 0 &0  &0\\ 0 & 1+d2*(r-1) &0 &0\\ 0&0& 1+d3*(r-1)  &0\\ 0&0&0& 1+d4*(r-1)}
+
+
+	\end{variables}
+		
+        \type{input.matrix}
+        \field{complex} % rational
+
+%\text{Bei der $(\var{m}\times \var{n})$-Matrix $A$ mit reellen Einträgen soll
+%die $\var{i}$-te Zeile mit $\var{r}$ multipliziert werden.\\
+%Geben Sie die Elementarmatrix $B$ an, so dass die entstandene Matrix gleich $B\cdot A$ ist.}
+
+\text{Gegeben sei eine $(\var{m}\times \var{n})$-Matrix $A$ mit komplexen Einträgen.
+        Wie üblich ist $i \in \C$ die imaginäre Einheit.\\
+        
+        In einer Zeilenoperation soll
+        die $\var{ii}$-te Zeile mit dem Faktor $(\var{r})$ multipliziert werden.\\
+
+        Geben Sie die Elementarmatrix $B$ an, so dass die durch die Zeilenoperation
+        entstehende Matrix gleich $B\cdot A$ ist.\\
+        
+        Bestimmen Sie zunächst das Format (also die Anzahl an Zeilen und Spalten) von $B$ und bestimmen
+        Sie dann die Einträge wertmäßig.}
+        
+        
+	    \begin{answer}
+	    	\text{$B=$}
+			\solution{mm}
+            \explanation{Die gesuchte Matrix $B$ hat das Format $(m \times m)$,
+            wobei $m$ der Anzahl der Zeilen von $A$ entspricht.
+            Der Eintrag $(k,k)$ ist mit $\var{r}$ zu wählen.
+            Hierbei ist $k$ die zu ändernde Zeile.
+            Alle anderen Einträge auf der Hauptdiagonalen sind $1$.
+            Die restlichen Einträge der Matrix sind $0$.            
+            }
+	    \end{answer}    
+	    
+\end{question}}
+
+
+%%-----ENGLISCHE VERSION -----
+%%----- Addition einer Zeile zu einer anderen ------
+\lang{en}{\begin{question}
+		
+		\begin{variables}
+
+            \number{m}{2}  %$m=2$-Fall
+
+            \randint{n}{2}{5} 
+            \randint[Z]{r1}{-4}{5} 
+            \randint[Z]{r2}{-4}{5} 
+            \function[calculate]{r}{r1/r2}
+
+            % $k2\in \{1,2\}$ \% Zufallsvariable für $m=2$-Fall \\
+            \randint{k2}{1}{2}
+
+            \function[calculate]{i}{k2}
+		    \function[calculate]{j}{3-k2}
+		    \matrix[calculate]{mm}{1 & (2-i)*r \\ (i-1)*r & 1}
+
+		\end{variables}
+		
+        \type{input.matrix}
+        \field{rational}
+		
+	    \text{Given is a $(\var{m}\times \var{n})$-matrix with real-valued entries.
+     A row operations should add $(\var{r})$-times the $\var{j}$th row to the $\var{i}$th row.\\
+
+     Give the elementary matrix $B$ such that the resulting matrix equals $B\cdot A$.\\
+
+     First of all determine the form (the number of rows and columns) of $B$ and then determine the value of the entries.}
+    
+	    
+	    \begin{answer}
+	    	\text{$B=$}
+			\solution{mm}
+            \explanation{
+            The matrix $B$ has the form $(m\times m$), at which $m$ equals the numbers of rows of $A$.
+            We choose $\var{r}$ for the entry $(i,j)$.
+            Here is $i$ the index of the row, which we multiply by $\var{r}$ and add it to the row $j$.
+            The entries on the main diagonal equal $1$ and the entries not on the main diagonal equal $0$.           
+            }
+	    \end{answer}    
+	    	    
+\end{question}
+
+\begin{question}
+		
+	\begin{variables}
+        \number{m}{3}
+
+        \randint{n}{2}{5} 
+        \randint[Z]{r1}{-4}{5} 
+        \randint[Z]{r2}{-4}{5} 
+        \function[calculate]{r}{r1/r2}
+
+        % $k3,l3\in \{1,2,3\}$ \% Zufallsvariablen für $m=3$-Fall \\
+        \randint{k3}{1}{3}
+        \randint{l3}{1}{3}
+        \randadjustIf{k3,l3}{k3=l3}
+
+		\function[calculate]{i}{k3}
+		\function[calculate]{j}{l3}
+		\function[calculate]{d12}{(1-|sign(i-1)|)*(1-|sign(j-2)|)}
+		\function[calculate]{d13}{(1-|sign(i-1)|)*(1-|sign(j-3)|)}
+		\function[calculate]{d21}{(1-|sign(i-2)|)*(1-|sign(j-1)|)}
+		\function[calculate]{d23}{(1-|sign(i-2)|)*(1-|sign(j-3)|)}
+		\function[calculate]{d31}{(1-|sign(i-3)|)*(1-|sign(j-1)|)}
+		\function[calculate]{d32}{(1-|sign(i-3)|)*(1-|sign(j-2)|)}
+		\matrix[calculate]{mm}{1 & d12*r & d13*r \\ d21*r & 1 & d23*r\\ d31*r & d32*r & 1}
+
+    \end{variables}
+		
+        \type{input.matrix}
+        \field{rational}
+		
+	    %\text{Bei der $(\var{m}\times \var{n})$-Matrix $A$ mit reellen Einträgen soll
+%das $(\var{r})$-fache der $\var{j}$-ten Zeile zur $\var{i}$-ten Zeile addiert werden.\\
+%Geben Sie die Elementarmatrix $B$ an, so dass die entstandene Matrix gleich $B\cdot A$ ist.}
+
+	    \text{Given is a $(\var{m}\times \var{n})$-matrix with real-valued entries.
+     A row operations should add $(\var{r})$-times the $\var{j}$th row to the $\var{i}$th row.\\
+
+     Give the elementary matrix $B$ such that the resulting matrix equals $B\cdot A$.\\
+
+     First of all determine the form (the number of rows and columns) of $B$ and then determine the value of the entries.}
+
+	    
+	    \begin{answer}
+	    	\text{$B=$}
+			\solution{mm}
+            \explanation{The matrix $B$ has the form $(m\times m$), at which $m$ equals the numbers of rows of $A$.
+            We choose $\var{r}$ for the entry $(i,j)$.
+            Here is $i$ the index of the row, which we multiply by $\var{r}$ and add it to the row $j$.
+            The entries on the main diagonal equal $1$ and the ones not on the main diagonal equal $0$.             
+            }
+	    \end{answer}    
+	    
+\end{question}
+	
+\begin{question}
+		
+	\begin{variables}        
+        \number{m}{4}
+
+
+        \randint{n}{2}{5} 
+        \randint[Z]{r1}{-4}{5} 
+        \randint[Z]{r2}{-4}{5} 
+        \function[calculate]{r}{r1/r2}
+
+        % $k4,l4\in \{1,2,3,4\}$ \% Zufallsvariablen für $m=4$-Fall \\
+        \randint{k4}{1}{4}
+        \randint{l4}{1}{4}
+        \randadjustIf{k4,l4}{k4=l4}
+
+        \function[calculate]{i}{k4}
+		\function[calculate]{j}{l4}
+		\function[calculate]{d12}{(1-|sign(i-1)|)*(1-|sign(j-2)|)}
+		\function[calculate]{d13}{(1-|sign(i-1)|)*(1-|sign(j-3)|)}
+		\function[calculate]{d14}{(1-|sign(i-1)|)*(1-|sign(j-4)|)}
+		\function[calculate]{d21}{(1-|sign(i-2)|)*(1-|sign(j-1)|)}
+		\function[calculate]{d23}{(1-|sign(i-2)|)*(1-|sign(j-3)|)}
+		\function[calculate]{d24}{(1-|sign(i-2)|)*(1-|sign(j-4)|)}
+		\function[calculate]{d31}{(1-|sign(i-3)|)*(1-|sign(j-1)|)}
+		\function[calculate]{d32}{(1-|sign(i-3)|)*(1-|sign(j-2)|)}
+		\function[calculate]{d34}{(1-|sign(i-3)|)*(1-|sign(j-4)|)}
+		\function[calculate]{d41}{(1-|sign(i-4)|)*(1-|sign(j-1)|)}
+		\function[calculate]{d42}{(1-|sign(i-4)|)*(1-|sign(j-2)|)}
+		\function[calculate]{d43}{(1-|sign(i-4)|)*(1-|sign(j-3)|)}
+		\matrix[calculate]{mm}{1 & d12*r & d13*r & d14*r \\ d21*r & 1 & d23*r & d24*r \\ d31*r & d32*r & 1 & d34*r \\ d41*r & d42*r & d43*r & 1}
+
+
+	\end{variables}
+		
+        \type{input.matrix}
+        \field{rational}
+		
+	    %\text{Bei der $(\var{m}\times \var{n})$-Matrix $A$ mit reellen Einträgen soll
+%das $(\var{r})$-fache der $\var{j}$-ten Zeile zur $\var{i}$-ten Zeile addiert werden.\\
+%Geben Sie die Elementarmatrix $B$ an, so dass die entstandene Matrix gleich $B\cdot A$ ist.}
+	    \text{Given is a $(\var{m}\times \var{n})$-matrix with real-valued entries.
+     A row operations should add $(\var{r})$-times the $\var{j}$th row to the $\var{i}$th row.\\
+
+     Give the elementary matrix $B$ such that the resulting matrix equals $B\cdot A$.\\
+
+     First of all determine the form (the number of rows and columns) of $B$ and then determine the value of the entries.}
+
+	    
+	    \begin{answer}
+	    	\text{$B=$}
+			\solution{mm}
+            \explanation{The matrix $B$ has the form $(m\times m$), at which $m$ equals the numbers of rows of $A$.
+            We choose $\var{r}$ for the entry $(i,j)$.
+            Here is $i$ the index of the row, which we multiply by $\var{r}$ and add it to the row $j$.
+            The entries on the main diagonal equal $1$ and the entries not on the main diagonal equal $0$.          
+            }
+	    \end{answer}    
+	    
+\end{question}
+	
+    
+%%--- Vertauschung zweier Zeilen ---
+%%----------------------------------
+\begin{question}
+		
+	\begin{variables}
+        \number{m}{2}
+ 
+        \randint{n}{2}{5} 
+        % $k2\in \{1,2\}$ \% Zufallsvariable für $m=2$-Fall \\
+        \randint{k2}{1}{2}
+
+		\function[calculate]{i}{k2}
+		\function[calculate]{j}{3-k2}
+		\matrix[calculate]{mm}{ 0 & 1 \\ 1 & 0 }
+
+		\end{variables}
+		
+            \type{input.matrix}
+            \field{rational}
+
+	    \text{Given is a $(\var{m}\times \var{n})$-matrix $A$ with real-valued entries.
+     A row operation should swap the $\var{i}$th and the $\var{j}$th row.\\
+
+    Give the elementary matrix $B$ such, that the resulting matrix equals $B\cdot A$.\\
+        
+    First of all determine the form (the numbers of rows and columns) and then determine the value of the entries.}
+	    
+	    \begin{answer}
+	    	\text{$B=$}
+			\solution{mm}
+            \explanation{
+            The matrix $B$ has the form $(m \times m)$, where $m$ is the number of rows of the matrix $A$.
+            All entries equal $0$, besides the following exceptions:
+            If the $k$th row $(1\leq k\leq m)$ is not one of those to be swapped, then the entry $(j,i)$ equals $1$.
+            Furthermore we set the entries $(i,j)$ and $(j,i)$ equal to $1$, with $i$ and $j$ being
+            the indices of the swapped rows.          
+            }
+	    \end{answer}    
+ \end{question}
+
+\begin{question}
+		
+	\begin{variables}
+        \number{m}{3}
+
+        \randint{n}{2}{5} 
+            
+        % $k3,l3\in \{1,2,3\}$ \% Zufallsvariablen für $m=3$-Fall \\
+        \randint{k3}{1}{3}
+        \randint{l3}{1}{3}
+        \randadjustIf{k3,l3}{k3=l3}
+
+        \function[calculate]{i}{k3}
+		\function[calculate]{j}{l3}
+		\function[calculate]{i1}{(1-|sign(i-1)|)}
+		\function[calculate]{i2}{(1-|sign(i-2)|)}
+		\function[calculate]{i3}{(1-|sign(i-3)|)}
+		\function[calculate]{j1}{(1-|sign(j-1)|)}
+		\function[calculate]{j2}{(1-|sign(j-2)|)}
+		\function[calculate]{j3}{(1-|sign(j-3)|)}
+		\matrix[calculate]{mm}{1-i1-j1 & i1*j2+i2*j1 &i1*j3+i3*j1 \\ i2*j1+i1*j2 & 1-i2-j2 & i2*j3+i3*j2\\ i3*j1+i1*j3 & i3*j2+i2*j3 & 1-i3-j3}
+
+	\end{variables}
+		
+            \type{input.matrix}
+            \field{rational}
+		    
+%            \text{Bei der $(\var{m}\times \var{n})$-Matrix $A$ mit reellen Einträgen sollen
+%die $\var{i}$-te und die $\var{j}$-te Zeile vertauscht werden.\\
+%Geben Sie die Elementarmatrix $B$ an, so dass die entstandene Matrix gleich $B\cdot A$ ist.}
+\text{Given is a $(\var{m}\times \var{n})$-matrix $A$ with real-valued entries.
+     A row operation should swap the $\var{i}$th and the $\var{j}$th row.\\
+
+    Give the elementary matrix $B$ such, that the resulting matrix equals $B\cdot A$.\\
+        
+    First of all determine the form (the numbers of rows and columns) and then determine the value of the entries.}
+        
+        
+	    \begin{answer}
+	    	\text{$B=$}
+			\solution{mm}
+            \explanation{
+            The matrix $B$ has the form $(m \times m)$, where $m$ is the number of rows of the matrix $A$.
+            All entries equal $0$, besides the following exceptions:
+            If the $k$th row $(1\leq k\leq m)$ is not one of those to be swapped, then the entry $(j,i)$ equals $1$.
+            Furthermore we set the entries $(i,j)$ and $(j,i)$ equal to $1$, with $i$ and $j$ being
+            the indices of the swapped rows. 
+            }
+	    \end{answer}    
+	    
+\end{question}
+
+\begin{question}
+		
+	\begin{variables}
+        \number{m}{4}
+        
+        \randint{n}{2}{5}
+        % $k4,l4\in \{1,2,3,4\}$ \% Zufallsvariablen für $m=4$-Fall \\
+        \randint{k4}{1}{4}
+        \randint{l4}{1}{4}
+        \randadjustIf{k4,l4}{k4=l4}
+
+		\function[calculate]{i}{k4}
+		\function[calculate]{j}{l4}
+		\function[calculate]{i1}{(1-|sign(i-1)|)}
+		\function[calculate]{i2}{(1-|sign(i-2)|)}
+		\function[calculate]{i3}{(1-|sign(i-3)|)}
+		\function[calculate]{i4}{(1-|sign(i-4)|)}
+		\function[calculate]{j1}{(1-|sign(j-1)|)}
+		\function[calculate]{j2}{(1-|sign(j-2)|)}
+		\function[calculate]{j3}{(1-|sign(j-3)|)}
+		\function[calculate]{j4}{(1-|sign(j-4)|)}
+		\matrix[calculate]{mm}{1-i1-j1 & i1*j2+i2*j1 &i1*j3+i3*j1 &i1*j4+i4*j1 \\ 
+        i2*j1+i1*j2 & 1-i2-j2 & i2*j3+i3*j2& i2*j4+i4*j2\\ i3*j1+i1*j3 & i3*j2+i2*j3 & 
+        1-i3-j3 & i3*j4+i4*j3\\ i4*j1+i1*j4 & i4*j2+i2*j4 & i4*j3+i3*j4 & 1-i4-j4}
+
+	\end{variables}
+		
+            \type{input.matrix}
+            \field{rational}
+		    
+%            \text{Bei der $(\var{m}\times \var{n})$-Matrix $A$ mit reellen Einträgen sollen
+%die $\var{i}$-te und die $\var{j}$-te Zeile vertauscht werden.\\
+%Geben Sie die Elementarmatrix $B$ an, so dass die entstandene Matrix gleich $B\cdot A$ ist.}
+\text{Given is a $(\var{m}\times \var{n})$-matrix $A$ with real-valued entries.
+     A row operation should swap the $\var{i}$th and the $\var{j}$th row.\\
+
+    Give the elementary matrix $B$ such, that the resulting matrix equals $B\cdot A$.\\
+        
+    First of all determine the form (the numbers of rows and columns) and then determine the value of the entries.}
+
+	    \begin{answer}
+	    	\text{$B=$}
+			\solution{mm}
+            \explanation{
+            The matrix $B$ has the form $(m \times m)$, where $m$ is the number of rows of the matrix $A$.
+            All entries equal $0$, besides the following exceptions:
+            If the $k$th row $(1\leq k\leq m)$ is not one of those to be swapped, then the entry $(j,i)$ equals $1$.
+            Furthermore we set the entries $(i,j)$ and $(j,i)$ equal to $1$, with $i$ and $j$ being
+            the indices of the swapped rows. 
+            }
+	    \end{answer}    
+	    
+\end{question}
+
+%%-- Multiplikation einer Zeile mit Faktor ---
+%%--------------------------------------------
+\begin{question}
+		
+	\begin{variables}
+        \number{m}{2}
+        
+        \randint{n}{2}{5} 
+        \randint[Z]{r1}{-4}{5} 
+        \randint[Z]{r2}{-4}{5} 
+        %\randadjustIf{r1,r2}{r1=r2}
+        \function[calculate]{r}{r1 + r2*i}
+        
+        % $k2\in \{1,2\}$ \% Zufallsvariable für $m=2$-Fall \\
+        \randint{k2}{1}{2}
+
+        \function[calculate]{ii}{k2}
+		\function[calculate]{d1}{2-ii}
+		\function[calculate]{d2}{ii-1}
+		\matrix[calculate]{mm}{1+d1*(r-1) & 0 \\ 0 & 1+d2*(r-1) }
+
+	\end{variables}
+		
+        \type{input.matrix}
+        \field{complex} % rational
+        
+		%\text{Bei der $(\var{m}\times \var{n})$-Matrix $A$ mit reellen Einträgen soll
+%die $\var{i}$-te Zeile mit $\var{r}$ multipliziert werden.\\
+%Geben Sie die Elementarmatrix $B$ an, so dass die entstandene Matrix gleich $B\cdot A$ ist.}
+
+\text{Given is a $(\var{m}\times \var{n})$-matrix $A$ with complex-valued entries. $i\in\C$ is the imaginary unit.\\
+A row operations should multiply the $\var{ii}$th row with the factor $(\var{r})$.\\
+
+Give the elementary matrix $B$ such that the resulting matrix equals $B\cdot A$.\\
+First of all determine the form (the number of rows and columns) of $B$ und then determine the values of its entries.}
+        
+
+	    \begin{answer}
+	    	\text{$B=$}
+			\solution{mm}
+            \explanation{
+            The matrix $B$ has the form $(m\times m)$, where $m$ equals the number of rows of the matrix $A$.
+            $k$ is the index of the row we want to multiply with the factor. We then set the entry $(k,k)$ equal to $\var{r}$.
+            The other entries on the main diagonal are $1$ and the entries not on the main diagonal equal $0$.         
+            }
+	    \end{answer}    
+	    	    
+\end{question}
+
+
+
+\begin{question}
+		
+	\begin{variables}
+        \number{m}{3}
+        
+        \randint{n}{2}{5} 
+        \randint[Z]{r1}{-4}{5} 
+        \randint[Z]{r2}{-4}{5} 
+        %\randadjustIf{r1,r2}{r1=r2}
+        \function[calculate]{r}{r1 + r2*i}
+        
+        % $k3\in \{1,2,3\}$ \% Zufallsvariable für $m=3$-Fall \\
+        \randint{k3}{1}{3}
+
+        \function[calculate]{ii}{k3}
+		\function[calculate]{d1}{(1-|sign(ii-1)|)}
+		\function[calculate]{d2}{(1-|sign(ii-2)|)}
+		\function[calculate]{d3}{(1-|sign(ii-3)|)}
+		\matrix[calculate]{mm}{ 1+d1*(r-1) & 0 &0 \\ 0 & 1+d2*(r-1) &0\\ 0&0& 1+d3*(r-1) }
+
+		\end{variables}
+		
+        \type{input.matrix}
+        \field{complex} % rational
+
+%\text{Bei der $(\var{m}\times \var{n})$-Matrix $A$ mit reellen Einträgen soll
+%die $\var{i}$-te Zeile mit $\var{r}$ multipliziert werden.\\
+%Geben Sie die Elementarmatrix $B$ an, so dass die entstandene Matrix gleich $B\cdot A$ ist.}
+\text{Given is a $(\var{m}\times \var{n})$-matrix $A$ with complex-valued entries. $i\in\C$ is the imaginary unit.\\
+A row operations should multiply the $\var{ii}$th row with the factor $(\var{r})$.\\
+
+Give the elementary matrix $B$ such that the resulting matrix equals $B\cdot A$.\\
+First of all determine the form (the number of rows and columns) of $B$ und then determine the values of its entries.}
+        
+        
+	    \begin{answer}
+	    	\text{$B=$}
+			\solution{mm}
+            \explanation{The matrix $B$ has the form $(m\times m)$, where $m$ equals the number of rows of the matrix $A$.
+            $k$ is the index of the row we want to multiply with the factor. We then set the entry $(k,k)$ equal to$\var{r}$.
+            The other entries on the main diagonal are $1$ and the entries not on the main diagonal equal $0$.            
+            }
+	    \end{answer}    
+	    
+\end{question}
+
+
+
+
+\begin{question}
+		
+	\begin{variables}
+        \number{m}{4}
+        
+        \randint{n}{2}{5} 
+        \randint[Z]{r1}{-4}{5} 
+        \randint[Z]{r2}{-4}{5} 
+        %\randadjustIf{r1,r2}{r1=r2}        
+        \function[calculate]{r}{r1 + r2*i}
+        
+        % $k4\in \{1,2,3,4\}$ \% Zufallsvariable für $m=4$-Fall \\
+        \randint{k4}{1}{4}
+        
+		\function[calculate]{ii}{k4}
+		\function[calculate]{d1}{(1-|sign(ii-1)|)}
+		\function[calculate]{d2}{(1-|sign(ii-2)|)}
+		\function[calculate]{d3}{(1-|sign(ii-3)|)}
+		\function[calculate]{d4}{(1-|sign(ii-4)|)}
+		\matrix[calculate]{mm}{1+d1*(r-1) & 0 &0  &0\\ 0 & 1+d2*(r-1) &0 &0\\ 0&0& 1+d3*(r-1)  &0\\ 0&0&0& 1+d4*(r-1)}
+
+
+	\end{variables}
+		
+        \type{input.matrix}
+        \field{complex} % rational
+
+%\text{Bei der $(\var{m}\times \var{n})$-Matrix $A$ mit reellen Einträgen soll
+%die $\var{i}$-te Zeile mit $\var{r}$ multipliziert werden.\\
+%Geben Sie die Elementarmatrix $B$ an, so dass die entstandene Matrix gleich $B\cdot A$ ist.}
+
+\text{Given is a $(\var{m}\times \var{n})$-matrix $A$ with complex-valued entries. $i\in\C$ is the imaginary unit.\\
+A row operations should multiply the $\var{ii}$th row with the factor $(\var{r})$.\\
+
+Give the elementary matrix $B$ such that the resulting matrix equals $B\cdot A$.\\
+First of all determine the form (the number of rows and columns) of $B$ und then determine the values of its entries.}
+        
+        
+	    \begin{answer}
+	    	\text{$B=$}
+			\solution{mm}
+            \explanation{The matrix $B$ has the form $(m\times m)$, where $m$ equals the number of rows of the matrix $A$.
+            $k$ is the index of the row we want to multiply with the factor. We then set the entry $(k,k)$ equal to$\var{r}$.
+            The other entries on the main diagonal are $1$ and the entries not on the main diagonal equal $0$.            
+            }
+	    \end{answer}    
+	    
+\end{question}}
+
+
+
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

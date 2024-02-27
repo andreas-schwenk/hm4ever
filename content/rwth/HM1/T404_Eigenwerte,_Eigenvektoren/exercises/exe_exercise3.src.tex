@@ -1,0 +1,381 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü03: Eigenwert, -vektoren}
+    \lang{en}{Ex03: Eigenvalues, eigenvectors}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+
+\title{\lang{de}{Ü03: Eigenwert, -vektoren}\lang{en}{Ex03: Eigenvalues, eigenvectors}}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/11623}{Ticket 11623}
+\end{block}
+
+%######################################################FRAGE_TEXT
+\lang{de}{ 
+Wir betrachten die Matrix
+\[ A=\begin{pmatrix}
+        -2  & 5  &  -3  \\   
+        1  &  -1  &  0  \\
+         3  & -6  & 3  \\
+     \end{pmatrix}\in M(3;\R). \]
+Bestimmen Sie alle Eigenwerte von $A$ und die zugehörigen Eigenvektoren.
+}
+
+\lang{en}{ 
+We consider the matrix
+\[ A=\begin{pmatrix}
+        -2  & 5  &  -3  \\   
+        1  &  -1  &  0  \\
+         3  & -6  & 3  \\
+     \end{pmatrix}\in M(3;\R). \]
+Determine all eigenvalues of $A$ and the corresponding eigenvectors.
+}
+
+%##################################################ANTWORTEN_TEXT
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+%++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Antwort  }\lang{en}{    Answer  }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{
+
+Die Eigenwerte von $A$ sind $0$, $\sqrt{3}$ und $-\sqrt{3}$.
+
+Die Eigenvektoren zu $0$ sind $r\cdot \left( \begin{smallmatrix}
+1 \\ 1 \\ 1
+\end{smallmatrix}\right)$ mit $r\in \R\setminus \{0\}$.
+
+Die Eigenvektoren zu $\sqrt{3}$ sind $r\cdot \left( \begin{smallmatrix}
+-1-\frac{1}{3}\sqrt{3} \\ -\frac{1}{3}\sqrt{3} \\ 1
+\end{smallmatrix}\right)$ mit $r\in \R\setminus \{0\}$.
+
+Die Eigenvektoren zu $-\sqrt{3}$ sind $r\cdot \left( \begin{smallmatrix}
+-1+\frac{1}{3}\sqrt{3} \\ +\frac{1}{3}\sqrt{3} \\ 1
+\end{smallmatrix}\right)$ mit $r\in \R\setminus \{0\}$. 
+  }
+
+\lang{en}{
+
+The eigenvalues of $A$ are $0$, $\sqrt{3}$ and $-\sqrt{3}$.
+
+The eigenvectors for $0$ are $r\cdot \left( \begin{smallmatrix}
+1 \\ 1 \\ 1
+\end{smallmatrix}\right)$ with $r\in \R\setminus \{0\}$.
+
+The eigenvectors for $\sqrt{3}$ are $r\cdot \left( \begin{smallmatrix}
+-1-\frac{1}{3}\sqrt{3} \\ -\frac{1}{3}\sqrt{3} \\ 1
+\end{smallmatrix}\right)$ with $r\in \R\setminus \{0\}$.
+
+The eigenvectors for $-\sqrt{3}$ are $r\cdot \left( \begin{smallmatrix}
+-1+\frac{1}{3}\sqrt{3} \\ +\frac{1}{3}\sqrt{3} \\ 1
+\end{smallmatrix}\right)$ with $r\in \R\setminus \{0\}$. 
+  }
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+  
+%++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung zu Eigenwerte  }\lang{en}{    Solution for the eigenvalues  }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   Da die Eigenwerte genau die Nullstellen des charakteristischen Polynoms von $A$ sind, müssen wir zunächst dieses bestimmen:
+\begin{eqnarray*}
+p_A(t)&=&\det(A-t\cdot E_3)=
+\det \Big( \begin{pmatrix}
+-2-t & 5 & -3\\
+1 & -1-t & 0 \\
+3 & -6 & 3-t \\
+\end{pmatrix} \Big) \\
+& =&(-2-t)(-1-t)(3-t)+0+18-(-9)(-1-t)-0-5(3-t)\\
+& =&(t^2+3t+2)(3-t)+18-9-9t-15+5t\\
+& =&3t^2+9t+6-t^3-3t^2-2t-6-4t\\
+& =&-t^3+3t = -t(t^2-3)\\ &=& -t(t-\sqrt{3})(t+\sqrt{3})
+\end{eqnarray*}
+
+Die Nullstellen von $p_A(t)$ und damit die Eigenwerte von $A$ sind also
+\[ \lambda_1=0, \quad \lambda_2=\sqrt{3}, \quad \lambda_3=-\sqrt{3}.  \]    }
+
+\lang{en}{ Since the eigenvalues are exactly the zeros of the characteristic polynomial of $A$,
+we need to determine that:
+\begin{eqnarray*}
+p_A(t)&=&\det(A-t\cdot I_3)=
+\det \Big( \begin{pmatrix}
+-2-t & 5 & -3\\
+1 & -1-t & 0 \\
+3 & -6 & 3-t \\
+\end{pmatrix} \Big) \\
+& =&(-2-t)(-1-t)(3-t)+0+18-(-9)(-1-t)-0-5(3-t)\\
+& =&(t^2+3t+2)(3-t)+18-9-9t-15+5t\\
+& =&3t^2+9t+6-t^3-3t^2-2t-6-4t\\
+& =&-t^3+3t = -t(t^2-3)\\ &=& -t(t-\sqrt{3})(t+\sqrt{3})
+\end{eqnarray*}
+
+The zeros of $p_A(t)$ and therefore the eigenvalues of $A$ are
+\[ \lambda_1=0, \quad \lambda_2=\sqrt{3}, \quad \lambda_3=-\sqrt{3}.  \]    }
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+  
+  
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung zu Eigenvektoren    }\lang{en}{    Solution for the eigenvectors    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   Die Eigenvektoren zu einem Eigenwert $\lambda$ sind ja genau die nicht-trivialen Lösungen des Gleichungssystems
+\[  (A-\lambda E_3)\cdot x=0.\]
+
+Für $\lambda_1=0$ berechnet man (wobei wir die rechte Seite, welche ja immer gleich $0$ ist, weglassen)
+
+\begin{eqnarray*}
+& &
+\begin{pmatrix}
+-2 & 5 & -3\\
+1 & -1 & 0 \\
+3 & -6 & 3 
+\end{pmatrix}  \begin{matrix} \updownarrow \\ \phantom{1} \\ \end{matrix} \\
+
+&\rightsquigarrow&
+\begin{pmatrix}
+1 & -1 & 0 \\
+-2 & 5 & -3\\
+3 & -6 & 3 
+\end{pmatrix}  \begin{matrix} \phantom{1}\\  /  +2\cdot \text{(I)}\\  /  -1\cdot \text{(I)} \end{matrix} \\
+&\rightsquigarrow&
+\begin{pmatrix}
+1 & -1 & 0 \\
+0 & 3 & -3\\
+0 & -1 & 1 
+\end{pmatrix} \begin{matrix} \phantom{1}\\  \phantom{1} \\  /  +\frac{1}{3}\cdot \text{(I)} \end{matrix} \\
+&\rightsquigarrow&
+\begin{pmatrix}
+1 & -1 & 0 \\
+0 & 3 & -3\\
+0 & 0 & 0
+\end{pmatrix}\begin{matrix}  \phantom{1} \\ / \cdot \frac{1}{3} \\  \phantom{1}  \end{matrix} \\
+&\rightsquigarrow&
+\begin{pmatrix}
+1 & -1 & 0 \\
+0 &  1 & -1\\
+0 & 0 & 0
+\end{pmatrix} \begin{matrix}/  +1\cdot \text{(II)}\\  \phantom{1} \\  \phantom{1} \end{matrix} \\
+&\rightsquigarrow&
+\begin{pmatrix}
+1 & 0 & -1 \\
+0 & 1 & -1\\
+0 & 0 & 0
+\end{pmatrix}
+\end{eqnarray*}
+Die Eigenvektoren zum Eigenwert $0$ sind also die
+Vektoren
+\[  r\cdot  \begin{pmatrix}
+1\\ 1 \\ 1
+\end{pmatrix}\quad \text{mit }r\in \R\setminus { \{0\} }. \]
+    }
+
+
+\lang{en}{   The eigenvectors for an eigenvalue $\lambda$ are the nontrivial solutions of the linear system
+\[  (A-\lambda I_3)\cdot x=0.\]
+
+For $\lambda_1=0$ we calculate (we omit the right side, since it is always equal to $0$)
+
+\begin{eqnarray*}
+& &
+\begin{pmatrix}
+-2 & 5 & -3\\
+1 & -1 & 0 \\
+3 & -6 & 3 
+\end{pmatrix}  \begin{matrix} \updownarrow \\ \phantom{1} \\ \end{matrix} \\
+
+&\rightsquigarrow&
+\begin{pmatrix}
+1 & -1 & 0 \\
+-2 & 5 & -3\\
+3 & -6 & 3 
+\end{pmatrix}  \begin{matrix} \phantom{1}\\  /  +2\cdot \text{(I)}\\  /  -1\cdot \text{(I)} \end{matrix} \\
+&\rightsquigarrow&
+\begin{pmatrix}
+1 & -1 & 0 \\
+0 & 3 & -3\\
+0 & -1 & 1 
+\end{pmatrix} \begin{matrix} \phantom{1}\\  \phantom{1} \\  /  +\frac{1}{3}\cdot \text{(I)} \end{matrix} \\
+&\rightsquigarrow&
+\begin{pmatrix}
+1 & -1 & 0 \\
+0 & 3 & -3\\
+0 & 0 & 0
+\end{pmatrix}\begin{matrix}  \phantom{1} \\ / \cdot \frac{1}{3} \\  \phantom{1}  \end{matrix} \\
+&\rightsquigarrow&
+\begin{pmatrix}
+1 & -1 & 0 \\
+0 &  1 & -1\\
+0 & 0 & 0
+\end{pmatrix} \begin{matrix}/  +1\cdot \text{(II)}\\  \phantom{1} \\  \phantom{1} \end{matrix} \\
+&\rightsquigarrow&
+\begin{pmatrix}
+1 & 0 & -1 \\
+0 & 1 & -1\\
+0 & 0 & 0
+\end{pmatrix}
+\end{eqnarray*}
+The eigenvectors for the eigenvalue $0$ are also the vectors
+\[  r\cdot  \begin{pmatrix}
+1\\ 1 \\ 1
+\end{pmatrix}\quad \text{with }r\in \R\setminus { \{0\} }. \]
+    }
+
+
+    
+    \step 
+    \lang{de}{ 
+
+Für den Eigenwert $\lambda_2=\sqrt{3}$ berechnet man
+\begin{eqnarray*}
+& &
+\begin{pmatrix}
+-2-\sqrt{3} & 5 & -3 \\
+1 & -1-\sqrt{3} & 0 \\
+3 & -6 & 3- \sqrt{3} 
+\end{pmatrix}  \begin{matrix} \updownarrow \\ \phantom{1} \end{matrix} \\
+&\rightsquigarrow &
+\begin{pmatrix}
+1 & -1-\sqrt{3} & 0 \\
+-2-\sqrt{3} & 5 & -3 \\
+3 & -6 & 3- \sqrt{3} 
+\end{pmatrix}  \begin{matrix} \phantom{1}\\  /  +(2+\sqrt{3})\cdot \text{(I)}\\  /  -3\cdot \text{(I)} \end{matrix} \\
+&\rightsquigarrow & 
+\begin{pmatrix}
+1 & -1-\sqrt{3} & 0 \\
+0 & -3\sqrt{3} & -3 \\
+0 & -3+3\sqrt{3} & 3-\sqrt{3} 
+\end{pmatrix}  \begin{matrix} \phantom{1} \\  \cdot (-\frac{1}{9}\sqrt{3}) \\   \phantom{1} \end{matrix} \\
+&\rightsquigarrow & 
+\begin{pmatrix}
+1 & -1-\sqrt{3} & 0 \\
+0 & 1 &  \frac{1}{3}\sqrt{3} \\
+0 & -3+3\sqrt{3} & 3-\sqrt{3} 
+\end{pmatrix}  \begin{matrix} \phantom{1}\\   \phantom{1}\\  /  +(3-3\sqrt{3})\cdot \text{(II)} \end{matrix} \\
+&\rightsquigarrow &
+\begin{pmatrix}
+1 & -1-\sqrt{3} & 0 \\
+0 & 1 &  \frac{1}{3}\sqrt{3} \\
+0 & 0 & 0
+\end{pmatrix} \begin{matrix}/  +(1+\sqrt{3})\cdot \text{(II)} \\   \phantom{1}\\   \phantom{1} \end{matrix} \\
+&\rightsquigarrow &
+\begin{pmatrix}
+1 & 0 &  \frac{1}{3}\sqrt{3}+1 \\
+0 & 1 &  \frac{1}{3}\sqrt{3} \\
+0 & 0 & 0
+\end{pmatrix}
+\end{eqnarray*} }
+
+
+\lang{en}{ 
+
+For the eigenvalue $\lambda_2=\sqrt{3}$ we calculate
+\begin{eqnarray*}
+& &
+\begin{pmatrix}
+-2-\sqrt{3} & 5 & -3 \\
+1 & -1-\sqrt{3} & 0 \\
+3 & -6 & 3- \sqrt{3} 
+\end{pmatrix}  \begin{matrix} \updownarrow \\ \phantom{1} \end{matrix} \\
+&\rightsquigarrow &
+\begin{pmatrix}
+1 & -1-\sqrt{3} & 0 \\
+-2-\sqrt{3} & 5 & -3 \\
+3 & -6 & 3- \sqrt{3} 
+\end{pmatrix}  \begin{matrix} \phantom{1}\\  /  +(2+\sqrt{3})\cdot \text{(I)}\\  /  -3\cdot \text{(I)} \end{matrix} \\
+&\rightsquigarrow & 
+\begin{pmatrix}
+1 & -1-\sqrt{3} & 0 \\
+0 & -3\sqrt{3} & -3 \\
+0 & -3+3\sqrt{3} & 3-\sqrt{3} 
+\end{pmatrix}  \begin{matrix} \phantom{1} \\  \cdot (-\frac{1}{9}\sqrt{3}) \\   \phantom{1} \end{matrix} \\
+&\rightsquigarrow & 
+\begin{pmatrix}
+1 & -1-\sqrt{3} & 0 \\
+0 & 1 &  \frac{1}{3}\sqrt{3} \\
+0 & -3+3\sqrt{3} & 3-\sqrt{3} 
+\end{pmatrix}  \begin{matrix} \phantom{1}\\   \phantom{1}\\  /  +(3-3\sqrt{3})\cdot \text{(II)} \end{matrix} \\
+&\rightsquigarrow &
+\begin{pmatrix}
+1 & -1-\sqrt{3} & 0 \\
+0 & 1 &  \frac{1}{3}\sqrt{3} \\
+0 & 0 & 0
+\end{pmatrix} \begin{matrix}/  +(1+\sqrt{3})\cdot \text{(II)} \\   \phantom{1}\\   \phantom{1} \end{matrix} \\
+&\rightsquigarrow &
+\begin{pmatrix}
+1 & 0 &  \frac{1}{3}\sqrt{3}+1 \\
+0 & 1 &  \frac{1}{3}\sqrt{3} \\
+0 & 0 & 0
+\end{pmatrix}
+\end{eqnarray*} }
+
+
+\step 
+    \lang{de}{
+    
+Die Eigenvektoren zum Eigenwert $\sqrt{3}$ sind also die
+Vektoren
+\[  r\cdot  \begin{pmatrix}
+-1-\frac{1}{3}\sqrt{3} \\ -\frac{1}{3}\sqrt{3} \\ 1
+\end{pmatrix}\quad \text{mit }r\in \R\setminus { \{0\} }. \]
+
+
+Ganz genauso berechnet man die Eigenvektoren zum Eigenwert $-\sqrt{3}$. Man muss nur an
+jeder Stelle $\sqrt{3}$ durch $-\sqrt{3}$ ersetzen. Also sind die Eigenvektoren zu $-\sqrt{3}$ die
+Vektoren
+\[  r\cdot  \begin{pmatrix}
+-1+\frac{1}{3}\sqrt{3} \\ +\frac{1}{3}\sqrt{3} \\ 1
+\end{pmatrix}\quad \text{mit }r\in \R\setminus { \{0\} }. \]
+    }
+
+\lang{en}{
+    
+The eigenvectors for the eigenvalue $\sqrt{3}$ are the vectors
+\[  r\cdot  \begin{pmatrix}
+-1-\frac{1}{3}\sqrt{3} \\ -\frac{1}{3}\sqrt{3} \\ 1
+\end{pmatrix}\quad \text{with }r\in \R\setminus { \{0\} }. \]
+
+
+Similarly we calculate the eigenvectors for the eigenvalue $-\sqrt{3}$. 
+We only need to subsitute for each spot $\sqrt{3}$ through $-\sqrt{3}$. So the eigenvectors for $-\sqrt{3}$ 
+are the vectors
+\[  r\cdot  \begin{pmatrix}
+-1+\frac{1}{3}\sqrt{3} \\ +\frac{1}{3}\sqrt{3} \\ 1
+\end{pmatrix}\quad \text{mit }r\in \R\setminus { \{0\} }. \]
+    }
+
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+%#############################################################ENDE
+\end{tabs*}
+\end{content}

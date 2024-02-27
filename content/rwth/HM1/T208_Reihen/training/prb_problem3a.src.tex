@@ -1,0 +1,119 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A03: Textaufgabe}
+    \lang{en}{input numbers}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/20150}{Ticket 20150}
+\end{block}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/18866}{Ticket 18866}
+\end{block}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A03: Textaufgabe}}
+\lang{en}{\title{Problem 3}}
+
+\begin{problem}
+
+\randomquestionpool{1}{2}
+
+  \begin{question}
+		\lang{de}{
+			\text{In einem Hörsaal befinden sich $\var{n}$ Stühle in der ersten Reihe. In jeder weiteren Reihe verringert sich die Anzahl
+            um $\var{b}$ Stühle.\\\\
+            a) Wie viele Stühle befinden sich in der $9.$ Reihe?\\\\
+            b) Wie viele Stühle befinden sich in den ersten $9$ Reihen?\\\\
+            Es befinden sich \ansref Stühle in der $9.$ Reihe. In den ersten $9$ Reihen stehen insgesamt \ansref Stühle.}}
+		
+		\explanation{Beschreiben Sie das Problem in a) mit Hilfe einer Folge und das Problem von b) mit Hilfe einer Reihe.}
+		\type{input.number}
+		\field{rational}
+		
+
+    \precision[false]{3}
+    \displayprecision{3}
+    \correctorprecision{3}
+		
+		\begin{variables}
+			\randint{n}{78}{98}
+            \randint{b}{3}{5}
+			\function[calculate]{loes}{n-8*b}
+            \function[calculate]{loes1}{(2*n-8*b)*4.5}
+		\end{variables}
+		
+		\begin{answer}
+			\solution{loes}
+		\end{answer}
+		
+        \begin{answer}
+			\solution{loes1}
+		\end{answer}
+		
+        
+	\end{question}
+
+	\begin{question}
+		\lang{de}{
+			\text{Ein Turm wird gebaut, indem Würfel übereinander gestapelt werden. Dabei hat jeder weitere Würfel die halbe 
+            Kantenlänge des darunter liegenden Würfels. Der erste Würfel hat eine Kantenlänge von $\var{a}$ Metern, der zweite Würfel von
+            $\var{b}$ Metern und so weiter.\\\\
+            a) Welche Höhe hat der Turm, der aus $\var{c}$ Würfeln besteht?\\\\
+            b) Welche Höhe würde der Turm haben, wenn unendlich viele Würfel übereinandergesetzt würden?\\\\
+            
+            Der Turm aus $\var{c}$ Würfeln hat eine Höhe von \ansref Metern. Die Höhe des Turms, der aus unendlich vielen Würfeln 
+            zusammengebaut wird, hätte eine Höhe von \ansref Metern.}}
+		
+		\explanation{Überlegen Sie sich den Zusammenhang mit der geometrischen Reihe. Verwenden Sie insbesondere auch die geometrische Summenformel.}
+		\type{input.number}
+		\field{rational}
+		
+
+    \precision[false]{3}
+    \displayprecision{3}
+    \correctorprecision{3}
+		
+		\begin{variables}
+			\drawFromSet{a}{2,3,4,5,6,7,8}
+            \drawFromSet{c}{8,9,10,11,12,13,14}
+			\function[calculate]{b}{0.5*a}
+			\function[calculate]{loes1}{2*a*(1-(1/2)^c)}
+            \function[calculate]{loes2}{2*a}
+		\end{variables}
+		
+		\begin{answer}
+			\solution{loes1}
+		\end{answer}
+        
+        	
+		\begin{answer}
+			\solution{loes2}
+		\end{answer}
+		
+	\end{question}
+	
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+
+\end{content}

@@ -1,0 +1,226 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A03: Matrixmultiplikation}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21343}{Ticket 21343}
+\end{block}
+\begin{block}[annotation]
+Copy of \href{http://team.mumie.net/issues/9670}{Ticket 9670}: content/rwth/HM1/T112_Rechnen_mit_Matrizen/training/prb_problem3.src.tex
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+\lang{de}{
+	\title{A03: Matrixmultiplikation}
+}
+
+
+
+
+\begin{problem}
+
+    
+\begin{question}
+
+	\begin{variables}
+		\randint[Z]{a}{-9}{9}
+		\randint[Z]{b}{-9}{9}
+		\randint[Z]{c}{-9}{9}
+		\randint[Z]{d}{-9}{9}
+		
+		\randint[Z]{ee}{-9}{9}
+		\randint[Z]{f}{-9}{9}
+		\randint[Z]{g}{-9}{9}
+		\randint[Z]{h}{-9}{9}
+		
+			\matrix[calculate]{aa}{
+  			a & b \\ 
+  			c & d
+      	}
+      	
+      	\matrix[calculate]{bb}{
+  			ee & f \\ 
+  			g & h
+      	}
+		
+		\matrix[calculate]{m}{
+		a*ee+b*g & a*f+b*h \\
+		c*ee+d*g & c*f+d*h
+      } 
+	\end{variables}
+
+	\type{input.matrix}
+    \field{rational}
+    
+    \lang{de}{
+	    \text{
+	    Bestimmen Sie die folgende Matrixmultiplikation:\\
+$\var{aa}\cdot\var{bb}$}}
+    
+    \begin{answer}
+	    \solution{m}
+      \format{2}{2}
+      \explanation{
+            Die Matrixmultiplikation zweier quadratischer Matrizen,
+            also Matrizen mit gleicher Zeilen- und Spaltenanzahl ist 
+            immer erlaubt. Die Ergebnismatrix hat dann ebensoviele
+            Zeilen und Spalten.
+            Man bestimmt die Ergebnismatrix, indem man für den
+            $(i,j)$-ten Eintrag das Skalarprodukt aus der
+            $i$-ten Zeile der ersten Matrix und der $j$-ten
+            Spalte der zweiten Matrix bestimmt.
+      }
+	\end{answer}
+    
+\end{question}
+
+\begin{question}
+
+	\begin{variables}
+		\randint[Z]{x11}{-5}{5}
+		\randint[Z]{x12}{-5}{5}
+		\randint[Z]{x13}{-5}{5}
+		\randint[Z]{x21}{-5}{5}
+		\randint[Z]{x22}{-5}{5}
+		\randint[Z]{x23}{-5}{5}
+		\randint[Z]{x31}{-5}{5}
+		\randint[Z]{x32}{-5}{5}
+		\randint[Z]{x33}{-5}{5}
+	
+		\randint[Z]{y11}{-5}{5}
+		\randint[Z]{y12}{-5}{5}
+		\randint[Z]{y13}{-5}{5}
+		\randint[Z]{y21}{-5}{5}
+		\randint[Z]{y22}{-5}{5}
+		\randint[Z]{y23}{-5}{5}
+		\randint[Z]{y31}{-5}{5}
+		\randint[Z]{y32}{-5}{5}
+		\randint[Z]{y33}{-5}{5}
+		
+			\matrix[calculate]{a}{
+  			x11 & x12 & x13 \\ 
+  			x21 & x22 & x23 \\
+  			x31 & x32 & x33
+      	}
+      		\matrix[calculate]{b}{
+  			y11 & y12 & y13 \\ 
+  			y21 & y22 & y23 \\
+  			y31 & y32 & y33
+      	}
+      		\matrix[calculate]{c}{
+  			x11*y11 +x12*y21 + x13*y31 & x11*y12 +x12*y22+x13*y32 & x11*y13 +x12*y23+x13*y33\\ 
+  x21*y11 +x22*y21 + x23*y31 & x21*y12 +x22*y22 + x23*y32 & x21*y13 +x22*y23 + x23*y33\\
+  x31*y11 +x32*y21 + x33*y31 & x31*y12 +x32*y22 + x33*y32 & x31*y13 +x32*y23 + x33*y33
+      	}
+	\end{variables}
+
+	\type{input.matrix}
+    \field{rational}
+    
+    \lang{de}{
+	    \text{Bestimmen Sie die folgende Matrixmultiplikation:\\
+$\var{a}\cdot\var{b}$}}
+    
+    \begin{answer}
+	    \solution{c}
+      \format{3}{3}
+      \explanation{
+            Die Matrixmultiplikation zweier quadratischer Matrizen,
+            also Matrizen mit gleicher Zeilen- und Spaltenanzahl ist 
+            immer erlaubt. Die Ergebnismatrix hat dann ebensoviele
+            Zeilen und Spalten.
+            Man bestimmt die Ergebnismatrix, indem man für den
+            $(i,j)$-ten Eintrag das Skalarprodukt aus der
+            $i$-ten Zeile der ersten Matrix und der $j$-ten
+            Spalte der zweiten Matrix bestimmt.
+      }
+	\end{answer}
+    
+\end{question}
+
+\begin{question}
+
+	\begin{variables}
+		\randint[Z]{x11}{-5}{5}
+		\randint[Z]{x12}{-5}{5}
+		\randint[Z]{x21}{-5}{5}
+		\randint[Z]{x22}{-5}{5}
+		\randint[Z]{x31}{-5}{5}
+		\randint[Z]{x32}{-5}{5}
+	
+		\randint[Z]{y11}{-5}{5}
+		\randint[Z]{y12}{-5}{5}
+		\randint[Z]{y13}{-5}{5}
+		\randint[Z]{y21}{-5}{5}
+		\randint[Z]{y22}{-5}{5}
+		\randint[Z]{y23}{-5}{5}
+		
+			\matrix[calculate]{a}{
+  			x11 & x12  \\ 
+  			x21 & x22  \\
+  			x31 & x32 
+      	}
+      		\matrix[calculate]{b}{
+  			y11 & y12 & y13 \\ 
+  			y21 & y22 & y23
+      	}
+      		\matrix[calculate]{c}{
+  			x11*y11 +x12*y21  & x11*y12 +x12*y22 & x11*y13 +x12*y23\\ 
+  x21*y11 +x22*y21 & x21*y12 +x22*y22 & x21*y13 +x22*y23\\
+  x31*y11 +x32*y21 & x31*y12 +x32*y22 & x31*y13 +x32*y23	}
+	\end{variables}
+
+	\type{input.matrix}
+    \field{rational}
+    
+    \lang{de}{
+	    \text{Bestimmen Sie die folgende Matrixmultiplikation:\\
+$\var{a}\cdot\var{b}$}}
+    
+    \begin{answer}
+	    \solution{c}
+        \explanation{
+            Die Matrixmultiplikation ist dann erlaubt,
+            wenn die Anzahl der Spalten der ersten Matrix
+            mit der Anzahl der Zeilen der zweiten Matrix
+            übereinstimmt. Dies ist hier gegeben.
+            Nun muss das Format bestimmt werden:
+            Die Anzahl der Zeilen der Ergebnismatrix
+            entspricht der Anzahl der Zeilen der ersten Matrix.
+            Die Anzahl der Spalten der Ergebnismatrix
+            entspricht der Anzahl der Zeilen der zweiten Matrix.
+            Man bestimmt die Komponenten der Ergebnismatrix,
+            indem man für den $(i,j)$-ten Eintrag das Skalarprodukt 
+            aus der $i$-ten Zeile der ersten Matrix und der $j$-ten
+            Spalte der zweiten Matrix bestimmt.
+        }
+	\end{answer}
+    
+\end{question}
+
+\end{problem}
+
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

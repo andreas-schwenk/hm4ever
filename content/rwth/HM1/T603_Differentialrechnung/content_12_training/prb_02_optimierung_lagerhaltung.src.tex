@@ -1,0 +1,100 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{A02: Economic Order Quantity }
+    \lang{de}{A02: Andler'sche Losgrößenformel}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A02: Andler'sche Losgrößenformel}}
+\lang{en}{\title{A02: Economic Order Quantity}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24035}{Ticket 24035}
+\end{block}
+
+
+\usepackage{mumie.genericproblem}
+
+
+     \begin{problem}
+     \begin{variables}
+        \drawFromSet{a}{1,2,3,4,5}
+        \drawFromSet{c}{100,400,900}
+        \function[calculate]{s}{c*a*5}
+        \function{b}{a}
+        \function{sol}{(2000*s/b)^0.5}
+     \end{variables}
+          \begin{question}
+          \type{input.number}
+          \lang{de}{\text{In der Massenproduktion eines Produktes soll die Menge x
+          des Gutes festgelegt werden, die zwischen zwei Umrüstungen der Anlage 
+          gefertigt wird. \\
+          
+          Bei jeder Umrüstung entstehen Kosten, die von der Menge des Gutes 
+          unabhängig sind, sogenannte Rüstkosten von $R=1000$\euro.
+          Für Lagerung und entgangene Kapitalerträge entstehen Bestandskosten
+          von $b=\var{b}$\euro pro Mengen- und Zeiteinheit. (Es wird mit einem mittleren
+          Bestand von $\frac{b}{2}$ gerechnet, da das Lager zwischen voll und leer schwankt.) Pro Zeiteinheit werden
+          $s=\var{s}$ Teile des Gutes gefertigt und abgesetzt. 
+          
+          Als Modell für die Kostenfunktion wählen wir
+          $
+          K(x) = \frac{R}{x} s + \frac{b}{2}x.
+          $
+          
+          Berechnen Sie die Menge x des Gutes, so dass die Kosten minimiert werden:\\
+          $x=$\ansref
+          }}
+           \lang{en}{\text{In the context of the mass production of a product,
+           the quantity x of the good that is produced between two retoolings of the plant
+            needs to be determined. \\
+          
+          Each retooling incurs costs that are independent of the quantity of the good:
+          so-called setup costs of $R=1000$\euro.
+          Storage and lost capital gains incur inventory costs
+          of $b=\var{b}$\euro per unit of quantity and time. (This is calculated assuming an average
+          stock of $\frac{b}{2}$, as the stock fluctuates between full and empty). Per unit of time,
+          $s=\var{s}$ units of the good are produced and sold. 
+          
+          As a model for the cost function, we choose
+          $
+          K(x) = \frac{R}{x} s + \frac{b}{2}x.
+          $
+          
+          Calculate the quantity x of the good that minimizes the cost:\\
+          $x=$\ansref
+          }}
+               \begin{answer}
+               \solution{sol}
+               \end{answer}
+          \lang{de}{\explanation[edited]{Nutzen Sie die Ableitung von $K(x)=\frac{s}{x}R+\frac{x}{2}b; x>0$, um eine
+          Minimalstelle zu finden.}}
+          \lang{en}{\explanation[edited]{Use the derivative of $K(x)=\frac{s}{x}R+\frac{x}{2}b; x>0$ to find a
+          minimum.}}
+          
+          \end{question} 
+          
+     \end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

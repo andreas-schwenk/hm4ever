@@ -1,0 +1,92 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+ %   \lang{en}{...}
+    \lang{de}{Ü04: Additionstheorem}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+%    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T201neu_Vollstaendige_Induktion/g_art_content_03_binomischer_lehrsatz.meta.xml}{content_03_binomischer_lehrsatz}
+\link{generic_article}{content/rwth/HM1/T209_Potenzreihen/g_art_content_28_exponentialreihe.meta.xml}{content_28_exponentialreihe}
+% \link{generic_article}{content/rwth/HM1/T201_Vollstaendige_Induktion_wichtige_Ungleichungen/g_art_content_03_binomialkoeffizienten.meta.xml}{content_03_binomialkoeffizienten}
+\link{generic_article}{content/rwth/HM1/T208_Reihen/g_art_content_26_produkt_von_reihen.meta.xml}{content_26_produkt_von_reihen}
+\end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/18205}{Ticket 18205}
+\end{block}
+\title{
+\lang{de}{Ü04: Additionstheorem}
+}
+
+Leiten Sie die Identität $\cos^2(x)+\sin^2(x)=1$ her, indem Sie die Cauchy-Produkte der Reihen
+benutzen.
+
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+\tab{Lösung}
+Für das \ref[content_26_produkt_von_reihen][Cauchy-Produkt]{def:cauchy-prod}  
+\begin{equation*}
+\cos^2(x)= \left(\sum_{k=0}^\infty \frac{(-1)^{\textcolor{#0066CC}{k}} x^{\textcolor{#0066CC}{2k}}}{\textcolor{#0066CC}{(2k)!}}\right)\left(\sum_{m=0}^\infty \frac{(-1)^{\textcolor{#CC6600}{m}} x^{\textcolor{#CC6600}{2m}}}{\textcolor{#CC6600}{(2m)!}}\right)
+\end{equation*}
+erhält man, wenn man zusammenfasst,
+%indem man $m$ durch $n-k$ in den Termen des rechten Faktors setzt,
+\begin{align*}
+\cos^2(x)&=\sum_{n=0}^\infty \sum_{k=0}^n \frac{(-1)^{\textcolor{#0066CC}{k}+\textcolor{#CC6600}{n-k}}x^{\textcolor{#0066CC}{2k}+\textcolor{#CC6600}{2(n-k)}}}{\textcolor{#0066CC}{(2k)!} \textcolor{#CC6600}{(2(n-k))!}}\\
+&=\sum_{n=0}^\infty \sum_{k=0}^n \frac{(-1)^{n} x^{2n}}{(2k)! (2n-2k)!}.
+\end{align*}
+Aus der inneren Summe klammert man zunächst $(-1)^nx^{2n}$ aus und anschließend noch $\frac{1}{(2n)!}$, sodass sich
+\begin{align*}
+\cos^2(x)
+&=\sum_{n=0}^\infty(-1)^nx^{2n}\sum_{k=0}^n\frac{(2n)!}{(2n)!(2k)!(2n-2k)!}\\
+&= \sum_{n=0}^\infty \frac{(-1)^{n}x^{2n}}{(2n)!}\sum_{k=0}^{n}\binom{2n}{2k}\:\\
+\end{align*}
+ergibt. Analog erhält man für das Quadrat des Sinus 
+\begin{eqnarray*}
+\sin^2(x)
+&=&\left(\sum_{n=0}^\infty \frac{(-1)^n x^{2n+1}}{(2n+1)!}\right)^2\\
+&=&\sum_{n=0}^\infty(-1)^nx^{2(n+1)}\sum_{k=0}^n\frac{1}{(2k+1)!(2(n-k)+1)!}\\
+&=& \sum_{n=0}^\infty \frac{(-1)^{n}x^{2(n+1)}}{(2(n+1))!}\sum_{k=0}^{n}\binom{2(n+1)}{2k+1}\:.
+\end{eqnarray*}
+Für die Summe hat man also
+\begin{equation*}
+\cos^2(x)+\sin^2(x)= \sum_{n=0}^\infty \frac{(-1)^{n}x^{2n}}{(2n)!}\sum_{k=0}^{n}\binom{2n}{2k}+
+\sum_{n=0}^\infty \frac{(-1)^{n}x^{2(n+1)}}{(2(n+1))!}\sum_{k=0}^{n}\binom{2(n+1)}{2k+1}\:.
+\end{equation*}
+Damit man das zu einer Summe zusammenfassen kann, formt man die Cosinus-Reihe noch etwas um:
+Man zieht den Term für $n=0$ heraus und verschiebt den Index $n\mapsto n-1$. Das heißt
+\begin{align*}
+\cos^2(x)&=1+ \sum_{n=1}^\infty \frac{(-1)^{n}x^{2n}}{(2n)!}\sum_{k=0}^{n}\binom{2n}{2k}\\
+&= 1 - \sum_{n=0}^\infty \frac{(-1)^{n}x^{2(n+1)}}{(2(n+1))!}\sum_{k=0}^{n+1}\binom{2(n+1)}{2k}
+\end{align*}
+Damit hat man
+\[
+\cos^2(x)+\sin^2(x)= 1+\sum_{n=0}^\infty\frac{(-1)^{n}x^{2(n+1)}}{(2(n+1))!}\left( \sum_{k=0}^{n}
+\binom{2(n+1)}{2k+1}- \sum_{k=0}^{n+1}\binom{2(n+1)}{2k}\right)\:.
+\]
+In der Klammer mit den beiden Summen treten die Binomialkoeffizienten $\binom{2(n+1)}{j}$ alle auf, 
+und zwar mit Vorzeichen $+1$, wenn $j$ ungerade ist, und mit $-1$, wenn $j$ gerade ist. Also können wir auch 
+\[\sum_{k=0}^{n}\binom{2(n+1)}{2k+1}- \sum_{k=0}^{n+1}\binom{2(n+1)}{2k}=-\sum_{j=0}^{2(n+1)}\binom{2(n+1)}{j}(-1)^{j}\]
+schreiben. Das ist also nichts anderes als die \ref[content_03_binomischer_lehrsatz][Binomialentwicklung]{thm:binom} von $-(1-1)^{2(n+1)}=0$.
+Somit ist
+\begin{eqnarray*}
+\cos^2(x)+\sin^2(x)&=& 1+ \sum_{n=0}^\infty \frac{(-1)^{n}x^{2(n+1)}}{(2(n+1))!}
+\left( \sum_{k=0}^{n}
+\binom{2(n+1)}{2k+1}- \sum_{k=0}^{n+1}\binom{2(n+1)}{2k}\right)\\
+&=& 1+\sum_{n=0}^\infty 0 =1\:.
+\end{eqnarray*}
+Das war harte Arbeit. Durch den \ref[content_28_exponentialreihe][Zusammenhang mit der komplexen Exponientialreihe]{rem:sin_cos_exp}
+wird diese Identität später sehr elegant gezeigt.
+\end{tabs*}
+\end{content}
+

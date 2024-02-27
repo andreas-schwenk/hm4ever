@@ -1,0 +1,71 @@
+\documentclass{mumie.problem.python}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/PythonCorrector.meta.xml}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/20100}{Ticket 20100}
+\end{block}
+
+\title{Approximation: Newtonverfahren}
+
+\begin{question}
+
+Implementieren Sie eine \textbf{Funktion} \texttt{def newton(f, s)} in Python.
+\begin{itemize}
+    \item Sei der Parameter $f$ eine per \texttt{sympy} definierte symbolische Funktion. TODO: Link zur Sympy-Einführung im Kurs (noch nicht vorhanden) 
+    \item Seit $s \in \R$ der Startwert (im Vorlesungsteil $x_0$).
+    \item Zurückgegeben wird eine approxmierte Nullstelle $x_n \in \R$. 
+\end{itemize}
+Innerhalb der zu implementierenden Funktion wird $f$ zunächst symbolisch 
+per \texttt{f.diff(x)} differenziert.
+Ausgeführt werden sollen die ersten 100 Schritte.
+Ein dynamisches Abbruchkriterium ist nicht gefordert.
+
+\pythonanswer{int_sinc}
+
+\begin{pythonsolution}{int_sinc}   
+from sympy import *
+
+def newton(f, s):
+        xn = start
+        fd = f.diff()
+        for i in range(0, 100):
+                n = f.subs(x, xn).evalf()
+                d = fd.subs(x, xn).evalf()
+                q = n / d
+                xn = xn - q
+        return xn
+\end{pythonsolution}
+
+\begin{pythonevaluator}
+x = Symbol('x')
+f = x - exp(-x)
+if abs(newton(f, 0.0) - 0.56714) > 1e-3:
+    exit(11)
+exit(0)                                                   	
+\end{pythonevaluator}
+
+\pythongrading{11}{0.5}{Dein Code liefert das falsche Ergebnis}
+
+\end{question}
+
+
+\end{content}

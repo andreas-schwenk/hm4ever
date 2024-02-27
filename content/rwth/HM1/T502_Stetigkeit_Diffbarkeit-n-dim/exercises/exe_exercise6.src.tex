@@ -1,0 +1,90 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Exercise 13}
+    \lang{de}{Ü13: Gradient}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{Exercise 13}
+    \lang{de}{Ü13: Gradient}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T111neu_Matrizen/g_art_content_44_transponierte_matrix.meta.xml}{content_44_transponierte_matrix}
+\end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22640}{Ticket 22640}
+\end{block}
+  \title{
+    \lang{en}{Exercise 13}
+    \lang{de}{Ü13: Gradient}
+  }
+  Es sei $f:\R^3 \to \R, x\mapsto x_1^2x_2 + \cos(x_2) e^{x_3}$.
+  
+  \begin{enumerate}[alph]   
+    \item Begründen Sie, dass $f$ total differenzierbar ist, und berechnen Sie den Gradienten von $f$ in allen Punkten.
+
+    \item Bestimmen Sie anschließend das Differential von $\nabla f$, sofern es existiert. Was fällt Ihnen auf? 
+  \end{enumerate}
+  \\
+  
+  \begin{tabs*}[\initialtab{0}\class{exercise}]
+    \tab{Lösung a)}
+    Der Term $x_1^2 x_2$ ist ein Polynom, $\cos$ und $\exp$ sind jeweils stetig differenzierbare, reelle Funktionen.
+    Außerdem sind die Projektionen von $\R^3$ nach $\R$ stetig partiell differenzierbar.
+    $f$ ist daher als Verknüpfung (Summe, Produkt und Komposition) stetig partiell differenzierbarer Funktionen 
+    wieder stetig partiell differenzierbar. Insbesondere ist $f$ damit total differenzierbar.
+    Der Gradient von $f$ ist
+    \[
+    \nabla f (x) = \begin{pmatrix}2 x_1 x_2 \\ x_1^2 - \sin(x_2) e^{x_3} \\ \cos(x_2)e^{x_3}\end{pmatrix}.
+    \]
+    \tab{Lösung b)}
+    \begin{incremental}[\initialsteps{1}]
+      \step Die Komponenten des Gradienten $\nabla f$ sind wieder alle total differenzierbar (gleiche Begründung wie in a)).
+      Es ist
+      \begin{align*}
+      \frac{\partial (\nabla f)_1}{\partial x_1}(x) &= 2x_2 \\
+      \frac{\partial (\nabla f)_1}{\partial x_2}(x) &= 2x_1 \\
+      \frac{\partial (\nabla f)_1}{\partial x_3}(x) &= 0 \\
+      \frac{\partial (\nabla f)_2}{\partial x_1}(x) &= 2x_1 \\
+      \frac{\partial (\nabla f)_2}{\partial x_2}(x) &= -\cos(x_2)e^{x_3} \\
+      \frac{\partial (\nabla f)_2}{\partial x_3}(x) &= -\sin(x_2)e^{x_3} \\
+      \frac{\partial (\nabla f)_3}{\partial x_1}(x) &= 0 \\
+      \frac{\partial (\nabla f)_3}{\partial x_2}(x) &= -\sin(x_2)e^{x_3} \\
+      \frac{\partial (\nabla f)_3}{\partial x_3}(x) &= \cos(x_2) e^{x_3}.
+      \end{align*}
+      Das Differential ist damit
+      \[ D(\nabla f)(x) = \begin{pmatrix} \frac{\partial (\nabla f)_1}{\partial x_1}(x) &
+      \frac{\partial (\nabla f)_1}{\partial x_2}(x) &
+      \frac{\partial (\nabla f)_1}{\partial x_3}(x) \\
+      \frac{\partial (\nabla f)_2}{\partial x_1}(x) &
+      \frac{\partial (\nabla f)_2}{\partial x_2}(x) &
+      \frac{\partial (\nabla f)_2}{\partial x_3}(x) \\
+      \frac{\partial (\nabla f)_3}{\partial x_1}(x) &
+      \frac{\partial (\nabla f)_3}{\partial x_2}(x) &
+      \frac{\partial (\nabla f)_3}{\partial x_3}(x)
+      \end{pmatrix}
+      = \begin{pmatrix}
+      2x_2 & 2x_1 & 0 \\ 2x_1 & -\cos(x_2)e^{x_3} & -\sin(x_2)e^{x_3} \\ 0 & -\sin(x_2)e^{x_3} & \cos(x_2) e^{x_3}
+      \end{pmatrix}.
+      \]
+      \step Es fällt auf, dass $D(\nabla f)(x)$ eine 
+      \ref[content_44_transponierte_matrix][symmetrische Matrix]{def:symmetrische_matrix}
+       ist.
+       %FS: Ergänzung wie in QS gewünscht:
+       Das heißt, die Reihenfolge, nach der die Variablen abgeleitet werden, spielt keine Rolle.
+       
+       \textit{Anmerkung:} Dies gilt auch allgemein für alle zweimal stetig partiell differenzierbare Funktionen.
+      \end{incremental}
+  \end{tabs*}
+\end{content}
+

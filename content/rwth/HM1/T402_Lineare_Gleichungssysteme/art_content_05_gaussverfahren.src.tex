@@ -1,0 +1,1442 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Gauß-Verfahren}
+    \lang{en}{Gaussian elimination}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T112neu_Lineare_Gleichungssysteme/g_art_content_41_gauss_verfahren.meta.xml}{gauss}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{2}
+\ombarticle{2}
+\usepackage{mumie.genericvisualization}
+
+
+\title{\lang{de}{Gauß-Verfahren über allgemeinen Körpern} \lang{en}{Gaussian elinimation over any field}}
+
+\begin{block}[annotation]
+ 
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/11196}{Ticket 11196}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\lang{de}{
+Das \notion{Gauß-Verfahren} zum L\"osen linearer Gleichungssysteme (LGS) über den reellen Zahlen wurde bereits in
+\link{gauss}{Teil 1} eingeführt.
+Die Idee des Gauß-Verfahrens ist es, die Gleichungen des LGS (bzw. die Zeilen der zugehörigen erweiterten Koeffizientenmatrix) 
+so umzuformen, dass man am Ende
+die Lösungsmenge des Gleichungssystems leicht angeben kann. 
+In diesem Abschnitt wird das Gauß-Verfahren für die erweiterte Koeffizientenmatrix wiederholt. 
+Allerdings werden die Koeffizienten nun über beliebigen Körpern $\mathbb{K}$ betrachtet.\\
+Außerdem werden wir zeigen, wie man eine Menge von linearen Gleichungssystemen $Ax=b$ lösen kann,
+bei denen sich jeweils nur der Vektor $b$ unterscheidet.\\
+Im Folgenden betrachten wir stets ein lineares Gleichungssystem der Form
+\begin{equation*} 
+\begin{mtable}[\cellaligns{ccccccccc}]
+ a_{11} x_1 & + & a_{12} x_2 & + & \cdots & + & a_{1n} x_n & = & b_1 \\
+ a_{21} x_1 & + & a_{22} x_2 & + & \cdots & + & a_{2n} x_n & = & b_2 \\
+ \vdots     &   & \vdots     &   &        &   & \vdots     &   & \vdots \\
+ a_{m1} x_1 & + & a_{m2} x_2 & + & \cdots & + & a_{mn} x_n & = & b_m
+\end{mtable} \label{eq:lgs1}
+\end{equation*}
+mit Elementen $a_{ij}\in \mathbb{K}$ für $1 \leq i \leq m$ und $1 \leq j \leq n$ und $b_1, \ldots, b_m\in \mathbb{K}$, sowie die zugehörige erweiterte Koeffizientenmatrix
+\begin{equation*}
+(A \ \mid \ b) = \underbrace{\left(  \begin{smallmatrix}
+                                      a_{11} & a_{12} & \cdots & a_{1n} & | & b_1\\
+                                      a_{21} & a_{22} & \cdots & a_{2n} & | &b_2\\
+                                      \vdots & \vdots & \ddots & \vdots & \mid &\vdots\\
+                                      a_{m1} & a_{m2} & \cdots & a_{mn} &| & b_m
+                                      \end{smallmatrix} \right) }_{
+\in M(m,n+1;\mathbb{K})}.
+\end{equation*}
+Ziel des Gauß-Verfahrens ist es, eine Matrix schrittweise in Stufenform zu bringen und anschließend daraus die Lösungsmenge anzugeben.}
+
+
+\lang{en}{
+The \notion{Gaussian elimination} for solving linear system over the real numbers was already introduced in \link{gauss}{Part 1}.
+The idea of the Gaussian elimination is to manipulate the equations of the system (or rather the rows of the corresponding augmented matrix) 
+into a form, which makes it easy to find the solution set.
+This section reviews the Gaussian elimination for the augmented matrix, but the coefficients will be elements of any field $\mathbb{K}$.\\ 
+Further on, we will see, how we can solve a set of linear equations $Ax=b$, that differs only in the vector $b$.
+In the following linear systems will have the form
+\begin{equation*} 
+\begin{mtable}[\cellaligns{ccccccccc}]
+ a_{11} x_1 & + & a_{12} x_2 & + & \cdots & + & a_{1n} x_n & = & b_1 \\
+ a_{21} x_1 & + & a_{22} x_2 & + & \cdots & + & a_{2n} x_n & = & b_2 \\
+ \vdots     &   & \vdots     &   &        &   & \vdots     &   & \vdots \\
+ a_{m1} x_1 & + & a_{m2} x_2 & + & \cdots & + & a_{mn} x_n & = & b_m
+\end{mtable} \label{eq:lgs1}
+\end{equation*}
+with $a_{ij}\in \mathbb{K}$ for $1 \leq i \leq m$ and $1 \leq j \leq n$ and $b_1, \ldots, b_m\in \mathbb{K}$, plus the corresponding augmented coefficient matrix
+\begin{equation*}
+(A \ \mid \ b) = \underbrace{\left(  \begin{smallmatrix}
+                                      a_{11} & a_{12} & \cdots & a_{1n} & | & b_1\\
+                                      a_{21} & a_{22} & \cdots & a_{2n} & | &b_2\\
+                                      \vdots & \vdots & \ddots & \vdots & \mid &\vdots\\
+                                      a_{m1} & a_{m2} & \cdots & a_{mn} &| & b_m
+                                      \end{smallmatrix} \right) }_{
+\in M(m,n+1;\mathbb{K})}.
+\end{equation*}
+The aim of the Gaussian elimination is to manipulate the matrix step-by-step into the reduced echelon row form, from which the solution can be read.}
+
+
+
+
+\section{\lang{de}{Die Stufenform}\lang{en}{Row echelon form}} 
+\begin{definition}[\lang{de}{Stufenform} \lang{en}{row echelon form}]\label{def:stufenformen}\label{stufenform}
+\lang{de}{
+Ein LGS liegt in \notion{Stufenform} vor, wenn für jede Gleichung die 
+%(lexikographisch) 
+erste auftretende Variable
+in allen folgenden Gleichungen nicht mehr auftritt (oder die Gleichung gar keine Variablen enthält).\\
+Betrachtet man die Stufenform der dazugehörigen erweiterten Koeffizientenmatrix, so hat diese die Form}
+\lang{en}{
+A linear system is in \notion{row echelon form}, if for each equation the leading term is not appearing in the following equations (i.e. the coefficient is zero).\\
+The augmented matrix corresponding to a linear system in row echelon form has the following form}
+\[ \begin{pmatrix}
+    a_{1} & \star & \cdots & \star & \star&| & b_1\\ 
+     0 & a_{2} & \cdots & \star & \star&| & b_2\\ 
+    \vdots & \, & \ddots & \, & \vdots&| & \vdots\\ 
+ 0 & 0 & \cdots & a_{k} & \star&| & b_k\\ 
+   0 & 0 & \cdots & 0 & 0&| & \vdots \\ 
+  0 & 0 & \cdots & 0 & 0&| & b_{m}\\ 
+    \end{pmatrix},\]
+\lang{de}{wobei der Eintrag $a_{i}$ jeweils dem ersten Koeffizienten ungleich Null der $i$-ten Gleichung entspricht. Diesen Koeffizienten nennen wir \notion{Stufenelement} (oder Stufeneintrag). 
+Der "$\star$" steht jeweils für einen beliebigen Eintrag. 
+Das LGS liegt in \notion{reduzierter Stufenform} vor, wenn die ersten auftretenden Variablen sogar in keiner anderen Gleichung
+auftreten, also auch nicht in den darüber liegenden, und ihre Koeffizienten zusätzlich den Wert 1 besitzen.\\
+Die entsprechende reduzierte Stufenform der erweiterten Koeffizientenmatrix hat damit die Form}
+
+\lang{en}{where $a_{i}$ is the first non-zero coefficient of the $i$th row. This coefficient is called the \notion{leading coefficient} of the row/equation. 
+The "$\star$" here may be any element. 
+The linear system is in  \notion{reduced row echelon form}, if the variable in the leading term do not appear in any other equation/row (not only in the following equations/rows)
+and the leading coefficient of each row is 1.\\
+The augmented matrix corresponding to a linear system in reduced row echelon form has the following form:}
+ 
+ \[ \begin{pmatrix}
+    1 & 0 & \cdots & 0 & \star&| & b_1\\ 
+     0 & 1 & \cdots & 0 & \star&| & b_2\\ 
+    \vdots & \, & \ddots & \, & \vdots &| & \vdots\\ 
+ 0 & 0 & \cdots & 1 & \star&| & b_k\\ 
+   0 & 0 & \cdots & 0 & 0&| & \vdots \\ 
+  0 & 0 & \cdots & 0 & 0&| & b_{m}\\ 
+  \end{pmatrix}.\]
+\lang{de}{Dabei ist zu beachten, dass nur die Einträge über und unter einem Stufenelement Null sein müssen.}
+\lang{en}{It is important to note, that the elements below and above each leading coefficient must be zero.}
+
+\end{definition}
+\lang{de}{
+In der Literatur spricht man oft präziser von der Zeilenstufenform.}
+
+\begin{remark}
+\lang{de}{
+Falls eine Koeffizientenmatrix in Stufenform eine Nullzeile besitzt, 
+so ist die entsprechende Gleichung des LGS $0=b_i$. 
+In dieser Gleichung treten also keine Variablen mehr auf.}
+\lang{en}{
+If the augmented matrix in row echelon form contains a row of zero, the corresponding equation of the linear system is $0=b_i$.
+This equation contains no variables.}\\
+\end{remark}
+
+\lang{de}{
+\begin{example}
+\begin{tabs*}
+\tab{1. Beispiel}
+Die erweiterte Koeffizientenmatrix
+\[ \begin{pmatrix} -1 & 2 & 3 & | & 5 \\\textcolor{#0066CC}{0} & 1 & 4 & | & 11 \\\textcolor{#0066CC}{0} & \textcolor{#0066CC}{0} & -2 & | & -6 \end{pmatrix} \]
+liegt in Stufenform vor, da die Einträge unter den Stufenelementen Null sind. \\
+Es liegt aber keine reduzierte Stufenform vor, da zum einen die Stufenelemente nicht alle Wert 1 haben und die Einträge über ihnen nicht Null sind.
+\[ \begin{pmatrix} \textcolor{#CC6600}{-1} & \textcolor{#CC6600}{2} & \textcolor{#CC6600}{3} & | & 5 \\0 & \textcolor{#0066CC}{1} & \textcolor{#CC6600}{4} & | & 11 \\0 & 0 & \textcolor{#CC6600}{-2} & | & -6 \end{pmatrix} \]
+\tab{2. Beispiel}
+Die erweiterte Koeffizientenmatrix 
+\[ \begin{pmatrix} 2 & -4-2i & | & 10 \\\textcolor{#CC6600}{6i} &6-12i & | & 30i \end{pmatrix} \]
+über den komplexen Zahlen liegt nicht in Stufenform vor, da der Koeffizient $6i$ Null entsprechen müsste.\\
+Anders verhält es sich bei der erweiterten Koeffizientenmatrix
+\[ \begin{pmatrix} \textcolor{#0066CC}{1}& -2-i & | & 10 \\0 &0 & | & 0 \end{pmatrix}, \]
+bei der der Koeffizient $a_{21}=0$ ist. Außerdem hat das Stufenelement hier den Wert 1 und es existieren keine darüber liegenden Einträge. Damit ist sie sogar in reduzierter Stufenform.
+\tab{3. Beispiel}
+Die erweiterte Koeffizientenmatrix
+\[ \begin{pmatrix}1 & 2 &1 & -1 &| & 7 \\\textcolor{#0066CC}{0} & 1 &-1 & 0 &| & 1\\\textcolor{#0066CC}{0} &\textcolor{#0066CC}{0} &0 & 1 &| & -1 \end{pmatrix}\]
+liegt in Stufenform vor, da die Einträge unter den Stufenelementen alle Null entsprechen.\\
+Die Stufenform ist jedoch keine reduzierte Stufenform, obwohl die Stufenelemente den Wert 1 besitzen. Denn nicht alle Koeffizienten über den Stufenelementen sind Null.
+\[ \begin{pmatrix}\textcolor{#0066CC}{1} & \textcolor{#CC6600}{2} &1 & \textcolor{#CC6600}{-1} &| & 7 \\0 & \textcolor{#0066CC}{1} &-1 & \textcolor{#0066CC}{0} &| & 1\\0 & 0 &0 & \textcolor{#0066CC}{1} &| & -1 \end{pmatrix}\]
+\end{tabs*}
+\end{example}}
+
+
+
+\lang{en}{
+\begin{example}
+\begin{tabs*}
+\tab{1. Example}
+The augmented matrix
+\[ \begin{pmatrix} -1 & 2 & 3 & | & 5 \\\textcolor{#0066CC}{0} & 1 & 4 & | & 11 \\\textcolor{#0066CC}{0} & \textcolor{#0066CC}{0} & -2 & | & -6 \end{pmatrix} \]
+is in row echelon form, because the coefficients below the leading coefficients are zero. \\
+The row echelon form is not reduced, because the coefficients of the leading terms have values $\neq 1$ and the entries above are non-zero.
+\[ \begin{pmatrix} \textcolor{#CC6600}{-1} & \textcolor{#CC6600}{2} & \textcolor{#CC6600}{3} & | & 5 \\0 & \textcolor{#0066CC}{1} & \textcolor{#CC6600}{4} & | & 11 \\0 & 0 & \textcolor{#CC6600}{-2} & | & -6 \end{pmatrix} \]
+\tab{2. Example}
+The augmented matrix 
+\[ \begin{pmatrix} 2 & -4-2i & | & 10 \\\textcolor{#CC6600}{6i} &6-12i & | & 30i \end{pmatrix} \]
+over the complex numbers is not in row echelon form, because the coefficient $6i$ should be zero.\\
+The situations is different for the augmented matrix
+\[ \begin{pmatrix} \textcolor{#0066CC}{1}& -2-i & | & 10 \\0 &0 & | & 0 \end{pmatrix}, \]
+because we have $a_{21}=0$. The leading coefficient is 1 and there are no entries above it. For this reason, the matrix is even in reduced row echelon form.
+\tab{3. Example}
+The augmented matrix
+\[ \begin{pmatrix}1 & 2 &1 & -1 &| & 7 \\\textcolor{#0066CC}{0} & 1 &-1 & 0 &| & 1\\\textcolor{#0066CC}{0} &\textcolor{#0066CC}{0} &0 & 1 &| & -1 \end{pmatrix}\]
+is in row echelon form, because the entries below the leading coefficients are all zero.\\
+The row echelon form is not reduced, although all the leading coefficients have the value 1, because there are non-zero entries above the pivots.
+\[ \begin{pmatrix}\textcolor{#0066CC}{1} & \textcolor{#CC6600}{2} &1 & \textcolor{#CC6600}{-1} &| & 7 \\0 & \textcolor{#0066CC}{1} &-1 & \textcolor{#0066CC}{0} &| & 1\\0 & 0 &0 & \textcolor{#0066CC}{1} &| & -1 \end{pmatrix}\]
+\end{tabs*}
+\end{example}}
+
+\lang{de}{
+\begin{quickcheck}
+		\type{input.interval}
+        \field{rational}
+        \precision{3}
+      \field{real}
+      \begin{variables}
+           \randint[Z]{a}{2}{6}
+           \randint[Z]{b}{2}{8}
+           \randint[Z]{c}{2}{8}
+           \randint[Z]{d}{2}{8}
+           \end{variables}
+      \text{Für das lineare Gleichungssystem 
+\[ \begin{mtable}[\cellaligns{crcrcrcr}]
+(I)&\var{a} \cdot  x & - & \var{c} \cdot y       &   &                &= & 0 \\
+(II)&                &   & \var{b}\cdot y & + & \var{d} \cdot z&=  & \var{a} 
+\end{mtable} \]
+       gilt: } 
+    \begin{choices}{unique}
+        \begin{choice}
+            \text{Es liegt in Stufenform vor, aber nicht in reduzierter Stufenform.}
+			\solution{true}
+		\end{choice}             
+        \begin{choice}
+            \text{Es liegt in reduzierter Stufenform vor.}
+			\solution{false}
+		\end{choice}
+                \begin{choice}
+            \text{Es liegt nicht in Stufenform vor.}
+			\solution{false}
+		\end{choice}      
+    \end{choices}{unique}
+            	\explanation{Das LGS liegt in Stufenform vor, da die Variable $x$ nur in der ersten Gleichung auftritt.\\ 
+                Es liegt aber nicht in reduzierter Stufenform vor, da die Variable $y$ (als erste Variable der zweiten Gleichung) ebenfalls in der ersten Gleichung auftaucht. 
+                Zusätzlich besitzen die Stufenelemente nicht den Wert 1.}		
+	\end{quickcheck}}
+
+ \lang{en}{
+\begin{quickcheck}
+		\type{input.interval}
+        \field{rational}
+        \precision{3}
+      \field{real}
+      \begin{variables}
+           \randint[Z]{a}{2}{6}
+           \randint[Z]{b}{2}{8}
+           \randint[Z]{c}{2}{8}
+           \randint[Z]{d}{2}{8}
+           \end{variables}
+      \text{For the linear system 
+\[ \begin{mtable}[\cellaligns{crcrcrcr}]
+(I)&\var{a} \cdot  x & - & \var{c} \cdot y       &   &                &= & 0 \\
+(II)&                &   & \var{b}\cdot y & + & \var{d} \cdot z&=  & \var{a} 
+\end{mtable} \]
+       holds: } 
+    \begin{choices}{unique}
+        \begin{choice}
+            \text{The linear system is in row echelon form, but is not reduced.}
+			\solution{true}
+		\end{choice}                    
+        \begin{choice}
+            \text{The linear system is in reduced row echelon form.}
+			\solution{false}
+		\end{choice}
+                \begin{choice}
+            \text{The linear system is not in row echelon form.}
+			\solution{false}
+		\end{choice}      
+    \end{choices}{unique}
+            	\explanation{The linear system is in row echelon form, because the variable x is found only in the firs equations.
+             But the row echelon form is not reduced, since the variable $y$ (as the first variable in the second euqation) is also found in the first equation.
+             Further on, the pivot elements do not have the value 1.}		
+	\end{quickcheck}}
+    
+    
+%Im Allgemeinen sieht ein LGS in Stufenform dann folgendermaßen aus mit gewissen Zahlen $k$ ($1\leq k\leq m$) und
+%$1\leq i_1<i_2<\ldots <i_k\leq n$, sowie $c_i\in \R\setminus \{0\}$ und $\tilde{a}_{ij}, \tilde{b}_i\in \R$:
+%\begin{equation}\label{eq:lgs2}
+% \begin{mtable}[\cellaligns{rrrrrrrrrrrrrrl}]
+% c_1 x_{i_1} & + & \cdots & + & \tilde{a}_{1i_2}x_{i_2} & + & \cdots & &\cdots &&\cdots && \cdots & = & \tilde{b}_1 \\
+%			 &   	&  &  &   c_2 x_{i_2} & + & \cdots &+ & \tilde{a}_{2i_3}x_{i_3} & + &\cdots&&  \cdots & = & \tilde{b}_2 \\
+% 			 &   	&  			 &  &                          &    &            &   &   c_3 x_{i_3} & + &\cdots&&  \cdots & = & \tilde{b}_3 \\
+%    &    &          &   &                   &      &      &    &   &   & \vdots   &&   &     & \vdots \\
+% 			 &   &               &   &        &    & &           &        &   &  c_k x_{i_k} & + & \cdots & = & \tilde{b}_k \\
+% 			 &&&&&&&&&&&& 0 & = & \tilde{b}_{k+1} \\
+% 			 &&&&&&&&&&&& \vdots & & \vdots \\
+% 			 &&&&&&&&&&&& 0 & = & \tilde{b}_{m} 
+%\end{mtable} 
+%\end{equation}
+%In der reduzierten Stufenform sind zusätzlich die Koeffizienten über den $c$'s gleich Null.
+\lang{de}{
+Anhand der Stufenform lässt sich erkennen, ob ein LGS lösbar ist.}
+\lang{en}{
+From the row echelon form of a linear system we can tell whether it has solutions.}
+%und sie lässt sich damit explizit durch Rückwärtseinsetzen berechnen. 
+\lang{de}{
+\begin{theorem}[Lösbarkeit]\label{rule:loesung-parametrisiert}
+Ein LGS ist genau dann lösbar,
+wenn für die Stufenform  (Definition \ref{stufenform}) 
+seiner erweiterten Koeffizientenmatrix
+entweder
+%Ein LGS und ihre dazugehörige erweiterte Koeffizientenmatrix ist genau 
+%dann l"osbar, wenn für ihre Stufenform (\ref{stufenform}) entweder 
+\begin{itemize}
+\item $k=m \ $ oder
+\item${b}_{k+1}=\ldots = {b}_{m} =0$
+\end{itemize}
+gilt.\\
+Lösbarkeit bedeutet also, dass nach Umformung in Stufenform keine Zeile der Form
+$(0 ~$\cdots$~ 0 | b_i)$ mit $b_i \neq 0$
+auftritt.
+\end{theorem}}
+
+\lang{en}{
+\begin{theorem}[\lang{de}{Lösbarkeit} \lang{en}{Solvability}]\label{rule:loesung-parametrisiert}
+A linear system is solvable if and only if we have for the row echelon form (Definition \ref{stufenform}) of the augmented matrix
+either
+%Ein LGS und ihre dazugehörige erweiterte Koeffizientenmatrix ist genau 
+%dann l"osbar, wenn für ihre Stufenform (\ref{stufenform}) entweder 
+\begin{itemize}
+\item $k=m \ $ or
+\item${b}_{k+1}=\ldots = {b}_{m} =0$.
+\end{itemize}
+Hence, solvability of a linear system corresponds to the non-existence any rows of the form $(0\ldots 0|bi)$ with $bi\neq 0$ in the row echelon form of the system.
+\end{theorem}}
+
+\lang{de}{
+Ist ein LGS nicht lösbar, so gilt für seine Lösungsmenge $\mathbb{L}=\emptyset$.\\
+Für die Bestimmung der Lösungsmenge eines lösbaren LGS gehen wir wie folgt vor.}
+
+\lang{en}{
+If a linear system is not solvable, then its solution set is $\mathbb{L}=\emptyset$.
+We determine the solution set of a solvable linear system as follows:}
+
+\lang{de}{
+\begin{rule}[Bestimmung der Lösungsmenge]\label{rule:bestimmungDerLoesungsmenge}
+Um die Lösungsmenge zu berechnen, stellt man die erweiterte Koeffizientenmatrix wieder als lineares Gleichungssystem dar.\\
+Unbekannte, die als Koeffizienten einen Stufeneintrag besitzen, werden \notion{abhängige Variablen} genannt und folglich sind alle Unbekannten 
+ohne einen Stufeneintrag als Koeffizienten \notion{unabhängige} oder \notion{freie Variablen}.\\
+Für letztere werden Parameter gewählt und 
+anschließend wird das Gleichungssystem nach den abhängigen Variablen durch \notion{Rückwärtseinsetzen} aufgelöst.\\
+Ist das LGS in reduzierter Stufenform, so enthält jede Gleichung höchstens eine abhängige Variable und diese kann direkt in Abhängigkeit der Parameter abgelesen werden (falls vorhanden).
+Besitzt ein lösbares LGS keine freien Variablen, so besteht die Lösungsmenge aus genau einem Lösungsvektor.
+\end{rule}}
+
+\lang{en}{
+\begin{rule}[Determining the solution set]\label{rule:bestimmungDerLoesungsmenge}
+For determining the solution of a linear system, it needs to be considered as a system of linear equations, instead of a matrix.\\
+The leading variable of a row is called \notion{dependent variable} and all variables in non-leading terms are naturally called \notion{independent} or \notion{free variables}.\\
+For those, we choose parameters to represent them and afterwards we solve the linear system in a process called \notion{back substitution}.\\
+If the linear system is in reduced row echelon form, each non-zero equation contains at most one dependent variable and can be rearranged to give the solution of these dependent variables in terms of parameters (if existing).
+If the linear system has no independent variables, then the solution set consists of exactly one solution vector.
+\end{rule}}
+
+\lang{de}{
+Rückwärtseinsetzen bedeutet, dass man bei der letzten Gleichung beginnend alle Gleichungen von unten nach oben nach der
+ersten auftretenden Variable l\"ost,
+ indem man alle bereits in Parametern ausgedrückten oder durch Werte berechneten Variablen in die darüber liegenden Gleichungen einsetzt.\\
+ Dadurch erhält man für alle Variablen Werte oder Ausdrücke in den Parametern. 
+ \begin{remark}
+Werden die freien bzw. abhängigen Variablen anders gewählt, so ändert sich die Lösungsmenge nicht. Sie erhält dadurch aber eine andere Darstellungsform. 
+\end{remark}}
+
+\lang{en}{
+Back substitution is a process, that dissolves all equations for its leading variables. We rearrange the last equation by expressing its leading variable in terms of the
+parameters and substitute the calculated variable in the above equation, and so on. 
+Thereby all variables will be expressed in terms of the parameters. 
+ \begin{remark}
+Changing the (in-)dependent variables does not change the solution set, but the representation may change.
+\end{remark}}
+
+
+\begin{example} \label{gauss1}
+\begin{tabs*}
+\tab{\lang{de}{1. Beispiel} \lang{en}{1. Example}}
+\lang{de}{
+Im LGS
+\begin{displaymath}
+\begin{mtable}[\cellaligns{ccrcrcrcr}]
+(I)&\qquad-&x&+&2y&+&3z&=&5\\
+(II)&&&&y&+&4z&=&11\\
+(III)&&&&&-&2z&=&-6
+\end{mtable}
+\end{displaymath}
+ist jede Variable die erste auftretende Variable einer Gleichung. Es gibt daher keine freien Variablen, und für alle Variablen können
+ Werte berechnet werden. 
+Zun\"achst wird die dritte Gleichung nach der Variable $z$ aufgel\"ost.
+\begin{displaymath}
+(III) \qquad z=3
+\end{displaymath}
+Diesen Wert setzt man in die zweite Gleichung ein, um die Variable $y$ zu bestimmen.
+\begin{displaymath}
+(II) \qquad y+4\cdot3=11 \quad \Leftrightarrow \quad y=-1
+\end{displaymath}
+Anschlie{\ss}end werden beide Werte in die erste Gleichung eingesetzt, um daraus $x$ zu berechnen.
+\begin{displaymath}
+(I) \qquad -x+2\cdot(-1)+3\cdot3=5 \quad \Leftrightarrow \quad x=2
+\end{displaymath}
+Das LGS ist eindeutig l\"osbar und besitzt die L\"osungsmenge
+\begin{displaymath}
+\mathbb{L}=\left\{\begin{pmatrix}2\\ -1\\ 3\end{pmatrix} \right\}.
+\end{displaymath}}
+\lang{en}{
+In the linear system
+\begin{displaymath}
+\begin{mtable}[\cellaligns{ccrcrcrcr}]
+(I)&\qquad-&x&+&2y&+&3z&=&5\\
+(II)&&&&y&+&4z&=&11\\
+(III)&&&&&-&2z&=&-6
+\end{mtable}
+\end{displaymath}
+each variable is the leading variable of an equation, which is why there are no independent variables. Hence, the value of each
+variable can be determined. 
+First, the third equation is solved for the variable $z$:
+\begin{displaymath}
+(III) \qquad z=3
+\end{displaymath}
+This value is then substituted into the second equation in order to calculate the variable $y$:
+\begin{displaymath}
+(II) \qquad y+4\cdot3=11 \quad \Leftrightarrow \quad y=-1
+\end{displaymath}
+Next, both values are substituted into the first equation for solving it for $x$:
+\begin{displaymath}
+(I) \qquad -x+2\cdot(-1)+3\cdot3=5 \quad \Leftrightarrow \quad x=2
+\end{displaymath}
+The linear system is uniquely solvable and has the solution set:
+\begin{displaymath}
+\mathbb{L}=\left\{\begin{pmatrix}2\\ -1\\ 3\end{pmatrix} \right\}.
+\end{displaymath}}
+
+\tab{\lang{de}{2. Beispiel} \lang{en}{2. Example}}
+\lang{de}{
+Das LGS über den komplexen Zahlen
+\[ \begin{mtable}[\cellaligns{crcrcr}]
+(I)&\qquad x & - & (2+i) \cdot  y & = & 5 \\
+(II)& &  & 0 & =  & 0
+\end{mtable} \]
+ist lösbar, da es zwar eine Gleichung ohne Variablen gibt, diese aber $0=0$ entspricht, d.\,h. stets erfüllt ist. Diese Gleichung kann nun
+weggelassen werden. In der verbliebenen Gleichung $(I)$ ist $x$ die erste Variable, also eine abhängige Variable und $y$ ist eine
+freie Variable. Wir führen daher einen komplexen Parameter $r$ für $y$ ein, setzen also $y=r$. 
+Nun setzt man $y=r$ in die Gleichung $(I)$ ein, löst sie nach $x$ auf und erhält 
+\[ x=5+(2+i)r.\]
+Die Lösungsmenge ist daher
+\[ \mathbb{L}= \left\{ \begin{pmatrix}5+(2+i)r\\ r \end{pmatrix} \, \big| \, r\in \C \right\}
+= \left\{ \begin{pmatrix}5\\ 0 \end{pmatrix}+r\cdot \begin{pmatrix} 2+i \\ 1 \end{pmatrix} \, \big| \, r\in \C \right\}. \]}
+
+\lang{en}{
+The linear system
+\[ \begin{mtable}[\cellaligns{crcrcr}]
+(I)&\qquad x & - & (2+i) \cdot  y & = & 5 \\
+(II)& &  & 0 & =  & 0
+\end{mtable} \]
+over the complex numbers is solvable. Though there is an equation without any variables, this equation is $0=$, i.e. always fulfilled.
+This equation can be omitted.
+In theremaining equationIn der verbliebenen Gleichung $(I)$ the variable $x$ is the first one and therefore a dependent variable.
+$y$ is a free variable. We introduce the complex parameter $r$ for $y$ and set $y=r$. 
+We now subsitute $y=r$ in equation $(I)$, dissolve it for $x$ and we get 
+\[ x=5+(2+i)r.\]
+Therefore the solution set is
+\[ \mathbb{L}= \left\{ \begin{pmatrix}5+(2+i)r\\ r \end{pmatrix} \, \big| \, r\in \C \right\}
+= \left\{ \begin{pmatrix}5\\ 0 \end{pmatrix}+r\cdot \begin{pmatrix} 2+i \\ 1 \end{pmatrix} \, \big| \, r\in \C \right\}. \] }
+
+\tab{\lang{de}{3. Beispiel} \lang{en}{3. Example}}
+\lang{de}{
+Im LGS über $\mathbb{R}$
+\[ \begin{mtable}[\cellaligns{crcrcrcrcr}]
+(I)&\qquad x_1 & + & 2 \cdot  x_2 &+ & x_3 & - & x_4 &= & 7 \\
+(II)& 		  &  &           x_2 &- & x_3 &   &     &=  & 1 \\
+(III)& 		  &  &               &  &     &   & x_4 &= & -1
+\end{mtable} \]   
+sind die Variablen $x_1$, $x_2$ und $x_4$ die ersten auftretenden Variablen einer der Gleichungen. Dies sind also die abhängigen Variablen
+und die Variable $x_3$ ist eine freie Variable. Wir setzen also $x_3=t$ mit einem reellen Parameter $t$, und rechnen die anderen Variablen
+von unten nach oben aus. Die dritte Gleichung ist
+\[   x_4=-1.  \]
+Für die zweite Gleichung gilt:
+\[  x_2-t=1 \Leftrightarrow x_2=1+t. \]
+Nun setzen wir die Ausdrücke für $x_2$, $x_3$ und $x_4$ in die erste Gleichung ein und lösen nach $x_1$ auf:
+\[ x_1+2\cdot (1+t)+t- (-1)=7  \Leftrightarrow x_1=7-2\cdot (1+t)-t-1=4-3t. \]
+Die Lösungsmenge ist daher:
+\[ \mathbb{L}
+= \left\{ \begin{pmatrix} 4-3t \\ 1+t \\t \\ -1\end{pmatrix} \, \big| \, t\in \R \right\}
+= \left\{ \begin{pmatrix} 4 \\ 1 \\ 0 \\ -1\end{pmatrix}+ t\cdot \begin{pmatrix} -3\\ 1\\ 1\\ 0 \end{pmatrix} \, \big| \, t\in \R \right\}. \]}
+
+\lang{en}{
+In the linear system over $\mathbb{R}$,
+\[ \begin{mtable}[\cellaligns{crcrcrcrcr}]
+(I)&\qquad x_1 & + & 2 \cdot  x_2 &+ & x_3 & - & x_4 &= & 7 \\
+(II)& 		  &  &           x_2 &- & x_3 &   &     &=  & 1 \\
+(III)& 		  &  &               &  &     &   & x_4 &= & -1
+\end{mtable} \]   
+the variables $x_1$, $x_2$ and $x_4$ are the first one in one of the equatiosn. 
+They are then the dependent variables. $x_3$ is the free variable.
+We set $x_3=t$ with $t\in\R$ and determine the other variables by back subituting.
+The thrid equation is
+\[   x_4=-1.  \]
+For the second equation we have:
+\[  x_2-t=1 \Leftrightarrow x_2=1+t. \]
+Now we subsitute the terms for $x_2$, $x_3$ and $x_4$ in the first equation and dissolve it for $x_1$:
+\[ x_1+2\cdot (1+t)+t- (-1)=7  \Leftrightarrow x_1=7-2\cdot (1+t)-t-1=4-3t. \]
+So, the solution set is:
+\[ \mathbb{L}
+= \left\{ \begin{pmatrix} 4-3t \\ 1+t \\t \\ -1\end{pmatrix} \, \big| \, t\in \R \right\}
+= \left\{ \begin{pmatrix} 4 \\ 1 \\ 0 \\ -1\end{pmatrix}+ t\cdot \begin{pmatrix} -3\\ 1\\ 1\\ 0 \end{pmatrix} \, \big| \, t\in \R \right\}. \]}
+\end{tabs*}
+\end{example}
+
+
+
+
+\section{\lang{de}{Gauß-Verfahren mit erweiterter Koeffizientenmatrix} \lang{en}{Gaussian elimination for the augmented matrix}}\label{sec:gauss-mit-matrizen}
+\lang{de}{
+Mit dem Gauß-Verfahren lässt sich jedes lineare Gleichungssystem systematisch in die beschriebene (reduzierte) Stufenform bringen. 
+Es stellt eine Verallgemeinerung des Additions-Verfahrens dar.}
+\lang{en}{
+The Gaussian elimination is an algorithm to systematically transform any linear system into (reduced) row echelon form. It is a generalisation of the addition method.}
+
+
+\begin{definition} \label{def:Gauß-Verfahren}
+\lang{de}{
+Für das Gauß-Verfahren können folgende sogenannte \notion{elementare Umformungen} auf die Zeilen einer Matrix angewendet werden:}
+\lang{en}{
+The following are called \notion{elementary row operations} and can be utilized for the Gaussian elimination:}
+\begin{itemize}
+\item \lang{de}{Vertauschen zweier Zeilen.} \lang{en}{Exchanging/swapping two rows}
+\item \lang{de}{Multiplikation einer Zeile mit einer Konstanten $c\neq 0$ mit $c \in \mathbb{K}$.} \lang{en}{Multiplication of a row with a number $c\neq0$}
+\item \lang{de}{Addition (Subtraktion) eines $c$-fachen einer Zeile zu (von) einer anderen.} \lang{en}{Addition (or subtraction) of one multiple of a row to (from) another}
+\end{itemize}
+\end{definition}
+
+
+\lang{de}{Bevor wir das Gauß-Verfahren betrachten, zunächst eine \textit{Vorbemerkungen}:}
+\lang{en}{There are some \textit{preliminary premarks} to look at before considering the Gaussian elimination:}
+\lang{de}{
+\begin{itemize}
+    \item Zu Beginn betrachten wir die gesamte 
+        erweiterte Koeffizientenmatrix.
+    \item Die Schritte des Verfahrens werden wiederholt auf 
+        einer Teilmatrix durchgeführt. 
+        Wenn im Folgenden z.\,B. von der ersten Zeile die Rede ist, 
+        dann ist hiermit immer die erste Zeile 
+        der aktuell betrachteten Teilmatrix gemeint.
+    \item Wir schreiben $(K)$ für alle Einträge der $k$-ten Zeile,
+    also $a_{k1}, a_{k2}, \ldots, a_{kn}$.
+    
+    Handschriftlich adressiert man die Zeilen meist mit
+    römischen Zahlen: $(I)$, $(II)$, $\ldots$
+\end{itemize}}
+
+\lang{en}{
+\begin{itemize}
+    \item First of all we consider the entire augmented matrix.
+    \item The steps of the elimination are repeatedly applied to a submatrix.
+    Hereinafter, when talking about e.g. the first row, we always talk about the first row of the currently used submatrix.
+    \item We write $(K)$ for all entries in the $k$th row,
+    so $a_{k1}, a_{k2}, \ldots, a_{kn}$.
+    
+    When solving a linear system by hand, the rows a usually labelled with roman numerals:
+    römischen Zahlen: $(I)$, $(II)$, $\ldots$
+\end{itemize}}
+
+\begin{rule}[\lang{de}{Gauß-Verfahren} \lang{en}{The Gaussian elimination}] 
+\lang{de}{
+\begin{enumerate}
+\item[1.] Suche die erste Spalte, die auch Einträge ungleich $0$ enthält. Den Index dieser Spalte bezeichnen wir nun mit $j$. 
+\item[2.] Vertausche die Zeilen der Matrix ggf. so, dass in dieser Spalte der erste Koeffizient $a_{kj}$ nicht gleich $0$ ist.\\
+Dieser Koeffizient entspricht dem Stufenelement dieser Zeile.
+%\item Teile die erste Zeile durch den Koeffizienten der ersten Variablen.
+\item[3.] Addiere jeweils geeignete Vielfache der ersten Zeile $(K)$ zu den darunter liegenden Zeilen $(L)$, 
+so dass alle anderen Koeffizienten dieser Spalte gleich $0$ werden:\\
+Für alle $l$ mit  $k<l$ forme die Zeile $(L)$ zu $(L)-\frac{a_{lj}}{a_{kj}}(K)$ um.
+\item[4.] Die erste Zeile der aktuellen Teilmatrix wird nun 
+    nicht mehr verändert. 
+    Wir führen das Gauß-Verfahren ab Schritt~1 für eine neue
+    Teilmatrix fort: Diese besteht aus der zweiten bis zur letzten Zeile 
+    der aktuellen Teilmatrix.
+    
+Das Verfahren wird beendet, wenn nur noch eine Zeile übrig ist
+oder die linken Seiten der restlichen Zeilen alle gleich 0 sind.
+\end{enumerate}}
+
+\lang{en}{
+\begin{enumerate}
+\item[1.] Find the first non-zero column. The index of this column, we now call $j$. 
+\item[2.] If necessary, swap the rows so, that we have $a_{kj}\neq0$ for the first coefficient in the $j$th column. 
+This coefficient is now the leading element of this row. 
+%\item Teile die erste Zeile durch den Koeffizienten der ersten Variablen.
+\item[3.] Add a suitable multiple of the first row $(K)$ to the rows $(L)$ below so, that all the other coefficients
+in this row equal zero:\\
+For all $l$ with $k<l$ transform the row $(L)$ to $(L)-\frac{a_{lj}}{a_{kj}}(K)$.
+\item[4.] The first row of the current submatrix will not be changed any more. Continue (starting at step~1) with
+the Gaussian elimination for a new submatrix, that consists of the second to the last row of the current submatrix.
+
+The algorithm stops, if there is only one row left or  the left sides of the remaining rows are all 0.
+\end{enumerate}}
+
+\lang{de}{
+Die erweiterte Koeffizientenmatrix liegt nun in Stufenform vor.
+
+Um eine reduzierte Stufenform zu erhalten, verfährt man nach dieser Umformung weiter:
+\begin{enumerate}
+\item[5.] Bringe jedes Stufenelement auf den Wert 1:\\
+Teile dazu jede Zeile, bei der die linke Seite nicht komplett $0$ ist, durch ihren Stufeneintrag:\\
+Für alle entsprechenden $l$ mit  $l\geq 1$ forme die Zeile $(L)$ zu $\frac{1}{a_{lj}}(L)$ um.
+\item[6.] Bringe alle Koeffizienten über einem Stufenelement auf den Wert 0.\\
+Addiere dazu geeignete Vielfache der in 5. genannten Zeilen $(L)$ zu den darüber liegenden Zeilen $(K)$.\\
+Für alle $k$ mit $1\leq k < l$ forme die Zeile $(K)$ zu $(K)-a_{kj}(L)$ um.
+\end{enumerate}
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10841
+&mode=iframe}{\image[75]{00_video_button_schwarz-blau}}}\\
+}
+
+
+\lang{en}{
+We now have the augmented matrix in row echelon form.
+
+To receive a reduced row echelon form, we must proceed with the following transformations:
+\begin{enumerate}
+\item[5.] Each leading element needs to have the value $1$:\\
+Divide each row with a non-zero left side, by its leading element:\\
+For all $l$ with  $l\geq 1$ transform the row $(L)$ to $\frac{1}{a_{lj}}(L)$.
+\item[6.] All coefficients above a leading element need to have value $0$:
+Add suitable multiples of the row $(L)$, mentioned in 5., to the rows $(K)$ above.\\
+For all $k$ with $1\leq k < l$ transform the row $(K)$ to $(K)-a_{kj}(L)$.
+\end{enumerate}}
+\end{rule}
+
+\lang{de}{
+\begin{remark}
+Beim handschriftlichen Lösen eines LGS wird der Algorithmus 
+oft nicht streng umgesetzt. 
+Um Brüche zu vermeiden, werden im ersten Schritt die Zeilen 
+zum Beispiel so getauscht, dass der 
+%Koeffizient $a_{ik}=1$ 
+Stufeneintrag gleich 1
+ist. 
+Außerdem kann man in Schritt 3 beispielsweise anstelle 
+der Umformung $(L)-\frac{a_{lj}}{a_{kj}}(K)$ 
+auch $-a_{kj}(L) + a_{lj}(K)$ verwenden. 
+Sowohl die Lösungsmenge als auch die reduzierte Stufenform 
+bleiben hierbei unverändert.
+\end{remark}}
+
+\lang{en}{
+\begin{remark}
+When solving a linear system by hand we slightly change the algorithm for convenience.
+In the first step, the rows are swapped so, that the leading element is $1$ to avoid fractions.
+In step 3, it is possible to use the transformation $-a_{kj}(L) + a_{lj}(K)$ 
+instead of $(L)-\frac{a_{lj}}{a_{kj}}(K)$.
+Both the solution set and the reduced row echelon form stay unmodified.
+\end{remark}}
+
+\begin{example}
+\begin{tabs*}
+\tab{\lang{de}{1. Beispiel} \lang{en}{2. Example}}
+\lang{de}{
+Für das LGS 
+\[  \begin{mtable}[\cellaligns{crcrcrcrcrl}]
+(I)&\qquad x_1 &+& 2x_2 &+ &\phantom{3}x_3 &-  &x_4 & = & 7 & \phantom{\qquad|\,\, -2\cdot \text{(II)}}\\
+(II)&  x_1  &+ &3x_2 &  &    & -  & x_4 & = & 8& \\
+(III)& -x_1  &  &      &  -   &3x_3 &+   &5x_4  & = & -9& 
+\end{mtable} \]
+über $\mathbb{R}$ erhalten wir die folgende erweiterte Koeffizientenmatrix:
+\[
+\begin{pmatrix}
+    1 & 2 & 1 & -1 & | & 7\\ 
+    \textcolor{#CC6600}{1} & 3 & 0 & -1  &| & 8\\
+    \textcolor{#CC6600}{-1} & 0 & -3 & 5 &| &  -9
+ %    \rowops \add[-1]01 \add[+1]02
+   \end{pmatrix}
+   ~
+\begin{matrix}
+    \phantom{}\\
+    |-(I) + (II)\\
+    |(I) + (III)
+\end{matrix}\]
+Die erste Spalte enthält Koeffizienten ungleich $0$, sogar in  der ersten Zeile, weshalb wir keine Zeilen tauschen müssen.
+Subtrahieren der ersten Zeile von der zweiten und Addieren der ersten Zeile auf die dritte liefert
+\[    \rightsquigarrow~~
+\begin{pmatrix}
+    1 & 2 & 1 & -1 &| & 7\\ 
+    0 & 1 & -1& 0  &| & 1\\
+    0 & 2 & -2 & 4 & | &  -2
+ %    \rowops \add[-2]12
+\end{pmatrix}.\]
+Damit ist der erste Durchlauf fertig und man fährt genauso mit der Matrix aus der zweiten und dritten Zeile fort, schreibt aber
+weiterhin die erste Zeile mit:
+
+\[    \rightsquigarrow~~
+\begin{pmatrix}
+    \textcolor{gray}{1} & \textcolor{gray}{2} & \textcolor{gray}{1} & \textcolor{gray}{-1} &\textcolor{gray}{|} & \textcolor{gray}{7}\\ 
+    0 & 1 & -1& 0  &| & 1\\
+    0 & \textcolor{#CC6600}{2} & -2 & 4 & | &  -2
+ %    \rowops \add[-2]12
+   \end{pmatrix}
+   ~
+\begin{matrix}
+    \phantom{}\\
+    \phantom{}\\
+    |(-2)(II) + (III)
+\end{matrix}\]
+
+Betrachtet man also nur die kleinere Matrix, enthält die erste Spalte nur $0$, aber die zweite nicht. Auch hier sind keine 
+Zeilen zu tauschen.
+Dann wird das Doppelte der zweiten Zeile von der dritten subtrahiert 
+\[     \rightsquigarrow~~
+\begin{pmatrix}
+    \textcolor{gray}{1} & \textcolor{gray}{2} & \textcolor{gray}{1} & \textcolor{gray}{-1} &\textcolor{gray}{|} & \textcolor{gray}{7}\\ 
+    0 & 1 & -1  & 0&| & 1\\
+    0 & 0 & 0 &4 &| &   -4
+% \rowops \mult[\frac{1}{4}]2   
+   \end{pmatrix}, \]
+wonach auch der zweite Durchlauf fertig ist und man die Stufenform erreicht hat.
+
+Die Stufeneinträge sind im Folgenden blau markiert:
+\[    \rightsquigarrow~~
+\begin{pmatrix}
+    \textcolor{#0066CC}{1} & {2} & {1} &{-1} &{|} & {7}\\ 
+    0 & \textcolor{#0066CC}{1} & -1  & 0&| & 1\\
+    0 & 0 & 0 &\textcolor{#0066CC}{4} &| &   -4
+% \rowops \mult[\frac{1}{4}]2   
+   \end{pmatrix}
+   ~
+\begin{matrix}
+    \phantom{}\\
+    \phantom{}\\
+    |\cdot \frac{1}{4} (III)
+\end{matrix}\]
+
+
+Für die reduzierte Stufenform teilen wir also die dritte Zeile durch $4$   
+\[   
+   \rightsquigarrow~~\begin{pmatrix}
+    \textcolor{#0066CC}{1} & 2 & 1 & \textcolor{red}{-1} &| & 7\\ 
+    0 & \textcolor{#0066CC}{1} & -1  & 0&| & 1\\
+    0 & 0 & 0 &\textcolor{#0066CC}{1} &| &   -1
+   \end{pmatrix}
+   ~
+\begin{matrix}
+    |(III)+(I)\\
+    \phantom{}\\
+    \phantom{}
+\end{matrix}\]
+und addieren die dritte Zeile auf die erste Zeile, um die rote $1$ über dem
+letzten Stufeneintrag zu eliminieren,
+\[     \rightsquigarrow~~
+\begin{pmatrix}
+    \textcolor{#0066CC}{1} & \textcolor{#CC6600}{2} & 1 & 0 &| & 6\\ 
+    0 & \textcolor{#0066CC}{1} & -1  & 0&| & 1\\
+    0 & 0 & 0 &\textcolor{#0066CC}{1} &| &   -1
+%     \rowops \add[-2]10
+   \end{pmatrix}
+   ~
+\begin{matrix}
+    |(-2)(II)+(I)\\
+    \phantom{}\\
+    \phantom{}
+\end{matrix}\]
+und subtrahieren schließlich das Doppelte der zweiten Zeile von der ersten,
+um auch die rote $2$ zu eliminieren:
+\[     \rightsquigarrow~~
+\begin{pmatrix}
+    \textcolor{#0066CC}{1} & 0 & 3 & 0 &| & 4\\ 
+    0 & \textcolor{#0066CC}{1} & -1  & 0&| & 1\\
+    0 & 0 & 0 &\textcolor{#0066CC}{1} &| &   -1
+   \end{pmatrix}
+\]
+Als Gleichungssystem ist dies dann 
+\[  \begin{mtable}[\cellaligns{crcrcrcrcrl}]
+(I)&\qquad \phantom{+}x_1 &\phantom{+}& \phantom{2x_2} &+ &3x_3 &\phantom{-}  & & = & 4 &  \\
+(II)&   & &x_2 & - &  x_3  &   & & = & 1 & \\
+(III)&  &  &    &     & &   &\phantom{4}x_4  & = & -1& 
+\end{mtable} \]
+und daraus lässt sich die Lösungsmenge direkt ablesen, indem man $x_3=t$ mit $t \in \R$ setzt:
+\[ \mathbb{L}
+= \left\{ \begin{pmatrix} 4-3t \\ 1+t \\t \\ -1\end{pmatrix} \, \big| \, t\in \R \right\}
+= \left\{ \begin{pmatrix} 4 \\ 1 \\ 0 \\ -1\end{pmatrix}+ t\cdot \begin{pmatrix} -3\\ 1\\ 1\\ 0 \end{pmatrix} \, \big| \, t\in \R \right\} \]
+.}
+
+\lang{en}{
+For the linear system
+\[  \begin{mtable}[\cellaligns{crcrcrcrcrl}]
+(I)&\qquad x_1 &+& 2x_2 &+ &\phantom{3}x_3 &-  &x_4 & = & 7 & \phantom{\qquad|\,\, -2\cdot \text{(II)}}\\
+(II)&  x_1  &+ &3x_2 &  &    & -  & x_4 & = & 8& \\
+(III)& -x_1  &  &      &  -   &3x_3 &+   &5x_4  & = & -9& 
+\end{mtable} \]
+over $\mathbb{R}$ we have the following augmented matrix:
+\[
+\begin{pmatrix}
+    1 & 2 & 1 & -1 & | & 7\\ 
+    \textcolor{#CC6600}{1} & 3 & 0 & -1  &| & 8\\
+    \textcolor{#CC6600}{-1} & 0 & -3 & 5 &| &  -9
+ %    \rowops \add[-1]01 \add[+1]02
+   \end{pmatrix}
+   ~
+\begin{matrix}
+    \phantom{}\\
+    |-(I) + (II)\\
+    |(I) + (III)
+\end{matrix}\]
+The first column contains non-zero coefficients in every row, even in the first one, which is why we do not need to swap rows.
+Subtracting the first row from the second and adding the first row to the thirds yields
+\[    \rightsquigarrow~~
+\begin{pmatrix}
+    1 & 2 & 1 & -1 &| & 7\\ 
+    0 & 1 & -1& 0  &| & 1\\
+    0 & 2 & -2 & 4 & | &  -2
+ %    \rowops \add[-2]12
+\end{pmatrix}.\]
+The first cycle is done and we go on the same way with the resulting submatrix, but
+continue to note the first row:
+
+\[    \rightsquigarrow~~
+\begin{pmatrix}
+    \textcolor{gray}{1} & \textcolor{gray}{2} & \textcolor{gray}{1} & \textcolor{gray}{-1} &\textcolor{gray}{|} & \textcolor{gray}{7}\\ 
+    0 & 1 & -1& 0  &| & 1\\
+    0 & \textcolor{#CC6600}{2} & -2 & 4 & | &  -2
+ %    \rowops \add[-2]12
+   \end{pmatrix}
+   ~
+\begin{matrix}
+    \phantom{}\\
+    \phantom{}\\
+    |(-2)(II) + (III)
+\end{matrix}\]
+
+Condering only the small matrix, the first column is a zero-column, but the second is not, so they do not need to be swapped.
+The double of the second row is subtracted from the third
+\[     \rightsquigarrow~~
+\begin{pmatrix}
+    \textcolor{gray}{1} & \textcolor{gray}{2} & \textcolor{gray}{1} & \textcolor{gray}{-1} &\textcolor{gray}{|} & \textcolor{gray}{7}\\ 
+    0 & 1 & -1  & 0&| & 1\\
+    0 & 0 & 0 &4 &| &   -4
+% \rowops \mult[\frac{1}{4}]2   
+   \end{pmatrix}.\]
+The second cycle is done and the matrix is in row echelon form.
+
+The leading elements are colored blue:
+\[    \rightsquigarrow~~
+\begin{pmatrix}
+    \textcolor{#0066CC}{1} & {2} & {1} &{-1} &{|} & {7}\\ 
+    0 & \textcolor{#0066CC}{1} & -1  & 0&| & 1\\
+    0 & 0 & 0 &\textcolor{#0066CC}{4} &| &   -4
+% \rowops \mult[\frac{1}{4}]2   
+   \end{pmatrix}
+   ~
+\begin{matrix}
+    \phantom{}\\
+    \phantom{}\\
+    |\cdot \frac{1}{4} (III)
+\end{matrix}\]
+
+
+To receive the reduced row echelon form, we divide the third row by $4$   
+\[   
+   \rightsquigarrow~~\begin{pmatrix}
+    \textcolor{#0066CC}{1} & 2 & 1 & \textcolor{red}{-1} &| & 7\\ 
+    0 & \textcolor{#0066CC}{1} & -1  & 0&| & 1\\
+    0 & 0 & 0 &\textcolor{#0066CC}{1} &| &   -1
+   \end{pmatrix}
+   ~
+\begin{matrix}
+    |(III)+(I)\\
+    \phantom{}\\
+    \phantom{}
+\end{matrix}\]
+and add the result to the first row. So the red $1$ above the last leading element is eliminated
+\[     \rightsquigarrow~~
+\begin{pmatrix}
+    \textcolor{#0066CC}{1} & \textcolor{#CC6600}{2} & 1 & 0 &| & 6\\ 
+    0 & \textcolor{#0066CC}{1} & -1  & 0&| & 1\\
+    0 & 0 & 0 &\textcolor{#0066CC}{1} &| &   -1
+%     \rowops \add[-2]10
+   \end{pmatrix}
+   ~
+\begin{matrix}
+    |(-2)(II)+(I)\\
+    \phantom{}\\
+    \phantom{}
+\end{matrix}.\]
+In the last step we substract the double of the first row from the first to eliminate the red $2$:
+\[     \rightsquigarrow~~
+\begin{pmatrix}
+    \textcolor{#0066CC}{1} & 0 & 3 & 0 &| & 4\\ 
+    0 & \textcolor{#0066CC}{1} & -1  & 0&| & 1\\
+    0 & 0 & 0 &\textcolor{#0066CC}{1} &| &   -1
+   \end{pmatrix}
+\]
+This yields the system of linear equations as follows
+\[  \begin{mtable}[\cellaligns{crcrcrcrcrl}]
+(I)&\qquad \phantom{+}x_1 &\phantom{+}& \phantom{2x_2} &+ &3x_3 &\phantom{-}  & & = & 4 &  \\
+(II)&   & &x_2 & - &  x_3  &   & & = & 1 & \\
+(III)&  &  &    &     & &   &\phantom{4}x_4  & = & -1& 
+\end{mtable}.\]
+Now the solution set can be read right away by subsituting $x_3=t$ with $t \in \R$:
+\[ \mathbb{L}
+= \left\{ \begin{pmatrix} 4-3t \\ 1+t \\t \\ -1\end{pmatrix} \, \big| \, t\in \R \right\}
+= \left\{ \begin{pmatrix} 4 \\ 1 \\ 0 \\ -1\end{pmatrix}+ t\cdot \begin{pmatrix} -3\\ 1\\ 1\\ 0 \end{pmatrix} \, \big| \, t\in \R \right\} \]
+.}
+\tab{\lang{de}{2. Beispiel} \lang{en}{3. Example}}
+\lang{de}{
+Für das LGS über den komplexen Zahlen
+\[  \begin{mtable}[\cellaligns{crcrcrcrl}]
+(I)&\qquad ix_1 &+& (2+i)x_2 &+ &5x_3& = & 0 & \phantom{\qquad|\,\, -2\cdot \text{(II)}}\\
+(II)&  -x_1  &+ &(-1+2i)x_2 & +  & 4ix_3 & = & 2i& \\
+(III)& -3ix_1  & - &  6-3ix_2    &  -   &12x_3 &= & -6& 
+\end{mtable} \]
+ erhalten wir die folgende erweiterte Koeffizientenmatrix:
+\[ \begin{pmatrix}
+    i & 2+i & 5 & | & 0\\ 
+    -1 & 2i-1 & 4i &| & 2i\\
+    -3i & -6-3i & -12 &| & -6
+   \end{pmatrix}  
+   ~
+\begin{matrix}
+    \phantom{}\\
+    |(-i)(I)+(II)\\
+    |3(I)+(III)
+\end{matrix}\]
+Die erste Spalte enthält Koeffizienten ungleich $0$, sogar in  der ersten Zeile, weshalb wir keine Zeilen tauschen müssen.
+Die erste Zeile wird mit $-i$ multipliziert und anschließend zu der zweiten Zeile addiert. 
+Ebenso wird das Dreifache der ersten zu der dritten Zeile addiert.
+\[ 
+ \rightsquigarrow~~\begin{pmatrix}
+    i & 2+i & 5 &| & 0\\ 
+    0 & 0 & -i &| & 2i\\
+    0 & 0 & 3 &| & -6
+   \end{pmatrix}\]
+Damit ist der erste Durchlauf fertig und man fährt genauso mit der Matrix aus der zweiten und dritten Zeile fort, schreibt aber
+weiterhin die erste Zeile mit:
+
+\[  \rightsquigarrow~~
+\begin{pmatrix}
+    \textcolor{gray}{i} & \textcolor{gray}{2+i} & \textcolor{gray}{5} & {|} & \textcolor{gray}{0}\\ 
+    0 & 0 & -i &| & 2i\\
+    0 & 0 & 3 &| & -6
+   \end{pmatrix}  
+   ~
+\begin{matrix}
+    \phantom{}\\
+    \phantom{}\\
+    |(-3i)(II)+(III)
+\end{matrix}\]
+
+Betrachtet man also nur die kleinere Matrix, enthält die erste und die zweite Spalte nur Nullen. 
+In der dritten Spalte sind alle Koeffizienten nicht Null und müssen somit nicht getauscht werden.
+Die zweite Zeile wird mit $-3i$ multipliziert und anschließend zur dritten Zeile addiert
+\[    \rightsquigarrow~~
+\begin{pmatrix}
+        \textcolor{gray}{i} & \textcolor{gray}{2+i} & \textcolor{gray}{5} & {|} & \textcolor{gray}{0}\\
+    0 & 0 & -i &| & 2i\\
+    0 & 0 & 0 &| & 0
+   \end{pmatrix}, \]
+wonach auch der zweite Durchlauf fertig ist und man die Stufenform erreicht hat.
+
+Die Stufeneinträge sind im Folgenden blau markiert:
+\[   \rightsquigarrow~~
+\begin{pmatrix}
+    \textcolor{#0066CC}{i} & {2+i} & {5} &{|} & {0}\\ 
+    0 & 0 & \textcolor{#0066CC}{-i}&| & 2i\\
+    0 & 0 & 0 &| & 0  
+   \end{pmatrix}  
+   ~
+\begin{matrix}
+    |(-i)(I)\\
+    |i(II)\\
+     \phantom{}
+\end{matrix}\]
+
+
+Um die Stufenelemente auf $1$ zu bringen, multiplizieren wir die erste Zeile mit $-i$ und die zweite Zeile mit $i$:
+\[  \rightsquigarrow~~
+\begin{pmatrix}
+    \textcolor{#0066CC}{1} & 1-2i &\textcolor{#CC6600}{-5i} &| & 0\\ 
+    0 & 0&\textcolor{#0066CC}{1} &| & -2\\
+    0 & 0 & 0 &| &0
+   \end{pmatrix}  
+   ~
+\begin{matrix}
+    |5i(II)+(I)\\
+\phantom{}\\
+\phantom{}
+\end{matrix}\]
+Anschließend addieren wir das $5i$-fache der zweiten Zeile zu der ersten Zeile:
+\[   \rightsquigarrow~~
+\begin{pmatrix}
+    \textcolor{#0066CC}{1} & 1-2i&0 &| & -10i\\ 
+    0 & 0&\textcolor{#0066CC}{1} &| & -2\\
+    0 & 0 & 0 &| & 0
+   \end{pmatrix} \]
+Damit ist die reduzierte Stufenform erreicht.%\\
+
+Als Gleichungssystem ist dies  
+\[ 
+\begin{mtable}[\cellaligns{crcrcrl}]
+(I)&\qquad x_1 &+&(1-2i)x_2 &\phantom{-}  & & = & -10i &  \\
+(II)&   & & &  &  x_3  & = & -2 & \\ 
+\end{mtable} \]
+und man erhält die Lösungsmenge
+\[ \mathbb{L}
+= \left\{ \begin{pmatrix} -10i-(1-2i)t \\ t \\ -2 \end{pmatrix} \, \big| \, t\in \C \right\}
+= \left\{ \begin{pmatrix} -10i \\ 0 \\ -2 \end{pmatrix}+ t\cdot \begin{pmatrix} -1+2i\\ 1\\ 0 \end{pmatrix} \, \big| \, t\in \C \right\}. \]}
+
+\lang{en}{
+For the complex-valued linear system
+\[  \begin{mtable}[\cellaligns{crcrcrcrl}]
+(I)&\qquad ix_1 &+& (2+i)x_2 &+ &5x_3& = & 0 & \phantom{\qquad|\,\, -2\cdot \text{(II)}}\\
+(II)&  -x_1  &+ &(-1+2i)x_2 & +  & 4ix_3 & = & 2i& \\
+(III)& -3ix_1  & - &  6-3ix_2    &  -   &12x_3 &= & -6& 
+\end{mtable} \]
+the augmented matrix is given by:
+\[ \begin{pmatrix}
+    i & 2+i & 5 & | & 0\\ 
+    -1 & 2i-1 & 4i &| & 2i\\
+    -3i & -6-3i & -12 &| & -6
+   \end{pmatrix}  
+   ~
+\begin{matrix}
+    \phantom{}\\
+    |(-i)(I)+(II)\\
+    |3(I)+(III)
+\end{matrix}\]
+The first column contains non-zero coefficients, even in the first row, which is why no rows need to be exchanged.
+The first row ist multiplied with $-i$ and then added to the second row.
+Likewise, the triple of the first row is added to the third.
+
+\[ 
+ \rightsquigarrow~~\begin{pmatrix}
+    i & 2+i & 5 &| & 0\\ 
+    0 & 0 & -i &| & 2i\\
+    0 & 0 & 3 &| & -6
+   \end{pmatrix}\]
+The first cycle is done and we continue with the submatrix consisting of the second and the third row, but keep noting down the first row:
+
+\[  \rightsquigarrow~~
+\begin{pmatrix}
+    \textcolor{gray}{i} & \textcolor{gray}{2+i} & \textcolor{gray}{5} & {|} & \textcolor{gray}{0}\\ 
+    0 & 0 & -i &| & 2i\\
+    0 & 0 & 3 &| & -6
+   \end{pmatrix}  
+   ~
+\begin{matrix}
+    \phantom{}\\
+    \phantom{}\\
+    |(-3i)(II)+(III)
+\end{matrix}\]
+
+Considering only the submatrix, the first and the second column contain only zeros, but there are non-zero entries in the third column.
+Therefore, nothing needs to be exchanged.
+The second row is multiplied with $-3i$ and is then added to the third row
+\[    \rightsquigarrow~~
+\begin{pmatrix}
+        \textcolor{gray}{i} & \textcolor{gray}{2+i} & \textcolor{gray}{5} & {|} & \textcolor{gray}{0}\\
+    0 & 0 & -i &| & 2i\\
+    0 & 0 & 0 &| & 0
+   \end{pmatrix}, \]
+which is the row echelon form.
+
+The leading elements are colored blue in the following:
+\[   \rightsquigarrow~~
+\begin{pmatrix}
+    \textcolor{#0066CC}{i} & {2+i} & {5} &{|} & {0}\\ 
+    0 & 0 & \textcolor{#0066CC}{-i}&| & 2i\\
+    0 & 0 & 0 &| & 0  
+   \end{pmatrix}  
+   ~
+\begin{matrix}
+    |(-i)(I)\\
+    |i(II)\\
+     \phantom{}
+\end{matrix}\]
+
+
+To get only ones as leading elements, the first row is multiplied with $-i$ and the second row with $i$:
+\[  \rightsquigarrow~~
+\begin{pmatrix}
+    \textcolor{#0066CC}{1} & 1-2i &\textcolor{#CC6600}{-5i} &| & 0\\ 
+    0 & 0&\textcolor{#0066CC}{1} &| & -2\\
+    0 & 0 & 0 &| &0
+   \end{pmatrix}  
+   ~
+\begin{matrix}
+    |5i(II)+(I)\\
+\phantom{}\\
+\phantom{}
+\end{matrix}\]
+Afterwards we add $5i$-times the second row to the first:
+\[   \rightsquigarrow~~
+\begin{pmatrix}
+    \textcolor{#0066CC}{1} & 1-2i&0 &| & -10i\\ 
+    0 & 0&\textcolor{#0066CC}{1} &| & -2\\
+    0 & 0 & 0 &| & 0
+   \end{pmatrix} \]
+Now the linear system is in reduced row echelon form.%\\
+
+Written as a system of linear equations we have  
+\[ 
+\begin{mtable}[\cellaligns{crcrcrl}]
+(I)&\qquad x_1 &+&(1-2i)x_2 &\phantom{-}  & & = & -10i &  \\
+(II)&   & & &  &  x_3  & = & -2 & \\ 
+\end{mtable} \]
+and the solution set is given by
+\[ \mathbb{L}
+= \left\{ \begin{pmatrix} -10i-(1-2i)t \\ t \\ -2 \end{pmatrix} \, \big| \, t\in \C \right\}
+= \left\{ \begin{pmatrix} -10i \\ 0 \\ -2 \end{pmatrix}+ t\cdot \begin{pmatrix} -1+2i\\ 1\\ 0 \end{pmatrix} \, \big| \, t\in \C \right\}. \]}
+\end{tabs*}
+\end{example}
+
+
+\begin{remark}
+\lang{de}{
+Ist allgemein eine Matrix $A$ gegeben (die nicht von einem LGS induziert sein muss),
+reden wir dennoch von Zeilenumformungen und reduzierter Stufenform der Matrix $A$.
+Diese werden entsprechend dem obigen Gauß-Verfahren gebildet, wobei keine rechte Seite vorhanden ist.}
+\lang{en}{
+The terms "row operations" and "reduced row echelon form" may also be used for a general matrix $A$, that does not necesseraly
+need to be given by a system of linear equations.
+For that, the above Gaussian elimination can be applied, even if no right side exists. }
+\end{remark}
+
+\lang{de}{
+Eine Matrix $A$ (bzw. ein LGS) kann durch unterschiedliche Umformungen eine andere Stufenform annehmen. 
+Im Gegensatz dazu existiert genau eine dazugehörige reduzierte Stufenform.}
+\lang{en}{
+A matrix $A$ (or a linear system) may have different row echelon forms depending on the transformations applied.
+In contrast to that, there exists exactly on corresponding reduced row echelon form.}
+\label{rule:red-stufenform-eind}
+
+\begin{theorem}
+\begin{enumerate}
+\item \lang{de}{Die reduzierte Stufenform einer Matrix $A$ hängt nicht von den getätigten
+Zwischenschritten ab. Das heißt, wenn man im Gauß-Verfahren andere Schritte
+durchführt - zum Beispiel am Anfang noch Zeilen vertauscht, um einen anderen von Null
+verschiedenen Eintrag an erster Position zu erhalten -, ist die reduzierte Stufenform mit Einsen als Stufenelementen
+am Ende wieder dieselbe.}
+\lang{en}{The reduced row echelon form of a matrix $A$ does not depend on the intermediate steps taken.
+This means, that if we perform different steps in the Gaussian elimination - e.g. exchanging rows to start with a different non-zero entry -,
+the reduced row echelon form with only ones as leading elements is the same in the end.}
+\item \lang{de}{Sind $A$ und $B$ zwei Matrizen, die durch Zeilenumformungen auseinander
+hervorgegangen sind, so sind ihre reduzierten Stufenformen dieselben.}
+\lang{en}{If $A$ and $B$ are two matrices that have been created from each other by row transformations,
+then their reduced row echelon forms are the same.}
+\end{enumerate}
+\end{theorem}
+
+\begin{block}[explanation]
+			\begin{showhide}
+            \begin{enumerate}
+\item \lang{de}{Durch die Zeilenumformungen ändert sich die Lösungsmenge des entsprechenden
+homogenen linearen Gleichungssystems $Ax=0$ nicht.\\
+Aus der reduzierten Stufenform lässt sich die Lösungsmenge in Parameterform direkt ablesen (s. \lref{rule:loesung-parametrisiert}{unten}). 
+Diese Darstellung hängt von den
+als Parametern gewählten Variablen ab (siehe \ref{rule:loesung-parametrisiert}), welche aber bei dem angewendeten Verfahren
+stets die möglichst letzten sind.\\
+Die reduzierte Stufenform ist also immer dieselbe, egal welche elementaren Umformungen dafür gemacht wurden.}
+
+\lang{en}{
+The row operations do not change the solution set of the corresponding homogeneous linear system $Ax=0$.\\
+From the reduced row echelon form, the solution set can be read directly in parameter form (see \lref{rule:loesung-parametrisiert}{below}).
+The representation depends on the chosen parameters for the variables (see \ref{rule:loesung-parametrisiert}), which, however,
+are always the last possible in the procedure used.\\
+So, the reduced row echelon form is always the same, no matter which elementary operations were used.}
+
+\item \lang{de}{Eine Matrix $A$ lässt sich immer in reduzierter Stufenform angeben und somit lässt sich auch jede Matrix $B$, die durch elementare Umformungen von $A$ erzeugt wurde, in dieser darstellen.
+Da die reduzierte Stufenform von $A$ eindeutig ist, entspricht sie auch der von $B$.}
+\lang{en}{
+A matrix $A$ can always be presented in reduced row echelon form. Therefore, every matrix $B$, created from $A$ by using elementary operations,
+can be displayed in reduced row echelon form too. Because the reduced row echelon form of $A$ is unique, it also corresponds to that of $B$.}\\
+\end{enumerate}
+\end{showhide}
+\end{block}
+
+\section{\lang{de}{Lineare Gleichungssysteme mit mehreren rechten Seiten} \lang{en}{Linear systems with several right sides}}\label{sec:mehrere-rechte-seiten}
+
+\lang{de}{In der Praxis möchte man oft mehrere lineare Gleichungssysteme lösen, wobei die
+linke Seite ($Ax$) durch das konkrete Problem stets dieselbe ist und sich lediglich die
+rechte Seite ($b$) ändert. 
+
+Mit dem Gauß-Verfahren kann man diese LGS in einer Rechnung
+lösen. Man muss in der erweiterten Koeffizientenmatrix lediglich alle rechten Seiten nebeneinander aufführen.}
+
+\lang{en}{In practise we often want to solve several linear system, in which the left side ($Ax$) is always the same because of 
+the given problem and only the righ side ($b$) changes.
+
+With the Gaussian elimination these linear systems can be solved with only one calculation. For this, all the right sides need to be listed
+in the augmented matrix.}
+
+\begin{example}
+\begin{tabs*}
+\tab{\lang{de}{1. Beispiel} \lang{en}{2. Example}}\ref{ex:gauss}
+\lang{de}{
+Zu lösen sind die linearen Gleichungssysteme}
+\begin{displaymath}
+\begin{mtable}[\cellaligns{ccrcrcrcr}]
+(I)&\quad-&x&+&2y&+&3z&=&5\\
+(II)&\quad&x&-&y&+&z&=&6\\
+(III)&\quad&2x&-&3y&-&4z&=&-5
+\end{mtable}\qquad \text{und} \qquad 
+\begin{mtable}[\cellaligns{ccrcrcrcr}]
+(I)&\quad-&x&+&2y&+&3z&=&2\\
+(II)&\quad&x&-&y&+&z&=&-1\\
+(III)&\quad&2x&-&3y&-&4z&=&3
+\end{mtable}
+\end{displaymath}
+und bei beiden ist die Koeffizientenmatrix
+\[ A= \begin{pmatrix}
+-1 & 2 & 3 \\ 1 & -1 & 1 \\ 2 & -3 & -4 \end{pmatrix}. \]
+Die Spaltenvektoren zur rechten Seite sind
+\[  b=\begin{pmatrix} 5 \\ 6 \\ -5\end{pmatrix} \quad \text{bzw.} \quad 
+c= \begin{pmatrix} 2 \\ -1 \\ 3\end{pmatrix}. \]
+Um beide LGS gleichzeitig zu lösen (und damit Rechenaufwand zu sparen),
+schreibt man eine erweiterte Koeffizientenmatrix, bei der beide Spaltenvektoren auf der rechten Seite stehen:
+\[ (A \ \mid \ b\ c)=  \begin{pmatrix}
+-1 & 2 & 3 & | & 5 & 2 \\ 1 & -1 & 1& | & 6 & -1  \\ 2 & -3 & -4& | & -5 & 3  \end{pmatrix}. \]
+Anschließend wendet man auf diese Matrix das oben beschriebene Gauß-Verfahren an
+und kann danach beide LGS in reduzierter Stufenform ablesen:
+\begin{eqnarray*}
+&& \begin{pmatrix} -1 & 2 & 3 & | & 5 & 2 \\ 1 & -1 & 1& | & 6 & -1  \\ 2 & -3 & -4& | & -5 & 3  \end{pmatrix} 
+\begin{matrix} \text{|} \cdot (-1) \\ \phantom{1}\\ \phantom{1} \end{matrix} \rightsquigarrow 
+\begin{pmatrix} 1 & -2 & -3 & | & -5 & -2 \\ 1 & -1 & 1& | & 6 & -1  \\ 2 & -3 & -4& | & -5 & 3  \end{pmatrix} 
+\begin{matrix} \phantom{1} \\ \text{|} - 1\cdot (I)\\ \text{|}  -2\cdot (I) \end{matrix}  \\ &&\\
+& \rightsquigarrow & \begin{pmatrix} 1 & -2 & -3 & | & -5 & -2 \\ 0 & 1 & 4& | & 11 & 1  \\ 0 & 1 & 2& | & 5 & 7  \end{pmatrix} 
+\begin{matrix} \phantom{1} \\  \phantom{1}\\ \text{|} -1\cdot (II) \end{matrix} \rightsquigarrow 
+\begin{pmatrix} 1 & -2 & -3 & | & -5 & -2 \\ 0 & 1 & 4& | & 11 & 1  \\ 0 & 0 & -2& | & -6 & 6  \end{pmatrix} 
+\begin{matrix} \phantom{1} \\  \phantom{1}\\ \text{|}  \cdot (-1/2) \end{matrix}   \\ &&\\
+& \rightsquigarrow & \begin{pmatrix} 1 & -2 & -3 & | & -5 & -2 \\ 0 & 1 & 4& | & 11 & 1  \\ 0 & 0 & 1& | & 3 & -3  \end{pmatrix} 
+\begin{matrix}\text{|} +3\cdot (III) \\  \text{|}  -4\cdot (III) \\\phantom{1} \end{matrix} \rightsquigarrow 
+\begin{pmatrix} 1 & -2 & 0 & | & 4 & -11 \\ 0 & 1 & 0& | & -1 & 13  \\ 0 & 0 & 1& | & 3 & -3  \end{pmatrix} 
+\begin{matrix}\text{|} +2\cdot (II) \\  \phantom{1} \\ \phantom{1} \end{matrix}  \\ &&\\
+& \rightsquigarrow & \begin{pmatrix} 1 & 0 & 0 & | & 2 & 15 \\ 0 & 1 & 0& | & -1 & 13  \\ 0 & 0 & 1& | & 3 & -3  \end{pmatrix}
+\end{eqnarray*}
+Die Lösungsmenge für das erste LGS lautet damit
+\[  \mathbb{L}=\{ \left(\begin{smallmatrix}
+2 \\ -1\\ 3 \end{smallmatrix}\right) \},\]
+und die Lösungsmenge für das zweite LGS ist
+\[  \mathbb{L}=\{ \left(\begin{smallmatrix}
+15 \\ 13\\ -3 \end{smallmatrix}\right) \}.\]
+%}
+
+\lang{en}{
+The following linear systems need to be solved
+\begin{displaymath}
+\begin{mtable}[\cellaligns{ccrcrcrcr}]
+(I)&\quad-&x&+&2y&+&3z&=&5\\
+(II)&\quad&x&-&y&+&z&=&6\\
+(III)&\quad&2x&-&3y&-&4z&=&-5
+\end{mtable}\qquad \text{und} \qquad 
+\begin{mtable}[\cellaligns{ccrcrcrcr}]
+(I)&\quad-&x&+&2y&+&3z&=&2\\
+(II)&\quad&x&-&y&+&z&=&-1\\
+(III)&\quad&2x&-&3y&-&4z&=&3
+\end{mtable}.
+\end{displaymath}
+Both have the coefficient matrix
+\[ A= \begin{pmatrix}
+-1 & 2 & 3 \\ 1 & -1 & 1 \\ 2 & -3 & -4 \end{pmatrix}. \]
+The column vectors of the right side are
+\[  b=\begin{pmatrix} 5 \\ 6 \\ -5\end{pmatrix} \quad \text{bzw.} \quad 
+c= \begin{pmatrix} 2 \\ -1 \\ 3\end{pmatrix}. \]
+To solve both linear systems at a time (and save calculation effort),
+we write a augmented matrix with both column vectors on the right side:
+\[ (A \ \mid \ b\ c)=  \begin{pmatrix}
+-1 & 2 & 3 & | & 5 & 2 \\ 1 & -1 & 1& | & 6 & -1  \\ 2 & -3 & -4& | & -5 & 3  \end{pmatrix}. \]
+Afterwards we apply the Gaussian elimination from above. In the end it is possible to read both linear systems in 
+reduced row echelon form:
+\begin{eqnarray*}
+&& \begin{pmatrix} -1 & 2 & 3 & | & 5 & 2 \\ 1 & -1 & 1& | & 6 & -1  \\ 2 & -3 & -4& | & -5 & 3  \end{pmatrix} 
+\begin{matrix} \text{|} \cdot (-1) \\ \phantom{1}\\ \phantom{1} \end{matrix} \rightsquigarrow 
+\begin{pmatrix} 1 & -2 & -3 & | & -5 & -2 \\ 1 & -1 & 1& | & 6 & -1  \\ 2 & -3 & -4& | & -5 & 3  \end{pmatrix} 
+\begin{matrix} \phantom{1} \\ \text{|} - 1\cdot (I)\\ \text{|}  -2\cdot (I) \end{matrix}  \\ &&\\
+& \rightsquigarrow & \begin{pmatrix} 1 & -2 & -3 & | & -5 & -2 \\ 0 & 1 & 4& | & 11 & 1  \\ 0 & 1 & 2& | & 5 & 7  \end{pmatrix} 
+\begin{matrix} \phantom{1} \\  \phantom{1}\\ \text{|} -1\cdot (II) \end{matrix} \rightsquigarrow 
+\begin{pmatrix} 1 & -2 & -3 & | & -5 & -2 \\ 0 & 1 & 4& | & 11 & 1  \\ 0 & 0 & -2& | & -6 & 6  \end{pmatrix} 
+\begin{matrix} \phantom{1} \\  \phantom{1}\\ \text{|}  \cdot (-1/2) \end{matrix}   \\ &&\\
+& \rightsquigarrow & \begin{pmatrix} 1 & -2 & -3 & | & -5 & -2 \\ 0 & 1 & 4& | & 11 & 1  \\ 0 & 0 & 1& | & 3 & -3  \end{pmatrix} 
+\begin{matrix}\text{|} +3\cdot (III) \\  \text{|}  -4\cdot (III) \\\phantom{1} \end{matrix} \rightsquigarrow 
+\begin{pmatrix} 1 & -2 & 0 & | & 4 & -11 \\ 0 & 1 & 0& | & -1 & 13  \\ 0 & 0 & 1& | & 3 & -3  \end{pmatrix} 
+\begin{matrix}\text{|} +2\cdot (II) \\  \phantom{1} \\ \phantom{1} \end{matrix}  \\ &&\\
+& \rightsquigarrow & \begin{pmatrix} 1 & 0 & 0 & | & 2 & 15 \\ 0 & 1 & 0& | & -1 & 13  \\ 0 & 0 & 1& | & 3 & -3  \end{pmatrix}
+\end{eqnarray*}
+The solution set of the first linear system ist
+\[  \mathbb{L}=\{ \left(\begin{smallmatrix}
+2 \\ -1\\ 3 \end{smallmatrix}\right) \},\]
+and the solution set of the second linear system is
+\[  \mathbb{L}=\{ \left(\begin{smallmatrix}
+15 \\ 13\\ -3 \end{smallmatrix}\right) \}.\]}
+
+\tab{\lang{de}{2. Beispiel} \lang{en}{2. Example}}
+\lang{de}{
+Zu lösen sind die linearen Gleichungssysteme
+\begin{displaymath}
+\begin{mtable}[\cellaligns{ccrcrcrcr}]
+(I)&\qquad ix_1 &+& (2+i)x_2 &+ &5x_3& = & 0 \\
+(II)&  -x_1  &+ &(-1+2i)x_2 & +  & 4ix_3 & = & 2i \\
+(III)& -3ix_1  & + &  (-6-3i)x_2    &  -   &12x_3 &= & -6
+\end{mtable}\qquad \text{und} \qquad 
+\begin{mtable}[\cellaligns{ccrcrcrcr}]
+(I)&\qquad ix_1 &+& (2+i)x_2 &+ &5x_3& = & 1\\
+(II)&  -x_1  &+ &(-1+2i)x_2 & +  & 4ix_3 & = & i \\
+(III)& -3ix_1  & + &  (-6-3i)x_2    &  -   &12x_3 &= & -3
+\end{mtable}
+\end{displaymath}
+und bei beiden ist die Koeffizientenmatrix
+\[ \begin{pmatrix}
+    i & 2+i & 5  \\ 
+    -1 & 2i-1 & 4i \\
+    -3i & -6-3i & -12 
+   \end{pmatrix}. \]
+Die Spaltenvektoren zur rechten Seite sind
+\[  b=\begin{pmatrix} 0\\ 2i \\ -6\end{pmatrix} \quad \text{bzw.} \quad 
+c= \begin{pmatrix} 1 \\ i \\ -3\end{pmatrix}. \]
+Um beide LGS gleichzeitig zu lösen (und damit Rechenaufwand zu sparen),
+schreibt man eine erweiterte Koeffizientenmatrix, bei der beide Spaltenvektoren auf der rechten Seite stehen:
+\[ (A \ \mid \ b\ c)=\begin{pmatrix}
+    i & 2+i & 5 & | & 0 &1\\ 
+    -1 & 2i-1 & 4i &| & 2i&i\\
+    -3i & -6-3i & -12 &| & -6&-3
+   \end{pmatrix}. \]
+Anschließend wendet man auf diese Matrix das oben beschriebene Gauß-Verfahren an
+und kann danach beide LGS in reduzierter Stufenform ablesen:
+\begin{eqnarray*}
+&& \begin{pmatrix}
+    i & 2+i & 5 & | & 0 &1\\ 
+    -1 & 2i-1 & 4i &| & 2i&i\\
+    -3i & -6-3i & -12 &| & -6&-3
+   \end{pmatrix}
+   \begin{matrix} \phantom{1} \\ \text{|} -i \cdot (I) \\ \text{|} +3 \cdot (I)   \end{matrix} \rightsquigarrow 
+\begin{pmatrix}
+    i & 2+i & 5 &| & 0 & 1\\ 
+    0 & 0 & -i &| & 2i & 0\\
+    0 & 0 & 3 &| & -6 & 0
+   \end{pmatrix}
+\begin{matrix} \phantom{1} \\\phantom{1} \\ \text{|} -3i \cdot (II)  \end{matrix}   \\ &&\\
+& \rightsquigarrow & 
+\begin{pmatrix}
+    i & 2+i & 5 &| & 0 & 1\\ 
+    0 & 0 & -i &| & 2i & 0\\
+    0 & 0 & 0 &| & 0 & 0
+   \end{pmatrix}
+\begin{matrix} \text{|} \cdot (-i) \\ \text{|} \cdot i\\ \phantom{1} \end{matrix} \rightsquigarrow 
+\begin{pmatrix}
+    1 & 1-2i &{-5i} &| & 0 & -i\\ 
+    0 & 0&{1} &| & -2 & 0\\
+    0 & 0 & 0 &| & 0 & 0
+   \end{pmatrix}  
+\begin{matrix} \text{|} +5i \cdot (II) \\ \phantom{1} \\  \phantom{1} \end{matrix}  \\ &&\\& \rightsquigarrow & 
+\begin{pmatrix}
+    1 & 1-2i&0 &| & -10i& -i\\ 
+    0 & 0   &1 &| & -2 & 0\\
+    0 & 0   &0 &| & 0 & 0
+   \end{pmatrix}
+\end{eqnarray*}
+Die Lösungsmenge des ersten LGS lautet damit
+\[  \mathbb{L}=\left\{ \begin{pmatrix} -10i-(1-2i)t \\ t \\ -2 \end{pmatrix} \, \big| \, t\in \C \right\}\]
+und die Lösungsmenge des zweiten LGS ist
+\[ \mathbb{L}=\left\{ \begin{pmatrix} -i-(1-2i)t \\ t \\ 0 \end{pmatrix} \, \big| \, t\in \C \right\}.\]}
+
+\lang{en}{
+The following linear systems need to be solved
+\begin{displaymath}
+\begin{mtable}[\cellaligns{ccrcrcrcr}]
+(I)&\qquad ix_1 &+& (2+i)x_2 &+ &5x_3& = & 0 \\
+(II)&  -x_1  &+ &(-1+2i)x_2 & +  & 4ix_3 & = & 2i \\
+(III)& -3ix_1  & + &  (-6-3i)x_2    &  -   &12x_3 &= & -6
+\end{mtable}\qquad \text{und} \qquad 
+\begin{mtable}[\cellaligns{ccrcrcrcr}]
+(I)&\qquad ix_1 &+& (2+i)x_2 &+ &5x_3& = & 1\\
+(II)&  -x_1  &+ &(-1+2i)x_2 & +  & 4ix_3 & = & i \\
+(III)& -3ix_1  & + &  (-6-3i)x_2    &  -   &12x_3 &= & -3
+\end{mtable}.
+\end{displaymath}
+For both the coefficient matrix is
+\[ \begin{pmatrix}
+    i & 2+i & 5  \\ 
+    -1 & 2i-1 & 4i \\
+    -3i & -6-3i & -12 
+   \end{pmatrix}. \]
+The column vectors on the right side are
+\[  b=\begin{pmatrix} 0\\ 2i \\ -6\end{pmatrix} \quad \text{bzw.} \quad 
+c= \begin{pmatrix} 1 \\ i \\ -3\end{pmatrix}. \]
+
+To solve both linear systems at a time (and save calculation effort),
+we write a augmented matrix with both column vectors on the right side:
+\[ (A \ \mid \ b\ c)=\begin{pmatrix}
+    i & 2+i & 5 & | & 0 &1\\ 
+    -1 & 2i-1 & 4i &| & 2i&i\\
+    -3i & -6-3i & -12 &| & -6&-3
+   \end{pmatrix}. \]
+Afterwards we apply the Gaussian elimination on the matrix. Then it is possible to
+read both linear systems in reduced row echelon form:
+\begin{eqnarray*}
+&& \begin{pmatrix}
+    i & 2+i & 5 & | & 0 &1\\ 
+    -1 & 2i-1 & 4i &| & 2i&i\\
+    -3i & -6-3i & -12 &| & -6&-3
+   \end{pmatrix}
+   \begin{matrix} \phantom{1} \\ \text{|} -i \cdot (I) \\ \text{|} +3 \cdot (I)   \end{matrix} \rightsquigarrow 
+\begin{pmatrix}
+    i & 2+i & 5 &| & 0 & 1\\ 
+    0 & 0 & -i &| & 2i & 0\\
+    0 & 0 & 3 &| & -6 & 0
+   \end{pmatrix}
+\begin{matrix} \phantom{1} \\\phantom{1} \\ \text{|} -3i \cdot (II)  \end{matrix}   \\ &&\\
+& \rightsquigarrow & 
+\begin{pmatrix}
+    i & 2+i & 5 &| & 0 & 1\\ 
+    0 & 0 & -i &| & 2i & 0\\
+    0 & 0 & 0 &| & 0 & 0
+   \end{pmatrix}
+\begin{matrix} \text{|} \cdot (-i) \\ \text{|} \cdot i\\ \phantom{1} \end{matrix} \rightsquigarrow 
+\begin{pmatrix}
+    1 & 1-2i &{-5i} &| & 0 & -i\\ 
+    0 & 0&{1} &| & -2 & 0\\
+    0 & 0 & 0 &| & 0 & 0
+   \end{pmatrix}  
+\begin{matrix} \text{|} +5i \cdot (II) \\ \phantom{1} \\  \phantom{1} \end{matrix}  \\ &&\\& \rightsquigarrow & 
+\begin{pmatrix}
+    1 & 1-2i&0 &| & -10i& -i\\ 
+    0 & 0   &1 &| & -2 & 0\\
+    0 & 0   &0 &| & 0 & 0
+   \end{pmatrix}
+\end{eqnarray*}
+The solution set of the first linear system is
+\[  \mathbb{L}=\left\{ \begin{pmatrix} -10i-(1-2i)t \\ t \\ -2 \end{pmatrix} \, \big| \, t\in \C \right\}\]
+The solution set of the second linear system is
+\[ \mathbb{L}=\left\{ \begin{pmatrix} -i-(1-2i)t \\ t \\ 0 \end{pmatrix} \, \big| \, t\in \C \right\}.\]}
+\end{tabs*}
+\end{example}
+\end{content}

@@ -1,0 +1,1359 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Erzeugendensysteme und Basen}
+    \lang{en}{Generating sets, linear independence and bases}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T108_LinearDependence.meta.xml}{T108_LinearDependence}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T108_Vektorrechnung/g_art_content_30_basen_eigenschaften.meta.xml}{Erzeugendensystem}
+% alt  \link{generic_article}{content/rwth/HM1/T111_Matrizen,_lineare_Gleichungssysteme/g_art_content_40_lineare_gleichungssysteme.meta.xml}{lgs}
+% content_40_ ... ist in T112neu_ ...
+    \link{generic_article}{content/rwth/HM1/T112neu_Lineare_Gleichungssysteme/g_art_content_40_lineare_gleichungssysteme.meta.xml}{lgs}
+    \link{generic_article}{content/rwth/HM1/T108_Vektorrechnung/g_art_content_29_linearkombination.meta.xml}{lin-comb}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{8}
+\ombarticle{3}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Lineare Unabhängigkeit von Vektoren, Erzeugendensysteme und Basen}
+       \lang{en}{Generating sets, linear independence and bases}}
+ 
+\begin{block}[annotation]
+  übungsinhalt
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9047}{Ticket 9047}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\lang{de}{
+Im Zusammenhang mit \ref[lin-comb][Linearkombinationen]{sec:lin-comb}
+ergeben sich drei wichtige Begriffe:
+Erzeugendensysteme, lineare Unabhängigkeit und Basen.
+}
+\lang{en}{
+There are several important definitions that arise from the definition of a 
+\ref[lin-comb][linear combination]{sec:lin-comb} of vectors: generating sets, linear independence 
+and bases.
+}
+
+\section{\lang{de}{Erzeugendensysteme}\lang{en}{Generating sets}}  \label{def_ES}
+
+%
+%%% Video Hoever
+%
+\lang{de}{
+In den \ref[lin-comb][Beispielen zu Linearkombinationen]{ex:linearkombinationen} haben wir festgestellt, dass
+aus geeigneten fest vorgegebenen Vektoren des $\R^3$ alle weiteren Vektoren aus dem $\R^2$ als Linearkombination
+darstellen lassen. Dies führt uns zu dem Begriff des \emph{Erzeugendensystems.}
+\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=709}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{
+In the \ref[lin-comb][final example]{ex:linearkombinationen} of the previous section we established 
+that any vector in $\R^3$ is a linear combination of a specific given set of vectors.
+}
+%
+
+\begin{definition}[\lang{de}{Erzeugendensystem}\lang{en}{Generating system}]
+\lang{de}{
+Eine Menge von Vektoren $\{ \vec{v}_1;\ldots;\vec{v}_l \}$ im $\R^n$ hei"st \emph{Erzeugendensystem 
+des $\R^n$}, wenn jeder Vektor im $\R^n$ sich als Linearkombination der Vektoren 
+$\vec{v}_1,\ldots,\vec{v}_l$ schreiben lässt.\\
+}
+\lang{en}{
+A set of vectors $\{ \vec{v}_1;\ldots;\vec{v}_l \}$ in $\R^n$ is called a \emph{generating set of 
+$\R^n$} if every vector in $\R^n$ can be written as a linear combination of the vectors 
+$\vec{v}_1,\ldots,\vec{v}_l$.
+}
+\end{definition}
+
+\lang{de}{
+Dabei gilt stets $l \geq n$, wie später in \ref{ES_Basis} (Theorem zu Basen) noch gezeigt wird.
+}
+\lang{en}{
+It is necessary that $l \geq n$, as is shown later in theorem \ref{ES_Basis}.
+}
+
+\begin{example}
+\begin{tabs*}
+\tab{\lang{de}{Standardvektoren}\lang{en}{Standard unit vectors}}
+\lang{de}{Die Standardvektoren im $\R^n$}
+\lang{en}{The standard unit vectors in $\R^n$}
+\[ \vec{e}_1=\begin{pmatrix} 1\\ 0\\ \vdots \\ 0\end{pmatrix},
+   \quad \vec{e}_2=\begin{pmatrix} 0\\ 1\\ \vdots \\ 0\end{pmatrix},
+     \quad \ldots, \quad \vec{e}_n=\begin{pmatrix} 0\\ \vdots \\ 0\\ 1\end{pmatrix} \]
+\lang{de}{
+bilden ein Erzeugendensystem des $\R^n$, da jeder Vektor 
+$\begin{pmatrix} v_1\\ \vdots \\ v_n\end{pmatrix}$ geschrieben werden kann als
+}
+\lang{en}{
+\emph{generate} $\R^n$, that is, the set of the standard unit vectors is a generating set of $\R^n$, 
+as every vector $\begin{pmatrix} v_1\\ \vdots \\ v_n\end{pmatrix}$ can be written as
+}
+\[ \begin{pmatrix} v_1\\ \vdots \\ v_n\end{pmatrix} = v_1\cdot \vec{e}_1 +v_2\cdot \vec{e}_2 +\ldots +v_n\cdot \vec{e}_n. \]
+\lang{de}{
+Es lässt sich also jeder Vektor $\vec{v} \in \R^n$ als Linearkombination aus den Standardvektoren 
+\emph{erzeugen}.
+}
+\lang{en}{
+Hence every vector $\vec{v} \in \R^n$ is \emph{generated} by the standard unit vectors.
+}
+\tab{\lang{de}{3 Vektoren im $\R^3$}\lang{en}{Three vectors in $\R^3$}}
+\lang{de}{Die Vektoren}
+\lang{en}{The vectors}
+\[
+\vec{v}_1 \, = \, \begin{pmatrix}
+1 \\ 2 \\ 0
+\end{pmatrix}, 
+\vec{v}_2 \, = \, \begin{pmatrix}
+2 \\ 3 \\ 0
+\end{pmatrix}, 
+\vec{v}_3 \, = \, \begin{pmatrix}
+3 \\ 4 \\ 0
+\end{pmatrix}
+\]
+\lang{de}{
+bilden kein Erzeugendensystem des $\R^3$, da bei allen die 3. Komponente Null ist.
+\\
+Demzufolge lässt sich zum Beispiel der Vektor
+}
+\lang{en}{
+do not generate $\R^3$, as their third component is always zero.
+\\
+Hence, for example the vector
+}
+$ \begin{pmatrix}
+0 \\ 0 \\ 1 \end{pmatrix} $
+\lang{de}{
+nicht aus $\vec{v}_1$, $\vec{v}_2$ und $\vec{v}_3$ erzeugen, denn es gibt keine
+rellen Zahlen $r_1,r_2,r_3$, für die gilt: 
+}
+\lang{en}{
+cannot be written as a linear combination of $\vec{v}_1$, $\vec{v}_2$ and $\vec{v}_3$, as there are 
+no real numbers $r_1,r_2,r_3$ such that:
+}
+\[1=r_1 \cdot 0 + r_2 \cdot 0 + r_3 \cdot 0. \]
+
+\lang{de}{Folglich gibt es auch keine Linearkombination}
+\lang{en}{Thus there are no $r_1,r_2,r_3$ such that:}
+ 
+\[ \begin{pmatrix}
+0 \\ 0 \\ 1 \end{pmatrix}= r_1 \cdot \begin{pmatrix}1 \\ 2 \\ 0\end{pmatrix}
++ r_2\cdot \begin{pmatrix}2 \\ 3 \\ 0\end{pmatrix}
++ r_3 \cdot \begin{pmatrix}3 \\ 4 \\ 0\end{pmatrix}. \]
+
+ 
+\tab{\lang{de}{3 Vektoren im $\R^2$}\lang{en}{Three vectors in $\R^2$}}
+\lang{de}{
+Die Vektoren $\begin{pmatrix} 2\\ -1\end{pmatrix}$, $\begin{pmatrix} -1\\ 3\end{pmatrix}$
+und $\begin{pmatrix} 1\\ 0\end{pmatrix}$ bilden ein Erzeugendensystem des $\R^2$, denn jeder Vektor 
+$\begin{pmatrix} v_1\\ v_2\end{pmatrix}$ lässt sich darstellen als
+}
+\lang{en}{
+The vectors $\begin{pmatrix} 2\\ -1\end{pmatrix}$, $\begin{pmatrix} -1\\ 3\end{pmatrix}$ and 
+$\begin{pmatrix} 1\\ 0\end{pmatrix}$ generate $\R^2$, as every vector 
+$\begin{pmatrix} v_1\\ v_2\end{pmatrix}$ can be written as
+}
+\[ \begin{pmatrix} v_1\\ v_2\end{pmatrix} = -v_2\cdot \begin{pmatrix} 2\\ -1\end{pmatrix}
++ 0 \cdot \begin{pmatrix} -1\\ 3\end{pmatrix}
++ (v_1+2v_2) \cdot \begin{pmatrix} 1\\ 0\end{pmatrix}. \]
+\end{tabs*}
+\end{example}
+
+\begin{remark}
+\lang{de}{
+Um im Allgemeinen zu entscheiden, ob eine gegebene Menge von Vektoren $\{ \vec{v}_1;\ldots;\vec{v}_l \}$ im $\R^n$
+ein Erzeugendensystem ist, muss für jeden beliebigen Vektor $\vec{w}$ untersucht werden, ob die Gleichung 
+\[ r_1\vec{v}_1+\ldots + r_l\vec{v}_l =\vec{w} \]
+Lösungen $r_1, \ldots,r_l \in \R$ hat. \\
+Ein allgemeines Verfahren, solche linearen Gleichungssysteme (hier mit $n$ Gleichungen 
+und $l$ Variablen $r_1,\ldots, r_l$) zu lösen, wird im Abschnitt \link{lgs}{Lineare Gleichungssysteme} erklärt.\\
+Im $\R^2$ oder $\R^3$ lassen sich Lösungen oft auch \glqq{}direkt\grqq{} finden.
+}
+\lang{en}{
+In general, to decide whether a given set of vectors $\{ \vec{v}_1;\ldots;\vec{v}_l \}$ in $\R^n$ 
+is a generating set, we must check whether for any vector $\vec{w}$ the equation 
+\[ r_1\vec{v}_1+\ldots + r_l\vec{v}_l =\vec{w} \]
+has solutions $r_1, \ldots,r_l \in \R$. \\
+A general strategy for solving such systems of equations (here containing $n$ equations, one per 
+component, and $l$ variables $r_1,\ldots, r_l$) is described in the section on \link{lgs}{systems 
+of linear equations}.\\
+In $\R^2$ or $\R^3$ we can often 'directly' find solutions.
+}
+\end{remark}
+
+\begin{example}
+\lang{de}{Wir untersuchen, ob die Vektoren}
+\lang{en}{We will determine whether the vectors}
+$
+\vec{v}_1 \, = \, \begin{pmatrix}
+1 \\ 2 \\ 3
+\end{pmatrix}, 
+\vec{v}_2 \, = \, \begin{pmatrix}
+2 \\ 3 \\ 5       
+\end{pmatrix}, 
+\vec{v}_3 \, = \, \begin{pmatrix}
+3 \\ 4 \\ 7
+\end{pmatrix}
+$
+\lang{de}{
+ein Erzeugenensystem des $\R^3$ bilden.
+\\
+Würde ${ \vec{v}_1,\vec{v}_2,\vec{v}_3 }$ ein Erzeugendensystem des $\R^3$ bilden, 
+so m\"usste sich zum Beispiel der Vektor $\vec{w} = \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix} 
+\in \R^3$ als als Linearkombination aus $\vec{v}_1$, $\vec{v}_2$ und $\vec{v}_3$ darstellen lassen, 
+d.h. es g\"abe reelle Zahlen $r_1,r_2,r_3$, sodass gilt:
+}
+\lang{en}{
+form a generating set of $\R^3$.
+\\
+If ${ \vec{v}_1,\vec{v}_2,\vec{v}_3 }$ were a generating set of $\R^3$, then for example the vector 
+$\vec{w} = \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix} \in \R^3$ could be written as a linear 
+combination of $\vec{v}_1$, $\vec{v}_2$ and $\vec{v}_3$, that is, there would exist real numbers 
+$r_1,r_2,r_3$ such that:
+}
+ 
+\[ \begin{pmatrix}
+  0 \\ 0 \\ 1 \end{pmatrix}= r_1 \cdot \begin{pmatrix}1 \\ 2 \\ 3\end{pmatrix}
+  + r_2\cdot \begin{pmatrix}2 \\ 3 \\ 5\end{pmatrix}
+  + r_3 \cdot \begin{pmatrix}3 \\ 4 \\ 7\end{pmatrix}.
+\] 
+
+\lang{de}{
+Lösen wir diese Gleichung nun komponentenweise auf, dann gilt für die ersten beiden Komponeten:
+}
+\lang{en}{
+Let us solve this equation componentwise. The first two rows read:
+}
+\[ r_1+2r_2+3r_3=0 \]
+\lang{de}{und}
+\lang{en}{and}
+\[2r_1+3r_2+4r_3=0 \] 
+\lang{de}{folglich auch}
+\lang{en}{and added together give}
+
+\[ (1+2) \cdot r_1+(2+3) \cdot r_2+(3+4) \cdot r_3=3r_1+5r_2+7r_3=0 \]
+
+\lang{de}{Dies widerspricht jedoch der Gleichung der 3. Komponente:}
+\lang{en}{This contradicts the equation in the third components:}
+
+\[3r_1+5r_2+7r_3=1.\]
+
+\lang{de}{
+Der Vektor $\vec{w}$ lässt sich also nicht als Linearkombination der Vektoren 
+$\vec{v}_1$, $\vec{v}_2$ und $\vec{v}_3$ darstellen und somit bilden diese 
+auch kein Erzeugendensystem des $\R^3$.
+}
+\lang{en}{
+Therefore the vector $\vec{w}$ cannot be written as a linear combination of the vectors $\vec{v}_1$, 
+$\vec{v}_2$ and $\vec{v}_3$, and these do not form a generating set of $\R^3$.
+}
+
+\end{example}
+
+ 
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{k}{1}{2}	% Zufallsvariable zum Vertauschen:
+			\function[calculate]{k1}{2-k}  % "Dirac"-funktionen
+			\function[calculate]{k2}{k-1}
+			\function[calculate]{nk}{3-k}  % gerade die andere Option
+
+
+			\randint[Z]{r}{1}{4}
+			\randint[Z]{s}{2}{4}
+			\randint[Z]{t}{2}{4}
+			\randint[Z]{a1}{-5}{5}
+			\randint[Z]{a2}{-5}{5}
+			\randint[Z]{c1}{-5}{5}
+			\randint[Z]{c2}{-5}{5}
+
+			\function[calculate]{b1}{-k2*r*a1}
+			\function[calculate]{b2}{-r*a2}
+			\function[calculate]{f1}{t*a1}
+			\function[calculate]{f2}{t*a2}
+			\function[calculate]{d1}{k1*s*c1}
+			\function[calculate]{d2}{s*c2}
+			
+			\function[calculate]{v}{k2*a2/a1+k1*c2/c1}
+		\end{variables}
+		
+			\text{\lang{de}{
+            Welche der folgenden Mengen von Vektoren bildet ein Erzeugendensystem des $\R^2$?}
+            }
+            \lang{en}{
+            Which of the following sets of vectors is a generating set of $\R^2$?
+            }\\
+
+            \begin{choices}{multiple}
+
+                \begin{choice}
+                  \text{$\{ \begin{pmatrix} \var{a1} \\ \var{a2} \end{pmatrix}; 
+                        \begin{pmatrix} \var{b1} \\ \var{b2} \end{pmatrix}; 
+                        \begin{pmatrix} \var{f1} \\ \var{f2} \end{pmatrix} \}$}
+                  \solution[compute]{k=1}
+                \end{choice}
+                \begin{choice}
+                  \text{$\{ \begin{pmatrix} \var{c1} \\ \var{c2} \end{pmatrix}; 
+				        \begin{pmatrix} \var{d1}\\ \var{d2} \end{pmatrix} \}.$}
+                  \solution[compute]{k=2}
+                \end{choice}
+
+             \end{choices}
+
+
+		\explanation{\lang{de}{
+    Als Linearkombination der Vektoren der $\var{nk}$. Menge lassen sich nur die Vektoren darstellen,
+		bei denen die zweite Komponente, das $\var{v}$-fache der ersten Komponente ist.
+    }
+    \lang{en}{
+    Set $\var{nk}$ only generates those vectors whose second component is $\var{v}$-times the first 
+    component.
+    }}
+     
+\end{quickcheck}
+
+%%%%% alte Version %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% \begin{quickcheck}
+%		\field{rational}
+%		\type{input.number}
+%		\begin{variables}
+%			\randint{k}{1}{2}	% Zufallsvariable zum Vertauschen:
+%			\function[calculate]{k1}{2-k}  % "Dirac"-funktionen
+%			\function[calculate]{k2}{k-1}
+%			\function[calculate]{nk}{3-k}  % gerade die andere Option
+%
+%
+%			\randint[Z]{r}{1}{4}
+%			\randint[Z]{s}{2}{4}
+%			\randint[Z]{t}{2}{4}
+%			\randint[Z]{a1}{-5}{5}
+%			\randint[Z]{a2}{-5}{5}
+%			\randint[Z]{c1}{-5}{5}
+%			\randint[Z]{c2}{-5}{5}
+%
+%			\function[calculate]{b1}{-k2*r*a1}
+%			\function[calculate]{b2}{-r*a2}
+%			\function[calculate]{f1}{t*a1}
+%			\function[calculate]{f2}{t*a2}
+%			\function[calculate]{d1}{k1*s*c1}
+%			\function[calculate]{d2}{s*c2}
+%			
+%			\function[calculate]{v}{k2*a2/a1+k1*c2/c1}
+%		\end{variables}
+%		
+%			\text{Welche der folgenden Mengen von Vektoren bildet ein Erzeugendensystem des $\R^2$?\\
+%               
+%				1) $\{ \begin{pmatrix} \var{a1} \\ \var{a2} \end{pmatrix}; 
+%				\begin{pmatrix} \var{b1} \\ \var{b2} \end{pmatrix}; 
+%				\begin{pmatrix} \var{f1} \\ \var{f2} \end{pmatrix} \}$ \\
+%				2) $\{ \begin{pmatrix} \var{c1} \\ \var{c2} \end{pmatrix}; 
+%				\begin{pmatrix} \var{d1}\\ \var{d2} \end{pmatrix} \}$.\\
+%				Die Menge mit der Nummer \ansref.}
+%		
+%		\begin{answer}
+%			\solution{k}
+%		\end{answer}
+%		\explanation{Als Linearkombination der Vektoren der Menge $\var{nk}$ lassen sich nur die Vektoren darstellen,
+%		bei denen die zweite Komponente, das $\var{v}$-fache der ersten Komponente ist.}
+%    
+%\end{quickcheck}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{\lang{de}{Lineare Unabhängigkeit}\lang{en}{Linear independence}} \label{def_lin_unabh}
+
+%
+%%% Video Hoever
+%
+\lang{de}{
+Wir werden nun die im vorherigen Abschnitt eingeführten Erzeugendensystem genauer betrachten, um sie hinsichtlich
+der erforderlichen Anzahl von Vektoren zu optimieren. Dies führt uns zu den Begriffen der \emph{Linearen Abhängigkeit}
+und der \emph{Linearen Unabhängigkeit}.
+\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=710}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+%
+\lang{en}{
+Now we will define \emph{linear dependence} and \emph{linear independence} in order to optimise the 
+number of vectors needed in a generating set.
+}
+
+\begin{definition}[\lang{de}{Lineare (Un-)Abhängigkeit}\lang{en}{Linear (in-)dependence}]
+\lang{de}{
+Ein Vektor $\vec{v}$ hei"st \emph{linear abh"angig von Vektoren} $\vec{w}_1,\ldots,\vec{w}_k$, wenn er als Linearkombination
+der Vektoren $\vec{w}_1,\ldots,\vec{w}_k$ dargestellt werden kann. 
+Andernfalls hei"st $\vec{v}$ \emph{linear unabh"angig von} $\vec{w}_1,\ldots,\vec{w}_k$.
+\\\\
+Eine Menge von Vektoren $\{ \vec{v}_1;\ldots;\vec{v}_l\}$ hei"st \emph{linear abh"angig}, wenn mindestens einer der Vektoren
+der Menge von den anderen linear abh"angig ist, und sie hei"st \emph{linear unabh"angig}, wenn keiner der Vektoren von 
+den anderen linear abh"angig ist.
+}
+\lang{en}{
+A vector $\vec{v}$ is called \emph{linearly dependent} on the vectors $\vec{w}_1,\ldots,\vec{w}_k$ 
+if it can be written as a linear combination of $\vec{w}_1,\ldots,\vec{w}_k$. 
+Otherwise $\vec{v}$ is called \emph{linearly independent} from $\vec{w}_1,\ldots,\vec{w}_k$.
+\\\\
+A set of vectors $\{ \vec{v}_1;\ldots;\vec{v}_l\}$ is called \emph{linearly dependent} if at least 
+one of its vectors is linearly dependent on the others, and \emph{linearly independent} if none of 
+its vectors is linearly dependent on the others.
+}
+\end{definition} 
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{k}{1}{3}	% Zufallsvariable zum Vertauschen:
+			\function[calculate]{k1}{(2-k)*(3-k)/2}  % "Dirac"-funktionen
+			\function[calculate]{k2}{(k-1)*(3-k)}
+			\function[calculate]{k3}{(k-1)*(k-2)/2}
+
+			\randint[Z]{r}{1}{4}
+			\randint[Z]{s}{2}{4}
+			\randint[Z]{t}{2}{4}
+			\randint[Z]{d1}{-4}{4}
+			\randint[Z]{d2}{-4}{4}
+			\randint[Z]{c1}{-4}{4}
+			\randint[Z]{c2}{-4}{4}
+
+			\function[calculate]{a1}{r*c1}
+			\function[calculate]{a2}{s*d1}
+			\function[calculate]{a3}{r*c2+s*d2+k1}
+			\function[calculate]{b1}{s*c1}
+			\function[calculate]{b2}{t*d1}
+			\function[calculate]{b3}{s*c2+t*d2-k2}
+			\function[calculate]{f1}{t*c1}
+			\function[calculate]{f2}{r*d1}
+			\function[calculate]{f3}{t*c2+r*d2-2*k3}
+			
+			\function[calculate]{g1}{k1*a1+k2*b1+k3*f1}
+			\function[calculate]{g2}{k1*a2+k2*b2+k3*f2}
+			\function[calculate]{g3}{k1*a3+k2*b3+k3*f3}
+			\function[calculate]{gg3}{k1*(a3-k1)+k2*(b3+k2)+k3*(f3+2*k3)}
+			
+
+		\end{variables}
+		
+			\text{\lang{de}{
+      Welcher der folgenden Vektoren ist von den Vektoren 
+      $\vec{w}_1=\begin{pmatrix} \var{c1} \\ 0\\ \var{c2} \end{pmatrix}$ und 
+			$\vec{w}_2=\begin{pmatrix} 0\\ \var{d1}\\ \var{d2} \end{pmatrix}$ linear unabhängig?
+      }
+      \lang{en}{
+      Which of the following vectors is linearly independent from the vectors 
+      $\vec{w}_1=\begin{pmatrix} \var{c1} \\ 0\\ \var{c2} \end{pmatrix}$ and 
+      $\vec{w}_2=\begin{pmatrix} 0\\ \var{d1}\\ \var{d2} \end{pmatrix}$? 
+      }}\\
+                                 
+                \begin{choices}{unique}
+               %  1)
+                    \begin{choice}
+                      \text{$\begin{pmatrix} \var{a1} \\ \var{a2}\\ \var{a3} \end{pmatrix}\quad $}
+                      \solution[compute]{k=1}
+                    \end{choice}
+                    
+                %  2)
+                    \begin{choice}
+                      \text{$\begin{pmatrix} \var{b1} \\ \var{b2}\\ \var{b3} \end{pmatrix}\quad $}
+                      \solution[compute]{k=2}
+                    \end{choice}
+                    
+                %  3)                    
+                    \begin{choice}
+                      \text{$\begin{pmatrix} \var{f1} \\ \var{f2} \\ \var{f3} \end{pmatrix}$}
+                      \solution[compute]{k=3}
+                    \end{choice}
+
+                 \end{choices}
+                
+           
+            
+%%%%% alte Version %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                           
+%				1) $\begin{pmatrix} \var{a1} \\ \var{a2}\\ \var{a3} \end{pmatrix}\quad $ 
+%				2)  $\begin{pmatrix} \var{b1} \\ \var{b2}\\ \var{b3} \end{pmatrix}\quad $
+%				3)  $\begin{pmatrix} \var{f1} \\ \var{f2} \\ \var{f3} \end{pmatrix}$\\
+%				Die Vektoren mit den Nummern \ansref. (Geben Sie alle Nummern ohne Leerzeichen ein.)}
+%		
+%		\begin{answer}
+%			\solution{k}
+%		\end{answer}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        
+		\explanation{\lang{de}{
+    Ein Vektor ist genau dann linear abhängig von $\,\vec{w}_1$ und $\vec{w}_2$, wenn man ihn als 
+    Linearkombination dieser beiden Vektoren darstellen kann. Ist dies nicht möglich, ist er linear 
+    unabhängig von $\,\vec{w}_1$ und $\vec{w}_2$.\\
+		Versucht man also die Vektoren als $\, r\cdot \vec{w}_1+s\cdot \vec{w}_2$ darzustellen, erhält 
+    man aus den ersten beiden	Komponenten die folgenden (einzig möglichen) Werte für $r$ und $s:$
+    \begin{itemize}
+        \item[im 1. Fall] $r=\var{r}, s=\var{s},$
+        \item[im 2. Fall] $r=\var{s}, s=\var{t} \;$ und
+    		\item[im 3. Fall] $r=\var{t}, s=\var{r}.$ 
+    \end{itemize}    
+    Im $\var{k}$-ten Fall liefert diese Linearkombination dann aber der Vektor 
+		$\begin{pmatrix} \var{g1} \\ \var{g2}\\ \var{gg3} \end{pmatrix}$, der ungleich  
+		$\begin{pmatrix} \var{g1} \\ \var{g2}\\ \var{g3} \end{pmatrix}\,$ ist. Deshalb ist 
+    $\begin{pmatrix} \var{g1} \\ \var{g2}\\ \var{g3} \end{pmatrix}\,$  linear unabhängig von 
+    $\vec{w}_1$ und $\vec{w}_2$. Bei den anderen beiden Vektoren hat man auf diese Weise eine 
+    passende Linearkombination gefunden, d.h. diese sind linear abhängig von $\vec{w}_1$ und 
+    $\vec{w}_2$.
+      }
+    \lang{en}{
+    A vector is linearly dependent on $\,\vec{w}_1$ and $\vec{w}_2$ if and only if it can be 
+    written as a linear combination of these two vectors. If this is not possible, then it is 
+    linearly independent from $\,\vec{w}_1$ and $\vec{w}_2$.\\
+    Hence if we try to write each vector as $\, r\cdot \vec{w}_1+s\cdot \vec{w}_2$ using only the 
+    first two components, we obtain
+    \begin{itemize}
+        \item[for the first vector,] $r=\var{r}, s=\var{s},$
+        \item[for the second vector,] $r=\var{s}, s=\var{t} \;$ and
+    		\item[for the third vector,] $r=\var{t}, s=\var{r}.$ 
+    \end{itemize}
+    In the first case, this linear combination yields the vector 
+    $\begin{pmatrix} \var{g1} \\ \var{g2}\\ \var{gg3} \end{pmatrix}$, which is not equal to 
+		$\begin{pmatrix} \var{g1} \\ \var{g2}\\ \var{g3} \end{pmatrix}\,$. Therefore 
+    $\begin{pmatrix} \var{g1} \\ \var{g2}\\ \var{g3} \end{pmatrix}\,$  is linearly independent from
+    $\vec{w}_1$ and $\vec{w}_2$. The other two linear combinations do in fact yield the other two 
+    vectors, so each of these two is linearly dependent on $\vec{w}_1$ and $\vec{w}_2$.
+    }}
+	\end{quickcheck}
+
+
+\lang{de}{
+Um herauszufinden, ob mehrere Vektoren $\vec{v}_1,\ldots,\vec{v}_l$ linear unabh"angig sind, müsste man also untersuchen,
+ob $\vec{v}_1$ als Linearkombination von $\vec{v}_2,\ldots,\vec{v}_l$ geschrieben werden kann, oder ob
+$\vec{v}_2$ als Linearkombination von $\vec{v}_1,\vec{v}_3, \ldots,\vec{v}_l$ geschrieben werden kann, etc.
+\\
+Einfacher geht es mit Hilfe des folgenden Satzes:
+}
+\lang{en}{
+To determine whether multiple vectors $\vec{v}_1,\ldots,\vec{v}_l$ are linearly independent, 
+we can check if $\vec{v}_1$ can be written as a linear combination of $\vec{v}_2,\ldots,\vec{v}_l$, 
+if $\vec{v}_2$ can be written as a linear combination of $\vec{v}_1,\vec{v}_3, \ldots,\vec{v}_l$, 
+etc.
+\\
+The next theorem makes this a simpler task:
+}
+
+\begin{theorem} \label{Satz_Lin_Unabh}
+\lang{de}{
+Vektoren $\vec{v}_1,\ldots,\vec{v}_l$ sind genau dann linear unabh"angig, wenn die Gleichung
+}
+\lang{en}{
+The vectors $\vec{v}_1,\ldots,\vec{v}_l$ are linearly independent if and only if 
+}
+\[ r_1\vec{v}_1+\ldots +r_l\vec{v}_l=\vec{0} \]
+\lang{de}{nur f"ur $r_1=\ldots=r_l=0$ erf"ullt ist.}
+\lang{en}{is only satisfied by $r_1=\ldots=r_l=0$.}
+\end{theorem}
+
+\begin{example} \label{mehrere_vektoren}
+\begin{tabs*}
+\tab{\lang{de}{Standardvektoren}\lang{en}{Standard unit vectors}}
+\lang{de}{Die Standardvektoren}
+\lang{en}{The standard unit vectors}
+\[ \vec{e}_1=\begin{pmatrix} 1\\ 0\\ \vdots \\ 0\end{pmatrix},\quad \vec{e}_2=\begin{pmatrix} 0\\ 1\\ \vdots \\ 0\end{pmatrix}
+,\quad \ldots, \quad \vec{e}_n=\begin{pmatrix} 0\\ \vdots \\ 0\\ 1\end{pmatrix} \]
+\lang{de}{sind linear unabhängig. Es ist nämlich}
+\lang{en}{are linearly independent, since}
+\[ r_1\vec{e}_1+r_2\vec{e}_2+\ldots +r_n \vec{e}_n=\begin{pmatrix} r_1\\ r_2\\ \vdots \\ r_n\end{pmatrix} \]
+\lang{de}{nur dann der Nullvektor, wenn $r_1=r_2= \ldots =r_n=0$ gilt.}
+\lang{en}{is only the zero vector if $r_1=r_2= \ldots =r_n=0$}
+
+\tab{\lang{de}{3 Vektoren im $\R^3$}\lang{en}{Three vectors in $\R^3$}} 
+\lang{de}{Seien}
+\lang{en}{Let}
+$
+\vec{v}_1 \, = \, \begin{pmatrix}
+1 \\ 2 \\ 3
+\end{pmatrix}, 
+\vec{v}_2 \, = \, \begin{pmatrix}
+2 \\ 3 \\ 5
+\end{pmatrix}, 
+\vec{v}_3 \, = \, \begin{pmatrix}
+3 \\ 4 \\ 7
+\end{pmatrix}
+$
+\lang{de}{
+gegeben.\\
+Um zu entscheiden, ob $\vec{v}_1$, $\vec{v}_2$, $\vec{v}_3$ linear abh{\"a}ngig sind, muss man
+also herausfinden, ob die Gleichung $r_1\vec{v}_1+r_2\vec{v}_2+r_3\vec{v}_3=\vec{0}$ nur durch 
+$r_1=r_2=r_3=0$ gel"ost wird.
+\\\\
+Wegen
+}
+\lang{en}{
+\\
+To determine whether $\vec{v}_1$, $\vec{v}_2$, $\vec{v}_3$ are linearly dependent, we check whether 
+the only solution of the equation $r_1\vec{v}_1+r_2\vec{v}_2+r_3\vec{v}_3=\vec{0}$ is 
+$r_1=r_2=r_3=0$.
+\\\\
+As
+}
+\[
+r_1 \cdot \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix}
++ r_2 \begin{pmatrix} 2 \\ 3 \\ 5 \end{pmatrix} 
++r_3 \begin{pmatrix} 3 \\ 4 \\ 7 \end{pmatrix}
+=\begin{pmatrix} r_1+2r_2+3r_3\\ 2r_1+3r_2+4r_3 \\ 3r_1+5r_2+7r_3 \end{pmatrix}
+\]
+\lang{de}{ist also das System von Gleichungen}
+\lang{en}{we must solve the linear system}
+\begin{align*}
+r_1 &+2r_2 &+3r_3 &= 0 \\
+2r_1 &+3r_2 &+4r_3 &= 0 \\
+3r_1 &+5r_2&+7r_3 &= 0
+\end{align*}
+\lang{de}{
+zu lösen. Wie das im Allgemeinen gemacht wird, wird im Abschnitt \link{lgs}{Lineare Gleichungssysteme} erklärt.
+\\\\
+Das Gleichungssystem hier hat unendlich viele Lösungen. Zum Beispiel lösen $r_1=1$, $r_2=-2$ und $r_3=1$ 
+alle drei Gleichungen. Die drei Vektoren sind daher linear abhängig.
+\\\\
+In diesem Fall ist sogar jeder einzelne der Vektoren von den anderen beiden linear abhängig, wie man durch Umstellen
+der eben gefundenen Gleichung $1\cdot \vec{v}_1 -2\cdot \vec{v}_2 +1\cdot  \vec{v}_3=\vec{0}$ sehen kann:
+}
+\lang{en}{
+Solving a linear system is covered in a \link{lgs}{previous chapter}.
+\\\\
+The system here has infinitely many solutions. For example, $r_1=1$, $r_2=-2$ and $r_3=1$ solves all 
+three equations. The three vectors are thus linearly dependent.
+\\\\
+In this case, each of the vectors is linearly dependent on the other two, as can be seen simply by 
+rearranging $1\cdot \vec{v}_1 -2\cdot \vec{v}_2 +1\cdot \vec{v}_3=\vec{0}$:
+}
+\begin{eqnarray*}
+\vec{v}_1 &=& 2\cdot \vec{v}_2 -1\cdot  \vec{v}_3 \\
+\vec{v}_2 &=& \frac{1}{2}( \vec{v}_1+\vec{v}_3) \\
+\vec{v}_3 &=& 2\cdot \vec{v}_2 -1\cdot  \vec{v}_1
+\end{eqnarray*}
+
+\tab{\lang{de}{3 Vektoren im $\R^2$}\lang{en}{Three vectors in $\R^2$}}
+\lang{de}{
+Im \ref[lin-comb][Beispiel zu Linearkombinationen]{ex:linearkombinationen} hatten wir die Vektoren \\
+$\begin{pmatrix} 2\\ -1\end{pmatrix}$, $\begin{pmatrix} -1\\ 3\end{pmatrix}$
+und $\begin{pmatrix} 1\\ 0\end{pmatrix}$ betrachtet und gesehen, dass
+}
+\lang{en}{
+In \ref[lin-comb][an example from the previous section]{ex:linearkombinationen} we considered the 
+vectors \\
+$\begin{pmatrix} 2\\ -1\end{pmatrix}$, $\begin{pmatrix} -1\\ 3\end{pmatrix}$ and 
+$\begin{pmatrix} 1\\ 0\end{pmatrix}$, and saw that
+}
+\[ 3\cdot \begin{pmatrix} 2\\ -1\end{pmatrix} + 1\cdot \begin{pmatrix} -1\\ 3\end{pmatrix}
+  -5 \cdot \begin{pmatrix} 1\\ 0\end{pmatrix}
+  = \begin{pmatrix} 0\\ 0\end{pmatrix}. \]
+\lang{de}{
+Folglich lässt sich jeder der drei Vektoren aus den jeweils anderen beiden Vektoren erzeugen, 
+beispielsweise ist
+}
+\lang{en}{
+Therefore each of the three vectors can be written as a linear combination of the others, i.e.
+}
+\[ \begin{pmatrix} -1\\ 3\end{pmatrix} 
+  = 5 \cdot \begin{pmatrix} 1\\ 0\end{pmatrix}
+  - 3\cdot \begin{pmatrix} 2\\ -1\end{pmatrix}. \]
+
+\begin{center}
+\image{T108_LinearDependence}
+\end{center}
+
+\lang{de}{Diese drei Vektoren sind also linear abhängig.}
+\lang{en}{Hence these three vectors are linearly dependent.}
+
+\tab{\lang{de}{2 Vektoren im $\R^2$}\lang{en}{Two vectors in $\R^2$}}
+\lang{de}{
+Die zwei Vektoren $\begin{pmatrix} 2\\ -1\end{pmatrix}$ und $\begin{pmatrix} 1\\ 0\end{pmatrix}$ 
+allein betrachtet sind hingegen linear unabhängig, denn aus
+}
+\lang{en}{
+The two vectors $\begin{pmatrix} 2\\ -1\end{pmatrix}$ and $\begin{pmatrix} 1\\ 0\end{pmatrix}$ 
+are linearly independent, since to satisfy
+}
+\[ r_1\cdot \begin{pmatrix} 2\\ -1\end{pmatrix} + r_2 \cdot \begin{pmatrix} 1\\ 0\end{pmatrix}
+= \begin{pmatrix} 0\\ 0\end{pmatrix}, \]
+\lang{de}{kann man direkt ablesen, dass $ r_1=0 $ und folglich auch $ r_2=0 $ sein muss.}
+\lang{en}{we must clearly have $ r_1=0 $ and it also follows that $ r_2=0 $}
+\end{tabs*}
+\end{example}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{2}
+    \begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\number{k}{1}
+%			\randint{k}{1}{2}	% Zufallsvariable zum Vertauschen:
+			\function[calculate]{k1}{(2-k)}  % "Dirac"-funktionen
+			\function[calculate]{k2}{(k-1)}
+			\function[calculate]{nk}{3-k}  % gerade die andere Option
+
+			\randint[Z]{r}{1}{4}
+			\randint[Z]{s}{2}{4}
+			\randint[Z]{t}{2}{4}
+			\randint[Z]{a1}{-4}{4}
+			\randint[Z]{a2}{-4}{4}
+			\randint[Z]{a3}{-4}{4}
+
+			\randint[Z]{d1}{-4}{4}
+			\randint[Z]{d2}{-4}{4}
+			\randint[Z]{c1}{-4}{4}
+			\randint[Z]{c2}{-4}{4}
+            \randint[Z]{h}{1}{3}
+
+			\function[calculate]{b1}{s*a1}
+			\function[calculate]{b2}{s*a2}
+			\function[calculate]{b3}{s*a3-h*k2}
+			\function[calculate]{f1}{t*c1}
+			\function[calculate]{f2}{r*d1}
+			\function[calculate]{f3}{t*c2+r*d2-h*k1}
+			
+
+		\end{variables}
+		
+			\text{\lang{de}{Welche der folgenden Mengen von Vektoren ist linear abhängig?}
+            \lang{en}{Which of the following sets of vectors is linearly independent?}}\\
+            
+            \begin{choices}{multiple}
+
+                \begin{choice}
+                  \text{$\{ \begin{pmatrix} \var{a1} \\ \var{a2}\\ \var{a3} \end{pmatrix};
+				        \begin{pmatrix} \var{b1} \\ \var{b2}\\ \var{b3} \end{pmatrix} \}$}
+                  \solution[compute]{k=1}
+                \end{choice}
+                \begin{choice}
+                  \text{$\{ \begin{pmatrix} \var{c1} \\ 0\\ \var{c2} \end{pmatrix};
+                        \begin{pmatrix} 0 \\ \var{d1}\\ \var{d2} \end{pmatrix};
+                        \begin{pmatrix} \var{f1} \\ \var{f2}\\ \var{f3} \end{pmatrix} \}$}
+                  \solution[compute]{k=2}
+                \end{choice}
+
+             \end{choices}
+
+		\explanation{\lang{de}{
+    Die Menge $\{ \begin{pmatrix} \var{a1} \\ \var{a2}\\ \var{a3} \end{pmatrix}; 
+    \begin{pmatrix} \var{b1} \\ \var{b2}\\ \var{b3} \end{pmatrix} \}$ 
+    ist linear abhängig, denn es gilt
+    $\begin{pmatrix} \var{b1} \\ \var{b2}\\ \var{b3} \end{pmatrix} =\var{s}\cdot
+     \begin{pmatrix} \var{a1} \\ \var{a2}\\ \var{a3} \end{pmatrix}.$\\
+    Die Menge $\{ \begin{pmatrix} \var{c1} \\ 0\\ \var{c2} \end{pmatrix};
+    \begin{pmatrix} 0 \\ \var{d1}\\ \var{d2} \end{pmatrix};
+    \begin{pmatrix} \var{f1} \\ \var{f2}\\ \var{f3} \end{pmatrix} \}$ ist linear unabhängig.
+    }
+    \lang{en}{
+    The set $\{ \begin{pmatrix} \var{a1} \\ \var{a2}\\ \var{a3} \end{pmatrix}; 
+                \begin{pmatrix} \var{b1} \\ \var{b2}\\ \var{b3} \end{pmatrix} \}$ 
+    is linearly dependent, as
+    $\begin{pmatrix} \var{b1} \\ \var{b2}\\ \var{b3} \end{pmatrix} = \var{s}\cdot
+     \begin{pmatrix} \var{a1} \\ \var{a2}\\ \var{a3} \end{pmatrix}.$\\
+    The set $\{ \begin{pmatrix} \var{c1} \\ 0\\ \var{c2} \end{pmatrix};
+    \begin{pmatrix} 0 \\ \var{d1}\\ \var{d2} \end{pmatrix};
+    \begin{pmatrix} \var{f1} \\ \var{f2}\\ \var{f3} \end{pmatrix} \}$ is linearly independent.
+    }}
+            
+	\end{quickcheck}
+    
+    \begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\number{k}{2}
+%			\randint{k}{1}{2}	% Zufallsvariable zum Vertauschen:
+			\function[calculate]{k1}{(2-k)}  % "Dirac"-funktionen
+			\function[calculate]{k2}{(k-1)}
+			\function[calculate]{nk}{3-k}  % gerade die andere Option
+
+			\randint[Z]{r}{1}{4}
+			\randint[Z]{s}{2}{4}
+			\randint[Z]{t}{2}{4}
+			\randint[Z]{a1}{-4}{4}
+			\randint[Z]{a2}{-4}{4}
+			\randint[Z]{a3}{-4}{4}
+
+			\randint[Z]{d1}{-4}{4}
+			\randint[Z]{d2}{-4}{4}
+			\randint[Z]{c1}{-4}{4}
+			\randint[Z]{c2}{-4}{4}
+            \randint[Z]{h}{1}{3}
+
+			\function[calculate]{b1}{s*a1}
+			\function[calculate]{b2}{s*a2}
+			\function[calculate]{b3}{s*a3-h*k2}
+			\function[calculate]{f1}{t*c1}
+			\function[calculate]{f2}{r*d1}
+			\function[calculate]{f3}{t*c2+r*d2-h*k1}
+			
+
+		\end{variables}
+		
+			\text{Welche der folgenden Mengen von Vektoren ist linear abhängig?}\\
+            
+            \begin{choices}{multiple}
+
+                \begin{choice}
+                  \text{$\{ \begin{pmatrix} \var{a1} \\ \var{a2}\\ \var{a3} \end{pmatrix};
+				        \begin{pmatrix} \var{b1} \\ \var{b2}\\ \var{b3} \end{pmatrix} \}$}
+                  \solution[compute]{k=1}
+                \end{choice}
+                \begin{choice}
+                  \text{$\{ \begin{pmatrix} \var{c1} \\ 0\\ \var{c2} \end{pmatrix};
+                        \begin{pmatrix} 0 \\ \var{d1}\\ \var{d2} \end{pmatrix};
+                        \begin{pmatrix} \var{f1} \\ \var{f2}\\ \var{f3} \end{pmatrix} \}$}
+                  \solution[compute]{k=2}
+                \end{choice}
+
+             \end{choices}
+
+		\explanation{Die Menge $\{ \begin{pmatrix} \var{c1} \\ 0\\ \var{c2} \end{pmatrix};
+                        \begin{pmatrix} 0 \\ \var{d1}\\ \var{d2} \end{pmatrix};
+                        \begin{pmatrix} \var{f1} \\ \var{f2}\\ \var{f3} \end{pmatrix} \}$ ist linear abhängig, denn es gilt
+                     \[
+                     \begin{pmatrix} \var{f1} \\ \var{f2}\\ \var{f3} \end{pmatrix} =\var{t}\cdot
+                     \begin{pmatrix} \var{c1} \\ 0\\ \var{c2} \end{pmatrix} + \var{r}\cdot
+                     \begin{pmatrix} 0 \\ \var{d1}\\ \var{d2} \end{pmatrix}
+                     \]
+                     Die Menge $\{ \begin{pmatrix} \var{a1} \\ \var{a2}\\ \var{a3} \end{pmatrix};
+				     \begin{pmatrix} \var{b1} \\ \var{b2}\\ \var{b3} \end{pmatrix} \}$ ist linear unabhängig.
+                     }
+            
+	\end{quickcheck}
+    
+\end{quickcheckcontainer}
+
+%%%%% alte Version %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  \begin{quickcheck}
+%          \field{rational}
+%          \type{input.number}
+%          \begin{variables}
+%              \randint{k}{1}{2}	% Zufallsvariable zum Vertauschen:
+%              \function[calculate]{k1}{(2-k)}  % "Dirac"-funktionen
+%              \function[calculate]{k2}{(k-1)}
+%
+%              \randint[Z]{r}{1}{4}
+%              \randint[Z]{s}{2}{4}
+%              \randint[Z]{t}{2}{4}
+%              \randint[Z]{a1}{-4}{4}
+%              \randint[Z]{a2}{-4}{4}
+%              \randint[Z]{a3}{-4}{4}
+%
+%              \randint[Z]{d1}{-4}{4}
+%              \randint[Z]{d2}{-4}{4}
+%              \randint[Z]{c1}{-4}{4}
+%              \randint[Z]{c2}{-4}{4}
+%              \randint[Z]{h}{1}{3}
+%
+%              \function[calculate]{b1}{s*a1}
+%              \function[calculate]{b2}{s*a2}
+%              \function[calculate]{b3}{s*a3-h*k2}
+%              \function[calculate]{f1}{t*c1}
+%              \function[calculate]{f2}{r*d1}
+%              \function[calculate]{f3}{t*c2+r*d2-h*k1}
+%
+%
+%          \end{variables}
+%
+%             \text{Welche der folgenden Mengen von Vektoren ist linear abhängig?\\
+%                  1) $\{ \begin{pmatrix} \var{a1} \\ \var{a2}\\ \var{a3} \end{pmatrix};
+%                  \begin{pmatrix} \var{b1} \\ \var{b2}\\ \var{b3} \end{pmatrix} \}$\\ 
+%                  2)  $\{ \begin{pmatrix} \var{c1} \\ 0\\ \var{c2} \end{pmatrix};
+%                  \begin{pmatrix} 0 \\ \var{d1}\\ \var{d2} \end{pmatrix};
+%                  \begin{pmatrix} \var{f1} \\ \var{f2}\\ \var{f3} \end{pmatrix} \}$\\
+%                  Die Menge mit der Nummer \ansref. }
+%
+%          \begin{answer}
+%              \solution{k}
+%          \end{answer}
+%	\end{quickcheck}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{\lang{de}{Basis}\lang{en}{Bases}} \label{def_basis}
+
+%
+%%% Video Hoever
+%
+\lang{de}{
+Wir betrachten nun spezielle Erzeugendensysteme des $\R^n$, nämlich solche, die ausschließlich aus 
+\emph{linear unabhängigen} Vektoren bestehen. Dies führt uns schließlich zum Begriff der \emph{Basis}.
+\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=711}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+%
+\lang{en}{
+We now consider special generating sets of $\R^n$, namely those which are \emph{linearly 
+independent}. This leads us to the definition of a \emph{basis}.
+}
+
+\begin{definition}[\lang{de}{Basis}\lang{en}{Basis}]
+\lang{de}{
+Eine Menge von Vektoren $\{ \vec{v}_1;\ldots;\vec{v}_l \}$ im $\R^n$ hei"st \emph{Basis des $\R^n$},
+wenn jeder Vektor im $\R^n$ sich eindeutig (d.h. auf genau eine Weise) als Linearkombination der 
+Vektoren $\vec{v}_1,\ldots,\vec{v}_l$ schreiben lässt.
+}
+\lang{en}{
+A set of vectors $\{ \vec{v}_1;\ldots;\vec{v}_l \}$ in $\R^n$ is called a \emph{basis of $\R^n$} 
+if every vector in $\R^n$ can be uniquely written as a linear combination of the vectors 
+$\vec{v}_1,\ldots,\vec{v}_l$.
+}
+\end{definition}
+
+\begin{remark}
+\begin{enumerate}
+\item \lang{de}{
+      Die Darstellung als Linearkombination der Vektoren einer Basis ist auf \textbf{genau} eine 
+      Weise möglich, wohingegen es bei einem Erzeugendensystem nur \textbf{mindestens} eine 
+      Möglichkeit geben muss.
+      }
+      \lang{en}{
+      The representation of a vector as a linear combination of vectors in a basis is 
+      \textbf{unique}, unlike for a general generating set, where each vector has \textbf{at least} 
+      one representation.
+      }
+\item \lang{de}{Jede Basis ist also auch ein Erzeugendensystem.}
+      \lang{en}{Every basis is a generating set.}
+\item \lang{de}{
+      Ist $\{ \vec{v}_1;\ldots;\vec{v}_l \}$ eine Basis des $\R^n$, so lässt sich auch der 
+      Nullvektor auf genau eine Weise als Linearkombination darstellen. Da 
+      $0\cdot \vec{v}_1+\ldots+ 0\cdot \vec{v}_l$ eine solche ist, ist sie auch die einzige. Dies 
+      bedeutet, dass die Vektoren einer Basis linear unabhängig sind.
+      }
+      \lang{en}{
+      If $\{ \vec{v}_1;\ldots;\vec{v}_l \}$ is a basis of $\R^n$, then even the zero vector is 
+      uniquely expressed as a linear combination. Hence $0\cdot \vec{v}_1+\ldots+ 0\cdot \vec{v}_l$ 
+      is the only linear combination of basis vectors that equals zero, and the vectors in a basis 
+      are linearly independent.
+      }
+\end{enumerate}
+\end{remark}
+
+\lang{de}{Zur vorigen Bemerkung gilt auch die Umkehrung. Genauer}
+\lang{en}{The converse of the final remark above also holds. That is:}
+
+\begin{theorem}
+\lang{de}{
+Eine Menge von Vektoren $\{ \vec{v}_1;\ldots;\vec{v}_l \}$ ist genau dann eine Basis des $\R^n$,
+wenn sie ein Erzeugendensystem ist und linear unabhängig ist.
+}
+\lang{en}{
+A set of  vectors $\{ \vec{v}_1;\ldots;\vec{v}_l \}$ is a basis of $\R^n$ if and only if it is a 
+linearly independent generating set.
+}
+\end{theorem}
+
+\begin{example}
+\begin{tabs*}
+\tab{\lang{de}{Standardvektoren}\lang{en}{Standard unit vectors}}
+\lang{de}{
+Wie schon gesehen, bilden die Standardvektoren $\vec{e}_1,\ldots, \vec{e}_n $ 
+ein Erzeugendensystem des $ \R^n $, und sie sind linear unabhängig. Also bilden 
+sie eine Basis des $\R^n $.
+}
+\lang{en}{
+As already established, the standard vectors $\vec{e}_1,\ldots, \vec{e}_n $ form a generating set of 
+$ \R^n $, and are linearly independent. They therefore form a basis of $\R^n $.
+}
+\tab{\lang{de}{3 Vektoren im $\R^3 $}\lang{en}{Three vectors in $\R^3 $}}
+\lang{de}{Die drei Vektoren}
+\lang{en}{The three vectors}
+$
+\vec{v}_1 \, = \, \begin{pmatrix}
+1 \\ 2 \\ 3
+\end{pmatrix}, 
+\vec{v}_2 \, = \, \begin{pmatrix}
+2 \\ 3 \\ 5
+\end{pmatrix}$ und $ 
+\vec{v}_3 \, = \, \begin{pmatrix}
+3 \\ 4 \\ 7
+\end{pmatrix}
+$
+\lang{de}{
+bilden weder ein Erzeugendensystem, noch sind sie linear unabhängig. Insbesondere bilden sie keine Basis.
+}
+\lang{en}{
+Neither form a generating set, nor are linearly independent. In particular, they do not form a basis.
+}
+\tab{\lang{de}{3 Vektoren im $\R^2$}\lang{en}{Three vectors in $\R^2$}}
+\lang{de}{
+Die Vektoren $\begin{pmatrix} 2\\ -1\end{pmatrix}$, $\begin{pmatrix} -1\\ 3\end{pmatrix}$
+und $\begin{pmatrix} 1\\ 0\end{pmatrix}$ bilden zwar ein Erzeugendensystem des $\R^2$, aber sie sind nicht
+linear unabhängig. Im \ref[lin-comb][Beispiel zu Linearkombinationen]{ex:linearkombinationen} hatten wir auch gesehen,
+dass sich der Vektor $\begin{pmatrix} 1 \\ 1\end{pmatrix}$ auf zwei verschiedene Arten als Linearkombination
+dieser Vektoren schreiben lässt.\\
+Sie bilden daher keine Basis des $\R^2$.
+}
+\lang{en}{
+The vectors $\begin{pmatrix} 2\\ -1\end{pmatrix}$, $\begin{pmatrix} -1\\ 3\end{pmatrix}$ 
+and $\begin{pmatrix} 1\\ 0\end{pmatrix}$ form a generating set of $\R^2$, however they are not 
+linearly independent. As an alternative reason, in the 
+\ref[lin-comb][previous section]{ex:linearkombinationen} we saw that the vector 
+$\begin{pmatrix} 1 \\ 1\end{pmatrix}$ can be written in two different ways as a linear combination 
+of these vectors.\\
+They therefore do not form a basis of $\R^2$.
+}
+\end{tabs*}
+\end{example}
+
+\lang{de}{
+Der folgende Satz macht die Entscheidung, ob eine gegebene Menge von Vektoren eine Basis ist, 
+leichter.
+}
+\lang{en}{
+The following theorem makes it easier to determine whether a given set of vectors is a basis.
+}
+
+\begin{theorem}  \label{ES_Basis} 
+\begin{enumerate}
+\item \lang{de}{
+      Jede Basis des $\R^n$ hat gleich viele Elemente. Insbesondere, da 
+      $\{ \vec{e}_1;\ldots; \vec{e}_n\}$ eine Basis ist, besitzt jede Basis des $\R^n$ genau $n$ 
+      Elemente.
+      }
+      \lang{en}{
+      Every basis of $\R^n$ has the same number of elements. In particular, as 
+      $\{ \vec{e}_1;\ldots; \vec{e}_n\}$ is a basis, every basis of $\R^n$ contains exactly $n$ 
+      vectors.
+      }
+\item \lang{de}{
+      Für eine Menge $M$ von $n$ Vektoren im $\R^n$ sind gleichbedeutend:
+      \begin{itemize}
+      \item $M$ ist eine Basis,
+      \item $M$ ist ein Erzeugendensystem,
+      \item die Vektoren von $M$ sind linear unabhängig. 
+      \end{itemize}
+      }
+      \lang{en}{
+      For a set $M$ conntaining $n$ vectors in $\R^n$, the following are equivalent:
+      \begin{itemize}
+      \item $M$ is a basis,
+      \item $M$ is a generating set,
+      \item the vectors in $M$ are linearly independent. 
+      \end{itemize}
+      }
+\item \lang{de}{
+      Eine Menge $M$ von Vektoren im $\R^n$ mit mehr als $n$ Elementen ist stets linear abhängig.
+      }
+      \lang{en}{
+      A set $M$ of vectors in $\R^n$ with more than $n$ elements is always linearly dependent.
+      }
+\item \lang{de}{
+      Eine Menge $M$ von Vektoren im $\R^n$ mit weniger als $n$ Elementen ist nie ein 
+      Erzeugendensystem des $\R^n$.
+      }
+      \lang{en}{
+      A set $M$ of vectors in $\R^n$ with fewer than $n$ elements is never a generating set of 
+      $\R^n$.
+      }
+\end{enumerate}
+\end{theorem}
+
+\begin{definition}[\lang{de}{Dimension}\lang{en}{Dimension}]\label{def:dimension}
+\lang{de}{
+Die Anzahl der Elemente einer Basis eines Vektorraums (und damit jeder Basis eines Vektorraums) 
+nennt man die \emph{Dimension} des Vektorraumes.
+}
+\lang{en}{
+The number of elements in a basis of a vector space (and hence every basis of that vector space) 
+is called the \emph{dimension} of the vector space.
+}
+\end{definition}
+
+\begin{example}
+\begin{tabs*}
+\tab{\lang{de}{3 Vektoren im $\R^3$}\lang{en}{Three vectors in $\R^3$}}
+\lang{de}{In den vorigen Beispielen hatten wir die drei Vektoren}
+\lang{en}{In the previous examples we considered the three vectors}
+$
+\vec{v}_1 \, = \, \begin{pmatrix}
+1 \\ 2 \\ 3
+\end{pmatrix}, 
+\vec{v}_2 \, = \, \begin{pmatrix}
+2 \\ 3 \\ 5
+\end{pmatrix}$ und $ 
+\vec{v}_3 \, = \, \begin{pmatrix}
+3 \\ 4 \\ 7
+\end{pmatrix}$
+\lang{de}{
+im $\R^3$. \\
+Im früheren \ref[Erzeugendensystem][Beispiel zu 3 Vektoren im $\R^3$]{mehrere_vektoren} 
+haben wir gezeigt, dass die 3 Vektoren linear abhängig sind. Nach dem vorausgegangenen Satz 
+folgt dann direkt, dass sie auch kein Erzeugendensystem bilden.
+}
+\lang{en}{
+in $\R^3$. \\
+In the \ref[Erzeugendensystem][previous example for three vectors in $\R^3$]{mehrere_vektoren} we 
+showed that these three vectors are linearly dependent. By the previous statement we immediately 
+have that they do not form a basis.
+}
+
+\tab{\lang{de}{3 Vektoren im $\R^2$}\lang{en}{Three vectors in $\R^2$}}
+\lang{de}{
+Die Vektoren $\begin{pmatrix} 2\\ -1\end{pmatrix}$, $\begin{pmatrix} -1\\ 3\end{pmatrix}$
+und $\begin{pmatrix} 1\\ 0\end{pmatrix}$ im $\R^2$ können nach obigem Satz gar nicht linear unabhängig sein,
+was im früheren \ref[Erzeugendensystem][Beispiel zu 3 Vektoren im $\R^2$]{mehrere_vektoren} auch bestätigt wurde.
+}
+\lang{en}{
+The vectors $\begin{pmatrix} 2\\ -1\end{pmatrix}$, $\begin{pmatrix} -1\\ 3\end{pmatrix}$ and 
+$\begin{pmatrix} 1\\ 0\end{pmatrix}$ in $\R^2$ cannot be linearly independent, by the above theorem. 
+We also showed this in the 
+\ref[Erzeugendensystem][previous example for three vectors in $\R^2$]{mehrere_vektoren}.
+}
+
+\tab{\lang{de}{2 Vektoren im $\R^2$}\lang{en}{Two vectors in $\R^2$}}
+\lang{de}{
+Im früheren \ref[Erzeugendensystem][Beispiel zu 2 Vektoren im $\R^2$]{mehrere_vektoren}
+haben wir gezeigt, dass die Vektoren $\begin{pmatrix} 2\\ -1\end{pmatrix}$ und 
+$\begin{pmatrix} 1\\ 0\end{pmatrix}$ linear unabhängig sind. Nach obigem Satz bilden sie somit eine 
+Basis des $\R^2$.
+}
+\lang{en}{
+In the \ref[Erzeugendensystem][previous example for two vectors in $\R^2$]{mehrere_vektoren} we 
+showed that the vectors $\begin{pmatrix} 2\\ -1\end{pmatrix}$ and 
+$\begin{pmatrix} 1\\ 0\end{pmatrix}$ are linearly independent. By the above theorem, we immediately 
+have that they are a basis of $\R^2$.
+}
+
+\end{tabs*}
+\end{example}
+
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{2}
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\number{k}{2}
+%			\randint{k}{1}{2}	% Zufallsvariable zum Vertauschen:
+			\function[calculate]{k1}{(2-k)}  % "Dirac"-funktionen
+			\function[calculate]{k2}{(k-1)}
+
+			\randint[Z]{r}{1}{4}
+			\randint[Z]{s}{2}{4}
+			\randint[Z]{t}{2}{4}
+
+% (Ticket #10)  	
+%			\randint[Z]{d1}{-4}{4}
+%			\randint[Z]{d2}{-4}{4}
+%			\randint[Z]{c1}{-4}{4}
+%			\randint[Z]{c2}{-4}{4}
+
+			\randint[Z]{d1}{1}{5}
+			\randint[Z]{d2}{1}{5}
+			\randint[Z]{c1}{1}{5}
+			\randint[Z]{c2}{1}{5}
+
+			\function[calculate]{f1}{t*c1}
+			\function[calculate]{f2}{r*d1}
+			\function[calculate]{f3}{t*c2+r*d2+s*k2}
+			
+			\function[calculate]{z}{s*k2}
+			
+
+		\end{variables}
+		
+			\text{\lang{de}{Ist die folgende Menge von Vektoren eine Basis des $\R^3$?}
+        \lang{en}{Is the foollowing set of vectors a basis of $\R^3$?}\\
+				$\{ \begin{pmatrix} \var{c1} \\ 0\\ \var{c2} \end{pmatrix};
+				\begin{pmatrix} \var{f1} \\ \var{f2}\\ \var{f3} \end{pmatrix};
+				\begin{pmatrix} 0 \\ \var{d1}\\ \var{d2} \end{pmatrix} \}$}\\
+                
+                                
+                \begin{choices}{unique}
+
+                    \begin{choice}
+                      \text{\lang{de}{ja}\lang{en}{yes}}
+                      \solution[compute]{k2=1}
+                    \end{choice}
+                    \begin{choice}
+                      \text{\lang{de}{nein}\lang{en}{no}}
+                      \solution[compute]{k2=0}
+                    \end{choice}
+
+                 \end{choices}
+                
+                
+%%%%% alte Version %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                
+%
+%				\ansref (Antwort $1$ für ja, $0$ für nein). 
+%		
+%		\begin{answer}
+%			\solution{k2}
+%		\end{answer}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+		\explanation{\lang{de}{
+    Da die Menge aus drei Elementen besteht, ist nur zu testen, ob sie linear unabhängig ist.\\
+		Mit dem Ansatz:
+    }
+    \lang{en}{
+    As the set contains three elements, we can simply check whether it is linearly independent.\\
+    From the equation:
+    }\\
+		$ \begin{pmatrix} 0 \\ 0\\ 0 \end{pmatrix}=r_1\cdot \begin{pmatrix} \var{c1} \\ 0\\ \var{c2} \end{pmatrix}
+		+r_2\cdot \begin{pmatrix} \var{f1} \\ \var{f2}\\ \var{f3} \end{pmatrix}
+		+r_3\cdot \begin{pmatrix} 0 \\ \var{d1}\\ \var{d2} \end{pmatrix}=
+% (Ticket #10) 	
+% mit Klammern:    		\begin{pmatrix} \var{c1}r_1+(\var{f1})r_2 \\ \var{f2}r_2+(\var{d1})r_3\\ \var{c2}r_1+(\var{f3})r_2+(\var{d2})r_3 \end{pmatrix} \]
+        \begin{pmatrix} \var{c1}r_1+\var{f1}r_2 \\ \var{f2}r_2+\var{d1}r_3\\ \var{c2}r_1+\var{f3}r_2+\var{d2}r_3 \end{pmatrix} $\\
+    \lang{de}{
+		erhält man aus der ersten Zeile $r_1=-\var{t}r_2$ und aus der zweiten Zeile $r_3=-\var{r}r_2$. 
+    Durch Einsetzen in die dritte Zeile, erhält man
+    }
+    \lang{en}{
+    the first row yields $r_1=-\var{t}r_2$ and the second row yields $r_3=-\var{r}r_2$. By 
+    substituting these into the third row, we obtain
+    }\\
+% (Ticket #10) 	
+% mit Klammern:    		\[ 0= \var{c2}\cdot (-\var{t}r_2)+(\var{f3})r_2+(\var{d2})\cdot (-\var{r}r_2)=\var{z}r_2. \]
+    $ 0= \var{c2}\cdot (-\var{t}r_2)+\var{f3}r_2+\var{d2}\cdot (-\var{r}r_2)=\var{z}r_2. $\\
+    \lang{de}{
+		Also bekommt man aus der dritten Zeile die Bedingung $r_2=0$ und mit den anderen Gleichungen 
+    auch $r_1=r_3=0$, weshalb dies die einzige Lösung ist. Die Vektoren sind also linear unabhängig.
+		}
+    \lang{en}{
+    Hence the third row yields $r_2=0$ and thus $r_1=r_3=0$, and this is the only solution. The 
+    vectors are therefore linearly independent, and form a basis.
+    }}
+	\end{quickcheck}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\number{k}{1}
+%			\randint{k}{1}{2}	% Zufallsvariable zum Vertauschen:
+			\function[calculate]{k1}{(2-k)}  % "Dirac"-funktionen
+			\function[calculate]{k2}{(k-1)}
+
+			\randint[Z]{r}{1}{4}
+			\randint[Z]{s}{2}{4}
+			\randint[Z]{t}{2}{4}
+
+% (Ticket #10)  	
+%			\randint[Z]{d1}{-4}{4}
+%			\randint[Z]{d2}{-4}{4}
+%			\randint[Z]{c1}{-4}{4}
+%			\randint[Z]{c2}{-4}{4}
+
+			\randint[Z]{d1}{1}{5}
+			\randint[Z]{d2}{1}{5}
+			\randint[Z]{c1}{1}{5}
+			\randint[Z]{c2}{1}{5}
+
+			\function[calculate]{f1}{t*c1}
+			\function[calculate]{f2}{r*d1}
+			\function[calculate]{f3}{t*c2+r*d2+s*k2}
+			
+			\function[calculate]{z}{s*k2}
+			
+
+		\end{variables}
+		
+			\text{\lang{de}{Ist die folgende Menge von Vektoren eine Basis des $\R^3$?}
+            \lang{en}{Is the following set of vectors a basis of $\R^3$?}\\
+				$\{ \begin{pmatrix} \var{c1} \\ 0\\ \var{c2} \end{pmatrix};
+				\begin{pmatrix} \var{f1} \\ \var{f2}\\ \var{f3} \end{pmatrix};
+				\begin{pmatrix} 0 \\ \var{d1}\\ \var{d2} \end{pmatrix} \}$}\\
+                
+                \begin{choices}{unique}
+
+                    \begin{choice}
+                      \text{\lang{de}{ja}\lang{en}{yes}}
+                      \solution[compute]{k2=1}
+                    \end{choice}
+                    \begin{choice}
+                      \text{\lang{de}{nein}\lang{en}{no}}
+                      \solution[compute]{k2=0}
+                    \end{choice}
+
+                 \end{choices}
+                
+                
+%%%%% alte Version %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                
+%				\ansref (Antwort $1$ für ja, $0$ für nein). }
+%	
+%		\begin{answer}
+%			\solution{k2}
+%		\end{answer}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+		\explanation{\lang{de}{
+    Da die Menge aus drei Elementen besteht, ist nur zu testen, ob sie linear unabhängig ist.\\
+		Mit dem Ansatz:
+    }
+    \lang{en}{
+    As the set contains three elements, we can simply check whether it is linearly independent.\\
+    From the equation:
+    }\\
+		$ \begin{pmatrix} 0 \\ 0\\ 0 \end{pmatrix}=r_1\cdot \begin{pmatrix} \var{c1} \\ 0\\ \var{c2} \end{pmatrix}
+		+r_2\cdot \begin{pmatrix} \var{f1} \\ \var{f2}\\ \var{f3} \end{pmatrix}
+		+r_3\cdot \begin{pmatrix} 0 \\ \var{d1}\\ \var{d2} \end{pmatrix}=
+% (Ticket #10) 	
+% mit Klammern:    \begin{pmatrix} \var{c1}r_1+(\var{f1})r_2 \\ \var{f2}r_2+(\var{d1})r_3\\ \var{c2}r_1+(\var{f3})r_2+(\var{d2})r_3 \end{pmatrix}
+        \begin{pmatrix} \var{c1}r_1+\var{f1}r_2 \\ \var{f2}r_2+\var{d1}r_3\\ \var{c2}r_1+\var{f3}r_2+\var{d2}r_3 \end{pmatrix}        
+    $\\
+    \lang{de}{
+		erhält man aus der ersten Zeile $r_1=-\var{t}r_2$ und aus der zweiten Zeile $r_3=-\var{r}r_2$. 
+    Durch Einsetzen in die dritte Zeile, erhält man die Gleichung
+    }
+    \lang{en}{
+    the first row yields $r_1=-\var{t}r_2$ and the second row yields $r_3=-\var{r}r_2$. By 
+    substituting these into the third row, we obtain
+    }\\
+% (Ticket #10)	
+% mit Klammern:    \[ 0= \var{c2}\cdot (-\var{t}r_2)+(\var{f3})r_2+(\var{d2})\cdot (-\var{r}r_2)=0\cdot r_2.\]
+		$ 0= \var{c2}\cdot (-\var{t}r_2)+\var{f3}r_2+\var{d2}\cdot (-\var{r}r_2)=0\cdot r_2.$\\
+    \lang{de}{
+		Diese ist für beliebiges $r_2$ erfüllt, weshalb dann zum Beispiel die Wahl von $r_2=1$, 
+    $r_1=-\var{t}$ und $r_3=-\var{r}$ eine nichttriviale Linearkombination für den Nullvektor 
+    ergibt. Die Vektoren sind daher linear abhängig.
+    }
+    \lang{en}{
+    This is satisfied by any $r_2$, so for example setting $r_2=1$, $r_1=-\var{t}$ and 
+    $r_3=-\var{r}$ yields a non-trivial linear combination representing the zero vector. The vectors 
+    are therefore linearly dependent, and do not form a basis.
+		}}
+	\end{quickcheck}
+\end{quickcheckcontainer}
+
+
+\end{visualizationwrapper}
+
+
+\end{content}

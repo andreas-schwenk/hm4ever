@@ -1,0 +1,183 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Training 1}
+    \lang{de}{A01: Kurven}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/23027}{Ticket 23027}
+\end{block}
+\usepackage{mumie.genericproblem}
+\title{
+    \lang{en}{Training 1}
+    \lang{de}{A01: Kurven}
+  }
+  \begin{problem}
+
+%QS Änderung: Zerlegung in Einzelne Teilaufgaben (zur besseren Zuordnung der Erklärungen)
+% \begin{question}
+    \begin{variables}
+    %Koeffizienten:
+    \randint[Z]{a}{2}{10}
+    \randint[Z]{b}{-10}{-2}
+    \randint[Z]{c}{-10}{10}
+    \randint[Z]{d}{-10}{10}
+    %Kurve
+    \function{phix}{a*sin(t)}
+    \function{phiy}{b*cos(t)}
+    %Kurve doppelt so schnell
+	\function{doppx}{a*sin(2*t)}
+    \function{doppy}{b*cos(2*t)}
+    %Kurve rückwärts
+    \function{rueckx}{a*sin(2*pi-t)}
+    \function{ruecky}{b*cos(2*pi-t)}    
+    %Kurve verschoben
+    \function{shiftx}{a*sin(t)+c}
+    \function{shifty}{b*cos(t)+d}
+    \end{variables}  
+%    \type{input.generic}
+%     \field{real}
+
+\begin{question} % Teilaufg. (a)
+    \type{input.generic}
+     \field{real}
+ 
+    \lang{de}{\text{Gegeben ist die Kurve $\phi:[0;2\pi]\to\R^2$, 
+    $t\mapsto\begin{pmatrix}\var{a}\sin(t)\\\var{b}\cos(t)\end{pmatrix}$.\\
+    \\
+    Geben Sie die Parametrisierung der mit doppelter Geschwindigkeit durchlaufenen Kurve $\phi$ an:\\
+    \\
+         
+    
+    \begin{table}[\class{layout}]
+      $\phi_{dopp}$:\ansref $\to\R^2$, $\: t\mapsto$ & 
+      \begin{table}[\class{pmatrix}]  \ansref\\ \ansref \end{table}  \end{table} 
+    }}
+    
+%neue Erklärung   
+  \explanation[NOT [equal(ans_2,doppx)] OR NOT[equal(ans_3,doppy)]]{Wird die Kurve mit doppelter Geschwindikeit durchlaufen, 
+               muss in der ursprünglichen Kurve $\; t\mapsto 2t$ substituiert werden.
+               } 
+
+   \begin{answer}  % Intervall
+   \type{input.interval}
+% NEU (2.11.2021): "pi" kann jetzt als Intervallgrenze eingegeben werden und wird auch als "pi" angezeigt   
+   \allowForInput{pi}
+  %\allowIntervalUnionsForInput
+  \solution{[0;pi]}
+%QS neue Erklärung   
+  \explanation[answerEqual(\(0;pi\)) OR answerEqual(\(0;pi\]) OR answerEqual(\[0;pi\))]{Der Definitionsbereich von $\phi_{dopp}$ ist wie der ursprüngliche abgeschlossen.}
+  \explanation[NOT[answerEqual(\[0;pi\])] AND NOT[answerEqual(\(0;pi\))] AND NOT[answerEqual(\(0;pi\])] AND NOT[answerEqual(\[0;pi\))]]{Püfen Sie die Intervallgrenzen der Kurve $\phi_{dopp}$. Durch die höhere Geschwindigkeit verkürzt sich das Zeitintervall.}   
+    \end{answer}
+    
+    \begin{answer}  % Parametrisierung
+    \type{input.function}
+    \solution{doppx}
+    \inputAsFunction{t}{Dx}
+			\checkFuncForZero{Dx-doppx}{-1}{1}{10}  
+            \explanation{Die erste Komponente von $\phi_{dopp}$ ist nicht korrekt.}
+    \end{answer}
+    \begin{answer} %(b)
+    \type{input.function}
+    \solution{doppy}
+    \inputAsFunction{t}{Dy}
+    			\checkFuncForZero{Dy-doppy}{-1}{1}{10}
+                \explanation{Die zweite Komponente von $\phi_{dopp}$ ist nicht korrekt.}
+    \end{answer}
+    
+\end{question}    
+
+\begin{question} % Teilaufg. (b)
+    \lang{de}{\text{Geben Sie die Parametrisierung der rückwärts durchlaufenen Kurve $\phi$ an: \\
+\\    
+    
+      \begin{table}[\class{layout}]
+      $\phi_{rueck}$:\ansref $\to\R^2$, $t\mapsto $ & 
+      \begin{table}[\class{pmatrix}]  \ansref\\ \ansref \end{table}  \end{table} 
+    }}
+
+%neue Erklärung   
+  \explanation[NOT [equal(ans_2,rueckx)] OR NOT[equal(ans_3,ruecky)]]{Wird die Kurve rückwärts durchlaufen, erhält man die neue Kurve aus  
+               der ursprünglichen Kurve $\phi$ durch Substitution von $\; t\mapsto 2\pi-t$.
+               }                        
+   \begin{answer} % Intervall
+   \type{input.interval}
+% NEU (10.11.2021): Intervalle auch hier eingeben:    
+   \allowForInput{pi}
+  \solution{[0;2*pi]}
+  \explanation{Püfen Sie den Definitionsbereich der Kurve $\phi_{rueck}$. Das Zeitintervall bleibt unverändert.}   
+    \end{answer}
+    
+    \begin{answer} 
+    \type{input.function}
+    \solution{rueckx}
+    \inputAsFunction{t}{Rx}
+			\checkFuncForZero{Rx-rueckx}{-1}{1}{10}
+            \explanation{Die erste Komponente von $\phi_{rueck}$ ist nicht korrekt.}
+    \end{answer}
+    \begin{answer}
+    \type{input.function}
+    \solution{ruecky}
+    \inputAsFunction{t}{Ry}
+			\checkFuncForZero{Ry-ruecky}{-1}{1}{10}
+            \explanation{Die zweite Komponente von $\phi_{rueck}$ ist nicht korrekt.}
+    \end{answer}
+\end{question}    
+
+\begin{question} % Teilaufg. (c)
+    \lang{de}{\text{Geben Sie die um $\left(\begin{smallmatrix}\var{c}\\\var{d}\end{smallmatrix}\right)$ 
+    verschobene Kurve $\phi$ an:\\
+\\    
+    \begin{table}[\class{layout}]
+     $\phi_{transl}$: \ansref $\to\R^2$, $t\mapsto$ & 
+      \begin{table}[\class{pmatrix}]  \ansref\\ \ansref \end{table}  \end{table} 
+    }}
+
+%neue Erklärung
+  \explanation[NOT [equal(ans_2,shiftx)] OR NOT[equal(ans_3,shifty)]]{Die verschobene Kurve $\phi_{transl}$ erhält man durch Addition des Verschiebungsvektors
+               zum Vektor $\phi(t)$. }                
+    \begin{answer} 
+    \type{input.interval}
+% NEU (10.11.2021): Intervalle auch hier eingeben:    
+   \allowForInput{pi}
+  \solution{[0;2*pi]}
+  \explanation{Püfen Sie den Definitionsbereich der Kurve $\phi_{transl}$. Das Zeitintervall bleibt bei der räumlichen Verschiebung unverändert.}   
+    \end{answer}
+    \begin{answer}
+    \type{input.function}
+    \solution{shiftx}
+    \inputAsFunction{t}{Sx}
+			\checkFuncForZero{Sx-shiftx}{-1}{1}{10}
+            \explanation{Die erste Komponente von $\phi_{transl}$ ist nicht korrekt.}
+    \end{answer}
+    
+    \begin{answer}
+    \type{input.function}
+    \solution{shifty}
+    \inputAsFunction{t}{Sy}
+			\checkFuncForZero{Sy-shifty}{-1}{1}{10}
+            \explanation{Die zweite Komponente von $\phi_{transl}$ ist nicht korrekt.}
+    \end{answer}
+\end{question}
+
+\end{problem}
+\embedmathlet{gwtmathlet}
+
+\end{content}

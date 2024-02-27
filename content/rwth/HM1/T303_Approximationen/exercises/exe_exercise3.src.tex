@@ -1,0 +1,101 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü03: Taylor}
+    \lang{en}{Exercise 3}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+
+\title{\lang{de}{Ü03: Taylor}}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10494}{Ticket 10494}
+\end{block}
+
+%######################################################FRAGE_TEXT
+\lang{de}{ 
+Bestimmen Sie die Taylor-\notion{Reihen} zu den Funktionen\\
+\textbf{a)} $f(x)=\frac{x}{1-x} \quad$ \textbf{b)} $g(x)=xe^x$\\
+jeweils an der Stelle $x_0=0$.
+ }
+
+%##################################################ANTWORTEN_TEXT
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung a)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   Man berechnet zunächst die ersten Ableitungen, um eine Idee für die allgemeine Ableitung zu
+bekommen.  Mit der Quotientenregel gilt:
+\begin{eqnarray*}
+f'(x)&=& \frac{1\cdot (1-x)-x\cdot (-1)}{(1-x)^2}=\frac{1}{(1-x)^2}=(1-x)^{-2}, \\
+\end{eqnarray*}
+Weiter erhält man mit der Kettenregel:
+\begin{eqnarray*}
+f''(x) &=& (-2)(1-x)^{-3}\cdot (-1)=2(1-x)^{-3}, \\
+f'''(x) &=& 2\cdot (-3)(1-x)^{-4}\cdot (-1)=3!\cdot (1-x)^{-4},\\
+f^{(4)}(x) &=& 3!\cdot (-4)(1-x)^{-5}\cdot (-1)=4!\cdot (1-x)^{-5} 
+\end{eqnarray*}
+
+Dies legt die allgemeine Formel $f^{(n)}(x)=n!\cdot (1-x)^{-n-1}$ nahe. Dass die Formel stimmt, weist man induktiv nach: Für $n=1$ ist die Formel richtig, und wenn sie für ein festes $n$
+gilt, so folgt mit der Kettenregel
+\[  f^{(n+1)}(x)=(f^{(n)})'(x)=\left( n!\cdot (1-x)^{-n-1} \right)'=n!\cdot (-n-1)(1-x)^{-n-2}\cdot (-1)=(n+1)!\cdot (1-x)^{-n-2}.\]
+D.h. die Formel gilt auch für $n+1$.
+
+Die Taylor-Reihe erhalten wir dann durch Einsetzen in die allgemeine Formel:
+\[ P_{f,0}(x)=\sum_{n=0}^\infty \frac{f^{(n)}(0)}{n!}(x-0)^n
+= 0+ \sum_{n=1}^\infty \frac{n!\cdot (1-0)^{-n-1}}{n!}x^n=\sum_{n=1}^\infty x^n.\]
+   }
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+\tab{\lang{de}{    Lösung b)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   Man berechne zunächst die ersten Ableitungen, um eine Idee für die allgemeine Ableitung zu
+bekommen. Mit der Produktregel gelten:
+\begin{eqnarray*}
+  g'(x)&=& 1\cdot e^x+x\cdot e^x=(1+x)e^x,\\
+  g''(x) &=& 1\cdot e^x+(1+x)\cdot e^x=(2+x)e^x.
+\end{eqnarray*}
+Dies legt die allgemeine Formel
+\[  g^{(n)}(x)=(n+x)e^x \]
+nahe, welche man induktiv nachweist: Für $n=1$ stimmt die Formel, und wenn sie für ein festes $n$
+gilt, so folgt
+\[ g^{(n+1)}(x)=(g^{(n)})'(x)=\left( (n+x)e^x\right)'= 1\cdot e^x+(n+x)e^x=(n+1+x)e^x. \]
+D.h. die Formel gilt auch für $n+1$.
+
+Die Taylor-Reihe erhalten wir dann durch Einsetzen in die allgemeine Formel:
+\[ T_{g,0}(x)=\sum_{n=0}^\infty \frac{g^{(n)}(0)}{n!}(x-0)^n
+= \sum_{n=0}^\infty \frac{(n+0)e^0}{n!}x^n = \sum_{n=1}^\infty \frac{x^n}{(n-1)!}
+\]
+    }
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+ 
+
+%#############################################################ENDE
+\end{tabs*}
+\end{content}

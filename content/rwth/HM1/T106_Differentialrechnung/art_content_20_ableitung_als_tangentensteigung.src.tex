@@ -1,0 +1,725 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ableitung und Ableitungsformeln}
+    \lang{en}{Differentiation}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T106_Tangent_B.meta.xml}{T106_Tangent_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T106_Tangent_A.meta.xml}{T106_Tangent_A}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T104_weitere_elementare_Funktionen/g_art_content_14_potenzregeln.meta.xml}{power-rules}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{6}
+\ombarticle{1}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Ableitung und Ableitungsformeln}\lang{en}{Differentiation}}
+ 
+\begin{block}[annotation]
+  übungsinhalt
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9031}{Ticket 9031}\\
+\end{block}
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+%\begin{block}[info-box]
+\lang{de}{
+Die Differentialrechnung stellt Werkzeuge zur Verfügung, mit denen das Änderungsverhalten von 
+Funktionen "im Kleinen" untersucht werden kann. Dabei können beispielsweise lokale Extrema (Hoch- 
+und Tiefpunkte) ermittelt werden. 
+Auch eine lineare Approximation nicht-linearer Funktionen ist dadurch lokal möglich.
+}
+\lang{en}{
+Differentiation is a way of finding the rate of change of a function over 'arbitrarily small' parts 
+of the domain. It can for example be used to determine local extrema (maximum and minimum points) of 
+a function. It can also be used for constructing, for example, linear approximations to non-linear 
+functions.
+}
+%\end{block}
+
+\section{
+	\lang{de}{Die Ableitung als Tangentensteigung}
+	\lang{en}{The derivative as the gradient of the tangent}\label{sec:ableitung}
+}
+
+% In der Analysis interessiert man sich häufig für Eigenschaften von Kurven wie Extremstellen, Steigungs- oder Kr\"{u}mmungsverhalten. Oder
+% man m\"{o}chte einen Funktionswert an einer Stelle n\"{a}herungsweise bestimmen, ohne ihn konkret auszurechnen. Bei all diesen Problemen
+% ist die sogenannte Ableitung einer Funktion n\"{u}tzlich.\\
+\lang{de}{
+Die Ableitung einer Funktion $f$ an einer Stelle $x_0$ soll die Steigung der Tangente an den Graphen von $f$ im Punkt $(x_0;f(x_0))$ angeben.
+Dies ist zugleich ein Ma{\ss} f\"{u}r die Steigung von $f$ in $x_0$.\\
+Diese Tangente ist eine Gerade, die den Graphen im Punkt $P_0=(x_0;f(x_0))$ \textit{berührt}.
+Um rechnerisch zu verstehen, was dies bedeutet, betrachtet man zunächst Sekanten des Graphen durch den Punkt $P_0=(x_0;f(x_0))$, also solche Geraden,
+ die den Graphen der Funktion außer in $P_0$ noch in mindestens einem weiteren Punkt schneidet.
+Die Steigung der Sekante des Graphen von $f$ durch die Punkte $P_0=(x_0;f(x_0))$ und $P=(x_0+h;f(x_0+h))$ bestimmt man \"{u}ber
+das Steigungsdreieck. Die Steigung entspricht also dem Quotienten der Differenzen auf der $y$-Achse und der $x$-Achse und berechnet sich zu
+}
+\lang{en}{
+The derivative of a function $f$ at a pont $x_0$ can be thought of as the gradient of the tangent 
+of the graph of $f$ at the point $(x_0;f(x_0))$. This is essentially a measure of the slope of $f$ 
+at $x_0$. \\
+The tangent is a specific line which \textit{touches} the line at $P_0=(x_0;f(x_0))$, and its 
+gradient is found using a process called \emph{differentiation from first principles}, as follows. 
+Consider the secants of the graph of $f$ through the point $P_0=(x_0;f(x_0))$, that is, those lines 
+that intersect with the graph in at least one point other than $P_0$. The gradient of the secant of 
+the graph of $f$ through the points $P_0=(x_0;f(x_0))$ and $P=(x_0+h;f(x_0+h))$ is found by dividing 
+the change in the $y$-axis by the change in the $x$-axis,
+}
+\[\frac{f(x_0+h)-f(x_0)}{x_0+h-x_0}=\frac{f(x_0+h)-f(x_0)}{h}.\]\label{steigung_sekante}
+
+\begin{center}
+\image{T106_Tangent_A}
+\end{center}
+
+\lang{de}{
+Macht man $h$ nun betragsmäßig immer kleiner, so erkennt man an dem folgenden Schaubild, dass sich 
+die so entstandenen Sekanten immer weiter der Tangente an die Kurve von $f$ im Punkt $(x_0;f(x_0))$ n\"{a}hern, und auch der Quotient $\frac{f(x_0+h)-f(x_0)}{h}$
+(also die Steigung der jeweiligen Sekante) n\"{a}hert sich der Steigung der Tangente an.\\
+}
+\lang{en}{
+Suppose we now choose progressively smaller $h$, and note from the diagram that the secant 
+approaches the tangent of the curve at the point $(x_0;f(x_0))$, and that the quotient 
+$\frac{f(x_0+h)-f(x_0)}{h}$ (the gradient of the secant) approaches the gradient of the tangent.\\
+}
+
+\begin{center}
+\image{T106_Tangent_B}
+\end{center}
+
+\lang{de}{
+In der folgenden Visualisierung ist \nowrap{$f(x) = x^2 - |x|+1 $} und \nowrap{$P = (x_0; f(x_0))=(1; 1)$.} 
+Verändern Sie die $x$-Koordinate des Punktes $Q$ und lassen Sie so $Q$ gegen $P$ laufen. Überzeugen Sie sich,
+dass es eine Tangente an den Graphen von $f$ im Punkt $P$ gibt und dass die Ableitung, d.h. die Steigung der Tangente,
+den Wert $1$ hat.
+}
+\lang{en}{
+In the following visualisation, we show \nowrap{$f(x) = x^2 - |x|+1 $} and 
+\nowrap{$P = (x_0; f(x_0))=(1; 1)$}. Change the $x$-coordinate of $Q$ and in order to make it 
+approach $P$, and convince yourself that there exists a tangent to the graph of $f$ at the point 
+$P$ and that the derivative of $f$ at $P$ (the gradient of the tangent) has value $1$.
+}
+
+\begin{genericGWTVisualization}[550][650]{mathlet1}
+\lang{de}{\title{Tangente im Punkt $P$}}
+\lang{en}{\title{The tangent at the point $P$}}
+\begin{variables}
+
+	\point{P}{rational}{1,1}
+	\point[editable]{Q0}{rational}{1.5,0}
+	\point{R}{rational}{0,0}
+	\point{x0}{rational}{1,0}
+	\function{f}{rational}{x^2 - abs(x) + 1}
+	\number{Qx}{rational}{var(Q0)[x]}
+	\number{h}{rational}{var(Qx)-1}
+	\number{Qy}{rational}{(var(Qx))^2 - abs(var(Qx)) + 1}
+	\point{Q}{rational}{var(Qx),var(Qy)}
+	\point{Q1}{rational}{var(Qx)-dirac(var(h)),var(Qy)-dirac(var(h))}
+	\line{s}{rational}{var(P),var(Q1)}
+	\line{t}{rational}{var(R),var(P)}
+	
+\end{variables}
+ \color{Q}{#0066CC}
+ \color{Qx}{#0066CC}
+ \color{Qy}{#0066CC}
+ \color{P}{#CC6600}
+ \color{x0}{#CC6600}
+ \color{s}{#0066CC}
+ \color{f}{#CC6600}
+ \color{h}{#0066CC}
+ \label{P}{@2d[$\textcolor{#CC6600}{P}$]}
+ \label{x0}{@2d[$\textcolor{#CC6600}{x_0}$]}
+ \label{Q}{@2d[$\textcolor{#0066CC}{Q}$]}
+ \label{f}{@2d[$\textcolor{#CC6600}{f}$]}
+	\begin{canvas}
+	\plotSize{450}
+	\plotLeft{-1.5}
+	\plotRight{2.5}
+	\plot[coordinateSystem]{f,Q,P,x0,s,t,Q0}
+	\end{canvas}
+\lang{de}{\text{\textcolor{#CC6600}{Orangener} Graph: \textcolor{#CC6600}{$f(x) = x^2 -|x| + 1$}, fester Punkt: \textcolor{#CC6600}{$P= (x_0;f(x_0))=(1; 1)$}.}}
+\lang{en}{\text{\textcolor{#CC6600}{Orange} graph: \textcolor{#CC6600}{$f(x) = x^2 -|x| + 1$}, fixed point: \textcolor{#CC6600}{$P= (x_0,f(x_0))=(1, 1)$}.}}
+\lang{de}{\text{Ziehen Sie mit der Maus den schwarzen Punkt entlang der $x$-Achse,}}
+\lang{en}{\text{Use the mouse to move around the black point along the $x$-axis}}
+\lang{de}{\text{um $\textcolor{#0066CC}{x=x_0+h = 1+}\var{h}$ zu verändern. Die \textcolor{#0066CC}{blaue} Sekante ist}}
+\lang{en}{\text{in order to vary $\textcolor{#0066CC}{x=x_0+h=1+}\var{h}$. The \textcolor{#0066CC}{blue} secant is}}
+\lang{de}{\text{die Gerade durch die Punkte \textcolor{#CC6600}{$P$} und 
+$\textcolor{#0066CC}{Q = (x;f(x))= (}\var{Qx};\var{Qy}\textcolor{#0066CC}{)}$.}}
+\lang{en}{\text{the line through the point \textcolor{#CC6600}{$P$} and 
+$\textcolor{#0066CC}{Q = (x,f(x))= (}\var{Qx},\var{Qy}\textcolor{#0066CC}{)}$.}}
+\lang{de}{\text{Wenn $\textcolor{#CC6600}{P}=\textcolor{#0066CC}{Q}$, d.h. $\textcolor{#0066CC}{h=0}$, ist die Sekante nicht definiert, aber}}
+\lang{en}{\text{If $\textcolor{#CC6600}{P}=\textcolor{#0066CC}{Q}$, i.e. $\textcolor{#0066CC}{h=0}$, the secant is not defined, however}}
+\lang{de}{\text{die Sekanten nähern sich für $\textcolor{#0066CC}{h}$ gegen Null der schwarzen Tangente.}}
+\lang{en}{\text{the secant approximates the black tangent line as $\textcolor{#0066CC}{h}$ approaches $0$.}}
+
+
+\end{genericGWTVisualization}
+%There seems to be neither a black point nor a black tangent line on the graph - Niccolo
+
+\lang{de}{
+In der zweiten Visualisierung geht es um den Ausnahmefall, dass es keine Tangente und keine 
+Ableitung gibt. Dazu betrachten wir die Funktion \nowrap{$f(x) = x^2 - |x|+1$} diesmal im Punkt 
+\nowrap{$P = (x_0; f(x_0))=(0;1)$.} Überzeugen Sie sich, dass die Endlage der Sekante
+durch $P$ und $Q$ unterschiedlich ist, je nachdem ob wir die $x-$Koordinate des Punktes $Q$ von der 
+Seite der positiven Zahlen gegen $x_0=0$ gehen lassen oder von der Seite der negativen Zahlen. 
+Nähert man sich von links der Stelle $x_0  = 0$ an, so hat die Tangente dort die Steigung $+1$. Eine 
+Annäherung von rechts liefert die Steigung $-1$.
+}
+\lang{en}{
+The following second visualization deals with an exception: a point where there is no tangent to the 
+graph and hence no derivative. Here, again we'll consider the function \nowrap{$f(x) = x^2 - |x|+1$} 
+but this time at the point \nowrap{$P = (x_0, f(x_0))=(0,1)$.} Convince yourself that the secant is 
+different depending on which direction the point $Q$ approaches the point $x_0=0$ (whether from the 
+negative or the positive side).
+}
+
+
+\begin{genericGWTVisualization}[550][650]{mathlet1}
+\lang{de}{\title{Keine Tangente im Punkt $P$}}
+\lang{en}{\title{No tangent at the point $P$}}
+\begin{variables}
+	\point{P}{rational}{0,1}
+	\point[editable]{Q0}{rational}{1.5,0}
+	\function{f}{rational}{x^2 - abs(x)+1}
+	\number{Qx}{rational}{var(Q0)[x]}
+	\number{h}{rational}{var(Qx)}
+	\number{Qy}{rational}{(var(Qx))^2 - abs(var(Qx))+1}
+	\point{Q}{rational}{var(Qx),var(Qy)}
+	\point{P1}{rational}{1000*dirac(var(h)),1}
+	\point{Q1}{rational}{var(Qx)-1000*dirac(var(h)),var(Qy)-10*dirac(var(h))}
+	\line{s}{rational}{var(P1),var(Q1)}
+\end{variables}
+
+ \color{Q}{#0066CC}
+ \color{Qx}{#0066CC}
+ \color{Qy}{#0066CC}
+ \color{P}{#CC6600}
+ \color{s}{#0066CC}
+ \color{f}{#CC6600}
+ \color{h}{BLUE}
+ \label{P}{@2d[$\textcolor{#CC6600}{P}$]}
+ \label{Q}{@2d[$\textcolor{BLUE}{Q}$]}
+ \label{f}{@2d[$\textcolor{#CC6600}{f}$]}
+	\begin{canvas}
+	\plotSize{450}
+	\plotLeft{-2}
+	\plotRight{2}
+	\plot[coordinateSystem]{f,Q,P,s,Q0}
+	\end{canvas}
+\lang{de}{\text{\textcolor{#CC6600}{Orangener} Graph: \textcolor{#CC6600}{$f(x) = x^2 -|x|+1$}, fester Punkt: \textcolor{#CC6600}{$P= (x_0; f(x_0))= (0; 1)$}.}}
+\lang{en}{\text{\textcolor{#CC6600}{Orange} graph: \textcolor{#CC6600D}{$f(x) = x^2 -|x|+1$}, fixed point: \textcolor{#CC6600}{$P= (x_0, f(x_0))= (0, 1)$}.}}
+\lang{de}{\text{Ziehen Sie mit der Maus den schwarzen Punkt entlang der $x$-Achse,}}
+\lang{en}{\text{Using the mouse, move the black point along the $x$-axis}}
+\lang{de}{\text{um $\textcolor{#0066CC}{x=x_0+h = h =} \var{h}$ zu verändern. Die \textcolor{#0066CC}{blaue} Sekante ist}}
+\lang{en}{\text{in order to vary $\textcolor{#0066CC}{x=x_0+h = h =} \var{h}$. The \textcolor{#0066CC}{blue} secant is}}
+\lang{de}{\text{die Gerade durch die Punkte \textcolor{#CC6600}{$P$} und
+$\textcolor{#0066CC}{Q = (x; f(x)) = (}\var{Qx}; \var{Qy}\textcolor{#0066CC}{)}$.}}
+\lang{en}{\text{the line through the points \textcolor{#CC6600}{$P$} and
+$\textcolor{#0066CC}{Q = (x, f(x)) = (}\var{Qx}, \var{Qy}\textcolor{#0066CC}{)}$.}}
+\lang{de}{\text{Wenn $\textcolor{#CC6600}{P}=\textcolor{#0066CC}{Q}$, d.h. $\textcolor{#0066CC}{h=0}$, ist die Sekante nicht definiert.}}
+\lang{en}{\text{If $\textcolor{#CC6600}{P}=\textcolor{#0066CC}{Q}$, i.e. $\textcolor{#0066CC}{h=0}$, the secant is not defined.}}
+
+
+\end{genericGWTVisualization}
+
+\lang{de}{
+Wenn sich wie in der ersten Visualisierung die Sekante einer Tangente und damit die Steigung der 
+Sekante der Steigung der Tangente ann\"{a}hert, soll $f$ in $x_0$ differenzierbar hei{\ss}en.
+}
+\lang{en}{
+If, like in the first visualization, the secant line gets closer to the tangent, and hence the 
+gradient of the secant approaches the gradient of the tangent, we call $f$ differentiable at $x_0$.
+}
+
+
+\begin{definition}%\textit{Definition:}\\
+\lang{de}{
+Eine Funktion $f$ ist \notion{\emph{in $x_0$ differenzierbar}} (oder auch ableitbar),
+falls ein eindeutiges $c\in\R$ existiert, so dass die Steigung der Sekante
+}
+\lang{en}{
+A function $f$ is called \textit{differentiable} at $x_0$ if there exists a unique $c\in\R$ such 
+that the gradient
+}
+\[\frac{f(x_0+h)-f(x_0)}{h}\;\;\;\;\;\;(h\neq 0)\]
+\lang{de}{
+gegen $c$ geht f\"{u}r $h$ gegen Null.
+Dieses $c$ bezeichnet man dann als die \textit{Ableitung von $f$ in $x_0$} und schreibt
+}
+\lang{en}{
+of the secant approaches $c$ as $h$ goes to $0$.
+This number $c$ is called the \textit{derivative of $f$ at $x_0$} and we write
+}
+\begin{equation}\label{diffbarkeit}\label{diffbarkeitz}
+c=:f'(x_0).
+\end{equation}
+\lang{de}{
+Obigen Quotienten nennt man \notion{\emph{Differenzenquotient}}.
+\\\\
+Wichtig: Beachten Sie, dass $c=+\infty$ und $c=-\infty$ ausgeschlossen sind!
+}
+\lang{en}{
+Note: It is important to note that $c=+\infty$ and $c=-\infty$ are not permissible gradients!
+}
+\end{definition}
+
+\begin{theorem}\label{thm:steigung_tangente}
+\lang{de}{
+Sei $f$ an der Stelle $x_0$ differenzierbar. Dann ist $c=f'(x_0)$ aus Gleichung $(1)$
+die Steigung der Tangente an den Graphen von $f$ im Punkt $(x_0;f(x_0))$.\\
+Die Tangente $T(x)$ an den Graphen von $f$ im Punkt $(x_0;f(x_0))$ hat also die Form 
+}
+\lang{en}{
+Let $f$ be differentiable at the point $x_0$. Then $c=f'(x_0)$ from equation $(1.1)$
+is the gradient of the tangent of the graph of $f$ at the point $(x_0,f(x_0))$.\\
+The tangent $T(x)$ of the graph of $f$ at the point $(x_0,f(x_0))$ has the form
+}
+\[T(x)=f'(x_0)\cdot(x-x_0)+f(x_0).\]
+\end{theorem}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{a}{-2}{1}
+			\randint[Z]{b}{-2}{1}
+			\randint{c}{-2}{2}
+			\function[normalize]{f}{x^3+a*x^2+b*x+c}
+			\randint[Z]{p}{0}{8}
+			\function[calculate]{x0}{p/4}
+			\function[calculate]{y0}{x0^3+a*x0^2+b*x0+c}
+			\function[calculate]{m}{3*x0^2+2*a*x0+b}
+		\end{variables}
+		
+			\text{\lang{de}{
+      Wir betrachten die Funktion $f(x)=\var{f}$ an der Stelle $x_0=\var{x0}$.\\
+			Bestimmen Sie mit Hilfe der folgenden Visualisierung (bei der Sie die Koeffizienten von $f$ und die Stelle
+			$x_0$ ändern können) den Wert der Ableitung von $f$ an der Stelle $\var{x0}$.\\
+			$f'(\var{x0})=$\ansref.
+      }
+      \lang{en}{
+      Consider the function $f(x)=\var{f}$ at the point $x_0=\var{x0}$.\\
+      Determine, using the following visualisation (for which the coefficients of $f$ and the point 
+      $x_0$ can be modified), the value of the derivative of $f$ at the point $\var{x0}$.\\
+      $f'(\var{x0})=$\ansref.
+      }}
+		
+		\begin{answer}
+			\solution{m}
+		\end{answer}
+		\explanation{\lang{de}{
+    Der Ableitungswert $f'(\var{x0})$ ist die Steigung der Tangente am Punkt $(\var{x0};\var{y0})$.
+    }
+    \lang{en}{
+    The value of the derivative $f'(\var{x0})$ is the gradient of the tangent to $f$ at the point 
+    $(\var{x0};\var{y0})$.
+    }}
+	\end{quickcheck}
+
+	\begin{genericGWTVisualization}[550][1000]{mathlet1}
+		\begin{variables}
+			\number[editable]{a}{rational}{1}
+			\number[editable]{b}{rational}{1}
+			\number[editable]{c}{rational}{1}
+			\number[editable]{x0}{rational}{0}
+			\function{f}{rational}{x^3+var(a)*x^2+var(b)*x+var(c)}
+			\number{y0}{rational}{var(x0)^3+var(a)*var(x0)^2+var(b)*var(x0)+var(c)}
+			\number{m}{rational}{3*var(x0)^2+2*var(a)*var(x0)+var(b)}
+			\number{q0}{rational}{var(y0)-var(m)*var(x0)}
+			\point{P}{rational}{var(x0),var(y0)}
+			\point{Q}{rational}{var(x0)+1,var(y0)}
+			\point{R}{rational}{var(x0)+1,var(y0)+var(m)}
+			\line{T}{rational}{var(P),var(R)}
+			\segment{s1}{rational}{var(P),var(Q)}
+			\segment{s2}{rational}{var(Q),var(R)}
+		\end{variables}
+% 		\color{P}{BLUE}
+% 		\label{P}{$\textcolor{BLUE}{P}$}
+		\color{s1}{#00CC00}
+		\color{s2}{#00CC00}
+		\color{T}{#0066CC}
+%		\label{s1}{$\textcolor{BLUE}{1}$}
+%		\label{s2}{$\textcolor{BLUE}{\var{m}}$}
+		\begin{canvas}
+			\plotSize{300}
+			\plotLeft{-3}
+			\plotRight{3}
+			\plot[coordinateSystem]{f,T,P, s1,s2}
+		\end{canvas}
+		\lang{de}{\text{
+    Die Funktion $f(x)=x^3+\var{a}\cdot x^2+\var{b}\cdot x+\var{c}$ hat an der Stelle $x_0=\var{x0}$
+		die \textcolor{#0066CC}{Tangente $T$} mit der Gleichung 
+    \textcolor{#0066CC}{$T(x)=\var{m}x+\var{q0}$}.
+    }}
+    \lang{en}{\text{
+    The function $f(x)=x^3+\var{a}\cdot x^2+\var{b}\cdot x+\var{c}$ has the 
+    \textcolor{#0066CC}{tangent $T$} with equation \textcolor{#0066CC}{$T(x)=\var{m}x+\var{q0}$} at 
+    the point $x_0=\var{x0}$.
+    }}
+	    	\end{genericGWTVisualization}
+
+\lang{de}{
+Das nachfolgende Video führt ebenfalls in die Differentiation ein und beinhaltet einige Beispiele.   \\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10766&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\\\
+}
+\lang{en}{}
+\section{\lang{de}{Wichtige Ableitungsformeln}\lang{en}{Important derivatives}}
+
+\begin{definition}%\textit{Definition:}\\
+\label{def:differenzierbar}
+
+\lang{de}{
+Ist $f$ in jedem Punkt des Definitionsbereiches differenzierbar, so nennt man $f$ \notion{\emph{differenzierbar}}. 
+Da man dann in jedem Punkt $x$ des Definitionsbereiches 
+$f'(x)$ bilden kann, kann man $f'$ auch als Funktion auffassen, die einem Punkt $x_0$ die\notion{\emph{Ableitung}} von $f$ in $x_0$ 
+zuordnet.
+}
+\lang{en}{
+If a function $f$ is differentiable at every point of its domain we call $f$ \notion{\emph{differentiable}}. In this case, since the function $f$ has a derivative
+$f'(x)$ at every point in its domain, we can think of $f'$ as a function that gives us the derivative of the function $f$ at any point $x_0$.
+}
+\end{definition}
+
+\begin{remark}
+\begin{enumerate}
+\item \lang{de}{
+      Die Ableitung wird zur Unterscheidung von h\"{o}heren Ableitungen (wie der 
+      sp\"{a}ter eingef\"{u}hrten zweiten Ableitung) auch als \textit{erste 
+      Ableitung} bezeichnet.
+      }
+      \lang{en}{
+      In particular, the derivative we just defined is called the first derivative, in order to 
+      distinguish it from higher derivatives (such as the second derivative, introduced later on).
+      }
+\item \lang{de}{
+      Da $f'(x_0)$ auch als Grenzwert des Differenzenquotienten berechnet werden kann, schreibt man 
+      statt $f'(x_0)$ manchmal auch $\frac{df}{dx}(x_0)$. Statt $f'$ schreibt man auch 
+      $\frac{df}{dx}$, falls $f$ von $x$ abh\"{a}ngig ist.
+      }
+      \lang{en}{
+      Because $f'(x_0)$ is also the limit of a change in the function value divided by a change in 
+      $x$-coordinate, instead of writing $f'(x_0)$ we sometimes write $\frac{df}{dx}(x_0)$. Instead 
+      of $f'$ we can also write $\frac{df}{dx}$ if $f$ is dependent on $x$.
+      }
+\item \lang{de}{
+      Die Ableitung $f'(x_0)$ wird manchmal auch als 
+      $\lim\limits_{\Delta x\rightarrow 0}\frac{\Delta y}{\Delta x}$ geschrieben. 
+      Hier ist dann $\Delta x=h$ und $\Delta y=f(x_0+h)-f(x_0)$. Das $\Delta$ (Delta) steht 
+      allgemein f\"{u}r eine Differenz, $\Delta x$ f\"{u}r die Differenz auf der $x$-Achse, 
+      $\Delta y$ f\"{u}r die Differenz auf der $y$-Achse.
+      %Alternativ schreibt man dann auch $\frac{ dy}{dx}$ f\"{u}r $f'$. <-- This comment was already included in item 2.
+      }
+      \lang{en}{The derivative $f'(x_0)$ is sometimes written 
+      $\lim\limits_{\Delta x\rightarrow 0}\frac{\Delta y}{\Delta x}$. 
+      In this case $\Delta x=h$ and $\Delta y=f(x_0+h)-f(x_0)$. The $\Delta$ (the uppercase greek 
+      letter delta) usually denotes a difference, $\Delta x$ stands for a distance on the 
+      $x$-axis (i.e. a difference in the $x$-coordinate), $\Delta y$ for a distance on the $y$-axis 
+      (i.e. a difference in the $y$-coordinate). 
+      %Alternatively, we can also write $\frac{ dy}{dx}$ for $f'$.
+      }
+\end{enumerate} 
+\end{remark}
+
+
+\lang{de}{
+Die folgenden, in einer Tabelle zusammengefassten Ableitungen sollten Sie kennen.
+}
+\lang{en}{
+The following is a short table summarizing some derivatives of common functions.
+}
+\begin{rule}\label{rule:elementare_abl}
+\begin{align*}
+\underline{\text{\lang{de}{Funktion}\lang{en}{Function}}\; f(x)}&\hspace{20pt}&  
+\underline{\text{\lang{de}{Ableitung}\lang{en}{Derivative}}\; f'(x)}&&
+\underline{\text{\lang{de}{Bedingung an }\lang{en}{Conditions on }}\, x}\\
+c \;(c\in\R) &&0&&\\
+x^n\;( n\in\N)&&nx^{n-1}&&\\
+x^n\;(n\in\Z, n<0)&&nx^{n-1}&& x\neq 0\\
+\sqrt{x}
+&&\frac{1}{2\sqrt{x}}&& x>0\\
+e^x&&e^x&&\\
+\ln(x)&&\frac{1}{x}&&x>0\\
+a^x \;(a>0)&& a^x \cdot ln (a)&&\\
+\sin(x)&&\cos(x)&&\\
+\cos(x)&&-\sin(x)&&\\
+\end{align*}
+\end{rule}
+
+\section{\lang{de}{Ableitungsregeln}\lang{en}{Rules for differentiation}}\label{sec:abl_regeln}
+
+\lang{de}{
+Summen differenzierbarer Funktionen sind differenzierbar. Wie ihre Ableitung berechnet wird, 
+beschreibt die Summenregel.
+}
+\lang{en}{
+The sum of differentiable functions is also differentiable. This is called the 'sum rule'.
+}
+
+
+\begin{rule}[\lang{de}{Summenregel}\lang{en}{Sum rule}]\label{rule:additiv}
+\lang{de}{F\"{u}r differenzierbare Funktionen $f$ und $g$ ist}
+\lang{en}{Given two differentiable functions $f$ and $g$,}
+\[(f+g)'(x)=f'(x)+g'(x).\] 
+\lang{de}{Damit ist auch jede endliche Summe von differenzierbaren Funktionen $f_1, f_2, \ldots , f_n$ wieder differenzierbar:}
+\lang{en}{Hence any finite sum of differentiable functions $f_1, f_2, \ldots ,f_n$ is also 
+differentiable:}
+\[(f_1+f_2+\ldots f_n)'=f_1'+f_2'+\ldots + f_n'.\]
+\end{rule}
+
+
+
+\begin{example}%\textit{Beispiel:}\\
+\lang{de}{
+Wir berechnen die Ableitung der Funktion $f(x)=x^3+x+1$. Diese Funktion ist die Summe der 
+Funktionen $x^3$, $x$ und der konstanten Funktion $1$. Nach der Summenregel ist
+}
+\lang{en}{
+We can calculate the derivative of the function $f(x)=x^3+x+1$. This function is the sum of the 
+functions $x^3$, $x$, and the constant function $1$. According to the sum rule,
+}
+\[f'(x)=3x^2+1.\]
+\end{example}
+
+
+\lang{de}{
+Multipliziert man eine differenzierbare Funktion $f$ mit einer reellen Zahl $c$, so ist die 
+Produktfunktion differenzierbar. Die Ableitung berechnet man zu
+}
+\lang{en}{If we multiply a differentiable function $f$ by a real number $c$, then the product is 
+differentiable. The derivative is then
+}
+\[(c\cdot f)'(x)=\lim_{h\rightarrow 0}\frac{c\cdot f(x+h)-c \cdot f(x)}{h}=c\cdot \lim_{h\rightarrow 0}\frac{f(x+h)-f(x)}{h}=c\cdot f'(x).\]
+\lang{de}{Die Faktorregel fasst diesen Sachverhalt zusammen.}
+\lang{en}{Summarizing you get the so called constant rule.}
+
+
+\begin{rule}[\lang{de}{Faktorregel}\lang{en}{The constant rule}]\label{rule:const_factor}
+\lang{de}{F\"{u}r eine differenzierbare Funktion $f$ und $c\in\R$ ist }
+\lang{en}{For any $c\in\R$ and differentiable $f$, }
+\[(c\cdot f)'(x)=c\cdot f'(x).\] 
+
+\end{rule}
+
+% \lang{de}{Zur Ergänzung ein Rap über die Faktorregel.}
+% \begin{center}
+%   \lang{de}{\iframe[400][225][S]{https://www.stream24.net/vod/getVideo.php?id=10962-1-5528&mode=iframe}}
+% \end{center}
+
+\lang{de}{
+Wie Produkte differenzierbarer Funktionen abgeleitet werden, beschreibt die Produktregel.
+}
+\lang{en}{
+The product rule describes how we take the derivative of the product of differentiable functions.
+}
+
+\begin{rule}[\lang{de}{Produktregel} \lang{en}{The product rule}]\label{rule:produktregel}
+ \lang{de}{Sind $f$ und $g$ differenzierbare Funktionen, so ist \ }
+ \lang{en}{If $f$ and $g$ are two differentiable functions, then  }
+ \[(f\cdot g)'(x)=f'(x)\cdot g(x)+f(x)\cdot g'(x).\]
+
+ \end{rule}
+ 
+\begin{proof*}[\lang{de}{Beweis der Produktregel}\lang{en}{Proof of the product rule}]
+\begin{incremental}[\initialsteps{0}]
+\step
+\begin{eqnarray*}
+(f\cdot g)'(x)&=&\lim_{h\rightarrow 0}\frac{(f\cdot g)(x+h)-(f\cdot g)(x)}{h}\\
+&=&\lim_{h\rightarrow 0}\frac{f(x+h)\cdot g(x+h)-f(x)\cdot g(x)}{h}\\
+&=&\lim_{h\rightarrow 0}\frac{f(x+h)\cdot g(x+h)-f(x)\cdot g(x+h)+f(x)\cdot g(x+h)-f(x)\cdot g(x)}{h}\\
+&=&\lim_{h\rightarrow 0}\frac{(f(x+h)-f(x))\cdot g(x+h)+f(x) \cdot (g(x+h) -g(x))}{h}\\
+&=&\lim_{h\rightarrow 0} \bigg(\frac{f(x+h)- f(x)}{h}\cdot g(x+h)+f(x)\cdot \frac{g(x+h) -g(x)}{h}\bigg)\\
+&=&
+f'(x)\cdot g(x)+f(x)\cdot g'(x).
+\end{eqnarray*}
+\end{incremental}
+\end{proof*}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+%  \lang{de}{Zur Ergänzung ein Rap über die Produktregel.}
+% \begin{center}
+%   \lang{de}{\iframe[400][225][S]{https://www.stream24.net/vod/getVideo.php?id=10962-1-5524&mode=iframe}}
+% \end{center}
+%\lang{de}{Zur Herleitung der Produktregel klicken Sie bitte} 
+% This wasn't consistent with the way this was used in the past.
+
+ \begin{example}%\textit{Beispiel:}\\
+\lang{de}{
+Wir berechnen als Beispiel die Ableitung der Funktion $F(x)=\frac{1}{x^2}\cdot \sin x$. Diese ist 
+das Produkt $F(x)=f(x)\cdot g(x)$ der differenzierbaren Funktionen $f(x)=\frac{1}{x^2}$ und 
+$g(x)=\sin x$. Die Ableitung von $f(x)$ ist $-\frac{2}{x^3}$, die Ableitung von $g(x)$ ist $\cos x$. 
+Dann ist
+}
+\lang{en}{
+As an example we can calculate the derivative of the function $F(x)=\frac{1}{x^2}\cdot \sin x$, which is the product $F(x)=f(x)\cdot g(x)$ 
+of the differentiable functions 
+$f(x)=\frac{1}{x^2}$ and $g(x)=\sin x$. The derivative of $f(x)$ is $-\frac{2}{x^3}$ and the derivative of $g(x)$ is $\cos x$. Hence 
+}
+\[F'(x)=f'(x)\cdot g(x)+f(x)\cdot g'(x)=-\frac{2}{x^3}\cdot\sin x+\frac{1}{x^2}\cdot \cos x.\]
+
+\end{example}
+\begin{remark}%\textit{Bemerkung:}\\
+\lang{de}{Im vorigen Abschnitt ist dargelegt, dass die Ableitung jeder konstanten Funktion $0$ ist. Nach der Produktregel ist also, 
+falls $g(x)=c$ konstant ist:
+\[(c\cdot f)'(x)=(g\cdot f)'(x)=g'(x)\cdot f(x)+g(x)\cdot f'(x)=0 \cdot f(x)+c \cdot f'(x)=c \cdot f'(x).\] Die Faktorregel ist also ein 
+Spezialfall der Produktregel.}
+\lang{en}{In the earlier section we stated that the derivative of every constant function is $0$. According to the product rule, 
+if we treat $g(x)=c$ as a constant function:
+\[(c\cdot f)'(x)=(g\cdot f)'(x)=g'(x)\cdot f(x)+g(x)\cdot f'(x)=0 \cdot f(x)+c \cdot f'(x)=c \cdot f'(x).\] From this example we can
+see that the constant rule is simply a special case of the product rule.}
+\end{remark}
+
+
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{1}
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\randint[Z]{a}{-2}{2}
+			\randint[Z]{b}{1}{4}
+			\randint{l}{1}{4}
+			\function[calculate]{l1}{l-1}
+			
+			\randint{k}{1}{4}	% Zufallsvariable zum Vertauschen:
+			\function[calculate]{d1}{-(k-2)*(k-3)*(k-4)/6}  % "Dirac"-funktionen
+			\function[calculate]{d2}{(k-1)*(k-3)*(k-4)/2}
+			\function[calculate]{d3}{-(k-1)*(k-2)*(k-4)/2}
+			\function[calculate]{d4}{(k-1)*(k-2)*(k-3)/6}
+			
+			\function[normalize]{f1}{sin(x)}
+			\function[normalize]{f2}{cos(x)}
+			\function[normalize]{f3}{exp(x)}
+			\function[normalize]{f4}{ln(x)}
+
+			\function[expand,normalize]{g}{d1*f1+d2*f2+d3*f3+d4*f4}						
+			\function[expand,normalize]{dg}{d1*f2+d2*(-f1)+d3*f3+d4*(1/x)}
+
+			\function[normalize]{p}{a*x^l+b}
+			\function[normalize]{dp}{l*a*x^(l-1)}
+		    \function[normalize]{f}{p*g}
+			\function[normalize]{df}{dp*g+p*dg}
+		\end{variables}
+
+			\text{\lang{de}{
+      Bestimmen Sie mit Hilfe der Formeln und der Ableitungsregeln die Ableitung der
+			Funktion $f(x)=\var{f}$.\\ Die Ableitungsfunktion ist: $f'(x)=$ \ansref.
+      }
+      \lang{en}{
+      Using the table of common derivatives and the rules of differentiation, determine the 
+      derivative of the function $f(x)=\var{f}$.\\ The derivative is: $f'(x)=$ \ansref.
+      }}
+
+		\begin{answer}
+			\solution{df}
+			\checkAsFunction{x}{-2}{2}{20}
+		\end{answer}
+		\explanation{\lang{de}{
+    Mit der Produktregel ist zunächst $f'(x)=(\var{p})'\cdot \var{g}+(\var{p})\cdot (\var{g})'$.\\
+		Für $(\var{p})'$ rechnet man:\\
+		$(\var{p})'=\var{a}\cdot (x^{\var{l}})'+ (\var{b})'=\var{a}\cdot \var{l}\cdot x^{\var{l1}}+0=\var{dp}$\\
+		und $(\var{g})'=\var{dg}$ mit obiger Formel. Also insgesamt:\\
+		$f'(x)=\var{df}$.
+    }
+    \lang{en}{
+    Firstly we apply the product rule, giving us $f'(x)=(\var{p})'\cdot 
+      \var{g}+(\var{p})\cdot (\var{g})'$.\\
+    For $(\var{p})'$ we calculate:\\
+    $(\var{p})'=\var{a}\cdot (x^{\var{l}})'+ (\var{b})'=\var{a}\cdot 
+      \var{l}\cdot x^{\var{l1}}+0=\var{dp}$\\
+    and $(\var{g})'=\var{dg}$ by the table of derivatives. Combining these,\\
+    $f'(x)=\var{df}$.
+    }}
+		
+	\end{quickcheck}
+\end{quickcheckcontainer}
+% 
+% 
+% 	\begin{genericGWTVisualization}[550][1000]{mathlet1}
+% 		\begin{variables}
+% 			\randint{randomA}{1}{2}
+% 
+% 			\point[editable]{P}{rational}{var(randomA),var(randomA)}
+% 		\end{variables}
+% 		\color{P}{BLUE}
+% 		\label{P}{$\textcolor{BLUE}{P}$}
+% 
+% 		\begin{canvas}
+% 			\plotSize{300}
+% 			\plotLeft{-3}
+% 			\plotRight{3}
+% 			\plot[coordinateSystem]{P}
+% 		\end{canvas}
+% 		\text{Der Punkt hat die Koordinaten $(\var{P}[x],\var{P}[y])$.}
+% 	    	\end{genericGWTVisualization}
+
+\end{visualizationwrapper}
+
+\begin{rule}[\lang{de}{Quotientenregel} \lang{en}{The Quotient Rule}]\label{rule:quotient_regel}
+ \lang{de}{
+ Sind $f : I \to \R$ und $g : I \to \R$ differenzierbare Funktionen mit $g(x) \neq 0$ für alle 
+ $x \in I$. Dann ist $\frac{f}{g}$ differenzierbar und 
+ }
+ \lang{en}{
+ If $f : I \to \R$ and $g : I \to \R$ are two differentiable functions and $g(x) \neq 0$ for all 
+ $x \in I$, then
+ }
+ \[\left( \frac{f}{g} \right)^'(x)= \frac{f'(x) \cdot g(x) - f(x) \cdot g'(x)}{(g(x))^2}. \]
+ \end{rule}
+ 
+ 
+ \begin{example}
+ \begin{enumerate}
+\item \lang{de}{
+Wir berechnen die Ableitung der Funktion $f(x) = e^{-x} = \frac{1}{e^x}$. Mit der Quotientenregel 
+erhalten wir
+}
+\lang{en}{
+We calculate the derivative of the function $f(x) = e^{-x} = \frac{1}{e^x}$. By the quotient rule,
+}
+\[\left(\frac{1}{e^x}\right)^' = \frac{0 \cdot e^x - 1 \cdot e^x}{(e^x)^2} = \frac{-e^x}{(e^x)^2} = \frac{-1}{e^x} = -e^{-x}.\]
+
+\item \lang{de}{
+Es soll die Ableitung von $f(x) = \frac{2x^2 + 3}{2x +1}$ für $x > 0$ berechnet werden. Mit der Quotientenregel erhalten wir
+}
+\lang{en}{
+We calculate the derivative of the function $f(x) = \frac{2x^2 + 3}{2x +1}$ for $x > 0$. By the 
+quotient rule,
+}
+\[ f'(x) = \frac{(4x) \cdot (2x +1) - (2) \cdot (2x^2 +3)}{(2x +1)^2} = \frac{8x^2 + 4x - 4x^2 -6}{(2x+1)^2} = \frac{4x^2 + 4x -6}{(2x+1)^2}. \]
+\end{enumerate}
+\end{example}
+
+\end{content}

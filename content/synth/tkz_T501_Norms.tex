@@ -1,0 +1,29 @@
+%This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)
+%https://creativecommons.org/licenses/by/4.0/legalcode
+\documentclass[rgb]{standalone}
+\usepackage{tkz-euclide}
+\definecolor{myorange}{hsb}{0.0833, 1, 0.8}
+\definecolor{mygreen}{hsb}{0.3333, 1, 0.8}
+\definecolor{myblue}{hsb}{0.5833, 1, 0.8}
+\definecolor{mymagenta}{hsb}{0.8333, 1, 0.8}
+\begin{document}
+	\begin{tikzpicture}[scale=1.5, font=\Large]
+		% Coordinate system
+		\tkzInit[xmin=-3,xmax=3,ymin=-3,ymax=3]
+		\tkzGrid[color=lightgray]
+		\tkzDrawX[thick,label=$x_1$]
+		\tkzDrawY[thick,label=$x_2$]
+		% Unit circles
+		\draw[very thick, myorange, fill opacity=0.4, fill=myorange, dashed] (-2,2) -- (2,2) -- (2,-2) -- (-2,-2) -- cycle;
+		\draw[very thick,myblue,dashed, fill=myblue, fill opacity=0.4, domain=0:360, smooth, variable=\x, myblue] plot ({2*cos(\x)}, {2*sin(\x)});
+		\draw[very thick, mygreen, fill opacity=0.4, fill=mygreen, dashed] (-2,0) -- (0,2) -- (2,0) -- (0,-2) -- cycle;
+		% Labels
+		\node[below=0.5mm] at (2,0){$r$};
+		\node[below=0.5mm] at (-2,0){$-r$};
+		\node[left=0.5mm] at (0,2){$r$};
+		\node[left=0.5mm] at (0,-2){$-r$};
+		\node[myblue] at (2.65,1.2){$U^{(2)}_r(0)$};
+		\node[myorange] at (2.65,1.8){$U^{(\infty)}_r(0)$};
+		\node[mygreen] at (2.65,0.6){$U^{(1)}_r(0)$};
+	\end{tikzpicture}	
+\end{document}

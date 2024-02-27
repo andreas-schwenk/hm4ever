@@ -1,0 +1,150 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A07: Rechnen mit Potenzen}
+    \lang{en}{Problem 7}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Rechnen mit Potenzen}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+\usepackage{mumie.ombplus}
+
+\lang{de}{
+	\title{A07: Rechnen mit Potenzen}
+}
+
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9289}{Ticket 9289}
+\end{block}
+
+
+
+\begin{problem}
+	\begin{question}
+      \lang{de}{\text{Bestimmen Sie $m$ und $n$ so, dass gilt: $\var{ee}x^{\var{b}}:\var{c}x^{\var{d}}=m{x}^{n}$. }}
+      \lang{en}{\text{Find $m$ and $n$ so that: $\var{ee}x^{\var{b}}/\var{c}x^{\var{d}}=m{x}^{n}$. }}
+      \explanation{}
+
+      \type{input.number}
+      \precision{3}
+      \field{real}
+
+      \begin{variables}
+                   \randint[Z]{a}{2}{20}
+                   \randint[Z]{b}{2}{20}
+                   \randint[Z]{c}{2}{20}
+                   \randint[Z]{d}{2}{20}
+                   \function[calculate]{ee}{a*c}
+                   \function[calculate]{f}{b-d}
+       \end{variables}
+
+      \begin{answer}
+            \text{$m=$ }
+            \solution{a}
+      \end{answer}
+      
+      \begin{answer}
+            \text{$n=$ }
+            \solution{f}
+      \end{answer}
+	\end{question}
+	
+	\begin{question}
+      \lang{de}{\text{W\"{a}hlen Sie alle richtigen Antworten aus.}}
+      \lang{en}{\text{Select all of the correct answers.}}
+      \explanation{}
+
+      \permutechoices{1}{4}
+      \type{mc.multiple}
+      \field{real}
+
+      \begin{variables}
+            \randint{a}{1}{11}
+            \randint{b}{2}{12}
+             \randint{m}{2}{35}
+            \randint{c}{2}{4}
+             \function[calculate]{d}{-c}
+              \function[calculate]{ee}{b^c}
+                \randadjustIf{a,b}{a=b} % see Part 9 http://team.mumie.net/projects/support/wiki/GenericTexProblems 
+      \end{variables}
+      \begin{choice}
+            \text{$(\var{a} \cdot \var{b})^{\var{c}}=\var{a}^{\var{c}}\cdot \var{b}^{\var{c}}$}
+            \solution{true}
+      \end{choice}
+
+      \begin{choice}
+            \text{$\var{b}^{-\var{c}} =\frac{1}{\var{ee}}$}
+            \solution{true}
+      \end{choice}
+            \begin{choice}
+            \text{$\var{b}^{\var{c}}=\var{ee}$}
+            \solution{true}
+      \end{choice}
+      \begin{choice}
+            \text{$\var{m}^1=\var{m}$}
+            \solution{true}
+      \end{choice}
+      \begin{choice}
+            \text{$\var{m}^0=0$}
+            \solution{false}
+      \end{choice}
+\end{question}
+
+\begin{question}
+      \lang{de}{\text{W\"{a}hlen Sie alle richtigen Antworten aus.}}
+      \lang{en}{\text{Select all of the correct answers.}}
+      \explanation{}
+
+      \permutechoices{1}{4}
+      \type{mc.multiple}
+      \field{real}
+
+      \begin{variables}
+            \randint{a}{1}{11}
+            \randint{b}{2}{12}
+             \randint{m}{2}{35}
+            \randint{c}{2}{4}
+             \function[calculate]{d}{-c}
+                \randadjustIf{a,b}{a=b} % see Part 9 http://team.mumie.net/projects/support/wiki/GenericTexProblems 
+      \end{variables}
+      \begin{choice}
+            \text{$(1 \cdot \var{b})^{\var{c}}=1\cdot \var{b}^{\var{c}}$}
+            \solution{true}
+      \end{choice}
+
+     \begin{choice}
+            \text{$(0 \cdot \var{b})^{\var{c}}=0^{\var{c}}\cdot \var{b}$}
+            \solution{true}
+      \end{choice}
+           
+      \begin{choice}
+            \text{$\var{m}^0=\var{m}$}
+            \solution{false}
+      \end{choice}
+      \begin{choice}
+            \text{$\var{m}^1=1$}
+            \solution{false}
+      \end{choice}
+\end{question}
+\end{problem}
+\embedmathlet{gwtmathlet}
+
+
+
+\end{content}

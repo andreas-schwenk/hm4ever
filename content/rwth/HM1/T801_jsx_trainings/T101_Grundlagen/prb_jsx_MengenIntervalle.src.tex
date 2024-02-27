@@ -1,0 +1,289 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{MengenIntervalle}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}    
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+%  
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/32293}{Ticket 32293}
+\end{block}
+\begin{block}[annotation]
+Copy of : /home/mumie/checkin/content/playground/HM4mint-Testaufgaben/T101neu_Elementare_Rechengrundlagen/prb_jsx_MengenIntervalle.src.tex
+\end{block}
+
+\begin{block}[annotation]
+(B. Guyet)\\
+Copy of : /home/mumie/checkin/content/playground/BarbaraGuyet/JSX-Aufgaben/prb_jsx_MengenIntervalle.src.tex
+\end{block}
+
+
+\begin{block}[annotation]
+Intervalle: Lösung grafisch ableiten, Menge umschreiben als Intervall
+\end{block}
+
+\usepackage{mumie.genericproblem}
+\lang{de}{
+\title{Intervallschreibweise von Mengen}
+}
+\begin{visualizationwrapper}
+
+
+\begin{genericJSXVisualization}
+	\begin{variables}
+ 
+        \point[editable]{G1}{real}{0,8}   % blauer Punkt obere Grenze
+        \point[editable]{G2}{real}{0,-8}  % blauer Punkt untere Grenze
+
+        \function{g1}{real}{G1[y]}
+        \function{g2}{real}{G2[y]}
+        \function{h}{real}{0}             % x-Achse
+
+        \pointOnCurve[editable]{P}{real}{var(h)}{-1} % roter Punkt für linke Grenze (bewegt sich auf x-Achse)
+    		\pointOnCurve[editable]{Q}{real}{var(h)}{2}  % roter Punkt für rechte Grenze (bewegt sich auf x-Achse)
+      
+        \point{A}{real}{P[x],1}
+        \point{B}{real}{Q[x],1}
+        \line{l1}{real}{var(A), var(P)}
+        \line{l2}{real}{var(B), var(Q)}
+
+        \number{l}{real}{G2[y]}  % untere Grenze (blau)
+        \number{r}{real}{G1[y]}  % obere Grenze(blau)
+        \number{lx}{real}{P[x]}  % linke Grenze (rot)
+        \number{rx}{real}{Q[x]}  % rechte Grenze(rot)
+        \segment{s}{real}{P,Q}
+        \problem{f}{real}   % Funktion f ist global auf problem-Ebene definiert, 
+                            % nicht auf question-Ebene      
+	\end{variables}
+
+\label{P}{lGr}
+\label{Q}{rGr}
+\label{f}{f}
+\color{f}{green}
+
+\color{g1}{BLUE}
+\color{G1}{BLUE}
+\color{g2}{BLUE}
+\color{G2}{BLUE}
+\label{g1}{oGr}
+\label{g2}{uGr}
+
+\color[0.7]{l1}{blue}
+\color[0.7]{l2}{blue}
+\color[0.7]{g1}{blue}
+\color[0.7]{g2}{blue}
+\color{P}{red}
+\color{Q}{red}
+\color{s}{red}
+\answer{g2}{1,1}  % wird in Q1, Antwort 1 geprüft
+\answer{g1}{1,2}  % wird in Q1, Antwort 2 geprüft
+\answer{lx}{1,3}  % wird in Q1, Antwort 3 geprüft
+\answer{rx}{1,4}  % wird in Q1, Antwort 4 geprüft
+
+
+
+	\begin{canvas}
+        \snapToGrid{0.05,0.1}
+        \plotSize{500,500}
+        \plotLeft{-10}
+        \plotRight{10}
+        \plot[coordinateSystem,showPointCoords]{G1,G2,P,Q,f,g1,g2,l1,l2,s}
+	\end{canvas}
+
+\end{genericJSXVisualization}
+
+\end{visualizationwrapper}
+
+
+\begin{problem}
+
+    \begin{variables}
+          \randint{c}{1}{3}
+          % Definition aller Variablen außerhalb der Switch-Umgebung !
+          % (wiki: "Every variable in a switch environment must have a default definition")
+          % c=1
+            \randint{r1}{1}{10}
+            \randint{l1}{-10}{-1}
+            \randint[Z]{d1}{-2}{2}
+            \randint[Z]{m}{2}{5}
+          % c=2
+            \randint{zr}{4}{12}
+            \randint{nr}{1}{4}
+            \randint{l2}{-7}{0}
+            \randint[Z]{d2}{-2}{2}
+          % c=3
+            \randint[Z]{q}{0}{3}
+            \randint[Z]{p}{-3}{0}
+            \randint[Z]{d3}{-5}{5}
+          %  
+           \begin{switch}
+             \begin{case}{c=1}      %f=m*x
+                  \function[calculate]{r}{r1}
+                  \function[calculate]{l}{l1}
+                  \function[calculate]{lx}{l/m+d1}
+                  \function[calculate]{rx}{r/m+d1}                  
+                  \function{f}{m(x-d1)} 
+              \end{case}
+              \begin{case}{c=2}    %f=|x|
+%                  \function[calculate]{r}{(zr/nr)^2}
+                  \function[calculate]{r}{zr/nr}
+                  \function[calculate]{l}{l2}
+                  \function[calculate]{rx}{r+d2}
+                  \function[calculate]{lx}{-r+d2}                  
+                  \function{f}{|x-d2|}
+              \end{case}
+              \begin{default}    %f=x^3
+                  \function[normalize]{r}{q*q*q}
+                  \function[normalize]{l}{p*p*p} 
+                  \function[calculate]{rx}{q+d3}
+                  \function[calculate]{lx}{p+d3}
+                  \function{f}{(x-d3)^3}
+              \end{default}
+            \end{switch}
+     \end{variables}
+%
+ \randomquestionpool{1}{1}
+ \randomquestionpool{2}{3}
+ \showQuestionLabels{no}
+%
+% Q1 grafische Bestimmung der Intervallgrenzen 
+%
+  \begin{question}
+
+    \field{rational}
+    \correctorprecision{1}
+
+     \text{Beschreiben Sie grafisch den Bereich aller Werte $x\in \R$, für
+           die $f(x)=\var{f}$ zwischen $\var{l}$ und $\var{r}$ liegt.\\
+           Verschieben Sie hierzu die blauen Begrenzungslinien mithilfe der 
+           Punkte auf den Koordinatenachsen so, dass der gesuchte Bereich in
+           rot dargestellt ist.
+          } 
+      \explanation[NOT[correct(ans_1)] OR NOT[correct(ans_2)]]{Der vorgegebene Bereich für $f(x)$
+                                 wird durch die blauen Begrenzungslinien noch nicht korrekt eingegrenzt.}
+      \explanation[correct(ans_1) AND correct(ans_2) AND NOT[correct(ans_3)] AND correct(ans_4)]{Die untere (bzw. linke) Grenze für $x$ ist in der Grafik nicht korrekt dargestellt.}
+      \explanation[correct(ans_1) AND correct(ans_2) AND NOT[correct(ans_4)] AND correct(ans_3)]{Die obere (bzw. rechte) Grenze für $x$ ist in der Grafik nicht korrekt gesetzt.}
+      \explanation[correct(ans_1) AND correct(ans_2) AND NOT[correct(ans_4)] AND NOT[correct(ans_3)]]{Die Grenzen für $x$ (rote Punkte) sind in der Grafik nicht korrekt gesetzt.}
+%          
+%\debug[c,lx,rx,l,r] 
+%
+          \begin{answer}
+            \type{graphics.function}
+            \solution{l}
+            \checkAsFunction[1E-1]{}{-1}{1}{10}
+          \end{answer}
+          %
+          \begin{answer}
+            \type{graphics.function}
+            \solution{r}
+            \checkAsFunction[1E-1]{}{-1}{1}{10}
+          \end{answer}
+%
+          \begin{answer}
+            \type{graphics.function}
+            \solution{lx}
+            \checkAsFunction[1E-1]{}{-1}{1}{10}
+          \end{answer}
+          %
+          \begin{answer}
+            \type{graphics.function}
+            \solution{rx}
+            \checkAsFunction[1E-1]{}{-1}{1}{10}
+          \end{answer}
+%
+  \end{question}
+%
+% Q2 Umschreibung der Lösungsmenge in Intervallform (geschlossenes Intervall)
+%
+  \begin{question}
+
+    \field{rational}
+    \correctorprecision{1}
+    \begin{variables}
+           \begin{switch}
+             \begin{case}{c=2}      %f=|x|
+                  \string{cond}{$\var{f} \le \var{r}$}
+              \end{case}
+              \begin{default}    %f=mx+b oder f=x^3
+                  \string{cond}{$\var{l} \le \var{f} \le \var{r}$}
+              \end{default}
+            \end{switch}
+     \end{variables}
+%
+
+     \text{Leiten Sie nun aus der Grafik die Intervalldarstellung für die Lösungsmenge ab 
+           und beachten Sie dabei die Vorgaben für die Randwerte.
+          }      
+%          
+%\debug[c,cond,lx,rx]   
+% 
+          \begin{answer}
+          \type{input.interval}
+              \text{$\mathbb{L}=\{x \in \R \vert$ \var{cond} $\}=$}          
+              %\allowIntervalUnionsForInput
+              \checkAsFunction[1E-1]{}{-1}{1}{10}
+              \solution{[lx;rx]}
+              \explanation{Die Intervallgrenzen sind nicht korrekt. Haben Sie die Randwerte mit berücksichtigt?}
+          \end{answer}
+%
+  \end{question}
+
+%
+% Q3 Umschreibung der Lösungsmenge in Intervallform (offenes Intervall)
+%
+  \begin{question}
+
+    \field{rational}
+    \correctorprecision{1}
+    \begin{variables}
+           \begin{switch}
+             \begin{case}{c=2}      %f=|x|
+                  \string{cond}{$\var{f} < \var{r}$}
+              \end{case}
+              \begin{default}    %f=mx+b oder f=x^3
+                  \string{cond}{$\var{l} < \var{f} < \var{r}$}
+              \end{default}
+            \end{switch}
+     \end{variables}
+%
+
+     \text{Leiten Sie nun aus der Grafik die Intervalldarstellung für die Lösungsmenge unter
+           Berücksichtigung der Vorgaben für die Randwerte ab:
+          }      
+%          
+%\debug[c,cond,lx,rx]   
+% 
+          \begin{answer}
+          \type{input.interval}
+              \text{$\mathbb{L}=\{x \in \R \vert$ \var{cond} $\}=$}          
+              %\allowIntervalUnionsForInput
+              checkAsFunction[1E-1]{}{-1}{1}{10}
+              \solution{(lx;rx)}
+              \explanation{Die Intervallgrenzen sind nicht korrekt. Sollten die Randwerte enthalten Sein?}
+          \end{answer}
+%
+  \end{question}
+
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

@@ -1,0 +1,154 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A01: Produktionsfunktion}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A01: Produktionsfunktion}}
+\lang{en}{\title{A01: Production function}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24034}{Ticket 24034}
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+  \begin{problem}
+     \begin{variables}
+        \drawFromSet{a}{1,2,3,4,5} 
+        \function[expand, normalize]{f}{a*(-0,1*x^3+6*x^2+12,3*x)}
+        \derivative{f_1}{f}{x}
+        \derivative{f_2}{f_1}{x}
+        \number{m}{41}
+        \number{w}{20}
+        \function[calculate,2]{a2}{-a*0,3}
+        \function[calculate]{M}{a*(-0,1*36^3+6*36^2+12,3*36)}
+        
+     \end{variables}
+          \begin{question}
+          \lang{de}{\text{Gegeben sei die Produktionsfunktion $y=f(x)=\var{f}$ 
+          \\($x>0$, $x$=INPUT
+          in Mengeneinheiten, $y$=OUTPUT in Mengeneinheiten) mit maximal möglichem INPUT 
+          von 36 Mengeneinheiten.
+          
+          Bestimmen Sie den maximalen Output, die Grenzproduktivität und das Wachstumsverhalten.}}
+             \lang{en}{\text{Given the production function $y=f(x)=\var{f}$ 
+          \\($x>0$, $x$=INPUT
+          in units of quantity, $y$=OUTPUT in units of quantity) with maximum possible INPUT 
+          of 36 units.
+          
+          Determine the maximum output, marginal productivity and growth behaviour.}}
+          
+          \type{input.generic}
+          
+               \begin{answer}
+                 \type{input.function}
+                 \text{$f'(x)=$}
+                 \solution{f_1}
+                 \checkAsFunction{x}{-10}{10}{10}
+                 \explanation[edited]{
+                 \lang{de}{\text{Die Ableitung ist:}}
+                 \lang{en}{\text{The derivative is :}}
+                 $f'(x)=\var{f_1}$.}
+               \end{answer}
+               
+               \begin{answer}
+                    \type{input.function}
+                    \text{$f''(x)=$}
+                    \solution{f_2}
+                    \checkAsFunction{x}{-10}{10}{10}
+               \end{answer}       
+               
+               \begin{answer}
+                 \type{input.number}
+                 \lang{de}{\text{lokales Maximum von $f$ liegt bei $x_e=$}}
+                 \lang{en}{\text{local maximum of $f$ at $x_e=$}}
+                 \solution{m}
+                 \lang{de}{\explanation[edited]{Bei der pq-Formel muss man daran denken durch $\var{a2}$ zu teilen.}}
+                 \lang{en}{\explanation[edited]{Remember to divide by $\var{a2}$ in the quadratic formula.}}
+               \end{answer} 
+               
+               \begin{answer}
+                    \type{input.number}
+                    \lang{de}{\text{maximaler Output beträgt $y_{max}=$}}
+                    \lang{en}{\text{maximum output is $y_{max}=$}}
+                    \solution{M}
+                    \lang{de}{\explanation[edited]{x ist höchstens 36.}}
+                    \lang{en}{\explanation[edited]{x is at most 36.}}
+               \end{answer}              
+               
+               \begin{answer}
+                    \type{mc.yesno}
+                    \begin{choice}
+                        \lang{de}{\text{Die Grenzproduktivität ist für $x<36$ positiv.}}
+                        \lang{en}{\text{Marginal productivity is positive for $x<36$.}}
+                        \solution{true}
+                    \end{choice}
+                    \begin{choice}
+                        \lang{de}{\text{Die Grenzproduktivität ist für $x>36$ positiv.}}
+                        \lang{en}{\text{Marginal productivity is positive for $x>36$.}}
+                        \solution{false}
+                    \end{choice}
+                    \lang{de}{\explanation{Die Grenzproduktivität als Zuwachs des Ertrages, der durch den Einsatz einer weiteren
+                    Einheit eines Produktionsfaktors erzielt wird, ist dort positiv, wo die Funktion streng monoton steigend ist.
+                    Wir müssen hier noch beachten, dass die Menge durch 36 nach oben beschränkt ist.}}
+                    \lang{en}{\explanation{Marginal productivity, being the increase in output that is achieved through the use of a further unit of a production factor,
+                    is positive where the function is strictly monotonically increasing.
+                    We still have to note here that the quantity is bounded from above by 36.}}
+               \end{answer}
+               
+               \begin{answer}
+                    \type{input.number}
+                    \lang{de}{\text{Wendestelle bei $x_w=$}}
+                    \lang{en}{\text{Inflection point at $x_w=$}}
+                    \solution{w}
+                    %\explanation[edited]{...}
+               \end{answer}
+               
+               \begin{answer}
+                    \type{mc.yesno}
+                    \begin{choice}
+                        \lang{de}{\text{Das Wachstum ist für $x<20$ progressiv.}}
+                        \lang{en}{\text{Growth increases in rate for $x<20$.}}
+                        \solution{true}
+                    \end{choice}
+                    \begin{choice}
+                        \lang{de}{\text{Das Wachstum ist für $x>20$ progressiv.}}
+                        \lang{en}{\text{Growth increases in rate for $x>20$.}}
+                        \solution{false}
+                    \end{choice}
+                    \lang{de}{\explanation{In diesem Fall wird die Steigung bis zur Wendestelle immer größer, 
+                    d.\,h. $f''>0$.}}
+                    \lang{en}{\explanation{In this case, the slope increases up to the inflection point, 
+                    i.e. $f''>0$.}}
+               \end{answer}
+               
+               
+          \end{question}     
+     \end{problem}
+
+
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

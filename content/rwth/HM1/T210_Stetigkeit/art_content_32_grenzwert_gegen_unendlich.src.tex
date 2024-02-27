@@ -1,0 +1,1075 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Asymptoten}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+    \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T210_Sine1x.meta.xml}{T210_Sine1x1}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T210_xSine1x.meta.xml}{T210_xSine1x1}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T103_Polynomfunktionen/g_art_content_10_polynomdivision.meta.xml}{content_10_polynomdivision}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_16_konvergenzkriterien.meta.xml}{content_16_konvergenzkriterien}
+    \link{generic_article}{content/rwth/HM1/T210_Stetigkeit/g_art_content_31_grenzwerte_von_funktionen.meta.xml}{content_31_grenzwerte_von_funktionen}
+    \link{generic_article}{content/rwth/HM1/T206_Folgen_II/g_art_content_19_bestimmte_divergenz.meta.xml}{bestimmte-divergenz}
+  \end{links}
+  \creategeneric
+
+  % Alte Links/Components  
+  %\begin{components}
+    %   \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  % \end{components}
+  % \begin{links}
+  %   \link{generic_article}{content/rwth/HM1/T206_Folgen_II/g_art_content_19_bestimmte_divergenz.meta.xml}{bestimmte-divergenz}
+  % \end{links}
+  % \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{10}
+\ombarticle{4}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\lang{de}{\title{Asymptoten}}
+
+\begin{block}[annotation]
+  Kapitel wurde um geschrieben, viele JSX-Graphs ergänzt
+  und dem Speziallfall der gebrochen rationalen Funktionen ein eigener Abschnitt gewidmet.
+Weiter wurden die Farben für die Visualisierungen bewusst gewählt: 
+Weil die recht verbreitete Rot-Grün-Schwäche die Unterscheidung von grün-orange-magenta
+unmöglich macht, wurden die Graphen meist schwarz gesetzt, die Asymptoten grün bzw. blau.
+ \end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9792}{Ticket 9792}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+Hier wenden wir das Wissen über  Funktionsgrenzwerte an, um das 
+Verhalten von Funktionen am Rand ihrer Definitionsbereiche zu untersuchen.\\
+Sei $f:D\to\R$ eine reelle Funktion. Wir interessieren uns für das Verhalten von $f$ in  einem Randpunkt
+$x^\ast$ von $D$, der nicht zu $D$ gehört, zum Beispiel dem Endpunkt eines offenen Intervalls.
+Randpunkte sind grundsätzlich endlich, also $x^\ast\in\R$, aber für Funktionen mit unbeschränktem Definitionsbereich
+ist auch (oder gerade) das Verhalten für $x$ gegen $\pm\infty$ interessant. Deshalb lassen wir im letzten Abschnitt wiederum die Schreibweise $x^\ast=\pm \infty$ zu.
+\\
+Oftmals kann das Verhalten der Funktion gegen einen solchen Randpunkt oder $\pm\infty$ durch eine Asymptote beschrieben werden: 
+Der Funktionsgraph schmiegt sich dann an eine Gerade oder den Graphen einer einfacheren Funktion an, wenn $x$ gegen  $x^\ast$ läuft.
+% Im letzten Abschnitt hatten wir Grenzwerte gegen Definitionslücken betrachtet. In diesem Abschnitt geht es um die Grenzwerte für $x$ gegen $\infty$ oder gegen $-\infty$, wenn man also Folgen $(x_n)$ betrachtet, die \link{bestimmte-divergenz}{bestimmt divergent} gegen  $\infty$ oder gegen $-\infty$ sind.
+
+% Des weiteren geht es um den Fall, dass für links- bzw. rechtsseitige Folgen an Definitionslücken die Folgen der Funktionswerte bestimmt divergieren.
+
+% In beiden Fällen erhält man grafisch sogenannte \emph{Asymptoten}.
+
+
+% Die Ergebnisse sind ganz ähnlich wie im vorigen Abschnitt, wenn man bestimmt divergent gegen $\infty$ bzw. gegen $-\infty$ als Konvergenz ansieht.
+
+
+\section{Verhalten an endlichen Randpunkten}
+In diesem Abschnitt sei stets $x^\ast\in\overline{D}\setminus D\subset\R$ ein 
+endlicher Randpunkt des Definitionsbereichs $D$ einer Funktion $f$.
+\begin{definition}[Stetige Fortsetzbarkeit]
+Es sei $f:D\to\R$ eine reelle Funktion und $x^\ast\in\overline{D}\setminus D\subset\R$.
+Die Funktion $f$ heißt \notion{stetig fortsetzbar in} $x^\ast$, wenn der Funktionsgrenzwert $\lim_{x\to x^\ast}f(x)\in\R$ existiert.
+\\
+In diesem Fall heißt die Funktion 
+\[\tilde{f}:D\cup{\{x^\ast\}}\to\R, x\mapsto\begin{cases}f(x)& \text{ falls } x\in D,\\ \lim_{x\to x^\ast}f(x)& \text{ falls } x=x^\ast,\end{cases}\]
+die stetige Fortsetzung der Funktion $f$ auf $D\cup\{x^\ast\}$.
+\end{definition}
+\begin{example}
+Im \ref[content_31_grenzwerte_von_funktionen][allerersten Beispiel (b)]{ex:erstes_bsp_Grenzwert_von_Funktionswerten}
+hatten wir gesehen,
+dass der Grenzwert der Funktion $g:\R\setminus\{1\}\to\R$, $x\mapsto \frac{x^2-1}{x-1}$, in $x^\ast=1$ existiert,
+\[\lim_{x\to 1}g(x)=\lim_{x\to 1}(x+1)=2.\]
+Die Funktion $g$ ist also auf ganz $\R$ stetig fortsetzbar durch die Funktionsvorschrift $x\mapsto x+1$.
+\end{example}
+
+\begin{definition}\label{def:best_div_fkt}
+Es sei $f:D\to \R$ eine reelle Funktion und es sei $x^\ast\in\overline{D}\setminus D\subset\R$ ein Randpunkt.
+\begin{enumerate}
+\item[(i)]
+  Die Funktion $f$ heißt \notion{bestimmt divergent gegen $\infty$ für $x \to x^*$}, wenn
+  \[ \lim_{n\to \infty} f(x_n)= \infty \]
+  für jede Folge $(x_n)_{n\geq 1}$ mit $x_n\in D\setminus \{x^*\}$ und $\lim_{n\to \infty} x_n=x^*$.
+\\
+Wir schreiben dann kurz
+\[ \lim_{x\to x^*} f(x)= \infty. \]
+\item[(ii)]
+  Die Funktion $f$ heißt \notion{bestimmt divergent gegen $-\infty$ für $x \to x^*$}, wenn
+  \[ \lim_{n\to \infty} f(x_n)= -\infty \]
+  für jede Folge $(x_n)_{n\geq 1}$ mit $x_n\in D\setminus \{x^*\}$ und $\lim_{n\to \infty} x_n=x^*$.
+\\
+Wir schreiben dann kurz
+\[ \lim_{x\to x^*} f(x)= -\infty. \]
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+Man definiert ebenso \notion{linksseitig bestimmte Divergenz} von $f$ über Folgen
+ $(x_n)_{n\geq 1}$ mit $x_n<x^*$ und schreibt dann
+ \[ \lim_{x\nearrow x^*} f(x)= \infty\quad \text{bzw.} \quad \lim_{x\nearrow x^*} f(x)=-\infty, \]
+ und auch \notion{rechtsseitig bestimmte Divergenz} von $f$ über Folgen
+ $(x_n)_{n\geq 1}$ mit $x_n>x^*$ und schreibt dann
+ \[ \lim_{x\searrow x^*} f(x)= \infty\quad \text{bzw.} \quad \lim_{x\searrow x^*} f(x)=-\infty. \]
+\end{remark}
+
+
+\begin{remark}\label{rem:senkrechte-asymptote}
+Anschaulich bedeutet die Eigenschaft $\lim_{x\nearrow x^*} f(x)= \infty$, dass der Graph von $f$
+immer steiler wird, wenn man sich der Stelle $x^*$ von links nähert, und sich der Graph an die senkrechte Gerade $x=x^*$ "`anschmiegt"'.
+Diese senkrechte Gerade $x=x^*$ nennt man daher \notion{(senkrechte) Asymptote} an den Graphen von $f$.
+
+Entsprechend fällt der Graph von $f$ bei Annäherung an $x^*$ von links immer stärker, wenn 
+$\lim_{x\nearrow x^*} f(x)= -\infty$. Auch in diesem Fall "`schmiegt"' sich der Graph an die senkrechte Gerade $x=x^*$ an.
+
+Für die rechtsseitige bestimmte Divergenz gilt entsprechendes.
+\end{remark}
+
+
+\begin{example}
+\begin{tabs*}
+\tab{$f(x)=\frac{x+1}{x-1}$ für $x\to 1$}
+Wir betrachten die Funktion $f:\R\setminus {\{1\}}\to \R, x\mapsto \frac{x+1}{x-1}$ und untersuchen
+ das Verhalten bei $x^*=1$.\\
+Für jede Folge $(x_n)_{n\geq 1}$ mit $\lim_{n\to \infty} x_n=1$ ist
+\[ \lim_{n\to \infty} \frac{1}{f(x_n)}=\lim_{n\to \infty} \frac{x_n-1}{x_n+1}
+= \frac{\lim_{n\to \infty} x_n-1}{\lim_{n\to \infty} x_n+1}=\frac{1-1}{1+1}=0.\]
+Sind nun alle $x_n<1$, dann sind sie auch alle ab einem bestimmten $N$ zwischen $-1$ und $1$ und daher $f(x_n)<0$ für alle $n\geq N$. 
+Nach den \ref[bestimmte-divergenz][Rechenregeln mit bestimmter Divergenz]{sec:rechenregeln} gilt
+daher für gegen $1$ konvergente Folgen $(x_n)_{n\geq 1}$ mit $x_n<1$:
+\[ \lim_{n\to \infty} f(x_n)=-\infty. \]
+Also ist $ \lim_{x\nearrow 1} f(x)=-\infty.$
+
+Entsprechend ist $f(x)>0$ für alle $x>1$ und man erhält entsprechend
+\[ \lim_{x\searrow 1} f(x)= \infty. \]
+
+Der Graph (schwarz) hat also bei $x=1$ eine senkrechte Asymptote (grün).
+
+\begin{genericJSXVisualization}[550][800]{example_a}
+ 		\begin{variables}
+ 			\function{f}{real}{(x+1)/(x-1)}  
+			\point{O}{real}{1,0} 			
+			\point{P}{real}{1,1} 			
+ 			\line{l}{real}{var(O),var(P)}
+ 			
+ 		\end{variables}
+ 		\color{l}{#00CC00}
+   \color{f}{black}
+ 
+ 		\begin{canvas}
+ 			\plotSize{400,300}
+ 			\plotLeft{-4}
+ 			\plotRight{4}
+ 			\plot[coordinateSystem]{f,l }
+ 		\end{canvas}
+ 		% \text{Die schwarze Kurve ist der Graph der Funktion $f:\R\setminus \{1\}\to \R$ mit 
+ 		% $f(x)=\frac{x+1}{x-1}$. Die grüne Gerade ist die senkrechte Asymptote $x=1$.
+ 		%}
+\end{genericJSXVisualization}
+\tab{$f(x)=\frac{x+1}{(x-1)^2}$ für $x\to 1$} Wir betrachten die Funktion $f:\R\setminus {\{1\} }\to \R, x\mapsto \frac{x+1}{(x-1)^2}$ und untersuchen
+ das Verhalten bei $x^*=1$.\\
+Für jede Folge $(x_n)_{n\geq 1}$ mit $\lim_{n\to \infty} x_n=1$ ist
+\[ \lim_{n\to \infty} \frac{1}{f(x_n)}=\lim_{n\to \infty} \frac{(x_n-1)^2}{x_n+1}
+= \frac{(\lim_{n\to \infty} x_n-1)^2}{\lim_{n\to \infty} x_n+1}=\frac{(1-1)^2}{1+1}=0.\]
+Für $x>-1$ (und $x\neq 1$) ist auch $f(x)>0$. Da ab einem bestimmten $N$ alle $x_n$ größer als $-1$ sind (da die Folge gegen $1$ konvergiert),
+gilt nach den \ref[bestimmte-divergenz][Rechenregeln mit bestimmter Divergenz]{sec:rechenregeln} 
+\[ \lim_{n\to \infty} f(x_n)=\infty. \]
+Also ist $ \lim_{x\to 1} f(x)=\infty.$
+
+Der Graph (schwarz) hat also bei $x=1$ eine senkrechte Asymptote (grün) und er schmiegt sich von beiden Seiten gegen $\infty$ an.
+
+\begin{genericJSXVisualization}[550][800]{example_b}
+ 		\begin{variables}
+ 			\function{f}{real}{(x+1)/(x-1)^2}  
+			\point{O}{real}{1,0} 			
+			\point{P}{real}{1,1} 			
+ 			\line{l}{real}{var(O),var(P)}
+ 			
+ 		\end{variables}
+ 		\color{l}{#00CC00}
+   \color{f}{black}
+   
+ 		\begin{canvas}
+ 			\plotSize{400,300}
+ 			\plotLeft{-4}
+ 			\plotRight{4}
+ 			\plot[coordinateSystem]{f,l }
+ 		\end{canvas}
+ 		% \text{Die schwarze Kurve ist der Graph der Funktion $f:\R\setminus \{1\}\to \R$ mit 
+ 		% $f(x)=\frac{x+1}{(x-1)^2}$. Die grüne Gerade ist die senkrechte Asymptote $x=1$.
+ 		%}
+\end{genericJSXVisualization}
+\end{tabs*}
+\end{example}
+
+\begin{example}
+Wir betrachten $f:\R\setminus\{1\}\to\R$, $x\mapsto \exp(\frac{1}{x-1})$.
+Das Verhalten in der Nähe der Definitionslücke $x^\ast=1$ ergibt sich aus dem Verhalten der inneren Funktion 
+$x\mapsto\frac{1}{x-1}$ und dem der Exponentialfunktion 
+wie folgt:
+Es ist $\lim_{x\nearrow 1}\frac{1}{x-1}=-\infty$, und weil die Exponentialfunktion stetig ist und abklingt 
+(also $\exp(y)\to 0$ für $y\to -\infty$), gilt
+\[\lim_{x\nearrow 1}\exp(\frac{1}{x-1})=\exp(\lim_{x\nearrow 1}\frac{1}{x-1})=0.\]
+Dagegen ist $\lim_{x\searrow 1}\frac{1}{x-1}=+\infty$. Aus der Stetigkeit der Exponentialfunktion und ihrem Wachstum 
+(also $\exp(y)\to \infty$ für $y\to \infty$) folgt nun
+\[\lim_{x\searrow 1}\exp(\frac{1}{x-1})=\exp(\lim_{x\searrow 1}\frac{1}{x-1})=+\infty.\]
+Die Funktion $f$ kann also in $x^\ast=1$ durch $f(1)=0$ \emph{linksseitig} stetig fortgesetzt werden. Sie hat dennoch
+eine senkrechte Asymptote in $x^\ast=1$, an die sich der rechte Zweig des Graphen immer mehr anschmiegt.
+\begin{genericJSXVisualization}[550][800]{example_b}
+ 		\begin{variables}
+ 			\function{f}{real}{exp(1/(x-1))}  
+			\point{O}{real}{1,0} 			
+			\point{P}{real}{1,1} 			
+ 			\line{l}{real}{var(O),var(P)}
+ 			
+ 		\end{variables}
+ 		\color{l}{#00CC00}
+   \color{f}{black}
+ 
+ 		\begin{canvas}
+ 			\plotSize{400,300}
+ 			\plotLeft{-4}
+ 			\plotRight{4}
+ 			\plot[coordinateSystem]{f,l }
+ 		\end{canvas}
+ 		%\text{Die schwarze Kurve ist der Graph der Funktion $f:\R\setminus \{1\}\to \R$ mit 
+ 		%$f(x)=\frac{x+1}{(x-1)^2}$. Die grüne Gerade ist die senkrechte Asymptote $x=1$.
+ 		%}
+\end{genericJSXVisualization}
+\end{example}
+
+Wie die obigen Beispiele schon vermuten lassen, gibt es analog zu den 
+\ref[bestimmte-divergenz][Rechenregeln für Folgen mit bestimmter Divergenz]{sec:rechenregeln} auch Rechenregeln für 
+die bestimmte Divergenz von Funktionswerten $\lim_{x\to x^*} f(x)$.
+
+\begin{rule}
+Es sei $f:D\to \R$ eine reelle Funktion,
+und es sei $x^\ast\in\overline{D}\setminus D\subset\R$ ein Randpunkt.
+
+Dann gilt:
+\begin{enumerate}
+\item[(i)] $ \lim_{x\nearrow x^*} f(x)=+\infty  $
+  genau dann, wenn $\,\lim_{x\nearrow x^*} \frac{1}{f(x)}=0\,$ und wenn die Funktionswerte in einem kleinen Intervall links von $x^\ast$ positiv sind,
+  d.h. wenn es $\delta>0$ gibt so, dass $f(x)>0$ für alle $x\in (x^*-\delta; x^*)\cap D$. 
+%\[ \exists \delta>0 \text{ mit }\quad f(x)>0\text{ für alle } x\in (x^*-\delta; x^*)\cap D. \]
+\item[(ii)] $  \lim_{x\nearrow x^*} f(x)=-\infty$ 
+  genau dann, wenn $\,\lim_{x\nearrow x^*} \frac{1}{f(x)}=0\,$ und wenn die Funktionswerte in einem kleinen Intervall links von $x^\ast$ negativ sind,
+  d.h. wenn es $\delta>0$ gibt so, dass $f(x)<0$ für alle $x\in (x^*-\delta; x^*)\cap D$.
+%\[ \exists \delta>0\text{ mit }\quad f(x)<0\text{ für alle } x\in (x^*-\delta; x^*)\cap D. \]
+\item[(iii)] $  \lim_{x\searrow x^*} f(x)=\infty $
+  genau dann, wenn $\,\lim_{x\searrow x^*} \frac{1}{f(x)}=0\,$ und wenn die Funktionswerte in einem kleinen Intervall rechts von $x^\ast$ positiv sind,
+  d.h. wenn es $\delta>0$ gibt so, dass $f(x)>0$ für alle $x\in (x^*; x^*+\delta)\cap D$.
+%\[ \exists \delta>0\text{ mit }\quad f(x)>0\text{ für alle } x\in (x^*; x^*+\delta)\cap D. \]
+\item[(iv)]$  \lim_{x\searrow x^*} f(x)=-\infty  $ genau dann, wenn  $\,\lim_{x\searrow x^*} \frac{1}{f(x)}=0\,$ und wenn
+die Funktionswerte in einem kleinen Intervall rechts von $x^\ast$ negativ sind,
+d.h. wenn es $\delta>0$ gibt so, dass $f(x)<0$ für alle $x\in (x^*; x^*+\delta)\cap D$.
+%\[ \exists \delta>0\text{ mit }\quad f(x)<0\text{ für alle } x\in (x^*; x^*+\delta)\cap D. \]
+\end{enumerate}  
+\end{rule}
+\begin{example}
+Für $f:\R\setminus\{0\}\to\R$, $x\mapsto \frac{1}{x^5}$
+erhalten wir wegen $\lim_{x\to\infty}x^5=+\infty$ und $\lim_{x\to-\infty} x^5=-\infty$
+\[\lim_{x\searrow 0}\frac{1}{x^5}=+\infty\quad \text{ \lang{de}{ sowie } \lang{en}{ and }}\quad
+\lim_{x\nearrow 0}\frac{1}{x^5}=-\infty.\]
+Die Gerade $x=0$ ist eine senkrechte Asymptote des Funktionsgraphen von $f$. Die Funktion divergiert bestimmt, und zwar von links gegen $-\infty$ und von rechts gegen $+\infty$.
+\end{example}
+
+
+
+
+\begin{quickcheck}
+    \field{real}
+    \type{input.number}
+    \begin{variables}
+        \number{n}{0}
+    \end{variables}
+    \text{Berechnen Sie den Grenzwert der Funktion $f(x)=x^2\ln(x^2)$. Es ist 
+    $\lim_{x\to0}f(x)=$\ansref.
+    \\
+    Tipp: Substituieren Sie $x=e^y$, passen Sie "$x\to 0$" im Limes entsprechend an und berücksichtigen Sie,
+    dass für jedes Polynom $p(x)$ gilt $\lim_{x\to\infty}\frac{p(x)}{e^{cx}}=0$ für $c>0$.\\
+    }
+    \begin{answer}
+        \solution{n}
+    \end{answer}
+    \explanation{$\lim_{x\to0}x^2\ln(x^2)=\lim_{y\to-\infty}(e^y)^2\ln((e^y)^2)=
+    \lim_{y\to-\infty}e^{2y}\ln(e^{2y})=\lim_{y\to-\infty}e^{2y}\cdot2y=0$}
+
+\end{quickcheck}
+
+In den bisherigen Beispielen waren die Funktionen in Definitionslücken stetig fortsetzbar oder hatten
+senkrechte Asymptoten. Natürlich gibt es auch Funktionen, die sich an Lücken im Definitionsbereich nicht so schön verhalten.
+
+\begin{example}
+Wir haben bereits in einem \ref[content_31_grenzwerte_von_funktionen][früheren Beispiel]{ex:Funktionsgrenzwerte}, dass
+für die Funktion 
+$f(x)=\sin\left(\frac{1}{x}\right)$ kein Grenzwert gegen $x^*=0$ existiert, weil verschiedene Nullfolgen  Funktionswertfolgen produzieren, die
+gegen verschiedene Grenzwerte oder gar nicht konvergieren. Demnach gibt es keine Möglichkeit, die Funktion in $x^\ast=0$ stetig fortzusetzen oder
+eine Asymptotik abzuleiten.\\
+Die folgende Abbildung stellt $f(x)=\sin\left(\frac{1}{x}\right)$ grafisch dar. 
+Setzen wir $y=\frac{1}{x}$, dann liegt zwischen $y$ und $y+2\pi$
+genau eine volle Schwingung von $\sin(y)$. Nun entspricht aber die Änderung um den Summanden $2\pi$ in $y$ der Änderung in $x$ um den Faktor $\frac{1}{1+2\pi}$.
+Also werden die Funktionswerte $[-1;1]$
+in der Nähe von $x^\ast=0$ auf einen beliebig schmalen Abszissenbereich zusammengedrängt: $f(x)$ nimmt in jeder noch so 
+ kleinen Umgebung des Nullpunktes jeden Wert zwischen $-1$ und $+1$ an.
+% der Funktionswerte (Ordinate) der Hyperbel $x'=\frac{1}{x}$ eine Abnahme der $x$-Werte (Abszisse), die zugleich
+% mit $x$ selbst gegen 0 konvergiert, und das heißt, daß eine volle Schwingung von $\sin(\frac{1}{x})$
+% in der Nähe von $x=0$ auf einen beliebig schmalen Abszissenbereich zusammengedrängt wird. $f(x)$ nimmt in jeder noch so 
+% kleinen Umgebung des Nullpunktes jeden Wert zwischen $-1$ und $+1$ an und kann sich daher
+% keinem Grenzwert nähern.
+% \begin{center}
+% \image{T210_Sine1x1}
+% \end{center}
+\begin{center}
+\begin{genericJSXVisualization}[550][800]{example_sin_1x}
+ 		\begin{variables}
+ 			\function{f}{real}{sin(1/x)}  
+			%\point{O}{real}{1,0} 			
+			%\point{P}{real}{1,1} 			
+ 			%\line{l}{real}{var(O),var(P)}
+ 			
+ 		\end{variables}
+ 		%\color{l}{#00CC00}
+ 
+ 		\begin{canvas}
+ 			\plotSize{400,300}
+ 			\plotLeft{-4}
+ 			\plotRight{4}
+ 			\plot[coordinateSystem]{f,l }
+ 		\end{canvas}
+ 		%\text{Die schwarze Kurve ist der Graph der Funktion $f:\R\setminus \{1\}\to \R$ mit 
+ 		%$f(x)=\frac{x+1}{(x-1)^2}$. Die grüne Gerade ist die senkrechte Asymptote $x=1$.
+ 		%}
+\end{genericJSXVisualization}
+\end{center}
+
+Anders verhält sich allerdings die Funktion $g(x)=x\cdot\sin(\frac{1}{x})$. Auch sie hat eine Definitionslücke in $x^*=0$, 
+besitzt aber  den Grenzwert $\lim_{x \to  0}f(x)=0$. Dazu betrachten wir
+\[{\vert g(x)-0\vert}={\vert x\cdot \sin\left(\frac{1}{x}\right)\vert}=
+{\vert x\vert}\cdot {\vert\sin\left(\frac{1}{x}\right)\vert}\leq{\vert x\vert}\cdot 1={\vert x\vert} \]
+Für jede Nullfolge $(x_n)_{n\in\N}$ mit $x_n\neq 0$ für alle $n\in\N$ gilt also
+\[0\leq {\vert g(x_n)\vert}\leq {\vert x_n\vert.} \]
+Nach dem \ref[content_16_konvergenzkriterien][Sandwich-Lemma]{thm:sandwich} gilt somit auch $\lim_{n\to\infty}{\vert g(x_n)\vert=0}$. 
+Und weil eine Folge genau dann gegen Null
+konvergiert, wenn es die Folge ihrer Beträge tut, folgt $\lim_{n\to\infty}g(x_n)=0$.
+Weil dies für beliebige solche Folgen gilt, ist $\lim_{x\to 0}g(x)=0$.
+Die Funktion lässt sich also in $x^\ast=0$ stetig fortsetzen.
+Die Multiplikation mit $x$ erzwingt hier also den Verlauf durch den Nullpunkt.
+% \begin{center}
+% \image{T210_xSine1x1}
+% \end{center}
+\begin{center}
+\begin{genericJSXVisualization}[550][800]{example_sin_1x}
+ 		\begin{variables}
+ 			\function{f}{real}{x*sin(1/x)}  	
+ 		\end{variables}
+ 		%\color{l}{#00CC00}
+ 
+ 		\begin{canvas}
+ 			\plotSize{400,300}
+ 			\plotLeft{-4}
+ 			\plotRight{4}
+ 			\plot[coordinateSystem]{f,l }
+ 		\end{canvas}
+ 		%\text{Die schwarze Kurve ist der Graph der Funktion $f:\R\setminus \{1\}\to \R$ mit 
+ 		%$f(x)=\frac{x+1}{(x-1)^2}$. Die grüne Gerade ist die senkrechte Asymptote $x=1$.
+ 		%}
+\end{genericJSXVisualization}
+\end{center}
+\end{example}
+%%
+%%
+%%
+\section{Verhalten gegen Unendlich}
+Nun befassen wir uns mit dem Verhalten reeller Funktionen an den uneigentlichen \glqq Rändern\grqq{} $\pm\infty$ von Definitionsbereichen.
+Wir haben bereits \ref[content_31_grenzwerte_von_funktionen][Funktionsgrenzwerte für $x$ gegen $\pm\infty$]{rem:funktionsgrenzwert}
+ definiert.
+ Wir wiederholen diese und fügen den Begriff der bestimmten Divergenz hinzu.
+\begin{definition}
+\begin{enumerate}
+\item[(i)]
+Sei $f:D\to \R$ eine Funktion, deren Definitionsbereich $D$ nach oben (bzw. nach unten) unbeschränkt ist.
+%und es gebe mindestens eine Folge $(x_n)_{n\geq 1}$ mit $x_n\in D$, die bestimmt gegen $\infty$ divergiert, d.h. $D$ ist nach oben unbeschränkt.
+\\
+Die Funktion $f$ heißt \notion{konvergent gegen $L \in \R$ für $x \to \infty$ (bzw. $x \to -\infty$)}, wenn
+  \[ \lim_{n\to \infty} f(x_n)= L \]
+  für alle Folgen $(x_n)_{n\geq 1}$ in $D$ mit $\lim_{n\to \infty} x_n=\infty$ (bzw. $=-\infty$) erfüllt ist.
+In diesem Fall schreiben wir kurz
+\[ \lim_{x\to \infty} f(x)= L \quad \text{ bzw. }\quad \lim_{x\to -\infty} f(x)= L . \]
+%%
+\item[(ii)] Sei $f:D\to \R$ eine Funktion, deren Definitionsbereich $D$ nach oben (bzw. nach unten) unbeschränkt ist.
+\\
+Die Funktion $f$ heißt \notion{bestimmt divergent  gegen $+\infty$ (oder $-\infty$) für $x \to \infty$ (bzw. $x \to -\infty$)}, 
+wenn
+  \[ \lim_{n\to \infty} f(x_n)= +\infty \:\text{ (oder }-\infty) \]
+  für alle Folgen $(x_n)_{n\geq 1}$ in $D$ mit $\lim_{n\to \infty} x_n=\infty$ (bzw. $=-\infty$) erfüllt ist.
+In diesem Fall schreiben wir kurz
+\[ \lim_{x\to \infty} f(x)= +\infty \:\text{ (oder }-\infty) \quad \text{ bzw. }\quad \lim_{x\to -\infty} f(x)= +\infty\:\text{ (oder }-\infty) . \]
+\end{enumerate}
+\end{definition}
+
+% \begin{remark}
+% Auch hier gibt es wieder ein $\epsilon$-Kriterium. Da die Nähe zu $\infty$ aber nicht durch eine $\delta$-Umgebung gegeben ist, sondern durch Schranken, die überschritten werden, lautet die entsprechende Definition:
+
+% Sei $f:D\to \R$ eine Funktion, für welche $D$ nach oben unbeschränkt ist. Die Funktion $f$ ist konvergent gegen $L \in \R$ für $x \to \infty$, wenn es für jedes $\epsilon>0$ ein $R_\epsilon\in \R$ gibt,
+% sodass
+% \[ |f ( x ) - L| < \epsilon\quad \text{für alle }x\in D \text{ mit }x > R_\epsilon. \]
+
+% \\
+
+% Entsprechend gilt für $-\infty$:
+
+% Sei $f:D\to \R$ eine Funktion, für welche $D$ nach unten unbeschränkt ist. Die Funktion $f$ ist konvergent gegen $L \in \R$ für $x \to -\infty$, wenn es für jedes $\epsilon>0$ ein $R_\epsilon\in \R$ gibt,
+% sodass
+% \[ |f ( x ) - L| < \epsilon\quad \text{für alle }x\in D \text{ mit }x < R_\epsilon. \]
+% \end{remark}
+
+\begin{remark}\label{rem:waagerechte-asymptote}
+\begin{enumerate}
+\item[(i)]
+Anschaulich bedeutet die Existenz des Grenzwerts $\lim_{x\to \infty} f(x)= L$, dass sich der Graph von $f$ für
+immer größer werdende $x$-Werte immer mehr der waagerechten Geraden $y=L$ annähert.\\
+Diese waagerechte Gerade $y=L$ nennt man daher \notion{(waagerechte) Asymptote} an den Graphen von $f$.
+
+Die  Existenz des Grenzwerts $\lim_{x\to -\infty} f(x)= L$ bedeutet ganz entsprechend, dass sich der Graph von $f$ für
+immer kleiner werdende $x$-Werte immer mehr der waagerechten Geraden $y=L$ annähert.\\
+Auch in diesem Fall nennt man  die Gerade $y=L$ \notion{(waagerechte) Asymptote} an den Graphen von $f$.
+\item[(ii)] Die bestimmte Divergenz gegen $+\infty$ für $x\to+\infty$ (bzw. für $x\to -\infty$) bedeutet, dass der Graph über jede Grenze
+hinaus wächst.\\
+Analog bedeutet die bestimmte Divergenz gegen $-\infty$ für $x\to+\infty$ (bzw. für $x\to -\infty$), 
+dass der Graph unter jede Grenze fällt.
+\end{enumerate}
+\end{remark}
+
+\begin{example}
+\begin{tabs*}
+\tab{$e^x$}
+Es ist bereits bekannt, dass
+\[\lim_{x\to-\infty}e^x=0 \quad\text{ sowie }\quad \lim_{x\to+\infty}e^x=+\infty\:.\]
+\begin{center}
+\begin{genericJSXVisualization}[550][800]{example_exp_asymp}
+ 		\begin{variables}
+ 			\function{f}{real}{e^x}  	
+    	\point{O}{real}{0,0} 			
+			\point{Q}{real}{4,0}
+     \line{m}{real}{var(Q),var(O)}
+ 		\end{variables}
+ 		\color{m}{blue}
+   \color{f}{black}
+ 
+ 		\begin{canvas}
+ 			\plotSize{400,300}
+      \plotTop{4.4}
+ 			\plotLeft{-4}
+ 			\plotRight{4}
+ 			\plot[coordinateSystem]{f,m }
+ 		\end{canvas}
+ 		%\text{Die schwarze Kurve ist der Graph der Funktion $f:\R\setminus \{1\}\to \R$ mit 
+ 		%$f(x)=\frac{x+1}{(x-1)^2}$. Die grüne Gerade ist die senkrechte Asymptote $x=1$.
+ 		%}
+\end{genericJSXVisualization}
+\end{center}
+\tab{$\frac{4x^3+x^2+1}{x^3-2}$}
+Für das Verhalten von $f:\R\setminus\{\sqrt[3]{2}\}\to\R$, $x\mapsto \frac{4x^3+x^2+1}{x^3-2}$, für $x\to\pm\infty$ 
+bemerken wir zunächst,
+dass $\lim_{x\to\pm\infty}\frac{1}{x^k}=0$ für alle $k>0$.
+Somit gilt mit den \ref[bestimmte-divergenz][Rechenregeln für bestimmte Divergenz]{sec:rechenregeln}
+\[\lim_{x\to\infty}f(x)=
+\lim_{x\to\infty}\frac{x^3}{x^3}\frac{4+\frac{1}{x}+\frac{1}{x^3}}{1-\frac{2}{x^3}}=
+\lim_{x\to\infty}\frac{4+\frac{1}{x}+\frac{1}{x^3}}{1-\frac{2}{x^3}}=\frac{4}{1}=4,\]
+und ganz analog
+\[\lim_{x\to-\infty}\frac{4x^3+x^2+1}{x^3-2}=4.\]
+Der Funktionsgraph (schwarz) hat die waagerechte Asymptote $y=4$ (blau).
+Zusätzlich hat die Funktion eine senkrechte Asymptote (grün) in $x=\sqrt[3]{2}$ mit folgender links- bzw. rechtsseitiger bestimmter Divergenz (beachte, dass der Zähler für $x>0$ stets größer als Null ist)
+\[\lim_{x\nearrow \sqrt[3]{2}}\frac{4x^3+x^2+1}{x^3-2}=-\infty \quad \text{ und }\quad
+\lim_{x\searrow \sqrt[3]{2}}\frac{4x^3+x^2+1}{x^3-2}=+\infty .
+\]
+\begin{center}
+\begin{genericJSXVisualization}[550][800]{example_gebro_rat_1}
+ 		\begin{variables}
+ 			\function{f}{real}{(4x^3+x^2+1)/(x^3-2)}  	
+    	\point{O}{real}{cbrt(2),0} 			
+			\point{P}{real}{cbrt(2),1} 			
+       \point{Q}{real}{0,4}
+    \point{R}{real}{1,4}
+    \line{l}{real}{var(O),var(P)}
+    \line{m}{real}{var(Q),var(R)}
+ 		\end{variables}
+ 		\color{l}{#00CC00}
+   \color{m}{blue}
+   \color{f}{black}
+ 
+ 		\begin{canvas}
+ 			\plotSize{400,300}
+      \plotTop{4.4}
+ 			\plotLeft{-4}
+ 			\plotRight{4}
+ 			\plot[coordinateSystem]{f,l,m }
+ 		\end{canvas}
+ 		%\text{Die schwarze Kurve ist der Graph der Funktion $f:\R\setminus \{1\}\to \R$ mit 
+ 		%$f(x)=\frac{x+1}{(x-1)^2}$. Die grüne Gerade ist die senkrechte Asymptote $x=1$.
+ 		%}
+\end{genericJSXVisualization}
+\end{center}
+\tab{$ \frac{|x-2|}{x^2-2x}$}
+Sei $f:\R\setminus \{0; 2\}\to \R$ gegeben durch
+\[ f(x)= \frac{|x-2|}{x^2-2x} \]
+für alle $x\in \R\setminus \{0; 2\}$.
+
+Ist $(x_n)_{n\geq 1}$ eine Folge in $\R\setminus \{0; 2\}$, die bestimmt divergent gegen $\infty$ ist, also mit $\lim_{n\to \infty} x_n=\infty$, so gibt es ein $N\in \N$ mit $x_n>2$ für alle $n\geq N$.\\
+Dementsprechend gilt für alle $n\geq N$: $f(x_n)=\frac{x-2}{x^2-2x}=\frac{1}{x}$.
+
+Mit den \ref[bestimmte-divergenz][Rechenregeln mit bestimmter Divergenz]{sec:rechenregeln} gilt daher:
+\[ \lim_{n\to \infty} f(x_n)= \lim_{n\to \infty} \frac{1}{x_n}=0. \]
+
+Da dies für alle gegen $\infty$ bestimmt divergenten Folgen $(x_n)_{n\geq 1}$ gilt, ist somit
+\[ \lim_{x\to \infty} f(x)= 0.\]
+Die Gerade $y=0$ ist also eine waagerechte Asymptote an den Graphen für $x\to \infty$. \\ \\
+
+
+Folgen $(x_n)_{n\geq 1}$ in $\R\setminus \{0; 2\}$, die bestimmt divergent gegen $-\infty$ sind,
+erfüllen $x_n<0$ für alle $n\geq N$ bei geeignetem festen $N\in \N$ und dementsprechend gilt:
+\[ f(x_n)=\frac{-(x_n-2)}{x_n^2-2x_n}=-\frac{1}{x_n} \quad \text{ für alle }n\geq N.\]
+
+Also ist auch hier:
+\[ \lim_{n\to \infty} f(x_n)= \lim_{n\to \infty} -\frac{1}{x_n}=0. \]
+
+Da dies für alle gegen $-\infty$ bestimmt divergenten Folgen $(x_n)_{n\geq 1}$ gilt, ist somit
+\[ \lim_{x\to -\infty} f(x)= 0.\]
+Die Gerade $y=0$ ist also auch eine waagerechte Asymptote (blau) an den Graphen (schwarz) für $x\to -\infty$.
+
+ 	\begin{genericJSXVisualization}[550][800]{waagerecht_1}
+ 		\begin{variables}
+ 			\function{f}{real}{|x-2|/(x^2-2*x)}  
+			\point{O}{real}{0,0} 			
+			\point{P}{real}{1,0} 			
+ 			\line{l}{real}{var(O),var(P)}
+       	\point{Q}{real}{0,0} 			
+			\point{R}{real}{0,1} 	
+     \line{m}{real}{var(Q),var(R)}
+ 			
+ 		\end{variables}
+ 		\color{l}{blue}
+     \color{m}{#00CC00}
+      \color{f}{black}
+ 
+ 		\begin{canvas}
+ 			\plotSize{400,300}
+ 			\plotLeft{-4},
+ 			\plotRight{4}
+ 			\plot[coordinateSystem]{f,l,m }
+ 		\end{canvas}
+ \end{genericJSXVisualization}
+ In der Definitionslücke $x=0$ hat die Funktion eine senkrechte Asymptote (grün). Es gilt
+  \[\lim_{x\nearrow 0}f(x)=\lim_{x\nearrow 0}-\frac{1}{x}=+\infty \quad\text{ sowie }
+ \lim_{x\searrow 0}f(x)=\lim_{x\searrow 0}-\frac{1}{x}=-\infty .\]
+ Zusätzlich hat die Funktion eine Definitionslücke in $x=2$. Es gilt
+ \[\lim_{x\nearrow 2}f(x)=\lim_{x\nearrow 2}-\frac{1}{x}=-\frac{1}{2} \quad\text{ sowie }
+ \lim_{x\searrow 2}f(x)=\lim_{x\searrow 2}\frac{1}{x}=+\frac{1}{2} .\]
+ \end{tabs*}
+\end{example}
+Natürlich gibt es auch Funktionen, die für $x\to\pm\infty$ weder konvergieren noch bestimmt divergieren:
+\begin{example}
+\begin{tabs*}
+\tab{$\cos$ und $\sin$}
+Die Funktionen $\cos(x)$ und $\sin(x)$ sind $2\pi$-periodisch. Sie nehmen also auch für $\vert x\vert$ größer als jede beliebige Grenze jeden Wert im Intervall $[-1;1]$ an.
+Demnach kann weder ein Grenzwert für $x\to\pm\infty$ existieren, noch kann bestimmte Divergenz für $x\to\pm\infty$ vorliegen.
+\end{tabs*}
+\end{example}
+\begin{quickcheck}
+    \field{real}
+        \type{input.number}
+        \begin{variables}
+            \drawFromSet{a}{2,3,4,5}
+            \function[calculate]{b}{2*a}
+            \number{n}{0}
+        \end{variables}
+        \text{Berechnen Sie den Grenzwert  $\:\lim_{x\to -\infty}\frac{\var{b}}{\var{a}+\sqrt{|x|}}=$\ansref
+        }
+        \begin{answer}
+            \solution{n}
+        \end{answer}
+        \explanation{Für jede Folge $(x_n)_{n\in\N}$ mit $\lim_{n\to\infty}x_n=-\infty$  gilt 
+        $\lim_{n\to\infty}\sqrt{\vert x_n\vert}=\infty$. Somit gilt nach den Rechenregeln für bestimmt Divergenz 
+        $\lim_{n\to\\infty}\frac{\var{b}}{\var{a}+\sqrt{|x_n|}}=0$.
+        }
+\end{quickcheck}
+\section{Gebrochen rationale Funktionen}\label{sec:asymptotics_rational}
+Für gebrochen rationale Funktionen $r(x)=\frac{p(x)}{q(x)}$ mit Polynomen $p(x)$ und $q(x)$
+lassen sich allgemeine Aussagen über  Asymptotiken treffen. 
+Diese Asymptotiken sind sehr nützlich dafür, Funktionsgraphen  zu skizzieren.
+\begin{rule}[Verhalten an Definitionslücken]\label{rule:rat_fct_def_gaps}
+Eine rationale Funktion $r(x)=\frac{p(x)}{q(x)}$ mit Polynomen $p(x)$ und $q(x)$
+hat genau an den Nullstellen des Nennerpolynoms $q(x)$ Definitionslücken.
+Für jede solche Definitionslücke $x_\ast$ gibt es Polynome $p_\ast(x)$ und $q_\ast(x)$ 
+und eine Zahl
+$s\in\Z$ so,
+dass $p_\ast(x_\ast)\neq 0$ und $q_\ast(x_\ast)\neq 0$ und 
+\[r(x)=\frac{p(x)}{q(x)}=\frac{p_\ast(x)}{q_\ast(x)}\cdot (x-x_\ast)^s.\]
+Dann gilt:
+\begin{itemize}
+\item[(i)] Ist $s\geq 0$ so lässt $r(x)$ sich in $x_\ast$ stetig fortsetzen durch den Wert
+\[\frac{p_\ast(x_\ast)}{q_\ast(x_\ast)}\cdot (x_\ast-x_\ast)^s=\begin{cases}0&\text{ für } s>0\\
+                                                              \frac{p_\ast(x_\ast)}{q_\ast(x_\ast)}&\text{ für } s=0
+                                                              \end{cases}.\]
+In diesem Fall nennt man $x_\ast$ eine \notion{hebbare Singularität} von $r(x)$.
+\item[(ii)] Ist $s<0$, dann nennt man $x_\ast$ eine \notion{Polstelle} von $r(x)$. 
+Die Gerade $x=x_\ast$ ist dann eine senkrechte Asymptote des Graphen.
+\end{itemize}
+\end{rule}
+\begin{proof*}
+\begin{incremental}[\initialsteps{0}]
+\step
+Durch \ref[content_10_polynomdivision][Polynomdivision]{sec:poly-div-factoring} kann man den Linearfaktor $(x-x_\ast)$ 
+so oft von $q(x)$ abspalten, wie es der Vielfachheit $l\in\N$ der Nullstelle $x_\ast$ entspricht.
+Es gibt also ein Polynom $q_\ast(x)$ mit $q_\ast(x_\ast)\neq 0$ und $q(x)=q_\ast(x)\cdot(x-x_\ast)^l$.
+\\
+Ebenso zerlegt man $p(x)=p_\ast(x)\cdot(x-x_\ast)^k$ in ein Polynom $p_\ast(x)$ mit $p_\ast(x_\ast)\neq 0$
+und die $k$-te Potenz des Linearfaktors $(x-x_\ast)$. Wenn schon $p(x_\ast)\neq 0$ gilt,
+ dann ist $k=0$ und $p_\ast(x)=p(x)$.
+Somit ist die Darstellung
+\[r(x)=\frac{p_\ast(x)}{q_\ast(x)}\cdot (x-x_\ast)^s\]
+gezeigt mit $s:=k-l\in\Z$.
+Weil nun $\lim_{x\to x_\ast}\frac{p_\ast(x)}{q_\ast(x)}=\frac{p_\ast(x_\ast)}{q_\ast(x_\ast)}\neq 0$ existiert,
+hängt nach den Grenzwertregeln die Existenz des Grenzwerts $\lim_{x\to x_\ast}r(x)$ nur ab von der Existenz von $\lim_{x\to x_\ast}(x-x_\ast)^s$.
+\\
+Ist $s\geq 0$, dann ist $(x-x_\ast)^s$ ein Polynom, und der Grenzwert existiert: 
+Für $s=0$ ist $\lim_{x\to x_\ast}(x-x_\ast)^s=1$, und für $s>0$ ist $\lim_{x\to x_\ast}(x-x_\ast)^s=0$.
+Wiederum nach den Grenzwertsätzen folgt die Existenz des Grenzwerts
+\[\lim_{x\to x_\ast}r(x)=\frac{p_\ast(x_\ast)}{q_\ast(x_\ast)}\cdot \lim_{x\to x_\ast}(x-x_\ast)^k=
+\begin{cases} \frac{p_\ast(x_\ast)}{q_\ast(x_\ast)} &\text{ falls } s=0\\
+0&\text{ falls } s>0\end{cases}.\]
+\\
+Ist $s<0$, so setzen wir $y=x-x_\ast$ und erhalten $\lim_{x\nearrow x_\ast}(x-x_\ast)^s=\lim_{y\nearrow 0}\frac{1}{y^{\vert s\vert}}=(-1)^s\cdot\infty$
+und $\lim_{x\searrow x_\ast}(x-x_\ast)^s=\lim_{y\searrow 0}\frac{1}{y^{\vert s\vert}}=\infty$. Also ist $x=x_\ast$ senkrechte Asymptote.
+Das Vorzeichen der bestimmen Divergenz von $r(x)$ ist zusätzlich abhängig vom Vorzeichen des Faktors $\frac{p_\ast(x_\ast)}{q_\ast(x_\ast)}$.
+\end{incremental}
+\end{proof*}
+\begin{rule}[Verhalten gegen Unendlich]\label{rule:rat_fun_infty}
+Es seien $p(x)=a_nx^n+a_{n-1}x^{n-1}+\ldots+a_1x+a_0$ und $q(x)=b_mx^m+b_{m-1}x^{m-1}+\ldots+b_1x+b_0$ reelle Polynome vom Grad $n$ bzw. $m$. Insbesondere seien also 
+die höchsten Koeffizienten $a_n$ und $b_m$ ungleich Null.
+Es sei weiter 
+\[
+d:=\text{grad } p(x) - \text{grad } q(x)=n-m
+\]
+die Differenz der Polynomgrade. Dann gilt für die gebrochen rationale Funktion $r(x)=\frac{p(x)}{q(x)}$:
+\begin{itemize}
+\item[(i)] Ist $d>0$, dann divergiert $r(x)$ bestimmt für $x\to\pm\infty$. Genauer gilt
+\[\lim_{x\to\infty}r(x)=\text{VZ}\left(\frac{a_n}{b_m}\right)\cdot\infty\quad\text{ und }\quad \lim_{x\to\infty}r(x)=\text{VZ}\left(\frac{a_n}{b_m}\right)\cdot (-1)^d\cdot\infty.\]
+\item[(ii)]  Ist $d=0$, dann konvergiert $r(x)$ für $x\to\pm\infty$ gegen den Grenzwert
+\[\lim_{x\to\infty}r(x)=\frac{a_n}{b_m}.\]
+\item[(iii)] Ist $d<0$, dann konvergiert $r(x)$ für $x\to\pm\infty$ gegen den Grenzwert
+\[\lim_{x\to\infty}r(x)=0.\]
+\end{itemize}
+In Fall (ii) und (iii) hat der Funktionsgraph eine waagerechte Asymptote in Höhe des Grenzwerts.
+\end{rule}
+\begin{proof*}
+\begin{incremental}[\initialsteps{0}]
+\step
+Wir schreiben die Funktion $r(x)$ um zu
+\[
+r(x)=\frac{x^n}{x^m}\cdot\frac{a_n+\frac{a_{n-1}}{x}+\ldots+\frac{a_{1}}{x^{n-1}}+\frac{a_{0}}{x^n}}
+{b_m+\frac{b_{m-1}}{x}+\ldots+\frac{b_{1}}{x^{m-1}}+\frac{b_{0}}{x^m}}.\]
+ Wir beachten $\lim_{x\to\pm\infty}\frac{1}{x}=0$ und erhalten unter Beachtung der Grenzwertregeln
+\[
+\lim_{x\to\pm\infty}\frac{a_n+\frac{a_{n-1}}{x}+\ldots+\frac{a_{1}}{x^{n-1}}+\frac{a_{0}}{x^n}}
+{b_m+\frac{b_{m-1}}{x}+\ldots+\frac{b_{1}}{x^{m-1}}+\frac{b_{0}}{x^m}}=\frac{a_n}{b_m}.
+\]
+Somit hängt die Existenz der Grenzwerte $\lim_{x\to\pm\infty}r(x)$ nur ab von der Existenz der Grenzwerte
+ $\lim_{x\to\pm\infty}\frac{x^n}{x^m}=\lim_{x\to\pm\infty} x^d$.
+ \step
+(i) Im Fall $d>0$ ist $\lim_{x\to+\infty} x^d=\infty$ und $\lim_{x\to-\infty}x^d=(-1)^d\cdot\infty$.
+Mit den Grenzwertregeln folgt die bestimmte Divergenz von $r(x)$ für $x\to\pm\infty$
+mit
+\[\lim_{x\to\infty}r(x)=\text{VZ}\left(\frac{a_n}{b_m}\right)\cdot\infty\quad\text{ und }\quad \lim_{x\to\infty}r(x)=\text{VZ}\left(\frac{a_n}{b_m}\right)\cdot (-1)^d\cdot\infty.\]
+\step
+(ii)
+Im Fall $d=0$ ist $\lim_{x\to\pm\infty }x^d=\lim_{x\to\pm\infty}1=1$, also folgt
+\[\lim_{x\to\infty}r(x)=1\cdot \lim_{x\to\pm\infty}\frac{a_n+\frac{a_{n-1}}{x}+\ldots+\frac{a_{1}}{x^{n-1}}+\frac{a_{0}}{x^n}}
+{b_m+\frac{b_{m-1}}{x}+\ldots+\frac{b_{1}}{x^{m-1}}+\frac{b_{0}}{x^m}}=\frac{a_n}{b_m}.\]
+\step
+(iii)
+Im Fall $d<0$ ist $\lim_{x\to\pm\infty }x^d=0$, also folgt
+\[\lim_{x\to\pm\infty}r(x)=\lim_{x\to\pm\infty }x^d\cdot \lim_{x\to\pm\infty}\frac{a_n+\frac{a_{n-1}}{x}+\ldots+\frac{a_{1}}{x^{n-1}}+\frac{a_{0}}{x^n}}
+{b_m+\frac{b_{m-1}}{x}+\ldots+\frac{b_{1}}{x^{m-1}}+\frac{b_{0}}{x^m}}=0\cdot \frac{a_n}{b_m}=0.\]
+\end{incremental}
+\end{proof*}
+Im Fall (i) der vorgehenden Regel können wir sogar noch eine bessere Beschreibung der bestimmten Divergenz
+erhalten:
+\begin{remark}\label{rem:polynomial_asypt}
+Ist für die rationale Funktion $r(x)=\frac{p(x)}{q(x)}$ der Zählergrad größer als der Nennergrad, 
+dann gibt es (eindeutig bestimmte) Polynome $s(x)$ mit $\text{grad }s(x)=\text{grad } p(x) - \text{grad } q(x)$
+und $t(x)$ mit $\text{grad }t(x)<\text{grad } q(x)$ oder $t=0$, so dass
+\[r(x)=\frac{p(x)}{q(x)}=s(x)+\frac{t(x)}{q(x)}.\]
+Das Polynom $s(x)$ beschreibt das asymptotische Verhalten von $r(x)$ für $x\to\pm\infty$, d.h. für $x\to\pm\infty$ schmiegt
+sich der Graph von $r(x)$ an den von $s(x)$ an.
+\end{remark}
+\begin{proof*}
+\begin{incremental}[\initialsteps{0}]
+\step
+Die Existenz eindeutig bestimmter solcher Polynome $s(x)$ und $t(x)$ erhält man aus der \ref[content_10_polynomdivision][Polynomdivision]{sec:poly-div-factoring}
+\[ p(x)=s(x)\cdot q(x)+t(x).\]
+Dabei ist $\text{grad } p(x)=\text{grad } s(x)+\text{grad } q(x)$ und $\text{grad } t(x)<\text{grad } q(x)$ oder $t$ ist bereits das Nullpolynom.
+Es gilt damit
+\[r(x)=\frac{p(x)}{q(x)}=\frac{s(x)\cdot q(x)+t(x)}{q(x)}=s(x)+\frac{t(x)}{q(x)}.\]
+Nach Regel \ref{rule:rat_fun_infty}(iii) gilt $\lim_{x\to\pm\infty}\frac{t(x)}{q(x)}=0$.
+Also gilt 
+\[\lim_{x\to\pm\infty}r(x)-s(x)=\lim_{x\to\pm\infty}\frac{t(x)}{q(x)}=0.\]
+\end{incremental}
+\end{proof*}
+\begin{example}
+Die gebrochen rationale Funktion $r(x)=\frac{x^4+x^3-x^2+x-2}{5x^2-10x-5}$
+hat eine einzige Definitionslücke $x_\ast=-1$, denn das Nennerpolynom $q(x)=5(x^2-2x+1)=5(x-1)^2$ hat eine doppelte Nullstelle.
+Auch das Zählerpolynom $p(x)=x^4+x^3-x^2+x-2$ hat $x_\ast$ zur Nullstelle.
+Es ist $p(x)=(x^3+2x^2+x+2)(x-1)$ (Polynomdivision!), und $x_\ast$ ist keine Nullstelle des erstes Faktors mehr.
+Somit ergibt sich
+\[r(x)=\frac{x^3+2x^2+x+2}{5}\cdot (x-1)^{-1}.\]
+Die Funktion hat also in $x=1$ eine senkrechte Asymptote (grün) und divergiert dort bestimmt. Genauer ist
+\[\lim_{x\nearrow 1}r(x)=\lim_{x\nearrow 1}\frac{x^3+2x^2+x+2}{5}\cdot \lim_{x\nearrow 1}(x-1)^{-1}=-\infty,\]
+sowie
+\[\lim_{x\searrow 1}r(x)=\lim_{x\searrow 1}\frac{x^3+2x^2+x+2}{5}\cdot \lim_{x\searrow 1}(x-1)^{-1}=+\infty.\]
+Weil der Zählergrad vier ist und der Nennergrad zwei, divergiert die Funktion für $x\to\pm\infty$ bestimmt.
+Durch Polynomdivision erhalten wir weiter eine Zerlegung der Form $r(x)=s(x)+\frac{t(x)}{q(x)}$, nämlich
+\[r(x)=\frac{1}{5}(x^2+3x+4)+\frac{6(x-1)}{5(x-1)^2}=\frac{1}{5}(x^2+3x+4)+\frac{6}{5(x-1)}.\]
+Es ist also $s(x)=\frac{1}{5}(x^2+3x+4)$ und $t(x)=6(x-1)$ wie in Bemerkung \ref{rem:polynomial_asypt}.
+Das Verhalten für $x$ gegen $+\infty$ und $-\infty$ ist somit gegeben durch
+\[
+\lim_{x\to\pm\infty} r(x)=\lim_{x\to\pm\infty}\frac{1}{5}(x^2+3x+4)=+\infty,\]
+und der Funktionsgraph von $x\mapsto \frac{1}{5}(x^2+3x+4)$ ist eine Asymptote (blau) an den Graphen (schwarz) von $r(x)$ für $x\to\pm\infty$.
+
+ 	\begin{genericJSXVisualization}[550][800]{example_gebr_rat_final}
+ 		\begin{variables}
+ 			\function{f}{real}{(x^3+2*x^2+x+2)/(5*(x-1))}  
+			\point{O}{real}{1,0} 			
+			\point{P}{real}{1,1} 			
+ 			\line{l}{real}{var(O),var(P)}
+    \function{g}{real}{(x^2+3*x+4)/5}
+     
+ 			
+ 		\end{variables}
+ 		\color{l}{green}
+     \color{g}{blue}%{magenta}
+     \color{f}{black}
+ 
+ 		\begin{canvas}
+ 			\plotSize{400,300}
+ 			\plotLeft{-4},
+ 			\plotRight{4}
+ 			\plot[coordinateSystem]{f,l,g }
+ 		\end{canvas}
+ \end{genericJSXVisualization}
+\end{example}
+
+% Im letzten Abschnitt hatten wir Grenzwerte gegen Definitionslücken betrachtet. In diesem Abschnitt geht es um die Grenzwerte für $x$ gegen $\infty$ oder gegen $-\infty$, wenn man also Folgen $(x_n)$ betrachtet, die \link{bestimmte-divergenz}{bestimmt divergent} gegen  $\infty$ oder gegen $-\infty$ sind.
+
+% Des weiteren geht es um den Fall, dass für links- bzw. rechtsseitige Folgen an Definitionslücken die Folgen der Funktionswerte bestimmt divergieren.
+
+% In beiden Fällen erhält man grafisch sogenannte \emph{Asymptoten}.
+
+
+% Die Ergebnisse sind ganz ähnlich wie im vorigen Abschnitt, wenn man bestimmt divergent gegen $\infty$ bzw. gegen $-\infty$ als Konvergenz ansieht.
+
+
+% \section{Grenzwert gegen Unendlich}
+
+% \begin{definition}
+% \begin{enumerate}
+% \item
+% Sei $f:D\to \R$ eine Funktion und es gebe mindestens eine Folge $(x_n)_{n\geq 1}$ mit $x_n\in D$, die bestimmt gegen $\infty$ divergiert, d.h. $D$ ist nach oben unbeschränkt.
+
+% Die Funktion $f$ heißt \notion{konvergent gegen $L \in \R$ für $x \to \infty$}, wenn
+%   \[ \lim_{n\to \infty} f(x_n)= L \]
+%   für jede Folge $(x_n)_{n\geq 1}$ mit $x_n\in D$ und $\lim_{n\to \infty} x_n=\infty$.
+
+% Wir schreiben dann kurz:
+% \[ \lim_{x\to \infty} f(x)= L. \]
+
+% \item Sei $f:D\to \R$ eine Funktion und es gebe mindestens eine Folge $(x_n)_{n\geq 1}$ mit $x_n\in D$, die bestimmt gegen $-\infty$ divergiert, d.h. $D$ ist nach unten unbeschränkt.
+
+% Die Funktion $f$ heißt \notion{konvergent gegen $L \in \R$ für $x \to -\infty$}, wenn
+%   \[ \lim_{n\to \infty} f(x_n)= L \]
+%   für jede Folge $(x_n)_{n\geq 1}$ mit $x_n\in D$ und $\lim_{n\to \infty} x_n=-\infty$.
+
+% Wir schreiben dann kurz:
+% \[ \lim_{x\to -\infty} f(x)= L. \]
+% \end{enumerate}
+% \end{definition}
+
+% \begin{remark}
+% Auch hier gibt es wieder ein $\epsilon$-Kriterium. Da die Nähe zu $\infty$ aber nicht durch eine $\delta$-Umgebung gegeben ist, sondern durch Schranken, die überschritten werden, lautet die entsprechende Definition:
+
+% Sei $f:D\to \R$ eine Funktion, für welche $D$ nach oben unbeschränkt ist. Die Funktion $f$ ist konvergent gegen $L \in \R$ für $x \to \infty$, wenn es für jedes $\epsilon>0$ ein $R_\epsilon\in \R$ gibt,
+% sodass
+% \[ |f ( x ) - L| < \epsilon\quad \text{für alle }x\in D \text{ mit }x > R_\epsilon. \]
+
+% \\
+
+% Entsprechend gilt für $-\infty$:
+
+% Sei $f:D\to \R$ eine Funktion, für welche $D$ nach unten unbeschränkt ist. Die Funktion $f$ ist konvergent gegen $L \in \R$ für $x \to -\infty$, wenn es für jedes $\epsilon>0$ ein $R_\epsilon\in \R$ gibt,
+% sodass
+% \[ |f ( x ) - L| < \epsilon\quad \text{für alle }x\in D \text{ mit }x < R_\epsilon. \]
+% \end{remark}
+
+% \begin{remark}\label{rem:waagerechte-asymptote}
+% Anschaulich bedeutet die Eigenschaft $\lim_{x\to \infty} f(x)= L$, dass sich der Graph von $f$ für
+% immer größer werdende $x$-Werte immer mehr der waagerechten Geraden $y=L$ annähert.\\
+% Diese waagerechte Gerade $y=L$ nennt man daher \notion{(waagerechte) Asymptote} an den Graphen von $f$.
+
+% Die  Eigenschaft $\lim_{x\to -\infty} f(x)= L$ bedeutet ganz entsprechend, dass sich der Graph von $f$ für
+% immer kleiner werdende $x$-Werte immer mehr der waagerechten Geraden $y=L$ annähert.\\
+% Auch in diesem Fall nennt man  die Gerade $y=L$ \notion{(waagerechte) Asymptote} an den Graphen von $f$.
+% \end{remark}
+
+% \begin{example}
+% Sei $f:\R\setminus \{0; 2\}\to \R$ gegeben durch
+% \[ f(x)= \frac{|x-2|}{x^2-2x} \]
+% für alle $x\in \R\setminus \{0; 2\}$.
+
+% Ist $(x_n)_{n\geq 1}$ eine Folge in $\R\setminus \{0; 2\}$, die bestimmt divergent gegen $\infty$ ist, also mit $\lim_{n\to \infty} x_n=\infty$, so gibt es ein $N\in \N$ mit $x_n>2$ für alle $n\geq N$.\\
+% Dementsprechend gilt für alle $n\geq N$: $f(x_n)=\frac{x-2}{x^2-2x}=\frac{1}{x}$.
+
+% Mit den \ref[bestimmte-divergenz][Rechenregeln mit bestimmter Divergenz]{sec:rechenregeln} gilt daher:
+% \[ \lim_{n\to \infty} f(x_n)= \lim_{n\to \infty} \frac{1}{x_n}=0. \]
+
+% Da dies für alle gegen $\infty$ bestimmt divergenten Folgen $(x_n)_{n\geq 1}$ gilt, ist somit
+% \[ \lim_{x\to \infty} f(x)= 0.\]
+% Die Gerade $y=0$ ist also eine waagerechte Asymptote an den Graphen für $x\to \infty$. \\ \\
+
+
+% Folgen $(x_n)_{n\geq 1}$ in $\R\setminus \{0; 2\}$, die bestimmt divergent gegen $-\infty$ sind,
+% erfüllen $x_n<0$ für alle $n\geq N$ bei geeignetem festen $N\in \N$ und dementsprechend gilt:
+% \[ f(x_n)=\frac{-(x_n-2)}{x_n^2-2x_n}=-\frac{1}{x_n} \quad \text{ für alle }n\geq N.\]
+
+% Also ist auch hier:
+% \[ \lim_{n\to \infty} f(x_n)= \lim_{n\to \infty} -\frac{1}{x_n}=0. \]
+
+% Da dies für alle gegen $-\infty$ bestimmt divergenten Folgen $(x_n)_{n\geq 1}$ gilt, ist somit
+% \[ \lim_{x\to -\infty} f(x)= 0.\]
+% Die Gerade $y=0$ ist also auch eine waagerechte Asymptote an den Graphen für $x\to -\infty$.
+
+%  	\begin{genericGWTVisualization}[550][800]{mathlet1}
+%  		\begin{variables}
+%  			\function{f}{real}{|x-2|/(x^2-2*x)}  
+% 			\point{O}{real}{0,0} 			
+% 			\point{P}{real}{1,0} 			
+%  			\line{l}{real}{var(O),var(P)}
+ 			
+%  		\end{variables}
+%  		\color{l}{#00CC00}
+ 
+%  		\begin{canvas}
+%  			\plotSize{400,300}
+%  			\plotLeft{-4}
+%  			\plotRight{4}
+%  			\plot[coordinateSystem]{f,l }
+%  		\end{canvas}
+%  		\text{Die schwarze Kurve ist der Graph der Funktion $f:\R\setminus \{0;2\}\to \R$ mit 
+%  		$f(x)=\frac{|x-2|}{x^2-2x}$. Die grüne Gerade ist die waagerechte Asymptote $y=0$.
+%  		}
+%  	    	\end{genericGWTVisualization}
+
+% \end{example}
+
+% \begin{quickcheck}
+%     \field{real}
+%         \type{input.number}
+%         \begin{variables}
+%             \drawFromSet{a}{2,3,4,5}
+%             \function[calculate]{b}{2*a}
+%             \number{n}{0}
+%         \end{variables}
+%         \text{Berechnen Sie den Grenzwert für die Funktion $f(x)=\frac{\var{b}}{\var{a}+\sqrt{|x|}}$\\
+%         $\lim_{x\to -\infty}f(x)=$\ansref
+%         }
+%         \begin{answer}
+%             \solution{n}
+%         \end{answer}
+%         \explanation{Mit $x_n=-n^2$ ist $\lim_{n\to\infty}x_n=-\infty$ und somit gilt: 
+%         \[\lim_{x\to -\infty}f(x)=\lim_{n\to \infty}f(x_n)=\frac{\var{b}}{\var{a}+\sqrt{|-n^2|}}
+%         =\frac{\var{b}}{\var{a}+n}=0\]
+%         }
+% \end{quickcheck}
+
+% \section{Bestimmte Divergenz an Definitionslücken}
+
+
+% \begin{definition}
+% Sei $f:D\to \R$ eine reelle Funktion und sei $x^*\in\R$ der Grenzwert 
+%   von mindestens einer Folge $(x_n)_{n\geq 1}$ mit $x_n\in D\setminus \{x^*\}$.
+  
+% \begin{enumerate}
+% \item
+%   Die Funktion $f$ heißt \notion{bestimmt divergent gegen $\infty$ für $x \to x^*$}, wenn
+%   \[ \lim_{n\to \infty} f(x_n)= \infty \]
+%   für jede Folge $(x_n)_{n\geq 1}$ mit $x_n\in D\setminus \{x^*\}$ und $\lim_{n\to \infty} x_n=x^*$.
+
+% Wir schreiben dann kurz:
+% \[ \lim_{x\to x^*} f(x)= \infty. \]
+% \item
+%   Die Funktion $f$ heißt \notion{bestimmt divergent gegen $-\infty$ für $x \to x^*$}, wenn
+%   \[ \lim_{n\to \infty} f(x_n)= -\infty \]
+%   für jede Folge $(x_n)_{n\geq 1}$ mit $x_n\in D\setminus \{x^*\}$ und $\lim_{n\to \infty} x_n=x^*$.
+
+% Wir schreiben dann kurz:
+% \[ \lim_{x\to x^*} f(x)= -\infty. \]
+% \end{enumerate}
+% \end{definition}
+
+% \begin{remark}
+% Man definiert entsprechend \notion{linksseitig bestimmte Divergenz} von $f$ über Folgen
+%  $(x_n)_{n\geq 1}$ mit $x_n<x^*$ und schreibt dann
+%  \[ \lim_{x\nearrow x^*} f(x)= \infty\quad \text{bzw.} \quad \lim_{x\nearrow x^*} f(x)=-\infty, \]
+%  und auch \notion{rechtsseitig bestimmte Divergenz} von $f$ über Folgen
+%  $(x_n)_{n\geq 1}$ mit $x_n>x^*$ und schreibt dann
+%  \[ \lim_{x\searrow x^*} f(x)= \infty\quad \text{bzw.} \quad \lim_{x\searrow x^*} f(x)=-\infty. \]
+% \end{remark}
+
+
+% \begin{remark}\label{rem:senkrechte-asymptote}
+% Anschaulich bedeutet die Eigenschaft $\lim_{x\nearrow x^*} f(x)= \infty$, dass der Graph von $f$
+% immer steiler wird, wenn man sich der Stelle $x^*$ von links nähert, und sich der Graph an die senkrechte Gerade $x=x^*$ "`anschmiegt"'.
+% Diese senkrechte Gerade $x=x^*$ nennt man daher \notion{(senkrechte) Asymptote} an den Graphen von $f$.
+
+% Entsprechend fällt der Graph von $f$ bei Annäherung an $x^*$ von links immer stärker, wenn 
+% $\lim_{x\nearrow x^*} f(x)= -\infty$. Auch in diesem Fall "`schmiegt"' sich der Graph an die senkrechte Gerade $x=x^*$ an.
+
+% Für die rechtsseitige bestimmte Divergenz gilt entsprechendes.
+% \end{remark}
+
+
+% \begin{example}
+% \begin{enumerate}
+% \item Wir betrachten die Funktion $f:\R\setminus {\{1\}}\to \R, x\mapsto \frac{x+1}{x-1}$ und untersuchen
+%  das Verhalten bei $x^*=1$.\\
+% Für jede Folge $(x_n)_{n\geq 1}$ mit $\lim_{n\to \infty} x_n=1$ ist
+% \[ \lim_{n\to \infty} \frac{1}{f(x_n)}=\lim_{n\to \infty} \frac{x_n-1}{x_n+1}
+% = \frac{\lim_{n\to \infty} x_n-1}{\lim_{n\to \infty} x_n+1}=\frac{1-1}{1+1}=0.\]
+% Sind nun alle $x_n<1$, dann sind sie auch alle ab einem bestimmten $N$ zwischen $-1$ und $1$ und daher $f(x_n)<0$ für alle $n\geq N$. 
+% Nach den \ref[bestimmte-divergenz][Rechenregeln mit bestimmter Divergenz]{sec:rechenregeln} gilt
+% daher für gegen $1$ konvergente Folgen $(x_n)_{n\geq 1}$ mit $x_n<1$:
+% \[ \lim_{n\to \infty} f(x_n)=-\infty. \]
+% Also ist $ \lim_{x\nearrow 1} f(x)=-\infty.$
+
+% Entsprechend ist $f(x)>0$ für alle $x>1$ und man erhält entsprechend
+% \[ \lim_{x\searrow 1} f(x)= \infty. \]
+
+% Der Graph hat also bei $x=1$ eine senkrechte Asymptote.
+
+% \begin{genericGWTVisualization}[550][800]{mathlet1}
+%  		\begin{variables}
+%  			\function{f}{real}{(x+1)/(x-1)}  
+% 			\point{O}{real}{1,0} 			
+% 			\point{P}{real}{1,1} 			
+%  			\line{l}{real}{var(O),var(P)}
+ 			
+%  		\end{variables}
+%  		\color{l}{#00CC00}
+ 
+%  		\begin{canvas}
+%  			\plotSize{400,300}
+%  			\plotLeft{-4}
+%  			\plotRight{4}
+%  			\plot[coordinateSystem]{f,l }
+%  		\end{canvas}
+%  		\text{Die schwarze Kurve ist der Graph der Funktion $f:\R\setminus \{1\}\to \R$ mit 
+%  		$f(x)=\frac{x+1}{x-1}$. Die grüne Gerade ist die senkrechte Asymptote $x=1$.
+%  		}
+%  	    	\end{genericGWTVisualization}
+% \item Wir betrachten die Funktion $f:\R\setminus {\{1\} }\to \R, x\mapsto \frac{x+1}{(x-1)^2}$ und untersuchen
+%  das Verhalten bei $x^*=1$.\\
+% Für jede Folge $(x_n)_{n\geq 1}$ mit $\lim_{n\to \infty} x_n=1$ ist
+% \[ \lim_{n\to \infty} \frac{1}{f(x_n)}=\lim_{n\to \infty} \frac{(x_n-1)^2}{x_n+1}
+% = \frac{(\lim_{n\to \infty} x_n-1)^2}{\lim_{n\to \infty} x_n+1}=\frac{(1-1)^2}{1+1}=0.\]
+% Für $x>-1$ (und $x\neq 1$) ist auch $f(x)>0$. Da ab einem bestimmten $N$ alle $x_n$ größer als $-1$ sind (da die Folge gegen $1$ konvergiert),
+% gilt nach den \ref[bestimmte-divergenz][Rechenregeln mit bestimmter Divergenz]{sec:rechenregeln} 
+% \[ \lim_{n\to \infty} f(x_n)=\infty. \]
+% Also ist $ \lim_{x\to 1} f(x)=\infty.$
+
+% Der Graph hat also bei $x=1$ eine senkrechte Asymptote und er schmiegt sich von beiden Seiten gegen $\infty$ an.
+
+% \begin{genericGWTVisualization}[550][800]{mathlet1}
+%  		\begin{variables}
+%  			\function{f}{real}{(x+1)/(x-1)^2}  
+% 			\point{O}{real}{1,0} 			
+% 			\point{P}{real}{1,1} 			
+%  			\line{l}{real}{var(O),var(P)}
+ 			
+%  		\end{variables}
+%  		\color{l}{#00CC00}
+ 
+%  		\begin{canvas}
+%  			\plotSize{400,300}
+%  			\plotLeft{-4}
+%  			\plotRight{4}
+%  			\plot[coordinateSystem]{f,l }
+%  		\end{canvas}
+%  		\text{Die schwarze Kurve ist der Graph der Funktion $f:\R\setminus \{1\}\to \R$ mit 
+%  		$f(x)=\frac{x+1}{(x-1)^2}$. Die grüne Gerade ist die senkrechte Asymptote $x=1$.
+%  		}
+%  	    	\end{genericGWTVisualization}
+% \end{enumerate}
+% \end{example}
+
+% Wie die obigen Beispiele schon vermuten lassen, gibt es analog zu den \ref[bestimmte-divergenz][Rechenregeln für Folgen mit bestimmter Divergenz]{sec:rechenregeln} auch Rechenregeln für 
+% $\lim_{x\to x^*} f(x)$.
+
+% \begin{rule}
+% Sei $f:D\to \R$ eine reelle Funktion und sei $x^*\in\R$ der Grenzwert 
+%   von mindestens einer Folge $(x_n)_{n\geq 1}$ mit $x_n\in D\setminus \{x^*\}$.
+
+% Dann gelten:
+% \begin{enumerate}
+% \item \[   \lim_{x\nearrow x^*} f(x)=\infty   \]
+%   genau dann, wenn $\,\lim_{x\nearrow x^*} \frac{1}{f(x)}=0\,$ und 
+% \[ \exists \delta>0 \text{ mit }\quad f(x)>0\text{ für alle } x\in (x^*-\delta; x^*)\cap D. \]
+% \item \[   \lim_{x\nearrow x^*} f(x)=-\infty     \]
+%   genau dann, wenn $\,\lim_{x\nearrow x^*} \frac{1}{f(x)}=0\,$ und
+% \[ \exists \delta>0\text{ mit }\quad f(x)<0\text{ für alle } x\in (x^*-\delta; x^*)\cap D. \]
+% \item \[   \lim_{x\searrow x^*} f(x)=\infty  \]
+%   genau dann, wenn $\,\lim_{x\searrow x^*} \frac{1}{f(x)}=0\,$ und
+% \[ \exists \delta>0\text{ mit }\quad f(x)>0\text{ für alle } x\in (x^*; x^*+\delta)\cap D. \]
+% \item \[   \lim_{x\searrow x^*} f(x)=-\infty   \]
+%   genau dann, wenn $\,\lim_{x\searrow x^*} \frac{1}{f(x)}=0\,$ und
+% \[ \exists \delta>0\text{ mit }\quad f(x)<0\text{ für alle } x\in (x^*; x^*+\delta)\cap D. \]
+% \end{enumerate}  
+% \end{rule}
+
+% \end{visualizationwrapper}
+
+% \begin{quickcheck}
+%     \field{real}
+%     \type{input.number}
+%     \begin{variables}
+%         \number{n}{0}
+%     \end{variables}
+%     \text{Berechen Sie den Grenzwert der Funktion $f(x)=x^2\ln(x^2)$:
+%     \[\lim_{x\to0}f(x)=\]
+%     Tipp: Substituieren Sie: $x=e^y$, passen Sie "$x\to 0$" im limes entsprechend an und berücksichtigen Sie,
+%     dass für jedes Polynom $p(x)$ gilt: $\lim_{x\to\infty}\frac{p(x)}{e^{cx}}=0$ für $c>0$.\\
+%     Antwort:\ansref
+%     }
+%     \begin{answer}
+%         \solution{n}
+%     \end{answer}
+%     \explanation{$\lim_{x\to0}x^2\ln(x^2)=\lim_{y\to-\infty}(e^y)^2\ln((e^y)^2)=
+%     \lim_{y\to-\infty}e^{2y}\ln(e^{2y})=\lim_{y\to-\infty}e^{2y}\cdot2y=0$}
+
+% \end{quickcheck}
+
+
+\end{visualizationwrapper}
+\end{content}

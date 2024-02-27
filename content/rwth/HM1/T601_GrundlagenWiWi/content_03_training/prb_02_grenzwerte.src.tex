@@ -1,0 +1,217 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A02: Konvergenz von Folgen}
+    \lang{en}{input numbers}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A02: Konvergenz von Folgen}}
+\lang{en}{\title{A02: Convergence of Sequences}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/23798}{Ticket 23798}
+\end{block}
+
+
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+
+
+\begin{block}[annotation]
+Kopie: hm4mint/T205_Konvergenz_von_Folgen/ training 4
+
+Im Ticket-System: \href{http://team.mumie.net/issues/9863}{Ticket 9863}
+\end{block}
+
+\begin{problem}
+
+% Erweiterung um Folgen insb. exp>polyn (a), d))
+% Teil b) ist neu (mit unendlich)
+
+	\begin{question}
+		\lang{de}{
+			\text{Bestimmen Sie den Grenzwert $a$ der Folgen $(a_{n})_{n\in\N}$ und geben Sie die Lösung vollständig gekürzt an.
+		\\
+ 		1. $a_{n}= \frac{\var{x22} \cdot n^2}{(-\var{x33}n+\var{bnenner})^\var{x44}} $ für alle $n\in\N$\\ 
+        2. $a_{n}= \frac{\var{azahler}}{\var{anenner}} $ für alle $n\in\N$ \\ 
+ 		3. $a_{n}= \frac{\var{x00} \cdot (\var{bzahler})^4}{(n^2+\var{bnenner})^2} $ für alle $n\in\N$\\
+        4. $a_{n}= \frac{\var{x22}\cdot n^\var{x33}}{\var{x44}^n} $ für alle $n\in\N$\\
+		}
+		}
+\lang{en}{
+  \text{Determine the limit $a$ of the sequences $(a_{n})_{n\in\N}$ and simplify the solution completely.
+		\\
+ 		1. $a_{n}= \frac{\var{x22} \cdot n^2}{(-\var{x33}n+\var{bnenner})^\var{x44}} $ for all $n\in\N$\\
+        2. $a_{n}= \frac{\var{azahler}}{\var{anenner}} $ for all $n\in\N$ \\
+ 		3. $a_{n}= \frac{\var{x00} \cdot (\var{bzahler})^4}{(n^2+\var{bnenner})^2} $ for all $n\in\N$\\
+        4. $a_{n}= \frac{\var{x22}\cdot n^\var{x33}}{\var{x44}^n} $ for all $n\in\N$\\
+        }}
+        
+		%\frac{\var{x0}n^{2}+(\var{x1})n+(\var{x2})}{\var{y0}n^{2}+(\var{y1})n+(\var{y2})}
+		%\frac{\var{x00}(n+(\var{x11}))^{4}}{(n^{2}+(\var{y}))^{2}}
+		\type{input.number}
+		\field{rational}
+
+    \precision[false]{3}
+    \displayprecision{3}
+    \correctorprecision{3}
+		
+		\begin{variables}
+			\randint[Z]{x0}{-5}{5}
+			\randint{x1}{-5}{5}
+			\randint{x2}{-5}{5}
+			
+			\randint[Z]{y0}{1}{10}
+			\randint{y1}{1}{10}
+			\randint[Z]{y2}{1}{10}
+			
+			\randint[Z]{y}{-10}{10}
+			
+			\randint[Z]{x00}{-10}{10}
+			\randint{x11}{-10}{10}
+            
+            \randint{x22}{2}{8}
+            \randint{x33}{2}{8}
+            \randint{x44}{3}{5}
+			
+			\function{al}{x0/y0}
+			\function{bl}{x00}
+            \number{cl}{0}
+			
+			\function[normalize]{azahler}{x0*n*n+ x1 * n+ x2}
+			\function[normalize]{anenner}{y0 * n*n+y1 * n+ y2 }
+			
+			\function[normalize]{bzahler}{n+x11}
+			
+			\function[normalize]{bnenner}{y*y}
+		
+		\end{variables}
+		
+		\begin{answer}
+			\text{1. $a = $}
+			\solution{cl}
+		\end{answer}
+		
+		\begin{answer}
+			\text{2. $a = $}
+			\solution{al}
+		\end{answer}
+    
+        \begin{answer}
+			\text{3. $a = $}
+			\solution{bl}
+		\end{answer}
+        
+        \begin{answer}
+			\text{4. $a = $}
+			\solution{cl}
+		\end{answer}
+	
+    \end{question}
+    
+    \begin{question}
+		\lang{de}{
+			\text{Bestimmen Sie den Grenzwert $a$ der unten stehenden Folgen - vollständig gekürzt -
+            in $\R$, sofern diese konvergieren. Wenn die Folge divergiert, so geben Sie 
+            ${\pm\infty}$ ein (Eingabe als \textit{infty}).\\
+        1. $(\frac{\var{azahler}}{\var{anenner}})_{n\in\N}$\\\\ 
+ 		2. $(\frac{\var{bzahler}}{\var{bnenner}})_{n\in\N}$\\\\
+        3. $(\frac{\var{czahler}}{\var{cnenner}})_{n\in\N}$\\\\
+		4. $(\frac{\var{dzahler}}{\var{dnenner}})_{n\in\N}$\\\\
+		}
+		}
+  \lang{en}{
+  \text{Determine the limit $a$ of the sequences below - simplified completely -
+            in $\R$, if they converge. If the sequence diverges, then enter 
+            ${\pm\infty}$ (enter as \textit{infty}).\\
+        1. $(\frac{\var{azahler}}{\var{anenner}})_{n\in\N}$\\\\ 
+ 		2. $(\frac{\var{bzahler}}{\var{bnenner}})_{n\in\N}$\\\\
+        3. $(\frac{\var{czahler}}{\var{cnenner}})_{n\in\N}$\\\\
+		4. $(\frac{\var{dzahler}}{\var{dnenner}})_{n\in\N}$\\\\
+  }}
+		%\frac{\var{x0}n^{2}+(\var{x1})n+(\var{x2})}{\var{y0}n^{2}+(\var{y1})n+(\var{y2})}
+		%\frac{\var{x00}(n+(\var{x11}))^{4}}{(n^{2}+(\var{y}))^{2}}
+		\type{input.number}
+		\field{rational}
+        \explanation{Merkregel: Der Teil des Bruchs (Zähler oder Nenner) ist stärker, der den größeren Exponenten hat!}
+
+    %\precision[false]{3}
+    %\displayprecision{3}
+    %\correctorprecision{3}
+		
+		\begin{variables}
+			\randint[Z]{x0}{-5}{-1}
+			\randint{x1}{-5}{5}
+			\randint{x2}{2}{6}
+            \randint{x3}{-5}{5}
+			\randint{x4}{2}{8}
+            \randint{x5}{2}{8}
+            \randint{x6}{2}{3}
+			
+			\randint[Z]{y0}{1}{10}
+			\randint{y1}{1}{10}
+					
+			\function[normalize]{azahler}{x0*n+x1}
+			\function[normalize]{anenner}{y0*n*n+y1}
+			
+			\function[normalize]{bzahler}{x2*n^5-x3}
+			\function[normalize]{bnenner}{x4*n^4+5}
+            
+            \function[normalize]{czahler}{3*n^(2*x5)}
+			\function[normalize]{cnenner}{x4*(n^2+2)^x5}
+		
+            \function[normalize]{dzahler}{n*(2*n-5)^x6}
+			\function[normalize]{dnenner}{(3*n+1)^(x6+1)}
+        
+            \function[normalize]{aloes}{0}
+            \function[normalize]{bloes}{infty}
+		    \function[normalize]{cloes}{3/x4}
+		    \function[normalize]{dloes}{2^x6/3^(x6+1)}
+		
+      
+		\end{variables}
+		
+		\begin{answer}
+			\text{1. $a = $}
+			\solution{aloes}
+		\end{answer}
+		
+		\begin{answer}
+			\text{2. $a = $}
+			\solution{bloes}
+		\end{answer}
+        
+        \begin{answer}
+			\text{3. $a = $}
+			\solution{cloes}
+		\end{answer}
+        
+          \begin{answer}
+			\text{4. $a = $}
+			\solution{dloes}
+		\end{answer}
+	
+    \end{question}
+	
+	
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

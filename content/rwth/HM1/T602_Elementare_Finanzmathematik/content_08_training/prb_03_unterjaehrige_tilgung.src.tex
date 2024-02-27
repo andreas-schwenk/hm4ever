@@ -1,0 +1,95 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A04: unterjährige Tilgung}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A04: unterjährige Tilgung}}
+\lang{en}{\title{A04: intra-year repayment}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22674}{Ticket 22674}
+\end{block}
+
+
+\usepackage{mumie.genericproblem}
+
+     \begin{problem}
+     \begin{variables}
+        \drawFromSet{S}{10000,20000,30000}
+        \drawFromSet{p}{6,7,8,9,10,11,12,13}
+        \function{q}{1+p/100}
+        \function{a}{q^2*S/((q+1)(2+p/200))}
+        \function{A}{(2+p/200)*a}
+        \function{RS1}{q*S-A}
+        \function{Z1}{p*S/100-a*p/200}
+        
+     \end{variables}
+          \begin{question}
+          \type{input.number}
+          \lang{de}{\text{Eine Kreditsumme von $\var{S}$\euro soll bei jährlicher Verzinsung von $\var{p}$\% in 2 Jahren 
+          durch halbjährlich-nachschüssig zu zahlende konstante Annuitäten a zurückgezahlt werden. Bei der Verzinsung 
+          sollen die unterjährig gezahlten Tilgungsbeträge berücksichtigt werden. \\
+          
+          Berechnen Sie die halbjährliche Annuität a, die Restschuld nach 1 Jahr $S_{1,2}$, 
+          sowie den konformen Jahreszins $Z_1$ und die konforme Ersatzannuität $A$:\\
+          $a=$\ansref \euro\\
+          $S_{1,2}=$\ansref \euro\\
+          $Z_1=$\ansref \euro\\
+          $A=$\ansref \euro\\
+          }}
+          \lang{en}{\text{A loan of $\var{S}$\euro is to be repaid in 2 years at an annual interest rate of $\var{p}$\%, 
+          in constant annuities paid semi-annually in arrears. The redemption amounts paid during the year
+          are to be taken into account when the interest is calculated. \\
+          
+          Calculate the semi-annual annuity a, the residual debt after 1 year $S_{1,2}$, 
+          as well as the conformal annual interest rate $Z_1$ and the conformal equivalent annuity $A$:\\
+           $a=$\ansref \euro\\
+          $S_{1,2}=$\ansref \euro\\
+          $Z_1=$\ansref \euro\\
+          $A=$\ansref \euro\\
+          }}
+               \begin{answer}
+                    \solution{a}
+               \end{answer} 
+               \begin{answer}
+                    \solution{RS1}
+               \end{answer}  
+               \begin{answer}
+                    \solution{Z1}
+               \end{answer}  
+               \begin{answer}
+                    \solution{A}
+               \end{answer} 
+            \lang{de}{\explanation{Mit $S_{1,2}=qS_{1,1}-A$ und $S_{1,3}=qS_{1,2}-A=0$ lässt sich ausrechnen:
+            $a=\frac{q^2S_{1,1}}{(q+1)(2+\frac{p}{200})}$ und $A=(2+\frac{p}{200})a$ und 
+            $Z_1=\frac{p}{100}S_{1,1}-\frac{ap}{200}$.}}
+            \lang{en}{\explanation{With $S_{1,2}=qS_{1,1}-A$ and $S_{1,3}=qS_{1,2}-A=0$, we can calculate:
+            $a=\frac{q^2S_{1,1}}{(q+1)(2+\frac{p}{200})}$ and $A=(2+\frac{p}{200})a$ and 
+            $Z_1=\frac{p}{100}S_{1,1}-\frac{ap}{200}$.}}
+          \end{question}     
+     \end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

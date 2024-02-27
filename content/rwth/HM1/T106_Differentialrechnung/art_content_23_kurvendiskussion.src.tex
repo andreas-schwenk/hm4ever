@@ -1,0 +1,690 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Kurvendiskussion}
+    \lang{en}{Curves}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T106_Example_D.meta.xml}{T106_Example_D}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T106_Example_C.meta.xml}{T106_Example_C}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T106_Example_B.meta.xml}{T106_Example_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T106_Example_A.meta.xml}{T106_Example_A}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T106_Curvature.meta.xml}{T106_Curvature}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T106_Differentialrechnung/g_art_content_22_extremstellen.meta.xml}{content_22_extremstellen}
+    \link{generic_article}{content/rwth/HM1/T301_Differenzierbarkeit/g_art_content_03_hoehere_ableitungen.meta.xml}{content_03_hoehere_ableitungen}
+    \link{generic_article}{content/rwth/HM1/T104_weitere_elementare_Funktionen/g_art_content_14_potenzregeln.meta.xml}{power-rules}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{6}
+\ombarticle{4}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Kurvendiskussion}\lang{en}{Curves}}
+ 
+\begin{block}[annotation]
+  übungsinhalt
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9034}{Ticket 9034}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{\lang{de}{Krümmung}\lang{en}{Curvature}}\label{sec:kruemmung}
+
+\lang{de}{
+Der vorige Abschnitt behandelte das Wachstumsverhalten von Graphen anhand der ersten Ableitung. Nun soll ein weiterer Aspekt des Verhaltens 
+von Kurven untersucht werden, n\"{a}mlich die Kr\"{u}mmung. Daf\"{u}r ben\"{o}tigt man die zweite Ableitung.
+}
+\lang{en}{
+The previous section dealt with the growth of graphs with the help of the first derivative. 
+One further aspect of the behaviour of curves will now be investigated: concavity. In order to define this properly, we need the second derivative.
+}
+
+
+\begin{block}[info]
+	\lang{de}{
+  Der Graph der Funktion $x^2$ ist nach oben ge\"{o}ffnet, der Graph der Funktion $-x^2$ ist dagegen 
+  nach unten ge\"{o}ffnet.
+  }
+	\lang{en}{
+  The graph of the function $x^2$ opens upwards, and the graph of the function $-x^2$ opens downwards.
+  }
+	\begin{center}
+    \image{T106_Curvature}
+    \end{center}
+	\lang{de}{
+  Stellt man sich vor, dass man mit wachsendem $x$, also von links nach rechts, auf dem Graphen 
+	entlangf\"{a}hrt, so f\"{a}hrt man auf dem ersten Graphen eine 
+	Linkskurve, auf dem zweiten Graphen hingegen eine Rechtskurve. Den ersten Graphen nennt man auch 
+	linksgekr\"{u}mmt, den zweiten rechtsgekr\"{u}mmt. 
+	Wir beobachten, dass bei einer Linkskurve die Steigung zunimmt, dass also die Ableitungsfunktion 
+	$f'$ monoton w\"{a}chst. 
+	Bei einer Rechtskurve nimmt die Steigung ab, dort ist die Ableitungsfunktion $f'$ monoton fallend.
+  }
+	\lang{en}{
+  Regions of a function that are concave up have increasing slope, in that the first derivative $f'$ 
+  is monotonically increasing. 
+	Regions of a function that are concave down have decreasing slope and the derivative in that region 
+	is monotonically decreasing.
+	}
+\end{block}
+
+\begin{definition}
+\label{def:zweimaldiffbar}
+  \lang{de}{
+  	Sei $f$ eine differenzierbare Funktion mit Ableitung $f'$. Wenn die Ableitungsfunktion $f'$ in 
+    allen Stellen	des Definitionsbereiches differenzierbar ist, hei{\ss}t $f$ \textit{zweimal 
+    differenzierbar}. Man schreibt dann statt $(f')'$ kurz $f''$.\\
+		Die \textit{zweite Ableitung von $f$ in $x_0$} ist also die Ableitung von $f'$ und 
+  }
+  \lang{en}{
+		Let $f$ be a differentiable function with first derivative $f'$. If the first derivative $f'$ is 
+    differentiable at every point in its domain, then the function $f$ is called \textit{twice 
+    differentiable}. Instead of writing $(f')'$, we write $f''$.\\
+		The \textit{second derivative of $f$ at $x_0$} is just the derivative of $f'$:
+  }
+		\[
+			f''(x_0)=\lim_{h\rightarrow 0}\frac{f'(x_0+h)-f'(x_0)}{h}
+		\]
+
+	
+\end{definition}
+
+\lang{de}{
+Wir setzen in diesem Abschnitt voraus, dass $f$ auf dem Definitionsbereich zweimal differenzierbar 
+ist, dass also auch die Ableitung $f'$ eine auf dem Definitionsbereich differenzierbare Funktion ist.
+}
+\lang{en}{
+In this section we will require that $f$ is differentiable on its domain, and that its derivative 
+$f'$ is a function defined on its domain.
+}
+
+\begin{example} 
+	\begin{enumerate}
+	\item
+	    \lang{de}{Sei $f(x)=x^3+2x^2+5$. Dann ist $f'(x)=3x^2+4x$ und $f''(x)=6x+4$.}
+	    \lang{en}{Let $f(x)=x^3+2x^2+5$. Then $f'(x)=3x^2+4x$ and $f''(x)=6x+4$.}
+	\item 
+	    \lang{de}{Sei $f(x)=\sin(x)$. Es ist $f'(x)=\cos(x)$, folglich $f''(x)=-\sin(x)$.}
+	    \lang{en}{Let $f(x)=\sin(x)$. Then $f'(x)=\cos(x)$ and $f''(x)=-\sin(x)$.}
+	\item 
+	    \lang{de}{Sei $f(x)=\cos(x)$. Wir erhalten $f'(x)=-\sin(x)$ und $f''(x)=-\cos(x)$.}
+	    \lang{en}{Let $f(x)=\cos(x)$. Then $f'(x)=-\sin(x)$ and $f''(x)=-\cos(x)$.}
+	\item 
+	    \lang{de}{Sei $f(x)=e^{2x}$. Nach der Kettenregel ist $f'(x)=2e^{2x}$ und $f''(x)=4e^{2x}$.}
+	    \lang{en}{Let $f(x)=e^{2x}$. By the chain rule, $f'(x)=2e^{2x}$ and $f''(x)=4e^{2x}$.}
+	\item 
+	    \lang{de}{Sei $f(x)=\ln(x)$. Dann ist $f'(x)=\frac{1}{x}$ und $f''(x)=-\frac{1}{x^2}$.}
+	    \lang{en}{Let $f(x)=\ln(x)$. Then $f'(x)=\frac{1}{x}$ and $f''(x)=-\frac{1}{x^2}$.}
+	\end{enumerate}
+\end{example}
+
+	\begin{genericGWTVisualization}[550][1000]{mathlet1}
+		\begin{variables}
+			\number[editable]{x0}{rational}{1/2}
+			\point{P}{rational}{var(x0),0}
+			%\pointOnCurve{P}{rational}{0}{1}  % verschiebbarer Punkt auf der x-Achse, initial p=(1;0)
+			%\number{x0}{rational}{var(P)[x]}
+			\number{xc}{rational}{var(x0)}  % nicht editierbare Kopie von x0.
+			\function{f0}{rational}{x^4-x^3-3*x^2+2*x}
+			\function{f1}{rational}{4*x^3-3*x^2-6*x+2}
+			\function{f2}{rational}{12*x^2-6*x-6}
+			\number{y0}{rational}{var(x0)^4-var(x0)^3-3*var(x0)^2+2*var(x0)}
+			\number{y1}{rational}{4*var(x0)^3-3*var(x0)^2-6*var(x0)+2}
+			\number{y2}{rational}{12*var(x0)^2-6*var(x0)-6}
+			\number{y3}{rational}{24*var(x0)-6}
+			\point{Pc}{rational}{var(P)[x],var(P)[y]}   % Kopien von P zum anzeigen in verschiedenen canvas.
+			\point{Pcc}{rational}{var(P)[x],var(P)[y]}
+			\point{P0}{rational}{var(x0),var(y0)}
+			\point{P1}{rational}{var(x0),var(y1)}
+			\point{P2}{rational}{var(x0),var(y2)}
+%% ---- Krümmungskurve von Graph(f) am Punkt P0; funktioniert nicht wegen Variablen in der Definition.
+%			\parametricFunction{Kr}{rational}{var(xc)+t, var(y0)+t*var(y1)+0.5*t^2*var(y2),-0.3,0.3,60}
+%% ---- Tangente an Graph(f') am Punkt P1; funktioniert nicht wegen Variablen in der Definition.
+%			\parametricFunction{Ta}{rational}{var(xc)+t, var(y1)+t*var(y2),-0.3,0.3,60}
+		\end{variables}
+		
+%		\label{P}{$\textcolor{BLUE}{P}$}
+		\color{f0}{#0066CC}
+		%\color{P0}{DARK_BLUE}
+		\color{f1}{#00CC00}
+		%\color{P1}{DARK_CYAN}
+		\color{f2}{#CC00CC}
+		%\color{P2}{DARK_GREEN}
+%		\color{P2}{DARK_RED}   % wenn Kr und Ta möglich, dann P2 auch DARK_RED
+% 		\color{Kr}{DARK_RED}
+% 		\color{Ta}{DARK_RED}
+% 		\label{f0}{@2d[$\textcolor{BLUE}{f(x)}$]}
+% 		\label{f1}{@2d[$\textcolor{CYAN}{f'(x)}$]}
+% 		\label{f2}{@2d[$\textcolor{GREEN}{f''(x)}$]}
+
+		\lang{de}{\text{
+    Für $x=\var{x0}$ 
+		\IFELSE{var(y2)=0}{geht der 
+			Funktionsgraph von $f(x)=\var{f0}$ im Punkt $P=(\var{xc},\var{y0})$ von einer 
+			\IFELSE{var(y3)<0}{Linkskurve in eine Rechtkurve}{Rechtskurve in eine Linkskurve} über. Die
+			Steigung des Graphen ist also dort (lokal) am \IFELSE{var(y3)<0}{größten}{kleinsten}.}{macht 
+			der Funktionsgraph von $f(x)=\var{f0}$ im Punkt $P=(\var{xc},\var{y0})$
+		eine \IFELSE{var(y2)>0}{Linkskurve.}{Rechtskurve.} Die Steigungen des Graphen werden daher immer 
+		\IFELSE{var(y2)>0}{größer.}{kleiner.}}
+		}}
+    \lang{en}{\text{
+    For $x=\var{x0}$ 
+		\IFELSE{var(y2)=0}{the graph of the function $f(x)=\var{f0}$ changes from a
+    \IFELSE{var(y3)<0}{concave up to a concave down}{concave down to a concave up} at the point 
+    $P=(\var{xc},\var{y0})$. The slope of the graph is hence (locally) at a
+    \IFELSE{var(y3)<0}{maximum}{minimum}.}
+    {the graph of the function $f(x)=\var{f0}$ is \IFELSE{var(y2)>0}{concave up}{concave down} at 
+    point $P=(\var{xc},\var{y0})$. The slope of the graph hence keeps 
+		\IFELSE{var(y2)>0}{increasing.}{decreasing.}}
+		}}
+		\begin{canvas}
+			\updateOnDrag[false]
+			\plotSize{250,400}
+			\plotLeft{-2.5}
+			\plotRight{2.5}
+			\plot[coordinateSystem]{P, f0, P0}
+%			\plot[coordinateSystem]{P, Kr, f0, P0}
+		\end{canvas}
+		\lang{de}{\text{
+		\IFELSE{var(y2)=0}{Dass die Steigung des Graphen von $f(x)=\var{f0}$ dort
+		(lokal) am \IFELSE{var(y3)<0}{größten}{kleinsten} ist, ist gleichbedeutend dazu, dass die Ableitungsfunktion 
+		$f'(x)=\var{f1}$ bei $x=\var{x0}$ ein \IFELSE{var(y3)<0}{Maximum}{Minimum} 
+		hat.}{Dass die Steigungen des Graphen von $f(x)=\var{f0}$ immer \IFELSE{var(y2)>0}{größer}{kleiner} werden, 
+		bedeutet, dass 
+		die Ableitungsfunktion $f'(x)=\var{f1}$ bei $x=\var{x0}$ \IFELSE{var(y2)>0}{steigt.}{fällt.}}
+		}}
+    \lang{en}{\text{
+		\IFELSE{var(y2)=0}{The slope of the graph of $f(x)=\var{f0}$ having a (local)
+    \IFELSE{var(y3)<0}{maximum}{minimum} there is equivalent to the derivative 
+		$f'(x)=\var{f1}$ having a \IFELSE{var(y3)<0}{maximum}{minimum} at $x=\var{x0}$.}
+    {The slope of the graph of $f(x)=\var{f0}$ being \IFELSE{var(y2)>0}{increasing}{decreasing} 
+    around $x=\var{x0}$ is equivalent to the derivative $f'(x)=\var{f1}$ 
+    \IFELSE{var(y2)>0}{increasing}{decreasing} around $x=\var{x0}$.}
+		}}
+		\begin{canvas}
+			\updateOnDrag[false]
+			\plotSize{250,400}
+			\plotLeft{-2.5}
+			\plotRight{2.5}
+			\plot[coordinateSystem]{Pc, f1, P1}
+%			\plot[coordinateSystem]{Pc, Ta, f1, P1}
+		\end{canvas}
+		\lang{de}{\text{
+    Dass die Ableitungsfunktion $f'(x)=\var{f1}$ bei $x=\var{x0}$
+		\IFELSE{var(y2)=0}{ein \IFELSE{var(y3)<0}{Maximum}{Minimum} 
+		hat, ist gleichbedeutend damit, dass deren Ableitung, also die zweite Ableitung $f''(x)=\var{f2}$, 
+		bei $x=\var{xc}$ gleich $0$ ist und einen Vorzeichenwechsel von 
+		\IFELSE{var(y3)<0}{Plus nach Minus}{Minus nach Plus} hat.}{\IFELSE{var(y2)>0}{steigt}{fällt}, ist 
+		gleichbedeutend damit, dass
+		die zweite Ableitung $f''(x)=\var{f2}$ bei $x=\var{xc}$ \IFELSE{var(y2)>0}{größer}{kleiner} als $0$ ist.}
+		}}
+    \lang{en}{\text{
+    The derivative $f'(x)=\var{f1}$ 
+		\IFELSE{var(y2)=0}{having a \IFELSE{var(y3)<0}{maximum}{minimum} 
+		at $x=\var{x0}$ is equivalent to its own derivative, that is the second derivative
+    $f''(x)=\var{f2}$, 
+		being equal to $0$ at $x=\var{xc}$ and switching signs from 
+		\IFELSE{var(y3)<0}{positive to negative}{negative to positive}.}
+    {\IFELSE{var(y2)>0}{increasing}{decreasing} is equivalent to the second derivative 
+    $f''(x)=\var{f2}$ being \IFELSE{var(y2)>0}{greater}{less} than $0$ at $x=\var{xc}$.}
+		}}
+		\begin{canvas}
+			\updateOnDrag[false]
+			\plotSize{250,400}
+			\plotLeft{-2.5}
+			\plotRight{2.5}
+			\plot[coordinateSystem]{Pcc, f2, P2}
+		\end{canvas}
+	    	\end{genericGWTVisualization}
+
+\begin{rule}\label{rule:recht_links_kruemmung}
+	\lang{de}{
+  Ist in einem Intervall $f''(x)> 0$ f\"{u}r $x\in I$, so beschreibt $f$ in $I$ eine Linkskurve. Ist 
+  $f''(x)< 0$ f\"{u}r $x\in I$, so beschreibt $f$	eine Rechtskurve.
+  }
+	\lang{en}{
+  For some interval $I$, if $f''(x)>0$ for $x\in I$ then $f$ is concave up on $I$. If $f''(x)<0$ for 
+  $x\in I$ then $f$ is concave down on $I$.
+  }
+\end{rule}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\number{c}{12}   % schönere Zahlen mit c=12 (auf jeden Fall muss c>0 sein.)
+			\randint{ns1}{-2}{0}
+			\randint{ns2}{1}{2}
+			\randint{a}{-3}{3}
+			\function[normalize]{dfak}{c*(x-ns1)*(x-ns2)}
+			\function[expand,normalize]{d}{c*(x-ns1)*(x-ns2)}
+			\function[normalize]{dd}{(c/3)*x^3-(c/2)*(ns1+ns2)*x^2+c*ns1*ns2*x+a}
+			\function[normalize]{d3}{(c/12)*x^4-(c/6)*(ns1+ns2)*x^3+(c/2)*ns1*ns2*x^2+a*x}
+		
+		\end{variables}
+		
+			\text{\lang{de}{
+      Bestimmen Sie den Bereich, in dem der Graph der Funktion $f(x)=\var{d3}$ eine Rechtskurve 
+      beschreibt.\\
+			Er macht im Bereich \ansref$\leq x\leq $\ansref eine Rechtskurve.
+      }
+      \lang{en}{
+      Determine the interval over which the function $f(x)=\var{d3}$ describes a concave down graph.\\
+      It describes a concave down graph on the interval \ansref$\leq x\leq $\ansref.
+      }}
+		
+		\begin{answer}
+			\solution{ns1}
+		\end{answer}
+		\begin{answer}
+			\solution{ns2}
+		\end{answer}
+		\explanation{\lang{de}{
+    Der Funktionsgraph macht in dem Bereich eine Rechtskurve, in dem die zweite Ableitung $\leq 0$ 
+    ist. Wegen $f'(x)=\var{dd}$ und $f''(x)=\var{d}=\var{dfak}$ ist dies der Bereich 
+    $\var{ns1}\leq x\leq \var{ns2}$.
+    }
+    \lang{en}{
+    The graph of the function is concave down wherever the second derivative is $\leq 0$. As 
+    $f'(x)=\var{dd}$ and $f''(x)=\var{d}=\var{dfak}$, the interval is $\var{ns1}\leq x\leq \var{ns2}$.
+    }}
+	\end{quickcheck}
+
+
+\section{\lang{de}{Wendestellen und Sattelpunkte}\lang{en}{Turning points and saddle points}}\label{sec:wendest_sattel}
+
+\begin{definition}
+\lang{de}{
+Sei $f$ eine zweimal differenzierbare Funktion. Einen Punkt $P$, an dem der Graph von $f$ von einer 
+Rechtskurve in eine Linkskurve oder von einer Linkskurve in eine Rechtskurve \"{u}bergeht, nennt man 
+einen \emph{Wendepunkt}. Die x-Koordinate eines solchen Punktes $P$, also die Stelle, an der dies 
+auftritt, nennt man \emph{Wendestelle} von $f$.
+\\\\
+Besitzt der Graph von $f$ an einem Wendepunkt eine waagrechte Tangente, so nennt man den Punkt auch 
+\emph{Sattelpunkt} und die zugehörige Stelle \emph{Sattelstelle}.
+}
+\lang{en}{
+Let $f$ be a twice differentiable function. A point $P$ at which the graph of $f$ changes from 
+concave down to concave up or vice versa is called a \emph{turning point}. We say the turning point 
+is at the $x$-coordinate of such a $P$.
+\\\\
+If the graph of $f$ has a horizontal tangent at a turning point, the point is called an 
+\emph{inflection point}.
+}
+\end{definition}
+
+\begin{example}
+	\lang{de}{
+  Der Graph der Funktion $f(x)=x^4-2x^3+2x+1$ besteht aus einer Linkskurve f\"{u}r $x<0$, einer 
+  Rechtskurve f\"{u}r $0<x<1$ und wieder einer Linkskurve f\"{u}r $x>1$. Die Wendestellen liegen 
+  damit bei $x=0$ und $x=1$.
+  }
+	\lang{en}{
+  The graph of the function $f(x)=x^4-2x^3+2x+1$ consists of a section that is concave up for $x<0$, 
+  a concave down section for $0<x<1$, and a concave up section for $x>1$. 
+	The inflection points are thus at the points $x=0$ and $x=1$.
+  }
+	
+	\begin{center}
+    \image{T106_Example_A}
+    \end{center}
+	\lang{de}{Die Ableitung berechnet sich zu }
+	\lang{en}{The first derivative can be calculated to be}
+	$f'(x)=4x^3-6x^2+2$.  
+	
+	\begin{center}
+    \image{T106_Example_B}
+    \end{center}
+	
+	\lang{de}{
+  Man sieht am Schaubild von $f'$, dass $f'$ bis zur Stelle $x=0$ w\"{a}chst, um danach zu fallen. 
+  Hier muss also ein Vorzeichenwechsel von $(f')'=f''$ von positiv zu negativ stattfinden.
+	An der Stelle $x=1$ muss dagegen das Vorzeichen von $f''$ von negativ zu positiv wechseln.}
+	\lang{en}{
+  From the image it can be seen that $f'$ is increasing until the point $x=0$ and then starts 
+  decreasing. At this point the sign of $f(')'=f''$ changes from positive to negative. At the point 
+  $x=1$ the sign of $f''$ changes back from negative to positive.
+  }
+	
+	\begin{center}
+    \image{T106_Example_C}
+    \end{center}
+	
+	\lang{de}{
+  Dies erkennt man auch an der Form der zweiten Ableitung: $f''(x)=12x^2-12x=12x(x-1)$. $f''(x)$ ist 
+  positiv f\"{u}r $x<0$ und $x>1$ (Linkskurve von $f$) und negativ f\"{u}r $0<x<1$ (Rechtskurve von 
+  $f$). \\
+	Diese Beobachtung nutzen wir, um den Begriff der Wendestelle sauber mathematisch zu definieren. }
+	\lang{en}{
+  This can be recognized from the form of the second derivative: $f''(x)=12x^2-12x=12x(x-1)$. 
+  $f''(x)$ is positive for $x<0$ and $x>1$ (concave up) and negative for $0<x<1$ (concave down).\\
+	This observation can be used in order to neatly define the mathematical idea of an inflection 
+  point.
+  }
+\end{example}
+
+\begin{theorem}\label{thm:notw_hinr_bedg_wendepkt}
+	\lang{de}{
+  Sei $f$ zweimal differenzierbar. Ist $f''(x)=0$ und wechselt $f''$ in $x$ das Vorzeichen, so ist 
+	$x$ eine Wendestelle und der Punkt $(x;f(x))$ ein Wendepunkt.\\
+     \floatright{\href{https://www.hm-kompakt.de/video?watch=525}{\image[75]{00_Videobutton_schwarz}}}\\~
+  }
+	\lang{en}{
+  Let $f$ be twice differentiable. If $f''(x)=0$ and the sign of $f''$ changes from one side to 
+  another at $x$,	then $x$ is a \emph{turning point}.}
+\end{theorem}
+
+\lang{de}{
+Die hinreichende Bedingung lässt sich mittels 
+\ref[content_03_hoehere_ableitungen][höheren Ableitungen]{def:höhere_Ableitungen} und einem 
+\ref[content_22_extremstellen][Satz]{def:Extrema} aus vorigem Kapitel auch anders formulieren. Dazu 
+die nachfolgende Bemerkung.
+}
+\lang{en}{
+The above sufficient condition can be formulated differently using 
+\ref[content_03_hoehere_ableitungen][higher derivatives]{def:höhere_Ableitungen} and a 
+\ref[content_22_extremstellen][theorem]{def:Extrema} from the previous chapter:
+}
+
+\begin{remark}
+\lang{de}{
+Sei $f$ auf $I$ dreimal differenzierbar $x_0 \in I$ ein innerer Punkt. Ist $f''(x_0) = 0$ und gilt $f'''(x_0) \neq 0$, so liegt in $x_0$ eine Wendestelle vor.
+}
+\lang{en}{
+Let $f$ be thrice differentiable on an interval $I$ and let $x_0 \in I$ be an interior point. If 
+$f''(x_0) = 0$ and $f'''(x_0) \neq 0$, then there is a turning point at $x_0$.
+}
+\end{remark}
+
+
+
+% \begin{remark}
+% 	\lang{de}{F\"{u}r ein einfaches Kriterium zur Bestimmung einer Wendestelle ben\"{o}tigt man also die 2. Ableitung, die 1. Ableitung ist nicht ausreichend. 
+% 	Die 1. Ableitung hilft aber bei der weiteren Unterscheidung: Im Beispiel 6.3 sieht man, 
+% 	dass die Art der Wendestellen in $0$ und $1$ 
+% 	verschieden ist - in $1$ hat die Tangente, die man an den Funktionsgraphen anlegt, die Steigung $0$, in $0$ hat die Tangente an den Graphen die 
+% 	Steigung $2$. \\
+% 	Eine Wendestelle $x$, in der zus\"{a}tzlich $f'(x)=0$ gilt, bezeichnet man auch als Sattelstelle. \\
+% 	Den dazugeh\"{o}rigen Punkt $(x;f(x))$ auf dem Graphen nennt man analog Sattelpunkt.\\
+% 	Jeder Sattelpunkt ist also insbesondere ein 
+% 	Wendepunkt und ein station\"{a}rer Punkt.}
+% 	\lang{en}{For a simple critierium for determining an inflection point, we need the second derivative: the first derivative is not sufficient.
+% 	The first derivative does however help in describing the inflection point further. In Example 6.3 we can see that the type of inflection point at $x=0$ and $x=1$ is different. At $x=1$ the slope of the tangent
+% 	is $0$, and at $x=0$ the slope of the tangent is $2$.\\
+% 	An inflection point $x$ that also satisfies $f'(x)=0$ is called a saddle point.\\
+% 	Every saddle point is both an inflection point as well as a critical point.}
+% \end{remark}
+
+\begin{example}
+	\lang{de}{
+  Im vorherigen Beispiel zu $f(x)=x^4-2x^3+2x+1$ wurde gezeigt, dass $f$ in $x=0$ und $x=1$ 
+  Wendestellen besitzt. Da $f'(x)=4x^3-6x^2+2$ ist, erh\"{a}lt man $f'(0)=2$ und $f'(1)=0$. In $x=1$ 
+  liegt also eine Sattelstelle vor, in $x=0$ liegt hingegen wegen $f'(0)\neq 0$ keine Sattelstelle 
+  vor.
+  }
+	\lang{en}{
+  In the previous example where $f(x)=x^4-2x^3+2x+1$, it was shown that $f$ has turning points at 
+  $x=0$ and $x=1$. Because $f'(x)=4x^3-6x^2+2$, we get $f'(0)=2$ and $f'(1)=0$. At the point $x=1$ 
+  the function has an inflection point, and at $x=0$, because $f'(0)\neq 0$, the function does not 
+  have an inflection point.
+  }
+\end{example}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\number{c}{12}   % schönere Zahlen mit c=12 (auf jeden Fall muss c>0 sein.)
+			\randint{ns1}{-2}{0}
+			\randint{ns2}{1}{2}
+			\randint{a}{-3}{3}
+			\function[normalize]{dfak}{c*(x-ns1)*(x-ns2)}
+			\function[expand,normalize]{d}{c*(x-ns1)*(x-ns2)}
+			\function[normalize]{dd}{(c/3)*x^3-(c/2)*(ns1+ns2)*x^2+c*ns1*ns2*x+a}
+			\function[normalize]{d3}{(c/12)*x^4-(c/6)*(ns1+ns2)*x^3+(c/2)*ns1*ns2*x^2+a*x}
+		
+		\end{variables}
+		
+			\text{\lang{de}{
+      Bestimmen Sie die Wendestellen der Funktion $f(x)=\var{d3}$.\\
+			Die Wendestellen (in aufsteigender Reihenfolge) sind \ansref und \ansref.
+      }
+      \lang{en}{
+      Determine the turning points of the function $f(x)=\var{d3}$. \\
+      The turning points (in increasing order) are \ansref and \ansref.
+      }}
+		
+		\begin{answer}
+			\solution{ns1}
+		\end{answer}
+		\begin{answer}
+			\solution{ns2}
+		\end{answer}
+		\explanation{\lang{de}{
+    Kandidaten für Wendestellen sind die Stellen $x_0$, an denen die zweite Ableitung gleich Null 
+    ist. Wegen $f'(x)=\var{dd}$ und $f''(x)=\var{d}=\var{dfak}$ sind die Kandidaten die Stellen 
+    $\var{ns1}$ und $\var{ns2}$. Nun muss noch $f'''(\var{ns1})\neq 0$ und $f'''(\var{ns2})\neq 0$ 
+    geprüft werden.
+    }
+    \lang{en}{
+    Candidates for turning points are the points $x_0$ at which the second derivative of $f$ is 
+    equal to zero. As $f'(x)=\var{dd}$ and $f''(x)=\var{d}=\var{dfak}$, the candidates are 
+    $\var{ns1}$ and $\var{ns2}$. Now we simply need to show that $f'''(\var{ns1})\neq 0$ and 
+    $f'''(\var{ns2})\neq 0$.
+    }}
+	\end{quickcheck}
+
+
+\section{\lang{de}{Kurvendiskussion}\lang{en}{Curve sketching}}\label{sec:kurvendiskussion}
+\lang{de}{
+Bei einer Kurvendiskussion wird eine Funktion $f$ auf ihre wesentlichen Merkmale \"{u}berpr\"{u}ft. 
+Zu diesen k\"{o}nnen der maximale Definitionsbereich, die Nullstellen, das Monotonieverhalten, 
+asymptotisches Verhalten, Wende-, Sattel- und Extremalstellen und einige mehr z\"{a}hlen.\\
+In diesem Abschnitt soll jedoch der Hauptaspekt auf einigen hier behandelten Merkmalen liegen. Unter 
+einer Kurvendiskussion wollen wir hier also das Untersuchen einer Funktion auf Wende- und 
+Sattelstellen sowie auf Extrema verstehen.
+}
+\lang{en}{
+When looking to sketch the graph of a function $f$, the important characteristics must be included. 
+This includes its domain, roots, monotonicity, asymptotic behaviour, turning points, inflection 
+points, extrema, etc.\\
+In this section we restrict the discussion to a function's turning and inflection points, as well as 
+its extrema.
+}
+
+\begin{example}
+\lang{de}{
+  Sei $f(x)=x^4+4x^3+4x^2$. Dann ist \[f'(x)=4x^3+12x^2+8x=4x(x^2+3x+2)=4x(x+1)(x+2).\] $f'$ besitzt 
+  also die Nullstellen $x_0=0$, $x_1=-1$ und $x_2=-2$. Da $f'(x)$ in allen drei Nullstellen das 
+  Vorzeichen wechselt, liegen in $x_1$, $x_2$ und $x_3$ Extremalstellen vor.\\
+  Da das Vorzeichen in $x_0$ von negativ zu positiv wechselt, liegt in $x_0=0$ ein lokales Minimum 
+  vor. Analog folgert man, dass in $x_1=-1$ ein lokales Maximum und in $x_2=-2$ ein lokales Minimum 
+  vorliegt.\\
+	Weiter ist \[f''(x)=12x^2+24x+8=12(x^2+2x+\frac{2}{3}).\] Die Nullstellen von $f''$ berechnen sich 
+  nach der $pq$-Formel zu $x_3=-1+\frac{1}{\sqrt{3}}$ und $x_4=-1-\frac{1}{\sqrt{3}}$. Wir haben also 
+  \[f''(x)=12(x+(1+\frac{1}{\sqrt{3}}))(x+(1-\frac{1}{\sqrt{3}})).\]
+  $f''$ wechselt also in $x_3$ und $x_4$ das Vorzeichen und damit liegen in $x_3$ und $x_4$ 
+  Wendestellen vor. 
+  Da weder $x_3$ noch $x_4$ Nullstellen von $f'$ sind, sind beide Wendestellen keine Sattelstellen. 
+  $f$ besitzt also keine Sattelstellen.
+	\\\\
+	Nun muss noch auf globale Extrema untersucht werden. Da $f(x)=x^2(x+2)^2$ gilt, nimmt $f$ stets 
+  Werte gr\"{o}{\ss}er oder gleich Null an.	Da $f(x_0)=f(0)=0$ und $f(x_2)=f(-2)=0$, liegen in $x_0$ 
+  und $x_2$ globale Minimalstellen vor. Nun muss noch die lokale Maximalstelle $x_1$ untersucht 
+  werden.	Da $f(-1)=1$, aber z.B. $f(1)=9>1=f(-1)$, kann $x_1$ keine globale Maximalstelle sein. Dies 
+  h\"{a}tte man z.B. auch einsehen k\"{o}nnen, indem man $\lim_{x\rightarrow\infty}f(x)=\infty$ oder 
+  $\lim_{x\rightarrow -\infty}f(x)=\infty$ bildet.
+}
+	
+\lang{en}{
+  Let $f(x)=x^4+4x^3+4x^2$, and hence $f'(x)=4x^3+12x^2+8x=4x(x^2+3x+2)=4x(x+1)(x+2)$. $f'$ has roots 
+  $x_0=0$, $x_1=-1$, and $x_2=-2$. Because $f'(x)$ changes sign at each of its three roots, there are 
+  extrema at $x_1$, $x_2$ and $x_3$.\\
+	Because the sign changes from positive to negative at $x_0$, there is a local minimum at $x_0=0$. 
+  Analogously, we can show that $f$ has a 
+	local maximum at $x_1=-1$ and a local minimum at $x_2=-2$.\\
+	The second derivative is \[f''(x)=12x^2+24x+8=12(x^2+2x+\frac{2}{3}),\] and the roots of $f''$ 
+  can be calculated using the $p-q$ formula to be $x_3=-1+\frac{1}{\sqrt{3}}$ and 
+  $x_4=1-\frac{1}{\sqrt{3}}$.
+	For this reason, $f''$ can be rewritten as:
+  \[f''(x)=12(x+(1+\frac{1}{\sqrt{3}}))(x+(1-\frac{1}{\sqrt{3}})).\]
+  $f''$ changes sign at $x_3$ and $x_4$ and hence $x_3$ and $x_4$ are turning points. Because neither 
+  $x_3$ nor $x_4$ are roots of $f'$, neither of these turning points are inflection points, i.e. $f$ 
+  has no inflection points.
+	\\\\
+	Now the existence of global extrema are investigated. Because $f(x)=x^2(x+2)^2$, $f$ is always 
+  greater than or equal to zero. Because $f(x_0)=f(0)=0$ and $f(x_2)=f(-2)=0$, $f$ has global minima 
+  at $x_0$ and $x_2$.	Although there is a local maximum at $x_1$, $f$ does not have a global maximum 
+  at $x_1$ because, for example, $f(1)=9>1=f(-1)$. The fact that $f$ has no global maximum can also 
+  be seen by taking either the limit $\lim_{x\rightarrow\infty}f(x)=\infty$ or the limit 
+  $\lim_{x\rightarrow -\infty}f(x)=\infty$.
+}
+	
+	\begin{center}
+    \image{T106_Example_D}
+    \end{center}
+\end{example} 
+
+% \lang{de}{Sie haben nun mit der Kurvendiskussion ein Hilfsmittel zum Analysieren einer Funktion $f$ und k\"{o}nnen sich mit ihr auch ein ungef\"{a}hres Bild des 
+% Kurvenverlaufs verschaffen. Das folgende Mathlet soll der Anschauung dienen. In ihm k\"{o}nnen Sie Eigenschaften der Kurven von $f$, $f'$ und $f''$ 
+% miteinander in Beziehung setzen.}
+% \lang{en}{Curve sketching is a valuable tool for analyzing functions. 
+% You can use it to get a rough picture of how the graph of a function $f$ looks. In the following applet you can change the properties of $f$ and watch how the curves of $f$, $f'$, and $f''$ relate to each other.}
+
+
+% \begin{genericGWTVisualization}[550][700]{mathlet1}
+% \lang{de}{\title{Funktion, Ableitung und 2. Ableitung}}
+% \lang{en}{\title{A Function and its First and Second Derivatives}}
+% \begin{variables}
+% 	\number[editable]{a}{rational}{0}
+% 	\number[editable]{b}{rational}{0}
+% 	\number[editable]{c}{rational}{2}
+% 	\number[editable]{d}{rational}{2}
+%   	\number{u}{rational}{var(a)+var(b)+var(c)+var(d)}
+%   	\number{v}{rational}{var(a)*var(b)+var(a)*var(c)+var(a)*var(d)+var(b)*var(c)+var(b)*var(d)+var(c)*var(d)}
+%   	\number{s}{rational}{var(a)*var(b)*var(c)+var(a)*var(b)*var(d)+var(a)*var(c)*var(d)+var(b)*var(c)*var(d)}
+% 	\function{fint}{rational}{(x-var(a))*(x-var(b))*(x-var(c))*(x-var(d))} %interpolation polynomial through 4 points
+% 	\function{fint_prime}{rational}{4*x^3-3*var(u)*x^2+2*var(v)*x-var(s)} % its first derivative
+% 	\function{fint_second}{rational}{12*x^2 -6*var(u)*x+2*var(v)} % its second derivative
+% \end{variables}
+%  \color{fint}{BLUE}
+%  \color{fint_prime}{DARK_RED}
+%  \color{fint_second}{DARK_GREEN}
+%  	\label{fint}{@2d[$\textcolor{BLUE}{f}$]}
+%  	\label{fint_prime}{@2d[$\textcolor{DARK_RED}{f'}$]}
+%  	\label{fint_second}{@2d[$\textcolor{DARK_GREEN}{f''}$]}
+% 	\begin{canvas}
+% 	\plotSize{540}
+% 	\plotLeft{-6}
+% 	\plotRight{6}
+% 	\plot[coordinateSystem]{fint,fint_prime,fint_second}
+% 	\end{canvas}
+% 
+%     \lang{de}{\text{Um den \textcolor{BLUE}{blauen Graphen der Funktion $f(x)=(x-a)(x-b)(x-c)(x-d)$} zu verändern,  wählen Sie }}
+%     \lang{en}{\text{To change the \textcolor{BLUE}{blue graph of the function $f(x)=(x-a)(x-b)(x-c)(x-d)$},}}
+%     
+% 
+%     \lang{de}{\text{die Variablen \textcolor{BLUE}{$a$, $b$, $c$ und $d$}: (diese sind die \textcolor{BLUE}{Nullstellen von $f$}!)}}
+%     \lang{en}{\text{choose the variables \textcolor{BLUE}{$a$, $b$, $c$, and $d$}: (these are the \textcolor{BLUE}{roots of $f$}!)}}
+%      
+% \text{$\qquad \qquad \qquad \textcolor{BLUE}{a} : \var{a}$, 
+% $\qquad \qquad \qquad \textcolor{BLUE}{b} : \var{b}$, $\qquad\qquad \qquad  \textcolor{BLUE}{c} : \var{c}$, 
+% $\qquad\qquad \qquad  \textcolor{BLUE}{d} : \var{d}$ }
+% 
+% 			\lang{de}{\text{Die \textcolor{DARK_RED}{rote Kurve} ist der Graph der \textcolor{DARK_RED}{Ableitung $f'$}.}}
+%     		\lang{en}{\text{The \textcolor{DARK_RED}{red curve} is the graph of the \textcolor{DARK_RED}{derivative, $f'$}.}}    
+%  			\lang{de}{\text{Die \textcolor{DARK_GREEN}{gr\"{u}ne Kurve} ist der Graph der \textcolor{DARK_GREEN}{2. Ableitung $f''$}.}}
+%    			\lang{en}{\text{The \textcolor{DARK_GREEN}{green curve} is the graph of the \textcolor{DARK_GREEN}{2nd derivative, $f''$}.}}    
+%  			\lang{de}{\text{Beobachten Sie:}}
+%     		\lang{en}{\text{Observe:}}    
+%       		\lang{de}{\text{- wie die \textcolor{BLUE}{Monotonieintervalle und station\"{a}re Stellen von $f$}}}
+%     		\lang{en}{\text{- how the \textcolor{BLUE}{monotonic intervals and critical points of $f$}}}    
+%    			\lang{de}{\text{$\;$den  \textcolor{DARK_RED}{Vorzeichen und Nullstellen der Ableitung $f'$} entsprechen,}}
+%     		\lang{en}{\text{$\;$ correspond to the \textcolor{DARK_RED}{sign and roots of the derivative, $f'$}}}   
+%   
+%     \lang{de}{\text{- das Vorliegen \textcolor{BLUE}{station\"{a}rer Stellen von $f$} (also von \textcolor{DARK_RED}{Nullstellen von $f'$})}}
+%     \lang{en}{\text{- the existence of \textcolor{BLUE}{critical points of $f$} (the \textcolor{DARK_RED}{roots of $f'$}) }}
+%     
+%   
+%     \lang{de}{\text{$\;$in den \textcolor{BLUE}{Extremalstellen von $f$},}}
+%     \lang{en}{\text{$\;$where \textcolor{BLUE}{$f$ has extrema},}}
+%     
+%  
+%     \lang{de}{\text{- wie die \textcolor{DARK_RED}{Monotonieintervalle und station\"{a}re Stellen von $f'$}}}
+%     \lang{en}{\text{- how the \textcolor{DARK_RED}{monotonic intervals and critical points of $f$}}}
+%     
+%   
+%     \lang{de}{\text{$\;$den \textcolor{DARK_GREEN}{Vorzeichen und Nullstellen der 2. Ableitung $f''$} entsprechen,}}
+%     \lang{en}{\text{$\;$correspond to the \textcolor{DARK_GREEN}{sign and roots of the 2nd derivative, $f''$},}}
+%    
+%    
+%     \lang{de}{\text{- wie die \textcolor{DARK_RED}{Extremalstellen von $f'$} den \textcolor{BLUE}{Wendestellen von $f$} entsprechen,}}
+%     \lang{en}{\text{- how the \textcolor{DARK_RED}{extrema of $f'$} correspond to the \textcolor{BLUE}{inflection points of $f$},}}
+%     
+%    
+%     \lang{de}{\text{- wie die \textcolor{DARK_GREEN}{Extremalstellen von $f''$} den \textcolor{DARK_RED}{Wendestellen von $f'$} entsprechen,}}
+%     \lang{en}{\text{- how the \textcolor{DARK_GREEN}{extrema of $f''$} correspond to the \textcolor{DARK_RED}{inflection points of $f'$},}}
+%     
+%    
+%     \lang{de}{\text{- wie in den \textcolor{BLUE}{Sattelstellen von $f$} Nullstellen sowohl von \textcolor{DARK_RED}{$f'$} als auch von \textcolor{DARK_GREEN}{$f''$} vorliegen.}}
+%     \lang{en}{\text{- how \textcolor{BLUE}{saddle points of $f$} relate to roots of both \textcolor{DARK_RED}{$f'$} and \textcolor{DARK_GREEN}{$f''$}.}}
+%  
+%     \lang{de}{\text{Probieren Sie f\"{u}r $a$, $b$, $c$ und $d$ auch je drei gleiche oder vier gleiche Zahlen aus!}}
+%     \lang{en}{\text{Try using three or four of the same values for $a$, $b$, $c$, and $d$!}}
+% 
+%     \lang{de}{\text{Der Graph der zuerst dargestellten Funktion ist der Graph der im Beispiel behandelten Funktion.}}
+%     \lang{en}{\text{The graph of the initial function is the graph of the function in the example above.}}
+%     
+% \end{genericGWTVisualization}
+
+% \begin{quickcheckcontainer}
+% \randomquickcheckpool{1}{1}
+% \begin{quickcheck}
+% 		\field{rational}
+% 		\type{input.number}
+% 		\begin{variables}
+% 			\randint[Z]{a}{-5}{5}
+% 			\randint[Z]{b}{1}{4}
+% 			\randint{c}{-4}{4}
+% 			\randint[Z]{d}{1}{4}
+% 		    \function[normalize]{f}{(a/b)*x+c/d}
+% 			\function[calculate]{ns}{-(c*b)/(a*d)}
+% 		\end{variables}
+% 		
+% 			\text{Die Nullstelle der linearen Funktion $f(x)=\var{f}$ ist \ansref.}
+% 		
+% 		\begin{answer}
+% 			\solution{ns}
+% 		\end{answer}
+% 	\end{quickcheck}
+% \end{quickcheckcontainer}
+% 
+% 
+
+\end{visualizationwrapper}
+
+
+\end{content}

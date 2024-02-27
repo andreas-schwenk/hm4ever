@@ -1,0 +1,132 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A05: Stammfunktion rationaler Funktionen}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A05: Stammfunktion rationaler Funktionen}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/11222}{Ticket 11222}
+\end{block}
+
+\begin{problem}
+	\randomquestionpool{1}{3}
+	
+	\begin{question}	
+		\begin{variables}
+		%g = ax 3 + bx 2 + d mit b, d ∈ {− 4; 4 } \ { 0 } und a ∈ { 0; 1 }
+
+			\randint[Z]{a}{-3}{4}
+			\randint[Z]{b}{-3}{4}
+			\randint[Z]{c}{-3}{4}
+			\randint[Z]{n}{2}{4}
+
+			\function[normalize]{f}{2*a*x+b}
+			\function[normalize]{g0}{a*x^2+b*x+c}
+			\function{g}{g0^n}
+			
+			\function[normalize]{S}{1/((1-n)*g0^(n-1))}
+    
+
+		\end{variables}
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		  \type{input.function}
+          \explanation{Nutzen Sie die Substitutionsregel. Im Zähler steht die Ableitung der zu substituierenden Funktion.}
+      \field{rational}
+		\correctorprecision{3}
+		\displayprecision{3}
+	    \lang{de}{\text{Bestimmen Sie eine Stammfunktion von $\frac{\var{f}}{\var{g}}$.}} 
+	    \begin{answer}
+	    	\text{Eine Stammfunktion ist }
+			\solution{S}
+          \inputAsFunction{x}{s}%D[s]=f/g
+          \checkFuncForZero{D[s]-f/g}{-10}{10}{100}
+	    \end{answer}  
+        
+	    
+	\end{question}
+	
+	\begin{question}	
+		\begin{variables}
+
+			\randint[Z]{a}{-3}{4}
+			\randint[Z]{c}{1}{3}
+            \function{d}{c^2}
+
+			\function{f}{a}
+			\function{g}{x^2+d}
+			
+			\function{S}{a*arctan(x/c)/c}
+
+
+		\end{variables}
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		  \type{input.function}
+     \field{real}
+		\correctorprecision{3}
+		\displayprecision{3}
+	    \lang{de}{\text{Bestimmen Sie eine Stammfunktion von $\frac{\var{f}}{\var{g}}$.}} 
+	    \begin{answer}
+	    	\text{Eine Stammfunktion ist }
+			\solution{S}
+         \inputAsFunction{x}{s}%D[s]=f/g
+         \checkFuncForZero{D[s]-f/g}{-10}{10}{100}
+	    \end{answer}  
+	    \explanation{Der Nenner hat keine reelle Nullstelle. Nutzen Sie aus, dass $\arctan$ eine Stammfunktion von $\frac{1}{x^2+1}$ ist.}
+	\end{question}
+	
+	\begin{question}	
+		\begin{variables}
+		%g = ax 3 + bx 2 + d mit b, d ∈ {− 4; 4 } \ { 0 } und a ∈ { 0; 1 }
+
+			\randint[Z]{a}{-3}{4}
+			\randint[Z]{b}{-3}{4}
+			\randint[Z]{c}{-3}{4}
+
+			\function[normalize]{f}{2*a*x+b}
+			\function[normalize]{g}{a*x^2+b*x+c}
+			
+			\function[normalize]{S}{ln(g)}
+
+
+		\end{variables}
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		  \type{input.function}
+      \field{real}
+		\correctorprecision{3}
+		\displayprecision{3}
+	    \lang{de}{\text{Bestimmen Sie eine Stammfunktion von $\frac{\var{f}}{\var{g}}$.}} 
+	    \begin{answer}
+	    	\text{Eine Stammfunktion ist }
+			\solution{S}
+          \inputAsFunction{x}{s}%D[s]=f/g
+          \checkFuncForZero{D[s]-f/g}{-10}{10}{100}
+	    \end{answer}  
+	    \explanation{Im Zähler steht die Ableitung des Nenners. Nutzen Sie also die Substitutionsregel.}
+	\end{question}
+	
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

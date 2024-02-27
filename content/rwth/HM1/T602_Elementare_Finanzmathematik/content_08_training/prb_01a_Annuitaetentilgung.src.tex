@@ -1,0 +1,160 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A02: Annuitätentilgung}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/28261}{Ticket 28261}
+\end{block}
+
+
+\usepackage{mumie.genericproblem}
+\lang{de}{\title{A02: Annuitätentilgung}}
+\lang{en}{\title{A02: Annuity repayment}}
+
+\begin{problem}
+\begin{variables}
+    \drawFromSet{p}{7,7.5,8,8.5,9,9.5,10}
+    \drawFromSet{S0}{10000,20000,30000,40000,50000}
+    
+    \function[calculate,2]{a3}{(q^3-1)/(q^3(q-1))}
+    \function{q}{1+p/100}
+    \function[calculate,2]{A}{S0/a3}
+    
+    \function[calculate]{z1}{S0*p/100}
+    \function[calculate,2]{t1}{A-z1}
+    \function[calculate]{s1}{A*(q^2-1)/(q^2(q-1))}
+        
+    \function[calculate]{z2}{s1*p/100}
+    \function[calculate]{t2}{A-z2}
+    \function[calculate]{s2}{A*(q^1-1)/(q^1(q-1))}
+    
+    \function[calculate]{z3}{s2*p/100}
+    \function[calculate]{t3}{A-z3}
+    \function[calculate]{s3}{A*(q^0-1)/(q^0(q-1))}
+    
+\end{variables}
+    \begin{question}
+         \type{input.number}
+         \lang{de}{\text{Für eine Investition hat ein Betrieb einen Kredit
+     über $\var{S0}$ \euro aufgenommen, der bei einer jährlichen Verzinsung von 
+     $i=\var{p}$ \% in $n=3$ Jahren durch eine jährlich gleich hohe Annuität $A$
+     getilgt werden soll.\\
+     Erstellen Sie den Tilgungsplan.
+     \begin{table}
+     k&$S_{k-1}$&$Z_k$&$T_k$&$A$&$S_k$\\
+     \textbf{1}&\ansref&\ansref&\ansref&\ansref&\ansref\\
+     \textbf{2}&\ansref&\ansref&\ansref&\ansref&\ansref\\
+     \textbf{3}&\ansref&\ansref&\ansref&\ansref&\ansref
+     
+     \end{table}
+     }}
+         \lang{en}{\text{For an investment, a company has taken out a loan
+     of $\var{S0}$ \euro, which is to be repaid an annual interest rate of 
+     $i=\var{p}$ \% in $n=3$ years by an annuity $A$ of the same amount per year.\\
+     Draw up the repayment schedule.
+     \begin{table}
+     k&$S_{k-1}$&$Z_k$&$T_k$&$A$&$S_k$\\
+     \textbf{1}&\ansref&\ansref&\ansref&\ansref&\ansref\\
+     \textbf{2}&\ansref&\ansref&\ansref&\ansref&\ansref\\
+     \textbf{3}&\ansref&\ansref&\ansref&\ansref&\ansref
+     
+     \end{table}
+     }}
+    %1.
+               \begin{answer}
+               \solution{S0}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{z1}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{t1}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{A}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{s1}
+               \end{answer}
+    %2.           
+               \begin{answer}
+               \solution{s1}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{z2}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{t2}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{A}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{s2}
+               \end{answer}
+    %3.           
+               \begin{answer}
+               \solution{s2}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{z3}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{t3}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{A}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{s3}
+               \end{answer}
+    \lang{de}{\explanation{Zuerst muss der Faktor $a_3=\frac{q^3-1}{q^3(q-1)}=\var{a3}$ berechnet werden. Die Annuität 
+    $A$ ist dann $A=\frac{S_0}{a_3}=\var{A}$. Die Restschuld berechnet sich dann $S_k=A\cdot a_{3-k}$ und
+    $T_k=T_1\cdot q^{k-1}$, wobei $T_1=A-i\cdot S_0=\var{t1}$.
+    }}
+    \lang{en}{\explanation{First, the factor $a_3=\frac{q^3-1}{q^3(q-1)}=\var{a3}$ must be calculated. The annuity 
+    $A$ is then $A=\frac{S_0}{a_3}=\var{A}$. The residual debt is then calculated as $S_k=A\cdot a_{3-k}$ and
+    $T_k=T_1\cdot q^{k-1}$, where $T_1=A-i\cdot S_0=\var{t1}$.
+    }}
+
+    \end{question}
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

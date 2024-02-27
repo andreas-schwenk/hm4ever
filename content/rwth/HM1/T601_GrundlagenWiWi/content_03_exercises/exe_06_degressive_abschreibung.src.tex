@@ -1,0 +1,239 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Ü06: Reducing-balance depreciation}
+    \lang{de}{Ü06: degressive Abschreibung}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\title{\lang{de}{Ü06: degressive Abschreibung}
+\lang{en}{Exercise 6: Reducing-balance depreciation}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/23655}{Ticket 23655}
+\end{block}
+
+
+\lang{de}{Eine Webmaschine mit Anschaffungskosten von $100000$ \euro soll in 20 Jahren auf den Restwert 
+(Schrottwert) von $5000$ \euro (arithmetisch)-degressiv abgeschrieben werden. Der erste Abschreibungsbetrag soll 
+$9000$ \euro betragen. 
+
+Bestimmen Sie die Folge der Abschreibungsbeträge und erstellen Sie einen Abschreibungsplan.
+}
+\lang{en}{A loom with an initial purchase cost of $100000$ \euro must be depreciated to its salvage value of
+$5000$ \euro after 20 years by the reducing-balance method. The first depreciation expense will be $9000$ \euro.
+
+Compute the sequence of depreciation expenses and set up a depreciation schedule.
+
+}
+
+
+  \begin{tabs*}[\initialtab{0}\class{exercise}]
+    \tab{
+      \lang{en}{Solution}
+      \lang{de}{Lösung}
+      \lang{zh}{...}
+      \lang{fr}{...}
+    }
+    \begin{incremental}[\initialsteps{1}]
+      \step
+        \lang{en}{\notion{Sequence of depreciation expenses ($d=-447.37$ \euro):}\\
+        $A_1=9000$\\
+        $A_2=8552.63$\\
+        ...\\
+        $A_{19}=947.34$\\
+        $A_{20}=499.97$
+        
+        
+        \textbf{Depreciation schedule}
+  \begin{table}[\cellaligns{crrcr}]
+    \head[\cellaligns{lllll}]
+    n & $A_n$ & $K_n$ & $p'_n$ & $p_n$
+    \body
+    0  &      & 100000.00 &  & \\
+    1  & 9000.00 & 91000.00 & 9.00  & 9.00\\
+    2  & 8552.63 & 82447.40 & 8.55 &9.40 \\
+    ...&...&...&...&...\\
+    19 & 947.34   &  5499.97 & 0.96 & 14.83\\
+    20 & 499.97   &  5000.00 &0.50 &9.09
+  \end{table}}
+        \lang{de}{
+        
+        \notion{Folge der Abschreibungsbeträge ($d=-447,37$ \euro):}\\
+        $A_1=9000$\\
+        $A_2=8552,63$\\
+        ...\\
+        $A_{19}=947,34$\\
+        $A_{20}=499,97$
+        
+        
+        \textbf{Abschreibungsplan}
+  \begin{table}[\cellaligns{crrcr}]
+    \head[\cellaligns{lllll}]
+    n & $A_n$ & $K_n$ & $p'_n$ & $p_n$
+    \body
+    0  &      & 100000,00 &  & \\
+    1  & 9000,00 & 91000,00 & 9,00  & 9,00\\
+    2  & 8552,63 & 82447,40 & 8,55 &9,40 \\
+    ...&...&...&...&...\\
+    19 & 947,34   &  5499,97 & 0,96 & 14,83\\
+    20 & 499,97   &  5000,00 &0,50 &9,09
+  \end{table}
+        
+        
+        }
+        \lang{zh}{...}
+        \lang{fr}{...}
+     
+    \end{incremental}
+    \tab{
+      \lang{en}{Explanation}
+      \lang{de}{Erklärung}
+      \lang{zh}{...}
+      \lang{fr}{...}
+    }
+    \begin{incremental}[\initialsteps{1}]
+      \step
+        \lang{en}{In the \notion{reducing-balance method}, the depreciation costs $A_n$
+        decrease by a constant value $d$ each year. 
+        
+        In other words, the \textit{depreciation costs} form an \textit{arithmetic sequence}:\\
+        \begin{eqnarray}
+        A_n&=&A_1+(n-1)d \text{ with }d<0\\
+        \end{eqnarray}
+        
+        The book value of the asset is therefore the sum of an arithmetic series. We use 
+        Gauss' summation formula $\sum_{i=1}^ni=\frac{n(n+1)}{2}$ and obtain:
+        \begin{eqnarray*}
+        K_0-K_n&=&\sum_{i=1}^nA_i\\
+        &=&\sum_{i=1}^n\left(A_1+(i-1)d\right)\\
+        &=&nA_1+\sum_{i=1}^n\left(id-d\right)\\
+        &=&nA_1-nd+\sum_{i=1}^nid\\
+        &=&nA_1-\frac{2nd}{2}+d\sum_{i=1}^ni\\
+        &=&nA_1-\frac{2nd}{2}+d\frac{n(n+1)}{2}\\
+        &=&n\left(A_1 + (n-1)\frac{d}{2}\right).
+        \end{eqnarray*}
+        In order to reach a specified remaining value $K_m$ after m years, we must have:
+        \begin{eqnarray}
+        K_0-K_m&=&mA_1+m(m-1)\frac{d}{2}\\
+        \iff d&=&2\frac{K_0-K_m-mA_1}{m(m-1)}
+        \end{eqnarray}}
+        \lang{de}{Bei der \notion{arithmetisch-degressiven Abschreibung} wird festgelegt, dass die
+        Abschreibungsbeträge $A_n$ um einen konstanten Wert $d$ (pro Jahr) fallen sollen. 
+        
+        Jetzt bilden die \textit{Abschreibungsbeträge} eine \textit{arithmetische Folge}:\\
+        \begin{eqnarray}
+        A_n&=&A_1+(n-1)d \text{ mit }d<0\\
+        \end{eqnarray}
+        
+        Also verhalten sich die (Rest-)Buchwerte wie eine arithmetische Reihe. Wir benutzen die
+        Gauss'sche Summenformel $\sum_{i=1}^ni=\frac{n(n+1)}{2}$ und es gilt dann:
+        \begin{eqnarray*}
+        K_0-K_n&=&\sum_{i=1}^nA_i\\
+        &=&\sum_{i=1}^n\left(A_1+(i-1)d\right)\\
+        &=&nA_1+\sum_{i=1}^n\left(id-d\right)\\
+        &=&nA_1-nd+\sum_{i=1}^nid\\
+        &=&nA_1-\frac{2nd}{2}+d\sum_{i=1}^ni\\
+        &=&nA_1-\frac{2nd}{2}+d\frac{n(n+1)}{2}\\
+        &=&n\left(A_1 + (n-1)\frac{d}{2}\right)
+        \end{eqnarray*}
+        Damit nach m Jahren ein bestimmter Restwert $K_m$ erreicht wird, muss gelten:
+        \begin{eqnarray}
+        K_0-K_m&=&mA_1+m(m-1)\frac{d}{2}\\
+        \iff d&=&2\frac{K_0-K_m-mA_1}{m(m-1)}
+        \end{eqnarray}
+        }
+        \step
+        \lang{en}{Since $A_n$ is a monotonically decreasing sequence,
+        \[K_0-K_m<mA_1\iff \frac{K_0-K_m}{m}<A_1.\]
+        
+        Equation $(1)$ implies: 
+        \[(m-1)d=A_m-A_1>-A_1,\]
+        because all depreciation costs $A_i$ are positive. Equation $(2)$ becomes:
+        \[\frac{2(K_0-K_m)}{m}=2A_1+(m-1)d>A_1.\]
+        The initial depreciation cost is therefore bounded by
+        \[\frac{K_0-K_m}{m}<A_1<\frac{2(K_0-K_m)}{m}.\]
+        The depreciation rate is given by:
+        \begin{enumerate}
+        \item
+        $p_1=\frac{100A_1}{K_0}$,
+        \item Depreciation rate for $n>1$:
+        $p_n=\frac{A_n}{K_{n-1}}100=\frac{A_1+(n-1)d}{K_0-(n-1)A_1-\frac{(n-2)(n-1)}{2}d}$
+        \item
+        $p'_n=\frac{A_n}{K_0}100=\frac{A_1+(n-1)d}{K_0}100$
+        \end{enumerate}
+        }
+        \lang{de}{
+        Da $A_n$ eine monoton fallende Folge ist, gilt:
+        \[K_0-K_m<mA_1\iff \frac{K_0-K_m}{m}<A_1\]
+        
+        Aus Gleichung $(1)$ folgt: 
+        \[(m-1)d=A_m-A_1>-A_1,\]
+        da alle Abschreibungsbeträge $A_i>0$. Gleichung$(2)$ wird damit zu:
+        \[\frac{2(K_0-K_m)}{m}=2A_1+(m-1)d>A_1\]
+        Um Abschätzungen machen zu können ergibt sich also:
+        \[\frac{K_0-K_m}{m}<A_1<\frac{2(K_0-K_m)}{m}\]
+        
+        Für die Abschreibungsprozentsätze ergibt sich:
+        \begin{enumerate}
+        \item
+        $p_1=\frac{100A_1}{K_0}$, Abschreibungsprozentsatz
+        \item für $n>1$:
+        $p_n=\frac{A_n}{K_{n-1}}100=\frac{A_1+(n-1)d}{K_0-(n-1)A_1-\frac{(n-2)(n-1)}{2}d}$
+        \item
+        $p'_n=\frac{A_n}{K_0}100=\frac{A_1+(n-1)d}{K_0}100$
+        \end{enumerate}
+        
+        
+        }
+        \lang{zh}{...}
+        \lang{fr}{...}
+      
+    \end{incremental}
+    
+    \tab{
+      \lang{en}{Calculation}
+      \lang{de}{Rechnung}
+      \lang{zh}{...}
+      \lang{fr}{...}
+    }
+    \begin{incremental}[\initialsteps{1}]
+      \step
+        \lang{en}{
+        \[d=2\frac{(K_0-K_m)-mA_1}{m(m-1)}=2\frac{95000-20\cdot 9000}{20\cdot19}=-447.37\text { \euro},\] 
+        \[\frac{K_0-K_{20}}{20}=4750<9000<9500=\frac{2(K_0-K_{20})}{20}\]
+        }
+        \lang{de}{
+        \[d=2\frac{(K_0-K_m)-mA_1}{m(m-1)}=2\frac{95000-20\cdot 9000}{20\cdot19}=-447,37\text { \euro},\] 
+        \[\frac{K_0-K_{20}}{20}=4750<9000<9500=\frac{2(K_0-K_{20})}{20}\]
+        
+        
+        
+        }
+        \lang{zh}{...}
+        \lang{fr}{...}
+     
+    \end{incremental}
+    
+  \end{tabs*}
+
+
+
+\end{content}
+

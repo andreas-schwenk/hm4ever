@@ -1,0 +1,95 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A04: Taylor}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22383}{Ticket 22383}
+\end{block}
+
+
+\usepackage{mumie.genericproblem}
+\lang{de}{\title{A04: Taylor}}
+\begin{problem}
+	%\randomquestionpool{}{}
+	
+%######################################################QUESTION_START	
+	\begin{question}	
+	%+++++++++++++++++++VARIABLES++++++++++++++++++++++
+		\begin{variables}
+			\randint[Z]{a}{1}{7}
+            \randint[Z]{k}{-2}{2}
+			\function[normalize]{b}{a+k}
+%            \number{n}{5}
+            \function[normalize]{f}{(a+x)/(a-x)}
+            \function[normalize]{fn}{2*a*fac(n)/((a-x)^(n+1))}
+            \substitute[calculate]{f1}{f}{x}{b}
+%            \substitute[calculate]{fn1}{fn}{x}{b}
+            \function{summand}{(2*a)/((a-b)^(n+1))*(x-b)^n}
+		\end{variables}
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		\type{input.function} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+		\field{rational} 
+		%\precision{3}
+	%+++++++++++++++++++TITLE++++++++++++++++++++++++++	
+	    \lang{de}{\text{
+        Es sei $f(x)=\var{f}$. \\ Bestimmen Sie allgemein die $n$-te Ableitung von $f$:
+        \\
+        $f^{(n)}(x)=$\ansref .\\
+        Bestimmen Sie weiter die Taylor-Entwicklung von $f$ an der Entwicklungsstelle $x_0=\var{b}$
+        \\
+        $T_{f,\var{b}}(x)=$\ansref $+\sum_{n=1}^\infty$\ansref.
+         
+	    }}
+	%+++++++++++++++++++ANSWERS++++++++++++++++++++++++
+        \begin{answer}
+          \solution{fn}
+          \inputAsFunction{x,n}{stud1}
+          \checkFuncForZero{|stud1[2,n]-fn[2,n]|+|stud1[3,n]-fn[3,n]|+|stud1[4,n]-fn[4,n]|}{8}{10}{100}
+          \explanation{Nach Bildung einiger Ableitungen lässt sich ein allgemeiner Ausdruck für $f^{(n)}(x)$ erkennen, 
+          den Sie durch vollständige Induktion beweisen können.}
+        \end{answer}
+        \begin{answer}
+          \solution{f1}
+          \checkAsFunction{x}{8}{10}{100}
+          \explanation{Das nullte Glied der Taylor-Reihe ist $f(x_0)$.}
+        \end{answer}
+	    \begin{answer}
+            \inputAsFunction{x,n}{stud}
+	    	\solution{summand}
+            \checkFuncForZero{|stud[2,n]-summand[2,n]|+|stud[3,n]-summand[3,n]|+|stud[4,n]-summand[4,n]|}{8}{10}{100}
+			%\checkAsFunction{x,n}{8}{10}{100} 
+            \explanation{Überlegen Sie, wie sich die Koeffizienten der Taylor-Reihe aus den Ableitungen der Funktion ergeben.}
+	    \end{answer}    
+	\end{question}
+%######################################################QUESTION_END
+
+\end{problem}
+
+
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

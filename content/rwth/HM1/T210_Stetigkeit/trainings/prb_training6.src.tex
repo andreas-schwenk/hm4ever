@@ -1,0 +1,77 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A06: Grenzwert $x\to\pm\infty$ }
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{Aufgabe 6}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/19398}{Ticket 19398}
+\end{block}
+\usepackage{mumie.genericproblem}
+
+
+\lang{de}{\title{A06: Grenzwert $x\to\pm\infty$ }}
+\begin{problem}
+    \begin{question}
+        \type{input.function}
+        \field{real}
+        \begin{variables}
+            \randint{a}{5}{8}
+            \function{n1}{-1/a}
+            \function{n2}{0}
+        \end{variables}        
+        \lang{de}{\text{Berechnen Sie folgenden Grenzwert:}
+        }
+        \begin{answer}
+            \text{$\lim_{x\to+\infty}\frac{e^{2x}-e^{5x}}{\var{a}e^{5x}+e^x}=$}
+            \solution{n1}
+            \checkAsFunction{a}{-10}{10}{100}
+            \explanation{$\lim_{x\to+\infty}\frac{e^{2x}-e^{5x}}{\var{a}e^{5x}+e^x}=\lim_{x\to\infty}\frac{e^{5x}(e^{-3x}-1)}{e^{5x}(\var{a}+e^{-4x})}=
+            \lim_{x\to+\infty}\frac{e^{-3x}-1}{\var{a}+e^{-4x}}=
+            \frac{\lim_{x\to+\infty}e^{-3x}-1}{\lim_{x\to+\infty}\var{a}+e^{-4x}}=-\frac{1}{\var{a}}$}   
+        \end{answer}
+    \end{question}
+     \begin{question}
+        \type{input.function}
+        \field{real}
+        \begin{variables}
+            \randint{a}{5}{8}
+            \function{n1}{-1/a}
+            \function{n2}{0*a}
+        \end{variables}        
+        \lang{de}{\text{Berechnen Sie folgenden Grenzwert:}
+        }
+        \begin{answer}
+            \text{$\lim_{x\to-\infty}\frac{e^{2x}-e^{5x}}{\var{a}e^{5x}+e^x}=$}
+            \solution{n2}
+            \checkAsFunction{a}{-10}{10}{100}
+            \explanation{$\lim_{x\to-\infty}\frac{e^{2x}-e^{5x}}{\var{a}e^{5x}+e^x}=
+            \lim_{x\to-\infty}\frac{e^x(e^x-e^{4x})}{e^x(\var{a}e^{4x}+1)}=
+            \frac{\lim_{x\to-\infty}e^x-e^{4x}}{\lim_{x\to-\infty}\var{a}e^{4x}+1}=\frac{0}{1}=0
+            $}
+        \end{answer}
+    \end{question}
+    
+\end{problem}
+
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

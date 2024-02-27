@@ -1,0 +1,111 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A03: Lineare Abbildungen}
+    \lang{en}{P03: Linear maps}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/14363}{Ticket 14363}
+\end{block}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{
+	\title{A03: Lineare Abbildungen}
+}
+
+\lang{en}{
+	\title{P03: Linear maps}
+}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/}{Ticket }
+\end{block}
+
+
+
+\begin{problem}
+
+    
+\begin{question}
+
+	\begin{variables}
+		\randint{a}{-3}{3}
+        \randint{b}{-3}{3}
+        \randint{g}{-3}{3}
+        \randint{f}{-3}{3}
+        \randint{c}{-5}{5}
+        \randint{d}{-5}{5}
+        \function[normalize]{aa1}{a*x + b*y}
+        \function[normalize]{aa2}{g*x + f*y}
+		
+        \pmatrix{aa}{aa1 \\ aa2 }
+        
+        \pmatrix[calculate]{dd}{1 \\ d+1}
+        \pmatrix[calculate]{cc}{c+1 \\ c*d+c+d}
+		\pmatrix[calculate]{bb}{a*(c+1)+b*(c*d+c+d) & a+b*(d+1) \\ g*(c+1)+f*(c*d+c+d) & g+f*(d+1)}
+        \pmatrix{dumm}{x \\ y}
+	\end{variables}
+
+	\type{input.matrix}
+	\displayprecision{3}
+    \correctorprecision{2}
+    \field{real}
+    
+    \lang{de}{
+	    \text{ Bestimmen Sie die Abbildungsmatrix ${\,}_S f_B$, wobei $S$ die Standardbasis des $\R^2$ bezeichnet. Zusätzlich sei
+         die Basis $B=\left\{\var{cc},\var{dd} \right\}$ des $\R^2$ und die lineare Abbildung $\quad f$ mit  \\ 
+         \begin{equation*}
+         f : \R^2 \to \R^2, \var{dumm} \mapsto \var{aa}
+         \end{equation*}
+         gegeben.
+      }
+
+      \explanation{ Die Abbildungsmatrix ${\,}_S f_B$ ist eine $2\times 2-$Matrix mit den Spalten $f(\var{cc})$ und $f(\var{dd}),$
+       da die Ziel-Basis die Standardbasis des $\R^2$ ist.    
+      }
+      }
+
+          \lang{en}{
+	    \text{ Determine the matrix ${\,}_S f_B$ associated with linear map, at which $S$ is the standard basis of $\R^2$. Furthermore
+     let be $B=\left\{\var{cc},\var{dd} \right\}$ basis of $\R^2$ and the linear map $\quad f$ with  \\ 
+         \begin{equation*}
+         f : \R^2 \to \R^2, \var{dumm} \mapsto \var{aa}
+         \end{equation*}
+         given.
+      }
+
+      \explanation{ The matrix  of a linear map ${\,}_S f_B$ is a $2\times 2-$matrix with the columns $f(\var{cc})$ and $f(\var{dd}),$
+       because destination-basis is the standard basis of $\R^2$.    
+      }
+      }
+    
+    \begin{answer}
+	    \solution{bb}
+      %\format{2}{2}
+	\end{answer}
+    
+\end{question}
+
+\end{problem}
+
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

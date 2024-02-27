@@ -1,0 +1,508 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Rang einer Matrix}
+    \lang{en}{Rank of a matrix}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T108_Vektorrechnung/g_art_content_30_basen_eigenschaften.meta.xml}{content_30_basen_eigenschaften}
+    \link{generic_article}{content/rwth/HM1/T403_Quadratische_Matrizen,_Determinanten/g_art_content_07_quadratische_matrizen.meta.xml}{content_07_quadratische_matrizen}
+    \link{generic_article}{content/rwth/HM1/T109_Skalar-_und_Vektorprodukt/g_art_content_31_skalarprodukt.meta.xml}{skalarprodukt}
+    \link{generic_article}{content/rwth/HM1/T111neu_Matrizen/g_art_content_43_matrizenmultiplikation.meta.xml}{matrix-mult}
+    \link{generic_article}{content/rwth/HM1/T112neu_Lineare_Gleichungssysteme/g_art_content_41_gauss_verfahren.meta.xml}{gauss-verfahren}
+     \link{generic_article}{content/rwth/HM1/T112neu_Lineare_Gleichungssysteme/g_art_content_41_gauss_verfahren.meta.xml}{gauss1}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21348}{Ticket 21348}
+\end{block}
+\begin{block}[annotation]
+Copy of \href{https://team.mumie.net/issues/18626}{Ticket 18626}: content/rwth/HM1/T112_Rechnen_mit_Matrizen/art_content_45_matrixrang.src.tex
+\end{block}
+
+\usepackage{mumie.ombplus}
+\ombchapter{12}
+\ombarticle{3}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Rang einer Matrix}\lang{en}{Rank of a matrix}}
+ 
+%\begin{block}[annotation]
+%  übungsinhalt
+%  
+%\end{block}
+% \begin{block}[annotation]
+%   Im Ticket-System: \href{http://team.mumie.net/issues/18625}{Ticket 18625}\\
+% \end{block}
+
+\begin{block}[annotation]
+  Die Inhalte dieses Kapitels standen zuvor in \href{http://team.mumie.net/issues/9061}{Ticket 9061}.
+  Die Ausgliederung erhöht die Übersichtlichkeit.
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+\lang{de}{
+Die 
+\link{content_30_basen_eigenschaften}{lineare Unabhängigkeit}
+haben wir bereits im Kapitel Vektorrechnung kennengelernt.
+\\\\
+In diesem Kapitel führen wir zunächst den \textbf{Zeilenrang} einer Matrix ein,
+der die maximale Anzahl linear unabhängiger Zeilenvektoren angibt.
+Zur numerischen Bestimmung nutzen wir das im 
+\link{gauss-verfahren}{letzten Unterkapitel}
+kennengelernte Gauß-Verfahren. Anschließend bringen wir den Rang der Koeffizientenmatrix eines linearen Gleichungssystems mit dessen Lösbarkeit in Verbindung.
+}
+\lang{en}{
+The concept of \link{content_30_basen_eigenschaften}{linear independence} was introduced in the 
+the chapter on vectors.
+\\\\
+In this chapter we introduce the \textbf{row rank} of a matrix, which gives the maximum number of 
+linearly independent row vectors in the matrix. To numerically determine the rank, we employ the 
+\link{gauss-verfahren}{Gaussian elimination} algorithm from the previous section. Finally, we look 
+at the relationship between the rank of a coefficient matrix and the solvability of a linear system.
+}
+
+
+
+\section{\lang{de}{Zeilenrang und Spaltenrang}
+         \lang{en}{Row rank and column rank}}\label{sec:zeilenrang-spaltenrang}
+
+\begin{definition}[\lang{de}{Zeilenrang/Spaltenrang}\lang{en}{Row/column rank}]
+\lang{de}{
+Für eine $(m\times n)$-Matrix $A$ über $\R$ ist der \notion{Zeilenrang von $A$} die maximale Anzahl 
+an linear unabhängigen Zeilenvektoren.\\
+Analog ist der \notion{Spaltenrang von $A$} definiert als die maximale Anzahl an linear unabhängigen 
+Spaltenvektoren.
+}
+\lang{en}{
+Given an $(m\times n)$-matrix $A$ over $\R$, the \notion{row rank of $A$} is the maximum number of 
+linearly independent row vectors contained in the matrix.\\
+Analogously, the \notion{column rank} of $A$ is defined as the maximum number of linearly independent 
+column vectors contained in the matrix.\\
+Note that \textit{'contained'} here means \textit{'corresponding to a full row/column of the matrix'.}
+}
+\end{definition}
+\lang{de}{
+Mit dem \ref[gauss-verfahren][Gauß-Verfahren]{sec:gauss-mit-matrizen} kann man beliebige Matrizen 
+durch elementare Zeilenumformungen in Stufenform bringen.
+}
+\lang{en}{
+Using \ref[gauss-verfahren][Gaussian elimination]{sec:gauss-mit-matrizen} we can change any matrix 
+into row echelon form using only elementary row operations.
+}
+\begin{remark}
+\lang{de}{
+Der Zeilenrang von $A$ entspricht der Anzahl der Zeilen, die ungleich der Nullzeile sind, nachdem $A$ 
+durch das Gauß-Verfahren auf Stufenform gebracht worden ist.\\
+Der Spaltenrang von $A$ ist folglich der Zeilenrang von $A^T$.
+}
+\lang{en}{
+The row rank of $A$ is equal to the number of non-zero rows in $A$, after $A$ has been changed into 
+row echelon form by Gaussian elimination.\\
+The column rank of $A$ is the row rank of $A^T$.
+}
+\end{remark}
+
+\begin{example}
+\lang{de}{Wir betrachten die $(4\times 5)$-Matrix}
+\lang{en}{We consider the $(4\times 5)$-matrix}
+\[A=
+\begin{pmatrix}
+    1 & 2 & 1 & -1 & 7\\ 
+    1 & 3 & 0 & -1 & 8\\
+    -1 & 0 & -3 & 5 & 9 \\
+    1 & 1 & 2 & -1 & 6
+   \end{pmatrix}. \]
+\lang{de}{Durch elementare Zeilenumformungen erhalten wir}
+\lang{en}{Elementary row operations give us}
+\[  \rightsquigarrow~~
+  \begin{pmatrix}
+    1 & 2 & 1 & -1 & 7\\ 
+    0 & 1 & -1& 0  & 1\\
+    0 & 2 & -2 & 4 & 16 \\
+	0 & -1& 1 &  0 & -1    
+   \end{pmatrix}
+\rightsquigarrow~~
+   \begin{pmatrix}
+     1 & 2 & 1 & -1 & 7\\ 
+     0 & 1 & -1& 0  & 1\\
+   	 0 & 0 & 0 &4 &  14 \\
+	 0 & 0 & 0 & 0 & 0
+   \end{pmatrix}.   
+\]
+\lang{de}{
+Die Stufenform besitzt also drei Zeilen ungleich $0$, weshalb der Zeilenrang der Matrix $A$ gleich $3$ ist.
+\\\\
+Für den Spaltenrang von $A$ bringen wir
+}
+\lang{en}{
+The row echelon form of $A$ has three non-zero rows, so the row rank of the matrix $A$ is $3$.
+\\\\
+To find the column rank, we change
+}
+\[A^T= \begin{pmatrix} 1&1&-1&1 \\ 2&3&0&1\\ 1&0&-3&2\\ -1&-1&5&-1\\ 7&8&9&6   \end{pmatrix}\]
+\lang{de}{auf Stufenform:}
+\lang{en}{into row echelon form:}
+\[  \rightsquigarrow~~ \begin{pmatrix} 1&1&-1&1 \\ 0&1&2&-1\\ 0&-1&-2&1\\ 0&0&4&0\\ 0&1&16&-1 \end{pmatrix}
+ \rightsquigarrow~~ \begin{pmatrix}1&1&-1&1 \\ 0&1&2&-1\\ 0&0&0&0\\ 0&0&4&0\\ 0&0&14&0\end{pmatrix}
+ \rightsquigarrow~~ \begin{pmatrix}1&1&-1&1 \\ 0&1&2&-1\\ 0&0&14&0\\ 0&0&4&0\\0&0&0&0\end{pmatrix}
+ \rightsquigarrow~~\begin{pmatrix}1&1&-1&1 \\ 0&1&2&-1\\ 0&0&14&0\\ 0&0&0&0\\0&0&0&0\end{pmatrix}.\]
+\lang{de}{
+Auch hier bleiben drei Zeilen ungleich der Nullzeile. Der Spaltenrang der Matrix $A$ ist also auch gleich $3$.
+}
+\lang{en}{
+Here too we have three non-zero rows. The column rank of the matrix $A$ is hence also $3$.
+}
+\end{example}
+
+
+
+\begin{theorem}
+\lang{de}{Für jede $(m\times n)$-Matrix $A$ über $\R$ ist der Zeilenrang gleich dem Spaltenrang.}
+\lang{en}{The row and column ranks of every $(m\times n)$-matrix $A$ over $\R$ are equal.}
+\end{theorem}
+
+
+\section{\lang{de}{Rang}\lang{en}{Rank}}\label{sec:rang}
+
+\begin{definition}[\lang{de}{Rang}\lang{en}{Rank}]
+\lang{de}{
+Da der Zeilenrang und der Spaltenrang einer Matrix $A$ immer gleich sind, wird diese Zahl auch kurz 
+\notion{Rang von $A$} genannt und mit Rang($A$) bezeichnet.
+\\\\
+Man sagt, dass eine $(m\times n)$-Matrix $A$ \notion{vollen Rang} hat, wenn der Rang von $A$ gleich 
+der kleineren der beiden Zahlen $m$ und $n$ ist, d.\,h. wenn
+Rang($A$)$=\min\{m,n\}$ gilt.\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=816}{\image[75]{00_Videobutton_schwarz}}
+\href{https://www.hm-kompakt.de/video?watch=817}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{
+As the row rank and column rank of a matrix $A$ are always equal, we instead simply use the 
+terminology \notion{rank of $A$} when referring to them, and denote it by rank{$A$}.
+\\\\
+We say that an $(m\times n)$-matrix $A$ has \notion{full rank} if the rank of $A$ is equal to the 
+smaller of the two numbers $m$ and $n$, that is, if rank($A$)$=\min\{m,n\}$.
+}
+\end{definition}
+
+\begin{example}
+\lang{de}{Die $(4\times 5)$-Matrix}
+\lang{en}{The $(4\times 5)$-matrix}
+\[A=
+\begin{pmatrix}
+    1 & 2 & 1 & -1 & 7\\ 
+    1 & 3 & 0 & -1 & 8\\
+    -1 & 0 & -3 & 5 & 9 \\
+    1 & 1 & 2 & -1 & 6
+   \end{pmatrix} \]
+\lang{de}{
+aus obigem Beispiel hat Rang $3$. Der Rang ist also sowohl kleiner als die Zeilenzahl, als auch 
+kleiner als die Spaltenzahl. Daher hat $A$ keinen vollen Rang.
+}
+\lang{en}{
+from the above example has rank $3$. Its rank is less than both the number of rows and the number of 
+columns of the matrix. Hence $A$ does not have full rank.
+}
+\end{example}
+
+\begin{remark}\label{rem:sing_reg}
+\lang{de}{
+Eine quadratische $(n\times n)$-Matrix $A$ hat vollen Rang, wenn der Rang von $A$ gleich $n$ ist.\\
+Diese Matrizen werden \notion{regulär} genannt. Wir nennen quadratische Matrizen \notion{singulär}, wenn sie keinen vollen Rang besitzen.\\
+}
+\lang{en}{
+A square $(n\times n)$-matrix $A$ has full rank if it has rank equal to $n$.\\
+Such a matrix is called \notion{regular}. We call a square matrix \notion{singular} if it does not 
+have full rank.
+}
+\end{remark}
+\lang{de}{
+Quadratische Matrizen werden ausführlich im \link{content_07_quadratische_matrizen}{Kursteil 3b} behandelt.
+}
+\lang{en}{
+Square matrices are covered in detail in \link{content_07_quadratische_matrizen}{chapter 3b}.
+}
+ 
+
+\begin{quickcheck}
+    \type{input.number}
+      \precision{3}
+      \field{real}
+      \begin{variables}
+           \randint[Z]{m}{2}{4}
+           \randint[Z]{n}{5}{6}
+           \randint[Z]{k}{5}{6}
+           \randint[Z]{l}{2}{4}
+\function[calculate]{k4}{4*k}
+\function[calculate]{l4}{4*l}
+       \end{variables}
+      \text{\lang{de}{
+      Die Matrix 
+  $A=\begin{pmatrix} \var{m} & \var{n} & 1\\ 0 &\var{k}&\var{l} \\ 0 & \var{k4} & c \end{pmatrix}$
+      hat für $c=$\ansref keinen vollen Rang.\\
+      \explanation{
+      $A$ ist eine $(3 \times 3)$-Matrix. 
+      Für $c=\var{l4}$ entspricht die dritte Zeile dem Vierfachen
+      der zweiten Zeile. 
+      Damit existiert nach Zeilenumformung eine Nullzeile. 
+      Der Rang ist dadurch $Rang(A)=2$ und nicht voll.
+      }}
+      \lang{en}{
+      The matrix 
+  $A=\begin{pmatrix} \var{m} & \var{n} & 1\\ 0 &\var{k}&\var{l} \\ 0 & \var{k4} & c \end{pmatrix}$
+      does not have full rank if $c=$\ansref.\\
+      \explanation{
+      $A$ is a $(3 \times 3)$-matrix. 
+      If $c=\var{l4}$, the third row is equal to four times the second row. 
+      In this case, Gaussian elimination will produce a row of $0$ entries. 
+      The rank would then be $Rang(A)=2$, which is not full rank.
+      }}}
+  
+    \begin{answer}
+            \solution{l4}
+      \end{answer}
+\end{quickcheck}
+
+\section{\lang{de}{Rang und Lösbarkeit eines LGS}\lang{en}{Rank and solvability of a linear system}}
+
+\lang{de}{
+Mit Hilfe des Rangs einer Koeffizientenmatrix lassen sich Aussagen über die Lösbarkeit des 
+dazugehörigen linearen Gleichungssystems treffen.
+}
+\lang{en}{
+Given the rank of a coefficient matrix, we may make statements about the solvability of the 
+associated linear system.
+}
+\begin{theorem}\label{thm:rang_loesg_lgs}
+\lang{de}{Ein lineares Gleichungssystem mit $m$ Gleichungen und $n$ Variablen besitzt ...}
+\lang{en}{A linear system with $m$ equations and $n$ variables has ...}
+\begin{itemize}
+\item[1.] \lang{de}{
+          \notion{keine Lösung}, wenn der Rang der Koeffizientenmatrix nicht dem Rang der erweiterten 
+          Koeffizientenmatrix entspricht, also wenn
+          \[\text{Rang}(A)\neq \text{Rang}(A|b).\]
+          }
+          \lang{en}{
+          \notion{no solution} if the rank of its coefficient matrix is not equal to the rank of the 
+          augmented matrix, i.e. if
+          \[\text{rank}(A)\neq \text{rank}(A|b).\]
+          }
+\item[2.] \lang{de}{
+          \notion{genau eine Lösung}, wenn der Rang von Koeffizientenmatrix und von erweiterter 
+          Koeffizientenmatrix $n$ ist, also wenn
+          \[\text{Rang}(A)=\text{Rang}(A|b)\,\,\, \text{und}\,\,\, \text{Rang}(A)=n. \]
+          }
+          \lang{en}{
+          \notion{exactly one solution} if the ranks of its coefficient matrix and of the augmented 
+          matrix are both equal to $n$, i.e. if
+          \[\text{rank}(A)=\text{rank}(A|b)\,\,\, \text{and}\,\,\, \text{rank}(A)=n. \]
+          }
+\item[3.] \lang{de}{
+          \notion{unendlich viele Lösungen}, wenn die Ränge von Koeffizientenmatrix und erweiterter 
+          Koeffizientenmatrix zwar gleich, aber kleiner als $n$ sind, d.\,h.
+          \[\text{Rang}(A)=\text{Rang}(A|b)\,\,\, \text{und}\,\,\, \text{Rang}(A)<n.\]
+          }
+          \lang{en}{
+          \notion{infinitely many solutions} if the ranks of the coefficient matrix and of the 
+          augmented matrix are equal to each other, but less than $n$, i.e. if
+          \[\text{rank}(A)=\text{rank}(A|b)\,\,\, \text{and}\,\,\, \text{rank}(A)<n.\]
+          }
+\end{itemize}
+\end{theorem}
+
+\begin{proof*}[\lang{de}{Beweis Theorem}\lang{en}{Proof of theorem}]
+\begin{showhide}
+\begin{itemize}
+\item[1.] \lang{de}{
+          Wenn der Rang der Koeffizientenmatrix nicht dem Rang der erweiterten Koeffizientenmatrix 
+          entspricht, so hat diese die reduzierte Stufenform
+          }
+          \lang{en}{
+          If the rank of the coefficient matrix is not equal to the rank of the augmented matrix, 
+          then the latter in reduced row echelon form is
+          }
+ \[ \begin{pmatrix}
+    1 & 0 & \cdots & 0 & \star&| & b_1\\ 
+     0 & 1 & \cdots & 0 & \star&| & b_2\\ 
+    \vdots & \, & \ddots & \, & \vdots&| & \vdots\\ 
+ 0 & 0 & \cdots & 1 & \star&| & b_k\\ 
+   0 & 0 & \cdots & 0 & 0&| & \vdots \\ 
+  0 & 0 & \cdots & 0 & 0&| & b_{m}\\ 
+  \end{pmatrix}\]
+          \lang{de}{
+          mit mindestens einem $b_i \neq 0$ für $k<i\leq m$, was im Widerspruch zu der Nullzeile der 
+          linken Seite steht. Damit besitzt das dazugehörige LGS keine Lösung.\\
+          Für die Lösbarkeit eines LGS muss der Rang der Koeffizientenmatrix folglich immer gleich 
+          dem Rang der erweiterten Koeffizientenmatrix sein.
+          }
+          \lang{en}{
+          with at least one $b_i \neq 0$ for $k<i\leq m$ with a row of $0$ entries on its left. This 
+          corresponds to the equation $0=b_i \neq 0$, a contradiction, so the linear system has no 
+          solutions.\\
+          To be solvable, the coefficient matrix of a linear system must have the same rank as the 
+          augmented matrix.
+          }
+\item[2.] \lang{de}{
+          Wenn der Rang der Koeffizientenmatrix $n$ ist, so ist in ihrer reduzierten Stufenform 
+          dieselbe Anzahl an Spalten und Zeilen ungleich Null. Die reduzierte Stufenform der 
+          erweiterten Koeffizientenmatrix ist
+          }
+          \lang{en}{
+          If the rank of the coefficient matrix is $n$, then in its reduced row echelon form, there 
+          are $n$ non-zero rows and $n$ non-zero columns. The reduced row echelon form of the 
+          augmented matrix is
+          }
+ \[ \begin{pmatrix}
+    1 & 0 & \cdots & 0 & 0&| & b_1\\ 
+     0 & 1 & \cdots & 0 & 0&| & b_2\\ 
+    \vdots & \, & \ddots & \, & \vdots&| & \vdots\\ 
+ 0 & 0 & \cdots & 1 & 0&| & b_{n-1}\\ 
+  0 & 0 & \cdots & 0 & 1&| & b_n\\
+    0 & 0 & \cdots & 0 & 0&| & 0\\ 
+     \vdots & \, & \cdots & & \vdots&| & \vdots\\  
+  0 & 0 & \cdots & 0 & 0&| & 0\\ 
+  \end{pmatrix}.\]
+          \lang{de}{
+          Das heißt, es existieren $n$ Stufenelemente (Einsen) zu $n$ Variablen und damit ist keine 
+          von ihnen eine freie Variable.\\
+          Eine eindeutige Lösung lässt sich hier direkt ablesen.
+          }
+          \lang{en}{
+          This means that there exist $n$ pivot elements/entries and $n$ variables, hence there are 
+          no free variables.\\
+          A unique solution can be directly read from the reduced row echelon form in this case.
+          }
+
+\item[3.] \lang{de}{
+          Wenn der Rang der (erweiterten) Koeffizientenmatrix $k$ kleiner als $n$ ist, so existieren 
+          im Gegensatz zu 2. freie Variablen.
+          }
+          \lang{en}{
+          If the ranks of the coefficient matrix and the augmented matrix are both $k$ and less than 
+          $n$, then unlike in case 2., there exist free variables.
+          }
+ \[ \begin{pmatrix}
+    1 & 0 & \cdots & 0 & \star&| & b_1\\ 
+     0 & 1 & \cdots & 0 & \star&| & b_2\\ 
+    \vdots & \, & \ddots & & \vdots&| & \vdots\\ 
+ 0 & 0 & \cdots & 1 & \star&| & b_k\\ 
+    0 & 0 & \cdots & 0 & 0&| & 0\\ 
+     \vdots & \, & \cdots & \, & \vdots&| & \vdots\\  
+  0 & 0 & \cdots & 0 & 0&| & 0\\ 
+  \end{pmatrix}.\]
+          \lang{de}{
+          Da freie Variablen als reellwertige Parameter gesetzt werden können, existieren unendlich 
+          viele Lösungen.
+          }
+          \lang{en}{
+          As free variables can be replaced with real-valued parameters, there exist infinitely many 
+          solutions, found by varying these parameters.
+          }
+\end{itemize}
+\end{showhide}
+\end{proof*}
+
+\begin{example}
+\begin{tabs*}
+\tab{\lang{de}{1. Beispiel}\lang{en}{Example 1}}
+\lang{de}{Für das lineare Gleichungssystem}
+\lang{en}{The linear system}
+\begin{displaymath}
+\begin{mtable}[\cellaligns{ccrcrcrcr}]
+\text{(I)}&\qquad-&x&+&2y&+&3z&=&5\\
+\text{(II)}&&&&y&+&4z&=&11\\
+\text{(III)}&&&&&-&2z&=&-6
+\end{mtable}
+\end{displaymath}
+\lang{de}{mit erweiterter Koeffizientenmatrix}
+\lang{en}{has the augmented matrix}
+\[ \begin{pmatrix} -1 & 2 & 3 & | & 5 \\0 & 1 & 4 & | & 11 \\0 & 0 & -2 & | & -6 \end{pmatrix} \]
+\lang{de}{
+gilt $\text{Rang}(A)=\text{Rang}(A|b)=3$, was auch der Anzahl der dazugehörigen Variablen entspricht. 
+Das heißt, das LGS besitzt genau eine Lösung:
+}
+\lang{en}{
+with $\text{rank}(A)=\text{rank}(A|b)=3$, which is equal to the number of variables in the system. 
+Therefore the linear system has a unique solution:
+}
+
+\[\mathbb{L}=\left\{\begin{pmatrix}2\\ -1\\ 3\end{pmatrix} \right\}\]
+\lang{de}{(siehe \link{gauss1}{letztes Kapitel}).}
+\lang{en}{(see the \link{gauss1}{previous chapter}).}
+\\
+
+\tab{\lang{de}{2. Beispiel}\lang{en}{Example 2}}
+\lang{de}{Für das lineare Gleichungssystem}
+\lang{en}{The linear system}
+\[ \begin{mtable}[\cellaligns{crcrcr}]
+(I)&\qquad x & - & 4 \cdot  y & = & 10 \\
+(II)& &  & 0 & =  & 0
+\end{mtable} \]
+\lang{de}{mit erweiterter Koeffizientenmatrix}
+\lang{en}{has the augmented matrix}
+\[ \begin{pmatrix} 1 & -4 & | & 10 \\0 &0 & | & 0 \end{pmatrix} \]
+\lang{de}{
+gilt $\text{Rang}(A)=\text{Rang}(A|b)=1$. Das LGS besitzt aber 2 Variablen und hat damit unendlich 
+viele Lösungen:
+}
+\lang{en}{
+with $\text{rank}(A)=\text{rank}(A|b)=1$. The linear system has two variables, so it has infinitely 
+many solutions:
+}
+
+\[ \mathbb{L}= \left\{ \begin{pmatrix}10\\ 0 \end{pmatrix}+r\cdot \begin{pmatrix} 4 \\ 1 \end{pmatrix} \, \big| \, r\in \R \right\} \] 
+\lang{de}{(siehe \link{gauss1}{letztes Kapitel}).}
+\lang{en}{(see the \link{gauss1}{previous chapter}).}
+
+\tab{\lang{de}{3. Beispiel}\lang{en}{Example 3}}
+\lang{de}{Für das lineare Gleichungssystem}
+\lang{en}{The linear system}
+\begin{displaymath}
+\begin{mtable}[\cellaligns{ccrcrcrcr}]
+\text{(I)}&\qquad-&x&+&2y&+&3z&=&5\\
+\text{(II)}&&&&y&+&4z&=&11\\
+\text{(III)}&&&&&&0&=&-6
+\end{mtable}
+\end{displaymath}
+\lang{de}{mit erweiterter Koeffizientenmatrix}
+\lang{en}{has the augmented matrix}
+\[ \begin{pmatrix} -1 & 2 & 3 & | & 5 \\0 & 1 & 4 & | & 11 \\0 & 0 & 0 & | & -6 \end{pmatrix} \]
+\lang{de}{
+gilt $\text{Rang}(A)=2$ und $\text{Rang}(A|b)=3$.\\
+Das heißt, das LGS ist nicht lösbar und
+}
+\lang{en}{
+with $\text{rank}(A)=2$ and $\text{rank}(A|b)=3$.\\
+Therefore the linear system has no solutions:
+}
+\[\mathbb{L}=\emptyset.\]
+
+\end{tabs*}
+\end{example}
+
+\end{visualizationwrapper}
+
+
+\end{content}

@@ -1,0 +1,505 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ober- und Untersummen}
+    \lang{en}{Upper and lower sums}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T304_Integral_B.meta.xml}{T303_Integral_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T304_Integral_A.meta.xml}{T303_Integral_A}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T107_Integral_A.meta.xml}{T107_Integral_A}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T204_Abbildungen_und_Funktionen/g_art_content_12_reelle_funktionen_monotonie.meta.xml}{reelle-funk}
+    \link{generic_article}{content/rwth/HM1/T107_Integralrechnung/g_art_content_24_integral_als_flaeche.meta.xml}{def-integral}
+    \link{generic_article}{content/rwth/HM1/T202_Reelle_Zahlen_axiomatisch/g_art_content_07_vollstaendigkeit.meta.xml}{supinf}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{3}
+\ombarticle{1}
+
+\title{\lang{de}{Ober- und Untersummen}\lang{en}{Upper and lower sums}}
+ 
+\begin{block}[annotation]
+  
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10036}{Ticket 10036}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\lang{de}{
+In \link{def-integral}{Teil 1} hatten wir das Integral als Flächeninhalt mit Vorzeichen 
+kennengelernt. Das bestimmte Integral $\big\int_a^b f(x)\, dx$ einer Funktion $f(x)$ gab den 
+\emph{Flächeninhalt mit Vorzeichen} (orientierter Flächeninhalt) der Fläche an, die der Graph der 
+Funktion mit der $x$-Achse zwischen den Integrationsgrenzen $a$ und $b$ einschließt, wobei die 
+Flächenteile oberhalb der $x$-Achse \emph{positiv} und die Flächenteile unterhalb der $x$-Achse 
+\emph{negativ} in das Integral eingehen.
+}
+\lang{en}{
+In the following we will always assume that $a$ and $b$ are real numbers and $a<b$. We recall our 
+definitions from \link{def-integral}{Part 1} of the course. The definite integral 
+$\big\int_a^b f(x)\, dx$ of a function $f(x)$ gives us the \emph{signed area} of the 
+function bounded by its graph between the lower and upper bounds, $a$ and $b$ respectively. Areas 
+above the $x$-axis count as \emph{positive} area, and areas below the $x$-axis count as \emph{negative} area.
+}
+
+\begin{center}
+\image{T107_Integral_A}
+\end{center}
+
+\lang{de}{
+Weist der Funktionsgraph jedoch Sprünge auf, müsste man sich noch senkrechte Verbindungslinien 
+denken, um eine geschlossen umrahmte Fläche zu bekommen. Auch kann es bei sehr "`sprunghaften"' 
+Funktionsgraphen (z.\,B. zur 
+\ref[reelle-funk][Dirichletschen Sprungfunktion]{ex:unstetige-funktionen}) vorkommen, dass man keine 
+richtige Fläche erhält. Wir benötigen daher eine mathematische Definition des Integrals, die in 
+diesem und dem folgenden Abschnitt eingeführt werden. Bei "`schönen"' Funktionen stimmt dies dann 
+wieder mit der naiven Anschauung als eingeschlossene Fläche überein.
+\\\\
+Die grobe Idee ist, dass das Integral durch Summation von Rechtecksflächen mit Vorzeichen entsteht, 
+welche den gesuchten orientierten Flächeninhalt approximieren. Hierzu benötigt man zunächst 
+\textit{Zerlegungen} des Intervalls.
+}
+\lang{en}{
+If the graph of the function being integrated has 'jumps', we can use vertical lines to bound the 
+area for integration. In the case of graphs with very many 'jumps' (for example the 
+\ref[reelle-funk][Dirichlet function]{ex:unstetige-funktionen}), even this strategy may not work. 
+Hence we require a rigorous definition of an integral, which we introduce in this section and the 
+next. This should correspond to our previous naive definition in terms of bounded areas in the case 
+of 'nice' functions.
+\\\\
+Roughly, the idea is to define the integral as the sum of signed areas of rectangles which 
+approximate the area bounded by the function. Firstly we introduce the concept of 
+\textit{partitioning} an interval.
+}
+
+
+
+
+\section{\lang{de}{Intervall-Zerlegung}\lang{en}{Partitioning intervals}}
+
+
+\begin{definition}\label{def:intervall-zer}
+\lang{de}{
+Es sei $[a;b]$ ein Intervall. Eine \notion{Zerlegung} $Z$ des Intervalls $[a;b]$ in $n$ 
+Teilintervalle besteht aus Stellen $x_0=a<x_1<x_2<\ldots <x_{n-1}<x_n=b$, und den zugehörigen 
+Teilintervallen $[x_0;x_1]$, $[x_1;x_2],\ldots, [x_{n-1};x_n]$.\\
+Der Wert $\Delta x_k=x_k-x_{k-1}$ ist die Länge des $k$-ten Teilintervalls (für $k=1,\ldots, n$) und
+die \notion{Feinheit} der Zerlegung $Z$ ist das Maximum der Teilintervalllängen, d.\,h. der Wert
+}
+\lang{en}{
+Let $[a;b]$ be an interval. A \notion{partition} $Z$ of the interval $[a;b]$ into $n$ subintervals 
+is a collection of points $x_0=a<x_1<x_2<\ldots <x_{n-1}<x_n=b$ and the corresponding subintervals 
+$[x_0;x_1]$, $[x_1;x_2],\ldots, [x_{n-1};x_n]$.\\
+The value $\Delta x_k=x_k-x_{k-1}$ is the length of the $k$th subinterval (for $k=1,\ldots, n$) and 
+the \notion{norm} of the partition $Z$ is the maximum of the lengths of the subintervals, that is, 
+the value
+}
+\[ \Delta Z:= \max\{ \Delta x_1,\ldots, \Delta x_n\}. \]
+\end{definition}
+
+\begin{example}\label{ex:aequidistante-zerlegung}
+\lang{de}{
+Eine der wichtigsten Zerlegungen ist die sogenannte \notion{äquidistante Zerlegung}, bei der die 
+Längen der Teilintervalle alle gleich sind. Bei einer äquidistanten Zerlegung des Intervalls $[1;6]$ 
+in $8$ Teilintervalle hat also jedes Teilintervall die Länge $\Delta x_k=\frac{6-1}{8}=\frac{5}{8}$. 
+Die Zwischenstellen sind also
+}
+\lang{en}{
+One of the most important partitions is the so-called \notion{equal partition}, in which the 
+intervals are all the same lengths. An equal partition of the interval $[1;6]$ into $8$ 
+subintervals results in each subinterval having length $\Delta x_k=\frac{6-1}{8}=\frac{5}{8}$. The 
+corresponding points are
+}
+\[   x_0=1,\, x_1=1+\frac{5}{8}=\frac{13}{8},\, x_2=\frac{13}{8}+\frac{5}{8}=\frac{18}{8}, \ldots \]
+\lang{de}{bzw. allgemein}
+\lang{en}{in this case, or more generally,}
+\[   x_k= 1+k\cdot \frac{5}{8} \quad \text{\lang{de}{ für }\lang{en}{ for }}k=0,\ldots, 8. \]
+\lang{de}{Die Teilintervalle sind also die Intervalle }
+\lang{en}{The subintervals are therefore the intervals }
+$[1;\frac{13}{8}]$, $[\frac{13}{8};\frac{18}{8}],\ldots, [\frac{43}{8};6]$.
+  
+\lang{de}{
+Im Allgemeinen besteht also eine äquidistante Zerlegung eines Intervalls $[a;b]$ in $n$ 
+Teilintervalle aus den Teilpunkten 
+}
+\lang{en}{
+In general the equal partition of an interval $[a;b]$ into $n$ subintervals has the following 
+endpoints:
+}
+\[   x_k= a+k\cdot \frac{b-a}{n} \quad \text{\lang{de}{ für }\lang{en}{ for }}k=0,\ldots, n. \]
+\end{example}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{2}
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{a}{-3}{1}
+            \randint{b}{2}{8}
+            \function[calculate]{l}{(b-a)/4}
+			\function[calculate]{sol1}{a+l}
+            \function[calculate]{sol2}{a+2*l}
+            \function[calculate]{sol3}{a+3*l}
+		\end{variables}
+		
+		\text{\lang{de}{
+        Das Intervall $[\var{a};\var{b}]$ soll in vier äquidistante Teilintervalle zerlegt werden.
+        Die Zerlegungsstellen sind gegeben durch:
+        }
+        \lang{en}{
+        If the interval $[\var{a};\var{b}]$ is partitioned into four equal subintervals, the 
+        endpoints of the intervals are as follows:
+        }\\
+        $\var{a} <$ \ansref $<$ \ansref $<$ \ansref $< \var{b}$}
+		
+		\begin{answer}
+			\solution{sol1}
+		\end{answer}
+        \begin{answer}
+			\solution{sol2}
+		\end{answer}
+        \begin{answer}
+			\solution{sol3}
+		\end{answer}
+		\explanation{\lang{de}{Die Länge jedes Teilintervalls ist $\var{l}$.}
+                 \lang{en}{The length of each subinterval is $\var{l}$.}}
+	\end{quickcheck}
+	
+	\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{a}{-3}{1}
+            \randint{b}{2}{8}
+            \function[calculate]{l}{(b-a)/5}
+			\function[calculate]{sol1}{a+l}
+            \function[calculate]{sol2}{a+2*l}
+            \function[calculate]{sol3}{a+3*l}
+            \function[calculate]{sol4}{a+4*l}
+		\end{variables}
+		
+		\text{\lang{de}{
+        Das Intervall $[\var{a};\var{b}]$ soll in fünf äquidistante Teilintervalle zerlegt werden.
+        Die Zerlegungsstellen sind gegeben durch:
+        }
+        \lang{en}{
+        If the interval $[\var{a};\var{b}]$ is partitioned into five equal subintervals, the 
+        endpoints of the intervals are as follows:
+        }\\
+        $\var{a} <$ \ansref $<$ \ansref $<$ \ansref $<$ \ansref $< \var{b}$}
+		
+		\begin{answer}
+			\solution{sol1}
+		\end{answer}
+        \begin{answer}
+			\solution{sol2}
+		\end{answer}
+        \begin{answer}
+			\solution{sol3}
+		\end{answer}
+        \begin{answer}
+			\solution{sol4}
+		\end{answer}
+		\explanation{\lang{de}{Die Länge jedes Teilintervalls ist $\var{l}$.}
+                 \lang{en}{The length of each subinterval is $\var{l}$.}}
+	\end{quickcheck}
+\end{quickcheckcontainer}
+
+
+\section{\lang{de}{Obersummen und Untersummen}
+         \lang{en}{Upper sums and lower sums}}\label{sec:ober-untersumme}
+
+
+\begin{definition}\label{def:Obersum-untersum}
+\lang{de}{
+Sei $f:[a;b]\to \R$ eine auf dem Intervall $[a;b]$ definierte beschränkte Funktion.
+Für eine Zerlegung $Z$ des Intervalls $[a;b]$ in Teilintervalle $[x_{k-1};x_k]$ ($k=1,\ldots, n$)
+seien für jedes $k=1,\ldots, n$
+}
+\lang{en}{
+Let $f:[a;b]\to \R$ be a bounded function defined on the interval $[a;b]$. For a partition $Z$ of the 
+interval $[a;b]$ into subintervals $[x_{k-1};x_k]$ ($k=1,\ldots, n$), for all $k=1,\ldots, n$ let 
+}
+\[ m_k=\inf\{ f(x) \,|\, x\in [x_{k-1};x_k] \}, \]
+\lang{de}{
+das \link{supinf}{Infimum} aller Funktionswerte auf dem Teilintervall $[x_{k-1};x_k]$, und
+}
+\lang{en}{
+be the \link{supinf}{infimum} of the image of the function on the subinterval $[x_{k-1};x_k]$, and
+}
+\[ M_k=\sup\{ f(x) \,|\, x\in [x_{k-1};x_k] \}, \]
+\lang{de}{
+das \link{supinf}{Supremum} aller Funktionswerte auf dem Teilintervall $[x_{k-1};x_k]$. Dann 
+definiert man die \notion{Untersumme} $U(Z)$ und die \notion{Obersumme} $O(Z)$ von $f$ zur Zerlegung 
+$Z$ durch
+}
+\lang{en}{
+be the \link{supinf}{supremum} of the image of the function on the subinterval $[x_{k-1};x_k]$. Then 
+we define the \notion{lower sum} $U(Z)$ and the \notion{upper sum} $O(Z)$ of $f$ over the partition 
+$Z$ as
+}
+  \[ U(Z)= \sum_{k=1}^n m_k \cdot \Delta x_k \, \, \text{\lang{de}{ und }\lang{en}{ and }} \, \, \,   O(Z)= \sum_{k=1}^n M_k \cdot \Delta x_k \, .\]
+
+\lang{de}{Die Werte hängen von der gewählten Zerlegung $Z$ des Intervalls $[a;b]$ ab.}
+\lang{en}{These values depend on the chosen partition $Z$ of the interval $[a;b]$.}
+
+% Der gesuchte Integralwert (sofern er existiert) liegt \emph{zwischen der Untersumme und der Obersumme}. 
+\end{definition}
+
+
+\begin{example}\label{zweizerl}
+%\emph {Beispiel:} 
+
+\lang{de}{
+Links wird das Integrationsintervall $[0;2]$ in zwei Teilintervalle und rechts in 
+zehn Teilintervalle aufgeteilt. Die Untersumme ist die dunkel gefärbte Fläche,
+die Obersumme ist die hell gefärbte plus die dunkel gefärbte Fläche.
+In beiden Fällen liegt der Flächeninhalt unter dem Graphen zwischen der Untersumme und der Obersumme. 
+Mit zehn Teilintervallen ist der Unterschied jedoch geringer.\\
+}
+\lang{en}{
+On the left, the interval $[0,2]$ has been divided into two smaller subintervals. On the right, the 
+same interval has been divided into ten equal intervals. The lower sum is the area of the darker 
+rectangles and the upper sum is the area of the lighter rectangles. In both cases, the true value 
+of the integral lies between the upper and lower sums, however the approximation 
+is better with ten intervals than with two.\\
+}
+
+
+\begin{center}
+\image{T303_Integral_A}\hspace{1cm} \image{T303_Integral_B}
+\end{center}
+
+
+%\end{example}
+%\includegraphics[width=7cm]{summe2.png} %\hspace*{5mm}
+%\includegraphics[width=7cm]{summe5.png}
+%\caption{Untersummen und Obersummen für $f(x)=x^2+1$ im Intervall $[0,2]$ mit $2$ Teilintervallen (links) und $10$ Teilintervallen (rechts).}
+%\label{summen2-5}
+%\end{figure}
+
+%\begin{example}
+%\emph{Beispiel:}
+\lang{de}{
+Die Funktion in diesem Beispiel ist $f(x)=x^2+1$ und die Intervallgrenzen sind $a=0$ und $b=2$. 
+Bei der Aufteilung in zwei Teilintervalle (linker Graph) wird das Intervall $[0;2]$ in zwei 
+Teilintervalle $[0;1]$ und $[1;2]$ zerlegt und für diese Zerlegung die Untersumme $U(Z_2)$ und die 
+Obersumme $O(Z_2)$ berechnet. Die Intervalllänge ist $1$, der kleinste Funktionswert liegt am linken 
+Rand, der größte am rechten Rand. Man erhält:
+}
+\lang{en}{
+The function in this example is $f(x)=x^2+1$, defined on an interval from $a=0$ to $b=2$. To 
+partition this into two equal subintervals (left graph), the interval $[0;2]$ is divided into 
+$[0;1]$ and $[1;2]$, and these are used to find the lower sum $U(Z_2)$ and the upper sum $O(Z_2)$. 
+The length of the intervals is $1$, the smallest value of the function is on the left side of each 
+subinterval, and the largest value is on the right side. We obtain:
+}
+\[ U(Z_2)= f(0)\cdot 1 + f(1)\cdot 1 = 1+2 = 3 \, \, \, \text{\lang{de}{ und }\lang{en}{ and }} \, \, \,
+O(Z_2)=f(1) \cdot 1 + f(2)\cdot 1 = 2+5 = 7 . \]
+
+\lang{de}{
+Bei der Zerlegung in zehn gleich große Teilintervalle ist die Intervalllänge jeweils 
+$\frac{2}{10}=0,2$. Auch hier wird das Supremum der Funktionswerte stets am rechten Rand und das 
+Infimum am linken Rand der Teilintervalle angenommen. Für Unter- und Obersumme erhält man daher
+}
+\lang{en}{
+To partition the interval into ten equal subintervals, the subintervals must have length 
+$\frac{2}{10}=0.2$. Again, the smallest value of the function is on the left side of each 
+subinterval, and the largest value is on the right side. The lower and upper sums are now:
+}
+\begin{eqnarray*}
+U(Z_{10}) &=& f(0)\cdot 0\lang{de}{,}\lang{en}{.}2 + f(0,2)\cdot 0\lang{de}{,}\lang{en}{.}2 
+            + \ldots + f(1\lang{de}{,}\lang{en}{.}8)\cdot 0\lang{de}{,}\lang{en}{.}2 
+            =(1 + 1\lang{de}{,}\lang{en}{.}04 + 1\lang{de}{,}\lang{en}{.}16 + \ldots 
+            + 4\lang{de}{,}\lang{en}{.}24)\cdot 0\lang{de}{,}\lang{en}{.}2 
+            = 4\lang{de}{,}\lang{en}{.}28\, , \\
+O(Z_{10}) &=& f(0\lang{de}{,}\lang{en}{.}2)\cdot 0\lang{de}{,}\lang{en}{.}2 
+            + f(0\lang{de}{,}\lang{en}{.}4)\cdot 0\lang{de}{,}\lang{en}{.}2 
+            +\ldots + f(2)\cdot 0\lang{de}{,}\lang{en}{.}2 
+            = (1\lang{de}{,}\lang{en}{.}04 + 1\lang{de}{,}\lang{en}{.}16 + \ldots 
+            + 4\lang{de}{,}\lang{en}{.}24+5)\cdot 0\lang{de}{,}\lang{en}{.}2 
+            = 5\lang{de}{,}\lang{en}{.}08\, . \\
+\end{eqnarray*} 
+
+\lang{de}{
+Bei der Zerlegung in zehn Teilintervalle ist die Differenz zwischen Ober- und Untersumme nicht so 
+groß wie bei der Zerlegung in zwei Teilintervalle.
+}
+\lang{en}{
+When we partition into ten subintervals, the difference between the upper sum and the lower sum is 
+smaller than when we partition into two subintervals.
+}
+\end{example}
+
+%
+%\lang{de}{In der folgenden Definition wird der Begriff der beschränkten Funktion verwendet.
+%Eine Funktion $f$ ist \emph{beschränkt}, falls es eine Zahl $R>0$ gibt, so dass
+%$-R \leq f(x) \leq R$ für alle $x$ in ihrem Definitionsbereich gilt.}
+%\lang{en}{In the following definition we'll deal with the idea of a bounded function. A function $f$ is called \emph{bounded} if there is a number 
+%$R>0$ so that $-R \leq f(x) \leq R$ for all $x$ in the domain of $f$.}
+
+
+
+\section{\lang{de}{Riemannsche Zwischensummen}
+         \lang{en}{Riemann sums}}\label{sec:zwischensummen}
+
+\lang{de}{
+Wir hatten im obigen \lref{sec:ober-untersumme}{Abschnitt} Ober- und Untersummen definiert, indem wir 
+das betreffende Intervall in Teilintervalle zerlegt hatten und dann rechteckige Flächen aufsummiert 
+haben, deren Höhen genau die Suprema bzw. Infima der Funktion auf den Teilintervallen sind.
+\\\\
+Ganz entsprechend definiert man auch Zwischensummen:
+}
+\lang{en}{
+In the above \lref{sec:ober-untersumme}{section} we defined upper sums and lower sums by partitioning 
+an interval into equal subintervals and summing the rectangular areas whose heights are respectively 
+the suprema or infima of the function values on the subintervals.
+\\\\
+We now define Riemann sums:
+}
+
+
+\begin{definition}\label{def:riemann-zwisch-sum}
+\lang{de}{
+Es sei $f:[a;b]\to \R$ eine auf dem Intervall $[a;b]$ definierte beschränkte Funktion
+und $Z$ eine Zerlegung des Intervalls $[a;b]$ in Teilintervalle $[x_{k-1};x_k]$ ($k=1,\ldots, n$).
+Weiter sei für jedes $k=1,\ldots, n$ eine Stelle $a_k\in [x_{k-1};x_k]$ gewählt.
+\\\\
+Dann definiert man die \notion{(Riemannsche) Zwischensumme} $S(Z;a_1,\ldots, a_n)$ von $f$ zur 
+Zerlegung $Z$ und den Zwischenstellen $a_1,\ldots, a_n$ durch
+}
+\lang{en}{
+Let $f:[a;b]\to \R$ be a bounded function defined on the interval $[a;b]$, and $Z$ a partition of the 
+interval $[a;b]$ into subintervals $[x_{k-1};x_k]$ ($k=1,\ldots, n$). 
+For each $k=1,\ldots, n$, let $a_k\in [x_{k-1};x_k]$ be a point.
+\\\\
+We define the \notion{Riemann sum} $S(Z;a_1,\ldots, a_n)$ of $f$ over the partition $Z$ with 
+a point $a_1,\ldots, a_n$ in each subinterval as
+}
+  \[ S(Z;a_1,\ldots, a_n)= \sum_{k=1}^n f(a_k) \cdot \Delta x_k = \sum_{k=1}^n f(a_k) \cdot (x_k-x_{k-1}) \, .\]
+
+\end{definition}
+
+\begin{remark}
+\lang{de}{
+Sind die Zwischenstellen $a_1,\ldots,a_n$ so gewählt, dass 
+$f(a_k)=\sup \{ f(x) | x\in [x_{k-1};x_k]\}$ 
+für alle $k$ gilt (falls es überhaupt möglich ist), so ist die
+Zwischensumme zur gewählten Zerlegung gleich der Obersumme zu dieser Zerlegung.\\
+Entsprechend ist die Zwischensumme gleich der Untersumme, wenn 
+$f(a_k)=\inf \{ f(x) | x\in [x_{k-1};x_k]\}$ für alle $k$.
+\\\\
+Im Allgemeinen liegt die Zwischensumme zu einer gewählten Zerlegung zwischen der Unter- und der Obersumme zu dieser Zerlegung.
+}
+\lang{en}{
+If the points $a_1,\ldots,a_n$ are chosen such that $f(a_k)=\sup \{ f(x) | x\in [x_{k-1};x_k]\}$ for 
+all $k$ (if this is even possible), then the Riemann sum for the given partition is equal to the 
+upper sum for the partition.\\
+Similarly, the Riemann sum is equal to the lower sum if $f(a_k)=\inf \{ f(x) | x\in [x_{k-1};x_k]\}$ 
+for all $k$.
+\\\\
+In general, for any given partition, the Riemann sum lies between the upper sum and the lower sum.
+}
+\end{remark}
+
+\lang{de}{
+Da Zwischensummen zwischen der Unter- und der Obersumme liegen, dienen auch sie dazu, Integrale 
+näherungsweise zu bestimmen. Sie sind im Allgemeinen sogar praktischer, weil man nicht die Suprema 
+bzw. Infima auf Intervallen bestimmen muss, sondern lediglich Funktionswerte an Zwischenstellen.
+}
+\lang{en}{
+As Riemann sums lie between upper sums and lower sums, they can be used to approximate integrals. In 
+fact, they are more practical to this purpose than the upper and lower sums themselves, as there is 
+no need to determine the suprema and infima on each subinterval. We simply need to choose some 
+arbitrary value in the subinterval at which to evaluate the function.
+}
+
+
+\begin{example}
+\lang{de}{
+Im \lref{zweizerl}{obigen Beispiel} $f(x)=x^2+1$ auf dem Intervall $[a;b]=[0;2]$ kann man zur 
+äquidistanten Zerlegung in zwei Teilintervalle auch die Zwischenstellen $a_1=\frac{1}{2}$ und 
+$a_2=\frac{3}{2}$ wählen und erhält dementsprechend als Zwischensumme
+}
+\lang{en}{
+In the \lref{zweizerl}{above example} of $f(x)=x^2+1$ on the interval $[a;b]=[0;2]$, we may partition 
+$[0;2]$ into two equal subintervals, then choose the midpoints of each interval, $a_1=\frac{1}{2}$ 
+and $a_2=\frac{3}{2}$. The Riemann sum is then
+}
+\[  S\left(Z_2; \frac{1}{2}, \frac{3}{2}\right)= f\left(\frac{1}{2}\right)\cdot 1+ f\left(\frac{3}{2}\right)\cdot 1=\frac{5}{4}+\frac{13}{4}=\frac{9}{2}=4\lang{de}{,}\lang{en}{.}5.\]
+
+\lang{de}{
+Wir sehen, dass hier der Wert der Zwischensumme zwischen den Werten der Ober- und Untersumme aus 
+Beispiel \ref{zweizerl} liegt. Wenn wir das Integral mit den Methoden aus dem ersten Teil ermitteln, 
+erhalten wir
+}
+\lang{en}{
+Here we see that the value of the Riemann sum lies in between the values of the upper and lower sums. 
+Evaluating the integrals using the methods from the first chapter yields
+}
+\[
+\int_0^2 f(x)\, dx = \frac{14}{3} \approx 4\lang{de}{,}\lang{en}{.}67.
+\]
+\lang{de}{
+Der Wert der Zwischensumme kann den Wert des Integrals also einigermaßen gut approximieren. Dies 
+liegt aber auch an der gewählten Zerlegung und den Zwischenstellen.
+}
+\lang{en}{
+The value of the Riemann sum can evidently approximate the value of the integral to some extent. It 
+still depends, of course, on the chosen partition and at which points the function is evaluated in 
+each subinterval.
+}
+\end{example}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{a}{-3}{3}
+            \randint{b}{-3}{3}
+            \randint{c}{1}{4}
+            \function[normalize]{f}{x^2+a*x+b}
+            \function[calculate]{z1}{-1/c}
+            \function[calculate]{z2}{2/c}
+			\substitute[calculate]{v1}{f}{x}{z1}
+            \substitute[calculate]{v2}{f}{x}{z2}
+            \function[calculate]{sol}{v1+2*v2}
+		\end{variables}
+		
+		\text{\lang{de}{
+        Das Intervall $[-1;2]$ soll in zwei Teilintervalle zerlegt werden mit der Zwischenstelle $0$.
+        Die Funktion $f$ sei gegeben durch $f(x)=\var{f}$. Berechnen Sie die Zwischensumme $S(Z;\var{z1},\var{z2}) =$\ansref
+        }
+        \lang{en}{
+        Partition the interval $[-1;2]$ into two subintervals with endpoint $0$. 
+        Let the function $f$ be given by $f(x)=\var{f}$. Calculate the Riemann sum $S(Z;\var{z1},\var{z2}) =$\ansref
+        }}
+		
+		\begin{answer}
+			\solution{sol}
+		\end{answer}
+		\explanation{$f(\var{z1})=\var{v1}$ \lang{de}{und}\lang{en}{and} $f(\var{z2})=\var{v2}$}
+	\end{quickcheck}
+
+
+\end{content}

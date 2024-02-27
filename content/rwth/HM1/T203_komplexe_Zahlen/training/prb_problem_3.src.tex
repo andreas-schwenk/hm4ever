@@ -1,0 +1,140 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A03: Polarkoordinaten}
+    \lang{en}{Problem 3}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+\lang{de}{\title{A03: Polarkoordinaten}}
+\lang{en}{\title{Problem 3}}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9753}{Ticket 9753}
+\end{block}
+
+\begin{problem}
+  \begin{question}
+    \lang{de}{\text{
+    Bestimmen Sie den Betrag und das Argument (den Phasenwinkel) von \\
+    $\var{z}$. Runden Sie auf 2 Nachkommastellen.
+    }}
+    \lang{de}{\explanation{
+    Der Betrag berechnet sich aus der Wurzel der Summe
+    der Quadrate von Real- und Imaginärteil. \\
+    Der Phasenwinkel berechnet sich aus dem Arkustangens
+    des Quotienten von Imaginärteil und Realteil.
+    }}
+    \type{input.number}
+    \field{real}
+    \begin{variables}
+      \randint{a}{1}{10} % Erster und vierter Quadrant
+      \randint{b}{-10}{10}
+      \function{z}{a + b*i}
+      \function[calculate]{r}{sqrt(a^2 + b^2)}
+      \function[calculate]{ph}{atan(b/a)}
+    \end{variables}
+
+    \begin{answer}
+      \text{Betrag:}
+      \solution{r}
+    \end{answer}
+
+    \begin{answer}
+      \text{Argument:}
+      \solution{ph}
+    \end{answer}
+
+  \end{question}
+
+  \begin{question}
+    \lang{de}{\text{
+    Bestimmen Sie den Betrag und das Argument (den Phasenwinkel) von \\
+    $\var{z}$. Runden Sie auf 2 Nachkommastellen.
+    }}
+    \lang{de}{\explanation{
+    Der Betrag berechnet sich aus der Wurzel der Summe
+    der Quadrate von Real- und Imaginärteil. \\
+    Der Phasenwinkel berechnet sich aus dem Arkustangens
+    des Quotienten von Imaginärteil und Realteil. \\
+    Da die Zahl im zweiten Quadranten liegt
+    (negativer Realteil, positiver Imaginärteil),
+    muss zum Phasenwinkel noch $\pi$ addiert werden.
+    }}
+    \type{input.number}
+    \field{real}
+    \begin{variables}
+      \randint{a}{-10}{-1} % Zweiter Quadrant
+      \randint{b}{1}{10}
+      \function{z}{a + b*i}
+      \function[calculate]{r}{sqrt(a^2 + b^2)}
+      \function[calculate]{ph}{atan(b/a) + pi}
+    \end{variables}
+
+    \begin{answer}
+      \text{Betrag:}
+      \solution{r}
+    \end{answer}
+
+    \begin{answer}
+      \text{Argument:}
+      \solution{ph}
+    \end{answer}
+
+  \end{question}
+
+  \begin{question}
+    \lang{de}{\text{
+    Bestimmen Sie den Betrag und das Argument (den Phasenwinkel) von \\
+    $\var{z}$. Runden Sie auf 2 Nachkommastellen.
+    }}
+    \lang{de}{\explanation{
+    Der Betrag berechnet sich aus der Wurzel der Summe
+    der Quadrate von Real- und Imaginärteil. \\
+    Der Phasenwinkel berechnet sich aus dem Arkustangens
+    des Quotienten von Imaginärteil und Realteil. \\
+    Da die Zahl im dritten Quadranten liegt
+    (negativer Realteil, negativer Imaginärteil),
+    muss vom Phasenwinkel noch $\pi$ subtrahiert werden.
+    }}
+    \type{input.number}
+    \field{real}
+    \begin{variables}
+      \randint{a}{-10}{-1} % Dritter Quadrant
+      \randint{b}{-10}{-1}
+      \function{z}{a + b*i}
+      \function[calculate]{r}{sqrt(a^2 + b^2)}
+      \function[calculate]{ph}{atan(b/a) - pi}
+    \end{variables}
+
+    \begin{answer}
+      \text{Betrag:}
+      \solution{r}
+    \end{answer}
+
+    \begin{answer}
+      \text{Argument:}
+      \solution{ph}
+    \end{answer}
+
+  \end{question}
+
+\end{problem}
+
+\embedmathlet{mathlet}
+\end{content}

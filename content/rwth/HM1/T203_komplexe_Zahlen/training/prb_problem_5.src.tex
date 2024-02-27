@@ -1,0 +1,83 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A05: Produkt/Quotient}
+    \lang{en}{Problem 5}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+\lang{de}{\title{A05: Produkt/Quotient}}
+\lang{en}{\title{Problem 5}}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9755}{Ticket 9755}
+\end{block}
+
+\begin{problem}
+
+  \begin{question}
+    \lang{de}{\text{
+    Berechnen Sie das Produkt $z_1 \cdot z_2$ und den Quotienten 
+    $\frac{z_1}{z_2}$ 
+    der beiden komplexen Zahlen \\
+    $z_1 = \var{z_1},$ \\
+    $z_2 = \var{z_2}$.
+    }}
+    \lang{de}{\explanation{
+    Das Produkt zweier komplexer Zahlen $z_1 = a_1 + {i} \, b_1$ und 
+    $z_2 = a_2 +{i} \, b_2$ ist
+    $a_1 \cdot a_2 - b_1 \cdot b_2 + 
+    {i} \, (a_1 \cdot b_2 + b_1 \cdot a_2).$ \\
+    Der Quotient wird mit Hilfe der 3. binomischen Formel in ein Produkt umgewandelt:
+    $\frac{a_1+i b_1}{a_2 + i b_2} = \frac{(a_1 + i b_1)(a_2- i b_2)}{(a_2+ i b_2)(a_2- i b_2)}
+    = \frac{(a_1 + i b_1)(a_2- i b_2)}{a_2^2 + b_2^2}$.
+    }}
+    \type{input.number}
+    \field{complex}
+    \begin{variables}
+      \randint{a_1}{-10}{10}
+      \randint{b_1}{-10}{10}
+      \randint[Z]{a_2}{-10}{10}
+      \randint{b_2}{-10}{10}
+      \function{z_1}{a_1 + b_1*i}
+      \function{z_2}{a_2 + b_2*i}
+      \function[calculate]{a_p}{a_1*a_2 - b_1*b_2}
+      \function[calculate]{b_p}{a_1*b_2 + b_1*a_2}
+      \function[calculate]{a_q}{(a_1*a_2 + b_1*b_2)/(a_2*a_2 + b_2*b_2)}
+      \function[calculate]{b_q}{(b_1*a_2 - a_1*b_2)/(a_2*a_2 + b_2*b_2)}
+      \function{p}{a_p + b_p*i}
+      \function{q}{a_q + b_q*i}
+    \end{variables}
+
+    \begin{answer}
+      \text{Produkt: }
+      \solution{p}
+    \end{answer}
+
+    \begin{answer}
+      \text{Quotient: }
+      \solution{q}
+    \end{answer}
+
+  \end{question}
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

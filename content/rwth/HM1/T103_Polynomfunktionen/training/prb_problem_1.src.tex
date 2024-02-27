@@ -1,0 +1,102 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A01: Grad und Leitkoeffizient}
+    \lang{en}{problem_1}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{
+	\title{A01: Grad und Leitkoeffizient}
+}
+\lang{en}{
+	\title{Problem 1}
+}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9275}{Ticket 9275}
+\end{block}
+
+\begin{problem}
+ 	\begin{variables}
+      		\randint{a0}{-5}{5}
+            \randint{a1}{-5}{5}
+            \randint{a2}{-5}{5}
+            \randint{a3}{-5}{5}
+            \randint[Z]{a4}{-5}{5}
+            \function[expand, normalize]{f1}{a4*x^4+ a3*x^3+a2*x^2+a1*x+a0}
+            
+            \randint{b0}{-5}{5}
+            \randint{b1}{-5}{5}
+            \randint{b2}{-5}{5}
+            \randint[Z]{b3}{-5}{5}
+            \function[expand, normalize]{f2}{b3*x^3+b2*x^2+b1*x+b0}
+            
+            \number{s1}{4}
+            \number{s2}{3}
+    \end{variables}
+     
+    \begin{question}
+    	\type{input.number}
+		\field{rational}
+		\lang{de}{\text{Tragen Sie den Leitkoeffizienten und den Grad des folgenden Polynoms ein:\\
+		$p(x)= \var{f1}$}}
+      \lang{en}{\text{}}
+      \explanation{}
+     
+      
+		\begin{answer}
+		    \text{Leitkoeffizient:}
+		    \solution{a4}
+		\end{answer}
+      	\begin{answer}
+		    \text{Grad des Polynoms:}
+		    \solution{s1}
+            \explanation{Der Leitkoeffizient ist der Koeffizient des Monoms höchsten Grades. }
+		\end{answer}
+        
+	\end{question}
+
+	\begin{question}
+    	\type{input.number}
+		\field{rational} 
+      \lang{de}{\text{Tragen Sie den Leitkoeffizienten und den Grad des folgenden Polynoms ein:\\
+		$p(x)= \var{f2}$}}
+      \lang{en}{\text{}}
+      \explanation{Der Leitkoeffizient ist der Koeffizient des Monoms höchsten Grades.}
+
+		\begin{answer}
+		    \text{Leitkoeffizient:}
+		    \solution{b3}
+		\end{answer}
+      	\begin{answer}
+		    \text{Grad des Polynoms:}
+		    \solution{s2}
+		\end{answer}
+	\end{question}
+   
+\end{problem}
+
+\embedmathlet{mathlet}
+
+
+
+\end{content}

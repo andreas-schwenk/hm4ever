@@ -1,0 +1,94 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A06: Funktionseigenschaften}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A06: Funktionseigenschaften}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/10287}{Ticket 10287}
+\end{block}
+
+\begin{problem}
+%	\randomquestionpool{1}{3}
+	
+%######################################################QUESTION_START	
+	\begin{question}	
+	%+++++++++++++++++++VARIABLES++++++++++++++++++++++
+		\begin{variables}
+			\randint{s}{1}{5}
+			\randint{r}{1}{5}
+			\randint{w1}{0}{1}
+			\randint{w2}{0}{1}
+			\function[calculate]{c}{s+1}
+			
+			\function[calculate]{a}{2*c+r+w2}
+			\function[calculate]{b}{r-c^2+a*c+w1}
+			
+			\function{func1}{x^2-a*x+b}
+			\function{func2}{r/(x-s)}
+			\function{sol1}{w1}
+			\function{sol2}{(1-w1)*w2}
+			\function{sol3}{(1-w1)*(1-w2)}
+			
+		\end{variables}
+        
+        \explanation{Prüfen Sie zunächst auf Stetigkeit. Ist die Funktion im Punkt $x_0$ nicht stetig, so kann sie dort auch nicht differenzierbar sein. Es ist zu prüfen, ob
+        $\lim_{x \to x_0} f(x)$ existiert und $\lim_{x \to x_0} f(x) = f(x_0)$ gilt. Ist $f$ in $x_0$ stetig, so muss noch die Differenzierbarkeit geprüft werden. Dazu ist die Definition zu prüfen. }
+        
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+	    \type{mc.unique}  %mc.yesno %mc.multiple
+	%+++++++++++++++++++TITLE++++++++++++++++++++++++++	
+	    \lang{de}{\text{Gegeben ist die Funktion $f:\R\to \R$ mit $f(x)=\begin{cases}\var{func1}, & \text{ für }x<\var{c}\\ \var{func2}& \text{ für }x\geq \var{c}.\end{cases}$\\
+
+Welche Eigenschaften treffen auf die Funktion $f(x)$ an der Stelle $x_0=\var{c}$ zu?}}
+	%+++++++++++++++++++ANSWERS++++++++++++++++++++++++    
+	    \begin{choice}
+	    	\text{weder stetig noch differenzierbar}
+			\solution{compute}
+			\iscorrect{sol1}{=}{1}
+	    \end{choice}     
+	    \begin{choice}
+	    	\text{stetig, aber nicht differenzierbar}
+			\solution{compute}
+			\iscorrect{sol2}{=}{1}
+	    \end{choice}     
+	    \begin{choice}
+	    	\text{differenzierbar, aber nicht stetig}
+			\solution{false}
+	    \end{choice}      
+	    \begin{choice}
+	    	\text{sowohl stetig, als auch differenzierbar}
+			\solution{compute}
+			\iscorrect{sol3}{=}{1}
+	    \end{choice}    
+	\end{question}
+    
+%######################################################QUESTION_END
+
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

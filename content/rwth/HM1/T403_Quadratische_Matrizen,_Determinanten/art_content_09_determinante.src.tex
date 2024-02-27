@@ -1,0 +1,767 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Determinante}
+    \lang{en}{The determinant}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T306_Sarrus.meta.xml}{T306_Sarrus}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+\end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T401_Matrizenrechnung/g_art_content_03_transponierte.meta.xml}{content_03_transponierte}
+    \link{generic_article}{content/rwth/HM1/T403_Quadratische_Matrizen,_Determinanten/g_art_content_09_determinante.meta.xml}{content_09_determinante}
+    \link{generic_article}{content/rwth/HM1/T402_Lineare_Gleichungssysteme/g_art_content_06_umformungen_rang.meta.xml}{umformungen}
+    \link{generic_article}{content/rwth/HM1/T403_Quadratische_Matrizen,_Determinanten/g_art_content_08_inverse_matrix.meta.xml}{inverse-matrix}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{3}
+\ombarticle{3}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Determinante} \lang{en}{The determinant}}
+
+\begin{block}[annotation]
+ 
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/11284}{Ticket 11284}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\lang{de}{
+Die Determinante einer quadratischen Matrix $A\in M(n;\K)$ gilt als Kenngröße für die Invertierbarkeit von $A$. 
+Es gibt mehrere äquivalente Möglichkeiten, die Determinante zu definieren. Hier soll eine Definition verwendet werden, die zugleich
+eine Möglichkeit der Berechnung liefert.}
+\lang{en}{
+The determinant of a square matrix $A\in M(n;\K)$ is a characteristic for the invertibility of $A$. 
+There are several equivalent ways of defining the determinant. Here we will choose a definition, that gives us a way of determining the determinant right away.}
+
+\section{\lang{de}{Definition der Determinante} \lang{en}{Definition of the determinant}}
+
+\begin{definition}\label{def:determinante}
+\lang{de}{
+Die \notion{Determinante} einer Matrix $A\in M(n;\K)$, bezeichnet mit $\det(A)$, ist ein Element des Körpers $\K$, welches durch folgende Eigenschaften charakterisiert ist:}
+\lang{en}{
+The \notion{determinant} of a matrix $A\in M(n;\K)$, denoted with $\det(A)$, is an element of the field $\K$ and characterised by the following properties:}
+\begin{enumerate}
+\item \lang{de}{Ist $A \in M(n;\K) $ eine obere Dreiecksmatrix oder eine untere Dreiecksmatrix mit Diagonaleintr"agen $a_{11}, a_{22}, \ldots, a_{nn}$, so ist
+\[ \det(A)=a_{11}\cdot a_{22} \cdots a_{nn} \]
+das Produkt der Diagonalelemente.}
+\lang{en}{Let $A \in M(n;\K) $ be a lower or upper triangular matrix with diagonal entries $a_{11}, a_{22}, \ldots, a_{nn}$, the determinant is the product
+of the diagonal elements:
+\[ \det(A)=a_{11}\cdot a_{22} \cdots a_{nn} \]}
+ \item \lang{de}{Erh\"alt man $B \in M(n;\K)$ aus $A$ durch Addition des $r$-fachen der $j$-ten Zeile zur $i$-ten Zeile ($i \neq j$), so gilt f\"ur die Determinanten:
+       \[
+       \det(A)=\det(B).
+       \]}
+       \lang{en}{If matrix $B \in M(n;\K)$ is the result of adding in $A$ $r$-times $j$th row to the $i$th row ($i \neq j$), we have for the determinants:
+       \[
+       \det(A)=\det(B).
+       \]}
+ \item \lang{de}{Erh\"alt man $B$ aus $A$ durch Multiplikation der $i$-ten Zeile mit 
+ $r \in \K \setminus \{ 0 \}$, so gilt
+       \[
+       \det(A) = \frac{1}{r} \cdot  \det(B).
+       \]}
+       \lang{en}{If $B$ is the result of multiplying the $i$th row of $A$ with 
+ $r \in \K \setminus \{ 0 \}$, we have
+       \[
+       \det(A) = \frac{1}{r} \cdot  \det(B).
+       \]}
+ \item \lang{de}{Erh\"alt man $B$ aus $A$ durch Vertauschen der $i$-ten und $j$-ten Zeile, so gilt
+       \[
+       \det(A)=- \det(B).
+       \]}
+       \lang{en}{If $B$ is the result of swapping the $i$th and $j$th row if $A$, we have
+       \[
+       \det(A)=- \det(B).
+       \]}
+\end{enumerate}
+
+\lang{de}{
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11380&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}}
+
+\end{definition}
+
+\begin{quickcheck}
+\type{input.number}
+  \field{complex}
+  \displayprecision{3}
+  \correctorprecision{4}
+ 
+  \begin{variables}
+   \function[calculate]{a}{6}
+   \function[calculate]{b}{-i}
+  \end{variables}
+\text{\lang{de}{Bestimmen Sie die Determinanten von $A=\begin{pmatrix}1&0&0\\2&2&0\\1&0&3\end{pmatrix}$ und 
+$B=\begin{pmatrix}0&1\\i&0\end{pmatrix}$.
+
+Antwort: $\det(A)=$\ansref und $\det(B)=$\ansref.}
+\lang{en}{Determine the determinants of $A=\begin{pmatrix}1&0&0\\2&2&0\\1&0&3\end{pmatrix}$ and 
+$B=\begin{pmatrix}0&1\\i&0\end{pmatrix}$.
+
+Answer: $\det(A)=$\ansref and $\det(B)=$\ansref.}
+}
+ \begin{answer}
+    \solution{a}
+  \end{answer}
+   \begin{answer}
+    \solution{b}
+   \end{answer}
+   \explanation{\lang{de}{$A$ ist eine untere Dreiecksmatrix. 
+   Die Determinante berechnet sich also als Produkt der Diagonalglieder $\det(A)=1\cdot 2\cdot 3=6$. 
+   Vertauscht man in $B$ die zwei Zeilen, so erhält man die Diagonalmatrix $\begin{pmatrix}1&0\\0&i\end{pmatrix}$,
+   deren Determinante gleich $i$ ist. 
+   Die Determinante von $B$ erhält noch das Vorzeichen, das durch die Vertauschung aufgenommen wird: $\det(B)=-i$.}
+   \lang{en}{$A$ is a lower triangular matrix.
+   The determinant is the product of the diagonal entries $\det(A)=1\cdot 2\cdot 3=6$. 
+   By swapping the two rows of $B$, we get the diagonal matrix $\begin{pmatrix}1&0\\0&i\end{pmatrix}$,
+   which has the determinant $i$. 
+   The determinant of $B$ needs the sign, which results from swapping the rows: $\det(B)=-i$.}}
+\end{quickcheck}
+
+\begin{remark}
+\begin{itemize}
+\item \lang{de}{Da man mittels Zeilenumformungen jede quadratische Matrix auf obere Dreiecksgestalt bringen kann (z.B. mit dem Gauß-Verfahren), ist somit für jede Matrix $A$ ein Wert $\det(A)$ definiert. 
+Auch zeigt diese Definition, wie man die Determinante berechnet, nämlich durch Zeilenumformungen.}
+\lang{en}{Every square matrix can be transformed into an upper triangular matrix by using  Gaussian elimination. Therefore $\det(A)$ is defined for every square matrix 
+$A$. Also, this definition shows how to calculate the determinant, namely by row transformations.}
+\item \lang{de}{Genau genommen müsste man noch nachprüfen, dass dieses Verfahren auch tatsächlich für jede Matrix $A$ einen eindeutigen Wert $\det(A)$ liefert,
+und nicht davon abhängt, über welche Zeilenumformungen man zu einer oberen Dreiecksmatrix kommt. Darauf soll hier aber verzichtet werden.}
+\lang{en}{Strictly speaking, we would also need to check, that the value $\det(A)$ is unambigous for every matrix $A$ and not dependend on the
+performed row transformations. This can be omitted here.}
+\end{itemize}
+\end{remark}
+
+\begin{example}
+\begin{enumerate}
+\item \lang{de}{Die Einheitsmatrix $E_n$ hat als Determinante
+\[ \det(E_n)=1\cdot 1\cdots 1=1. \]}
+\lang{en}{The indentity matrix $I_n$ has the determinant
+\[ \det(I_n)=1\cdot 1\cdots 1=1. \]}
+\item \lang{de}{Wir betrachten die reelle $(3\times 3)$-Matrix 
+\[ A= \begin{pmatrix}
+-2 & 4 & 6 \\ 1 & -1 & 1 \\ 2 & -3 & -4 \end{pmatrix}. \]
+Mit Gauß-Verfahren erhalten wir die Umformungen
+\begin{eqnarray*}
+&& \begin{pmatrix} -2 & 4 & 6 \\ 1 & -1 & 1  \\ 2 & -3 & -4  \end{pmatrix} 
+\begin{matrix} / \cdot (-1/2) \\ \phantom{1}\\ \phantom{1} \end{matrix} \rightsquigarrow 
+\begin{pmatrix} 1 & -2 & -3  \\ 1 & -1 & 1  \\ 2 & -3 & -4  \end{pmatrix} 
+\begin{matrix} \phantom{1} \\ / - 1\cdot \text{(I)}\\ / -2\cdot \text{(I)} \end{matrix} \rightsquigarrow  \\ &&\\
+& \rightsquigarrow & \begin{pmatrix} 1 & -2 & -3  \\ 0 & 1 & 4  \\ 0 & 1 & 2 \end{pmatrix} 
+\begin{matrix} \phantom{1} \\  \phantom{1}\\ / -1\cdot \text{(II)} \end{matrix} \rightsquigarrow 
+\begin{pmatrix} 1 & -2 & -3  \\ 0 & 1 & 4  \\ 0 & 0 & -2 \end{pmatrix} .
+\end{eqnarray*}
+Damit gilt unter Verwendung der Eigenschaften aus Definition \ref{def:determinante}
+\begin{eqnarray*} \det(A) 
+&=& (-2)\cdot \det\Big(\left( \begin{smallmatrix} 1 & -2 & -3  \\ 1 & -1 & 1  \\ 2 & -3 & -4  \end{smallmatrix}\right)\Big) 
+=-2\cdot \det\Big(\left(  \begin{smallmatrix} 1 & -2 & -3  \\ 0 & 1 & 4  \\ 0 & 1 & 2 \end{smallmatrix} \right)\Big)\\
+&=& -2\cdot \det\Big(\left(  \begin{smallmatrix} 1 & -2 & -3  \\ 0 & 1 & 4  \\ 0 & 0 & -2 \end{smallmatrix} \right)\Big)
+=-2\cdot \big( 1\cdot 1\cdot (-2)\big)=4
+\end{eqnarray*}}
+
+\lang{en}{We consider the real $(3\times 3)$-matrix 
+\[ A= \begin{pmatrix}
+-2 & 4 & 6 \\ 1 & -1 & 1 \\ 2 & -3 & -4 \end{pmatrix}. \]
+We receive the following transformations by using Gaussian elimination
+\begin{eqnarray*}
+&& \begin{pmatrix} -2 & 4 & 6 \\ 1 & -1 & 1  \\ 2 & -3 & -4  \end{pmatrix} 
+\begin{matrix} / \cdot (-1/2) \\ \phantom{1}\\ \phantom{1} \end{matrix} \rightsquigarrow 
+\begin{pmatrix} 1 & -2 & -3  \\ 1 & -1 & 1  \\ 2 & -3 & -4  \end{pmatrix} 
+\begin{matrix} \phantom{1} \\ / - 1\cdot \text{(I)}\\ / -2\cdot \text{(I)} \end{matrix} \rightsquigarrow  \\ &&\\
+& \rightsquigarrow & \begin{pmatrix} 1 & -2 & -3  \\ 0 & 1 & 4  \\ 0 & 1 & 2 \end{pmatrix} 
+\begin{matrix} \phantom{1} \\  \phantom{1}\\ / -1\cdot \text{(II)} \end{matrix} \rightsquigarrow 
+\begin{pmatrix} 1 & -2 & -3  \\ 0 & 1 & 4  \\ 0 & 0 & -2 \end{pmatrix} .
+\end{eqnarray*}
+Then we have using the properties from definition \ref{def:determinante}
+\begin{eqnarray*} \det(A) 
+&=& (-2)\cdot \det\Big(\left( \begin{smallmatrix} 1 & -2 & -3  \\ 1 & -1 & 1  \\ 2 & -3 & -4  \end{smallmatrix}\right)\Big) 
+=-2\cdot \det\Big(\left(  \begin{smallmatrix} 1 & -2 & -3  \\ 0 & 1 & 4  \\ 0 & 1 & 2 \end{smallmatrix} \right)\Big)\\
+&=& -2\cdot \det\Big(\left(  \begin{smallmatrix} 1 & -2 & -3  \\ 0 & 1 & 4  \\ 0 & 0 & -2 \end{smallmatrix} \right)\Big)
+=-2\cdot \big( 1\cdot 1\cdot (-2)\big)=4.
+\end{eqnarray*}}
+\end{enumerate}
+\end{example}
+
+\begin{example}
+\lang{de}{
+Die Determinanten der \ref[umformungen][Elementarmatrizen]{rule:elementarmatrizen} lassen sich leicht berechnen:}
+\lang{en}{
+The determinant of \ref[umformungen][elementary matrices]{rule:elementarmatrizen} can be calculated easily:}
+\begin{incremental}
+\step
+%\begin{itemize}
+% \item 
+\lang{de}{
+Die Matrix $A_{ij}(r)$, $r \in \K$, $i\neq j$, deren Diagonalelemente alle $1$ sind, deren Eintrag an der Stelle $(i,j)$ gleich $r$ ist und die sonst nur Nulleinträge hat, ist insbesondere eine untere oder obere Dreiecksmatrix. Daher ist
+       \[
+       \det(A_{ij}(r))=1\cdot 1\cdots 1=1.
+       \] }
+\lang{en}{
+The diagonal entries of matrix $A_{ij}(r)$, $r \in \K$, $i\neq j$ are all equal to $1$, the entry $a_{,j}$ is equal to $r$ and the other entries are zero-entries. Then $A$ is a lower or
+upper triangular matrix with determinant
+       \[
+       \det(A_{ij}(r))=1\cdot 1\cdots 1=1.
+       \] }
+\step
+% \item 
+\lang{de}{
+Die Matrix $M_{i}(r)$, $r \in \R \setminus \lbrace 0 \rbrace $, $i\in\{ 1,\ldots,n\}$,  deren $i$-tes Diagonalelement gleich $r$ ist, alle anderen Diagonalelemente gleich $1$, und die sonst nur Nulleinträge hat, ist sogar eine Diagonalmatrix. Daher ist:
+       \[
+       \det(M_{i}(r))=1\cdots 1\cdot r\cdot 1\cdots 1=r.
+       \]}
+\lang{en}{ The matrix$M_{i}(r)$, $r \in \R \setminus \lbrace 0 \rbrace $, $i\in\{ 1,\ldots,n\}$ is a diagonal matrix, because all diagonal elements besides
+the $i$th entry are equal to $1$. The $i$th entry is equal to $r$. Therefore the determinant is
+       \[
+       \det(M_{i}(r))=1\cdots 1\cdot r\cdot 1\cdots 1=r.
+       \]}
+\step
+% \item 
+\lang{de}{
+Die Matrix $V_{ij}$ unterscheidet sich von der Einheitsmatrix $E_n$ nur dadurch, dass die $i$-te und die $j$-te Zeile vertauscht sind. Daher ist 
+       \[
+       \det(V_{ij})=-\det(E_n)=-1.
+       \]}
+       \lang{en}{
+The matrix $V_{ij}$ differs from the identity matrix $I_n$ only by swapped $i$th and $j$th rows. Therefore the determinant is 
+       \[
+       \det(V_{ij})=-\det(I_n)=-1.
+       \]}
+\end{incremental}
+%\end{itemize}
+
+\end{example}
+
+\lang{de}{
+Ein wichtiger Grund, wofür Determinanten verwendet werden, ist der folgende.}
+\lang{en}{
+The following theorem is another important application of determinants.}
+
+\begin{theorem}
+\lang{de}{
+Eine quadratische Matrix $A\in M(n;\K)$ ist genau dann invertierbar, wenn ihre Determinante von $0$ verschieden ist.}
+\lang{en}{
+A square matrix $A\in M(n;\K)$ is invertible if and only if the determinant is unequal to $0$.}
+\end{theorem}
+
+\begin{proof*}[\lang{de}{Beweis des Satzes} \lang{en}{Proof of the theorem}]
+\begin{showhide}
+\lang{de}{
+Durch Anwenden elementarer Zeilenumformungen kann sich zwar der Wert der Determinante ändern, jedoch nicht die Eigenschaft, ob sie $0$ ist oder nicht.
+Denn dabei wird nur mit Elementen ungleich $0$ multipliziert.
+Bezeichnen wir mit $S$ die reduzierte Zeilenstufenform von $A$, dann gilt also:
+\begin{eqnarray*}
+\det(A)=0 &\Leftrightarrow & \det(S)=0 \\
+&\Leftrightarrow & S\text{ besitzt weniger als $n$ Stufen} \quad (\text{da $S$ obere Dreiecksmatrix})\\
+&\Leftrightarrow & S\text{ hat Rang kleiner als }n\quad (\text{da Rang($S$)=Anzahl der Stufen})\\
+&\Leftrightarrow & A\text{ hat Rang kleiner als }n\quad (\text{da Rang($A$)=Rang($S$)})\\
+&\Leftrightarrow & A\text{ ist nicht invertierbar}.
+\end{eqnarray*}}
+
+\lang{en}{
+Elementary row transformations may change the value of the determinant, but not the property whether it is equal to $0$ or not,
+because row transformations only change the determinant by a factor unequal to zero.
+If we denote the reduced row echelon form of $A$ with $S$, we have:
+\begin{eqnarray*}
+\det(A)=0 &\Leftrightarrow & \det(S)=0 \\
+&\Leftrightarrow & S\text{ has less than $n$ echelons} \quad (\text{because $S$ is upper triangular matrix})\\
+&\Leftrightarrow & \text{rank of $S$ is less than }n\quad (\text{because rank($S$)=number of echelons})\\
+&\Leftrightarrow & \text{ rank of $A$ is less than}n\quad (\text{because rank($A$)=rank($S$)})\\
+&\Leftrightarrow & A\text{ is not invertible}.
+\end{eqnarray*}}
+\end{showhide}
+\end{proof*}
+
+%\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10879&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+\lang{de}{
+Das folgende Video zeigt zunächst den Beweis zu Satz 3.3.5. Im Anschluss wird ein Beispiel vorgerechnet:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11381&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}}
+
+
+\section{\lang{de}{Determinanten kleiner Matrizen} \lang{en}{Determinants of small matrices}}\label{sec:determinanten-kleine-matrizen}
+
+\lang{de}{
+Für Matrizen kleiner Größe gibt es einfache Formeln, die Determinante zu berechnen.}
+\lang{en}{There are easy formulas to calculate the determinant of small matrices.}
+
+\begin{rule}
+\begin{enumerate}
+\item \lang{de}{Für $(1\times 1)$-Matrizen $A=(a)\in M(1;\K)$ gilt nach Definition $\det(A)=a\in \K$.}
+\lang{en}{For $(1\times 1)$-matrices $A=(a)\in M(1;\K)$ we have, according to the definition, $\det(A)=a\in \K$.}
+
+\item \lang{de}{Für $(2\times 2)$-Matrizen $A= \begin{pmatrix}
+a & b \\ c& d \end{pmatrix} \in M(2;\K) $ ist
+\[ \det(A)=ad-bc.\]}
+\lang{en}{For $(2\times 2)$-matrices $A= \begin{pmatrix}
+a & b \\ c& d \end{pmatrix} \in M(2;\K) $ is
+\[ \det(A)=ad-bc.\]}
+
+\item \lang{de}{Für $(3\times 3)$-Matrizen $A=\left( \begin{smallmatrix}
+a_{11} & a_{12} &a_{13} \\ a_{21}& a_{22} &a_{23} \\ a_{31}& a_{32}& a_{33}
+\end{smallmatrix}\right)$ ist
+\begin{eqnarray*}
+\det(A) &=& \ a_{11} a_{22} a_{33} + a_{12} a_{23} a_{31} + a_{13} a_{21}a_{32} \\
+                   & & - a_{13} a_{22} a_{31} - a_{11} a_{23} a_{32} - a_{12} a_{21} a_{33}.
+\end{eqnarray*}}
+\lang{en}{For $(3\times 3)$-matrices $A=\left( \begin{smallmatrix}
+a_{11} & a_{12} &a_{13} \\ a_{21}& a_{22} &a_{23} \\ a_{31}& a_{32}& a_{33}
+\end{smallmatrix}\right)$ is
+\begin{eqnarray*}
+\det(A) &=& \ a_{11} a_{22} a_{33} + a_{12} a_{23} a_{31} + a_{13} a_{21}a_{32} \\
+                   & & - a_{13} a_{22} a_{31} - a_{11} a_{23} a_{32} - a_{12} a_{21} a_{33}.
+\end{eqnarray*}}
+\end{enumerate}
+\end{rule}
+
+\begin{remark}
+\begin{enumerate}
+\item \lang{de}{Den Ausdruck $ad-bc$ für $(2\times 2)$-Matrizen hatten wir im 
+\ref[inverse-matrix][vorigen Abschnitt]{rule:inverse-2x2} bei der Berechnung der inversen Matrix als Kriterium 
+für die Invertierbarkeit entdeckt.} 
+\lang{en}{We already discovered the term $ad-bc$ for $(2\times 2)$-matrices in the 
+\ref[inverse-matrix][previous section]{rule:inverse-2x2}, while calculating the inverse matrix
+as a criteria for invertibility.}
+\item \lang{de}{Die Formel für $(3\times 3)$-Ma
+trizen wird auch Regel von Sarrus genannt. Sie lässt sich mit dem folgenden Schema 
+leicht merken:
+\begin{center}
+\image{T306_Sarrus}
+\end{center}}
+
+\lang{en}{The formula for $(3\times 3)$-matrices is also called rule of Sarrus. It can easily be remembered with the following scheme:
+\begin{center}
+\image{T306_Sarrus}
+\end{center}}
+
+\lang{de}{
+Erg\"anze die ersten beiden Spalten der Matrix $A$ noch einmal zur Matrix $A$ als 4. und 5. Spalte. Dann addiere man die 
+Produkte der Diagonalen von links oben nach rechts unten und subtrahiere
+die Produkte der Diagonalen von links unten nach rechts oben.}
+\lang{en}{
+We complement the first two columns of $A$ behind it as a $4$th and $5$th column. We then add the products of the diagonals
+from top left to bottom right and substract the products of the 
+diagonals vom bottom left to top right.}
+\end{enumerate}
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% HIER GEHT ES WEITER %%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{example}
+\begin{tabs*}[\initialtab{0}]
+\tab{\lang{de}{Beispiel 1} \lang{en}{1. Example}}
+\lang{de}{
+Wir betrachten wieder die reelle $(3\times 3)$-Matrix 
+\[ A= \begin{pmatrix}
+-2 & 4 & 6 \\ 1 & -1 & 1 \\ 2 & -3 & -4 \end{pmatrix}. \]
+Schreibt man die ersten zwei Spalten nochmal daneben, erhält man das Schema
+\[ \begin{matrix}
+-2 & 4 & 6 &: &-2 & 4\\ 1 & -1 & 1&: &1 & -1 \\ 2 & -3 & -4&: &2 & -3
+\end{matrix}. \]
+Damit berechnen wir also:
+\begin{eqnarray*}
+ \det(A)&=&(-2)\cdot (-1)\cdot (-4)+4\cdot 1\cdot 2
++ 6\cdot 1\cdot (-3) \\ 
+&& - 2\cdot (-1)\cdot 6- (-3)\cdot 1\cdot (-2)
+- (-4)\cdot 1\cdot 4 \\
+&=& -8+8-18+12-6+16=4
+\end{eqnarray*}}
+\lang{en}{
+We consider again the real $(3\times 3)$-matrix 
+\[ A= \begin{pmatrix}
+-2 & 4 & 6 \\ 1 & -1 & 1 \\ 2 & -3 & -4 \end{pmatrix}. \]
+We write the first two columns behind the matrix and receive the scheme
+\[ \begin{matrix}
+-2 & 4 & 6 &: &-2 & 4\\ 1 & -1 & 1&: &1 & -1 \\ 2 & -3 & -4&: &2 & -3
+\end{matrix}. \]
+Using this we calculate:
+\begin{eqnarray*}
+ \det(A)&=&(-2)\cdot (-1)\cdot (-4)+4\cdot 1\cdot 2
++ 6\cdot 1\cdot (-3) \\ 
+&& - 2\cdot (-1)\cdot 6- (-3)\cdot 1\cdot (-2)
+- (-4)\cdot 1\cdot 4 \\
+&=& -8+8-18+12-6+16=4
+\end{eqnarray*}}
+
+\tab{\lang{de}{Beispiel 2} \lang{en}{2. Example}}
+\lang{de}{
+Wir betrachten die Matrix
+\[ B= \begin{pmatrix}
+-1 & i & 2+i \\ i & -1 & 0 \\ 3-i & -1+i & 5i \end{pmatrix}\in M(3;\C). \]
+Schreibt man die ersten zwei Spalten nochmal daneben, erhält man das Schema
+\[ \begin{matrix}
+-1 & i & 2+i &: &-1 & i\\ i & -1 & 0&: &i & -1 \\ 3-i & -1+i & 5i&: &3-i & -1+i
+\end{matrix}. \]
+Somit berechnen wir:
+\begin{eqnarray*}
+ \det(B)&=&(-1)\cdot(-1)\cdot5i+i\cdot 0\cdot(3-i)+(2+i)\cdot i\cdot (-1+i) \\ 
+&& - (3-i)\cdot (-1)\cdot (2+i)- (-1+i)\cdot 0\cdot (-1) - (5i)\cdot i\cdot i \\
+&=& 5i+0+i(-3+i)+(7+i)-0+5i=6+8i.
+\end{eqnarray*}}
+\lang{en}{
+We consider the matrix
+\[ B= \begin{pmatrix}
+-1 & i & 2+i \\ i & -1 & 0 \\ 3-i & -1+i & 5i \end{pmatrix}\in M(3;\C). \]
+We write the first two columns behind the matrix and receive the scheme
+\[ \begin{matrix}
+-1 & i & 2+i &: &-1 & i\\ i & -1 & 0&: &i & -1 \\ 3-i & -1+i & 5i&: &3-i & -1+i
+\end{matrix}. \]
+With that we calculate:
+\begin{eqnarray*}
+ \det(B)&=&(-1)\cdot(-1)\cdot5i+i\cdot 0\cdot(3-i)+(2+i)\cdot i\cdot (-1+i) \\ 
+&& - (3-i)\cdot (-1)\cdot (2+i)- (-1+i)\cdot 0\cdot (-1) - (5i)\cdot i\cdot i \\
+&=& 5i+0+i(-3+i)+(7+i)-0+5i=6+8i.
+\end{eqnarray*}}
+\end{tabs*}
+\end{example}
+
+
+\begin{block}[warning]
+\lang{de}{
+Die Regel von Sarrus gilt ausschließlich für $(3\times 3)$-Matrizen. Für größere Matrizen ist
+eine derartige Regel im Allgemeinen falsch!
+\\
+Für $(2\times 2)$-Matrizen sieht man das sofort ein: Eine übertragene Sarrus-Regel würde hier
+den Term $ad+bc-bc-ad=0$ liefern.}
+\lang{en}{
+The rule of Sarrus applies exclusively for $(3\times 3$)-matrices. 
+For larger matrices a rule like that is generally wrong!
+\\
+This is easy to understand, when we look at $(2\times 2)$-matrices. A transfered rule of Sarrus would result in the term $ad+bc-bc-ad=0$, which is not 
+the determinant of a $(2\times 2)$-matrix.}
+\end{block}
+
+
+
+\section{\lang{de}{Rechenregeln für Determinanten} \lang{en}{Calculating rules for determinants}}\label{sec:determinante-rechenregeln}
+\lang{de}{
+Auch Determinanten von quadratischen Matrizen beliebigen Ausmaßes sind gut berechenbar. Wir geben hier nur zwei Möglichkeiten an.}
+\lang{en}{
+We can  easily calculate the determinants for square matrices of any dimension. Here we will discuss only two options.
+}
+
+\begin{rule}[\lang{de}{Berechnung von allgemeinen Determinanten} \lang{en}{Calculating general determinants}]\label{rule:Laplace}
+\lang{de}{Die Determinante einer Matrix $A=(a_{ij})_{ij}\in M(n;\K)$ kann wie folgt berechnet werden.}
+\lang{en}{The determinant of a matrix $A=(a_{ij})_{ij}\in M(n;\K)$ can be calculated as follows.}
+\begin{itemize}
+\item[(i)] \lang{de}{Man wendet die \ref[content_09_determinante][Definition der Determinante]{def:determinante} an. 
+Durch Multiplikation mit Elementarmatrizen bringt man $A$ also auf eine Stufenform $S$, die eine (obere) Dreiecksmatrix ist.
+Deren Determinante kann man daher direkt ablesen, die der Elementarmatrizen kennt man.
+Bezeichen $M_1\ldots,M_r$ die verwendeten Elementarmatrizen, dann gilt
+\[\det(A)=\det(M_1)^{-1}\cdot\ldots\cdot\det(M_r)^{-1}\cdot\det(S).\]}
+\lang{en}{We utilise the \ref[content_09_determinante][definition of the determinant]{def:determinante}.
+By multiplying with elementary matrices we transform $A$ into row echelon form $S$, which is a (upper) triangular matrix.
+Its matrix can be read right away, since we know the determinants of the elementary matrices.
+We denote the used elementary matrices with $M_1\ldots,M_r$, then we have:
+\[\det(A)=\det(M_1)^{-1}\cdot\ldots\cdot\det(M_r)^{-1}\cdot\det(S).\]}
+
+\item[(ii)]
+\lang{de}{
+Es sei $A_{ij}\in M(n-1;\K)$ die Matrix, die aus $A$ entsteht, wenn man die $i$-te Zeile und $j$-te Spalte streicht.
+\notion{Laplace-Entwicklung nach der $i$-ten Zeile:}
+\[\det(A)=\sum_{j=1}^n(-1)^{i+j}a_{ij}\cdot\det(A_{ij}).\]
+\notion{Laplace-Entwicklung nach der $j$-ten Spalte:}
+\[\det(A)=\sum_{i=1}^n(-1)^{i+j}a_{ij}\cdot\det(A_{ij}).\]}
+\lang{en}{
+Let $A_{ij}\in M(n-1;\K)$ be the matrix, that results from $A$, after removing the $i$th row and the $j$th column.
+\notion{Laplace-expansion along with the $i$th row:}
+\[\det(A)=\sum_{j=1}^n(-1)^{i+j}a_{ij}\cdot\det(A_{ij}).\]
+\notion{Laplace-expansion along with the $i$th column:}
+\[\det(A)=\sum_{i=1}^n(-1)^{i+j}a_{ij}\cdot\det(A_{ij}).\]}
+\end{itemize}
+\end{rule}
+
+\lang{de}{
+Im nachfolgenden Video wird die Laplace-Entwicklung erklärt und durch ein Beispiel veranschaulicht:
+
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10882&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}}\\
+
+
+\lang{en}{
+\begin{example}
+Given is the matrix $A=\begin{pmatrix}2&0&0&1\\1&3&0&1\\-0&7&2&1\\0&0&0&5\end{pmatrix}$, for which we want to calculate the determinant.\\
+Since the forth row has only one non-zero entry, we can utilise Laplace-expansion along with the $4$th row:
+\[ \det(A)=\sum_{j=1}^{4} (-1)^{4+j}\cdot \underbrace{a_{4j}}_{=0\text{ except for }j=4}\cdot \det(A_{4j})=(-1)^{4+4}\cdot 5\cdot
+\det(\begin{pmatrix}2&0&0\\1&3&0\\0&7&2\end{pmatrix}) \underbrace{=}_{\text{triangular matrix}}5\cdot 2\cdot 3 \cdot 2=60\].
+We may also expand along with the third column, since this has also only one non-zero entry. With the Laplace-expansion we get:
+\[\det(A)=\sum_{i=1}^{4}(-1)^{i+3}\cdot \underbrace{a_{i3}}_{\neq 0{\text{ only for }i=3}}\cdot 
+\det(A_{i3})=2\cdot \det(\begin{pmatrix}2&0&1\\1&3&1\\0&0&5\end{pmatrix}) \underbrace{=}_{\text{Laplace for third row}} 2\cdot
+(-1)^{3+3}\cdot 5\cdot \det(\begin{pmatrix} 2&0\\1&3\end{pmatrix})=2\cdot5\cdot6=60\]
+So there are several options for the Laplace-expansion, although some take longer than others.
+\end{example}
+}
+
+
+\begin{quickcheck}
+\type{input.number}
+  \field{rational}
+  \displayprecision{3}
+  \correctorprecision{4}
+ 
+  \begin{variables}
+   \function{a}{-6}
+   \end{variables}
+%\text{Es sei $A=\begin{pmatrix}1&2&3\\4&5&6\\-7&8&9\end{pmatrix}$. Dann ist $\det(A_{21})=$\ansref.}
+\text{\lang{de}{Es sei $A=\begin{pmatrix}1&2&3\\4&5+3i&6\\-7i&8&9\end{pmatrix}$. Dann ist $\det(A_{21})=$\ansref.}
+\lang{en}{Given $A=\begin{pmatrix}1&2&3\\4&5+3i&6\\-7i&8&9\end{pmatrix}$. Then we have $\det(A_{21})=$\ansref.}}
+ \begin{answer}
+    \solution{a}
+  \end{answer}
+   \explanation{\lang{de}{$A_{21}$ entsteht aus $A$ durch streichen der zweiten Zeile und ersten Spalte. 
+   Also ist $A_{21}=\begin{pmatrix}2&3\\8&9\end{pmatrix}$ und $\det(A_{21})=2\cdot 9-8\cdot 3=-6$.}
+   \lang{en}{$A_{21}$ is the result of removing the second row and first column in $A$. So we have $A_{21}=\begin{pmatrix}2&3\\8&9\end{pmatrix}$ und $\det(A_{21})=2\cdot 9-8\cdot 3=-6$.}}
+\end{quickcheck}
+
+\begin{remark}
+\begin{itemize}
+\item
+\lang{de}{
+Bei der Laplace-Entwicklung wird also die Berechnung der Determinante zurückgeführt auf die Berechnung von
+$n$  Determinanten $\det(A_{ij})$ kleinerer Größe, sogenannten Unterdeterminanten von $A$.}
+\lang{en}{
+The Laplace-expansion reduces the calculation of the determinant to the calcuation of $n$ determinants $\det(A_{ij})$ with
+a smaller size. They are called minors of $A$ and are the determinant of a smaller square matrix created from $A$.}
+
+\item 
+\lang{de}{Die Laplace-Entwicklung eignet sich besonders gut bei dünnbesetzten Zeilen oder Spalten, also solchen bei denen viele Einträge gleich null sind.
+Ist nämlich ein $a_{ij}=0$, dann taucht der entsprechende Term in der Summe nicht auf. Man braucht dann $\det(A_{ij})$ gar nicht erst zu berechnen, was den Rechenaufwand erheblich reduziert.}
+\lang{en}{The Laplace-expansion is especially useful, if the matrix has a lot of zero-entries. Because the term of a zero-entry, i.e. $a_{ij}=0$, will not appear in the sum and therefore
+we do not need to calculate $\det(A_{ij})$. This reduces the calculation effort.}
+\item 
+\lang{de}{Wenn die Matrix sehr voll besetzt ist, dann ist Methode (i) meist schneller. Man braucht die Matrix dazu nicht einmal in reduzierte Stufenform zu bringen, irgendeine Dreiecksform reicht aus.}
+\lang{en}{For a matrix with just a few or no zero-entries it is faster to use method (i). Keep in mind, that any triangular matrix is fine - you do not need to transform it into reduced row echelon form.}
+\item
+\lang{de}{
+Es gibt allgemeinere Versionen der Laplace-Entwicklung und noch viele andere  Möglichkeiten, Determinanten zu berechnen.
+Der tiefere mathematische Grund dafür liegt in den faszinierenden Eigenschaften, die die Determinante hat.
+Deren Diskussion geht aber weit über das hinaus, was in der praktischen Anwendung benötigt wird. 
+Deshalb verzichten wir hier ebenso darauf, wie auf einen Beweis der Laplace-Entwicklung nach der $i$-ten Zeile oder $j$-ten Spalte.}
+\lang{en}{
+There are more general versions of the Laplace-expansion and even more other methods to calculate determinants. Their discussion is not needed for practical
+usage, which is why is will not be done here. Furthermore we refrain from proofing the Laplace-expansion along with the $i$th row or $j$ column.
+}
+\end{itemize}
+\end{remark}
+
+
+\begin{example}
+\begin{incremental}[\initialsteps{1}]
+\step \lang{de}{Wir berechnen die Determinante von $A=\begin{pmatrix} -1&0&0&2\\2&3&0&1\\1&5&0&0\\0&0&3&2\end{pmatrix}$
+mit Hilfe der Laplace-Entwicklung. }
+\lang{en}{
+We calculate the determinant of $A=\begin{pmatrix} -1&0&0&2\\2&3&0&1\\1&5&0&0\\0&0&3&2\end{pmatrix}$ using the Laplace-expansion. }
+
+\step
+\lang{de}{
+Am dünnbesetztesten ist hier die dritte Spalte, also entwickeln wir nach dieser:
+\[\det(A)=\sum_{i=1}^4(-1)^{i+3}a_{i3}\det(A_{i3}),\]
+worin alle $a_{i3}$ bis auf $a_{43}$ gleich null sind.
+Es ist also
+\[\det(A)=(-1)^{4+3}\cdot 3\cdot\det(A_{43})=(-3)\cdot\det\Big(\left(\begin{smallmatrix}
+-1&0&2\\2&3&1\\1&5&0\end{smallmatrix}\right)\Big).\]}
+\lang{en}{
+We expand along the third column, because it has the most zero-entries:
+\[\det(A)=\sum_{i=1}^4(-1)^{i+3}a_{i3}\det(A_{i3}),\]
+in which all $a_{i3}$ except $a_{43}$ are equal to zero.
+So we have
+\[\det(A)=(-1)^{4+3}\cdot 3\cdot\det(A_{43})=(-3)\cdot\det\Big(\left(\begin{smallmatrix}
+-1&0&2\\2&3&1\\1&5&0\end{smallmatrix}\right)\Big).\]}
+
+\step
+\lang{de}{
+Diese Determinante könnten wir mit der Regel von Sarrus berechnen, aber wir entwickeln sie hier weiter nach der ersten Zeile:
+ \begin{align*}
+ \det\Big(\left(\begin{smallmatrix}
+-1&0&2\\2&3&1\\1&5&0\end{smallmatrix}\right)\Big)&=(-1)^{1+1}\cdot(-1)\cdot\det\Big(\left(\begin{smallmatrix}3&1\\5&0\end{smallmatrix}\right)\Big)+0
+ +(-1)^{1+3}\cdot 2\cdot\det\Big(\left(\begin{smallmatrix}2&3\\1&5\end{smallmatrix}\right)\Big)\\
+ &=(-1)(-5)+2(10-3)=19,
+ \end{align*}
+ wobei wir die Determinantenregel für $(2\times 2)$-Matrizen benutzt haben.
+Insgesamt finden wir also 
+\[\det(A)=(-3)\cdot 19=-57.\]}
+\lang{en}{
+We could caluclate this determinant with the rule of Sarrus, but we continue with expanding, here along with the first row:
+ \begin{align*}
+ \det\Big(\left(\begin{smallmatrix}
+-1&0&2\\2&3&1\\1&5&0\end{smallmatrix}\right)\Big)&=(-1)^{1+1}\cdot(-1)\cdot\det\Big(\left(\begin{smallmatrix}3&1\\5&0\end{smallmatrix}\right)\Big)+0
+ +(-1)^{1+3}\cdot 2\cdot\det\Big(\left(\begin{smallmatrix}2&3\\1&5\end{smallmatrix}\right)\Big)\\
+ &=(-1)(-5)+2(10-3)=19,
+ \end{align*}
+ at which we used the rule for the determinant of $(2\times 2)$-matrices.
+Alltogether we have 
+\[\det(A)=(-3)\cdot 19=-57.\]}
+\end{incremental}
+\end{example}
+
+
+\lang{de}{Für Determinanten gelten weitere wichtige Rechenregeln}
+\lang{en}{There are further rules applying for determinants}
+\begin{rule}\label{rule:rechenregeln}
+\begin{itemize}
+ \item[(i)] \notion{\lang{de}{Determinantenmultiplikationssatz:} \lang{en}{Multiplicative property of determinants:}} 
+ \lang{de}{Seien $A, B \in M(n;\K)$. Dann gilt}
+  \lang{en}{Given are $A, B \in M(n;\K)$. Then we have}
+       \[
+       \det(A \cdot B)= \det(A) \cdot \det(B).
+       \] 
+ \lang{en}{The determinant of a matrix product is equal to the product of their determinants.}
+ \item[(ii)] \lang{de}{Ist $A \in M(n;\K)$ mit $\det(A) \neq 0$ (d.h. $A$ ist invertierbar), dann gilt f\"ur die Determinante der inversen Matrix $A^{-1}$:
+       \[
+       \det(A^{-1})= \frac{1}{\det(A)}.
+       \]}
+       \lang{en}{Given is $A \in M(n;\K)$ with $\det(A) \neq 0$ (i.e. $A$ is invertible). Then it holds for the determinant of the inverse matrix $A^{-1}$:
+       \[
+       \det(A^{-1})= \frac{1}{\det(A)}.
+       \]}
+ \item[(iii)] \lang{de}{Die in der Definition angegebenen Gleichungen für die Determinanten nach Zeilenumformungen gelten genauso auch für Spaltenumformungen.}
+ \lang{en}{The equations, listed in the definition, for the determinant after transforming the rows hold also for transforming columns.}
+ \item[(iv)] \lang{de}{Kann man $A$ in der Blockmatrix-Form
+       \[
+       A= \begin{pmatrix} B & C \\  0_{r,s} & D \end{pmatrix} \text{ oder } A=\begin{pmatrix} B & 0_{s,r} \\ C & D \end{pmatrix}
+       \]
+       schreiben, wobei $B \in M(s;\K)$, $D \in M(r;\K)$, f\"ur $r$, $s \in \N$, dann berechnet sich die Determinante von $A$ wie folgt:
+       \[
+       \det(A)= \det(B) \det(D).
+       \]}
+       \lang{en}{If we can write $A$ as a block matrix       \[
+       A= \begin{pmatrix} B & C \\  0_{r,s} & D \end{pmatrix} \text{ or } A=\begin{pmatrix} B & 0_{s,r} \\ C & D \end{pmatrix}
+       \]
+       with $B \in M(s;\K)$, $D \in M(r;\K)$, für $r$, $s \in \N$, then we can calculate the determinant of $A$ as follows:
+       \[
+       \det(A)= \det(B) \det(D).
+       \]}
+\item[(v)] \lang{de}{Ist $A^T\in M(n;\K)$ die transponierte Matrix zu $A$, so gilt  \[
+       \det(A^T)= \det(A).
+       \]}
+       \lang{en}{Is $A^T\in M(n;\K)$ the transpose of $A$, we have  \[
+       \det(A^T)= \det(A).
+       \]}
+\end{itemize}
+\end{rule}
+\begin{proof*}
+\begin{showhide}
+\begin{itemize}
+\item[(i)]
+\lang{de}{
+Wir benutzen, dass jede invertierbare Matrix als Produkt von Elementarmatrizen geschrieben werden kann.
+Ist $A$ also invertierbar, so reicht es zu zeigen, 
+dass für jede Matrix $A\in M(n;\K)$ und jede Elementarmatrix $M\in M(n;\K)$ gilt
+\[\det(M\cdot A)=\det(M)\cdot\det(A).\]
+Das ist allerdings klar nach der \ref[content_09_determinante][Definition der Determinante]{def:determinante}.
+Ist in dem Produkt $A\cdot B$ eine der Matrizen nicht invertierbar, hat also nicht vollen Rang, dann gilt das auch für das Produkt.
+Dann ist 
+\[\det(A\cdot B)=0=\det(A)\cdot\det(B).\]}
+\lang{en}{
+We utilise, that every invertible matrix can be written as a product of elementary matrices.
+If $A$ is invertible, we only need to demonstrate, that for every matrix $A\in M(n;\K)$ 
+and every elementary matrix $M\in M(n;\K)$ holds
+\[\det(M\cdot A)=\det(M)\cdot\det(A).\]
+This is easy to see according to the \ref[content_09_determinante][definition of the determinant]{def:determinante}.
+If one of the matrices in the product $A\cdot B$ not invertible, does not have full rank, then this holds also for the product.
+Then we have
+\[\det(A\cdot B)=0=\det(A)\cdot\det(B).\]}
+
+\item[(ii)]
+\lang{de}{
+Wir wenden den Determinantenmultiplikationssatz (i) an auf die Identität $A\cdot A^{-1}=E_n$ und erhalten
+\[\det(A)\cdot\det(A^{-1})=\det(E_n)=1.\]
+Weil $\det(A)\neq 0$, ist das gleichbedeutend zu
+\[\det(A^{-1})=\frac{1}{\det(A)}.\]}
+\lang{en}{
+We can write the identity as $I_n=A\cdot A^{-1}$. Then we apply the multiplication property of the determinant (i) 
+on the determinant of $I_n$ and we get
+\[\det(A)\cdot\det(A^{-1})=\det(I_n)=1.\]
+Because $\det(A)\neq 0$, the equation is equivalent to
+\[\det(A^{-1})=\frac{1}{\det(A)}.\]}
+
+\item[(iii)] \lang{de}{Die Spaltenumformungen erhalten wir durch Multiplikation mit Elementarmatrizen von rechts (statt von links wie bei Zeilenumformungen).
+Somit liefert der Determinantenmultiplikationssatz (i) die Behauptung.}
+\lang{en}{We create the column transformations by multiplying with the elementary matrices from the right (instead of from the left for the row
+transformations). The multiplicative property of the determinant (i) then proves the claim.}
+
+\item[(iv)]
+\lang{de}{Um die Determinante dieser Blockmatrix zu berechnen, bringt man sie auf Stufenform. Die dazu nötigen elementaren Zeilenumformungen lassen sich aufteilen in die für den
+oberen linken Block und die für den unteren rechten Block. Die dadurch entstehende Stufenform ist eine Dreiecksmatrix, und für diese gilt die Formel aus
+(iv). Also gilt sie auch für die Ausgangsmatrix.}
+\lang{en}{To calculate the determinant of a block matrix, we transform her into row echelon form. The used elementary row transformations can be split in the ones for the
+upper left block and the ones for the lower right block. The resulting row echelon form is a triangular matrix, for which we can use
+the formular (iv). Therefore we can also use it for the matrix we started with.}
+
+\item[(v)] \lang{de}{Wieder benutzen wir, dass sich $A$ entweder als Produkt von Elementarmatrizen schreiben lässt oder nicht vollen Rang hat.
+Im zweiten Fall hat auch $A^T$ nicht vollen Rang (Spaltenrang$=$Zeilenrang). Es gilt also $\det(A)=0=\det(A^T)$.
+Im ersten Fall sei $A=M_1\cdots M_r$ mit Elementarmatrizen $M_j$, $j=1,\ldots,r$.
+Für die Elementarmatrizen gilt aber offensichtlich $\det(M_j^T)=\det(M_j)$. Also gilt
+\[\det(A^T)=\det(M_r^T\cdots M_1^T)=\det(M_r^T)\cdots\det(M_1^T)=
+\det(M_1)\cdots\det(M_r)=\det(M_1\cdots M_r)=\det(A),\]
+wobei wir die \ref[content_03_transponierte][Rechenregel für transponierte Matrizen]{sec:rechenregeln} und den Determinantenmultiplikationssatz (i) verwendet haben.}
+\lang{en}{Here we use again the fact, that $A$ can either be written as a product of elementary matrices or $A$ does not have full rank.
+In the second case $A^T$ does not have full rank either (row rank=column rank). It holds $\det(A)=0=\det(A^T)$.
+In the first case let $A$ be $A=M_1\cdots M_r$ with the elementary matrices $M_j$, $j=1,\ldots,r$.
+For the elementary matrices it obviously holds \[\det(A^T)=\det(M_r^T\cdots M_1^T)=\det(M_r^T)\cdots\det(M_1^T)=
+\det(M_1)\cdots\det(M_r)=\det(M_1\cdots M_r)=\det(A).\] Note, that we use the \ref[content_03_transponierte][calculating rules for the transpose]{sec:rechenregeln}
+and the multiplicative property of the determinant (i).}
+\end{itemize}
+\end{showhide}
+\end{proof*}
+\begin{quickcheck}
+\type{input.number}
+  \field{rational}
+  \displayprecision{3}
+  \correctorprecision{4}
+ 
+  \begin{variables}
+   \function{a}{5}
+   \function{b}{3}
+   \function{d}{1/5}
+   \function{c}{15}
+   \function{f}{5/3}
+  \end{variables}
+\text{\lang{de}{Für zwei Matrizen $A,B\in M(3;\C)$ sei $\det(A)=5$ und $\det(B)=3$.
+Dann ist $\det(A\cdot B)=$\ansref, $\det A^{-1}=$\ansref, $\det(B^T)=$\ansref und $\det(B^{-1}A^T)=$\ansref.}
+\lang{en}{Let $\det(A)=5$ and $\det(B)=3$ be the determinants of the matrices $A,B\in M(3;\C)$ .
+Determine $\det(A\cdot B)=$\ansref, $\det A^{-1}=$\ansref, $\det(B^T)=$\ansref and $\det(B^{-1}A^T)=$\ansref.}}
+ \begin{answer}
+    \solution{c}
+  \end{answer}
+   \begin{answer}
+    \solution{d}
+   \end{answer}
+   \begin{answer}
+    \solution{b}
+   \end{answer}
+   \begin{answer}
+    \solution{f}
+   \end{answer}
+   \end{quickcheck}
+   
+
+\lang{de}{
+Das folgende Video zeigt die Berechnung von $2 \times2$ - Matrizen,
+die Regel von Sarrus,
+sowie den Determinantenmultiplikationssatz.
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10880&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}}\\
+   
+   
+\end{visualizationwrapper}
+
+\end{content}

@@ -1,0 +1,1099 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Trigonometrische Funktionen}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T105_Tangent.meta.xml}{T105_Tangent}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T211_SineCosine.meta.xml}{T211_SineCosine}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+    \component{generic_image}{content/rwth/HM1/images/g_img_hm-def-sin-cos.meta.xml}{image1}
+    \component{generic_image}{content/rwth/HM1/images/g_img_hm-def-tancot.meta.xml}{tan_cot}
+    %\component{js_lib}{content/rwth/HM1/mathlets/VisualizationSineCosineCircleMathlet.meta.xml}{SinCos}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T211_Eigenschaften_stetiger_Funktionen/g_art_content_36_anwendungen.meta.xml}{content_36_anwendungen}
+    \link{generic_article}{content/rwth/HM1/T211_Eigenschaften_stetiger_Funktionen/g_art_content_33_zwischenwertsatz.meta.xml}{zwischenwertsatz}
+    \link{generic_article}{content/rwth/HM1/T210_Stetigkeit/g_art_content_30_elem_funktionen.meta.xml}{elem-funk}
+    \link{generic_article}{content/rwth/HM1/T105_Trigonometrische_Funktionen/g_art_content_18_grad_und_bogenmass.meta.xml}{grad-bogenmass}
+    \link{generic_article}{content/rwth/HM1/T105_Trigonometrische_Funktionen/g_art_content_19_allgemeiner_sinus_cosinus.meta.xml}{allg-sin-cos}
+    \link{generic_article}{content/rwth/HM1/T209_Potenzreihen/g_art_content_28_exponentialreihe.meta.xml}{exp}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{11}
+\ombarticle{3}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\lang{de}{\title{Trigonometrische Funktionen}}
+ 
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9795}{Ticket 9795}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{Sinus und Kosinus}
+
+Im Abschnitt \link{allg-sin-cos}{Sinus und Kosinus am Einheitskreis} haben wir schon den Sinus und
+ Kosinus als Funktionen von Winkelgrößen kennengelernt. Man fasst diese Funktionen als reelle
+ Funktionen auf, indem man den Winkel im Bogenmaß verwendet, welcher gleich der Länge des
+ entsprechenden Bogens auf dem Einheitskreis ist (vgl. Abschnitt \link{grad-bogenmass}{Gradmaß und Bogenmaß}).
+ 
+ 
+\begin{definition}\label{sincos.definition.1}
+    \lang{de}{Es sei $x \in \R$ und $(u;v)$ der Punkt auf dem Einheitskreis
+    ($u^2 + v^2 = 1$), der mit der positiven $u$-Achse den Winkel $x$
+    einschließt (entgegen dem Uhrzeigersinn gerechnet).
+    
+    Die \notion{Kosinusfunktion} ist die Funktion, die dem Winkel $x$ die Projektion des Punktes $(u;v)$ auf die 
+    $u$-Achse zuordnet, also $\cos(x) = u$.
+
+    Ordnet man dem Winkel $x$ die Projektion des Punktes $(u;v)$ auf die 
+    $v$-Achse zu, erhält man die \notion{Sinusfunktion}, es gilt also $ \sin(x) = v$.}
+    
+\begin{center}
+\image{T211_SineCosine}
+\end{center}
+
+\end{definition} 
+\\
+\lang{de}{Mit der nachfolgenden Visualisierung können Sie die Graphen von Sinus und Kosinus
+durch die Bewegung des Punktes auf dem Einheitskreis nachvollziehen.}
+\lang{en}{With the following applet you will be able to understand the graphs of sine and cosine via the movement of the point
+on the unit circle.}
+\\
+% Beginn des jsxgraph-Teils
+\begin{jsxgraph}
+
+% werden die Tabellen mit den jxgboxen.
+% im script wird der Inhalt geändert.
+\jxgbox[300][0]{out-0}
+\jxgbox[600][510]{out-1}
+
+\button[ansichtButton]{Ansicht 2}{changeView(aktAnsicht)}
+\button[speedButton]{1x}{changeSpeed(speed)}
+\button[startPauseButton]{>}{animating(animationRunning)}
+\button[resetButton]{Zurücksetzen}{resetView()}
+
+% java-script-code für die Visualisierung
+\begin{code}
+// create new css-class:
+const style = document.createElement('style');
+style.type = 'text/css';
+style.innerHTML = '.hideDiv { display: none; }';
+document.getElementsByTagName('head')[0].appendChild(style);
+
+// make a table of jxgboxes out of the jxgbox "out-0"
+  const firstView =  document.getElementById("out-0");
+  firstView.classList.remove("jxgbox");
+  firstView.removeAttribute("style");
+  firstView.innerHTML = '<table><tr><td>' +
+  '<div id="jsx-board-master-0" class="MuiBox-root jss2 jss1 jxgbox" style="width:500px; height:140px"></div>'+
+  '</td></tr><tr><td>'+
+  '<div id="jsx-board-sine-0" class="MuiBox-root jss2 jss1 jxgbox" style="width:500px; height:140px"></div>'+
+  '</td></tr><tr><td>'+
+  '<div id="jsx-board-cosine-0" class="MuiBox-root jss2 jss1 jxgbox" style="width:500px; height:140px"></div>'+
+  '</td></tr></table>';
+// make a table of jxgboxes out of the jxgbox "out-1" 
+  const secondView =  document.getElementById("out-1");
+  secondView.classList.remove("jxgbox");
+  secondView.removeAttribute("style");	
+  secondView.innerHTML = '<table><tr><td>'+
+  '<div id="jsx-board-master-1" class="MuiBox-root jss2 jss1 jxgbox" style="width:116px; height:116px"></div>'+
+  '</td><td>'+
+  '<div id="jsx-board-sine-1" class="MuiBox-root jss2 jss1 jxgbox" style="width:450px; height:116px"></div>'+
+  '</td></tr><tr><td>'+
+  '<div id="jsx-board-cosine-1" class="MuiBox-root jss2 jss1 jxgbox" style="width:116px; height:386px"></div>'+
+  '</td></tr></table>'; 
+  
+// ----------------------------------
+// global variables
+// ----------------------------------
+const maxSpeed = 8;
+var aktAnsicht = 0; // 0 (wenn aktuell Ansicht 1), 1 (wenn aktuell Ansicht 2)
+var speed = 1;
+var animationRunning = false;
+var tValue = Math.PI / 6;
+var intervalID = null;
+// ----------------------------------
+// functions for button-events
+// ----------------------------------
+function changeView(n) {
+  var jxgboxes = [
+    [
+      document.getElementById('jsx-board-master-0'),
+      document.getElementById('jsx-board-sine-0'),
+      document.getElementById('jsx-board-cosine-0'),
+    ],
+    [
+      document.getElementById('jsx-board-master-1'),
+      document.getElementById('jsx-board-sine-1'),
+      document.getElementById('jsx-board-cosine-1'),
+    ],
+  ];
+  for (var i = 0; i < 3; i++) {
+    jxgboxes[n][i].classList.add('hideDiv');
+    jxgboxes[1-n][i].classList.remove('hideDiv');
+  }
+  aktAnsicht = 1-n;
+  document.getElementById('ansichtButton').value = 'Ansicht ' + (2 - aktAnsicht);
+  document.getElementById('ansichtButton').innerHTML = 
+        document.getElementById('ansichtButton').value;
+}
+
+function changeSpeed(n) {
+  if (n < maxSpeed) {
+    speed = 2 * speed;
+  } else {
+    speed = 1;
+  }
+  document.getElementById('speedButton').setAttribute('value', speed + 'x');
+  document.getElementById('speedButton').innerHTML = 
+        document.getElementById('speedButton').value;
+  animating(!animationRunning);
+}
+
+function animating(isRunning) {
+  animationRunning = !isRunning;
+  if (intervalID != null) {
+    // stop current animation.
+    clearInterval(intervalID);
+  }
+  if (isRunning) {
+    document.getElementById('startPauseButton').setAttribute('value', '>');
+    intervalID = null;
+  } else {
+    document.getElementById('startPauseButton').setAttribute('value', '||');
+    // start animation.
+    intervalID = setInterval(() => {
+      increaseTValue(speed);
+    }, 160);
+    console.log('interval started with ID:', intervalID, 'and speed', speed);
+  }
+  document.getElementById('startPauseButton').innerHTML = 
+        document.getElementById('startPauseButton').value;
+}
+
+function increaseTValue(stepwidth) {
+  tValue = tValue + stepwidth / 200;
+  if (tValue > 2 * Math.PI) {
+    tValue = tValue - 2 * Math.PI;
+    console.log('tValue reduced to ', tValue);
+  }
+  masterBoard[0].elementsByName['p'].moveTo([Math.cos(tValue), Math.sin(tValue)]);
+  masterBoard[1].elementsByName['p'].moveTo([Math.cos(tValue), Math.sin(tValue)]);
+}
+
+function resetView() {
+  changeView(1);
+  animating(true);
+  changeSpeed(maxSpeed);
+  tValue = Math.PI / 6;
+  masterBoard[0].elementsByName['p'].moveTo([Math.cos(tValue), Math.sin(tValue)]);
+  masterBoard[1].elementsByName['p'].moveTo([Math.cos(tValue), Math.sin(tValue)]);
+}
+
+// ----------------------------------
+// function which is called when 'point' is dragged:
+//  * tValue is adjusted,
+//  * corresp. point in second board is synchronised.
+// ----------------------------------
+function setTValue(point) {
+  tValue = Math.atan2(point.Y(), point.X());
+  if (tValue < 0) {
+    tValue += 2 * Math.PI;
+  }
+  var p2;
+  if (point.board == masterBoard[0]) {
+    p2 = masterBoard[1].elementsByName[point.name];
+  }
+  if (point.board == masterBoard[1]) {
+    p2 = masterBoard[0].elementsByName[point.name];
+  }
+  p2.moveTo([point.X(), point.Y()]);
+}
+
+// ----------------------------------
+// attributes for boards
+// ----------------------------------
+const attributesMaster = [
+  {
+    boundingBox: [-5, 1.4, 5, -1.4],
+    axis: true,
+    keepaspectratio: true,
+    showZoom: false,
+    showNavigation: false,
+    showCopyright: false,
+  },
+  {
+    boundingBox: [-1.4, 1.4, 1.4, -1.4],
+    axis: true,
+    keepaspectratio: true,
+    showZoom: false,
+    showNavigation: false,
+    showCopyright: false,
+  },
+];
+
+const attributesSine = [
+  {
+    boundingBox: [-1.5, 1.4, 8.5, -1.4],
+    axis: true,
+    keepaspectratio: true,
+    showZoom: false,
+    showNavigation: false,
+    showCopyright: false,
+    defaultAxes: {
+      x: { ticks: {
+          scale: Math.PI,
+          scaleSymbol: '\u03c0',
+          ticksDistance: 1,
+          insertTicks: false
+      }}}
+  },
+  {
+    boundingBox: [-1.5, 1.4, 8.5, -1.4],
+    axis: true,
+    keepaspectratio: true,
+    showZoom: false,
+    showNavigation: false,
+    showCopyright: false,
+    defaultAxes: {
+      x: { ticks: {
+          scale: Math.PI,
+          scaleSymbol: '\u03c0',
+          ticksDistance: 1,
+          insertTicks: false
+      }}}
+  },
+];
+const attributesCosine = [
+  {
+    boundingBox: [-1.5, 1.4, 8.5, -1.4],
+    axis: true,
+    keepaspectratio: true,
+    showZoom: false,
+    showNavigation: false,
+    showCopyright: false,
+    defaultAxes: {
+      x: { ticks: {
+          scale: Math.PI,
+          scaleSymbol: '\u03c0',
+          ticksDistance: 1,
+          insertTicks: false
+      }}}
+  },
+  {
+    boundingBox: [-1.4, 1.5, 1.4, -6],
+    axis: false,
+    grid: false,
+    keepaspectratio: true,
+    showZoom: false,
+    showNavigation: false,
+    showCopyright: false,
+  },
+];
+
+// ----------------------------------
+// boards: master, sine and cosine for each view
+// ----------------------------------
+const masterBoard = [
+  JXG.JSXGraph.initBoard('jsx-board-master-0', attributesMaster[0]),
+  JXG.JSXGraph.initBoard('jsx-board-master-1', attributesMaster[1]),
+];
+const sineBoard = [
+  JXG.JSXGraph.initBoard('jsx-board-sine-0', attributesSine[0]),
+  JXG.JSXGraph.initBoard('jsx-board-sine-1', attributesSine[1]),
+];
+const cosineBoard = [
+  JXG.JSXGraph.initBoard('jsx-board-cosine-0', attributesCosine[0]),
+  JXG.JSXGraph.initBoard('jsx-board-cosine-1', attributesCosine[1]),
+];
+
+// enable MathJax in Text-Elements
+JXG.Options.text.useMathJax = true;
+
+// ----------------------------------
+// initializations of the boards;
+// has to be put in subroutines for correctly distinguished variables.
+// ----------------------------------
+for (i = 0; i < 2; i++) {
+  initializeMasterBoard(masterBoard[i], i);
+}
+for (var i = 0; i < 2; i++) {
+  initializeSineBoard(sineBoard[i], masterBoard[i], 'p');
+}
+initializeFirstCosineBoard(cosineBoard[0], masterBoard[0], 'p');
+initializeSecondCosineBoard(cosineBoard[1], masterBoard[1], 'p');
+
+// apply changeView(1) to hide the second set of boards.
+changeView(1);
+
+// ----------------------------------
+// uncomment the following to see color deficiencies:
+// * 'defic' is a string equal to either 'protanopia', 'deuteranopia' or 'tritanopia'.
+// ----------------------------------
+/* 
+  const defic='tritanopia';
+  for (var i=0;i<2;i++) { 
+  masterBoard[i].emulateColorblindness(defic);
+  sineBoard[i].emulateColorblindness(defic);
+  cosineBoard[i].emulateColorblindness(defic);
+} 
+*/
+
+// ----------------------------------
+// Master configuration:
+// ----------------------------------
+function initializeMasterBoard(brd, n) {
+  const origin = brd.create('point', [0, 0], { visible: false });
+  const eins = brd.create('point', [1, 0], { visible: false });
+  const kreis = brd.create('circle', [origin, 1], {
+    strokeWidth: 2,
+    strokeColor: 'black',
+    fixed: true,
+    highlight: false,
+  });
+  var p = brd.create('glider', [Math.cos(tValue), Math.sin(tValue), kreis], {
+    name: 'p',
+    color: 'black',
+    size: 4,
+    withLabel: false,
+  });
+  p.on('drag', function() {
+    setTValue(p);
+  });
+  var bogen = brd.create('arc', [origin, eins, p], {
+    strokeWidth: 4,
+    strokeColor: '#0066CC',
+    highlight: false,
+  });
+  var xText = brd.create(
+    'text',
+    [
+      () => {
+        const r = 1.21;
+        return r * Math.cos(tValue / 2);
+      },
+      () => {
+        const r = 1.21;
+        return r * Math.sin(tValue / 2);
+      },
+      'x',
+    ],
+    {
+      color: '#0066CC',
+      fixed: true,
+      highlight: false,
+      name: 'xText',
+    }
+  );
+  xText.addParents([p]); // p has to be set as a parent so that xText will be updated, when p is.
+  var px = brd.create(
+    'point',
+    [
+      () => {
+        return p.X();
+      },
+      0,
+    ],
+    { visible: false }
+  );
+  var py = brd.create(
+    'point',
+    [
+      0,
+      () => {
+        return p.Y();
+      },
+    ],
+    { visible: false }
+  );
+  var l1 = brd.create('segment', [py, p], {
+    color: '#00CC00',
+    strokeWidth: 4,
+    highlight: false,
+  });
+  var l2 = brd.create('segment', [p, px], {
+    color: '#CC6600',
+    strokeWidth: 4,
+    highlight: false,
+  });
+  if (i == 0) {
+    l1.setAttribute({ withLabel: true, labelColor: '#00CC00' });
+    l1.setAttribute({ label: { position: 'bot' } });
+    l1.setLabelText('cos(x)');
+    l2.setAttribute({ withLabel: true, labelColor: '#CC6600' });
+    l2.setLabelText('sin(x)');
+    l2.setAttribute({ label: { position: 'top' } });
+  }
+}
+// ----------------------------------
+// sineBoards
+// ----------------------------------
+function initializeSineBoard(brd, parent, point) {
+  parent.addChild(brd); // so that brd is updated, when parent is.
+  var pcopy = parent.elementsByName[point];
+  var origin = brd.create('point', [0, 0], { visible: false });
+  var bb = brd.getBoundingBox();
+  var f = brd.create('functiongraph', [Math.sin, bb[0], bb[2]], {
+    strokeWidth: 2,
+    strokeColor: 'black',
+    fixed: true,
+    highlight: false,
+  });
+  var qx = brd.create(
+    'point',
+    [
+      function() {
+        return tValue;
+      },
+      0,
+    ],
+    { visible: false }
+  );
+  var q = brd.create(
+    'point',
+    [
+      function() {
+        return tValue;
+      },
+      function() {
+        return Math.sin(tValue);
+      },
+    ],
+    { visible: false }
+  );
+  qx.addParents([pcopy]);
+  q.addParents([pcopy]); // for correct update
+  var l1 = brd.create('segment', [origin, qx], {
+    color: '#0066CC',
+    strokeWidth: 4,
+    highlight: false,
+    withLabel: false,
+  });
+  brd.create(
+    'text',
+    [
+      function() {
+        return qx.X() / 2;
+      },
+      -0.1,
+      'x',
+    ],
+    { color: '#0066CC' }
+  );
+  var l2 = brd.create('segment', [q, qx], {
+    color: '#CC6600',
+    strokeWidth: 4,
+    highlight: false,
+    withLabel: false,
+  });
+  var tt = brd.create('text', [bb[0] + 0.1, bb[1] - 0.2, 'sin(x)'], {
+    color: '#CC6600',
+    fixed: true,
+    highlight: false,
+  });
+}
+
+// ----------------------------------
+// first cosineBoard:
+// ----------------------------------
+function initializeFirstCosineBoard(brd, parent, point) {
+  parent.addChild(brd);
+  console.log('parent', parent);
+  console.log('Elemente', parent.elementsByName);
+  var pcopy = parent.elementsByName[point];
+  console.log('pcopy', pcopy);
+  var origin = brd.create('point', [0, 0], { visible: false });
+  var bb = brd.getBoundingBox();
+  console.log(bb);
+  var f = brd.create('functiongraph', [Math.cos, bb[0], bb[2]], {
+    strokeWidth: 2,
+    strokeColor: 'black',
+    fixed: true,
+    highlight: false,
+  });
+  var qx = brd.create(
+    'point',
+    [
+      function() {
+        return tValue;
+      },
+      0,
+    ],
+    { visible: false }
+  );
+  var q = brd.create(
+    'point',
+    [
+      function() {
+        return tValue;
+      },
+      function() {
+        return Math.cos(tValue);
+      },
+    ],
+    { visible: false }
+  );
+  qx.addParents([pcopy]);
+  q.addParents([pcopy]); // for correct update
+  brd.create(
+    'text',
+    [
+      () => {
+        return qx.X() / 2;
+      },
+      0.2,
+      'x',
+    ],
+    { color: '#0066CC' }
+  );
+  var l1 = brd.create('segment', [origin, qx], {
+    color: '#0066CC',
+    strokeWidth: 4,
+    highlight: false,
+    withLabel: false,
+  });
+  var l2 = brd.create('segment', [q, qx], {
+    color: '#00CC00',
+    strokeWidth: 4,
+    highlight: false,
+    withLabel: false,
+  });
+  var tt = brd.create('text', [bb[0] + 0.1, bb[1] - 0.2, 'cos(x)'], {
+    color: '#00CC00',
+    fixed: true,
+    highlight: false,
+  });
+}
+
+// ----------------------------------
+// second cosineBoard
+// ----------------------------------
+function initializeSecondCosineBoard(brd, parent, point) {
+  parent.addChild(brd);
+  console.log('parent', parent);
+  console.log('Elemente', parent.elementsByName);
+  var pcopy = parent.elementsByName[point];
+  console.log('pcopy', pcopy);
+  var origin = brd.create('point', [0, 0], { visible: false });
+  // im Vergleich zur anderen Visualisierung: Alles um -pi/2 gedreht.
+  var xachse = brd.create(
+    'axis',
+    [
+      [0, 0],
+      [0, -1],
+    ],
+    { strokeOpacity: 1 }
+  );
+  var yachse = brd.create('axis', [
+    [0, 0],
+    [1, 0],
+  ]);
+  xachse.removeTicks(xachse.defaultTicks);
+  var tic = brd.create('ticks', [xachse, Math.PI], {
+    minorTicks: 1,
+    drawZero: true,
+  });
+  tic.setAttribute({ strokeOpacity: 0.3, minorHeight: 5, majorHeight: -1 }); // negativ value for whole board
+  brd.create('text', [
+    -0.3,
+    -Math.PI,
+    () => {
+      return '\u03c0';
+    },
+  ]);
+  brd.create('text', [
+    -0.4,
+    -2 * Math.PI,
+    () => {
+      return '2'+'\u03c0';
+    },
+  ]);
+  var bb = brd.getBoundingBox();
+  console.log(bb);
+  var f = brd.create(
+    'curve',
+    [
+      t => {
+        return Math.cos(t);
+      },
+      t => {
+        return t;
+      },
+      bb[3],
+      bb[1],
+    ],
+    {
+      strokeWidth: 2,
+      strokeColor: 'black',
+      fixed: true,
+      highlight: false,
+    }
+  );
+  var qx = brd.create(
+    'point',
+    [
+      0,
+      function() {
+        return -tValue;
+      },
+    ],
+    { visible: false }
+  );
+  var q = brd.create(
+    'point',
+    [
+      function() {
+        return Math.cos(tValue);
+      },
+      function() {
+        return -tValue;
+      },
+    ],
+    { visible: false }
+  );
+  qx.addParents([pcopy]);
+  q.addParents([pcopy]); // for correct update
+  brd.create(
+    'text',
+    [
+      0.2,
+      () => {
+        return qx.Y() / 2;
+      },
+      'x',
+    ],
+    { color: '#0066CC' }
+  );
+  var l1 = brd.create('segment', [origin, qx], {
+    color: '#0066CC',
+    strokeWidth: 4,
+    highlight: false,
+    withLabel: false,
+  });
+  var l2 = brd.create('segment', [q, qx], {
+    color: '#00CC00',
+    strokeWidth: 4,
+    highlight: false,
+    withLabel: false,
+  });
+  var tt = brd.create('text', [bb[0] + 0.1, bb[1] - 0.2, 'cos(x)'], {
+    color: '#00CC00',
+    fixed: true,
+    highlight: false,
+  });
+}
+\end{code}
+\end{jsxgraph}
+
+
+Viele Eigenschaften, wie die Periodizität $\cos(x+2\pi)=\cos(x)$ und $\sin(x+2\pi)=\sin(x)$ für alle $x\in \R$, haben wir im Abschnitt  \link{allg-sin-cos}{Sinus und Kosinus am Einheitskreis} auch schon gesehen, weshalb wir uns hier auf die Eigenschaften beschränken, die dort noch nicht aufgeführt sind.
+
+
+\begin{theorem}[Additionstheoreme]
+Die Funktionen $\sin$ und $\cos$ erfüllen die sogenannten \notion{Additionstheoreme}. Für alle $x,y\in \R$ gelten
+\begin{eqnarray*}
+\cos(x+y) &=& \cos(x)\cos(y)-\sin(x)\sin(y), \\
+\cos(x-y) &=& \cos(x)\cos(y)+\sin(x)\sin(y), \\
+\sin(x+y) &=& \sin(x)\cos(y)+\cos(x)\sin(y), \\
+\sin(x-y) &=& \sin(x)\cos(y)-\cos(x)\sin(y).
+\end{eqnarray*}
+\floatright{\href{https://www.hm-kompakt.de/video?watch=136}{\image[75]{00_Videobutton_schwarz}}}\\\\
+\end{theorem}
+
+
+\begin{proof*}
+\begin{incremental}
+\step
+Dies kann man mit geometrischen Argumenten beweisen, oder aber auch über den Zusammenhang mit der komplexen Exponentialfunktion (vgl. Abschnitt \link{exp}{Exponentialreihe, Sinus und Kosinus}), aus dem
+man auch die Potenzreihen-Darstellungen für Sinus und Kosinus erhält:
+\[ \cos(x)= \sum_{k=0}^\infty\;(-1)^k\; \frac{x^{2k}}{(2k)!} 
+    = 1 -\frac{x^2}{2!} + \frac{x^4}{4!} - \ldots \]
+    und
+    \[ \sin(x) = \sum_{k=0}^\infty \; (-1)^k\;\frac{x^{2k+1}}{(2k+1)!} 
+    =x - \frac{x^3}{3!} + \frac{x^5}{5!}- \ldots\, ,\]
+welche für alle $x\in \R$ absolut konvergieren.
+\end{incremental}
+\end{proof*}
+
+\begin{theorem}
+\begin{enumerate}
+\item Sinus und Kosinus sind stetige Funktionen.
+\item Kosinus ist streng monoton fallend auf dem Intervall $[0;\pi]$ und $\cos([0;\pi])=[-1;1]$.
+\item Sinus ist streng monoton wachsend auf dem Intervall $[-\frac{\pi}{2};\frac{\pi}{2}]$
+ und $\sin( [-\frac{\pi}{2};\frac{\pi}{2}])=[-1;1]$.
+\end{enumerate}
+\end{theorem}
+
+
+
+\begin{proof*}
+\begin{incremental}
+\step
+Die strenge Monotonie von Sinus und Kosinus auf den Intervallen ist direkt aus der Definition ersichtlich.
+Außerdem ist $\cos(0)=1=\sin(\frac{\pi}{2})$ und $\cos(\pi)=-1=\sin(-\frac{\pi}{2})$.
+Wenn wir die Stetigkeit gezeigt haben, ist jeweils nach dem 
+\ref[zwischenwertsatz][Zwischenwertsatz]{thm:zwischenwertsatz} und wegen der Monotonie der Wertebereich 
+genau das Intervall $[-1;1]$.
+
+\step
+
+Für die Stetigkeit zeigen wir zunächst die Stetigkeit beider Funktionen an der Stelle $0$, d.\,h. wir zeigen
+\[  \lim_{x\to 0} \sin(x)=0=\sin(0)\quad \text{und} \quad  \lim_{x\to 0} \cos(x)=1=\cos(0). \]
+
+Aus der Definition sieht man direkt, dass für alle $x\in \R$ mit $-\frac{\pi}{2}\leq x\leq \frac{\pi}{2}$ 
+die Ungleichung $|\sin(x)|\leq |x|$ gilt, denn $|x|$ ist die Länge des Kreisbogens von $(1;0)$ zum
+Punkt $(u;v)=(\cos(x);\sin(x))$ und $|\sin(x)|$ ist der Abstand dieses Punktes zur $u$-Achse.
+\step
+Dann gilt aber $ \lim_{x\to 0} |\sin(x)|\leq  \lim_{x\to 0} |x|=0$ und daher
+\[ \lim_{x\to 0} \sin(x)=0. \]
+Aus dem trigonometrischen Pythagoras $\cos(x)^2+\sin(x)^2=1$ für alle $x\in \R$ und $\cos(x)\geq 0$ für 
+$-\frac{\pi}{2}\leq x\leq \frac{\pi}{2}$ erhält man 
+\[ \cos(x)=\sqrt{1-\sin(x)^2} \quad \text{für alle }x\in [-\frac{\pi}{2};\frac{\pi}{2}]. \]
+Da mit $\sin(x)$ auch $1-\sin(x)^2$ stetig in $0$ ist und auch die Wurzelfunktion stetig ist, ist auch die
+Komposition $\sqrt{1-\sin(x)^2}$ bei $0$ stetig 
+(vgl. \ref[elem-funk][Kompositionen stetiger Funktionen]{sec:kompositionen}). Also ist auch $\cos(x)$ bei 
+$0$ stetig und es gilt
+\[   \lim_{x\to 0} \cos(x) =\lim_{x\to 0} \sqrt{1-\sin(x)^2} =1=\cos(0). \]
+\step
+Für die Stetigkeit in einem beliebigen Punkt $x^*\in \R$ verwenden wir die Additionstheoreme:
+\begin{eqnarray*}
+\lim_{x\to x^*} \sin(x) &=& \lim_{x\to x^*}  \sin(x^*+(x-x^*)) \\
+&=& \lim_{x\to x^*}[ \sin(x^*)\cos(x-x^*)+  \cos(x^*)\sin(x-x^*)] \\
+&=& \lim_{h\to 0}[\sin(x^*)\cos(h)+  \cos(x^*)\sin(h)] \\
+&=& \sin(x^*)\cos(0)+  \cos(x^*)\sin(0)= \sin(x^*). 
+\end{eqnarray*} 
+Für $\cos$ rechnet man ganz entsprechend
+\begin{eqnarray*}
+\lim_{x\to x^*} \cos(x)  %&=& \lim_{x\to x^*}  \cos(x^*+(x-x^*)) \\
+&=& \lim_{x\to x^*}[ \cos(x^*)\cos(x-x^*)-  \sin(x^*)\sin(x-x^*) ]\\
+% &=& \lim_{h\to 0}\cos(x^*)\cos(h)-  \sin(x^*)\sin(h) \\
+&=& \cos(x^*)\cos(0)-  \sin(x^*)\sin(0)= \cos(x^*). 
+\end{eqnarray*} 
+
+
+\step Anmerkung: Verwendet man die Potenzreihendarstellung, erhält man direkt aus Abschnitt 
+\ref[elem-funk][Stetigkeit elementarer Funktionen]{sec:potenzreihen}, dass Sinus und Kosinus auf ihrem 
+Konvergenzbereich (also auf ganz $\R$) stetig sind. 
+
+\end{incremental}
+\end{proof*}
+
+\section{Tangens und Kotangens}\label{tan-cot.definition}
+
+Auch Tangens und Kotangens haben wir schon als reelle Funktionen kennengelernt:
+
+\begin{definition}
+\lang{de}{Die \notion{Tangensfunktion} $\tan$ ist definiert durch
+\begin{align*}
+\tan(x) = \frac{\sin(x)}{\cos(x)} ,
+\end{align*}
+wobei $x \in \mathbb{R}$ nicht die Werte $\;\ldots, \frac{-5\pi}{2},
+\frac{-3\pi}{2}, \frac{-\pi}{2}, \frac{\pi}{2}, \frac{3\pi}{2},
+\frac{5\pi}{2}, \ldots\;$ annehmen darf, das heißt, ihr Definitionsbereich
+ist gegeben durch $D_{\tan} = \mathbb{R} \setminus U$ mit $U = \big\{
+ k\pi + \frac{\pi}{2} \; \big| \; k \in \mathbb{Z} \big\}$.
+
+Die \notion{Kotangensfunktion} $\cot$ ist definiert durch
+\begin{align*}
+\cot(x) = \frac{\cos(x)}{\sin(x)} ,
+\end{align*}
+wobei $x \in \mathbb{R}$ nicht die Werte
+$\;\ldots, -2\pi, -\pi, 0, \pi, 2\pi, \ldots\;$
+annehmen darf, das heißt, ihr Definitionsbereich ist
+gegeben durch $D_{\cot} = \mathbb{R} \setminus G$ mit
+$G= \big\{ k\pi \; \big| \; k \in  \mathbb{Z} \big\}$. 
+%Beide Funktionen haben die Menge der reellen Zahlen als Wertemenge: $W_{\tan}=W_{\cot}=\R$.
+\begin{center}
+\image{T105_Tangent}
+\end{center}
+}
+\lang{en}{The \emph{tangent} of an angle $\tan(x)$ is defined by
+\begin{align*}
+\tan(x) = \frac{\sin(x)}{\cos(x)} ,
+\end{align*}
+where $x \in \mathbb{R}$ may not take on the values $\;\ldots, \frac{-5\pi}{2},
+\frac{-3\pi}{2}, \frac{-\pi}{2}, \frac{\pi}{2}, \frac{3\pi}{2},
+\frac{5\pi}{2}, \ldots\;$. In set notation the domain is given by
+$D_{\tan} = \mathbb{R} \setminus U$ where $U = \big\{
+ k\pi + \frac{\pi}{2} \; \big| \; k \in \mathbb{Z} \big\}$.
+\\
+The \emph{cotangent} of an angle $\cot(x)$ is defined by
+\begin{align*}
+\cot(x) = \frac{\cos(x)}{\sin(x)} ,
+\end{align*}
+where $x \in \mathbb{R}$ may not take on the values
+$\;\ldots, -2\pi, -\pi, 0, \pi, 2\pi, \ldots\;$. In set notation the domain is given by $D_{\cot} = \mathbb{R} \setminus G$ where
+$G= \big\{ k\pi \; \big| \; k \in  \mathbb{Z} \big\}$. \\
+Both functions' ranges are the set of real numbers: $W_{\tan}=W_{\cot}=\R$.
+\begin{center}
+\image[350]{tan_cot} % Bild hm-def-tancot
+\end{center}
+}
+\end{definition}
+
+Wir kennen bereits die Periodizität $\tan(x+\pi)=\tan(x)$ und $\cot(x+\pi)=\cot(x)$. Weitere Eigenschaften  
+der Funktionen fasst das folgende Theorem zusammen: 
+
+\begin{theorem}
+\begin{enumerate}
+\item Die Funktionen $\tan$ und $\cot$ sind auf ihrem gesamten Definitionsbereich stetig.
+\item Tangens ist auf dem Intervall $(-\frac{\pi}{2};\frac{\pi}{2})$ streng monoton wachsend und hat den Wertebereich $\tan\big((-\frac{\pi}{2};\frac{\pi}{2})\big)=\R$.
+\item Kotangens ist auf dem Intervall $(0;\pi)$ streng monoton fallend und
+hat den Wertebereich $\cot\big((0;\pi)\big)=\R$.
+\end{enumerate}
+\end{theorem}
+
+
+\begin{proof*}
+\begin{incremental}
+\step
+Als Quotienten stetiger Funktionen sind $\tan$ und $\cot$ stetig.
+
+Für die Monotonie von $\tan$ auf dem Intervall $(-\frac{\pi}{2};\frac{\pi}{2})$ betrachten wir $x,y\in (-\frac{\pi}{2};\frac{\pi}{2})$ mit $x<y$. Dann gilt
+\begin{eqnarray*}
+\tan(y)-\tan(x) &=& \frac{\sin(y)}{\cos(y)}-  \frac{\sin(x)}{\cos(x)} \\
+&=& \frac{\sin(y)\cos(x)-\cos(y)\sin(x)}{\cos(y)\cos(x)}= \frac{\sin(y-x)}{\cos(y)\cos(x)},
+\end{eqnarray*}
+wobei im letzten Schritt ein Additionstheorem verwendet wurde.\\
+Nun ist $y-x\in (0;\pi)$ und daher $\sin(y-x)>0$. Es gelten auch
+$\cos(y)>0$ und $\cos(x)>0$, da $x,y\in  (-\frac{\pi}{2};\frac{\pi}{2})$.
+Also ist \[ \tan(y)-\tan(x) =\frac{\sin(y-x)}{\cos(y)\cos(x)}>0. \]
+Damit ist $\tan$ auf dem Intervall $(-\frac{\pi}{2};\frac{\pi}{2})$
+streng monoton wachsend.
+\step
+Weiter gilt für alle $x$ mit  $-\frac{\pi}{2}<x<0$
+\[   \tan(x)=  \frac{\sin(x)}{\cos(x)}<0 \]
+und
+\[ \lim_{x\searrow -\frac{\pi}{2}} \frac{1}{\tan(x)}= 
+\lim_{x\searrow -\frac{\pi}{2}} \frac{\cos(x)}{\sin(x)} = 
+\frac{\cos(-\frac{\pi}{2})}{\sin(-\frac{\pi}{2})}=0.\]
+Also 
+\[ \lim_{x\searrow -\frac{\pi}{2}} \tan(x) =-\infty. \]
+Entsprechend ist wegen $\tan(x)>0$ für $0<x<\frac{\pi}{2}$ und
+wegen $\lim_{x\nearrow \frac{\pi}{2}} \frac{1}{\tan(x)}=0$ auch
+\[ \lim_{x\nearrow \frac{\pi}{2}} \tan(x) =\infty. \]
+
+Damit ist der Wertebereich von $\tan$ auf dem Intervall $(-\frac{\pi}{2};\frac{\pi}{2})$ 
+gleich $(-\infty;\infty)=\R$.
+\step
+
+Um die Monotonie und den Wertebereich für $\cot$ zu zeigen, verfährt man ganz entsprechend, 
+oder man verwendet, dass
+\[  \cot(x)= \frac{\cos(x)}{\sin(x)}=\frac{\sin(\frac{\pi}{2}-x)}{\cos(\frac{\pi}{2}-x)}
+=\tan\left(\frac{\pi}{2}-x\right). \]
+\end{incremental}
+\end{proof*}
+
+
+\section{Arkusfunktionen}\label{arcus.funktionen}
+
+Die trigonometrischen Funktionen sind alle periodisch und deshalb nicht injektiv. Schränkt
+man sie jedoch auf ein geeignetes Teilintervall von $\R$ ein, dann sind sie dort streng monoton, also auch injektiv, wie wir oben gesehen haben.
+
+Speziell haben wir gesehen:
+\begin{itemize}
+\item $\sin$ ist auf dem Intervall $[-\frac{\pi}{2};\frac{\pi}{2}]$ streng monoton wachsend mit Wertemenge $[-1;1]$,
+\item $\cos$ ist auf dem Intervall $[0;\pi]$ streng monoton fallend mit Wertemenge $\cos([0;\pi])=[-1;1]$, 
+\item $\tan$ ist auf dem Intervall $(-\frac{\pi}{2};\frac{\pi}{2})$ streng monoton wachsend und hat den Wertebereich $\tan\big((-\frac{\pi}{2};\frac{\pi}{2})\big)=\R$,
+\item $\cot$ ist auf dem Intervall $(0;\pi)$ streng monoton fallend und
+hat den Wertebereich $\cot\big((0;\pi)\big)=\R$.
+\end{itemize}
+
+Man definiert daher ihre partiellen Umkehrfunktionen.
+
+\begin{definition}
+\begin{enumerate}
+\item Der \notion{Arkuskosinus} $\arccos: [-1;1]\to [0;\pi]$ ist die Umkehrfunktion des eingeschränkten Kosinus,
+\item der \notion{Arkussinus} $\arcsin:[-1;1]\to [-\frac{\pi}{2};\frac{\pi}{2}]$ ist die Umkehrfunktion des eingeschränkten Sinus,
+\item der \notion{Arkustangens} $\arctan:\R\to (-\frac{\pi}{2};\frac{\pi}{2})$ ist die Umkehrfunktion des eingeschränkten Tangens,
+\item der \notion{Arkuskotangens} $\arccot:\R\to (0;\pi)$ ist die Umkehrfunktion des eingeschränkten Kotangens.
+\end{enumerate}
+\end{definition}
+
+ 	\begin{genericGWTVisualization}[550][1000]{mathlet1}
+ 		\begin{variables}
+			\function{f1}{real}{sin(x)+sqrt((pi^2)/4-x^2)-((pi^2)/4-x^2)/sqrt((pi^2)/4-x^2)} 	% eingeschränkt auf $(-pi/2;pi/2)$
+			\function{f11}{real}{sin(x)}  % zur Anzeige
+			\function{f2}{real}{arcsin(x)} 			
+			\function{g1}{real}{cos(x)+sqrt(x*(pi-x))-x*(pi-x)/sqrt(x*(pi-x))} 	% eingeschränkt auf $(0;pi)$
+			\function{g11}{real}{cos(x)}  % zur Anzeige
+			\function{g2}{real}{arccos(x)} 			
+			\function{h1}{real}{tan(x)+sqrt((pi^2)/4-x^2)-((pi^2)/4-x^2)/sqrt((pi^2)/4-x^2)} 	% eingeschränkt auf $(-pi/2;pi/2)$
+			\function{h11}{real}{tan(x)}  % zur Anzeige
+			\function{h2}{real}{arctan(x)} 			
+			\function{j1}{real}{cot(x)+sqrt(x*(pi-x))-x*(pi-x)/sqrt(x*(pi-x))} 	% eingeschränkt auf $(0;pi)$
+			\function{j11}{real}{cot(x)}  % zur Anzeige
+			\function{j2}{real}{arccot(x)} 			
+			\function{w}{real}{x}
+			\function{v}{real}{x}
+			\number{a1}{real}{-(pi/2)}
+			\number{a2}{real}{0}
+			\number{a3}{real}{(pi/2)}
+			\number{a4}{real}{pi}
+			\point{p11}{real}{var(a1),var(a1)}
+			\point{p12}{real}{var(a1),var(a2)}
+			\point{p21}{real}{var(a2),var(a1)}
+			\point{p22}{real}{var(a2),var(a2)}
+			\point{p33}{real}{var(a3),var(a3)}
+			\point{p34}{real}{var(a3),var(a4)}
+			\point{p43}{real}{var(a4),var(a3)}
+			\point{p44}{real}{var(a4),var(a4)}
+			\line{s1}{real}{var(p11),var(p12)}
+			\line{s2}{real}{var(p21),var(p22)}
+			\line{s3}{real}{var(p33),var(p34)}
+			\line{s4}{real}{var(p43),var(p44)}
+			\line{w1}{real}{var(p11),var(p21)}
+			\line{w2}{real}{var(p12),var(p22)}
+			\line{w3}{real}{var(p33),var(p43)}
+			\line{w4}{real}{var(p34),var(p44)}
+			
+ 		\end{variables}
+ 		\color{f1}{#0066CC}
+ 		\color{f11}{#0066CC}
+ 		\color{f2}{#0066CC}
+ 		\color{g1}{#CC6600}
+ 		\color{g11}{#CC6600}
+ 		\color{g2}{#CC6600}
+ 		\color{h1}{#00CC00}
+ 		\color{h11}{#00CC00}
+ 		\color{h2}{#00CC00}
+ 		\color{j1}{#CC00CC}
+ 		\color{j11}{#CC00CC}
+ 		\color{j2}{#CC00CC}
+ 		\color{w}{LIGHT_GRAY}
+ 		\color{v}{LIGHT_GRAY}
+ 		\color{s1}{LIGHT_GRAY}
+ 		\color{s2}{LIGHT_GRAY}
+ 		\color{s3}{LIGHT_GRAY}
+ 		\color{s4}{LIGHT_GRAY}
+ 		\color{w1}{LIGHT_GRAY}
+ 		\color{w2}{LIGHT_GRAY}
+ 		\color{w3}{LIGHT_GRAY}
+ 		\color{w4}{LIGHT_GRAY}
+ 
+ 		\text{Hier zunächst die Graphen der eingeschränkten trigonometrischen Funktionen
+ 		\var{f11}, \var{g11}, \var{h11} und \var{j11}...
+ 		}
+ 		\begin{canvas}
+ 			\plotSize{400}
+ 			\plotLeft{-3.5}
+ 			\plotRight{3.5}
+ 			\plot[coordinateSystem]{s1,s2,s3,s4,f1,g1,h1,j1}
+ 		\end{canvas}
+ 		
+  		\text{... und die Graphen der zugehörigen Arkusfunktionen
+ 		\var{f2}, \var{g2}, \var{h2} und \var{j2}.}
+
+ 		\begin{canvas}
+ 			\plotSize{400}
+ 			\plotLeft{-3.5}
+ 			\plotRight{3.5}
+ 			\plot[coordinateSystem]{w1,w2,w3,w4,f2,g2,h2,j2}
+ 		\end{canvas}
+
+        \text{Um sich die Arkusfunktionen vorzustellen, ist es hilfreich, 
+        ausgewählte Punkte zu betrachten und sie \glqq umzukehren". Wir erhalten:
+     
+        \textcolor{##0066CC}{
+        \begin{table}
+        $\sin(-\frac{\pi}{2})=-1$&$\sin(0)=0$&$\sin(\frac{\pi}{2})=1$\\
+        $\arcsin(-1)=-\frac{\pi}{2}$&$\arcsin(0)=0$&$\arcsin(1)=\frac{\pi}{2}$
+        \end{table}}
+        
+        \textcolor{#CC6600}{
+        \begin{table}
+        $\cos(0)=1$&$\cos(\frac{\pi}{2})=0$&$\cos(\pi)=-1$\\
+        $\arccos(1)=0$&$\arccos(0)=\frac{\pi}{2}$&$\arccos(-1)=\pi$
+        \end{table}}
+        
+        \textcolor{#00CC00}{
+        \begin{table}
+        $\tan(-\frac{\pi}{4})=-1$&$\tan(0)=0$&$\tan(\frac{\pi}{4})=1$\\
+        $\arctan(-1)=-\frac{\pi}{4}$&$\arctan(0)=0$&$\arctan(1)=\frac{\pi}{4}$
+        \end{table}}
+        
+        \textcolor{#CC00CC}{
+        \begin{table}
+        $\cot(\frac{3\pi}{4})=-1$&$\cot(\frac{\pi}{2})=0$&$\cot(\frac{\pi}{4})=1$\\
+        $\arccot(-1)=\frac{3\pi}{4}$&$\arccot(0)=\frac{\pi}{2}$&$\arccot(1)=\frac{\pi}{4}$
+        \end{table}}
+        }
+
+
+ 	    	\end{genericGWTVisualization}
+
+
+Aus dem \ref[elem-funk][Satz zur Stetigkeit der Umkehrfunktion]{thm:inverse-stetig} erhält man direkt:
+
+\begin{theorem}
+Die Arkusfunktionen sind alle auf ihrem Definitionsbereich stetig.
+\end{theorem}
+
+\begin{quickcheckcontainer}
+
+\randomquickcheckpool{1}{2}
+\randomquickcheckpool{3}{3}
+
+\begin{quickcheck}
+    \field{rational}
+    \type{input.number}
+    \begin{variables}
+        \number{n}{0}
+    \end{variables}
+    \text{$\arcsin(0)=$ \ansref }
+    \begin{answer}
+        \solution{n}
+    \end{answer}
+\end{quickcheck}
+
+\begin{quickcheck}
+    \field{rational}
+    \type{input.function}
+    \begin{variables}
+        \function{f}{pi/2}
+    \end{variables}
+    \text{$\arccos(0)=$ \ansref }
+    \begin{answer}
+        \solution{f}
+    \end{answer}
+\end{quickcheck}
+
+\begin{quickcheck}
+    \field{rational}
+    \type{input.function}
+    \begin{variables}
+        \function{f}{pi/2}
+    \end{variables}
+    \text{$\lim_{u\to\infty}\arctan(u)=$ \ansref }
+    \begin{answer}
+        \solution{f}
+    \end{answer}
+\end{quickcheck}
+
+
+\end{quickcheckcontainer}
+
+\end{visualizationwrapper}
+\end{content}

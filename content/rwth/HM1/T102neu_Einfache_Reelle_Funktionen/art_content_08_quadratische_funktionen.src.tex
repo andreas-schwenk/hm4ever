@@ -1,0 +1,1141 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Quadratische Funktionen, Parabeln}
+    \lang{en}{Quadratic functions and parabolas}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}  
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T102_ParabolaVertex.meta.xml}{T102_ParabolaVertex}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T102_ParabolaThreePoints.meta.xml}{T102_ParabolaThreePoints}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T102_Parabolas.meta.xml}{T102_Parabolas}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}         
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T102neu_Einfache_Reelle_Funktionen/g_art_content_08_quadratische_funktionen.meta.xml}{content_08_quadratische_funktionen}
+    \link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_02_rechengrundlagen_terme.meta.xml}{content_02_rechengrundlagen_terme}
+    \link{generic_article}{content/rwth/HM1/T102neu_Einfache_Reelle_Funktionen/g_art_content_07_geradenformen.meta.xml}{content_07_geradenformen}
+    \link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_05_loesen_gleichungen_und_lgs.meta.xml}{link-04-lin-funk}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21160}{Ticket 21160}
+\end{block}
+
+%
+% ursprüngliche Version:
+%
+% Copy of \href{http://team.mumie.net/issues/8974}{Ticket 8974}: 
+%          content/rwth/HM1/T102_Einfache_Funktionen,_grundlegende_Begriffe/art_content_06_quadratische_funktionen.src.tex
+% 
+% \begin{block}[annotation]
+%   Im Ticket-System: \href{http://team.mumie.net/issues/8974}{Ticket 8974}\\
+% \end{block}
+%
+% Ticket neu: 
+%
+
+\usepackage{mumie.ombplus}
+\ombchapter{2}
+\ombarticle{3}
+
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Quadratische Funktionen und Parabeln}
+       \lang{en}{Quadratic functions and parabolas}}
+
+\begin{block}[annotation]
+ quadratische Funktionen, Parameter einer Parabel und deren Bedeutung, Scheitelpunktform, 
+ Festlegung einer quadratischen Funktion durch drei Punkte\\
+
+\end{block} 
+
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{Quadratische Funktionen}  \label{sec:quadratic}
+%
+%%% Video Hoever
+%
+\lang{de}{
+Wir beginnen mit einer anschaulichen Einführung in quadratische Funktionen.
+\floatright{\href{https://www.hm-kompakt.de/video?watch=105}{\image[75]{00_Videobutton_schwarz}}}
+\\\\
+Fassen wir nun die wesentlichen Definitionen und Merkmale zusammen.
+}
+\lang{en}{
+We begin by giving the essential definitions for this section.
+}
+% 
+
+\begin{definition}[\lang{de}{Quadratische Funktion}\lang{en}{Quadratic Function}] \label{def:quadratic_func}
+\lang{de}{
+Eine Funktion $f:\R\to \R\,$ der Form 
+}
+\lang{en}{
+A function $f:\R\to \R\,$ of the form 
+}
+\begin{align*}
+f(x) = a x^2 + b \, x + c
+\end{align*}
+\lang{de}{
+mit Koeffizienten $a,\, b,\,c \in \mathbb{R}$, wobei $a \neq 0$ ist, heißt 
+\notion{\emph{quadratische Funktion}} oder \notion{\emph{Parabelfunktion}}.
+\\ 
+Den Koeffizienten $a$ bezeichnet man als \notion{\emph{Leitkoeffizienten}.}
+\\
+Der Definitionsbereich ist $D_f = \mathbb{R}$.
+}
+\lang{en}{
+with coefficients $a,\, b,\,c \in \mathbb{R}$, where $a \neq 0$, is called a 
+\notion{\emph{quadratic function}} or sometimes just a \notion{\emph{quadratic}}.
+\\
+The coefficient $a$ is called the \notion{\emph{leading coefficient}} of the quadratic.
+\\
+If $a = 1$, the quadratic function is called \notion{\emph{monic}}.
+\\
+The domain is $D_f = \mathbb{R}$.
+}
+\end{definition}
+
+\begin{definition}[\lang{de}{Parabel und Normalparabel}\lang{en}{Parabola}] \label{def:parabel}
+\lang{de}{
+Der Graph einer quadratischen Funktion $f:\R\to \R, \; x \mapsto a x^2 + b \, x + c$, \\
+also die Menge $\{ (x;y) \in \R^2 \mid y=a x^2 + b \, x + c \},$ beschreibt eine 
+\notion{\emph{Parabel}.}
+\\
+Ist der Leitkoeffizient $a = 1$, so bezeichnet man den Graphen von $f$ als 
+\notion{\emph{Normalparabel}.}
+}
+\lang{en}{
+The graph of a quadratic function $f:\R\to \R, \; x \mapsto a x^2 + b \, x + c$, \\
+so the set $\{ (x;y) \in \R^2 \mid y=a x^2 + b \, x + c \},$ describes a curve called a 
+\notion{\emph{parabola}}.
+}
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 
+% \begin{center}
+%   \lang{de}{\iframe[400][225][S]{https://www.stream24.net/vod/getVideo.php?id=10962-1-5531&mode=iframe}}
+% \end{center}
+% 
+% \lang{de}{Man bezeichnet eine ganzrationale Gleichung als quadratisch, 
+% wenn die Unbekannte mit dem Exponenten 2 auftritt (z.B. als $x^2$), 
+% und auch nicht durch Umformungen wegfällt. 
+% Außerdem tritt sie nicht mit irgendwelchen Wurzeln oder sonstigen Funktionen auf.}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{remark}[\lang{de}{Bedeutung der Parameter}
+               \lang{en}{Interpreting the parameters}] \label{rem:parabel_parameter}
+
+  \lang{de}{
+  In der Darstellung $\,f(x)=ax^2+bx+c\,$ bestimmt der Leitkoeffizient $a$ die Form der Parabel:
+  }
+  \lang{en}{
+  In the form $\,f(x)=ax^2+bx+c\,$, the leading coefficient $a$ determines the shape of the parabola: 
+  }
+    \begin{itemize}
+    \item   \lang{de}{
+            F"ur $a>0$ ist die Parabel nach \emph{oben} geöffnet und\\ 
+            f"ur $a<0$ ist die Parabel nach \emph{unten} geöffnet.
+            }
+            \lang{en}{
+            For $a>0$ the parabola opens to the \emph{top}, and \\ 
+            for $a<0$ the parabola opens to the \emph{bottom}.
+            }
+    \item   \lang{de}{
+            Man bezeichnet $a$ auch als \notion{\emph{Streckfaktor}} der Parabel, denn\\
+            f"ur $|a|>1$ ist die Parabel \emph{steiler} bzw. \emph{spitzer} als die Normalparabel und\\ 
+            f"ur $|a|<1$ ist die Parabel \emph{flacher} bzw. \emph{stumpfer} als die Normalparabel.
+            }
+            \lang{en}{
+            We sometimes call $a$ the \notion{\emph{stretch factor}} of the parabola, as \\
+            for $|a|>1$ the parabola is \emph{steeper} or \emph{'sharper'} than for a monic 
+            quadratic.\\
+            For $|a|<1$ the parabola is \emph{more flat} or \emph{'blunter'} than for a monic 
+            quadratic.
+            }
+    \end{itemize}
+  \lang{de}{
+  Der Koeffizient $\,c\,$ kennzeichnet den Schnittpunkt mit der $y-$Achse, also $\,(0;c)$, denn $\,f(0)=c.$ 
+  \\
+  Die Bedeutung des Koeffizienten $b$ ist nicht so offensichtlich, wird aber später erläutert.
+  }
+  \lang{en}{
+  The coefficient $\,c\,$ once more denotes the $y$-intercept, that is, $\,(0;c)$ such that 
+  $\,f(0)=c.$ 
+  }
+ 
+\end{remark}
+
+\lang{de}{
+Die folgenden Beispiele veranschaulichen, wie sich Veränderungen der Koeffizienten einer  
+quadratischen Funktion $\, f:\R\to \R, \; x \mapsto ax^2+bx+c\,$ auf ihre graphische 
+Darstellung als Parabel auswirken.
+}
+\lang{en}{
+The following examples demonstrate how changing the coefficients of a quadratic function 
+$\, f:\R\to \R, \; x \mapsto ax^2+bx+c\,$ affects the parabola when the function is graphed.
+}
+
+\begin{example}
+%
+
+\lang{de}{
+Wir beobachten zunächst, wie sich die Parabel allein durch Variation des \notion{Streckfaktors} 
+$\,a\,$ verändert. Hierzu wählen wir eine Parabel der Form  $\textcolor{\#0066CC}{f(x)}= a \cdot x^2$,
+in der also die Koeffizienten $c$ und $b$ gleich Null sind, und vergleichen diese jeweils mit der 
+Normalparabel $\textcolor{\#CC6600}{f_0 (x)}=x^2$.
+}
+\lang{en}{
+We firstly observe how changing the \notion{stretch factor} $\,a\,$ modifies the parabola. To 
+demonstrate this, we consider a parabola of the form $\textcolor{\#0066CC}{f(x)}= a \cdot x^2$, 
+which has the coefficients $c$ and $b$ both equal to zero, and compare it to the parabola given 
+by the monic quadratic function $\textcolor{\#CC6600}{f_0 (x)}=x^2$.
+}
+%
+\lang{de}{
+ \begin{genericGWTVisualization}[480][600]{mathlet1}
+  \begin{variables}
+      % editierbare Variablen (Koeffizienten für die Parabelfunktion)
+      \number[editable]{a}{real}{-1}
+      %\number[editable]{b}{real}{0}
+      %\number[editable]{c}{real}{0}
+      % Definition der Parabelfunktionen
+      \function{P}{rational}{var(a)*x^2}  % Parabel zu obigen Koeffizienten
+      \function{NP}{rational}{x^2}        % Normalparabel
+  \end{variables}
+    \label{P}{$f$}
+    \label{NP}{$f_0$}   
+	% COLOR:
+	\color{P}{#0066CC}
+	\color{NP}{#CC6600}
+	\text{Variieren Sie den Leitkoeffizienten der Parabel 
+    $\textcolor{#0066CC}{f(x)}=\var{a} \cdot x^2$ mit beliebigen reellen Werten 
+    und beobachten Sie dabei die Veränderung der Parabel.}
+	\begin{canvas}
+		\plotSize{400}
+		\plotLeft{-6}
+		\plotRight{6}
+		\plot[coordinateSystem]{NP,P}
+%        \slider{sla}
+	\end{canvas}
+ \end{genericGWTVisualization}
+}
+\lang{en}{
+ \begin{genericGWTVisualization}[480][600]{mathlet1}
+  \begin{variables}
+      % editierbare Variablen (Koeffizienten für die Parabelfunktion)
+      \number[editable]{a}{real}{-1}
+      %\number[editable]{b}{real}{0}
+      %\number[editable]{c}{real}{0}
+      % Definition der Parabelfunktionen
+      \function{P}{rational}{var(a)*x^2}  % Parabel zu obigen Koeffizienten
+      \function{NP}{rational}{x^2}        % Normalparabel
+  \end{variables}
+    \label{P}{$f$}
+    \label{NP}{$f_0$}
+	% COLOR:
+	\color{P}{#0066CC}
+	\color{NP}{#CC6600}
+	\text{Vary the coefficients of the parabola 
+    $\textcolor{#0066CC}{f(x)}=\var{a} \cdot x^2$ in the real numbers and observe the changes in 
+    the graph.}
+	\begin{canvas}
+		\plotSize{400}
+		\plotLeft{-6}
+		\plotRight{6}
+		\plot[coordinateSystem]{NP,P}
+%        \slider{sla}
+	\end{canvas}
+ \end{genericGWTVisualization}
+}
+\end{example}
+
+\begin{example}
+%
+\lang{de}{
+Wir betrachten nun eine Parabel in der allgemeinen Form $\textcolor{#0066CC}{f(x)}= a x^2 + b x + c\,$ 
+und betrachten die Veränderungen, die durch Variation der Koeffizienten $a, b\,$ und $\,c\,$ entstehen.
+}
+\lang{en}{
+We consider a general parabola of the form $\textcolor{#0066CC}{f(x)}= a x^2 + b x + c\,$ 
+and observe the changes in the parabola caused by variation of the coefficients $a, b\,$ and $\,c\,$.
+}
+%
+\lang{de}{
+ \begin{genericGWTVisualization}[480][600]{mathlet1}
+  \begin{variables}
+      % editierbare Variablen (Koeffizienten für die Parabelfunktion)
+      \number[editable]{a}{real}{0.5}
+      \number[editable]{b}{real}{-2}
+      \number[editable]{c}{real}{2}
+      % Definition der Parabelfunktionen
+      \function{P}{rational}{var(a)*x^2+var(b)*x+var(c)}  % Parabel zu obigen Koeffizienten
+  \end{variables}
+    \label{P}{$f$}
+	% COLOR:
+	\color{P}{#0066CC}
+	\text{Variieren Sie nun alle drei Koeffizienten der Parabel 
+    $\textcolor{#0066CC}{f(x)}=\var{a} \cdot x^2 + \var{b} \cdot x + \var{c}$ mit beliebigen reellen Werten 
+    und beobachten Sie erneut die Veränderung der Parabel. Beachten Sie insbesondere, dass der dritte 
+    Koeffizient, also der Koeffizient ohne $\,x\,$, stets den Schnittpunkt mit der $y-$Achse kennzeichnet.}
+	\begin{canvas}
+		\plotSize{400}
+		\plotLeft{-6}
+		\plotRight{6}
+		\plot[coordinateSystem]{NP,P}
+%        \slider{sla}
+	\end{canvas}
+ \end{genericGWTVisualization}
+}
+\lang{en}{
+ \begin{genericGWTVisualization}[480][600]{mathlet1}
+  \begin{variables}
+      % editierbare Variablen (Koeffizienten für die Parabelfunktion)
+      \number[editable]{a}{real}{0.5}
+      \number[editable]{b}{real}{-2}
+      \number[editable]{c}{real}{2}
+      % Definition der Parabelfunktionen
+      \function{P}{rational}{var(a)*x^2+var(b)*x+var(c)}  % Parabel zu obigen Koeffizienten
+  \end{variables}
+    \label{P}{$f$}
+	% COLOR:
+	\color{P}{#0066CC}
+	\text{Vary the coefficients of the parabola 
+    $\textcolor{#0066CC}{f(x)}=\var{a} \cdot x^2 + \var{b} \cdot x + \var{c}$ in the real numbers 
+    and observe the changes in the graph. Pay particular attention to the third coefficient, the 
+    constant without $\,x\,$, and the intersection of the parabola with the $y$-axis.}
+	\begin{canvas}
+		\plotSize{400}
+		\plotLeft{-6}
+		\plotRight{6}
+		\plot[coordinateSystem]{NP,P}
+%        \slider{sla}
+	\end{canvas}
+ \end{genericGWTVisualization}
+}
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{\lang{de}{Nullstellenbestimmung}\lang{en}{Finding roots}} \label{sec:nullstellen}
+
+\lang{de}{
+Um die Nullstellen einer quadratischen Funktion $\,f(x)=ax^2+bx+c\;$ (mit $a\ne 0$) zu bestimmen,
+ist die \emph{quadratische Gleichung} $\, ax^2+bx+c=0 \,$ zu lösen. Hierzu liefert uns 
+zum Beispiel die \ref[link-04-lin-funk][Mitternachtsformel]{rem:mitternachtsformel} direkt
+die Lösungen.
+}
+\lang{en}{
+To find the roots of a quadratic function $\,f(x)=ax^2+bx+c\;$ (with $a\ne 0$), we solve the 
+\emph{quadratic equation} $\, ax^2+bx+c=0 \,$. Using a technique such as the 
+\ref[link-04-lin-funk][quadratic formula]{rem:mitternachtsformel} immediately gives us the 
+solutions.
+}
+
+\begin{rule}[\lang{de}{Nullstellen quadratischer Funktionen}
+             \lang{en}{Roots of a quadratic function}]  \label{rule:quadratic_nst}
+
+ \lang{de}{
+ Eine quadratischen Funktion $f:\R\to \R$, definiert in allgemeiner Form durch 
+ }
+ \lang{en}{
+ A quadratic function $f:\R\to \R$, defined in general in the form 
+ }
+ \[f(x)= a x^2 + b \, x + c, \quad \text{\lang{de}{mit}\lang{en}{ with }} 
+ \,a, b,c \in \mathbb{R}\, \text{\lang{de}{und}\lang{en}{ and }} \,a \neq 0,\]
+ \lang{de}{besitzt}
+ \lang{en}{has}
+ 
+ \begin{enumerate}
+    \item \lang{de}{\emph{keine} reelle Nullstelle, falls $\,b^2-4ac<0,$}
+          \lang{en}{\emph{no} real roots if $\,b^2-4ac<0,$}
+    
+    \item \lang{de}{
+          \emph{eine} reelle Nullstelle, falls $\,b^2-4ac=0$, nämlich an $\, x = -\frac{b}{2a},$
+          }
+          \lang{en}{
+          \emph{one} real root if $\,b^2-4ac=0$, namely $\, x = -\frac{b}{2a},$
+          }
+    \item \lang{de}{
+          \emph{zwei} reelle Nullstellen,  falls $\,b^2-4ac>0.\;$  Diese liegen an \\
+          $\,x_1=\frac{-b - \sqrt{b^2-4ac}}{2a}\,$ und $\, x_2=\frac{-b + \sqrt{b^2-4ac}}{2a}$.
+          }
+          \lang{en}{
+          \emph{two} real roots if $\,b^2-4ac>0.\;$ These lie at \\
+          $\,x_1=\frac{-b - \sqrt{b^2-4ac}}{2a}\,$ and $\, x_2=\frac{-b + \sqrt{b^2-4ac}}{2a}$.
+          }
+ \end{enumerate}
+\end{rule}
+
+\begin{remark} \label{rem:quadratic_nst}
+\lang{de}{
+Handelt es sich bei der quadratischen Funktion speziell um eine \emph{Normalparabel}, d.h. 
+ihr Leitkoeffizient ist $1$, dann ist zur Bestimmung der Nullstellen eine
+\emph{quadratische Gleichung in Normalform} zu lösen, also 
+}
+\lang{en}{
+If we are dealing with a monic quadratic function, whose leading coefficient is $1$, then to find 
+its roots we solve a monic quadratic equation 
+}
+\[f(x)= x^2 + p \, x + q=0, \quad \text{mit} \,p, q \in \mathbb{R}.\]
+\lang{de}{
+Hierzu verwendet man die \ref[link-04-lin-funk][p-q-Formel]{rule:pqFormel} 
+und erhält als Ergebnis, dass die Parabel
+}
+\lang{en}{
+This is suited to the \ref[link-04-lin-funk][p-q-formula]{rule:pqFormel} which shows that the 
+parabola has
+}
+ \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \item \lang{de}{entweder \emph{keine} reelle Nullstelle besitzt, falls $\,\Big{(}\frac{p}{2}\Big{)}^2-q<0,$}
+          \lang{en}{either \emph{no} real roots, if $\,\Big{(}\frac{p}{2}\Big{)}^2-q<0,$}
+    \item \lang{de}{
+          oder \emph{eine} reelle Nullstelle besitzt, falls $\,\Big{(}\frac{p}{2}\Big{)}^2-q=0$, 
+          nämlich $\, x = -\frac{p}{2},$
+          }
+          \lang{en}{\emph{one} real root, if $\,\Big{(}\frac{p}{2}\Big{)}^2-q=0$, namely
+          $\, x = -\frac{p}{2},$
+          }
+    \item \lang{de}{
+          oder \emph{zwei} reelle Nullstellen besitzt, falls $\,\Big{(}\frac{p}{2}\Big{)}^2-q>0.\;$
+          Diese liegen in
+          }
+          \lang{en}{
+          or \emph{two} real roots, if $\,\Big{(}\frac{p}{2}\Big{)}^2-q>0.\;$ These lie at 
+          }
+   \[ x_1=-\frac{p}{2}-\sqrt{\Big{(}\frac{p}{2}\Big{)}^2-q}\quad 
+      \text{\lang{de}{ und }\lang{en}{ and }} \quad
+      x_2=-\frac{p}{2}+\sqrt{\Big{(}\frac{p}{2}\Big{)}^2-q}.\]
+ \end{description}
+
+\end{remark}
+
+\begin{example}\label{quadratic.example.1}
+\lang{de}{
+Wir untersuchen die folgenden quadratischen Funktionen auf ihre Nullstellen.
+}
+\lang{en}{
+We find the roots of the following quadratic functions.
+}
+
+\begin{tabs*}[\initialtab{1}\class{example}]
+
+% f_1 hat keine Nst  
+  \tab{\small $\displaystyle{\textcolor{\#0066CC}{f_1(x)}= \frac{1}{2}\, x^2 - 6\,x +19}$}
+    \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+      \item \lang{de}{
+            Der \emph{Leitkoeffizient} $\,$ von $\, f_1\,$ ist % $\,\frac{1}{2} \; (\neq 1)$, 
+            $\, \neq 1$, also verwenden wir die \emph{Mitternachtsformel} und
+            betrachten zunächst die Diskriminante $(b^2-4ac)$. Mit den 
+            Koeffizienten von $\, f_1\,$ gilt   
+            $\quad 6^2 - 4\cdot 0,5 \cdot 19=-2\,<0.$
+            }
+            \lang{en}{
+            The \emph{leading coefficient} $\,$ of $\, f_1\,$ is $\, \neq 1$, so we use the 
+            \emph{quadratic formula} and consider the discriminant $(b^2-4ac)$. With the coefficients 
+            of $\, f_1\,$ this is $\quad 6^2 - 4\cdot 0,5 \cdot 19=-2\,<0.$
+            }
+      \item \lang{de}{
+            Nach Regel \ref{rule:quadratic_nst} folgt hieraus, 
+            dass $f_1$ \emph{keine} Nullstelle hat. 
+            }
+            \lang{en}{
+            By rule \ref{rule:quadratic_nst}, $f_1$ has \emph{no} roots.
+            }
+    \end{description}
+% f_2 hat 1 Nst    
+  \tab{\small $\displaystyle{\textcolor{\#CC6600}{f_2(x)}= -x^2 - 4x - 4}$}     
+    \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+      \item \lang{de}{
+            Der \emph{Leitkoeffizient} $\,$ von $\, f_2\,$ ist % $\,\frac{1}{2} \; (\neq 1)$, 
+            $\, \neq 1$, also verwenden wir die \emph{Mitternachtsformel} und
+            betrachten zunächst die Diskriminante $(b^2-4ac)$. Mit den 
+            Koeffizienten von $\, f_2\,$ gilt 
+            $\quad (-4)^2 - 4\cdot (-1) \cdot (-4)\,=0$
+            }
+            \lang{en}{
+            The \emph{leading coefficient} $\,$ of $\, f_2\,$ is $\, \neq 1$, so we use the 
+            \emph{quadratic formula} and consider the discriminant $(b^2-4ac)$. With the coefficients 
+            of $\, f_2\,$ this is $\quad (-4)^2 - 4\cdot (-1) \cdot (-4)\,=0$.
+            }
+      \item \lang{de}{
+            Nach Regel \ref{rule:quadratic_nst} folgt hieraus, dass $f_2$ 
+            \emph{genau eine} Nullstelle hat und zwar in $\;x=-\frac{(-4)}{2 \cdot(-1)}=-2.$
+            }
+            \lang{en}{
+            By rule \ref{rule:quadratic_nst}, $f_2$ has \emph{exactly one} root, namely 
+            $\;x=-\frac{(-4)}{2 \cdot(-1)}=-2$.
+            }
+     \end{description}
+
+%% f_3 hat 2 Nst
+  \tab{\small $\displaystyle{\textcolor{\#00CC00}{f_3(x)}=x^2 - x - 6}$}
+    \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+      \item \lang{de}{
+            Der \emph{Leitkoeffizient} $\,$ von $\, f_3$ ist $\,1$, wir
+            können hier also die \emph{p-q-Formel} gemäß Bemerkung \ref{rem:quadratic_nst}
+            anwenden und erhalten
+            $\quad \big( \frac{(-1)}{2} \big)^2 - (-6)= \frac{25}{4}\,>0$
+            }
+            \lang{en}{
+            The \emph{leading coefficient} $\,$ of $\, f_3$ is $\,1$, so we can use the 
+            \emph{p-q-formula} and remark \ref{rem:quadratic_nst} as 
+            $\quad \big( \frac{(-1)}{2} \big)^2 - (-6)= \frac{25}{4}\,>0$.
+            }
+      \item \lang{de}{
+            Nach Regel \ref{rem:quadratic_nst} folgt hieraus, dass $f_3$ 
+            \emph{zwei} Nullstellen hat und zwar in 
+            $\;x_1=-\frac{(-1)}{2}-\sqrt{\frac{25}{4}}=-2 \;$ und in
+            $\;x_2=-\frac{(-1)}{2}+\sqrt{\frac{25}{4}}=3.$
+            }
+            \lang{en}{
+            By remark \ref{rem:quadratic_nst}, $f_3$ has \emph{two} roots, namely 
+            $\;x_1=-\frac{(-1)}{2}-\sqrt{\frac{25}{4}}=-2 \;$ and 
+            $\;x_2=-\frac{(-1)}{2}+\sqrt{\frac{25}{4}}=3$.
+            }
+    \end{description}
+% \tab{\small \textbf{Videos zur Nullstellenbestimmung}}
+%    \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+%      \item Nullstellenbestimmung mittels \emph{p-q-Formel}:\\\href{https://www.hm-kompakt.de/video?watch=109}{\image[75]{00_Videobutton_schwarz}}
+%      \item Nullstellenbestimmung mittels \emph{Mitternachtsformel}:\\\href{https://www.hm-kompakt.de/video?watch=110}{\image[75]{00_Videobutton_schwarz}}   
+%    \end{description}
+\end{tabs*}
+  
+  
+    \begin{center}
+        \image{T102_Parabolas}
+    \end{center}
+
+\end{example}
+
+%
+%%% Video K.M. *** NEU: 11274 ((Un-)Gleichungen_3_b) ***
+%
+\lang{de}{
+Durch die Bestimmung der Nullstellen einer Parabel erhalten wir eine grobe Vorstellung über ihre Lage im Koordinatensystem. 
+\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11274&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}\\\\
+}
+\lang{en}{
+\\
+}
+\\
+% Weitere Hinweise zur Lage einer Parabel liefern uns gemäß Bemerkung \ref{rem:parabel_parameter} die Parameter der Parabel 
+% in der Darstellung $\,f(x)=ax^2+bx+c\,$, insbesondere ihr Leitkoeffizient $a$. 
+%
+\begin{remark}\label{rem:factorised_form}
+\lang{de}{
+Die quadratische Funktion $\,f(x)=ax^2+bx+c\,$ lässt sich zudem mithilfe ihrer Nullstellen $x_1$ und $x_2$ in
+einer sogenannten \notion{\emph{faktorisierten Form}} $\,f(x)=a(x-x_1)(x-x_2)\,$ darstellen.
+}
+\lang{en}{
+If we know the roots $x_1$ and $x_2$ of the quadratic function $\,f(x)=ax^2+bx+c\,$, it can be 
+written in a \notion{\emph{factorised form}} $\,f(x)=a(x-x_1)(x-x_2)\,$.
+}
+\end{remark}
+
+\section{\lang{de}{Scheitelpunktform}\lang{en}{Turning point form}} \label{sec:scheitel}
+
+\lang{de}{
+Eine weitere Darstellungsform für quadratische Funktionen ist, wie im Video bereits erwähnt, die sogenannte 
+\emph{Scheitelpunktform}. Sie gibt ebenfalls Auskunft über die Lage der Parabel im zweidimensionalen Koordinatenraum.
+}
+\lang{en}{
+A further way of writing quadratic functions is the so-called \emph{turning point} or 
+\emph{completed square} form, which gives some information about the position of the parabola in 
+two-dimensional coordinates.
+}
+
+\begin{definition}
+\lang{de}{
+Der \emph{\notion{Scheitelpunkt}} einer Parabel ist der Punkt mit der kleinsten 
+$\,y-$Koordinate, falls die Parabel nach oben geöffnet ist, und der Punkt mit der 
+größten $\,y-$Koordinate, falls die Parabel nach unten geöffnet ist.
+}
+\lang{en}{
+The \emph{\notion{turning point}} of a parabola is the point with the smallest $y$-coordinate if the 
+parabola is open upwards, or the point with the largest $y$-coordinate if the parabola opens 
+downwards.
+}
+\end{definition}
+
+\begin{remark}  %%% oder doch Definition ?????
+\lang{de}{
+Zu jeder quadratischen Funktion $\,f(x)= ax^2+bx+c\;$ (mit $a\ne 0$) gibt es eine
+alternative Darstellungsform, die wie folgt durch die Koordinaten ihres Scheitelpunkts
+und den Streckfaktor $\,a\,$ bestimmt ist
+}
+\lang{en}{
+Every quadratic function $\,f(x)= ax^2+bx+c\;$ (with $a\ne 0$) can be written in a form using the 
+coordinates of the turning point and the leading coefficient $\,a\,$
+}
+\[ f(x)=a(x-s_{x})^2+s_{y}.\]
+\lang{de}{
+Man bezeichnet sie deshalb auch als die \emph{\notion{Scheitelpunktform}} der Parabel.
+Der Streckfaktor $\,a\,$ ist in beiden Darstellungsformen identsich.
+}
+\lang{en}{
+This is called the \emph{\notion{turning point form}} or \emph{\notion{completed square form}} of the 
+quadratic. The stretch factor $\,a\,$ is the same in both forms.
+}
+\end{remark}
+
+\begin{example}
+\lang{de}{
+Die quadratische Funktion $\,f(x)= x^2-4x+5\,$ hat ihren Scheitelpunkt in 
+$\; \textcolor{\#CC6600}{S=(2;1)}\,$ und ihre Scheitelpunktform lautet 
+$\, \textcolor{\#0066CC}{f(x)= (x-2)^2+1}.$
+}
+\lang{en}{
+The quadratic function $\,f(x)= x^2-4x+5\,$ has a turning point at 
+$\; \textcolor{\#CC6600}{S=(2;1)}\,$ and can be written in turning point form as 
+$\, \textcolor{\#0066CC}{f(x)= (x-2)^2+1}$.
+}
+
+    \begin{center}
+        \image{T102_ParabolaVertex}
+    \end{center}
+
+\end{example}
+
+\begin{rule}[\lang{de}{Umrechnung Scheitelpunktform}
+             \lang{en}{Finding the turning point form}] \label{rule:umrechnung_scheitelpkt}
+\lang{de}{
+Die allgemeine Standardform einer quadratischen Funktion $\,f(x)=ax^2+bx+c\,$ 
+(mit $a\ne 0$) und ihre Scheitelpunktform $\,f(x)=a(x-s_{x})^2+s_{y}\,$ sind durch folgende
+Umrechnungsformeln ineinender überführbar:
+}
+\lang{en}{
+The general standard form of a quadratic function $\,f(x)=ax^2+bx+c\,$ (with $a\ne 0$) and the 
+turning point form $\,f(x)=a(x-s_{x})^2+s_{y}\,$ are related as follows:
+}
+  
+ \begin{enumerate}[alph] 
+  \item \lang{de}{\notion{Umrechnung von der Scheitelpunktform in die Standardform }}
+        \lang{en}{\notion{Manipulating the turning point form into the standard form}}
+  \[b=-2as_{x} \qquad \text{\lang{de}{und}\lang{en}{and}} \qquad c=as_{x}^2+s_{y}.\]
+  \item \lang{de}{\notion{Umrechnung von der Standardform in die Scheitelpunktform }}
+        \lang{en}{\notion{Manipulating the standard form into the turning point form}}
+    \[s_{x}=-\frac{b}{2a} \qquad \text{\lang{de}{und}\lang{en}{and}} \qquad s_{y}=c- \frac{b^2}{4a}.\]
+  \end{enumerate}
+\end{rule}
+
+
+\begin{proof}[\lang{de}{Herleitung}\lang{en}{Derivation}]
+\begin{showhide}
+ 
+ \begin{enumerate}[alph] 
+%
+  \item \lang{de}{
+    Die \notion{Umrechnung von der Scheitelpunktform in die Standardform }
+    erfolgt durch Anwendung der 
+    \ref[content_02_rechengrundlagen_terme][2. binomischen Formel]{rule:binomische_formeln}
+    und Sortieren der Terme nach Exponenten:
+    }
+    \lang{en}{
+    \notion{Manipulating the turning point form into the standard form} is achieved by expanding the 
+    \ref[content_02_rechengrundlagen_terme][square of the binomial]{rule:binomische_formeln} 
+    and sorting the terms by exponents:
+    }
+    \[ a(x-s_{x})^2+s_{y}=a(x^2-2s_{x}x+s_{x}^2)+s_{y}=ax^2-2as_{x}x+(as_{x}^2+s_{y}). \]
+    \lang{de}{
+    Der \emph{Leitkoeffizient} $a$ ist als \emph{Streckfaktor} in beiden Darstellungen 
+    gleich.\\Für die Koeffizienten $b$ und $c$ ergeben sich durch einen Koeffizientenvergleich
+    folgende Umrechnungsfomeln:
+    }
+    \lang{en}{
+    The \emph{leading coefficient} $a$ is the same \emph{stretch factor} in both forms.
+    \\
+    The coefficients $b$ and $c$ are found by comparing coefficients:
+    }
+    \[b=-2as_{x} \quad \text{\lang{de}{und}\lang{en}{and}} \quad c=as_{x}^2+s_{y}.\]
+%
+  \item \lang{de}{
+    Zur \notion{Umrechnung von der Standardform in die Scheitelpunktform }
+    wird zunächst der \emph{Leitkoeffizient} $\,a\,$ ausgeklammert 
+    }
+    \lang{en}{
+    \notion{Manipulating the standard form into the turning point form} is achieved by factoring 
+    out the leading coefficient $\,a\,$:
+    }
+    \[
+        ax^2+bx+c=a(x^2+\frac{b}{a}x+\frac{c}{a}),
+    \]
+    \lang{de}{
+    und anschließend innerhalb der Klammer der quadratische Term in Normalform
+    \ref[link-04-lin-funk][quadratisch ergänzt,]{alg:quadr_erg} um über die
+    binomische Formel einen Term der Form $(x-s_{x})^2$ zu erhalten:
+    }
+    \lang{en}{
+    and we \ref[link-04-lin-funk][complete the square]{alg:quadr_erg} to obtain a term of the form 
+    $(x-s_{x})^2$ using the formula for the square of a binomial:
+    }
+    \begin{align*} a\bigg(x^2+\frac{b}{a}x+\frac{c}{a}\bigg)
+        & =a\bigg(x^2+\frac{b}{a}x+\big(\frac{b}{2a}\big)^2-\big(\frac{b}{2a}\big)^2+\frac{c}{a}\bigg)\\
+        & =a\bigg( \big( x+\frac{b}{2a} \big)^2 -\big(\frac{b}{2a}\big)^2+\frac{c}{a}\bigg)\\
+        & =a\big( x+\frac{b}{2a} \big)^2 - a\big(\frac{b}{2a}\big)^2+a\frac{c}{a} \\
+        & = a\big( x-\underbrace{(-\frac{b}{2a})}_{=s_{x}} \big)^2 +\underbrace{c- \frac{b^2}{4a}}_{=s_{y}}
+    \end{align*}
+    \lang{de}{
+    Der letzte Term hat die gewünschte Form der Scheitelpunktform und liefert somit die 
+    folgende Umrechnungsformel:
+    }
+    \lang{en}{
+    The final expression is in turning point form and hence we obtain the following 
+    identities:
+    }
+    \[s_{x}=-\frac{b}{2a} \quad \text{\lang{de}{und}\lang{en}{and}} \quad s_{y}=c- \frac{b^2}{4a}.\]
+
+  \end{enumerate}
+\end{showhide}  
+\end{proof}
+
+\begin{example}
+\lang{de}{
+\begin{itemize}
+%
+%%% Video Hoever
+%
+  \item 
+      Überführung quadratischer Funktionen mit Leitkoeffizient $a=1$ in ihre Scheitelpunktform 
+        \floatright{\href{https://www.hm-kompakt.de/video?watch=107lsg}{\image[75]{00_Videobutton_schwarz}}}
+        \floatright{\href{https://www.hm-kompakt.de/video?watch=107}{\image[75]{00_Videobutton_schwarz}}}\\\\ 
+  \item 
+      Überführung quadratischer Funktionen mit Leitkoeffizient $a \neq 1$ in ihre Scheitelpunktform 
+        \floatright{\href{https://www.hm-kompakt.de/video?watch=108lsg}{\image[75]{00_Videobutton_schwarz}}}
+        \floatright{\href{https://www.hm-kompakt.de/video?watch=108}{\image[75]{00_Videobutton_schwarz}}}\\
+%
+  \item 
+      Gesucht ist die Scheitelpunktform der quadratischen Funktion \[f(x)=2x^2+6x-5.\]
+      Dazu gehen wir die einzelnen, in der Herleitung beschriebenen Schritte durch:
+      Wir klammern zunächst den Leitkoeffizienten, hier die $\,2\,$, aus und bestimmen
+      anschließend den quadratischen Term der Scheitelpunktform durch quadratische Ergänzung, 
+      hier $\,\Big( +  (\frac{3}{2})^2 -(\frac{3}{2})^2\Big), \,$ innerhalb der Klammer:
+      \begin{align*}
+      f(x) & =2x^2+6x-5 = 2(x^2+3x-\frac{5}{2}) \\
+      &= 2\big( x^2+2\cdot \frac{3}{2}x +  (\frac{3}{2})^2 -(\frac{3}{2})^2 -\frac{5}{2}\big) \\
+      &=  2\big( (x+\frac{3}{2})^2 -\frac{9}{4}-\frac{5}{2}\big) \\
+      &= 2(x+\frac{3}{2})^2 - \frac{9}{2}-5 \\
+      &= 2\Big(x- (-\frac{3}{2})\Big)^2 - \frac{19}{2}
+      \end{align*}
+      Aus dem letzten Term können wir auch den Scheitelpunkt ablesen, n"amlich $(-\frac{3}{2}; - \frac{19}{2})$.
+      Beachte, dass in der Scheitelpunktform $x-d$ quadriert wird, sodass in diesem Beispiel $d=-\frac{3}{2}$ ist und
+      \textbf{nicht} $\frac{3}{2}$.
+\end{itemize}
+}
+\lang{en}{
+      Suppose we want to write the quadratic function \[f(x)=2x^2+6x-5.\] in turning point form, 
+      by repeating the derivation rather than by using the identities. Firstly we factor out the 
+      leading coefficient $\,2\,$, and by completing the square we find the square term of the 
+      turning point form, which here is $\,\Big( +  (\frac{3}{2})^2 -(\frac{3}{2})^2\Big)\,$.
+      \begin{align*}
+      f(x) & =2x^2+6x-5 = 2(x^2+3x-\frac{5}{2}) \\
+      &= 2\big( x^2+2\cdot \frac{3}{2}x +  (\frac{3}{2})^2 -(\frac{3}{2})^2 -\frac{5}{2}\big) \\
+      &=  2\big( (x+\frac{3}{2})^2 -\frac{9}{4}-\frac{5}{2}\big) \\
+      &= 2(x+\frac{3}{2})^2 - \frac{9}{2}-5 \\
+      &= 2\Big(x- (-\frac{3}{2})\Big)^2 - \frac{19}{2}
+      \end{align*}
+      We can immediately read the turning point coordinates from the last expression, 
+      $(-\frac{3}{2}; - \frac{19}{2})$. Note that $x-d$ is squared in the turning point form, so in 
+      this example $d=-\frac{3}{2}$ and \textbf{not} $\frac{3}{2}$.
+}
+
+\end{example}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{2}
+\begin{quickcheck}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{a}{-5}{5}			
+			\randint{b}{-4}{4}
+			\randint{c}{-4}{4}
+		    \function[normalize]{f}{a*x^2+b*x+c}
+			\function[calculate]{d}{-b/(2*a)}
+			\function[calculate]{e}{c-b^2/(4*a)}
+% Änderung, da es Probleme mit dem Variablen-Namen "e" gibt:
+			\function[calculate]{xs}{-b/(2*a)}
+			\function[calculate]{ys}{c-b^2/(4*a)}            
+		\end{variables}
+		
+			\text{\lang{de}{
+       Bestimmen Sie die Scheitelpunktform der quadratischen Funktion $f(x)=\var{f}$,
+			 und geben Sie den Scheitelpunkt an.}
+            \lang{en}{
+       Determine the turning point form of the quadratic function $f(x)=\var{f}$, and give the 
+       coordinates of the turning point.
+            }}
+			\text{$f(x)=$\ansref$(x-$\ansref$)^2+$\ansref.\\ 
+      \lang{de}{Der Scheitelpunkt ist}\lang{en}{The turning point is} $S=$(\ansref;\ansref)}
+		
+		\begin{answer}
+			\solution{a}
+		\end{answer}
+%		\begin{answer}
+%			\solution{d}
+%		\end{answer}
+%		\begin{answer}
+%			\solution{e}
+%		\end{answer}
+%		\begin{answer}
+%			\solution{d}
+%		\end{answer}
+%		\begin{answer}
+%			\solution{e}
+%		\end{answer}
+% Änderung, da es Probleme mit dem Variablen-Namen "e" gibt:
+		\begin{answer}
+			\solution{xs}
+		\end{answer}
+		\begin{answer}
+			\solution{ys}
+		\end{answer}
+		\begin{answer}
+			\solution{xs}
+		\end{answer}
+		\begin{answer}
+			\solution{ys}
+		\end{answer}        
+	\end{quickcheck}
+	
+\begin{quickcheck}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{a}{-3}{3}			
+%			\randint{d}{-3}{3}
+%			\randint{e}{-4}{4}
+%		    \function[normalize]{f}{a*(x-d)^2+e}
+%			\function[calculate]{b}{-2*a*d}
+%			\function[calculate]{c}{a*d^2+e}
+            % Änderung, da es Probleme mit dem Variablen-Namen "e" gibt:
+			\randint{xs}{-3}{3}
+			\randint{ys}{-4}{4}
+		    \function[normalize]{f}{a*(x-xs)^2+ys}
+			\function[calculate]{b}{-2*a*xs}
+			\function[calculate]{c}{a*xs^2+ys}
+		\end{variables}
+		
+			\text{\lang{de}{Bestimmen Sie die Normalform der quadratischen Funktion $f(x)=\var{f}$.}
+            \lang{en}{Determine the standard form of the quadratic function $f(x)=\var{f}$.}}
+			\text{$f(x)=$\ansref$ x^2+$\ansref$x+$\ansref.}
+		
+		\begin{answer}
+			\solution{a}
+		\end{answer}
+		\begin{answer}
+			\solution{b}
+		\end{answer}
+		\begin{answer}
+			\solution{c}
+		\end{answer}
+	\end{quickcheck}
+        
+\end{quickcheckcontainer}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\lang{de}{
+In den letzten beiden Abschnitten \ref{sec:nullstellen} und \ref{sec:scheitel} haben wir gesehen, 
+wie sich die Lage einer Parabel aus ihren Nullstellen und ihrem Scheitelpunkt ableiten lässt. 
+Im folgenden Abschnitt werden wir untersuchen, wie man zu vorgegebenen Punkten im zweidimensionalen
+Koordinatenraum eine Parabel bestimmen kann, die diese Punkte durchläuft.
+}
+\lang{en}{
+In the previous two sections \ref{sec:nullstellen} and \ref{sec:scheitel}, we have seen how the 
+shape and position of a parabola can be determined by its roots and turning point. In the next 
+section we will examine how to find a parabola that contains given points in the two-dimensional 
+plane.
+}
+
+\section{\lang{de}{Festlegung einer Parabel}
+         \lang{en}{Finding a parabola containing given points}}\label{sec:3_P_Parabel}
+
+\lang{de}{
+Zur Bestimmung einer Geraden werden, wie im Kapitel 
+\ref[content_07_geradenformen]["`Darstellungsformen von Geraden"']{sec:zweipunktform}
+beschrieben, zwei Punkte mit unterschiedlichen $x$-Werten benötigt. 
+Eine Parabel ist erst durch \textbf{drei} Punkte, die in $x$ verschiedenen sind und zudem
+nicht auf einer Geraden liegen dürfen, eindeutig festgelegt.
+Setzt man die Koordinaten dieser drei Punkte in die Parabelgleichung $\,f(x)=ax^2+bx+c\,$
+ein, so erhält man ein \emph{lineares Gleichungssystem} mit drei Gleichungen, in dem die 
+drei Koeffizienten $\,a, b\,$ und $\, c\,$ die Unbekannten sind. Durch die eindeutige 
+\ref[link-04-lin-funk][Lösung dieses LGS]{sec:lgs} ist dann auch die Parabel eindeutig bestimmen.
+}
+\lang{en}{
+To find the equation of a line, like in chapter 
+\ref[content_07_geradenformen]['The equation of a line']{sec:zweipunktform}, two points with 
+different $x$-coordinates are required. A parabola is only uniquely determined by \textbf{three} 
+points, all with different $x$-coordinates and not all on a common straight line. 
+Substituting the coordinates of such three points into the quadratic $\,f(x)=ax^2+bx+c\,$ gives a 
+\emph{linear system} of three equations, in which the three coefficients $\,a, b\,$ and $\, c\,$ 
+are the variables. As there is a 
+\ref[link-04-lin-funk][unique solution of this linear system]{sec:lgs}, we can uniquely determine 
+the parabola.
+}
+
+\begin{example}\label{geraden.example.2}
+%
+%
+% \begin{block}[important]
+%    Die generische Version ist noch fehlerhaft und wird noch bearbeitet ...
+% \end{block}
+%
+% \begin{genericGWTVisualization}[450][800]{mathlet1}
+%	\begin{variables}
+%        % Die editierbaren Variablen ...%
+%		\number{p1x}{rational}{0}
+%		\number[editable]{p1y}{rational}{1}
+%		\number[editable]{p2x}{rational}{1}
+%		\number[editable]{p2y}{rational}{2}
+%		\number[editable]{p3x}{rational}{2}
+%		\number[editable]{p3y}{rational}{0}
+ %       % ... für die folgenden drei Punkte P_1, P_2 und P_3		
+%		\point{p1}{rational}{var(p1x),var(p1y)}
+%		\point{p2}{rational}{var(p2x),var(p2y)}
+%		\point{p3}{rational}{var(p3x),var(p3y)}
+%
+%		% für Rechnung:
+%		% nicht-editierbare Kopien der obigen Variablen für das Lösen des LGS:
+%		\number{q1x}{rational}{var(p1x)}
+%		\number{q1y}{rational}{var(p1y)}
+%		\number{q2x}{rational}{var(p2x)}
+%		\number{q2y}{rational}{var(p2y)}
+%		\number{q3x}{rational}{var(p3x)}
+%		\number{q3y}{rational}{var(p3y)}
+%		% in Rechnung:
+%		\number{c}{rational}{var(p1y)}
+%		\number{f2a}{rational}{var(q2x)^2}
+%		\number{f3a}{rational}{var(q3x)^2}
+%		\number{l2}{rational}{var(q2y)-var(c)}
+%		\number{l3}{rational}{var(q3y)-var(c)}
+%		\number{nl2}{rational}{(var(q2y)-var(c))/var(q2x)}
+%		\number{nl3}{rational}{(var(q3y)-var(c))/var(q3x)}
+%		\number{vl}{rational}{var(nl3)-var(nl2)}
+%		\number{vr}{rational}{var(q3x)-var(q2x)}
+%		\number{a}{rational}{var(vl)/var(vr)}
+%		\number{b}{rational}{var(nl2)-var(q2x)*var(a)}
+%		\function{f}{rational}{var(a)*x^2+var(b)*x+var(c)}  %quadr. Funktion durch die drei Punkte p1,p2 und p3.
+%	\end{variables}
+%
+%	\color{p1}{BLUE}
+%	\color{p2}{RED}
+%	\color{p3}{DARK_ORANGE}
+%	\text{Gesucht ist die Funktionsgleichung $f(x)=ax^2+bx+c$ für die Parabel durch die drei Punkte $\textcolor{blue}{P_1}=(\var{p1x};\var{p1y})$,
+%	$\textcolor{red}{P_2}=(\var{p2x};\var{p2y})$ und $\textcolor{darkorange}{P_3}=(\var{p3x};\var{p3y})$.}
+%
+%	\begin{canvas}
+%		\plotSize{240}
+%		\plotLeft{-3}
+%		\plotRight{3}
+%		\plot[coordinateSystem]{f,p1,p2,p3}
+%	\end{canvas}
+%
+%	\text{ Einsetzen der Punkte in die Funktionsvorschrift liefert:}
+% \text[c]{\begin{align}
+% \text{(I)}&\quad \var{q1y} &= f(\var{q1x}) &= a\cdot (\var{q1x})^2+ b\cdot (\var{q1x})+c &=  &&\phantom{+}c \\
+% \text{(II)}&\quad \var{q2y} &= f(\var{q2x}) &= a\cdot (\var{q2x})^2+ b\cdot (\var{q2x})+c &=\var{f2a}\cdot a&+(\var{q2x})\cdot b&+c \\
+% \text{(III)}&\quad \var{q3y} &= f(\var{q3x}) &= a\cdot (\var{q3x})^2+ b\cdot (\var{q3x})+c &=\var{f3a}\cdot a&+(\var{q3x})\cdot b&+c \\
+% \end{align} }
+%\text{Dieses Gleichungssystem lässt sich nach dem \textbf{Einsetzungsverfahren} lösen.
+%Setzt man $c=\var{q1y}$ aus der ersten Gleichung \textbf{(I)} in die 
+%Gleichungen \textbf{(II)} und \textbf{(III)} ein, erhält man die Gleichungen }
+% \text[c]{\begin{align}
+%    \text{(II*)} &\quad \var{l2} &= \var{f2a}a+(\var{q2x})b \\
+%    \text{(III*)}&\quad \var{l3} &= \var{f3a}a+(\var{q3x})b.\\
+% \end{align} }
+%\text[c]{ 
+% \IF{var(q2x) != 1}{$(II*)\,$ ist äquivalent zu $\var{nl2}=\var{q2x}a+b$\quad (teilen durch $\var{q2x}$).\\ }
+% \IF{var(q3x) != 1}{$(III*)\;$ ist äquivalent zu $\var{nl3}=\var{q3x}a+b$\quad (teilen durch $\var{q3x}$).\\ }
+%}
+%\text{Zieht man die erste der beiden Gleichungen von der zweiten ab, erhält man}
+% \text[c]{ $\var{nl3}-\var{nl2} = (\var{q3x}a+b)-(\var{q2x}a+b)$
+%  \IFELSE{var(vr) = 1}{$\Leftrightarrow \var{a} = a.$}
+%  {$\Leftrightarrow  \var{vl}  = \var{vr}a \Leftrightarrow \var{a} = a.$ }
+% }
+%\text{Daraus berechnet man $b$ mittels: $\var{nl2}=\var{q2x}a+b$, d.h. $b=\var{b}$.}
+%\text{Insgesamt also: $f(x)=\var{f}$.}
+%
+%\end{genericGWTVisualization}
+%\end{example}
+
+
+%\begin{example}  %Gleiches Beispiel, aber nicht generisch.
+\lang{de}{
+Gesucht ist die Funktionsgleichung $\, f(x)=ax^2+bx+c\,$ f"ur die Parabel, die durch 
+die drei Punkte $P_1=(0;1)$, $P_2=(1;2)$ 
+und $P_3=(2;7)$ verläuft.
+}
+\lang{en}{
+Suppose we want to find the quadratic function $\, f(x)=ax^2+bx+c\,$ whose graph intersects the 
+points $P_1=(0;1)$, $P_2=(1;2)$ and $P_3=(2;7)$.
+}
+
+    \begin{center}
+        \image{T102_ParabolaThreePoints}
+    \end{center}
+
+\lang{de}{
+Wir setzen die Koordinaten der gegebenen Punkte in die Funktionsgleichung ein und erhalten so 
+das folgende lineare Gleichungssystem mit 3 Gleichungen und den 3 Unbekannten: 
+}
+\lang{en}{We substitute the coordinates of the given points into the general form of the function 
+and hence obtain the following linear system with three solutions and three indeterminates: 
+}
+$a, b\,$ und $\,c:$
+\begin{align*}
+    \text{(I)}   &\qquad  1 &\,=\,& f(0) &\,=\,& a\cdot 0^2+ b\cdot 0+c &\,=\,& && && \, c \\
+    \text{(II)}  &\qquad  2 &\,=\,& f(1) &\,=\,& a\cdot 1^2+ b\cdot 1+c &\,=\,&\, a &\,+\,&\, b &\,+\,& c \\
+    \text{(III)} &\qquad  7 &\,=\,& f(2) &\,=\,& a\cdot 2^2+ b\cdot 2+c &\,=\,&4 a &\,+\,&2b &\,+\,& c \\
+\end{align*}
+\lang{de}{
+Da  die Variable $\,c\,$ in der ersten Gleichung bereits \emph{"`isoliert"'} ist, bietet 
+sich im ersten Schritt die Anwendung des  
+\ref[link-04-lin-funk][Einsetzungsverfahrens]{alg:einsetzungsverfahren} an.
+Wir setzen also $c=1$ aus der Gleichung \textbf{(I)} in die 
+Gleichungen \textbf{(II)} und \textbf{(III)} ein und erhalten das folgende
+reduzierte LGS mit 2 Gleichungen und 2 Unbekannten:
+}
+\lang{en}{
+As the variable $\,c\,$ is \emph{'isolated'} in the first equation, the opportunity arises to solve 
+the system by \ref[link-04-lin-funk][substitution]{alg:einsetzungsverfahren}. We therefore 
+substitute $c=1$ from equation \textbf{(I)} into equations \textbf{(II)} und \textbf{(III)} and 
+obtain the following reduced linear system with two equations and two indeterminates.
+}
+\begin{align*}
+    \text{(II*)}  &\qquad  1 &\,=\,& \,a+ \,b   &\\
+    \text{(III*)} &\qquad  6 &\,=\,& 4a+2b &\qquad \vert :2 \\
+\end{align*}
+\begin{center}
+_____________________________________________________
+\end{center}
+\begin{align*}
+    \text{(II*)}  &\qquad  1 &\,=\,& \, a+b  \\
+    \text{(III*)} &\qquad  3 &\,=\,& 2a+ b  \\
+\end{align*}
+
+\lang{de}{
+Hier ziehen wir nun nach dem  
+\ref[link-04-lin-funk][Additionsverfahren]{alg:additionsverfahren}
+die Gleichung \textbf{(II*)} von der Gleichung \textbf{(III*)} ab und erhalten 
+}
+\lang{en}{
+Using the \ref[link-04-lin-funk][addition method]{alg:additionsverfahren}, we now subtract equation 
+\textbf{(II*)} from equation \textbf{(III*)} and obtain 
+}
+ \[  3-1 = 2a-a+b-b  \Leftrightarrow  2  = a. \]
+\lang{de}{$a=2\,$ eingesetzt in Gleichung \textbf{(II*)} liefert: }
+\lang{en}{Now $a=2\,$ substituted into equation \textbf{(II*)} yields}
+ \[  1=2+b  \Leftrightarrow  b=-1. \]
+
+\lang{de}{Die Funktionsgleichung für die gesuchte Parabel lautet somit:}
+\lang{en}{The equation of the parabola is therefore:}
+\[ f(x)=2x^2-x+1. \]
+\end{example}
+
+\begin{remark}
+\begin{enumerate}
+\item \lang{de}{
+Die Rechnung im vorigen Beispiel wird komplizierter, wenn keiner der Punkte $\,0\,$ als 
+$\, x-$Koordinate hat, denn dann lässt sich der Wert von $c$ nicht mehr direkt ablesen. \\
+Allgemeine Verfahren zur Lösung linearer Gleichungssysteme mit 3 Gleichungen und 3 Unbekannten 
+sind in Kapitel 1 anhand eines Beispiels sowohl mit dem
+\ref[link-04-lin-funk][Additionsverfahren,]{ex:additionsverfahren_3_3} als auch mit dem
+\ref[link-04-lin-funk][Einsetzungsverfahren]{ex:einsetzungsverfahren_3_3} beschrieben.
+}
+\lang{en}{
+The calculation in the previous example becomes more complicated when none of the points has 
+$x$-coordinate $\,0\,$, as then the system cannot be immediately reduced to a smaller one. \\
+General methods for solving linear systems with three equations and three indeterminates are 
+described in chapter 1, for example the 
+\ref[link-04-lin-funk][addition method]{ex:additionsverfahren_3_3} and the 
+\ref[link-04-lin-funk][substitution method]{ex:einsetzungsverfahren_3_3}.
+}
+
+\item \lang{de}{
+Die Berechnung von $a$, $b$ und $c$ funktioniert übrigens auf diese Weise auch, wenn die 
+drei gegebenen Punkte auf einer Geraden liegen. In dem Fall erhält man bei der Lösung für $a$ 
+den Wert $0$. Die Funktionsgleichung beschreibt also keine Parabel, sondern eine lineare Funktion
+$f(x)=bx+c$.
+}
+\lang{en}{
+Calculating $a$, $b$ and $c$ in this way also works if the three given points lie on one line. In 
+this case the value for $a$ will turn out to be $0$. The equation will therefore not describe a 
+parabola, but rather a line with equation $f(x)=bx+c$.
+}
+
+\item \lang{de}{
+Handelt es sich bei einem der vorgegebenen Punkte um den Scheitelpunkt der Parabel, 
+empfiehlt es sich von der \emph{Scheitelpunktform} auszugehen, um die Parameter der zugehörigen
+quadratischen Funktion zu bestimmen. \\
+Sind die Nullstellen der Parabel vorgegeben, ist ein Ansatz über die \emph{faktorisierte Form} 
+der Parabel geeignet.
+}
+\lang{en}{
+If one of the given points is the turning point of the parabola, it may be easier to derive the 
+quadratic function by starting from the \emph{turning point form}.\\
+If the roots of the parabola are given, it makes sense to substitute them into the \emph{factorised 
+form} of the parabola.
+}
+\end{enumerate}
+\end{remark}
+%
+%%% Video Hoever
+%
+\lang{de}{
+Schauen Sie sich zu den in diesem Abschnitt erworbenen Erkenntnissen weitere anschauliche
+Erklärungen und Beispiele im Video an:
+\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=112lsg}{\image[75]{00_Videobutton_schwarz}}}
+\floatright{\href{https://www.hm-kompakt.de/video?watch=112}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{
+\\
+}
+
+% 
+
+\end{visualizationwrapper}
+
+\end{content}
+

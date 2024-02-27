@@ -1,0 +1,98 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A05: mehrere Grenzwerte }
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/18755}{Ticket 18755}
+\end{block}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A05: mehrere Grenzwerte}}
+
+\begin{problem}
+    \begin{question}
+        \type{input.generic}
+        \begin{variables}
+            \randint{a}{3}{5}
+            \function[normalize]{f}{|3*(a-x)|/(a-x)}
+            \function{g}{a-x}
+            \function[normalize]{ga}{3*g}
+            \function{sol1}{3}
+            \function{sol2}{-3} 
+            \string{s}{nein} 
+        \end{variables}
+        \lang{de}{
+            \text{Untersuchen Sie die Funktion $f:\R\to\R$ mit $f(x)=\begin{cases}
+                    \var{f} &,\text{für }x\neq\var{a}\\
+                    0 &,\text{für }x=\var{a}
+                    \end{cases}$.}
+        }
+        \begin{answer}
+            \type{input.number}
+            \text{$\lim_{x\to 0} f(x)=$}
+            \solution{sol1}
+            \explanation[edited]{$f(0)=3$}
+        \end{answer}
+        
+        \begin{answer}
+            \type{input.number}
+            \text{$\lim_{x\to \infty} f(x)=$}
+            \solution{sol2}
+            \explanation[edited]{$\var{ga}=\var{a} \cdot (\var{g})$. Mit $\var{g}$ kürzen, den negativen Nenner
+            berücksichtigen, dann ist $\lim_{x\to \infty} f(x)=-3$}
+        \end{answer}
+        
+        \begin{answer}
+            \type{input.number}
+            \text{$\lim_{x\searrow \var{a}} f(x)=$}
+            \solution{sol2}
+            \explanation[edited]{$\var{ga}=\var{a} \cdot (\var{g})$. Nenner ist negativ, mit $\var{g}$ kürzen, dann ist
+            $\lim_{x\searrow \var{a}} f(x)=-3$}
+        \end{answer}
+        
+        \begin{answer}
+            \type{input.number}
+            \text{$\lim_{x\nearrow \var{a}} f(x)=$}
+            \solution{sol1}
+            \explanation[edited]{$\var{ga}=\var{a} \cdot (\var{g})$. Mit $\var{g}$ kürzen, dann ist $\lim_{x\nearrow \var{a}} f(x)=3$}
+        \end{answer}
+        
+        \begin{answer}
+            \type{mc.yesno}
+            \lang{de}{
+                \text{Existiert der folgende Grenzwert ? }
+            }
+            \begin{choice}
+                \lang{de}{\text{$\lim_{x\to \var{a}} f(x)$}}
+                \solution{false}
+                \explanation[edited]{Rechts- und linksseitiger Grenzwert müssen für die 
+                Existenz des Grenzwertes identisch sein.}
+            \end{choice}
+        \end{answer}
+        
+        
+     \end{question}
+\end{problem}
+            
+\embedmathlet{gwtmathlet}
+
+\end{content}

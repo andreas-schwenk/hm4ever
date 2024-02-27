@@ -1,0 +1,1732 @@
+
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Wichtige Funktionen}
+
+    \lang{en}{Important functions}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_SineCosine_B.meta.xml}{T601_SineCosine_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_Triangle_A.meta.xml}{T601_Triangle_A}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_Logarithms_B.meta.xml}{T601_Logarithms_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_Exponentials_B.meta.xml}{T601_Exponentials_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_Exponentials_A.meta.xml}{T601_Exponentials_A}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_LinearFunction.meta.xml}{T601_LinearFunction}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_blau.meta.xml}{00_Videobutton_blau}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T601_GrundlagenWiWi/g_art_content_04_Funktionsbegriff.meta.xml}{content_04_Funktionsbegriff}
+    \link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_05_loesen_gleichungen_und_lgs.meta.xml}{content_05_loesen_gleichungen_und_lgs}
+    \link{generic_article}{content/rwth/HM1/T102neu_Einfache_Reelle_Funktionen/g_art_content_06_funktionsbegriff_und_lineare_funktionen.meta.xml}{content_06_funktionsbegriff_und_lineare_funktionen}
+    \link{generic_article}{content/rwth/HM1/T102neu_Einfache_Reelle_Funktionen/g_art_content_07_geradenformen.meta.xml}{content_07_geradenformen}
+    \link{generic_article}{content/rwth/HM1/T102neu_Einfache_Reelle_Funktionen/g_art_content_08_quadratische_funktionen.meta.xml}{content_08_quadratische_funktionen}
+    \link{generic_article}{content/rwth/HM1/T103_Polynomfunktionen/g_art_content_09_polynome.meta.xml}{content_09_polynome}
+    \link{generic_article}{content/rwth/HM1/T403a_Vektorraum/g_art_content_10b_lineare_abb.meta.xml}{content_10b_lineare_abb}
+    \link{generic_article}{content/rwth/HM1/T204_Abbildungen_und_Funktionen/g_art_content_10_abbildungen_verkettung.meta.xml}{content_10_abbildungen_verkettung}
+\end{links}
+  \creategeneric
+\end{metainfo}
+
+
+\begin{content}
+\title{
+  \lang{de}{Wichtige Funktionen}
+  \lang{en}{Important functions}
+}
+\usepackage{mumie.ombplus}
+\ombchapter{1}
+\ombarticle{5}
+\usepackage{mumie.genericvisualization}
+
+
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22666}{Ticket 22666}
+\end{block}
+
+\tableofcontents
+\begin{visualizationwrapper}
+\lang{de}{Wir stellen in diesem Kapitel die am häufigsten gebrauchten Funktionen vor. }
+\lang{en}{
+This chapter introduces the most commonly used functions.
+}
+\section{\lang{de}{Lineare Funktionen} \lang{en}{Linear functions}} \label{sec:linear}
+\lang{de}{Viele Zusammenhänge lassen sich (zumindest in kleinen Intervallen) gut durch lineare Funktionen bzw. Geraden 
+beschreiben. Da Geraden auch relativ leicht zu bestimmen und aufzustellen sind, gehören sie mit zu den wichtigsten
+Funktionen. }
+\lang{en}{
+Many relationships can be represented well (at least over short intervals)
+by linear functions, i.e. lines. Since lines are relatively easy to determine and to describe,
+they are some of the most important functions.
+}
+
+\begin{definition}[\lang{de}{Lineare Funktion/Gerade} \lang{en}{Linear functions / Lines}] \label{def:linear_func}   
+    \lang{de}{Eine Funktion $g:\R\to \R\,$ der Form
+    \begin{align*}
+		g(x)=mx+b 
+	\end{align*}
+   
+	mit beliebigen, aber festen reellen Zahlen $m$ und $b$ hei\"st \notion{\emph{lineare Funktion.}} % oder \notion{\emph{Gerade}}. 
+    }
+    \lang{en}{
+A function $g:\R\to \R\,$ of the form
+\begin{align*}
+		g(x)=mx+b 
+	\end{align*}
+for fixed real numbers $m$ and $b$ is called a \notion{\emph{linear function.}}  % or a \notion{\emph{line}}.
+    }
+
+    \lang{de}{
+    Der Graph einer linearen Funktion ist eine 
+    \notion{\emph{Gerade}}. Der Parameter \emph{$m$} beschreibt dabei die \notion{\emph{Steigung}} und
+    \emph{$b$} den \notion{\emph{Ordinaten-}} bzw. \notion{\emph{$y$-Achsenabschnitt}}.
+  	}
+   \lang{en}{
+    The graph of a linear function is a
+    \notion{\emph{line}}. Here, the parameter \emph{$m$} stands for the \notion{\emph{slope}} and
+    \emph{$b$} for the \emph{$y$-intercept}.
+  	}
+   
+\end{definition}   
+
+\lang{de}{Die Parameter $m$ und $b$ besitzen folgende anschauliche Bedeutung:}
+\lang{en}{The parameters $m$ and $b$ have the following descriptive meaning:}
+
+    \lang{de}{Der $y$-Achsenabschnitt $b$ gibt an, dass die Gerade $g$ die $y$-Achse
+    im Punkt $(0;b)$ schneidet.}
+    \lang{en}{
+    The $y$-intercept being $b$ indicates that the line $g$ intersects
+    the $y$-axis in the point $(0;b)$.
+    }
+    \begin{itemize}
+    \item \lang{de}{Ist $b=0$, so verläuft die Gerade durch den \textit{Ursprung} 
+    $(0;0)$ des Koordinatensystems (es ist $g(x)=mx$).}
+    \lang{en}{
+    If $b=0$, then the line runs through the \textit{origin}
+    $(0;0)$ of the coordinate system (because $g(x)=mx$).
+    }
+    \item \lang{de}{ Ist $b>0$, so schneidet die Gerade die $y$-Achse oberhalb 
+    der $x$-Achse.}
+    \lang{en}{
+    If $b>0$, then the line intersects the $y$-axis
+    above the $x$-axis.
+    }
+    \item \lang{de}{Ist $b<0$, so schneidet die Gerade die $y$-Achse unterhalb 
+    der $x$-Achse.}
+    \lang{en}{
+    If $b<0$, then the line intersects the $y$-axis
+    below the $x$-axis.
+    }
+    \end{itemize}
+    \lang{de}{Die Steigung $m$ gibt an, um wie viel die Gerade steigt, wenn man $x$  um $1$ 
+    erh"oht.}
+    \lang{en}{
+    The slope $m$ indicates by how much the line increases in height
+    if $x$ increases by $1$.
+    }
+    \begin{itemize}
+    \item \lang{de}{Ist $m=0$, so ist die Gerade \emph{parallel} zur $x$-Achse (es ist $g(x)=b$).}
+    \lang{en}{If $m=0$, then the line is \emph{parallel} to the $x$-axis (we have $g(x)=b$).}
+    \item \lang{de}{Ist $m>0$, so \emph{steigt} die Gerade (und zwar mit wachsendem $m$  immer \emph{steiler}.}
+    \lang{en}{}If $m>0$, then the line is \emph{increasing} (and for greater $m$ it increases more \emph{steeply}).
+
+\item \lang{de}{Ist $m<0$, so \emph{f"allt} die Gerade.}
+\lang{en}{If $m<0$, then the line is \emph{decreasing}.}
+\end{itemize}
+
+\lang{de}{Die Gerade in der folgenden Abbildung besitzt eine negative Steigung und einen positiven Ordinatenabschnitt.
+}
+\lang{en}{
+The line in the image below has a negative slope and a positive $y$-intercept.
+}
+    \begin{center}
+        \image{T601_LinearFunction}
+    \end{center}
+
+\lang{de}{Wenn zwei Punkte der Gerade gegeben sind, kann die Gerade, die durch beide Punkte geht, leicht aufgestellt werden.
+}
+\lang{en}{
+Given two points, the line that passes through
+both of them can be computed in a straightforward way.
+}
+
+\begin{rule}[\lang{de}{Aufstellen der Geradengleichung} \lang{en}{Equation of a line}]\label{rule:geradengleichung}
+\lang{de}{Es seien zwei Punkte $P_1(x_1;y_1)$ und $P_2(x_2;y_2)$ mit unterschiedlichen $x$-Koordinaten gegeben. 
+Die Gerade durch $P_1$ und $P_2$ hat die Steigung
+\[
+m = \frac{y_2 - y_1}{x_2 - x_1}.
+\]
+Den Ordinatenabschnitt $b$ können wir ausrechnen, indem wir den Wert von $m$ und die Koordinaten eines Punktes von oben 
+in die Gleichung $y = mx + b$ einsetzen und nach $b$ auflösen. Als allgemeine Formel ergibt sich 
+\[
+b = y_1 - x_1 \cdot \frac{y_2-y_1}{x_2 - x_1}.
+\]}
+\lang{en}{
+Suppose we are given two points $P_1(x_1;y_1)$ and $P_2(x_2;y_2)$ with distinct $x$-coordinates.
+The line passing through $P_1$ and $P_2$ has slope
+\[
+m = \frac{y_2 - y_1}{x_2 - x_1}.
+\]
+The $y$-intercept $b$ can be calculated by plugging in the value of $m$ and the coordinates of either point
+above in the equation $y = mx + b$, and then solving for $b$. This yields the general formula
+\[
+b = y_1 - x_1 \cdot \frac{y_2-y_1}{x_2 - x_1}.
+\]
+}
+\end{rule}
+\lang{de}{Häufig werden mehrere Geraden zu \emph{stückweise linearen Funktionen} zusammengesetzt - wie im 
+folgenden Beispiel. }
+\lang{en}{
+Often, multiple lines are combined to \emph{piecewise linear functions},
+as in the following example.
+}
+
+\begin{example}
+\lang{de}{Ein Händler verkauft Aktenordner für 1,80 € pro Stück. Bei der Abnahme von mindestens 50 Ordnern 
+sinkt der Stückpreis auf 1,60 €. Die Kosten für $x$ Ordner (in Euro) betragen also 
+\[
+K(x) = \left\{ 
+   \begin{matrix}
+   1,80 \cdot x, &\text{ falls }x <50{,}\\
+1,60 \cdot x, &\text{ falls } x \geq 50 \text{.}
+\end{matrix} 
+ \right.
+\]}
+\lang{en}{
+A vendor is selling folders for 1.80 € each.
+For orders of at least 50 folders, the price per unit
+is reduced to 1.60 €. The cost of buying $x$ folders is then
+\[
+K(x) = \left\{ 
+   \begin{matrix}
+   1.80 \cdot x, &\text{ if }x <50{,}\\
+1.60 \cdot x, &\text{ if } x \geq 50 \text{.}
+\end{matrix} 
+ \right.
+\]
+}
+
+
+\lang{de}{Ein anderer Händler übernimmt diese Preise, aber gewährt den reduzierten Preis von 1,60 € nicht für 
+die ersten 49 Ordner, sondern erst ab dem 50. Ordner. Die Kosten betragen in diesem Fall
+\[
+K(x) = \left\{ 
+   \begin{matrix}
+   1,80 \cdot x, &\text{ falls }x <50{,}\\
+1,80 \cdot 49 + 1,60 \cdot (x - 49), &\text{ falls } x \geq 50 \text{.}
+\end{matrix} 
+ \right.
+\]}
+\lang{en}{
+A second vendor uses the above prices but only
+offers the reduced price of 1.60 € for all folders after the 50th,
+not for the first 49. In this case, the cost is
+\[
+K(x) = \left\{ 
+   \begin{matrix}
+   1.80 \cdot x, &\text{ if }x <50{,}\\
+1.80 \cdot 49 + 1.60 \cdot (x - 49), &\text{ if } x \geq 50 \text{.}
+\end{matrix} 
+ \right.
+\]
+}
+
+
+\lang{de}{Bei einer Bestellung von über 50 Ordnern setzen sich die Kosten hier zusammen aus den Kosten für die 
+ersten 49 Ordner und den ermäßigten Kosten für jeden folgenden Ordner.}
+\lang{en}{
+For orders of more than 50 folders, the price above consists of the
+price of the first 49 folders and the reduced price for all of the
+other folders.
+}
+
+
+\end{example}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{2}
+\randomquickcheckpool{3}{3}
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{a}{-5}{5}
+			\randint[Z]{b}{1}{2}
+			\randint{c}{-4}{4}
+			\randint[Z]{d}{3}{5}
+			\function[calculate]{m}{a/b}
+			\function[calculate]{y}{c/d}
+		    \function[normalize]{f}{m*x+y}
+		\end{variables}
+
+      \lang{de}{
+			\text{Für die lineare Funktion $f(x)=\var{f}$ hat die zugehörige Gerade
+			 die Steigung \ansref und den $y$-Achsenabschnitt \ansref.}}
+      \lang{en}{
+      \text{Given the linear function $f(x)=\var{f}$, the associated line
+      has slope \ansref and $y$-intercept \ansref.}
+      }
+		
+		\begin{answer}
+			\solution{m}
+		\end{answer}
+		\begin{answer}
+			\solution{y}
+		\end{answer}
+		\explanation{
+    \lang{de}{Die Steigung ist der Koeffizient von $x$, also der Faktor, mit dem $x$ multipliziert wird.\\
+		Der $y$-Achsenabschnitt ist die Zahl, die hinzuaddiert wird, d.\,h. der Wert von $f$ an der Stelle $0$.}
+    \lang{en}{
+    The slope is the coefficient of $x$, or the factor that $x$ is multiplied by.
+    The $y$-intercept is the number that is added on, i.e. the value of $f(x)$ at $x=0$.
+    }
+    }
+	\end{quickcheck}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{a}{-5}{5}
+			\randint[Z]{b}{2}{4}
+			\randint{c}{-4}{4}
+			\function[calculate]{m}{a}
+			\function[calculate]{y}{c/b}
+		    \function[normalize]{f0}{a*x+c/b}
+		    \function{f}{f0}
+		\end{variables}
+
+      \lang{de}{
+			\text{Für die lineare Funktion $f(x)=\var{f}$ hat die zugehörige Gerade
+			 die Steigung \ansref und den $y$-Achsenabschnitt \ansref.}}
+      \lang{en}{
+        \text{Given the linear function $f(x)=\var{f}$, the associated line
+        has slope \ansref and $y$-intercept \ansref.}}
+		
+		\begin{answer}
+			\solution{m}
+		\end{answer}
+		\begin{answer}
+			\solution{y}
+		\end{answer}
+		\explanation{
+    \lang{de}{Die Steigung ist der Koeffizient von $x$, also der Faktor, mit dem $x$ multipliziert wird.\\
+		Der $y$-Achsenabschnitt ist die Zahl, die hinzuaddiert wird, d.\,h. der Wert von $f$ an der Stelle $0$.}
+    \lang{en}{
+    The slope is the coefficient of $x$, or the factor that $x$ is multiplied by.
+    The $y$-intercept is the number that is added on, i.e. the value of $f(x)$ at $x=0$.
+    }
+    }
+  \end{quickcheck}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\randint[Z]{a}{-5}{5}
+			\randint[Z]{b}{1}{4}
+			\randint{c}{-4}{4}
+			\randint[Z]{d}{1}{4}
+			\function[calculate]{m}{a/b}
+			\function[calculate]{y}{c/d}
+		    \function[normalize]{f}{m*x+y}
+		\end{variables}
+
+      \lang{de}{
+			\text{Für die Gerade mit Steigung $\var{m}$ und $y$-Achsenabschnitt $\var{y}$
+			 ist die zugehörige Funktionsgleichung $y=$\ansref.}}
+      \lang{en}{
+      \text{The line with slope $\var{m}$ and $y$-intercept $\var{y}$
+      has the equation $y=$\ansref.}
+      }
+    
+		
+		\begin{answer}
+			\solution{f}
+			\checkAsFunction{x}{-10}{10}{100}
+		\end{answer}
+		\explanation{\lang{de}{Die Funktionsgleichung ergibt sich als $y=mx+b$, wobei $m$ die Steigung und $b$ der $y$-Achsenabschnitt ist.}
+      \lang{en}{The equation of the line is given by $y=mx+b$, where $m$ is the slope and $b$ the $y$-intercept.}}
+	\end{quickcheck}
+
+\end{quickcheckcontainer}
+
+\section{\lang{de}{Polynomfunktionen} \lang{en}{Polynomial functions}}
+
+\lang{de}{Die linearen Funktionen gehören zu den allgemeineren Polynomfunktionen, wo auch höhere Potenzen 
+der Funktionsvariablen auftreten dürfen.}
+\lang{en}{
+Linear functions are a special case of polynomial functions.
+In the latter, higher powers of the variable are also allowed to appear.
+}
+
+
+\begin{definition}[\lang{de}{Polynome} \lang{en}{Polynomials}] \label{polynomial}
+\lang{de}{Funktionen der Form
+\begin{equation*}
+p(x) = a_n\, x^n + a_{n-1} \, x^{n-1} + a_{n-2} \, x^{n-2} + \ldots + a_1 \, x + a_0
+\end{equation*}
+mit Koeffizienten $a_0,\, a_1,\,\ldots, a_{n-1},\, a_n \in \mathbb{R}$ heißen 
+\notion{\emph{Polynomfunktionen.}} 
+
+Der größte Exponent der $x$-Potenzen in obiger Darstellung heißt \notion{Grad} der Polynomfunktion, wobei der
+Koeffizient der betreffenden Potenz nicht null sein darf. 
+
+Gilt für den Koeffizienten der höchsten Potenz $a_n \neq 0$, 
+so sagen wir etwa, dass $p(x)$ eine Polynomfunktion 
+\notion{von Grad n} ist. Auch gebräuchlich ist die Bezeichnung \notion{ganzrationale Funktion
+$n$. Grades}. Die Zahl $a_n$, die als Vorfaktor bei der höchsten Potenz von $x$ steht, bezeichnet man als \textbf{Leitkoeffizienten}.}
+
+\lang{en}{
+A function of the form
+\begin{equation*}
+p(x) = a_n\, x^n + a_{n-1} \, x^{n-1} + a_{n-2} \, x^{n-2} + \ldots + a_1 \, x + a_0
+\end{equation*}
+with coefficients $a_0,\, a_1,\,\ldots, a_{n-1},\, a_n \in \mathbb{R}$
+is called a \notion{\emph{polynomial function.}}
+
+The highest power of $x$ in the above representation
+for which the corresponding coefficient is nonzero
+is called the \notion{degree} of the polynomial function.
+
+If $a_n \neq 0$, then we call $p(x)$ a polynomial
+of \notion{degree n}. The coefficient $a_n$ of 
+the highest power of $x$ is called the
+\notion{leading coefficient}.
+}
+
+\end{definition}
+
+\lang{de}{Geraden sind nach dieser Definition Polynomfunktionen vom Grad 1 (wenn Steigung $m \neq 0$ gilt)
+oder vom Grad 0 (wenn $m = 0$ gilt).}
+
+\lang{en}{
+By this definition, lines are polynomial functions of
+degree $1$ (if their slope $m$ is nonzero) or of
+degree $0$ (if $m=0$).
+}.
+
+\begin{example}
+ \lang{de}{Polynome  unterschiedlichen Grades:}
+ \lang{en}{Some polynomials of various degrees:}
+\begin{align*}
+p_0(x) &= -2 &&\quad\text{\lang{de}{Grad}\lang{en}{degree}} = 0,\\
+p_1(x) &= 3x-2 &&\quad\text{\lang{de}{Grad}\lang{en}{degree}} = 1,\\
+p_2(x) &= (x+2)^2 - 2 &&\quad\text{\lang{de}{Grad}\lang{en}{degree}} = 2,\\
+p_3(x) &= -3x^3 + 2x^2 + 3x-2 &&\quad\text{\lang{de}{Grad}\lang{en}{degree}} = 3,\\
+p_4(x) &= (x-1)\cdot(x-6)\cdot(x+3)\cdot(x-4) &&\quad\text{\lang{de}{Grad}\lang{en}{degree}} = 4.
+\end{align*}
+
+\lang{de}{Die Polynome $p_2$ und $p_4$ können wie in der Definition angegeben hingeschrieben werden, in dem 
+man die Klammern ausmultipliziert. Dann ist z.\,B. 
+\begin{equation*}
+p_2(x) = (x+2)^2 - 2  = (x^2 + 4x + 4) - 2 = x^2 + 4x + 2.
+\end{equation*}
+Die Darstellung von $p_4(x)$ heißt \emph{Linearfaktorzerlegung}. Durch sie lassen sich sofort die Nullstellen der Funktion ablesen: 1, 6, -3, 4.
+}
+\lang{en}{
+The polynomials $p_2$ and $p_4$ can be put in the form
+of the definition by multiplying out the expressions in
+parentheses. For example,
+\begin{equation*}
+p_2(x) = (x+2)^2 - 2  = (x^2 + 4x + 4) - 2 = x^2 + 4x + 2.
+\end{equation*}
+The representation of $p_4(x)$ is called its
+\emph{linear factorization}. It allows us to read off
+the zeros of the function directly: 1, 6, -3, 4.
+}
+
+
+
+\lang{de}{In der folgenden Visualisierung können Sie beliebige Polynomfunktionen mit bis zu sechs Summanden 
+anzeigen lassen. }
+
+\lang{en}{
+In the visualization below, you can display any
+polynomial involving at most six summands.
+}
+
+
+
+ \begin{genericGWTVisualization}[280][300]{mathlet1}
+\lang{de}{\title{Polynom}}
+\lang{en}{\title{Polynomials}}
+
+	\begin{variables}
+
+	\function[editable]{P5}{rational}{x^5}
+	\function[editable]{P4}{rational}{0*x^4}
+	\function[editable]{P3}{rational}{-4*x^3}
+	\function[editable]{P2}{rational}{x^2}
+	\function[editable]{P1}{rational}{3*x}
+	\function[editable]{P0}{rational}{-2}
+
+	\function{P5x}{rational}{var(P5)}
+	\function{P4x}{rational}{var(P4)}
+	\function{P3x}{rational}{var(P3)}
+	\function{P2x}{rational}{var(P2)}
+	\function{P1x}{rational}{var(P1)}
+	\function{P0x}{rational}{var(P0)}
+
+	\function{P}{rational}{var(P5)+var(P4)+var(P3)+var(P2)+var(P1)+var(P0)}
+	\end{variables}
+
+
+	\color{P}{#0066CC}
+
+	\begin{canvas}
+	\plotSize{380}
+	\plotLeft{-5}
+	\plotRight{5}
+	\plot[coordinateSystem]{P}
+	\end{canvas}
+	\lang{de}{\text{Fügen Sie hier die Summanden (Vorfaktor mit $x$-Potenz) ein.}}
+  \lang{en}{\text{Enter the summands (coefficients and powers of $x$) here.}}
+	\text{$p(x) = \var{P5}+ (\var{P4})+ (\var{P3})+ (\var{P2})+ (\var{P1})+ (\var{P0})$
+	\phantom{}}
+\text{$p(x) =  \var{P}$} 
+\end{genericGWTVisualization}
+\end{example}
+\lang{de}{Für das asymptotische Verhalten von Polynomfunktionen gilt die folgende Regel:}
+\lang{en}{The asymptotic behavior of a polynomial function
+is governed by the following rule:}
+\begin{rule}
+\lang{de}{
+Für $x \to \pm \infty$ hängt das Verhalten der
+     Polynomfunktion $p(x) = a_n x^n + \ldots + a_1 x + a_0$ (mit $a_n \neq 0$) 
+     vom      Summanden mit der größten Potenz ab: 
+     \[
+     \lim_{x \to \pm\infty} \left(a_n x^n + \ldots + a_1 x + a_0 \right)= \lim_{x \to \pm\infty} a_n x^n.
+     \]
+}
+\lang{en}{
+The behavior of the polynomial $p(x) = a_n x^n + \ldots + a_1 x + a_0$ (with $a_n \neq 0$)
+as $x \to \pm \infty$ depends only on the summand with the highest power of $x$:
+      \[
+     \lim_{x \to \pm\infty} \left(a_n x^n + \ldots + a_1 x + a_0 \right)= \lim_{x \to \pm\infty} a_n x^n.
+     \]
+}
+  \lang{de}{
+   Weiterhin gilt 
+   \[\lim_{x \to \infty} x^n = +\infty, \quad
+   \lim_{x \to -\infty} x^n = \left\{ 
+   \begin{matrix}
+   +\infty, &\text{ falls } n \text{ gerade, }\\
+-\infty, &\text{ falls } n \text{ ungerade.}
+\end{matrix} 
+ \right.
+   \]
+  }
+  \lang{en}{
+   Furthermore, we have 
+   \[\lim_{x \to \infty} x^n = +\infty, \quad
+   \lim_{x \to -\infty} x^n = \left\{ 
+   \begin{matrix}
+   +\infty, &\text{ if } n \text{ is even, }\\
+-\infty, &\text{ if } n \text{ is odd.}
+\end{matrix} 
+ \right.
+   \]
+  }
+  
+\end{rule}
+
+\lang{de}{Für das Verhalten von Polynomfunktionen in der Nähe von $0$ schaut man sich hingegen nur die Potenzen mit den 
+niedrigsten Exponenten an. Meistens lässt man in der Funktionsgleichung dazu alle $x$-Potenzen weg, deren Exponent 
+größer als $1$ ist. }
+\lang{en}{
+On the other hand, to determine the behavior of a polynomial function as it approaches zero,
+we only need to consider the terms involving the smallest powers of the variable.
+This is generally done by omitting all terms in the defining equation
+that involve a power of $x$ greater than $1$.
+}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\randint{p1}{0}{1}
+			\randint{p2}{0}{1}
+			\randint{p3}{0}{2}
+			\randint[Z]{a}{-5}{5}
+			\randint{b1}{-3}{4}
+			\randint{b2}{-3}{4}
+			\randint[Z]{c}{-4}{4}
+			\randint{d}{1}{4}
+			\function[normalize]{ht}{p1*a*x^6+(1-p1)*a*x^5}  %ax^5 oder ax^6
+			\function[normalize]{mt}{(2-p3)*b1*x^4+p3*b2*x^3-p3*p2*(b1+b2)*x^2}  %x^4 und x^3-terme und evtl. auch x^2, wenn nt keinen hat.
+			\function[normalize]{nt}{(1-p2)*c*x^2+p2*c*x+d}   %cx^2+d oder cx+d
+		    \function[normalize,sort]{f}{ht+mt+nt}
+		    \function[normalize]{gr}{p1*6+(1-p1)*5}
+		    \function[normalize]{lc}{a}
+		\end{variables}
+
+      \lang{de}{
+			\text{Die Polynomfunktion $f(x)=\var{f}$ hat\\ 
+			Grad \ansref und Leitkoeffizient \ansref.}
+			\text{Für $x\to \pm \infty$ verhält sie sich wie die Funktion \ansref.}
+            \explanation{Für den Grenzwert gegen $ \pm \infty$ benötigen Sie den Summanden mit dem höchsten Grad.}
+      }
+      \lang{en}{
+      \text{The polynomial $f(x)=\var{f}$ \\
+      is of degree \ansref and has leading coefficient \ansref.
+      }
+      \text{In the limit $x\to \pm \infty$, it behaves like the function \ansref.}
+      \explanation{For the limit $x\to \pm \infty$, we need to consider the summand of the highest degree.}
+      }      
+		
+		\begin{answer}
+			\solution{gr}
+			\checkAsFunction{x}{-2}{2}{100}
+		\end{answer}
+		\begin{answer}
+			\solution{lc}
+			\checkAsFunction{x}{-2}{2}{100}
+		\end{answer}
+		\begin{answer}
+			\solution{ht}
+			\checkAsFunction{x}{-2}{2}{100}
+		\end{answer}
+	\end{quickcheck}
+	
+
+\lang{de}{Über die Nullstellen von Polynomfunktionen lässt sich Folgendes aussagen:}
+\lang{en}{
+The following can be said about the zeros of polynomial functions:
+}
+\begin{theorem}
+\begin{enumerate}
+\item \lang{de}{Eine Polynomfunktion $p$ vom Grad $n$ besitzt höchstens $n$ verschiedene reelle Nullstellen.}
+\lang{en}{
+A polynomial $p$ of degree $n$ has at most $n$ distinct real zeros.
+}
+      
+\item \lang{de}{Ist $c$ eine Nullstelle von $p$, so gibt es eine Polynomfunktion $q$ vom Grad $n-1$ mit
+~\\
+\begin{center}$p(x)=q(x)\cdot (x-c) \quad \text{für alle }x\in \R.$\end{center}
+}
+\lang{en}{If $c$ is a zero of $p$, then there exists a polynomial $q$ of degree $n-1$ with
+~\\
+\begin{center}$p(x)=q(x)\cdot (x-c) \quad \text{for all }x\in \R.$\end{center}
+}
+\end{enumerate}
+%\floatright{\href{https://www.hm-kompakt.de/video?watch=117}{}\image[75]{00_Videobutton_schwarz}}\\\\
+\end{theorem}
+
+
+\section{
+\lang{de}{Exponentialfunktion und Logarithmus}
+\lang{en}{Exponential function and logarithm}
+}
+
+\lang{de}{Bisher haben wir nur Potenzen der Form $x^n$ betrachtet, bei denen die Funktionsvariable die Basis der Potenz ist. Die Funktionen $2^x, 10^x, e^x$ 
+(wobei $e$ die {Eulersche Zahl} ist) sind Beispiele von "`Exponentialfunktionen"',
+denn die Variable steht im Exponenten.}
+\lang{en}{
+Thus far, we have only considered powers of the form $x^n$ in which
+the variable is the base. The functions $2^x$, $10^x$
+and $e^x$ (where $e$ is the {Euler number}) are examples
+of "exponential functions" because the variable
+appears in the exponent.
+}
+
+\begin{definition}[
+\lang{de}{Exponentialfunktion}
+\lang{en}{Exponential function}]
+   \lang{de}{Die Funktionen}
+   \lang{en}{The functions}
+     \begin{equation*}
+    f(x) = a^x
+      \end{equation*}
+    \lang{de}{mit positiver Basis $a > 0$ heißen \notion{\emph{Exponentialfunktionen}}. Sie sind für alle reellen Zahlen $x$ definiert: $D_f = \mathbb{R}$. 
+    
+    Die Zahl $a$ heißt \notion{Basis}.}
+
+    \lang{en}{for a positive base $a > 0$ are called \notion{\emph{exponential functions}}. They are defined for all real numbers $x$: $D_f = \mathbb{R}$.
+
+    The number $a$ is called the \notion{base}.}
+    
+   \lang{de}{Die Exponentialfunktion mit der Basis $e$ heißt \notion{\emph{natürliche Exponentialfunktion}} oder kurz \notion{\emph{$e$-Funktion}}}
+   \lang{en}{The exponential function to the base $e$ is called the \notion{\emph{natural exponential function}}, or \notion{\emph{exp-function}} for short.}
+     \begin{equation*}
+    f(x) = e^x = \exp(x).
+      \end{equation*}
+      \lang{de}{Dabei ist die \emph{Eulersche Zahl}}
+      \lang{en}{Here, the \emph{Euler number}}
+     \begin{equation*} e \approx 2\lang{de}{,}\lang{en}{.}718281828459...\end{equation*}
+     \lang{de}{der Wert der Exponentialreihe $\sum_{n=0}^\infty \frac{1}{n!}$. Sie ist eine irrationale Zahl.}
+      \lang{en}{is the value of the exponential series $\sum_{n=0}^\infty \frac{1}{n!}$. This is an irrational number.}
+   % \floatright{\href{https://www.hm-kompakt.de/video?watch=141}{\image[75]{00_Videobutton_schwarz}}}\\~
+\end{definition}
+
+  \lang{de}{Die natürliche Exponentialfunktion ist eine der wichtigsten
+  Funktionen der Mathematik und Naturwissenschaften. Sie
+  hat die ganz besondere Eigenschaft, dass sie mit ihrer Ableitung
+  (siehe Abschnitt {Ableitung}) übereinstimmt, das heißt, dass $(e^x)' = e^x$
+  gilt.}
+  \lang{en}{
+  The natural exponential function is one of the most important
+  functions in mathematics and the natural sciences.
+  It has the very special property of coinciding with
+  its own derivative (see the section on {derivatives}); that is, $(e^x)' = e^x$.9
+  }
+
+
+\lang{de}{Alle Exponentialfunktionen haben die Eigenschaft $f(0)=a^0=1$. Der Verlauf der Exponentialfunktionen
+ist von der Basis $a$ abhängig und kann in zwei Fälle unterteilt werden: $0 < a < 1$ und $a > 1$. (Der Fall $a = 1$ wird meist 
+ausgeschlossen, da die Funktion $f(x) = 1^x = 1$ konstant ist.) 
+}
+\lang{en}{
+All exponential functions have the property that $f(0) = a^0 = 1$.
+The shape of the function depends on the base $a$ and
+falls into two cases: $0 < a < 1$ or $a > 1$.
+(The case $a=1$ is usually excluded because the
+function $f(x) = 1^x = 1$ is constant.)
+}
+
+\lang{de}{In der folgenden Abbildung
+ist der Zusammenhang von Basiswert und Verlauf der Exponentialfunktionen ersichtlich.
+}
+\lang{en}{
+The relationship between the base and the shape of the
+function can be seen in the figure below.
+}
+
+
+\begin{table}[\class{item}]
+\image{T601_Exponentials_A} & \image{T601_Exponentials_B}
+\end{table}
+
+
+\begin{example}
+   \begin{tabs*}[\initialtab{1}\class{example}]
+ \tab{$f(x) = a^x, \; a > 1$ }
+   \begin{table}
+  \head
+  $f(x) = a^x$ & $a > 1, \;\; a \in \mathbb{R}$ 
+  \body
+  $D_f = \mathbb{R}$ & \lang{de}{Definitionsbereich ist die Menge aller reellen Zahlen.}\lang{en}{The domain is the set of all real numbers.} \\
+  $W_f = \mathbb{R}^+$  & \lang{de}{Wertemenge ist die Menge der positiven reellen Zahlen.}\lang{en}{The range is the set of all positive real numbers.} \\
+  $f(x) \neq 0$& \lang{de}{Die Funktionen haben keine Nullstellen.}\lang{en}{The functions have no zeros.}\\
+  $f(x_1) < f(x_2)$ \lang{de}{für}\lang{en}{for} $x_1 < x_2$&  \lang{de}{Die Funktionen sind streng monoton wachsend.}\lang{en}{The functions are strictly monotonically increasing.}\\
+  \lang{de}{Die Steigung von $f$ nimmt ständig zu.}\lang{en}{The slope is increasing}  & \lang{de}{Der Graph beschreibt eine Linkskurve.}\lang{en}{The graph is concave up} \\
+  $\lim_{x \to -\infty}f(x) = 0, \ \lim_{x \to \infty}f(x) = \infty$& \lang{de}{Die Funktionen streben von $0$ nach $\infty$.} \lang{en}{The functions go from $0$ to $\infty$.}
+  \\
+  \end{table}
+ \tab{$f(x) = a^{x}, \; 0 < a < 1$}
+\begin{table}
+  \head
+  $f(x) = a^{x} = \left(\frac{1}{a}\right)^{-x}$ & $ 0 < a < 1, \;\; a \in \mathbb{R}$ 
+  \body
+  $D_f = \mathbb{R}$ & \lang{de}{Definitionsbereich ist die Menge aller reellen Zahlen.}\lang{en}{The domain is the set of all real numbers.} \\
+  $W_f = \mathbb{R}^+$  &  \lang{de}{Wertemenge ist die Menge der positiven reellen Zahlen.}\lang{en}{The range is the set of all positive real numbers.} \\
+  $f(x) \neq 0$& \lang{de}{Die Funktionen haben keine Nullstellen.}\lang{en}{The functions have no zeros.}\\
+  $f(x_1) > f(x_2)$ \lang{de}{für}\lang{en}{for} $x_1 < x_2$&  \lang{de}{Die Funktionen sind streng monoton fallend.}\lang{en}{The functions are strictly monotonically decreasing.}\\
+  \lang{de}{Die Steigung von $f$ nimmt ständig zu.}\lang{en}{The slope is increasing} & \lang{de}{Der Graph beschreibt eine Linkskurve.}\lang{en}{The graph is concave up}  \\
+  $\lim_{x \to -\infty}f(x) = \infty, \ \lim_{x \to \infty}f(x) = 0$& \lang{de}{Die Funktionen streben von $\infty$ nach $0$.} \lang{en}{The functions go from $\infty$ to $0$.}\\
+  \end{table}
+ \end{tabs*}
+\end{example}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{a1}{1}{4}
+			\randint{a2}{1}{4}		
+			\function[calculate]{a}{a1/a2} % a=1 ausschließen???
+			\randint[Z]{xp}{-1}{1} % sollte -4 .. 4 sein
+			\function[calculate]{yp}{a^xp}
+		\end{variables}
+  		\lang{de}{
+			\text{Für welches $a>0$ geht der Graph der Exponentialfunktion $f(x)=a^x$ durch den Punkt $P=(\var{xp};\var{yp})$?\\
+			Für $a=$\ansref.}
+     }
+     \lang{en}{
+      \text{For which $a>0$ does the graph of the exponential function
+      $f(x)=a^x$ go through the point $P=(1;2)$?\\
+      $a=$\ansref.}
+     }
+		
+		\begin{answer}
+			\solution{a}
+		\end{answer}
+    \lang{de}{
+		\explanation{Wenn der Punkt $P=(\var{xp};\var{yp})$ auf dem Graphen liegt, gilt: $f(\var{xp})=\var{yp}$, 
+		also $a^\var{xp}=\var{yp}$.}
+    }
+    \lang{en}{
+    \explanation{If the point $P=(\var{xp};\var{yp})$ lies on the graph, then $f(\var{xp})=\var{yp}$,
+    and therefore $a^\var{xp}=\var{yp}$.}
+    }
+	\end{quickcheck}
+
+
+\lang{de}{Bei der Beschreibung von Prozessen in den Natur-, Ingenieur- und Wirtschaftswissenschaften durch
+mathematische Modelle ("`mathematische Modellbildung"') treten sehr oft Exponentialfunktionen auf, 
+insbesondere, um den zeitlichen Verlauf wiederzugeben. Die unabhängige Variable wird dann meist mit $t$
+für die Zeit (lateinisch tempus) bezeichnet.}
+\lang{en}{
+Exponential functions often arise when describing processes in the natural sciences,
+in engineering, or in economics through mathematical
+models, especially when describing the evolution of a process over time.
+In this context, the independent variable is usually
+denoted by $t$, standing for time.
+}
+
+\lang{de}{Im nächsten Kapitel werden wir das Wachstum eines Kapitals mit festem
+Zinssatz mit Hilfe von Exponentialfunktionen beschreiben und die Zinseszinsformel 
+   \begin{equation*}K(t) = K_{0}  \cdot  (1 + \frac{p}{100} )^{t}
+   \end{equation*}
+   erhalten. }
+\lang{en}{
+In the next chapter, we will model the growth of
+a sum of money at a fixed interest rate with
+exponential functions and obtain the formula
+    \begin{equation*}K(t) = K_{0}  \cdot  (1 + \frac{p}{100} )^{t}
+   \end{equation*}
+for compound interest.
+}
+
+\lang{de}{Um Exponentialgleichungen wie z.\,B. $3^x = 81$ lösen zu können, brauchen wir noch \emph{\ref[content_04_Funktionsbegriff][Umkehrfunktionen]{def:functionprops}} von
+Exponentialfunktionen. Dies sind die \emph{Logarithmusfunktionen}. Diese Umkehrfunktionen existieren, weil die 
+Exponentialfunktionen streng monoton wachsend oder fallend sind (und damit bijektiv auf den Wertebereich abbilden). 
+}
+\lang{en}{
+To solve exponential equations such as $3^x = 81$, we
+will also need the \emph{\ref[content_04_Funktionsbegriff][inverse functions]{def:functionprops}}
+of the exponential functions. These are the
+\emph{logarithms}. The inverse functions exist
+because exponential functions are either strictly
+monotonically increasing or decreasing (and therefore
+bijective maps onto their images).
+}
+
+\begin{definition}[\lang{de}{Logarithmus} \lang{en}{Logarithm}]
+  
+  	\label{ln} \lang{de}{Zu vorgegebener Basis $a>0$ und $u>0$ ist der 
+  	\notion{\emph{Logarithmus zur Basis $a$ von $u$}} die eindeutige Lösung der Gleichung $a^x = u$. Wir schreiben dafür $\log_a(u)$.}
+    \lang{en}{
+    For a given base $a>0$ and $u>0$, the
+    \emph{base $a$ logarithm of $u$} is the unique solution $x$ of the equation $a^x = u$.
+    We denote it by $\log_a(u)$.
+    }
+    \lang{de}{Wenn aus dem Kontext bekannt ist, welche Basis gemeint ist, oder wenn die Basis für die Aussage irrelevant ist, 
+    schreibt man auch einfach $\log(u)$ statt 
+    $\log_a(u)$. }
+    \lang{en}{
+    If the base is clear in context or if it is irrelevant
+    then we can simply write $\log(u)$ instead of $\log_a(u)$.
+    }
+    \lang{de}{
+    In der Praxis benutzen wir meistens die beiden folgenden Logarithmusfunktionen: \\  
+    {Den \emph{Logarithmus zur Basis $10$}} nennen wir \notion{Zehnerlogarithmus} oder \notion{dekadischen Logarithmus}
+     und schreiben dafür $\lg$.\\
+     {Den \emph{Logarithmus zur Basis $e$}} nennen wir \notion{natürlichen Logarithmus} und schreiben dafür $\ln$.
+    }
+    \lang{en}{
+    In practice, we mostly use one of the following
+    two logarithms:\\
+    {The \emph{base $10$ logarithm}} is called the \notion{common logarithm} or \notion{decimal logarithm}
+    and is written $\lg$.\\
+    {The \emph{base $e$ logarithm}} is called the \notion{natural logarithm}
+    and is written $\ln$.
+    }
+\end{definition}
+\lang{de}{
+Es gilt also 
+  	\begin{align*}	
+  		\ln(u) = s \quad \Leftrightarrow \quad e^s = u
+  	\end{align*}
+und Exponentialfunktion und Logarithmus heben sich gegenseitig auf:
+\begin{align*}
+ e^{\ln(x)}  = x, \quad \ln(e^x) = x.
+\end{align*}
+Dies gilt auch für Exponential- und Logarithmusfunktionen zu anderen Basen. 
+}
+\lang{en}{
+In other words,
+  	\begin{align*}	
+  		\ln(u) = s \quad \Leftrightarrow \quad e^s = u,
+  	\end{align*}
+and the exponential function and logarithm cancel each other out:
+\begin{align*}
+ e^{\ln(x)}  = x, \quad \ln(e^x) = x.
+\end{align*}
+This also applies to exponentials and logarithms with other bases.
+}
+
+\begin{center}
+\image{T601_Logarithms_B}
+\end{center}
+
+\lang{de}{
+In den folgenden Beispielen wird auf die Gleichungen jeweils eine Logarithmusfunktion angewandt.}
+\lang{en}{
+In the following examples, a logarithm is applied to each equation:
+}
+\begin{example}
+	\begin{eqnarray*}
+        e^{-1} = \frac{1}{e} &\Leftrightarrow & \ln\left(\frac{1}{e} \right) = -1 \\
+		10^4 = 10\;\!000 &\Leftrightarrow & \lg(10\;\!000) = 4\\
+		10^{-3} = \frac{1}{1\;\!000}  &\Leftrightarrow & \lg\left(\frac{1}{1\;\!000}\right) = -3\\
+		e^{-\frac{1}{2}} = \frac{1}{\sqrt{e}} &\Leftrightarrow & \ln\left(\frac{1}{\sqrt{e}}\right)= -\frac{1}{2} 
+	\end{eqnarray*}
+\end{example}
+
+
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{2}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{a}{1}{4}
+			\randint{k}{1}{2}
+			\function[calculate]{n}{k*a+1}
+			\function[calculate]{b}{10^a}
+			\function[calculate]{c}{a/n}
+		\end{variables}
+
+      \lang{de}{
+			\text{Bestimmen Sie $\lg(\sqrt[\var{n}]{\var{b}})$.\\ $\lg(\sqrt[\var{n}]{\var{b}})=$\ansref.}
+  		}
+      \lang{en}{
+      \text{Calculate $\lg(\sqrt[\var{n}]{\var{b}})$.\\ $\lg(\sqrt[\var{n}]{\var{b}})=$\ansref.}
+  		}
+		\begin{answer}
+			\solution{c}
+		\end{answer}
+    \lang{de}{
+		\explanation{Es ist $\sqrt[\var{n}]{\var{b}}=10^{\var{c}}$, und daher 
+		$\lg(\sqrt[\var{n}]{\var{b}})=\var{c}$.}
+    }
+    \lang{en}{
+    \explanation{We have $\sqrt[\var{n}]{\var{b}}=10^{\var{c}}$,
+    and therefore $\lg(\sqrt[\var{n}]{\var{b}})=\var{c}$.}
+    }
+	\end{quickcheck}
+	
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{n}{2}{4}
+			\randint{k}{1}{2}
+			\function[calculate]{a}{k*n+1}
+			\function[calculate]{b}{10^a}
+			\function[calculate]{c}{a/n}
+		\end{variables}
+		
+			\lang{de}{
+			\text{Bestimmen Sie $\lg(\sqrt[\var{n}]{\var{b}})$.\\ $\lg(\sqrt[\var{n}]{\var{b}})=$\ansref.}
+  		}
+      \lang{en}{
+      \text{Calculate $\lg(\sqrt[\var{n}]{\var{b}})$.\\ $\lg(\sqrt[\var{n}]{\var{b}})=$\ansref.}
+  		}
+    
+		\begin{answer}
+			\solution{c}
+		\end{answer}
+		\lang{de}{
+		\explanation{Es ist $\sqrt[\var{n}]{\var{b}}=10^{\var{c}}$, und daher 
+		$\lg(\sqrt[\var{n}]{\var{b}})=\var{c}$.}
+    }
+    \lang{en}{
+    \explanation{We have $\sqrt[\var{n}]{\var{b}}=10^{\var{c}}$,
+    and therefore $\lg(\sqrt[\var{n}]{\var{b}})=\var{c}$.}
+    }
+
+	\end{quickcheck}
+\end{quickcheckcontainer}
+	
+ 
+
+\lang{de}{Zu den bereits bekannten Potenzrechengesetzen erhalten wir passende 
+Logarithmusgesetze: }
+\lang{en}{
+We get logarithm rules from the already known
+exponent rules:
+}
+ 
+\begin{rule}[\lang{de}{Logarithmusgesetze}
+            \lang{en}{Logarithm rules}]
+	\lang{de}{
+    Für $u,v>0$, $t \in \R$ und $n \in \N$ gelten die folgenden Gleichheiten:}
+  \lang{en}{
+    The following equations are valid for $u,v>0$, $t \in \R$ and $n \in \N$:
+  }
+	\begin{align*}
+
+		\text{a)}&\quad\log(u \cdot v)&=& \log(u) + \log(v),\\
+		\text{b)}& \quad\log\left(\frac{u}{v}\right)& \ = \ & \log(u) - \log(v), \quad \text{insbesondere gilt}\\
+			     & \quad\log\left(\frac{1}{v}\right)& \ = \ & - \log(v),\\
+         \text{c)}& \quad\log(u^t) & \ = \ & t\, \log(u), \\
+		\text{d)} & \quad\log(\sqrt[n]{u}) & \ = \ & \frac{1}{n} \cdot \log(u).
+                 
+	\end{align*}	
+\end{rule}
+
+\begin{proof*}[\lang{de}{Beweis} \lang{en}{Proof}]
+\lang{de}{Die Beweise beruhen auf den bereits behandelten Potenzrechengesetzen. }
+\lang{en}{
+The proofs come from the rules for exponents discussed earlier.
+}
+\begin{showhide}
+\begin{tabs*}[\initialtab{0}\class{example}]
+		\tab{\lang{de}{Beweis a)}\lang{en}{Proof of a)}}
+        \lang{de}{Es gelten:}
+        \lang{en}{We have:}
+		\begin{align*}
+			&\log(u) &=& \ s \;\Leftrightarrow\; a^s = u& \\
+			\text{\lang{de}{und}\lang{en}{and}}\quad &&&&\\
+			&\log(v) &=& \ t \;\Leftrightarrow\; a^t = v, &\\
+			\text{\lang{de}{also}\lang{en}{so}}\quad &&&& \\
+			&\log(u \cdot v) &=& \log (a^s \cdot a^t) &\\
+			&&=& \log (a^{s + t}) = s+t& \\
+			& &=& \log(u) + \log(v).  &
+		\end{align*}
+		
+		\tab{\lang{de}{Beweis b)}\lang{en}{Proof of b)}}
+        \lang{de}{Es gelten:}
+        \lang{en}{We have:}
+		\begin{align*}
+			&\log(u) &=& \ s \;\Leftrightarrow\; a^s = u& \\
+			\text{\lang{de}{und}\lang{en}{and}}\quad &&&& \\
+			&\log(v) &=& \ t \;\Leftrightarrow\; a^t = v, &\\
+			\text{\lang{de}{also} \lang{en}{so}} \quad &&&& \\
+			&\log\left(\frac{u}{v}\right) &=& \log \left(\frac{a^s}{a^t}\right)& \\
+			&&=& \log (a^{s - t}) = s-t& \\
+			& &=& \log(u) - \log(v).  &
+		\end{align*}
+        	\tab{\lang{de}{Beweis c)}\lang{en}{Proof of c)}}
+            \lang{de}{Es gelten:}
+            \lang{en}{We have:}
+		\begin{align*}
+			\log(u) &=& s \quad\Leftrightarrow \quad u=a^s,\\
+			& u^t & = \left(a^s\right)^t = a^{s\cdot t},\\
+			\log\left(u^t\right) &=& s\cdot t = t\cdot \log(u).
+		\end{align*}
+		
+	\tab{\lang{de}{Beweis d)}\lang{en}{Proof of d)}}
+    \lang{de}{Es gilt }
+    \lang{en}{We have}
+    \[
+			\log (\sqrt[n]{u})  = \log (u^{\frac{1}{n}})
+    \]
+    \lang{de}{und aus c) folgt direkt }
+    \lang{en}{and c) immediately yields}
+    \[
+    \log ( \sqrt[n]{u}) = \frac{1}{n} \log(u)\,.
+    \]
+	\end{tabs*}
+    \end{showhide}
+\end{proof*}
+
+
+\lang{de}{Mit Hilfe der Logarithmusgesetze können Rechnungen häufig deutlich vereinfacht 
+werden, wie die folgenden Beispiele zeigen. }
+\lang{en}{
+Calculations can often be simpified considerably using
+the logarithm rules, as the following examples show.
+}
+
+\begin{example}[\lang{de}{Logarithmusgesetze} \lang{en}{Logarithm rules}]
+\begin{tabs*}[\initialtab{1}\class{example}]
+\tab{\lang{de}{Beispiel 1}\lang{en}{Example 1}}
+\begin{eqnarray*}
+\ln (2 e^5) 
+& =& \ln(2) + \ln(e^5) \\ 
+&= & \ln (2) + 5.
+\end{eqnarray*}
+\tab{\lang{de}{Beispiel 2}\lang{en}{Example 2}}
+\lang{de}{Für $-5<x<5$ gilt}
+\lang{en}{For $-5<x<5$,}
+\begin{eqnarray*}
+	\lg (5-x) + \lg(5+x) 
+	& =& \lg\left((5-x)\cdot(5+x)\right)\\
+	& =& \lg(25-x^2).
+\end{eqnarray*}
+\tab{\lang{de}{Beispiel 3}\lang{en}{Example 3}}
+ \begin{eqnarray*} 
+\lg \left( \frac{1}{1000^{3}}\right) &=& \lg (1000^{-3}) \\
+&=& -3 \lg (1000) \\
+&=& -3 \lg (10^3) \\
+&=& -3 \cdot 3 \\
+&=& -9.
+\end{eqnarray*}
+\tab{\lang{de}{Beispiel 4}\lang{en}{Example 4}}
+ \begin{eqnarray*} 
+ \ln \left( \sqrt{e}^{\;5} \right) &=& \ln \left( e^{\frac{5}{2}} \right) \\
+&=& \frac{5}{2}\ln (e)\\
+&=&   \frac{5}{2}.
+\end{eqnarray*}
+ \end{tabs*}
+ \end{example}
+
+ 
+ \begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{k}{2}{5}
+			\randint{m}{2}{5}
+			\randint{n}{2}{5}
+			\function[calculate]{k2}{k^2}
+			\function[calculate]{c}{2*n-m}
+		\end{variables}
+  		\lang{de}{
+			\text{Vereinfachen Sie den Ausdruck $2\cdot \ln(\var{k}e^\var{n})-\ln(\var{k2}e^\var{m})$.\\ 
+			$2\cdot \ln(\var{k}e^\var{n})-\ln(\var{k2}e^\var{m})=$\ansref.}
+  		}
+      \lang{en}{
+      \text{Simplify the expression $2\cdot \ln(\var{k}e^\var{n})-\ln(\var{k2}e^\var{m})$.\\ 
+      $2\cdot \ln(\var{k}e^\var{n})-\ln(\var{k2}e^\var{m})=$\ansref.}
+      }
+		\begin{answer}
+			\solution{c}
+		\end{answer}
+    \lang{de}{
+		\explanation{Mit obigen Rechenregeln ist \\
+		\begin{align*}
+		2\cdot \ln(\var{k}e^\var{n})-\ln(\var{k2}e^\var{m}) 
+		&=2\cdot \big( \ln(\var{k})+\ln(e^\var{n})\big)-\ln (\var{k}^2)-\ln(e^\var{m}) \\
+		&=2\cdot \ln(\var{k}) + 2\cdot \var{n} - 2\cdot \ln(\var{k}) - \var{m}\\
+		&=2\cdot \var{n} -\var{m} = \var{c}.
+		\end{align*}
+		}
+    }
+    \lang{en}{
+		\explanation{Using the above rules, \\
+		\begin{align*}
+		2\cdot \ln(\var{k}e^\var{n})-\ln(\var{k2}e^\var{m}) 
+		&=2\cdot \big( \ln(\var{k})+\ln(e^\var{n})\big)-\ln (\var{k}^2)-\ln(e^\var{m}) \\
+		&=2\cdot \ln(\var{k}) + 2\cdot \var{n} - 2\cdot \ln(\var{k}) - \var{m}\\
+		&=2\cdot \var{n} -\var{m} = \var{c}.
+		\end{align*}
+		}
+    }
+	\end{quickcheck}
+ 
+\lang{de}{Wie die folgende Regel zeigt, kann man Exponential- und Logarithmusfunktionen auch in andere 
+Basen umrechnen. Grundsätzlich braucht man also nicht für jede beliebige Basis die entsprechende 
+Logarithmusfunktion. Auf Taschenrechnern sind daher auch häufig nur der dekadische und der 
+natürliche Logarithmus umgesetzt. }
+\lang{en}{
+The following rule shows that exponential and logarithm
+functions can be converted to different bases.
+Therefore, we do not strictly need a different
+logarithm for every possible base.
+This is why calculators often only provide the
+common and natural logarithms.
+}
+
+\begin{rule}[\lang{de}{Umrechnung der Basis} \lang{en}{Change of base}]\label{change-base}
+\lang{de}{Exponential- und Logarithmusfunktionen zu einer Basis $a > 0$ können in jede andere Basis umgerechnet werden. 
+Für die Umrechnung in die Basis $e$ ergibt sich beispielhaft:}
+\lang{en}{
+The exponential and logarithm functions to a base $a > 0$ can be converted to
+any other base. For the change of base to $e$, for example,
+}
+\begin{align*}
+    a)  \ & \ \  e^x &= \ & a^{x\log_a(e)}, \\
+	b) \ & \ \ a^x &= \ & e^{x\ln(a)},\\
+	c) \ & \  \ln(x) &= \ & \frac{\log_a(x)}{\log_a(e)},\\
+	d) \ & \ \log_a(x) &= \ & \frac{\ln(x)}{\ln(a)}.\\
+\end{align*}
+\lang{de}{In Fall $c)$ und $d)$ muss $x>0$ gelten, damit die Logarithmen definiert sind.
+}
+\lang{en}{
+In cases $c)$ and $d)$, we need $x > 0$ so that the
+logarithms are defined.
+}
+\end{rule}
+ 
+ \begin{proof*}
+ \begin{tabs*}[\initialtab{0}\class{example}]
+\tab{\lang{de}{Beweis a) und b)}
+\lang{en}{Proof of a) and b)}}
+\lang{de}{Nach den Logarithmus- und Potenzrechengesetzen gilt}
+\lang{en}{The rules for logarithms and exponents yield}
+\begin{align*}
+ e^x = a^{\log_a(e^x)} = a^{x\log_a(e)}
+\end{align*}
+\lang{de}{sowie umgekehrt}
+\lang{en}{and conversely}
+\begin{align*}
+ a^x = e^{\ln(a^x)} = e^{x\ln(a)}.
+\end{align*}
+
+\tab{\lang{de}{Beweis c) und d)}
+\lang{en}{Proof of c) and d)}}
+\lang{de}{Nach den Logarithmus- und Potenzrechengesetzen gilt}
+\lang{en}{The rules for logarithms and exponents yield}
+\begin{align*}
+\log_a(x) = \log_a(e^{\ln(x)}) = \ln(x) \cdot \log_a(e).
+\end{align*}
+\lang{de}{Wenn wir beide Seiten durch $\log_a(e)$ teilen, erhalten wir}
+\lang{en}{After dividing both sides by $\log_a(e)$, we obtain}
+\begin{align*}
+\ln(x) = \frac{\log_a(x)}{\log_a(e)}.
+\end{align*}
+\lang{de}{Genau so folgt}
+\lang{en}{Similarly,}
+\begin{align*}
+\ln(x) = \ln(a^{\log_a(x)}) = \log_a(x) \cdot \ln(a).
+\end{align*}
+\lang{de}{Wenn wir beide Seiten durch $\ln(a)$ teilen, erhalten wir}
+\lang{en}{After dividing both sides by $\ln(a)$, we obtain}
+\begin{align*}
+\log_a(x) = \frac{\ln(x)}{\ln(a)}.
+\end{align*}
+\end{tabs*}
+ \end{proof*}
+
+
+\lang{de}{Alle Logarithmusfunktionen haben dieselbe Nullstelle $x=1$, denn $a^0=1$ für jede Basis $a>0$.
+In der Praxis benutzt man lediglich die Funktionen $\lg$ und $\ln$. Die wichtigsten 
+Eigenschaften sind in der folgenden Tabelle festgehalten.}
+\lang{en}{
+All logarithms have the same zero $x=1$, because $a^0=1$ for every base $a>0$.
+In practice, one only uses the function $\lg$ and $\ln$.
+Their most important properties are listed in the table below.
+}
+
+
+  \begin{table}
+  \head
+  $f(x) = \lg (x)$  \lang{de}{oder} \lang{en}{or} $f(x) = \ln (x)$  & $ $ 
+  \body
+  $D_f = \mathbb{R}^+$ & \lang{de}{Definitionsbereich ist die Menge der positiven Zahlen.}\lang{en}{The domain is the set of all positive numbers.} \\
+  $W_f = \mathbb{R}$  &  \lang{de}{Wertemenge ist die Menge der reellen Zahlen.}\lang{en}{The range is the set of all real numbers.}  \\
+  $f(1) = 0$& $x=1$ \lang{de}{ist die einzige Nullstelle.}\lang{en}{is the only zero.}\\
+  $f(x_1) < f(x_2)\,$ \lang{de}{für}\lang{en}{for} $x_1 < x_2$&  \lang{de}{Die Funktion ist streng monoton wachsend.}\lang{en}{The functions are strictly monotonically increasing.}\\
+  \lang{de}{Die Steigung von $f$ nimmt ständig ab.}\lang{en}{The slope is decreasing.} & \lang{de}{Der Graph beschreibt eine Rechtskurve.}\lang{en}{The graph is concave down.} \\
+  \lang{de}{für}\lang{en}{for} $ x \rightarrow 0$ \lang{de}{gilt}\lang{en}{,} $\;f(x) \rightarrow -\infty$ & \lang{de}{y-Achse ist Asymptote.}\lang{en}{The y-axis is an asymptote.}   
+  \end{table}
+
+ \lang{de}{Die Rechenregeln für Logarithmen und für Potenzen
+helfen auch, Exponential- und Logarithmusgleichungen umzuformen und zu lösen. Die Anwendung von 
+Exponentialfunktion oder Logarithmus ist eine gültige Äquivalenzumformung. 
+}
+\lang{en}{
+The rules for logarithms and exponents are also useful
+for rearranging and solving exponential and logarithm equalities.
+Taking exponentials or logarithms is an equivalence.
+}
+
+
+\begin{example}[
+\lang{de}{Exponential- und Logarithmusgleichungen}
+\lang{en}{Exponential and logarithm equations}
+]
+ \begin{tabs*}[\initialtab{1}\class{example}] 
+ \tab{\lang{de}{Beispiel 1} \lang{en}{Example 1}}
+ \begin{eqnarray*}
+ e^{2x + 3} = 4 &\Leftrightarrow& \ln ( e^{2x + 3}) = \ln(4) \\
+ &\Leftrightarrow& 2x + 3 = \ln(4) \\
+  &\Leftrightarrow& x = \frac{1}{2} (\ln(4) -3 ).
+ \end{eqnarray*}
+  \tab{\lang{de}{Beispiel 2} \lang{en}{Example 2}}
+ \begin{eqnarray*}
+ \left( 2^{3 - x} \right)^{2-x} = 1  &\Leftrightarrow& 2^{(3-x)(2-x)} = 1 \\
+ &\Leftrightarrow& \ln \left(2^{(3-x)(2-x)}\right) = \ln (1) \\
+ &\Leftrightarrow& (3-x)(2-x)\ln(2)=0 \\
+ &\Leftrightarrow& x = 3\;\;\; \text{\lang{de}{oder}\lang{en}{or}} \;\;\; x = 2.
+ \end{eqnarray*}
+  	\tab{\lang{de}{Beispiel 3}\lang{en}{Example 3}}
+	 	\lang{de}{Für $x>-2$:}\lang{en}{For $x>-2$:} 
+	 	\begin{eqnarray*}
+	 	\ln \frac{1}{2+x} = 0 &\Leftrightarrow& \text{e}^{ \ln \frac{1}{2+x}} = \text{e}^0 \\
+	 								    &\Leftrightarrow& \frac{1}{2+x} = 1 \\
+	 									&\Leftrightarrow& 2 + x = 1 \\ 
+	 									&\Leftrightarrow& x = -1.\\
+	 	\end{eqnarray*}
+	 	
+ 	\tab{\lang{de}{Beispiel 4}\lang{en}{Example 4}}
+ 		\lang{de}{Für $x>0$:}\lang{en}{For $x>0$:} 
+		\begin{eqnarray*}
+			\lg (x^3) + 2 \lg (x^2) = 21  
+			&\Leftrightarrow& \lg (x^3) +  \lg \left((x^2)^2\right) = 21\\
+			&\Leftrightarrow& \lg (x^3\cdot x^4) = 21\\
+			&\Leftrightarrow& \lg (x^7) = 21\\
+			&\Leftrightarrow& 10^{ \lg (x^7)} = 10^{21}\\ 
+			&\Leftrightarrow& x^7 = 10^{21}\\
+			&\Leftrightarrow& \sqrt[7]{x^7} = \sqrt[7]{10^{21}}\\
+			&\Leftrightarrow& x = 10^{\frac{21}{7}}\\
+			&\Leftrightarrow& x = 10^{3}.
+		\end{eqnarray*}
+ \end{tabs*}
+ \end{example}
+ 
+
+
+\begin{quickcheck}
+		\field{real}
+		\displayprecision{2}
+ 		\correctorprecision{2}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{c}{-2}{4}
+			\randint[Z]{k}{-3}{3}
+		    \function[normalize]{f}{x-k}
+			\function[calculate]{ls}{k+10^c}
+		\end{variables}
+
+      \lang{de}{
+			\text{Bestimmen Sie die Lösung der Gleichung $\lg(\var{f})=\var{c}$.\\ Die Lösung ist \ansref.}
+      }
+      \lang{en}{
+      \text{Find the solution of the equation $\lg(\var{f})=\var{c}$.\\ The solution is \ansref.}
+      }
+		\begin{answer}
+			\solution{ls}
+		\end{answer}
+    \lang{de}{
+		\explanation{Umformen ergibt:
+		\begin{align*}
+			& \lg(\var{f}) &=\var{c} &\quad &\\
+			\Leftrightarrow \ & \var{f} & =10^\var{c}  &\quad & (\text{und }\var{f}>0) \\
+			\Leftrightarrow \  & x & =\var{k}+ 10^\var{c}= \var{ls}.&&
+		\end{align*} }
+    }
+    \lang{en}{
+    \explanation{After rearranging:
+    \begin{align*}
+			& \lg(\var{f}) &=\var{c} &\quad &\\
+			\Leftrightarrow \ & \var{f} & =10^\var{c}  &\quad & (\text{and }\var{f}>0) \\
+			\Leftrightarrow \  & x & =\var{k}+ 10^\var{c}= \var{ls}.&&
+		\end{align*} }
+    }
+	\end{quickcheck}
+
+
+
+
+\section{\lang{de}{Wurzelfunktion} \lang{en}{Radical functions}}
+\lang{de}{Mit Hilfe von Wurzelfunktionen lassen sich die Potenzfunktionen $x^n$ rückgängig machen, denn es handelt sich 
+um die Umkehrfunktionen von $f(x) = x^n$. Diese sind im Allgemeinen  nicht für negative Werte definiert. 
+}
+\lang{en}{
+Radical functions are useful when inverting the function
+$f(x) = x^n.$
+In general, radicals are not defined for negative arguments. 
+}
+
+\begin{definition}
+\lang{de}{Für $n \in \N$ ist die $n$-te Wurzelfunktion gegeben durch }
+\lang{en}{For $n \in \N$, the $n$-th root function is defined by}
+\[ f: [0,\infty)\to \R, \ f(x) = \sqrt[n]{x} = x^{\frac{1}{n}}. \]
+%\floatright{\href{https://www.hm-kompakt.de/video?watch=150}{\image[75]{00_Videobutton_schwarz}}}\\\\
+\end{definition}
+
+\lang{de}{Der maximale Definitionsbereich der $n$-ten Wurzelfunktion ist also die Menge der nicht negativen 
+reellen Zahlen $[0,\infty)$, die Wertemenge ist ebenso $[0,\infty)$.
+}
+\lang{en}{
+The maximal domain of the $n$-th root function is the set
+of nonnegative real numbers, $[0, \infty)$, and the
+range is also $[0, \infty)$.
+}
+
+\lang{de}{Da die $n$-te Wurzelfunktion die reelle Umkehrfunktion ist, erhält man ihren Funktionsgraphen, indem man
+den Graphen der Potenzfunktion $f:[0,\infty)\to \R, x\mapsto x^n$ an der Winkelhalbierenden $y=x$
+spiegelt.}
+\lang{en}{
+Since the $n$-th root is an inverse function,
+its graph is obtained by reflecting the graph of the
+power function $f:[0,\infty)\to \R,\; x \mapsto x^n$
+across the diagonal $y=x$.
+}
+
+	\begin{genericGWTVisualization}[550][1000]{mathlet1}
+		\begin{variables}		
+			\parametricFunction{p1}{real}{t, t, 0.01, 3, 1000}
+			\parametricFunction{p2}{real}{t, t^2, 0.01, 3, 1000}
+			\parametricFunction{p3}{real}{t, t^3, 0.01, 3, 1000}
+			\parametricFunction{p4}{real}{t, t^4, 0.01, 3, 1000}
+			\parametricFunction{f2}{real}{t^2, t, 0.01, 3, 1000}
+			\parametricFunction{f3}{real}{t^3, t, 0.01, 3, 1000}
+			\parametricFunction{f4}{real}{t^4, t, 0.01, 3, 1000}
+		\end{variables}
+		\color[0.5]{p1}{GRAY}
+ 		\color[0.1]{p2}{#0066CC}
+ 		\color[0.1]{p3}{#00CC00}
+  		\color[0.1]{p4}{#CC6600}
+		\color{f2}{#0066CC}
+		\color{f3}{#00CC00}
+		\color{f4}{#CC6600}
+
+
+		\begin{canvas}
+			\plotSize{450}
+			\plotLeft{-1}
+			\plotRight{5}
+			\plot[coordinateSystem]{p1,p2,p3,p4,f2,f3,f4}
+		\end{canvas}
+    \lang{de}{
+		\text{Hier sehen Sie die Graphen der
+		Wurzelfunktionen $\textcolor{#0066CC}{f_2(x)=\sqrt{x}}$,
+		$\textcolor{#00CC00}{f_3(x)=\sqrt[3]{x}}$ und $\textcolor{#CC6600}{f_4(x)=\sqrt[4]{x}}$, sowie die 
+		zugehörenden Potenzfunktionen $\textcolor{#0066CC}{x^2}$, $\textcolor{#00CC00}{x^3}$ und 
+		$\textcolor{#CC6600}{x^4}$ im Bereich $x\geq 0$.
+		}
+    }
+    \lang{en}{
+    These are the graphs of the radical functions
+    $\textcolor{#0066CC}{f_2(x)=\sqrt{x}}$,
+    $\textcolor{#00CC00}{f_3(x)=\sqrt[3]{x}}$ and
+    $\textcolor{#CC6600}{f_4(x)=\sqrt[4]{x}}$,
+    as well as the associated power functions
+    $\textcolor{#0066CC}{x^2}$,
+    $\textcolor{#00CC00}{x^3}$ and
+    $\textcolor{#CC6600}{x^4}$ on the domain $x\geq 0$.
+    }
+	    	\end{genericGWTVisualization}
+
+\begin{example}
+\lang{de}{Wir berechnen den Definitionsbereich einer Wurzelfunktion: Die Funktion $f$ mit $f(x) = \sqrt{x^2 - 4}$ ist nur definiert, wenn $x^2 - 4 \geq 0$ gilt. Dies ist 
+der Fall für $x\geq 4$ oder $x \leq -4$. Insgesamt folgt $D_f = (-\infty; -4] \cup [4; \infty)$. }
+\lang{en}{
+Let us find the domain of a radical function.
+The function $f$ with $f(x)=\sqrt{x^2 - 4}$ is only defined
+when $x^2 - 4 \ge 0$. This is the case if $x \ge 4$
+or $x \le -4$. So $D_f = (-\infty, -4] \cup [4, \infty)$.
+}
+\end{example}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{b}{1}{5}
+		    \function[calculate]{a2}{b^2}
+		    \function[calculate]{a}{-b}
+		\end{variables}
+      \lang{de}{
+			\text{Der maximale Definitionsbereich der Funktion $f(x)=\sqrt{\var{a2}-x^2}$ ist\\
+			$D_f=\{ x\in \R \,|\, $\ansref$\leq x\leq $\ansref $\}$.}
+      }
+      \lang{en}{
+      \text{The maximal domain of the function $f(x)=\sqrt{\var{a2}-x^2}$ is\\
+      $D_f=\{ x\in \R \,|\, $\ansref$\leq x\leq $\ansref $\}$.}
+      }
+		\begin{answer}
+			\solution{a}
+		\end{answer}
+		\begin{answer}
+			\solution{b}
+		\end{answer}
+    \lang{de}{
+		\explanation{Der maximale Definitionsbereich besteht aus den Werten von $x$, für die der Ausdruck
+		definiert ist, für die also $\var{a2}-x^2\geq 0$ gilt.}
+    }
+    \lang{en}{
+    \explanation{The maximal domain consists of all values of $x$ for which
+    the expression is defined, i.e. for which $\var{a2}-x^2\geq 0$.}
+    }
+	\end{quickcheck}
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{a}{1}{5}
+			\randint[Z]{b}{1}{5}
+		    \function[calculate]{na}{-a}
+		\end{variables}
+      \lang{de}{
+			\text{Der maximale Definitionsbereich der Funktion $f(x)=\sqrt{x+\var{a}}-\sqrt{\var{b}-x}$ ist\\
+			$D_f=\{ x\in \R \,|\, $\ansref$\leq x\leq $\ansref $\}$.}
+      }
+      \lang{en}{
+      \text{The maximal domain of the function $f(x)=\sqrt{x+\var{a}}-\sqrt{\var{b}-x}$ is\\
+      $D_f=\{ x\in \R \,|\, $\ansref$\leq x\leq $\ansref $\}$.}
+      }
+		\begin{answer}
+			\solution{na}
+		\end{answer}
+		\begin{answer}
+			\solution{b}
+		\end{answer}
+    \lang{de}{
+		\explanation{Der maximale Definitionsbereich besteht aus den Werten von $x$, für die der gesamte Ausdruck
+		definiert ist, für die also $x+\var{a}\geq 0$ ist und $\var{b}-x\geq 0$ ist.}
+    }
+    \lang{en}{
+    \explanation{The maximal domain consists of all values of $x$
+    at which the entire expression is defined, i.e.
+    for which $x+\var{a}\geq 0$ and $\var{b}-x\geq 0$.}
+    }
+	\end{quickcheck}
+
+
+\section{
+\lang{de}{Trigonometrische Funktionen}
+\lang{en}{Trigonometric functions}
+}
+
+\lang{de}{Periodische Vorgänge, die sich stets wiederholen, können häufig gut durch trigonometrische Funktionen wie Sinus und Kosinus 
+modelliert werden. Wir wiederholen kurz die Definition. 
+}
+\lang{en}{
+Periodic processes that continuously repeat can often
+be modeled well by trigonometric functions such as the
+sine and cosine. We will quickly review their definitions.
+}
+
+\begin{definition}[Sinus, Kosinus und Tangens] \label{def-trigFkt}
+\lang{de}{
+\textbf{Sinus}, \textbf{Kosinus} und \textbf{Tangens} ordnen einem Winkel im rechtwinkligen
+Dreieck die L"angenverh"altnisse der Katheten und Hypotenuse zu.
+F"ur die Definition betrachtet man zun"achst ein rechtwinkliges
+Dreieck $ABC$ wie in der Abbildung.} 
+\lang{en}{
+The \textbf{sine}, \textbf{cosine} and \textbf{tangent}
+of an angle in a right triangle describe the ratios
+between the lengths of the legs and the hypotenuse.
+To define them, consider a right triangle $ABC$
+as in the figure below.
+}
+
+\label{sin-cos-im-dreieck}
+\begin{figure}
+  \image{T601_Triangle_A}
+\caption{\lang{de}{Rechtwinkliges Dreieck $ABC$}\lang{en}{Right Triangle $ABC$}}
+\end{figure}
+
+\lang{de}{Man definiert dann \textbf{Sinus}, \textbf{Kosinus} und \textbf{Tangens} von
+$\alpha$ durch
+  \begin{eqnarray*}
+    \sin(\alpha) &:=& \frac{\text{L"ange der Gegenkathete von }\alpha}{\text{L"ange der Hypotenuse}}
+                 =  \frac{a}{c}, \\
+    \cos(\alpha) &:=& \frac{\text{L"ange der Ankathete von }\alpha}{\text{L"ange der Hypotenuse}}
+                 =  \frac{b}{c}, \\
+    \tan(\alpha) &:=& \frac{\text{L"ange der Gegenkathete von }\alpha}{\text{L"ange der Ankathete von }\alpha}
+                 =  \frac{a}{b} = \frac{\sin(\alpha)}{\cos(\alpha)}.
+  \end{eqnarray*}
+}
+
+\lang{en}{The \textbf{sine}, \textbf{cosine} and \textbf{tangent} of
+$\alpha$ are then defined as
+  \begin{eqnarray*}
+    \sin(\alpha) &:=& \frac{\text{length of opposite side}}{\text{length of hypotenuse}}
+                 =  \frac{a}{c}, \\
+    \cos(\alpha) &:=& \frac{\text{length of adjacent side}}{\text{length of hypotenuse}}
+                 =  \frac{b}{c}, \\
+    \tan(\alpha) &:=& \frac{\text{length of opposite side}}{\text{length of adjacent side}}
+                 =  \frac{a}{b} = \frac{\sin(\alpha)}{\cos(\alpha)}.
+  \end{eqnarray*}
+}
+\end{definition}
+
+
+\lang{de}{Die Werte
+$\sin(\alpha)$, $\cos(\alpha)$ und $\tan(\alpha)$ hängen nicht von der Gr"o"se des Dreiecks
+ab, sondern nur von der Winkelgr"o"se von $\alpha$.}
+\lang{en}{
+The values of $\sin(\alpha)$, $\cos(\alpha)$ and $\tan(\alpha)$
+depend only on the size of the angle $\alpha$,
+not on the size of the triangle.
+}
+
+\lang{de}{Wenn $\alpha$ kein Winkel in Grad ist, sondern eine reelle Zahl (\glqq in Bogenmaß\grqq),
+müssen wir zwischen Grad- und Bogenmaß umrechnen:}
+\lang{en}{
+If $\alpha$ is not given as an angle measured in degrees but instead
+as a real number ("in radians")
+then we have to convert between degrees and radians:
+}
+
+\lang{de}{
+  \[ \text{Wert in Bogenma"s} = \frac{\text{Wert in Gradma"s}}{360^\circ}\cdot 2\pi \] 
+und umkehrt
+    \[ \text{Wert in Gradma"s} = \frac{\text{Wert in Bogenma"s}}{2\pi}\cdot
+  360^\circ .
+  \]
+}
+\lang{en}{
+\[ \text{Size in radians} = \frac{\text{Size in degrees}}{360^\circ}\cdot 2\pi \] 
+and conversely
+\[ \text{Size in degrees} = \frac{\text{Size in radians}}{2\pi}\cdot
+  360^\circ .
+  \]
+}
+
+\lang{de}{Auf diese Weise ist $\sin(x)$ oder $\cos(x)$ für reelle Zahlen $x$ definiert. Dadurch können wir 
+Sinus und Kosinus auch als reelle Funktionen auffassen.}
+\lang{en}{
+$\sin(x)$ and $\cos(x)$ are defined
+in this way for arbitrary real numbers $x$. We can therefore view sine and
+cosine as real functions.
+}
+
+\\
+\begin{center}
+\image{T601_SineCosine_B}
+\end{center}
+\\
+\lang{de}{Sinus und Kosinus haben die folgenden Eigenschaften:}
+\lang{en}{
+The sine and cosine functions have the following properties:
+}
+\begin{rule}
+\begin{itemize}
+\item \lang{de}{Der Definitionsbereich von Sinus und Kosinus ist $D_{\sin}=D_{\cos}=\R$ und die 
+Wertemenge ist das Intervall $W_{\sin}=W_{\cos}=[-1 ; 1]$.
+}
+\lang{en}{
+The domain of sine and cosine is $D_{\sin}=D_{\cos}=\R$
+and the range is the interval $W_{\sin}=W_{\cos}=[-1 ; 1]$.
+}
+
+\item \lang{de}{Sinus und Kosinus sind periodisch mit Periodenlänge $2\pi$, d.\,h.}
+\lang{en}{Sine and cosine are periodic with a period of length $2\pi$, i.e.}
+\begin{eqnarray*}
+\sin(x + 2 \pi) &= &\sin(x)\, ,\\
+\cos(x + 2 \pi) &= &\cos(x).
+\end{eqnarray*}
+
+\item \lang{de}{Sinus und Kosinus unterscheiden sich nur um eine Verschiebung um $\frac{\pi}{2}$, d.\,h. für alle $x \in \R$ gilt}
+\lang{en}{
+Sine and cosine differ only by an offset of $\frac{\pi}{2}$; that is, for all $x \in \R$,
+}
+\[
+\sin(x+\frac{\pi}{2})=\cos(x).
+\]
+
+
+\item \lang{de}{Für $k \in \mathbb{Z}$ gilt}
+\lang{en}{For $k \in \mathbb{Z}$,}
+\[
+\sin(k \pi) =  0, \quad \cos\left(\frac{\pi}{2} + k\pi \right) = 0
+\]
+\lang{de}{und alle Nullstellen von Sinus und Kosinus sind von dieser Form. }
+\lang{en}{
+and every zero of sine or cosine is of this form.
+}
+
+
+\item \lang{de}{Für alle $x \in \R$ gilt}
+\lang{en}{For every $x \in \R$,}
+\[
+\sin(-x) =  -\sin(x), \quad \cos(-x) =  \cos(x).
+\]
+
+\end{itemize}
+\end{rule}
+
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{2}
+\begin{quickcheck}
+		\field{real}
+		\type{input.number}
+        
+		\begin{variables}
+			\randint[Z]{k1}{-2}{2}			
+			\function[calculate]{k2}{k1+3}
+			\function[calculate]{lb}{floor(k1*pi)}
+			\function[calculate]{ub}{floor(k2*pi)+1}
+			\function[normalize]{x1}{k1*pi}
+			\function[normalize]{x2}{(k1+1)*pi}
+			\function[normalize]{x3}{(k1+2)*pi}
+			\function[normalize]{x4}{k2*pi}
+		\end{variables}
+
+      \lang{de}{
+			\text{Welche Nullstellen hat die Funktion $\sin(x)$ im Intervall $[\var{lb};\var{ub}]$?
+				Die Nullstellen sind (in aufsteigender Reihenfolge):\\ 
+                $x_1=$\ansref,\\
+                $x_2=$\ansref,\\
+                $x_3=$\ansref,\\
+                $x_4=$\ansref.\\
+				(Geben Sie die Nullstellen als Vielfache von $\pi$ an durch Eingabe von z.\,B. $2*pi$).}
+      }
+      \lang{en}{
+      \text{What are the zeros of the function $\sin(x)$ in the interval $[\var{lb};\var{ub}]$?
+        The zeros (in increasing order) are: \\
+                $x_1=$\ansref,\\
+                $x_2=$\ansref,\\
+                $x_3=$\ansref,\\
+                $x_4=$\ansref.\\
+        (Give the zeros as multiples of $\pi$ by entering $2*pi$ (for example))}
+      }
+        \begin{answer}
+			\solution{x1}
+		\end{answer}
+		\begin{answer}
+			\solution{x2}
+		\end{answer}
+		\begin{answer}
+			\solution{x3}
+		\end{answer}
+		\begin{answer}
+			\solution{x4}
+		\end{answer}
+	\end{quickcheck}
+\begin{quickcheck}
+		\field{real}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{k1}{-2}{2}			
+			\function[calculate]{k2}{k1+4}
+			\function[calculate]{lb}{floor(k1*pi)}
+			\function[calculate]{ub}{floor(k2*pi)+1}
+			\function[normalize]{x1}{(k1+1/2)*pi}
+			\function[normalize]{x2}{(k1+3/2)*pi}
+			\function[normalize]{x3}{(k1+5/2)*pi}
+			\function[normalize]{x4}{(k1+7/2)*pi}
+		\end{variables}
+
+      \lang{de}{
+			\text{Welche Nullstellen hat die Funktion $\cos(x)$ im Intervall $[\var{lb};\var{ub}]$?
+				Die Nullstellen sind (in aufsteigender Reihenfolge):\\
+                $x_1=$\ansref,\\
+                $x_2=$\ansref,\\
+                $x_3=$\ansref,\\
+                $x_4=$\ansref.\\
+				(Geben Sie die Nullstellen als Vielfache von $\pi$ an durch Eingabe von z.\,B. $2*pi$).}
+      }
+      \lang{en}{
+      \text{What are the zeros of the function $\cos(x)$ in the interval $[\var{lb};\var{ub}]$?
+        The zeros (in increasing order) are: \\
+                $x_1=$\ansref,\\
+                $x_2=$\ansref,\\
+                $x_3=$\ansref,\\
+                $x_4=$\ansref.\\
+            (Enter the zeros as multiples of $\pi$ by entering $2*pi$ (for example))}
+      }
+		\begin{answer}
+			\solution{x1}
+		\end{answer}
+		\begin{answer}
+			\solution{x2}
+		\end{answer}
+		\begin{answer}
+			\solution{x3}
+		\end{answer}
+		\begin{answer}
+			\solution{x4}
+		\end{answer}
+	\end{quickcheck}
+\end{quickcheckcontainer}
+
+
+\end{visualizationwrapper}
+
+\end{content}
+

@@ -1,0 +1,114 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A09: Abstand}
+    \lang{en}{input numbers}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A09: Abstand}}
+\lang{en}{\title{Problem 9}}
+
+\begin{block}[annotation]
+	Schnittpunkt zwischen zwei Geraden. 
+\end{block}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22820}{Ticket 22820}
+\end{block}
+
+
+
+\begin{problem}
+
+%Question 1 of 1 	
+\begin{question} 
+	\lang{de}{ 
+    	\text{
+        
+        Gegeben ist die Gerade\\
+        $g: \vec{x} = \begin{pmatrix} 4\\0\\\var{b}\end{pmatrix} + \lambda\cdot \begin{pmatrix} \var{r1}\\\var{r2}\\\var{r3}\end{pmatrix}$, $\lambda\in\R$\\\\\\
+                
+        1. Bestimmen Sie den Lotfußpunkt $L$ vom Punkt $P(\var{f};0;0)$ auf die Gerade $g$. Ermitteln Sie auch den Abstand des Punktes $P$ von der Geraden $g$.\\\\
+        \textit{Hinweis: Runden Sie Ihre Ergebnisse bei der Eingabe mit dem Taschenrechner auf zwei Nachkommastellen.}\\
+        Der Lotfußpunkt liegt bei $L=($\ansref$;$\ansref$;$\ansref$)$.\\ Der Abstand des Punktes $P$ von $g$ beträgt \ansref.\\\\\\
+        
+        2. Berechnen Sie ferner den Abstand der Geraden\\ 
+        $h:  \vec{x} = \begin{pmatrix} 4\\0\\0\end{pmatrix} + \mu\cdot \begin{pmatrix} \var{c}\\\var{c}\\\var{c}\end{pmatrix}$, $\mu\in\R$\\
+        von der Geraden $g$.\\\\
+        Der Abstand der beiden Geraden beträgt \ansref.        
+       }}
+    	 
+    \begin{variables}
+      \randint{a}{3}{6}
+      \randint{b}{2}{5}
+      \randint{c}{1}{3}
+      \randint{d}{3}{5}
+      \function[normalize]{r1}{2*c}
+      \function[normalize]{r2}{d*c}
+      \function[normalize]{r3}{d*c}
+      \randint{f}{3}{6}
+      
+      \function[normalize]{Sx}{4+2*c*l}
+      \function[normalize]{Sy}{d*c*l}
+      \function[normalize]{Sz}{b+d*c*l}
+      
+      \function[normalize]{l}{(2*c*f-8*c-b*c*d)/(4*c*c+2*d*d*c*c)}
+      \function[normalize]{abstand1}{sqrt((Sx-f)^2+(Sy)^2+(Sz)^2)}
+      
+      \function[normalize]{abstand2}{(b*d*c*c-2*b*c*c)/(sqrt(2*(2*c*c-d*c*c)^2))}
+      
+	\end{variables}
+	\type{input.number}
+    \field{real}
+    
+    \begin{answer}
+		\solution{Sx}
+        \explanation[edited]{Man kann eine Hilfsebene (in Normalen-/Koordinatenform) durch den Punkt $P$ aufstellen, deren Normalenvektor dem Richtungsvektor der Geraden $g$
+        entspricht. In die Koordinatenform-Gleichung setzt man die Gerade $g$ ein und ermittelt die Lösung $\lambda$ der Gleichung. $\lambda$ wiederum in die Gerade $g$
+        eingesetzt liefert den Lotfußpunkt $L$.}
+	\end{answer}
+    \begin{answer}
+		\solution{Sy}
+	\end{answer}
+    \begin{answer}
+		\solution{Sz}
+	\end{answer}
+
+    \begin{answer}
+		\solution{abstand1}
+        \explanation[edited]{Man erhält den Abstand des Punktes $P$ von der Geraden $g$ durch den Abstand von $P$ zum ermittelten Lotfußpunkt $L$.}
+	\end{answer}
+    
+    \begin{answer}
+		\solution{abstand2}
+        \explanation[edited]{Sind $g= \vec{p} + r \vec{v}, r \in \mathbb{R},$ und  $h= \vec{q} + s \vec{w},s \in \mathbb{R},$ 
+zwei Geraden im $\mathbb{R}^3$, die nicht parallel sind, und $\vec{n}$ ein Vektor, der zu beiden Geraden orthogonal ist, 
+so lässt sich der Abstand von $g$ und $h$ berechnen durch\\
+
+$d(g,h)= \frac{\left| (\vec{q}-\vec{p})\bullet \vec{n} \right|}{\|\vec{n}\|}$.}
+	\end{answer}
+
+\end{question}
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

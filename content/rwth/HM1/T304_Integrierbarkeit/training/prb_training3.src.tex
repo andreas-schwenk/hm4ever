@@ -1,0 +1,100 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A03: Zwischensumme}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A03: Zwischensumme}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/10587}{Ticket 10587}
+\end{block}
+
+\begin{problem}
+	%\randomquestionpool{}{}
+	
+%######################################################QUESTION_START	
+	%+++++++++++++++++++VARIABLES++++++++++++++++++++++
+		\begin{variables}
+			\randint[Z]{n}{2}{4}
+			\randint[Z]{a}{1}{4}
+			\randint[Z]{s}{1}{4}
+			\randint[Z]{c}{1}{4}
+			\randint[Z]{b}{5}{8}
+			\function[calculate]{dx}{(b-a)/n}
+			\function[calculate]{k1}{1- (n-3)(n-4)/2} %k1=0, falls n=2    und =1, falls n=3, 4
+			\function[calculate]{k2}{(n-2)(n-3)/2}   % k2=0, falls n=2, 3 und =1, falls n=4
+			\function[calculate]{a1}{a}
+			\function[calculate]{a2}{a+dx}
+			\function[calculate]{a3}{a2+k1*dx}
+			\function[calculate]{a4}{a3+k2*dx}
+			\function[expand, normalize]{f}{c/(x+s)}
+			\function[calculate]{f1}{c/(a1+s)}
+			\function[calculate]{f2}{c/(a2+s)}
+			\function[calculate]{f3}{k1*(c/(a3+s))}
+			\function[calculate]{f4}{k2*(c/(a4+s))}
+			\function[calculate,2]{S}{(f1+f2+f3+f4)*dx}
+			%\randadjustIf{}{}
+		\end{variables}
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+	\begin{question}	
+		\type{input.generic} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+		\field{rational} 
+%		\precision{2}
+	%+++++++++++++++++++TITLE++++++++++++++++++++++++++	
+	    \lang{de}{\text{Für die Funktion $f(x)=\var{f}$ auf dem Intervall $[\var{a};\var{b}]$
+soll eine Zwischensumme zur äquidistanten Zerlegung in $\var{n}$ Teilintervalle
+berechnet werden. Als Zwischenstellen für die Funktionswerte sollen die unteren Grenzen
+der Teilintervalle gewählt werden.}}
+	%+++++++++++++++++++ANSWERS++++++++++++++++++++++++    
+	    \begin{answer}
+		\type{input.number} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+	    	\text{Die Längen der Teilintervalle sind also sämtlich $\Delta x=$}
+			\solution{dx}
+	    \end{answer}    
+	    \begin{answer}
+	    	\type{input.finite-number-set}
+	    	\text{und die Zerlegungsstellen sind:}
+			\solution{a1,a2,a3,a4,b}
+            \explanation{Die Anfangsstelle $\var{a}$ und die letzte Stelle $\var{b}$ sind ebenfalls Zerlegungsstellen. Insgesamt gibt es
+            eine Zerlegungsstelle mehr als Teilintervalle.}
+	    \end{answer}  
+	\end{question}
+        
+	\begin{question}	
+	    	\type{input.number}
+            \field{real} 
+    		\precision{2}
+        \text{Damit ist die Zwischensumme $S$ (auf zwei Stellen nach dem Komma gerundet):\\ $S=$ \ansref}
+	    \begin{answer}
+        \explanation{Die Zwischensumme berechnet sich hier zu $\sum_{j=1}^{\var{n}} \Delta x f(x_j)$, wobei $x_j$ jeweils die untere Grenze des Teilintervalls ist.}
+	    	
+			\solution{S}
+	    \end{answer}    
+	\end{question}
+%######################################################QUESTION_END
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

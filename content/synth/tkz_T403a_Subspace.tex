@@ -1,0 +1,36 @@
+%This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)
+%https://creativecommons.org/licenses/by/4.0/legalcode
+\documentclass[rgb]{standalone}
+\usepackage{pgfplots}
+\usepackage{amsmath}
+\definecolor{myorange}{hsb}{0.0833, 1, 0.8}
+\definecolor{mygreen}{hsb}{0.3333, 1, 0.8}
+\definecolor{myblue}{hsb}{0.5833, 1, 0.8}
+\definecolor{mymagenta}{hsb}{0.8333, 1, 0.8}
+\begin{document}
+	\begin{tikzpicture}[font=\Large]
+		\begin{axis}[scale=1.5,hide axis,thick,view={30}{45}, xmin=-3,xmax=3.5, ymin=-3,ymax=3, zmin=-4, zmax=5]	
+			\draw[thick, dashed] (axis cs:0,0,-7) -- (axis cs:0,0,0);
+			\draw[thick, dashed, -latex] (axis cs:0,0,0) -- (axis cs:0,4,0);
+			\draw[fill, gray, opacity=0.4, draw= none] (axis cs:-3,3,0) -- (axis cs:3,3,0) -- (axis cs:3,0,0)   -- (axis cs:-3,0,0) --  cycle;
+			\draw[fill, mygreen, opacity=0.4, draw= none] (axis cs:-3,3,3) -- (axis cs:3,3,3) -- (axis cs:3,-3,-3)   -- (axis cs:-3,-3,-3) --  cycle;
+			\draw[fill, gray, opacity=0.4, draw= none] (axis cs:-3,0,0) -- (axis cs:3,0,0) -- (axis cs:3,-3,0)   -- (axis cs:-3,-3,0) --  cycle;
+			\draw[thick] (axis cs:0,-4,0) -- (axis cs:0,0,0);
+			\draw[thick, -latex] (axis cs:-4,0,0) -- (axis cs:4,0,0);
+			\draw[thick, -latex] (axis cs:0,0,0) -- (axis cs:0,0,9);
+			\draw[line width=2.5pt, myorange, -latex] (axis cs:0,0,0) -- (axis cs:1.5,0,0);
+			\draw[line width=2.5pt, myblue, -latex] (axis cs:0,0,0) -- (axis cs:1.5,1.5,1.5);	
+			\node[very thick, draw, circle,fill,inner sep=2] at (axis cs:0,0,0) {};	
+			\node[very thick, draw, circle,fill,inner sep=2] at (axis cs:1.5,0,0) {};	
+			\node[very thick, draw, circle,fill,inner sep=2] at (axis cs:1.5,1.5,1.5) {};	
+			\node at (axis cs:0.1,0,0.1) [anchor=south east] {$O$};
+			\node at (axis cs:1.5,1.5,1.5) [anchor=west] {$P$};
+			\node at (axis cs:1.5,0,0) [below=0.5mm] {$R$};
+			%\node at (axis cs:0,-2,-3.5) [mygreen, anchor=south] {$E:\begin{pmatrix}  x \\ y \\ z \end{pmatrix}=\lambda\cdot\overrightarrow{OP} + \mu\cdot\overrightarrow{OR}$};
+			\node at (axis cs:-2,0,5) [mygreen, anchor=south] {$E$};
+			\node at (axis cs:4.35,0,0) [anchor= center] {$x$};	
+			\node at (axis cs:0,4.35,0) [anchor= center] {$y$};	
+			\node at (axis cs:0,0,9.6) [anchor= center] {$z$};	
+		\end{axis}
+	\end{tikzpicture}
+\end{document}

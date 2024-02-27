@@ -1,0 +1,263 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A13: Maximierungsaufgabe}
+    \lang{en}{problem_13}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T106_Problem13_E.meta.xml}{T106_Problem13_E}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T106_Problem13_D.meta.xml}{T106_Problem13_D}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T106_Problem13_C.meta.xml}{T106_Problem13_C}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T106_Problem13_A.meta.xml}{T106_Problem13_A}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T106_Problem13_B.meta.xml}{T106_Problem13_B}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+
+\lang{de}{
+	\title{A13: Maximierungsaufgabe}
+}
+\lang{en}{
+	\title{Problem 13}
+}
+
+\begin{block}[annotation]
+      
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9478}{Ticket 9478}
+\end{block}
+ 
+
+\begin{problem}
+  	
+\randomquestionpool{1}{6}
+
+%Frage 1 von 6
+\begin{question}
+	\lang{de}{
+		\text{Es soll ein Rechteck mit den Seitenl\"{a}ngen $a$ und $b$ gebildet werden. 
+		Der Umfang $U$ soll dabei die feste L\"{a}nge $\var{u}$ haben. Welches ist der maximale Fl\"{a}cheninhalt $F$, der so gebildet werden kann? \\ 
+	        Runden Sie Ihr Ergebnis auf zwei Stellen hinter dem Komma!}
+	    \explanation{Der Fl\"{a}cheninhalt berechnet sich durch $F=a\cdot b$. Aus dem Umfang $U=2a+2b$ ergibt sich $b=\frac{U}{2}-a$, \\
+	    und damit 
+	    $F(a)=a(\frac{U}{2}-a)$. }
+	}
+	\lang{en}{
+		\text{A rectangle with sides $a$ and $b$ has a perimeter of $P=\var{u}$. What is the maximum area that the rectangle
+		can have while still having a perimeter of $\var{u}$?\\
+		Round your answer to two decimal places!}
+		\explanation{The area of a rectangle is $A=a\cdot b$. The formula for the perimeter is $P=2a+2b$, which solved for $b$ is:
+		$b=\frac{U}{2}-a$. Substiting this into the formula for the area gives: $A(a)=a(\frac{P}{2}-a)$.}
+	}
+    \begin{variables}
+	    \randint{u}{2}{6}
+   		\function{f}{u^2/16} 
+	\end{variables}
+	\type{input.number}
+    \displayprecision{2}
+	\correctorprecision[rounded]{2}
+	\begin{answer}
+		\lang{de}{\text{Der maximale Fl\"{a}cheninhalt $F$ ist:}}
+       	\lang{en}{\text{The maximum area $A$ is:}}
+		\solution{f}
+	\end{answer}			
+\end{question}
+
+%Frage 2 von 6
+\begin{question}
+	\lang{de}{
+		\text{\begin{figure}\image{T106_Problem13_A}\end{figure}
+		Es soll ein Rechteck konstruiert werden, das im ersten Quadranten liegt und am Achsenkreuz 
+		anliegt. Eine Ecke soll zudem auf dem Graphen der Funktion $f(x)=\frac{1}{x}$ liegen. Was ist der
+		geringste Umfang $U$, den ein solches Rechteck haben kann?
+		\\ Runden Sie Ihr Ergebnis auf zwei Stellen hinter dem Komma!}
+	    \explanation{Der Umfang $U$ berechnet sich zu $U=2x+\frac{2}{x}$.}
+	}
+	\lang{en}{
+		\text{\begin{figure}\image{T106_Problem13_A}\end{figure}
+		A rectangle with one corner at the origin and sides on the axes has one of its corners on the graph 
+		of the function $f(x)=\frac{1}{x}$. What is the smallest perimeter $P$ that such a rectangle can have?\\
+		Round your answer to two decimal places!}
+		\explanation{The perimeter of such a rectangle is $P=2x+\frac{2}{x}$.}
+	}
+	\begin{variables}
+		\number{n}{4}
+	\end{variables}
+		
+	\type{input.number}
+	\correctorprecision[rounded]{2}
+	\displayprecision{2}
+	\begin{answer}
+    	\lang{de}{\text{Der minimale Umfang $U$ ist:}}
+       	\lang{en}{\text{The minimal perimeter $P$ is:}}
+		\solution{n}
+	\end{answer}		
+\end{question}
+
+%Frage 3 von 6
+\begin{question}
+	\lang{de}{
+		\text{\begin{figure}\image{T106_Problem13_B}\end{figure}
+		Es soll ein rechteckiges Spielfeld mit den Seitenl\"{a}ngen $a$ und $b$ gebildet werden. An zwei gegen\"{u}berliegenden
+		Seiten des Spielfelds wird je ein Halbkreis angelegt, der nahtlos mit der Seite des Spielfeldes abschlie{\ss}t. 
+		Der Umfang $U$ soll die konstante Gr\"{o}{\ss}e 
+		$\var{v}$ haben.\\ 
+		Welches ist der maximale Fl\"{a}cheninhalt $F$, den das so
+		umschlossene rechteckige Spielfeld haben kann?\\ 
+	        Runden Sie Ihr Ergebnis auf zwei Stellen hinter dem Komma!}
+	    \explanation{Der Fl\"{a}cheninhalt berechnet sich durch $F=a\cdot b$. Sind die halbkreisf\"{o}rmigen Fl\"{a}chen an den Seiten der L\"{a}nge $a$
+	    angesetzt, so ergibt sich f\"{u}r den Umfang $U=2b+\pi a$. Damit ergibt sich \\ $b=\frac{U}{2}-\frac{\pi a}{2}$, und damit 
+	    $F(a)=a(\frac{U}{2}-\frac{\pi a}{2})$. }
+	}
+	\lang{en}{
+		\text{\begin{figure} \image{T106_Problem13_B}\end{figure}
+		A rectangular football field has side lengths $a$ and $b$. Two of the opposite sides have half circles drawn on them. The total perimeter $P$ of the rectangle  
+		plus the new half circles needs to be $\var{v}$. What is the maximum area $A$ of the rectangular part of the field if the total perimeter stays at a constant $\var{v}$?\\
+		Round your answer to two decimal places.}
+		\explanation{The area of the rectangle is $A=a\cdot b$. Two half circles have been added to the field to the sides of length $a$, hence the 
+		total perimeter of the new object is $P=2b+\pi a$. Solving for $b$ results in $b=\frac{P}{2}-\frac{\pi a}{2}$ and hence the area of the rectangular part of the field is
+		$A(a)=a(\frac{P}{2}-\frac{\pi a}{2})$.}
+	}
+	\begin{variables}	
+		\randint{v}{2}{8}	
+		\function{g}{v^2/(8*pi)} 
+	\end{variables}
+	\type{input.number}
+	\correctorprecision[rounded]{2}
+	\displayprecision{2}
+	\begin{answer}
+		\lang{de}{\text{Der maximale Fl\"{a}cheninhalt $F$ ist:}}
+   		\lang{en}{\text{The maximum area $A$ is:}}
+		\solution{g}
+	\end{answer}			
+\end{question}
+
+%Frage 4 von 6	 
+\begin{question}
+	\lang{de}{
+		\text{\begin{figure}\image{T106_Problem13_C}\end{figure}
+		Gegeben sei ein Halbkreis \"{u}ber der Seite $c$ der L\"{a}nge $\var{c}$.  Es soll ein Dreieck mit maximalem Fl\"{a}cheninhalt 
+		eingeschrieben werden. Ein solches Dreieck ist nach Satz des Thales stets rechtwinklig.
+		Welches ist der maximale Fl\"{a}cheninhalt $F$, den das eingeschriebene Dreieck \\
+		haben kann? \\ 
+		Runden Sie Ihr Ergebnis auf zwei Stellen hinter dem Komma!}
+	    \explanation{ Der Fl\"{a}cheninhalt bestimmt sich mit Hilfe des Satzes des Pythagoras. Hei{\ss}en die Katheten 
+	    des Dreiecks $a$ und $b$ und die Hypothenuse $c$, so gilt mit $F=\frac{a\cdot b}{2}$ und $a^2+b^2=c^2$, dass $F(a)=\frac{a\sqrt{c^2-a^2}}{2}$. }
+	}
+	\lang{en}{
+		\text{\begin{figure}\image{T106_Problem13_C}\end{figure}
+		A triangle has been inscribed inside a half circle with diameter $c=\var{c}$. By Thales' Theorem, this triangle
+		will always be a right triangle. What is the maximum area $A$ that such a triangle can have?\\
+		Round your answer to two decimal places!}
+		\explanation{The area can be calculated using the Pythagorean Theorem. If the legs of the triangle are $a$ and $b$ and 
+		the hypotenuse is $c$, then the area of the triangle is $A=\frac{a\cdot b}{2}$ and $a^2+b^2=c^2$, so that $A(a)=\frac{a\sqrt{c^2-a^2}}{2}$.} 
+	}
+	\begin{variables}	
+		\randint{c}{2}{8}	
+		\function{h}{c^2/4} 
+	\end{variables}
+	\type{input.number}
+	\correctorprecision[rounded]{2}
+	\displayprecision{2}
+	\begin{answer}
+    	\lang{de}{\text{Der maximale Fl\"{a}cheninhalt $F$ ist:}}
+       	\lang{en}{\text{The maximum area $A$ is:}}
+		\solution{h}
+	\end{answer}		
+\end{question}
+
+%Frage 5 von 6
+\begin{question}
+	\lang{de}{
+		\text{\begin{figure}\image{T106_Problem13_D}\end{figure}
+		Es soll eine Konservendose konstruiert werden. Sie soll das festgelegte Volumen $V=\var{l}$ und\\ eine m\"{o}glichst geringe 
+		Oberfl\"{a}che haben, um den Materialverbrauch zu minimieren. Welches ist die geringste Oberfl\"{a}che $F$, die eine Konservendose des Volumens $V$ haben kann?\\ 
+		Runden Sie Ihr Ergebnis auf zwei Stellen hinter dem Komma!}
+	    \explanation{Wir bezeichnen mit $r$ den Radius des Bodens bzw. Deckels der Dose und mit $h$ ihre H\"{o}he. 
+	    Dann bestimmt sich die Oberfl\"{a}che zu $F=2\pi r^2+ 2\pi rh$. Da das Volumen  $V=\pi r^2 h$ konstant ist, 
+	    ist $h=\frac{V}{\pi r^2}$. Dann ist $F(r)=2\pi r^2+ \frac{2 V}{ r}$.}
+	}
+	\lang{en}{
+		\text{\begin{figure}\image{T106_Problem13_D}\end{figure}
+		When constructing a cylindrical tin can, the goal is to hold the 
+		a fixed volume using the least amount of material possible. What is the smallest surface area $SA$ that such a cylinder can have while having a fixed volume $V=\var{l}$?
+		Round your answer to two decimal places!}
+		\explanation{Let $r$ be the radius of the cylinder's base (as well as the top) and let $h$ be its height.
+		The surface area of the cylinder is $SA=2\pi r^2 + 2\pi rh$. Because the volume $V$ is a constant $V=\pi r^2 h$,
+		$h=\frac{V}{\pi r^2}$. Substituting this result into the formula for the surface area results in $SA(r)=2\pi r^2 \frac{2 V}{ r}$.}
+	}
+	\begin{variables}	
+		\randint{d}{2}{6}	
+		\function{k}{6*d^2*pi^(1/3)} 
+		\function[calculate]{l}{2*d^3}		
+	\end{variables}
+		
+	\type{input.number}
+	\correctorprecision[rounded]{2}
+	\displayprecision{2}
+	\begin{answer}	
+    	\lang{de}{\text{Der minimale Fl\"{a}cheninhalt $F$ ist:}}
+       	\lang{en}{\text{The maximum surface area $SA$ is:}}
+		\solution{k}
+	\end{answer}		
+\end{question}
+
+%Frage 6 von 6
+\begin{question}
+	\lang{de}{
+		\text{\begin{figure}\image{T106_Problem13_E}\end{figure}
+		Es soll eine quadratische Pyramide der H\"{o}he $h$ \"{u}ber einer Grundfl\"{a}che der Seitenl\"{a}nge $a$ konstruiert werden. \\
+		Die Kanten von der Grundfl\"{a}che zur Spitze sollen die feste L\"{a}nge $L=\var{z}$ haben, $a$ sei variabel.\\
+		Wie gro{\ss} ist $h$, wenn das Volumen der Pyramide maximal ist? \\ Runden Sie Ihr Ergebnis auf zwei Stellen hinter dem Komma!\\
+		Bemerkung: das Volumen $V$ einer solchen Pyramide berechnet sich durch $V=\frac{1}{3}a^2h$.
+		}
+	    \explanation{Es sei $d$ die L\"{a}nge der Diagonalen der Grundfl\"{a}che. \\
+	    Nach Satz des Pythagoras ist $2a^2=d^2$ und $L^2=h^2+\frac{d^2}{4}$. Damit ist $L^2=h^2+\frac{a^2}{2}$, \\
+	    bzw. $a^2=2(L^2-h^2)$. Es folgt mit $V=\frac{1}{3}a^2h$ und $L=\var{z}$: $V=\frac{2}{3}\cdot \var{l}h-\frac{2\cdot h^3}{3}$.}
+	}
+	\lang{en}{
+		\text{\begin{figure}\image{T106_Problem13_E}\end{figure}
+		A square based pyramid has a base of side length $a$ and a height of $h$. In addition, the edge from the base to the 
+		apex has a fixed length of $L=\var{z}$ and $a$ is variable. What does $h$ need to be in order to make the pyramid have 
+		a maximum volume?\\
+		Round your answer to two decimal places!\\
+		Hint: the volume $V$ of such a pyramid is $V=\frac{1}{3}a^2h$.}
+		\explanation{Let $d$ be the length of the diagonal of the base. According to the Pythagorean Theorem, $2a^2=d^2$ and 
+		$L^2=h^2+\frac{d^2}{4}$, and hence $L^2=h^2+\frac{a^2}{2}$ as well as $a^2=2(L^2-h^2)$. Knowing that $V=\frac{1}{3}a^2h$ 
+		and $L=\var{z}$ gives: $V=\frac{2}{3}\cdot \var{l}h-\frac{2\cdot h^3}{3}$.}
+	}
+    \begin{variables}	
+		\randint{z}{2}{6}	
+		\function{m}{z/(3^(1/2))} 
+		\function[calculate]{l}{z^2}
+	\end{variables}
+	\type{input.number}
+	\correctorprecision[rounded]{2}
+	\displayprecision{2}
+	\begin{answer}
+		\text{$h=$}
+		\solution{m}
+	\end{answer}				
+\end{question}
+
+\end{problem}
+
+\embedmathlet{mathlet}
+\end{content}

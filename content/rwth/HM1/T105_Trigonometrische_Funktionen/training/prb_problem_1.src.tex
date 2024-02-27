@@ -1,0 +1,62 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A01: Geometrische Probleme}
+    \lang{en}{problem_1}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+
+\lang{de}{
+	\title{A01: Geometrische Probleme}
+}
+\lang{en}{
+	\title{Problem 1}
+}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9157}{Ticket 9157}
+\end{block}
+
+\begin{problem}
+ 	\begin{variables}
+      		\randint{a}{1}{10}
+      		\randint{b}{1}{10}
+      		\function[calculate]{z}{a^2+b^2}
+      		\function{zz}{sqrt(z)}
+     \end{variables}
+     \begin{question}
+     \explanation{Zur Lösung der Aufgabe kann der Satz des Pythagoras herangezogen werden.}
+    	\type{input.function}
+    	\field{real}
+		\lang{de}{\text{In einem rechtwinkligen Dreieck sind die Kathetenlängen $\var{a}$ cm und $\var{b}$ cm gegeben.
+Bestimmen Sie die Länge der Hypotenuse des Dreiecks (in cm). (Geben Sie für die Wurzel sqrt() ein.)}}
+		\begin{answer}
+		    \text{Länge der Hypothenuse in cm:}
+		    \solution{zz}
+		    \inputAsFunction{x}{ax} 
+            \checkFuncForZero{ax-zz}{-10}{10}{100}
+		\end{answer}
+     \end{question}
+ \end{problem}
+
+
+\embedmathlet{mathlet}
+\end{content}

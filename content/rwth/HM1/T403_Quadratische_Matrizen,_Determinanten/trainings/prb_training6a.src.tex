@@ -1,0 +1,203 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A07: Determinante}
+    \lang{en}{P07: The determinant}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21091}{Ticket 21091}
+\end{block}
+\begin{block}[annotation]
+
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A07: Determinante}}
+\lang{en}{\title{P07: The determinant}}
+
+
+\begin{problem}
+	%\randomquestionpool{}{}
+	
+		
+\begin{variables}
+% Einträge der (5x5)-Matrix:
+\randint[Z]{alpha}{-5}{5}%zentraler Eintrag inklusive VZ aus der Laplace-Entwicklung
+\function{minusalpha}{-alpha}
+\randint[Z]{a}{-2}{2}
+\randint{b}{1}{5}
+\randint[Z]{c}{-2}{2}
+\randint[Z]{d}{-2}{2}
+\randint[Z]{f}{-2}{2}
+\randint[Z]{g}{-2}{2}
+\randint[Z]{h}{-2}{2}
+\randint[Z]{j}{-2}{2}
+\randint{k}{-5}{-1}
+\randint[Z]{l}{-2}{2}
+\randint[Z]{m}{-2}{2}
+\randint[Z]{p}{-2}{2}
+\randint[Z]{r}{-2}{2}
+\randint[Z]{q}{-2}{2}
+%Untermatrizen der (4x4)-Matrix
+\matrix{BB1}{f&g&h\\j&l&m\\p&r&q}
+\matrix{BB2}{a&c&d\\f&g&h\\p&r&q}
+%Unterdeterminanten der (4x4)-Matrix:
+\function{b1}{j*g*q+l*h*p+m*f*r-p*g*m-r*h*j-q*f*l}
+\function{B1}{b1}
+\function{b2}{a*g*q+c*h*p+d*f*r-p*g*d-r*h*a-q*f*c}
+\function{B2}{b2}
+% Determinante der (4x4)-Matrix
+\function{a1}{b*b1-k*b2}
+\function{A1}{b*B1-k*B2}
+% Determinante der (5x5)-Matrix:
+\function{det}{alpha*a1}
+\function{Det}{alpha*A1}
+%(5x5)-Matrix: 
+\matrix{AA}{
+a & b & 0 & c & d \\f & 0 & 0 & g & h \\ j & k& 0 & l & m \\ 0 & 0 & minusalpha & 0 & 0 \\p & 0 & 0 & r & q
+}
+\matrix{AA43}{
+a&b&c&d\\f&0&g&h\\j&k&l&m\\p&0&r&q
+}
+		\end{variables}
+\begin{question}		
+		\type{input.number}
+        \field{rational}
+		\correctorprecision{3}
+		\displayprecision{3}
+		\lang{de}{
+	    \text{Berechnen Sie die Determinante der $(5\times 5)$-Matrix $A=\var{AA}$ durch
+Laplace-Entwicklung nach der \emph{dritten} Spalte.
+\\
+ Das führt zunächst auf $\det(A)=($ \ansref $ )\cdot \det(A_{43})$, wobei $A_{43}=$ \ansref.
+ \\
+ Entwickeln Sie nun $\det(A_{43})$ weiter nach der \emph{zweiten} Spalte. Es ist
+ \\
+ $\det(A_{43})=(-1)^{1+2}\cdot($\ansref$)\cdot\det (B)+(-1)^{3+2}\cdot($ \ansref $)\cdot\det(C)$,
+wobei $B=$\ansref und $C=$\ansref.
+\\
+Berechnen Sie nun letztendlich $\det(A)=$\ansref.}}
+
+
+\lang{en}{
+	    \text{Calculate the determinant of the $(5\times 5)$-matrix $A=\var{AA}$ with Laplace expansion along with the
+     \emph{third} column.
+\\
+ This leads to $\det(A)=($ \ansref $ )\cdot \det(A_{43})$ with $A_{43}=$ \ansref.
+ \\
+ Exapnd $\det(A_{43})$ along with the \emph{second} column. It is
+ \\
+ $\det(A_{43})=(-1)^{1+2}\cdot($\ansref$)\cdot\det (B)+(-1)^{3+2}\cdot($ \ansref $)\cdot\det(C)$,
+with $B=$\ansref and $C=$\ansref.
+\\
+Finally calculate $\det(A)=$\ansref.}}
+
+
+\lang{de}{
+        \begin{answer}
+         \type{input.number}
+         \solution{alpha}
+         \explanation{Der Vorfaktor entsteht als Produkt des Vorzeichens $(-1)^{4+3}$ und des $(4,3)$-ten Eintrags von $A$.}
+         \end{answer}
+	    \begin{answer}
+            \type{input.matrix}
+            \format{4}{4}
+            \solution{AA43}
+            \explanation{Die Matrix $A_{43}$ entsteht aus $A$ durch Streichen der vierten Zeile und dritten Spalte.}
+         \end{answer}
+         \begin{answer}
+         \type{input.number}
+         \solution{b}
+         \explanation{Der Vorfaktor ist der $(1,2)$-te Eintrag von $A_{43}$.}
+         \end{answer}
+         \begin{answer}
+         \type{input.number}
+         \solution{k}
+         \explanation{Der Vorfaktor ist der $(3,2)$-te Eintrag von $A_{43}$.}
+         \end{answer}
+         \begin{answer}
+         \type{input.matrix}
+            \format{3}{3}
+            \solution{BB1}
+            \explanation{Die erste Matrix $B$ entsteht aus $A_{43}$ durch Streichen der ersten Zeile und zweiten Spalte.}
+         \end{answer}
+          \begin{answer}
+         \type{input.matrix}
+            \format{3}{3}
+            \solution{BB2}
+            \explanation{Die zweite Matrix $C$ entsteht aus $A_{43}$ durch Streichen der dritten Zeile und zweiten Spalte.}
+         \end{answer}
+         \begin{answer}
+         \type{input.number}
+         \solution{det}
+         \explanation{Berechnen Sie noch die Determinanten von $B$ und $C$ und setzen sie dann in die Formel für $\det(A_{43})$ ein.
+         Nun kann die Berechnung von $\det(A)$ erfolgen.}
+         \end{answer}}
+
+
+\lang{en}{
+        \begin{answer}
+         \type{input.number}
+         \solution{alpha}
+         \explanation{The preliminary factor is the product of the sign $(-1)^{4+3}$ and the $(4,3)$-entry of $A$.}
+         \end{answer}
+	    \begin{answer}
+            \type{input.matrix}
+            \format{4}{4}
+            \solution{AA43}
+            \explanation{The matrix $A_{43}$ is the result of removing the fourth row and third column in $A$.}
+         \end{answer}
+         \begin{answer}
+         \type{input.number}
+         \solution{b}
+         \explanation{The preliminary factor is the $(1,2)$-entry of $A_{43}$.}
+         \end{answer}
+         \begin{answer}
+         \type{input.number}
+         \solution{k}
+         \explanation{The preliminary factor is the $(3,2)$-entry of $A_{43}$.}
+         \end{answer}
+         \begin{answer}
+         \type{input.matrix}
+            \format{3}{3}
+            \solution{BB1}
+            \explanation{The first matrix $B$ is the result of removing the first row and second column in $A_{43}$.}
+         \end{answer}
+          \begin{answer}
+         \type{input.matrix}
+            \format{3}{3}
+            \solution{BB2}
+            \explanation{The second matrix $C$ is the result of removing the third row and second column in $A_{43}$.}
+         \end{answer}
+         \begin{answer}
+         \type{input.number}
+         \solution{det}
+         \explanation{Now calculate the determinants of $B$ and $C$  and insert them in the formula for $\det(A_{43})$.
+         Now we can finally calculate $\det(A)$.}
+         \end{answer}}
+         
+	    
+	\end{question}
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

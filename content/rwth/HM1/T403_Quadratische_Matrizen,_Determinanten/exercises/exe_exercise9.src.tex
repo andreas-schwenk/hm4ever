@@ -1,0 +1,247 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü12: Cramersche Regel}
+    \lang{en}{Ex12: Cramer's rule}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+
+\title{\lang{de}{Ü12: Cramersche Regel}  \lang{en}{Ex12: Cramer's rule}}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/11364}{Ticket 11364}
+\end{block}
+
+%######################################################FRAGE_TEXT
+\lang{de}{ 
+Bestimmen Sie  zu $A$ und zu $B$ jeweils die inverse Matrix mit Hilfe der Cramerschen Regel 
+\[
+A= \begin{pmatrix} 3 & 0 & 1 \\ 1 & 2 & 1 \\ 1 & -1 & 2 \end{pmatrix}, \quad 
+B=\begin{pmatrix} 1 & 1 & 2 \\ -1 & 4 & 5 \\ 1 & 2 & 3 \end{pmatrix}.
+\]
+ }
+
+\lang{en}{ 
+Determine the inverse matrices for $A$ and $B$ with the help of Cramer's rule
+\[
+A= \begin{pmatrix} 3 & 0 & 1 \\ 1 & 2 & 1 \\ 1 & -1 & 2 \end{pmatrix}, \quad 
+B=\begin{pmatrix} 1 & 1 & 2 \\ -1 & 4 & 5 \\ 1 & 2 & 3 \end{pmatrix}.
+\]
+ }
+%##################################################ANTWORTEN_TEXT
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung zu $A$    } \lang{en}{Solution for $A$}}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   
+Wir beginnen mit der Matrix $A$ und berechnen zunächst die Determinante (zum Beispiel mit der Regel von Sarrus)
+\[
+\det(A)= 12-1-2+3=12.
+\]
+Nun l\"osen wir mit Hilfe der Cramerschen Regel die folgenden $3$ Gleichungssysteme
+\[
+A x= \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix}, \quad A y= \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}, \quad  A z= \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}. 
+\]
+Beachten wir, dass $\det(A)=12$ gilt, so berechnen wir weiter
+\[
+x_1 = \frac{\det \left( \left( \begin{smallmatrix} 1 & 0 & 1 \\ 0 & 2 & 1 \\ 0 & -1 & 2   \end{smallmatrix} \right) \right)}{\det(A)}  =  \frac{5}{12},
+\quad
+x_2 = \frac{ \det \left( \left( \begin{smallmatrix} 3 & 1 & 1 \\ 1 & 0 & 1 \\ 1 & 0 & 2   \end{smallmatrix}  \right) \right)}{\det(A)} = \frac{-1}{12},
+\quad
+x_3 = \frac{ \det \left( \left( \begin{smallmatrix} 3 & 0 & 1 \\ 1 & 2 & 0 \\ 1 & -1 & 0   \end{smallmatrix} \right) \right)}{\det(A)} = \frac{-3}{12}, 
+\]
+\[
+y_1 = \frac{\det \left( \left( \begin{smallmatrix} 0 & 0 & 1 \\ 1 & 2 & 1 \\ 0 & -1 & 2   \end{smallmatrix} \right) \right)}{\det(A)}  = \frac{-1}{12} ,
+\quad
+y_2 = \frac{ \det \left( \left( \begin{smallmatrix} 3 & 0 & 1 \\ 1 & 1 & 1 \\ 1 & 0 & 2   \end{smallmatrix}  \right) \right)}{\det(A)} = \frac{5}{12},
+\quad
+y_3 = \frac{ \det \left( \left( \begin{smallmatrix} 3 & 0 & 0 \\ 1 & 2 & 1 \\ 1 & -1 & 0   \end{smallmatrix} \right) \right)}{\det(A)} =  \frac{3}{12}, 
+\]
+\[
+z_1 = \frac{\det \left( \left( \begin{smallmatrix} 0 & 0 & 1 \\ 0 & 2 & 1 \\ 1 & -1 & 2   \end{smallmatrix} \right) \right)}{\det(A)}  =\frac{-2}{12} ,
+\quad
+z_2 = \frac{ \det \left( \left( \begin{smallmatrix} 3 & 0 & 1 \\ 1 & 0 & 1 \\ 1 & 1 & 2   \end{smallmatrix}  \right) \right)}{\det(A)} = \frac{-2}{12},
+\quad
+z_3 = \frac{ \det \left( \left( \begin{smallmatrix} 3 & 0 & 0 \\ 1 & 2 & 0 \\ 1 & -1 & 1   \end{smallmatrix} \right) \right)}{\det(A)} =  \frac{6}{12}, 
+\]
+Damit ist $A^{-1}$ gegeben durch
+\[
+A^{-1} = \frac{1}{12} \begin{pmatrix} 5 & -1 & -2 \\ -1 & 5 & -2 \\ -3 & 3 & 6 \end{pmatrix}.
+\]
+Wir machen noch einmal die Probe:
+\[
+A \cdot A^{-1} = \begin{pmatrix} 3 & 0 & 1 \\ 1 & 2 & 1 \\ 1 & -1 & 2 \end{pmatrix} \cdot \frac{1}{12} \begin{pmatrix} 5 & -1 & -2 \\ -1 & 5 & -2 \\ -3 & 3 & 6 \end{pmatrix}
+               = \frac{1}{12} \begin{pmatrix} 12 & 0 & 0 \\ 0 & 12 & 0 \\ 0 & 0 & 12 \end{pmatrix} = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix}.
+\]
+    }
+
+
+    \lang{en}{  
+    We start with the matrix $A$ and determine the determinant (for example with the rule of Sarrus)
+\[
+\det(A)= 12-1-2+3=12.
+\]
+Now we solve the following $3$ linear system using Cramer's rule
+\[
+A x= \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix}, \quad A y= \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}, \quad  A z= \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}. 
+\]
+Considering $\det(A)=12$, we continue to calculate
+\[
+x_1 = \frac{\det \left( \left( \begin{smallmatrix} 1 & 0 & 1 \\ 0 & 2 & 1 \\ 0 & -1 & 2   \end{smallmatrix} \right) \right)}{\det(A)}  =  \frac{5}{12},
+\quad
+x_2 = \frac{ \det \left( \left( \begin{smallmatrix} 3 & 1 & 1 \\ 1 & 0 & 1 \\ 1 & 0 & 2   \end{smallmatrix}  \right) \right)}{\det(A)} = \frac{-1}{12},
+\quad
+x_3 = \frac{ \det \left( \left( \begin{smallmatrix} 3 & 0 & 1 \\ 1 & 2 & 0 \\ 1 & -1 & 0   \end{smallmatrix} \right) \right)}{\det(A)} = \frac{-3}{12}, 
+\]
+\[
+y_1 = \frac{\det \left( \left( \begin{smallmatrix} 0 & 0 & 1 \\ 1 & 2 & 1 \\ 0 & -1 & 2   \end{smallmatrix} \right) \right)}{\det(A)}  = \frac{-1}{12} ,
+\quad
+y_2 = \frac{ \det \left( \left( \begin{smallmatrix} 3 & 0 & 1 \\ 1 & 1 & 1 \\ 1 & 0 & 2   \end{smallmatrix}  \right) \right)}{\det(A)} = \frac{5}{12},
+\quad
+y_3 = \frac{ \det \left( \left( \begin{smallmatrix} 3 & 0 & 0 \\ 1 & 2 & 1 \\ 1 & -1 & 0   \end{smallmatrix} \right) \right)}{\det(A)} =  \frac{3}{12}, 
+\]
+\[
+z_1 = \frac{\det \left( \left( \begin{smallmatrix} 0 & 0 & 1 \\ 0 & 2 & 1 \\ 1 & -1 & 2   \end{smallmatrix} \right) \right)}{\det(A)}  =\frac{-2}{12} ,
+\quad
+z_2 = \frac{ \det \left( \left( \begin{smallmatrix} 3 & 0 & 1 \\ 1 & 0 & 1 \\ 1 & 1 & 2   \end{smallmatrix}  \right) \right)}{\det(A)} = \frac{-2}{12},
+\quad
+z_3 = \frac{ \det \left( \left( \begin{smallmatrix} 3 & 0 & 0 \\ 1 & 2 & 0 \\ 1 & -1 & 1   \end{smallmatrix} \right) \right)}{\det(A)} =  \frac{6}{12}, 
+\]
+So $A^{-1}$ is
+\[
+A^{-1} = \frac{1}{12} \begin{pmatrix} 5 & -1 & -2 \\ -1 & 5 & -2 \\ -3 & 3 & 6 \end{pmatrix}.
+\]
+Let us check the calculation:
+\[
+A \cdot A^{-1} = \begin{pmatrix} 3 & 0 & 1 \\ 1 & 2 & 1 \\ 1 & -1 & 2 \end{pmatrix} \cdot \frac{1}{12} \begin{pmatrix} 5 & -1 & -2 \\ -1 & 5 & -2 \\ -3 & 3 & 6 \end{pmatrix}
+               = \frac{1}{12} \begin{pmatrix} 12 & 0 & 0 \\ 0 & 12 & 0 \\ 0 & 0 & 12 \end{pmatrix} = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix}.
+\]
+    }
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung zu $B$    } \lang{en}{Solution for $B$}}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   
+
+Betrachten wir nun die Matrix $B$. Wir berechnen
+\[
+\det(B)=12 + 5 -4 -8 +3 -10=-2.
+\]
+Nun l\"osen wir mit Hilfe der Cramerschen Regel die folgenden $3$ Gleichungssysteme
+\[
+B x= \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix}, \quad B y= \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}, \quad  B z= \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}. 
+\]
+Beachten wir, dass $\det(B)=-2$ gilt, so berechnen wir weiter
+\[
+x_1 = \frac{\det \left( \left( \begin{smallmatrix} 1 & 1 & 2 \\ 0 & 4 & 5 \\ 0 & 2 & 3   \end{smallmatrix} \right) \right)}{\det(B)}  =  \frac{2}{-2},
+\quad
+x_2 = \frac{ \det \left( \left( \begin{smallmatrix} 1 & 1 & 2 \\ -1 & 0 & 5 \\ 1 & 0 & 3   \end{smallmatrix}  \right) \right)}{\det(B)} = \frac{8}{-2},
+\quad
+x_3 = \frac{ \det \left( \left( \begin{smallmatrix} 1 & 1 & 1 \\ -1 & 4 & 0 \\ 1 & 2 & 0   \end{smallmatrix} \right) \right)}{\det(B)} = \frac{-6}{-2}, 
+\]
+\[
+y_1 = \frac{\det \left( \left( \begin{smallmatrix} 0 & 1 & 2 \\ 1 & 4 & 5 \\ 0 & 2 & 3   \end{smallmatrix} \right) \right)}{\det(B)}  = \frac{1}{-2} ,
+\quad
+y_2 = \frac{ \det \left( \left( \begin{smallmatrix} 1 & 0 & 2 \\ -1 & 1 & 5 \\ 1 & 0 & 3   \end{smallmatrix}  \right) \right)}{\det(B)} = \frac{1}{-2},
+\quad
+y_3 = \frac{ \det \left( \left( \begin{smallmatrix} 1 & 1 & 0 \\ -1 & 4 & 1 \\ 1 & 2 & 0   \end{smallmatrix} \right) \right)}{\det(B)} =  \frac{-1}{-2}, 
+\]
+\[
+z_1 = \frac{\det \left( \left( \begin{smallmatrix} 0 & 1 & 2 \\ 0 & 4 & 5 \\ 1 & 2 & 3   \end{smallmatrix} \right) \right)}{\det(B)}  =\frac{-3}{-2} ,
+\quad
+z_2 = \frac{ \det \left( \left( \begin{smallmatrix} 1 & 0 & 2 \\ -1 & 0 & 5 \\ 1 & 1 & 3   \end{smallmatrix}  \right) \right)}{\det(B)} = \frac{-7}{-2},
+\quad
+z_3 = \frac{ \det \left( \left( \begin{smallmatrix} 1 & 1 & 0 \\ -1 & 4 & 0 \\ 1 & 2 & 1   \end{smallmatrix} \right) \right)}{\det(B)} =  \frac{5}{-2}, 
+\]
+Damit ist $B^{-1}$ gegeben durch
+\[
+B^{-1} = \frac{1}{-2} \begin{pmatrix} 2 & 1 & -3 \\ 8 & 1 & -7 \\ -6 & -1 & 5 \end{pmatrix}.
+\]
+Wir machen noch einmal die Probe:
+\[
+B \cdot B^{-1} = \begin{pmatrix} 1 & 1 & 2 \\ -1 & 4 & 5 \\ 1 & 2 & 3 \end{pmatrix} \cdot \frac{1}{-2} \begin{pmatrix} 2 & 1 & -3 \\ 8 & 1 & -7 \\ -6 & -1 & 5 \end{pmatrix}
+               = -\frac{1}{2} \begin{pmatrix} -2 & 0 & 0 \\ 0 & -2 & 0 \\ 0 & 0 & -2 \end{pmatrix} = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix}.
+\]
+    }
+
+
+        \lang{en}{   
+Now we consider the matrix $B$. We calculate the determinant
+\[
+\det(B)=12 + 5 -4 -8 +3 -10=-2.
+\]
+Now we solve the following $3$ linear systems with the help of Cramer's rule
+\[
+B x= \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix}, \quad B y= \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}, \quad  B z= \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}. 
+\]
+With keeping in mind, that $\det(B)=-2$ we continue calculating
+\[
+x_1 = \frac{\det \left( \left( \begin{smallmatrix} 1 & 1 & 2 \\ 0 & 4 & 5 \\ 0 & 2 & 3   \end{smallmatrix} \right) \right)}{\det(B)}  =  \frac{2}{-2},
+\quad
+x_2 = \frac{ \det \left( \left( \begin{smallmatrix} 1 & 1 & 2 \\ -1 & 0 & 5 \\ 1 & 0 & 3   \end{smallmatrix}  \right) \right)}{\det(B)} = \frac{8}{-2},
+\quad
+x_3 = \frac{ \det \left( \left( \begin{smallmatrix} 1 & 1 & 1 \\ -1 & 4 & 0 \\ 1 & 2 & 0   \end{smallmatrix} \right) \right)}{\det(B)} = \frac{-6}{-2}, 
+\]
+\[
+y_1 = \frac{\det \left( \left( \begin{smallmatrix} 0 & 1 & 2 \\ 1 & 4 & 5 \\ 0 & 2 & 3   \end{smallmatrix} \right) \right)}{\det(B)}  = \frac{1}{-2} ,
+\quad
+y_2 = \frac{ \det \left( \left( \begin{smallmatrix} 1 & 0 & 2 \\ -1 & 1 & 5 \\ 1 & 0 & 3   \end{smallmatrix}  \right) \right)}{\det(B)} = \frac{1}{-2},
+\quad
+y_3 = \frac{ \det \left( \left( \begin{smallmatrix} 1 & 1 & 0 \\ -1 & 4 & 1 \\ 1 & 2 & 0   \end{smallmatrix} \right) \right)}{\det(B)} =  \frac{-1}{-2}, 
+\]
+\[
+z_1 = \frac{\det \left( \left( \begin{smallmatrix} 0 & 1 & 2 \\ 0 & 4 & 5 \\ 1 & 2 & 3   \end{smallmatrix} \right) \right)}{\det(B)}  =\frac{-3}{-2} ,
+\quad
+z_2 = \frac{ \det \left( \left( \begin{smallmatrix} 1 & 0 & 2 \\ -1 & 0 & 5 \\ 1 & 1 & 3   \end{smallmatrix}  \right) \right)}{\det(B)} = \frac{-7}{-2},
+\quad
+z_3 = \frac{ \det \left( \left( \begin{smallmatrix} 1 & 1 & 0 \\ -1 & 4 & 0 \\ 1 & 2 & 1   \end{smallmatrix} \right) \right)}{\det(B)} =  \frac{5}{-2}, 
+\]
+So $B^{-1}$ is
+\[
+B^{-1} = \frac{1}{-2} \begin{pmatrix} 2 & 1 & -3 \\ 8 & 1 & -7 \\ -6 & -1 & 5 \end{pmatrix}.
+\]
+We check our calculations:
+\[
+B \cdot B^{-1} = \begin{pmatrix} 1 & 1 & 2 \\ -1 & 4 & 5 \\ 1 & 2 & 3 \end{pmatrix} \cdot \frac{1}{-2} \begin{pmatrix} 2 & 1 & -3 \\ 8 & 1 & -7 \\ -6 & -1 & 5 \end{pmatrix}
+               = -\frac{1}{2} \begin{pmatrix} -2 & 0 & 0 \\ 0 & -2 & 0 \\ 0 & 0 & -2 \end{pmatrix} = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix}.
+\]
+    }
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+
+%#############################################################ENDE
+
+
+
+\end{tabs*}
+\end{content}

@@ -1,0 +1,142 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Exercise 2: Present value of an annuity}
+    \lang{de}{Ü02: Rentenbarwerte}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\title{
+    \lang{en}{Exercise 2: Present value of an annuity}
+    \lang{de}{Ü02: Rentenbarwerte}
+    \lang{zh}{...}
+    \lang{fr}{...}
+}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22680}{Ticket 22680}
+\end{block}
+
+
+\lang{de}{Berechnen Sie folgende \textbf{Rentenbarwerte} $R_0$:
+
+Aus welchem zum Zeitpunkt 0 eingezahlten Betrag kann 10 Jahre lang eine 
+konstante jährliche Rente von 12000 \euro gezahlt werden, wenn die Anlage zu 4 \% erfolgt?
+\\
+\begin{itemize}
+    \item[a)] bei \textbf{nachschüssiger} Zahlung der Rente zum Jahresende:
+    \item[b)] bei \textbf{vorschüssiger} Zahlung der Rente zu Jahresbeginn:
+\end{itemize}    
+}
+\lang{en}{Compute the \textbf{present value} $R_0$ of the following annuities:
+
+What amount must be invested at time $0$ to yield a constant annual annuity
+of 12000 \euro for 10 years, assuming the investment earns interest at a rate of 4 \%?
+
+\begin{itemize}
+    \item[a)] if the annuity is paid out \textbf{in arrears}, at the end of the year:
+    \item[b)] if the annuity is paid out \textbf{in advance}, at the beginning of the year:
+\end{itemize}      
+}
+
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+\tab{\lang{de}{Lösung a)} \lang{en}{Solution a)}}
+    \begin{incremental}[\initialsteps{1}]
+        \step \lang{de}{Die Lösung ist:
+        \begin{align*}
+        R_0=97.330,69 \text{ \euro}
+        \end{align*}}
+        \lang{en}{The solution is:
+        \begin{align*}
+        R_0=97,330.69 \text{ \euro}
+        \end{align*}}
+        \step
+        \lang{de}{\[r=12000\qquad q=1+\frac{4}{100}=1,04\]}
+        \lang{en}{\[r=12000\qquad q=1+\frac{4}{100}=1.04\]}
+        \step
+        \lang{de}{Der nachschüssige Rentenendwert von 
+        \[R_n=r\frac{q^n-1}{q-1}\]
+        muss mit dem Faktor $q^n$ abgezinst werden:
+        \[R_0=R_nq^n=r\frac{q^n-1}{q^{n+1}-q^n}\]
+        (Der Faktor $\frac{q^n-1}{q^{n+1}-q^n}$ heißt auch 
+        \textbf{nachschüssiger Rentenbarwertfaktor}.)
+        Damit ergibt sich:
+        \begin{eqnarray*}
+        R_0&=&12000\frac{1,04^{10}-1}{1,04^{11}-1,04^{10}}\\
+        &=&97.330,69 \text{ \euro}
+        \end{eqnarray*}}
+        \lang{en}{
+        The future value \[R_n=r\frac{q^n-1}{q-1}\]
+        must be discounted by the factor $q^n$:
+        \[R_0=R_nq^n=r\frac{q^n-1}{q^{n+1}-q^n}\]
+        (The factor $\frac{q^n-1}{q^{n+1}-q^n}$ is also called the
+        \textbf{annuity factor} for an annuity in arrears.)
+        So we have:
+        \begin{eqnarray*}
+        R_0&=&12000\frac{1.04^{10}-1}{1.04^{11}-1.04^{10}}\\
+        &=&97,330.69 \text{ \euro}
+        \end{eqnarray*}
+        }
+       
+    \end{incremental}
+\tab{\lang{de}{Lösung b)} \lang{en}{Solution b)}}
+    \begin{incremental}[\initialsteps{1}]
+        \step \lang{de}{Die Lösung ist:
+        \begin{align*}
+        R_0=101.223,92\text{ \euro} 
+        \end{align*}}
+        \lang{en}{The solution is:
+        \begin{align*}
+        R_0=101,223.92\text{ \euro} 
+        \end{align*}}
+        \step
+        \lang{de}{\[r'=12000 \qquad q=1+\frac{4}{100}=1,04\]}
+        \lang{en}{\[r'=12000 \qquad q=1+\frac{4}{100}=1.04\]}
+        \step
+        \lang{de}{Da bei vorschüssiger Zahlung, also einer Rentenzahlung zu Beginn einer Zinsperiode,
+        jede Rate einmal mehr verzinst wird, ist die vorschüssige Rente gleichwertig zu einer 
+        nachschüssigen mit der Rate $r=r'\cdot q=12.480 \text{ \euro}$.}
+        \lang{en}{Since each payment accrues interest one additional time in 
+        an annuity an advance, i.e. an annuity paid at the beginning of each
+        interest period, the annuity in advance is equivalent to an annuity in arrears
+        with a payment of $r=r'\cdot q=12.480 \text{ \euro}$.}
+        \step
+        \lang{de}{
+        (Der Faktor $q\cdot \frac{q^n-1}{q^{n+1}-q^n}$ heißt auch 
+        \textbf{vorschüssiger Rentenbarwertfaktor}.)
+         Damit ergibt sich:
+        \begin{eqnarray*}
+        R_0&=&12000\cdot1,04\frac{1,04^{10}-1}{1,04^{11}-1,04^{10}}\\
+        &=&12480\frac{1,04^{10}-1}{1,04^{11}-1,04^{10}}\\
+        &=&101.223,92 \text{ \euro}
+        \end{eqnarray*}}
+        \lang{en}{
+        (The factor $q\cdot \frac{q^n-1}{q^{n+1}-q^n}$ is also called the
+        \textbf{annuity factor} for an annuity in advance.)
+        So we have:
+        \begin{eqnarray*}
+        R_0&=&12000\cdot1.04\frac{1.04^{10}-1}{1.04^{11}-1.04^{10}}\\
+        &=&12480\frac{1.04^{10}-1}{1.04^{11}-1.04^{10}}\\
+        &=&101,223.92 \text{ \euro}
+        \end{eqnarray*}}
+    \end{incremental}
+\end{tabs*}
+
+\end{content}
+

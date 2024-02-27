@@ -1,0 +1,130 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A01: Geradengleichung}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A01: Geradengleichung}}
+\lang{en}{\title{A01: Equation of a line}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24060}{Ticket 24060}
+\end{block}
+\usepackage{mumie.genericproblem}
+
+\begin{block}[annotation]
+	Trainingsaufgaben zur Zweipunktform einer Geraden \\
+    Bestimmung einer Geraden aus zwei Punkten
+\end{block}
+
+\begin{block}[annotation]
+Kopie: hm4mint/T102_neu_Einfache_Reelle_Funktionen/training 4
+
+	Im Ticket-System: \href{https://team.mumie.net/issues/22077}{Ticket 22077}
+\end{block}
+
+
+\begin{problem}
+
+    \begin{variables}
+       	\randint[Z]{deltax}{-8}{8}
+       	\randint[Z]{p1x}{-5}{5}
+       	\function[calculate]{p2x}{p1x+deltax}
+      	\randint[Z]{deltay}{-8}{8}
+       	\randint{p1y}{-5}{5}
+       	\function[calculate]{p2y}{p1y+deltay}
+       	\function[normalize]{m}{((p2y)-(p1y))/((p2x)-(p1x))}   
+       	\function[normalize]{b}{p1y-(((p2y)-(p1y))/((p2x)-(p1x)))p1x}         	        	
+    	\function{f1}{(p2y-p1y)/(p2x-p1x)}
+    	\function{f2}{p1y-m*p1x}
+        \function{g}{m*x+b}
+    \end{variables}
+			
+%Frage 1 von 2
+    \begin{question}  
+	 	\lang{de}{\text{Gesucht ist die Gerade, die durch die Punkte 
+ 		$\,P_1 = (x_1 ; y_1) = (\var{p1x} \, ; \, \var{p1y})\,$ und
+ 		$\,P_2 = (x_2 ; y_2) = (\var{p2x} \, ; \, \var{p2y})\,$ 
+ 		verläuft. Bestimmen Sie ihre Steigung $\,m\,$ und den Ordinatenabschnitt $\,b$. \\
+        (Geben Sie die gesuchten Zahlen als Brüche oder ganze Zahlen an.)}}
+    \lang{en}{\text{We are looking for the line that passes through the points 
+ 		$\,P_1 = (x_1 , y_1) = (\var{p1x} \, , \, \var{p1y})\,$ and
+ 		$\,P_2 = (x_2 , y_2) = (\var{p2x} \, , \, \var{p2y})\,$. 
+   Determine its slope $\,m\,$ and $y$-intercept $\,b$. \\
+        (Enter these numbers as fractions or integers.)}}
+        
+
+% tpye    
+	\type{input.number}
+ 	\field{rational}
+%    
+% answer 1 von 2
+%
+ 	\begin{answer}
+    	\lang{de}{\text{$\qquad m=$}}
+      \lang{en}{\text{$\qquad m=$}}
+        \solution{m}
+		\lang{de}{\explanation{Die Steigung $\,m\,$ ergibt sich aus dem Steigungsdreieck 
+        $\,\frac{y_2 - y_1}{x_2 - x_1}.$}}
+     \lang{en}{\explanation{The slope $\,m\,$ results from the slope triangle 
+        $\,\frac{y_2 - y_1}{x_2 - x_1}.$}} 
+    \end{answer}
+%    
+% answer 2 von 2
+%
+ 	\begin{answer}
+      	\text{$\qquad b=$}
+        \solution{b}        
+ 		\lang{de}{\explanation{Der Ordinatenabschnitt $\,b\,$ berechnet sich aus 
+                    $\,b= y_1-\frac{y_2 - y_1}{x_2 - x_1} \cdot x_1.$}}
+    \lang{en}{\explanation{The $y$-intercept $\,b\,$ is calculated from 
+                    $\,b= y_1-\frac{y_2 - y_1}{x_2 - x_1} \cdot x_1.$}}
+	\end{answer}
+
+\end{question}
+
+%Frage 2 von 2
+
+\begin{question} 
+ 	\lang{de}{\text{Wie lautet die Geradengleichung?}}
+  \lang{en}{\text{What is the equation of the line?}}
+
+
+    \type{input.function}
+ 	\field{rational}
+%    
+% answer
+%    
+ 	\begin{answer}
+      	\text{$\qquad y=$}
+        \solution{g}
+        \checkAsFunction{x}{-10}{10}{100} 
+        \lang{de}{\explanation{Die Gleichung der Geraden ist $\,y=mx+b$.}}
+        \lang{en}{\explanation{The equation of the line is $\,y=mx+b$.}}
+        
+    \end{answer}
+
+\end{question}
+	
+\end{problem}
+
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

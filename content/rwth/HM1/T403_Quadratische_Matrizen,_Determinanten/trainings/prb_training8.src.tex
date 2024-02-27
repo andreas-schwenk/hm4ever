@@ -1,0 +1,144 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A09: Cramersche Regel}
+    \lang{en}{P09: Cramer's rul}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A09: Cramersche Regel}}
+\lang{en}{\title{P09: Cramer's rule}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/11442}{Ticket 11442}
+\end{block}
+
+\begin{problem}
+	%\randomquestionpool{}{}
+    
+    		\begin{variables}
+			
+			\randint[Z]{a}{-3}{3}
+			\randint[Z]{b}{-3}{3}
+			\randint[Z]{c}{-3}{3}
+			\randint[Z]{f}{-3}{3}
+			\randint[Z]{r}{-3}{3}
+			\randint[Z]{t}{-3}{3}
+			
+			\matrix[calculate]{aa}{a & 0 & 0 \\ c  & 2 & b \\ 0 & f & f*b } 
+\matrix{bb}{r\\ 0 \\ t}
+\function[calculate]{s}{a*f*b}
+\function{s1}{s}
+\function{l1}{(r*f*b)/s1}
+\function{l2}{-(a*b*t+r*c*f*b)/s1}
+\function{l3}{(2*a*t+r*c*f)/s1}
+% \function{L1}{l1}
+% \function{L2}{l2}
+% \function{L2}{l2}
+% % \function{A1}{r*f*b}
+% \function{A2}{-(a*b*t+r*c*f*b)}
+% \function{A3}{2*a*t+c*f*r}
+\matrix[calculate]{m}{l1\\ l2\\ l3}
+  
+		\end{variables}
+	\begin{question}
+		
+		\begin{variables}
+			\earlierAnswer{s1}{-1,1}
+% 			\randint[Z]{a}{-3}{3}
+% 			\randint[Z]{b}{-3}{3}
+% 			\randint[Z]{c}{-3}{3}
+% 			\randint[Z]{f}{-3}{3}
+% 			\randint[Z]{r}{-3}{3}
+% 			\randint[Z]{t}{-3}{3}
+			
+% 			\matrix[calculate]{aa}{a & 0 & 0 \\ c  & 2 & b \\ 0 & f & f*b } 
+% \matrix{bb}{r\\ 0 \\ t}
+% \function[calculate]{s}{a*f*b}
+% \function{l1}{r/a}
+% \function{l2}{-(a*b*t+r*c*f*b)/s}
+% \function{l3}{(2*a*t+r*c*f)/s}
+% \function{L1}{l1}
+% \function{L2}{l2}
+% \function{L2}{l2}
+% % \function{A1}{r*f*b}
+% % \function{A2}{-(a*b*t+r*c*f*b)}
+% % \function{A3}{2*a*t+c*f*r}
+% \matrix[calculate]{m}{l1\\ l2\\ l3}
+  
+		\end{variables}
+		
+		\type{input.generic}
+        \field{rational}
+        \lang{de}{
+	    \text{Bestimmen Sie mit Hilfe der Cramerschen Regel die eindeutige Lösung des
+linearen Gleichungssystems
+$    \var{aa}\cdot \begin{pmatrix}
+x_1 \\ x_2 \\ x_3
+\end{pmatrix} = \var{bb}. $}}
+
+ \lang{en}{
+	    \text{Determine with the help of Cramer's rule the unique solution of the linear system
+$    \var{aa}\cdot \begin{pmatrix}
+x_1 \\ x_2 \\ x_3
+\end{pmatrix} = \var{bb}. $}}
+
+     \lang{de}{
+	    \begin{answer}
+            \type{input.number}
+	    	\text{Die Determinante der Koeffizientenmatrix ist: $\det(\var{aa})= $}
+			\solution{s}
+            \explanation{Benutzen Sie die Laplace-Entwicklung nach der ersten Zeile oder die Regel von Sarrus.}
+	    \end{answer}    
+	    \begin{answer}
+            \type{input.matrix}
+	    	\text{Die Lösung des LGS ist:  $\begin{pmatrix}
+x_1 \\ x_2 \\ x_3
+\end{pmatrix} =$}
+			\solution{m}
+			\format{3}{1}
+         \explanation{Bezeichnet $A$ die obige Matrix und $b$ den Vektor der rechten Seite, so ergibt sich nach der Cramerschen Regel die
+                       $j$-te Komponente der Lösung als $x_j=\frac{\det(A_{j|b})}{\det A}$.}
+	    \end{answer}}
+
+     \lang{en}{
+	    \begin{answer}
+            \type{input.number}
+	    	\text{The determinant of the coefficient matrix is $\det(\var{aa})= $}
+			\solution{s}
+            \explanation{Use Laplace-expansion along with the first row or the rule of Sarrus.}
+	    \end{answer}    
+	    \begin{answer}
+            \type{input.matrix}
+	    	\text{The solution of the linear system is $\begin{pmatrix}
+x_1 \\ x_2 \\ x_3
+\end{pmatrix} =$}
+			\solution{m}
+			\format{3}{1}
+         \explanation{If we denote with $A$ the matrix above and with $b$ the vector on the right side,
+         we receive with Cramer's rule the $j$th component of the solution as $x_j=\frac{\det(A_{j|b})}{\det A}$.}
+	    \end{answer}}
+	    
+	\end{question}
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

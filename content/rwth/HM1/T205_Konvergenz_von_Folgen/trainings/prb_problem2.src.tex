@@ -1,0 +1,86 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A03: Folgenabschätzung}
+    \lang{en}{input numbers}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A03: Folgenabschätzung}}
+\lang{en}{\title{Problem 3}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9861}{Ticket 9861}
+\end{block}
+
+\begin{problem}
+
+	\begin{question}
+		\lang{de}{
+			\text{Bestimmen Sie für jede der Folgen $(a_{n})_{n\in\N}$ das minimale $N\in\N$, so dass $|a_{n}|<\frac{1}{10}$ für alle $n\geq N$.
+		\\
+ 		a) Ist $a_{n}=\frac{\var{x}}{n}$ für alle $n\in\N$, so ist das minimale $N$ gerade $N=$\ansref.\\
+  		b) Ist $a_{n}=(\var{q})^{n}$ für alle $n\in\N$, so ist das minimale $N$ gerade $N=$\ansref.\\
+ 		c) Ist $a_{n}=\frac{\var{k}}{n^{2}}$ für alle $n\in\N$, so ist das minimale $N$ gerade $N=$\ansref.\\
+		
+				}}
+		
+		\explanation{Formen Sie die Ungleichung nach $n$ um, nachem Sie die Folgendefinition für $a_n$ eingesetzt haben.}
+		\type{input.number}
+		\field{rational}
+		
+
+    \precision[false]{3}
+    \displayprecision{3}
+    \correctorprecision{3}
+		
+		\begin{variables}
+			\randint[Z]{x}{-10}{10}
+			\function[calculate]{xl}{10*|x|+1}
+			
+			\randint{qq}{2}{10}
+			\randint[Z]{pmeins}{-1}{1}
+			\function[calculate]{q}{pmeins/qq}
+			\function[calculate]{ql}{floor(-ln(10)/ln(pmeins*q))+1}
+			
+			\randint[Z]{k}{-10}{10}
+			\function[calculate]{kl}{floor(sqrt(10*|k|))+1}
+			
+		\end{variables}
+		
+		\begin{answer}
+			\solution{xl}
+			
+		\end{answer}
+		\begin{answer}
+			\solution{ql}
+		\end{answer}
+		\begin{answer}
+			\solution{kl}
+		\end{answer}
+	\end{question}
+	
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+
+\end{content}

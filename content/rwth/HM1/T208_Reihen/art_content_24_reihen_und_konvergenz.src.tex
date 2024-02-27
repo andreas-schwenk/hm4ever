@@ -1,0 +1,581 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Reihen und Konvergenz}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+\end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T201neu_Vollstaendige_Induktion/g_art_content_02_vollstaendige_induktion.meta.xml}{content_02_vollstaendige_induktion}
+    \link{generic_article}{content/rwth/HM1/T209_Potenzreihen/g_art_content_27_konvergenzradius.meta.xml}{content_27_konvergenzradius}
+    \link{generic_article}{content/rwth/HM1/T208_Reihen/g_art_content_26_produkt_von_reihen.meta.xml}{content_26_produkt_von_reihen}
+    
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_14_konvergenz.meta.xml}{konvergenz}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_15_monotone_konvergenz.meta.xml}{monot-konv}
+    \link{generic_article}{content/rwth/HM1/T207_Intervall_Schachtelung/g_art_content_23_intervallschachtelung.meta.xml}{intervallschachtelung}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{8}
+\ombarticle{1}
+
+\lang{de}{\title{Reihen und deren Konvergenz}}
+ 
+\begin{block}[annotation]
+  
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9681}{Ticket 9681}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+\section{Reihen}
+
+Eine Reihe ist eine besondere Folge. Man bildet sie aus einer anderen Folge, indem man deren Glieder aufsummiert.
+
+%Motivationsbeispiel
+Wir beginnen mit ein paar Beispielen.
+\begin{example}\label{ex:motivation-reihen}
+\begin{tabs*}[\initialtab{0}]
+\tab{Kraftstoffverbrauch}
+Ein Unternehmen hat eine neue Maschine angeschafft.
+An jedem Tag wird die Menge des an dem Tag verbrauchten Kraftstoffes notiert.
+Wir erhalten eine Folge $(a_n)_{n\in\N}$, die den Kraftstoffverbrauch der Maschine
+am Tag $n$ seit der Anschaffung angibt.
+Nun möchte der Geschäftsleiter wissen, 
+wie viel Kraftstoff die Maschine im ersten Monat, im ersten Jahr oder allgemein nach Tag $n$ insgesamt verbraucht hat.
+
+Um den Verbrauch nach Tag $n$ zu erhalten, müssen wir den jeweiligen Verbrauch $a_1, \ldots, a_n$ der ersten $n$ Tage aufsummieren.
+Wir erhalten dann die Folge $(s_n)_{n\in \N}$ des Gesamtverbrauchs nach $n$ Tagen, die dann gegeben ist durch
+\[
+s_n = \sum_{k=1}^n a_k.
+\]
+Die Folge $(s_n)_{n\in \N}$ nennen wir dann auch Reihe.
+
+\tab{Insektenpopulation}
+Eine Insektenpopulation wird beobachtet. Zu Beginn der Beobachtung wurden $s_0$ Insekten gezählt.
+Nach dem ersten Jahr der Beobachtung ist die Anzahl der Insekten um 50 Prozent gestiegen.
+Der absolute Zuwachs beträgt hier $a_1=\frac{1}{2}s_0$. Die Insektenpopulation ist also auf $s_1=\frac{3}{2}s_0$ gestiegen.
+In den folgenden Jahren hat sich der Zuwachs der Population jeweils zum Vorjahr etwa halbiert.
+Der Zuwachs der Population kann also (ungefähr) durch die Folge $(a_n)_{n\in \N}$ mit
+\[
+a_1 = \frac{1}{2}s_0, \, a_2= \frac{1}{4} s_0, \, a_3 = \frac{1}{8}s_0,\, \cdots
+\]
+und allgemein mit der Formel
+\[
+a_n = \frac{1}{2^n}s_0
+\]
+beschrieben werden.
+
+Die Gesamtpopulation nach $n$ Jahren ist dann gegeben durch 
+\[
+s_n = \sum_{k=0}^{n} \frac{1}{2^k} s_0.
+\]
+Die Folge $(s_n)_{n \in \N}$ ist ein Beispiel einer geometrischen Reihe, die wir
+in Beispiel\,\ref{ex:geom-reihe} allgemein einführen werden.
+
+Die Zuwächse der Insektenpopulation werden immer geringer, sodass die Population sich nach einer gewissen Zeit
+praktisch kaum noch verändert. Es entsteht dann ein (biologisches) Gleichgewicht.
+Dieses Gleichgewicht kann durch den Grenzwert $\lim_{n \to \infty} s_n$ modelliert werden.
+
+\tab{Achilles und die Schildkröte}
+Der antike griechische Philosoph Zenon von Elea behauptete, dass ein schneller Läufer wie Achilles bei einem Wettrennen eine Schildkröte niemals einholen könne, wenn er ihr einen Vorsprung gewähre.
+Bevor Achilles die Schildkröte überholen kann, muss er zuerst ihren Vorsprung einholen.
+In der Zeit, die er dafür benötigt, hat die Schildkröte aber einen neuen, wenn auch kleineren Vorsprung gewonnen, den Achilles ebenfalls erst einholen muss. Ist ihm auch das gelungen, hat die Schildkröte wiederum einen – noch kleineren – Weg-Vorsprung gewonnen und so weiter.
+Der Vorsprung, den die Schildkröte hat, werde zwar immer kleiner, bleibe aber dennoch immer ein Vorsprung, sodass sich der schnellere Läufer der Schildkröte zwar immer weiter nähere, sie aber niemals einholen und somit auch nicht überholen könne.
+
+Wir legen diese Argumentation einmal mathematisch dar:
+Wir gehen davon aus, dass Achilles $m$-mal schneller als die Schildkröte ist.
+Die Geschwindigkeit von Achilles sei $v_a$ und die der Schildkröte sei $v_s$.
+Dann ist $v_a=m \cdot v_s$. Wir nehmen weiter an, die Schildkröte bekäme einen Vorsprung $s_0$ und Achilles benötige die Zeit $t_0$, um den Weg $s_0$ zu laufen.
+In der Zeit $t_0$ hat die Schildkröte allerdings den Weg $s_1 = \frac{s_0}{m}$ zurückgelegt.
+Für diesen braucht allerdings Achilles wiederum die Zeit $t_1 = \frac{t_0}{m}$, während die Schildkröte nun die neue Strecke $s_2 = \frac{s_1}{m}=\frac{s_0}{m^2}$ zurückgelegt hat, usw.
+Die Zeit, die nach der $n$-ten Iteration vergangen ist, ist dann
+\[
+T_n = \sum_{k=0}^n \frac{t_0}{m^k}.
+\]
+Dies ist wieder eine geometrische Reihe.
+
+Doch wo liegt der Argumentationsfehler von Zenon? Achilles hätte wohl auch mit durchschnittener Sehne gegen die Schildkröte gewonnen.
+
+Die Zeit $t$, die Achilles benötigt, um die Schildkröte einzuholen, lässt sich als Lösung der Gleichung
+\[
+v_a \cdot t = s_0 + v_s \cdot t
+\]
+berechnen, denn $v_a \cdot t$ ist die Strecke, die Achilles in der Zeit $t$ zurücklegt.
+Die rechte Seite der Gleichung ist die zurückgelegte Strecke der Schildkröte.
+Die Lösung der Gleichung ist 
+\[ 
+t = \frac{s_0}{v_a-v_s}= \frac{s_0}{v_a} \cdot \frac{1}{1-\frac{1}{m}} = t_0 \cdot \frac{1}{1-\frac{1}{m}}.
+\]
+
+Mit der Formel für die \ref[content_02_vollstaendige_induktion][geometrische Summe]{rule:geom-summe} können wir $\lim_{n \to \infty} T_n = t$ zeigen.
+Genauer betrachten wir dies aber noch in Beispiel \ref{ex:konvergenz-geo-reihe}.
+
+Dem griechischen Philosophen war noch nicht bekannt, dass ein Aufsummieren von "{unendlich vielen}" Summanden einen endlichen Wert liefern kann.
+\end{tabs*}
+\end{example}
+%Ende erstes Motivationsbeispiel
+Als Einstieg ins Thema \emph{Reihen} wird das Beispiel von Achilles und der Schildkröte in folgendem Video erklärt:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10902&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\\\
+
+Wir beschäftigen uns hier direkt mit komplexen Reihen. 
+Dadurch behandeln wir die reellen Reihen gleich mit als Spezialfall der Reihen, 
+deren Glieder alle Imaginärteil null haben.
+
+\begin{definition}\label{def:reihe}
+Gegeben sei eine (komplexe) Folge $( a_k )_{k\in \N}$. Dann nennen wir 
+\[   s_n=a_1+a_2+\ldots+a_n=\sum_{i=1}^n a_i \]
+die $n$-te \notion{Partialsumme}. Es ist also $s_1=a_1$, $s_2=a_1+a_2$, $s_3=a_1+a_2+a_3$, etc.
+
+Eine \notion{(komplexe) Reihe} ist eine Folge von Partialsummen $(s_n)_{n \in \N}$.
+Wir schreiben dafür abkürzend  auch
+\[ \sum_{i=1}^\infty a_i. \]
+Wir beachten aber, dass diese Schreibweise  symbolisch ist, 
+denn sie sagt nichts darüber aus, ob der Limes der Partialsummen existiert.\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=312}{\image[75]{00_Videobutton_schwarz}}}\\\\
+\end{definition}
+
+\begin{remark}
+Wie auch schon bei Folgen muss die Indexmenge nicht immer $\N$ sein,
+sondern kann auch $\{ n\in \Z | n\geq n_0\}$ für eine beliebige ganze
+Zahl $n_0$ sein. Besonders häufig verwenden wir $n_0=0$.
+Der Einfachheit halber werden wir dennoch alle Aussagen mit $n\in \N$ formulieren.
+
+Wie immer bei Summen ist der verwendete Indexbuchstabe irrelevant, d.\,h. $\sum_{i=1}^\infty a_i$ und $\sum_{k=1}^\infty a_k$ bezeichnen
+dieselbe Reihe.
+\end{remark}
+
+\begin{example}[Dezimalbrüche]\label{ex:dezimalbruch-als-reihe}
+Partialsummenfolgen begegnen wir andauernd in Gestalt von Dezimalbrüchen. 
+Ein Dezimalbruch hat die Form
+\[d_0,d_1d_2d_3\ldots  \]
+mit einer ganzen Zahl $d_0\in\Z$  und Koeffizienten $d_j\in\{0,1,\ldots,9\}$  für alle $j\in\N$.
+Für die Folge der $a_j=d_j\cdot 10^{-j}$ ist die Partialsummenfolge $(r_n)_{n\in\N_0}$ 
+gegeben durch die Dezimalbruchentwicklung bis zur $n$-ten Nachkommastelle $r_n=d_0,d_1\ldots d_n$. 
+In Beispiel \ref{ex:dezimalbruchzerlegung} werden wir formal zeigen, dass jede reelle Zahl $r$ eine Dezimalbruchentwicklung der Form
+\[r=d_0,d_1d_2d_3\ldots=\sum_{j=0}^\infty d_j\cdot 10^{-j}\]
+besitzt.
+\end{example}
+
+\begin{example}\label{ex:geom-reihe}
+Es sei $q\in \C$. Die \emph{geometrische Reihe} 
+\[\sum_{k=0}^\infty q^k\]
+ist die Folge der \ref[content_02_vollstaendige_induktion][geometrischen Summen]{rule:geom-summe}
+$s_n:=\sum_{k=0}^n q^k$.
+Die Folge $( a_k )_{k\geq 0}$ aus der Definition \ref{def:reihe} ist also hier die geometrische Folge $(q^k)_{k\geq 0}$.
+Bevor wir in Beispiel \ref{ex:konvergenz-geo-reihe} das Konvergenzverhalten der geometrischen Reihe besprechen, 
+definieren wir erst einmal genau, was wir unter der Konvergenz einer Reihe verstehen.
+\end{example}
+
+
+
+\section{Konvergenz von Reihen}\label{sec:konvergenz-reihen}
+
+Bisher ist der Ausdruck $\sum_{k=1}^\infty a_k$ für eine Reihe lediglich ein Symbol. Das Symbol suggeriert jedoch, 
+dass man alle $a_k$ aufsummiert, um einen neuen Wert zu bekommen.
+
+Mit Hilfe der Folgenkonvergenz kann dies konkret gemacht werden:
+
+\begin{definition}\label{def:reihenkonvergenz}
+Eine Reihe $\sum_{k=1}^\infty a_k$ heißt \notion{konvergent}, wenn die Folge $(s_n)_{n\in \N}$ ihrer Partialsummen 
+$s_n=\sum_{k=1}^n a_k$
+konvergiert.
+
+Ist $\lim_{n\to \infty} s_n =S$, so schreiben wir auch
+\[  \sum_{k=1}^\infty a_k= S. \] 
+
+Ist die Reihe $\sum_{k=1}^\infty a_k$ nicht konvergent, so heißt sie \notion{divergent}. In Anlehnung an die Interpretation der unendlichen Summe als Grenzwert sagt man auch kurz:
+\[  \sum_{k=1}^\infty a_k\quad \text{ existiert nicht.} \]
+
+Sind die Partialsummen $(s_n)_{n\in \N}$ eine Folge von reellen Zahlen und zugleich bestimmt divergent gegen $\infty$ bzw. gegen $-\infty$, dann schreibt man auch oft
+\[  \sum_{k=1}^\infty a_k =\infty \]
+bzw.
+\[  \sum_{k=1}^\infty a_k =-\infty. \]
+\end{definition}
+
+\begin{remark}\label{rem:reihenfolge-summation}
+Bei endlichen Summen ist es egal, in welcher Reihenfolge man ihre Glieder aufaddiert, 
+denn die komplexen Zahlen genügen dem Kommutativ- und dem Assoziativgesetz. 
+Bei \glqq{}unendlichen Summen\grqq{} ist das nicht mehr der Fall. 
+Aber durch die Definition einer Reihe als Folge ihrer 
+Partialsummen legen wir eine Summationsreihenfolge eindeutig fest.
+\begin{tabs*}[\initialtab{0}]
+\tab{Beispiel}
+Betrachten wir zum Beispiel die unendliche Summe
+\[+1-1+1-1+1-1\ldots.\]
+Für die Folge der $a_k=(-1)^k$ ist das die Reihe $\sum_{k=0}^\infty (-1)^k$.
+Für die Partialsummenfolge $(s_n)_{n\geq 0}$ gilt dabei $s_n=1$, 
+wenn $n$ gerade ist, bzw. $s_n=0$, wenn $n$ ungerade ist.
+Die Reihe $\sum_{k=0}^\infty (-1)^k$ ist also divergent mit den zwei Häufungspunkten $1$ und $0$.
+In obiger Summe entspricht das der Klammerung
+\[(\ldots((((+1-1)+1)-1)+1)-1\ldots).\]
+Betrachten wir hingegen die Klammerung
+\[+\underbrace{(1-1)}_{b_0}+\underbrace{(1-1)}_{b_1}+\underbrace{(1-1)}_{b_2}+\ldots ,\]
+dann führt uns das zur $0$-Reihe $\sum_{k=0}^\infty b_k=\sum_{k=0}^\infty 0=0$.
+Und die Klammerung
+\[\underbrace{+1}_{c_0}+\underbrace{(-1+1)}_{c_1}+\underbrace{(-1+1)}_{c_2}+\ldots\]
+führt schließlich auf die Reihe $\sum_{k=0}^\infty c_k=1+\sum_{k=1}^\infty c_k=1$.
+\end{tabs*}
+Eine spezielle Familie von Reihen, die man umordnen darf ohne ihren Grenzwert zu verändern, 
+besprechen wir in Abschnitt \ref[content_26_produkt_von_reihen][Umordnung von Reihen]{sec:umordnung-reihen}. 
+\end{remark}
+
+In diesem Video wird der Konvergenzbegriff für Reihen noch einmal erläutert:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10903&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+
+\begin{example}[Dezimalbruchentwicklung]\label{ex:dezimalbruchzerlegung}
+
+\begin{incremental}[\initialsteps{1}]
+\step
+Wir zeigen, dass jede reelle Zahl $r\in\R$ eine  Dezimalbruchentwicklung 
+\[r=d_0,d_1d_2d_3\ldots\]
+hat. 
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10904&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+\step
+Nehmen wir zunächst $r\geq 0$ an.
+Wir bestimmen die Koeffizienten $d_n$ der Partialsummenfolge $r_n=\sum_{j=0}^n d_j\cdot 10^{-j}$ 
+sukzessive und eindeutig  durch die Ungleichungen
+\[ 0\leq r-r_n<10^{-n}. \]
+\step
+Die Folge $(r_n)_{n\in\N_0}$ ist monoton steigend
+und hat $r$ als obere Schranke. Weil $10^{-j}$ eine Nullfolge ist, 
+existiert zu jedem $\epsilon>0$ eine natürliche Zahl $N_\epsilon$ so, dass $10^{-N_\epsilon}<\epsilon$ gilt.
+Dann gilt auch 
+\[ | r-r_n |<\epsilon \]
+für alle $n\geq N_\epsilon$. Mit anderen Worten: 
+Die reelle Zahl $r$ ist Supremum der monoton steigenden Folge $(r_n)_{n\in\N_0}$, 
+also ihr Grenzwert.
+\step
+
+Natürlich lässt sich auch jede negative reelle Zahl $r$ als Dezimalbruch darstellen. 
+Dazu wenden wir einfach das obige Verfahren auf $-r>0$ an.
+\end{incremental}
+
+\end{example}
+
+%\begin{quickcheckcontainer}
+\begin{quickcheck}
+  \type{input.number}
+  \displayprecision{3}
+  \correctorprecision{4}
+ 
+  \begin{variables}
+   \drawFromSet{d}{7,12,13}
+   \function[calculate]{s}{floor(1000/d)/1000}
+  \end{variables}
+ 
+  \text{
+    Bestimmen Sie die ersten drei Nachkommastellen der Dezimalbruchentwicklung von $\frac{1}{\var{d}}$.
+ 
+    Antwort: \ansref 
+  }
+  
+ 
+  \begin{answer}
+    \solution{s}
+  \end{answer}
+\end{quickcheck}
+%\end{quickcheckcontainer}
+
+
+\begin{example}[Geometrische Reihe]\label{ex:konvergenz-geo-reihe}
+Für die geometrische Reihe $\sum_{k=0}^\infty q^k$ mit $q\in \C$
+hatten wir die Partialsummen
+\[ s_n=\sum_{k=0}^n q^k. \]
+\begin{enumerate}
+\item Für $q=1$ ist $s_n=\sum_{k=0}^n 1^k=n+1$. Diese Folge
+ist bestimmt divergent gegen $\infty$, also ist in diesem Fall
+\[ \sum_{k=0}^\infty 1^k =\infty.\] Dies ist auch der einzige Fall, in dem die geometrische Summenformel nicht 
+angewendet werden kann, um die Partialsummen auszurechnen. 
+\item Für $|q|<1$ ist nach der \ref[content_02_vollstaendige_induktion][geometrischen Summenformel]{rule:geom-summe}
+\[ s_n=\sum_{k=0}^n q^k=\frac{1-q^{n+1}}{1-q} \]
+und $\lim_{n\to \infty} q^{n+1}=0$. 
+Daher ist nach den \ref[konvergenz][Grenzwertregeln]{sec:grenzwertregeln}
+\[ \lim_{n\to \infty} s_n=\lim_{n\to \infty}\frac{1-q^{n+1}}{1-q}
+=\frac{1}{1-q}.\]
+Die Reihe ist also konvergent und
+\[ \sum_{k=0}^\infty q^k =\frac{1}{1-q}.\]
+\item Falls $|q|\geq 1$, aber $q\neq 1$, ist immer noch 
+\[ s_n=\sum_{k=0}^n q^k=\frac{1-q^{n+1}}{1-q}. \]
+In diesem Fall konvergiert die Folge $(q^{n+1})_{n\geq 0}$ jedoch nicht, weshalb auch die Folge $(s_n)_{n\geq 0}$ nicht konvergiert.
+
+Die Reihe $\sum_{k=0}^\infty q^k$ konvergiert also hier nicht.
+\end{enumerate}
+\end{example}
+
+\begin{quickcheck}
+  \type{input.number}
+  \field{rational}
+ 
+  \begin{variables}
+   \randint{n}{2}{10}
+   \function[calculate]{s}{n/(n-1)}
+   \function[calculate]{t}{s-1}
+  \end{variables}
+ 
+  \text{
+    Bestimmen Sie die Grenzwerte der Reihen
+    $\sum_{k=0}^\infty (\frac{1}{\var{n}})^k$ und $\sum_{k=1}^\infty (\frac{1}{\var{n}})^k$.
+   
+   $\sum_{k=0}^\infty (\frac{1}{\var{n}})^k=$\ansref
+   
+   $\sum_{k=1}^\infty (\frac{1}{\var{n}})^k=$\ansref
+   }
+  
+ 
+  \begin{answer}
+  %\text{$\sum_{k=0}^\infty (\frac{1}{\var{n}})^k=$}
+    \solution{s}
+  \end{answer}
+  \begin{answer}
+  %\text{$\sum_{k=1}^\infty (\frac{1}{\var{n}})^k=$}
+    \solution{t}
+  \end{answer}
+\end{quickcheck}
+
+
+\begin{example}\label{ex:erste-reihen}
+
+\begin{tabs*}[\initialtab{0}]
+\tab{$1=0,\overline{9}$}
+Wir berechnen den Grenzwert  des Dezimalbruchs
+\[0,999999\ldots=\sum_{j=1}^{\infty}9\cdot 10^{-j}.\]
+Dazu formen wir die Partialsummen ein wenig um, $r_n=-9+9\cdot\sum_{j=0}^n 10^{-j}$, 
+und erkennen im letzten Term die geometrische Reihe für $q=\frac{1}{10}$. Also ist  
+\[\sum_{j=1}^{\infty}9\cdot 10^{-j}=-9+9\cdot\sum_{j=0}^\infty10^{-j}
+=-9+9\cdot\frac{1}{1-\frac{1}{10}}=1.\]
+Wir haben gezeigt, dass die beiden Dezimalbrüche $1=1,\overline{0}$ und $0,\overline{9}$ dieselbe Zahl darstellen.
+
+Wie passt das damit zusammen, dass die  
+Dezimalbruchentwicklung in Beispiel \ref{ex:dezimalbruchzerlegung} doch eindeutig war? 
+Nun, die dort erzeugte Dezimalbruchentwicklung war eindeutig
+mit der Eigenschaft, dass in jedem Schritt der Approximationsfehler
+echt kleiner als $10^{-n}$ ist, also $|r-r_n|<10^{-n}$. 
+Bei der Dezimalbruchentwicklung $0,\overline{9}$ von $1$ ist das 
+offensichtlich für $n=0$ nicht erfüllt.
+Vielmehr ergibt sich hier für die reelle Zahl $0,\overline{9}$ die in Beispiel \ref{ex:dezimalbruchzerlegung} 
+erzeugte Dezimalbruchentwicklung als $1$.
+\tab{$\sum_{k=1}^\infty \frac{1}{k(k+1)}=1$}
+Für die Reihe $\sum_{k=1}^\infty \frac{1}{k(k+1)}$ sind die Partialsummen gegeben durch $s_n=\sum_{k=1}^n \frac{1}{k(k+1)}$.
+Durch die Umformung
+\[ \frac{1}{k(k+1)}=\frac{1+k-k}{k(k+1)}=
+\frac{1+k}{k(k+1)}-\frac{k}{k(k+1)}=\frac{1}{k}-\frac{1}{k+1}\]
+für jedes $k\in \N$ lässt sich $s_n$ einfacher schreiben als
+\begin{eqnarray*}
+ s_n &=& \sum_{k=1}^n \frac{1}{k(k+1)}=\sum_{k=1}^n (\frac{1}{k}-\frac{1}{k+1}) \\
+ &=& \sum_{k=1}^n \frac{1}{k}-\sum_{k=1}^n \frac{1}{k+1} 
+ = \sum_{k=1}^n \frac{1}{k} -\sum_{j=2}^{n+1} \frac{1}{j} \\
+ &=& 1 -\frac{1}{n+1}.
+\end{eqnarray*}
+Daraus folgt
+\[ \sum_{k=1}^\infty \frac{1}{k(k+1)}=\lim_{n\to \infty} s_n=\lim_{n\to \infty} \left(1 -\frac{1}{n+1}\right) =1.\]
+\tab{Harmonische Reihe $\sum_{k=1}^\infty \frac{1}{k}=\infty$}
+Die harmonische Reihe $\sum_{k=1}^\infty \frac{1}{k}$ 
+entsteht durch Summation der \ref[konvergenz][harmonischen Folge]{ex:einfache-folgen}.
+Sie ist ein zentrales Beispiel für eine bestimmt divergente Reihe.
+
+Da alle Summanden $\frac{1}{k}$ positiv sind, ist die Folge der
+ Partialsummen $s_n=\sum_{k=1}^n \frac{1}{k}$ streng monoton wachsend. Also ist die Reihe entweder konvergent oder bestimmt divergent gegen $\infty$. 
+ Um zu sehen, dass die Reihe nicht konvergiert, betrachten wir
+ die Partialsummen $s_n$, wenn $n=2^m$  ($m\in \N$) eine Zweierpotenz ist, und zeigen \ref[content_02_vollstaendige_induktion][induktiv]{sec:induktionsprinzip}, dass
+ \[ s_{2^m} \geq 1+m\cdot \frac{1}{2} \]
+ für alle $m \in \mathbb{N}$ gilt.
+
+Für $m=1$ ist 
+\[ s_2= \sum_{k=1}^2 \frac{1}{k} =1+\frac{1}{2}, \]
+was den Induktionsanfang liefert.
+Unter der Annahme, dass die Ungleichung für ein $m$ gilt, ist dann
+\begin{eqnarray*}
+s_{2^{m+1}} &=& \sum_{k=1}^{2^{m+1}} \frac{1}{k} =s_{2^m}+ \underbrace{\sum_{k=2^m+1}^{2^{m+1}} \frac{1}{k}}_{2^m \text{ Summanden}} \\
+&\geq & s_{2^m}+ 2^m \cdot \frac{1}{2^{m+1}}=s_{2^m}+\frac{1}{2}\\
+&\geq & 1+ m\cdot\frac{1}{2}+ \frac{1}{2}= 1+ (m+1)\cdot \frac{1}{2}.
+\end{eqnarray*}
+Die Teilfolge $(s_{2^m})_{m\in \N}$ ist also nicht beschränkt und daher auch nicht die Folge $(s_{n})_{n\in \N}$.
+\end{tabs*}
+\end{example}
+
+Ein \emph{notwendiges} Kriterium dafür, dass eine Reihe konvergieren kann, ergibt sich aus dem folgenden Satz:
+
+\begin{theorem}
+Ist $\sum_{k=1}^\infty a_k$ eine konvergente Reihe, so ist die
+Folge $(a_k)_{k\geq 1}$ eine Nullfolge.
+
+Äquivalent ausgedrückt:\\
+Ist  $(a_k)_{k\geq 1}$ keine Nullfolge, so ist die Reihe
+$\sum_{k=1}^\infty a_k$ divergent.
+\end{theorem}
+
+\begin{block}[warning]
+Die Bedingung, dass $(a_k)_{k\geq 1}$ eine Nullfolge ist, ist \emph{nicht} ausreichend dafür, dass die Reihe  $\sum_{k=1}^\infty a_k$ konvergiert, wie man anhand der harmonischen Reihe gut sehen kann.
+
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10905&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+\end{block}
+
+\begin{proof*}[Beweis des Theorems]
+\begin{incremental}[\initialsteps{0}]
+\step
+Wenn $\sum_{k=1}^\infty a_k$ gegen $s\in \R$ konvergiert, so gibt es für jedes $\epsilon_1>0$ ein $N_{\epsilon_1}\in \N$ mit
+ \[ | \, s- \sum_{k=1}^n a_k \, |<\epsilon_1 \]
+für alle $n\geq N_{\epsilon_1}$. Insbesondere gilt dann für alle
+$m\geq N_{\epsilon_1}+1$:
+\begin{eqnarray*}
+ |a_m|  &=& | \sum_{k=1}^m a_k - \sum_{k=1}^{m-1} a_k | \\
+&\leq& | \sum_{k=1}^m a_k - s| + |s-\sum_{k=1}^{m-1} a_k |\\ &<& 2\epsilon_1.
+\end{eqnarray*} 
+Das heißt aber, dass man für beliebiges $\epsilon>0$ die Zahl $M_\epsilon=N_{\epsilon/2}+1$ wählen kann, so dass
+\[ |a_m| < 2 \ \frac{\epsilon}{2} =\epsilon \]
+für alle $m\geq M_\epsilon$ gilt.\\
+Also ist $(a_k)_{k\geq 1}$ eine Nullfolge.
+\end{incremental}
+\end{proof*}
+
+\section{Grenzwertregeln und Leibniz-Kriterium}\label{sec:grenzwertregeln}
+
+Aus den \ref[konvergenz][Grenzwertregeln für Folgen]{sec:grenzwertregeln} bekommt man direkt auch Grenzwertregeln für Reihen.
+
+\begin{rule}[Grenzwertregeln]\label{rul:grenzwert-regeln}
+Es seien  $\sum_{k=1}^\infty a_k=A$ und $\sum_{k=1}^\infty b_k=B$ konvergente Reihen. Dann gilt für alle $\alpha, \beta \in \C$:
+
+Die Reihe $\sum_{k=1}^\infty ( \alpha a_k + \beta b_k)$ konvergiert und es ist
+\[ \sum_{k=1}^\infty ( \alpha a_k + \beta b_k)
+= \alpha \cdot A + \beta \cdot B. \]
+\floatright{\href{https://www.hm-kompakt.de/video?watch=324}{\image[75]{00_Videobutton_schwarz}}}\\\\
+\end{rule}
+
+\begin{quickcheck}
+  \type{input.number}
+  \field{rational}
+ 
+  \begin{variables}
+   \randint{n}{2}{6}
+   \randint{m}{7}{11}
+   \function[calculate]{s}{n/(n-1)}
+   \function[calculate]{t}{m/(m+1)}
+   \function[calculate]{r}{s-t}
+  \end{variables}
+ 
+  \text{
+    Bestimmen Sie den Grenzwert der Reihe
+    $\sum_{k=0}^\infty ((\frac{1}{\var{n}})^k-(-\frac{1}{\var{m}})^k)$.
+   
+   Antwort: \ansref
+    
+   }
+  
+ 
+  \begin{answer}
+  \solution{r}
+  \end{answer} 
+  
+\end{quickcheck}
+
+
+
+
+Ein Konvergenzkriterium, das wir hier gesondert behandeln, 
+betrifft sogenannte alternierende reelle Reihen:
+
+
+
+\begin{theorem}[Leibniz-Kriterium] \label{thm:leibnizkriterium}
+Ist $(a_k)_{k\geq 1}$ eine reelle monoton fallende Nullfolge (insbesondere $a_n\geq a_{n+1}\geq 0$), so ist die Reihe
+\[ \sum_{k=1}^\infty (-1)^k a_k \]
+konvergent.
+Ist $S$ der Grenzwert, so gilt für alle $n\in \N$
+\begin{align*}
+ 0 \, &\leq \, S-\sum_{k=1}^n (-1)^k a_k \ &\leq \, a_{n+1}, \quad
+ & \text{falls }n\text{ ungerade,} \\ 
+ 0 \, &\geq \, S-\sum_{k=1}^n (-1)^k a_k \ &\geq \, -a_{n+1}, \quad
+ & \text{falls }n\text{ gerade.} 
+\end{align*}  
+\floatright{\href{https://www.hm-kompakt.de/video?watch=322}{\image[75]{00_Videobutton_schwarz}}}\\\\
+\end{theorem}
+Betrachten wir zum Beispiel $S=\sum_{k=1}^\infty \frac{(-1)^k}{k+1}$,  so finden wir für $n=1$ die Abschätzung
+\[0\leq S+\frac{1}{2}\leq \frac{1}{3}.\] Der Grenzwert $S$ ist also negativ, sogar $-\frac{1}{6}\geq S\geq \frac{-1}{2}$.
+Für $n=2$ erhalten wir die Ungleichung $0\leq S+\frac{1}{2}-\frac{1}{3}\geq\frac {-1}{4}$.
+Bringen wir $\frac{1}{2}-\frac{1}{3}$ auf die rechte Seite, dann sehen wir $\frac{-1}{6}\geq S\geq \frac{-5}{12}$. 
+Die Ungleichung für $n=3$ liefert dann $\frac{-13}{60}\geq s\geq \frac{-5}{12}$, etc..
+Die obigen Ungleichungen ermöglichen uns also abwechselnd immer bessere Schranken für den Grenzwert nach oben und nach unten.
+Und mit der Addition des nächsten Reihengliedes hüpfen wir abwechselnd nach oben und unten immer knapper am Grenzwert vorbei.
+
+
+
+\begin{proof*}[Beweis des Leibniz-Kriteriums]
+
+
+
+Da die Folge $(a_k)_{k\geq 1}$ eine monoton fallende Nullfolge ist, 
+sind die für $S$ gegebenen Ungleichungen ausreichend dafür, dass $S$ auch der Grenzwert der Reihe ist.
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10906&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+\begin{incremental}[\initialsteps{0}]
+\step Ist nämlich $\epsilon>0$ beliebig, so gibt es ein $N\in \N$ mit $|a_{n}|<\epsilon$ für alle $n\geq N$, 
+und damit folgt aus den Ungleichungen
+\[  | \, S-\sum_{k=1}^n (-1)^k a_k \, |\leq {|a_{n+1}|}<\epsilon \]
+für alle $n\geq N$.
+\step
+
+Setzt man nun 
+\[   r_m =\sum_{k=1}^{2m-1} (-1)^k a_k\quad \text{und}\quad t_m=\sum_{k=1}^{2m} (-1)^k a_k \]
+für alle $m\in \N$, so gelten wegen $a_n\geq a_{n+1}\geq 0$
+und $\lim_{n\to \infty} a_n=0$:
+\begin{itemize}
+\item $t_m= r_m +a_{2m}\geq r_m$ für alle $m\in \N$,
+\item $r_{m+1}=r_m+ a_{2m}-a_{2m+1}\geq r_m$ und 
+$t_{m+1}=t_m-a_{2m+1}+a_{2m+2}\leq t_m$ für alle $m\in \N$, d.\,h.
+die Folge $(r_m)_{m\in \N}$ ist monoton wachsend und die Folge $(t_m)_{m\in \N}$ ist monoton fallend.
+\item Die Folge $(t_m-r_m)_{m\in \N}=(a_{2m})_{m\in \N}$ ist eine Nullfolge.
+\end{itemize}
+Dies bedeutet, dass die Folge von Intervallen $[r_m;t_m]$ eine \link{intervallschachtelung}{Intervallschachtelung} ist. 
+Ist also
+\[ s= \sup \{ r_m \, | \, m\in \N\} =\inf \{ t_m \, | \, m\in \N\} \]
+die reelle Zahl, die in allen Intervallen liegt, dann gilt $r_m\leq s\leq t_m$ für alle $m\in \N$. Insbesondere gelten für $n=2m-1$
+\[  s- \sum_{k=1}^n (-1)^k a_k=s-r_m\geq 0\quad \text{und}\quad
+s- \sum_{k=1}^n (-1)^k a_k=s-r_m\leq t_m-r_m=a_{2m}=a_{n+1}\]
+und für $n=2m$
+\[  s- \sum_{k=1}^n (-1)^k a_k =s- t_m\leq 0\quad \text{und}\quad
+s- \sum_{k=1}^n (-1)^k a_k=s-t_m\geq r_{m+1}-t_m=-a_{2m+1}=-a_{n+1}.\]
+Also erfüllt $s$ die oben genannten Kriterien und ist somit der Grenzwert der Reihe.
+\end{incremental}
+\end{proof*}
+\begin{remark}
+Mit den Grenzwertregeln erhält man aus dem Leibniz-Kriterium auch ein Konvergenzkriterium für die Folge
+\[ \sum_{k=1}^\infty (-1)^{k+1} a_k. \]
+Diese ist nämlich gerade $(-1)\cdot \sum_{k=1}^\infty (-1)^k a_k$.
+\end{remark}
+
+
+\begin{example}\label{ex:alter-harm-reihe}
+Die alternierende harmonische Reihe ist die Reihe
+\[  \sum_{k=1}^\infty \frac{(-1)^{k+1}}{k}=1-\frac{1}{2}+\frac{1}{3}-\frac{1}{4}+\ldots \]
+Nach dem Leibniz-Kriterium bzw. der Bemerkung danach ist diese Reihe  konvergent.
+
+\ref[content_27_konvergenzradius][Später]{ex:konvergenz-auf-rand} werden wir diesen Grenzwert verstehen als $\sum_{k=1}^\infty \frac{(-1)^{k+1}}{k}=\ln(2)$.
+
+\end{example}
+
+
+\end{content}

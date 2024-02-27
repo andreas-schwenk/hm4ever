@@ -1,0 +1,33 @@
+%This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)
+%https://creativecommons.org/licenses/by/4.0/legalcode
+\documentclass[rgb]{standalone}
+\usepackage{tkz-euclide}
+\definecolor{myorange}{hsb}{0.0833, 1, 0.8}
+\definecolor{mygreen}{hsb}{0.3333, 1, 0.8}
+\definecolor{myblue}{hsb}{0.5833, 1, 0.8}
+\definecolor{mymagenta}{hsb}{0.8333, 1, 0.8}
+\begin{document}
+	\begin{tikzpicture}[scale=1.5, font=\Large]
+		% Coordinate system
+		\tkzInit[xmin=0,xmax=6,ymin=-2,ymax=2]
+		\tkzGrid[color=lightgray]
+		\tkzDrawX[thick,label=$x$]
+		\tkzDrawY[thick,label=$y$]
+		\draw[dashed] (0,-0.75) -- (6,-0.75);
+		\draw[dashed] (0,0.75) -- (6,0.75);
+		\draw[very thick,domain=30:330, smooth, samples=300, variable=\x,myblue] plot (45/75+\x/75, {1.5*sin(\x)});
+		\node[very thick, draw, circle,fill,inner sep=2] at (3.4,-0.75) {};
+		\node[very thick, draw, circle,fill,inner sep=2] at (3,0) {};
+		\node[very thick, draw, circle,fill,inner sep=2] at (2.6,0.75) {};
+		\node[very thick, draw, circle,fill,inner sep=2, myblue] at (1,0.75) {};
+		\node[very thick, draw, circle,fill,inner sep=2, myblue] at (5,-0.75) {};
+		% Labels
+		\node[left=0.5mm] at (0,0.75){$f(a)$};
+		\node[left=0.5mm] at (0,-0.75){$f(b)$};
+		\node[below=0.5mm] at (1,0){$a$};
+		\node[below=0.5mm] at (5,0){$b$};
+		\node[above right] at (2.6,0.75){$D$};
+		\node[above right=0.5mm] at (2.9,0){Nullstelle};
+		\node[above right] at (3.4,-0.75){$E$};
+	\end{tikzpicture}	
+\end{document}

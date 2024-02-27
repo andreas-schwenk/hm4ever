@@ -1,0 +1,327 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Exponentialreihe, Sinus und Kosinus}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T209_HyperbolicFunctions.meta.xml}{T209_HyperbolicFunctions}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T209_ComplexExponential.meta.xml}{T209_ComplexExponential}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T209_Exponential.meta.xml}{T209_Exponential}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T208_Reihen/g_art_content_25_konvergenz_kriterien.meta.xml}{konv-krit}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_15_monotone_konvergenz.meta.xml}{monot-konv}
+    \link{generic_article}{content/rwth/HM1/T208_Reihen/g_art_content_26_produkt_von_reihen.meta.xml}{cauchy-produkt}
+    \link{generic_article}{content/rwth/HM1/T104_weitere_elementare_Funktionen/g_art_content_15_exponentialfunktionen.meta.xml}{exponentialfunktion}
+    \link{generic_article}{content/rwth/HM1/T105_Trigonometrische_Funktionen/g_art_content_19_allgemeiner_sinus_cosinus.meta.xml}{sinus-und-kosinus}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{9}
+\ombarticle{2}
+
+\lang{de}{\title{Exponentialreihe, Sinus und Kosinus}}
+ 
+\begin{block}[annotation]
+  
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9685}{Ticket 9685}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+
+
+\section{Exponentialreihe und Exponentialfunktion}\label{sec:exp-reihe}
+
+Wir haben im Abschnitt \ref[konv-krit][Konvergenzkriterien für Reihen]{ex:exp-reihe} gesehen, dass die
+ Exponentialreihe $\exp(z)=\sum_{n=0}^\infty \frac{z^n}{n!}$ für jedes $z\in \C$ absolut konvergiert.
+Mit Hilfe der Potenzreihe können wir also (wie schon durch die Benennung $\exp(z)$ angedeutet) eine komplexwertige Funktion $\exp$ mit Definitionsbereich $\C$ definieren. 
+ 
+
+\begin{definition}
+Die komplexe Exponentialfunktion $\exp:\C\to \C$ ist definiert durch die Exponentialreihe
+\[  z\:\mapsto\:\exp(z)= \sum_{n=0}^\infty \frac{z^n}{n!} \]
+für alle $z\in \C$.\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=328}{\image[75]{00_Videobutton_schwarz}}}\\\\
+\end{definition}
+Natürlich suggeriert die Benennung der Exponentialreihe als $\exp(x)$ den Zusammenhang mit der
+\ref[exponentialfunktion][natürlichen Exponentialfunktion]{eulernum} $e^x$ nicht von ungefähr.
+Dass  diese Funktionen für reelle Zahlen $x$ wirklich übereinstimmen, 
+ist aber an dieser Stelle nicht leicht zu sehen, 
+denn wir haben noch keinen Begriff von  Stetigkeit oder gar Differenzierbarkeit zur Verfügung, 
+die wir erst in den nächsten Kapiteln einführen. 
+Stattdessen zeigen wir hier erst einmal die Übereinstimmung der Funktionen auf den rationalen Zahlen.
+
+%Der Zusammenhang mit der aus der Schule bekannten $e$-Funktion $e^x$ ergibt sich aus:
+
+\begin{theorem}\label{thm:exp_auf_QQ}
+Für alle rationalen Zahlen $x\in \Q$ ist
+\[  \exp(x) = e^x ,\]
+wobei $e$ die \ref[monot-konv][Eulersche Zahl]{sec:eulersche-zahl} bezeichnet.
+\end{theorem}
+
+
+
+\begin{proof*}
+Zunächst ist einzusehen, dass $\exp(1)=\sum_{k=0}^\infty \frac{1}{k!}$ mit dem Grenzwert
+\[ e= \lim_{n\to \infty} \left(1+\frac{1}{n}\right)^n \]
+übereinstimmt.
+\begin{incremental}[\initialsteps{0}]
+\step
+Hierzu sei $s_n:=\sum_{k=0}^n \frac{1}{k!}$ die $n$-te Partialsumme von $\exp(1)$ für $n\in \N$.
+Dann gilt für alle $n\in \N$:
+\begin{eqnarray*}
+ \left(1+\frac{1}{n}\right)^n &=& \sum_{k=0}^n \binom{n}{k} (\frac{1}{n})^k 
+= \sum_{k=0}^n \frac{n(n-1)\cdots (n-k+1)}{k! \cdot n^k} \\
+& \leq & \sum_{k=0}^n \frac{1}{k!} = s_n.
+\end{eqnarray*}
+Also ist auch 
+\[ e= \lim_{n\to \infty} \left(1+\frac{1}{n}\right)^n \leq\lim_{n\to \infty}s_n =\exp(1).\]
+\step
+Weiter ist aber für festes $m\in \N$ und $n\geq m$:
+\begin{eqnarray*}
+\left(1+\frac{1}{n}\right)^n &=& \sum_{k=0}^n \frac{n(n-1)\cdots (n-k+1)}{k! \cdot n^k} 
+ \geq  \sum_{k=0}^m \frac{n(n-1)\cdots (n-k+1)}{k! \cdot n^k} \\
+ &\geq & \sum_{k=0}^m \frac{1}{k!}\left( \frac{n-m+1}{n}\right)^k \geq  
+ \sum_{k=0}^m \frac{1}{k!}\left( \frac{n-m+1}{n}\right)^m \\
+ &=& \left( \frac{n-m+1}{n}\right)^m \cdot s_m =\left( 1 - \frac{m-1}{n}\right)^m \cdot s_m .
+ \end{eqnarray*}
+Damit ist
+\[  e= \lim_{n\to \infty} \left(1+\frac{1}{n}\right)^n \geq \lim_{n\to \infty} \left( 1 - \frac{m-1}{n}\right)^m \cdot s_m =s_m \]
+für alle $m\in \N$, und damit auch
+\[ \exp(1)=\lim_{m\to \infty} s_m \leq e.\]
+
+Insgesamt erhält man also $\exp(1)=e$.
+\end{incremental}
+Des Weiteren ist nach Definition $\exp(0)=1=e^0$.
+Dass $\exp(x)$ und $e^x$ wirklich für alle rationalen Zahlen übereinstimmen, zeigt man dann schrittweise
+mit Hilfe der \ref[cauchy-produkt][Funktionalgleichung für die Exponentialreihe]{ex:funktionalgleichung-exp}
+%\[ \left( \sum_{n=0}^\infty \frac{z^n}{n!} \right) \left( \sum_{n=0}^\infty \frac{w^n}{n!}\right)
+%= \sum_{n=0}^\infty \frac{(z+w)^n}{n!}, \text{d.h.}\]
+\[ \exp(z)\cdot \exp(w)=\exp(z+w) \]
+für alle $z,w\in \C$.
+%die wir im Abschnitt \ref[cauchy-produkt][Produkt von Reihen]{ex:funktionalgleichung-exp} gesehen hatten.
+\begin{incremental}[\initialsteps{0}]
+\step Zunächst erhält man aus obiger Gleichung induktiv für alle $m\in \N$ und $z\in \C$ die Gleichung $\exp(mz)=\exp(z)^m$,
+denn
+\[ \exp(mz)=\exp((m-1)z+z)=\exp((m-1)z)\cdot \exp(z)=\exp(z)^{m-1}\cdot \exp(z)=\exp(z)^m. \]
+Für alle $m\in \N$ gilt somit
+\[ \exp(m)=\exp(m\cdot 1)=\exp(1)^m= e^m.\]
+\step Für positive rationale Zahlen $\frac{p}{q}\in \Q$ ist dann
+\[ \left(\exp\left(\frac{p}{q}\right)\right)^q = \exp(q\cdot \frac{p}{q})=\exp(p)=e^p. \]
+Weil die Exponentialreihe nur positive Koeffizienten hat, ist $\exp(\frac{p}{q})$ positiv.
+Also folgt wegen der Eindeutigkeit der positiven Wurzel
+\[ \exp(\frac{p}{q}) =\sqrt[q]{e^p}=e^{\frac{p}{q}}. \]
+\step Schließlich erhält man für negative rationale Zahlen $-x$ (mit $x\in \Q_+$):
+\[ \exp(-x)=\frac{\exp(x+(-x))}{\exp(x)}=\frac{1}{e^x}=e^{-x}. \]
+\end{incremental}
+\end{proof*}
+
+
+\begin{remark}
+Mit der \link{exponentialfunktion}{intuitiven Einführung} von $e^x$ für reelle $x$ wie in der Schule gilt
+der obige Satz sogar für alle reellen Zahlen $x$. Formal korrekt kann man also $e^x$ als Grenzwert der
+Reihe $ \sum_{n=0}^\infty \frac{x^n}{n!}$ definieren und erhält den aus der Schule bekannten Graphen
+für diese reelle Funktion.
+% Graf der e-Funktion
+\begin{center}
+\image{T209_Exponential}
+\end{center}
+%
+\end{remark}
+
+Die (komplexe) Exponentialfunktion hat besondere Eigenschaften, die hier aufgeführt werden:
+
+\begin{theorem}\label{thm:eigenschaften_von_exp}
+Die komplexe Exponentialfunktion $\exp$ hat für alle $z,w\in \C$ die folgenden Eigenschaften:
+\begin{enumerate}
+\item $\exp(z+w)=\exp(z)\exp(w)$,
+\item $\exp(z)\neq 0$ und $\exp(-z)=\frac{1}{\exp(z)}$,
+\item für die konjugiert komplexe Zahl $\bar{z}$ gilt $\exp(\bar{z})=\overline{\exp(z)}$,
+\item für alle reellen Zahlen $x\in \R$ ist $\exp(x)\in \R$ und $\exp(x)>0$,
+\item für alle rein imaginären Zahlen $iy$ ($y\in \R$) ist $|\exp(iy)|=1$,
+\item $|\exp(z)|=\exp(\Re(z))$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof*}
+Die erste Gleichung ist die \ref[cauchy-produkt][Funktionalgleichung für die Exponentialreihe]{ex:funktionalgleichung-exp}.
+\begin{incremental}[\initialsteps{0}]
+\step
+Aus der Eigenschaft $\exp(0)=1$ folgt dann unmittelbar
+\[ 1=\exp(z-z)=\exp(z)\exp(-z), \] 
+was $\exp(z)\neq 0$ und $\exp(-z)=\frac{1}{\exp(z)}$ impliziert.
+\step
+Dadurch, dass die Exponentialreihe reelle Koeffizienten hat, gilt für die Partialsummen
+\[  \sum_{n=0}^m \frac{\bar{z}^n}{n!}= \overline{ \sum_{n=0}^m \frac{z^n}{n!} } \]
+und daher auch für die Grenzwerte
+\[ \exp(\bar{z}) =\sum_{n=0}^\infty \frac{\bar{z}^n}{n!}=\overline{ \sum_{n=0}^\infty \frac{z^n}{n!} }
+=\overline{\exp(z)}. \]
+\step
+Die Bedingung $\exp(x)\in \R_+$ für reelle $x\in \R$ erhält man für positive reelle $x$ direkt
+aus der Definition $\exp(x)= \sum_{n=0}^\infty \frac{x^n}{n!}>0$. 
+\step
+Für negative $x$ ist
+\[ \exp(x)=\frac{1}{\exp(-x)}>0, \]
+da $-x$ positiv ist.
+
+Für rein imaginäre Zahlen $iy$ ($y\in \R$) ist $\overline{iy}=-iy$ und damit ist
+\[ |\exp(iy)|=\sqrt{\exp(iy) \overline{\exp(iy)}}=\sqrt{\exp(iy) \exp(\overline{iy})}
+=\sqrt{\exp(iy) \exp(-iy)}=\sqrt{1}=1. \]
+
+Die letzte Gleichung folgt schließlich aus $\exp(\Re(z))=| \exp(\Re(z))|$ und $|\exp(i\Im(z))| =1$:
+\[ |\exp(z)|=| \exp(\Re(z)+i\Im(z))|=| \exp(\Re(z))\cdot  \exp(i\Im(z))|=
+| \exp(\Re(z))|\cdot |\exp(i\Im(z))| = \exp(\Re(z)) .\]
+\end{incremental}
+\end{proof*}
+
+Das folgende Video beschäftigt sich ausführlich mit der Exponentialfunktion:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10871&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+\section{Sinus und Kosinus}\label{sec:sinus-kosinus}
+
+Für die bekannten \link{sinus-und-kosinus}{Winkelfunktionen} Sinus und Kosinus erhält
+man ebenso Darstellungen als Potenzreihen.
+Ein Beweis für das folgende Theorem bleiben wir schuldig, 
+benötigt er doch weit mehr mathematische Theorie. Das
+Theorem kann auch als Definition der Kosinus- und Sinus-Reihen verstanden werden.
+
+
+
+
+\begin{theorem}\label{thm:sin_cos_exp}
+Für jede reelle Zahl $x$ gilt:
+\[   \cos(x)=\Re(\exp(ix))=\frac{1}{2}\left(\exp(ix)+\exp(-ix)\right)\]
+%\quad \text{und} 
+und
+%\quad 
+\[\sin(x)=\Im(\exp(ix))=\frac{1}{2i}(\exp(ix)-\exp(-ix)). \]
+Insbesondere hat man die Potenzreihen-Darstellungen
+\[ \cos(x)= \sum_{k=0}^\infty\;(-1)^k\; \frac{x^{2k}}{(2k)!} 
+    = 1 -\frac{x^2}{2!} + \frac{x^4}{4!} - \ldots \]
+    und
+    \[ \sin(x) = \sum_{k=0}^\infty \; (-1)^k\;\frac{x^{2k+1}}{(2k+1)!} 
+    =x - \frac{x^3}{3!} + \frac{x^5}{5!}- \ldots\, ,\]
+die für alle $x\in \R$ (sogar für alle $x\in\C$) absolut konvergieren.\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=330}{\image[75]{00_Videobutton_schwarz}}}\\\\
+\end{theorem}
+
+
+
+
+\begin{remark}
+\label{rem:sin_cos_exp}
+\begin{enumerate}
+\item
+Nimmt man 
+\[   \cos(x)=\Re(\exp(ix)) \quad \text{und} \quad \sin(x)=\Im(\exp(ix)) \]
+als gegeben an, erhält man die Potenzreihen-Darstellungen aus der Potenzreihe für $\exp$.
+Es ist nämlich
+\begin{eqnarray*}
+\exp(ix) &=& \sum_{n=0}^\infty \frac{(ix)^n}{n!}
+= \sum_{n=0}^\infty \frac{i^n x^n}{n!}\\
+&=& \sum_{n\geq 0, n\text{ gerade}} \frac{(-1)^{n/2} x^n}{n!}
++  \sum_{n\geq 1, n\text{ ungerade}} \frac{i\cdot (-1)^{(n-1)/2} x^n}{n!}\\
+&=&  \sum_{k=0}^\infty  \frac{(-1)^k x^{2k}}{(2k)!}
++ i \sum_{k=0}^\infty \;\frac{(-1)^k x^{2k+1}}{(2k+1)!} \, .
+\end{eqnarray*}
+\item Aus der Gleichung $|\exp(ix)|=1$ für reelle $x$ sieht man, 
+dass die Werte $\exp(ix)$ auf dem komplexen Einheitskreis liegen. 
+Trägt man Real- und Imaginärteil an den Achsen ab, sieht man, dass 
+tatsächlich $\Re(\exp(ix))=\cos(\varphi)$ und $\Im(\exp(ix))=\sin(\varphi)$ für einen Winkel $\varphi$ gelten.
+Dass aber $\varphi=x$ (jedenfalls bis auf Vielfache von $2\pi$ im Bogenma"s) gilt, ist, wie erwähnt, mathematisch tiefliegender.
+%
+\begin{center}
+\image{T209_ComplexExponential}
+\end{center}
+%
+\item Aus der Gleichung $|\exp(ix)|=1$ erhält man den trigonometrischen Satz des Pythagoras:
+\[ 1= |\exp(ix)|^2=\Re(\exp(ix))^2+ \Im(\exp(ix))^2=\cos(x)^2+\sin(x)^2 \]
+für alle $x\in \R$.
+\item Die Additionstheoreme
+\[ \cos(x+y)=\cos(x)\cos(y)-\sin(x)\sin(y)\]
+und
+\[\sin(x+y)=\sin(x)\cos(y)+\cos(x)\sin(y) \]
+lassen sich wiederum direkt aus der Gleichung
+\[  \exp(ix+iy)=\exp(ix)\exp(iy) \]
+herleiten.
+\end{enumerate}
+\begin{tabs*}[\initialtab{0}]
+\tab{Beispiel}
+Wir beweisen das Additionstheorem für den Kosinus
+\[\cos(x+y)=\cos(x)\cos(y)-\sin(x)\sin(y).\]
+Unter Verwendung der Definition von Sinus und Kosinus und der Funktionalgleichung der Exponentialreihe rechnen wir
+\begin{eqnarray*}
+&&\cos(x)\cos(y)-\sin(x)\sin(y)\\&=&
+\frac{1}{4}\big(\exp(ix)+\exp(-ix)\big)\big(\exp(iy)+\exp(-iy)\big)\\
+&&-\frac{1}{4i^2}\big(\exp(ix)-\exp(-ix)\big)\big(\exp(iy)-\exp(-iy)\big)\\
+&=&\frac{1}{4}\big(\exp(i(x+y))+\exp(i(y-x))+\exp(i(x-y))+\exp(-i(x+y))\\
+&&\quad  +\exp(i(x+y))-\exp(i(y-x))-\exp(i(x-y))+\exp(-i(x+y))\big)\\
+&=&\frac{1}{4}\big(2\exp(i(x+y))+2\exp(-i(x+y))\big)\\
+&=&\cos(x+y)\:.
+\end{eqnarray*}
+\end{tabs*}
+\end{remark}
+\begin{remark}\label{rem:euler_formel}
+Mit dem Wissen über die trigonometrischen Funktionen, dass $\cos(\pi)=-1$ und $\sin(\pi)=0$ ist,
+erhält man die fundamentale Gleichung (\textbf{Eulersche Identität})
+\[   e^{i\pi}=-1\quad  \text{ bzw. }\quad e^{i\pi}+1=0\:, \]
+wobei in Analogie zur reellen Exponentialfunktion $e^{i\pi}$ als $\exp(i\pi)$ zu verstehen ist.
+\end{remark}
+
+Den Zusammenhang zwischen der komplexen Exponentialfunktion und den Winkelfunktionen
+erläutert das folgende Video:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10872&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+
+\section{Sinus hyperbolicus und Kosinus hyperbolicus}\label{sec:sinh-cosh}
+Es hindert uns nichts daran, die Exponentialreihe auch ohne eine imaginäre Einheit mitzuschleppen in zwei Teilreihen aufzuteilen. 
+Dann gelangt man zu den folgenden Funktionen.
+\begin{definition}\label{def:sinh-cosh}
+Die Reihe 
+\[\sinh (x)=\sum_{n=0}^\infty \frac{x^{2n+1}}{(2n+1)!}\]
+heißt die \notion{Sinus hyperbolicus}-Reihe, und die Reihe
+\[\cosh (x)=\sum_{n=0}^\infty \frac{x^{2n}}{(2n)!}\]
+heißt die \notion{Kosinus hyperbolicus}-Reihe.\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=333}{\image[75]{00_Videobutton_schwarz}}}\\\\
+\end{definition}
+Obwohl diese Reihen offenbar für komplexe Argumente definiert sind, 
+betrachtet man sie normalerweise als reelle Funktionen und verwendet daher das Argument $x$.
+\begin{theorem}\label{thm:sinh-cosh}
+Die Reihen Sinus hyperbolicus und Kosinus hyperbolicus haben Konvergenzradius unendlich, sind also für jede komplexe Zahl konvergent.
+Es gelten
+\[\sinh(x)=\frac{1}{2}(e^x-e^{-x})=-i\sin(ix),\]
+\[\cosh(x)=\frac{1}{2}(e^x+e^{-x})=\cos(ix),\]
+sowie
+\[e^x=\cosh(x)+\sinh(x).\]
+Weiter ergibt sich
+\[\cosh^2(x)-\sinh^2(x)=1.\]
+\begin{center}
+\image{T209_HyperbolicFunctions}
+\end{center}
+
+Durch den Graphen des Kosinus hyperbolicus wird zum Beispiel eine an zwei gleich hohen Punkten befestigte durchhängende Kette dargestellt, 
+daher wird dieser Graph auch als \emph{Kettenlinie} bezeichnet.
+\end{theorem}
+
+\end{content}

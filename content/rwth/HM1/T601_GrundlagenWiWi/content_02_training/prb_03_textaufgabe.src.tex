@@ -1,0 +1,339 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+ \name{
+  \lang{de}{A03: Anwendung einfacher Gleichungen}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+\lang{de}{\title{A03: Anwendung einfacher Gleichungen}}
+\lang{en}{\title{A03: application of simple equations}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/23785}{Ticket 23785}
+\end{block}
+
+\begin{block}[annotation]
+Kopie: hm4mint/T101_neu_Elementare_Rechengrundlagen/training 11
+
+Im Ticket-System: \href{https://team.mumie.net/issues/22336}{Ticket 22336}
+\end{block}
+
+\begin{block}[annotation]
+	Anwendungen zu linearen und quadratischen GLeichungen
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+
+\begin{problem}
+
+%
+  \randomquestionpool{1}{6}
+%
+
+% Question 1
+
+\begin{question}
+
+\begin{variables}
+	\randint{a}{20}{50}
+	\randint{b}{1}{30}
+	\randadjustIf{a}{b>=a}
+	
+	\function[calculate, 2]{sc}{(a+b)/5}	
+    \function[calculate, 2]{sb}{2*sc}
+	\function[calculate, 2]{sl}{sb-b}
+\end{variables}
+
+	\type{input.number}
+	\field{real}
+    \precision{2}
+    \lang{de}{\text{
+	    Die Geschwister Ben, Carl und Laura gehen zusammen einkaufen. Sie geben zusammen $\var{a}$ € aus.
+        Ben gibt dabei doppelt soviel aus wie Carl und Laura gibt $\var{b}$ € weniger aus als Ben. 
+	    Welchen Betrag gibt jeder einzelne von ihnen aus?\\
+        \\
+        Ben gibt \ansref €, $\,$ Carl \ansref € $\,$ und Laura \ansref € aus.}}
+    \lang{en}{\text{
+       The siblings Ben, Carl and Laura go shopping together. They spend $\var{a}$ € together.
+        Ben spends twice as much as Carl and Laura spends $\var{b}$ € less than Ben. 
+	    What amount does each of them spend?\\
+        \\
+        Ben spends \ansref €, $\,$ Carl spends \ansref € $\,$ and Laura spends \ansref €.}}
+  
+  \lang{de}{\explanation{Zu Lösen ist die lineare Gleichung $x+ \frac{1}{2} x+ (x-\var{b})=\var{a}$.}}
+  \lang{en}{\explanation{We need to solve the linear equation $x+ \frac{1}{2} x+ (x-\var{b})=\var{a}$. }}
+    
+    \begin{answer}
+	    \solution{sb}
+    \end{answer}
+    \begin{answer}
+	    \solution{sc}
+    \end{answer}
+    \begin{answer}
+	    \solution{sl}
+    \end{answer}
+
+\end{question}
+
+% Question 2
+
+\begin{question}
+
+\begin{variables}
+	\randint{a}{50}{150}
+	\randint{b}{3}{5}
+	
+	\function[calculate, normalize]{s}{2*a*b/(b-2)}	
+
+\end{variables}
+
+	\type{input.number}
+	\field{rational}
+  \lang{de}{\text{
+	    Marc und Lea machen eine dreitägige Radtour. Am ersten Tag legen sie $50$ \% der Gesamtstrecke 
+        zurück. Am zweiten Tag schaffen sie $\var{a}$. Für den letzten Tag bleibt dann noch ein $\var{b}$-tel 
+        der Gesamtstrecke zu fahren. Wie lang ist die gesamte Strecke?\\
+        \\
+        Insgesamt fahren die beiden an den drei Tagen $\,$\ansref km.}}
+    \lang{en}{\text{
+     Marc and Lea go on a three-day bike tour. On the first day they cover $50$ \% of the total distance. 
+        On the second day they manage $\var{a}$. On the last day they have to cycle $1/\var{b}$
+        of the total distance. How long is the total distance?\\
+        \\
+        In total, the two of them cycle $\,$\ansref km over the three days.}}
+        
+    \lang{de}{\explanation{Zu Lösen ist die lineare Gleichung $\; \frac{1}{2} x+ \var{a} + \frac{1}{\var{b}} x = x $.}}
+    \lang{en}{\explanation{We need to solve the linear equation $\; \frac{1}{2} x+ \var{a} + \frac{1}{\var{b}} x = x $. }}
+    
+    \begin{answer}
+	    \solution{s}
+    \end{answer}
+
+\end{question}
+
+% Question 3
+
+\begin{question}
+
+\begin{variables}
+	\randint{a}{60}{120}
+    \randint{d}{10}{30}
+	\randint{b}{5}{15}
+    \randadjustIf{b}{b>=d}
+ 
+	\function[calculate, normalize]{cd}{d-b}    % Alter von David vor b Jahren
+    \function[calculate, normalize]{co}{a-d-b}	% Alter der Großmutter vor b Jahren
+	\function[calculate, normalize]{c}{co/cd}
+	\function[calculate, normalize]{sd}{d}
+	\function[calculate, normalize]{so}{a-d}	    
+
+\end{variables}
+
+	\type{input.number}
+	\field{rational}
+   \lang{de}{\text{
+	    David und seine Großmutter sind zusammen $\var{a}$ Jahre alt. Vor $\var{b}$ Jahren war seine Großmutter
+        $\var{c}$ mal so alt wie David. Wie alt sind die beiden heute?\\
+        \\
+        David ist \ansref Jahre alt und seine Großmutter ist \ansref .}}
+    \lang{en}{\text{
+	    David and his grandmother are $\var{a}$ years old together. $\var{b}$ years ago, his grandmother was
+        $\var{c}$ times as old as David. How old are they today?\\
+        \\
+        David is \ansref  years old and his grandmother is \ansref years old.}}
+        
+    \lang{de}{\explanation{Zu Lösen ist die lineare Gleichung $\; \var{c} (x-\var{b}) = (\var{a}-x)-\var{b}$.}}
+    \lang{en}{\explanation{We need to solve the linear equation $\; \var{c} (x-\var{b}) = (\var{a}-x)-\var{b}$.}}
+    
+    \begin{answer}
+	    \solution{sd}
+    \end{answer}
+    \begin{answer}
+	    \solution{so}
+    \end{answer}
+
+\end{question}
+
+% Question 4
+
+\begin{question}
+
+\begin{variables}
+	\randint{a}{10}{15}                                 % Geschwindikeit Marie
+    \drawFromSet{d}{5,15}
+    \function[calculate, normalize]{b}{a+d}             % Geschwindikeit Mutter 
+ 	\function[calculate, normalize]{sh}{1/4 * a/(b-a)}  % Fahrtzeit der Mutter in h
+	\function[calculate, normalize]{sm}{sh * 60}	    % Fahrtzeit der Mutter in min   
+
+\end{variables}
+
+	\type{input.number}
+	\field{rational}
+   \lang{de}{\text{
+	    Marie fährt mit ihrem Fahrrad mit (konstant) $\var{a}$ km/h zur Schule. Als ihre Mutter 
+        bemerkt, dass Marie ihren Sportbeutel vergessen hat, fährt sie mit einem e-Bike hinterher, 
+        um Marie den Sportbeutel zu bringen. Die Mutter bricht genau $15$ min später auf und fährt mit
+        einer (konstanten) Geschwindigkeit von $\var{b}$ km/h.  
+        Wie lange braucht sie, bis sie ihre Tochter eingeholt hat? (Geben Sie die Zeit in Minuten an.)\\
+        \\
+        Es dauert $\,$\ansref min, bis die Mutter Marie eingeholt hat.}}
+    \lang{en}{\text{
+    Marie rides her bicycle to school at (constant) $\var{a}$ km/h. When her mother notices
+    that Marie has forgotten her sports bag, she rides behind her on an e-bike to bring Marie her gym bag. 
+    The mother sets off exactly $15$ min later and rides at a (constant) speed of $\var{b}$ km/h.  
+    How long does it take her to catch up with her daughter? (Give the time in minutes.)\\
+       \\It takes $\,$\ansref min for the mother to catch up with Marie.
+    }}
+        
+    \lang{de}{\explanation{Zu Lösen ist die lineare Gleichung 
+                $\; (\frac{1}{4}$h $\,+ x\,$h $) \cdot \var{a} \,$km/h $\,= x\,$h $\,\cdot \var{b} \,$km/h.\\ 
+               }}
+    \lang{en}{\explanation{We need to solve the linear equation
+              $\; (\frac{1}{4}$h $\,+ x\,$h $) \cdot \var{a} \,$km/h $\,= x\,$h $\,\cdot \var{b} \,$km/h.\\
+              }}
+    
+    \begin{answer}
+	    \solution{sm}
+    \end{answer}
+
+\end{question}
+
+% Question 5
+
+\begin{question}
+
+\begin{variables}
+	\randint[Z]{a}{-50}{50}
+	\randint[Z]{b}{-50}{50}
+%    \randadjustIf{b}{b<a}
+
+    \function[calculate, normalize]{sum}{a+b}
+    \function[calculate, normalize]{sn}{-a-b}
+ 	\function[calculate, normalize]{p}{a*b} 
+
+\end{variables}
+
+	\type{input.number}
+	\field{rational}
+    \lang{de}{\text{
+	    Zerlegen Sie die Zahl $\var{sum}$ in zwei Summanden, deren Produkt $\var{p}$ ergibt. \\
+        \\
+        Die gesuchten Summanden sind $x_1=$\ansref und $x_2=$\ansref .}}
+      \lang{en}{\text{ Decompose the number $\var{sum}$ into two summands whose product is $\var{p}$. \\
+        \\
+        The summands we are looking for are $x_1=$\ansref and $x_2=$\ansref .}}
+        
+   \lang{de}{\explanation[sum<0 AND p<0]
+                {Zu Lösen ist die quadratische Gleichung $x^2 + \var{sn} x + (\var{p}) =0$.\\
+                Für die Lösungen $x_1$ und $x_2$ gilt nach dem Satz von Viëta 
+                $\var{sum}=(x_1+x_2)\,$ und $\var{p}=x_1 \cdot x_2$.
+                }}
+    \lang{en}{\explanation[sum<0 AND p<0]
+              {We need to solve the quadratic equation $x^2 + \var{sn} x + (\var{p}) =0$.
+                According to Vieta's theorem, the solutions $x_1$ and $x_2$ satisfy $\var{sum}=(x_1+x_2)\,$ und $\var{p}=x_1 \cdot x_2$.
+              }}
+   \lang{de}{\explanation[sum<0 AND p>=0]
+                {Zu Lösen ist die quadratische Gleichung $x^2 + \var{sn} x + \var{p} =0$.\\
+                Für die Lösungen $x_1$ und $x_2$ gilt nach dem Satz von Viëta 
+                $\var{sum}=(x_1+x_2)\,$ und $\var{p}=x_1 \cdot x_2$.
+                }}
+   \lang{en}{\explanation[sum<0 AND p<0]
+              {We need to solve the quadratic equation $x^2 + \var{sn} x + \var{p} =0$.
+                
+                According to Vieta's theorem, the solutions $x_1$ and $x_2$ satisfy $\var{sum}=(x_1+x_2)\,$ und $\var{p}=x_1 \cdot x_2$.
+              }}
+      
+    \lang{de}{\explanation[sum>=0 AND p<0]
+                {Zu Lösen ist die quadratische Gleichung $x^2 - \var{sum} x + (\var{p}) =0$.\\
+                Für die Lösungen $x_1$ und $x_2$ gilt nach dem Satz von Viëta 
+                $\var{sum}=(x_1+x_2)\,$ und $\var{p}=x_1 \cdot x_2$.
+                }}   
+   \lang{en}{\explanation[sum<0 AND p<0]
+              {We need to solve the quadratic equation $x^2 - \var{sum} x + (\var{p}) =0$.
+                
+                According to Vieta's theorem, the solutions $x_1$ and $x_2$ satisfy $\var{sum}=(x_1+x_2)\,$ und $\var{p}=x_1 \cdot x_2$.
+              }}
+    \lang{de}{\explanation[sum>=0 AND p>=0]
+                {Zu Lösen ist die quadratische Gleichung $x^2 - \var{sum} x + \var{p} =0$.\\
+                Für die Lösungen $x_1$ und $x_2$ gilt nach dem Satz von Viëta 
+                $\var{sum}=(x_1+x_2)\,$ und $\var{p}=x_1 \cdot x_2$.
+                }}
+     \lang{en}{\explanation[sum<0 AND p<0]
+              {We need to solve the quadratic equation $x^2 - \var{sum} x + \var{p} =0$.
+                
+                According to Vieta's theorem, the solutions $x_1$ and $x_2$ satisfy $\var{sum}=(x_1+x_2)\,$ und $\var{p}=x_1 \cdot x_2$.
+              }}
+                
+                
+%
+   \permuteAnswers{1, 2}
+%   
+    \begin{answer}
+	    \solution{a}
+    \end{answer}
+    \begin{answer}
+	    \solution{b}
+    \end{answer}
+
+\end{question}
+
+% Question 6
+
+\begin{question}
+
+\begin{variables}
+	\randint[Z]{a}{0}{35}
+	\randint[Z]{b}{1}{10}
+
+    \function[calculate, normalize]{s}{2*(2*a+b)}
+ 	\function[calculate, normalize]{f}{a*(a+b)} 
+
+\end{variables}
+
+	\type{input.number}
+	\field{rational}
+    \lang{de}{\text{
+	    Ein rechteckiges Grundstück mit einer Fläche von $\var{f}$ qm ist von einem
+        Zaun umgeben. Die längere Seite des Grundstücks ist $\var{b}$ m länger
+        als die kürzere Seite. Wie lang ist der Zaun?  \\
+        \\
+        Der Zaun hat eine Länge von \ansref m.}}
+    \lang{en}{\text{A rectangular plot of land with an area of $\var{f}$ sqm is surrounded by a
+        fence. The longer side of the plot is $\var{b}$ m longer
+        than the shorter side. What is the length of the fence?  \\
+        \\
+        The fence has a length of \ansref m.}}
+        
+   \lang{de}{\explanation{Die positive Lösung der quadratischen Gleichung $x^2 + \var{b} x - \var{f} =0$ liefert 
+                die Länge der kürzeren Grundstücksseite.
+                }}
+    \lang{en}{\explanation{The positive solution of the quadratic equation $x^2 + \var{b} x - \var{f} =0$ yields 
+                the length of the shorter side of the plot.}}
+%   
+    \begin{answer}
+	    \solution{s}
+    \end{answer}
+
+\end{question}
+
+
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

@@ -1,0 +1,182 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü01: Ober- und Untersummen}
+    \lang{en}{Exercise 1: Upper and lower sums}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\title{\lang{de}{Ü01: Ober- und Untersummen}
+    \lang{en}{Exercise 1: Upper and lower sums}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/23239}{Ticket 23239}
+\end{block}
+\usepackage{mumie.ombplus}
+
+
+\begin{block}[annotation]
+Kopie: hm4mint/T304_Integrierbarkeit/exercise 4
+Im Ticket-System: \href{http://team.mumie.net/issues/10579}{Ticket 10579}
+\end{block}
+
+%######################################################FRAGE_TEXT
+\lang{de}{ Wir betrachten die Funktion $f(x)=\frac{1}{x}$ auf dem Intervall $[1;5]$.\\
+\begin{enumerate}[a)]
+\item a) Geben Sie zu jedem $n\in \N$ die Ober- und Untersumme von $f$ bezüglich der
+äquidistanten Zerlegung $Z_n$ in $n$ Teilintervalle an.
+\item b) Berechnen Sie die Differenzen $O(Z_n)-U(Z_n)$.
+Wieso folgt aus dieser Berechnung, dass $f$ auf $[1;5]$ integrierbar ist?
+\item c) Für welche $n$ ist mit Sicherheit $|\int_1^5 f(x)\, dx - O(Z_n)|\leq 0,01$?
+\end{enumerate}
+
+\textit{Hinweis:} Nutzen Sie aus, dass die Funktion monoton fallend ist.
+ }
+\lang{en}{Consider the function $f(x) = \frac{1}{x}$ on the interval $[1;5]$.\\
+\begin{enumerate}[a)]
+\item a) For each $n \in \N$, find the upper and lower sums of $f$ with
+respect to an equidistant partition $Z_n$ into $n$ subintervals.
+\item b) Compute the differences $O(Z_n)-U(Z_n)$.
+Why does this computation imply that $f$ is integrable on $[1;5]$?
+\item c) For which $n$ can we be sure that $|\int_1^5 f(x)\, dx - O(Z_n)|\leq 0.01$?
+\end{enumerate}
+\textit{Hint:} Use the fact that $f$ is monotonically decreasing.
+}
+
+%##################################################ANTWORTEN_TEXT
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+\tab{\lang{de}{    Antworten    }  \lang{en}{Answers}}
+    \lang{de}{ \begin{enumerate}[a)]
+\item a) Obersumme und Untersumme sind
+\[ O(Z_n)= \sum_{l=0}^{n-1}  \frac{4}{n+4l}, \quad U(Z_n)= \sum_{k=1}^{n}  \frac{4}{n+4k}. \]
+
+
+\item b) Die Differenz beträgt
+\[  O(Z_n)-U(Z_n) = \frac{16}{5n}.\]
+Für Begründung der Integrierbarkeit siehe Lösung b).
+
+\item c) Für $n\geq 320$ ist die Bedingung erfüllt.
+\end{enumerate} }
+
+\lang{en}{ \begin{enumerate}[a)]
+\item a) The upper and lower sums are
+\[ O(Z_n)= \sum_{l=0}^{n-1}  \frac{4}{n+4l}, \quad U(Z_n)= \sum_{k=1}^{n}  \frac{4}{n+4k}. \]
+
+
+\item b) The difference is
+\[  O(Z_n)-U(Z_n) = \frac{16}{5n}.\]
+The proof of integrability is given in solution b).
+
+\item c) The condition is satisfied for $n\geq 320$.
+\end{enumerate} }
+
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung a)    }  \lang{en}{Solution a)}}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step  
+\lang{de}{Da das Intervall $[1;5]$ die Länge $4$ hat, sind die Längen der Teilintervalle bei der
+äquidistanten Zerlegung $Z_n$ jeweils $\frac{4}{n}$, und die Teilungsstellen sind
+\[  x_k=1+\frac{4k}{n}=\frac{n+4k}{n}\quad \text{für }k=0,\ldots, n. \] }
+\lang{en}{Since the interval $[1;5]$ has length $4$, the lengths of the subintervals in the
+equidistant partition $Z_n$ are all $\frac{4}{n}$, and the endpoints of the
+subintervals are 
+\[  x_k=1+\frac{4k}{n}=\frac{n+4k}{n}\quad \text{for }k=0,\ldots, n. \] }
+
+
+\step
+\lang{de}{Da die Funktion monoton fallend ist, wird das Maximum auf den Teilintervallen stets
+am linken Rand angenommen und das Minimum stets am rechten Rand.}
+\lang{en}{The function is monotonically decreasing, so its maximum on any subinterval
+occurs in the left endpoint and the minimum in the right endpoint. }
+\step
+\lang{de}{Als Obersumme zur Zerlegung $Z_n$ erhält man daher}
+\lang{en}{The upper sum for the partition $Z_n$ is therefore}
+\[ O(Z_n)= \sum_{k=1}^n f(x_{k-1}) \cdot \frac{4}{n}
+=  \frac{4}{n} \cdot\sum_{k=1}^n  \frac{n}{n+4(k-1)}
+= \frac{4}{n} \cdot\sum_{l=0}^{n-1}  \frac{n}{n+4l}=\sum_{l=0}^{n-1}  \frac{4}{n+4l},
+\]
+\lang{de}{wobei wir im vorletzten Schritt den Summationsindex $k$ durch den Summationsindex $l$ mittels $l=k-1$ ersetzt haben.}
+\lang{en}{where we replaced the summation index $k$ by $l=k-1$ in the second-to-last step.}
+\step
+\lang{de}{Für die Untersumme zur Zerlegung $Z_n$ erhält man entsprechend}
+\lang{en}{Similarly, the lower sum for the partition $Z_n$ is}
+\[ U(Z_n)=\sum_{k=1}^n f(x_{k}) \cdot \frac{4}{n}=
+ \frac{4}{n} \cdot\sum_{k=1}^{n}  \frac{n}{n+4k}= \sum_{k=1}^{n}  \frac{4}{n+4k}. \]
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung b)    } \lang{en}{Solution b)}}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step  
+\lang{de}{Aus Teil a) haben wir die Formeln $O(Z_n) =\sum_{l=0}^{n-1}  \frac{4}{n+4l}$ und
+$U(Z_n)= \sum_{k=1}^{n}  \frac{4}{n+4k}$.}
+\lang{en}{Part a) yields the formulas $O(Z_n) =\sum_{l=0}^{n-1}  \frac{4}{n+4l}$
+and $U(Z_n)= \sum_{k=1}^{n}  \frac{4}{n+4k}$.}
+\step
+\lang{de}{Da sich die beiden Summen lediglich um den Summanden mit $l=0$ bzw. mit $k=n$ unterscheiden, erhält man direkt}
+\lang{en}{The two sums differ only by the summand with $l=0$, i.e. $k=n$, so we immediately obtain}
+\[  O(Z_n)-U(Z_n) = \sum_{l=0}^{n-1}  \frac{4}{n+4l} - \sum_{k=1}^{n}  \frac{4}{n+4k} = \frac{4}{n}- \frac{4}{n+4n}=\frac{4}{n}-\frac{4}{5n}=\frac{16}{5n}.\]
+
+\step
+\lang{de}{Nach der Definition von Integrierbarkeit benötigt man zu jedem $\epsilon>0$ eine Zerlegung $Z$, für welche $O(Z)-U(Z)<\epsilon$ gilt. Für gegebenes $\epsilon>0$ muss man hier lediglich ein $n$ wählen, das so groß ist, dass $ \frac{16}{5n}<\epsilon$ ist.
+Dies ist möglich, da die Folge $( \frac{16}{5n})_{n\in \N}$ eine Nullfolge ist. Explizit kann
+man eine natürliche Zahl $n>\frac{16}{5\epsilon}$ wählen.
+
+Also ist $f$ auf dem Intervall $[1;5]$ integrierbar.}
+\lang{en}{According to the definition of integrability, for every $\epsilon>0$ we need a partition $Z$ for which $O(Z)-U(Z)<\epsilon$. In our case, for a fixed $\epsilon>0$, we
+only need to choose $n$ large enough such that $ \frac{16}{5n}<\epsilon$.
+This is possible because the sequence $(\frac{16}{5n})_{n\in \N}$ tends to zero.
+More explicitly, we can choose any natural number $n>\frac{16}{5\epsilon}$.
+}
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung c)    } \lang{en}{Solution c)}}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+\step 
+\lang{de}{Der Integralwert liegt stets zwischen Ober- und Untersumme. Ist also deren Abstand höchstens $0,01$, so ist auch der Abstand der Obersumme zum Integral  höchstens $0,01$.}
+\lang{en}{The value of the integral always lies between the upper and lower sums.
+If their difference is at most $0.01$, then the difference between
+the upper sum and the integral is also at most $0.01$.}
+
+\step
+\lang{de}{Wir haben also mit Sicherheit $|\int_1^5 f(x)\, dx - O(Z_n)|\leq 0,01$, wenn
+$\frac{16}{5n}\leq 0,01=\frac{1}{100}$, d.\,h. wenn $n\geq 320$.}
+\lang{en}{Therefore, $|\int_1^5 f(x)\, dx - O(Z_n)|\leq 0.01$ certainly holds whenever
+$\frac{16}{5n}\leq 0.01=\frac{1}{100}$, i.e. $n\geq 320$.}
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+
+%#############################################################ENDE
+\end{tabs*}
+\end{content}

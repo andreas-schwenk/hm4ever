@@ -1,0 +1,870 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Integrierbarkeit}
+    \lang{en}{Integrability}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T304_Integral_E.meta.xml}{T303_Integral_E}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T304_Integral_D.meta.xml}{T303_Integral_D}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T304_Integral_C.meta.xml}{T303_Integral_C}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T304_Integrierbarkeit/g_art_content_09_integrierbare_funktionen.meta.xml}{link2}
+    \link{generic_article}{content/rwth/HM1/T107_Integralrechnung/g_art_content_24_integral_als_flaeche.meta.xml}{teil1}
+    \link{generic_article}{content/rwth/HM1/T204_Abbildungen_und_Funktionen/g_art_content_12_reelle_funktionen_monotonie.meta.xml}{reelle-funk}
+    \link{generic_article}{content/rwth/HM1/T304_Integrierbarkeit/g_art_content_07_ober_und_untersumme.meta.xml}{ober-und-unter}
+    \link{generic_article}{content/rwth/HM1/T304_Integrierbarkeit/g_art_content_10_uneigentliches_integral.meta.xml}{uneigentlich-int}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{3}
+\ombarticle{2}
+
+
+\title{\lang{de}{Integrierbarkeit}\lang{en}{Integrability}}
+ 
+\begin{block}[annotation]
+  
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10037}{Ticket 10037}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+\lang{de}{
+In diesem Abschnitt verwenden wir die Ober-, Unter- und Zwischensummen aus dem 
+\link{ober-und-unter}{vorigen Abschnitt}, um Integrierbarkeit und Integrale zu definieren und zu 
+berechnen.
+\\\\
+Grundsätzlich existieren Integrale nur für Funktionen, die auf einem endlichen Intervall $[a;b]$ 
+definiert sind und dort auch beschränkt sind.
+\\\\
+Wir werden später allerdings auch noch \textit{uneigentliche Integrale} kennenlernen, bei denen die 
+Funktion z.\,B. am Rand nicht definiert sein muss. Diese werden wir aus den hier definierten 
+Integralen durch Grenzwertbildung erhalten.
+}
+\lang{en}{
+In this section we use the upper sum, lower sum and Riemann sum definitions from the 
+\link{ober-und-unter}{previous section} to define and determine integrability and integrals.
+\\\\
+The integrals that are introduced here are for functions that are defined and bounded on a finite 
+interval $[a;b]$.
+\\\\
+However, in later sections we also introduce definitions for \textit{improper integrals}, for which 
+the interval may not be finite. To introduce those, we will require the definitions we provide in 
+this section.
+}
+
+
+\section{\lang{de}{Integrierbarkeit}\lang{en}{Integrability}}\label{sec:integrierbarkeit}
+
+
+\begin{definition}
+\label{def:integral}
+%\emph{Definition:} 
+\lang{de}{
+Es sei $f(x)$ eine auf dem Intervall $[a;b]$ beschränkte Funktion.
+% $f$ heißt (Riemann-) integrierbar auf dem Intervall $[a;b]$, 
+%falls es eine Folge von Zerlegungen $Z_n$ von $[a;b]$ gibt, deren Feinheit
+%(maximale Breite der Teilintervalle) nach $0$ konvergiert für $n \rightarrow \infty$
+%und deren Obersummen und Untersummen gegen einen gemeinsamen Grenzwert (das Integral) konvergieren:
+%\[ \lim_{n\rightarrow \infty} U(Z_n) = \lim_{n\rightarrow \infty} O(Z_n) = \int_a^b f(x)\, dx \]
+$f$ heißt \notion{integrierbar} auf dem Intervall $[a;b]$, falls sich Untersumme und Obersumme
+durch Verfeinerung der Zerlegung beliebig genau annähern, d.\,h. falls es zu jeder
+vorgegebenen Zahl $\epsilon>0$ (und sei sie noch so klein) eine Zerlegung $Z_\epsilon$ des
+Intervalls $[a;b]$ gibt, sodass
+}
+\lang{en}{
+Let $f(x)$ be a function that is defined and bounded on an interval $[a;b]$. 
+We say that $f$ is \notion{integrable} on the interval $[a;b]$ if the lower sum and the upper sum 
+tend towards the same limit as the partition is refined. That is to say, if for arbitrarily small 
+$\epsilon>0$ there exists a partition $Z_\epsilon$ of the interval $[a;b]$ such that
+}
+\[ 0 \leq O(Z_\epsilon) - U(Z_\epsilon) \leq \epsilon \]
+\lang{de}{
+gilt. \\
+Ist $f$ integrierbar auf $[a;b]$, so gibt es eine eindeutige reelle Zahl
+$\big\int_a^b f(x)\, dx$, die als \notion{Integral von $f$ von $a$ nach $b$}
+bezeichnet wird, sodass
+}
+\lang{en}{
+holds. \\
+If $f$ is integrable on $[a;b]$, then there exists a unique real number $\big\int_a^b f(x)\, dx$ 
+called the \notion{integral of $f$ from $a$ to $b$} such that
+}
+\[ U(Z) \leq \int_a^b f(x)\, dx \leq O(Z) \]
+\lang{de}{
+für alle Zerlegungen $Z$ des Intervalls $[a;b]$ in endlich viele Teilintervalle gilt.
+}
+\lang{en}{
+for all partitions $Z$ of the interval $[a;b]$ into finitely many subintervals.
+}
+\end{definition}
+\lang{de}{
+Die gesamte (bisherige) Einführung des allgemeinen Integralbegriffs kann auch noch einmal hier angesehen werden:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10813&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+}
+\lang{en}{}
+%Das Integral kann auch alternativ mit Hilfe der Zwischensummen eingeführt werden.
+%Das Vorgehen ist sehr ähnlich und äquivalent. Dies wird in diesen Videos präsentiert:
+%\center{\href{https://www.hm-kompakt.de/video?watch=601}{\image[75]{00_Videobutton_schwarz}}
+%\href{https://www.hm-kompakt.de/video?watch=603}{\image[75]{00_Videobutton_schwarz}}
+%\href{https://www.hm-kompakt.de/video?watch=605}{\image[75]{00_Videobutton_schwarz}}
+%}\\\\
+
+
+% \begin{block}[notation]
+
+% \emph{\lang{de}{Schreibweise des bestimmten Integrals}\lang{en}{Notation for definite integrals}}\\\\
+% \lang{de}{Für das Integral der Funktion $f(x)$ in den Grenzen von $a$ bis $b$ schreibt man }
+% \lang{en}{The integral of the function $f(x)$ from $a$ to $b$ is written}
+% \[ \int_a^b f(x)\, dx \,  . \]
+% \lang{de}{$a$ und $b$ sind die \notion{Integrationsgrenzen}, 
+% $x$ ist die \notion{Integrationsvariable}, 
+% $f(x)$ der \notion{Integrand} und $dx$ das \notion{Differential}.}
+% \lang{en}{The parameters $a$ and $b$ are called the \textit{limits} or \emph{bounds} of integration where $a$ is the lower bound and $b$ is the upper bound, 
+% $x$ is the \textit{integration variable},
+% $f(x)$ is called the \textit{integrand}, and $dx$ is called the \textit{differential}.}
+
+% \end{block}
+
+
+
+\lang{de}{
+Das Integral kann also mit Hilfe von Obersummen und Untersummen definiert werden. 
+Zur Berechnung des Integrals einer integrierbaren Funktion $f$ lässt man 
+die Breite der Teilintervalle immer kleiner werden. Schließlich ergibt sich dann
+der gesuchte Integralwert.
+%Im Grenzwert konvergieren Untersummen und Obersummen dann gegen den gesuchten Integralwert.
+Da es weitere Integralbegriffe gibt, spricht man hierbei 
+vom \emph{Riemann-Integral}.}
+\lang{en}{
+The integral can thus be defined using lower and upper sums.
+In order to calculate the integral of an integrable function $f$ we simply progressively smaller 
+subintervals. 
+As the subinterval size goes to zero, the upper and lower sums converge to the value of the 
+integral. 
+As there are other formal definitions of integrals, we call this particular construction the 
+\emph{Riemann integral}.
+}
+
+
+
+\begin{example}
+\lang{de}{
+Im \ref[teil1][ersten Teil]{ex:integral-einfuehrung} haben wir das Integral als orientierten 
+Flächeninhalt kennengelernt. Dort haben wir für die Funktion $f(x)=2x+1$ das Integral 
+$\int_{-1}^2 f(x) dx$ in einem \ref[teil1][Beispiel]{ex:integral-dreieck} geometrisch bestimmt. 
+Zur Erinnerung ist der Flächeninhalt eines Dreiecks 
+\nowrap{$\frac{1}{2}$ $\cdot$ Breite $\cdot$ Höhe.}
+Wir haben das Integral als die Summe von zwei Dreiecksflächen mit unterschiedlichem Vorzeichen 
+berechnet: Ein kleines Dreieck zwischen $x=-1$ und $x=-0,5$ und ein größeres Dreieck zwischen 
+$x=-0,5$ und $x=2$. Das Integral $\int_{-1}^2 (2x+1)\, dx $ haben wir als 
+}
+\lang{en}{
+In the \ref[teil1][first part of the course]{ex:integral-einfuehrung} we introduced intervals as 
+signed areas bounded by a function graph and the $x$-axis. In an 
+\ref[teil1][example]{ex:integral-dreieck}, 
+we geometrically determined the interval $\int_{-1}^2 f(x) dx$ of the function $f(x)=2x+1$. 
+Recall that the area of a triangle is given by \nowrap{$\frac{1}{2}$ $\cdot$ width $\cdot$ height.} 
+We calculated the integral as the sum of the areas of two triangles with different signs: a small 
+triangle between $x=-1$ and $x=-0.5$, and a larger triangle between $x=-0.5$ and $x=2$. The integral 
+$\int_{-1}^2 (2x+1)\, dx $ was determined to be
+}
+\[ \frac{1}{2} \big(0{,}5 \cdot (-1) \big) + \frac{1}{2}\big(2{,}5 \cdot 5 \big) = 6  \]
+\lang{de}{bestimmt.}
+\lang{en}{in this example.}
+
+\begin{center}
+\image{T303_Integral_C}
+\end{center}
+
+\lang{de}{
+Stimmt jedoch der geometrische Integralbegriff aus dem ersten Teil des Kurses mit unserer Definition 
+\ref{def:integral} überein? Dies wollen wir nun rechnerisch bestätigen. Bei einer äquidistanten 
+Zerlegung $Z_n$ des Intervalls $[-1;2]$ in $n$ Teilintervalle sind die Randstellen der 
+Teilintervalle 
+}
+\lang{en}{
+Does our definition \ref{def:integral} correspond to the geometric idea behind the interval from the 
+first part of the course? We will now confirm this computationally. For a partition $Z_n$ of the 
+interval $[-1;2]$ into $n$ equal subintervals, the endpoints of the intervals are
+}
+\[  x_k=-1 +k\cdot \frac{3}{n}= \frac{3k-n}{n}\quad \text{ \lang{de}{für}\lang{en}{for} }k=0,\ldots, n \] 
+\lang{de}{
+und die Intervalllänge jeweils $\frac{3}{n}$.
+\\\\
+Da die Funktion monoton wachsend ist, werden die Suprema der Funktionswerte stets am rechten 
+Intervallrand angenommen und die Infima stets am linken. Man erhält also als Unter- und Obersummen
+}
+\lang{en}{
+and the length of each subinterval $\frac{3}{n}$.
+\\\\
+As the function is monotone increasing, the function takes the suprema of its image on each 
+subinterval at the right end of the interval, and the infima at the left end. Hence the lower sums 
+are
+}
+\begin{eqnarray*}
+U(Z_n) &=& \sum_{k=1}^n f(x_{k-1})\cdot \frac{3}{n}=\left( \sum_{k=1}^n (2\cdot \frac{3(k-1)-n}{n}+1)\right)\cdot \frac{3}{n} \\
+ &=& \frac{3}{n^2}\cdot \sum_{k=1}^n  (6k-6-2n+n) = \frac{3}{n^2}\cdot \left( 6\frac{n(n+1)}{2} - 6n-n^2 \right) \\
+ &=& \frac{3}{n^2}\cdot (3n^2+3n-6n-n^2)=6-\frac{9}{n},
+\end{eqnarray*}
+\lang{de}{
+wobei wir die Gaußsche Summenformel $\sum_{k=1}^n k=\frac{n(n+1)}{2}$ ausgenutzt haben. Für die 
+Obersumme gilt entsprechend
+}
+\lang{en}{
+where we use the Gaussian sum formula $\sum_{k=1}^n k=\frac{n(n+1)}{2}$. The upper sums are
+}
+\begin{eqnarray*}
+O(Z_n) &=& \sum_{k=1}^n f(x_{k})\cdot \frac{3}{n}=\left( \sum_{k=1}^n (2\cdot \frac{3k-n}{n}+1)\right)\cdot \frac{3}{n} \\
+ &=& \frac{3}{n^2}\cdot \sum_{k=1}^n  (6k-2n+n) = \frac{3}{n^2}\cdot \left( 6\frac{n(n+1)}{2} -n^2 \right) \\
+ &=& \frac{3}{n^2}\cdot (3n^2+3n-n^2)=6+\frac{9}{n}.
+\end{eqnarray*}
+
+\lang{de}{
+Die Differenz der beiden Summen beträgt $O(Z_n)-U(Z_n)=\frac{18}{n}$.
+Ist also $\epsilon>0$ beliebig, so kann man eine natürliche Zahl $n>\frac{18}{\epsilon}$ wählen, und 
+erhält für die Differenz der Ober- und Untersumme zur Zerlegung $Z_n$, dass
+}
+\lang{en}{
+The difference of the two sums is $O(Z_n)-U(Z_n)=\frac{18}{n}$. 
+Therefore given arbitrary $\epsilon>0$, we may choose any natural number $n>\frac{18}{\epsilon}$ 
+such that
+}
+\[ 0 \leq O(Z_n) - U(Z_n) = \frac{18}{n} < \epsilon \]
+\lang{de}{
+gilt. Also ist die Funktion auf dem Intervall $[-1;2]$ integrierbar. 
+\\\\
+Wegen $\lim_{n\to \infty} O(Z_n)=\lim_{n\to \infty} 6+\frac{9}{n}=6$ und
+$\lim_{n\to \infty} U(Z_n)=\lim_{n\to \infty} 6-\frac{9}{n}=6$ ist die einzige Zahl $I$ mit
+$U(Z_n)\leq I \leq O(Z_n)$ für alle $n$ die Zahl $I=6$.
+\\\\
+Also gilt:
+}
+\lang{en}{
+holds. Hence the function is integrable on the interval $[-1;2]$.
+\\\\
+As $\lim_{n\to \infty} O(Z_n)=\lim_{n\to \infty} 6+\frac{9}{n}=6$ and
+$\lim_{n\to \infty} U(Z_n)=\lim_{n\to \infty} 6-\frac{9}{n}=6$, the only number $I$ with 
+$U(Z_n)\leq I \leq O(Z_n)$ for all $n$ is $I=6$.
+\\\\
+Hence:
+}
+\[ \int_{-1}^2 (2x+1)\, dx = 6. \]
+\end{example}
+
+
+\begin{example}
+\begin{tabs*}[\initialtab{0}]
+\tab{$\int_0^2 (x^2+1)\, dx$}
+%\emph{Beispiel: } 
+\lang{de}{
+Wir betrachten wieder die Funktion $f(x)=x^2+1$ auf dem Intervall $[0;2]$ 
+(siehe Beispiel \ref[ober-und-unter][im vorigen Abschnitt]{zweizerl}). 
+\\\\
+Für die äquidistante Zerlegung $Z_n$ in $n$ Teilintervalle erhält man wie im vorigen Beispiel 
+die Randstellen der Teilintervalle 
+}
+\lang{en}{
+We once again consider the function $f(x)=x^2+1$ on the interval $[0;2]$ 
+(see example \ref[ober-und-unter][in the previous section]{zweizerl}).
+\\\\
+For the partition $X_n$ into $n$ equal subintervals we obtain as the endpoints of the subintervals
+}
+\[  x_k=0 +k\cdot \frac{2}{n}= \frac{2k}{n}\quad \text{ \lang{de}{für}\lang{en}{for} }k=0,\ldots, n \] 
+\lang{de}{
+und die Intervalllängen $\frac{2}{n}$. Der minimale Funktionswert liegt jeweils am linken Rand jedes 
+Teilintervalls und der maximale Funktionswert am rechten Rand. Um Ober- und Untersumme in diesem 
+Beispiel auszurechnen, brauchen wir außerdem noch die Formel 
+}
+\lang{en}{
+and each subinterval has length $\frac{2}{n}$. The minimum function value is always on the left end 
+of each subinterval and the maximum function value on the right end. To calculate the upper and 
+lower sums for this example, we once more employ the formula
+}
+\[ \sum_{k=1}^n \ k^2 = \frac{n(n+1)(2n+1)}{6},\]
+\lang{de}{
+welche mit vollständiger Induktion leicht bewiesen werden kann. (Dass wir eine derartige 
+Summenformel brauchen, deutet bereits an, dass man Integrale mit diesem Ansatz nur schwer bestimmen 
+kann.)
+\\\\
+Die Obersumme und Untersumme sind nun
+}
+\lang{en}{
+which can be easily proven by induction. (The need for such a formula points towards this approach 
+to computing integrals often being a difficult one.)
+\\\\
+The upper sums are
+}
+\begin{eqnarray*}
+O(Z_n) &=& \sum_{k=1}^n f(x_{k})\cdot \frac{2}{n}=\frac{2}{n}\cdot \sum_{k=1}^n \left((\frac{2k}{n})^2+1\right) \\
+&=&  \frac{2}{n}\cdot \sum_{k=1}^n \frac{4k^2}{n^2} + \frac{2}{n}\cdot n \\
+&=& \frac{8}{n^3}\cdot \sum_{k=1}^n k^2 + 2 \\
+&=& \frac{8}{n^3}\cdot \frac{n(n+1)(2n+1)}{6} + 2 =2+ \frac{8}{6}\cdot (1+\frac{1}{n})(2+\frac{1}{n})
+\end{eqnarray*}
+\lang{de}{bzw. entsprechend}
+\lang{en}{and the lower sums are}
+\begin{eqnarray*}
+U(Z_n) &=& \sum_{k=1}^n f(x_{k-1})\cdot \frac{2}{n}\\
+&=& \frac{8}{n^3}\cdot \frac{(n-1)n(2n-1)}{6} + 2 =2+ \frac{8}{6}\cdot (1-\frac{1}{n})(2-\frac{1}{n}) .
+\end{eqnarray*}
+\lang{de}{Für die Grenzwerte für $n\to \infty$ gilt dann:}
+\lang{en}{The limits as $n\to \infty$ are then}
+\begin{eqnarray*}
+\lim_{n\to \infty} O(Z_n)&=&  \lim_{n\to \infty} \big( 2+ \frac{8}{6}\cdot (1+\frac{1}{n})(2+\frac{1}{n}) \big) =2+\frac{8}{6}\cdot 2=\frac{14}{3}, \\
+\lim_{n\to \infty} U(Z_n)&=&  \lim_{n\to \infty} \big( 2+ \frac{8}{6}\cdot (1-\frac{1}{n})(2-\frac{1}{n}) \big) =2+\frac{8}{6}\cdot 2=\frac{14}{3}.
+\end{eqnarray*}
+\lang{de}{
+Der Integralwert ist also $\frac{14}{3}$, d.\,h. 
+$\big\int_0^2 (x^2+1)\, dx = \frac{14}{3} \approx 4{,}67$.
+}
+\lang{en}{
+The value of the integral is therefore $\frac{14}{3}$, that is, 
+$\big\int_0^2 (x^2+1)\, dx = \frac{14}{3} \approx 4{.}67$.
+}
+\end{tabs*}
+\end{example}
+
+
+
+\begin{block}[warning]
+\lang{de}{
+Über Definitionslücken darf nicht hinweg integriert werden und auch 
+Integrale über unbeschränkte Intervalle wie z.\,B. $[0;\infty)$ 
+oder Integrale unbeschränkter Funktionen sind 
+zunächst nicht zugelassen.
+In diesen Fällen kann der Flächeninhalt unendlich groß
+oder unbestimmt sein. Manchmal existiert dann ein \emph{uneigentliches Integral}, das wir aber erst \link{uneigentlich-int}{später}
+behandeln.
+}
+\lang{en}{
+Gaps in the domain of a function cannot be integrated over; unbounded
+intervals such as $[0,\infty)$ cannot be integrated over, and unbounded functions
+also cannot be integrated. 
+Attempting to integrate in such cases can end with areas being infinitely large or simply undefined. 
+Sometimes the so-called \emph{improper integral} exists, but this is dealt with link{uneigentlich-int}{later}.
+}
+\end{block}
+
+\lang{de}{
+Die Warnung haben wir bereits im ersten Teil ausgesprochen und ein 
+\ref[teil1][Beispiel]{ex:integral-def-luecke}
+angegeben. Wir schauen uns das Beispiel noch einmal genauer an.
+}
+\lang{en}{
+We already gave this warning in the first part of the course, and gave an 
+\ref[teil1][example]{ex:integral-def-luecke}. 
+We now consider this example more closely.
+}
+
+\begin{example}
+%\emph {Beispiel:} 
+\lang{de}{Wir betrachten die Funktion}
+\lang{en}{We consider the function}
+\[
+f: \R \to \R, \ x \mapsto \begin{cases}\frac{1}{x^2}, & \text{\lang{de}{falls}\lang{en}{if} } x \neq 0, \\ 0, & \text{\lang{de}{falls}\lang{en}{if} } x = 0.\end{cases}
+\]
+\lang{de}{
+Die Funktion $f$ hat zwar keine Definitionslücke, sie ist aber weder stetig noch beschränkt.
+Auf abgeschlossenen Intervallen, die die Null nicht enthalten, ist $f$ beschränkt.
+Die Integrale $\big\int_{-3}^{-1} f(x)\, dx$ und $\big\int_2^4 f(x) \, dx$ 
+existieren also, da $f$
+auf $[-3;-1]$ und auch auf $[2;4]$ beschränkt ist. Die Integrale
+$\big\int_{-1}^1 f(x)\, dx$ oder $\big\int_0^1 f(x)\, dx$ existieren aber nicht, 
+da in jeder Umgebung um $x=0$ die Funktion $f$ nicht beschränkt ist.
+Genauso existiert auch $\big\int_0^1 \frac{1}{x^2}\, dx$ nicht. Hier können wir zusätzlich anführen,
+dass $\frac{1}{x^2}$ in $x=0$ gar nicht definiert ist.
+}
+\lang{en}{
+The function $f$ may not have any gaps in its definition, but it is neither continuous nor bounded. 
+On a closed interval not containing zero, $f$ is bounded. Thus the integrals 
+$\big\int_{-3}^{-1} f(x)\, dx$ and $\big\int_2^4 f(x) \, dx$ exist, as $f$ is bounded on both 
+$[-3;-1]$ and $[2;4]$. The integrals $\big\int_{-1}^1 f(x)\, dx$ and $\big\int_0^1 f(x)\, dx$ do not exist however, as the function $f$ is not bounded on any neighbourhood of $x=0$. Likewise,  $\big\int_0^1 \frac{1}{x^2}\, dx$ does not exist. Here we can use that $\frac{1}{x^2}$ is 
+not even defined at $x=0$.
+}
+\end{example}
+
+
+\lang{de}{
+Wir schließen den Paragraphen mit einem Beispiel für eine Funktion, die nicht integrierbar ist.
+}
+\lang{en}{
+We give an example of a function that is not integrable at all.
+}
+
+\begin{example}\label{ex:dirichlet-nicht-intbar}
+\lang{de}{
+Wir betrachten die \ref[reelle-funk][Dirichletsche Sprungfunktion]{ex:unstetige-funktionen}
+}
+\lang{en}{
+We consider the \ref[reelle-funk][Dirichlet function]{ex:unstetige-funktionen}
+}
+\[  D:\R\to {\{0;1\}}, \ x \mapsto \begin{cases} 1, & \text{\lang{de}{falls}\lang{en}{if} }x\in \Q, \\
+0, & \text{\lang{de}{falls}\lang{en}{if} }x\notin \Q, \end{cases}\]
+\lang{de}{
+auf dem Intervall $[0;1]$.
+Wählt man eine beliebige Zerlegung $Z$ des Intervalls mit Teilpunkten $a=x_0<x_1<\ldots < x_n=b$,
+so ist das Infimum $m_k$ auf jedem Teilintervall $0$, da jedes Teilintervall  eine irrationale Zahl 
+enthält (sogar unendlich viele).
+Andererseits enthält jedes Teilintervall  auch unendlich viele rationale Zahlen, weshalb das 
+Supremum $M_k$ auf jedem Teilintervall $1$ ist. Als Unter- und Obersummen hat man also
+}
+\lang{en}{
+on the interval $[0;1]$.
+If we choose an arbitrary partition $Z$ of subintervals with endpoints $a=x_0<x_1<\ldots < x_n=b$,
+then the infimum $m_k$ on each subinterval is $0$, as each interval contains an irrational number 
+(in fact, infinitely many). Each subinterval also contains infinitely many rational numbers, so the 
+supremum $M_k$ on each subinterval is $1$. The lower and upper sums are therefore, respectively, 
+}
+\begin{eqnarray*}
+ U(Z)&=& \sum_{k=1}^n 0\cdot \Delta x_k= 0 \quad \text{\lang{de}{und}\lang{en}{and}} \\
+O(Z) &=& \sum_{k=1}^n 1\cdot \Delta x_k=\sum_{k=1}^n (x_k-x_{k-1})=x_n-x_0=1-0=1.
+\end{eqnarray*} 
+\lang{de}{
+Unabhängig von der Zerlegung sind also die Untersummen gleich $0$ und die Obersummen gleich $1$.
+Insbesondere ist die Differenz $O(Z)-U(Z)=1$ und kann nicht beliebig klein werden.
+\\\\
+Die Dirichletsche Sprungfunktion ist also nicht (Riemann-)integrierbar.
+}
+\lang{en}{
+Independently of the partition, the lower sums are all equal to $0$, and the upper sums 
+are all equal to $1$. In particular, the difference between them is $O(Z)-U(Z)=1$, and cannot be 
+made arbitrarily small.
+\\\\
+The Dirichlet function is therefore not (Riemann) integrable.
+}
+\end{example}
+
+\section{\lang{de}{Eigenschaften des Integrals}
+         \lang{en}{Properties of integrals}}\label{eigenschaften}
+
+\lang{de}{Das Integral ist additiv bezüglich des Integrationsintervalls:}
+\lang{en}{Integrals are additive on their integration intervals:}
+
+\begin{rule}\label{rule:intervall}
+\lang{de}{
+Für reelle Zahlen $a<b<c$ und eine auf dem Intervall $[a;c]$ integrierbare Funktion $f(x)$ gilt:
+}
+\lang{en}{
+For all real numbers $a<b<c$ and all functions $f(x)$ integrable on $[a,c]$ we have:
+}
+
+\[ \int_a^b f(x)\, dx + \int_b^c f(x)\, dx = \int_a^c f(x)\, dx \,  . \]
+\end{rule}
+
+\begin{remark}
+\lang{de}{
+Für die Integrationsgrenzen $a$ und $b$ gilt üblicherweise $a<b$. 
+Man betrachtet aber auch die Fälle $a=b$ und $a>b$:
+\\\\
+Im Fall $a=b$ setzt man $\big\int_a^a f(x)\, dx = 0$, und für $a>b$ setzt man
+}
+\lang{en}{
+For the limits of integration $a$ and $b$ we usually assume $a<b$. Let us consider the
+cases $a=b$ and $a>b$:
+\\\\
+In the case $a=b$ we set $\big\int_a^a f(x)\, dx = 0$, and if $a>b$ we set
+}
+\[ \int_a^b f(x)\, dx = - \int_b^a f(x)\, dx \, . \]
+\lang{de}{
+Ein Grund für diese Definition ist zum einen die Anschauung, dass bei Integration von rechts nach 
+links die Orientierung und daher das Vorzeichen des Integrals umgekehrt ist, zum anderen aber gilt 
+mit dieser Definition die Additivität des Integrals auch für Grenzen $a,b,c$, die nicht 
+notwendigerweise angeordnet sind:
+}
+\lang{en}{
+A reason for this definition is the idea that integrating from right to left reverses the 
+orientation of the process, and hence changes the sign in front of the interval. Moreover, the 
+property of additivity of integrals holds for limits $a,b,c$ that are not necessarily ordered:
+}
+\[ \int_a^b f(x)\, dx + \int_b^c f(x)\, dx = \int_a^c f(x)\, dx \,  . \]
+\lang{de}{Insbesondere zum Beispiel, wenn $a=c$ ist, erhält man}
+\lang{en}{In particular, if $a=c$, we obtain}
+
+\[ \int_a^b f(x)\, dx  + \int_b^a f(x)\, dx= 0 = \int_a^a f(x)\, dx  .\]
+\lang{de}{
+\floatright{\href{https://www.hm-kompakt.de/video?watch=612}{\image[75]{00_Videobutton_schwarz}}}\\~
+}
+\lang{en}{}
+\end{remark}
+
+
+
+\lang{de}{
+Neben der Additivität bezüglich der Intervallgrenzen verhält sich das Integral auch gut bezüglich 
+der Addition und Skalierung von Funktionen:
+}
+\lang{en}{
+Besides additivity in the sense of integral limits, integrals have nice properties in the sense 
+of adding and scaling functions:
+}
+
+\begin{rule} \label{Linear_Integral}
+\lang{de}{
+Es seien $f$ und $g$ zwei auf dem Intervall $[a;b]$ integrierbare Funktionen und $r\in \R$ eine 
+reelle Zahl. Dann sind auch die Summe $f+g$, die Differenz $f-g$ und das Vielfache $r\cdot f$ wieder 
+auf $[a;b]$ integrierbar, und es gelten
+}
+\lang{en}{
+Let $f$ and $g$ be two functions that are integrable on the interval $[a;b]$ and $r\in \R$ a real 
+number. Then the sum $f+g$, the difference $f-g$ and the scaled function $r\cdot f$ are all also 
+integrable on $[a;b]$, and we have
+}
+\begin{eqnarray*}
+ \int_a^b (f+g)(x)\, dx &=& \int_a^b f(x)\, dx + \int_a^b g(x)\, dx, \\
+ \int_a^b (f- g)(x)\, dx &=& \int_a^b f(x)\, dx  - \int_a^b g(x)\, dx, \\
+  \int_a^b (rf)(x)\, dx &=& r\cdot  \int_a^b f(x)\, dx.
+\end{eqnarray*}
+\lang{de}{
+\floatright{\href{https://www.hm-kompakt.de/video?watch=614}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{}
+\end{rule}
+
+
+\begin{example}
+\lang{de}{
+Betrachten wir die Funktion $h(x)=2x+\cos(x)$ auf dem Intervall $[0;\pi]$. 
+Um das Integral $\int_0^{\pi} h(x)\, dx$ zu bestimmen, zerlegen wir $h$ als $h(x)=f(x)+g(x)$ mit
+$f(x)=2x$ und $g(x)=\cos(x)$.
+}
+\lang{en}{
+Consider the function $h(x)=2x+\cos(x)$ on the interval $[0;\pi]$. 
+In order to determine the value of the integral $\int_0^{\pi} h(x)\, dx$, we write $h$ as 
+$h(x)=f(x)+g(x)$ with $f(x)=2x$ and $g(x)=\cos(x)$.
+}
+
+\begin{center}
+\image{T303_Integral_D}
+\end{center}
+
+\lang{de}{
+Der Graph von $f$ ist eine Gerade durch den Ursprung und schließt mit der $x$-Achse im Bereich 
+$[0;\pi]$ ein Dreieck ein. Die Grundseite des Dreiecks ist $\pi$ und die Höhe ist $f(\pi)=2\pi$. Der 
+Flächeninhalt (und damit das Integral) beträgt daher
+}
+\lang{en}{
+The graph of $f$ is a line through the origin, and with the $x$-axis, bounds a triangle in the 
+interval $[0;\pi]$. The bottom side of the triangle has length $\pi$, and the height of the triangle 
+is $f(\pi)=2\pi$. The area of the triangle (and hence the value of the integral) is hence
+}
+\[  \int_0^{\pi} f(x)\, dx =\frac{1}{2}\pi\cdot 2\pi=\pi^2.\]
+
+\lang{de}{Anhand der Eigenschaften von $g(x)=\cos(x)$ (oder auch anhand der Skizze) erkennen wir}
+\lang{en}{Making use of the properties of $g(x)=\cos(x)$ (or its graph) we see that}
+\[  \int_0^{\pi} g(x)\, dx =0,\]
+\lang{de}{
+da die Flächen, die der Graph mit der $x$-Achse einschließt, im Bereich $[0;\frac{\pi}{2}]$ und 
+$[\frac{\pi}{2};\pi]$ gleich groß sind und sich gegenseitig wegheben.
+\\\\
+Damit gilt:
+}
+\lang{en}{
+as the areas bounded by the graph and the $x$-axis in the intervals $[0;\frac{\pi}{2}]$ and 
+$[\frac{\pi}{2};\pi]$ are the same size, and thus cancel each other out.
+\\\\
+Hence:
+}
+\[  \int_0^{\pi} h(x)\, dx=\int_0^{\pi}  f(x)\, dx + \int_0^{\pi} g(x)\, dx = \pi^2+0=\pi^2. \]
+\end{example}
+
+\section{\lang{de}{Stetigkeit und Integrierbarkeit}
+         \lang{en}{Continuity and integrability}}\label{sec:stet-u-int}
+
+\lang{de}{
+Es stellt sich noch die Frage, welche Funktionen integrierbar sind.
+Die wichtigste Klasse bilden die stetigen Funktionen.
+}
+\lang{en}{
+The question remains of which functions are integrable. 
+The most important class of integrable functions are the continuous functions.
+}
+
+\begin{theorem}
+\lang{de}{
+Ist $f$ eine auf dem Intervall $[a;b]$ stetige Funktion, so ist $f$ auf $[a;b]$ integrierbar.
+Das Integral $\int_a^b f(x)\, dx$ stimmt dann mit dem orientierten Flächeninhalt, den der Graph von 
+$f$ mit der $x$-Achse im Bereich $a\leq x\leq b$ einschließt, überein.
+\\\\
+Außerdem sind sogar stückweise stetige Funktionen integrierbar, die abschnittsweise aus stetigen 
+Funktionen zusammengefügt werden, sofern sie beschränkt sind.
+\\\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10814&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+}
+\lang{en}{
+Let $f$ be a function continuous on the interval $[a;b]$. Then $f$ is integrable on $[a;b]$. The 
+integral $\int_a^b f(x)\, dx$ then corresponds to the signed area bounded by the graph of $f$ and 
+the $x$-axis in the interval $a\leq x\leq b$.
+\\\\
+Even piecewise continuous functions are integrable, provided that they are bounded.
+}
+\end{theorem}
+\begin{proof*}
+\lang{de}{
+Die Integrierbarkeit stetiger Funktionen folgt im Wesentlichen aus der gleichmäßigen Stetigkeit der 
+Funktionen auf Kompakta. (Der Begriff der gleichmäßigen Stetigkeit wird im Rahmen dieses Kurses 
+nicht behandelt, der folgende Beweis sollte aber trotzdem zumindest von der Grundidee verständlich 
+sein.)
+}
+\lang{en}{
+The integrability of continuous functions follows in general from their uniform continuity on 
+compact subsets of the real line. (The definition of uniform continuity is not handled in the 
+context of this course, however the following proof should still be mostly understandable.)
+}
+\begin{incremental}
+\step
+\lang{de}{
+Eine stetige Funktion $f$ ist gleichmäßig stetig auf dem kompakten Intervall $[a;b]$. 
+Das heißt, dass es zu jedem $\varepsilon > 0$ ein $\delta>0$ gibt mit
+}
+\lang{en}{
+A continuous function $f$ is uniformly continuous on the compact interval $[a;b]$. 
+This means that for arbitrary $\varepsilon > 0$ there exists $\delta>0$ such that
+}
+\[
+|f(x)-f(y)| < \varepsilon \ \text{ \lang{de}{für alle}\lang{en}{for all} } \ |x-y|<\delta.
+\]
+\step
+\lang{de}{
+Ersetze $\varepsilon$ von oben durch $\varepsilon/(b-a)$. Für eine Zerlegung $Z$ von $[a;b]$ mit 
+Feinheit $\Delta Z < \delta$ und Zwischenstellen $x_0,\ldots, x_n$ ergibt sich
+}
+\lang{en}{
+Replace the $\varepsilon$ from above with $\varepsilon/(b-a)$. For a partition $Z$ of $[a;b]$ with 
+norm $\Delta Z < \delta$ and subinterval endpoints $x_0,\ldots, x_n$ we have
+}
+\begin{align*}
+O(Z)-U(Z) & \leq \sum_{j=0}^{n} (\sup_{x\in [x_j;x_{j+1}]}f(x)-\inf_{x\in [x_j;x_{j+1}]}f(x)) (x_{j+1}-x_j) \\ &\leq \sum_{j=0}^n \frac{\varepsilon}{b-a} (x_{j+1}-x_j) 
+\end{align*}
+\lang{de}{aus der gleichmäßigen Stetigkeit.}
+\lang{en}{by the uniform continuity.}
+\step
+\lang{de}{Dann gilt also}
+\lang{en}{Hence we have}
+\[
+O(Z)-U(Z) \leq \varepsilon
+\]
+\lang{de}{und $f$ ist nach Definition integrierbar.}
+\lang{en}{and $f$ is by definition integrable.}
+\end{incremental}
+
+\lang{de}{
+Der Wert des Integrals stimmt mit dem orientierten Flächeninhalt überein, da dieser ebenfalls 
+zwischen Ober- und Untersumme liegt und deren Differenz beliebig klein wird. 
+\\\\
+Der Funktionswert an einer einzelnen Stelle hat keinen Einfluss auf den Wert des Integrals.
+Ist zum Beispiel
+}
+\lang{en}{
+The value of the integral corresponds to the signed area, as it lies between the upper and lower 
+sums and the difference between these two can be made arbitrarily small.
+\\\\
+The value of the function at a single point has no effect on the value of the integral. For example, 
+if
+}
+\[
+f(x) = \begin{cases}x, & x \neq 0, \\ 42, & x = 0,\end{cases}
+\]
+\lang{de}{
+gegeben, dann ist $f$ auf $[-1;1]$ integrierbar und für das Integral gilt 
+$\int_{-1}^1 f(x)\, dx = \int_{-1}^1 x\, dx = 0$. 
+Der Einfluss des Wertes $f(0)=42$ wird bei Obersummen feinerer Zerlegungen immer geringer, bis er 
+beim Wert des Integrals gar keine Rolle mehr spielt.
+\\\\
+Zusammen mit Regel \ref{rule:intervall} erklärt dies, warum stückweise stetige Funktionen 
+integrierbar sind und wie stückweise stetige Funktionen integriert werden können. Ein Beispiel 
+betrachten wir in \ref{stueck}.
+}
+\lang{en}{
+then $f$ is integrable on $[-1;1]$ with $\int_{-1}^1 f(x)\, dx = \int_{-1}^1 x\, dx = 0$. 
+The effect of the value $f(0)=42$ on the upper sum becomes smaller as the partition becomes finer, 
+until it has no effect at all on the value of the integral.
+\\\\
+Together with rule \ref{rule:intervall}, this explains why piecewise continuous functions are 
+integrable and how we can integrate them. We consider an example of this in \ref{stueck}.
+}
+\end{proof*}
+
+\lang{de}{
+Diese Aussage schließt die aus der Schule bekannten Funktionen wie Polynome, die Exponentialfunktion 
+$e^x$, die trigonometrischen Funktionen $\sin(x)$, $\cos(x)$ und die Betragsfunktion über beliebigen 
+Intervallen $[a;b]$ ein. Ebenso alle Funktionen, die aus diesen zusammengesetzt sind (Summen, 
+Produkte, Quotienten, Verkettungen), sofern im Intervall $[a;b]$ keine Definitionslücke auftritt.
+}
+\lang{en}{
+This theorem is applicable to many common functions such as polynomial functions, the exponential 
+function $e^x$, the trigonometric functions $\sin(x)$, $\cos(x)$ and the absolute value function 
+on any interval $[a;b]$. Likewise, it applies to functions which are sums, products, quotients and 
+compositions of the above, provided that the function is defined everywhere in the interval 
+$[a;b]$.
+}
+ 
+\begin{remark}
+\lang{de}{
+Beim Differenzieren gibt es für die aus der Schule bekannten Funktionen stets Formeln und Regeln, um 
+deren Ableitungsfunktionen zu bestimmen. Für die Integration ist dies nicht der Fall. Zwar gibt es 
+auch hier einige Formeln und Regeln, die im nächsten Themenblock behandelt werden, aber dennoch kann 
+man nicht für alle Funktionen Formeln herleiten. Ein solches Beispiel ist die Funktion 
+$f(x)=e^{-x^2}$.
+\\\\
+In solchen Fällen kann man aber durch Ober-, Unter- oder 
+\ref[ober-und-unter][Zwischensummen]{sec:zwischensummen} das Integral annähern.
+}
+\lang{en}{
+There exist formulas and rules for differentiating common functions such as the above. This is not 
+the case for integration. The following chapter covers some formulas and rules for integration, 
+but not every function can be integrated. An example of such a function is $f(x)=e^{-x^2}$.
+\\\\
+In these cases, we can still approximate an integral using 
+\ref[ober-und-unter][Riemann sums]{sec:zwischensummen}.
+}
+\end{remark}
+
+
+\lang{de}{
+Wir wissen zwar inzwischen, dass stetige Funktionen integrierbar sind, jedoch ist die Berechnung des 
+Integral mittels der Definition recht umständlich, da man laut Definition alle Zerlegungen des 
+Intervalls betrachten muss. Im nächsten Abschnitt und im Themenblock "`Integrationstechniken"' 
+werden wir schnelle Möglichkeiten kennenlernen, für viele Funktionen deren Integrale zu berechnen.\\
+Bei solchen Funktionen jedoch, auf die diese Techniken nicht anwendbar sind, hilft die folgende 
+Aussage.
+}
+\lang{en}{
+We now know that continuous functions are integrable, but computing an integral using the definition 
+is quite laborious, as one has to consider all partitions of the interval. In the next section and 
+in the chapter 'Techniques for integration' we introduce some faster methods for calculating the 
+integral of a variety of functions.\\
+The following theorem is useful for functions to which these methods cannot be applied.
+}
+
+\begin{theorem}
+\lang{de}{
+Es sei $f$ eine auf dem Intervall $[a;b]$ integrierbare Funktion. Für jede natürliche Zahl 
+$m\in \N$ sei eine Zerlegung $Z_m$ des Intervalls $[a;b]$ in $n_m$ Teilintervalle gegeben, deren 
+Feinheiten gegen Null konvergieren, also mit $\lim_{m\to \infty} \Delta Z_m=0$. Weiter seien zu den 
+Zerlegungen $Z_m$ Zwischenstellen $a_{m,k}$ für $k=1,\ldots, n_m$ gegeben, und 
+}
+\lang{en}{
+Let $f$ be a function that is integrable on the interval $[a;b]$. For every natural number $m\in \N$ 
+let $Z_m$ be a partition of the interval $[a;b]$ into $n_m$ subintervals, such that 
+$\lim_{m\to \infty} \Delta Z_m=0$. Let $a_{m,k}$ be a point in the $k$th subinterval of each $Z_m$, 
+for $k=1,\ldots, n_m$, and
+}
+\[  S_m:=S(Z_m; a_{m,1},\ldots, a_{m,n_m})=\sum_{k=1}^{n_m} f(a_{m,k})\cdot \Delta x_{m,k} \]
+\lang{de}{
+die Zwischensumme von $f$ zur Zerlegung $Z_m$ und den Zwischenstellen $a_{m,k}$ für 
+$k=1,\ldots, n_m$. Dann gilt
+}
+\lang{en}{
+the Riemann sum of $f$ over the partition $Z_m$. Then we have
+}
+\[  \lim_{m\to \infty} S_m = \int_{a}^b f(x) dx. \]
+
+\lang{de}{
+\floatright{\href{https://www.hm-kompakt.de/video?watch=607}{\image[75]{00_Videobutton_schwarz}}}\\
+}
+\lang{en}{}
+\end{theorem}
+
+\lang{de}{
+Grob gesagt, bedeutet diese Aussage, dass man nicht alle Zwischensummen betrachten muss, sondern 
+lediglich eine Folge von Zwischensummen, bei denen die Zerlegungen immer feiner werden. Oftmals 
+nimmt man als $n$-tes Folgenglied die äquidistante Zerlegung in $n$ Teilintervalle und geeignete 
+Zwischenstellen, z.\,B. jeweils die untere Grenze der Teilintervalle. 
+}
+\lang{en}{
+Roughly speaking, this theorem states that not all Riemann sums need to be considered, only a 
+sequence of Riemann sums whose partitions become finer and finer. Often we take the partition into 
+$n$ equal subintervals as the $nth$ partition and a suitable point within each subinterval, for 
+example the lower endpoint of each subinterval.
+}
+
+\begin{block}[warning]
+\lang{de}{
+Der Satz kann \textbf{nicht} dazu benutzt werden,  Integrierbarkeit zu zeigen! Er dient lediglich 
+dazu, das Integral zu berechnen, wenn man schon weiß, dass das Integral existiert.
+\\\\
+Als einfaches Beispiel einer nicht-integrierbaren Funktion können wir die Dirichletsche 
+Sprungfunktion aus \ref{ex:dirichlet-nicht-intbar} nehmen. Wählen wir ausschließlich rationale 
+Zwischenstellen, die immer feiner werden, dann existiert der Grenzwert $ \lim_{m\to \infty} S_m=1$. 
+Aber dennoch ist die Funktion nicht integrierbar.
+}
+\lang{en}{
+The theorem \textbf{cannot} be used to prove integrability! It may only be used to calculate an 
+integral once we know that it exist.
+\\\\
+As a simple example using a non-integrable function, consider the Dirichlet function from 
+\ref{ex:dirichlet-nicht-intbar}. If we choose a rational number in each interval, then the limit 
+$ \lim_{m\to \infty} S_m=1$ exists. However, the function is not integrable.
+}
+\end{block}
+
+\lang{de}{
+Zum Abschluss geben wir ein Beispiel, wie stückweise stetige Funktionen integriert werden.
+}
+\lang{en}{
+Finally we give an example of how piecewise continuous functions can be integrated.
+}
+\begin{example}
+\label{stueck}
+%\emph{Beispiel: } 
+\lang{de}{Wir betrachten eine abschnittsweise definierte Funktion $f(x)$: }
+\lang{en}{Consider the piecewise function $f(x)$:}
+\[ f(x) = \begin{cases} x, & x \in [0;1), \\
+                        2x, & x \in [1;2].
+          \end{cases} \]
+\begin{center}
+\image{T303_Integral_E}     
+\end{center}
+\lang{de}{
+$f(x)$ hat also eine Sprungstelle bei $x=1$. An den übrigen Stellen ist sie aber stetig, und sie ist 
+auf dem ganzen Intervall $[0;2]$ beschränkt. (Die Funktionswerte liegen alle im Intervall $[0;4]$.) 
+Daher ist $f(x)$ auf $[0;2]$ integrierbar. 
+Wir können für das Integral nun die Regel \ref{rule:intervall} anwenden:
+}
+\lang{en}{
+$f(x)$ has a jump discontinuity at $x=1$. The function is continuous at all other points, and is 
+bounded on the whole interval $[0;2]$. (The function values all lie in the interval $[0;4]$.) 
+Hence $f(x)$ is integrable on $[0,2]$. 
+We may now apply rule \ref{rule:intervall} to compute the integral:
+}
+\[
+\int_0^2 f(x)\, dx = \int_0^1 f(x)\, dx + \int_1^2 f(x)\, dx.
+\]
+\lang{de}{
+Die jeweiligen Integrale können beispielsweise geometrisch bestimmt werden. Das haben wir bereits im 
+\ref[teil1][ersten Teil]{stueck} getan. Das erste Integral ist durch eine Dreiecksfläche und das 
+zweite durch eine Trapezfläche gegeben:
+}
+\lang{en}{
+Both of these integrals can be computed geometrically for example. In fact, we have already done so 
+in the \ref[teil1][first section]{stueck}. The first integral is simply the area of a triangle, and 
+the second is the area of a trapezium:
+}
+\[ \int_0^1 f(x)\, dx + \int_1^2 f(x)\, dx = \frac{1}{2}(1\cdot 1) + 1 \cdot 2 + 
+\frac{1}{2}(1 \cdot 2) = \frac{7}{2}. \]                    
+\end{example}
+
+
+\end{content}

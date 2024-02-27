@@ -1,0 +1,125 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A04: Substitution}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A04: Substitution}}
+\lang{en}{\title{Problem 4}}
+
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/11221}{Ticket 11221}
+\end{block}
+
+\begin{problem}
+
+		\begin{variables}
+		    \randint{p}{1}{5}
+		    \randint{q}{1}{5}
+		    \function[calculate]{PP}{p*4}
+		    \function[calculate]{QQ}{q*3}
+		    \function{f}{p*y^4+q*y^3}
+		    \derivative[normalize]{f_1}{f}{y}
+		    \functionNormalize{f_1}
+
+		    \randint[Z]{m}{-3}{5}
+		    \randint{n}{1}{6}
+		    \function{g}{m*x+n}
+
+		    \substitute{h}{f_1}{y}{g}
+		    \substitute{j}{f}{y}{g}
+
+		\end{variables}
+
+\begin{question}
+	\type{input.function}
+	\field{real}
+	\lang{de}{
+			\text{Geben Sie zwei Funktionen $f(y)$ und $g(x)$ an, sodass für ihre Verkettung \\
+			$f(g(x)) =\var{PP} \cdot (\var{g})^3+\var{QQ} \cdot (\var{g})^2$ gilt.\\
+			%begin-cosh		
+			Dabei soll der Graph von $g$ eine Gerade beschreiben. }
+			%ende-cosh		
+	}
+	\lang{en}{
+		\text{Find two functions $f(y)$ and $g(x)$ such that their composition is 
+	    $f(g(x)) =\var{PP} \cdot (\var{g})^3+\var{QQ} \cdot (\var{g})^2$ and such that the graph of $g(x)$ is a line. }
+	}
+	\begin{answer}
+		\text{ $f(y) = $}
+		\solution{f_1}
+		\inputAsFunction{y}{R}
+	\end{answer}
+	\begin{answer}
+		\text{ $g(x) = $}
+		\solution{g}
+		\inputAsFunction{x}{S}
+		\checkFuncForZero{R[S]-h}{-10}{10}{100}
+        \explanation{Sie haben $f$ und $g$ nicht richtig gewählt.}
+		\score{2.0}
+	\end{answer}
+\end{question}
+
+
+	\begin{question}
+
+	  \begin{variables}
+	 	\randint{u}{-3}{4}
+	 	\randint{v}{1}{5}
+		\randadjustIf{u,v}{u>=v}
+
+		\substitute[normalize]{JU}{j}{x}{u}
+		\substitute[normalize]{JV}{j}{x}{v}
+
+	 	\function[calculate]{L}{(JV-JU)/m}
+	  \end{variables}
+
+		\lang{de}{
+			\text{Berechnen Sie nun das Integral $\int_a^b \var{PP} \cdot (\var{g})^3+\var{QQ} \cdot (\var{g})^2\, dx$\\
+			mit den Grenzen $a=\var{u}$ und $b=\var{v}$.\\
+			%\textit{Hinweis: Lineare Substitution mit Hilfe der in a) bestimmten Funktionen nutzen!}\\
+			\textit{Für große Zahlen nutzen Sie am besten einen Taschenrechner.}}
+		}
+		 \lang{en}{\text{
+      Now calculate the integral $\int_a^b \var{PP} \cdot (\var{g})^3+\var{QQ} \cdot (\var{g})^2\, dx$\\
+      with the limits $a=\var{u}$ and $b=\var{v}$.\\
+      \textit{Hint: use a linear substitution with the function determined in a)!}\\
+      \textit{For large numbers it is best to use a calculator.}
+     }}
+		\type{input.number}
+		\begin{answer}
+      \lang{de}{	\text{ Lösung: }
+}
+ \lang{en}{\text{ Solution: }}
+      \solution{L}
+		\end{answer}
+        \explanation{Lineare Substitution mit Hilfe der in a) bestimmten Funktionen nutzen!}
+
+	\end{question}
+
+\end{problem}
+
+
+\embedmathlet{mathlet}
+
+\end{content}

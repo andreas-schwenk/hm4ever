@@ -1,0 +1,65 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{Ü04: AWA}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21986}{Ticket 21986}
+\end{block}
+
+\title{\lang{de}{Ü04: AWA}}
+Bestimmen Sie die Lösung des Anfangswertproblems
+\[y'=y+x\cdot y^2\quad \text{mit Anfangswert }\: y(1)=1.\]
+%%
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+\tab{Lösung}
+Die Lösung $\phi:I\to\R$ dieser Bernoulli-Anfangswertaufgabe ist gegeben durch
+\[\phi(x)=(e^{1-x}-x+1)^{-1}\]
+mit maximalem Existenzintervall $I=(-infty;x_1)$, wobei $x_1$ 
+die eindeutig bestimmte Lösung der Gleichung $e^{1-x}=x-1$ ist.
+\begin{incremental}[\initialsteps{1}]
+\step
+\notion{Begründung:}
+\step
+Die Differentialgleichung ist vom Bernoulli-Typ $y'=a(x)y+b(x)y^k$ mit Koeffizienten $a(x)=1$ und $b(x)=x$ sowie Exponent $k=2$.
+Wir setzen formal $z=y^{-1}$ und erhalten ein lineares Anfangswertproblem
+\[z'=-z-x,\:\text{ mit Anfangswert } z(x_0)=\frac{1}{y_0}=1.\]
+Das lösen wir zunächst: Die Lösung des homogenen Problems $z'=-z$ mit $z(1)=1$ ist
+\[\phi_1(x)=e^{-x+1}.\]
+Damit berechnen wir den zweiten Faktor der Lösung des inhomogenen Problems mit partieller Integration
+\begin{align*}
+u(x)\:&=&\:1+\int_1^x\frac{-t}{e^{-x+1}}dt=1-e^{-1}\int_1^xte^t\:dt\\
+&=&\:1-e^{-1}([te^t]_1^x-\int_1^x e^t\:dt)\\
+&=&\:1-(x-1)e^{x-1}.
+\end{align*}
+Das lineare Anfangswertproblem in $z$ hat also die Lösung
+\[\psi(x)=\phi_1(x)\cdot u(x)=e^{1-x}-(x-1).\]
+\step
+Daraus erhalten wir die formale Lösung der Bernoulli-Anfangswertaufgabe als
+\[\phi(x)=\frac{1}{\psi(x)}.\]
+\step
+Wir müssen allerdings noch ein Intervall $I$ finden, das $x_0=1$ enthält und auf dem $\phi$ wohldefiniert ist.
+Die Funktion $\psi$ hat eine Nullstelle $x_1$. Sie begrenzt das Existenzintervall der Lösung $\phi$.
+Es gilt $x_0=1<x_1$, denn $\psi(x_0)=1>0$
+und $\psi$ ist streng monoton fallend (denn $\psi'(x)=-e^{1-x}-1<0$). Also ist $\phi$ definiert auf $(-\infty;x_1)$.
+\end{incremental}
+\end{tabs*}
+
+\end{content}
+

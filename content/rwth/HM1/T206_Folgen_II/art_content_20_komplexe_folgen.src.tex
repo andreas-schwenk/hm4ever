@@ -1,0 +1,248 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Komplexe Folgen}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T203_komplexe_Zahlen/g_art_content_08aneu_komplexeZahlen_intro.meta.xml}{content_08aneu_komplexeZahlen_intro}
+    \link{generic_article}{content/rwth/HM1/T203_komplexe_Zahlen/g_art_content_08bneu_komplexeZahlen_geom.meta.xml}{content_08bneu_komplexeZahlen_geom}
+    \link{generic_article}{content/rwth/HM1/T206_Folgen_II/g_art_content_20_komplexe_folgen.meta.xml}{content_20_komplexe_folgen}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_15_monotone_konvergenz.meta.xml}{monot-konv}
+    \link{generic_article}{content/rwth/HM1/T201neu_Vollstaendige_Induktion/g_art_content_02_vollstaendige_induktion.meta.xml}{vollst-ind}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{6}
+\ombarticle{2}
+
+\lang{de}{\title{Komplexe Folgen}}
+ 
+\begin{block}[annotation]
+  Definition komplexer Folgen und deren Konvergenz; übertragung der reellen Konvergenz
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9677}{Ticket 9677}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+In diesem Abschnitt werden komplexe Folgen behandelt und die Konzepte für reelle Folgen auf
+komplexe Folgen übertragen.
+
+\section{Komplexe Folgen}
+
+\begin{definition}
+Eine \notion{komplexe} (oder komplexwertige) \notion{Folge} ist eine Funktion $a:\N\to \C$.\\
+Statt $a:\N\to \C,n\mapsto a(n)$ bezeichnet man eine solche Folge üblicherweise mit 
+\[ (a_n)_{n \in \N}, \] 
+wobei $a_n:=a(n)$ der Funktionswert an der Stelle $n$ ist. Man nennt $a_n$ auch \notion{n-tes
+Folgeglied} der Folge $(a_n)_{n \in \N}$.
+\end{definition}
+
+\begin{example}
+\begin{enumerate}
+\item Da wir die reellen Zahlen als Teilmenge der komplexen Zahlen auffassen, ist jede reelle Folge auch eine komplexe Folge.
+\item Geometrische Folgen $(uq^n)_{n \in \N}$ mit $u,q\in \C\setminus\{0\}$ sind komplexe Folgen, z.B.
+die Folge $(i^n)_{n \in \N}$, d.h. $(i, -1, -i, 1, i, -1, \ldots )$.
+\item Die rekursiv definierte Folge  $(a_n)_{n \in \N}$ mit $a_1=i$ und
+\[  a_{n+1}=1+\frac{a_n}{2}\quad \text{ für alle }n\in \N \]
+ist eine komplexe Folge.
+\end{enumerate}
+\end{example}
+
+Konvergenz und Beschränktheit komplexer Folgen definiert man wie für reelle Folgen, wobei hier der 
+\ref[content_08bneu_komplexeZahlen_geom][Betrag komplexer Zahlen]{betragkz}
+ ins Spiel kommt.
+
+\begin{definition}\label{def:konvergent-komplexe-folge}
+Eine Folge komplexer Zahlen $(a_n)_{n\in \N}$ heißt \notion{konvergent}, wenn eine Zahl $a \in \C$ existiert, so dass
+die folgende Eigenschaft erfüllt ist:
+
+ F"ur jedes $\epsilon > 0$ gibt es eine Zahl  \nowrap{$N_{\epsilon} \in \N $,}
+  so dass \[ | a_n - a | < \epsilon \text{ f"ur alle } n \geq N_{\epsilon}. \]
+
+Eine solche Zahl $a$ (sofern sie existiert) nennt man \notion{Limes} oder \notion{Grenzwert} der 
+Folge  $(a_n)_{n\in \N}$ und schreibt
+\[  \lim_{n\to\infty} a_n =a. \]
+Man sagt auch: Die Folge $(a_n)_{n\in \N}$ konvergiert gegen $a$.
+
+Eine komplexe Folge, die gegen $0$ konvergiert, nennt man \notion{Nullfolge}.
+
+Eine komplexe Folge $(a_n)_{n\in \N}$ heißt \notion{ beschränkt}, wenn ihre Wertemenge $\{ a_n | n\in \N\}$ beschränkt ist, d.h. wenn es eine reelle Zahl $c>0$ gibt, so dass
+\[ |a_n|\leq c   \text{ f"ur alle } n \in \N. \]
+\end{definition}
+
+Da die Menge der komplexen Zahlen eine Ebene bilden, sind die Begriffe \emph{monoton}~ und 
+\emph{nach oben beschränkt}~ bzw. \emph{nach unten beschränkt}~ nicht sinnvoll. Wohl jedoch kann man 
+von der Monotonie der Folge der Beträge $(\abs{a_n})_{n\in\N}$ sprechen, was man im 
+\ref[content_20_komplexe_folgen][Beispiel]{ex:1} weiter unten sehen kann.
+
+\begin{remark}
+Eine komplexe Folge $(a_n)_{n\in \N}$ konvergiert also genau dann gegen $a \in \C$, wenn die
+reelle Folge $( | a_n - a |)_{n\in \N}$ eine Nullfolge ist.
+\end{remark}
+
+\begin{example}\label{ex:1}
+\begin{enumerate}
+\item Für $|q|\leq 1$ ist die geometrische Folge $(uq^n)_{n \in \N}$ beschränkt, denn für alle $n \in \N$ gilt:
+\[   |uq^n|=|u|\cdot |q|^n\leq |u|. \]
+Für $|q|<1$ konvergiert diese Folge sogar gegen $0$, denn die reelle Folge $ (|u|\cdot |q|^n)_{n \in \N}$ ist eine Nullfolge (vgl. \ref[monot-konv][Abschnitt Monotone Konvergenz]{ex:beispiele}).
+\item Betrachten wir die Folge $(a_n)_{n \in \N}$ mit $a_1=i$ und
+\[  a_{n+1}=1+\frac{a_n}{2}\quad \forall n\in \N. \]
+Wir zeigen mit vollständiger Induktion, dass die Folge beschränkt ist und genauer, dass $|a_n|\leq 2$ für alle $n\in \N$ gilt.
+
+IA: Für $a_1=i$ ist $|a_1|=|i|=1\leq 2$.
+
+IS: $n\to n+1$: Sei $|a_n|\leq 2$ für ein $n\in \N$. Dann gilt:
+\[  |a_{n+1}|=|1+\frac{a_n}{2}|\leq |1|+|\frac{a_n}{2}|=1+\frac{|a_n|}{2}\leq 1+\frac{2}{2}=2.\]
+Beim ersten $\leq$ haben wir dabei die Dreiecksungleichung verwendet und beim zweiten $\leq$ die Induktionsvoraussetzung $|a_n|\leq 2$.
+
+Die Folge ist sogar konvergent mit Grenzwert $2$.
+\begin{incremental}[\initialsteps{0}]
+\step Für alle $n\in \N$ gilt nämlich
+\[  |a_{n+1}-2|= |1+\frac{a_n}{2}-2|= |\frac{a_n-2}{2}|=\frac{|a_n-2|}{2}. \]
+Die reelle Folge $(b_n)_{n\in \N}=(|a_n-2|)_{n\in \N}$ erfüllt also $b_1=|a_1-2|=|i-2|=\sqrt{5}$ und
+$b_{n+1}=\frac{1}{2}b_n$. Sie ist also die geometrische Folge $(2\sqrt{5}(\frac{1}{2})^n)_{n\in \N}$ und 
+konvergiert wegen $0<\frac{1}{2}<1$ gegen $0$. Also ist $2$ der Grenzwert der Folge $(a_n)_{n \in \N}$.
+\end{incremental}
+\end{enumerate}
+\end{example}
+
+\section{Konvergenzkriterium und Grenzwertregeln}\label{sec:konvergenzkriterium}
+
+
+Ein wichtiges Kriterium für komplexe Folgen erhält man durch Betrachtung der 
+\ref[content_08aneu_komplexeZahlen_intro][Real- und Imaginärteile]{def:real-imaginaer-teil}:
+
+\begin{theorem}
+Sei $(a_n)_{n\in \N}$ eine komplexe Folge und $a \in \C$.
+\begin{enumerate}
+\item Die Folge $(a_n)_{n\in \N}$ ist genau dann beschränkt, wenn die reellen Folgen
+$(\Re(a_n))_{n\in \N}$ und $(\Im(a_n))_{n\in \N}$ beschränkt sind.
+\item Die Folge $(a_n)_{n\in \N}$ konvergiert genau dann, wenn die reellen Folgen
+$(\Re(a_n))_{n\in \N}$ und $(\Im(a_n))_{n\in \N}$ konvergieren. Ist $a=\lim_{n\to \infty}a_n$,
+so gilt
+\[ \lim_{n\to \infty} \Re(a_n) =\Re(a) \quad \text{und} \quad \lim_{n\to \infty} \Im(a_n) =\Im(a). \]
+\item Konvergente komplexe Folgen sind beschränkt.
+\item Ist die Folge $(a_n)_{n\in \N}$ konvergent mit Grenzwert $a \in \C$, so konvergiert auch jede
+Teilfolge gegen $a$.
+\end{enumerate}
+\end{theorem}
+
+\begin{example}
+\begin{enumerate}
+\item Die Folge $(i^n)_{n \in \N}$ ist beschränkt, denn $|i^n|=|i|^n=1^n=1$ für alle $n\in \N$.
+Die Folge der Realteile ist $(b_n)_{n\in \N}$ mit
+\[   b_n=\begin{cases} 0 & \text{falls }n \text{ ungerade}\\
+(-1)^{n/2}& \text{falls }n \text{ gerade} \end{cases}, \]
+denn für $n$ gerade, d.h. $n=2k$, ist $i^n=i^{2k}=(-1)^k=(-1)^{n/2}$ und für $n$ ungerade, d.h. $n=2k-1$, ist $i^n=i\cdot i^{2k-2}=i\cdot (-1)^{k-1}$.
+
+Entsprechend ist die Folge  $(\Im(i^n))_{n\in \N}$ gegeben durch
+\[   \Im(i^n)=\begin{cases} (-1)^{(n-1)/2} & \text{falls }n \text{ ungerade}\\
+0& \text{falls }n \text{ gerade} \end{cases}. \]
+
+Beide Folgen haben Werte im Intervall $[-1, 1]$, weshalb sie beschränkt sind.
+
+Weder die Folge $(\Re(i^n))_{n\in \N}$ noch die Folge $(\Im(i^n))_{n\in \N}$ sind konvergent, da sie die divergente Folge $((-1)^k)_{k\in \N}$ als Teilfolge haben. Insbesondere ist auch die Folge
+$(i^n)_{n \in \N}$ nicht konvergent.
+\item Für die Folge $(a_n)_{n \in \N}$ mit $a_1=i$ und
+\[  a_{n+1}=1+\frac{a_n}{2}\quad \forall n\in \N \]
+ist die Folge der Realteile $(x_n)_{n \in \N}=(\Re(a_n))_{n \in \N}$ gegeben durch
+$x_1=\Re(a_1)=\Re(i)=0$ und
+\[ x_{n+1}=\Re(a_{n+1})=\Re (1+\frac{a_n}{2})=1+\frac{\Re(a_n)}{2}=1+\frac{x_n}{2}.\]
+Induktiv erhält man damit für $x_n$ die \ref[vollst-ind][geometrische Summe]{rule:geom-summe}
+\[ x_n=\sum_{k=0}^{n-2} (\frac{1}{2})^k =\frac{(\frac{1}{2})^{n-1}-1}{\frac{1}{2}-1}
+=\frac{(\frac{1}{2})^{n-1}-1}{-\frac{1}{2}} =2\left(1-(\frac{1}{2})^{n-1}\right) .\]
+Damit gilt:
+\[ \lim_{n\to \infty} \Re(a_n)= \lim_{n\to \infty} x_n= \lim_{n\to \infty}2\left(1-(\frac{1}{2})^{n-1}\right) =2\cdot 1=2.\]
+
+Die Folge der Imaginärteile $(y_n)_{n \in \N}=(\Im(a_n))_{n \in \N}$ ist gegeben durch
+$y_1=\Im(a_1)=\Im(i)=1$ und 
+\[ y_{n+1}=\Im(a_{n+1})=\Im (1+\frac{a_n}{2})=\frac{\Im(a_n)}{2}=\frac{y_n}{2}. \]
+Dies ist also die geometrische Folge $(y_n)_{n \in \N}=((\frac{1}{2})^{n-1})_{n \in \N}$ und konvergiert gegen $0$.
+
+Die Folge $a_n$ ist also konvergent mit Grenzwert
+\[  \lim_{n\to \infty} a_n=  \lim_{n\to \infty}x_n+ i\cdot  \lim_{n\to \infty}y_n=2+i\cdot 0=2,\]
+was die Rechnung in obigem Beispiel bestätigt. 
+\end{enumerate}
+\end{example}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{1}
+\begin{quickcheck}
+\type{input.function}
+		\field{rational}
+            
+       	\begin{variables}
+			\randint{x2}{2}{9}	
+            \randint{a}{2}{7} 
+            \randint{b}{2}{7} 
+            \function{f}{-b*i}
+		\end{variables}
+	
+		\lang{de}{
+			\text{Gegeben sei die komplexe Folge $(a_n)_{n\in\N}$ mit $a_n=\frac{\var{x2}}{n}+\frac{\var{a}+\var{b}n}{in}$.\\\\
+            
+            Gegen welchen Grenzwert konvergiert die Folge $(a_n)_{n\in\N}$?\\\\
+            
+            $\lim\limits_{n\to\infty}{a_n}=$\ansref\\\\
+                      
+        }
+       		}
+		
+    	\begin{answer}
+		\solution{f}
+        \checkAsFunction{f}{-10}{10}{100}
+		\end{answer}
+        
+        \explanation{Betrachten Sie gemäß obiger Regel die Folge der Real- und Imaginärteile zunächst getrennt voneinander.} 
+	\end{quickcheck}
+\end{quickcheckcontainer}
+
+\begin{remark}
+In den meisten Fällen ist es nicht möglich, eine rekursiv definierte Folge so einfach in Real- und Imaginärteil zu zerlegen wie
+im vorigen Beispiel. Auch für andere explizite Beispiele ist die Zerlegung in Real- und Imaginärteil oft nicht einfach.
+
+Der vorige Satz dient jedoch oft für theoretische Konvergenz- und Grenzwertüberlegungen wie den folgenden Grenzwertregeln.
+\end{remark}
+
+
+Die Grenzwertregeln für reelle Folgen kann man auf komplexe Folgen übertragen:
+
+\begin{rule}[Grenzwertregeln]
+Seien  $(a_n)_{n\in \N}$, $(b_n)_{n\in \N}$ konvergente komplexe Folgen mit
+$\lim_{n\to\infty} a_n =a$ und $\lim_{n\to\infty} b_n =b$. Dann gilt für alle $\alpha, \beta \in \C$:
+\begin{enumerate}
+\item Die Folge $( \alpha a_n + \beta b_n )_{n\in \N}$ konvergiert und \[ \lim_{n\to\infty} ( \alpha a_n + \beta b_n )
+= \alpha \cdot a + \beta \cdot b. \]
+\item Die Folge $( a_n \cdot b_n )_{n\in \N}$ konvergiert und \[\lim_{n\to\infty} ( a_n \cdot b_n ) = a \cdot b. \]
+\item Falls $b_n \neq 0$ für alle $n \in \N$ und $b \neq 0$, so konvergiert die Folge $( a_n /b_n )_{n\in \N}$ und
+\[  \lim_{n\to\infty} ( \frac{a_n}{b_n} )=\frac{a}{b}.\]
+\end{enumerate}
+Außerdem gilt:
+\[  \lim_{n\to\infty} \bar{a_n}=\bar{a} \quad \text{und} \quad \lim_{n\to \infty} |a_n|=|a|. \]
+\end{rule}
+
+\begin{remark}
+Bestimmte Divergenz (gegen $\pm\infty$) macht bei komplexen Folgen keinen Sinn.
+\end{remark}
+
+\end{content}

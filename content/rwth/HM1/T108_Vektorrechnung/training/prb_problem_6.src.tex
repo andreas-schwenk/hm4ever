@@ -1,0 +1,157 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A06: Erzeugendensysteme}
+    \lang{en}{input numbers}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+
+\usepackage{mumie.genericproblem}
+\usepackage{mumie.ombplus}
+
+\lang{de}{\title{A06: Erzeugendensysteme}}
+\lang{en}{\title{Problem 6}}
+
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9521}{Ticket 9521}
+\end{block}
+
+
+\begin{problem}
+\randomquestionpool{1}{2}  
+%
+%   Fall 1 liefert 3 linear abhängige Vektoren, die also kein Erzeugendensystem des R^3 bilden
+%
+	\begin{question}
+		\lang{de}{
+			\text{Bildet die folgende Menge ein Erzeugendensystem im $\R^3$ ?\\
+			$ \left\{ \begin{pmatrix} \var{a1} \\\var{a2} \\ \var{a3}\end{pmatrix},
+			\begin{pmatrix} \var{b1} \\\var{b2} \\ \var{b3}\end{pmatrix},
+			\begin{pmatrix} \var{c1} \\\var{c2} \\ \var{c3}\end{pmatrix} \right\} $}
+            \explanation{Die 3 Vektoren sind linear abhängig, können also kein Erzeugendensystem des $\R^3$ bilden.}
+		}
+		\lang{en}{}
+		
+		\type{mc.yesno}
+		\field{rational}
+		
+    	\precision[false]{3}
+    	\displayprecision{3}
+    	\correctorprecision{3}
+		
+		\begin{variables}
+			\randint{a1}{-20}{20}
+			\randint{a2}{-20}{20}
+			\randint{a3}{-20}{20}
+			
+			\randint{b1}{-20}{20}
+			\randint{b2}{-20}{20}
+			\randint{b3}{-20}{20}
+			
+ 			\randint[Z]{kmu}{-3}{3}                         
+			\randint{klambda}{-3}{3}
+			\randint{k}{1}{2}
+			\function[calculate]{mu}{kmu/k}                     
+			\function[calculate]{lambda}{klambda/k}
+%
+%       Zur Vermeidung von Dezimalzahlen bzw. Brüchen vereinfacht:
+%
+% 			\randint[Z]{mu}{-3}{3}                         
+% 			\randint{lambda}{-3}{3}
+
+			\function[calculate]{c1}{mu*a1+lambda*b1}           % Der Vektor (c_1, c_2, c_3) ist eine Linearkombination aus 
+			\function[calculate]{c2}{mu*a2+lambda*b2}           % (a_1, a_2, a_3) und (b_1, b_2, b_3), folglich sind die drei
+			\function[calculate]{c3}{mu*a3+lambda*b3}           % Vektoren linear abhängig und bilden kein Erzeugendensystem.
+                                                          
+			\randadjustIf{a1,a2,a3}{a1=0 and a2=0 and a3=0}     % Ausschluss, dass (a_1, a_2, a_3) Nullvektor ist
+			\randadjustIf{b1,b2,b3}{b1=0 and b2=0 and b3=0}     % Ausschluss, dass (b_1, b_2, b_3) Nullvektor ist
+ 			
+		\end{variables}
+		
+		\begin{choice}
+		   % Test:        
+ 		   % \text{mu $=\var{mu}$ und lambda $=\var{lambda}$}
+            \text{}
+			\solution{false}
+		\end{choice}
+
+	\end{question}
+	
+	
+
+%
+%   Fall 2 liefert 3 linear unabhängige Vektoren, die somit ein Erzeugendensystem des R^3 bilden
+%	
+\begin{question}
+		\lang{de}{
+			\text{Bildet die folgende Menge ein Erzeugendensystem im $\R^3$ ?\\
+			$ \left\{ \begin{pmatrix} \var{x1} \\\var{x2} \\ \var{x3}\end{pmatrix},
+			\begin{pmatrix} \var{y1} \\\var{y2} \\ \var{y3}\end{pmatrix},
+			\begin{pmatrix} \var{z1} \\\var{z2} \\ \var{z3}\end{pmatrix} \right\} $}
+			\explanation{Die 3 Vektoren sind linear unabhängig und bilden somit ein Erzeugendensystem des $\R^3.$}
+		}
+		\lang{en}{}
+		
+		\type{mc.yesno}
+		\field{real}
+		
+    	\precision[false]{3}
+    	\displayprecision{3}
+    	\correctorprecision{3}
+		
+		\begin{variables}
+			\randint{x1}{-15}{15}
+			\randint{x2}{-15}{15}
+			\randint{x3}{-15}{15}
+			\randint{y1}{-15}{15}
+			\randint{y2}{-15}{15}
+			\randint{y3}{-15}{15}
+			\randint{z1}{-15}{15}
+			\randint{z2}{-15}{15}
+			\randint{z3}{-15}{15}
+            
+           % Test:
+           % \function[calculate]{det}{x1*y2*z3-x1*y3*z2-x2*y1*z3+x2*y3*z1+x3*y1*z2-x3*y2*z1} 
+            
+			\randadjustIf{x1,x2,x3,y1,y2,y3,z1,z2,z3}{x1*y2*z3-x1*y3*z2-x2*y1*z3+x2*y3*z1+x3*y1*z2-x3*y2*z1=0}
+            
+                                                         % durch die randadjustIf-Abfrage wird Det = 0 ausgeschlossen. 
+                                                         % Damit ist sichergestellt, dass die drei erzeugten Vektoren 
+                                                         % linear unabhängig sind. Sie bilden also ein Erzeugendensystem.     
+		\end{variables}         
+
+		\begin{choice} 
+           % Test:        
+ 		   % \text{Determinante $=\var{det}$}  
+             \text{}
+			\solution{true}          
+		\end{choice}
+	\end{question}
+	
+	
+	
+	
+	
+\end{problem}
+
+\embedmathlet{mathlet}
+
+
+\end{content}

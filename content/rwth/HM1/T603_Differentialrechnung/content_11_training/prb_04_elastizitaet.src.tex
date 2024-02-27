@@ -1,0 +1,81 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A04: Elastizität}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{Elastizität}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A04: Elastizität}}
+\lang{en}{\title{A04: Elasticity}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24030}{Ticket 24030}
+\end{block}
+
+\usepackage{mumie.genericproblem}
+     \begin{problem}
+     \begin{variables}
+        \drawFromSet{a}{2,3,4} 
+        \randint{b}{2}{5}
+        \function{f}{b*e^(-a*x^2)}
+        \derivative{f_1}{f}{x}
+        \function{Ef}{x*f_1/f}
+        \function[expand,normalize]{sol}{Ef}
+        \function[expand,normalize]{sol2}{1/(2*a)^0,5}
+     \end{variables}
+          \begin{question}
+          \lang{de}{\text{Berechnen Sie die Elastizitätsfunktion $\epsilon_f(x)$ zu der 
+                 Nachfragefunktion $f(x)=\var{f}$:}}
+           \lang{en}{\text{Calculate the elasticity function $\epsilon_f(x)$ for the 
+                 demand function $f(x)=\var{f}$:}}      
+          \type{input.generic}
+               \begin{answer}
+                 \type{input.function}
+                 \text{$\epsilon_f(x)=$}
+                 \solution{sol}
+                 \checkAsFunction{x}{-10}{10}{10}
+                 \explanation[edited]
+                 {\lang{de}{\text {Die Ableitung ist:}}
+                 \lang{en}{\text{The derivative is : }}
+                 $f'(x)=\var{f_1}$.}
+               \end{answer} 
+               
+               \begin{answer}
+                    \type{input.number}
+                    \lang{de}{\text{In welchem Bereich ist die Nachfrage elastisch?
+                    $x>$
+                    }}
+                    \lang{en}{\text{Where is demand elastic?}}
+                    \solution{sol2}
+                    
+                    \explanation[edited]
+                    {\lang{de}{\text{f ist elastisch, wenn }}
+                    \lang{en}{\text{ f is elastic if }}
+                    $|\epsilon_f(x)|>1$}
+               \end{answer}               
+          \end{question}     
+     \end{problem}
+
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

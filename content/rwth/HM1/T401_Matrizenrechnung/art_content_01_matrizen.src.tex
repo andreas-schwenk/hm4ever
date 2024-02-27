@@ -1,0 +1,430 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Matrizen}
+    \lang{en}{Matrices}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+  \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+\end{components}
+  \begin{links}
+  \link{generic_article}{content/rwth/HM1/T203_komplexe_Zahlen/g_art_content_08aneu_komplexeZahlen_intro.meta.xml}{content_08aneu_komplexeZahlen_intro}
+%\link{generic_article}{content/rwth/HM1/T203_komplexe_Zahlen/g_art_content_08_algebraische_darstellung.meta.xml}{content_08_algebraische_darstellung}
+    \link{generic_article}{content/rwth/HM1/T111neu_Matrizen/g_art_content_39_matrizen.meta.xml}{matrizen}
+    \link{generic_article}{content/rwth/HM1/T108_Vektorrechnung/g_art_content_27_vektoren.meta.xml}{vektoren}
+    \link{generic_article}{content/rwth/HM1/T108_Vektorrechnung/g_art_content_29_linearkombination.meta.xml}{lin-komb}
+    \link{generic_article}{content/rwth/HM1/T202_Reelle_Zahlen_axiomatisch/g_art_content_04_koerperaxiome.meta.xml}{koerper}
+    \link{generic_article}{content/rwth/HM1/T401_Matrizenrechnung/g_art_content_03_transponierte.meta.xml}{transponierte}
+    \link{generic_article}{content/rwth/HM1/T403a_Vektorraum/g_art_content_10a_vektorraum.meta.xml}{vektorraum}
+    \link{generic_article}{content/rwth/HM1/T403a_Vektorraum/g_art_content_10b_lineare_abb.meta.xml}{def_lin_abb}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{1}
+\ombarticle{1}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Matrizen, Addition und Skalarmultiplikation}\lang{en}{Matrices, addition and scalar multiplication}}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/11066}{Ticket 11066}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+\lang{de}{Matrizen sind nicht nur über den reellen Zahlen definiert, wie im Abschnitt 
+\link{matrizen}{Matrizen} aus Teil 1, sondern allgemeiner über jedem \link{koerper}{Körper} $\mathbb{K}$,
+also zum Beispiel über den \link{content_08aneu_komplexeZahlen_intro}{komplexen Zahlen} $\C$.
+Alle Regeln, die über den reellen Zahlen angegeben wurden, sind auch über jedem 
+Körper $\mathbb{K}$ gültig. Dieser Themenblock wiederholt (nun über allgemeinen Körpern) 
+die in Teil 1 gegebenen Regeln für das Rechnen mit Matrizen, und ergänzt noch
+ \link{transponierte}{Rechenregeln für transponierte Matrizen}.}
+
+\lang{en}{Matrices are not only defined over the real numbers, as seen in the section on \link{matrizen}{matrices} of Part 1, but 
+more generally over every \link{koerper}{field} $\mathbb{K}$; for example, over the \link{content_08aneu_komplexeZahlen_intro}{complex numbers} $\C$.
+All rules used over the real numbers are also valid over every field $\mathbb{K}$. This section 
+reviews the rules given in Part 1 for calculating with matrices, but now over general fields 
+and adds \link{transponierte}{calculating operations for transposed matrices}.}
+
+\lang{de}{Wenn Sie bereits die Kapitel 11 und 12 aus Teil 1 behandelt haben,
+ist für Sie auf dieser Seite hier Folgendes neu:
+\begin{itemize}
+    \item Betrachtung von Matrizen über allgemeinen Körpern $\K$.
+    \item Beispiele über $\C$.
+    \item Die Beweisskizze unter Regel 1.12.
+\end{itemize}}
+
+\lang{en}{If you have already worked on the Chapters 11 and 12 from Part 1, the following will be new to you on this page:
+\begin{itemize}
+    \item Matrices over general fields $\K$.
+    \item Examples over $\C$. 
+    \item Outline of the proof for 1.12. %Beweisskizze??
+\end{itemize}}
+
+
+\section{\lang{de}{Matrizen}\lang{en}{Matrices}}
+
+\lang{de}{Im ganzen Abschnitt bezeichne $\mathbb{K}$ einen Körper (also z.B. $\mathbb{K}=\R$ oder $\mathbb{K}=\C$).}
+\lang{en}{Throughout the entire section, $\mathbb{K}$ denotes a field (e.g. $\mathbb{K}=\R$ or $\mathbb{K}=\C$).}
+
+\begin{definition}[\lang{de}{Matrix}\lang{en}{Matrix}]\label{def:matrix}
+\lang{de}{Sind $m, n \in \N$ gegeben, sowie f\"ur alle $i, j \in \N$ mit $1 \leq i \leq m$ und $1 \leq j \leq n$ Elemente $a_{ij} \in \mathbb{K}$, 
+so nennt man das Schema
+\[ 
+\begin{pmatrix}
+a_{11} & a_{12} & a_{13} & \cdots & a_{1n} \\
+a_{21} & a_{22} & a_{23} & \cdots & a_{2n} \\
+\vdots  & \vdots  & \vdots  & \ddots & \vdots  \\
+a_{m1} & a_{m2} & a_{m3} & \cdots & a_{mn}  
+\end{pmatrix} = \left( a_{ij} \right)_{1 \leq i \leq m, 1 \leq j \leq n} = A 
+\]
+eine Matrix \"uber $\mathbb{K}$ mit $m$ \emph{Zeilen} und $n$ \emph{Spalten}, oder kurz eine
+\emph{$ \left( m \times n \right)$-Matrix} \"uber $\mathbb{K}$.}
+
+\lang{en}{Let $m, n\in \N$ be given and $a_{ij}\in\K$ for all $i, j\in\N$ with $1\leq i\leq m$ and $1\leq j\leq n$.
+We then call the table
+\[ 
+\begin{pmatrix}
+a_{11} & a_{12} & a_{13} & \cdots & a_{1n} \\
+a_{21} & a_{22} & a_{23} & \cdots & a_{2n} \\
+\vdots  & \vdots  & \vdots  & \ddots & \vdots  \\
+a_{m1} & a_{m2} & a_{m3} & \cdots & a_{mn}  
+\end{pmatrix} = \left( a_{ij} \right)_{1 \leq i \leq m, 1 \leq j \leq n} = A 
+\]
+a matrix over $\K$ with $m$ \emph{rows} and $n$ \emph{columns}, or an \emph{$ \left( m \times n \right)$-matrix} over $\mathbb{K}$.}
+
+
+\lang{de}{Die Einträge der Matrix nennt man die \emph{Koeffizienten} der Matrix, genauer ist
+$a_{ij}$ der Koeffizient der Matrix der $i$-ten Zeile und $j$-ten Spalte, oder kurz der \emph{$(i,j)$-te Koeffizient} der Matrix.}
+
+\lang{en}{The entries of the matrix are called \emph{elements}. $a_{ij}$ is the entry of the $i$th row and the $j$th column, or the \emph{$(i,j)$-th
+element} of the matrix.}
+
+\lang{de}{Die Menge aller $(m\times n)$-Matrizen mit Einträgen in $\mathbb{K}$ wird mit $M(m,n;\mathbb{K})$ bezeichnet.}
+\lang{en}{The set of all $(m\times n)$-matrices with elements in $\K$ is denoted by $M(m,n;\mathbb{K})$.}\\
+\lang{de}{\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11009&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}
+\floatright{\href{https://www.hm-kompakt.de/video?watch=800}{\image[75]{00_Videobutton_schwarz}}}}\\\\
+\end{definition}
+
+\begin{remark}
+\lang{de}{
+\begin{enumerate}
+\item In obiger Darstellung sind die $a$ mit zwei Indizes $i$ und $j$ versehen, und man sollte eigentlich genauer $a_{i,j}$ schreiben statt
+$a_{ij}$, also zum Beispiel $a_{1,2}$ statt $a_{12}$. Insbesondere wird bei großen Matrizen ein Komma benötigt, um zum Beispiel zwischen
+ $a_{1,12}$ (also dem Eintrag in der ersten Zeile und zwölften Spalte) und $a_{11,2}$ (also dem  Eintrag 
+in der elften Zeile und zweiten Spalte) zu unterscheiden, was ohne Komma beides $a_{112}$ wäre.
+\item Für die Menge der $(m\times n)$-Matrizen über $\mathbb{K}$ gibt es noch weitere gebräuchliche Bezeichnungen. Einige davon sind:
+\[ \mathbb{K}^{(m \times n)}, \quad \text{Mat}(m,n;\mathbb{K}) \quad \text{und} \quad  M_{m,n}(\mathbb{K}). \]
+\end{enumerate}}
+\lang{en}{
+\begin{enumerate}
+\item In the notation shown above, $j$ and $i$ are used as indices for the coefficients $a$. To avoid confusion in large matrices, they should be separated by a comma.
+For example, $a_{112}$ should be written as $a_{1,12}$ or $a_{11,2}$.\\
+We can only omit the comma if there is no ambiguity.
+\item There are a couple of notations commonly used for the set of $(m\times n)$-matrices over $\mathbb{K}$. For example:
+\[ \mathbb{K}^{(m \times n)}, \quad \text{Mat}(m,n;\mathbb{K}) \quad \text{and} \quad  M_{m,n}(\mathbb{K}). \]
+\end{enumerate}}
+\end{remark}
+
+
+\begin{remark}
+\lang{de}{
+\begin{enumerate}
+\item Eine $(1\times n)$-Matrix (d.h. eine Matrix mit nur einer Zeile) nennt man auch \emph{Zeilenvektor der L"ange $n$}.\\
+\item Eine $(m\times 1)$-Matrix (d.h. eine Matrix mit nur einer Spalte) nennt man auch \emph{Spaltenvektor der L"ange $m$}.
+\item Eine $(n\times n)$-Matrix (d.h. eine Matrix mit gleich vielen Zeilen wie Spalten) nennt man auch eine \emph{quadratische} Matrix
+der Größe $n$.
+\end{enumerate}}
+\lang{en}{
+\begin{enumerate}
+\item A $(1\times n)$-matrix (a matrix with only one row) is called a \emph{row vector with $n$ entries}.\\
+\item A $(m\times 1)$-matrix (a matrix with only one coloumn) is called a \emph{column vector with $m$ entries}.
+\item A $(n\times n)$-matrix (a matrix with the same number of rows and columns) is called a \emph{square matrix of order $n$}.
+\end{enumerate}}
+\end{remark}
+
+
+\begin{example}
+\[ A= \begin{pmatrix} 2 & -3 & 1 \\ 0 & \frac{4}{3} & 5 \end{pmatrix} \]
+\lang{de}{
+ist eine $(2\times 3)$-Matrix über $\R$.\\
+Der Koeffizient an der Stelle $(1, 3)$ ist $a_{13}=1$.\\
+Die erste Zeile der Matrix ist $\begin{pmatrix} 2 & -3 & 1 \end{pmatrix}$ und die erste Spalte ist $\begin{pmatrix} 2\\ 0  \end{pmatrix}$.}
+\lang{en}{
+is a $(2\times 3)$-matrix over $\R$.\\
+The entry at $(1, 3)$ is $a_{13}=1$.\\
+The first row of the matrix is $\begin{pmatrix} 2 & -3 & 1 \end{pmatrix}$ 
+and the first column is $\begin{pmatrix} 2\\ 0  \end{pmatrix}$.}
+\end{example}
+
+
+\begin{example}
+\[ A= \begin{pmatrix} -1 & -3+i \\ 0 & 4+2i \end{pmatrix} \]
+\lang{de}{
+ist eine $(2\times 2)$-Matrix über $\C$.\\
+Der Koeffizient an der Stelle $(2, 2)$ ist $a_{22}=4+2i$.}
+\lang{en}{is a $(2\times 2)$-matrix over $\C$.\\
+The entry at $(2, 2)$ is $a_{22}=4+2i$.}
+\end{example}
+
+
+
+\section{\lang{de}{Addition und Skalarmultiplikation von Matrizen} \lang{en}{Addition and scalar multiplication}}
+
+
+\begin{definition}[\lang{de}{Matrix-Addition} \lang{en}{Matrix addition}]\label{def:matrix-addition}
+
+\lang{de}{Für zwei $(m\times n)$-Matrizen $A=\left( a_{ij} \right)_{1 \leq i \leq m, 1 \leq j \leq n}$ und $B=\left( b_{ij} \right)_{1 \leq i \leq m, 1 \leq j \leq n}$  über $\mathbb{K}$, die also die 
+gleiche Anzahl an Zeilen \textbf{und} die gleiche Anzahl an Spalten haben, ist deren \emph{Summe} koeffizientenweise definiert, d.h. der $(i,j)$-te Koeffizient der Summe ist gleich
+der Summe der $(i,j)$-ten Koeffizienten, oder kurz:}
+\lang{en}{Given two $(m\times n)$-matrices $A=\left( a_{ij} \right)_{1 \leq i \leq m, 1 \leq j \leq n}$ and $B=\left( b_{ij} \right)_{1 \leq i \leq m, 1 \leq j \leq n}$ over $\mathbb{K}$
+that have the same number of rows \textbf{and} columns, we define their \emph{sum} componentwise. The $(i,j)$th entry of the sum equals the sum of the $(i,j)$th entries:}
+
+\[ A+B = \left( a_{ij}+b_{ij} \right)_{1 \leq i \leq m, 1 \leq j \leq n}.  \]
+
+\lang{de}{Ausführliche Schreibweise:}
+\lang{en}{In more detailed notation:}
+
+\begin{eqnarray*}
+  A + B &=&
+  \begin{pmatrix}
+    a_{11} & a_{12} & \cdots & a_{1n} \\
+    a_{21} & a_{22} & \cdots & a_{2n} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    a_{m1} & a_{m2} & \cdots & a_{mn}
+  \end{pmatrix} + \begin{pmatrix}
+    b_{11} & b_{12} & \cdots & b_{1n} \\
+    b_{21} & b_{22} & \cdots & b_{2n} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    b_{m1} & b_{m2} & \cdots & b_{mn}
+  \end{pmatrix} \\ && \\
+  &=& 
+  \begin{pmatrix}
+    a_{11}+b_{11} & a_{12}+b_{12} & \cdots & a_{1n}+b_{1n} \\
+    a_{21}+b_{21} & a_{22}+b_{22} & \cdots & a_{2n}+b_{2n} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    a_{m1}+b_{m1} & a_{m2}+b_{m2} & \cdots & a_{mn}+b_{mn}
+  \end{pmatrix}
+\end{eqnarray*}
+
+\end{definition}
+
+\begin{block}[warning]
+\lang{de}{Für Matrizen verschiedener Größen ist die Summe nicht definiert!}
+\lang{en}{The sum cannot be defined for matrices with  different sizes!}
+\end{block}
+
+\begin{example}
+\lang{de}{
+\begin{enumerate}
+\item Die Summe der Matrizen $A=\begin{pmatrix} 1&2&3\\ 4 & 5 &6\end{pmatrix}$ und $B=\begin{pmatrix} 3&0&-1 \\ 2 & -2 &-3\end{pmatrix}$ ist
+\[ 
+ \begin{pmatrix} 1&2&3\\ 4 & 5 &6\end{pmatrix}+\begin{pmatrix} 3&0&-1 \\ 2 & -2 &-3\end{pmatrix} = 
+ \begin{pmatrix} 1+3&2+0&3-1 \\ 4+2 & 5-2 &6-3\end{pmatrix}=\begin{pmatrix} 4&2&2 \\ 6 & 3 &3\end{pmatrix}. 
+\]
+\item Die Summe der Matrizen $A=\begin{pmatrix} 2+3i & 0\\ 4i & -5i\end{pmatrix}$ und $B=\begin{pmatrix} -i & 1\\ 3 & 2+i\end{pmatrix}$ über $\mathbb{C}$ ist
+\[ 
+ \begin{pmatrix} 2+3i & 0\\ 4i & -5i\end{pmatrix}+\begin{pmatrix} -i & 1\\ 3 & 2+i\end{pmatrix} = 
+ \begin{pmatrix} 2+3i-i & 0+1\\ 4i+3 & -5i+2+i\end{pmatrix}=\begin{pmatrix} 2+2i & 1\\ 3+4i & 2-4i\end{pmatrix}. 
+\]
+\item Die Summe der Matrizen $A=\begin{pmatrix} 1&2&3\\ 4 & 5 &6\end{pmatrix}$ und $B=\begin{pmatrix} 3&0 \\ 2  &-3\end{pmatrix}$ ist nicht definiert, da
+ sie verschiedene Anzahlen von Spalten haben.
+\end{enumerate}}
+\lang{en}{
+\begin{enumerate}
+\item The sum of the matrices $A=\begin{pmatrix} 1&2&3\\ 4 & 5 &6\end{pmatrix}$ and $B=\begin{pmatrix} 3&0&-1 \\ 2 & -2 &-3\end{pmatrix}$ is
+\[ 
+ \begin{pmatrix} 1&2&3\\ 4 & 5 &6\end{pmatrix}+\begin{pmatrix} 3&0&-1 \\ 2 & -2 &-3\end{pmatrix} = 
+ \begin{pmatrix} 1+3&2+0&3-1 \\ 4+2 & 5-2 &6-3\end{pmatrix}=\begin{pmatrix} 4&2&2 \\ 6 & 3 &3\end{pmatrix}. 
+\]
+\item The sum of the matrices $A=\begin{pmatrix} 2+3i & 0\\ 4i & -5i\end{pmatrix}$ and $B=\begin{pmatrix} -i & 1\\ 3 & 2+i\end{pmatrix}$ over $\mathbb{C}$ is
+\[ 
+ \begin{pmatrix} 2+3i & 0\\ 4i & -5i\end{pmatrix}+\begin{pmatrix} -i & 1\\ 3 & 2+i\end{pmatrix} = 
+ \begin{pmatrix} 2+3i-i & 0+1\\ 4i+3 & -5i+2+i\end{pmatrix}=\begin{pmatrix} 2+2i & 1\\ 3+4i & 2-4i\end{pmatrix}. 
+\]
+\item The sum of the matrices $A=\begin{pmatrix} 1&2&3\\ 4 & 5 &6\end{pmatrix}$ and $B=\begin{pmatrix} 3&0 \\ 2  &-3\end{pmatrix}$ is not defined, as
+ they have a different number of columns.
+\end{enumerate} }
+\end{example}
+
+
+\begin{definition}[\lang{de}{Multiplikation mit Skalaren} \lang{en}{Scalar multiplication}]\label{def:matrix-multiplikation-skalar}
+\lang{de}{
+Für eine $(m\times n)$-Matrix $A=\left( a_{ij} \right)_{1 \leq i \leq m, 1 \leq j \leq n}$ über $\mathbb{K}$ und ein Element $r\in \mathbb{K}$ ist die \emph{skalare Multiplikation} 
+koeffizientenweise definiert, d.h. der $(i,j)$-te Koeffizient des Ergebnisses ist das $r$-fache des $(i,j)$-ten Koeffizienten von $A$, oder kurz
+\[ r\cdot A= \left( ra_{ij} \right)_{1 \leq i \leq m, 1 \leq j \leq n}. \]}
+\lang{en}{Given a $(m\times n)$-matrix $A=\left( a_{ij} \right)_{1 \leq i \leq m, 1 \leq j \leq n}$ over $\mathbb{K}$ and an element $r\in\mathbb{K}$,
+we define \emph{scalar multiplication} componentwise. The $(i,j)$th entry of the final matrix is $r$-times the $(i,j)$th entry of $A$:
+\[ r\cdot A= \left( r\cdot a_{ij} \right)_{1 \leq i \leq m, 1 \leq j \leq n}. \]}
+\end{definition}
+
+\begin{remark}
+\lang{de}{Betrachtet man Spaltenvektoren der Länge $n$ als $(n\times 1)$-Matrizen, so stimmen die Definitionen hier mit der Vektoraddition und der Skalarmultiplikation aus
+dem Abschnitt \link{vektoren}{Vektoren im Anschauungsraum} überein.}
+\lang{en}{Considering column vectors of length $n$ as $(n\times 1)$-matrices, the definitions above match the definitions of vector addition and scalar multiplication, that we 
+introduced in \link{vektoren}{vectors in space}. }
+\end{remark}
+
+\begin{example}
+\lang{de}{
+Für die Matrizen $A=\begin{pmatrix} 1&2&3\\ 4 & 5 &6\end{pmatrix}$ und $C=\begin{pmatrix} 3&0 \\ 2  &-3\end{pmatrix}$ sind
+\[ 2\cdot A= 2\cdot \begin{pmatrix} 1&2&3\\ 4 & 5 &6\end{pmatrix} =\begin{pmatrix} 2&4&6\\ 8 & 10 &12\end{pmatrix}\]
+sowie
+\[ (-1)\cdot C=-C= \begin{pmatrix} -3&0 \\ -2  &3\end{pmatrix} \]
+und weiterhin
+\[ (-2i)\cdot C= \begin{pmatrix} -6i&0 \\ -4i &6i\end{pmatrix}. \]}
+
+\lang{en}{
+For the matrices $A=\begin{pmatrix} 1&2&3\\ 4 & 5 &6\end{pmatrix}$ and $C=\begin{pmatrix} 3&0 \\ 2  &-3\end{pmatrix}$ equals
+\[ 2\cdot A= 2\cdot \begin{pmatrix} 1&2&3\\ 4 & 5 &6\end{pmatrix} =\begin{pmatrix} 2&4&6\\ 8 & 10 &12\end{pmatrix}\]
+and
+\[ (-1)\cdot C=-C= \begin{pmatrix} -3&0 \\ -2  &3\end{pmatrix} \]
+as well as
+\[ (-2i)\cdot C= \begin{pmatrix} -6i&0 \\ -4i &6i\end{pmatrix}. \]}
+\end{example}
+
+\begin{remark}
+\lang{de}{
+Für eine $(m\times n)$-Matrix $A=\left( a_{ij} \right)_{1 \leq i \leq m, 1 \leq j \leq n}$ über $\K$ und ein Element $s\in \K$ ist die \emph{skalare Division}
+direkt auf die skalare Multiplikation zurückzuführen, indem man in der Definition $r$ durch $\frac{1}{s}$ ersetzt.}
+\lang{en}{ For a $(m\times n)$-matrix $A=\left( a_{ij} \right)_{1 \leq i \leq m, 1 \leq j \leq n}$ over $\K$ and an element $s\in\K$, we define the \emph{scalar divion}
+by replacing $r$ through $\frac{1}{s}$ in the definition of the scalar multiplication.}
+
+
+\end{remark}
+
+
+\section{\lang{de}{Rechenregeln} \lang{en}{Rules}}
+\lang{de}{Die Addition und die skalare Multiplikation von $(m\times n)$-Matrizen über $\mathbb{K}$ lassen sich auch kombinieren. Es ergeben sich dieselben Regeln wie für
+die \link{lin-komb}{Addition und skalare Multiplikation} von Vektoren.}
+\lang{en}{The addition and the scalar multiplication of $(m\times n)$-matrices over $\mathbb{K}$ can be combined using the following rules, similiar to the ones for 
+link{lin-komb}{addition and scalar multiplication of vectors}.}
+
+
+\begin{rule}\label{rule:rechenregeln}
+\lang{de}{
+Wie bisher bezeichne $M(m,n;\mathbb{K})$ die Menge aller $(m\times n)$-Matrizen über $\mathbb{K}$. Dann gilt
+   f"ur die Addition:
+    \begin{enumerate}
+    \item $\,\, A + B = B + A$ f\"ur alle $A,B \in M(m,n;\mathbb{K})$,
+    \item \nowrap{$\,\, A + (B + C) = (A + B) + C$ f\"ur alle
+      $A,B,C \in M(m,n;\mathbb{K})$,}
+    \item $\,\,$ es existiert eine Matrix $0 \in M(m,n;\mathbb{K})$, sodass $ B + 0 = B$ 
+    f\"ur alle $B \in M(m,n;\mathbb{K}) $ (nämlich die \emph{Nullmatrix}, deren Koeffizienten sämtlich $0$ sind).
+%    \item \nowrap{Zu jedem $ B \in M(m,n;\mathbb{K})$ existiert $-B \in M(m,n;\mathbb{K})$, sodass
+%      $B + (-B) = \vec{0}$}
+    F"ur die Multiplikation mit Skalaren gilt:
+    \begin{enumerate}
+    \item \nowrap{$\,\, \alpha (\beta B) = (\alpha \beta) B$ f\"ur alle $B \in
+      M(m,n;\mathbb{K}) $ und $ \alpha, \beta \in \mathbb{K} $,}
+    \item \nowrap{$\,\, 1\cdot B = B$ f\"ur alle $B \in M(m,n;\mathbb{K}) $.}
+    \end{enumerate}
+    Zwischen Addition und Multiplikation mit Skalaren gelten die Distributivgesetze:
+    \begin{enumerate}
+    \item \nowrap{$\,\, \alpha (A + B) = \alpha A + \alpha B$ f\"ur alle
+      $A, B \in M(m,n;\mathbb{K})$ und $\alpha \in \mathbb{K}$,}
+    \item \nowrap{$\,\, (\alpha + \beta) B = \alpha B + \beta B$ f\"ur alle
+      $B \in M(m,n;\mathbb{K})$ und $\alpha , \beta \in \mathbb{K} $.}
+    \end{enumerate}
+    \floatright{\href{https://www.hm-kompakt.de/video?watch=818}{\image[75]{00_Videobutton_schwarz}}}\\
+    \end{enumerate}}
+
+\lang{en}{
+As introduced earlier, $M(m,n;\mathbb{K})$ describes the set of all $(m\times n)$-matrices over $\mathbb{K}$. For addition of matrices we have:
+    \begin{enumerate}
+    \item $\,\, A + B = B + A$ for all $A,B \in M(m,n;\mathbb{K})$,
+    \item \nowrap{$\,\, A + (B + C) = (A + B) + C$ for all
+      $A,B,C \in M(m,n;\mathbb{K})$,}
+    \item $\,\,$ There exists a matrix $0 \in M(m,n;\mathbb{K})$, such that $ B + 0 = B$ 
+    for all $B \in M(m,n;\mathbb{K}) $ (namely the \emph{zero matrix}, with all entries equal to $0$).
+%    \item \nowrap{Zu jedem $ B \in M(m,n;\mathbb{K})$ existiert $-B \in M(m,n;\mathbb{K})$, sodass
+%      $B + (-B) = \vec{0}$}
+  For scalar multiplication we have:
+    \begin{enumerate}
+    \item \nowrap{$\,\, \alpha (\beta B) = (\alpha \beta) B$ for all $B \in
+      M(m,n;\mathbb{K}) $ and $ \alpha, \beta \in \mathbb{K} $,}
+    \item \nowrap{$\,\, 1\cdot B = B$ for all $B \in M(m,n;\mathbb{K}) $.}
+    \end{enumerate}
+    There are also distributive laws between addition and scalar multipliation:
+    \begin{enumerate}
+    \item \nowrap{$\,\, \alpha (A + B) = \alpha A + \alpha B$ for all
+      $A, B \in M(m,n;\mathbb{K})$ and $\alpha \in \mathbb{K}$,}
+    \item \nowrap{$\,\, (\alpha + \beta) B = \alpha B + \beta B$ for all
+      $B \in M(m,n;\mathbb{K})$ and $\alpha , \beta \in \mathbb{K} $.}
+    \end{enumerate}
+    \end{enumerate}}
+
+
+\end{rule}
+
+%\begin{block}[explanation]
+\begin{proof*}[\lang{de}{Beweisskizze} \lang{en}{Outline of the proof}]
+\lang{de}{
+Da sowohl die Addition als auch die Skalarmultiplikation koeffizientenweise definiert sind, muss man die Rechenregeln lediglich für jeden einzelnen Doppelindex $(i,j)$ überprüfen.\\
+Dann sind es aber lediglich die Regeln die in jedem Körper aufgrund der Körperaxiome gelten, nämlich
+\begin{enumerate}
+\item Kommutativität und Assoziativität der Addition in $\mathbb{K}$, sowie Existenz des Nullelements $0\in \mathbb{K}$,
+\item Assoziativität der Multiplikation in $\mathbb{K}\setminus\{0\}$, sowie definierende Eigenschaft des Einselements $1\in \mathbb{K}$,
+\item Distributivgesetze.
+\end{enumerate}}
+
+\lang{en}{
+Addition as well as scalar multiplication are defined componentwise, so the rules only need to be chcked for every double index $(i,j)$.\\
+But those are merely the rules that hold in every field because of the field axioms, namely
+\begin{enumerate}
+\item commutativity and associativity of addition in $\mathbb{K}$, and the existence of the zero element $0\in\mathbb{K}$,
+\item associativity of multiplication in $\mathbb{K}\setminus\{0\}$, as well as the identity element $1\in\mathbb{K}$ and its defining property,
+\item distributive laws.
+\end{enumerate}
+}
+\end{proof*}
+%\end{block}
+
+
+\begin{example}
+%\begin{enumerate}
+%\item 
+\lang{de}{Es gilt:}
+\lang{en}{We have:}
+\begin{eqnarray*} && 3\cdot \left( \begin{pmatrix}2&1&0 \\ 3&0&1\end{pmatrix}+ \begin{pmatrix}-1&-1& 2\\ 4i&0&0 \end{pmatrix}\right)
+- 3\cdot \begin{pmatrix}2&1&0\\ 3&0&1\end{pmatrix} \\
+&=& 3\cdot \begin{pmatrix}2&1&0 \\ 3&0&1\end{pmatrix}+ 3\cdot \begin{pmatrix}-1&-1& 2\\ 4i&0&0\end{pmatrix}- 3\cdot \begin{pmatrix}2&1&0\\ 3&0&1\end{pmatrix} \\
+&=& 3\cdot \begin{pmatrix}-1&-1& 2\\ 4i&0&0\end{pmatrix} =\begin{pmatrix}-3&-3&6 \\ 12i&0&0\end{pmatrix} 
+\end{eqnarray*}
+%\end{enumerate}
+\end{example}
+
+
+\begin{remark}
+\lang{de}{
+Aufgrund der \lref{rule:rechenregeln}{obigen Rechenregeln} bildet für alle natürliche Zahlen $m$ und $n$ die Menge $M(m,n;\mathbb{K})$ der $(m\times n)$-Matrizen über $\mathbb{K}$
+einen Vektorraum über $\mathbb{K}$.
+Das wird noch Thema in \ref[vektorraum][diesem Abschnitt]{def:Allg_VR} sein.}%(vgl. \ref[lin-komb][Ergänzung im Abschnitt Rechenregeln für Vektoren und Linearkombinationen]{supp:allg-vektorraum}).
+ \lang{en}{
+For all natural numbers $n$ and $m$, the set $M(m,n;\mathbb{K})$ of $(m\times n)$-matrices over $\mathbb{K}$ forms a vector space over $\mathbb{K}$.
+This will be addressed in the section about \ref[vektorraum][vector spaces]{def:Allg_VR}.}
+\end{remark}
+\lang{de}{ Ein weiterer Ausblick auf dieses Kapitel stellt folgendes Video dar. Es behandelt die obige Regel im Bezug zu \link{def_lin_abb}{linearen Abbildungen}.}\\
+\lang{de}{\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10857&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}}\\
+ 
+
+\end{visualizationwrapper}
+
+\end{content}

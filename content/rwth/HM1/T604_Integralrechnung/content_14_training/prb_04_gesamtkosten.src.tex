@@ -1,0 +1,73 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A04: Gesamtkosten}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A04: Gesamtkosten}}
+\lang{en}{\title{A04: Total costs}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24050}{Ticket 24050}
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+\begin{problem}
+     \begin{variables}
+            \drawFromSet{h}{1/2,1/4,3/4,1/5,2/5,3/5,4/5}
+            \drawFromSet{a}{10,20,30}
+            \drawFromSet{b}{800,900,1000,1100}
+            \function{F}{1/(2(1-h))*((1+b^2)^(1-h)-(1+a^2)^(1-h))}
+     \end{variables}
+     
+     \begin{question}
+          \lang{de}{\text{Ein Unternehmen will die Kosten berechnen, die für die Entwicklung eines Produktes bis zur Serienreife 
+     entstanden sind. Dabei betrugen die Grenzkosten  $K'(x)=\frac{x}{(1+x^2)^{\var{h}}}$ Tsd \euro.
+     
+     Berechnen Sie die Kosten $K$, wenn die allerersten $\var{a}$ Prototypen unberücksichtigt bleiben und bis zur Serienreife
+   $\var{b}$ Teile hergestellt wurden.\\$K=$\ansref Tsd \euro
+     }}
+    \lang{en}{\text{A company wants to calculate the costs incurred during the development
+     of a product before it was ready for series production. Here the marginal cost was $K'(x)=\frac{x}{(1+x^2)^{\var{h}}}$ thousand \euro.
+     Calculate the costs $K$ if the first $\var{a}$ prototypes are excluded and if $\var{b}$ parts
+     had been produced by the time the part was ready for mass production.\\$K=$\ansref thousand \euro
+     }}
+        
+     
+     
+     
+     \type{input.number}
+          \begin{answer}
+               \solution{F}
+          \end{answer}
+          \lang{de}{\explanation{Es muss das Integral $\int_{\var{a}}^{\var{b}}K'(x)dx$ berechnet werden. Die
+          Substitutionsregel muss angewandt werden mit $g(x)=1+x^2$.}}
+          \lang{en}{\explanation{We need to calculate the integral $\int_{\var{a}}^{\var{b}}K'(x)dx$. The
+          substitution rule should be applied with $g(x)=1+x^2$.}}
+     \end{question}     
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

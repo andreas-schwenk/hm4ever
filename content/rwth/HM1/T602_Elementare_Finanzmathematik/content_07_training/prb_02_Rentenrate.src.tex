@@ -1,0 +1,77 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A02: Rentenrate}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A02: Rentenrate}}
+\lang{en}{\title{A02: annuity payments}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22686}{Ticket 22686}
+\end{block}
+
+
+\usepackage{mumie.genericproblem}
+
+     \begin{problem}
+        \begin{variables}
+            \drawFromSet{r0}{15000,20000,25000,30000}
+            \randint{n}{4}{6}
+            \randint{p}{2}{4}
+            \function[calculate,2]{q}{1+p/100}
+            \function[calculate,2]{rn}{r0*(q^(n+1)-q^n)/(q^n-1)}
+        \end{variables}
+          \begin{question}
+               \type{input.function}
+               \lang{de}{\text{Ein Student erhält für sein $\var{n}$-jähriges
+               Studium $\var{r0}$ \euro (Rentenbarwert) geschenkt. Welchen 
+               Betrag (Rentenrate) kann er nachschüssig bei einer jährlichen Verzinsung von
+               $\var{p}$ \% pro Jahr abheben, damit das Geld eben diese $\var{n}$ 
+               Jahre reicht?\\
+               Rentenrate r=\ansref\euro}}
+               \lang{en}{\text{A student receives a gift of $\var{r0}$ \euro 
+               (annuity cash value) to cover $\var{n}$ years of study.
+               What amount (annuity payment) can he withdraw in arrears at an annual interest rate of
+               $\var{p}$ \% per year in order for the money to last just these $\var{n}$ 
+               years?\\
+               Annuity payment r=\ansref\euro}}
+               \begin{answer}
+                 \solution{rn}
+               \end{answer}
+               \lang{de}{\explanation[edited]{Für den Zinsfaktor q gilt: $q=1+\frac{p}{100}$
+                und somit für die Rentenrate: $r=R_0\cdot\frac{q^{n+1}-q^n}{q^n-1}.$
+                %=\var{r0}\frac{\var{q}^{\var{n}+1}-\var{q}^{\var{n}}}{\var{q}^{\var{n}}-1}
+                %=\var{rn}$ \euro.
+                }}
+                \lang{en}{\explanation[edited]{The interest factor q satisfies $q=1+\frac{p}{100}$
+                and the annuity rate satisfies $r=R_0\cdot\frac{q^{n+1}-q^n}{q^n-1}.$
+                %=\var{r0}\frac{\var{q}^{\var{n}+1}-\var{q}^{\var{n}}}{\var{q}^{\var{n}}-1}
+                %=\var{rn}$ \euro.
+                }}
+          \end{question}     
+     \end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

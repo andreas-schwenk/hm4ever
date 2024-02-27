@@ -1,0 +1,88 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A07: Partialbruchzerlegung}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A07: Partialbruchzerlegung}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/11224}{Ticket 11224}
+\end{block}
+
+\begin{problem}
+	\begin{question}
+		
+		\begin{variables}
+			\randint[Z]{c1}{-4}{-1} %Z heißt "ohne 0"
+			\randint[Z]{a}{-2}{2} 
+			\randint[Z]{k}{-1}{1} 
+			\function[calculate]{c2}{-c1+1}
+			\function[normalize]{g}{x*(x-c1)*(x-c2)}
+			\function[calculate]{b}{k*a+1}
+			\randadjustIf{a}{b=0}%wenn a, b und (a+b)\neq 0, da ansonsten weniger Bruchstriche benötigt werden
+			
+			\function[normalize]{xc1}{x-c1}
+			 
+			\function[normalize]{xc2}{x-c2}
+			
+			\function[expand,normalize]{f}{a*xc2*x+b*xc1*x-(a+b)*xc2*xc1}
+			\function{s1}{a/(xc1)}
+			\function{s2}{b/(xc2)}
+			\function[normalize]{s3}{(-a-b)/x}
+			\function[normalize]{s}{s1+s2+s3}
+			\function{fdg}{f/g}
+            
+            \function{F}{a*ln(abs(xc1))+b*ln(abs(xc2))+(-a-b)*ln(abs(x))}
+			
+		\end{variables}
+		
+		\lang{de}{
+	    \text{Bestimmen Sie die Partialbruchzerlegung der rationalen Funktion 
+        $f(x)=\var{fdg}$.\\        
+        $\var{fdg}=$\ansref.\\
+        Bestimmen Sie nun noch eine Stammfunktion $F(x)$ von der rationalen Funktion $f(x)$.\\
+        $F(x)=$\ansref.}
+		}
+     
+	\type{input.function}
+	\field{rational}
+	\begin{answer}
+		\solution{s}
+        \inputAsFunction{x}{kk}
+        \checkAsFunction{x}{-10}{10}{100}
+        \checkStringsForRelation{count(/,kk)>2 AND count((,kk)<3 AND count(x,kk)<4 AND equal(s,kk)}
+        \explanation{Es ist der Ansatz $\frac{A}{\var{xc1}}+\frac{B}{\var{xc2}}+\frac{C}{x}$ mit reellen Zahlen $A,B,C$ zu wählen.}
+        \explanation[count((,kk)>2)]{Nutzen Sie nur so viele Klammern wie nötig.}
+	\end{answer}
+    \begin{answer}
+        \solution{F}
+        \inputAsFunction{x}{Fx}
+        \checkFuncForZero{D[Fx]-kk}{-10}{10}{100}
+        \explanation{Nutzen Sie die Partialbruchzerlegung, um eine Stammfunktion zu bestimmen.}
+    \end{answer}
+	\end{question}
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

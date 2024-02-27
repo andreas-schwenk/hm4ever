@@ -1,0 +1,203 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A06: Fakultät}
+    \lang{en}{Factoriel}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22132}{Ticket 22132}
+\end{block}
+\begin{block}[annotation]
+Copy of \href{http://team.mumie.net/issues/9772}{Ticket 9772}: content/rwth/HM1/T201_Vollstaendige_Induktion_wichtige_Ungleichungen/training/prb_problem6.src.tex
+\end{block}
+
+
+\usepackage{mumie.genericproblem}
+\usepackage{mumie.ombplus}
+
+
+\lang{de}{
+	\title{A06: Fakultät}
+}
+
+\lang{en}{
+	\title{Problem 6}
+}
+
+
+\begin{problem}
+
+\randomquestionpool{1}{6}
+	\begin{question}
+	
+		\text{Fassen Sie den folgenden Ausdruck vollständig zusammen, sodass Sie als Ergebnis einen Ausdruck der Form  $x!$ erhalten:\\
+        $(\var{n}+1)\cdot \var{n}! =$\ansref $!$}
+		\type{input.number} 
+        \field{rational}
+		
+		\begin{variables}
+			\number{a}{0}
+			\randint{n}{2}{50}
+			
+			\function[calculate]{nh1}{n+1}
+			
+		\end{variables}
+	
+		\begin{answer}
+			\solution{nh1}
+            \explanation{Tipp: Verwenden Sie die Definition der Fakultät.}
+		\end{answer}
+		
+	\end{question}
+	
+	\begin{question}
+	
+	\text{Fassen Sie den folgenden Ausdruck vollständig zusammen, sodass Sie als Ergebnis einen Ausdruck der Form  $x!$ erhalten:\\
+        $\var{nh2}\cdot \var{n}!\cdot \var{nh1} =$\ansref $!$}
+		\type{input.number} 
+        \field{rational}
+		
+		\begin{variables}
+			\number{a}{0}
+			
+			\randint{n}{2}{50}
+			\function[calculate]{nh1}{n+1}
+			\function[calculate]{nh2}{n+2}
+			
+		\end{variables}
+	
+		\begin{answer}
+			\solution{nh2}
+            \explanation{Tipp: Verwenden Sie die Definition der Fakultät.}
+		\end{answer}
+	
+	
+	\end{question}
+	
+	\begin{question}
+	
+	\text{Fassen Sie den folgenden Ausdruck vollständig zusammen, sodass Sie als Ergebnis einen Ausdruck der Form  $x!$ erhalten:\\
+        $\frac{\var{nh1}!}{\var{nh1}}=$\ansref $!$}
+		\type{input.number} 
+        \field{rational}
+		
+		\begin{variables}
+			\number{a}{0}
+			
+			\randint{n}{2}{50}
+			
+			\function[calculate]{nh1}{n+1}
+			
+		\end{variables}
+	
+		\begin{answer}
+			\solution{n}
+            \explanation{Tipp: Verwenden Sie die Definition der Fakultät.}
+		\end{answer}
+	
+	
+	\end{question}
+	
+		\begin{question}
+	
+	\text{Fassen Sie den folgenden Ausdruck vollständig zusammen, sodass Sie als Ergebnis einen Ausdruck der Form  $x!$ erhalten:\\
+        $\frac{\var{n}!}{\var{n}\cdot \var{nl1}}=$\ansref $!$}
+		\type{input.number} 
+        \field{rational}
+		
+		\begin{variables}
+			
+			\randint{n}{2}{50}
+			\number{a}{0}
+			
+			\function[calculate]{nl1}{n-1}
+			\function[calculate]{nl2}{n-2}
+			
+
+			
+		\end{variables}
+	
+		\begin{answer}
+			\solution{nl2}
+            \explanation{Tipp: Verwenden Sie die Definition der Fakultät.}
+		\end{answer}
+	
+	
+	\end{question}
+	
+
+	\begin{question}
+	
+	\text{Fassen Sie den folgenden Ausdruck vollständig zusammen, sodass Sie als Ergebnis einen Ausdruck der Form  $x!$ erhalten:\\
+        $(\var{k}-1)!\cdot \var{k}\cdot (\var{k}+1)=$\ansref $!$}
+		\type{input.function} 
+        \field{rational}
+		
+		\begin{variables}			
+    			\number{a}{0}
+		
+			\function{k}{l}
+
+			\function{k1}{(k+1)}
+			
+			
+		\end{variables}
+	
+		\begin{answer}
+			\solution{k1}
+			\checkAsFunction{l}{-10}{10}{100}
+            \explanation{Tipp: Verwenden Sie die Definition der Fakultät.}
+		\end{answer}
+	
+	
+	\end{question}
+
+\begin{question}
+	
+	\text{Fassen Sie den folgenden Ausdruck vollständig zusammen, sodass Sie als Ergebnis einen Ausdruck der Form  $x!$ erhalten:\\
+        $\frac{\var{k}!}{\var{k}\cdot (\var{k}-1)}=$\ansref $!$}
+		\type{input.function} 
+        \field{rational}
+		
+		\begin{variables}			
+    			\number{a}{0}
+		
+			\function{k}{l}
+
+			\function{k2}{(k-2)}
+			
+			
+		\end{variables}
+	
+		\begin{answer}
+			\solution{k2}
+			\checkAsFunction{l}{-10}{10}{100}
+            \explanation{Tipp: Verwenden Sie die Definition der Fakultät.}
+		\end{answer}
+	
+	
+	\end{question}
+		
+\end{problem}
+
+\embedmathlet{mathlet}
+
+
+\end{content}

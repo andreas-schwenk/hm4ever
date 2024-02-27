@@ -1,0 +1,968 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Definition und Eigenschaften des Integrals}
+    \lang{en}{Definition and fundamental properties of integrals}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T107_Integral_J.meta.xml}{T107_Integral_J}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T107_Integral_I.meta.xml}{T107_Integral_I}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T107_Integral_H.meta.xml}{T107_Integral_H}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T107_Integral_G.meta.xml}{T107_Integral_G}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T107_Integral_F.meta.xml}{T107_Integral_F}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T107_SineCosine.meta.xml}{T107_SineCosine}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T107_Integral_E.meta.xml}{T107_Integral_E}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T107_Integral_D.meta.xml}{T107_Integral_D}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T107_Integral_C.meta.xml}{T107_Integral_C}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T107_Integral_B.meta.xml}{T107_Integral_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T107_Integral_A.meta.xml}{T107_Integral_A}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T304_Integrierbarkeit/g_art_content_07_ober_und_untersumme.meta.xml}{content_07_ober_und_untersumme}
+    \link{generic_article}{content/rwth/HM1/T304_Integrierbarkeit/g_art_content_10_uneigentliches_integral.meta.xml}{content_10_uneigentliches_integral}
+    \link{generic_article}{content/rwth/HM1/T107_Integralrechnung/g_art_content_25_stammfunktion.meta.xml}{link2}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{7}
+\ombarticle{1}
+
+\lang{de}{\title{Definition und grundlegende Eigenschaften des Integrals}}
+\lang{en}{\title{Definition and fundamental properties of integrals}}
+
+\begin{block}[annotation]
+
+Integral als orientierter Flächeninhalt,
+Integrale von konstanten Funktionen und Geraden (orientierte Rechtecks- und Dreiecksflächen),
+Integral der Änderungsrate (Ableitung einer Funktion),
+Definition des Riemann-Integrals als Grenzwert von Obersummen und Untersummen,
+Eigenschaften des Integrals: Additivität bezüglich der Grenzen, Vertauschung der Grenzen, Linearität.
+
+\end{block}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9035}{Ticket 9035}\\
+\end{block}
+
+\begin{block}[info-box]
+  \tableofcontents
+\end{block}
+
+
+\section{\lang{de}{Das bestimmte Integral als Flächeninhalt mit Vorzeichen}
+         \lang{en}{The definite integral as an area}}\label{orient-flaeche}
+\lang{de}{
+Im Folgenden nehmen wir stets an, dass $a$ und $b$ reelle Zahlen sind und $a<b$ gelte.
+Das bestimmte Integral $\big\int_a^b f(x)\, dx$ einer Funktion $f(x)$ gibt den \emph{Flächeninhalt 
+mit Vorzeichen} (orientierter Flächeninhalt) an, die der Graph der Funktion mit der $x$-Achse 
+zwischen den Integrationsgrenzen $a$ und $b$ einschließt, wobei die Flächenteile oberhalb der 
+$x$-Achse \emph{positiv} und die Flächenteile unterhalb der $x$-Achse \emph{negativ} in das Integral 
+eingehen.
+}
+\lang{en}{
+In the following we will always assume that $a$ and $b$ are real numbers and $a<b$. The definite 
+integral $\big\int_a^b f(x)\, dx$ of a function $f(x)$ gives us the \emph{signed area} bounded by the 
+graph of the function, the $x$-axis and the lower and upper bounds, $a$ and $b$. Areas 
+above the $x$-axis count as \emph{positive} area, and areas below the $x$-axis count as 
+\emph{negative} area.
+}
+
+\begin{example}\label{ex:integral-einfuehrung}
+%Beispiel: 
+\lang{de}{
+Das Integral $\big\int_a^b f(x)\, dx$ ist in diesem Beispiel die Summe von drei orientierten 
+Flächeninhalten. Der erste und dritte Flächeninhalt oberhalb der $x$-Achse zählen positiv, der zweite 
+Flächeninhalt unterhalb der $x$-Achse zählt negativ.
+}
+\lang{en}{
+In this example the integral $\big\int_a^b f(x)\, dx$ is the sum of three signed areas. The first 
+and third areas above the $x$-axis count positively towards the area, and the second area below the 
+$x$-axis counts negatively.
+}
+\begin{center}
+\image{T107_Integral_A}
+\end{center}
+\end{example}
+{ }\\ 
+  
+\begin{block}[notation]\label{bestimmtes_Integral}
+
+\lang{de}{
+\emph{Schreibweise des bestimmten Integrals}\\\\
+Für das Integral der Funktion $f(x)$ in den Grenzen von $a$ bis $b$ schreibt man
+}
+\lang{en}{
+\emph{Notation for definite integrals}\\\\
+The integral of the function $f(x)$ between $a$ and $b$ is written
+}
+\[ \int_a^b f(x)\, dx \,  . \]
+\lang{de}{
+$a$ und $b$ sind die \textit{Integrationsgrenzen}, 
+$x$ ist die \textit{Integrationsvariable}, 
+$f(x)$ der \textit{Integrand} und $dx$ das \textit{Differential}.
+}
+\lang{en}{
+The parameters $a$ and $b$ are called the \textit{limits} or \emph{bounds} of integration where $a$ 
+is the lower bound and $b$ is the upper bound. $x$ is called the \textit{integration variable}, 
+$f(x)$ is called the \textit{integrand}, and $dx$ is called the \textit{differential}.
+}
+
+\end{block}
+
+\lang{de}{
+Das Integralzeichen $\int$ ist historisch aus dem Summenzeichen $\sum$ entstanden: 
+Die Vorstellung des Integrals war, dass die Fläche ermittelt wird, indem schmale Rechtecksflächen mit Vorzeichen summiert werden, d.\,h. 
+Produkte von Funktionswerten $f(x)$ als Höhe des Rechtecks und einer 
+kleinen (infinitesimalen) Intervallbreite $dx$.
+\\\\
+Besonders einfach lassen sich Integrale von konstanten Funktionen bestimmen.
+Das Integral einer konstanten Funktion $f(x)=c$ ist eine orientierte Rechtecksfläche der Breite $b-a$ und der positiven oder negativen Höhe $c$, also
+}
+\lang{en}{
+The integral sign $\int$ comes from the sum symbol $\sum$. The formal definition of an integral 
+divides the area under the curve into progressively thinner rectangles, whose signed areas are added 
+together and a limit is taken to form an integral. The height of the rectangle centered at $x$ is the 
+function value $f(x)$ and the base length $dx$ is taken to be infinitesimally small using the limit.
+\\\\
+Determining the integrals of constant functions is especially simple. The integral of a constant 
+function $f(x)=c$ is the signed area of a rectangle of width $b-a$ and height (positive or negative) 
+$c$, so 
+}
+\[ \int_a^b c\, dx = c \cdot (b-a) . \]
+
+\lang{de}{
+Wie diese Annäherung durch Rechtecksflächen zu verstehen ist, 
+können Sie sich an drei Beispielen veranschaulichen.
+}
+\lang{en}{
+How this approximation using rectangular areas is illustrated in the next three examples and is 
+explained in more detail in a \link{content_07_ober_und_untersumme}{section} later in this course.
+}
+
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+ \tab{
+ \lang{de}{Konstante Funktion}
+ \lang{en}{Constant functions}
+ }
+\lang{de}{
+Für konstante Funktionen liefert die Annäherung der Fläche mit Hilfe von Rechtecksflächen ein exaktes 
+Ergebnis.
+}
+\lang{en}{
+For constant functions, the approximation of the area with sums of areas of rectangles gives the 
+exact result without taking a limit.
+}
+ 
+\begin{center}
+\image{T107_Integral_B}
+\end{center}
+
+ \tab{   
+ \lang{de}{Lineare Funktion}
+ \lang{en}{Linear functions}
+ }
+ 
+\lang{de}{
+Für lineare Funktionen ist das Ergebnis dieser Approximation in der Regel nicht exakt. Durch 
+Approximation der Fläche durch $10$ Rechtecke erhält man für die abgebildete Funktion ein Ergebnis 
+von $5,625$.
+}
+\lang{en}{
+In general, for linear functions the result of this approximation is not exact. Through approximation 
+with $10$ rectangles of the plotted function, we get an area of $5.625$.
+}
+ 
+\begin{center}
+\image{T107_Integral_C}
+\end{center}
+ 
+\lang{de}{Verwendet man $20$ Rechtecke, so erhält man $5,9375$.}
+\lang{en}{Using $20$ rectangles, we get $5.9375$.}
+  
+\begin{center}
+\image{T107_Integral_D}
+\end{center}
+
+\lang{de}{
+Das exakte Ergebnis ist durch die Fläche eines Dreiecks gegeben und beträgt $A=2,5\cdot 5/2=6,25$.
+Je mehr Rechtecke man zur Approximation verwendet, umso näher kommt man diesem Ergebnis.
+}
+\lang{en}{
+The exact result is given by the area of a triangle $A=2.5\cdot 5/2=6.25$. The more rectangles we 
+use, the closer the approximated result is to the exact result of the limit.
+}
+
+ \tab{
+ \lang{de}{Allgemein}
+ \lang{en}{In general}
+ }
+ 
+\lang{de}{
+Die gleiche Vorgehensweise kann für beliebige Funktionen angewendet werden, um den Flächeninhalt 
+zwischen Funktionsgraph und $x$-Achse näherungsweise zu berechnen. Dabei muss beachtet werden, dass 
+Flächen unterhalb der $x$-Achse mit einem negativen Vorzeichen versehen sind.
+}
+\lang{en}{
+The same approach can be applied to arbitrary functions, in order to approximately calculate the area 
+enclosed by the function and the $x$-axis. In doing so, one has to keep in mind that areas under the $x$-axis are given a negative sign.
+}
+
+\begin{center}
+\image{T107_Integral_E}
+\end{center}
+
+\lang{de}{
+Die Annäherung mit $20$ Rechtecken für die (vorzeichenbehaftete) Fläche, die obige Funktion von $1$ 
+bis $2$ mit der $x$-Achse einschließt,  liefert ungefähr den Wert $-12,51$. Der exakte Wert wird in 
+einem Beispiel im nächsten \link{link2}{Abschnitt} bestimmt und beträgt $-13$.
+\\\\
+Die Approximation des Integrals wird im folgenden Video erklärt und in einem 
+\link{content_07_ober_und_untersumme}{Abschnitt} des Vertiefungsteils Analysis präzisiert und 
+formalisiert.\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=600}{\image[75]{00_Videobutton_schwarz}}}
+\\\\
+}
+\lang{en}{
+The approximation with $20$ rectangular areas between $1$ and $2$ for the function depicted above 
+results in about $-12.51$. The precise value is calculated in an example in a \link{link2}{later 
+section} to be $-13$.
+}
+\end{tabs*}
+
+
+\begin{center}
+\image{T107_SineCosine}
+\end{center}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{2}
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{b}{1}{8}
+			\function[calculate]{k1}{-b/8}
+			\function[calculate]{k2}{b/8}
+			\function{lb}{k1*pi}
+			\function{ub}{k2*pi}
+			\number{sol}{0}
+		\end{variables}
+		
+		\text{\lang{de}{Bestimmen Sie mit Hilfe der obigen Grafik das folgende Integral: \\ } 
+          \lang{en}{Use the graphic above to determine the following integral: \\ }
+      		$\int_{\var{lb}}^{\var{ub}} \sin(x)dx =$\ansref.}
+		
+		\begin{answer}
+			\solution{sol}
+		\end{answer}
+		\explanation{\lang{de}{
+    Die positiv zählende Fläche und die negativ zählende Fläche sind gleich groß, weshalb das
+		Integral gleich $0$ ist.
+    }
+    \lang{en}{
+    The area bounded above the $x$-axis and below the $x$-axis is the same, which is why the 
+    integral is $0$.
+    }}
+	\end{quickcheck}
+	
+	\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{b}{1}{8}
+			\function[calculate]{k1}{1/2-b/8}
+			\function[calculate]{k2}{1/2+b/8}
+			\function{lb}{k1*pi}
+			\function{ub}{k2*pi}
+			\number{sol}{0}
+		\end{variables}
+		
+		\text{\lang{de}{
+          Bestimmen Sie mit Hilfe der obigen Grafik das folgende Integral: \\ 
+          }
+          \lang{en}{
+          Use the graphic above to determine the following integral: \\
+          }
+      		$\int_{\var{lb}}^{\var{ub}} \cos(x)dx =$\ansref.}
+		
+		\begin{answer}
+			\solution{sol}
+		\end{answer}
+		\explanation{\lang{de}{
+    Die positiv zählende Fläche und die negativ zählende Fläche sind gleich groß, weshalb das 
+		Integral gleich $0$ ist.
+    }
+    \lang{en}{
+    The area bounded above the $x$-axis and below the $x$-axis is the same, which is why the 
+    integral is $0$.
+    }}
+
+	\end{quickcheck}
+\end{quickcheckcontainer}
+
+
+\lang{de}{
+Die Ausnutzung von Symmetrien von Funktionen ist auch Thema dieses Videos:
+\floatright{\href{https://www.hm-kompakt.de/video?watch=613}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{}
+
+
+\begin{example}
+%\emph{Beispiel:} 
+\lang{de}{
+Das Integral der konstanten Funktion $f(x)=-4$ in den Grenzen von $-1$ bis $2$ ist gleich $-12$:
+}
+\lang{en}{
+The integral of the constant function $f(x)=-4$ from $-1$ to $2$ is equal to $-12$:
+}
+\[ \int_{-1}^2 -4\, dx = (-4)\cdot \big(2-(-1)\big) = (-4) \cdot 3 = -12. \]
+\end{example}
+
+
+\lang{de}{
+Integrale von linearen Funktionen $f(x)=mx+b$ können geometrisch durch Summen von 
+vorzeichenbehafteten Rechtecks- und Dreiecksflächen bestimmt werden. Im 
+\link{link2}{nächsten Abschnitt} werden wir Integrale von linearen Funktionen zusätzlich auch mit 
+Hilfe einer Stammfunktion berechnen.
+}
+\lang{en}{
+Integrals of linear functions $f(x)=mx+b$ can be calculated geometrically by summing signed 
+rectangular or triangular areas. In the \link{link2}{next section} we calculate the integral of linear functions with the help of antiderivatives.
+}
+
+\begin{example}\label{ex:integral-dreieck}
+%\emph{Beispiel:} 
+\lang{de}{
+Das Integral der Funktion $f(x)=2x+1$ in den Grenzen von $-1$ bis $2$ ist eine Summe von zwei 
+Dreiecksflächen mit unterschiedlichem Vorzeichen. Der Flächeninhalt des kleinen Dreiecks
+zwischen $x=-1$ und $x=-0,5$ geht mit negativem, der Flächeninhalt des großen Dreiecks zwischen 
+$x=-0,5$ und $x=2$ geht mit positivem Vorzeichen in das Integral ein. Der Flächeninhalt eines 
+Dreiecks beträgt \nowrap{$\frac{1}{2}$ $\cdot$ Breite $\cdot$ Höhe}. Damit ergibt sich
+\[ \int_{-1}^2 (2x+1)\, dx = \frac{1}{2} \big(0,5 \cdot (-1) \big) + \frac{1}{2}\big(2,5 \cdot 5 \big) = 6.\]
+}
+\lang{en}{
+The integral of the function $f(x)=2x+1$ from $-1$ to $2$ is the sum of the areas of two triangles 
+with different signs. The area of the small triangle between $x=-1$ and $x=-0.5$ counts negatively 
+towards the integral, whereas the area between $x=-0.5$ and $x=2$ counts positively. Recall that the 
+area of a triangle is \nowrap{$\frac{1}{2}$ base $\cdot$ height}. Hence, we get
+\[ \int_{-1}^2 (2x+1)\, dx = \frac{1}{2} \big(0.5 \cdot (-1) \big) + \frac{1}{2}\big(2.5 \cdot 5 \big) = 6.\]
+}
+
+\begin{center}
+\image{T107_Integral_F}
+\end{center}
+\end{example}
+
+\begin{remark}
+\lang{de}{
+Der Name der Integrationsvariablen ($x$, $t$, ...) hat im bestimmten Integral keine Bedeutung:
+}
+\lang{en}{
+The symbol chosen for the integration variable ($x$, $t$, ...) in definite integrals has no meaning 
+outside of the integrand:
+}
+\[ \int_a^b f(x)\, dx = \int_a^b f(t)\, dt = \int_a^b f(u)\, du = \, ... \]
+\lang{de}{Bei Integralen über ein Zeitintervall wird häufig die Variable $t$ verwendet.}
+\lang{en}{When integrating over time intervals, the variable $t$ is chosen the most often.}
+\end{remark}
+
+\begin{block}[warning]
+\lang{de}{
+Über Definitionslücken darf nicht hinweg integriert werden und auch Integrale über unbeschränkte 
+Intervalle wie z.\,B. $[0;\infty)$ oder Integrale unbeschränkter Funktionen sind zunächst nicht 
+zugelassen. In diesen Fällen kann der Flächeninhalt unendlich groß oder unbestimmt sein. Manchmal 
+existiert aber ein \emph{uneigentliches Integral}, das wir nicht in diesem Grundlagenteil behandeln. 
+Für Interessierte wird das uneigentliche Integral in 
+\link{content_10_uneigentliches_integral}{Teil 3a} behandelt.
+}
+\lang{en}{
+Gaps in the domain of a function cannot be integrated over. Unbounded intervals like $[0,\infty)$ 
+cannot be integrated over, and unbounded functions also cannot be integrated, as in such cases the 
+area can end up being infinitely large or simply undefined. Sometimes the so-called \emph{improper 
+integral} exists, but it will not be dealt with in this part of the course. For interested students, 
+the improper integral is covered in \link{content_10_uneigentliches_integral}{part 3a}.
+}
+\end{block}
+
+\begin{example}\label{ex:integral-def-luecke}
+%\emph {Beispiel:} 
+\lang{de}{
+Die Funktion $f(x) = \frac{1}{x^2}$ hat eine Lücke (Polstelle) bei $x=0$. Die Integrale
+$\big\int_{-3}^{-1} \frac{1}{x^2}\, dx$ und $\big\int_2^4 \frac{1}{x^2}\, dx$ existieren, nicht aber 
+$\big\int_{-1}^1 \frac{1}{x^2}\, dx$ oder $\big\int_0^1 \frac{1}{x^2}\, dx$, 
+da $x=0$ dann im Integrationsintervall (bzw. am Rand des Intervalls) liegt.
+\\\\
+Die Fläche, die zwischen $-3$ und $-1$ von der Funktion und der $x$-Achse eingeschlossen wird, kann 
+durch folgendes Bild veranschaulicht werden:
+}
+
+\lang{en}{
+The function $f(x) = \frac{1}{x^2}$ has a gap (also called a pole) at $x=0$. The integrals
+$\big\int_{-3}^{-1} \frac{1}{x^2}\, dx$ and $\big\int_2^4 \frac{1}{x^2}\, dx$ exist, however  
+$\big\int_{-1}^1 \frac{1}{x^2}\, dx$ and $\big\int_0^1 \frac{1}{x^2}\, dx$ do not, since $x=0$ is 
+inside the limits of integration for these.
+\\\\
+The area enclosed by the function and the $x$-axis from $-3$ to $-1$ can be depicted as follows:
+}
+
+\begin{center}
+\image{T107_Integral_G}
+\end{center}
+
+\lang{de}{
+Die Fläche, die zwischen $-1$ und $1$ von der Funktion und der $x$-Achse eingeschlossen wird, ist in 
+diesem Fall auch im uneigentlichen Sinne nicht endlich. Anhand einer Skizze kann dies nicht 
+entschieden werden.
+}
+\lang{en}{
+The area enclosed by the function between $-1$ and $1$ and the $x$-axis (in the improper sense 
+mentioned in the warning above) is not finite. One cannot properly see this by only looking at an 
+image.
+}
+
+\begin{center}
+\image{T107_Integral_H}
+\end{center}
+\end{example}
+
+\section{\lang{de}{Das Integral der Änderungsrate}
+         \lang{en}{The integral of a derivative}}\label{aenderung}
+\lang{de}{
+Die Integration hat eine enge Beziehung zur Ableitung einer Funktion und kann als ihre Umkehrung 
+angesehen werden. Wenn die momentane Änderungsrate einer Funktion (d.\,h. ihre Ableitung) gegeben 
+ist, so liefert die Integration der Ableitung die ursprünglichen Funktionswerte, oder genauer gesagt: 
+Das Integral von $f'(x)$ in den Grenzen von $a$ bis $b$ ergibt die gesamte Änderung $f(b)-f(a)$ der 
+Funktionswerte. \\
+}
+\lang{en}{
+Integration is related to the derivative of a function, and can be seen as the inverse of the 
+differentiation. If we know the instantaneous rate of change of a function (its derivative), then 
+integrating it gives us the original function values. More precisely, the integral of $f'(x)$ from 
+$a$ to $b$ gives us the difference $f(b)-f(a)$ in the function's value from $a$ to $b$.\\
+}
+
+\begin{example}
+\label{weg}
+%\emph{Beispiel:} 
+\lang{de}{
+Die zeitabhängige Geschwindigkeit $v(t)$ eines Objekts sei gegeben. Die Geschwindigkeit $v(t)$ ist 
+die Ableitung der Wegfunktion $s(t)$. Für ein kleines Zeitintervall $[t;t+\Delta t]$ beträgt die 
+Wegänderung näherungsweise $\Delta s = v(t)\cdot \Delta t$. Dies entspricht einer kleinen 
+Rechtecksfläche der Breite $\Delta t$ und der Höhe $v(t)$. Dann liefert das Integral 
+$\big\int_a^b v(t)\, dt$ die Summation der Wegänderungen und somit die gesamte Weglänge 
+$s=s(b)-s(a)$, die zwischen den Zeitpunkten $t=a$ und $t=b$ zurückgelegt wurde. Die Weglänge $s$ 
+entspricht der markierten Fläche.
+}
+\lang{en}{
+Let $v(t)$ be the time dependent velocity of an object. The velocity $v(t)$ is the derivative of the 
+displacement of the object, $s(t)$. The change in displacement during a short time interval 
+$[t,t+\Delta t]$ is approximately $\Delta s = v(t)\cdot \Delta t$. This corresponds with a small 
+rectangular area of width $\Delta t$ and height $v(t)$. The integral $\big\int_a^b v(t)\, dt$ 
+then gives us the sum of infinitesimally small changes in displacement, and hence the total distance 
+traveled $s=s(b)-s(a)$ between times $t=a$ and $t=b$. The total distance traveled $s$ is the marked area.
+}
+\begin{center}
+\image{T107_Integral_I}
+\end{center}
+\end{example}
+
+\begin{quickcheck}
+		\field{real}
+		\type{input.number}
+		\begin{variables}
+			\randint{k}{2}{4}
+			\function[calculate]{zk}{10*k}
+			\function[calculate]{sol}{10*k^2/2}
+		\end{variables}
+		
+		\text{\lang{de}{
+          Ein Stein wird in einen Brunnen fallen gelassen. Die Geschwindigkeit des Steins zur Zeit 
+          $t>0$ beträgt	dann ungefähr $v(t)=10t$ m/s (da die Beschleunigung konstant ist). Nach 
+          $\var{k}$ Sekunden kommt der Stein unten an.\\
+      		Wie tief ist der Brunnen? \\ Die Tiefe des Brunnens beträgt \ansref Meter.
+          }
+          \lang{en}{
+          A stone is dropped into a well. The speed of the stone at the time $t > 0$ is then 
+          approximately $v(t) = 10t$ m/s (since the acceleration due to gravity is constant). After 
+          $ \var{k} $ seconds the stone arrives at the bottom. \\
+          How deep is the well? \\ The well is \ansref meters deep.
+          }}
+		
+		\begin{answer}
+			\solution{sol}
+		\end{answer}
+		\explanation{\lang{de}{
+    Die vom Stein zurückgelegte Strecke ergibt sich als $\int_{0}^\var{k} (10t)dt$ Meter. Sie ist 
+    also gleich dem Flächeninhalt eines Dreiecks mit Breite $\var{k}$ und Höhe 
+    $10\cdot \var{k}=\var{zk}$, also gleich	$\frac{1}{2}\cdot \var{k}\cdot \var{zk}=\var{sol}.$
+    }
+    \lang{en}{
+    The distance covered by the stone is $\int_{0}^\var{k} (10t) dt$ meters. It is therefore equal to 
+    the area of a triangle with width $\var{k}$ and height $ 10 \cdot \var{k} = \var{zk} $, thus 
+    $\frac{1}{2} \cdot \var{k} \cdot \var{zk} = \var{sol}.$
+    }}
+
+	\end{quickcheck}
+
+
+%begin-cosh
+\lang{de}{
+Funktionen, die eine Ableitung besitzen, heißen \emph{differenzierbar}. Der folgende Satz gilt für 
+differenzierbare Funktionen mit stetiger Ableitung, d.\,h. für Funktionen, deren Ableitung keine 
+Sprünge besitzt. Diese Voraussetzung ist in den meisten Fällen, die uns interessieren, erfüllt.
+}
+\lang{en}{
+Functions that have derivatives are called \emph{differentiable}. The following theorem is valid for 
+differentiable functions with continuous derivatives, i.e. for functions whose derivative has no 
+jumps. This condition is satisfied in most cases we are interested in.
+}
+
+\begin{theorem}\label{thm:aenderung}
+	\lang{de}{
+  Wenn $f(x)$ differenzierbar ist und eine stetige Ableitung $f\prime(x)$ besitzt, so liefert die 
+  Integration von $f'(x)$ im Intervall $[a;b]$ die Differenz $f(b)-f(a)$, d.\,h. die Änderung von 
+  $f(x)$ zwischen den Stellen $x=a$ und $x=b$ :
+	}
+	%ende-cosh
+	\lang{en}{
+  If $f(x)$ is a differentiable function with continuous derivative $f\prime(x)$, then the integral 
+  of $f'(x)$ on the interval $[a,b]$ is equal to the difference $f(b)-f(a)$. That is, the change of 
+  $f(x)$ between the points $x=a$ and $x=b$ is
+  }
+	\[ \int_a^b f'(x)\, dx = f(b) - f(a) \, . \]
+\end{theorem}
+
+\begin{tabs*}[\initialtab{0}]
+\tab{\lang{de}{Erläuterung}\lang{en}{Explanation}}
+\lang{de}{
+Der Satz folgt aus dem Hauptsatz der Differential- und Integralrechnung
+(siehe \link{link2}{folgender Abschnitt}), der in diesem Grundlagenteil aber nicht
+bewiesen wird.
+\\\\
+Warum ist die Aussage des Satzes plausibel? Setzt man $y=f(x)$ und betrachtet ein kleines 
+Teilintervall $[x;x+\Delta x]$ von $[a;b]$, so beträgt die Differenz der Funktionswerte 
+$\Delta y = f(x+\Delta x)-f(x)$. Ähnlich wie im Beispiel \ref{weg} ist $\Delta y$ näherungsweise 
+gleich $f'(x) \cdot \Delta x$. Zerlegt man das Intervall $[a;b]$ in Teilintervalle der Breite 
+$\Delta x$, so ergibt die Summation der $\Delta y$ (im Grenzwert $\Delta x \rightarrow 0$) daher das 
+Integral $\big\int_a^b f'(x)\, dx$. Andererseits liefert die Summation der 
+$\Delta y = f(x+\Delta x)-f(x) $ aber auch die gesamte Änderung $f(b)-f(a)$ der Funktionswerte 
+zwischen $a$ und $b$.
+}
+\lang{en}{
+The theorem follows from the fundamental theorem of calculus (see \link{link2}{the following 
+section}) which will not be proven in this course.
+\\\\
+Why is the claim made by the theorem even plausible? Let $y=f(x)$ and consider a small subinterval 
+$[x,x+\Delta x]$ of $[a,b]$. The difference in the function values at the start and the end of the 
+interval is $\Delta y = f(x+\Delta x)-f(x)$. Much like in example \ref{weg}, $\Delta y$ is 
+approximately equal to $f'(x) \cdot \Delta x$. If we break down the interval $[a,b]$ into smaller 
+intervals of length $\Delta x$ and sum the $\Delta y$ (in the limit as $\Delta x \rightarrow 0$), we 
+get the integral $\big\int_a^b f'(x)\, dx$. On the other hand, this sum gives us the total change of 
+the function value between $a$ and $b$, $f(b)-f(a)$.
+}
+\end{tabs*}
+
+\begin{example}
+%\emph{Beispiel:}
+
+\lang{de}{
+Die Ableitung der Funktion $f(x)=\frac{1}{2}x^2+1$ ist $f'(x)=x$. Integriert man die Ableitung 
+$f'(x)=x$ von $0$ bis $1$, so erhält man den positiven Flächeninhalt eines Dreiecks der Breite und 
+Höhe $1$,sodass gilt
+}
+\lang{en}{
+The derivative of the function $f(x)=\frac{1}{2}x^2+1$ is $f'(x)=x$. If we integrate the derivative
+$f'(x)=x$ from $0$ to $1$ we get the positive area of a triangle with both base and height $1$ so that
+}
+%man die Änderung (den Zuwachs) der Funktion
+%$f(x)$ zwischen den Stellen $x=0$ und $x=1$. 
+\[ \int_0^1 x\, dx = \frac{1}{2} \cdot 1 \cdot 1 = \frac{1}{2} . \]
+\lang{de}{
+Andererseits ist die gesamte Änderung (der Zuwachs) der Funktionswerte von $f(x)$ zwischen den 
+Stellen $x=0$ und $x=1$ nichts anderes als $f(1)-f(0)=\frac{3}{2} - 1 = \frac{1}{2}$. Man erhält in 
+diesem Beispiel also
+}
+\lang{en}{
+The total change in the function value of $f(x)$ between $x=0$ and $x=1$ is 
+$f(1)-f(0)=\frac{3}{2} - 1 = \frac{1}{2}$. Hence in this example we have
+}
+\[ \int_0^1 f'(x)\, dx = f(1)-f(0) . \]
+
+\end{example}
+
+\lang{de}{
+Wenn die momentane Änderungsrate $f'(x)$ einer Funktion $f(x)$ gegeben ist, so bietet die Integration
+von $f'(x)$ also eine Möglichkeit der Bestimmung oder Rekonstruktion der Funktion. Sofern ein 
+Anfangswert $f(a)$ gegeben ist, lässt sich jeder Wert $f(b)$ ausrechnen:
+}
+\lang{en}{
+If the instantaneous rate of change (derivative) $f'(x)$ of a function $f(x)$ is given, then 
+integrating $f'(x)$ allows us to reconstruct the original function. Given a starting value $f(a)$, 
+we can calculate any $f(b)$:
+}
+\[ f(b) = f(a) +  \int_a^b f'(x)\, dx . \]
+
+
+\begin{example}
+\emph{\lang{de}{Anwendungen:}\lang{en}{Practical Applications}}\\
+
+%Beispiele aus den Naturwissenschaften
+\begin{tabs*}[\initialtab{0}] %\class{exercise}
+ % \tab{Arbeit, Kraft}
+ % Das Integral über die Kraft $F$ längs eines Weges ergibt die verrichtete Arbeit $W$
+ % \[  W = \int_{s_0}^{s_1} F(s)\, ds \]
+  
+\tab{\lang{de}{Energie}\lang{en}{Energy}}
+	\lang{de}{
+  Das Integral über die Leistung $P(t)$ (Arbeit pro Zeiteinheit, d.\,h. die Ableitung der Arbeit nach 
+  der Zeit)	ergibt die im Zeitintervall $[0;T]$ verrichtete Arbeit $W$ (aufgewendete Energie). Der 
+  Anfangswert (d.\,h. die Energie bei $t=0$) ist hier gleich $0$:
+  }
+	\lang{en}{
+  Power is the amount of work done per unit time, i.e. the derivative of work with respect to time. 
+  The units of work are \emph{Joules} and the units	of power are \emph{Joules/sec}. If we take the 
+  integral of the power $P(t)$ between $0$ and $T$, we get the amount of work done $W$ (in Joules) 
+  during the time interval $[0,T]$. Assuming that the initial value (the energy at $t=0$) is $0$, we 
+  get
+  }
+	\[ W = \int_0^T P(t)\, dt . \]
+
+\tab{\lang{de}{Ladung}\lang{en}{Charge}}
+	\lang{de}{
+  Beim Aufladen eines Kondensators über einen Widerstand ergibt das Integral über die Stromstärke 
+  $I(t)$ (Ladung pro Zeiteinheit, d.\,h. die Ableitung der Ladung nach der Zeit) die Ladungsmenge 
+  $Q$, die der Kondensator zum Zeitpunkt $T$ speichert, sofern er bei $t=0$ völlig entladen war 
+  (Anfangswert gleich $0$):
+  }
+	\lang{en}{
+  Current is measured in \emph{charge per unit time}; when charging a capacitor through a resistor. 
+  The integral of the current $I(t)$ (i.e. of the derivative of charge with respect to time) is the 
+  total capacity $Q$ that the capacitor has stored from time $t=0$ to time $T$:
+  } 
+	\[ Q = \int_0^T I(t)\, dt . \]
+
+\tab{\lang{de}{Volumen}\lang{en}{Volume}}
+	\lang{de}{
+  Die Zulaufrate eines Wasserbehälters sei $f(t)$ (Volumen pro Zeiteinheit, d.\,h. die Ableitung des 
+  Volumens nach der Zeit). Das Integral über $f(t)$ ergibt das Volumen $V$ (die Wassermenge im 
+  Behälter) zum Zeitpunkt $T$, sofern der Behälter bei $t=0$ leer war (Anfangswert gleich $0$):
+  }
+	\lang{en}{
+  Suppose the filling rate of a container is $f(t)$ (\emph{volume per unit time}; the derivative of 
+  volume with respect to time). The integral of $f(t)$ gives us the filled volume $V$ at the time 
+  point $T$ assuming the container was empty at time $t=0$:
+  }
+	\[ V = \int_0^T f(t)\, dt . \]
+%begin-cosh
+\tab{\lang{de}{Kosten}\lang{en}{Marginal costs}}
+	\lang{de}{
+  Die Grenzkosten sind diejenigen Kosten,	die durch die Produktion einer zusätzlichen Mengeneinheit 
+  eines Produktes entstehen. Die Grenzkostenfunktion für die Herstellung eines bestimmten Produktes 
+  sei $f(x)$.	Dann können die Kosten $K$ für die Produktion von $N$ Einheiten durch Integration der 
+  Grenzkosten und Additon der Fixkosten $K_0$ bestimmt werden:
+  \[ K = K_0 + \int_0^N f(x)\, dx . \]
+  }
+  \lang{en}{
+  In economics, the \textit{marginal cost} is the cost associated with the production of an 
+  additional unit of a product. Let $f(x)$ be the marginal cost function for the production of a 
+  specific product. The total cost $C$ for the production of $Q$ units can be written as
+	the integral of the marginal cost plus the addition of any fixed costs, $C_0$:
+	\[ C = C_0 + \int_0^Q f(x)\, dx . \]
+  }
+%ende-cosh
+
+\end{tabs*}
+\end{example}
+
+% \section{\lang{de}{Obersummen und Untersummen}\lang{en}{Upper Sums and Lower Sums}}\label{summe}
+% 
+% \lang{de}{Das Integral entsteht durch Summation von Rechtecksflächen mit Vorzeichen, welche den 
+% gesuchten orientierten Flächeninhalt approximieren. 
+% Zur Bestimmung des Integrals zerlegt man das Integrationsintervall 
+% $[a;b]$ in $n$ Teilintervalle der Breite $\Delta x_k$, mit $k \in \{1;2;...;n\}$.
+%   Auf diesen Intervallen ermittelt man jeweils
+%  den kleinsten Funktionswert $m_k$ und den größten Funktionswert $M_k$. % (eigentlich das Infimum und das 
+%  % Supremum, aber diese Begriffe werden in diesem Kurs nicht behandelt). %, wobei auch das Vorzeichen berücksichtigt wird.
+%   Man erhält je Teilintervall zwei orientierte Rechtecksflächen, $m_k \cdot \Delta x_k$ und $M_k \cdot \Delta x_k$. 
+%  %Das Vorzeichen ist positiv oder negativ, je nachdem ob der Funktionswert 
+%  %$\geq 0$ bzw. $<0$ ist. 
+%  Die Summation 
+%  %der orientierten Flächeninhalte, die aus dem 
+%  %minimalen Funktionswert in jedem Teilintervall gebildet werden,
+%   liefert die \emph{Untersumme} $U(Z)$ und die \emph{Obersumme} $O(Z)$. Die Werte hängen von 
+%   der gewählten Zerlegung $Z$ des Intervalls $[a;b]$ ab.
+%   \[ U(Z)= \sum_{k=1}^n m_k \cdot \Delta x_k \, \, \text{ und } \, \, \,   O(Z)= \sum_{k=1}^n M_k \cdot \Delta x_k \, .\]
+%  %Die Summation der Flächeninhalte mit dem maximalen Funktionswert liefert die \emph{Obersumme}. 
+%  Der gesuchte Integralwert liegt \emph{zwischen der Untersumme und der Obersumme}. 
+%  Die Abschätzung des Integrals mit Hilfe der Untersumme und Obersumme ist umso 
+%  genauer, je kleiner die Teilintervalle sind, d.h. je feiner die Zerlegung ist. } 
+%  \lang{en}{The integral is made up of the sum of signed rectangular areas which approximate the 
+%  area of a given region. In order to determine the value of the integral, we break down the limits of integration
+% $[a,b]$ into $n$ equal parts of size $\Delta x_k$ where $k \in \{1,2,...,n\}$.
+%   On each of these intervals we can identify the smallest function value $m_k$ as well as the largest $M_k$. 
+%   On each interval we get two signed rectangles, $m_k \cdot \Delta x_k$ and $M_k \cdot \Delta x_k$. 
+%  The sum of these rectangles gives us the \emph{lower sum} $L(Z)$ and the \emph{upper sum} $U(Z)$, respectively. These values 
+% depend on the decomposition $Z$ of the interval $[a,b]$.
+%   \[ L(Z)= \sum_{k=1}^n m_k \cdot \Delta x_k \, \, \text{ and } \, \, \,   U(Z)= \sum_{k=1}^n M_k \cdot \Delta x_k \, .\]
+%  The true value of the integral lies \emph{between the upper sum and lower sum}. 
+%  The estimate of the integral using the upper and lower sums improves the smaller the intervals get (i.e. the smaller the bases of the rectangles get).}
+% 
+% \begin{example}\label{zweizerl}
+% %\emph {Beispiel:} 
+% 
+% \lang{de}{Links wird das Integrationsintervall $[0;2]$ in zwei 
+% Teilintervalle und rechts in 
+% zehn Teilintervalle aufgeteilt. Die Untersumme ist die dunkel gefärbte Fläche,
+% die Obersumme ist die hell gefärbte plus die dunkel gefärbte Fläche.
+% In beiden Fällen liegt der wahre Integralwert zwischen der Untersumme und der Obersumme. 
+% Mit zehn Teilintervallen wird aber eine bessere Näherung als mit zwei Teilintervallen erzielt.\\
+% }
+% \lang{en}{On the left the interval $[0,2]$ has been divided into two smaller subintervals. On the right, the same
+% interval has been divided into 10 equal intervals. The lower sum is calculated from the darker 
+% rectangles and the upper sum is calculated from the lighter ones. In both cases, the true value
+% of the integral lies between the upper and lower sums, however with ten intervals the approximation
+% is better than the approximation with only two.\\
+% }
+% 
+% \image{image4}
+% \image{image5}
+% \end{example}
+% %\includegraphics[width=7cm]{summe2.png} %\hspace*{5mm}
+% %\includegraphics[width=7cm]{summe5.png}
+% %\caption{Untersummen und Obersummen für $f(x)=x^2+1$ im Intervall $[0,2]$ mit $2$ Teilintervallen (links) und $10$ Teilintervallen (rechts).}
+% %\label{summen2-5}
+% %\end{figure}
+% 
+% \begin{example}
+% %\emph{Beispiel:} 
+% \lang{de}{In obigem Beispiel \ref{zweizerl} ist $f(x)=x^2+1$ und die Integrationsgrenzen sind $a=0$ und $b=2$. 
+% Bei der Aufteilung in zwei Teilintervalle (linker Graph) wird 
+% das Intervall $[0;2]$ 
+% in zwei Teilintervalle $[0;1]$ und $[1;2]$ zerlegt und für diese Zerlegung die Untersumme $U(Z_2)$ und die
+% Obersumme $O(Z_2)$ berechnet. Die Intervallbreite ist $1$, der kleinste Funktionswert liegt am linken Rand, der größte am rechten Rand.
+% Man erhält:
+% \[ U(Z_2)= f(0)\cdot 1 + f(1)\cdot 1 = 1+2 = 3 \, \, \, \text{ und } \, \, \,
+% O(Z_2)=f(1) \cdot 1 + f(2)\cdot 1 = 2+5 = 7 . \]
+% }
+% \lang{en}{In Example \ref{zweizerl} above, $f(x)=x^2+1$ with lower and upper bounds $a=0$ and $b=2$. 
+% Dividing the interval $[0,2]$ into two (in the left image) gives us the intervals $[0,1]$ and $[1,2]$ 
+% From this we can calculate the lower $L(Z_2)$ and upper $U(Z_2)$ sums to be:
+% \[ L(Z_2)= f(0)\cdot 1 + f(1)\cdot 1 = 1+2 = 3 \, \, \, \text{ and } \, \, \,
+% U(Z_2)=f(1) \cdot 1 + f(2)\cdot 1 = 2+5 = 7 . \]
+% Note that for this function, the heights of the rectangles used in the lower sum are the function values $f(x)$ at the left boundary of each interval and
+% the heights for the upper sums are the function values at the right boundary.
+% }
+% \end{example}
+% 
+% 
+% \lang{de}{In der folgenden Definition wird der Begriff der beschränkten Funktion verwendet.
+% Eine Funktion $f$ ist \emph{beschränkt}, falls es eine Zahl $R>0$ gibt, so dass
+% $-R \leq f(x) \leq R$ für alle $x$ in ihrem Definitionsbereich gilt.}
+% \lang{en}{In the following definition we'll deal with the idea of a bounded function. A function $f$ is called \emph{bounded} if there is a number 
+% $R>0$ so that $-R \leq f(x) \leq R$ for all $x$ in the domain of $f$.}
+% 
+% \begin{definition}
+% 
+% %\emph{Definition:} 
+% \lang{de}{Sei $f(x)$ eine auf dem Intervall $[a;b]$ beschränkte Funktion.
+% % $f$ heißt (Riemann-) integrierbar auf dem Intervall $[a;b]$, 
+% %falls es eine Folge von Zerlegungen $Z_n$ von $[a;b]$ gibt, deren Feinheit
+% %(maximale Breite der Teilintervalle) nach $0$ konvergiert für $n \rightarrow \infty$
+% %und deren Obersummen und Untersummen gegen einen gemeinsamen Grenzwert (das Integral) konvergieren:
+% %\[ \lim_{n\rightarrow \infty} U(Z_n) = \lim_{n\rightarrow \infty} O(Z_n) = \int_a^b f(x)\, dx \]
+% $f$ heißt integrierbar auf dem Intervall $[a;b]$, falls sich Untersumme und Obersumme
+% durch Verfeinerung der Zerlegung beliebig genau annähern lassen, d.h. falls es zu jeder
+% vorgegebenen Zahl $\epsilon>0$ (und sei sie noch so klein) eine Zerlegung $Z_n$ des
+% Intervalls $[a;b]$ in $n$ Teilintveralle gibt, sodass
+% \[ 0 \leq O(Z_n) - U(Z_n) \leq \epsilon \]
+% gilt. \\
+% Ist $f$ integrierbar auf $[a;b]$, so gibt es eine eindeutige reelle Zahl
+% $\big\int_a^b f(x)\, dx$, die als \emph{Integral von $f$ von $a$ nach $b$}
+% bezeichnet wird, sodass
+% \[ U(Z) \leq \int_a^b f(x)\, dx \leq O(Z) \]
+% für alle Zerlegungen $Z$ des Intervalls $[a;b]$ in endlich viele Teilintervalle gilt.}
+% \lang{en}{Let $f(x)$ be a bounded function on the interval $[a,b]$.
+% A function $f$ is called integrable on the interval $[a,b]$ if the upper and lower sums 
+% converge to the same limit as the interval size decreases. Integrability is also equivalent to the following:
+% a function is integrable if for every $\epsilon>0$ there exists a decomposition of the interval $[a,b]$ into $n$ parts such that
+% \[ 0 \leq U(Z_n) - L(Z_n) \leq \epsilon .\]  \\
+% If $f$ is integrable on $[a,b]$ then there is a unique real number 
+% $\big\int_a^b f(x)\, dx$ called the \emph{integral of $f$ from $a$ to $b$}
+% and
+% \[ L(Z) \leq \int_a^b f(x)\, dx \leq U(Z) \]
+% for any decomposition $Z$ of the interval $[a,b]$ into finitely many subintervals.}
+% \end{definition}
+% 
+% \lang{de}{Das Integral kann also mit Hilfe von Obersummen und Untersummen definiert werden. 
+% Zur Berechnung des Integrals einer integrierbaren Funktion $f$ lässt man 
+% die Breite der Teilintervalle immer kleiner werden. Schließlich ergibt sich dann
+% der gesuchte Integralwert.
+% %Im Grenzwert konvergieren Untersummen und Obersummen dann gegen den gesuchten Integralwert.
+% Da es weitere Integralbegriffe gibt, spricht man hierbei 
+% vom \emph{Riemann-Integral}.}
+% \lang{en}{In this way, the integral can be defined with the help of lower and upper sums.
+% In order to calculate the integral of an integrable function $f$ we simply take smaller and smaller subintervals. 
+% In the limit as the interval size goes to zero, the upper and lower sums converge to the value of the integral. 
+% There are other definitions of the integral, and this construction gives the so-called \emph{Riemann Integral}.}
+% 
+% \begin{example}
+% %\emph{Beispiel: } 
+% \lang{de}{Wir betrachten weiterhin $f(x)=x^2+1$ und unterteilen $[0;2]$ nun in $10$ 
+% Teilintervalle der Breite $\frac{1}{5}$ (siehe Beispiel \ref{zweizerl}). % Diese Zerlegung bezeichnen wir
+% %mit $Z_{10}$.
+% Der minimale Funktionswert liegt jeweils am linken Rand jedes Teilintervalls. Die Untersumme ist daher:
+% \[ U(Z_{10})=\Big(  f(0)+f(\frac{1}{5})+f(\frac{2}{5})+f(\frac{3}{5})+f(\frac{4}{5})
+% +f(1)+f(\frac{6}{5})+f(\frac{7}{5})+f(\frac{8}{5})+
+% f(\frac{9}{5}) \Big) \cdot \frac{1}{5} . \]
+% Mit Hilfe einer Wertetabelle lässt sich dies leicht ausrechnen: $U(Z_{10})=\frac{107}{25}=4{,}28$.\\
+% 
+% Der maximale Funktionswert liegt jeweils am rechten Rand der Teilintervalle. Die Obersumme ist daher:
+% \[ O(Z_{10})= \Big(  f(\frac{1}{5})+f(\frac{2}{5})+f(\frac{3}{5})+f(\frac{4}{5})
+% +f(1)+f(\frac{6}{5})+f(\frac{7}{5})+f(\frac{8}{5})+
+% f(\frac{9}{5}) + f(2) \Big) \cdot \frac{1}{5} . \]
+% Man erhält $O(Z_{10})=\frac{127}{25}=5{,}08$. Der wahre Integralwert, den wir mit 
+% feineren Zerlegungen (oder mit
+% Hilfe einer Stammfunktion im \link{link2}{nächsten Abschnitt}) ausrechnen können, 
+% beträgt $\big\int_0^2 (x^2+1)\, dx = \frac{14}{3} \approx 4{,}67$.}
+% \lang{en}{Let's consider the function $f(x)=x^2+1$ on the interval $[0,2]$ divided into $10$ equal subintervals
+% of size $\frac{1}{5}$ (see Example \ref{zweizerl}).
+% The minimal function value lies on the left boundary of each subinterval, and hence the lower sum is:
+% \[ L(Z_{10})=\Big(  f(0)+f(\frac{1}{5})+f(\frac{2}{5})+f(\frac{3}{5})+f(\frac{4}{5})
+% +f(1)+f(\frac{6}{5})+f(\frac{7}{5})+f(\frac{8}{5})+
+% f(\frac{9}{5}) \Big) \cdot \frac{1}{5}  \]
+% \[ L(Z_{10})=\frac{107}{25}=4{.}28 \]\\
+% 
+% The maximal function value is on the right boundary of each subinterval, hence the upper sum is:
+% \[ U(Z_{10})= \Big(  f(\frac{1}{5})+f(\frac{2}{5})+f(\frac{3}{5})+f(\frac{4}{5})
+% +f(1)+f(\frac{6}{5})+f(\frac{7}{5})+f(\frac{8}{5})+
+% f(\frac{9}{5}) + f(2) \Big) \cdot \frac{1}{5}  \]
+% \[ U(Z_{10})=\frac{127}{25}=5.08 \] The true value of the integral can be calculated
+% with finer decompositions or simply by using the antiderivative from the \link{link2}{next section} and is
+% $\big\int_0^2 (x^2+1)\, dx = \frac{14}{3} \approx 4.67$.}
+% 
+% \end{example}
+% 
+% %\begin{block}[info-box]
+% \lang{de}{Welche Funktionen sind integrierbar? Alle stetigen Funktionen wie 
+% Polynome, die Exponentialfunktion $e^x$, die trigonometrischen Funktionen 
+% $\sin(x)$, $\cos(x)$ und die Betragsfunktion sind integrierbar über beliebigen Intervallen $[a;b]$. 
+% Eine Funktion $y=f(x)$ ist \emph{stetig}, wenn kleine (infinitesimale) Änderungen des $x$-Wertes nur zu kleinen
+% (infinitesimalen) Änderungen des $y$-Wertes führen. Solche Funktionen besitzen keine Sprünge der Funktionswerte.\\
+% 
+% Außerdem sind sogar stückweise stetige Funktionen integrierbar, die abschnittsweise aus stetigen Funktionen
+% zusammengefügt werden (siehe Beispiel \ref{stueck}).}
+% \lang{en}{Which functions are integrable? All continuous functions, such as polynomials, the exponential function $e^x$, the trig functions $\sin(x)$, $\cos(x)$, and the
+% absolute value function are integrable on any interval $[a,b]$. 
+% A function $y=f(x)$ is called \emph{continuous} if small (infinitesimal) changes in the $x$-value only lead to small (infinitesimal) changes in the $y$-value. Such functions 
+% don't have any jumps in their function values.\\
+% 
+% Piecewise continuous functions are also integrable; see Example \ref{stueck}.}
+% %\end{block}
+
+
+
+\section{\lang{de}{Eigenschaften des Integrals}
+         \lang{en}{Properties of integrals}}\label{eigenschaften}
+
+\lang{de}{Das Integral ist additiv bezüglich des Integrationsintervalls:}
+\lang{en}{Integrals are additive on their integration intervals:}
+
+\begin{rule}\label{thm:additiv}
+\lang{de}{
+Für reelle Zahlen $a<b<c$ und eine auf dem Intervall $[a;c]$ integrierbare Funktion $f(x)$ gilt:
+\[ \int_a^b f(x)\, dx + \int_b^c f(x)\, dx = \int_a^c f(x)\, dx \,  . \]
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10772&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+}
+\lang{en}{
+Let $f(x)$ be an integrable function on the interval $[a,c]$. For all real numbers $a<b<c$, we have
+\[ \int_a^b f(x)\, dx + \int_b^c f(x)\, dx = \int_a^c f(x)\, dx \,  . \]
+}
+\end{rule}
+
+\begin{example}
+\label{stueck}
+%\emph{Beispiel: } 
+\lang{de}{Wir betrachten eine abschnittsweise definierte Funktion $f(x)$: }
+\lang{en}{Consider the following piecewise function $f(x)$:}
+\[ f(x) = \begin{cases} x, & x \in [0\lang{de}{;}\lang{en}{,}1) \\
+                        2x, & x \in [1\lang{de}{;}\lang{en}{,}2]
+          \end{cases} \]
+
+\begin{center}
+    \image{T107_Integral_J}     
+\end{center}
+
+\lang{de}{
+$f(x)$ hat also eine Sprungstelle bei $x=1$. An den übrigen Stellen ist sie aber stetig.
+Daher ist $f(x)$ auf $[0;2]$ integrierbar und
+das Integral ergibt sich als Summe der Integrale von $0$ bis $1$ und von $1$ bis $2$.
+Das erste Integral ist durch eine Dreiecksfläche und das zweite durch eine Trapezfläche 
+gegeben, die man beispielsweise als Summe einer Rechtecks- und einer Dreiecksfläche berechnen
+kann. Die Flächeninhalte der markierten Kästchen lassen sich auch direkt aus der 
+Abbildung ablesen. Alle 
+Integrale sind positiv, da $f(x) \geq 0$ für $x \in [0;2]$ gilt. Insgesamt ist also 
+}   
+\lang{en}{
+$f(x)$ has a jump discontinuity at $x=1$. At all other points the function is continuous, hence 
+$f(x)$ is integrable on $[0,2]$ and the integral can be given via the sum of the integrals from $0$ 
+to $1$ and from $1$ to $2$. The first integral is given via the triangular area, the second via the 
+trapezoidal area. Both can be calculated via the known formulas for their areas. The area of the 
+marked regions can be read directly from the graph. The integrals are positive, since 
+$f(x) \geq 0$ for $x \in [0, 2]$. So
+}
+\[ \int_0^2 f(x)\, dx = \int_0^1 f(x)\, dx + \int_1^2 f(x)\, dx = \frac{1}{2}(1\cdot 1) + 1 \cdot 2 + 
+\frac{1}{2}(1 \cdot 2) = \frac{7}{2} . \]                    
+\end{example}
+
+\lang{de}{
+Für die Integrationsgrenzen $a$ und $b$ gilt üblicherweise $a<b$. 
+Man betrachtet aber auch die Fälle $a=b$ und $a>b$:
+}
+\lang{en}{
+For the limits $a$ and $b$, by convention $a<b$. Let us however consider the case $a \geq b$:
+}
+
+\begin{definition}\label{def:Integr_grenz_tausch} 
+%\emph{Definition:} 
+\lang{de}{
+Wenn $f(x)$ auf dem Intervall $[a;b]$ mit $a<b$ integrierbar ist, dann definiert man 
+auf folgende Weise das Integral mit vertauschten Grenzen:
+}
+\lang{en}{
+If $f(x)$ is integrable on the interval $[a,b]$ where $a<b$, then we define the integral with
+swapped upper and lower bounds in the following way:
+}
+\[ \int_b^a f(x)\, dx = - \int_a^b f(x)\, dx \, . \]
+\lang{de}{Außerdem setzt man $\big\int_a^a f(x)\, dx = 0$.}
+\lang{en}{In addition, we define $\big\int_a^a f(x)\, dx = 0$.}
+\end{definition}
+
+\lang{de}{
+Warum ändert man das Vorzeichen? Bei der Integration von $b$ nach $a$ (d.\,h. in negativer 
+$x$-Richtung) ändert sich die Orientierung und daher das Vorzeichen des Integrals. Eine weitere 
+Begründung liefert die Additivität des Integrals bezüglich der Integrationsgrenzen:
+}
+\lang{en}{
+Why does the sign change when swapping the limits? Intuitively, if we integrate from $b$ to $a$, we 
+are integrating in the negative $x$-direction and hence we need to add a negative sign. More 
+convincing perhaps is the need to keep the additive property of limits of integrals:
+}
+\[ \int_a^b f(x)\, dx  + \int_b^a f(x)\, dx = \int_a^a f(x)\, dx = 0 .\]
+
+
+\end{content}

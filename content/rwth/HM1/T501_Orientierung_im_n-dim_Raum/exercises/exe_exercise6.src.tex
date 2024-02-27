@@ -1,0 +1,145 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Exercise 6}
+    \lang{de}{Ü06: Matrizennorm}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  
+  \begin{components}
+
+  \end{components}
+  
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/23980}{Ticket 23980}
+\end{block}
+
+
+\title{
+  \lang{en}{Exercise 6}
+    \lang{de}{Ü06: Matrizennorm}}
+    
+Sei $A=(a_{ij})_{1\leq i\leq m,1\leq j\leq n}$ eine Matrix über $\R$. Zeigen Sie, dass
+
+\begin{enumerate}
+\item[(a)] ${\Vert A\Vert_{1}}=\text{max}_\limits{j=1,\ldots,n}{\sum_{i=1}^{m}{\vert a_{ij}\vert}}$. 
+(Deswegen bezeichnet man $\Vert A\Vert_{1}$ als \emph{Spaltensummennorm} von $A$.)
+\item[(b)] ${\Vert A\Vert_{\infty}}=\text{max}_\limits{i=1,\ldots,m}{\sum_{j=1}^{n}{\vert a_{ij}\vert}}$. 
+(Deswegen bezeichnet man $\Vert A\Vert_{\infty}$ als \emph{Zeilensummennorm} von $A$.)
+\item[(c)] Für $A:=\begin{pmatrix}
+  5 & -1 & 2\\
+  -1 & 7 & -2\\
+  2 & -3 & -3  
+ \end{pmatrix}$ und $B:=\begin{pmatrix}
+  -5 & -1 & 2\\
+  3 & -3 & -3\\
+  4 & -\frac{3}{2} & 3  
+ \end{pmatrix}$ berechnen Sie die Maximumsnorm und 1-Norm von $A$ und $B$. 
+\end{enumerate}
+
+  \begin{tabs*}[\initialtab{0}\class{exercise}]
+    
+    \tab{
+      Lösung a)
+    }
+    Seien $\R^n$ und $\R^m$ mit der 1-Norm gegeben. Per Definition haben wir
+    \[{\Vert A\Vert_{1}}= \text{sup}_\limits{x\in\R^n\text{ mit }\Vert x\Vert_{1}=1}{\Vert A.x\Vert_{1}}.\]
+    Da wir in endlich-dimensionalen Räumen ($\R^n$) arbeiten, können wir in der obigen Gleichung \emph{max} 
+    anstelle von \emph{sup} verwenden. D.h.
+    \[{\Vert A\Vert_{1}}= \text{max}_\limits{\Vert x\Vert_{1}=1}{\Vert A.x\Vert_{1}}
+    =\text{max}_\limits{\Vert x\Vert_{1}=1}{\sum_{i=1}^{m}{\vert \sum_{j=1}^{n} a_{ij}x_{j}\vert}}.\]
+    
+    Da $\vert\sum_{j=1}^{n} a_{ij}x_{j}\vert$ für festes $i$ für einen der Einheitsvektoren 
+    \[{\vec {e}}_{1}={\begin{pmatrix}1\\0\\0\\\vdots \\0\end{pmatrix}},\;
+    {\vec {e}}_{2}={\begin{pmatrix}0\\1\\0\\\vdots \\0\end{pmatrix}},\;
+    {\vec {e}}_{3}={\begin{pmatrix}0\\0\\1\\\vdots \\0\end{pmatrix}},\;
+    \ldots ,
+    \;{\vec {e}}_{n}={\begin{pmatrix}0\\0\\0\\\vdots \\1\end{pmatrix}}\]
+    maximal wird, gilt
+    \[{\Vert A\Vert_{1}}=\text{max}_\limits{\Vert x\Vert_{1}=1}{\sum_{i=1}^{m}{\vert \sum_{j=1}^{n} a_{ij}x_{j}\vert}}
+    =\max_{j=1,\ldots,n}{\sum_{i=1}^{m}{\vert a_{ij}\vert}}.\]
+    
+    \tab{
+    Lösung b)
+    }
+    Seien $\R^n$ und $\R^m$ mit der Maximumsnorm gegeben. Per Definition haben wir
+    \[{\Vert A\Vert_{\infty}}= \text{sup}_\limits{x\in\R^3\text{ mit }\Vert x\Vert_{\infty}=1}{\Vert A.x\Vert_{\infty}}.\]
+    Da wir in endlich-dimensionalen Räumen ($\R^n$) arbeiten, können wir in der obigen Gleichung \emph{max} 
+    anstelle von \emph{sup} verwenden. D.h.
+    
+    
+    \begin{align*}
+    {\Vert A\Vert_{\infty}}
+    &=\text{max}_\limits{\Vert x\Vert_{\infty}=1}{\Vert A.x\Vert_{\infty}}&&\\
+    &=\text{max}_\limits{\Vert x\Vert_{\infty}=1}\text{ }\text{ max}_\limits{i=1,\ldots,m}{\vert \sum_\limits{j=1}^{n} a_{ij}x_{j}\vert}&&\\
+    &\leq\text{max}_\limits{\Vert x\Vert_{\infty}=1}\text{ }\text{ max}_\limits{i=1,\ldots,m}{\sum_\limits{j=1}^{n} \vert a_{ij}\vert \vert x_{j}\vert}&\qquad&| Dreiecksungleichung\\
+    &=\text{max}_\limits{i=1,\ldots,m}\text{ }\text{ max}_\limits{\Vert x\Vert_{\infty}=1}{\sum_\limits{j=1}^{n} \vert a_{ij}\vert \vert x_{j}\vert}&&\\
+    &\leq\text{max}_\limits{i=1,\ldots,m}\text{ }\text{ max}_\limits{\Vert x\Vert_{\infty}=1}{\sum_\limits{j=1}^{n} \vert a_{ij}\vert \Vert x\Vert_{\infty}}&&\\
+    &=\text{max}_\limits{i=1,\ldots,m}{\sum_\limits{j=1}^{n} \vert a_{ij}\vert}.&&\\
+    \end{align*}
+    
+    
+    Es gilt also
+    
+    \[{\Vert A\Vert_{\infty}}
+    =\text{max}_\limits{\Vert x\Vert_{\infty}=1}{\Vert A.x\Vert_{\infty}}
+    \leq\text{max}_\limits{i=1,\ldots,m}{\sum_{j=1}^{n} {\vert a_{ij}\vert}}.\qquad(1)\\\]
+    
+    
+    Sei $k$ die Zeilennummer, für die gilt
+    \[\text{max}_\limits{i=1,\ldots,m}{\sum_{j=1}^{n} {\vert a_{ij}\vert}}=\sum_{j=1}^{n} {\vert a_{kj}\vert}.\]
+    
+    Sei außerdem $v=(v_1,...,v_n)$ in der Weise, dass für jedes $j$ gilt $v_j=1$, wenn $a_{kj}\geq 0$ und $v_j=-1$ wenn 
+    $a_{kj}\leq 0$. Es ist klar, dass $\Vert v\Vert_{\infty}=1$. Für jedes $j$ gilt also $a_{kj}v_{j}=|a_{kj}x_{j}|$ und wir erhalten somit für jede Zeile 
+    $i\in\{1,\ldots,m\}$:
+    \begin{align*}
+    \left|\sum_{j=1}^n a_{ij}v_j\right|
+    &\leq \sum_{j=1}^n \left|a_{ij}v_j\right|\\
+    &=\sum_{j=1}^n \left|a_{ij}\right|\\
+    &\leq \sum_{j=1}^n \left|a_{kj}\right|\\
+    &=\left|\sum_{j=1}^n a_{kj}v_j \right|.
+    \end{align*}
+    
+    Für $v$ und $k$ gilt also
+    
+    \[{\Vert A.v\Vert_{\infty}}=\text{max}_\limits{i=1,\ldots,m}\left|\sum_{j=1}^n a_{ij}v_j\right|
+    =\left|\sum_{j=1}^n a_{kj}v_j \right|
+    =\sum_{j=1}^n \left|a_{kj}\right|
+    =\text{max}_\limits{i=1,\ldots,m}\sum_{j=1}^n \left|a_{ij}\right|.\qquad(2)\].
+
+    Aus $(1)$ und $(2)$ können wir schließen, dass
+    
+    \[{\Vert A\Vert_{\infty}}
+    =\text{max}_\limits{\Vert x\Vert_{\infty}=1}{\Vert A.x\Vert_{\infty}}
+    =\text{max}_\limits{i=1,\ldots,m}\sum_{j=1}^n \left|a_{ij}\right|.\]
+    
+    \tab{
+    Lösung (c)
+    }
+    \[{\Vert A\Vert_{1}}=\text{max}_\limits{j=1,\ldots,n}{\sum_{i=1}^{m}{\vert a_{ij}\vert}}
+    =\max\{5+1+2;1+7+3;2+2+3\}=\max\{8;11;7\}=11.\]
+    \[{\Vert A\Vert_{\infty}}=\text{max}_\limits{i=1,\ldots,m}{\sum_{j=1}^{n}{\vert a_{ij}\vert}}
+    =\max\{5+1+2;1+7+2;2+3+3\}=10.\]
+    
+    \[{\Vert B\Vert_{1}}=\text{max}_\limits{j=1,\ldots,n}{\sum_{i=1}^{m}{\vert b_{ij}\vert}}
+    =\max\{12;\frac{11}{2};8\}=12.\]
+    \[{\Vert B\Vert_{\infty}}=\text{max}_\limits{i=1,\ldots,m}{\sum_{j=1}^{n}{\vert b_{ij}\vert}}
+    =\max\{8;9;\frac{17}{2}\}=9.\]
+
+ \end{tabs*}   
+\end{content}
+

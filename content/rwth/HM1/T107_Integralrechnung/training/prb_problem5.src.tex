@@ -1,0 +1,120 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A05: Hauptsatz der Integralrechnung}
+    \lang{en}{problem 5}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+
+\lang{de}{
+	\title{A05: Hauptsatz der Integralrechnung}
+}
+\lang{en}{
+	\title{Problem 5}
+}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9613}{Ticket 9613}
+\end{block}
+
+\begin{problem}
+	\begin{variables}
+	 	\randint{a}{-2}{3}
+	 	\randint{b}{0}{4}
+	 	\randadjustIf{a,b}{b<=a}
+
+	 	\randint[Z]{c}{-3}{5}
+	 	\randint[Z]{d}{-4}{5}
+	 	\randint[Z]{u}{-5}{5}
+
+		\function{f}{d*x^4+u*x^2+c*x}
+		\derivative[normalize]{f_1}{f}{x}
+		\functionNormalize{f_1}
+
+        %\substitute[normalize]{fx0}{f}{x}{x0} % if you want to have the value computed, use this option
+        \substitute{Fb}{f}{x}{b}
+        \substitute{Fa}{f}{x}{a}
+        \function[calculate]{L}{Fb-Fa}
+
+
+	\end{variables}
+
+
+	\begin{question}
+		\lang{de}{
+			\text{In dieser Aufgabe sei die Funktion $f(x) = \var{f_1}$ gegeben.\\
+			Das Ziel der Aufgabe ist, den orientierten Flächeninhalt $\int_{\var{a}}^{\var{b}} f(x) \, dx$ zu bestimmen. \\
+			Dazu dienen die folgenden Schritte:\\ \\
+			Bestimmen Sie zuerst eine Stammfunktion $F$ von $f$:}
+		}
+		 \lang{en}{\text{
+      In this problem, we are given the function $f(x) = \var{f_1}$.\\
+      The goal is to determine the size of the oriented area
+      $\int_{\var{a}}^{\var{b}} f(x) \, dx$. \\
+      In order to find this area, we will use the following steps: \\ \\
+      First, determine an antiderivative $F$ of $f$:
+     }}
+		\type{input.function}
+
+		\begin{answer}
+			\text{ $F(x) = $}
+			\solution{f}
+			\inputAsFunction{x}{inp}
+			\checkFuncForZero{D[inp]-f_1}{-10}{10}{100}
+            
+            \lang{de}{
+            \explanation[edited(ans)]{Die eingegebene Stammfunktion ist falsch. Beachten Sie, dass $(x^n)\prime = nx^{n-1}$ für $n\geq 1$ gilt.}
+            }
+            \lang{en}{
+            \explanation[edited(ans)]{The entered function is incorrect. Note that $(x^n)\prime = nx^{n-1}$ for $n\geq 1$.}
+            }            
+		\end{answer}
+	\end{question}
+
+
+	\begin{question}
+		\lang{de}{
+			\text{Berechnen Sie nun $\int_{\var{a}}^{\var{b}} f(x) \, dx$.}
+		}
+		 \lang{en}{\text{
+      Now calculate $\int_{\var{a}}^{\var{b}} f(x) \, dx$.
+     }}
+		\type{input.number}
+		\begin{answer}
+			\text{ $\int_{\var{a}}^{\var{b}} f(x) \, dx = $ }
+			\solution{L}
+            
+            \lang{de}{
+            \explanation[edited(ans)]{Für eine beliebige Stammfunktion $F$ von $f$ gilt $\int_{\var{a}}^{\var{b}} f(x) \, dx = F(\var{b})-F(\var{a})$.}
+            }
+            \lang{en}{
+            \explanation[edited(ans)]{For an arbitrary antiderivative $F$ of $f$ the equation $\int_{\var{a}}^{\var{b}} f(x) \, dx = F(\var{b})-F(\var{a})$ holds.}
+            }            
+		\end{answer}
+
+	\end{question}
+
+\end{problem}
+
+
+\embedmathlet{mathlet}
+\end{content}

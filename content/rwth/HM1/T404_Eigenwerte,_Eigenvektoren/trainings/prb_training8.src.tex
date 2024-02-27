@@ -1,0 +1,178 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{P08: Principal axes}
+    \lang{de}{A08: Hauptachsen}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22657}{Ticket 22657}
+\end{block}
+\usepackage{mumie.genericproblem}
+\lang{de}{\title{A08: Hauptachsen}}
+\lang{en}{\title{P08: Principal axes}}
+\begin{problem}
+% Hauptachsentransformation
+     \begin{question}
+          \begin{variables}
+              \randint{a1}{3}{5}
+              \randint[Z]{b1}{-2}{2}
+              \function{a}{a1}
+              \function{b}{b1}
+              \function{zero}{0}
+              \function[calculate]{bbetrag}{|b|}
+% Matrix A entsteht aus diag(a,b) durch Konjugieren mit der orthogonalen Matrix (1/25)*\begin{pmatrix}3&-4\\4&3\end{pmatrix}
+              \matrix[calculate]{aa}{(9*a+16*b)/25&(-12*a+12*b)/25\\
+                                    (-12*a+12*b)/25&(16*a+9*b)/25}
+          \end{variables}     
+%           \type{input.function} 
+     \type{input.generic}
+     \field{rational}
+%     \displayprecision{3}
+%     \correctorprecision{2}
+     \lang{de}{\text{(a) Bringen Sie die Matrix $A=\var{aa}$ auf  Hauptachsenform $C$.\\ \\
+     \begin{table}[\class{layout}]
+      $C=\quad$ & 
+      \begin{table}[\class{pmatrix}] \ansref & \ansref\\ \ansref &\ansref \end{table}  \end{table} 
+     }}
+      \lang{en}{\text{(a) Transform the matrix $A=\var{aa}$ into principal axes form $C$.\\ \\
+     \begin{table}[\class{layout}]
+      $C=\quad$ & 
+      \begin{table}[\class{pmatrix}] \ansref & \ansref\\ \ansref &\ansref \end{table}  \end{table} 
+     }}
+          \begin{answer}
+          \type{input.function}
+          %\field{rational}
+           \solution{a}
+            \inputAsFunction{}{ans1}
+            \checkFuncForZero{(ans1-a)*(ans1-b)}{1}{2}{10}
+            
+          \end{answer}     
+          \begin{answer}
+          \type{input.function}
+         % \field{rational}
+           \solution{zero}
+            \inputAsFunction{}{ans3}
+            \checkAsFunction{}{1}{2}{10}
+            %\checkFuncForZero{ans3-zero}{1}{2}{10}
+          \end{answer}     
+          \begin{answer}
+          \type{input.function}
+          %\field{rational}
+           \solution{zero}
+            \inputAsFunction{}{ans4}
+            \checkFuncForZero{ans4-zero}{1}{2}{10}
+            %\explanation[NOT[equals(ans4,0)] OR NOT[equals(ans3,0)]]{Die Hauptachsenform einer Matrix ist eine Diagonalmatrix.}
+            %\checkAsFunction{}{1}{2}{10}
+          \end{answer}     
+          \begin{answer}
+          \type{input.function}
+          %\field{rational}
+           \solution{b}
+            \inputAsFunction{}{ans2}
+            \checkFuncForZero[1E-2]{|(ans2-a)*(ans2-b)|+dirac(ans1-ans2)}{1}{2}{10}
+            
+          %\explanation{Die Hauptachsengestalt beschreibt die quadratische Form $q_A$ bezüglich einer Basis aus Eigenvektoren.
+          %              Die Matrix $C$ ist also eine Diagonalmatrix, deren Diagonalglieder die Eigenwerte von $A$ sind.}
+          \lang{de}{
+          \explanation[NOT[equal(ans4,0)] OR NOT[equal(ans3,0)]]{Zu (a): Die Hauptachsenform einer Matrix ist eine Diagonalmatrix.}
+          \explanation[equal(ans4,0) AND equal(ans3,0) AND [NOT[equal(ans1,a) OR equal(ans1,b)]] AND [NOT[equal(ans2,a) OR equal(ans2,b)]]]{Zu (a): Sie haben die Eigenwerte nicht korrekt bestimmt.}
+          \explanation[equal(ans4,0) AND equal(ans3,0) AND [NOT[equal(ans1,a) OR equal(ans1,b)]] AND [equal(ans2,a) OR equal(ans2,b)]]{Zu (a): Sie haben nur den zweiten Eigenwert korrekt bestimmt.}
+          \explanation[equal(ans4,0) AND equal(ans3,0) AND [equal(ans1,a) OR equal(ans1,b)] AND [NOT[equal(ans2,a) OR equal(ans2,b)]]]{Zu (a): Sie haben nur den  ersten Eigenwert korrekt bestimmt.}
+   }
+   \lang{en}{
+          \explanation[NOT[equal(ans4,0)] OR NOT[equal(ans3,0)]]{Zu (a): The principal axes form of a matrix is a diagonal matrix.}
+          \explanation[equal(ans4,0) AND equal(ans3,0) AND [NOT[equal(ans1,a) OR equal(ans1,b)]] AND [NOT[equal(ans2,a) OR equal(ans2,b)]]]{Zu (a): You did not determine the eigenvalues correctly.}
+          \explanation[equal(ans4,0) AND equal(ans3,0) AND [NOT[equal(ans1,a) OR equal(ans1,b)]] AND [equal(ans2,a) OR equal(ans2,b)]]{Zu (a): You only determined the second eigenvalues correctly.}
+          \explanation[equal(ans4,0) AND equal(ans3,0) AND [equal(ans1,a) OR equal(ans1,b)] AND [NOT[equal(ans2,a) OR equal(ans2,b)]]]{Zu (a): You only determined the first eigenvalues correctly.}
+   }
+   \end{answer} 
+   \begin{answer}
+   \lang{de}{
+   \text{(b) Welche Art Kegelschnitt beschreibt die Gleichung $\begin{pmatrix}x&y\end{pmatrix}\cdot A\cdot\begin{pmatrix}x\\y\end{pmatrix}=5$?}
+   \type{mc.unique}        
+        \permutechoices{1}{4}
+ 
+        \begin{choice}
+            \text{Ellipse}
+            \solution{compute}
+            \iscorrect{b}{>}{0}
+        \end{choice}
+ 
+        \begin{choice}
+            \text{Parabel}
+            \solution{false}
+        \end{choice}
+ 
+        \begin{choice}
+            \text{Hyperbel}
+            \solution{compute}
+            \iscorrect{b}{<}{0}
+        \end{choice}
+ 
+        \begin{choice}
+           \text{Geradenpaar}
+           \solution{false}
+        \end{choice}
+  
+    \explanation[edited(ans) AND [equal(b,bbetrag)]]{Zu (b): Weil die Eigenwerte beide positiv sind und ebenfalls $5>0$,
+                                handelt es sich um eine Ellipse.}
+    \explanation[edited(ans) AND NOT[equal(b,bbetrag)]]{Zu (b): Weil einer der Eigenwerte  positiv ist und der andere negativ, handelt es sich um eine Hyperbel.}                         
+    }
+
+     \lang{en}{
+   \text{(b) What type of conic section is described by the equation $\begin{pmatrix}x&y\end{pmatrix}\cdot A\cdot\begin{pmatrix}x\\y\end{pmatrix}=5$?}
+   \type{mc.unique}        
+        \permutechoices{1}{4}
+ 
+        \begin{choice}
+            \text{Ellipse}
+            \solution{compute}
+            \iscorrect{b}{>}{0}
+        \end{choice}
+ 
+        \begin{choice}
+            \text{Parabola}
+            \solution{false}
+        \end{choice}
+ 
+        \begin{choice}
+            \text{Hyperbola}
+            \solution{compute}
+            \iscorrect{b}{<}{0}
+        \end{choice}
+ 
+        \begin{choice}
+           \text{Pair of linea}
+           \solution{false}
+        \end{choice}
+  
+    \explanation[edited(ans) AND [equal(b,bbetrag)]]{(b): Since bboth eigenvalues are positive and also $5>0$,
+                                the equation describes an ellipse.}
+    \explanation[edited(ans) AND NOT[equal(b,bbetrag)]]{(b): Since the eigenvalues ahve opposite signs, we have a hyperbola.}                         
+    }
+    \end{answer} 
+          \end{question}   
+       \end{problem}
+     
+     
+\embedmathlet{gwtmathlet}
+
+\end{content}

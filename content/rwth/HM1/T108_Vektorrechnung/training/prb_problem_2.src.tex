@@ -1,0 +1,112 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A02: Verbindungsvektoren}
+    \lang{en}{problem_2}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+  
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  %  \link{generic_article}{content/rwth/HM1/T108_Vektorrechnung/g_art_content_27_vektoren.meta.xml}{content_27_vektoren}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A02: Verbindungsvektoren}}
+\lang{en}{\title{Problem 2}}
+
+\begin{block}[annotation]
+	Vektoren und Punkte  
+\end{block}
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9466}{Ticket 9466}
+\end{block}
+
+
+\begin{problem}
+
+%Question 1 of 1
+\begin{question} 
+	\lang{de}{ 
+  		\text{Beantworten Sie folgende Fragen zu den Punkten $P = (\var{Px};\var{Py};\var{Pz})$, $Q = (\var{Qx};\var{Qy};\var{Qz})$ 
+        und $R = (\var{Rx};\var{Ry};\var{Rz})$.}
+
+		\explanation{Verbindungsvektoren zwischen zwei Punkten berechnet man nach der Regel
+%        \ref[content_27_vektoren][Regel zu Verbindungsvektoren]{Verbindungsvektor}          % Link aus einer Explanation
+%                                                                                            % ist derzeit nicht möglich!   
+         "Endpunkt minus Anfangspunkt". Das bedeutet also, dass beispielsweise für den Vektor 
+          von $Q = (q_1; q_2; q_3)$ nach $R = (r_1; r_2; r_3)$ gilt: 
+          $ \overrightarrow{QR}=\left(\begin{smallmatrix} r_1-q_1 \\ r_2-q_2 \\ r_3-q_3 \end{smallmatrix} \right).$
+          \\
+          Die beiden anderen Verbindungsvektoren berechnet man analog.}     
+    }
+  	\lang{en}{
+  		\text{Answer the following questions about the points $P = (\var{Px},\var{Py},\var{Pz})$, $Q = (\var{Qx},\var{Qy},\var{Qz})$, and $R = (\var{Rx},\var{Ry},\var{Rz})$.}
+  		\explanation{The vector from $P = (P_x,P_y,P_z)$ to $Q = (Q_x,Q_y,Q_z)$ is $\vec{PQ} = \begin{pmatrix} Q_x - P_x \\ Q_y - P_y \\ Q_z - P_z\end{pmatrix}$. 
+  		The length of a vector $\vec{v}$ is $\abs{\vec{v}} = \sqrt{v_x^2+v_y^2+v_z^2}$.}
+  	}
+	\begin{variables}
+		\randint{Px}{-5}{5}
+		\randint{Py}{-5}{5}
+		\randint{Pz}{-5}{5}
+		\randint{Qx}{-5}{5}
+		\randint{Qy}{-5}{5}
+		\randint{Qz}{-5}{5}
+		\randint{Rx}{-5}{5}
+		\randint{Ry}{-5}{5}
+		\randint{Rz}{-5}{5}				    		
+		\randint[Z]{h}{-1}{1}
+		\randint[Z]{f}{-1}{1}
+		\randint[Z]{g}{-1}{1}				    		
+		\function[calculate]{vx}{h*(Qx-Px)}
+		\function[calculate]{vy}{h*(Qy-Py)}
+		\function[calculate]{vz}{h*(Qz-Pz)}
+		\function[calculate]{lv}{sqrt(vx^2+vy^2+vz^2)}
+		\function[calculate]{wx}{f*(Rx-Px)}
+		\function[calculate]{wy}{f*(Ry-Py)}
+		\function[calculate]{wz}{f*(Rz-Pz)}
+		\function[calculate]{lw}{sqrt(wx^2+wy^2+wz^2)}
+		\function[calculate]{ux}{g*(Rx-Qx)}
+		\function[calculate]{uy}{g*(Ry-Qy)}
+		\function[calculate]{uz}{g*(Rz-Qz)}
+		\function[calculate]{lu}{sqrt(ux^2+uy^2+uz^2)}
+	\end{variables}
+	\permutechoices{1}{3}
+	\type{mc.yesno}
+	\begin{choice}
+		\lang{de}{\text{Der Vektor von $P$ nach $Q$ ist gegeben durch $\begin{pmatrix} \var{vx} \\ \var{vy} \\ \var{vz} \end{pmatrix}$.}}
+		\lang{en}{\text{The vector from $P$ to $Q$ is given by $\begin{pmatrix} \var{vx} \\ \var{vy} \\ \var{vz} \end{pmatrix}$.}}
+		\solution{compute}
+		\iscorrect{h}{=}{1}
+	\end{choice}
+	\begin{choice}
+		\lang{de}{\text{Der Vektor von $Q$ nach $R$ ist gegeben durch $\begin{pmatrix} \var{ux} \\ \var{uy} \\ \var{uz} \end{pmatrix}$.}}
+		\lang{en}{\text{The vector from $Q$ to $R$ is given by $\begin{pmatrix} \var{ux} \\ \var{uy} \\ \var{uz} \end{pmatrix}$.}}
+		\solution{compute}
+		\iscorrect{g}{=}{1}
+	\end{choice}
+	\begin{choice}
+		\lang{de}{\text{Der Vektor von $P$ nach $R$ ist gegeben durch $\begin{pmatrix} \var{wx} \\ \var{wy} \\ \var{wz} \end{pmatrix}$.}}
+		\lang{en}{\text{The vector from $P$ to $R$ is given by $\begin{pmatrix} \var{wx} \\ \var{wy} \\ \var{wz} \end{pmatrix}$.}}
+		\solution{compute}
+		\iscorrect{f}{=}{1}
+	\end{choice}
+\end{question}
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

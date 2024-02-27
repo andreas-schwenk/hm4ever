@@ -1,0 +1,368 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{Separierbare und lineare Differentialgleichungen}
+   }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \begin{components}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T305_Integrationstechniken/g_art_content_12_substitutionsregel.meta.xml}{content_12_substitutionsregel}
+\link{generic_article}{content/rwth/HM1/T305_Integrationstechniken/g_art_content_13_partialbruchzerlegung.meta.xml}{content_13_partialbruchzerlegung}
+\end{links}
+  \creategeneric
+\end{metainfo}
+
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21645}{Ticket 21645}
+\end{block}
+\usepackage{mumie.ombplus}
+\ombchapter{3}
+\ombarticle{1}
+\usepackage{mumie.genericvisualization}
+\title{Separierbare und lineare Differentialgleichungen}
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+Differentialgleichungen stellen Funktionen und ihre Ableitungen miteinander in Verbindung.
+Die einfachste Differentialgleichung ist
+\[f'=f.\]
+Sie kennen bereits eine Lösung dieser Differentialgleichung: $f(x)=\exp(x)$. 
+Ebenso ist auch $f_a(x)=a\exp(x)$ eine Lösung für jedes $a\in\R$.
+Differentialgleichungen beschreiben wesentliche Zusammenhänge in allen Natur- und Lebenswissenschaften
+und damit in Konsequenz auch in Ihrem Fachbereich. 
+Obige Gleichung gibt zum Beispiel ein exponentielles Wachstum an, 
+das heißt der Zuwachs einer Population (o.ä.)
+ist genau so groß wie die Polulation selbst. Ist dann die Größe der Population etwa zur  Zeit $x_0=0$ 
+durch $a=f_a(x_0)=a\exp(0)$ gegeben, so ist sie zu jeder anderen Zeit $x$ gleich $f_a(x)=a\exp(x)$.
+Wir werden unten sehen, dass dieses Anfangswertproblem eine eindeutige Lösung hat. 
+Das heißt, es gibt eine einzige  Funktion, die sowohl $f'=f$ als auch $f(x_0)=a$ erfüllt.
+Der Anfangspunkt $x_0$ liegt dabei nicht notwendig auf dem Rand des Definitionsbereichs.
+
+In diesem Kapitel stellen wir einige Typen von Differentialgleichungen (kurz: DGL) vor. 
+Die Lösungsmethoden für Differentialgleichungen sind sehr vielfältig, reichen von sehr einfach bis äußerst kompliziert
+und bilden einen ganzen Zweig der mathematischen Forschung.
+Oft kann man Differentialgleichungen gar nicht explizit lösen, sondern bestenfalls die Existenz einer Lösung garantieren.
+Dann kann man aber mit numerischen Methoden Näherungen für die Lösung berechnen, die für praktische Zwecke völlig ausreichen.
+
+Dabei benutzen wir eine übliche Konvention und schreiben die Differentialgleichung in der Variablen $y$ statt $f$.
+Unsere Differentialgleichung für exponentielles Wachstum lautet also
+\[y'=y.\]
+Damit bringen wir zum Ausdruck, dass $y$ eine bislang unbestimmte Funktion ist, 
+halten aber die Variable $x$ als Funktionsvariable  vor. 
+%Video
+\center{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10751&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+
+%%
+%\section{Separierbare und lineare Differentialgleichungen}
+\section{Separierbare Differentialgleichungen}\label{sec:sep_lin_DGL}
+Separierbare (oder: trennbare) Differentialgleichungen sind solche, in denen die übrige Abhängigkeit der
+Differentialgleichung von der Funktionsvariablen $x$ von der Abhängigkeit in $y$ als Faktor abgespalten werden kann.
+Wir beginnen ganz formal mit der genauen Definition.
+\begin{definition}[Separierbare DGL]\label{def:sep_DGL}
+Es seien $I$ und $J$ in $\R$ nicht ausgeartete Intervalle. Weiter seien $f:I\to\R$ und $g:J\to \R$ stetige Funktionen.
+\begin{enumerate}
+\item[(i)]
+Eine Gleichung der Form
+\[y'=f(x)\cdot g(y)\]
+heißt \notion{separierbare} Differentialgleichung auf $I\times J$.
+Ein \notion{Anfangswert} ist die Vorgabe eines Wertes $y(x_0)=y_0\in J$ für ein $x_0\in I$.
+\item[(ii)]
+Ist $I'$ ein nicht ausgeartetes Teilintervall von $I$ und ist $\phi:I'\to \R$ eine differenzierbare Funktion
+mit $\phi(I')\subset J$, dann ist $\phi$ eine \notion{Lösung} der Differentialgleichung, wenn
+\[\phi'(x)=f(x)g(\phi(x))\]
+für alle $x\in I'$ erfüllt ist.
+\item[(iii)]
+Gilt zusätzlich $y_0=\phi(x_0)$, dann ist $\phi$ eine Lösung des  \notion{Anfangswertproblems}
+\[y'=f(x)\cdot g(y), \quad y(x_0)=y_0.\]
+\end{enumerate}
+\end{definition}
+%%
+\begin{example}\label{ex:sep_DG}
+\begin{tabs*}[\initialtab{0}]
+\tab{Beispiel a)}
+$y'=x^2\cdot y^2$ ist eine separierbare Differentialgleichung auf $\R\times\R$ mit $f(x)=x^2$ und $g(y)=y^2$.
+\tab{Beispiel b)}
+$y'=y-y^2$ ist ebenfalls eine separierbare Differentialgleichung auf $\R\times \R$ mit $f\equiv 1$.
+\tab{Beispiel c)}
+$y'=y^2+x^2$ ist keine separierbare Differentialgleichung.
+\end{tabs*}
+\end{example}
+Die Lösung separierbarer Gleichungen beruht im wesentlichen auf Angabe geeigneter Stammfunktionen,
+also auf Integralrechung.
+\begin{theorem}[Separierbares Anfangswertproblem]\label{thm:sep_DG}
+Es sei 
+\[y'=f(x)g(y) \text{ mit } y(x_0)=y_0\]
+ein separierbares Anfangswertproblem, und weiter sei $g(y_0)\neq 0$.
+(Insbesondere sind also $f:I\to\R$ und $g:J\to \R$ stetige Funktionen mit $x_0\in I$ und $y_0\in J$.)
+
+Dann gibt es ein nichtausgeartetes Intervall $I'\subset I$, auf dem das Anfangswertproblem 
+eine eindeutige Lösung $\phi$ besitzt.
+
+Genauer: Es sei $F:I\to\R$ die Stammfunktion von $f$ mit $F(x_0)=0$, das heißt $F(x)=\int_{x_0}^xf(t)~dt$.
+Sei $J'\subset J$ ein nichtausgeartetes Intervall, das $y_0$ enthält und auf dem $g$ keine Nullstelle hat,
+und sei weiter $H:J'\to\R$ eine Stammfunktion von $\frac{1}{g}$ mit $H(y_0)=0$, das heißt $H(y)=\int_{y_0}^y\frac{1}{g(s)}ds$.
+Dann gibt es ein Teilintervall $I'\subset I$ so, dass für alle $x\in I'$ gilt
+\[H(\phi(x))=F(x).\]
+Außerdem besitzt $H$ eine Umkehrfunktion $H^{-1}$, und mit dieser gilt für alle $x\in H(J')$
+\[\phi(x)=H^{-1}(F(x)).\]
+\end{theorem}
+%%
+\begin{proof*}
+\begin{incremental}[\initialsteps{0}]
+\step
+Wir nehmen zunächst an, es gibt eine Lösung $\phi$ des Anfangswertproblems.
+Dann gilt für alle $x\in I'$
+\[\frac{\phi'(x)}{g(\phi(x))}=f(x).\]
+Wir benutzen die \ref[content_12_substitutionsregel][Substitutionsregel]{thm:substitutionsregel} und erhalten
+\[\int_{y_0}^{\phi(x)}\frac{ds}{g(s)}=\int_{x_0}^x\frac{\phi'(t)}{g(\phi(t))}dt=\int_{x_0}^xf(t)dt.\]
+Also: Wenn eine Lösung existiert, dann erfüllt sie
+\[H(\phi(x))=F(x).\]
+\step
+Nun zeigen wir die Existenz der Lösung.
+Weil $\frac{1}{g}$ auf $J'$ das Vorzeichen nicht wechselt, ist $H$ streng monoton und als Stammfunktion stetig. 
+Also ist $H$ umkehrbar auf seinem Bild.
+Nun \emph{definieren} wir
+\[\phi(x):=H^{-1}(F(x)).\]
+Dann ist $\phi(x_0)=H^{-1}(0)=y_0$, und mit Hilfe der Ableitungsregeln für Umkehrfunktion und Komposition erhalten wir
+\begin{align*}
+\phi'(x)&=(H^{-1})'(F(x))\cdot F'(x)=\frac{1}{H'((H^{-1})(F(x)))}\cdot f(x)\\
+&= \frac{1}{H'(\phi(x))}\cdot f(x)=g(\phi(x))\cdot f(x).
+\end{align*}
+\step
+Zuletzt zeigen wir, dass dieses $\phi$ die einzige Lösung ist.
+Diese Lösung erfüllt $H(\phi(x))=F(x)$. Weil $H$ umkehrbar ist, kann nur die Funktion $\phi$ diese Gleichung erfüllen.
+\end{incremental}
+\end{proof*}
+%%
+\begin{remark}\label{rem:sep_AW-probleme}
+\begin{enumerate}
+\item[(a)]
+Man kann die größtmöglichen Teilintervalle $I'$ und $J'$, deren Existenz durch Satz \ref{thm:sep_DG} gewährleistet ist, 
+genauer beschreiben:
+ $J'\subset J$ ist das größte Teilintervall von $J$, das $y_0$ enthält aber keine Nullstelle von $g$.
+Dann ist $I'\subset I$ das größte Teilintervall von $I$, das  $x_0$ enthält und $F(I')\subset H(J')$ erfüllt.\\
+In der Praxis erhält man das maximale Existenzintervall einer lokal gefundenen Lösung oft  dadurch, 
+dass man die Gültigkeitsgrenzen dieser Lösung retrospektiv bestimmt.
+\item[(b)]
+Der Satz macht keine Aussage über Anfangswerte $(x_0,y_0)$ mit $g(y_0)=0$. Für solche Anfangswerte ist die konstante Funktion
+\[\phi:I\to\R,\quad x\mapsto \phi(x)=y_0\]
+eine Lösung -- aber es kann im allgemeinen weitere Lösungen geben. 
+Allerdings kann man zeigen: Wenn $g$ differenzierbar ist in $x_0$, dann ist diese konstante Lösung die einzige.
+\end{enumerate}
+\end{remark}
+%Video
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10752&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+
+%%
+\begin{example}\label{ex:sep_AW-probleme}
+Wir lösen Anfangswertprobleme zu den separierbaren Differentialgleichungen aus Beispiel \ref{ex:sep_DG} a) und b).
+\begin{tabs*}[\initialtab{0}]
+\tab{Beispiel a)}
+Wir lösen das Anfangswertproblem $y'=x^2\cdot y^2$ zu $y(1)=1$.
+Hier ist $f(x)=x^2$ und $g(x)=y^2$ sowie $g(y_0)=g(1)\neq 0$. Damit finden wir die Stammfunktionen
+\[F(x)=\int_{1}^x f(t)\:dt=\frac{1}{3}(x^3-1)\]
+und
+\[H(y)=\int_1^y \frac{ds}{g(s)}=\int_1^y\frac{ds}{s^2}=-\frac{1}{y}+1.\]
+Nun lösen wir
+\begin{align*}
+& \: H(\phi(x))=F(x)\\
+\Leftrightarrow&\: -\frac{1}{\phi(x)}+1=\frac{1}{3}(x^3-1)\\
+\Leftrightarrow&\:\frac{1}{\phi(x)}=\frac{1}{3}(4-x^3)\\
+\Leftrightarrow&\:\phi(x)=\frac{3}{4-x^3}.
+\end{align*}
+Die maximalen Existenzintervalle sind $J'=(0;\infty)$, denn $1\in J'$ und die einzige Nullstelle von $g$ ist null.
+Und folglich $I'=(-\infty;\sqrt[3]{4})$.
+
+Ist man lediglich am maximalen Existenzintervall der Lösung $\phi$ selbst interessiert, so kann man auch wie folgt argumentieren.
+Das maximale Definitionsintervall der Funktion $\phi$, das $x_0=1$ enthält, ist $I'=(-\infty;\sqrt[3]{4})$. 
+(Der Definitionsbereich selbst ist größer.) Weil $\phi$ offenbar die Differentialgleichung für alle $x\in I'$ erfüllt und die Anfangswertbedingung erfüllt,
+muss $I'$ das maximale Lösungsintervall sein.
+\tab{Beispiel b)}
+Wir lösen das Anfangswertproblem $y'=y-y^2$ mit $y(0)=1$. Hier ist $f\equiv 1$ und $g(y)=y-y^2$ als Polynom differenzierbar. 
+Weil $g(y)=0$, hat das Anfangswertproblem nach Bemerkung \ref{rem:sep_AW-probleme} (b) nur die konstante Lösung $\phi\equiv 1$.
+Das maximale Existenzintervall ist $I'=\R$.
+\tab{Beispiel b')}
+Wir lösen das Anfangswertproblem $y'=y-y^2$ mit $y(0)=\frac{1}{2}$.
+Die Stammfunktionen sind $F(x)=\int_0^x 1\:dt=x$ und 
+\[H(y)=\int_{\frac{1}{2}}^y\frac{ds}{s(1-s)}.\]
+Dieses Integral lösen wir durch \ref[content_13_partialbruchzerlegung][Partialbruchzerlegung]{sec:partialbruch_int}. Es ist
+\[\frac{1}{s(1-s)}=\frac{1}{s}+\frac{1}{(1-s)}\]
+und somit $\tilde{H}(y)=\ln y -\ln(1-y)=\ln\frac{y}{1-y}$ eine Stammfunktion. Dann ist
+\[H(y)=\tilde{H}(y)-\tilde{H}(\frac{1}{2})=\ln\frac{y}{1-y}-\ln 1= \ln\frac{y}{1-y}.\]
+Damit berechnen wir die Lösung $\phi$.
+\begin{align*}
+&\:\ln\frac{\phi(x)}{1-\phi(x)}=x\\
+\Leftrightarrow&\:\frac{\phi(x)}{1-\phi(x)}=e^x\\
+\Leftrightarrow& \:
+\phi(x)(1+e^x)=e^x\\
+\Leftrightarrow&\:
+\phi(x)=\frac{e^x}{1+e^x}.
+\end{align*}
+Dabei ist das maximale Intervall $J'=(0;1)\ni\frac{1}{2}$, weil $0$ und $1$ die Nullstellen von $g$ sind.
+Dann ist 
+\[H(J')=(\lim_{s\to 0}\ln\frac{s}{1-s};\lim_{s\to 0}\ln\frac{s}{1-s})=(-\infty;\infty)=\R.\]
+Also ist das maximale Existenzintervall $I'=\R$, denn $F(\R)=J'$.
+\end{tabs*}
+\end{example}
+%%
+\begin{quickcheck}
+\text{Markiere alle wahren Aussagen.}
+\begin{choices}{multiple}
+    \begin{choice}
+      \text{$y'=x^2y^2+xy^2$ ist eine separierbare Differentialgleichung.}
+      \solution{true}
+    \end{choice} 
+    \begin{choice}
+      \text{$y'=\cos(x\cdot y)$ ist eine separierbare Differentialgleichung.}
+      \solution{false}
+    \end{choice}
+    \begin{choice}
+      \text{Die Funktion $\phi:\R_{>0}\to\R$, $x\mapsto 2x$, ist eine Lösung des Anfangswertproblems
+      $y'=\frac{y^2}{x^2}$, $y(1)=2$.}
+      \solution{false}
+    \end{choice}
+    \begin{choice}
+      \text{Die Funktion $\phi:\R\to\R$, $x\mapsto e^{2x}$, ist eine Lösung des Anfangswertproblems
+      $y'=2y$, $y(0)=1$.}
+      \solution{true}
+    \end{choice}      
+  \end{choices}
+\end{quickcheck}
+%%
+\section{Lineare Differentialgleichungen}
+\begin{definition}[Lineare DGL]\label{def:lin_DGL}
+Es seien $a,b:I\to\R$ stetige Funktionen auf einem nichtausgearteten Intervall $I\subset\R$.
+Eine Differentialgleichung der Form
+\[y'=a(x)\cdot y+b(x)\]
+heißt \notion{linear}.
+Ist dabei die Funktion $b$ identisch null, so heißt die Gleichung \notion{homogen}, anderenfalls \notion{inhomogen}.
+\end{definition}
+Homogene lineare Differentialgleichungen sind Spezialfälle von separierbaren Differentialgleichungen.
+Daher können wir leicht die Lösungen linearer Differentialgleichungen bestimmen.
+%%
+\begin{theorem}[Lineare DGL]\label{thm:lin_DG}
+Es sei $I\subset \R$ ein nichtausgeartetes Intervall, $x_0\in I$ ein Punkt, und es sei $a:I\to\R$ eine stetige Funktion.
+\begin{enumerate}
+\item[(a)] \notion{Homogene lineare Differentialgleichung}
+Für jedes $y_0\in \R$ existiert genau eine Lösung $\phi:I\to\R$ des Anfangswertproblems 
+\[y'=a(x)\cdot y, \quad y(x_0)=y_0.\]
+Sie  wird gegeben durch
+\begin{equation}\label{eq:lsg_homogene_lin_DG}
+\phi(x)=y_0\cdot\exp\big(\int_{x_0}^x a(t)\:dt\big).
+\end{equation}
+\item[(b)]\notion{Inhomogene lineare Differentialgleichung}
+Sei  $b:I\to\R$ eine weitere stetige Funktion. Dann besitzt das Anfangswertproblem
+\[y'=a(x)\cdot y+b(x), \quad y(x_0)=y_0\]
+genau eine Lösung $\psi:I\to\R$. Sie wird gegeben durch
+\[\psi(x)=\phi_1(x)\cdot u(x),\]
+wobei $\phi_1:I\to\R$,
+\[\phi_1(x)=\exp\big(\int_{x_0}^x a(t)\:dt\big),\]
+eine Lösung des homogenen Problems $y'=a(x)\cdot y$ zum Anfangswert $y(x_0)=1$ ist, und $u:I\to\R$ durch
+\[u(x)=y_0+\int_{x_0}^x\frac{b(t)}{\phi_1(t)}\:dt\]
+bestimmt wird.
+\end{enumerate}
+\end{theorem}
+%%
+\begin{proof*}
+Die Lösung der homogenen linearen Differentialgleichung bestimmt sich aus Satz \ref{thm:sep_DG}, die
+der inhomogenen durch Variation der Konstanten. Genauer:
+\begin{incremental}[\initialsteps{0}]
+\step
+Zu (a): In dieser separierbaren Differentialgleichung ist (mit den Bezeichnungen aus Satz \ref{thm:sep_DG})
+$f(x)=a(x)$ und $g(y)=y$. Ist $y_0=0$, dann ist nach Bemerkung \ref{rem:sep_AW-probleme} (b) die Lösung $\phi\equiv 0$
+eindeutig bestimmt und entspricht (\ref{eq:lsg_homogene_lin_DG}).
+Ist $y_0>0$, dann ist $J'=(0;\infty)$, und falls $y_0<0$ ist $J'=(-\infty;0)$. In beiden Fällen
+erhält man $F(x)=\int_{x_0}^xa(t)\:dt$ und 
+\[H(y)=\int_{y_0}^y\frac{ds}{s}=\ln {\vert s\vert} -\ln {\vert y_0\vert}=\ln\frac{\vert y\vert}{\vert y_0\vert}=\ln\frac{y}{y_0}.\]
+Damit ergibt sich aus $H(\phi(x))=\ln\frac{\phi(x)}{y_0}=F(x)$ die Lösung $\phi$ durch
+\[\phi(x)=y_0\cdot\exp(F(x))=y_0\cdot\exp\big(\int_{x_0}^xa(t)\:dt\big).\]
+Das maximale Existenzintervall ist das maximale Intervall $I'$, das $x_0$ enthält und $F(I')=H(J')=\R$ erfüllt, also $I'=\R$.
+\step
+Zu (b): Wir zeigen zunächst, dass es höchstens eine Lösung des inhomogenen linearen Anfangswertproblems geben kann.
+Denn sind $\psi$ und $\tilde{\psi}$ zwei Lösungen, dann ist $\psi-\tilde{\psi}$ eine Lösung der homogenen linearen Differentialgleichung
+$y'=a(x)\cdot y$ zum Anfangswert $y(x_0)=0$. Nach Teil (a) ist $\psi-\tilde{\psi}\equiv 0$ die einzige Lösung davon. 
+Also stimmen $\psi$ und $\tilde{\psi}$ überein.
+\step
+Um eine Lösung $\psi$ zu konstruieren, machen wir den Ansatz (die sogenannte Variation der Konstanten)
+\[\psi(x)=\phi_1(x)\cdot u(x),\]
+mit einer noch zu bestimmenden differenzierbaren Funktion $u$ und einer Lösung des homogenen Anfangswertproblems $y'=a(x)y$ zum Anfangswert $y(x_0)=1$, 
+also $ \phi_1(x)=\exp(\int_{x_0}^x a(t)\:dt)$.
+Wir differenzieren $\psi$ mit der Produktregel $\psi'(x)=\phi_1'(x)\cdot u(x)+\phi_1(x)\cdot u'(x)$ und setzen in die Differentialgleichung ein
+\[\phi_1'(x)\cdot u(x)+\phi_1(x)\cdot u'(x)=a(x)\cdot \phi_1(x)\cdot u(x)+b(x).\]
+Weil  $\phi_1'(x)=a(x)\phi_1(x)$, stimmen die ersten Terme der linken und rechten Seite überein, und wir erhalten
+\[u'(x)=\frac{b(x)}{\phi_1(x)}.\]
+(Als Exponentialfunktion hat $\phi_1$ keine Nullstellen, der Bruch ist also wohldefiniert.)
+Um eine Lösung des Anfangswertproblems zu erhalten, müssen wir nur noch die Stammfunktion $u(x)=\int_{x_0}^x \frac{b(t)}{\phi_1(t)}dt+c$
+jetzt passend wählen:
+Es ist
+\[\phi_1(x_0)\cdot( \int_{x_0}^{x_0} \frac{b(t)}{\phi_1(t)}dt+c)=c,\]
+also müssen wir $c=y_0$ setzen und haben eine Lösung $\psi=\phi_1\cdot u:\R\to\R$ des Anfangswertproblems gefunden.
+\end{incremental}
+\end{proof*}
+%%
+Wir bemerken noch, dass sich die Lösung eines homogenen linearen Anfangswertproblems als Spezialfall der Lösung
+des  inhomogenen linearen Anfangswertproblems gewinnen lässt, indem wir dort $b=0$ setzen.
+\begin{example}
+\begin{tabs*}[\initialtab{0}]
+\tab{$y'=ay$}
+In der homogenen linearen Differentialgleichung $y'=ay$ finden wir unser Eingangsbeispiel wieder für $a=1$.
+Ist $a=0$, dann ist jede konstante Funktion Lösung der Differentialgleichung.
+Beachten wir den Anfangswert $y(x_0)=y_0$, dann ist die nun eindeutige Lösung des Anfangswertproblems gegeben durch $\phi(x)=y_0$.
+\\
+Für $a\neq 0$ und einen Anfangswert $y(x_0)=y_0$,  ist die eindeutig bestimmte Lösung $\phi:\R\to\R$ dieses Anfangswertproblems
+gegeben durch
+\[\phi(x)=y_0\cdot\exp(\int_{x_0}^x a\:dt)=y_0\cdot e^{a(x-x_0)}.\]
+
+\tab{$y'=\cos(x)\cdot y$}
+Wir lösen das homogene lineare Anfangswertproblem $y'=\cos(x)\cdot y$ zum Anfangswert $y(0)=1$.
+Die Lösung $\phi:\R\to\R$ ist gegeben durch
+\[\phi(x)=1\cdot\exp\big(\int_0^x \cos t\:dt\big)=\exp(\sin(x)-\sin(0))=e^{\sin x}.\]
+\tab{$y'=\frac{y}{x}$}
+Die homogene lineare Differentialgleichung $y'=\frac{y}{x}$ betrachten wir auf dem Intervall $I=(0;\infty)$. Wir wählen den Anfangswert $y(1)=1$.
+Wir finden die Lösung $\phi:I\to \R$ des Anfangswertproblems als
+\[x\mapsto\phi(x)=\exp\big(\int_1^x\frac{1}{t}\:dt\big)=\exp(\ln x-\ln 1)=x.\]
+Das ist auch die Lösung, die man durch einen scharfen Blick auf die Gleichung erwartet.
+\tab{$y'=\frac{y}{x}+x^2+1$}
+Die inhomogene lineare Differentialgleichung $ y'=\frac{y}{x}+x^2+1$ betrachten wir zum Anfangswert $y(1)=1$
+auf dem Intervall $I=(0;\infty)$. Im vorigen Beispiel haben wir schon die Lösung $\phi_1:I\to\R$, $x\mapsto x$,
+des homogenen Anfangswertproblems $y'=\frac{y}{x}$, $y(1)=1$ gefunden.
+Somit ist die Lösung $\psi:I\to\R$ des inhomogenen Anfangswertproblems bestimmt durch
+\begin{align*}\psi(x)\:&=\:x\cdot(1+\int_1^x\frac{t^2+1}{t}dt)=x\cdot(1+\int_1^xt\:dt+\int_1^x\frac{dt}{t})\\
+&=\:x\cdot(1+\frac{1}{2}x^2-\frac{1}{2}+\ln x-\ln 1)\\
+&=\:\frac{1}{2}x^3+x\cdot\ln x+\frac{1}{2}x.
+\end{align*}
+\end{tabs*}
+\end{example}
+%Video
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10753&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+
+%%
+\begin{quickcheck}
+\type{input.function}
+  \begin{variables}
+  \function{f1}{exp(x)}
+  \end{variables}
+\text{Bestimme die Lösung $\phi:\R\to\R$ des Anfangswertproblems $y'=y$ mit $y(1)=e$.
+Es ist $\phi(x)=$\ansref.}
+\begin{answer}
+\solution{f1}
+\end{answer}
+\end{quickcheck}
+%%
+\end{content}

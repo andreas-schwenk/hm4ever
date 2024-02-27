@@ -1,0 +1,122 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü02: Taylor}
+    \lang{en}{Exercise 2}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+
+\title{\lang{de}{Ü02: Taylor}}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10493}{Ticket 10493}
+\end{block}
+
+%######################################################FRAGE_TEXT
+\lang{de}{ 
+Wir betrachten die Logarithmusfunktion $f(x)=\ln(1+x^2)$.
+\begin{enumerate}[a)]
+\item a) Bestimmen Sie die ersten drei Ableitungsfunktionen von $f$.
+\item b) Bestimmen Sie die Taylor-Polynome  erster und zweiter Ordnung von $f$ an der Stelle $x_0=1$, sowie
+die Lagrange-Formeln für die zugehörigen Restglieder.
+\item c) Bestimmen Sie, um wie viel die Taylor-Polynome von der Funktion bei $x=\frac{3}{4}$ und $x=\frac{5}{4}$ abweichen.
+\end{enumerate} }
+%Korrigiert am 18.06.19, FS
+%##################################################ANTWORTEN_TEXT
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung a)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   Mit der Kettenregel (äußere Funktion $\ln(x)$, innere Funktion $h(x)=1+x^2$) erhält man
+\[  f'(x)=\frac{1}{1+x^2}\cdot 2x=\frac{2x}{1+x^2}. \]
+Die höheren Ableitungen erhält man dann mit der Quotientenregel:
+\[ f''(x)= \frac{2\cdot (1+x^2)-2x\cdot 2x}{(1+x^2)^2}=\frac{2-2x^2}{(1+x^2)^2}, \]
+sowie
+\[ f'''(x)=\frac{-4x\cdot (1+x^2)^2-(2-2x^2)\cdot 2(1+x^2)\cdot 2x}{(1+x^2)^4}
+=\frac{4x(-1-x^2)+(-2+2x^2)\cdot 4x}{(1+x^2)^3}= \frac{4x(x^2-3)}{(1+x^2)^3} \]
+    }
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+  \tab{\lang{de}{    Lösung b)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{ 
+    Mit Hilfe der in a) berechneten Ableitungsfunktionen berechnet man
+\[  f(1)=\ln(1+1^2)=\ln(2),\quad f'(1)=\frac{2}{1+1^2}=1,\quad f''(1)=\frac{2-2}{(1+1^2)^2}=0. \]
+Das Taylor-Polynom erster Ordnung ist also
+\[T_{f,1,1}(x)=f(1)+f'(1)(x-1)=\ln(2)+(x-1).\]
+Weil die zweite Ableitung an der Stelle $x_0=1$ verschwindet, findet man für
+ das Taylor-Polynom zweiter Ordnung ebenfalls
+\[  T_{f,2,1}(x)=f(1)+f'(1)(x-1)+\frac{f''(1)}{2}(x-1)^2=\ln(2)+(x-1).\]
+Die Taylor-Polynome erster und zweiter Ordnung sind also gleich,
+\[T_{f,1,1}(x)=T_{f,2,1}(x) ,\]
+und haben den Grad eins.
+
+
+Da die Taylor-Polynome gleich sind, sind auch die Restglieder dieselben Funktionen. Die
+Formeln, die man mit Hilfe der nächsten Ableitungsfunktion an einer Zwischenstelle erhält, 
+sind jedoch verschieden.
+
+Für das Lagrange-Restglied zum Taylor-Polynom erster Ordnung  hat man die Formel
+\[ R_{f,1,1}(x)=\frac{f''(\xi_1)}{2!}(x-1)^2=\frac{1-\xi_1^2}{(1+\xi_1^2)^2}(x-1)^2  \]
+für eine geeignete Stelle $\xi_1$ zwischen $x_0=1$ und $x$ (abhängig von $x$).
+
+Für das Lagrange-Restglied zum Taylor-Polynom zweiter Ordnung hat man die Formel
+\[ R_{f,2,1}(x)=\frac{f'''(\xi_2)}{3!}(x-1)^3=\frac{4\xi_2(-1+3\xi_2^2)}{3!(1+\xi_2^2)^3}(x-1)^3  \]
+für eine geeignete Stelle $\xi_2$ zwischen $x_0=1$ und $x$ (abhängig von $x$).
+
+    
+	}
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+  \tab{\lang{de}{    Lösung c)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{ 
+Da nach Teil b) die Taylor-Polynome der Ordnung eins und zwei gleich sind, nämlich
+\[  T_f(x)=x+\ln(2)-1\]
+sind auch die Restglieder gleich, nämlich
+\[ R_f(x)=f(x)-T_f(x)=\ln(1+x^2)-x-\ln(2)+1. \]
+
+An den Stellen $x=\frac{3}{4}$ bzw. $x=\frac{5}{4}$ gilt damit:
+\[ R_f(\frac{3}{4})=\ln(1+(\frac{3}{4})^2)-\frac{3}{4}-\ln(2)+1
+=\ln(\frac{25}{16})-\ln(2)+\frac{1}{4} =\ln(\frac{25}{32})+\frac{1}{4}\approx 0,003, \]
+sowie
+\[ R_f(\frac{5}{4})=\ln(1+(5/4)^2)-\frac{5}{4}-\ln(2)+1
+=\ln(\frac{41}{16})-\ln(2)-\frac{1}{4} =\ln(\frac{41}{32})-\frac{1}{4}\approx -0,002. \]
+}
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+
+
+%#############################################################ENDE
+\end{tabs*}
+\end{content}

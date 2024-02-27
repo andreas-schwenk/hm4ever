@@ -1,0 +1,86 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A01: Zinssatz}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A01: Zinssatz}}
+\lang{en}{\title{A01: Interest rate}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22676}{Ticket 22676}
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+     \begin{problem}
+          
+          \begin{variables}
+             \randint{n}{2}{6}
+             \begin{switch} %2nd, 3rd, nth
+             \begin{case}{n=2}
+             \string{th}{nd}
+             \end{case}
+             \begin{case}{n=3}
+             \string{th}{rd}
+             \end{case}
+             \begin{default}
+             \string{th}{th}
+             \end{default}
+             \end{switch}
+             \drawFromSet{k0}{1000000,2000000,3000000}
+             \function[calculate]{gew}{50000*n}
+             \function[calculate,2]{p}{(((k0+gew)/k0)^(1/n)-1)*100}
+          \end{variables}
+          \begin{question}
+               \type{input.number}
+               \lang{de}{\text{Ein Unternehmer hat durch eine Investition von 
+               $\var{k0}$\euro in $\var{n}$ Jahren einen Gewinn von 
+               $\var{gew}$\euro gemacht. Zu welchem Zinssatz $i$ hätte er das 
+               Kapital anlegen müssen, um bei zinseszinslicher Verrechnung 
+               denselben Zuwachs zu erreichen?\\
+               $i=$ \ansref \%
+               }}
+               \lang{en}{\text{
+               An entrepreneur invested
+               $\var{k0}$\euro and made a profit of $\var{gew}$\euro
+               over $\var{n}$ years. At what interest rate $i$, compounded annually,
+               would he have needed to invest the sum in order to earn the same profit?\\
+               $i=$ \ansref \%
+               }}
+               \begin{answer}
+                   
+                    \solution{p}
+               \end{answer}
+               \lang{de}{\explanation[edited]{Um den Zinssatz $i$ zu bestimmen, muss die $\var{n}$-te Wurzel gezogen werden.}}
+               \lang{en}{\explanation[edited]{
+               To determine the interest rate $i$, we have to take a $\var{n}$\var{th} root.}}
+               \\
+               %$i=\sqrt[\var{n}]{\frac{\var{k0}+\var{gew}}{\var{k0}}}-1=\var{p}$ \%
+          \end{question} 
+          
+     \end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

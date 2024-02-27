@@ -1,0 +1,27 @@
+%This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)
+%https://creativecommons.org/licenses/by/4.0/legalcode
+\documentclass[rgb]{standalone}
+\usepackage{tkz-euclide}
+\definecolor{myorange}{hsb}{0.0833, 1, 0.8}
+\definecolor{mygreen}{hsb}{0.3333, 1, 0.8}
+\definecolor{myblue}{hsb}{0.5833, 1, 0.8}
+\definecolor{mymagenta}{hsb}{0.8333, 1, 0.8}
+\begin{document}
+	\begin{tikzpicture}[scale=1.5, font=\Large]
+		% Coordinate system
+		\tkzInit[xmin=-4,xmax=4,ymin=-2,ymax=2]
+		\tkzGrid[color=lightgray]
+		\tkzDrawX[thick]
+		\tkzDrawY[thick]
+		\draw[very thick,domain=-360:360, smooth, samples=500, variable=\x,myblue] plot ({\x/90}, {cos(\x)});
+		\draw[very thick,domain=-360:360, smooth, samples=500, variable=\x,myorange] plot ({\x/90}, {sin(\x)});
+		\node[below] at (1,0){$\frac{\pi}{2}$};	
+		\node[below] at (3,0){$\frac{3\pi}{2}$};
+		\node[below] at (-1,0){$-\frac{\pi}{2}$};	
+		\node[below] at (-3,0){$-\frac{3\pi}{2}$};
+		\node[left] at (0,1){$1$};
+		\node[left] at (0,-1){$-1$};
+		\node[left,myblue] at (-0.35,1){$y=\cos(x)$};
+		\node[right,myorange] at (1.35,1){$y=\sin(x)$};
+	\end{tikzpicture}	
+\end{document}

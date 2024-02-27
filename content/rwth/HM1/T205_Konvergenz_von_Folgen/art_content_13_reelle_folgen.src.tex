@@ -1,0 +1,466 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Reelle Folgen}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T205_Inventory.meta.xml}{T205_Inventory}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_blau.meta.xml}{00_Videobutton_blau}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+%\component{generic_image}{content/rwth/HM1/T205_Konvergenz_von_Folgen/Audios/g_img_Button_schwarz.meta.xml}{Button_schwarz}
+%\component{generic_image}{content/rwth/HM1/T205_Konvergenz_von_Folgen/Audios/g_img_Button_3.meta.xml}{Button_3}
+%\component{generic_image}{content/rwth/HM1/T205_Konvergenz_von_Folgen/Audios/g_img_Button_2.meta.xml}{Button_2}
+%\component{generic_image}{content/rwth/HM1/T205_Konvergenz_von_Folgen/Audios/g_img_Button_1.meta.xml}{Button_1}
+%\component{generic_sound}{content/rwth/HM1/T205_Konvergenz_von_Folgen/Audios/g_snd_Folgendefinition_Kurztest_neu.meta.xml}{Folgendefinition_Kurztest_neu}
+%\component{generic_sound}{content/rwth/HM1/T205_Konvergenz_von_Folgen/Audios/g_snd_Folgendefinition_Beispiel_2_neu.meta.xml}{Folgendefinition_Beispiel_2_neu}
+%\component{generic_sound}{content/rwth/HM1/T205_Konvergenz_von_Folgen/Audios/g_snd_Folgendefinition_Beispiel_1_neu.meta.xml}{Folgendefinition_Beispiel_1_neu}
+%\component{generic_sound}{content/rwth/HM1/T205_Konvergenz_von_Folgen/Audios/g_snd_Folgendefinition_Bemerkung_neu.meta.xml}{Folgendefinition_Bemerkung_neu}
+%\component{generic_sound}{content/rwth/HM1/T205_Konvergenz_von_Folgen/Audios/g_snd_Folgendefinition_neu.meta.xml}{Folgendefinition_neu}
+%\component{generic_sound}{content/rwth/HM1/T205_Konvergenz_von_Folgen/Audios/g_snd_Test_1.meta.xml}{Test_1}
+\end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T208_Reihen/g_art_content_24_reihen_und_konvergenz.meta.xml}{content_24_reihen_und_konvergenz}
+\link{generic_article}{content/rwth/HM1/T204_Abbildungen_und_Funktionen/g_art_content_12_reelle_funktionen_monotonie.meta.xml}{content_12_reelle_funktionen_monotonie}
+\link{generic_article}{content/rwth/HM1/T303_Approximationen/g_art_content_05_newtonverfahren.meta.xml}{content_05_newtonverfahren}
+\link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_13_reelle_folgen.meta.xml}{content_13_reelle_folgen}
+\end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{5}
+\ombarticle{1}
+
+\lang{de}{\title{Reelle Folgen}}
+ 
+\begin{block}[annotation]
+  
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9655}{Ticket 9655}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+\begin{example}
+  \begin{tabs*}[\initialtab{0}]
+    \tab{Lagerhaltung 1a}
+  Ein Logistikunternehmen lagert unzählige Materilaien und Stoffe in seinen Hallen und auf dem
+  Außengelände der Firma. Dabei führen sie digital ausführlich Buch darüber, wo genau welche und wie viele 
+  Materialien gelagert werden. Intern bezeichnet das Unternehmen diesen Vorgang als Lagerhaltung.\\
+  
+ In den nächsten Tagen soll ihr Bestand erweitert werden, weshalb das Unternehmen eine große
+ Warenanlieferung eines Produkts erwartet. Dafür muss eine neue Lagerstätte vorbereitet werden.
+ Die zuständigen Mitarbeiter fertigen große Regalsysteme, die bei Bedarf nach oben hin um weitere
+ Fächer ausgebaut werden können. Die weitere Planung beschränkt sich auf eines dieser Regalsysteme 
+ - wie nachfolgend dargestellt.
+ 
+\begin{center}
+\image{T205_Inventory}
+\end{center}
+
+Aus der Masse eines jeden Kartons, der in das Regalsystem eingelagert werden soll, ermitteln die Mitarbeiter
+die höchstzulässige Lagermenge an Kartons für das unterste Fach: $1024$ Stück. Sie entscheiden sich dafür, 
+in ein jeweils darüber liegendes Fach $50$ Kartons weniger einräumen zu wollen als in das darunter liegende Fach.
+Denn es ist bekannt, dass jeweils die Gesamtmasse aller Fächer, die über einem Fach liegen, auf die Stabilität des
+Fachs einwirken. In das System zur Lagerhaltung notieren sie folgendes:\\
+
+ Lagerstätte: Außenbereich, $C3$, Regalsystem $A10$:
+    \begin{itemize}
+        \item Fach Nummer 0: Produkt $A$, $1024$ Stück
+        \item Fach Nummer 1: Produkt $A$, $974$ Stück
+        \item Fach Nummer 2: Produkt $A$, $924$ Stück
+        \item Fach Nummer 3: Produkt $A$, $874$ Stück
+    \end{itemize}
+
+Wir sehen hier also eine Durchnummerierung der Fächer, wobei jedem Fach mit der Nummer $n$ eine bestimmte
+Anzahl an Produkten der Sorte $A$ in Abhängigkeit der Fachnummer $n$ zugeordnet wird. In diesem Sinne kann
+sofort die Anzahl an Produkten in einem bestimmten Fach ermittelt werden.\\\\
+Steht $A(n)$ für die Anzahl an Produkten in Fach $n$, so erhalten wir sofort die Anzahl der Produkte durch die folgende
+Berechnungsformel:\\\\
+$\quad\quad\quad\quad\quad\quad\quad\quad A(n)=1024-50\cdot n$\\\\
+Die Aufstellung derartiger Zuordnungen geschieht mit Hilfe von (arithmetischen) \notion{Folgen}.
+
+ \tab{Lagerhaltung 1b}
+ 
+ Kurz vor der Warenanlieferung bekommt das Unternehmen eine unangekündigte Kontrolle durch einen Gutachter.
+ Dieser schaut sich das neue Regalsystem an und bemängelt folgendes:\\
+ 
+ "Bei dieser Art Regalsystem, darf die Gesamtmasse der eingelagerten Produkte aller Fächer, die über
+ einem bestimmten Fach liegen, die Masse der eingelagerten Produkte dieses (unteren) Fachs nicht überschreiten."\\
+ 
+ Der zuständige Mitarbeiter schlägt daraufhin vor, ein jedes Fach mit der halben Masse des darunter liegenden Fachs
+ zu füllen. Dadurch kommt er zu folgender Lagerhaltung:\\
+ 
+  Lagerstätte: Außenbereich, $C3$, Regalsystem $A10$:
+    \begin{itemize}
+        \item Fach Nummer 0: Produkt $A$, $1024$ Stück
+        \item Fach Nummer 1: Produkt $A$, $512$ Stück
+        \item Fach Nummer 2: Produkt $A$, $256$ Stück
+        \item Fach Nummer 3: Produkt $A$, $128$ Stück
+    \end{itemize}
+ 
+Auch hier findet eine Durchnummerierung der Fächer statt, wobei jedem Fach mit der Nummer $n$ eine bestimmte
+Anzahl an Produkten der Sorte $A$ in Abhängigkeit der Fachnummer $n$ zugeordnet wird.\\\\
+Steht $A(n)$ für die Anzahl an Produkten in Fach $n$, so erhalten wir sofort die Anzahl der Produkte durch die folgende
+Berechnungsformel:\\\\
+$\quad\quad\quad\quad\quad\quad\quad\quad A(n)=1024\cdot (\frac{1}{2})^n$\\\\
+Die Aufstellung derartiger Zuordnungen geschieht mit Hilfe von \notion{geometrischen Folgen}.\\
+
+Die Antwort auf die Frage, ob der Vorschlag des Mitarbeiters ausreicht, um die Vorschriften des Gutachters 
+einhalten zu können, wird im Kapitel \ref[content_24_reihen_und_konvergenz][Reihen]{def:reihe} beantwortet.
+
+    \end{tabs*}
+\end{example}
+
+
+In diesem Themenblock befassen wir uns mit reellen Folgen. 
+Folgen sind für die Anwendung wichtig, insbesondere wenn es darum geht, sukzessive bessere Näherungswerte (z. B. für die Lösung einer Gleichung) zu bestimmen.
+Wir werden sie aber auch benötigen, um die Begriffe "Stetigkeit" und "Differenzierbarkeit" definieren zu können.
+
+\section{Folgen und ihre Wertemengen}
+
+\begin{definition}
+%\audio[1,0.5,0.8,1.25,1.5]{Folgendefinition_neu}\\
+Eine reelle (oder reellwertige) \notion{Folge} ist eine reelle Funktion mit Definitionsbereich $\N$.\\
+Statt $a:\N\to \R,n\mapsto a(n)$ bezeichnet man eine solche Folge üblicherweise mit 
+\[ (a_n)_{n \in \N}, \] 
+wobei $a_n:=a(n)$ der Funktionswert an der Stelle $n$ ist. Man nennt $a_n$ auch \notion{n-tes
+Folgeglied} der Folge $(a_n)_{n \in \N}$.\\
+
+Die \notion{Wertemenge} einer Folge $(a_n)_{n \in \N}$ ist die Wertemenge als Funktion,
+d.h. die Menge $\{ a_n | n \in \N\}$.\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=300}{\image[75]{00_Videobutton_schwarz}}}\\\\
+\end{definition}
+
+Da wir in diesem Themenblock nur reelle Folgen behandeln, werden wir oft das Wort \emph{reell} weglassen
+und nur von \emph{Folgen} reden, auch wenn \emph{reelle Folgen} gemeint sind.
+
+\begin{remark}
+%\audio[1,0.5,0.8,1.25,1.5]{Folgendefinition_Bemerkung_neu}\\
+\begin{enumerate}
+\item Oft wird als Folge auch allgemeiner eine reelle Funktion bezeichnet, deren Definitionsbereich
+eine Menge $\{n\in \Z | n\geq n_0\}$ ist für eine feste ganze Zahl $n_0$. Insbesondere
+taucht oft als Definitionsmenge bzw. in der üblichen Schreibweise als Indexmenge die Menge $\Nzero$
+auf.
+\item Für den Index kann eine beliebige Variable verwendet werden. 
+\[ (a_n)_{n\in \N},\quad  (a_k)_{k\in \N}\quad \text{und} \quad (a_l)_{l\in \N} \]
+bezeichnen also dieselbe Folge.
+\item Andere Bezeichnungen für eine Folge $(a_n)_{n\in \N}$ sind auch $(a_n)_{n\geq 1}$
+oder $(a_n)_{n=1}^\infty$.
+\end{enumerate}
+\end{remark}
+
+Es gibt im Wesentlichen zwei Weisen, in denen Folgen beschrieben werden: Zum einen
+durch eine \notion{explizite Formel} für $a_n$ in Abhängigkeit von $n$, oder zum anderen
+\notion{rekursiv}, d.h. "`ein paar"' Folgeglieder werden explizit angegeben, und das
+allgemeine Folgeglied $a_n$ wird ausgedrückt durch $n$ und Folgeglieder $a_k$ mit $k<n$
+ (s. Beispiele).
+
+\begin{example}\label{ex:22}
+%\href{https://www.hm-kompakt.de/video?watch=300}{\image[75]{Button_schwarz}}\\
+%\audio[1,0.5,0.8,1.25,1.5]{Folgendefinition_Beispiel_1_neu}\\
+Beispiele mit expliziten Formeln:
+\begin{enumerate}
+\item \emph{Konstante Folgen:} Für $c\in \R$ ist die Folge $(a_n)_{n\in \N}$ mit $a_n=c$ für alle $n$
+eine sogenannte konstante Folge. Die Wertemenge ist lediglich $\{c\}$.
+\item $(a_n)_{n\in \N}=((-1)^n)_{n\in \N}$, d.h. $a_n=(-1)^n$ für alle $n\in \N$ ist eine Folge
+mit Wertemenge $\{-1;1\}$. Diese Folge lässt sich auch beschreiben durch
+\[ a_n= \begin{cases} 1, & \text{falls }n \text{ gerade} \\ 
+-1, & \text{falls }n \text{ ungerade}.\end{cases}\]
+\item Durch
+\[ a_n= \begin{cases} \frac{n}{2}, &\text{falls } n \text{ gerade} \\ 
+\frac{1-n}{2} &\text{falls } n, \text{ ungerade}\end{cases}\]
+wird eine Folge $(a_n)_{n\geq 1}$ mit Wertemenge $\Z$ definiert.
+\item \emph{Arithmetische Folgen:} Für $c,d\in \R$ nennt man die Folge $(a_n)_{n\geq 0}$ mit
+\[  a_n=c+nd \quad \text{für alle } n\in \Nzero \]
+eine \emph{arithmetische Folge}. Arithmetische Folgen sind dadurch gekennzeichnet, dass die Differenz
+aufeinanderfolgender Folgenglieder stets dieselbe ist, hier $a_{n+1}-a_n=d$ für alle $n\in \Nzero$.\\
+Konstante Folgen sind spezielle arithmetische Folgen mit $d=0$.
+\item \emph{Geometrische Folgen:} Für $u,q\in \R^*$ nennt man die Folge $(a_n)_{n\geq 0}$ mit
+\[  a_n=u\cdot q^n \quad \text{für alle } n\in \Nzero \]
+eine \emph{geometrische Folge}. Geometrische Folgen sind dadurch gekennzeichnet, dass der Quotient
+aufeinanderfolgender Folgenglieder stets derselbe ist, hier $\frac{a_{n+1}}{a_n}=q$ für alle $n\in \Nzero$.\\
+Konstante Folgen sind spezielle geometrische Folgen mit $q=1$.
+\end{enumerate}
+\end{example}
+
+Bevor rekursiv definierte Folgen vorgestellt werden, kann sich ein Video angeschaut werden, dass die bisherige
+ Definition einer Folge und zwei einfache Beispiele noch einmal näher erläutert:\\
+ \floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11265&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}\\\\
+
+\begin{example}\label{ex:33}
+%\audio[1,0.5,0.8,1.25,1.5]{Folgendefinition_Beispiel_2_neu}\\
+Beispiele mit rekursiven Definitionen:
+\begin{enumerate}
+\item \label{ex:sqrt-2} Die Folge $(a_n)_{n\geq 1}$ mit $a_1=2$ und für 
+alle $n\in\mathbb{N}$ gelte $a_{n+1}=\frac{a_n}{2}+\frac{1}{a_n}$ ist eine rekursiv definierte Folge.\\\\
+Die ersten Folgeglieder sind also $a_1=2$, sowie
+\begin{align*} a_2 &= \frac{a_1}{2}+\frac{1}{a_1} &=\frac{2}{2}+\frac{1}{2} &=\frac{3}{2} &=1,5\, , \\
+a_3 &= \frac{a_2}{2}+\frac{1}{a_2} &=\frac{3}{4}+\frac{2}{3}&=\frac{17}{12}&=1,41\bar{6}\, , \\
+a_4 &= \frac{a_3}{2}+\frac{1}{a_3}&=\frac{17}{24}+\frac{12}{17}&=\frac{577}{408} &\approx 1,4142157\, , \\
+a_5 &= \frac{a_4}{2}+\frac{1}{a_4}&=\frac{577}{816}+\frac{408}{577}
+&=\frac{665857}{470832} &\approx 1,414213562375\, .
+\end{align*}
+Diese Folge taucht beim \href{https://de.wikipedia.org/wiki/Heron-Verfahren}{Heron-Verfahren} zur
+näherungsweisen Berechnung von $\sqrt{2}\approx 1,414213562373$ auf. Das 
+\ref[content_05_newtonverfahren][Heron-Verfahren]{rem:heron-verfahren} stellt einen 
+Spezialfall des \ref[content_05_newtonverfahren][Newton-Verfahrens]{the:newton-verfahren} für $n=2$ dar.
+\item \label{ex:fibonacci} \emph{Fibonacci-Folge:} Die Definition $f_0 = f_1 = 1$ und
+\[f_{n+2} = f_{n+1} + f_n,\quad n \in \Nzero\]
+definiert eine Folge $(f_n)_{n\geq 0}$, die sogenannte \emph{Fibonacci-Folge}.
+Die ersten Folgeglieder sind also $f_0=1$ und $f_1=1$, sowie
+\begin{align*} f_2 &= f_1+f_0 &= 1+1 &= 2\, ,\\
+f_3 &= f_2+f_1 &= 2+1 &= 3\, ,\\
+f_4 &= f_3+f_2 &= 3+2 &= 5\, ,\\
+f_5 &= f_4+f_3 &= 5+3 &= 8\, .
+\end{align*}
+\item Arithmetische Folgen können auch rekursiv definiert werden durch
+$a_0=c$ und $a_{n+1}=a_n+d$ für alle $n\in \Nzero$, wobei wieder $c,d\in \R$ festgewählte Zahlen 
+sind.\\
+Ebenso kann für $u,q\in \R^*$ die geometrische Folge $(a_n)_{n\geq 0}=(uq^n)_{n\geq 0}$ 
+rekursiv definiert werden durch $a_0=u$ und $a_{n+1}=qa_n$.
+\end{enumerate}
+\end{example}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{1}
+\begin{quickcheck}
+\type{input.number}
+		\field{rational}
+            
+       	\begin{variables}
+			\randint{x2}{2}{4}	
+            \randint{a}{1}{4}   						
+			\function[normalize]{afo}{(1/x2)^n}
+            \function[normalize]{loes0}{1*a}
+            \function[normalize]{loes1}{a+1/x2}
+            \function[normalize]{loes2}{a+1/x2+1/x2^2}
+                                         
+		\end{variables}
+	
+		\lang{de}{
+			\text{
+            %\audio[1,0.5,0.8,1.25,1.5]{Folgendefinition_Kurztest_neu}\\
+            Geben Sie die ersten drei Folgenglieder der rekursiven Folge 
+            $(a_n)_{n\in\N}$ mit $a_1=\var{a}$ und $a_{n+1}= a_n + \var{afo}$ für $n\geq 1$ an.
+		\\\\
+        Geben Sie die Werte exakt und so weit gekürzt wie möglich ein.\\\\
+        
+        Die ersten drei Folgenglieder lauten: $a_1=$\ansref, $a_2=$\ansref und $a_3=$\ansref.
+ 		}
+       		}
+		
+    	\begin{answer}
+		\solution{loes0}
+		\end{answer}
+            
+		\begin{answer}
+		\solution{loes1}
+		\end{answer}
+        
+        \begin{answer}
+		\solution{loes2}
+		\end{answer}
+     
+        \explanation{Verwenden Sie das jeweils zuvor berechnete Folgenglied, um das nächste Folgenglied zu bestimmen.} 
+	\end{quickcheck}
+\end{quickcheckcontainer}
+
+
+\section{Monotonie und Beschränktheit}
+
+Da reelle Folgen spezielle reelle Funktionen sind, können wir die Begriffe der Monotonie und Beschränktheit
+direkt auf Folgen übertragen.
+
+
+\begin{definition}\label{def:beschränkte_Folge}
+Eine Folge $(a_n)_{n\in \N}$ heißt \notion{nach oben beschränkt} bzw. \notion{nach unten beschränkt}
+bzw. \notion{beschränkt}, wenn ihre Wertemenge $\{ a_n | n\in \N\}$ nach oben beschränkt bzw. 
+nach unten beschränkt bzw. beschränkt ist.
+\end{definition}
+
+
+\begin{definition}\label{def:monotone_Folge}
+Eine Folge $(a_n)_{n\in \N}$ heißt \notion{monoton wachsend}, wenn $a_n\leq a_m$ für 
+alle $n,m\in \N$ mit $n\leq m$ gilt bzw. \notion{streng monoton wachsend}, wenn $a_n< a_m$ für 
+alle $n,m\in \N$ mit $n< m$ gilt.\\
+Sie heißt \notion{monoton fallend}, wenn $a_n\geq a_m$ für 
+alle $n,m\in \N$ mit $n\leq m$ gilt bzw. \notion{streng monoton fallend}, wenn $a_n> a_m$ für 
+alle $n,m\in \N$ mit $n< m$ gilt.
+\end{definition}
+
+\begin{remark}
+\begin{enumerate}
+\item Die Monotonie einer Folge $(a_n)_{n\in\N}$ ist gleichbedeutend mit der Monotonie der entsprechenden
+Funktion $a:\N\to \R,n\mapsto a(n)$ im Sinne der Definition der \ref[content_12_reelle_funktionen_monotonie][Monotonie einer Funktion]{Monotonie}.  
+\item Für die Monotonie von Folgen reicht es jeweils ein Folgeglied mit dem nächsten zu vergleichen.\\
+Eine Folge $(a_n)_{n\in \N}$ ist genau dann (streng) monoton wachsend, wenn $a_n\leq a_{n+1}$ (bzw.
+$a_n< a_{n+1}$) für alle $n\in \N$ gilt.\\
+Entsprechendes gilt für monoton fallende Folgen.
+\item Monoton wachsende Folgen sind stets nach unten beschränkt, denn das erste Folgeglied ist
+das kleinste Element der Wertemenge. Ebenso sind monoton fallende Folgen nach oben beschränkt,
+da das erste Folgeglied das größte Element der Wertemenge ist. 
+\item Eine Folge $(a_n)_{n\in\N}$ ist genau dann nach oben unbeschränkt, wenn es zu jedem $M>0$ ein
+$N\in\N$ gibt mit $a_N>M$. Analoges gilt für Unbeschränktheit nach unten.
+\end{enumerate}
+\end{remark}
+
+
+\begin{example}\label{ex:monotone-folgen}
+
+\begin{tabs*}[\initialtab{0}] 
+  
+\tab{\lang{de}{Monotonie}}
+\lang{de}{
+\begin{enumerate}
+\item Wie auch schon konstante Funktionen sind konstante Folgen sowohl monoton wachsend 
+als auch monoton fallend.
+\item Die Folge $(a_n)_{n\in \N}=((-1)^n)_{n\in \N}$ ist weder monoton wachsend noch monoton fallend, denn für
+alle geraden $n\in \N$ gilt $a_n=1>-1=a_{n+1}$ und für alle ungeraden $n\in \N$ gilt $a_n=-1<1=a_{n+1}$.
+\item \ref[content_13_reelle_folgen][Arithmetische Folgen]{ex:22} $(c+dn)_{n\geq 0}$ sind streng monoton wachsend, wenn $d>0$ ist, und streng monoton
+fallend, wenn $d<0$ ist, denn für alle $n\in \Nzero$ ist 
+\begin{align*} 
+a_{n+1} &=a_n+d >a_n,& \text{ falls } d>0\\ 
+a_{n+1} &=a_n+d <a_n,& \text{ falls } d<0.
+\end{align*}
+\item Bei \ref[content_13_reelle_folgen][geometrischen Folgen]{ex:22} $(a_n)_{n\geq 0}=(uq^n)_{n\geq 0}$ hängt die Monotonie sowohl von 
+$q$ als auch von $u$ ab.\\
+Ist $q<0$ so ist die Folge nicht monoton, denn die Folgeglieder sind abwechselnd positiv und
+negativ (vgl. 2.Beispiel, wo $u=1$ und $q=-1$ ist).
+Für $q>0$ haben alle $a_n$ das gleiche Vorzeichen wie $u$.\\
+Wegen $a_{n+1}=qa_n$ ist also die Frage, ob $qa_n$ größer oder kleiner als
+$a_n$ ist, was zum einen von der Größe von $q$ und vom Vorzeichen von $a_n$ abhängt, und man erhält
+folgende $5$ Fälle:
+\begin{itemize}
+\item $u>0$, $q>1$: Dann ist $a_n>0$ und $a_{n+1}=qa_n>a_n$ für alle $n\geq 0$. Also ist die 
+Folge streng monoton wachsend.
+\item $u>0$, $0<q<1$: Dann ist $a_n>0$ und $a_{n+1}=qa_n<a_n$ für alle $n\geq 0$. Also ist die 
+Folge streng monoton fallend.
+\item $u<0$, $q>1$: Dann ist $a_n<0$ und $a_{n+1}=qa_n<a_n$ für alle $n\geq 0$. Also ist die 
+Folge streng monoton fallend.
+\item $u<0$, $0<q<1$: Dann ist $a_n<0$ und $a_{n+1}=qa_n>a_n$ für alle $n\geq 0$. Also ist die 
+Folge streng monoton wachsend.
+\item  $q=1$: Dann ist die Folge konstant (s.o.).
+\end{itemize}
+\item Die Folge $(a_n)_{n\geq 1}$ mit $a_1=2$ und
+\[  a_{n+1}=\frac{a_n}{2}+\frac{1}{a_n}\quad \forall n\in \N. \]
+ist streng monoton fallend. Dies zeigt man mit vollständiger Induktion.
+\begin{incremental}
+\step Vielmehr zeigt man mit vollständiger Induktion für alle $n\in \N$ die Aussage:
+\[   A(n):\, 1< a_n\leq 2< a_n^2\text{ und } a_{n+1}<a_n. \]
+  \begin{enumerate}
+    \item[(IA)] $n=1$: Es ist $a_1=2$ und $a_2=\frac{3}{2}$. Also ist $1< a_1\leq 2< a_1^2$ erfüllt
+    und auch $a_2<a_1$.
+    \item[(IS)] $n\rightarrow n+1$: Man hat also die Induktionsvoraussetzung f"ur ein festes $n\in\N$:
+    \begin{center}(IV) $A(n):\, 1< a_n\leq 2< a_n^2\text{ und } a_{n+1}<a_n$.\end{center}
+    und muss f"ur dieses $n$ die Aussage 
+    \[ A(n+1): \, 1< a_{n+1}\leq 2< a_{n+1}^2\text{ und } a_{n+2}<a_{n+1}. \] zeigen:
+
+	Nach Definition ist $a_{n+1}=\frac{a_n}{2}+\frac{1}{a_n}=\frac{1}{2}\left( a_n+ \frac{2}{a_n}\right)$, d.h.
+	$a_{n+1}$ ist das arithmetische Mittel der Zahlen $a_n$ und $\frac{2}{a_n}$.
+	Nach Induktionsvoraussetzung ist $a_n\leq 2<a_n^2$ und daher $1\leq \frac{2}{a_n}<a_n$.\\
+	Da $a_{n+1}$ das arithmetische Mittel ist, ist $\frac{2}{a_n}<a_{n+1}<a_n$ und insbesondere
+	$1 < a_{n+1}\leq 2$. Außerdem ist das arithmetische Mittel verschiedener Zahlen strikt größer als
+	ihr geometrisches Mittel, weshalb außerdem
+	\[ a_{n+1}>\sqrt{a_n\cdot \frac{2}{a_n}} =\sqrt{2}, \]
+	d.h. $a_{n+1}^2>2$.\\
+	Schließlich folgt $a_{n+2}<a_{n+1}$ wieder aus der Tatsache, dass $\frac{2}{a_{n+1}}<a_{n+1}$ und dass
+	$a_{n+2}$ das arithmetische Mittel der beiden Zahlen ist.
+  \end{enumerate}
+
+\end{incremental}
+\item Die \lref{ex:fibonacci}{Fibonacci-Folge} $(f_n)_{n\geq 0}$ ist monoton wachsend, aber nicht streng monoton
+wachsend, denn $f_0=f_1$.\\ Betrachtet man jedoch nur die Folge $(f_n)_{n\geq 1}$ (lässt also
+$f_0$ weg), erhält man eine streng monoton wachsende Folge.\\
+\begin{incremental}
+\step Formal zeigt man dies mit vollständiger Induktion. Und zwar betrachte man für alle 
+$n\in \N$ die Aussage
+\[   A(n): \, f_{n-1}>0,\quad f_n>0 \text{ und } f_{n+1}>f_n.  \]
+  welche man mit vollständiger Induktion beweist:
+  \begin{enumerate}
+    \item[(IA)] $n=1$: Es ist $f_0=1>0$ und $f_1=1>0$, sowie $f_2=2>1=f_1$. Also ist $A(1)$ wahr.
+    \item[(IS)] $n\rightarrow n+1$: Man hat also die Induktionsvoraussetzung f"ur ein festes $n\in\N$:
+    \begin{center}(IV) $A(n):\, f_{n-1}>0,\quad f_n>0 \text{ und } f_{n+1}>f_n$\end{center}
+    und muss f"ur dieses $n$ die Aussage 
+    \[ A(n+1):f_{n}>0,\quad f_{n+1}>0 \text{ und } f_{n+2}>f_{n+1} \] zeigen:
+
+	$f_n>0$ ist nach Induktionsvoraussetzung wahr und ebenfalls nach Induktionsvoraussetzung
+	ist $f_{n+1}>f_n>0$. Schließlich ist
+	
+    \begin{align*}
+      f_{n+2} &= f_{n+1}+f_n &\quad \text{nach Definition der Folge} \\
+      &> f_{n+1}+0 &\quad \text{da }f_n>0. \\
+    \end{align*}
+  \end{enumerate}
+\end{incremental}
+\end{enumerate}
+}
+\tab{\lang{de}{Beschränktheit}}
+\lang{de}{
+\begin{enumerate}
+\item Die Folge $(a_n)_{n\in \N}=((-1)^n)_{n\in \N}$ hat als Wertemenge $\{-1;1\}$. Sie ist also beschränkt.
+\item \ref[content_13_reelle_folgen][Arithmetische Folgen]{ex:22} sind zwar monoton und daher in eine Richtung beschränkt, aber nicht in die andere. 
+\item Bei \ref[content_13_reelle_folgen][geometrischen Folgen]{ex:22} hängt die Frage nach der Beschränktheit von $u$ und $q$ ab. \\
+Ist $|q|\leq 1$ so ist die Folge beschränkt, denn $|a_n|=|uq^n|=|u|\cdot |q|^n \leq |u|$ für alle $n\in\Nzero$, 
+weshalb die Wertemenge durch $|u|$ beschränkt ist.\\
+Für $q>1$ ist die Folge zwar monoton, und daher in eine Richtung beschränkt, aber nicht in die andere. Und für $q<-1$
+ist die Folge weder nach oben noch nach unten beschränkt. 
+\item Für die Folge $(a_n)_{n\geq 1}$ mit $a_1=2$ und
+\[  a_{n+1}=\frac{a_n}{2}+\frac{1}{a_n}\quad \forall n\in \N \]
+hatten wir oben gezeigt, dass $1<a_n\leq 2$ für alle $n\in \N$ gilt. Diese Folge ist also beschränkt.
+\item Die \ref[content_13_reelle_folgen][Fibonacci-Folge]{ex:33} ist monoton wachsend und daher nach unten beschränkt. Sie ist jedoch nicht
+nach oben beschränkt. Vielmehr lässt sich leicht zeigen, dass $f_n\geq n$ für alle $n\in \N$ gilt.
+\end{enumerate}
+}
+\end{tabs*}
+\end{example}
+
+Im folgenden Video wird die Definition von Monotonie und Beschränktheit einer Folge noch einmal anhand von Beispielen erläutert:\\\\ 
+ \floatright{\href{https://www.hm-kompakt.de/video?watch=301}{\image[75]{00_Videobutton_schwarz}}}\\\\
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{1}
+\begin{quickcheck}
+\type{input.number}
+		\field{rational}
+            
+       	\begin{variables}
+			\randint{a}{2}{9} 						
+			\function[normalize]{loes0}{a+1}
+        \end{variables}
+	
+		\lang{de}{
+			\text{Gegeben sei die rekursive Folge $(a_n)_{n\in\N}$ mit $a_0=\var{a}$ sowie $a_{n+1}=a_n+\frac{1}{2^{n+1}}$ für 
+            $n\geq 1$. Geben sie die kleinstmögliche obere Schranke $c\in\N$ an, durch die die Folge $(a_n)_{n\in\N}$ nach oben beschränkt 
+            ist.\\\\
+            
+            Die kleinstmögliche natürliche Zahl $c$, durch die die Folge $(a_n)_{n\in\N}$ nach oben beschränkt ist, lautet $c=$\ansref.}}
+		
+    	\begin{answer}
+		\solution{loes0}
+		\end{answer}
+            
+		\explanation{Verwenden Sie das jeweils zuvor berechnete Folgenglied, um das nächste Folgenglied zu bestimmen und machen Sie
+        sich klar, wie das jeweils nächste Folgenglied rechnerisch zustande kommt.} 
+	\end{quickcheck}
+\end{quickcheckcontainer}
+
+
+\end{content}

@@ -1,0 +1,509 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Exponentialfunktion und Logarithmus}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T211_ExpLog.meta.xml}{T211_ExpLog}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T104_Logarithms_A.meta.xml}{T104_Logarithms_A}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T104_Exponentials_A.meta.xml}{T104_Exponentials_A}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T209_Exponential.meta.xml}{T209_Exponential}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T211_Eigenschaften_stetiger_Funktionen/g_art_content_34_exp_und_log.meta.xml}{content_34_exp_und_log}
+    \link{generic_article}{content/rwth/HM1/T204_Abbildungen_und_Funktionen/g_art_content_12_reelle_funktionen_monotonie.meta.xml}{content_12_reelle_funktionen_monotonie}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_15_monotone_konvergenz.meta.xml}{monot-konv}
+    \link{generic_article}{content/rwth/HM1/T210_Stetigkeit/g_art_content_30_elem_funktionen.meta.xml}{elem-funk}
+    \link{generic_article}{content/rwth/HM1/T211_Eigenschaften_stetiger_Funktionen/g_art_content_33_zwischenwertsatz.meta.xml}{zwischenwertsatz}
+    \link{generic_article}{content/rwth/HM1/T209_Potenzreihen/g_art_content_28_exponentialreihe.meta.xml}{exp}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{11}
+\ombarticle{2}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\lang{de}{\title{Exponentialfunktion und Logarithmus}}
+ 
+\begin{block}[annotation]
+  
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9794}{Ticket 9794}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{Exponentialfunktion}
+
+Im Abschnitt \link{exp}{Exponentialreihe} haben wir schon die Exponentialfunktion $\exp$
+durch ihre Reihendarstellung kennengelernt:
+
+\[ \exp(z)= \sum_{n=0}^\infty \frac{z^n}{n!} \]
+für alle $z\in \C$. Im Folgenden betrachten wir jedoch nur die reelle Exponentialfunktion, d.\,h.
+die auf die reellen Zahlen eingeschränkte Funktion
+\[ \exp:\R\to \R, \ x\mapsto \sum_{n=0}^\infty \frac{x^n}{n!}. \]
+
+Die Exponentialfunktion erfüllt drei ganz wichtige Eigenschaften, die diese auch eindeutig charakterisieren.
+Das heißt, die Exponentialfunktion ist die einzige Funktion, die alle der drei folgenden 
+Eigenschaften erfüllt:
+
+\begin{enumerate}
+\item Sie ist eine auf ganz $\R$ definierte stetige Funktion,
+\item für alle $x,y\in \R$ gilt $\exp(x+y)=\exp(x)\exp(y)$,
+\item es ist $\exp(1)=e$, wobei $e$ die \ref[monot-konv][Eulersche Zahl]{sec:eulersche-zahl} $e\approx 2,71828$ bezeichnet.
+\end{enumerate}
+(Vgl. die Abschnitte \link{exp}{Exponentialreihe} und \ref[elem-funk][Stetigkeit elementarer Funktionen]{sec:potenzreihen}.)
+
+Aus diesen Eigenschaften haben wir noch viele weitere Eigenschaften hergeleitet:
+
+\begin{rule}\label{rule:exp-auf-q}
+\begin{enumerate}
+\item Für alle rationalen Zahlen $x\in \Q$ ist
+\[  \exp(x) = e^x \]
+mit der \ref[monot-konv][Eulerschen Zahl]{sec:eulersche-zahl} $e\approx 2,71828$,
+weshalb wir auch für reelle Zahlen $x$ oft $e^x$ statt $\exp(x)$ schreiben.
+\item Es gilt $\exp(x)>0$ und $\exp(-x)=\frac{1}{\exp(x)}$ bzw. $e^{-x}=\frac{1}{e^x}$ für alle $x\in \R$.
+\item Es gilt $\exp(rx)=\exp(x)^r$ bzw. $e^{rx}=(e^x)^r$ für alle $r\in \Q$ und $x\in \R$.
+\end{enumerate}
+\end{rule}
+
+Die Exponentialfunktion erfüllt jedoch noch viele weitere Eigenschaften.
+
+\begin{rule}
+Es gelten weiter:
+\begin{enumerate}
+\item Die Exponentialfunktion $\exp$ ist streng monoton wachsend.
+\item Es gilt $\lim_{x\to \infty} \exp(x)= \infty$.
+\item Es gilt $\lim_{x\to -\infty} \exp(x)= 0$.
+\end{enumerate}
+\end{rule}
+
+
+\begin{proof*}
+\begin{incremental}
+\step
+Aus der Reihendarstellung sieht man direkt für $h>0$:
+\[ \exp(h)= \sum_{n=0}^\infty \frac{h^n}{n!} >1. \]
+Es seien nun $x,y\in \R$ mit $x<y$ und $h=y-x>0$. Dann gilt
+\[ \exp(y)=\exp(x+h)=\exp(x)\cdot \exp(h)>\exp(x). \]
+Also ist die Exponentialfunktion streng monoton wachsend.
+\step
+Aus der Reihendarstellung sieht man direkt $\exp(x)\geq x$ für alle $x>0$.
+Da $\lim_{x\to \infty} x=\infty$, ist somit auch $\lim_{x\to \infty} \exp(x)= \infty$.
+\step
+Aus der vorigen Aussage folgt
+\[ \lim_{x\to -\infty} \exp(x)=\lim_{x\to -\infty} \frac{1}{\exp(-x)}=\lim_{y\to \infty}  \frac{1}{\exp(y)}=0. \]
+\end{incremental}
+\end{proof*}
+
+\begin{center}
+\image{T209_Exponential}
+\end{center}
+
+Aus obigen Eigenschaften folgt:
+
+\begin{theorem}\label{thm:eigenschaften_exp}
+Die Exponentialfunktion $\exp:\R\to \R$ ist stetig, streng monoton wachsend und bildet $\R$ bijektiv
+auf das Intervall $\R_{+}=(0;\infty)$ ab.
+\end{theorem}
+
+
+\begin{proof*}
+\begin{incremental}
+\step
+Es muss nur noch gezeigt werden, dass die Wertemenge von $\exp$ das Intervall $(0;\infty)$ ist. Für jedes abgeschlossene endliche Intervall $[a;b]$ ist nach dem \ref[zwischenwertsatz][Zwischenwertsatz]{thm:zwischenwertsatz} die Bildmenge $\exp([a;b])$ ein Intervall $[m;M]$, wobei
+$m$ das Minimum der Funktionswerte und $M$ das Maximum der Funktionswerte ist. Da die Funktion
+$\exp$ streng monoton wachsend ist, ist das Minimum genau $f(a)$ und das Maximum genau $f(b)$,
+also $\exp([a;b])=[\exp(a);\exp(b)]$.
+Damit ist dann aber die Wertemenge von $\exp$ genau die Vereinigung aller dieser Mengen, d.\,h.
+$W_{\exp}=(s;S)$ mit
+\[ s=\inf W_{\exp}= \lim_{x\to -\infty} \exp(x)=0 \]
+und
+\[ S=\sup W_{\exp}= \lim_{x\to \infty} \exp(x)=\infty. \]
+Also ist $W_{\exp}=(0;\infty)$.
+\end{incremental}
+\end{proof*}
+
+Für das asymptotische Grenzverhalten gelten sogar stärkere Aussagen:
+
+\begin{theorem}\label{thm:exp_asymptotik}
+Für jedes $n\in \Nzero$ ist
+\begin{enumerate}
+\item $\lim_{x\to \infty} \frac{x^n}{\exp(x)}=0$ (die Exponentialfunktion wächst stärker als jede Potenz),
+\item $\lim_{x\to -\infty} x^n\cdot \exp(x)=0$.
+\end{enumerate}
+\end{theorem}
+
+
+\begin{proof*}
+\begin{incremental}
+\step
+
+Der zweite Teil folgt aus dem ersten durch Setzen von $y=-x$ und $\exp(x)=\frac{1}{\exp(y)}$.
+Um den ersten Teil einzusehen, bemerkt man aus der Reihendarstellung zunächst, dass für $x\geq 0$ die Abschätzung 
+\[ \exp(x)\geq \frac{x^{n+1}}{(n+1)!} \]
+gilt. Damit gilt auch
+\[  \frac{x^n}{\exp(x)}\leq \frac{(n+1)!}{x} \quad \text{für alle }x\geq 0 \]
+und daher
+\[ 0\leq \lim_{x\to \infty} \frac{x^n}{\exp(x)} \leq \lim_{x\to \infty}\frac{(n+1)!}{x} =0.\]
+
+\end{incremental}
+\end{proof*}
+
+
+ 	\begin{genericGWTVisualization}[550][1000]{mathlet1}
+ 		\begin{variables}
+			\function{f}{real}{exp(x)} 			
+ 			\function[editable]{g}{real}{x^4}
+			\function{h}{real}{var(g)/var(f)}
+%			\function{h}{real}{x^5/exp(x)}
+ 		\end{variables}
+ 		\color{g}{#0066CC}
+ 		\color{h}{#00CC00}
+ 
+ 		\begin{canvas}
+ 			\plotSize{400,300}
+ 			\plotLeft{-0.3}
+ 			\plotRight{13}
+ 			\plot[coordinateSystem]{f,g,h}
+ 		\end{canvas}
+ 		\text{Die schwarze Kurve ist der Graph der Funktion $f(x)=e^x$, die blaue Kurve der Graph
+ 		von $g(x)=$\var{g}, und die grüne Kurve der Graph von $h(x)=\frac{g(x)}{f(x)}=\var{h}$.\\
+ 		Sie können die Funktion $g$ verändern.}
+ 	    	\end{genericGWTVisualization}
+
+
+\section{Der natürliche Logarithmus}
+
+Da die Exponentialfunktion $\exp$ eine streng monoton wachsende (und daher injektive) Funktion ist, 
+besitzt sie eine (partielle) Umkehrfunktion. Ihr Definitionsbereich ist dann die Wertemenge von $\exp$, 
+also $(0;\infty)$, und ihre Wertemenge ist der Definitionsbereich von $\exp$, also $\R$. Außerdem ist auch 
+die Umkehrfunktion \ref[content_12_reelle_funktionen_monotonie][wieder streng monoton wachsend]{thm:inversmonoton}.
+Diese Umkehrfunktion wird der \emph{natürliche Logarithmus} genannt.
+
+\begin{definition}
+Die Umkehrfunktion zu $\exp : \R \to ( 0; \infty )$ heißt \notion{(natürlicher) Logarithmus}
+und wird mit $\ln$ (oder manchmal auch $\log$) bezeichnet:
+
+\[  \ln: ( 0; \infty )\to  \R, \ x\mapsto \ln(x). \]
+\end{definition}
+
+Das folgende Video geht ausführlich auf die Umkehrfunktion ein und bespricht kurz die Beispiele $f(x)=e^x$ sowie $f(x)=x^2$.
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10920&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+
+
+	\begin{genericGWTVisualization}[550][1000]{mathlet1}
+ 		\begin{variables}
+			\function{f}{real}{exp(x)} 			
+ 			\function{g}{real}{ln(x)}
+			\function{h}{real}{x}
+%			\function{h}{real}{x^5/exp(x)}
+ 		\end{variables}
+ 		\color{g}{#0066CC}
+ 		\color{f}{#00CC00}
+		\color{h}{LIGHT_GRAY}
+ 
+ 		\begin{canvas}
+ 			\plotSize{300}
+ 			\plotLeft{-3}
+ 			\plotRight{13}
+ 			\plot[coordinateSystem]{f,g,h}
+ 		\end{canvas}
+ 		\text{Die grüne Kurve ist der Graph der Funktion \textcolor{green}{$f(x)=e^x$} und die blaue 
+ 		Kurve der Graph
+ 		der Umkehrfunktion \textcolor{blue}{$g(x)=\ln(x)$.} Wie stets bei Umkehrfunktionen erhält man 
+ 		den Graphen von \textcolor{blue}{$\ln(x)$},
+ 		indem man den Graphen von \textcolor{green}{$e^x$} an der Winkelhalbierenden $y=x$ 
+ 		(grau eingezeichnet) spiegelt.
+ 		}
+ 	    	\end{genericGWTVisualization}
+
+Aus der Definition als Umkehrfunktion folgt direkt (mit der Schreibweise $e^x$ statt $\exp(x)$ und dem 
+\ref[content_34_exp_und_log][Satz von der stetigen Umkehrfunktion auf Intervallen]{thm:inverse-stetig}):
+
+\begin{rule}
+Es gelten 
+\begin{enumerate}
+\item $ \ \ln(e^x)=x$ für alle $x\in \R$,
+\item $ \ e^{\ln(x)}=x$ für alle $x\in (0;\infty)$.
+\item $ \ \ln$ ist eine stetige Funktion.
+\end{enumerate}
+\end{rule}
+
+Damit erhält man aus den Regeln für die Exponentialfunktion auch viele Eigenschaften des Logarithmus:
+
+\begin{rule}\label{rule:ln}
+Der natürliche Logarithmus $ \ln: ( 0; \infty )\to  \R$ besitzt die folgenden Eigenschaften:
+\begin{enumerate}
+\item $ \ \ln(1)=0$ und $\ln(e)=1$,
+\item $ \ \ln(xy)=\ln(x)+\ln(y)$ für alle $x,y>0$,
+\item $ \ \ln(\frac{1}{x})=-\ln(x)$ für alle $x>0$,
+\item $ \ \ln(x^r)=r\cdot \ln(x)$ für alle $x>0$ und $r\in \Q$,
+\item $ \ \lim_{x\to \infty} \ln(x)=\infty$,
+\item $ \ \lim_{x \searrow 0} \ln(x)=-\infty$,
+\item $ \ \lim_{x\to \infty} \frac{\ln(x)}{\sqrt[n]{x}}=0$ für alle $n\in \N$ (Logarithmus wächst langsamer als jede Potenz/Wurzel von $x$).
+\end{enumerate}
+\end{rule}
+
+\begin{proof*}
+Da die Exponentialfunktion injektiv ist, sind die jeweiligen Seiten der Gleichungen 1.-4. 
+genau dann gleich, wenn ihre Bilder unter der Exponentialfunktion gleich sind.
+\begin{incremental}
+\step
+Zu 1. ist 
+\[ e^{\ln(1)}=1 =e^0\quad \text{und}\quad e^{\ln(e)}=e=e^1, \]
+und daher $\ln(1)=0$ und $\ln(e)=1$.
+\step
+Zu 2. ist für alle $x,y>0$
+\[  e^{\ln(x)+\ln(y)}=e^{\ln(x)}\cdot e^{\ln(y)}=xy=e^{\ln(xy)}.\]
+Also gilt $\ln(x)+\ln(y)=\ln(xy)$.
+\step
+Ebenso folgen $\ln(\frac{1}{x})=-\ln(x)$ und $\ln(x^r)=r\cdot \ln(x)$ aus
+\[ e^{-\ln(x)}=\frac{1}{e^{\ln(x)}} =   \frac{1}{x} =e^{\ln(\frac{1}{x})} \]
+bzw.
+\[  e^{r\cdot \ln(x)}=\left( e^{\ln(x)}\right)^r=x^r=e^{\ln(x^r)}. \]
+Da der natürliche Logarithmus stetig und streng monoton steigend mit Wertebereich ganz $\R$ ist (der Definitionsbereich von $\exp$),
+folgt direkt $\lim_{x \to \infty} \ln(x)=\infty$ und $\lim_{x \searrow 0} \ln(x)=-\infty$.
+\step
+Für den letzten Grenzwert bemerken wir zunächst: Ist $x> 0$, so setzen wir $z=\sqrt[2n]{x}>0$ und 
+erhalten aus obigen Abschätzungen für die Exponentialfunktion
+\[  \sqrt[2n]{x}=z\leq e^z=e^{\sqrt[2n]{x}}. \]
+\step
+Da der Logaritmus streng monoton wachsend ist, gilt somit
+\[ \frac{1}{2n} \ln(x) =  \ln(\sqrt[2n]{x})\leq \ln(e^{\sqrt[2n]{x}})=\sqrt[2n]{x} \quad \text{für alle }x>0. \]
+Dies können wir umformen zu 
+\[
+\frac{\ln(x)}{\sqrt[2n]{x}} \leq 2n . 
+\]
+Damit gilt
+\[ \lim_{x\to \infty} \frac{\ln(x)}{\sqrt[n]{x}}=\lim_{x\to \infty}  \frac{\ln(x)}{(\sqrt[2n]{x})^2}
+=\lim_{x\to \infty}  \frac{\ln(x)}{\sqrt[2n]{x}}\cdot  \frac{1}{\sqrt[2n]{x}} =0,\]
+da $\frac{\ln(x)}{\sqrt[2n]{x}}$ beschränkt und $\lim_{x\to \infty} \frac{1}{\sqrt[2n]{x}} =0$ ist.
+
+\end{incremental}
+\end{proof*}
+
+
+
+%  	\begin{genericGWTVisualization}[550][1000]{mathlet1}
+%  		\begin{variables}
+% 			\function{f}{real}{ln(x)} 			
+%  			\function[editable]{g}{rational}{x^(1/4)}
+% 			\function{h}{rational}{var(f)/var(g)}
+%  		\end{variables}
+%  		\color{g}{BLUE}
+%  		\color{h}{GREEN}
+%  
+%  		\begin{canvas}
+%  			\plotSize{400,300}
+%  			\plotLeft{-0.3}
+%  			\plotRight{13}
+%  			\plot[coordinateSystem]{f,g,h}
+%  		\end{canvas}
+%  		\text{Die schwarze Kurve ist der Graph der Funktion $f(x)=\ln(x)$, die blaue Kurve der Graph
+%  		von $g(x)=$\var{g}, und die grüne Kurve der Graph von $h(x)=\frac{f(x)}{g(x)}=\var{h}$.\\
+%  		Sie können die Funktion $g$ verändern.}
+%  	    	\end{genericGWTVisualization}
+
+
+\section{Exponentialfunktion und Logarithmus zu anderen Basen}
+
+Mit Hilfe der Exponentialfunktion und des Logarithmus können wir auch allgemeine Potenzen $a^b$ mit $a>0$ und $b\in \R$ definieren.
+
+\begin{definition}
+Für reelle Zahlen $a,b$ mit $a>0$  definieren wir die Potenz $a^b$ als
+\[   a^b=e^{b\ln(a)}=\exp(b\ln(a)). \]
+\end{definition}
+
+\begin{remark}
+\begin{enumerate}
+\item Für rationale Zahlen $b=\frac{p}{q}$ stimmt diese Definition aufgrund der 
+\lref{rule:exp-auf-q}{obigen Regeln} mit der üblichen überein, d.\,h. es
+ist  \[  a^b =\sqrt[q]{a^p} .\]
+\item Durch Anwenden des natürlichen Logarithmus auf die Definition von $a^b$ erhält man für alle 
+$a>0$ und $b\in \R$
+\[   \ln(a^b)=b\cdot \ln(a). \]
+\end{enumerate}
+\end{remark}
+
+\begin{definition}[\lang{de}{Exponentialfunktion}\lang{en}{The Exponential Function}]
+   Für $a\in \R$ mit $a>0$ heißt die Funktion
+     \begin{equation*}
+    f:\R\to \R\quad \text{ mit } \ f(x) = a^x
+      \end{equation*}
+    \notion{Exponentialfunktion zur Basis $a$}.
+\end{definition}
+
+Alle Exponentialfunktionen haben die Eigenschaft $f(0)=a^0=1$. Der Verlauf der Exponentialfunktionen
+ist von der Basis $a$ abhängig und kann in drei Fälle unterteilt werden, nämlich $0 < a < 1$, $a=1$ und $a > 1$.
+
+Im Fall $a=1$ ist die Funktion nichts anderes als die konstante Funktion $f(x)=1$, ansonsten gilt:
+
+\begin{theorem}\label{thm:andere-basen}
+Für $a>1$ ist die Exponentialfunktion $f(x) = a^x$ streng monoton wachsend.\\
+Für $0<a<1$ ist die Exponentialfunktion $f(x) = a^x$ streng monoton fallend.
+
+In beiden Fällen ist die Funktion stetig mit Wertemenge $(0;\infty)$ und erfüllt die \emph{Funktionalgleichung}
+\[  f(x+y)= f(x)\cdot f(y) \quad \text{für alle }x,y\in \R, \]
+d.\,h. $ \ a^{x+y}=a^x\cdot a^y$.
+\end{theorem}
+
+\begin{example}
+  \begin{table}[\cellaligns{cccccccc}]
+%   \lang{de}{
+  \head
+  $x$ & $\quad-3 \quad$ &$\quad -2  \quad$& $\quad -1 \quad$ &$\quad 0 \quad$ & $\quad 1 \quad$& $\quad 2 \quad$ &$\quad 3 \quad$
+  \body
+  $2^x$ & $\frac{1}{8}$ & $\frac{1}{4}$ & $\frac{1}{2}$& $1$ & $2$& $4$ & $8$\\
+  $\left( \frac{1}{2} \right)^x = 2^{-x}$& $8$ & $4$ & $2$ & $1$ & $\frac{1}{2}$ & $\frac{1}{4}$ & $\frac{1}{8}$ \\
+  $3^x$ & $\frac{1}{27}$ & $\frac{1}{9}$ & $\frac{1}{3}$& $1$ & $3$& $9$ & $27$\\
+  $\left( \frac{1}{3} \right)^x = 3^{-x}$& $27$ & $9$ & $3$ & $1$ & $\frac{1}{3}$ & $\frac{1}{9}$ & $\frac{1}{27}$\\
+   $10^x$& $0,001$& $0,01$ &$0,1$& $1$ & $10$& $100$ & $1000$\\
+  $\left( \frac{1}{10} \right)^x = 10^{-x}$ & $1000$ & $100$ & $10$ & $1$ &$0,1$ & $0,01$ & $0,001$
+%   }
+%   \lang{en}{\head
+%   $x$ & $\quad-3 \quad$ &$\quad -2  \quad$& $\quad -1 \quad$ &$\quad 0 \quad$ & $\quad 1 \quad$& $\quad 2 \quad$ &$\quad 3 \quad$
+%   \body
+%   $2^x$ & $\frac{1}{8}$ & $\frac{1}{4}$ & $\frac{1}{2}$& $1$ & $2$& $4$ & $8$\\
+%   $\left( \frac{1}{2} \right)^x = 2^{-x}$& $8$ & $4$ & $2$ & $1$ & $\frac{1}{2}$ & $\frac{1}{4}$ & $\frac{1}{8}$ \\
+%   $3^x$ & $\frac{1}{27}$ & $\frac{1}{9}$ & $\frac{1}{3}$& $1$ & $3$& $9$ & $27$\\
+%   $\left( \frac{1}{3} \right)^x = 3^{-x}$& $27$ & $9$ & $3$ & $1$ & $\frac{1}{3}$ & $\frac{1}{9}$ & $\frac{1}{27}$\\
+%    $10^x$& $0.001$& $0.01$ &$0.1$& $1$ & $10$& $100$ & $1000$\\
+%   $\left( \frac{1}{10} \right)^x = 10^{-x}$ & $1000$ & $100$ & $10$ & $1$ &$0.1$ & $0.01$ & $0.001$
+%   }
+  \end{table}
+ \begin{center}
+\image{T104_Exponentials_A}
+  \end{center}
+\end{example}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{a1}{1}{4}
+			\randint{a2}{5}{8}
+			\function[calculate]{a}{a1/a2} 
+			\randint[Z]{xp}{-4}{4} 
+			\function[calculate]{yp}{a^xp}
+		\end{variables}
+
+			\text{Für welches $a>0$ geht der Graph der Exponentialfunktion $f(x)=a^x$ durch den Punkt $P=(\var{xp};\var{yp})$?\\
+			Für $a=$\ansref.}
+
+		\begin{answer}
+			\solution{a}
+		\end{answer}
+		\explanation{Wenn der Punkt $P=(\var{xp};\var{yp})$ auf dem Graphen liegt, gilt $f(\var{xp})=\var{yp}$,
+		also $a^\var{xp}=\var{yp}$.}
+	\end{quickcheck}
+
+
+Da die Exponentialfunktionen $f(x)=a^x$ für $a>0$ und $a\neq 1$ streng monoton sind, besitzen auch sie Umkehrfunktionen, die allgemeinen \emph{Logarithmusfunktionen}.
+
+\begin{definition}\label{def:Log_arbitrary_base}
+Für $a\in \R$ mit $a>0$ und $a\neq 1$ ist der \notion{Logarithmus zur Basis $a$} die Umkehrfunktion  
+
+\[ \log_a: (0;\infty)\to \R, \ x\mapsto \log_a(x) \]
+der Exponentialfunktion zur Basis $a$.
+
+ \begin{center}
+\image{T211_ExpLog}
+  \end{center}
+
+
+\end{definition}
+
+\begin{remark}
+Nach Definition der Umkehrfunktion gilt:
+\[  y=\log_a(x)\Leftrightarrow  x=a^y. \]
+
+Außerdem sind die Logarithmusfunktionen $\log_a$ für $a>1$ streng monoton wachsend und für $0<a<1$ streng monoton fallend. Genauer gilt sogar
+\[   \log_{\frac{1}{a}}(x)=-\log_a(x) \]
+für alle $x\in (0;\infty)$.
+\end{remark}
+
+\begin{quickcheck}
+    \field{real}
+    \type{input.function}
+        \begin{variables}
+            \function{f}{1/x}
+            \function{g}{2}
+            \function{h}{ln(3)+x}
+        \end{variables}
+            \text{Berechnen oder vereinfachen Sie:\\
+            $e^{-\ln(x)}=$ \ansref}
+        \begin{answer}
+            \solution{f}
+        \end{answer}
+        \explanation{$e^{-\ln(x)}=e^{\ln(x^{-1})}=e^{\ln(\frac{1}{x})}=\frac{1}{x}$,\\
+        $\log_{10}(4)+\log_{10}(25)=\log_{10}(4\cdot 25)=\lg(100)=2$,\\
+        $\ln(3e^x)=\ln(3)+\ln(e^x)=\ln(3)+x$.}
+            \text{$\log_{10}(4)+\log_{10}(25)=$ \ansref}
+        \begin{answer}
+            \solution{g}
+        \end{answer}
+            \text{$\ln(3e^x)=$ \ansref }
+        \begin{answer}
+            \solution{h}
+        \end{answer}
+\end{quickcheck}
+
+\begin{example}
+Neben dem natürlichen Logarithmus, welcher auch der Logarithmus zur Basis $e$ ist, werden häufig auch
+der \emph{Zehnerlogarithmus} $\log_{10}$, auch \emph{dekadischer Logarithmus} genannt,  und der
+\emph{Zweierlogarithmus} (\emph{binäre Logarithmus}) $\log_2$ verwendet.
+
+Statt $\log_{10}$ wird oft auch $\lg$ geschrieben und statt $\log_2$ oft $\text{lb}$.
+
+
+\begin{center}
+\image{T104_Logarithms_A}
+\end{center}
+\end{example}
+
+\begin{rule}
+Alle Logarithmusfunktionen unterscheiden sich nur um ein skalares Vielfaches.
+Genauer gilt für $a,b\in \R$ mit $a,b>0$ und $a,b\neq 1$:
+\[   \log_b(x)= \frac{\log_a(x)}{\log_a(b)} \quad \text{für alle }x\in (0;\infty). \]
+\end{rule}
+
+\begin{proof*}
+\begin{showhide}
+
+Es ist $y= \log_b(x)$ genau dann, wenn $x=b^y$. Setzen wir dies in die rechte Seite ein, ergibt sich
+\[ \frac{\log_a(b^y)}{\log_a(b)}= \frac{y\cdot \log_a(b)}{\log_a(b)}=y =\log_b(x). \]
+\end{showhide}
+\end{proof*}
+
+Da sich alle Logarithmusfunktionen nur um ein skalares Vielfaches unterscheiden, wird in der Praxis immer nur mit einer
+Logarithmusfunktion gerechnet, und zwar mit derjenigen, die für die gegebenen Zwecke am praktischsten ist.
+Je nach Anwendungsgebiet ist dies der natürliche Logarithmus $\ln$, der dekadische Logarithmus 
+$\log_{10}=\lg$
+oder der binäre Logarithmus $\log_2=\text{lb}$.\\
+Oft wird dann für den verwendeten Logarithmus auch $\log$ geschrieben, ohne die Basis explizit zu nennen.
+
+\end{visualizationwrapper}
+
+\end{content}

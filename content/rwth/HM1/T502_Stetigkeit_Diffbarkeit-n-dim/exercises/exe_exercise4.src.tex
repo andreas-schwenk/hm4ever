@@ -1,0 +1,127 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Exercise 11}
+    \lang{de}{Ü11: Gradient}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{Exercise 11}
+    \lang{de}{Ü11: Gradient}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T109_Skalar-_und_Vektorprodukt/g_art_content_33_winkel.meta.xml}{content_33_winkel}
+\link{generic_article}{content/rwth/HM1/T502_Stetigkeit_Diffbarkeit-n-dim/g_art_content_54_Differentiation.meta.xml}{content_54_Differentiation}
+\end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22638}{Ticket 22638}
+\end{block}
+  \title{
+    \lang{en}{Exercise 11}
+    \lang{de}{Ü11: Gradient}
+  }
+
+Es sei $f:(-1,1)\times (-1,1)\to \R$ definiert durch
+\[
+f(x,y):=y \cdot \arcsin(xy).
+\]
+  \begin{enumerate}[alph]
+    
+    \item  Berechnen Sie den Gradienten sowie die Richtungsableitung von $f$ in Richtung $v=(2,1)^T$ im Punkt $(0,\frac{1}{2})^T$.
+
+    \item  Berechnen Sie unter allen normierten Vektoren $w\in \R^2$ (d.h. $\Vert w \Vert_2=1$), diejenige Richtung, sodass $D_w f(0,\frac{1}{2})$ maximal wird. Warum widerspricht dies nicht a)?
+
+    \item  Begründen Sie, dass der Gradient $\nabla f$ immer in diejenige Richtung zeigt, in der $D_v f$ maximal (unter allen normierten Vektoren $v$) wird, vorausgesetzt $\nabla f \neq 0$.
+  \end{enumerate}
+  \\
+    
+  \begin{tabs*}[\initialtab{0}\class{exercise}]
+    \tab{Lösung a)}
+    
+    \begin{incremental}[\initialsteps{1}]
+      \step Es sei $(x_0,y_0)^T \in (-1,1)\times (-1,1)$. \\
+        Für die reelle Funktion $f_1:(-1,1) \rightarrow \R, \ x \mapsto y_0 \cdot \text{arcsin}(xy_0)$ gilt mit der Kettenregel
+        \begin{align*}
+            f_1'(x_0) = \frac{y_0^2}{\sqrt{1-(x_0y_0)^2}}
+        \end{align*}
+        und für $f_2: (-1,1) \rightarrow \R, \ y \mapsto y \cdot \text{arcsin}(x_0y)$ gilt entsprechend
+        \begin{align*}
+            f_2'(y_0) = \text{arcsin}(x_0y_0) + \frac{x_0y_0}{\sqrt{1-(x_0y_0)^2}}.
+        \end{align*}
+%QS	\step Nach Definition ist somit 
+%QS
+    \step Hieraus ergeben sich \ref[content_54_Differentiation][definitionsgemäß]{def:part_abl} die partiellen Ableitungen\\
+    
+        $\frac{\partial f}{\partial x}(x,y) = \frac{y^2}{\sqrt{1-x^2y^2}}$ sowie $\frac{\partial f}{\partial y}(x,y) = \text{arcsin}(xy) + \frac{xy}{\sqrt{1-x^2y^2}}$ für alle $x,y \in (-1,1)$. \\ \\
+	\step Im Punkt $(0,\frac{1}{2})^T$ haben wir
+      \begin{align*}
+          \frac{\partial f}{\partial x}(0,\frac{1}{2}) &= \frac{(\frac{1}{2})^2}{\sqrt{1-0}} =  \frac{1}{4},\\
+          \frac{\partial f}{\partial y}(0,\frac{1}{2}) &= \text{arcsin}(0) + 0 \cdot \frac{1}{2} \cdot \frac{1}{\sqrt{1-0}} = 0.
+      \end{align*}
+    
+    \step Der Gradient ist somit
+      \[
+      \nabla f (0,\frac{1}{2}) = \begin{pmatrix}\frac{1}{4} \\ 0 \end{pmatrix}.
+      \]
+	\step Die Richtungsableitung in Richtung $v=(2,1)^T$ ist dann \ref[content_54_Differentiation][bekanntermaßen]{rem:richtg_abl_mv_produkt}
+    gegeben durch 
+      \begin{align*}
+          D_v f(0,\frac{1}{2}) = \nabla f(0,\frac{1}{2}) \bullet v = \frac{1}{4}\cdot 2 + 0 \cdot 1 = \frac{1}{2}.
+      \end{align*}
+    \end{incremental}
+    
+    \tab{Lösung b)}
+    
+    \begin{incremental}[\initialsteps{1}]
+      \step Aus a) wissen wir
+        \[
+        \nabla f (0,\frac{1}{2}) = \begin{pmatrix}\frac{1}{4} \\ 0 \end{pmatrix}.
+        \]
+        In a) haben wir außerdem
+        \begin{align*}
+            D_w f(0,\frac{1}{2}) = \nabla f(0,\frac{1}{2}) \bullet w = \frac{1}{4}\cdot w_1 + 0 \cdot w_2 = \frac{1}{4} w_1
+        \end{align*}
+        ausgenutzt.
+
+        Damit $D_w f(0,\frac{1}{2})$ maximal wird, muss $w_1$ so groß wie möglich gewählt werden und da wir uns auf 
+        normierte Vektoren $\Vert w\Vert_2 = 1$ beschränken, muss $w_1=1$ und folglich $w_2=0$ sein.
+
+        Maximal wird $D_w f(0,\frac{1}{2})$ also für $w=(1,0)^T$ mit $D_w f(0,\frac{1}{2})=\frac{1}{4}$.
+    
+      \step In a) hatten wir für $v=(1,2)^T$ einen größeren Wert 
+        $D_v f(0,\frac{1}{2})=\frac{1}{2}>\frac{1}{4}=D_w f(0,\frac{1}{2})$ erhalten. \\
+        
+       Dies ist jedoch kein Widerspruch dazu, dass $D_w f(0,\frac{1}{2})$ maximal ist, da $\Vert v \Vert_2 = \sqrt{5} \neq 1.$
+       Würden wir $v$ auf eine Einheitslänge normieren, d.h. $v'=\frac{1}{\sqrt{5}}v$ würden wir $D_{v'}f(0,\frac{1}{2})=\frac{1}{2\sqrt{5}}<\frac{1}{4}$ erhalten.
+    \end{incremental}
+    
+    \tab{Lösung c)}
+    In a) und b) hatten wir schon ausgenutzt, dass $D_v f(x)=\nabla f(x) \bullet v$ ist. 
+    Aus der \ref[content_33_winkel][Winkel-Formel zum Skalarprodukt]{def:winkel} erhalten wir hiermit
+    \[
+    D_v f(x)=\nabla f(x) \bullet v = \cos(\varphi)\cdot \Vert \nabla f(x) \Vert_2 \Vert v \Vert_2,
+    \]
+    wobei $\varphi$ der Winkel zwischen dem Gradienten $\nabla f(x)$ und dem Richtungsvektor $v$ ist.
+
+    Wenn wir uns wie in b) auf normierte Richtungsvektoren $v$ beschränken, d.h. $\Vert v \Vert_2 =1$, 
+    wird der Wert der Richtungsableitung $D_v f(x)$ maximal, wenn $cos(\varphi)=1$ (also maximal) ist,
+    d.h. der Winkel $\varphi$ zwischen Gradient $\nabla f(x)$ und Richtungsvektor $v$ gleich Null ist.
+    
+    Unter der Voraussetzung, dass $v$ normiert ist, wird also die Richtungsableitung $D_v f(x)$ maximal, 
+    wenn $\nabla f(x) (\neq 0)$ in dieselbe Richtung zeigt wie $v$.
+    
+    Wenn $\nabla f(x)=0$ ist, können wir natürlich zunächst keine Aussage über die Richtung des steilsten 
+    Anstiegs treffen. In diesem Fall gibt es nämliche mehrere Fälle (Minimum, Maximum, Sattelpunkt usw.), 
+    auf die wir hier nicht detaillierter eingehen wollen.
+  \end{tabs*}
+\end{content}
+

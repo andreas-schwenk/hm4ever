@@ -1,0 +1,387 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Substitutionsregel}
+    \lang{en}{Substitution rules}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+\end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T211_Eigenschaften_stetiger_Funktionen/g_art_content_34_exp_und_log.meta.xml}{content_34_exp_und_log}
+    \link{generic_article}{content/rwth/HM1/T301_Differenzierbarkeit/g_art_content_02_ableitungsregeln.meta.xml}{abl-regeln}
+    \link{generic_article}{content/rwth/HM1/T107_Integralrechnung/g_art_content_26_flaechen_zwischen_graphen.meta.xml}{lin-sub}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{4}
+\ombarticle{2}
+
+\title{\lang{de}{Substitutionsregel}\lang{en}{Substitution rules}}
+ 
+\begin{block}[annotation]
+  
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10042}{Ticket 10042}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\lang{de}{
+In diesem Abschnitt werden wir eine Integrationstechnik behandeln, die sich aus der
+\ref[abl-regeln][Kettenregel der Differentiation]{sec:kettenregel} ergibt.
+\\\\
+Einen Spezialfall dieser Integrationstechnik haben wir mit der \ref[lin-sub][linearen Substitution]{rule:lin-sub}
+schon gesehen.
+}
+\lang{en}{
+In this section we will introduce an integration technique which derives from the 
+\ref[abl-regeln][chain rule for differentiation]{sec:kettenregel}.
+\\\\
+We have already seen a special case of this technique, \ref[lin-sub][linear substitution]{rule:lin-sub}.
+}
+
+\section{\lang{de}{Allgemeine Substitutionsregel}
+         \lang{en}{General substitution rules}}\label{sec:allg-subst-reg}
+
+\begin{theorem}[\lang{de}{Substitutionsregel}
+                \lang{en}{Substitution rules}]\label{thm:substitutionsregel}
+\lang{de}{
+Es sei $I\subseteq \R$ ein Intervall und $f\colon I\to\R$ habe eine Stammfunktion $F.$\\
+Weiter seien $\alpha < \beta$ und $g\colon [\alpha;\beta] \to I, \;x\mapsto g(x),$ stetig 
+differenzierbar mit Ableitung $g'(x).$
+Dann gilt: 
+}
+\lang{en}{
+Let $I\subseteq \R$ be an interval and suppose $f\colon I\to\R$ has an antiderivative $F.$\\
+Let $\alpha < \beta$ and let $g\colon [\alpha;\beta] \to I, \;x\mapsto g(x),$ be continuously 
+differentiable with derivative $g'(x)$. 
+Then we have:
+}
+    \[
+  \int_\alpha^\beta \;f(\,g(x)\,)\cdot g'(x)\;dx = \int_{g(\alpha)}^{g(\beta)}\; f(y)\;dy
+  = \left[ F(y) \right]_{g(\alpha)}^{g(\beta)}= \left[ F(g(x)) \right]_\alpha^\beta.
+  \]
+  %\floatright{\href{https://www.hm-kompakt.de/video?watch=627}{\image[75]{00_Videobutton_schwarz}}}\\\\
+\end{theorem}
+
+\begin{proof*}
+\begin{incremental}[\initialsteps{1}]
+\step
+\lang{de}{Nach der Kettenregel ist die Ableitung der Funktion $F(g(x))$ gegeben durch}
+\lang{en}{By the chain rule, the derivative of the function $F(g(x))$ is given by}
+\[ (F\circ g)'(x)= F'(g(x))\cdot g'(x). \]
+\lang{de}{
+Da $F$ eine Stammfunktion von $f$ ist, gilt $F'=f$, d.\,h. $ (F\circ g)'(x)=f(g(x))\cdot g'(x)$.
+\\\\
+Damit ist aber nach dem Hauptsatz der Differential- und Integralrechnung
+}
+\lang{en}{
+As $F$ is an antiderivative of $f$, we have $F'=f$, that is, $ (F\circ g)'(x)=f(g(x))\cdot g'(x)$.
+\\\\
+By the fundamental theorem of calculus,
+}
+  \[
+  \int_\alpha^\beta \;f(\,g(x)\,)\cdot g'(x)\;dx = \left[ F(g(x)) \right]_{\alpha}^{\beta}.\]
+\step
+\lang{de}{
+Die Gleichheit zu den anderen angegebenen Termen ergibt sich nun von hinten nach vorne durch
+}
+\lang{en}{
+The other equalities now follow from
+}
+\[ \left[ F(g(x)) \right]_\alpha^\beta= F(g(\beta))-F(g(\alpha))= \left[ F(y) \right]_{g(\alpha)}^{g(\beta)}, \]
+\lang{de}{
+sowie mit dem Hauptsatz der Differential- und Integralrechnung angewandt auf die Funktion $f$:
+}
+\lang{en}{
+and by applying the fundamental theorem of calculus to the function $f$:
+}
+\[  \int_{g(\alpha)}^{g(\beta)}\; f(y)\;dy  = \left[ F(y) \right]_{g(\alpha)}^{g(\beta)}. \]
+\end{incremental}
+\end{proof*}
+
+\lang{de}{Wir diskutieren Anwendungen der allgemeinen Substitutionsregel.}
+\lang{en}{Let us see some applications of the general substitution rules.}
+\begin{example}
+\begin{tabs*}[\initialtab{0}]
+\tab{$\int_1^3 \frac{10}{(3-5x)^2}\;dx$} Wir betrachten das Integral $\int_1^3 \frac{10}{(3-5x)^2}\;dx$.\\
+\lang{de}{
+Setzen wir $g:[1;3]\to (-\infty;0), \ x \mapsto 3-5x$ und $f:(-\infty;0) \to \R, \ x \mapsto \frac{-2}{x^2}$, dann ist
+}
+\lang{en}{
+Let $g:[1;3]\to (-\infty;0), \ x \mapsto 3-5x$ und $f:(-\infty;0) \to \R, \ x \mapsto \frac{-2}{x^2}$. Then
+}
+\[ f(\,g(x)\,)\cdot g'(x)= \frac{-2}{g(x)^2}\cdot g'(x)=\frac{-2}{(3-5x)^2}\cdot (-5)
+= \frac{10}{(3-5x)^2} \]
+\lang{de}{
+genau der angegebene Integrand. Eine Stammfunktion von $f$ ist gegeben durch
+$F(x)=\frac{2}{x}$ und daher ist
+}
+\lang{en}{
+is precisely the given integrand. $F(x)=\frac{2}{x}$ is an antiderivative of $f$ and so
+}
+\begin{align*}
+\int_1^3 \frac{10}{(3-5x)^2}\;dx &= \int_1^3\;f(g(x))\cdot g'(x)\;dx
+= \int_{g(1)}^{g(3)} f(y)\, dy \\
+&= \left[ F(y) \right]_{g(1)}^{g(3)} = \left[ \frac{2}{y} \right]_{-2}^{-12} \\ 
+&= -\frac{2}{12}+\frac{2}{2}=\frac{5}{6}\,.
+\end{align*}
+
+\tab{$\int_0^1\; r\;\exp (-r^2/2)\;dr$}
+\lang{de}{
+Wir betrachten das Integral $\int_0^1\; r\;\exp (-r^2/2)\;dr$.\\
+Hier bietet sich an, als innere Funktion $g(r)=-r^2/2$ zu setzen, wodurch $g'(r)=-r$ ist.
+Der Integrand ist dann
+}
+\lang{en}{
+Consider the integral $\int_0^1\; r\;\exp (-r^2/2)\;dr$.\\
+It is convenient to choose $g(r)=-r^2/2$ as the inner function, so that $g'(r)=-r$. 
+Then the integrand is
+}
+\[ r\;\exp (-r^2/2)=-g'(r)\cdot e^{g(r)}. \]
+\lang{de}{Also ist}
+\lang{en}{Thus}
+\[ \int_0^1\; r\;\exp (-r^2/2)\;dr =-\int_0^1 e^{g(r)}\cdot g'(r)\, dr
+= -\int_{g(0)}^{g(1)} e^{x}\;dx =- \left[ e^x\right]_{0}^{-1/2}
+= -\frac{1}{\sqrt{e}} +1.
+\]
+\lang{de}{
+Analog kann man so Funktionen der Art $x\cdot f(x^2)$ oder allgemeiner $x^{n-1}\cdot f(x^n)$ 
+integrieren, wenn f\"ur $f$ eine Stammfunktion bekannt ist.
+}
+\lang{en}{
+We can analogously integrate functions of the form $x\cdot f(x^2)$ or more generally 
+$x^{n-1}\cdot f(x^n)$ if we know an antiderivative of $f$.
+}
+\tab{$\int_0^{\pi/4} \tan(t)\,dt$}
+\lang{de}{
+Wir betrachten das Integral $\int_0^{\pi/4} \tan(t)\,dt$.\\
+Zunächst ist ja $\tan(t)= \frac{\sin(t)}{\cos(t)}=\sin(t)\cdot (\cos(t))^{-1}$.
+Weil die Ableitung von $\cos(t)$ die Funktion $-\sin(t)$ ist, gilt also
+$\tan(t)=-g'(t)\cdot g(t)^{-1}$ für $g(t)=\cos(t)$. Wir müssen aber auch aufpassen, dass wir nicht über eine 
+Definitionslücke der Funktion $x \mapsto x^{-1}$ integrieren und auch eine richtige Stammfunktion finden. 
+Daher betrachten wir den Wertebereich von $g(x)$: Für jeden Wert $x \in [0 ; \frac{\pi}{4}]$ ist $g(x)$ positiv. Damit ist
+}
+\lang{en}{
+Consider the integral $\int_0^{\pi/4} \tan(t)\,dt$.\\
+Firstly note that we have $\tan(t)= \frac{\sin(t)}{\cos(t)}=\sin(t)\cdot (\cos(t))^{-1}$.
+As the derivative of $\cos(t)$ is the function $-\sin(t)$, we have 
+$\tan(t)=-g'(t)\cdot g(t)^{-1}$ where $g(t)=\cos(t)$. 
+We must be careful not to integrate over a gap in the domain of the function $x \mapsto x^{-1}$ and 
+to find a correct antiderivative. Thankfully, $g(x)$ is positive for all 
+$x \in [0 ; \frac{\pi}{4}]$, so
+}
+\begin{align*} 
+\int_0^{\pi/4} \tan(t)\;dt \ &= \int_0^{\pi/4}-g'(t)\cdot g(t)^{-1} \;dt = 
+-\int_{g(0)}^{g(\pi/4)} x^{-1}\; dx\\
+ &= - \big[ \ln({|x|})\big]_{g(0)}^{g(\pi/4)} = -\big[ \ln({|\cos(t)|})\big]_0^{\pi/4} \\
+ &= - \ln({|\cos(\frac{\pi}{4})|}) + \ln({|\cos(0)|})=-\ln(\frac{\sqrt{2}}{2}) + \ln(1)\\
+ & =-\ln(2^{-1/2})=\frac{1}{2}\cdot \ln(2).
+\end{align*}
+\lang{de}{
+Hier wurden im letzten Schritt die \ref[content_34_exp_und_log][Eigenschaften des Logarithmus]{rule:ln} genutzt.
+}
+\lang{en}{
+In the final step we used some \ref[content_34_exp_und_log][properties of the logarithm]{rule:ln}.
+}
+\end{tabs*}
+\end{example}
+
+
+\section{\lang{de}{Anmerkungen zur Substitution}\lang{en}{Remarks about substitution}}
+\lang{de}{
+Die \ref[lin-sub][lineare Substitution]{rule:lin-sub} ist der Spezialfall der allgemeineren 
+Substitutionsregel, wenn die innere Funktion $g(x)=mx+b$ ist. 
+Wir wiederholen die Aussage hier:
+}
+\lang{en}{
+\ref[lin-sub][Linear substitution]{rule:lin-sub} is a special case of the general substitution rule 
+introduced above in which the inner function is of the form $g(x)=mx+b$. We repeat the former rule 
+here:
+}
+
+
+% Ein spezieller Fall der Substitution ist die sogenannte \textit{lineare Substitution}. Die
+% innere Funktion $g$ ist hierbei eine lineare Funktion. Die Ableitung $g'$ ist in diesem Fall 
+% lediglich eine konstante reelle Zahl.
+ 
+ 
+%  %\begin{tabs*} % [\initialtab{0}]
+%  % \tab{\lang{de}{Beispiele} }
+  
+%  % \tab{\lang{de}{Beispiel 1}}
+%  % Sei $h(x)=f(g(x))=e^{2x+1}$. Die äußere Funktion ist $f(x)=e^x$ mit $f'(x)=e^x$ und die innere Funktion ist
+%  % $g(x)=2x+1$ mit $g'(x)=2$. Die Ableitung von $h(x)$ ist daher:
+%  % \[ h'(x) = e^{2x+1} \cdot 2 \]
+  
+%   %\tab{\lang{de}{Beispiel 2}}
+%   %Sei $h(x)=\sin^3(x)$. Die äußere Funktion ist $f(x)=x^3$ mit $f'(x)=3x^2$ 
+%   %und die innere Funktion ist $g(x)=\sin(x)$ mit $g'(x)=\cos(x)$.
+%   %Die Ableitung von $h(x)$ ist daher:
+%   %\[ h'(x) = 3 \sin^2(x) \cos(x) \]
+% %\end{tabs*}
+ 
+
+ \begin{rule}[\lang{de}{Lineare Substitution}\lang{en}{Linear substitution}]
+ \label{rule:lin-subst}
+ \lang{de}{
+ Wenn $F(x)$ eine Stammfunktion von $f(x)$ ist und Konstanten $m \neq 0$ und 
+ $b \in \mathbb{R}$ gegeben sind, so ist
+ }
+ \lang{en}{
+ If $F(x)$ is an antiderivative of $f(x)$ and constants $m \neq 0$ and $b \in \mathbb{R}$ are given, 
+ then
+ }
+ \[ 
+ \frac{1}{m} F(mx+b)
+ \]
+ \lang{de}{eine Stammfunktion von $f(mx+b)$.}
+ \lang{en}{is an antiderivative of $f(mx+b)$.}
+ \[ \int f(mx+b)\, dx = \frac{1}{m} F(mx+b) + C . \]
+ \end{rule}
+\lang{de}{
+Es empfiehlt sich, bei der Bestimmung einer Stammfunktion mittels Substitution immer zu einem 
+bestimmten Integral mit variablen Grenzen überzugehen. Dies ist übersichtlicher und so passieren 
+seltener Fehler bei der Rücksubstitution.
+}
+\lang{en}{
+When determining an antiderivative via substitution, it is advisable to choose a proper integral 
+with variable limits. These are easier to keep track of, leading to fewer calculation mistakes.
+}
+\begin{remark}\label{rem:kalkuel}
+\lang{de}{
+Weit verbreitet in der Literatur ist auch folgendes Kalkül:
+Bestimmen möchten wir $\int_a^b f(g(x)) g'(x) \, dx$. Wir wählen als Substitution $t = \textcolor{#0066CC}{g(x)}$.
+Die Ableitung können wir auch als $\frac{dt}{dx} = g'(x)$ schreiben.
+Umgeformt ergibt dies $\textcolor{#CC6600}{dx} = \frac{dt}{g'(x)}$.
+Durch Ersetzen der Ausdrücke mit $x$ und entsprechendem Kürzen bekommen wir die bekannte Formel
+}
+\lang{en}{
+The following reasoning is informal but is commonly seen in the literature on this topic. 
+Suppose we wish to determine $\int_a^b f(g(x)) g'(x) \, dx$. As a substitution we choose 
+$t = \textcolor{#0066CC}{g(x)}$. The derivative can also be written as $\frac{dt}{dx} = g'(x)$. 
+Rearranging this would get us $\textcolor{#CC6600}{dx} = \frac{dt}{g'(x)}$. 
+Now if we substitute $x$ and simplify, we get the well-known formula
+}
+\[
+\int_{x=a}^{x=b} f(\textcolor{#0066CC}{g(x)}) \cdot g'(x)\, \textcolor{#CC6600}{dx} = \int_{t=g(a)}^{t=g(b)} f(t)\, dt.
+\]
+\lang{de}{
+Daher stammt auch der Name der Substitutionsregel.
+\\\\
+Hier sollte aber darauf geachtet werden, dass die Substitution umkehrbar ist, d.\,h. $g:[a;b]\to \R$ injektiv.
+}
+\lang{en}{
+This is from where the term 'substitution' comes from in reference to the above theorem.
+\\\\
+We must be careful here that the substitution is invertible, that is, that $g:[a;b]\to \R$ is 
+injective.
+}
+\end{remark}
+\lang{de}{
+In den folgenden beiden Videos wird das Kalkül aus Bemerkung \ref{rem:kalkuel} zur Substitution genutzt:
+\floatright{\href{https://www.hm-kompakt.de/video?watch=628}{\image[75]{00_Videobutton_schwarz}}
+  \href{https://www.hm-kompakt.de/video?watch=629}{\image[75]{00_Videobutton_schwarz}}
+ %\href{https://www.hm-kompakt.de/video?watch=630}{\image[75]{00_Videobutton_schwarz}}
+  }\\\\
+Wir diskutieren noch ein Beispiel dazu.
+}
+\lang{en}{Let us see an example of the above reasoning being used in a substitution.}
+\begin{example}
+\lang{de}{
+Wir möchten das Integral $\int_0^{\pi/4} \frac{2\sin(x)}{\cos(x)^2}\, dx$ bestimmen.
+Die offensichtliche Wahl wäre die Substitution $g(x)=\cos(x)$. Dann hätten wir
+}
+\lang{en}{
+Suppose we want to compute the integral $\int_0^{\pi/4} \frac{2\sin(x)}{\cos(x)^2}\, dx$. The 
+obvious choice would be the substitution $g(x)=\cos(x)$. Then we would have
+}
+\[
+\int_0^{\pi/4} \frac{-2g'(x)}{g(x)^2} \, dx = -2\cdot \int_{g(0)}^{g(\pi/4)} \frac{1}{u^2}\, du = \left[\frac{2}{u}\right]_{1}^{1/\sqrt{2}}= 2\sqrt{2} -2.
+\]
+\lang{de}{
+Nun kann man aber auch auf die Idee kommen, $t = h(x) = \textcolor{#0066CC}{\cos(x)^2}$ zu 
+substituieren. Dann ist
+}
+\lang{en}{
+Alternatively, we may choose $t = h(x) = \textcolor{#0066CC}{\cos(x)^2}$. Then
+}
+\[
+\frac{dt}{dx} = h'(x) = -2 \sin(x) \cos(x) \Leftrightarrow \textcolor{#CC6600}{dx} = \frac{dt}{-2\sin(x) \cos(x)}.
+\]
+\lang{de}{Wenn wir dies im Integral einsetzen, erhalten wir}
+\lang{en}{If we substitute this into the integral, we obtain}
+\[
+\frac{2 \sin(x) \, \textcolor{#CC6600}{dx}}{\textcolor{#0066CC}{\cos(x)^2}} = \frac{2\sin(x) dt}{-2\sin(x) \cos(x) t} = \frac{dt}{-\cos(x) \cdot t}.
+\]
+\lang{de}{
+Wichtig ist nun, dass wir den Integranden nur in Termen mit $t$ schreiben. Dies ist möglich, da
+$h:[0;\pi/4]\to \R$ injektiv ist und damit $\cos(x) = \sqrt{t}$ für $x \in [0;\pi/4]$.
+Wir erhalten das alternative Integral
+}
+\lang{en}{
+It is important to express the integrand entirely in terms of $t$. This is possible because 
+$h:[0;\pi/4]\to \R$ is injective and so $\cos(x) = \sqrt{t}$ for $x \in [0;\pi/4]$. 
+We obtain the alternative interval
+}
+\[
+\int_0^{\pi/4} \frac{2 \sin(x)}{\cos(x)^2} \, dx = \int_{h(0)}^{h(\pi/4)} \frac{1}{-t^{3/2}}\, dt = \left[2\cdot \frac{1}{\sqrt{t}}\right]_{h(0)}^{h(\pi/4)} = \left[\frac{2}{\sqrt{t}}\right]_{1}^{1/2}=2\sqrt{2}-2.
+\]
+\lang{de}{Dies ist das gleiche Ergebnis wie oben.}
+\lang{en}{This is the same result as for the first choice of function.}
+\end{example}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{1}
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{a}{3}{5}
+            \randint[Z]{n}{-1}{4}
+		    \function[normalize]{f}{n*2*a*x*cos(a*x^2)}
+            \function[normalize]{g}{a*x^2}
+			\function[normalize]{ff}{n*sin(a*x^2)}
+			\function[calculate]{ffupper}{n*sin(a*(pi/2))}
+			\function[calculate]{fflower}{0}
+			\function[calculate]{sol}{ffupper-fflower}
+		\end{variables}
+        
+            \text{\lang{de}{Bestimmen Sie den Wert des folgenden Integrals:}
+                  \lang{en}{Determine the value of the following integral:}\\
+			$\int_{0}^{\sqrt{\frac{\pi}{2}}} (\var{f})dx=$\ansref.}	
+
+		\begin{answer}
+			\solution{sol}
+		\end{answer}
+		\explanation{\lang{de}{
+    Eine Stammfunktion von $f(x)=\var{f}$ ist $F(x)=\var{ff}$ (substituiere $g(x)=\var{g}$).\\
+		Damit ist $\int_{0}^{\sqrt{\frac{\pi}{2}}} (\var{f})dx=F(\sqrt{\frac{\pi}{2}})-F(0)=\var{ffupper}-\var{fflower}=\var{sol}$.
+    }
+    \lang{en}{
+    The function $F(x)=\var{ff}$ is an antifderivative of $f(x)=\var{f}$ (substitute 
+    $g(x)=\var{g}$).\\
+    Hence $\int_{0}^{\sqrt{\frac{\pi}{2}}} (\var{f})dx=F(\sqrt{\frac{\pi}{2}})-F(0)=\var{ffupper}-\var{fflower}=\var{sol}$.
+    }}
+
+	\end{quickcheck}
+\end{quickcheckcontainer}
+
+
+\end{content}

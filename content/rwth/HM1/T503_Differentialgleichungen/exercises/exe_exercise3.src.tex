@@ -1,0 +1,72 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{Ü03: AWA}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21969}{Ticket 21969}
+\end{block}
+
+
+\title{\lang{de}{Ü03: AWA}}
+Bestimmen Sie die Lösung des Anfangswertproblems
+\[y'=\frac{3x^2+2x+1}{y^2}\quad \text{mit Anfangswert }\: y(1)=-1.\]
+%%
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+\tab{Lösung}
+Die Lösung $\phi:I'\to\R$ der separierbaren Anfangswertaufgabe ist gegeben durch
+\[\phi(x)=-\sqrt[3]{{| 3(x^3+x^2+x-3)-1|}}\]
+mit maximalem Existenzintervall $I'=(-\infty;x_1)$, wobei $x_1>1$ die eindeutig bestimmte Lösung der Gleichung $x^3+x^2+x-3=\frac{1}{3}$ ist.
+\begin{incremental}[\initialsteps{1}]
+\step
+\notion{Begründung:}
+\step
+In der separierbaren Differentialgleichung setzen wir $f(x)=3x^2+2x+1$ und $g(y)=\frac{1}{y^2}$.
+Die Lösung hat nun die Form $H^{-1}\circ F(x)$, 
+wobei wir die zwei Stammfunktion $H$ und $F$ wie folgt berechnen.
+\begin{align*}
+F(x)\:&=&\: \int_{x_0}^xf(t)\:dt=\int_{1}^x(3t^2+2t+1)\:dt\:=\:x^3+x^2+x-3,
+\end{align*}
+sowie
+\begin{align*}
+H(y)\:&=&\: \int_{y_0}^y\frac{ds}{g(s)}=\int_{-1}^y s^2\:ds\:=\:\frac{1}{3}(y^3+1).
+\end{align*}
+\step
+Dabei ist das maximale Definitionsintervall $J'$ von $H$ das maximale Intervall mit $y_0\in J'$,
+auf dem $g$ definiert (und nullstellenfrei) ist. Somit ist $J'=(-\infty;0)$, und
+\[H(J')=(-\infty;\frac{1}{3}).\]
+Um das maximale Lösungsintervall der Anfangswertaufgabe zu bestimmen, 
+müssen wir $x_0\in I'$ erfüllen und $F(I')\subset H(J')$. 
+Weil $\lim_{x\to -\infty}F(x)=-\infty$ und $F(1)=0$, ist mindestens $(-\infty;1]\subset I'$.
+Um die rechte Grenze von $I'$ zu bestimmen, bemerken wir, dass $F$ auf ganz $\R$ monoton wächst,
+denn die Nullstellen von $f(x)=F'(x)$ sind nicht reell (Diskriminante ist $\sqrt{-2}$).
+Also gibt es eine einzige Zahl $x_1$, an der $F$ die rechte Intervallgrenze von $H(J')$ annimmt, $F(x_1)=\frac{1}{3}$.
+Das ergibt das Lösungsintervall $I'=(-\infty;x_1)$.
+\step
+Um die Lösung $\phi$ vollständig zu bestimmen, müssen wir zunächst $H$ invertieren. Für $z\in H(J')$ und $y\in J'$ formen wir um
+\begin{align*}
+& & \frac{1}{3}(y^3+1)=z\:\Leftrightarrow\:y^3=3z-1\:\Leftrightarrow\:y=-\sqrt[3]{\vert{3z-1}\vert}.
+\end{align*}
+\step
+Das führt uns auf den Funktionsterm der Lösung
+\[\phi(x)=H^{-1}\circ F(x)=\sqrt[3]{\vert{3F(x)-1}\vert}=-\sqrt[3]{\vert{3(x^3+x^2+x-3)-1}\vert}.\]
+\end{incremental}
+\end{tabs*}
+\end{content}
+

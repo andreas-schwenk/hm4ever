@@ -1,0 +1,127 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A08: Rechnen mit Potenzen}
+    \lang{en}{Problem 8}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Lösen von Gleichungen mit Potenzen}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+\usepackage{mumie.ombplus}
+\lang{de}{
+	\title{A08: Rechnen mit Potenzen}
+}
+
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9290}{Ticket 9290}
+\end{block}
+
+
+
+\begin{problem}
+	\begin{question}
+      \lang{de}{\text{Bestimmen Sie $m$ und $n$ so, dass gilt: $(\var{a}x^{\var{b}})^\var{c}=m{x}^{n}$. }}
+      \lang{en}{\text{Find $m$ and $n$ so that: $(\var{a}x^{\var{b}})^\var{c}=m{x}^{n}$. }}
+      \explanation{}
+
+      \type{input.number}
+      \precision{3}
+      \field{real}
+
+      \begin{variables}
+                   \randint[Z]{a}{2}{20}
+                   \randint[Z]{b}{2}{20}
+                   \randint[Z]{c}{2}{3}
+                   \randint[Z]{d}{2}{20}
+                   \function[calculate]{ee}{a^c}
+                   \function[calculate]{f}{b*c}
+       \end{variables}
+
+      \begin{answer}
+            \text{$m=$ }
+            \solution{ee}
+      \end{answer}
+      
+      \begin{answer}
+            \text{$n=$ }
+            \solution{f}
+      \end{answer}
+	\end{question}
+	
+	\begin{question}
+      \lang{de}{\text{Für welches $x$ ist
+      $\var{a}^{\var{b}}\cdot \var{a}^{-4}\cdot \var{a}^{\var{c}}:\var{a}^{\var{n}}=\var{a}^{x}$? }}
+      \lang{en}{\text{For what value of $x$ is $\var{a}^{\var{b}}\cdot \var{a}^{-4}\cdot \var{a}^{\var{c}}/\var{a}^{\var{n}}=\var{a}^{x}$? }}
+      \explanation{}
+
+      \type{input.number}
+      \precision{3}
+      \field{real}
+
+      \begin{variables}
+                   \randint[Z]{a}{2}{20}
+                   \randint[Z]{n}{2000}{3000}
+                   \function[calculate]{b}{2*n-2}
+                   \function[calculate]{c}{n+3}
+                   \function[calculate]{d}{b-1}
+       \end{variables}
+
+      \begin{answer}
+            \lang{de}{\text{Antwort: }}
+            \lang{en}{\text{Answer: }}
+            \solution{d}
+      \end{answer}
+	\end{question}
+	
+	\begin{question}
+      \lang{de}{\text{Bestimmen Sie $x$ und $y$, so dass für alle positiven $z$ gilt: 
+      $\quad z^{\var{b1}}\cdot z^{\var{b}}+ z^{\var{c1}}:z^{\var{c}}=y \, z^{x}$. }}
+      \lang{en}{\text{Find $x$ and $y$ so that for all positive $z$:  
+      $\quad z^{\var{b1}}\cdot z^{\var{b}}+ z^{\var{c1}}/z^{\var{c}}=y \, z^{x}$. }}
+      \explanation{}
+
+      \type{input.number}
+      \precision{3}
+      \field{real}
+
+      \begin{variables}
+                   \randint[Z]{a}{2}{20}
+                   \randint[Z]{b}{3}{11}
+                   \randint[Z]{c}{3}{11}
+                   \function[calculate]{b1}{-b+3}
+                   \function[calculate]{c1}{c+3}
+                   \function[calculate]{x}{3}
+                   \function[calculate]{y}{2}
+                          \end{variables}
+
+      \begin{answer}
+            \text{$x=$ }
+            \solution{x}
+      \end{answer}
+      \begin{answer}
+            \text{$y=$ }
+            \solution{y}
+      \end{answer}
+	\end{question}
+\end{problem}
+\embedmathlet{gwtmathlet}
+
+
+
+\end{content}

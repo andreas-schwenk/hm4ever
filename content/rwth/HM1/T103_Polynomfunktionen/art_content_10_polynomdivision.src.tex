@@ -1,0 +1,950 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Polynomdivision, rationale Funktionen}
+    \lang{en}{Polynomial division, rational functions}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    %
+    %
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+    %
+    %
+\end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T103_Polynomfunktionen/g_art_content_09_polynome.meta.xml}{link-polynome}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{3}
+\ombarticle{2}
+\usepackage{mumie.genericvisualization}
+
+
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Polynomdivision und Horner-Schema}\lang{en}{Polynomial division, rational functions}}
+
+\begin{block}[annotation]
+ Polynomdivision mit Rest, Polynomdivision durch Lineare Terme mittels Hornerschema,
+ rationale Funktionen, echt rationale Funktionen (Zählergrad<Nennergrad)
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/8989}{Ticket 8989}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{\lang{de}{Polynomdivision und Faktorisierung von Polynomen}
+         \lang{en}{Polynomial division and factorisation of polynomials}}\label{sec:poly-div-factoring}
+
+\lang{de}{
+Wir hatten im letzten Abschnitt gesehen, dass man jedes Polynom $f$ mit Nullstelle $c$ in der Form
+$f(x)=q(x)\cdot (x-c)$ schreiben kann.
+Allgemeiner (wenn $c$ keine Nullstelle ist) gilt
+$f(x)=q(x)\cdot (x-c) + f(c)$ für ein geeignetes Polynom $q$.
+\\
+In diesem Abschnitt wird erläutert, wie man $q$ durch \glqq{}Division mit Rest\grqq{} ermittelt.
+Der beschriebene Fall ist ein Spezialfall des folgenden Satzes, welcher auch für die gebrochen rationalen
+Funktionen von Bedeutung sein wird.
+}
+\lang{en}{
+In the previous section we saw that every polynomial $f$ with root $c$ can be written in the form 
+$f(x)=q(x)\cdot (x-c)$. More generally (if $c$ is not a root), we have $f(x)=q(x)\cdot (x-c) + f(c)$ 
+for a unique polynomial $q$.
+\\
+In this section we explain how $q$ can be determined via 'polynomial long division'. The 
+case described above is a special case of the following theorem, which will be generalised to work 
+with rational functions in the future.
+}
+
+\begin{theorem}[\lang{de}{Polynomdivision mit Rest}\lang{en}{Polynomial long division}]
+  \lang{de}{
+  Sind $f(x)$ und $g(x)$ zwei Polynome ungleich $0$, dann gibt es zwei Polynome $q(x)$ und $r(x)$, 
+  so dass
+  }
+  \lang{en}{
+  For two polynomials $f(x)$ and $g(x)$ different from $0$, there exist two polynomials $q(x)$ 
+  \emph{(the quotient)} and $r(x)$ \emph{(the remainder)} such that
+  }
+  \begin{equation*}
+    f(x)=q(x)\cdot g(x)+r(x)\, ,
+  \end{equation*}
+
+  \lang{de}{
+  wobei der Grad von $r(x)$ echt kleiner als der Grad von
+  $g(x)$ ist, also
+  }
+  \lang{en}{
+  where the degree of $r(x)$ is strictly smaller than the degree of $g(x)$:
+  }
+  \\
+  \begin{equation*}
+    \text{grad}\left(r\right)<\text{grad}(g),
+  \end{equation*}
+  \lang{de}{
+  oder sogar $r(x)=0$ das Nullpolynom ist.
+  }
+  \lang{en}{
+  or in particular $r(x)=0$ may be the zero polynomial.
+  }
+\end{theorem}
+
+
+\begin{remarks}
+  \begin{enumerate}
+  	\item \lang{de}{
+    Teilt man beide Seiten der Gleichung durch $g(x)$, so liest sich die Gleichung als
+    }
+    \lang{en}{
+    If we divide both sides of the equation by $g(x)$, it can be expressed as
+    }
+  	\[ \frac{f(x)}{g(x)}=q(x)+\frac{r(x)}{g(x)}. \]
+    \lang{de}{
+  	Der Quotient ist also die Summe aus einem Polynom und einem Quotienten, bei dem der Grad des Zählers
+  	kleiner als der Grad des Nenners ist.\\
+  	Analog zur Division mit Rest in den nat\"urlichen Zahlen schreibt man auch:
+    }
+    \lang{en}{
+    The quotient of $p$ divided by $g$ is therefore the sum of a polynomial and a quotient of 
+    polynomials whose numerator has a smaller degree than the denominator.\\
+    Analogously to long division of natural numbers, we also write:
+    }
+  	\[ f(x) : g(x) = q(x),\quad \text{remainder: }\;r(x). \]
+    \item 
+    \lang{de}{
+    Die Polynomdivision ist eng verwandt mit der Division nat\"urlicher Zahlen
+    mit Rest:  
+    \begin{itemize}
+    \item nat\"urliche Zahl $\backsim$ Polynom 
+    \item rationale Zahl $\backsim$  \lref{sec:gebrochen-rational}{gebrochen rationale Funktion}.
+    \end{itemize}
+    In dem Beispiel $\frac{11}{4}=2+\frac{3}{4}$ ist 
+    \begin{itemize}
+    \item \nowrap{$2$ der ganzzahlige Anteil $\backsim \, q(x)$} 
+    \item $\frac{3}{4}$ der Restterm $\backsim \, \frac{r(x)}{g(x)}$.
+    \end{itemize}
+    }
+    \lang{en}{
+    Polynomial division is intimately related to the division of
+    natural numbers with remainder: 
+    \begin{itemize}
+    \item natural number $\backsim$ polynomial, 
+    \item rational number $\backsim$ \lref{sec:gebrochen-rational}{rational function}.
+    \end{itemize}
+    In the example $\frac{11}{4}=2+\frac{3}{4}$  
+    \begin{itemize}
+    \item \nowrap{$2$ corresponds to the integer part $\backsim \, q(x)$,} 
+    \item \nowrap{$\frac{3}{4}$ corresponds to the remainder term $\backsim \, \frac{r(x)}{g(x)}$.}
+    \end{itemize}
+    }
+  \end{enumerate}
+\end{remarks}
+
+\lang{de}{
+Wie man die Polynome $q$ und $r$ berechnet, soll an expliziten Beispielen demonstriert werden.
+}
+\lang{en}{
+It is best shown in an explicit example how the polynomials $q$ and $r$ are calculated.
+}
+
+\begin{example}
+\lang{de}{Es seien $f(x)=x^4+3x+5$ und $g(x)=x^2+1$. Wir zeigen, dass}
+\lang{en}{Let $f(x)=x^4+3x+5$ and $g(x)=x^2+1$. We prove that}
+\begin{equation*}
+  \frac{x^4+3x+5}{x^2+1}=\left(x^2-1\right)+\frac{3x+6}{x^2+1}
+\end{equation*}
+\lang{de}{oder - in der anderen Notation - dass}
+\lang{en}{or, using a different notation, that}
+\\
+\begin{equation*}
+  \left(x^4+3x+5\right):\left(x^2+1\right)=x^2-1,\quad 
+  \text{\lang{de}{Rest: }\lang{en}{remainder }}\; 3x+6\,.
+\end{equation*}
+\lang{de}{
+Das Beispiel ist so gew\"ahlt, dass der Grad des Z"ahlers $x^4+3x+5$ gr\"o\"ser
+ist als der Grad des Nenners $x^2+1$. Das Resultat der Division ist damit ein
+Polynom; möglicherweise mit Restterm. 
+Man spricht auch von einer "`\emph{Euklidischen Division}"' von Polynomen.
+}
+\lang{en}{
+The example is selected such that the degree of the numerator $x^4+3x+5$ is
+greater than the degree of the denominator $x^2+1$. Hence the result is a
+polynomial, possibly with a remainder term. This is also called "\emph{Euclidean division}"
+of polynomials.
+}
+\\\\
+\lang{de}{
+\notion{Berechnung}\\
+\notion{1. Schritt:}
+Der Quotient der Terme h\"ochster Ordnung in $\left(x^4+3x+5\right)$ und
+$\left(x^2+1\right)$ ist
+\begin{equation*}
+  \frac{x^4}{x^2}=x^2.\quad\text{Das ist der 1. Term im polynomialen Anteil.}
+\end{equation*}
+Wir vervollst\"andigen jetzt den polynomialen Anteil schrittweise und berechnen
+gleichzeitig den Restterm - analog zur Division mit Rest f\"ur nat\"urliche
+Zahlen:
+}
+\lang{en}{
+\notion{Computation}\\
+\notion{Step 1:}
+The quotient of the terms of highest order in
+$\left(x^4+3x+5\right)$ and $\left(x^2+1\right)$ is
+\\
+\begin{equation*}
+  \frac{x^4}{x^2}=x^2.\quad\text{This is the 1st term in the polynomial part $q(x)$.}
+\end{equation*}
+Now we complete the polynomial part stepwise and at the same time compute the
+remainder of the division like in the case of natural numbers:
+}
+    \begin{align*}
+          & (x^4  \phantom{x^2} + \phantom{xx}  3x  +  5  ) &:~&  (x^2  + 1)  &~=~&  x^2  + &\ldots\\
+       -( &  \underline{x^4 \,\, + \, \,   x^2 \,)\phantom{xxxxxxxx}} & & & & &\\
+          & \phantom{XX}    -       x^2  +               3x  +  5  &   & &                   & & 
+            \text{\lang{de}{erster Restterm.}\lang{en}{first remainder term.}}\\
+    \end{align*}
+
+\lang{de}{
+\notion{2. Schritt}: Der Quotient der Terme h\"ochster Ordnung im 1. Restterm
+  $\left(-x^2+3x+5\right)$ und im Nenner $\left(x^2+1\right)$ ist
+  \begin{equation*}
+    \frac{-x^2}{x^2}=-1.\quad\text{Das ist der 2. Term im polynomialen Anteil.}
+  \end{equation*}
+  Jetzt berechnen wir den 2. Restterm:
+}
+\lang{en}{
+\notion{Step 2:} The quotient of the term of the highest order in the first remainder 
+  $\left(-x^2+3x+5\right)$ and the denominator $\left(x^2+1\right)$ is
+  \begin{equation*}
+    \frac{-x^2}{x^2}=-1.\quad\text{This is the 2nd term of the polynomial part $q(x)$.}
+  \end{equation*}
+  Now we calculate the second remainder term:
+}
+
+ \begin{align*}
+          & (x^4  \phantom{x^2} + \phantom{xx}  3x  +  5  ) &:~&  (x^2  +  1)  &~=~&  x^2 - 1 + &\ldots\\
+       -( &  \underline{x^4 \,\, + \, \,   x^2 \,)\phantom{xxxxxxxx}}   & & & &     &          \\
+          & \phantom{XX}    -       x^2  +               3x  +  5    & & & & & \phantom{\text{first remainder term.}}\\
+          & -( \underline{\phantom{X}- x^2 \phantom{3x +} - 1 \,)}          & & & & &\\
+          & \phantom{+ + + + \quad} 3x  +  6 &&&&&\text{second and final remainder term.}
+ \end{align*}
+
+  
+%  \\
+  \lang{de}{Der Algorithmus bricht hier ab, weil der Grad des 2. Restterms
+  kleiner als der Grad des Nenners ist.}
+  \lang{en}{The algorithm terminates here because the degree of the second
+  remainder term is smaller than the degree of the denominator.}
+\end{example}
+
+\begin{quickcheck}
+		\type{input.function}
+		\begin{variables}
+			\randint[Z]{a}{-5}{5}
+			\randint[Z]{b}{1}{4}
+			\randint{c}{-4}{4}
+			\randint[Z]{d1}{1}{4}
+			\randint[Z]{d0}{-3}{3}
+			\randint{m}{-3}{3}
+			\randint{n}{-3}{3}
+		    \function[normalize]{q}{a*x^2+b*x+c}
+		    \function[normalize]{g}{x^2+d1*x+d0}
+			\function[normalize]{r}{m*x+n}
+			\function[expand,normalize]{f}{q*g+r}
+		\end{variables}
+		
+			\text{\lang{de}{
+      Bestimmen Sie das Ergebnis bei Division mit Rest von $f(x)=\var{f}$ durch $g(x)=\var{g}$.
+      }
+      \lang{en}{
+      Determine the result of long division of $f(x)=\var{f}$ by $g(x)=\var{g}$.
+      }}
+			\text{\lang{de}{Es ist $\var{f}=($\ansref$)\cdot (\var{g})+($\ansref$)$.}
+            \lang{en}{It is $\var{f}=($\ansref$)\cdot (\var{g})+($\ansref$)$.}}
+             \explanation{\lang{de}{
+             Führen Sie die Rechnung entsprechend den Beispielen druch und schreiben Sie alles sauber auf. Wichtig ist, dass die Monome mit gleicher Ordnung untereinander stehen. Fehlt ein Monom muss Platz gelassen werden.}
+             \lang{en}{
+             Follow the steps given in the example and write each step up neatly. It is important 
+             that the terms of the same degree are vertically alighed for legibility. If a term is 
+             missing, conventionally we leave a gap in its place.
+             }}
+		
+		\begin{answer}
+			\solution{q}
+			\checkAsFunction{x}{-10}{10}{100}
+		\end{answer}
+		\begin{answer}
+			\solution{r}
+			\checkAsFunction{x}{-10}{10}{100}
+		\end{answer}
+	\end{quickcheck}
+
+\lang{de}{
+Nachfolgendes Video behandelt ebenfalls die Polynomdivision.
+\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10865&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}
+\\    
+Zum Schluss noch ein Video, worin ein Beispiel ausführlich durchgerechnet wird.
+\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10866&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+}
+\lang{en}{
+\\
+}
+
+\section{\lang{de}{Das Horner-Schema}\lang{en}{Horner's method}}\label{sec:poly-div-mit-horner}
+
+
+
+
+
+\lang{de}{
+Die Auswertung eines Polynoms $p(x)$ in der Darstellung $p(x) = a_{n}x^{n}+a_{n-1}x^{n-1}+...+a_{1}x+a_{0}$ an einer festen Stelle $x_{0}$ erfordert viele Rechenoperationen ($2n-1$ Multiplikationen und $n$ Additionen). Verwendet man stattdessen die sogenannte \textbf{Horner}-Darstellung, so benötigt man nur $n$ Multiplikationen und $n$ Additionen.\\ Die Horner-Darstellung ergibt sich durch fortgesetztes Ausklammern.
+}
+\lang{en}{
+Evaluation of a polynomial $p(x)$ of the form $p(x) = a_{n}x^{n}+a_{n-1}x^{n-1}+...+a_{1}x+a_{0}$ 
+at a fixed point $x_{0}$ calls for many operations to be performed ($2n-1$ multiplications and $n$ 
+additions). If however the so-called \textbf{Horner method} is used, we can reduce this to $n$ 
+multiplications and $n$ additions.\\ \textbf{Horner's rule} states that a polynomial can be written 
+with the following parentheses:
+}
+
+\begin{align*}
+    p(x) &= a_{n}x^{n}+a_{n-1}x^{n-1}+...+a_{1}x+a_{0} \\
+&= (a_{n}x^{n-1}+a_{n-1}x^{n-2}+...+a_{1}) \cdot x+a_{0} \\
+&= ((a_{n}x^{n-2}+a_{n-1}x^{n-3}+...+a_{2}) \cdot x+a_{1}) \cdot x+a_{0} \\
+&= ...\\
+&= (...((a_{n}x+a_{n-1}) \cdot x+a_{n-2}) \cdot x+...+a_{1}) \cdot x+a_{0} 
+\end{align*}
+
+
+
+\begin{example}
+\lang{de}{
+Wir leiten für $p(x) = 2x^{3}+4x^{2}-10x-12$ die Horner-Darstellung her. \\
+}
+\lang{en}{
+We represent $p(x) = 2x^{3}+4x^{2}-10x-12$ using Horner's rule. \\
+}
+\begin{align*}
+    p(x) &= 2x^{3}+4x^{2}-10x-12 \\
+    &= (2x^{2}+4x-10)x-12 \\
+    &= ((2x+4)x-10)x-12 \\
+\end{align*}
+\end{example}
+
+\lang{de}{
+Um $p(x_{0})$ an einer festen Stelle $x_{0}$ zu berechnen, verwendet man 
+die Horner-Darstellung und rechnet "von innen nach außen" die Klammern aus. 
+Dies stellt man im \textbf{Hornerschema} dar.
+}
+\lang{en}{
+To evaluate $p(x_{0})$ at a fixed point $x_{0}$, we apply Horner's rule to represent the polynomial 
+as in the last line, and evaluate it 'from the centre outwards'. 
+This is the principle behind \textbf{Horner's method}, also called \textbf{Horner's scheme}:
+}\\\\
+
+\begin{enumerate}
+    \item \lang{de}{
+    Die Koeffizienten von $p(x)$ werden in die erste Zeile des Hornerschemas geschrieben. Dabei werden auch Koeffizienten mit $a_k =0$ notiert.
+    }
+    \lang{en}{
+    The coefficients of $p(x)$ are written in the first row of a table. Coefficients with $a_k =0$ 
+    are also written.
+    }
+    \begin{table}
+    $a_{k \: \: \: \:}$ & $a_{n \: \: \: \:}$ & $a_{n-1}$ &$a_{n-2}$ &... $\: \: \: \:$ &$a_{1 \: \: \: \:}$ &$a_{0 \: \: \: \: }$ \\ 
+     &  &  &  &  &  &  \\
+    &  &  &  &  &  & 
+    \end{table} 
+    \item \lang{de}{Notieren der Stelle $x_{0}$, an der das Polynom ausgewertet werden soll.}
+          \lang{en}{Write the point $x_{0}$ at which the polynomial is to be evaluated.}
+    \begin{table}
+    $a_{k \: \: \: \:}$ & $a_{n \: \: \: \:}$ & $a_{n-1}$ & $a_{n-2}$ & ...$\: \: \: \:$ & $a_{1 \: \: \: \:}$ & $a_{0 \: \: \: \:}$ \\ 
+    $x_{0}$ &  &  &  &  &  & \\ 
+    &  &  &  &  & & 
+    \end{table} 
+    \item \lang{de}{
+    Das Schema wird schrittweise von links nach rechts ausgefüllt. 
+    \\
+        a) Unter $a_{n}$ schreiben wir $0$ und addieren die Werte in der ersten Spalte. Notieren des Ergebnisses $c_{n-1} = a_n + 0 = a_n$.
+    }
+    \lang{en}{
+    The table is filled in steps from left to right.
+    \\
+        a) Under $a_{n}$ we write $0$ and add the values in the first column. Denote the result 
+           $c_{n-1} = a_n + 0 = a_n$.
+    }
+    \begin{table}
+    $a_{k \: \: \: \:}$ &$a_{n \: \: \: \:}$ &$a_{n-1}$ &$a_{n-2}$ &... $\: \: \: \:$ &$a_{1 \: \: \: \:}$ &$a_{0 \: \: \: \:}$ \\ 
+    $x_{0}$ & 0  &  &  &  & & \\ 
+    & $c_{n-1}$ &  &  &  & &
+    \end{table}
+    \lang{de}{
+        b) $c_{n-1} \cdot x_{0}$ wird unter $a_{n-1}$ geschrieben. Die Werte der zweiten Spalte werden addiert. Notieren des Ergebnisses $c_{n-2} = a_{n-1} + c_{n-1} \cdot x_0$.
+    }
+    \lang{en}{
+        b) $c_{n-1} \cdot x_{0}$ is written under $a_{n-1}$. The values in the second column are 
+        summed. Denote the result $c_{n-2} = a_{n-1} + c_{n-1} \cdot x_0$.
+    }
+    \begin{table}
+    $a_{k \: \: \: \: \: \: \: \: \: \:}$ &$a_{n \: \: \: \: \: \: \: \: \: \:}$ &$a_{n-1}$ &$a_{n-2 \: \: \: \: \: \: \: \:}$ &... $\: \: \: \: \: \: \: \: \: \:$ &$a_{1 \: \: \: \: \: \: \: \: \: \:}$ &$a_{0 \: \: \: \: \: \: \: \:}$ \\ 
+    $x_{0}$ & 0  & $c_{n-1} \cdot x_{0}$ &  &  & &  \\ 
+    & $c_{n-1}$ & $c_{n-2}$ &  &  &  &
+    \end{table}
+    \lang{de}{
+    Schritt b) wird nun analog für die dritte Spalte, vierte Spalte etc. durchgeführt, bis man in der letzten Spalte angekommen ist. In der letzten Spalte rechts unten steht dann das Ergebnis $p(x_{0})$.
+    }
+    \lang{en}{
+    Step b) is now repeated on the third column, then the fourth, etc. until the final column is 
+    reached. In the bottom cell of the rightmost column is the result of the evaluation, $p(x_{0})$.
+    }
+    \begin{table}
+    $a_{k \: \: \: \: \: \: \: \: \: \:}$ &$a_{n \: \: \: \: \: \: \: \: \: \:}$ &$a_{n-1}$ &$a_{n-2}$ &... $\: \: \: \: \: \: \: \: \: \:$ &$a_{0 \: \: \: \: \: \: \: \: \: \:}$ \\ 
+    $x_{0}$ & 0 & $c_{n-1} \cdot x_{0}$ & $c_{n-2} \cdot x_{0}$ & ... & $c_{0} \cdot x_{0}$\\ 
+    & $c_{n-1}$ & $c_{n-2}$ & $c_{n-3}$ & ... & $p(x_{0})$ 
+    \end{table}
+    
+\end{enumerate}
+    
+  
+\begin{example}
+\lang{de}{
+Gegeben sei das Polynom 
+}
+\lang{en}{
+Consider the polynomial 
+}
+
+\[p(x) = 2x^{3}+4x^{2}-10x-12 = [(2x+4)x-10]x-12.\]
+\lang{de}{
+Mit dem Hornerschema wollen wir $p(3)$ berechnen.
+\\
+\\
+Koeffizienten von $p(x)$ in die erste Zeile des Hornerschemas schreiben; $x_{0} = 3$ notieren; $0$ in die erste Spalte unter den Leitkoeffizienten schreiben; Summe in der ersten Spalte bilden.
+}
+\lang{en}{
+Let us calculate $p(3)$ using Horner's method.
+\\
+\\
+We write the coefficients of $p(x)$ in the first row of the table, and note down $x_{0} = 3$; we 
+write $0$ in the first column under the leading coefficient. We sum the values in the first column.
+}
+
+    \begin{table}
+     $a_{k}$ &$2 \: \: \: \: \: \: \: \: \: \:$ &$4 \: \: \: \: \: \: \: \: \: \:$ &$-10 \: \: \: \: \:  $ & $-12 \: \: \: \: \:  $ \\ 
+    $x_{0} = 3$ & 0  &  &  &  \\ 
+    & 2 &  &  &  
+    \end{table}
+    \lang{de}{
+    Das Ergebnis der ersten Spalte mit $x_{0} = 3$ multiplizieren und in die zweite Spalte unter den 
+    Koeffizienten 4 schreiben; Summe in der zweiten Spalte bilden.
+    }
+    \lang{en}{
+    We multiply the sum of the first column by $x_{0} = 3$ and write the result in the second column 
+    below the coefficient $4$. We sum the values of the second column.
+    }
+    \begin{table}
+    $a_{k}$ &$2 \: \: \: \: \: \: \: \: \: \:$ &$4 \: \: \: \: \: \: \: \: \: \:$ &$-10 \: \: \: \: \:   $ & $-12 \: \: \: \: \:  $ \\ 
+    $x_{0} = 3$ & 0  & 6 &  &  \\ 
+    & 2 & 10 &  &  
+    \end{table}
+    \lang{de}{
+    Das Ergebnis in der zweiten Spalte mit $x_{0} = 3$ multiplizieren und in die dritte Spalte unter den Koeffizienten -10 schreiben; Summe in der dritten Spalte bilden.
+    }
+    \lang{en}{
+    We multiply the sum of the second column by $x_{0} = 3$ and write the result in the third column 
+    below the coefficient $-10$. We sum the values of the third column.
+    }
+    \begin{table}
+    $a_{k}$ &$2 \: \: \: \: \: \: \: \: \: \:$ &$4 \: \: \: \: \: \: \: \: \: \:$ &$-10 \: \: \: \: \:   $ & $-12 \: \: \: \: \:  $ \\
+    $x_{0} = 3$ & 0  & 6 & 30 &  \\ 
+    & 2 & 10 & 20 & 
+    \end{table}
+    \lang{de}{
+    Das Ergebnis der dritten Spalte mit $x_{0} = 3$ multiplizieren und in die vierte Spalte unter den 
+    Koeffizienten -12 schreiben; Summe in der vierten Spalte bilden.
+    }
+    \lang{en}{
+    We multiply the sum of the third column by $x_{0} = 3$ and write the result in the fourth column 
+    below the coefficient $-12$. We sum the values of the fourth column.
+    }
+    \begin{table}
+    $a_{k}$ &$2 \: \: \: \: \: \: \: \: \: \:$ &$4 \: \: \: \: \: \: \: \: \: \:$ &$-10\: \: \: \: \:  $ & $-12 \: \: \: \: \:  $ \\ 
+    $x_{0} = 3$ & 0  & 6 & 30 & 60 \\ 
+    & 2 & 10 & 20 & \textbf{48}
+    \end{table}
+    \lang{de}{
+    Rechts unten im Schema steht das Ergebnis \textbf{p(3) = 48}. Für $p(x)$ ergibt sich außerdem die 
+    Darstellung $p(x) = (x-3) \cdot (2x^{2}+10x+20)+48$.
+    }
+    \lang{en}{
+    The sum of the values in the rightmost column \textbf{p(3) = 48} is the evaluation of $p(x)$ at 
+    $x_0 = 3$. This is also the remainder of division of $p(x)$ by $(x-3)$, and we can write $p(x) = (x-3) \cdot (2x^{2}+10x+20)+48$. Note that the coefficients come from the results row of the table!
+    }
+\end{example}
+
+
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{a}{-2}{2}
+			\randint{b}{-2}{4}
+			\randint{c0}{0}{6}
+			\function[calculate]{c}{-c0*sign(a)}
+			\randint[Z]{d}{-5}{5}
+			\randint[Z]{y}{-2}{2}
+		    \function[normalize]{f}{a*x^3+b*x^2+c*x+d}
+			\function[calculate]{z1}{y*a}
+			\function[calculate]{z2}{y*d1}
+			\function[calculate]{z3}{y*d2}
+			\function[calculate]{d1}{z1+b}
+			\function[calculate]{d2}{z2+c}
+			\function[calculate]{d3}{z3+d}
+		\end{variables}
+		
+			\text{\lang{de}{
+      Berechnen Sie den Wert von $f(x)=\var{f}$ an der Stelle $x=\var{y}$
+			mit dem Horner-Schema:
+      }
+      \lang{en}{
+      Evaluate $f(x)=\var{f}$ at $x=\var{y}$ using Horner's method:
+      }\\
+			\begin{table}[\class{}]
+			\body &$\Bigg|$& \ansref & \ansref & \ansref & \ansref \\
+			\ansref &$\Bigg|$&       & \ansref & \ansref & \ansref \\
+			 & &\colspan{4}$\overline{\phantom{xxxxxxxxxxxxxxxxxx}}$ \\		
+			\foot &&  \ansref & \ansref & \ansref & \ansref \\
+			\end{table}
+			\lang{de}{Es ist also }
+      \lang{en}{Hence we have }
+      $f(\var{y})=$\ansref. 
+            
+			}
+		\begin{answer}\solution{a}\end{answer}
+		\begin{answer}\solution{b}\end{answer}
+		\begin{answer}\solution{c}\end{answer}
+		\begin{answer}\solution{d}\end{answer}
+		\begin{answer}\solution{y}\end{answer}
+		\begin{answer}\solution{z1}\end{answer}
+		\begin{answer}\solution{z2}\end{answer}
+		\begin{answer}\solution{z3}\end{answer}
+		\begin{answer}\solution{a}\end{answer}
+		\begin{answer}\solution{d1}\end{answer}
+		\begin{answer}\solution{d2}\end{answer}
+		\begin{answer}\solution{d3}\end{answer}
+		\begin{answer}\solution{d3}\end{answer}
+        
+         \explanation{\lang{de}{
+          Wichtig ist hier, dass in der ersten Zeile alle Koeffizienten inklusive aller Nullen, falls 
+          solche auftauchen, notiert werden. Sie müssen nach der Höhe der Potenzen der Monome 
+          absteigend sortiert sein.
+         }
+         \lang{en}{
+          It is important here to write every coefficient, including zero coefficients, in the first 
+          row of the table. They must also be written in descending order of the powers of the terms.
+         }}
+        
+	\end{quickcheck}
+    
+    
+    \lang{de}{
+    Im Kapitel \ref[link-polynome][Nullstellen und Faktorisierung von Polynomen]{factorisation}
+    haben wir gesehen, dass sich Polynome nach ihren Nullstellen faktorisieren lassen. Ist $c$ eine 
+    Nullstelle des Polynoms $p$ vom Grad $n$, so gibt es ein Polynom $q$ vom Grad $n-1$ mit 
+    }
+    \lang{en}{
+    In a previous chapter, the section on 
+    \ref[link-polynome][roots and linear factors of polynomials]{factorisation} 
+    mentions that polynomials can be factorised usuing their roots. If $c$ is a root of the 
+    polynomial $p$ of degree $n$, then there exists a polynomial $q$ of degree $n-1$ with 
+    }
+    
+    \[ p(x)=q(x)\cdot (x-c) \quad \text{\lang{de}{für alle }\lang{en}{for all }}x\in \R. \]
+
+    \lang{de}{
+    Das Polynom $q$ erhält man durch Polynomdivision $p(x) : (x -x_{0}) =q(x)$ 
+    oder mit Hilfe der Ergebniszeile des zugehörigen Hornerschemas. Ist also $p(x_{0}) = 0$, dann ist 
+    }
+    \lang{en}{
+    The polynomial $q$ is obtained by polynomial division $p(x) : (x -x_{0}) =q(x)$ or with help from 
+    the results row of the corresponding Horner's method table. Hence if $p(x_{0}) = 0$, then 
+    }
+     
+    \[p(x) = (x - x_{0}) \cdot (c_{n-1}x^{n-1} + c_{n-2}x^{n-2} + ...c_{1}x + c_{0}).\]
+
+    \lang{de}{
+    Mit $q(x)$ verfährt man dann analog.
+    Ist $q(x_{1}) = 0$, so ist $p(x) = (x - x_{0}) \cdot (x - x_{1}) \cdot \tilde{q}(x)$ mit einem Polynom $\tilde{q}$ vom Grad $n-2$.
+    }
+    \lang{en}{
+    We repeat the process with $q(x)$.
+    If $q(x_{1}) = 0$, then $p(x) = (x - x_{0}) \cdot (x - x_{1}) \cdot \tilde{q}(x)$ with a 
+    polynomial $\tilde{q}$ of degree $n-2$.
+    }
+    
+    \\ \\
+    
+    \begin{example}
+    \lang{de}{
+    Sei $p(x) = 2x^{3} + 4x^{2} - 10x - 12$. Es gilt $p(-1) = 0.$\\ Hornerschema für $x_{0} = -1$:
+    }
+    \lang{en}{
+    Let $p(x) = 2x^{3} + 4x^{2} - 10x - 12$. We have $p(-1) = 0$.\\
+    The Horner's method table for $x_{0} = -1$ is as follows:
+    }
+    
+    \begin{table}
+    $a_{k}$ & 2 & 4 & -10 & -12 & \\ 
+    $x_{0} = -1$ & 0 & -2 & -2 & 12 & \\ 
+    & 2 & 2 & -12 & 0 & $=p(-1)$ 
+    \end{table}
+
+    \lang{de}{
+    Also gilt $p(x) = (x + 1) \cdot (2x^{2} + 2x - 12).$\\
+    Die Nullstelle von $q(x) = 2(x^{2} + x -6)$ ermittelt man mit der $pq-$Formel zu $x_{1} = -3$ und 
+    $x_{2} = 2.$ Damit erhält man insgesamt die Faktorisierung des Polynoms 
+    $p(x) = 2 \cdot (x + 1) \cdot (x + 3) \cdot (x - 2).$
+    }
+    \lang{en}{
+    Hence $p(x) = (x + 1) \cdot (2x^{2} + 2x - 12)$.\\
+    The roots of $q(x) = 2(x^{2} + x -6)$ are $x_{1} = -3$ and $x_{2} = 2$, found using the p-q 
+    formula. Hence we obtain the factorisation of the polynomial 
+    $p(x) = 2 \cdot (x + 1) \cdot (x + 3) \cdot (x - 2).$
+    }
+    \end{example}
+%-----------------------------------------------------------------------
+
+
+
+\lang{de}{
+Für die Polynomdivision durch einen \textbf{linearen Term} kann man ebenfalls das
+Horner-Schema verwenden.
+\\
+%\ref[link-polynome][Horner-Schema]{sec:hornerschema}
+\\
+Für die Division eines Polynoms $f(x)$ durch ein lineares Polynom $g(x)=x-c$ führt man
+das Horner-Schema für $f$ und die Stelle $x=c$ durch.
+Der letzte Eintrag in der letzten Zeile ist - wie schon gesagt - der Wert $f(c)$, welcher
+gleich dem Polynom $r$ (vom Grad $0$) entspricht. Die anderen Einträge der letzten Zeile
+ergeben die Koeffizienten des Quotienten $q(x)$ beginnend mit der höchsten Potenz.
+\\
+Stellt man das Horner-Schema der Polynomdivision gegenüber, sieht man recht schnell,
+dass im Prinzip die gleichen Rechnungen durchgeführt werden.
+}
+\lang{en}{
+We can also use Horner's method for division of a polynomial by a \textbf{linear expression}.
+\\
+\\
+To divide a polynomial $f(x)$ by a linear polynomial $g(x)=x-c$ we carry out Horner's method for $f$ 
+evaluated at $x=c$. 
+The sum of the values in the rightmost column is, as previously mentioned, the value of $f(c)$, which 
+is the remainder polynomial in this case (of degree $0$ because the division is by a linear 
+expression, with degree $1$). The other entries of the result row correspond to the coefficients of 
+the quotient $q(x)$ starting with the highest power term.
+\\
+Comparing Horner's method to polynomial long division quickly reveals that in principle the same 
+calculations are made in both.
+}
+
+\begin{example}
+\lang{de}{
+Für die Division des Polynoms $f(x)=4x^3-3x^2+2$ durch das lineare Polynom $g(x)=x-2$
+berechnet man mit dem Horner-Schema für $f$ und die Stelle $2$:
+}
+\lang{en}{
+For the division of the polynomial $f(x)=4x^3-3x^2+2$ by the linear polynomial $g(x)=x-2$ we apply 
+Horner's method for $f$ evaluated at $2$:
+}
+
+\begin{table}
+% 0066CC: myblue
+% CC6600: myorange
+ \begin{table}
+    $a_k$ & $\phantom{-2}4$ & $\phantom{2}-3$ & $\phantom{-2}0$ & $\phantom{-2}2$ \\
+    $x_0=2$ & & $\phantom{-2}\textcolor{\#CC6600}{8}$ & $\phantom{-}\textcolor{\#CC6600}{10}$ & $\phantom{-}\textcolor{\#CC6600}{20}$ \\
+    & $\phantom{-2}\textcolor{\#0066CC}{4}$ & $\phantom{-2}\textcolor{\#0066CC}{5}$ & $\phantom{-}\textcolor{\#0066CC}{10}$ & $\phantom{-}\textcolor{\#0066CC}{22}$ 
+ \end{table}
+
+& 
+\begin{align*}
+          &\phantom{-}(4x^3 - 3x^2  \phantom{+10x} +  2  ) &:\,\,  (x-2) \,\,=\,\,  
+          \textcolor{\#0066CC}{4}x^2 +\textcolor{\#0066CC}{5}x+\textcolor{\#0066CC}{10}  \,\,\text{Rest: }\textcolor{\#0066CC}{22}\\
+         &-(\underline{\textcolor{\#0066CC}{4}x^3 -\textcolor{\#CC6600}{8}x^2 \,)\phantom{+10x+2}} &   \\
+          & \phantom{+(4x^3+(}\, \textcolor{\#0066CC}{5}x^2   \phantom{+10x}  +  2    &\\
+          & \phantom{+(4x^3}\! -(\underline{\textcolor{\#0066CC}{5}x^2 - \textcolor{\#CC6600}{10}x\,)\phantom{+2}}    & \\
+          & \phantom{+(4x^3 +8x^2+(}\,  \textcolor{\#0066CC}{10}x  +  2 &\\
+          & \phantom{+(4x^3 +8x^2}\! -(\underline{\textcolor{\#0066CC}{10}x - \textcolor{\#CC6600}{20} })  & \\
+          & \phantom{+(4x^3 +8x^2+ 10x+} \textcolor{\#0066CC}{22} & \\
+ \end{align*}
+ \end{table}
+
+\lang{de}{Also ist}
+\lang{en}{Hence}
+\\ 
+$f(x): (x-2) = 4x^2+5x+10 + \frac{22}{(x-2)}$, \\
+\lang{de}{bzw.}
+\lang{en}{or}
+\\
+$ f(x)= (4x^2+5x+10)\cdot (x-2)+22$.
+\end{example}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{a}{-2}{2}
+			\randint{b}{-2}{4}
+			\randint{c0}{0}{6}
+			\function[calculate]{c}{-c0*sign(a)}
+			\randint[Z]{d}{-5}{5}
+			\randint[Z]{y}{-2}{2}
+		    \function[normalize]{f}{a*x^3+b*x^2+c*x+d}
+			\function[calculate]{z1}{y*a}
+			\function[calculate]{z2}{y*d1}
+			\function[calculate]{z3}{y*d2}
+			\function[calculate]{d1}{z1+b}
+			\function[calculate]{d2}{z2+c}
+			\function[calculate]{d3}{z3+d}
+			\function[normalize]{g}{x-y}
+		\end{variables}
+		
+			\text{\lang{de}{
+      Sei $f(x)=\var{f}$.
+			Berechnen Sie mit dem Horner-Schema das Polynom $q$ und die Zahl $r$ so, dass
+			$f(x)=q(x)\cdot (\var{g})+r$ gilt:
+      }
+      \lang{en}{
+      Let $f(x)=\var{f}$.
+      Using Horner's method, find the polynomial $q$ and the number $r$ such that 
+      $f(x)=q(x)\cdot (\var{g})+r$:
+      }
+      \\
+			\begin{table}[\class{plain}]
+			\body &|& \ansref & \ansref & \ansref & \ansref \\
+			\ansref &|&       & \ansref & \ansref & \ansref \\	
+            & &\colspan{4}$\overline{\phantom{xxxxxxxxxxxxxxxxxx}}$ \\	
+			\foot &&  \ansref & \ansref & \ansref & \ansref \\
+			\end{table}
+      \lang{de}{
+			Es ist also $q(x)=$\ansref$x^2+$\ansref$x+$\ansref und $r=$\ansref.
+      }
+      \lang{en}{
+      Hence $q(x)=$\ansref$x^2+$\ansref$x+$\ansref and $r=$\ansref.
+      }}
+		\begin{answer}\solution{a}\end{answer}
+		\begin{answer}\solution{b}\end{answer}
+		\begin{answer}\solution{c}\end{answer}
+		\begin{answer}\solution{d}\end{answer}
+		\begin{answer}\solution{y}\end{answer}
+		\begin{answer}\solution{z1}\end{answer}
+		\begin{answer}\solution{z2}\end{answer}
+		\begin{answer}\solution{z3}\end{answer}
+		\begin{answer}\solution{a}\end{answer}
+		\begin{answer}\solution{d1}\end{answer}
+		\begin{answer}\solution{d2}\end{answer}
+		\begin{answer}\solution{d3}\end{answer}
+		\begin{answer}\solution{a}\end{answer}
+		\begin{answer}\solution{d1}\end{answer}
+		\begin{answer}\solution{d2}\end{answer}
+		\begin{answer}\solution{d3}\end{answer}
+        
+    \explanation{\lang{de}{
+    Wichtig ist hier, dass in der ersten Zeile alle Koeffizienten inklusive aller Nullen, falls 
+    solche auftauchen, notiert werden. Sie müssen nach der Höhe der Potenzen der Monome absteigend 
+    sortiert sein.
+    }
+    \lang{en}{
+    It is important here to write every coefficient, including zero coefficients, in the first 
+    row of the table. They must also be written in descending order of the powers of the terms.
+    }}     
+        
+	\end{quickcheck}
+
+    \lang{de}{
+    Nachfolgendes Video behandelt auch das Horner-Schema:
+    \\
+    \floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10812&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+    }
+    \lang{en}{
+    \\
+    }
+	
+
+\section{\lang{de}{Gebrochen rationale Funktionen}
+         \lang{en}{Rational functions}} \label{sec:rationale_fkt}
+
+\begin{definition}\label{def:gebr_rat_fkt}\label{def:singularity}\label{def:pole}
+\lang{de}{
+Der Quotient zweier Polynome $f(x)$ und $g(x)$ heißt 
+\notion{rationale Funktion} oder \notion{gebrochen rationale Funktion}
+}
+\lang{en}{The quotient of two polynomials $f(x)$ and $g(x)$ is called a \notion{rational function}}
+\begin{equation*}
+  r(x)=\frac{f(x)}{g(x)}.
+\end{equation*}
+\lang{de}{Der nat"urliche Definitionsbereich ${D}_r$ von $r$ ist}
+\lang{en}{The natural domain ${D}_r$ of the rational function $r$ is}
+\[ {D}_r = \{ x\in\R\mid g(x)\ne 0\} \]
+%\quad \text{\lang{de}{oder}\lang{en}{or}}
+%\quad \cal{D}_r = \{ x\in\C\mid g(x)\ne 0\}.\]
+\lang{de}{
+Die Nullstellen von $g(x)$ sind die \notion{Definitionslücken} von $r(x)$ (und werden auch Singularitäten genannt). Falls $g$ an der Stelle $x_0$ eine Nullstelle hat und $\lim_{x\to x_0}|r(x)|=\infty$ gilt, dann nennen wir $x_0$ eine \notion{Polstelle} von $r(x)$.
+\\
+Eine rationale Funktion $\frac{f(x)}{g(x)}$ heißt \notion{echt gebrochen rational}, wenn
+der Grad des Zählers $f$ echt kleiner als der Grad des Nenners $g$ ist.\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=121}{\image[75]{00_Videobutton_schwarz}}}\\
+}
+\lang{en}{
+The roots of $g(x)$ are not in the domain of $r(x)$, and if there is a root $x_0$ of $g$ such that 
+$\lim_{x\to x_0}|r(x)|=\infty$, we call $x_0$ a \notion{pole} or \notion{singularity} of $r(x)$.
+\\
+A rational function $\frac{f(x)}{g(x)}$ is called a \notion{proper rational function} if the degree 
+of the numerator $f$ is strictly less than the degree of the denominator $g$. 
+}
+\end{definition}
+
+\lang{de}{
+Wir haben bisher den Grenzwert-Begriff noch nicht eingeführt. Das werden wir erst im zweiten Teil des Kurses tun. An dieser Stelle haben wir die Polstellen aber schon einmal formal definiert.
+Eine genauere Betrachtung der Definitionslücken und Polstellen werden wir dann auch erst im zweiten Teil führen. Deshalb ist für das Verständnis hier besonders die nächste Bemerkung hilfreich.
+}
+\lang{en}{
+We have not yet introduced the definition of a limit. We will do this in the second part of the 
+course. For now we have defined the pole of a rational function, but a more general and insightful 
+definition can only be provided in the second part of the course. The following remark is helpful for 
+understanding what a pole is without needing the definition of a limit.
+}
+
+
+\begin{remark}\label{rem:polstelle}
+    \lang{de}{
+    Für eine Stelle $x$, an der das Nennerpolynom $g(x)=0$ ist und $f(x)\neq 0$ gilt, liegt immer 
+    eine Polstelle von $r(x)$ vor.
+    }
+    \lang{en}{
+    If there is a real number $x$ at which $g(x)=0$ and $f(x)\neq 0$, then there is a pole of $r(x)$ 
+    at $x$.
+    }
+\end{remark}
+
+
+\begin{example}
+    \lang{de}{Die rationale Funktion}
+    \lang{en}{The rational function}
+    \begin{equation*}
+      r(x)=\frac{2x+1}{x^2-1}
+    \end{equation*}
+    \lang{de}{hat zwei Polstellen:
+    \begin{equation*}
+      x=1 \;\text{und}\;x=-1,
+    \end{equation*}
+    denn für das Zählerpolynom $f(x)= 2x+1$ gilt $f(1) = 3 \neq 0$ und $f(-1)=-1\neq 0$.
+    }
+    \lang{en}{has two poles:
+    \begin{equation*}
+      x=1 \;\text{and}\;x=-1
+    \end{equation*}
+    }
+    \end{example}
+
+\begin{remark}
+  \begin{enumerate}
+    \item \lang{de}{
+          Die Summe von zwei rationalen Funktionen ist eine rationale Funktion, 
+          wie das folgende Beispiel erkl"art:
+          }
+          \lang{en}{
+          The sum of two rational functions is another rational function, as is illustrated by the 
+          following example:
+          }
+    \begin{eqnarray}
+      \frac{x}{x^2+1}+\frac{1}{x^2-1} & = &
+        \frac{x\left(x^2-1\right)+\left(x^2+1\right)}{\left(x^2+1\right)\left(x^2-1\right)}\\
+      & = & \frac{x^3+x^2-x+1}{x^4-1}.
+    \end{eqnarray}
+	\item \lang{de}{
+        Mittels Polynomdivision lässt sich jede rationale Funktion als Summe eines Polynoms und 
+      	einer echt gebrochen rationalen Funktion schreiben. Ist nämlich $f(x)=q(x)\cdot g(x)+r(x)$ 
+        mit Grad $r$ echt kleiner als Grad von $g$, so liest sich diese Gleichung nach Teilen durch 
+        $g$ als
+      	\[ \frac{f(x)}{g(x)}=q(x)+\frac{r(x)}{g(x)}. \]
+      	Die rationale Funktion $\frac{f(x)}{g(x)}$ ist also die Summe aus dem Polynom $q$ und der echt
+      	gebrochen rationalen Funktion $\frac{r(x)}{g(x)}$.
+        }
+        \lang{en}{
+        Using long division of polynomials, every rational function can be expressed as the sum of a 
+        polynomian and a proper rational function. If $f(x)=q(x)\cdot g(x)+r(x)$ with the degree of 
+        $r$ strictly less than the degree of $g$, then the equation can be divided by $g$ to obtain 
+        \[ \frac{f(x)}{g(x)}=q(x)+\frac{r(x)}{g(x)}. \]
+        The rational function $\frac{f(x)}{g(x)}$ is therefore the sum of the polynomial $q$ and the 
+        proper rational function $\frac{r(x)}{g(x)}$.
+        }
+  \end{enumerate}
+
+\end{remark}
+
+
+\begin{quickcheck}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{a}{-5}{5}
+			\randint[Z]{b}{1}{4}
+			\randint{c}{-4}{4}
+			\randint[Z]{d1}{1}{4}
+			\randint[Z]{d2}{-4}{-1}
+		    \function[normalize]{f}{a*x^2+b*x+c}
+		    \function[expand,normalize]{g}{(x-d1)*(x-d2)}
+		\end{variables}
+		
+			\text{\lang{de}{
+      Bestimmen Sie die Definitionslücken $c_1$ und $c_2$ der rationalen Funktion $\frac{\var{f}}{\var{g}}$
+			mit $c_1<c_2$.\\
+			Die Definitionslücken sind \ansref und \ansref.}
+      \lang{en}{
+      Determine the points $c_1$ and $c_2$ at which the rational function $\frac{\var{f}}{\var{g}}$ 
+      is not defined, with $c_1<c_2$.\\
+      The points are \ansref und \ansref.
+      }}
+		
+		\begin{answer}
+			\solution{d2}
+		\end{answer}
+		\begin{answer}
+			\solution{d1}
+		\end{answer}
+        
+         \explanation{\lang{de}{
+                      Die Definitionslücken sind die Nullstellen des Nennerpolynoms.
+                      }
+                      \lang{en}{
+                      The points at which the rational function is not defined are the 
+                      roots of the denominator.
+                      }}
+        
+	\end{quickcheck}
+
+
+	
+
+\end{visualizationwrapper}
+
+\end{content}

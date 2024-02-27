@@ -1,0 +1,663 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Exponentialfunktionen}
+    \lang{en}{Exponential functions}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T104_Exponentials_B.meta.xml}{T104_Exponentials_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T104_Exponentials_A.meta.xml}{T104_Exponentials_A}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T104_weitere_elementare_Funktionen/g_art_content_15_exponentialfunktionen.meta.xml}{content_15_exponentialfunktionen}
+    \link{generic_article}{content/rwth/HM1/T104_weitere_elementare_Funktionen/g_art_content_14_potenzregeln.meta.xml}{powers-roots}
+    \link{generic_article}{content/rwth/HM1/T104_weitere_elementare_Funktionen/g_art_content_16_logarithmen.meta.xml}{link2}
+    \link{generic_article}{content/rwth/HM1/T106_Differentialrechnung/g_art_content_20_ableitung_als_tangentensteigung.meta.xml}{link-diff}
+    \link{generic_article}{content/rwth/HM1/T107_Integralrechnung/g_art_content_25_stammfunktion.meta.xml}{link-int}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{4}
+\ombarticle{3}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\lang{de}{\title{Exponentialfunktionen}}
+\lang{en}{\title{Exponential functions}}
+
+\begin{block}[annotation]
+ $a^x$, Definition, Funktionsgraphen, Definitions- und Wertebereich, Umkehrbarkeit. $e$
+\end{block}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9011}{Ticket 9011}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{\lang{de}{Einf"uhrung in Exponentialfunktionen}
+         \lang{en}{Introduction to exponential functions}}\label{sec:exp_fkt}
+\lang{de}{
+Die Funktionen $2^x, 10^x, e^x$ (wobei $e$ die \lref{eulernum}{Eulersche Zahl} ist) sind Beispiele 
+von Exponentialfunktionen, also Funktionen, bei denen die Variable im Exponenten steht.
+}
+\lang{en}{
+The functions $2^x, 10^x, e^x$ (where $e$ is \lref{eulernum}{Euler's number}) are examples of 
+'exponential functions', whose variable is found in the exponent.
+}
+\begin{definition}[\lang{de}{Exponentialfunktion}\lang{en}{Exponential function}]
+   \lang{de}{Die Funktionen}
+   \lang{en}{Functions of the form} 
+     \begin{equation*}
+    f(x) = a^x, \quad a > 0
+      \end{equation*}
+    \lang{de}{
+    heißen \notion{Exponentialfunktionen}. Sie sind für alle reellen Zahlen $x$ definiert: 
+    $D_f = \mathbb{R}$. Die Zahl $a>0$ heißt \emph{Basis}.\\
+    \floatright{\href{https://www.hm-kompakt.de/video?watch=141}{\image[75]{00_Videobutton_schwarz}}}\\~
+    }
+    \lang{en}{
+    are called \emph{exponential functions}. They are defined for all real numbers: 
+    $D_f = \mathbb{R}$. The number $a>0$ is called the \emph{base}.
+    } 
+\end{definition}
+\lang{de}{
+Für \emph{rationale Exponenten} $x$ ist $a^x$ bereits im Abschnitt 
+\ref[powers-roots][Potenzgesetze]{potenz_rational} eingeführt worden. Um $a^x$ für beliebige reelle 
+Zahlen ordentlich zu definieren, sind Konzepte nötig (z.B. die Stetigkeit), die erst im nächsten Teil 
+dieses Kurses behandelt werden. Wir begnügen uns deshalb hier mit der folgenden Beobachtung: Kann 
+eine reelle Zahl $x$ beliebig gut durch eine rationale Zahl $\frac{m}{n}$ angenähert werden, dann ist 
+auch $a^{\frac{m}{n}}$ eine beliebig gute Näherung für $a^x$. Dies genügt für alle praktischen Zwecke.
+}
+\lang{en}{
+We have introduced $a^x$ for \emph{rational exponents} $x$ in the section on 
+\ref[powers-roots][general exponents]{potenz_rational}. To define $a^x$ for any real $x$, we require 
+concepts (such as continuity) that are only covered in the second part of this course. Therefore we 
+content ourselves here with making the following observation: if a real number $x$ can be 
+approximated arbitrarily well by a rational number $\frac{m}{n}$, then $a^{\frac{m}{n}}$ can be an 
+arbitrarily good approximation for $a^x$. This suffices for our practical needs.
+}
+
+\begin{theorem}
+\lang{de}{
+Die Wertemenge jeder Exponentialfunktion (mit Ausnahme von  $a = 1$) ist die Menge 
+$\R_{>0}$ der positiven reellen Zahlen, wie die Grafiken im untenstehenden Beispiel nahelegen. \\
+Im  Fall $a=1$ ist $f(x)=1$ für alle $x$, die Wertemenge ist nun also $\{1\}$.
+}\label{uninteresting_de}
+\lang{en}{
+The image of every exponential function with $x\in\R$ (except when $a = 1$) is the set of positive 
+real numbers $\R^+$; this can be seen in the plot below. 
+The uninteresting case is when $a=1$, which implies $f(x)=1$ for all $x$.
+}\label{uninteresting_en}
+\end{theorem}
+%Da $a>0$ ist und entsprechend $f(x) = a^x$ immer positiv ist, sind die Werte jeder Exponentialfunktion positiv.
+%Zusätzlich gilt, dass 
+
+\lang{de}{
+Alle Exponentialfunktionen haben die Eigenschaft $f(0)=a^0=1$. Der Verlauf der Exponentialfunktionen
+ist von der Basis $a$ abhängig und kann in zwei Fälle unterteilt werden, $0 < a < 1$ und $a > 1$. Im nächsten Beispiel 
+ist der Zusammenhang von Basiswert und Verlauf der Exponentialfunktionen ersichtlich.
+}
+\lang{en}{
+All exponential functions have the property $f(0)=a^0=1$. The gradient of the exponential function depends on the basis $a$, and can be divided into two cases:
+$0 < a < 1$ and $a > 1$. In the following example we'll see the relationship between the base and gradient of an exponential function more clearly.
+}
+
+\begin{example}\label{ex:exp-examples_A}
+\lang{de}{
+  \begin{table}[\cellaligns{cccccccc}]
+\head
+  $x$ & $\quad-3 \quad$ &$\quad -2  \quad$& $\quad -1 \quad$ &$\quad 0 \quad$ & $\quad 1 \quad$& $\quad 2 \quad$ &$\quad 3 \quad$ 
+  \body
+  $2^x$ & $\frac{1}{8}$ & $\frac{1}{4}$ & $\frac{1}{2}$& $1$ & $2$& $4$ & $8$\\
+  $\left( \frac{1}{2} \right)^x = 2^{-x}$& $8$ & $4$ & $2$ & $1$ & $\frac{1}{2}$ & $\frac{1}{4}$ & $\frac{1}{8}$ \\
+  $3^x$ & $\frac{1}{27}$ & $\frac{1}{9}$ & $\frac{1}{3}$& $1$ & $3$& $9$ & $27$\\
+  $\left( \frac{1}{3} \right)^x = 3^{-x}$& $27$ & $9$ & $3$ & $1$ & $\frac{1}{3}$ & $\frac{1}{9}$ & $\frac{1}{27}$\\
+   $10^x$& $0,001$& $0,01$ &$0,1$& $1$ & $10$& $100$ & $1000$\\
+  $\left( \frac{1}{10} \right)^x = 10^{-x}$ & $1000$ & $100$ & $10$ & $1$ &$0,1$ & $0,01$ & $0,001$
+%   \lang{en}{\head
+%   $x$ & $\quad-3 \quad$ &$\quad -2  \quad$& $\quad -1 \quad$ &$\quad 0 \quad$ & $\quad 1 \quad$& $\quad 2 \quad$ &$\quad 3 \quad$ 
+%   \body
+%   $2^x$ & $\frac{1}{8}$ & $\frac{1}{4}$ & $\frac{1}{2}$& $1$ & $2$& $4$ & $8$\\
+%   $\left( \frac{1}{2} \right)^x = 2^{-x}$& $8$ & $4$ & $2$ & $1$ & $\frac{1}{2}$ & $\frac{1}{4}$ & $\frac{1}{8}$ \\
+%   $3^x$ & $\frac{1}{27}$ & $\frac{1}{9}$ & $\frac{1}{3}$& $1$ & $3$& $9$ & $27$\\
+%   $\left( \frac{1}{3} \right)^x = 3^{-x}$& $27$ & $9$ & $3$ & $1$ & $\frac{1}{3}$ & $\frac{1}{9}$ & $\frac{1}{27}$\\
+%    $10^x$& $0.001$& $0.01$ &$0.1$& $1$ & $10$& $100$ & $1000$\\
+%   $\left( \frac{1}{10} \right)^x = 10^{-x}$ & $1000$ & $100$ & $10$ & $1$ &$0.1$ & $0.01$ & $0.001$
+%   }
+  \end{table}
+}
+\lang{en}{
+  \begin{table}[\cellaligns{cccccccc}]
+\head
+  $x$ & $\quad-3 \quad$ &$\quad -2  \quad$& $\quad -1 \quad$ &$\quad 0 \quad$ & $\quad 1 \quad$& $\quad 2 \quad$ &$\quad 3 \quad$ 
+  \body
+  $2^x$ & $\frac{1}{8}$ & $\frac{1}{4}$ & $\frac{1}{2}$& $1$ & $2$& $4$ & $8$\\
+  $\left( \frac{1}{2} \right)^x = 2^{-x}$& $8$ & $4$ & $2$ & $1$ & $\frac{1}{2}$ & $\frac{1}{4}$ & $\frac{1}{8}$ \\
+  $3^x$ & $\frac{1}{27}$ & $\frac{1}{9}$ & $\frac{1}{3}$& $1$ & $3$& $9$ & $27$\\
+  $\left( \frac{1}{3} \right)^x = 3^{-x}$& $27$ & $9$ & $3$ & $1$ & $\frac{1}{3}$ & $\frac{1}{9}$ & $\frac{1}{27}$\\
+   $10^x$& $0.001$& $0.01$ &$0,1$& $1$ & $10$& $100$ & $1000$\\
+  $\left( \frac{1}{10} \right)^x = 10^{-x}$ & $1000$ & $100$ & $10$ & $1$ &$0.1$ & $0.01$ & $0.001$
+%   \lang{en}{\head
+%   $x$ & $\quad-3 \quad$ &$\quad -2  \quad$& $\quad -1 \quad$ &$\quad 0 \quad$ & $\quad 1 \quad$& $\quad 2 \quad$ &$\quad 3 \quad$ 
+%   \body
+%   $2^x$ & $\frac{1}{8}$ & $\frac{1}{4}$ & $\frac{1}{2}$& $1$ & $2$& $4$ & $8$\\
+%   $\left( \frac{1}{2} \right)^x = 2^{-x}$& $8$ & $4$ & $2$ & $1$ & $\frac{1}{2}$ & $\frac{1}{4}$ & $\frac{1}{8}$ \\
+%   $3^x$ & $\frac{1}{27}$ & $\frac{1}{9}$ & $\frac{1}{3}$& $1$ & $3$& $9$ & $27$\\
+%   $\left( \frac{1}{3} \right)^x = 3^{-x}$& $27$ & $9$ & $3$ & $1$ & $\frac{1}{3}$ & $\frac{1}{9}$ & $\frac{1}{27}$\\
+%    $10^x$& $0.001$& $0.01$ &$0.1$& $1$ & $10$& $100$ & $1000$\\
+%   $\left( \frac{1}{10} \right)^x = 10^{-x}$ & $1000$ & $100$ & $10$ & $1$ &$0.1$ & $0.01$ & $0.001$
+%   }
+  \end{table}
+}
+
+ \begin{center}
+\image{T104_Exponentials_A}
+  \end{center}
+
+\end{example}
+\lang{de}{
+Wir fassen einige wichtige Eigenschaften von Exponentialfunktionen zusammen. 
+(Einige Begriffe wie die Monotonie werden an späterer Stelle ausführlich besprochen, sind Ihnen aber wahrscheinlich aus der Schule bekannt.)
+}
+\lang{en}{
+We summarise some important properties of exponential functions. 
+Certain definitions like monotone functions are only introduced later, but are included for 
+completeness, and some students may know these already.
+}
+
+\begin{example}\label{ex:eigenschaften_exp}
+   \begin{tabs*}[\initialtab{1}\class{example}]
+ \tab{$f(x) = a^x, \; a > 1$ }
+   \begin{table}
+  \head
+  $f(x) = a^x$ & $a > 1, \;\; a \in \mathbb{R}$ 
+  \body
+  $D_f = \mathbb{R}$ & 
+    \lang{de}{Definitionsbereich ist die Menge aller reellen Zahlen.}
+    \lang{en}{The domain is the set of all real numbers.} \\
+  $W_f = \mathbb{R}^+$  & 
+    \lang{de}{Wertemenge ist die Menge der positiven reellen Zahlen.}
+    \lang{en}{The image is the set of all positive real numbers.} \\
+  $f(x) \neq 0$& 
+    \lang{de}{Die Funktionen haben keine Nullstellen.}
+    \lang{en}{The functions have no zeros.}\\
+  $f(x_1) < f(x_2)$ \lang{de}{für}\lang{en}{for} $x_1 < x_2$&  
+    \lang{de}{Die Funktionen sind streng monoton wachsend.}
+    \lang{en}{The functions are strictly monotonically increasing.}\\
+  \lang{de}{Die Steigung von $f$ nimmt ständig zu.}
+  \lang{en}{The slope is increasing}  & 
+    \lang{de}{Der Graph beschreibt eine Linkskurve.}
+    \lang{en}{The graph is concave upward.} \\
+  $\lim_{x \to -\infty}f(x) = 0, \lim_{x \to \infty}f(x) = \infty$& 
+    \lang{de}{Die Funktionen streben von $0$ nach $\infty$.}
+    \lang{en}{The functions tend towards $0$ as $x$ decreases, and to $\infty$ as $x$ increases.}\\
+  \end{table}
+ \tab{$f(x) = a^{x}, \; 0 < a < 1$}
+\begin{table}
+  \head
+  $f(x) = a^{x} = \left(\frac{1}{a}\right)^{-x}$ & $ 0 < a < 1, \;\; a \in \mathbb{R}$ 
+  \body
+  $D_f = \mathbb{R}$ & 
+    \lang{de}{Definitionsbereich ist die Menge aller reellen Zahlen.}
+    \lang{en}{The domain is the set of all real numbers.} \\
+  $W_f = \mathbb{R}^+$ & 
+    \lang{de}{Wertemenge ist die Menge der positiven reellen Zahlen.}
+    \lang{en}{The image is the set of all positive real numbers.} \\
+  $f(x) \neq 0$& 
+    \lang{de}{Die Funktionen haben keine Nullstellen.}
+    \lang{en}{The functions have no zeros.}\\
+  $f(x_1) > f(x_2)$ \lang{de}{für}\lang{en}{for} $x_1 < x_2$& 
+    \lang{de}{Die Funktionen sind streng monoton fallend.}
+    \lang{en}{The functions are strictly monotonically decreasing.}\\
+  \lang{de}{Die Steigung von $f$ nimmt ständig zu.}
+  \lang{en}{The slope is increasing} & 
+    \lang{de}{Der Graph beschreibt eine Linkskurve.}
+    \lang{en}{The graph is concave upward.}  \\
+  $\lim_{x \to -\infty}f(x) = \infty, \lim_{x \to \infty}f(x) = 0$& 
+    \lang{de}{Die Funktionen streben von $\infty$ nach $0$.}
+    \lang{en}{The functions tend towards $\infty$ as $x$ decreases, and to $0$ as $x$ increases.}\\
+  \end{table}
+ \end{tabs*}
+\end{example}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{a1}{1}{4}
+			\randint{a2}{1}{4}		
+			\function[calculate]{a}{a1/a2} % a=1 ausschließen???
+			\randint[Z]{xp}{-1}{1} % sollte -4 .. 4 sein
+			\function[calculate]{yp}{a^xp}
+		\end{variables}
+		
+			\text{\lang{de}{
+            Für welches $a>0$ geht der Graph der Exponentialfunktion $f(x)=a^x$ durch den Punkt 
+            $P=(\var{xp};\var{yp})$?\\
+      			Für $a=$\ansref.
+            }
+            \lang{en}{
+            For which $a>0$ does the graph of the exponential function $f(x)=a^x$ contain the point 
+            $P=(\var{xp};\var{yp})$?\\
+            For $a=$\ansref.
+            }}
+		
+		\begin{answer}
+			\solution{a}
+		\end{answer}
+		\explanation{\lang{de}{
+                 Wenn der Punkt $P=(\var{xp};\var{yp})$ auf dem Graphen liegt, gilt: 
+                 $f(\var{xp})=\var{yp}$, also $a^\var{xp}=\var{yp}$.
+                 }
+                 \lang{en}{
+                 If the point $P=(\var{xp};\var{yp})$ lies on the graph, we have 
+                 $f(\var{xp})=\var{yp}$, so $a^\var{xp}=\var{yp}$.
+                 }}
+	\end{quickcheck}
+
+
+\lang{de}{
+Aus den \ref[powers-roots][Potenzgesetzen]{Potenzgesetze} folgt eine wichtige Eigenschaft
+jeder Exponentialfunktion: Die Addition der Argumente  führt zur Multiplikation der
+Funktionswerte.  Exponentialfunktionen verwandeln also Addition in Multiplikation!
+}
+\lang{en}{
+Every exponential function has the property that the image of the sum is equal to the product of the 
+images of two numbers. In this way the exponential function creates a connection between addition and 
+multiplication.
+}
+
+\begin{theorem}[\lang{de}{Potenzgesetz für Exponentialfunktionen}
+                \lang{en}{Power Rules for Exponential Functions}]\label{functional_eqn_exp}
+\lang{de}{Jede Exponentialfunktion $a^x$ mit $a>0$ erfüllt für alle $x_1,\,x_2\in\R$}
+\lang{en}{For every exponential function $a^x$ with $a>0$ and $x_1,\,x_2\in\R$,}
+\[
+	a^{x_1 + x_2} = a^{x_1}\cdot a^{x_2}.
+\]
+\lang{de}{Insbesondere gilt}
+\lang{en}{In particular,}
+\begin{equation*} 
+a^{-x} = \frac{1}{a^{x}}.
+\end{equation*}
+\end{theorem}
+\lang{de}{
+Dieser Satz folgt unmittelbar aus den \ref[powers-roots][Potenzgesetzen]{Potenzgesetze}, 
+die nicht nur für rationale Potenzen sondern auch für alle reellen Potenzen gelten.
+\\
+Wird das Argument einer Exponentialfunktion um einen festen Wert $\Delta x$ erhöht (oder bei 
+$\Delta x<0$ verringert), dann wird der Funktionswert mit dem festen Faktor $a^{\Delta x}$ 
+multipliziert:
+}
+\lang{en}{
+This follows directly from the previously established \ref[powers-roots][power laws]{Potenzgesetze}, 
+and holds for real exponents as well as rational exponents.
+\\
+If the argument of an exponential function is increased by a fixed value $\Delta x$ (or decreased 
+when $\Delta x<0$), then its image is multiplied by a fixed factor $a^{\Delta x}$:
+}
+
+\begin{equation*} f(x+\Delta x) = f(\Delta x)\cdot f(x) =  a^{\Delta x}\cdot f(x). \label{factor_shift}
+\end{equation*}
+
+\lang{de}{
+Diese Eigenschaft ist wichtig für \lref{applications_exp}{Anwendungen der Exponentialfunktionen}
+in der mathematischen Modellbildung.
+}
+\lang{en}{
+This property is important for the \lref{applications_exp}{applications of exponential functions} in 
+mathematical modelling.
+}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{a}{2}{5}
+			\randint{k}{1}{3}
+			\function[calculate]{c}{a^k}
+		\end{variables}
+		
+			\text{\lang{de}{
+      Wir betrachten die Exponentialfunktion $f(x)=\var{a}^{x}$. Bestimmen Sie den Faktor $c$ so, dass
+			$f(x+\var{k})=c\cdot f(x)$ für alle reellen Zahlen $x$ gilt. \\
+			Es ist $c=$\ansref.
+      }
+      \lang{en}{
+      We consider the exponential function $f(x)=\var{a}^{x}$. The factor $c$ satisfying 
+      $f(x+\var{k})=c\cdot f(x)$ for all real numbers $x$ is:\\
+      $c=$\ansref.
+      }}
+		
+		\begin{answer}
+			\solution{c}
+		\end{answer}
+		\explanation{\lang{de}{Es gilt}\lang{en}{We have} 
+    $f(x+\var{k})=\var{a}^{x+\var{k}}=\var{a}^\var{k}\cdot 
+    \var{a}^x=\var{a}^\var{k}\cdot f(x)=\var{c}\cdot f(x)$.}
+	\end{quickcheck}
+
+
+% Die Umkehrung,
+% dass die Multiplikation der Argumente zur Addition der Funktionswerte führt, ist eine charakteristische
+% \ref[link2][Eigenschaft der Logarithmusfunktionen]{functional_eqn_log}.
+% 
+% Auch die Multiplikation und Potenzierung werden durch die Exponentialfunktion verbunden.
+% Setzt man in der Regel $x=x_1=x_2$, so erhält man $f(2x)=f(x+x)=\left(f(x)\,\right)^2$. Das
+% gilt auch für andere Faktoren als nur $c=2$:}
+% \lang{en}{This property is important for \lref{applications_exp}{applications of the exponential function}
+% in building up mathematical models. The converse, that multiplication of arguments leads to the addition of function values, is a characteristic
+% \ref[link2][property of logarithms]{functional_eqn_log}.
+% 
+% Multiplication and exponentiation are also connected via the exponential function.
+% If we use the above rule and let $x=x_1=x_2$, we get $f(2x)=f(x+x)=\left(f(x)\,\right)^2$. This is
+% true for other factors, not only $c=2$:}
+% \begin{rule}\label{power_exp_fcn}
+% \lang{de}{Jede Exponentialfunktion $f(x)=a^x$ mit $a>0$ erfüllt für alle $x,\,c\in\R$}
+% \lang{en}{For every exponential function $f(x)=a^x$ with $a>0$ and $x,\,c\in\R$:}
+% \begin{equation*} 
+% \lang{de}{f(c\cdot x) = \left(f(x)\,\right)^c= \left(a^c\right)^x.}
+% \lang{en}{f(c\cdot x) = \left(f(x)\,\right)^c= \left(a^c\right)^x}
+% \end{equation*}
+% \end{rule}
+% \lang{de}{Dass die Transformation $\,f(x)\longrightarrow f(cx)$ den Graphen horizontal streckt oder staucht und evtl. spiegelt, wird 
+% im \ref[transformations][Abschnitt über Transformationen]{horizontale_Skalierung_exp} erläutert und visualisiert.}
+% \lang{en}{The transformation $\,f(x)\longrightarrow f(cx)$ leads to a stretching or shrinking of the graph (or even a mirroring), and will be dealt with
+% in further detail in the section on \ref[transformations][transformations]{horizontale_Skalierung_exp}.}
+
+\section{\lang{de}{Die natürliche Exponentialfunktion}
+         \lang{en}{The natural exponential function}}\label{sec:nat-exp-fct}
+\begin{definition}[\lang{de}{natürliche Exponentialfunktion}
+                   \lang{en}{Natural exponential function}]\label{eulernum}
+   \lang{de}{Die Exponentialfunktion mit der Basis $e$ heißt \notion{natürliche Exponentialfunktion}}
+   \lang{en}{The exponential function with base $e$ is called the \emph{natural exponential function}}  \\
+     \begin{equation*}
+    f(x) = e^x = \exp(x),
+      \end{equation*}
+      \lang{de}{wobei die \notion{Eulersche Zahl}}
+      \lang{en}{where \emph{Euler's Number}}
+     \begin{equation*} e \approx 2\lang{de}{,}\lang{en}{.}718281828459\end{equation*}
+     \lang{de}{eine irrationale Zahl ist.}
+     \lang{en}{is an irrational number.}
+\end{definition}
+
+\lang{de}{
+  Die natürliche Exponentialfunktion ist eine der wichtigsten
+  Funktionen in Mathematik und Naturwissenschaften. Wachstumsvorgänge
+  und Zerfallsprozesse in der Natur werden durch sie dargestellt. Sie
+  hat die ganz besondere Eigenschaft, dass sie mit ihrer Ableitung
+  (siehe Abschnitt \link{link-diff}{Ableitung und Ableitungsformeln}) übereinstimmt, das heißt, dass $(e^x)' = e^x$
+  für alle $x \in \mathbb{R}$ gilt. 
+  Das vereinfacht viele Berechnungen und
+  Umformungen zum Beispiel beim Differenzieren und
+  Integrieren (siehe Abschnitt \link{link-int}{Stammfunktion}).
+}
+\lang{en}{
+  The natural exponential function is one of the most important
+  functions in mathematics and the natural sciences. Growth and decay
+  in nature can be represented via the natural exponential function. The function has the
+  special property that its derivative is the function itself (see the section on 
+  \link{link-diff}{differentiation and rules of differentiation}), i.e. $(e^x)' = e^x$
+  for all $x \in \mathbb{R}$. 
+  This tends to simplify many calculations and transformations, 
+  most notably when there is differentiation and integration involved 
+  (see the section on \link{link-int}{integration}).
+}
+  
+\begin{remark}
+   \lang{de}{Jede Exponentialfunktion kann durch die natürliche Exponentialfunktion dargestellt werden:\\
+   }
+   \lang{en}{Every exponential function can be represented using the natural exponential function:\\
+   }
+     \begin{equation*}
+    f(x) = a^x = e^{bx},
+      \end{equation*}
+   \lang{de}{
+   wobei $a = e^b$. Für $a>1$ ist $b > 0$ und für $0 < a < 1 $ ist $b < 0$.
+   }
+   \lang{en}{
+   where $a = e^b$. For $a>1$ we have $b>0$ and for $0<a<1$ we have $b<0$.\\
+   For this reason, whenever we refer to \emph{the} exponential function, we almost always mean the 
+   natural exponential function. \emph{An} exponential function can refer to an exponential function 
+   with any base.
+   }
+\end{remark}
+\lang{de}{
+Der Parameter $b$ kann als $b=\ln(a)$ berechnet werden, was  im Abschnitt über 
+\link[_blank]{link2}{Logarithmusfunktionen} behandelt wird.
+}
+\lang{en}{
+We can actually write the parameter $b$ as $b=\ln(a)$, but this will be dealt with in 
+the section on 
+\link[_blank]{link2}{logarithms}.
+}
+\begin{example}
+\begin{center}
+\image{T104_Exponentials_B}
+\end{center}
+\lang{de}{
+Hier sehen Sie die Graphen einiger Exponentialfunktionen. Vergleichen Sie mit Beispiel 
+\ref{ex:exp-examples_A}: Auch optisch ist klar, dass z.B. die Funktion $2^x$ dort nicht mit der hier 
+dargestellten Funktion $e^{2x}=(e^2)^x$ übereinstimmt. Erstere wächst deutlich langsamer, denn 
+$2<\!<e^2\approx 7,39$.
+}
+\lang{en}{
+Above are the graphs of several exponential functions. Even visually comparing then with example 
+\ref{ex:exp-examples_A} quickly makes it clear that e.g. the function $2^x$ is distinctly 
+different from $e^{2x}=(e^2)^x$. The prior grows substantially slower, as $2<\!<e^2\approx 7,39$.
+}
+
+\end{example}
+ 
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randrat[Z]{c}{1}{4}{1}{4}
+			\randint[Z]{xp}{-4}{4}
+			\function[calculate]{yp}{c*xp}
+		\end{variables}
+		
+			\text{\lang{de}{
+      Für welches $c$ geht der Graph der Exponentialfunktion $f(x)=e^{cx}$ durch den Punkt 
+			$P=(\var{xp};e^\var{yp})$?\\
+			Für $c=$\ansref.
+      }
+      \lang{en}{
+      The graph of the exponential function $f(x)=e^{cx}$ contains the point 
+      $P=(\var{xp};e^\var{yp})$ if \\
+      $c=$\ansref.
+      }}
+		
+		\begin{answer}
+			\solution{c}
+		\end{answer}
+		\explanation{\lang{de}{
+    Wenn der Punkt $P=(\var{xp};e^\var{yp})$ auf dem Graphen liegt, gilt: $f(\var{xp})=e^\var{yp}$, 
+		also $e^{\var{xp}c}=e^\var{yp}$.
+    }
+    \lang{en}{
+    If the point $P=(\var{xp};e^\var{yp})$ lies on the graph, we have $f(\var{xp})=e^\var{yp}$, so 
+    $e^{\var{xp}c}=e^\var{yp}$.
+    }}
+	\end{quickcheck}
+
+ \lang{de}{
+  Nachfolgendes Video behandelt auch die Exponentialfunktionen und ergänzt obigen Text, dabei wird 
+  auch auf die Stetigkeit und Differenzierbarkeit eingegangen, was erst später besprochen wird.
+	 
+ \floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10799&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+ }
+ \lang{en}{
+ \\
+ }
+ 
+\section{\lang{de}{Anwendungen der Exponentialfunktionen}
+         \lang{en}{Applications of exponential functions}}\label{applications_exp}
+
+\lang{de}{
+Bei der Beschreibung von Prozessen in den Natur-, Ingenieur- und Wirtschaftswissenschaften 
+durch mathematische Modelle ("`mathematische Modellbildung"') treten sehr oft Exponentialfunktionen 
+auf, insbesondere, um den zeitlichen Verlauf wiederzugeben. Die unabhängige Variable wird dann meist 
+mit $t$ für die Zeit (lateinisch tempus) bezeichnet. Die Maßeinheit (z.B. Sekunden $s$, Stunden $h$, 
+Tage $d$ oder Jahre $a$) muss jeweils angegeben werden.
+}
+\lang{en}{
+In describing processes in the natural, engineering, and economic sciences via mathematical
+modelling we often encounter the exponential function, especially when dealing with growth over time. 
+The independent variable is most often denoted by $t$ for time (originally from the Latin 
+\emph{tempus}). The units (e.g. seconds (s), hours (h), days (d) or years (a)) always need to be 
+specified.
+}
+
+\begin{enumerate}
+\item \lang{de}{
+In einer typischen Bakterienkultur verdoppelt sich die Anzahl der Bakterien etwa alle $20$ Minuten
+(solange genügend Platz und Nährlösung vorhanden ist). In einer Stunde hat sich die Anzahl dreimal
+verdoppelt, also verachtfacht. Wenn die Kultur am Anfang $N_0$ Bakterien hatte, und wenn die Zeit von 
+da an in Stunden gemessen wird, dann hat die Kultur zu einer späteren Zeit $t>0$
+}
+\lang{en}{
+In a typical bacterial culture, the number of bacteria doubles itself every $20$ minutes 
+(as long as there's enough room and nutrition to sustain the growth).
+In one hour, the number of bacteria doubles three times, that is, grows 8-fold. If the culture 
+starts with $N_0$ bacteria and the time from then on is measured in hours, then the culture $t>0$ 
+hours later has:
+}
+\begin{equation*}N(t) = N_0\cdot 8^t\;\text{\lang{de}{Bakterien, $\quad t\,$ in Stunden.}
+                                            \lang{en}{bacteria, $\quad t\,$ in hours}}
+\end{equation*}
+\lang{de}{
+Wenn z.B. am Anfang $N_0=7$ Bakterien in der Kultur waren, dann erwartet man nach einer Stunde
+$N(1) = 7\cdot 8^1 =56$ Bakterien, nach $3$ Stunden
+$N(3) = 7\cdot 8^3 = 3.584$ Bakterien und nach 6 Stunden $N(6) = 7\cdot 8^6 \approx 1,8$ Millionen 
+Bakterien. Sie sehen daran die Grenzen eines einfachen Modells für exponentielles Wachstum. Die 
+Modelle sind Näherungen und sie sind nur für ein begrenztes Zeitintervall eine gute Beschreibung. 
+Wenn die Population zu groß wird, muss auch der begrenzte Platz oder Nahrungsvorrat berücksichtigt 
+werden, der bei kleinen Populationen noch keine Rolle spielt.
+}
+\lang{en}{
+For example, if at the beginning we have $N_0=7$ bacteria in the culture, then after an hour we 
+expect there to be $N(1) = 7\cdot 8^1 =56$ bacteria, after $3$ hours $N(3) = 7\cdot 8^3 = 3,584$ 
+bacteria, and after 6 hours $N(6) = 7\cdot 8^6 \approx 1.8$ million bacteria. Here we can see the 
+limits of the simple model of exponential growth. The models are approximations, and are only valid 
+for a limited time interval. If the population gets too large, the amount of space available and 
+the amount of food come into play, which normally don't play a role with small populations.
+}
+\item \lang{de}{
+Auch das Wachstum eines Kapitals mit festem Zinssatz gemäß der
+Zinseszinsformel ist ein Beispiel für exponentielles Wachstum. Das verzinste Kapital lässt sich berechnen mit folgender Formel:
+   \begin{equation*}
+   K_{neu} = K_{0}  \cdot  (1 + \frac{p}{100} )^{h}
+   \end{equation*}
+Wobei $K_{0}$ für das Startkapital steht, $p$ für den Zinssatz und $h$ für die Laufzeit der 
+Verzinsung.\\
+Angenommen wir legen 1000\euro{} für 15 Jahre zu 5,0 \% Zinsen an. Eingesetzt in die Formel erhalten 
+wir
+$ K_{neu} = 1000 \cdot (1 +  \frac{5}{100} )^{15} \approx 2079$\euro{}
+}
+\lang{en}{
+The growth of capital with a fixed interest rate according to the interest formula is an example of 
+exponential growth, modelled by the formula
+   \begin{equation*}
+   K_{new} = K_{0}  \cdot  (1 + \frac{p}{100} )^{h}
+   \end{equation*}
+where $K_{0}$ is the initial capitak, $p$ is the interest rate and $h$ is the time variable. \\
+If we deposited $1000$\euro{} and waited $15$ years at a $5.0$\% interest rate, by the formula we 
+would have
+$ K_{new} = 1000 \cdot (1 +  \frac{5}{100} )^{15} \approx 2079$\euro{}
+}
+
+\item \lang{de}{
+Ein aufgeladener elektrischer Kondensator mit Anfangsspannung $U_0 = 20\,\text{V}$ wird 
+über einen Widerstand entladen. Nach einer Sekunde
+hat er die Spannung $18\,\text{V} = (\frac{9}{10})\cdot 20\,\text{V}$. 
+Dann wird der zeitliche Verlauf der Spannung (in Volt) durch
+    \begin{equation*}
+    U(t) = U_0\cdot \left(\frac{9}{10}\right)^t,\qquad t\;\text{ in Sekunden (s)}
+    \end{equation*}
+beschrieben. Nach $2,5$ Sekunden  ist die Spannung auf 
+$U(2,5)=20\,\text{V}\cdot (\frac{9}{10})^{2,5} \approx 15,4\,\text{V}$ \\
+abgefallen, nach $10\,\text{s}$ auf 
+$U(10)=20\,\text{V}\cdot (\frac{9}{10})^{10} \approx 7\,\text{V}$ \\
+und nach einer Minute auf 
+$U(60)=20\,\text{V}\cdot (\frac{9}{10})^{60} \approx 0,04\,\text{V}$.
+}
+\lang{en}{
+A charged capacitor with an initial voltage of $U_0 = 20\,\text{V}$ is released through a resistor. After one second, the voltage drops to 
+$18\,\text{V} = (\frac{9}{10})\cdot 20\,\text{V}$. The voltage can then be given (in Volts) via the following equation:
+    \begin{equation*}
+    U(t) = U_0\cdot \left(\frac{9}{10}\right)^t,\qquad t\;\text{ in seconds (s)}
+    \end{equation*}
+After $2.5$ seconds the voltage has dropped to 
+$U(2.5)=20\,\text{V}\cdot (\frac{9}{10})^{2,5} \approx 15.4\,\text{V}$, \\
+after $10$ seconds it has dropped to 
+$U(10)=20\,\text{V}\cdot (\frac{9}{10})^{10} \approx 7\,\text{V}$ \\
+and after a minute it has dropped to 
+$U(60)=20\,\text{V}\cdot (\frac{9}{10})^{60} \approx 0.04\,\text{V}$.
+}
+\item \lang{de}{
+Ein anderes Beispiel für exponentielles Abklingen ist der radioaktive Zerfall. 
+Eine radioaktive Substanz zerfällt nach dem Zerfallsgesetz
+\[
+n(t) = n_0 \cdot e^{-\lambda t}, \qquad t \geq 0.
+\]
+Dabei ist $n_0$ das zum Zeitpunkt $t = 0$ vorhandene radioaktive Material und 
+$\lambda > 0$ die sogenannte Zerfallskonstante. 
+Die Halbwertszeit gibt die Zeitdauer an, nach der die Hälfte der Atomkerne einer 
+radioaktiven Substanz zerfallen sind. Sie lässt sich über die Formel
+\[
+t_{1/2} = \frac{1}{\lambda} \cdot \ln(2)
+\]
+berechnen. 
+Dabei bezeichnet $\ln$ den natürlichen Logarithmus, siehe dazu \ref[link2][hier]{ln}.
+Das radioaktive Isotop Radon 220 hat beispielsweise die Zerfallskonstante 
+$ \lambda = 1,247 \cdot 10^{-2} \cdot s^{-1}$. Damit ergibt sich die Halbwertszeit 
+von Radon 220 zu
+}
+\lang{en}{
+Another example for exponential decay is radioactive decay, which can be modelled by 
+the formula 
+\[
+n(t) = n_0 \cdot e^{-\lambda t}, \qquad t \geq 0,
+\]
+where $n_0$ is the level of radiactivity at the time $t=0$, and $\lambda > 0$ is the 
+so-called \emph{decay constant}. 
+The \emph{half-life} is the time required for the radioactivity of a sample to decay 
+to half its original value, and can be calculated using the formula 
+\[
+t_{1/2} = \frac{1}{\lambda} \cdot \ln(2). 
+\]
+Here $\ln$ is the natural logarithm, introduced \ref[link2][here]{ln}. 
+For example, the radioactive isotope \emph{radon 220} has a decay constant 
+$ \lambda = 1,247 \cdot 10^{-2} \cdot s^{-1}$, making its half-life
+}
+\[
+t_{1/2} = \frac{\ln(2)}{1,247 \cdot 10^{-2} \cdot s^{-1}}  = 
+\frac{\ln(2) \cdot s}{1,247 \cdot 10^{-2}} \approx 55,8 \ s.
+\]
+
+
+
+
+\end{enumerate}
+
+\end{visualizationwrapper}
+
+\end{content}

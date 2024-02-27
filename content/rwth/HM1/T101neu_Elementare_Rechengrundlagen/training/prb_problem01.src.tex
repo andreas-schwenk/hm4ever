@@ -1,0 +1,106 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+ \name{
+  \lang{de}{A01: Mengenoperationen}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{
+	\title{A01: Mengenoperationen}
+}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22282}{Ticket 22282}
+\end{block}
+
+\begin{block}[annotation]
+	Mengen und Mengenoperationen
+\end{block}
+
+\begin{problem}
+%
+  \begin{question}  % Q1: Mengenoperationen
+%
+      \begin{variables}                 % alle Variablen sind verschieden !!!
+        \randint{a0}{-9}{-5}
+        \randint{b0}{-4}{-1}
+        \randint{bn}{2}{8}
+        \function[normalize]{b1}{b0/bn} % b1 kann gannzahlig nur -2 od. -1 sein, 
+%        \randadjustIf{b1}{b0=b1}       % ist aber stets ungleich b0, da bn \neq 1
+        \randint{c0}{0}{2}
+        \randint{c1}{0}{2}
+        \randadjustIf{c1}{c0=c1}          
+        \randint{d0}{3}{5}
+        \randint{dn}{2}{8}
+        \function[normalize]{d1}{d0/dn}     % d1 kann gannzahlig nur 1 und 2 sein, daher 
+        \randadjustIf{dn}{d1=c0 OR d1=c1 }  % ist nur Gleichheit mit c0, c1 auszuschließen 
+        \randint{e0}{6}{10}
+        \randint{e1}{6}{10}        
+        \randadjustIf{e1}{e0=e1}        
+        \randint{f0}{11}{15}
+        \randint{g0}{16}{18}
+      \end{variables}
+
+
+      \text{Gegeben seien die Mengen \\
+      
+         \\  $A=\{\var{a0}; \var{b1}; \var{e0}; \var{f0}\},
+         \quad B=\{\var{c0}; \var{d0}; \var{b1}; \var{d1}; \var{a0}\},$
+         \\  $C=\{\var{b0}; \var{d1}; \var{e1}; \var{d0}\} \; $
+        und $\; D=\{\var{c1}; \var{g0}; \var{d0}; \var{b1}; \var{f0}\} .$\\
+
+
+      \\ Bestimmen Sie die folgenden Mengen und geben Sie diese durch Auflistung ihrer Elemente an.}
+%      
+      \explanation{Tipp: Veranschaulichen Sie sich die Mengen als Venn-Diagramme}
+
+      \type{input.finite-number-set}
+      \field{rational}
+
+%     
+      \begin{answer}
+        \lang{de}{\text{ ${(A\cup B) \setminus D}$ = }}
+        \solution{a0, c0, e0, d1}
+      \end{answer}
+%      
+      \begin{answer}
+        \lang{de}{\text{ ${D \setminus (B \cap C) }$ = }}
+        \solution{b1, f0, g0, c1}
+      \end{answer}
+%
+
+%
+      \begin{answer}
+        \lang{de}{\text{ ${(A\cup B) \cap D}$ = }}
+         \solution{d0, b1, f0}
+      \end{answer}
+%      
+      \begin{answer}
+        \lang{de}{\text{ ${(A\setminus B) \cap D}$ = }}
+        \solution{f0}
+      \end{answer}
+      
+    \end{question}
+%
+
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

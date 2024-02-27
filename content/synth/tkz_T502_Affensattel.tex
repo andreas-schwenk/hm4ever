@@ -1,0 +1,17 @@
+%This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)
+%https://creativecommons.org/licenses/by/4.0/legalcode
+\documentclass[rgb]{standalone}
+\usepackage{pgfplots}
+\usepgfplotslibrary{patchplots}
+\pgfplotsset{colormap/viridis}
+\begin{document}
+	\begin{tikzpicture}[font=\Large]
+		\begin{axis}[scale=1.5,thick,grid=both, minor tick num =1,view={45}{45},
+			xmin=-3, xmax=3, ymin=-3,ymax=3, zmin=-30, zmax=30, 
+			ztick={-30,0,30}, 
+			xlabel=$x$, ylabel=$y$, zlabel=$f(x {,} y)$]
+		\addplot3[surf, patch, domain=-3:3, y domain=-3:3,
+			samples=20] {3*x^2*y-y^3};
+		\end{axis}
+	\end{tikzpicture}
+\end{document}

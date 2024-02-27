@@ -1,0 +1,197 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A05: Determinante}
+    \lang{en}{P05: The determinant}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A05: Determinante}}
+\lang{en}{\title{P05: The determinant}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/11438}{Ticket 11438}
+\end{block}
+
+\begin{problem}
+
+	\randomquestionpool{1}{2}
+	\begin{question}
+		
+ 		\begin{variables}
+       
+			
+			\randint{a}{-4}{6}
+			\randint{b}{-4}{6}
+			\randint{c}{-4}{6}
+			\randint{d}{-4}{6}
+			\function{s}{a*d-b*c}
+			
+
+ 		\end{variables}
+		
+		\type{input.generic}
+        \field{real}
+		\correctorprecision{3}
+		\displayprecision{3}
+		\lang{de}{
+	    \text{Berechnen Sie die Determinante der  $(2\times 2)$-Matrix $A=\begin{pmatrix}
+ \var{a} & \var{b} \\ \var{c} & \var{d} \end{pmatrix}$ mit der Formel zur\\ Determinantenberechnung.}
+	    }
+     \lang{en}{
+	    \text{Determine the determinant of the $(2\times 2)$-matrix $A=\begin{pmatrix}
+ \var{a} & \var{b} \\ \var{c} & \var{d} \end{pmatrix}$ with the formular for the\\ determinant calculation.}
+	    }
+	    %\permuteAnswers{1, 2, 3} 
+	    %http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+     \lang{de}{
+	    \begin{answer}
+            \type{input.number}
+	    	\text{$\det(A)= $}
+			\solution{s}
+            \explanation{Erinnern Sie die Determinantenformel für $(2\times 2)$-Matrizen.}
+			%\checkAsFunction{x}{-10}{10}{100} 
+            %\inputAsFunction{x}{s3}
+			%\checkFuncForZero{D[s3]-h}{-10}{10}{100}
+	    \end{answer}}
+
+     \lang{en}{
+	    \begin{answer}
+            \type{input.number}
+	    	\text{$\det(A)= $}
+			\solution{s}
+            \explanation{Remember the formula for the determinant of a $(2\times 2)$-matrix.}
+			%\checkAsFunction{x}{-10}{10}{100} 
+            %\inputAsFunction{x}{s3}
+			%\checkFuncForZero{D[s3]-h}{-10}{10}{100}
+	    \end{answer}}
+
+     \lang{de}{
+	    \begin{answer}
+	    \begin{choice}
+            \type{mc.yesno}
+	    	\text{Ist die Matrix $A$ invertierbar? }
+			\solution{compute}%
+            \iscorrect{s}{!=}{0}
+            \end{choice}
+            \explanation{Eine Matrix ist genau dann invertierbar, wenn ihre Determinante nicht null ist.}
+	    \end{answer}}   
+
+     
+     \lang{en}{
+	    \begin{answer}
+	    \begin{choice}
+            \type{mc.yesno}
+	    	\text{Is the matrix $A$ invertible?}
+			\solution{compute}%
+            \iscorrect{s}{!=}{0}
+            \end{choice}
+            \explanation{A matrix $A$ is invertible exactly if, the determinant is unequal to $0$.}
+	    \end{answer}}   
+	    
+	    %generic viz: http://team.mumie.net/projects/support/wiki/Example
+	    
+	\end{question}
+	\begin{question}
+		
+		\begin{variables}
+			
+			
+			\randint{a11}{-4}{6}
+			\randint{a12}{-4}{6}
+			\randint{a13}{-4}{6}
+			\randint{a21}{-4}{6}
+			\randint{a22}{-4}{6}
+			\randint{a23}{-4}{6}
+			\randint{a31}{-4}{6}
+			\randint{a32}{-4}{6}
+			\randint{a33}{-4}{6}
+			\function{s}{a11*a22*a33+a12*a23*a31+a13*a21*a32-a31*a22*a13-a32*a23*a11-a33*a21*a12}
+			
+			\matrix{aa}{
+a11 & a12 & a13\\ a21 & a22 & a23\\ a31 & a32& a33
+}
+		\end{variables}
+		
+		\type{input.generic}
+        \field{real}
+		\correctorprecision{3}
+		\displayprecision{3}
+		\lang{de}{
+	    \text{
+Berechnen Sie die Determinante der   $(3\times 3)$-Matrix $A=\var{aa}$ mit der Regel von Sarrus.}
+	    }
+     \lang{en}{
+	    \text{
+     Determine the determinant of the $(3\times 3)$-matrix $A=\var{aa}$ using the rule of Sarrus.}
+	    }
+	    %\permuteAnswers{1, 2, 3} 
+	    %http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+     \lang{de}{
+	    \begin{answer}
+            \type{input.number}
+	    	\text{$\det(A)= $}
+			\solution{s}
+            \explanation{Schreiben Sie das Schema für die Regel von Sarrus im konkreten Fall auf und rechnen noch einmal sorgfältig nach.}
+			%\checkAsFunction{x}{-10}{10}{100} 
+            %\inputAsFunction{x}{s3}
+			%\checkFuncForZero{D[s3]-h}{-10}{10}{100}
+	    \end{answer}}
+
+     \lang{en}{
+	    \begin{answer}
+            \type{input.number}
+	    	\text{$\det(A)= $}
+			\solution{s}
+            \explanation{Write down the concrete scheme for the rule of Sarrus and calculate carefully.}
+			%\checkAsFunction{x}{-10}{10}{100} 
+            %\inputAsFunction{x}{s3}
+			%\checkFuncForZero{D[s3]-h}{-10}{10}{100}
+	    \end{answer}}
+
+     \lang{de}{
+	    \begin{answer}
+	    \begin{choice}
+            \type{mc.yesno}
+	    	\text{Ist die Matrix $A$ invertierbar? }
+			\solution{compute}%
+            \iscorrect{s}{!=}{0}
+            \end{choice}
+             \explanation{Eine Matrix ist genau dann invertierbar, wenn ihre Determinante nicht null ist.}
+	    \end{answer}}  
+
+     \lang{en}{
+	    \begin{answer}
+	    \begin{choice}
+            \type{mc.yesno}
+	    	\text{Is the matrix $A$ invertible?}
+			\solution{compute}%
+            \iscorrect{s}{!=}{0}
+            \end{choice}
+             \explanation{A matrix is invertible exactly if the determinant is unequal to $0$.}
+	    \end{answer}}
+	    
+	    %generic viz: http://team.mumie.net/projects/support/wiki/Example
+	    
+	\end{question}
+\end{problem}
+\embedmathlet{mathlet}
+
+\end{content}

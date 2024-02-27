@@ -1,0 +1,549 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Rechenregeln und Linearkombination}
+    \lang{en}{Rules for vectors and linear combinations}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1} 
+  \end{components}
+  \begin{links}
+    %\link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_02_rechengrundlagen_terme.meta.xml}{content_02_rechengrundlagen_terme}
+    \link{generic_article}{content/rwth/HM1/T403a_Vektorraum/g_art_content_10a_vektorraum.meta.xml}{Allg_Vektorraum}  % Link zur Zielstelle
+    \link{generic_article}{content/rwth/HM1/T108_Vektorrechnung/g_art_content_27_vektoren.meta.xml}{Vektor_Addition}  % Link zur Zielstelle
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{8}
+\ombarticle{2}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Rechenregeln für Vektoren und Linearkombinationen}
+       \lang{en}{Rules for vectors and linear combinations}}
+
+\begin{block}[annotation]
+  Inhalt: Rechenregeln für Vektoren (Ergänzung: Vektorraumdefinition), Def. von Linearkombinationen
+
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9046}{Ticket 9046}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{\lang{de}{Rechenregeln für Vektoren}
+         \lang{en}{Rules for vectors}} \label{Vektorraum_R_n}
+
+\lang{de}{
+Die Addition und die skalare Multiplikation von Vektoren im $\R^n$ lassen sich auch kombinieren.
+\\\\
+Für Umformungen gibt es mehrere Regeln, die sich aus den Rechenregeln für reelle Zahlen herleiten lassen.
+}
+\lang{en}{
+Addition and scalar multiplication of vectors in $\R^n$ can also be combined together.
+\\\\
+The following rules apply to vectors in any $\R^n$, and are some of the so-called vector space axioms.
+}
+
+
+
+\begin{rule}[\lang{de}{Rechnenregeln für Vektoren}\lang{en}{Rules for calculating with vectors}]
+\lang{de}{
+Wir bezeichnen mit $\vectorspace{V}$ die Menge aller Vektoren im $\R^n$. Dann gilt f"ur die Addition 
+dieser Vektoren:
+}
+\lang{en}{
+For any natural $n$ we call the set of all vectors in $\R^n$ a vector space . Then for addition of 
+vectors, we have
+}
+\begin{enumerate}
+    \item \lang{de}{
+          Das Kommutativgesetz: $ \vec{u} + \vec{v} = \vec{v} + \vec{u}$ f\"ur alle 
+          $\vec{u},\vec{v} \in \vectorspace{V}$
+          }
+          \lang{en}{
+          Commutativity: $ \vec{a} + \vec{b} = \vec{b} + \vec{a}$ for all 
+          $\vec{a},\vec{b} \in \vectorspace{V}$,
+          }
+    \item \lang{de}{
+          Das Assoziativgesetz: 
+          \nowrap{$ \vec{u} + (\vec{v} + \vec{w}) = (\vec{u} + \vec{v}) + \vec{w}$ f\"ur alle 
+          $\vec{u},\vec{v},\vec{w} \in \vectorspace{V}$}
+          }
+          \lang{en}{
+          Associativity: 
+          \nowrap{$ \vec{u} + (\vec{v} + \vec{w}) = (\vec{u} + \vec{v}) + \vec{w}$ for all
+          $\vec{u},\vec{v},\vec{w} \in \vectorspace{V}$,}
+          }
+    \item \lang{de}{
+          Es gibt einen Vektor, den man zu jedem Vektor $\vec{v}$ addieren kann, ohne dass sich 
+          $\vec{v}$ ver\"andert.\\
+          Dies ist der Nullvektor $\vec{0} \in \vectorspace{V}$, für den gilt 
+          $ \vec{v} + \vec{0} = \vec{0} + \vec{v} = \vec{v}$ f\"ur alle 
+          $\vec{v} \in \vectorspace{V} $.
+          }
+          \lang{en}{
+          There exists a zero vector $\vec{0} \in \vectorspace{V}$ satisfying 
+          $ \vec{v} + \vec{0} = \vec{0} + \vec{v} = \vec{v}$ for all 
+          $\vec{v} \in \vectorspace{V} $.
+          }
+\end{enumerate}
+
+\lang{de}{F"ur die Multiplikation mit Skalaren gilt:}
+\lang{en}{For multiplication by a scalar we have:}
+\begin{enumerate}
+    \item \lang{de}{
+          \nowrap{$ \alpha (\beta \vec{v}) = (\alpha \beta) \vec{v}$ f\"ur alle 
+          $\vec{v} \in \vectorspace{V} $ und $ \alpha, \beta \in \R $}
+          }
+          \lang{en}{
+          \nowrap{$ \alpha (\beta \vec{v}) = (\alpha \beta) \vec{v}$ for all 
+          $\vec{v} \in \vectorspace{V} $ und $ \alpha, \beta \in \R $,}
+          }
+    \item \lang{de}{
+          Es gibt einen Skalar $ \alpha \in \R $, den man mit jedem Vektor $\vec{v}$ multiplizieren 
+          kann, so dass dieser unver\"andert bleibt. Dies ist $\alpha =1 $ und es gilt 
+          \nowrap{$ 1 \cdot \vec{v} = \vec{v}$ f\"ur alle $\vec{v} \in \vectorspace{V} $}
+          }
+          \lang{en}{
+          There exists a scalar $ 1 \in \R $ satisfying 
+          \nowrap{$ 1 \cdot \vec{v} = \vec{v}$ for all $\vec{v} \in \vectorspace{V} $.}
+          }
+\end{enumerate}
+\lang{de}{Zwischen Addition und Multiplikation mit Skalaren gelten die Distributivgesetze:}
+\lang{en}{Between addition and multiplication by a scalar we have distributivity laws:}
+\begin{enumerate}
+    \item \lang{de}{
+          \nowrap{$ \alpha (\vec{u} + \vec{v}) = \alpha \vec{u} + \alpha \vec{v}$ f\"ur alle 
+          $\vec{u}, \vec{v} \in \vectorspace{V}$ und $\alpha \in \R$}
+          }
+          \lang{en}{
+          \nowrap{$ \alpha (\vec{u} + \vec{v}) = \alpha \vec{u} + \alpha \vec{v}$ for all 
+          $\vec{u}, \vec{v} \in \vectorspace{V}$ and $\alpha \in \R$,}
+          }
+    \item \lang{de}{
+          \nowrap{$ (\alpha + \beta) \vec{v} = \alpha \vec{v} + \beta \vec{v}$ f\"ur alle 
+          $\vec{v} \in \vectorspace{V}$ und $\alpha , \beta \in \R $}
+          }
+          \lang{en}{
+          \nowrap{$ (\alpha + \beta) \vec{v} = \alpha \vec{v} + \beta \vec{v}$ for all 
+          $\vec{v} \in \vectorspace{V}$ and $\alpha , \beta \in \R $.}
+          }
+\end{enumerate}
+\end{rule}
+
+\begin{remark} \label{supp:allg-vektorraum}
+  \lang{de}{
+  In der Mathematik bezeichnet man eine Menge $\vectorspace{V}$, auf der eine Addition $+$ und eine 
+  Skalarmultiplikation $\cdot$ mit reellen Zahlen definiert ist, sodass die obigen Regeln erfüllt sind, 
+  als einen \emph{reellen Vektorraum}. Die Elemente aus $\vectorspace{V}$ nennt man dann \emph{Vektoren}.
+  \\    
+%
+%%% Video Hoever
+%       
+    \floatright{\href{https://www.hm-kompakt.de/video?watch=705}{\image[75]{00_Videobutton_schwarz}}}\\\\
+  }
+  \lang{en}{
+  A set $\vectorspace{V}$ which has both an addition $+$ and a scalar multiplication $\cdot$ by real 
+  numbers defined on it, satisfying the above rules, is called a \emph{real vector space}. A 
+  \emph{vector} is then defined as an element of a real vector space $\vectorspace{V}$.
+  }
+\end{remark} 
+
+\lang{de}{
+In diesem Kapitel betrachten wir ausschließlich den Vektorraum $\R^n$. Dieser ist ein Spezialfall eines 
+allgemeineren Vektorraum-Begriffs, der später in \ref[Allg_Vektorraum][Teil 3b, Abschnitt 4.1]{def:Allg_VR}
+behandelt wird.
+}
+\lang{en}{
+In this chapter we exclusively deal with the vector space $\R^n$. This is actually only a special 
+case of a vector space, which is defined more generally 
+\ref[Allg_Vektorraum][in a later chapter]{def:Allg_VR}.
+}
+
+\begin{example}    
+    \begin{alignat}{3}
+     & &3\cdot \left( \begin{pmatrix}2\\ 3\end{pmatrix}+ \begin{pmatrix}-1\\ 4\end{pmatrix}\right)
+      - 3\cdot \begin{pmatrix}2\\ 3\end{pmatrix}    
+      &&& \vert \, \text{\lang{de}{1. Distributivgesetz (Skalar $3$ ausklammern)}
+                         \lang{en}{1st distributivity law (factoring the scalar $3$)}} \\
+      &&&&&\\
+     &=&3\cdot \left(\begin{pmatrix}2\\ 3\end{pmatrix}+ \begin{pmatrix}-1\\ 4\end{pmatrix}
+      - \begin{pmatrix}2\\ 3\end{pmatrix} \right)   
+      &&& \vert \, \text{\lang{de}{Kommutativgesetz (innerhalb der Klammer)}
+                         \lang{en}{Commutativity (within the parentheses)}} \\
+      &&&&&\\
+     &=&3\cdot \left(\begin{pmatrix}-1\\ 4\end{pmatrix} + \;
+        \begin{pmatrix}2\\ 3\end{pmatrix} - \begin{pmatrix}2\\ 3\end{pmatrix} \right) 
+      &&& \vert \, \text{\lang{de}{1. Distributivgesetz}
+                         \lang{en}{1st distributivity law}} \\
+      &&&&&\\
+     &=&3\cdot \begin{pmatrix}-1\\ 4\end{pmatrix} + 
+        3\cdot \underbrace{\left(\begin{pmatrix}2\\ 3\end{pmatrix} - \begin{pmatrix}2\\ 3\end{pmatrix}\right)}_{=\begin{pmatrix}0\\ 0\end{pmatrix}} 
+       &&&\\
+       &&&&&\\
+     &=& 3\cdot \begin{pmatrix}-1\\ 4\end{pmatrix} + 0 =\begin{pmatrix}-3\\ 12\end{pmatrix} &&&
+    \end{alignat}
+\end{example}
+
+\begin{remark}                                       
+    \begin{enumerate}
+        \item \lang{de}{
+            Wie in \ref[Vektor_Addition][Abschnitt 8.1.1 zu Vektoren]{Gegenvektor}  %  (Link zur Bem nach Def 1.2 in 8.1 Vektoren im Anschauungsraum
+            einleitend bemerkt, gibt es zu jedem Vektor $\vec{v}$ einen sogenannten \emph{Gegenvektor}
+            \ $-\vec{v}$. Dieser ist definiert durch \ $-\vec{v}=(-1)\cdot \vec{v}$.
+            }
+            \lang{en}{
+            As was noted in the ref[Vektor_Addition][previous section]{Gegenvektor}, for each vector 
+            $\vec{v}$ there is a negative vector $-\vec{v}$. This is defined by 
+            $-\vec{v}=(-1)\cdot \vec{v}$.
+            }
+
+        \item \lang{de}{
+            Damit definiert man nun, wie schon in 
+            \ref[Vektor_Addition][Abschnitt 8.1.3, Rechnen mit Vektoren]{Bem_Vektor_Addition} erwähnt, 
+            %  (Link zu Bemerkung 1.11 in 8.1 Vektoren im Anschauungsraum) 
+            eine Subtraktion von Vektoren durch
+            }
+            \lang{en}{
+            As in the \ref[Vektor_Addition][previous section]{Bem_Vektor_Addition}, we define 
+            subtraction of vectors as 
+            }
+            \[ \vec{v}-\vec{w} = \vec{v}+(-\vec{w})= \vec{v}+(-1)\cdot \vec{w}. \]
+
+        \item \lang{de}{
+            Insbesondere gilt offenbar $\vec{v}-\vec{v}=\vec{v}+(-\vec{v})=\vec{0}$.\\ 
+            Das bedeutet, zu jedem Vektor $ \vec{v} \in \vectorspace{V}$ gibt es einen sogenannten 
+            \emph{inversen Vektor}, nämlich den Gegenvektor $(-\vec{v}) \in \vectorspace{V}$.
+            }
+            \lang{en}{
+            In particular we have $\vec{v}-\vec{v}=\vec{v}+(-\vec{v})=\vec{0}$.\\
+            This means that for every vector $ \vec{v} \in \vectorspace{V}$, the vector 
+            $ -\vec{v} \in \vectorspace{V}$ is its so-called \emph{additive inverse}.
+            }
+
+        \item \lang{de}{
+            Die Regeln zur skalaren Multiplikation und das zweite Distributivgesetz sorgen dafür, dass man mit 
+            Vielfachen von gleichen Vektoren die Skalare wie gewohnt zusammenfassen kann. Zum Beispiel gilt für jeden Vektor
+            $\vec{v}$ im $\R^n$, die Gleichheit $3\cdot \vec{v}- 5\cdot \vec{v}=-2\cdot \vec{v}$ 
+            }
+            \lang{en}{
+            The rules for scalar multiplication and the second distributivity law ensure that 
+            multiples of a vector can be expressed as expected using scalars. For example, for every 
+            vector $\vec{v}$ in $\R^n$ we have $3\cdot \vec{v}- 5\cdot \vec{v}=-2\cdot \vec{v}$.
+            }
+            
+        \item \lang{de}{
+              Für die Multiplikation mit Skalaren folgt durch Anwendung des 
+              Kommutativgesetzes für die Multiplikation $\R$
+            %\ref[content_02_rechengrundlagen_terme][Kommutativgesetzes für die Multiplikation $\R$]{rule:rechengesetze}
+              }
+              \lang{en}{
+              By commutativity of the multiplication of real numbers, 
+              }
+             \[ \alpha (\beta \vec{v}) = (\alpha \beta) \vec{v}=(\beta \alpha) \vec{v} =\beta (\alpha \vec{v})\]
+    \end{enumerate}
+\end{remark}
+
+\begin{example}
+
+        \[ 3\cdot \begin{pmatrix}2\\ -1\\ 3\end{pmatrix} - 5\cdot \begin{pmatrix}2\\ -1\\ 3\end{pmatrix}
+        =  3\cdot \begin{pmatrix}2\\ -1\\ 3\end{pmatrix} + (-5)\cdot \begin{pmatrix}2\\ -1\\ 3\end{pmatrix}
+        =         \begin{pmatrix}6\\ -3\\ 9\end{pmatrix}+         \begin{pmatrix}-10\\ 5\\ -15\end{pmatrix}
+        =\begin{pmatrix}-4\\ 2\\ -6\end{pmatrix}\]
+\lang{de}{und}\lang{en}{and}        
+        \[ 3\cdot \begin{pmatrix}2\\ -1\\ 3\end{pmatrix} -5\cdot \begin{pmatrix}2\\ -1\\ 3\end{pmatrix}
+        =(3-5)\cdot \begin{pmatrix}2\\ -1\\ 3\end{pmatrix}=-2\cdot \begin{pmatrix}2\\ -1\\ 3\end{pmatrix}
+        =\begin{pmatrix}-4\\ 2\\ -6\end{pmatrix}\]
+
+\end{example}
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{1}
+\begin{quickcheck}
+        \field{rational}
+        \type{input.number}
+        \begin{variables}
+%			\randint{a}{1}{3}
+            \randint{a}{2}{4}
+            \function[calculate]{a1}{a+1}
+            \randint{q1}{-5}{5}
+            \randint{q2}{-5}{5}
+            \function[calculate]{s1}{a*q1}
+            \function[calculate]{s2}{a*q2}
+
+        \end{variables}
+
+            \text{\lang{de}{
+            Bestimmen Sie den Vektor $\vec{v}$ im $\R^2$, für den
+            }
+            \lang{en}{
+            Determine the vector $\vec{v}$ in $\R^2$ such that
+            }
+            \[  \var{a}\cdot \left( \vec{v}+ \begin{pmatrix} \var{q1}\\ \var{q2}\end{pmatrix}\right) 
+            = \var{a1}\cdot \vec{v} \]
+            \lang{de}{gilt.}
+            \lang{en}{holds.}
+            \begin{table}[\class{no-padding}]
+            \rowspan[l][m]{2} \lang{de}{Der Vektor ist}\lang{en}{The vector is} 
+            $\vec{v}=\left(\begin{matrix} \\ \\ \end{matrix}\right.$ &  
+            \ansref & \rowspan[l][m]{2} $\left.\begin{matrix} \\ \\ \end{matrix}\right)$. & \\ 
+            \ansref & 
+            \end{table}		
+            }
+        \begin{answer}
+            \solution{s1}
+        \end{answer}
+        \begin{answer}
+            \solution{s2}
+        \end{answer}
+        \explanation{\lang{de}{
+        Mit den obigen Rechenregeln ist die linke Seite gleich\\
+        $\var{a}\cdot \vec{v}+ \var{a}\cdot \begin{pmatrix} \var{q1}\\ \var{q2}\end{pmatrix}
+        = \var{a}\cdot \vec{v} + \begin{pmatrix} \var{s1}\\ \var{s2}\end{pmatrix}. $\\
+        Zieht man dann auf beiden Seiten der Gleichung $\var{a}\cdot \vec{v}$ ab, erhält man\\
+        $\begin{pmatrix} \var{s1}\\ \var{s2}\end{pmatrix}
+        = \var{a1}\cdot \vec{v}-\var{a}\cdot \vec{v}
+        =(\var{a1} - \var{a})\cdot \vec{v}=\vec{v}. $
+        }
+        \lang{en}{
+        Using the above rules for vectors, the left-hand side is immediately\\
+        $\var{a}\cdot \vec{v}+ \var{a}\cdot \begin{pmatrix} \var{q1}\\ \var{q2}\end{pmatrix}
+        = \var{a}\cdot \vec{v} + \begin{pmatrix} \var{s1}\\ \var{s2}\end{pmatrix}. $\\
+        Subtracting $\var{a}\cdot \vec{v}$ from both sides of the equation yields\\
+        $\begin{pmatrix} \var{s1}\\ \var{s2}\end{pmatrix}
+        = \var{a1}\cdot \vec{v}-\var{a}\cdot \vec{v}
+        =(\var{a1} - \var{a})\cdot \vec{v}=\vec{v}. $
+        }}
+
+    \end{quickcheck}
+\end{quickcheckcontainer}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   In Zusammenhang mit dem Video-Einbaus wurde diese Bemerkung vorverlegt !
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  \begin{supplement}[Allgemeiner Vektorraum]\label{supp:allg-vektorraum}
+%  \begin{remark}
+%    In der Mathematik wird ein \emph{reeller Vektorraum} definiert als eine Menge $V$, auf der eine Addition $+$
+%    und eine Skalarmultiplikation $\cdot$ mit reellen Zahlen definiert ist, sodass die obigen Regeln erfüllt sind.
+%    Die Elemente aus ${V}$ nennt man dann \emph{Vektoren}.
+%    \\
+%    \\
+%    Die in diesem Kapitel betrachteten Vektorräume der Vektoren im $\R^n$ sind Spezialfälle eines allgemeineren Begriffs
+%    des Vektorraums. Dieser wird in \ref[Allg_Vektorraum][Teil 3b, Abschnitt 4.1]{def:Allg_VR}
+%    behandelt.
+%  \end{remark}
+%  \end{supplement}
+
+\section{\lang{de}{Linearkombinationen}\lang{en}{Linear combinations}}\label{sec:lin-comb}
+
+  \begin{definition}[\lang{de}{Linearkombination}\lang{en}{Linear combination}]\label{def:linearcomb}
+    \lang{de}{Seien $\vec{v}_1, \ldots , \vec{v}_k$ Vektoren im $\R^n$.\\\\ Ein Vektor der Form}
+    \lang{en}{Let  $\vec{v}_1, \ldots , \vec{v}_k$ be vectors in $\R^n$.\\\\ A vector of the form}
+    \begin{displaymath}
+      \alpha_1\, \vec{v}_1 + \ldots +\alpha_k\, \vec{v}_k = \sum_{i=1}^k \alpha_i\, \vec{v}_i
+    \end{displaymath}
+    \lang{de}{
+    mit % Koeffizienten
+    $\alpha_1, \ldots , \alpha_k \in  \R$ 
+    hei"st \notion{Linearkombination} von $\vec{v}_1,  \ldots,
+    \vec{v}_k$. \\
+    \\ Die reellen Zahlen $\alpha_1, \ldots , \alpha_k $ nennt man dabei auch die \notion{Koeffizienten} der Linearkombination.
+    }
+    \lang{en}{
+    with coefficients $\alpha_1, \ldots , \alpha_k \in \R$ is called a \notion{linear combination} of 
+    $\vec{v}_1, \ldots , \vec{v}_k$.
+    }
+  \end{definition}
+
+\begin{remark}
+\lang{de}{Eine Linearkombination ist eine \emph{endliche} Summe von Vektoren.}
+\lang{en}{A linear combination is a \emph{finite} sum of vectors.}
+\end{remark}
+
+%
+%%% Video Hoever
+%
+\lang{de}{
+Das folgende Video veranschaulicht die Definition der \emph{Linearkombination} an einem Beispiel im 2-dimensionalen
+Koordinatensystem und visualisiert, wie man einen beliebigen Vektor des $\R^2$ mit einer geeigneten Linearkombination
+darstellen kann.
+\\
+    \floatright{\href{https://www.hm-kompakt.de/video?watch=706}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{}
+
+\begin{example} \label{ex:linearkombinationen}
+%
+%%% Video Hoever
+%
+\lang{de}{
+\begin{enumerate}[alph]
+  \item Wir lösen zunächst die Abschlussfrage aus dem vorherigen Video: 
+   $\quad$ \floatright{\href{https://www.hm-kompakt.de/video?watch=706lsg}{\image[75]{00_Videobutton_schwarz}}}\\\\
+%
+  \item Linearkombinationen der Vektoren $\begin{pmatrix} 2\\ -1\end{pmatrix}$, $\begin{pmatrix} -1\\ 3\end{pmatrix}$
+und $\begin{pmatrix} 1\\ 0\end{pmatrix}$ sind zum 
+Beispiel
+\[ \frac{1}{2}\cdot \begin{pmatrix} 2\\ -1\end{pmatrix} + \frac{1}{2}\cdot \begin{pmatrix} -1\\ 3\end{pmatrix}
++ \frac{1}{2} \cdot \begin{pmatrix} 1\\ 0\end{pmatrix}
+= \begin{pmatrix} 1 \\ 1\end{pmatrix},\]
+\[ (-1) \cdot \begin{pmatrix} 2\\ -1\end{pmatrix} + 0\cdot \begin{pmatrix} -1\\ 3\end{pmatrix}
++ 3 \cdot \begin{pmatrix} 1\\ 0\end{pmatrix}
+= \begin{pmatrix} 1 \\ 1\end{pmatrix}\]
+und
+\[ 3\cdot \begin{pmatrix} 2\\ -1\end{pmatrix} + 1\cdot \begin{pmatrix} -1\\ 3\end{pmatrix}
+-5 \cdot \begin{pmatrix} 1\\ 0\end{pmatrix}
+= \begin{pmatrix} 0\\ 0\end{pmatrix}.\]
+%
+\end{enumerate}
+}
+\lang{en}{
+Some example linear combinations of the vectors $\begin{pmatrix} 2\\ -1\end{pmatrix}$, 
+$\begin{pmatrix} -1\\ 3\end{pmatrix}$ and $\begin{pmatrix} 1\\ 0\end{pmatrix}$ are
+\[ \frac{1}{2}\cdot \begin{pmatrix} 2\\ -1\end{pmatrix} + 
+     \frac{1}{2}\cdot \begin{pmatrix} -1\\ 3\end{pmatrix} + 
+       \frac{1}{2} \cdot \begin{pmatrix} 1\\ 0\end{pmatrix} =
+          \begin{pmatrix} 1 \\ 1\end{pmatrix},\]
+\[ (-1) \cdot \begin{pmatrix} 2\\ -1\end{pmatrix} + 
+     0\cdot \begin{pmatrix} -1\\ 3\end{pmatrix} + 
+       3 \cdot \begin{pmatrix} 1\\ 0\end{pmatrix} = 
+         \begin{pmatrix} 1 \\ 1\end{pmatrix}\]
+and
+\[ 3\cdot \begin{pmatrix} 2\\ -1\end{pmatrix} + 
+     1\cdot \begin{pmatrix} -1\\ 3\end{pmatrix} - 
+       5 \cdot \begin{pmatrix} 1\\ 0\end{pmatrix} = 
+         \begin{pmatrix} 0\\ 0\end{pmatrix}.\]
+}
+\end{example}
+
+
+\begin{quickcheck}
+        \field{rational}
+        \type{input.number}
+        \begin{variables}
+            \randint{q1}{-5}{5}
+            \randint[Z]{q2}{-5}{5}
+            \randint[Z]{r1}{-5}{5}
+            \randint[Z]{r2}{-5}{5}
+            \randint[Z]{s1}{-5}{5}
+            \number{s2}{0}
+
+            \function[calculate]{c1}{q2/r2}
+            \function[calculate]{c2}{(q1-r1*c1)/s1}
+
+            % für explanation
+            \function[normalize]{k1}{r1*a+s1*b}
+            \function[calculate]{z}{c1*r1}		
+
+        \end{variables}
+
+            \text{\lang{de}{
+            Schreiben Sie den Vektor $\vec{w}=\begin{pmatrix} \var{q1}\\ \var{q2}\end{pmatrix}$ als 
+            Linearkombination der Vektoren $\vec{v}_1=\begin{pmatrix} \var{r1}\\ \var{r2}\end{pmatrix}$
+            und $\vec{v}_2=\begin{pmatrix} \var{s1}\\ \var{s2}\end{pmatrix}$.\\
+            Es ist
+            $\begin{pmatrix} \var{q1}\\ \var{q2}\end{pmatrix}=$\ansref $\cdot \begin{pmatrix} \var{r1}\\ \var{r2}\end{pmatrix}
+            + $\ansref $\cdot \begin{pmatrix} \var{s1}\\ \var{s2}\end{pmatrix}$.
+            }
+            \lang{en}{
+            Write the vector $\vec{w}=\begin{pmatrix} \var{q1}\\ \var{q2}\end{pmatrix}$ as a linear
+            combination of the vectors $\vec{v}_1=\begin{pmatrix} \var{r1}\\ \var{r2}\end{pmatrix}$ 
+            and $\vec{v}_2=\begin{pmatrix} \var{s1}\\ \var{s2}\end{pmatrix}$.\\
+            It is 
+            $\begin{pmatrix} \var{q1}\\ \var{q2}\end{pmatrix}=$\ansref $\cdot \begin{pmatrix} \var{r1}\\ \var{r2}\end{pmatrix}
+            + $\ansref $\cdot \begin{pmatrix} \var{s1}\\ \var{s2}\end{pmatrix}$.
+            }}
+
+        \begin{answer}
+            \solution{c1}
+        \end{answer}
+        \begin{answer}
+            \solution{c2}
+        \end{answer}
+        \explanation{\lang{de}{
+        Es sind reelle Zahlen $a$ und $b$ zu finden, so dass\\
+        $ \begin{pmatrix} \var{q1}\\ \var{q2}\end{pmatrix} = 
+          a \cdot \begin{pmatrix} \var{r1}\\ \var{r2}\end{pmatrix} + 
+            b \cdot \begin{pmatrix} \var{s1}\\ \var{s2}\end{pmatrix}. $\\
+        Also dass\\
+        $ \begin{pmatrix} \var{q1}\\ \var{q2}\end{pmatrix} = 
+          \begin{pmatrix} \var{k1}\\ \var{r2}a \end{pmatrix}. $\\
+        Aus der zweiten Komponente erhält man $a=\frac{\var{q2}}{\var{r2}}=\var{c1}$, und damit aus 
+        der ersten\\
+        $b=\frac{\var{q1}-(\var{r1}a)}{\var{s1}}=\frac{\var{q1}-(\var{z})}{\var{s1}}=\var{c2}.$
+        }
+        \lang{en}{
+        We are searching for real numbers $a$ and $b$ such that\\
+        $ \begin{pmatrix} \var{q1}\\ \var{q2}\end{pmatrix} = 
+          a \cdot \begin{pmatrix} \var{r1}\\ \var{r2}\end{pmatrix} + 
+            b \cdot \begin{pmatrix} \var{s1}\\ \var{s2}\end{pmatrix}. $\\
+        That is, such that\\
+        $ \begin{pmatrix} \var{q1}\\ \var{q2}\end{pmatrix} = 
+          \begin{pmatrix} \var{k1}\\ \var{r2}a \end{pmatrix}. $\\
+        From the equality of the second components, $a=\frac{\var{q2}}{\var{r2}}=\var{c1}$, and 
+        hence from the equality of the first components,\\
+        $b=\frac{\var{q1}-(\var{r1}a)}{\var{s1}}=\frac{\var{q1}-(\var{z})}{\var{s1}}=\var{c2}.$
+        }}
+
+    \end{quickcheck}
+
+
+\begin{example}
+\lang{de}{
+\begin{enumerate}[alph]
+  \item Jeder Vektor im $\R^3$ ist eine Linearkombination der sogenannten \emph{Standardvektoren}
+    \[  \vec{e}_1=\begin{pmatrix} 1\\ 0\\ 0\end{pmatrix},\quad \vec{e}_2=\begin{pmatrix} 0\\ 1\\ 0\end{pmatrix}
+    \quad \text{und}\quad \vec{e}_3=\begin{pmatrix} 0\\ 0\\ 1\end{pmatrix}. \]
+    Für den Vektor $\vec{v}=\begin{pmatrix} 5\\ -2\\ 4\end{pmatrix}$ gilt beispielsweise
+    \[ \begin{pmatrix} 5\\ -2\\ 4\end{pmatrix} = 5\cdot \begin{pmatrix} 1\\ 0\\ 0\end{pmatrix}
+    + (-2)\cdot \begin{pmatrix} 0\\ 1\\ 0\end{pmatrix}+4\cdot \begin{pmatrix} 0\\ 0\\ 1\end{pmatrix}
+    = 5\cdot \vec{e}_1 -2\cdot \vec{e}_2+4\cdot \vec{e}_3.\]
+    \\
+    Die Koeffizienten der Linearkombination mit den Standardvektoren $\vec{e}_1, \vec{e}_2 , \vec{e}_3$ entsprechen dabei genau
+    den Komponenten des Vektors $\vec{v}$, der durch $\vec{e}_1, \vec{e}_2 , \vec{e}_3$ linear kombiniert wird.  
+%
+%%% Video Hoever
+%
+  \item Ein weiteres Beispiel für eine Linearkombination im 3-dimensionalen Raum: 
+   $\quad$ \floatright{\href{https://www.hm-kompakt.de/video?watch=708}{\image[75]{00_Videobutton_schwarz}}}\\\\
+%
+\end{enumerate}
+}
+\lang{en}{
+Every vector in $\R^3$ is a linear combination of the so-called \emph{standard unit vectors}
+\[  \vec{e}_1=\begin{pmatrix} 1\\ 0\\ 0\end{pmatrix},
+      \quad \vec{e}_2=\begin{pmatrix} 0\\ 1\\ 0\end{pmatrix}\quad \text{and}
+        \quad \vec{e}_3=\begin{pmatrix} 0\\ 0\\ 1\end{pmatrix}. \]
+For example, the vector $\vec{v}=\begin{pmatrix} 5\\ -2\\ 4\end{pmatrix}$ can be written as
+\[ \begin{pmatrix} 5\\ -2\\ 4\end{pmatrix} = 
+     5\cdot \begin{pmatrix} 1\\ 0\\ 0\end{pmatrix} + 
+       (-2)\cdot \begin{pmatrix} 0\\ 1\\ 0\end{pmatrix} + 
+         4\cdot \begin{pmatrix} 0\\ 0\\ 1\end{pmatrix} = 
+           5\cdot \vec{e}_1 -2\cdot \vec{e}_2+4\cdot \vec{e}_3.\]
+\\
+Note that the coefficients of the linear combination of the unit vectors $\vec{e}_1, \vec{e}_2 , 
+\vec{e}_3$ are precisely the components of the vectors $\vec{v}$.
+}
+\end{example}
+
+\end{visualizationwrapper}
+
+
+\end{content}

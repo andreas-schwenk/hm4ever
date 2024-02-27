@@ -1,0 +1,94 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A03: Länge}
+    \lang{en}{mc yes-no}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{description}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+
+\usepackage{mumie.genericproblem}
+\lang{de}{
+	\title{A03: Länge}
+}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9713}{Ticket 9713}
+\end{block}
+
+\textit{Hinweis: Benutzen Sie sqrt() um die Wurzel einzugeben.}
+
+\begin{problem}
+
+	\begin{question}
+		\lang{de}{
+			\text{Bestimmen Sie die Länge folgender Vektoren. \\
+			a)
+			$
+			  \left\|\begin{pmatrix}\var{x_1}\\ \var{x_2} \end{pmatrix}\right\|=$\ansref \\
+ 			b)
+ 			$
+  			 \left\|\begin{pmatrix}\var{y_1}\\ \var{y_2}\\ \var{y_3} \end{pmatrix}\right\|=$\ansref 
+		}
+		}
+         \explanation{Die Länge eines Vektors berechnen Sie, indem Sie jeden Eintrag des Vektors 
+         quadrieren, alle Quadrate aufsummieren und aus der Summe die Wurzel ziehen.}
+      
+		\type{input.function}
+      \field{real} 
+ 
+      \begin{variables}
+            \randint[Z]{x_1}{-10}{10}
+            \randint{x_2}{-10}{10}
+            \randint{y_1}{-10}{10}
+            \randint{y_2}{-10}{10}
+            \randint{y_3}{-10}{10}
+            
+            \function[calculate]{a1}{x_1^2+x_2^2}
+            \function[calculate]{b1}{y_1^2+y_2^2+y_3^2}
+            
+            \function{aa}{sqrt(a1)}
+            \function{bb}{sqrt(b1)}
+      \end{variables}
+      \begin{answer}
+            \text{a)}
+            \solution{aa}
+            \inputAsFunction{x}{ax} 
+            \checkFuncForZero{ax-aa}{-10}{10}{100}
+            \explanation[edited]{Ihre Antwort in a) ist falsch.}
+      \end{answer}
+
+      \begin{answer}
+            \text{b)}
+            \solution{bb}
+            \inputAsFunction{y}{by} 
+            \checkFuncForZero{by-bb}{-10}{10}{100}
+            \explanation[edited]{Ihre Antwort in b) ist falsch.}
+      \end{answer}
+             
+\end{question}
+
+
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+
+
+\end{content}

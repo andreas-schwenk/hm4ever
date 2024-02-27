@@ -1,0 +1,130 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A02: char. Polynom}
+    \lang{en}{P02: Characteristic polynomial}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A02: char. Polynom}}
+\lang{en}{\title{P02: Characteristic polynomial}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/11627}{Ticket 11627}
+\end{block}
+
+\begin{block}[annotation]
+Pool aus zwei Aufgaben: Entweder die Matrix ist $2\times 2$ oder $3\times 3$.
+\end{block}
+
+\begin{problem}
+	\randomquestionpool{1}{2}
+	\begin{question}
+		
+		\begin{variables}
+			\randint{a}{-3}{3} 
+			\randint{b}{-3}{3} 
+			\randint{c}{-3}{3} 
+			\randint{d}{-3}{3}
+			\matrix{aa}{a & b \\ c & d} 
+			\function[expand,normalize]{s}{t^2-(a+d)*t+(a*d-b*c)}
+		\end{variables}
+		
+		\type{input.generic}
+        \field{real}
+		\correctorprecision{3}
+		\displayprecision{3}
+		\lang{de}{
+	    \text{Bestimmen Sie das charakteristische Polynom der Matrix $A=\var{aa}$.}
+	    }
+     		\lang{en}{
+	    \text{Determine the characteristic polynomial of the matrix $A=\var{aa}$.}
+	    }
+	    \begin{answer}
+            \type{input.function}
+	    	\lang{de}{\text{Das charakteristische Polynom ist $p_A(t)=$}}
+      \lang{en}{\text{The characteristic polynomial is $p_A(t)=$}}
+			%\checkAsFunction{x}{-10}{10}{100} 
+            \solution{s}
+            \inputAsFunction{t}{p}
+			\checkFuncForZero{p^2-s^2}{-10}{10}{100}
+            \lang{de}{\explanation{Kombinieren Sie Ihr Wissen über das charakteristische Polynom mit der Technik, 
+            eine $(2\times 2)$-Determinante zu berechnen.}}
+             \lang{en}{\explanation{Combine your knowledge about characteristic polynomias with your skills
+             to calculate a $(2\times 2)$-determinant.}}
+	    \end{answer}    
+	    
+	    %generic viz: http://team.mumie.net/projects/support/wiki/Example
+	    
+	\end{question}
+	
+		\begin{question}
+		
+		\begin{variables}
+		\randint{a}{-2}{2}
+		\randint{b}{0}{1}
+		%\number{b}{0}
+		\randint{c}{-2}{2}
+		\randint{d}{-2}{2}
+		\randint{f}{-2}{2}
+		\randint{g}{-1}{0}
+		%\number{g}{0}
+		\randint[Z]{l0}{-4}{2}
+		\function[calculate]{l}{l0+1}
+
+       	\matrix[calculate]{aa}{(a*c-b)*(d*f*(1-l) + g*l)+ a*d*(1-l) + 1  & c*d*f*l - c*d*f - c*g*l + d*l - d  & -d*f*l + d*f + g*l\\
+a^2*(-c*d*f*l + c*d*f + c*g*l - d*l + d) + a*b*d*f*l - a*b*d*f - a*b*g*l + a*c*f - a*l + a - b*f  & a*c*d*f*l - a*c*d*f - a*c*g*l + a*d*l - a*d - c*f + l &  -a*d*f*l + a*d*f + a*g*l + f\\
+-a*b*c*d*f*l + a*b*c*d*f + a*b*c*g*l - a*b*d*l + a*b*d + a*c^2*f + a*c + b^2*d*f*l - b^2*d*f - b^2*g*l - b*c*f - b*l & b*c*d*f*l - b*c*d*f - b*c*g*l + b*d*l - b*d - c^2*f - c  & -b*d*f*l + b*d*f + b*g*l + c*f + l + 1}
+
+			\function[expand,normalize]{s}{(1-t)*(l-t)*(1+l-t)}
+		\end{variables}
+		
+		\type{input.generic}
+        \field{real}
+		\correctorprecision{3}
+		\displayprecision{3}
+		\lang{de}{
+	    \text{Bestimmen Sie das charakteristische Polynom der Matrix $A=\var{aa}$.}
+	    }
+     \lang{en}{
+	    \text{Determine the characteristic polynomial of the matrix $A=\var{aa}$.}
+	    }
+	    \begin{answer}
+            \type{input.function}
+	    	\lang{de}{\text{Das charakteristische Polynom ist $p_A(t)=$}}
+      \lang{en}{\text{The characteristic polynomial is $p_A(t)=$}}
+			%\checkAsFunction{x}{-10}{10}{100} 
+            \solution{s}
+            \inputAsFunction{t}{p}
+			\checkFuncForZero{p^2-s^2}{-10}{10}{100}
+            \lang{de}{\explanation{Kombinieren Sie Ihr Wissen über das charakteristische Polynom mit der Technik, 
+            eine $(3\times 3)$-Determinante zu berechnen.}}
+            \lang{en}{\explanation{Combine your knowledge about characteristic polynomias with your skills
+             to calculate a $(2\times 2)$-determinant.}}
+	    \end{answer}    
+	    
+	    %generic viz: http://team.mumie.net/projects/support/wiki/Example
+	    
+	\end{question}
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

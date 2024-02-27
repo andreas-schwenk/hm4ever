@@ -1,0 +1,44 @@
+%This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)
+%https://creativecommons.org/licenses/by/4.0/legalcode
+\documentclass[rgb]{standalone}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepgfplotslibrary{patchplots}
+\definecolor{myorange}{hsb}{0.0833, 1, 0.8}
+\definecolor{mygreen}{hsb}{0.3333, 1, 0.8}
+\definecolor{myblue}{hsb}{0.5833, 1, 0.8}
+\definecolor{mymagenta}{hsb}{0.8333, 1, 0.8}
+\begin{document}
+\begin{tikzpicture}[font=\Large]
+	\begin{axis}[scale=2.5,clip=false,
+			hide axis,
+			view={45}{15},
+			xmin=-3, xmax=3,
+			ymin=-3, ymax=3, 
+			zmin=-2, zmax=2,
+			mesh/interior colormap=
+			{interior}{color=(gray) color=(gray)},
+			colormap=
+			{exterior}{color=(lightgray) color=(lightgray)},
+			samples=40,
+			samples y=80,
+			z buffer=sort,
+			]	
+		% surface cone: x^2+y^2=z^2			
+		% plane hyperbola (blue): x=3/4
+		% plane ellipse (orange):	z=-3/5(1+x)
+		% plane parabola (green): z= 1-x
+		\draw[very thick, dashed, myblue] (axis cs:3/4,-3,-2) -- (axis cs:3/4,3,-2);
+		\draw[very thick, dashed, myorange] (axis cs:-1,3,0) -- (axis cs:-1,-3,0);	
+		\addplot3[surf,patch, domain=-2:2,y domain=0:360] 
+				({x*cos(y)},{x*sin(y)},{x});			
+		\addplot3 [ultra thick, smooth, patch, thick, myblue,domain={-sqrt(55)/4}:{sqrt(55)/4}, samples = 100, samples y=0] ( {3/4}, {x}, {(9/16+x^2)^(1/2)});	
+		\addplot3 [ultra thick, smooth, patch, thick, myblue,domain={-sqrt(55)/4}:{sqrt(55)/4}, samples = 100, samples y=0] ( {3/4}, {x}, {-(9/16+x^2)^(1/2)});		
+		\addplot3 [ultra thick, smooth, patch, thick, myorange,domain=0:360, samples = 100, samples y=0] ( {15/16*cos(x)+9/16}, {3/4*sin(x)}, {-15/16-9/16*cos(x)});	
+		\addplot3 [ultra thick, smooth, patch, thick, mygreen,domain={-sqrt(3)}:{sqrt(3)}, samples = 100, samples y=0] ( {1/2-1/2*x^2}, {x}, {1/2+1/2*x^2});	
+		\draw[very thick, dashed, myblue] (axis cs:3/4,-3,-2) -- (axis cs:3/4,-3,2) -- (axis cs:3/4,3,2) -- (axis cs:3/4,3,-2);	
+		\draw[very thick, dashed, myorange] (axis cs:-1,-3,0) -- (axis cs:7/3,-3,-2) -- (axis cs:7/3,3,-2) -- (axis cs:-1,3,0);	
+		\draw[very thick, dashed, mygreen] (axis cs:-1,-3,2) -- (axis cs:-1,3,2) -- (axis cs:{2*sqrt(2)-1},3,{2-2*sqrt(2)}) -- (axis cs:{2*sqrt(2)-1},-3,{2-2*sqrt(2)}) -- cycle;			
+\end{axis}
+\end{tikzpicture}
+\end{document}

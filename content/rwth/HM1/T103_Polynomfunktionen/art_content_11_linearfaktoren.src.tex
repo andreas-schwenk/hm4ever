@@ -1,0 +1,207 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Nullstellen und Abspaltung von Linearfaktoren}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_hm-hornerschema3.meta.xml}{image-hornerschema}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T103_Polynomfunktionen/g_art_content_09_polynome.meta.xml}{link-polynome}
+    \link{generic_article}{content/rwth/HM1/T103_Polynomfunktionen/g_art_content_10_polynomdivision.meta.xml}{link-polynomdivision}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{Nullstellen und Abspaltung von Linearfaktoren; nicht im Kurs!}
+
+\begin{block}[annotation]
+ Abspaltung mehrere Linearfaktoren, mehrfache Nullstelle, Funktionsverlauf bei Nullstellen
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/8990}{Ticket 8990}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{Abspaltung mehrerer Linearfaktoren}
+
+In Abschnitt \ref[link-polynome][Polynome]{sec:linearfaktor} hatten wir gesehen, dass man von einem Polynom
+$f(x)$ einen Linearfaktor abspalten kann, wenn man eine Nullstelle $x_1$ von $f(x)$ kennt, d.h. dass man $f(x)$
+schreiben kann als Produkt $f(x)=q(x)\cdot (x-x_1)$ mit einem geeigneten Polynom $q(x)$, dessen Grad um $1$
+kleiner als der von $f(x)$ ist. Im letzten Abschnitt 
+\ref[link-polynomdivision][Polynomdivision]{sec:poly-div-mit-horner} wurde auch gezeigt, wie man $q(x)$ durch
+Polynomdivision oder mit dem Horner-Schema berechnen kann.
+
+Dieses Abspalten von Linearfaktoren kann man nun sukzessive öfter betreiben, wenn man mehrere Nullstellen von
+$f(x)$ kennt, oder wenn der Quotient $q(x)$ auch wieder $x_1$ als Nullstelle hat.
+
+\begin{theorem}
+Ist $f(x)$ ein Polynom vom Grad $n>0$ und sind $x_1,\ldots, x_k$ verschiedene Nullstellen von $f(x)$,
+so gibt es ein Polynom $t(x)$ vom Grad $n-k$ so, dass
+\[ f(x)=t(x)\cdot (x-x_1)(x_x_2)\cdots (x-x_k) \]
+gilt. Den Faktor $t(x)$ erhält man, indem man sukzessive die Linearfaktoren abspaltet, d.h. nach
+den Abspaltungen
+\begin{align*}
+f(x) &=& q_1(x)\cdot (x-x_1) \\
+q_1(x) &=& q_2(x)\cdot (x-x_2) \\
+\vdots & & \vdots \\
+q_{k-1}(x) &=& q_k(x)\cdot (x-x_k) 
+\end{align*} 
+gilt $t(x)=q_k(x)$.
+\end{theorem}
+
+\begin{remark}
+\begin{enumerate}
+\item Der Grund für vorigen Satz ist ganz einfach: $x_2,\ldots, x_k$ sind Nullstellen von 
+$f(x)=q_1(x)\cdot(x-x_1)$. Da es aber keine Nullstellen von $g(x)=x-x_1$ sind, müssen es Nullstellen von
+$q_1(x)$ sein. Daher kann man $x-x_2$ von $q_1(x)$ abspalten, $q_1(x) = q_2(x)\cdot (x-x_2)$, und
+erhält mit der gleichen Begründung, dass $x_3,\ldots, x_k$ Nullstellen von $q_2(x)$ sind. Dies führt man
+fort, bis man alle Nullstellen abgespalten hat, und bekommt durch sukzessives einsetzen in die vorhergehende
+Gleichung
+\[ f(x)= q_1(x)\cdot (x-x_1)=q_2(x)\cdot (x-x_2)\cdot (x-x_1)=\ldots
+= q_k(x)\cdot (x-x_k)\cdots (x-x_2)\cdot (x-x_1). \]
+Nach Umsortierung der Faktoren ist das genau die Aussage des Satzes.
+\item Da ein Polynom immer einen Grad $\geq 0$ hat, folgt aus dem Satz auch:
+\begin{center}
+Ein Polynom vom Grad $n$ besitzt höchstens $n$ verschiedene Nullstellen.
+\end{center}
+\end{enumerate}
+\end{remark}
+
+\begin{example}
+\begin{tabs*}
+\tab{1. Beispiel}
+Das Polynom $f(x)=x^4-81$ besitzt die Nullstellen $x=3$ und $x=-3$. Durch Abspalten von $(x-3)$
+erhält man zunächst \[ x^4-81=(x^3+3x^2+9x+27)\cdot (x-3) \] und dann weiter
+\[ x^3+3x^2+9x+27 = (x^2+9)\cdot (x+3). \]
+Insgesamt also $f(x)=x^4-81=(x^2+9)(x-3)(x+3)$.
+Das quadratische Polynom $x^2+9$ besitzt keine reelle Nullstellen, weshalb man keine weiteren Linearfaktoren
+abspalten kann.
+\tab{2. Beispiel}
+Das Polynom $f(x)=2x^3 - 4x^2 - 6x + 12$ besitzt die Nullstelle $x=2$. Mit dem Hornerschema erhält man:
+
+ \begin{table}
+    $a_k$ & $\phantom{-2}2$ & $\phantom{2}-4$ & $\phantom{2}-6$ & $\phantom{-}12$ \\
+    $x_0=2$ & & $\phantom{-2}4$ & $\phantom{-2}0$ & $-12$ \\
+    & $\phantom{-2}2$ & $\phantom{-2}0$ & $\phantom{2}-6$ & $\phantom{-2}0$
+ \end{table}
+
+Also $f(x)=(2x^2-6)\cdot (x-2)$.\\
+Die Nullstellen des quadratischen Polynoms sind $\sqrt{3}$ und $-\sqrt{3}$, und man erhält durch sukzessives weiteres
+Abspalten oder direkt mit dem Satz von Vieta:
+\[ 2x^2-6=2(x^2-3)=2(x-\sqrt{3})(x+\sqrt{3}). \]
+Damit lässt sich also $f$ schreiben als
+\[ f(x)=2(x-2)(x-\sqrt{3})(x+\sqrt{3}).  \]
+\end{tabs*}
+\end{example}
+
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\randint[Z]{a1}{-2}{2}
+			\randint[Z]{a2}{-2}{2}
+			\randadjustIf{a1,a2}{a1 = a2}
+			\randint[Z]{b}{-2}{2}
+			\randint{c}{-4}{4}
+			\randint[Z]{d}{1}{4}
+			\function{q}{b*x^2+c*x+d}
+		    \function[expand,normalize]{f}{(x-a1)*(x-a2)*q}
+		\end{variables}
+		
+			\text{Das Polynom $f(x)=\var{f}$ hat die Nullstellen $\var{a1}$ und $\var{a2}$.
+			Welches Polynom bleibt, wenn man die zugehörigen Linearfaktoren abgespalten hat?\\
+			$f(x)=($\ansref$)(x-\var{a1})(x-\var{a2})$.
+		}
+		
+		\begin{answer}
+			\solution{q}
+			\checkAsFunction{x}{-10}{10}{100}
+		\end{answer}
+	\end{quickcheck}
+
+\section{Vielfachheit von Nullstellen} \label{sec:vielfachheit}
+
+Ist $f(x)$ ein Polynom und $x_1$ eine Nullstelle, so kann man den Linearfaktor $x-x_1$ abspalten,
+$f(x)=q(x)\cdot (x-x_1)$. Nun kann es vorkommen, dass $x_1$ auch eine Nullstelle von $q(x)$ ist, und man daher
+den Linearfaktor $x-x_1$ nochmals von $q(x)$ abspalten kann. Eventuell kann man dies auch noch öfter durchführen.
+
+\begin{definition}[mehrfache Nullstelle]
+Ist $c$ eine Nullstelle eines Polynoms $f(x)\ne 0$, so gibt es eine eindeutige natürliche Zahl $k$ und
+ein eindeutiges Polynom $q(x)$ so, dass
+\[ f(x)=q(x)\cdot (x-c)^k \quad \text{und}\quad q(c)\ne 0. \]
+Die Zahl $k$ heißt dann die \emph{Vielfachheit} der Nullstelle $c$, und man nennt $c$ eine 
+\emph{$k$-fache Nullstelle} von $f$. 
+\end{definition}
+
+\begin{example}
+\begin{enumerate}
+\item Das Polynom $f_1(x)=x^4 + 2x^3 + 2x^2 + 2x + 1$ hat $-1$ als Nullstelle, denn 
+$f_1(-1)=(-1)^4+2\cdot (-1)^3+2\cdot (-1)^2+2\cdot (-1)+1=1-2+2-2+1=0$. Mit Polynomdivision bekommt man
+\[ f_1(x)=(x^3+x^2+x+1)(x+1). \]
+Das Polynom $x^3+x^2+x+1$ hat wieder $-1$ als Nullstelle, und es ist $x^3+x^2+x+1=(x^2+1)(x+1)$. Damit gilt
+\[ f_1(x)=(x^2+1)(x+1)^2 \]
+und $-1$ ist keine Nullstelle von $q(x)=x^2+1$, da $q(-1)=(-1)^2+1=2$.\\
+Also ist $-1$ eine doppelte (=zweifache) Nullstelle von $f_1$.
+\item Das Polynom $f_2(x)=4x^3 - 8x^2 + 5x - 1$ hat die Nullstellen $1$ und $\frac{1}{2}$ und lässt sich schreiben als
+\[ f_2(x)=4x^3 - 8x^2 + 5x - 1=2(x-1)(x-\frac{1}{2})^2. \]
+Damit ist $1$ eine einfache Nullstelle von $f_2$, und $\frac{1}{2}$ ist eine doppelte (=zweifache) Nullstelle von $f_2$.
+\end{enumerate}
+\end{example}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{a1}{-2}{2}
+			\randint{k}{1}{3}
+			\randint[Z]{b}{-2}{2}
+			\randint[Z]{d}{1}{4}
+			\function[normalize]{l}{x-a1}
+			\function[expand,normalize]{q}{b*(x-a1)*x^(3-k)+d}
+		    \function[expand,normalize]{f}{(x-a1)^k*q}
+		\end{variables}
+		
+			\text{Das Polynom $f(x)=\var{f}$ besitzt die Nullstelle $\var{a1}$.
+			Was ist die Vielfachheit dieser Nullstelle?\\
+			Die Vielfachheit ist \ansref.
+		}
+		
+		\begin{answer}
+			\solution{k}
+		\end{answer}
+		
+		\explanation{Durch sukzessive Abspalten des Linearfaktors $\var{l}$ erhält man, 
+		dass $f(x)=\var{f}=(\var{q})\cdot (\var{l})^{\var{k}}$ gilt, und dass
+		$\var{q}$ an der Stelle $\var{a1}$ den Wert $\var{d}\ne 0$ hat.}
+	\end{quickcheck}
+	
+	
+\section{Funktionsverlauf bei mehrfachen Nullstellen}
+
+Noch zu schreiben...
+
+
+\end{visualizationwrapper}
+
+\end{content}

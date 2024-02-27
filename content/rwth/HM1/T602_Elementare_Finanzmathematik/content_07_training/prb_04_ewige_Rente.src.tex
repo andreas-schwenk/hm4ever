@@ -1,0 +1,85 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A04: ewige Rente}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A04: ewige Rente}}
+\lang{en}{\title{A04: perpetuity}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22682}{Ticket 22682}
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+     \begin{problem}
+     \begin{variables}
+        \randint{m}{2}{4}
+        \function[calculate]{r0}{100000*m}
+        \function[calculate,2]{p}{0,5*m}
+        \function[calculate,2]{rew}{p*r0/100}
+        \function[calculate,2]{q}{1+p/100}
+        \function[calculate,2]{r40}{r0*(q^(41)-q^(40))/(q^(40)-1)}
+     \end{variables}
+          \begin{question}
+          \type{input.number}
+          \lang{de}{\text{Herr L. hat den Rest seines Lottogewinnes von $\var{r0}$
+          \euro am Jahresbeginn zu einem festen Zinssatz von $\var{p}$ \% angelegt. Wie hoch ist die ewige Rente,
+          die er jährlich nachschüssig abheben kann?\\
+          Berechnen Sie im Vergleich dazu die Rentenrate bei 40-jähriger Laufzeit.\\
+          $r_{\text{ewig}}=$\ansref \\
+          $r_{40}=$ \ansref
+          }}
+          \lang{en}{\text{Mr L. invested the rest of his lottery winnings of $\var{r0}$
+          \euro at the beginning of the year at a fixed interest rate of $\var{p}$ \%. How much is the perpetuity
+          that he can withdraw in arrears each year?\\
+          In comparison, calculate the annuity payments for a 40-year term.\\
+          $r_{\text{eterity}}=$\ansref \\
+          $r_{40}=$ \ansref
+          }}
+               \begin{answer}
+                    \solution{rew}
+               \end{answer}
+               \begin{answer}
+                    \solution{r40}
+               \end{answer}               
+          \lang{de}{\explanation{Bei einer ewigen Rente entspricht die jährliche Auszahlung dem Zinsbetrag.
+          %$r_{\text{ewig}}=R_0\cdot\frac{p}{100}=\var{rew}$. 
+          Die 40-jährige Laufzeit hat eine höhere Rate, 
+          da am Ende kein Kapital übrig bleibt. 
+          %$r_{40}=R_0\frac{q^{41}-q^{40}}{q^{40}-1}=\var{r40}$\euro.
+          }}
+          \lang{en}{\explanation{In the case of a perpetuity, the annual payout is equal to the interest amount.
+          %$r_{\text{eternal}}=R_0\cdot\frac{p}{100}=\var{rew}$. 
+          The 40-year term has a higher rate, 
+          as there is no capital left over at the end. 
+          %$r_{40}=R_0\frac{q^{41}-q^{40}}{q^{40}-1}=\var{r40}$\euro.
+          }}
+          \end{question}
+          
+     \end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

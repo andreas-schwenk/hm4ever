@@ -1,0 +1,82 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü02: Konvergenzradius}
+    \lang{en}{Exercise 2}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_14_konvergenz.meta.xml}{content_14_konvergenz}
+\link{generic_article}{content/rwth/HM1/T209_Potenzreihen/g_art_content_27_konvergenzradius.meta.xml}{content_27_konvergenzradius}
+\end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+
+\title{
+  \lang{de}{Ü02: Konvergenzradius}
+}
+
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9920}{Ticket 9920}
+\end{block}
+
+
+
+\lang{de}{ Bestimmen Sie den Konvergenzradius der Potenzreihe
+        \[\sum_{k=1}^{\infty} \left( \frac{k!}{\prod_{j=1}^k \left( 2j+1 \right)} \right)^{2} \cdot z^{k}\]
+        mit Hilfe der Quotientenregel. }
+    
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+
+  \tab{\lang{de}{    Lösung    }}
+  %#################################
+  
+  
+  \begin{incremental}[\initialsteps{1}]
+  
+  
+    \step 
+    \lang{de}{   Für $k\in\mathbb{N}$ seien $b_{k}:=\frac{k!}{\prod_{j=1}^k \left(2j+1\right)}$
+          und $a_{k}:=b_{k}^{2}$. Dann gilt
+          \[
+          \left|\frac{a_{k}}{a_{k+1}}\right|=\left(\frac{b_{k}}{b_{k+1}}\right)^{2},
+          \]}
+          \step 
+    \lang{de}{ 
+          und es ist
+          \begin{eqnarray*}
+          \frac{b_{k}}{b_{k+1}} & = & \frac{k!}{\prod_{j=1}^k \left(2j+1\right)}\cdot\frac{\prod_{j=1}^{k+1} \left(2j+1\right)}{\left(k+1\right)!}\\
+           & = & \frac{k!}{\prod_{j=1}^k \left(2j+1\right)}\cdot\frac{\prod_{j=1}^{k} \left(2j+1\right)}{k!} \cdot \frac{2(k+1)+1}{k+1} \\
+           & = & \frac{2\left(k+1\right)+1}{k+1}\\
+           & = & \frac{2k+3}{k+1}\\
+           & = & \frac{2+\frac{3}{k}}{1+\frac{1}{k}}\xrightarrow[k\rightarrow\infty]{\text{}}\frac{2}{1}=2
+          \end{eqnarray*}}
+          \step 
+    \lang{de}{ 
+          nach den \ref[content_14_konvergenz][Grenzwertregeln]{sec:grenzwertregeln}. Insgesamt folgt nun
+          \[
+          \lim_{k\rightarrow\infty}\left|\frac{a_{k}}{a_{k+1}}\right|=\lim_{k\rightarrow\infty}\left(\frac{b_{k}}{b_{k+1}}\right)^{2}\overset{\text{}}{=}2^{2}=4.
+          \]
+          Nach der \ref[content_27_konvergenzradius][Quotientenregel]{thm:quot-regel} ist der Konvergenzradius der gegebenen Potenzreihe also $R=4$. 
+          (Wir haben hier $a_k/a_{k+1}$ statt $a_{k+1}/a_k$ betrachtet, damit wir direkt den Konvergenzradius herausbekommen und nicht noch den Kehrwert bilden müssen.)\\    }
+     %#########################
+     
+  
+  \end{incremental}
+  
+
+\end{tabs*}
+\end{content}

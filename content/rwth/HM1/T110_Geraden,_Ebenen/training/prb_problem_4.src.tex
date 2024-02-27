@@ -1,0 +1,196 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A04: Koordinatengleichungen}
+    \lang{en}{input function}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{description}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A04: Koordinatengleichungen}}
+\lang{en}{\title{Problem 4}}
+
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9646}{Ticket 9646}
+\end{block}
+
+
+
+
+\begin{problem}
+
+	\begin{question}
+		\lang{de}{\text{
+			Gegeben sei die Gerade 
+			$ g= \left\{\begin{pmatrix}x_1 \\ x_2 \end{pmatrix} \in \R^2 \vert \var{n_1} x_1+ (\var{n_2} x_2)=\var{d} \right\}. $ 
+			Bestimmen Sie eine Parameterform $g=\{ \vec{p}+\lambda \vec{v}\vert \lambda \in \R \}$ 
+			für die Gerade $g$. Geben Sie die Komponenten von $\vec{p}$ und $\vec{v}$ ein.\\ \\
+            $p_1 = $ \ansref , ~~~~~ $v_1 = $ \ansref, \\
+            $p_2 = $ \ansref , ~~~~~ $v_2 = $ \ansref.
+		}
+		}
+		
+		\type{input.function}
+		\field{real}
+		
+		
+		\begin{variables}
+			\randint{d}{-10}{10}
+			\randint[Z]{n_1}{-10}{10}
+			\randint[Z]{n_2}{-10}{10}
+			\function[calculate]{x1}{0*d}
+			\function{x2}{d/n_2}
+			\function[calculate]{n1}{-n_2}
+			\function[calculate]{n2}{n_1}
+		\end{variables}
+		
+		\begin{answer}
+			\text{$p_1 = $}
+			\solution{x1}
+			\inputAsFunction{}{p1}
+		\end{answer}
+		\begin{answer}
+			\text{$v_1 = $}
+			\solution{n1}
+			\inputAsFunction{}{v1}
+		\end{answer}
+        
+		\begin{answer}
+			\text{$p_2 = $}
+			\solution{x2}
+			\inputAsFunction{}{p2}
+			\checkFuncForZero{n_1*p1+n_2*p2-d }{-10}{10}{100}
+            \explanation[edited]{Als Stützvektor $\vec{p}$ der Geraden $g$ eignet sich jeder Punkt, der die Koordinatengleichung der Geraden erfüllt.}
+		\end{answer}
+			
+		\begin{answer}
+			\text{$v_2 = $}
+			\solution{n2}
+			\inputAsFunction{}{v2}
+			\checkFuncForZero{(v1*n_1+v2*n_2)^2 + dirac(v1^2+v2^2)}{-10}{10}{100}
+            %dirac(...) fängt den Nullvektor ab
+            \explanation[edited]{Die Vorfaktoren vor den $x_i$ in der Koordinatengleichung bilden einen Normalenvektor der Geraden $g$. Als Richtungsvektor $\vec{v}$ der Geraden $g$
+    kann derjenige Vektor gewählt werden, der senkrecht zum Normalenvektor steht, d. h., wo das Skalarprodukt aus Normalen- und
+    Richtungsvektor Null wird.}
+		\end{answer}
+		
+		
+	\end{question}
+	
+	\begin{question}
+		\lang{de}{\text{
+			Gegeben sei die Ebene 
+			$ E = \left\{ \begin{pmatrix}x_1 \\ x_2 \\ x_3 \end{pmatrix}\in \R^3 \vert \var{n_1} x_1+(\var{n_2} x_2)+(\var{n_3} x_3) = \var{d} \right\}. $ 
+			Bestimmen Sie eine Parameterform $E=\{\vec{r}+s \vec{v}+t \vec{w} \vert s,t\in \R \}$ für die Ebene $E$ 
+			und geben Sie die (Komponenten der) auftretenden Vektoren $\vec{r},\vec{v},\vec{w}$ ein.\\\\
+            $r_1 = $ \ansref , ~~~~~ $v_1 = $ \ansref,  ~~~~~ $w_1 = $ \ansref,\\
+            $r_2 = $ \ansref , ~~~~~ $v_2 = $ \ansref,  ~~~~~ $w_2 = $ \ansref,\\
+            $r_3 = $ \ansref , ~~~~~ $v_3 = $ \ansref,  ~~~~~ $w_3 = $ \ansref.
+		}
+		}
+		\type{input.function}
+		\field{real}
+		
+		
+		\begin{variables}
+			\randint{d}{-10}{10}
+			\randint{n_1}{-10}{12}
+			\randint{n_2}{-10}{12}
+			\randint[Z]{n_3}{-10}{12}
+						
+			\function[calculate]{x1}{0}
+			\function[calculate]{x2}{0}
+			\function{x3}{d/n_3}
+			
+			%Gram-Schmidt mit den ersten beiden Standard Basisvektoren (n_3!=0) um zwei aufspannende Vektoren von E zu erhalten
+			\function[calculate]{v1}{1-(n_1^2)/(n_1^2+n_2^2+n_3^2)}
+			\function[calculate]{v2}{0-(n_1*n_2)/(n_1^2+n_2^2+n_3^2)}
+			\function[calculate]{v3}{0-(n_1*n_3)/(n_1^2+n_2^2+n_3^2)}
+			\function[calculate]{w1}{0-n_2*n_1/(n_1^2+n_2^2+n_3^2)-v2*v1/(v1^2+v2^2+v3^2)}
+			\function[calculate]{w2}{1-n_2*n_2/(n_1^2+n_2^2+n_3^2)-v2*v2/(v1^2+v2^2+v3^2)}
+			\function[calculate]{w3}{0-n_2*n_3/(n_1^2+n_2^2+n_3^2)-v2*v3/(v1^2+v2^2+v3^2)}
+		\end{variables}
+		
+		\begin{answer}
+			\text{$r_1 = $}
+			\solution{x1}
+			\inputAsFunction{}{O1}
+		\end{answer}
+		\begin{answer}
+			\text{$v_1 = $}
+			\solution{v1}
+			\inputAsFunction{}{V1}
+		\end{answer}
+        \begin{answer}
+			\text{$w_1 = $}
+			\solution{w1}
+			\inputAsFunction{}{W1}
+		\end{answer}
+        
+		\begin{answer}
+			\text{$r_2 = $}
+			\solution{x2}
+			\inputAsFunction{}{O2}
+			
+		\end{answer}
+		\begin{answer}
+			\text{$v_2 = $}
+			\solution{v2}
+			\inputAsFunction{}{V2}
+		\end{answer}
+        
+        \begin{answer}
+			\text{$w_2 = $}
+			\solution{w2}
+			\inputAsFunction{}{W2}
+		\end{answer}
+        
+		\begin{answer}
+			\text{$r_3 = $}
+			\solution{x3}
+			\inputAsFunction{}{O3}
+			\checkFuncForZero{n_1*O1+n_2*O2+n_3*O3-d}{-10}{10}{100}
+            \explanation[edited]{Suchen Sie einen Punkt, der die vorgegebene Gleichung erfüllt. Den Ortvektor können Sie für $\vec{r}$ wählen. Sie können beispielsweise $r_1=0, r_2=0$ setzen und dann die restliche Gleichung nach $r_3$ auflösen.}
+		\end{answer}
+		
+		\begin{answer}
+			\text{$v_3 = $}
+			\solution{v3}
+			\inputAsFunction{}{V3}
+		\end{answer}
+		
+		\begin{answer}
+			\text{$w_3 = $}
+			\solution{w3}
+			\inputAsFunction{}{W3}
+            %Skalarprodukt n*v und n*w müssen Null sein UND det(n,v,w)\neq 0
+			\checkFuncForZero{(n_1*V1+n_2*V2+n_3*V3)^2+(n_1*W1+n_2*W2+n_3*W3)^2+1-sign((n_1*V2*W3+V1*W2*n_3+W1*n_2*V3-n_3*V2*W1-V3*W2*n_1-W3*n_2*V1)^2)}{-10}{10}{100}
+            \explanation[edited]{Suchen Sie zwei linear unabhängige Vektoren $\vec{v}, \vec{w}$, die beide orthogonal auf $\begin{pmatrix}\var{n_1}\\ \var{n_2}\\ \var{n_3}\end{pmatrix}$ stehen.}
+            \explanation[n_1*V2*W3+V1*W2*n_3+W1*n_2*V3-n_3*V2*W1-V3*W2*n_1-W3*n_2*V1 = 0]{Die Richtungsvektoren, die Sie angegeben haben, sind nicht linear unabhängig.}
+		\end{answer}
+		
+	\end{question}
+	
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+
+\end{content}

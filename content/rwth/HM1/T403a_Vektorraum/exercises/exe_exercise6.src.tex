@@ -1,0 +1,150 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+   \lang{de}{Ü06: Basen v. Untervektorräumen}
+   \lang{en}{Ex06: Basis of vector subspaces}
+ }
+ \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+   \lang{de}{Aufgabe 6}
+   \lang{en}{Description here}
+ \end{description}
+ \begin{components}
+ \end{components}
+ \begin{links}
+\link{generic_article}{content/rwth/HM1/T402_Lineare_Gleichungssysteme/g_art_content_05_gaussverfahren.meta.xml}{gaussverfahren}
+\link{generic_article}{content/rwth/HM1/T403a_Vektorraum/g_art_content_10a_vektorraum.meta.xml}{vektorraum}
+\end{links}
+ \creategeneric
+ \end{metainfo}
+ \begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/15909}{Ticket 15909}
+\end{block}
+   \title{
+    \lang{de}{Ü06: Basen von Untervektorräumen}
+    \lang{en}{Ex06: Basis of vector subspaces}
+   }
+   \lang{de}{Gegeben sei die Matrix $A=\begin{pmatrix}3 & 4 & 1 & 0\\ 0 & 1 & 2 & 1 \\ -3 & -2 & 3 & 2
+   \end{pmatrix}$.
+   Bestimmen Sie eine Basis der Lösungsmenge
+   $\mathbb{L}=\{ x \in \R^4 |\, A \cdot x = 0\}$.}
+    \lang{en}{Given is a matrix $A=\begin{pmatrix}3 & 4 & 1 & 0\\ 0 & 1 & 2 & 1 \\ -3 & -2 & 3 & 2
+   \end{pmatrix}$.
+   Determine a basis of the solution set
+   $\mathbb{L}=\{ x \in \R^4 |\, A \cdot x = 0\}$.}
+
+ \begin{tabs*}[\initialtab{0}\class{exercise}]
+   \tab{
+   \lang{de}{Antwort}
+   \lang{en}{Answer}
+  }
+\lang{de}{
+Zum Beispiel $\left\{\begin{pmatrix}\frac{7}{3}\\-2\\ 1 \\ 0\end{pmatrix};
+\begin{pmatrix}\frac{4}{3}\\-1\\ 0 \\ 1\end{pmatrix}\right\}$.}
+\lang{en}{
+For example $\left\{\begin{pmatrix}\frac{7}{3}\\-2\\ 1 \\ 0\end{pmatrix};
+\begin{pmatrix}\frac{4}{3}\\-1\\ 0 \\ 1\end{pmatrix}\right\}$.}
+
+ \tab{
+   \lang{de}{Lösung}
+   \lang{en}{Solution}
+} \begin{incremental}[\initialsteps{1}]
+
+    \step 
+     \lang{de}{Wie in der Vorlesung in den \ref[vektorraum][Beispielen zu Vektorräumen]{ex:LGS_UnterVR} erwähnt, bildet die Lösungsmenge $\mathbb{L}$ 
+     eines homogenen LGS $Ax=0 \,$ mit $3$ Gleichungen und $4$ Variablen einen Untervektorraum des $\R^4$.       
+     
+%     Wir gehen wie im Vorlesungstext angegeben vor.
+     
+%     Zunächst führen wir den Gauß-Algorithmus aus, um die Lösungsmenge von $A\cdot x=0$ zu bestimmen. Es ist also ein homogenes LGS zu lösen.
+
+     Wir bestimmen also zunächst die Lösungsmenge von $A\cdot x=0$ durch Anwendung des \ref[gaussverfahren][Gauß-Algorithmus.]{def:Gauß-Verfahren}
+     Dabei können wir die rechte Seite einfach weglassen, da diese dem Nullvektor entspricht.
+      
+%     Die rechte Seite ist der Nullvektor. Dieser kann auch weggelassen werden.
+     }
+
+         \lang{en}{Like we have seen in the lecture during the \ref[vektorraum][examples for vector spaces]{ex:LGS_UnterVR}, the solution set $\mathbb{L}$ 
+     of a homogeneous linear system $Ax=0 \,$ with $3$ equations and $4$ variables is a vector subspace of $\R^4$.       
+     
+%     Wir gehen wie im Vorlesungstext angegeben vor.
+     
+%     Zunächst führen wir den Gauß-Algorithmus aus, um die Lösungsmenge von $A\cdot x=0$ zu bestimmen. Es ist also ein homogenes LGS zu lösen.
+
+     First of all we determine the solut set of $A\cdot x=0$ with the help of \ref[gaussverfahren][Gaussian elimination]{def:Gauß-Verfahren}.
+     We may omit the right side, because it is equal to the zero-vector.
+      
+%     Die rechte Seite ist der Nullvektor. Dieser kann auch weggelassen werden.
+     }
+     
+       \step \begin{align*}
+       &\begin{pmatrix}3 & 4 & 1 & 0\\ 0 & 1 & 2 & 1 \\ -3 & -2 & 3 & 2
+   \end{pmatrix} \\
+   \rightsquigarrow & \begin{pmatrix} 3 & 4 & 1 & 0 \\ 0 & 1 & 2 & 1 \\ 0 & 2 & 4 & 2\end{pmatrix} \\
+   \rightsquigarrow & \begin{pmatrix} 3 & 4 & 1 & 0 \\ 0 & 1 & 2 & 1 \\ 0 & 0 & 0 & 0\end{pmatrix}\\
+   \rightsquigarrow & \begin{pmatrix} 3 & 0 & -7 & -4 \\ 0 & 1 & 2 & 1 \\ 0 & 0 & 0 & 0\end{pmatrix}\\
+   \rightsquigarrow & \begin{pmatrix} 1 & 0 & -\frac{7}{3}& -\frac{4}{3}
+\\ 0 & 1& 2 & 1\\ 0& 0& 0 & 0\end{pmatrix}       \end{align*}
+
+\step \lang{de}{Die letzte Matrix ist in Stufenform. Wir erkennnen, dass der Rang der Matrix $A$ zwei ist. Damit sind zwei Variablen von $x \in \R^4$ frei wählbar.
+Wir setzten $x_3=s$ und $x_4=t$. Eine andere Wahl ist auch möglich und liefert eine andere Basis, die aber mit einer passenden
+Basiswechselmatrix in diese überführt werden kann.}
+\lang{en}{The last matrix is in row echelon form. We see, that the rank of the matrix is $2$.
+So two of the variables $x \in \R^4$ are free.
+We set $x_3=s$ and $x_4=t$. You may also choose different values for the variables, which results
+in a different basis. But with a basis transformation matrix wecan
+transform the basis in the basis given here.}
+
+\step \lang{de}{Aus der ersten Zeile der Matrix in Stufenform erhalten wir die Gleichung
+\[
+x_1 -\frac{7}{3}s-\frac{4}{3}t= 0,
+\]
+also
+\[
+x_1 = \frac{7}{3}s+\frac{4}{3}t.
+\]
+Aus der zweiten Zeile der Matrix in Stufenform erhalten wir
+\[ x_2+2s+t=0,\]
+also \[x_2=-2s-t.\]}
+\lang{en}{The following equation results from the first row of the matrix in row echelon form:
+\[
+x_1 -\frac{7}{3}s-\frac{4}{3}t= 0,
+\]
+so
+\[
+x_1 = \frac{7}{3}s+\frac{4}{3}t.
+\]
+With the second row of the matrix we get
+\[ x_2+2s+t=0,\]
+so \[x_2=-2s-t.\]}
+
+\step \lang{de}{Somit können wir die Lösungsmenge in der folgenden Form schreiben
+\begin{align*}
+\mathbb{L}&=\left\{ \begin{pmatrix}\frac{7}{3}s+\frac{4}{3}t \\ -2s-t \\ s\\t\end{pmatrix}
+|\, s,t\in \R \right\}\\
+&= \left\{ s\cdot \begin{pmatrix}\frac{7}{3}\\-2\\1 \\ 0\end{pmatrix}+t\cdot \begin{pmatrix}\frac{4}{3}\\-1\\0\\1\end{pmatrix}|\, s,t\in \R\right\}.
+\end{align*}
+Die Lösungsmenge ist also die Menge aller Linearkombinationen aus den Vektoren $\begin{pmatrix}\frac{7}{3}\\-2\\1 \\ 0\end{pmatrix}$ 
+und $\begin{pmatrix}\frac{4}{3}\\-1\\0\\1\end{pmatrix}$. Folglich ist eine Basis von $\mathbb{L}$ gegeben durch
+\[
+\left\{ \begin{pmatrix}\frac{7}{3}\\-2\\1 \\ 0\end{pmatrix}; \begin{pmatrix}\frac{4}{3}\\-1\\0\\1\end{pmatrix} \right\}.
+\]}
+\lang{en}{So we can write the solution set in the following form
+\begin{align*}
+\mathbb{L}&=\left\{ \begin{pmatrix}\frac{7}{3}s+\frac{4}{3}t \\ -2s-t \\ s\\t\end{pmatrix}
+|\, s,t\in \R \right\}\\
+&= \left\{ s\cdot \begin{pmatrix}\frac{7}{3}\\-2\\1 \\ 0\end{pmatrix}+t\cdot \begin{pmatrix}\frac{4}{3}\\-1\\0\\1\end{pmatrix}|\, s,t\in \R\right\}.
+\end{align*}
+So the solution set consists of all possible linear combinations of the vectors $\begin{pmatrix}\frac{7}{3}\\-2\\1 \\ 0\end{pmatrix}$ 
+and $\begin{pmatrix}\frac{4}{3}\\-1\\0\\1\end{pmatrix}$. Therefore a basis of $\mathbb{L}$ is given by
+\[
+\left\{ \begin{pmatrix}\frac{7}{3}\\-2\\1 \\ 0\end{pmatrix}; \begin{pmatrix}\frac{4}{3}\\-1\\0\\1\end{pmatrix} \right\}.
+\]}
+ \end{incremental}
+
+ \end{tabs*}
+ \end{content}

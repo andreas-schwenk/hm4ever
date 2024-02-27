@@ -1,0 +1,218 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Problem 3.2}
+    \lang{de}{Quadratische Funktionen: Scheitelform bestimmen und Parabel anpassen}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+  \begin{taxonomy}
+        \difficulty{3}
+        \usage{FH Aachen, Mathematische Grundlagen}
+        \objectives{analyze,understand}
+        \topic{analysis1/functions/graph_of_function}
+  \end{taxonomy}
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/32291}{Ticket 32291}
+\end{block}
+\begin{block}[annotation]
+Copy of : /home/mumie/checkin/content/playground/HM4mint-Testaufgaben/T102neu_Einfache_Reelle_Funktionen/prb_jsx_QuadFunk_LFZ.src.tex
+\end{block}
+
+
+\begin{block}[annotation]
+(B. Guyet)\\
+Abwandlung der Aufgabe: \\
+/home/mumie/checkin/content/playground/BarbaraGuyet/JSX-Aufgaben/prb_jsx_QuadFunk_SPF.src.tex
+\\
+Weiterentwicklung basierend auf Kopien von: \\
+/home/mumie/checkin/content/playground/Andreas_Maurischat/grafischeAufgaben/prb_QuadFunk_A3.3.src.tex
+\\
+/home/mumie/checkin/content/pool/fh_aachen/MGI/Quadratische_Funktionen/prb_QuadFunk_A3.3.src.tex
+\end{block}
+
+\begin{block}[annotation]
+ Bestimmung der Nullstellen einer quadratischen Funktion nach Viëta; Umformung der Funktion in
+ die faktorisierte Form (Linearfaktorzerlegung) und in die Scheitelpunktform; Grafische Bestimmung
+ der Lage der Parabel unter Verwendung einer der Nullstellen und des Scheitelpunkts.
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+\begin{visualizationwrapper}
+
+
+\begin{genericJSXVisualization}
+	\begin{variables}
+  		\point[editable]{S}{real}{0,0}
+  		\point[editable]{N}{real}{1,1}
+        \function{f}{real}{(N[y]-S[y])/((N[x]-S[x])*(N[x]-S[x]))*(x-S[x])*(x-S[x])+S[y]}
+        \number{sx}{real}{S[x]}
+        \number{sy}{real}{S[y]}
+        \number{nx}{real}{N[x]}
+        \number{ny}{real}{N[y]}
+    \end{variables}
+\color{f}{RED}
+\label{S}{S}
+\label{N}{N}
+\label{f}{f}
+\answer{sx}{3,1}
+\answer{sy}{3,2}
+\answer{nx}{3,3}
+\answer{ny}{3,4}
+
+	\begin{canvas}
+        \snapToGrid{0.05,0.05}
+        \plotSize{400,400}
+        \plotLeft{-5}
+        \plotRight{5}
+        \plot[coordinateSystem,showPointCoords]{S,N,f}
+	\end{canvas}
+
+\end{genericJSXVisualization}
+
+\end{visualizationwrapper}
+
+   \begin{problem} 
+%   
+    \begin{variables}
+	    \randint[Z]{a}{-3}{3}
+	    \randint{b}{1}{4}
+	    \randint{c}{1}{4}
+	    \randint{d}{1}{4}
+      \randadjustIf{b,d}{b=d OR b/a=d/c} 
+     % Quadr. Funktion f mit Linearfaktorzerlegung f1*f2
+      \function{ff}{(c*x+d)*(a*x+b)} 
+      \function[expand, normalize]{f}{ff}
+     %  Nullstellen von f (es müssen 2 Nullstellen sein, sonst N=S)  
+	    \function[calculate]{ns1}{-b/a}
+	    \function[calculate]{ns2}{-d/c}
+      \function[calculate]{nx0}{ns2}      
+      \substitute[calculate]{ny0}{ff}{x}{nx0}     
+     % faktorisierte Form
+      \function[calculate, normalize]{m}{a*c}     % Steckungsfaktor der Parabel
+      \function[normalize]{f1}{x-ns1}
+      \function[normalize]{f2}{x-ns2}
+	   % Scheitelpunktform der Parabel       
+      \function[calculate, normalize]{xs}{-(b*c+a*d)/(2*a*c)}      % x-Koordinate des Scheitelpunkts
+      \function[calculate, normalize]{ys}{b*d-(b*c+a*d)^2/(4*a*c)} % y-Koordinate des Scheitelpunkts
+      \function[normalize]{f0}{m*(x-xs)^2+ys}  % Scheitelpunktform der Parabel
+    \end{variables}
+% (a)         
+  \begin{question}
+     \text{Die quadratische Funktion $f:\, \R \rightarrow \R$, $\;f(x)= \var{f}\,$ 
+          hat eine Nullstellen in $\, x_1=\var{ns1}$. \\
+          Bestimmen Sie die Linearfaktorzerlegung von $f$ und schreiben 
+          Sie $f$ in die faktorisierte Form um:\\
+          $f(x)=$ \ansref $\cdot (\var{f1}) \cdot ($ \ansref $)$.\\
+          \\
+          \textit{Geben alle Zahlen als (gekürzte) Brüche oder ganze Zahlen an.}}
+%
+    
+     \field{rational}
+% \debug[m,ff,f1,f2,f0,nx0,ny0,ns1,ns2,xs,ys]
+      
+     \begin{answer}
+       \type{input.number}
+       \solution{m}
+     \end{answer} 
+     \begin{answer}
+        \type{input.function}
+        \solution{f2}
+        \inputAsFunction{x}{ant1}
+        \checkStringsForRelation{count(x,ant1)=1 AND equal(ant1,f2)}
+        \checkAsFunction{x}{-1}{1}{10}
+       \end{answer} 
+       \explanation[NOT[equal(ans_1,m)] AND [equal(ans_2,f2)]]{Der Vorfaktor ist nicht korrekt.}
+       \explanation[NOT[equal(ans_1,m)] AND NOT[equal(ans_2,f2)]]{Klammern Sie zuerst den richtigen 
+                   Vorfaktor aus und verwenden Sie den Satz von Viëta zur Berechnung der zweiten 
+                   Nullstelle von $f$.}
+       \explanation[[equal(ans_1,m)] AND NOT[equal(ans_2,f2)]]{Verwenden Sie den Satz von Viëta 
+                   zur Berechnung der zweiten Nullstelle von $f$.}
+     \end{question}         
+% (b)         
+     \begin{question}
+     \text{Bringen Sie den Funktionsterm von $f$ in Scheitelpunktform:\\
+     $f(x)=$ \ansref.
+     \\
+     \textit{Geben alle Zahlen als (gekürzte) Brüche oder ganze Zahlen an.}}
+     
+     \field{rational}
+     
+       \begin{answer}
+        \type{input.function}
+        \solution{f0}
+        \inputAsFunction{x}{ant1}
+        \checkStringsForRelation{count(x,ant1)=1 AND equal(ant1,f0)}
+%        \checkAsFunction{x}{-1}{1}{10}
+        \checkFuncForZero[5e-1]{(ant1-f0)}{-1}{1}{100}
+       \end{answer} 
+       \explanation[count(x,ans_1)!=1]{Das ist keine Scheitelpunktform.}
+       \explanation[count(x,ans_1)=1]{Leider falsch. Klammern Sie zuerst den Vorfaktor $\var{m}$ aus und 
+                   machen Sie dann eine quadratische Ergänzung.}
+     \end{question}
+% (c)      
+     \begin{question}
+       \begin{variables}
+        \earlierAnswer{f}{2,1}
+       \end{variables}          
+       \precision{1}
+          \type{input.generic}
+          \field{real}
+               \text{Verschieben Sie anschließend in der Grafik den Punkt $S$ in den 
+               zuvor berechneten Scheitelpunkt der Parabel und den Punkt $N$ in eine
+               der beiden Nullstellen, so dass der Funktionsgraph der Funktion $f(x)$ 
+               entsteht.}        
+     \begin{answer}
+      \type{graphics.function}
+      \solution{xs}
+      \inputAsFunction{}{xsx}
+     \end{answer}          
+     \begin{answer}
+      \type{graphics.function}
+      \solution{ys}
+      \inputAsFunction{}{ysy}
+      \checkFuncForZero[1e-1]{f[xsx]-ysy}{1}{2}{2}
+     \end{answer}                    
+     \begin{answer}
+      \type{graphics.function}
+      \solution{nx0}
+      \inputAsFunction{x}{nx}
+      \checkFuncForZero[2e-1]{(nx-ns1)*(nx-ns2)}{-1}{1}{100}
+     \end{answer}     
+     \begin{answer}
+      \type{graphics.function}
+      \solution{ny0}
+      \inputAsFunction{}{ny}
+      \checkFuncForZero[1e-1]{f[nx]-ny}{1}{2}{2}
+     \end{answer}
+     \explanation[NOT[equal(ans_1,xs)] AND NOT[equal(ans_2,ys)]]{Der Scheitelpunkt ist falsch.}
+     \explanation[NOT[equal(ans_1,xs)] AND [equal(ans_2,ys)]]{Der Scheitelpunkt hat die richtige $y$-Koordinate, 
+     aber nicht die richtige $x$-Koordinate.}
+     \explanation[NOT[equal(ans_2,ys)] AND [equal(ans_1,xs)]]{Der Scheitelpunkt hat die richtige $x$-Koordinate, 
+     aber nicht die richtige $y$-Koordinate.}
+     \explanation[[equal(ans_1,xs)] AND [equal(ans_2,ys)]]{Der Scheitelpunkt ist richtig, aber der Punkt $N$ 
+     stimmt noch nicht.}
+   \end{question}
+
+   
+ \end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

@@ -1,0 +1,306 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A02: Abschnittsweise definierte Funktion}
+    \lang{en}{problem 2}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+
+\lang{de}{
+	\title{A02: Abschnittsweise definierte Funktion}
+}
+\lang{en}{
+	\title{Problem 2}
+}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9610}{Ticket 9610}
+\end{block}
+
+\begin{problem}
+
+\randomquestionpool{1}{3}
+\randomquestionpool{4}{4}
+
+ \begin{variables}
+  \randint{a}{3}{5}
+
+  \randint{m}{2}{4}
+  \randint{b}{1}{5}
+  \function{f}{m*x+b}
+
+  \randint{g}{1}{20}
+
+  \function[calculate]{L}{(6-a)*g + (a*(m*a+2*b))/2}
+ \end{variables}
+
+ \begin{question}%1
+ \type{input.generic}
+    \lang{de}{
+ %begin-cosh   
+  \text{Gegeben sei eine Funktion $f$, wobei $f(x)= \begin{cases}\var{f}, & \text{ für }x \leq \var{a}\\
+ \var{g}, &\text{ für }x > \var{a}\end{cases}$ gilt.\\
+ Ist diese Funktion auf $[0;6]$ integrierbar?}}
+   \lang{en}{\text{Let $f$ be a function where $f(x)= \begin{cases}\var{f}, & \text{ for }x \leq \var{a}\\
+ \var{g}, &\text{ for }x > \var{a}\end{cases}$. Is this function integrable on $[0, 6]$?}}
+    
+  \begin{answer}
+  %\permutechoices{1}{5}
+  \type{mc.multiple}
+  \field{integer}
+
+  \begin{choice}
+      \lang{de}{ \text{Nein, weil sie an der Stelle $x=\var{a}$ eine Sprungstelle hat.}}
+       \lang{en}{\text{No, since there is a jump discontinuity at $x=\var{a}$.}}
+   \solution{false}
+  \end{choice}
+
+  \begin{choice}
+      \lang{de}{   \text{Ja, weil beschränkte Funktionen auf abgeschlossenen Intervallen immer integrierbar sind.}
+}
+ \lang{en}{\text{Yes, since bounded functions over closed intervals are always integrable.}}
+      \solution{false}
+  \end{choice}
+
+  \begin{choice}
+      \lang{de}{   \text{Nein, weil sie abschnittsweise definiert ist.}
+}
+ \lang{en}{\text{No, since it is defined piecewise.}}
+      \solution{false}
+  \end{choice}
+
+   \begin{choice}
+      \lang{de}{    \text{Ja, weil jede Funktion integrierbar ist.}
+}
+ \lang{en}{\text{Yes, since all functions are integrable.}}
+      \solution{false}
+   \end{choice}
+
+   \begin{choice}
+      \lang{de}{    \text{Ja, weil sie auf beiden Teilintervallen integrierbar ist.}
+}
+ \lang{en}{\text{Yes, since it is integrable on both subintervals.}}
+      \solution{true}
+   \end{choice}
+   
+\lang{de}{  
+   \explanation[equalChoice(1????)]{Auch Funktionen mit Sprungstellen können integrierbar sein.}                                   
+   \explanation[equalChoice(?1???)]{Beschränkheit alleine reicht nicht, um Integrierbarkeit einer Funktion zu garantieren.}                                    
+   \explanation[equalChoice(??1??)]{Auch abschnittsweise definierte Funktionen können integrierbar sein.}                                    
+   \explanation[equalChoice(???1?)]{Nicht jede Funktion ist integrierbar.}                                 
+   \explanation[equalChoice(????0)]{Aus der Integrierbarkeit einer Funktion auf zwei Teilintervallen ergibt sich die Integrierbarkeit auf der Vereinigung der Intervalle.}
+                                    
+} 
+
+\lang{en}{  
+   \explanation[equalChoice(1????)]{Functions with jump discontinuities can also be integrable.}
+   \explanation[equalChoice(?1???)]{Boundedness is not enough to guarantee that a function can be integrated.}
+   \explanation[equalChoice(??1??)]{Piecewise defined functions can be integrable.}
+   \explanation[equalChoice(???1?)]{There are also non-integrable functions.}
+   \explanation[equalChoice(????0)]{The integrability on the union of intervals results from the integrability on the subintervals.}
+} 
+
+\end{answer}
+ \end{question}%1
+ 
+ \begin{question}%2
+ \type{input.generic}
+    \lang{de}{
+ %begin-cosh   
+  \text{Gegeben sei eine Funktion $f$, wobei $f(x)= \begin{cases}\var{f}, & \text{ für }x \leq \var{a}\\
+ \var{g}, &\text{ für }x > \var{a}\end{cases}$ gilt.\\
+ Ist diese Funktion auf $[0;6]$ integrierbar?}}
+   \lang{en}{\text{Let $f$ be a function where where $f(x)= \var{f},$ when $x \leq \var{a}$\\
+   and $f(x)=\var{g},$ when $x > \var{a}$. Is this function integrable on $[0, 6]$?}}
+    
+  \begin{answer}
+  %\permutechoices{1}{5}
+  \type{mc.multiple}
+  \field{integer}
+  
+\begin{choice}
+      \lang{de}{   \text{Ja, weil beschränkte Funktionen auf abgeschlossenen Intervallen immer integrierbar sind.}
+}
+ \lang{en}{\text{Yes, since bounded functions over closed intervals are always integrable.}}
+      \solution{false}
+\end{choice}
+
+\begin{choice}
+      \lang{de}{ \text{Nein, weil sie an der Stelle $x=\var{a}$ eine Sprungstelle hat.}}
+       \lang{en}{\text{No, since there is a jump discontinuity at $x=\var{a}$.}}
+   \solution{false}
+\end{choice}
+
+\begin{choice}
+      \lang{de}{    \text{Ja, weil jede Funktion integrierbar ist.}
+}
+ \lang{en}{\text{Yes, since all functions are integrable.}}
+      \solution{false}
+\end{choice}
+
+\begin{choice}
+      \lang{de}{    \text{Ja, weil sie auf beiden Teilintervallen integrierbar ist.}
+}
+ \lang{en}{\text{Yes, since it is integrable on both subintervals.}}
+      \solution{true}
+\end{choice}
+
+\begin{choice}
+      \lang{de}{   \text{Nein, weil sie abschnittsweise definiert ist.}
+}
+ \lang{en}{\text{No, since it is defined piecewise.}}
+      \solution{false}
+\end{choice}
+
+\lang{de}{   
+   \explanation[equalChoice(1????)]{Beschränkheit alleine reicht nicht, um Integrierbarkeit einer Funktion zu garantieren.}                                    
+   \explanation[equalChoice(?1???)]{Auch Funktionen mit Sprungstellen können integrierbar sein.}                                    
+   \explanation[equalChoice(??1??)]{Nicht jede Funktion ist integrierbar.}                                    
+   \explanation[equalChoice(???0?)]{Aus der Integrierbarkeit einer Funktion auf zwei Teilintervallen ergibt sich die Integrierbarkeit auf der Vereinigung der Intervalle.}                                    
+   \explanation[equalChoice(????1)]{Auch abschnittsweise definierte Funktionen können integrierbar sein.}                                    
+}   
+
+\lang{en}{   
+   \explanation[equalChoice(1????)]{Boundedness is not enough to guarantee that a function can be integrated.}
+   \explanation[equalChoice(?1???)]{Functions with jump discontinuities can also be integrable.}
+   \explanation[equalChoice(??1??)]{There are also non-integrable functions.}
+   \explanation[equalChoice(???0?)]{The integrability on the union of intervals results from the integrability on the subintervals.}
+   \explanation[equalChoice(????1)]{Piecewise defined functions can be integrable.}
+}   
+   
+\end{answer}
+ \end{question}%2
+ 
+\begin{question}%3
+ \type{input.generic}
+    \lang{de}{
+ %begin-cosh   
+  \text{Gegeben sei eine Funktion $f$, wobei $f(x)= \begin{cases}\var{f}, & \text{ für }x \leq \var{a}\\
+ \var{g}, &\text{ für }x > \var{a}\end{cases}$ gilt.\\
+ Ist diese Funktion auf $[0;6]$ integrierbar?}}
+   \lang{en}{\text{Let $f$ be a function where where $f(x)= \var{f},$ when $x \leq \var{a}$\\
+   and $f(x)=\var{g},$ when $x > \var{a}$. Is this function integrable on $[0, 6]$?}}
+    
+  \begin{answer}
+  %\permutechoices{1}{5}
+  \type{mc.multiple}
+  \field{integer}
+  
+\begin{choice}
+      \lang{de}{    \text{Ja, weil sie auf beiden Teilintervallen integrierbar ist.}
+}
+ \lang{en}{\text{Yes, since it is integrable on both subintervals.}}
+      \solution{true}
+\end{choice}
+
+\begin{choice}
+      \lang{de}{ \text{Nein, weil sie an der Stelle $x=\var{a}$ eine Sprungstelle hat.}}
+       \lang{en}{\text{No, since there is a jump discontinuity at $x=\var{a}$.}}
+   \solution{false}
+\end{choice}
+
+\begin{choice}
+      \lang{de}{   \text{Ja, weil beschränkte Funktionen auf abgeschlossenen Intervallen immer integrierbar sind.}
+}
+ \lang{en}{\text{Yes, since bounded functions over closed intervals are always integrable.}}
+      \solution{false}
+\end{choice}
+
+\begin{choice}
+      \lang{de}{    \text{Ja, weil jede Funktion integrierbar ist.}
+}
+ \lang{en}{\text{Yes, since all functions are integrable.}}
+      \solution{false}
+\end{choice}
+
+
+
+\begin{choice}
+      \lang{de}{   \text{Nein, weil sie abschnittsweise definiert ist.}
+}
+ \lang{en}{\text{No, since it is defined piecewise.}}
+      \solution{false}
+\end{choice}
+   
+\lang{de}{   
+   \explanation[equalChoice(0????)]{Aus der Integrierbarkeit einer Funktion auf zwei Teilintervallen ergibt sich die Integrierbarkeit auf der Vereinigung der Intervalle.}                                   
+   \explanation[equalChoice(?1???)]{Auch Funktionen mit Sprungstellen können integrierbar sein.}                                    
+   \explanation[equalChoice(??1??)]{Beschränkheit alleine reicht nicht, um Integrierbarkeit einer Funktion zu garantieren.}                                    
+   \explanation[equalChoice(???1?)]{Nicht jede Funktion ist integrierbar.}                                    
+   \explanation[equalChoice(????1)]{Auch abschnittsweise definierte Funktionen können integrierbar sein.}
+                                    
+}
+
+\lang{en}{   
+   \explanation[equalChoice(0????)]{The integrability on the union of intervals results from the integrability on the subintervals.}
+   \explanation[equalChoice(?1???)]{Functions with jump discontinuities can also be integrable.}
+   \explanation[equalChoice(??1??)]{Boundedness is not enough to guarantee that a function can be integrated.}
+   \explanation[equalChoice(???1?)]{There are also non-integrable functions.}
+   \explanation[equalChoice(????1)]{Piecewise defined functions can be integrable.}
+}
+
+\end{answer}
+ \end{question}%3
+ 
+ 
+ 
+
+ \begin{question}%4
+    \lang{de}{
+%begin-cosh    
+  \text{Bestimmen Sie den Wert des Integrals $\int_0^6 f(x)\, dx$ für die oben gegebene Funktion $f$.\\
+%ende-cosh  
+  \textit{Tipp: Denken Sie an die Additivität des Integrals!}}
+}
+ \lang{en}{\text{Determine the value of the integral $\int_0^6 f(x)\, dx$ for
+ the function $f(x)$ given above. \\
+ \textit{Hint: recall the additivity property of integrals!}}}
+
+  \type{input.number}
+
+  \begin{answer}
+      \lang{de}{   \text{Lösung: }
+}
+ \lang{en}{\text{Solution: }}
+      \solution{L}
+ \lang{de}{ 
+  \explanation{Verwenden Sie für $x$ zwischen $0$ und $\var{a}$ die obere Definition und für $x$ zwischen
+  $\var{a}$ und $6$ die untere Definition in der abschnittsweisen Definition von $f$.}
+  }
+  
+  \lang{en}{
+  \explanation{For $x$ between $0$ and $\var{a}$ use the upper equation and for $x$ between
+  $\var{a}$ and $6$ the lower equation in the piecewise definition of $f$.}
+  }
+  \end{answer}
+  
+
+
+ \end{question}%4
+
+
+\end{problem}
+
+
+\embedmathlet{mathlet}
+
+\end{content}

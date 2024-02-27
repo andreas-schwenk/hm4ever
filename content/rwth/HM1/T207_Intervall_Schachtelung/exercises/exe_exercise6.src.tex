@@ -1,0 +1,108 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü06: Intervallhalbierungsverfahren}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Hier die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\title{
+\lang{de}{Ü06: Intervallhalbierungsverfahren}
+}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9984}{Ticket 9984}
+\end{block}
+
+\begin{enumerate}
+\item 
+Bestimmen Sie ein Intervall der Länge $\le \frac{1}{4} $ in dem eine reelle Nullstelle von 
+\[ f:\R \to \R , f(x) = (x-1)^3 -2 \]
+liegt. Benutzen Sie das Verfahren der Intervallhalbierung (Bisektionsverfahren).
+\item
+\begin{enumerate}
+\item[a)]
+Führen Sie für die Funktion $f(x)=x^3+2x-4$ zwei Schritte des Bisektionsverfahren durch. 
+Geben Sie ausgehend von $[0;2]$ ein Intervall der Länge 0,5 an, in dem eine Nullstelle liegt.
+\item[b)]
+Wieviele Schritte muss man machen, um (ausgehend von $[0;2]$) ein Intervall der Länge $10^{-6}$ anzugeben,
+in dem eine Nullstelle liegt?\\
+Geben Sie die Anzahl formelmäßig und näherungsweise (mit der groben Abschätzung $2^3\approx 10$) an.
+\end{enumerate}
+\end{enumerate}
+
+
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+  \tab{
+    \lang{en}{...}
+    \lang{de}{Antworten}
+  }
+\begin{enumerate}
+\item Die Nullstelle liegt im Intervall $[\frac{9}{4}; \frac{10}{4}]$.
+\item  \begin{enumerate}
+       \item Die Nullstelle liegt im Intervall $[1;1,5]$.
+       \item Die Formel für die Schrittanzahl lautet: $n\geq \log_2(2\cdot 10^6)$\\
+             Mit $2^3\approx 1000$ sind es mindestens $n=21$ Schritte.
+       \end{enumerate}
+
+\end{enumerate}
+        
+ 
+  \tab{
+    \lang{en}{...}
+    \lang{de}{Lösung 1)}
+  }
+    \begin{incremental}[\initialsteps{1}]
+      %\step
+       % \lang{en}{...}
+        %\lang{de}{Die Nullstelle liegt im Intervall $[\frac{9}{4}, \frac{10}{4}]$.}
+      \step
+        \lang{en}{...}
+        \lang{de}{Wir starten den Algorithmus mit den folgenden Werten:
+\begin{align*}
+ a= a_1= 2: \qquad f(a) &=f(2) = (2-1)^3-2 = - 1 < 0 \\
+ b= b_1 = 3: \qquad f(b) &= f(3) = (3-1)^3-2 = 6 > 0. 
+\end{align*}
+Wir bestimmen den Intervallmittelpunkt, den zugehörigen Funktionswert und passen dann die Intervallgrenzen an.
+Es ist
+\[ \frac{a_1+b_1}{2} = \frac{2+3}{2} = \frac{5}{2}. \]
+Damit gilt 
+\[ f\left( \frac{a_1+b_1}{2} \right) = f(2,5) = (1,5)^3 - 2 = 1,375 >0. \]}
+ \step \lang{de}{Nach den Regeln des Algorithmus setzen wir die neuen Intervallgrenzen auf 
+\[ a_2=a_1=2, \qquad b_2 = \frac{a_1+b_1}{2} = \frac{5}{2} . \]
+Wir wiederholen nun das Prozedere mit den neuen Werten und erhalten
+\begin{align*}
+ \frac{a_2+b_2}{2} &= \frac{2+2,5}{2} = \frac{9}{4}, \\
+ f\left( \frac{9}{4} \right) &= \left( \frac{5}{4} \right)^3 - 2 = \frac{125}{64} - 2 < 0.
+\end{align*}
+Das nächste Intervall $[a_3;b_3]$ ist dann gegeben durch 
+\[ a_3=\frac{a_2+b_2}{2}=\frac{9}{4},\qquad b_3 = b_2 = \frac{5}{2} = \frac{10}{4} . \]
+Damit haben wir das gesuchte Intervall gefunden.
+}
+    \end{incremental}
+  \tab{
+    \lang{en}{...}
+    \lang{de}{Lösungsvideo zu 2)}
+  }
+
+        \lang{de}{\youtubevideo[500][300]{746h2lK8brQ}}
+ 
+\end{tabs*}
+
+
+
+
+
+\end{content}

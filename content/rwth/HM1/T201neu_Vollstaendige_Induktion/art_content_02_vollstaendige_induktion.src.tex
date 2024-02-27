@@ -1,0 +1,392 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Vollständige Induktion}
+    \lang{en}{Mathematical Induction}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_02_rechengrundlagen_terme.meta.xml}{terme-umformungen}
+    \link{generic_article}{content/rwth/HM1/T201neu_Vollstaendige_Induktion/g_art_content_03_binomischer_lehrsatz.meta.xml}{fakultaet}
+
+  \end{links}
+  \creategeneric
+\end{metainfo}
+
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22234}{Ticket 22234}
+    
+    Nachfolger von: \href{http://team.mumie.net/issues/9635}{Ticket 9635}\\
+\end{block}
+
+\usepackage{mumie.ombplus}
+\ombchapter{1}
+\ombarticle{2}
+
+\lang{de}{\title{Beweise durch vollständige Induktion}}
+\lang{en}{\title{Proof using mathematical induction}}
+
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+\section{\lang{de}{Das Induktionsprinzip}\lang{en}{The principle of induction}}\label{sec:induktionsprinzip}
+
+\lang{de}{
+Im Folgenden bezeichne $A(n)$ eine Aussage, die von einer nat"urlichen Zahl $n$ abh"angt.\\
+Die \emph{Beweismethode der vollständigen Induktion} ist eine Methode, um Aussagen der Form
+\[ \text{für alle } n\in \N: A(n) \]
+zu beweisen, wenn ein direkter Beweis nur schwer (oder gar nicht) möglich ist.
+Die Methode besteht aus zwei Teilen:
+}
+\lang{en}{
+In the following let $A(n)$ denote a proposition which depends on the natural number $n$. Mathematical induction is a method of proof
+used to prove statements of the form
+\[ \text{for all } n\in \N: A(n) \]
+when a direct proof is too difficult (or even impossible). The method consists of two parts:
+}
+
+
+\begin{enumerate}
+    \item[\textbf{(\lang{de}{IA}\lang{en}{BC})}] \lang{de}{Dem \emph{Induktionsanfang} (oder \emph{Induktionsverankerung}), in dem gezeigt wird, dass $A(1)$ wahr ist.}
+    \lang{en}{The \emph{base case} (or \emph{anchor step}), in which it is shown that $A(1)$ is true.}
+  \item[\textbf{(IS)}] \lang{de}{Dem \emph{Induktionsschritt} (oder \emph{Induktionsschluss}), in dem gezeigt wird, dass für alle $n\in \N$
+    die Implikation $A(n) \Rightarrow A(n+1)$ wahr ist.}
+    \lang{en}{The \emph{induction step} (or \emph{inductive step}), in which it is shown that for all $n\in \N$ the implication $A(n) \Rightarrow A(n+1)$ is true.}
+\end{enumerate}
+
+\lang{de}{
+Im Induktionsschritt heißt $A(n)$ die \emph{Induktionsvoraussetzung} \textbf{(IV)}, da sie die Voraussetzung der Implikation ist.
+}
+\lang{en}{
+In the induction step $A(n)$ is called the inductive hypothesis, since it is the hypothesis of the implication.
+}
+
+\begin{remark}
+  \lang{de}{
+  Im \emph{Induktionsschritt} muss man also nicht zeigen, dass $A(n)$ wahr ist, sondern man zeigt, dass für alle natürlichen Zahlen
+  $n$ die Implikation $A(n)
+    \Rightarrow A(n+1)$ wahr ist. Man setzt also voraus, dass die Aussage $A(n)$ für eine beliebig gewählte natürliche Zahl $n$ wahr 
+    ist, und zeigt dann, dass für genau dieses $n$ folglich auch die Aussage $A(n+1)$ wahr ist.\\
+    'Beliebig' hei"st dabei nicht, dass man sich ein $n$ w"ahlen darf, sondern dass an die nat"urliche Zahl, f"ur die $n$ stehen
+    soll, keine Einschr"ankungen gemacht wird.\\
+    Wenn also die Wahrheit des \emph{Induktionsanfangs} $A(1)$ ebenfalls gezeigt wurde, kann man sagen, dass durch Anwendung des 
+    \emph{Induktionsschritt} rekursiv gilt:
+    }
+    \lang{en}{
+    In the induction step one must therefore not show that $A(n)$ is true, but rather that for all natural numbers $n$, the implication $A(n)
+    \Rightarrow A(n+1)$ is true. Thus one assumes that $A(n)$ is true for some arbitrarily chosen $n$, and shows that for this $n$, the proposition $A(n+1)$ is true.\\
+    'Arbitrary' here means not that one can specifically choose $n$, but rather that there should be no restrictions on the natural number that $n$ represents.\\
+    When the truth of the \emph{base case} has also been shown, then one can say that by the recursive application of the \emph{induction step}, the following holds:
+    }
+    \[ A(1)\Rightarrow A(2)\Rightarrow A(3)\ldots. \]
+\end{remark}
+
+\lang{de}{
+Das folgenden Video bietet Ihnen auch einen einführenden Blick auf das 
+Induktionsverfahren:
+ 
+%Video
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10952&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\ 
+}
+
+\begin{example}
+  \lang{de}{
+  Es soll gezeigt werden, dass für jede natürliche Zahl $n$ die Summe der ersten $n$ ungeraden Zahlen genau die Zahl
+    $n^2$ gibt.
+  Zu zeigen ist also für alle $n\in \N: A(n)$ wobei}
+  \lang{en}{
+  We will prove that for every natural number $n$, the sum of the first $n$ odd numbers is exactly $n^2$. This amounts to showing for all $n\in \N: A(n)$ where
+  }
+  \[ A(n):\quad 1+3+\ldots + (2n-1) =n^2, \]
+  \lang{de}{oder mit Summenzeichen:}\lang{en}{or with summation notation:}
+  \[ A(n):\quad \sum_{k=1}^n 2k-1=n^2. \]
+  \lang{de}{Beweis:}\lang{de}{Proof:}
+
+  \begin{enumerate}
+    \item[\textbf{(\lang{de}{IA}\lang{en}{BC})}] $n=1: \;$  \lang{de}{Die Summe besteht nur aus einer Zahl, nämlich der $1$ und $n^2=1$, \\
+        also ist die Aussage $A(1): \sum_{k=1}^1 2k-1=2-1=1$ wahr.}
+        \lang{en}{The sum consists only of one number, namely $1$. Since $n^2=1$, the proposition $A(1): \sum_{k=1}^1 2k-1=2-1=1$ is true.}
+    \item[\textbf{(IS)}] $n\rightarrow n+1: \;$ \\
+        \lang{de}{Sei eine beliebige Zahl $n\in\N$ fest gewählt und gelte für diese}
+        \lang{en}{Let an arbitrary number $n\in\N$ be held fixed, and suppose}
+         \begin{center}
+
+           \textbf{(\lang{de}{IV}\lang{en}{IH})}$\quad A(n): \quad \sum_{k=1}^n 2k-1=1+3+\ldots + (2n-1) =n^2, \qquad$ 
+         \end{center}
+        \lang{de}{dann ist zu zeigen, dass für gleiches $n$ auch }
+        \lang{en}{is true. Then we must show that for the same $n$, }
+        \begin{center}
+
+          $\, A(n+1): \quad \sum_{k=1}^{n+1} 2k-1=1+3+\ldots + (2(n+1)-1) =(n+1)^2 \;$
+        \end{center}
+        \lang{de}{gilt.}
+        \lang{en}{is true.}
+        
+        \begin{align*}
+
+            \underbrace{1+3+\ldots + (2(n+1)-1)}_{= \sum_{k=1}^{n+1} 2k-1} \, &= \underbrace{1+3+\ldots +(2n-1)}_{=\sum_{k=1}^n 2k-1=\,n^2} + (2(n+1)-1) &\\
+          &= n^2 + (2(n+1)-1)   & \vert \text{\lang{de}{(IV) eingesetzt}\lang{en}{using (IH)}} \\
+          &= n^2 + 2n+2-1       & \\
+          & =n^2+2n+1           &\vert \ref[terme-umformungen][\text{\lang{de}{1. bin. Formel}\lang{en}{1. bin. Identity}}]{rule:binomische_formeln} \\
+          &= (n+1)^2            &
+        \end{align*}
+        
+  \end{enumerate}
+
+  \lang{de}{Im Induktionsschritt $n\rightarrow n+1$ wurde also gezeigt: Wenn (für eine beliebige, feste natürliche Zahl $n$) die 
+  Aussage $A(n)$ wahr ist, dann ist auch die Aussage $A(n+1)$ wahr.}
+  \lang{en}{In the induction step $n\rightarrow n+1$ we showed: If (for an arbitrary, fixed natural number $n$) the proposition $A(n)$ is true, then the proposition $A(n+1)$ is also true.}
+\end{example}
+
+\section{\lang{de}{Alternative Induktionsanfänge}\lang{en}{Alternative base cases}}
+
+\begin{remark}
+\lang{de}{Man kann die Beweismethode der vollständigen Induktion auch anwenden, wenn die Aussagen $A(n)$ nur für alle natürlichen Zahlen $n$
+zu beweisen ist, die größer oder gleich einer festen Zahl $n_0$ sind. In diesem Fall muss man im Induktionsanfang dann die Aussage
+$A(n_0)$ zeigen. Der Induktionsschritt ändert sich nicht.\\
+Ebenso lässt sich die Methode anwenden, wenn $n_0$ eine beliebige ganze Zahl ist, und die Aussagen $A(n)$ für alle ganzen Zahlen $n\geq n_0$
+zu beweisen sind.\\
+Als häufigster Fall neben $n_0=1$ ist hier der Fall $n_0=0$.}
+\lang{en}{One can also apply mathematical induction if the proposition $A(n)$ is only to be proved for all natural numbers $n$ which are greater or equal to some fixed number $n_0$.
+In this case one has to show that the proposition $A(n_0)$ is true in the base step. The induction step is not different.\\
+Likewise the method of proof can be used if $n_0$ is an arbitrary integer, and the propositions $A(n)$ are to be proved for all integers $n\geq n_0$.\\
+The most common case besides $n_0=1$ is the case $n_0=0$.}
+\end{remark}
+
+\begin{example}\label{ex:vollst-ind}
+
+\begin{tabs*}[\initialtab{0}]
+\tab{$\sum_{k=0}^n k=\frac{n(n+1)}{2}$ für $n\geq 0$}
+\lang{de}{Zu zeigen ist, dass für alle $n\in \N_0$ die Gleichung}
+\lang{en}{We will show that for all $n\in \N_0$, the equation}
+\[ A(n):\quad \sum_{k=0}^n k=\frac{n(n+1)}{2} \]
+\lang{de}{gilt.\\ In diesem Fall ist der Induktionsanfang also für $n=0$ durchzuführen.}
+\lang{en}{holds.\\ Here, the base case is to be checked for $n=0$.}
+\begin{enumerate}
+    \item[\textbf{(\lang{de}{IA}\lang{en}{BC})}] $n=0$: \lang{de}{Die linke Seite ist: $\sum_{k=0}^0 k = 0$ und die rechte Seite ist $\frac{0\cdot (0+1)}{2}=0$. Also
+    ist die Gleichung für $n=0$ erfüllt.}
+    \lang{en}{The left side is: $\sum_{k=0}^0 k = 0$ and the right side is $\frac{0\cdot (0+1)}{2}=0$. So the equation holds for $n=0$.}
+    \item[\textbf{(IS)}] $n\rightarrow n+1$: \lang{de}{Man hat also die Induktionsvoraussetzung f"ur ein festes $n\in\N$:}
+    \lang{en}{Now for a fixed $n\in\N$, we have the inductive hypothesis:}
+    \begin{center}\textbf{(\lang{de}{IV}\lang{en}{IH})} \quad \lang{de}{Es gelte $\quad \sum_{k=0}^n k=\frac{n(n+1)}{2}\quad $}\lang{en}{$\quad \sum_{k=0}^n k=\frac{n(n+1)}{2}\quad $ holds}\end{center}
+    \lang{de}{und muss f"ur dieses $n$ die Aussage $A(n+1):\sum_{k=0}^{n+1} k=\frac{(n+1)(n+1+1)}{2} $ zeigen:}
+    \lang{en}{and using this, we must show that for this $n$, the proposition $A(n+1):\sum_{k=0}^{n+1} k=\frac{(n+1)(n+1+1)}{2} $ is true:}
+    \begin{align*}
+      \sum_{k=0}^{n+1} k &= \underbrace{(\sum_{k=0}^{n} k )}_{=\,\frac{n(n+1)}{2}}+ (n+1)  &\\
+      &= \frac{n(n+1)}{2}+ (n+1) & \vert \text{\lang{de}{nach (IV)}\lang{en}{using (IH)}} \\
+      &= (n+1)\cdot \frac{n}{2}+(n+1)\cdot 1 =(n+1)\cdot (\frac{n+2}{2}) &\\
+      &= \frac{(n+1)(n+2)}{2}. &
+    \end{align*}
+ \end{enumerate}    
+
+
+\tab{$2^n \leq n!$ für $n\geq 4$} 
+\lang{de}{Zu zeigen ist, dass für alle $n\geq 4$ die Ungleichung}
+\lang{en}{We will show that for all $n\geq 4$ the inequality}
+\[ 2^n \leq n! \]
+\lang{de}{gilt. (Für die Defintion von $n!$ siehe \ref[fakultaet][here]{def:fakultaet}.)\\ 
+In diesem Fall ist also $n_0=4$ und für den Induktionsanfang ist die Ungleichung $2^4\leq 4!$ zu zeigen.}
+\lang{en}{holds. (For the definition of $n!$, see \ref[fakultaet][here]{def:fakultaet}.)\\
+In this example $n_0=4$, and for the base case we must show the inequality $2^4\leq 4!$.}
+\begin{enumerate}
+    \item[\textbf{(\lang{de}{IA}\lang{en}{BC})}] $n=4$: \lang{de}{Es sind $2^4=16$ und $4!=1\cdot 2\cdot 3\cdot 4=24$. Also ist  $2^4\leq 4!$.}
+    \lang{en}{Since $2^4=16$ and $4!=1\cdot 2\cdot 3\cdot 4=24$, we have $2^4\leq 4!$.}
+    \item[\textbf{(IS)}] $n\rightarrow n+1$: \lang{de}{Man hat also f"ur ein festes $n\geq 4$ die Induktionsvoraussetzung:}
+    \lang{en}{For a fixed $n\geq 4$ we have the induction hypothesis:}
+    \begin{center}\textbf{(\lang{de}{IV}\lang{en}{IH})} \quad \lang{de}{Es gelte} $\quad 2^n\leq n!\quad $\lang{en}{ holds}\end{center}
+    \lang{de}{und muss f"ur dieses $n$ die Aussage $2^{n+1}\leq (n+1)! $ zeigen:}
+    \lang{en}{and using this, we must show that for this $n$, the proposition $2^{n+1}\leq (n+1)! $ is true:}
+    \begin{align*}
+    2^{n+1} &= \underbrace{2^n}_{\leq n!}\cdot 2 &\\
+    &\leq n! \cdot 2     & \quad\vert \text{\lang{de}{nach (IV)}\lang{en}{using (IH)}} \\
+    &\leq n! \cdot (n+1) & \quad\vert \text{\lang{de}{da}\lang{en}{since} }2\leq n+1 \\
+    &= (n+1)!            & \quad\vert \text{\lang{de}{nach}\lang{en}{by} } \ref[fakultaet][\text{\lang{de}{dieser Bemerkung.}\lang{en}{this remark.}}]{rem:fakultaet}
+      \end{align*}
+ \end{enumerate}
+ %Video
+%\lang{de}{
+ \tab{\lang{de}{$2^n \geq n^2$ für $n\geq 4$}} 
+\lang{de}{Im folgendem Video wird per Induktion bewiesen, dass für alle $n\geq 4$ die Ungleichung
+ $2^n \geq n^2$ gilt.
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10954&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+}
+\end{tabs*}
+
+\end{example}
+
+\section{\lang{de}{Anwendungsbeispiele: Beweis wichtiger Formeln}\lang{en}{Examples of application: Proofs of important formulas}}\label{sec:wichtige-beispiele}
+
+\lang{de}{In diesem Paragraphen werden einige wichtige Gleichungen und Ungleichungen vorgestellt.}
+\lang{en}{In this section we will introduce some important equations and inequalities.}
+
+\begin{rule}[\lang{de}{Geometrische Summenformel}\lang{en}{Geometric partial sum formula}]\label{rule:geom-summe}
+\lang{de}{Für jede beliebige reelle Zahl $q\ne 1$ und $n\in \Nzero$ gilt:}
+\lang{en}{For any arbitrary real number $q\ne 1$ and $n\in \Nzero$ we have:}
+ \[  \sum_{k=0}^n q^k=\frac{q^{n+1}-1}{q-1} \]
+\lang{de}{Hierbei wird $q^0=1$ gesetzt, und daher $\sum_{k=0}^n q^k=1+q+q^2+\cdots+q^n$, selbst wenn $q=0$ ist.
+ Diese Formel ist die sogenannte \emph{geometrische Summenformel}.}
+\lang{en}{Here we set $q^0=1$, so that $\sum_{k=0}^n q^k=1+q+q^2+\cdots+q^n$, even when $q=0$.
+This formula is called the \emph{partial sum formula of the geometric series}.}
+\end{rule} 
+
+\begin{proof*}[\lang{de}{Begründung}\lang{en}{Proof}]
+     \begin{showhide}
+ \lang{de}{Zum Beweis durch vollständige Induktion betrachten wir zunächst den Induktionsanfang mit $n=0$.}
+ \lang{en}{For a proof by mathematical induction, we begin with a base case of $n=0$.}
+ \begin{enumerate}
+    \item[\textbf{(\lang{de}{IA}\lang{en}{BC})}] $n=0$: \lang{de}{Die linke Seite ist $\sum_{k=0}^0 q^k = q^0=1$ und die rechte Seite ist $\frac{q^1-1}{q-1}=1$. Also
+    ist die Gleichung für $n=0$ erfüllt.}
+    \lang{en}{The left side is $\sum_{k=0}^0 q^k = q^0=1$ and the right side is $\frac{q^1-1}{q-1}=1$. So the equation is satisfied for $n=0$.}
+    \item[\textbf{(IS)}] $n\rightarrow n+1$: \lang{de}{Man hat also die Induktionsvoraussetzung f"ur ein festes $n\in\N$:}
+    \lang{en}{Now for a fixed $n\in\N$, we have the inductive hypothesis:}
+    \begin{center}\textbf{(\lang{de}{IV}\lang{en}{IH})} \quad \lang{de}{Es gelte} $\quad \sum_{k=0}^n q^k=\frac{q^{n+1}-1}{q-1}\quad$ \lang{en}{ holds}\end{center}
+    \lang{de}{und muss f"ur dieses $n$ die Aussage $A(n+1):\sum_{k=0}^{n+1} q^k=\frac{q^{n+2}-1}{q-1} $ zeigen:}
+    \lang{en}{and using this, we must show that for this $n$, the proposition $A(n+1):\sum_{k=0}^{n+1} q^k=\frac{q^{n+2}-1}{q-1} $ is true:}
+    \begin{align*}
+      \sum_{k=0}^{n+1} q^k &= (\sum_{k=0}^{n} q^k )+ q^{n+1}  \\
+      &= \frac{q^{n+1}-1}{q-1}+ q^{n+1} \quad \text{\lang{de}{nach (IV)}\lang{en}{using (IH)}} \\
+      &= \frac{q^{n+1}-1}{q-1}+ \frac{q^{n+2}-q^{n+1}}{q-1} \quad \text{\lang{de}{(Erweitern des zweiten Summanden)}\lang{en}{(Expanding the second summand)}}\\
+      &= \frac{q^{n+2}-1}{q-1}.
+    \end{align*}
+ \end{enumerate}
+    \end{showhide}
+\end{proof*}
+
+%Video
+\lang{de}{
+Die Anwendung der vollständigen Induktion zur Begründung der geometrischen Summenformel wird hier auch vorgestellt:
+
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10957&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+}
+
+
+\begin{rule}[\lang{de}{Bernoullische Ungleichung}\lang{en}{Bernoulli's inequality}]\label{rule:bernoulli-ungleichung}
+\lang{de}{Für alle $a\in \R$ mit $a\geq -1$ und $n\in \Nzero$ gilt:}
+\lang{en}{For all $a\in \R$ with $a\geq -1$ and $n\in \Nzero$:}
+\[ (1+a)^n\geq 1+na. \]
+\lang{de}{Hierbei wird $(1+a)^0=1$ gesetzt, selbst wenn $a=-1$ ist.}
+\lang{en}{Here we set $(1+a)^0=1$, even when $a=-1$.}
+
+\lang{de}{Diese Ungleichung nennt man die \emph{Bernoullische Ungleichung}.}
+\lang{en}{This inequality is called \emph{Bernoulli's inequality}.}
+\end{rule} 
+
+\begin{proof*}[\lang{de}{Begründung}\lang{en}{Proof}]
+     \begin{showhide}
+\lang{de}{ Zu zeigen ist für jede beliebige reelle Zahl $a\geq -1$, dass für alle $n\in \N_0$ die Ungleichung}
+\lang{en}{ We will show that for any arbitrary real number $a\geq -1$, and for all $n\in N_0$, the inequality}
+ \[ A(n):\quad (1+a)^n\geq 1+na \]
+\lang{de}{ gilt. 
+ Zum Beweis durch vollst"andige Induktion betrachten wir also zun"achst den Induktionsanfang mit $n=0$.}
+\lang{en}{ holds.
+For a proof by mathematical induction, we begin with a base case of $n=0$.}
+ \begin{enumerate}
+    \item[\textbf{(\lang{de}{IA}\lang{en}{BC})}] $n=0$: \lang{de}{Die linke Seite ist: $(1+a)^0=1$ und die rechte Seite ist $1+0\cdot a=1$. Also
+    ist die Ungleichung für $n=0$ erfüllt.}
+    \lang{en}{The left side is: $(1+a)^0=1$ and the right side is $1+0\cdot a=1$. So the inequality holds for $n=0$.}
+    \item[\textbf{(IS)}] $n\rightarrow n+1$: \lang{de}{Man hat also die Induktionsvoraussetzung f"ur ein festes $n\in\N$:}
+    \lang{en}{Now for a fixed $n\in\N$, we have the indctive hypothesis:}
+    \begin{center}\textbf{(\lang{de}{IV}\lang{en}{IH})} \quad \lang{de}{Es gelte} $\quad (1+a)^n\geq 1+na\quad $\lang{en}{ holds}\end{center}
+    \lang{de}{und muss f"ur dieses $n$ die Aussage $A(n+1): (1+a)^{n+1}\geq 1+(n+1)a$  zeigen:}
+    \lang{en}{and using this, we must show that for this $n$, the proposition $A(n+1): (1+a)^{n+1}\geq 1+(n+1)a$  is true::}
+    \begin{align*}
+     (1+a)^{n+1} &= (1+a)^n\cdot (1+a) & \\
+     &\geq (1+na)\cdot (1+a)  \quad & \,\,\,\text{\lang{de}{wegen (IV) und }\lang{en}{using (IH) and }}1+a\geq 0 \\
+     &= 1\cdot 1+ 1\cdot a+ na\cdot 1 +na^2 & \,\,\,\text{\lang{de}{ausmultipliziert}\lang{en}{expanding}} \\
+     &\geq 1+(n+1)a & \,\,\,\text{\lang{de}{wegen }\lang{en}{because }}na^2\geq 0.
+    \end{align*}
+ \end{enumerate}
+    \end{showhide}
+\end{proof*}
+
+%video
+\lang{de}{
+Eine Begründung der \emph{Bernoullischen Ungleichung} finden Sie auch in diesem Video:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10956&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+}
+
+\begin{rule}[\lang{de}{Ungleichung zwischen arithmetischem und geometrischem Mittel}\lang{en}{Inequality of arithmetic and geometric means}]\label{rule:means_ineq}
+\lang{de}{Für alle $m\in \N$ und nicht-negativen Zahlen $x_1,\ldots, x_m\in \R$ gilt:}
+\lang{en}{For all $m\in N$ and non-negative $x_1,\ldots, x_m\in \R$, the following inequality holds:}
+\[    \sqrt[m]{x_1 \cdot x_2\cdot \ldots \cdot x_m}  \leq \frac{x_1+x_2+\ldots + x_m}{m}.  \]
+\lang{de}{Gleichheit gilt genau dann, wenn $x_1=x_2=\ldots =x_m$ gilt.}
+\lang{en}{With equality holding if and only if $x_1=x_2=\ldots =x_m$.}
+
+\lang{de}{Diese Ungleichung nennt man die Ungleichung zwischen dem \emph{geometrischen Mittel} 
+$\,\sqrt[m]{x_1 \cdot x_2\cdot \ldots \cdot x_m}\,$ und dem \emph{arithmetischen
+Mittel} $\, \frac{x_1+x_2+\ldots + x_m}{m}$.}
+\lang{en}{This is an inequality between the \emph{geometric mean} $\,\sqrt[m]{x_1 \cdot x_2\cdot \ldots \cdot x_m}\,$
+ and the \emph{arithmetic mean} $\, \frac{x_1+x_2+\ldots + x_m}{m}$. It is often abbreviated and called the \emph{AM-GM inequality}.}
+\end{rule}
+
+\begin{proof*}[\lang{de}{Erklärung}\lang{en}{Explanation}]
+     \begin{showhide}
+\lang{de}{Der Beweis der allgemeinen Formel benötigt eine vollständige Induktion für die Aussage:}
+\lang{en}{The proof for the general formula needs mathematical induction on the proposition:}
+\[ A(n): \sqrt[m]{x_1 \cdot x_2\cdot \ldots \cdot x_m} \leq \frac{x_1+x_2+\ldots + x_m}{m} \quad \text{für alle }m\leq 
+2n\text{ und }x_1,\ldots, x_m\in \R_+. \]
+\lang{de}{Wir zeigen hier \textit{nur}, den \textbf{Induktionsanfang}, d.h. den Beweis der Aussage }
+\lang{en}{Here we will \textit{only} show the \textbf{base case}, i.e. the proof of the proposition }
+\[ A(1): \sqrt[m]{x_1 \cdot x_2\cdot \ldots \cdot x_m} \leq \frac{x_1+x_2+\ldots + x_m}{m} \quad \text{für alle }m\leq 
+2\text{ und }x_1,\ldots, x_m\in \R_+. \]
+
+\lang{de}{Für den \textbf{Induktionschritt} ($n\to n+1$) würde man zunächst die Ungleichung für $m=2(n+1)$ aus den Ungleichungen für $m=n+1$ und $m=2$ folgern 
+und anschließend die Ungleichung für $m=2n+1$ aus der für $m=2(n+1)$.
+
+Im \textbf{Induktionsanfang} sind also die Ungleichungen für $m=1$ und $m=2$ zu zeigen:
+
+Für $m=1$ lautet die Ungleichung $\sqrt[1]{x_1}\leq \frac{x_1}{1}$, welche offensichtlich richtig ist.
+
+Für $m=2$ lautet die Ungleichung $\sqrt[2]{x_1x_2}\leq \frac{x_1+x_2}{2}$. Da beide Seiten nicht-negativ sind, ist dies
+äquivalent zu }
+\lang{en}{For the \textbf{induction step} ($n\to n+1$) one would first derive the inequality for $m=2(n+1)$ from the inequality for $m=n+1$ and $m=2$, 
+and then the inequality for $m=2n+1$ from the one for $m=2(n+1)$.
+
+In the \textbf{base case} we therefore need to show the inequalities for $m=1$ and $m=2$:
+
+For $m=1$ the inequality reads $\sqrt[1]{x_1}\leq \frac{x_1}{1}$, which is obviously true.
+
+For $m=2$ the inequality reads $\sqrt[2]{x_1x_2}\leq \frac{x_1+x_2}{2}$. Since both sides are non-negative, this is equivalent to }
+
+
+\begin{align*}
+				 & x_1x_2  &\leq & \left( \frac{x_1+x_2}{2}\right)^2 \\
+\Leftrightarrow\quad & x_1x_2  &\leq & \frac{x_1^2+2x_1x_2+x_2^2}{4} \\
+ \Leftrightarrow\quad & 4x_1x_2 &\leq & x_1^2+2x_1x_2+x_2^2 \\
+  \Leftrightarrow\quad & 0& \leq &x_1^2-2x_1x_2+x_2^2 \\
+  \Leftrightarrow\quad & 0& \leq & (x_1-x_2)^2
+\end{align*}
+\lang{de}{ Da Quadrate immer $\geq 0$ sind, ist die letzte Zeile richtig, und da nur Äquivalenzumformungen gemacht wurden, auch die erste Ungleichung.\\
+ Außerdem ist die Gleichheit in der ersten Ungleichung genau dann gegeben, wenn sie in der letzten gegeben ist, d.h. wenn $x_1-x_2=0$, d.h. $x_1=x_2$.}
+\lang{en}{ Since squares are always $\geq 0$, the last line is true, and since all the lines are equivalent, so is the first inequality. Furthermore, 
+equality holds in the first inequality if and only if it holds in the last inequality, i.e. when $x_1-x_2=0$, i.e. $x_1=x_2$.}
+    \end{showhide}
+\end{proof*}
+
+%Video
+\lang{de}{
+In dem Video wird die vorhergehende Regel erklärt.
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10958&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+}
+
+\end{content}

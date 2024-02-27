@@ -1,0 +1,484 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Folgenkonvergenz}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_14_konvergenz.meta.xml}{content_14_konvergenz}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_13_reelle_folgen.meta.xml}{reelle-folgen}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_15_monotone_konvergenz.meta.xml}{monotone-konvergenz}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_16_konvergenzkriterien.meta.xml}{konv-krit}
+    \link{generic_article}{content/rwth/HM1/T210_Stetigkeit/g_art_content_30_elem_funktionen.meta.xml}{elem-funk}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{5}
+\ombarticle{2}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\lang{de}{\title{Konvergenz von Folgen}}
+ 
+\begin{block}[annotation]
+  Inhalt: $\epsilon$-Definition;Bsp. $1/n$; Eindeutigkeit des Grenzwerts; 
+  Beschränktheit konvergenter Folgen; Grenzwertsätze
+  
+  TODO: In Mathlet: Nur die Folgenpunkte zeichnen statt $f$? Aber wie?
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9656}{Ticket 9656}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{Konvergenz und Divergenz}
+
+\begin{definition}\label{def:folgenkonvergent}
+Eine Folge reeller Zahlen $(a_n)_{n\in \N}$ heißt \notion{konvergent}, wenn eine Zahl $a \in \R$ existiert, so dass
+die folgende Eigenschaft erfüllt ist:
+
+ F"ur jedes $\epsilon > 0$ gibt es eine Zahl  \nowrap{$N_{\epsilon} \in \N $,}
+  so dass \[ | a_n - a | < \epsilon \text{ f"ur alle } n \geq N_{\epsilon}. \]
+
+Eine solche Zahl $a$ (sofern sie existiert) nennt man \notion{Limes} oder \notion{Grenzwert} der 
+Folge  $(a_n)_{n\in \N}$ und schreibt
+\[  \lim_{n\to\infty} a_n =a. \]
+Man sagt auch: Die Folge $(a_n)_{n\in \N}$ konvergiert gegen $a$.
+
+Eine Folge, die gegen $0$ konvergiert, nennt man \notion{Nullfolge}.
+
+Eine Folge, die nicht konvergiert, nennt man \notion{divergent}. \\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=302}{\image[75]{00_Videobutton_schwarz}}}\\\\
+\end{definition}
+
+\begin{remark}
+Grob gesagt bedeutet die Konvergenzbedingung, dass die Abstände der Folgeglieder zu $a$ immer kleiner
+werden. Sie müssen nicht kontinuierlich kleiner werden, aber wenn man sich einen Abstand $\epsilon$ zu $a$ vorgibt,
+dann haben fast alle Folgenglieder, d. h. alle bis auf endlich viele, einen kleineren Abstand zu $a$.
+
+\begin{genericGWTVisualization}[550][1000]{mathlet1}
+		\begin{variables}
+			\function{f}{rational}{(2*x^2-3*x+1)/(x^2+3x-3)+sqrt(x-0.5)-(x-0.5)/sqrt(x-0.5)}  % +-sqrt(x-0.5), um auf >=0.5 einzuschränken
+			\function{g}{rational}{var(f)*theta(sqrt(0.03-sin(pi*x)^2))}
+%			\function{g}{rational}{var(f)}
+%			\pointOnCurve{a1}{rational}{var(f)}{1}
+%			\number{a}{rational}{2}
+			\parametricFunction{ax}{real}{0, 2+t, 0, 2.02, 201}
+			\pointOnParametricCurve[editable]{P}{real}{var(ax)}{1}		
+			\number{ups}{real}{var(P)[y]-2}
+%-------------------variante mit editierbarem epsilon
+%			\number[editable]{ups}{real}{1}
+%			\point{P}{real}{0,var(ups)}
+%-----------------------------------------------------
+			\function{gr}{real}{2}
+			\function{l1}{real}{2+var(ups)}
+			\function{l2}{real}{2-var(ups)}
+			\number{b}{real}{9/(2*var(ups))-3/2}
+			\number{N}{real}{floor(var(b)+sqrt(var(b)^2+3-7/var(ups) )+1.0001) }
+%			\point{c0}{real}{var(N),2-var(ups)}
+			\point{c0}{real}{var(N),0}
+			\point{c1}{real}{var(N),2+var(ups)}
+			\segment{v}{real}{var(c0), var(c1)}
+			\set{s}{real}{|y-2|<var(ups) AND x>var(N)}
+			\point{O}{real}{0,2}
+			\segment{vups}{real}{var(O),var(P)}
+		\end{variables}
+		\color{P}{#CC00CC}
+		\label{P}{\textcolor{#CC00CC}{$\epsilon$}}
+		\color{s}{#CC00CC}
+		\color{l1}{#CC00CC}
+		\color{l2}{#CC00CC}
+		\color{gr}{#0066CC}
+		\color{v}{#CC00CC}
+		\color{g}{#CC6600}
+		\color{ups}{#CC00CC}
+		\color{N}{#CC00CC}
+		\color{vups}{#CC00CC}
+
+		\begin{canvas}
+			\plotLeft{-0.3}
+			\plotRight{6.3}
+			\plotSize{800,270}
+			\plot[coordinateSystem]{vups, s, gr,l1,l2, v, P,g}
+			%\plotRatio{keep}
+		\end{canvas}
+		\text{Gegeben ist die Folge \textcolor{#CC6600}{$a_n=\frac{2n^2-3n+1}{n^2+3n-3}$} (=y-Werte der orangenen Punkte), 
+		welche den Grenzwert \textcolor{#0066CC}{$a=2$} hat. 
+		Für \textcolor{#CC00CC}{$\epsilon= $}\var{ups} ist 
+		\textcolor{#CC00CC}{$N_\epsilon=$}\var{N} eine Zahl, so dass
+		$|a_n-a|<\var{ups}$ für alle $n\geq N_\epsilon$.\\
+		Verschieben Sie den pinken Punkt, um $\epsilon$ zu variieren. Die Zahl $N_\epsilon$ wird automatisch angepasst.}
+   	\end{genericGWTVisualization}
+
+
+%-------------------alte Version mit durchgezogenem Graphen -------------------------
+%------------------------------------------------------------------------------------
+% \begin{genericGWTVisualization}[550][1000]{mathlet1}
+% 		\begin{variables}
+% 			\function{f}{rational}{(2*x^2-3*x+1)/(x^2+3x-3)+sqrt(x-1)-(x-1)/sqrt(x-1)}  % +-sqrt(x-1), um auf >=1 einzuschränken
+% %			\pointOnCurve{a1}{rational}{var(f)}{1}
+% %			\number{a}{rational}{2}
+% 			\parametricFunction{ax}{real}{0, 2+t, 0, 3, 299}
+% 			\pointOnParametricCurve[editable]{P}{real}{var(ax)}{1}		
+% 			\number{ups}{real}{var(P)[y]-2}
+% %-------------------variante mit editierbarem epsilon
+% %			\number[editable]{ups}{real}{1}
+% %			\point{P}{real}{0,var(ups)}
+% %-----------------------------------------------------
+% 			\function{gr}{real}{2}
+% 			\function{l1}{real}{2+var(ups)}
+% 			\function{l2}{real}{2-var(ups)}
+% 			\number{b}{real}{9/(2*var(ups))-3/2}
+% 			\number{N}{real}{floor(var(b)+sqrt(var(b)^2+1-7/var(ups) )+1) }
+% 			\point{c0}{real}{var(N),2-var(ups)}
+% 			\point{c1}{real}{var(N),2+var(ups)}
+% 			\segment{v}{real}{var(c0), var(c1)}
+% 			\set{s}{real}{|y-2|<var(ups) AND x>var(N)}
+% 		\end{variables}
+% 		\color{P}{LIGHT_GREEN}
+% 		%\label{P}{$\textcolor{BLUE}{P}$}
+% 		\color{s}{LIGHT_GREEN}
+% 		\color{l1}{LIGHT_GREEN}
+% 		\color{l2}{LIGHT_GREEN}
+% 		\color{gr}{BLUE}
+% 		\color{v}{LIGHT_GREEN}
+% 
+% 
+% 		\begin{canvas}
+% 			\plotLeft{-0.3}
+% 			\plotRight{6.3}
+% 			\plotSize{600,200}
+% 			\plot[coordinateSystem]{s, gr,l1,l2, v, P, f}
+% 		\end{canvas}
+% 		\text{Gegeben ist die Folge $a_n=\frac{2n^2-3n+1}{n^2+3n-3}$ ($y$-Koordinaten der Punkte $(n,a_n)$ in obiger Kurve),
+% 		welche den Grenzwert $a=2$ hat. Für $\epsilon= \var{ups}$ ist $N_\epsilon=\var{N}$ eine Zahl, so dass
+% 		$|a_n-a|<\var{ups}$ für alle $n\geq N_\epsilon$.}
+%    	\end{genericGWTVisualization}
+
+
+\end{remark}
+
+\begin{example}\label{ex:einfache-folgen}
+\begin{enumerate}
+\item Für $c\in \R$ konvergiert die konstante Folge $(a_n)_{n\in \N}$ mit $a_n=c$ für alle $n\in \N$ 
+gegen die Zahl $c$. Man kann nämlich für jedes $\epsilon>0$ die Zahl $N_\epsilon=1$ wählen und erhält für alle
+$n\geq N_\epsilon=1$:
+\[  | a_n -c|=|c-c|=0<\epsilon, \]
+wie gefordert.
+\item Die Folge $(a_n)_{n\in \N}=((-1)^n)_{n\in \N}$, d.h. $a_n=(-1)^n$ für alle $n\in \N$, konvergiert nicht, ist also
+divergent. Wäre nämlich $a$ ein Grenzwert, so ist $|(-1)-a|\geq 1$ oder $|1-a|\geq 1$. Das bedeutet, für
+ $\epsilon>0$ klein genug, z.B. $\epsilon=\frac{1}{2}$ ist $|a_n-a|\geq 1>\epsilon$ für alle geraden $n$ oder alle
+ ungeraden $n$, weshalb es für $\epsilon=\frac{1}{2}$ kein gefordertes $N_{\epsilon}$ gibt.
+\item \notion{Harmonische Folge} Die Folge $(a_n)_{n\in \N}$ mit $a_n=\frac{1}{n}$ ist eine Nullfolge, d.h. $\lim_{n\to \infty} \frac{1}{n}=0$.\\ 
+Zu $\epsilon>0$ kann man nämlich eine Zahl $N_\epsilon>\frac{1}{\epsilon}$ wählen, 
+dann gilt für alle $n\geq N_\epsilon$:
+\[ {|a_n-0|}={|\frac{1}{n}|}=\frac{1}{n}<\frac{1}{N_\epsilon}<\epsilon. \]
+\item Die Folge $(a_n)_{n\geq 1}$ mit $a_1=2$ und
+$a_{n+1}=\frac{a_n}{2}+\frac{1}{a_n}$ für alle $n\in \N $
+aus dem letzten \ref[reelle-folgen][Abschnitt]{ex:sqrt-2} konvergiert gegen $\sqrt{2}$.\\
+Die Berechnung der ersten Folgeglieder 
+\begin{align*}
+ a_1 &=2,\quad a_2=1,5,\quad a_3= 1,41\bar{6},\\ a_4 &\approx 1,4142157,\quad
+  a_5 \approx 1,414213562375
+\end{align*}
+deutet schon darauf hin, da für die Abstände zu $\sqrt{2}\approx 1,414213562373$ gilt:
+\begin{align*}
+&|a_1-\sqrt{2}|<1, \quad |a_2-\sqrt{2}|<0,1, \quad |a_3-\sqrt{2}|<0,003,\\
+&|a_4-\sqrt{2}|<0,000003, \quad |a_5-\sqrt{2}|<0,000000000004
+\end{align*}
+Allerdings beweisen die ersten Folgeglieder noch lange nicht, dass $\sqrt{2}$ der Grenzwert ist. Zum einen könnte
+der Grenzwert knapp daneben liegen, aber vor allem könnte die Folge sich noch ganz anders entwickeln.\\
+Dass $\sqrt{2}$ wirklich der Grenzwert ist, werden wir \link{monotone-konvergenz}{später} zeigen.
+\item Nicht-konstante arithmetische Folgen und geometrische Folgen $(uq^n)_{n\in \Nzero}$ mit $|q|>1$ konvergieren
+nicht. Dies folgt aus dem zweiten Teil des nächsten Satzes.\\
+Geometrische Folgen $(uq^n)_{n\in \Nzero}$ mit $|q|<1$ konvergieren, wie wir im \link{monotone-konvergenz}{nächsten Abschnitt}
+zeigen werden.
+\end{enumerate}
+\end{example}
+
+Die oben aufgeführten Begriffe werden im folgenden Video noch einmal genauer anhand von Beispielen erläutert:\\\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11266&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}\\\\\\
+
+\begin{remark}\label{rem:n-geq-n_0}
+Für Fragen zur Konvergenz von Folgen sind die Folgenglieder "`am Anfang"' unerheblich. Die Konvergenz einer Folge ändert sich
+also nicht, wenn man \emph{endlich} viele Folgenglieder abändert, oder gar die Folge erst später beginnen lässt, also statt einer
+Folge $(a_n)_{n\geq 1}$ die Folge $(a_n)_{n\geq n_0}$ mit einer festen natürlichen Zahl $n_0\in \N$ betrachtet.
+
+Insbesondere lassen sich bei den nachfolgenden Grenzwertregeln und Grenzwertkriterien Bedingungen an die Folgenglieder abschwächen von
+"`für alle $n\in \N$"' zu "`für alle $n\geq n_0$"' (bei einem fest gewählten $n_0\in \N$), ohne dass die Aussagen falsch werden.
+\end{remark}
+
+
+
+\begin{theorem}\label{thm:eindeutigkeitgw}
+\begin{enumerate}
+\item Eine Folge besitzt höchstens einen Grenzwert. Das heißt, wenn $(a_n)_{n\in \N}$ konvergiert, ist der
+Grenzwert eindeutig bestimmt.
+\item Eine konvergente Folge ist beschränkt.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof*}[Erklärung]
+\begin{enumerate}
+\item Seien $a$ und $a'$ zwei Grenzwerte einer Folge $(a_n)_{n\in \N}$. Für jedes beliebige $\epsilon>0$ gibt
+es dann $N_{\epsilon}, M_{\epsilon}\in \N$ so dass $|a_n-a|<\epsilon$ für alle $n\geq N_{\epsilon}$ und
+$|a_n-a'|<\epsilon$ für alle $n\geq M_{\epsilon}$. Insbesondere gilt dies für alle 
+$n\geq \max\{N_{\epsilon},M_{\epsilon}\}$.\\
+Mit der Dreiecksungleichung erhält man nun für $n\geq \max\{N_{\epsilon},M_{\epsilon}\}$
+\[  |a-a'|\leq |a-a_n|+|a_n-a'|< \epsilon+\epsilon<2\epsilon. \]
+Wären nun $a$ und $a'$ verschieden, könnte man  $\epsilon=\frac{1}{2}|a-a'|>0$ wählen und erhielte dennoch
+aus der letzten Zeile $|a-a'|<2\epsilon=|a-a'|$. Widerspruch.
+\item Sei $(a_n)_{n\in \N}$ eine Folge, die gegen eine Zahl $a\in \R$ konvergiert. Dann gibt es nach Definition
+für jedes beliebige $\epsilon>0$ ein $N_{\epsilon}\in \N$ so dass $|a_n-a|<\epsilon$ für alle $n\geq N_{\epsilon}$.\\
+Insbesondere für $\epsilon=1$ gilt dann $|a_n-a|<1$ für alle $n\geq N_1$.\\
+Die Wertemenge von $(a_n)_{n\in \N}$ ist daher eine Teilmenge der Menge
+\[  \{ a_k | k<N_1 \} \cup [a-1,a+1]. \]
+Da sowohl die endliche Menge $\{ a_k | k<N_1 \}$ als auch das Intervall $[a-1,a+1]$ beschränkt sind, ist insbesondere die
+Wertemenge beschränkt.\\
+\end{enumerate}
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11267&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}\\\\
+\end{proof*}
+
+\begin{remark}
+Jede konvergente Folge ist nach obigem Satz beschränkt. Jedoch muss nicht jede beschränkte Folge konvergent sein, wie
+das Beispiel $((-1)^n)_{n\in \N}$ zeigt.
+\end{remark}
+
+
+
+\section{Grenzwertregeln}\label{sec:grenzwertregeln}
+
+Um Grenzwerte zu berechnen, sind einige Regeln sehr hilfreich.
+
+\begin{rule}[Grenzwertregeln]\label{grenzwertregeln}
+Seien  $(a_n)_{n\in \N}$, $(b_n)_{n\in \N}$ konvergente (reelle) Folgen mit
+$\lim_{n\to\infty} a_n =a$ und $\lim_{n\to\infty} b_n =b$. Dann gilt für alle $\alpha, \beta \in \R$:
+\begin{enumerate}
+\item Die Folge $( \alpha a_n + \beta b_n )_{n\in \N}$ konvergiert und \[ \lim_{n\to\infty} ( \alpha a_n + \beta b_n )
+= \alpha \cdot a + \beta \cdot b. \]
+\item Die Folge $( a_n \cdot b_n )_{n\in \N}$ konvergiert und \[\lim_{n\to\infty} ( a_n \cdot b_n ) = a \cdot b. \]
+\item Falls $b_n \neq 0$ für alle $n \in \N$ und $b \neq 0$, so konvergiert die Folge $( a_n /b_n )_{n\in \N}$ und
+\[  \lim_{n\to\infty} ( \frac{a_n}{b_n} )=\frac{a}{b}.\]
+\end{enumerate}
+\floatright{\href{https://www.hm-kompakt.de/video?watch=305}{\image[75]{00_Videobutton_schwarz}}}\\\\
+\end{rule}
+
+
+\begin{proof*}[Erklärung]
+Wir zeigen die erste Aussage. Die anderen beiden sind etwas komplizierter zu zeigen, folgen aber dem gleichen Prinzip.
+
+Nach Definition der Konvergenz von $(a_n)_{n\in \N}$ und $(b_n)_{n\in \N}$ gibt es für beliebige $\epsilon_1>0$ und $\epsilon_2>0$ 
+natürliche Zahlen $K_{\epsilon_1}, M_{\epsilon_2}\in \N$, so dass $|a_n-a|<\epsilon_1$ für alle $n\geq K_{\epsilon_1}$ und 
+$|b_n-b|<\epsilon_2$ für alle $n\geq M_{\epsilon_2}$. Insbesondere gilt dies für alle 
+$n\geq \max\{K_{\epsilon_1},M_{\epsilon_2}\}$.\\
+Damit gilt für alle $n\geq \max\{K_{\epsilon_1},M_{\epsilon_2}\}$
+\[ |( \alpha a_n + \beta b_n )-(\alpha  a + \beta  b)| =|\alpha (a_n-a)+\beta (b_n-b)|
+\leq |\alpha|\cdot |a_n-a| + |\beta|\cdot |b_n-b| <  |\alpha|\epsilon_1 + |\beta|\epsilon_2. \]
+Für beliebiges $\epsilon>0$ kann man also $\epsilon_1=\frac{\epsilon}{2|\alpha|}>0$ (bzw. $\epsilon_1$ beliebig, falls $\alpha=0$)
+und $\epsilon_2=\frac{\epsilon}{2|\beta|}>0$ (bzw. $\epsilon_2$ beliebig, falls $\beta=0$) wählen, sowie $N_\epsilon=
+\max\{K_{\epsilon_1},M_{\epsilon_2}\}$, und erhält
+für alle $n\geq N_\epsilon$
+\[ |( \alpha a_n + \beta b_n )-(\alpha  a + \beta  b)| 
+<  |\alpha|\epsilon_1 + |\beta|\epsilon_2\leq \frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon.\]
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10800&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}\\\\
+\end{proof*}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{1}
+\begin{quickcheck}
+		\field{real}
+		\type{input.number}
+		\begin{variables}
+			\randint{a}{2}{6}
+			\randint{b}{2}{8}
+			\randint{c}{2}{6}
+			\randint{d}{3}{6}
+		    \function{ff}{a/n+b)}
+            \function{gg}{c+(1/d)^n}
+            \function{loes}{b/c}
+		\end{variables}
+
+
+         \lang{de}{\text{Bestimmen Sie den Grenzwert $a$ der konvergenten Folge
+         $(a_n)_{n\in\N}$ definiert durch $a_n:=
+         \frac{\frac{\var{a}}{n}+\var{b}}{\var{c}+(\frac{1}{\var{d}})^n}$\\\\
+         
+         Der Grenzwert von $(a_n)_{n\in\N}$ lautet: $a=$\ansref}}
+			
+
+		\begin{answer}
+        	\solution{loes}
+	    \end{answer}
+		\explanation{Betrachten Sie die Grenzwerte der einzelnen konvergenten Folgen $a_{n,1}=
+        \frac{\var{a}}{n}$, $a_{n,2}=a_{n,1}+\var{b}$, $a_{n,3}=(\frac{1}{\var{d}})^n$ 
+        sowie $a_{n,4}=\var{c}+a_{n,3}$ und verwenden Sie dann die Grenzwertregeln. } 
+	\end{quickcheck}
+\end{quickcheckcontainer}
+
+\begin{remark}
+Für den Quotienten kann man die Voraussetzung gemäß obiger \lref{rem:n-geq-n_0}{Bemerkung} auch abschwächen:\\
+Sind für ein festes $n_0\in \N$ die Folgenglieder $b_n\neq 0$ für alle $n\geq n_0$, dann ist die
+Folge $( a_n /b_n )_{n\geq n_0}$ konvergent und
+\[  \lim_{n\to\infty} ( \frac{a_n}{b_n} )=\frac{a}{b}.\]
+\end{remark}
+
+
+\begin{example}
+\begin{enumerate}
+\item Der Grenzwert der Folge $(a_n)_{n\in\N}$ definiert durch $a_n:=\frac{1}{n^2}$
+lässt sich mit Hilfe der \ref[content_14_konvergenz][Grenzwertregeln]{grenzwertregeln} bestimmen:
+\[ \lim_{n\to \infty} \frac{1}{n^2}= (\lim_{n\to \infty} \frac{1}{n})\cdot (\lim_{n\to \infty} \frac{1}{n})=0\cdot 0=0 \]
+Allgemeiner gilt sogar für alle $k\in\N$:
+\[\lim_{n\to \infty} \frac{1}{n^k}=(\lim_{n\to \infty} \frac{1}{n})^k =0^k=0\]
+\item Für die Folge $(a_n)_{n\in \N}$ mit $a_n=\frac{2n^2-3n+1}{n^2+3n-3}$ lassen sich die Grenzwertregeln nicht direkt anwenden,
+da die Folgen $(n^2)_{n\in \N}$ und $(n)_{n\in \N}$ nicht konvergieren. Wenn wir den Bruch jedoch mit der höchsten Potenz
+$n^2$ kürzen, erhalten wir 
+\[ a_n=\frac{2n^2-3n+1}{n^2+3n-3}=\frac{2-3\cdot \frac{1}{n}+\frac{1}{n^2}}{1+3\cdot \frac{1}{n}-3\cdot \frac{1}{n^2}}.\]
+Für den Zähler gilt
+\[ \lim_{n\to \infty} \left(2-3\cdot \frac{1}{n}+\frac{1}{n^2}\right)= \lim_{n\to \infty} 2 -3\cdot\lim_{n\to \infty}\frac{1}{n}+
+ \lim_{n\to \infty} \frac{1}{n^2} =2-3\cdot 0+0 =2, \]
+und für den Nenner
+\[ \lim_{n\to \infty} \left(1+3\cdot \frac{1}{n}-3\cdot \frac{1}{n^2} \right)=1+3\cdot 0 -3\cdot 0=1.\]
+Man kann also die Regel für Quotienten anwenden und bekommt:
+\[ \lim_{n\to \infty} a_n =\lim_{n\to \infty} \frac{2-3\cdot \frac{1}{n}+\frac{1}{n^2}}{1+3\cdot \frac{1}{n}-3\cdot \frac{1}{n^2}}
+= \frac{2}{1}=2. \]
+\item Um den Grenzwert für die Folge $(a_n)_{n\in \N}$ mit $a_n=\frac{2n^2-3n+1}{n^3+2n^2-4}$ zu berechnen, geht man wie im vorigen
+Beispiel vor und kürzt den Bruch zunächst mit der höchsten Potenz des Nenners, hier also $n^3$:
+\[ \lim_{n\to \infty} a_n =\lim_{n\to \infty} \frac{2n^2-3n+1}{n^3+2n^2-4}
+=\lim_{n\to \infty}\frac{2\cdot \frac{1}{n} -3\cdot \frac{1}{n^2}+\frac{1}{n^3}}{1+2\cdot \frac{1}{n}-4\cdot \frac{1}{n^3}}
+=\frac{2\cdot 0-3\cdot 0+0}{1+2\cdot 0-4\cdot 0}=\frac{0}{1}=0.\]
+Die Folge ist also eine Nullfolge.
+\item Folgen von obigem Typ, bei denen die höchste Potenz im Zähler größer als die höchste Potenz im Nenner ist, konvergieren nicht,
+wie wir am Beispiel $a_n=\frac{2n^4-3n+1}{n^3+2n^2-4}$ erläutern:\\
+Zunächst kürzt man wieder mit der höchsten Potenz des Nenners, hier $n^3$ und erhält
+$a_n=\frac{2\cdot n -3\cdot \frac{1}{n^2}+\frac{1}{n^3}}{1+2\cdot \frac{1}{n}-4\cdot \frac{1}{n^3}}$.
+Die Folge der Nenner $b_n=1+2\cdot \frac{1}{n}-4\cdot \frac{1}{n^3}$ ist nun konvergent gegen $1$.\\
+Wäre die Folge $(a_n)_{n\in \N}$ konvergent, so wäre auch die Folge $(a_nb_n)_{n\in \N}$ konvergent, aber wegen
+$a_nb_n=2\cdot n -3\cdot \frac{1}{n^2}+\frac{1}{n^3}>2\cdot n -3$ ist dies eine unbeschränkte Folge im Widerspruch zur Konvergenz.
+\end{enumerate}
+\end{example}
+
+Ähnliche Beispiele werden im folgenden Video veranschaulicht und damit die Grenzwertregeln erläutert:\\\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10893&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}\\\\\\
+
+Auch für das Wurzelziehen gibt es eine Grenzwertregel. Den Beweis dazu werden wir jedoch erst indirekt durch die \ref[elem-funk][Stetigkeit 
+der Wurzelfunktion]{sec:wurzel-und-ln} bekommen.
+
+\begin{rule}
+Sei $(a_n)_{n\in \N}$ eine konvergente Folge mit  $a_n\geq 0$ für alle $n\in \N$
+und mit Grenzwert
+$a=\lim_{n\to \infty}  a_n$. Des Weiteren sei $k\in \N$ eine natürliche Zahl.
+Dann ist die Folge der $k$-ten Wurzeln $(\sqrt[k]{a_n})_{n\in \N}$ konvergent und es gilt
+\[ \lim_{n\to \infty} \sqrt[k]{a_n} = \sqrt[k]{a}. \]
+\end{rule}
+
+An dieser Stelle sollen noch Regeln und Anmerkungen zu Grenzwerten, Konvergenz und bestimmter Divergenz bei Folgen gegeben werden, die u. a. die Laufvariable im Exponenten haben.
+Insbesondere wird das Konvergenzverhalten von "exponentiellen" Folgen im Vergleich zu "polynomialen" Folgen betrachtet.
+
+\begin{theorem}\label{thm:exp-schlaegt-pol}
+Sei $n\in\mathbb{N}$ sowie $a, q\in\mathbb{R}$. Dann gilt für $|q|<1$:
+\[\lim_{n\to\infty} n^a\cdot q^n=0\]
+\floatright{\href{https://www.hm-kompakt.de/video?watch=310}{\image[75]{00_Videobutton_schwarz}}}\\\\
+\end{theorem}
+\begin{proof*}[Beweis des  \ref[content_14_konvergenz][Theorems]{{thm:exp-schlaegt-pol}}]
+\begin{incremental}
+\step
+Wir schreiben $b_n= n^a\cdot q^n$ und zeigen: Es gibt eine Konstante $c$ mit $| q| <c<1$ und ein $N\in\N$   so,
+dass für alle $n\geq N$ gilt
+\[| b_{n+1}|<c |b_n|.\]
+Dann folgt nämlich 
+\[\lim_{n\to\infty}\abs{b_n} <\lim_{n\to\infty}c^{n-N}\cdot\abs{b_N}=0,\]
+und somit auch $\lim_{n\to\infty} n^a\cdot q^n=0$.
+\step
+Die Bedingung $| b_{n+1}|<c| b_n|$ ist gleichbedeutend mit $(n+1)^a | q|^{n+1}<c\cdot n^a | q|^n$ bzw. mit
+\[ (1+\frac{1}{n})^a{| q|}<c.\]
+Für $a\leq 0$ ist $(1+\frac{1}{n})^a\leq 1$, und somit die Bedingung erfüllt für jedes $| q|<c<1$.
+
+Für $a>0$ ist $(1+\frac{1}{n})^a$ eine monoton fallende Folge mit Grenzwert $1$. Nun wählen wir $\vert q\vert <\tilde{c}<1$ und dazu ein $\epsilon>0$ so klein,
+dass immer noch $c=(1+\epsilon)\tilde{c}<1$ erfüllt ist. Dann wählen wir $N\in\N$ so groß, dass $(1+\frac{1}{N})^a<1+\epsilon$. 
+Dann gilt für alle $n\geq N$
+\[(1+\frac{1}{n})^a \abs{q}<c,\]
+und somit ist wieder obige Bedingung erfüllt.
+\end{incremental}
+\end{proof*}
+
+\begin{remark}\label{rem:expstrong}
+Die Eigenschaft $n^a \cdot q^n \rightarrow 0$ bei $|q|<1$ passt zur \textbf{Merkregel}:\\
+\[\text{Exponentiell ist stärker als polynomial!}\]
+\end{remark}
+
+\begin{example}
+\begin{enumerate}
+\item Die Folge $(a_n)_{n\in\mathbb{N}}=n^7\cdot 0,9^n$ konvergiert und ist eine Nullfolge. 
+\item Die Folge $(b_n)_{n\in\N}=(n+2)^8\cdot (\frac{3}{7})^n+c$ konvegiert für $c\in\R$ gegen $c$, da $((n+2)^8\cdot (\frac{3}{7})^n)_{n\in\N}$ eine Nullfolge ist. 
+\end{enumerate}
+\end{example}
+
+
+\begin{remark}
+Die angegebenen Grenzwertregeln helfen also Grenzwerte zu berechnen. Weitere Möglichkeiten werden im Abschnitt 
+\link{konv-krit}{Konvergenzkriterien} behandelt. 
+\end{remark}
+
+Die folgende Regel hilft manchmal Grenzwerte abzuschätzen.
+
+\begin{rule}\label{rule:grenzwerte-vergleichen}
+Seien $(a_n)_{n\in \N}$ und $(b_n)_{n\in \N}$ konvergente Folgen mit $a_n\leq b_n$ für alle $n\in \N$. Dann gilt
+für die Grenzwerte
+\[ \lim_{n\to \infty}  a_n \leq \lim_{n\to \infty} b_n.\]
+\end{rule}
+
+\begin{proof*}[Erklärung]
+Sei $a=\lim_{n\to \infty}  a_n $ und $b=\lim_{n\to \infty} b_n$. Für beliebiges $\epsilon>0$ gibt es dann eine 
+natürliche Zahl $N_\epsilon$ mit
+\[  |a_n-a|<\epsilon \quad \text{und} \quad |b_n-b|<\epsilon \]
+für alle $n\geq N_\epsilon$. Damit folgt für alle $n\geq N_\epsilon$
+\[  a-\epsilon < a_n \leq b_n < b+\epsilon. \]
+Also gilt $a< b+2\epsilon$ für beliebiges $\epsilon>0$, weshalb $a\leq b$.
+\end{block}
+
+\begin{block}[warning]
+Zu beachten ist, dass die stärkere Voraussetzung $a_n<b_n$ für alle $n\in \N$ \emph{nicht} die strikte
+Ungleichung $\lim_{n\to \infty}  a_n < \lim_{n\to \infty} b_n$ impliziert.
+
+Dies ist am Beispiel $(a_n)_{n\in \N}=(-\frac{1}{n})_{n\in \N}$ und $(b_n)_{n\in \N}=(\frac{1}{n})_{n\in \N}$
+gut zu sehen, wo $a_n<0<b_n$ gilt für alle $n\in \N$, aber
+\[ \lim_{n\to \infty}  a_n =0 = \lim_{n\to \infty}  b_n. \]
+\end{proof*}
+
+Zuletzt bemerken wir noch folgende Tatsache, die direkt aus den Definitionen folgt.
+
+\begin{rule}\label{rule:folge--limes-nullfolge}
+Eine Folge $(a_n)_{n\in \N}$ konvergiert genau dann gegen eine Zahl $a\in \R$, wenn die Folge
+$(a_n-a)_{n\in \N}$ eine Nullfolge ist, und dies ist genau dann der Fall, wenn $\big({|a_n-a|}\big)_{n\in \N}$ eine Nullfolge ist.
+\end{rule}
+
+
+\end{visualizationwrapper}
+
+\end{content}

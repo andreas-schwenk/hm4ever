@@ -1,0 +1,198 @@
+
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Exercise 7}
+    \lang{de}{A07: Textaufgabe}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\title{A07: Textaufgabe}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22598}{Ticket 22598}
+\end{block}
+
+
+\usepackage{mumie.genericproblem}
+
+\embedmathlet{gwtmathlet}
+
+\begin{problem}
+    \begin{question}
+    
+        \begin{variables}
+            \function{f}{x^2*e^(-y)+y^4*e^(-x)}
+            %explizite Formeln
+            \function[normalize]{f1}{2*x*e^(-y)-y^4*e^(-x)}
+            \function[normalize]{f2}{-x^2*e^(-y)+4*y^3*e^(-x)}
+            \function[normalize]{fr}{cos(w)*(2*r*cos(w)*e^(-r*sin(w))-(r*sin(w))^4*e^(-r*cos(w)))+sin(w)*(-(r*cos(w))^2*e^(-r*sin(w))+4*(r*sin(w))^3*e^(-r*cos(w)))}
+            
+            \function{px}{r*cos(w)}
+            \function{py}{r*sin(w)}
+            %MUMIE berechnet die Lösung
+            \derivative[normalize]{g1}{f}{x}
+            \derivative[normalize]{g2}{f}{y}
+            \substitute[normalize]{hh1}{g1}{x}{px}
+            \substitute{h1}{hh1}{y}{py}
+            \substitute{hh2}{g2}{x}{px}
+            \substitute{h2}{hh2}{y}{py}
+            \function[normalize]{gr}{cos(w)*h1+sin(w)*h2}
+            
+            \number{three}{3}
+            \number{four}{4}
+            \substitute{hl1}{f1}{x}{three}
+            \substitute{l1}{hl1}{y}{four}
+            \substitute{hl2}{f2}{x}{three}            
+            \substitute{l2}{hl2}{y}{four}
+            
+            \matrix[calculate]{m}{l1 & l2}
+            
+            \function[calculate]{ll}{1/5*(l1*3+l2*4)}
+            
+            \number{s}{5}
+            
+       \end{variables}
+        \text{Ein Unternehmen ist für die Lackierung großflächiger Bauteile zuständig. 
+        Sie haben dazu einen Roboter erworben, der einen sowohl ausfahrbar als auch schwenkbaren Arm besitzt, mit dem er lackiert.
+        Der Roboter steht nun im Ursprung $(0,0)$. Der Roboterarm kann so das Gebiet $U_{10}(0)\subset \R^2$ erreichen.
+        Der Hersteller der Maschine gibt die Leistung der Maschine in Abhängigkeit der $(x,y)$-Koordinaten des Roboterarms an.
+        Die Leistung soll durch die Funktion $f:U_{10}(0) \to \R, (x,y)\mapsto \var{f}$
+        beschrieben werden können.
+        Nun möchte der Unternehmer wissen, ob die Roboterleistung steigt, wenn er den Arm weiter ausfährt (und den Winkel belässt).}
+        \type{input.generic}
+        \field{real}  
+    \begin{answer}
+        \type{input.function}
+        \text{Bestimmen Sie zunächst die partiellen Ableitungen: $\frac{\partial f}{\partial x}(x,y) = $}
+        \solution{g1}
+        \inputAsFunction{x,y}{k1}
+        \checkFuncForZero{g1-k1}{-10}{10}{100}
+%QS
+%  [edited] eingefügt
+%       
+        \explanation[edited]{$\frac{\partial f}{\partial x}(x,y)$ ist nicht richtig. Leiten Sie $f$ nach $x$ ab.}
+    \end{answer}
+    \begin{answer}
+        \type{input.function}
+        \text{$\frac{\partial f}{\partial y}(x,y) = $}
+        \solution{g2}
+        \inputAsFunction{x,y}{k2}
+        \checkFuncForZero{g2-k2}{-10}{10}{100}
+%QS
+%  [edited] eingefügt
+%
+        \explanation[edited]{$\frac{\partial f}{\partial y}(x,y)$ ist nicht richtig. Leiten Sie $f$ an beliebiger Stelle nach $y$ ab.}
+    \end{answer}
+    \begin{answer}
+        \type{input.function}
+        \text{Wir wählen nun die Polarkoordinaten, $x=r \cos(w), y= r \sin(w)$.
+          ($w$ bezeichnet hier den Winkel. Normalerweise nutzt man griechische Buchstaben, wie $\varphi$ oder $\theta$, 
+          hierfür. Dies ist aber für Ihre Eingabe ungeeignet.) Dann setzen wir $\tilde{f}(r,w):=f(r\cos(w),r\sin(w))$.
+          Bestimmen Sie die radiale Ableitung $\frac{\partial \tilde{f}}{\partial r}$ im Punkt $(r,w)$.\\ $\frac{\partial \tilde{f}}{\partial r}(r,w)=$}
+        \solution{gr}
+        \inputAsFunction{r,w}{k3}
+        \checkFuncForZero{gr-k3}{-10}{10}{100}
+%QS
+%  Änderungsvorschlag
+        \explanation{Es ist $\tilde{f}(r,w)=f\circ g(x,y)$ mit $g:\R^2 \to \R^2, (r,w)^T=(r \cos(w),r\sin(w))^T$.
+            Nutzen Sie die Kettenregel, d.h. $D\tilde{f} = Df\circ g \cdot Dg$. Sie brauchen nur den ersten Eintrag 
+            dieser Matrix berechnen!}
+%ursprüngl.
+%        \explanation{Nutzen Sie die Kettenregel, d.h. $D\tilde{f} = Df\circ g \cdot Dg$. Die innere Funktion ist $g:\R^2 \to \R^2, (r,w)^T=(r \cos(w),r\sin(w))^T$. Sie brauchen nur den ersten Eintrag dieser Matrix berechnen!}
+    \end{answer}
+    \begin{answer}
+        \type{input.matrix}
+        \text{Nun befindet sich der Roboterarm aktuell am Punkt $x=3$, $y=4$. Bestimmen Sie zunächst einmal $Df(3,4)=$}
+        \solution{m}
+        \explanation{Achten Sie auf das Format! Das Differential ist hier ein Zeilenvektor. Setzen Sie $x=3, y=4$ in $\frac{\partial f}{\partial x}(x,y)$ und $\frac{\partial f}{\partial y}(x,y)$ ein.}
+    \end{answer}
+    \begin{answer}
+        \type{input.function}
+        \text{Die radiale Ableitung von $f$ an der Stelle $a\in \R^2$ kann auch als Richtungsableitung in Richtung $v=\frac{1}{\Vert a \Vert_2}\cdot a$ interpretiert werden.
+%QS
+%  Änderungsvorschlag
+        Berechnen Sie an der Stelle $a=(3,4)^T \;$ die Richtungsableitung $D_v f(3,4)=$}
+%ursprüngl.
+%        Berechnen Sie $D_v f(3,4)=$}
+        \solution{ll}
+        \inputAsFunction{}{k4}
+        \checkFuncForZero{ll-k4}{-10}{10}{100}
+%QS
+%  Korrektur in Formel und ohne [edited]
+%
+        \explanation{Nutzen Sie die Formel $D_v f(a)= Df(a)\cdot v$.}
+%ursprüngl.
+%        \explanation[edited]{Nutzen Sie $D_v f(a)= Df(a)\cdot a$ aus. Es ist $a=(3,4)^T$.}
+        \end{answer}
+        
+        \begin{answer}
+            %QS
+%QS  Änderungsvorschlag
+        \text{Nun betrachten wir die Situation in Polarkoordinaten.
+              Für die aktuelle Position $a=(3,4)^T$ des Roboterarms ist $r=$}
+%ursprüngl.
+%        \text{Nun betrachten wir dies in Polarkoordinaten. Für die aktuelle Position des Roboterarms ist $r=$}
+            \type{input.number}
+            \solution{s}
+            %QS
+%QS  Änderungsvorschlag
+        \explanation{Es ist $r=\Vert a \Vert_2$.}
+%ursprüngl.
+%        \explanation{Es ist $r=\Vert a \Vert_2$ für $a=(3,4)^T$.}
+        \end{answer}
+        \begin{answer}
+            \type{input.function}
+%QS  Änderungsvorschlag            
+        \text{Bestimmen Sie nun die radiale Ableitung $\frac{\partial \tilde{f}}{\partial r}$ an der aktuelle Position des Roboterarms. 
+              (\textit{Hinweis: Die explizite Bestimmung des Winkels $w$ ist hierzu nicht erforderlich, da bekannt ist, dass $\, 3=r \cos(w)$ und $4=r\sin(w)$.})        
+%ursprüngl.
+%        \text{Setzen Sie in $\frac{\partial \tilde{f}}{\partial r}$ nun die aktuelle Position des Roboterarms ein. 
+%            \textit{Hinweis: Sie brauchen den Winkel $w$ nicht explizit berechnen. Sie haben $r$ bestimmt und wissen $3=r \cos(w)$ und $4=r\sin(w)$.}\\
+              An der aktuellen Roboterarm-Position ist $\frac{\partial \tilde{f}}{\partial r}=$}
+            \solution{ll}
+            \inputAsFunction{}{k5}
+        \checkFuncForZero{ll-k5}{-10}{10}{100}
+%QS  Änderungsvorschlag (ohne [edited]!)
+        \explanation{Verwenden Sie das bereits berechnete Ergebnis von $\frac{\partial \tilde{f}}{\partial r}(r,w)$.
+        Wie im Hinweis ist $3=r \cos(w)$ und $4=r\sin(w)$ und Sie haben $r$ vorher berechnet. Dann ist also $\cos(w) = \frac{3}{r}$ und $\sin(w) = \frac{4}{r}$. Setzen Sie nun diese Werte $r$, $\sin(w)$ und $\cos(w)$ in die vorher berechnete Formel $\frac{\partial \tilde{f}}{\partial r}(r,w)$ ein.}
+        
+        \end{answer}
+        \begin{answer}
+            \text{Abschließend beantworten Sie bitte die Eingangsfrage: Die Roboterleistung steigt, wenn ...}
+            \type{mc.multiple}
+            \begin{choice}
+                \text{... der Arm weiter ausgefahren wird.}
+                \solution{compute}
+                \iscorrect{ll}{>}{0}
+            \end{choice}
+            \begin{choice}
+                \text{... der Arm etwas eingefahren wird.}
+                \solution{compute}
+                \iscorrect{ll}{<}{0}
+            \end{choice}
+            \begin{choice}
+                \text{Über den Sachverhalt kann anhand der voherigen Rechnungen keine Aussage getroffen werden.}
+                \solution{compute}
+                \iscorrect{ll}{=}{0}
+            \end{choice}
+            %FS: NEUE explanation.
+            \explanation{Die radiale Ableitung gibt die Änderungsrate der Roboterleistung an, wenn der Arm etwas weiter ausgefahren wird. Ist sie positiv, dann steigt die Leistung; ist sie negativ, dann fällt die Leistung ab.}
+        \end{answer}
+    \end{question}
+\end{problem}
+\end{content}

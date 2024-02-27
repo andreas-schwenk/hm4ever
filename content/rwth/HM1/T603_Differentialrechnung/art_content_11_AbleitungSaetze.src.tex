@@ -1,0 +1,1192 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Eigenschaften und höhere Ableitungen}
+    \lang{en}{Properties and higher derivatives}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T603_ParabolaTangents.meta.xml}{T603_ParabolaTangents}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T303_Approximationen/g_art_content_06_de_l_hospital.meta.xml}{content_06_de_l_hospital}
+    \link{generic_article}{content/rwth/HM1/T603_Differentialrechnung/g_art_content_09_Ableitungsbegriff.meta.xml}{content_09_Ableitungsbegriff}
+    \link{generic_article}{content/rwth/HM1/T301_Differenzierbarkeit/g_art_content_03_hoehere_ableitungen.meta.xml}{content_03_hoehere_ableitungen}
+    \link{generic_article}{content/rwth/HM1/T106_Differentialrechnung/g_art_content_22_extremstellen.meta.xml}{extremstellen}
+    \link{generic_article}{content/rwth/HM1/T207_Intervall_Schachtelung/g_art_content_23_intervallschachtelung.meta.xml}{intervallschachtelung}
+    \link{generic_article}{content/rwth/HM1/T211_Eigenschaften_stetiger_Funktionen/g_art_content_33_zwischenwertsatz.meta.xml}{zwischenwertsatz}
+    \link{generic_article}{content/rwth/HM1/T106_Differentialrechnung/g_art_content_23_kurvendiskussion.meta.xml}{kurvendiskussion}
+    \link{generic_article}{content/rwth/HM1/T211_Eigenschaften_stetiger_Funktionen/g_art_content_33_zwischenwertsatz.meta.xml}{saetze-stetig}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{3}
+\ombarticle{3}
+
+\lang{de}{\title{Wichtige Aussagen über die Ableitung}}
+\lang{en}{\title{Important properties of the derivative}}
+
+\begin{block}[annotation]
+  
+  
+\end{block}
+\begin{block}[annotation]
+ Im Ticket-System: \href{https://team.mumie.net/issues/22699}{Ticket 22699}
+
+\end{block}
+
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\lang{de}{Nachdem wir wissen, was die Ableitung ist (Grenzwert des Differenzenquotienten), was sie anschaulich bedeutet (Steigung der
+Tangente) und wie man sie ausrechnet (Ableitungsregeln), sammeln wir hier einige nützliche Sätze über die Ableitung, die wir 
+im nächsten Kapitel zur Kurvendiskussion verwenden werden. 
+}
+\lang{en}{
+Now that we know what the derivative is
+(a limit of difference quotients),
+what it means intuitively
+(the slope of the tangent line)
+and how to compute it (differentiation rules),
+we will formulate several useful properties of the
+derivative that will be used in the next chapter on
+the analysis of curves.
+}
+
+
+\section{
+\lang{de}{Stetigkeit und Mittelwertsatz}
+\lang{en}{Continuity and the mean value theorem}
+}
+
+\lang{de}{In diesem Abschnitt behandeln wir zwei eher theoretische Sätze. Wir beginnen mit dem Zusammenhang zwischen Stetigkeit und 
+Differenzierbarkeit. 
+}
+\lang{en}{
+In this section, we will discuss two theorems of a
+rather theoretical nature. We will begin with the
+relationship between continuity and differentiability.
+}
+
+
+\begin{theorem}
+\lang{de}{Es sei $f$ eine Funktion, die auf einem offenen Intervall $I$ differenzierbar ist (d.\,h. $f'$ existiert). 
+}
+\lang{en}{
+Let $f$ be a function that is differentiable on an open
+interval $I$ (i.e. $f'$ exists).
+}
+
+\lang{de}{In diesem Fall ist $f$ auch stetig auf $I$ (d.\,h. der Funktionsgraph macht keine Sprünge).
+}
+\lang{en}{Then $f$ is also continuous on $I$
+(i.e. its graph has no jumps).}
+\end{theorem}
+
+\begin{proof*}
+\lang{de}{Der Beweis findet sich im \ref[content_03_hoehere_ableitungen][Hauptkurs]{thm:diffstetig}.
+}
+\lang{en}{The proof can be found in
+the \ref[content_03_hoehere_ableitungen][main course]{thm:diffstetig}.
+}
+\end{proof*}
+
+\lang{de}{Jede differenzierbare Funktion ist also stetig, aber umgekehrt ist nicht jede stetige Funktion differenzierbar. Die Betragsfunktion 
+$f(x) = |x|$ besitzt etwa an der Stelle $x=0$ keine Ableitung, wie wir \ref[content_09_Ableitungsbegriff][bereits gesehen haben]{ex:nichtdiffbar}. 
+}
+\lang{en}{
+While every differentiable function is continuous,
+not every continuous function is differentiable.
+The absolute value function $f(x) = |x|$, for example,
+does not have a derivative at $x=0$, \ref[content_09_Ableitungsbegriff][as we saw earlier]{ex:nichtdiffbar}.
+}
+
+
+\lang{de}{Das folgende Resultat, der \emph{Mittelwertsatz}, ist innerhalb der Analysis von großer Bedeutung, etwa bei der Beweisführung von Aussagen, 
+da er einen Zusammenhang zwischen Funktionswerten und Ableitung herstellt.  
+Auch wenn wir ihn nicht benutzen werden, soll der Satz hier zumindest erwähnt werden.
+}
+\lang{en}{
+The following result, the \emph{mean value theorem}, plays
+an important role in analysis (for example, in proofs)
+because it provides a connection between the values of a function
+and its derivative. The theorem is worth stating here,
+even though we will not have to use it.
+}
+
+
+\begin{theorem}[
+\lang{de}{Mittelwertsatz}
+\lang{en}{Mean value theorem}]\label{thm:mittelwertsatz}
+  \lang{de}{Es sei $f$ eine auf einem Intervall $I \subset \R$ differenzierbare Funktion und es seien $a, b \in I$ zwei verschiedene reelle
+  Zahlen. 
+  
+  Dann existiert eine Stelle $\xi \in \R$ zwischen $a$ und $b$, für die die Gleichung
+  \[ 
+  \frac{f(b)-f(a)}{b-a} = f'(\xi )
+  \]
+  erfüllt ist.}
+  \lang{en}{Let $f$ be a differentiable function on an interval $I \subseteq \R$,
+  and let $a, b \in I$ be two distinct real numbers.
+
+  Then there exists a point $\xi \in \R$ between $a$ and $b$ that satisfies the equation
+  \[ 
+  \frac{f(b)-f(a)}{b-a} = f'(\xi ).
+  \]
+  }
+\end{theorem}
+\begin{proof*}
+\lang{de}{Der Beweis findet sich im \ref[content_03_hoehere_ableitungen][Hauptkurs]{thm:mittelwertsatz}.}
+\lang{en}{The proof can be found in the \ref[content_03_hoehere_ableitungen][main course]{thm:mittelwertsatz}.}
+\end{proof*}
+\lang{de}{Anschaulich bedeutet der Mittelwertsatz, dass es bei differenzierbaren Funktionen zu jeder Sekante durch zwei Punkte auch eine Tangente mit gleicher Steigung 
+gibt.}
+\lang{en}{
+In graphical terms, the mean value theorem states that for any
+secant through two points on the graph of a differentiable function,
+there exists a tangent with the same slope.
+}
+
+\section{
+\lang{de}{Höhere Ableitungen}
+\lang{en}{Higher derivatives}
+}
+
+\lang{de}{Für eine differenzierbare Funktion $f: I\to \R$ haben wir die Ableitung auch wieder als Funktion $f': I\to \R$ aufgefasst. Wenn diese
+differenzierbar ist, kann man auch diese Funktion ableiten und erhält eine \emph{höhere Ableitung}.
+}
+\lang{en}{
+Given a differentiable function $f: I\to \R$, we have
+interpreted its derivative as another function $f' : I\to \R$.
+If the latter is differentiable, we can take its derivative
+to obtain a \emph{higher derivative} of $f$.
+}
+
+
+\begin{definition}[Höhere Ableitungen]
+  	\lang{de}{
+  		Es sei $f$ eine differenzierbare Funktion mit Ableitungsfunktion $f'$. }
+    \lang{en}{
+      Let $f$ be a differentiable function with derivative $f'$.
+    }
+\begin{itemize}        
+        \item \lang{de}{Ist die Funktion $f'$ ebenfalls differenzierbar,
+		so hei{\ss}t $f$ \notion{zweimal differenzierbar}. Man schreibt dann statt $(f')'$ kurz $f''$ und nennt $f''$
+        die \notion{zweite Ableitung}. }
+        \lang{en}{If $f'$ is itself a differentiable function,
+        then we call $f$ \notion{twice differentiable}. We write
+        $f''$ instead of $(f')'$ and call $f''$ the \notion{second derivative}.}
+	
+    
+\item \lang{de}{Genau so werden die dritte, vierte, $\ldots$, $n$-te Ableitung von $f$ als Ableitungen
+der zweiten, dritten, $\ldots$, $(n-1)$-ten Ableitung von $f$ definiert, sofern diese existieren und differenzierbar sind. 
+Man sagt dann, dass $f$ \notion{dreimal, viermal,  $\ldots$, $n$-mal differenzierbar} ist. }
+\lang{en}{
+Similarly, the third, fourth, $\ldots$, $n$th derivatives of $f$ are defined
+as the derivatives of the second, third,$\ldots$, $(n-1)$th derivatives of $f$,
+assuming that these exist and are differentiable. In this case,
+we say that $f$ is \notion{three times, four times, $\ldots$, $n$ times differentiable}.
+}
+
+\item 
+\lang{de}{Die Ableitung $f'$ wird auch als \notion{erste Ableitung} von $f$ bezeichnet. Die $n$-te 
+ Ableitungsfunktion von $f$ wird auch mit $f^{(n)}$ bezeichnet, um zu viele Striche zu vermeiden.
+}
+\lang{en}{The derivative $f'$ is also called the \notion{first derivative}
+of $f$. The $n$th derivative of $f$ is also denoted $f^{(n)}$
+in order to avoid an excess of prime symbols.}
+
+\item 
+\lang{de}{Existiert die $n$-te Ableitungsfunktion von $f$ und ist diese stetig, so sagt man, dass $f$ \notion{$n$-mal stetig differenzierbar} ist. 
+}
+\lang{en}{
+If the $n$th derivative of $f$ exists and defines a continuous
+function, then we call $f$ \notion{$n$ times continuously differentiable}.
+}
+\end{itemize}	
+    
+\end{definition}
+
+\lang{de}{Wenn eine Funktion etwa $2$-mal stetig differenzierbar ist, dann ist die Funktion $f''$ stetig. Aber auch $f'$ und $f$  
+sind stetig, da sie differenzierbare Funktionen sind und damit stetig. 
+}
+\lang{en}{
+If a function is twice continuously differentiable, for example,
+then the function $f''$ is continuous. $f'$ and $f$
+are also continuous because they are differentiable.
+}
+
+\begin{example}
+\begin{enumerate}
+\item \lang{de}{Für $f(x)=x^3+2x^2+5$ gelten 
+\[f'(x)=3x^2+4x \quad \text{und} \quad f''(x)= (f')'(x) = 6x+4.
+\]
+Dann sind 
+\[ f^{(3)}(x)=(f'')'(x)=6\quad \text{und}\quad f^{(4)}(x)=(f^{(3)})'(x)=0. \]
+Alle höheren Ableitungen $f^{(n)}(x)$ mit $n>4$ sind dann aber auch konstant $0$.
+}
+\lang{en}{For $f(x)=x^3+2x^2+5$,
+\[f'(x)=3x^2+4x \quad \text{and} \quad f''(x)= (f')'(x) = 6x+4.
+\]
+Then
+\[ f^{(3)}(x)=(f'')'(x)=6\quad \text{and}\quad f^{(4)}(x)=(f^{(3)})'(x)=0. \]
+All higher derivatives $f^{(n)}(x)$, $n>4$ will also be the constant $0$.
+}
+
+
+\item \lang{de}{Für $f(x)=\sin(x)$ ist $f'(x)=\cos(x)$ und  $f''(x)=-\sin(x)=-f(x)$. Damit sind
+\[ f^{(3)}(x)=(f'')'(x)=-f'(x)=-\cos(x) \quad \text{und}\quad f^{(4)}(x)=(f^{(3)})'(x)=-f''(x)=f(x). \]
+Die vierte Ableitung ist also die Funktion selbst und es geht von vorne los, weshalb wir generell für $k>0$ die Beziehung
+\[  f^{(k+4)}=f^{(k)} \]
+erhalten.}
+\lang{en}{
+For $f(x)=\sin(x)$, we have $f'(x)=\cos(x)$ and
+$f''(x)=-\sin(x)=-f(x)$. Therefore,
+\[ f^{(3)}(x)=(f'')'(x)=-f'(x)=-\cos(x) \quad \text{and}\quad f^{(4)}(x)=(f^{(3)})'(x)=-f''(x)=f(x). \]
+The fourth derivative is just $f$ itself and the pattern of derivatives repeats,
+such that for $k>0$ we obtain
+\[  f^{(k+4)}=f^{(k)}. \]
+}
+
+\item 
+\lang{de}{Für $f(x)=e^{2x}$ sind $f'(x)=2e^{2x}$ und $f''(x)=4e^{2x}$. Man sieht hier schon ein Muster für die höheren Ableitungen, nämlich
+\[  f^{(n)}(x)=2^n\cdot e^{2x}. \]
+}
+\lang{en}{
+For $f(x)=e^{2x}$, we have $f'(x)=2e^{2x}$ and $f''(x)= 4e^{2x}$.
+The pattern that the higher derivatives follow is already visible:
+\[  f^{(n)}(x)=2^n\cdot e^{2x}. \]
+}
+\end{enumerate}
+\end{example}
+
+   \begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\randint[Z]{a}{-3}{5}
+		    \function[normalize]{f}{(x-a)/(x+a)}
+            \function[normalize]{df}{(2*a)/(x+a)^2}
+            \derivative[normalize]{ddf}{df}{x}
+            \derivative[normalize]{df3}{ddf}{x}
+		\end{variables}
+
+    \lang{de}{
+		\text{Die höheren Ableitungen der Funktion $f(x)=\var{f}$ sind\\ $f'(x)= $\ansref, \\
+        $f''(x)= $\ansref, \\ $f'''(x)= $\ansref.}
+		}
+    \lang{en}{
+    \text{The higher derivatives of the function $f(x)=\var{f}$ are\\
+        $f'(x)= $\ansref, $f''(x)= $\ansref, \\ $f'''(x)= $\ansref.}
+    }
+  
+		\begin{answer}
+			\solution{df}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\begin{answer}
+			\solution{ddf}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\begin{answer}
+			\solution{df3}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\lang{de}{\explanation{Die nächsthöhere Ableitung ist stets die Ableitung der vorhergehenden
+        Ableitung. Sie können die Ableitung mit Quotientenregel oder Kettenregel berechnen.
+        }}
+    \lang{en}{
+    \explanation{The next higher derivative is always the derivative
+    of the previous function. The derivatives can be calculated with the quotient rule or chain rule.}
+    }
+	\end{quickcheck}
+    
+
+\section{
+\lang{de}{Monotonie und Krümmung}
+\lang{en}{Monotonicity and convexity}
+}
+
+\lang{de}{Nun interessieren wir uns daf\"{u}r, in welchen Bereichen eine Funktion $f$ w\"{a}chst oder f\"{a}llt. Dies ist z.\,B. 
+interessant, wenn man nach Minimal- und Maximalstellen sucht. Im nächsten Kapitel werden wir ausführlich behandeln, wie wir solche 
+Stellen finden können. Zur Vorbereitung formulieren wir hier den Zusammenhang 
+zwischen Ableitung und Monotonie bzw. Krümmung des Funktionsgraphen.
+}
+\lang{en}{
+We will now consider the regions in which a function
+is increasing or decreasing. This is useful when
+looking for maxima and minima, among other things.
+We will describe how to find these points in more detail
+in the next chapter. Here we will formulate the connection
+between the derivative and monotonicity or convexity
+of a function's graph.
+}
+
+\lang{de}{Indem wir uns vorstellen, dass wir von links nach rechts entlang des Funktionsgraphen Fahrrad fahren, können wir die Krümmung des Funktionsgraphen dadurch 
+beschreiben, in welche Richtung wir lenken müssen (links oder rechts). 
+}
+\lang{en}{
+If we imagine riding a bicycle from left to right along
+the graph of the function, then the convexity of the graph
+determines the direction that we have to turn
+(left or right).
+}
+
+\begin{theorem}
+\lang{de}{Ist $f$ eine auf einem Intervall $I$ differenzierbare Funktion, so gelten:
+}
+\lang{en}{
+For a differentiable function $f$ on an interval $I$, the following hold:
+}
+\begin{itemize}
+\item 
+\lang{de}{$f'(x) \geq 0$ für alle $x \in I \quad \Leftrightarrow \quad f$ ist monoton wachsend.
+}
+\lang{en}{$f'(x) \geq 0$ for all $x \in I \quad \Leftrightarrow \quad f$ is monotonically increasing}
+\item 
+\lang{de}{$f'(x) \leq 0$ für alle $x \in I \quad \Leftrightarrow \quad f$ ist monoton fallend.}
+\lang{en}{$f'(x) \leq 0$ for all $x \in I \quad \Leftrightarrow \quad f$ is monotonically decreasing.}
+\item 
+\lang{de}{$f'(x) \textcolor{#CC6600}{>} 0$ für alle $x \in I \quad \textcolor{#CC6600}{\Rightarrow} \quad f$ ist \textcolor{#CC6600}{streng} monoton wachsend.}
+\lang{en}{$f'(x) \textcolor{#CC6600}{>} 0$ for all $x \in I \quad \textcolor{#CC6600}{\Rightarrow} \quad f$ is \textcolor{#CC6600}{strictly} monotonically increasing.}
+\item 
+\lang{de}{$f'(x) \textcolor{#CC6600}{<} 0$ für alle $x \in I \quad \textcolor{#CC6600}{\Rightarrow} \quad f$ ist \textcolor{#CC6600}{streng} monoton fallend.}
+\lang{en}{$f'(x) \textcolor{#CC6600}{<} 0$ for all $x \in I \quad \textcolor{#CC6600}{\Rightarrow} \quad f$ is \textcolor{#CC6600}{strictly} monotonically decreasing.}
+\end{itemize}
+\lang{de}{Ist $f$ zweimal auf $I$ differenzierbar, dann gelten außerdem:}
+\lang{en}{If in addition $f$ is twice differentiable on $I$, then:}
+\begin{itemize}
+\item 
+\lang{de}{$f''(x) \geq 0$ für alle $x \in I \quad \Leftrightarrow \quad f$ ist konvex (linksgekrümmt).}
+\lang{en}{$f''(x) \geq 0$ for all $x \in I \quad \Leftrightarrow \quad f$ is convex (convex down; concave up).}
+\item 
+\lang{de}{$f''(x) \leq 0$ für alle $x \in I \quad \Leftrightarrow \quad f$ ist konkav (rechtsgekrümmt).}
+\lang{en}{$f''(x) \leq 0$ for all $x \in I \quad \Leftrightarrow \quad f$ is concave (convex up; concave down).}
+\end{itemize}
+\end{theorem}
+\lang{de}{Die rot markierten Implikationspfeile zeigen an, dass die Folgerung nur in eine Richtung gültig ist. 
+Eine streng monoton wachsende Funktion kann durchaus Punkte haben, an denen $f'(x) =0$ gilt. Dies gilt z.\,B.
+für $f(x) = x^3$ an der Stelle $0$.}
+\lang{en}{
+The arrows in red indicate that the implication is only true
+in one direction. A strictly monotonically increasing function
+can have points at which $f'(x) = 0$. For example, this
+is the case for $f(x) = x^3$ at $x=0$.
+}
+\begin{proof*}
+\lang{de}{Der Beweis der Monotonieaussagen beruht auf dem Mittelwertsatz und findet sich im 
+\ref[content_03_hoehere_ableitungen][Hauptkurs]{thm:diffmonotonie}. Die Aussagen zur Krümmung folgen 
+aus den Aussagen zur Monotonie, indem man $f$ durch $f'$ ersetzt. 
+}
+\lang{en}{
+The proof for the claims related to monotonicity relies
+on the mean value theorem and can be foun in the 
+\ref[content_03_hoehere_ableitungen][main course]{thm:diffmonotonie}.
+The claims involving convexity follow from those involving
+monotonicity after replacing $f$ by $f'$.
+}
+\end{proof*}
+
+\begin{example}
+	\begin{center}
+    \image{T603_ParabolaTangents}
+    \end{center}
+	\lang{de}{Die Funktion $f(x)=x^2$ ist monoton fallend auf $(-\infty;0]$ und monoton steigend auf $[0;\infty)$. 
+    An jeder Stelle $x_0 \leq 0$ hat also die Tangente eine Steigung $f'(x_0)\leq 0$, und an jeder Stelle $x_1 \geq 0$ ist die Steigung
+    $f'(x_1) \geq 0$.}
+  \lang{en}{
+    The function $f(x)=x^2$ is monotonically decreasing
+    on $(-\infty, 0]$ and monotonically increasing
+    on $[0, \infty)$. Therefore, the tangent at any point
+    $x_0 \le 0$ has slope $f'(x_0) \le 0$, and at any point
+    $x_1 \ge 0$ its slope is $f'(x_1) \ge 0$.
+  }
+    
+\lang{de}{Im Bild sind zwei Stellen $x_0$ und $x_1$ eingezeichnet. 
+    Da die Tangente in $x_0 <0$ sogar eine negative Steigung hat, ist $f'(x) <0$ f\"{u}r $x\in (-\infty;0)$, 
+	und damit ist $f$ auf $(-\infty;0)$ streng monoton fallend. Analog gilt $f'(x)>0$ auf $(0;\infty)$ und $f$ ist dort streng monoton steigend.
+    }
+  \lang{en}{
+    Two such points $x_0$ and $x_1$ are displayed
+    in the above image. Since the tangent at $x_0$ has
+    a strictly negative slope, we have $f'(x) < 0$ for
+    $x \in (-\infty, 0)$ and therefore $f$ is strictly
+    monotonically decreasing there. Similarly,
+    $f'(x) > 0$ on $(0, \infty)$, so $f$ is strictly
+    monotonically increasing there.
+  }
+    \lang{de}{Der Graph der Funktion ist linksgekrümmt bzw. konvex, daher ist $f''(x) \geq 0$ für alle $x \in \R$. Und tatsächlich gilt ja $f''(x)=2 >0$. 
+    }
+    \lang{en}{
+    The graph of the function is convex, so $f''(x) \ge 0$
+    for all $x \in \R$. Indeed, $f''(x) = 2 > 0$.
+    }
+\end{example}
+
+\begin{remark}
+\lang{de}{Das Krümmungsverhalten allein erlaubt keinen Rückschluss darauf, ob eine Funktion wächst oder fällt.
+}
+\lang{en}{
+Convexity or concavity of a function by itself is
+not enough to draw any conclusions as to whether it
+is increasing or decreasing.
+}
+
+\lang{de}{Eine linksgekrümmte, monoton wachsende Funktion wird immer schneller wachsen. Man bezeichnet solche Funktionen auch als \emph{progressiv wachsend}.}
+\lang{en}{
+A convex, monotonically increasing function will increase
+more and more steeply. These functions undergo \emph{accelerating growth}.
+}
+
+\lang{de}{Eine rechtsgekrümmte, monoton wachsende Funktion wird hingegen immer langsamer wachsen und flacher verlaufen. Man bezeichnet solche Funktionen auch als \emph{degressiv wachsend}.
+}
+\lang{en}{
+A concave, monotonically increasing function will increase
+more and more slowly and its graph will become flatter.
+These functions undergo \emph{decelerating growth}.
+}
+
+\lang{de}{Analog bezeichnet man linksgekrümmte, monoton fallende Funktionen als \emph{degressiv fallend} und rechtsgekrümmte, monoton fallende Funktionen als 
+\emph{progressiv fallend}.}
+\end{remark}
+
+
+\section{
+\lang{de}{Elastizität, Taylor-Entwicklung und Regeln von L'Hospital}
+\lang{en}{Elasticity, Taylor expansions and L'Hôpital's rule}
+}
+\lang{de}{
+In diesem Abschnitt befassen wir uns mit Aussagen, die eine gewisse Näherug an gesuchte 
+Werte oder sogar ganze Funktionen erlauben. 
+}
+\lang{en}{
+In this section, we will introduce results that allow
+certain values or even entire functions to be approximated.
+}
+
+\lang{de}{Wenn wir eine Funktion $f$ haben und die \emph{relative} Änderung des Funktionswerts suchen, ist dies einfach der Bruch
+}
+\lang{en}{
+If we have a function $f$ and we want to find the
+\emph{relative} change of its values then this is
+simply the quotient
+}
+
+\[
+{\frac{f(x+h)-f(x)}{f(x)}}.
+\]
+
+\lang{de}{Im Zähler steht die Änderung des Funktionswerts und im Nenner der Funktionswert als Referenzwert. 
+Die relative Änderung des Funktionswerts pro relativer Änderung der Eingangsgröße (die Variable $x$) ist dann 
+}
+\lang{en}{
+The change in value of the function appears in the
+numerator and the value of the function itself appears
+in the denominator. The relative change in value
+with respect to the relative change in the input
+(the variable $x$) is then
+}
+\[
+\frac{\frac{f(x+h)-f(x)}{f(x)}}{\frac{h}{x}} = \frac{x}{f(x)} \cdot \frac{f(x+h) - f(x)}{h} \underset{ {h \to 0}}{\longrightarrow} \frac{xf'(x)}{f(x)},
+\]
+\lang{de}{vorausgesetzt, die Funktion $f$ ist differenzierbar und $f(x) \neq 0$. Dies führt zur folgenden Definition. 
+}
+\lang{en}{
+assuming the function $f$ is differentiable and $f(x) \ne 0$.
+This leads to the following definition.
+}
+
+\begin{definition}
+\lang{de}{Ist $f: I \rightarrow \R$ eine differenzierbare Funktion, dann definieren wir für alle $x \in I$ mit $f(x) \neq 0$ den Wert
+\[
+\epsilon_{f}(x) = \frac{x f'(x)}{f(x)}
+\]
+und bezeichnen ihn als die \notion{Elastizität} von $f$ an der Stelle $x$. 
+}
+\lang{en}{
+Let $f : I \rightarrow \R$ be a differentiable function. For any $x \in I$
+with $f(x) \ne 0$, we define
+\[
+\epsilon_{f}(x) = \frac{x f'(x)}{f(x)}
+\]
+and call it the \notion{elasticity} of $f$ at the point $x$.
+}
+
+\lang{de}{Gilt $|\epsilon_f(x)| < 1$, so sagen wir, dass $f$ an $x$ \notion{unelastisch} ist. 
+}
+\lang{en}{
+If $|\epsilon_f(x)| < 1$, then we call $f$ \notion{inelastic} in $x$.
+}
+\lang{de}{
+Im Fall $|\epsilon_f(x)| > 1$ nennen wir $f$ \notion{elastisch} an $x$. 
+}
+\lang{en}{
+If $|\epsilon_f(x)| < 1$, then we call $f$ \notion{elastic} in $x$.
+}
+\end{definition}
+
+\lang{de}{
+Für den Fall $|\epsilon_f(x)|=1$ existieren verschiedene Bezeichnungen, z.\,B. \emph{einheitselastisch}, \emph{proportional} oder \emph{fließend}.
+}
+\lang{en}{
+When $|\epsilon_f(x)|=1$, $f$ is called \notion{unitary elastic} or \notion{unit elastic} in $x$.
+}
+
+\begin{rule}[\lang{de}{Wichtige Faustregel} \lang{en}{Important rule of thumb}]
+\lang{de}{Die Elastizität $\epsilon_f(x)$ gibt ungefähr die Änderung des Wertes $f(x)$ in Prozent an, wenn sich die Eingangsgröße $x$ um 1\% erhöht. 
+
+Bei elastischen Funktionen ist die relative Änderung der Funktionswerte 
+größer als die relative Änderung der Eingangswerte. Bei elastischen Funktionen 
+können kleine Ursachen
+große Wirkung haben.}
+
+\lang{en}{
+The elasticity $\varepsilon_f(x)$ roughly describes the percent change of $f(x)$
+when the input variable $x$ is increased by 1\%.
+
+For elastic functions, the relative change in the value of $f$ is greater than the
+relative change of $x$. Small changes in the input of an elastic function can have a large impact.
+}
+\end{rule}
+
+\begin{example}
+\begin{tabs*}[\initialtab{0}]
+\tab{$x^{n}$}
+\lang{de}{Für die Funktion $f$ mit $f(x) = x^{-2}$ können wir die Elastizität für $x \neq 0$ berechnen und erhalten 
+\[
+\epsilon_f(x) = \frac{x \cdot (-2) \cdot  x^{-2-1}}{x^{-2}} = \frac{-2 \not{x^{-2}}}{\not{x^{-2}}} = -2.
+\]
+Wenn sich $x$ um 1\% erhöht, wird der Wert von $f(x)$ ungefähr um 2\% fallen.}
+\lang{en}{
+Let $f$ be the function $f(x) = x^{-2}$. For $x \ne 0$, we can compute the
+elasticity and we find
+\[
+\epsilon_f(x) = \frac{x \cdot (-2) \cdot  x^{-2-1}}{x^{-2}} = \frac{-2 \not{x^{-2}}}{\not{x^{-2}}} = -2.
+\]
+When $x$ increases by 1\%, the value of $f(x)$ falls by approximately 2\%.
+}
+
+\lang{de}{Wir betrachten nun allgemeiner die Funktion $f$ mit $f(x) = x^n$. Dann ist 
+\[
+\epsilon_f(x) = \frac{x \cdot n \cdot  x^{n-1}}{x^n} = \frac{n \not{x^{n}}}{\not{x^{n}}} = n.
+\]
+Die Potenzfunktionen $x^n$ haben also konstante Elastizitäten.}
+\lang{en}{
+More generally, consider the function $f$ with $f(x) = x^n$. Then
+\[
+\epsilon_f(x) = \frac{x \cdot n \cdot  x^{n-1}}{x^n} = \frac{n \not{x^{n}}}{\not{x^{n}}} = n.
+\]
+So the power functions $x^n$ have constant elasticity.
+}
+
+%\tab{$e^{ax}$}
+%Für die Funktion $f$ mit $f(X) = e^{ax}$ berechnet sich die Elastizität in einem Punkt durch 
+%\[
+%\epsilon_f(x) = \frac{x \cdot a \cdot  e^{ax}}{e^{ax}} = ax.
+%\]
+
+\tab{\lang{de}{Elastische Nachfrage} \lang{en}{Elastic demand}}
+\lang{de}{Gegeben ist die Preis-Absatz-Funktion $x(p) = 60-3p$, die für $p \in [0; 20]$ definiert ist. Wir berechnen 
+für diese Funktion die Elastizität an einer Stelle $p$:
+\[
+\epsilon_x(p) = \frac{p \cdot x'(p)}{x(p)} =  \frac{-3p}{60-3p} = -\frac{p}{20-p}.
+\]}
+\lang{en}{
+Suppose we are given the price-demand function $x(p)=60-3p$, defined for $p \in [0,20]$.
+We will compute the elasticity of this function at the point $p$:
+\[
+\epsilon_x(p) = \frac{p \cdot x'(p)}{x(p)} =  \frac{-3p}{60-3p} = -\frac{p}{20-p}.
+\]
+}
+
+\lang{de}{Wir sind nun daran interessiert, wann $x(p)$ elastisch ist und wann nicht. Dazu bestimmen wir die Werte für $p$, für die 
+$\epsilon_x(p) = 1$ oder $\epsilon_x(p) = -1$ gilt. An diesen Stellen kann die 
+Funktion $x(p)$ von unelastisch zu elastisch oder umgekehrt wechseln. }
+\lang{en}{
+We would like to know when $x(p)$ is elastic and when it is not.
+Therefore, we will determine the values of $p$ for which $\epsilon_x(p) = 1$
+or $\epsilon_x(p) = -1.$ At these points, the function $x(p)$ may change
+from inelastic to elastic or vice versa.
+}
+
+\lang{de}{Im Fall $\epsilon_x(p) = 1$ müsste
+\[
+-p =  20 -p  \quad \Leftrightarrow \quad 0 = 20
+\]
+gelten, was ein Widerspruch ist. Folglich gibt es hier auch keine Lösung für $p$. }
+\lang{en}{
+For $\epsilon_x(p) = 1$, we would need
+\[
+-p =  20 -p  \quad \Leftrightarrow \quad 0 = 20,
+\]
+which is impossible. Therefore, there is no solution for $p$.
+}
+
+\lang{de}{Im Fall $\epsilon_x(p) = -1$ erhalten wir die Gleichung
+\[
+-p =  -1 \cdot (20 -p) \quad \Leftrightarrow \quad -p = -20 + p \quad \Leftrightarrow \quad -2p = -20,
+\]
+was die eindeutige Lösung $p = 10$ besitzt. }
+\lang{en}{
+In the case $\epsilon_x(p) = -1$, we get the equation
+\[
+-p =  -1 \cdot (20 -p) \quad \Leftrightarrow \quad -p = -20 + p \quad \Leftrightarrow \quad -2p = -20,
+\]
+which has the unique solution $p = 10$.
+}
+
+\lang{de}{Wir betrachten nun noch einmal die Elastizitätsfunktion, die wir oben ausgerechnet haben:
+\[
+\epsilon_x(p) = -\frac{p}{20-p}.
+\]
+Wenn $p< 10$ ist, dann ist der Zähler oben kleiner als der Nenner (der immer noch eine
+zweistellige Zahl sein wird). Es gilt also $|\epsilon_x(p)| < 1$ und die Funktion $x$ ist an $p$ 
+unelastisch.}
+\lang{en}{
+Now consider again the elasticity function that we computed earlier:
+\[
+\epsilon_x(p) = -\frac{p}{20-p}.
+\]
+If $p < 10$, the numerator above is smaller than the denominator (which will be a double-digit number),
+so $|\epsilon_x(p)| < 1$ and the function $x$ is inelastic in $p$.
+}
+
+\lang{de}{Wenn $p >10$ ist, dann verhält es sich genau umgekehrt und es gilt $|\epsilon_x(p)| > 1$, 
+die Funktion $x$ ist also an $p$  elastisch. }
+\lang{en}{
+If $p > 10$, then the opposite is true and $|\epsilon_x(p)| >1$, so the function $x$
+is elastic in $p$.
+}
+%\tab{Amoroso-Robinson}
+
+\end{tabs*}
+
+
+\end{example}
+
+\lang{de}{Komplizierte Funktionen können häufig auch gut durch Polynom-Funktionen angenähert werden, zumindest in der Nähe einer gewählten 
+Stelle $x_0$. Ein Sonderfall hiervon ist die 
+\emph{Linearisierung}, die eine Funktion durch eine Geradengleichung approximiert.
+}
+\lang{en}{
+Complicated functions can often be described well by polynomials, at least in a
+neighborhood of a chosen point $x_0$. A special case of this is \emph{linearization},
+in which a function is approximated by the equation of a line.
+}
+
+\begin{definition}[\lang{de}{Linearisierung und Taylor-Polynom}
+\lang{en}{Linearization and Taylor polynomials}]
+\lang{de}{Es sei $f: I \rightarrow \R$ eine $n$-mal differenzierbare Funktion ($n \in \N$) und es sei $x_0 \in I$ eine reelle Zahl.
+}
+\lang{en}{
+Let $f : I \rightarrow \R$ be an $n$-times differentiable function ($n \in \N$)
+and let $x_0 \in I$ be a real number.
+}
+\begin{itemize}
+\item \lang{de}{Das Polynom
+  \[ T_n(x)\coloneq\sum_{k=0}^{n} \frac{f^{(k)}(x_0)}{k!}(x-x_0)^k \] 
+heißt \notion{Taylor-Polynom $n$-ter Ordnung} von $f$ zur \notion{Entwicklungsstelle} $x_0\in I$.
+  }
+  \lang{en}{The polynomial
+  \[ T_n(x)\coloneq\sum_{k=0}^{n} \frac{f^{(k)}(x_0)}{k!}(x-x_0)^k \] 
+  is called the \notion{Taylor polynomial of order $n$} of $f$ about the \notion{base point} $x_0 \in I$.
+  }
+  
+  \lang{de}{Dabei bezeichnet $f^{(k)}(x_0)$ die $k$-te Ableitung von $f$ an der Entwicklungsstelle $x_0$ für $0 \leq k \leq n$.}
+  \lang{en}{Here, $f^{(k)}(x_0)$ stands for the $k$-th derivative of $f$ in the base point $x_0$ for $0 \le k \le n$.}
+\item \lang{de}{Die Geradengleichung $g(x) = f(x_0) + f'(x_0) \cdot (x- x_0)$, die identisch mit dem Taylor-Polynom $T_1(x)$ ist, 
+wird auch als \notion{Linearisierung} von $f$ an $x_0$ bezeichnet. Sie ist die Tangente an den Funktionsgraphen an der 
+Stelle $x_0$.}
+\lang{en}{
+The equation of the line $g(x) = f(x_0) + f'(x_0) \cdot (x - x_0)$, which coincides with
+the Taylor polynomial $T_1(x)$, is also known as the \notion{linearization} of $f$ in $x_0$.
+This is the tangent to the graph of the function at $x_0$.
+}
+\end{itemize}
+\end{definition}
+\lang{de}{Wenn für $n$ immer größere natürliche Zahlen gewählt werden, erhält man schließlich eine \emph{Taylor-Reihe}, die in vielen Fällen 
+(aber nicht bei jeder Funktion) gegen die ursprüngliche Funktion konvergiert. }
+\lang{en}{
+Choosing arbitrarily large natural numbers for $n$ leads to a \emph{Taylor series},
+which in many (but not all) cases converges to the original function.
+}
+
+\begin{example}\label{ex:taylorpoly-exp}\label{ex:taylorpoly-geom-reihe}\label{ex:taylorpoly-ln}
+\begin{tabs*}[\initialtab{0}]
+\tab{
+\lang{de}{Polynom}
+\lang{en}{Polynomials}
+}
+
+\lang{de}{Wir bestimmen die Linearisierung der Funktion $f:\R\to\R$, $f(x)=x^2$ zu den zwei Entwicklungsstellen $x_0=0$ und $x_0=1$. Wir bezeichnen dieses
+als $T_{0,1}$ und $T_{1,1}$. }
+\lang{en}{
+We will determine the linearizations of the function $f:\R\to\R$, $f(x)=x^2$
+at the two base points $x_0 = 0$ and $x_0 = 1$. These will be labeled $T_{0,1}$
+and $T_{1,1}$.
+}
+
+\lang{de}{Für $x_0=0$ finden wir
+\[T_{0,1}(x)=f(0)+f'(0)\cdot(x-0)=0+0\cdot x=0,\]
+also die Nullfunktion.}
+\lang{en}{
+At $x_0=0$, we find
+\[T_{0,1}(x)=f(0)+f'(0)\cdot(x-0)=0+0\cdot x=0,\]
+i.e. the zero function.
+}
+\lang{de}{Für $x_0=1$ erhalten wir
+\[T_{1,1}(x)=f(1)+f'(1)\cdot(x-1)=1+2\cdot (x-1)\neq T_{0,1}(x).\]}
+\lang{en}{
+At $x_0=1$, we find
+\[T_{1,1}(x)=f(1)+f'(1)\cdot(x-1)=1+2\cdot (x-1)\neq T_{0,1}(x).\]
+}
+\tab{\lang{de}{Natürliche Exponentialfunktion}
+\lang{en}{The exponential function}}%\label{ex:taylorpoly-exp}
+\lang{de}{Wir betrachten die Exponentialfunktion $f:\R\to\R$, $f(x)=e^x$ an der Entwicklungsstelle $x_0=0$.
+Da $f' =f$ beim Ableiten unverändert bleibt und $f(0)=e^0=1$ ist, erhalten wir das 
+Taylor-Polynom $n$-ter Ordnung an der Stelle $x_0=0$ zu
+\[ T_n(x)=\sum_{k=0}^n \frac{1}{k!}x^k .\]}
+\lang{en}{
+We will consider the exponential function $f:\R\to\R$, $f(x)=e^x$
+at the base point $x_0 = 0$. Since $f' = f$ is unchanged by differentiating
+and $f(0)=e^0=1$, the Taylor polynomial of order $n$ about the point $x_0 = 0$ is
+\[ T_n(x)=\sum_{k=0}^n \frac{1}{k!}x^k .\]
+}
+\lang{de}{Für $n \to \infty$ erhält man hier übrigens wieder die Reihendarstellung der Exponentialfunktion.}
+\lang{en}{
+In the limit $n \to \infty$ we obtain the series expansion of the exponential function.
+}
+\tab{
+\lang{de}{Gebrochenrationale Funktion}
+\lang{en}{Rational functions}}%\label{ex:taylorpoly-geom-reihe}
+\lang{de}{Wir betrachten die Funktion $f:\R\setminus\{1\}\to\R$, $f(x)=\frac{1}{1-x}$ an der Stelle $x_0=0$.
+Schreibt man $f(x)$ als $f(x)=(1-x)^{-1}$, erhält man mit der Kettenregel für die ersten Ableitungen
+\begin{eqnarray*}
+ f'(x) &=& (-1)\cdot (-1)\cdot (1-x)^{-2}=(1-x)^{-2}, \\
+f''(x) &=&  (-1)\cdot (-2)\cdot (1-x)^{-3}=2 (1-x)^{-3} ,\\
+f'''(x) &=& 2\cdot (-1)\cdot (-3)\cdot (1-x)^{-4}=3!\cdot  (1-x)^{-4} ,
+\end{eqnarray*}
+und induktiv dann allgemein
+\[  f^{(k)}(x)= k! (1-x)^{-k-1}=\frac{k!}{(1-x)^{k+1}} .\]
+Somit ist $f^{(k)}(0)=\frac{k!}{(1-0)^{k+1}}=k!$ und das Taylor-Polynom $n$-ter Ordnung zum Entwicklungspunkt $x_0=0$ ist
+\[ T_n(x)=\sum_{k=0}^n \frac{k!}{k!}x^k=\sum_{k=0}^n x^k .\]
+Für $n \to \infty$ erhält man hier übrigens die geometrische Reihe. }
+\lang{en}{
+Consider the function $f:\R\setminus\{1\}\to\R$, $f(x)=\frac{1}{1-x}$ and the base point $x_0=0$.
+Writing $f(x)=(1-x)^{-1}$ and using the chain rule yields the first few derivatives,
+\begin{eqnarray*}
+ f'(x) &=& (-1)\cdot (-1)\cdot (1-x)^{-2}=(1-x)^{-2}, \\
+f''(x) &=&  (-1)\cdot (-2)\cdot (1-x)^{-3}=2 (1-x)^{-3} ,\\
+f'''(x) &=& 2\cdot (-1)\cdot (-3)\cdot (1-x)^{-4}=3!\cdot  (1-x)^{-4} ,
+\end{eqnarray*}
+and inductively, the derivative of general order,
+\[  f^{(k)}(x)= k! (1-x)^{-k-1}=\frac{k!}{(1-x)^{k+1}} .\]
+Therefore, $f^{(k)}(0)=\frac{k!}{(1-0)^{k+1}}=k!$, and the Taylor polynomial
+of order $n$ at the base point $x_0 = 0$ is
+\[ T_n(x)=\sum_{k=0}^n \frac{k!}{k!}x^k=\sum_{k=0}^n x^k .\]
+In the limit $n \to \infty$ we obtain the geometric series.
+}
+\end{tabs*}
+\end{example}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\function{b}{6}
+		    \function{f}{1/(x-5)}
+            \function{df1}{-1/(x-5)^2}
+            \function[normalize]{df2}{2/(x-5)^3}
+            \function{fb}{1}
+            \function{df1b}{-1}
+            \function{df2b}{2}
+            \function{p0}{1}
+            \function{p1}{1+(x-1)}
+            \function{p2}{1+(x-1)+(x-1)^2}
+		\end{variables}
+		\lang{de}{
+		\text{Bestimmen Sie die Taylor-Polynome nullter, erster und zweiter Ordnung der Funktion $f(x)=\var{f}$ um die Stelle $x_0=\var{b}$.\\ 
+        Die Ableitungen der Funktion $f(x)=\var{f}$ sind\\ $f'(x)= $\ansref und $\quad f''(x)= $\ansref. \\
+        Daraus ergeben sich die Werte $f(\var{b})=$\ansref, $f'(\var{b})=$\ansref und $\quad f''(\var{b})=$\ansref.\\
+        Die Taylor-Polynome sind daher\\
+        $T_0(x)=$ \ansref,\\                
+        $T_1(x)=$ \ansref,\\                
+        $T_2(x)=$ \ansref.                  
+        }}
+    \lang{en}{
+    \text{Determine the Taylor polynomials of order $0$, $1$ and $2$
+        for the function $f(x)=\var{f}$ at the base point $x_0=\var{b}$.\\
+        The derivatives of the function $f(x)=\var{f}$ are\\ $f'(x)= $\ansref and $\quad f''(x)= $\ansref. \\
+        This leads to the values $f(\var{b})=$\ansref, $f'(\var{b})=$\ansref and $\quad f''(\var{b})=$\ansref.\\
+        The Taylor polynomials are therefore\\
+        $T_0(x)=$ \ansref,\\                
+        $T_1(x)=$ \ansref,\\                
+        $T_2(x)=$ \ansref.   
+        }
+    }
+		
+		\begin{answer}
+			\solution{df1}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\begin{answer}
+			\solution{df2}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\begin{answer}
+			\solution{fb}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\begin{answer}
+			\solution{df1b}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+        \begin{answer}
+			\solution{df2b}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\begin{answer}
+			\solution{p0}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\begin{answer}
+			\solution{p1}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\begin{answer}
+			\solution{p2}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+    \lang{de}{
+		\explanation{Benutzen Sie  die Formel für die Taylor-Polynome.\\
+               }}
+    \lang{en}{
+    \explanation{Use the formula for Taylor polynomials.\\ }
+    }
+\end{quickcheck}
+
+\lang{de}{Zum Abschluss behandeln wir die \emph{Regeln von de L'Hospital}, mit deren Hilfe Grenzwerte von Brüchen  
+ $\lim_{x\to x_0}\;\frac{f(x)}{g(x)}$ berechnet werden, bei denen Zähler und Nenner beide gegen $0$ konvergieren oder beide 
+ unbeschränkt wachsen (\glqq gegen $\infty$ gehen\grqq ). Ausdrücke wie $\;$ \glqq $\frac{0}{0}$\grqq{} $\,$ oder $\,$ \glqq $\frac{\infty}{\infty}$\grqq{}
+ $\,$ sind nicht definiert, daher werden wir versuchen diese umzuformen. }
+\lang{en}{
+Finally, we will discuss \emph{L'Hôpital's rule}, which is used to calculate
+limits of quotients of the form $\lim_{x\to x_0}\;\frac{f(x)}{g(x)}$ in which the
+numerator and denominator both tend to $0$ or both grow unboundedly
+(or "tend to $\infty$"). Expressions such as $\;$ "$\frac{0}{0}$" $\,$ or $\,$  "$\frac{\infty}{\infty}$"
+ $\,$ are undefined so we will try to rearrange them.
+}
+ 
+\begin{theorem}[
+\lang{de}{Regeln von de L'Hospital}
+\lang{en}{L'Hôpital's rule}]\label{thm:lhospital}
+\lang{de}{Es seien $f$ und $g$ zwei Funktionen, die auf einem offenen Intervall $I = (a;b)$ differenzierbar sind, und es gelte $g'(x) \neq 0$ für alle $x \in I$.
+Weiter sei $x_0 \in I$ oder $x_0 = a$ oder $x_0 = b$. }
+\lang{en}{
+Let $f$ and $g$ be two functions that are differentiable on an open interval
+$I = (a, b)$, and suppose $g'(x)\ne 0$ for all $x \in I$.
+Let $x_0 \in I$ or $x_0 = a$ or $x_0 = b$.
+}
+
+\lang{de}{Außerdem sei \notion{eine} der folgenden beiden Bedingungen erfüllt:
+\begin{itemize}
+\item $ \lim_{x \to x_0} \, f(x) =  \lim_{x \to x_0} \, g(x) = 0,$
+\item $  \lim_{x \to x_0} \, f(x) = \pm \infty \ \  \text{sowie} \ \lim_{x \to x_0} \, g(x) = \pm \infty.$
+\end{itemize}
+}
+\lang{en}{
+In addition, suppose that \notion{one} of the conditions below is satisfied:
+\begin{itemize}
+\item $ \lim_{x \to x_0} \, f(x) =  \lim_{x \to x_0} \, g(x) = 0,$
+\item $  \lim_{x \to x_0} \, f(x) = \pm \infty \ \  \text{and} \ \lim_{x \to x_0} \, g(x) = \pm \infty.$
+\end{itemize}
+}
+\lang{de}{
+Unter diesen Voraussetzungen gilt dann 
+\[
+\lim_{x \to x_0} \, \frac{f'(x)}{g'(x)} \in \R \quad \Longrightarrow \quad \lim_{x \to x_0} \,  \frac{f(x)}{g(x)} =  \lim_{x \to x_0} \, \frac{f'(x)}{g'(x)}
+\]
+oder anders ausgedrückt: Wenn der Grenzwert für $\frac{f'(x)}{g'(x)}$ existiert, dann existiert er auch für $\frac{f(x)}{g(x)}$ und beide Grenzwerte stimmen
+überein.}
+\lang{en}{
+Under these assumptions,
+\[
+\lim_{x \to x_0} \, \frac{f'(x)}{g'(x)} \in \R \quad \Longrightarrow \quad \lim_{x \to x_0} \,  \frac{f(x)}{g(x)} =  \lim_{x \to x_0} \, \frac{f'(x)}{g'(x)}.
+\]
+In other words: if the limit of $\frac{f'(x)}{g'(x)}$ exists, then the limit
+of $\frac{f(x)}{g(x)}$ also exists and the two limits coincide.
+}
+\end{theorem}
+
+\lang{de}{Es ist erlaubt, $a = -\infty$ und/oder $b = \infty$ zu wählen. }
+\lang{en}{
+It is possible to choose $a = -\infty$ and/or $b = \infty$.
+}
+\begin{proof*}
+\lang{de}{Eine ausführliche Besprechung der Regeln von de L'Hospital findet sich im \ref[content_06_de_l_hospital][gleichnamigen Kapitel]{} des Hauptkurses. 
+Der Beweis benutzt eine Variante des Mittelwertsatzes. Es ist auch möglich, die Regeln aus der 
+Taylor-Entwicklung herzuleiten.}
+\lang{en}{
+A detailed discussion of L'Hôpital's rule can be found in the main HM4Mint course
+\ref[content_06_de_l_hospital][in the chapter of the same name]{}.
+The proof uses a variant of the mean value theorem. It is also possible
+to prove L'Hôpital's rule using Taylor expansions.
+}
+\end{proof*}
+\lang{de}{Ergibt $\lim_{x\to x_0}\;\frac{f'(x)}{g'(x)}$ wieder einen Ausdruck wie $\;$ \glqq$0/0$\grqq\ $\,$ oder $\,$ \glqq$\infty/\infty$\grqq\ $\,$,
+so kann man oft die Regel von de L'Hospital erneut (oder sogar mehrfach) anwenden und erhält eventuell einen Grenzwert
+$\lim_{x\to x_0}\;\frac{f''(x)}{g''(x)}$. Jeder Schritt erhält dann erst nachträglich seine Legitimation, wenn im letzten Schritt die Existenz des Grenzwerts gezeigt wurde.
+Dabei ist es wichtig, in jedem Schritt die Voraussetzungen neu zu prüfen. Einem solchen Fall begegnen wir auch in den folgenden Beispielen. 
+}
+\lang{en}{
+If $\lim_{x\to x_0}\;\frac{f'(x)}{g'(x)}$ also leads to an expression
+such as  $\;$ "$0/0$" $\,$ or $\,$ "$\infty/\infty$" $\,$
+then it is often possible to apply L'Hôpital's rule again (even multiple times)
+to potentially obtain the limit $\lim_{x\to x_0}\;\frac{f''(x)}{g''(x)}$.
+These steps are only justified if the existence of the limit can be shown in the last step.
+It is important to check that the conditions are satisfied in each step.
+We will see a case like this in the examples below.
+}
+
+\begin{example}
+\begin{tabs*}[\initialtab{0}]
+\tab{
+\lang{de}{\glqq $\frac{0}{0}$ \grqq{}}
+\lang{en}{"$\frac{0}{0}$"}
+}
+\lang{de}{Um den Grenzwert $\lim_{x\to 0} \;\frac{\tan(x)}{x} $ zu berechnen, bemerken wir zum einen
+ $\lim_{x\to 0} \tan(x)=0=\lim_{x\to 0} x$ und zum anderen, dass $f(x)=\tan(x)$ und $g(x)=x$ differenzierbar sind
+ mit $f'(x)=1+\tan(x)^2$ und $g'(x)=1\neq 0$. Also können wir die Regel von de L'Hospital anwenden und erhalten
+\[ \lim_{x\to 0} \;\frac{\tan(x)}{x} =\lim_{x\to 0} \frac{1+\tan(x)^2}{1} =1. \]}
+\lang{en}{
+To compute the limit $\lim_{x\to 0} \;\frac{\tan(x)}{x} $, we first observe
+that $\lim_{x\to 0} \tan(x)=0=\lim_{x\to 0} x$ and that
+$f(x)=\tan(x)$ and $g(x)=x$ are both differentiable
+ with $f'(x)=1+\tan(x)^2$ and $g'(x)=1\neq 0$.
+ Therefore, L'Hôpital's rule applies, and we find
+ \[ \lim_{x\to 0} \;\frac{\tan(x)}{x} =\lim_{x\to 0} \frac{1+\tan(x)^2}{1} =1. \]
+}
+
+
+\tab{
+\lang{de}{\glqq $\frac{\infty}{\infty}$\grqq{}}
+\lang{en}{"$\frac{\infty}{\infty}$"}
+}
+\lang{de}{Berechnung von $\lim_{x\to \infty} \;\frac{\ln(x)}{x}$:\\
+}
+\lang{en}{
+Computing $\lim_{x\to \infty} \;\frac{\ln(x)}{x}$:\\
+}
+
+\lang{de}{In diesem Fall gelten $\lim_{x\to \infty} \ln(x)=\infty$ und $\lim_{x\to \infty} x=\infty$ 
+sowie $(\ln(x))'=\frac{1}{x}$. Der Nenner $x$ hat eine konstante Ableitung. Also können wir die
+Regel von de L'Hospital anwenden und erhalten
+  \[ \lim_{x\to \infty} \;\frac{\ln(x)}{x} =\lim_{x\to \infty} \;\frac{\frac{1}{x}}{1} =0.\]
+}
+\lang{en}{
+In this case, $\lim_{x\to \infty} \ln(x)=\infty$ and $\lim_{x\to \infty} x=\infty$.
+We have $(\ln(x))'=\frac{1}{x}$, and the denominator $x$ has a constant derivative.
+ We can apply L'Hôpital's rule to find
+ \[ \lim_{x\to \infty} \;\frac{\ln(x)}{x} =\lim_{x\to \infty} \;\frac{\frac{1}{x}}{1} =0.\]
+}
+
+\tab{
+\lang{de}{\glqq $\frac{0}{0}$\grqq{} (mehrfach)}
+\lang{en}{"$\frac{0}{0}$" (multiple)}
+}
+\lang{de}{Um den Grenzwert $\lim_{x\to\infty}\,\frac{x^n}{e^x}$ zu berechnen, muss man  die Regel von de L'Hospital $n$-mal anwenden.
+}
+\lang{en}{
+To compute the limit $\lim_{x\to\infty}\,\frac{x^n}{e^x}$, we will need to apply
+L'Hôpital's rule $n$ times.
+}
+\lang{de}{
+Dazu überlegt man sich, dass $f(x)=x^n$ beliebig oft stetig differenzierbar ist mit $\lim_{x\to\infty}f^{(k)}(x)=\infty$ für $k<n$ 
+und dass $g(x)=e^x$ ebenfalls beliebig oft stetig differenzierbar ist mit $g^{(k)}(x)=g(x)\neq 0$ und $\lim_{x\to\infty}g^{(k)}(x)=\infty$.
+}
+\lang{en}{
+First, observe that $f(x)=x^n$ is infinitely differentible 
+with $\lim_{x\to\infty}f^{(k)}(x)=\infty$ for $k<n$,
+and that $g(x)=e^x$ is also infinitely differentiable with
+$g^{(k)}(x)=g(x)\neq 0$ and $\lim_{x\to\infty}g^{(k)}(x)=\infty$.
+}
+\lang{de}{
+Also gilt
+\[ \lim_{x\to\infty}\,\frac{x^n}{e^x} =\lim_{x\to\infty}\,\frac{nx^{n-1}}{e^x}=\ldots =\lim_{x\to\infty}\,\frac{n! x^0}{e^x}=0.\]
+}
+\lang{en}{
+Therefore,
+\[ \lim_{x\to\infty}\,\frac{x^n}{e^x} =\lim_{x\to\infty}\,\frac{nx^{n-1}}{e^x}=\ldots =\lim_{x\to\infty}\,\frac{n! x^0}{e^x}=0.\]
+}
+\lang{de}{
+Dies zeigt, dass die Exponentialfunktion schneller wächst als jede Potenz von $x$.}
+\lang{en}{
+This shows that the exponential function grows faster than any power of $x$.
+}
+\tab{ 
+\lang{de}{\glqq $0\cdot\infty$\grqq{}}
+\lang{en}{"$0 \cdot \infty$"}
+}
+\lang{de}{Wir wollen nun den Grenzwert $\lim_{x \to \infty} x\cdot e^{-x}$ ermitteln. }
+\lang{en}{
+We would now like to determine the limit $\lim_{x \to \infty} x\cdot e^{-x}$.
+}
+\lang{de}{Hier schreibt man den Term besser um zu
+\[   x\cdot e^{-x}=\frac{x}{e^x} \]
+und berechnet
+\[ \lim_{x\to \infty} x\cdot e^{-x}=\lim_{x\to \infty} \frac{x}{e^x} =\lim_{x\to \infty} \frac{1}{e^x} = 0.\]
+}
+\lang{en}{
+It is better to rewrite this expression in the form
+\[   x\cdot e^{-x}=\frac{x}{e^x},\]
+so that
+\[ \lim_{x\to \infty} x\cdot e^{-x}=\lim_{x\to \infty} \frac{x}{e^x} =\lim_{x\to \infty} \frac{1}{e^x} = 0.\]
+}
+\lang{de}{Würde man jedoch in der Absicht, de L'Hospital anzuwenden, den Term  als $\frac{e^{-x}}{x^{-1}}$ schreiben, 
+ erhielte man den Quotienten der Ableitung als  $\frac{-e^{-x}}{-x^{-2}}$. 
+ Dessen Grenzwert kann wieder nicht direkt berechnet werden.}
+\lang{en}{
+If we instead write the expression as $\frac{e^{-x}}{x^{-1}}$ and attempt to apply
+L'Hôpital's rule, however, then we find that the quotient of the derivatives is $\frac{-e^{-x}}{-x^{-2}}$.
+This is another limit that cannot be computed directly.
+}
+
+ 
+\tab{
+\lang{de}{"`$\infty - \infty$"'}
+\lang{en}{"$\infty - \infty$"}
+}
+\lang{de}{Würde man den Grenzwert $\lim_{x\to 0} \;\left(\frac{1}{e^x-1} - \frac{1}{x}\right) $ summandenweise berechnen wollen, erhielte
+man einen Ausdruck "`$\infty - \infty$"', welcher nicht definiert ist. }
+\lang{en}{
+If we try to compute the limit $\lim_{x\to 0} \;\left(\frac{1}{e^x-1} - \frac{1}{x}\right) $ termwise
+then we obtain the expression $\infty - \infty$, which is undefined.
+}
+
+\lang{de}{Auch in diesem Fall formt man den Term um, um als Grenzwert einen Ausdruck der Form
+\glqq$0/0$\grqq\ oder \glqq$\infty/\infty$\grqq\ zu bekommen, auf welchen man wieder die Regel von de L'Hospital anwenden kann (hier am Ende
+sogar zweimal):
+  \[ \lim_{x\to 0} \;\left(\frac{1}{e^x-1} - \frac{1}{x}\right) =  \lim_{x\to 0} \frac{x-(e^x-1)}{x\,e^x - x}
+  =  \lim_{x\to 0} \frac{1-e^x}{e^x+x\,e^x -1} = \lim_{x\to 0} \;\frac{-e^x}{2e^x+x\,e^x} =\frac{-1}{2}.
+  \]
+}
+\lang{en}{
+We rewrite the expression again to obtain something of the form "$0/0$" or "$\infty/\infty$"
+in the limit, such that L'Hôpital's rule can be applied (in fact, we use it twice):
+\[ \lim_{x\to 0} \;\left(\frac{1}{e^x-1} - \frac{1}{x}\right) =  \lim_{x\to 0} \frac{x-(e^x-1)}{x\,e^x - x}
+  =  \lim_{x\to 0} \frac{1-e^x}{e^x+x\,e^x -1} = \lim_{x\to 0} \;\frac{-e^x}{2e^x+x\,e^x} =\frac{-1}{2}.
+  \]
+}
+  
+\tab{
+\lang{de}{\glqq $1^\infty$\grqq{}}
+\lang{en}{"$1^\infty$"}
+}
+
+\lang{de}{
+ Auch wenn Potenzen vorkommen, helfen die Regeln von L'Hospital oft, um die Grenzwerte zu berechnen. 
+Es gibt hier im Wesentlichen drei Fälle, nämlich Grenzwertausdrücke der Form 
+ $\,$ \glqq$1^\infty$\grqq, \glqq$0^0$\grqq{} oder \glqq$\infty^0$\grqq.
+ \\
+}
+\lang{en}{
+Even when exponents are involved, L'Hôpital's rule can often be used to
+compute limits. There are essentially three cases: limit expressions of the form
+"$1^\infty$", "$0^0$" and "$\infty^0$".
+\\
+}
+  \lang{de}{Bei dem Grenzwert $ \lim_{x\to \infty} \;\left(1+\frac{1}{x}\right)^x$ würde man einen Ausdruck \glqq$1^\infty$\grqq{} bekommen,
+  wenn man die Grenzwerte von Basis und Exponent separat berechnet. }
+  \lang{en}{
+  The limit $ \lim_{x\to \infty} \;\left(1+\frac{1}{x}\right)^x$ would lead to
+  the expression "$1^\infty$" if the limits of the base and exponent were
+  computed separately.
+  }
+    
+  \lang{de}{In solchen Fällen berechnen wir zunächst den Logarithmus des Terms, also
+  \[ \ln\left( \big(1+\frac{1}{x}\big)^x\right) =x\cdot \ln \big(1+\frac{1}{x}\big) = \frac{\ln \big(1+\frac{1}{x}\big)}{1/x}, \]
+  und dessen Grenzwert mit der Regel von de L'Hospital (Voraussetzungen prüfen!):
+   \[  \lim_{x\to \infty}\frac{\ln \big(1+\frac{1}{x}\big)}{1/x} = \lim_{x\to \infty}\frac{-\frac{1}{x^2}\cdot \frac{1}{1+1/x}}{-\frac{1}{x^2}} = \lim_{x\to \infty} \frac{1}{1+1/x} =1.\]
+  }
+  \lang{en}{
+  In these cases, we first take the logarithm of the expression:
+  \[ \ln\left( \big(1+\frac{1}{x}\big)^x\right) =x\cdot \ln \big(1+\frac{1}{x}\big) = \frac{\ln \big(1+\frac{1}{x}\big)}{1/x}, \]
+  and compute its limit using L'Hôpital's rule (checking that the conditions hold!):
+  \[  \lim_{x\to \infty}\frac{\ln \big(1+\frac{1}{x}\big)}{1/x} = \lim_{x\to \infty}\frac{-\frac{1}{x^2}\cdot \frac{1}{1+1/x}}{-\frac{1}{x^2}} = \lim_{x\to \infty} \frac{1}{1+1/x} =1.\]
+ 
+  }
+	\lang{de}{Da die Exponentialfunktion stetig ist, gilt dann
+	\[    \lim_{x\to \infty} \;\left(1+\frac{1}{x}\right)^x= \lim_{x\to \infty} \exp\left(\ln\left( \big(1+\frac{1}{x}\big)^x\right) \right)
+	=  \exp\left( \lim_{x\to \infty}  \ln\left( \big(1+\frac{1}{x}\big)^x\right) \right)=\exp(1)=e.\]	
+  }
+  \lang{en}{
+  Since the exponential function is continuous, we have
+  \[    \lim_{x\to \infty} \;\left(1+\frac{1}{x}\right)^x= \lim_{x\to \infty} \exp\left(\ln\left( \big(1+\frac{1}{x}\big)^x\right) \right)
+	=  \exp\left( \lim_{x\to \infty}  \ln\left( \big(1+\frac{1}{x}\big)^x\right) \right)=\exp(1)=e.\]	
+  }
+\end{tabs*}
+\end{example}
+\begin{quickcheck}
+\lang{de}{
+\text{Welche der folgenden Grenzwertprobleme bieten das Potential, mit der Regel von de l'Hospital berechnet zu werden?}
+}
+\lang{en}{
+\text{Which of the following limit problems could potentially be solved with L'Hôpital's rule?}
+}
+\begin{choices}{multiple}
+
+        \begin{choice}
+            \text{$\lim_{x\to 0}\frac{x^4}{\cos x}$}
+			\solution{false}
+         \end{choice}
+                    
+        \begin{choice}
+            \text{$\lim_{x\to \infty}\frac{e^x}{e^x-x}$}
+			\solution{true}
+		\end{choice} 
+        \begin{choice}
+            \text{$\lim_{x\to \infty}\frac{x^3}{\cos x}$}
+			\solution{false}
+        \end{choice} 
+        \begin{choice}
+            \text{$\lim_{x\to 0}\frac{x^3}{\sin x}$}
+			\solution{true}
+		\end{choice}
+        \begin{choice}
+            \text{$\lim_{x\to 0}\frac{\ln \frac{1}{x}}{\frac{1}{x}}$}
+			\solution{true}
+		\end{choice}
+\end{choices}
+\lang{de}{
+\explanation{Den ersten Grenzwert berechnet man direkt $\lim_{x\to 0}\frac{x^4}{\cos x}=\frac{0}{1}=1$.\\
+Bei $\lim_{x\to \infty}\frac{e^x}{e^x-x}$  liegt der Fall \glqq$\frac{\infty}{\infty}$\grqq{} vor.\\
+Weil der Grenzwert $\lim_{x\to\infty}\cos x$ nicht exisitiert, kann man für $\lim_{x\to \infty}\frac{x^3}{\cos x}$
+keine de L'Hospitalsche Regel anwenden.\\
+Bei $\lim_{x\to 0}\frac{x^3}{\sin x}$ liegt der Fall \glqq$\frac{0}{0}$\grqq{} vor, und bei
+$\lim_{x\to 0}\frac{\ln \frac{1}{x}}{\frac{1}{x}}$ der Fall \glqq$(-1)\cdot\frac{\infty}{\infty}$\grqq{}.}
+}
+\lang{en}{
+\explanation{The first limit can be calculated directly: $\lim_{x\to 0}\frac{x^4}{\cos x}=\frac{0}{1}=1$.\\
+$\lim_{x\to \infty}\frac{e^x}{e^x-x}$ is of the form "$\frac{\infty}{\infty}$". \\
+Since the limit $\lim_{x\to\infty}\cos x$ does not exist, L'Hôpital's rule
+cannot be applied to $\lim_{x\to \infty}\frac{x^3}{\cos x}$.\\
+$\lim_{x\to 0}\frac{x^3}{\sin x}$ is of the form "$\frac{0}{0}$", and
+$\lim_{x\to 0}\frac{\ln \frac{1}{x}}{\frac{1}{x}}$ is of the form "$(-1)\cdot\frac{\infty}{\infty}$".
+}
+}
+\end{quickcheck}
+
+ 
+\end{content}

@@ -1,0 +1,1008 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Quadratische Matrizen}
+    \lang{en}{Square matrices}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T403_Rotation.meta.xml}{T403_Rotation}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+\end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T403a_Vektorraum/g_art_content_10b_lineare_abb.meta.xml}{content_10b_lineare_abb}
+    \link{generic_article}{content/rwth/HM1/T401_Matrizenrechnung/g_art_content_02_matrizenmultiplikation.meta.xml}{matrix-mult}
+    \link{generic_article}{content/rwth/HM1/T403_Quadratische_Matrizen,_Determinanten/g_art_content_08_inverse_matrix.meta.xml}{inverse-matrix}
+    \link{generic_article}{content/rwth/HM1/T401_Matrizenrechnung/g_art_content_01_matrizen.meta.xml}{matrizen}
+    \link{generic_article}{content/rwth/HM1/T402_Lineare_Gleichungssysteme/g_art_content_06_umformungen_rang.meta.xml}{umformungen}
+    \link{generic_article}{content/rwth/HM1/T202_Reelle_Zahlen_axiomatisch/g_art_content_04_koerperaxiome.meta.xml}{koerperaxiome}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{3}
+\ombarticle{1}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Quadratische Matrizen} \lang{en}{Square matrices}}
+
+\begin{block}[annotation]
+ 
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/11282}{Ticket 11282}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\lang{de}{
+Wir haben bereits \link{matrizen}{Matrizen}  und das Rechnen mit Matrizen kennengelernt. 
+In diesem Abschnitt geht es speziell um quadratische Matrizen.
+Durch Matrizen beschreibt man eine sehr wichtige und sehr nützliche Klasse von Abbildungen zwischen mehrdimensionalen Räumen. 
+Diese sogennanten linearen Abbildungen erhält man, indem man schlicht die Vektoren $x$ an $A\in M(m,n;\R)$ multipliziert: $x\mapsto A\cdot x$.
+Quadratische $(n\times n)$-Matrizen beschreiben also lineare Selbstabbildungen des $\R^n$. Viele einfache geometrische Abbildungen lassen sich so darstellen.}
+
+\lang{en}{We already learned about \link{matrizen}{matrices} and how to calculate with them. In this section, we will learn about
+square matrices. They describe a very important and useful class of maps between multidimensional spaces.
+We obtain those so called linear maps by multiplying the vectors $x$ with $A\in M(m;n;\R)$: $x\mapsto A\cdot x$.
+Square $(n \times n)$-matrices describe linear self-maps of $\R^n$. With this, a lot of easy geometrical maps can be described. }
+
+\lang{de}{
+\begin{example}\label{ex:drehmatrix}
+Die Matrix $\left(\begin{smallmatrix}\cos(\alpha)&-\sin(\alpha)\\\sin(\alpha)&\cos(\alpha)\end{smallmatrix}\right)$ beschreibt eine Drehung 
+im $\R^2$ um den 
+Winkel $\alpha$ um den Nullpunkt gegen den Uhrzeigersinn,
+\begin{incremental}[\initialsteps{0}]
+\step
+\[ \begin{pmatrix}\cos(\alpha)&-\sin(\alpha)\\\sin(\alpha)&\cos(\alpha)\end{pmatrix}\cdot\begin{pmatrix}x\\y\end{pmatrix}=
+\begin{pmatrix}\cos(\alpha)\cdot x-\sin(\alpha)\cdot y\\\sin(\alpha)\cdot x+\cos(\alpha)\cdot y\end{pmatrix}.\]
+\begin{center}
+\image{T403_Rotation}
+\end{center}
+\end{incremental}
+\end{example}}
+
+\lang{en}{
+\begin{example}\label{ex:drehmatrix}
+The matrix $\left(\begin{smallmatrix}\cos(\alpha)&-\sin(\alpha)\\\sin(\alpha)&\cos(\alpha)\end{smallmatrix}\right)$ describes a counterclockwise rotation
+in $\R^2$ around the origin by an angle $\alpha$,
+\begin{incremental}[\initialsteps{0}]
+\step
+\[ \begin{pmatrix}\cos(\alpha)&-\sin(\alpha)\\\sin(\alpha)&\cos(\alpha)\end{pmatrix}\cdot\begin{pmatrix}x\\y\end{pmatrix}=
+\begin{pmatrix}\cos(\alpha)\cdot x-\sin(\alpha)\cdot y\\\sin(\alpha)\cdot x+\cos(\alpha)\cdot y\end{pmatrix}.\]
+\begin{center}
+\image{T403_Rotation}
+\end{center}
+\end{incremental}
+\end{example}}
+
+\lang{de}{
+Auch wenn  viele wichtige Abbildungen nicht derart beschrieben werden können, so reicht für praktische Zwecke oft ihre 
+\glqq erste Näherung\grqq{}, also eine Approximation durch eine lineare Abbildung aus. 
+Dafür  studieren wir in diesem Kapitel grundlegende Eigenschaften quadratischer Matrizen.}
+\lang{en}{
+Even though a lot of important maps cannot be described in this way, their \glqq first approximation \grqq (approximation through a linear map)
+is enough for pratical purposes.
+Therefore we will study the basic properties of square matrices in this chapter.}
+
+
+
+
+\section{\lang{de}{Quadratische Matrizen} \lang{en}{Square matrices}}
+
+
+\begin{definition}\label{def:quad_matrix}
+\lang{de}{
+Eine \notion{quadratische Matrix} ist eine Matrix mit genauso vielen Zeilen wie Spalten.}
+\lang{en}{
+A \notion{square matrix} has the same number of rows and columns.}
+\end{definition}
+
+\lang{de}{
+Im Folgenden ist stets $n$ eine natürliche Zahl, $\K$ ein Körper, und wir betrachten die Menge
+$M(n,n;\mathbb{K})$ der (quadratischen) $(n\times n)$-Matrizen. Statt $M(n,n;\mathbb{K})$
+schreiben wir auch kürzer $M({n};\K)$. Eine weitere gebräuchliche Bezeichnung dafür ist $M_n(\K)$.}
+
+
+\lang{en}{
+From now on $n$ is always a natural number, $\K$ a field and we consider the set $M(n,n;\mathbb{K})$ of square $(n\times n)$-matrices.
+Instead of $M(n,n;\mathbb{K})$ we will write short $M({n};\K)$. Another common notation is $M_n(\K)$.}
+
+\begin{definition}\label{def:wichtige-quadratische-matrizen}
+\lang{de}{
+Für wichtige quadratische Matrizen und Arten von Matrizen gibt es noch besondere Bezeichnungen:}
+\lang{en}{
+There are special names for important square matrices and types of matrices:}
+
+\begin{tabs*}[\initialtab{0}]
+\tab{\lang{de}{Nullmatrix $0_n$} \lang{en}{Zero matrix $0_n$}}
+\lang{de}{
+Die $(n \times n)$-Nullmatrix ist die Matrix, deren Eintr\"age alle gleich $0$ sind, also 
+       \begin{equation*}
+       0_{n} := \begin{pmatrix}
+            0 & 0 & \cdots & 0 \\
+            0 & 0 & \cdots & 0 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & 0 
+           \end{pmatrix} \in M(n;\K).
+       \end{equation*}}
+\lang{en}{
+The $(n \times n)$-zero matrix is a matrix, whose entries are all equal to $0$, so
+       \begin{equation*}
+       0_{n} := \begin{pmatrix}
+            0 & 0 & \cdots & 0 \\
+            0 & 0 & \cdots & 0 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & 0 
+           \end{pmatrix} \in M(n;\K).
+       \end{equation*}}
+       
+\tab{\lang{de}{Einheitsmatrix $E_n$} \lang{en}{Identity matrix $I_n$}}
+\lang{de}{
+ Bei der $ (n \times n)$-Einheitsmatrix sind alle Eintr\"age auf der Hauptdiagonalen gleich $1$ und alle anderen
+       gleich $0$, also 
+       \begin{equation*}
+       E_{n} := \begin{pmatrix}
+                1 & 0 & \cdots & 0 & 0 \\
+                0 & 1 & \cdots & 0 & 0 \\
+                \vdots & \vdots & \ddots & \vdots & \vdots \\
+                0 & 0 & \cdots & 1 & 0 \\
+                0 & 0 & \cdots & 0 & 1 
+                \end{pmatrix} \in M(n;\K).
+  \end{equation*}}
+  \lang{en}{
+The entries on the main diagonal of the $(n\times n)$ identity matrix are all equal to $1$ and all the other entries are equal to $0$, so we have 
+       \begin{equation*}
+       I_{n} := \begin{pmatrix}
+                1 & 0 & \cdots & 0 & 0 \\
+                0 & 1 & \cdots & 0 & 0 \\
+                \vdots & \vdots & \ddots & \vdots & \vdots \\
+                0 & 0 & \cdots & 1 & 0 \\
+                0 & 0 & \cdots & 0 & 1 
+                \end{pmatrix} \in M(n;\K).
+  \end{equation*}}
+  
+\tab{\lang{de}{Diagonalmatrizen} \lang{en}{Diagonal matrices}}
+\lang{de}{
+              Eine Matrix der Form
+       \begin{equation*}
+       \begin{pmatrix}
+       a_{11} & 0 & \cdots & 0 & 0 \\
+       0 & a_{22} & \cdots & 0 & 0 \\
+       \vdots & \vdots & \ddots & \vdots & \vdots \\
+       0 & 0 & \cdots & a_{n-1,n-1} & 0 \\
+       0 & 0 & \cdots & 0 & a_{nn} 
+       \end{pmatrix} \in M(n;\K)
+       \end{equation*}
+       mit $a_{ii}\in \K$ nennt man \notion{Diagonalmatrix}.
+       Hier stehen \emph{h\"ochstens} auf der Diagonalen von $0$ verschiedene Eintr\"age. 
+       Man schreibt auch kurz $\text{diag}(a_{11},a_{22},\ldots,a_{nn})$.}
+\lang{en}{
+        A matrix in the form of
+       \begin{equation*}
+       \begin{pmatrix}
+       a_{11} & 0 & \cdots & 0 & 0 \\
+       0 & a_{22} & \cdots & 0 & 0 \\
+       \vdots & \vdots & \ddots & \vdots & \vdots \\
+       0 & 0 & \cdots & a_{n-1,n-1} & 0 \\
+       0 & 0 & \cdots & 0 & a_{nn} 
+       \end{pmatrix} \in M(n;\K)
+       \end{equation*}
+       with $a_{ii}\in \K$ is called \notion{diagonal matrix}.
+       At most, there are non-zero entries on the main diagonal. Another notation is $\text{diag}(a_{11},a_{22},\ldots,a_{nn})$.}
+  
+\tab{\lang{de}{Obere Dreiecksmatrizen} \lang{en}{Upper triangular matrix}}
+\lang{de}{
+    Eine Matrix der Form
+      \begin{equation*}
+       \begin{pmatrix}
+       a_{11} & a_{12} & \cdots & a_{1,n-1} & a_{1n} \\
+       0 & a_{22} & \cdots & a_{2,n-1} & a_{2n} \\
+       \vdots & \vdots & \ddots & \vdots & \vdots \\
+       0 & 0 & \cdots & a_{n-1,n-1} & a_{n-1,n} \\
+       0 & 0 & \cdots & 0 & a_{nn} 
+       \end{pmatrix} \in M(n;\K)
+       \end{equation*}
+       mit $a_{ij}\in \K$ nennt man  \notion{obere Dreiecksmatrix} (nur oberhalb oder auf der Diagonalen 
+       dürfen die Eintr\"age ungleich $0$ sein).}  
+\lang{en}{
+    A matrix in the form of
+      \begin{equation*}
+       \begin{pmatrix}
+       a_{11} & a_{12} & \cdots & a_{1,n-1} & a_{1n} \\
+       0 & a_{22} & \cdots & a_{2,n-1} & a_{2n} \\
+       \vdots & \vdots & \ddots & \vdots & \vdots \\
+       0 & 0 & \cdots & a_{n-1,n-1} & a_{n-1,n} \\
+       0 & 0 & \cdots & 0 & a_{nn} 
+       \end{pmatrix} \in M(n;\K)
+       \end{equation*}
+       with $a_{ij}\in \K$ is called \notion{upper triangular matrix} (only entries above the main diagonal may be
+       unequal to $0$.} 
+       
+\tab{\lang{de}{Untere Dreiecksmatrizen} \lang{en}{Lower triangular matrix}}
+\lang{de}{
+    Analog zur oberen Dreiecksmatrix nennt man eine Matrix der Form  
+       \begin{equation*}
+       \begin{pmatrix}
+       a_{11} & 0 & \cdots & 0 & 0 \\
+       a_{21} & a_{22} & \cdots & 0 & 0 \\
+       \vdots & \vdots & \ddots & \vdots & \vdots \\
+       a_{n-1,1} & a_{n-1,2} & \cdots & a_{n-1,n-1} & 0 \\
+       a_{n1} & a_{n2} & \cdots & a_{n,n-1} & a_{nn} 
+       \end{pmatrix} \in M(n;\K)
+       \end{equation*}
+       mit $a_{ij}\in \K$ eine \notion{untere Dreiecksmatrix} (nur unterhalb oder auf der 
+       Diagonalen dürfen die Eintr\"age ungleich $0$ sein).}
+\lang{en}{
+Analogous to the upper triangular matrix, we call a matrix in the form  
+       \begin{equation*}
+       \begin{pmatrix}
+       a_{11} & 0 & \cdots & 0 & 0 \\
+       a_{21} & a_{22} & \cdots & 0 & 0 \\
+       \vdots & \vdots & \ddots & \vdots & \vdots \\
+       a_{n-1,1} & a_{n-1,2} & \cdots & a_{n-1,n-1} & 0 \\
+       a_{n1} & a_{n2} & \cdots & a_{n,n-1} & a_{nn} 
+       \end{pmatrix} \in M(n;\K)
+       \end{equation*}
+       with $a_{ij}\in \K$ with \notion{lower triangular matrix} (only entries below the main diagonal may be
+       unequal to $0$).}
+\end{tabs*}
+\end{definition}
+
+\begin{example}
+\begin{enumerate}
+\item \lang{de}{Die Nullmatrix $0_n$ und die Einheitsmatrix $E_n$ sind spezielle Diagonalmatrizen. Sie
+sind auch untere und obere Dreiecksmatrizen.}
+\lang{en}{The zero matrix $0_n$ and the identity matrix $I_n$ are special diagonal matrices. They are also upper and lower triangular
+matrices.}
+\item \lang{de}{Jede Diagonalmatrix ist sowohl eine untere als auch eine obere Dreiecksmatrix.}
+\lang{en}{Every diagonal matrix is both a lower and an upper triangular matrix.}
+\item \lang{de}{Elementarmatrizen: Bei den \link{umformungen}{Zeilenumformungen mittels Matrizenmultiplikation} hatten 
+wir verschiedene sogenannte Elementarmatrizen kennengelernt. Die Matrizen
+\[
+\begin{mtable}[\cellaligns{cc}]
+ { \text{i-te Spalte }} &\\
+  \downarrow        &
+\end{mtable}
+\] \[
+M_{i}(r) \ = 
+\left(
+\begin{matrix}
+1       &        &        &        &        &            &        &   &            \\
+        & \:\ddots &        &        &        &            &        &   &            \\ 
+        &        &        & 1      &        &            &        &   &  \\
+        &        &        &        & r      &            &        &   &  \\
+        &        &        &        &        & 1          &        &   &  \\
+        &        &        &        &        &            & \:\ddots &   &  \\
+        &        &        &        &        &            &        & 1 & 
+\end{matrix}
+\right)
+\begin{mtable}[\cellaligns{c}]
+\\
+\\
+\\
+\leftarrow {\text{i-te Zeile}} \\
+\\
+\\
+\\
+\end{mtable}
+ \]
+ für $r\in \K, r\neq 0$ und $i\in \{1,\ldots, n\}$ sind Diagonalmatrizen (und obere und untere Dreiecksmatrizen).\\
+ 
+ Die Matrizen
+  \[
+\begin{mtable}[\cellaligns{cc}]
+     &   & { \text{j-te Spalte }}& \\
+     &   & \downarrow        &
+\end{mtable}
+\]
+\[
+A_{ij}(r)=
+\left(
+\begin{matrix}
+1       &                &        &        &            &        &   &            \\
+        & \ddots         &        &        &            &        &   &            \\ 
+        &                & 1      &        & r          &        &   &  \\
+        &                &        & \ddots &            &        &   &  \\
+        &                &        &        & 1          &        &   &  \\
+        &                &        &        &            & \ddots &   &  \\
+        &                &        &        &            &        & 1 & 
+\end{matrix}
+\right)
+\begin{mtable}[\cellaligns{c}]
+\\
+\leftarrow {\text{i-te Zeile}} \\
+\\
+\\
+\\
+\end{mtable}
+\]
+für $r\in \K$, $r\neq 0$ und $i,j\in \{1,\ldots, n\}, i\neq j$  sind untere Dreiecksmatrizen, wenn $i>j$, 
+und obere
+Dreiecksmatrizen, wenn $i<j$. Es sind aber keine Diagonalmatrizen, da stets ein Eintrag außerhalb der Diagonalen (nämlich der an der Stelle $(i,j)$) ungleich $0$ ist.\\
+
+ Die Matrizen
+ \[
+\begin{mtable}[\cellaligns{cccc}]
+ { \text{i-te Spalte}} &  &   {\text{j-te Spalte }} &   \\
+  \downarrow           &  & \downarrow &
+\end{mtable}
+\]
+\[ V_{ij} \ \ \ \ = \ \ \ \ 
+\left(
+\begin{matrix}
+1       &        &        &        &        &            &        &   &   &        &   &  \\
+        & \ddots &        &        &        &            &        &   &   &        &   &  \\ 
+        &        &  1     &        &        &            &        &   &   &        &   &  \\
+        &        &        & 0      &        &            &        & 1 &   &        &   &  \\
+        &        &        &        & 1      &            &        &   &   &        &   &  \\
+        &        &        &        &        & \ddots     &        &   &   &        &   &  \\
+        &        &        &        &        &            & 1      &   &   &        &   &  \\
+        &        &        & 1      &        &            &        & 0 &   &        &   &  \\
+        &        &        &        &        &            &        &   & 1 &        &   &  \\
+        &        &        &        &        &            &        &   &   & \ddots &   &  \\
+        &        &        &        &        &            &        &   &   &        & 1 & 
+\end{matrix}
+\right)
+\begin{mtable}[\cellaligns{c}]
+\\
+\\
+\leftarrow {\text{i-te Zeile}} \\
+\\
+\\
+\\
+\leftarrow {\text{j-te Zeile}} \\
+\\
+\\
+\end{mtable}
+ \]
+ für $i,j\in \{1,\ldots, n\}$, $i\neq j$ sind weder untere noch obere Dreiecksmatrizen (und erst recht keine Diagonalmatrizen), da sowohl oberhalb der Diagonalen, als auch unterhalb der Diagonalen Einträge ungleich $0$ vorhanden sind.}
+
+ \lang{en}{Elementary matrices: We got to know the elementary matrices while discussing \link{umformungen}{row transformations by matrix multiplications} 
+ The matrices
+\[
+\begin{mtable}[\cellaligns{cc}]
+ { \text{i-te Spalte }} &\\
+  \downarrow        &
+\end{mtable}
+\] \[
+M_{i}(r) \ = 
+\left(
+\begin{matrix}
+1       &        &        &        &        &            &        &   &            \\
+        & \:\ddots &        &        &        &            &        &   &            \\ 
+        &        &        & 1      &        &            &        &   &  \\
+        &        &        &        & r      &            &        &   &  \\
+        &        &        &        &        & 1          &        &   &  \\
+        &        &        &        &        &            & \:\ddots &   &  \\
+        &        &        &        &        &            &        & 1 & 
+\end{matrix}
+\right)
+\begin{mtable}[\cellaligns{c}]
+\\
+\\
+\\
+\leftarrow {\text{i-te Zeile}} \\
+\\
+\\
+\\
+\end{mtable}
+ \]
+ for $r\in \K, r\neq 0$ and $i\in \{1,\ldots, n\}$ are diagonal matrices (and lower and upper triangular matrices).\\
+ 
+ The matrices
+  \[
+\begin{mtable}[\cellaligns{cc}]
+     &   & { \text{j-te Spalte }}& \\
+     &   & \downarrow        &
+\end{mtable}
+\]
+\[
+A_{ij}(r)=
+\left(
+\begin{matrix}
+1       &                &        &        &            &        &   &            \\
+        & \ddots         &        &        &            &        &   &            \\ 
+        &                & 1      &        & r          &        &   &  \\
+        &                &        & \ddots &            &        &   &  \\
+        &                &        &        & 1          &        &   &  \\
+        &                &        &        &            & \ddots &   &  \\
+        &                &        &        &            &        & 1 & 
+\end{matrix}
+\right)
+\begin{mtable}[\cellaligns{c}]
+\\
+\leftarrow {\text{i-te Zeile}} \\
+\\
+\\
+\\
+\end{mtable}
+\]
+for $r\in \K$, $r\neq 0$ and $i,j\in \{1,\ldots, n\}, i\neq j$  are lower triangular matrices, if $i>j$, 
+and upper triangular matrices, if $i<j$. But they are not diagonal matrices,
+because there is always a non-zero entries beside the main diagonal (the entry with indices $(i,j)$).\\
+
+ The matrices
+ \[
+\begin{mtable}[\cellaligns{cccc}]
+ { \text{i-te Spalte}} &  &   {\text{j-te Spalte }} &   \\
+  \downarrow           &  & \downarrow &
+\end{mtable}
+\]
+\[ V_{ij} \ \ \ \ = \ \ \ \ 
+\left(
+\begin{matrix}
+1       &        &        &        &        &            &        &   &   &        &   &  \\
+        & \ddots &        &        &        &            &        &   &   &        &   &  \\ 
+        &        &  1     &        &        &            &        &   &   &        &   &  \\
+        &        &        & 0      &        &            &        & 1 &   &        &   &  \\
+        &        &        &        & 1      &            &        &   &   &        &   &  \\
+        &        &        &        &        & \ddots     &        &   &   &        &   &  \\
+        &        &        &        &        &            & 1      &   &   &        &   &  \\
+        &        &        & 1      &        &            &        & 0 &   &        &   &  \\
+        &        &        &        &        &            &        &   & 1 &        &   &  \\
+        &        &        &        &        &            &        &   &   & \ddots &   &  \\
+        &        &        &        &        &            &        &   &   &        & 1 & 
+\end{matrix}
+\right)
+\begin{mtable}[\cellaligns{c}]
+\\
+\\
+\leftarrow {\text{i-te Zeile}} \\
+\\
+\\
+\\
+\leftarrow {\text{j-te Zeile}} \\
+\\
+\\
+\end{mtable}
+ \]
+ for $i,j\in \{1,\ldots, n\}$, $i\neq j$ are neither lower nor upper triangular matrices (especially no diagonal matrices),
+ because there are non-zero entries above and below the main diagonal.}
+\end{enumerate}
+\end{example}
+
+\section{\lang{de}{Rechnen mit quadratischen Matrizen} \lang{en}{Calculating with square matrices}}
+
+\lang{de}{
+In den Abschnitten \link{matrizen}{Matrizen} und \link{matrix-mult}{Matrizenmultiplikation}
+wurden schon Matrizen addiert und multipliziert. Während bei der Addition die Abmessungen
+der Matrizen gleich sein muss, muss bei der Multiplikation die Zeilenzahl der zweiten Matrix 
+gleich der Spaltenzahl der ersten Matrix sein. Sind $A$ und $B$ also quadratische $(n\times n)$-Matrizen mit 
+Einträgen in $\K$, so sind beide Bedingungen erfüllt, und daher ist sowohl die Summe
+\[ A+B \]
+als auch das Produkt
+\[ A\cdot B\]
+definiert. In beiden Fällen ist das Ergebnis wieder eine $(n\times n)$-Matrix.}
+
+
+\lang{en}{
+We already added and multiplied matrices in the sections \link{matrizen}{matrices} and \link{matrix-mult}{matrix multiplication}.
+For addition the dimensions of the matrices must be the same. For multiplication the number of rows in the second matrix must be
+equal to the number of columns in the first matrix.
+For the $(n\times n)$ square matrices with entries in $\K$, both of the criteria are fulfilled, which is why the sum
+\[ A+B \]
+and the product
+\[ A\cdot B\]
+are defined. In both cases, the result is again a $(n\times n)$-matrix.}
+
+\lang{de}{
+Natürlich gelten auch die allgemeinen \ref[matrizen][Rechenregeln für die Addition]{rule:rechenregeln} und 
+für die  \ref[matrix-mult][Matrizenmultiplikation]{rule:rechenregeln}
+in diesem speziellen Fall:}
+
+\lang{en}{
+The general \ref[matrizen][calcuating rules for addition]{rule:rechenregeln} and the rules for 
+\ref[matrix-mult][matrix multiplication]{rule:rechenregeln} also apply in this case:
+}
+
+\begin{rule}
+\lang{de}{
+Auf der Menge $M(n;\K)$ der $(n\times n)$-Matrizen mit Einträgen in $\K$ sind die Addition $+$ und die 
+Multiplikation $\cdot$ definiert, die zwei Matrizen $A$ und $B$ wieder eine $(n\times n)$-Matrix, nämlich
+deren Summe $A+B$ bzw. deren Produkt $A\cdot B$ zuordnen. 
+Es gelten für alle $A,B,C\in M(n;\K)$:}
+\lang{en}{
+Addition $+$ and multiplication $\cdot$ are defined for the set $M(n;\K)$ of $(n\times n)$-matrices with entries in $\K$. They map two
+matrices $A$ and $B$ on another $(n\times n)$-matrix, which is either their sum $A+B$ or their product $A\cdot B$.}
+
+   \lang{de}{
+   \emph{Rechenregeln der Addition:} 
+    \begin{itemize}
+        \item $A+B=B+A$ $\quad$ (Kommutativgesetz)
+        \item $\left(A+B\right)+C=A+\left(B+C\right)$ $\quad$
+            (Assoziativgesetz)
+        \item Die Nullmatrix $0_n\in M(n;\K)$ erfüllt  $\nowrap{A+0_n=A}$ für alle $A\in M(n;\K)$
+        (neutrales Element der Addition).
+        \item Für jede Matrix $A\in M(n;\K)$ ist $A+(-A)=0_n$.
+    \end{itemize}}
+    \lang{en}{
+   \emph{Calculating rules of addition:}
+    \begin{itemize}
+        \item $A+B=B+A$ $\quad$ (commutative property)
+        \item $\left(A+B\right)+C=A+\left(B+C\right)$ $\quad$
+            (associative property)
+        \item The zero matrix $0_n\in M(n;\K)$ holds  $\nowrap{A+0_n=A}$ for all $A\in M(n;\K)$
+        (identity element of addition).
+        \item For each $A\in M(n;\K)$ we have $A+(-A)=0_n$.
+    \end{itemize}}
+    
+    
+    \\    
+    \lang{de}{
+    \emph{Rechenregeln der Multiplikation:} 
+    \begin{itemize}
+%        \item[(M1)] $a\cdot b=b\cdot a$ $\quad$ (Kommutativgesetz)
+        \item $A\cdot \left(B\cdot C\right) = \left(A\cdot B\right)\cdot 
+            C$ $\quad$ (Assoziativgesetz)
+        \item Die Einheitsmatrix $E_n\in  M(n;\K)$ erfüllt $A\cdot E_n=E_n\cdot A=A$
+        (neutrales Element der Multiplikation).
+    \end{itemize}}
+    \lang{en}{
+    \emph{Calculating rules of multiplication:} 
+    \begin{itemize}
+%        \item[(M1)] $a\cdot b=b\cdot a$ $\quad$ (Kommutativgesetz)
+        \item $A\cdot \left(B\cdot C\right) = \left(A\cdot B\right)\cdot 
+            C$ $\quad$ (associative property)
+        \item The identity matrix $I_n\in  M(n;\K)$ holds $A\cdot I_n=I_n\cdot A=A$
+        (identity element of multiplication).
+    \end{itemize}}
+    
+    \\
+    \lang{de}{
+    \emph{Vertr\"aglichkeit von Addition und Multiplikation:} \\
+    \begin{itemize}
+        \item $\left(A+B\right)\cdot C=A\cdot C+B\cdot C$ $\quad$ und\\
+        $A\cdot \left(B+C\right)=A\cdot B+A\cdot C$ $\quad$
+            (Distributivgesetze)
+    \end{itemize}}
+    \lang{en}{
+    \emph{Compatibility of addition and multiplication:} \\
+    \begin{itemize}
+        \item $\left(A+B\right)\cdot C=A\cdot C+B\cdot C$ $\quad$ and\\
+        $A\cdot \left(B+C\right)=A\cdot B+A\cdot C$ $\quad$
+            (distributive property)
+    \end{itemize}}
+\end{rule}
+
+
+\begin{remark}
+\lang{de}{
+Vergleicht man die Rechenregeln mit den \ref[koerperaxiome][Körperaxiomen]{sec:axiome},
+so stellt man fest, dass lediglich die Kommutativität der Multiplikation und die Existenz inverser
+Elemente bzgl. der Multiplikation nicht aufgeführt sind. Diese gelten für Matrizen mit $n\geq 2$ im Allgemeinen nicht.}
+\lang{en}{
+If we compare the calculating rules with the \ref[koerperaxiome][field axioms]{sec:axiome}, we see that, that only the
+commutative property of multiplication and the existence of an inverse element for the multiplication is missing. Generally those do not
+hold for matrices with $n\geq2$.}
+
+\lang{de}{
+\emph{Gegenbeispiel zur Kommutativität:}
+\\
+Für
+$A = \begin{pmatrix}
+1 & 2 \\ 0& 1
+\end{pmatrix}$ und  $B = \begin{pmatrix}
+2 & 0\\ 1&1 \end{pmatrix} \in M(2;\R) 
+$ gilt
+\[ A\cdot B=\begin{pmatrix}
+1 & 2 \\ 0& 1
+\end{pmatrix}\cdot \begin{pmatrix}
+2 & 0\\ 1&1 \end{pmatrix}=\begin{pmatrix} 4&2\\ 1&1\end{pmatrix}, \]
+aber 
+\[ B\cdot A=\begin{pmatrix}
+2 & 0\\ 1&1 \end{pmatrix}\cdot\begin{pmatrix}
+1 & 2 \\ 0& 1
+\end{pmatrix}=\begin{pmatrix} 2&4\\ 1&3\end{pmatrix}. \]
+Es gilt also $A\cdot B\neq  B\cdot A$.}
+
+\lang{en}{
+\emph{Counterexample for the commutative property:}
+\\
+For
+$A = \begin{pmatrix}
+1 & 2 \\ 0& 1
+\end{pmatrix}$ and  $B = \begin{pmatrix}
+2 & 0\\ 1&1 \end{pmatrix} \in M(2;\R) 
+$ we have
+\[ A\cdot B=\begin{pmatrix}
+1 & 2 \\ 0& 1
+\end{pmatrix}\cdot \begin{pmatrix}
+2 & 0\\ 1&1 \end{pmatrix}=\begin{pmatrix} 4&2\\ 1&1\end{pmatrix}, \]
+but 
+\[ B\cdot A=\begin{pmatrix}
+2 & 0\\ 1&1 \end{pmatrix}\cdot\begin{pmatrix}
+1 & 2 \\ 0& 1
+\end{pmatrix}=\begin{pmatrix} 2&4\\ 1&3\end{pmatrix}. \]
+We have $A\cdot B\neq  B\cdot A$.}
+
+\lang{de}{
+\emph{Beispiel für eine Matrix, die kein multiplikatives Inverses besitzt:}
+\\
+Zur Matrix $C=\begin{pmatrix}
+1 & 0 \\ 0& 0
+\end{pmatrix}$   gibt  es keine Matrix $D$ mit $C\cdot D=E_2$, denn in jedem Produkt 
+\[ \begin{pmatrix}
+1 & 0 \\ 0& 0
+\end{pmatrix}\cdot \begin{pmatrix} d_{11}&d_{12}\\d_{21}&d_{22}\end{pmatrix}=\begin{pmatrix}d_{11}&d_{12}\\0&0\end{pmatrix} \]
+ist stets die zweite Zeile gleich $(0 \ 0)$ unabhängig davon, welche Einträge $d_{ij}$ wir in $D$ wählen. Ebenso gibt es keine Matrix $D$ mit $D\cdot C=E_2$, denn im Produkt
+\[D\cdot \begin{pmatrix}
+1 & 0 \\ 0& 0
+\end{pmatrix} \]
+ist stets die zweite Spalte gleich $\left(\begin{smallmatrix} 0\\ 0 \end{smallmatrix}\right)$.}
+
+\lang{en}{
+\emph{Example for a matrix without a multiplicative inverse:}
+\\
+There is no matrix $D$ for matrix $C=\begin{pmatrix}
+1 & 0 \\ 0& 0
+\end{pmatrix}$ such, that $C\cdot D=I_2$. In each product 
+\[ \begin{pmatrix}
+1 & 0 \\ 0& 0
+\end{pmatrix}\cdot \begin{pmatrix} d_{11}&d_{12}\\d_{21}&d_{22}\end{pmatrix}=\begin{pmatrix}d_{11}&d_{12}\\0&0\end{pmatrix} \]
+we always find, that the second row is equal to $(0 \ 0)$ no matter which entries $d_{ij}$ we choose in $D$. 
+Also there is no matrix $D$ with $D\cdot C=I_2$, because in the product
+\[D\cdot \begin{pmatrix}
+1 & 0 \\ 0& 0
+\end{pmatrix} \]
+the second row is always equal to $\left(\begin{smallmatrix} 0\\ 0 \end{smallmatrix}\right)$.}
+
+\lang{de}{Solche Beispiele findet man ebenso einfach für beliebiges $n\geq 2$.}
+\lang{en}{Such examples can be found for any $n\geq 2$.}
+\end{remark}
+
+\lang{de}{
+Das folgende Video erläutert die letzte Bemerkung.
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10884&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+}
+
+\section{\lang{de}{Invertierbare Matrizen} \lang{en}{invertible matrices}}\label{sec:invertierbare-matrizen}
+
+\lang{de}{
+Da es nicht für jede Matrix $A\in M(n;\K)$ eine Matrix $B\in M(n;\K)$ mit $A\cdot B=E_n$ gibt,
+erhalten solche Matrizen, für die es so ein $B$ gibt, einen besonderen Namen.}
+\lang{en}{
+Since there is for every matrix $A\in M(n;\K)$ a matrix $B\in M(n;\K)$ with $A\cdot B=I_n$, the matrices for which there is such a $B$
+will get a special name.}
+
+\begin{definition}\label{def:invertierbar}
+\lang{de}{
+Eine Matrix $A\in M(n;\K)$ heißt \notion{invertierbar}, wenn es
+eine Matrix $B\in M(n;\K)$ mit $A\cdot B=E_n$ gibt.
+
+In diesem Fall wird die Matrix $B$ \notion{inverse Matrix} zu $A$ genannt und mit $A^{-1}$ bezeichnet.\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=829}{\image[75]{00_Videobutton_schwarz}}}}
+
+\lang{en}{
+A matrix $A\in  M(n;\K)$ is called \notion{invertible}, if there exists a matrix $B\in M(n;\K)$ such that $A\cdot B=I_n$.
+We then call the matrix $B$ the \notion{inverse matrix} of $A$ and note it with $A^{-1}$.}
+\end{definition}
+\begin{example}
+\lang{de}{
+ Die Einheitsmatrix $E_n$ ist invertierbar mit inverser Matrix $E_n$, denn
+$E_n\cdot E_n=E_n$.}
+\lang{en}{
+The identity matrix $I_n$ is invertible. Its inverse matrix is $I_n$, because
+$I_n\cdot I_n=I_n$.}
+\end{example}
+
+\begin{remark}\label{rem:links-invers}
+\begin{enumerate}
+\item \lang{de}{ Wenn $A$ invertierbar ist, dann gibt es auch nur genau eine Matrix $B$ mit $A\cdot B=E_n$, weshalb es gerechtfertigt ist, von \textbf{der} inversen Matrix $A^{-1}$ von $A$ zu sprechen.}
+\lang{en}{If $A$ is invertible, then there is exactly one matrix $B$ with $A\cdot B=I_n$. Because of this, we can talk about \textbf{the} inverse matrix $A^{-1}$ for the matrix $A$.}
+\item \lang{de}{Gibt es andererseits zu $A\in M(n;\K)$ eine Matrix $B\in M(n;\K)$ mit $B\cdot A=E_n$, so
+gilt auch $A\cdot B=E_n$. Man hätte also alternativ definieren können, dass $A$ invertierbar ist,
+wenn es eine Matrix $B\in M(n;\K)$ mit $B\cdot A=E_n$ gibt.}
+\lang{en}{If there a matrix $B\in M(n;\K)$ for a given matrix $A\in M(n;\K)$ with $B\cdot A=I_n$, then it is also $A\cdot B=I_n$.}
+\item \lang{de}{Die inverse Matrix $A^{-1}$ erfüllt also nicht nur $A\cdot A^{-1}=E_n$, sondern auch
+\[ A^{-1}\cdot A=E_n. \]}
+\lang{en}{The inverse $A^{-1}$ not only satisfies the equation $A\cdot A^{-1}=I_n$, but also \[ A^{-1}\cdot A=I_n. \]}
+\end{enumerate}
+\lang{de}{
+Die Begründungen für diese Tatsachen werden im \link{inverse-matrix}{nächsten Abschnitt} gegeben, wo wir erklären, wie man die inverse Matrix berechnen kann.}
+\lang{en}{We will justify those statements in the \link{inverse-matrix}{next section}, where we will discuss how to calcute the inverse matrix. }
+\end{remark}
+\begin{block}[warning]
+\lang{de}{
+Da die Matrizenmultiplikation nicht kommutativ ist, sollte die für Zahlen übliche Bruchschreibweise $\frac{a}{b}$ für $ab^{-1}$ bei Matrizen nicht verwendet werden. Die für Brüche von Zahlen geltenden Rechenregeln
+\[ \frac{a}{b}\cdot \frac{c}{d}=\frac{ac}{bd}\quad \text{und} \quad \frac{a}{b}+\frac{c}{d}=\frac{ad+bc}{bd}\]
+wären nämlich für Matrizen falsch!}
+\lang{en}{Since matrix multiplication is not commutative, the usual notation $ab^{-1}$ for fractions $\frac{a}{b}$ should not be used. The following calculating rules for fractions
+\[ \frac{a}{b}\cdot \frac{c}{d}=\frac{ac}{bd}\quad \text{und} \quad \frac{a}{b}+\frac{c}{d}=\frac{ad+bc}{bd}\]
+are wrong for matrices!}
+\end{block}
+
+\begin{example}\label{ex:erste-bsp_inverse_matrix}
+\begin{tabs*}
+\tab{\lang{de}{Beispiel 1} \lang{en}{Example 1}} 
+\lang{de}{
+Die Matrix $A = \begin{pmatrix}
+1 & 2 \\ 0& 1
+\end{pmatrix} \in M(2;\R) $ ist invertierbar.}
+\lang{en}{
+The matrix $A = \begin{pmatrix}
+1 & 2 \\ 0& 1
+\end{pmatrix} \in M(2;\R) $ is invertible.}
+\begin{incremental}[\initialsteps{0}]
+\step
+\lang{de}{
+Ihre inverse Matrix ist
+$ A^{-1}=\begin{pmatrix}
+1 & -2 \\ 0& 1
+\end{pmatrix}$,}
+\lang{en}{
+Its inverse matrix is
+$ A^{-1}=\begin{pmatrix}
+1 & -2 \\ 0& 1
+\end{pmatrix}$,}
+\step
+\lang{de}{
+denn
+\[  A\cdot A^{-1}= \begin{pmatrix}
+1 & 2 \\ 0& 1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & -2 \\ 0& 1
+\end{pmatrix} = \begin{pmatrix}
+1\cdot 1+2\cdot 0 & 1\cdot (-2)+2\cdot 1 \\ 0\cdot 1+1\cdot 0 & 0\cdot (-2)+1\cdot 1
+\end{pmatrix}= \begin{pmatrix}
+1 & 0 \\ 0& 1
+\end{pmatrix}. \]}
+\lang{en}{
+because
+\[  A\cdot A^{-1}= \begin{pmatrix}
+1 & 2 \\ 0& 1
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & -2 \\ 0& 1
+\end{pmatrix} = \begin{pmatrix}
+1\cdot 1+2\cdot 0 & 1\cdot (-2)+2\cdot 1 \\ 0\cdot 1+1\cdot 0 & 0\cdot (-2)+1\cdot 1
+\end{pmatrix}= \begin{pmatrix}
+1 & 0 \\ 0& 1
+\end{pmatrix}. \]}
+\end{incremental}
+
+\tab{\lang{de}{Beispiel 2} \lang{en}{Example 2}} 
+\lang{de}{
+Die Matrix $B = \begin{pmatrix}
+3 & 2 \\ -1& 1
+\end{pmatrix} \in M(2;\R) $ ist invertierbar.}
+\lang{en}{
+The matrix $B = \begin{pmatrix}
+3 & 2 \\ -1& 1
+\end{pmatrix} \in M(2;\R) $ is invertible.}
+\begin{incremental}[\initialsteps{0}]
+\step
+\lang{de}{
+Ihre  inverse Matrix ist
+$B^{-1}=\begin{pmatrix}
+1/5 & -2/5 \\ 1/5& 3/5
+\end{pmatrix}, $}
+\lang{en}{
+Its  inverse matrix is
+$B^{-1}=\begin{pmatrix}
+1/5 & -2/5 \\ 1/5& 3/5
+\end{pmatrix}, $}
+\step
+\lang{de}{
+denn
+\[  B\cdot B^{-1}= \begin{pmatrix}
+3 & 2 \\ -1& 1
+\end{pmatrix} \cdot \begin{pmatrix}
+\frac{1}{5} & -\frac{2}{5} \\ \frac{1}{5}& \frac{3}{5}
+\end{pmatrix} = \begin{pmatrix}
+\frac{3}{5}+\frac{2}{5} & -\frac{6}{5}+\frac{6}{5} \\ -\frac{1}{5}+\frac{1}{5} & \frac{2}{5}+\frac{3}{5}
+\end{pmatrix}= \begin{pmatrix}
+1 & 0 \\ 0& 1
+\end{pmatrix}. \]
+Man sieht hier auch direkt
+\[ B^{-1}\cdot B=\begin{pmatrix}
+\frac{1}{5} & -\frac{2}{5} \\ \frac{1}{5}& \frac{3}{5}
+\end{pmatrix} \cdot \begin{pmatrix}
+3 & 2 \\ -1& 1
+\end{pmatrix} = \begin{pmatrix}
+\frac{3}{5}+\frac{2}{5} & \frac{2}{5}-\frac{2}{5} \\ \frac{3}{5}-\frac{3}{5} & \frac{2}{5}+\frac{3}{5}
+\end{pmatrix}= \begin{pmatrix}
+1 & 0 \\ 0& 1
+\end{pmatrix}. \]}
+\lang{en}{
+because
+\[  B\cdot B^{-1}= \begin{pmatrix}
+3 & 2 \\ -1& 1
+\end{pmatrix} \cdot \begin{pmatrix}
+\frac{1}{5} & -\frac{2}{5} \\ \frac{1}{5}& \frac{3}{5}
+\end{pmatrix} = \begin{pmatrix}
+\frac{3}{5}+\frac{2}{5} & -\frac{6}{5}+\frac{6}{5} \\ -\frac{1}{5}+\frac{1}{5} & \frac{2}{5}+\frac{3}{5}
+\end{pmatrix}= \begin{pmatrix}
+1 & 0 \\ 0& 1
+\end{pmatrix}. \]
+We can see right away, that
+\[ B^{-1}\cdot B=\begin{pmatrix}
+\frac{1}{5} & -\frac{2}{5} \\ \frac{1}{5}& \frac{3}{5}
+\end{pmatrix} \cdot \begin{pmatrix}
+3 & 2 \\ -1& 1
+\end{pmatrix} = \begin{pmatrix}
+\frac{3}{5}+\frac{2}{5} & \frac{2}{5}-\frac{2}{5} \\ \frac{3}{5}-\frac{3}{5} & \frac{2}{5}+\frac{3}{5}
+\end{pmatrix}= \begin{pmatrix}
+1 & 0 \\ 0& 1
+\end{pmatrix}. \]}
+\end{incremental}
+
+\tab{\lang{de}{Beispiel 3} \lang{en}{Example 3}}
+\lang{de}{
+Die Matrix $C=\begin{pmatrix} 2+i&-i\\i&2-i\end{pmatrix}$ ist invertierbar.}
+\lang{en}{
+The matrix $C=\begin{pmatrix} 2+i&-i\\i&2-i\end{pmatrix}$ is invertible.}
+\begin{incremental}[\initialsteps{0}]
+\step
+\lang{de}{
+Ihre inverse Matrix ist $C^{-1}=\frac{1}{4}\begin{pmatrix}2-i&i\\-i&2+i\end{pmatrix}$,}
+\lang{en}{
+Its inverse matrix is $C^{-1}=\frac{1}{4}\begin{pmatrix}2-i&i\\-i&2+i\end{pmatrix}$,}
+\step
+\lang{de}{
+denn
+\[C\cdot C^{-1}=\frac{1}{4}\begin{pmatrix}(2+i)(2-i)+(-i)^2&(2+i)i-i(2+i)\\ i(2-i)+(2-i)(-i)&i^2+(2-i)(2+i)\end{pmatrix}
+=\frac{1}{4}\begin{pmatrix}4&0\\0&4\end{pmatrix}=\begin{pmatrix}
+1 & 0 \\ 0& 1
+\end{pmatrix}.\]}
+\lang{en}{
+because
+\[C\cdot C^{-1}=\frac{1}{4}\begin{pmatrix}(2+i)(2-i)+(-i)^2&(2+i)i-i(2+i)\\ i(2-i)+(2-i)(-i)&i^2+(2-i)(2+i)\end{pmatrix}
+=\frac{1}{4}\begin{pmatrix}4&0\\0&4\end{pmatrix}=\begin{pmatrix}
+1 & 0 \\ 0& 1
+\end{pmatrix}.\]}
+\step
+\lang{de}{
+Auch hier gilt
+\[C^{-1}\cdot C=\frac{1}{4}\begin{pmatrix}(2-i)(2+i)+i^2&(2-i)(-i)+i(2-i)\\ -i(2+i)+(2+i)i&(-i)^2+(2+i)(2-i)\end{pmatrix}
+=\begin{pmatrix} 1 & 0 \\ 0& 1\end{pmatrix}.\]}
+\lang{en}{
+Here we also have
+\[C^{-1}\cdot C=\frac{1}{4}\begin{pmatrix}(2-i)(2+i)+i^2&(2-i)(-i)+i(2-i)\\ -i(2+i)+(2+i)i&(-i)^2+(2+i)(2-i)\end{pmatrix}
+=\begin{pmatrix} 1 & 0 \\ 0& 1\end{pmatrix}.\]}
+\end{incremental}
+
+\tab{\lang{de}{Diagonalmatrizen} \lang{en}{Diagonal matrices}} 
+\lang{de}{
+Eine Diagonalmatrix $D=\text{diag}(d_1,d_2,\ldots,d_n)\in M(n;\C)$ ist invertierbar, wenn alle $d_j\neq 0$, $j=1,\ldots,n$.}
+\lang{en}{
+A diagonal matrix $D=\text{diag}(d_1,d_2,\ldots,d_n)\in M(n;\C)$ is invertible if all $d_j\neq 0$, $j=1,\ldots,n$.}
+\begin{incremental}[\initialsteps{0}]
+\step
+\lang{de}{
+Die inverse Matrix ist dann
+$D^{-1}=\text{diag}(d_1^{-1},d_2^{-1},\ldots, d_n^{-1})$,} 
+\lang{en}{
+Then the inverse matrix is
+$D^{-1}=\text{diag}(d_1^{-1},d_2^{-1},\ldots, d_n^{-1})$,} 
+\step
+\lang{de}{
+denn
+\[\text{diag}(d_1,d_2,\ldots,d_n)\cdot\text{diag}(d_1^{-1},d_2^{-1},\ldots, d_n^{-1})=\text{diag}(d_1d_1^{-1},d_2d_2^{-1},\ldots, d_n d_n^{-1})=\text{diag}(1,1,\ldots,1)=E_n.\]}
+\lang{en}{
+because
+\[\text{diag}(d_1,d_2,\ldots,d_n)\cdot\text{diag}(d_1^{-1},d_2^{-1},\ldots, d_n^{-1})=\text{diag}(d_1d_1^{-1},d_2d_2^{-1},\ldots, d_n d_n^{-1})=\text{diag}(1,1,\ldots,1)=I_n.\]}
+\end{incremental}
+\end{tabs*}
+\end{example}
+
+%\begin{quickcheckcontainer}
+\begin{quickcheck}
+  \type{input.function}
+  \field{complex-rational}
+  \displayprecision{3}
+  \correctorprecision{4}
+ 
+  \begin{variables}
+   \drawFromSet{d1}{2,3,4,5,6,7,8,9}
+   \drawFromSet{d4}{2,3,4,5,6,7,8,9}
+   \function[calculate]{a1}{1/d1}
+   \function[calculate]{a2}{0}
+   \function[calculate]{a3}{0}
+   \function[calculate]{a4}{1/d4}
+   \function[calculate]{b1}{-i}
+   \function[calculate]{b4}{i}
+   \function[calculate]{b2}{0}
+   
+ \end{variables}
+  
+  \text{
+  \lang{de}{
+    Bestimmen Sie die inverse Matrix $B=\begin{pmatrix}b_{11}&b_{12}\\b_{21}&b_{22}\end{pmatrix}$ von $A=\begin{pmatrix}\var{d1}&0\\0&\var{d4}\end{pmatrix}\in M(2;\R)$.
+ 
+    Antwort: $b_{11}=$\ansref, $b_{12}=$\ansref, $b_{21}=$\ansref, $b_{22}=$\ansref. 
+    
+    Bestimmen Sie außerdem die inverse Matrix $D=\begin{pmatrix}d_{11}&d_{12}\\d_{21}&d_{22}\end{pmatrix}$ von
+    $C=\begin{pmatrix}i&0\\0&-i\end{pmatrix}\in M(2;\C)$.
+    
+    Antwort: $d_{11}=$\ansref, $d_{12}=$\ansref, $d_{21}=$\ansref, $d_{22}=$\ansref.} 
+
+    \lang{en}{
+
+    Determine the inverse matrix $B=\begin{pmatrix}b_{11}&b_{12}\\b_{21}&b_{22}\end{pmatrix}$ of $A=\begin{pmatrix}\var{d1}&0\\0&\var{d4}\end{pmatrix}\in M(2;\R)$.
+ 
+    Answer: $b_{11}=$\ansref, $b_{12}=$\ansref, $b_{21}=$\ansref, $b_{22}=$\ansref. 
+    
+    Determine also the inverse matrix $D=\begin{pmatrix}d_{11}&d_{12}\\d_{21}&d_{22}\end{pmatrix}$ of
+    $C=\begin{pmatrix}i&0\\0&-i\end{pmatrix}\in M(2;\C)$.
+    
+    Answer: $d_{11}=$\ansref, $d_{12}=$\ansref, $d_{21}=$\ansref, $d_{22}=$\ansref.} 
+  }
+  
+ 
+  \begin{answer}
+    \solution{a1}
+  \end{answer}
+   \begin{answer}
+    \solution{a2}
+   \end{answer}
+   \begin{answer}
+    \solution{a3} 
+  \end{answer}
+  \begin{answer}
+    \solution{a4}
+   \end{answer}
+   %%
+   \begin{answer}
+    \solution{b1}
+  \end{answer}
+   \begin{answer}
+    \solution{b2}
+   \end{answer}
+   \begin{answer}
+    \solution{b2} 
+  \end{answer}
+  \begin{answer}
+    \solution{b4}
+   \end{answer}
+\end{quickcheck}
+%\end{quickcheckcontainer}
+
+\lang{de}{
+Auch alle Elementarmatrizen sind invertiertbar:}
+\lang{en}{
+All elementary matrices are invertible too:}
+
+\begin{example}
+\lang{de}{
+Die Elementarmatrizen $M_i(r)$, $A_{ij}(r)$ und $V_{ij}$ mit $r\in \K$, $r\neq 0$, $i,j\in \{1,\ldots, n\}$, $i\neq j$, sind alle invertierbar mit Inversen $M_i(\frac{1}{r})$, $A_{ij}(-r)$ bzw. $V_{ij}$, denn
+\begin{eqnarray*}
+ M_i(r) \cdot M_i(\frac{1}{r}) &=& M_i(1)=E_n, \\
+A_{ij}(r) \cdot A_{ij}(-r) &=& A_{ij}(r-r)= E_n, \\
+V_{ij}\cdot V_{ij}&=& E_n.
+\end{eqnarray*}}
+
+\lang{en}{
+The elementary matrices $M_i(r)$, $A_{ij}(r)$ and $V_{ij}$ with $r\in \K$, $r\neq 0$, $i,j\in \{1,\ldots, n\}$, $i\neq j$, are all invertible with inverse $M_i(\frac{1}{r})$, $A_{ij}(-r)$ or rather $V_{ij}$, because
+\begin{eqnarray*}
+ M_i(r) \cdot M_i(\frac{1}{r}) &=& M_i(1)=I_n, \\
+A_{ij}(r) \cdot A_{ij}(-r) &=& A_{ij}(r-r)= I_n, \\
+V_{ij}\cdot V_{ij}&=& I_n.
+\end{eqnarray*}}
+\end{example}
+
+\lang{de}{
+Das nachfolgende Video führt quadratische Matrizen ein,
+setzt jedoch grundlegende Kenntnisse über
+\link{content_10b_lineare_abb}{lineare Abbildungen} voraus:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10876&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}}
+
+
+
+\end{visualizationwrapper}
+
+\end{content}

@@ -1,0 +1,407 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü06: Elementarmatrizen}
+    \lang{en}{Ex 06: Elementary matrices}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+
+\title{\lang{de}{Ü06: Elementarmatrizen} \lang{en}{Ex06: Elementary matrices}}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/11516}{Ticket 11516}
+\end{block}
+
+%######################################################FRAGE_TEXT
+\lang{de}{In dieser Aufgabe sollen die Zeilenumformungen des Gauß-Verfahrens
+als Elementarmatrizen angegeben werden.}
+\lang{en}{In this exercise the row operations of Gaussian elimination should be expressed as elementary matrices.}
+
+\lang{de}{
+Gegeben sei die Matrix 
+%$A \in M(2,3;\R)$ mit 
+$A= \left(\begin{smallmatrix}
+2 & 2 & -1 \\ 3 & 1 & 4 \end{smallmatrix} \right) $ über $\R$.
+Die folgenden Zeilenumformungen bringen die Matrix auf die
+reduzierte Zeilenstufenform:}
+\lang{en}{
+Given a matrix 
+%$A \in M(2,3;\R)$ mit 
+$A= \left(\begin{smallmatrix}
+2 & 2 & -1 \\ 3 & 1 & 4 \end{smallmatrix} \right) $ over $\R$.
+The following row operations transform the matrix into reduced row echelon form:}
+
+\lang{de}{Matrix $A$:}
+\lang{en}{Matrix $A$:}
+\[
+\begin{pmatrix}
+    2 & 2 & -1 \\
+    3 & 1 & 4\\
+\end{pmatrix}
+~
+\begin{matrix}
+     \\
+    | (-\frac{3}{2}) \cdot (I) + (II) \\
+\end{matrix}
+\]
+
+\lang{de}{Schritt 1:}
+\lang{en}{Step 1:}
+\[
+\rightsquigarrow~~
+\begin{pmatrix}
+    2 & 2 & -1 \\
+    0 & -2 & \frac{11}{2}\\
+\end{pmatrix}
+~
+\begin{matrix}
+    | 1 \cdot (II) + (I) \\
+    \\
+\end{matrix}
+\]
+
+\lang{de}{Schritt 2:}
+\lang{en}{Step 2:}
+\[
+\rightsquigarrow~~
+\begin{pmatrix}
+    2 & 0 & \frac{9}{2} \\
+    0 & -2 & \frac{11}{2}\\
+\end{pmatrix}
+~
+\begin{matrix}
+    | \frac{1}{2} \cdot (I) \\
+    \\
+\end{matrix}
+\]
+
+\lang{de}{Schritt 3:}
+\lang{en}{Step 3:}
+\[
+\rightsquigarrow~~
+\begin{pmatrix}
+    1 & 0 & \frac{9}{4} \\
+    0 & -2 & \frac{11}{2}\\
+\end{pmatrix}
+~
+\begin{matrix}
+    \\
+    | (-\frac{1}{2}) \cdot (II) \\
+\end{matrix}
+\]
+
+\lang{de}{Schritt 4:}
+\lang{en}{Step 4:}
+\[
+\rightsquigarrow~~
+\begin{pmatrix}
+    1 & 0 & \frac{9}{4} \\
+    0 & 1 & -\frac{11}{4}\\
+\end{pmatrix}
+\]
+
+%\begin{eqnarray*}
+%&& \begin{pmatrix}  2 & 2 & -1 \\ 3 & 1 & 4\end{pmatrix} \begin{matrix}  \phantom{1}\\ /  -\frac{3}{2}\cdot \text{(I)}  \end{matrix} \\
+%& \rightsquigarrow &
+%\begin{pmatrix}  2 & 2 & -1 \\ 0 & -2 & \frac{11}{2} \end{pmatrix} \begin{matrix}  / +\text{(II)}   \\ \phantom{1}\end{matrix} \\ 
+%& \rightsquigarrow &
+%\begin{pmatrix}  2 & 0 & \frac{9}{2} \\ 0 & -2 & \frac{11}{2} \end{pmatrix} \begin{matrix}  / \cdot \frac{1}{2}   \\ \phantom{1} \end{matrix}\\
+%& \rightsquigarrow &
+%\begin{pmatrix}  1 & 0 & \frac{9}{4} \\ 0 & -2 & \frac{11}{2} \end{pmatrix} \begin{matrix} \phantom{1}\\ / \cdot (-\frac{1}{2})  \end{matrix} \\
+%& \rightsquigarrow &
+%\begin{pmatrix}  1 & 0 & \frac{9}{4} \\ 0 & 1 & -\frac{11}{4} \end{pmatrix}
+%\end{eqnarray*}
+
+\lang{de}{
+\begin{enumerate}[(a)]
+\item (a) Geben Sie Elementarmatrizen für alle vier Umformungsschritte an.
+
+\item (b) Bestimmen Sie aus der Lösung von (a) eine Matrix $B$, sodass Folgendes gilt:
+\[
+    \begin{pmatrix}  1 & 0 & \frac{9}{4} \\ 0 & 1 & -\frac{11}{4} \end{pmatrix} = B \cdot A = B \cdot \begin{pmatrix}  2 & 2 & -1 \\ 3 & 1 & 4\end{pmatrix}
+\]
+
+\item (c) Bestimmen Sie weiterhin eine Matrix $C$, für die gilt:
+\[
+    A = 
+    \begin{pmatrix}  2 & 2 & -1 \\ 3 & 1 & 4\end{pmatrix}=C\cdot \begin{pmatrix}  1 & 0 & \frac{9}{4} \\ 0 & 1 & -\frac{11}{4} \end{pmatrix}
+\]
+\end{enumerate}}
+
+\lang{en}{
+\begin{enumerate}[(a)]
+\item (a) Give the elementary matrices for all four transformation steps.
+
+\item (b) Determin a matrix $B$, using (a), such that holds:
+\[
+    \begin{pmatrix}  1 & 0 & \frac{9}{4} \\ 0 & 1 & -\frac{11}{4} \end{pmatrix} = B \cdot A = B \cdot \begin{pmatrix}  2 & 2 & -1 \\ 3 & 1 & 4\end{pmatrix}
+\]
+
+\item (c) Determine a matric $C$, that holds:
+\[
+    A = 
+    \begin{pmatrix}  2 & 2 & -1 \\ 3 & 1 & 4\end{pmatrix}=C\cdot \begin{pmatrix}  1 & 0 & \frac{9}{4} \\ 0 & 1 & -\frac{11}{4} \end{pmatrix}
+\]
+\end{enumerate}}
+
+\lang{de}{
+\textit{Bemerkung:} In dieser Aufgabe sind die in (b) und (c) gesuchten Matrizen $B$ und $C$
+eindeutig durch die angegebene Bedingung festgelegt.
+Im Allgemeinen (d.\,h. bei anderen Ausgangsmatrizen) könnte es jedoch mehrere solcher Matrizen geben.}
+\lang{en}{
+\textit{Note:} The matrices $B$ and $C$ are unambiguously determined by the given conditions. In general (i.e. for other matrices) 
+there may be several matrices.}
+
+%##################################################ANTWORTEN_TEXT
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+  \tab{\lang{de}{    Antwort    } \lang{en}{Answer}}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   
+\begin{enumerate}
+\item[(a)] Die Elementarmatrizen sind (in dieser Reihenfolge):
+\[  \begin{pmatrix} 1 & 0 \\ -\frac{3}{2} & 1 \end{pmatrix}, \quad \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix},\quad \begin{pmatrix} \frac{1}{2} & 0 \\ 0 & 1 \end{pmatrix},\quad \begin{pmatrix} 1 & 0 \\ 0 & -\frac{1}{2} \end{pmatrix}.\]
+\item[(b)] Multiplikation der Elementarmatrizen in umgekehrter Reihenfolge zu (a) ergibt:\\
+\[ B= \begin{pmatrix} -\frac{1}{4} & \frac{1}{2} \\ \frac{3}{4} & -\frac{1}{2} \end{pmatrix} \]
+%\item[c)] Multiplikation der Elementarmatrizen in der Reihenfolge aus a) ergibt:\\
+\item[(c)] Der Lösungsweg ist wie in (a) und (b), 
+jedoch mit den gegenteiligen Umformungsschritten.
+Man erhält:
+\[ C= \begin{pmatrix}2 & 2 \\ 3 & 1\end{pmatrix} \]
+\end{enumerate}    }
+
+\lang{en}{   
+\begin{enumerate}
+\item[(a)] The elementary matrices are (in this order):
+\[  \begin{pmatrix} 1 & 0 \\ -\frac{3}{2} & 1 \end{pmatrix}, \quad \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix},\quad \begin{pmatrix} \frac{1}{2} & 0 \\ 0 & 1 \end{pmatrix},\quad \begin{pmatrix} 1 & 0 \\ 0 & -\frac{1}{2} \end{pmatrix}.\]
+\item[(b)] Multiplication of the elementary matrices in reversed order (compared to (a)) yields:\\
+\[ B= \begin{pmatrix} -\frac{1}{4} & \frac{1}{2} \\ \frac{3}{4} & -\frac{1}{2} \end{pmatrix} \]
+%\item[c)] Multiplikation der Elementarmatrizen in der Reihenfolge aus a) ergibt:\\
+\item[(c)] We receive $C$ by going on as done in (a) and (b), but with the inversed transformationsteps.
+We get:
+\[ C= \begin{pmatrix}2 & 2 \\ 3 & 1\end{pmatrix} \]
+\end{enumerate}    }
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung (a)    } \lang{en}{Solution (a)}}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step\lang{de}{
+    Im ersten Umformungsschritt wird das $(-\frac{3}{2})$-fache der
+    ersten Zeile zur zweiten Zeile hinzuaddiert.
+    
+    Wir definieren nun eine Matrix $A_{ij}(c)$, um das $c$-fache 
+der $j$-ten Zeile zur $i$-ten Zeile hinzuzuaddieren.
+Die Matrix $A_{ij}(c)$ ist wie folgt aufgebaut:
+Die Einträge auf der Hauptdiagonalen sind 1.
+An der Stelle $(i,j)$ ist der Eintrag $c$.
+Alle anderen Einträge sind 0.
+Hier sind $c=-\frac{3}{2}$, $j=1$ und $i=2$.
+Die zur ersten Umformung gehörende Matrix ist daher:}
+
+\lang{en}{
+In the first step we add $(-\frac{3}{2})$-times the first row to the second.
+Now we define a matrix $A_{ij}(c)$ to add $c$-times the $j$th row to the $i$th row. The matrix $A_{ij}(c)$ is composed as follows:
+The entries on the main diagonal are all 1.
+The entry $a_{i,j}$ is $c$.
+The other entries are 0.
+Here we have $c=-\frac{3}{2}$, $j=1$ and $i=2$.
+The matrix for the first transformation is then:}
+\[  A_{21}(-\frac{3}{2})=\begin{pmatrix} 1 & 0 \\ -\frac{3}{2} & 1 \end{pmatrix}. \]
+
+    \step\lang{de}{
+    Im zweiten Umformungsschritt wird das $1$-fache der zweiten Zeile zur ersten Zeile hinzuaddiert.    
+Entsprechend definieren wir:}
+\lang{en}{In the second transformatio stept we add ($1$-times) the second row to the first row.
+Analogously we define:}
+\[ A_{12}(1)= \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}.\]
+
+    \step\lang{de}{
+    Im dritten Schritt wird die erste Zeile mit dem Faktor $\frac{1}{2}$ multipliziert.
+    Die Matrix, mit der man die $i$-te Zeile mit $c$ multipliziert, bezeichnen wir mit
+$M_i(c)$.
+    Der $i$-te Diagonaleintrag dieser Matrix ist gleich $c$.
+    Alle anderen Diagonaleintäge sind 1.
+    Die Einträge, die nicht auf der Hauptdiagonalen liegen, sind 0.
+    Hier ist $c=\frac{1}{2}$ und wir erhalten:}
+
+    \lang{en}{
+    In the third step we multiply the first row with $\frac{1}{2}$.
+    The matrix, which multiplies the $i$th row with $c$, is called $M_i(c)$.
+    The $i$th diagonal entry equals $c$. The other diagonal entries are $1$.
+    All the other entries are $0$.
+    Here we have $c=\frac{1}{2}$, which gives us:}
+\[ M_1(\frac{1}{2})= \begin{pmatrix} \frac{1}{2} & 0 \\ 0 & 1 \end{pmatrix}. \]
+
+    \step\lang{de}{
+    Im letzten Schritt wird die zweite Zeile mit einem Faktor multipliziert.
+    Wir verfahren wie im letzen Schritt und erhalten die Matrix:}
+    \lang{en}{
+    In the last step the second row is multiplied with a factor.
+    We proceed, like we have done in the last step and we get the matrix:}
+\[ M_2(-\frac{1}{2})= \begin{pmatrix} 1 & 0 \\ 0 & -\frac{1}{2} \end{pmatrix}. \]
+
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung (b)    } \lang{en}{Solution (b)}}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   
+Durch die Umformungen und die in (a) bestimmten zugehörigen Matrizen erhält man:}
+\lang{en}{Through the transformations and the matrices determined in (a) we get:}
+
+
+\begin{eqnarray*}
+
+A' = A_{21}(-\frac{3}{2}) \cdot A =
+\begin{pmatrix} 1 & 0 \\ -\frac{3}{2} & 1 \end{pmatrix}\cdot \begin{pmatrix}  2 & 2 & -1 \\ 3 & 1 & 4\end{pmatrix}
+&=& 
+\begin{pmatrix}  2 & 2 & -1 \\ 0 & -2 & \frac{11}{2} \end{pmatrix} \\
+
+A'' = A_{12}(1) \cdot A' = 
+\begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}\cdot \begin{pmatrix}  2 & 2 & -1 \\ 0 & -2 & \frac{11}{2} \end{pmatrix}
+&=& 
+\begin{pmatrix}  2 & 0 & \frac{9}{2} \\ 0 & -2 & \frac{11}{2} \end{pmatrix} \\
+
+A''' = M_1(\frac{1}{2}) \cdot A'' =
+\begin{pmatrix} \frac{1}{2} & 0 \\ 0 & 1 \end{pmatrix}\cdot \begin{pmatrix}  2 & 0 & \frac{9}{2} \\ 0 & -2 & \frac{11}{2} \end{pmatrix}
+&=& 
+\begin{pmatrix}  1 & 0 & \frac{9}{4} \\ 0 & -2 & \frac{11}{2} \end{pmatrix} \\
+
+M_2(-\frac{1}{2}) \cdot A''' =
+\begin{pmatrix} 1 & 0 \\ 0 & -\frac{1}{2} \end{pmatrix}\cdot  \begin{pmatrix}  1 & 0 & \frac{9}{4} \\ 0 & -2 & \frac{11}{2} \end{pmatrix}
+&=&
+\begin{pmatrix}  1 & 0 & \frac{9}{4} \\ 0 & 1 & -\frac{11}{4} \end{pmatrix} \\
+
+\end{eqnarray*}
+
+    \lang{de}{   
+Dies führt sukzessive von unten nach oben eingesetzt zu}
+\lang{en}{This leads successively from the bottom to the top to}
+
+\[
+    B = M_2(-\frac{1}{2}) \cdot M_1(\frac{1}{2}) \cdot A_{12}(1) \cdot A_{21}(-\frac{3}{2}).
+\]
+
+
+%\begin{eqnarray*}
+%\begin{pmatrix}  1 & 0 & \frac{9}{4} \\ 0 & 1 & -\frac{11}{4} \end{pmatrix} &=&
+% \begin{pmatrix} 1 & 0 \\ 0 & -\frac{1}{2} \end{pmatrix}\cdot \begin{pmatrix}  1 & 0 & \frac{9}{4} \\ 0 & -2 & \frac{11}{2} \end{pmatrix} =  \begin{pmatrix} 1 & 0 \\ 0 & -\frac{1}{2} \end{pmatrix}\cdot 
+% \begin{pmatrix} \frac{1}{2} & 0 \\ 0 & 1 \end{pmatrix}\cdot \begin{pmatrix}  2 & 0 & \frac{9}{2} \\ 0 & -2 & \frac{11}{2} \end{pmatrix}, \\
+% &=&  \begin{pmatrix} 1 & 0 \\ 0 & -\frac{1}{2} \end{pmatrix}\cdot 
+% \begin{pmatrix} \frac{1}{2} & 0 \\ 0 & 1 \end{pmatrix}\cdot \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}\cdot
+%\begin{pmatrix}  2 & 2 & -1 \\ 0 & -2 & \frac{11}{2} \end{pmatrix} , \\
+% &=&  \begin{pmatrix} 1 & 0 \\ 0 & -\frac{1}{2} \end{pmatrix}\cdot 
+% \begin{pmatrix} \frac{1}{2} & 0 \\ 0 & 1 \end{pmatrix}\cdot \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}\cdot
+% \begin{pmatrix} 1 & 0 \\ -\frac{3}{2} & 1 \end{pmatrix}\cdot  \begin{pmatrix}  2 & 2 & -1 \\ 3 & 1 & 4\end{pmatrix}.
+%\end{eqnarray*}
+
+    \lang{de}{Als Matrix $B$ kann also das Produkt der Elementarmatrizen gewählt werden:}
+    \lang{en}{Matrix $B$ can be chosen as the product of the elementary matrices:}
+
+\begin{eqnarray*}
+ B&=& \begin{pmatrix} 1 & 0 \\ 0 & -\frac{1}{2} \end{pmatrix}\cdot 
+ \begin{pmatrix} \frac{1}{2} & 0 \\ 0 & 1 \end{pmatrix}\cdot \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}\cdot
+ \begin{pmatrix} 1 & 0 \\ -\frac{3}{2} & 1 \end{pmatrix} \\
+  &=& \qquad \begin{pmatrix} \frac{1}{2} & 0 \\ 0 & -\frac{1}{2} \end{pmatrix}\quad \cdot \quad \begin{pmatrix} -\frac{1}{2} & 1 \\ -\frac{3}{2} & 1 \end{pmatrix}\\
+  &=&  \begin{pmatrix} -\frac{1}{4} & \frac{1}{2} \\ \frac{3}{4} & -\frac{1}{2} \end{pmatrix}.
+\end{eqnarray*}
+
+    \lang{de}{Wir prüfen:}
+    \lang{en}{We check:}
+\[
+B \cdot A = 
+\begin{pmatrix} -\frac{1}{4} & \frac{1}{2} \\ \frac{3}{4} & -\frac{1}{2} \end{pmatrix}
+\cdot
+\begin{pmatrix}  2 & 2 & -1 \\ 3 & 1 & 4\end{pmatrix}
+= 
+\begin{pmatrix}  1 & 0 & \frac{9}{4} \\ 0 & 1 & -\frac{11}{4} \end{pmatrix}
+\]
+
+
+    
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung (c)    } \lang{en}{Solution (c)}}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   
+Die Bestimmung von $C$ kann man entsprechend zur Bestimmung von $B$ durchführen.
+Man führt die Umformungsschritte in umgekehrter Reihenfolge durch.}
+\lang{en}{
+The Determination of $C$ can be done analogously to the determination of $B$.
+Therefor the transformation steps need to be done in reversed order.}
+
+    \lang{de}{Die Elementarmatrizen zu den umgekehrten Umformungen sind von unten nach oben:}
+    \lang{en}{The elementary matrices to the reversed transformations are vom the bottom to the top:}
+
+\[  M_2(-2)= \begin{pmatrix} 1 & 0\\ 0 & -2 \end{pmatrix},\quad M_1(2)= \begin{pmatrix} 2 & 0\\ 0 & 1 \end{pmatrix}, \quad A_{12}(-1)= \begin{pmatrix} 1 & -1\\  0 & 1 \end{pmatrix},  \quad A_{21}(\frac{3}{2})= \begin{pmatrix} 1 & 0\\ \frac{3}{2} & 1 \end{pmatrix}.\]
+
+    \lang{de}{Entsprechend der Überlegung in (b) ist dann:}
+    \lang{en}{Corresponding to (b) we have:}
+\begin{eqnarray*}
+  \begin{pmatrix}  2 & 2 & -1 \\ 3 & 1 & 4\end{pmatrix}
+&=& A_{21}(\frac{3}{2})\cdot A_{12}(-1)\cdot M_1(2)\cdot  M_2(-2)\cdot \begin{pmatrix}  1 & 0 & \frac{9}{4} \\ 0 & 1 & -\frac{11}{4} \end{pmatrix}\\
+&=& \begin{pmatrix} 1 & 0\\ \frac{3}{2} & 1 \end{pmatrix}\cdot \begin{pmatrix} 1 & -1\\  0 & 1 \end{pmatrix}\cdot \begin{pmatrix} 2 & 0\\ 0 & 1 \end{pmatrix}\cdot  \begin{pmatrix} 1 & 0\\ 0 & -2 \end{pmatrix}
+\cdot \begin{pmatrix}  1 & 0 & \frac{9}{4} \\ 0 & 1 & -\frac{11}{4} \end{pmatrix}
+\end{eqnarray*}
+
+    \lang{de}{Man erhält letztendlich die gewünschte Matrix $C$ wie folgt:}
+    \lang{en}{We receive $C$ as follows:}
+\begin{eqnarray*}
+C&=&  \begin{pmatrix} 1 & 0\\ \frac{3}{2} & 1 \end{pmatrix}\cdot \begin{pmatrix} 1 & -1\\  0 & 1 \end{pmatrix}\cdot \begin{pmatrix} 2 & 0\\ 0 & 1 \end{pmatrix}\cdot  \begin{pmatrix} 1 & 0\\ 0 & -2 \end{pmatrix} \\
+  &=& \qquad \begin{pmatrix} 1 & -1 \\ \frac{3}{2} & -\frac{1}{2} \end{pmatrix}\quad \cdot \quad \begin{pmatrix} 2 & 0 \\ 0 & -2 \end{pmatrix}\\
+  &=&  \begin{pmatrix} 2 & 2 \\ 3 & 1 \end{pmatrix}.
+\end{eqnarray*}    
+
+    \lang{de}{Vorausblick: Im nächsten Kapitel (quadratische Matrizen) werden wir feststellen,
+    dass wir für die Lösung dieses Aufgabenteils alternativ auch die \textit{inverse Matrix}
+    zur Matrix des Aufgabenteils (b) bestimmen können.}
+    \lang{en}{Preview: In the next chapter (square matrix), we well see, that we may determine the \textit{inverse}
+    of the matrix in (b) to solve this exercise part.}
+
+
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+
+%#############################################################ENDE
+\end{tabs*}
+\end{content}

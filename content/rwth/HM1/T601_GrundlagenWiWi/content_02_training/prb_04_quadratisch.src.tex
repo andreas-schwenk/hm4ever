@@ -1,0 +1,375 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+ \name{
+  \lang{de}{A04: quadratische Gleichungen}
+  \lang{en}{A04: quadratic equations}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+\lang{de}{\title{A04: quadratische Gleichungen}}
+\lang{en}{\title{A04: quadratic equations}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/23786}{Ticket 23786}
+\end{block}
+
+
+\begin{block}[annotation]
+Kopie: hm4mint/T101_neu_Elementare_REchengraundlagen/training 12
+
+Im Ticket-System: \href{https://team.mumie.net/issues/22337}{Ticket 22337}
+\end{block}
+
+\begin{block}[annotation]
+	Normalform bestimmen und quadratische Gleichung lösen
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+
+
+\begin{problem}
+
+\randomquestionpool{1}{2}
+\randomquestionpool{3}{4}
+%
+% Q1
+%
+\begin{question}
+
+\begin{variables}
+	\randint[Z]{a}{-5}{5}
+	\randint[Z]{l}{-5}{5}
+	\randadjustIf{a,l}{a=l OR a=1 OR l=1}    
+	
+	\randint[Z]{b0}{-5}{5}
+	\randint[Z]{m0}{-5}{5}
+   	\function[calculate]{b}{b0*(a-l)}
+	\function[calculate]{m}{m0*(a-l)}
+	
+	\randint[Z]{c0}{-5}{5}
+	\randint[Z]{n0}{-5}{5}
+   	\function[calculate]{c}{c0*(a-l)}
+	\function[calculate]{n}{n0*(a-l)}    
+	
+	\randint[Z]{d0}{-5}{5}
+	\randint[Z]{i0}{-5}{5}
+   	\function[calculate]{d}{d0*(a-l)}
+	\function[calculate]{i}{i0*(a-l)}        
+	
+	\randint[Z]{ee0}{-5}{5}
+	\randint[Z]{j0}{-5}{5}
+   	\function[calculate]{ee}{ee0*(a-l)}
+	\function[calculate]{j}{j0*(a-l)}    
+	
+    \function[calculate]{disk}{(c-n-2*(a*b-l*m))^2-4*(a-l)*(a*b^2-l*m^2+c*d-n*i+ee-j)}
+	\randadjustIf{b0,c0,d0,ee0,m0,n0,i0,j0,a,l}{a=l OR disk<=0}
+
+% quadratische Gleichung
+	\function{q}{a*(x-b)^2+c*(x+d)+ee}
+	\function{z}{l*(x-m)^2+n*(x+i)+j}
+
+% Lösungen	
+	\function[calculate,2]{sa}{(-(c-n-2*a*b+2*l*m)+sqrt(disk))/(2*a-2*l)}
+	\function[calculate,2]{sb}{(-(c-n-2*a*b+2*l*m)-sqrt(disk))/(2*a-2*l)}
+
+% Normalform
+    \function{norm}{1/(a-l)}
+    \function[expand, normalize]{fn}{norm*(q-z)}
+	\function[calculate,2]{sp}{(c-2*(a*b-l*m)-n)/(a-l)}
+	\function[calculate,2]{sq}{(a*b^2+c*d+ee-l*m^2-n*i-j)/(a-l)}
+    
+	
+\end{variables}
+
+	\type{input.number}
+	\field{real} 
+	\precision{2}
+	    \lang{de}{\text{
+	    Überführen Sie zunächst die quadratische Gleichung   \\
+        \\
+        $\, \var{q}=\var{z} \,$ \\
+        \\
+        in die Normalform und bestimmen Sie anschließend ihre Lösungen $x_1$ und $x_2$.\\
+	    (Geben Sie die gerundeten Ergebnisse auf zwei Nachkommastellen an.) \\
+        \\
+        Die Normalform ist $\; x^2+\,($\ansref$)\,x\,+\,($\ansref$)\,=0\,$  \\
+        \\
+        und die Lösungen sind $\, x_1 =$\ansref  und $\,x_2 =$\ansref .
+    }}
+    \lang{en}{\text{First transform the quadratic equation \\
+        \\
+        $\, \var{q}=\var{z} \,$ \\
+        \\
+        into normal form and then determine its solutions $x_1$ and $x_2$.\\
+	    (Give the results rounded to two decimal places.) \\
+        \\
+        The normal form is $\; x^2+\,($\ansref$)\,x\,+\,($\ansref$)\,=0\,$ \\
+        \\
+        and the solutions are $\, x_1 =$\ansref and $\,x_2 =$\ansref .}}
+
+    \permuteAnswers{3, 4}
+    \begin{answer}
+	    \solution{sp}
+    \end{answer}
+    \begin{answer}
+	    \solution{sq}
+    \end{answer}
+
+    \begin{answer}
+%	    \text{$x_1 =$}
+	    \solution{sa}
+    \end{answer}
+    
+    \begin{answer}
+%	    \text{$x_2 =$}
+	    \solution{sb}
+    \end{answer}
+    
+\end{question}
+%
+% Q2
+%
+\begin{question}
+
+\begin{variables}
+	\randint[Z]{a}{-5}{5}
+	\randint[Z]{l}{-5}{5}
+	\randadjustIf{a,l}{a=l OR a=1 OR l=1}    
+	
+	\randint{b0}{-5}{5}
+	\randint{m0}{-5}{5}
+   	\function[calculate]{b}{b0*(a-l)}
+	\function[calculate]{m}{m0*(a-l)}
+	
+	\randint{c0}{-5}{5}
+	\randint{n0}{-5}{5}
+   	\function[calculate]{c}{c0*(a-l)}
+	\function[calculate]{n}{n0*(a-l)}    
+	
+	\randint{d0}{-5}{5}
+	\randint{i0}{-5}{5}
+   	\function[calculate]{d}{d0*(a-l)}
+	\function[calculate]{i}{i0*(a-l)}        
+	
+	\randint{ee0}{-5}{5}
+	\randint{j0}{-5}{5}
+   	\function[calculate]{ee}{ee0*(a-l)}
+	\function[calculate]{j}{j0*(a-l)}    
+	
+    \function[calculate]{disk}{(c-n-2*(a*b-l*m))^2-4*(a-l)*(a*b^2-l*m^2+c*d-n*i+ee-j)}
+	\randadjustIf{b0,c0,d0,ee0,m0,n0,i0,j0,a,l}{a=l OR disk<=0}
+
+% quadratische Gleichung
+	\function[normalize]{q}{a*(x-b)^2+c*(x+d)+ee}
+	\function[normalize]{z}{l*(x-m)^2+n*(x+i)+j}
+
+% Lösungen	
+	\function[calculate,2]{sa}{(-(c-n-2*a*b+2*l*m)+sqrt(disk))/(2*a-2*l)}
+	\function[calculate,2]{sb}{(-(c-n-2*a*b+2*l*m)-sqrt(disk))/(2*a-2*l)}
+
+% Normalform
+    \function{norm}{1/(a-l)}
+    \function[expand, normalize]{fn}{norm*(q-z)}
+	\function[calculate,2]{sp}{(c-2*(a*b-l*m)-n)/(a-l)}
+	\function[calculate,2]{sq}{(a*b^2+c*d+ee-l*m^2-n*i-j)/(a-l)}
+    
+	
+\end{variables}
+
+	\type{input.number}
+	\field{real} 
+	\precision{2}
+	  \lang{de}{\text{
+	    Überführen Sie zunächt die quadratische Gleichung   \\
+        \\
+        $\, \var{q}=\var{z} \,$ \\
+        \\
+        in die Normalform und bestimmen Sie anschließend ihre Lösungen $x_1$ und $x_2$.\\
+	    (Geben Sie die gerundeten Ergebnisse auf zwei Nachkommastellen an.) \\
+        \\
+        Die Normalform ist $\; x^2+\,($\ansref$)\,x\,+\,($\ansref$)\,=0\,$  \\
+        \\
+        und die Lösungen sind $\, x_1 =$\ansref  und $\,x_2 =$\ansref .
+    }}
+    \lang{en}{\text{ First transform the quadratic equation \\
+        \\
+        $\, \var{q}=\var{z} \,$ \\
+        \\
+        into normal form and then determine its solutions $x_1$ and $x_2$.\\
+	    (Give the results rounded to two decimal places.) \\
+        \\
+        The normal form is $\; x^2+\,($\ansref$)\,x\,+\,($\ansref$)\,=0\,$ \\
+        \\
+        and the solutions are $\, x_1 =$\ansref and $\,x_2 =$\ansref .}}
+
+    \permuteAnswers{3, 4}
+    \begin{answer}
+	    \solution{sp}
+    \end{answer}
+    \begin{answer}
+	    \solution{sq}
+    \end{answer}
+
+    \begin{answer}
+%	    \text{$x_1 =$}
+	    \solution{sa}
+    \end{answer}
+    
+    \begin{answer}
+%	    \text{$x_2 =$}
+	    \solution{sb}
+    \end{answer}
+    
+\end{question}
+%
+% Q3 -Anzahl Lösungen
+%
+\begin{question}
+
+\begin{variables}
+	\randint[Z]{a}{2}{5}
+	
+	\randint{b0}{-5}{5}
+	\randint{m0}{-5}{5}
+   	\function[calculate]{b}{b0*(a-1)}
+	\function[calculate]{m}{m0*(a-1)}
+	
+	\randint{c0}{-5}{5}
+	\randint{n0}{-5}{5}
+   	\function[calculate]{c}{c0*(a-1)}
+	\function[calculate]{n}{n0*(a-1)}    
+	
+	\randint{d0}{-5}{5}
+	\randint{i0}{-5}{5}
+   	\function[calculate]{d}{d0*(a-1)}
+	\function[calculate]{i}{i0*(a-1)}        
+			
+    \function[calculate]{disk}{(c-n-2*(a*b-m))^2-4*(a-1)*(a*b^2-m^2+d-i)}
+
+    \begin{switch}
+        \begin{case}{disk<0}
+          \number{sol}{0}
+      \end{case}
+      \begin{case}{disk=0}
+        \number{sol}{1}
+      \end{case}
+      \begin{default}
+         \number{sol}{2}
+      \end{default} 
+   \end{switch}       
+
+% quadratische Gleichung
+	\function[normalize]{q}{a*(x-b)^2+c*x+d}
+	\function[normalize]{z}{(x-m)^2+n*x+i}
+
+% Lösungen	
+	\function[calculate,2]{sa}{(-(c-n-2*a*b+2*m)+sqrt(disk))/(2*a-2)}
+	\function[calculate,2]{sb}{(-(c-n-2*a*b+2*m)-sqrt(disk))/(2*a-2)}
+
+% Normalform
+    \function{norm}{1/(a-1)}
+    \function[expand, normalize]{fn}{norm*(q-z)}
+	\function[calculate,2]{sp}{(c-2*(a*b-m)-n)/(a-1)}
+	\function[calculate,2]{sq}{(a*b^2+d-m^2-i)/(a-1)}   
+	
+\end{variables}
+
+	\type{input.number}
+	\field{rational} 
+	\precision{2}
+    
+    \lang{de}{\text{Geben Sie an, wieviele Lösungen die folgende quadratische Gleichung
+           $\, \var{q}=\var{z} \,$ besitzt.}}
+    \lang{en}{\text{State how many solutions the following quadratic equation has.
+           $\, \var{q}=\var{z} \,$ has.}}
+          
+    \lang{de}{\explanation{Überführen Sie die Gleichung in die Normalform $\,x^2+px+q=0\,$ und prüfen Sie 
+                dann, ob die Diskriminante $(\frac{p}{2})^2-q$ größer, gleich oder kleiner Null ist.}}
+    \lang{en}{\explanation{Convert the equation into the normal form $\,x^2+px+q=0\,$ and then check 
+                whether the discriminant $(\frac{p}{2})^2-q$ is greater than, equal to or less than zero.}}
+              
+    \begin{answer}
+       \lang{de}{\text{Die Anzahl der Lösungen ist: $\,$}}
+       \lang{en}{\text{The number of solutions is: $\,$}}
+	    \solution{sol}
+    \end{answer}
+        
+\end{question}
+%
+%
+% Q4 -Anzahl Lösungen
+%
+\begin{question}
+
+\begin{variables}
+	\randint[Z]{a}{1}{5}
+	\randint[Z]{b}{-5}{5}
+	\randint[Z]{c}{-5}{5}
+	\randint{d}{-5}{5}    
+	
+	\function[calculate]{p}{-2*a*b+2*c}
+	\function[calculate]{q}{a*b^2+c^2}    
+				
+    \function[calculate]{disk}{d/a}
+
+    \begin{switch}
+        \begin{case}{disk<0}
+          \number{sol}{0}
+      \end{case}
+      \begin{case}{disk=0}
+        \number{sol}{1}
+      \end{case}
+      \begin{default}
+         \number{sol}{2}
+      \end{default} 
+   \end{switch}       
+
+% quadratische Gleichung
+	\function[normalize]{v}{(a+1)*x^2+p*x+q}    % = a(x-b)^2 + (x+c)^2
+	\function[normalize]{z}{(x+c)^2+d}          % = (x+c)^2 + d
+	
+\end{variables}
+
+	\type{input.number}
+	\field{rational} 
+	\precision{2}
+    
+    \lang{de}{\text{Geben Sie an, wieviele Lösungen die quadratische Gleichung 
+           $\, \var{v}=\var{z} \,$ besitzt.
+          }}
+    \lang{en}{\text{State how many solutions there are to the quadratic equation 
+           $\, \var{v}=\var{z} \,$.}}
+          
+    \lang{de}{\explanation{Überführen Sie die Gleichung in die Normalform $\,x^2+px+q=0\,$ und prüfen Sie 
+                dann, ob die Diskriminante $(\frac{p}{2})^2-q$ größer, gleich oder kleiner Null ist.}}
+    \lang{en}{\explanation{Convert the equation into the normal form $\,x^2+px+q=0\,$ and then check 
+                whether the discriminant $(\frac{p}{2})^2-q$ is greater than, equal to or less than zero.}}
+              
+    \begin{answer}
+     \lang{de}{\text{Die Anzahl der Lösungen ist: $\,$}}
+     \lang{en}{\text{The number of solutions is: $\,$}}
+     \solution{sol}
+    \end{answer}
+        
+\end{question}
+%
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

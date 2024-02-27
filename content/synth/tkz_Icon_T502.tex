@@ -1,0 +1,27 @@
+%This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0) 
+%https://creativecommons.org/licenses/by/4.0/legalcode 
+\documentclass[rgb]{standalone}
+\usepackage{tikz, pgfplots}
+\begin{document}
+	\begin{tikzpicture}[scale=0.5, font=\Large]
+		\draw[draw=none] (-0.5,0) -- (-0.5,8) -- (7.5,8) -- (7.5,0) -- cycle;
+		\begin{axis}[scale=1,clip=false,
+		hide axis,
+		view={45}{45},
+		xmin=-2, xmax=2,
+		ymin=-2, ymax=2, 
+		zmin=-2, zmax=2,
+		mesh/interior colormap=
+		{interior}{color=(lightgray) color=(darkgray)},
+		colormap=
+		{exterior}{color=(lightgray) color=(darkgray)},
+		samples=40,
+		samples y=40,
+		z buffer=sort,
+		]	
+		\addplot3[surf, patch, domain=-2:2, y domain=-2:2] {3*(x^2+2*y^2)*exp(1-x^2-y^2)};
+		\draw[line width=3pt, -latex, darkgray] (axis cs:1,-1,{9*exp(-1)}) -- (axis cs:0,-1,{21*exp(-1)});
+		\draw[line width=3pt, -latex, darkgray] (axis cs:1,-1,{9*exp(-1)}) -- (axis cs:1,0,{15*exp(-1)});
+		\end{axis}
+	\end{tikzpicture}
+\end{document}

@@ -1,0 +1,283 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A01: Rechenregeln}
+    \lang{en}{Exercise 1}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{Terme}}
+\lang{en}{\title{terms}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/23783}{Ticket 23783}
+\end{block}
+
+\begin{block}[annotation]
+Kopie: hm4mint/T101_neu_elementare _Rechenregeln/training 4
+
+Im Ticket-System: \href{https://team.mumie.net/issues/22286}{Ticket 22286}
+\end{block}
+
+\begin{block}[annotation]
+  Klammersetzung, Vorzeichen, Potenzen, Rechengesetze und binomische Formeln     
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+\lang{de}{  
+	\title{A01: Rechenregeln}
+}
+\lang{en}{
+	\title{arthimetical rules 1}
+	}
+
+\begin{problem}	
+    \randomquestionpool{1}{1}
+    \randomquestionpool{2}{3}    
+%Q1	
+    \begin{question}
+     \lang{de}{\text{Vervollständigen Sie die folgenden Formeln\\
+            \\
+            $\qquad \var{a}(x+$\ansref $)^2=$\ansref $x^2 +\var{f1}x+$\ansref \\
+            \\
+            $\qquad \var{bb1}(\var{a0} z\,+$\ansref $) \cdot ($\ansref $z\, -$\ansref $)=\var{f3} z^2 -\var{f4}$
+            }
+      \explanation{Wenden Sie die binomischen Formeln an. Mindestens eine der beiden
+                Formeln ist noch fehlerhaft oder unvollständig. 
+                }}
+       \lang{en}{\text{Complete the following formulas.
+            \\
+            $\qquad \var{a}(x+$\ansref $)^2=$\ansref $x^2 +\var{f1}x+$\ansref \\
+            \\
+            $\qquad \var{bb1}(\var{a0} z\,+$\ansref $) \cdot ($\ansref $z\, -$\ansref $)=\var{f3} z^2 -\var{f4}$
+            }
+      \explanation{Apply the binomial formulas. At least one of the
+                formulas is still incorrect or incomplete. 
+                }}        
+      
+      \type{input.number}
+      \field{rational}
+
+      \begin{variables}
+            \randint[Z]{a}{2}{11}
+            \randint{a1}{2}{3}
+            \randint[Z]{k}{-1}{1}
+            \randint{b}{2}{11}
+            \randint[Z]{c}{1}{6}
+            \randint[Z]{d}{1}{11}
+            
+            \function[calculate]{a0}{k*a1}
+            \function[calculate, normalize]{bc}{b/c}
+            \function[calculate, normalize]{da}{d/(a-1)}
+            \function[calculate, normalize]{bb}{b/(a*c)}
+            \function[calculate, normalize]{bb1}{b/(a1*c)}
+            \function[calculate, normalize]{f1}{2*bc}  
+            \function[calculate, normalize]{f2}{a*bb^2}
+            \function[calculate, normalize]{l1}{da/bb1}
+            \function[calculate, normalize]{l2}{k*a1*bb1}
+            \function[calculate, normalize]{f3}{l2^2}
+            \function[calculate, normalize]{f4}{da^2}           
+
+      \end{variables}
+
+%1 
+      \begin{answer}
+            \solution{bb}    
+      \end{answer}
+      \begin{answer}
+            \solution{a}    
+      \end{answer}      
+      \begin{answer}
+            \solution{f2}    
+      \end{answer}      
+%2 
+      \begin{answer}
+            \solution{l1}    
+      \end{answer}
+      \begin{answer}
+            \solution{l2}    
+      \end{answer}      
+      \begin{answer}
+            \solution{da}    
+      \end{answer}      
+	
+    \end{question}
+
+%Q2	
+    \begin{question}
+     \lang{de}{\text{Welche der folgenden Aussagen sind richtig?}
+      \explanation{Prüfen Sie die korrekte Anwendung der Rechenregeln ("`Klammer- vor Potenz- vor Punkt- 
+            vor Strichrechnung"', Potenzregeln), der Rechengesetze (Assoziativ- und Distributivgesetz) 
+            und der binomischen Formeln. 
+            Kontrollieren Sie ggf. ihr Ergebnis, indem Sie beide Seiten der Gleichung ausrechnen.}}
+      \lang{en}{\text{Which of the following statements are correct?}
+      \explanation{Check the correct application of the rules of arithmetic (" `parenthesis before power before point
+            before dash"´, power rules), the laws of arithmetic (associative and distributive laws) 
+            and the binomial formulae. 
+            If necessary, check your result by calculating both sides of the equation.}}
+      
+      \permutechoices{1}{8}
+      \type{mc.multiple}
+      \field{real}
+
+      \begin{variables}
+            \randint{m}{2}{9}
+            \randint{n}{2}{9}           
+            \function[calculate]{f}{n^2} 
+            \function[calculate]{f1}{2*n*m} 
+            \function[calculate]{f2}{m^2}
+            \function[calculate]{f3}{m^3}            
+            \function[calculate]{m2}{m+m}       
+%
+            \randint{a}{1}{99}
+            \randint{b}{1}{99}
+            \randint{c}{1}{66}
+            \randint{d}{1}{66}
+            \randadjustIf{a,b}{a=b}       
+            \randadjustIf{a,b}{a=b}                     % see Part 9 http://team.mumie.net/projects/
+                                                        %            support/wiki/GenericTexProblems              
+      \end{variables}
+      
+%1 
+      \begin{choice}
+            \text{$(-(-(-\var{c}))=\var{c}$}
+            \solution{false}    % dreimal Minus ergibt Minus
+      \end{choice}
+%2 
+      \begin{choice}
+            \text{$(-(-(-\var{c}))=-\var{c}$}
+            \solution{true}    % dreimal Minus ergibt Minus
+      \end{choice}      
+%3
+    \begin{choice}
+            \text{$\var{a} \cdot ((-\var{b})-(-\var{d}))= -\var{a} \cdot \var{b} +\var{a} \cdot \var{d}$}
+            \solution{true}
+    \end{choice}
+%4
+    \begin{choice}
+            \text{$\var{a} \cdot ((-\var{b})-(-\var{d}))= -\var{a} \cdot \var{b} -\var{a} \cdot \var{d}$}
+            \solution{false}    % VZ-Fehler: (+ \var{a}*\var{d})       
+    \end{choice}
+%
+%5      
+      \begin{choice}
+            \text{$a \cdot (-\var{n} a + \var{m}) \, (\var{n} a + \var{m})= \var{f2} \, a - \var{f} \, a^3 $}
+            \solution{true} 
+      \end{choice}      
+%6 
+      \begin{choice}
+            \text{$(-(-\var{m} y)) \cdot (x+\var{m})^2 = \var{m} y x^2 + \var{f2} y^2 x + \var{f3} y^3 $}
+            \solution{false}    % es fehlt der Faktor 2 vor (m^2*y^2*x)              
+      \end{choice}
+%7
+      \begin{choice}
+            \text{$(x-\var{m})^2 -\var{f2}= x \, (x- \var{m2}) $}
+            \solution{true}
+      \end{choice} 
+%8 
+    \begin{choice}
+            \text{$(\var{n} + a) \, (\var{n} - b) = (\var{f} - ab)$}
+            \solution{false}    % es fehlt das gemischte Glied (+an-bn)
+    \end{choice}      
+
+\end{question}
+
+%Q3	
+    \begin{question}
+     \lang{de}{\text{Welche der folgenden Aussagen sind richtig?}
+      \explanation{Prüfen Sie die korrekte Anwendung der Rechenregeln ("`Klammer- vor Potenz- vor Punkt- 
+            vor Strichrechnung"', Potenzregeln), der Rechengesetze (Assoziativ- und Distributivgesetz) 
+            und der binomischen Formeln. 
+            Kontrollieren Sie ggf. ihr Ergebnis, indem Sie beide Seiten der Gleichung ausrechnen.}}
+        \lang{en}{\text{Which of the following statements are correct?}
+      \explanation{Check the correct application of the rules of arithmetic ("`parenthesis before power before point 
+            before dash"`, power rules), the laws of arithmetic (associative and distributive laws) 
+            and the binomial formulae. 
+            If necessary, check your result by calculating both sides of the equation.}}
+
+      \permutechoices{1}{8}
+      \type{mc.multiple}
+      \field{real}
+
+      \begin{variables}
+            \randint{m}{2}{9}
+            \randint{n}{2}{9}
+            \randint{l}{2}{9}
+            \randadjustIf{l}{l=n}
+            \function[calculate]{f0}{n+1}
+            \function[calculate]{fm}{f0*m}  
+%
+            \randint{a}{1}{99}
+            \randint{b}{1}{99}
+            \randint{c}{1}{66}
+            \randint{d}{1}{66}
+            \randadjustIf{a,b}{a=b}       
+            \randadjustIf{a,b}{a=b}                     % see Part 9 http://team.mumie.net/projects/
+                                                        %            support/wiki/GenericTexProblems              
+
+      \end{variables}
+
+%1 
+      \begin{choice}
+            \text{$\var{n} ax+ \var{n} ay + \var{l} bx + \var{l} by = (x+y)\, (\var{n} a + \var{l} b)$}
+            \solution{true}
+      \end{choice}      
+%2
+    \begin{choice}
+            \text{$\var{n} z + z \cdot \var{m} = \var{f0} z \cdot \var{m} = \var{fm} z$}
+            \solution{false}    % Punkt-vor-Strichrechnung missachtet
+    \end{choice}           
+%
+%3
+     \begin{choice}
+            \text{$\var{b}-((-\var{a})-(-\var{c})) = (\var{b}-\var{a})+\var{c}$}
+            \solution{false}    % VZ-Fehler, richtig wäre: (\var{b}+\var{a})-\var{c})                          
+     \end{choice}
+      
+%4
+     \begin{choice}
+            \text{$\var{b}-((-\var{a})-(-\var{c})) = (\var{b}+\var{a})-\var{c}$}
+            \solution{true} 
+     \end{choice}
+%5      
+      \begin{choice}
+            \text{$(-\var{n}^2)^3=((-\var{n})^2)^3$}
+            \solution{false}    % das Minuszeichen in (- n^2) wird nicht mit potenziert ! 
+      \end{choice}    
+%6      
+      \begin{choice}
+            \text{$(-\var{n}^2)^3=(\var{n}^2)^3$}
+            \solution{false}    % das Minuszeichen in (- n^2) wird nicht mit potenziert ! 
+      \end{choice} 
+%7     
+      \begin{choice}
+            \text{$(-\var{n}^2)^3=-(\var{n}^2)^3$}
+            \solution{true}    
+      \end{choice} 
+%8     
+      \begin{choice}
+            \text{$(-\var{n}^2)^3=-\var{n}^{(2^3)}$}
+            \solution{false}    
+      \end{choice} 
+            
+\end{question}
+
+
+\end{problem}
+\embedmathlet{mathlet}
+\end{content}

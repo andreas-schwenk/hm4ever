@@ -1,0 +1,223 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü05: L'Hospital}
+    \lang{en}{Exercise 5: L'Hôpital's rule}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\title{\lang{de}{Ü05: L'Hospital}
+    \lang{en}{Exercise 5: L'Hôpital's rule}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24026}{Ticket 24026}
+\end{block}
+\usepackage{mumie.ombplus}
+
+
+
+\begin{block}[annotation]
+Kopie: hm4mint/T303_Approximationen/exercise 6
+
+Im Ticket-System: \href{http://team.mumie.net/issues/10497}{Ticket 10497}
+\end{block}
+
+%######################################################FRAGE_TEXT
+\lang{de}{ 
+Bestimmen Sie mit Hilfe der Regel von de l'Hospital die folgenden Grenzwerte:}
+\lang{en}{Use L'Hôpital's rule to compute the following limits:}
+\begin{enumerate}[a)]
+\item a) $\lim_{x\to 2} \frac{x^2-4x+4}{x^4-16}$
+\item b) $\lim_{x\to 0} \frac{e^x-x-1}{\cos(x)-1}$
+\item c) $\lim_{x\nearrow 1} \frac{-\ln(1-x)}{\tan(\frac{\pi}{2}x)}$
+\end{enumerate}
+
+
+%##################################################ANTWORTEN_TEXT
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+\tab{\lang{de}{   Antwort    } \lang{en}{Answer}}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{ Die Grenzwerte sind:}
+    \lang{en}{The limits are:}
+\begin{enumerate}[a)]
+\item a) $\lim_{x\to 2} \frac{x^2-4x+4}{x^4-16}=0$
+\item b) $\lim_{x\to 0} \frac{e^x-x-1}{\cos(x)-1}=-1$
+\item c) $\lim_{x\nearrow 1} \frac{-\ln(1-x)}{\tan(\frac{\pi}{2}x)}=0$
+\end{enumerate}
+
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung a)    }  \lang{en}{Solution a)}}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   Zähler wie Nenner sind als Polynome beliebig oft differenzierbar.
+    Die Grenzwerte des Zählers und des Nenners sind beide gleich $0$, da
+\[ \lim_{x\to 2}{(x^2-4x+4)} =2^2-4\cdot 2+4=0 \]
+und
+\[ \lim_{x\to 2}{(x^4-16)}=2^4-16=0.\]
+Also lässt sich die Regel von de l'Hospital anwenden, womit der gesuchte Grenzwert
+gleich dem Grenzwert des Quotienten der Ableitungen ist. Wegen
+$(x^2-4x+4)'=2x-4$ und $(x^4-16)'=4x^3$ ist also
+\[\lim_{x\to 2} \frac{x^2-4x+4}{x^4-16}=\lim_{x\to 2} \frac{2x-4}{4x^3}=\frac{2\cdot 2-4}{4\cdot 2^3}
+=\frac{0}{32}=0.\]
+
+\textit{Bemerkung:} In diesem Beispiel wäre man auch ohne die Regel von de l'Hospital zum Ziel gekommen, wenn
+man Zähler und Nenner jeweils durch den Linearfaktor $x-2$ geteilt hätte.
+    }
+\lang{en}{   The numerator and denominator are both polynomials and therefore infinitely differentiable.
+    The limits of the numerator and denominator are both $0$, because
+\[ \lim_{x\to 2}{(x^2-4x+4)} =2^2-4\cdot 2+4=0 \]
+and
+\[ \lim_{x\to 2}{(x^4-16)}=2^4-16=0.\]
+Therefore we can use L'Hôpital's rule to write the original limit as the limit of
+the quotient of the derivatives. Since
+$(x^2-4x+4)'=2x-4$ and $(x^4-16)'=4x^3$, we find
+\[\lim_{x\to 2} \frac{x^2-4x+4}{x^4-16}=\lim_{x\to 2} \frac{2x-4}{4x^3}=\frac{2\cdot 2-4}{4\cdot 2^3}
+=\frac{0}{32}=0.\]
+
+\textit{Remark:} In this example, we could have avoided the use of
+L'Hôpital's rule by dividing the numerator and the denominator
+by the linear factor $x-2$.}
+
+    
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung b)    } \lang{en}{Solution b)}}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{  Die Grenzwerte des Zählers und des Nenners sind beide gleich $0$, da
+\[ \lim_{x\to 0}{(e^x-x-1)}=1-0-1=0\quad \text{und}\quad \lim_{x\to 0} (\cos(x)-1)=1-1=0.\]
+Der Grenzwert des Bruchs lässt sich also nicht direkt bestimmen. Um die Regel von de l'Hospital
+anzuwenden, müssen zunächst die Ableitungen der beliebig oft differenzierbaren Funktionen bestimmt werden:
+\[ (e^x-x-1)'=e^x-1\quad \text{und}\quad (\cos(x)-1)'=-\sin(x). \]
+Nun sind aber
+\[ \lim_{x\to 0}{(e^x-1)}=1-1=0\quad \text{und}\quad \lim_{x\to 0} (-\sin(x))=0,\]
+weshalb man erneut die Ableitungen bestimmt:
+\[ (e^x-1)'=e^x\quad \text{und}\quad (-\sin(x))'=-\cos(x). \]
+Dann gilt
+\[ \lim_{x\to 0} \frac{e^x}{-\cos(x)}=\frac{e^0}{-\cos(0)}=\frac{1}{-1}=-1.\]
+Nach der Regel von de l'Hospital ist also
+\[ \lim_{x\to 0} \frac{e^x-x-1}{\cos(x)-1}=\lim_{x\to 0} \frac{e^x-1}{-\sin(x)}
+=\lim_{x\to 0} \frac{e^x}{-\cos(x)}=-1.\]
+ }
+ \lang{en}{  The limits of the numerator and the denominator are both $0$, because
+\[ \lim_{x\to 0}{(e^x-x-1)}=1-0-1=0\quad \text{and}\quad \lim_{x\to 0} (\cos(x)-1)=1-1=0.\]
+The limit of the quotient cannot be determined directly. To apply L'Hôpital's rule,
+we first determine the derivatives of the infinitely differentiable functions:
+\[ (e^x-x-1)'=e^x-1\quad \text{and}\quad (\cos(x)-1)'=-\sin(x). \]
+Here,
+\[ \lim_{x\to 0}{(e^x-1)}=1-1=0\quad \text{and}\quad \lim_{x\to 0} (-\sin(x))=0,\]
+so we compute derivatives again:
+\[ (e^x-1)'=e^x\quad \text{and}\quad (-\sin(x))'=-\cos(x). \]
+Now
+\[ \lim_{x\to 0} \frac{e^x}{-\cos(x)}=\frac{e^0}{-\cos(0)}=\frac{1}{-1}=-1.\]
+By L'Hôpital's rule,
+\[ \lim_{x\to 0} \frac{e^x-x-1}{\cos(x)-1}=\lim_{x\to 0} \frac{e^x-1}{-\sin(x)}
+=\lim_{x\to 0} \frac{e^x}{-\cos(x)}=-1.\]
+ }
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung c)    } \lang{en}{Solution c)}}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{ Wegen $\lim_{x\nearrow 1} (-\ln(1-x))=\lim_{y\searrow 0} (-\ln(y))=\infty$ und 
+$\lim_{x\nearrow 1} \tan(\frac{\pi}{2}x)=\infty$ lässt sich die Regel von de l'Hospital anwenden,
+denn beide Funktionen sind beliebig oft differenzierbar.
+
+Wir berechnen also zunächst die Ableitungen des Zählers $f(x)=-\ln(1-x)$ und des Nenners $g(x)=\tan(\frac{\pi}{2}x)$.
+\[ f'(x)=-\frac{1}{1-x}\cdot (-1)=\frac{1}{1-x}, \]
+nach der Kettenregel, und ebenfalls mit der Kettenregel und der Formel für die Ableitung des Tangens ist
+\[ g'(x)=(1/\cos(\frac{\pi}{2}x)^2)\cdot \frac{\pi}{2}.\]
+
+Also ist 
+\[ \frac{f'(x)}{g'(x)}=\frac{1/(1-x)}{\frac{\pi}{2}/\cos(\frac{\pi}{2}x)^2}
+=\frac{\cos(\frac{\pi}{2}x)^2}{\frac{\pi}{2}(1-x)}. \]
+
+Wegen $\lim_{x\nearrow 1} \cos(\frac{\pi}{2}x)^2=0$ und $\lim_{x\nearrow 1} \frac{\pi}{2}(1-x)=0$,
+lässt sich der Grenzwert $\lim_{x\nearrow 1} \frac{f'(x)}{g'(x)}$ auch nicht direkt berechnen, und wir bestimmen
+wieder die Ableitungen von $f'(x)=\cos(\frac{\pi}{2}x)^2$ und $g'(x)=\frac{\pi}{2}(1-x)$.
+\[ f''(x)=2 \cos(\frac{\pi}{2}x)\cdot (-\sin(\frac{\pi}{2}x))\cdot \frac{\pi}{2}\]
+und
+\[ g''(x)=-\frac{\pi}{2}. \]
+Damit gilt also
+\begin{eqnarray*}
+ \lim_{x\nearrow 1} \frac{-\ln(1-x)}{\tan(\frac{\pi}{2}x)} &=& \lim_{x\nearrow 1} \frac{f'(x)}{g'(x)}
+=\lim_{x\nearrow 1} \frac{\cos(\frac{\pi}{2}x)^2}{\frac{\pi}{2}(1-x)}\\
+&=&\lim_{x\nearrow 1} \frac{f''(x)}{g''(x)}
+=\lim_{x\nearrow 1} \frac{2 \cos(\frac{\pi}{2}x)\cdot (-\sin(\frac{\pi}{2}x))\cdot \frac{\pi}{2}}{-\frac{\pi}{2}}\\
+&=& \lim_{x\nearrow 1} 2 \cos(\frac{\pi}{2}x)\cdot \sin(\frac{\pi}{2}x)=2\cdot 0\cdot 1=0.
+\end{eqnarray*}
+ }
+ \lang{en}{ Since $\lim_{x\nearrow 1} (-\ln(1-x))=\lim_{y\searrow 0} (-\ln(y))=\infty$ and 
+$\lim_{x\nearrow 1} \tan(\frac{\pi}{2}x)=\infty$ and both functions are differentiable infinitely often,
+we can apply L'Hôpital's rule. 
+
+First we find the derivatives of the numerator $f(x)=-\ln(1-x)$ and the denominator $g(x)=\tan(\frac{\pi}{2}x)$.
+\[ f'(x)=-\frac{1}{1-x}\cdot (-1)=\frac{1}{1-x}, \]
+by the chain rule, and using the chain rule and the formula for the derivative of $\tan$,
+\[ g'(x)=(1/\cos(\frac{\pi}{2}x)^2)\cdot \frac{\pi}{2}.\]
+
+Therefore,
+\[ \frac{f'(x)}{g'(x)}=\frac{1/(1-x)}{\frac{\pi}{2}/\cos(\frac{\pi}{2}x)^2}
+=\frac{\cos(\frac{\pi}{2}x)^2}{\frac{\pi}{2}(1-x)}. \]
+
+Since $\lim_{x\nearrow 1} \cos(\frac{\pi}{2}x)^2=0$ and $\lim_{x\nearrow 1} \frac{\pi}{2}(1-x)=0$,
+the limit $\lim_{x\nearrow 1} \frac{f'(x)}{g'(x)}$ cannot be computed directly, and we have to find the derivatives
+of $f'(x)=\cos(\frac{\pi}{2}x)^2$ and $g'(x)=\frac{\pi}{2}(1-x)$.
+\[ f''(x)=2 \cos(\frac{\pi}{2}x)\cdot (-\sin(\frac{\pi}{2}x))\cdot \frac{\pi}{2}\]
+und
+\[ g''(x)=-\frac{\pi}{2}. \]
+Altogether,
+\begin{eqnarray*}
+ \lim_{x\nearrow 1} \frac{-\ln(1-x)}{\tan(\frac{\pi}{2}x)} &=& \lim_{x\nearrow 1} \frac{f'(x)}{g'(x)}
+=\lim_{x\nearrow 1} \frac{\cos(\frac{\pi}{2}x)^2}{\frac{\pi}{2}(1-x)}\\
+&=&\lim_{x\nearrow 1} \frac{f''(x)}{g''(x)}
+=\lim_{x\nearrow 1} \frac{2 \cos(\frac{\pi}{2}x)\cdot (-\sin(\frac{\pi}{2}x))\cdot \frac{\pi}{2}}{-\frac{\pi}{2}}\\
+&=& \lim_{x\nearrow 1} 2 \cos(\frac{\pi}{2}x)\cdot \sin(\frac{\pi}{2}x)=2\cdot 0\cdot 1=0.
+\end{eqnarray*}
+ }
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+%#############################################################ENDE
+
+ \tab{\lang{de}{Video: ähnliche Übungsaufgabe} \lang{en}{Video: similar exercise}}
+  \youtubevideo[500][300]{DjTg8lCVUmI}\\
+
+\end{tabs*}
+\end{content}

@@ -1,0 +1,76 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A08: geometrische Reihe II}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A08: geometrische Reihe II}}
+\lang{en}{\title{A08: geometric series II}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24040}{Ticket 24040}
+\end{block}
+
+
+\usepackage{mumie.genericproblem}
+
+     \begin{problem}
+          \begin{variables}
+                \drawFromSet{p}{1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9}
+                \drawFromSet{k}{1100,1200,1300,1400,1500,1600,1700,1800,1900}
+                \function{f}{k*(1-(1+p/100)^12)/(1-(1+p/100))} 
+                \function{f1}{floor(f)}
+          \end{variables}
+          \begin{question}
+                \lang{de}{\explanation{Hier handelt es sich um eine geometrische Reihe: 
+                $s_{12}=\var{k}\cdot\sum_{k=0}^{11}q^k$
+                %=\var{k}\frac{1-q^{12}}{1-q}$
+                mit
+                $q=(1+\frac{\var{p}}{100})$.}}
+                \lang{en}{\explanation{This is a geometric series: 
+                $s_{12}=\var{k}\cdot\sum_{k=0}^{11}q^k$
+                %=\var{k}\frac{1-q^{12}}{1-q}$
+                with
+                $q=(1+\frac{\var{p}}{100})$.}}
+                \type{input.number}
+                \lang{de}{\text{In einem Betrieb soll innerhalb eines Jahres die Arbeitsproduktivität
+                monatlich um \var{p} \% gesteigert werden. Im Januar betrug die Produktion \var{k}
+                Stück.\\
+                Wie hoch ist die gesamte Jahresproduktion $P$?\\
+                \textit{Bitte runden Sie auf eine ganze Zahl.}\\
+                $P=$\ansref}}
+                \lang{en}{\text{A company's production increases over one year 
+                by \var{p} \% per month. In January the production is \var{k}
+                units.\\
+                What will the total annual production $P$ be?\\
+                \textit{Please round to a whole number.}\\
+                 $P=$\ansref}}
+               \begin{answer}
+                    \solution{f1}
+               \end{answer}          
+          \end{question}     
+     \end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

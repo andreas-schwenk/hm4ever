@@ -1,0 +1,774 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Regel von de l'Hospital}
+    \lang{en}{L'Hopital's rules}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T303_Approximationen/g_art_content_04_taylor_polynom.meta.xml}{content_04_taylor_polynom}
+    \link{generic_article}{content/rwth/HM1/T303_Approximationen/g_art_content_06_de_l_hospital.meta.xml}{content_06_de_l_hospital}
+    \link{generic_article}{content/rwth/HM1/T210_Stetigkeit/g_art_content_31_grenzwerte_von_funktionen.meta.xml}{grenzw-funk}
+    \link{generic_article}{content/rwth/HM1/T301_Differenzierbarkeit/g_art_content_03_hoehere_ableitungen.meta.xml}{hoehere-abl}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{2}
+\ombarticle{3}
+
+\title{\lang{de}{Regel von de l'Hospital}\lang{en}{L'Hopital's rules}}
+ 
+\begin{block}[annotation]
+  
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10033}{Ticket 10033}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{\lang{de}{Regel von de l'Hospital}\lang{en}{L'Hopital's rule}}\label{sec:lHospital}
+
+\lang{de}{
+In Anwendungen hat man oft mit Funktionen zu tun, die zum Beispiel Summen, Produkte oder Quotienten 
+einfacher Funktionen sind. Die Grenzwerte solcher komplizierterer Funktionen kann man oft aus den 
+Grenzwerten ihrer einfachen Bausteine erhalten, indem man die 
+\ref[grenzw-funk][Grenzwertregeln]{sec:grenzwertregeln} anwendet 
+- sofern die Ausdr\"ucke auch f\"ur die Grenzwerte definiert sind.
+\\\\
+Ist zum Beispiel 
+$\lim_{x\to x_0}\;f(x) =f_0$ und $\lim_{x\to x_0}\;g(x) =g_0\neq 0,$ dann gilt 
+$\nowrap{\lim_{x\to x_0}\;\frac{f(x)}{g(x)} = \frac{f_0}{g_0}}$.
+\\\\
+Wenn aber $f$ und $g$ beide gegen  Null oder Unendlich streben, dann gibt es keinen offensichtlichen Grenzwert 
+ $\lim_{x\to x_0}\;\frac{f(x)}{g(x)}$. Ausdrücke wie $\;$ \glqq $\frac{0}{0}$\grqq{} $\,$ oder $\,$ \glqq $\frac{\infty}{\infty}$\grqq{}
+ $\,$ sind nicht definiert.
+\\\\
+In solchen F\"allen kommt es nämlich darauf an, welche der Funktionen  $f$ und $g$ \emph{stärker} oder \emph{schneller} gegen ihren Grenzwert streben.
+Es kommt also auch auf die Art der Änderung der Funktionen an. Und  die haben wir durch deren Ableitung beschrieben.
+\\\\
+Die folgenden Resultate über Grenzwerte, die als Regeln von de l'Hospital bezeichnet werden, machen sich das zu Nutze.
+Mit Hilfe der Differentialrechnung liefern sie uns die Möglichkeit, Grenzwerte so umzuformen, 
+dass wir in Situation gelangen können, in denen wir die Grenzwertsätze anwenden dürfen.
+\\\\
+%Wir erwarten einen Grenzwert Null,
+% wenn der Z\"ahler $f(x)$ wesentlich schneller gegen Null strebt als der Nenner $g(x)$. Und wenn es anders herum ist,
+% sollte der Grenzwert Unendlich sein. Einen endlichen Grenzwert erwarten wir, wenn $f$ und $g$ vergleichbar schnell 
+% konvergieren. Beispielsweise konvergieren $\sin x$ und $x$ f\"ur $x\to 0$ vergleichbar schnell gegen Null, es gilt
+%   $\lim\; (\sin x)/x =1$ f\"ur $x\to 0.$ Andererseits strebt $1 - \cos x$ quadratisch gegen Null, daher gilt
+% $\lim \;(1-\cos x)/x =0$ und $\lim \;(1-\cos x)/x^2 =1/2$ f\"ur $x\to 0.$ 
+ 
+%  Die Differentialrechnung liefert ein zus\"atzliches Hilfsmittel f\"ur solche Untersuchungen. 
+%  Die Ableitung beschreibt gerade quantitativ die \"Anderungsrate einer Funktion. Mit ihr reduzieren wir das 
+%  Problem auf einen Fall, in dem die Grenzwerts\"atze anwendbar sind.
+Wir beginnen mit der einfachsten Variante dieser Idee.
+}
+\lang{en}{
+In applications we often deal with functions that are sums, products or quotients of other 
+functions. Limits of such complicated functions can sometimes be determined using the limits of 
+their more simple components by using the \ref[grenzw-funk][limit rules]{sec:grenzwertregeln}, 
+provided every expression is well-defined.
+\\\\
+For example, if 
+$\lim_{x\to x_0}\;f(x) =f_0$ and $\lim_{x\to x_0}\;g(x) =g_0\neq 0,$ then 
+$\nowrap{\lim_{x\to x_0}\;\frac{f(x)}{g(x)} = \frac{f_0}{g_0}}$.
+\\\\
+However, if both $f$ and $g$ tend towards zero or diverge to infinity, then there is no obvious limit 
+$\lim_{x\to x_0}\;\frac{f(x)}{g(x)}$. Expressions such as $\;$ ' $\frac{0}{0}$' $\,$ and 
+$\,$ ' $\frac{\infty}{\infty}$' $\,$ are not well defined.
+\\\\
+These cases effectively come down to which of the two functions $f$ and $g$ tends towards their 
+limit \emph{faster}, or which is \emph{stronger}. We therefore need to consider the rate of change 
+of the functions, that is, their derivatives.
+\\\\
+The following results, which are referred to as l'Hopital's rules, make use of derivatives to 
+determine the values of such limits. We begin with the simplest variant of this idea.
+}
+\begin{theorem}\label{thm:de-l-Hospital_1}
+  \lang{de}{
+  Sei $I\subseteq\R$ ein offenes Intervall, $f,g\colon I\to \R$ differenzierbar mit $g'(x)\neq 0$ f\"ur $x\in I$, sowie $x_0\in I$
+  oder $x_0$ ein Randpunkt von $I$.
+  Weiter sei
+  }
+  \lang{en}{
+  Let $I\subseteq\R$ be an interval, $f,g\colon I\to \R$ differentiable with $g'(x)\neq 0$ for 
+  $x\in I$, and $x_0\in I$, or $x_0$ on the boundary (edge) of $I$. 
+  Assume that
+  }
+  \[ \lim_{x\to x_0} f(x) = \lim_{x\to x_0} g(x) =0.
+  \]
+%  \lang{de}{oder}
+%  \lang{en}{or that}
+%  \\
+%  \[ \lim_{x\to x_0} f(x) = \infty,\quad \lim_{x\to x_0} g(x) =\infty.
+%  \]
+
+  \lang{de}{
+  Wenn der Grenzwert $\lim_{x\to x_0}\;\frac{f'(x)}{g'(x)} = A$ existiert, 
+  dann konvergiert auch der Quotient der Funktionen und es gilt
+  }
+  \lang{en}{
+  If the limit $\lim_{x\to x_0}\;\frac{f'(x)}{g'(x)} = A$ exists, then the quotient of the initial 
+  functions converges, with
+  }
+  \[\lim_{x\to x_0}\;\frac{f(x)}{g(x)}= \lim_{x\to x_0}\;\frac{f'(x)}{g'(x)} = A.
+  \]
+\end{theorem}
+
+\begin{proof*}
+\begin{incremental}[\initialsteps{0}]
+\step \lang{de}{
+Zunächst interpretieren wir die Voraussetzung $\lim_{x\to x_0} f(x) = \lim_{x\to x_0} g(x) =0$.
+Ist $x_0\in I$, dann folgt aus der Stetigkeit von $f$ und $g$, dass $f(x_0)=0=g(x_0)$.
+Falls $x_0$ ein Randpunkt von $I$ ist, so können wir $f$ und $g$ mittels $f(x_0)=0=g(x_0)$ stetig in $x_0$ fortsetzen.
+}
+\lang{en}{
+Firstly we consider the condition $\lim_{x\to x_0} f(x) = \lim_{x\to x_0} g(x) =0$. 
+If $x_0\in I$, then by the continuity of $f$ and $g$, $f(x_0)=0=g(x_0)$. 
+If $x_0$ lies on the boundary of $I$, then we may extend the functions $f$ and $g$ by setting 
+$f(x_0)=0=g(x_0)$.
+}
+\step \lang{de}{
+Nun wenden wir den \lref{sec:verallg-mws}{verallgemeinerten Mittelwertsatz} an, dessen Beweis wir auf 
+das Ende dieses Kapitels verschieben. Nach diesem gibt es zu jedem $x$ eine Zahl $\xi$ (abhängig von 
+$x$) zwischen $x$ und $x_0$ mit
+}
+\lang{en}{
+Now we apply the \lref{sec:verallg-mws}{general mean value theorem}, whose proof we give at the end 
+of the chapter. By this theorem, for each $x$ there exists a number $\xi$ (dependent on $x$) 
+between $x$ and $x_0$ with
+}
+\[ \frac{f'(\xi)}{g'(\xi)}=\frac{f(x)-f(x_0)}{g(x)-g(x_0)}. \]
+\lang{de}{
+Betrachtet man nun $x\to x_0$, dann strebt auch dieses kleine dazwischen liegende $\xi$ gegen $x_0$.
+Somit gilt, weil  $f(x_0)=0=g(x_0)$,
+}
+\lang{en}{
+If we take $x\to x_0$, then $\xi$ tends towards $x_0$ too. As $f(x_0)=0=g(x_0)$, we have
+}
+\begin{eqnarray*}
+ \lim_{x\to x_0} \;\frac{f(x)}{g(x)} &=& \lim_{x\to x_0} \frac{f(x)-f(x_0)}{g(x)-g(x_0)}=\lim_{x\to x_0}\frac{f'(\xi)}{g'(\xi)}\\
+&=&  \lim_{\xi\to x_0}\frac{f'(\xi)}{g'(\xi)} = \lim_{x\to x_0} \frac{f'(x)}{g'(x)}.
+\end{eqnarray*}
+\end{incremental}
+\end{proof*}
+
+\lang{de}{
+Etwas komplizierter nachzuweisen sind die folgenden Varianten der Regel von de l'Hospital, die 
+ebenfalls unter diesem Namen firmieren.
+\\\\
+Die Unterschiede zur obigen Regel sind lediglich, dass bei 1. die Funktionen $f$ und $g$ gegen 
+unendlich streben für $x$ gegen $x_0$, und dass bei 2. die Variable $x$ gegen $\infty$ strebt statt 
+gegen einen Wert $x_0$.
+}
+\lang{en}{
+Somewhat more complicated to verify are the following variants of l'Hopital's rule, which are given 
+the same name.
+\\\\
+The differences between these are as follows: in 1. the functions $f$ and $g$ diverge 
+towards infinity as $x$ tends towards $x_0$, and in 2. the variable $x$ itself tends towards $\infty$ 
+rather than some value $x_0$.
+}
+
+\begin{theorem}\label{thm:de-l-hospital}
+\begin{enumerate}
+\item \lang{de}{
+Sei $I\subseteq\R$ ein offenes Intervall, $f,g\colon I\to \R$ differenzierbar mit $g'(x)\neq 0$ f\"ur 
+$x\in I$, sowie $x_0\in I$ oder $x_0$ ein Randpunkt von $I$. Gilt
+}
+\lang{en}{
+Let $I\subseteq\R$ be an open interval, $f,g\colon I\to \R$ differentiable with $g'(x)\neq 0$ for 
+$x\in I$, and either $x_0\in I$ or $x_0$ on the boundary of $I$. If
+}
+   \[ \lim_{x\to x_0} f(x) = \infty,\quad\text{\lang{de}{und}\lang{en}{and}}\quad \lim_{x\to x_0} g(x) =\infty, \]
+\lang{de}{
+und existiert der Grenzwert 
+$ \lim_{x\to x_0}\;\frac{f'(x)}{g'(x)} = A, $
+so gilt
+}
+\lang{en}{
+holds, and the limit 
+$ \lim_{x\to x_0}\;\frac{f'(x)}{g'(x)} = A$
+exists, then
+}
+\[   \lim_{x\to x_0}\;\frac{f(x)}{g(x)} = \lim_{x\to x_0}\;\frac{f'(x)}{g'(x)} = A. \]
+\item \lang{de}{
+Ist $I=(a,\infty)\subseteq \R$ und $f,g\colon I\to \R$ differenzierbar mit $g'(x)\neq 0$ f\"ur $x\in I$. 
+Gilt nun
+}
+\lang{en}{
+Let $I=(a,\infty)\subseteq \R$ and let $f,g\colon I\to \R$ be differentiable functions with 
+$g'(x)\neq 0$ for $x\in I$. If
+}
+  \[ \lim_{x\to \infty} f(x) = \lim_{x\to \infty} g(x) =0
+  \quad
+  \text{\lang{de}{oder}\lang{en}{or}}
+  \quad \lim_{x\to \infty} f(x) = \infty= \lim_{x\to \infty} g(x),
+  \]
+\lang{de}{
+und existiert der Grenzwert 
+$ \lim_{x\to \infty}\;\frac{f'(x)}{g'(x)} = A,$
+so gilt
+}
+\lang{en}{
+holds and the limit 
+$ \lim_{x\to \infty}\;\frac{f'(x)}{g'(x)} = A$ 
+exists, then
+}
+\[   \lim_{x\to \infty}\;\frac{f(x)}{g(x)} = \lim_{x\to \infty}\;\frac{f'(x)}{g'(x)} = A. \]
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}
+\begin{enumerate}
+\item \lang{de}{Die Regel ist auch richtig, wenn $x$ gegen $-\infty$ strebt.}
+\lang{en}{The rule also applies when $x$ tends towards $-\infty$. }
+%\item Die Regel ist auch richtig, wenn $\lim_{x\to x_0}\;\frac{f'(x)}{g'(x)}=\infty$ oder $=-\infty$ ist.
+%
+\item \lang{de}{
+Ergibt $\lim_{x\to x_0}\;\frac{f'(x)}{g'(x)}$ (mit $x_0\in \R$ oder $x_0=\infty$) wieder einen 
+Ausdruck wie $\;$ "$0/0$" $\,$ oder $\,$ "$\infty/\infty$" $\,$, so kann man oft die Regel von de 
+l'Hospital erneut (oder sogar mehrfach) anwenden und erhält eventuell einen Grenzwert
+$\lim_{x\to x_0}\;\frac{f''(x)}{g''(x)}$ bzw. $\lim_{x\to x_0}\;\frac{f^{(n)}(x)}{g^{(n)}(x)}$ für $n>2$.
+\\\\
+Jeder Schritt erhält dann erst nachträglich seine Legitimation, wenn im letzten Schritt die Existenz 
+des Limes gezeigt wurde.
+\\\\
+Dabei ist es wichtig, in jedem Schritt die Voraussetzungen an die Differenzierbarkeit von Zähler und 
+Nenner sowie die Nullstellenfreiheit der Ableitung des Nenners in einer Umgebung des Grenzpunkts zu 
+prüfen.
+}
+\lang{en}{
+If $\lim_{x\to x_0}\;\frac{f'(x)}{g'(x)}$ (where $x_0\in \R$ or $x_0=\infty$) yields yet again an 
+expression such as $\;$ "$0/0$" $\,$ or $\,$ "$\infty/\infty$" $\,$, then often l'Hopital's rule can 
+be applied again (and even multiple times) until finally a limit 
+$\lim_{x\to x_0}\;\frac{f''(x)}{g''(x)}$, or indeed $\lim_{x\to x_0}\;\frac{f^{(n)}(x)}{g^{(n)}(x)}$ 
+for $n>2$, is obtained.
+\\\\
+Every step requires the existence of the limit, which is given only when (or rather, if) this final 
+limit is reached, and which then recursively justifies the previous uses of the theorem.
+\\\\
+Thus it is important to verify at every step the differentiability of the numerator and the 
+denominator, as well as checking that the denominator is non-zero within the interval in question.
+}
+\end{enumerate}
+\end{remark}
+
+
+\begin{example}
+\begin{tabs*}[\initialtab{0}]
+\tab{\glqq $\frac{0}{0}$ \grqq{}}
+\lang{de}{
+Um den Grenzwert $\lim_{x\to 0} \;\frac{\tan(x)}{x} $ zu berechnen, bemerken wir zum einen 
+$\lim_{x\to 0} \tan(x)=0=\lim_{x\to 0} x$ und zum anderen, dass $f(x)=\tan x$ und $g(x)=x$ stetige 
+Funktionen repräsentieren mit $f'(x)=1+\tan(x)^2$ und $g'(x)=1\neq 0$. Also können wir die Regel von 
+de l'Hospital anwenden und erhalten
+}
+\lang{en}{
+To determine the value of the limit $\lim_{x\to 0} \;\frac{\tan(x)}{x}$, we firstly note both that
+$\lim_{x\to 0} \tan(x)=0=\lim_{x\to 0} x$, and that $f(x)=\tan x$ and $g(x)=x$ are continuous 
+functions with $f'(x)=1+\tan(x)^2$ and $g'(x)=1\neq 0$. Hence we can apply l'Hopital's rule here and 
+obtain
+}
+\[ \lim_{x\to 0} \;\frac{\tan(x)}{x} =\lim_{x\to 0} \frac{1+\tan(x)^2}{1} =1. \]
+\tab{\glqq $\frac{\infty}{\infty}$\grqq{}}
+\lang{de}{
+Berechnung von $\lim_{x\to \infty} \;\frac{\ln(x)}{x}$:
+\\\\
+In diesem Fall gilt $\lim_{x\to \infty} \ln(x)=\infty$ und $\lim_{x\to \infty} x=\infty$, 
+sowie $\ln'(x)=\frac{1}{x}$. Der Nenner $x$ hat eine konstante Ableitung. Also können wir die 
+Regel von de l'Hospital anwenden und erhalten
+}
+\lang{en}{
+We determine $\lim_{x\to \infty} \;\frac{\ln(x)}{x}$:
+\\\\
+In this case we have $\lim_{x\to \infty} \ln(x)=\infty$, $\lim_{x\to \infty} x=\infty$ and 
+$\ln'(x)=\frac{1}{x}$. The denominator $x$ has a constant derivative. Hence we may apply l'Hopital's 
+rules and obtain
+}
+  \[ \lim_{x\to \infty} \;\frac{\ln(x)}{x} =\lim_{x\to \infty} \;\frac{1/x}{1} =0.\]
+\tab{\glqq $\frac{0}{0}$\grqq{} (\lang{de}{iterierte Anwendung}
+                                 \lang{en}{iterating l'Hopital's rule})}
+\lang{de}{
+Um den Grenzwert $\lim_{x\to\infty}\,\frac{x^n}{e^x}$ zu berechnen, muss man die Regel von de 
+l'Hospital $n$-mal anwenden.
+\\\\
+Dazu überlegt man sich, dass $f(x)=x^n$ beliebig oft stetig differenzierbar ist mit 
+$\lim_{x\to\infty}f^{(k)}(x)=\infty$ für $k<n$, und dass $g(x)=e^x$ ebenfalls beliebig oft stetig 
+differenzierbar ist mit $g^{(k)}(x)=g(x)\neq 0$ und $\lim_{x\to\infty}g^{(k)}(x)=\infty$.
+\\\\
+Also gilt
+}
+\lang{en}{
+To determine the value of the limit $\lim_{x\to\infty}\,\frac{x^n}{e^x}$, we can apply l'Hopital's 
+rules $n$ times.
+\\\\
+To do this, we use the fact that both $f(x)=x^n$ and $g(x)=e^x$ are arbitrarily many times 
+continuously differentiable, with $\lim_{x\to\infty}f^{(k)}(x)=\infty$ for $k<n$, and 
+$g^{(k)}(x)=g(x)\neq 0$ so $\lim_{x\to\infty}g^{(k)}(x)=\infty$.
+\\\\
+Hence we have
+}
+\[ \lim_{x\to\infty}\,\frac{x^n}{e^x} =\lim_{x\to\infty}\,\frac{nx^{n-1}}{e^x}=\ldots =\lim_{x\to\infty}\,\frac{n! x^0}{e^x}=0.\]
+\lang{de}{Dies zeigt, dass die Exponentialfunktion schneller wächst als jede Potenz von $x$.}
+\lang{en}{This shows that the exponential function grows faster than any power of $x$ does.}
+\end{tabs*}
+\end{example}
+\begin{quickcheck}
+\text{\lang{de}{
+Welche der folgenden Grenzwertprobleme bieten das Potential, mit der Regel von de l'Hospital berechnet zu werden?
+}
+\lang{en}{
+Which of the following limits could be calculated using l'Hopital's rule?
+}}
+\begin{choices}{multiple}
+
+        \begin{choice}
+            \text{$\lim_{x\to 0}\frac{x^4}{\cos x}$}
+			\solution{false}
+         \end{choice}
+                    
+        \begin{choice}
+            \text{$\lim_{x\to \infty}\frac{e^x}{e^x-x}$}
+			\solution{true}
+		\end{choice} 
+        \begin{choice}
+            \text{$\lim_{x\to \infty}\frac{x^3}{\cos x}$}
+			\solution{false}
+        \end{choice} 
+        \begin{choice}
+            \text{$\lim_{x\to 0}\frac{x^3}{\sin x}$}
+			\solution{true}
+		\end{choice}
+        \begin{choice}
+            \text{$\lim_{x\to 0}\frac{\ln \frac{1}{x}}{\frac{1}{x}}$}
+			\solution{true}
+		\end{choice}
+\end{choices}
+\explanation{\lang{de}{
+Den ersten Grenzwert berechnet man direkt $\lim_{x\to 0}\frac{x^4}{\cos x}=\frac{0}{1}=1$.\\
+Bei $\lim_{x\to \infty}\frac{e^x}{e^x-x}$ liegt der Fall \glqq$\frac{\infty}{\infty}$\grqq{} vor.\\
+Weil der Grenzwert $\lim_{x\to\infty}\cos x$ nicht exisitiert, kann man für 
+$\lim_{x\to \infty}\frac{x^3}{\cos x}$ keine de l'Hospitalsche Regel anwenden.\\
+Bei $\lim_{x\to 0}\frac{x^3}{\sin x}$ liegt der Fall \glqq$\frac{0}{0}$\grqq{} vor, und bei
+$\lim_{x\to \infty}\frac{\ln \frac{1}{x}}{\frac{1}{x}}$ der Fall \glqq$(-1)\cdot\frac{\infty}{\infty}$\grqq{}.
+}
+\lang{en}{
+The first limit can be directly computed as $\lim_{x\to 0}\frac{x^4}{\cos x}=\frac{0}{1}=1$.\\
+For $\lim_{x\to \infty}\frac{e^x}{e^x-x}$ we may use l'hopital's rule for '$\frac{\infty}{\infty}$'.
+As the limit $\lim_{x\to\infty}\cos x$ does not exist, we may not apply l'Hopital's rule to 
+$\lim_{x\to \infty}\frac{x^3}{\cos x}$.\\
+The limit $\lim_{x\to 0}\frac{x^3}{\sin x}$ allows us to use the $\frac{0}{0}$ version of l'Hopital's 
+rule, and the limit $\lim_{x\to \infty}\frac{\ln \frac{1}{x}}{\frac{1}{x}}$ the version for 
+$(-1)\cdot\frac{\infty}{\infty}$.
+}}
+\end{quickcheck}
+
+
+\lang{de}{
+Neben den F\"allen $\;$ \glqq $\frac{0}{0}$ \grqq{} $\;$ und 
+$\,$ \glqq $\frac{\infty}{\infty}$\grqq{}, $\,$ die oben erw\"ahnt wurden, kann man auch F\"alle wie 
+$\;$ \glqq $0\cdot\infty$\grqq{} oder \glqq $\infty - \infty$\grqq{} handhaben. Die Idee dabei ist, 
+die Terme so umzuformen, dass diese Terme, oder Teile davon, die Ausdrücke 
+\glqq $\frac{0}{0}$\grqq{} oder \glqq $\frac{\infty}{\infty}$\grqq{} als Grenzwerte hätten.
+\\\\
+Direkte Regeln für solche Ausdrücke gibt es nicht! Zum Beispiel ist es falsch, den Grenzwert 
+$\lim_{x\to x_0} f(x)g(x)$, wobei $f$ gegen $0$ und $g$ gegen $\infty$ streben, mit dem Produkt der 
+Ableitungen von $f$ und $g$ in $x_0$ in Beziehung zu setzen.
+\\\\
+Auch wenn Potenzen vorkommen, helfen die Grenzwertsätze oft, um die Grenzwerte zu berechnen. 
+So ist zum Beispiel
+}
+\lang{en}{
+In addition to the cases $\;$ '$\frac{0}{0}$' $\;$ and $\,$ '$\frac{\infty}{\infty}$' $\,$ that were 
+handled above, it also makes sense to consider cases $\;$ '$0\cdot\infty$' and '$\infty - \infty$'. 
+The idea behind computing limits in these cases is to manipulate the expressions in question in order 
+to get expressions with '$\frac{0}{0}$' or '$\frac{\infty}{\infty}$' as limits.
+\\\\
+There are no direct rules for such expressions! For example, it would be incorrect to assume that the 
+limit $\lim_{x\to x_0} f(x)g(x)$, where $f$ tends towards $0$ and $g$ tends towards $\infty$, 
+corresponds to the product of the derivatives of $f$ and $g$ at $x_0$.
+\\\\
+Even when powers appear in a limit, we can often use the limits of the powers to compute the value of 
+the limit itself. For example, if both limits exist \emph{and} the corresponding exponential function 
+$(\lim_{x\to x_0}f(x))^y$ is continuous in $y$, then we have
+}
+\[\lim_{x\to x_0}f(x)^{g(x)}=(\lim_{x\to x_0}f(x))^{\lim_{x_0\to x}g(x)},\]
+\lang{de}{
+\emph{falls} beide Grenzwerte existieren \emph{und} die entstehende Exponentialfunktion 
+$(\lim_{x\to x_0}f(x))^y$ stetig in $y$ ist. Es gibt im Wesentlichen drei Fälle, wo diese Bedingungen 
+verletzt sind, nämlich Grenzwertausdrücke der Form $\,$ "$1^\infty$" $\,$, "$0^0$" oder "$\infty^0$".
+\\\\
+Auch dazu zeigen die folgenden Beispiele Vorgehensweisen, sie zu berechnen.
+Ein festes Schema gibt es dabei nicht, es braucht viel mehr ein scharfes Auge bzw. Erfahrung, 
+um eine zielführende Umformung zu erkennen.
+}
+\lang{en}{
+There are three common cases in which these conditions are not met: $\,$ '$1^\infty$' $\,$, '$0^0$' 
+and '$\infty^0$'.
+\\\\
+The following exercises show possible approaches even to calculate limits which fall into these 
+cases. There is no exact algorithm for this, and it requires intuition, built through practice, 
+to know which manipulations are to be done.
+}
+ 
+% \begin{enumerate}
+% \item Sind Funktionen $f$, $g$ und eine "`Stelle"' $x_0\in \R\cup \{\infty\}$ mit
+% \[  \lim_{x\to x_0} f(x)=0\quad\text{und}\quad \lim_{x\to x_0} g(x)=\infty \]
+% gegeben und möchte man den Grenzwert $\lim_{x\to x_0} f(x)\cdot g(x)$ berechnen, schreibt man das Produkt
+% um in die Form $f(x)\cdot g(x)=\frac{f(x)}{1/g(x)}$ und wendet die Regel von de l'Hospital auf diesen Quotienten an.
+%Wenn $f(x)>0$ für alle $x$ und daher $\lim_{x\to x_0} 1/f(x)=\infty$, kann man auch alternativ die Regel von de l'Hospital 
+%auf den Quotienten $\frac{g(x)}{1/f(x)}$ anwenden.
+%\item Will man den Grenzwert $\lim_{x\to x_0} f(x)-g(x)$ berechnen, wobei $\lim_{x\to x_0} f(x)=\infty$ und
+%$\lim_{x\to x_0} g(x)=\infty$, so klammert man einen geeigneten Faktor, z.B. $f(x)$ aus und erhält
+%$f(x)-g(x)=f(x)\cdot (1-g(x)/f(x))$ 
+% 
+% \end{enumerate}
+
+
+\begin{example}
+\begin{tabs*}[\initialtab{0}]
+\tab{\glqq $0\cdot\infty$\grqq{} (a)}
+\lang{de}{
+Versuchte man den Ausdruck $\lim_{x\nearrow \frac{\pi}{2}} \;(x- \frac{\pi}{2})\cdot \tan (x)$ 
+faktorweise zu berechnen, erhielte man einen Ausdruck der Form "`$0\cdot\infty$"'. Dies formen wir zu 
+einem Ausdruck "$0/0$" um
+}
+\lang{en}{
+If we try to compute the expression 
+$\lim_{x\nearrow \frac{\pi}{2}} \;(x- \frac{\pi}{2})\cdot \tan (x)$ factor by factor, we obtain an 
+expression of the form $0\cdot\infty$. We can manipulate the expressions to obtain '$0/0$' instead.
+}
+\[   (x- \frac{\pi}{2})\cdot \tan (x) =  \frac{x- \frac{\pi}{2}}{\cot (x)} ,\]
+\lang{de}{und wenden dann die Regel von de l'Hospital an, wobei wir $\cot'(x)=-1-\cot(x)^2$ verwenden}
+\lang{en}{and then apply l'Hopital's rule, using $\cot'(x)=-1-\cot(x)^2$:}
+ \[ \lim_{x\nearrow \frac{\pi}{2}} \;(x- \frac{\pi}{2})\cdot \tan (x) = \lim_{x\nearrow \frac{\pi}{2}} \frac{x- \frac{\pi}{2}}{\cot (x)}
+  =  \lim_{x\nearrow \frac{\pi}{2}} \frac{1}{-1-\cot (x)^2} = -1.\]
+\lang{de}{
+(Weil $\cot'(\frac{\pi}{2})-1$ und $\cot'(x)$ stetig ist, gilt $\cot(x)\neq 0$ für $x$ nahe 
+$\frac{\pi}{2}$.)
+}
+\lang{en}{
+(As $\cot'(\frac{\pi}{2})-1$ and as $\cot'(x)$ is continuous, we have $\cot(x)\neq 0$ for $x$ near 
+$\frac{\pi}{2}$.)
+}
+\tab{ \glqq $0\cdot\infty$\grqq{} (b)}
+\lang{de}{
+In anderen F\"allen ist es g\"unstiger, den Term \glqq $0\cdot\infty$\grqq{} zu "$\infty/\infty$" 
+umzuformen, wie im folgenden Beispiel.\\
+Versucht man den Ausdruck $\lim_{x\to \infty} x\cdot e^{-x}$ faktorweise zu berechnen, erhielte man 
+einen Ausdruck der Form "`$\infty\cdot 0$"'. Hier schreibt man den Term besser um zu
+}
+\lang{en}{
+In other cases it makes more sense to manipulate an expression '$0\cdot\infty$' into an expression 
+'$\infty/\infty$', like in the following example.\\
+If we try to compute the expression $\lim_{x\to \infty} x\cdot e^{-x}$ factor by factor, we obtain 
+an expression of the form '$\infty\cdot 0$'. We can rewrite the expression as
+}
+\[   x\cdot e^{-x}=\frac{x}{e^x} \]
+\lang{de}{und berechnet}
+\lang{en}{and calculate}
+\[ \lim_{x\to \infty} x\cdot e^{-x}=\lim_{x\to \infty} \frac{x}{e^x} =\lim_{x\to \infty} \frac{1}{e^x} = 0.\]
+\lang{de}{
+Würde man jedoch in der Absicht, de l'Hospital anzuwenden, den Term als $\frac{e^{-x}}{x^{-1}}$ 
+schreiben, erhielte man den Quotienten der Ableitung als  $\frac{-e^{-x}}{-x^{-2}}$. Dessen Grenzwert 
+kann wieder nicht direkt berechnet werden.
+}
+\lang{en}{
+If we insisted on applying l'Hopital's rule to the expression rewritten instead as
+$\frac{e^{-x}}{x^{-1}}$, the quotient of the derivatives would be $\frac{-e^{-x}}{-x^{-2}}$. 
+However, the limit of this cannot be calculated directly.
+}
+\tab{"`$\infty - \infty$"'}
+\lang{de}{
+Würde man den Grenzwert $\lim_{x\to 0} \;\left(\frac{1}{e^x-1} - \frac{1}{x}\right) $ summandenweise 
+berechnen wollen, erhielte man einen Ausdruck "`$\infty - \infty$"'. Auch in diesem Fall formt man 
+den Term um, um als Grenzwert einen Ausdruck der Form "$0/0$" oder "$\infty/\infty$" zu bekommen, auf 
+welchen man wieder die Regel von de l'Hospital anwenden kann (hier am Ende sogar zweimal)
+}
+\lang{en}{
+If we tried to calculate the limit $\lim_{x\to 0} \;\left(\frac{1}{e^x-1} - \frac{1}{x}\right) $ term 
+by term, we would obtain an expression '$\infty - \infty$'. Instead, we can manipulate the expression 
+in order to get something of the forms '$0/0$' or '$\infty/\infty$', and apply l'Hopital's rule to 
+this (twice, in this case).
+}
+  \[ \lim_{x\to 0} \;\left(\frac{1}{e^x-1} - \frac{1}{x}\right) =  \lim_{x\to 0} \frac{x-(e^x-1)}{x\,e^x - x}
+  =  \lim_{x\to 0} \frac{1-e^x}{e^x+x\,e^x -1} = \lim_{x\to 0} \;\frac{-e^x}{2e^x+x\,e^x} =\frac{-1}{2}.
+  \]
+  \tab{\glqq $1^\infty$\grqq{}}
+\lang{de}{
+Bei dem Grenzwert $ \lim_{x\to \infty} \;\left(1+\frac{1}{x}\right)^x$ würde man einen Ausdruck 
+"$1^\infty$" bekommen, wenn man die Grenzwerte von Basis und Exponent separat berechnet. Auch dies 
+macht keinen Sinn.
+\\\\    
+In solchen Fällen berechnet man zunächst den Logarithmus des Terms, also
+}
+\lang{en}{
+The limit $ \lim_{x\to \infty} \;\left(1+\frac{1}{x}\right)^x$ yields an expression '$1^\infty$' if 
+we try to compute the limits of the base and the exponent seperately. This makes no sense.
+\\\\
+In such cases we first calculate the logarithm of the expression,
+}
+  \[ \ln\left( \big(1+\frac{1}{x}\big)^x\right) =x\cdot \ln \big(1+\frac{1}{x}\big) = \frac{\ln \big(1+\frac{1}{x}\big)}{1/x} \]
+\lang{de}{und dessen Grenzwert mit der Regel von de l'Hospital (Voraussetzungen prüfen!)}
+\lang{en}{and find its limit using l'Hopital's rule (and remembering to check the conditions!)}
+   \[  \lim_{x\to \infty}\frac{\ln \big(1+\frac{1}{x}\big)}{1/x} = \lim_{x\to \infty}\frac{-\frac{1}{x^2}\cdot \frac{1}{1+1/x}}{-\frac{1}{x^2}} = \lim_{x\to \infty} \frac{1}{1+1/x} =1.\]
+
+\lang{de}{Da die Exponentialfunktion stetig ist, gilt dann}
+\lang{en}{As the exponential function is continuous, we then have}
+	\[    \lim_{x\to \infty} \;\left(1+\frac{1}{x}\right)^x= \lim_{x\to \infty} \exp\left(\ln\left( \big(1+\frac{1}{x}\big)^x\right) \right)
+	=  \exp\left( \lim_{x\to \infty}  \ln\left( \big(1+\frac{1}{x}\big)^x\right) \right)=\exp(1)=e.\]	
+\tab{\glqq $0^0$\grqq{}}
+\lang{de}{
+Würde als Grenzwert ein Ausdruck "$0^0$" entstehen, verfährt man wie bei "$1^\infty$", d.h. man 
+berechnet zunächst den Logarithmus des Terms und dessen Grenzwert mittels der Regel von de l'Hospital 
+und wendet anschließend wieder die Exponentialfunktion an.
+\\\\
+Im Beispiel $\lim_{x\searrow 0} x^x$ berechnen wir zunächst
+}
+\lang{en}{
+If a limit yields an expression '$0^0$', we proceed as with '$1^\infty$'. That is, we first calculate 
+the logarithm of the expression and then its limit using l'Hopital's rule, then apply the exponential 
+function once again.
+\\\\
+In the example $\lim_{x\searrow 0} x^x$, we start by finding
+}
+\[ \ln(x^x)=x\cdot \ln(x)= \frac{\ln(x)}{1/x} \]
+\lang{de}{und}
+\lang{en}{and}
+\[ \lim_{x\searrow 0} \frac{\ln(x)}{1/x} = \lim_{x\searrow 0} \frac{1/x}{-1/x^2}
+= \lim_{x\searrow 0} (-x) =0.\]
+\lang{de}{Daher ist}
+\lang{en}{Thus}
+\[ \lim_{x\searrow 0} x^x =\lim_{x\searrow 0} \exp( \frac{\ln(x)}{1/x})=\exp\left( \lim_{x\searrow 0} \frac{\ln(x)}{1/x}\right)=\exp(0)=1.\]
+\tab{\glqq $\infty^0$\grqq{}}
+\lang{de}{
+Würde als Grenzwert ein Ausdruck "$\infty^0$" entstehen, verfährt man wie bei "$1^\infty$", d.h.
+man berechnet zunächst den Logarithmus des Terms und dessen Grenzwert mittels der Regel von de 
+l'Hospital und wendet anschließend wieder die Exponentialfunktion an.
+\\\\
+Im Beispiel $\lim_{x\to \infty} x^{1/x}$ berechnen wir zunächst
+}
+\lang{en}{
+If a limit yields an expression '$\infty^0$', we proceed as with '$1^\infty$'. That is, we first 
+calculate the logarithm of the expression and then its limit using l'Hopital's rule, then apply the 
+exponential function once again.
+\\\\
+In the example $\lim_{x\to \infty} x^{1/x}$, we start by finding
+}
+\[ \ln(x^{1/x})=\frac{1}{x}\cdot \ln(x)=\frac{\ln(x)}{x} \]
+\lang{de}{und}
+\lang{en}{and}
+\[ \lim_{x\to \infty} \frac{\ln(x)}{x}= \lim_{x\to \infty} \frac{1/x}{1}=0.\]
+\lang{de}{Daher ist, und hier benutzen wir wieder die Stetigkeit der Exponentialfunktion,}
+\lang{en}{Hence, using once more the continuity of the exponential function,}
+\[ \lim_{x\to \infty} x^{1/x}=\lim_{x\to \infty}\exp(\frac{\ln(x)}{x} )=\exp\left( \lim_{x\to \infty} \frac{\ln(x)}{x}\right)=\exp(0)=1.\]
+\end{tabs*}
+\end{example}
+\lang{de}{
+Ergänzende Zusammenfassungen der bisher angesprochenen Themen aus Abschnitt \ref{sec:lHospital}, samt Rechenbeispielen, können den folgenden Videos entnommen werden:\\
+\floatright{
+    \href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10765&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}
+    \href{https://www.hm-kompakt.de/video?watch=531}{\image[75]{00_Videobutton_schwarz}}
+}\\\\
+}
+\lang{en}{}
+
+
+
+
+\section{\lang{de}{Zusammenhang zur Taylor-Approximation}
+         \lang{en}{Relationship with Taylor approximations}}\label{sec:lhopital-taylor}
+\lang{de}{
+Weshalb finden Sie diesen Abschnitt über die Regeln von de l'Hospital im Kapitel Approximation?
+Wenn wir den Quotienten $\frac{f(x)}{g(x)}$ im Grenzwertprozess ersetzen durch den Quotienten 
+$\frac{f'(x)}{g'(x)}$, dann approximieren wir die Funktion selbst durch ihre Ableitung. Das können 
+wir besonders gut dann beobachten, wenn die Funktionen $f$ und $g$ im Punkt $x_0$ stetig 
+differenzierbar sind, denn dann gibt uns die 
+\ref[content_04_taylor_polynom][Taylor-Formel]{thm:taylor-approximation}
+}
+\lang{en}{
+Why is this section on l'Hopital's rules in the chapter on approximations? In replacing the quotient 
+$\frac{f(x)}{g(x)}$ with the quotient $\frac{f'(x)}{g'(x)}$ in the limit, we are approximating the 
+functions themselves by their derivatives. This can be seen in particular if the functions $f$ and 
+$g$ are continuously differentiable at the point $x_0$, as then there exists a 
+\ref[content_04_taylor_polynom][Taylor polynomial]{thm:taylor-approximation}
+}
+\begin{align*}
+f(x)&=& f(x_0)+f'(x_0)(x-x_0)+(x-x_0)\, r_f(x),\\
+g(x)&=& g(x_0)+g'(x_0)(x-x_0)+(x-x_0)\,r_g(x),
+\end{align*}
+\lang{de}{
+wobei die Restfunktionen erster Ordnung $r_f$ und $r_g$ stetig sind in $x_0$ mit 
+$\lim_{x\to x_0}r_f(x)=0=\lim_{x\to x_0}r_g(x)$. Jetzt nehmen wir zusätzlich zur stetigen 
+Differenzierbarkeit von $f$ und $g$ in $x_0$ noch die Voraussetzung von Satz 
+\ref{thm:de-l-Hospital_1} an. Das heißt, wir nehmen an $f(x_0)=0=g(x_0)$ und $g'(x_0)\neq 0$. 
+Dann gilt
+}
+\lang{en}{
+where the first order remainder functions $r_f$ and $r_g$ are continuous at $x_0$ with 
+$\lim_{x\to x_0}r_f(x)=0=\lim_{x\to x_0}r_g(x)$. Now if we additionally suppose the conditions of 
+Theorem \ref{thm:de-l-Hospital_1} hold, that is, $f(x_0)=0=g(x_0)$ and $g'(x_0)\neq 0$, we have
+}
+\begin{align*}
+\lim_{x\to x_0}\frac{f(x)}{g(x)}&=&\lim_{x\to x_0}\frac{f'(x_0)(x-x_0)+( x-x_0)\cdot r_f(x)}{g'(x_0)(x-x_0)+(x-x_0)\cdot r_g(x)}\\
+&=&\lim_{x\to x_0}\frac{f'(x_0)}{g'(x_0)+r_g(x)}
++\lim_{x\to x_0}\frac{ r_f(x)}{g'(x_0)+ r_g(x)}\\
+&=&\frac{f'(x_0)}{g'(x_0)}=\lim_{x\to x_0}\frac{f'(x)}{g'(x)}.
+\end{align*}
+\lang{de}{
+Damit haben wir die erste de l'Hospitalsche Regel (Satz \ref{thm:de-l-Hospital_1}) gezeigt mit Hilfe 
+der Taylor-Approximation unter der Voraussetzung, dass $f$ und $g$ stetig differenzierbare Funktionen 
+sind. Die erste de l'Hospitalsche Regel fordert statt der Annahme der stetigen Differenzierbarkeit 
+ein klein wenig schwächere Voraussetzungen, unter der die Regel trotzdem noch anwendbar ist.
+\\\\
+Wieso haben wir die de l'Hospitalsche Regel nicht gleich  durch die Taylor-Approximation bewiesen? 
+Das liegt daran, dass wir bereits für den \ref[content_04_taylor_polynom][Beweis der Taylor-Approximationseigenschaft]{proof:Beweis der Taylor-Approximationseigenschaft} 
+die de l'Hospitalsche Regel verwendet haben. Ohne einen anderen Beweis der de l'Hospitalsche Regel 
+hätten wir einen mathematischen Zirkelschluss getan: Die eine Aussage ist genau dann wahr, wenn die 
+andere wahr ist. Aber ob eine der Aussage wirklich wahr ist, hätten wir nicht sagen können.
+\\\\
+Der de l'Hospitalschen Regel liegt also dieselbe \emph{Idee} zugrunde wie der Taylor-Approximation. 
+Um beide zu beweisen, müssen wir an einer Stelle härter arbeiten, nämlich den 
+\ref[content_06_de_l_hospital][verallgemeinerten Mittelwertsatz]{thm:verallg_mws} beweisen.
+Wir haben uns dafür entschieden, das bei der de l'Hospitalschen Regel zu tun.
+\\\\
+Auch das $n$-fache Anwenden der Regel von de l'Hospital können wir durch Taylor-Approximation ganz 
+leicht verstehen. Dazu nehmen wir an, dass $f$ und $g$ sogar $n$-mal stetig differenzierbar sind in 
+$x_0$ und dass alle Ableitungen bis zur $(n-1)$-ten verschwinden, nicht aber die $n$-te von $g$, 
+also $f^{(k)}(x_0)=0=g^{(k)}(x_0)$ für $k=0,\ldots,n-1$ und $g^{(n)}(x_0)\neq 0$. Wir machen somit 
+genau die Annahme, die wir beim $n$-fachen Anwenden von de l'Hospital benötigen. Dann gilt mit Hilfe 
+der $n$-ten Restglieder $r_f$ und $r_g$ von $f$ bzw. $g$, die ja stetig sind in $x_0$ und dort 
+verschwinden,
+}
+\lang{en}{
+Thus we have shown the validity of the first of l'Hopital's rules (Theorem \ref{thm:de-l-Hospital_1}) 
+using a Taylor approximation, under the condition that $f$ and $g$ are continuously differentiable 
+functions. The first of l'Hopital's rule has weaker conditions than this, under which it is still 
+valid.
+\\\\
+Why did we not initially use Taylor approximations to prove the rule? In fact, we used l'Hopital's 
+rule in the \ref[content_04_taylor_polynom][proof of uniqueness of Taylor approximations]{proof:Beweis der Taylor-Approximationseigenschaft}. If we did not provide a different proof of 
+l'Hopital's rule, we would have a circular proof: the statement is true if and only if the other 
+statement is true. However, this does not tell us whether either theorem is true by itself.
+\\\\
+L'Hopital's rules therefore rely on the same \emph{idea} as Taylor approximations. In order to prove 
+both, we must do some more work on one end. We choose to prove the 
+\ref[content_06_de_l_hospital][general mean value theorem]{thm:verallg_mws}, 
+which is then used in the proof of l'Hopital's rule earlier.
+\\\\
+Even the repeated application of l'Hopital's rule can be understood using Taylor approximations. 
+Suppose that $f$ and $g$ are $n$-times continuously differentiable at $x_0$, and that all derivatives 
+up to the $(n-1)$th vanish there, but not the $n$th derivative of $g$. That is, 
+$f^{(k)}(x_0)=0=g^{(k)}(x_0)$ for $k=0,\ldots,n-1$ and $g^{(n)}(x_0)\neq 0$. We have required exactly 
+the conditions that are required for $n$ consecutive applications of l'Hopital's rule. Then, using 
+the $n$th order remainders $r_f$ and $r_g$ of $f$ and $g$, which are continuous and vanish at $x_0$,
+}
+\begin{align*}
+f(x)&=& f^{(n)}(x_0)(x-x_0)^n+(x-x_0)^n\cdot r_f(x),\\
+g(x)&=& g^{(n)}(x_0)(x-x_0)^n+(x-x_0)^n\cdot r_g(x).
+\end{align*}
+\lang{de}{Genau wie im Fall $n=1$ erhalten wir daraus}
+\lang{en}{Like in the case $n=1$, we obtain}
+\[\lim_{x\to x_0}\frac{f(x)}{g(x)}=\frac{f^{(n)}(x_0)}{g^{(n)}(x_0)}=\lim_{x\to x_0}\frac{f^{(n)}(x)}{g^{(n)}(x)}.\]
+
+\section{\lang{de}{Verallgemeinerter Mittelwertsatz}
+         \lang{en}{General mean value theorem}}\label{sec:verallg-mws}
+
+\lang{de}{
+Im Beweis der Regel von de l'Hospital haben wir den verallgemeinerten Mittelwertsatz verwendet, den 
+wir jetzt nachholen.
+}
+\lang{en}{
+The proof of l'Hopital's rule used the general mean value theorem, which we now provide a proof of.
+}
+
+\begin{theorem}[\lang{de}{Verallgemeinerter Mittelwertsatz}
+                \lang{en}{General mean value theorem}]\label{thm:verallg_mws}
+  \lang{de}{
+  Sei $I\subseteq \R$ ein Intervall und seien $f,g\colon I\to\R$ stetige Funktionen, die im Innern 
+  von $I$ differenzierbar sind. Die Ableitung erf\"ulle 
+  \nowrap{$g'(x)\neq 0$} f\"ur alle $x$ aus dem Inneren von $ I$.
+  \\\\
+  F\"ur alle $a,b\in I,\; a<b,$ gibt es ein $\xi\in I$ zwischen $a$ und $b,$ so dass
+  }
+  \lang{en}{
+  Let $I\subseteq \R$ be an interval and $f,g\colon I\to\R$ differentiable. Let the derivative 
+  satisfy \nowrap{$g'(x)\neq 0$} for all $x\in I.$
+  \\\\
+  For all $a,b\in I,\; a< b,$ there is a $\xi\in I$ between $a$ and $b$ such that
+  }
+  \[ \frac{f(b)-f(a)}{g(b) - g(a)} = \frac{f'(\xi)}{g'(\xi)}\,.\]
+\end{theorem}
+
+\begin{remark}
+  \begin{enumerate}
+  \item
+    \lang{de}{"`$\xi\in I$ zwischen  $a$ und $b$"' $\,$ bedeutet $a<\xi<b$.}
+    \lang{en}{'$\xi\in I$ between $a$ and $b$' $\,$  means $a<\xi<b.$}
+  \item
+    \lang{de}{Aus $g'(x)\neq 0$ f\"ur alle $x\in I$ folgt $g(b) - g(a)\neq 0$ f\"ur alle $a\neq b.$}
+    \lang{en}{'$g'(x)\neq 0$ for all $x\in I$' implies $g(b) - g(a)\neq 0$ for all $a\neq b.$}
+  \item
+    \lang{de}{Mit $g(x)=x$ erh\"alt man den  \ref[hoehere-abl][gew\"ohnlichen Mittelwertsatz]{thm:mittelwertsatz}.}
+    \lang{en}{Setting $g(x)=x$ yields the usual \ref[hoehere-abl][mean value theorem]{thm:mittelwertsatz}. }
+\end{enumerate}
+\end{remark}
+\begin{proof*}[\lang{de}{Beweis von Satz \ref{thm:verallg_mws}}
+               \lang{en}{Proof of Theorem \ref{thm:verallg_mws}}]
+\lang{de}{
+Mit einer geeigneten Hilfsfunktion führen wir den verallgemeinerten Mittelwertsatz auf den 
+\ref[hoehere-abl][gew\"ohnlichen Mittelwertsatz]{thm:mittelwertsatz} zurück.
+}
+\lang{en}{
+With a suitable helping function, we can use the usual 
+\ref[hoehere-abl][mean value theorem]{thm:mittelwertsatz} to prove the general mean value 
+theorem.
+}
+\begin{incremental}[\initialsteps{0}]
+\step
+\lang{de}{Die Funktion $h:I\to\R$,}
+\lang{en}{The function $h:I\to\R$,}
+\[x\mapsto h(x) = [f(b)-f(a)\,]\,g(x) -[g(b)-g(a)\,]\,f(x)\]
+\lang{de}{ist differenzierbar und erfüllt}
+\lang{en}{is differentiable and satisfies}
+\[h(a)=f(b)g(a)-g(b)f(a)=h(b).\]
+\lang{de}{Nach dem Mittelwertsatz existiert eine Stelle $\xi$, $a<\xi<b$, für die gilt}
+\lang{en}{By the mean value theorem, there exists a point $\xi$ with $a<\xi<b$ for which}
+\[h'(\xi)=\frac{h(b)-h(a)}{b-a}=0.\]
+\lang{de}{Das heißt aber}
+\lang{en}{However, then}
+\[ 0=h'(\xi) = [f(b)-f(a)\,]\,g'(\xi) -[g(b)-g(a)\,]\,f'(\xi).     \]
+\lang{de}{
+Umstellen dieser Gleichung liefert die Behauptung. Dabei bemerken wir, dass wir nicht nur durch 
+$g'(\xi)$ sondern auch durch $(g(b)-g(a))$ teilen dürfen, weil nach Voraussetzung $g'$ keine 
+Nullstelle hat. Somit ist die Funktion $g$ streng monoton, also $g(b)\neq g(a)$.
+}
+\lang{en}{
+Manipulating this equation yields the assumption. We note that not only can we divide by $g'(\xi)$, 
+but we can also divide by $(g(b)-g(a))$, because by our condition, $g'$ is non-zero at every point. 
+Hence the function $g$ is strictly monotone, and $g(b)\neq g(a)$.
+}
+\end{incremental}
+
+\end{proof*}
+
+
+\end{content}

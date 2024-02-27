@@ -1,0 +1,103 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A02: Koordinatendarstellung}
+    \lang{en}{P02: Coordinate representation}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/14364}{Ticket 14364}
+\end{block}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{
+	\title{A02: Koordinatendarstellung}
+}
+\lang{en}{
+\title{P02: Coordinate representation}
+}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/}{Ticket 14364 }
+\end{block}
+
+
+
+\begin{problem}
+
+    
+\begin{question}
+
+	\begin{variables}
+		\randint{a}{-5}{5}
+        \randint[Z]{b}{-5}{5}
+        \randint{c}{-5}{5}
+        \randint{d}{-5}{5}
+        
+		
+        \pmatrix[calculate]{aa}{c+1\\1}
+        \pmatrix[calculate]{bb}{c*d+c+d \\ d+1}
+        \pmatrix{cc}{a \\ b}
+		\pmatrix[calculate]{dd}{a*d+a-b*c*d-b*c-b*d \\ -a+b*c+b }
+	\end{variables}
+
+	\type{input.matrix}
+	\displayprecision{3}
+    \correctorprecision{2}
+    \field{real}
+    
+    \lang{de}{
+	    \text{
+	    Bestimmen Sie die Koordinatendarstellung von $\var{cc}$ bezüglich der Basis $\{\var{aa},\var{bb} \}$}
+         
+        \explanation{ 
+        Die Koordinatendarstellung $\begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix}$ von $\var{cc}$ 
+        bezüglich der Basis $\{\var{aa},\var{bb} \}$ ergibt sich als Lösung des Gleichungssytems:
+
+         $\lambda_1 \cdot \var{aa} + \lambda_2 \cdot \var{bb} = \var{cc}$
+
+        }
+        }
+
+    \lang{en}{
+	    \text{
+	    Determine the coordinate representation of $\var{cc}$ with respect to the basis $\{\var{aa},\var{bb} \}$}
+         
+        \explanation{ 
+        The coordinate representation $\begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix}$ of $\var{cc}$ 
+      with respect to the basis $\{\var{aa},\var{bb} \}$ is the solution of the linear system:
+
+         $\lambda_1 \cdot \var{aa} + \lambda_2 \cdot \var{bb} = \var{cc}$
+
+        }
+        }
+    
+    \begin{answer}
+	    \solution{dd}
+      \format{2}{1}
+	\end{answer}
+    
+\end{question}
+
+\end{problem}
+
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

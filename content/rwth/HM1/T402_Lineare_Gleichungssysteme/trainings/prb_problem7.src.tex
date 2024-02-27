@@ -1,0 +1,443 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A05: Rang}
+    \lang{en}{P05: Rank}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21544}{Ticket 21544}
+\end{block}
+\usepackage{mumie.genericproblem}
+
+
+\lang{de}{\title{A05: Rang}}
+\lang{en}{\title{P05: Rank}}
+% Übernahme aus Ticket 9673; Inhalt angepasst
+
+\lang{de}{
+\begin{problem}
+
+     \begin{question} 
+     
+     
+     \begin{variables}
+		\randint[Z]{a}{-9}{9}
+		\randint[Z]{b}{-9}{9}
+		\randint[Z]{c}{-9}{9}
+		\randint[Z]{d}{-9}{9}
+		\randint[Z]{ee}{-9}{9}
+		\randint[Z]{f}{-9}{9}
+		\randint[Z]{k}{-9}{9}
+        \randint[Z]{l}{-9}{9}
+		
+			%\matrix[calculate]{m1}{
+  			%a & a & k*a \\
+     %0 & a & k*a \\
+     %0 & a & k*a 
+     % 	}
+      		\matrix[calculate]{m2}{
+  			 a & -l*a & -(l+1)*a \\
+     a & -l*a & -(l+1)*a \\
+     0 & (l+1)*a & (l+1)*a 
+      	}
+     % 		\matrix[calculate]{m3}{
+  		%	a & b & c \\
+     %0 & 0 & c \\
+     %0 & b & 0 
+     % 	}
+      	\matrix[calculate]{m4}{
+  			a & b & c \\
+     d & ee & f \\
+     0 & 0 & 0
+      	}
+      	\matrix[calculate]{m5}{
+  			a & 0 & 0 & 0\\
+     0 & b & b & 0 \\
+     0 & 2*b & 3*b & 4*b \\
+     0 & c & c & 5*c
+      	}
+        \matrix[calculate]{m6}{
+  			a & b & c \\
+     a*2 & b*4 & c*5
+      	}
+	\end{variables}
+     
+     
+     \lang{de}{ 
+      	\text{
+            Geben Sie für alle der folgenden Matrizen über $\R$ an, ob diese
+            vollen Rang haben.
+        }
+      }
+    	\permutechoices{1}{3}
+    	\type{mc.yesno}
+		%\begin{choice}
+  		%	\text{$\var{m1}$}
+  		%	\solution{false}
+		%\end{choice}
+		\begin{choice}
+  			\text{$\var{m2}$}
+  			\solution{false}
+		\end{choice}
+		\begin{choice}
+  			\text{$\var{m4}$}
+  			\solution{false}
+		\end{choice}
+		%\begin{choice}
+  		%	\text{$\var{m3}$}
+  		%	\solution{true}
+		%\end{choice}
+		\begin{choice}
+  			\text{$\var{m5}$}
+  			\solution{true}
+		\end{choice}
+		\begin{choice}
+  			\text{$\var{m6}$}
+  			\solution{true}
+		\end{choice}
+                
+        \explanation{
+         Bringen Sie die jeweilige Matrix zunächst mit Hilfe des Gauß-Verfahrens in Stufenform.
+         Der Rang enspricht dann der Anzahl an Zeilen, die ungleich der Nullzeile sind.
+         Eine $(m \times n)$-Matrix $A$ hat dann vollen Rang, wenn der Rang von $A$ gleich $\min\{m,n\}$ ist.
+        }
+        
+    \end{question}
+    
+    
+    
+    
+\begin{question} 
+   \begin{variables}
+      \randint[Z]{ar}{-9}{9}
+      \randint[Z]{ai}{-9}{9}
+      \function[calculate]{a}{ar+ai*i}
+      \randint[Z]{b}{-9}{9}
+      \randint[Z]{cr}{-9}{9}
+      \randint[Z]{ci}{-9}{9}
+      \function[calculate]{c}{cr+ci*i}
+      \randint[Z]{d}{-9}{9}
+      \randint[Z]{ee}{-9}{9}
+      \randint[Z]{f}{-9}{9}
+      \randint[Z]{k}{-9}{9}
+      \matrix[calculate]{m6}{
+          a & b & cr \\
+          a*3 & b*3 & c*3 
+      }
+    \end{variables}
+    \field{complex}
+    \lang{de}{ 
+        \text{Entscheiden Sie, ob die folgende Matrix über $\C$ vollen Rang besitzt.
+        Wie üblich ist $i \in \C$ die imaginäre Einheit.}
+    }
+    %\permutechoices{1}{3}
+    \type{mc.yesno}
+    \begin{choice}
+        \text{$\var{m6}$}
+        \solution{true}
+    \end{choice}      
+    \explanation{
+     Bringen Sie die Matrix zunächst mit Hilfe des Gauß-Verfahrens in Stufenform.
+     Der Rang enspricht dann der Anzahl an Zeilen, die ungleich der Nullzeile sind.
+     Eine $(m \times n)$-Matrix $A$ hat dann vollen Rang, wenn der Rang von $A$ gleich $\min\{m,n\}$ ist.
+     Der Rang ist hier 2 und entspricht $\min\{2, 3\}=2$.
+    }        
+\end{question}    
+    
+    
+    
+    
+\begin{question}
+  \begin{variables}
+    \randint[Z]{a}{-9}{9}
+    \randint[Z]{b}{-9}{9}
+    \randint[Z]{c}{-9}{9}
+    \randint[Z]{d}{-9}{9}
+    \randint[Z]{ee}{-9}{9}
+    \randint[Z]{f}{-9}{9}
+    \randint[Z]{k}{-9}{9}
+    \matrix[calculate]{r1}{
+      a & a & k*a \\
+      0 & a & k*a \\
+      0 & a & k*a 
+    }
+    \number{r1s}{2}
+  \end{variables}
+  \type{input.number}
+  \displayprecision{3}
+  \correctorprecision{2}
+  \field{integer}
+  \lang{de}{
+      \text{Geben Sie den Rang für die folgende Matrix über $\R$ an:\\
+      $A=\var{r1}$}
+  }
+  \begin{answer}
+      \text{Rang(A)=}\solution{r1s}
+      \explanation{
+         Bringen Sie die Matrix zunächst mit Hilfe des Gauß-Verfahrens in Stufenform.
+         Sie stellen fest, dass die dritte Zeile in dieser Aufgabe dann eine Nullzeile ist.
+         Der Rang enspricht dann der Anzahl an Zeilen, die ungleich der Nullzeile sind,
+         also hier 2.
+      }
+  \end{answer}
+\end{question} 
+
+
+\begin{question}
+  \begin{variables}
+    \randint[Z]{a}{-9}{9}
+    \randint[Z]{b}{-9}{9}
+    \randint[Z]{c}{-9}{9}
+    \randint[Z]{d}{-9}{9}
+    \randint[Z]{ee}{-9}{9}
+    \randint[Z]{f}{-9}{9}
+    \randint[Z]{k}{-9}{9}
+    \matrix[calculate]{r2}{
+      a & b & c \\
+      0 & 0 & c \\
+      0 & b & 0 
+    }    
+    \number{r2s}{3}
+  \end{variables}
+  \type{input.number}
+  \displayprecision{3}
+  \correctorprecision{2}
+  \field{integer}
+  \lang{de}{
+      \text{Geben Sie den Rang für die folgende Matrix über $\R$ an:\\
+      $B=\var{r2}$}
+  }
+  \begin{answer}
+      \text{Rang(B)=}\solution{r2s}
+      \explanation{
+        Bringen Sie die Matrix zunächst mit Hilfe des Gauß-Verfahrens in Stufenform.
+        Am einfachsten tauscht man hier die zweite und die dritte Zeile.
+        Der Rang enspricht dann der Anzahl an Zeilen, die ungleich der Nullzeile sind,
+        also hier 3.
+      }
+  \end{answer}
+\end{question} 
+
+\end{problem}}
+
+%% ------ ENGLISCHE VERSION -----------------------------------
+\lang{en}{
+\begin{problem}
+
+     \begin{question} 
+     
+     
+     \begin{variables}
+		\randint[Z]{a}{-9}{9}
+		\randint[Z]{b}{-9}{9}
+		\randint[Z]{c}{-9}{9}
+		\randint[Z]{d}{-9}{9}
+		\randint[Z]{ee}{-9}{9}
+		\randint[Z]{f}{-9}{9}
+		\randint[Z]{k}{-9}{9}
+        \randint[Z]{l}{-9}{9}
+		
+			%\matrix[calculate]{m1}{
+  			%a & a & k*a \\
+     %0 & a & k*a \\
+     %0 & a & k*a 
+     % 	}
+      		\matrix[calculate]{m2}{
+  			 a & -l*a & -(l+1)*a \\
+     a & -l*a & -(l+1)*a \\
+     0 & (l+1)*a & (l+1)*a 
+      	}
+     % 		\matrix[calculate]{m3}{
+  		%	a & b & c \\
+     %0 & 0 & c \\
+     %0 & b & 0 
+     % 	}
+      	\matrix[calculate]{m4}{
+  			a & b & c \\
+     d & ee & f \\
+     0 & 0 & 0
+      	}
+      	\matrix[calculate]{m5}{
+  			a & 0 & 0 & 0\\
+     0 & b & b & 0 \\
+     0 & 2*b & 3*b & 4*b \\
+     0 & c & c & 5*c
+      	}
+        \matrix[calculate]{m6}{
+  			a & b & c \\
+     a*2 & b*4 & c*5
+      	}
+	\end{variables}
+      
+      	\text{
+       Decide for each of the following matrices over $\R$, if they have full rank.
+        }
+  
+    	\permutechoices{1}{3}
+    	\type{mc.yesno}
+		%\begin{choice}
+  		%	\text{$\var{m1}$}
+  		%	\solution{false}
+		%\end{choice}
+		\begin{choice}
+  			\text{$\var{m2}$}
+  			\solution{false}
+		\end{choice}
+		\begin{choice}
+  			\text{$\var{m4}$}
+  			\solution{false}
+		\end{choice}
+		%\begin{choice}
+  		%	\text{$\var{m3}$}
+  		%	\solution{true}
+		%\end{choice}
+		\begin{choice}
+  			\text{$\var{m5}$}
+  			\solution{true}
+		\end{choice}
+		\begin{choice}
+  			\text{$\var{m6}$}
+  			\solution{true}
+		\end{choice}
+                
+        \explanation{
+        Transform each matrix via Gaussian elimination into row echelon form.
+        The rank is equal to the number of non-zero rows.
+        A $(m\times n)$-matrix $A$ has full rank, when the rank of $A$ is $\min\{m,n\}$.}
+        
+    \end{question}
+    
+    
+    
+    
+\begin{question} 
+   \begin{variables}
+      \randint[Z]{ar}{-9}{9}
+      \randint[Z]{ai}{-9}{9}
+      \function[calculate]{a}{ar+ai*i}
+      \randint[Z]{b}{-9}{9}
+      \randint[Z]{cr}{-9}{9}
+      \randint[Z]{ci}{-9}{9}
+      \function[calculate]{c}{cr+ci*i}
+      \randint[Z]{d}{-9}{9}
+      \randint[Z]{ee}{-9}{9}
+      \randint[Z]{f}{-9}{9}
+      \randint[Z]{k}{-9}{9}
+      \matrix[calculate]{m6}{
+          a & b & cr \\
+          a*3 & b*3 & c*3 
+      }
+    \end{variables}
+    \field{complex}
+    \lang{de}{ 
+        \text{Decide for each of the following matrices over $\C$, if they have full rank. $i\in\C$ is the imaginary unit.}
+    }
+    %\permutechoices{1}{3}
+    \type{mc.yesno}
+    \begin{choice}
+        \text{$\var{m6}$}
+        \solution{true}
+    \end{choice}      
+    \explanation{
+     Transform the matrix via Gaussian elimination into row echelon form.
+        The rank is equal to the number of non-zero rows.
+        A $(m\times n)$-matrix $A$ has full rank, when the rank of $A$ is $\min\{m,n\}$.
+     Here the rank is $2$ and we have $\min \{2,3\}=2$.
+    }        
+\end{question}    
+    
+    
+    
+    
+\begin{question}
+  \begin{variables}
+    \randint[Z]{a}{-9}{9}
+    \randint[Z]{b}{-9}{9}
+    \randint[Z]{c}{-9}{9}
+    \randint[Z]{d}{-9}{9}
+    \randint[Z]{ee}{-9}{9}
+    \randint[Z]{f}{-9}{9}
+    \randint[Z]{k}{-9}{9}
+    \matrix[calculate]{r1}{
+      a & a & k*a \\
+      0 & a & k*a \\
+      0 & a & k*a 
+    }
+    \number{r1s}{2}
+  \end{variables}
+  \type{input.number}
+  \displayprecision{3}
+  \correctorprecision{2}
+  \field{integer}
+  \lang{de}{
+      \text{Determine the rank of the following matrix over $\R$:\\
+      $A=\var{r1}$}
+  }
+  \begin{answer}
+      \text{Rang(A)=}\solution{r1s}
+      \explanation{
+      Transform the matrix via Gaussian elimination into row echelon form.
+      We see, that the third row is a zero row.
+      The rank is the number of non-zero rows, which is here $2$.
+      }
+  \end{answer}
+\end{question} 
+
+
+\begin{question}
+  \begin{variables}
+    \randint[Z]{a}{-9}{9}
+    \randint[Z]{b}{-9}{9}
+    \randint[Z]{c}{-9}{9}
+    \randint[Z]{d}{-9}{9}
+    \randint[Z]{ee}{-9}{9}
+    \randint[Z]{f}{-9}{9}
+    \randint[Z]{k}{-9}{9}
+    \matrix[calculate]{r2}{
+      a & b & c \\
+      0 & 0 & c \\
+      0 & b & 0 
+    }    
+    \number{r2s}{3}
+  \end{variables}
+  \type{input.number}
+  \displayprecision{3}
+  \correctorprecision{2}
+  \field{integer}
+  \lang{de}{
+      \text{Determine the rank of the following matrix over $\R$:\\
+      $B=\var{r2}$}
+  }
+  \begin{answer}
+      \text{Rang(B)=}\solution{r2s}
+      \explanation{
+      Transform the matrix via Gaussian elimination into row echelon form. 
+      Therefore it is the easiest to swap the second and the third row.
+      The rank is the number of non-zero rows, which is here $3$.
+      }
+  \end{answer}
+\end{question} 
+
+\end{problem}}
+
+\embedmathlet{mathlet}
+
+\end{content}

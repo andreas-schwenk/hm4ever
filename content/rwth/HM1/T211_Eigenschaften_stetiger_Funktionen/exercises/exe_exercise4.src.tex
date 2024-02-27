@@ -1,0 +1,80 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü04: Gleichungen}
+    \lang{en}{Exercise 4}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Hier die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\title{
+\lang{de}{Ü04: Gleichungen}
+}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10052}{Ticket 10052}
+\end{block}
+ 
+\begin{itemize}
+\item[a)] {Bestimmen Sie alle reellen Lösungen der Gleichung $e^{x}+e^{-x}=5$.}\\
+\item[b)] {Bestimmen Sie alle reellen Lösungen der Gleichung $\tan(x)=\cos(x)$.}
+\end{itemize}
+
+
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+  \tab{
+  \lang{de}{Lösung a)}}
+  \begin{incremental}[\initialsteps{1}]
+	\step 
+Wir bemerken zunächst, dass die Funktion $f(x)=e^{x}+e^{-x}$ symmetrisch zur $y$-Achse ist: Es gilt $f(-x)=f(x)$ für alle $x\in\R$. Wir formulieren das Problem zunächst um:
+\[e^{x}+e^{-x}=5\iff \frac{e^{2x}+1}{e^{x}}=5\iff e^{2x}-5e^{x}+1=0\,.\]
+Wir setzen nun $u:=e^{x}$. Dann schreibt sich die letzte Gleichung in der Form
+\[u^{2}-5u+1=0\,.\]
+\step Dies ist eine quadratische Gleichung in $u$. Die Nullstellen können wir mit Hilfe der $p$-$q$-Formel bestimmen:
+\[u^{2}-5u+1=0\iff u=\frac{5+\sqrt{21}}{2}\text{ oder } \ u=\frac{5-\sqrt{21}}{2}\,.\]
+\step Die Lösungen der ursprünglichen Gleichung sind also $x_{1}=\ln\left(\frac{5+\sqrt{21}}{2}\right)$ und  $x_{2}=\ln\left(\frac{5-\sqrt{21}}{2}\right)$. Hier muss
+natürlich darauf geachtet werden, dass die Argumente in der Logarithmusfunktion positiv sind, was hier aber der Fall ist. 
+
+Beachte, dass wegen der Logarithmenregeln tatsächlich $x_{2}=-x_{1}$ gilt:
+\[-x_{1}=-\ln\left(\frac{5+\sqrt{21}}{2}\right)=\ln\left(\frac{1}{\frac{5+\sqrt{21}}{2}}\right)=\ln\left(\frac{2}{5+\sqrt{21}}\right)\,.\]
+Weiter ist
+\[\frac{2}{5+\sqrt{21}}=\frac{2 \cdot (5-\sqrt{21})}{(5+\sqrt{21})(5-\sqrt{21})} = \frac{2 \cdot (5-\sqrt{21})}{4} = \frac{5-\sqrt{21}}{2}\,.\]
+\end{incremental}
+
+	\tab{
+	\lang{de}{Lösung b)}}
+	\begin{incremental}[\initialsteps{1}]
+	\step Der Tangens ist definiert auf der Menge
+\[M=\R\backslash\left\{\frac{\pi}{2}+k\pi\,|\,k\in\Z\right\}\,.\]
+Die Lösungen sind also innerhalb dieser Menge zu suchen. 
+\step Die Gleichung lässt sich folgendermaßen umstellen:
+\begin{align*}
+\tan(x)=\cos(x) &\iff \frac{\sin(x)}{\cos(x)}=\cos(x)\iff \sin(x)=\cos(x)^{2} \\ &\iff \sin(x)=1-\sin(x)^{2}\,,
+\end{align*}
+wobei die letzte Identität laut Vorlesung gilt. Substituiert man $u=\sin(x)$, so führt dies auf das Nullstellenproblem
+\[u^{2}+u-1=0\,.\]
+Jede Lösung des ursprünglichen Problems ist also auch eine Lösung des Nullstellenproblems. 
+\step Wir können diese quadratische Gleichung wieder mit Hilfe der $p$-$q$-Formel lösen und erhalten als Lösungen
+\[u_{1}=\frac{\sqrt{5}-1}{2}\quad,\quad u_{2}=\frac{-\sqrt{5}-1}{2}\,.\]
+\step Die Umkehrfunktion des Sinus ist $\arcsin$. Diese ist definiert auf der Menge $[-1;1]$. Wegen $2<\sqrt{5}<3$ ist $u_{1}\in[-1;1]$, 
+aber $u_{2}\notin [-1;1]$. Daher erhalten wir $x_{1}=\arcsin(u_{1})$ als eindeutige Lösung im Intervall $(-\frac{\pi}{2};\frac{\pi}{2})$. Offenbar 
+ist $x_{1}\in M$. Aus der Identität $\sin(\pi-x)=\sin(x)$ erhalten wir $x_{2}=\pi-x_{1}$ als weitere Lösung im Intervall $(\frac{\pi}{2};\frac{3\pi}{2})$.
+
+Wegen der $2\pi$-Periodizität des Sinus ist die Lösungsmenge der Gleichung gegeben durch
+\[\{x_{1}+2\pi k\,|\,k\in\Z\}\cup\{x_{2}+2\pi k\,|\,k\in\Z\}\,.\]	
+\end{incremental}
+\end{tabs*}
+
+\end{content}

@@ -1,0 +1,67 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü08: Folgeneigenschaften}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Hier die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T201neu_Vollstaendige_Induktion/g_art_content_02_vollstaendige_induktion.meta.xml}{content_02_vollstaendige_induktion1}
+% \link{generic_article}{content/rwth/HM1/T201_Vollstaendige_Induktion_wichtige_Ungleichungen/g_art_content_02_vollstaendige_induktion.meta.xml}{content_02_vollstaendige_induktion}
+\link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_16_konvergenzkriterien.meta.xml}{content_16_konvergenzkriterien}
+\end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\title{
+\lang{de}{Ü08: Folgeneigenschaften}
+}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9859}{Ticket 9859}
+\end{block}
+ 
+\lang{de}{Betrachten Sie die Folge $(a_{n})_{n\in\N}$ mit $a_{n}=(n^{2}+n)^{-n}$. 
+Zeigen Sie, dass diese Folge streng monoton fallend und beschränkt ist. 
+Bestimmen Sie weiter den Grenzwert.}
+
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+  \tab{
+  \lang{de}{Lösung}}
+  
+  \begin{incremental}[\initialsteps{1}]
+    \step 
+    \lang{de}{Eine Folge $(a_{n})_{n\in\N}$ mit $a_{n}\neq 0$ für alle $n\in\N$ ist genau dann 
+    streng monoton fallend, wenn gilt
+	\[\frac{a_{n}}{a_{n+1}}>1\quad\text{ für alle }n\in\N\,.\]}
+     
+    \step \lang{de}{Sei also $n\in\N$. Dann gilt
+\begin{align*}
+   \frac{a_{n}}{a_{n+1}}&=\frac{((n+1)^{2}+(n+1))^{n+1}}{(n^{2}+n)^{n}}\\
+	&=(n^{2}+n)\left(\frac{(n+1)(n+2)}{n(n+1)}\right)^{n+1}\\
+	&=(n^{2}+n)\left(\frac{n+2}{n}\right)^{n+1}\\
+	&= (n^{2}+n)\left(1+\frac{2}{n}\right)^{n+1}\\
+	&\geq (n^{2}+n)\left(1+\frac{2(n+1)}{n}\right)\\
+	&=(n^{2}+n)\left(3+\frac{2}{n}\right)\,,
+  \end{align*}
+wobei wir in der vorletzten Umformung die \ref[content_02_vollstaendige_induktion1][Bernoullische Ungleichung]{rule:bernoulli-ungleichung} verwendet haben. Der letzte Ausdruck ist für jedes $n\in\N$ echt größer als 1. Also ist die Folge streng monoton fallend. Daher ist die Folge auch nach oben beschränkt. Die Folge ist auch nach unten durch $0$ beschränkt. Daher ist sie konvergent.}
+    \step \lang{de}{Wir betrachten folgende Abschätzung:
+\[\forall n\in\N\,:\,0\leq a_{n}=\frac{1}{(n^{2}+n)^{n}}\leq\frac{1}{n^{2}+n}\leq \frac{1}{n}\,.\]
+Mit Hilfe des \ref[content_16_konvergenzkriterien][Sandwich-Lemmas]{thm:sandwich} erhalten wir so die Konvergenz der Folge mit $\lim_{n\to\infty}{a_{n}}=0$.
+ }
+  \end{incremental}
+
+  
+\end{tabs*}
+
+
+\end{content}

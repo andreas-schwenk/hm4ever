@@ -1,0 +1,82 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A01: Infimum/Supremum}
+    \lang{en}{input numbers}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A01: Infimum/Supremum}}
+\lang{en}{\title{Problem 1}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9784}{Ticket 9784}
+\end{block}
+
+\begin{problem}
+
+	\begin{question}
+		\lang{de}{
+			\text{Gegeben sei die folgende Menge \\
+				$M:=\left\{  \var{M}   \,|\, \, x>0 \text{ und } \var{a}<x^{2}\leq \var{b} \right\}\,.$\\
+				Es sei $c:=\inf(M)$. Geben Sie $c^{2}$ an.
+				}
+		}
+		\explanation{}
+		\type{input.number}
+		\field{rational}
+		
+
+    \precision[false]{3}
+    \displayprecision{3}
+    \correctorprecision{3}
+		
+		\begin{variables}
+			\randint{xx}{2}{20}
+			\randint{y}{2}{20}
+			\randadjustIf{xx,y}{xx=y}
+			\function[calculate]{a}{1/2*(xx+y-abs(xx-y))}
+			\function[calculate]{b}{1/2*(xx+y+abs(xx-y))}
+			\function[calculate]{c2}{a}
+			
+			\function[normalize]{M}{1/2 * x + 1/2*a/x}
+		\end{variables}
+		
+		\begin{answer}
+			\text{$c^2=$}
+			\solution{c2}
+			\explanation{ Für alle $x^2 \in (\var{a},\var{b}]$ gilt\\
+			$(x-\sqrt{\var{a}})^{2}\geq 0\,.$\\
+			Dies ist äquivalent zu \\
+			$x^{2}-2x\sqrt{\var{a}}+\var{a}\geq 0   \Leftrightarrow   2\sqrt{\var{a}}\leq x+\frac{\var{a}}{x}
+            \Leftrightarrow   \sqrt{\var{a}}\leq \frac{x}{2}+\frac{\var{a}}{2x}\,.$\\
+			Also ist $M$ durch $\sqrt{\var{a}}$ nach unten beschränkt. 
+			Tatsächlich gilt hier sogar $\inf(M)=\sqrt{\var{a}}$. 
+			Dies wird durch das sogenannte Heron-Verfahren garantiert.}
+		\end{answer}
+		
+	\end{question}
+	
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

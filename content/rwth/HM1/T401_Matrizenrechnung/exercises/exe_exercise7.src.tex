@@ -1,0 +1,221 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü08: Anwendung}
+    \lang{en}{Ex08: Application}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Rechnen mit Matritzen}
+    \lang{en}{Calculating with matrices}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/19603}{Ticket 19603}
+\end{block}
+\usepackage{mumie.ombplus}
+
+\title{\lang{de}{Ü08: Anwendung} \lang{en}{Ex08: Application}}
+
+
+\lang{de}{
+  Ein Unternehmen fertigt die \textit{Endprodukte} $P_1$, $P_2$ und $P_3$.
+  Es soll ermittelt werden, welcher Bedarf an Rohstoffen je Endprodukt besteht.
+    \begin{itemize}
+        \item Jedes Endprodukt setzt sich aus den \textit{Zwischenprodukten} $Z_1$, $Z_2$ und $Z_3$ zusammen.
+        \item Die Zwischenprodukte bestehen aus den \textit{Rohstoffen} $R_1$, $R_2$, $R_3$ und $R_4$.
+    \end{itemize}
+Die folgende Tabelle 1 gibt den Rohstoffbedarf für jedes Zwischenprodukt in der Einheit Kilogramm an:
+\begin{center}
+\begin{table}[\cellaligns{ccc}]
+    \head
+      & $Z_1$ & $Z_2$ & $Z_3$
+    \body
+  $R_1$ & 0 & 4 & 3 \\
+  $R_2$ & 3 & 2 & 2 \\
+  $R_3$ & 0 & 2 & 3 \\
+  $R_4$ & 3 & 2 & 4
+\end{table}
+\end{center}
+Weiterhin liegt eine Tabelle 2 vor, welche die Stückzahl der Zwischenprodukte je Endprodukt auflistet:
+\begin{table}[\cellaligns{ccc}]
+    \head
+      & $P_1$ & $P_2$ & $P_3$
+    \body
+  $Z_1$ & 2 & 1 & 5 \\
+  $Z_2$ & 1 & 9 & 3 \\
+  $Z_3$ & 4 & 7 & 2
+\end{table}}
+
+\lang{en}{
+  A company manufactures the \textit{final products} $P_1$, $P_2$ and $P_3$.
+  The raw material requirements for each end product should be determined.
+    \begin{itemize}
+        \item Each final product consists of the \textit{intermediates} $Z_1$, $Z_2$ and $Z_3$.
+        \item The intermediate consist of the \textit{raw materials} $R_1$, $R_2$, $R_3$ and $R_4$.
+    \end{itemize}
+The following table describes the raw material requirement for each intermediate in the unit kilogramme:
+\begin{center}
+\begin{table}[\cellaligns{ccc}]
+    \head
+      & $Z_1$ & $Z_2$ & $Z_3$
+    \body
+  $R_1$ & 0 & 4 & 3 \\
+  $R_2$ & 3 & 2 & 2 \\
+  $R_3$ & 0 & 2 & 3 \\
+  $R_4$ & 3 & 2 & 4
+\end{table}
+\end{center}
+Furthermore there is table 2, which describes the amount of intermediates in each final product:
+\begin{table}[\cellaligns{ccc}]
+    \head
+      & $P_1$ & $P_2$ & $P_3$
+    \body
+  $Z_1$ & 2 & 1 & 5 \\
+  $Z_2$ & 1 & 9 & 3 \\
+  $Z_3$ & 4 & 7 & 2
+\end{table}}
+
+\lang{de}{
+\begin{enumerate}[(a)]
+  \item (a) Stellen Sie die beiden Tabellen als Matrizen $A$ und $B$ dar.
+  \item (b) Bestimmen Sie den Rohstoffbedarf für jedes Endprodukt. Geben Sie die Lösung als Matrix $C$ an.
+     %Die $i$-te Zeile der Lösungsmatrix beschreibt, wie viele Einheiten vom Rohstoff $R_i$ für die Endprodukte $E_1, E_2, E_3$ benötigt werden.
+  \item (c) Für die Erstellung der Rohstoffbestellung möchte man nun aus Matrix $C$ wieder eine Tabelle erstellen. 
+     Dazu sollen die benötigten Rohstoffmengen für Endprodukt $P_k$ in Zeile $k$ stehen ($1 \leq k \leq 3$).
+\end{enumerate}}
+
+\lang{en}{
+\begin{enumerate}[(a)]
+  \item (a) Display the tables as matrices.
+  \item (b) Determine the raw material requirement for each final product. Display the result in a matrix $C$.
+     %Die $i$-te Zeile der Lösungsmatrix beschreibt, wie viele Einheiten vom Rohstoff $R_i$ für die Endprodukte $E_1, E_2, E_3$ benötigt werden.
+  \item (c) For ordering the raw materials, the matrix $C$ should be displayed as a table. The row $k$ indicates the needed amount of raw material
+  for the final product $P_k$.
+\end{enumerate}}
+
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+  \tab{\lang{de}{Lösung (a)} \lang{en}{Solution for (a)}}
+  \lang{de}{
+    Wir stellen die Matrix $A \in M(4,3;\R)$ auf, deren Eintrag $a_{i,j}$ den Rohstoffbedarf am Rohstoff $R_i$ für das Zwischenprodukt $Z_j$ angibt.
+    Weiter soll die Matrix $B \in M(3,3;\R)$ im Eintrag $b_{i,j}$ angeben, welche Stückzahl des Zwischenprodukts $Z_i$ je Endprodukt $P_j$ notwendig ist.
+    Damit sind die Matrizen wie folgt gegeben:}
+
+  \lang{en}{
+We set up the matrix $A \in M(4,3;\R)$. The $(i,J)$th entry indicates the requirement of the raw material $R_i$ for the intermediate $Z_j$.
+  The $(i,j)$th entry of matrix $B \in M(3,3;\R)$ indicates the quantity of the intermediate $Z_i$ needed for the final product $P_j$.
+ The matrices are then given as follows:}
+    
+    \begin{equation*}
+A = 
+	\begin{pmatrix}
+		0 & 4 & 3 \\
+		3 & 2 & 2 \\
+		0 & 2 & 3 \\
+		3 & 2 & 4
+	\end{pmatrix}
+ ~~~~~ B=
+	\begin{pmatrix}
+		2 & 1 & 5 \\
+		1 & 9 & 3 \\
+		4 & 7 & 2
+	\end{pmatrix}
+\end{equation*}
+
+
+  \tab{\lang{de}{Lösung (b)} \lang{en}{Solution for (b)}}
+  \lang{de}{
+  Die Lösung erhält man durch Multiplikation der beiden Matrizen $A$ und $B$:}
+  \lang{en}{
+  The solution is obtained by multiplying the two matrices $A$ and $B$}
+  
+\begin{eqnarray*}
+	C = A \cdot B
+	&=&
+	\begin{pmatrix}
+		0 & 4 & 3 \\
+		3 & 2 & 2 \\
+		0 & 2 & 3 \\
+		3 & 2 & 4
+	\end{pmatrix}
+	\cdot
+	\begin{pmatrix}
+		2 & 1 & 5 \\
+		1 & 9 & 3 \\
+		4 & 7 & 2
+	\end{pmatrix}
+    \\
+	&=&
+	\begin{pmatrix}
+0 \cdot 2 + 4 \cdot 1 + 3 \cdot 4  &  0 \cdot 1 + 4 \cdot 9 + 3 \cdot 7  &  0 \cdot 5 + 4 \cdot 3 + 3 \cdot 2 \\
+3 \cdot 2 + 2 \cdot 1 + 2 \cdot 4  &  3 \cdot 1 + 2 \cdot 9 + 2 \cdot 7  &  3 \cdot 5 + 2 \cdot 3 + 2 \cdot 2 \\
+0 \cdot 2 + 2 \cdot 1 + 3 \cdot 4  &  0 \cdot 1 + 2 \cdot 9 + 3 \cdot 7  &  0 \cdot 5 + 2 \cdot 3 + 3 \cdot 2 \\
+3 \cdot 2 + 2 \cdot 1 + 4 \cdot 4  &  3 \cdot 1 + 2 \cdot 9 + 4 \cdot 7  &  3 \cdot 5 + 2 \cdot 3 + 4 \cdot 2
+	\end{pmatrix}
+    \\
+	&=&
+    \begin{pmatrix}
+   16 &  57  & 18 \\
+   16 &  35  & 25 \\
+   14 &  39  & 12 \\
+   24 &  49  & 29
+	\end{pmatrix}
+\end{eqnarray*}
+\lang{de}{
+Der Eintrag $c_{ij}$ gibt nun an, wie viele Einheiten des Rohstoffs $R_i$ für das Endprodukt $P_j$ benötigt werden.}
+\lang{en}{
+The entry $c_{ij}$ indicates, how many units of the raw material $R_i$ are needed for the final product $P_j$.}
+
+  \tab{\lang{de}{Lösung (c)} \lang{en}{Solution for (c)}}#
+  \lang{de}{
+  In (b) haben wir gesehen, dass in der $i$-ten Zeile die benötigte Rohstoffmenge des Rohstoffes $R_i$ für das Endprodukt $P_j$ abgelesen werden kann.
+  Die Aufgabenstellung erwartet aber in den Zeilen jeweils das Endprodukt. Dazu ist das Transponieren der Matrix $C$ nötig:}
+  \lang{en}{
+As seen in (b), the $i$th row indicates the needed amount of the raw material $R_i$ for the final product $P_j$.
+But as asked in the exercise, the final product should be listed in the row. Therefore, it is necessary to transpose the matrix $C$:}
+
+\[
+    C^T = 
+    \begin{pmatrix}
+   16 &  57  & 18 \\
+   16 &  35  & 25 \\
+   14 &  39  & 12 \\
+   24 &  49  & 29
+	\end{pmatrix}^T
+    =
+    \begin{pmatrix}
+   16 &  16 &  14 &  24 \\
+   57 &  35 &  39 &  49 \\
+   18 &  25 &  12 &  29
+	\end{pmatrix}
+\]
+
+\lang{de}{Für die Bestellung werden die Elemente aus Matrix $C^T$ nun wieder in eine Tabelle übertragen:}
+\lang{en}{For the order, the elements of $C^T$ will be transfered into a table:}
+
+\begin{center}
+\begin{table}[\cellaligns{ccc}]
+    \head
+      & $R_1$ & $R_2$ & $R_3$ & $R_4$
+    \body
+  $P_1$ & 16 &  16 &  14 &  24 \\
+  $P_2$ & 57 &  35 &  39 &  49 \\
+  $P_3$ & 18 &  25 &  12 &  29
+\end{table}
+\end{center}
+
+   \tab{\lang{de}{Video: ähnliche Übungsaufgabe}}	
+    \youtubevideo[500][300]{cwCgtYMaFCg}\\
+
+\end{tabs*}
+\end{content}

@@ -1,0 +1,108 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A03: Horner-Schema}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+
+\lang{de}{
+	\title{A03: Horner-Schema}
+}
+\lang{en}{
+	\title{Problem 3}
+}
+
+\begin{block}[annotation]
+	 
+\end{block}
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9085}{Ticket 9085}
+\end{block}
+
+
+
+\begin{problem}
+
+%Frage 1 von 7
+\begin{question}
+	\type{input.number}
+	\field{rational}
+	\precision{3}
+
+	\begin{variables}
+      		\randint{a0}{-5}{5}
+            \randint{a1}{-5}{5}
+            \randint{a2}{-5}{5}
+            \randint{a3}{-5}{5}
+            \randint[Z]{a4}{-5}{5}
+            \randint[Z]{x0}{-2}{2}
+            \function[expand, normalize]{f1}{a4*x^4+ a3*x^3+a2*x^2+a1*x+a0}
+            \function{s11}{x0*a4}
+            \function{s12}{x0*(a3+x0*a4)}
+            \function{s13}{x0*(a2+x0*(a3+x0*a4))}
+            \function{s14}{x0*(a1+x0*(a2+x0*(a3+x0*a4)))}
+            \function{s21}{a3+ s11}
+            \function{s22}{a2+s12}
+            \function{s23}{a1+s13}
+            \function{s24}{a0+s14}
+	\end{variables}
+    \lang{de}{
+\text{Gegeben sei das Polynom $p(x)=\var{f1}$. Bestimmen Sie $p(\var{x0})$ mit Hilfe 
+des Horner-Schemas: \\
+\phantom{xxxxxi}  $\vert$  \ansref  \ansref  \ansref  \ansref  \ansref  \\ 
+\ansref $\vert$ \phantom{xxxxx}  \ansref  \ansref  \ansref  \ansref  \\ 
+\phantom{xxxxxi}  $\overline{\phantom{ixxxxxxxxxxxxxxxxxxxxxxx}}$ \\		
+\phantom{xxxxxi} \phantom{|} \ansref  \ansref  \ansref  \ansref  \ansref  
+\\
+Es ist also $p(\var{x0})=$\ansref
+}}
+
+%\head \phantom{xxxx} & \phantom{xxxx} &\phantom{xxxx}  &\phantom{xxxx} &\phantom{xxxx} &\phantom{xxxx} & \\
+%\body &$\Bigg|$& \ansref & \ansref & \ansref & \ansref & \ansref\\
+%\ansref &$\Bigg|$&       & \ansref & \ansref & \ansref & \ansref\\
+%		 & &\colspan{5}$\overline{\phantom{xxxxxxxxxxxxxxxxxxxxxx}}$ \\		
+%	\foot &&  \ansref & \ansref & \ansref & \ansref & \ansref\\            
+
+		\begin{answer}\solution{a4}\end{answer}
+        \explanation{Schreiben Sie die Koeffizienten in die erste Zeile. Auch der Koeffizient Null muss berücksichtigt werden. Orientieren Sie sich an den gelösten Beispielen.}
+		\begin{answer}\solution{a3}\end{answer}
+		\begin{answer}\solution{a2}\end{answer}
+		\begin{answer}\solution{a1}\end{answer}
+		\begin{answer}\solution{a0}\end{answer}
+		\begin{answer}\solution{x0}\end{answer}
+		\begin{answer}\solution{s11}\end{answer}
+		\begin{answer}\solution{s12}\end{answer}
+		\begin{answer}\solution{s13}\end{answer}
+		\begin{answer}\solution{s14}\end{answer}
+		\begin{answer}\solution{a4}\end{answer}
+		\begin{answer}\solution{s21}\end{answer}
+ 		\begin{answer}\solution{s22}\end{answer}
+ 		\begin{answer}\solution{s23}\end{answer}
+ 		\begin{answer}\solution{s24}\end{answer}
+		\begin{answer}\solution{s24}\end{answer}
+\end{question}
+\end{problem}
+
+
+\embedmathlet{mathlet}
+
+\end{content}

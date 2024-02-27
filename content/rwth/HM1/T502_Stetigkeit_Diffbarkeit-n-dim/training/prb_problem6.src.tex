@@ -1,0 +1,223 @@
+
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A06: Jacobi-Matrix}
+    \lang{en}{Exercise 6}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+  \begin{taxonomy}
+        \difficulty{0}
+        \usage{}
+        \objectives{apply,remember}
+        \topic{analysis1/differentiation/function_several_real_variables/jacobi_matrix}
+  \end{taxonomy}
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22596}{Ticket 22596}
+\end{block}
+
+
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A06: Jacobi-Matrix}}
+
+\begin{problem}
+	\begin{variables}
+
+		\drawFromSet{a}{-4,-2,2,4,6,8} 
+		\drawFromSet{b}{-3,3,5}  
+		\number{c}{7}  
+		\drawFromSet{d}{-4,-2,2,4,6,8}  
+        %\randint[Z]{ax}{-4}{8}
+        %\randint[Z]{aw}{-4}{8}
+        \function[normalize]{av}{(a/2)*x^2+b*y-c}
+        \function[normalize]{aw}{c*x+(d/2)*y^2-2*a}
+        
+%QS Vorschlag Gegenbeispiel für Globale Umkehrfunktion
+%
+        \function[calculate]{xn}{b/a}
+        \function[calculate]{yn}{c/d}
+%        
+        \matrix[calculate]{aa}{a &  b \\ c & d}
+        \matrix[calculate]{bb}{d/(a*d-b*c) & -b/(a*d-b*c) \\ -c/(a*d-b*c) &  a/(a*d-b*c)}
+        
+        \matrix{cc}{ a*x & b \\ c & d*y}
+
+
+%QS Vorschlag 
+%
+        \function[calculate]{g1}{(a/2)+b-c}
+        \function[calculate]{g2}{c+(d/2)-2*a}
+        
+        \matrix[calculate]{gg}{g1 \\ g2}  %gg sollte immer ungleich (1,1) sein.
+        
+%ursprüngl.        \matrix[calculate]{gg}{(a/2)+b-c \\ c+(d/2)-2*a}  %gg sollte immer ungleich (1,1) sein.        
+%        
+
+	\end{variables}
+        
+	\begin{question}
+
+		\type{input.generic}
+        \field{real}
+		%\correctorprecision{2}
+		%\displayprecision{2}
+		\lang{de}{
+	    \text{Bestimmen Sie die Jacobi-Matrix zur Funktion $f:\mathbb{R}^2\rightarrow
+        \mathbb{R}^2, \, (x,y)^T \mapsto \begin{pmatrix} \var{av} \\\var{aw}\end{pmatrix}$ und werten Sie diese an der Stelle $(1,1)$ aus.
+        Bestimmen Sie ferner die Inverse der Jacobi-Matrix, ausgewertet an derselben Stelle.\\\\
+        }}
+        \begin{answer}
+            \type{input.matrix}
+	    	\text{Die Jacobi-Matrix zu $f$ lautet: $\quad$ $Df(x,y)=$ } 
+            \format{2}{2}
+            \checkAsFunction{x,y}{-10}{10}{100}
+            \solution{cc}
+%QS Vorschlag 
+%
+            \explanation{Die Jacobi-Matrix $Df(x,y)$ enthält in der ersten Spalte die partiellen Ableitungen
+                        von $f$ nach $x$ und in der zweiten Spalte die partiellen Ableitungen von $f$ nach $y$. 
+                        Die jeweils andere Variable wird dabei als feste Konstante betrachtet.}
+%
+% ursprünglich           \explanation[edited]{Die Jacobi-Matrix $Df(x,y)$ haben Sie nicht korrekt aufgestellt. 
+%                                 In der ersten Spalte müssen Sie $f$ nach $x$ ableiten, in der 
+%                                 zweiten Spalte nach $y$. Die jeweils andere Variable ist dann 
+%                                 eine feste Konstante.}
+		\end{answer} 
+        
+        \begin{answer}
+            \type{input.matrix}
+	    	\text{Die Jacobi-Matrix ausgewertet bei $(1,1)$ lautet: $\quad$ $Df(1,1)=$ } 
+            \format{2}{2}
+            \checkAsFunction{x,y}{-10}{10}{100}
+%QS Vorschlag 
+% 
+            \explanation{Setzen Sie in die zuvor bestimmte Jacobi-Matrix $Df(x,y)$ den Punkt $(1,1)$ ein.
+                        Überprüfen Sie eventuell noch einmal Ihre Rechnung.}
+%
+% ursprünglich           \explanation[edited]{Setzen Sie in $Df(x,y)$ den Punkt $(1,1)$ ein.}
+%
+            \solution{aa}
+		\end{answer} 
+      
+        \begin{answer}
+            \type{input.matrix}
+	    	\text{Die Inverse zur Jacobi-Matrix ausgewertet bei $(1,1)$ lautet: $\quad$ $(Df(1,1))^{-1}=$ } 
+            \format{2}{2}
+            %\checkAsFunction{x,y}{-10}{10}{100}
+            \solution{bb}
+%QS Vorschlag 
+% 
+%            \explanation{Bestimmen Sie die Inverse der $(2\times 2)-$Matrix $Df(1,1)$.
+%                         Überprüfen Sie eventuell noch einmal Ihre Rechnung.}
+%
+           \explanation[edited]{Ihre Inverse von $Df(1,1)$ sollten Sie noch einmal überprüfen.}
+%           
+        \end{answer}
+        
+%QS Vorschlag 2: Da die Untersuchungen zur lokalen Umkehrbarkeit im Rahmen des MC-Teils stattfinden, 
+%                passt diese Teilaufgabe besser am Ende.
+%        
+%        \begin{answer}
+%            \type{input.matrix}
+%            \format{2}{1}
+%
+%QS Vorschlag 1: 
+% 
+%            \text{Da die Jacobi-Matrix $Df(1,1)$ in $(1,1)$ invertierbar ist, ist die Funktion $f$ 
+%                  in einer Umgebung von $(1,1)$ lokal umkehrbar. Sei $g$ die lokale Umkehrfunktion. 
+%                  Dann gilt für die Jacobi-Matrix von $g:\; Dg(a)=(Df(1,1))^{-1}$. Hierbei ist $a=$}
+%	        \solution{gg}
+%            \explanation{Nach dem Satz über die lokale Umkehrbarkeit gilt $Dg(f(1,1))=(Df(1,1))^{-1}$,
+%                         also ist $a=f(1,1)$.}
+%%
+%% ursprünglich                      
+%%            \text{Die Funktion $f$ ist in einer Umgebung von $(1,1)$ lokal invertierbar. Sei $g$ die lokale Umkehrfunktion. 
+%%                  Es gilt $Dg(a)=(Df(1,1))^{-1}$. Hierbei ist $a=$}
+%%	        \solution{gg}
+%%           \explanation[edited]{Es ist $a=f(1,1)$.}
+%%
+%        \end{answer}
+\end{question}
+
+\begin{question}
+    \type{mc.multiple}
+    \text{Welche Aussagen sind zutreffend?}
+    \begin{choice}
+        \text{$f$ ist stetig differenzierbar.}
+        \solution{true}
+    \end{choice}
+    \begin{choice}
+        \text{$f$ besitzt eine globale Umkehrfunktion $f^{-1}$.}
+        \solution{false}
+    \end{choice}
+    \begin{choice}
+    %
+%QS Vorschlag
+        \text{Sei $g$ die lokale Umkehrfunktion von $f$. Dann lässt sich über $Dg(1,1)$ zunächst keine Aussage treffen.}
+%                
+% ursprüngl.
+%        \text{Über $Dg(1,1)$ lässt sich zunächst keine Aussage treffen.}
+        \solution{true}
+    \end{choice}
+    \begin{choice}
+        \text{Die lokale Umkehrbarkeit von $f$ in $(1,1)$ folgt aus der Existenz der Matrix $(Df(1,1))^{-1}$.}
+        \solution{true}
+    \end{choice}
+    \begin{choice}
+        \text{Für die lokale Umkehrbarkeit von $f$ in $(1,1)$ reicht es, wenn alle Werte von $Df(1,1)$ von Null verschieden sind.}
+        \solution{false}
+    \end{choice}
+%
+%QS Vorschlag (diese letzte Aussage ersetzt die letzte Frage in Teil (a))
+%    
+    \begin{choice}
+        \text{Sei $g$ die lokale Umkehrfunktion von $f$. Dann gilt $\; Dg(\var{g1}, \var{g2})=(Df(1,1))^{-1}$.}
+        \solution{true}
+    \end{choice}
+%    
+    \explanation[equalChoice(0?????)]{$f$ ist in jeder Komponente ein Polynom und damit stetig (partiell) differenzierbar.}
+%
+%QS Vorschlag
+    \explanation[equalChoice(?1????)]{$f$ ist im Punkt $(\frac{\var{b}}{\var{a}}, \frac{\var{c}}{\var{d}})$ nicht (lokal) umkehrbar,
+                da $\, \det(Df(\frac{\var{b}}{\var{a}}, \frac{\var{c}}{\var{d}}))=0$ und die Jacobi-Matrix somit in diesem Punkt 
+                nicht invertierbar ist.}
+    \explanation[equalChoice(??0???)]{Aus den bisherigen Berechnungen kann nur eine Aussage über $Dg(f(1,1))$ getroffen werden, jedoch nicht 
+                über $Dg(1,1)$. Es ist noch nicht einmal klar, dass $g$ im Punkt $(1,1)$ überhaupt definiert ist!}
+    \explanation[equalChoice(??0???) OR equalChoice(???0??) OR equalChoice(????1?) OR equalChoice(?????0)]{Schauen Sie sich den Satz über 
+                die lokale Umkehrbarkeit von Funktionen noch einmal genau an.} 
+    \explanation[equalChoice(???0??)]{Prüfen Sie, unter welchen Voraussetzungen auf die Existenz einer lokalen Umkehrfunktion geschlossen werden kann.}
+    \explanation[equalChoice(????1?)]{Für die lokale Umkehrbarkeit von $f$ in $(1,1)$ wird der volle Rang der Matix $Df(1,1)$ benötigt. Der 
+                volle Rang einer Matrix ist jedoch nicht grundsätzlich gegeben, wenn alle Werte dieser Matrix von Null verschieden sind.
+                Ein einfaches Beispiel hierfür ist eine Matrix mit zwei identischen Zeilen (oder Spalten).}
+    \explanation[equalChoice(?????0)]{Nach dem Satz über die lokale Umkehrbarkeit gilt $Dg(f(1,1))=(Df(1,1))^{-1}$. Berechnen Sie also zur Prüfung der 
+                letzten Aussage $f(1,1).$}
+%                
+% ursprüngl.
+%    \explanation[equalChoice(?1???)]{Für eine globale Invertierbarkeit von $f$ müsste das Gleichungssystem $f(x,y)=(u,v)$ eindeutig lösbar sein.}
+%    \explanation[equalChoice(??0??)]{Mit dem bisher Ausgerechnetem kann nur eine Aussage über $Dg(f(1,1))$ getroffen werden. Es ist noch nicht einmal klar, dass $g$ im Punkt $(1,1)$ überhaupt definiert ist!}
+%    \explanation[equalChoice(???0?)]{Schauen Sie sich noch einmal genau an, für welche Funktionen auf die Existenz einer lokalen Umkehrfunktion geschlossen werden kann.}
+%    \explanation[equalChoice(????1)]{Für die lokale Umkehrbarkeit benötigen Sie vollen Rang von $Df(1,1)$. Wenn alle Werte von $Df(1,1)$ von Null verschieden sind, kann der Rang aber auch $1$ sein.}
+\end{question}
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

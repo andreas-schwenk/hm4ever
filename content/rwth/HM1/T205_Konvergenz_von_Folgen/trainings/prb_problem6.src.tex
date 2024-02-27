@@ -1,0 +1,69 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A08: Grenzwertberechnung}
+    \lang{en}{Problem 8}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+
+\lang{de}{\title{A08: Grenzwertberechnung}}
+\lang{en}{\title{Problem 8}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/15908}{Ticket 15908}
+\end{block}
+\usepackage{mumie.genericproblem}
+\begin{problem}
+
+	\begin{question}
+		\lang{de}{
+			\text{
+			Gegeben sei die Folge $(a_{n})_{n\in\N}$ mit $a_n= \sqrt{\var{f1}}-\sqrt{\var{f2}}$ für alle $n\in\N$. 
+			Geben Sie den Grenzwert $a$ der konvergenten Folge an.
+		}
+		}
+		\explanation{Erweitern Sie den Term so, dass Sie die dritte binomische Formel anwenden können, und verwenden Sie 
+        anschließend die Grenzwertregeln.}
+		\type{input.number}
+		\field{rational}
+		
+		\begin{variables}
+			
+			\randint{a}{1}{7}
+            \randint{b}{-5}{5}            
+            \randint{c}{-5}{5}
+            \randint{d}{0}{5}
+            \function[normalize]{f1}{(a*n)^2+b*n}
+            \function[normalize]{f2}{(a*n)^2+c*n+d}
+            \function[calculate]{sol}{(b-c)/(2*a)}
+            \randadjustIf{b}{a^2+b<0}
+            \randadjustIf{c}{a^2+c<0}
+		\end{variables}
+		
+		\begin{answer}
+			\text{$a = $}
+			\solution{sol}
+		\end{answer}
+		
+	\end{question}
+	
+\end{problem}
+\embedmathlet{gwtmathlet}
+
+\end{content}

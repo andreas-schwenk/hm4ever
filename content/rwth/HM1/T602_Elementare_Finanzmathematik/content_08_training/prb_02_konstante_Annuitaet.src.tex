@@ -1,0 +1,173 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A03: exakte Annuität}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\title{A03: exakte Annuität}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22696}{Ticket 22696}
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+
+     \begin{problem}
+          \begin{variables}
+                %\number{S}{10000}
+                %\number{p}{2.25}
+                \drawFromSet{S}{10000,20000,30000}
+                \drawFromSet{p}{2,2.25,3,3.25,4,4.25,5,5.25}
+                \function[calculate]{ijahr}{4*p}
+                \function{q}{1+p/100}
+                \function[calculate,2]{A}{S*q^8*(q-1)/(q^8-1)}
+                \function{T1}{S*(q-1)/(q^8-1)}
+                \function{T2}{T1*q}
+                \function{T3}{T1*q^2}
+                \function{T4}{T1*q^3}
+                \function{Z1}{A-T1}
+                \function{Z2}{A-T2}
+                \function{Z3}{A-T3}
+                \function{Z4}{A-T4}
+                \function{RS1}{S}
+                \function{RS2}{S-T1}
+                \function{RS3}{S-T1(q+1)}
+                \function{RS4}{S-T1(q^3-1)/(q-1)}
+                \function{RS5}{S-T1(q^4-1)/(q-1)}
+          \end{variables}
+          \begin{question}
+               \type{input.number}
+               \text{Eine Kreditsumme von $\var{S}$ \euro soll mit einem Jahreszins
+               von $i=\var{ijahr}$ \% in 2 Jahren abbezahlt werden. Die Zahlungen erfolgen vierteljährlich,
+               so dass mit einem Periodenzinssatz von $i_k=\var{p}$\% zu rechnen ist. \\
+               
+               Erstellen Sie den Tilgungsplan für das erste Jahr.}
+
+     \begin{table}
+     \head
+     k&$S_{k-1}$&$Z_k$&$T_k$&$A$&$S_k$
+     \body
+     \textbf{1} & \ansref & \ansref & \ansref & \ansref & \ansref\\
+     \textbf{2}&\ansref&\ansref&\ansref&\ansref&\ansref\\
+     \textbf{3}&\ansref&\ansref&\ansref&\ansref&\ansref\\
+     \textbf{4}&\ansref&\ansref&\ansref&\ansref&\ansref
+     \end{table} 
+               
+           %1.
+               \begin{answer}
+               \solution{RS1}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{Z1}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{T1}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{A}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{RS2}
+               \end{answer}
+               
+           %2.
+               \begin{answer}
+               \solution{RS2}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{Z2}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{T2}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{A}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{RS3}
+               \end{answer}
+               
+           %3.
+               \begin{answer}
+               \solution{RS3}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{Z3}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{T3}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{A}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{RS4}
+               \end{answer}
+               
+           %4.
+               \begin{answer}
+               \solution{RS4}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{Z4}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{T4}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{A}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{RS5}
+               \end{answer}
+               
+               \explanation[edited]{Zuallererst muss die Annuität $A=S_0\frac{q^n(q-1)}{q^n-1}$ berechnet werden. Hier ist mit
+               $n=8=2\cdot4$ wegen der vierteljährlichen Betrachtung zu rechnen.
+               Um Rundungsfehler zu vermeiden, bietet es sich an, im Taschenrechner die exakten Zwischenergebnisse zu speichern und bei
+               der weiteren Rechnung wiederzuverwenden.
+               }
+               \end{question}
+           
+     \end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

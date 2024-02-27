@@ -1,0 +1,581 @@
+
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Tilgungsrechnung}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+
+  \end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T601_GrundlagenWiWi/g_art_content_03_Folgen_Reihen.meta.xml}{content_03_Folgen_Reihen}
+\end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{2}
+\ombarticle{3}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\lang{de}{\title{Tilgungsrechnung}}
+\lang{en}{\title{repayment calculation}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22690}{Ticket 22690}
+
+\end{block}
+
+\begin{block}[annotation]
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+
+\section {\lang{de}{Grundbegriffe} \lang{en}{Basic terms}}
+
+\lang{de}{Die Tilgungsrechnung befasst sich mit der Rückzahlung von Krediten und Darlehen. Die Art und Weise der Rückzahlung der Schuld wird vorzugsweise im Vorhinein
+festgelegt. Neben der Tilgung des Geldbetrages fallen zusätzlich Zinsen auf das bereitgestellte Kapital an.} 
+\lang{en}{The repayment calculation deals with the repayment of credits and loans. The method of repayment of the debt is preferably determined in advance.
+ In addition to the repayment of the amount of money, interest also accrues on the capital provided.}\\
+\begin{definition}
+\lang{de}{Die \textbf{Tilgung} (oder auch \textbf{Tilgungsrate}) bezeichnet den Betrag, der zu einem regelmäßigen Zeitintervall abgetragen wird.}
+\lang{en}{The \textbf{repayment} (or also \textbf{repayment rate}) denotes the amount deducted at a regular time interval.}
+\\
+\begin{itemize}
+\item \lang{de}{$T_k$: Tilgungsrate in Periode $k$}
+      \lang{en}{$T_k$: Repayment rate in period $k$}
+\end{itemize}
+
+\lang{de}{Die \textbf{Restschuld} bezeichnet die Schuld nach dem Ablauf eines bestimmten Zeitintervalls,
+nachdem bereits ein Teil der Schuld getilgt wurde.}
+\lang{en}{The residual debt denotes the debt after the expiry of a certain time interval, after part of the debt has already been repaid.}
+\begin{itemize}
+\item \lang{de}{$S_k$: Restschuld nach Ablauf von $k$ Zeitintervallen}
+   \lang{en}{$S_k$: residual debt after expiry of $k$ time intervals }
+\item \lang{de}{$S_0$: Anfangsschuld (entspricht dem Anfangskapital $K_0$)}
+    \lang{en}{$S_0$: Initial debt (equal to initial capital $K_0$)}
+\end{itemize}
+
+\lang{de}{Eine \textbf{Annuität} bezeichnet die Zahlung des Schuldners in einem bestimmten Zeitintervall. 
+Die {Annuität} ist hierbei die Summe der \textbf{Tilgungsrate} und der anfallenden \textbf{Zinsen}.} 
+\lang{en}{A \textbf{annuity} denotes the payment of the debtor in a certain time interval.
+The annuity is the sum of the \textbf{repayment rate} and the accrued \textbf{interest}.}
+\begin{itemize}
+\item \lang{de}{$A_k$: Annuität in Periode $k$}
+      \lang{en}{$A_k$: Annuity in period $k$}
+\end{itemize}
+\lang{de}{In den meisten Fällen entsprechen die Perioden Jahren. Dem Namen nach handelt es sich bei Annuitäten 
+auch um jährliche Zahlungen (lat. \emph{annus:} Jahr).}
+\lang{en}{In most cases the periods correspond to years. 
+As the name suggests, annuities are annual payments (lat. \emph{annus:} year).}
+\end{definition}
+
+\begin{example}
+\lang{de}{Eine Bank leiht Ihnen $1.000$ € bei $10\%$ Zinsen. 
+Sie vereinbaren eine jährliche Rückzahlung von $300$ €.}
+\lang{en}{A bank lends you $1,000$ € at $10\%$ interest. 
+You agree to repay $300$ € annually.}\\
+\lang{de}{Wir erstellen einen Tilgungsplan für die ersten drei Jahre:}
+\lang{en}{We create a repayment plan for the first three years:}\\
+\lang{de}{\begin{table}
+    \head
+       Jahr & Restschuld zu Jahresbeginn & Zinsen & Tilgung & Jahreszahlung & Restschuld am Jahresende
+       
+    \body
+       $1$ & $1.000$ € & $100$ € & $200$ € & $300$ € & $800$ €\\
+       $2$ & $800$ € & $80$ € & $220$ € & $300$ € & $580$ €\\
+       $3$ & $580$ € & $58$ € & $242$ € & $300$ € & $338$ €   
+  \end{table}}
+  \lang{en}{\begin{table}
+    \head
+      Year & Remaining debt at the beginning of the year & Interest & Repayment & Annual payment & Remaining debt at the end of the year
+    \body
+       $1$ & $1,000$ € & $100$ € & $200$ € & $300$ € & $800$ €\\
+       $2$ & $800$ € & $80$ € & $220$ € & $300$ € & $580$ €\\
+       $3$ & $580$ € & $58$ € & $242$ € & $300$ € & $338$ €   
+  \end{table}}
+
+\lang{de}{Wenn nach einem Jahr $300$€ gezahlt werden, reduziert sich die Restschuld auf $800$ €, denn nach einem Jahr sind $100$ € Zinsen fällig.
+Die $300$ € Jahreszahlung setzen sich aus $100$ € Zinsen und $200$ € Tilgung zusammen. Der Schuldbetrag selbst reduziert sich lediglich um den Tilgungsbetrag.} 
+
+\lang{en}{If $300$€ is paid after one year, the remaining debt is reduced to $800$ €, because $100$ € interest is due after one year.
+The $300$ € annual payment is made up of $100$ € interest and $200$ € repayment. The debt amount itself is only reduced by the repayment amount.}
+\end{example}
+
+\begin{remark}
+\lang{de}{Ganz allgemein ergibt sich bei einem Zinssatz $i$ und einer Gesamtlaufzeit $n$ folgender \textbf{allgemeiner Tilgungsplan}:}
+\lang{en}{In general, for an interest rate $i$ and a total time $n$, the following \textbf{general repayment schedule} results:}
+\\
+\lang{de}{\begin{table}
+    \head
+       Jahr & Restschuld zu Jahresbeginn & Zinsen & Tilgung & Jahreszahlung
+    \body
+       $1$ & $S_0$  & $Z_1 = S_0\cdot i$  & $T_1$  & $A_1 = Z_1 + T_1$  \\
+       $2$ & $S_1 =S_0 - T_1$  & $Z_2 = S_1\cdot i$  & $T_2$  & $A_2 = Z_2 + T_2$  \\
+       ... & ... & ... & ... & ... \\
+       $k$ & $S_{k-1} =S_0 - T_1 - ... - T_{k-1}$  & $Z_k = S_k-1\cdot i$  & $T_k$  & $A_k = Z_k + T_k$ \\
+       ... & ... & ... & ... & ...\\
+       $n$ & $S_{n-1} =S_0 - T_1 - ... - T_{n-1}$  & $Z_n = S_n-1\cdot i$  & $T_n$  & $A_n = Z_n + T_n$ \\
+       $n+1$ & $0$ &  &  &  
+       
+  \end{table}}
+  \lang{en}{\begin{table}
+    \head
+       Year & Remaining debt at the beginning of the year & Interest & Redemption & Annual paymen
+    \body
+       $1$ & $S_0$  & $Z_1 = S_0\cdot i$  & $T_1$  & $A_1 = Z_1 + T_1$  \\
+       $2$ & $S_1 =S_0 - T_1$  & $Z_2 = S_1\cdot i$  & $T_2$  & $A_2 = Z_2 + T_2$  \\
+       ... & ... & ... & ... & ... \\
+       $k$ & $S_{k-1} =S_0 - T_1 - ... - T_{k-1}$  & $Z_k = S_k-1\cdot i$  & $T_k$  & $A_k = Z_k + T_k$ \\
+       ... & ... & ... & ... & ...\\
+       $n$ & $S_{n-1} =S_0 - T_1 - ... - T_{n-1}$  & $Z_n = S_n-1\cdot i$  & $T_n$  & $A_n = Z_n + T_n$ \\
+       $n+1$ & $0$ &  &  &  
+       
+  \end{table}}
+\end{remark}
+
+\lang{de}{In den nachfolgenden Abschnitten werden zwei Tilgungsmodelle, die \textbf{Ratentilgung} und die \textbf{Annuitätentilgung}, behandelt.}
+\lang{en}{In the following sections, two repayment models, the \textbf{instalment repayment} and the \textbf{annuity repayment}, will be discussed.}
+\section{\lang{de}{Ratentilgung} \lang{en}{Repayment by instalments}}
+\lang{de}{Von \textbf{Ratentilgung} wird gesprochen, wenn die \textbf{Tilgungsraten} über den gesamten Zeitraum der Rückzahlung konstant sind.
+Die gezahlte Rate pro Zeitabschnitt, die \textbf{Annuität}, ist hingegen durch die Addition der \textbf{Tilgungsrate} zu den anfallenden \textbf{Zinsen}
+immer verschieden.}
+\lang{en}{The term \textbf{amortisation} is used when the \textbf{amortisation rates} are constant over the entire repayment period.
+The instalment paid per period,on the other hand, the \textbf{annuity}, is always different due to the addition of the \textbf{amortisation instalment} to the accruing \textbf{interest}.}
+\\
+
+\begin{rule}\lang{de}{[Ratentilgung]} \lang{en}{Repayment by instalments}
+\lang{de}{Die konstante \textbf{Tilgungsrate T} berechnet sich durch die Division der Anfangsschuld $S_0$ durch die Laufzeit $n$, also}
+\lang{en}{The constant \textbf{repayment rate T} is calculated by dividing the initial debt $S_0$ by the maturity $n$, i.e.}
+\[ 
+T = \frac{S_0}{n} .
+\] 
+
+\lang{de}{Die \textbf{Restschuld} nach $k$ Zeitintervallen berechnet sich durch}
+\lang{en}{The \textbf{residual debt} after $k$ time intervals is calculated by}
+\[ 
+S_k = S_0 - k\cdot T = S_0 \left(1-\frac{k}{n}\right).
+\] 
+
+\lang{de}{Die zu leistende \textbf{Zinszahlung} pro Zeitintervall $k$ beläuft sich auf}
+\lang{en}{The \textbf{interest} payment to be made per time interval $k$ amounts to}
+\[ 
+Z_k = S_0 \left(1-\frac{k-1}{n}\right)\cdot i    \ \ \ \ \lang{de}{\text{mit}}
+                                                          \lang{en}{\text{with}}
+                                                          \ \  k=1, 2, 3, \ldots, n-1, n .
+\] 
+
+\lang{de}{Die zu zahlende Rate (Annuität) pro Zeitintervall $k$ berechnet sich als Summe von \textbf{Zins-} und \textbf{Tilgungsbetrag}}
+\lang{en}{The instalment (annuity) to be paid per time interval $k$ is calculated as the sum of \textbf{interest} and \textbf{amortisation}}
+\[ 
+A_k = T + Z_k = S_0 \left(\frac{1}{n} +i\left(1-\frac{k-1}{n}\right) \right).
+\] 
+\end{rule}
+
+\begin{proof*}\lang{de}{[Herleitung]} \lang{en}{[Derivation]}
+\lang{de}{Da die Tilgungsrate konstant ist, muss lediglich $S_0$ durch die Laufzeit $n$ dividiert werden,
+um die Tilgungsrate $T=\frac{S_0}{n}$ zu erhalten. Die Restschuld $S_k$ ist einfach die Anfangsschuld $S_0$ abzüglich 
+der $k$ bereits gezahlten Tilgungsraten, wodurch sich die angegebene Formel ergibt.}
+\lang{en}{Since the repayment rate is constant, only $S_0$ has to be divided by the term $n$,
+to get the repayment rate $T=\frac{S_0}{n}$. The residual debt $S_k$ is simply the initial debt $S_0$ minus 
+the $k$ repayments already paid, giving the formula given.}
+\lang{de}{Für die Zinszahlung $Z_k$ müssen wir die Restschuld nach $k-1$ Zeitintervallen betrachten und mit dem Zinssatz $i$
+multiplizieren, wodurch wir}
+\lang{en}{For the interest payment $Z_k$, we need to look at the residual debt after $k-1$ time intervals and multiply by the interest rate $i$,
+which gives us}
+\[
+Z_k = S_{k-1} \cdot i = S_0 \left( 1 - \frac{k-1}{n}\right) \cdot i
+\]
+\lang{de}{erhalten. Die Annuität ist nun lediglich die Summe aus den Formeln für $T$ und $Z_k$.}
+\lang{en}{The annuity is now simply the sum of the formulas for $T$ and $Z_k$. }
+\end{proof*}
+
+\begin{example}
+\lang{de}{Bei einem Kredit von $3.000$ € zu $10\%$ Zinsen ergibt sich bei einer jährlichen Tilgung von 600€ folgender Tilgungsplan:}
+\lang{en}{For a loan of $3,000$ at $10\%$ interest, an annual repayment of 600€ results in the following repayment schedule:}
+\\
+\lang{de}{\begin{table}
+    \head
+       Jahr & Restschuld zu Jahresbeginn & Zinsen & Tilgung & Jahreszahlung 
+    \body
+       $1$ & $3.000$ € & $300$ € & $600$ € & $900$ € \\
+       $2$ & $2.400$ € & $240$ € & $600$ € & $840$ € \\
+       $3$ & $1.800$ € & $180$ € & $600$ € & $780$ €\\
+       $4$ & $1.200$ € & $120$ € & $600$ € & $720$ € \\
+       $5$ & $600$ € & $60$ € & $600$ € & $660$ € \\
+       $6$ & $0$ € &  &  & 
+  \end{table}}
+  \lang{en}{\begin{table}
+    \head
+       Year & Remaining debt at the beginning of the year & Interest & Repayment & Annual payment 
+    \body
+       $1$ & $3,000$ € & $300$ € & $600$ € & $900$ € \\
+       $2$ & $2,400$ € & $240$ € & $600$ € & $840$ € \\
+       $3$ & $1,800$ € & $180$ € & $600$ € & $780$ €\\
+       $4$ & $1,200$ € & $120$ € & $600$ € & $720$ € \\
+       $5$ & $600$ € & $60$ € & $600$ € & $660$ € \\
+       $6$ & $0$ € &  &  & 
+  \end{table}}
+\lang{de}{Nach fünf Jahren ist der Kredit vollständig zurückgezahlt. \\
+Die Laufzeit lässt sich auch mit
+\[ 
+n = \frac{S_0}{T} = \frac{3.000}{600} = 5
+\] berechnen.}
+\lang{en}{After five years the loan is fully repaid. \\
+The time can also be calculated with
+\[ 
+n = \frac{S_0}{T} = \frac{3.000}{600} = 5.
+\]}
+\end{example}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			
+		 
+            \function{T}{5000}
+            \function{T1}{5000}
+            
+            \function{S0}{50000}
+            \function{S1}{45000}
+            \function{S2}{40000}
+            
+            \function{Z1}{2500}
+            \function{Z2}{2250}
+            
+            
+            \function{A1}{7500}
+            \function{A2}{7250}
+           
+  		\end{variables}
+		
+		\lang{de}{\text{%\notion{Kurztest:}\\
+        Ein Darlehen über $50.000 $ € soll bei einem Zinssatz von $5$\%, bei gleichbleibender Tilgungsrate, innerhalb von 10 Jahren getilgt werden. \\
+        Erstellen Sie den Tilgungsplan für die ersten zwei Jahre.\\
+        
+        Die Tilgungsrate beträgt: \ansref €
+        
+  \begin{table}
+    \head
+       Jahr & Restschuld zu Jahresbeginn & Zinsen & Tilgung & Jahreszahlung 
+    \body
+       $1$ & \ansref € & \ansref € & \ansref € & \ansref € \\
+       $2$ & \ansref € & \ansref € & \ansref € & \ansref € \\
+       $3$ & \ansref € &  &  &
+      
+  \end{table}
+        
+       }}  
+       		\lang{en}{\text{%\notion{Kurztest:}\\
+       A loan of $50,000$ € is to be repaid within 10 years at an interest rate of $5$\%, with a constant repayment rate. \\
+        Erstellen Sie den Tilgungsplan für die ersten zwei Jahre.\\
+        
+     The repayment rate is: \ansref €     
+  \begin{table}
+    \head
+       Year & Remaining debt at the beginning of the year & Interest & Repayment & Annual payment 
+    \body
+       $1$ & \ansref € & \ansref € & \ansref € & \ansref € \\
+       $2$ & \ansref € & \ansref € & \ansref € & \ansref € \\
+       $3$ & \ansref € &  &  &
+      
+  \end{table}
+        
+       }}  
+		
+		\begin{answer}
+			\solution{T}
+		\end{answer}
+        \begin{answer}
+			\solution{S0}
+		\end{answer}
+         \begin{answer}
+			\solution{Z1}
+		\end{answer}
+        \begin{answer}
+			\solution{T1}
+		\end{answer}
+        \begin{answer}
+			\solution{A1}
+		\end{answer}
+        \begin{answer}
+			\solution{S1}
+		\end{answer}
+         \begin{answer}
+			\solution{Z2}
+		\end{answer}
+        \begin{answer}
+			\solution{T}
+		\end{answer}
+        \begin{answer}
+			\solution{A2}
+		\end{answer}
+        \begin{answer}
+			\solution{S2}
+		\end{answer}
+         
+        
+        \lang{de}{\explanation{
+        Die Tilgungsrate wird mit $T = \frac{S_0}{n}$ berechnet. \\
+        $T = \frac{50.000 \text{€}}{10} = 5.000$ €.\\
+        
+        Für den Zinsbetrag wird die Restschuld zu Jahresbeginn mit dem Faktor $0,05$ multipliziert ($5\%$ Zinsen).\\
+        
+        Die Summe von Zinsbetrag und Tilgungsrate ergibt die Jahreszahlung. \\
+        
+        Zuletzt wird die Tilgungsrate von der Restschuld zu Jahresbeginn abgezogen. So erhalten wir die Restschuld des nachfolgenden Jahres.}}
+        
+		   \lang{en}{\explanation{
+        The repayment rate is calculated as $T = \frac{S_0}{n}$. \\
+        $T = \frac{50,000 \text{€}}{10} = 5,000$ €.\\
+        
+        For the interest amount, the remaining debt at the beginning of the year is multiplied by a factor of $0.05$ ($5\%$ interest).\\
+        
+        The sum of the interest amount and the repayment rate is the annual payment. \\
+        
+        Finally, the repayment instalment is subtracted from the remaining debt at the beginning of the year. This gives us the remaining debt for the following year.}}
+\end{quickcheck}
+
+
+\section {\lang{de}{Annuitätentilgung} \lang{en}{Annuity repayment}}
+
+\lang{de}{Von \textbf{Annuitätentilgung} wird gesprochen, wenn die \textbf{Annuität}, also die Zahlung pro Zeitintervall, 
+über den gesamten Zeitraum der Rückzahlung konstant ist. Hierbei ist die \textbf{Tilgungsrate} pro Zeitintervall verschieden.}
+\lang{en}{The term \textbf{annuity repayment} is used when the \textbf{annuity}, i.e. the payment per time interval, 
+is constant over the entire period of repayment. Here the \textbf{amortisation rate} per time interval is different.}\\
+\lang{de}{Die Berechnung der konstanten \textbf{Annuität} ist hier ein bisschen aufwändiger.}
+\lang{en}{The calculation of the constant \textbf{annuality} is a bit more elaborate here.}
+\begin{rule}\lang{de}{[Annuitätentilgung]}
+\lang{de}{Wir bezeichnen mit $n$ die Laufzeit. 
+Die konstante \textbf{Annuität A} berechnet sich durch Division der Anfangsschuld $S_0$ durch einen Faktor $a_n$:}
+\lang{en}{We denote by $n$ the repayment period. 
+The constant \textbf{annuity A} is calculated by dividing the initial debt $S_0$ by a factor $a_n$: }\\
+\[
+A = \frac{S_0}{a_n},
+\]
+
+\lang{de}{wobei sich der Faktor $a_n$ durch} 
+\lang{en}{where the factor $a_n$ is given by} 
+\[
+a_n = \frac{q^n-1}{q^n\cdot(q-1)} 
+\]
+\lang{de}{mit dem Zinsfaktor
+\[
+q = 1 + i
+\]}
+\lang{en}{with the interest factor
+\[
+q = 1 + i.
+\]}
+
+\lang{de}{berechnen lässt.}\\
+
+\lang{de}{Wie zuvor setzt sich die Annuität aus \textbf{Tilgungszahlung} und \textbf{Zinszahlung} nach $k$ Zeitintervallen
+\[ 
+A = T_k + Z_k 
+\] zusammen.} 
+\lang{en}{As before, the annuity is composed of \textbf{repayment} and the \textbf{interest payment} after $k$ time intervals
+\[ 
+A = T_k + Z_k.
+\]} 
+
+
+\lang{de}{Die \textbf{Tilgungszahlung} zum Zeitpunkt $k$ berechnet sich durch}
+\lang{en}{The \textbf{repayment} at time $k$ is calculated by}
+\[ 
+T_k = T_1 \cdot q^{k-1} ; \quad T_1 = A - i\cdot S_0 .
+\]
+
+\lang{de}{Die \textbf{Restschuld} zu einem bestimmten Zeitpunkt $k$ lässt sich mit}
+\lang{en}{The \textbf{residual debt} at a given time $k$ can be calculated with}
+\[ 
+S_k = S_0 - (T_1 + T_2 + ... + T_k) = A\cdot a_{n-k} 
+\]
+\lang{de}{berechnen.} 
+
+\end{rule}
+\begin{proof*}\lang{de}{[Herleitung]} \lang{en}{[Derivation]}
+\begin{incremental}[\initialsteps{1}]
+\step
+\lang{de}{Die Anfangsschuld $S_0$ wird durch die $n$-malige Zahlung der konstanten Annuität $A$ beglichen. Wenn wir 
+annehmen, dass auch die gezahlten Annuitäten zum Zinssatz $i$ verzinst werden, haben wir am Ende des 
+Tilgungszeitraums den Betrag}
+\lang{en}{The initial debt $S_0$ is settled by paying the constant annuity $A$ $n$ times. If we 
+assume that the annuities paid also bear interest at the rate $i$, then at the end of the 
+redemption period we have the amount}
+\[
+S_0 \cdot q^n = A + A \cdot q + A \cdot q^2 + \ldots + A \cdot q^{n-1}
+\]
+\lang{de}{bzw.} \lang{en}{or} 
+\[
+S_0 \cdot q^n = A \cdot \left( 1+ q + q^2 + \ldots + q^{n-1} \right) = A \cdot \frac{q^n -1}{q -1},
+\]
+\lang{de}{wobei wir für die letzte Gleichheit die Formel für die \ref[content_03_Folgen_Reihen][geometrische Reihe]{ex:konvergenz-geo-reihe} genutzt haben. Die Annahme, dass
+auch die gezahlten Annuitäten verzinst werden, haben wir hier nur gebraucht, um eine Gleichung zu erhalten, 
+durch die wir die Unbekannte $A$ berechnen können. Durch Umformen
+der Gleichung erhalten wir} 
+\lang{en}{where for the last equality we have used the formula for the \ref[content_03_Folgen_Reihen][geometric series]{ex:convergent-geo-series}. The assumption that
+the annuities paid are also interest-bearing is only needed here to obtain an equation
+for calculating the unknown $A$. By transforming the equation we obtain} 
+\[
+A= S_0 \cdot \frac{q^n (q-1)}{q^n-1} = \frac{S_0}{a_n}.
+\]
+
+\step
+\lang{de}{Durch Multiplikation der Gleichung mit $a_n$ erhalten wir $S_0 = A \cdot a_n$. Die gleiche Rechnung hätten wir 
+auch mit der Restschuld $S_k$ statt der Anfangsschuld $S_0$ durchführen können, wobei wir dann die Laufzeit $n$
+durch die Restlaufzeit $n-k$ ersetzen müssten. Auf diese Weise erhalten wir die Formel für 
+die Restschuld }
+\lang{en}{By multiplying the equation by $a_n$ we get $S_0 = A \cdot a_n$. We could have done the same calculation 
+with the residual debt $S_k$ instead of the initial debt $S_0$, in which case we would divide the maturity $n$
+by the residual term $n-k$. In this way we obtain the formula for 
+the residual debt }
+\[
+S_k = A \cdot a_{n-k}.
+\]
+
+\step
+\lang{de}{Um die Formel für die Tilgungszahlung herzuleiten, gehen wir so ähnlich wie am Anfang vor und nutzen aus, dass wir die Annuität $A$ als 
+Summe $A=T_1 + Z_1$ schreiben können:}
+\lang{en}{To derive the formula for the redemption payment, we proceed similarly to the beginning and exploit the fact that we can write the annuity $A$ as 
+Sum $A=T_1 + Z_1$ can be written:}
+\begin{align*}
+S_0 \cdot q^n &= A + A \cdot q + A \cdot q^2 + \ldots + A \cdot q^{n-1} \\
+          &= (T_1 + Z_1) + (T_1+Z_1) \cdot q + (T_1 + Z_1) \cdot q^2 + \ldots + (T_1 + Z_1) \cdot q^{n-1} \\
+          &= T_1 + T_1 \cdot q + T_1 \cdot q^2 + \ldots + T_1 \cdot q^{n-1}  + Z_1 + Z_1 \cdot q + Z_1 \cdot q^2 + \ldots + Z_1 \cdot q^{n-1}.
+\end{align*}
+\lang{de}{Wenn wir nun die anfallenden Zinsen und Zinseszinsen ignorieren, können wir sehen, wie die Anfangsschuld über die Tilgungszahlungen abgetragen wird:}
+\lang{en}{If we now ignore the accruing interest and compound interest, we can see how the initial debt is paid off via the redemption payments:}
+\[
+S_0 = T_1 + T_1 \cdot q + T_1 \cdot q^2 + \ldots + T_1 \cdot q^{n-1}.
+\]
+\lang{de}{Die erste Tilgungszahlung $T_1$ ist Annuität $A$ abzüglich der Zinsen $Z_1 = i \cdot S_0$, also $T_1 = A - i \cdot S_0$. Die nächsten Tilgungszahlungen sind dann $T_2 = T_1 \cdot q$, 
+$T_3 = T_1 \cdot q^2$ usw.}
+\lang{en}{The first redemption payment $T_1$ is annuity $A$ minus interest $Z_1 = i \cdot S_0$, so $T_1 = A - i \cdot S_0$. The next redemption payments are then $T_2 = T_1 \cdot q$, 
+$T_3 = T_1 \cdot q^2$ etc.}
+\end{incremental}
+\end{proof*}
+
+\begin{example}
+\lang{de}{Ein Kredit von $3.000$ € zu $10\%$ Zinsen soll, bei gleichbleibend großen Zahlungen, in fünf Jahren zurückgezahlt werden.}
+\lang{en}{A loan of $3,000$ € at $10\%$ interest is to be repaid in five years, in payments of a constant size.}\\
+\lang{de}{Zuerst wird die Annuität berechnet: $A = \frac{S_0}{a_5}$.}
+\lang{en}{First the annuity is calculated: $A = \frac{S_0}{a_5}$.}\\
+
+\lang{de}{Es gilt 
+$a_5 = \frac{q^5-1}{q^5\cdot (q-1)} = \frac{1,1^5-1}{1,1^5\cdot (1,1-1)} = 3,79079$\\
+und somit ergibt sich $A = \frac{3000}{3,79079} = 791,39 $ €.}
+\lang{en}{Then
+$a_5 = \frac{q^5-1}{q^5\cdot (q-1)} = \frac{1.1^5-1}{1.1^5\cdot (1.1-1)} = 3.79079$\\
+and thus $A = \frac{3000}{3.79079} = 791.39 $ €.}
+\lang{de}{\begin{table}
+    \head
+       Jahr & Restschuld zu Jahresbeginn & Zinsen & Tilgung & Jahreszahlung 
+    \body
+       $1$ & $3.000$ € & $300$ € & $491,39$ € & $791,39$ € \\
+       $2$ & $2.508,61$ € & $250,86$ € & $540,53$ € & $791,39$ € \\
+       $3$ & $1.968,08$ € & $196,81$ € & $594,58$ € & $791,39$ €\\
+       $4$ & $1.373,50$ € & $137,35$ € & $654,04$ € & $791,39$ € \\
+       $5$ & $719,46$ € & $71,95$ € & $719,44$ € & $791,39$ € \\
+       $6$ & $0,02$ € &  &  & 
+  \end{table}}
+  
+\lang{en}{\begin{table}
+    \head
+      Year & Remaining debt at the beginning of the year & Interest & Repayment & Annual payment
+    \body
+       $1$ & $3,000$ € & $300$ € & $491.39$ € & $791.39$ € \\
+       $2$ & $2,508.61$ € & $250.86$ € & $540.53$ € & $791.39$ € \\
+       $3$ & $1,968.08$ € & $196.81$ € & $594.58$ € & $791.39$ €\\
+       $4$ & $1,373.50$ € & $137.35$ € & $654.04$ € & $791.39$ € \\
+       $5$ & $719.46$ € & $71.95$ € & $719.44$ € & $791.39$ € \\
+       $6$ & $0.02$ € &  &  & 
+  \end{table}}
+\lang{de}{Bei einer gleichbleibenden Annuität von $791,39 $ € bleibt nach fünf Jahren eine noch zu begleichende Restschuld von $0,02 $ €.}
+\lang{en}{With a constant annuity of $791.39 $ €, a remaining debt of $0.02 $ € remains to be paid after five years.}\\
+\end{example}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			
+		 
+            \function{n}{10}
+            
+           
+  		\end{variables}
+		
+		\lang{de}{\text{%\notion{Kurztest:}\\
+        Ein Kredit über $50.000$ € soll bei einem Zinssatz von $5$\%, bei gleichbleibender Annuität von $6.500$ € pro Jahr, zurückgezahlt werden. \\
+        Nach wie vielen Jahren ist der Kredit abbezahlt? \\
+        (Runden Sie auf ganze Jahre!)
+        
+        Der Kredit ist nach \ansref Jahren abbezahlt.}}   
+		\lang{en}{\text{%\notion{Kurztest:}\\
+        A loan of $50,000$ € is to be repaid at an interest rate of $5$\%, with a constant annuity of $6,500$ € per year. \\
+        After how many years will the loan be paid off? \\
+        (Round to the nearest year!)
+        
+        The loan will be paid off after \ansref years.}} 
+		\begin{answer}
+			\solution{n}
+		\end{answer}
+                 
+        
+        \lang{de}{\explanation{
+        Die Annuität von $6.500$ € berechnet sich mit $A = \frac{S_0}{a_n}$.\\
+        \begin{align*}
+        & \quad 6.500 &\ =\  50.000 \cdot 1,05^n \cdot \frac{1,05-1}{1,05^n-1} &\text{|} :50.000\\
+        &\Leftrightarrow \quad \frac{13}{100} &\ =\  1,05^n \cdot \frac{1,05-1}{1,05^n-1} &\text{|} :(1,05-1)\\
+        &\Leftrightarrow \quad \frac{13}{5} &\ =\  \frac{1,05^n}{1,05^n-1} &\text{|} \text{ umformen}\\
+        &\Leftrightarrow \quad \frac{13}{5} &\ =\  \frac{1}{1-\frac{1}{1,05^n}} & \text{|} \text{ Kehrwerte bilden}\\
+        &\Leftrightarrow \quad \frac{5}{13} &\ =\  1-\frac{1}{1,05^n} &\text{|} +\frac{1}{1,05^n}; -\frac{5}{13}\\
+        &\Leftrightarrow \quad \frac{1}{1,05^n} &\ =\  1-\frac{5}{13} = \frac{8}{13} &\text{|} \text{ Kehrwerte bilden}\\
+        &\Leftrightarrow \quad 1,05^n &\ =\  \frac{8}{13} &\text{|} \text{ Logarithmus}\\
+        &\Leftrightarrow \quad n &\ =\  \log_{1,05}(\frac{8}{13}) &\\
+        &\Leftrightarrow \quad n &\ =\  9,95 & \\
+        &\Rightarrow 10 \text{ Jahre} & &
+        
+        \end{align*}
+       }}
+                \lang{en}{\explanation{
+      The annuity of $6,500$ € is calculated with  $A = \frac{S_0}{a_n}$.\\
+        \begin{align*}
+        & \quad 6,500 &\ =\  50,000 \cdot 1.05^n \cdot \frac{1.05-1}{1.05^n-1} &\text{|} :50,000\\
+        &\Leftrightarrow \quad \frac{13}{100} &\ =\  1.05^n \cdot \frac{1.05-1}{1.05^n-1} &\text{|} :(1.05-1)\\
+        &\Leftrightarrow \quad \frac{13}{5} &\ =\  \frac{1.05^n}{1.05^n-1} &\text{|} \text{ transform }\\
+        &\Leftrightarrow \quad \frac{13}{5} &\ =\  \frac{1}{1-\frac{1}{1.05^n}} & \text{|} \text{ Calculate reciprocal}\\
+        &\Leftrightarrow \quad \frac{5}{13} &\ =\  1-\frac{1}{1.05^n} &\text{|} +\frac{1}{1.05^n}; -\frac{5}{13}\\
+        &\Leftrightarrow \quad \frac{1}{1.05^n} &\ =\  1-\frac{5}{13} = \frac{8}{13} &\text{|} \text{ Calculate reciprocal}\\
+        &\Leftrightarrow \quad 1.05^n &\ =\  \frac{8}{13} &\text{|} \text{ Logarithm}\\
+        &\Leftrightarrow \quad n &\ =\  \log_{1.05}(\frac{8}{13}) &\\
+        &\Leftrightarrow \quad n &\ =\  9.95 & \\
+        &\Rightarrow 10 \text{ Jahre} & &
+        
+        \end{align*}
+       }}
+        
+		
+\end{quickcheck}
+
+\end{visualizationwrapper}
+
+\end{content}
+

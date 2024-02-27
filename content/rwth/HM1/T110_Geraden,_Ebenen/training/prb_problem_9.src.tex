@@ -1,0 +1,220 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Aufgabe 9}
+    \lang{en}{input function}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{description}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{Aufgabe 9}}
+\lang{en}{\title{Problem 9}}
+
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9660}{Ticket 9660}
+\end{block}
+
+
+\begin{problem}
+
+	
+% bisher nur gleiche und parallele Ebenen. Zweite Question mit schneidenden Ebenen?    
+%	\randomquestionpool{1}{2}
+	\begin{question}
+		\lang{de}{\text{ 
+			Wir betrachten die beiden Ebenen 
+			$E_1 = \{\vec{x}\in \R^3 \vert \var{f1} = \var{d_1} \} $,
+ 			$E_2 = \{\vec{x}\in \R^3 \vert \var{f2} = \var{d_2} \}$.\\
+			Wie liegen die Ebenen $E_1$ und $E_2$ zueinander?
+            Bestimmen Sie anschließend noch den Abstand von $E_1$ und $E_2$. \\
+            \textit{Hinweis: Falls die Ebenen sich schneiden sollten, dann ist der Abstand $0$.}}}
+            \type{input.generic}
+        %\explanation{Den Abstand zweier paralleler Ebenen kann man ermitteln, indem man einen Punkt der einen Ebene nimmt und dessen Abstand zur anderen
+        %Ebene bestimmt. Dabei hilft die Punkt-Ebenen-abstandsformel.}
+		
+		
+		\begin{variables}
+			\randint[Z]{mult1}{-1}{1}
+        	\randint[Z]{mult2}{-1}{1}
+        	\randint[Z]{mult3}{-1}{1}
+        	
+			\randint{d_1}{-20}{20}
+			
+			\randint[Z]{ca}{-5}{5}
+			\randint{a}{1}{2}
+			\function{c}{ca/a}
+			
+			%Fall gleicher oder paralleler Ebenen
+			\function[calculate]{d_2}{c*(d_1+dist)}
+			\function[calculate]{m_1}{c*n_1}
+			\function[calculate]{m_2}{c*n_2}
+			\function[calculate]{m_3}{c*n_3}
+
+            \randint{dist}{0}{1}
+            \function[calculate]{dist2}{dist/nn}
+
+            \function[normalize]{f1}{n_1*x_1+n_2*x_2+n_3*x_3}  % fuer Koord-gleichung von E1
+            \function[normalize]{f2}{m_1*x_1+m_2*x_2+m_3*x_3}  % fuer Koord-gleichung von E2
+		\end{variables}
+		
+		
+		%pool um ganzzahlige Norm von n zu garantieren, dadurch keine möglichen (numerische) probleme mit dem Vergleich von Lösungen
+	\begin{pool}
+        \begin{variables}
+        	
+            \function[calculate]{n_1}{mult1*2}
+            \function[calculate]{n_2}{mult2*2}
+            \function[calculate]{n_3}{mult3*1}
+            \number{nn}{3}  % norm of n
+        \end{variables}
+        
+        \begin{variables}
+        	
+            \function[calculate]{n_1}{mult1*2}
+            \function[calculate]{n_2}{mult2*1}
+            \function[calculate]{n_3}{mult3*2}
+            \number{nn}{3}  % norm of n
+        \end{variables}
+
+       \begin{variables}
+        	
+            \function[calculate]{n_1}{mult1*3}
+            \function[calculate]{n_2}{mult2*4}
+            \function[calculate]{n_3}{0}
+            \number{nn}{5}  % norm of n
+        \end{variables}
+        
+         \begin{variables}
+        	
+            \function[calculate]{n_1}{0}
+            \function[calculate]{n_2}{mult2*4}
+            \function[calculate]{n_3}{mult1*3}
+            \number{nn}{5}  % norm of n
+        \end{variables}
+        
+         \begin{variables}
+        	
+            \function[calculate]{n_1}{mult1*3}
+            \function[calculate]{n_3}{mult2*4}
+            \function[calculate]{n_2}{0}
+            \number{nn}{5}  % norm of n
+        \end{variables}
+        
+        \begin{variables}
+        	
+            \function[calculate]{n_1}{mult1*4}
+            \function[calculate]{n_2}{mult2*4}
+            \function[calculate]{n_3}{mult3*2}
+            \number{nn}{6}  % norm of n
+        \end{variables}
+        
+        \begin{variables}
+        	
+            \function[calculate]{n_1}{mult1*6}
+            \function[calculate]{n_2}{mult2*3}
+            \function[calculate]{n_3}{mult3*2}
+            \number{nn}{7}  % norm of n
+        \end{variables}
+        
+        \begin{variables}
+        	
+            \function[calculate]{n_1}{mult1*2}
+            \function[calculate]{n_2}{mult2*6}
+            \function[calculate]{n_3}{mult3*3}
+            \number{nn}{7}  % norm of n
+        \end{variables}
+        
+        \begin{variables}
+        	
+            \function[calculate]{n_1}{mult1*2}
+            \function[calculate]{n_2}{mult2*3}
+            \function[calculate]{n_3}{mult3*6}
+            \number{nn}{7}  % norm of n
+        \end{variables}
+        
+        \begin{variables}
+        	
+            \function[calculate]{n_1}{mult1*6}
+            \function[calculate]{n_2}{mult2*9}
+            \function[calculate]{n_3}{mult3*2}
+            \number{nn}{11}  % norm of n
+        \end{variables}
+        
+        \begin{variables}
+        	
+            \function[calculate]{n_1}{mult1*2}
+            \function[calculate]{n_2}{mult2*9}
+            \function[calculate]{n_3}{mult3*6}
+            \number{nn}{11}  % norm of n
+        \end{variables}
+        
+        \begin{variables}
+        	
+            \function[calculate]{n_1}{mult1*9}
+            \function[calculate]{n_2}{mult2*6}
+            \function[calculate]{n_3}{mult3*2}
+            \number{nn}{11}  % norm of n
+        \end{variables}
+    \end{pool}
+		
+		
+		
+		\begin{answer}
+            \type{mc.unique}
+            \begin{choice}
+                \text{Die Ebenen $E_1$ und $E_2$ sind identisch.}
+                \solution{compute}
+                \iscorrect{dist}{=}{0}
+            \end{choice}
+            \begin{choice}
+                \text{Die Ebenen $E_1$ und $E_2$ liegen parallel, sind aber nicht gleich.}
+                \solution{compute}
+                \iscorrect{dist}{=}{1}
+            \end{choice}
+            \begin{choice}
+                \text{Die Ebenen $E_1$ und $E_2$ schneiden sich in einem Punkt.}
+                \solution{false}
+            \end{choice}
+            \begin{choice}
+                \text{Die Ebenen $E_1$ und $E_2$ schneiden sich auf einer Geraden.}
+                \solution{false}
+            \end{choice}
+            \explanation[equalChoice(3)]{Zwei Ebenen können sich niemals nur in einem Punkt schneiden.}
+            \explanation[equalChoice(4)]{Die Normalenvektoren der beiden Ebenen, die man aus der gegebenen Koordinatenform ablesen kann, sind Vielfache voneinander. Damit sind Ebenen parallel zueinander (entweder identisch oder echt parallel).}
+		\end{answer}
+        
+		\begin{answer}
+            \type{input.number}
+            \field{rational}
+            \text{dist$(E_1,E_2) = $}
+			\solution{dist2}
+            \explanation[edited]{Der Abstand zweier (echt) paralleler Ebenen entspricht dem Abstand eines Punktes der einen Ebene zur anderen Ebene. Diesen Abstand eines Punktes $P$ von der Ebene $E$ erhält man durch $d(P,E)=\frac{|d-\vec{p}\bullet \vec{n}|}{\|\vec{n}\|},$ wobei $\vec{n}$ ein Normalenvektor der Ebenen ist, den aus der Koordinatenform ablesen kann.}
+		\end{answer}
+		
+		
+	\end{question}
+	
+
+	
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

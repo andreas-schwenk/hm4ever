@@ -1,0 +1,93 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A07: Geradenschnittpunkt}
+    \lang{en}{input numbers}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A07: Geradenschnittpunkt}}
+\lang{en}{\title{Problem 7}}
+
+\begin{block}[annotation]
+	Schnittpunkt zwischen zwei Geraden. 
+\end{block}
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9643}{Ticket 9643}
+\end{block}
+
+
+\begin{problem}
+
+%Question 1 of 1 	
+\begin{question} 
+	\lang{de}{ 
+    	\text{Berechnen Sie den Schnittpunkt $S = (S_x;S_y;S_z)$ der beiden Geraden\\
+      	$g: \vec{x} = \begin{pmatrix} \var{Px}\\\var{Py}\\\var{Pz}\end{pmatrix} + \lambda\cdot \begin{pmatrix} \var{vx}\\\var{vy}\\\var{vz}\end{pmatrix}$, $\lambda\in\R$ und\\
+      	$h: \vec{x} = \begin{pmatrix} \var{Qx}\\\var{Qy}\\\var{Qz}\end{pmatrix} + \mu\cdot \begin{pmatrix} \var{wx}\\\var{wy}\\\var{wz}\end{pmatrix}$, $\mu\in\R$.}
+    	\explanation{Setzen Sie beide Geraden gleich, ermitteln Sie $\lambda$ und $\mu$ und berechnen Sie damit durch Einsetzen in eine der beiden Geradengleichungen den Schnittpunkt.}
+    }
+    \lang{en}{
+    	\text{Calculate the intersection $S = (S_x,S_y,S_z)$ of the lines\\
+    	$g: \vec{x} = \begin{pmatrix} \var{Px}\\\var{Py}\\\var{Pz}\end{pmatrix} + \lambda\cdot \begin{pmatrix} \var{vx}\\\var{vy}\\\var{vz}\end{pmatrix}$, $\lambda\in\R$ and\\
+      	$h: \vec{x} = \begin{pmatrix} \var{Qx}\\\var{Qy}\\\var{Qz}\end{pmatrix} + \mu\cdot \begin{pmatrix} \var{wx}\\\var{wy}\\\var{wz}\end{pmatrix}$, $\mu\in\R$.}
+      	\explanation{Set both equations equal to each other, find a $\lambda$ and $\mu$ and use those to help you find the intersection point.} 
+    }  
+    \begin{variables}
+      	\randint{Px}{-5}{5}
+      	\randint{Py}{-5}{5}
+      	\randint{Pz}{-5}{5}
+		\randint{l}{-7}{7}
+		\randint{m}{-7}{7}
+      	\function[calculate]{Qx}{Px+l*vx-m*wx}
+      	\function[calculate]{Qy}{Py+l*vy-m*wy}
+      	\function[calculate]{Qz}{Pz+l*vz-m*wz}    	
+      	\randint[Z]{vx}{-5}{5}
+      	\randint{vy}{-5}{5}
+      	\randint{vz}{-5}{5}
+      	\randint[Z]{wx}{-5}{5}
+      	\randint{wy}{-5}{5}
+      	\randint{wz}{-5}{5}
+ 		\function[calculate]{t}{vx/wx}
+      	\randadjustIf{vx,vy,vz,wx,wy,wz}{vx=t*wx and vy=t*wy and vz=t*wz}   	
+      	\function[calculate]{Sx}{Px+l*vx}
+      	\function[calculate]{Sy}{Py+l*vy}
+      	\function[calculate]{Sz}{Pz+l*vz}      	
+	\end{variables}
+	\type{input.number}
+	\begin{answer}
+		\text{$S_x = $}
+		\solution{Sx}
+	\end{answer}
+	\begin{answer}
+		\text{$S_y = $}
+		\solution{Sy}
+	\end{answer}
+	\begin{answer}
+		\text{$S_z = $}
+		\solution{Sz}
+	\end{answer}
+\end{question}
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

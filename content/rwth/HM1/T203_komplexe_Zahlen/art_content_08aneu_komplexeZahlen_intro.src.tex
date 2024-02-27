@@ -1,0 +1,606 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{Einführung}
+   }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \begin{components}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T203_ComplexPlane.meta.xml}{T203_ComplexPlane}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+\component{generic_image}{content/rwth/HM1/images/g_img_T203_gauss_ebene.meta.xml}{T203_gauss_ebene}
+\end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T202_Reelle_Zahlen_axiomatisch/g_art_content_05_anordnungsaxiome.meta.xml}{content_05_anordnungsaxiome}
+\link{generic_article}{content/rwth/HM1/T202_Reelle_Zahlen_axiomatisch/g_art_content_04_koerperaxiome.meta.xml}{content_04_koerperaxiome}
+\end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21562}{Ticket 21562}
+\end{block}
+\begin{block}[annotation]
+Copy of \href{https://team.mumie.net/issues/20592}{Ticket 20592}: content/rwth/HM1/T203_komplexe_Zahlen/art_content_01_komplexeZahlen_intro.src.tex
+\end{block}
+
+\usepackage{mumie.ombplus}
+\ombchapter{3}
+\ombarticle{1}
+
+
+\lang{de}{\title{Komplexe Zahlen}}
+\lang{en}{\title{Complex numbers}}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{
+\lang{de}{Einführung der komplexen Zahlen}
+\lang{en}{Introduction to complex numbers}}\label{sec:gauss-ebene}
+
+\lang{de}{
+Die quadratische Gleichung $x^2+1=0$ hat in $\R$ keine Lösung, denn für alle 
+$x\in\R$ gilt $x^2\geq0$ und damit (durch Addition von 
+$+1$ auf beiden Seiten der Ungleichung) gilt auch $x^2+1\geq1$. \\
+Weil wir diese Gleichung aber lösen können wollen, \glqq $i$maginieren\grqq wir uns eine
+Lösung und nennen sie $i$.\\
+}
+\lang{en}{
+The quadratic equation $x^2+1=0$ has no solutions in $\R$,
+because $x^2 \geq 0$ for all $x\in\R$ and therefore
+(after adding $1$ to both sides of the inequality)
+$x^2+1\geq 1$. \\
+Since we would like to be able to solve the equation, we "$i$magine"
+a solution and call it $i$.
+}
+
+\begin{definition}\label{def:imaginäre_Einheit}
+\lang{de}{Die \notion{imaginäre Einheit} $i$ erfüllt die Gleichung $i^2+1=0$, anders gesagt
+\[i^2=-1.\]}
+\lang{en}{
+The \notion{imaginary unit} $i$ satisfies the equation $i^2+1=0$,
+or in other words \[i^2=-1.\]
+}
+\end{definition}
+
+
+\lang{de}{Diese Definition ist sinnvoll, wenn wir $i$ im Weiteren behandeln wie jede andere Zahl auch. 
+Wenn es $i$ gibt, dann gibt es auch $2i$, $3i$, ..., $-i$, also allgemein jedes Vielfache in $i\R$.
+Aber man muss diese Zahlen auch zu reellen Zahlen hinzuaddieren können, $1+i$, $2-i$, etc. So gelangt man zu $\R+i\R$.
+Das kann man geometrisch veranschaulichen, indem wir zur Zahlengerade der reellen Zahlen eine weitere Dimension hinzunehmen.
+}
+\lang{en}{
+This definition is reasonable if we treat $i$ like any other number.
+If $i$ exists, then $2i, 3i, ...$ and $-i$, and more generally
+every multiple in $i\R$, should also exist. But we must also be able to add these numbers
+to real numbers: $1+i$, $2-i$, etc. That leads us to $\R+i\R$.
+We can visualize this geometrically by adding another dimension
+to the number line that represents the real numbers.
+}
+\begin{center}
+\image{T203_ComplexPlane}
+\end{center}
+
+\begin{definition}[
+\lang{de}{Gaußsche Zahlenebene}
+\lang{en}{Complex plane}]\label{def:Gausssche_Ebene}
+\lang{de}{Die \notion{Gaußsche Zahlenebene} ist die Ebene der komplexen Zahlen
+\[\C=\{a+bi\,|\,a,b\in\R\}.\]
+Sie enthält die reellen Zahlen 
+\[\R=\{a+bi\,|\,a\in\R,b=0\}\subset\C.\]
+}
+\lang{en}{
+The \notion{complex plane} is the plane of complex numbers
+\[\C=\{a+bi\,|\,a,b\in\R\}.\]
+It contains the real numbers
+\[\R=\{a+bi\,|\,a\in\R,b=0\}\subset\C.\]
+}
+\end{definition}
+
+
+
+\section{
+\lang{de}{Addition und Multiplikation komplexer Zahlen}
+\lang{en}{Adding and multiplying complex numbers}}\label{sec:add-mult-kompl}
+
+\lang{de}{Wir können komplexe Zahlen addieren und multiplizieren, indem wir die aus $\R$ bekannten Rechenregeln für $\C$ übernehmen:\\
+}
+\lang{en}{
+Complex numbers can be added and multiplied by carrying over
+the familiar rules of arithmetic from $\R$ to $\C$:
+}
+%\[(a+bi)+(c+di)=(a+c)+(bi+di)=(a+c)+(b+d)i\in \C, \]
+\begin{eqnarray*}
+(a+bi)+(c+di)&=&(a+c)+(bi+di)\\
+&=&(a+c)+(b+d)i\in \C ,
+\end{eqnarray*}
+\begin{eqnarray*}
+(a+bi)\cdot(c+di)&=&ac +adi+ bci +bdi^2\\
+&=&ac-bd +adi+bci\\
+&=&(ac-bd)+(ad+bc)i\in\C .
+\end{eqnarray*}
+
+\begin{example}
+\begin{enumerate}
+\item
+$ \ (5-3i)+(-2+7i)=(5-2)+(-3i+7i)=3+4i$
+\item
+$ \ (-2-2i)+(3+2i)=1+0i=1$
+\item
+$ \ (2+3i)\cdot(1-4i)=2\cdot 1+2\cdot(-4i)+3i\cdot1+3i\cdot(-4i)=2-8i+3i-12i^2=2-5i+12=14-5i$
+\item
+$ \ \frac{5+3i}{1-2i}=\frac{(5+3i)(1+2i)}{(1-2i)(1+2i)}=\frac{5+10i+3i+6i^2}{1^2-(2i)^2}
+=\frac{-1+13i}{1+4}=\frac{-1}{5}+\frac{13}{5}i$\\
+\lang{de}{(Im Nenner kommt die 3. binomische Formel zur Anwendung.)}
+\lang{en}{(The 3rd binomial formula was used in the denominator.)}
+\end{enumerate}
+\end{example}
+
+\begin{definition}\label{def:real-imaginaer-teil}
+\lang{de}{
+Für eine komplexe Zahl $z=a+bi\in \C$ mit $a,b\in \R$ ist der \notion{Realteil} von $z$, bezeichnet mit $\Re (z)$, gegeben durch
+\[ \Re (z)=a\in \R \]
+und der \notion{Imagin\"arteil} von $z$, bezeichnet mit $\Im (z)$, gegeben durch
+\[ \Im (z)=b\in \R. \]
+(Beachte: Auch der Imagin\"arteil einer komplexen Zahl ist 
+        eine \emph{reelle} Zahl!)
+        
+Die zu $z$ \notion{konjugiert komplexe} Zahl, bezeichnet mit $\bar{z}$, ist
+\[ \bar{z}=a-bi.  \]
+}
+\lang{en}{
+Let $z=a+bi \in \C$ be a complex number with $a,b\in \R$.
+The \notion{real part} of $z$, denoted $\Re(z)$, is
+\[ \Re (z)=a\in \R,\]
+and the \notion{imaginary part} of $z$, denoted $\Im(z)$, is
+\[ \Im (z)=b\in \R. \]
+(Note: the imaginary part of a complex number is a \emph{real} number!)
+The \notion{complex conjugate} of $z$, denoted $\bar{z}$, is
+\[ \bar{z}=a-bi.  \]
+}
+\end{definition}  
+
+\lang{de}{
+Die folgenden Videos erläutern die bisherigen Definitionen und Aussagen anhand von kleinen Beispielen. Beachten Sie dabei, dass in den Videos die imaginäre Einheit $i$ 
+durch $j$ repräsentiert wird:
+ \floatright{
+\href{https://www.hm-kompakt.de/video?watch=200}{\image[75]{00_Videobutton_schwarz}}
+\href{https://www.hm-kompakt.de/video?watch=203}{\image[75]{00_Videobutton_schwarz}}
+\href{https://www.hm-kompakt.de/video?watch=206}{\image[75]{00_Videobutton_schwarz}}
+}
+}
+
+\\
+\\
+\\
+
+\begin{quickcheck}
+\field{real}
+\type{input.function}
+\begin{variables}
+    \randint{a}{1}{3}
+    \randint[Z]{b}{4}{6}
+    \function[expand, normalize]{z}{a+b*i}
+    \function[expand, normalize]{zquer}{a-b*i}
+\end{variables}
+\lang{de}{
+\text{Betrachten Sie die Zahl $z=\var{z}$ und bestimmen Sie:\\
+$\Re(z)=$\ansref, $\Im(z)=$\ansref, $\bar{z}$=\ansref. 
+}
+}
+\lang{en}{
+\text{Consider the number $z=\var{z}$. Determine\\
+$\Re(z)=$\ansref, $\Im(z)=$\ansref, $\bar{z}$=\ansref. 
+}
+}
+\begin{answer}
+    \solution{a}
+\end{answer}
+\begin{answer}
+    \solution{b}
+\end{answer}
+\begin{answer}
+    \solution{zquer}
+\end{answer}
+\end{quickcheck}
+
+
+\begin{remark}
+\lang{de}{
+Es sei $z = a+bi$ eine komplexe Zahl mit $a,b\in\R$ und $i\in\C$ die imaginäre Einheit. Dann heißt
+$z$ \notion{rein imaginär}, falls $a=0$ gilt, also wenn $z=ib$ ein reelles Vielfaches der imaginären Einheit ist.
+}
+\lang{en}{
+Let $z=a+bi$ be a complex number with $a,b\in\R$, where $i\in\C$ is the imaginary unit.
+$z$ is called \notion{purely imaginary} if $a=0$; that is,
+if $z=ib$ is a real multiple of the imaginary unit.
+}
+\end{remark}
+
+
+\begin{quickcheck}
+\field{real}
+\type{input.function}
+\begin{variables}
+    \number{a}{1+3i}
+    \number{b}{2+4i}
+    \function{z}{-10+10i}
+    \randint{c}{-3}{-2}
+    \randint{d}{2}{4}
+    \function[expand,normalize]{z1}{c+3i}
+    \function[expand,normalize]{z2}{d-4i}
+    \function[expand,normalize]{z3}{c*d+12+(3*d-4*c)*i}
+\end{variables}
+\lang{de}{
+\text{Berechnen Sie das Produkt der folgenden beiden komplexen Zahlen:
+\[z_1=1+3i \ \text{  und  } \ z_2=2+4i. \]
+$z_1\cdot z_2=$\ansref 
+}
+}
+\lang{en}{
+\text{Calculate the product of the following two complex numbers:
+\[z_1=1+3i \ \text{  und  } \ z_2=2+4i. \]
+$z_1\cdot z_2=$\ansref 
+}
+}
+\begin{answer}
+    \solution{z}
+\end{answer}
+\lang{de}{
+\text{Nun müssen Sie auch auf die Vorzeichen achten:\\
+$(\var{z1})\cdot (\var{z2})= $\ansref
+}
+}
+\lang{en}{
+\text{Here you will have to pay attention to the minus signs:\\
+$(\var{z1})\cdot (\var{z2})= $\ansref
+}
+}
+\begin{answer}
+    \solution{z3}
+\end{answer}
+\explanation{$(1+3i)(2+4i)=2+4i+6i+12i^2=2+10i-12=-10+10i$\\
+\lang{de}{und}\lang{en}{and} \\
+$(\var{z1})\cdot(\var{z2})=\var{z3}.$
+}
+\end{quickcheck}
+
+
+
+\begin{quickcheck}
+    \field{real}
+        \type{input.function}
+        \lang{de}{
+        \text{Berechnen Sie $z_1+z_2$ sowie $z_1\cdot z_2$ für die folgenden beiden komplexen Zahlen:}
+        }
+        \lang{en}{
+        \text{Calculate $z_1+z_2$ and $z_1\cdot z_2$ for the following two complex numbers:}
+        }
+        \begin{variables}
+            \randint{a}{-6}{6}
+            \randint[Z]{b}{-6}{6}
+            \randint{c}{-6}{6}
+            \randint[Z]{d}{-6}{6}
+            \function[expand,normalize]{z1}{a+b*i}
+            \function[expand,normalize]{z2}{c+d*i}
+            \function[expand,normalize]{zp}{a+c+(b+d)*i}
+            \function[expand,normalize]{zm}{a*c-b*d+(a*d+b*c)*i}
+        \end{variables}
+        \lang{de}{
+        \text{$z_1=\var{z1} \ $ und $ \ z_2=\var{z2}$.\\
+            $z_1+z_2=$\ansref und  $z_1\cdot z_2=$\ansref}
+        }
+        \lang{en}{
+        \text{$z_1=\var{z1} \ $ and $ \ z_2=\var{z2}$.\\
+            $z_1+z_2=$\ansref and  $z_1\cdot z_2=$\ansref}
+        }
+            \begin{answer}
+                \solution{zp}
+            \end{answer}
+            \begin{answer}
+                \solution{zm}
+            \end{answer}
+            \explanation{$z_1+z_2=(\var{a}+\var{c})+(\var{b}+\var{d})i=\var{zp} \ $ \lang{de}{und} \lang{en}{and}
+            $ \ z_1\cdot z_2=(\var{a})\cdot(\var{c})-(\var{b})\cdot(\var{d})+((\var{a})\cdot(\var{d})+(\var{b})\cdot(\var{c}))i=\var{zm}.$
+            }
+\end{quickcheck}
+
+\lang{de}{
+Im folgenden Video kann der Sachverhalt des Kapitels nochmals angesehen werden:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10823&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+}
+
+\section{
+\lang{de}{Der Körper der komplexen Zahlen}
+\lang{en}{The field of complex numbers}}\label{sec:koerper-komplexe-zahlen}
+
+\lang{de}{Wir haben die uns bekannte Addition \glqq +\grqq  und Multiplikation \glqq $\cdot$\grqq der reellen Zahlen auf die komplexen 
+Zahlen ausgedehnt. Kommutativ-, Assoziativ- und Distributivgesetz gelten dann weiterhin, wie sich leicht nachrechnen lässt. Wir gehen jetzt
+der Frage nach dem \textit{multiplikativen Inversen} nach:
+Gibt es zu einer Zahl $z$ auch eine Zahl $z^{-1}$ so, dass $z\cdot z^{-1}=1$ gilt?
+}
+\lang{en}{
+We have extended the familiar addition "+" and multiplication "$\cdot$" of real numbers to complex numbers.
+It is not difficult to verify that the commutative, associative and distributive laws
+continue to hold. We will now consider the existence of the \textit{multiplicative inverse}:
+for a complex number $z$, does there exist a number $z^{-1}$ such that $z \cdot z^{-1} = 1$?
+}
+
+\begin{theorem}[
+\lang{de}{multiplikative Inverse}
+\lang{en}{multiplicative inverse}]
+\begin{enumerate}
+\item 
+\lang{de}{
+Für jede komplexe Zahl $z=a+bi$ mit $a,b\in\R$ ist $z\cdot\bar{z}=a^2+b^2\in\R$ eine nicht negative reelle Zahl. 
+Ist $z\neq 0$, dann ist auch $z \cdot\bar{z}\neq 0$.
+}
+\lang{en}{
+For any complex number $z=a+bi$ with $a,b\in \R$, $z\cdot\bar{z}=a^2+b^2\in \R$
+is a nonnegative real number. If $z\neq 0$, then $z\cdot\bar{z}\neq 0$ as well.
+}
+\item 
+\lang{de}{
+Für jede von Null verschiedene komplexe Zahl $z=a+bi\in\C\setminus\{0\}$ ist ihr multiplikatives Inverses durch $z^{-1}=\frac{\bar{z}}{z\bar{z}}=\frac{a-bi}{a^2+b^2}$
+bestimmt.}
+\lang{en}{
+The multiplicative inverse of a nonzero complex number $z=a+bi \in\C\setminus\{0\}$ is
+given by $z^{-1}=\frac{\bar{z}}{z\bar{z}}=\frac{a-bi}{a^2+b^2}$.
+}
+\end{enumerate}
+\end{theorem}
+
+\begin{proof*}
+\begin{showhide}
+\begin{enumerate}
+\item
+$z\cdot\bar{z}=(a+bi)(a-bi)=a^2+b^2$\\
+\lang{de}{
+Nur für $z=0=\bar{z}$ ist $z\cdot\bar{z}=0$.}
+\lang{en}{
+$z\cdot\bar{z}=0$ only if $z=0=\bar{z}$.
+}
+\item
+\lang{de}{Mit $z=a+bi$ und $z^{-1}= \frac{a-bi}{a^2+b^2}$ ist}
+\lang{en}{Setting $z=a+bi$ and $z^{-1}= \frac{a-bi}{a^2+b^2}$, }
+\[ z\cdot z^{-1}=(a+bi)\cdot\frac{a-bi}{a^2+b^2}=\frac{a^2+b^2}{a^2+b^2}=1. \]
+\end{enumerate}
+\end{showhide}
+\end{proof*}
+
+\lang{de}{
+Da wir die Frage nach dem multiplikativen Inversen mit ja beantworten konnten, können 
+wir nun prüfen, ob die komplexen Zahlen ebenso wie die reellen Zahlen einen \link{content_04_koerperaxiome}{Körper} bilden.
+}
+\lang{en}{
+Since we were able to show the existence of multiplicative inverses,
+we can now check whether the complex numbers (like the real numbers) form a \link{content_04_koerperaxiome}{field}.
+}
+\begin{theorem}\label{thm:C_field}
+\lang{de}{Die Menge der komplexen Zahlen $\C$ bildet zusammen mit der Addition und Multiplikation
+einen \notion{Körper}.
+}
+\lang{en}{
+The set of complex numbers $\C$, together with its addition and multiplication,
+is a \notion{field}.
+}
+\end{theorem}
+
+\begin{proof*}[
+\lang{de}{Körperaxiome für $\C$}
+\lang{en}{Field axioms for $\C$}]
+\lang{de}{
+Dass die Menge der komplexen Zahlen $\C$  zusammen mit der Addition und Multiplikation 
+einen Körper bildet, bedeutet, dass
+die \ref[content_04_koerperaxiome][Axiome (A1)-(A4), (M1)-(M4) und (D)]{sec:axiome} für $\C$ gelten.
+Es bedeutet auch, dass alle \ref[content_04_koerperaxiome][Rechenregeln]{sec:rechenregeln}, 
+die für Körper gelten, auch für die komplexen Zahlen gelten.
+Die Axiome lassen sich mit den Definitionen nachrechnen. 
+Wir geben hier nur die in (A3), (M3), (A4) und (M4) geforderten Elemente an.
+}
+\lang{en}{
+For the set of complex numbers $\C$ with its addition and multiplication
+to be a field means that $\C$ satisfies the axioms
+\ref[content_04_koerperaxiome][(A1)-(A4), (M1)-(M4) and (D)]{sec:axiome}.
+It also means that the \ref[content_04_koerperaxiome][rules of arithmetic]{sec:rechenregeln}
+that hold in any field also hold for the complex numbers.
+The axioms can be verified using the definitions.
+Here, we will only describe the elements required by (A3), (M3), (A4) and (M4).
+}
+
+
+\begin{incremental}{0}
+\step 
+\lang{de}{
+Wir betrachten ein Element $z=a+bi\in\C$.\\
+Das \textcolor{#CC6600}{Nullelement bezüglich der Addition} in $\C$ ist $\textcolor{#CC6600}{z_0^+=0}=0+0i$, denn $z+z_0^+=(a+bi)+(0+0i)=(a+0)+(bi+0i)
+=a+(b+0)i=a+bi=z$.\\
+Das \textcolor{#0066CC}{Einselement bezüglich der Multiplikation} ist 
+$\textcolor{#0066CC}{z_1^*=1}=1+0i$,
+denn $z\cdot z_1^*=z\cdot1=z$.
+Das Nullelement in $\C$ ist $0+0i$ und das Einselement ist $1+0i$, welche mit der Null $0$ in $\R$ und mit der Eins $1$ in $\R$
+identifiziert werden.\\
+}
+\lang{en}{
+Consider an element $z=a+bi\in\C$.\\
+The \textcolor{#CC6600}{additive identity} in $\C$ is $\textcolor{#CC6600}{z_0^+=0}=0+0i$,
+because $z+z_0^+=(a+bi)+(0+0i)=(a+0)+(bi+0i)=a+(b+0)i=a+bi=z$.\\
+The \textcolor{#0066CC}{multiplicative identity} is $\textcolor{#0066CC}{z_1^*=1}=1+0i$,
+because $z\cdot z_1^*=z\cdot1=z$. \\
+The zero in $\C$ is $0+0i$ and the unity is $1+0i$, and they are identified with the zero $0$ in $\R$ and the unity $1$ in $\R$.
+}
+\step
+\lang{de}{
+Das \textcolor{#CC6600}{inverse Element bezüglich der Addition} in $\C$ ist $\textcolor{#CC6600}{-z=-a-bi}$, denn $z+(-z)=(a+bi)+(-a-bi)=\textcolor{#CC6600}{z_0^+}$.\\
+Das \textcolor{#0066CC}{inverse Element bezüglich der Multiplikation} in $\C\setminus \{0\}$ ist
+\[  z^{-1}= \frac{\bar{z}}{z \bar{z}}, \]
+wie wir im vorherigen Satz bereits nachgerechnet haben. 
+}
+\lang{en}{
+The \textcolor{#CC6600}{additive inverse} in $\C$ is $\textcolor{#CC6600}{-z=-a-bi}$,
+because $z+(-z)=(a+bi)+(-a-bi)=\textcolor{#CC6600}{z_0^+}$.\\
+The \textcolor{#0066CC}{multiplicative inverse} in $\C\setminus \{0\}$ is
+\[  z^{-1}= \frac{\bar{z}}{z \bar{z}}, \]
+as we saw in the previous theorem.
+}
+%Das \textcolor{blue}{inverse Element bezüglich der Multiplikation} in $\C\setminus \{0\}$ ist:
+%$\textcolor{blue}{z^{-1}=\frac{\bar{z}}{z\cdot\bar{z}}}$, denn $z\cdot z^{-1}=\textcolor{blue}{1}$.
+%\[  z^{-1}= \frac{a-ib}{a^2+b^2}, \]
+%denn $(a+ib)\cdot(a-ib)=a^2-(ib)^2=a^2-i^2b^2=a^2-(-1)b^2=a^2+b^2$ und damit ist 
+%\[z\cdot z^{-1}=(a+ib)\cdot\frac{a-ib}{a^2+b^2}=\frac{1}{a^2+b^2}(a+ib)(a-ib)=\frac{a^2+b^2}{a^2+b^2}=\textcolor{blue}{1}\]
+%Man beachte, dass der Nenner $a^2+b^2$ ungleich $0$ ist, da wir $\C\setminus\{0\}$ betrachten. Dann ist aber 
+%mindestens eine der beiden reellen Zahlen $a$ und $b$ ungleich $0$ und damit der Nenner von 0 verschieden.
+\end{incremental}
+\end{proof*}
+
+% Dann weiter mit Beispielen (lassen sich bestimmt auch noch aus den alten Kapiteln extrahieren), und der Nicht-Anordnung.
+
+
+\begin{example}
+\lang{de}{
+Zu $z\in\C$ sollen die konjugiert komplexe Zahl $\bar{z}$, \textcolor{#CC6600}{das inverse Element bzgl. der Addition} $\textcolor{#CC6600}{(-z)}$ und 
+\textcolor{#0066CC}{das inverse Element bzgl. der Multiplikation} $\textcolor{#0066CC}{(z^{-1})}$ berechnet werden:
+}
+\lang{en}{
+Given $z\in\C$, we want to compute the complex conjugate $\bar{z}$,
+\textcolor{#CC6600}{the additive inverse} $\textcolor{#CC6600}{(-z)}$ and 
+\textcolor{#0066CC}{the multiplicative inverse} $\textcolor{#0066CC}{(z^{-1})}$:
+}
+\begin{enumerate}
+\item
+\lang{de}{Für $z=1+i$ sind\\
+$\bar{z}=1-i$, $\ \textcolor{#CC6600}{-z}=-(1+i)=-1-i \ $ und $ \ \textcolor{#0066CC}{z^{-1}}=\frac{1-i}{(1+i)(1-i)}=\frac{1-i}{1^2-i^2}=\frac{1-i}{2}
+=\frac{1}{2}-\frac{i}{2}$.}
+\lang{en}{For $z=1+i$, we have\\
+$\bar{z}=1-i$, $\ \textcolor{#CC6600}{-z}=-(1+i)=-1-i \ $ and $ \ \textcolor{#0066CC}{z^{-1}}=\frac{1-i}{(1+i)(1-i)}=\frac{1-i}{1^2-i^2}=\frac{1-i}{2}
+=\frac{1}{2}-\frac{i}{2}$.
+}
+\item
+\lang{de}{
+Für $z=5$ sind\\
+$\bar{z}=5$, $\ \textcolor{#CC6600}{-z}=-5 \ $ und $ \ \textcolor{#0066CC}{z^{-1}}=\frac{5}{5\cdot 5}=\frac{1}{5}$ (wie aus $\R$ erwartet).
+}
+\lang{en}{
+For $z=5$, we have\\
+$\bar{z}=5$, $\ \textcolor{#CC6600}{-z}=-5 \ $ and $ \ \textcolor{#0066CC}{z^{-1}}=\frac{5}{5\cdot 5}=\frac{1}{5}$ (as in $\R$).
+}
+\item
+\lang{de}{
+Für $z=i$ sind\\
+$\bar{z}=-i$, $ \ \textcolor{#CC6600}{-z}=-i \ $ und $ \ \textcolor{#0066CC}{z^{-1}}=\frac{-i}{i\cdot (-i)}=-i$ (Probe ist hier einfach mit $i\cdot(-i)=-(-1)=1$).
+}
+\lang{en}{
+For $z=i$, we have\\
+$\bar{z}=-i$, $ \ \textcolor{#CC6600}{-z}=-i \ $ and $ \ \textcolor{#0066CC}{z^{-1}}=\frac{-i}{i\cdot (-i)}=-i$ (which is easily checked using $i\cdot(-i)=-(-1)=1$).
+}
+\end{enumerate}
+\end{example}
+\lang{de}{
+Anders als bei den reellen Zahlen ist es bei komplexen Zahlen nicht möglich, sie mit \glqq $<$\grqq oder \glqq $>$\grqq zu vergleichen. 
+}
+\lang{en}{
+In contrast to the real numbers, it is not possible to compare complex numbers with "$<$" and "$>$".
+}
+\begin{theorem}
+\lang{de}{
+Die Menge der komplexen Zahlen $\C$ ist \notion{kein} angeordneter Körper.
+}
+\lang{en}{
+The set of complex numbers $\C$ is \notion{not} an ordered field.
+}
+\end{theorem}
+
+\begin{proof*}
+\lang{de}{
+Wäre $\C$ ein angeordneter Körper, dann  müsste  für jedes $z\in\C$ einer der drei folgenden Fälle gelten: $z<0$ oder $z=0$ oder $z>0$. Wir werden
+zeigen, dass für die komplexe Zahl $z = i$ alle drei Aussagen zum Widerspruch führen. Damit ist dann gezeigt, dass $\C$ kein angeordneter Körper sein kann.
+}
+\lang{en}{
+If $\C$ were an ordered field, then one of the following three cases would hold for every $z\in\C$:
+$z<0$, $z=0$ or $z>0$. We will show that all three cases lead to a contradiction for $z=i$.
+This will show that $\C$ could not have been an ordered field.
+}
+\begin{incremental}{0}
+\step
+\lang{de}{
+Angenommen, es gäbe eine Anordnung \glqq $<$\grqq auf $\C$. Wir dürfen ohne Weiteres annehmen, dass schon $0<1$ gilt. Offensichtlich ist $i \neq 0$,
+da $i^2 = -1 \neq 0^2$. Es muss also entweder $0< i$ oder $i<0$ gelten.
+Gehen wir nun beide Fälle durch: Ist $0<i$, dann folgt aus den \ref[content_05_anordnungsaxiome][Anordnungsaxiomen]{def:axiome}, dass $0 <i^2$ ist, aber es gilt $i^2=-1<0$.
+Wäre $i < 0$, dann folgt aus den Anordnungsaxiomen (nutze $0 < -i$ aus), dass $i\cdot(-i)=-i^2<0$ gilt, aber $0 < 1 = -i^2$.
+}
+\lang{en}{
+Suppose there is an order "$<$" on $\C$. We can assume without loss of generality that $0 < 1$.
+Clearly, $i \neq 0$, because $i^2 = -1 \neq 0^2$. Therefore, either $0<i$ or $i<0$.
+Now we will consider the two cases. If $0<i$, then the \ref[content_05_anordnungsaxiome][order axioms]{def:axiome}
+imply that $0 < i^2$; however, $i^2 = -1 < 0$.
+If $i < 0$, then (using $0 < -i$) the order axioms imply that $i \cdot (-i) = -i^2 < 0$; however, $0 < 1 = -i^2$.
+}
+\end{incremental}
+\end{proof*}
+
+\begin{quickcheck}
+    \field{rational}
+        \type{input.function}
+            \lang{de}{
+            \text{Bestimmen Sie das \textcolor{#CC6600}{inverse Element bzgl. der Addition} $\textcolor{#CC6600}{(-z)}$ und das 
+            \textcolor{#0066CC}{inverse Element bzgl. der Multiplikation} $\textcolor{#0066CC}{(z^{-1})}$ von \\
+            \[z=\var{z}.\]}
+            }
+            \lang{en}{
+            \text{Determine the \textcolor{#CC6600}{additive inverse} $\textcolor{#CC6600}{(-z)}$ and the
+            \textcolor{#0066CC}{multiplicative inverse} $\textcolor{#0066CC}{(z^{-1})}$ of
+            \[z=\var{z}.\]
+            }
+            }
+            \begin{variables}
+                \randint{a}{-6}{6}
+                \randint[Z]{b}{-6}{6}
+                \function[expand, normalize]{z}{a+b*i}
+                \function[expand, normalize]{za}{-a-b*i}
+                \function[expand, normalize]{zm}{(a-b*i)/(a^2+b^2)}
+                \function[expand, normalize]{zq}{a-b*i}   
+                \function[expand, normalize]{zb}{a^2+b^2}
+                \function[expand, normalize]{mb}{-b}                
+            \end{variables}
+            \lang{de}{
+            \text{Antworten:\\
+            $\textcolor{#CC6600}{(-z)}=$\ansref und  $\textcolor{#0066CC}{z^{-1}}=$\ansref}
+            }
+            \lang{en}{
+            \text{Answers:\\
+            $\textcolor{#CC6600}{(-z)}=$\ansref and  $\textcolor{#0066CC}{z^{-1}}=$\ansref}
+            }
+            \begin{answer}
+                \solution{za}
+            \end{answer}
+            \begin{answer}
+                \solution{zm}
+            \end{answer}
+            \lang{de}{
+            \explanation{Schreibe $z=a+bi$; dann ist $-z=-(a+bi)=-a-bi=\var{za}$ und $\bar{z}=a-bi=\var{zq}$ 
+            und somit $z^{-1}=\frac{\bar{z}}{z\cdot\bar{z}}=\frac{a-bi}{a^2+b^2}=\frac{\var{zq}}{\var{zb}} = \frac{\var{a}}{\var{zb}} + \frac{\var{mb}}{\var{zb}} i.$
+            }
+            }
+            \lang{en}{
+            \explanation{Write $z=a+bi$. Then $-z=-(a+bi)=-a-bi=\var{za}$
+            and $\bar{z}=a-bi=\var{zq}$ 
+            and therefore $z^{-1}=\frac{\bar{z}}{z\cdot\bar{z}}=\frac{a-bi}{a^2+b^2}=\frac{\var{zq}}{\var{zb}} = \frac{\var{a}}{\var{zb}} + \frac{\var{mb}}{\var{zb}} i.$
+            }
+            }
+
+\end{quickcheck}
+
+
+\end{content}
+

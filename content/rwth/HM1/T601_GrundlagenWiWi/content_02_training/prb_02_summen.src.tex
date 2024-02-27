@@ -1,0 +1,219 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A02: Summen- und Produktzeichen}
+    \lang{en}{sum and product signs}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A02: Summen- und Produktzeichen}}
+\lang{en}{\title{A02: sum and product signs}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/23784}{Ticket 23784}
+\end{block}
+
+\begin{block}[annotation]
+Kopie: hm4mint/T101neu_Elementare_Rechengraundlagen/training 5
+
+Im Ticket-System: \href{https://team.mumie.net/issues/22287}{Ticket 22287}
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+
+\begin{problem}
+%
+\randomquestionpool{1}{2}
+
+%       
+%Q1
+	\begin{question}
+	\lang{de}{\text{Berechnen Sie die folgenden Zahlenwerte und vereinfachen Sie Ihr Ergebnis 
+        so weit wie möglich. (Fassen sie also vollständig zusammen!)\\
+        \\
+        
+        $\sum_{k=0}^\var{n} \var{qk} =$\ansref                              %Q1.1
+        $\qquad \sum_{l=\var{nb}}^\var{mb} \var{zb} = $\ansref  \\          %Q1.2
+        \\
+        
+        $\prod_{j=2}^\var{nc} \left( \frac{1}{j+\var{mc}} \right) = $ \ansref       %Q1.3
+        $\qquad \prod_{k=1}^\var{md} \frac{k+\var{id}}{k+\var{id1}} = $ \ansref     %Q1.4
+        }}
+    \lang{en}{\text{Calculate the following numerical values and simplify your result 
+        as far as possible. (Simplify it completely!)\\
+        \\
+        
+        $\sum_{k=0}^\var{n} \var{qk} =$\ansref                             %Q1.1
+        $\qquad \sum_{l=\var{nb}}^\var{mb} \var{zb} = $\ansref  \\         %Q1.2
+        \\
+        
+        $\prod_{j=2}^\var{nc} \left( \frac{1}{j+\var{mc}} \right) = $ \ansref     %Q1.3
+        $\qquad \prod_{k=1}^\var{md} \frac{k+\var{id}}{k+\var{id1}} = $ \ansref   %Q1.4
+        }}
+	
+	\begin{variables}
+    %Q1.1 
+    	\randint{qh}{-6}{6}
+		\randadjustIf{qh}{qh=0 OR qh=2}
+		\function[calculate]{q}{qh/2}
+		\randint{n}{3}{8}
+		\function[calculate]{f}{(q^(n+1)-1)/(q-1)}
+		\function{qk}{q^k}
+
+    %Q1.2
+        \randint{nb}{1}{5}
+        \randint{mb}{10}{20}
+        \randint{zb}{2}{8}
+        \function[calculate]{fb}{zb * (mb-nb+1)}
+        
+    %Q1.3
+        \randint{nc}{2}{6}
+        \randint{mc}{1}{5}	
+        \function[calculate]{fc}{(mc+1)!/(mc+nc)!}
+        
+    %Q1.4        
+        \randint{md}{3}{7}
+        \randint{id}{0}{4}
+        \function[calculate]{id1}{id+1}
+        \function[calculate]{fd}{(1+id)/(md+1+id)}
+    
+	\end{variables}
+    
+	\type{input.number} 
+    \field{rational}
+        
+    %Q1.1	
+		\begin{answer}
+%			\text{ $\sum_{k=0}^\var{n} \var{qk} =$}
+			\solution{f}
+		\end{answer}
+    
+    %Q1.2		
+		\begin{answer}
+%			\text{$\sum_{l=\var{nb}}^\var{mb} \var{zb} = $}
+			\solution{fb}
+		\end{answer}
+        
+    %Q1.3
+    	\begin{answer}
+%			\text{$\prod_{j=2}^\var{nc} \left( \frac{1}{j+\var{mc}} \right) = $}
+			\solution{fc}
+		\end{answer}
+        
+    %Q1.4		
+		\begin{answer}
+%			\text{$\prod_{k=1}^\var{md} \frac{k+\var{id}}{k+\var{id1}} = $}
+			\solution{fd}
+		\end{answer}
+	
+	\end{question}
+
+%
+%Q2	
+	\begin{question}
+	\lang{de}{\text{Berechnen Sie die folgenden Zahlenwerte und vereinfachen Sie Ihr Ergebnis 
+        so weit wie möglich. (Fassen sie also vollständig zusammen!)\\
+        \\
+        
+        $\sum_{j=1}^\var{na}  \var{ma} \cdot j \cdot (j+\var{za}) = $\ansref        %Q2.1
+        $\qquad \sum_{k=0}^\var{n} \var{qk} =$\ansref   \\                          %Q2.2
+        \\
+        
+        $\prod_{j=2}^\var{nc} \left( 1 - \frac{2}{j^2+j} \right) = $ \ansref        %Q2.3
+        $\qquad \; \prod_{k=1}^\var{md} \frac{k+\var{id}}{k+\var{id1}} = $ \ansref     %Q2.4 
+        }}
+    \lang{en}{\text{Calculate the following numerical values and simplify your result 
+        as far as possible. (Simplify it completely!)\\
+        \\
+        
+        $\sum_{j=1}^\var{na}  \var{ma} \cdot j \cdot (j+\var{za}) = $\ansref     %Q2.1
+        $\qquad \sum_{k=0}^\var{n} \var{qk} =$\ansref \\                          %Q2.2
+        \\
+        
+        $\prod_{j=2}^\var{nc} \left( 1 - \frac{2}{j^2+j} \right) = $ \ansref       %Q2.3
+        $\qquad \; \prod_{k=1}^\var{md} \frac{k+\var{id}}{k+\var{id1}} = $ \ansref %Q2.4 
+        }}
+	
+    \begin{variables}
+    
+    %Q2.1
+        \randint{ma}{2}{9}
+        \randint{na}{1}{5}
+        \randint{za}{1}{3}								
+        \function[calculate]{fa}{na*(na+1)*1/2 * ( (2*na+1)*1/3*ma + ma*za )}
+        
+    %Q2.2
+		\randint{q}{-6}{6}
+		\randadjustIf{q}{q=0}
+        \randadjustIf{q}{q=1} %hat andere Lösung
+		\randint{n}{0}{2}
+		\function[calculate]{f}{(q^(n+1)-1)/(q-1)}       
+		\function{qk}{q^k}
+                
+    %Q2.3
+        \randint{nc}{2}{6}
+        \function{fc2}{ 1/3*(1+2/nc)}
+        
+    %Q2.4        
+        \randint{md}{3}{7}
+        \randint{id}{0}{4}
+        \function[calculate]{id1}{id+1}
+        \function[calculate]{fd}{(1+id)/(md+1+id)}
+			
+	\end{variables}
+	
+    \type{input.number} 
+    \field{rational}
+
+    %Q2.1
+		\begin{answer}
+%			\text{$\sum_{j=1}^\var{na}  \var{ma} \cdot j \cdot (j+\var{za}) = $}
+			\solution{fa}
+		\end{answer}
+       
+   
+    %Q2.2	
+		\begin{answer}
+%			\text{ $\sum_{k=0}^\var{n} \var{qk} =$}
+			\solution{f}
+		\end{answer}
+     
+     
+    %Q2.3
+    	\begin{answer}
+%			\text{$\prod_{j=2}^\var{nc} \left( 1 - \frac{2}{j^2+j} \right) = $}
+			\solution{fc2}
+		\end{answer}
+        
+    %Q2.4		
+		\begin{answer}
+%			\text{$\prod_{k=1}^\var{md} \frac{k+\var{id}}{k+\var{id1}} = $}
+			\solution{fd}
+		\end{answer}
+
+	\end{question}
+
+%
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+
+\end{content}

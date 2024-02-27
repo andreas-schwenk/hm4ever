@@ -1,0 +1,63 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A07: quadratische Gleichung}
+    \lang{en}{Problem 7}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21300}{Ticket 21300}
+\end{block}
+\usepackage{mumie.genericproblem}
+\title{A07: quadratische Gleichung}
+\begin{problem}
+    \begin{question}
+        \field{complex}
+        \type{input.number}
+        \displayprecision{2}
+        \correctorprecision{2}
+        \begin{variables}
+            \drawFromSet{p}{2,4,6,8,10,12}
+            \drawFromSet{qua}{9,16,25,36,64}
+            \function[calculate]{q}{qua+tmp1^2}
+            \function{tmp1}{-p/2}
+            \function{tmp2}{q-(p/2)^2}
+            \function[normalize]{sol1}{tmp1+sqrt(tmp2)*i}
+            \function[normalize]{sol2}{tmp1-sqrt(tmp2)*i}
+        \end{variables}
+        \text{Bestimmen Sie die komplexen Lösungen der quadratischen Gleichung\\
+        $z^2+\var{p}z+\var{q}=0$.\\
+        }
+        \explanation{Die Lösungen sind: $z_{1/2}=\var{tmp1}\pm\sqrt{\var{tmp2}}\cdot i$}
+    \permuteAnswers{1,2}
+    \begin{answer}
+        \text{$z_1=$}
+        \solution{sol1}
+    \end{answer}
+    \begin{answer}
+       \text{$z_2=$}
+       \solution{sol2}
+    \end{answer}
+   \end{question}
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

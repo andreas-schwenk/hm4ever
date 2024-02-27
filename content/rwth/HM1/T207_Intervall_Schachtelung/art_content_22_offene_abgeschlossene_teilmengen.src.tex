@@ -1,0 +1,292 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Offene und abgeschlossene Teilmengen}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+    
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T207_Intervall_Schachtelung/g_art_content_21_intervalle.meta.xml}{intervalle}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_14_konvergenz.meta.xml}{konvergenz}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_15_monotone_konvergenz.meta.xml}{monot-konv}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{7}
+\ombarticle{2}
+
+\lang{de}{\title{Offene und abgeschlossene Teilmengen}}
+ 
+\begin{block}[annotation]
+  
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9679}{Ticket 9679}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+\section{Innere Punkte und Randpunkte}\label{sec:innere-randpunkte}
+
+\begin{definition}
+Sei $D$ eine Teilmenge der reellen Zahlen $\R$. Eine Zahl $c\in D$ heißt genau dann \notion{innerer Punkt} von $D$, wenn
+es eine $\epsilon$-Umgebung von $c$ gibt, die in $D$ enthalten ist, d.h. es gibt $\epsilon>0$ mit
+$U_\epsilon(c)\subseteq D$.
+
+Eine Zahl $c\in \R$ heißt genau dann \notion{Randpunkt} von $D$, 
+ wenn jede $\epsilon$-Umgebung von $c$ sowohl mit $D$ als auch mit dem Komplement von $D$ nicht-leeren Schnitt hat,
+wenn also gilt: Zu jedem 
+ $\epsilon>0$ gibt es (mindestens) ein $x_\epsilon\in D$  mit $|x_\epsilon-c|<\epsilon$ und (mindestens) ein
+ $y_\epsilon\in \R\setminus D$ mit $|y_\epsilon-c|<\epsilon$ (d.h. mit
+$x_\epsilon, y_\epsilon\in U_\epsilon(c)$).
+\end{definition}
+
+\begin{example}
+Am Beispiel der \link{intervalle}{Intervalle} werden die Begriffe anschaulich:\\
+Die Intervallgrenzen sind die Randpunkte des Intervalls.
+Für ein abgeschlossenes Intervall $[a;b]$ mit $a<b$ gehören die Randpunkte $a$ und $b$ zum Intervall dazu,
+während alle anderen Elemente von $[a;b]$ innere Punkte sind.
+
+Für $c=a$ und für jedes $\epsilon>0$ ist die Zahl $x_\epsilon=a-\frac{\epsilon}{2}\in U_\epsilon(a)$ nicht in $[a;b]$ enthalten. 
+Daher ist $a$ ein Randpunkt des Intervalls. Ebenso ist für jedes $\epsilon>0$ die Zahl $x_\epsilon=b+\frac{\epsilon}{2}\in U_\epsilon(b)$ nicht in $[a;b]$ enthalten, weshalb $b$ ein Randpunkt ist.
+
+Für $c\in [a;b]$ mit $a<c<b$ kann man jedoch $\epsilon>0$ wählen als 
+\[ \epsilon =\min\{ c-a; b-c \}. \]
+dann gilt $a\leq c-\epsilon$ und $b\geq c+\epsilon$ und daher ist für jedes $x\in U_\epsilon(c)$:
+\[  a\leq c-\epsilon <x <c+\epsilon\leq b. \]
+Jedes $x\in U_\epsilon(c)$ liegt also im Intervall $[a;b]$ (sogar im offenen Intervall $(a; b)$), 
+weshalb $U_\epsilon(c)$ in $[a;b]$ enthalten ist.
+
+
+Die Überlegung für $c\in [a;b]$ mit $a<c<b$, d.h. für $c\in (a; b)$ zeigt auch, dass jedes Element des offenen
+Intervalls $(a; b)$ ein innerer Punkt ist. Die Randpunkte $a$ und $b$ des offenen Intervalls gehören nicht zum Intervall dazu.
+\end{example}
+
+\begin{tabs*}
+\tab{Hinweis zur Notation}
+In der Literatur wird oft auch der Rand $\partial D$ einer Menge $D$ definiert als Menge aller Randpunkte.
+Dieser ist wie gesehen nicht notwendigerweise eine Teilmenge von $D$. 
+\end{tabs*}
+
+\section{Offene Mengen}\label{sec:offene_mengen}
+
+Die offenen Intervalle sind ein Beispiel für die allgemeineren offenen Mengen.
+
+\begin{definition}
+Eine Teilmenge $D$ der reellen Zahlen nennt man genau dann \notion{offen}, wenn  jeder Punkt von $D$ ein innerer Punkt ist.
+\end{definition}
+
+\begin{example}
+\begin{enumerate}
+\item Wie oben beschrieben, sind offene Intervalle $(a; b)$ für $a<b$ offene Mengen.
+\item Auch die unendlichen Intervalle $(a; \infty)$, $(-\infty; b)$ und $(-\infty; \infty)=\R$ sind offen. 
+Für jede reelle Zahl des Intervalls existiert  eine weitere Zahl in deren Umgebung, da keine Randpunkte zum Intervall gehören.
+\item Alle anderen Intervalle sind nicht offen, da sie mindestens einen Randpunkt enthalten. Als Beispiel seien die halboffenen
+Intervalle wie $[a;b)$ oder $(a;b]$ genannt.
+\item Die leere Menge $\emptyset$ ist offen, da sie keine Elemente enthält. Die Bedingung, dass jeder Punkt ein innerer Punkt ist, ist also erfüllt.
+\item Die Mengen $\N$, $\Z$ und $\Q$ sind alle nicht offen, weil sie gar keine inneren Punkte besitzen. 
+\end{enumerate}
+\end{example}
+
+\begin{theorem}\label{thm:eigenschaften_off_mengen}
+\begin{enumerate}
+\item Die leere Menge $\emptyset$ und $\R$ sind offen.
+\item Sind $D_1,\ldots, D_n\subseteq \R$ endlich viele offene Mengen, so ist auch deren Durchschnitt
+$D_1\cap D_2\cap \ldots \cap D_n$ eine offene Menge.
+\item Für beliebig viele (auch unendlich viele) offene Mengen ist deren Vereinigung wieder eine offene Menge.
+\end{enumerate}
+\end{theorem}
+
+\begin{block}[warning]
+Man kann in 2. nicht auf die Endlichkeit verzichten: So sind zum Beispiel für jedes $n\in \N$ die Intervalle
+$(-\frac{1}{n}; \frac{1}{n})$ offen, ihr Durchschnitt ist jedoch
+\[  \bigcap_{n\in \N} (-\frac{1}{n}; \frac{1}{n}) 
+%=\{ x\in \R \mid x\in (-\frac{1}{n}; \frac{1}{n})\text{ für alle }n\in \N \} 
+= \{ x\in \R \mid  {|x|}< \frac{1}{n}\text{ für alle }n\in \N \}
+%=\{ x\in \R \mid  {|x|}=0 \} 
+=\{0\}. \]
+Die Menge $\{0\}$ ist aber nicht offen, denn jede $\epsilon$-Umgebung von $0$ enthält noch Zahlen außer der $0$.
+\end{block}
+
+\begin{proof*}{Beweis}
+\begin{incremental}{0}
+\step
+Die leere Menge und $\R$ waren in den Beispielen schon erklärt. 
+\step
+Um zu sehen, dass für offene Mengen $D_1,\ldots, D_n$ auch deren Durchschnitt $D_1\cap D_2\cap \ldots \cap D_n$  eine offene Menge ist, betrachten wir
+einen beliebigen Punkt $c\in D_1\cap D_2\cap \ldots \cap D_n$ und zeigen, dass er ein innerer Punkt ist. 
+Da alle $D_j$ offen sind, gibt es $\epsilon_1,\ldots, \epsilon_n>0$ mit $U_{\epsilon_1}(c)\subseteq D_1$, $U_{\epsilon_2}(c)\subseteq D_2$ etc.
+
+Damit ist aber $U_{\epsilon_1}(c)\cap \ldots\cap U_{\epsilon_n}(c)\subseteq D_1\cap D_2\cap \ldots \cap D_n$ und
+$U_{\epsilon_1}(c)\cap \ldots\cap U_{\epsilon_n}(c)$ ist nichts anderes als $U_{\epsilon}(c)$ mit
+$\epsilon=\min\{ \epsilon_1,\ldots, \epsilon_n\} >0$. \\ Also enthält $D_1\cap D_2\cap \ldots \cap D_n$ eine
+$\epsilon$-Umgebung von $c$, weshalb $c$ innerer Punkt des Durchschnitts ist.
+\step 
+Ist $c$ ein Punkt in der Vereinigung, dann liegt er nach Definition der Vereinigung in einer der offenen Mengen. Dann gibt es aber eine $\epsilon$-Umgebung von $c$, die Teilmenge dieser offenen Menge ist und daher auch Teilmenge der Vereinigung der Mengen. Also ist $c$ ein innerer Punkt der Vereinigung.
+\end{incremental}
+\end{proof*}
+
+Das folgende Video erinnert nochmal an Intervalle und behandelt die oben genannten Themen:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10817&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+\section{Abgeschlossene Mengen}\label{sec:abgeschl-mengen}
+
+\begin{definition}
+Eine Teilmenge $M\subseteq \R$ heißt genau dann \notion{abgeschlossen}, wenn für jede konvergente Folge
+$(x_n)_{n\in \N}$ mit Werten in $M$ (d.h. mit $x_n\in M$ für alle $n\in \N$) auch ihr Grenzwert
+$\lim_{n\to \infty} x_n$ in $M$ liegt.
+\end{definition}
+
+\begin{example}
+Abgeschlossene Mengen:
+\begin{tabs*}[\initialtab{0}]
+\tab{abgeschlossene Intervalle $[a;b]$} 
+Jedes endliche abgeschlossene Intervall $[a;b]$ ist abgeschlossen in diesem Sinne.
+Ist $(x_n)_{n\in \N}$ eine konvergente Folge mit Werten in $[a;b]$, d.h. mit $a\leq x_n\leq b$ für alle
+ $n\in \N$,  dann gilt
+nach den \ref[konvergenz][Regeln zu Grenzwerten]{rule:grenzwerte-vergleichen} auch
+\[  a= \lim_{n\to \infty}  a \leq \lim_{n\to \infty}  x_n \leq  \lim_{n\to \infty} b =b \]
+mit den konstanten Folgen $(a)_{n\in \N}$ und $(b)_{n\in \N}$.
+\tab{Intervalle $[a;\infty)$ und $(-\infty; b]$}
+Auch die unendlichen Intervalle $[a;\infty)$, $(-\infty; b]$ sind abgeschlossen, wie man genauso wie für endliche
+zeigt.
+% Jede konvergente Folge ist ja beschränkt, weshalb sie Werte in einem 
+%abgeschlossenen Intervall $[-c;c]$ hat mit $c\in \R$. 
+%Eine konvergente Folge mit Werten in $[a;\infty)$ bzw. $(-\infty; b]$ hat daher insbesondere Werte in einem abgeschlossenen Intervall $[a;\infty)\cap [-c;c]$ bzw. $(-\infty; b]\cap [-c;c]$, weshalb auch ihr Grenzwert in diesem Intervall liegt. 
+\tab{$\N$ und $\Z$} Die Menge der natürlichen Zahlen $\N$ und die Menge der ganzen Zahlen $\Z$ sind abgeschlossen.
+Ist  $(x_n)_{n\in \N}$ eine konvergente Folge mit Werten in $\N$ oder $\Z$ und Grenzwert $a\in \R$, so gibt es
+auch für $\epsilon=\frac{1}{2}$ ein $N_\epsilon\in \N$ mit $|x_n-a|<\frac{1}{2}$ für alle $n\geq N_\epsilon$.\\
+Damit ist aber für alle $n,m\geq N_\epsilon$
+\[ |x_n-x_m|=|x_n-a+a-x_m|\leq |x_n-a|+|a-x_m|<\frac{1}{2}+\frac{1}{2}=1.\]
+Da aber alle $x_n$ ganze Zahlen sind, kann deren Abstand zueinander nur $<1$ sein, wenn sie gleich sind. Also gilt
+$x_n=x_m=x_{N_\epsilon}$ für alle $n,m\geq N_\epsilon$, und auch $a=x_{N_\epsilon}$. D.h. $a$ liegt in den ganzen bzw. natürlichen Zahlen.
+\tab{endliche Teilmengen}
+Jede endliche Teilmenge von $\R$ ist abgeschlossen, wie man ähnlich zum Fall der ganzen Zahlen sieht. Man muss lediglich ein $\epsilon$ wählen, das halb so groß wie der kleinste auftretende Abstand ist.
+\end{tabs*}
+Teilmengen, die nicht abgeschlossen sind:
+\begin{tabs*}[\initialtab{0}]
+\tab{offene und halboffene Intervalle}
+Intervalle, bei denen die "`Ränder"' nicht zum Intervall gehören (also z.B. $(a;b)$ oder $(a;b]$ etc.), 
+sind keine abgeschlossenen Mengen. Ist nämlich der "`untere Rand"' $a$ nicht im Intervall, so kann man ein beliebiges 
+$a<c<b$ im Intervall wählen und die Folge $(x_n)_{n\in \N}$ mit 
+\[ x_n= a+\frac{c-a}{n} \quad \text{für alle }n\in \N.\]
+Dies ist eine Folge mit Werten im Intervall, da insbesondere $(a;c]$ Teilmenge des Intervalls ist und 
+sie gegen $a$ konvergiert, da
+\[  \lim_{n\to \infty} x_n =\lim_{n\to \infty}  a+\frac{c-a}{n} =a+(c-a)\cdot \lim_{n\to \infty}\frac{1}{n}=a.\]
+\tab{$\Q$} 
+Die Menge der rationalen Zahlen $\Q$ ist nicht abgeschlossen. Im Abschnitt \link{monot-konv}{Monotone Konvergenz} hatten wir zum Beispiel eine Folge mit Werten in $\Q$, die gegen die irrationale Zahl $\sqrt{2}$ konvergiert.
+\end{tabs*}
+\end{example}
+
+Obwohl die Definitionen von offenen und abgeschlossenen Mengen sehr unterschiedlich sind, hängen sie doch zusammen.
+
+\begin{theorem}
+Eine Teilmenge $D$ der reellen Zahlen ist genau dann offen, wenn ihr Komplement $\complement{D}=\R\setminus D$ 
+abgeschlossen ist. 
+
+Eine Teilmenge $M$ der reellen Zahlen ist genau dann abgeschlossen, wenn ihr Komplement 
+$\complement{M}=\R\setminus M$ offen ist. 
+\end{theorem}
+
+
+\begin{proof*}[Beweis]
+Da das Komplement des Komplements wieder die ursprüngliche Menge selbst ist, sind die beiden Aussagen gleichbedeutend. 
+Wir zeigen also nur die erste. 
+\begin{incremental}{0}
+\step
+Sei nun $D$ eine offene Teilmenge und $(a_n) _{n\in\N}$ eine konvergente Folge mit Werten in $\R\setminus D$ und 
+Grenzwert $a \in \R$. Wäre $a\in D$, so gäbe es eine Zahl $\epsilon>0$ mit $U_\epsilon(a) \subseteq D$,da $D$ offen ist. Zu diesem $\epsilon$ gibt es jedoch ein $N_\epsilon\in\N$ mit $|a_n-a|<\epsilon$, d. h.  mit $a_n\in U_\epsilon(a)$, für alle $n\geq N_\epsilon$ im Widerspruch zu $a_n\notin D$. Also ist $a\in 
+\R\setminus D$, wie zu zeigen war. 
+\step
+Ist andererseits $D$ keine offene Menge,  dann gibt es einen Randpunkt $a\in D$. D.h. für jedes $\epsilon>0$ ist 
+$U_\epsilon(a) $ keine Teilmenge von $D$. Insbesondere gibt es für jedes $n\in\N$ und $\epsilon=\frac{1}{n}$ eine 
+Zahl $a_n\in U_{\frac{1}{n}}$ mit $a_n\in \R\setminus D$.\\
+Dies bedeutet aber nichts anderes als dass die so erhaltene Folge $(a_n) _{n\in\N}$ eine konvergente Folge mit Werten 
+in $\R\setminus D$ und Grenzwert $a \in D$ ist. Also ist $\R\setminus D$ nicht abgeschlossen. 
+\end{incremental}
+\end{proof*}
+
+Mit Hilfe der de Morganschen Regeln $\complement{(C\cup D)}=\complement{C}\cap \complement{D}$ und
+ $\complement{(C\cap D)}=\complement{C}\cup \complement{D}$, welche auch für unendliche Vereinigungen und unendliche 
+ Durchschnitte gelten, erhält man nun aus dem Satz über Durchschnitte und Vereinigungen offener Mengen
+ einen ähnlichen Satz zu abgeschlossenen Mengen.
+
+\begin{theorem}
+\begin{enumerate}
+\item Die leere Menge und $\R$ sind abgeschlossen.
+\item Sind $D_1,\ldots, D_n\subseteq \R$ endlich viele abgeschlossene Mengen, so ist auch deren Vereinigung
+$D_1\cup D_2\cup \ldots \cup D_n$ eine abgeschlossene Menge.
+\item Für beliebig viele (auch unendlich viele) abgeschlossene Mengen ist deren Durchschnitt wieder eine 
+abgeschlossene Menge.
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}
+\begin{enumerate}
+\item Auch hier kann bei 2. nicht auf die Endlichkeit verzichtet werden. Die Vereinigung der unendlich vielen abgeschlossenen Intervalle
+$[\frac{1}{n},1]$ für $n\in \N$ ist das linksoffene Intervall $(0,1]$. Es ist nicht abgeschlossen, da 
+zum Beispiel die Folge $(\frac{1}{n})_{n\in \N}$ Werte in $(0,1]$ hat, aber den Grenzwert $0$, welcher nicht in $(0,1]$ liegt.
+\item Die leere Menge und ganz $\R$ sind also beide abgeschlossen und offen. Es lässt sich zeigen, dass dies die 
+einzigen
+beiden Teilmengen von $\R$ sind, welche sowohl abgeschlossen als auch offen sind.
+\item Es gibt sehr viele Mengen, die weder abgeschlossen noch offen sind, beispielsweise halboffene Intervalle oder die 
+Menge der rationalen Zahlen $\Q$.
+\end{enumerate}
+\end{remark}
+
+Das Thema Abgeschlossenheit wird in folgemdem Video beleuchtet und gibt einen Ausblick auf die 
+komplexe Erweiterung:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10818&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+\begin{quickcheck}
+    \lang{de}{\text{Markieren Sie alle richtigen Antworten:}}
+    \begin{choices}{multiple}
+        \begin{choice}
+            \text{$(3;4)$ ist eine nicht abgeschlossene Menge}
+            \solution{true}
+        \end{choice}
+        
+        \begin{choice}
+            \text{$\emptyset$ ist eine offene Menge}
+            \solution{true}
+        \end{choice}
+        
+        \begin{choice}
+            \text{$[-1;7)$ ist eine abgeschlossene Menge}
+            \solution{false}
+        \end{choice}
+        
+        \begin{choice}
+            \text{$(-\infty;3]$ ist eine abgeschlossene Menge}
+            \solution{true}
+        \end{choice}
+        \begin{choice}
+            \text{$\R$ ist eine nicht abgeschlossene Menge}
+            \solution{false}
+        \end{choice}
+    \end{choices}
+    \explanation{siehe Bemerkung 2.10 und:\\
+    Bedenken Sie: $\R$ enthält alle Grenzwerte und ist damit abgeschlossen,\\
+    sowie\\
+    $\emptyset$ ist offen, da es keine Randpunkte enthält.}
+\end{quickcheck}
+
+\end{content}

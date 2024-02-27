@@ -1,0 +1,71 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A01: Tangente}
+    \lang{en}{problem_1}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+
+\lang{de}{
+	\title{A01: Tangente}
+}
+\lang{en}{
+	\title{Problem 1}
+}
+
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10282}{Ticket 10282}
+\end{block}
+
+\begin{problem}
+ 
+    \begin{question}
+      \lang{de}{\text{Gegeben sei die Funktion $f(x)=\var{f}$. Bestimmen Sie die Gleichung der Tangente an den Graphen von 
+      $f$ im Punkt $(\var{x0},f(\var{x0}))$.}}
+      \type{input.function}
+ 
+      \begin{variables}
+            \randint{n}{1}{6}
+            \randint{a}{-5}{5}
+            \randint{x0}{-1}{1}
+            \function[expand,normalize]{f}{a*e^x+x^n}
+            \function{fx0}{a*e^x0+x0^n}
+            \function{l}{(a*e^x0+n*x0^(n-1))*(x-x0)+fx0}
+      \end{variables}
+      
+      \begin{answer}
+      		\text{$T(x)=$}
+			\solution{l}
+			\checkAsFunction{x}{-10}{10}{100}
+            \explanation{Wie in der ersten Beispielaufgabe muss die Formel $T(x) = f'(x_0)(x-x_0) +f(x_0)$ berechnet werden. 
+            Hier ist $x_0 = \var{x0}$. Wir müssen also $f'$ und $f$ an der Stelle $x_0$ auswerten und das in die Formel einsetzen.}
+		\end{answer}
+	\end{question}
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+
+
+\end{content}

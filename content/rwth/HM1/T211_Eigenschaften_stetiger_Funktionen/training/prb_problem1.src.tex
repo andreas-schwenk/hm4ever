@@ -1,0 +1,99 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A01: Infimum/Supremum}
+    \lang{en}{Problem 1}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{description}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A01: Infimum/Supremum}}
+\lang{en}{\title{Problem 1}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/10055}{Ticket 10055}
+\end{block}
+
+
+\begin{problem}
+
+	\begin{variables}
+    	\randint[Z]{c}{-10}{10}
+    	\function[normalize,expand]{f}{c*e^(-x^2)}
+    	%\number{s}{0}
+        \function[calculate]{s1}{(c-|c|)/2}  % min(0,c)
+        \function[calculate]{s2}{(c+|c|)/2}  % max(0,c)
+    \end{variables}
+    	
+    	
+    \begin{question}
+    	\text{Gegeben sei die Funktion $f:\R\to\R$ mit $f(x)=\var{f}$. 
+    	Geben Sie Infimum $m$ und Supremum $M$ von $W_{f}=\{f(x)\,|\,x\in\R\}$ an.}
+    	
+    	\type{input.number}
+    	\field{rational}
+    	\begin{answer}
+    		\text{$m=$}
+    		\solution{s1}
+    	\end{answer}
+    	\begin{answer}
+    		\text{$M=$}
+    		\solution{s2}
+    	\end{answer}
+        \explanation[edited]{Um die Antwort zu finden, müssen $f(0)$ bzw. 
+        $\lim_{x\to\pm\infty}f(x)$ berechnet werden.}
+    \end{question}
+    \begin{question} 
+     
+     	\lang{de}{ 
+      	\text{Entscheiden Sie weiter, welche der folgenden Aussagen richtig sind:}
+    	}
+    	\type{mc.multiple}
+\permutechoices{1}{4}
+		\begin{choice}
+			\text{$M$ ist das Maximum von $W_{f}$.}
+			\solution{compute}
+            \iscorrect{c}{>}{0}
+		\end{choice}
+		\begin{choice}
+			\text{$m$ ist das Minimum von $W_{f}$.}
+			\solution{compute}
+            \iscorrect{c}{<}{0}
+		\end{choice}
+		\begin{choice}
+			\text{$W_{f}$ besitzt kein Maximum.}
+			\solution{compute}
+            \iscorrect{c}{<}{0}
+		\end{choice}
+		\begin{choice}
+			\text{$W_{f}$ besitzt kein Minimum.}
+			\solution{compute}
+            \iscorrect{c}{>}{0}
+		\end{choice}
+		\explanation[edited]{Infimum/Supremum müssen nicht in $W_f$ enthalten sein, 
+        wohingegen Maximum/Minimum in der Wertemenge enthalten sein müssen.}
+	\end{question}
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+
+
+\end{content}

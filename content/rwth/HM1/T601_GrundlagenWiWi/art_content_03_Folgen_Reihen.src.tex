@@ -1,0 +1,1597 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Folgen und Reihen}
+    \lang{en}{Sequences and series}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_Inventory.meta.xml}{T601_Inventory}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T208_Reihen/g_art_content_25_konvergenz_kriterien.meta.xml}{content_25_konvergenz_kriterien}
+    \link{generic_article}{content/rwth/HM1/T603_Differentialrechnung/g_art_content_11_AbleitungSaetze.meta.xml}{content_11_AbleitungSaetze}
+    \link{generic_article}{content/rwth/HM1/T201neu_Vollstaendige_Induktion/g_art_content_02_vollstaendige_induktion.meta.xml}{content_02_vollstaendige_induktion}
+    \link{generic_article}{content/rwth/HM1/T209_Potenzreihen/g_art_content_27_konvergenzradius.meta.xml}{content_27_konvergenzradius}
+    \link{generic_article}{content/rwth/HM1/T208_Reihen/g_art_content_26_produkt_von_reihen.meta.xml}{content_26_produkt_von_reihen}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_14_konvergenz.meta.xml}{konvergenz}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_15_monotone_konvergenz.meta.xml}{monot-konv}
+    \link{generic_article}{content/rwth/HM1/T207_Intervall_Schachtelung/g_art_content_23_intervallschachtelung.meta.xml}{intervallschachtelung}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericvisualization}
+\ombchapter{1}
+\ombarticle{3}
+
+\title{
+\lang{de}{Folgen und Reihen}
+\lang{en}{Sequences and series}
+}
+ 
+\begin{block}[annotation]
+  
+  
+\end{block}
+\begin{block}[annotation]
+Im Ticket-System: \href{https://team.mumie.net/issues/22667}{Ticket 22667}
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+\section{
+\lang{de}{Folgen und ihre Wertemengen}
+\lang{en}{Sequences and their sets of values}
+}
+
+\lang{de}{In diesem Kapitel befassen wir uns mit (reellen) Folgen und später auch Reihen. Folgen treten in vielfältigen Anwendungen auf und 
+erlauben in vielen Fällen ein systematisches Vorgehen, wenn etwas in einer Abfolge von Schritten passiert. }
+\lang{en}{
+In this chapter, we will consider (real) sequences and, later, series.
+Sequences appear in many applications and allow one to work
+systematically with events that take place in successive steps.
+}
+
+\begin{example}
+  \begin{tabs*}[\initialtab{0}]
+    \tab{\lang{de}{Lagerhaltung 1a} \lang{en}{Inventory 1a}}
+ \lang{de}{ Ein Logistikunternehmen lagert unzählige Materialien und Stoffe in seinen Hallen und auf dem
+ Außengelände der Firma. Dabei führen sie digital ausführlich Buch darüber, wo genau welche und wie viele 
+  Materialien gelagert werden. Intern bezeichnet das Unternehmen diesen Vorgang als Lagerhaltung.\\
+  
+ In den nächsten Tagen soll ihr Bestand erweitert werden, weshalb das Unternehmen eine große
+ Warenanlieferung eines Produkts erwartet. Dafür muss eine neue Lagerstätte vorbereitet werden.
+ Die zuständigen Mitarbeiter fertigen große Regalsysteme, die bei Bedarf nach oben hin um weitere
+ Fächer ausgebaut werden können. Die weitere Planung beschränkt sich auf eines dieser Regalsysteme 
+ - wie nachfolgend dargestellt.\\ }
+ \lang{en}{
+  A logistics company stores countless materials both in its buildings and outside
+  on company property. They keep extensive records on the location and quantity of
+  the stored materials. Internally, the company calls this activity taking inventory.
+
+  In the next few days, the stock of materials will be increased. Therefore, the company
+  expects a large delivery of a product. A new warehouse must be prepared.
+  The employees in charge of that are building large shelving systems that can be
+  expanded upwards with further shelves if necessary.
+  The planning below is concerned with one of these shelving systems,
+  as represented in the following image.
+ }
+ 
+\begin{center}
+\image{T601_Inventory}
+\end{center}
+
+\lang{de}{Aus der Masse eines jeden Kartons, der in das Regalsystem eingelagert werden soll, ermitteln die Mitarbeiter
+die höchstzulässige Lagermenge an Kartons für das unterste Fach: $1024$ Stück. Sie entscheiden sich dafür, 
+in ein jeweils darüber liegendes Fach $50$ Kartons weniger einräumen zu wollen als in das darunter liegende Fach.
+Denn es ist bekannt, dass die Gesamtmasse aller Fächer, die über einem Fach liegen, auf die Stabilität des
+Fachs einwirkt. In das System zur Lagerhaltung notieren sie folgendes:\\ }
+\lang{en}{
+Based on the weight of the boxes used in the shelving system, the employees
+determine the maximum permissible number of boxes in the lowest shelf: $1024$ boxes.
+They decide that $50$ fewer boxes should be stored on any given shelf than
+the shelf below it. This is because the stability of each shelf is impacted
+by the total weight of the shelves lying above it.
+In the inventory system they record the following:\\
+}
+
+\lang{de}{ Lagerstätte: Außenbereich, $C3$, Regalsystem $A10$:
+    \begin{itemize}
+        \item Fach Nummer 0: Produkt $A$, $1024$ Stück
+        \item Fach Nummer 1: Produkt $A$, $974$ Stück
+        \item Fach Nummer 2: Produkt $A$, $924$ Stück
+        \item Fach Nummer 3: Produkt $A$, $874$ Stück
+    \end{itemize}
+}
+\lang{en}{ Facility: Outside area, $C3$, Shelf system $A10$:
+    \begin{itemize}
+        \item Shelf 0: Product $A$, $1024$ Boxes
+        \item Shelf 1: Product $A$, $974$ Boxes
+        \item Shelf 2: Product $A$, $924$ Boxes
+        \item Shelf 3: Product $A$, $874$ Boxes
+    \end{itemize}
+}
+
+\lang{de}{Wir sehen hier also eine Durchnummerierung der Fächer, wobei jedem Fach mit der Nummer $n$ eine bestimmte
+Anzahl an Produkten der Sorte $A$ in Abhängigkeit der Fachnummer $n$ zugeordnet wird. \\\\
+Steht $A(n)$ für die Anzahl an Produkten in Fach $n$, so erhalten wir sofort die Anzahl der Produkte durch die folgende
+Berechnungsformel:\\\\
+$\quad\quad\quad\quad\quad\quad\quad\quad A(n)=1024-50\cdot n$\\\\
+Die Aufstellung derartiger Zuordnungen geschieht mit Hilfe von (arithmetischen) \notion{Folgen}.}
+\lang{en}{
+Here we see an enumeration of the shelves, such that the shelf numbered $n$
+contains a certain number of boxes of product $A$ depending on the shelf number $n$. \\\\
+If $A(n)$ denotes the number of boxes in shelf $n$, then we immediately obtain the number of boxes
+by the following formula:\\\\
+$\quad\quad\quad\quad\quad\quad\quad\quad A(n)=1024-50\cdot n$\\\\
+Relations of this sort can be described by means of (arithmetic) \notion{sequences}.
+}
+
+ \tab{\lang{de}{Lagerhaltung 1b} \lang{en}{Inventory 1b}}
+ 
+ \lang{de}{Kurz vor der Warenanlieferung bekommt das Unternehmen eine unangekündigte Kontrolle durch einen Gutachter.
+ Dieser schaut sich das neue Regalsystem an und bemängelt Folgendes:\\
+ 
+ \glqq Bei dieser Art Regalsystem, darf die Gesamtmasse der eingelagerten Produkte aller Fächer, die über
+ einem bestimmten Fach liegen, die Masse der eingelagerten Produkte dieses (unteren) Fachs nicht überschreiten.\grqq \\
+ 
+ Der zuständige Mitarbeiter schlägt daraufhin vor, ein jedes Fach mit der halben Masse des darunter liegenden Fachs
+ zu füllen. Dadurch kommt er zu folgender Lagerhaltung:\\ }
+
+ \lang{en}{
+  Just before the delivery, the company receives an unannounced inspection by an expert
+  who examines the new shelving system and raises the following complaints:\\
+
+  "In this type of shelving system, the total weight of the products stored on the shelves
+  lying over a given shelf may not exceed the weight of the products on the (lower) shelf."
+
+ The employee in charge then proposes to fill every shelf to half of the weight of
+ the shelf beneath it. This leads to the following layout:
+ }
+ 
+  \lang{de}{Lagerstätte: Außenbereich, $C3$, Regalsystem $A10$:
+    \begin{itemize}
+        \item Fach Nummer 0: Produkt $A$, $1024$ Stück
+        \item Fach Nummer 1: Produkt $A$, $512$ Stück
+        \item Fach Nummer 2: Produkt $A$, $256$ Stück
+        \item Fach Nummer 3: Produkt $A$, $128$ Stück
+    \end{itemize}}
+  \lang{en}{Facility: Outside, $C3$, Shelf system $A10$:
+    \begin{itemize}
+        \item Shelf 0: Product $A$, $1024$ Boxes
+        \item Shelf 1: Product $A$, $512$ Boxes
+        \item Shelf 2: Product $A$, $256$ Boxes
+        \item Shelf 3: Product $A$, $128$ Boxes
+    \end{itemize}}
+ 
+\lang{de}{Auch hier findet eine Durchnummerierung der Fächer statt, wobei jedem Fach mit der Nummer $n$ eine bestimmte
+Anzahl an Produkten der Sorte $A$ in Abhängigkeit der Fachnummer $n$ zugeordnet wird.\\\\
+Steht $A(n)$ für die Anzahl an Produkten in Fach $n$, so erhalten wir sofort die Anzahl der Produkte durch die folgende
+Berechnungsformel:\\\\
+$\quad\quad\quad\quad\quad\quad\quad\quad A(n)=1024\cdot (\frac{1}{2})^n$\\\\
+Die Aufstellung derartiger Zuordnungen geschieht mit Hilfe von \notion{geometrischen Folgen}.\\
+
+Wir werden im Verlauf des Kapitels sehen,  
+dass 
+\[
+1024 \cdot \frac{1}{2} + 1024 \cdot \frac{1}{4} + \ldots = 1024 \cdot \sum_{k=1}^infty \left( \frac{1}{2} \right)^k 
+\]
+gegen $1024$ konvergiert. Der Vorschlag des Mitarbeiters erfüllt also die Forderung des Gutachters.}
+
+\lang{en}{
+Here we also find an enumeration of the shelves, such that the shelf numbered $n$ contains a certain
+number of boxes of product $A$ depending on the number $n$.\\\\
+If $A(n)$ stands for the number of boxes on shelf $n$, then we immediately obtain the number of boxes of product
+by the following formula:\\\\
+$\quad\quad\quad\quad\quad\quad\quad\quad A(n)=1024\cdot (\frac{1}{2})^n$\\\\
+Relations of this sort can be described by means of \notion{geometric sequences}.\\
+
+Later in this chapter, we will see that
+\[
+1024 \cdot \frac{1}{2} + 1024 \cdot \frac{1}{4} + \ldots = 1024 \cdot \sum_{k=1}^infty \left( \frac{1}{2} \right)^k 
+\]
+converges to $1024$. Therefore, the employee's suggestion meets the inspector's requirements.
+}
+
+    \end{tabs*}
+\end{example}
+
+\begin{definition}
+\lang{de}{Eine reelle \notion{Folge} ist eine (meist unendliche) Liste von reellen Zahlen, die durchnummeriert sind. Für die Folge $a$ schreiben wir auch $(a_n)_{n \in \N}$ 
+oder $(a_n)$ und meinen damit die Liste von Zahlen 
+\[ (a_n) = a_1, \ a_2, \ a_3, \ \ldots \] 
+Die einzelnen Zahlen der Liste nennt man \notion{Glieder} der Folge. 
+Die \notion{Wertemenge} einer Folge $(a_n)_{n \in \N}$ ist die Menge der Glieder $\{ a_n \,|\, n \in \N\}$.}
+\lang{en}{A real \notion{sequence} is a (generally infinite) list of
+real numbers that are enumerated. The sequence $a$ is also written
+$(a_n)_{n \in \N}$ or $(a_n)$ and stands for the list of numbers
+\[ (a_n) = a_1, \ a_2, \ a_3, \ \ldots \]
+The individual numbers in the list are called \notion{terms} of
+the sequence. The \notion{set of values} of a sequence $(a_n)_{n \in \N}$ 
+is the set of its terms $\{ a_n \,|\, n \in \N\}$.}
+
+\end{definition}
+
+\lang{de}{Da wir in diesem Themenblock nur reelle Folgen behandeln, werden wir oft das Wort \emph{reell} weglassen
+und nur von \emph{Folgen} reden.
+
+Häufig beginnt die Nummerierung einer Folge auch nicht bei $1$, sondern bei $0$ oder einer anderen ganzen Zahl. 
+Dies machen wir kenntlich, indem wir etwa $(a_n)_{n \geq 0}$ schreiben. }
+
+\lang{en}{
+Since we will only consider real sequences in this module, we will often omit the word \emph{real}
+and simply refer to these as \emph{sequences}.
+}
+
+\begin{example}\label{ex:22}
+\begin{enumerate}
+\item \lang{de}{\emph{Konstante Folgen:} Für $c\in \R$ ist die Folge $(a_n)_{n\in \N}$ mit $a_n=c$ für alle $n$
+eine sogenannte konstante Folge. Es gilt also 
+\[a_1 = c, \ a_2 = c, \ \ldots \]
+Die Wertemenge ist lediglich $\{c\}$.}
+\lang{en}{\emph{Constant sequences:} For $c \in \R$, the sequence
+$(a_n)_{n \in \N}$ with $a_n = c$ for all $n$ is called a constant
+sequence. We have
+\[a_1 = c, \ a_2 = c, \ \ldots \]
+The set of values is just $\{c\}$.}
+\item \lang{de}{\emph{Arithmetische Folgen:} Für feste Werte $c,d\in \R$ nennt man die Folge $(a_n)_{n\geq 0}$ mit
+\begin{align*}  
+           & a_n=c+nd \quad \text{für alle } n\in \Nzero  \\
+         (\text{d.h.} \quad  & a_0 = c, \ a_1 = c+d, \ a_2 = c+2d, \ a_3 = c+3d, \ \ldots )
+\end{align*}
+eine \emph{arithmetische Folge}. Arithmetische Folgen sind dadurch gekennzeichnet, dass die Differenz
+aufeinanderfolgender Glieder der Folge stets dieselbe ist, hier $a_{n+1}-a_n=d$ für alle $n\in \Nzero$.\\
+Konstante Folgen sind spezielle arithmetische Folgen mit $d=0$.}
+\lang{en}{\emph{Arithmetic sequences:} For fixed values $c,d \in \R$, the sequence
+$(a_n)_{n \geq 0}$ with
+\begin{align*}  
+           & a_n=c+nd \quad \text{for all } n\in \Nzero  \\
+         (\text{i.e.} \quad  & a_0 = c, \ a_1 = c+d, \ a_2 = c+2d, \ a_3 = c+3d, \ \ldots )
+\end{align*}
+is called an \emph{arithmetic sequences}. Arithmetic sequences are characterized by the property
+that the difference between any two consecutive terms of the sequence is the same;
+here, $a_{n+1} - a_n = d$ for all $n \in \Nzero$.
+Constant sequences are arithmetic sequences with $d=0$.
+}
+\item \lang{de}{\emph{Geometrische Folgen:} Für $u,q\in \R^*$ nennt man die Folge $(a_n)_{n\geq 0}$ mit
+\begin{align*}  & a_n=u\cdot q^n \quad \text{für alle } n\in \Nzero \\
+      (\text{d.h.} \quad & a_0 = u, \ a_1 = uq, \ a_2 = uq^2, \ a_3 = u q^3, \ \ldots) \end{align*}
+eine \emph{geometrische Folge}. Geometrische Folgen sind dadurch gekennzeichnet, dass der Quotient
+aufeinanderfolgender Glieder der Folge stets derselbe ist, hier $\frac{a_{n+1}}{a_n}=q$ für alle $n\in \Nzero$.\\
+Konstante Folgen sind spezielle geometrische Folgen mit $q=1$.}
+\lang{en}{\emph{Geometric sequences:} For $u,q\in \R^*$, the sequence $(a_n)_{n \geq 0}$ with
+\begin{align*}  & a_n=u\cdot q^n \quad \text{for all } n\in \Nzero \\
+      (\text{i.e.} \quad & a_0 = u, \ a_1 = uq, \ a_2 = uq^2, \ a_3 = u q^3, \ \ldots) \end{align*}
+is called a \emph{geometric sequence}. Geometric sequences are characterized by the property
+that the ratio of any two consecutive terms of the sequence is the same;
+here, $\frac{a_{n+1}}{a_n} = q$ for all $n\in \Nzero$.
+Constant sequences are geometric sequences with $q=1$.
+}
+\item \label{ex:sqrt-2} \lang{de}{Die Folge $(a_n)_{n\geq 1}$ mit $a_1=2$ und  
+$a_{n+1}=\frac{a_n}{2}+\frac{1}{a_n}$ für alle $n \in \N$ ist eine rekursiv definierte Folge.
+Die ersten Glieder der Folge sind also $a_1=2$, sowie
+\begin{align*} a_2 &= \frac{a_1}{2}+\frac{1}{a_1} &=\frac{2}{2}+\frac{1}{2} &=\frac{3}{2} &=1,5\, , \\
+a_3 &= \frac{a_2}{2}+\frac{1}{a_2} &=\frac{3}{4}+\frac{2}{3}&=\frac{17}{12}&=1,41\bar{6}\, , \\
+a_4 &= \frac{a_3}{2}+\frac{1}{a_3}&=\frac{17}{24}+\frac{12}{17}&=\frac{577}{408} &\approx 1,4142157\, , \\
+a_5 &= \frac{a_4}{2}+\frac{1}{a_4}&=\frac{577}{816}+\frac{408}{577}
+&=\frac{665857}{470832} &\approx 1,414213562375\, .
+\end{align*}}
+\lang{en}{The sequence $(a_n)_{n\geq 1}$ with $a_1=2$ and
+$a_{n+1}=\frac{a_n}{2}+\frac{1}{a_n}$ for all $n \in \N$ is a
+recursively defined sequence. The first terms of the sequence are $a_1=2$ and
+\begin{align*} a_2 &= \frac{a_1}{2}+\frac{1}{a_1} &=\frac{2}{2}+\frac{1}{2} &=\frac{3}{2} &=1.5\, , \\
+a_3 &= \frac{a_2}{2}+\frac{1}{a_2} &=\frac{3}{4}+\frac{2}{3}&=\frac{17}{12}&=1.41\bar{6}\, , \\
+a_4 &= \frac{a_3}{2}+\frac{1}{a_3}&=\frac{17}{24}+\frac{12}{17}&=\frac{577}{408} &\approx 1.4142157\, , \\
+a_5 &= \frac{a_4}{2}+\frac{1}{a_4}&=\frac{577}{816}+\frac{408}{577}
+&=\frac{665857}{470832} &\approx 1.414213562375\, .
+\end{align*}
+}
+
+
+\item \lang{de}{Arithmetische Folgen können auch rekursiv definiert werden durch
+$a_0=c$ und $a_{n+1}=a_n+d$ für alle $n\in \Nzero$, wobei wieder $c,d\in \R$ fest gewählte Zahlen 
+sind.\\
+Ebenso kann für $u,q\in \R^*$ die geometrische Folge $(a_n)_{n\geq 0}=(uq^n)_{n\geq 0}$ 
+rekursiv definiert werden durch $a_0=u$ und $a_{n+1}=qa_n$.}
+\lang{en}{Arithmetic sequences can also be defined recursively,
+by specifying $a_0=c$ and $a_{n+1}=a_n+d$ for all $n\in \Nzero$,
+where $c,d \in \R$ are any fixed values as before.
+Similarly, for $u,q \in \R^*$, the geometric sequence $(a_n)_{n\geq 0}=(uq^n)_{n\geq 0}$ 
+can be defined recursively by specifying $a_0=u$ and $a_{n+1}=qa_n$.
+}
+
+\end{enumerate}
+\end{example}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{1}
+\begin{quickcheck}
+\type{input.number}
+		\field{rational}
+            
+       	\begin{variables}
+			\randint{x2}{2}{4}	
+            \randint{a}{1}{4}   						
+			\function[normalize]{afo}{(1/x2)^n}
+            \function[normalize]{loes0}{1*a}
+            \function[normalize]{loes1}{a+1/x2}
+            \function[normalize]{loes2}{a+1/x2+1/x2^2}
+                                         
+		\end{variables}
+	
+		\lang{de}{
+			\text{
+            %\audio[1,0.5,0.8,1.25,1.5]{Folgendefinition_Kurztest_neu}\\
+            Geben Sie die ersten drei Glieder der rekursiv definierten Folge 
+            $(a_n)_{n\in\N}$ mit $a_1=\var{a}$ und $a_{n+1}= a_n + \var{afo}$ für $n\geq 1$ an.
+		\\\\
+        Geben Sie die Werte exakt und so weit gekürzt wie möglich ein.\\\\
+        
+        Die ersten drei Glieder der Folge lauten: $a_1=$\ansref, $a_2=$\ansref und $a_3=$\ansref.
+ 		}
+       		}
+    \lang{en}{
+			\text{
+            %\audio[1,0.5,0.8,1.25,1.5]{Folgendefinition_Kurztest_neu}\\
+            Find the first three terms of the recursively defined sequence 
+            $(a_n)_{n\in\N}$ with $a_1=\var{a}$ and $a_{n+1}= a_n + \var{afo}$ for $n\geq 1$.
+		\\\\
+        Enter the values exactly, simplified as much as possible.\\\\
+        
+        The first three terms of the sequence are: $a_1=$\ansref, $a_2=$\ansref and $a_3=$\ansref.
+ 		}
+       		}
+		
+    	\begin{answer}
+		\solution{loes0}
+		\end{answer}
+            
+		\begin{answer}
+		\solution{loes1}
+		\end{answer}
+        
+        \begin{answer}
+		\solution{loes2}
+		\end{answer}
+     \lang{de}{
+        \explanation{Verwenden Sie das jeweils zuvor berechnete Glied der Folge, um das nächste zu bestimmen.} }
+    \lang{en}{
+        \explanation{Use the previous term in the sequence to compute the one following it.}
+    }
+	\end{quickcheck}
+\end{quickcheckcontainer}
+
+\lang{de}{
+Um Folgen zu verstehen, werden wir sie auf bestimmte Eigenschaften untersuchen. Meistens
+wird es darum gehen, ob die Werte der Folge eine bestimmte Tendenz aufweisen (z.\,B. alle steigen)
+oder die Werte in einem  beschränkten Bereich enthalten sind. 
+}
+\lang{en}{
+To understand sequences, we will consider various properties they can have.
+These will mostly have to do with whether the values of the sequence
+display any kind of trend (for example, if they are increasing) or whether they are contained in a bounded region.
+}
+
+\begin{definition}
+\lang{de}{
+Eine Folge $(a_n)_{n\in \N}$ heißt ...
+
+\begin{itemize}
+\item ... \notion{nach oben beschränkt}, wenn es eine reelle Zahl $C$ gibt, die größer als alle Glieder der Folge ist.
+
+\item ... \notion{nach unten beschränkt}, wenn es eine reelle Zahl $c$ gibt, die kleiner als alle Glieder der Folge ist.
+
+\item ... \notion{beschränkt}, wenn sie sowohl nach oben als auch nach unten beschränkt ist.
+
+\item ... \notion{monoton wachsend}, wenn $a_1 \leq a_2 \leq a_3 \leq \ldots$ gilt.
+
+\item ... \notion{streng monoton wachsend}, wenn $a_1 < a_2 < a_3 < \ldots$ gilt.
+
+\item ... \notion{monoton fallend}, wenn $a_1 \geq a_2 \geq a_3 \geq \ldots$ gilt.
+
+\item ... \notion{streng monoton fallend}, wenn $a_1 > a_2 > a_3 > \ldots$ gilt.
+ 
+
+\end{itemize}
+}
+\lang{en}{
+A sequence $(a_n)_{n\in \N}$ is called ...
+
+\begin{itemize}
+\item ... \notion{bounded from above} if there exists a real number $C$ that is greater than every term of the sequence.
+
+\item ... \notion{bounded from below} if there exists a real number $c$ that is less than every term of the sequence.
+
+\item ... \notion{bounded} if it is both bounded from above and from below.
+
+\item ... \notion{monotonically increasing} if $a_1 \leq a_2 \leq a_3 \leq \ldots$.
+
+\item ... \notion{strictly monotonically increasing} if $a_1 < a_2 < a_3 < \ldots$.
+
+\item ... \notion{monotonically decreasing} if $a_1 \geq a_2 \geq a_3 \geq \ldots$.
+
+\item ... \notion{strictly monotonically decreasing} if $a_1 > a_2 > a_3 > \ldots$.
+ 
+
+\end{itemize}
+}
+\end{definition}
+
+
+% Die beiden Begriffe der \emph{Monotonie} und \emph{Beschränktheit}~ werden im folgenden Video anhand eines Beispiels erläutert:
+% \begin{center}
+% \href{https://www.hm-kompakt.de/video?watch=301}{\image[75]{00_Videobutton_schwarz}}\\
+% \end{center}
+
+
+\begin{example}\label{ex:monotone-folgen}
+
+\begin{tabs*}[\initialtab{0}] 
+  
+\tab{\lang{de}{Monotonie} \lang{en}{Monotonicity}}
+\lang{de}{
+\begin{enumerate}
+\item \lang{de}{Konstante Folgen sind sowohl monoton wachsend 
+als auch monoton fallend.}
+\lang{en}{Constant sequence are both monotonically increasing
+and monotonically decreasing.}
+\item \lang{de}{Die Folge $(a_n)_{n\in \N}=((-1)^n)_{n\in \N}$ ist weder monoton wachsend noch monoton fallend, denn sie
+nimmt immer abwechselnd die Werte $1$ und $-1$ an.}
+\lang{en}{The sequence $(a_n)_{n\in \N}=((-1)^n)_{n\in \N}$ is neither monotonically increasing
+nor monotonically decreasing, as it alternats between the values $1$ and $-1$.}
+\item  \lang{de}{Arithmetische Folgen $(c+dn)_{n\geq 0}$ sind streng monoton wachsend, wenn $d>0$ ist, und streng monoton
+fallend, wenn $d<0$ ist, denn für alle $n\in \Nzero$ ist 
+\begin{align*} 
+a_{n+1} &=a_n+d >a_n,& \ \text{ falls } \ d>0,\\ 
+a_{n+1} &=a_n+d <a_n,& \ \text{ falls } \ d<0.
+\end{align*}}
+\lang{en}{Arithmetic sequences $(c+dn)_{n\geq 0}$ are strictly monotonically increasing if $d>0$ and strictly
+monotonically decreasing if $d < 0$, because for every $n \in \Nzero$, we have
+\begin{align*} 
+a_{n+1} &=a_n+d >a_n,& \ \text{ falls } \ d>0,\\ 
+a_{n+1} &=a_n+d <a_n,& \ \text{ falls } \ d<0.
+\end{align*}}
+\item \lang{de}{Bei  $(a_n)_{n\geq 0}=(uq^n)_{n\geq 0}$ hängt die Monotonie sowohl von 
+$q$ als auch von $u$ ab.\\
+Ist $q<0$, so ist die Folge nicht monoton, denn die Glieder der Folge sind abwechselnd positiv und
+negativ (vgl. 2. Beispiel, wo $u=1$ und $q=-1$ ist).
+
+Für $q>0$ haben alle $a_n$ das gleiche Vorzeichen wie $u$. Wir erhalten
+folgende $5$ Fälle:
+\begin{itemize}
+\item $u>0$, $q>1$: Dann ist $a_n>0$ und $a_{n+1}=qa_n>a_n$ für alle $n\geq 0$. Also ist die 
+Folge streng monoton wachsend.
+\item $u>0$, $0<q<1$: Dann ist $a_n>0$ und $a_{n+1}=qa_n<a_n$ für alle $n\geq 0$. Also ist die 
+Folge streng monoton fallend.
+\item $u<0$, $q>1$: Dann ist $a_n<0$ und $a_{n+1}=qa_n<a_n$ für alle $n\geq 0$. Also ist die 
+Folge streng monoton fallend.
+\item $u<0$, $0<q<1$: Dann ist $a_n<0$ und $a_{n+1}=qa_n>a_n$ für alle $n\geq 0$. Also ist die 
+Folge streng monoton wachsend.
+\item  $q=1$: Dann ist die Folge konstant (s.\,o.).
+\end{itemize}
+}
+\lang{en}{Whether  $(a_n)_{n\geq 0}=(uq^n)_{n\geq 0}$ is monotonic
+depends on both of $q$ and $u$.
+If $q<0$, then the sequence is not monotonic, as the terms of
+the sequence alternate between positive and negative values
+(compare Example 2, where $u=1$ and $q=-1$).
+
+If $q>0$, then all $a_n$ have the same sign as $u$.
+We have $5$ cases to distinguish:
+\begin{itemize}
+\item $u>0$, $q>1$: Here, $a_n>0$ and $a_{n+1}=qa_n>a_n$ for all $n\geq 0$,
+so the sequence is strictly monotonically increasing.
+\item $u>0$, $0<q<1$: Here, $a_n>0$ and $a_{n+1}=qa_n<a_n$ for all $n\geq 0$,
+so the sequence is strictly monotonically decreasing.
+\item $u<0$, $q>1$: Here, $a_n<0$ and $a_{n+1}=qa_n<a_n$ for all $n\geq 0$,
+so the sequence is strictly monotonically decreasing.
+\item $u<0$, $0<q<1$: Here, $a_n<0$ and $a_{n+1}=qa_n>a_n$ for all $n\geq 0$,
+so the sequence is strictly monotonically increasing.
+\item  $q=1$: This is a constant sequence (see above).
+\end{itemize}
+}
+
+\end{enumerate}
+}
+\tab{\lang{de}{Beschränktheit} \lang{en}{Boundedness}}
+\lang{de}{
+\begin{enumerate}
+\item Konstante Folgen sind beschränkt. 
+\item Die Folge $(a_n)_{n\in \N}=((-1)^n)_{n\in \N}$ hat als Wertemenge $\{-1;1\}$. Sie ist also auch beschränkt.
+\item  Arithmetische Folgen, die nicht konstant sind, sind zwar streng monoton fallend oder wachsend und daher in eine Richtung beschränkt, aber nicht in die andere. 
+\item Bei geometrischen Folgen hängt die Frage nach der Beschränktheit von $u$ und $q$ ab. \\
+Ist $|q|\leq 1$ so ist die Folge beschränkt, denn $|a_n|=|uq^n|=|u|\cdot |q|^n \leq |u|$ für alle $n\in\Nzero$, 
+weshalb die Folge durch $|u|+1$ nach oben beschränkt ist. Nach unten ist sie z.\,B. durch $-(|u|+1)$ beschränkt. \\
+Für $q>1$ ist die Folge zwar monoton und daher in eine Richtung beschränkt, aber nicht in die andere. Und für $q<-1$
+ist die Folge weder nach oben noch nach unten beschränkt. 
+\end{enumerate}
+}
+\lang{en}{
+\begin{enumerate}
+\item Constant sequences are bounded. 
+\item The sequence $(a_n)_{n\in \N}=((-1)^n)_{n\in \N}$ has the set of values $\{-1,1\}$ so it is also bounded.
+\item  Arithmetic sequences that are not constant are strictly monotonic
+and therefore bounded in one direction but not in the other.
+\item For geometric sequences, boundedness depends on $q$. \\
+If $|q| \leq 1$, then the sequence is bounded because $|a_n|=|uq^n| = |u|\cdot |q|^n \leq |u|$
+for every $n \in \Nzero$, so the sequence is bounded from above
+by $|u|+1$ and from below by $-|u|-1$.\\
+For $q>1$, the sequence is monotonic and therefore bounded in one direction, but not in the other.
+If $q<-1$, then the sequence is neither bounded from above nor from below.
+\end{enumerate}
+}
+\end{tabs*}
+\end{example}
+
+
+\section{\lang{de}{Folgen und Konvergenz} \lang{en}{Sequences and convergence}}
+\lang{de}{Dadurch, dass Folgen meist unendlich sind, stellt sich die Frage, ob sich die Folge \glqq langfristig einem Zielwert\grqq annähert. Dies führt auf den
+Begriff des Grenzwerts. Eine Folge mit Grenzwert heißt \emph{konvergent}.}
+
+\lang{en}{
+The fact that sequences are generally infinite raises the question of whether 
+a given sequence tends to a target value "in the long run".
+This leads to the concept of a limit. A sequence with a limit is called \emph{convergent}.
+}
+
+\begin{definition}\label{def:folgenkonvergent}
+\lang{de}{Man sagt, dass eine Folge reeller Zahlen $(a_n)_{n\in \N}$ gegen eine Zahl $a$ \notion{konvergiert}, wenn f"ur jeden noch so 
+kleinen Abstand $\epsilon > 0$ eine natürliche Zahl $N$ existiert, sodass ab $a_N$ alle weiteren Glieder der Folge weniger als  
+$\epsilon$ von $a$ entfernt sind. Mathematisch exakt heißt das
+\[ | a_n - a | < \epsilon  \ \text{für alle } \ n \geq N.\]
+Die Zahl $a$ nennt man \notion{Limes} oder \notion{Grenzwert} der 
+Folge  $(a_n)_{n\in \N}$ und schreibt
+\[  \lim_{n\to\infty} a_n =a. \]}
+\lang{en}{A sequence of real numbers $(a_n)_{n\in \N}$ is said to
+\notion{converge} to a number $a$ if, for every arbitrarily small
+distance $\epsilon > 0$, there exists a natural number $N$ such that
+all terms of the sequence after $a_N$ are at a distance of less
+than $\epsilon$ from $a$. This is written mathematically as
+\[ | a_n - a | < \epsilon  \ \text{for all } \ n \geq N.\]
+The number $a$ is called the \notion{limit} of the sequence $(a_n)_{n\in \N}$,
+written \[  \lim_{n\to\infty} a_n =a. \]
+}
+
+\lang{de}{Eine Folge, die gegen $0$ konvergiert, nennt man \notion{Nullfolge}. Eine Folge, die nicht konvergiert, 
+nennt man \notion{divergent}. }
+\lang{en}{
+A sequence that converges to $0$ is also called a \notion{null sequence}.
+A sequence that does not converge is called \notion{divergent}.
+}
+
+\lang{de}{
+Gibt es für jedes $C >0$ eine natürliche Zahl $N$, sodass $x_n > C$ für alle $n \geq N$ gilt, dann schreiben wir
+auch $\lim_{n \to \infty} x_n = \infty$. Genauso schreiben wir $\lim_{n \to \infty} x_n = -\infty$, wenn 
+$x_n < -C$ für alle $n \geq N$ gilt. In diesen beiden Fällen nennen wir die 
+Folge \notion{bestimmt divergent}.}
+\lang{en}{
+If, for every $C > 0$, there exists a natural number $N$ such that
+$x_n > C$ for all $n \ge N$, then we write $\lim_{n \to \infty} x_n = \infty$.
+Similarly, we write $\lim_{n \to \infty} x_n = -\infty$ if $x_n < -C$ for all $n \geq N$.
+In both of these cases, the sequence is called \notion{properly divergent}.
+}
+\end{definition}
+
+%\image{konvergenz1}
+
+\begin{example}\label{ex:einfache-folgen}
+\begin{enumerate}
+\item \lang{de}{Für $c\in \R$ konvergiert die konstante Folge $(a_n)_{n\in \N}$ mit $a_n=c$ für alle $n\in \N$ 
+gegen die Zahl $c$. Man kann nämlich für jedes $\epsilon>0$ die Zahl $N=1$ wählen und erhält für alle
+$n\geq N=1$:
+\[  | a_n -c|=|c-c|=0<\epsilon, \]
+wie gefordert.}
+\lang{en}{For any $c\in \R$, the constant sequence $(a_n)_{n\in \N}$ with $a_n=c$ for all $n \in \N$
+converges to $c$. Namely, for every $\epsilon>0$ we can choose $N=1$ to find
+\[  | a_n -c|=|c-c|=0<\epsilon \]
+for all $n\geq N=1$.
+}
+\item \lang{de}{Die Folge $(a_n)_{n\in \N}$ mit $a_n=(-1)^n$ für alle $n\in \N$ konvergiert nicht, ist also
+divergent. Wäre nämlich $a$ ein Grenzwert und z.\,B. $\epsilon = 0,01$, so müssten die Glieder der Folge 
+ab einem $a_N$ alle im Intervall $[a-0,01; a + 0,01]$ liegen. Dieses Intervall ist aber sehr schmal
+und insbesondere zu klein, um sowohl die Zahl $1$ als auch die Zahl $-1$ zu umfassen. }
+\lang{en}{The sequence $(a_n)_{n\in \N}$ with $a_n=(-1)^n$ for all $n \in \N$ does not converge,
+i.e. it is divergent. Namely, if $a$ were a limit and $\epsilon=0.01$ (for example)
+then all of the terms of the sequence beginning with some $a_N$ would have to
+lie in the interval $[a-0,01; a + 0,01]$. However, this interval is too narrow
+to contain both the number $1$ and the number $-1$.
+}
+\item \lang{de}{\emph{Harmonische Folge:} Die Folge $(a_n)_{n\in \N}$ mit $a_n=\frac{1}{n}$ ist eine Nullfolge, d.\,h. $\lim_{n\to \infty} \frac{1}{n}=0$.\\ 
+Zu $\epsilon>0$ kann man nämlich eine Zahl $N>\frac{1}{\epsilon}$ wählen und 
+dann gilt für alle $n\geq N$:
+\[ |a_n-0|=|\frac{1}{n}|=\frac{1}{n}<\frac{1}{N}<\epsilon. \]}
+\lang{en}{\emph{Harmonic sequence:} The sequence $(a_n)_{n\in \N}$ with $a_n = \frac{1}{n}$ is a null sequence,
+i.e. $\lim_{n\to \infty} \frac{1}{n}=0$.\\
+Namely, for any $\epsilon>0$, we can choose a number $N>\frac{1}{\epsilon}$,
+and then
+\[ |a_n-0|=|\frac{1}{n}|=\frac{1}{n}<\frac{1}{N}<\epsilon\]
+for every $n\geq N$.
+}
+\item \lang{de}{Die \emph{Eulersche Zahl} $e = 2,71828\ldots$ kann als Grenzwert der Folge $(a_n)$ mit $a_n = (1+\frac{1}{n})^n$ definiert werden. }
+\lang{en}{\emph{Euler's number} $e = 2.71828\ldots$ can be defined
+as the limit of the sequence $(a_n)_{n\in \N}$ with $a_n = (1+\frac{1}{n})^n$.}
+\item \lang{de}{Nicht-konstante arithmetische Folgen und geometrische Folgen $(uq^n)_{n\in \Nzero}$ mit $|q|>1$ konvergieren
+nicht, denn die Abstände zwischen den Gliedern der Folge werden nicht kleiner und können sich so nicht einer festen Zahl annähern. Die Folge ist insbesondere nicht 
+beschränkt. }
+\lang{en}{Nonconstant arithmetic sequences and geometric sequences $(uq^n)_{n\in \Nzero}$ with $|q|>1$
+do not converge, as the distance between consecutive terms of the sequence does not decrease and in particular
+do not tend to a fixed number. These sequences are not even bounded.}
+
+\lang{de}{Geometrische Folgen $(uq^n)_{n\in \Nzero}$ mit $|q|<1$ sind Nullfolgen, denn die Potenzen einer Zahl, deren Betrag kleiner $1$ ist, nähern sich dem Wert $0$ 
+immer weiter an. (Für $q = 0,5$ ist etwa $q^2 = 0,25$, $q^3 = 0,125$, $q^4 = 0,0625$, $\ldots$)}
+\lang{en}{Geometric sequences $(uq^n)_{n\in \Nzero}$ with $|q|<1$ are null sequences, 
+because the powers of a number whose absolute value is less than 1 tend to $0$.
+(For $q=0.5$, for example, $q^2 = 0.25$, $q^3 = 0.125$, $q^4 = 0.0625$, $\ldots$)}
+\end{enumerate}
+\end{example}
+
+\lang{de}{Das folgende Theorem ist zwar eher theoretischer Natur, aber kann in einigen Fällen benutzt werden, um die Existenz eines Grenzwertes auszuschließen. 
+}
+\lang{en}{
+Although the following theorem is of a rather theoretical nature,
+it can used in some cases to rule out the existence of a limit.
+}
+
+\begin{theorem}\label{thm:eindeutigkeitgw}
+\begin{enumerate}
+\item \lang{de}{Eine Folge besitzt höchstens einen Grenzwert. Das heißt, wenn $(a_n)_{n\in \N}$ konvergiert, ist der
+Grenzwert eindeutig bestimmt.}
+\lang{en}{
+A sequence can have at most one limit. That is, if $(a_n)_{n\in \N}$ converges,
+then its limit is unique.
+}
+\item \lang{de}{Eine konvergente Folge ist beschränkt.}
+\lang{en}{Every convergent sequence is bounded.}
+\end{enumerate}
+\end{theorem}
+
+\begin{proof*}
+\lang{de}{Der Beweis des Theorems kann bei Interesse im Hauptkurs \ref[konvergenz][hier]{thm:eindeutigkeitgw} nachgelesen werden.}
+\lang{en}{The interested reader can find the proof of this theorem
+\ref[konvergenz][here]{thm:eindeutigkeitgw} in the main course.}
+\end{proof*}
+
+
+\lang{de}{
+Um Grenzwerte konkret zu berechnen, sind die folgenden Regeln sehr hilfreich.
+}
+
+\lang{en}{
+The following rules are very useful for computing limits in practice.
+}
+
+\begin{rule}[\lang{de}{Grenzwertregeln} \lang{en}{Limit rules}]\label{grenzwertregeln}
+\lang{de}{Es seien  $(a_n)_{n\in \N}$, $(b_n)_{n\in \N}$ konvergente Folgen mit
+$\lim_{n\to\infty} a_n =a$ und $\lim_{n\to\infty} b_n =b$. Dann gilt für alle $\alpha, \beta \in \R$:}
+\lang{en}{
+Let $(a_n)_{n\in \N}$, $(b_n)_{n\in \N}$ be convergent sequences with
+$\lim_{n\to\infty} a_n =a$ and $\lim_{n\to\infty} b_n =b$.
+For any $\alpha, \beta \in \R$:
+}
+\begin{enumerate}
+\item \lang{de}{Die Folge $( \alpha a_n + \beta b_n )_{n\in \N}$ konvergiert und \[ \lim_{n\to\infty} ( \alpha a_n + \beta b_n )
+= \alpha \cdot a + \beta \cdot b. \]}
+\lang{en}{The sequence $( \alpha a_n + \beta b_n )_{n\in \N}$ converges and \[ \lim_{n\to\infty} ( \alpha a_n + \beta b_n )
+= \alpha \cdot a + \beta \cdot b. \]}
+\item \lang{de}{Die Folge $( a_n \cdot b_n )_{n\in \N}$ konvergiert und \[\lim_{n\to\infty} ( a_n \cdot b_n ) = a \cdot b. \]}
+\lang{en}{The sequence $( a_n \cdot b_n )_{n\in \N}$ converges and \[\lim_{n\to\infty} ( a_n \cdot b_n ) = a \cdot b. \]}
+\item \lang{de}{Falls $b_n \neq 0$ für alle $n \in \N$ und $b \neq 0$, so konvergiert die Folge $( \frac{a_n}{b_n} )_{n\in \N}$ und
+\[  \lim_{n\to\infty} ( \frac{a_n}{b_n} )=\frac{a}{b}.\]}
+\lang{en}{If $b_n \neq 0$ for all $n \in \N$ and $b \neq 0$, then the sequence $( \frac{a_n}{b_n} )_{n\in \N}$ converges and
+\[  \lim_{n\to\infty} ( \frac{a_n}{b_n} )=\frac{a}{b}.\]}
+\item \lang{de}{Gilt $a_n\leq b_n$ für alle $n\in \N$, dann gilt auch 
+für die Grenzwerte
+\[ \lim_{n\to \infty}  a_n \leq \lim_{n\to \infty} b_n.\]}
+\lang{en}{If $a_n\leq b_n$ for all $n\in \N$, then this also
+carries over to the limits:
+\[ \lim_{n\to \infty}  a_n \leq \lim_{n\to \infty} b_n.\]}
+\end{enumerate}
+\end{rule}
+
+
+\begin{proof*}
+\lang{de}{Der Beweis der 1., 2. und 3. Aussage kann im Hauptkurs \ref[konvergenz][hier]{grenzwertregeln} nachgelesen werden. Es wird dort mit Hilfe
+der Rechenregeln für Beträge die Definition von Konvergenz nachgewiesen. Der Beweis der 4. Aussage findet sich 
+\ref[konvergenz][hier]{rule:grenzwerte-vergleichen}.}
+\lang{en}{
+The proofs of the 1st, 2nd and 3rd claims can be found 
+\ref[konvergenz][here]{grenzwertregeln} in the main course. 
+The proofs apply the rules for arithmetic with absolute values
+to verify the definition of convergence. 
+The proof of the 4th claim can be found
+\ref[konvergenz][here]{rule:grenzwerte-vergleichen}.}
+\end{proof*}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{1}
+\begin{quickcheck}
+		\field{real}
+		\type{input.number}
+		\begin{variables}
+			\randint{a}{2}{6}
+			\randint{b}{2}{8}
+			\randint{c}{2}{6}
+			\randint{d}{3}{6}
+		    \function{ff}{a/n+b)}
+            \function{gg}{c+(1/d)^n}
+            \function{loes}{b/c}
+		\end{variables}
+
+
+         \lang{de}{\text{Bestimmen Sie den Grenzwert $a$ der konvergenten Folge
+         $(a_n)_{n\in\N}$ definiert durch $a_n:=
+         \frac{\frac{\var{a}}{n}+\var{b}}{\var{c}+(\frac{1}{\var{d}})^n}$\\\\
+         
+         Der Grenzwert von $(a_n)_{n\in\N}$ lautet: $a=$\ansref}}
+         \lang{en}{\text{Find the limit $a$ of the convergence sequence
+         $(a_n)_{n\in\N}$ defined by $a_n:=
+         \frac{\frac{\var{a}}{n}+\var{b}}{\var{c}+(\frac{1}{\var{d}})^n}$\\\\
+         
+         The limit of $(a_n)_{n\in\N}$ is: $a=$\ansref}}
+			
+
+		\begin{answer}
+        	\solution{loes}
+	    \end{answer}
+		\lang{de}{\explanation{Betrachten Sie die Grenzwerte der einzelnen konvergenten Folgen $p_{n}=
+        \frac{\var{a}}{n}$, $q_{n}=p_{n}+\var{b}$, $r_{n}=(\frac{1}{\var{d}})^n$ 
+        sowie $s_{n}=\var{c}+r_{n}$ und verwenden Sie dann die Grenzwertregeln. } }
+        \lang{en}{
+      \explanation{Consider the limits of the convergent sequences
+      $\frac{\var{a}}{n}$, $q_{n}=p_{n}+\var{b}$, $r_{n}=(\frac{1}{\var{d}})^n$ 
+      and $s_{n}=\var{c}+r_{n}$ separately, and then use the limit rules.}
+        }
+	\end{quickcheck}
+\end{quickcheckcontainer}
+
+
+
+\begin{example}
+\begin{enumerate}
+\item \lang{de}{Der Grenzwert der Folge $(a_n)_{n\in\N}$ definiert durch $a_n=\frac{1}{n^2}$
+lässt sich mit Hilfe der Grenzwertregeln  bestimmen:
+\[ \lim_{n\to \infty} \frac{1}{n^2}= (\lim_{n\to \infty} \frac{1}{n})\cdot (\lim_{n\to \infty} \frac{1}{n})=0\cdot 0=0. \]
+Allgemeiner gilt sogar für alle $k\in\N$
+\[\lim_{n\to \infty} \frac{1}{n^k}=(\lim_{n\to \infty} \frac{1}{n})^k =0^k=0.\]}
+\lang{en}{The limit of the sequence $(a_n)_{n\in\N}$ defined by $a_n=\frac{1}{n^2}$
+can be determined using the limit rules:
+\[ \lim_{n\to \infty} \frac{1}{n^2}= (\lim_{n\to \infty} \frac{1}{n})\cdot (\lim_{n\to \infty} \frac{1}{n})=0\cdot 0=0. \]
+More generally, for any $k\in\N$,
+\[\lim_{n\to \infty} \frac{1}{n^k}=(\lim_{n\to \infty} \frac{1}{n})^k =0^k=0.\]}
+\item \lang{de}{Für die Folge $(a_n)_{n\in \N}$ mit $a_n=\frac{2n^2-3n+1}{n^2+3n-3}$ lassen sich die Grenzwertregeln nicht direkt anwenden,
+da die Folgen $(n^2)_{n\in \N}$ und $(n)_{n\in \N}$ nicht konvergieren. Wenn wir den Bruch jedoch durch die höchste Potenz
+$n^2$ kürzen, erhalten wir 
+\[ a_n=\frac{2n^2-3n+1}{n^2+3n-3}=\frac{2-3\cdot \frac{1}{n}+\frac{1}{n^2}}{1+3\cdot \frac{1}{n}-3\cdot \frac{1}{n^2}}.\]
+Für den Zähler gilt
+\[ \lim_{n\to \infty} \left(2-3\cdot \frac{1}{n}+\frac{1}{n^2}\right)= \lim_{n\to \infty} 2 -3\cdot\lim_{n\to \infty}\frac{1}{n}+
+ \lim_{n\to \infty} \frac{1}{n^2} =2-3\cdot 0+0 =2, \]
+und für den Nenner
+\[ \lim_{n\to \infty} \left(1+3\cdot \frac{1}{n}-3\cdot \frac{1}{n^2} \right)=1+3\cdot 0 -3\cdot 0=1.\]
+Man kann also die Regel für Quotienten anwenden und bekommt:
+\[ \lim_{n\to \infty} a_n =\lim_{n\to \infty} \frac{2-3\cdot \frac{1}{n}+\frac{1}{n^2}}{1+3\cdot \frac{1}{n}-3\cdot \frac{1}{n^2}}
+= \frac{2}{1}=2. \]}
+\lang{en}{
+The limit rules cannot be applied directly to the sequence $(a_n)_{n\in \N}$ with $a_n=\frac{2n^2-3n+1}{n^2+3n-3}$
+because the sequences $(n^2)_{n\in \N}$ and $(n)_{n\in \N}$ do not converge.
+However, if we divide both the numerator and denominator of the fraction
+by the greatest power $n^2$, then we obtain
+\[ a_n=\frac{2n^2-3n+1}{n^2+3n-3}=\frac{2-3\cdot \frac{1}{n}+\frac{1}{n^2}}{1+3\cdot \frac{1}{n}-3\cdot \frac{1}{n^2}}.\]
+For the numerator, we have
+\[ \lim_{n\to \infty} \left(2-3\cdot \frac{1}{n}+\frac{1}{n^2}\right)= \lim_{n\to \infty} 2 -3\cdot\lim_{n\to \infty}\frac{1}{n}+
+ \lim_{n\to \infty} \frac{1}{n^2} =2-3\cdot 0+0 =2, \]
+ and for the denominator,
+ \[ \lim_{n\to \infty} \left(1+3\cdot \frac{1}{n}-3\cdot \frac{1}{n^2} \right)=1+3\cdot 0 -3\cdot 0=1.\]
+Now we can use the limit rule for quotients to obtain
+\[ \lim_{n\to \infty} a_n =\lim_{n\to \infty} \frac{2-3\cdot \frac{1}{n}+\frac{1}{n^2}}{1+3\cdot \frac{1}{n}-3\cdot \frac{1}{n^2}}
+= \frac{2}{1}=2. \]
+}
+\item \lang{de}{Um den Grenzwert für die Folge $(a_n)_{n\in \N}$ mit $a_n=\frac{2n^2-3n+1}{n^3+2n^2-4}$ zu berechnen, geht man wie im vorigen
+Beispiel vor und kürzt den Bruch zunächst durch die höchste Potenz des Nenners, hier also $n^3$:
+\[ \lim_{n\to \infty} a_n =\lim_{n\to \infty} \frac{2n^2-3n+1}{n^3+2n^2-4}
+=\lim_{n\to \infty}\frac{2\cdot \frac{1}{n} -3\cdot \frac{1}{n^2}+\frac{1}{n^3}}{1+2\cdot \frac{1}{n}-4\cdot \frac{1}{n^3}}
+=\frac{2\cdot 0-3\cdot 0+0}{1+2\cdot 0-4\cdot 0}=\frac{0}{1}=0.\]
+Die Folge ist also eine Nullfolge.}
+\lang{en}{
+To the determine the limit of the sequence $(a_n)_{n\in \N}$ with $a_n=\frac{2n^2-3n+1}{n^3+2n^2-4}$,
+we emulate the previous example and divide both the numerator and denominator
+by the highest power of the denominator, which in this case is $n^3$:
+\[ \lim_{n\to \infty} a_n =\lim_{n\to \infty} \frac{2n^2-3n+1}{n^3+2n^2-4}
+=\lim_{n\to \infty}\frac{2\cdot \frac{1}{n} -3\cdot \frac{1}{n^2}+\frac{1}{n^3}}{1+2\cdot \frac{1}{n}-4\cdot \frac{1}{n^3}}
+=\frac{2\cdot 0-3\cdot 0+0}{1+2\cdot 0-4\cdot 0}=\frac{0}{1}=0.\]
+Hence, this sequence is a null sequence.}
+\item \lang{de}{Folgen von obigem Typ, bei denen die höchste Potenz im Zähler größer als die höchste Potenz im Nenner ist, konvergieren nicht,
+wie wir am Beispiel $a_n=\frac{2n^4-3n+1}{n^3+2n^2-4}$ erläutern:\\
+Zunächst kürzen wir wieder durch die höchste Potenz des Nenners, hier $n^3$, und erhalten
+$a_n=\frac{2\cdot n -3\cdot \frac{1}{n^2}+\frac{1}{n^3}}{1+2\cdot \frac{1}{n}-4\cdot \frac{1}{n^3}}$.
+Die Folge der Nenner $b_n=1+2\cdot \frac{1}{n}-4\cdot \frac{1}{n^3}$ ist nun konvergent gegen $1$.\\
+Wäre die Folge $(a_n)_{n\in \N}$ konvergent, so wäre auch die Folge $(a_nb_n)_{n\in \N}$ konvergent, aber wegen
+$a_nb_n=2\cdot n -3\cdot \frac{1}{n^2}+\frac{1}{n^3}>2\cdot n -3$ ist dies eine unbeschränkte Folge im Widerspruch zur Konvergenz.
+}
+\lang{en}{
+Sequences of the above sort in which the highest power of $n$ is greater
+than the highest power in the denominator do not converge,
+as we will demonstrate with the example $a_n=\frac{2n^4-3n+1}{n^3+2n^2-4}$. \\
+First, we divide by the highest power in the denominator as before,
+i.e. $n^3$, to obtain
+$a_n=\frac{2\cdot n -3\cdot \frac{1}{n^2}+\frac{1}{n^3}}{1+2\cdot \frac{1}{n}-4\cdot \frac{1}{n^3}}$.
+The sequence of denominators $b_n=1+2\cdot \frac{1}{n}-4\cdot \frac{1}{n^3}$
+converges to $1$. If the sequence $(a_n)_{n\in \N}$ were convergent,
+then the sequence $(a_nb_n)_{n\in \N}$ would also converge, but
+$a_nb_n=2\cdot n -3\cdot \frac{1}{n^2}+\frac{1}{n^3}>2\cdot n -3$
+shows that the latter sequence is unbounded and in particular divergent.
+}
+\item \lang{de}{Die Folge $(a_n)_{n\in\mathbb{N}}=n^7\cdot 0,5^n$ konvergiert und ist eine Nullfolge. Mit den Regeln von de l'Hospital 
+im Teil Differentialrechnung \ref[content_11_AbleitungSaetze][werden wir noch lernen]{thm:lhospital}, wie wir solche Grenzwerte bequem berechnen können. Ein elementarer Beweis 
+findet sich im \ref[konvergenz][Hauptkurs]{thm:exp-schlaegt-pol}. }
+\lang{en}{
+The sequence $(a_n)_{n\in\mathbb{N}}=n^7\cdot 0.5^n$ converges and it is
+a null sequence. In the section on differential calculus,
+\ref[content_11_AbleitungSaetze][we will learn]{thm:lhospital} how to
+calculate limits of this sort using L'Hôpital's rule.
+An elementary proof may be found in the \ref[konvergenz][main course]{thm:exp-schlaegt-pol}.
+}
+\item \lang{de}{Die Folge $(a_n)_{n\in\mathbb{N}}=\frac{2^n}{n^7}$ konvergiert nicht, denn der Kehrwert 
+ist $\frac{1}{a_n} = n^7 \cdot (0,5)^n$ und konvergiert gegen $0$ (siehe oben).
+
+Generell gilt: Eine Folge kann nicht konvergieren, wenn ihr Kehrwert eine Nullfolge ist.}
+
+\lang{en}{
+The sequence $(a_n)_{n\in \N} =\frac{2^n}{n^7}$ does not converge, because the
+reciprocal is $\frac{1}{a_n} = n^7 \cdot (0.5)^n$ which converges to $0$
+(see above).
+
+In general: a sequence does not converge if its reciprocals form a null sequence.
+}
+
+
+
+\end{enumerate}
+\end{example}
+
+
+
+\begin{block}[info]
+\lang{de}{Bis wir im Teil Differentialrechnung weitere Regeln für Grenzwerte lernen, nutzen wir die folgende \textbf{Merkregel}:
+\[\text{Exponentielles Wachstum setzt sich durch!}\]}
+
+\lang{en}{Until we learn about further rules for limits in the
+differential calculus sections, we will use the following \textbf{rule of thumb}:
+\[\text{Exponential growth dominates!}\]
+}
+\end{block}
+
+
+
+\section{\lang{de}{Reihen} \lang{en}{Series}}
+
+
+\lang{de}{Eine Reihe ist eine besondere Folge. Man bildet sie aus einer anderen Folge, indem man deren Glieder aufsummiert.
+}
+\lang{en}{
+A series is a particular type of sequence. Series are formed from sequences
+by summing up their terms.
+}
+\begin{example}\label{ex:motivation-reihen}
+\begin{tabs*}[\initialtab{0}]
+\tab{\lang{de}{Kraftstoffverbrauch} \lang{en}{Fuel usage}}
+\lang{de}{Ein Unternehmen hat eine neue Maschine angeschafft.
+An jedem Tag wird die Menge des an dem Tag verbrauchten Kraftstoffes notiert.
+Wir erhalten eine Folge $(a_n)_{n\in\N}$, die den Kraftstoffverbrauch der Maschine
+am Tag $n$ seit der Anschaffung angibt.
+Nun möchte der Geschäftsleiter wissen, 
+wie viel Kraftstoff die Maschine im ersten Monat, im ersten Jahr oder allgemein nach Tag $n$ insgesamt verbraucht hat.
+
+Um den Verbrauch nach Tag $n$ zu erhalten, müssen wir den jeweiligen Verbrauch $a_1, \ldots, a_n$ der ersten $n$ Tage aufsummieren.
+Wir erhalten dann die Folge $(s_n)_{n\in \N}$ des Gesamtverbrauchs nach $n$ Tagen, die dann gegeben ist durch
+\[
+s_n = \sum_{k=1}^n a_k.
+\]
+Die Folge $(s_n)_{n\in \N}$ nennen wir dann auch Folge der Partialsummen oder auch \emph{Reihe}.
+}
+\lang{en}{
+A company has bought a new machine.
+Each day, the amount of fuel consumed by the machine is recorded.
+We obtain a sequence $(a_n)_{n\in \N}$ that describes the fuel
+used by the machine on the $n$-th day following its purchase.
+The manager would like to know how much fule the machine has consumed
+in the first month, the first year, or more generally by day $n$.\\
+
+To determine the fuel used by day $n$, we must sum up the fuel usage
+$a_1,...,a_n$ for the first $n$ days. We obtain the sequence $(s_n)_{n \in \N}$
+describing the cumulative fuel consumption after $n$ days,
+which is given by
+\[
+s_n = \sum_{k=1}^n a_k.
+\]
+The sequence $(s_n)_{n\in \N}$ is called the sequence of partial sums or \emph{series}.
+}
+\tab{\lang{de}{Geldschöpfung} \lang{en}{Money creation}}
+\lang{de}{[Das folgende Beispiel zeigt eine traditionelle Sichtweise der Geldschöpfung mit der Bank als
+Vermittlerin zwischen Sparern und Kreditnehmern. Diese Sicht ist nur bedingt richtig, aber als Modell verbreitet.]
+}
+\lang{en}{
+[The following example illustrates a traditional understanding of
+money creation with the bank as an intermediary between depositors
+and borrowers. This point of view is only partially correct
+but it is widespread as a model.
+]
+}
+
+\lang{de}{Herr Müller zahlt seine Ersparnisse von 10.000 Euro auf ein Bankkonto ein. Die Bank muss von dieser Einlage 
+10\% als Mindestreserve an die Notenbank transferieren, was Herrn Müller aber egal ist und er auch 
+nicht mitkriegt. Am gleichen Tag vergibt die Bank einen Kredit von 9000 Euro 
+an einen Koch, der dadurch eine neue Küche finanziert. }
+\lang{en}{Mr. Mueller deposits his savings of 10,000 euros into a
+bank account. The bank must transfer at least 10\% of the deposit
+as a reserve to the central bank, which is fine with Mr. Mueller
+and which he does not even notice.
+On the same day, the bank extends a loan of 9000 euros to a cook
+who uses it to finance a new kitchen.
+}
+
+\lang{de}{Über diverse Geschäfte gelangen die 9000 Euro an einen anderen Kunden der Bank, Frau Wagner, die diese wiederum
+auf ihr Konto einzahlt. Wieder gehen 10\%, also diesmal 900 Euro, als Mindestreserve an die Notenbank. Am gleichen 
+Tag vergibt die Bank einen Kredit über 8100 an einen anderen Kunden.}
+\lang{en}{
+Through a series of transactions, those 9000 euros make their way to another
+customer of the bank, Ms. Wagner, who in turn deposits them into her
+account. Again, 10\%, which in this case is 900 euros, is sent to the
+central bank as a minimal reserve. On the same day, the bank
+extends a loan of 8100 euros to a new customer.
+}
+
+\lang{de}{Obwohl es anfangs nur die 10.000 Euro von Herrn Müller gab, sind auf den Konten der Bank jetzt 19.000 Euro 
+verbucht. Hier ist neues (Buch-)Geld entstanden.}
+\lang{en}{
+Although there were only Mr. Mueller's 10,000 euros in the beginning,
+there are now 19,000 euros in the accounts of the bank.
+New (broad) money has been created.
+}
+
+\lang{de}{Wenn die 8100 Euro, die die Bank als Kredit vergeben hat, über Umwege wieder auf ein Konto eingezahlt werden, 
+erhöht sich die Geldmenge sogar noch weiter. Es stellt sich die Frage, ob am Ende unendlich viel Geld verbucht ist. }
+
+\lang{en}{If the 8100 euros that the bank has lent out
+make their way back into the bank's accounts then the amount of money
+will continue to increase.
+This raises the question of whether an infinite amount of money
+will have been deposited in the end.
+}
+
+\lang{de}{Die eingezahlten Beträge bilden eine geometrische Folge $(a_n)$ mit $a_n = 10.000 \cdot (0,9)^n$, weil 10\% Mindestreserve
+ jeweils abgehen. Die Gesamtsumme nach \glqq unendlich vielen\grqq Schritten ist 
+ \[
+ \sum_{n=0}^\infty 10.000 \cdot (0,9)^n = 10.000 \sum_{n=0}^\infty (0,9)^n.
+\]
+Wir werden mit Hilfe der geometrischen Reihe sehen, dass dieser Wert endlich ist, nämlich 100.000 Euro.}
+
+\lang{en}{
+The deposited sums form a geometric sequence $(a_n)$ with $a_n = 10,000 \cdot (0.9)^n$,
+since a 10\% reserve is deducted each time. The total sum
+after "infinitely many" steps is
+ \[
+ \sum_{n=0}^\infty 10,000 \cdot (0.9)^n = 10,000 \sum_{n=0}^\infty (0.9)^n.
+\]
+We will use the geometric series to see that this value is finite;
+in fact, it is 100,000 euros.
+}
+
+\end{tabs*}
+\end{example}
+%Ende erstes Motivationsbeispiel
+
+\begin{definition}\label{def:reihe}
+\lang{de}{Gegeben sei eine Folge $( a_k )_{k\in \N}$. Dann nennen wir 
+\[   s_n=a_1+a_2+\ldots+a_n=\sum_{i=1}^n a_i \]
+die $n$-te \notion{Partialsumme}. Es ist also $s_1=a_1$, $s_2=a_1+a_2$, $s_3=a_1+a_2+a_3$, etc.}
+\lang{en}{Given the sequence $(a_k)_{k \in \N}$, we call
+\[   s_n=a_1+a_2+\ldots+a_n=\sum_{i=1}^n a_i \]
+the $n$-th \notion{partial sum}. Thus $s_1=a_1$, $s_2=a_1+a_2$, $s_3=a_1+a_2+a_3$, etc.
+}
+
+\lang{de}{Eine \notion{Reihe} ist eine Folge von Partialsummen $(s_n)_{n \in \N}$.
+Wir schreiben dafür abkürzend  auch
+\[ \sum_{i=1}^\infty a_i. \]
+Wir beachten aber, dass diese Schreibweise nichts darüber aussagt, ob der Grenzwert der Partialsummen existiert.
+}
+\lang{en}{
+A \notion{series} is a sequence of partial sums $(s_n)_{n \in \N}$.
+We abbreviate this with \[ \sum_{i=1}^\infty a_i. \]
+Note, however, that this notation does not imply anything
+as to whether or not the limit of the partial sums exists.
+}
+\end{definition}
+\lang{de}{Wie auch schon bei Folgen muss der Start-Index nicht immer $n=1$ sein, sondern kann eine 
+beliebige ganze Zahl sein.}
+\lang{en}{Similarly to sequences, the index need not always start at $n=1$; it can start at any integer.}
+
+
+
+\lang{de}{Bisher ist die Schreibweise $\sum_{k=1}^\infty a_k$ für eine Reihe lediglich ein Symbol, da man unendlich viele Zahlen
+nicht aufsummieren kann. Wenn sich die Summe aber einem Grenzwert immer weiter annähert, je mehr Summanden man addiert hat, 
+dann können wir diesen Grenzwert als Wert der unendlichen Summe nehmen.
+
+Mathematisch exakter:}
+
+\lang{en}{
+So far, the notation $\sum_{k=1}^{\infty} a_k$ for a series is merely symbolic,
+as it is not possible to sum infinitely many numbers.
+However, if the sum approaches a limit as one includes more and more
+summands, then we can view this limit as the value of the infinite sum.
+
+More rigorously,
+} 
+\begin{definition}
+\lang{de}{Eine Reihe $\sum_{k=1}^\infty a_k$ heißt \notion{konvergent}, wenn die Folge $(s_n)_{n\in \N}$ ihrer endlichen Partialsummen 
+$s_n=\sum_{k=1}^n a_k$ gegen eine reelle Zahl $S$ konvergiert. Wir schreiben dann auch
+\[  \sum_{k=1}^\infty a_k= S. \] 
+
+Ist die Reihe $\sum_{k=1}^\infty a_k$ nicht konvergent, so heißt sie \notion{divergent}. 
+
+Eine Reihe $\sum_{k=1}^\infty a_k$ heißt \notion{absolut konvergent}, 
+wenn die Reihe der Absolutbeträge $\sum_{k=1}^\infty |a_k|$ konvergiert.
+}
+\lang{en}{
+A series $\sum_{k=1}^\infty a_k$ is called \notion{convergent}
+if the sequence $(s_n)_{n \in \N}$ of its finite partial sums
+$s_n = \sum_{k=1}^n a_k$ converges to a real number $S$.
+In this case, we write
+\[  \sum_{k=1}^\infty a_k= S. \] 
+
+If the series $\sum_{k=1}^\infty a_k$ does not converge
+then we call it \notion{divergent}.
+
+A series $\sum_{k=1}^\infty a_k$ is called \notion{absolutely convergent}
+if the series of absolute values $\sum_{k=1}^\infty |a_k|$ converges.
+}
+\end{definition}
+
+\lang{de}{In der Praxis haben wir meistens mit den folgenden beiden Beispielen zu tun, die wir daher etwas ausführlicher besprechen.
+}
+\lang{en}{
+In practice, we will usually encounter one of two
+examples below, which we therefore consider in more detail.
+}
+
+\begin{example}[\lang{de}{Arithmetische Reihe} \lang{en}{Arithmetic series}]\label{ex:arithmetischeReihe}
+\lang{de}{Es sei eine arithmetische Folge $(a_k)_{k \geq 0}$ mit $a_k = c + d\cdot k$ gegeben. Wenn wir zu dieser speziellen 
+Folge die Partialsummen $(s_n)_{n \geq 0}$ bilden, erhalten wir nach umsortieren
+\begin{align*}
+s_n &= (c + 0 \cdot d) + (c + 1 \cdot d) + \ldots + (c + n \cdot d) \\
+    &= c + c + \ldots + c + d + 2 \cdot d + \ldots + n \cdot d \\
+    &= (n+1) \cdot c + d \cdot (1 + 2 + \ldots + n).
+\end{align*}
+Die Zahlen von $1$ bis $n$ ergeben aufsummiert den Wert $\frac{n(n+1)}{2}$, wie im Hauptkurs
+\ref[content_02_vollstaendige_induktion][hier]{ex:vollst-ind} bewiesen wird. Wenn wir dies einsetzen, lautet die Formel für $s_n$
+\begin{align*}
+s_n = \sum_{k=0}^n \left(c + d \cdot k \right)= (n+1) \cdot c + d \cdot \frac{n(n+1)}{2}
+\end{align*}
+und dieser Ausdruck wird auch als \emph{arithmetische Summe} oder \emph{arithmetische Reihe} bezeichnet.
+Durch weiteres umformen können wir dies auch umschreiben zu 
+\begin{align*}
+s_n = (n+1) \cdot c + d \cdot \frac{n(n+1)}{2} = \frac{n+1}{2} \cdot \left( 2c + n \cdot d  \right)
+ = \frac{n+1}{2} \cdot \left( a_0  + a_n  \right).
+\end{align*}
+Mit dieser Formel lassen sich arithmetische Folgen schnell und einfach aufsummieren. 
+Wegen $\lim_{n \to \infty} s_n = \pm \infty$ konvergiert die unendliche Reihe $\sum_{k=0}^\infty \left( c + k \cdot d \right)$ 
+jedoch nie.}
+
+\lang{en}{
+Suppose we aregiven an arithmetic sequence $(a_k)_{k\geq 0}$ with $a_k=c+d \cdot k$.
+When we form the partial sums $(s_n)_{n \geq 0}$ of this particular sequence,
+then after rearranging we find
+\begin{align*}
+s_n &= (c + 0 \cdot d) + (c + 1 \cdot d) + \ldots + (c + n \cdot d) \\
+    &= c + c + \ldots + c + d + 2 \cdot d + \ldots + n \cdot d \\
+    &= (n+1) \cdot c + d \cdot (1 + 2 + \ldots + n).
+\end{align*}
+Adding the numbers $1$ to $n$ together yields the value $\frac{n(n+1)}{2}$,
+as proved \ref[content_02_vollstaendige_induktion][here]{ex:vollst-ind}
+in the main course. After plugging this in, the formula for $s_n$
+becomes
+\begin{align*}
+s_n = \sum_{k=0}^n \left(c + d \cdot k \right)= (n+1) \cdot c + d \cdot \frac{n(n+1)}{2}.
+\end{align*}
+This expression is also called an \emph{arithmetic sum} or \emph{arithmetic series}.
+By a further rearrangement, we can rewrite this as
+\begin{align*}
+s_n = (n+1) \cdot c + d \cdot \frac{n(n+1)}{2} = \frac{n+1}{2} \cdot \left( 2c + n \cdot d  \right)
+ = \frac{n+1}{2} \cdot \left( a_0  + a_n  \right).
+\end{align*}
+This formula makes it possible to sum up arithmetic sequences 
+quickly and easily. However, since $\lim_{n \to \infty} s_n = \pm \infty$,
+the infinite series $\sum_{k=0}^\infty (c+k \cdot d)$ never converges.
+}
+\end{example}
+
+
+\begin{example}[\lang{de}{Geometrische Reihe} \lang{en}{Geometric series}]\label{ex:konvergenz-geo-reihe}
+\lang{de}{Es sei $q\in \R$. Die \emph{geometrische Reihe} 
+\[\sum_{k=0}^\infty q^k\]
+ist eine Reihe, die sich dadurch auszeichnet, dass eine geometrische Folge $(q^k)_{k\geq 0}$ summiert wird.
+Die Folge der Partialsummen $(s_n)_{n \geq 0}$ ist die Folge der geometrischen Summen
+$s_n:=\sum_{k=0}^n q^k$. Für diese Partialsummen gibt es eine Formel, mit der die Summe schnell berechnet werden kann:
+\[
+s_n = 1 + q + q^2 + \ldots + q^n = \frac{1-q^{n+1}}{1-q},
+\]
+wenn $q \neq 1$ ist. Ein Beweis dieser Formel findet sich im \ref[content_02_vollstaendige_induktion][Hauptkurs]{rule:geom-summe}. Wir untersuchen
+nun das Konvergenzverhalten der geometrischen Reihe.
+\begin{enumerate}
+\item Für $q=1$ ist $s_n=\sum_{k=0}^n 1^k=n+1$. Diese Folge
+ist bestimmt divergent gegen $\infty$, also ist in diesem Fall
+\[ \sum_{k=0}^\infty 1^k =\infty.\] Dies ist auch der einzige Fall, in dem die geometrische Summenformel nicht 
+angewendet werden kann, um die Partialsummen auszurechnen. 
+\item Für $|q|<1$ ist nach der geometrischen Summenformel
+\[ s_n=\sum_{k=0}^n q^k=\frac{1-q^{n+1}}{1-q} \]
+und $\lim_{n\to \infty} q^{n+1}=0$. 
+Daher ist nach den Grenzwertregeln
+\[ \lim_{n\to \infty} s_n=\lim_{n\to \infty}\frac{1-q^{n+1}}{1-q}
+=\frac{1}{1-q}.\]
+Die Reihe ist also konvergent und
+\[ \sum_{k=0}^\infty q^k =\frac{1}{1-q}.\]
+\item Falls $|q|\geq 1$, aber $q\neq 1$, ist immer noch 
+\[ s_n=\sum_{k=0}^n q^k=\frac{1-q^{n+1}}{1-q}. \]
+In diesem Fall konvergiert die Folge $(q^{n+1})_{n\geq 0}$ jedoch nicht, weshalb auch die Folge $(s_n)_{n\geq 0}$ nicht konvergiert.
+
+Die Reihe $\sum_{k=0}^\infty q^k$ konvergiert also hier nicht.
+\end{enumerate}
+}
+\lang{en}{
+Let $q\in \R$. The \emph{geometric series} 
+\[\sum_{k=0}^\infty q^k\]
+is a series obtained by summing a geometric sequence $(q^k)_{k\geq 0}$.
+The sequence $(s_n)_{n \geq 0}$ of partial sums is the sequence of geometric sums
+$s_n:=\sum_{k=0}^n q^k$. 
+For these partial sums, there is a formula with which the sum can be calculated quickly:
+\[
+s_n = 1 + q + q^2 + \ldots + q^n = \frac{1-q^{n+1}}{1-q},
+\]
+ A proof of this formula is given in \ref[content_02_vollstaendige_induktion][the main course]{rule:geom-summe}.
+We will now investigate when the geometric series converges.
+
+\begin{enumerate}
+\item If $q=1$, then $s_n=\sum_{k=0}^n 1^k=n+1$. 
+This sequence diverges properly to $\infty$, so
+\[ \sum_{k=0}^\infty 1^k =\infty.\] 
+This is also the only case in which the formula for geometric sums
+cannot be applied to compute the partial sums.
+\item If $|q|<1$, then the formula for geometric sums yields
+\[ s_n=\sum_{k=0}^n q^k=\frac{1-q^{n+1}}{1-q} \]
+and $\lim_{n\to \infty} q^{n+1}=0$. 
+By the limit rules,
+\[ \lim_{n\to \infty} s_n=\lim_{n\to \infty}\frac{1-q^{n+1}}{1-q}
+=\frac{1}{1-q}.\]
+So this series converges, and
+\[ \sum_{k=0}^\infty q^k =\frac{1}{1-q}.\]
+\item If $|q|\geq 1$ but $q\neq 1$, then
+\[ s_n=\sum_{k=0}^n q^k=\frac{1-q^{n+1}}{1-q}. \]
+In this case, the sequence $(q^{n+1})_{n\geq 0}$
+does not converge, so the sequence $(s_n)_{n\geq 0}$
+does not converge either.
+
+Therefore, the series $\sum_{k=0}^\infty q^k$ does not converge
+in this case.
+\end{enumerate}
+}
+\end{example}
+
+\begin{block}[warning]\label{rem:reihenfolge-summation}
+\lang{de}{Bei endlichen Summen ist es egal, in welcher Reihenfolge man ihre Summanden aufaddiert.
+Bei \glqq{}unendlichen Summen\grqq{} ist das nicht mehr der Fall. Wir müssen daher Summanden
+in der vorgegebenen Reihenfolge addieren. 
+
+Wenn eine Reihe absolut konvergiert, darf man die Summationsreihenfolge beliebig ändern.}
+
+\lang{en}{
+For finite sums, the order in which the summands are added together does not matter.
+That is no longer the case for "infinite sums".
+We have to add the summands together in the specified order.
+
+If a series converges absolutely, then the order of summation can be changed arbitrarily.
+}
+\end{block}
+
+\lang{de}{Aus den Grenzwertregeln für Folgen bekommt man direkt auch Grenzwertregeln für Reihen.}
+\lang{en}{The limit rules for sequences immediately yield
+limit rules for series.}
+
+\begin{rule}[\lang{de}{Grenzwertregeln} \lang{en}{limit rules}]\label{rul:grenzwert-regeln}
+\lang{de}{Es seien  $\sum_{k=1}^\infty a_k=A$ und $\sum_{k=1}^\infty b_k=B$ konvergente Reihen. Dann gilt für alle $\alpha, \beta \in \R$:
+
+Die Reihe $\sum_{k=1}^\infty ( \alpha a_k + \beta b_k)$ konvergiert und es ist
+\[ \sum_{k=1}^\infty ( \alpha a_k + \beta b_k)
+= \alpha \cdot A + \beta \cdot B. \]}
+\lang{en}{
+Suppose $\sum_{k=1}^\infty a_k=A$ und $\sum_{k=1}^\infty b_k=B$ are convergent series.
+For any $\alpha, \beta \in \R$, the series $\sum_{k=1}^\infty ( \alpha a_k + \beta b_k)$ converges and
+\[ \sum_{k=1}^\infty ( \alpha a_k + \beta b_k)
+= \alpha \cdot A + \beta \cdot B. \]
+}
+\end{rule}
+
+
+
+\begin{quickcheck}
+  \type{input.number}
+  \field{rational}
+ 
+  \begin{variables}
+   \randint{n}{2}{10}
+   \function[calculate]{s}{n/(n-1)}
+   \function[calculate]{t}{s-1}
+  \end{variables}
+
+   \lang{de}{
+  \text{
+    Bestimmen Sie die Grenzwerte der Reihen
+    $\sum_{k=0}^\infty (\frac{1}{\var{n}})^k$ und $\sum_{k=1}^\infty (\frac{1}{\var{n}})^k$.
+   
+   $\sum_{k=0}^\infty (\frac{1}{\var{n}})^k=$\ansref
+   
+   $\sum_{k=1}^\infty (\frac{1}{\var{n}})^k=$\ansref
+   }}
+   \lang{en}{
+  \text{
+    Find the limits of the series
+    $\sum_{k=0}^\infty (\frac{1}{\var{n}})^k$ and $\sum_{k=1}^\infty (\frac{1}{\var{n}})^k$.
+   
+   $\sum_{k=0}^\infty (\frac{1}{\var{n}})^k=$\ansref
+   
+   $\sum_{k=1}^\infty (\frac{1}{\var{n}})^k=$\ansref
+   }}
+  
+ 
+  \begin{answer}
+  %\text{$\sum_{k=0}^\infty (\frac{1}{\var{n}})^k=$}
+    \solution{s}
+  \end{answer}
+  \begin{answer}
+  %\text{$\sum_{k=1}^\infty (\frac{1}{\var{n}})^k=$}
+    \solution{t}
+  \end{answer}
+\end{quickcheck}
+
+
+\section{\lang{de}{Konvergenzkriterien für Reihen} \lang{en}{Convergence tests for series}}
+
+\lang{de}{Nachdem wir den Begriff der Konvergenz für Reihen definiert haben und auch wissen, dass die Grenzwertsätze gelten, stehen wir aber 
+immer noch vor dem Problem, dass wir nur sehr wenige konvergente Reihen kennen. Um eine Reihe auf Konvergenz zu untersuchen, gibt es
+verschiedene Kriterien, die wir hier kurz vorstellen. Viele dieser Kriterien nutzen den Vergleich zu anderen Reihen, von denen 
+man schon weiß, dass sie konvergieren oder divergieren. Wir starten daher mit Beispielen.}
+
+\lang{en}{
+Although we have now defined the notion of convergence for series and we know that
+the limit rules hold, we still have the problem that we know only very few examples of convergent series.
+To test whether a series converges, there are several different criteria that can be used,
+and we will quickly introduce them here. Many of these tests involve comparing with a different series
+for which we already know that it converges or diverges. Therefore, we begin with some examples.
+}
+
+\begin{example}\label{ex:erste-reihen}
+\begin{tabs*}[\initialtab{0}]
+\tab{$\sum_{k=1}^\infty \frac{1}{k(k+1)}=1$}
+\lang{de}{Für die Reihe $\sum_{k=1}^\infty \frac{1}{k(k+1)}$ sind die Partialsummen gegeben durch $s_n=\sum_{k=1}^n \frac{1}{k(k+1)}$.
+Durch die Umformung
+\[ \frac{1}{k(k+1)}=\frac{1+k-k}{k(k+1)}=
+\frac{1+k}{k(k+1)}-\frac{k}{k(k+1)}=\frac{1}{k}-\frac{1}{k+1}\]
+für jedes $k\in \N$ lässt sich $s_n$ einfacher schreiben als
+\begin{eqnarray*}
+ s_n &=& \sum_{k=1}^n \frac{1}{k(k+1)}=\sum_{k=1}^n (\frac{1}{k}-\frac{1}{k+1}) \\
+ &=& \sum_{k=1}^n \frac{1}{k}-\sum_{k=1}^n \frac{1}{k+1} 
+ = \sum_{k=1}^n \frac{1}{k} -\sum_{j=2}^{n+1} \frac{1}{j} \\
+ &=& 1 -\frac{1}{n+1},
+\end{eqnarray*}
+wobei im vorletzten Schritt eine Indexverschiebung bei der Summe durchgeführt wurde.
+Es folgt
+\[ \sum_{k=1}^\infty \frac{1}{k(k+1)}=\lim_{n\to \infty} s_n=\lim_{n\to \infty} \left(1 -\frac{1}{n+1}\right) =1\]
+und die Reihe ist also konvergent.}
+\lang{en}{The series $\sum_{k=1}^\infty \frac{1}{k(k+1)}$ has the partial sums $s_n=\sum_{k=1}^n \frac{1}{k(k+1)}$.
+By substituting
+\[ \frac{1}{k(k+1)}=\frac{1+k-k}{k(k+1)}=
+\frac{1+k}{k(k+1)}-\frac{k}{k(k+1)}=\frac{1}{k}-\frac{1}{k+1}\]
+for every $k\in \N$, we can rearrange $s_n$ to the simpler sum
+\begin{eqnarray*}
+ s_n &=& \sum_{k=1}^n \frac{1}{k(k+1)}=\sum_{k=1}^n (\frac{1}{k}-\frac{1}{k+1}) \\
+ &=& \sum_{k=1}^n \frac{1}{k}-\sum_{k=1}^n \frac{1}{k+1} 
+ = \sum_{k=1}^n \frac{1}{k} -\sum_{j=2}^{n+1} \frac{1}{j} \\
+ &=& 1 -\frac{1}{n+1},
+\end{eqnarray*}
+where the second-to-last step involves shifting an index in the sum.
+Therefore,
+\[ \sum_{k=1}^\infty \frac{1}{k(k+1)}=\lim_{n\to \infty} s_n=\lim_{n\to \infty} \left(1 -\frac{1}{n+1}\right) =1\]
+so the series converges.}
+\tab{\lang{de}{Harmonische Reihe $\sum_{k=1}^\infty \frac{1}{k}=\infty$}
+\lang{en}{Harmonic series  $\sum_{k=1}^\infty \frac{1}{k}=\infty$}
+}
+\lang{de}{Die harmonische Reihe $\sum_{k=1}^\infty \frac{1}{k}$ 
+entsteht durch Summation der harmonischen Folge.
+Sie ist ein zentrales Beispiel für eine divergente Reihe.
+
+Da alle Summanden $\frac{1}{k}$ positiv sind, ist die Folge der
+ Partialsummen $s_n=\sum_{k=1}^n \frac{1}{k}$ streng monoton wachsend. 
+ Um zu sehen, dass die Reihe nicht konvergiert, betrachten wir
+ die Partialsummen $s_n$, wenn $n=2^m$  ($m\in \N$) eine Zweierpotenz ist. Man kann mit der Beweismethode der 
+\emph{vollständigen Induktion} zeigen, dass
+ \[ s_{2^m} \geq 1+m\cdot \frac{1}{2} \]
+ für alle $m \in \mathbb{N}$ gilt. Wir verzichten hier auf den Beweis, aber wir können aus der Ungleichung folgern, 
+dass die Teilfolge $(s_{2^m})_{m\in \N}$ nicht beschränkt ist. Und daher wächst auch die Folge $(s_{n})_{n\in \N}$ unbeschränkt.}
+\lang{en}{
+The harmonic series $\sum_{k=1}^\infty \frac{1}{k}$ arises by
+summing the harmonic sequence. It is a central example of a divergent series.
+
+Since all summands $\frac{1}{k}$ are positive, the sequence 
+$s_n=\sum_{k=1}^n \frac{1}{k}$ of partial sums is strictly monotonically increasing.
+To see that the series does not converge, we consider the partial sums
+$s_n$ for powers of two, $n=2^m$ ($m \in \N$).
+Using the proof method of \emph{complete induction}, one can show
+that \[ s_{2^m} \geq 1+m\cdot \frac{1}{2} \] holds for all $m \in \mathbb{N}$.
+We omit the proof here, but the inequality implies that the
+subsequence $(s_{2^m})_{m\in \N}$ is unbounded.
+Therefore, the full sequence $(s_n)_{n\in \N}$ is also unbounded.
+}
+\end{tabs*}
+\end{example}
+
+\lang{de}{Es folgt nun eine Auflistung verschiedener Konvergenzkriterien für Reihen. Mit einigen Kriterien kann nur die Konvergenz oder nur die
+Divergenz nachgewiesen werden und es hängt auch immer von der gegebenen Reihe ab, welches Kriterium gewählt werden sollte. }
+
+\lang{en}{We will now list a variety of convergence tests for series.
+Some tests can only be used to prove convergence, some can only prove
+divergence, and the choice of which test to use always
+depends on the given series.}
+
+\begin{theorem}[\lang{de}{Kriterien für Konvergenz} \lang{en}{Convergence tests}]
+\lang{de}{Wir betrachten die Reihe $\sum_{k=1}^\infty a_k$ und die Folge der Summanden $(a_k)$. }
+\lang{en}{Consider the series $\sum_{k=1}^\infty a_k$ and the sequence of summands $(a_k)$.}
+\begin{itemize}
+\item \lang{de}{Wenn die Reihe $\sum_{k=1}^\infty |a_k|$ konvergiert, dann konvergiert auch $\sum_{k=1}^\infty a_k$. 
+(Aus absoluter Konvergenz folgt Konvergenz.)}
+\lang{en}{If the series $\sum_{k=1}^\infty |a_k|$ converges, then the series $\sum_{k=1}^\infty a_k$ also converges.
+(Absolute convergence implies convergence.)
+}
+
+\item \lang{de}{Wenn $(a_k)_{k\geq 1}$ keine Nullfolge ist, so ist $\sum_{k=1}^\infty a_k$ divergent.}
+\lang{en}{If $(a_k)_{k\geq 1}$ is not a null sequence,
+then $\sum_{k=1}^\infty a_k$ diverges.}
+
+\item \lang{de}{Ist $(a_k)_{k\geq 1}$ eine monoton fallende Nullfolge ($a_1\geq a_2 \geq a_3 \geq \ldots \geq 0$), so ist die 
+\emph{alternierende} Reihe
+\[ \sum_{k=1}^\infty (-1)^k a_k \]
+konvergent. Dies ist das \emph{Leibniz-Kriterium}.}
+\lang{en}{
+If $(a_k)_{k\geq 1}$ is a monotonically decreasing null sequence ($a_1\geq a_2 \geq a_3 \geq \ldots \geq 0$),
+then the \emph{alternating} series
+\[ \sum_{k=1}^\infty (-1)^k a_k \]
+converges. This is the \emph{alternating series test}, or \emph{Leibniz test}.
+}
+
+\item \lang{de}{Ist $\sum_{k=1}^\infty c_k$ eine konvergente Reihe und gilt
+  $|a_k|\leq c_k$ für alle $k\geq 1$, so ist die Reihe $\sum_{k=1}^\infty a_k$ absolut konvergent. Dies ist das 
+  \emph{Majorantenkriterium}.}
+  \lang{en}{ If $\sum_{k=1}^\infty c_k$ is a convergent series and
+  $|a_k|\leq c_k$ for all $k\geq 1$, then the series $\sum_{k=1}^\infty a_k$ converges absolutely.
+  This is the \emph{comparison test}.
+  }
+\item \lang{de}{Ist $\sum_{k=1}^\infty d_k$ eine divergente Reihe und gilt
+$a_k\geq d_k \geq 0$ für alle $k\geq 1$, 
+so ist die Reihe $\sum_{k=1}^\infty a_k$ divergent. Dies ist das \emph{Minorantenkriterium}.
+}
+\lang{en}{If $\sum_{k=1}^\infty d_k$ is a divergent series and
+  $a_k\geq d_k \geq 0$ for all $k\geq 1$, then the series $\sum_{k=1}^\infty a_k$ diverges.
+  This is also known as the \emph{comparison test}.
+}
+\item \lang{de}{Wenn $a_k \neq 0$ für alle $k \in \N$ gilt und der Grenzwert
+\[ g:=  \lim_{k \to \infty}|\frac{a_{k+1}}{a_k}|\]
+existiert, dann besagt das \emph{Quotientenkriterium}: \\
+Im Fall $g<1$ ist die Reihe $\sum_{k=1}^\infty a_k$ absolut konvergent. \\
+Im Fall $g>1$ ist die Reihe $\sum_{k=1}^\infty a_k$ divergent. \\
+Im Fall $g=1$ können wir mit diesem Kriterium keine Aussage treffen.}
+\lang{en}{If $a_k \neq 0$ for all $k \in \N$, and if the limit
+\[ g:=  \lim_{k \to \infty}|\frac{a_{k+1}}{a_k}|\]
+exists, then the \emph{ratio test} states the following: \\
+If $g<1$, then the series $\sum_{k=1}^\infty a_k$ converges absolutely. \\
+If $g>1$, then the series $\sum_{k=1}^\infty a_k$ diverges. \\
+When $g=1$, the ratio test does not apply.
+}
+\end{itemize}
+
+
+\end{theorem}
+
+\begin{block}[warning]
+\begin{itemize}
+
+\item \lang{de}{Die Bedingung, dass $(a_k)_{k\geq 1}$ eine Nullfolge ist, ist \emph{nicht} ausreichend dafür, dass die Reihe  $\sum_{k=1}^\infty a_k$ konvergiert,
+wie man anhand der harmonischen Reihe gut sehen kann.}
+\lang{en}{The assumption that $(a_k)_{k\geq 1}$ is a null sequence
+is \emph{not} sufficient for the series $\sum_{k=1}^\infty a_k$ to
+converge, as one can see from the example of the harmonic series.}
+
+\item \lang{de}{Ist keine der obigen Bedingungen erfüllt, so lässt sich auf diesem Weg keine Aussage zur Konvergenz treffen.}
+\lang{en}{When none of the conditions above are satisfied,
+we cannot use this fact to deduce anything about the convergence
+of the series.}
+\end{itemize}
+\end{block}
+
+
+\begin{example}\label{ex:absolut-konvergenz}
+\begin{tabs*}
+\tab{\lang{de}{Minorantenkriterium} \lang{en}{Comparison test}}
+\lang{de}{Wir betrachten die Reihe $\sum_{k=1}^\infty \frac{1}{\sqrt{k}}$. 
+
+Für jede natürliche Zahl $k \in \N$ gilt 
+\[
+\sqrt{k} \leq k \quad \text{bzw.} \quad \frac{1}{\sqrt{k}} \geq \frac{1}{k}.
+\]
+Wir wissen, dass die harmonische Reihe $\sum_{k=1}^\infty \frac{1}{k}$ divergiert. Nach dem Minorantenkriterium divergiert daher 
+auch die Reihe $\sum_{k=1}^\infty \frac{1}{\sqrt{k}}$.
+}
+\lang{en}{
+Consider the series $\sum_{k=1}^\infty \frac{1}{\sqrt{k}}$.
+
+For any natural number $k\in \N$, we have
+\[
+\sqrt{k} \leq k \quad \text{and therefore} \quad \frac{1}{\sqrt{k}} \geq \frac{1}{k}.
+\]
+We know that the harmonic series $\sum_{k=1}^\infty \frac{1}{k}$ diverges.
+By the comparison test, the series $\sum_{k=1}^\infty \frac{1}{\sqrt{k}}$ also diverges.
+}
+
+
+ \tab{\lang{de}{Alternierende harmonische Reihe}
+ \lang{en}{Alternating harmonic series}
+ }
+\lang{de}{Die alternierende harmonische Reihe ist die Reihe
+\[  \sum_{k=1}^\infty \frac{(-1)^{k+1}}{k}=1-\frac{1}{2}+\frac{1}{3}-\frac{1}{4}+\ldots \]
+Nach dem Leibniz-Kriterium ist diese Reihe  konvergent. Die Reihe der Absolutbeträge ist die harmonische Reihe $\sum_{k=1}^\infty \frac{1}{k} $, welche nicht konvergiert.\\
+Die alternierende harmonische Reihe ist also konvergent, aber nicht absolut konvergent.}
+\lang{en}{
+The alternating harmonic series is the series
+\[  \sum_{k=1}^\infty \frac{(-1)^{k+1}}{k}=1-\frac{1}{2}+\frac{1}{3}-\frac{1}{4}+\ldots \]
+The alternating series test implies that this series converges. The series of absolute values is the
+harmonic series $\sum_{k=1}^\infty \frac{1}{k} $, which does not converge.
+So the alternating harmonic series is convergent but not absolutely convergent.
+}
+
+\tab{\lang{de}{Majorantenkriterium} \lang{en}{Comparison test II}}
+\begin{incremental}[\initialsteps{1}]
+\step
+\lang{de}{Wir zeigen mit dem Majorantenkriterium, dass die Reihe 
+$\sum_{k=1}^\infty \frac{1}{k^2}=\frac{1}{1^2}+ \frac{1}{2^2}+\ldots\quad$ absolut konvergiert.}
+\lang{en}{We will use the comparison test to show that the series
+$\sum_{k=1}^\infty \frac{1}{k^2}=\frac{1}{1^2}+ \frac{1}{2^2}+\ldots\quad$ converges absolutely.}
+
+\\
+\step
+\lang{de}{Für alle $k\in \N$ ist $k^2 > k$, also ist auch
+\[ 2k^2 > k^2 + k \quad \text{bzw.} \quad k^2 > \frac{1}{2} k(k+1). \]
+Für die Kehrwerte gilt damit 
+\[
+\frac{1}{k^2} < \frac{2}{k(k+1)}
+\]
+für alle $k \in \N$. Wir haben in Beispiel \ref{ex:erste-reihen} gesehen, dass die Reihe $\sum_{k=1}^\infty \frac{1}{k(k+1)}$
+konvergiert. Nach den Grenzwertregeln konvergiert auch die Reihe 
+\[
+\sum_{k=1}^\infty \frac{2}{k(k+1)} = 2 \sum_{k=1}^\infty \frac{1}{k(k+1)}.
+\]
+Nach dem Majorantenkriterium ist also die Reihe $\sum_{k=1}^\infty \frac{1}{k^2}$ absolut konvergent.
+}
+\lang{en}{
+For every $k\in \N$, we have $k^2 \geq k$, so
+\[ 2k^2 > k^2 + k \quad \text{bzw.} \quad k^2 > \frac{1}{2} k(k+1). \]
+This implies that the reciprocals satisfy
+\[
+\frac{1}{k^2} < \frac{2}{k(k+1)}
+\]
+for all $k \in \N$. In Example \ref{ex:erste-reihen} we saw that the series
+$\sum_{k=1}^\infty \frac{1}{k(k+1)}$ converges.
+By the limit rules, the series
+\[
+\sum_{k=1}^\infty \frac{2}{k(k+1)} = 2 \sum_{k=1}^\infty \frac{1}{k(k+1)}
+\]
+also converges. The comparison test shows that $\sum_{k=1}^\infty \frac{1}{k^2}$ converges absolutely.
+}
+\end{incremental}
+\end{tabs*}
+\end{example}
+
+\begin{example}[\lang{de}{Exponentialreihe} \lang{en}{Exponential series}]
+\lang{de}{Für jede beliebige reelle (oder sogar komplexe) Zahl $z$ ist die Reihe
+\[ \exp(z)=\sum_{n=0}^\infty \frac{z^n}{n!} \]
+absolut konvergent. Mit $n!$ bezeichnen wir hier, wie im letzten Kapitel eingeführt, das Produkt $1 \cdot 2 \cdots n$ der Zahlen 
+von $1$ bis $n$.
+
+Für $z=0$ ist die Reihe absolut konvergent, weil die Reihe $1+ 0 +0 + \ldots$
+ist und nur einen Summanden ungleich null besitzt. (Der erste Summand lautet zwar  $0^0$, wird aber 
+als $1$ gewertet.)
+
+Für $z\neq 0$ benutzen wir das Quotientenkriterium und 
+betrachten den Quotienten
+\begin{eqnarray*}
+ |\frac{a_{k+1}}{a_k}| &=& |\frac{\frac{z^{k+1}}{(k+1)!}}{\frac{z^{k}}{k!}}|=
+\frac{|z|^{k+1}\cdot k!}{(k+1)!\cdot |z|^k}  \\
+&=& \frac{|z|\cdot k!}{(k+1)\cdot k!\cdot 1}= \frac{|z|}{k+1}.
+\end{eqnarray*}
+Der Grenzwert hiervon ist 
+\[  \lim_{k \to \infty} \ |\frac{a_{k+1}}{a_k}| =\lim_{k \to \infty} \ \frac{|z|}{k+1} = 0, \]
+da $|z|$ eine konstante Zahl ist. Nach dem Quotientenkriterium ist die Reihe also absolut konvergent.
+
+In der Tat kann man zeigen, dass der Grenzwert der Exponentialreihe dem Wert der $e$-Funktion $\exp(z)=e^z$ entspricht. }
+\lang{en}{For any real (or even complex) number $z$, the series
+\[ \exp(z)=\sum_{n=0}^\infty \frac{z^n}{n!} \]
+converges absolutely. As in the last chapter, $n!$ stands for the product $1 \cdot 2 \cdots n$ of the numbers from $1$ to $n$.
+
+For $z=0$, the series converges absolutely, because the series
+is $1+ 0 +0 + \ldots$ with only one nonzero summand.
+(The first summand is $0^0$, but it is defined to be $1$.)
+
+For $z\neq 0$, we use the ratio test and consider the quotients
+\begin{eqnarray*}
+ |\frac{a_{k+1}}{a_k}| &=& |\frac{\frac{z^{k+1}}{(k+1)!}}{\frac{z^{k}}{k!}}|=
+\frac{|z|^{k+1}\cdot k!}{(k+1)!\cdot |z|^k}  \\
+&=& \frac{|z|\cdot k!}{(k+1)\cdot k!\cdot 1}= \frac{|z|}{k+1}.
+\end{eqnarray*}
+This tends to the limit
+\[  \lim_{k \to \infty} \ |\frac{a_{k+1}}{a_k}| =\lim_{k \to \infty} \ \frac{|z|}{k+1} = 0, \]
+as $|z|$ is a constant number. By the ratio test, the series converges absolutely.
+
+One can show that the limit of the exponential series is exactly the value of the $\exp$-function $\exp(z)=e^z$.
+}
+\end{example}
+
+
+\begin{quickcheck}
+  \type{input.number}
+  \field{rational}
+ 
+  \begin{variables}
+   \randint{n}{2}{6}
+   \randint{m}{7}{11}
+   \function[calculate]{s}{n/(n-1)}
+   \function[calculate]{t}{m/(m+1)}
+   \function[calculate]{r}{s-t}
+  \end{variables}
+
+ \lang{de}{
+  \text{
+    Bestimmen Sie den Grenzwert der Reihe
+    $\sum_{k=0}^\infty ((\frac{1}{\var{n}})^k-(-\frac{1}{\var{m}})^k)$.
+   
+   Antwort: \ansref
+    
+   }}
+  \lang{en}{
+  \text{
+    Find the limit of the series
+    $\sum_{k=0}^\infty ((\frac{1}{\var{n}})^k-(-\frac{1}{\var{m}})^k)$.
+   
+   Answer: \ansref
+    
+   }}
+ 
+  \begin{answer}
+  \solution{r}
+  \end{answer} 
+  
+\end{quickcheck}
+
+
+
+
+\end{content}

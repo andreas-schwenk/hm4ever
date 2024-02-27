@@ -1,0 +1,92 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A01: Skalarprodukt}
+    \lang{en}{problem_1}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Vergleichen von Zahlen und einfache Addition}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+
+\lang{de}{
+	\title{A01: Skalarprodukt}
+}
+\lang{en}{
+	\title{Problem 1}
+}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9711}{Ticket 9711}
+\end{block}
+
+\begin{problem}
+ 
+    \begin{question}
+      \lang{de}{\text{Bestimmen Sie folgende Skalarprodukte.\\
+		 a)
+		$
+ 		\begin{pmatrix} \var{x_1} \\ \var{x_2} \end{pmatrix} \bullet \begin{pmatrix}\var{y_1}\\ \var{y_2} \end{pmatrix} = $\ansref
+		\\
+		  b)
+		$
+		 \left(\begin{pmatrix} \var{x_1}\\ \var{x_2} \end{pmatrix}+\begin{pmatrix}\var{y_1} \\ \var{y_2} \end{pmatrix}\right) \bullet \left(\begin{pmatrix}\var{z_1}\\ \var{z_2} \end{pmatrix}-\begin{pmatrix}\var{u_1}\\ \var{u_2} \end{pmatrix}\right) =$ \ansref
+		}
+		}
+            
+      \type{input.number}
+      \field{rational} 
+ 
+      \begin{variables}
+            \randint[Z]{x_1}{-10}{10}
+            \randint[Z]{x_2}{-10}{10}
+            \randint[Z]{y_1}{-10}{10}
+            \randint[Z]{y_2}{-10}{10}
+            \randint{u_1}{-10}{10}
+            \randint{u_2}{-10}{10}
+            \randint{z_1}{-10}{10}
+            \randint{z_2}{-10}{10}
+            \function{ea}{x_1*y_1+x_2*y_2}%Für explanation
+            \function[calculate]{aa}{x_1*y_1+x_2*y_2}
+            \function[calculate]{bb}{(x_1+y_1)*(z_1-u_1)+(x_2+y_2)*(z_2-u_2)}
+      \end{variables}
+      \begin{answer}
+            \text{a)}
+            \solution{aa}
+            \explanation[edited]{Das Skalarprodukt zweier Vektoren berechnen Sie, indem Sie den ersten Eintrag des ersten Vektors mit dem ersten Eintrag
+            des zweiten Vektors multiplizieren und derart für alle weiteren Einträge fortfahren. Dann bilden Sie die Summe aus allen Produkten. Das Skalarprodukt in a) ist gegeben durch $\var{ea}$.}
+      \end{answer}
+
+      \begin{answer}
+            \text{b)}
+            \solution{bb}
+            \explanation[edited]{Addieren bzw. subtrahieren Sie zunächst die beiden Vektoren in den Klammern. Von den resultierenden Vektoren bilden Sie das Skalarprodukt.}
+      \end{answer}
+             
+\end{question}
+
+
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+
+
+\end{content}

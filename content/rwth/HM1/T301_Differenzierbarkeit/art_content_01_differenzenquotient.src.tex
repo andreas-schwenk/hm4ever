@@ -1,0 +1,670 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Differenzierbarkeit}
+    \lang{en}{Differentiability}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T106_Tangent_B.meta.xml}{T106_Tangent_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T106_Tangent_A.meta.xml}{T106_Tangent_A}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T201neu_Vollstaendige_Induktion/g_art_content_03_binomischer_lehrsatz.meta.xml}{link2}
+    \link{generic_article}{content/rwth/HM1/T210_Stetigkeit/g_art_content_31_grenzwerte_von_funktionen.meta.xml}{grenzw-funk}
+    \link{generic_article}{content/rwth/HM1/T209_Potenzreihen/g_art_content_28_exponentialreihe.meta.xml}{expreihe}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{1}
+\ombarticle{1}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Differenzierbarkeit und Ableitung}\lang{en}{Differentiability and differentiation}}
+ 
+\begin{block}[annotation]
+  
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10030}{Ticket 10030}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{
+	\lang{de}{Die Ableitung als Tangentensteigung}
+	\lang{en}{The derivative as the slope of the tangent}\label{sec:ableitung}
+}
+
+% In der Analysis interessiert man sich häufig für Eigenschaften von Kurven wie Extremstellen, Steigungs- oder Kr\"{u}mmungsverhalten. Oder
+% man m\"{o}chte einen Funktionswert an einer Stelle n\"{a}herungsweise bestimmen, ohne ihn konkret auszurechnen. Bei all diesen Problemen
+% ist die sogenannte Ableitung einer Funktion n\"{u}tzlich.\\
+\lang{de}{
+Die Ableitung einer Funktion $f$ an einer Stelle $x_0$ soll die Steigung der Tangente an den Graphen von $f$ im Punkt $(x_0;f(x_0))$ angeben.
+Dies ist zugleich ein Ma{\ss} f\"{u}r die Steigung von $f$ in $x_0$.\\
+Diese Tangente ist eine Gerade, die den Graphen im Punkt $P_0=(x_0;f(x_0))$ \textit{berührt}.
+Um rechnerisch zu verstehen, was dies bedeutet, betrachtet man zunächst Sekanten des Graphen durch den Punkt $P_0=(x_0;f(x_0))$, also solche Geraden,
+ die den Graphen der Funktion außer in $P_0$ noch in mindestens einem weiteren Punkt schneiden.
+Die Steigung der Sekante des Graphen von $f$ durch die Punkte $P_0=(x_0;f(x_0))$ und $P=(x_0+h;f(x_0+h))$ bestimmt man \"{u}ber
+das Steigungsdreieck. Die Steigung entspricht also dem Quotienten der Differenzen auf der $y$-Achse und der $x$-Achse und berechnet sich zu
+}
+\lang{en}{
+The derivative of a function $f$ at a point $x_0$ gives the gradient of the line tangent to the 
+graph of $f$ at the point $(x_0;f(x_0))$. In this way, it measures the slope of $f$ at $x_0$.\\
+The tangent is a line, which makes contact with the graph at the point $P_0=(x_0;f(x_0))$. In order 
+to understand the meaning of this, we consider the secants of the graph through the point 
+$P_0=(x_0;f(x_0))$, that is, those lines that also intersect the function at some point other than 
+$P_0$. The gradient of a secant of the graph of $f$ through the points $P_0=(x_0;f(x_0))$ and 
+$P=(x_0+h;f(x_0+h))$ can be visualised using the gradient triangle. The gradient is the quotient of 
+the difference on the $y$-axis and the difference on the $x$-axis,
+}
+\[\frac{f(x_0+h)-f(x_0)}{x_0+h-x_0}=\frac{f(x_0+h)-f(x_0)}{h}.\]
+
+\begin{center}
+\image{T106_Tangent_A}
+\end{center}
+
+\lang{de}{
+Macht man $h$ nun betragsmäßig immer kleiner, so erkennt man an dem folgenden Schaubild, dass sich die so entstandenen
+Sekanten immer weiter der Tangente an die Kurve von $f$ im Punkt $(x_0;f(x_0))$ n\"{a}hern, und auch der Quotient $\frac{f(x_0+h)-f(x_0)}{h}$
+(also die Steigung der jeweiligen Sekante) n\"{a}hert sich der Steigung der Tangente an.\\
+}
+\lang{en}{
+If we now make the absolute value of $h$ progressively smaller, the corresponding secants approach 
+the tangent of the curve $f$ at the point $(x_0;f(x_0))$, as is shown in the image below. Thus the 
+gradient $\frac{f(x_0+h)-f(x_0)}{h}$ of the secants also approaches the gradient of the tangent.\\
+}
+
+\begin{center}
+\image{T106_Tangent_B}
+\end{center}
+
+\lang{de}{
+In der folgenden Visualisierung ist \nowrap{$f(x) = x^2 - |x|+1 $} und \nowrap{$P = (x_0; f(x_0))=(1; 1)$.} 
+Verändern Sie die $x$-Koordinate des Punktes $Q$ und lassen Sie so $Q$ gegen $P$ laufen. Überzeugen Sie sich,
+dass es eine Tangente an den Graphen von $f$ im Punkt $P$ gibt und dass die Ableitung, d.h. die Steigung der Tangente,
+den Wert $1$ hat.
+}
+\lang{en}{
+In theb following graphic, \nowrap{$f(x) = x^2 - |x|+1 $} and \nowrap{$P = (x_0; f(x_0))=(1; 1)$.} 
+Move the $x$-coordinate of the point $Q$ to move it closer to $P$. Convince yourself that there is 
+a tangent to the graph of $f$ at the point $P$, and that its derivative at $P$, i.e. the gradient of 
+the tangent, is $1$.
+}
+
+\begin{genericGWTVisualization}[550][650]{mathlet1}
+\title{\lang{de}{Tangente im Punkt $P$}\lang{en}{The tangent at the point $P$}}
+\begin{variables}
+
+	\point{P}{rational}{1,1}
+	\point[editable]{Q0}{rational}{1.5,0}
+	\point{R}{rational}{0,0}
+	\point{x0}{rational}{1,0}
+	\function{f}{rational}{x^2 - abs(x) + 1}
+	\number{Qx}{rational}{var(Q0)[x]}
+	\number{h}{rational}{var(Qx)-1}
+	\number{Qy}{rational}{(var(Qx))^2 - abs(var(Qx)) + 1}
+	\point{Q}{rational}{var(Qx),var(Qy)}
+	\point{Q1}{rational}{var(Qx)-dirac(var(h)),var(Qy)-dirac(var(h))}
+	\line{s}{rational}{var(P),var(Q1)}
+	\line{t}{rational}{var(R),var(P)}
+	
+\end{variables}
+ \color{Q}{#0066CC}
+ \color{Qx}{#0066CC}
+ \color{Qy}{#0066CC}
+ \color{P}{#CC6600}
+ \color{x0}{#CC6600}
+ \color{s}{#0066CC}
+ \color{f}{#CC6600}
+ \color{h}{#0066CC}
+ \label{P}{@2d[$\textcolor{#CC6600}{P}$]}
+ \label{x0}{@2d[$\textcolor{#CC6600}{x_0}$]}
+ \label{Q}{@2d[$\textcolor{#0066CC}{Q}$]}
+ \label{f}{@2d[$\textcolor{#CC6600}{f}$]}
+	\begin{canvas}
+	\plotSize{450}
+	\plotLeft{-1.5}
+	\plotRight{2.5}
+	\plot[coordinateSystem]{f,Q,P,x0,s,t,Q0}
+	\end{canvas}
+\lang{de}{\text{\textcolor{#CC6600}{Orangener} Graph: \textcolor{#CC6600}{$f(x) = x^2 -|x| + 1$}, fester Punkt: \textcolor{#CC6600}{$P= (x_0;f(x_0))=(1; 1)$}.}}
+\lang{en}{\text{\textcolor{#CC6600}{Orange} graph: \textcolor{#CC6600}{$f(x) = x^2 -|x| + 1$}, fixed point: \textcolor{#CC6600}{$P= (x_0,f(x_0))=(1, 1)$}.}}
+\lang{de}{\text{Ziehen Sie mit der Maus den schwarzen Punkt entlang der $x$-Achse,}}
+\lang{en}{\text{Use the mouse to move around the black point along the $x$-axis}}
+\lang{de}{\text{um $\textcolor{#0066CC}{x=x_0+h = 1+}\var{h}$ zu verändern. Die \textcolor{#0066CC}{blaue} Sekante ist}}
+\lang{en}{\text{in order to vary $\textcolor{#0066CC}{x=x_0+h=1+}\var{h}$. The \textcolor{#0066CC}{blue} secant is}}
+\lang{de}{\text{die Gerade durch die Punkte \textcolor{#CC6600}{$P$} und 
+$\textcolor{#0066CC}{Q = (x;f(x))= (}\var{Qx};\var{Qy}\textcolor{#0066CC}{)}$.}}
+\lang{en}{\text{the line through the point \textcolor{#CC6600}{$P$} and 
+$\textcolor{#0066CC}{Q = (x,f(x))= (}\var{Qx},\var{Qy}\textcolor{#0066CC}{)}$.}}
+\lang{de}{\text{Wenn $\textcolor{#CC6600}{P}=\textcolor{#0066CC}{Q}$, d.h. $\textcolor{#0066CC}{h=0}$, ist die Sekante nicht definiert, aber}}
+\lang{en}{\text{If $\textcolor{#CC6600}{P}=\textcolor{#0066CC}{Q}$, i.e. $\textcolor{#0066CC}{h=0}$, the secant is not defined, however}}
+\lang{de}{\text{die Sekanten nähern sich für $\textcolor{#0066CC}{h}$ gegen Null der schwarzen Tangente.}}
+\lang{en}{\text{the secant approximates the black tangent line as $\textcolor{#0066CC}{h}$ approaches $0$.}}
+
+
+\end{genericGWTVisualization}
+
+\lang{de}{
+In der zweiten Visualisierung geht es um den Ausnahmefall, dass es keine Tangente und keine Ableitung gibt. 
+Dazu betrachten wir die Funktion \nowrap{$f(x) = x^2 - |x|+1$} diesmal im Punkt 
+\nowrap{$P = (x_0; f(x_0))=(0;1)$.} Überzeugen Sie sich, dass die Endlage der Sekante
+durch $P$ und $Q$ unterschiedlich ist, je nachdem ob wir die $x-$Koordinate des Punktes $Q$ von der Seite
+der positiven Zahlen gegen $x_0=0$ gehen lassen oder von der Seite der negativen Zahlen.
+}
+\lang{en}{
+The following graphic deals with an exception: a point where there is no tangent to the graph and 
+hence no derivative. Here again we consider the function \nowrap{$f(x) = x^2 - |x|+1$}, but this time 
+at the point \nowrap{$P = (x_0, f(x_0))=(0,1)$.} Convince yourself that the secant is different depending on from which direction the point $Q$ approaches the point $x_0=0$ (whether it does so from 
+the negative or the positive side).}
+
+
+\begin{genericGWTVisualization}[550][650]{mathlet1}
+\lang{de}{\title{Keine Tangente im Punkt $P$}}
+\lang{en}{\title{No tangent at the point $P$}}
+\begin{variables}
+	\point{P}{rational}{0,1}
+	\point[editable]{Q0}{rational}{1.5,0}
+	\function{f}{rational}{x^2 - abs(x)+1}
+	\number{Qx}{rational}{var(Q0)[x]}
+	\number{h}{rational}{var(Qx)}
+	\number{Qy}{rational}{(var(Qx))^2 - abs(var(Qx))+1}
+	\point{Q}{rational}{var(Qx),var(Qy)}
+	\point{P1}{rational}{1000*dirac(var(h)),1}
+	\point{Q1}{rational}{var(Qx)-1000*dirac(var(h)),var(Qy)-10*dirac(var(h))}
+	\line{s}{rational}{var(P1),var(Q1)}
+\end{variables}
+
+ \color{Q}{#0066CC}
+ \color{Qx}{#0066CC}
+ \color{Qy}{#0066CC}
+ \color{P}{#CC6600}
+ \color{s}{#0066CC}
+ \color{f}{#CC6600}
+ \color{h}{#0066CC}
+ \label{P}{@2d[$\textcolor{#CC6600}{P}$]}
+ \label{Q}{@2d[$\textcolor{#0066CC}{Q}$]}
+ \label{f}{@2d[$\textcolor{#CC6600}{f}$]}
+	\begin{canvas}
+	\plotSize{450}
+	\plotLeft{-2}
+	\plotRight{2}
+	\plot[coordinateSystem]{f,Q,P,s,Q0}
+	\end{canvas}
+\lang{de}{\text{\textcolor{#CC6600}{Orangener} Graph: \textcolor{#CC6600}{$f(x) = x^2 -|x|+1$}, fester Punkt: \textcolor{#CC6600}{$P= (x_0; f(x_0))= (0; 1)$}.}}
+\lang{en}{\text{\textcolor{#CC6600}{Orange} graph: \textcolor{#CC6600}{$f(x) = x^2 -|x|+1$}, fixed Punkt: \textcolor{#CC6600}{$P= (x_0, f(x_0))= (0, 1)$}.}}
+\lang{de}{\text{Ziehen Sie mit der Maus den schwarzen Punkt entlang der $x$-Achse,}}
+\lang{en}{\text{Using the mouse, move the black point along the $x$-axis}}
+\lang{de}{\text{um $\textcolor{#0066CC}{x=x_0+h = h =} \var{h}$ zu verändern. Die \textcolor{#0066CC}{blaue} Sekante ist}}
+\lang{en}{\text{in order to vary $\textcolor{#0066CC}{x=x_0+h = h =} \var{h}$. The \textcolor{#0066CC}{blue} secant is}}
+\lang{de}{\text{die Gerade durch die Punkte \textcolor{#CC6600}{$P$} und
+$\textcolor{#0066CC}{Q = (x; f(x)) = (}\var{Qx}; \var{Qy}\textcolor{#0066CC}{)}$.}}
+\lang{en}{\text{the line through the points \textcolor{#CC6600}{$P$} and
+$\textcolor{#0066CC}{Q = (x, f(x)) = (}\var{Qx}, \var{Qy}\textcolor{#0066CC}{)}$.}}
+\lang{de}{\text{Wenn $\textcolor{RED}{P}=\textcolor{#0066CC}{Q}$, d.h. $\textcolor{#0066CC}{h=0}$, ist die Sekante nicht definiert.}}
+\lang{en}{\text{If $\textcolor{RED}{P}=\textcolor{#0066CC}{Q}$, i.e. $\textcolor{#0066CC}{h=0}$, the secant is not defined.}}
+
+
+\end{genericGWTVisualization}
+
+\lang{de}{
+Wenn sich wie in der ersten Visualisierung die Sekante einer Tangente und damit die Steigung der Sekante der 
+Steigung der Tangente ann\"{a}hert, soll $f$ in $x_0$ differenzierbar hei{\ss}en.
+}
+\lang{en}{
+If the secant line approaches the tangent like in the first graphic, and hence the slope of the 
+secant approaches the slope of the tangent, we call $f$ differentiable at $x_0$.
+}
+
+
+\begin{definition}\label{def:punkt-diff} %\textit{Definition:}\\
+\lang{de}{
+Eine Funktion $f:D\to \R$ ist \notion{an der Stelle $x_0\in D$ differenzierbar} (oder auch ableitbar),
+falls der \ref[grenzw-funk][Funktionsgrenzwert]{def:funktionsgrenzwert}
+}
+\lang{en}{
+A function $f:D\to \R$ is \notion{differentiable at the point $x_0\in D$} if the 
+\ref[grenzw-funk][limit]{def:funktionsgrenzwert}
+}
+\[\lim_{h\to 0} \frac{f(x_0+h)-f(x_0)}{h}  \]
+\lang{de}{
+existiert.
+Diesen Grenzwert bezeichnet man dann als die \notion{Ableitung von $f$ in $x_0$} und schreibt
+}
+\lang{en}{
+exists. This limit is then called the \notion{derivative of $f$ in $x_0$} and denoted
+}
+\begin{equation}\label{diffbarkeit}\label{diffbarkeitz}
+f'(x_0):= \lim_{h\to 0} \frac{f(x_0+h)-f(x_0)}{h} =\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}
+\end{equation}
+
+\lang{de}{
+Man nennt obigen Quotienten den \textit{Differenzenquotient} von $f$.
+\\\\
+Wichtig: Beachten Sie, dass $f'(x_0)=+\infty$ und $f'(x_0)=-\infty$ ausgeschlossen sind!\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=500}{\image[75]{00_Videobutton_schwarz}}}\\~
+}
+\lang{en}{
+We call the above method for finding the quotient \textit{differentiation from first principles}.
+\\\\
+Important: note that $f'(x_0)=+\infty$ und $f'(x_0)=-\infty$ are not permitted!
+}
+
+\end{definition}
+
+\begin{theorem}\label{thm:steig-abl}
+\lang{de}{
+Sei $f$ an der Stelle $x_0$ differenzierbar. Dann ist $c=f'(x_0)$ aus Gleichung $(1.1)$
+die Steigung der Tangente an den Graphen von $f$ im Punkt $(x_0;f(x_0))$.\\
+Die Tangente $T(x)$ an den Graphen von $f$ im Punkt $(x_0;f(x_0))$ hat also die Form
+}
+\lang{en}{
+Let $f$ be differentiable at the point $x_0$. Then $c=f'(x_0)$ from equation $(1.1)$
+is the slope of the tangent of the graph of $f$ at the point $(x_0,f(x_0))$.\\
+The tangent $T(x)$ of the graph of $f$ at the point $(x_0,f(x_0))$ has the equation
+}
+\[T(x)=f'(x_0)\cdot(x-x_0)+f(x_0).\]
+\end{theorem}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{a}{-2}{1}
+			\randint[Z]{b}{-2}{1}
+			\randint{c}{-2}{2}
+			\function[normalize]{f}{x^3+a*x^2+b*x+c}
+			\randint[Z]{p}{0}{8}
+			\function[calculate]{x0}{p/4}
+			\function[calculate]{y0}{x0^3+a*x0^2+b*x0+c}
+			\function[calculate]{m}{3*x0^2+2*a*x0+b}
+		\end{variables}
+		
+			\text{\lang{de}{
+      Wir betrachten die Funktion $f(x)=\var{f}$ an der Stelle $x_0=\var{x0}$.\\
+			Bestimmen Sie mit Hilfe der folgenden Visualisierung (bei der Sie die Koeffizienten von $f$ und die Stelle
+			$x_0$ ändern können) den Wert der Ableitung von $f$ an der Stelle $x_0$.\\
+			$f'(\var{x0})=$\ansref.
+      }
+      \lang{en}{
+      We consider the function $f(x)=\var{f}$ at the point $x_0=\var{x0}$.\\
+      Using the following graphic (in which the coefficients of $f$ and the point $x_0$ can be 
+      changed), determine the value of the derivative of $f$ at the point $x_0$.\\
+      $f'(\var{x0})=$\ansref.
+      }}
+		
+		\begin{answer}
+			\solution{m}
+		\end{answer}
+		\explanation{\lang{de}{Der Ableitungswert $f'(\var{x0})$ ist die Steigung der Tangente am Punkt $(\var{x0};\var{y0})$.}
+    \lang{en}{The derivative $f'(\var{x0})$ is the gradient of the tangent at the point $(\var{x0};\var{y0})$.}}
+	\end{quickcheck}
+
+	\begin{genericGWTVisualization}[550][1000]{mathlet1}
+		\begin{variables}
+			\number[editable]{a}{rational}{1}
+			\number[editable]{b}{rational}{1}
+			\number[editable]{c}{rational}{1}
+			\number[editable]{x0}{rational}{0}
+			\function{f}{rational}{x^3+var(a)*x^2+var(b)*x+var(c)}
+			\number{y0}{rational}{var(x0)^3+var(a)*var(x0)^2+var(b)*var(x0)+var(c)}
+			\number{m}{rational}{3*var(x0)^2+2*var(a)*var(x0)+var(b)}
+			\number{q0}{rational}{var(y0)-var(m)*var(x0)}
+			\point{P}{rational}{var(x0),var(y0)}
+			\point{Q}{rational}{var(x0)+1,var(y0)}
+			\point{R}{rational}{var(x0)+1,var(y0)+var(m)}
+			\line{T}{rational}{var(P),var(R)}
+			\segment{s1}{rational}{var(P),var(Q)}
+			\segment{s2}{rational}{var(Q),var(R)}
+		\end{variables}
+% 		\color{P}{BLUE}
+% 		\label{P}{$\textcolor{BLUE}{P}$}
+		\color{s1}{#0066CC}
+		\color{s2}{#0066CC}
+		\color{T}{#0066CC}
+%		\label{s1}{$\textcolor{BLUE}{1}$}
+%		\label{s2}{$\textcolor{BLUE}{\var{m}}$}
+		\begin{canvas}
+			\plotSize{300}
+			\plotLeft{-3}
+			\plotRight{3}
+			\plot[coordinateSystem]{f,T,P, s1,s2}
+		\end{canvas}
+		\text{\lang{de}{
+    Die Funktion $f(x)=x^3+\var{a}\cdot x^2+\var{b}\cdot x+\var{c}$ hat an der Stelle $x_0=\var{x0}$
+		die \textcolor{#0066CC}{Tangente $T$} mit der Gleichung \textcolor{#0066CC}{$T(x)=\var{m}x+\var{q0}$}.
+    }
+    \lang{en}{
+    At the point $x_0=\var{x0}$, the function $f(x)=x^3+\var{a}\cdot x^2+\var{b}\cdot x+\var{c}$ has 
+		a \textcolor{#0066CC}{tangent $T$} with the equation \textcolor{#0066CC}{$T(x)=\var{m}x+\var{q0}$}.
+    }}
+	    	\end{genericGWTVisualization}
+
+\begin{definition}\label{def:diff}%\textit{Definition:}\\
+
+\lang{de}{
+Ist $f:D\to \R$ in jedem Punkt des Definitionsbereiches $D$ differenzierbar, so nennt man $f$ \notion{differenzierbar}. 
+In diesem Fall definiert man die Ableitungsfunktion $f':D\to \R$, die einer Stelle $x$ die Ableitung von $f$ in $x$ zuordnet, also
+\[  f'(x)= \lim_{h\to 0} \frac{f(x+h)-f(x)}{h}. \]
+für alle $x\in D$.\\
+%\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-1-10452&mode=query}{\image[75]{00_Videobutton_schwarz}}}\\~
+%\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-1-10452&mode=iframe}{\image[75]{00_Videobutton_schwarz}}}\\~
+\floatright{\href{https://www.hm-kompakt.de/video?watch=502}{\image[75]{00_Videobutton_schwarz}}}\\~
+}
+\lang{en}{
+If $f:D\to \R$ is differentiable at every point in its domain $D$, we call $f$ 
+\notion{differentiable}. In this case we can define the derivative $f':D\to \R$ as a function which 
+maps each point $x$ to the derivative of $f$ at $x$, i.e.
+\[  f'(x)= \lim_{h\to 0} \frac{f(x+h)-f(x)}{h} \]
+for all $x\in D$.\\
+}
+\end{definition}
+
+\begin{remark}
+\begin{enumerate}
+\item \lang{de}{
+      Die Ableitung wird zur Unterscheidung von h\"{o}heren Ableitungen (wie der
+      sp\"{a}ter eingef\"{u}hrten zweiten Ableitung) auch als \notion{erste
+      Ableitung} bezeichnet.
+      }
+      \lang{en}{
+      The derivative as defined above will also be called the \notion{first derivative} in order to 
+      distinguish it from higher derivatives (such as the second derivative, introduced later on).
+      }
+\item \lang{de}{
+      Da $f'(x_0)$ auch als Grenzwert des Differenzenquotienten berechnet werden kann, schreibt man 
+      statt $f'(x_0)$ manchmal auch $\frac{df}{dx}(x_0)$. Statt $f'$ schreibt man auch 
+      $\frac{df}{dx}$, wenn $x$ die Funktionsvariable von $f$ ist.
+      }
+      \lang{en}{
+      Because $f'(x_0)$ is defined as the limit of a quotient, instead of writing $f'(x_0)$ we 
+      sometimes write $\frac{df}{dx}(x_0)$. Instead of $f'$ we can also write $\frac{df}{dx}$ if $f$ 
+      as a function is dependent on $x$.
+      }
+\item \lang{de}{
+      Die Ableitung $f'(x_0)$ wird manchmal auch als 
+      $\lim\limits_{\Delta x\rightarrow 0}\frac{\Delta y}{\Delta x}$ geschrieben. 
+      Hier ist dann $\Delta x=h$ und $\Delta y=f(x_0+h)-f(x_0)$. Das $\Delta$ (Delta) steht allgemein 
+      f\"{u}r eine Differenz, $\Delta x$ f\"{u}r die Differenz auf der $x$-Achse, $\Delta y$ f\"{u}r 
+      die Differenz auf der $y$-Achse. 
+      %Alternativ schreibt man dann auch $\frac{ dy}{dx}$ f\"{u}r $f'$. <-- This comment was already included in item 2.
+      }
+      \lang{en}{
+      The derivative $f'(x_0)$ is sometimes written as 
+      $\lim\limits_{\Delta x\rightarrow 0}\frac{\Delta y}{\Delta x}$. 
+      In this case $\Delta x=h$ and $\Delta y=f(x_0+h)-f(x_0)$. The Greek letter $\Delta$ (upper case 
+      delta) stands in general for a difference; $\Delta x$ stands for a distance on the $x$-axis and 
+      $\Delta y$ for a distance on the $y$-axis. 
+      %Alternatively, we can also write $\frac{ dy}{dx}$ for $f'$.
+      }
+\end{enumerate} 
+\end{remark}
+
+\section{\lang{de}{Ableitungen elementarer Funktionen}
+         \lang{en}{Derivatives of some elementary functions}}\label{sec:abl-elem-funk}
+%Teilweise von OMB+-Kap. VII.3
+
+% \lang{de}{In diesem Abschnitt lernen Sie die Ableitungen einiger elementarer Funktionen kennen.}
+% \lang{en}{In this section we'll learn about the derivatives of certain simple elementary functions.}
+
+\lang{de}{
+Wir wissen nun prinzipiell, wie wir zu einer gegebenen Funktion $f$ die Ableitung $f'$ berechnen k\"{o}nnen - n\"{a}mlich als den 
+Grenzwert des Differenzenquotienten. 
+Zu vielen Funktionen kann man so die Ableitung berechnen.
+}
+\lang{en}{
+Now that we know the principle behind finding the derivative of a function $f$ (taking the limit 
+of the derivative quotient), we can differentiate many different functions.
+}
+\begin{example}\label{ex:abl-elem-funk}
+\begin{tabs*}[\initialtab{0}]
+\tab{\lang{de}{Lineare (und konstante) Funktionen}
+     \lang{en}{Linear (and constant) functions}}%\textit{Beispiel:}\\
+\lang{de}{
+Betrachten wir die lineare Funktion $f(x)=mx+b$, wobei $m$ und $b$ feste, reelle Zahlen sein sollen. 
+Im Fall $m=0$ ist $f$ eine konstante Funktion ist. Wir berechnen:
+}
+\lang{en}{
+We consider the linear function $f(x)=mx+b$, where $m$ and $b$ are fixed real numbers. If $m=0$, then 
+$f$ is a constant function. We calculate:
+}
+\[f'(x)=\lim_{h\rightarrow 0}\frac{f(x+h)-f(x)}{h}=\lim_{h\rightarrow 0}\frac{m(x+h)+b-(mx+b)}{h}=\lim_{h\rightarrow 0}\frac{mh}{h}=
+\lim_{h\rightarrow 0} m=m.\] 
+\lang{de}{
+Die Ableitungsfunktion einer linearen Funktion mit Steigung $m$ ist also die konstante Funktion $f'(x)=m$.
+Dies stimmt mit der Anschauung auch überein, nach welcher die Steigung des Funktionsgraphen an jeder Stelle $m$ sein sollte.
+}
+\lang{en}{
+The derivative function of a linear function with gradient $m$ is therefore the constant function 
+$f'(x)=m$. This corresponds with the graphic, from which it is clear that the slope of the graph is 
+$m$ at each point.
+}
+\tab{\lang{de}{Potenzfunktionen $x^n$}\lang{en}{Power functions $x^n$}}
+\lang{de}{
+Eine Möglichkeit die Ableitung der Potenzfunktion $f:\R\to \R, x\mapsto x^n$, für $n\in \N$ zu 
+bestimmen, ist, die \link{link2}{allgemeine binomische Formel} zu verwenden:
+}
+\lang{en}{
+A possible method of determining the derivative of the power function $f:\R\to \R, x\mapsto x^n$ for 
+$n\in \N$ is to apply the \link{link2}{general binomial formula}:
+}
+\[    (a+b)^n=\sum_{k=0}^n \binom{n}{k}a^{n-k}b^k \]
+\lang{de}{für alle reellen Zahlen $a$ und $b$. Damit erhält man im Spezialfall $n=2$}
+\lang{en}{for all real numbers $a$ and $b$. In the special case $n=2$ we then obtain}
+		\begin{align*}
+		f'(x)&=\lim_{h\rightarrow 0}\frac{f(x+h)-f(x)}{h}=\lim_{h\rightarrow 0}\frac{(x+h)^2-x^2}{h}\\
+		&=\lim_{h\rightarrow 0}\frac{x^2+2xh+h^2-x^2}{h}=\lim_{h\rightarrow 0}\frac{2xh+h^2}{h}\\
+		&=\lim_{h\rightarrow 0}2x+h=2x,
+		\end{align*}
+\lang{de}{und allgemein}
+\lang{en}{and in general}
+		\begin{align*}
+		f'(x)&=\lim_{h\rightarrow 0}\frac{f(x+h)-f(x)}{h}=\lim_{h\rightarrow 0}\frac{(x+h)^n-x^n}{h}\\
+		&=\lim_{h\rightarrow 0}\frac{\sum_{k=0}^n \binom{n}{k}x^{n-k} h^k- x^n}{h}
+		=\lim_{h\rightarrow 0}\frac{\sum_{k=1}^n \binom{n}{k}x^{n-k} h^k}{h}\\
+		&=\lim_{h\rightarrow 0} \sum_{k=1}^n {\binom{n}{k}}x^{n-k} h^{k-1}\\
+		&=\binom{n}{1}x^{n-1}=nx^{n-1} .
+		\end{align*}
+\tab{\lang{de}{Exponentialfunktion $e^x$}\lang{en}{Exponential function $e^x$}}
+\lang{de}{
+Für die Exponentialfunktion $\exp:\R\to \R, x\mapsto \exp(x)=e^x$, betrachten wir zunächst die Ableitung an der Stelle $x_0=0$.
+Aufgrund der \link{expreihe}{Potenzreihendarstellung} $\exp(x)=\sum_{n=0}^\infty \frac{x^n}{n!}$ erhält man für den Differenzenquotienten
+}
+\lang{en}{
+We first consider the derivative of the exponential function $\exp:\R\to \R, x\mapsto \exp(x)=e^x$ at 
+the point $x_0=0$. 
+Thanks to the \link{expreihe}{power series representation} $\exp(x)=\sum_{n=0}^\infty \frac{x^n}{n!}$ 
+we obtain the quotient
+}
+\[  \frac{\exp(0+h)-\exp(0)}{h}=\frac{ \sum_{n=0}^\infty \frac{h^n}{n!} -1}{h}= \sum_{n=1}^\infty \frac{h^{n-1}}{n!}
+= \sum_{m=0}^\infty \frac{h^{m}}{(m+1)!}. \]
+\lang{de}{Damit ist}
+\lang{en}{Hence}
+\[ \exp'(0)= \lim_{h\rightarrow 0} \frac{\exp(0+h)-\exp(0)}{h}=\lim_{h\rightarrow 0} \sum_{m=0}^\infty \frac{h^{m}}{(m+1)!} =
+\frac{1}{1!}=1. \]
+\lang{de}{
+Aufgrund der Funktionalgleichung $\exp(x+y)=e^{x+y}=e^x\cdot e^y=\exp(x)\cdot\exp(y)$ erhält man dann 
+für eine beliebige Stelle $x\in \R$:
+}
+\lang{en}{
+Using the identity $\exp(x+y)=e^{x+y}=e^x\cdot e^y=\exp(x)\cdot\exp(y)$ we obtain for any $x\in \R$:
+}
+		\begin{align*}
+		\exp'(x) &=\lim_{h\rightarrow 0}\frac{\exp(x+h)-\exp(x)}{h} 
+		=\lim_{h\rightarrow 0}\frac{\exp(x)\cdot\exp(h)-\exp(x)}{h}\\ 
+		&=\lim_{h\rightarrow 0} \frac{\exp(h)-1}{h}\cdot \exp(x) =\exp'(0)\cdot \exp(x)\\
+		&=\exp(x)
+		\end{align*}
+\lang{de}{
+Die Ableitungsfunktion der Exponentialfunktion $e^x$ ist also wieder die Exponentialfunktion $e^x$.
+}
+\lang{en}{
+The derivative of the exponential function $e^x$ is hence again the exponential function $e^x$.
+}
+\tab{\lang{de}{Sinus und Kosinus}\lang{en}{Sine and cosine}}
+\lang{de}{
+Sinus und Kosinus sind beide differenzierbar und es gilt
+}
+\lang{en}{
+The sine and cosine functions are both differentiable and we have
+}
+\[   \sin'(x)=\cos(x) \quad \text{\lang{de}{und}\lang{en}{and}}\quad \cos'(x)=-\sin(x) \]
+\lang{de}{
+für alle $x\in \R$. Dies sieht man ähnlich ein wie bei der Exponentialfunktion: 
+Über die \ref[expreihe][Potenzreihenentwicklungen von Sinus und Kosinus]{sec:sinus-kosinus} erhält man zunächst 
+$\sin'(0)=1$ und $\cos'(0)=0$ und mit Hilfe der \ref[expreihe][Additionstheoreme]{sec:sinus-kosinus} und $\sin(0)=0$ und $\cos(0)=1$ dann
+}
+\lang{en}{
+for all $x\in \R$. This can be seen in a way similar to the exponential function. Using the 
+\ref[expreihe][power series representations of sine and cosine]{sec:sinus-kosinus} we obtain 
+$\sin'(0)=1$ and $\cos'(0)=0$, and using the 
+\ref[expreihe][theorem about their sums]{sec:sinus-kosinus} and $\sin(0)=0$ and $\cos(0)=1$, we obtain
+}
+		\begin{align*}
+		\sin'(x) &=\lim_{h\rightarrow 0} \frac{\sin(x+h)-\sin(x)}{h} \\
+		&=\lim_{h\rightarrow 0} \frac{\sin(x)\cos(h)+\cos(x)\sin(h)-\sin(x)}{h} \\
+		&=\lim_{h\rightarrow 0} \left( \sin(x)\cdot \frac{\cos(h)-1}{h}+\cos(x)\cdot \frac{\sin(h)}{h}\right) \\ 
+		&=\sin(x)\cdot \cos'(0)+\cos(x)\cdot \sin'(0) = \cos(x)
+		\end{align*}
+\lang{de}{sowie}
+\lang{en}{and}
+\begin{align*}
+		\cos'(x) &=\lim_{h\rightarrow 0} \frac{\cos(x+h)-\cos(x)}{h} \\
+		&=\lim_{h\rightarrow 0} \frac{\cos(x)\cos(h)-\sin(x)\sin(h)-\cos(x)}{h} \\
+		&=\lim_{h\rightarrow 0} \left( \cos(x)\cdot \frac{\cos(h)-1}{h}-\sin(x)\cdot \frac{\sin(h)}{h} \right) \\ 
+		&=\cos(x)\cdot \cos'(0)-\sin(x)\cdot \sin'(0) = -\sin(x).
+		\end{align*}
+\tab{$f(x)=\frac{1}{x}$}
+\lang{de}{
+Die Funktion $f(x)=\frac{1}{x}$ ist für $x\in\R\setminus\{0\}$ definiert. Sei $x\neq 0$ und $h$ 
+gen\"{u}gend klein (d.h. $|h|<|x|$). Dann ist
+}
+\lang{en}{
+The function $f(x)=\frac{1}{x}$ is defined for $x\in\R\setminus\{0\}$. Suppose $x\neq 0$ and let $h$ 
+be sufficiently small (i.e. $|h|<|x|$). Then
+}
+\begin{eqnarray*}
+\frac{f(x+h)-f(x)}{h}&=&\frac{\frac{1}{x+h}-\frac{1}{x}}{h}
+=\frac{1}{h}\cdot \frac{x-(x+h)}{x(x+h)}\\&=&\frac{1}{h}\cdot\frac{-h}{x(x+h)}=-\frac{1}{x(x+h)},
+\end{eqnarray*}
+\lang{de}{also}
+\lang{en}{so}
+\[f'(x)=\lim_{h\rightarrow 0}-\frac{1}{x(x+h)}=-\frac{1}{x^2}.\]
+\tab{\lang{de}{Wurzelfunktion $\sqrt{x}$}\lang{en}{Square root function $\sqrt{x}$}}
+\lang{de}{
+F\"{u}r die Wurzelfunktion $f(x)=\sqrt{x}$ (definiert für $x\geq 0$) erhalten wir für $x\geq 0$ und $h>-x$:
+}
+\lang{en}{
+For the square root function $f(x)=\sqrt{x}$ (defined for $x\geq 0$), for $x\geq 0$ and $h>-x$ we 
+obtain:
+}
+\begin{eqnarray*}
+f(x+h)-f(x)&=&\sqrt{x+h}-\sqrt{x}\\
+&=&\frac{(\sqrt{x+h}-\sqrt{x})\cdot (\sqrt{x+h}+\sqrt{x})}{\sqrt{x+h}+\sqrt{x}}
+=\frac{(\sqrt{x+h})^2-(\sqrt{x})^2}{\sqrt{x+h}+\sqrt{x}}\\
+&=&\frac{x+h-x}{\sqrt{x+h}+\sqrt{x}}
+=\frac{h}{\sqrt{x+h}+\sqrt{x}}
+\end{eqnarray*}
+\lang{de}{
+(man beachte ab der zweiten Zeile, dass $x+h>0$ und daher $\sqrt{x+h}+\sqrt{x}>0$ und insbesondere $\neq 0$), also
+}
+\lang{en}{
+(consider that from the second row onwards, $x+h>0$ and hence $\sqrt{x+h}+\sqrt{x}>0$ and in 
+particular $\neq 0$), so
+}
+\[\frac{f(x+h)-f(x)}{h}=\frac{1}{\sqrt{x+h}+\sqrt{x}}.\]
+\lang{de}{Für $x>0$ ist damit}
+\lang{en}{For $x>0$ we hence have}
+\[f'(x)=\lim_{h\rightarrow 0}\frac{1}{\sqrt{x+h}+\sqrt{x}}=\frac{1}{2\sqrt{x}}.\]
+\lang{de}{
+Für $x=0$ (und $h>0$) existiert der Grenzwert $\lim_{h\rightarrow 0}\frac{1}{\sqrt{x+h}+\sqrt{x}}=\lim_{h\searrow 0}\frac{1}{\sqrt{h}}$ jedoch
+nicht. Die Wurzelfunktion ist also an der Stelle $x=0$ nicht differenzierbar.
+}
+\lang{en}{
+For $x=0$ (and $h>0$), the limit 
+$\lim_{h\rightarrow 0}\frac{1}{\sqrt{x+h}+\sqrt{x}}=\lim_{h\searrow 0}\frac{1}{\sqrt{h}}$ 
+does not exist. The square root function is therefore not differentiable at the point $x=0$.
+}
+
+\end{tabs*}
+\end{example}
+
+
+
+\lang{de}{
+In der folgenden Tabelle sind die wichtigsten Ableitungen zusammengefasst. Für die Begründung der
+Ableitungen von $x^n$ mit $n\in \Z$ bzw. allgemeiner $x^r$  mit $r\in \R$, sowie für $\ln(x)$, $a^x$ und $\tan(x)$ werden die
+Rechenregeln verwendet, die erst im nächsten Abschnitt erläutert werden, weshalb dies auf den nächsten Abschnitt verschoben wird.
+}
+\lang{en}{
+In the following table we display some of the most important derivatives. To determine the 
+derivatives of $x^n$ for all $n\in \Z$ or more generally $x^r$  with $r\in \R$, and those of 
+$\ln(x)$, $a^x$ and $\tan(x)$, we require some rules that are covered in the next section.
+}
+\begin{rule}\label{rule:diffregeln}
+\begin{align*}
+\underline{\text{\lang{de}{Funktion}\lang{en}{Function}}\; f(x)}&\hspace{20pt}&  \underline{\text{\lang{de}{Ableitung}\lang{en}{Derivative}}\; f'(x)}&&\underline{\text{\lang{de}{Bedingung an }\lang{en}{Conditions on }}\, x}\\
+c \;(c\in\R) &&0&&\\
+x^n\;( n\in\N)&&nx^{n-1}&&\\
+x^n\;(n\in\Z, n<0)&&nx^{n-1}&& x\neq 0\\
+x^r\;( r\in\R)&&rx^{r-1}&& x>0\\
+\sqrt{x}=x^{1/2} &&\frac{1}{2\sqrt{x}}=\frac{1}{2}x^{-1/2}&& x>0\\
+e^x&&e^x&&\\
+\ln(x)&&\frac{1}{x}&&x>0\\
+a^x \;(a>0)&&\ln a\cdot a^x&&\\
+\sin(x)&&\cos(x)&&\\
+\cos(x)&&-\sin(x)&&\\
+\tan(x)&& \frac{1}{\cos(x)^2}=1+\tan(x)^2 \quad&& x\notin \{ \frac{\pi}{2}+k\pi \,|\, k\in\Z \}
+\end{align*}
+\end{rule}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\randint[Z]{n}{2}{9}
+		    \function[normalize]{f}{1/x^n}
+			\function[normalize]{df}{-n/x^(n+1)}
+		\end{variables}
+		
+			\text{\lang{de}{Die Ableitungsfunktion der Funktion $f(x)=\var{f}$ ist $f'(x)= $\ansref.}
+            \lang{en}{The derivative function of $f(x)=\var{f}$ is $f'(x)= $\ansref.}}
+		
+		\begin{answer}
+			\solution{df}
+            \checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\explanation{\lang{de}{
+    $\var{f}$ ist gleich $x^{-\var{n}}$. Dann kann man die Regel für ganzzahlige Potenzen anwenden.
+    }
+    \lang{en}{
+    $\var{f}$ is equal to $x^{-\var{n}}$. We may hence use the above rule for differentiating integer 
+    powers.
+    }}
+	\end{quickcheck}
+
+
+
+\end{visualizationwrapper}
+
+
+\end{content}

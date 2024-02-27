@@ -1,0 +1,324 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A09: zweite Ableitung}
+    \lang{en}{problem_9}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+
+\lang{de}{
+	\title{A09: zweite Ableitung}
+}
+\lang{en}{
+	\title{Problem 9}
+}
+
+\begin{block}[annotation]
+      
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9474}{Ticket 9474}
+\end{block}
+
+
+\begin{problem}
+	
+\randomquestionpool{1}{3}
+\randomquestionpool{4}{5}
+\randomquestionpool{6}{8}
+\randomquestionpool{9}{9}
+	
+%Frage 1 von 9
+\begin{question}
+	\lang{de}{
+		\text{Gegeben $f(x) = \var{ida}x^3-\var{idb}x^2+\var{idc}x+\var{idd}$. Berechnen Sie $f''(x)$ und geben Sie Ihr Ergebnis ein.}
+		\explanation{}
+	}
+	\lang{en}{
+		\text{Let $f(x) = \var{ida}x^3-\var{idb}x^2+\var{idc}x+\var{idd}$. Calculate $f''(x)$ and input your answer below.}
+	}
+	\begin{variables}
+        \randint[Z]{a}{2}{5}
+		\randint[Z]{b}{3}{6}
+		\randint[Z]{c}{2}{7}
+		\randint[Z]{d}{1}{12}
+		\function[calculate]{ida}{a}
+		\function[calculate]{idb}{b}
+		\function[calculate]{sida}{6*a}
+		\function[calculate]{zidb}{2*b}
+		\function[calculate]{idc}{c}
+		\function[calculate]{idd}{d}
+	    \function{g}{sida*x-zidb}
+	\end{variables}	
+	\type{input.function}
+	\begin{answer}
+		\text{ $f''(x) = $}
+		\solution{g}
+		\checkAsFunction{x}{-10}{10}{100}		
+	\end{answer}
+\end{question}
+
+%Frage 2 von 9
+\begin{question}
+	\lang{de}{
+		\text{Gegeben $f(x) = \cos(\var{idb}x)+\sin(\var{idd}x)$. Berechnen Sie $f''(x)$ und geben Sie Ihr Ergebnis ein.}
+		\explanation{}
+	}
+	\lang{en}{
+		\text{Let $f(x) = \cos(\var{idb}x)+\sin(\var{idd}x)$. Calculate $f''(x)$ and input your answer below.}
+	}
+	\begin{variables}
+        \randint[Z]{a}{2}{5}
+		\randint[Z]{b}{3}{6}
+		\randint[Z]{c}{2}{7}
+		\randint[Z]{d}{1}{12}
+		\function[calculate]{ida}{a}
+		\function[calculate]{idb}{b}
+		\function[calculate]{vfe}{-1*b^2}
+		\function[calculate]{vfz}{d^2}
+		\function[calculate]{idc}{c}
+		\function[calculate]{idd}{d} 
+		\function{g}{vfe*cos(idb*x)-vfz*sin(idd*x)}
+	\end{variables}
+	\type{input.function}
+	\begin{answer}
+		\text{ $f''(x) = $}
+		\solution{g}
+		\checkAsFunction{x}{-10}{10}{100}		
+	\end{answer}
+\end{question}
+
+%Frage 3 von 9
+\begin{question}
+	\lang{de}{
+		\text{Gegeben $f(x) = e^{x^{\var{idn}}}$. Berechnen Sie $f''(x)$ und geben Sie Ihr Ergebnis ein.}
+		\explanation{}
+	}
+	\lang{en}{
+		\text{Let $f(x) = e^{x^{\var{idn}}}$. Calculate $f''(x)$ and input your answer below.}
+	}
+	\begin{variables}
+        \randint[Z]{n}{3}{6}
+		\function[calculate]{idn}{n}
+		\function[calculate]{vfe}{n-1}
+		\function{g}{x^(n-2)*n*exp(x^n)*(vfe+n*x^n)}
+	\end{variables}
+	\type{input.function}
+	\begin{answer}
+		\text{ $f''(x) = $}
+		\solution{g}
+		\checkAsFunction{x}{-10}{10}{100}		
+	\end{answer}
+\end{question}
+
+%Frage 4 von 9
+\begin{question}
+	\lang{de}{
+		\text{Gegeben $f(x) =\var{ida}x^3-\var{vfe}x^2+\var{idd}$. Wo besitzt $f$ eine Wendestelle?}
+		\explanation{$f$ hat eine Wendestelle in $x$, wenn $f''(x)=0$ gilt und $f''$ in $x$ das Vorzeichen wechselt.}
+	}
+	\lang{en}{
+		\text{Let $f(x) =\var{ida}x^3-\var{vfe}x^2+\var{idd}$. Where does $f$ have an inflection point?}
+		\explanation{$f$ has an inflection point at $x$-values where both $f''(x)=0$ and where $f''$ changes sign.}
+	}
+	\begin{variables}
+        \randint[Z]{a}{2}{4}
+		\randint[Z]{b}{3}{6}
+		\randint[Z]{c}{1}{5}
+		\randint[Z]{d}{1}{7}
+		\function[calculate]{vfe}{3*c*a}
+		\function[calculate]{ida}{a}
+		\function[calculate]{idd}{d}
+	\end{variables}
+	\type{input.number}
+	\begin{answer}
+  		\lang{de}{\text{ $f$ hat eine Wendestelle in:}}
+  		\lang{en}{\text{$f$ has an inflection point at $x=$}}
+		\solution{c}
+	\end{answer}
+\end{question}
+
+%Frage 5 von 9
+\begin{question}
+	\lang{de}{
+		\text{Gegeben $f(x) =\ln(\var{qa}x^2+\var{qb})$. In welchem $x>0$ besitzt $f$ eine Wendestelle?}
+		\explanation{$f$ hat eine Wendestelle in $x$, wenn $f''(x)=0$ gilt und $f''$ in $x$ das Vorzeichen wechselt.}
+	}
+	\lang{en}{
+		\text{Let $f(x) =\ln(\var{qa}x^2+\var{qb})$. At what $x>0$ does $f$ have an inflection point?}
+		\explanation{$f$ has an inflection point at $x$-values where both $f''(x)=0$ and where $f''$ changes sign.}
+	}
+	\begin{variables}
+        \randint[Z]{a}{2}{3}
+	 	\randint[Z]{c}{1}{3}
+		\function[calculate]{b}{c*a}
+		\function[calculate]{qa}{a^2}
+		\function[calculate]{qb}{c^2*a^2}
+	\end{variables}
+	\type{input.number}
+	\begin{answer}
+    	\lang{de}{\text{ $f$ hat eine Wendestelle in:}}
+      	\lang{en}{\text{$f$ has an inflection point at $x=$}}
+		\solution{c}
+	\end{answer}
+\end{question}
+	
+%Frage 6 von 9	
+\begin{question}
+	\lang{de}{
+		\text{Gegeben $f(x) =\var{f}$. 
+		Bestimmen Sie die Sattelstellen $x_1\leq x_2$\\ und die weitere Wendestelle $x_3$ von $f$. }
+		\explanation{$f$ hat eine Wendestelle in $x$, wenn $f''(x)=0$ gilt und $f''$ in $x$ das Vorzeichen wechselt.\\
+		Gilt zus\"{a}tzlich noch $f'(x)=0$, so liegt in $x$ eine Sattelstelle vor.}
+	}
+	\lang{en}{
+		\text{Let $f(x)=\var{f}$.
+		Find the saddle points $x_1\leq x_2$ and an additional inflection point $x_3$ of $f$.}
+		\explanation{$f$ has an inflection point at $x$-values where both $f''(x)=0$ and where $f''$ changes sign.
+		If in addition $f'(x)=0$ at that point, then $f$ has a saddle point there.}
+	}
+	\begin{variables}
+	    \randint[Z]{m}{2}{4}
+	    \randint[Z]{b}{1}{5}
+	    \function[calculate]{vfe}{m^4}
+	    \function[calculate]{vfz}{2*m^2}
+		\function{f}{1/5*x^5-vfz/3*x^3+vfe*x+b}
+	    \number{loes}{0}
+	   	\function{loesz}{-m}
+	   	\function{loesd}{m}
+	\end{variables}
+	\type{input.number}
+	\begin{answer}
+		\text{ $x_1$=}
+		\solution{loesz}	
+	\end{answer}
+	\begin{answer}
+		\text{ $x_2$=}
+		\solution{loesd}	
+	\end{answer}
+	\begin{answer}
+		\text{ $x_3$=}
+		\solution{loes}	
+	\end{answer}
+\end{question}
+
+%Frage 7 von 9
+\begin{question}
+	\lang{de}{
+		\text{Gegeben $f(x) =\var{f}$. 
+		Bestimmen Sie die Sattelstelle $x_1$\\ und die weitere Wendestelle $x_2$ von $f$. }
+		\explanation{$f$ hat eine Wendestelle in $x$, wenn $f''(x)=0$ gilt und $f''$ in $x$ das Vorzeichen wechselt.\\
+		Gilt zus\"{a}tzlich noch $f'(x)=0$, so liegt in $x$ eine Sattelstelle vor.}
+	}
+	\lang{en}{
+		\text{Let $f(x)=\var{f}$.
+		Find the saddle point $x_1$ and an additional inflection point $x_2$ of $f$.}
+		\explanation{$f$ has an inflection point at $x$-values where both $f''(x)=0$ and where $f''$ changes sign.
+		If in addition $f'(x)=0$ at that point, then $f$ has a saddle point there.}
+	}
+	\begin{variables}
+	    \randint[Z]{a}{1}{3}
+	    \function{s}{2*a-1}
+	    \randint[Z]{b}{1}{5}
+        \function[calculate, 2]{vfe}{9*s^2/2}
+        \function[calculate, 2]{vfz}{2*s}
+		\function{f}{0.25*x^4-vfz*x^3+vfe*x^2+b}
+		\function{loesz}{6*a-3}
+		\function{loesd}{2*a-1}
+	\end{variables}
+	\type{input.number}
+	\begin{answer}
+		\text{ $x_1$=}
+		\solution{loesz}	
+	\end{answer}
+	\begin{answer}
+		\text{ $x_2$=}
+		\solution{loesd}	
+	\end{answer}
+\end{question}
+
+%Frage 8 von 9
+\begin{question}
+	\lang{de}{
+		\text{Gegeben $f(x) =\var{f}$. 
+		Bestimmen Sie die Sattelstelle $x_1$\\ und die weitere Wendestelle $x_2$ von $f$. }
+		\explanation{$f$ hat eine Wendestelle in $x$, wenn $f''(x)=0$ gilt und $f''$ in $x$ das Vorzeichen wechselt.\\
+		Gilt zus\"{a}tzlich noch $f'(x)=0$, so liegt in $x$ eine Sattelstelle vor.}
+	}
+	\lang{en}{
+		\text{Let $f(x)=\var{f}$.
+		Find the saddle point $x_1$ and an additional inflection point $x_2$ of $f$.}
+		\explanation{$f$ has an inflection point at $x$-values where both $f''(x)=0$ and where $f''$ changes sign.
+		If in addition $f'(x)=0$ at that point, then $f$ has a saddle point there.}
+	}
+	\begin{variables}
+		\randint[Z]{a}{1}{2}
+        \function{s}{2*a}
+        \randint[Z]{b}{1}{5}
+	    \function[calculate, 2]{vfe}{18*a^2}
+	    \function[calculate, 2]{vfz}{2*s}
+    	\function{f}{0.25*x^4-vfz*x^3+vfe*x^2+b}  
+		\function{loesz}{6*a}
+		\function{loesd}{2*a}
+	\end{variables}
+	\type{input.number}
+	\begin{answer}
+		\text{ $x_1$=}
+		\solution{loesz}
+	\end{answer}
+	\begin{answer}
+		\text{ $x_2$=}
+		\solution{loesd}
+	\end{answer}	
+\end{question}
+
+%Frage 9 von 9
+\begin{question}
+	\lang{de}{
+		\text{Gegeben $f(x) =\var{idb}x(x-\var{ida})^3$. Wo besitzt $f$ eine Sattelstelle?\\ Tipp: Leiten Sie den Term $(x-\var{ida})^3$ 
+		mit der Kettenregel ab! }
+		\explanation{$f$ besitzt in $x$ eine Sattelstelle, wenn $f'(x)=f''(x)=0$ gilt und zus\"{a}tzlich $f''$ in $x$ das Vorzeichen wechselt.}
+	}
+	\lang{en}{
+		\text{Let $f(x) =\var{idb}x(x-\var{ida})^3$. Where does $f$ have a saddle point?\\
+		Hint: Take the derivative of the term $(x-\var{ida})^3$ using the chain rule!}
+		\explanation{$f$ has a saddle point at $x$-values where $f'(x)=f''(x)=0$ and where $f''$ changes sign.}
+	}
+	\begin{variables}
+        \randint[Z]{a}{2}{3}
+        \randint[Z]{b}{2}{7}
+		\function[calculate]{ida}{a}  		
+		\function[calculate]{idb}{b}
+	\end{variables}
+	\type{input.number}
+	\begin{answer}
+    	\lang{de}{\text{$f$ hat eine Sattelstelle in:}}
+       	\lang{en}{\text{$f$ has a saddle point at $x=$}}
+		\solution{a}	
+	\end{answer}
+\end{question}
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

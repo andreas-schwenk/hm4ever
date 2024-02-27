@@ -1,0 +1,308 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Addition und Skalarmultiplikation}
+    \lang{en}{Addition and scalar multiplication of matrices}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+  \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T111neu_Matrizen/g_art_content_39_matrizen.meta.xml}{matrizen}
+    \link{generic_article}{content/rwth/HM1/T108_Vektorrechnung/g_art_content_27_vektoren.meta.xml}{vektoren}
+    \link{generic_article}{content/rwth/HM1/T108_Vektorrechnung/g_art_content_29_linearkombination.meta.xml}{lin-komb}
+    \link{generic_article}{content/rwth/HM1/T111neu_Matrizen/g_art_content_43_matrizenmultiplikation.meta.xml}{matrix-mult}
+    \link{generic_article}{content/rwth/HM1/T403a_Vektorraum/g_art_content_10a_vektorraum.meta.xml}{Allg_Vektorraum}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21337}{Ticket 21337}
+\end{block}
+\begin{block}[annotation]
+Copy of \href{http://team.mumie.net/issues/9059}{Ticket 9059}: content/rwth/HM1/T112_Rechnen_mit_Matrizen/art_content_42_matrixaddition.src.tex
+\end{block}
+
+\usepackage{mumie.ombplus}
+\ombchapter{11}
+\ombarticle{2}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Addition und Skalarmultiplikation von Matrizen}
+       \lang{en}{Addition and scalar multiplication of matrices}}
+
+% \begin{block}[annotation]
+%   Im Ticket-System: \href{http://team.mumie.net/issues/9059}{Ticket 9059}\\
+% \end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+%\begin
+
+\section{\lang{de}{Addition und Skalarmultiplikation von Matrizen}
+         \lang{en}{Addition and scalar multiplication of matrices}}
+
+\lang{de}{
+Im Abschnitt \link{matrizen}{Matrizen} haben wir Matrizen kennengelernt.
+In diesem und in den nächsten Abschnitten geht es um das Rechnen mit Matrizen.
+}
+\lang{en}{
+In the first \link{matrizen}{section on matrices} we introduced matrices, and in this section we 
+study some operations on matrices.
+}
+
+
+\begin{definition}[\lang{de}{Matrix-Addition}\lang{en}{Matrix addition}]\label{def:matrix_add}
+
+\lang{de}{
+Für zwei $(m\times n)$-Matrizen $A=\left( a_{ij} \right)_{1 \leq i \leq m, 1 \leq j \leq n}$ und $B=\left( b_{ij} \right)_{1 \leq i \leq m, 1 \leq j \leq n}$ über $\R$, die also die 
+gleiche Anzahl an Zeilen \textbf{und} die gleiche Anzahl an Spalten haben, ist deren \emph{Summe} komponentenweise definiert, d.\,h. der $(i,j)$-te Koeffizient der Summe ist gleich
+der Summe der $(i,j)$-ten Koeffizienten, oder kurz:
+}
+\lang{en}{
+Given two $(m\times n)$-matrices $A=\left( a_{ij} \right)_{1 \leq i \leq m, 1 \leq j \leq n}$ and 
+$B=\left( b_{ij} \right)_{1 \leq i \leq m, 1 \leq j \leq n}$ over $\R$, which thus have the same 
+number of rows \textbf{and} columns, we define their \emph{sum} componentwise. That is, the 
+$(i,j)$th coefficient of the sum is equal to the sum of the $(i,j)$th coefficients:
+}
+
+\[ A+B = \left( a_{ij}+b_{ij} \right)_{1 \leq i \leq m, 1 \leq j \leq n}. \]
+
+\lang{de}{Ausführliche Schreibweise:}
+\lang{en}{More explicitly:}
+
+\begin{eqnarray*}
+ A + B &=&
+\begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{pmatrix} + \begin{pmatrix}
+b_{11} & b_{12} & \cdots & b_{1n} \\
+b_{21} & b_{22} & \cdots & b_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+b_{m1} & b_{m2} & \cdots & b_{mn}
+\end{pmatrix} \\ && \\
+&=& \begin{pmatrix}
+a_{11}+b_{11} & a_{12}+b_{12} & \cdots & a_{1n}+b_{1n} \\
+a_{21}+b_{21} & a_{22}+b_{22} & \cdots & a_{2n}+b_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1}+b_{m1} & a_{m2}+b_{m2} & \cdots & a_{mn}+b_{mn}
+\end{pmatrix}.
+\end{eqnarray*}
+
+\end{definition}
+
+\begin{block}[warning]
+\lang{de}{Für Matrizen verschiedener Größen ist die Summe nicht definiert!}
+\lang{en}{The sum of two matrices of different sizes is not defined!}
+\end{block}
+
+\begin{example}
+\begin{enumerate}
+\item \lang{de}{
+      Die Summe der Matrizen $A=\begin{pmatrix} 1&2&3\\ 4 & 5 &6\end{pmatrix}$ und 
+      $B=\begin{pmatrix} 3&0&-1 \\ 2 & -2 &-3\end{pmatrix}$ ist
+      }
+      \lang{en}{
+      The sum of the matrices $A=\begin{pmatrix} 1&2&3\\ 4 & 5 &6\end{pmatrix}$ and 
+      $B=\begin{pmatrix} 3&0&-1 \\ 2 & -2 &-3\end{pmatrix}$ is
+      }
+      \[\begin{pmatrix} 1&2&3\\ 4 & 5 &6\end{pmatrix} + 
+          \begin{pmatrix} 3&0&-1 \\ 2 & -2 &-3\end{pmatrix} = 
+        \begin{pmatrix} 1+3&2+0&3-1 \\ 4+2 & 5-2 &6-3\end{pmatrix} = 
+        \begin{pmatrix} 4&2&2 \\ 6 & 3 &3\end{pmatrix}. \]
+\item \lang{de}{
+      Die Summe der Matrizen $A=\begin{pmatrix} 1&2&3\\ 4 & 5 &6\end{pmatrix}$ und 
+      $C=\begin{pmatrix} 3&0 \\ 2  &-3\end{pmatrix}$ ist nicht definiert, da sie verschiedene 
+      Anzahlen von Spalten haben.
+      }
+      \lang{en}{
+      The sum of the matrices $A=\begin{pmatrix} 1&2&3\\ 4 & 5 &6\end{pmatrix}$ and 
+      $C=\begin{pmatrix} 3&0 \\ 2  &-3\end{pmatrix}$ is not defined, as they have a different 
+      number of columns.
+      }
+\end{enumerate}
+\end{example}
+
+
+\begin{definition}[\lang{de}{Multiplikation mit Skalaren}\lang{en}{Scalar multiplication}]\label{def:matrix_skalar_mult}
+\lang{de}{
+Für eine $(m\times n)$-Matrix $A=\left( a_{ij} \right)_{1 \leq i \leq m, 1 \leq j \leq n}$ über $\R$ 
+und eine reelle Zahl $r\in \R$ ist die \emph{skalare Multiplikation} komponentenweise definiert, 
+d.\,h. der $(i,j)$-te Koeffizient des Ergebnisses ist das $r$-fache des $(i,j)$-ten Koeffizienten von 
+$A$, oder kurz:
+}
+\lang{en}{
+Given the $(m\times n)$-matrix $A=\left( a_{ij} \right)_{1 \leq i \leq m, 1 \leq j \leq n}$ over $\R$ 
+and a real number $r\in \R$, we define \emph{scalar multiplication} componentwise. That is, the 
+$(i,j)$th coefficient of the result is $r$-times the $(i,j)$th coefficient of $A$:
+}
+\[ r\cdot A= \left( ra_{ij} \right)_{1 \leq i \leq m, 1 \leq j \leq n}. \]
+\end{definition}
+
+\begin{remark}
+\lang{de}{
+Betrachtet man Spaltenvektoren der Länge $n$ als $(n\times 1)$-Matrizen, so stimmen die Definitionen 
+hier mit der Vektoraddition und der Skalarmultiplikation aus dem Abschnitt 
+\link{vektoren}{Vektoren im Anschauungsraum} überein.
+}
+\lang{en}{
+Considering column vectors with $n$ entries as  $(n\times 1)$-matrices, the above operations are 
+compatible with (equivalent to) the vector addition and scalar multiplication that we 
+\link{vektoren}{introduced for vectors}.
+}
+\end{remark}
+
+\begin{example}
+\lang{de}{Für die Matrizen }
+\lang{en}{The matrices }
+$A=\begin{pmatrix} 1&2&3\\ 4 & 5 &6\end{pmatrix}$ \lang{de}{und}\lang{en}{and} 
+$C=\begin{pmatrix} 3&0 \\ 2  &-3\end{pmatrix}$ \lang{de}{sind}\lang{en}{we have}
+\[ 2\cdot A= 2\cdot \begin{pmatrix} 1&2&3\\ 4 & 5 &6\end{pmatrix} =\begin{pmatrix} 2&4&6\\ 8 & 10 &12\end{pmatrix}\]
+\lang{de}{sowie}\lang{en}{and}
+\[ 2\cdot C= 2 \cdot \begin{pmatrix} 3&0 \\ 2 & -3\end{pmatrix} = \begin{pmatrix} 6& 0 \\ 4  &-6\end{pmatrix}. \]
+\end{example}
+
+\begin{remark}
+\lang{de}{
+Für eine $(m\times n)$-Matrix $A=\left( a_{ij} \right)_{1 \leq i \leq m, 1 \leq j \leq n}$ über $\R$ 
+und eine reelle Zahl $s\in \R$ ist die \emph{skalare Division} direkt auf die skalare Multiplikation 
+zurückzuführen, indem man in der Definition $r$ durch $\frac{1}{s}$ ersetzt.
+}
+\lang{en}{
+For the $(m\times n)$-matrix $A=\left( a_{ij} \right)_{1 \leq i \leq m, 1 \leq j \leq n}$ over $\R$ 
+and a real number $s\in \R$, \emph{scalar division} by $s$ is simply defined as scalar multiplication 
+by the reciprocal $\frac{1}{s}$ of $s$.
+}
+\end{remark}
+
+
+\section{\lang{de}{Rechenregeln}\lang{en}{Rules for matrix addition and scalar multiplication}}
+
+\lang{de}{
+Die Addition und die skalare Multiplikation von $(m\times n)$-Matrizen über $\R$ lassen sich auch 
+kombinieren. Es ergeben sich dieselben Regeln wie für die 
+\link{lin-komb}{Addition und skalare Multiplikation} von Vektoren.
+}
+\lang{en}{
+Addition and scalar multiplication of $(m\times n)$-matrices over $\R$ can be combined using the 
+following rules, similar to \link{lin-komb}{those for addition and scalar multiplication of vectors}.
+}
+
+
+\begin{rule}\label{rule:rechenregeln}\label{rule:matrix_rechenregeln}
+\lang{de}{
+Wie \link{matrizen}{bisher} bezeichne $M(m,n;\R)$ die Menge aller $(m\times n)$-Matrizen über $\R$. 
+Dann gilt f"ur die Addition:
+}
+\lang{en}{
+\link{matrizen}{As seen before}, $M(m,n;\R)$ denotes the set of all $(m\times n)$-matrices over $\R$. 
+For addition of matrices we have
+}
+\begin{enumerate}
+    \item \lang{de}{\nowrap{$\,\, A + B = B + A$ f\"ur alle $A,B \in M(m,n;\R)$,}}
+          \lang{en}{\nowrap{$\,\, A + B = B + A$ for all $A,B \in M(m,n;\R)$,}}
+    \item \lang{de}{\nowrap{$\,\, A + (B + C) = (A + B) + C$ f\"ur alle $A,B,C \in M(m,n;\R)$,}}
+          \lang{en}{\nowrap{$\,\, A + (B + C) = (A + B) + C$ for all $A,B,C \in M(m,n;\R)$,}}
+    \item \lang{de}{
+          $\,$ es existiert eine Matrix $0 \in M(m,n;\R)$, sodass $ B + 0 = B$ f\"ur alle 
+          $B \in M(m,n;\R)$ gilt (nämlich die \emph{Nullmatrix}, deren Koeffizienten sämtlich $0$ 
+          sind).
+          }
+          \lang{en}{
+          There exists a matrix $0 \in M(m,n;\R)$ such that $ B + 0 = B$ holds for all 
+          $B \in M(m,n;\R)$ (namely the \emph{zero matrix}). It has all entries equal to $0$.
+          }
+%    \item \nowrap{Zu jedem $ B \in M(m,n;\R)$ existiert $-B \in M(m,n;\R)$, sodass
+%      $B + (-B) = \vec{0}$}
+    \end{enumerate}
+
+    \lang{de}{F"ur die Multiplikation mit Skalaren gilt:}
+    \lang{en}{For scalar multiplication we have:}
+    \begin{enumerate}
+    \item \lang{de}{
+          \nowrap{$\,\, \alpha (\beta B) = (\alpha \beta) B$ f\"ur alle $B \in M(m,n;\R) $ und 
+          $ \alpha, \beta \in \R $,}
+          }
+          \lang{en}{
+          \nowrap{$\,\, \alpha (\beta B) = (\alpha \beta) B$ for all $B \in M(m,n;\R) $ and 
+          $ \alpha, \beta \in \R $,}
+          }
+    \item \lang{de}{\nowrap{$\,\, 1\cdot B = B$ f\"ur alle $B \in M(m,n;\R) $.}}
+          \lang{en}{\nowrap{$\,\, 1\cdot B = B$ for all $B \in M(m,n;\R) $.}}
+    \end{enumerate}
+    \lang{de}{Zwischen Addition und Multiplikation mit Skalaren gelten die Distributivgesetze:}
+    \lang{en}{There are also distributivity laws between addition and scalar multiplication:}
+    \begin{enumerate}
+    \item \lang{de}{
+          \nowrap{$\,\, \alpha (A + B) = \alpha A + \alpha B$ f\"ur alle $A, B \in M(m,n;\R)$ und 
+          $\alpha \in \R$,}
+          }
+          \lang{en}{
+          \nowrap{$\,\, \alpha (A + B) = \alpha A + \alpha B$ for all $A, B \in M(m,n;\R)$ and 
+          $\alpha \in \R$,}
+          }
+    \item \lang{de}{
+          \nowrap{$\,\, (\alpha + \beta) B = \alpha B + \beta B$ f\"ur alle $B \in M(m,n;\R)$ und 
+          $\alpha , \beta \in \R $.}
+          }
+          \lang{en}{
+          \nowrap{$\,\, (\alpha + \beta) B = \alpha B + \beta B$ for all $B \in M(m,n;\R)$ and 
+          $\alpha , \beta \in \R $.}
+          }
+\end{enumerate}
+\lang{de}{
+\floatright{\href{https://www.hm-kompakt.de/video?watch=818}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{}
+\end{rule}
+
+\begin{example}
+%\begin{enumerate}
+%\item 
+\lang{de}{Es gilt: }
+\lang{en}{We have: }
+\begin{eqnarray*} && 3\cdot \left( \begin{pmatrix}2&1&0 \\ 3&0&1\end{pmatrix}+ \begin{pmatrix}-1&-1& 2\\ 4&0&0 \end{pmatrix}\right)
+- 3\cdot \begin{pmatrix}2&1&0\\ 3&0&1\end{pmatrix} \\
+&=& 3\cdot \begin{pmatrix}2&1&0 \\ 3&0&1\end{pmatrix}+ 3\cdot \begin{pmatrix}-1&-1& 2\\ 4&0&0\end{pmatrix}- 3\cdot \begin{pmatrix}2&1&0\\ 3&0&1\end{pmatrix} \\
+&=& 3\cdot \begin{pmatrix}-1&-1& 2\\ 4&0&0\end{pmatrix} =\begin{pmatrix}-3&-3&6 \\ 12&0&0\end{pmatrix}.
+\end{eqnarray*}
+%\end{enumerate}
+\end{example}
+
+\begin{remark}
+\lang{de}{
+Für alle natürlichen Zahlen $m$ und $n$ bildet die Menge $M(m,n;\R)$ der $(m\times n)$-Matrizen über 
+$\R$ einen reellen Vektorraum. % (vgl. dazu die \ref[lin-komb][Ergänzung im Abschnitt Rechenregeln für Vektoren und Linearkombinationen]{supp:allg-vektorraum}).
+Dieser wird in \ref[Allg_Vektorraum][Teil 3b, Abschnitt 4.1]{def:Allg_VR} behandelt.
+}
+\lang{en}{
+For all natural numbers $m$ and $n$, the set $M(m,n;\R)$ of all $(m\times n)$-matrices over $\R$ 
+forms a real vector space. This is handled 
+\ref[Allg_Vektorraum][when we generalise vector spaces]{def:Allg_VR}.
+}
+\end{remark}
+
+
+\end{visualizationwrapper}
+
+
+\end{content}

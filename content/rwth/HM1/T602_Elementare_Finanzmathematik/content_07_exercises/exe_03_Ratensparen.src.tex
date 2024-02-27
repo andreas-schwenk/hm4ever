@@ -1,0 +1,162 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Exercise 3: An installment savings plan}
+    \lang{de}{Ü03: Ratensparvertrag}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\title{
+    \lang{en}{Exercise 3: An installment savings plan}
+    \lang{de}{Ü03: Ratensparvertrag}
+    \lang{zh}{...}
+    \lang{fr}{...}
+}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22693}{Ticket 22693}
+\end{block}
+
+\label{Ratensparen_re}
+\lang{de}{Berechnen Sie folgende \textbf{Rentenendwerte} $R_n$:
+
+Nun werden 10 Jahre monatlich 1000 \euro eingezahlt und zu 4 \% verzinst. Es gibt also $k=12$ Zahlungen pro Jahr. 
+Die Zinsperiode beträgt 1 Jahr. Wie hoch ist der Betrag
+der zu Beginn des 11. Jahres bereitsteht?
+\begin{itemize}
+    \item[a)] bei nachschüssiger Zahlung der Rate zum Monatsende:
+    \item[b)] bei vorschüssiger Zahlung der Rate zu Monatsbeginn:
+\end{itemize}    }
+\lang{en}{Compute the \textbf{future values} $R_n$ of the following annuities:
+
+For 10 years, 1000 \euro is invested monthly at an interest rate of 4 \%. 
+In particular, there are $k=12$ deposits per year. 
+The interest period is 1 year. What amount is available at the
+beginning of the 11th year?
+\begin{itemize}
+    \item[a)] if the deposits occur in arrears, at the end of the month:
+    \item[b)] if the deposits occur in advance, at the beginning of the month:
+\end{itemize}    }
+
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+\tab{\lang{de}{Lösung a)} \lang{en}{Solution a)}}
+    \begin{incremental}[\initialsteps{1}]
+        \step \lang{de}{Die Lösung ist:
+        \begin{align*}
+        R_{10}=146.714,63 \text{ \euro}
+        \end{align*}}
+        \lang{en}{The solution is:
+        \begin{align*}
+        R_{10}=146,714.63 \text{ \euro}
+        \end{align*}}
+        \step
+        \lang{de}{
+        \[r=1000\qquad q=1+\frac{4}{100}=1,04\qquad k=12\]
+        }
+        \lang{en}{
+        \[r=1000\qquad q=1+\frac{4}{100}=1.04\qquad k=12\]
+        }
+        \step
+        \lang{de}{Aus den m Zahlungen pro Zinsperiode berechnet man zunächst 
+        entsprechende nachschüssige jährliche Zahlungen $r_e$ mit einfacher Verzinsung. Im nächsten Schritt wird daraus der
+        Rentenendwert berechnet.}
+        \lang{en}{First we combine the m deposits per interest period to an equivalent
+        annual deposit (in arrears) $r_e$, assuming simple interest.
+        Then we will use this to compute the future value of the annuity.
+        
+        }
+        \begin{eqnarray*}
+        r_e&=&r+r\left(1+\frac{p}{100\cdot k}\right)+r\left(1+\frac{2p}{100\cdot k}\right)+\ldots +r\left(1+\frac{(k-1)p}{100\cdot k}\right)\\
+        &=&r\left(k+\frac{(k-1)p}{200}\right)
+        \end{eqnarray*}
+        \lang{de}{Die Summe wurde mit der Gauss'schen Summenformel $\sum_{i=1}^ni=\frac{n(n+1)}{2}$ ausgeführt.}
+        \lang{en}{The sum was calculated using Gauss's formula $\sum_{i=1}^ni=\frac{n(n+1)}{2}$.}
+        \lang{de}{\[r_e=1000\left(12+\frac{4\cdot 11}{200}\right)=12.220 \text{ \euro}\]}
+        \lang{en}{\[r_e=1000\left(12+\frac{4\cdot 11}{200}\right)=12,220 \text{ \euro}\]}
+        \step
+        \lang{de}{Mit dieser jährlichen Ersatzzahlung $r_e$ kann nun der nachschüssige Rentenendwert 
+        berechnet werden:
+        \begin{eqnarray*}
+        R_{10}&=&r_e\frac{q^10-1}{q-1}\\
+        &=&12.220\frac{1,04^{10}-1}{1,04-1}\\
+        &=&146.714,63 \text{ \euro}
+        \end{eqnarray*}        }
+        \lang{en}{Using the equivalent annual annuity, we can now compute the future value:
+        \begin{eqnarray*}
+        R_{10}&=&r_e\frac{q^10-1}{q-1}\\
+        &=&12,220\frac{1.04^{10}-1}{1.04-1}\\
+        &=&146,714.63 \text{ \euro}
+        \end{eqnarray*}
+      
+        }
+       
+    \end{incremental}
+\tab{\lang{de}{Lösung b)} \lang{en}{Solution b)}}
+    \begin{incremental}[\initialsteps{1}]
+        \step \lang{de}{Die Lösung ist:
+        \begin{align*}
+        R_0=147.194,87 \text{ \euro}
+        \end{align*}}
+        \lang{en}{The solution is:
+        \begin{align*}
+        R_0=147,194.87 \text{ \euro}
+        \end{align*}}
+        \step
+        \lang{de}{\[r=1000\qquad q=1+\frac{4}{100}=1,04\qquad k=12\]}
+        \lang{en}{\[r=1000\qquad q=1+\frac{4}{100}=1.04\qquad k=12\]}
+        \step
+        \lang{de}{Aus den m Zahlungen pro Zinsperiode berechnet man zunächst 
+        entsprechende vorschüssige jährliche Zahlungen $r_e$ mit einfacher Verzinsung. Im nächsten Schritt wird daraus der
+        Rentenendwert berechnet.
+        \begin{eqnarray*}
+        r_e&=&r+r\left(1+\frac{p}{100\cdot k}\right)+r\left(1+\frac{2p}{100\cdot k}\right)+\ldots +r\left(1+\frac{kp}{100\cdot k}\right)\\
+        &=&r\left(k+\frac{(k+1)p}{200}\right)
+        \end{eqnarray*}
+        Die Summe wurde mit der Gauss'schen Summenformel $\sum_{i=1}^ni=\frac{n(n+1)}{2}$ ausgeführt.
+        \[r_e=1000\left(12+\frac{4\cdot 13}{200}\right)=12.260 \text{ \euro}\] }
+        \lang{en}{First we combine the m deposits per interest period to an equivalent
+        annual deposit (in advance) $r_e$, assuming simple interest. Then we will use this to compute the
+        future value of the annuity.
+        \begin{eqnarray*}
+        r_e&=&r+r\left(1+\frac{p}{100\cdot k}\right)+r\left(1+\frac{2p}{100\cdot k}\right)+\ldots +r\left(1+\frac{kp}{100\cdot k}\right)\\
+        &=&r\left(k+\frac{(k+1)p}{200}\right)
+        \end{eqnarray*}
+        The sum was calculated using Gauss's formula $\sum_{i=1}^ni=\frac{n(n+1)}{2}$.
+        \[r_e=1000\left(12+\frac{4\cdot 13}{200}\right)=12,260 \text{ \euro}\]
+        }
+        \step
+        \lang{de}{Mit dieser jährlichen Ersatzzahlung $r_e$ kann nun der nachschüssige Rentenendwert 
+        berechnet werden:
+        \begin{eqnarray*}
+        R_{10}&=&r_e\frac{q^10-1}{q-1}\\
+        &=&12.260\frac{1,04^{10}-1}{1,04-1}\\
+        &=&147.194,87 \text{ \euro}
+        \end{eqnarray*}}
+        \lang{en}{Using the equivalent annual annuity, we can now compute the future value:
+        \begin{eqnarray*}
+        R_{10}&=&r_e\frac{q^10-1}{q-1}\\
+        &=&12,260\frac{1.04^{10}-1}{1.04-1}\\
+        &=&147,194.87 \text{ \euro}
+        \end{eqnarray*}}
+    \end{incremental}
+\end{tabs*}
+
+
+\end{content}
+

@@ -1,0 +1,30 @@
+%This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)
+%https://creativecommons.org/licenses/by/4.0/legalcode
+\documentclass[rgb]{standalone}
+\usepackage{tkz-euclide}
+\definecolor{myorange}{hsb}{0.0833, 1, 0.8}
+\definecolor{mygreen}{hsb}{0.3333, 1, 0.8}
+\definecolor{myblue}{hsb}{0.5833, 1, 0.8}
+\definecolor{mymagenta}{hsb}{0.8333, 1, 0.8}
+\begin{document}
+	\begin{tikzpicture}[scale=1.5, font=\Large]
+		% Coordinate system
+		\tkzInit[xmin=-4,xmax=4,ymin=-3,ymax=3]
+		\tkzGrid[color=lightgray]
+		\tkzDrawX[thick]
+		\tkzDrawY[thick]
+		\draw[very thick,domain={-360}:{-360+atan(3)}, smooth, samples=500, variable=\x,mygreen] plot ({\x/90}, {tan(\x)});
+		\draw[very thick,domain={-180-atan(3)}:{-180+atan(3)}, smooth, samples=500, variable=\x,mygreen] plot ({\x/90}, {tan(\x)});
+		\draw[very thick,domain={-atan(3)}:{atan(3)}, smooth, samples=500, variable=\x,mygreen] plot ({\x/90}, {tan(\x)});
+		\draw[very thick,domain={180-atan(3)}:{180+atan(3)}, smooth, samples=500, variable=\x,mygreen] plot ({\x/90}, {tan(\x)});
+		\draw[very thick,domain={360-atan(3)}:{360}, smooth, samples=500, variable=\x,mygreen] plot ({\x/90}, {tan(\x)});
+		\draw[very thick,domain=-360:360, smooth, samples=500, variable=\x,myblue] plot ({\x/90}, {cos(\x)});
+		\draw[very thick,domain=-360:360, smooth, samples=500, variable=\x,myorange] plot ({\x/90}, {sin(\x)});
+		\node[below=0.5mm] at (1,0){$\frac{\pi}{2}$};	
+		\node[below=0.5mm] at (3,0){$\frac{3\pi}{2}$};
+		\node[below=0.5mm] at (-1,0){$-\frac{\pi}{2}$};
+		\node[below=0.5mm] at (-3,0){$-\frac{3\pi}{2}$};
+		\node[left=0.5mm] at (0,2){$2$};
+		\node[left=0.5mm] at (0,-2){$-2$};
+	\end{tikzpicture}	
+\end{document}

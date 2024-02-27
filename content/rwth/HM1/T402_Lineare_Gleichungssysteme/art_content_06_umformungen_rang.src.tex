@@ -1,0 +1,1240 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Zeilenumformungen durch Matrizenmultiplikation und Rang}
+    \lang{en}{Row operations by matrix multiplication and rank}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+\end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T402_Lineare_Gleichungssysteme/g_art_content_05_gaussverfahren.meta.xml}{gauss}
+    \link{generic_article}{content/rwth/HM1/T402_Lineare_Gleichungssysteme/g_art_content_05_gaussverfahren.meta.xml}{gauss1}
+    \link{generic_article}{content/rwth/HM1/T401_Matrizenrechnung/g_art_content_03_transponierte.meta.xml}{transponierte}
+    \link{generic_article}{content/rwth/HM1/T403_Quadratische_Matrizen,_Determinanten/g_art_content_07_quadratische_matrizen.meta.xml}{content_07_quadratische_matrizen}
+    \link{generic_article}{content/rwth/HM1/T108_Vektorrechnung/g_art_content_30_basen_eigenschaften.meta.xml}{def_lin_unabh}
+ \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{2}
+\ombarticle{3}
+\usepackage{mumie.genericvisualization}
+
+
+
+\title{\lang{de}{Zeilenumformungen durch Matrizenmultiplikation und Rang} \lang{en}{Row operations by matrix multiplication and rank}}
+
+\begin{block}[annotation]
+ 
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/11197}{Ticket 11197}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{\lang{de}{Zeilenumformung mit Matrizenmultiplikation}\lang{en}{Row operations as matrix multiplications}}\label{sec:zeilenumformungMitMatrixmul}
+
+\lang{de}{
+Beim Gauß-Verfahren im \link{gauss}{letzten Abschnitt} haben wir gelernt, dass
+bei dem Verfahren in einer systematischen Reihenfolge drei Arten von
+ elementaren Zeilenumformungen vorgenommen werden:
+\begin{itemize}
+\item Tausch zweier Zeilen
+\item Multiplikation einer Zeile mit $c\in \mathbb{K}$, $c\neq 0$
+\item Addition (Subtraktion) des $c$-fachen einer Zeile zu (von) einer anderen Zeile
+\end{itemize}
+
+In diesem Kapitel werden wir die elementaren Umformungsschritte
+als Matrizenmultiplikation durchführen.}
+%soll dies mit der Matrizenmultiplikation in 
+%Zusammenhang gebracht werden.
+
+
+\lang{en}{
+While studying the Gaussian elimination in the \link{gauss}{last section} we learned,
+that there exist three types of elementary row operations in a particular order:
+ \begin{itemize}
+\item Exchanging/swapping two rows
+\item Multiplication of a row with $c\in \mathbb{K}$, $c\neq 0$
+\item Addition (or subtraction) of one multiple of a row to (from) another
+\end{itemize}
+
+In this chapter we will undertake the elementary transformation steps as matrix multiplications.}
+
+\lang{de}{
+\begin{definition}[Elementarmatrizen]\label{rule:elementarmatrizen}
+Für eine $(m\times n)$-Matrix $A$ über einem Körper $\mathbb{K}$ lassen sich die jeweiligen resultierenden Matrizen, die durch elementare Zeilenumformungen von $A$ entstehen, 
+durch eine Matrixmultiplikation geeigneter $(m\times m)$-Matrizen beschreiben. Die Matrizen, die dabei jeweils von links an $A$ multipliziert werden, nennt man \notion{Elementarmatrizen}.
+\begin{enumerate}
+\item Für $1\leq i,j\leq m$ ist die Matrix, die man aus $A$ durch Vertauschen der $i$-ten und der $j$-ten Zeile erhält, gegeben durch
+\[   V_{ij}\cdot A, \]
+wobei
+\[
+\begin{mtable}[\cellaligns{cccc}]
+ { \text{i-te Spalte}} &  &   {\text{j-te Spalte }} &   \\
+  \downarrow           &  & \downarrow &
+\end{mtable}
+\]
+\[ V_{ij} \ \ \ \ = \ \ \ \ 
+\left(
+\begin{matrix}
+1       &        &        &        &        &            &        &   &   &        &   &  \\
+        & \ddots &        &        &        &            &        &   &   &        &   &  \\ 
+        &        &  1     &        &        &            &        &   &   &        &   &  \\
+        &        &        & 0      &        &            &        & 1 &   &        &   &  \\
+        &        &        &        & 1      &            &        &   &   &        &   &  \\
+        &        &        &        &        & \ddots     &        &   &   &        &   &  \\
+        &        &        &        &        &            & 1      &   &   &        &   &  \\
+        &        &        & 1      &        &            &        & 0 &   &        &   &  \\
+        &        &        &        &        &            &        &   & 1 &        &   &  \\
+        &        &        &        &        &            &        &   &   & \ddots &   &  \\
+        &        &        &        &        &            &        &   &   &        & 1 & 
+\end{matrix}
+\right)
+\begin{mtable}[\cellaligns{c}]
+\\
+\\
+\leftarrow {\text{i-te Zeile}} \\
+\\
+\\
+\\
+\leftarrow {\text{j-te Zeile}} \\
+\\
+\\
+\end{mtable}
+ \]
+ \item Für $1\leq i\leq m$ und $c \neq 0$ ist die Matrix, die man aus $A$ durch
+ Multiplikation der $i$-ten Zeile mit $c$ erhält, gegeben durch
+ \[ M_{i}(c)\cdot A, \]
+ wobei
+ \[
+\begin{mtable}[\cellaligns{cc}]
+ { \text{i-te Spalte }} &\\
+  \downarrow        &
+\end{mtable}
+\]
+\[
+M_{i}(c) \ = 
+\left(
+\begin{matrix}
+1       &        &        &        &        &            &        &   &            \\
+        & \ddots &        &        &        &            &        &   &            \\ 
+        &        &        & 1      &        &            &        &   &  \\
+        &        &        &        & c      &            &        &   &  \\
+        &        &        &        &        & 1          &        &   &  \\
+        &        &        &        &        &            & \ddots &   &  \\
+        &        &        &        &        &            &        & 1 & 
+\end{matrix}
+\right)
+\begin{mtable}[\cellaligns{c}]
+\\
+\\
+\\
+\leftarrow {\text{i-te Zeile}} \\
+\\
+\\
+\\
+\end{mtable}
+ \]
+ \item Für $1\leq i,j\leq m$ und $c \neq 0$ ist die Matrix, die man aus $A$ durch
+ Addition des $c$-fachen der $j$-ten Zeile zur $i$-ten Zeile erhält, gegeben durch
+ \[  A_{ij}(c)\cdot A, \]
+ wobei
+ \[
+\begin{mtable}[\cellaligns{cc}]
+     &   & { \text{j-te Spalte }}& \\
+     &   & \downarrow        &
+\end{mtable}
+\]
+\[
+A_{ij}(c)=
+\left(
+\begin{matrix}
+1       &                &        &        &            &        &   &            \\
+        & \ddots         &        &        &            &        &   &            \\ 
+        &                & 1      &        & c          &        &   &  \\
+        &                &        & \ddots &            &        &   &  \\
+        &                &        &        & 1          &        &   &  \\
+        &                &        &        &            & \ddots &   &  \\
+        &                &        &        &            &        & 1 & 
+\end{matrix}
+\right)
+\begin{mtable}[\cellaligns{c}]
+\\
+\leftarrow {\text{i-te Zeile}} \\
+\\
+\\
+\\
+\end{mtable}
+\]
+\end{enumerate}
+\end{definition}}
+
+
+\lang{en}{
+\begin{definition}[Elementary matrices]\label{rule:elementarmatrizen}
+For a $(m\times n)$-matrix $A$ over a field $\mathbb{K}$ the matrices resulting from elementary row operations of $A$
+can be expressed as matrix multiplications with suitabler $(m\times m)$-matrices.
+The matrices, $A$ is multiplied with, are called \notion{elementary matrices}.
+\begin{enumerate}
+\item For $1\leq i,j\leq m$ the matrix, that results from exchanging the $i$th and the $j$th row of $A$ is given by
+\[   V_{ij}\cdot A, \]
+with
+\[
+\begin{mtable}[\cellaligns{cccc}]
+ { i\text{th column}} &  &   {j\text{th column}} &   \\
+  \downarrow           &  & \downarrow &
+\end{mtable}
+\]
+\[ V_{ij} \ \ \ \ = \ \ \ \ 
+\left(
+\begin{matrix}
+1       &        &        &        &        &            &        &   &   &        &   &  \\
+        & \ddots &        &        &        &            &        &   &   &        &   &  \\ 
+        &        &  1     &        &        &            &        &   &   &        &   &  \\
+        &        &        & 0      &        &            &        & 1 &   &        &   &  \\
+        &        &        &        & 1      &            &        &   &   &        &   &  \\
+        &        &        &        &        & \ddots     &        &   &   &        &   &  \\
+        &        &        &        &        &            & 1      &   &   &        &   &  \\
+        &        &        & 1      &        &            &        & 0 &   &        &   &  \\
+        &        &        &        &        &            &        &   & 1 &        &   &  \\
+        &        &        &        &        &            &        &   &   & \ddots &   &  \\
+        &        &        &        &        &            &        &   &   &        & 1 & 
+\end{matrix}
+\right)
+\begin{mtable}[\cellaligns{c}]
+\\
+\\
+\leftarrow {i\text{th row}} \\
+\\
+\\
+\\
+\leftarrow {j\text{th row}} \\
+\\
+\\
+\end{mtable}
+ \]
+ \item For $1\leq i\leq m$ and $c \neq 0$ the matrix, that results from multiplying the $i$th row of $A$ with
+  $c$ is given by
+ \[ M_{i}(c)\cdot A, \]
+ with
+ \[
+\begin{mtable}[\cellaligns{cc}]
+ { \text{i-te Spalte }} &\\
+  \downarrow        &
+\end{mtable}
+\]
+\[
+M_{i}(c) \ = 
+\left(
+\begin{matrix}
+1       &        &        &        &        &            &        &   &            \\
+        & \ddots &        &        &        &            &        &   &            \\ 
+        &        &        & 1      &        &            &        &   &  \\
+        &        &        &        & c      &            &        &   &  \\
+        &        &        &        &        & 1          &        &   &  \\
+        &        &        &        &        &            & \ddots &   &  \\
+        &        &        &        &        &            &        & 1 & 
+\end{matrix}
+\right)
+\begin{mtable}[\cellaligns{c}]
+\\
+\\
+\\
+\leftarrow {i\text{th row}} \\
+\\
+\\
+\\
+\end{mtable}
+ \]
+ \item For $1\leq i,j\leq m$ and $c \neq 0$ the matrix that results from adding the row $c\cdot j$ to the $i$th row is given by
+ \[  A_{ij}(c)\cdot A, \]
+ with
+ \[
+\begin{mtable}[\cellaligns{cc}]
+     &   & { j\text{th column}}& \\
+     &   & \downarrow        &
+\end{mtable}
+\]
+\[
+A_{ij}(c)=
+\left(
+\begin{matrix}
+1       &                &        &        &            &        &   &            \\
+        & \ddots         &        &        &            &        &   &            \\ 
+        &                & 1      &        & c          &        &   &  \\
+        &                &        & \ddots &            &        &   &  \\
+        &                &        &        & 1          &        &   &  \\
+        &                &        &        &            & \ddots &   &  \\
+        &                &        &        &            &        & 1 & 
+\end{matrix}
+\right)
+\begin{mtable}[\cellaligns{c}]
+\\
+\leftarrow {i\text{th row}} \\
+\\
+\\
+\\
+\end{mtable}
+\]
+\end{enumerate}
+\end{definition}}
+
+\lang{de}{
+\begin{remark}
+Für eine $(m\times n)$-Matrix $A$ über einem Körper $\mathbb{K}$ 
+können wir durch Linksmultiplikation
+mit gewissen Elementarmatrizen $S_1, \cdots, S_{\ell}$ 
+die Matrix $A$ in eine Matrix $D$ in Zeilenstufenform überführen. 
+Somit gilt dann
+\[
+D = S_{\ell} \cdot S_{{\ell}-1} \cdot \cdots \cdot S_1 \cdot A.
+\]
+\end{remark}}
+
+\lang{en}{
+\begin{remark}
+A $(m\times n)$-matrix $A$ over a field $\mathbb{K}$ can be transformed into a matrix $D$ in row echelon form
+by multiplying several elementary matrices $S_1, \cdots, S_{\ell}$ from the left with $A$.
+Therefore, we have
+\[
+D = S_{\ell} \cdot S_{{\ell}-1} \cdot \cdots \cdot S_1 \cdot A.
+\]
+\end{remark}}
+
+\lang{de}{
+\begin{example}\label{ex:Elementarmatrizen3kreuz3}
+Betrachten wir ein lineares Gleichungssystem mit $3$ Gleichungen und $n$ Unbekannten, das hei"st
+\begin{equation*}
+\begin{mtable}[\cellaligns{ccccccccc}]
+ a_{11} x_1 & + & a_{12} x_2 & + & \cdots & + & a_{1n} x_n & = & b_1 \\
+ a_{21} x_1 & + & a_{22} x_2 & + & \cdots & + & a_{2n} x_n & = & b_2 \\
+ a_{31} x_1 & + & a_{32} x_2 & + & \cdots & + & a_{3n} x_n & = & b_3  
+\end{mtable}
+\end{equation*}
+in allgemeiner Form, dann hat die zugehörige (erweiterte) Koeffizientenmatrix $3$ Zeilen und die Elementarmatrizen sind $(3\times 3)$-Matrizen. 
+Sie sehen folgendermaßen aus:
+\begin{tabs*}
+ \tab{$A_{ij}(c)$} Die Matrix
+       \begin{equation*}
+       A_{12}(c)=\begin{pmatrix}
+       1 & c & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 
+       \end{pmatrix}
+       \text{ addiert das } c \text{-fache der } 2. \text{Zeile zur } 1. \text{Zeile.}
+       \end{equation*}
+       Die Matrix
+       \begin{equation*}
+       A_{13}(c)=\begin{pmatrix}
+       1 & 0 & c \\ 0 & 1 & 0 \\ 0 & 0 & 1 
+       \end{pmatrix}
+       \text{ addiert das } c \text{-fache der } 3. \text{Zeile zur } 1. \text{Zeile.}
+       \end{equation*}
+       Die Matrix
+       \begin{equation*}
+       A_{23}(c)=\begin{pmatrix}
+       1 & 0 & 0 \\ 0 & 1 & c \\ 0 & 0 & 1 
+       \end{pmatrix}
+       \text{ addiert das } c \text{-fache der } 3. \text{Zeile zur } 2. \text{Zeile.}
+       \end{equation*}
+       Die Matrix
+       \begin{equation*}
+       A_{21}(c)=\begin{pmatrix}
+       1 & 0 & 0 \\ c & 1 & 0 \\ 0 & 0 & 1 
+       \end{pmatrix}
+       \text{ addiert das } c \text{-fache der } 1. \text{Zeile zur } 2. \text{Zeile.}
+       \end{equation*}
+       Die Matrix
+       \begin{equation*}
+       A_{31}(c)=\begin{pmatrix}
+       1 & 0 & 0 \\ 0 & 1 & 0 \\ c & 0 & 1 
+       \end{pmatrix}
+       \text{ addiert das } c \text{-fache der } 1. \text{Zeile zur } 3. \text{Zeile.}
+       \end{equation*}
+        Die Matrix
+       \begin{equation*}
+       A_{32}(c)=\begin{pmatrix}
+       1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & c & 1 
+       \end{pmatrix}
+       \text{ addiert das } c \text{-fache der } 2. \text{Zeile zur } 3. \text{Zeile.}
+       \end{equation*}
+ \tab{$M_i(c)$} Die Matrix
+       \begin{equation*}
+       M_1(c)=\begin{pmatrix}
+       c & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 
+       \end{pmatrix}
+       \text{ multipliziert die } 1. \text{Zeile mit } {c \in \mathbb{K} \backslash \lbrace 0 \rbrace.}
+       \end{equation*}
+       Die Matrix
+       \begin{equation*}
+       M_2(c)=\begin{pmatrix}
+       1 & 0 & 0 \\ 0 & c & 0 \\ 0 & 0 & 1 
+       \end{pmatrix}
+       \text{ multipliziert die } 2. \text{Zeile mit } {c \in \mathbb{K} \backslash \lbrace 0 \rbrace.}
+       \end{equation*}
+       Die Matrix
+       \begin{equation*}
+       M_3(c)=\begin{pmatrix}
+       1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & c 
+       \end{pmatrix}
+       \text{ multipliziert die } 3. \text{Zeile mit } {c \in \mathbb{K} \backslash \lbrace 0 \rbrace.}
+       \end{equation*}
+ \tab{$V_{ij}$} Die Matrix
+       \begin{equation*}
+       V_{13}=V_{31}=\begin{pmatrix}
+       0 & 0 & 1 \\ 0 & 1 & 0 \\ 1 & 0 & 0 
+       \end{pmatrix}
+       \text{ vertauscht die } 1. \text{ und } 3. \text{Zeile.}
+       \end{equation*}
+       Die Matrix
+       \begin{equation*}
+       V_{12}=V_{21}=\begin{pmatrix}
+       0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 
+       \end{pmatrix}
+       \text{ vertauscht die } 1. \text{ und } 2. \text{Zeile.}
+       \end{equation*}
+       Die Matrix
+       \begin{equation*}
+       V_{23}=V_{32}=\begin{pmatrix}
+       1 & 0 & 0 \\ 0 & 0 & 1 \\ 0 & 1 & 0 
+       \end{pmatrix}
+       \text{ vertauscht die } 2. \text{ und } 3. \text{Zeile.}
+       \end{equation*}
+\end{tabs*}
+\end{example}}
+
+\lang{en}{
+\begin{example}\label{ex:Elementarmatrizen3kreuz3}
+We consider a system of linear equations with $3$ equations and $n$ unknowns,
+\begin{equation*}
+\begin{mtable}[\cellaligns{ccccccccc}]
+ a_{11} x_1 & + & a_{12} x_2 & + & \cdots & + & a_{1n} x_n & = & b_1 \\
+ a_{21} x_1 & + & a_{22} x_2 & + & \cdots & + & a_{2n} x_n & = & b_2 \\
+ a_{31} x_1 & + & a_{32} x_2 & + & \cdots & + & a_{3n} x_n & = & b_3  
+\end{mtable}.
+\end{equation*}
+The corresponding (augmented) coefficient matrix has $3$ rows and the elementary matrices are $(3\times 3)$-matrices, as follows:
+\begin{tabs*}
+ \tab{$A_{ij}(c)$} The matrix
+       \begin{equation*}
+       A_{12}(c)=\begin{pmatrix}
+       1 & c & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 
+       \end{pmatrix}
+       \text{ adds } c \text{ times the } 2. \text{row to the } 1. \text{row.}
+       \end{equation*}
+       The matrix
+       \begin{equation*}
+       A_{13}(c)=\begin{pmatrix}
+       1 & 0 & c \\ 0 & 1 & 0 \\ 0 & 0 & 1 
+       \end{pmatrix}
+       \text{ add  } c \text{ times the  } 3. \text{row to the } 1. \text{row.}
+       \end{equation*}
+       The matrix
+       \begin{equation*}
+       A_{23}(c)=\begin{pmatrix}
+       1 & 0 & 0 \\ 0 & 1 & c \\ 0 & 0 & 1 
+       \end{pmatrix}
+       \text{ adds } c \text{ times the } 3. \text{row to the } 2. \text{row.}
+       \end{equation*}
+       The matrix
+       \begin{equation*}
+       A_{21}(c)=\begin{pmatrix}
+       1 & 0 & 0 \\ c & 1 & 0 \\ 0 & 0 & 1 
+       \end{pmatrix}
+       \text{ adds } c \text{ times the } 1. \text{row to the } 2. \text{row.}
+       \end{equation*}
+       The matrix
+       \begin{equation*}
+       A_{31}(c)=\begin{pmatrix}
+       1 & 0 & 0 \\ 0 & 1 & 0 \\ c & 0 & 1 
+       \end{pmatrix}
+       \text{ adds } c \text{ times the } 1. \text{row to the } 3. \text{row.}
+       \end{equation*}
+        The matrix
+       \begin{equation*}
+       A_{32}(c)=\begin{pmatrix}
+       1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & c & 1 
+       \end{pmatrix}
+       \text{ adds } c \text{ times the } 2. \text{row to the } 3. \text{row.}
+       \end{equation*}
+ \tab{$M_i(c)$} The matrix
+       \begin{equation*}
+       M_1(c)=\begin{pmatrix}
+       c & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 
+       \end{pmatrix}
+       \text{ multiplies the } 1. \text{row with } {c \in \mathbb{K} \backslash \lbrace 0 \rbrace.}
+       \end{equation*}
+       The matrix
+       \begin{equation*}
+       M_2(c)=\begin{pmatrix}
+       1 & 0 & 0 \\ 0 & c & 0 \\ 0 & 0 & 1 
+       \end{pmatrix}
+       \text{ multiplies the } 2. \text{row with } {c \in \mathbb{K} \backslash \lbrace 0 \rbrace.}
+       \end{equation*}
+       The matrix
+       \begin{equation*}
+       M_3(c)=\begin{pmatrix}
+       1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & c 
+       \end{pmatrix}
+       \text{ multiplies the } 3. \text{row with } {c \in \mathbb{K} \backslash \lbrace 0 \rbrace.}
+       \end{equation*}
+ \tab{$V_{ij}$} The matrix
+       \begin{equation*}
+       V_{13}=V_{31}=\begin{pmatrix}
+       0 & 0 & 1 \\ 0 & 1 & 0 \\ 1 & 0 & 0 
+       \end{pmatrix}
+       \text{ exchanges the } 1. \text{ and the } 3. \text{row.}
+       \end{equation*}
+       The Matrix
+       \begin{equation*}
+       V_{12}=V_{21}=\begin{pmatrix}
+       0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 
+       \end{pmatrix}
+       \text{ exchanges the } 1. \text{ and the } 2. \text{row.}
+       \end{equation*}
+       The matrix
+       \begin{equation*}
+       V_{23}=V_{32}=\begin{pmatrix}
+       1 & 0 & 0 \\ 0 & 0 & 1 \\ 0 & 1 & 0 
+       \end{pmatrix}
+       \text{ exchanges the } 2. \text{ and the } 3. \text{Zeile.}
+       \end{equation*}
+\end{tabs*}
+\end{example}}
+
+\lang{de}{
+\begin{quickcheck}
+
+    \begin{variables}
+    
+      \randint[Z]{t}{2}{6}
+        
+    \end{variables}
+       \text{Betrachte die Matrix $A=\begin{pmatrix} 1 & 0&0\\0&7&0\\0 &\var{t}&1\end{pmatrix}$
+und die Einheitsmatrix $E$.\\
+Für welche Matrix $S$, die aus einem Produkt von $(3 \times 3)$-Elementarmatrizen besteht, gilt $E=S\cdot A$?
+ 
+ 
+        } 
+    \begin{choices}{unique}
+
+      \begin{choice}
+        \text{$S=A_{23}(\var{t})\cdot M_2(7)\cdot V_{23}$}
+        \solution{false}
+      \end{choice}
+
+      \begin{choice}
+         \text{$S=A_{32}(\var{t})\cdot M_2(7)$}
+        \solution{false}
+        \end{choice}
+      \begin{choice}
+        \text{$S=A_{32}(-\var{t})\cdot M_2(\frac{1}{7})$}
+        \solution{true}
+      \end{choice}
+            \begin{choice}
+        \text{$S=V_{23}\cdot M_2(-\var{t})\cdot A_{32}(\frac{1}{7})$}
+        \solution{false}
+      \end{choice}
+\end{choices}{unique}
+
+ \explanation{
+ \[E=\begin{pmatrix} 1 & 0&0\\0&1&0\\0 &0&1\end{pmatrix}\]
+ Um aus der Matrix $A$ die Einheitsmatrix $E$ zu erhalten, multiplizieren wir zuerst die zweite Zeile mit $\frac{1}{7}$: $M_2(\frac{1}{7})$\\
+ Anschließend subtrahiert man das $\var{t}$-fache der zweiten Zeile von der dritten Zeile: $A_{32}(-\var{t})$\\
+ Durch Linksmultiplikation mit der Matrix $A$ erhält man damit die Einheitsmatrix $E$:
+ \[E=A_{32}(-\var{t})\cdot(M_2(\frac{1}{7})\cdot A)=A_{32}(-\var{t})\cdot M_2(\frac{1}{7})\cdot A\]}
+  
+\end{quickcheck}}
+
+
+\lang{en}{
+\begin{quickcheck}
+
+    \begin{variables}
+    
+      \randint[Z]{t}{2}{6}
+        
+    \end{variables}
+       \text{Consider the matrix $A=\begin{pmatrix} 1 & 0&0\\0&7&0\\0 &\var{t}&1\end{pmatrix}$
+and the elementary matrix $E$.\\
+For which matrix $S$, that consists of a product of $(3 \times 3)$ elementary matrices, yields $E=S\cdot A$?
+ 
+ 
+        } 
+    \begin{choices}{unique}
+
+      \begin{choice}
+        \text{$S=A_{23}(\var{t})\cdot M_2(7)\cdot V_{23}$}
+        \solution{false}
+      \end{choice}
+
+      \begin{choice}
+         \text{$S=A_{32}(\var{t})\cdot M_2(7)$}
+        \solution{false}
+        \end{choice}
+      \begin{choice}
+        \text{$S=A_{32}(-\var{t})\cdot M_2(\frac{1}{7})$}
+        \solution{true}
+      \end{choice}
+            \begin{choice}
+        \text{$S=V_{23}\cdot M_2(-\var{t})\cdot A_{32}(\frac{1}{7})$}
+        \solution{false}
+      \end{choice}
+\end{choices}{unique}
+
+ \explanation{
+ \[E=\begin{pmatrix} 1 & 0&0\\0&1&0\\0 &0&1\end{pmatrix}\]
+ To receive the elementary matrix $E$ having $A$, we multiply the first row with $\frac{1}{7}$: $M_2(\frac{1}{7})$\\
+ Afterwars we substract $\var{t}$ times the second row from the third row: $A_{32}(-\var{t})$\\
+ By multiplying from the left with $A$, we get the elementary matrix $E$:
+ \[E=A_{32}(-\var{t})\cdot(M_2(\frac{1}{7})\cdot A)=A_{32}(-\var{t})\cdot M_2(\frac{1}{7})\cdot A\]}
+  
+\end{quickcheck}}
+
+
+\section{\lang{de}{Zeilenrang und Spaltenrang} \lang{en}{Row rank and column rank}}
+
+\lang{de}{
+\begin{definition}[Zeilenrang/Spaltenrang]\label{def:zeilenSpaltenRang}
+Für eine $(m\times n)$-Matrix $A$ über $\mathbb{K}$ ist der \notion{Zeilenrang von $A$} die maximale Anzahl an \link{def_lin_unabh}{linear unabhängigen} Zeilenvektoren.\\
+Analog ist der \notion{Spaltenrang von $A$} definiert als die maximale Anzahl an linear unabhängigen Spaltenvektoren.
+\end{definition}}
+
+\lang{en}{
+\begin{definition}[row rank/column rank]\label{def:zeilenSpaltenRang}
+For a  $(m\times n)$-matrix $A$ over $\mathbb{K}$ the \notion{row rank of $A$} is the  maximal number of \link{def_lin_unabh}{linear independent} row vectors.\\
+Analogous the \notion{column rank of $A$} is defined as the maximal number of linear independent column vectors.
+\end{definition}}
+
+\lang{en}{
+The \ref[gauss][Gaussian elimination]{sec:gauss-mit-matrizen} makes it possible to transform any matrix into
+reduced row echelon form.}
+
+\lang{de}{
+Mit dem \ref[gauss][Gauß-Verfahren]{sec:gauss-mit-matrizen} kann man beliebige Matrizen durch elementare Umformungen der Zeilen auf
+die reduzierte Stufenform bringen.}
+
+
+\begin{remark}
+\lang{de}{
+Der Zeilenrang von $A$ entspricht der Anzahl der Zeilen, die ungleich der Nullzeile sind, nachdem $A$ durch das
+Gauß-Verfahren auf Stufenform gebracht worden ist.\\
+Der Spaltenrang von $A$ ist folglich der Zeilenrang der transponierten Matrix $A^T$.}
+\lang{en}{
+The row rank of $A$ is the number of non-zero rows, after the Gaussian elimination was applied.\\
+The column rank of $A$ is the row rank of the transpose $A^T$.}
+\end{remark}
+
+\lang{de}{
+\begin{example}
+Wir betrachten die $(4\times 5)$-Matrix \[A=
+\begin{pmatrix}
+    1 & 2 & 1 & -1 & 7\\ 
+    1 & 3 & 0 & -1 & 8\\
+    -1 & 0 & -3 & 5 & 9 \\
+    1 & 1 & 2 & -1 & 6
+   \end{pmatrix}. \]
+Durch elementare Zeilenumformungen erhalten wir   
+\[ 
+\rightarrow  \begin{pmatrix}
+    1 & 2 & 1 & -1 & 7\\ 
+    0 & 1 & -1& 0  & 1\\
+    0 & 2 & -2 & 4 &16 \\
+	0 & -1& 1 &  0 & -1    
+   \end{pmatrix}  \rightarrow \begin{pmatrix}
+     1 & 2 & 1 & -1 & 7\\ 
+     0 & 1 & -1& 0  & 1\\
+   	 0 & 0 & 0 &4 &  14 \\
+	 0 & 0 & 0 & 0 & 0
+   \end{pmatrix}.   
+\]
+Die Stufenform besitzt also drei Zeilen ungleich $0$, weshalb der Zeilenrang der Matrix $A$ gleich $3$ ist.
+ 
+Für den Spaltenrang von $A$ bringen wir \[A^T= \begin{pmatrix} 1&1&-1&1 \\ 2&3&0&1\\ 1&0&-3&2\\ -1&-1&5&-1\\ 7&8&9&6   \end{pmatrix}\]
+auf Stufenform:
+\[ \rightarrow \begin{pmatrix} 1&1&-1&1 \\ 0&1&2&-1\\ 0&-1&-2&1\\ 0&0&4&0\\ 0&1&16&-1 \end{pmatrix}
+\rightarrow \begin{pmatrix}1&1&-1&1 \\ 0&1&2&-1\\ 0&0&0&0\\ 0&0&4&0\\ 0&0&14&0\end{pmatrix}
+\rightarrow \begin{pmatrix}1&1&-1&1 \\ 0&1&2&-1\\ 0&0&14&0\\ 0&0&4&0\\0&0&0&0\end{pmatrix}
+\rightarrow \begin{pmatrix}1&1&-1&1 \\ 0&1&2&-1\\ 0&0&14&0\\ 0&0&0&0\\0&0&0&0\end{pmatrix}.\]
+Auch hier bleiben drei Zeilen ungleich der Nullzeile. Der Spaltenrang der Matrix $A$ ist also auch gleich $3$.
+\end{example}}
+
+\lang{en}{
+\begin{example}
+Consider the $(4\times 5)$-matrix \[A=
+\begin{pmatrix}
+    1 & 2 & 1 & -1 & 7\\ 
+    1 & 3 & 0 & -1 & 8\\
+    -1 & 0 & -3 & 5 & 9 \\
+    1 & 1 & 2 & -1 & 6
+   \end{pmatrix}. \]
+The elementary row operations transform it to  
+\[ 
+\rightarrow  \begin{pmatrix}
+    1 & 2 & 1 & -1 & 7\\ 
+    0 & 1 & -1& 0  & 1\\
+    0 & 2 & -2 & 4 &16 \\
+	0 & -1& 1 &  0 & -1    
+   \end{pmatrix}  \rightarrow \begin{pmatrix}
+     1 & 2 & 1 & -1 & 7\\ 
+     0 & 1 & -1& 0  & 1\\
+   	 0 & 0 & 0 &4 &  14 \\
+	 0 & 0 & 0 & 0 & 0
+   \end{pmatrix}.   
+\]
+The row echelon form has three non-zero rows, which is why the row rank of $A$ is $3$.
+
+For the row rank of $A$ the transpose \[A^T= \begin{pmatrix} 1&1&-1&1 \\ 2&3&0&1\\ 1&0&-3&2\\ -1&-1&5&-1\\ 7&8&9&6   \end{pmatrix}\]
+ is transformed into row echelon form:
+\[ \rightarrow \begin{pmatrix} 1&1&-1&1 \\ 0&1&2&-1\\ 0&-1&-2&1\\ 0&0&4&0\\ 0&1&16&-1 \end{pmatrix}
+\rightarrow \begin{pmatrix}1&1&-1&1 \\ 0&1&2&-1\\ 0&0&0&0\\ 0&0&4&0\\ 0&0&14&0\end{pmatrix}
+\rightarrow \begin{pmatrix}1&1&-1&1 \\ 0&1&2&-1\\ 0&0&14&0\\ 0&0&4&0\\0&0&0&0\end{pmatrix}
+\rightarrow \begin{pmatrix}1&1&-1&1 \\ 0&1&2&-1\\ 0&0&14&0\\ 0&0&0&0\\0&0&0&0\end{pmatrix}.\]
+There are again three non-zero rows. So the column rank of $A$ is also $3$.
+Auch hier bleiben drei Zeilen ungleich der Nullzeile. Der Spaltenrang der Matrix $A$ ist also auch gleich $3$.
+\end{example}}
+
+\lang{de}{
+\begin{remark}
+Um den Spaltenrang einer Matrix $A$ zu bestimmen, kann man auch die Matrix $A$
+mittels Spaltenumformungen, welche entsprechend zu den Zeilenumformungen gemacht werden, auf eine Spalten-Stufenform bringen, und dann den Spaltenrang anhand der
+von Null verschiedenen Spalten ablesen.\\
+
+Bei entsprechenden Umformungsschritten ist die Spalten-Stufenform am Ende nämlich
+genau die transponierte Matrix zu der Stufenform, die man aus $A^T$ durch Zeilenumformungen erhält.
+\end{remark}}
+
+
+
+\lang{en}{
+\begin{remark}
+To determine the column rank of a matrix $A$, we may transform $A$ into column echelon form by applying column operations, which are analog
+to the row operations. The rank can the be found by countin the non-zero columns.\\
+
+The column echelon form of $A$ is similar to the row echelon form of $A^T$.
+\end{remark}}
+
+\lang{de}{
+Allgemeiner gilt für den Zeilen- und Spaltenrang der folgende Satz.
+\begin{theorem}
+Für jede $(m\times n)$-Matrix $A$ über $\mathbb{K}$ ist der Zeilenrang gleich dem Spaltenrang.
+\end{theorem}}
+
+\lang{en}{
+In general we have the following theorem for the row and column rank:
+\begin{theorem}
+For each $(m\times n)$-matrix $A$ over $\mathbb{K}$ the row rank equals the column rank.
+\end{theorem}}
+
+\begin{proof*}[\lang{de}{Beweis}\lang{en}{Proof}]
+\begin{showhide}
+\lang{de}{
+Es sei $A$ eine $(m\times n)$-Matrix und $A_z$ ihre reduzierte Zeilenstufenform, 
+bzw. $A_s$ ihre reduzierte Spaltenstufenform.
+Wir wissen, dass 
+$\text{Zeilenrang}(A)=\text{Zeilenrang}(A_z)$ und $\text{Spaltenrang}(A)=\text{Spaltenrang}(A_s)$
+gilt.\\
+
+Um den Satz zu beweisen, gehen wir nun wie folgt vor. Zeige:}\\
+
+\lang{en}{
+Let $A$ be a $(m\times n)$-matrix and $A_r$ its reduced row echelon form and
+$A_c$ its reduced column echelon form.
+We know, that
+$\text{row rank}(A)=\text{row rank}(A_r)$ and $\text{column rank}(A)=\text{column rank}(A_c)$
+holds.\\
+
+To proof the theorem, we go on as follows. Proof:}\\
+
+\lang{de}{
+\begin{itemize}
+\item[1.] $\text{Zeilenrang}(A_z)=\text{Spaltenrang}(A_z)$
+\item[2.] $\text{Zeilenrang}(A_s)=\text{Spaltenrang}(A_s)$
+\item[3.] Für Spaltenumformungen einer Matrix bleibt der Zeilenrang unverändert: $\text{Zeilenrang}(A)=\text{Zeilenrang}(A_s)$
+\end{itemize}
+
+Das heißt insgesamt: 
+$\text{Zeilenrang}(A)=\text{Zeilenrang}(A_s)=\text{Spaltenrang}(A_s)=\text{Spaltenrang}(A)$}
+
+
+\lang{en}{
+\begin{itemize}
+\item[1.] $\text{row rank}(A_r)=\text{column rank}(A_c)$
+\item[2.] $\text{row rank}(A_c)=\text{column rank}(A_r)$
+\item[3.] The row rank does not change whil column operations: $\text{row rank}(A)=\text{row rank}(A_c)$
+\end{itemize}
+
+Altogether we have:
+$\text{Zeilenrang}(A)=\text{Zeilenrang}(A_s)=\text{Spaltenrang}(A_s)=\text{Spaltenrang}(A)$}
+
+\begin{incremental}
+
+\step \begin{itemize}
+\item[1.]
+\lang{de}{
+Betrachtet man zunächst eine Matrix $A_z$ in reduzierter (Zeilen-)Stufenform 
+\[
+A_z= \left(
+\begin{matrix}
+0 & \cdots & 0 & 1 & \ast & \cdots & \ast & 0    & \ast & \cdots & \ast & 0    & \ast & \cdots & \ast & 0    & \ast & \cdots & \ast \\ 
+0 & \cdots & 0 & 0 & 0    & \cdots & 0    & 1    & \ast & \cdots & \ast & 0    & \ast & \cdots & \ast & 0    & \ast & \cdots & \ast \\
+0 & \cdots & 0 & 0 & 0    & \cdots & 0    & 0    & 0    & \cdots & 0    & 1    & \ast & \cdots & \ast & 0    & \ast & \cdots & \ast \\
+  & \vdots &   &   &      & \vdots &      &      &      & \vdots &      &      &      & \vdots &      &      &      & \vdots &      \\
+0 & \cdots & 0 & 0 & 0    & \cdots & 0    & 0    & 0    & \cdots & 0    & 0    & 0    & \cdots & 0    & 1    & \ast & \cdots &      \\
+0 & \cdots & 0 & 0 & 0    & \cdots & 0    & 0    & 0    & \cdots & 0    & 0    & 0    & \cdots & 0    & 0    & 0    & \cdots & 0    \\
+  & \vdots &   &   &      & \vdots &      &      &      & \vdots &      &      &      & \vdots &      &      &      & \vdots &      \\
+0 & \cdots & 0 & 0 & 0    & \cdots & 0    & 0    & 0    & \cdots & 0    & 0    & 0    & \cdots & 0    & 0    & 0    & \cdots & 0    
+\end{matrix}
+\right)\]
+und bringt diese durch Spaltenumformungen auf Spalten-Stufenform, so sieht man direkt, dass die resultierende Matrix von der Form
+\[ \left( \begin{matrix}
+1       &        &        &        &        &            &        &   &            \\
+        & \ddots &        &        &        &            &        &   &            \\ 
+        &        &        & \ddots      &        &            &        &   &  \\
+        &        &        &        & 1      &            &        &   &  \\
+        &        &        &        &        & 0          &        &   &  \\
+        &        &        &        &        &            & \ddots &   &  \\
+        &        &        &        &        &            &        & 0 & 
+\end{matrix} \right) \]
+ist, wobei die Anzahl der Einsen gleich der Anzahl der Stufenelemente von $A$ ist.\\
+Für eine solche Matrix $A$ ist also der Zeilenrang gleich dem Spaltenrang:
+\[\text{Zeilenrang}(A_z)=\text{Spaltenrang}(A_z)\]}
+
+\lang{en}{
+Consider a matrix $A_r$ in reduced row echelon form 
+\[
+A_z= \left(
+\begin{matrix}
+0 & \cdots & 0 & 1 & \ast & \cdots & \ast & 0    & \ast & \cdots & \ast & 0    & \ast & \cdots & \ast & 0    & \ast & \cdots & \ast \\ 
+0 & \cdots & 0 & 0 & 0    & \cdots & 0    & 1    & \ast & \cdots & \ast & 0    & \ast & \cdots & \ast & 0    & \ast & \cdots & \ast \\
+0 & \cdots & 0 & 0 & 0    & \cdots & 0    & 0    & 0    & \cdots & 0    & 1    & \ast & \cdots & \ast & 0    & \ast & \cdots & \ast \\
+  & \vdots &   &   &      & \vdots &      &      &      & \vdots &      &      &      & \vdots &      &      &      & \vdots &      \\
+0 & \cdots & 0 & 0 & 0    & \cdots & 0    & 0    & 0    & \cdots & 0    & 0    & 0    & \cdots & 0    & 1    & \ast & \cdots &      \\
+0 & \cdots & 0 & 0 & 0    & \cdots & 0    & 0    & 0    & \cdots & 0    & 0    & 0    & \cdots & 0    & 0    & 0    & \cdots & 0    \\
+  & \vdots &   &   &      & \vdots &      &      &      & \vdots &      &      &      & \vdots &      &      &      & \vdots &      \\
+0 & \cdots & 0 & 0 & 0    & \cdots & 0    & 0    & 0    & \cdots & 0    & 0    & 0    & \cdots & 0    & 0    & 0    & \cdots & 0    
+\end{matrix}
+\right)\]
+and transform it into column echelon form using column transformations. The result matrix is as follows
+\[ \left( \begin{matrix}
+1       &        &        &        &        &            &        &   &            \\
+        & \ddots &        &        &        &            &        &   &            \\ 
+        &        &        & \ddots      &        &            &        &   &  \\
+        &        &        &        & 1      &            &        &   &  \\
+        &        &        &        &        & 0          &        &   &  \\
+        &        &        &        &        &            & \ddots &   &  \\
+        &        &        &        &        &            &        & 0 & 
+\end{matrix} \right) \]
+The number of ones equals the number of the leading elements of $A$.\\
+For such a matrix $A$ the row rank equals the column rank:
+\[\text{ro rank}(A_r)=\text{column rank}(A_c)\]}
+\end{itemize}
+
+\step 
+\begin{itemize}
+\item[2.]
+\lang{de}{
+Entsprechend (durch Übergang zur Transponierten) sieht man, dass auch für eine
+Matrix in Spalten-Stufenform der Zeilenrang gleich dem Spaltenrang ist:
+\[\text{Zeilenrang}(A_s)=\text{Spaltenrang}(A_s)\]}
+\lang{en}{
+Looking at the transpose we see, that the matrix is in column echelon form and that the row rank is the same
+as the column rank:
+\[\text{row rank}(A_c)=\text{column rank}(A_c)\]}
+\end{itemize}
+\step
+\begin{itemize}
+\item[3.]
+\lang{de}{
+Zuletzt zeigen wir noch, dass bei Spaltenumformungen nicht nur der Spaltenrang gleich
+bleibt, sondern auch der Zeilenrang.\\
+Betrachten wir also eine allgemeine $(m\times n)$-Matrix $A$ über $\mathbb{K}$ und 
+eine Matrix $B$, die aus $A$ durch Spaltenumformung entstanden ist.\\
+Da man Spaltenumformungen auch durch Multiplikation mit $(n\times n)$-Matrizen von rechts darstellen kann, gibt es also eine solche 
+Matrix $D$ mit $B=A\cdot D$.\\
+Da man Zeilenumformungen auch durch Multiplikation mit $(m\times m)$-Matrizen von links darstellen kann, gibt es des Weiteren eine 
+Matrix $C$, so dass $A_z=C\cdot A$ die
+reduzierte Zeilenstufenform von $A$ ist.\\
+Die Matrix $C\cdot B$ erhält man also aus $B$ durch Zeilenumformungen, weshalb ihre
+Zeilenränge gleich sind. Andererseits ist
+\[ C\cdot B= C\cdot (A\cdot D)=(C\cdot A)\cdot D=A_z \cdot D \]
+eine Matrix, die aus der reduzierten Zeilenstufenform $A_z=C\cdot A$ durch Spaltenumformungen entsteht. Da die Anzahl der Nullzeilen dabei 
+nicht weniger werden
+kann, ist also
+\begin{eqnarray*}
+ \text{Zeilenrang}(B) &=& \text{Zeilenrang}(C\cdot B)=\text{Zeilenrang}((C\cdot A)\cdot D)\\ 
+ & \leq & \text{Zeilenrang}(C\cdot A)=\text{Zeilenrang}(A_z)=\text{Zeilenrang}(A).
+\end{eqnarray*}
+Durch Vertauschen der Rollen von $A$ und $B$ erhält man auch
+\[ \text{Zeilenrang}(A) \leq  \text{Zeilenrang}(B),  \]
+also insgesamt die Gleichheit.}
+
+\lang{en}{
+Lastly, we need to proof, that not only the column rank but also the row rank remain the same during column operations.\\
+So we consider a general $(m\times n)$-matrix $A$ over $\mathbb{K}$ and 
+a matrix $B$, which resulting from $A$ through column operations.\\
+Since multiplication with $(n\times n)$-matrices from the right represent column operations, there is 
+a matrix $D$ with $B=A\cdot D$.\\
+Row operations are represetend by multiplication with $(m\times m)$-matrices from the left, there is a matrix
+ $C$ such, that $A_z=C\cdot A$ is the reduced row echelon form of $A$.\\
+ We receive $C\cdot B$ by perfoming row operations on $B$, which is why the have the same row rank. 
+On the other hand we have
+\[ C\cdot B= C\cdot (A\cdot D)=(C\cdot A)\cdot D=A_r \cdot D \].
+This is a matrix, that is the outcome of performing column operations on $A_r=C\cdot A$. Because the number of
+non-zero row can not get less, we have
+\begin{eqnarray*}
+ \text{row rank}(B) &=& \text{row rank}(C\cdot B)=\text{row rank}((C\cdot A)\cdot D)\\ 
+ & \leq & \text{row rank}(C\cdot A)=\text{row rank}(A_r)=\text{row rank}(A).
+\end{eqnarray*}
+By swapping the positions of $A$ and $B$ we receive
+\[ \text{row rank}(A) \leq  \text{row rank}(B),  \]
+which is overall the equality.}
+\end{itemize}
+
+\step
+\lang{de}{
+Damit erhält man dann für eine allgemeine $(m \times n)$-Matrix $A$ über $\mathbb{K}$ mit reduzierter Spalten-Stufenform $A_s$
+\[\text{Zeilenrang}(A)=\text{Zeilenrang}(A_s)=\text{Spaltenrang}(A_s)=\text{Spaltenrang}(A).\]}
+\lang{en}{
+For a general $(m \times n)$-matrix $A$ over $\mathbb{K}$ with its reduced column echelon form $A_c$ we have
+\[\text{row rank}(A)=\text{row rank}(A_c)=\text{column rank}(A_c)=\text{column rank}(A).\]}
+\end{incremental}
+\end{showhide}
+\end{proof*}
+
+\lang{de}{
+Wir müssen also nicht mehr zwischen dem Zeilen- und dem Spaltenrang unterscheiden.}
+\lang{en}{
+There is no need to distinguish the row rank from the column rank.}
+
+\begin{definition}[\lang{de}{(voller) Rang} \lang{de}{(Full) rank}]\label{def:vollerRang}
+\lang{de}{
+Da der Zeilenrang und der Spaltenrang einer Matrix $A$ immer gleich sind, wird diese Zahl auch kurz \notion{Rang} von $A$ 
+genannt und mit Rang($A$) bezeichnet.
+
+Man sagt, dass eine $(m\times n)$-Matrix $A$ \notion{vollen Rang} hat, wenn der Rang von $A$ gleich der kleineren der 
+beiden Zahlen $m$ und $n$ ist, d.\,h. wenn Rang($A$)$=\min\{m,n\}$ gilt.\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=816}{\image[75]{00_Videobutton_schwarz}}
+\href{https://www.hm-kompakt.de/video?watch=817}{\image[75]{00_Videobutton_schwarz}}}}\\\\
+
+\lang{en}{
+Since the row rank and the column rank of a matrix $A$ are always the same, this number is also called \notion{rank} of $A$
+and is denoted by rank($A$).
+
+A $(m\times n)$-matrix $A$ is said to have \notion{full rank} if the rank of $A$ is equal to the lesser of the 
+two numbers $m$ and $n$, i.e. if rank($A$)$=\min\{m,n\}$ holds.}
+\end{definition}
+
+\begin{remark}
+\lang{de}{
+Eine quadratische $(n\times n)$-Matrix $A$ hat vollen Rang, 
+wenn der Rang von $A$ gleich $n$ ist.\\
+Diese Matrizen werden \notion{regulär} genannt. Wir nennen quadratische Matrizen \notion{singulär}, wenn sie keinen vollen Rang besitzen.}
+
+
+\lang{en}{
+A square $(n\times n)$-matrix has full rank, when the rank of $A$ equals $n$.\\
+Such a matrix is called \notion{regular}. We call a square matrix \notion{singular}, if it does not have full rank.}\\
+\end{remark}
+\lang{de}{
+\link{content_07_quadratische_matrizen}{Quadratische Matrizen} werden ausführlich im nächsten Abschnitt behandelt.}
+
+\lang{en}{
+\link{content_07_quadratische_matrizen}{Square matrices} will be discussed in detail in the next section.}
+ 
+\begin{example}
+\lang{de}{
+Die $(4\times 5)$-Matrix \[A=
+\begin{pmatrix}
+    1 & 2 & 1 & -1 & 7\\ 
+    1 & 3 & 0 & -1 & 8\\
+    -1 & 0 & -3 & 5 & 9 \\
+    1 & 1 & 2 & -1 & 6
+   \end{pmatrix} \]
+   aus obigem Beispiel hat Rang $3$. Der Rang ist also sowohl kleiner als die Zeilenanzahl, als auch kleiner als die Spaltenanzahl. 
+   Daher hat $A$ keinen vollen Rang.}
+
+\lang{en}{
+The $(4\times 5)$-matrix \[A=
+\begin{pmatrix}
+    1 & 2 & 1 & -1 & 7\\ 
+    1 & 3 & 0 & -1 & 8\\
+    -1 & 0 & -3 & 5 & 9 \\
+    1 & 1 & 2 & -1 & 6
+   \end{pmatrix} \]
+   from the above example has rank $3$. The rank is less than the number of rows and the number ob columns.
+   Therefore, $A$ does not have full rank.}
+   
+\end{example}
+
+\begin{quickcheck}
+    \type{input.number}
+      \precision{3}
+      \field{real}
+      \begin{variables}
+           \randint[Z]{m}{2}{4}
+           \randint[Z]{n}{5}{6}
+           \randint[Z]{k}{5}{6}
+           \randint[Z]{l}{2}{4}
+\function[calculate]{k4}{4*k}
+\function[calculate]{l4}{4*l}
+       \end{variables}
+      \text{
+      \lang{de}{
+      Die Matrix 
+  $A=\begin{pmatrix} \var{m} & \var{n} & 1\\ 0 &\var{k}&\var{l} \\ 0 & \var{k4} & c \end{pmatrix}$
+      hat für $c=$\ansref keinen vollen Rang.}
+      \lang{en}{
+      The matrix 
+  $A=\begin{pmatrix} \var{m} & \var{n} & 1\\ 0 &\var{k}&\var{l} \\ 0 & \var{k4} & c \end{pmatrix}$
+      does not have full rank for $c=$\ansref.}\\
+      }
+      \explanation{
+      \lang{de}{$A$ ist eine $(3 \times 3)$-Matrix. Für $c=\var{l4}$ ist die dritte Zeile ein Vielfaches der zweiten Zeile.
+      Damit existiert nach Zeilenumformung eine Nullzeile. Der Rang ist dadurch $\text{Rang}(A)=2$ und nicht voll.}
+      \lang{en}{$A$ is a $(3 \times 3)$-matrix. For $c=\var{l4}$ the third row is a multiple of the second row.
+      Because of that, there is a zero row after the row operations. Thereby the rank is $\text{rank}(A)=2$ and not full.}
+      }
+  
+    \begin{answer}
+            \solution{l4}
+      \end{answer}
+\end{quickcheck}
+
+\section{\lang{de}{Rang und Lösbarkeit eines LGS} \lang{en}{Rank and solvability of a linear system}}
+\lang{de}{
+Mit Hilfe des Rangs einer Koeffizientenmatrix lassen sich Aussagen über die Lösbarkeit des dazugehörigen linearen Gleichungssystems treffen.}
+\lang{en}{
+Given the rank of a coefficient matrix, we may make statements about the solvability of the associated linear system. }
+
+\begin{theorem}
+\lang{de}{
+Ein lineares Gleichungssystem über einen Körper $\mathbb{K}$ mit $m$ Gleichungen und $n$ Variablen besitzt...}
+\lang{en}{A system of linear equations of a field $\mathbb{K}$ with $m$ equations and $n$ variables has...}
+\begin{itemize}
+\item[1.] \lang{de}{\notion{keine Lösung}, wenn der Rang der Koeffizientenmatrix nicht dem Rang der erweiterten Koeffizientenmatrix entspricht, also wenn
+\[\text{Rang}(A)\neq \text{Rang}(A|b).\]}
+\lang{en}{\notion{no solution}, when the rank of its coefficient matrix is equal to the rank of the augmented matrix, i.e.
+\[\text{rank}(A)\neq \text{rank}(A|b).\]}
+
+\item[2.] \lang{de}{\notion{genau eine Lösung}, wenn der Rang von Koeffizientenmatrix und von erweiterter Koeffizientenmatrix $n$ ist, also wenn
+\[\text{Rang}(A)=\text{Rang}(A|b)\,\,\, \text{und}\,\,\, \text{Rang}(A)=n. \]}
+\lang{en}{\notion{exactly one solution}, if the rank of its coefficient matrix and the augmented matrix both equal $n$, i.e.
+\[\text{Rang}(A)=\text{rank}(A|b)\,\,\, \text{and}\,\,\, \text{rank}(A)=n. \]}
+
+\item[3.] \lang{de}{\notion{unendlich viele Lösungen}, wenn die Ränge von Koeffizientenmatrix und erweiterter Koeffizientenmatrix zwar gleich, aber kleiner als $n$ sind, d.\,h.
+\[\text{Rang}(A)=\text{Rang}(A|b)\,\,\, \text{und}\,\,\, \text{Rang}(A)<n.\]
+(Dieser Punkt gilt nur, wenn der Körper $\mathbb{K}$ selbst unendlich viele Elemente enthält, zum Beispiel $\mathbb{Q},\mathbb{R}$ oder $\mathbb{C}$. 
+Über einem endlichen Körper würde die Lösungsmenge in diesem Fall genau so viele Elemente enthalten wie der Körper.)} 
+\lang{en}{\notion{infinitly many solutions}, if the rank of the coefficient matrix is equal to the rank of the augmented
+matrix, but less than $n$, i.e.
+\[\text{rank}(A)=\text{rank}(A|b)\,\,\, \text{and}\,\,\, \text{rank}(A)<n.\]
+(This only holds, wenn the field $\mathbb{K}$ consists of infinitly many elements, e.g. $\Q$, $\R$ or $\C$.
+Over a finite body, the solution set would contain exactly as many elements as the field.}
+\end{itemize}
+\end{theorem}
+
+\begin{proof*}[\lang{de}{Beweis Theorem} \lang{en}{Proof of the theorem}]
+\begin{showhide}
+\begin{itemize}
+\item[1.] \lang{de}{Wenn der Rang der Koeffizientenmatrix nicht dem Rang der erweiterten Koeffizientenmatrix entspricht, so hat diese die reduzierte Stufenform
+ \[ \begin{pmatrix}
+    1 & 0 & \cdots & 0 & \star&| & b_1\\ 
+     0 & 1 & \cdots & 0 & \star&| & b_2\\ 
+    \vdots & \, & \ddots & \, & \vdots&| & \vdots\\ 
+ 0 & 0 & \cdots & 1 & \star&| & b_k\\ 
+   0 & 0 & \cdots & 0 & 0&| & \vdots \\ 
+  0 & 0 & \cdots & 0 & 0&| & b_{m}\\ 
+  \end{pmatrix}\]
+mit mindestens einem $b_i \neq 0$ für $k<i\leq m$, was im Widerspruch zu der Nullzeile der linken Seite steht. 
+Damit besitzt das dazugehörige LGS keine Lösung.\\
+Für die Lösbarkeit eines LGS muss der Rang der Koeffizientenmatrix folglich immer gleich dem Rang der erweiterten Koeffizientenmatrix sein.} 
+
+\lang{en}{If the rank of the coefficient matrix does not equal the rank of the augmented matrix, this has the reduced row echelon form
+ \[ \begin{pmatrix}
+    1 & 0 & \cdots & 0 & \star&| & b_1\\ 
+     0 & 1 & \cdots & 0 & \star&| & b_2\\ 
+    \vdots & \, & \ddots & \, & \vdots&| & \vdots\\ 
+ 0 & 0 & \cdots & 1 & \star&| & b_k\\ 
+   0 & 0 & \cdots & 0 & 0&| & \vdots \\ 
+  0 & 0 & \cdots & 0 & 0&| & b_{m}\\ 
+  \end{pmatrix}\]
+with at least one $b_i \neq 0$ for $k<i\leq m$, which contradicts the zero row on the left side. 
+Therefore the linear system has no solution.\\
+For solvability of a linear system the rank of the coefficient matrix must equal the rank of the augmented coefficient matrix.}
+
+\item[2.] \lang{de}{Wenn der Rang der Koeffizientenmatrix $n$ ist, so ist in ihrer reduzierten Stufenform dieselbe Anzahl an Spalten und Zeilen ungleich Null.
+Die reduzierte Stufenform der erweiterten Koeffizientenmatrix ist
+ \[ \begin{pmatrix}
+    1 & 0 & \cdots & 0 & 0&| & b_1\\ 
+     0 & 1 & \cdots & 0 & 0&| & b_2\\ 
+    \vdots & \, & \ddots & \, & \vdots&| & \vdots\\ 
+ 0 & 0 & \cdots & 1 & 0&| & b_{n-1}\\ 
+  0 & 0 & \cdots & 0 & 1&| & b_n\\
+    0 & 0 & \cdots & 0 & 0&| & 0\\ 
+     \vdots & \, & \cdots & & \vdots&| & \vdots\\  
+  0 & 0 & \cdots & 0 & 0&| & 0\\ 
+  \end{pmatrix}.\]
+Das heißt, es existieren $n$ Stufenelemente (Einsen) zu $n$ Variablen und damit ist keine von ihnen eine freie Variable.\\
+Eine eindeutige Lösung lässt sich hier direkt ablesen.}
+
+\lang{en}{If the rank of the coefficient matrix is $n$, in reduced row echelon form the number of non-zero rows equals the number of non-zero columns.
+The reduced row echelon form of the augmented matrix is
+ \[ \begin{pmatrix}
+    1 & 0 & \cdots & 0 & 0&| & b_1\\ 
+     0 & 1 & \cdots & 0 & 0&| & b_2\\ 
+    \vdots & \, & \ddots & \, & \vdots&| & \vdots\\ 
+ 0 & 0 & \cdots & 1 & 0&| & b_{n-1}\\ 
+  0 & 0 & \cdots & 0 & 1&| & b_n\\
+    0 & 0 & \cdots & 0 & 0&| & 0\\ 
+     \vdots & \, & \cdots & & \vdots&| & \vdots\\  
+  0 & 0 & \cdots & 0 & 0&| & 0\\ 
+  \end{pmatrix}.\]
+There exist $n$ leading elements (ones) for $n$ variables and therefore non of them is a free variable.
+A unique solution can be read directly here.}
+
+\item[3.] \lang{de}{Wenn der Rang der (erweiterten) Koeffizientenmatrix $k$ kleiner als $n$ ist, so existieren im Gegensatz zu 2. freie Variablen. 
+ \[ \begin{pmatrix}
+    1 & 0 & \cdots & 0 & \star&| & b_1\\ 
+     0 & 1 & \cdots & 0 & \star&| & b_2\\ 
+    \vdots & \, & \ddots & & \vdots&| & \vdots\\ 
+ 0 & 0 & \cdots & 1 & \star&| & b_k\\ 
+    0 & 0 & \cdots & 0 & 0&| & 0\\ 
+     \vdots & \, & \cdots & \, & \vdots&| & \vdots\\  
+  0 & 0 & \cdots & 0 & 0&| & 0\\ 
+  \end{pmatrix}\]
+Da freie Variablen als Parameter in $\mathbb{K}$ gesetzt werden können, existieren unendlich viele Lösungen.}
+
+\lang{en}{If the rank of the augmented matrix $k$ is less than $n$, there exist free variables (in contrast to 2.). 
+ \[ \begin{pmatrix}
+    1 & 0 & \cdots & 0 & \star&| & b_1\\ 
+     0 & 1 & \cdots & 0 & \star&| & b_2\\ 
+    \vdots & \, & \ddots & & \vdots&| & \vdots\\ 
+ 0 & 0 & \cdots & 1 & \star&| & b_k\\ 
+    0 & 0 & \cdots & 0 & 0&| & 0\\ 
+     \vdots & \, & \cdots & \, & \vdots&| & \vdots\\  
+  0 & 0 & \cdots & 0 & 0&| & 0\\ 
+  \end{pmatrix}\]
+  Because fre
+Since free variables can be set as parameters in $\mathbb{K}$, there exist infinitely many solutions.}
+\end{itemize}
+\end{showhide}
+\end{proof*}
+
+\begin{example}
+\begin{tabs*}
+\tab{\lang{de}{1. Beispiel} \lang{en}{1. Example}}
+\lang{de}{
+Für das lineare Gleichungssystem
+\begin{displaymath}
+\begin{mtable}[\cellaligns{ccrcrcrcr}]
+(I)&\qquad-&x&+&2y&+&3z&=&5\\
+(II)&&&&y&+&4z&=&11\\
+(III)&&&&&-&2z&=&-6
+\end{mtable}
+\end{displaymath}
+mit erweiterter Koeffizientenmatrix 
+\[ \begin{pmatrix} -1 & 2 & 3 & | & 5 \\0 & 1 & 4 & | & 11 \\0 & 0 & -2 & | & -6 \end{pmatrix} \]
+gilt $\text{Rang}(A)=\text{Rang}(A|b)=3$, was auch der Anzahl der dazugehörigen Variablen entspricht. Das heißt, das LGS besitzt genau eine Lösung:
+
+\[\mathbb{L}=\left\{\begin{pmatrix}2\\ -1\\ 3\end{pmatrix} \right\}\]
+(siehe \link{gauss1}{letztes Kapitel}).}
+
+\lang{en}{
+For the linear system
+\begin{displaymath}
+\begin{mtable}[\cellaligns{ccrcrcrcr}]
+(I)&\qquad-&x&+&2y&+&3z&=&5\\
+(II)&&&&y&+&4z&=&11\\
+(III)&&&&&-&2z&=&-6
+\end{mtable}
+\end{displaymath}
+with its augmented matrix 
+\[ \begin{pmatrix} -1 & 2 & 3 & | & 5 \\0 & 1 & 4 & | & 11 \\0 & 0 & -2 & | & -6 \end{pmatrix} \]
+we have $\text{rank}(A)=\text{rank}(A|b)=3$, which is also the number of the corresponding variables. 
+This means that the LGS has exactly one solution:
+
+\[\mathbb{L}=\left\{\begin{pmatrix}2\\ -1\\ 3\end{pmatrix} \right\}\]
+(see \link{gauss1}{last chapter}).}
+\\
+
+\tab{\lang{de}{2. Beispiel} \lang{en}{2. Example}}
+\lang{de}{
+Für das komplexwertige lineare Gleichungssystem
+\[ \begin{mtable}[\cellaligns{crcrcr}]
+(I)&\qquad x & - & (2+i) \cdot  y & = & 5 \\
+(II)& &  & 0 & =  & 0
+\end{mtable} \]
+mit erweiterter Koeffizientenmatrix 
+\[ \begin{pmatrix} 1 & -2-i & | & 5 \\0 &0 & | & 0 \end{pmatrix} \]
+gilt $\text{Rang}(A)=\text{Rang}(A|b)=1$. Das LGS besitzt aber 2 Variablen und hat damit unendlich viele Lösungen:
+
+\[ \mathbb{L}= \left\{ \begin{pmatrix}5\\ 0 \end{pmatrix}+r\cdot \begin{pmatrix} 2+i \\ 1 \end{pmatrix} \mid\, r\in \C \right\} \] 
+(siehe \link{gauss1}{letztes Kapitel}).}
+
+\lang{en}{
+For the complex-valued linear system
+\[ \begin{mtable}[\cellaligns{crcrcr}]
+(I)&\qquad x & - & (2+i) \cdot  y & = & 5 \\
+(II)& &  & 0 & =  & 0
+\end{mtable} \]
+with its augmented matrix 
+\[ \begin{pmatrix} 1 & -2-i & | & 5 \\0 &0 & | & 0 \end{pmatrix} \]
+we have $\text{rank}(A)=\text{rank}(A|b)=1$. But the linear system hast 2 variables and therefore iniftly many solutions:
+
+\[ \mathbb{L}= \left\{ \begin{pmatrix}5\\ 0 \end{pmatrix}+r\cdot \begin{pmatrix} 2+i \\ 1 \end{pmatrix} \mid\, r\in \C \right\} \] 
+(see \link{gauss1}{last chapter}).}
+
+\tab{\lang{de}{3. Beispiel} \lang{en}{3. Example}}
+\lang{de}{
+Für das lineare Gleichungssystem
+\begin{displaymath}
+\begin{mtable}[\cellaligns{ccrcrcrcr}]
+(I)&\qquad-&x&+&2y&+&3z&=&5\\
+(II)&&&&y&+&4z&=&11\\
+(III)&&&&&&0&=&-6
+\end{mtable}
+\end{displaymath}
+mit erweiterter Koeffizientenmatrix 
+\[ \begin{pmatrix} -1 & 2 & 3 & | & 5 \\0 & 1 & 4 & | & 11 \\0 & 0 & 0 & | & -6 \end{pmatrix} \]
+gilt $\text{Rang}(A)=2$ und $\text{Rang}(A|b)=3$.\\
+Das heißt, das LGS ist nicht lösbar und 
+\[\mathbb{L}=\emptyset.\]}
+
+\lang{en}{
+For the linear system
+\begin{displaymath}
+\begin{mtable}[\cellaligns{ccrcrcrcr}]
+(I)&\qquad-&x&+&2y&+&3z&=&5\\
+(II)&&&&y&+&4z&=&11\\
+(III)&&&&&&0&=&-6
+\end{mtable}
+\end{displaymath}
+with its augmented matrix 
+\[ \begin{pmatrix} -1 & 2 & 3 & | & 5 \\0 & 1 & 4 & | & 11 \\0 & 0 & 0 & | & -6 \end{pmatrix} \]
+we have $\text{rank}(A)=2$ and $\text{rank}(A|b)=3$.\\
+Therefore the linear system is not solvable and 
+\[\mathbb{L}=\emptyset.\]}
+
+\end{tabs*}
+\end{example}
+
+
+
+
+\end{content}

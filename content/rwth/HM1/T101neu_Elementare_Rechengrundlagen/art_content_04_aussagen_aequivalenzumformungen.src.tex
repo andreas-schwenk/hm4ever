@@ -1,0 +1,2586 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Aussagenlogik und Äquivalenzumformungen}    
+    \lang{en}{Propositional logic}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_01_zahlenmengen.meta.xml}{content_01_zahlenmengen}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+
+\usepackage{mumie.ombplus}
+\ombchapter{1}
+\ombarticle{4}
+
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Aussagenlogik und "Aquivalenzumformungen}\lang{en}{Propositional logic}}
+ 
+\begin{block}[annotation]
+  Aussagen, Folgerungen und Äquivalenz von Aussagen, Äquivalenzumformungen von (Un-)Gleichungen
+  
+\end{block}
+%
+% ursprüngliche Version: T101_Rechengrundlagen/content_02_aussagen
+%
+% \begin{block}[annotation]
+%  Im Ticket-System: \href{http://team.mumie.net/issues/8970}{Ticket 8970}\\
+% \end{block}
+%
+%Ticket neu:
+%
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/19193}{Ticket 19193}
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{\lang{de}{Aussagen und Aussageformen}\lang{en}{Propositions}} \label{sec:aussagen}
+%
+% Motivation
+%
+\lang{de}{
+Die \emph{Aussagenlogik} ist ein Teilgebiet der Logik, das auch in der Mathematik Anwendung findet.
+Hier befasst sie sich konkret mit der Verknüpfung mathematischer Aussagen, denen Wahrheitswerte 
+zugeordnet werden. Mit Hilfe der \emph{Aussagenlogik} lassen sich auch Sachverhalte aus der
+realen Welt formalisieren, um dann nach bestimmten Regeln Schlussfolgerungen ziehen zu können. 
+Dies wird anhand des folgenden Beispiels im Laufe des Kapitels veranschaulicht.
+}
+\lang{en}{
+\emph{Propositional logic is a subfield of logic which has applications in mathematics. It is about 
+combining mathematical statements which are assigned truth-values. With the help of 
+\emph{propositional logic}, even difficult real-world problems can be formalised, so that 
+inferences can be made using a set of rules. This is demonstrated throughout this chapter using the 
+following example.
+}
+}
+
+%
+% Motivationsbeispiel
+%
+\begin{block}
+\begin{example}[\textit{\lang{de}{Wer sagt die Wahrheit?}\lang{en}{Who is telling the truth?}}] \label{ex:motivation}
+\lang{de}{
+Lukas lebt in einer Vierer-WG zusammen mit Julia, Marie und Lara. Am Wochenende 
+erwartet er Besuch und hat hierfür einen Kasten Bier besorgt. Am Samstag muss er leider
+feststellen, dass nur noch eine volle Flasche Bier in seinem Kasten ist. 
+Seine Mitbewohnerinnen leugnen ausnahmslos, das Bier genommen zu haben. Da außer ihnen
+niemand in der Wohnung war, muss also mindestens eine von ihnen lügen. Lukas kennt die drei 
+Mitbewohnerinnen noch nicht sehr gut, er weiß nur, dass jede von ihnen entweder 
+grundsätzlich die Wahrheit sagt oder grundsätzlich lügt. Deshalb befragt er sie nochmal 
+einzeln, woraufhin Julia sagt, dass Marie lügt, Marie sagt, dass Lara lügt und Lara sagt,
+dass Julia und Marie beide lügen. Kann Lukas nun herausfinden, wer das Bier genommen hat?
+}
+\lang{en}{
+Lukas lives with his roommates Julia, Marie and Lara. On the weekend he is having a party, 
+and he has bought a crate of beers. On Saturday he lifts the crate and notices that it feels lighter 
+than before; he checks and finds that most of the bottles in the crate are now empty. His roommates 
+all deny having taken any of the beer, but since nobody else had been in their apartment, at least 
+one of them must be lying. Lukas does not yet know any of his roommates very well, but he knows that 
+each one of them either always tells the truth or always lies. Upon questioning each of 
+them individually, Julia says that Marie is lying, Marie says that Lara is lying, and Lara says 
+that both Julia and Marie are lying. Can Lukas deduce who took the beer?
+}
+\end{example}
+\end{block}
+
+\lang{de}{
+Wir werden im Folgenden sehen, wie sich Lukas' Problem formalisieren und mithilfe der 
+\emph{Aussagenlogik} lösen lässt. Hierzu definieren wir zunächst, was eine Aussage im 
+mathematischen Sinne ist.
+}
+\lang{en}{
+In this chapter we will see how Lukas' problem can be formalised and solved with the help of 
+\emph{propositional logic}. We first define a 'proposition' in the mathematical sense.
+}
+
+\begin{definition}[\lang{de}{Aussage}\lang{en}{Proposition}] \label{def:aussagen}
+\lang{de}{
+Eine \notion{(mathematische) Aussage} ist eine sprachlich oder symbolisch formulierte Behauptung,
+          der auf eindeutige Weise ein Wahrheitswert, nämlich \textbf{wahr (W)} oder \textbf{falsch (F)}
+          zugeordnet werden kann. 
+         }
+\lang{en}{
+A \textit{(mathematical) proposition} is a statement, expressed either in words or symbols, that can be 
+unambiguously assigned a truth-value, i.e. a statement that is either \textbf{true (T)} or 
+\textbf{false (F)}
+}
+\end{definition}
+
+\lang{de}{
+  Im rein sprachlichen Gebrauch werden die Begriffe \textit{"`Aussage"' \,} und \textit{"`Behauptung"' \,} 
+  oft synonym verwendet, unabhängig davon, ob es sich dabei um eine \emph{(mathematische) Aussage} im Sinne 
+  der vorstehenden Definition \ref{def:aussagen} handelt. Zur besseren Abgrenzung der Begrifflichkeiten werden 
+  wir im Folgenden stets zunächst von einer \textit{"`Behauptung"' \,} sprechen, solange noch 
+  nicht nachgewiesen ist, ob ihr ein eindeutiger Wahrheitswert zugeordnet werden kann.
+  Für eine \emph{"`Aussage"'} ist dann gemäß Definition \ref{def:aussagen} stets die
+  \textit{prinzipielle} Nachprüfbarkeit der zugrundeliegenden \textit{"`Behauptung"'} essenziell.
+}
+\lang{en}{
+Informally we often use the terms \textit{'proposition'} and \textit{'statement'} interchangably, not always 
+referring to a \emph{(mathematical) proposition} in the sense of definition \ref{def:aussagen}. To remove 
+ambiguity, we henceforth use \textit{'statement'} whenever it has not yet been shown whether a truth-value can 
+be assigned. Hence it is verifiability that distinguishes a \textit{'statement'} from a \emph{proposition}.
+}
+
+\begin{example} \label{ex:aussagen}
+  \begin{itemize}
+  \item \lang{de}{
+  So ist beispielsweise die Behauptung "`Es regnet genau jetzt draußen im Garten."' eine Aussage, denn durch einen Blick 
+  aus dem Fenster können wir prüfen, ob die Aussage wahr oder falsch ist. Aber auch, wenn wir uns in einem 
+  fensterlosen Keller befinden, haben wir keinen Zweifel, dass der Satz "`Es regnet genau jetzt draußen im Garten."' prinzipiell 
+  überprüfbar ist. Unverzichtbar für die eindeutige Bestimmung des Wahrheitswert ist jedoch die konkrete Angabe von Zeit und Ort in 
+  dieser Aussage, denn es kann zum gleichen Zeitpunkt an einem anderen Ort nicht regnen, ebenso kann es zwei 
+  Minuten später im Garten nicht mehr regnen.
+  }
+  \lang{en}{
+  For example, the statement 'It is currently raining in Lukas' garden.' is a proposition, as we can decide whether 
+  it is true or false by simply looking at the garden. However, even if we were nowhere near the garden, the 
+  statement 'It is currently raining in Lukas' garden.' is still clearly either true or false. Specifying the time 
+  and location here is essential for making it a proposition, as there are other places at the same time 
+  where it is not raining, and in Lukas' garden it sometimes rains and sometimes does not. In this case, the 
+  statement is specific enough that it can reasonably be assigned a truth-value.
+  }
+  
+  \item \lang{de}{
+  Die Behauptung "`Sechs Richtige im Lotto!"' hingegen ist \textbf{keine} Aussage, da nicht klar spezifiziert ist,
+  um wen oder was es geht, und ob die "`Sechs Richtigen"' "`getippt"' oder "`knapp verfehlt"' wurden. 
+  Durch das fehlende Verb in dem Satz ist es also nicht möglich, hier einen eindeutigen Wahrheitswert zuzuordnen.
+  }
+  \lang{en}{
+  The statement 'Six matching lottery numbers!' on the other hand is \textbf{not} a proposition, as it is not clearly 
+  specified whose lottery ticket the numbers match with, or whether they \textit{almost} match or \textit{fully} 
+  match. The sentence has no verb either, meaning it cannot be assigned a truth-value.
+  }
+        
+  \begin{block}[tip]
+     \lang{de}{
+     Für Behauptungen in Form von sprachlich formulierten Sätzen gilt die \textbf{Faustregel}, dass in der 
+     Regel nur ein vollständig formulierter Satz mit Subjekt, Prädikat und (optional) 
+     Objekt eine Aussage im mathematischen Sinne gemäß \ref{def:aussagen} sein kann.
+     }
+     \lang{en}{
+     As a rule of thumb, statements expressed using natural language must be gramatically correct sentences, 
+     with a subject and predicate, and possibly an object, in order to be considered a mathematical proposition 
+     as in definition \ref{def:aussagen}.
+     }
+  \end{block}
+
+    \item \lang{de}{
+        Für eine Aussage ist es wichtig, dass ihr ein Wahrheitswert zugeordnet werden \emph{kann}, 
+        in dem Sinne, dass dies grundsätzlich möglich ist.
+        Welcher Wahrheitswert ihr zugeordnet wird, ist aber stark vom Kontext abhängig. Zum Beispiel wird die Aussage
+          \textit{"`Diese Aussage ist falsch."'} je nach Zusammenhang mit 
+          \textbf{wahr} oder \textbf{falsch} belegt werden.
+        }
+        \lang{en}{
+        It is important that a truth-value \textbf{can} be assigned to a proposition. The value itself is 
+        highly dependent on context. For example, the proposition 
+          \textit{'this proposition is false'} 
+        can be assigned to be either be \textbf{'true'} or \textbf{'false'} depending on the context.
+        }
+
+    \item \lang{de}{
+    Ähnliches gilt für mathematisch formulierte Behauptungen, die Variablen enthalten, wie z.\,B. $\, x^2=1.$ \\
+    Diese Behauptung wird erst dann zu einer Aussage, wenn ergänzend konkrete Werte für die Variable $x$ spezifiziert 
+    sind. So gilt innerhalb der reellen Zahlen:
+    \\
+    \begin{itemize}[arrow]
+      \item "`Für alle $x \in \{-1,1\} \;\;$  gilt $\ x^2=1$ ."'$\quad $  eine \textbf{wahre} Aussage,\\
+      \item "`Für alle $x \in [-1,1] \quad$ gilt $\ x^2=1$ ."'$\quad $  eine \textbf{falsche} Aussage.\\
+    \end{itemize}
+    }
+    \lang{en}{
+    A mathematical statement containing variables, such as $\, x^2=1$, only becomes a proposition when it is 
+    specified what values are taken by the variable $x$. For example, 
+    \\
+    \begin{itemize}[arrow]
+      \item 'For all $x \in \{-1,1\} \;\;$  we have $\ x^2=1$ .'$\quad $  A \textbf{true} proposition,\\
+      \item 'For all $x \in [-1,1] \quad$ we have $\ x^2=1$ .'$\quad $  A \textbf{false} proposition.\\
+    \end{itemize}
+    }
+
+  \end{itemize}
+\end{example}
+
+
+\begin{remark}\label{rem:aussagen}
+    
+    \begin{itemize}
+        \item \lang{de}{
+        Enthält eine mathematisch formulierte Behauptung Variablen, so kann man ihren Wahrheitswert
+       nur in Abhängigkeit von diesen Variablen bestimmen. 
+       Die Behauptung erfüllt also per se nicht die geforderte 
+        Eigenschaft einer \emph{Aussage}. Erst durch die Belegung der Variablen mit konkreten Werten, wie im 
+        vorstehenden Beispiel, wird die Behauptung zu einer Aussage im Sinne der Definition \ref{def:aussagen}. 
+        }
+        \lang{en}{
+        If a mathematical statement contains variables, its truth-value can only be determined depending on those 
+        variables. The statement only becomes a proposition in the sense of definition \ref{def:aussagen} once the 
+        values of the variables are specified.
+        }
+        
+        \item \lang{de}{
+        Auch mathematische Terme wie zum Beispiel $x^2+1$ oder auch $2+5$ sind keine \emph{Aussagen,}
+        da sie weder \textbf{wahr} noch \textbf{falsch} sein können. 
+        Sprachlich würde dem etwa \glqq Blume\grqq{} oder \glqq Haus\grqq{} entsprechen.
+         Ausdrücke mit Termen können nur dann Aussagen 
+        im Sinne der Definition \ref{def:aussagen} sein, wenn sie mehrere Terme oder auch Terme und 
+        Mengen enthalten, die durch Relationszeichen wie z.\,B. $=$, $>$, $<$, $\geq$, $\leq$, $\neq$, $\in, \ldots\quad$ in Beziehung
+        gesetzt werden. Zum Beipiel ist
+        \\
+        \begin{itemize}[arrow]
+          \item $2+5>3 \quad $  eine \textbf{wahre} Aussage,\\
+          \item $2+5=6 \quad $  eine \textbf{falsche} Aussage,\\
+          \item "`Für $x=1\;$ ist $\; x^2=1 $."'$\quad $  eine \textbf{wahre} Aussage.\\
+        \end{itemize}
+        }
+        \lang{en}{
+        Mathematical expressions such as $x^2+1$ or $2+5$ are not propositions either, as they can neither be 
+        \textbf{true} nor \textbf{false}. Analogously, neither 'flower' nor 'house' can hold a truth-value. Such 
+        expressions can only become propositions in the sense of definition \ref{def:aussagen} if they contain a relation 
+        such as $=$, $>$, $<$, $\geq$, $\leq$, $\neq$, $\in, \ldots\quad$ that compares two or more expressions. For 
+        example, 
+        \\
+        \begin{itemize}[arrow]
+          \item $2+5>3 \quad $  is a \textbf{true} proposition,\\
+          \item $2+5=6 \quad $  is a \textbf{false} proposition,\\
+          \item `For $x=1\;$ we have $\; x^2=1 $.'$\quad $  is a \textbf{true} proposition.\\
+        \end{itemize}
+        }
+
+\end{itemize}       
+\end{remark}
+
+
+
+%    \lang{de}{In Definition \ref{def:aussagen} ist die \textit{prinzipielle} 
+%    Nachprüfbarkeit gemeint.
+%   So ist der Satz "`Es regnet."' eine Aussage, denn durch einen Blick aus 
+%    dem Fenster können wir prüfen, ob die Aussage wahr oder falsch ist. 
+%    Aber auch, wenn wir uns in einem fensterlosen Keller befinden, haben 
+%    wir keinen Zweifel, dass der Satz "`Es regnet."' prinzipiell überprüfbar 
+%    ist.
+%    Auch}
+%    \begin{align}
+%    x^2=1 \label{eq-II.1.01}
+%    \end{align}
+%    \lang{de}{ist eine Aussage; für $x = 1$ und $x = -1$ ist \ref{eq-II.1.01} wahr, 
+%    und für alle anderen reellen Zahlen ist \ref{eq-II.1.01} falsch - aber 
+%    stets ist \ref{eq-II.1.01} entweder wahr oder falsch 
+%    (und nicht "`weder wahr noch falsch"').\\
+%    \\
+%    Zum Verständnis des Begriffs der Aussage ist es nützlich, Beispiele 
+%    von Sätzen zu geben, die \textit{keine} Aussagen sind: "`Ein Auto"' 
+%    ist keine Aussage, "`Sechs Richtige im Lotto"' ist keine Aussage, 
+%    und auch ein einzelner Term,}
+%   \begin{align}
+%   \frac{x^2}{x^2+1} \label{eq-II.1.02}
+%    \end{align}
+%    \lang{de}{ist keine Aussage. An diesem Beispiel erkennt man die Bedeutung der 
+%    Gleichheits- und Ungleichheitszeichen $=,\; <,\; >,\; \leq$ und $\geq$: 
+%    Erst wenn Terme durch diese (und noch viele weitere) Zeichen miteinander 
+%    in Beziehung gesetzt werden, entstehen Aussagen. Als Faustregel gilt, dass 
+%    ein \textit{ganzer deutscher Satz} meist eine Aussage im mathematischen Sinn ist.}
+
+
+
+\begin{quickcheck}
+		\type{input.number}
+		\begin{variables}
+			\randint{y}{1}{5}
+			\function[calculate]{l}{y*(y-1)}
+			\function[calculate]{u}{y*(y+1)}
+		\end{variables}
+		
+			\text{\lang{de}{
+      F"ur welchen Wert der Variable $x$ ist die Aussage\\ 
+			\emph{$x \;$ ist eine natürliche Zahl mit $\quad \var{l}< x^2\leq \var{u}$.}\\
+			eine wahre Aussage?\\
+			F"ur $x=$\ansref.
+      }
+      \lang{en}{
+      For which value of the variable $x$ is the proposition\\
+      \emph{$x \;$ is a natural number with $\quad \var{l}< x^2\leq \var{u}$.}\\
+      a true proposition?\\
+      For $x=$\ansref.
+      }}
+		
+		\begin{answer}
+			\solution{y}
+		\end{answer}
+	\end{quickcheck}
+
+%%%%%%
+% NEU
+%%%%%%
+
+%
+% Motivationsbeispiel
+%
+%
+  
+\begin{block} 
+\lang{de}{\notion{1. Schritt zur Lösung von \ref{ex:motivation}{$\,$} \textit{Wer sagt die Wahrheit?} }}
+\lang{en}{\notion{First step to solve \ref{ex:motivation}{$\,$} \textit{Who is telling the truth?}}}
+\\  
+    \lang{de}{
+    Schauen wir uns noch einmal die Situation in der Vierer-WG an. 
+    Zur Prüfung der Sachverhalte suchen wir zunächst die im Text enthaltenen Behauptungen,
+    die sich als % \emph{(mathematische) Aussagen} 
+    \emph{Aussagen} im Sinne der Definition \ref{def:aussagen}
+    formulieren lassen, denen also eindeutig
+    ein Wahrheitswert zugeordnet werden kann.
+    }
+    \lang{en}{
+    Let us remind ourselves of the situation in Lukas' apartment, and look for the statements made in the example 
+    text that can be formulated as \emph{propositions} in the sense of definition \ref{def:aussagen}, and assigned 
+    a truth-value.
+    }
+
+
+ \begin{incremental}
+
+  \step %1
+  \lang{de}{
+  Die Tatsache, dass jede Mitbewohnerin von Lukas entweder grundsätzlich die Wahrheit sagt
+  oder grundsätzlich lügt, lässt sich durch die folgenden Aussagen darstellen:
+  \begin{enumerate}
+      \item[$A_1:$]  "`Julia sagt die Wahrheit."' \\
+      \item[$A_2:$]  "`Marie sagt die Wahrheit."' \\
+      \item[$A_3:$]  "`Lara sagt die Wahrheit."'  \\
+  \end{enumerate}
+  % Dies sind Aussagen im mathematischen Sinne, 
+  Dies sind \emph{Aussagen} im Sinne der Definition \ref{def:aussagen},
+  denn jede der Aussagen ist entweder wahr oder falsch. Eine konkrete Festlegung von Zeit und Ort, wie in 
+  Beispiel \ref{ex:aussagen} erwähnt, spielt in dieser Aussage aufgrund der Voraussetzung keine Rolle, denn
+  sagt beispielsweise Julia die Wahrheit, tut sie dies ja grundsätzlich, somit ist
+  $A_1$ \textbf{wahr}. Wenn aber Julia lügt, tut sie auch dies grundsätzlich und in diesem 
+  Fall ist $A_1$ \textbf{falsch}.
+  }
+  \lang{en}{
+  The fact that each of Lukas' roommates either always tells the truth or always lies can be expressed as:
+  \begin{enumerate}
+      \item[$A_1:$]  'Julia tells the truth.' \\
+      \item[$A_2:$]  'Marie tells the truth.' \\
+      \item[$A_3:$]  'Lara tells the truth.'  \\
+  \end{enumerate}
+  These are \emph{propositions} in the sense of definition \ref{def:aussagen}, as each one is either true 
+  or false. A specified time and place like in example \ref{ex:aussagen} is not necessary here. This is because 
+  we are given as a fact that if Julia tells the truth, she always does so, making $A_1$ \textbf{true.} If she 
+  lies, she always does so, making $A_1$ \textbf{false.} 
+  }
+   
+  
+  \step %2
+  \lang{de}{
+  Die einzelnen Angaben der Mitbewohnerinnen, "`Julia sagt, dass Marie lügt"', "`Marie sagt, 
+  dass Lara lügt"' und "`Lara sagt, dass Julia und Marie lügen"' sind weitere Behauptungen,
+  die jedoch alleinstehend noch keine sinnvollen Aussagen im mathematischen Sinne ergeben.
+  Sie müssen in logischem Zusammenhang zu den vorstehenden Aussagen $A_1$, $A_2$ 
+  und $A_3$ betrachtet werden, um zur Lösung der Fragestellung zu verhelfen.\\ 
+  Wie man logische Zusammenhänge formalisieren und auswerten kann, werden wir nachfolgend
+  weiter untersuchen.
+  }
+  \lang{en}{
+  Each of the roommates' claims, 'Julia says that Marie is lying', 'Marie says that Lara is lying' and 'Lara says 
+  that both Julia and Marie are lying', need to logically connected to the propositions $A_1$, $A_2$ and 
+  $A_3$ before they are useable mathematical propositions. We now look at how logical relationships can be formalised 
+  and evaluated.
+  }
+  
+ \end{incremental}
+\end{block}
+
+\lang{de}{
+Neben den Aussagen und ihren Wahrheitswerten spielen auch Verknüpfungen eine wichtige Rolle in der \emph{Aussagenlogik}.
+% Man betrachtet dabei Aussagen, die sich aus einzelnen Teilaussagen zusammensetzen, wobei jede Teilaussage selbst eine Aussage 
+% im Sinne der Definition \ref{def:aussagen} ist. 
+\\
+Beispiele:
+}
+\lang{en}{
+Logical connectives play as important a role in \emph{propositional logic} as propositions and their truth-values do.
+\\
+Examples:
+}
+\begin{itemize}
+\item \lang{de}{
+Die Aussage "`Wenn die Sonne scheint, ist es hell."' setzt sich mittels einer Wenn-Dann-Verknüpfung 
+aus den (Teil-)Aussagen "`Die Sonne scheint."' und "`Es ist hell."' zusammen.
+}
+\lang{en}{
+The proposition 'If the sun is shining, it is bright.' is created using an 'implication' connective between the smaller propositions 'The sun is shining.' and 'It is bright.'.
+}
+\item \lang{de}{
+Die Aussage "`Die Sonne scheint und es ist hell."' ergibt sich aus einer Und-Verknüpfung der beiden Teil-Aussagen.
+}
+\lang{en}{
+The proposition 'The sun is shining and it is bright.' is created using an 'and' connective between the two smaller 
+propositions.
+}
+\end{itemize}
+
+\lang{de}{
+Diese Zusammenhänge wollen wir im Folgenden mathematisch formalisieren. Um hierbei die Zuordnung der Wahrheitswerte bei 
+Verknüpfungen zu abstrahieren und nicht vom konkreten Inhalt der verknüpften Aussage oder vom Kontext abzuleiten, verwendet man
+statt des Begriffs \emph{Aussage} oft auch die Bezeichnung \emph{Aussagenvariable} (als Platzhalter für eine konkrete 
+Aussage).
+}
+\lang{en}{
+We will now express these relationships more formally. In order to abstract away from the need to assign a truth-value 
+to a proposition depending on the specific statement it is making, we often use 'propositional variables' in place of 
+propositions.
+}
+
+\begin{definition}[\lang{de}{Objekte der Aussagenlogik}\lang{en}{Objects in propositional logic}]\label{def:objekte_aussagenlogik}
+
+\lang{de}{
+Die zentralen Objekte der Aussagenlogik sind
+}
+\lang{en}{
+The main objects in propositional logic are
+}
+  \begin{itemize}
+    \item \lang{de}{
+    \notion{Aussagen} oder \notion{Variablen} (kurz für \emph{Aussagenvariablen}), welche meist mit 
+    $A, B, C,\ldots$ bezeichnet werden,
+    }
+    \lang{en}{
+    \notion{Propositions} or \notion{variables} (short for \emph{propositional variables}), often denoted by 
+    $A, B, C,\ldots$.
+    }
+    \item \lang{de}{
+    \notion{Wahrheitswerte} (auch \emph{Konstanten} genannt) "`wahr"' und "`falsch"',
+        bezeichnet mit $W$ und $F$.
+    }
+    \lang{en}{
+    \notion{Truth-values} (also called \emph{constants}) 'true' and 'false', denoted by $T$ and $F$, and
+    }
+    \item \lang{de}{
+    \emph{Logische Verknüpfungen} zwischen Aussagen, auch \notion{Junktoren} genannt. Diese sind 
+    \begin{enumerate} 
+      \item[$\mathbf{\neg}$] \notion{Negation}, gelesen \emph{"`nicht"'},
+      \item[$\mathbf{\wedge}$] \notion{Konjunktion}, gelesen \emph{"`und"'},
+      \item[$\mathbf{\vee}$] \notion{Disjunktion}, gelesen \emph{"`oder"'},
+      \item[$\mathbf{\Rightarrow}$] \notion{Implikation}, gelesen \emph{"`wenn ..., dann ..."'},
+      \item[$\mathbf{\Leftrightarrow}$] \notion{Äquivalenz}, gelesen \emph{"`genau dann ..., wenn ..."'}.
+    \end{enumerate}
+    }
+    \lang{en}{
+    \emph{Logical connectives} between propositions, also called \notion{logical operators} and \notion{sentential connectives}. These are the following:
+    \begin{enumerate} 
+      \item[$\mathbf{\neg}$] \notion{Negation}, said \emph{'not'},
+      \item[$\mathbf{\wedge}$] \notion{Conjunction}, said \emph{'and'},
+      \item[$\mathbf{\vee}$] \notion{Disjunction}, said \emph{'or'},
+      \item[$\mathbf{\Rightarrow}$] \notion{Implication}, said \emph{'if ..., then ...'},
+      \item[$\mathbf{\Leftrightarrow}$] \notion{Equivalence}, said \emph{'... if and only if ...''}.
+    \end{enumerate}
+    }
+\end{itemize}
+\lang{de}{
+    Eine Formel aus \emph{Aussagen/Variablen}, \emph{Wahrheitswerten} und \emph{Junktoren} wird auch \notion{Aussageform} 
+    oder einfach \notion{Formel} genannt und im Folgenden % als Abgrenzung zu \emph{(Aussage-)Variablen} 
+    mit $\mathbf{\mathcal{A}, \mathcal{B}, \mathcal{C},\ldots}$ bezeichnet.
+}
+\lang{en}{
+A formula constructed from \emph{propositions/variables}, \emph{truth-values} and \emph{connectives} is also called a 
+\notion{propositional formula}, but we often just use \notion{formula} to mean the same. In the following we use $\mathbf{\mathcal{A}, \mathcal{B}, \mathcal{C},\ldots}$ for formulas.
+}
+
+\end{definition}
+
+\begin{remark}\label{rem:formeln}
+    
+  \begin{itemize}
+  
+    \item \lang{de}{
+        Eine Variable $A$ selbst ist bereits eine \emph{Formel}, die einfach nur aus der 
+        Variablen $A$ besteht. Eine solche Formel bezeichnet man als \notion{einfache} oder 
+        auch als \notion{atomare Formel.}
+        }
+        \lang{en}{
+        A variable $A$ is a \emph{formula} on its own, called an \notion{atomic formula} because it contains no 
+        logical connectives.
+        }
+      
+    \item \lang{de}{
+        Für alle \emph{Variablen} $A$ und $B\,$ lassen sich weitere \emph{Formeln} durch einen
+        schrittweisen Prozess von logischen Verknüpfungen definieren, zum Beispiel im 
+        ersten Schritt
+       \begin{enumerate}
+        \item[$\; \neg A$]  die Negation einer Variablen $A$, gelesen 'nicht $A$',
+        \item[$A\wedge B$]  die Konjunktion von $A$ und $B$, gelesen '$A$ und $B$', 
+        \item[$A\vee B$]    die Disjunktion von $A$ und $B$, gelesen '$A$ oder $B$',
+       \end{enumerate}
+       und durch weitere Verknüfungen
+       \begin{enumerate}
+        \item[$ \neg (A \wedge (\neg B) )\;$] die Negation von '$A$ und nicht $B$',
+        \item[$(\neg B)\Rightarrow A \;$] 'wenn nicht $B$, dann $A$',
+        \item[$A \Leftrightarrow (\neg B)\,$] '$A$ genau dann, wenn nicht $B$'.
+       \end{enumerate}
+       }
+       \lang{en}{
+        With any \emph{variables} $A$ and $B\,$ we can construct more \emph{formulas} using logical connectives:
+       \begin{enumerate}
+        \item[$\; \neg A$]  the negation of a variable $A$, said 'not $A$',
+        \item[$A\wedge B$]  the conjunction of $A$ and $B$, said '$A$ and $B$', 
+        \item[$A\vee B$]    the disjunction of $A$ and $B$, said '$A$ or $B$',
+       \end{enumerate}
+       and by further combining these,
+       \begin{enumerate}
+        \item[$ \neg (A \wedge (\neg B) )\;$] the negation of '$A$ and not $B$',
+        \item[$(\neg B)\Rightarrow A \;$] 'if not $B$, then $A$',
+        \item[$A \Leftrightarrow (\neg B)\,$] '$A$ if and only if not $B$'.
+       \end{enumerate}
+       }
+      
+  \end{itemize}
+\end{remark}
+
+%
+\begin{example}
+ \lang{de}{
+    Wir stehen am Fenster, blicken in den Garten und beschreiben die aktuelle Wettersituation. 
+    Dabei steht die Variable $A\;$ konkret für die Aussage "`Die Sonne scheint."' und $B\;$ für "`Es regnet."'.
+    Dann liefern die Formeln die folgenden neuen Aussagen:
+    }
+\lang{en}{
+We stand at a window, look into the garden and describe the current weather. Let the variable $A\;$ represent the 
+proposition 'The sun is shining.' and $B\;$ represent 'It is raining'. Then the above formulas represent the following 
+propositions:
+}
+    
+ \begin{enumerate}
+      \item[$\neg A$] 
+        \lang{de}{"`Die Sonne scheint nicht."'}
+        \lang{en}{'The sun is not shining'}
+      \item[$A\wedge B$] 
+        \lang{de}{"`Die Sonne scheint und es regnet."'}
+        \lang{en}{'The sun is shining and it is raining.'}
+      \item[$A\vee B$]   
+        \lang{de}{"`Die Sonne scheint oder es regnet."'}
+        \lang{en}{'The sun is shining or it is raining.'} 
+      \item[$\neg (A\wedge \neg B)$] 
+        \lang{de}{"`Es ist nicht wahr, dass die Sonne scheint und es nicht regnet."'}
+        \lang{en}{'It is not true that the sun is shining and it is not raining.'}
+      \item[$(\neg B)\Rightarrow A$] 
+        \lang{de}{"`Wenn es nicht regnet, dann scheint die Sonne."'}
+        \lang{en}{'If it is not raining, then the sun is shining.'}
+      \item[$A \Leftrightarrow (\neg B)\,$]  
+        \lang{de}{"`Die Sonne scheint genau dann, wenn es nicht regnet."'}
+        \lang{en}{'The sun is shining if and only if it is not raining.'}            
+    \end{enumerate} 
+\end{example}
+%
+%%% Video K.M.
+%
+\lang{de}{
+Bevor Sie anhand des folgenden Kurztests überprüfen können, ob Sie die Bedeutung
+mathematischer Aussagen, deren logische Verknüpfung und Bewertung bereits beherrschen, 
+bietet Ihnen das folgende Video nocheinmal eine Zusammenfassung des bisher Erlernten: 
+\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10743&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+}
+\lang{en}{
+Keep in mind the above example when doing the question below.
+}
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%   Quickcheck mit randomquestionpool und mc !?!?!?!??!?
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{quickcheckcontainer}
+ 
+\randomquickcheckpool{1}{6}
+
+%1a
+\begin{quickcheck}
+        \text{\lang{de}{
+              Welche der folgenden \emph{"`wenn..., dann..."'}-Formen entspricht dem
+              umgangssprachlichen Satz \notion{"`Ich gehe jeden Samstag ins Kino"'}?
+              } 
+              \lang{en}{
+              Which of the following implications corresponds to the colloquial sentence 
+              \notion{'I go to the cinema every Saturday'}?
+              } \\
+             }
+   \begin{choices}{multiple}
+
+    \begin{choice}
+      \text{\lang{de}{Wenn Samstag ist, dann gehe ich ins Kino.}
+            \lang{en}{If it is Saturday, then I go to the cinema.}}
+      \solution{true}
+    \end{choice}
+    
+    \begin{choice}
+      \text{\lang{de}{Wenn ich ins Kino gehe, ist Samstag.}
+            \lang{en}{If I go to the cinema, then it is Saturday.}}
+      \solution{false}
+    \end{choice}    
+
+    \begin{choice}
+      \text{\lang{de}{Wenn nicht Samstag ist, dann gehe ich nicht ins Kino.}
+            \lang{en}{If it is not Saturday, then I do not go to the cinema.}}
+      \solution{false}
+    \end{choice}
+
+    \begin{choice}
+      \text{\lang{de}{Wenn Samstag ist, dann gehe ich nicht ins Kino.}
+            \lang{en}{If it is Saturday, then I do not go to the cinema.}}
+      \solution{false}
+    \end{choice}
+
+  \end{choices}         
+            
+\end{quickcheck}
+
+%1b
+\begin{quickcheck}
+        \text{\lang{de}{Wir formalisieren den umgangssprachlichen Satz \notion{"`Ich gehe jeden Samstag ins Kino"'.}\\
+              Wie lautet die zugehörige logische Formel unter Verwendung der Aussagen 
+              $A$: "`Es ist Samstag"' und $B$: "`Ich gehe ins Kino"'.
+              }
+              \lang{en}{
+              We formalise the colloquial sentence \notion{'I go to the cinema every Saturday'}. 
+              What is the corresponding propositional formula if we take $A$ to mean the proposition 
+              'It is Saturday', and $B$ to mean 'I go to the cinema'.
+              }\\
+            }
+   \begin{choices}{unique}
+
+    \begin{choice}
+      \text{$A \Rightarrow \neg B$}
+      \solution{false}
+    \end{choice}
+
+    \begin{choice}
+      \text{$A \Rightarrow B$}
+      \solution{true}
+    \end{choice}
+
+    \begin{choice}
+      \text{$\neg A \Rightarrow \neg B$}
+      \solution{false}
+    \end{choice}
+
+    \begin{choice}
+      \text{$B \Rightarrow A$}
+      \solution{false}
+    \end{choice}
+
+  \end{choices}         
+            
+\end{quickcheck}
+ 
+%2a
+\begin{quickcheck}
+        \text{\lang{de}{
+              Welche der folgenden \emph{"`wenn..., dann..."'}-Formen entspricht dem
+              umgangssprachlichen Satz \notion{"`Ich gehe nur samstags ins Kino"'}?
+              }
+              \lang{en}{
+              Which of the following implications corresponds to the colloquial sentence 
+              \notion{'I go to the cinema only on Saturdays'}?
+              } \\
+            }
+   \begin{choices}{multiple}
+
+    \begin{choice}
+      \text{\lang{de}{Wenn Samstag ist, dann gehe ich ins Kino.}
+            \lang{en}{If it is Saturday, then I go to the cinema.}}
+      \solution{false}
+    \end{choice}
+    
+    \begin{choice}
+      \text{\lang{de}{Wenn ich ins Kino gehe, ist Samstag.}
+            \lang{en}{If I go to the cinema, then it is Saturday.}}
+      \solution{true}
+    \end{choice}    
+
+    \begin{choice}
+      \text{\lang{de}{Wenn nicht Samstag ist, dann gehe ich nicht ins Kino.}
+            \lang{en}{If it is not Saturday, then I do not go to the cinema.}}
+      \solution{true}
+    \end{choice}
+
+    \begin{choice}
+      \text{\lang{de}{Wenn Samstag ist, dann gehe ich nicht ins Kino.}
+            \lang{en}{If it is Saturday, then I do not go to the cinema.}}
+      \solution{false}
+    \end{choice}
+
+  \end{choices}         
+            
+\end{quickcheck}
+ 
+%2b
+\begin{quickcheck}
+        \text{\lang{de}{
+              Wir formalisieren den umgangssprachlichen Satz \notion{"`Ich gehe nur samstags ins Kino"'.}\\
+              Wie lautet die zugehörige logische Formel unter Verwendung der Aussagen 
+              $A=$"`Es ist Samstag"' und $B=$"`Ich gehe ins Kino"'.
+              }
+              \lang{en}{
+              We formalise the colloquial sentence \notion{'I go to the cinema only on Saturdays'}. 
+              What is the corresponding propositional formula if we take $A$ to mean the proposition 
+              'It is Saturday', and $B$ to mean 'I go to the cinema'.
+              }\\
+            }
+   \begin{choices}{multiple}
+
+    \begin{choice}
+      \text{$A \Rightarrow \neg B$}
+      \solution{false}
+    \end{choice}
+    
+    \begin{choice}
+      \text{$B \Rightarrow A$}
+      \solution{true}
+    \end{choice}    
+
+    \begin{choice}
+      \text{$A \Rightarrow B$}
+      \solution{false}
+    \end{choice}
+
+    \begin{choice}
+      \text{$\neg A \Rightarrow \neg B$}
+      \solution{true}
+    \end{choice}
+
+  \end{choices}         
+            
+\end{quickcheck}
+ 
+%3a
+\begin{quickcheck}
+        \text{\lang{de}{
+              Welche der folgenden \emph{"`wenn..., dann..."'}-Formen entspricht dem
+              umgangssprachlichen Satz \notion{"`Samstags gehe ich nie ins Kino"'}?}
+              \lang{en}{
+              Which of the following implications corresponds to the colloquial sentence 
+              \notion{'I never go to the cinema on a Saturday'}?
+              }\\
+            }
+   \begin{choices}{multiple}
+
+    \begin{choice}
+      \text{\lang{de}{Wenn Samstag ist, dann gehe ich ins Kino.}
+            \lang{en}{If it is Saturday, then I go to the cinema.}}
+      \solution{false}
+    \end{choice}
+
+    \begin{choice}
+      \text{\lang{de}{Wenn nicht Samstag ist, dann gehe ich nicht ins Kino.}
+            \lang{en}{If it is not Saturday, then I do not go to the cinema.}}
+      \solution{false}
+    \end{choice}
+
+    \begin{choice}
+      \text{\lang{de}{Wenn Samstag ist, dann gehe ich nicht ins Kino.}
+            \lang{en}{If it is Saturday, then I do not go to the cinema.}}
+      \solution{true}
+    \end{choice}
+
+  \end{choices} 
+  
+\end{quickcheck}
+ 
+%3b
+\begin{quickcheck}
+        \text{\lang{de}{Wir formalisieren den umgangssprachlichen Satz \notion{"`Samstags gehe ich nie ins Kino"'.}\\
+              Wie lautet die zugehörige logische Formel unter Verwendung der Aussagen 
+              $A=$"`Es ist Samstag"' und $B=$"`Ich gehe ins Kino"'.
+              }
+              \lang{en}{
+              We formalise the colloquial sentence \notion{'I never go to the cinema on a Saturday'}. 
+              What is the corresponding propositional formula if we take $A$ to mean the proposition 
+              'It is Saturday', and $B$ to mean 'I go to the cinema'.
+              }\\
+            }
+   \begin{choices}{unique}
+
+    \begin{choice}
+      \text{$A \Rightarrow \neg B$}
+      \solution{true}
+    \end{choice}
+
+    \begin{choice}
+      \text{$\neg A \Rightarrow \neg B$}
+      \solution{false}
+    \end{choice}
+
+    \begin{choice}
+      \text{$A \Rightarrow B$}
+      \solution{false}
+    \end{choice}
+
+  \end{choices} 
+  
+\end{quickcheck}
+
+\end{quickcheckcontainer}
+
+%
+%%%%%%
+% NEU
+%%%%%%
+
+%
+% Motivationsbeispiel
+%
+%
+
+\begin{block} 
+  \notion{\lang{de}{2. Schritt zur Lösung von \ref{ex:motivation}{$\,$} \textit{Wer sagt die Wahrheit?}}
+          \lang{en}{Second step to solve \ref{ex:motivation}{$\,$} \textit{Who is telling the truth?}}}\\
+  
+\lang{de}{
+    Wir werden nun die noch nicht formalisierten Behauptungen der WG-Bewohnerinnen mit den in Schritt 1
+    spezifizierten Aussagen $A_1, A_2$ und $A_3$ in Zusammenhang bringen und hieraus logische  
+    Aussageformen gemäß Definition {$\,$}\ref{def:objekte_aussagenlogik}{$\,$} ableiten. 
+    }
+\lang{en}{
+    We will now formally express the claims by Lukas' roommates using the propositions $A_1, A_2$ 
+    and $A_3$ defined in the first step, using the connectives from definition {$\,$}\ref{def:objekte_aussagenlogik}{$\,$}.
+}
+
+ \begin{incremental}
+
+  \step %1 
+   \lang{de}{
+   Betrachten wir zunächst die Behauptung "`Julia sagt, dass Marie lügt"' in logischem Zusammenhang mit der Aussage 
+   "`Julia sagt die Wahrheit"', dann erhalten wir eine logische \emph{"`genau dann, wenn"'}$-$Verknüpfung der 
+   Aussagen $A_1$ (Julia sagt die Wahrheit) und $\neg A_2$ (Marie sagt nicht die Wahrheit), denn genau dann, wenn
+   Julia die Wahrheit sagt, lügt Marie und wenn Marie lügt, sagt Julia die Wahrheit. Es gilt also die Formel
+   }
+   \lang{en}{
+   Let us express the statement 'Julia says that Marie is lying' using the propositions $A_1$ ('Julia tells 
+   the truth'), $\neg A_2$ ('Marie does not tell the truth') and the logical connective 'if and only 
+   if'. According to the claim, if Julia tells the truth, then Marie must really be lying; if Marie is 
+   lying, then Julia was truthful in her claim, i.e. Julia tells the truth. That is to say, 
+   \emph{'Julia tells the truth if and only if Marie does not tell the truth'}:
+   }
+      \[\mathcal{B}_1: \qquad A_1 \Leftrightarrow (\neg A_2).\] 
+   
+   \lang{de}{
+   Ebenso liefert die Behauptung "`Marie sagt, dass Lara lügt"' in logischem Zusammenhang mit der Aussage 
+   "`Marie sagt die Wahrheit"' die Formel
+   }
+   \lang{en}{
+   Similarly, the statement 'Marie says that Lara is lying' can be expressed using the propositions $A_2$ 
+   ('Marie tells the truth') and $\neg A_3$ ('Lara does not tell the truth') as
+   }
+   \[\mathcal{B}_2: \qquad A_2 \Leftrightarrow (\neg A_3).\] 
+   
+   \lang{de}{
+   Bringen wir schließlich noch die Behauptung "`Lara sagt, dass Julia und Marie lügen"' in logischen Zusammenhang mit der 
+   Aussage "`Lara sagt die Wahrheit"', bedeutet dies, wenn Lara die Wahrheit sagt, lügt sowohl Julia als auch 
+   Marie (und umgekehrt). Es gilt also die \emph{"`genau dann, wenn"'}$-$Formel
+   }
+   \lang{en}{
+   Finally, the statement 'Lara says that Julia and Marie are lying' needs $A_1$, $A_2$ and $A_3$ to 
+   be expressed. If Lara is telling the truth, both Julia \emph{and} Marie are lying, and if both 
+   Julia and Marie are lying, then Lara is telling the truth, i.e.
+   }
+    \[\mathcal{B}_3: \qquad A_3 \Leftrightarrow (\neg A_1 \wedge \neg A_2)\]
+ 
+  \step %2
+  \lang{de}{
+   Um nun zu einem abschließenden Ergebnis zu kommen, müssen wir diese drei Aussageformen $\mathcal{B}_1,
+   \mathcal{B}_2\,$ und $\, \mathcal{B}_3$ auf ihre Wahrheitswerte prüfen und herausfinden, unter
+   welchen Bedingungen alle drei Aussageformen \emph{wahr} sind. 
+   Schauen wir uns nun zunächst an, wie wir hierzu weiter vorgehen können.
+  }
+  \lang{en}{
+  To finally reach a result and determine which roommates tell the truth, we have to find under which 
+  conditions all three propositional formulas $\mathcal{B}_1, \mathcal{B}_2\,$ and $\, \mathcal{B}_3$ 
+  are true. Next we examine how to proceed with this.
+  }
+
+ \end{incremental}
+\end{block}
+
+\lang{de}{
+    Ordnet man einer Variablen $A$ einen Wahrheitswert \notion{W} $\,(=\,$ wahr$)$ oder 
+    \notion{F} $\,(=\,$ falsch$)$ zu, so spricht man von einer \emph{Bewertung der Variablen}. 
+    Ordnet man allen Variablen einer Formel Wahrheitswerte
+    zu, dann spricht man von einer \emph{Bewertung der Formel} oder \emph{Bewertung der Aussageform.}
+    Da man eine Variable auch als \emph{einfache (atomare) Formel} betrachten kann,
+    lässt sich die Definiton \ref{def:aussagen} der \emph{Aussage} wie folgt mathematisch formal 
+    vereinfachen:
+}
+\lang{en}{
+Assigning a variable a truth-value \notion{T} $\,(=\,$ true$)$ or \notion{F} $\,(=\,$ false$)$ is 
+called \emph{evaluating} the variable. Doing this to every variable in a formula is hence called 
+\emph{evaluating} the propositional formula, in the same way that expressions can be evaluated. As a 
+variable can be considered an \emph{atomic formula}, we can formally simplify the definition 
+\ref{def:aussagen} of a \emph{proposition}.
+}
+ 
+\begin{definition}[\lang{de}{Aussage als bewertete Aussageform}
+                   \lang{en}{Propositions as evaluated propositional formulas}] \label{def:aussagen_af}
+        \lang{de}{
+        Eine \notion{Aussage} ist eine \notion{bewertete Aussageform/Formel}, 
+        also eine \emph{Aussageform / Formel} mit einem fest zugeordneten Wahrheitswert 
+        \textbf{wahr (W)} oder \textbf{falsch (F)}.
+        }
+        \lang{en}{
+        A \notion{proposition} is an \notion{evaluated propositional formula}, that is, a 
+        \emph{propositional formula} with a fixed truth-value (\textbf{true} or \textbf{false}).
+        }
+
+\end{definition}
+    
+
+\begin{remark}\label{rem:wahrheitstafeln}
+\lang{de}{
+Die aus einen einzelnen \emph{Variablen} bzw. \emph{atomaren Formeln} zusammengesetzen \emph{Aussageformen} 
+werden somit erst dann zu \emph{Aussagen}, wenn wir ihnen einen Wahrheitswert fest zuordnen können.
+Dieser wird je nach Bewertung der auftretenden Variablen unterschiedlich ausfallen. Man spricht in diesem Zusammenhang 
+        auch von den \notion{verschiedenen Belegungen der Aussageform}.
+\\
+        Um Wahrheitswerte einer Aussageformen für verschiedene Belegungen systematisch zu belegen, 
+        verwendet man sogenannte \notion{Wahrheitstafeln}, die in den linken Spalten alle 
+        möglichen Bewertungskombinationen der einzelnen \emph{Variablen} (Teilaussagen) enthalten, und in weiteren Spalten 
+        rechts daneben die hieraus abzuleitenden Bewertungen der \emph{Formeln}, die diese 
+        Variablen enthalten.
+}
+\lang{en}{
+A \emph{propositional formula} containing \emph{variables} or smaller \emph{atomic formulas} only 
+becomes a proposition when its truth-value is fixed to be either true or false. This value is 
+dependent on the values of the variables in the formula.
+\\
+To systematically find the different values that a propositional formula can take, so-called 
+\notion{truth tables} are employed. The left columns of a truth table contain all possible values 
+of the individual variables, and to their right are columns containing values of formulas containing 
+these variables.
+}
+\end{remark}  
+
+
+%
+%%% Video K.M. *** NEU: Video 10744 ersetzen durch 11279 (Aussagenlogik_2_a) ***
+%
+\lang{de}{
+Wir betrachten nachfolgend die möglichen Bewertungen der elementaren \emph{Formeln} aus 
+Definition \ref{def:objekte_aussagenlogik} und ihre systematische Darstellung mit Hilfe 
+von Wahrheitstafeln.
+\\\\
+Eine anschauliche Erläuterung hierzu finden Sie zum Teil auch in 
+folgendem Video, ebenso wie einige Anwendungsbeispiele:
+\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11279&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}\\
+}
+%
+\lang{en}{
+Next we consider the connectives from definition \ref{def:objekte_aussagenlogik}, and how the values 
+of the most elementary formulas containing each one can be systematically represented using truth 
+tables.
+}
+\\         
+
+        
+         
+ \begin{enumerate}
+    \item[\notion{Negation}]\label{ex:negation}
+      \lang{de}{
+      Die Wahrheitstafel verdeutlicht, dass durch die \emph{Negation} einer Aussage
+      $A$ ihr Wahrheitswert genau umgekehrt wird.
+      }
+      \lang{en}{
+      The truth table means that \emph{negation} of a proposition $A$ switches its value.
+      }
+
+      \begin{table}[\cellaligns{ccc}] % {c||c}
+        \head 
+        $A$ && $\neg A$ 
+        \body 
+        \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} && \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} \\
+        \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} && \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$}
+      \end{table}
+          
+    \item[\notion{\lang{de}{Konjunktion}\lang{en}{Conjugation}}]\label{ex:konjunktion}
+      \lang{de}{
+      Die durch die \emph{Konjunktion} oder auch \emph{"`UND"'}$-$Verknüpfung zweier (Teil-)Aussagen gebildete Aussageform wird nur dann zu
+      einer wahren Aussage, wenn beide Teilaussagen wahr sind.
+      }
+      \lang{en}{
+      A propositional formula made of two propositions connected by a \emph{conjunction} or 
+      \emph{'AND'} connective is true precisely if both propositions are true, and false otherwise.
+      }
+
+      \begin{table}[\cellaligns{cccc}] % {c|c||c}
+        \head
+        $A$ & $B$ && $A\wedge B$ 
+        \body
+        \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} && \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} \\
+        \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} && \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} \\
+        \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} && \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} \\
+        \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} && \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$}
+      \end{table}
+      
+    \item[\notion{\lang{de}{Disjunktion}\lang{en}{Disjunction}}]\label{ex:disjunktion}
+      \lang{de}{
+      Die durch die \emph{Disjunktion}  oder auch \emph{"`ODER"'}$-$Verknüpfung zweier (Teil-)Aussagen gebildete Aussageform ist genau dann 
+      eine wahre Aussage, wenn mindestens eine der beiden Teilaussagen wahr ist.
+      }
+      \lang{en}{
+      A propositional formula made of two propositions connected by a \emph{disjunction} or 
+      \emph{'OR'} connective is true if at least one of the propositions is true, and false otherwise.
+      }
+
+      \begin{table}[\cellaligns{cccc}] % {c|c||c}
+        \head
+        $A$ & $B$ && $A\vee B$ 
+        \body
+        \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} && \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} \\
+        \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} && \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} \\
+        \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} && \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} \\
+        \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} && \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$}
+      \end{table}
+
+    \item[\notion{\lang{de}{Äquivalenz}\lang{en}{Equivalence}}]\label{ex:equivalence}
+       \lang{de}{
+       Die \emph{Äquivalenz} $A \Leftrightarrow B$ zweier (Teil-)Aussagen $A$ und $B$ ist genau dann 
+       wahr, wenn $A$ und $B$ den gleichen Wahrheitsgehalt haben, also beide falsch oder 
+       beide wahr sind.
+       }
+       \lang{en}{
+       A propositional formula made of two propositions connected by an \emph{equivalence} or 
+       \emph{'IF AND ONLY IF'} or \emph{biconditional} connective is true precisely if both propositions 
+       have the same value (both are true or both are false), and false otherwise.
+       }
+
+      \lang{de}{
+      \begin{table}[\cellaligns{cccc}] 
+        \head
+        $A$ & $B$ && $A \Leftrightarrow B$ 
+        \body
+        W & W && W \\
+        W & F && F \\
+        F & W && F \\
+        F & F && W
+      \end{table}}
+      \lang{en}{
+      \begin{table}[\cellaligns{cccc}] 
+        \head
+        $A$ & $B$ && $A \Leftrightarrow B$ 
+        \body
+        T & T && T \\
+        T & F && F \\
+        F & T && F \\
+        F & F && T
+      \end{table}} 
+
+    \item[\notion{\lang{de}{Implikation}\lang{en}{Implication}}]\label{ex:implication}
+       \lang{de}{
+       Eine sehr wichtige Verknüpfung ist die Implikation $A \Rightarrow B$ zweier (Teil-)Aussagen 
+       $A$ und $B$. Sie ist genau dann falsch ist, wenn $A$ zwar wahr, aber $B$ falsch ist. 
+       }   %Sie ist genau dann falsch ist - typo? - Niccolo
+       \lang{en}{
+       An implication $A \Rightarrow B$ between two propositions $A$ and $B$ is false precisely if 
+       $A$ is true, but $B$ is false. Otherwise $A \Rightarrow B$ is true.
+       }
+
+      \lang{de}{
+      \begin{table}[\cellaligns{cccc}] 
+        \head
+        $A$ & $B$ && $A \Rightarrow B$ 
+        \body
+        W & W && W \\
+        W & F && F \\
+        F & W && W \\
+        F & F && W
+      \end{table}}
+      \lang{en}{
+      \begin{table}[\cellaligns{cccc}] 
+        \head
+        $A$ & $B$ && $A \Rightarrow B$ 
+        \body
+        T & T && T \\
+        T & F && F \\
+        F & T && T \\
+        F & F && T
+      \end{table}}
+
+       \lang{de}{
+       Die \emph{Implikation}, aber auch die \emph{Äquivalenz} schauen wir uns im folgenden 
+       Abschnitt \ref{sec:folgerung} noch genauer an.
+       }
+       \lang{en}{
+       We further examine \emph{implication} and \emph{equivalence} in section \ref{sec:folgerung}.
+       }
+
+ \end{enumerate}
+
+ \lang{de}{
+ Besonders hilfreich sind die Wahrheitstafeln zur Bestimmung der Wahrheitswerte für komplexere
+ Formeln. Man zerlegt hierzu die komplexe Formel dann in Teil-Formeln mit möglichst elementaren 
+ Verknüpfungen und fügt in der Wahrheitstafel für jede Teil-Formel eine neue Spalte ein.
+ }
+ \lang{en}{
+ Truth tables are especially helpful for evaluating the truth-values of more complex formulas. This 
+ is because long formulas can be decomposed into smaller ones so that each sub-formula can be 
+ evaluated step by step, column by column.
+ }
+ 
+ \begin{example}
+  \begin{enumerate}[alph]
+   \item \lang{de}{
+         Wir betrachten die Formel $\neg (A\wedge \neg B)$ und deren Wahrheitswerte mit Hilfe einer 
+         Wahrheitstafel:
+         \begin{table}[\cellaligns{cccccc}] 
+          \head
+          $A$ & $B$ && $\neg B$ & $A\wedge (\neg B)$ & $\neg (A\wedge \neg B)$
+          \body
+          W & W && F &  F & W \\
+          W & F && W &  W & F \\
+          F & W && F &  F & W \\
+          F & F && W &  F & W
+        \end{table} 
+        Die Formel $\neg (A\wedge \neg B)$ ist also nur dann falsch, wenn $A$ wahr und $B$ falsch ist.
+        }
+        \lang{en}{
+        We evaluate the formula $\neg (A\wedge \neg B)$ using a truth table:
+        \begin{table}[\cellaligns{cccccc}] 
+          \head
+          $A$ & $B$ && $\neg B$ & $A\wedge (\neg B)$ & $\neg (A\wedge \neg B)$
+          \body
+          T & T && F &  F & T \\
+          T & F && T &  T & F \\
+          F & T && F &  F & T \\
+          F & F && T &  F & T
+        \end{table}
+        The formula $\neg (A\wedge \neg B)$ is therefore only false if $A$ is true and $B$ is false.
+        }
+     
+%
+%%% Video K.M.
+%
+    \item \lang{de}{
+          In dem folgenden Video untersuchen wir die Formeln \[(A \vee B)\wedge C \; \text{und}  
+          \; A \vee (B \wedge C ),\] die sich nur durch die Klammersetzung unterscheiden.  
+          Die Verknüpfung der Variablen erfolgt also in unterschiedlicher Reihenfolge. Hat dies
+          Einfluss auf den jeweiligen Wahrheitswert der Formel?
+          
+%QS        \floatright
+           \center{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10960&mode=iframe&speed=true}
+          {\image[75]{00_video_button_schwarz-blau}}}\\
+          }
+          \lang{en}{
+          Completing a truth table for the formula $\; (A \vee B)\wedge C \;$ and 
+          another for the formula $\; A \vee (B \wedge C )$ reveals that the placement of 
+          the parentheses here is important, i.e. these two formulas are not the same.
+          }
+          \\ 
+      
+% 
+
+  \end{enumerate}
+ \end{example}
+
+%
+%%%%%%
+% NEU
+%%%%%%
+
+%
+% Motivationsbeispiel
+%
+%
+
+\begin{block} 
+  \notion{\lang{de}{3. Schritt zur Lösung von \ref{ex:motivation}{$\,$} \textit{Wer sagt die Wahrheit?}}
+          \lang{en}{Third step to solve \ref{ex:motivation}{$\,$} \textit{Who is telling the truth?}}}\\
+  
+\lang{de}{
+          Mithilfe einer Wahrheitstafel können wir nun die im 2. Schritt gefundenen Aussageformen 
+          $\mathcal{B}_1, \mathcal{B}_2 \,$ und $\, \mathcal{B}_3$ auf ihre Wahrheitswerte prüfen, 
+          indem wir zunächst die enthaltenen Aussagen-Variablen $A_1, A_2 \,$ und $\, A_3$ mit allen 
+          möglichen Wahrheitswert-Belegungskombinationen bewerten. \\
+          Die Lösung unseres Problems können wir dann aus der Zeile ablesen, in der alle drei
+          Aussageformen  $\mathcal{B}_1, \mathcal{B}_2 \,$ und $\, \mathcal{B}_3$ den Wahrheitswert 
+          \notion{W} $\,(=\,$ wahr$)$ haben.
+}
+\lang{en}{
+Using a truth table we can now evaluate the propositional formulas $\mathcal{B}_1, \mathcal{B}_2 \,$ and $\, \mathcal{B}_3$ that we found in the second step. We evaluate the formulas using all possible 
+values of the variables $A_1, A_2 \,$ and $\, A_3$. The solution to our problem is then the row 
+in which all three formulas $\mathcal{B}_1, \mathcal{B}_2 \,$ and $\, \mathcal{B}_3$ have the value 
+\notion{T} $\,(=\,$ true$)$.
+}
+ \begin{incremental}
+
+  \step %1 
+     \lang{de}{
+     \begin{table}[\cellaligns{ccccccccccc}] 
+      \head
+      $A_1$ & $A_2$ & $A_3$ &&  $\neg A_1$ & $\neg A_2$ & $\neg A_1 \wedge \neg A_2$ & $\neg A_3$ 
+                             & $A_1 \Leftrightarrow (\neg A_2)$ 
+                             & $A_2 \Leftrightarrow (\neg A_3)$                             
+                             & $A_3 \Leftrightarrow (\neg A_1 \wedge \neg A_2)$
+      \body
+      W & W & W && F & F & F & F & F & F & F  \\
+      W & W & F && F & F & F & W & F & W & W \\
+      W & F & W && F & W & F & F & W & W & F \\
+      W & F & F && F & W & F & W & W & F & W \\      
+      F & W & W && W & F & F & F & W & F & F \\
+      \notion{F} & \notion{W} & \notion{F} && W & F & F & W & \notion{W} & \notion{W} & \notion{W} \\
+      F & F & W && W & W & W & F & F & W & W \\
+      F & F & F && W & W & W & W & F & F & F        
+    \end{table}}
+    \lang{en}{
+    \begin{table}[\cellaligns{ccccccccccc}] 
+      \head
+      $A_1$ & $A_2$ & $A_3$ &&  $\neg A_1$ & $\neg A_2$ & $\neg A_1 \wedge \neg A_2$ & $\neg A_3$ 
+                             & $A_1 \Leftrightarrow (\neg A_2)$ 
+                             & $A_2 \Leftrightarrow (\neg A_3)$                             
+                             & $A_3 \Leftrightarrow (\neg A_1 \wedge \neg A_2)$
+      \body
+      T & T & T && F & F & F & F & F & F & F  \\
+      T & T & F && F & F & F & T & F & T & T \\
+      T & F & T && F & T & F & F & T & T & F \\
+      T & F & F && F & T & F & T & T & F & T \\      
+      F & T & T && T & F & F & F & T & F & F \\
+      \notion{F} & \notion{T} & \notion{F} && T & F & F & T & \notion{T} & \notion{T} & \notion{T} \\
+      F & F & T && T & T & T & F & F & T & T \\
+      F & F & F && T & T & T & T & F & F & F        
+    \end{table}}
+ 
+  \step %2
+  \lang{de}{
+   Aus der Tabelle können wir nun ablesen, dass unsere Aussageformen $\mathcal{B}_1, \mathcal{B}_2 \,$ und $\, \mathcal{B}_3$
+   genau dann \notion{wahr} sind, wenn 
+   \begin{itemize}
+   \item die Aussage $A_1\,$ \notion{falsch} ist, wenn also Julia lügt, und
+   \item die Aussage $A_3\,$ \notion{falsch} ist, also Lara ebenfalls lügt, und
+   \item die Aussage $A_2\,$ \notion{wahr} ist, also Marie die Wahrheit sagt.
+   \end{itemize}
+   \\
+   Damit haben wir nun ermittelt, dass Julia und Lara grundsätzlich lügen und nur Marie die Wahrheit 
+   sagt. Julia und Lara haben also das Bier von Lukas genommen. 
+   }
+   \lang{en}{
+   From the truth table it is clear that the formulas $\mathcal{B}_1, \mathcal{B}_2 \,$ and 
+   $\, \mathcal{B}_3$ are all \notion{true} if and only if
+   \begin{itemize}
+   \item the proposition $A_1\,$ is \notion{false}, so Julia is lying, and
+   \item the proposition $A_3\,$ is \notion{false}, so Lara is also lying, and
+   \item the proposition $A_2\,$ is \notion{true}, so Marie is telling the truth.
+   \end{itemize}
+   }
+
+ \end{incremental}
+\end{block}
+
+%
+%%% Video K.M. *** NEU: Aussagenlogik_2_b (11280)***
+%
+\lang{de}{
+    Betrachten wir die Wahrheitswerte zu folgenden einfachen Formeln:
+\\
+      \begin{table}[\align{c}\cellaligns{ccccc}] 
+        \head
+        $A$ && $\neg A$ & $A \vee (\neg A)$ & $A \wedge (\neg A)$
+        \body
+        W && F & W & F \\
+        F && W & W & F \\
+      \end{table} 
+\\
+    Wir stellen fest, dass die Formel $A \vee (\neg A)$ immer wahr, 
+    die Formel $A \wedge (\neg A)$ hingegen immer falsch ist, 
+    egal welchen Wahrheitswert man der Variablen $A$ zuordnet.
+    \\
+    Diese Besonderheit wird in folgendem Video genauer untersucht:
+\\      
+          \floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11280&mode=iframe&speed=true}
+          {\image[75]{00_video_button_schwarz-blau}}}\\
+          \\ 
+    Zusammenfassend halten wir fest
+}
+\lang{en}{
+Consider the truth table:
+      \begin{table}[\align{c}\cellaligns{ccccc}] 
+        \head
+        $A$ && $\neg A$ & $A \vee (\neg A)$ & $A \wedge (\neg A)$
+        \body
+        T && F & T & F \\
+        F && T & T & F \\
+      \end{table}
+\\
+The formula $A \vee (\neg A)$ is always true, and the formula $A \wedge (\neg A)$ is always false. 
+This motivates the following definition.
+}
+
+    
+    \begin{definition}[\lang{de}{Tautologie und Widerspruch}\lang{en}{Tautologies and contradictions}] \label{def:tautologie_widerspruch}
+     \begin{itemize}
+        \item \lang{de}{
+              Eine Formel, die für alle Bewertungen \emph{wahr} ist, heißt 
+              \emph{Tautologie} oder \emph{allgemeingültige Formel}.
+              }
+              \lang{en}{
+              A formula that is \emph{true} for all values of its variables 
+              is called a \emph{tautology}.
+              }
+        \item \lang{de}{
+              Eine Formel, die für alle Bewertungen \emph{falsch} ist, heißt 
+              \emph{Widerpruch}, \emph{Kontradiktion} oder \emph{unerfüllbare Formel}.
+              }
+              \lang{en}{
+              A formula that is \emph{false} for all values of its variables 
+              is called an \emph{unsatisfiable formula}.
+              }
+     \end{itemize}
+    \end{definition} 
+               
+   \begin{remark} \label{rem:tautologie_widerspruch}
+     \begin{itemize}
+        \item \lang{de}{Die Negation einer Tautologie ist stets ein Widerspruch, und }
+              \lang{en}{Negating a tautology gives an unsatisfiable formula.}
+        \item \lang{de}{die Negation eines Widerspruchs ist stets eine Tautologie.}
+              \lang{en}{Negating an unsatisfiable formula gives a tautology.}
+     \end{itemize}
+    \end{remark} 
+
+%         
+
+%%%%%%%%%%%%%%%%%%
+%
+% Weitere Vertiefung der Aussagenlogik, wie 
+%   - die Herleitung und Anwendung von Logikregeln (Distributivgesetz, de Morgan, etc) 
+%   - die Definition weiterer Begriffe wie z.B. die "Tautologie", der "Widerspruch"
+%
+%   werden hier nicht weiter vertieft ..., obwohl im OMB+ teilweise vorhanden!!!
+%
+%%%%%%%%%%%%%%%%%%
+
+% Wir werden die Aussagenlogik an dieser Stelle nicht weiter vertiefen, sondern uns nachfolgend mit ihrer Anwendung
+% in der Mathematik beschäftigen. 
+
+\lang{de}{
+Wir haben nun die grundlegenden Definitionen über Aussagen, ihre logischen Verknüpfungen und Bewertungen
+kennengelernt 
+%
+%%% Video K.M.
+%
+und beenden diesen Abschnitt mit einem letzten kleinen Beispiel, das uns noch
+einmal verdeutlicht, wie hilfreich logisches Verständnis im realen Leben sein kann: 
+\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10922&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}
+\\\\\\
+Im Folgenden werden wir uns nun mit der Anwendung dieser sogenannten \emph{"`Objekte der 
+Aussagenlogik"' \,} in der Mathematik beschäftigen.
+}
+%
+
+\lang{en}{
+In the following section we will consider how some of these logical constructions are applied to 
+mathematics.
+}
+
+\section{\lang{de}{Folgerung/Implikation und Äquivalenz}
+         \lang{en}{Implication and equivalence}}\label{sec:folgerung}
+
+\lang{de}{
+Die Aussagenlogik spielt eine sehr große Rolle in der Mathematik und kommt in verschiedensten 
+Teilgebieten der Mathematik zur Anwendung.
+}
+\lang{en}{
+Propositional logic plays a very large role in mathematics and can be applied to various fields.
+}
+
+\begin{itemize}
+    \item \lang{de}{
+        Zum Beispiel findet man logische Verknüpfungen von Aussagen häufig bei der Definition und 
+        Beschreibung von Mengen und \ref[content_01_zahlenmengen][Mengenoperationen]{def:mengenoperationen}.
+        So lässt sich beispielsweise die Vereinigung zweier Mengen $M$ und $N$ durch die logische Formel  
+        \[x \in M\cup N \Leftrightarrow  (x\in M \vee x\in N) \]
+        beschreiben. Man schreibt deshalb auch $M\cup N =\{x\mid x\in M \vee x\in N\}$ in der Kenntnis, dass für 
+        alle Elemente $x$ der Menge $M\cup N$ die Disjunktion $(x\in M \vee x\in N)$ eine wahre Aussagen ist.
+    \\
+        Analog gilt
+        \begin{itemize}                    
+            \item   für den Schnitt von $M$ und $N$: $\; x \in M\cap N \Leftrightarrow (x\in M \wedge x\in N)$, \\
+                    man schreibt deshalb auch $\; M\cap N =\{x\mid x\in M \wedge x\in N\} \,$, und
+            \item   für die Differenz von $M$ und $N$: $\; x \in M\setminus N \Leftrightarrow (x\in M \wedge \neg (x\in N))$, \\
+                    man schreibt deshalb auch $\; M\setminus N =\{x\mid x\in M \wedge \neg (x\in N)\}.$   
+        \end{itemize} 
+        }
+        \lang{en}{
+        For example, propositions and connectives are often used when describing sets and 
+        \ref[content_01_zahlenmengen][set operations]{def:mengenoperationen}. For example, the union 
+        of two sets $M$ and $N$ can be described by the logical formula 
+        \[x \in M\cup N \Leftrightarrow  (x\in M \vee x\in N). \]
+        Using this, we can write $M\cup N =\{x\mid x\in M \vee x\in N\}$, as $x$ being an element of 
+        $M\cup N$ is equivalent to the disjunction $(x\in M \vee x\in N)$ being true.
+        \\
+        Analogously,
+        \begin{itemize}                    
+            \item   for the intersection of $M$ and $N$: $\; x \in M\cap N \Leftrightarrow (x\in M \wedge x\in N)$, \\
+                    so we write $\; M\cap N =\{x\mid x\in M \wedge x\in N\} \,$, and
+            \item   for the difference of $M$ and $N$: $\; x \in M\setminus N \Leftrightarrow (x\in M \wedge \neg (x\in N))$, \\
+                    so we write $\; M\setminus N =\{x\mid x\in M \wedge \neg (x\in N)\}.$   
+        \end{itemize}
+        }
+
+    \item \lang{de}{
+          Von besonderer Bedeutung in der Mathematik ist auch die \emph{Äquivalenz \,} als \emph{\, "`... genau dann, wenn ..."'}
+          $-$Verknüpfung bei der Umformung von Gleichungen und Ungleichungen. Auf diese sogenannten 
+          \emph{Äquivalenzumformungen\,} werden wir in Abschnitt \ref{sec:aequivalenz} noch weiter eingehen.
+          }
+          \lang{en}{
+          Also especially important in mathematics is \emph{equivalence}, often written as 
+          \emph{'if and only if'}. This will be looked at further in section \ref{sec:aequivalenz}.
+          }
+        
+    \item \lang{de}{
+          Die \emph{Implikation\,} spielt unter anderem in der mathematischen Beweisführung eine wichtige Rolle.
+        Mathematische \emph{Sätze} oder \emph{Theoreme} basieren meist auf einer \emph{Voraussetzung} $\,A$, 
+        aus der dann eine \emph{Behauptung}  $\,B\,$ folgt. Es handelt sich hierbei also um eine Aussage vom 
+        Typ \textit{"`wenn $A$ gilt, dann gilt auch $B$."'} und enstspricht
+        somit der logischen Struktur einer \emph{Implikation} oder auch \emph{Folgerung}.
+        }
+        \lang{en}{
+        \emph{Implication} plays an important role in writing mathematical proofs, amongst other 
+        things. Mathematical \emph{results} and \emph{theorems} often depend on a \emph{condition} 
+        $\,A$ from which a statement $\,B\,$ follows. This is represented by a proposition 
+        \textit{'if $A$ holds, then $B$ holds'}, a logical \emph{implication}.
+        }
+\end{itemize}
+
+\lang{de}{
+Aufgrund ihrer besonderen Bedeutung werden wir die \emph{Implikation} und die \emph{Äquivalenz} 
+noch etwas genauer betrachten. Hierzu definieren wir zunächst beide logischen Verknüpfungen allgemein 
+für Aussageformen (Formeln) und untersuchen anschließend in den Beispielen \ref{ex:implikation} und 
+\ref{ex:aqiv} ihre Wahrheitswerte in Abhängigkeit von allen möglichen Belegungen der Formeln.
+}
+\lang{en}{
+Due to their particular importance, we consider \emph{implication} and \emph{equivalence} further. 
+Firstly we introduce their general definitions for propositional formulas, and then work through 
+examples \ref{ex:implikation} and \ref{ex:aqiv}.
+}
+
+\begin{definition}[\lang{de}{Implikation/Folgerung}\lang{en}{Implication}] \label{def:implikation}
+
+\lang{de}{
+  Für zwei Aussageformen $\mathcal{A}$ und $\mathcal{B}\,$ wird die \notion{\emph{Implikation (Folgerung)}}
+\begin{center}  
+  \emph{\,"`Wenn $\mathcal{A}$ wahr ist, dann ist auch $\mathcal{B}$ wahr."'\,}
+\end{center}
+ausgedrückt durch die Schreibweise
+ 
+	\begin{table}[\class{layout} \align{c} \cellaligns{llclcl}]
+		
+		& $\mathcal{A} \Rightarrow \mathcal{B} \quad$
+        &  gelesen als &$\quad$ \emph{"`aus $\mathcal{A}$ folgt $\mathcal{B}$"'} 
+        & $\;$ oder &$\;$ \emph{"`$\mathcal{A}$ impliziert $\mathcal{B}$"'} 
+        \\
+        
+   oder $\quad$ & $\mathcal{B} \Leftarrow \mathcal{A} \quad$
+        &  gelesen als &$\quad$\emph{"`$\mathcal{B}$ folgt aus $\mathcal{A}$"'} &&\\
+	
+	\end{table}       
+  
+ Dabei heißt $\mathcal{A}$ die \notion{Prämisse} und $\mathcal{B}$ die \notion{Konklusion} der Folgerung.
+}
+\lang{en}{
+For two propositional formulas $\mathcal{A}$ and $\mathcal{B}\,$, the \notion{\emph{implication}} 
+\begin{center}  
+  \emph{\,'If $\mathcal{A}$ is true, then $\mathcal{B}$ is true.'\,}
+\end{center}
+is expressed as 
+\begin{table}[\class{layout} \align{c} \cellaligns{llclcl}]
+		& $\mathcal{A} \Rightarrow \mathcal{B} \quad$
+        & said &$\;$ \emph{'$\mathcal{A}$ only if $\mathcal{B}$'} 
+        & $\;$ or &$\;$ \emph{'$\mathcal{A}$ implies $\mathcal{B}$'} 
+        \\
+        or $\quad$ & $\mathcal{B} \Leftarrow \mathcal{A} \quad$
+        & said &$\;$ \emph{'$\mathcal{B}$ if $\mathcal{A}$'}
+        & $\;$ or &$\;$ \emph{'$\mathcal{B}$ follows from $\mathcal{A}$'} \\
+	\end{table}
+}
+
+
+
+%  Die Folgerung $\; \mathcal{A} \Rightarrow \mathcal{B}\;$ ist also selbst eine Aussage und sie ist 
+%  genau dann wahr, wenn $\mathcal{A}$ und auch $\mathcal{B}$ beide wahr sind, oder wenn $\mathcal{A}$ falsch 
+%  ist, wie in der folgenden Tabelle, die man auch \emph{Wahrheitstafel} nennt, zu entnehmen.
+
+  \lang{de}{
+  Die Folgerung \textbf{$\; \mathcal{A} \Rightarrow \mathcal{B}\;$} ist per Definition selbst wieder 
+  eine Aussageform, die genau dann zu einer \emph{wahren} Aussage wird, wenn entweder 
+  $\mathcal{A}$ und $\mathcal{B}$ beide \emph{wahr} sind, oder wenn $\mathcal{A}$ 
+  \emph{falsch} ist.
+  }
+  \lang{en}{
+  The implication \textbf{$\; \mathcal{A} \Rightarrow \mathcal{B}\;$} is defined to be a propositional 
+  formula that is a true proposition precisely either if $\mathcal{A}$ and $\mathcal{B}$ are both 
+  \emph{true}, or if $\mathcal{A}$ is \emph{false}.
+  }
+\end{definition}  
+\lang{de}{
+  Die Folgerung $\; \mathcal{A} \Rightarrow \mathcal{B}\;$ genügt also der folgenden \emph{Wahrheitstafel}:
+  \begin{table}[\align{c}\cellaligns{cccc}] 
+    \head                %[\background{rgb(220,205,100)}]
+    $\mathcal{A}$ & $\mathcal{B}$ && $\mathcal{A}\Rightarrow \mathcal{B}$ 
+    \body
+    W & W && W \\
+    W & F && F \\
+    F & W && W \\
+    F & F && W 
+  \end{table}
+}
+\lang{en}{
+The implication $\; \mathcal{A} \Rightarrow \mathcal{B}\;$ satisfies the following \emph{truth table}. 
+    \begin{table}[\align{c}\cellaligns{cccc}] 
+    \head                %[\background{rgb(220,205,100)}]
+    $\mathcal{A}$ & $\mathcal{B}$ && $\mathcal{A}\Rightarrow \mathcal{B}$ 
+    \body
+    T & T && T \\
+    T & F && F \\
+    F & T && T \\
+    F & F && T 
+  \end{table}
+}
+  
+\begin{remark}  
+  \lang{de}{
+  Besonders hervorzuheben ist also die Tatsache, dass die Implikation $\;\mathcal{A} \Rightarrow \mathcal{B}\;$
+  immer wahr ist, wenn die Prämisse $\mathcal{A}$ falsch ist. Dabei spielt es keine Rolle, welchen Wahrheitswert 
+  die Konklusion $\mathcal{B}$ hat.\\
+  Sprachlich sehen wir das ein, wenn wir in den Konjunktiv wechseln: Wenn $\mathcal{A}$ wahr \emph{wäre},
+  dann \emph{wäre} auch $\mathcal{B}$ wahr.
+  }
+  \lang{en}{
+  Especially noteworthy is the fact that the implication $\;\mathcal{A} \Rightarrow \mathcal{B}\;$ is 
+  always true if the premise $\mathcal{A}$ is false, regardless of the value of $\mathcal{B}$. \\
+  This can be aligned with our linguistic intuition by rephrasing it as: if $\mathcal{A}$ were true, 
+  then $\mathcal{B}$ would be true. %Does this help explain the vacuous truth in English? - Niccolo
+  }
+\end{remark}
+
+
+\begin{example}\label{ex:implikation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Das 1. Beispiel wurde gestrichen, da es nicht ganz schlüssig ist und wir uns einleitend fest-
+% gelegt haben, dass wir uns nun mit der Anwendung der Aussagenlogik in der Mathematik beschäftigen 
+% werden ...
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{enumerate}[alph]
+%  \item Betrachten wir die beiden Aussagen $A:$ \textit{"`Es regnet."'} und $B:$ \textit{"`Die Straße ist nass."'}.\\
+%      Dann lautet die Folgerung $\,A \Rightarrow B$:
+%      \begin{center}
+%      \textit{"`Wenn es regnet, dann ist die Straße nass."'}
+%      \end{center}
+%      Diese Aussage wäre genau dann falsch, wenn es regnen würde und die Straße dabei trocken bliebe. Da die Straße bei 
+%      Regen aber immer nass wird, kann man diese Konstellation ($A=\,$W und $B=\,$F) ausschließen. 
+%      Wir können also sagen, die Aussage \textit{"`Wenn es regnet, dann ist die Straße nass."'} ist, unabhängig davon, 
+%      was für ein Wetter herrscht, immer wahr, denn wenn es regnet, also die Aussage $A$ wahr ist, ist auch die Straße nass, d.h. die
+%      Aussage $B$ auch wahr. Regnet es jedoch nicht, so ist die Aussage $A$ falsch und die Folgerung per Definition wahr.
+%      \\
+%      Anders verhält es sich für die umgekehrte Folgerung $B \Rightarrow A$.
+%      Die Straße könnte nass sein, auch wenn es nicht regnet. In diesem Fall wäre die Folgerung $B \Rightarrow A\,$ falsch,
+%      weil die Prämisse $B$ wahr ist, aber die Konklusion $A$ falsch.
+%
+%  \item Betrachten wir nun die beiden Aussagen $A$: "`$x = 1$"' und $B$: "`$x^2 = 1$"'\\
+
+\lang{de}{
+    Wir betrachten die beiden Formeln $\;\mathcal{A}:\,$ "`$x = 1$"' und $\;\mathcal{B}:\,$ "`$x^2 = 1$"',
+    deren Wahrheitswerte jeweils abhängig sind vom Wert der Variablen $x$.\\
+    
+    Der Wahrheitswert der Implikation $\mathcal{A} \Rightarrow \mathcal{B}$ hingegen ist unabhängig vom 
+    tatsächlichen Wert von $x$ immer \emph{wahr}, denn wenn $\mathcal{A}\,$ \emph{wahr\,} ist, gilt $x=1\,$ 
+    und folglich $\;x^2=1^2=1$. Also ist in diesem Fall $\mathcal{B}\,$ \emph{wahr} und kann niemals \emph{falsch} sein.\\
+    Wenn $\mathcal{A}\,$ \emph{falsch \,} ist, spielt der von $x$ abhängige Wahrheitswert 
+    von $\mathcal{B}$ keine Rolle, da die Implikation $\mathcal{A} \Rightarrow \mathcal{B}$ aufgrund der \emph{falschen} Prämisse
+    per Definition \emph{wahr} ist.\\
+    
+%      
+%    $\mathcal{B}: x^2=1$ kann sowohl \emph{wahr} als auch \emph{falsch} sein, denn \\
+%                 &&  für $x=-1 \;$ ist $x^2 = (-1)^2=1$, also ist $\mathcal{B}\,$ \emph{wahr} und \\
+%                 &&  für $x=4 \;$ ist $x^2 = 4^2=16 \neq 1$, also ist $\mathcal{B}\,$ \emph{falsch}.\\
+%
+     Wir fassen die möglichen Bewertungs-Konstellationen für die Formeln $\mathcal{A}\,$ und $\mathcal{B}\,$, und somit
+     die möglichen Belegungen für $\, \mathcal{A} \Rightarrow \mathcal{B}$ in einer Wahrheitstafel zusammen:
+}
+\lang{en}{
+Consider the two formulas $\;\mathcal{A}:\,$ '$x = 1$' and $\;\mathcal{B}:\,$ '$x^2 = 1$', whose 
+truth-values are both dependent on the value of the variable $x$.
+\\
+On the other hand, the truth-value of the implication $\mathcal{A} \Rightarrow \mathcal{B}$ is 
+always \emph{true}, for all values of $x$. This is because when $\mathcal{A}\,$ is 
+\emph{true}, $x=1\,$ and so $\;x^2=1^2=1$, and $\mathcal{B}\,$ is \emph{true}.
+\\
+If $\mathcal{A}\,$ is \emph{false}, the $x$-dependent truth-value of $\mathcal{B}$ is not relevant 
+to the truth-value of the implication $\mathcal{A} \Rightarrow \mathcal{B}$ by its truth-table definition.
+\\
+The one case for which the implication could be false by its truth-table definition is if 
+$\;\mathcal{A}\,$ were true and $\;\mathcal{B}\,$ false, but this is not possible here for any $x\in\R$.
+}
+
+\lang{de}{
+   \begin{table}[\align{c}\cellaligns{cccc}] 
+    \head             
+    $\mathcal{A}:\,x = 1$ & $\mathcal{B}:\,x^2 = 1$ && $\mathcal{A} \Rightarrow \mathcal{B}$ 
+    \body
+    W & W && W \\
+    W & F && \textit{nicht möglich}\\
+    F & W && W \\
+    F & F && W 
+  \end{table}
+}
+\lang{en}{
+   \begin{table}[\align{c}\cellaligns{cccc}] 
+    \head             
+    $\mathcal{A}:\,x = 1$ & $\mathcal{B}:\,x^2 = 1$ && $\mathcal{A} \Rightarrow \mathcal{B}$ 
+    \body
+    T & T && T \\
+    T & F && \textit{not possible}\\
+    F & T && T \\
+    F & F && T 
+  \end{table}
+}
+
+\lang{de}{
+  Hier können wir nun in der rechten Spalte direkt ablesen, dass die Implikation $\mathcal{A} \Rightarrow \mathcal{B},$ 
+  unabhängig vom tatsächlichen Wert von $x$, immer \emph{wahr} ist.
+  
+  Die umgekehrte Folgerung $\mathcal{B} \Rightarrow \mathcal{A}$ gilt für diese Formeln allerdings im Allgemeinen
+  nicht, 
+%  d.h. sie ist nicht für alle möglichen Berwertungs-Konstellationen für $\mathcal{B}\,$ und $\mathcal{A}\,$ \emph{wahr}, 
+  denn für $x = -1\;$ ist die Aussage $\mathcal{B}\,$ \emph{wahr, \,} da $(-1)^2 = 1, \;$ jedoch die Aussage $\mathcal{A}\,$ 
+  \emph{falsch, \,}  da $-1 \neq 1$. Somit erhalten wir folgende Bewertungen:
+}
+\lang{en}{
+From the rightmost column we see that the implication $\mathcal{A} \Rightarrow \mathcal{B},$ is always 
+\emph{true} independently from the value of $x$.
+\\
+The converse implication $\mathcal{B} \Rightarrow \mathcal{A}$ does not hold in general for these 
+formulas, as for $x = -1\;$ the statement $\mathcal{B}\,$ is \emph{true} as $(-1)^2 = 1, \;$ even 
+though the proposition $\mathcal{A}\,$ is \emph{false}. This gives rise to the following values:
+}
+
+\lang{de}{
+   \begin{table}[\align{c}\cellaligns{cccc}] 
+    \head               
+    $\mathcal{B}:\,x^2 = 1$ & $\mathcal{A}:\,x = 1$ && $\mathcal{B} \Rightarrow \mathcal{A}$ 
+    \body
+    W & W && W \\
+    W & F && \textcolor{\#D2691E}{\textbf{F}} \\
+    F & W && W \\
+    F & F && W 
+  \end{table}
+}
+\lang{en}{
+   \begin{table}[\align{c}\cellaligns{cccc}] 
+    \head               
+    $\mathcal{B}:\,x^2 = 1$ & $\mathcal{A}:\,x = 1$ && $\mathcal{B} \Rightarrow \mathcal{A}$ 
+    \body
+    T & T && T \\
+    T & F && \textcolor{\#D2691E}{\textbf{F}} \\
+    F & T && T \\
+    F & F && T 
+  \end{table}
+}
+
+\lang{de}{
+  Die Implikation $\mathcal{B} \Rightarrow \mathcal{A}\,$ gilt also nicht allgemein, d.h. sie wird nicht bei 
+  jeder Belegung zu einer \emph{wahren} Aussage. Man schreibt in diesem Fall auch $\mathcal{B} \not\Rightarrow \mathcal{A}$.
+}
+\lang{en}{
+The implication $\mathcal{B} \Rightarrow \mathcal{A}\,$ therefore does not hold in general, as it is not 
+evaluated as \emph{true} for every possible value of the variables. This can be expressed as $\mathcal{B} \not\Rightarrow \mathcal{A}$.
+}
+
+% \end{enumerate}
+\end{example}
+%
+%%% Video K.M. *** NEU: Aussagenlogik_4_a ***
+%
+\lang{de}{
+In folgendem Video wird die Definition der Implikation noch einmal wiederholt und die möglichen 
+Bewertungen dieser Verknüfung anhand weiterer Beispiele erläutert.
+\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10746&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}\\\\
+}
+\lang{en}{
+\\
+}
+%
+  
+\begin{remark} \label{rem:gueltige_folgerung}
+\lang{de}{
+  In der Mathematik ist man hauptsächlich an solchen \emph{Implikationen / Folgerungen} % (und \emph{Äquivalenzen})
+  interessiert, deren Wahrheitswert unabhängig von der konkreten Belegung der Variablen (in Prämisse und Konklusion) 
+  immer \emph{wahr} ist, d.h. die immer glütig sind.
+}
+\lang{en}{
+In mathematics we are primarily interested in those \emph{implications} that are always true, 
+regardless of the value of any variables (both in the premise and in the conclusion).
+}
+\end{remark}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{t}{2}{5}
+			\function[calculate]{t2}{t^2}	
+			\randint{z}{0}{1}
+			\function[normalize]{a}{z*t*x+(1-z^2)*t^2*x^2}
+			\function[normalize]{c}{z*t^2*x^2+(1-z^2)*t*x}
+		\end{variables}
+
+		\text{\lang{de}{Wir betrachten die Formeln}\lang{en}{We consider the formulas}\\ 
+			\[ \mathcal{A}:\;  \var{a}    >1 \quad\quad 
+               \mathcal{B}:\; -\var{t}x   <-1 \quad\quad 
+               \mathcal{C}:\;  \var{c}    >1. \]
+
+        \lang{de}{Welche der Folgerungen ist % \emph{nicht\,} 
+        für alle reellen Zahlen $x$ wahr?}
+        \lang{en}{Which of the implications is true for all real $x$?}}
+
+        \begin{choices}{multiple}
+               %  1)
+                    \begin{choice}
+                      \text{$\mathcal{A} \Rightarrow \mathcal{B}$}
+                      \solution[compute]{z=1}
+                    \end{choice}
+                    
+                %  2)
+                    \begin{choice}
+                      \text{$\mathcal{A} \Rightarrow \mathcal{C}$}
+                      \solution[compute]{z=1}
+                    \end{choice}
+                    
+                %  3)                    
+                    \begin{choice}
+                      \text{$\mathcal{C} \Rightarrow \mathcal{A}$}
+                      \solution[compute]{z=0}
+                    \end{choice}
+                    
+        \end{choices} 
+         
+		\explanation{\lang{de}{
+  Für negative Zahlen $x$ sind $\,(\var{t}x>1) \,$ und $\,(-\var{t}x<-1) \,$ falsche Aussagen. 
+        Die Aussage $\, (\var{t2}x^2>1) \,$ ist jedoch wahr, wenn zum Beispiel $x<-1$ ist, denn dann ist $x^2>1$ und 
+        damit auch $\var{t2}x^2>1.$\\
+		Die Folgerung $\, (\var{t2}x^2>1 \Rightarrow \var{t}x>1) \,$ wird daher für $x<-1$ zu einer falschen Aussage und 
+        ist somit \textbf{nicht} für alle rellen Zahlen wahr.
+        }
+        \lang{en}{
+        For negative $x$ the propositions $\,(\var{t}x>1) \,$ and $\,(-\var{t}x<-1) \,$ are false. The 
+        proposition $\, (\var{t2}x^2>1) \,$ is however true for e.g. $x<-1$, as then $x^2>1$ and hence 
+        $\var{t2}x^2>1.$
+        \\
+        The implication $\, (\var{t2}x^2>1 \Rightarrow \var{t}x>1) \,$ hence becomes a false proposition 
+        for $x<-1$ and so \textbf{does not hold} for all real $x$.
+        }}
+
+\end{quickcheck}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Alte Version ohne Multiple Choice
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%\begin{quickcheck}
+%		\field{rational}
+%		\type{input.number}
+%		\begin{variables}
+%			\randint{t}{2}{5}
+%			\function[calculate]{t2}{t^2}	
+%			\randint{z}{-1}{1}
+%			\function[calculate]{y}{z+2}
+%			\function[normalize]{x1}{z*(z-1)*A/2+(1-z^2)*C+z*(z+1)*B/2}
+%			\function[normalize]{x2}{z*(z-1)*B/2+(1-z^2)*A+z*(z+1)*C/2}
+%			\function[normalize]{x3}{z*(z-1)*C/2+(1-z^2)*B+z*(z+1)*A/2}
+%		\end{variables}
+%
+%
+%
+%			\text{Wir betrachten die Aussagen\\ 
+%				\[ A:\; \var{t}x>1 \quad\quad B:\; -\var{t}x<-1 \quad\quad C:\; \var{t2}x^2>1. \] 
+%			Welche der folgenden Folgerungen ist \emph{nicht} für alle reellen Zahlen $x$ wahr?
+%			\[ (1): \var{x3}\Rightarrow \var{x1} \quad\quad (2): \var{x1}\Rightarrow \var{x2} \quad\quad (3): \var{x2}\Rightarrow \var{x3} \]
+%			Die Folgerung mit der Nummer \ansref.}
+%		% Folgerung C=>A ist nicht immer richtig. Variablen so gesetzt, dass Lösung =y ist.
+%		\begin{answer}
+%			\solution{y}
+%		\end{answer}
+%		\explanation{Für negative Zahlen $x$ sind $A$ und $B$ falsche Aussagen. Die Aussage $C$ ist
+%		jedoch wahr, wenn zum Beispiel $x<-1$ ist, weil dann $x^2>1$ und damit auch $\var{t2}x^2>1$ ist.\\
+%		Die Folgerung $\, C\Rightarrow A$ ist daher nicht immer wahr.
+%		}
+%	\end{quickcheck}
+
+\begin{definition}[\lang{de}{Äquivalenz}\lang{en}{Equivalence}] \label{def:aequvalenz}
+    \lang{de}{
+         Zwei Aussageformen $\mathcal{A}$ und $\mathcal{B}$ heißen \notion{äquivalent} 
+         oder \notion{gleichwertig}, wenn gilt
+% \\
+%            \begin{table}[\class{layout} \align{c} \cellaligns{lll}]		
+%                & falls $\; \mathcal{B}\,$ aus $\,\mathcal{A}\,$ folgt,
+%                & $\;$ d.\,h. $ \, \mathcal{A} \Rightarrow \mathcal{B},\quad$ \\
+%                & und $\; \mathcal{A}\,$ aus $\,\mathcal{B}\,$ folgt,
+%                & $\;$ d.\,h. $ \, \mathcal{B} \Rightarrow \mathcal{A}.$\\       
+%             \end{table} 
+%        In diesem Fall sagt man auch 
+              \begin{center}  
+              \emph{\,"`$\mathcal{A}$ ist genau dann wahr, wenn $\mathcal{B}$ wahr ist."'\,}
+              \end{center}
+              
+        Man schreibt 
+                \[\mathcal{A} \Leftrightarrow \mathcal{B}.\]  % \label{eq-II.1.04}
+        
+        Die Äquivalenz $\mathcal{A} \Leftrightarrow \mathcal{B}$ ist per Definition selbst wieder 
+        eine Aussageform, die genau dann zu einer wahren Aussage wird, wenn beide Aussageformen
+        $\mathcal{A}$ und $\mathcal{B}$ \emph{gleichwertig} sind, d.\,h. entweder beide sind 
+        \emph{wahr} oder beide sind \emph{falsch}.
+        }
+    \lang{en}{
+        Two propositions $\mathcal{A}$ and $\mathcal{B}$ are called \notion{equivalent} if
+              \begin{center}  
+              \emph{\,'$\mathcal{A}$ is true if and only if $\mathcal{B}$ is true.'\,}
+              \end{center}
+        We write
+              \[\mathcal{A} \Leftrightarrow \mathcal{B}.\]
+        The equivalence $\mathcal{A} \Leftrightarrow \mathcal{B}$ is itself by defintion a propositional 
+        formula that becomes a true proposition precisely if $\mathcal{A}$ and $\mathcal{B}$ have the 
+        same truth value. That is, $\mathcal{A} \Leftrightarrow \mathcal{B}$ is true if $\mathcal{A}$ 
+        and $\mathcal{B}$ are both \emph{true} or both \emph{false}, else it is \emph{false}.
+    }
+\end{definition}
+
+\lang{de}{
+Die Äquivalenz $\mathcal{A} \Leftrightarrow \mathcal{B}$ genügt also der folgenden Wahrheitstafel:
+}
+\lang{en}{
+The equivalence $\mathcal{A} \Leftrightarrow \mathcal{B}$ gives the following truth table:
+}
+\lang{de}{
+  \begin{table}[\align{c}\cellaligns{cccc}] 
+    \head                %[\background{rgb(220,205,100)}]
+    $\mathcal{A}$ & $\mathcal{B}$ && $\mathcal{A} \Leftrightarrow \mathcal{B}$ 
+    \body
+    W & W && W \\
+    W & F && F \\
+    F & W && F \\
+    F & F && W 
+  \end{table}
+}
+\lang{en}{
+  \begin{table}[\align{c}\cellaligns{cccc}] 
+    \head                %[\background{rgb(220,205,100)}]
+    $\mathcal{A}$ & $\mathcal{B}$ && $\mathcal{A} \Leftrightarrow \mathcal{B}$ 
+    \body
+    T & T && T \\
+    T & F && F \\
+    F & T && F \\
+    F & F && T 
+  \end{table}
+}
+%
+%%% Video K.M.
+%
+\lang{de}{
+In folgendem Video wird die Äquivalenz von Aussageformen noch einmal
+erläutert und anhand einiger wichtiger Anwendungsbeispiele weiter vertieft:
+\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10745&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}\\\\
+}
+\lang{en}{
+\\
+}     
+
+%         
+
+  \begin{remark}\label{rem:aquiv-ist-doppelte-implikation}
+    \lang{de}{
+     Vergleicht man die Wahrheitstafeln der Implikationen $\mathcal{A} \Rightarrow \mathcal{B}$ und 
+     $\mathcal{B} \Rightarrow \mathcal{A}$ mit der Wahrheitstafel von $\mathcal{A} \Leftrightarrow \mathcal{B}$, 
+     so stellt man fest, dass die Äquivalenz $\mathcal{A} \Leftrightarrow \mathcal{B}$ genau dann wahr ist, wenn
+     beide Implikationen wahr sind.
+     }
+     \lang{en}{
+     Comparing the truth tables of the implications $\mathcal{A} \Rightarrow \mathcal{B}$ and 
+     $\mathcal{B} \Rightarrow \mathcal{A}$ with that that of $\mathcal{A} \Leftrightarrow \mathcal{B}$, 
+     it is clear that the equivalence $\mathcal{A} \Leftrightarrow \mathcal{B}$ is true if and only if 
+     both implications are true.
+     }
+    
+    \begin{table}[\align{c}\cellaligns{cccccc}] % {c|c||c|c|c }
+      \head[\background{rgb(150,200,150)}]   %[\background{rgb(220,205,100)}]
+      $\mathcal{A}$ & $\mathcal{B}$ && $\mathcal{A} \Rightarrow \mathcal{B}$ &  $\mathcal{B} \Rightarrow \mathcal{A}$ & $\mathcal{A} \Leftrightarrow \mathcal{B}$ 
+      \body
+      \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} && \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} \\
+      \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} && \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} \\
+      \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} && \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} \\
+      \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} && \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$}
+    \end{table}
+
+    \lang{de}{
+    Dies wird benutzt, wenn man zeigen m"ochte, dass zwei Aussageformen $\mathcal{A}$ und $\mathcal{B}$ 
+    äquivalent sind. Man beweist dann, dass sowohl die Implikation $\mathcal{A} \Rightarrow \mathcal{B}$ als auch die Implikation 
+    $\mathcal{B} \Rightarrow \mathcal{A}$ wahr ist.
+    }
+    \lang{en}{
+    Hence if we want two formulas $\mathcal{A}$ and $\mathcal{B}$ to be equivalent, it is enough to 
+    prove that both $\mathcal{A} \Rightarrow \mathcal{B}$ and $\mathcal{B} \Rightarrow \mathcal{A}$ are 
+    always true.
+    }
+     \end{remark}
+  
+  \begin{example} \label{ex:aqiv}
+   \begin{enumerate}[alph]
+%
+%%% Video K.M.
+%   
+    \item \lang{de}{
+          Schauen wir uns hierzu zunächst ein Beispiel mit detaillierten Erklärungen im Video an:
+          \\
+%QS        \floatright
+           \center{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10747&mode=iframe&speed=true}
+      {\image[75]{00_video_button_schwarz-blau}}}\\
+      }
+      \lang{en}{
+      The above remark essentially says that $\mathcal{A} \Leftrightarrow \mathcal{B}$ is the same 
+      formula as 
+      \[(\mathcal{A} \Rightarrow \mathcal{B}) \wedge (\mathcal{B} \Rightarrow \mathcal{A}).\]
+      }
+      \\         
+%   
+    \item \lang{de}{
+    In diesem zweiten Beispiel seien nun $\;\mathcal{A}:\,$ "`$-1 \leq x \leq 1$"' und $\;\mathcal{B}:\,$ "`$x^2 \leq 1$"'.\\
+    
+    Wir untersuchen die Formeln $\, \mathcal{A}$ und $\mathcal{B}$ auf \emph{Äquivalenz}.\\
+    
+    Dazu stellen wir zunächst fest, dass die Implikation $\mathcal{A} \Rightarrow \mathcal{B}\,$ 
+    unabhängig vom tatsächlichen Wert von $x\in\R$ immer \emph{wahr} ist, also unabhängig davon, ob $\mathcal{A}$ wahr oder falsch ist:
+    }
+    \lang{en}{
+    Let $\;\mathcal{A}:\,$ '$-1 \leq x \leq 1$' and $\;\mathcal{B}:\,$ '$x^2 \leq 1$'.
+    \\
+    We check the formulas $\, \mathcal{A}$ and $\mathcal{B}$ to see if they are \emph{equivalent}.
+    \\
+    To do this, we show that the implication $\mathcal{A} \Rightarrow \mathcal{B}\,$ is true for all 
+    $x\in\R$:
+    }
+ %
+ %  Hinweis: das Label zu "\item" in den eckigen Klammern wird in der Vorschau nicht dargestellt, 
+ %           aber in der Testumgebung erscheint es korrekt. Die "Tabellen"-Variante finktioniert nicht
+ %           wegen ungünstiger Zeilenumrüche.
+ %
+    \begin{itemize}
+      \item \lang{de}{
+              Ist $\mathcal{A}\,$ \emph{wahr}, 
+%              also $-1 \leq x \leq 1,\,$ dann gilt entweder $0\leq x\leq 1$ und somit $0=0\cdot x\leq x\cdot x\leq x\leq 1$, 
+%              oder $0<-x\leq 1$    , also $0=0\cdot(-x)\leq (-x)\cdot (-x)\leqq -x\leq 1$.
+              also $-1 \leq x \leq 1,\,$ dann gilt \\
+              entweder $\; 0\leq x\leq 1 \,$ und somit $\, 0=0\cdot x\leq x\cdot x\leq 1\cdot 1 =1$, \\
+              oder $\quad 0<-x\leq 1,\,$  also $\, 0=0\cdot(-x) < (-x)\cdot (-x)\leq 1\cdot 1 =1$. \\            
+              Es folgt insbesondere       $\;x^2 \leq 1$. 
+              Also ist $\mathcal{B}\,$ für jedes $x$ \emph{wahr}, für das $\mathcal{A}$ wahr ist.\\
+              }
+              \lang{en}{
+              If $\mathcal{A}\,$ is \emph{true}, that is to say $-1 \leq x \leq 1\,$, then either \\
+              $\quad 0\leq x\leq 1 \,$ and so $\, 0=0\cdot x\leq x\cdot x\leq 1\cdot 1 =1$, or \\
+              $\quad 0<-x\leq 1,\,$ and so $\, 0=0\cdot(-x) < (-x)\cdot (-x)\leq 1\cdot 1 =1$.
+              \\
+              In particular, $\;x^2 \leq 1$.
+              Hence $\mathcal{B}\,$ is \emph{true} for each $x$ that $\mathcal{A}$ is true for.
+              \\
+              }
+      \item \lang{de}{
+           Ist $\mathcal{A}\,$ hingegen \emph{falsch,}
+           dann ist entweder $1<x$ oder $1<-x$. \\
+           Somit ist entweder $1<1\cdot x<x\cdot x=x^2$, oder 
+           $1<1\cdot (-x)<(-x)\cdot (-x)=x^2$. 
+          Also ist hier auch $\mathcal{B}$ falsch.\\
+      Wir hätten hier übrigens auch von der Definition Gebrauch machen können,
+      dass die Implikation $\mathcal{A}\Rightarrow\mathcal{B}$ stets wahr ist, wenn
+       $\mathcal{A}$ falsch ist, unabhängig vom Wahrheitswert von $\mathcal{B}$. 
+      Unsere Argumentation unterstreicht noch einmal, dass diese Definition sinnvoll ist.
+      }
+      \lang{en}{
+      If, on the other hand, $\mathcal{A}\,$ is \emph{false}, then either $1<x$ or $1<-x$. Hence either \\
+      $\quad 1<1\cdot x<x\cdot x=x^2$ or \\
+      $\quad 1<1\cdot (-x)<(-x)\cdot (-x)=x^2$. \\
+      Hence $\mathcal{B}$ is false. Note that instead, we could have made use of the definition of 
+      implication to tell that $\mathcal{A}\Rightarrow\mathcal{B}$ is always \emph{true} when 
+      $\mathcal{A}$ is \emph{false}.
+      }
+            % dann spielt der Wahrheitswert von $\mathcal{B}$ keine Rolle, da eine Implikation per Definition 
+            % immer \emph{wahr} ist, wenn ihre Prämisse \emph{falsch} ist.  
+    \end{itemize}   
+    
+%    \begin{table}[\class{layout} \cellaligns{ll}] 
+%        ist $\mathcal{A}\,$ \emph{wahr}, & also $-1 \leq x \leq 1,\,$ dann gilt $\;x^2 \leq 1$. \\
+%                               & Somit ist also auch $\mathcal{B}\,$ \emph{wahr} und kann für diesen 
+%                               Fall nie \emph{falsch} sein. \\
+%       ist $\mathcal{A}\,$ \emph{falsch,} $\;$ & dann spielt der Wahrheitswert von $\mathcal{B}$ keine Rolle, 
+%                                da aus \emph{falsch} per Definition immer \emph{wahr} folgt.
+%    \end{table}
+    \lang{de}{
+    Ebenso ist die Implikation $\,\mathcal{B} \Rightarrow \mathcal{A}\,$ unabhängig vom tatsächlichen Wert von $x$ 
+    immer \emph{wahr}, denn:
+    }
+    \lang{en}{
+    Furthermore, the implication $\,\mathcal{B} \Rightarrow \mathcal{A}\,$ is always true, regardless 
+    of the value of $x$, as:
+    }
+    
+    \begin{itemize} 
+      \item \lang{de}{
+            Ist $\mathcal{B}\,$ \emph{wahr},
+            also $\, x^2 \leq 1,\,$ dann ist auch $\;-1 \leq x \leq 1$. \\
+            Also ist auch $\mathcal{A}\,$ \emph{wahr} für alle $x$, für die $\mathcal{B}$ wahr ist. \\
+            }
+            \lang{en}{
+            If $\mathcal{B}\,$ is \emph{true}, that is to say $\, x^2 \leq 1\,$, then 
+            $\;-1 \leq x \leq 1$.\\
+            Hence $\mathcal{A}\,$ is \emph{true} for each $x$ that $\mathcal{B}$ is true for.
+            }
+      \item \lang{de}{
+            Ist $\mathcal{B}\,$ \emph{falsch,}
+            dann ist wiederum  die Implikation $\,\mathcal{B} \Rightarrow \mathcal{A}\,$ per Definition 
+            immer \emph{wahr}, unabhängig vom Wahrheitswert von $\mathcal{A}$.
+            }
+            \lang{en}{
+            If $\mathcal{B}\,$ is \emph{false}, then by definition the implication 
+            $\,\mathcal{B} \Rightarrow \mathcal{A}\,$ is always true, regardless of the truth-value 
+            of $\mathcal{A}$.
+            }
+     \end{itemize} 
+   
+%     \begin{table}[\class{layout} \align{c} \cellaligns{ll}] 
+%     ist $\mathcal{B}\,$ \emph{wahr}, & also $x^2 \leq 1,\,$ dann ist $\;-1 \leq x \leq 1$. \\
+%                               & Somit ist also auch $\mathcal{A}\,$ \emph{wahr} und kann für diesen 
+%                               Fall nie \emph{falsch} sein. \\
+%       ist $\mathcal{B}\,$ \emph{falsch,} $\;$ & dann spielt der Wahrheitswert von $\mathcal{A}$ keine Rolle, 
+%                                da aus \emph{falsch} per Definition immer \emph{wahr} folgt.
+%      \end{table} 
+
+\lang{de}{
+  Nun übertragen wir diese Ergebnisse in eine Wahrheitstafel und überprüfen Bemerkung \ref{rem:aquiv-ist-doppelte-implikation}, laut der
+  die Wahrheitswerte für die Äquivalenz $\mathcal{A} \Leftrightarrow \mathcal{B}$ aus denen der Implikationen $\,\mathcal{A} \Rightarrow \mathcal{B}\,$ 
+  und $\,\mathcal{B} \Rightarrow \mathcal{A}$ folgen. 
+}
+\lang{en}{
+Now we transfer these results into a truth table and confirm remark 
+\ref{rem:aquiv-ist-doppelte-implikation} using the truth-values for the equivalence 
+$\mathcal{A} \Leftrightarrow \mathcal{B}$ and the implications $\,\mathcal{A} \Rightarrow \mathcal{B}\,$ 
+and $\,\mathcal{B} \Rightarrow \mathcal{A}$.
+}
+
+\lang{de}{
+   \begin{table}[\align{c}\cellaligns{cccccc}] 
+    \head             
+    $\mathcal{A}:\,-1 \leq x \leq 1$ & $\mathcal{B}:\,x^2 \leq 1$ && $\mathcal{A} \Rightarrow \mathcal{B}$ 
+            & $\mathcal{B} \Rightarrow \mathcal{A}$ & $\mathcal{A} \Leftrightarrow \mathcal{B}$
+    \body
+    W & W && W & W & W \\
+ %   W & F && \textit{nicht relevant} & W & \textit{nicht relevant} \\
+ %   F & W && W & \textit{nicht relevant} & \textit{nicht relevant}\\
+    W & F && \colspan{3} \textit{tritt hier nicht auf}\\
+    F & W && \colspan{3} \textit{tritt hier nicht auf}\\
+    F & F && W & W & W
+  \end{table}
+}
+\lang{en}{
+   \begin{table}[\align{c}\cellaligns{cccccc}] 
+    \head             
+    $\mathcal{A}:\,-1 \leq x \leq 1$ & $\mathcal{B}:\,x^2 \leq 1$ && $\mathcal{A} \Rightarrow \mathcal{B}$ 
+            & $\mathcal{B} \Rightarrow \mathcal{A}$ & $\mathcal{A} \Leftrightarrow \mathcal{B}$
+    \body
+    T & T && T & T & T \\
+ %   W & F && \textit{nicht relevant} & W & \textit{nicht relevant} \\
+ %   F & W && W & \textit{nicht relevant} & \textit{nicht relevant}\\
+    T & F && \colspan{3} \textit{not possible for $\,x\in\R$}\\
+    F & T && \colspan{3} \textit{not possible for $\,x\in\R$}\\
+    F & F && T & T & T
+  \end{table}
+}
+
+\lang{de}{
+  Aus der Tabelle lesen wir ab, dass in diesem Beispiel die Formel $\:\mathcal{A} \Leftrightarrow \mathcal{B}$ unabhängig von
+  den Wahrheitswerten von $\mathcal{A}$ und $\mathcal{B}$ immer wahr ist.
+  Das heißt, die Äquivalenz $\,-1 \leq x \leq 1\Leftrightarrow x^2 \leq 1$ ist immer \emph{wahr}, unabhängig vom
+  tatsächlichen Wert von $x\in\R$.
+}
+\lang{en}{
+From the truth table we see that in this example, the propositional formula 
+$\:\mathcal{A} \Leftrightarrow \mathcal{B}$ 
+is always \emph{true}, and not dependent on the values of $\mathcal{A}$ and $\mathcal{B}$. 
+This means that the equivalence $\,-1 \leq x \leq 1\Leftrightarrow x^2 \leq 1$ is \emph{true} for all 
+values of $x\in\R$.
+}
+  \end{enumerate}
+ \end{example}  
+
+%  \begin{block}[warning]
+%    \lang{de}{Man sollte die Äquivalenz von Aussagen nicht mit der Äquivalenz von Formeln verwechseln.
+%    Bei der Äquivalenz von Aussagen haben die Aussagen einen festgelegten Wahrheitswert,  
+%    % welcher aber dem Leser vielleicht nicht bekannt ist. 
+%    auch wenn dieser möglicherweise nicht bekannt ist.
+%    Die Äquivalenz drückt dann aus, dass die Wahrheitswerte der beiden Aussagen gleich sind.
+%    Findet man also den Wahrheitswert der einen Aussage heraus, kennt man damit auch den der anderen Aussage.}
+%    \lang{en}{One should not mix up the equivalence of statements with the equivalence of formulas. In the
+%    equivalence of statements, the statements have a fixed truth value which might be unknown to the reader. The equivalence expresses that the truth values of both statements are the same. If one
+%    determines the truth value of one of the statements, one also knows the truth value of the other 
+%    statement.}
+%  \end{block}
+
+\lang{de}{
+Ebenso wie bei den \emph{Implikationen} (siehe Bemerkung \ref{rem:gueltige_folgerung}) sind auch
+bei den \emph{Äquivalenzen} in der Mathematik meist diejenigen Aussageformen (Formeln) von Interesse, 
+die unabhängig von konkreten Werten der enthaltenen Variablen immer gültig sind, d.\,h. 
+deren Wahrheitswert immer wahr ist. Dies ist zum Beispiel von grundlegender Bedeutung 
+für \textit{Äquivalenzumformungen}, wie wir im folgenden Abschnitt sehen werden.
+}
+\lang{en}{
+Much like with \emph{implications} (see remark \ref{rem:gueltige_folgerung}), the interesting 
+\emph{equivalences} in mathematics are usually those that are \emph{true}, or 'hold', for every possible 
+value that can be assigned to the variables in the formula. For example, the \emph{equivalence 
+transformations} seen in the next sections rely on these always-true equivalences.
+}
+
+
+\section{\lang{de}{Äquivalenzumformungen}
+         \lang{en}{Equivalence transformations}}\label{sec:aequivalenz}
+
+%  \lang{de}{\textit{Äquivalenzumformungen} wandeln Aussagen, welche von Variablen abhängen (können),
+%  in Aussagen um, die unabhängig vom Wert der Variablen zur ursprünglichen Aussage äquivalent sind.\\ 
+%  So ist die Aussage $\mathcal{A}$: "`$3y - 3x = 9x$"' stets
+%  gleichwertig  mit $\mathcal{B}$: "`$3y = 12x$"' oder auch mit $\mathcal{C}$: "`$y = 4x$"', 
+%  denn die Werte für $x$ und $y$, für die die Aussage $\mathcal{A}$, $\mathcal{B}$ 
+%  oder $\mathcal{C}$ jeweils wahr ist (d.h. die jeweilige 
+%  Gleichung erfüllt ist), ist für alle drei Gleichungen gleich. \\ \\
+
+\lang{de}{Äquivalenzumformungen wandeln Formeln, die von Variablen abhängen (können), in neue
+Formeln um, ohne dass sich ihr Wahrheitswert verändert. Die neue Formel ist also, unabhängig vom 
+Wert eventueller Variablen, äquivalent zur ursprünglichen Formel.
+}
+\lang{en}{
+Equivalence transformations are used to change an equation that (may) involve variables without changing 
+the equation's truth-values. The changed equation is therefore equivalent to the original one for all 
+values of the variables.
+}
+\\ 
+
+\begin{example}
+  \lang{de}{
+  Betrachten wir beispielsweise die Formeln 
+  }
+  \lang{en}{
+  Consider the equations
+  }
+  \begin{enumerate}
+      \item[ ] $\mathcal{A}: \;$   $3y - 3x = 9x,$
+      \item[ ] $\mathcal{B}: \;$   $3y = 12x \;$ \lang{de}{und}\lang{en}{and}
+      \item[ ] $\mathcal{C}: \;$   $y = 4x.$
+  \end{enumerate}
+
+  \lang{de}{
+  Wir stellen fest, dass die Variablenbelegung für $x$ und $y$, die die einzelnen Gleichungen erfüllen und
+  somit die jeweiligen Formeln $\mathcal{A}$, $\mathcal{B}$ oder $\mathcal{C}$ zu wahren Aussagen machen,
+  für alle drei Gleichungen identisch sind. Das bedeutet, dass die drei Formeln (unabhängig vom Wert der 
+  Variablen $x$ und $y$) gleichwertig sind. Also gilt nach Definition \ref{def:aequvalenz} $\,$
+  }
+  \lang{en}{
+  We notice that the exact same values for $x$ and $y$ satisfy all three equations, that is to say, 
+  the equations are true propositions for the exact same values of $x$ and $y$. Hence by definition 
+  \ref{def:aequvalenz},
+  }
+
+  \[\mathcal{A} \Leftrightarrow \mathcal{B} \Leftrightarrow \mathcal{C} \, ( \Leftrightarrow \mathcal{A} ).\]
+
+  \lang{de}{
+  Wir stellen weiterhin fest, dass sich jede der drei Gleichungen durch Anwendung mathematischer Operationen in eine
+  der anderen umformen lässt, zum Beispiel
+  }
+  \lang{en}{
+  We point out that each of the three equations can be transformed into any of the other three 
+  equations, for example
+  }
+
+  \begin{itemize}
+      \item  \lang{de}{entsteht $\mathcal{B}$ aus $\mathcal{A}$ durch Addition von $3x$ auf beiden Seiten der Gleichung und }
+             \lang{en}{$\mathcal{A}$ can be turned into $\mathcal{B}$ by adding $3x$ to both sides 
+             of the equality, and}
+      \item  \lang{de}{$\mathcal{C}$ entsteht aus $\mathcal{B}$ durch Division beider Seiten der Gleichung durch $3.$}
+             \lang{en}{$\mathcal{B}$ can be turned into $\mathcal{C}$ by dividing both sides of the 
+             equality by $3$.}
+  \end{itemize}
+
+  \lang{de}{
+  Da sich der Wahrheitswert der Formeln durch diese Umformungen nicht verändert, nennt man sie auch
+  \emph{Äquivalenzumformungen}. Die Gleichwertigkeit der Formeln wird dabei durch Äquivalenzzeichen 
+  gekennzeichnet. Zur besseren Nachvollziehbarkeit der Umformungen wird die jeweils angewandte 
+  mathematische Operation meist rechts der ursprünglichen Formel, getrennt durch einen senkrechten 
+  Strich, vermerkt:
+  }
+  \lang{en}{
+  As the truth-values of the equations for each $x$, $y$ do not change through these transformations, 
+  we call them \emph{equivalence transformations}. An equivalence symbol can be used to represent this. 
+  For clarity, often each transformation is explicitly written to the right of the equation that is 
+  being transformed, seperated by a vertical line:
+  }
+  
+  \begin{align*}
+  &&\;					3y-3x	&= 9x		&\quad		&\vert +3x&\\
+  &\Leftrightarrow&\; 	3y  	&=12x		&\quad		&\vert \div 3&\\
+  &\Leftrightarrow&\;\; 	y		&=4x		&\quad		&&
+  \end{align*}
+  
+\end{example}
+
+\lang{de}{
+Wie das vorstehende Beispiel zeigt, lassen sich mathematische \emph{Gleichungen} oder \emph{Ungleichungen} mit Variablen, betrachtet
+als logische Formeln, durch geeignete mathematische Operationen so umformen, dass die neue (umgeformte) Formel bei gleicher 
+Variablenbelegung denselben Wahrheitswert hat wie die ursprüngliche Formel. Das bedeutet, dass die Lösungsmenge einer
+mathematischen \emph{(Un-)Gleichung} nach solchen \textit{äquivalenten Umformungen} unverändert bleibt. Aufgrund dieser 
+Eigenschaft sind \textit{Äquivalenzumformungen} in der Mathematik die wichtigste Methode zum Vereinfachen und Lösen mathematischer 
+\emph{(Un-)Gleichungen} mit einer oder mehreren Variablen.
+}
+\lang{en}{
+As is shown by the above example, mathematical \emph{equalities} or \emph{inequalities} containing 
+variables can be transformed by certain mathematical operations to give new equations with the same 
+truth-values for each value of the variables. This means that the set of solutions of the 
+\emph{(in-)equality} is unchanged by these \textit{equivalence transformations}. Due to this, 
+\textit{equivalence transformations} are the most important method for simplifying and solving 
+mathematical \emph{(in-)equalities} containing one or more variables.
+}
+
+
+
+
+\lang{de}{
+Dabei ist allerdings zu beachten, dass nicht jede mathematische Operation zu einer äquivalenten Umformung einer Gleichung 
+oder Ungleichung führt. 
+Gültige Umformungen sind:
+}
+\lang{en}{
+It is important to note that not every mathematical operation leads to an equivalence transformation 
+when applied to an equation. Valid equivalence transformations are:
+}
+
+
+\begin{tabs*}\label{aequivalenzumformungen}
+\tab{\lang{de}{Äquivalenzumformungen für Gleichungen}\lang{en}{Equivalence transformations for equations}}
+\begin{itemize}
+\item \lang{de}{Vertauschen der Gleichungsseiten:\\ $a = b \Leftrightarrow b = a$;}
+      \lang{en}{Swapping sides of an equation $a = b \Leftrightarrow b=a$;}
+\item \lang{de}{das Gleiche zu beiden Seiten addieren oder von beiden Seiten subtrahieren:\\
+$a = b \Leftrightarrow a \pm c = b \pm c$;}
+      \lang{en}{adding or subtracting the same value to (from) both sides,\\
+$a = b \Leftrightarrow a \pm c = b \pm c$;}
+\item \lang{de}{beide Seiten mit einem Faktor $m \neq 0$ (darf nicht Null sein!) 
+multiplizieren:\\ 
+$a = b \Leftrightarrow m \cdot a = m \cdot b$;}
+      \lang{en}{multiplying both sides of an equation by a non-zero value $m \neq 0$, $a = b \Leftrightarrow m \cdot a = m \cdot b$;}
+\item \lang{de}{beide Seiten durch einen Divisor $m \neq 0$ (darf nicht Null sein!)
+dividieren:\\
+$a=b \Leftrightarrow \displaystyle\frac{a}{m} = \displaystyle\frac{b}{m}$.}
+      \lang{en}{dividing both sides by a non-zero value $m \neq 0$,\\
+$a=b \Leftrightarrow \displaystyle\frac{a}{m} = \displaystyle\frac{b}{m}$.}
+\end{itemize}
+\tab{\lang{de}{Äquivalenzumformungen für Ungleichungen}\lang{en}{Equivalence transformations for inequalities}}
+\lang{de}{
+Für Ungleichungen hat man die gleichen Äquivalenzumformungen wie für Gleichungen, man muss jedoch darauf
+achten, dass sich in einigen Fällen das Vergleichszeichen \glqq{}umdreht\grqq{}:
+}
+\lang{en}{
+For inequalities the same equivalence transformations hold as for equalities, but the direction of the 
+inequality sign can change when swapping sides and when multiplying or dividing by a negative value:
+}\\
+\begin{itemize}
+\item \lang{de}{Vertauschen der Seiten:\\ $a > b \Leftrightarrow b \textcolor{\#D2691E}{<} a$ bzw. $a < b \Leftrightarrow b \textcolor{\#D2691E}{>} a$;}
+      \lang{en}{Swapping sides  $a > b \Leftrightarrow b<a$, and $a < b \Leftrightarrow b>a$;}
+\item \lang{de}{das Gleiche zu beiden Seiten addieren oder von beiden das Gleiche subtrahieren:\\
+$a > b \Leftrightarrow a \pm c > b \pm c$ bzw. $a < b \Leftrightarrow a \pm c < b \pm c$;}
+\lang{en}{adding or subtracting the same value to (from) both sides,\\
+$a > b \Leftrightarrow a \pm c > b \pm c$, and $a < b \Leftrightarrow a \pm c < b \pm c$;}
+\item \lang{de}{beide Seiten mit einem positiven Faktor $m > 0$  multiplizieren:\\ 
+$a > b \Leftrightarrow m \cdot a > m \cdot b$ bzw. $a < b \Leftrightarrow m \cdot a < m \cdot b$;}
+\lang{en}{multiplying both sides of an equation by a positive value $m > 0$, 
+$a > b \Leftrightarrow m \cdot a > m \cdot b$, and $a < b \Leftrightarrow m \cdot a < m \cdot b$;}
+\item \lang{de}{beide Seiten mit einem negativen Faktor $m < 0$  multiplizieren:\\
+bzw. $a < b \Leftrightarrow m \cdot a \textcolor{\#D2691E}{>} m \cdot b$;}
+\lang{en}{multiplying both sides of an equation by a negative value $m < 0$, 
+$a > b \Leftrightarrow m \cdot a \textcolor{\#D2691E}{<} m \cdot b$, 
+and $a < b \Leftrightarrow m \cdot a \textcolor{\#D2691E}{>} m \cdot b$;}
+\item \lang{de}{beide Seiten durch einen positiven Divisor $m > 0$ dividieren:\\
+$a>b \Leftrightarrow \displaystyle\frac{a}{m} > \displaystyle\frac{b}{m}$ bzw. $a<b \Leftrightarrow \displaystyle\frac{a}{m} < \displaystyle\frac{b}{m}$;}
+\lang{en}{dividing both sides by a positive value $m > 0$,\\
+$a>b \Leftrightarrow \displaystyle\frac{a}{m} > \displaystyle\frac{b}{m}$, and $a<b \Leftrightarrow \displaystyle\frac{a}{m} < \displaystyle\frac{b}{m}$;}
+\item \lang{de}{beide Seiten durch einen negativen Divisor $m < 0$ dividieren:\\
+$a>b \Leftrightarrow \displaystyle\frac{a}{m} \textcolor{\#D2691E}{<} \displaystyle\frac{b}{m}$ bzw. 
+$a<b \Leftrightarrow \displaystyle\frac{a}{m} \textcolor{\#D2691E}{>} \displaystyle\frac{b}{m}$;}
+\lang{en}{dividing both sides by a negative value $m < 0$,\\
+$a>b \Leftrightarrow \displaystyle\frac{a}{m} \textcolor{\#D2691E}{<} \displaystyle\frac{b}{m}$, and 
+$a<b \Leftrightarrow \displaystyle\frac{a}{m} \textcolor{\#D2691E}{>} \displaystyle\frac{b}{m}$;}
+\end{itemize}
+\end{tabs*}
+
+
+\begin{block}[warning]\label{proposition.warning.1}
+\lang{de}{Potenzieren (insbesondere Quadrieren) und Wurzelziehen sind im Allgemeinen keine Äquivalenzumformungen!}
+\lang{en}{In general, taking a power, taking a root, and squaring an equation are not equivalence transformations!}
+\end{block}
+
+\lang{de}{Wir schauen uns weitere Beispiele für Äquivalenzumformungen an und verzichten ab sofort auf die Bezeichnungen 
+$\mathcal{A}$, $\mathcal{B}$, etc. für die  \emph{(Un-)Gleichungen} als logische Formeln.}
+
+
+\lang{en}{From now on we will omit the letters $\mathcal{A}$, $\mathcal{B}$, and
+$\mathcal{C}$ as identifiers for the statements.}
+
+\begin{example}\label{proposition.example.2}
+
+\lang{de}{1. Seiten vertauschen:}
+\lang{en}{1. Swapping sides}
+\begin{align*}
+&&\quad					3x+12	&\;=	4		&\\
+&\Leftrightarrow&\quad  	4		&\;=	3x+12	&
+\end{align*}
+\lang{de}{Bei Ungleichungen muss das Vergleichszeichen \glqq{}umgedreht\grqq{} werden:}
+\lang{en}{In inequalities, swapping sides also involves changing the direction of the inequality sign:}
+\begin{align*}
+&&\quad					3x+12	&\;\leq	4		&\\
+&\Leftrightarrow&\quad		4	&\;\geq	3x+12	&
+\end{align*}
+
+\lang{de}{2. Gleiche Zahl addieren oder subtrahieren:}
+\lang{en}{2. Adding (or subtracting) the same number to (from) both sides}
+\begin{align*}
+&&\quad					    	3x+12		&\;=4		&  		&\quad\vert  -3& \\
+&\Leftrightarrow&\quad		3x+12-3		&\;=4-3	&		&&\\
+&\Leftrightarrow&\quad		3x+9		&\;=1	&		&&
+\end{align*}
+
+\lang{de}{3. Mit gleicher Zahl $\neq0$ multiplizieren oder dadurch dividieren:}
+\begin{align*}
+&&\quad			    		3x +12			&\;=4				&			&\quad\vert  \lang{de}{:}\lang{en}{/}(-3)&\\
+&\Leftrightarrow&\quad	(3x)\lang{de}{:}\lang{en}{/}(-3) +12\lang{de}{:}\lang{en}{/}(-3)	&\;=4\lang{de}{:}\lang{en}{/}(-3)	&	&&\\
+&\Leftrightarrow&\quad	-x-4			&\;=-\frac{4}{3}	&			&\quad\vert  +4&\\
+&\Leftrightarrow&\quad	-x				&\;=-\frac{4}{3}+4  &			&&\\
+&\Leftrightarrow&\quad	-x				&\;=\frac{8}{3}	    &			&\quad\vert  \cdot(-1)&\\
+&\Leftrightarrow&\quad	 x				&\;=-\frac{8}{3}     &			&\quad\vert  \cdot 3 &\\
+&\Leftrightarrow&\quad	 3x				&\;=-8               &			&&
+\end{align*}
+\lang{de}{
+Bei Ungleichungen muss das Vergleichszeichen \glqq{}umgedreht\grqq{} werden, sofern mit einer negativen
+Zahl multipliziert oder durch eine negative Zahl dividiert wird:
+}
+\lang{en}{
+Inequality signs have to be reversed when both sides are being multiplied or divided by a negative 
+number:
+}
+\begin{align*}
+&&\quad			    		3x +12			&\;<4				&		&\quad\vert  \lang{de}{:}\lang{en}{/}(-3)&\\
+&\Leftrightarrow&\quad	(3x)\lang{de}{:}\lang{en}{/}(-3) +12\lang{de}{:}\lang{en}{/}(-3)	&\;>4\lang{de}{:}\lang{en}{/}(-3)	&	&&\\
+&\Leftrightarrow&\quad	-x-4				&\;>-\frac{4}{3}&			&\quad\vert  +4&\\
+&\Leftrightarrow&\quad	-x				&\;>-\frac{4}{3}+4  &			&&\\
+&\Leftrightarrow&\quad	-x				&\;>\frac{8}{3}	    &			&\quad\vert  \cdot (-1)&\\
+&\Leftrightarrow&\quad	 x				&\;<-\frac{8}{3}    &			&\quad\vert  \cdot 3 &\\
+&\Leftrightarrow&\quad	 3x				&\;<-8              &			&&
+\end{align*}
+
+\end{example}
+
+\lang{de}{
+Wie bereits erwähnt, werden Äquivalenzumformungen zur Lösung von Gleichungen und Ungleichungen verwendet. 
+Als \emph{"`Lösung"'} einer (Un-) Gleichungen bezeichnet man dabei (reelle) Zahlen,
+die eingesetzt für die Variablen in der (Un-) Gleichungen, diese zu einer wahren Aussage machen.
+Ziel der äquivalenten Umformungen ist es nun, diese Variablen in der (Un-) Gleichung so weit wie möglich 
+zu isolieren, um so die Lösung der (Un-) Gleichung leichter bestimmen zu können. Im Idealfall lässt sich die 
+Lösung nach dem letzten Umformungsschritt direkt ablesen. Gibt es mehrere verschiedene Lösungen, so bezeichnet
+man die Menge aller Lösungen als die \emph{"`Lösungsmenge"'} der (Un-)Gleichung und schreibt $\mathbb{L}.$
+}
+\lang{en}{
+As has been mentioned, equivalence transformations are used to find solutions to equations and 
+inequalities. We define the \emph{solution} of an \emph{(in-)equality} as the real numbers that, when 
+substituted into the variables of the \emph{(in-)equality}, make it \emph{true}. 
+The aim of equivalence transformations is that the solutions of an \emph{(in-)equality} are easier to 
+find. Ideally, a solution can be directly read after all of the transformations have taken place. If 
+there is more than one solution, we call the set of all solutions the \emph{solution set} of the 
+equation and denote it by $\mathbb{L}$.
+}
+
+\begin{example}\label{proposition.example.3}
+\begin{enumerate}[alph]
+\item \lang{de}{
+      Wir bestimmen die Lösung % die Lösungsmenge $\mathbb{L}$ 
+      der folgenden Gleichung:
+      }
+      \lang{en}{
+      We determine the solution of the following equation:
+      }
+\begin{align*}
+&&\quad					5(3x-5)+2x	&=7(3-2x)+16		&		&&\\
+&\Leftrightarrow&\quad 	15x-25+2x	&=21-14x+16			&		&&\\
+&\Leftrightarrow&\quad 	17x-25		&=37-14x			&		&\vert +14x&\\
+&\Leftrightarrow&\quad 	31x-25		&=37				& 		&\vert +25&\\
+&\Leftrightarrow&\quad 	31x			&=62				&		&\vert \lang{de}{:}\lang{en}{/}31&\\
+&\Leftrightarrow&\quad 	x			&=\frac{62}{31}		&		&&\\
+&\Leftrightarrow&\quad 	x			&=2 				&		&&
+\end{align*}
+
+\lang{de}{
+Die Ausgangsgleichung $\, 5(3x-5)+2x=7(3-2x)+16\,$ wurde äquivalent umgeformt zur 
+Gleichung $\, x=2\,$. Man sagt auch, sie wurde \emph{nach $x$ "`aufgelöst'"}.
+% Die Lösungsmenge 
+Die Lösung $\, x=2 \,$ lässt sich nun direkt ablesen und liefert die sogenannte 
+\emph{"`Lösungsmenge'"}, die wie folgt dargestellt wird
+}
+\lang{en}{
+The original equation $\, 5(3x-5)+2x=7(3-2x)+16\,$ is transformed into the equivalent equation 
+$\, x=2\,$. This is also called \emph{'rearranging for $x$'}.
+The solution $\, x=2 \,$ can simply be read from the transformed equation, giving the solution set
+}
+ \[\mathbb{L}=\{\,x\in\R\,|\,x = 2 \,\}=\{2\}.	\]
+ 
+ \item \lang{de}{Wir bestimmen die Lösungsmenge $\mathbb{L}$ der folgenden Ungleichung:}
+       \lang{en}{We determine the solution set $\mathbb{L}$ of the following inequality:}
+\begin{align*}
+&&\quad					5x-4	    &\geq 2x+2  		&		&\quad\vert -2x+4&\\
+&\Leftrightarrow&\quad 	3x      	&\geq 6 			&		&\quad\vert  \lang{de}{:}\lang{en}{/}(3)&\\
+&\Leftrightarrow&\quad 	x			&\geq 2 			&		&&
+\end{align*}
+
+\lang{de}{
+Die Ausgangsungleichung $\, 5x-4 \geq 2x+2 \,$ wurde äquivalent umgeformt zur Ungleichung $\, x \geq 2,$ sie
+wurde also ebenfalls \emph{nach $x$ "`aufgelöst'"}. Hieraus lässt sich ablesen, dass alle reellen Zahlen
+$x$, die größer oder gleich $2$ sind, die Ungleichung lösen. Die Lösung der Ungleichung wird daher 
+auch dargestellt als die \emph{"`Lösungsmenge'"}
+}
+\lang{en}{
+The original inequality $\, 5x-4 \geq 2x+2 \,$ is transformed into the equivalent inequality 
+$\, x \geq 2$, that is, it is \emph{rearranged for $x$}. From this we simply read that all real numbers 
+$x$ that are greater than or equal to $2$ solve the inequality. The \emph{solution set} of the 
+inequality is therefore
+}
+ \[\mathbb{L}=\{\,x\in\R\,|\,x \geq 2 \,\}=[2;\infty).	\]
+ 
+\end{enumerate}
+
+\end{example}
+
+% \lang{de}{Äquivalenzumformungen und Folgerungen lassen sich auch kombinieren. 
+% Durch die Schreibweise wie in Gleichung (5) lässt sich gut verfolgen, 
+% welche der Aussagen Folgerung anderer Aussagen sind, z.B.}
+% \lang{en}{Equivalence transformations and implications can also be combined. 
+% Using the same style as in Equation (5) we can easily follow which statements are a result
+% of implications from other statements, e.g.}
+% \begin{align}
+% &&					3y-3x	&=9x		&			&\vert +3x		&			&(8)\label{eq-II.1.08}&\\
+% &\Leftrightarrow&	3y 		&=12x		&			&\vert \lang{de}{:}\lang{en}{/}3		&			&(9)\label{eq-II.1.09}&\\
+% &\Leftrightarrow&	y		&=4x		&			&\vert(\cdot)^2	&		 	&(10)\label{eq-II.1.10}&\\
+% &\Rightarrow&		y^2 	&=16x^2		&			&\vert -5		& 			&(11)\label{eq-II.1.11}&\\
+% &\Leftrightarrow&	y^2-5 	&=16x^2-5.	& 			&				&			&(12)\label{eq-II.1.12}&
+% \end{align}
+% 
+% \lang{de}{Beachte, dass Gleichung (11) nur eine Folgerung ($\Rightarrow$) aus Gleichung (10), aber 
+% nicht gleichwertig ($\Leftrightarrow$) ist, denn in (10) müssen $x$ und $y$ dasselbe 
+% Vorzeichen haben, während dies in (11) keine Rolle spielt.}
+% \lang{en}{Note that Equation (11) is simply an implication ($\Rightarrow$) of Equation (10), but not 
+% an equivalent one ($\Leftrightarrow$), since in (10) $x$ and $y$ need to have the same sign, which doesn't play a role in (11) anymore.}
+
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{a}{2}{4}
+			\randint{b}{1}{5}
+			\randint{c}{-2}{2}
+			\randint{d}{2}{5}
+			\function[calculate]{m}{a+d}
+			\function[calculate]{n}{c+b}
+			\function[calculate]{loes}{(b+c)/(a+d)}	
+		\end{variables}
+		
+%			\text{Die Gleichung $\var{a}x-\var{b}=\var{c}-\var{d}x$ ist äquivalent zur Gleichung\\
+%			 $x= $\ansref.}
+    \text{\lang{de}{Lösen Sie die folgende Gleichung nach $x$ auf.}
+          \lang{en}{Rearrange the following equality for $x$.}\\
+    $\var{a}x-\var{b}=\var{c}-\var{d}x \quad\Leftrightarrow\quad x= $ \ansref.}
+		
+		\begin{answer}
+			\solution{loes}
+		\end{answer}
+		\explanation{\lang{de}{Mittels Äquivalenzumformungen erhält man}
+                 \lang{en}{Using equivalence transformations we get}
+		\begin{align*}
+		  & \var{a}x-\var{b} &=\var{c}-\var{d}x &\quad & \vert +\var{d}x \\
+		  \Leftrightarrow&\quad \var{a}x+\var{d}x-\var{b} &=\var{c} &\quad & \vert +\var{b} \\
+		  \Leftrightarrow&\quad  \var{m}x &= \var{n} &\quad & \vert : \var{m} \\
+		  \Leftrightarrow&\quad x&= \frac{\var{n}}{\var{m}} && %  =\var{loes} &&
+		\end{align*}
+		}
+	\end{quickcheck}
+
+
+\begin{quickcheck}
+  \type{input.number}
+  \field{rational}
+  \begin{variables}
+    \randint{num1}{2}{3}
+    \randint{b1}{4}{5}
+    \randint{c1}{6}{9}
+    \function[calculate]{f1}{(c1-b1)/num1}
+    \randint{b2}{2}{5}
+    \function[calculate]{b2m}{-b2}
+    \function[calculate]{b22}{b2*b2}
+
+  \end{variables}
+  \text{\lang{de}{Lösen Sie die folgenden Ungleichungen nach $x$ auf.} 
+        \lang{en}{Rearrange the following inequality for $x$.}\\
+  $\var{num1}\,x+\var{b1}<\var{c1}\quad\Leftrightarrow\quad x<$ \ansref , \\
+%  $\frac{x}{\var{b2m}} +\var{b2}\geq 0 \quad\Leftrightarrow\quad x \leq$ \ansref.}}
+  $\displaystyle\Big(-\frac{x}{\var{b2}}\Big) +\var{b2}\geq 0 \quad\Leftrightarrow\quad x \leq$ \ansref.}
+   \begin{answer}
+    \solution{f1}
+  \end{answer}
+  \begin{answer}
+    \solution{b22}
+  \end{answer}
+\end{quickcheck}
+%No explanation for this quickcheck? - Niccolo
+
+
+
+
+
+\end{visualizationwrapper}
+\end{content}

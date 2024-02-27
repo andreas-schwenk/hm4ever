@@ -1,0 +1,139 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A01: LGS (2x2)}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21358}{Ticket 21358}
+\end{block}
+\begin{block}[annotation]
+Copy of \href{http://team.mumie.net/issues/9579}{Ticket 9579}: content/rwth/HM1/T111_Matrizen,_lineare_Gleichungssysteme/training/prb_problem2.src.tex
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+\lang{de}{
+	\title{A01: LGS (2x2)}
+}
+\lang{en}{
+	\title{Problem 1}
+}
+
+
+
+\begin{problem}
+
+	\randomquestionpool{1}{2}
+		
+	\begin{question}
+		\lang{de}{\text{Geben Sie die Lösung des folgenden linearen Gleichungssystems an.\\
+        \begin{align*}
+        \var{a}x&+\var{b}y& \ = \ &\var{c}\\
+        x&\var{d1}y& \ = \ &\var{f}
+        \end{align*}
+        }}
+        \lang{en}{\text{Find the solution of the following linear system.\\
+        \begin{align*}
+        \var{a}x&+\var{b}y& \ = \ &\var{c}\\
+        x&\var{d1}y& \ = \ &\var{f}
+        \end{align*}
+        }}
+        \lang{de}{\explanation{Am einfachsten multiplizieren Sie die zweite Gleichung mit $\var{z}$ und addieren dann die beiden Gleichungen. In der resultierenden Gleichung kommt schließlich $x$ nicht mehr vor.}}
+        \lang{en}{\explanation{The simplest way is to multiply the second equation by $\var{z}$ and add both equations together. The resulting equation won't have the variable $x$ in it.}}
+        \type{input.number}
+       
+        \begin{variables}
+            \randint[Z]{a}{-10}{10}
+            \randint[Z]{b}{0}{10}
+            \randint[Z]{d1}{-10}{0}
+            \randadjustIf{a,b,d1}{a*d1-b=0 OR a*a=1 OR b*b=1 OR d1*d1=1 OR abs(b)=abs(d1)}
+            
+            \randint{s}{-5}{5}
+            \randint{t}{-5}{5}
+            
+            \function[calculate]{c}{a*s+b*t} 
+            \function[calculate]{f}{s+d1*t}
+            
+            \function[calculate]{z}{-a}
+        \end{variables}
+
+        \begin{answer}
+              \text{$x=$}
+              \solution{s}
+        \end{answer}
+        
+        \begin{answer}
+        	  \text{$y=$}
+              \solution{t} 
+        \end{answer}
+        
+    \end{question}
+
+	\begin{question}
+		\lang{de}{\text{Geben Sie die Lösung des folgenden linearen Gleichungssystems an.\\
+        \begin{align*}
+        \var{a}x&\var{b}y& \ = \ &\var{c}\\
+        \var{d}x&+\var{d1}y& \ = \ &\var{f}
+        \end{align*}
+        }}
+        \lang{en}{\text{Find the solution of the following linear system.\\
+        \begin{align*}
+        \var{a}x&\var{b}y& \ = \ &\var{c}\\
+        \var{d}x&+\var{d1}y& \ = \ &\var{f}
+        \end{align*}
+        }}
+        \lang{de}{\explanation{Am einfachsten multiplizieren Sie die erste Gleichung mit $\var{q}$ und addieren dann die beiden Gleichungen. In der resultierenden Gleichung kommt schließlich $y$ nicht mehr vor.}}
+        \lang{en}{\explanation{The simplest way is to multiply the first equation by $\var{q}$ and add both equations together. The resulting equation won't have the variable $y$ in it.}}
+        \type{input.number}
+       
+        \begin{variables}
+            \randint[Z]{a}{-10}{10}
+            \randint[Z]{b}{-5}{0}
+            \randint[Z]{d}{-10}{10}
+            \randint[Z]{q}{2}{3}
+            \randadjustIf{a,b,d,q}{-a*q*b-b*d=0 OR a*a=1 OR d*d=1 OR b*b=1 OR abs(a)=abs(d)}
+            
+            \function[calculate]{d1}{-q*b}
+            
+            \randint{s}{-5}{5}
+            \randint{t}{-5}{5}
+            
+            \function[calculate]{c}{a*s+b*t} 
+            \function[calculate]{f}{d*s+d1*t}
+        \end{variables}
+
+        \begin{answer}
+              \text{$x=$}
+              \solution{s}
+        \end{answer}
+        
+        \begin{answer}
+        	  \text{$y=$}
+              \solution{t} 
+        \end{answer}
+        
+    \end{question}
+    
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

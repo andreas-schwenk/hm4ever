@@ -1,0 +1,230 @@
+
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Matrix-Vektor-Multiplikation}
+    \lang{en}{Matrix-vector multiplication}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+   \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+   \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T111neu_Matrizen/g_art_content_43_matrizenmultiplikation.meta.xml}{content_43_matrizenmultiplikation}
+    \link{generic_article}{content/rwth/HM1/T108_Vektorrechnung/g_art_content_27_vektoren.meta.xml}{vektorrechnung}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21336}{Ticket 21336}
+\end{block}
+\begin{block}[annotation]
+Copy of \href{https://team.mumie.net/issues/21314}{Ticket 21314}: content/rwth/HM1/T111_Matrizen,_lineare_Gleichungssysteme/art_content_39b_matrizen.src.tex
+\end{block}
+
+\usepackage{mumie.ombplus}
+\ombchapter{11}
+\ombarticle{3}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Matrix-Vektor-Multiplikation}\lang{en}{Matrix-vector multiplication}}
+ 
+\begin{block}[annotation]
+  übungsinhalt
+  
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{\lang{de}{Matrix-Vektor-Multiplikation}
+         \lang{en}{Matrix-vector multiplication}}\label{sec:matrix-vektor-mult}
+
+\lang{de}{
+In diesem Abschnitt wird die Multiplikation einer Matrix mit einem Vektor behandelt.
+Dies wird im \link{content_43_matrizenmultiplikation}{nächsten} Abschnitt
+durch die Multiplikation zweier Matrizen verallgemeinert.
+}
+\lang{en}{
+In this section we introduce multiplication of a matrix with a vector. This is generalised in a 
+\link{content_43_matrizenmultiplikation}{following section} where multiplication between matrices 
+is introduced.
+}
+
+
+\begin{definition}
+\lang{de}{
+Eine $(m\times n)$-Matrix $A=(a_{ij})$ kann mit einem Spaltenvektor 
+$x=\left(  \begin{smallmatrix}    x_1 \\      x_2\\   \vdots\\ x_n  \end{smallmatrix} \right)$ 
+der L"ange $n$ wie folgt multipliziert werden. Das Ergebnis ist dann ein Spaltenvektor der L"ange $m$:
+}
+\lang{en}{
+A $(m\times n)$-matrix $A=(a_{ij})$ can be multiplied as follows with a column vector 
+$x=\left(  \begin{smallmatrix}    x_1 \\      x_2\\   \vdots\\ x_n  \end{smallmatrix} \right)$ 
+with $n$ entries. The result is a column vector with $m$ entries.
+}
+
+\[ A\cdot x=
+\begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{pmatrix} \cdot  \begin{pmatrix}
+                                     x_1 \\      x_2\\ \vdots\\  \vdots\\  x_n  \end{pmatrix} 
+                                     = \begin{pmatrix}
+                                     a_{11} x_1 + a_{12} x_2 + \cdots + a_{1n} x_n \\
+                                     a_{21} x_1 + a_{22} x_2 + \cdots + a_{2n} x_n \\
+                                     \vdots \\
+                                     a_{m1} x_1 + a_{m2} x_2 + \cdots + a_{mn} x_n
+                                     \end{pmatrix}
+\]
+\lang{de}{
+Wie bei Multiplikationen üblich wird der Mal-Punkt oft weggelassen und $Ax$ statt $A\cdot x$ geschrieben.\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11010&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}
+\floatright{\href{https://www.hm-kompakt.de/video?watch=801}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{
+As is often done with multiplication, we conventionally omit the multiplication symbol and write 
+$Ax$ instead of $A\cdot x$.
+}
+\end{definition}
+
+\begin{block}[warning]
+\lang{de}{
+Das Produkt einer Matrix mit einem Spaltenvektor ist nur definiert, wenn die Länge des Spaltenvektors 
+mit der Anzahl der Spalten der Matrix übereinstimmt!
+}
+\lang{en}{
+The product of a matrix with a column vector is only defined if the column vector has as many entries 
+as the matrix has columns.
+}
+\end{block}
+
+
+\begin{example}
+\lang{de}{Wir betrachten}
+\lang{en}{Consider}
+\[ A= \begin{pmatrix} 2 & -3 & 1 \\ 0 & \frac{4}{3} & 5 \end{pmatrix} \quad 
+\text{\lang{de}{und}\lang{en}{and}} 
+\quad x=\begin{pmatrix} 1 \\ 3 \\ -2\end{pmatrix}.\]
+\lang{de}{
+$A$ ist eine $(2\times 3)$-Matrix und $x$ ist ein Spaltenvektor der Länge $3$. Seine Länge stimmt 
+also mit der Spaltenzahl von $A$ überein, weshalb man das Produkt der Matrix $A$ mit dem 
+Spaltenvektor $x$ bilden kann. Das Ergebnis ist der Spaltenvektor
+}
+\lang{en}{
+$A$ is a $(2\times 3)$-matrix and $x$ is a column vector with $3$ entries. As the matrix has $3$ 
+columns, the product of $A$ and $x$ is defined, giving
+}
+\[ A\cdot x= \begin{pmatrix} 2 & -3 & 1 \\ 0 & \frac{4}{3} & 5 \end{pmatrix} \cdot \begin{pmatrix} 1 \\ 3 \\ -2\end{pmatrix}
+=\begin{pmatrix} 2\cdot 1+(-3)\cdot 3+1\cdot (-2) \\ 0\cdot 1+\frac{4}{3}\cdot 3 +5\cdot (-2)\end{pmatrix} =\begin{pmatrix} -9\\ -6\end{pmatrix}.
+\]
+\end{example}
+\begin{quickcheck}
+
+      \precision{3}
+      \field{real}
+      \begin{variables}
+           \randint[Z]{a}{2}{4}
+           \randint[Z]{b}{2}{5}
+           \randint[Z]{m}{2}{4}
+           \randint[Z]{n}{5}{6}
+           \randint[Z]{k}{7}{8}
+           \randint[Z]{l}{2}{4}
+           \randint[Z]{o}{5}{6}
+           \randint[Z]{p}{7}{8}
+           \randint[Z]{l1}{3}{3}
+           \function[expand]{l2}{o*a+l*b}
+           var
+       \end{variables}
+      \text{\lang{de}{
+      Für 
+      $A=\begin{pmatrix} \var{n} & \var{m} \\ \var{o} &\var{l}\\ \var{k} & \var{p} \end{pmatrix}$ und 
+      $x=\begin{pmatrix} \var{a} \\ \var{b} \end{pmatrix}$ hat der resultierende Vektor $Ax$ genau 
+      \ansref Einträge. Der zweite Eintrag dieses Vektors lautet \ansref.
+      }
+      \lang{en}{
+      Let 
+      $A=\begin{pmatrix} \var{n} & \var{m} \\ \var{o} &\var{l}\\ \var{k} & \var{p} \end{pmatrix}$ and 
+      $x=\begin{pmatrix} \var{a} \\ \var{b} \end{pmatrix}$. The vector $Ax$ has exactly \ansref 
+      entries. The second entry of this vector is \ansref.
+      }}
+%      \explanation{}
+      \begin{answer}
+          \type{input.number}
+            \solution{l1}
+      \end{answer}
+      \begin{answer}
+       \type{input.function}
+            \solution{l2}
+      \end{answer}
+\end{quickcheck}
+
+
+\section{\lang{de}{Rechenregeln}
+         \lang{en}{Rules for matrix-vector multiplication}}\label{sec:rechenregeln}
+
+\lang{de}{
+Die Matrix-Vektor-Multiplikation erfüllt die Rechenregeln, die man von Multiplikationen erwartet.
+}
+\lang{en}{
+Matrix-vector multiplication satisfies the expected rules for a multiplication operation.
+}
+
+\begin{rule}
+\lang{de}{
+Mit der üblichen \ref[vektorrechnung][Addition und Skalarmultiplikation]{sec:rechnen} von 
+Spaltenvektoren gelten für alle $(m\times n)$-Matrizen $A$, Spaltenvektoren $x$ und $y$ der Länge 
+$n$ und reelle Zahlen $r\in \R$:
+}
+\lang{en}{
+With the standard \ref[vektorrechnung][addition and scalar multiplication]{sec:rechnen} of 
+column vectors, for all $(m\times n)$-matrices $A$, column vectors $x$ and $y$ with $n$ entries and 
+real numbers $r\in \R$:
+}
+\begin{enumerate}
+\item $\quad A\cdot (x+y)=Ax+Ay$,
+\item $\quad A\cdot (rx)=r(Ax)$.
+\end{enumerate}
+\lang{de}{
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11011&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}
+\floatright{\href{https://www.hm-kompakt.de/video?watch=804}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{}
+\end{rule}
+
+\begin{example}
+\lang{de}{Wir betrachten}
+\lang{en}{Consider}
+\[ A= \begin{pmatrix} 2 & -3 & 1 \\ 0 & \frac{4}{3} & 5 \end{pmatrix}, \quad x=\begin{pmatrix} 1 \\ 3 \\ -2\end{pmatrix}\quad
+ \text{\lang{de}{und}\lang{en}{and}} \quad y=\begin{pmatrix} 2 \\ -3 \\ 1\end{pmatrix}.\]
+ \lang{de}{Dann sind}
+ \lang{en}{Then}
+ \begin{eqnarray*} A(x+y) &=& \begin{pmatrix} 2 & -3 & 1 \\ 0 & \frac{4}{3} & 5 \end{pmatrix}\cdot \begin{pmatrix} 1+2 \\ 3-3 \\ -2+1\end{pmatrix}\\
+ &=& \begin{pmatrix} 2\cdot 3+(-3)\cdot 0+1\cdot (-1) \\ 0\cdot 3+\frac{4}{3} \cdot 0+5\cdot (-1) \end{pmatrix} =\begin{pmatrix} 5\\ -5 \end{pmatrix}
+ \end{eqnarray*}
+ \lang{de}{und}
+ \lang{en}{and}
+  \begin{eqnarray*} Ax+Ay &=& \begin{pmatrix} 2\cdot 1 + (-3)\cdot 3 + 1\cdot (-2) \\ 0\cdot 1 + \frac{4}{3} \cdot 3 + 5\cdot (-2) \end{pmatrix}
+   +\begin{pmatrix} 2\cdot 2 + (-3)\cdot (-3) + 1\cdot 1 \\ 0\cdot 2 + \frac{4}{3}\cdot (-3)+ 5\cdot 1 \end{pmatrix} \\
+ &=& \begin{pmatrix} -9\\ -6 \end{pmatrix}+ \begin{pmatrix} 14 \\ 1\end{pmatrix} = \begin{pmatrix} 5\\ -5 \end{pmatrix}.
+ \end{eqnarray*}
+ \end{example}
+\end{visualizationwrapper}
+\end{content}
+

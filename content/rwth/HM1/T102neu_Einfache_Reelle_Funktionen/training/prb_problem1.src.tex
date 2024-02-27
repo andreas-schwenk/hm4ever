@@ -1,0 +1,242 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+ \name{
+  \lang{de}{A01: Definitionsbereich}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22070}{Ticket 22070}
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+\begin{block}[annotation]
+	Bestimmung des Definitionsbereich einer reellen Funktion
+\end{block}
+
+\lang{de}{
+	\title{A01: Definitionsbereich}
+}
+
+
+\begin{problem}
+\randomquestionpool{1}{4}
+\randomquestionpool{5}{5}
+
+%Frage 1 von 4: a=0 (Nenner linear), a=1 (Nenner quadrat. Term), n1=1 (es gibt genau 1 Nullstelle des Nenners)
+\begin{question}
+%
+		\text{Bestimmen Sie den maximalen Definitionsbereich der Funktion 
+	     $\,f(x)=\var{f}$ \\
+         (Geben Sie alle Zahlen als Brüche oder ganze Zahlen an und kürzen 
+         Sie soweit wie möglich. Ist der Definitionsbereich nicht eingeschränkt,
+         geben Sie als Lösung $D_f=\R \setminus \{\} \,$ an.)}
+%         
+	    \explanation{Die Nullstellen des Nenners sind auszuschließen.}
+%
+
+    \type{input.finite-number-set}
+    \field{rational}
+      
+    \begin{variables}
+    
+        \randint{zero}{0}{0}
+    	\randint{a}{0}{1}    
+    	\randint[Z]{b}{-5}{5}
+	    \randrat{c}{0}{5}{1}{10}
+ 	    \randint{n1}{1}{1}        
+	    \randint[Z]{d}{-4}{4}
+        \function[normalize]{p}{b/n1}
+        \function[normalize]{q}{(1-a)*c+a*(b/2)^2}
+ 		\function[normalize]{f}{d/(a*x^2-p*x+q)}   
+		  	  
+		\function{f1}{(1-a)*q/p+a*b/2}
+	\end{variables}
+%
+%    \debug[a,b,n1]
+%
+     \begin{answer}
+        \type{input.finite-number-set}
+        \text{$D_f=\R \setminus $}
+        \solution{f1}
+    \end{answer}
+
+\end{question}
+
+%Frage 2 von 4: a=0 (Nenner linear), n1 >= 1 (es gibt genau 1 Nullstelle des Nenners)
+\begin{question}
+%
+		\text{Bestimmen Sie den maximalen Definitionsbereich der Funktion 
+	     $\,f(x)=\var{f}$ \\
+         (Geben Sie alle Zahlen als Brüche oder ganze Zahlen an und kürzen 
+         Sie soweit wie möglich. Ist der Definitionsbereich nicht eingeschränkt,
+         geben Sie als Lösung $D_f=\R \setminus \{\} \,$ an.)}
+%         
+	    \explanation{Die Nullstellen des Nenners sind auszuschließen.}
+%
+
+    \type{input.finite-number-set}
+    \field{rational}
+      
+    \begin{variables}
+    
+        \randint{zero}{0}{0}
+    	\randint{a}{0}{0}    
+    	\randint[Z]{b}{-5}{5}
+	    \randrat{c}{0}{5}{1}{10}
+ 	    \randint{n1}{1}{10}        
+	    \randint[Z]{d}{-4}{4}
+        \function[normalize]{p}{b/n1}
+        \function[normalize]{q}{(1-a)*c+a*(b/2)^2}
+ 		\function[normalize]{f}{d/(a*x^2-p*x+q)}   
+		  	  
+		\function{f1}{(1-a)*q/p+a*b/2}
+	\end{variables}
+%
+%    \debug[a,b,n1]
+%
+     \begin{answer}
+        \type{input.finite-number-set}
+        \text{$D_f=\R \setminus $}
+        \solution{f1}
+    \end{answer}
+
+\end{question}
+
+%Frage 3 von 4:  a=1 (Nenner quadrat. Term), n1>1 (es gibt keine Nullstelle des Nenners, D_f = \R)
+\begin{question}
+%
+		\text{Bestimmen Sie den maximalen Definitionsbereich der Funktion 
+	     $\,f(x)=\var{f}$ \\
+         (Geben Sie alle Zahlen als Brüche oder ganze Zahlen an und kürzen 
+         Sie soweit wie möglich. Ist der Definitionsbereich nicht eingeschränkt,
+         geben Sie als Lösung $D_f=\R \setminus \{\} \,$ an.)}
+%         
+	    \explanation{Die Nullstellen des Nenners sind auszuschließen.}
+%
+
+    \type{input.finite-number-set}
+    \field{rational}
+      
+    \begin{variables}
+    
+        \randint{zero}{0}{0}
+    	\randint{a}{1}{1}    
+    	\randint[Z]{b}{-5}{5}
+	    \randrat{c}{0}{5}{1}{10}
+ 	    \randint{n1}{2}{10}        
+	    \randint[Z]{d}{-4}{4}
+        \function[normalize]{p}{b/n1}
+        \function[normalize]{q}{(1-a)*c+a*(b/2)^2}
+ 		\function[normalize]{f}{d/(a*x^2-p*x+q)}   
+		  	  
+%		\function{f1}{(1-a)*q/p+a*b/2}    % Nenner quadratischer Term ohne Nullstelle
+	\end{variables}
+%
+%    \debug[a,b,n1]
+%
+     \begin{answer}
+        \type{input.finite-number-set}
+        \text{$D_f=\R \setminus $}
+        \solution{}
+    \end{answer}
+
+\end{question}
+
+%Frage 4 von 4:  a=1, n1=1 ABER q=-3(p/2)^2 statt q=(p/2)^2 (=> Diskrimitnante des quadr.
+%                               Nennerterms>0, es gibt also 2 Nullstellen des Nenners)
+\begin{question}
+%
+		\text{Bestimmen Sie den maximalen Definitionsbereich der Funktion 
+	     $\,f(x)=\var{f}$ \\
+         (Geben Sie alle Zahlen als Brüche oder ganze Zahlen an und kürzen 
+         Sie soweit wie möglich. Ist der Definitionsbereich nicht eingeschränkt,
+         geben Sie als Lösung $D_f=\R \setminus \{\} \,$ an.)}
+%         
+	    \explanation{Die Nullstellen des Nenners sind auszuschließen.}
+%
+
+    \type{input.finite-number-set}
+    \field{rational}
+      
+    \begin{variables}
+    
+        \randint{zero}{0}{0}
+    	\randint{a}{1}{1}    
+    	\randint[Z]{b}{-5}{5}
+	    \randrat{c}{0}{5}{1}{10}
+ 	    \randint{n1}{1}{1}        
+	    \randint[Z]{d}{-4}{4}
+        \function[normalize]{p}{b/n1}                   % p=b (da n1=1)
+        \function[normalize]{q}{(1-a)*c-a*3*(b/2)^2}    % q=-3(p/2)^2
+ 		\function[normalize]{f}{d/(a*x^2-p*x+q)}       
+		  	  
+		\function{f1}{(1-a)*q/p+a*(-b/2)}               % Nenner-Nst_1=(p/2)-(2p/2)=-p/2
+        \function{f2}{(1-a)*q/p+a*(3*b/2)}              % Nenner-Nst_2=(p/2)+(2p/2)=3p/2
+	\end{variables}
+%
+%    \debug[a,b,n1]
+%
+     \begin{answer}
+        \type{input.finite-number-set}
+        \text{$D_f=\R \setminus $}
+        \solution{f1,f2}
+    \end{answer}
+
+\end{question}
+
+
+%Frage 5
+\begin{question}
+%
+		\text{Bestimmen Sie den maximalen Definitionsbereich der Funktion 
+	    $f(x)=\sqrt{\var{f}}$ \\
+        (Geben Sie alle Zahlen als Brüche oder ganze Zahlen an und kürzen
+        Sie soweit wie möglich.)}
+%        
+	    \explanation{Der Term unter der Wurzel darf nicht negativ sein.}
+%
+
+    \type{input.interval}
+    \field{rational}
+      
+    \begin{variables}
+    	\randint{a}{-7}{-3}
+	    \randint{b}{-5}{-1}
+	    \randint{d}{3}{7}
+	    \randint{c}{-5}{-1}
+		\function[expand, normalize]{f}{(a*x-b)*(c*x-d)}
+		  
+		\function[calculate]{f1}{d/c}
+		\function[calculate]{f2}{b/a}
+	\end{variables}
+   
+    \begin{answer}
+	    
+		    \text{$D_f=\R \setminus$}
+	    
+     \solution{(f1;f2)}
+    \end{answer} 
+\end{question}
+
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

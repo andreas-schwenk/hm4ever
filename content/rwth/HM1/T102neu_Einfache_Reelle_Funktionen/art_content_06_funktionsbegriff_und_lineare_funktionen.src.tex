@@ -1,0 +1,1123 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Lineare reelle Funktionen}
+%   \lang{de}{Reelle Funktionen allgemein und Lineare Funktionen}
+    \lang{en}{Linear real functions}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T102_Graph_B.meta.xml}{T102_Graph_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T102_Graph_A.meta.xml}{T102_Graph_A}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T102_FunctionGraph.meta.xml}{T102_FunctionGraph}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_blau.meta.xml}{00_Videobutton_blau}
+    %\component{generic_image}{content/rwth/HM1/images/g_img_T102_funktionsgraph_geraden.meta.xml}{funktionsgraph_geraden}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_05_loesen_gleichungen_und_lgs.meta.xml}{content_05_loesen_gleichungen_und_lgs}
+    \link{generic_article}{content/rwth/HM1/T102neu_Einfache_Reelle_Funktionen/g_art_content_06_funktionsbegriff_und_lineare_funktionen.meta.xml}{content_06_funktionsbegriff_und_lineare_funktionen}
+    \link{generic_article}{content/rwth/HM1/T102neu_Einfache_Reelle_Funktionen/g_art_content_07_geradenformen.meta.xml}{content_07_geradenformen}
+    \link{generic_article}{content/rwth/HM1/T102neu_Einfache_Reelle_Funktionen/g_art_content_08_quadratische_funktionen.meta.xml}{content_08_quadratische_funktionen}
+    \link{generic_article}{content/rwth/HM1/T103_Polynomfunktionen/g_art_content_09_polynome.meta.xml}{content_09_polynome}
+    \link{generic_article}{content/rwth/HM1/T403a_Vektorraum/g_art_content_10b_lineare_abb.meta.xml}{content_10b_lineare_abb}
+    \link{generic_article}{content/rwth/HM1/T204_Abbildungen_und_Funktionen/g_art_content_10_abbildungen_verkettung.meta.xml}{content_10_abbildungen_verkettung}
+\end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+%
+% ursprüngliche Version:
+%
+%   \href{http://team.mumie.net/issues/8972}{Ticket 8972}: 
+%           content/rwth/HM1/T102_Einfache_Funktionen,_grundlegende_Begriffe/art_content_04_lineare_funktionen.src.tex
+%
+% \begin{block}[annotation]
+%    Im Ticket-System: \href{http://team.mumie.net/issues/8973}{Ticket 8972}\\
+% \end{block}
+% 
+% Ticket neu: 
+%
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21161}{Ticket 21161}
+\end{block}
+
+\usepackage{mumie.ombplus}
+\ombchapter{2}
+\ombarticle{1}
+
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Reelle Funktionen allgemein und lineare Funktionen}
+       \lang{en}{Real functions and linear real functions}}
+
+ 
+\begin{block}[annotation]
+ reelle Funktion, Definitionsbereich und Wertemenge, Lineare Funktionen, Steigung, Nullstelle
+\end{block}
+
+
+% \begin{block}[important]
+%    Dieses Kapitel wird derzeit überarbeitet und ist somit nur eine Arbeitsversion -
+%    ohne Anspruch auf Vollständigkeit, Konsistenz und Fehlerfreiheit.
+% \end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+\section{\lang{de}{Funktionsbegriff reeller Funktionen}
+         \lang{en}{Definition of a real function}}\label{sec:funktion} 
+
+\lang{de}{
+Bevor wir uns mit den einfachen reellen Funktionen und ihren Eigenschaften befassen, definieren wir zunächst, 
+was wir generell unter einer Funktion verstehen und welche Begriffe wir im Zusammenhang
+mit Funktionen verwenden werden. Dabei befassen wir uns hier im Grundlagen-Teil vorerst ausschließlich
+mit Funktionen über den \emph{reellen Zahlen}. Im Analysis-Teil dieses Kurses werden Funktionen allgemeiner als 
+\ref[content_10_abbildungen_verkettung][Abbildungen]{sec:abbildungen} zwischen beliebigen Mengen betrachtet.
+}
+\lang{en}{
+Before we look at specific real functions and their properties, we explain what is meant by 
+\emph{function}, and provide terminology that is used in reference to functions. For this, we begin by 
+considering only functions over the \emph{real numbers}. In the analysis part of this course, functions are more generally considered as 
+\ref[content_10_abbildungen_verkettung][operators]{sec:abbildungen} between two arbitrary given sets.
+}
+
+
+\begin{definition}[\lang{de}{Reelle Funktion}\lang{en}{Real function}] \label{def:reelle_funktion}
+     \lang{de}{
+	   Eine \emph{reelle Funktion} $\,f\,$ ist eine Vorschrift, die jeder 
+     Zahl $x$ aus einer vorgegebenen, nichtleeren Teilmenge $D$ der reellen Zahlen 
+     eindeutig eine reelle Zahl $\,y=:f(x)\,$ zuordnet. Man sagt auch \emph{"`$x\,$ wird 
+     durch $\,f\,$ abgebildet auf $\,f(x)$"'}$\,$ und man schreibt formal
+     \[f:D\to \R, \; x\mapsto f(x).\]
+  	 \\
+     Dabei nennt man $\,x\,$ die \notion{\emph{Variable}} oder das 
+     \notion{\emph{Argument}} der Funktion $\,f\,$
+     und $\,y\,$ bzw. $\, f(x) \,$ den eindeutig zugeordneten \notion{\emph{Funktionswert}} oder auch
+     das \notion{\emph{Bild}} von $\,x\,$ unter $\,f$.
+     }
+  	 \lang{en}{
+     A \emph{real function} $\,f\,$ is a rule which sends \emph{('maps')} each number $x$ in a nonempty 
+     subset of the real numbers to a unique real number $\,y=:f(x)\,$. We also say that '$x\,$ is mapped 
+     to $\,f(x)$ by $\,f\,$', and formally write 
+     \[f:D\to \R, \; x\mapsto f(x).\]
+  	 \\
+     Here $\,x\,$ is called the \notion{\emph{independent variable}} or \notion{\emph{argument}} of the 
+     function $\,f\,$ and $\,y\,$ or $\,f(x)\,$ is called the \notion{\emph{dependent variable}}, 
+     \notion{\emph{value}} or \notion{\emph{image}} of $\,x\,$ under $\,f$.
+     }
+\end{definition}
+
+
+\begin{definition}[\lang{de}{Definitionsbereich, Zielbereich, Bildmenge, Wertemenge}
+                   \lang{en}{Domain, codomain, image and range}]\label{dd}
+    \lang{de}{
+    Für eine reelle Funktion $\, f:D \to Z \,$ ist 
+    $\, D \, $ (auch $D_f$) der \notion{\emph{Definitionsbereich}} 
+    und $\, Z$\,  der \notion{\emph{Zielbereich}} von $f$.
+    \\              
+    Die Menge aller Funktionswerte (Bilder) von Elementen aus $D$ unter $f$ 
+    \[ 
+    W_f := \{f(x) \mid x\in D\} \subseteq Z 
+		\]
+    ist eine Teilmenge des Zielbereichs von $f$ und wird bezeichnet als die \notion{\emph{Bildmenge}}
+    oder auch die \notion{\emph{Wertemenge}} von $f$.
+    }
+    \lang{en}{
+    For a real function $\, f:D \to Z \,$, we call $\, D \, $ (or $D_f$) the \notion{\emph{domain}} of $f$ 
+    and $\, Z$\, the \notion{\emph{codomain}} of $f$.
+    \\
+    The set of all function values of elements in $D$ under $f$ 
+    \[ 
+    W_f := \{f(x) \mid x\in D\} \subseteq Z 
+		\]
+    is a subset of the codomain of $f$ and is called the \notion{\emph{image}} of $f$. Sometimes it is 
+    also called the \notion{\emph{range}} of $f$, but this term can also refer to the codomain.
+    }
+\end{definition} 	
+
+\lang{de}{
+Die \emph{Bildmenge von $f$} bezeichnet man auch als das \emph{Bild von $D$ 
+unter $f$} und schreibt kurz $f(D)$.
+}
+\lang{en}{
+The \emph{image of $f$} is also called the \emph{image of $D$ under $f$}, and can be written as $f(D)$.
+}
+
+\begin{example}\label{example:bereiche}
+\begin{enumerate}
+
+\item \lang{de}{
+Die Funktion $f:\R\to \R,\, x\mapsto x^2$ hat als Definitionsbereich die Menge $\,D_f=\R$. 
+Das \emph{Bild von $\,\R$ unter $\,f$} besteht jedoch nur aus den nicht-negativen reellen Zahlen, 
+denn für jede relle Zahl $\, x\,$ ist $\, x^2 \geq 0$. Deshalb gilt für die Wertemenge $W_f=[0,\infty)$.
+}
+\lang{en}{
+The function $f:\R\to \R,\, x\mapsto x^2$ has domain $\,D_f=\R$. The \emph{image of $\,\R$ under $\,f$} 
+consists of only the non-negative real numbers, as for every real number $\, x\,$, we have 
+$\, x^2 \geq 0$. Hence the image of $f$ is $W_f=[0,\infty)$.
+}
+
+\item \lang{de}{
+Die Funktion $g:\R\setminus \{1\}\to \R,\, x\mapsto \frac{1}{1-x}$ hat als Definitionsbereich die
+Menge $\,D_g=\R\setminus \{1\}$, da die Division durch $0$ nicht erlaubt ist. Das \emph{Bild
+von $\,D_g\,$ unter $\,g\,$} liefert dann alle reellen Zahlen außer $\,0$. Die Wertemenge 
+ist folglich $\, W_g=\R\setminus \{0\}$.
+}
+\lang{en}{
+The function $g:\R\setminus \{1\}\to \R,\, x\mapsto \frac{1}{1-x}$ has domain $\,D_g=\R\setminus \{1\}$, 
+as division by $0$ is not possible, hence the exclusion of $1$ from the domain to avoid this. The 
+\emph{image of $\,D_g\,$ under $\,g\,$} is therefore all real numbers besides $\,0$. That is, the image of 
+$f$ is $\, W_g=\R\setminus \{0\}$.
+}
+
+% weil jede Zahl $y\ne 0$ der Funktionswert einer Zahl $x$ aus der Menge $\R\setminus \{1\}$ ist, nämlich von der Zahl $x=1-\frac{1}{y}$.
+
+\end{enumerate}
+\end{example}
+
+% \begin{block}[warning]\label{max-defbereich}
+\begin{remark}     \label{max-defbereich}
+\begin{itemize}  
+ \item  \lang{de}{
+        Wie in \ref{dd} definiert, entspricht die \emph{Wertemenge} einer Funktion $\,f\,$
+        dem \emph{Bild des Definitionsbereichs unter $f$}. Das bedeutet in der Umkehrung
+        aber auch, dass es zu jedem Element $\,y\,$ der \emph{Wertemenge} eine Zahl $\,x\,$ 
+        im Definitionsbereich gibt mit $\,f(x)=y.$ Ist dies nicht sichergestellt, so spricht man
+        allgemeiner von dem \emph{Zielbereich} einer Funktion $f$, der eine Obermenge
+        der \emph{Werte-} bzw. \emph{Bildmenge} ist.
+        \\
+        Im 2. Beispiel von \ref{example:bereiche} lässt sich nachweisen, dass 
+        $\, W_g =\R\setminus \{0\} \,$ die \emph{Werte-} bzw. \emph{Bildmenge} von $\,g\,$ ist. 
+        Jede Zahl $\,y\in \R\setminus \{0\}\,$ ist nämlich Funktionswert einer Zahl $\,x\,$ aus 
+        dem Definitionsbereich $D_g=\R\setminus \{1\}$, und zwar $\,x=1-\frac{1}{y}$.
+        }
+        \lang{en}{
+        As defined in \ref{dd}, the \emph{image} of a function $\,f\,$ can also be defined as the image 
+        of the domain under $\,f\,$, which is the subset of the codomain containing the image of every 
+        element of the domain under $\,f\,$. This means that for every element $\,y\,$ in the image of 
+        $\,f\,$ there exists a number $\,x\,$ such that $\,f(x)=y$. This is not guaranteed in the 
+        \emph{codomain} of $\,f\,$, as $\,f\,$ does not need to map to every element of the codomain. 
+        This is why the image of $\,f\,$ is a subset of the codomain rather than equal to it.
+        \\
+        In the second example of \ref{example:bereiche}, it is easy to check that 
+        $\, W_g =\R\setminus \{0\} \,$ is the \emph{image} of $\,g\,$. For each number 
+        $\,y\in \R\setminus \{0\}\,$, we can find a number $\,x=1-\frac{1}{y}$ in the domain 
+        $D_g=\R\setminus \{1\}$, which clearly maps to $\,y\,$ under $\,g\,$.
+        }
+ 
+ \item  \lang{de}{
+      Beim Rechnen mit reellen Funktionen wird oft nur die Funktionsvorschrift angegeben, 
+      z.\,B. $f(x)=x^2$ oder $g(x)=\frac{1}{1-x}$, ohne den Definitionsbereich explizit zu nennen. 
+      Man impliziert damit dann, dass der Definitionsbereich der sogenannte \notion{\emph{maximale 
+      Definitionsbereich}} ist, d.\,h. die Teilmenge \emph{aller} reellen Zahlen, die als Wert f"ur 
+      die Variable $\,x\,$ in die Funktionsvorschrift $\,f(x)\,$ bzw. $\,g(x)\,$ eingesetzt werden
+      d"urfen.
+      \\
+      In den Beispielen \ref{example:bereiche} wäre der maximale Definitionsbereich von $\,f\,$ somit 
+      $\,D_f=\R\,$ und der von $\,g\,$ wäre $\,D_g=\R\setminus \{1\}$.
+      }
+      \lang{en}{
+      When real functions are used in mathematics, often only part of their definition is given, for 
+      example $f(x)=x^2$ or $g(x)=\frac{1}{1-x}$, without explicitly mentioning the domain or codomain. 
+      The underlying assumption is that the domain is the so-called \notion{\emph{maximal domain}}, which 
+      is the subset of \emph{all} real numbers which can be substituted into $x$ in the given function 
+      $\,f(x)\,$ or $\,g(x)\,$ without breaking any rules (division by zero, etc.).
+      \\
+      In example \ref{example:bereiche}, the maximal domain of $\,f\,$ is therefore 
+      $\,D_f=\R\,$ and the maximal domain of $\,g\,$ is $\,D_g=\R\setminus \{1\}$.
+      }
+
+\end{itemize}
+\end{remark}
+% \end{block}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{d}{-5}{5}
+			\randint{c}{-4}{4}
+			\randint[Z]{b}{1}{4}
+			\function[calculate]{a}{b*sign(d)*sign(c)}
+			\function[calculate]{y}{d}
+		    \function[normalize]{f}{a*x+d}
+		    \function{g}{c-x}		    
+		\end{variables}
+		
+			\text{\lang{de}{
+      Welche reelle Zahl liegt nicht im maximalen Definitionsbereich der Funktion
+			$f(x)=\frac{\var{f}}{\var{g}}$?\\ Die Zahl \ansref.
+      }
+      \lang{en}{
+      Which real number lies in the maximal domain of the function 
+      $f(x)=\frac{\var{f}}{\var{g}}$?\\ The number \ansref.
+      }}
+		
+		\begin{answer}
+			\solution{c}
+		\end{answer}
+		\explanation{\lang{de}{
+    Die einzige Zahl, die in die Vorschrift nicht eingesetzt werden darf, ist die, für die
+		der Nenner $\var{g}$ gleich $0$ wird, hier also $\,x=\var{c}$.
+    }
+    \lang{en}{
+    The only number that is not allowed to be substituted into the function definition is the one for 
+    which the denominator $\var{g}$ is equal to $0$, so $\,x=\var{c}$.
+    }}
+	\end{quickcheck}
+
+
+\section{\lang{de}{Graph einer reellen Funktion}
+         \lang{en}{Graph of a real function}}\label{sec:graph}
+    \lang{de}{
+    Funktionale Zusammenhänge werden in der Praxis oft in einer \emph{(Werte-) Tabelle}
+    oder \emph{graphisch} in einem zweidimensionalen Koordinatensystem dargestellt.  
+    Eine \emph{Wertetabelle} ist dabei eine Tabelle mit zwei Zeilen (oder Spalten), in die einzelne diskrete
+    Werte des Definitionsbereichs und die dazugehörigen Funktionswerte eingetragen werden.
+    }
+    \lang{en}{
+    Functions are in practice often represented by \emph{(function) tables} or two-dimensional 
+    \emph{graphs}. A \emph{function table} is a table with two rows (or columns), in which individual, 
+    discrete values in the domain are matched with their images under the function.
+    }
+    
+    \begin{table}[\align{c} \cellaligns{ccccccc}]
+        $\;\mathbf{x}\;$ && $\,x_1\,$ & $\,x_2\,$ & $\,x_3\,$ & $\,x_4\,$ & ...\\
+        $\;\mathbf{f(x)}\;$ && $\,y_1\,$ & $\,y_2\,$ & $\,y_3\,$ & $\,y_4\,$ & ...\\
+     \end{table}
+
+   \lang{de}{
+   Sie dient in der Regel zur Erstellung der \emph{graphischen} Darstellung der Funktion im
+   zweidimensionalen Koordinatensystem.
+   }
+   \lang{en}{
+   It is often useful to have such a table in order to then draw the \emph{graph} of the function in  
+   two-dimensional coordinates.
+   }
+
+    \begin{center}
+\image{T102_FunctionGraph}
+    \end{center}
+
+ \lang{de}{
+ Die waagerechte Achse des Koordinatensystems heißt \emph{x-Achse} oder auch \notion{\emph{Abszisse}} 
+ und die senkrechte Achse ist die \emph{y-Achse} oder auch die \notion{\emph{Ordinate}}.
+ }
+ \lang{en}{
+ The horizontal axis of the graph is called the \emph{$x$-axis} or also the \notion{\emph{abscissa}}, and 
+ the vertical axis is the \emph{$y$-axis} or also the \notion{\emph{ordinate}}.
+ }
+
+\begin{definition} \label{def:graph}
+
+    \lang{de}{
+    Als \notion{\emph{Funktionsgraph}} oder kurz als \notion{\emph{Graph}} der reellen Funktion 
+    $f:D\to \R$ bezeichnet man die Menge aller geordneten Paare $\,(x;f(x))\,$ aus Elementen $\,x\,$
+    des Definitionsbereichs $\,D\,$ und ihrem Bild $\,f(x)\,$.
+    }
+    \lang{en}{
+    We define the \notion{\emph{graph}} of the real function $f:D\to \R$ as the set of all ordered pairs 
+    $\,(x;f(x))\,$ of elements $\,x\,$ in the domain $\,D\,$ and their image $\,f(x)\,$.
+    }
+	\[ \text{Graph}(f):=\{ (x;y) \mid x\in D, y=f(x) \}=\{ (x;f(x)) \mid x\in D \} \subseteq \R^2.\] 
+    
+\end{definition}   
+
+\lang{de}{
+Überträgt man alle geordneten Paare der Menge \notion{Graph}$(f)\,$ in ein Koordinatensystem, mit
+dem Argument $\,x\,$ als Wert auf der \emph{x-Achse} und dem zugehörigen Funktionswert $\,f(x)\,$
+als Wert auf der \emph{y-Achse}, so erhält man die graphische Darstellung der Funktion $f$.
+}
+\lang{en}{
+Plotting all ordered pairs in the set \notion{Graph}$(f)\,$ onto a coordinate system, with the independent 
+variable $\,x\,$ on the \emph{$x$-axis} andn the corresponding image $\,f(x)\,$ on the \emph{$y$-axis} gives 
+us a graphical representation of the function $f$.
+}
+
+\begin{example}
+  \lang{de}{
+  Wir schauen uns die graphische Darstellung für unsere Funktionen $f$ und $g$ 
+  aus Beispiel \ref{example:bereiche} an:
+  }
+  \lang{en}{
+  We look at the graphical representation for the functions $f$ and $g$ from example 
+  \ref{example:bereiche}:
+  }
+  
+  \begin{tabs*}[\initialtab{1}\class{example}]
+   \tab{$f(x)=x^2$}  
+          \lang{de}{
+          Der Funktionsgraph der Funktion $f:\R\to \R,\, x\mapsto x^2$ wird beschrieben durch die Menge 
+          }
+          \lang{en}{
+          The graph of the function $f:\R\to \R,\, x\mapsto x^2$ is given by the set 
+          }
+           \[ \text{Graph}(f) =\{ (x;x^2) \mid x\in \R \}\]
+          \lang{de}{
+          oder beispielhaft durch die Wertetabelle 
+          }
+          \lang{en}{
+          or with some example columns of the table 
+          }
+          \begin{table}[\align{c} \cellaligns{ccrrrrr}]
+              $\;\mathbf{x}\;$ && $-2$ & $\textcolor{\#4169E1}{-1}$ & $\,\textcolor{\#4169E1}{0}\,$ & $\,1\,$ & $\,\textcolor{\#4169E1}{2}\,$ \\
+              $\;\mathbf{x^2}\;$ && $\,4\,$ & $\,\textcolor{\#4169E1}{1}\,$ & $\,\textcolor{\#4169E1}{0}\,$ & $\,1\,$ & $\,\textcolor{\#4169E1}{4}\,$ \\
+          \end{table}
+          \lang{de}{
+          und hat die folgende Darstellung im zweidimensionalen Koordinatensystem:
+          }
+          \lang{en}{
+          and has the following representation in the two dimensional coordinate system:
+          }
+            \begin{center}
+               \image{T102_Graph_A}
+            \end{center}
+
+
+   \tab{$g(x)=\frac{1}{1-x}$}
+        \lang{de}{
+        Der Funktionsgraph von $\,g:\R\setminus \{1\}\to \R\setminus \{0\},\, x\mapsto \frac{1}{1-x}\,$ 
+        wird beschrieben durch die Menge 
+        }
+        \lang{en}{
+        The graph of $\,g:\R\setminus \{1\}\to \R\setminus \{0\},\, x\mapsto \frac{1}{1-x}\,$ is given by 
+        the set 
+        }
+        \[ \text{Graph}(g) =\{\displaystyle \Big(x;\frac{1}{1-x}\Big) \mid x\in \R \setminus \{1\} \} \]
+        \lang{de}{
+        und hat die folgende Darstellung im zweidimensionalen Koordinatensystem:
+        }
+        \lang{en}{
+        and has the following representation in the two dimensional coordinate system:
+        }
+
+            \begin{center}
+               \image{T102_Graph_B}
+            \end{center}
+  \end{tabs*}
+\end{example}
+
+\lang{de}{
+Wir werden uns im Folgenden die elementarsten reellen Funktionen anschauen, nämlich 
+\ref[content_06_funktionsbegriff_und_lineare_funktionen]["`Lineare Funktionen"']{sec:linear}  und 
+\ref[content_08_quadratische_funktionen]["`Quadratische Funktionen"']{sec:quadratic},
+und deren charakteristische Eigenschaften näher untersuchen.
+}
+\lang{en}{
+In the following section, we will look at the most elementary real functions, namely 
+\ref[content_06_funktionsbegriff_und_lineare_funktionen]['linear functions']{sec:linear} and 
+\ref[content_08_quadratische_funktionen]['quadratic functions']{sec:quadratic}, and then investigate 
+their characteristic properties.
+}
+
+\section{\lang{de}{Lineare Funktionen}\lang{en}{Linear functions}} \label{sec:linear}
+
+\begin{definition}[\lang{de}{Lineare Funktion}\lang{en}{Linear function}] \label{def:linear_func}
+    \lang{de}{
+    Eine Funktion $f:\R\to \R\,$ der Form 
+    }
+    \lang{en}{
+    A function $f:\R\to \R\,$ of the form 
+    }
+    \begin{align*}
+		f(x)=mx+b 
+  	\end{align*}
+    \lang{de}{
+  	mit beliebigen, aber festen reellen Zahlen $m$ und $b$ hei\"st \notion{\emph{lineare Funktion.}}
+    % oder \notion{\emph{Gerade}}.
+    }
+    \lang{en}{
+    with arbitrary but fixed real numbers $m$ and $b$ is called a \notion{\emph{linear function}}.
+    }
+\end{definition}   
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Die folgende Warnung wird gestrichen/umgeschrieben, da sie an dieser Stelle nicht verständlich ist.
+% Der Hinweis erfolgt in T403a_Vektorraum\content_10b_lineare_abb in der Warnung nach
+% Definition 4.2.1 Lineare Abbildungen, dass nämlich lineare Funktionen nicht mit linearen 
+% Abbildungen gleichzusetzen sind!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%
+\lang{de}{
+\begin{block}[warning]
+	\begin{showhide}
+	
+     Es sei an dieser Stelle kurz bemerkt, dass es sich bei einer \emph{"`linearen Funktion"'} 
+     gemäß Definition \ref{def:linear_func} nicht um eine \emph{"`lineare Abbildung"'} im 
+     Sinne der \notion{linearen Algebra} handelt, die wir später im Kapitel über
+     \ref[content_10b_lineare_abb][Vektorräume]{def_lin_abb} noch kennenlernen werden. Eine 
+     \emph{"`lineare Funktion"'} würde im Sinne der linearen Algebra einer sogenannten 
+     \emph{"`affinen Abbildung"'} entsprechen und nur im Spezialfall $\,b=0\,$ den Anforderungen 
+     einer \emph{"`linearen Abbildung"'} genügen.
+     
+     In der \notion{Analysis} hingegen bezeichnet eine \emph{"`lineare Funktion"'}  eine Funktion, 
+     deren Graph eine gerade Linie ist und entspricht als solche einer 
+     \ref[content_09_polynome][Polynomfunktion]{polynomial} vom Grad Null oder Eins.
+        
+%			\lang{de}{"'Lineare Funktionen"' im Sinne der obigen Definition \ref{geraden.definition.1} sind nicht "'linear"' im Sinne der Hochschulmathematik. Dort bezeichnet man 
+%			Funktionen der Form $y =mx +b$ als "'affin"' und nur dann als "'linear"', falls $b=0$ ist.}
+%			\lang{en}{"Linear Functions" in the sense of the above Definition \ref{geraden.definition.1} are not 'linear' in the sense of linear algebra. In linear algebra (as part of university mathematics)
+%			we refer to functions of the form $y=mx+b$ as "{a}ffine" and call functions of the form $y=mx$ linear functions (i.e. when $b=0$).}
+	\end{showhide}
+\end{block}
+}
+%
+
+\begin{definition}[\lang{de}{Gerade und Geradengleichung}
+                   \lang{en}{Lines and equations of a line}] \label{def:gerade}
+    \lang{de}{
+    Der Graph einer linearen Funktion $f:\R\to \R, \, x \mapsto mx+b$, 
+    also die Menge $\{ (x;y) \in \R^2 \mid y=mx+b \},$ beschreibt eine 
+    \notion{\emph{Gerade} $\,g,$} die durch die Wahl der reellen Konstanten $m$ und $b$, 
+    auch \emph{Parameter} genannt, charakterisiert wird.
+    \\
+    Man bezeichnet $\,y=mx+b\,$ auch als die \notion{\emph{Geradengleichung}} 
+    von $g$ und schreibt statt der Mengenschreibweise 
+    \[g: \; y = m x + b, \: x \in \R .\]
+    Der Parameter \emph{$m$} beschreibt dabei die \notion{\emph{Steigung}} von $g$ und
+    \emph{$b$} den \notion{\emph{Ordinaten-}} bzw. \notion{\emph{$y-$Achsenabschnitt}}, da 
+    die Gerade $g$ die $y-$Achse im Punkt $(0;b)$ schneidet.
+    }
+    \lang{en}{
+    The graph of a linear function $f:\R\to \R, \, x \mapsto mx+b$, that is the set 
+    $\{ (x;y) \in \R^2 \mid y=mx+b \}$, describes a  \notion{\emph{line} $\,g,$} which is characterised 
+    by the choice of the real constants $m$ and $b$, which are also called \emph{parameters} in this case.
+    \\
+    We call $\,y=mx+b\,$ the \notion{\emph{equation}} of $g$ and instead of set notation, we write 
+    \[g: \; y = m x + b, \: x \in \R .\]
+    The parameter \emph{$m$} is called the \notion{\emph{gradient}} or \notion{\emph{slope}} of $g$ and 
+    \emph{$b$} is called the \notion{\emph{$y-$intercept}}, as the line $g$ crosses the $y$-axis at the 
+    point $(0;b)$.
+    }
+\end{definition}
+
+\lang{de}{
+Da somit die Geradengleichung durch ihre Steigung und ihren Schnittpunkt 
+mit der $y-$Achse eindeutig bestimmt ist, und umgekehrt die Steigung und 
+der Schnittpunkt mit der $y-$Achse direkt aus der Geradengleichung abgeleitet 
+werden können, bezeichnet man die Darstellung $\,g: \; y = m x + b\,$ auch als  
+eine \ref[content_07_geradenformen][Punkt-Steigungsform]{sec:punkt_steig_form}
+der Geraden $g$. Hierauf werden wir im folgenden Kapitel noch näher eingehen.
+\\
+Zunächst schauen wir uns an, welche Informationen uns diese Parameter
+über die Lage der Geraden $g$ im zweidimensionalen Koordinatensystem liefern.
+\\
+%
+%%% Video Hoever
+% 
+Eine anschauliche Erläuterung hierzu, illustriert durch einige Beispiele, finden Sie im folgenden Video.
+\\
+    \floatright{\href{https://www.hm-kompakt.de/video?watch=101}{\image[75]{00_Videobutton_schwarz}}}
+\\\\
+Das wichtigste fassen wir hier nochmal zusammen:
+%
+}
+\lang{en}{
+As a line equation is determined uniquely by its gradient and $y$-intercept, and conversely the gradient 
+and $y$-intercept can be uniquely determined from a line equation, we call $\,g: \; y = m x + b\,$ the 
+\ref[content_07_geradenformen][slope-intercept form]{sec:punkt_steig_form} of the line equation $g$. This will 
+be further examined in the next chapter.
+\\
+Firstly we examine what information these parameters provide about the graphical representation of the line 
+$g$ in two-dimensional coordinates.
+}
+
+
+
+\begin{remark}[\lang{de}{Bedeutung der Parameter}\lang{en}{Meaning of the parameters}]
+    \lang{de}{
+    Der $y-$Achsenabschnitt $b$ gibt an, dass die Gerade $g$ die $y-$Achse
+    im Punkt $(0;b)$ schneidet.
+    }
+    \lang{en}{
+    From the $y$-intercept $b$ we know the point at which the line $g$ crosses, or 'intercepts' the 
+    $y$-axis, $(0;b)$.
+    }
+    \begin{itemize}
+    \item \lang{de}{
+      Ist $b=0$, so verläuft die Gerade durch den \textit{Ursprung} 
+      $(0;0)$ des Koordinatensystems (es ist $f(x)=mx$).
+      }
+      \lang{en}{
+      If $b=0$, the line goes through the \textit{origin} $(0;0)$ of the coordinate system (it is of the 
+      form $f(x)=mx$).
+      }
+    \item \lang{de}{
+      Ist $b>0$, so schneidet die Gerade die $y-$Achse oberhalb 
+      der $x$-Achse.
+      }
+      \lang{en}{
+      If $b>0$, the line intercepts the $y$-axis in the upper half of the plane, above the $x$-axis.
+      }
+    \item \lang{de}{
+      Ist $b<0$, so schneidet die Gerade die $y-$Achse unterhalb 
+      der $x$-Achse.
+      }
+      \lang{en}{
+      If $b<0$, the line intercepts the $y$-axis in the lower half of the plane, below the $x$-axis.
+      }
+    \end{itemize}
+    \lang{de}{
+    Die Steigung $m$ gibt an, um wie viel die Gerade steigt, wenn man $x$ % um $1$ 
+    erh"oht.
+    }
+    \lang{en}{
+    The gradient $m$ reveals how steep the line is, hence the alternative term \emph{'slope'}. That is, 
+    how fast $y$ increases as $x$ is increased.
+    }
+    \begin{itemize}
+    \item \lang{de}{Ist $m=0$, so ist die Gerade \emph{parallel} zur $x$-Achse (es ist $f(x)=b$).}
+          \lang{en}{If $m=0$, the line is \emph{parallel} to the $x$-axis (it is $f(x)=b$).}
+    \item \lang{de}{Ist $m>0$, so \emph{steigt} die Gerade und zwar je \emph{größer} $m$ ist, desto 
+    \emph{steiler}.}
+          \lang{en}{If $m>0$, the line \emph{increases}; the \emph{larger} $m$ is, the \emph{steeper} the 
+          line.}
+% Genauer:
+% \begin{itemize}
+% \item Für $m=1$ hat die Gerade \glqq{}diagonale\grqq{} Steigung (aufw"arts),
+% \item f"ur $m>1$ ist die Steigung \emph{steiler} als diagonal,
+% \item f"ur $0<m<1$  ist die Steigung \emph{flacher} als diagonal.
+% \end{itemize}
+    \item \lang{de}{Ist $m<0$, so \emph{f"allt} die Gerade, wobei das Gefälle 
+    mit wachsendem $m (<0)$ abflacht, also geringer wird.}
+    \lang{en}{If $m<0$, the line \emph{decreases}, with a \emph{less steep} descent for larger $m$, that is 
+    $m$ closer to $0$.}
+% Genauer:
+% \begin{itemize}
+% \item Für $m=-1$ hat die Gerade \glqq{}diagonale\grqq{} Steigung abw"arts,
+% \item f"ur $m<-1$ ist die Steigung \emph{steiler} als diagonal,
+% \item f"ur $-1<m<0$  ist die Steigung \emph{flacher} als diagonal.
+%  \end{itemize}
+\end{itemize}
+\end{remark}
+
+
+\begin{example}\label{geraden.example.1}
+%
+%%% Video Hoever
+%
+\lang{de}{
+\begin{enumerate}[alph] 
+  \item Wir lösen zunächst die Abschlussfrage aus dem vorherigen Video: 
+   $\quad$ \floatright{\href{https://www.hm-kompakt.de/video?watch=101lsg}{\image[75]{00_Videobutton_schwarz}}}\\
+%
+  \item Das folgende Beispiel veranschaulicht, wie sich Veränderungen der charakterisierenden Parameter
+        $m$ und $b$ der linearen Funktion $f:\R\to \R, \, x \mapsto mx+b$ auf ihre graphische 
+        Darstellung der Geraden auswirken.
+\end{enumerate}
+}
+\lang{en}{
+The following example shows how changes in the characteristic parameters $m$ and $b$ affect the 
+graphical representation of the linear function $f:\R\to \R, \, x \mapsto mx+b$.
+}\\
+        
+
+  \lang{de}{
+	\begin{genericGWTVisualization}[450][800]{mathlet1}
+		\begin{variables}
+			\randint{randomA}{1}{2}
+			\randint{randomB}{-2}{2}
+			\number[editable]{m}{real}{var(randomA)}
+			\number[editable]{b}{real}{var(randomB)}
+			\slider{sm}{m}{-5,editable}{5,editable}
+			\slider{sb}{b}{-5,editable}{5,editable}
+			\number{opm}{operation}{var(m)}
+			\number{opb}{operation}{var(b)}
+%			\function{diag1}{real}{sign(var(m))*x}
+%			\function{diag2}{real}{-x}			
+			\function{F}{real}{var(m) * x + var(b)}
+			\point{P}{real}{0,var(b)}
+			\function[calculate]{F1}{real}{var(m) * x + var(b)}
+		\end{variables}
+		\label{F}{@2d[$\textcolor{BLACK}{g}$]}
+		\label{m}{$m=$}
+		\label{b}{$b=$}
+%		\color{diag1}{LIGHT_GRAY}
+%		\color{diag2}{LIGHT_GRAY}
+		\color{P}{#0066CC}
+		\begin{canvas}
+			\plotSize{540}
+			\plotLeft{-3}
+			\plotRight{3}
+			\plot[coordinateSystem]{diag1,F,P}
+			\slider{sm,sb}
+		\end{canvas}
+	    \text{Der Graph der reellen Funktion $f$, definiert durch}
+	    \\
+	    \phantom{}
+		\text{$f(x)=\var{F1}\;$  f\"ur alle $x \in \R$}
+		\\
+		\phantom{}
+	    \text{
+            Er hat die Steigung $\; m= \var{opm}$, den $y-$Achsenabschnitt 
+            $\; b= \var{opb}$ und entspricht der Geraden
+            }
+        \\
+		\phantom{}
+		\text{$ g = \{ (x;y) \in \R^2 \: | \: y = \var{F1}  \}$ .}
+    \text{\IFELSE{var(b)>0}
+                       {Da $\; b=\var{opb}$ größer als $0$ ist, schneidet die Gerade die 
+                        $y-$Achse oberhalb der $x-$Achse.}
+                       {\IFELSE{var(b)=0}
+                               {Da $\; b=\var{opb}$ ist, geht die Gerade durch den Ursprung.}
+                               {Da $\; b=\var{opb}$ kleiner als $0$ ist, schneidet die Gerade die 
+                                $y-$Achse unterhalb der $x-$Achse.}}
+  		     }
+		\text{  \IFELSE{var(m)=0}
+                        {Da $\; m=\var{opm}$ ist, ist die Steigung $0$, d.h. die Gerade ist 
+                        \IFELSE{var(b)=0}{diem}{parallel zur } x-Achse.}
+                    	 {\IFELSE{var(m)>0}
+                               {Da $\; m=\var{opm}$ größer als $0$ ist, steigt die Gerade.}
+                               {Da $\; m=\var{opm}$ kleiner als $0$ ist, fällt die Gerade.}}
+		     }
+	\end{genericGWTVisualization}
+  }
+  \lang{en}{
+  \begin{genericGWTVisualization}[450][800]{mathlet1}
+		\begin{variables}
+			\randint{randomA}{1}{2}
+			\randint{randomB}{-2}{2}
+			\number[editable]{m}{real}{var(randomA)}
+			\number[editable]{b}{real}{var(randomB)}
+			\slider{sm}{m}{-5,editable}{5,editable}
+			\slider{sb}{b}{-5,editable}{5,editable}
+			\number{opm}{operation}{var(m)}
+			\number{opb}{operation}{var(b)}
+%			\function{diag1}{real}{sign(var(m))*x}
+%			\function{diag2}{real}{-x}			
+			\function{F}{real}{var(m) * x + var(b)}
+			\point{P}{real}{0,var(b)}
+			\function[calculate]{F1}{real}{var(m) * x + var(b)}
+		\end{variables}
+		\label{F}{@2d[$\textcolor{BLACK}{g}$]}
+		\label{m}{$m=$}
+		\label{b}{$b=$}
+%		\color{diag1}{LIGHT_GRAY}
+%		\color{diag2}{LIGHT_GRAY}
+		\color{P}{#0066CC}
+		\begin{canvas}
+			\plotSize{540}
+			\plotLeft{-3}
+			\plotRight{3}
+			\plot[coordinateSystem]{diag1,F,P}
+			\slider{sm,sb}
+		\end{canvas}
+      \text{The graph of the real function $f$, defined by}
+	    \\
+	    \phantom{}
+		\text{$f(x)=\var{F1}\;$ for all $x \in \R$}
+		\\
+		\phantom{}
+	    \text{It has gradient $\; m= \var{opm}$ and $y$-intercept $\; b= \var{opb}$, and corresponds to 
+            the line}
+        \\
+		\phantom{}
+		\text{$ g = \{ (x;y) \in \R^2 \: | \: y = \var{F1}  \}$ .}
+       \text{\IFELSE{var(b)>0}
+                       {As $\; b=\var{opb}$ is greater than $0$, the line intercepts the 
+                        $y$-axis above the $x$-axis.}
+                       {\IFELSE{var(b)=0}
+                               {As $\; b=\var{opb}$, it goes through the origin.}
+                               {As $\; b=\var{opb}$ is less than $0$, the line intercepts the 
+                                $y$-axis below the $x$-axis.}}
+  		     }
+		\text{  \IFELSE{var(m)=0}
+                       {As $\; m=\var{opm}$, the gradient is $0$, so the line is 
+                        \IFELSE{var(b)=0}{precisely }{parallel to } the $x$-axis.
+                        }
+                    	 {\IFELSE{var(m)>0}
+                               {As $\; m=\var{opm}$ is greater than $0$, the line slopes 
+                                upwards.}
+                               {As $\; m=\var{opm}$ is less than $0$, the line slopes 
+                                downwards.}}
+		     }
+	\end{genericGWTVisualization}
+    }
+\end{example}
+
+                %       \\ Die Gerade
+                %		\IFELSE{var(m)=1}{ist \IFELSE{var(b)=0 }{die 1. Winkelhalbierende }{parallel zur 1. Winkelhalbierenden}, weil die Steigung $m$ gleich $1$ ist.}
+                %					{\IFELSE{var(m)>1}{ist steiler als die 1. Winkelhalbierende, weil $m$ sogar größer $1$ ist.}
+                %									  {ist flacher als die 1. Winkelhalbierende, weil $m$ kleiner als $1$ ist.}}}                                 
+                %           {Da $m=\var{opm}$ kleiner als $0$ ist, fällt die Gerade.}                                  
+                %       \\ Die Gerade
+                %		\IFELSE{var(m)=-1}{ist \IFELSE{var(b)=0}{die 2. Winkelhalbierende }{parallel zur 2. Winkelhalbierenden}, weil die Steigung $m$ gleich $-1$ ist.}{\IFELSE{var(m)<-1}
+                %		{ist steiler als die 2. Winkelhalbierende, weil $m$ sogar kleiner $-1$ ist.}{ist flacher als die 2. Winkelhalbierende, weil $m$ größer als $-1$ ist.}}}
+                
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Das Beispiel ist obsolet, da die Darstellung 
+% im nächsten Beispiel ausreicht.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Wir wollen uns das an einem Beispiel veranschaulichen
+%  \begin{example}
+%  $g_1\,$ sei der Graph der linearen Funktion $f_1:\R\to \R, \, x \mapsto 2x-1\,$  und \\
+%  $\,g_2\,$ sei der Graph von $f_2:\R\to \R, \, x \mapsto -\frac{1}{2}x+2.$ \\
+%
+%              \begin{center}
+%                 \image[500]{funktionsgraph_geraden}
+%              \end{center}
+%  Die Steigung der Geraden $g_1$ ist also $m=2$ und der Schnittpunkt mit der $y-$Achse 
+%  ist $(0;-1).$ \\ Die Steigung der Geraden $g_2$ ist hingegen $m=-\frac{1}{2}$ und der 
+%  Schnittpunkt mit der $y-$Achse ist $(0;2).$
+%  \end{example}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{2}
+\randomquickcheckpool{3}{3}
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{a}{-5}{5}
+			\randint[Z]{b}{1}{4}
+			\randint{c}{-4}{4}
+			\randint[Z]{d}{1}{4}
+			\function[calculate]{m}{a/b}
+			\function[calculate]{y}{c/d}
+		    \function[normalize]{f}{m*x+y}
+		\end{variables}
+		
+			\text{\lang{de}{
+       Für die lineare Funktion $f(x)=\var{f}$ hat die zugehörige Gerade
+			 die Steigung \ansref und den $y-$Achsenabschnitt \ansref.
+       }
+       \lang{en}{
+       The line corresponding to the linear funtion $f(x)=\var{f}$ has gradient \ansref and 
+       $y$-intercept \ansref.
+       }}
+		
+		\begin{answer}
+			\solution{m}
+		\end{answer}
+		\begin{answer}
+			\solution{y}
+		\end{answer}
+		\explanation{\lang{de}{
+    Die Steigung ist der Koeffizient von $x$, also der Faktor, mit dem $x$ multipliziert wird.\\
+		Der $y-$Achsenabschnitt ist die Zahl, die hinzuaddiert wird, d.\,h. der Wert von $f$ an der Stelle $0$.}
+    \lang{en}{
+    The gradient is the coefficient of $x$, that is, the factor by which $x$ is multiplied.\\
+    The $y$-intercept is the number which is added as a constant, that is, the value of $f$ at $x=0$.
+    }}
+	\end{quickcheck}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{a}{-5}{5}
+			\randint[Z]{b}{1}{4}
+			\randint{c}{-4}{4}
+			\function[calculate]{m}{a/b}
+			\function[calculate]{y}{c/b}
+		    \function[normalize]{f0}{a*x+c}
+		    \function{f}{f0/b}
+		\end{variables}
+		
+			\text{\lang{de}{
+       Für die lineare Funktion $f(x)=\var{f}$ hat die zugehörige Gerade
+			 die Steigung \ansref und den $y-$Achsenabschnitt \ansref.
+       }
+       \lang{en}{
+       The line corresponding to the linear function $f(x)=\var{f}$ has gradient \ansref and 
+       $y$-intercept \ansref.
+       }}
+		
+		\begin{answer}
+			\solution{m}
+		\end{answer}
+		\begin{answer}
+			\solution{y}
+		\end{answer}
+		\explanation{\lang{de}{
+    Die Steigung ist der Koeffizient von $x$, also der Faktor, mit dem $x$ multipliziert wird.\\
+		Der $y-$Achsenabschnitt ist die Zahl die hinzuaddiert wird, d.\,h. der Wert von $f$ an der Stelle $0$.}
+    \lang{en}{
+    The gradient is the coefficient of $x$, that is, the factor by which $x$ is multiplied.\\
+    The $y$-intercept is the number which is added as a constant, that is, the value of $f$ at $x=0$.
+    }}
+	\end{quickcheck}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\randint[Z]{a}{-5}{5}
+			\randint[Z]{b}{1}{4}
+			\randint{c}{-4}{4}
+			\randint[Z]{d}{1}{4}
+			\function[calculate]{m}{a/b}
+			\function[calculate]{y}{c/d}
+		    \function[normalize]{f}{m*x+y}
+		\end{variables}
+		
+			\text{\lang{de}{
+       Für die Gerade mit Steigung $\var{m}$ und $y-$Achsenabschnitt $\var{y}$
+			 ist die zugehörige Funktionsgleichung $y=$\ansref.}
+       \lang{en}{
+       The line with gradient $\var{m}$ and $y$-intercept $\var{y}$ is the graph of $y=$\ansref.
+       }}
+		
+		\begin{answer}
+			\solution{f}
+			\checkAsFunction{x}{-10}{10}{100}
+		\end{answer}
+		\explanation{\lang{de}{
+    Die Funktionsgleichung ergibt sich als $y=mx+b$, wobei $m$ die Steigung und $b$ der 
+    $y-$Achsenabschnitt ist.
+    }
+    \lang{en}{
+    The line equation is of the form $y=mx+b$, where $m$ is the gradient and $b$ is the 
+    $y$-intercept.
+    }}
+	\end{quickcheck}
+
+\end{quickcheckcontainer}
+
+
+
+
+\section{\lang{de}{Nullstellen}\lang{en}{Roots of a real function}}\label{Nullstellen}
+
+\lang{de}{
+Wir definieren zunächst den Begriff der \emph{Nullstelle} allgemein 
+für beliebige reelle Funktionen.
+}
+\lang{en}{
+We will define the concept of \emph{roots} generally, for all real functions.
+}
+	 
+\begin{definition}[\lang{de}{Nullstellen einer reeller Funktion}\lang{en}{Roots}]\label{def:nullstelle}
+  \lang{de}{
+  Die \emph{\notion{Nullstellen}} einer reellen Funktion $f:D_f\to \R$ sind die Stellen $x\in D_f$, 
+	an denen die Funktion den Wert $f(x)=0$ annimmt.
+  }
+  \lang{en}{
+	The \emph{roots} or \emph{zeros} of a function $f$ are the points $x\in D_f$ in the domain at which 
+  the function takes on the value $f(x)=0$.
+  }
+\end{definition}
+ 
+\lang{de}{
+   Bei der Darstellung der Funktion als Graph im zweidimensionalen
+	 Koordinatensystem sind die Nullstellen die \nowrap{$x$-Koordinaten}
+	 der Schnittpunkte des Funktionsgraphen mit der $x$-Achse.
+	 \\
+	 Eine Funktion kann eine, mehrere oder keine Nullstelle haben.
+   }
+\lang{en}{
+  In the represention of a function as a graph in a two-dimensional coordinate system,
+	the roots are the \nowrap{$x$-coordinates} where the graph of the function intersects the $x$-axis.
+	\\
+	A function can have one, multiple, or no roots.
+  }
+
+\lang{de}{
+	\begin{genericGWTVisualization}[450][800]{mathlet1}
+		\begin{variables}
+% 			\point[editable]{P1}{real}{-1,-1}
+% 			\point[editable]{P2}{real}{1,1}
+% 			\number{x1}{real}{var(P1)[x]}
+% 			\number{y1}{real}{var(P1)[y]}
+% 			\number{x2}{real}{var(P2)[x]}
+% 			\number{y2}{real}{var(P2)[y]}
+% 			%% wollen Polynom f(x)=x^4+ax^3+bx^2+cx+d mit Extrempunkten P1 und P2; Formel für Koeffizienten:
+% 			\number{nen}{real}{(var(x1)^3 - 3*var(x1)^2*var(x2) + 3*var(x1)*var(x2)^2 - var(x2)^3)}
+% 			\number{a}{real}{(-2*var(x1)^4 + 4*var(x1)^3*var(x2) - 4*var(x1)*var(x2)^3 + 2*var(x2)^4 - 2*var(y1) + 2*var(y2))/var(nen)}
+% 			\number{b}{real}{(var(x1)^5 + var(x1)^4*var(x2) - 8*var(x1)^3*var(x2)^2 + 8*var(x1)^2*var(x2)^3 - var(x1)*var(x2)^4 + 3*var(x1)*var(y1) - 3*var(x1)*var(y2) - var(x2)^5 + 3*var(x2)*var(y1) - 3*var(x2)*var(y2))/var(nen)}
+% 			\number{c}{real}{(-2*var(x1)^5*var(x2) + 4*var(x1)^4*var(x2)^2 - 4*var(x1)^2*var(x2)^4 + 2*var(x1)*var(x2)^5 - 6*var(x1)*var(x2)*var(y1) + 6*var(x1)*var(x2)*var(y2))/var(nen)}
+% 			\number{d}{real}{(var(x1)^5*var(x2)^2 - 3*var(x1)^4*var(x2)^3 + 3*var(x1)^3*var(x2)^4 + var(x1)^3*var(y2) - var(x1)^2*var(x2)^5 - 3*var(x1)^2*var(x2)*var(y2) + 3*var(x1)*var(x2)^2*var(y1) - var(x2)^3*var(y1))/var(nen)}
+%     		\function{f}{real}{x^4+var(a)*x^3+var(b)*x^2+var(c)*x+var(d)}
+%     		% dritter Extrempunkt:
+% 			\number{x3}{real}{-3/4*var(a)-var(x1)-var(x2)}
+% 			\number{y3}{real}{var(x3)^4+var(a)*var(x3)^3+var(b)*var(x3)^2+var(c)*var(x3)+var(d)}
+% 			%Anzahl der Nullstellen ergibt sich aus der Lage der Extrempunkte:
+% 			%1. x3=x1 (analog x3=x2):
+% 			%	keine NS für y2>0, eine NS für y2=0, 2 NS für y2<0
+% 			%2. x1\ne x3\ne x2:
+% 			%	keine NS für y1,y2,y3>0
+% 			%	1 NS für min(y1,y2,y3)=0, aber nur ein y gleich 0
+% 			%	2 NS für zwei y's gleich 0 oder y1*y2*y3<0
+% 			%	3 NS für min(y1,y2,y3)<0 und y1*y2*y3=0
+% 			%	4 NS für min(y1,y2,y3)<0 und y1*y2*y3>0		
+			\function{pol1}{rational}{x^3-2*x^2+x-2}
+			\function{pol2}{rational}{x^4-1/4*x^3-2*x^2+3/4*x-1/2}
+			\function{pol3}{rational}{x^4-2*x^2+1/2}
+			\function{pol4}{rational}{x^4-x^2+1/2*x+1}	
+		\end{variables}
+% 		\color{f}{BLACK}
+% 		\color{P1}{BLUE}
+% 		\color{P2}{BLUE}
+		\color{pol1}{#00CC00}
+		\color{pol2}{#0066CC}
+		\color{pol3}{#0066CC}
+		\color{pol4}{#CC6600}
+%		\label{P1}{$\textcolor{BLUE}{P_1}$}
+\\
+		\begin{canvas}
+			\plotSize{300}
+			\plotLeft{-3}
+			\plotRight{3}
+%			\plot[coordinateSystem]{f,P1,P2}
+			\plot[coordinateSystem]{pol1,pol2,pol3,pol4}
+		\end{canvas}
+%		\text{Es ist $P_1=(\var{P1})$ und $P_2=\var{P2}$, die Kurve gehört zu $f(x)=\var{f}$.}
+		\text{Das Beispiel zeigt Funktionen mit \textcolor{#00CC00}{genau einer}, mit \textcolor{#0066CC}{mehreren}
+		 und mit \textcolor{#CC6600}{keiner} Nullstelle.}
+	    	\end{genericGWTVisualization}
+}
+\lang{en}{
+	\begin{genericGWTVisualization}[450][800]{mathlet1}
+		\begin{variables}
+			\function{pol1}{rational}{x^3-2*x^2+x-2}
+			\function{pol2}{rational}{x^4-1/4*x^3-2*x^2+3/4*x-1/2}
+			\function{pol3}{rational}{x^4-2*x^2+1/2}
+			\function{pol4}{rational}{x^4-x^2+1/2*x+1}
+		\end{variables}
+		\color{pol1}{#00CC00}
+		\color{pol2}{#0066CC}
+		\color{pol3}{#0066CC}
+		\color{pol4}{#CC6600}
+		\begin{canvas}
+			\plotSize{300}
+			\plotLeft{-3}
+			\plotRight{3}
+			\plot[coordinateSystem]{pol1,pol2,pol3,pol4}
+		\end{canvas}
+		\text{This example shows functions with \textcolor{#00CC00}{exactly one}, with 
+          \textcolor{#0066CC}{multiple} and with \textcolor{#CC6600}{no} roots.}
+	    	\end{genericGWTVisualization}
+}
+
+\lang{de}{
+Die \notion{Nullstellen einer linearen Funktion} $f(x)=mx+b$ entprechen also nach vorstehender 
+Definition \ref{def:nullstelle} der  
+% \ref[content_05_loesen_gleichungen_und_lgs][Lösungen der linearen Gleichung]{sec:linear}
+\ref[content_05_loesen_gleichungen_und_lgs][Lösungsmenge der linearen Gleichung]{alg:lin_gleichung}
+$\; mx+b=0$ und folglich gilt: 
+}
+\lang{en}{
+The set of \notion{roots of a linear function} $f(x)=mx+b$ is, from definition \ref{def:nullstelle}, the
+\ref[content_05_loesen_gleichungen_und_lgs][solution set of a linear equation]{alg:lin_gleichung} 
+$\; mx+b=0$ and hence: 
+}
+
+% \begin{theorem}[Nullstellen Linearer Funktionen]\label{theorem:nullst_lin_fkt}
+% Eine lineare Funktion $f(x)=mx+b$ mit $m\ne 0$ besitzt genau eine Nullstelle. Diese l"asst sich berechnen, indem man die
+% Gleichung $f(x)=0$, also $mx+b=0$ nach $x$ aufl"ost:
+% \[ mx+b=0 \Leftrightarrow mx=-b \Leftrightarrow x=-\frac{b}{m}. \]
+% \end{theorem}
+
+\begin{theorem}[\lang{de}{Nullstellen Linearer Funktionen}
+                \lang{en}{Roots of a linear function}]\label{theorem:nullst_lin_fkt}
+    \lang{de}{
+    Eine lineare Funktion $f: \R \to \R\;$ mit $\; f(x)=mx+b\;$ und $\; m, b \in \R$
+    besitzt, sofern \notion{$m\ne 0$} ist, \notion{genau eine} Nullstelle, nämlich
+    }
+    \lang{en}{
+    A linear function $f: \R \to \R\;$ with $\; f(x)=mx+b\;$ and $\; m, b \in \R$ has, as long as 
+    \notion{$m\ne 0$}, \notion{exactly one} root, namely
+    }
+    \[x=-\frac{b}{m}. \]
+    \lang{de}{Falls $m=0$ ist und }
+    \lang{en}{If $m=0$ and }
+    \begin{enumerate}
+		\item[$b \neq 0, \;$]
+        \lang{de}{
+		    liegt $f$ parallel zur $x-$Achse und besitzt folglich \notion{keine} Nullstelle. 
+        }
+        \lang{en}{
+        then $f$ is parallel to the $x$-axis and therefore has \notion{no} roots.
+        }\\ 
+		\item[$b = 0, \;$]
+        \lang{de}{
+		    liegt $f$ genau auf der $x-$Achse und besitzt somit \notion{unendlich viele} Nullstellen.
+        }
+        \lang{en}{
+        then  $f$ describes the $x$-axis and therefore has \notion{infinitely many} roots.
+        }\\
+    \end{enumerate}
+
+\end{theorem}
+
+\begin{example}
+\begin{enumerate}
+\item \lang{de}{
+    Wir bestimmen die Nullstelle der lineare Funktion $f(x)=3x-1$, indem wir die lineare Gleichung
+    $3x-1=0$ lösen.
+    }
+    \lang{en}{
+    We find the root of the linear funtion $f(x)=3x-1$ by solving the linear equation $3x-1=0$.
+    }
+    \[ 3x-1=0 \Leftrightarrow 3x=1 \Leftrightarrow x=\frac{1}{3}.\]
+    \lang{de}{
+    Also liegt die Nullstelle von $f$ in $\frac{1}{3}$.
+    }
+    \lang{en}{
+    So the root of $f$ is at $\frac{1}{3}$.
+    }
+
+\item \lang{de}{
+    Die Nullstelle der lineare Funktion $f(x)=\frac{2}{3}x +\frac{1}{2}$ ist
+    $x=-\frac{3}{4}$, denn
+    }
+    \lang{en}{
+    The root of the linear function $f(x)=\frac{2}{3}x +\frac{1}{2}$ is $x=-\frac{3}{4}$, as
+    }
+    \[ \frac{2}{3}x +\frac{1}{2}=0 \Leftrightarrow \frac{2}{3}x=-\frac{1}{2} \Leftrightarrow x=-\frac{1}{2}\cdot \frac{3}{2}=-\frac{3}{4}. \]
+    \end{enumerate}
+\end{example}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{a}{-5}{5}
+			\randint[Z]{b}{1}{4}
+			\randint{c}{-4}{4}
+			\randint[Z]{d}{1}{4}
+			\function[calculate]{m}{a/b}
+			\function[calculate]{rezm}{b/a}
+			\function[calculate]{r}{-c/d}
+		    \function[normalize]{f}{(a/b)*x+c/d}
+			\function[calculate]{ns}{-(c*b)/(a*d)}
+		\end{variables}
+		
+			\text{\lang{de}{Die Nullstelle der linearen Funktion $f(x)=\var{f}$ ist \ansref.}
+            \lang{en}{The root of the linear function $f(x)=\var{f}$ is \ansref.}}
+		
+		\begin{answer}
+			\solution{ns}
+		\end{answer}
+		\explanation{\lang{de}{Um die Nullstelle zu berechnen, ist die Gleichung $f(x)=0$ zu lösen:}
+                 \lang{en}{To find the root, we solve the equation $f(x)=0$:}
+			\[ \var{f}=0 \Leftrightarrow \var{m}\cdot x=\var{r} \Leftrightarrow x=\var{r}\cdot \var{rezm}=\var{ns}. \]
+		}
+	\end{quickcheck}
+
+\end{visualizationwrapper}
+
+\end{content}
+

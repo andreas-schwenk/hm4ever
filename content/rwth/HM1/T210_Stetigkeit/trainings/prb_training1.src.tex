@@ -1,0 +1,403 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A01: Aussagen zu Stetigkeit}
+    \lang{en}{mc yes-no}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{description}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A01: Aussagen zu Stetigkeit}}
+\lang{en}{\title{Problem 1}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9996}{Ticket 9996}
+\end{block}
+
+\begin{problem}
+
+\begin{variables}
+      \randint{a}{-9}{9}
+      \randint{b}{-9}{9}
+      \randint{d}{-9}{9}
+      \randint[Z]{c}{-9}{9}
+      \randint{p}{1}{5}
+      \randint{q}{-5}{5}
+      \function[normalize]{funktion}{x - b}
+      
+      
+      
+      \function[normalize]{f1}{a*x*x+b*x+c}
+      \function[normalize]{f2}{a*x+b}
+      \function[normalize]{f31}{a*x*x + b*x +p}
+      \function[normalize]{f32}{x-d}
+      \function[normalize]{f4}{a*x+q}
+      \end{variables}
+      
+		\randomquestionpool{1}{1}
+		\randomquestionpool{2}{4}
+		\randomquestionpool{5}{6}
+		
+		\randomquestionpool{7}{7}
+		\randomquestionpool{8}{17}
+		\randomquestionpool{18}{20}
+		\randomquestionpool{21}{25}
+      
+      
+     \begin{question} %1
+     \lang{de}{ 
+      	\text{Kreuzen Sie korrekte Aussagen an. Wenn die Frage lautet: \\
+      	Ist $f$ stetig, so ist stets nach Stetigkeit auf dem gesamten Definitionsbereich gefragt.\\
+      	Wenn nicht anders angegeben, sei $f:\R\to\R$.
+      	}
+      }
+      
+    	\type{mc.yesno}
+    	\begin{choice}
+    		\text{$f(x) = \var{f1}$ ist stetig.}
+  			\solution{true}
+            \explanation[edited]{Polynome sind auf $R$ stetig.}
+		\end{choice}
+		\end{question}
+		
+		\begin{question} %2
+		\lang{de}{\text{ }}
+		\type{mc.yesno}
+		\begin{choice}
+  			\text{$f(x) = e^{\var{c}x+\var{p}}(\var{f2})$ ist stetig.}
+  			\solution{true}
+            \explanation[edited]{Eine Komposition stetiger Funktionen (e-Funktion und 
+            Polynome, beachten Sie auch das Polynom im Exponenten) ist stetig.}
+		\end{choice}
+		\end{question}
+		
+		\begin{question} %3
+		\lang{de}{\text{ }}
+		\type{mc.yesno}
+		\begin{choice}
+			\text{$f(x)= \var{c}+|\var{f2}|$ ist stetig.}
+  			\solution{true}
+            \explanation[edited]{Eine Komposition stetiger Funktionen 
+            (Betragsfunktion und Polynom) ist stetig.}
+		\end{choice}
+		\end{question}
+		
+		\begin{question} %4
+		\lang{de}{\text{ }}
+		\type{mc.yesno}
+		\begin{choice}
+			\text{$f(x)= \begin{cases}
+                       \var{funktion} &, \text{ falls } x\ge 0 \\
+                       x^2 &, \text{ falls } x<0
+                       \end{cases}$ ist stetig.}
+  			\solution{compute}
+  			\iscorrect{b}{=}{0}
+            \explanation[edited]{Diese abschnittsweise definierte Funktion (gebildet aus stetigen
+            Funktionen) kann auf $R$ nur stetig sein, wenn es sich für $x\geq 0$ um eine Ursprungsgerade 
+            handelt.}
+		\end{choice}
+		\end{question}
+		
+		\begin{question} %5
+		\lang{de}{\text{ }}
+		\type{mc.yesno}
+		\begin{choice}
+			\text{$f: \R\setminus \{\var{d} \} \to \R, f(x) = \frac{\var{f31}}{\var{f32}}$ ist stetig.}
+  			\solution{true}
+            \explanation[edited]{Diese gebrochen rationale Funktion hat eine Polstelle bei
+            $x=\var{d}$. Also ist sie auf $R\setminus \{\var{d} \}$ stetig.}
+		\end{choice}
+		\end{question}
+		
+		
+		\begin{question} %6
+		\lang{de}{\text{ }}
+		\type{mc.yesno}
+		\begin{choice}
+			\text{$f(x) = \begin{cases}
+                          \var{b}+x^2 &, \text{ falls } x \ge \var{p} \\
+                          \var{f4} &, \text{ falls } x<\var{p}
+                         \end{cases}$ ist stetig. }
+  			\solution{compute}
+  			\iscorrect{p^2+b}{=}{a*p+q}
+            \explanation[edited]{Wenn beide (stetigen) Teilfunktionen für $x=\var{p}$ denselben
+            Funktionswert besitzen, ist die Funktion $f(x)$ auf $R$ stetig.}
+		\end{choice}
+    \end{question}
+    
+    
+    \begin{question} %7
+    	\lang{de}{
+	      	\text{Kreuzen Sie korrekte Aussagen an. Wenn die Frage lautet: \\
+      	Ist $f$ stetig, so ist stets nach Stetigkeit auf dem gesamten Definitionsbereich gefragt.\\
+      	Eventuell werden eine oder beide der wie folgt definierten Funktionen auftauchen.\\
+  	Die sogenannte \textit{Signum-}Funktion (kurz: sgn) ist definiert durch\\
+   $ \text{sgn}: \R\to\R, \text{sgn}(x) := \begin{cases} 
+                             -1 &, \text{ falls } x < 0, \\
+                             0 &, \text{ falls } x= 0, \\
+                             1, &, \text{ falls } x>0.
+                            \end{cases}$\\
+	Außerdem definiert man die \textit{Heaviside-}Funktion durch\\
+	$h:\R\to\R, h(x):= \begin{cases}
+                       0 &, \text{ falls } x< 0 \\
+                       1 &, \text{ falls } x\ge0
+                       \end{cases}. $
+
+    	}
+    	}
+    	\type{mc.yesno}
+
+    	
+    	\begin{choice}
+    		\text{Die Gauß-Klammer-Funktion ist linksseitig stetig. }
+  			\solution{false}
+            \explanation[edited]{Die Gauß-Klammer-Funktion ist linksseitig für $x\in Z$ nicht stetig. 
+            Beispielsweise gilt: $\lim_{x \nearrow 1}[x]=0 \neq 1=[1]$.}
+		\end{choice}
+		\end{question}
+		
+		
+		\begin{question} %8
+    	\lang{de}{
+	      	\text{ }}
+	      	\type{mc.yesno}
+		\begin{choice}
+			\text{Die Gauß-Klammer-Funktion ist rechtsseitig stetig.}
+  			\solution{true}
+            \explanation[edited]{Die Gauß-Klammer-Funktion ist rechtsseitig für $x\in Z$ stetig. 
+            Beispielsweise gilt: $\lim_{x \searrow 1}[x]=1=[1]$.}
+		\end{choice}
+		\end{question}
+		
+		\begin{question} %9
+    	\lang{de}{
+	      	\text{ }}
+	      	\type{mc.yesno}
+		\begin{choice}
+			\text{Die Gauß-Klammer-Funktion ist stetig.}
+  			\solution{false}
+            \explanation[edited]{Die Gauß-Klammer-Funktion hat Sprungstellen für $x\in Z$, 
+            sie ist also nicht stetig.}
+		\end{choice}
+		\end{question}
+		
+		
+		
+		\begin{question} %10
+    	\lang{de}{
+	      	\text{ }}
+	      	\type{mc.yesno}
+		\begin{choice}
+			\text{Die Dirichlet'sche Sprungfunktion ist rechtsseitig stetig.}
+  			\solution{false}
+            \explanation[edited]{Die Dirichlet'sche Sprungfunktion ist an jeder Stelle unstetig, 
+            weil sie je nach Zugehörigkeit von $x$ zu $Q$ die Werte $0$ oder $1$ annimmt.}
+		\end{choice}
+		\end{question}
+		
+		\begin{question} %11
+    	\lang{de}{
+	      	\text{ }}
+	      	\type{mc.yesno}
+		\begin{choice}
+			\text{Die Dirichlet'sche Sprungfunktion ist linksseitig stetig.}
+  			\solution{false}
+            \explanation[edited]{Die Dirichlet'sche Sprungfunktion ist an jeder Stelle unstetig, 
+            weil sie je nach Zugehörigkeit von $x$ zu $Q$ die Werte $0$ oder $1$ annimmt.}
+		\end{choice}
+		\end{question}
+		
+		\begin{question} %12
+    	\lang{de}{
+	      	\text{ }}
+	      	\type{mc.yesno}
+		\begin{choice}
+			\text{Die Signum-Funktion ist stetig.}
+  			\solution{false}
+            \explanation[edited]{Die Signum-Funktion hat bei $x=0$ eine Sprungstelle, ist also nicht 
+            auf $R$ stetig.}
+		\end{choice}
+		\end{question}
+		
+		\begin{question} %13
+    	\lang{de}{
+	      	\text{ }}
+	      	\begin{variables}
+	      	\randint[Z]{c}{-9}{9}
+	      	\end{variables}
+	      	\type{mc.yesno}
+		\begin{choice}
+			\text{Die Signum-Funktion ist stetig in $x_0=\var{c}$. }
+  			\solution{true}
+            \explanation[edited]{Die Signum-Funktion hat nur bei $x=0$ eine Sprungstelle, 
+            bei $\var{c}$ ist sie also stetig. }
+		\end{choice}
+		\end{question}
+		
+		\begin{question} %14
+    	\lang{de}{
+	      	\text{ }}
+	      	\type{mc.yesno}
+		\begin{choice}
+			\text{Die Heaviside-Funktion ist stetig.}
+  			\solution{false}
+            \explanation[edited]{Die Heaviside-Funktion hat bei $x=0$ eine Sprungstelle,
+            ist also nicht stetig auf $R$.}
+		\end{choice}
+		\end{question}
+		
+		\begin{question} %15
+    	\lang{de}{
+	      	\text{ }}
+	      	\type{mc.yesno}
+		\begin{choice}
+			\text{Die Exponentialfunktion ist stetig ist auf $\R$.}
+  			\solution{true}
+            \explanation[edited]{Die Exponentialfunktion ist das 
+            klassische Beispiel einer stetigen Funktion.}
+		\end{choice}
+		\end{question}
+		
+		\begin{question} %16
+    	\lang{de}{
+	      	\text{ }}
+	      	\begin{variables}
+	      	\randint[Z]{c}{-9}{9}
+	      	\end{variables}
+	      	\type{mc.yesno}
+		\begin{choice}
+			\text{Die Heaviside-Funktion ist stetig in $x_0=\var{c}$.}
+  			\solution{true}
+            \explanation[edited]{Die Heaviside-Funktion hat nur bei $x=0$ eine Sprungstelle, 
+            d.h. in $x_0=\var{c}$ ist sie stetig.}
+		\end{choice}
+		\end{question}
+		
+		\begin{question} %17
+    	\lang{de}{
+	      	\text{ }}
+	      	\type{mc.yesno}
+		\begin{choice}
+			\text{ Die Heaviside-Funktion ist rechtsseitig stetig.}
+  			\solution{true}
+            \explanation[edited]{Die Heaviside-Funktion ist rechtsseitig stetig, weil 
+            $\lim_{x\searrow 0}h(x)=1=h(0)$.}
+		\end{choice}
+		\end{question}
+		
+		\begin{question} %18
+    	\lang{de}{
+	      	\text{ }}
+	      	\type{mc.yesno}
+		\begin{choice}
+			\text{Wenn $f:\R\to\R, \ g: \R\to \R$ stetig sind, so auch $f+g:\R\to \R$.}
+  			\solution{true}
+            \explanation[edited]{Kompositionen stetiger Funktionen sind stetig. }
+		\end{choice}
+		\end{question}
+		
+		\begin{question} %19
+    	\lang{de}{
+	      	\text{ }}
+	      	\type{mc.yesno}
+		\begin{choice}
+			\text{ Wenn $f:\R\to\R, \ g: \R\to \R$ stetig sind, so auch $f\cdot g:\R\to\R$.}
+  			\solution{true}
+            \explanation[edited]{Kompositionen stetiger Funktionen sind stetig. }
+		\end{choice}
+		\end{question}
+		
+		\begin{question} %20
+    	\lang{de}{
+	      	\text{ }}
+	      	\type{mc.yesno}
+		\begin{choice}
+			\text{Wenn $f:\R\to\R$ stetig ist, so auch $r\cdot f:\R\to\R,\ r\in\R$.}
+  			\solution{true}
+            \explanation[edited]{Dies ist eine einfache Komposition stetiger Funktionen: $f(x)$ und 
+            $g(x)=r$.}
+		\end{choice}
+		\end{question}
+		
+		\begin{question} %21
+    	\lang{de}{
+	      	\text{ }}
+	      	\type{mc.yesno}
+		\begin{choice}
+			\text{Wenn $f$ linksseitig stetig ist, so ist $f$ stetig.}
+  			\solution{false}
+            \explanation[edited]{Für Stetigkeit muss $f$ auch noch rechtsseitig stetig sein.}
+		\end{choice}
+		\end{question}
+		
+		\begin{question} %22
+    	\lang{de}{
+	      	\text{ }}
+	      	\type{mc.yesno}
+		\begin{choice}
+			\text{Wenn $f$ rechtsseitig stetig ist, so ist $f$ stetig.}
+  			\solution{false}
+            \explanation[edited]{Für Stetigkeit muss $f$ auch noch linksseitig stetig sein.}
+		\end{choice}
+		\end{question}
+		
+		\begin{question} %23
+    	\lang{de}{
+	      	\text{ }}
+	      	\type{mc.yesno}
+		\begin{choice}
+			\text{Wenn $f$ links- und rechtsseitig stetig ist, so ist $f$ stetig.}
+  			\solution{true}
+            \explanation[edited]{Rechts- und linksseitige Stetigkeit ist hinreichend für Stetigkeit.}
+		\end{choice}
+		\end{question}
+		
+		\begin{question} %24
+    	\lang{de}{
+	      	\text{ }}
+	      	\type{mc.yesno}
+		\begin{choice}
+			\text{Wenn $f$ stetig ist, so ist $f$ linksseitig stetig.}
+  			\solution{true}
+            \explanation[edited]{eine stetige Funktion ist sowieso linksseitig stetig.}
+		\end{choice}
+		\end{question}
+		
+		\begin{question} %25
+    	\lang{de}{
+	      	\text{ }}
+	      	\type{mc.yesno}
+		\begin{choice}
+			\text{Wenn $f$ stetig ist, so ist $f$ rechtsseitig stetig.}
+  			\solution{true}
+            \explanation[edited]{eine stetige Funktion ist sowieso rechtsseitig stetig.}
+		\end{choice}
+		
+    \end{question}
+
+    
+	
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+
+
+\end{content}

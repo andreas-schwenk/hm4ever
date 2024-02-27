@@ -1,0 +1,247 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+ \name{
+  \lang{de}{A08: Aussagenlogik}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22307}{Ticket 22307}
+\end{block}
+
+\begin{block}[annotation]
+	Formalisierung und Verknüpfung sprachlich formulierter Aussagen
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+\lang{de}{
+	\title{A08: Aussagenlogik}
+}
+
+\begin{problem}
+%
+%
+    \randomquestionpool{1}{5}
+% Q1    
+    \begin{question}
+      \text{Man betrachte die Aussagen \\
+      $A$: \textit{Tim isst Eis.}\\
+      $B$: \textit{Tom isst Eis.}\\
+      $C$: \textit{Es ist heiß.}\\
+      $D$: \textit{Es regnet.}\\
+
+      Wie setzt sich die Aussage\\ \textit{Wenn es heiß ist und nicht regnet, 
+      essen Tim und Tom Eis.}\\
+      aus den Aussagen $A$ bis $D$ zusammen?}
+      
+      \explanation{}
+
+      \begin{variables}
+      \end{variables}
+
+      \permutechoices{1}{4}
+      \type{mc.unique}
+      \field{real}
+      \precision{3}
+
+      \begin{choice}
+        \text{$C\wedge \neg D \Rightarrow A\wedge B$}
+        \solution{true}  
+      \end{choice}      
+      \begin{choice}
+        \text{$\neg (C\wedge D) \Rightarrow A\wedge B$}
+        \solution{false}  
+      \end{choice}      
+      \begin{choice}
+        \text{$A\wedge B\Rightarrow C\wedge \neg D$}
+        \solution{false}  
+      \end{choice}      
+      \begin{choice}
+        \text{$A\wedge B\Rightarrow \neg (C\wedge  D)$}
+        \solution{false}
+      \end{choice}      
+    \end{question}
+    
+% Q2  
+    \begin{question}
+      \text{Man betrachte die Aussagen \\
+      $A$: \textit{Tim isst Eis.}\\
+      $B$: \textit{Tom isst Eis.}\\
+      $C$: \textit{Es ist heiß.}\\
+      $D$: \textit{Es regnet.}\\
+
+      Wie setzt sich die Aussage\\ \textit{Tim und Tom essen kein Eis, wenn es regnet.}\\
+      aus den Aussagen $A$ bis $D$ zusammen?}
+      
+      \explanation{Die Aussage lässt sich auch so formulieren:\\
+      \textit{Wenn es regnet, dann isst Tim kein Eis und Tom isst kein Eis.}}
+      
+      \begin{variables}
+      \end{variables}
+
+      \permutechoices{1}{4}
+      \type{mc.unique}
+      \field{real}
+      \precision{3}
+
+      \begin{choice}
+        \text{$D \Rightarrow \neg A\wedge \neg B$}
+        \solution{true}  
+      \end{choice}      
+      \begin{choice}
+        \text{$\neg A \wedge \neg B \Rightarrow D$}
+        \solution{false}  
+      \end{choice}      
+      \begin{choice}
+        \text{$D\Rightarrow \neg(A\wedge B)$}
+        \solution{false}  
+      \end{choice}      
+      \begin{choice}
+        \text{$\neg (A\wedge B)\Rightarrow D$}
+        \solution{false}
+      \end{choice}      
+    \end{question}
+
+% Q3
+    \begin{question}
+      \text{Man betrachte die Aussagen \\
+      $A$: \textit{Tim isst Eis.}\\
+      $B$: \textit{Tom isst Eis.}\\
+      $C$: \textit{Es ist heiß.}\\
+      $D$: \textit{Es regnet.}\\
+
+      Wie setzt sich die Aussage\\ \textit{Tim isst immer dann Eis, wenn es heiß ist
+      und nicht regnet.}\\
+      aus den Aussagen $A$ bis $D$ zusammen?}
+      
+      \explanation{Es besteht hier eine \textit{genau dann, wenn} Beziehung.}
+      
+      \begin{variables}
+      \end{variables}
+
+      \permutechoices{1}{4}
+      \type{mc.unique}
+      \field{real}
+      \precision{3}
+
+      \begin{choice}
+        \text{$A\Leftrightarrow C\wedge \neg D$}
+        \solution{true}  
+      \end{choice}      
+      \begin{choice}
+        \text{$\neg D\vee C \Leftrightarrow A$}
+        \solution{false}  
+      \end{choice}      
+      \begin{choice}
+        \text{$C\wedge \neg D\Rightarrow A$}
+        \solution{false}  
+      \end{choice}      
+      \begin{choice}
+        \text{$\neg (C\wedge D)\Leftrightarrow A$}
+        \solution{false}
+      \end{choice}  
+    \end{question}
+
+% Q4
+    \begin{question}
+      \text{Man betrachte die Aussagen \\
+      $A$: \textit{Felix hat ein grünes Fahrrad.}\\
+      $B$: \textit{Alex hat ein grünes Fahrrad.}\\
+      $C$: \textit{Laura hat ein rotes Fahrrad.}\\
+      Wie setzt sich die Aussage\\ \textit{Weder Felix, noch Alex haben ein grünes Fahrrad, 
+      aber Laura hat ein rotes.}\\
+      aus den Aussagen $A$ bis $C$ zusammen?}
+      
+      \explanation{}
+
+      \begin{variables}
+      \end{variables}
+
+      \permutechoices{1}{4}
+      \type{mc.unique}
+      \field{real}
+      \precision{3}
+
+      \begin{choice}
+        \text{$(\neg A \wedge \neg B)\wedge C$}
+        \solution{true}  
+      \end{choice}      
+      \begin{choice}
+        \text{$(\neg A \vee \neg B)\wedge C$}
+        \solution{false}  
+      \end{choice}      
+      \begin{choice}
+        \text{$\neg (A\wedge B)\wedge C$}
+        \solution{false}  
+      \end{choice}      
+      \begin{choice}
+        \text{$\neg (A\wedge B)\vee C$}
+        \solution{false}
+      \end{choice}      
+    \end{question}
+
+% Q5
+    \begin{question}
+      \text{Man betrachte die Aussagen \\
+      $A$: \textit{Felix hat ein grünes Fahrrad.}\\
+      $B$: \textit{Alex hat ein grünes Fahrrad.}\\
+      $C$: \textit{Laura hat ein rotes Fahrrad.}\\
+      Wie setzt sich die Aussage\\ \textit{Entweder hat Laura ein rotes  Fahrrad und weder Felix,
+      noch Alex haben ein grünes, oder Felix und Alex haben beide ein grünes Fahrrad, aber 
+      Laura kein rotes.}\\
+      aus den Aussagen $A$ bis $C$ zusammen?}
+      
+      \lang{de}{\explanation{In diesem Fall schließen sich die "`oder"'-Alternativen sowieso 
+      aus, weshalb "`entweder, oder"' hier gleich "`oder"' ist.}}
+      
+      \begin{variables}
+      \end{variables}
+
+      \permutechoices{1}{4}
+      \type{mc.unique}
+      \field{real}
+      \precision{3}
+
+      \begin{choice}
+        \text{$(C\wedge \neg A \wedge \neg B)\vee (A\wedge B\wedge \neg C)$}
+        \solution{true}  
+      \end{choice}      
+      \begin{choice}
+        \text{$(C\wedge \neg (A\vee B))\vee ((A\vee B)\wedge \neg C)$}
+        \solution{false}  
+      \end{choice}      
+      \begin{choice}
+        \text{$(C\vee \neg C) \wedge ((\neg A\wedge \neg B)\vee (A\wedge B))$}
+        \solution{false}  
+      \end{choice}      
+      \begin{choice}
+        \text{$(C\wedge \neg (A\wedge B))\vee ((A\wedge B)\wedge \neg C)$}
+        \solution{false}
+      \end{choice}      
+    \end{question}
+
+
+%
+%
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

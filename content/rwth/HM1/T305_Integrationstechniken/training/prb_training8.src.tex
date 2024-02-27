@@ -1,0 +1,80 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A08: Partialbruchzerlegung}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/19138}{Ticket 19138}
+\end{block}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A08: Partialbruchzerlegung}}
+
+\begin{problem}
+	\begin{question}
+		
+		\begin{variables}
+			\randint[Z]{a}{-5}{5} %Z heißt "ohne 0"
+			\randint[Z]{b}{-5}{5} 
+			\randint[Z]{c}{-5}{5}
+            \function[calculate]{A}{c+b*a}
+            \randadjustIf{b}{A=0}%Damit Aufgabe immer richtig korrigiert wird, siehe Tr7
+            \function[normalize]{xc1}{x-a}  %xc1 sollte besser xa heißen?
+            \function[normalize]{f}{(b*x+c)/(xc1)^2}
+            \function{s1}{b/xc1}
+            \function{s2}{A/xc1^2}
+            \function{s}{s1+s2}
+            
+            \function{F}{b*ln(abs(xc1))-(c+a)/xc1}
+			
+            
+		\end{variables}
+		
+		\lang{de}{
+	    \text{Bestimmen Sie die Partialbruchzerlegung der rationalen Funktion 
+        $f(x)=\var{f}$.\\        
+        $\var{f}=$\ansref.\\
+        Bestimmen Sie nun noch eine Stammfunktion $F(x)$ der rationalen Funktion $f(x)$.\\
+        $F(x)=$\ansref.}
+		}
+     
+	\type{input.function}
+	\field{rational}
+	\begin{answer}
+		\solution{s}
+        \inputAsFunction{x}{k}
+        \checkAsFunction{x}{-10}{10}{100}
+        \checkStringsForRelation{count(/,k)>1 AND count((,k)<3 AND count(x,k)<3 AND equal(s,k)}
+        \explanation{Es ist der Ansatz $\frac{A}{\var{xc1}}+\frac{B}{(\var{xc1})^2}$ mit reellen Zahlen $A$ und $B$ zu wählen.}
+        \explanation[count((,k)>2)]{Nutzen Sie nur so viele Klammern wie nötig.}
+	\end{answer}
+    \begin{answer}
+        \solution{F}
+        \inputAsFunction{x}{Fx}
+        \checkFuncForZero{D[Fx]-s}{-10}{10}{100}
+        \explanation{Nutzen Sie die Partialbruchzerlegung, um eine Stammfunktion zu bestimmen.}
+    \end{answer}
+	\end{question}
+\end{problem}
+
+\embedmathlet{mathlet}
+\end{content}
+

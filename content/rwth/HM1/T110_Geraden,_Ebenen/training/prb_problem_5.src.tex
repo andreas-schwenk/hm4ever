@@ -1,0 +1,96 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A06: Lagebeziehungen}
+    \lang{en}{input numbers}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A06: Lagebeziehungen}}
+\lang{en}{\title{Problem 6}}
+
+\begin{block}[annotation]
+  Schnittpunkt Gerade und Ebene
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9642}{Ticket 9642}
+\end{block}
+
+\begin{problem}
+
+%Question 1 of 1
+\begin{question} 
+	\lang{de}{ 
+      	\text{Berechnen Sie den Schnittpunkt $S = (S_x;S_y;S_z)$ der Gerade
+      	$g: \vec{x} = \begin{pmatrix} \var{Px}\\\var{Py}\\\var{Pz}\end{pmatrix} + \lambda\cdot \begin{pmatrix} \var{vx}\\\var{vy}\\\var{vz}\end{pmatrix}$, $\lambda\in\R$\\
+		mit der Ebene
+		$E: \vec{x} = \begin{pmatrix} \var{Qx}\\\var{Qy}\\\var{Qz}\end{pmatrix} + \mu\cdot \begin{pmatrix} \var{wx}\\\var{wy}\\\var{wz}\end{pmatrix} + \rho\cdot\begin{pmatrix}\var{ux}\\\var{uy}\\\var{uz}\end{pmatrix}$, $\mu,\rho\in\R$.}
+    	\explanation{Eine Möglichkeit zur Lösung der Aufgabe ist es, die Geradengleichung und Ebenengleichung gleichzusetzen und das erhaltene Gleichungssystem zu lösen. Die erhaltenen Parameter werden in die Geradengleichung eingesetzt und der Punkt ausgerechnet.}
+    }
+    \lang{en}{
+    	\text{Calculate the intersection point $S = (S_x,S_y,S_z)$ of the line
+    	$g: \vec{x} = \begin{pmatrix} \var{Px}\\\var{Py}\\\var{Pz}\end{pmatrix} + \lambda\cdot \begin{pmatrix} \var{vx}\\\var{vy}\\\var{vz}\end{pmatrix}$, $\lambda\in\R$\\
+    	with the plane $E: \vec{x} = \begin{pmatrix} \var{Qx}\\\var{Qy}\\\var{Qz}\end{pmatrix} + \mu\cdot \begin{pmatrix} \var{wx}\\\var{wy}\\\var{wz}\end{pmatrix} + \rho\cdot\begin{pmatrix}\var{ux}\\\var{uy}\\\var{uz}\end{pmatrix}$, $\mu,\rho\in\R$.}
+    	\explanation{Set the equations of the line and plane equal to each other and solve the resulting system. The parameter that comes out can be substituted into the equation of the line and the intersection point can be calculated from that.}
+    } 
+    \begin{variables}
+    	\randint{Px}{-5}{5}
+      	\randint{Py}{-5}{5}
+      	\randint{Pz}{-5}{5}
+		\randint{l}{-7}{7}
+		\randint{m}{-7}{7}
+		\randint{r}{-7}{7}
+      	\function[calculate]{Qx}{Px+l*vx-m*wx-r*ux}
+      	\function[calculate]{Qy}{Py+l*vy-m*wy-r*uy}
+      	\function[calculate]{Qz}{Pz+l*vz-m*wz-r*uz}    	
+      	\randint{vx}{-5}{5}
+      	\randint{vy}{-5}{5}
+      	\randint[Z]{vz}{-5}{5}
+      	\randint{wx}{-5}{5}
+      	\randint{wy}{-5}{5}
+      	\randint{wz}{-5}{5}
+      	\randint{ux}{-5}{5}
+      	\randint{uy}{-5}{5}
+      	\randint{uz}{-5}{5}
+      	\randadjustIf{wx,wy,wz,ux,uy,uz}{wx*uy-wy*ux=0} 
+      	\randadjustIf{vx,vy,vz,wx,wy,wz,ux,uy,uz}{vx*wy*uz+wx*uy*vz+ux*vy*wz-ux*wy*vz-wx*vy*uz-vx*uy*wz=0}      	
+      	\function[calculate]{Sx}{Px+l*vx}
+      	\function[calculate]{Sy}{Py+l*vy}
+      	\function[calculate]{Sz}{Pz+l*vz}      	
+	\end{variables}
+	\type{input.number}
+	\begin{answer}
+		\text{$S_x = $}
+		\solution{Sx}
+	\end{answer}
+	\begin{answer}
+		\text{$S_y = $}
+		\solution{Sy}
+	\end{answer}
+	\begin{answer}
+		\text{$S_z = $}
+		\solution{Sz}
+	\end{answer}
+\end{question}
+
+\end{problem}
+
+\embedmathlet{mathlet}
+\end{content}

@@ -1,0 +1,140 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü05: Stammfuntkion rationaler Funktionen}
+    \lang{en}{Exercise 5}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+
+\title{\lang{de}{Ü05: Stammfuntkion rationaler Funktionen}}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10923}{Ticket 10923}
+\end{block}
+
+%######################################################FRAGE_TEXT
+\lang{de}{ 
+Bestimmen Sie jeweils eine Stammfunktion für die rationalen Funktionen
+\[  a)\quad f_1(x)=\frac{1}{x^2-4x+4},\qquad b)\quad f_2(x)= \frac{x}{x^4+2x^2+1}, \qquad c)\quad f_3(x)=\frac{2x+1}{x^2-2x+2} .
+\]
+Berechnen Sie des Weiteren deren Integrale über dem Intervall $[0;1]$.
+
+ }
+
+%##################################################ANTWORTEN_TEXT
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Antwort    }}
+
+    \lang{de}{   
+\begin{enumerate}[a)]
+\item a) Eine Stammfunktion von $f_1=\frac{1}{x^2-4x+4}$ ist $F_1(x)=-\frac{1}{x-2}$ und $\int_0^1 f_1(x)\; dx= \frac{1}{2}$.
+\item b) Eine Stammfunktion von $f_2(x)= \frac{x}{x^4+2x^2+1}$ ist $F_2(x)=- \frac{1}{2}\cdot \frac{1}{x^2+1}$ und
+$\int_0^1 f_2(x)\; dx= \frac{1}{4}$.
+\item c) Eine Stammfunktion von $f_3(x)=\frac{2x+1}{x^2-2x+2}$ ist
+$F_3(x)=\ln(|x^2-2x+2|)+ 3\arctan(x-1) $ und $\int_0^1 f_3(x)\; dx=\frac{3\pi}{4}-\ln(2)\approx 1,663$.
+\end{enumerate}    }
+
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung a)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step    
+Das Polynom im Nenner lässt sich mit der zweiten binomischen Formel schreiben als
+\[ x^2-4x+4=(x-2)^2. \]
+Die rationale Funktion ist also $f_1(x)=\frac{1}{(x-2)^2}=(x-2)^{-2}$.
+Mit Hilfe der linearen Substitution ist eine Stammfunktion also
+$F_1(x)=-1\cdot (x-2)^{-1}=-\frac{1}{x-2}$.
+
+\step Damit ist
+\[ \int_0^1 f_1(x)\; dx=F_1(1)-F_1(0)=-\frac{1}{1-2} + \frac{1}{0-2}=1-\frac{1}{2}=\frac{1}{2}.\]
+
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung b)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step    
+Das Polynom im Nenner kann man mit Hilfe der ersten binomischen Formel schreiben als
+\[ x^4+2x^2+1=(x^2+1)^2. \]
+\step Im Zähler des Bruchs steht $x$, was bis auf einen Faktor $2$ genau die Ableitung von $x^2+1$ ist. Mit Hilfe der Substitutionsregel gilt daher mit $g(x)=x^2+1$:
+\[ \int_\alpha^\beta \frac{x}{(x^2+1)^2}\; dx= \int_\alpha^\beta \frac{1}{2}g'(x)\cdot g(x)^{-2} \; dx= \int_{g(\alpha)}^{g(\beta)}  \frac{1}{2}\cdot y^{-2}\; dy
+= \left[ -\frac{1}{2} y^{-1} \right]_{g(\alpha)}^{g(\beta)} 
+= \left[ \frac{-1}{2(x^2+1)} \right]_\alpha^\beta.\]
+\step Also ist 
+$F_2(x)= \frac{-1}{2(x^2+1)} $ eine Stammfunktion von $f_2(x)= \frac{x}{x^4+2x^2+1}$.
+
+\step Das Integral $\int_0^1 f_2(x)\; dx$ ist damit wieder einfach zu berechnen:
+\[ \int_0^1 f_2(x)\; dx =  F_2(1)- F_2(0)= \frac{-1}{2(1^2+1)}-\frac{-1}{2(0^2+1)}=
+\frac{-1}{4}- \frac{-1}{2}=\frac{1}{4}. \]
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung c)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step Das Polynom im Nenner hat keine reelle Nullstelle, wie man mit Hilfe der pq-Formel feststellen kann. Wir sind also in dem Fall eines quadratischen Nenners ohne Nullstelle.
+
+\step Im ersten Schritt ist daher der Zähler so als Summe aufzuspalten, dass ein Summand ein reelles Vielfaches der Ableitung des Nenners ist und der andere Summand lediglich eine reelle Zahl.\\
+Die Ableitung des Nenners $x^2-2x+2$ ist $2x-2$, weshalb wir also $f_3(x)$ zerlegen in
+\[ f_3(x)=\frac{2x+1}{x^2-2x+2} =\frac{2x-2}{x^2-2x+2}+ \frac{3}{x^2-2x+2}.\]
+\step Mit der Substitutionsregel ist dann eine Stammfunktion des ersten Bruchs gegeben durch
+$\ln(|x^2-2x+2|)$.
+
+\step Eine Stammfunktion des zweiten Bruchs ist eine Arkustangens-Funktion. Um sie zu bestimmen, ist der Nenner mittels quadratischer Ergänzung in die Form 
+$c\cdot \left( (mx+b)^2+1\right)$ zu bringen:
+\[ x^2-2x+2=(x-1)^2 -1+2=(x-1)^2+1. \]
+\step Mit der linearen Substitution $g(x)=x-1$ (und $g'(x)=1$)  hat man dann
+\[  \int_\alpha^\beta \frac{3}{x^2-2x+2}\; dx= \int_{g(\alpha)}^{g(\beta)}
+  \frac{3}{y^2+1}\; dy = \big[ 3\arctan(y) \big]_{g(\alpha)}^{g(\beta)}
+  =  \big[ 3\arctan(x-1) \big]_\alpha^\beta.\]
+Eine Stammfunktion von $\frac{3}{x^2-2x+2}$ ist also $3\arctan(x-1)$.
+
+\step Insgesamt erhalten wir also als Stammfunktion von $f_3(x)=\frac{2x+1}{x^2-2x+2}$:
+\[ F_3(x)= \ln(|x^2-2x+2|)+3\arctan(x-1).\]
+
+\step Und das bestimmte Integral ist
+\begin{eqnarray*}
+ \int_0^1 f_3(x)\; dx &=&  F_3(1)- F_3(0)\\
+ &=& \ln(|1-2+2|)+3\arctan(1-1)- \ln(|0-0+2|)-3\arctan(0-1) \\
+&=& 0+0-\ln(2)-3\frac{-\pi}{4}=\frac{3\pi}{4}-\ln(2)\approx 1,663.
+\end{eqnarray*} 
+
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+
+%#############################################################ENDE
+\end{tabs*}
+\end{content}

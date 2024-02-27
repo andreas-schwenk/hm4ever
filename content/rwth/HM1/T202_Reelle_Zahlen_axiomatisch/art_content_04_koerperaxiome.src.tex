@@ -1,0 +1,432 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Körperaxiome und Rechenregeln}
+    \lang{en}{definition of fields}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_02_rechengrundlagen_terme.meta.xml}{content_02_rechengrundlagen_terme}
+    \link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_01_zahlenmengen.meta.xml}{content_01_zahlenmengen}
+    \link{generic_article}{content/rwth/HM1/T202_Reelle_Zahlen_axiomatisch/g_art_content_05_anordnungsaxiome.meta.xml}{anordnung}
+    \link{generic_article}{content/rwth/HM1/T202_Reelle_Zahlen_axiomatisch/g_art_content_07_vollstaendigkeit.meta.xml}{vollst}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+
+
+\begin{content}
+
+\usepackage{mumie.ombplus}
+\ombchapter{2}
+\ombarticle{1}
+
+\lang{de}{\title{Körperaxiome und Rechenregeln}}
+\lang{en}{\title{Field axioms and calculation rules}}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9638}{Ticket 9638}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+\lang{de}{Wir sind vertraut mit den reellen Zahlen, die wir als endliche oder unendliche Dezimalzahlen und als Punkte
+auf der Zahlengeraden kennen. Es gibt zwei grundsätzliche Möglichkeiten, $\R$ einzuführen. 
+
+Einerseits kann man $\R$ konstruktiv aus $\Q$ gewinnen, indem man, wie im 
+\ref[content_01_zahlenmengen][Grundlagenkapitel]{introduction_R} gezeigt, anschaulich die "`Lücken"' 
+auf der Zahlengeraden auffüllt.  
+Andererseits gibt es die axiomatische Beschreibung der reellen Zahlen $\R$, die wir im Folgenden
+ausführen möchten.
+Dabei wird $\R$ als eine Menge beschrieben, die gewissen Axiomen genügt, und man kann feststellen,
+dass $\R$ durch diese Axiome eindeutig festgelegt wird. Dies wird allerdings hier
+nicht stringent nachgewiesen.
+
+Die Axiome sind in drei Teile aufgeteilt. 
+Der erste Teil besteht aus Gesetzen, die sich lediglich mit der Addition und der 
+Multiplikation beschäftigen. Dieser Teil wird nachfolgend in den Abschnitten 
+\ref{sec:axiome} und \ref{sec:rechenregeln} behandelt. Der zweite Teil besteht aus 
+Regeln zur Anordnung der Elemente (den \link{anordnung}{Anordnungsaxiomen}) und 
+der dritte Teil behandelt die "`Lücken"' über entsprechende \link{vollst}{Vollständigkeitsaxiome}.
+
+Viele der in diesem Kapitel beschreibenen Axiome sind als 
+\ref[content_02_rechengrundlagen_terme][elementare Rechnenregeln für $\R\,$]{sec:grundrechenarten} 
+bereits bekannt aus dem Grundlagenkapitel. Im Rahmen dieses Kapitels werden sie allgemeiner für 
+sogenannte \emph{"`Körper"'} beschrieben. 
+}
+\lang{en}{We are familiar with the real numbers, which we know as terminating or non-terminating decimals
+and as points on the number line. There are two basic ways to introduce $\R$.
+
+On the one hand, $\R$ can be constructed from $\Q$, by filling in the 'gaps' on the number line as shown in 
+the \ref[content_01_zahlenmengen][chapter on foundations]{introduction_R}. On the other hand, there exists an axiomatic 
+description of the real numbers $\R$, which we will establish in this chapter. $\R$ will be described as a set which satisfies 
+certain axioms, and one can then check that $\R$ is uniquely determined by these axioms. However, this is not rigorously proven here.
+
+The axioms are split into three parts. The first part consists of rules that only deal with addition and multiplication. 
+This part will be handled in sections \ref{sec:axiome} und \ref{sec:rechenregeln}. The second part consists of rules for the ordering of elements
+(the \link{anordnung}{order axioms}), and the third part deals with the 'gaps' via the \link{vollst}{completeness axioms}.
+
+Many of the axioms described in this chapter will already be familiar as \ref[content_02_rechengrundlagen_terme][elementary rules for calculation in $\R\,$]{sec:grundrechenarten}
+from the chapter on foundations. In the context of this chapter, we will define these more generally for so-called 'fields'.
+}
+
+
+\section{\lang{de}{Körperaxiome}\lang{en}{Field axioms}}\label{sec:axiome}
+
+\begin{definition}[\lang{de}{Körper}\lang{en}{Fields}] \label{def:koerper}
+    \lang{en}{Let $\K$ be a set and $a, b, c\in\K.$}
+    \lang{de}{Sei $\K$ eine Menge, $a, b, c\in\K.$}
+    
+    \lang{en}{
+    A set $\K$ is called a \notion{field} if two binary operations are defined on it, 
+    usually called \emph{addition}, denoted by +, and \emph{multiplication}, 
+    denoted by $\cdot$. These binary operations assign any two elements $a,b\in \K$ a unique 
+    \emph{sum} $a+b\in \K$ and \emph{product} $a\cdot b\in \K$ such that the following \notion{axioms} are satisfied.
+    
+    \\
+    \emph{Axioms of addition:} \\ \\
+    \begin{itemize}
+        \item[(A1)] $a+b=b+a$ $\quad$ (commutative law) 
+        \item[(A2)] $\left(a+b\right)+c=a+\left(b+c\right)$ $\quad$ 
+            (associative law)
+        \item[(A3)] There exists a \emph{zero} element $0\in\K,$ such that $a+0=a$ for all $a\in \K$.
+             Zero is also called \emph{additive identity} (or neutral element).
+        \item[(A4)] For any $a\in\K$ there exists an \emph{additive inverse} 
+            (a \emph{negative}) element \\ $-a\in\K$ such that 
+            $a+\left(-a\right)=0$.
+    \end{itemize}        
+     
+    \\   
+    \emph{Axioms of multiplication:} \\ \\
+    \begin{itemize}
+        \item[(M1)] $a\cdot b=b\cdot a$ $\quad$ (commutative law)
+        \item[(M2)] $a\cdot\left(b\cdot c\right) = \left(a\cdot b\right)\cdot c$ 
+            $\quad$ (associative law)
+        \item[(M3)] There exists a '\emph{one}' element $1\in\K, 1\neq 0,$\\ such that $a\cdot 1=a$ for any $a\in \K$.
+                    One is also called \emph{multiplicative identity}. 
+        \item[(M4)] For any $a\neq0$ there exists a \emph{multiplicative 
+            inverse} (a \emph{reciprocal}) element $\frac{1}{a}$ (or $a^{-1}$) 
+            such that $a\cdot \frac{1}{a}=1$.
+    \end{itemize}
+    
+    \\
+    \emph{Compatibility of addition and multiplication:} \\
+    \begin{itemize}
+        \item[(D)] $\left(a+b\right)\cdot c=a\cdot c+b\cdot c$ $\; \;$ 
+            (distributive law)
+    \end{itemize}    
+    }
+    
+    \lang{de}{
+    Eine Menge $\K$ hei\"st \emph{\notion{K\"orper}}, wenn auf ihr zwei Verkn\"upfungen 
+    definiert sind, die gew\"ohnlich als \emph{Addition} (+) und 
+    \emph{Multiplikation} ($\cdot$) bezeichnet werden. Diese Verkn\"upfungen ordnen je zwei Elementen $a,b\in \K$ eine
+    eindeutige \emph{Summe} $a+b\in \K$ und ein \emph{Produkt} $a\cdot b\in \K$ zu, f\"ur die folgende 
+    \notion{Axiome} gelten.\\
+    
+  
+    Axiome der Addition:    
+    \begin{itemize}
+        \item[\textbf{(A1)}] $a+b=b+a$ $\qquad \qquad \qquad$ \notion{(Kommutativgesetz)}
+        \item[\textbf{(A2)}] $\left(a+b\right)+c=a+\left(b+c\right)$ $\quad \,$
+                \notion{(Assoziativgesetz)}
+        \item[\textbf{(A3)}] Es existiert ein Element \emph{Null} $\; 0\in\K$, so dass $\nowrap{a+0=a}$ für alle $a
+            \in \K$. \\ Die Null wird auch \notion{neutrales Element} der Addition genannt. 
+        \item[\textbf{(A4)}] Zu jedem $a\in\K$ existiert ein 
+                 \notion{inverses Element} der Addition
+                (ein \emph{negatives} Element) $-a\in\K$, so dass 
+            $a+\left(-a\right)=0$.
+    \end{itemize}
+    
+    \\    
+    Axiome der Multiplikation:
+    \begin{itemize}
+        \item[\textbf{(M1)}] $a\cdot b=b\cdot a$ $\qquad \qquad \quad$ 
+                 \notion{(Kommutativgesetz)}
+        \item[\textbf{(M2)}] $a\cdot \left(b\cdot c\right) = \left(a\cdot b\right)\cdot c$ 
+                $\quad \,$ \notion{(Assoziativgesetz)}
+        \item[\textbf{(M3)}] Es gibt ein Element \emph{Eins} $1\in\K,$ mit $1\neq0$
+        so dass für alle $a \in \K$  gilt \nowrap{$a\cdot 1=a$.} Die Eins wird auch
+         \notion{neutrales Element} der Multiplikation genannt.  
+        \item[\textbf{(M4)}] Zu jedem $a\neq0$ existiert ein 
+         \notion{inverses Element} der Multiplikation (ein \emph{Kehrwert}) 
+        $\frac{1}{a}$ (oder $a^{-1}$) mit $a\cdot \frac{1}{a}=1$.
+    \end{itemize}
+    
+    \\
+    Vertr\"aglichkeit von Addition und Multiplikation: \\
+    \begin{itemize}
+        \item[\textbf{(DG)}] $\left(a+b\right)\cdot c=a\cdot c+b\cdot c$ $\; \;$ 
+             \notion{(Distributivgesetz)}
+    \end{itemize}
+    
+    }
+  \end{definition}
+
+\begin{example} \label{ex:koerper}
+\begin{enumerate}
+\item \lang{de}{Die Menge der rationalen Zahlen $\Q$ ist mit der üblichen Addition "`+"' und Multiplikation "`$\cdot$"' 
+ein Körper. Ebenso ist die Menge der reellen Zahlen ein Körper, da 
+die Axiome (A1), (A2), (M1), (M2) und (DG) genau den aus dem Grundlagenteil bekannten
+\ref[content_02_rechengrundlagen_terme][Rechengesetzen für reelle Zahlen]{rule:rechengesetze} entsprechen.
+Zudem sind $0$ und $1$ die neutralen Elemente für die Addition bzw. für die Multiplikation in $\R$. Außerdem sei $r$ eine reelle Zahl. Dann ist
+$-r$ auch ein Element von $\R$. Wäre $r\neq0$ eine reelle Zahl, gehörte die Inverse davon $\frac{1}{r}$ auch zu den reellen Zahlen.}
+\lang{en}{The set of rational numbers $\Q$ equipped with the usual addition '+' and multiplication '$\cdot$' is a field. Likewise the set of real numbers is a field, 
+since the axioms (A1), (A2), (M1), (M2) and (D) follow immediately from the familiar \ref[content_02_rechengrundlagen_terme][calculation rules for real numbers]{rule:rechengesetze}. 
+Moreover $0$ and $1$ are, respectively, the additive and multiplicative identity elements in $\R$. If $r$ is a real number, then $-r$ is also an element of $\R$, and similarly for a real number $r\neq0$, 
+the reciprocal $\frac{1}{r}$ also belongs to the real numbers.}
+\item \lang{de}{$(\Z,+,\cdot)$ ist kein Körper, weil z. B. $2$ in $\Z$ kein Inverses bezüglich der Multiplikation besitzt.}
+\lang{en}{$(\Z,+,\cdot)$ is not a field, since for example $2$ in $\Z$ has no mupltiplicative inverse in $\Z$.}
+\item \lang{de}{Es gibt auch \emph{endliche} Körper, d.h. Körper deren zugrundeliegende Menge endlich viele Elemente besitzt. Das kleinste Beispiel ist die Menge $\mathbb{F}_2 = \{ \bar{0}; \bar{1} \}$ mit den
+Verknüpfungen}
+\lang{en}{There are also \emph{finite} fields, i.e. fields whose underlying set has finitely many elements. The smallest example is the set $\mathbb{F}_2 = \{ \bar{0}; \bar{1} \}$ with the operations}
+\[ \begin{mtable}[\cellaligns{cccc}] \bar{0} + \bar{0} = \bar{0}, &\quad  \bar{0} + \bar{1} = \bar{1},\quad  &
+\bar{1} + \bar{0} = \bar{1},& \quad \bar{1} + \bar{1} = \bar{0},\quad  \\
+\bar{0} \cdot \bar{0}  = \bar{0}, & \bar{0} \cdot \bar{1} = \bar{0},&
+\bar{1} \cdot \bar{0} = \bar{0}, & \bar{1} \cdot \bar{1} = \bar{1}.\end{mtable} \]
+\lang{de}{Die Axiome müssen hier nachgerechnet werden. Endliche Körper spielen in der Informatik und in der Algebra
+eine Rolle. Für die Analysis sind sie jedoch irrelevant.} 
+%Video
+\lang{de}{Dieses Beispiel wird im folgenden Video mit leicht veränderten Symbolen 
+ausführlicher behandelt.
+
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10834&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+}
+\lang{en}{The reader can check the axioms. Finite fields play a role in computer science and algebra, but they are not relevant to analysis.}
+
+\end{enumerate}
+\end{example}
+
+%Video
+\lang{de}{Auch im folgenden Video werden die Körperaxiome besprochen.
+
+\center{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10940&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+}
+  \begin{remarks}
+    \lang{de}{
+    \begin{itemize}
+        \item Der Punkt wird in Produkten meist weggelassen, d.h., 
+            $ab= a\cdot b$.\\
+            In Programmiersprachen ist $*$ als Zeichen f\"ur die Multiplikation verbreitet.
+        \item $a+\left(-b\right)$ wird zu $a-b$ abgek\"urzt.
+        \item $a\cdot \frac{1}{b}$ wird als $\frac{a}{b}$ (oder $a/b$) geschrieben.
+		\item Um Klammern zu sparen, wird die "Punkt-vor-Strich-Regel" verwendet, d.h. 
+		$a+b\cdot c= a+(b\cdot c)$.
+		\item Auch werden die Klammern bei Addition von $3$ oder mehr Termen und bei
+		der Multiplikation von $3$ oder mehr Termen weggelassen, da die Reihenfolge der Additionen
+		bzw. der Multiplikationen aufgrund der Axiome (A2) bzw. (M2) keine Rolle spielen.
+    \end{itemize}    
+    }
+    
+    \lang{en}{
+    \begin{itemize}
+        \item The dot in a product is frequently omitted, i.e., 
+            $ab\equiv a\cdot b$.\\
+            In programming languages $*$ is frequently used as multiplication sign.
+        \item $a+\left(-b\right)$ is shortened to $a-b$.
+        \item $a\cdot \frac{1}{b}$ is written as $\frac{a}{b}$ (or $a/b$).
+        \item To save on using brackets, we employ 'order of operations' rules, prioritising multiplication over addition, i.e. 
+    		$a+b\cdot c= a+(b\cdot c)$.
+    		\item Furthermore, when adding $3$ or more terms, and when multiplying $3$ or more terms, we will omit the brackets, 
+      since the associative laws for addition (A2) and multiplication (M2) ensure that rearranging the brackets does not change the result of the operation.
+        \end{itemize}
+    }
+  \end{remarks}
+
+\begin{example}
+\lang{de}{Wir betrachten den vollständig geklammerten Ausdruck in den rationalen Zahlen}
+\lang{en}{We consider the expression in rational numbers which has explicit brackets in all places}
+\[ \textcolor{#0066CC}{(}(1+3)\cdot 2\textcolor{#0066CC}{)} +\textcolor{#CC6600}{(}\textcolor{#00CC00}{(}4-3\textcolor{#00CC00}{)}
++1\textcolor{#CC6600}{)}. \]
+\lang{de}{Zunächst kann man wegen (A2) die orangenen Klammern weglassen. Weil $-3$ für $+(-3)$ steht, kann man auch die grünen Klammern
+weglassen. Wegen der Punkt-vor-Strich-Regel, kann man auch die blauen Klammern weglassen. Lediglich die schwarzen Klammern
+sind wegen der Punkt-vor-Strich-Regel nötig.
+Aufgrund des Distributivgesetzes (DG) kann man aber $(1+3)\cdot 2$ durch $(1\cdot 2+3\cdot 2)$ ersetzen und 
+erhält dann}
+\lang{en}{First of all, by virtue of (A2) we can omit the orange brackets. Because $-3$ stands for $+(-3)$, we can also omit the green brackets. 
+Because multiplication takes precedence over addition in the order of operations, we can omit the blue brackets. Only the black brackets are necessary, because of order of operations. 
+However, we can apply the distributive law (D) and expand $(1+3)\cdot 2$ to $(1\cdot 2+3\cdot 2)$, which gives}
+\[ (1\cdot 2+3\cdot 2)+4+(-3)+1. \]
+\lang{de}{Bei diesem Ausdruck man nun auch die letzte Klammer wegen des Assoziativgesetzes (A2) weglassen könnte.}
+\lang{en}{In this expression, we can also leave out the final brackets because of associativity of addition (A2).}
+\end{example}
+
+
+\begin{quickcheck}
+
+			\text{\lang{de}{Es seien $a,b$ Elemente eines Körpers $\mathbb{K}$. Welche der 
+            folgenden Ausdrücke sind aufgrund der Körperaxiome und Schreibkonventionen gleich dem Ausdruck
+            $\; a \cdot (a-b)$?}
+            \lang{en}{Let $a,b$ be elements of the field $\mathbb{K}$. Which of the following expressions are, 
+            considering the field axioms and notational conventions, the same as the expression $\; a \cdot (a-b)$?}}
+\begin{choices}{multiple}
+		\begin{choice}
+        \text{$a\cdot a+a\cdot (-b)$}
+        \solution{true}
+      \end{choice}
+      \begin{choice}
+        \text{$(-b)\cdot a+a$}
+        \solution{false}
+      \end{choice}
+      \begin{choice}
+        \text{$(a-b)\cdot a$}
+        \solution{true}
+      \end{choice}
+      \begin{choice}
+        \text{$a\cdot a-b$}
+        \solution{false}
+      \end{choice}
+\end{choices}      
+      \explanation{
+      \lang{de}{$a-b$ ist die Kurzschreibweise für $a+(-b)$, und mit dem Distributivgesetz erhält man dann
+      $a \cdot (a+(-b))=a\cdot a+a\cdot (-b)$. \\
+      Mit Hilfe des Kommutativgesetzes der Addition und
+      der Multiplikation lässt sich letzteres umformen zu $(-b)\cdot a+a\cdot a$, was aber
+      im Allgemeinen zu $(-b)\cdot a+a$ verschieden ist.\\
+      Den Ausdruck $(a-b)\cdot a$ erhält man direkt aus $a \cdot (a-b)$ durch Anwenden
+      des Kommutativgesetzes der Multiplikation mit den Faktoren $a$ bzw. $(a-b)$.\\
+      Wegen der Punkt-vor-Strich-Regel können die Klammern nicht einfach weggelassen werden.}
+      \lang{en}{$a-b$ is short for $a+(-b)$, and applying the distributive law gives $a \cdot (a+(-b))=a\cdot a+a\cdot (-b)$. \\
+      Now commutativity of addition and multiplication lets us rearrange the latter expression to $(-b)\cdot a+a\cdot a$. Note that in general, 
+      this is different from $(-b)\cdot a+a$.\\
+      The expression $(a-b)\cdot a$ can be obtained directly from $a \cdot (a-b)$  by applying the commutative law for multiplication on the two factors $a$ and $(a-b)$.\\
+      Order of operations does not permit us to omit the brackets here.}
+      }
+\end{quickcheck}
+
+
+
+\section{\lang{de}{Rechenregeln in Körpern}\lang{en}{Calculation rules in fields}}\label{sec:rechenregeln}
+
+\lang{de}{Mit Hilfe der Körperaxiome erhält man folgenden Aussagen.}
+\lang{en}{With the help of the field axioms, one obtains the following propositions.}
+
+\begin{theorem}
+\lang{de}{Sei $\K$ ein Körper. Dann gelten:}
+\lang{en}{Let $\K$ be a field. Then:}
+\begin{enumerate}
+\item \lang{de}{Für alle $a, b\in \K$ gibt es genau ein $x\in \K$ mit $a+x=b$, nämlich $x=b+(-a)=b-a$.\\
+  Insbesondere (wenn man $b=a$ wählt) ist das Element $0$ durch (A3) eindeutig bestimmt, 
+  und auch das additive Inverse $-a$ ist für jedes $a$ eindeutig. }
+  \lang{en}{For all $a, b\in \K$ there is precisely one $x\in \K$ with $a+x=b$, namely $x=b+(-a)=b-a$.\\
+  In particular (setting $b=a$) the element $0$ given by (A3) is uniquely defined, and the additive inverse $-a$ is unique for each $a$.}
+\item \lang{de}{Für alle $a, b\in \K$ mit $a\neq 0$ gibt es genau ein $y\in \K$ mit $a\cdot y=b$, 
+    nämlich $y=b \cdot a^{-1}=\frac{b}{a}$.\\ 
+    Insbesondere (wenn man $b=a$ wählt) ist das Element $1$ durch (M3) eindeutig bestimmt, 
+    und auch das multiplikative Inverse $a^{-1}$ ist für jedes $a$ eindeutig.}
+    \lang{en}{For all $a, b\in \K$ with $a\neq 0$, there is precisely one $y\in \K$ with $a\cdot y=b$, 
+    namely $y=b \cdot a^{-1}=\frac{b}{a}$.\\ 
+    In particular (setting $b=a$) the element $1$}
+\end{enumerate}
+\end{theorem}
+
+\begin{proof*}[\lang{de}{Begründung}\lang{en}{Proof}]
+\begin{showhide}
+\lang{de}{Zunächst erfüllt $x=b-a=b+(-a)$ die Gleichung $a+x=b$, denn}
+\lang{en}{To start with, $x=b-a=b+(-a)$ satisfies the equation $a+x=b$, as}
+\begin{align*}
+ a+ (b+(-a))  &\; = a+((-a)+b) \quad &\text{\lang{de}{nach}\lang{en}{by} (A1)} \\
+              &\; = (a+(-a))+b      &\text{\lang{de}{nach}\lang{en}{by} (A2)} \\
+              &\; = 0+b 	        &\text{\lang{de}{nach}\lang{en}{by} (A4)} \\
+              &\; = b+0 	        &\text{\lang{de}{nach}\lang{en}{by} (A1)} \\
+              &\; = b 	            &\text{\lang{de}{nach}\lang{en}{by} (A3)}.
+\end{align*}
+\lang{de}{Um zu zeigen, dass $b+(-a)$ das einzige Element ist, betrachten wir ein beliebiges Element $z\in \K$ mit $a+z=b$. Dann
+folgt}
+\lang{en}{To show that $b+(-a)$ is the only such element, consider an arbitrary element $z\in \K$ with $a+z=b$. Then it follows that}
+\begin{align*}
+ b+(-a)     &\; = (a+z)+(-a)\quad    &  \\
+            &\; = (z+a)+(-a)        &\text{\lang{de}{nach}\lang{en}{by} (A1)} \\
+            &\; = z+ (a+(-a))       &\text{\lang{de}{nach}\lang{en}{by} (A2)} \\
+            &\; = z+  0 	        &\text{\lang{de}{nach}\lang{en}{by} (A4)} \\
+            &\; = z 	            &\text{\lang{de}{nach}\lang{en}{by} (A3)}.
+\end{align*}
+\lang{de}{Der Nachweis, dass $\frac{b}{a}$ das einzige Element ist, das die Gleichung $a\cdot y=b$ erfüllt, geht ganz entsprechend.}
+\lang{en}{The proof that $\frac{b}{a}$ is the only element which satisfies $a\cdot y=b$ is similar.}
+\end{showhide}
+\end{proof*}
+
+\lang{de}{
+%Video
+In diesem Video finden Sie eine weitere Folgerung aus den Körperaxiomen mit einigen Beispielen:
+
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10942&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+}
+
+\lang{de}{Daraus lassen sich alle schon bekannten Rechenregeln für $+$, $\cdot$, $-$ und $:$ herleiten.}
+\lang{en}{From this we can derive all the known calculation rules for  $+$, $\cdot$, $-$ and $:$.}
+
+\begin{rule}\label{regelkoerper}
+\lang{de}{Sei $\K$ ein Körper. Dann gilt für alle $a, b, c, d \in \K$:}
+\lang{en}{Let $\K$ be a field. Then for all $a, b, c, d \in \K$ we have:}
+\begin{enumerate}
+\item \lang{de}{$-0=0$ und $-(a+b)=(-a)+(-b)=-a-b$, sowie $-(-a)=a$.}\lang{en}{$-0=0$ and $-(a+b)=(-a)+(-b)=-a-b$, and $-(-a)=a$.}
+\item $0\cdot b=0$.
+\item \lang{de}{$ (-a)\cdot b=-(a\cdot b)= a\cdot (-b)$ und $(-a)\cdot (-b)=a\cdot b$ (Vorzeichenregel),
+insbesondere $(-1)\cdot b=-b$.}\lang{en}{$ (-a)\cdot b=-(a\cdot b)= a\cdot (-b)$ and $(-a)\cdot (-b)=a\cdot b$ (sign rule),
+in particular $(-1)\cdot b=-b$.}
+\item \lang{de}{Aus $ab=0$ folgt, $a=0$ oder $b=0$. }\lang{en}{If we have $ab=0$, then $a=0$ or $b=0$. }
+\item \lang{de}{$1^{-1}=1$ und  $(ab)^{-1}=a^{-1}b^{-1}$, falls $a\neq 0$ und $b\neq 0$ sind 
+(und damit auch $ab\neq 0$ ist).}\lang{en}{$1^{-1}=1$ and  $(ab)^{-1}=a^{-1}b^{-1}$, if $a\neq 0$ and $b\neq 0$ 
+(and thus also $ab\neq 0$).}
+\item \lang{de}{Für $a\neq 0$ ist auch $a^{-1}\neq 0$ und es gilt: $(a^{-1})^{-1}=a$.}\lang{en}{For $a\neq 0$ we have $a^{-1}\neq 0$ and: $(a^{-1})^{-1}=a$.}
+\item \lang{de}{Sind $b\neq 0$ und $c\neq 0$, so gilt: $\frac{a}{b}=ab^{-1}=(ac)(bc)^{-1}=\frac{ac}{bc}$. 
+("`Erweitern und K"urzen"')}\lang{en}{For $b\neq 0$ and $c\neq 0$, we have: $\frac{a}{b}=ab^{-1}=(ac)(bc)^{-1}=\frac{ac}{bc}$. 
+("`Expanding and simplifying"'}
+\item $\frac{a}{b}\cdot \frac{c}{d}=\frac{ac}{bd}$ \lang{de}{(Multiplikationsregel f"ur Br"uche), wenn}\lang{en}{(Multiplication rules for fractions), for} $b,d\ne 0$
+\item $\frac{a}{b}+ \frac{c}{d}=\frac{ad}{bd}+ \frac{bc}{bd}=\frac{ad+bc}{bd}$ \lang{de}{(Additionsregel f"ur Br"uche), wenn}\lang{en}{(Addition rules for fractions), for} $b,d\ne 0$
+\item $\frac{a}{b}:\frac{c}{d}=\frac{a}{b}\cdot \frac{d}{c}$ \lang{de}{(Dividieren mittels Multiplizieren mit dem Kehrwert), wenn}\lang{en}{(Dividing by multiplying with the reciprocal), for} $b,c,d\ne 0$
+\end{enumerate}
+\end{rule}
+
+\lang{de}{
+%Video
+Im folgenden Video wird die 4. Regel in \ref{regelkoerper} diskutiert und bewiesen.
+
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10943&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+}
+
+%Potenzen
+
+\section{Potenzen}
+
+\lang{de}{F"ur die Multiplikation mehrerer gleicher Zahlen wird auch in allgemeinen Körpern die abk"urzende Schreibweise 
+mit Potenzen eingef"uhrt, n"amlich:}
+\lang{en}{For the repeated multiplication of the same number with itself in a general field, the notation for powers is employed as a shorthand:}
+\[  a^n= \underbrace{a\cdots  a}_{n-\text{mal}} \]
+\lang{de}{f"ur ein beliebiges Element $a\in \K$ und eine nat"urliche Zahl $n$.\\
+Ist $a\neq 0$, so verwendet man des Weiteren noch die Schreibweisen}
+\lang{en}{for an element $a\in \K$ and a natural number $n$.\\
+For $a\neq 0$, we further define the notation}
+\[ a^{-n}=\left(\frac{1}{a}\right)^n \quad \text{und} \quad a^0=1. \]
+\lang{de}{Man erh"alt dann f"ur $a,b\neq 0$ und $n,m\in\Z$ die bekannten \emph{Potenzregeln}:}
+\lang{en}{For $a,b\neq 0$ and $n,m\in\Z$ one obtains the familiar \emph{rules for exponents.}}
+\begin{itemize}
+\item $a^n\cdot a^m=a^{n+m}$ \ \lang{de}{und}\lang{en}{and} \ $\frac{a^n}{a^m}=a^{n-m}$
+\item $a^n\cdot b^n=(ab)^n$ \ \lang{de}{und}\lang{en}{and} \ $\frac{a^n}{b^n}= (\frac{a}{b})^n$
+\item $(a^m)^n=a^{m\cdot n}$
+\end{itemize}
+
+\lang{de}{\textbf{Anmerkung:} Potenzen mit rationalen oder gar reellen Exponenten sind in allgemeinen Körpern nicht definiert.}
+\lang{en}{\textbf{Remark:} Powers with rational or even real exponents are not defined in general fields.}
+
+
+\end{content}

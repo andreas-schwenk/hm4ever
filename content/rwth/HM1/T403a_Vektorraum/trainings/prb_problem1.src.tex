@@ -1,0 +1,108 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A01: Koordinatendarstellung}
+    \lang{en}{P01: Coordinate representation}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/14365}{Ticket 14365}
+\end{block}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{
+	\title{A01: Koordinatendarstellung}
+}
+\lang{en}{
+	\title{P01: Coordinate representation}
+}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/}{Ticket }
+\end{block}
+
+
+
+\begin{problem}
+
+    
+\begin{question}
+
+	\begin{variables}
+		\randint[Z]{a}{-9}{9}                   % a=0 ist im Command radiant[Z] ausgeschlossen
+        \randint{b}{-5}{5}
+        \randint[Z]{c}{-5}{5}
+        \function[expand]{p}{-a*x+1}            
+        \function[expand]{q}{x+a}
+        \function[expand, normalize]{r}{b*x+c}  % "normalize" bewirkt:  falls b=0, wird 
+                                                %  für \var{r} c statt 0x+c ausgegeben
+		
+
+			\pmatrix[calculate]{aa}{
+  			1/(-a^2-1)*(a*b-c)\\ 1/(-a^2-1)*(-b-a*c)
+      	}
+
+
+	\end{variables}
+
+	\type{input.matrix}
+	\displayprecision{3}
+    \correctorprecision{2}
+    \field{real}
+    
+    \lang{de}{
+	    \text{
+	    Bestimmen Sie die Koordinatendarstellung von $\var{r}$ 
+        bezüglich der Basis $\{\var{p},\var{q} \}.$
+        }       
+        \explanation{ 
+        Die Koordinatendarstellung $\begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix}$ von $\var{r}$ 
+        bezüglich der Basis $\{\var{p},\var{q} \}$ ergibt sich aus der Gleichung
+
+         $\lambda_1 \cdot (\var{p}) + \lambda_2 \cdot (\var{q}) = \var{r}$
+         und einem Koeffizientenvergleich.
+        }
+        }
+      \lang{en}{
+	    \text{
+	    Determine the coordinate representation of $\var{r}$ 
+        with respect of the basis $\{\var{p},\var{q} \}.$
+        }       
+        \explanation{ 
+        The coordinate representation $\begin{pmatrix} \lambda_1 \\ \lambda_2 \end{pmatrix}$ of $\var{r}$ 
+        with respect of the basis $\{\var{p},\var{q} \}$ results from the equation
+
+         $\lambda_1 \cdot (\var{p}) + \lambda_2 \cdot (\var{q}) = \var{r}$
+         a comparison of the coefficients.
+        }
+        }
+    
+    \begin{answer}
+	    \solution{aa}
+      \format{2}{1}
+	\end{answer}
+    
+\end{question}
+
+\end{problem}
+
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

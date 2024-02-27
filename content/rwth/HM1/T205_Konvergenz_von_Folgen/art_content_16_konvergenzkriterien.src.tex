@@ -1,0 +1,263 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Konvergenzkriterien}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_16_konvergenzkriterien.meta.xml}{content_16_konvergenzkriterien}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_15_monotone_konvergenz.meta.xml}{monot-konv}
+    \link{generic_article}{content/rwth/HM1/T207_Intervall_Schachtelung/g_art_content_23_intervallschachtelung.meta.xml}{intervallschachtelung}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{5}
+\ombarticle{4}
+
+\lang{de}{\title{Weitere Konvergenzkriterien}}
+ 
+\begin{block}[annotation]
+  Inhalt: Nullfolge$\cdot$ beschränkt=Nullfolge; Sandwich-Lemma; Bspe; $q^n$, $\sqrt[n]{n}$, 
+  $\sqrt[n]{q}$; \\
+  Def. Teilfolge; Folge konvergent gegen $a$ $\Rightarrow$ jede Teilfolge konvergent gegen $a$ 
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9657}{Ticket 9657}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+In diesem Abschnitt sollen weitere Kriterien für die Konvergenz von Folgen behandelt werden und wichtige Beispiele von Grenzwerten 
+gezeigt werden
+
+\section{Sandwich-Lemma und weiteres}
+
+\begin{theorem}[Sandwich-Lemma]\label{thm:sandwich}
+Seien $(a_n)_{n\in \N}$ und $(c_n)_{n\in \N}$ konvergente reelle Folgen mit
+\[ \lim_{n\to \infty} a_n =  \lim_{n\to \infty} c_n =A. \]
+Sei weiter $(b_n)_{n\in \N}$ eine reelle Folge, so dass es ein $n_0\in \N$ gibt mit
+\[ a_n\leq b_n\leq c_n \quad \text{für alle }n\geq n_0. \]
+Dann ist auch $(b_n)_{n\in \N}$ konvergent mit
+\[ \lim_{n\to \infty} b_n =A. \]
+\end{theorem}
+
+\begin{proof*}[Erklärung]
+Für alle $n\geq n_0$ gilt
+\[ b_n-A\leq c_n-A\leq |c_n-A|\quad \text{und}\quad A-b_n\leq A-a_n\leq |a_n-A|, \]
+d.h.
+\[  |b_n-A|\leq \max\{ |a_n-A|, |c_n-A| \}\leq |a_n-A|+|c_n-A|.\]
+Da $(|a_n-A|)_{n\in \N}$ und $(|c_n-A|)_{n\in \N}$ Nullfolgen sind, ist nach den Grenzwertregeln
+auch $( |a_n-A|+|c_n-A|)_{n\in \N}$ eine Nullfolge. Es gibt daher für jedes $\epsilon>0$ ein
+$N\in \N$ mit $|a_n-A|+|c_n-A|<\epsilon$ für alle $n\geq N$. Insbesondere gilt für alle 
+$n\geq \max\{n_0,N\}$ auch
+\[  |b_n-A|\leq |a_n-A|+|c_n-A|<\epsilon. \]
+$|b_n-A|$ ist also eine Nullfolge, d.h. $(b_n)_{n\in \N}$ konvergiert gegen $A$.\\\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10801&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}\\\\
+\end{proof*}
+
+Direkt aus dem Sandwich-Lemma erhält man auch folgendes:
+
+\begin{rule}\label{rule:sandwich-lemma}
+Ist $(a_n)_{n\in \N}$ eine Nullfolge und $(b_n)_{n\in \N}$ eine beschränkte Folge, so ist
+$(a_nb_n)_{n\in \N}$ wieder eine Nullfolge.
+\end{rule}
+
+\begin{proof*}[Erklärung]
+Da die Folge $(b_n)_{n\in \N}$ nicht konvergent sein muss, können die Grenzwertregeln nicht angewendet werden. Sei aber $C\in \R$ so, dass $|b_n|\leq C$ für alle $n\in \N$, dann sind
+die Folgen $(-C|a_n|)_{n\in \N}$ und $(C|a_n|)_{n\in \N}$ nach den Grenzwertregeln beides Nullfolgen und es gilt für alle $n\in \N$:
+\[ -C|a_n|\leq b_na_n\leq C|a_n|. \]
+Nach dem Sandwich-Lemma ist also auch $(a_nb_n)_{n\in \N}$ eine Nullfolge.
+\end{proof*}
+
+\section{Wichtige Beispiele}\label{sec:wichtige-beispiele}
+
+Mit dem Sandwich-Lemma lassen sich noch weitere wichtige Grenzwerte bestimmen.
+
+\begin{example}\label{ex:sandwich-lemma}
+\begin{tabs*}[\initialtab{0}] 
+\tab{$\lim_{n\to \infty} \sqrt[n]{n} = 1$}
+Wir betrachten die Folge $(\sqrt[n]{n})_{n\in \N}$.
+
+Für $n\geq 2$ lässt sich $n$ schreiben als 
+ \[ n=\underbrace{1\cdots 1}_{(n-2)\text{-mal}}\cdot \sqrt{n}\sqrt{n}. \]
+Mit der Ungleichung zwischen geometrischem und arithmetischem Mittel ist dann
+\[ \sqrt[n]{n} \leq \frac{(n-2)\cdot 1+2\cdot \sqrt{n}}{n}=1+\frac{2}{\sqrt{n}}-\frac{2}{n}, \]
+und es ist $\sqrt[n]{n}\geq 1$ für alle $n\geq 1$.
+
+Da außerdem $\lim_{n\to \infty} \frac{1}{\sqrt{n}}=0$ ist (vgl. \ref[monot-konv][Beispiel im vorigen Abschnitt]{ex:beispiele}), gilt
+\[ \lim_{n\to \infty} \left( 1+\frac{2}{\sqrt{n}}-\frac{2}{n}\right)
+= 1+0-0=1. \]
+Also ist nach dem Sandwich-Lemma auch die Folge $(\sqrt[n]{n})_{n\in \N}$
+konvergent mit
+\[ \lim_{n\to \infty} \sqrt[n]{n} = 1. \]
+
+\tab{$\lim_{n\to \infty} \sqrt[n]{q} = 1$ für $q>0$}
+Für $q>0$ betrachten wir die Folge $(\sqrt[n]{q})_{n\in \N}$.
+
+Für $q\geq 1$ wählt man $n_0\in \N$ mit $n_0\geq q$. Dann gilt für alle $n\geq n_0$:
+\[  1\leq \sqrt[n]{q} \leq \sqrt[n]{n}. \]
+Da sowohl die konstante Folge $1$ als auch die Folge $(\sqrt[n]{n})_{n\in \N}$
+gegen $1$ konvergieren ist somit
+\[ \lim_{n\to \infty} \sqrt[n]{q} = 1 \quad \text{für }q\geq 1.\]
+
+Für $0<q<1$ ist $\frac{1}{q}>1$ und daher nach dem ersten Fall
+\[ \lim_{n\to \infty} \sqrt[n]{1/q} = 1. \]
+Mit der Grenzwertregel für Brüche erhält man dann:
+\[ \lim_{n\to \infty} \sqrt[n]{q} =\lim_{n\to \infty} \frac{1}{\sqrt[n]{1/q}}=\frac{1}{1}=1. \]
+\end{tabs*} 
+\end{example}
+
+
+\section{Teilfolgen und deren Konvergenz}
+
+%\begin{definition}
+%Eine Folge $(b_k)_{k\in \N}$ heißt \notion{Teilfolge} einer Folge $(a_n)_{n\in \N}$,
+%wenn es eine streng monoton wachsende Folge $(n_k)_{k\in \N}$ mit Werten in $\N$ gibt, so dass
+%\[  b_k =a_{n_k}\quad \text{für alle }k\in \N. \]
+%\end{definition}
+
+\begin{definition}\label{def:teilfolge}
+Eine \notion{Teilfolge} einer Folge $(a_n)_{n\in \N}$ ist eine Folge
+der Form $(a_{n_k})_{k\in \N}$, wobei $(n_k)_{k\in \N}$ eine streng monoton wachsende Folge  mit Werten in $\N$ ist.
+\end{definition}
+
+Die Teilfolge erhält man aus der Folge also durch "`Auswählen"' von gewissen (aber dennoch unendlich vielen) Folgegliedern, wobei die Reihenfolge aus der ursprünglichen
+Folge beibehalten wird. Insbesondere gilt auch stets $n_k\geq k$.
+
+\begin{example}
+\begin{enumerate}
+\item Die Folge $\left(\frac{1}{k^2}\right)_{k\in \N}$ ist eine Teilfolge der Folge
+$\left(\frac{1}{n}\right)_{n\in \N}$, die man erhält, indem man das $1.$, das $4.$, das $9.$
+etc. Folgeglied auswählt. Beziehungsweise durch die Folge von Indizes $n_k=k^2$.
+\item Häufig betrachtet man Teilfolgen der Form $(a_{2n})_{n\in \N}$ oder
+$(a_{2n-1})_{n\in \N}$. Die erste Teilfolge ist die Teilfolge der geraden Folgeglieder, die zweite der ungeraden Folgeglieder.
+\end{enumerate}
+\end{example}
+
+\begin{theorem}
+Ist $(a_n)_{n\in \N}$ eine konvergente Folge, so ist auch jede ihrer Teilfolgen
+konvergent und konvergiert gegen den gleichen Grenzwert. 
+\end{theorem}
+
+\begin{proof*}[Erklärung]
+Sei $(a_{n_k})_{k\in \N}$ eine Teilfolge und $a$ der Grenzwert der ursprünglichen Folge.
+Dann gibt es zu jedem $\epsilon>0$ ein $N_\epsilon\in \N$ so, dass
+$|a_n-a|<\epsilon$ für alle $n\geq N_\epsilon$. Damit gilt auch für alle
+$k\geq N$ (und daher $n_k\geq k\geq N$)
+\[ |a_{n_k}-a|<\epsilon. \]
+Also ist die Teilfolge $(a_{n_k})_{k\in \N}$ konvergent mit Grenzwert $a$.
+\end{proof*}
+
+\begin{remark}
+Das Kriterium wird oft umgekehrt angewendet: Um zu zeigen, dass eine Folge nicht konvergiert, sucht man zwei Teilfolgen, die beide konvergent sind, aber gegen
+verschiedene Grenzwerte konvergieren.
+\end{remark} 
+ 
+\begin{example}\label{ex:teilfolge-hpunkt}
+Wir betrachten die Folgen $(a_n)_{n\in \N}=((-1)^n)_{n\in \N}$, d.h. $a_n=(-1)^n$ für alle $n\in \N$. Die Teilfolge $(a_{2k-1})_{k\in \N}$ ist dann die konstante Folge 
+$(-1)_{k\in \N}$, denn $(-1)^{2k-1}=-1$ für alle $k\geq 1$. Sie konvergiert also gegen
+$-1$. Die Teilfolge $(a_{2k})_{k\in \N}$ ist jedoch die konstante Folge 
+$(1)_{k\in \N}$, denn $(-1)^{2k}=1$ für alle $k\geq 1$. Sie konvergiert also gegen
+$1$. Da die beiden Teilfolgen gegen verschiedene Grenzwerte konvergieren, ist die Folge selbst nicht konvergent.
+\end{example}
+
+\begin{definition}
+Sei $(a_n)_{n \in \N}$ eine Folge. Ein Wert $a\in \R$ heißt \emph{Häufungspunkt} der Folge, wenn
+eine Teilfolge $(a_{n_k})_{k \in \N}$ existiert, die gegen $a$ konvergiert.
+\end{definition}
+\begin{example}
+Im \ref[content_16_konvergenzkriterien][obigen Beispiel]{ex:teilfolge-hpunkt} hat die Folge die Häufungspunkte $1$ und $-1$.
+\end{example}
+
+Die Begriffe Teilfolgen und Häufungspunkte werden auch im folgenden Video noch einmal auf eine etwas andere Herangehensweise erläutert:\\\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10802&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}\\\\\\
+
+\begin{remark}
+\begin{enumerate}
+\item Konvergiert eine Folge $(a_n)_{n \in \N}$ gegen den Wert $a$, so ist $a$ auch Häufungspunkt der Folge,
+da jede Teilfolge schon gegen $a$ konvergiert. In diesem Fall gibt es genau diesen einen Häufungspunkt (und keinen weiteren).
+\item Die Umkehrung gilt nicht: Eine Folge mit genau einem Häufungspunkt muss nicht zwangsläufig konvergieren, wie z.B. die Folge, die durch
+\[
+a_{2n}=\frac{1}{n}, \text{ und } a_{2n-1} = n, \, \, n \in \N,
+\]
+gegeben ist. Hier ist $0$ der Häufungspunkt. ($\infty$ ist als Häufungspunkt nicht möglich!)
+\item Aber natürlich gilt: Hat eine Folge mehr als einen Häufungspunkt, dann ist sie nicht konvergent.
+\item Der entscheidende Unterschied liegt also darin, dass jede Folge höchstens einen Grenzwert haben kann, aber möglicherweise mehrere, vielleicht sogar unendlich viele Häufungspunkte.
+\item Von einem Grenzwert wird gefordert, dass in jeder Umgebung des Punktes alle bis auf endlich viele Folgenglieder liegen. Bei einem Häufungspunkt müssen in jeder Umgebung des Punktes "nur" unendlich viele Folgenglieder liegen.
+Es können also nochmals unendlich viele Folgenglieder für weitere Häufungspunkte übrig bleiben.
+Hier soll "in jeder Umgebung" so viel wie "in der Nähe des Punktes" bedeuten. Den Begriff der Umgebung werden wir im nächsten Abschnitt \link{intervallschachtelung}{Intervallschachtelung} präziser bzw. formaler einführen.
+\end{enumerate}
+\end{remark}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{1}
+\begin{quickcheck}
+		
+         \begin{variables}
+			\drawFromSet{a}{3,5,7}
+            \randint{b}{6}{8}
+            \randint{c}{2}{3}
+            \randint{d}{2}{8}
+            \function{loes1}{b*e}
+            \number{loes2}{0}
+            \function[calculate]{loes3}{d*e}
+        \end{variables}
+		\type{input.function}
+		\field{real}
+        \correctorprecision{2}
+        %input.finite-number-set wird beim quickcheck nicht unterstützt
+		\lang{de}{\text{Bestimmen Sie die beiden Häufungspunkte der nachstehenden Folge $(a_n)_{n\in\mathbb{N}}$
+         mit\\\\
+        $a_{n}=\begin{cases}
+         \var{b}\cdot \left(1+\frac{1}{\var{a}n+1}\right)^{\var{a}n+1}&\text{ , falls }n \text{ gerade}\\
+	     (\frac{1}{\var{b}})^n&\text{ , falls }n \text{ ungerade.}
+        \end{cases}$\\\\
+        Der kleinere  Häufungspunkt von $a_n$ lautet: \ansref \\\\
+        Der andere Häufungspunkt von $a_n$ lautet:  \ansref}}
+        %auch permuteAnswers wird nicht unterstützt
+       
+        \explanation{Schauen Sie sich noch einmal verschiedene Grenzwerte der letzten Abschnitte an - insbesondere 
+        von der Folge $((1+\frac{1}{n})^n)_{n\in\N}$.}
+     	\begin{answer}
+	    	\solution{loes2}
+		\end{answer}
+        
+        \begin{answer}
+			\solution{loes1}
+		\end{answer}
+                     
+		\end{quickcheck}
+\end{quickcheckcontainer}
+
+
+Wir hatten gesehen, dass konvergente Folgen beschränkt sind, aber beschränkte Folgen nicht notwendigerweise konvergieren müssen.
+Es gilt aber die folgende schwächere Aussage:
+
+\begin{theorem}[Satz von Bolzano-Weierstrass]\label{thm:bolzano-weierstrass}
+Jede beschränkte Folge hat mindestens einen Häufungspunkt. Oder anders formuliert:
+Ist $(a_n)_{n\in \N}$ eine beschränkte Folge, so gibt es eine Teilfolge $(a_{n_k})_{k\in \N}$, die konvergiert. 
+\end{theorem}
+
+Für den Beweis dieser Aussage benötigen wir eine \link{intervallschachtelung}{Intervallschachtelung}, weshalb wir den Beweis dort führen werden.
+
+
+\end{content}

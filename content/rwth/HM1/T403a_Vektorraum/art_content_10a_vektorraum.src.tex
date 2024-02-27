@@ -1,0 +1,885 @@
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Allgemeine Vektorräume}
+    \lang{en}{General vector spaces}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T403a_Subspace.meta.xml}{T403a_Subspace}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}      
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+    \component{generic_image}{content/rwth/HM1/images/g_img_T403a_untervektorraum.meta.xml}{untervektorraum}    
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T108_Vektorrechnung/g_art_content_27_vektoren.meta.xml}{Vektoren}    
+    \link{generic_article}{content/rwth/HM1/T108_Vektorrechnung/g_art_content_29_linearkombination.meta.xml}{Vektorrechnung}  
+    \link{generic_article}{content/rwth/HM1/T108_Vektorrechnung/g_art_content_30_basen_eigenschaften.meta.xml}{basen}
+    \link{generic_article}{content/rwth/HM1/T401_Matrizenrechnung/g_art_content_02_matrizenmultiplikation.meta.xml}{matrix-mult}
+    \link{generic_article}{content/rwth/HM1/T402_Lineare_Gleichungssysteme/g_art_content_04_lgs.meta.xml}{lgs}
+    \link{generic_article}{content/rwth/HM1/T202_Reelle_Zahlen_axiomatisch/g_art_content_04_koerperaxiome.meta.xml}{koerperaxiome}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+
+\usepackage{mumie.ombplus}
+\ombchapter{4}
+\ombarticle{1}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+
+\lang{de}{\title{Allgemeine Vektorräume}}
+\lang{en}{\title{General vector spaces}}
+ 
+ 
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/13439}{Ticket 13439}\\
+\end{block}
+
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{\lang{de}{Allgemeiner Begriff des Vektorraums} \lang{en}{General concept of the vector space}}
+
+\lang{de}{
+Vektorräume sind uns schon mehrmals in diesem Kurs begegnet. Bevor wir auf die bereits bekannten 
+Beispiele für Vektorräume nochmals hinweisen, definieren wir zunächst den allgemeinen Begriff des 
+Vektorraums.}
+\lang{en}{
+We already came across vector spaces several times. Before we refer to the already known 
+examples for vector spaces, we will define the general concept of the vector space.}
+
+
+%%% Video K.M.
+% 
+\lang{de}{
+Die hierzu relevanten Grundlagen zu \ref[Vektoren][Vektoren im $\R^n$]{sec:1_1_Vektoren} und den
+\ref[Vektorrechnung][Rechenregeln]{Vektorraum_R_n} für diese Vektoren sind in folgendem Video
+noch einmal zusammengefasst:
+
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10929&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}}\\
+\\
+%
+
+\begin{definition}[\lang{de}{Vektorraum} \lang{en}{Vector space}] \label{def:Allg_VR}
+   \lang{de}{
+    Es sei $\K$ ein \ref[koerperaxiome][Körper]{sec:axiome}. Eine Menge $V$ mit zwei Verkn\"upfungen}
+      \lang{en}{
+    Let $\K$ be a \ref[koerperaxiome][field]{sec:axiome}. A set $V$ with two operations}
+   % \\
+    \[
+    \begin{mtable}[\align{l}] 
+    \begin{mtable}
+      +\, :\, &\, \vectorspace{V} \, \times \, \vectorspace{V} &\to &\vectorspace{V}\\
+      &({u},{v}) &\mapsto &{u} + {v}\quad               
+    \end{mtable}&\qquad \text{\notion{(\lang{en}{Addition}\lang{de}{Addition})}}\\
+    \begin{mtable}
+    &&&\\
+         \cdot\, :\,  &\, \K \, \times \, \vectorspace{V} &\to     &\vectorspace{V}  \\
+           &(\alpha,{v})          &\mapsto &\alpha \cdot {v}\quad              
+    \end{mtable}& \qquad \text{\notion{(\lang{en}{Multiplication with a scalar}\lang{de}{Multiplikation mit einem Skalar})}}
+    \end{mtable}
+    \]
+
+\lang{de}{ 
+	 hei"st \emph{$\K$-Vektorraum } und die Elemente aus ${V}$ hei"sen
+    \emph{Vektoren}, 
+    falls die folgenden Rechengesetze erf\"ullt sind.}
+   \lang{en}{
+    is called a 
+    \emph{(real) vector space}, and the elements of ${V}$ are called \emph{vectors}, if the following calculating rules apply.}
+    \lang{de}{F"ur die Addition gilt:}
+    \lang{en}{For addition holds:}
+    \begin{enumerate}
+    \item \lang{de}{Das Kommutativgesetz: ${u} + {v} = {v} + {u}$ f\"ur alle ${u},{v} \in \vectorspace{V}$,}
+          \lang{en}{The commutative property: ${u} + {v} = {v} + {u}$ for all ${u},{v} \in \vectorspace{V}$,}
+    \item \lang{de}{Das Assoziativgesetz: \nowrap{$ {u} + ({v} + {w}) = ({u} + {v}) + {w}$ f\"ur alle
+      ${u},{v},{w} \in \vectorspace{V} $.}}
+      \lang{en}{The associative property: \nowrap{$ {u} + ({v} + {w}) = ({u} + {v}) + {w}$ for all
+      ${u},{v},{w} \in \vectorspace{V} $.}}
+    \item \lang{de}{Es existiert ein Nullvektor ${0} \in \vectorspace{V}$, sodass $ {v} + {0} = {v}$ 
+    f\"ur alle ${v} \in \vectorspace{V} $.
+    Diesen Nullvektor nennt man das \emph{neutrale Element}  bez\"uglich der Addition.}
+    \lang{en}{It exists a zero vector ${0} \in \vectorspace{V}$, such that $ {v} + {0} = {v}$ 
+    for all ${v} \in \vectorspace{V} $. \\ This zero vector is called the \emph{identity element} of addition.}
+    \item \lang{de}{\nowrap{Zu jedem $ {v} \in \vectorspace{V}$ existiert ein sogenanntes \emph{inverses Element}  $-{v} \in \vectorspace{V}$, \\ 
+    sodass    ${v} + (-{v}) = {0}$.}}
+    \lang{en}{\nowrap{For every $ {v} \in \vectorspace{V}$ exists a \emph{inverse element}  $-{v} \in \vectorspace{V}$, \\ 
+    such that ${v} + (-{v}) = {0}$.}}
+    \end{enumerate}
+    \lang{de}{F"ur die Multiplikation mit Skalaren gilt:}
+    \lang{en}{For multiplication with scalars holds:}
+    \begin{enumerate}
+    \item \lang{de}{\nowrap{$ \alpha \cdot  (\beta \cdot  {v}) = (\alpha \beta) \cdot  {v}$ f\"ur alle ${v} \in
+      \vectorspace{V} $ und $ \alpha, \beta \in \K $}}
+      \lang{en}{\nowrap{$ \alpha \cdot  (\beta \cdot  {v}) = (\alpha \beta) \cdot  {v}$ for all ${v} \in
+      \vectorspace{V} $ and $ \alpha, \beta \in \K $}}
+    \item \lang{de}{\nowrap{$ 1 \cdot  {v} = {v}$ f\"ur alle ${v} \in \vectorspace{V} $}}
+    \lang{en}{\nowrap{$ 1 \cdot  {v} = {v}$ for all ${v} \in \vectorspace{V} $}}
+    \end{enumerate}
+    \lang{de}{Zwischen der Addition und der Multiplikation mit Skalaren gelten die Distributivgesetze:}
+    \lang{en}{Between addition and multiplication with scalars hold the distributive properties:}
+    \begin{enumerate}
+    \item \lang{de}{\nowrap{$ \alpha \cdot  ({u} + {v}) = \alpha \cdot  {u} + \alpha \cdot  {v}$ f\"ur alle
+      ${u}, {v} \in \vectorspace{V}$ und $\alpha \in \K$}}
+      \lang{en}{\nowrap{$ \alpha \cdot  ({u} + {v}) = \alpha \cdot  {u} + \alpha \cdot  {v}$ for all
+      ${u}, {v} \in \vectorspace{V}$ und $\alpha \in \K$}}
+    \item \lang{de}{\nowrap{$ (\alpha + \beta) \cdot  {v} = \alpha \cdot  {v} + \beta \cdot  {v}$ f\"ur alle
+      ${v} \in \vectorspace{V}$ und $\alpha , \beta \in \K $}}
+      \lang{en}{\nowrap{$ (\alpha + \beta) \cdot  {v} = \alpha \cdot  {v} + \beta \cdot  {v}$ f\"ur alle
+      ${v} \in \vectorspace{V}$ und $\alpha , \beta \in \K $}}
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}
+   \begin{itemize}
+   \item \lang{de}{Statt Vektorraum wird manchmal auch der Begriff \emph{linearer Raum} verwendet.}
+   \lang{en}{Sometimes we say \emph{linear space} instead of vector space.}
+   \item \lang{de}{Aus den obigen Eigenschaften folgt, dass $\vectorspace{V}\ne\emptyset$, $\vectorspace{V}$
+         also nicht leer ist, da mindestens der Nullvektor ${0}$ enthalten sein muss. Eine Erläuterung 
+         hierzu finden Sie in Beispiel 2) des nachstehenden Videos.}
+         \lang{en}{ It concludes from the above properties, that $\vectorspace{V}\ne\emptyset$, $\vectorspace{V}$ is not empty,
+         because at least the zero vector ${0}$ is contained.}
+     \end{itemize}
+\end{remark} 
+
+\lang{de}{Es folgen nun einige Beispiele von bekannten Mengen, die einen Vektorraum bilden.
+
+%%% Video K.M.
+% 
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10930&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}}\\
+\\
+
+\begin{example} \label{ex:vektorräume}
+\begin{enumerate}
+   \item \lang{de}{Wie bereits bei der \ref[Vektorrechnung][Vektorrechnung im $\R^n$]{Vektorraum_R_n} \,
+    gesehen, gelten die oben angegebenen Rechenregeln insbesondere auch für die Spaltenvektoren des $\R^n$ (für jedes $n> 0$). \\ 
+    Die Vektorräume der Spaltenvektoren im $\R^n $ (über $\K = \R $) sind also Spezialfälle des hier allgemein definierten 
+    Begriffs des Vektorraums.}
+    \lang{en}{As we have already seen for \ref[Vektorrechnung][vector calculations in $\R^n$]{Vektorraum_R_n} \,, 
+    the above calculating rules hold especially for the column vectors of $\R^n$ (for every $n>0$.)\\
+    The vector spaces of the column vectors in $\R^n$ (over $\K =\R$) are special cases of the general defined concept
+    of vector space.}
+
+   \item \lang{de}{Spaltenvektoren können auch auf gleiche Weise über jedem anderen Körper definiert werden (also z.B. über $\K=\Q$ oder $\K=\C$).
+   Dann bildet die Menge aller Spaltenvektoren
+   \[
+    \K^n := \{ \begin{pmatrix}
+                x_1 \\ \vdots \\ x_n
+               \end{pmatrix} | \, x_1,...,x_n \in \K \}
+
+   \]
+   einen $\K$-Vektorraum.}
+   \lang{en}{Column vectors can be defined analogously over any field (e.g. over $\K=\Q$ or $\K=\C$).
+   Then the set of all column vectors
+   \[
+    \K^n := \{ \begin{pmatrix}
+                x_1 \\ \vdots \\ x_n
+               \end{pmatrix} | \, x_1,...,x_n \in \K \}
+
+   \]
+   is a $\K$-vector space.}
+   \item \lang{de}{Die Menge der Polynomfunktionen (über den rationalen, reellen oder komplexen Zahlen) mit der üblichen Addition und Skalar-Multiplikation
+    mit rationalen, reellen bzw. komplexen Zahlen 
+   \begin{align*}
+    (p_1 + p_2)(x) &\coloneq& p_1(x) + p_2(x) \\
+    (\alpha\, p)(x) &\coloneq& \alpha\, p(x)
+  \end{align*}
+   bildet einen Vektorraum (s. Beispiel 3) in obigem Video). Der Nullvektor ist dabei das Nullpolynom $p_0$ mit $p_0(x)=0$
+   für alle $x\in \K$ (mit $\K=\Q,\R,\C$).}
+   \lang{en}{The set of polynomial functions (over the rational, real or complex numbers) with the known addition and scalar multiplication
+    with rational, real or complex numbers 
+   \begin{align*}
+    (p_1 + p_2)(x) &\coloneq& p_1(x) + p_2(x) \\
+    (\alpha\, p)(x) &\coloneq& \alpha\, p(x)
+  \end{align*}
+  is a vector space. Die zero vector is the zero-polynomial $p_0$ with $p_0(x)=0$
+   for all $x\in \K$ (with $\K=\Q,\R,\C$).}
+   
+   \item \lang{de}{Auch die Menge aller reellen Funktionen $f:\R\to \R$ bildet einen $\R$-Vektorraum. 
+   Die Addition und Skalar-Multiplikation ist die Gleiche wie im Fall der Polynomfunktionen und auch 
+   hier ist der Nullvektor die Nullfunktion $f_0$, für die $f_0(x)=0$ für alle $x\in \R$ gilt.}
+   \lang{de}{The set of the real functions $f:\R\to \R$ is also a $\R$-vector space. Addition and scalar-multiplication
+   are defined like we defined it for the polynomial functions. The zero-vector is again the zero-function $f_0$ with $f_0(x)=0$
+   for all $x\in\R$.}
+   
+   \item \lang{de}{Genauso bildet die Menge aller stetigen bzw. differenzierbarer Funktionen $f:I \to \R$ (für ein beliebiges, aber festes, nicht-leeres Intervall $I$) 
+   einen reellen Vektorraum (s. vorstehendes Video). Die Nullfunktion übernimmt wieder die Rolle des Nullvektors.}
+   \lang{en}{The set of continuous (differentiable) functions $f:I \to \R$ (for an arbitrary but fixed non-empty interval $I$)
+   is a real vector space. The zero-function is again the zero-vector.}
+   
+   \item \lang{de}{Die Menge aller $(m \times n)$ Matrizen über einem Körper $\K$ bildet ebenfalls einen Vektorraum. 
+   Sie erfüllen, wie ein Vergleich mit den \ref[matrix-mult][Rechenregeln für die Matrizen-Multiplikation]{rule:rechenregeln} aus den vorherigen Abschnitten zeigt, 
+   alle Eigenschaften eines Vektorraums. 
+   Der Nullvektor ist hier die Nullmatrix (also die Matrix, deren Einträge alle gleich $0$ sind). 
+   Die Addition auf diesem Vektorraum ist die bekannte Matrixaddition.}
+   \lang{en}{The set of all $(m \times n)$ matrices over a field $\K$ is also a vector space. 
+   They fulfill all the characteristics of a vector space. Therefor compare with the \ref[matrix-mult][calculating rules for matrix-multiplication]{rule:rechenregeln} from the before section. 
+   The zero-vector is the zero-matrix (all entries equal to $0$). The addition in this vector space is the usual matrix addition.}
+ \end{enumerate}
+\end{example}   
+
+%%% Video K.M.
+%
+\lang{de}{
+In folgendem Video werden weitere spezielle Beispiele für Vektorräume betrachtet, nämlich solche,
+die Teilmenge eines Vektorraums sind:
+
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10931&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}}\\
+\\
+ 
+\begin{definition}[\lang{de}{Untervektorraum} \lang{en}{Vector subspace}] \label{def:Unter_VR}
+
+  \lang{de}{
+  Sei $V$ ein $\K$-Vektorraum entsprechend der Definition \ref{def:Allg_VR}
+  und sei $U$ eine \emph{nichtleere} Teilmenge von $V$, die bezüglich der für $V$ definierten 
+  Verknüfpungen \emph{abgeschlossen} ist, d.h.}
+  \lang{en}{
+  Let $V$ be a $\K$-vector space, according the definiton \ref{def:Allg_VR}, and $U$ a 
+   \emph{non-empty} subset of $V$, which is \emph{closed} with respect to the operations defined for $V$, namely}
+  
+    \begin{itemize}
+    \item \lang{de}{\nowrap{f\"ur alle Vektoren ${u}, {v} \in \vectorspace{U}\;$ ist auch die Summe $\; {u} + {v} \in \vectorspace{U}$}  und}
+     \lang{en}{\nowrap{for all vectors ${u}, {v} \in \vectorspace{U}\;$ is also the sum $\; {u} + {v} \in \vectorspace{U}$}  and}
+    \item \lang{de}{\nowrap{f\"ur alle ${v} \in \vectorspace{U}$ und beliebiges $\, \alpha \in \K \;$ ist auch $\; \alpha \cdot  {v} \in \vectorspace{U}.$ }}
+    \lang{en}{\nowrap{for all ${v} \in \vectorspace{U}$ and any $\, \alpha \in \K \;$ is also $\; \alpha \cdot  {v} \in \vectorspace{U}.$ }}
+    \end{itemize}
+
+    \lang{de}{Dann bezeichnet man $\vectorspace{U}$ als \emph{Untervektorraum} oder auch \emph{linearer Unterraum} von $\vectorspace{V}$.}
+    \lang{en}{Then we call $\vectorspace{U}$ \emph{vector subspace} or \emph{linear subspace} of $\vectorspace{V}$.}
+
+\end{definition}
+
+\begin{remark}
+   \lang{de}{Sei $V$ ein $\K$-Vektorraum entsprechend der Definition \ref{def:Allg_VR}}
+   \lang{en}{Let $V$ be a $\K$-vector space according to the definition \ref{def:Allg_VR}}
+   
+ \begin{itemize}
+   \item \lang{de}{Ein \emph{Untervektorraum} $\vectorspace{U}$ von $\vectorspace{V}$ ist mit den für $\vectorspace{V}$ definierten
+   Verknüpfungen selbst wieder ein \emph{$\K$-Vektorraum. }}
+   \lang{en}{A \emph{vector subspace} $\vectorspace{U}$ of $\vectorspace{V}$ is with the operations defined for $\vectorspace{V}$ 
+   a  \emph{$\K$-vector space} itself.}
+   \item \lang{de}{Folgende Teilmengen von $\vectorspace{V}$ erfüllen stets die Eigenschaften eines \emph{Untervektorraums}:
+    \begin{itemize}
+      \item die Menge $V$ selbst  und
+      \item die Menge $\{0\}$, die nur aus dem \emph{Nullvektor} besteht
+    \end{itemize}}
+     \lang{en}{The following subsets of $\vectorspace{V}$ always fulfill the characteristics of a \emph{vector subspace}:
+    \begin{itemize}
+      \item the set $V$ itself  and
+      \item the set $\{0\}$, that consists of ony the \emph{zero-vector}
+    \end{itemize}}
+ \end{itemize}
+\end{remark} 
+
+\begin{example}
+ \begin{enumerate}   
+     
+   \item \lang{de}{Betrachten wir den Vektorraum $\R^3$. Dann bildet die, durch den Koordinatenursprung $O=(0;0;0)$ 
+    und die weiteren zwei Punkte $\;P=(1;1;1)\,$ und $\,R=(1;0;0)\,$ bestimmte Ebene
+    \[
+    E: \begin{pmatrix}x\\y\\z\end{pmatrix}=\lambda \cdot \vec{OP} + \mu \cdot \vec{OR}
+    =\lambda \cdot\begin{pmatrix}1\\1\\1\end{pmatrix}+ \mu \cdot \begin{pmatrix}1\\0\\0\end{pmatrix}
+    \] 
+    
+        \begin{center}
+         \image{T403a_Subspace}
+        \end{center}  
+    
+    einen Untervektorraum des $\R^3$ mit der Basis $\{\begin{pmatrix}1\\1\\1\end{pmatrix};\begin{pmatrix}1\\0\\0\end{pmatrix}\}$.}
+
+    \lang{en}{We consider the vector space $\R^3$. Then the origin of ordinates $O=(0;0;0)$ and the two points
+     $\;P=(1;1;1)\,$ und $\,R=(1;0;0)\,$ define the plane
+    \[
+    E: \begin{pmatrix}x\\y\\z\end{pmatrix}=\lambda \cdot \vec{OP} + \mu \cdot \vec{OR}
+    =\lambda \cdot\begin{pmatrix}1\\1\\1\end{pmatrix}+ \mu \cdot \begin{pmatrix}1\\0\\0\end{pmatrix}
+    \].
+    
+        \begin{center}
+         \image{T403a_Subspace}
+        \end{center}  
+    
+    $E$ is a vector subspace of $\R^3$ with the basis $\{\begin{pmatrix}1\\1\\1\end{pmatrix};\begin{pmatrix}1\\0\\0\end{pmatrix}\}$.}
+
+\lang{de}{
+\begin{showhide}[\buttonlabels{Zeige Nachweis für Untervektorraum}{Verstecke Nachweis für Untervektorraum}]
+  Da $E \subseteq \R^3$ und $E \neq \emptyset$, bleibt nur die \emph{Abgeschlossenheit} von $E$ zu zeigen. \\
+  Seien $u$ und $v$ beliebige Vektoren in $E$, dann gibt es $\lambda_u, \lambda_v, \mu_u, \mu_v \in \R$ mit
+  \[ 
+  \begin{mtable}
+    u= \lambda_u \cdot \begin{pmatrix}1\\1\\1\end{pmatrix}+ \mu_u \cdot \begin{pmatrix}1\\0\\0\end{pmatrix}\\
+    v= \lambda_v \cdot \begin{pmatrix}1\\1\\1\end{pmatrix}+ \mu_v \cdot \begin{pmatrix}1\\0\\0\end{pmatrix}
+  \end{mtable}
+  \] 
+  Dann ist 
+  \[
+  u+v= (\lambda_u + \lambda_v) \cdot \begin{pmatrix}1\\1\\1\end{pmatrix}+ (\mu_u + \mu_v) \cdot \begin{pmatrix}1\\0\\0\end{pmatrix} \in E 
+  \]
+  und für beliebiges $\alpha \in \R$ auch
+  \[
+   \alpha \cdot u = (\alpha \cdot \lambda_u) \cdot \begin{pmatrix}1\\1\\1\end{pmatrix}+ (\alpha \cdot \mu_u) \cdot \begin{pmatrix}1\\0\\0\end{pmatrix} \in E 
+  \]
+  
+  
+\end{showhide}}
+
+
+
+\lang{en}{
+\begin{showhide}[\buttonlabels{Show verification of the vector subspace}{Hide verification of the vector subspace}]
+Since $E \subseteq \R^3$ and $E \neq \emptyset$, we only need to verify the \emph{closure} of $E$. \\
+  Let $u$ and $v$ be any vectors in $E$, it exist $\lambda_u, \lambda_v, \mu_u, \mu_v \in \R$ with
+  \[ 
+  \begin{mtable}
+    u= \lambda_u \cdot \begin{pmatrix}1\\1\\1\end{pmatrix}+ \mu_u \cdot \begin{pmatrix}1\\0\\0\end{pmatrix}\\
+    v= \lambda_v \cdot \begin{pmatrix}1\\1\\1\end{pmatrix}+ \mu_v \cdot \begin{pmatrix}1\\0\\0\end{pmatrix}
+  \end{mtable}
+  \] 
+  Then it holds
+  \[
+  u+v= (\lambda_u + \lambda_v) \cdot \begin{pmatrix}1\\1\\1\end{pmatrix}+ (\mu_u + \mu_v) \cdot \begin{pmatrix}1\\0\\0\end{pmatrix} \in E 
+  \]
+  and for any $\alpha \in \R$ also
+  \[
+   \alpha \cdot u = (\alpha \cdot \lambda_u) \cdot \begin{pmatrix}1\\1\\1\end{pmatrix}+ (\alpha \cdot \mu_u) \cdot \begin{pmatrix}1\\0\\0\end{pmatrix} \in E 
+  \]
+  
+  
+\end{showhide}}
+
+
+   \item \label{ex:LGS_UnterVR}
+     \lang{de}{Wie im \ref[lgs][Kapitel über Lineare Gleichungssystem (in Teil 3b)]{rule-lgs_raum} gesehen, bildet die Lösungsmenge $\mathbb{L}$ eines homogenen LGS $Ax=0$ (mit $m$ Gleichungen und $n$ Variablen) einen Vektorraum.
+     Dies gilt sogar, falls es nur die triviale Lösung $x=0$ gibt. Daher bildet auch $\mathbb{L}=\{ 0 \}$ ein Vektorraum.
+     Im Fall, dass $A$ die Nullmatrix ist, ist $\mathbb{L}= \K^n$. In allen anderen Fällen ist der Vektorraum $\mathbb{L}$ eine Teilmenge des Vektorraums $\K^n$. 
+     Wir sprechen deshalb auch von einem \emph{Untervektorraum}.}
+     \lang{en}{We have already seen in the \ref[lgs][chapter about systems of linear equations (in Part 3b)]{rule-lgs_raum}, 
+     that the solutions set $\mathbb{L}$ of a homogeneous linear system $Ax=0$ (with $m$ equations and $n$ variable) form a vector space.
+     This holds even, if the only solution is the trivial solution $x=0$. Therefore also $\mathbb{L}=\{ 0 \}$ forms a vector space.
+     In the case, that $A$ is the zero-matrix, the solution set is $\mathbb{L}= \K^n$. In every other case the vector space $\mathbb{L}$ is a subset of the vector space $\K^n$. 
+     Therefore we can talk about a \emph{vector subspace}.}
+ \end{enumerate}
+\end{example}
+
+\lang{de}{Im Grundlagen-Teil haben wir die Vektoren immer mit einem Vektorpfeil versehen, um den Unterschied zwischen Punkten und Vektoren zu verdeutlichen.
+In diesem allgemeinen Kontext verzichten wir auf diese Notation und schreiben Vektoren ohne Vektorpfeile.}
+\lang{en}{In the basic-part we always denoted vectore with an arrow to illustrate the difference between points and vectors.
+In this general context we will omit this notation and write vectors without an arrow.}
+
+
+\section{\lang{de}{Linearkombinationen} \lang{en}{Linear combinations}}
+
+  \begin{definition}[\lang{de}{Linearkombinationen} \lang{en}{Linear combinations}]\label{def:linearkombination}
+    \lang{de}{Es sei $\K$ ein Körper und $\vectorspace{V}$ ein $\K$-Vektorraum. Seien
+    ${v}_1, \ldots , {v}_k$
+    Vektoren des Vektorraums $\vectorspace{V}$ "uber $\K$.}
+    \lang{de}{Ein Vektor der Form
+    \begin{displaymath}
+      \alpha_1\, {v}_1 + \ldots +\alpha_k\, {v}_k
+    \end{displaymath}
+    mit Koeffizienten
+    $\alpha_1, \ldots , \alpha_k \in  \K$
+    hei"st \notion{Linearkombination} von ${v}_1,  \ldots,{v}_k$.}
+
+    \lang{en}{Let $\K$ be a field and $\vectorspace{V}$ a $\K$-vector space. Let
+    ${v}_1, \ldots , {v}_k$
+    be vectors in $\vectorspace{V}$ over $\K$.}
+    \lang{en}{A vector of the form
+    \begin{displaymath}
+      \alpha_1\, {v}_1 + \ldots +\alpha_k\, {v}_k
+    \end{displaymath}
+    with coefficients
+    $\alpha_1, \ldots , \alpha_k \in  \K$
+    is called \notion{linear combination} of ${v}_1,  \ldots,{v}_k$.}
+  \end{definition}
+
+\lang{de}{Diese Definition ist eine Verallgemeinerung der entsprechenden \ref[Vektorrechnung][Definition im $\R^n$]{sec:lin-comb}.}
+\lang{en}{This definitions is a generalisation of the corresponding \ref[Vektorrechnung][definition in $\R^n$]{sec:lin-comb}. }
+
+\begin{remark}
+ \begin{itemize}
+   \item \lang{de}{Eine Linearkombination ist eine \emph{endliche} Summe von Vektoren.}
+   \lang{en}{A linear combination is a \emph{finite} sum of vectors.}
+
+%%% Video K.M.
+%    
+   \item \lang{de}{Eine Menge von Linearkombinationen aus Vektoren ${v}_1, \ldots , {v}_k$ eines Vektorraums $\vectorspace{V}$
+         $\{ \alpha_1\, {v}_1 + \ldots +\alpha_k\, {v}_k \mid \alpha_1, \ldots , \alpha_k \in  \K \}$
+       erzeugt einen Untervektorraum von $\vectorspace{V}$. \\
+         Diesen bezeichnet man auch als \emph{linearen Spann}
+         oder \emph{lineare Hülle} von ${v}_1, \ldots , {v}_k$.} 
+         \lang{en}{A set of linear combinations of vectors ${v}_1, \ldots , {v}_k$ in $\vectorspace{V}$
+         $\{ \alpha_1\, {v}_1 + \ldots +\alpha_k\, {v}_k \mid \alpha_1, \ldots , \alpha_k \in  \K \}$
+           generates a vector subspace of $\vectorspace{V}$. \\
+         This is also called \emph{linear span}
+         or \emph{linear hull} of ${v}_1, \ldots , {v}_k$.} 
+
+\lang{de}{\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10932&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}}\\
+\\
+         
+ \end{itemize}
+\end{remark}
+
+\section{\lang{de}{Erzeugendensysteme} \lang{en}{Generating set}}
+
+\lang{de}{Wir verallgemeinern nun den Begriff des Erzeugendensystems. 
+Dieser wurde für den Spezialfall $\R^n$ bereits im \link{basen}{Grundlagenteil zur Vektorrechnung} definiert.}
+\lang{en}{Now we generalise the concept of the generating set. We already intruced it for the special case of $\R^n$ in the part about \link{basen}{basic vector calculations}.}
+
+\begin{definition}[\lang{de}{Erzeugendensystem} \lang{en}{Generating system}]\label{def:erzeugendensystem}
+\lang{de}{Eine (endliche) Menge von Vektoren $\{ {v}_1;\ldots;{v}_l \}$ in einem Vektorraum $\vectorspace{V}$ hei"st \emph{(endliches) Erzeugendensystem von $\vectorspace{V},$}
+wenn jedes Element von $\vectorspace{V}$ sich als Linearkombination der Vektoren ${v}_1,\ldots,{v}_l$ schreiben lässt.}
+\lang{en}{A (finite) set of vectors $\{ {v}_1;\ldots;{v}_l \}$ in a vector space $\vectorspace{V}$ is called \emph{(finite) generating set of $\vectorspace{V},$}
+if every element of $\vectorspace{V}$ can be written as a linear combinations of the vectors ${v}_1,\ldots,{v}_l$.}
+\end{definition}
+
+%%% Video K.M. - Teil 1 von Video 10933, neu 11270
+%  
+\lang{de}{
+Dabei muss die \emph{"`Erzeugung"'} eines Vektors ${v} \in \vectorspace{V}$ als Linearkombination
+aus den Vektoren ${v}_1,\ldots,{v}_l$ nicht eindeutig sein, ebenso wenig besitzt ein $\K$-Vektorraum $\vectorspace{V}$
+ein eindeutiges \emph{Erzeugendensystem}. Dies wird in folgendem Video verdeutlicht. \\
+(Bemerkung: In den Videos in diesem Kapitel wird für Erzeugendensysteme die Notation 
+$\langle {v}_1,\ldots,{v}_l\rangle_{\K}$ verwendet.)}
+\lang{en}{The \emph{"`generation"'} of a vector ${v}\in\vectorspace{V}$ as a linear combination of the vectors ${v}_1,\ldots,{v}_l$
+does not necessarily need to be unique. There is also no unique \emph{generating set} for a $\K$-vector space $\vectorspace{V}$.}
+
+\lang{de}{\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11270&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}}\\
+\\
+         
+
+\begin{definition}[\lang{de}{Endlichkeit von Vektorräumen} \lang{en}{Finitude of vector spaces}]
+ \lang{de}{Ein Vektorraum $\vectorspace{V}$, für den ein endliches Erzeugendensystem $\{ v_1; ...; v_l\}$ existiert, heißt \emph{endlich erzeugt} (oder auch \emph{endlich dimensional}).}
+ \lang{en}{A vector space $\vectorspace{V}$, with a finite generating set $\{ v_1; ...; v_l\}$, is called \emph{finitely generated} (or \emph{finite dimensional}).}
+\end{definition}
+
+\lang{de}{Nicht jeder Vektorraum ist endlich erzeugt, wie die folgenden Beispiele zeigen.}
+\lang{en}{Not every vector space is finitely generated, as the following examples will show.}
+
+\begin{example}
+%TODO
+\begin{tabs*}
+\tab{$\R^n$}
+\lang{de}{
+Die Standardvektoren im $\R^n$
+\[ e_1=\begin{pmatrix} 1\\ 0\\ \vdots \\ 0\end{pmatrix},\quad e_2=\begin{pmatrix} 0\\ 1\\ \vdots \\ 0\end{pmatrix}
+,\quad \ldots \quad e_n=\begin{pmatrix} 0\\ \vdots \\ 0\\ 1\end{pmatrix} \]
+bilden ein Erzeugendensystem des $\R^n$, da jeder Vektor $\begin{pmatrix} \alpha_1\\ \vdots \\ \alpha_n\end{pmatrix}$ geschrieben 
+werden kann als
+\[ \begin{pmatrix} \alpha_1\\ \vdots \\ \alpha_n \end{pmatrix} = \alpha_1 \cdot e_1 + \alpha_2 \cdot e_2 +\ldots +\alpha_n\cdot e_n, \]
+%  \[ \vec{e}_1=\begin{pmatrix} 1\\ 0\\ \vdots \\ 0\end{pmatrix},\quad \vec{e}_2=\begin{pmatrix} 0\\ 1\\ \vdots \\ 0\end{pmatrix}
+%  ,\quad \ldots \quad \vec{e}_n=\begin{pmatrix} 0\\ \vdots \\ 0\\ 1\end{pmatrix} \]
+%  bilden ein Erzeugendensystem des $\R^n$, da jeder Vektor $\begin{pmatrix} v_1\\ \vdots \\ v_n\end{pmatrix}$ geschrieben 
+%  werden kann als
+%  \[ \begin{pmatrix} v_1\\ \vdots \\ v_n\end{pmatrix} = v_1\cdot \vec{e}_1 +v_2\cdot \vec{e}_2 +\ldots +v_n\cdot \vec{e}_n, \]
+d.h. jeder Vektor ist Linearkombination der Standardvektoren.}
+\lang{en}{
+The standard vectors of $\R^n$
+\[ e_1=\begin{pmatrix} 1\\ 0\\ \vdots \\ 0\end{pmatrix},\quad e_2=\begin{pmatrix} 0\\ 1\\ \vdots \\ 0\end{pmatrix}
+,\quad \ldots \quad e_n=\begin{pmatrix} 0\\ \vdots \\ 0\\ 1\end{pmatrix} \]
+form a generating set of $\R^n$, because every vector $\begin{pmatrix} \alpha_1\\ \vdots \\ \alpha_n\end{pmatrix}$ 
+can be written as
+\[ \begin{pmatrix} \alpha_1\\ \vdots \\ \alpha_n \end{pmatrix} = \alpha_1 \cdot e_1 + \alpha_2 \cdot e_2 +\ldots +\alpha_n\cdot e_n, \]
+d.h. Every vector is a linear combination of the standard vectors.}
+
+\tab{\lang{de}{Polynomfunktionen} \lang{en}{Polynomial functions}}
+\lang{de}{
+Jedes Polynom $p$ von Grad $\leq n$ lässt sich als die folgende Summe schreiben:
+\[
+p(x) = a_0 + a_1 x + a_2 x^2 + \ldots + a_n x^n = \sum_{j=0}^n a_j x^j
+\]
+Die sogenannten Monome $x^j$, $j=0,...,n$ erzeugen den Vektorraum der Polynome mit Grad $\leq n,$
+denn jedes Polynom kann als Linearkombination von den Monomen $x^j$ geschrieben werden.}
+\lang{en}{Every polynomial $p$ of degree $\leq n$ can be writting as the following sum:
+\[
+p(x) = a_0 + a_1 x + a_2 x^2 + \ldots + a_n x^n = \sum_{j=0}^n a_j x^j
+\]
+The so-called monomials $x^j$, $j=0,...,n$ generate the vector space of the polynomials with degree $\leq n,$
+because every polynomial can also be seen as a linear combination of monomials $x^j$.}
+
+\lang{de}{Betrachten wir allerdings den Raum aller % (beispielsweise reellen) 
+Polynome, so können wir $x^{n+1}$ nicht
+als Linearkombination aus $1, x, x^2,...,x^n$ schreiben. Da der Grad eines Polynoms beliebig groß sein kann, können wir durch endlich
+viele Monome nicht alle % (reellen) 
+Polynome beschreiben. Deshalb ist der Vektorraum der Polynomfunktionen nicht endlich erzeugt.}
+\lang{en}{If we consider the space of all polynomials, we can not build $X^{n+1}$ as a linear combination of $1, x, x^2,...,x^n$.
+Since the degree of a polynomial can be arbitrarily large, we can not describe all polynomials with only a finite number of monomials.}
+
+\tab{$M(m,n;\K)$}
+\lang{de}{Die Matrizen}
+\lang{en}{The matrizes}
+\[ \begin{pmatrix} 1 & 0 & \ldots & 0 \\ 0 & 0 & \ldots & 0\\ \vdots & \vdots & \vdots & \vdots \\ 0 & 0 & \ldots & 0 \end{pmatrix},
+\begin{pmatrix} 0 & 1 & \ldots & 0 \\ 0 & 0 & \ldots & 0\\ \vdots & \vdots & \vdots & \vdots \\ 0 & 0 & \ldots & 0 \end{pmatrix}, \ldots,
+\begin{pmatrix} 0 & 0 & \ldots & 1 \\ 0 & 0 & \ldots & 0\\ \vdots & \vdots & \vdots & \vdots \\ 0 & 0 & \ldots & 0 \end{pmatrix},
+\begin{pmatrix} 0 & 0 & \ldots & 0 \\ 1 & 0 & \ldots & 0\\ \vdots & \vdots & \vdots & \vdots \\ 0 & 0 & \ldots & 0 \end{pmatrix},
+\begin{pmatrix} 0 & 0 & \ldots & 0 \\ 0 & 1 & \ldots & 0\\ \vdots & \vdots & \vdots & \vdots \\ 0 & 0 & \ldots & 0 \end{pmatrix}, \ldots,
+\begin{pmatrix} 0 & 0 & \ldots & 0 \\ 0 & 0 & \ldots & 0\\ \vdots & \vdots & \vdots & \vdots \\ 0 & 0 & \ldots & 1 \end{pmatrix}
+\]
+\lang{de}{
+bilden ein Erzeugendensystem von $M(m,n;\K)$, da jede Matrix $\begin{pmatrix} a_{11}& a_{12} & \ldots & a_{1n}\\ a_{21}&a_{22}&\ldots & a_{2n} \\ \vdots & \vdots & & \vdots \\ a_{m1} & a_{m2} & \ldots & a_{mn} \end{pmatrix}$ geschrieben 
+werden kann als
+\[\begin{pmatrix} a_{11}& a_{12} & \ldots & a_{1n}\\ a_{21}&a_{22}&\ldots & a_{2n} \\ \vdots & \vdots & & \vdots \\ a_{m1} & a_{m2} & \ldots & a_{mn} \end{pmatrix}
+= a_{11} \cdot \begin{pmatrix} 1 & 0 & \ldots & 0 \\ 0 & 0 & \ldots & 0\\ \vdots & \vdots & \vdots & \vdots \\ 0 & 0 & \ldots & 0 \end{pmatrix}
+ +\ldots + 
+ a_{mn} \cdot \begin{pmatrix} 0 & 0 & \ldots & 0 \\ 0 & 0 & \ldots & 0\\ \vdots & \vdots & \vdots & \vdots \\ 0 & 0 & \ldots & 1 \end{pmatrix}
+\]}
+\lang{en}{
+are a generating set of $M(m,n;\K)$, since every matrix $\begin{pmatrix} a_{11}& a_{12} & \ldots & a_{1n}\\ a_{21}&a_{22}&\ldots & a_{2n} \\ \vdots & \vdots & & \vdots \\ a_{m1} & a_{m2} & \ldots & a_{mn} \end{pmatrix}$
+can be written as
+\[\begin{pmatrix} a_{11}& a_{12} & \ldots & a_{1n}\\ a_{21}&a_{22}&\ldots & a_{2n} \\ \vdots & \vdots & & \vdots \\ a_{m1} & a_{m2} & \ldots & a_{mn} \end{pmatrix}
+= a_{11} \cdot \begin{pmatrix} 1 & 0 & \ldots & 0 \\ 0 & 0 & \ldots & 0\\ \vdots & \vdots & \vdots & \vdots \\ 0 & 0 & \ldots & 0 \end{pmatrix}
+ +\ldots + 
+ a_{mn} \cdot \begin{pmatrix} 0 & 0 & \ldots & 0 \\ 0 & 0 & \ldots & 0\\ \vdots & \vdots & \vdots & \vdots \\ 0 & 0 & \ldots & 1 \end{pmatrix}
+\]}
+\end{tabs*}
+\end{example}
+
+
+
+\section{\lang{de}{Lineare Unabhängigkeit} \lang{en}{Linear indepence}}
+
+\lang{de}{Wir verallgemeinern nun den aus dem \ref[basen][ersten Teil des Kurses]{def_lin_unabh}
+ bekannten Begriff der linearen Abhängigkeit bzw. Unabhängigkeit.}
+ \lang{en}{Now we will generalise the concept of linear (in-)dependence, which we already know from \ref[basen][Part 1 of the course]{def_lin_unabh}.}
+
+\begin{definition}[\lang{de}{Lineare Abhängigkeit von Vektoren} \lang{en}{Linear dependence of vectors}]\label{def:lineareAbhaengigkeit}
+\lang{de}{Ein Vektor ${v}$ eines Vektorraums $\vectorspace{V}$ hei"st von Vektoren ${w}_1,\ldots,{w}_k \in \vectorspace{V}$ \emph{linear abh"angig}, wenn er als Linearkombination
+der Vektoren ${w}_1,\ldots,{w}_k$ geschrieben werden kann. 
+Andernfalls hei"st ${v}$ \emph{linear unabh"angig von} ${w}_1,\ldots,{w}_k$.}
+\lang{en}{A vector ${v}$ in a vector space $\vectorspace{V}$ is called \emph{linearly dependend} of the vectors ${w}_1,\ldots,{w}_k \in \vectorspace{V}$,
+if $v$ can be written as a linear combination of the vectors ${w}_1,\ldots,{w}_k$.
+Otherwise we call ${v}$ \emph{linearly independent}.}
+
+\lang{de}{Für eine Menge von Vektoren $\{ {v}_1;\ldots;{v}_l\}\subset \vectorspace{V}$ gilt:  \,
+${v}_1,\ldots,{v}_l$ heißen \emph{linear abhängig}, wenn mindestens einer der Vektoren dieser Menge
+von den anderen linear abh"angig ist, und sie heißen \emph{linear unabh"angig}, wenn keiner der Vektoren von
+den anderen linear abh"angig ist.}
+\lang{en}{
+For a set of vectors $\{ {v}_1;\ldots;{v}_l\}\subset \vectorspace{V}$ holds: \,
+${v}_1,\ldots,{v}_l$ are called \emph{linearly dependent}, if a least one of the vectors in the set is linearly dependent from 
+the others. They are called \emph{linearly independent}, if none of the vectors is linearly dependent from the others.}
+\end{definition} 
+%
+%%% Video K.M. - Teil 2 von Video 10933, neu: 11271
+% 
+\lang{de}{Das folgende Video vertieft die Definition der Linearen (Un-)Abhängigkeit anhand einiger Beispiele.
+
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11271&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}}\\\\
+\\
+
+\lang{de}{Um herauszufinden, ob mehrere Vektoren ${v}_1,\ldots,{v}_l$ linear unabh"angig sind, müsste man also untersuchen,
+ob ${v}_1$ als Linearkombination von ${v}_2,\ldots,{v}_l$ geschrieben werden kann, oder ob
+${v}_2$ als Linearkombination von ${v}_1,{v}_3, \ldots,{v}_l$ geschrieben werden kann, etc.}
+\lang{en}{If we want to know, if several vectors ${v}_1,\ldots,{v}_l$ are linearly independent, we need to check if ${v}_1$
+can be displayed as a linear combination of ${v}_2,\ldots,{v}_l$, ${v}_2$ as a linear combinations of ${v}_1,{v}_3, \ldots,{v}_l$ and so on.}
+
+         
+\lang{de}{Einfacher geht es mit Hilfe des folgenden Satzes:}
+\lang{en}{But it is easier with the help of the following theorem:}
+
+\begin{theorem}[\lang{de}{Lineare Unabhängigkeit von Vektoren} \lang{en}{Linear independence of vectors}] \label{Lin_unabh_Basis}
+\lang{de}{Vektoren ${v}_1,\ldots,{v}_l$ eines Vektorraums $\vectorspace{V}$ sind genau dann linear unabh"angig, wenn die Gleichung 
+\[ r_1{v}_1+\ldots +r_l{v}_l=0 \]
+nur f"ur $r_1=\ldots=r_l=0$ erf"ullt ist.}
+\lang{en}{Vectors ${v}_1,\ldots,{v}_l$ in a vector space $\vectorspace{V}$ are linearly independent if and only if the
+equations 
+\[ r_1{v}_1+\ldots +r_l{v}_l=0 \]
+is only fulfilled for $r_1=\ldots=r_l=0$. }
+\end{theorem}
+
+\begin{example}
+\begin{tabs*}
+\tab{\lang{de}{Standardvektoren} \lang{en}{Standard vectors}}
+\lang{de}{
+Die Standardvektoren
+\[ e_1=\begin{pmatrix} 1\\ 0\\ \vdots \\ 0\end{pmatrix},\quad e_2=\begin{pmatrix} 0\\ 1\\ \vdots \\ 0\end{pmatrix}
+,\quad \ldots, \quad e_n=\begin{pmatrix} 0\\ \vdots \\ 0\\ 1\end{pmatrix} \]
+sind linear unabhängig. Es ist nämlich
+\[ r_1 \cdot e_1+r_2 \cdot e_2+\ldots +r_n \cdot e_n=\begin{pmatrix} r_1\\ r_2\\ \vdots \\ r_n\end{pmatrix} \]
+nur dann der Nullvektor, wenn $r_1=r_2= \ldots =r_n=0$ gilt.}
+\lang{en}{
+The standard vectors
+\[ e_1=\begin{pmatrix} 1\\ 0\\ \vdots \\ 0\end{pmatrix},\quad e_2=\begin{pmatrix} 0\\ 1\\ \vdots \\ 0\end{pmatrix}
+,\quad \ldots, \quad e_n=\begin{pmatrix} 0\\ \vdots \\ 0\\ 1\end{pmatrix} \]
+are linearly indepdendent.
+\[ r_1 \cdot e_1+r_2 \cdot e_2+\ldots +r_n \cdot e_n=\begin{pmatrix} r_1\\ r_2\\ \vdots \\ r_n\end{pmatrix} \]
+is equal to the zero-vector if and only if it holds $r_1=r_2= \ldots =r_n=0$.}
+%
+%  \[ \vec{e}_1=\begin{pmatrix} 1\\ 0\\ \vdots \\ 0\end{pmatrix},\quad \vec{e}_2=\begin{pmatrix} 0\\ 1\\ \vdots \\ 0\end{pmatrix}
+%  ,\quad \ldots, \quad \vec{e}_n=\begin{pmatrix} 0\\ \vdots \\ 0\\ 1\end{pmatrix} \]
+%  sind linear unabhängig. Es ist nämlich
+%  \[ r_1\vec{e}_1+r_2\vec{e}_2+\ldots +r_n \vec{e}_n=\begin{pmatrix} r_1\\ r_2\\ \vdots \\ r_n\end{pmatrix} \]
+%  nur dann der Nullvektor, wenn $r_1=r_2= \ldots =r_n=0$ gilt.
+%
+\tab{\lang{de}{Polynomfunktionen} \lang{en}{Polynomial functions}}
+\lang{de}{Im Vektorraum der Polynomfunktionen sind die Monome $x^j$ jeweils linear unabhängig, denn
+ein Polynom vom Grad $n$ ist eindeutig durch die Werte an $n+1$ (verschiedenen) Stellen bestimmt. (Diese Tatsache nennt sich Identitätssatz für Polynome.)
+Der Wert des konstanten Nullpolynoms ist an allen Stellen (also sogar an unendlich vielen) gleich $0$.
+Damit lässt sich das Nullpolynom nur in folgender Form darstellen:
+\[
+0 = 0 \cdot x^0 + 0 \cdot x^1 + 0 \cdot x^2 + ... + 0 \cdot x^n.
+\]}
+\lang{en}{The monomials $x^j$ in the vector space of polynomial functions are each linearly independent,
+because a polynomial with degree $n$ is uniquely defined by the values at $n+1$ different spots.
+(We call this identity theorem for polynomials.)
+The value of the constant zero-polynomial is equal to $0$ at all spots (which means at infinitely many).
+Therefore the zero-polynomial can only be displayed in the following form:
+\[
+0 = 0 \cdot x^0 + 0 \cdot x^1 + 0 \cdot x^2 + ... + 0 \cdot x^n.
+\]}
+\end{tabs*}
+\end{example}
+
+\section{\lang{de}{Basis} \lang{en}{Basis}}
+
+\lang{de}{Für den $\R^n$ hatten wir schon den Begriff der \ref[basen][Basis]{def_basis}
+kennengelernt.}
+\lang{en}{For $\R^n$ we already learned the notion of the \ref[basen][basis]{def_basis}.}
+
+\begin{definition}[\lang{de}{Basis} \lang{en}{Basis}]\label{def:basis}
+\lang{de}{
+Eine Menge von Vektoren $\{ {v}_1;\ldots;{v}_l \}$ eines Vektorraums $\vectorspace{V}$ hei"st \emph{Basis von $\vectorspace{V}$},
+wenn sich jedes Element des Vektorraums eindeutig (d.h. auf genau eine Weise) als Linearkombination der Elemente ${v}_1,\ldots,{v}_l$ schreiben lässt.}
+\lang{en}{
+A set of vectors $\{ {v}_1;\ldots;{v}_l \}$ of the vector space $\vectorspace{V}$ is called \emph{basis of $\vectorspace{V}$},
+if every element of the vector space can be displayed uniquely (i.e. in exactly one way) as a linear combination of the elements ${v}_1,\ldots,{v}_l$.}
+\end{definition}
+
+\begin{remark}
+\begin{enumerate}
+\item \lang{de}{Die Darstellung eines Vektors $v \in \vectorspace{V}$ als Linearkombination der Vektoren einer Basis von $\vectorspace{V}$
+ist auf \textbf{genau} eine Weise möglich, wohingegen es bei einem Erzeugendensystem nur \textbf{mindestens} eine Möglichkeit geben muss.}
+\lang{en}{The representation of a vector $v \in \vectorspace{V}$ as a linear combination of vectors of a basis of $\vectorspace{V}$
+is \emph{unique}, while for the linear combination of vectors of a generating set is \emph{at least} one option.}
+
+\item \lang{de}{Jede Basis ist also auch ein Erzeugendensystem.} \lang{en}{Each basis is also a generating set.}
+\item \lang{de}{Ist $\{ {v}_1;\ldots;{v}_l \}$ eine Basis von $\vectorspace{V}$, so lässt sich auch der Nullvektor auf genau eine
+Weise als Linearkombination darstellen. \\ Da $0\cdot {v}_1+\ldots+ 0\cdot {v}_l= 0$ eine solche ist, ist sie
+auch die einzige.\\ Dies bedeutet (gemäß Theorem \ref{Lin_unabh_Basis}), dass die Vektoren einer Basis linear unabhängig sind.}
+\lang{en}{If $\{ {v}_1;\ldots;{v}_l \}$ is a basis of $\vectorspace{V}$, there also is exactly one possible linear combination
+for the zero-vector.\\ Since $0\cdot {v}_1+\ldots+ 0\cdot {v}_l= 0$ is such a linear combination, it is the only one.}
+\end{enumerate}
+\end{remark}
+
+\lang{de}{Zur vorigen Bemerkung gilt auch die Umkehrung. Genauer:}
+\lang{en}{The reverse of the previous remark also applies:}
+
+\begin{theorem}
+\lang{de}{Eine Menge von Vektoren $\{ {v}_1;\ldots;{v}_l \}$ ist genau dann eine Basis von $\vectorspace{V}$,
+wenn sie ein Erzeugendensystem ist und die Vektoren $\{ {v}_1;\ldots;{v}_l \}$ linear unabhängig sind.}
+\lang{en}{A set of vectors $\{ {v}_1;\ldots;{v}_l \}$ is a basis of $\vectorspace{V}$ if and only if it is
+a generating set and the vectors $\{ {v}_1;\ldots;{v}_l \}$ are linearly independent.}
+\end{theorem}
+
+%%% Video K.M.
+% 
+\lang{de}{
+Diese Zusammenhänge werden in dem folgenden Video noch einmal erläutert 
+und anhand von Beispielen veranschaulicht.
+
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10934&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}}\\
+\\
+
+\lang{de}{
+Nun haben wir oben gelernt, dass nicht jeder Vektorraum endlich erzeugt ist. Nicht endlich erzeugte Vektorräume können also keine Basis aus endlich vielen Vektoren haben.
+Für solche unendlich dimensionalen Vektorräume lässt sich aber auch der Begriff der Basis definieren. Dies wollen wir hier allerdings nicht weiter vertiefen
+und beschränken uns im Folgenden meist auf endlich erzeugte Vektorräume. Für diese können wir den folgenden Satz formulieren.}
+\lang{en}{
+We already know, that not every vector space is finitely generated. So not finitely generated vector spaces cannot have a basis consisting of finitely many vectors.
+But we can still define the concept of basis for infinitely generated vector spaces. We do not want to discuss this here and
+focus only on finitely generated vector spaces. For those we have the following theorem.}
+
+\begin{theorem}
+\lang{de}{Jede Basis eines endlich erzeugten Vektorraums $\vectorspace{V}$ hat gleich viele Elemente.}
+\lang{en}{Every basis of a finitely generated vector space $\vectorspace{V}$ has the same number of elements.}
+\end{theorem}
+
+\lang{de}{Dieser Satz macht die Entscheidung, ob eine gegebene Menge von Vektoren eine Basis ist, leichter.
+Damit wissen wir, dass $n$ linear unabhängige Vektoren im $\R^n$ stets eine Basis des $\R^n$ bilden.}
+\lang{en}{This theorem helps to decide if a given set of vectors is a basis. Therefore we know, that $n$ linearly independent
+vectors of $\R^n$ is always a basis of $\R^n$.}
+
+\begin{definition}[\lang{de}{Dimension eines Vektorraums} \lang{en}{Dimension of a vector space}]\label{def:dimension}
+\lang{de}{Die Anzahl der Elemente einer Basis eines Vektorraums (und damit jeder Basis eines Vektorraums) 
+nennt man die \emph{Dimension} des Vektorraumes.  Man schreibt $\text{dim}(V)$.}
+\lang{en}{The number of elements of a basis of a vector space (and therefore every basis of a vector space)
+is called the \emph{dimension} of the vector space. We denote $\text{dim}(V)$.}
+\end{definition}
+
+
+%%% Video K.M.
+%
+\lang{de}{
+Auch hierzu finden Sie Erläuterungen und Beispiele in einem Video:
+
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10935&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}}\\
+\\
+
+\lang{de}{
+Besitzt $\vectorspace{V}$ kein endliches Erzeugendensystem, so sagen wir $V$ ist unendlich
+dimensional und schreiben $\text{dim}(V) = \infty.$}
+\lang{en}{
+If $\vectorspace{V}$ does not have a finite generating system, we say, that $V$ is infinite-dimensional and write $\text{dim}(V) = \infty.$}
+
+\begin{theorem}[\lang{de}{Basisergänzungssatz} \lang{en}{Basisergänzungssatz - english?!}]\label{thm:basisergaenzungssatz}
+\lang{de}{
+Sind die Vektoren der Menge $\{v_1 ; . . . ; v_m \} \subset \vectorspace{V}$ linear unabhängig und ist $V$ ein endlich erzeugter Vektorraum 
+mit \, $\text{dim}(V) = n $ \, ( $ \geq m$), 
+so l\"asst sich $\{v_1 ; . . . ; v_m\}$ durch Hinzunahme geeigneter Elemente aus $V$ zu einer Basis erweitern.}
+\lang{en}{Let the set of vectors $\{v_1 ; . . . ; v_m \} \subset \vectorspace{V}$ be linearly independent and $V$ a finitely generated
+vector space with \, $\text{dim}(V) = n $ \, ( $ \geq m$). $\{v_1 ; . . . ; v_m\}$ can be expanded to a basis by adjoining suitable elements of $V$.}
+\end{theorem}
+
+%%% Video K.M.
+%
+\lang{de}{
+In folgendem Video wird der Basisergänzungssatz erläutert und um einige interessante
+Folgerungen ergänzt.
+
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10936&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}}\\
+\\
+
+\lang{de}{
+Insbesondere gilt, dass f\"ur einen endlich erzeugten Vektorraum auch immer eine Basis existiert.}
+\lang{en}{
+It especially holds, that it always exists a basis for a finitely generated vector space.}
+
+\begin{tabs*}
+\tab{\lang{de}{$\R^n$} \lang{en}{$\R^n$}}
+\lang{de}{
+Die Standardvektoren \[ e_1=\begin{pmatrix} 1\\ 0\\ \vdots \\ 0\end{pmatrix},\quad e_2=\begin{pmatrix} 0\\ 1\\ \vdots \\ 0\end{pmatrix}
+,\quad \ldots, \quad e_n=\begin{pmatrix} 0\\ \vdots \\ 0\\ 1\end{pmatrix} \]
+erzeugen den $\R^n$ und sind linear unabhängig, d.h. sie bilden eine Basis von $\R^n$.}
+\lang{en}{
+The standard vectors \[ e_1=\begin{pmatrix} 1\\ 0\\ \vdots \\ 0\end{pmatrix},\quad e_2=\begin{pmatrix} 0\\ 1\\ \vdots \\ 0\end{pmatrix}
+,\quad \ldots, \quad e_n=\begin{pmatrix} 0\\ \vdots \\ 0\\ 1\end{pmatrix} \]
+generate $\R^n$ and are linearly independent, i.e. they are a basis of $\R^n$.}
+
+\tab{\lang{de}{Polynomfunktionen} \lang{en}{Polynomnial functions}}
+\lang{de}{
+Für den endlich erzeugten Vektorraum der Polynomfunktionen mit Grad $\leq n$ ist beispielsweise
+eine Basis durch $\{x \mapsto 1;x\mapsto x;x \mapsto x^2;...;x \mapsto x^n\}$ gegeben, denn die Funktionen erzeugen den Raum und sind linear
+unabhängig.}
+\lang{en}{
+For the finitely generated vector space of polynomnial functions with degree $\leq n$, for example,
+$\{x \mapsto 1;x\mapsto x;x \mapsto x^2;...;x \mapsto x^n\}$ is a basis, because the functions generate the space and
+are linearly independent.}
+
+\lang{de}{Achtung: Um auch die konstanten Funktionen durch Linearkombinationen erzeugen zu können,
+besitzt eine Basis der Polynomfunktionen mit Grad $\leq n$ immer $n+1$ Elemente. In manchen Kontexten
+werden auch die Polynomfunktionen mit Grad $<n$ betrachtet. Dann sind es $n$ Basiselemente (also z.B. $\{x\mapsto 1;x\mapsto x;...;x \mapsto x^{n-1}\}$).}
+\lang{en}{Warning: Since we also want to generate the constant functions through linear combinations,
+the basis of the polynomial functions with degree $\leq n$ always consists of $n+1$ elements.
+In some contexts, there may be discussed polynomial functions with degree $<n$. Then the basis
+consists of $n$ elements (e.g. $\{x\mapsto 1;x\mapsto x;...;x \mapsto x^{n-1}\}$).}
+\end{tabs*}
+
+\begin{remark}[\lang{de}{Koordinatenvektor / Koeffizientenvektor} \lang{en}{Coordinate vector / coeffizient vector}]\label{rem:koordinatenvektor}\label{rem:koeffizientenvektor}
+ \lang{de}{Ist $B:=\{ {v}_1;\ldots;{v}_l \}$ eine Basis eines Vektorraums $\vectorspace{V}$, so lässt sich jedes Element $v \in V$ also schreiben als \[
+                                                                                                                                         v = \sum_{i=1}^l \alpha_i v_i\]
+        mit passenden $\alpha_i \in \K$.                                                                                                                                 
+  Der Vektor $\begin{pmatrix}
+               \alpha_1 \\ \vdots \\ \alpha_l
+              \end{pmatrix}$ nennt sich \emph{Koordinatenvektor} (oder auch 
+              \emph{Koeffizientenvektor}) von $v$ bezüglich der Basis $B.\,$
+  Wir schreiben hierfür ${\,}_B v,\,$ alternativ wird auch die Schreibweise $v_B\,$ verwendet.}
+
+ \lang{en}{If $B:=\{ {v}_1;\ldots;{v}_l \}$ is a basis of a vector space $\vectorspace{V}$, 
+ we can write every element $v \in V$ as \[
+                                                                                                                                        
+    v = \sum_{i=1}^l \alpha_i v_i\]
+        with suitable $\alpha_i \in \K$.                                                                                                                                 
+  The vector $\begin{pmatrix}
+               \alpha_1 \\ \vdots \\ \alpha_l
+              \end{pmatrix}$ is called \emph{coordinate vector} (or
+              \emph{coeffizient vector}) of $v$ referring to the basis $B.\,$
+  We denote this as ${\,}_B v,\,$ alternatively we may use the notation $v_B\,$.}
+  
+%
+%%% Video K.M.
+%
+\lang{de}{\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10828&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}}\\
+\\                                                                                                                                    
+\end{remark}
+
+\begin{example} \label{koord_vec}
+\begin{tabs}
+\tab{\lang{de}{$\R^n$} \lang{en}{$\R^n$}}
+\lang{de}{
+Bezüglich der Standardbasis des $\R^n$ ist der Vektor
+$\begin{pmatrix}a_1 \\ \vdots \\ a_n\end{pmatrix}$ stets schon gleich seinem
+Koordinatenvektor.}
+\lang{en}{
+Regarding the standard basis of $\R^n$ the vector
+$\begin{pmatrix}a_1 \\ \vdots \\ a_n\end{pmatrix}$ is always equal to its coordinate vector.}
+
+\tab{\lang{de}{$\R^2$} \lang{en}{$\R^2$}}
+\lang{de}{
+Der Koordinatenvektor des Vektors $\begin{pmatrix} -2 \\ 1\end{pmatrix}$ bezüglich der Standardbasis 
+$\{\begin{pmatrix}1 \\ 0 \end{pmatrix}; \begin{pmatrix}0 \\1 \end{pmatrix}\}$ des $\R^2$ ist 
+gegeben durch $\begin{pmatrix} -2 \\ 1\end{pmatrix}$ selbst.}
+\lang{en}{
+The coordinate vector of the vector $\begin{pmatrix} -2 \\ 1\end{pmatrix}$ regarding the standard basis 
+$\{\begin{pmatrix}1 \\ 0 \end{pmatrix}; \begin{pmatrix}0 \\1 \end{pmatrix}\}$ des $\R^2$ ist 
+is $\begin{pmatrix} -2 \\ 1\end{pmatrix}$ selbst.}
+
+\\
+
+\lang{de}{Bezüglich der Basis $C:=\{\begin{pmatrix}1 \\ 0 \end{pmatrix}; \begin{pmatrix}1 \\1 \end{pmatrix}\}$ des $\R^2$ schreibt man den Vektor 
+$\begin{pmatrix} -2 \\ 1\end{pmatrix}$ als
+
+ \[
+ \begin{pmatrix} -2 \\ 1\end{pmatrix} = \textcolor{#CC6600}{-3} \cdot \begin{pmatrix} 1 \\ 0 \end{pmatrix}+ \textcolor{#CC6600}{1} \cdot \begin{pmatrix}1 \\ 1\end{pmatrix}
+ \]
+ Deshalb ist der Koordinatenvektor von $\begin{pmatrix} -2 \\ 1\end{pmatrix}$ bezüglich $C$ gegeben durch $\textcolor{#CC6600}{\begin{pmatrix}-3 \\ 1 \end{pmatrix}}$.}
+
+
+\lang{en}{Regarding the basis $C:=\{\begin{pmatrix}1 \\ 0 \end{pmatrix}; \begin{pmatrix}1 \\1 \end{pmatrix}\}$ of $\R^2$ we write the vector 
+$\begin{pmatrix} -2 \\ 1\end{pmatrix}$ as
+
+ \[
+ \begin{pmatrix} -2 \\ 1\end{pmatrix} = \textcolor{#CC6600}{-3} \cdot \begin{pmatrix} 1 \\ 0 \end{pmatrix}+ \textcolor{#CC6600}{1} \cdot \begin{pmatrix}1 \\ 1\end{pmatrix}
+ \]
+ Therefore the coordinate vector of $\begin{pmatrix} -2 \\ 1\end{pmatrix}$ with respect to $C$ is $\textcolor{#CC6600}{\begin{pmatrix}-3 \\ 1 \end{pmatrix}}$.}
+
+\tab{\lang{de}{Polynomfunktionen} \lang{en}{Polynomial functions}}
+\lang{de}{
+Bezüglich der Standardbasis für den Raum der Polynomfunktionen mit Grad $\leq n$, welche
+wie oben gesehen durch $\{x \mapsto 1;x\mapsto x;x \mapsto x^2;...;x \mapsto x^n\}$ gegeben ist,
+ist der Koordinatenvektor für die Polynomfunktion $f(x)= a_n x^n + ... + a_1 x +a_0$ gegeben durch
+$\begin{pmatrix}a_0 \\ a_1 \\ a_2 \\ \vdots \\ a_n \end{pmatrix}$.}
+\lang{de}{
+With respect to the standard basis of the vector space of polynomial functions with degree $\leq n$, which is
+$\{x \mapsto 1;x\mapsto x;x \mapsto x^2;...;x \mapsto x^n\}$ (like we have seen above),
+the coordinate vector for the polynomial function $f(x)= a_n x^n + ... + a_1 x +a_0$ is given by
+$\begin{pmatrix}a_0 \\ a_1 \\ a_2 \\ \vdots \\ a_n \end{pmatrix}$.}
+\end{tabs}
+\end{example}
+
+\end{visualizationwrapper}
+
+
+
+\end{content}

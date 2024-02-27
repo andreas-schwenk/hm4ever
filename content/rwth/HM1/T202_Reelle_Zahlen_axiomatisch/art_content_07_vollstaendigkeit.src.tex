@@ -1,0 +1,619 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Vollständigkeit}
+    \lang{en}{Completeness}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+  \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T202_Reelle_Zahlen_axiomatisch/g_art_content_05_anordnungsaxiome.meta.xml}{content_05_anordnungsaxiome}
+    \link{generic_article}{content/rwth/HM1/T202_Reelle_Zahlen_axiomatisch/g_art_content_06_supremum_infimum.meta.xml}{content_06_supremum_infimum}
+    \link{generic_article}{content/rwth/HM1/T201neu_Vollstaendige_Induktion/g_art_content_02_vollstaendige_induktion.meta.xml}{content_02_vollstaendige_induktion}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+
+
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{2}
+\ombarticle{4}
+
+\lang{de}{\title{Supremum, Infimum und Vollständigkeit}}
+\lang{en}{\title{Supremum, infimum and completeness}}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9649}{Ticket 9649}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+\section{\lang{de}{Supremum und Infimum}\lang{en}{Supremum and infimum}}
+
+\lang{de}{Wie im letzten Abschnitt bezeichne $(\K,<)$ einen angeordneten Körper.}
+\lang{en}{As in the last section, let $(\K,<)$ denote an ordered field.}
+
+
+\begin{definition}[Supremum / Infimum] \label{def:sup_inf}
+    \lang{de}{Sei $A\subset \K$. Eine Zahl $S\in\K$ hei"st die \emph{\notion{kleinste obere Schranke}} 
+    	von $A$ (oder das \emph{\notion{Supremum}} von $A$, geschrieben $S=\sup A$), wenn}
+     \lang{en}{Let $A\subset \K$. A number $S\in\K$ is called the \emph{\notion{least upper bound}} 
+     of $A$ (or the \emph{\notion{supremum}} of $A$, written $S=\sup A$), if}
+    	\[
+    	\lang{de}{S\quad\text{eine obere Schranke von}\; A\;\text{ist und}}
+     \lang{en}{S\quad\text{is an upper bound of}\; A\;\text{and}}
+    	\]
+    	\[
+    	\lang{de}{S\,\leq\, C\quad \text{ f\"ur jede obere Schranke }\;C\;\text{ von }\;A.}
+     \lang{en}{S\,\leq\, C\quad \text{ for every upper bound }\;C\;\text{ of }\;A.}
+    	\]
+    	
+    	\lang{de}{Eine Zahl $s\in\K$ ist die \emph{\notion{gr\"o\"ste untere Schranke} }
+    	von $A$ (oder das \emph{\notion{Infimum}} von $A$,  geschrieben $s=\inf A$), wenn}
+     \lang{en}{A number $s\in\K$ is the \emph{\notion{greatest lower bound}} of $A$ 
+     (or the \emph{\notion{infimum}} of $A$, written $s=\inf A$), if}
+    	\[
+    	\lang{de}{s\quad\text{eine untere Schranke von}\;A\;\text{ist und}}
+     \lang{en}{s\quad\text{is a lower bound of }\;A\;\text{and}}
+    	\]
+    	\[
+    	\lang{de}{c\,\leq\, s\quad \text{ f\"ur jede untere Schranke }\;c\;\text{von}\;A.}
+     \lang{en}{c\,\leq\, s\quad \text{ for every lower bound }\;c\;\text{of}\;A.}
+    	\]
+  \end{definition}
+
+\begin{remark}
+\lang{de}{Sei $A$ eine beliebige Teilmenge eines angeordneten Körpers $(\K,<)$.}
+\lang{en}{Let $A$ be an arbitrary subset of an ordered field $(\K,<)$.}
+\begin{enumerate}
+\item \lang{de}{Besitzt $A$ ein Supremum bzw. ein Infimum, so ist dieses eindeutig bestimmt.}
+\lang{en}{If $A$ has a supremum (or an infimum), then it is unique.}
+
+    \begin{showhide}[\buttonlabels{\lang{de}{Zeige Begründung }\lang{en}{Show proof }}{\lang{de}{Verstecke Begründung}\lang{en}{Hide proof}}]
+    \lang{de}{Seien nämlich $S_1$ und $S_2$ zwei Suprema von $A$. Da $S_2$ eine obere Schranke ist, gilt nach Definition
+    des Supremums für $S_1$, dass $S_1\leq S_2$. Da aber auch $S_1$ eine obere Schranke ist, gilt nach Definition
+    des Supremums für $S_2$, dass $S_2\leq S_1$. Insgesamt also $S_1=S_2$.\\
+    Ganz entsprechend zeigt man dies für das Infimum.}
+    \lang{en}{Let $S_1$ and $S_2$ be two suprema of $A$. Since $S_2$ is an upper bound, the definition of the supremum for $S_1$ gives us that
+    $S_1\leq S_2$. However, since $S_2$ is also an upper bound, the definition of the supremum for $S_2$ gives us that $S_2\leq S_1$. Therefore $S_1=S_2$.\\
+    The same can similarly be shown for the infimum.}
+    \end{showhide}
+
+\item \lang{de}{Ist $A$ nach oben unbeschränkt, so besitzt sie kein Supremum. \\
+      Ist sie nach unten unbeschränkt, so besitzt sie kein Infimum. \\
+      Doch selbst wenn die Mengen nach oben oder nach unten beschränkt sind, 
+      müssen das Supremum und das Infimum von Teilmengen nicht unbedingt existieren, 
+      wie in den nachfolgenden Beispielen (\ref{ex:suprema-infima}) zu sehen ist.}
+      \lang{en}{If $A$ is unbounded above, then it has no supremum. \\
+      If it is unbounded below, then it has no infimum. \\
+      However, even if the set is bounded above or below, the supremum and infimum of a subset need not necessarily exist, 
+      as can be seen in the following examples (\ref{ex:suprema-infima}).}
+
+\lang{de}{Die Existenz von Suprema und Infima ist ein wesentliche Eigenschaft der reellen Zahlen.}
+\lang{en}{The existence of suprema and infima is an essential property of the real numbers.}
+\item
+\lang{de}{Besitzt $A$ ein Maximum $M=\max(A)$, so ist dieses auch gleichzeitig das Supremum.
+
+Besitzt eine Teilmenge $A$ ein Minimum $m=\min(A)$, so ist dieses auch gleichzeitig das Infimum.}
+\lang{en}{If $A$ has a maximum $M=\max(A)$, this is also the supremum.
+
+If $A$ has a mimimum $m=\min(A)$, this is also the infimum.}
+\item \lang{de}{Besitzt $A$ eine obere Schranke $S$, welche sogar in $A$ liegt, so ist $S=\sup(A)=\max(A)$.
+
+ Besitzt $A$ ein untere Schranke $s$, welche sogar in $A$ liegt, so ist $s=\inf(A)=\min(A)$.}
+ \lang{en}{If $A$ has an upper bound $S$ which lies in $A$, then $S=\sup(A)=\max(A)$.
+ 
+ If $A$ has a lower bound $s$ which lies in $A$, then $s=\inf(A)=\min(A)$.}
+\end{enumerate}
+\end{remark}
+
+
+\begin{example}\label{ex:suprema-infima}
+\lang{de}{Wir betrachten wieder die Teilmengen der rationalen Zahlen $\Q$ wie in den Beispielen zu 
+\ref[content_06_supremum_infimum][Maximum und Minimum]{ex:maxmin}.}
+\lang{en}{We again consider the subsets of the rational numbers $\Q$ from the examples for 
+\ref[content_06_supremum_infimum][maximum and minimum]{ex:maxmin}.}
+
+\begin{enumerate}
+  \item \lang{de}{Das Infimum von $\N$ ist gleich dem Minimum $1$. 
+      $\N$ ist jedoch nicht nach oben beschränkt und
+  besitzt daher auch kein Supremum.
+  Dass $\N$ kein Supremum besitzt, kann man auch direkt aus der Definition zur oberen Schranke folgern.}
+  \lang{en}{The infimum of $\N$ is equal to the mimimum $1$.
+  $\N$ is not bounded above, and therefore it has no supremum.
+  We can also show that $\N$ has no supremum directly from the definition of an upper bound.}
+
+    \begin{showhide}[\buttonlabels{\lang{de}{Zeige Begründung }\lang{en}{Show proof }}{\lang{de}{Verstecke Begründung}\lang{en}{Hide proof}}]
+    	  \lang{de}{Angenommen $S$ sei eine obere Schranke für $\N$. Dann gilt   
+          \ref[content_06_supremum_infimum][definitionsgemäß]{def:beschraenkt},
+          dass $\, n \leq S \,$ für alle $n \in \N \,$ gilt. Da mit $n$ aber auch 
+          $n+1$ in $\N$ liegt, gilt auch $n+1 \leq S \,$ und folglich 
+          $\, n \leq S-1 \, $ für alle $\, n\in \N$.\\
+          Dies wiederum bedeutet, dass auch $S-1$ eine obere Schranke für $\N$ ist, die
+          kleiner ist als $S$. Da dieser Schluss für jede beliebig gewählte obere Schranke 
+          $S$ gilt, besitzt $\N$ daher keine kleinste obere Schranke.}
+          \lang{en}{Suppose $S$ is an upper bound for $\N$. Then 
+          \ref[content_06_supremum_infimum][by definition]{def:beschraenkt}, 
+          we have $\, n \leq S \,$ for all $n \in \N \,$. Since as well as $n$, $n+1$ also lies in $\N$, 
+          we have $n+1 \leq S \,$ and thus $\, n \leq S-1 \, $ for all $\, n\in \N$.\\
+          This means that $S-1$ is also an upper bound for $\N$, which is smaller than $S$. 
+          Since this argument holds for any arbitrarily chosen upper bound $S$, it shows that 
+          $\N$ has no least upper bound.}
+    \end{showhide}
+% 
+
+  \item \lang{de}{Jede endliche nichtleere Teilmenge $A\subset \Q$ besitzt ein Infimum und ein Supremum, 
+        nämlich das Minimum bzw. das Maximum von $A$.}
+        \lang{en}{Every finite non-empty subset $A\subset \Q$ has an infimum and a supremum, namely 
+        the mimimum and the maximum respectively.}
+        
+  \item \lang{de}{Die Menge $A=\{\frac{1}{n} \in \Q | n\in \N \}$ besitzt das Maximum $1$, 
+        welches daher auch Supremum ist. Wir wissen bereits, dass $0$ eine untere Schranke,
+        jedoch kein Minimum von $A$ ist. Da $0$ jedoch die größte untere Schranke von $A$ ist, 
+        ist sie das Infimum von $A$, also $\inf(A)=0$.}
+        \lang{en}{The set $A=\{\frac{1}{n} \in \Q | n\in \N \}$ has the maximum $1$, 
+        which is therefore also its supremum. We already know that $0$ is a lower bound, but not the mimimum, of $A$. 
+        Since $0$ is the greatest lower bound of $A$, it is the infimum of $A$, so $\inf(A)=0$.}
+        
+  \item \lang{de}{Die Menge $A=\{x \in \Q | x^2<2\}$ ist zwar beschränkt, besitzt aber in den rationalen
+        Zahlen kein Supremum und kein Infimum. }
+        \lang{en}{The set $A=\{x \in \Q | x^2<2\}$ is bounded, but it has no supremum and no maximum in the rational numbers.}
+
+    \begin{showhide}[\buttonlabels{\lang{de}{Zeige Begründung }\lang{en}{Show proof }}{\lang{de}{Verstecke Begründung}\lang{en}{Hide proof}}]
+        \lang{de}{Da für jede rationale Zahl $x\in \Q$ genau dann $x\in A$ ist, wenn $-x$ in $A$ ist, 
+        ist $s\in \Q$ genau dann ein Infimum von $A$, wenn $-s$ ein Supremum von $A$ ist. 
+        Es reicht also, zu zeigen, dass $A$ kein Supremum besitzt.\\
+        
+        Ist nun $q \in \Q$ eine obere Schranke von $A$, dann gilt $\,q\geq 0\,$ (denn 
+        $0\in A$) und $q^2\geq 2\,$ (ansonsten wäre $q\in A$ und daher ein Maximum, was wir im vorigen
+        Abschnitt jedoch ausgeschlossen hatten). Da die Zahl $\sqrt{2}$ keine rationale Zahl ist, 
+        gilt zudem $q^2\neq 2$, daher ist sogar $\, q^2>2 $. \\
+        
+        Rechnerisch lässt sich nachweisen, dass für jede positive rationale Zahl $q$, deren 
+        Quadrat größer als $2$ ist, mit $r:=\frac{q^2+2}{2q}\, $ eine rationale Zahl existiert,
+        für die gilt:
+        \[0<r=\frac{q^2+2}{2q}<\frac{q^2+q^2}{2q}=q \quad \text{und}
+        \quad r^2=\frac{q^4+4q^2+4}{4q^2}=\frac{(q^2-2)^2+8q^2}{4q^2}>2.\]       
+        Letzteres impliziert, dass für alle $a\in A$ gilt:  
+        \[ r^2>2>a^2 \Rightarrow r > \abs{a} . \]
+        Damit ist die Zahl $r$ eine kleinere obere Schranke für $A$ als $q$, daher kann $q$
+        kein Supremum von $A$ sein. 
+        Da dieser Schluss für jede beliebig gewählte obere Schranke $q$ gilt, gibt
+        es demnach keine kleinste obere Schranke und somit nach Definition \ref{def:sup_inf}
+        auch kein Supremum für $A$.}
+        \lang{en}{Since for every rational number $x\in \Q$, we have $x\in A$ if and only if $-x\in A$, 
+        we therefore have that $s\in \Q$ is the infimum of $A$ if and only if $-s$ is the supremum of $A$.
+        Thus it suffices to show that $A$ has no supremum.\\
+        
+        Supposing $q \in \Q$ is an upper bound of $A$, we have $\,q\geq 0\,$ (since 
+        $0\in A$) and $q^2\geq 2\,$ (else we would have $q\in A$ and it would be a maximum, which we proved 
+        it was not in the previous section). Since the number $\sqrt{2}$ is not a rational number, this implies 
+        that $q^2\neq 2$, so we actually have $\, q^2>2 $. \\
+
+        Now performing some computations allows us to find that a rational number $r:=\frac{q^2+2}{2q}\, $ exists, such that:
+        \[0<r=\frac{q^2+2}{2q}<\frac{q^2+q^2}{2q}=q \quad \text{and}
+        \quad r^2=\frac{q^4+4q^2+4}{4q^2}=\frac{(q^2-2)^2+8q^2}{4q^2}>2.\]    
+        The latter implies that for all $a\in A$ we have:
+        \[ r^2>2>a^2 \Rightarrow r > \abs{a} . \]
+        Therefore the number $r$ is a smaller upper bound for $A$ than $q$, and so $q$ cannot be the supremum of $A$.
+        Since this argument holds for any arbitrary choice of upper bound $q$, there cannot be a least upper bound, 
+        and so by definition \ref{def:sup_inf} there is no supremum for $A$.}
+    \end{showhide}
+  \end{enumerate}
+\end{example}
+
+\lang{de}{Eine weitere Charakterisierung von Suprema und Infima ist die Folgende:}
+\lang{en}{Another characterisation of suprema and infima is the following:}
+
+\begin{theorem}\label{thm:charakterisierung-sup}
+\lang{de}{Sei $A\subset \K$. Ein Element $S\in \K$ ist genau dann das Supremum von $A$, wenn die beiden folgenden
+Aussagen erfüllt sind:}
+\lang{en}{Let $A\subset \K$. An element $S\in \K$ is the supremum of $A$ if and only if it satisfies the following two conditions:}
+\begin{enumerate}
+\item \lang{de}{Für jedes $x\in A$ gilt $x\leq S$  (d.h. $S$ ist obere Schranke),}
+\lang{en}{For every $x\in A$, $x\leq S$  (i.e. $S$ is an upper bound),}
+\item \lang{de}{zu jedem positiven $\epsilon\in \K$, existiert ein $x\in A$ mit $S-\epsilon<x$.}
+\lang{en}{for every positive $\epsilon\in \K$, there exists $x\in A$ with $S-\epsilon<x$.}
+\end{enumerate}
+
+\lang{de}{Ein Element $s\in \K$ ist genau dann das Infimum von $A$, wenn die beiden folgenden
+Aussagen erfüllt sind:}
+\lang{en}{An element $s\in \K$ is the infimum of $A$ if and only if it satisfies the following two conditions:}
+\begin{enumerate}
+\item \lang{de}{Für jedes $x\in A$ gilt $s\leq x$  (d.h. $s$ ist untere Schranke),}
+\lang{en}{For every $x\in A$, $s\leq x$  (i.e. $s$ is a lower bound),}
+\item \lang{de}{zu jedem positiven $\epsilon\in \K$, existiert ein $x\in A$ mit $x<s+\epsilon$.}
+\lang{en}{for every positive $\epsilon\in \K$, there exists $x\in A$ with $x<s+\epsilon$.}
+\end{enumerate}
+\end{theorem}
+
+\lang{de}{
+%Video
+Im folgenden Video finden Sie auch die Definitionen von Supremum und Infimum und deren Eigenschaften.
+
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10895&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+}
+
+\section{\lang{de}{Vollständigkeit}\lang{en}{Completeness}}
+
+\begin{definition}[\lang{de}{Vollständigkeit eines Körpers}\lang{en}{Completeness of a field}]\label{def:vollstaendigkeit}
+\lang{de}{Ein angeordneter Körper $(\K,<)$ heißt \notion{vollständig}, wenn jede nach oben beschränkte, 
+nicht-leere Teilmenge von $\K$ ein Supremum besitzt.}
+\lang{en}{An ordered field $(\K,<)$ is called \notion{complete} if every subset of $\K$ which is non-empty and bounded above has a supremum.}
+\end{definition}
+
+\begin{example}
+\lang{de}{Der Körper der rationalen Zahlen $\Q$ ist nicht vollständig, denn wie wir  in Beispiel 
+\ref{ex:suprema-infima} gezeigt haben, ist die Menge $\,A=\{x \in \Q | x^2<2\}\,$ 
+beschränkt und nicht-leer, besitzt aber in den rationalen Zahlen dennoch kein Supremum. }
+\lang{en}{The field of rational numbers $\Q$ is not complete, since as we showed in the example \ref{ex:suprema-infima}, 
+the set $\,A=\{x \in \Q | x^2<2\}\,$ is bounded and non-empty, but has no supremum in the rational numbers.}
+\end{example}
+
+\lang{de}{Dass man für die Definition der Vollständigkeit die Existenz von Suprema verlangt und nicht die Existenz
+von Infima, ist willkürlich. Der folgende Satz sagt aus, dass die Existenz von Suprema auch die
+Existenz von Infima impliziert und umgekehrt, sodass man den gleichen Begriff von Vollständigkeit bekommt,
+wenn man die Existenz von Infima voraussetzen würde.}
+\lang{en}{That the definition for completeness requires the existence of suprema and not the existence of infima is an arbitrary choice. 
+The following theorem says that the existence of suprema also implies the existence of infima, and vice versa, so that requiring the existence 
+of infima would result in the same definition for completeness.}
+
+\begin{theorem}
+\lang{de}{Ein angeordneter Körper $(\K,<)$ ist genau dann vollständig, wenn jede nach unten beschränkte, 
+nicht-leere Teilmenge von $\K$ ein Infimum besitzt.}
+\lang{en}{An ordered field $(\K,<)$ is complete if and only if every subset of $\K$ which is non-empty and bounded below has an infimum.}
+\end{theorem}
+
+
+\begin{proof*}
+\begin{showhide}
+\lang{de}{Zu einer beliebig gewählten Teilmenge $A\subset \K$ betrachten wir die Menge 
+$\,-A=\{ -x | x\in A\}$. \\
+Dann gilt:}
+\lang{en}{For an arbitrarily chosen subset $A\subset \K$, consider the set $\,-A=\{ -x | x\in A\}$. \\
+Then the following hold:}
+\begin{itemize}
+\item \lang{de}{$c\in \K$ untere Schranke von $A$ $\; \Leftrightarrow \;$ $-c\in \K$ obere Schranke von $-A$,}
+\lang{en}{$c\in \K$ is a lower bound of $A$ $\; \Leftrightarrow \;$ $-c\in \K$ is an upper bound of $-A$,}
+\item \lang{de}{$c\in \K$ größte untere Schranke von $A$ $\; \Leftrightarrow \;$  $-c\in \K$ kleinste obere Schranke von $-A$,}
+\lang{en}{$c\in \K$ is the greatest lower bound of $A$ $\; \Leftrightarrow \;$  $-c\in \K$ is the least upper bound of $-A$,}
+\item \lang{de}{$C\in \K$ obere Schranke von $A$ $\; \Leftrightarrow \;$  $-C\in \K$ untere Schranke von $-A$,}
+\lang{en}{$C\in \K$ is an upper bound of $A$ $\; \Leftrightarrow \;$  $-C\in \K$ is a lower bound of $-A$,}
+\item \lang{de}{$C\in \K$ kleinste obere Schranke von $A$ $\; \Leftrightarrow \;$  $-C\in \K$ größte untere Schranke von $-A$,}
+\lang{en}{$C\in \K$ is the least upper bound of $A$ $\; \Leftrightarrow \;$  $-C\in \K$ is the greatest lower bound of $-A$,}
+\end{itemize}
+\lang{de}{Dies folgt direkt aus der Definition der \ref[content_06_supremum_infimum][Schranken]{def:beschraenkt},
+denn ist nämlich zum Beispiel $c$ untere Schranke von $A$ ist, so ist}
+\lang{en}{These follow directly from the definition of \ref[content_06_supremum_infimum][bounds]{def:beschraenkt}, 
+since for example if $c$ is a lower bound of $A$, then}
+\[ c\leq x \quad \text{\lang{de}{f"ur alle }\lang{en}{for all }}\;  x\in A. \]
+\lang{de}{Äquivalent dazu ist}\lang{en}{This is equivalent to}
+\[ -c\geq -x \quad \text{\lang{de}{f"ur alle }\lang{en}{for all }}\; x\in A, \]
+\lang{de}{d.h.}\lang{en}{i.e.}
+\[ -c\geq y \quad \text{\lang{de}{f"ur alle }\lang{en}{for all }}\;  y\in -A, \]
+\lang{de}{und damit dass $-c$ eine obere Schranke für $-A$ ist.
+
+Setzt man nun zum Beispiel die Existenz von Suprema voraus, dann erhält man analog:\\
+Wenn $A$ eine nach unten beschränkte, nicht-leere Teilmenge von $\K$ ist, ist $-A$ 
+eine nach oben beschränkte, nicht-leere Teilmenge und besitzt daher eine kleinste obere Schranke $S$.
+Dann ist aber $-S$ eine größte untere Schranke von $A$, also ein Infimum von $A$. Jede nach unten beschränkte, 
+nicht-leere Teilmenge  besitzt daher ein Infimum.
+
+Entsprechend folgert man die Existenz von Suprema aus der Existenz von Infima.}
+\lang{en}{and thus that $-c$ is an upper bound for $-A$.
+
+For example, assuming the existence of suprema, one obtains analogously:\\
+If $A$ is a subset of $\K$ which is non-empty and bounded below, then $-A$ is a non-empty subset which is bounded above, 
+and thus has a least upper bound $S$. But then $-S$ is a greatest lower bound of $A$, and so the infimum of $A$. Hence every 
+subset which is non-empty and bounded below has an infimum.}
+\end{showhide}
+\end{proof*}
+
+
+
+
+\begin{theorem}
+\lang{de}{Die Menge $\R$ der reellen Zahlen ist ein vollständiger, angeordneter Körper, und dies
+charakterisiert $\R$ eindeutig, d.h. $\R$ ist "`der einzige"' vollständige, angeordnete Körper.}
+\lang{en}{The set $\R$ of real numbers is a comlete ordered field, and this property characterises $\R$, i.e. $\R$ is 'the only' complete ordered field.}
+\end{theorem}
+
+\lang{de}{Insbesondere sind alle Aussagen, die in den vorangegangenen Abschnitten über angeordnete Körper und vollständige, angeordnete
+Körper gemacht wurden, für den Körper $\R$ der reellen Zahlen gültig.
+
+
+Ein wichtiges Beispiel, bei dem die Vollständigkeit zum Tragen kommt, ist die Existenz $n$-ter
+Wurzeln nicht-negativer reeller Zahlen.}
+\lang{en}{In particular, all statements that were made in the previous sections about ordered fields and complete ordered fields
+are valid for the field $\R$ of real numbers.
+
+An important example where completeness comes into play is the existence of $n$-th roots of non-negative real numbers.}
+
+\begin{theorem}\label{thm:n-te-wurzel}
+\lang{de}{Sei $n\in \N$ eine natürliche Zahl.
+Für jede nicht-negative reelle Zahl $x\in \R_+$ gibt es eine eindeutige nicht-negative reelle
+Zahl $a\in \R_+$, für welche $a^n=x$ gilt.
+
+Diese Zahl wird die $n$-te Wurzel von $x$ genannt, und mit $\sqrt[n]{x}$ bezeichnet.}
+\lang{en}{Let $n\in \N$ be a natural number.
+For every non-negative real number $x\in \R_+$, there exists a unique non-negative real number $a\in \R_+$ for which $a^n=x$ holds.
+
+This number is called the $n$-th root of $x$, and is denoted by $\sqrt[n]{x}$.}
+\end{theorem}
+
+
+\begin{proof*}[\lang{de}{Erklärung}\lang{en}{Proof}]
+\begin{showhide}
+\lang{de}{Für ein beliebiges   
+$x \in \R_+ $ betrachten wir die Menge}
+\lang{en}{For an arbitrarily chosen   
+$x \in \R_+ $ consider the set}
+
+\[ M:=\{ r\in \R_{\geq 0} |\, r^n\leq x\}. \]
+\lang{de}{Diese Menge ist nicht-leer, denn wegen 
+$\, 0^n=0  < x\, $ ist $0\in M.\;$ Außerdem ist $r\leq 1+x$ für alle
+$r\in M.\;$ Wäre nämlich $r>1+x$, dann erhielte man wegen der 
+\ref[content_05_anordnungsaxiome][Anordnungsregel zu Potenzen]{rule:potenzen}
+$\; r^n>(1+x)^n\, $ und schließlich durch Anwendung der
+\ref[content_02_vollstaendige_induktion][Bernoulli-Ungleichung]{rule:bernoulli-ungleichung}
+und da $\, n \geq 1$:}
+\lang{en}{This set is non-empty, since due to $\, 0^n=0  < x\, $ we have $0\in M.\;$ 
+Additionally, we have $r\leq 1+x$ for all $r\in M.\;$. If we had, on the contrary, 
+$r>1+x$, then due to the  
+\ref[content_05_anordnungsaxiome][rules for inequalities with powers]{rule:potenzen}
+$\; r^n>(1+x)^n\, $ and it follows from an application of 
+\ref[content_02_vollstaendige_induktion][Bernoulli's inequality]{rule:bernoulli-ungleichung}
+that since $\, n \geq 1$:}
+\[  r^n>(1+x)^n\geq 1+nx\geq 1+x>x \]
+\lang{de}{im Widerspruch zu\, $r\in M$.
+Die Menge $M$ ist daher nach oben beschränkt (durch $1+x$) und wegen der Vollständigkeit von $\R$
+besitzt $M$ ein Supremum $a:=\sup(M)\in \R$.
+
+Durch Widerspruch zeigt man nun, dass tatsächlich $a^n=x$ gilt.
+Dies soll hier aber nicht ausgeführt werden.
+
+Die Eindeutigkeit eines Elements in $\R_+$, dessen $n$-te Potenz gleich $x$ ist, 
+ergibt sich wieder aus der \ref[content_05_anordnungsaxiome][Anordnungsregel zu Potenzen]{rule:potenzen}.
+Sind nämlich $a$ und $b$ zwei solche Elemente, ist insbesondere $a^n=b^n$ und daher $a=b$.}
+\lang{en}{contradicting\, $r\in M$.
+The set $M$ is thus bounded above (by $1+x$), and by the completeness of $\R$ it therefore has a supremum $a:=\sup(M)\in \R$.
+
+Using contradiction one can then show that in fact $a^n=x$.
+This will not be done here.
+
+The uniqueness of an element in $\R_+$ whose $n$-th power is equal to $x$ follows again from the 
+\ref[content_05_anordnungsaxiome][rules for inequalities with powers]{rule:potenzen}.
+If $a$ and $b$ are two such elements, we get that $a^n=b^n$ and so $a=b$.}
+ \end{showhide}
+\end{proof*}
+
+\lang{de}{
+%Video
+In dem Video wird nach der Definition der Vollständigkeit der Beweis des Satzes \ref{thm:n-te-wurzel} erläutert.
+
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10896&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+}
+
+\section{\lang{de}{Charakterisierung von $\R$ als ein vollständiger, angeordneter Körper}
+\lang{en}{Characterisation of $\R$ as a complete ordered field}}\label{sec:R-Koerper}\label{sec:R_vollst_Koerper}
+
+\lang{de}{Zuletzt wollen wir aus den Axiomen noch einige Aussagen folgern, die anzeigen, dass ein vollständiger, angeordneter Körper mit unserer
+Vorstellung der reellen Zahlen übereinstimmt, d.h. dass die Axiome wirklich die reellen Zahlen charakterisieren.}
+\lang{en}{Finally, we wish to derive several propositions from the axioms, which show that a complete ordered field matches our idea of the real numbers, 
+i.e. that the axioms really characterise the real numbers.}
+
+\begin{rule}
+\lang{de}{Ist $(\K,<)$ ein angeordneter Körper, so enthält er (eine Kopie) der rationalen Zahlen.}
+\lang{en}{If $(\K,<)$ is an ordered field, then it contains (a copy of) the rational numbers.}
+\end{rule}
+
+
+\begin{proof*}[\lang{de}{Erklärung}\lang{en}{Proof}]
+\begin{showhide}
+\lang{de}{Wir können die natürlichen Zahlen $\N$ als Teil von $\K$ auffassen, indem wir $n\in \N$ mit}
+\lang{en}{We can view the natural numbers $\N$ as a subset of $\K$ by identifying $n\in \N$ with}
+\[ n_{\K}:=\underbrace{1+\cdots +1}_{n-\text{mal}}\in \K \lang{en}{.}\]
+\lang{de}{identifizieren. Die Anordnung garantiert, dass keine zwei verschiedenen Zahlen $n,m\in \N$ mit dem gleichen Element in $\K$ identifiziert
+werden, denn zunächst gilt in $\K$, dass $1>0$ ist, und daher auch $\underbrace{1+\cdots +1}_{n-\text{mal}}>0$. Damit gilt dann für natürliche
+Zahlen $m>n$, 
+also $m=n+k$ mit $k\in \N$:}
+\lang{en}{The ordering guarantees that no two distinct numbers $n,m\in \N$ are identified with the same element in $\K$, since in $\K$ we have that $1>0$, 
+and thus also $\underbrace{1+\cdots +1}_{n-\text{times}}>0$. Hence for natural numbers $m>n$, writing $m=n+k$ with $k\in \N$:}
+\[ m_{\K}:=\underbrace{1+\cdots +1}_{m-\text{\lang{de}{mal}\lang{en}{times}}}=(\underbrace{1+\cdots +1}_{n-\text{\lang{de}{mal}\lang{en}{times}}})+(\underbrace{1+\cdots +1}_{k-\text{\lang{de}{mal}\lang{en}{times}}})=n_{\K}+k_{\K}
+>n_{\K}. \]
+\lang{de}{Damit sind $m_{\K}$ und $n_{\K}$ verschieden.
+
+Anschließend findet man die negativen ganzen Zahlen in $\K$ als additive Inverse der natürlichen Zahlen wieder und die $0$ in $\Z$ identifiziert
+man mit $0\in \K$. Zuletzt kann man dann eine rationale Zahl $\frac{p}{q}$ mit dem entsprechenden Element $pq^{-1}$ in $\K$ identifizieren. 
+
+Eine etwas aufwändigere Arbeit ist es, nachzurechnen, dass bei dieser Identifizierung auch die Rechenoperationen und die Anordnung erhalten 
+bleiben, dass also zum Beispiel $r+s$ in den rationalen Zahlen mit der Summe der Elemente $r$ und $s$ in $\K$ identifiziert wird.}
+\lang{en}{Therefore $m_{\K}$ and $n_{\K}$ are distinct.
+
+Now one can find the negative integers in $\K$ as the additive inverses of the natural numbers, and one identifies the $0$ in $\Z$ with $0\in \K$. 
+Finally, one can identify a rational number $\frac{p}{q}$ with the corresponding element $pq^{-1}$ in $\K$.
+
+A somewhat more time consuming task is to check that with this identification, the operations and ordering is preserved. For example, $r+s$ in the rational numbers should 
+be identified with the sum of the elements $r$ and $s$ in $\K$.}
+ \end{showhide}
+\end{proof*}
+
+
+
+\lang{de}{Nun sei $(\K,<)$ stets ein vollständiger, angeordneter Körper}
+\lang{en}{Now let $(\K,<)$ be a complete ordered field.}
+
+\begin{theorem}\label{thm:N-unbeschraenkt}
+\lang{de}{Die natürlichen Zahlen $\N\subset \K$ sind nach oben unbeschränkt.\\
+Die ganzen Zahlen $\Z\subset \K$ sind nach oben und nach unten unbeschränkt.
+
+Insbesondere gilt: \\
+
+Für jedes $x\in \K$ gibt es ganze Zahlen $m,n\in \Z\subset \K$ mit $m<x<n$.}
+\lang{en}{The natural numbers $\N\subset \K$ are unbounded above.\\
+The integers $\Z\subset \K$ are unbounded above and below.
+
+In particular: \\
+
+For every $x\in \K$ there are integers $m,n\in \Z\subset \K$ with $m<x<n$.}
+\end{theorem}
+
+
+\begin{proof*}[\lang{de}{Erklärung}\lang{en}{Proof}]
+\begin{showhide}
+\lang{de}{Wäre $\N$ nach oben beschränkt, dann besäße $\N$ nach Definition \ref{def:vollstaendigkeit} 
+ein Supremum $S\in \K$, da $\K$ vollständig ist. 
+Wir hatten aber in Beispiel \ref{ex:suprema-infima} gezeigt,
+dass $\N$ kein Supremum besitzt. Also ist $\N$ nach oben unbeschränkt.
+
+Da $\N$ nach oben unbeschränkt ist, ist $-\N=\{ -n | n\in \N\}$ nach unten unbeschränkt. Damit ist
+$\Z=-\N \cup \{0\} \cup \N$ weder nach unten noch nach oben beschränkt.}
+\lang{en}{If $\N$ were bounded above, then $\N$ would have, by definition \ref{def:vollstaendigkeit}, 
+a supremum $S\in \K$, since $\K$ is complete.
+However, we showed in example \ref{ex:suprema-infima} that $\N$ has no supremum. Therefore $\N$ is unbounded above.
+
+Since $\N$ is unbounded above, $-\N=\{ -n | n\in \N\}$ is unbounded below. 
+Therefore $\Z=-\N \cup \{0\} \cup \N$ is not bounded above, nor below.}
+ \end{showhide}
+\end{proof*}
+
+
+\lang{de}{Aus obiger Aussage folgert man}
+\lang{en}{From the above proposition we obtain}
+\begin{theorem}\label{thm:Q-dicht}
+\begin{enumerate}
+\item \lang{de}{Sind $a,b\in \K$ mit $a>0$ und $b>0$, so gibt es eine natürliche Zahl $n\in \N$, so dass $na>b$.}
+\lang{en}{If $a,b\in \K$ with $a>0$ and $b>0$, then there is a natural number $n\in \N$ such that $na>b$.}
+\item \lang{de}{Ist $a\in \K$ und gilt $0\leq a<\frac{1}{n}$ für jede natürliche Zahl $n\in \N$, so ist $a=0$.}
+\lang{en}{If $a\in \K$ and $0\leq a<\frac{1}{n}$ for all natural numbers $n\in \N$, then $a=0$.}
+\item \lang{de}{Sind $r,s\in \K$ mit $r<s$, so gibt es eine rationale Zahl $q$ mit $r<q<s$.}
+\lang{en}{If $r,s\in \K$ with $r<s$, then there is a rational number $q$ with $r<q<s$.}
+\end{enumerate}
+\end{theorem}
+
+
+\begin{proof*}[\lang{de}{Erklärung}\lang{en}{Proof}]
+\begin{showhide}
+\begin{enumerate}
+\item[$\text{\lang{de}{zu}\lang{en}{for}}\, 1.:$] \lang{de}{Gäbe es kein solches $n$, so wäre $na\leq b$ für alle $n\in \N$. Da $a>0$ ist, 
+      ist das gleichbedeutend zu $n\leq \frac{b}{a}$ für alle $n\in \N$. Damit wäre aber
+      $\frac{b}{a}$ eine obere Schranke für $\N$ im Widerspruch zur Unbeschränktheit 
+      gemäß Theorem \ref{thm:N-unbeschraenkt}.}
+      \lang{en}{If there were no such $n$, then we would have $na\leq b$ for all $n\in \N$. Since $a>0$, this is equivalent to 
+      $n\leq \frac{b}{a}$ for all $n\in \N$. But then $\frac{b}{a}$ would be an upper bound for $\N$, in contradiction to theorem
+      \ref{thm:N-unbeschraenkt} which says that $\N$ is unbounded above.}
+
+\item[$\text{\lang{de}{zu}\lang{en}{for}}\, 2.:$] \lang{de}{$a<\frac{1}{n}$ für alle $n\in \N$, ist gleichbedeutend zu $na<1$ 
+        für alle $n\in \N\,$ (da $n>0$). Wäre $a>0$, wäre dies (mit $b=1>0$) ein Widerspruch
+        zum ersten Teil. Also ist $a=0$.}
+        \lang{en}{$a<\frac{1}{n}$ for all $n\in \N$ is equivalent to $na<1$ for all $n\in \N\,$ (as $n>0$). 
+        If $a>0$, then this (with $b=1>0$) contradicts the first part of the theorem. So $a=0$.}
+
+\item[$\text{\lang{de}{zu}\lang{en}{for}}\, 3.:$] \lang{de}{Wähle zunächst $z\in \Z$ mit $z<r$. Eine solche Zahl $z \in \Z$ 
+        existiert, da $\Z$ nach unten unbeschränkt ist. Da$\, s-r>0$, existiert nach $1.$ 
+        eine natürliche Zahl $n\in \N$ mit \[n(s-r)>1 \quad (*).\] 
+        Die Menge $\, M=\{ i\in \Nzero\,|\, i>n(r-z) \}$ ist nicht-leer (da $\N$ nach oben 
+        unbeschränkt ist) und besitzt ein kleinstes Element, welches größer $0$ ist, da $r-z>0$. 
+        Sei also
+        $k=\min(M)\in M\subset \N$.\\ 
+        
+        Da $k$ das Minimum ist, gilt $\; k-1\leq n(r-z) \Leftrightarrow k \leq n(r-z)+1$, \\
+        und damit
+        \[ n(r-z)<k\leq n(r-z)+1 = n(s-z)+\underbrace{1-n(s-r)}_{<0\, wg.\, (*)} < n(s-z), \]
+        insbesondere 
+        \[ n(r-z)<k<n(s-z). \]
+        Multiplikation mit $\frac{1}{n}>0$ und Addition von $z$ liefert schließlich
+        \[ r<\frac{k}{n}+z < s, \]
+        und somit mit $q:=\frac{k}{n}+z$ eine rationale Zahl mit der gewünschten Eigenschaft.}
+        \lang{en}{Begin by choosing $z\in \Z$ with $z<r$. Such a number $z \in \Z$ exists because $\Z$ is unbounded below. 
+        Since $\, s-r>0$, by $1.$ we have that a natural number $n\in \N$ exists with \[n(s-r)>1 \quad (*).\]
+        The set $\, M=\{ i\in \Nzero\,|\, i>n(r-z) \}$ is non-empty (since $\N$ is unbounded above) and has a smallest element, 
+        which is greater than $0$ since $r-z>0$. 
+        Hence let $k=\min(M)\in M\subset \N$.\\ 
+
+        Since $k$ is the mimimum, we have $\; k-1\leq n(r-z) \Leftrightarrow k \leq n(r-z)+1$, \\
+        and so
+        \[ n(r-z)<k\leq n(r-z)+1 = n(s-z)+\underbrace{1-n(s-r)}_{<0\, by\, (*)} < n(s-z), \]
+        in particular 
+        \[ n(r-z)<k<n(s-z). \]
+        Multiplication by $\frac{1}{n}>0$ and addition of $z$ gives us
+        \[ r<\frac{k}{n}+z < s, \]
+        and indeed $q:=\frac{k}{n}+z$ is a rational number with the required property.}
+\end{enumerate}
+ \end{showhide}
+\end{proof*}
+
+
+\begin{theorem}\label{thm:dedekind-schnitt}
+\lang{de}{Für jedes Element $r\in \K$ gilt:}\lang{en}{For every element $r\in \K$ we have:}
+\[   r=\sup \{ q\in \Q\,|\, q< r \} \]
+\lang{de}{und}\lang{en}{and}
+\[   r=\inf \{ q\in \Q\,|\, q > r \}. \]
+\end{theorem}
+
+
+
+\begin{proof*}[\lang{de}{Erklärung}\lang{en}{Proof}]
+     \begin{showhide}
+\lang{de}{Für $r\in \K$ sei nun $L=\{ q\in \Q\,|\, q< r\}$ und $R=\{ q\in \Q\,|\, q >r \}$.\\
+Per Definition der Menge $L$ ist $r$ eine obere Schranke für $L$, d.h. insbesondere ist $L$ nach oben beschränkt. Außerdem gibt es 
+sogar eine ganze Zahl, die kleiner als $r$ ist, weshalb $L$ nicht leer ist. Da $\K$ vollständig ist,
+besitzt $L$ somit ein Supremum $S=\sup(L)$. Da $r$ eine obere Schranke ist, ist auch $S\leq r$.\\
+Angenommen $S<r$, dann gibt es nach Satz \ref{thm:Q-dicht}(3.) eine rationale Zahl $q$ mit $S<q<r$. Dann ist aber $q\in L$ und $S<q$, d.h. $S$
+ist keine obere Schranke für $L$. Die Annahme ist daher falsch und somit gilt: $r=S=\sup(L)$.
+
+Ganz entsprechend zeigt man, dass $r=\inf(R)$ gilt. }
+\lang{en}{For $r\in \K$ let $L=\{ q\in \Q\,|\, q< r\}$ and $R=\{ q\in \Q\,|\, q >r \}$.\\
+By definition of the set $L$, $r$ is a upper bound for $L$, i.e. in particular, $L$ is bounded above. 
+Additionally, there is an integer which is smaller than $r$, so $L$ is not empty. Because $\K$ is complete, 
+$L$ has a supremum $S=\sup(L)$. Because $r$ is an upper bound, we have $S\leq r$.\\
+Assuming $S<r$, by theorem \ref{thm:Q-dicht}(3.) there is a rational number $q$ with $S<q<r$. But then $q\in L$ and $S<q$, i.e. $S$ 
+is not an upper bound for $L$. This assumption is therefore false, and so we have $r=S=\sup(L)$.
+
+A similar proof shows that $r=\inf(R)$.}
+ \end{showhide}
+\end{proof*}
+
+
+\lang{de}{Der letzte Satz besagt zwei Dinge: Zum einen ist jedes Element in $\K$ das Supremum einer Menge rationaler Zahlen und auch das Infimum
+einer Menge rationaler Zahlen, und zum anderen ist jedes Element $r$ in $\K$ nach Satz \ref{thm:charakterisierung-sup}
+eindeutig dadurch festgelegt, welche rationalen Zahlen kleiner
+als $r$ sind, und welche größer.}
+\lang{en}{The final theorem says two things. For one, every element in $\K$ is the supremum of a set of rational numbers, and also the infimum 
+of a set of rational numbers. Secondly, every element $r$ in $\K$ is, by theorem \ref{thm:charakterisierung-sup}, uniquely determined by which rational 
+numbers are smaller than $r$, and which are greater.}
+
+\begin{remark}
+\lang{de}{Satz \ref{thm:dedekind-schnitt}
+entspricht anschaulich gesehen genau dem Füllen der "`Lücken"' auf der Zahlengeraden.
+Formal hängt dies eng mit einer Konstruktion der reellen Zahlen aus den rationalen Zahlen zusammen (vgl.
+\href{http://de.wikipedia.org/wiki/Dedekindscher_Schnitt}{\emph{Dedekindscher Schnitt} auf Wikipedia}).}
+\lang{en}{Theorem \ref{thm:dedekind-schnitt} corresponds intuitively to filling in the 'gaps' on the number line. 
+Formally this relates closely with a construction of the real numbers from the rational numbers (see 
+\href{http://en.wikipedia.org/wiki/Dedekind_cut}{\emph{Dedekind cuts} on Wikipedia}).}
+\end{remark}
+\lang{de}{
+%Video
+Im folgenden Video werden die oben genannten Folgerungen aus der Vollständigkeit der reellen Zahlen ebenfalls erörtert.
+
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10897&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+}
+
+
+\end{content}

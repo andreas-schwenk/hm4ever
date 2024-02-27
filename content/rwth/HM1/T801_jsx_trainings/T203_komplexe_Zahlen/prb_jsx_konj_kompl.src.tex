@@ -1,0 +1,137 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+  \lang{en}{...}
+  \lang{de}{Konjugiert komplex}
+  \lang{zh}{...}
+  \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/32295}{Ticket 32295}
+\end{block}
+\begin{block}[annotation]
+Copy of : /home/mumie/checkin/content/playground/HM4mint-Testaufgaben/T203_komplexe_Zahlen/prb_jsx_konj_kompl.src.tex
+\end{block}
+
+\begin{block}[annotation]
+(Dagmar Schumacher)\\
+Copy of : /home/mumie/checkin/content/playground/Dagmar_Schumacher/prb_konj_kompl_jsx.src.tex
+\end{block}
+
+\begin{block}[annotation]
+Copy of : /home/mumie/checkin/content/playground/Dagmar_Schumacher/prb_komplex2jsx.src.tex
+\end{block}
+
+  \usepackage{mumie.genericproblem}
+
+  \begin{visualizationwrapper}
+
+\title{konjugiert komplexe Zahl}
+
+\begin{genericJSXVisualization}
+  \begin{variables}
+      \question{1}{a}{real}
+      \question{1}{b}{real}
+      %%%
+      \point{z}{real}{a,b}
+      \label{z}{z}
+      \label{R}{z_konjugiert}
+      \point[editable]{R}{real}{-2.5,-1}
+      %%%
+      \number{Rx}{real}{R[x]}
+      \number{Ry}{real}{R[y]}
+
+      
+
+  \end{variables}
+  
+  %\color{v1}{#000077} %quite dark blue
+  \color{z}{RED} 
+  \color{R}{GREEN}
+  \answer{Rx}{1,1}
+  \answer{Ry}{1,2}
+
+  	\begin{canvas}
+    \snapToGrid{0.1,0.1}
+		\plotSize{300,300}
+		\plotLeft{-6.5}
+		\plotRight{6.5}
+		\plot[coordinateSystem,showPointCoords]{z,R}
+	\end{canvas}
+
+\end{genericJSXVisualization}
+
+\end{visualizationwrapper}
+
+\begin{problem}
+  \begin{variables}
+    \randint[Z]{a}{-5}{5}
+    \randint[Z]{b}{-5}{5}
+    %\function{zquer}{a-b*i}
+    \function{re}{a}
+    \function{im}{-b}
+    \function[normalize]{z}{a+b*i}
+  \end{variables}
+  
+  \begin{question}
+  \correctorprecision{1}
+  \precision{1}
+  
+  \text{Zeichnen Sie zu $z=\var{z}$  % $z=\var{a}+(\var{b})\,i$ 
+  die konjugiert komplexe Zahl $\bar{z}$ ein, indem Sie den grünen Punkt in der Gaußschen 
+  Zahlenebene verschieben.}
+
+  \explanation{Der grüne Punkt liegt nicht exakt in $\bar{z}$.}
+  
+   \begin{answer}
+      \type{graphics.number}
+      \solution{re}
+     \end{answer}
+    \begin{answer}
+      \type{graphics.number}
+      \solution{im}
+     \end{answer} 
+%     \explanation{Beim Konjugieren ändert sich nur der Imaginärteil.}
+   \end{question} 
+
+   \begin{question}
+      \text{Geben Sie den Real- und Imaginärteil von $\bar{z}$ an:\\
+      $\text{Re}\,(\bar{z})=$\ansref\\
+      $\text{Im}\,(\bar{z})=$\ansref\\
+      }
+     \begin{answer}
+       \type{input.number}
+       \solution{re}
+     \end{answer}
+     \begin{answer}
+       \type{input.number}
+       \solution{im}
+     \end{answer} 
+   \explanation[NOT[correct(ans_1)]]{Beim Konjugieren ändert sich nur der Imaginärteil.}
+   \explanation[NOT[correct(ans_2)]]{Konjugieren entspricht Spiegelung an der x-Achse.}
+%   \explanation[correct(ans_1)]{Haben Sie den grünen Punkt genommen?}
+  \end{question}
+
+\end{problem}
+  \embedmathlet{gwtmathlet}
+  
+\end{content}

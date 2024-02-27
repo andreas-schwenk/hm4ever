@@ -1,0 +1,297 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü11: Cramersche Regel}
+    \lang{en}{Ex11: Cramer's rule}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+
+\title{\lang{de}{Ü11: Cramersche Regel} \lang{en}{Ex11: Cramer's rule}}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/11363}{Ticket 11363}
+\end{block}
+
+%######################################################FRAGE_TEXT
+\lang{de}{ 
+Lösen Sie die folgenden linearen Gleichungssysteme mit der Cramerschen Regel.
+\[
+%\setlength{\arraycolsep}{1.5pt}%
+
+\begin{mtable}[\cellaligns{lrl}]
+\text{a)}\ & 2 x + y + z & = 0 \\
+& x + y + 2 z & = -3 \\
+& -x - 2 y + 2 z & = 2 \\
+\end{mtable}\qquad\quad
+
+\begin{mtable}[\cellaligns{lrl}]
+\text{b)}\ & 3 x + 2 y - z & = 2 \\
+& x + z & = 2 \\
+& x - y + 2 z & = 3 \\
+\end{mtable}
+\] 
+
+\[
+\begin{mtable}[\cellaligns{lrl}]
+\text{c)}\ & x_1 + x_2 & = 0 \\
+& 2 x_1 + 3 x_2 & = 4 \\
+\end{mtable}\qquad\quad
+
+\begin{mtable}[\cellaligns{lrl}]
+\text{d)}\ & x_1 - x_2 - x_3 & = 0 \\
+& x_1 + x_2 + 3 x_3 & = 4 \\
+& 2 x_1 + x_3 & = 3 \\
+\end{mtable}
+\] 
+
+}
+
+
+\lang{en}{ 
+Solve the following systems of linear equations with the help of Cramer's rule.
+\[
+%\setlength{\arraycolsep}{1.5pt}%
+
+\begin{mtable}[\cellaligns{lrl}]
+\text{a)}\ & 2 x + y + z & = 0 \\
+& x + y + 2 z & = -3 \\
+& -x - 2 y + 2 z & = 2 \\
+\end{mtable}\qquad\quad
+
+\begin{mtable}[\cellaligns{lrl}]
+\text{b)}\ & 3 x + 2 y - z & = 2 \\
+& x + z & = 2 \\
+& x - y + 2 z & = 3 \\
+\end{mtable}
+\] 
+
+\[
+\begin{mtable}[\cellaligns{lrl}]
+\text{c)}\ & x_1 + x_2 & = 0 \\
+& 2 x_1 + 3 x_2 & = 4 \\
+\end{mtable}\qquad\quad
+
+\begin{mtable}[\cellaligns{lrl}]
+\text{d)}\ & x_1 - x_2 - x_3 & = 0 \\
+& x_1 + x_2 + 3 x_3 & = 4 \\
+& 2 x_1 + x_3 & = 3 \\
+\end{mtable}
+\] 
+
+}
+%##################################################ANTWORTEN_TEXT
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+    \tab{\lang{de}{    Antwort    } \lang{en}{Answer}}
+    \lang{de}{
+        
+        a) 
+        ~$\left( \begin{mtable}[\cellaligns{r}]
+            2 & -3 & -1
+        \end{mtable} \right)^T$
+        
+        b)
+        ~$\left( \begin{mtable}[\cellaligns{r}]
+            1 & 0 & 1
+        \end{mtable} \right)^T$
+        
+        c)
+        ~$\left( \begin{mtable}[\cellaligns{r}]
+            -4 & 4
+        \end{mtable} \right)^T$
+        
+        d)
+        ~$\left( \begin{mtable}[\cellaligns{r}]
+            1 & 0 & 1
+        \end{mtable} \right)^T$
+
+    }
+\lang{en}{
+        
+        a) 
+        ~$\left( \begin{mtable}[\cellaligns{r}]
+            2 & -3 & -1
+        \end{mtable} \right)^T$
+        
+        b)
+        ~$\left( \begin{mtable}[\cellaligns{r}]
+            1 & 0 & 1
+        \end{mtable} \right)^T$
+        
+        c)
+        ~$\left( \begin{mtable}[\cellaligns{r}]
+            -4 & 4
+        \end{mtable} \right)^T$
+        
+        d)
+        ~$\left( \begin{mtable}[\cellaligns{r}]
+            1 & 0 & 1
+        \end{mtable} \right)^T$
+
+    }
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung a)    } \lang{en}{Solution a)}}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   Man hat
+\begin{align*}
+\det \left( \begin{mtable}[\cellaligns{rrr}]
+2 & 1 & 1 \\
+1 & 1 & 2 \\
+-1 & -2 & 2 \\
+\end{mtable} \right) = 7, \qquad
+\det \left( \begin{mtable}[\cellaligns{rrr}]
+0 & 1 & 1 \\
+-3 & 1 & 2 \\
+2 & -2 & 2 \\
+\end{mtable} \right) = 14, \qquad
+\det \left( \begin{mtable}[\cellaligns{rrr}]
+2 & 0 & 1 \\
+1 & -3 & 2 \\
+-1 & 2 & 2 \\
+\end{mtable} \right) = -21, \\
+\det \left( \begin{mtable}[\cellaligns{rrr}]
+2 & 1 & 0 \\
+1 & 1 & -3 \\
+-1 & -2 & 2 \\
+\end{mtable} \right) = -7, \qquad \quad
+\mbox{also} \quad
+\left( \begin{mtable}[\cellaligns{c}] x \\ y \\ z \end{mtable} \right) =
+\frac{1}{7} \left( \begin{mtable}[\cellaligns{r}] 14 \\ -21 \\ -7 \end{mtable} \right) =
+\left( \begin{mtable}[\cellaligns{r}] 2 \\ -3 \\ -1 \end{mtable} \right)
+\end{align*}
+als eindeutige Lösung des linearen Gleichungssystems.
+    }
+
+    \lang{de}{   We have
+\begin{align*}
+\det \left( \begin{mtable}[\cellaligns{rrr}]
+2 & 1 & 1 \\
+1 & 1 & 2 \\
+-1 & -2 & 2 \\
+\end{mtable} \right) = 7, \qquad
+\det \left( \begin{mtable}[\cellaligns{rrr}]
+0 & 1 & 1 \\
+-3 & 1 & 2 \\
+2 & -2 & 2 \\
+\end{mtable} \right) = 14, \qquad
+\det \left( \begin{mtable}[\cellaligns{rrr}]
+2 & 0 & 1 \\
+1 & -3 & 2 \\
+-1 & 2 & 2 \\
+\end{mtable} \right) = -21, \\
+\det \left( \begin{mtable}[\cellaligns{rrr}]
+2 & 1 & 0 \\
+1 & 1 & -3 \\
+-1 & -2 & 2 \\
+\end{mtable} \right) = -7, \qquad \quad
+\mbox{also} \quad
+\left( \begin{mtable}[\cellaligns{c}] x \\ y \\ z \end{mtable} \right) =
+\frac{1}{7} \left( \begin{mtable}[\cellaligns{r}] 14 \\ -21 \\ -7 \end{mtable} \right) =
+\left( \begin{mtable}[\cellaligns{r}] 2 \\ -3 \\ -1 \end{mtable} \right)
+\end{align*}
+as the unique solution of the linear system.}
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung b)    } \lang{en}{Solution b)}}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   Man hat
+\begin{align*}
+\det \left( \begin{mtable}[\cellaligns{rrr}]
+3 & 2 & -1 \\
+1 & 0 & 1 \\
+1 & -1 & 2 \\
+\end{mtable} \right) = 2, \qquad
+\det \left( \begin{mtable}[\cellaligns{rrr}]
+2 & 2 & -1 \\
+2 & 0 & 1 \\
+3 & -1 & 2 \\
+\end{mtable} \right) = 2, \qquad
+\det \left( \begin{mtable}[\cellaligns{rrr}]
+3 & 2 & -1 \\
+1 & 2 & 1 \\
+1 & 3 & 2 \\
+\end{mtable} \right) = 0, \\
+\det \left( \begin{mtable}[\cellaligns{rrr}]
+3 & 2 & 2 \\
+1 & 0 & 2 \\
+1 & -1 & 3 \\
+\end{mtable} \right) = 2, \qquad \quad
+\mbox{also} \quad
+\begin{pmatrix} x \\ y \\ z \end{pmatrix} = \frac{1}{2} \begin{pmatrix} 2 \\ 0 \\ 2 \end{pmatrix} = \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix}
+\end{align*}
+als eindeutige Lösung des linearen Gleichungssystems.
+    }
+    \lang{en}{   We get
+\begin{align*}
+\det \left( \begin{mtable}[\cellaligns{rrr}]
+3 & 2 & -1 \\
+1 & 0 & 1 \\
+1 & -1 & 2 \\
+\end{mtable} \right) = 2, \qquad
+\det \left( \begin{mtable}[\cellaligns{rrr}]
+2 & 2 & -1 \\
+2 & 0 & 1 \\
+3 & -1 & 2 \\
+\end{mtable} \right) = 2, \qquad
+\det \left( \begin{mtable}[\cellaligns{rrr}]
+3 & 2 & -1 \\
+1 & 2 & 1 \\
+1 & 3 & 2 \\
+\end{mtable} \right) = 0, \\
+\det \left( \begin{mtable}[\cellaligns{rrr}]
+3 & 2 & 2 \\
+1 & 0 & 2 \\
+1 & -1 & 3 \\
+\end{mtable} \right) = 2, \qquad \quad
+\mbox{also} \quad
+\begin{pmatrix} x \\ y \\ z \end{pmatrix} = \frac{1}{2} \begin{pmatrix} 2 \\ 0 \\ 2 \end{pmatrix} = \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix}
+\end{align*}
+as unique solution of the linear system.
+    }
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösungsvideo c) und d)    }}
+  
+\lang{de}{  Bemerkung: Im Video werden c), d) mit a), b) bezeichnet.
+  
+\youtubevideo[500][300]{e8dvelvD9aM}}\\
+
+
+%####################ENDE
+
+% \tab{\lang{de}{Video: ähnliche Übungsaufgabe}}	
+%    \youtubevideo[500][300]{e8dvelvD9aM}\\
+    
+\end{tabs*}
+\end{content}

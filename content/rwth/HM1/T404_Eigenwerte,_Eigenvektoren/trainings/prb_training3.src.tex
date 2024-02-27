@@ -1,0 +1,185 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A03: char. Polynom}
+    \lang{en}{P03: Characteristic polynomial}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A03: char. Polynom}}
+\lang{en}{\title{P03: Characteristic polynomial}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/11628}{Ticket 11628}
+\end{block}
+\begin{block}[annotation]
+Pool aus 3 Aufgaben. Die  $(4\times 4)$-Matrizen haben dabei besondere Form:
+erste Spalte der Form $(*,0,0,0)^T$, letzte Spalte der Form $(0,0,0,*)$, oder Blockmatrix.
+\end{block}
+
+\begin{problem}
+	\randomquestionpool{1}{3}
+	\begin{question}
+		
+		\begin{variables}
+			\randint{a}{-2}{2} 
+			\randint{b}{0}{1} 
+			\randint{c}{-1}{1} 
+			\randint{d}{-1}{1}
+			\randint{g}{-1}{0} 
+			\randint{f}{-1}{1} 
+			\randint{h}{-1}{1} 
+			\randint{k}{-1}{1}
+			\randint{v}{-2}{2} 
+			\randint{y}{-2}{2} 
+			\randint{z}{-2}{2}
+			\randint{w}{-2}{2}
+			\randint[Z]{l0}{-4}{-3}
+			\function[calculate]{l}{l0+1}
+
+			\matrix[calculate]{aa}{v & y & z & w \\ 0 & (a*c-b)*(d*f*(1-l) + g*l)+ a*d*(1-l) + 1  & c*d*f*l - c*d*f - c*g*l + d*l - d  & -d*f*l + d*f + g*l\\
+					  0 & a^2*(-c*d*f*l + c*d*f + c*g*l - d*l + d) + a*b*d*f*l - a*b*d*f - a*b*g*l + a*c*f - a*l + a - b*f  & a*c*d*f*l - a*c*d*f - a*c*g*l + a*d*l - a*d - c*f + l &  -a*d*f*l + a*d*f + a*g*l + f\\ 
+					  0 & -a*b*c*d*f*l + a*b*c*d*f + a*b*c*g*l - a*b*d*l + a*b*d + a*c^2*f + a*c + b^2*d*f*l - b^2*d*f - b^2*g*l - b*c*f - b*l & b*c*d*f*l - b*c*d*f - b*c*g*l + b*d*l - b*d - c^2*f - c  & -b*d*f*l + b*d*f + b*g*l + c*f + l + 1}
+			\function[expand,normalize]{s}{(v-t)*(1-t)*(l-t)*(1+l-t)}
+		\end{variables}
+		
+		\type{input.generic}
+		\field{rational}
+		\lang{de}{
+	    \text{Bestimmen Sie das charakteristische Polynom der Matrix $A=\var{aa}$.}
+	    }
+     \lang{en}{
+	    \text{Determine the characteristic polynomial of the matrix $A=\var{aa}$.}
+	    }
+	    %\permuteAnswers{1, 2, 3} 
+	    %http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+	    \begin{answer}
+            \type{input.function}
+	    	\lang{de}{\text{Das charakteristische Polynom ist $p_A(t)=$}}
+      \lang{en}{\text{The characteristic polynomial is $p_A(t)=$}}
+			%\checkAsFunction{x}{-10}{10}{100} 
+            \solution{s}
+            \inputAsFunction{t}{p}
+			\checkFuncForZero{p-s}{-10}{10}{100}
+           \lang{en}{\explanation{You may simplify the calculation of the determinant by considering the form of the matrix.}}
+           \lang{de}{\explanation{Sie können die Berechnung der Determinante vereinfachen, indem Sie die Gestalt der Matrix in Betracht ziehen.}}
+	    \end{answer}    
+	    
+	    %generic viz: http://team.mumie.net/projects/support/wiki/Example
+	    
+	\end{question}	\begin{question}
+		
+		\begin{variables}
+			\randint{a}{-1}{1} 
+			\randint{b}{0}{1} 
+			\randint{c}{-1}{1} 
+			\randint{d}{-2}{2}
+			\randint{g}{-1}{0} 
+			\randint{f}{-2}{2} 
+			\randint{h}{-1}{1} 
+			\randint{k}{-2}{2}
+			\randint{v}{-1}{1} 
+			\randint{y}{-1}{1} 
+			\randint{z}{-1}{1}
+			\randint{w}{-1}{1}
+			\randint[Z]{l0}{-4}{-3}
+			\function[calculate]{l}{l0+1}
+
+			\matrix[calculate]{aa}{(a*c-b)*(d*f*(1-l) + g*l)+ a*d*(1-l) + 1  & c*d*f*l - c*d*f - c*g*l + d*l - d  & -d*f*l + d*f + g*l& w\\
+				  a^2*(-c*d*f*l + c*d*f + c*g*l - d*l + d) + a*b*d*f*l - a*b*d*f - a*b*g*l + a*c*f - a*l + a - b*f  & a*c*d*f*l - a*c*d*f - a*c*g*l + a*d*l - a*d - c*f + l &  -a*d*f*l + a*d*f + a*g*l + f & z\\
+				  -a*b*c*d*f*l + a*b*c*d*f + a*b*c*g*l - a*b*d*l + a*b*d + a*c^2*f + a*c + b^2*d*f*l - b^2*d*f - b^2*g*l - b*c*f - b*l & b*c*d*f*l - b*c*d*f - b*c*g*l + b*d*l - b*d - c^2*f - c  & -b*d*f*l + b*d*f + b*g*l + c*f + l + 1&y\\
+				   0&0&0&v}
+			\function[expand,normalize]{s}{(v-t)*(1-t)*(l-t)*(1+l-t)}
+
+		\end{variables}
+		
+		\type{input.generic}
+        \field{rational}
+		\lang{de}{
+	    \text{Bestimmen Sie das charakteristische Polynom der Matrix $A=\var{aa}$.}
+	    }
+     \lang{en}{
+	    \text{Determine the characteristic polynomial of the matrix $A=\var{aa}$.}
+	    }
+	    %\permuteAnswers{1, 2, 3} 
+	    %http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+	    \begin{answer}
+            \type{input.function}
+	    	\lang{de}{\text{Das charakteristische Polynom ist $p_A(t)=$}}
+      \lang{en}{\text{The characteristic polynomial is $p_A(t)=$}}
+			%\checkAsFunction{x}{-10}{10}{100} 
+            \solution{s}
+            \inputAsFunction{t}{p}
+			\checkFuncForZero{p-s}{-10}{10}{100}
+           \lang{de}{\explanation{You may simplify the calculation of the determinant by considering the form of the matrix.}}
+           \lang{de}{\explanation{Sie können die Berechnung der Determinante vereinfachen, indem Sie die Gestalt der Matrix in Betracht ziehen.}}
+	    \end{answer}    
+	    
+	    %generic viz: http://team.mumie.net/projects/support/wiki/Example
+	    
+	\end{question}	\begin{question}
+		
+		\begin{variables}
+
+			\randint{a}{-2}{2} 
+			\randint{b}{-2}{2} 
+			\randint{c}{-2}{2} 
+			\randint{d}{-2}{2}
+			\randint{g}{-2}{2} 
+			\randint{f}{-2}{2} 
+			\randint{h}{-2}{2} 
+			\randint{k}{-2}{2}
+			\randint{v}{-2}{2} 
+			\randint{y}{-2}{2} 
+			\randint{z}{-2}{2}
+			\randint{w}{-2}{2}
+			\randint[Z]{l0}{-4}{-3}
+			\function[calculate]{l}{l0+1}
+
+			\matrix[calculate]{aa}{a&b&v&y\\ c&d&z&w\\ 0&0&f&g\\ 0&0&h&k}
+			\function[expand, normalize]{s}{(t^2-(a+d)*t+(a*d-b*c))*(t^2-(f+k)*t+(f*k-h*g))}
+		\end{variables}
+		
+		\type{input.generic}
+        \field{rational}
+		\lang{de}{
+	    \text{Bestimmen Sie das charakteristische Polynom der Matrix $A=\var{aa}$.}
+	    }
+     \lang{en}{
+	    \text{Determine the characteristic polynomial of the matrix $A=\var{aa}$.}
+	    }
+	    \begin{answer}
+            \type{input.function}
+	    	\lang{de}{\text{Das charakteristische Polynom ist $p_A(t)=$}}
+      \lang{en}{\text{The characteristic polynomial is $p_A(t)=$}}
+			%\checkAsFunction{x}{-10}{10}{100} 
+            \solution{s}
+            \inputAsFunction{t}{p}
+			\checkFuncForZero{p-s}{-10}{10}{100}
+             \lang{en}{\explanation{You may simplify the calculation of the matrix by considering the form of the matrix.}}
+             \lang{de}{\explanation{Sie können die Berechnung der Determinante vereinfachen, indem Sie die Gestalt der Matrix in Betracht ziehen.}}
+	    \end{answer}    
+	    
+	\end{question}
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

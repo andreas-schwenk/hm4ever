@@ -1,0 +1,134 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A02: Taylor}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22380}{Ticket 22380}
+\end{block}
+\begin{block}[annotation]
+Polynom in Punkt $x_0$ entwickeln.\\
+Generische Aufgabe mit differenziertem Feedback.
+\end{block}
+\begin{block}[annotation]
+	Entlehnt von \href{https://team.mumie.net/issues/17203}{Ticket 17203}.
+\end{block}
+\usepackage{mumie.genericproblem}
+\lang{de}{\title{A02: Taylor}}
+\lang{en}{\title{Problem 2}}
+
+\begin{problem}
+  \begin{question}
+    \type{input.number}
+    \field{rational}
+    \begin{variables}
+      \begin{pool}
+        \begin{variables}
+          \randint[Z]{sol3}{-4}{4}
+          \randint{sol2}{-1}{1}
+          \randint{sol1}{-2}{2}
+          \randint[Z]{sol0}{-2}{2}
+        \end{variables}
+        \begin{variables}
+          \randint[Z]{sol3}{-2}{2}
+          \randint{sol2}{-9}{9}
+          \randint{sol1}{-1}{1}
+          \randint[Z]{sol0}{-1}{1}
+        \end{variables}
+        \begin{variables}
+          \randint[Z]{sol3}{-2}{2}
+          \randint{sol2}{-1}{1}
+          \randint{sol1}{-9}{9}
+          \randint[Z]{sol0}{-2}{2}
+        \end{variables}
+        \begin{variables}
+          \randint[Z]{sol3}{-2}{2}
+          \randint{sol2}{-2}{2}
+          \randint{sol1}{-2}{2}
+          \randint[Z]{sol0}{-9}{9}
+        \end{variables}
+      \end{pool}
+      \randint[Z]{x0}{-3}{3}
+      \function[calculate]{x00}{abs(x0)}
+      \begin{switch}
+        \begin{case}{x0<0}
+          \string{op}{+}
+        \end{case}
+        \begin{default}
+          \string{op}{-}
+        \end{default}
+      \end{switch}
+      \function[expand, sort, normalize]{p}{sol3*(x-x0)^3 + sol2*(x-x0)^2 + sol1*(x-x0) + sol0}
+      % typische Fehler
+      \function[calculate]{err3}{sol3*6}
+      \function[calculate]{err2}{sol2*2}
+    \end{variables}
+    \lang{de}{
+      \text{
+        Entwickeln Sie 
+         die Polynomfunktion $p(x) = \var{p}$
+        nach Potenzen $(x\var{op} \var{x00})^j$ um den Entwicklungspunkt $x_0 = \var{x0}$.\\
+        \\
+        $
+            p(x) = $ \ansref $ \cdot\; (x \var{op} \var{x00})^3\;
+            + $ \ansref $ \cdot\; (x \var{op} \var{x00})^2\;
+            + $ \ansref $ \cdot\; (x \var{op} \var{x00})\;
+            + $ \ansref 
+      }
+      \explanation{
+        Dies entspricht der Taylor-Entwicklung im Entwicklungspunkt $x_0 = \var{x0}$.
+      }
+      \explanation[equal(err3,ans_1)]{\\
+        Der Koeffizient des kubischen Terms $(x-x_0)^3$ ist 
+        $\frac{p\prime\prime\prime(x_0)}{3!}$. \\
+        Beachten Sie, dass Sie den Wert der dritten Ableitung durch $3!$ dividieren müssen.
+      }
+      \explanation[[equal(err2, ans_2)] AND [NOT [equal(sol2, 0)]]]{\\
+        Der Koeffizient des quadratischen Terms $(x-x_0)^2$ ist 
+        $\frac{p\prime\prime(x_0)}{2!}$.\\
+        Beachten Sie, dass Sie den Wert der zweiten Ableitung durch $2!$ dividieren müssen.
+      }
+    }
+    \begin{answer}
+      \solution{sol3}
+    \end{answer}
+    \begin{answer}
+      \solution{sol2}
+    \end{answer}
+    \begin{answer}
+      \solution{sol1}
+    \end{answer}
+    \begin{answer}
+      \solution{sol0}
+    \end{answer}
+  \end{question}
+\end{problem}
+
+
+
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

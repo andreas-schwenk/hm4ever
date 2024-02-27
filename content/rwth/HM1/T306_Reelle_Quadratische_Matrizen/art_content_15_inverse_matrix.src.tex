@@ -1,0 +1,950 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Invertierbare Matrizen und Inverse}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T111neu_Matrizen/g_art_content_44_transponierte_matrix.meta.xml}{content_44_transponierte_matrix}
+    \link{generic_article}{content/rwth/HM1/T111neu_Matrizen/g_art_content_43_matrizenmultiplikation.meta.xml}{content_43_matrizenmultiplikation}
+    \link{generic_article}{content/rwth/HM1/T112neu_Lineare_Gleichungssysteme/g_art_content_45_matrixrang.meta.xml}{content_45_matrixrang}
+    \link{generic_article}{content/rwth/HM1/T112neu_Lineare_Gleichungssysteme/g_art_content_41_gauss_verfahren.meta.xml}{content_41_gauss_verfahren}
+    %\link{generic_article}{content/rwth/HM1/T112_Rechnen_mit_Matrizen/g_art_content_44_transponierte_matrix.meta.xml}{umformungen}
+    \link{generic_article}{content/rwth/HM1/T306_Reelle_Quadratische_Matrizen/g_art_content_14_quadratische_matrizen.meta.xml}{quadr-matrizen}
+    \link{generic_article}{content/rwth/HM1/T306_Reelle_Quadratische_Matrizen/g_art_content_16_determinante.meta.xml}{determinante}
+%     \link{generic_article}{content/rwth/HM1/T112_Rechnen_mit_Matrizen/g_art_content_44_transponierte_matrix.meta.xml}{transponierte}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{5}
+\ombarticle{2}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{Invertierbare Matrizen und Inverse}
+
+\begin{block}[annotation]
+ 
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/11618}{Ticket 11618}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+Im \link{quadr-matrizen}{letzten Abschnitt} haben wir invertierbare Matrizen definiert
+ als diejenigen Matrizen $A\in M(n;\R)$, für die es eine Matrix $B$ mit $A\cdot B=E_n$ gibt.
+Die Matrix $B$ haben wir dann \emph{inverse Matrix zu $A$} genannt und mit $A^{-1}$ bezeichnet.
+
+In diesem Abschnitt beschäftigen wir uns näher mit der Invertierbarkeit. 
+Insbesondere geben wir einen Algorithmus an, mit dem man die inverse Matrix $A^{-1}$ bestimmen kann, sofern sie existiert.
+
+\section{Berechnung der inversen Matrix}\label{sec:berechnung}
+
+Ist eine quadratische Matrix $A\in M(n;\R)$ gegeben, so müssen wir erst einmal bestimmen, ob $A$ invertierbar ist, und in diesem Fall dann die Einträge der inversen Matrix $A^{-1}$ angeben.
+
+Nehmen wir trotzdem zunächst an, dass $A$ invertierbar ist, und $B$ eine/die Matrix mit $A\cdot B=E_n$ ist.
+Dann ist die erste Spalte von $B$ aber eine Lösung des LGS
+\[ A\cdot \begin{pmatrix} x_1\\ x_2\\ \vdots \\ x_n
+\end{pmatrix} = \begin{pmatrix} 1\\ 0\\  \vdots \\ 0
+\end{pmatrix}.\]
+Es ist also
+\[ A\cdot \begin{pmatrix} b_{11}\\ b_{21}\\ \vdots \\ b_{n1}
+\end{pmatrix} = \begin{pmatrix} 1\\ 0\\  \vdots \\ 0
+\end{pmatrix}.\]
+Genauso ist die zweite Spalte eine Lösung des LGS
+\[ A\cdot \begin{pmatrix} x_1\\ x_2\\ \vdots \\ x_n
+\end{pmatrix} = \begin{pmatrix} 0\\ 1\\  \vdots \\ 0
+\end{pmatrix},\]
+etc., und die letzte  Spalte eine Lösung des LGS
+\[ A\cdot \begin{pmatrix} x_1\\ x_2\\ \vdots \\ x_n
+\end{pmatrix} = \begin{pmatrix} 0\\  \vdots \\ 0\\ 1
+\end{pmatrix}.\]
+
+Um die inverse Matrix $B$ zu bestimmen, müssen also $n$ LGS der Form $Ax=v$ gelöst werden zu
+den rechten Seiten 
+\[ v=e_1= \begin{pmatrix} 1\\ 0\\  \vdots \\ 0
+\end{pmatrix}, \ldots, v=e_n=\begin{pmatrix} 0\\  \vdots \\ 0\\ 1
+\end{pmatrix}.\]
+
+Gibt es umgekehrt für jedes $j=1,\ldots,n$ eine Lösung $b_j$  des LGS $A x=e_j$, dann gilt für die Matrix $B$,
+die die Spalten $b_1,\ldots,b_n$ hat, $A\cdot B=E_n$.
+
+Um zu entscheiden, ob ein LGS $(A|v)$ eine Lösung besitzt und um diese direkt ablesen zu können, bringt man es in
+\ref[content_41_gauss_verfahren][reduzierte Stufenform]{def:stufenformen}. 
+Die elementaren Zeilenumformungen, die man dafür benötigt, bestimmen sich aber allein aus der Matrix $A$ und nicht aus der rechten Seite $v$.
+Wir können sie also simultan für alle rechten Seiten $e_j$ gleichzeitig ausführen. 
+Damit bringen wir also das LGS $(A|E_n)$ auf seine reduzierte Stufenform $(D|B)$ mit einer oberen Dreiecksmatrix $D$, 
+auf deren Diagonalen nur Einsen oder Nullen stehen. Dabei ist die Anzahl der Einsen gleich dem 
+\ref[content_45_matrixrang][Rang]{sec:zeilenrang-spaltenrang}  von $A$.
+\begin{example}\label{ex:stufenform-beispiel}
+\begin{tabs*}
+\tab{Invertierbare Matrix} Für die Matrix $A = \begin{pmatrix}
+1 & 2 \\ 0& 2 \end{pmatrix} \in M(2;\R) $ erhält man 
+\[  {(A\,|\, E_2)}=  \begin{pmatrix}
+1 & 2 &| & 1 & 0 \\ 0& 2 &| & 0 & 1\end{pmatrix}\,\begin{matrix}  / - \text{(II)}\\  \phantom{1} \end{matrix} \rightsquigarrow  \begin{pmatrix}
+1 & 0 &| & 1 & -1 \\ 0& 2 &| & 0 & 1\end{pmatrix}\,\begin{matrix}\phantom{1}\\ /\cdot\frac{1}{2}\end{matrix}\rightsquigarrow
+\begin{pmatrix} 1&0&|&1&-1\\0&1&|&0&\frac{1}{2}\end{pmatrix}. \]
+Die Matrix $A$ hat also vollen Rang $2$.
+Hierbei sind die Spalten der rechten Seite die Lösungen von $Ax=e_1$ bzw. $Ax=e_2$. Also ist $A^{-1}=\begin{pmatrix}
+1 & -1 \\ 0& \frac{1}{2}
+\end{pmatrix}$ die inverse Matrix zu $A$.
+\tab{Nicht invertierbare Matrix}
+Für die Matrix $B = \begin{pmatrix}
+1 & 1 \\ 2& 2 \end{pmatrix} \in M(2;\R) $ erhält man 
+\[  {(B\,|\, E_2)}=  \begin{pmatrix}
+1 & 1 &| & 1 & 0 \\ 2& 2 &| & 0 & 1\end{pmatrix}\,
+\begin{matrix} \phantom{1}\\ / - 2\cdot\text{(I)}   \end{matrix}
+\rightsquigarrow  
+\begin{pmatrix}
+1 & 1 &| & 1 & 0 \\ 0& 0 &| & -2 & 1\end{pmatrix}.\]
+In dieser reduzierten Stufenform erscheint eine Nullzeile, die Matrix $B$ hat also nicht vollen Rang. Aber die zweite Zeile der rechten Seite ist nicht null.
+Also hat das LGS $(B|E_2)$ keine Lösung, und $B$ ist nicht invertierbar.
+\end{tabs*}
+
+Das folgende Video zeigt, wie die inverse Matrix mit Hilfe des Gauß-Algorithmus bestimmt werden kann:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10877&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+\end{example}
+
+
+\begin{theorem}[Inverse Matrix]\label{rule:invertierbarkeit-rang}\label{thm:invertierbarkeit-rang}
+Eine quadratische Matrix $A\in M(n;\R)$ ist genau dann invertierbar, wenn die reduzierte Stufenform der Matrix $(A\,|\, E_n)$ die Gestalt $(E_n\,|\, B)$ hat.
+In dem Fall ist $B$ die zu $A$ inverse Matrix.
+\\
+Erhält man eine andere reduzierte Stufenform,  so ist $A$ nicht invertierbar.
+
+Eine Matrix $A\in M(n;\R)$ ist also genau dann invertierbar, wenn sie vollen Rang hat.
+% Um festzustellen, ob eine quadratische Matrix $A\in M(n;\R)$ invertierbar ist, und um gegebenfalls ihre inverse Matrix $A^{-1}$ zu bestimmen, bringt man die Matrix $(A\,|\, E_n)$ auf reduzierte Stufenform. 
+
+% Erhält man eine Matrix der Form $(E_n\,|\, B)$, hat also $A$ den Rang $n$, so ist $A$ invertierbar und
+% $B$ ist die eindeutige inverse Matrix zu $A$.
+
+% Erhält man eine andere reduzierte Stufenform, hat also $A$ einen Rang kleiner $n$, so ist $A$ nicht invertierbar.
+\end{theorem}
+
+\begin{remark}
+% Der Rang einer Matrix gibt also Auskunft darüber, ob die Matrix invertierbar ist oder nicht:\\
+% Hat die Matrix vollen Rang, ist sie invertierbar, hat sie keinen vollen Rang, ist sie nicht invertierbar.
+%
+Im \link{determinante}{nächsten Abschnitt} werden wir ein weiteres Kriterium kennenlernen, um zu entscheiden, ob eine Matrix invertierbar ist, nämlich die sogenannte \emph{Determinante} der Matrix.
+\end{remark}
+
+
+\begin{proof*}[Beweis des Satzes]
+\begin{showhide}
+Durch unsere Vorüberlegungen wissen wir schon, dass eine quadratische Matrix $A$ invertierbar ist, 
+wenn die zu $(A\,|\,E_n)$ reduzierte Stufenform von der Gestalt $(E_n\,|\,B)$ ist, und dass dann $B=A^{-1}$ eine inverse Matrix zu $A$ ist. 
+Insbesondere ist dann der Rang von $A$ gleich dem von $E_n$, also gleich $n$, denn der Rang bleibt durch elementare Zeilenumformungen unverändert.
+
+Ist andererseits die reduzierte Stufenform $(D\,|\,B)$ von $(A\,|\,E_n)$ nicht von dieser Gestalt, dann tritt in $D$ mindestens eine Nullzeile auf. Das heisst, $A$ hat nicht vollen Rang.
+Denn der Rang bleibt durch die elementaren Zeilenumformungen unverändert. Deshalb hat aber auch $B$ denselben Rang wie $E_n$, also $n$.
+Dann kann aber $B$ keine Nullzeile haben. Somit erhalten wir im LGS $(D\,|\,B)$ eine unerfüllbare Bedingung. 
+Damit ist auch das LGS $(A\,|\,E_n)$ unlösbar. Es existiert keine inverse Matrix zu $A$.
+%
+%
+% Durch die Vorüberlegung haben wir schon gesehen, dass die Spalten der inversen Matrix die
+% Lösungen der linearen Gleichungssysteme mit linker Seite $A$ und rechter Seite der Spalten von $E_n$ sind. Die Lösungen lassen sich - wie im \ref[gauss-verfahren][Abschnitt Gauß-Verfahren]{sec:mehrere-rechte-seiten} erklärt - simultan bestimmen, indem man die Matrix
+% $(A\,|\, E_n)$ auf reduzierte Stufenform bringt und dann die entsprechenden LGS löst.
+
+% Allgemein ist nun die reduzierte Stufenform zu $(A\,|\, E_n)$ eine Matrix $(S\,|\, D)$, wobei
+% $S$ tatsächlich in Stufenform ist. Die Anzahl der von $0$ verschiedenen Zeilen von $S$ ist also gleich dem Rang von $A$.
+% Da $D$ aus $E_n$ durch Zeilenumformungen entstanden ist, sind die Ränge beider Matrizen gleich, das heißt, $D$ hat Rang $n$. Insbesondere besitzt $D$ keine Nullzeile.
+
+% Ist nun der Rang von $A$ kleiner als $n$, so ist die letzte Zeile von $S$ gleich $0$, die letzte Zeile von $D$ jedoch nicht, weshalb eines der zu $(S\,|\, D)$ gehörenden Gleichungssysteme
+% nicht lösbar ist. In diesem Fall lassen sich also nicht alle zu $(A\,|\, E_n)$ gehörenden Gleichungssysteme lösen, weshalb es keine Matrix $B$ mit $A\cdot B=E_n$ gibt. D.h. $A$ ist nicht invertierbar.
+
+% Hat $A$ jedoch vollen Rang $n$, so ist  $S=E_n$ und die reduzierte Stufenform zu $(A\,|\, E_n)$ von der Form $(E_n\,|\, D)$,
+% also entsprechend dem Gleichungssystem mit linker Seite $E_n$. Dadurch erhält man als eindeutige Lösungen der entsprechenden 
+% Gleichungssysteme direkt die Spalten von $D$.\\
+% $A$ ist in diesem Fall also invertierbar und $B=D$ ist die eindeutige inverse Matrix zu $A$.
+\end{showhide}
+\end{proof*}
+\begin{quickcheck}
+     \text{Markieren Sie alle invertierbaren Matrizen.}
+  \begin{choices}{multiple}
+      \begin{choice}
+        \text{$A=\begin{pmatrix}0&0\\1&0\end{pmatrix}$}
+        \solution{false}
+      \end{choice}
+      \begin{choice}
+        \text{$B=\begin{pmatrix}0&3&0\\4&8&0\\3&1&0\end{pmatrix}$}
+        \solution{false}
+      \end{choice}
+%       \begin{choice}
+%         \text{$C=\begin{pmatrix}0&0&0&8\\0&0&3&0\\0&4&0&0\\1&0&0&0\end{pmatrix}$}
+%         \solution{true}
+%       \end{choice}
+      \begin{choice}
+        \text{$C=\begin{pmatrix}0&0&0&8i\\0&0&3-i&0\\0&4&0&0\\1+i&0&0&0\end{pmatrix}$}
+        \solution{true}
+      \end{choice}
+      \begin{choice}
+        \text{$D=\begin{pmatrix}1&2&-2\\-2&-4&4\\0&3&1\end{pmatrix}$}
+        \solution{false}
+      \end{choice}
+      \end{choices}
+      \explanation{ Die Matrix $A$ hat eine Nullzeile, also nicht vollen Rang. Die Matrix $B$ hat eine Nullspalte, also nicht vollen Rang. 
+      Matrix $D$ hat ebenfalls nicht vollen Rang: Addiert man das zweifache der ersten zur zweiten Zeile, entsteht eine Nullzeile. Also sind die Matrizen $A$, $B$, $D$ nicht invertierbar.
+      Matrix $C$ hat hingegen vollen Rang und ist damit invertierbar. 
+      Man kann sie sogar durch Zeilenvertauschung auf Diagonalgestalt bringen, worin alle Diagonaleinträge von null verschieden sind.}
+    
+\end{quickcheck}
+
+
+
+Aus denselben Ideen lassen sich weitere interessante und nützliche Folgerungen ziehen.
+\begin{remark}
+\begin{enumerate}
+\item[(i)]
+Eine quadratische Matrix $A\in M(n;\R)$ hat genau dann Rang $n$, wenn das LGS $Ax=v$ für \emph{jedes} $v\in\R^n$ eine Lösung besitzt.
+\item[(ii)]
+Ist $B\in M(n;\R)$ die inverse Matrix von $A\in M(n,\R)$, dann gilt nicht nur $A\cdot B=E_n$, sondern auch
+\[B\cdot A=E_n.\]
+\item[(iii)]
+Die Inverse einer quadratischen Matrix $A\in M(n;\R)$ ist eindeutig bestimmt. 
+Das heißt, gilt $A\cdot B=E_n=A\cdot C$ für zwei Matrizen $B,C\in M(n;\R)$, dann ist $B=C$.
+\end{enumerate}
+\end{remark}
+\begin{proof*}
+\begin{showhide}
+\begin{enumerate}
+\item[(i)]
+Die Invertierbarkeit von $A$ ist gleich bedeutend dazu, dass $A$ Rang $n$ hat. Also können wir jetzt einfach die Lösung von $Ax=v$ 
+angeben, wenn der Rang von $A$ gleich $n$ ist.
+Diese ist nämlich $A^{-1}v$. Denn es ist $A\cdot(A^{-1}v)=(A\cdot A^{-1})v=E_nv=v$, nach dem 
+\ref[content_43_matrizenmultiplikation][Assoziativgesetz der Matrixmultiplikation]{rule:rechenregeln}. 
+
+Hat umgekehrt die Gleichung $Ax=v$ für jedes $v\in\R^n$ eine Lösung, dann gibt es insbesondere Lösungen $b_1,\ldots,b_n\in\R^n$ von $Ab_1=e_1, \ldots, Ab_n=e_n$. 
+Fassen wir diese Spalten $b_j$ zusammen zu einer Matrix $B\in M(n,\R)$, so erhalten wir gerade die Inverse zu $A$.
+\item[(ii)]
+Die elementaren Zeilenumformungen von $(A\,|\, E_n)$ zu $(E_n\,|\, B)$ lassen sich  durch Multiplikation mit
+einer $(n\times n)$-Matrix von links beschreiben, die gerade das Produkt der entsprechenden Elementarmatrizen ist. Bezeichnen wir diese Matrix mit $C\in M(n;\R)$, so gilt
+\[   C\cdot (A\,|\, E_n) = (E_n\,|\, B),\]
+was gleichbedeutend ist zu
+\[ C\cdot A=E_n\qquad \text{und} \qquad C\cdot E_n=B. \]
+Weil nun $C\cdot E_n=C$ ist, folgt aus der rechten Gleichung  $C=B$. Damit folgt aus der
+linken Gleichung
+\[ B\cdot A=E_n. \]
+\item[(iii)]
+Gilt neben $A\cdot B=E_n$ auch noch $A\cdot C=E_n$ für  $A,B,C\in M(n;\R)$, dann gilt also $A\cdot B=A\cdot C$.
+Durch Multiplikation von links mit $B$ folgt
+$B\cdot (A\cdot B)=B\cdot (A\cdot C)$. Nach den Rechenregeln für Matrizen ist das gleichbedeutend zu $(B\cdot A)\cdot B=(B\cdot A)\cdot C$.
+Nach (ii) ist aber $B\cdot A=E_n$, also erhalten wir $E_n\cdot B= E_n\cdot C$, was heißt $B=C$.
+\end{enumerate}
+\end{showhide}
+\end{proof*}
+
+\begin{example}\label{ex:inverse-berechnen}
+\begin{tabs*}
+\tab{1. Beispiel} Für die Matrix $A = \begin{pmatrix}
+1 & 2 \\ 0& 1 \end{pmatrix} \in M(2;\R) $ erhält man direkt
+\[  {(A\,|\, E_2)}=  \begin{pmatrix}
+1 & 2 &| & 1 & 0 \\ 0& 1 &| & 0 & 1\end{pmatrix}\,\begin{matrix}  / - 2\cdot \text{(II)}\\  \phantom{1} \end{matrix} \rightsquigarrow  \begin{pmatrix}
+1 & 0 &| & 1 & -2 \\ 0& 1 &| & 0 & 1\end{pmatrix}. \]
+Also ist $A^{-1}=\begin{pmatrix}
+1 & -2 \\ 0& 1
+\end{pmatrix}$.
+\tab{2. Beispiel} Für die Matrix $B = \begin{pmatrix}
+3 & 2 \\ -1& 1
+\end{pmatrix} \in M(2;\R) $ berechnet man
+\begin{eqnarray*}
+{(B\,|\, E_2)} &=&  \begin{pmatrix}
+3 & 2 &| & 1 & 0 \\ -1& 1 &| & 0 & 1\end{pmatrix}\,\begin{matrix} \phantom{1}\\  /  +\frac{1}{3}\cdot \text{(I)} \end{matrix} \\
+& \rightsquigarrow &  \begin{pmatrix}
+3 & 2 &| & 1 & 0 \\ 0& 5/3 &| & 1/3 & 1\end{pmatrix}\,\begin{matrix} /\cdot\frac{1}{3} \\  /  \cdot\frac{3}{5} \end{matrix} \\
+& \rightsquigarrow &  \begin{pmatrix}
+1 & 2/3 &| & 1/3 & 0 \\ 0& 1 &| & 1/5 & 3/5\end{pmatrix}\,\begin{matrix}  /  -\frac{2}{3}\cdot \text{(II)} \\ \phantom{1}  \end{matrix} \\
+& \rightsquigarrow &  \begin{pmatrix}
+1 & 0 &| & 3/15 & -2/5 \\ 0& 1 &| & 1/5 & 3/5\end{pmatrix}.
+\end{eqnarray*}
+Also ist $ B^{-1}=\begin{pmatrix}
+1/5 & -2/5 \\ 1/5& 3/5
+\end{pmatrix}$. 
+\tab{3. Beispiel}
+Für die Matrix $C = \begin{pmatrix}
+1 & 4 \\ -1& 1
+\end{pmatrix} \in M(2;\R) $ berechnet man
+\begin{eqnarray*}
+{(C\,|\, E_2)} &=&  \begin{pmatrix}
+1 & 4 &| & 1 & 0 \\ -1& 1 &| & 0 & 1\end{pmatrix}\,\begin{matrix} \phantom{1}\\  /  +\text{(I)} \end{matrix} \\
+&\rightsquigarrow&  \begin{pmatrix}
+1 & 4 &| & 1 & 0 \\ 0 & 5 &| & 1 & 1\end{pmatrix}\,\begin{matrix} \phantom{1}\\  /  \cdot \frac{1}{5} \end{matrix} \\
+&\rightsquigarrow&  \begin{pmatrix}
+1 & 4 &| & 1 & 0 \\ 0 & 1 &| & 1/5 & 1/5\end{pmatrix}\,\begin{matrix}/ -4\cdot \text{(II)}\\ \phantom{1} \end{matrix} \\
+&\rightsquigarrow&  \begin{pmatrix}
+1 & 0 &| & 1/5 & -4/5 \\ 0 & 1 &| & 1/5 & 1/5\end{pmatrix}.
+\end{eqnarray*}
+Also ist $ C^{-1}=\begin{pmatrix}
+1/5 & -4/5 \\ 1/5& 1/5
+\end{pmatrix}$.
+%%
+\tab{4. Beispiel}
+Für die Matrix $D = \begin{pmatrix}
+1 & -2 \\ -1& 2
+\end{pmatrix} \in M(2;\R) $ berechnet man
+\begin{eqnarray*}
+{(D\,|\, E_2)} &=&  \begin{pmatrix}
+1 & -2 &| & 1 & 0 \\ -1& 2 &| & 0 & 1\end{pmatrix}\,\begin{matrix} \phantom{1}\\  /  +\text{(I)} \end{matrix} \\
+&\rightsquigarrow&  \begin{pmatrix}
+1 & -2 &| & 1 & 0 \\ 0 & 0 &| & 1 & 1\end{pmatrix}.
+\end{eqnarray*}
+Die linke Seite ist in reduzierter Stufenform gegeben, aber nicht die Einheitsmatrix.
+Der Rang der Matrix $D$ ist lediglich $1$. Deshalb ist $D$ nicht invertierbar.
+%%
+\end{tabs*}
+\end{example}
+
+Aus dem allgemeinen Verfahren lässt sich für $(2\times 2)$-Matrizen die folgende Formel für die
+inverse Matrix herleiten.
+
+\begin{rule}\label{rule:inverse-2x2}
+Eine $(2\times 2)$-Matrix $A= \begin{pmatrix}
+a & b \\ c& d \end{pmatrix} \in M(2;\R) $ ist genau dann invertierbar, wenn
+$ad-bc\neq 0$ gilt. In diesem Fall ist die inverse Matrix gegeben durch
+\[ A^{-1}= \frac{1}{ad-bc}\begin{pmatrix}
+d & -b \\ -c& a \end{pmatrix}. \]
+\end{rule}
+
+Im folgenden Video findet man einige Beispielaufgaben zur Regel:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11379&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+~\\
+
+\begin{proof*}[Beweis der Regel]
+\begin{showhide}
+Wir führen das obige Verfahren im Fall $a\neq 0$ durch:
+\[
+{(A\,|\, E_2)} =  \begin{pmatrix}
+a & b &| & 1 & 0 \\ c& d &| & 0 & 1\end{pmatrix}\,\begin{matrix} \phantom{1}\\  /  -\frac{c}{a}\cdot \text{(I)} \end{matrix} 
+ \rightsquigarrow   \begin{pmatrix}
+a & b &| & 1 & 0 \\ 0& (ad-bc)/a &| & -c/a & 1\end{pmatrix} \]
+Der Rang von $A$ ist also genau dann $2$, wenn $ad-bc\neq 0$ ist. In diesem Fall rechnen wir weiter:
+\begin{eqnarray*}
+&& \begin{pmatrix}
+a & b &| & 1 & 0 \\ 0& (ad-bc)/a &| & -c/a & 1\end{pmatrix}\,\begin{matrix}  /  \cdot \frac{1}{a}
+\\  /\cdot \frac{a}{ad-bc} \end{matrix}\\
+& \rightsquigarrow &  \begin{pmatrix}
+1 & b/a &| & 1/a & 0 \\ 0& 1 &| & -c/(ad-bc) & a/(ad-bc)\end{pmatrix}\,\begin{matrix}  /  -\frac{b}{a}\cdot \text{(II)} \\ \phantom{1}  \end{matrix} \\
+& \rightsquigarrow &  \begin{pmatrix}
+1 & 0 &| & \frac{1}{a}+\frac{bc}{a(ad-bc)} & -\frac{b}{ad-bc} \\ 0& 1 &| & -\frac{c}{ad-bc} & \frac{a}{ad-bc}\end{pmatrix}
+\end{eqnarray*}
+Also ist die inverse Matrix
+\begin{eqnarray*} A^{-1} &=&  
+\begin{pmatrix} \frac{1}{a}+\frac{bc}{a(ad-bc)} & -\frac{b}{ad-bc} \\  -\frac{c}{ad-bc} & \frac{a}{ad-bc}\end{pmatrix}\\
+&=& \begin{pmatrix} \frac{ad}{a(ad-bc)} & -\frac{b}{ad-bc} \\  -\frac{c}{ad-bc} & \frac{a}{ad-bc}\end{pmatrix}\\
+&=& \frac{1}{ad-bc}\cdot \begin{pmatrix}d & -b \\ -c& a \end{pmatrix}.
+\end{eqnarray*}
+
+Im Fall $a=0$ und $c\neq 0$ führt man das Verfahren entsprechend durch, wobei man im ersten Schritt die Zeilen vertauschen muss.
+
+Falls $a$ und $c$ beide gleich $0$ sind, ist zum einen der Rang von $A$ kleiner als $2$ und zum anderen $ad-bc=0$. Auch in diesem Fall stimmt also die Behauptung.
+
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11378&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+
+\end{showhide}
+\end{proof*}
+
+
+%\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10878&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+
+
+
+
+
+%\begin{quickcheckcontainer}
+\begin{quickcheck}
+  \type{input.number}
+  \field{rational}
+  \displayprecision{3}
+  \correctorprecision{4}
+ 
+  \begin{variables}
+   \drawFromSet{d1}{2,3,4,5,6,7,8,9,-2,-3,-4,-5,-6,-7,-8,-9}
+   \function[calculate]{a1}{d1}
+   \function[calculate]{a2}{1}
+   \function[calculate]{a3}{-1}
+   \function[calculate]{a4}{0}
+   
+ \end{variables}
+ 
+  \text{
+    Bestimmen Sie die inverse Matrix $B=\begin{pmatrix}b_{11}&b_{12}\\b_{21}&b_{22}\end{pmatrix}$ von $A=\begin{pmatrix}0&-1\\1&\var{d1}\end{pmatrix}$.
+ 
+    Antwort: $b_{11}=$\ansref, $b_{12}=$\ansref, $b_{21}=$\ansref, $b_{22}=$\ansref. 
+  }
+  
+ 
+  \begin{answer}
+    \solution{a1}
+  \end{answer}
+   \begin{answer}
+    \solution{a2}
+   \end{answer}
+   \begin{answer}
+    \solution{a3} 
+  \end{answer}
+  \begin{answer}
+    \solution{a4}
+   \end{answer}
+\end{quickcheck}
+%\end{quickcheckcontainer}
+
+
+Auch für spezielle $(n\times n)$-Matrizen lassen sich leichte Regeln für die Invertierbarkeit herleiten.
+
+
+\begin{rule}
+\begin{enumerate}
+ \item[(i)] Eine Diagonalmatrix $A=\text{diag}(a_{11},a_{22}, \cdots, a_{nn}) \in M(n;\R) $ ist genau dann invertierbar,
+       wenn alle Eintr\"age $a_{ii} \neq 0$ sind f\"ur $1 \leq i \leq n$. In diesem Fall ist die Inverse gegeben durch 
+       \[
+       A^{-1}=\text{diag}\left(\frac{1}{a_{11}},\frac{1}{a_{22}}, \cdots, \frac{1}{a_{nn}}\right) \in M(n;\R).
+       \]
+ \item[(ii)] Eine obere bzw. untere Dreiecksmatrix ist genau dann invertierbar, wenn alle Diagonaleintr\"age ungleich $0$ sind. In diesem 
+       Fall ist die Inverse wieder eine obere bzw. untere Dreiecksmatrix.
+\end{enumerate}
+\end{rule}
+\begin{proof*}[Beweis der Regel]
+\begin{showhide}
+\begin{enumerate}
+\item[(i)] Diese Regel hatten wir schon in diesem \ref[quadr-matrizen][Beispiel]{ex:erste-bsp_inverse_matrix} hergeleitet.
+Es geht aber ebenso mit der reduzierten Stufenform: Um eine Diagonalmatrix auf die reduzierte Stufenform zu bringen, muss man nur noch die $i$-te Zeile mit $d_i^{-1}$ multiplizieren, falls $d_i\neq 0$.
+Falls alle $d_1\neq 0$, so erhält man also die inverse Matrix, wie behauptet. Ist ein $d_i=0$, dann hat die Matrix eine Nullzeile, also keinen vollen Rang mehr. Dann ist sie also nicht invertierbar.
+\item[(ii)]
+Eine obere Dreiecksmatrix $D$ ist bereits auf Stufengestalt. Sie hat genau dann vollen Rang, wenn alle Diagonaleinträge von null verschieden sind. Also ist sie auch genau dann invertierbar.
+Ist das der Fall, dann muss man für die reduzierte Stufenform von $(D\,|\,E_n)$ die Diagonaleinträge von $D$ auf eins normieren und die Einträge oberhalb der Diagonale ausräumen.
+Diese elementaren Zeilenumformungen führen insbesondere obere Dreiecksmatrizen in solche über, machen also auch aus der Einheitsmatrix eine obere Dreiecksmatrix. Somit ist die inverse Matrix von $D$ wieder eine obere Dreiecksmatrix.
+\\
+Für eine untere Dreiecksmatrix verfährt man analog.
+\end{enumerate}
+\end{showhide}
+\end{proof*}
+
+
+\section{Rechenregeln für inverse Matrizen}\label{sec:rechenregeln}
+
+Wir notieren noch weitere Rechenregeln für inverse Matrizen.
+
+\begin{rule}
+Sind $A,A_1,A_2\in M(n;\R)$  invertierbare Matrizen, dann gilt:
+\begin{enumerate}
+\item[(i)] $A^{-1}\in M(n;\R)$ ist invertierbar und $(A^{-1})^{-1} = A$.
+\item[(ii)] $A_1 \cdot A_2$ ist invertierbar und  
+$(A_1 \cdot A_2)^{-1} = A_2^{-1} \cdot A_1^{-1}$.
+\end{enumerate}
+\end{rule}
+
+\begin{block}[warning]
+Beim Produkt der inversen Matrizen ist also die Reihenfolge vertauscht!\\
+$(A_1 \cdot A_2)^{-1} $ ist also \textbf{nicht} $A_1^{-1}\cdot A_2^{-1}$, sondern
+\[ (A_1 \cdot A_2)^{-1} = A_2^{-1} \cdot A_1^{-1}.\]
+\end{block}
+
+\begin{proof*}[Beweis der Regel]
+\begin{showhide}
+\begin{enumerate}
+\item[(i)]
+Wir hatten gesehen, dass für eine invertierbare Matrix $A$ nicht nur nach Definition der inversen Matrix 
+$A\cdot A^{-1}=E_n$ ist, sondern auch $A^{-1}\cdot A=E_n$. Letztere
+Gleichung sagt aber genau aus, dass $A^{-1}$ invertierbar ist und dass $A$ die inverse Matrix
+zu $A^{-1}$ ist, also $(A^{-1})^{-1} = A$.
+\item[(ii)]
+Um nachzuweisen, dass $A_1 \cdot A_2$ invertierbar ist mit inverser Matrix $A_2^{-1} \cdot A_1^{-1}$, ist 
+lediglich nachzurechnen, dass
+\[ (A_1 \cdot A_2)\cdot (A_2^{-1} \cdot A_1^{-1})=E_n \]
+gilt. Mit Hilfe des Assoziativgesetzes erhält man:
+\begin{eqnarray*} 
+(A_1 \cdot A_2)\cdot (A_2^{-1} \cdot A_1^{-1}) &=& 
+\left((A_1 \cdot A_2)\cdot A_2^{-1}\right) \cdot A_1^{-1} \quad \text{Assoziativgesetz}\\
+&=& \left( A_1 \cdot (A_2\cdot A_2^{-1})\right) \cdot A_1^{-1} \quad \text{Assoziativgesetz} \\
+&=&  \left( A_1 \cdot E_n\right) \cdot A_1^{-1} \quad \text{Definition der Inversen }A_2^{-1} \\
+&=&  A_1  \cdot A_1^{-1} \quad \text{Eigenschaft von }E_n \\
+&=& E_n \quad \text{Definition der inversen }A_1^{-1} 
+\end{eqnarray*}
+\end{enumerate}
+\end{showhide}
+\end{proof*}
+
+
+
+\begin{example}
+\begin{incremental}[\initialsteps{1}]
+\step
+Im \lref{ex:inverse-berechnen}{obigen Beispiel} hatten wir die  inversen Matrizen zu
+\[ A = \begin{pmatrix}
+1 & 2 \\ 0& 1 \end{pmatrix} \in M(2;\R) \quad \text{und} \quad  B= \begin{pmatrix}
+3 & 2 \\ -1& 1
+\end{pmatrix} \in M(2;\R) \] 
+berechnet, nämlich
+\[ A^{-1}=\begin{pmatrix}
+1 & -2 \\ 0& 1
+\end{pmatrix} \quad \text{und} \quad  B^{-1}=\begin{pmatrix}
+1/5 & -2/5 \\ 1/5& 3/5
+\end{pmatrix}. \]
+\step
+Weiter ist 
+\[ A\cdot B=\begin{pmatrix}
+1 & 2 \\ 0& 1 \end{pmatrix}\cdot \begin{pmatrix}
+3 & 2 \\ -1& 1
+\end{pmatrix}=\begin{pmatrix}
+1 & 4 \\ -1& 1
+\end{pmatrix} \]
+Die inverse Matrix zu $A\cdot B$ ist 
+$(A\cdot B)^{-1}=\begin{pmatrix}
+1/5 & -4/5 \\ 1/5& 1/5
+\end{pmatrix}$ (vgl. drittes \lref{ex:inverse-berechnen}{Beispiel oben}).
+\step
+Wir können nun direkt verifizieren, dass $(A\cdot B)^{-1}=B^{-1}\cdot A^{-1}$ ist, indem wir
+das Produkt berechnen:
+\[ B^{-1}\cdot A^{-1}= \begin{pmatrix}
+1/5 & -2/5 \\ 1/5& 3/5
+\end{pmatrix}\cdot \begin{pmatrix}
+1 & -2 \\ 0& 1
+\end{pmatrix} = \begin{pmatrix}
+1/5 & -4/5 \\ 1/5& 1/5
+\end{pmatrix}=(A\cdot B)^{-1}.\]
+\step
+Das Produkt $A^{-1}\cdot B^{-1}$ ist hingegen
+\[ A^{-1}\cdot B^{-1} =  \begin{pmatrix}
+1 & -2 \\ 0& 1
+\end{pmatrix} \cdot  \begin{pmatrix}
+1/5 & -2/5 \\ 1/5& 3/5
+\end{pmatrix} = \begin{pmatrix}
+-1/5 & -8/5 \\ 1/5& 3/5
+\end{pmatrix} \neq (A\cdot B)^{-1}.\]
+\end{incremental}
+\end{example}
+
+
+% \begin{example}
+% Im \lref{ex:inverse-berechnen}{obigen Beispiel} hatten wir die inverse Matrix zu
+% $ B= \begin{pmatrix}
+% 3 & 2 \\ -1& 1
+% \end{pmatrix} \in M(2;\R) $ berechnet, nämlich
+% $ B^{-1}=\begin{pmatrix}
+% 1/5 & -2/5 \\ 1/5& 3/5
+% \end{pmatrix}$.
+% Dazu hatten wir die Matrix $(B\,|\,E_2)$ mittels Zeilenumformungen zu $(E_2\,|\,B^{-1})$ umgeformt. Um die Inverse zu 
+% $B^{-1}$ zu bestimmen, starten wir also mit 
+% $(B^{-1}\,|\,E_2)$ und wenden darauf Zeilenumformungen an.
+
+% Wenn man nun genau die oben gemachten Zeilenumformungen rückgängig macht, endet man 
+% aber automatisch bei der Matrix $(E_2\,|\,B)$, da ja lediglich die linken und rechten Seiten vertauscht sind. Also ist $B$ die inverse Matrix zu $B^{-1}$.\\
+% Würde man auf $(B^{-1}\,|\,E_2)$ strikt das Gauß-Verfahren anwenden, würde man natürlich andere Zeilenumformungen machen, die daraus resultierende reduzierte Zeilenstufenform wäre aber dieselbe, wie folgende Rechnung zeigt.
+
+% \begin{eqnarray*}
+% (B^{-1}\,|\, E_2) &=&  \begin{pmatrix}
+% 1/5 & -2/5 &| & 1& 0 \\  1/5 & 3/5 &| & 0 & 1\end{pmatrix}\,\begin{matrix} \phantom{1}\\  /  - \text{(I)} \end{matrix} \\
+% & \rightsquigarrow &  \begin{pmatrix}
+% 1/5 & -2/5 &| & 1 & 0 \\ 0& 1 &| & -1 & 1\end{pmatrix}\,\begin{matrix}\cdot 5 \\   \phantom{1} \end{matrix} \\
+% & \rightsquigarrow &  \begin{pmatrix}
+% 1 & -2 &| & 5 & 0 \\ 0& 1 &| & -1 & 1\end{pmatrix}\,\begin{matrix}  /  +2\cdot \text{(II)} \\ \phantom{1}  \end{matrix} \\
+% & \rightsquigarrow &  \begin{pmatrix}
+% 1 & 0 &| & 3 & 2 \\ 0& 1 &| & -1 & 1\end{pmatrix}.
+% \end{eqnarray*}
+
+% \end{example}
+
+Zuletzt beschäftigen wir uns noch mit Inversen \link{content_44_transponierte_matrix}{transponierter Matrizen}.
+
+\begin{rule}\label{rule:inverse-transpose}
+Sei $A\in M(n;\R)$ und $A^T\in M(n;\R)$ die transponierte Matrix zu $A$.
+
+Die Matrix $A^T$ ist genau dann invertierbar, wenn $A$ invertierbar ist. Ist das der Fall,
+dann gilt
+\[   (A^T)^{-1}=(A^{-1})^T. \] 
+D.h. die inverse Matrix zu $A^T$ ist genau die transponierte Matrix zu $A^{-1}$.
+\end{rule}
+
+\begin{proof*}[Beweis]
+\begin{showhide}
+Da die Ränge von $A$ und $A^T$ gleich sind (siehe 
+\ref[content_44_transponierte_matrix][Abschnitt Zeilenumformungen mit Matrizen und Rang]{sec:zeilenrang-spaltenrang}), hat $A^T$ genau
+dann vollen Rang, wenn $A$ vollen Rang hat, d.h. $A^T$ ist genau dann invertierbar, wenn
+$A$ invertierbar ist.
+
+Ist nun $A$ invertierbar und $A^{-1}$ ihre Inverse, dann gilt nicht nur $A\cdot A^{-1}=E_n$,
+sondern auch $A^{-1}\cdot A=E_n$.
+Mit den\ref[content_44_transponierte_matrix][Rechenregeln für transponierte Matrizen]{sec:rechenregeln} erhalten wir aus der letzten Gleichung
+\[  A^T\cdot (A^{-1})^T=\left(A^{-1}\cdot A \right)^T=E_n^T=E_n. \]
+Also ist $(A^{-1})^T$ die inverse Matrix zu $A^T$.
+\end{showhide}
+\end{proof*}
+%\begin{quickcheckcontainer}
+\begin{quickcheck}
+ 
+      \text{Die Matrix $A=\begin{pmatrix}1&2&3\\0&-1&4\\0&0&1\end{pmatrix}$ hat die Inverse
+      $\begin{pmatrix} 1&2&-11\\0&-1&4\\0&0&1\end{pmatrix}$. Welche der folgenden Matrizen ist die inverse Matrix von $A^T$?}
+      
+      \begin{choices}{unique}
+     
+  
+      \begin{choice}
+        \text{$\begin{pmatrix}1&4&-11\\0&-1&2\\0&0&1\end{pmatrix}$}
+        \solution{false}
+      \end{choice}
+
+      \begin{choice}
+        \text{$\begin{pmatrix}1&0&0\\2&-1&0\\-11&4&1\end{pmatrix}$}
+        \solution{true}
+      \end{choice}
+      \begin{choice}
+        \text{$\begin{pmatrix}1&0&0\\2&-1&0\\3&4&1\end{pmatrix}$}
+        \solution{false}
+      \end{choice}
+\end{choices}
+    
+\end{quickcheck}
+%\end{quickcheckcontainer}
+
+
+
+% Im \link{quadr-matrizen}{letzten Abschnitt} hatten wir schon invertierbare Matrizen definiert,
+% nämlich als solche Matrizen $A\in M(n;\R)$ für die es eine Matrix $B$ mit $A\cdot B=E_n$ gibt.
+% Die Matrix $B$ hatten wir dann \emph{inverse Matrix zu $A$} genannt und mit $A^{-1}$ bezeichnet.
+
+% In diesem Abschnitt werden wir uns näher mit der Invertierbarkeit beschäftigen und unter 
+% anderem angeben, wie man die inverse Matrix $A^{-1}$ bestimmen kann, sofern sie existiert.
+
+% \section{Berechnung der inversen Matrix}\label{sec:berechnung}
+
+% Ist eine quadratische Matrix $A\in M(n;\R)$ gegeben, so wollen wir zum einen bestimmen, ob $A$ invertierbar ist, 
+% und in diesem Fall auch die Einträge der inversen Matrix $A^{-1}$ bestimmen.
+
+% Nimmt man zunächst an, dass $A$ invertierbar ist, und $B$ eine/die Matrix mit $A\cdot B=E_n$ ist,
+% so ist also die erste Spalte von $B$ eine Lösung des LGS
+% \[ A\cdot \begin{pmatrix} x_1\\ x_2\\ \vdots \\ x_n
+% \end{pmatrix} = \begin{pmatrix} 1\\ 0\\  \vdots \\ 0
+% \end{pmatrix},\]
+% die zweite Spalte eine Lösung des LGS
+% \[ A\cdot \begin{pmatrix} x_1\\ x_2\\ \vdots \\ x_n
+% \end{pmatrix} = \begin{pmatrix} 0\\ 1\\  \vdots \\ 0
+% \end{pmatrix},\]
+% etc. und die letzte  Spalte eine Lösung des LGS
+% \[ A\cdot \begin{pmatrix} x_1\\ x_2\\ \vdots \\ x_n
+% \end{pmatrix} = \begin{pmatrix} 0\\  \vdots \\ 0\\ 1
+% \end{pmatrix}.\]
+
+% Um die inverse Matrix $B$ zu bestimmen, muss also das LGS $Ax=v$ mit
+% den rechten Seiten 
+% \[ v= \begin{pmatrix} 1\\ 0\\  \vdots \\ 0
+% \end{pmatrix}, \ldots, v=\begin{pmatrix} 0\\  \vdots \\ 0\\ 1
+% \end{pmatrix}\]
+% gelöst werden.
+
+
+
+% \begin{rule}\label{rule:invertierbarkeit-rang}
+% Um festzustellen, ob eine quadratische Matrix $A\in M(n;\R)$ invertierbar ist, und um gegebenfalls ihre 
+% inverse Matrix $A^{-1}$ zu bestimmen, 
+% bringt man die Matrix $(A\,|\, E_n)$ auf reduzierte Stufenform. 
+
+% Erhält man eine Matrix der Form $(E_n\,|\, B)$, hat also $A$ den Rang $n$, so ist $A$ invertierbar und
+% $B$ ist die eindeutige inverse Matrix zu $A$.
+
+% Erhält man eine andere reduzierte Stufenform, hat also $A$ einen Rang kleiner $n$, so ist $A$ nicht invertierbar.
+% \end{rule}
+
+% \begin{remark}
+% Der Rang einer Matrix gibt also Auskunft darüber, ob die Matrix invertierbar ist oder nicht:\\
+% Hat die Matrix vollen Rang, ist sie invertierbar, hat sie keinen vollen Rang, ist sie nicht invertierbar.
+
+% Im \link{determinante}{nächsten Abschnitt} werden wir ein weiteres Kriterium kennenlernen, um zu entscheiden, ob eine Matrix invertierbar ist, nämlich die sogenannte \emph{Determinante} der Matrix.
+% \end{remark}
+
+
+% \begin{block}[explanation]
+% Durch die Vorüberlegung haben wir schon gesehen, dass die Spalten der inversen Matrix die
+% Lösungen der linearen Gleichungssysteme mit linker Seite $A$ und rechter Seite der Spalten von $E_n$ sind. Die Lösungen lassen sich - wie im \ref[gauss-verfahren][Abschnitt Gauß-Verfahren]{sec:mehrere-rechte-seiten} erklärt - simultan bestimmen, indem man die Matrix
+% $(A\,|\, E_n)$ auf reduzierte Stufenform bringt und dann die entsprechenden LGS löst.
+
+% Allgemein ist nun die reduzierte Stufenform zu $(A\,|\, E_n)$ eine Matrix $(S\,|\, D)$, wobei
+% $S$ tatsächlich in Stufenform ist. Die Anzahl der von $0$ verschiedenen Zeilen von $S$ ist also gleich dem Rang von $A$.
+% Da $D$ aus $E_n$ durch Zeilenumformungen entstanden ist, sind die Ränge beider Matrizen gleich, das heißt, $D$ hat Rang $n$. Insbesondere besitzt $D$ keine Nullzeile.
+
+% Ist nun der Rang von $A$ kleiner als $n$, so ist die letzte Zeile von $S$ gleich $0$, die letzte Zeile von $D$ jedoch nicht, weshalb eines der zu $(S\,|\, D)$ gehörenden Gleichungssysteme
+% nicht lösbar ist. In diesem Fall lassen sich also nicht alle zu $(A\,|\, E_n)$ gehörenden Gleichungssysteme lösen, weshalb es keine Matrix $B$ mit $A\cdot B=E_n$ gibt. D.h. $A$ ist nicht invertierbar.
+
+% Hat $A$ jedoch vollen Rang $n$, so ist  $S=E_n$ und die reduzierte Stufenform zu $(A\,|\, E_n)$ von der Form $(E_n\,|\, D)$,
+% also entsprechend dem Gleichungssystem mit linker Seite $E_n$. Dadurch erhält man als eindeutige Lösungen der entsprechenden 
+% Gleichungssysteme direkt die Spalten von $D$.\\
+% $A$ ist in diesem Fall also invertierbar und $B=D$ ist die eindeutige inverse Matrix zu $A$.
+% \end{block}
+
+% \begin{remark}
+% Aus dieser Bestimmung der inversen Matrix $B$ erhält man auch, dass $B\cdot A=E_n$ ist.\\
+% Wir hatten ja die inverse Matrix $B$ bekommen, indem wir die Matrix $(A\,|\, E_n)$ mittels
+% Zeilenumformungen zu $(E_n\,|\, B)$ umgeformt hatten. Wenn wir alle Umformungen rückgängig machen, kommen
+% wir also von der Matrix $(E_n\,|\, B)$ zur Matrix $(A\,|\, E_n)$. Vertauschen wir die linken und rechten Seiten
+% in der Matrix, heißt dass also, dass man mittels Zeilenumformungen aus der Matrix $(B\,|\, E_n)$ die
+% Matrix $(E_n\,|\, A)$ erhält. Aufgrunddessen wie wir die Inverse berechnen, heißt das also, dass $A$ die inverse 
+% Matrix zu $B$ ist, d.h. dass $B\cdot A=E_n$ gilt.
+% \end{remark}
+
+% \begin{example}\label{ex:inverse-berechnen}
+% \begin{tabs*}
+% \tab{1. Beispiel} Für die Matrix $A = \begin{pmatrix}
+% 1 & 2 \\ 0& 1 \end{pmatrix} \in M(2;\R) $ erhält man direkt
+% \[  {(A\,|\, E_2)}=  \begin{pmatrix}
+% 1 & 2 &| & 1 & 0 \\ 0& 1 &| & 0 & 1\end{pmatrix}\,\begin{matrix}  / - 2\cdot \text{(II)}\\  \phantom{1} \end{matrix} \rightsquigarrow  \begin{pmatrix}
+% 1 & 0 &| & 1 & -2 \\ 0& 1 &| & 0 & 1\end{pmatrix}. \]
+% Also ist $A^{-1}=\begin{pmatrix}
+% 1 & -2 \\ 0& 1
+% \end{pmatrix}$.
+% \tab{2. Beispiel} Für die Matrix $B = \begin{pmatrix}
+% 3 & 2 \\ -1& 1
+% \end{pmatrix} \in M(2;\R) $ berechnet man
+% \begin{eqnarray*}
+% {(B\,|\, E_2)} &=&  \begin{pmatrix}
+% 3 & 2 &| & 1 & 0 \\ -1& 1 &| & 0 & 1\end{pmatrix}\,\begin{matrix} \phantom{1}\\  /  +\frac{1}{3}\cdot \text{(I)} \end{matrix} \\
+% & \rightsquigarrow &  \begin{pmatrix}
+% 3 & 2 &| & 1 & 0 \\ 0& 5/3 &| & 1/3 & 1\end{pmatrix}\,\begin{matrix} /\cdot\frac{1}{3} \\  /  \cdot\frac{3}{5} \end{matrix} \\
+% & \rightsquigarrow &  \begin{pmatrix}
+% 1 & 2/3 &| & 1/3 & 0 \\ 0& 1 &| & 1/5 & 3/5\end{pmatrix}\,\begin{matrix}  /  -\frac{2}{3}\cdot \text{(II)} \\ \phantom{1}  \end{matrix} \\
+% & \rightsquigarrow &  \begin{pmatrix}
+% 1 & 0 &| & 3/15 & -2/5 \\ 0& 1 &| & 1/5 & 3/5\end{pmatrix}.
+% \end{eqnarray*}
+% Also ist $ B^{-1}=\begin{pmatrix}
+% 1/5 & -2/5 \\ 1/5& 3/5
+% \end{pmatrix}$. 
+% \tab{3. Beispiel}
+% Für die Matrix $C = \begin{pmatrix}
+% 1 & 4 \\ -1& 1
+% \end{pmatrix} \in M(2;\R) $ berechnet man
+% \begin{eqnarray*}
+% {(C\,|\, E_2)} &=&  \begin{pmatrix}
+% 1 & 4 &| & 1 & 0 \\ -1& 1 &| & 0 & 1\end{pmatrix}\,\begin{matrix} \phantom{1}\\  /  +\text{(I)} \end{matrix} \\
+% &=&  \begin{pmatrix}
+% 1 & 4 &| & 1 & 0 \\ 0 & 5 &| & 1 & 1\end{pmatrix}\,\begin{matrix} \phantom{1}\\  /  \cdot \frac{1}{5} \end{matrix} \\
+% &=&  \begin{pmatrix}
+% 1 & 4 &| & 1 & 0 \\ 0 & 1 &| & 1/5 & 1/5\end{pmatrix}\,\begin{matrix}/ -4\cdot \text{(II)}\\ \phantom{1} \end{matrix} \\
+% &=&  \begin{pmatrix}
+% 1 & 0 &| & 1/5 & -4/5 \\ 0 & 1 &| & 1/5 & 1/5\end{pmatrix}.
+% \end{eqnarray*}
+% Also ist $ C^{-1}=\begin{pmatrix}
+% 1/5 & -4/5 \\ 1/5& 1/5
+% \end{pmatrix}$. 
+% \end{tabs*}
+% \end{example}
+
+% Aus dem allgemeinen Verfahren lässt sich für $(2\times 2)$-Matrizen die folgende Formel für die
+% inverse Matrix herleiten.
+
+% \begin{rule}\label{rule:inverse-2x2}
+% Eine $(2\times 2)$-Matrix $A= \begin{pmatrix}
+% a & b \\ c& d \end{pmatrix} \in M(2;\R) $ ist genau dann invertierbar, wenn
+% $ad-bc\neq 0$ gilt. In diesem Fall ist die inverse Matrix gegeben durch
+% \[ A^{-1}= \frac{1}{ad-bc}\begin{pmatrix}
+% d & -b \\ -c& a \end{pmatrix}. \]
+% \end{rule}
+
+% \begin{block}[explanation]
+% Wir führen das obige Verfahren im Fall $a\neq 0$ durch:
+% \[
+% {(A\,|\, E_2)} =  \begin{pmatrix}
+% a & b &| & 1 & 0 \\ c& d &| & 0 & 1\end{pmatrix}\,\begin{matrix} \phantom{1}\\  /  -\frac{c}{a}\cdot \text{(I)} \end{matrix} 
+%  \rightsquigarrow   \begin{pmatrix}
+% a & b &| & 1 & 0 \\ 0& (ad-bc)/a &| & -c/a & 1\end{pmatrix} \]
+% Der Rang von $A$ ist also genau dann $2$, wenn $ad-bc\neq 0$ ist. In diesem Fall rechnen wir weiter:
+% \begin{eqnarray*}
+% && \begin{pmatrix}
+% a & b &| & 1 & 0 \\ 0& (ad-bc)/a &| & -c/a & 1\end{pmatrix}\,\begin{matrix}  /  \cdot \frac{1}{a}
+% \\  \cdot \frac{a}{ad-bc} \end{matrix}\\
+% & \rightsquigarrow &  \begin{pmatrix}
+% 1 & b/a &| & 1/a & 0 \\ 0& 1 &| & -c/(ad-bc) & a/(ad-bc)\end{pmatrix}\,\begin{matrix}  /  -\frac{b}{a}\cdot \text{(II)} \\ \phantom{1}  \end{matrix} \\
+% & \rightsquigarrow &  \begin{pmatrix}
+% 1 & 0 &| & \frac{1}{a}+\frac{bc}{a(ad-bc)} & -\frac{b}{ad-bc} \\ 0& 1 &| & -\frac{c}{ad-bc} & \frac{a}{ad-bc}\end{pmatrix}
+% \end{eqnarray*}
+% Also ist die inverse Matrix
+% \begin{eqnarray*} A^{-1} &=&  
+% \begin{pmatrix} \frac{1}{a}+\frac{bc}{a(ad-bc)} & -\frac{b}{ad-bc} \\  -\frac{c}{ad-bc} & \frac{a}{ad-bc}\end{pmatrix}\\
+% &=& \begin{pmatrix} \frac{ad}{a(ad-bc)} & -\frac{b}{ad-bc} \\  -\frac{c}{ad-bc} & \frac{a}{ad-bc}\end{pmatrix}\\
+% &=& \frac{1}{ad-bc}\cdot \begin{pmatrix}d & -b \\ -c& a \end{pmatrix}.
+% \end{eqnarray*}
+
+% Im Fall $a=0$ und $c\neq 0$ führt man das Verfahren entsprechend durch, wobei man im ersten Schritt die Zeilen vertauschen muss.
+
+% Falls $a$ und $c$ beide gleich $0$ sind, ist zum einen der Rang von $A$ kleiner als $2$ und zum anderen $ad-bc=0$. Auch in diesem Fall stimmt also die Behauptung.
+% \end{block}
+
+
+% Auch für spezielle $(n\times n)$-Matrizen lassen sich leichte Regeln für die Invertierbarkeit herleiten.
+
+
+% \begin{rule}
+% \begin{itemize}
+%  \item Eine Diagonalmatrix $A=\text{diag}(a_{11},a_{22}, \cdots, a_{nn}) \in M(n;\R) $ ist genau dann invertierbar,
+%        wenn alle Eintr\"age $a_{ii} \neq 0$ sind f\"ur $1 \leq i \leq n$. In diesem Fall ist die Inverse gegeben durch 
+%        \[
+%        A^{-1}=\text{diag}(\frac{1}{a_{11}},\frac{1}{a_{22}}, \cdots, \frac{1}{a_{nn}}) \in M(n;\R).
+%        \]
+%  \item Eine obere bzw. untere Dreiecksmatrix ist genau dann invertierbar, wenn alle Diagonaleintr\"age ungleich $0$ sind. In diesem 
+%        Fall ist die Inverse wieder eine obere bzw. untere Dreiecksmatrix.
+% \end{itemize}
+% \end{rule}
+
+
+
+% \section{Rechenregeln für inverse Matrizen}\label{sec:rechenregeln}
+
+% Wenn beim Rechnen mit Matrizen mehrere inverse Matrizen auftauchen, ist es gut, gewisse Rechenregeln zu kennen.
+
+% \begin{rule}
+% Sind $A,A_1,A_2\in M(n;\R)$  invertierbare Matrizen, dann gelten:
+% \begin{enumerate}
+% \item $A^{-1}\in M(n;\R)$ ist invertierbar und $(A^{-1})^{-1} = A$.
+% \item $A_1 \cdot A_2$ ist invertierbar und  
+% $(A_1 \cdot A_2)^{-1} = A_2^{-1} \cdot A_1^{-1}$.
+% \end{enumerate}
+% \end{rule}
+
+
+
+% \begin{block}[explanation]
+% Wir hatten gesehen, dass für eine invertierbare Matrix $A$ nicht nur nach Definition der inversen Matrix 
+% $A\cdot A^{-1}=E_n$ ist, sondern auch $A^{-1}\cdot A=E_n$. Letztere
+% Gleichung sagt aber genau aus, dass $A^{-1}$ invertierbar ist und dass $A$ die inverse Matrix
+% zu $A^{-1}$ ist, also $(A^{-1})^{-1} = A$.
+
+% Um nachzuweisen, dass $A_1 \cdot A_2$ invertierbar ist mit inverser Matrix $A_2^{-1} \cdot A_1^{-1}$, ist 
+% lediglich nachzurechnen, dass
+% \[ (A_1 \cdot A_2)\cdot (A_2^{-1} \cdot A_1^{-1})=E_n \]
+% gilt. Mit Hilfe des Assoziativgesetzes erhält man:
+% \begin{eqnarray*} 
+% (A_1 \cdot A_2)\cdot (A_2^{-1} \cdot A_1^{-1}) &=& 
+% \left((A_1 \cdot A_2)\cdot A_2^{-1}\right) \cdot A_1^{-1} \quad \text{Assoziativgesetz}\\
+% &=& \left( A_1 \cdot (A_2\cdot A_2^{-1})\right) \cdot A_1^{-1} \quad \text{Assoziativgesetz} \\
+% &=&  \left( A_1 \cdot E_n\right) \cdot A_1^{-1} \quad \text{Definition der inversen }A_2^{-1} \\
+% &=&  A_1  \cdot A_1^{-1} \quad \text{Eigenschaft von }E_n \\
+% &=& E_n \quad \text{Definition der inversen }A_1^{-1} 
+% \end{eqnarray*}
+% \end{block}
+
+% \begin{block}[warning]
+% Beim Produkt der inversen Matrizen ist die Reihenfolge vertauscht!\\
+% $(A_1 \cdot A_2)^{-1} $ ist also \textbf{nicht} $A_1^{-1}\cdot A_2^{-1}$, sondern
+% \[ (A_1 \cdot A_2)^{-1} = A_2^{-1} \cdot A_1^{-1}.\]
+% \end{block}
+
+% \begin{example}
+% Im \lref{ex:inverse-berechnen}{obigen Beispiel} hatten wir die  inversen Matrizen zu
+% \[ A = \begin{pmatrix}
+% 1 & 2 \\ 0& 1 \end{pmatrix} \in M(2;\R) \quad \text{und} \quad  B= \begin{pmatrix}
+% 3 & 2 \\ -1& 1
+% \end{pmatrix} \in M(2;\R) \] 
+% berechnet, nämlich
+% \[ A^{-1}=\begin{pmatrix}
+% 1 & -2 \\ 0& 1
+% \end{pmatrix} \quad \text{und} \quad  B^{-1}=\begin{pmatrix}
+% 1/5 & -2/5 \\ 1/5& 3/5
+% \end{pmatrix}. \]
+% Weiter ist 
+% \[ A\cdot B=\begin{pmatrix}
+% 1 & 2 \\ 0& 1 \end{pmatrix}\cdot \begin{pmatrix}
+% 3 & 2 \\ -1& 1
+% \end{pmatrix}=\begin{pmatrix}
+% 1 & 4 \\ -1& 1
+% \end{pmatrix} \]
+% Die inverse Matrix zu $A\cdot B$ ist 
+% $(A\cdot B)^{-1}=\begin{pmatrix}
+% 1/5 & -4/5 \\ 1/5& 1/5
+% \end{pmatrix}$ (vgl. drittes \lref{ex:inverse-berechnen}{Beispiel oben}).
+
+% Wir können nun direkt verifizieren, dass $(A\cdot B)^{-1}=B^{-1}\cdot A^{-1}$ ist, indem wir
+% das Produkt berechnen:
+% \[ B^{-1}\cdot A^{-1}= \begin{pmatrix}
+% 1/5 & -2/5 \\ 1/5& 3/5
+% \end{pmatrix}\cdot \begin{pmatrix}
+% 1 & -2 \\ 0& 1
+% \end{pmatrix} = \begin{pmatrix}
+% 1/5 & -4/5 \\ 1/5& 1/5
+% \end{pmatrix}=(A\cdot B)^{-1}.\]
+
+% Das Produkt $A^{-1}\cdot B^{-1}$ wäre hingegen
+% \[ A^{-1}\cdot B^{-1} =  \begin{pmatrix}
+% 1 & -2 \\ 0& 1
+% \end{pmatrix} \cdot  \begin{pmatrix}
+% 1/5 & -2/5 \\ 1/5& 3/5
+% \end{pmatrix} = \begin{pmatrix}
+% -1/5 & -8/5 \\ 1/5& 3/5
+% \end{pmatrix} \neq (A\cdot B)^{-1}.\]
+% \end{example}
+
+
+% \begin{example}
+% Im \lref{ex:inverse-berechnen}{obigen Beispiel} hatten wir die inverse Matrix zu
+% $ B= \begin{pmatrix}
+% 3 & 2 \\ -1& 1
+% \end{pmatrix} \in M(2;\R) $ berechnet, nämlich
+% $ B^{-1}=\begin{pmatrix}
+% 1/5 & -2/5 \\ 1/5& 3/5
+% \end{pmatrix}$.
+% Dazu hatten wir die Matrix $(B\,|\,E_2)$ mittels Zeilenumformungen zu $(E_2\,|\,B^{-1})$ umgeformt. Um die Inverse zu 
+% $B^{-1}$ zu bestimmen, starten wir also mit 
+% $(B^{-1}\,|\,E_2)$ und wenden darauf Zeilenumformungen an.
+
+% Wenn man nun genau die oben gemachten Zeilenumformungen rückgängig macht, endet man 
+% aber automatisch bei der Matrix $(E_2\,|\,B)$, da ja lediglich die linken und rechten Seiten vertauscht sind. Also ist $B$ die inverse Matrix zu $B^{-1}$.\\
+% Würde man auf $(B^{-1}\,|\,E_2)$ strikt das Gauß-Verfahren anwenden, würde man natürlich andere Zeilenumformungen machen, die daraus resultierende reduzierte Zeilenstufenform wäre aber dieselbe, wie folgende Rechnung zeigt.
+
+% \begin{eqnarray*}
+% (B^{-1}\,|\, E_2) &=&  \begin{pmatrix}
+% 1/5 & -2/5 &| & 1& 0 \\  1/5 & 3/5 &| & 0 & 1\end{pmatrix}\,\begin{matrix} \phantom{1}\\  /  - \text{(I)} \end{matrix} \\
+% & \rightsquigarrow &  \begin{pmatrix}
+% 1/5 & -2/5 &| & 1 & 0 \\ 0& 1 &| & -1 & 1\end{pmatrix}\,\begin{matrix}\cdot 5 \\   \phantom{1} \end{matrix} \\
+% & \rightsquigarrow &  \begin{pmatrix}
+% 1 & -2 &| & 5 & 0 \\ 0& 1 &| & -1 & 1\end{pmatrix}\,\begin{matrix}  /  +2\cdot \text{(II)} \\ \phantom{1}  \end{matrix} \\
+% & \rightsquigarrow &  \begin{pmatrix}
+% 1 & 0 &| & 3 & 2 \\ 0& 1 &| & -1 & 1\end{pmatrix}.
+% \end{eqnarray*}
+
+% \end{example}
+
+% Zuletzt beschäftigen wir uns noch mit der \link{transponierte}{transponierten Matrix}.
+
+% \begin{rule}\label{rule:inverse-transpose}
+% Sei $A\in M(n;\R)$ und $A^T\in M(n;\R)$ die transponierte Matrix zu $A$.
+
+% Die Matrix $A^T$ ist genau dann invertierbar, wenn $A$ invertierbar ist. Sind beide invertierbar,
+% dann gilt
+% \[   (A^T)^{-1}=(A^{-1})^T. \] 
+% D.h. die inverse Matrix zu $A^T$ ist genau die transponierte Matrix zu $A^{-1}$.
+% \end{rule}
+
+% \begin{block}[explanation]
+% Da die Ränge von $A$ und $A^T$ gleich sind (siehe \ref[umformungen][Abschnitt Transponierte Matrix und Rang einer Matrix]{sec:zeilenrang-spaltenrang}), hat $A^T$ genau
+% dann vollen Rang, wenn $A$ vollen Rang hat, d.h. $A^T$ ist genau dann invertierbar, wenn
+% $A$ invertierbar ist.
+
+% Ist nun $A$ invertierbar und $A^{-1}$ ihre Inverse, dann gilt nicht nur $A\cdot A^{-1}=E_n$,
+% sondern auch $A^{-1}\cdot A=E_n$.
+% Mit den \ref[transponierte][Rechenregeln für transponierte Matrizen]{sec:rechenregeln} erhalten wir aus der letzten Gleichung
+% \[  A^T\cdot (A^{-1})^T=\left(A^{-1}\cdot A \right)^T=E_n^T=E_n. \]
+% Also ist nach Definition $(A^{-1})^T$ die inverse Matrix zu $A^T$.
+% \end{block}
+
+
+\end{visualizationwrapper}
+
+\end{content}

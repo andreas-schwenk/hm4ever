@@ -1,0 +1,190 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Beschränkte Mengen}
+    \lang{en}{Bounded sets}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_01_zahlenmengen.meta.xml}{content_01_zahlenmengen}
+\end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{2}
+\ombarticle{3}
+
+\lang{de}{\title{Beschränkte Mengen}}
+\lang{en}{\title{Bounded sets}}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9648}{Ticket 9648}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{\lang{de}{Beschränkte Mengen und Schranken}\lang{en}{Bounded sets and bounds}}
+
+
+ \begin{definition}[\lang{de}{obere / untere Schranke}\lang{en}{upper / lower bounds}] \label{def:beschraenkt}
+    \lang{en}{Let $\mathbf{(\K,<)}$ be an ordered field, and $A,B\subseteq\K$ be subsets of $\K$.}
+    \lang{de}{Sei $\mathbf{(\K,<)}$ ein angeordneter Körper und $A\subseteq\K$ Teilmenge von $\K$.}
+
+    \lang{en}{
+    	A number $C\in\K$ is an \emph{\notion{upper bound}} of A if
+    	\[
+    	a\leq C\quad \text{for all }\; a\in A.
+    	\]
+    	If there exists an upper bound of $A$ then $A$ is called \emph{\notion{bounded above}}, otherwise it is called \emph{\notion{unbounded above}}.
+    	
+    	A number $c\in\K$ is a \emph{\notion{lower bound}} of $B$ if
+    	\[
+    	c\leq b\quad \text{for all }\; b\in B.
+    	\]
+    	If there exists a lower bound of $B$ then $B$ is called \emph{\notion{bounded below}}, otherwise it is called \emph{\notion{unbounded below.}}
+      \\\\
+
+      The set $A$ is called \emph{\notion{bounded}} if it is bounded above and below.
+    }
+    \lang{de}{
+    	Eine Zahl $C\in\K$ hei\"st \emph{\notion{obere Schranke}} von $A$, wenn
+    	\[
+    	x\leq C\quad \text{für alle } x\in A.
+    	\]
+    	Wenn zu der Menge $A$ eine obere Schranke existiert, dann hei\"st $A$ \emph{\notion{nach oben beschr\"ankt}}, 
+    	sonst \emph{\notion{nach oben unbeschr\"ankt}}.
+    	\\
+    	
+    	Eine Zahl $c\in\K$ hei\"st \emph{\notion{untere Schranke}} von $A$, wenn
+    	\[
+    	c\leq x\quad \text{für alle } x\in A.
+    	\]
+    	Wenn zu der Menge $A$ eine untere Schranke existiert, dann hei\"st $A$ \emph{\notion{nach unten beschr\"ankt}}, 
+    	sonst \emph{\notion{nach unten unbeschr\"ankt}}.
+    	\\\\
+    	
+    	Die Menge $A$ hei\"st \emph{\notion{beschränkt}}, wenn sie nach oben und unten beschränkt ist. }
+\end{definition}    	
+
+
+\begin{remark}
+\begin{enumerate}
+\item \lang{de}{Betrachtet man die größere der beiden Zahlen $\abs{c}$ und $\abs{C}$, so sieht man sofort, dass $A$ genau dann
+beschränkt ist, wenn es ein $R\in \K$ mit $R>0$ gibt, so dass $\abs{x}\leq R$ für alle $x\in A$. Die leere
+Menge ist trivialerweise beschränkt.}
+\lang{en}{Considering the larger of the two numbers $\abs{c}$ and $\abs{C}$, we immediately see that $A$ is bounded if and only if 
+there is an $R\in \K$ with $R>0$ such that $\abs{x}\leq R$ for all $x\in A$. The empty set is trivially bounded.}
+\item \lang{de}{Im anschaulichen Beispiel der rationalen oder reellen Zahlen auf der Zahlengeraden, ist eine Menge $A$ genau dann 
+nach oben beschränkt, wenn alle Elemente von $A$ links von einer Zahl $C$ liegen, und nach unten beschränkt, wenn 
+alle Elemente von $A$ rechts von einer Zahl $c$ liegen, also im Intervall $(-\infty, C]$ bzw. $[c,\infty)$ bzw. $[c,C]$. }
+\lang{en}{In the example of the rational or real numbers on the number line, a set $A$ is bounded above if and only if all 
+elements of $A$ lie to the left of some number $C$, and it is bounded below if and only if all elements of $A$ lie to the right of 
+some number $c$. Thus all elements of $A$ must lie in the interval $(-\infty, C]$, respectively $[c,\infty)$, respectively $[c,C]$ 
+if it is bounded above and below. }
+\end{enumerate}
+\end{remark}
+
+\begin{example}
+\lang{de}{Im Folgenden betrachten wir Teilmengen der rationalen Zahlen, also $\K=\Q$.}
+\lang{en}{In the following we consider subsets of the rational numbers, so $\K=\Q$.}
+\begin{enumerate}
+\item \lang{de}{$\N$ ist nach unten beschränkt, da z.B. $c=1$, $c=\frac{1}{2}$ oder $c=0$ untere Schranken sind.
+$\N$ ist jedoch nicht nach oben beschränkt, da jede positive rationale Zahl $\frac{p}{q}$ mit $p,q\in\N$ kleiner als die
+natürliche Zahl $p+1$ ist. Damit existiert aber auch schon für jede mögliche obere Schranke eine größere natürliche Zahl.}
+\lang{en}{$\N$ is bounded below, since for example $c=1$, $c=\frac{1}{2}$ or $c=0$ are lower bounds. $\N$ is, however, not bounded above, 
+since every positive rational number $\frac{p}{q}$ with $p,q\in\N$ is smaller than the natural number $p+1$. Thus for every potential upper 
+bound, there exists a greater natural number.}
+\item \lang{de}{Jede endliche nichtleere Teilmenge $A\subseteq \Q$ ist beschränkt. Als untere Schranke kann man das 
+kleinste Element von $A$ wählen und als obere Schranke das größte Element.}
+\lang{en}{Every finite non-empty subset $A\subseteq \Q$ is bounded. As a lower bound one can take the smallest element of $A$, 
+and as an upper bound one can take the largest element.}
+\item \lang{de}{$A=\{\frac{1}{n} \in \Q | n\in \N \}$ ist beschränkt. Eine obere Schranke ist zum Beispiel $1$ und eine
+untere ist $0$.}
+\lang{en}{$A=\{\frac{1}{n} \in \Q | n\in \N \}$ is bounded. For example, an upper bound is $1$ and a lower bound is $0$.}
+\item \lang{de}{$A=\{x \in \Q | x^2<2\}$ ist beschränkt. Zum Beispiel ist $2$ eine obere und $-2$ eine untere
+Schranke von $A$, da für alle $x\in A$ gilt: $-2<-\sqrt{2}<x<\sqrt{2}<2$ . Hier ist zu beachten, dass wir nicht $\sqrt{2}$ als obere Schranke 
+wählen dürfen, da \ref[content_01_zahlenmengen][$\sqrt{2} \not\in \Q$]{proof:sqrt2}.}
+\lang{en}{$A=\{x \in \Q | x^2<2\}$ is bounded. For example $2$ is an upper bound and $-2$ is a lower bound of $A$, since for all $x\in A$ we 
+have $-2<-\sqrt{2}<x<\sqrt{2}<2$. Note that we cannot choose $\sqrt{2}$ as an upper bound, since \ref[content_01_zahlenmengen][$\sqrt{2} \not\in \Q$]{proof:sqrt2}.}
+
+\end{enumerate}
+\end{example}
+
+\section{\lang{de}{Maximum und Minimum}\lang{en}{Maximum and mimimum}}
+
+\begin{definition}[Maximum / Minimum]\label{def:min_max}
+\lang{de}{Sei $A\subset \K$ und $(\K,<)$ ein angeordneter Körper.\\ Besitzt $A$ ein größtes Element, d.h. ein Element $M\in A$ so, dass
+$M\geq x$ für alle $x\in A$ gilt, so nennt man $M$ das \emph{\notion{Maximum}} von $A$, kurz $M=\max(A)$.
+
+Besitzt $A$ ein kleinstes Element, d.h. ein Element $m\in A$ so, dass
+$m\leq x$ für alle $x\in A$ gilt, so nennt man $m$ das \emph{\notion{Minimum}} von $A$, kurz $m=\min(A)$.}
+\lang{en}{Let $A\subset \K$ and $(\K,<)$ be an ordered field.\\ If $A$ contains a greatest element, i.e. an element $m\in A$ such that 
+$M\geq x$ for all $x\in A$, then we call $M$ the \emph{\notion{Maximum}} of $A$, abbreviated8 to $M=\max(A)$.
+
+If $A$ contains a smallest element, i.e. an element $m\in A$ such that 
+$M\leq x$ for all $x\in A$, then we call $M$ the \emph{\notion{Minimum}} of $A$, abbreviated to $m=\min(A)$.}
+\end{definition}
+
+\begin{remark}\label{rem:max-min}
+\lang{de}{Maxima und Minima von Teilmengen müssen nicht existieren, selbst wenn die Mengen nach oben oder nach
+unten beschränkt sind, wie in den folgenden Beispielen \ref{ex:maxmin} zu sehen ist.
+
+Besitzt eine Teilmenge $A$ jedoch ein Maximum $M=\max(A)$, so ist $A$ nach oben beschränkt und man kann als
+obere Schranke $M$ wählen. 
+
+Genauso gilt, dass eine Teilmenge $A$ nach unten beschränkt ist, wenn sie ein Minimum $m=\min(A)$
+besitzt, und man kann als untere Schranke $m$ wählen.}
+\lang{en}{Maxima and minima of subsets need not exist, even when the set is bounded above or below, 
+as can be seen in the following examples \ref{ex:maxmin}.
+
+However, if a subset $A$ has a maximum $M=\max(A)$, then $A$ is bounded above, and one can take $M$ as an upper bound.
+
+Likewise, a subset $A$ is bounded below if it has a mimimum $m=\min(A)$, and one can take $m$ as a lower bound.}
+
+\end{remark}
+
+
+\begin{example} \label{ex:maxmin}
+\begin{enumerate}
+\item \lang{de}{$\N$ besitzt das Minimum $1$, aber kein Maximum.}
+\lang{en}{$\N$ has $1$ as its mimimum, but it has no maximum.}
+\item \lang{de}{Jede endliche nichtleere Teilmenge $A\subseteq \Q$ besitzt als Minimum das kleinste der endlich 
+vielen Elemente und als Maximum das größte.}
+\lang{en}{Every finite non-empty subset $A\subseteq \Q$ has the smallest of the finitely many elements as the mimimum, and the largest as the maximum.}
+\item \lang{de}{Die Menge $A=\{\frac{1}{n} \in \Q | n\in \N \}$ besitzt zwar ein Maximum, nämlich $1$, aber kein Minimum.}
+\lang{en}{The set $A=\{\frac{1}{n} \in \Q | n\in \N \}$ has a maximum, namely $1$, but no mimimum.}
+\item \lang{de}{Die Menge $A=\{x \in \Q | x^2<2\}$ ist zwar beschränkt, besitzt aber weder ein Maximum noch ein Minimum.}
+\lang{en}{The set $A=\{x \in \Q | x^2<2\}$ is bounded, but has neither a maximum nor a minimum.}
+  \begin{showhide}[\buttonlabels{\lang{de}{Zeige Begründung }\lang{en}{Show proof}}{\lang{de}{Verstecke Begründung}\lang{en}{Hide proof}}]
+  \lang{de}{Da für jede rationale Zahl $x\in \Q$ genau dann $x\in A$ ist, wenn $-x$ in $A$ ist, ist $m\in A$ genau dann
+  ein Minimum von $A$, wenn $-m$ ein Maximum von $A$ ist. Es reicht also, herauszufinden, dass $A$ kein Maximum
+  besitzt.
+  Eine kleine Rechnung zeigt nun, dass für jede positive rationale Zahl $q$ in $A$, deren Quadrat 
+  also kleiner als $2$ ist, die Zahl $\frac{4q}{q^2+2}\, (\in \Q)$ größer als $q$ ist und in $A$ liegt, weshalb es keine
+  größte Zahl in $A$ gibt.}
+  \lang{en}{Since for every rational number $x\in \Q$ we have $x\in A$ if and only $-x\in A$, we therefore have that 
+  $m\in A$ is a mimimum of $A$ if and only if $-m$ is a maximum of $A$. It therefore suffices to check that $A$ has no maximum. 
+  A quick calculation shows that for every rational number $q$ in $A$ whose square is smaller than $2$, the number $\frac{4q}{q^2+2}\, (\in \Q)$ 
+  is greater than $q$ and also lies in $A$. Thus no greatest number exists in $A$.}
+  \end{showhide}
+\end{enumerate}
+\end{example}
+
+
+
+\end{content}

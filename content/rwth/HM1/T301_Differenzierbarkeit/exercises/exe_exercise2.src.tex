@@ -1,0 +1,152 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü02: Differenzierbarkeit}
+    \lang{en}{Exercise 2}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+
+\title{\lang{de}{Ü02: Differenzierbarkeit}}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10275}{Ticket 10275}
+\end{block}
+
+%######################################################FRAGE_TEXT
+\lang{de}{ 
+\textbf{a)} Ist die Funktion $f:\R\to \R$ mit
+$f(x)=\begin{cases}x^2-x, & \text{für }x<1\\ \ln(x), & \text{für }x\geq 1 \end{cases}$\\
+an der Stelle $x_0=1$ differenzierbar?\\
+
+\textbf{b)} Ist die Funktion $g:\R\to\R$ mit $g(x)=|e^x-e^{-x}|$ differenzierbar?\\
+\textbf{c)} Für welche Kombination von Parametern $c$ und $a$ ist der Funktionsgraph zur Funktion
+$f: \R \to \R$ ,
+$f(x) = \begin{cases} c \cdot x^2, & \text{für} x < 2\\ \frac{1}{2} \cdot x + a, & \text{für} \geq 2 \end{cases}$\\
+glatt, d. h. auch bei $x = 2$ ohne Knick?
+ }
+
+%##################################################ANTWORTEN_TEXT
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung a)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   Um zu sehen, ob $f$ bei $x_0$ differenzierbar ist, müssen wir untersuchen, ob der Grenzwert
+\[ \lim_{x\to x_0} \frac{f(x)-f(x_0)}{x-x_0} \]
+existiert.    }
+  	 %------------------------------------END_STEP_X
+  	 
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   Da $f$ links und rechts von der Stelle durch verschiedene Vorschriften gegeben ist, betrachten wir
+zunächst den linksseitigen Grenzwert
+\[ \lim_{x\nearrow x_0} \frac{f(x)-f(x_0)}{x-x_0} \]
+und den rechtsseitigen Grenzwert
+\[ \lim_{x\searrow x_0} \frac{f(x)-f(x_0)}{x-x_0} \]
+getrennt.
+   }
+  	 %------------------------------------END_STEP_X
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   Für den linksseitigen Grenzwert gilt wegen $f(x_0)=\ln(1)=0$ und $f(x)=x^2-x$ für $x<1$:
+\[ \lim_{x\nearrow x_0} \frac{f(x)-f(x_0)}{x-x_0} =\lim_{x\nearrow 1} \frac{x^2-x-0}{x-1}
+ =\lim_{x\nearrow 1} \frac{x(x-1)}{x-1}=\lim_{x\nearrow 1} x =1.
+ \]  }
+  	 %------------------------------------END_STEP_X
+ 
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{      Für den rechtsseitigen Grenzwert gilt wegen $f(x_0)=\ln(1)=0$ und $f(x)=\ln(x)$ für $x>1$:
+\[ \lim_{x\searrow x_0} \frac{f(x)-f(x_0)}{x-x_0} =\lim_{x\searrow 1} \frac{\ln(x)-\ln(1)}{x-1} =
+\ln'(1)=\frac{1}{1}=1. \]}
+  	 %------------------------------------END_STEP_X
+  	 
+  	 
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   
+Da beide Grenzwerte existieren und gleich sind, ist $f$ in $x_0=1$ differenzierbar und $f'(1)=1$.}
+  	 %------------------------------------END_STEP_X
+  	 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+  
+  
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung b)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{  
+Für $x>0$ ist $e^x>1>e^{-x}$ und daher ist $g(x)=e^x-e^{-x}$ für alle $x>0$. 
+Als Zusammensetzung differenzierbarer Funktionen ist $g$ dann für alle $x>0$ differenzierbar.}
+  	 %------------------------------------END_STEP_X
+  	 
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{ 
+Für $x<0$ ist $e^x<1<e^{-x}$ und daher ist $g(x)=e^{-x}-e^x$ für alle $x<0$. 
+Als Zusammensetzung differenzierbarer Funktionen ist $g$ dann für alle $x<0$ differenzierbar.}
+  	 %------------------------------------END_STEP_X
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{ 
+An der Stelle $x_0=0$ gilt $g(0)=e^0-e^0=0$, und wir betrachten den links- und den rechtsseitigen
+Grenzwert wieder gesondert.}
+  	 %------------------------------------END_STEP_X
+ 
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{    
+Für den linksseitigen Grenzwert gilt:
+\[ \lim_{x\nearrow x_0} \frac{g(x)-g(x_0)}{x-x_0} =\lim_{x\nearrow x_0} \frac{e^{-x}-e^x-(e^0-e^0)}{x-x_0}, \]
+also die Ableitung der Funktion $g_1(x)=e^{-x}-e^x$ an der Stelle $0$.
+Mit den Ableitungsregeln ist $g_1'(x)=-e^{-x}-e^x$ für alle $x\in \R$ und daher $g_1'(0)=-e^0-e^0=-2$.}
+  	 %------------------------------------END_STEP_X
+  	 
+  	 
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{ Für den rechtsseitigen Grenzwert gilt entsprechend
+\[ \lim_{x\nearrow x_0} \frac{g(x)-g(x_0)}{x-x_0} =\lim_{x\nearrow x_0} \frac{e^x-e^{-x}-(e^0-e^0)}{x-x_0}, \]
+also die Ableitung der Funktion $g_2(x)=e^x-e^{-x}$ an der Stelle $0$.
+Mit den Ableitungsregeln ist $g_2'(x)=e^x-(-1)\cdot e^{-x}=e^x+e^{-x}$ für alle $x\in \R$ und daher $g_2'(0)=e^0+e^0=2$.}
+  	 %------------------------------------END_STEP_X
+  	 
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{ Da die beiden Grenzwerte verschieden sind, existiert der Grenzwert
+\[ \lim_{x\to x_0} \frac{g(x)-g(x_0)}{x-x_0} \]
+also nicht, weshalb $g$ an der Stelle $x_0=0$ nicht differenzierbar ist.}
+  	 %------------------------------------END_STEP_X
+  	 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+
+%#############################################################ENDE
+
+  \tab{\lang{de}{Lösungsvideo c)}}
+  \youtubevideo[500][300]{Klq3BUoDC9k}\\
+
+\end{tabs*}
+\end{content}

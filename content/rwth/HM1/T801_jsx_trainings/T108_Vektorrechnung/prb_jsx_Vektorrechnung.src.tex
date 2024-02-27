@@ -1,0 +1,193 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{}
+    \lang{de}{Grafische Bestimmung von Vektorsummen}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+  \begin{taxonomy}
+  \end{taxonomy}
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/32492}{Ticket 32492}
+\end{block}
+\begin{block}[annotation]
+Copy of : /home/mumie/checkin/content/playground/HM4mint-Testaufgaben/T108_Vektorrechnung/prb_jsx_Vektorrechnung.src.tex
+\end{block}
+
+\begin{block}[annotation]
+(B. Guyet)\\
+Copy of : /home/mumie/checkin/content/playground/BarbaraGuyet/JSX-Aufgaben/prb_jsx_Vektorrechnung01.src.tex
+\end{block}
+
+
+\begin{block}[annotation]
+ Bestimmung des Mittelpunkts und der Verlängerung einer Strecke mittels Vektorrechnung
+\end{block}
+
+\usepackage{mumie.genericproblem}
+\lang{de}{
+\title{Vektorrechnung zur Bestimmung des Mittelpunkts einer Strecke}
+}
+
+\begin{visualizationwrapper}
+
+
+\begin{genericJSXVisualization}
+	\begin{variables}
+       % variables fetched from question 1
+        \question{1}{a}{rational}
+        \question{1}{b}{rational}
+        \question{1}{c}{rational}
+        \question{1}{d}{rational}
+
+       % 
+        \point{P}{rational}{a,b}
+        \point{Q}{rational}{c,d}
+        \vector{vp}{rational}{var(P)}
+        \vector{vq}{rational}{var(Q)}
+%        \affine{vpq}{rational}{var(P),var(Q)}
+        \segment{vpq}{real}{var(P),var(Q)}
+        
+      % bewegliche Vektoren zum Rechnen
+        \point[editable]{A1}{rational}{-5,-6}
+        \point[editable]{A2}{rational}{-4,-5}
+        \point[editable]{B1}{rational}{-6,-6}
+        \point[editable]{B2}{rational}{-5,-5}
+        \affine[editable]{va}{rational}{var(A1),var(A2)}
+        \affine[editable]{vb}{rational}{var(B1),var(B2)}
+
+       % Ergebnis-Vektoren
+        \point[editable]{M}{rational}{-1,2}
+        \vector[editable]{vm}{rational}{var(M)}
+        \number{mx}{rational}{M[x]}
+        \number{my}{rational}{M[y]}
+        \point[editable]{S}{rational}{-2,1}
+        \vector[editable]{vs}{rational}{var(S)}
+        \number{sx}{rational}{S[x]}
+        \number{sy}{rational}{S[y]}
+
+	\end{variables}
+
+\label{P0}{P0}
+\label{Q0}{Q0}
+\label{P}{P}
+\label{Q}{Q}
+%\label{vp}{v}
+%\label{vq}{w}
+\color{P}{BLUE}
+\color{Q}{BLUE}
+\color[0.7]{vp}{BLUE}
+\color[0.7]{vq}{BLUE}
+
+\color[0.7]{A1}{GREEN}
+\color[0.7]{A2}{GREEN}
+\color[0.7]{B1}{GREEN}
+\color[0.7]{B2}{GREEN}
+\color[0.7]{va}{GREEN}
+\color[0.7]{vb}{GREEN}
+
+% Ergebnis-Vektoren
+\label{M}{M}
+%\label{vm}{m}
+\color{M}{RED}
+\color[0.7]{vm}{RED}
+\answer{mx}{1,1}  % mx is used as solution for question 1, answer 1
+\answer{my}{1,2}  % my is used as solution for question 1, answer 2
+\label{S}{S}
+%\label{vs}{s}
+\color{S}{RED}
+\color[0.7]{vs}{RED}
+\answer{sx}{1,3}  % sx is used as solution for question 1, answer 3
+\answer{sy}{1,4}  % sy is used as solution for question 1, answer 4
+
+	\begin{canvas}
+        \snapToGrid{0.25,0.25}
+        \plotSize{400,400}
+        \plotLeft{-6.5}
+        \plotRight{6.5}
+        \plotTop{6.5}
+        \plotBottom{-6.5}
+        \plot[coordinateSystem]{vpq,vp,vq,P,Q,A1,A2,B1,B2,va,vb,M,vm,S,vs}
+	\end{canvas}
+
+\end{genericJSXVisualization}
+
+\end{visualizationwrapper}
+
+     \begin{problem} 
+
+          \begin{question}
+          \correctorprecision{2}
+          \field{rational}
+          \begin{variables}
+               \randint{a}{-5}{5}
+               \randint{b}{-4}{1}
+               \randint{c}{-5}{5}
+               \randint{d}{-1}{4}
+               \randadjustIf{a,c,d}{a=c OR b=d OR |a|+|b|<2 OR |c|+|d|<2 OR |b+d|+|a+c|<4 OR |b-d|+|a-c|<4 OR |b*c-a*d|<2}
+               \function{mx}{1/2*(a+c)}  % mx=px+1/2(qx-px)
+               \function{my}{1/2*(b+d)}  % my=py+1/2(qy-py)
+               \function{sx}{mx+c-a}     % sx=px+3/2(qx-px)=mx+(qx-px)
+               \function{sy}{my+d-b}     % sy=py+3/2(qy-py)=my+(qy-py)
+          \end{variables}
+
+               \text{Gegeben seien die Punkte $P=(\var{a};\var{b})$ und $Q=(\var{c};\var{d})$. 
+                     Bestimmen Sie grafisch den Punkt $M$, der die Strecke $\bar{PQ}$ halbiert. 
+                     Bestimmen Sie anschließend den Punkt $S$ so, dass die Strecke $\bar{PS}$ 
+                     durch die Punkte $M$ und $Q$ jeweils gedrittelt wird. \\\\
+                    \textit{Tipp: Nutzen Sie die Regeln der Vektorrechnung und verwenden Sie als
+                    Hilfsmittel die grünen Verktoren, die in Lage, Länge und Richtung beliebig 
+                    veränderbar sind.}
+                    }
+%    
+%\debug[a,b,c,d,mx,my,sx,sy]
+% 
+          \begin{answer}
+            \type{graphics.number}
+            \solution{mx}
+          \end{answer}
+          \begin{answer}
+            \type{graphics.number}
+            \solution{my}
+          \end{answer}
+          \begin{answer}
+            \type{graphics.number}
+            \solution{sx}
+          \end{answer}
+          \begin{answer}
+            \type{graphics.number}
+            \solution{sy}
+          \end{answer}
+
+          \explanation[Not [edited]]{Ziehen Sie die roten Punkts $M$ und $S$ jeweils an die grafisch 
+                bestimmte Position im Koordinatensystem.}
+          \explanation[edited AND [ans_1 != mx OR ans_2 != my]]{Bilden Sie zur Bestimmung von $M$ 
+                die Summe $\vec{OP} + \vec{OQ}$. Verwenden Sie die grünen Hilfsvektoren, um 
+                die Vektoraddition grafisch darzustellen. Es entsteht ein Parallelogramm mit dem  
+                Summenvektor und der Strecke $\bar{PQ}$ als Diagonalen, die einander bekanntermaßen halbieren.}
+          \explanation[edited AND equal(mx,ans_1) AND  equal(my,ans_2) AND[ans_3 != sx OR ans_4 != sy]]{Den
+                Punkt $S$ erreichen Sie grafisch zum Beispiel über die Summe $\vec{OM} + \vec{PQ}$ oder über
+                die Summe $\vec{OP} + \vec{PQ} + \vec{PM}$. Verwenden Sie die grünen Hilfsvektoren, 
+                um die Vektoraddition grafisch darzustellen.}
+    \end{question}
+   \end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

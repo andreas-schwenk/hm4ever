@@ -1,0 +1,267 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Training 4}
+    \lang{de}{A04: Normen}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24113}{Ticket 24113}
+\end{block}
+
+\usepackage{mumie.genericproblem}
+\title{
+    \lang{en}{Training 4}
+    \lang{de}{A04: Normen}
+  }
+  
+  
+  \begin{problem}
+
+
+
+\begin{question} 
+     \type{input.generic}
+     \field{real}
+
+    \begin{variables}
+    \randint[Z]{v11}{-8}{8}
+    \randint[Z]{v12}{-8}{8}
+    \begin{switch}
+       \begin{case}{v11>=v12}
+        \function{max}{v11}
+      \end{case}
+      \begin{default}
+        \function{max}{v12}
+      \end{default}
+    \end{switch}
+    \function[calculate]{v11a}{abs(v11)}
+    \function[calculate]{v12a}{abs(v12)}
+    \begin{switch}
+        \begin{case}{v11a>=v12a}
+          \function{maxv1}{v11a}
+        \end{case}
+        \begin{default}
+          \function{maxv1}{v12a}
+        \end{default}
+    \end{switch}
+    \function[calculate]{v1-1n}{abs(v11)+abs(v12)}
+    \function[calculate]{v1-2n}{sqrt((v11)*(v11)+(v12)*(v12))}
+    
+    
+    \randint[Z]{v21}{-6}{6}
+    \randint[Z]{v22}{-8}{8}
+    \randint[Z]{v23}{-8}{8}
+    \function[calculate]{v21a}{abs(v21)}
+    \function[calculate]{v22a}{abs(v22)}
+    \function[calculate]{v23a}{abs(v23)}
+    \begin{switch}
+        \begin{case}{v21a>=v22a}
+          \function{max1v2}{v21a}
+        \end{case}
+        \begin{default}
+          \function{max1v2}{v22a}
+        \end{default}
+    \end{switch}
+    \function[calculate]{v}{max1v2}
+    \begin{switch}
+        \begin{case}{v>=v23a}
+          \function{maxv2}{v}
+        \end{case}
+        \begin{default}
+          \function{maxv2}{v23a}
+        \end{default}
+    \end{switch}
+    \function[calculate]{v2-1n}{abs(v21)+abs(v22)+abs(v23)}
+    \function[calculate]{v2-2n}{sqrt((v21)*(v21)+(v22)*(v22)+(v23)*(v23))}
+    
+    
+    \randint[Z]{a11}{-8}{12}
+    \randint[Z]{a12}{-12}{0}
+    \randint[Z]{a21}{-15}{6}
+    \randint[Z]{a22}{-12}{8}
+    \function[calculate]{a1j}{abs(a11)+abs(a12)}
+    \function[calculate]{a2j}{abs(a21)+abs(a22)}
+    \begin{switch}
+        \begin{case}{a1j>=a2j}
+          \function{ainfn}{a1j}
+        \end{case}
+        \begin{default}
+          \function{ainfn}{a2j}
+        \end{default}
+    \end{switch}
+    \function[calculate]{ai1}{abs(a11)+abs(a21)}
+    \function[calculate]{ai2}{abs(a12)+abs(a22)}
+    \begin{switch}
+        \begin{case}{ai1>=ai2}
+          \function{a1n}{ai1}
+        \end{case}
+        \begin{default}
+          \function{a1n}{ai2}
+        \end{default}
+    \end{switch}
+    
+    
+    \randint[Z]{b11}{-8}{12}
+    \randint[Z]{b12}{-8}{8}
+    \randint[Z]{b13}{-15}{8}
+    \randint[Z]{b21}{-12}{0}
+    \randint[Z]{b22}{-8}{8}
+    \randint[Z]{b23}{-8}{8}
+    \randint[Z]{b31}{-8}{12}
+    \randint[Z]{b32}{-12}{8}
+    \randint[Z]{b33}{-8}{8}
+    \function[calculate]{b1j}{abs(b11)+abs(b12)+abs(b13)}
+    \function[calculate]{b2j}{abs(b21)+abs(b22)+abs(b23)}
+    \function[calculate]{b3j}{abs(b31)+abs(b32)+abs(b33)}
+    \begin{switch}
+        \begin{case}{b1j>=b2j}
+          \function{binfn1}{b1j}
+        \end{case}
+        \begin{default}
+          \function{binfn1}{b2j}
+        \end{default}
+    \end{switch}
+    \function[calculate]{b1}{binfn1}
+    \begin{switch}
+        \begin{case}{b1>=b3j}
+          \function{binfn}{b1}
+        \end{case}
+        \begin{default}
+          \function{binfn}{b3j}
+        \end{default}
+    \end{switch}
+    \function[calculate]{bi1}{abs(b11)+abs(b21)+abs(b31)}
+    \function[calculate]{bi2}{abs(b12)+abs(b22)+abs(b32)}
+    \function[calculate]{bi3}{abs(b13)+abs(b23)+abs(b33)}
+    \begin{switch}
+        \begin{case}{bi1>=bi2}
+          \function{b1n1}{bi1}
+        \end{case}
+        \begin{default}
+          \function{b1n1}{bi2}
+        \end{default}
+    \end{switch}
+    \function[calculate]{b2}{b1n1}
+    \begin{switch}
+        \begin{case}{b2>=bi3}
+          \function{b1n}{b2}
+        \end{case}
+        \begin{default}
+          \function{b1n}{bi3}
+        \end{default}
+    \end{switch}
+    
+    \end{variables}
+     
+    \lang{de}{\text{Berechnen Sie für die folgenden Vektoren und Matrizen die angegebenen Normen.\\
+    $v_1 :=\begin{pmatrix}\var{v11}\\\var{v12}\end{pmatrix}$, $v_2 :=\begin{pmatrix}\var{v21}\\\var{v22}\\ \var{v23} \end{pmatrix}$,
+    $A:=\begin{pmatrix}
+    \var{a11} & \var{a12} \\
+    \var{a21} & \var{a22} 
+    \end{pmatrix}$ und $B:=\begin{pmatrix}
+    \var{b11} & \var{b12} & \var{b13} \\
+    \var{b21} & \var{b22} & \var{b23}\\
+    \var{b31} & \var{b32} & \var{b33}
+    \end{pmatrix}$ .}}
+    
+    \begin{answer}
+    \type{input.number}
+    \text{$\Vert v_1\Vert_{\infty}$=}
+    \solution{maxv1}
+    \explanation{$\Vert v_1\Vert_\infty=\max_{1\leq i\leq 2}\vert v_{1i}\vert
+    =max\{\vert v_{11}\vert;\vert v_{12}\vert\}$.}
+    \end{answer}
+    
+    \begin{answer}
+    \type{input.number}
+    \text{$\Vert v_1\Vert_{1}$=}
+    \solution{v1-1n}
+    \explanation{$\Vert v_1\Vert_1=\sum_{i=1}^2\vert v_{1i}\vert=\vert v_{11}\vert+\vert v_{12}\vert$.}
+    \end{answer}
+    
+    \begin{answer}
+    \type{input.number}
+    \text{$\Vert v_1\Vert_{2}$=}
+    \solution{v1-2n}
+    \explanation{${\Vert v_1 \Vert_2}=\sqrt{v_{11}^2+v_{12}^2}$.}
+    \end{answer}
+    
+    \begin{answer}
+    \type{input.number}
+    \text{$\Vert v_2\Vert_{\infty}$=}
+    \solution{maxv2}
+    \explanation{$\Vert v_2\Vert_\infty=\max_{1\leq i\leq 3}\vert v_{1i}\vert$.}
+    \end{answer}
+    
+    \begin{answer}
+    \type{input.number}
+    \text{$\Vert v_2\Vert_{1}$=}
+    \solution{v2-1n}
+    \explanation{$\Vert v_2\Vert_1=\sum_{i=1}^3\vert v_{2i}\vert$.}
+    \end{answer}
+    
+    \begin{answer}
+    \type{input.number}
+    \text{$\Vert v_2\Vert_{2}$=}
+    \solution{v2-2n}
+    \explanation{${\Vert v_2 \Vert_2}=\sqrt{v_{21}^2+v_{22}^2+v_{23}^2}$.}
+    \end{answer}
+    
+    \begin{answer}
+    \type{input.number}
+    \text{$\Vert A\Vert_{\infty}$=}
+    \solution{ainfn}
+    \explanation{$\Vert A\Vert_{\infty}=\max_{i=1,2}{\sum_{j=1}^{2}\vert a_{ij}\vert}
+    =\max\{\vert a_{11}\vert+\vert a_{12}\vert;\vert a_{21}\vert+\vert a_{22}\vert\}.$}
+    \end{answer}
+    
+    \begin{answer}
+    \type{input.number}
+    \text{$\Vert A\Vert_{1}$=}
+    \solution{a1n}
+    \explanation{$\Vert A\Vert_{1}=\max_{j=1,2}{\sum_{i=1}^{2}\vert a_{ij}\vert}
+    =\max\{\vert a_{11}\vert+\vert a_{21}\vert;\vert a_{12}\vert+\vert a_{22}\vert\}.$}
+    \end{answer}
+    
+    \begin{answer}
+    \type{input.number}
+    \text{$\Vert B\Vert_{\infty}$=}
+    \solution{binfn}
+    \explanation{}
+    \end{answer}
+    
+    \begin{answer}
+    \type{input.number}
+    \text{$\Vert B\Vert_{1}$=}
+    \solution{b1n}
+    \explanation{}
+    \end{answer}
+    
+
+
+ 
+\end{question}    
+
+\end{problem}
+\embedmathlet{gwtmathlet}
+
+\end{content}

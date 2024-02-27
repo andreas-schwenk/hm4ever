@@ -1,0 +1,202 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü01: Taylor}
+    \lang{en}{Exercise 1}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Ü01: Taylor}}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10405}{Ticket 10405}
+\end{block}
+
+%######################################################FRAGE_TEXT
+\lang{de}{1) Bestimmen Sie das Taylorpolynom  $4$-ter Ordnung zu der Funktion 
+$f:\R\setminus\{0\}\to\R$, $f(x)=\frac{1}{x}$, an den Stellen
+\begin{enumerate}
+\item[a)] $x_0=1$,
+\item[b)] $x_0=2$,
+\item[c)] $x_0=-1$.
+\end{enumerate}\\ }
+
+\lang{de}{2) 
+\begin{enumerate}
+\item[a)] Bestimmen Sie das 3-te Taylorpolynom in $0$ von $f(x)=e^x\,\sin(x)$.
+\item[b)] Bestimmen Sie das 3-te Taylorpolynom in $1$ von $f(x)=x^3-2x$.
+\item[c)] Bestimmen Sie das 3-te Taylorpolynom in $0$ von $f(x)=\text{arcsin}(x)$.\\
+          Hinweis: $[\text{arcsin}(x)]'=\frac{1}{\sqrt{1-x^2}}$
+\end{enumerate}\\ }
+
+%##################################################ANTWORTEN_TEXT
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+  \tab{\lang{de}{Antworten}}
+  Aufgabe 1
+  \begin{itemize}
+    \item[a)] $T_{4,1}(x)=1-(x-1)+(x-1)^2-(x-1)^4+(x-1)^5$
+    \item[b)] $T_{4,2}(x)=\frac{1}{2}-\frac{1}{4}(x-2)+\frac{1}{8}(x-2)^2-\frac{1}{16}(x-2)^3+\frac{1}{32}(x-2)^4$
+    \item[c)] $T_{4,-1}(x)=-1-(x+1)-(x+1)^2+(x+1)^3-(x+1)^4$
+  \end{itemize}
+  Aufgabe 2
+  \begin{itemize}
+    \item[a)] $T_{3,0}(x)=x+x^2+\frac{1}{3}x^3$
+    \item[b)] $T_{3,1}(x)=x^3-2x$
+    \item[c)] $T_{3,0}(x)=x+\frac{1}{6}x^3$
+  \end{itemize}
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{Allgemeiner Ansatz zu 1)}}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   Für das Taylorpolynom $4$-ter Ordnung  m"ussen zun"achst die ersten vier Ableitungsfunktionen
+bestimmt werden. Mit der Regel für Potenzen gilt wegen $f(x)=\frac{1}{x}=x^{-1}$:
+\begin{eqnarray*}
+  f'(x)&=& (-1)\cdot x^{-2}\\
+f''(x) &=& 2\cdot x^{-3}\\
+f^{(3)}(x) &=& -6\cdot x^{-4}\\
+f^{(4)}(x) &=& 24\cdot x^{-5}\\
+\end{eqnarray*}
+Das Taylorpolynom an einer Stelle $x_0$ ist damit gegeben durch
+\begin{eqnarray*}
+T_{4,x_0}(x)&=& f(x_0)+f'(x_0)\cdot (x-x_0)+\frac{f''(x_0)}{2}\cdot (x-x_0)^2+\frac{f^{(3)}(x_0)}{3!}\cdot (x-x_0)^3+\frac{f^{(4)}(x_0)}{4!}\cdot (x-x_0)^4 \\
+&=& \frac{1}{x_0}-\frac{x-x_0}{x_0^2}+\frac{(x-x_0)^2}{x_0^3}-\frac{(x-x_0)^3}{x_0^4}+\frac{(x-x_0)^4}{x_0^5}
+%&=& \frac{1}{a}\cdot \left( 1+ \frac{a-x}{a}+(\frac{a-x}{a})^2+(\frac{a-x}{a})^3+(\frac{a-x}{a})^4
+%\right) 
+\end{eqnarray*}     }
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+  
+   %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{   Lösung 1a)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   Hier müssen wir lediglich in das allgemeiner berechnete Taylorpolynom $x_0=1$ einsetzen. Dann
+erhalten wir mit der allgemeinen Binomischen Formel:
+\begin{eqnarray*}
+T_{4,1}(x)&=& \frac{1}{1}-\frac{x-1}{1^2}+\frac{(x-1)^2}{1^3}-\frac{(x-1)^3}{1^4}+\frac{(x-1)^4}{1^5} \\
+&=&1-(x-1)+(x-1)^2-(x-1)^4+(x-1)^5\:.
+% &=& 1-(x-1)+(x^2-2x+1)-(x^3-3x^2+3x-1)+(x^4-4x^3+6x^2-4x+1) \\
+% &=& x^4-5x^3+10x^2-10x+5
+\end{eqnarray*}   }
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+  
+   %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{   Lösung 1b)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   Hier müssen wir in das allgemeiner berechnete Taylor-Polynom $x_0=2$ einsetzen. Dann
+erhalten wir mit der allgemeinen binomischen Formel:
+\begin{eqnarray*}
+T_{4,2}(x)&=& \frac{1}{2}-\frac{x-2}{2^2}+\frac{(x-2)^2}{2^3}-\frac{(x-2)^3}{2^4}+\frac{(x-2)^4}{2^5} \\
+&=& \frac{1}{2}-\frac{1}{4}(x-2)+\frac{1}{8}(x-2)^2-\frac{1}{16}(x-2)^3+\frac{1}{32}(x-2)^4\:.
+% &=& \frac{1}{2}-\frac{1}{4}(x-2)+\frac{1}{8}(x^2-4x+4)-\frac{1}{16}(x^3-6x^2+12x-8)+\frac{1}{32}(x^4-8x^3+24x^2-32x+16) \\
+% &=& \frac{1}{32}x^4-(\frac{1}{16}+\frac{8}{32}) x^3+( \frac{1}{8}+\frac{6}{16}+\frac{24}{32}) x^2-(\frac{1}{4}+\frac{4}{8}+\frac{12}{16}+\frac{32}{32}) x+(\frac{1}{2}+\frac{2}{4}+\frac{4}{8}+\frac{8}{16}+\frac{16}{32}) \\
+% &=& \frac{1}{32}x^4-\frac{5}{16}x^3+\frac{5}{4}x^2-\frac{5}{2}x+\frac{5}{2}
+\end{eqnarray*}  }
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+  
+   %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{   Lösung 1c)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{  Hier müssen wir in das allgemeiner berechnete Taylor-Polynom $x_0=-1$ einsetzen. Dann
+erhalten wir mit der allgemeinen binomischen Formel:
+\begin{eqnarray*}
+T_{4,-1}(x)&=& \frac{1}{-1}-\frac{x+1}{(-1)^2}-\frac{(x+1)^2}{(-1)^3}-\frac{(x+1)^3}{(-1)^4}+\frac{(x+1)^4}{(-1)^5} \\
+&=& -1-(x+1)-(x+1)^2+(x+1)^3-(x+1)^4\:.
+% &=& -1-(x+1)-(x^2+2x+1)-(x^3+3x^2+3x+1)-(x^4+4x^3+6x^2+4x+1) \\
+% &=& -x^4-5x^3-10x^2-10x-5
+\end{eqnarray*}
+
+Bemerkung: Es ist kein Zufall, dass das Taylor-Polynom an der Stelle $x_0=-1$ und das Taylor-Polynom
+an der Stelle $x_0=1$ bis auf Vorzeichen die gleichen Koeffizienten haben. Die Funktion $f$ 
+erfüllt nämlich die Gleichung $f(-x)=-f(x)$ (d.h. sie ist punktsymmetrisch zum Ursprung). Damit
+erhält man aber den Graphen des Taylor-Polynoms bei $x_0=-1$ aus dem bei $x_0=1$ durch Spiegeln
+am Ursprung. Dies bedeutet aber, dass auch
+\[ T_{4,-1}(-x)=-T_{4,1}(x). \] }
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+%#############################################################ENDE
+
+    \tab{\lang{de}{Lösungsvideo 2)}}
+        Die Lösungswege zu Aufgabe 2 können dem folgenden Video entnommen werden:\\
+        \youtubevideo[500][300]{ImC__oYmtVo}\\
+\end{tabs*}
+
+\begin{genericGWTVisualization}[700][1000]{mathlet1}
+\lang{de}{\title{Das Taylor-Polynom $P_{f,4,x_0}(x)$ im Vergleich zur Funktion $f(x)$ für wählbares $x_0$}}
+\begin{variables}
+	
+	\function{f}{real}{1/x}
+	
+	\number{n}{real}{3}
+	
+	\slider[0.1]{n_slider}{n}{-10, editable}{10, editable}
+	
+	\function{p}{real}{1/(var(n))-(x-var(n))/((var(n))^2)+((x-var(n))^2)/((var(n))^3)-((x-var(n))^3/(var(n))^4)+((x-var(n))^4/(var(n))^5)}
+		
+ \color{f}{#0066CC}
+ \color{p}{#CC6600}
+ \label{n}{$x_0=$}
+ 
+	\point{x0}{rational}{var(n),0}
+	\point{x01}{rational}{var(n),1/var(n)}
+	
+\end{variables}
+\begin{canvas}
+	\plotSize{600}
+	\plotLeft{-10}
+	\plotRight{10}
+	\plot[coordinateSystem]{f,p,x0,x01}
+    \slider{n_slider}
+\end{canvas}
+\lang{de}{\text{\textcolor{#CC6600}{Roter} Graph: $P(x_0)=\var{p}$}}
+\lang{de}{\text{\textcolor{#0066CC}{Blauer} Graph: $f(x)=\var{f}$}}
+
+
+\end{genericGWTVisualization}
+
+\end{visualizationwrapper}
+
+
+
+\end{content}

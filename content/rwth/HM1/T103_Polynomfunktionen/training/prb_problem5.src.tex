@@ -1,0 +1,92 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A05: Division mit Rest}
+    \lang{en}{Exercise 5}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+
+\usepackage{mumie.genericproblem}
+
+\lang{de}{
+	\title{A05: Division mit Rest}
+}
+
+\lang{en}{
+	\title{Exercise 5}
+}
+
+\begin{block}[annotation]
+	 
+\end{block}
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9339}{Ticket 9339}
+\end{block}
+
+
+\begin{problem}
+	\begin{variables}
+			\randint{a0}{-5}{5}
+            \randint{a1}{-5}{5}
+            \randint{a2}{-5}{5}
+            \randint{a3}{-5}{5}
+            \randint{a4}{-5}{5}
+            
+            \randint{b0}{-5}{5}
+            \randint{b1}{-5}{5}
+            \randint{b2}{-5}{5}
+            
+            \function[expand, normalize]{f}{x^5+a4*x^4+a3*x^3+a2*x^2+a1*x+a0}
+            \function[expand, normalize]{g}{x^3+b2*x^2+b1*x+b0}
+            
+            \function{a}{a4-b2}
+            \function{b}{a3-b1-b2*a}
+            \function{c}{a2-b0-b1*a-b2*b}
+            \function{d}{a1-b0*a-b1*b}
+            \function{h}{a0-b*b0}
+            
+            \function[expand, normalize]{q}{x^2+a*x+b}
+            \function[expand, normalize]{r}{c*x^2+d*x+h}
+            
+	\end{variables}
+	\begin{question}
+	\type{input.function}
+		\lang{de}{\text{Gegeben seien die Polynome $f(x)=\var{f}$ und $g(x)= \var{g}$.\\
+		Bestimmen Sie Polynome $q(x)$ und $r(x)$, so dass $f(x)= q(x)\cdot g(x) +r(x)$.
+        }
+		\explanation{Polynomdivision}
+		}
+		\begin{answer}
+			\text{$q(x) =$}
+			\solution{q}
+			\checkAsFunction{x}{-10}{10}{100}
+		\end{answer}
+		\begin{answer}
+			\text{$r(x) =$}
+			\solution{r}
+			\checkAsFunction{x}{-10}{10}{100}
+		\end{answer}
+		
+	\end{question}
+	
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

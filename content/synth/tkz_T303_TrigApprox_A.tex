@@ -1,0 +1,42 @@
+%This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)
+%https://creativecommons.org/licenses/by/4.0/legalcode
+\documentclass[rgb]{standalone}
+\usepackage{tkz-euclide}
+\definecolor{myorange}{hsb}{0.0833, 1, 0.8}
+\definecolor{mygreen}{hsb}{0.3333, 1, 0.8}
+\definecolor{myblue}{hsb}{0.5833, 1, 0.8}
+\definecolor{mymagenta}{hsb}{0.8333, 1, 0.8}
+\begin{document}
+	\begin{tikzpicture}[scale=1.5,font=\Large]
+		% Coordinate system
+		\tkzInit[xmin=-3,xmax=3,ymin=-3,ymax=4]
+		\tkzGrid[color=lightgray]
+		\tkzDrawX[thick,label=$$]
+		\tkzDrawY[thick,label=$$]
+		\tkzDefPoint(0,0){A}
+		\tkzDefPoint(2*cos(pi/3),0){B}
+		\tkzDefPoint(2*cos(pi/3),2*sin(pi/3)){C}
+		\draw[fill,fill opacity=0.1] (0,0) -- (0.75,0) arc (0:60:0.75);
+		\draw[very thick,lightgray] (0,0) circle (2cm);
+		\draw[very thick,lightgray] (0,0) -- (2,{2*tan(60)}); 		
+		\draw[ultra thick,domain=0:60, smooth, variable=\x] plot ({2*cos(\x)}, {2*sin(\x)});
+		\draw[ultra thick,-latex] (0,0) -- ({2*cos(60)},{2*sin(60)}); 		
+		\draw[ultra thick,mygreen] (2,0) -- (2,{2*tan(60)}); 
+		\draw[ultra thick,myblue] ({2*cos(60)},0) -- ({2*cos(60)},{2*sin(60)}); 		
+		\draw[ultra thick,myorange] (0,0) -- ({2*cos(60)},0); 		
+		% Labels
+		\node[below,myorange] at ({cos(60)},0){$\cos x$};
+		\node[right,myblue] at ({2*cos(60)},{sin(60)}){$\sin x$};
+		\node[right,mygreen] at (2,{tan(60)}){$\tan x$};
+		\node[above left=-1.25mm] at ({cos(60)},{sin(60)}){$\vec{R}$};
+		\node[above right=-1mm] at ({2*cos(30)},{2*sin(30)}){$x$};
+		\node[below=0.5mm] at (2,0){$1$};
+		\node[below=0.5mm] at (-2,0){$-1$};
+		\node[left=0.5mm] at (0,2){$1$};
+		\node[left=0.5mm] at (0,-2){$-1$};
+		\node[above] at (0.4,0.05){$\varphi$};
+		\node[right] at (-2.75,3.5){\bf Einheitskreis:};
+		\node[right] at (-2.75,3){$\vert\vec{R}\vert=R=1$};
+		\node[right] at (-2.75,2.5){$\varphi=\frac{x}{R}=\frac{x}{1}=x$};
+	\end{tikzpicture}	
+\end{document}

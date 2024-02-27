@@ -1,0 +1,161 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A07: Textaufgabe}
+    \lang{en}{mc yes-no}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{description}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T109_Problem07.meta.xml}{T109_Problem07}
+    \component{generic_image}{content/rwth/HM1/images/g_img_1_9_Dreieck.meta.xml}{1_9_Dreieck}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21557}{Ticket 21557}
+\end{block}
+
+\usepackage{mumie.genericproblem}
+\lang{de}{
+	\title{A07: Textaufgabe}
+}
+
+\textit{Hinweis: Benutzen Sie \texttt{sqrt()} um die Wurzel einzugeben. Benutzen Sie zur Berechnung der Winkel einen Taschenrechner und runden Sie auf zwei Nachkommastellen. 
+}
+
+\begin{problem}
+
+	   \begin{question} 
+	\lang{de}{
+		\text{
+   Gegeben sei das folgende Dreieck $\overline{ABC}$ mit den Eckpunkten $A=(\var{a1};\var{a2};\var{a3})$, 
+        $B=(\var{b1};\var{b2};\var{b3})$ und $C=(\var{c1};\var{c2};\var{c3})$.
+        \begin{figure}
+        \image{T109_Problem07}
+        \end{figure}
+        1. Bestimmen Sie die Seitenlängen $a$, $b$ sowie $c$.\\\\
+        Die Seitenlängen lauten:\\\\
+        $a=$\ansref Einheiten\\\\
+        $b=$\ansref Einheiten\\\\
+        $c=$\ansref Einheiten\\\\
+        
+        2. Berechnen Sie die Winkel $\alpha$, $\beta$ und $\gamma$.\\\\
+        Die Winkel betragen:\\\\
+        $\alpha=$\ansref Grad\\\\ 
+        $\beta=$\ansref Grad\\\\
+        $\gamma=$\ansref Grad\\\\
+        
+        3. Das Dreieck $\overline{ABC}$ wird nun verändert: Der Punkt $A$ bleibt an gleicher Stelle. Die Seitenlängen $b$ und $c$ werden
+        auf das $\var{fache}$-fache verlängert, halten die Richtung aber bei. Bestimmen Sie den Winkel $\alpha_{neu}$, der
+        sich am Punkt $A$ des veränderten Dreiecks ergibt.\\\\
+        
+        Es gilt: $\alpha_{neu}=$\ansref Grad
+         
+        }}
+ 
+	\begin{variables}
+       \randint{a1}{4}{6}
+       \function[normalize]{a2}{a1}
+       \randint{a3}{1}{3}
+       \function[normalize]{b1}{a1+4}
+        \function[normalize]{b2}{a1+3}
+       \randint{b3}{8}{9}
+       \function[normalize]{c1}{a1+2}
+        \function[normalize]{c2}{a1+3}
+       \randint{c3}{6}{7}
+       \randint{fache}{6}{12}
+       \number{r}{1}
+    
+       \function[normalize]{avektor1}{c1-b1}
+       \function[normalize]{avektor2}{c2-b2}
+       \function[normalize]{avektor3}{c3-b3}
+     
+       \function[normalize]{bvektor1}{a1-c1}
+       \function[normalize]{bvektor2}{a2-c2}
+       \function[normalize]{bvektor3}{a3-c3}
+       
+       \function[normalize]{cvektor1}{b1-a1}
+       \function[normalize]{cvektor2}{b2-a2}
+       \function[normalize]{cvektor3}{b3-a3}
+       
+       \function[normalize]{alaenge}{sqrt(avektor1^2+avektor2^2+avektor3^2)}  
+       \function[normalize]{blaenge}{sqrt(bvektor1^2+bvektor2^2+bvektor3^2)}
+       \function[normalize]{claenge}{sqrt(cvektor1^2+cvektor2^2+cvektor3^2)}
+       
+              
+       \function[normalize]{skalarproduktalpha}{-bvektor1*cvektor1-bvektor2*cvektor2-bvektor3*cvektor3}  
+       \function[normalize]{skalarproduktbeta}{-cvektor1*avektor1-cvektor2*avektor2-cvektor3*avektor3}  
+       \function[normalize]{skalarproduktgamma}{-avektor1*bvektor1-avektor2*bvektor2-avektor3*bvektor3}  
+     
+       \function[normalize]{alpha1}{skalarproduktalpha/(claenge*blaenge)}  
+       \function[normalize]{alpha}{arccos(alpha1)*360/(2*pi)}
+       \function[normalize]{beta1}{skalarproduktbeta/(alaenge*claenge)}  
+       \function[normalize]{beta}{arccos(beta1)*360/(2*pi)}
+       \function[normalize]{gamma1}{skalarproduktgamma/(alaenge*blaenge)}  
+       \function[normalize]{gamma}{arccos(gamma1)*360/(2*pi)}
+       
+       \function[normalize]{alphaneu}{1*r}
+      
+    \end{variables}
+	\type{input.number}
+ 	\field{real}
+    
+    \begin{answer}
+         \type{input.function}
+    	\solution{alaenge}
+        \checkAsFunction{x}{-1}{1}{10}
+          \explanation[edited]{Um die Seitenlängen bestimmen zu können, müssen Sie die 
+               Verbindungsvektoren zweier Eckpunkte des Dreiecks berechnen und deren Länge bestimmen.}
+    \end{answer}
+    
+     \begin{answer}
+          \type{input.function}
+    	\solution{blaenge}
+           \checkAsFunction{x}{-1}{1}{10}
+    \end{answer}
+    
+     \begin{answer}
+          \type{input.function}
+    	\solution{claenge}
+           \checkAsFunction{x}{-1}{1}{10}
+    \end{answer}
+    
+     \begin{answer}
+    	\solution{alpha}
+         \explanation[edited]{Um die Winkel des Dreiecks bestimmen zu können, müssen Sie die 
+               beiden Verbindungsvektoren der jeweiligen Ecke zu den beiden anderen Ecken berechnen und dann den Winkel zwischen diesen 
+               Vektoren ermitteln.}
+    \end{answer}
+    
+     \begin{answer}
+    	\solution{beta}
+    \end{answer}
+    
+     \begin{answer}
+    	\solution{gamma}
+    \end{answer}
+    
+     \begin{answer}
+    	\solution{alpha}
+    \end{answer}
+   
+  \end{question}
+    
+	
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

@@ -1,0 +1,364 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A05: Verhalten von Polynomen}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A05: Verhalten von Polynomen}}
+\lang{en}{\title{A05: Behaviour of polynomials}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24059}{Ticket 24059}
+\end{block}
+\begin{block}[annotation]
+Kopie: hm4mint/T103_Polynomfunktionen/training 2
+
+	Im Ticket-System: \href{http://team.mumie.net/issues/9337}{Ticket 9337}
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+\begin{problem}
+
+\begin{variables}
+    \randint[Z]{n1}{-150}{150}
+	\randint{n2}{-150}{150}
+    \randint{n3}{-150}{150}
+    \randint{n4}{-15}{15}
+    \randint[Z]{n5}{-3}{3}
+    \randint{n0}{-150}{150}
+    \randadjustIf{n1}{n1 = n2 OR n1 = n3 OR n1 = n4 OR n1 = n5}
+    \randadjustIf{n2}{n2 = n3 OR n2 = n4 OR n2 = n5}
+    \randadjustIf{n3}{n3 = n4 OR n3 = n5}
+    \randadjustIf{n4}{n4 = n5}
+    \function{f}{n5*x^5 + n4*x^4 +n3*x^3 + n2 * x^2 + n1*x + n0}
+    \function{f1}{n5*x^5}
+    \function{f2}{n1*x+n0}
+    
+    
+    \randint[Z]{n1_1}{-150}{150}
+  	\randint{n2_1}{-5}{5}
+   	\randint{n3_1}{-15}{15}
+   	\randint[Z]{n4_1}{-3}{3}
+   	\randint{n0_1}{-50}{50}
+    \randadjustIf{n1_1}{n1_1 = n2_1 OR n1_1 = n3_1 OR n1_1 = n4_1}
+   	\randadjustIf{n2_1}{n2_1 = n3_1 OR n2_1 = n4_1 }
+	\randadjustIf{n3_1}{n3_1 = n4_1}
+
+    \function{g}{n4_1*x^4 +n3_1*x^3 + n2_1 * x^2 + n1_1*x + n0_1}
+    \function{g1}{n4_1*x^4}
+    \function{g2}{n1_1*x+n0_1}
+    
+\end{variables}
+
+%Frage 1 von 3
+\begin{question}
+	\type{input.function}
+	\field{real} 
+	\lang{de}{
+		\text{Wie verläuft das Polynom 
+        $p_1(x) = \var{f}$\\
+		für 
+        $x \rightarrow \pm \infty$ und 
+        $x \rightarrow 0$? \\
+	    Fügen Sie den entsprechenden führenden Term ein. } 
+	    \explanation{Für 
+        $x \rightarrow \pm \infty$ verläuft  der Graph  wie\\
+	    der des Terms 
+        $a_nx^n$, der höchsten Potenz.\\
+	    Für 
+        $x \rightarrow 0$ hängt das Verhalten der Polynomfunktion von\\
+	   	den Summanden mit den niedrigen Potenzen ab.}
+   	}
+    \lang{en}{
+    	\text{How does the polynomial 
+        $p_1(x) = \var{f}$ behave as 
+        $x \rightarrow \pm \infty$ and as 
+        $x \rightarrow 0$?\\
+    	Input the leading term.}
+    	\explanation{As 
+        $x \rightarrow \pm \infty$ the graph behaves like the term with 
+        the highest power, 
+        $a_nx^n$.\\
+    	As 
+        $x \rightarrow 0$ the behaviour of the polynomial depends on 
+        the summands with the smallest powers.}
+    }
+    \lang{fr}{
+    	\text{Comment se comporte le polynôme 
+        $p_1(x) = \var{f}$  quand 
+        $x \rightarrow \pm \infty$ et quand 
+        $x \rightarrow 0$ ?\\
+    	}
+    	\explanation{Quand
+        $x \rightarrow \pm \infty$, le polynôme se comporte comme le terme de 
+        plus haut degré, 
+        $a_nx^n$.\\
+    	Quand 
+        $x \rightarrow 0$, le comportement du polynôme dépend du terme de plus bas degré.}
+    }
+     \lang{zh}{
+    	\text{请分别输入当 
+        $x \rightarrow \pm \infty$ 时和当 
+        $x \rightarrow 0$ 时，多项式 
+        $p_1(x) = \var{f}$ 的变化情况。\\
+    	只输入决定项。}
+    	\explanation{当 
+        $x \rightarrow \pm \infty$ 时，图像的特性取决于最高次项 
+        $a_nx^n$ 。\\
+    	当 
+        $x \rightarrow 0$ 时，多项式函数的特性取决于最低次项，即常数项。}
+    }  
+    \begin{answer}
+    \lang{de}{\text{Für 
+    $x \rightarrow \pm \infty$ verläuft das Polynom wie
+    $f_{\infty}(x)= $}}
+    \lang{en}{\text{As 
+    $x \rightarrow \pm \infty$ the polynomial behaves like 
+    $f_{\infty}(x)= $ }}
+    \lang{fr}{\text{Quand
+    $x \rightarrow \pm \infty$, le polynôme se comporte comme
+    $f_{\infty}(x)= $ }}
+    \lang{zh}{\text{当 
+    $x \rightarrow \pm \infty$ 时，多项式的特性取决于 
+    $f_{\infty}(x)= $ }}
+    \solution{f1}
+    \checkAsFunction{x}{-10}{10}{100}
+    \end{answer}
+    
+    \begin{answer}
+    \lang{de}{\text{Für 
+    $x \rightarrow 0$ verläuft das Polynom wie 
+    $f_0(x)= $}}
+    \lang{en}{\text{As 
+    $x \rightarrow 0$ the polynomial behaves like
+    $f_0(x)= $}}
+    \lang{fr}{\text{Quand 
+    $x \rightarrow 0$, le polynôme se comporte comme 
+    $f_0(x)= $}}
+    \lang{zh}{\text{当 
+    $x \rightarrow 0$ 时，多项式的特性取决于 
+    $f_0(x)= $}}
+    \solution{f2}
+    \checkAsFunction{x}{-10}{10}{100}
+    \end{answer}
+\end{question}
+
+%Frage 2 von 3
+\begin{question}
+	\type{input.function}
+    \field{real} 
+    \lang{de}{
+	    \text{Wie verläuft das Polynom 
+        $p_2(x) = \var{g}$\\
+	    für 
+        $x \rightarrow \pm \infty$ und 
+        $x \rightarrow 0$? \\
+	    Fügen Sie den entsprechenden Funktionsterm ein. }
+	    \explanation{Für 
+        $x \rightarrow \pm \infty$ verläuft  der Graph  wie\\
+	    der des Terms 
+        $a_nx^n$, der höchsten Potenz.\\
+	    Für 
+        $x \rightarrow 0$ hängt das Verhalten der Polynomfunktion von\\
+	    den Summanden mit den niedrigen Potenze ab.}
+    }
+    \lang{en}{
+    	\text{How does the polynomial 
+        $p_2(x) = \var{g}$ behave as 
+        $x \rightarrow \pm \infty$ and as 
+        $x \rightarrow 0$?\\
+    	Input the corresponding term of the function.}
+    	\explanation{As 
+        $x \rightarrow \pm \infty$ the graph 
+        behaves like the term with the highest power,
+        $a_nx^n$.\\
+    	As 
+        $x \rightarrow 0$ the behaviour of the polynomial 
+        depends on the summands with the smallest power.}
+    }
+    \lang{fr}{
+    	\text{Comment se comporte le polynôme
+        $p_2(x) = \var{g}$  quand 
+        $x \rightarrow \pm \infty$ et quand
+        $x \rightarrow 0$ ?\\
+    	}
+    	\explanation{Quand 
+        $x \rightarrow \pm \infty$, le polynôme se comporte comme le terme de 
+        plus haut degré, 
+        $a_nx^n$.\\
+    	Quand
+        $x \rightarrow 0$, le comportement du polynôme dépend du terme de plus bas degré.}
+        }
+    \lang{zh}{
+    	\text{请分别输入当 
+        $x \rightarrow \pm \infty$ 时和当 
+        $x \rightarrow 0$ 时，多项式 
+        $p_2(x) = \var{g}$ 的变化情况。\\
+    	只输入决定项。}
+    	\explanation{当 
+        $x \rightarrow \pm \infty$ 时，图像的特性取决于最高次项 
+        $a_nx^n$ 。\\
+    	当 
+        $x \rightarrow 0$ 时，多项式的特性取决于最低次项，即常数项。}
+    }  
+    \begin{answer}
+    \lang{de}{\text{Für 
+    $x \rightarrow \pm \infty$ verläuft das Polynom wie 
+    $f_{\infty}(x)= $}}
+    \lang{en}{\text{As 
+    $x \rightarrow \pm \infty$ the polynomial behaves like 
+    $f_{\infty}(x)= $ }}
+    \lang{fr}{\text{Quand 
+    $x \rightarrow \pm \infty$, le polynôme se comporte comme 
+    $f_{\infty}(x)= $ }}
+    \lang{zh}{\text{当 
+    $x \rightarrow \pm \infty$ 时，多项式的特性取决于
+    $f_{\infty}(x)= $ }}
+    \solution{g1}
+    \checkAsFunction{x}{-10}{10}{100}
+    \end{answer}
+    
+    \begin{answer}
+    \lang{de}{\text{Für 
+    $x \rightarrow 0$ verläuft das Polynom wie 
+    $f_0(x)= $}}
+    \lang{en}{\text{As 
+    $x \rightarrow 0$ the polynomial behaves like 
+    $f_0(x)= $}}
+    \lang{fr}{\text{Quand 
+    $x \rightarrow 0$, le polynôme se comporte comme 
+    $f_0(x)= $}}
+    \lang{zh}{\text{当 
+    $x \rightarrow 0$ 时，多项式的特性取决于 
+    $f_0(x)= $}}
+    \solution{g2}
+    \checkAsFunction{x}{-10}{10}{100}
+    \end{answer}
+    
+\end{question}
+
+%Frage 3 von 3
+\begin{question}    
+	\type{mc.multiple}
+
+    \lang{de}{
+	    \text{Ordnen Sie die Polynomgleichungen den Graphen zu.\\
+		Kreuzen Sie alle richtigen Antworten an.\\
+		Verkleinern Sie die Graphen mit der Maus,\\
+	 	so dass Sie einen größeren Ausschnitt sehen können.}
+	 	\explanation{Vergleichen Sie den Verlauf der Polynome und der Graphen \\
+	 	für 
+        $x \rightarrow \pm \infty$ und 
+        $x \rightarrow 0$.}
+ 	}
+  	\lang{en}{
+  		\text{Match each of the polynomial equations with their graphs and select the correct statements below. Choose "Yes" for those that are correct, "No" otherwise.\\
+  		Zoom in using the mouse wheel to get a better view of the graphs.}
+  		\explanation{As 
+        $x \rightarrow \pm \infty$ the graph behaves like the term with the highest power,
+        $a_nx^n$.\\
+    	As 
+        $x \rightarrow 0$ the behaviour of the polynomial depends on the summand with the smallest power.}
+  	}
+    \lang{fr}{
+  		\text{Associez à chacun des polynômes 
+        un graphe, et sélectionnez les propositions correctes ci-dessous. \\
+  		Zoomez en utilisant la molette de la souris pour avoir une meilleure vue sur les graphes.}
+  		\explanation{Quand 
+        $x \rightarrow \pm \infty$, le polynôme se comporte comme le terme de plus haut degré,
+        $a_nx^n$.\\
+    	Quand 
+        $x \rightarrow 0$, le comportement du polynôme dépend du terme de plus bas degré.}
+  	}
+  	\lang{zh}{
+  		\text{请匹配下列多项式方程及其图像。选出所有正确的答案。\\
+        通过鼠标滚轮改变图像大小，可以部分放大以便于观察。}
+  		\explanation{当 
+        $x \rightarrow \pm \infty$ 时和当 
+        $x \rightarrow 0$ 时，对比多项式和图像的曲线。}
+  	}
+  	\plotF{1}{f} % % the function a1 is defined below in 'variables' in the usual way
+    \plotFrom{1}{-50} % % and is plotted starting from 0.0
+    \plotTo{1}{50} % % and ending in 1.0 , it's a quarter of a circle
+    \plotColor{1}{blue} % % colored blu
+    \plotF{2}{g} % % the function a1 is defined below in 'variables' in the usual way
+    \plotFrom{2}{-50} % % and is plotted starting from 0.0
+    \plotTo{2}{50} % % nd ending in 1.0 , it's a quarter of a circle
+    \plotColor{2}{red}
+    \plotLeft{-1.0} % % defines the canvas bound left
+    \plotRight{1.0} % % and right
+    \plotSize{400} 
+   
+  	
+ 	\permutechoices{1}{4}
+ 
+	\begin{choice}
+	    \lang{de}{\text{Das Polynom 
+        $p_1(x) = \var{f}$ hat den blauen Funktionsgraphen.}}
+	    \lang{en}{\text{The blue graph is the polynomial 
+        $p_1(x) = \var{f}$.}}
+        \lang{fr}{\text{Le graphe bleu est le polynôme
+        $p_1(x) = \var{f}$.}}
+        \lang{zh}{\text{多项式 
+        $p_1(x) = \var{f}$ 对应蓝色的函数图像。}}
+	  	\solution{true}    
+    \end{choice}
+    
+    \begin{choice}
+	    \lang{de}{\text{Das Polynom 
+        $p_1(x) = \var{f}$ hat den roten Funktionsgraphen.}}
+	    \lang{en}{\text{The red graph is the polynomial 
+        $p_1(x) = \var{f}$.}}
+        \lang{fr}{\text{Le graphe rouge est le polynôme
+        $p_1(x) = \var{f}$.}}
+        \lang{zh}{\text{多项式 
+        $p_1(x) = \var{f}$ 对应红色的函数图像。}}
+	  	\solution{false}
+	\end{choice}
+  		
+  	\begin{choice}
+	    \lang{de}{\text{Das Polynom 
+        $p_2 (x) = \var{g}$ hat den blauen Funktionsgraphen.}}
+	    \lang{en}{\text{The blue graph is the polynomial
+        $p_2 (x) = \var{g}$.}}
+        \lang{fr}{\text{Le graphe bleu est le polynôme 
+        $p_2 (x) = \var{g}$.}}
+        \lang{zh}{\text{多项式 
+        $p_2 (x) = \var{g}$ 对应蓝色的函数图像。}}
+	 	\solution{false}
+  	\end{choice}
+        
+    \begin{choice}
+	    \lang{de}{\text{Das Polynom 
+        $p_2(x) = \var{g}$ hat den roten Funktionsgraphen.}}
+	    \lang{en}{\text{The red graph is the polynomial 
+        $p_2(x) = \var{g}$.}}
+        \lang{fr}{\text{Le graphe rouge est le polynôme
+        $p_2(x) = \var{g}$.}}
+        \lang{zh}{\text{多项式 
+        $p_2(x) = \var{g}$ 对应红色的函数图像。}}
+	  	\solution{true}
+    \end{choice}
+\end{question}
+
+\end{problem}
+\embedmathlet{gwtmathlet}
+
+\end{content}

@@ -1,0 +1,31 @@
+%This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)
+%https://creativecommons.org/licenses/by/4.0/legalcode
+\documentclass[rgb]{standalone}
+\usepackage{tkz-euclide}
+\definecolor{myorange}{hsb}{0.0833, 1, 0.8}
+\definecolor{mygreen}{hsb}{0.3333, 1, 0.8}
+\definecolor{myblue}{hsb}{0.5833, 1, 0.8}
+\definecolor{mymagenta}{hsb}{0.8333, 1, 0.8}
+\begin{document}
+	\begin{tikzpicture}[scale=1.5, font=\Large]
+		% Coordinate system
+		\tkzInit[xmin=-3,xmax=3,ymin=-2,ymax=10,xstep=1,ystep=2]
+		\tkzGrid[color=lightgray]
+		\tkzDrawX[thick,label=$x$]
+		\tkzDrawY[thick,label=$y$]
+		% Graphs
+		\draw[very thick,gray,domain={1/4-sqrt(73)/4}:{1/4+sqrt(73)/4}, smooth, variable=\x] plot ({\x}, {\x*\x-1/2*\x+1/2});
+		\node[very thick, draw,circle,fill,inner sep=2,myblue] at (0,0.5) {};
+		\node[very thick, draw,circle,fill,inner sep=2,myorange] at (1,1) {};
+		\node[very thick, draw,circle,fill,inner sep=2,mygreen] at (2,3.5) {};
+		% Labels
+		\node[below=0.5mm] at (-2,0){$-2$};
+		\node[below=0.5mm] at (2,0){$2$};
+		\node[left=0.5mm] at (0,2){$4$};
+		\node[left=0.5mm] at (0,4){$8$};
+		\node[right,gray] at (-1.75,4.5){$f(x)=ax^2+bx+c$};
+		\node[below left=-1mm,myblue] at (0,0.5){$P_1=(0;1)$};
+		\node[below right=-1mm,myorange] at (1,1){$P_2=(1;2)$};
+		\node[above left=-1mm,mygreen] at (2,3.5){$P_3=(2;7)$};
+	\end{tikzpicture}	
+\end{document}

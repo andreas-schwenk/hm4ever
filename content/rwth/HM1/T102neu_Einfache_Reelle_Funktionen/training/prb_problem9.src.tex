@@ -1,0 +1,170 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A09: Parabelbestimmung}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{Interpretation der Parameter einer Parabel}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+
+%
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22082}{Ticket 22082}
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+\begin{block}[annotation]
+
+	Erkennen der Lage einer Parabel aus graphischer Darstellung 
+    durch Interpretation der Parameter (Öffnung, Streckung und 
+    y-Achsen Schnitt)\\
+        
+\end{block}
+
+\lang{de}{\title{A09: Parabelbestimmung}}
+\lang{en}{\title{Problem 9}}
+
+
+\begin{problem}
+ 
+      \begin{variables}
+        \randint[Z]{xs}{-3}{3}                                  % Scheitelpunkt ALLER Parabeln
+        \randint{ys}{-3}{3}                                     % Scheitelpunkt ALLER Parabeln
+
+        \randint[Z]{a1}{-10}{10}                                % Steckfaktor für Parabel f1
+        \function[calculate, normalize]{c1}{a1*xs^2+ys}         % y-Achsenschnitt von f1 
+        \randadjustIf{a1}{a1=1 OR a1=-1}
+        
+        \randint[Z]{k}{-1}{1}         
+        \function[calculate]{a2}{k/a1}                          % Steckfaktor für Parabel f2
+        \function[calculate, normalize]{c2}{a2*xs^2+ys}         % y-Achsenschnitt von f2         
+        \function[calculate, normalize]{c0}{xs^2+ys}            % y-Achsenschnitt von f0
+        \function[calculate, normalize]{h}{ys+1}                % Hilfsvariable
+        
+        \randint{c3}{-5}{5}                                     % y-Achsenschnitt von f3 
+        \randadjustIf{c3}{c3=ys OR c3=h OR c3=c0 OR c3=c2 OR c3=c1 }        % da ansonsten
+                                                                            % a3=0 oder a4=0 oder
+                                                                            % c3=c0 (dann wäre f3=f0) oder
+                                                                            % c3=c2 (dann wäre f3=f2) oder
+                                                                            % c3=c1 (dann wäre f3=f1)
+        \function[calculate, normalize]{a3}{(c3-ys)/xs^2}       % Steckfaktor für Parabel f3 
+        \function[calculate, normalize]{a4}{(c3-(ys+1))/xs^2}    % Steckfaktor für Parabel f4 
+
+
+        \function[normalize]{f0}{(x-xs)^2+ys}                   % Normalparabel mit S=(xs;ys)
+        \function[normalize]{f1}{a1*(x-xs)^2+ys}                % steiler als f0
+        \function[normalize]{f2}{a2*(x-xs)^2+ys}                % flacher als f0
+        \function[normalize]{f3}{a3*(x-xs)^2+ys}                % Parabel mit S=(xs;ys) u. 
+                                                                % y-Achsenschnitt in c3
+
+        \function[normalize, expand]{p0}{(x-xs)^2+ys}           % Normalpüarabelitelpunktform Normalparabel
+        \function[normalize, expand]{p1}{a1*(x-xs)^2+ys}        % steiler
+        \function[normalize, expand]{p2}{a2*(x-xs)^2+ys}        % flacher 
+        \function[normalize, expand]{p22}{k*a2*(x-xs)^2+ys}     % Variante für falsche Antwort         
+        \function[normalize, expand]{p3}{a3*(x-xs)^2+ys}        % y-Achsenschnitt in c3
+        \function[normalize, expand]{p32}{a4*(x-xs)^2+ys}       % y-Achsenschnitt in (c3-1) 
+                                                                % als Variante für falsche Antwort         
+               
+    \end{variables}
+%         
+%
+  \begin{question} 
+  
+	\type{mc.multiple}     
+    \field{rational}  
+     
+     \text{Die folgende Grafik zeigt verschiedene Parabeln mit einem
+           gemeinsamen Scheitelpunkt, darunter in schwarz die 
+           Normalparabel $\,f(x)=\var{p0} .$ Ordnen Sie den farbigen 
+           Parabeln jeweils ihre beschreibende quadratische Funktion zu.\\
+           Kreuzen Sie alle richtigen Antworten an.}
+          
+     \explanation{Verwenden Sie die Umrechnungsformeln zwischen Standard- 
+                und Scheitelpunktform einer Parabel und beachten Sie die
+                Öffnung, die Streckung und die Schnittstelle der 
+                jeweiligen Parabel mit der $y-$Achse.}
+
+%++++++++++++++++VISUALISATION+++++++++++++++++++++++++++
+
+        \plotF{1}{f0} 
+        \plotF{2}{f1} 
+        \plotF{3}{f2} 
+        \plotF{4}{f3}
+        \plotFrom{1}{-6} 
+        \plotTo{1}{6} 
+        \plotColor{1}{black} 
+        \plotColor{2}{red}
+        \plotColor{3}{blue}
+        \plotColor{4}{green}
+        \plotLeft{-6}
+        \plotRight{6}
+        \plotSize{600}
+        \plotRatio{keep}        
+
+%+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+ 	\permutechoices{1}{6}
+% 1von6 
+	\begin{choice}
+	    \text{Die quadratische Funktion  
+        $\, p_1(x) = \var{p1}$ hat den roten Funktionsgraphen.}
+	  	\solution{true}    
+    \end{choice}
+% 2von6    
+	\begin{choice}
+	    \text{Die quadratische Funktion  
+        $\, p_1(x) = \var{p1}$ hat den blauen Funktionsgraphen.}
+	  	\solution{false}    
+    \end{choice}
+% 3von6     
+	\begin{choice}
+	    \text{Die quadratische Funktion  
+        $\, p_3(x) = \var{p2}$ hat den blauen Funktionsgraphen.}
+	  	\solution{true}    
+    \end{choice}
+% 4von6 		
+	\begin{choice}
+	    \text{Die quadratische Funktion  
+        $\, p_4(x) = \var{p3}$ hat den grünen Funktionsgraphen.}
+	  	\solution{true}    
+    \end{choice}
+% 5von6 		
+	\begin{choice}
+	    \text{Die quadratische Funktion  
+        $\, p_5(x) = \var{p32}$ hat den grünen Funktionsgraphen.}
+	  	\solution{false}    
+    \end{choice}
+% 6von6
+	\begin{choice}
+	    \text{Die quadratische Funktion  
+        $\, p_2(x) = \var{p22}$ hat den roten Funktionsgraphen.}
+	  	\solution{false}    
+    \end{choice}
+        
+   
+\end{question}
+
+%######################################################QUESTION_END
+
+
+\end{problem}
+
+\embedmathlet{gwtmathlet}                                         
+
+\end{content}

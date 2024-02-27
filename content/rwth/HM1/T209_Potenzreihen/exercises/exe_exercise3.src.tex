@@ -1,0 +1,70 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Exercise 3}
+    \lang{de}{Ü03: Produktreihe}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{Exercise 3}
+    \lang{de}{Ü03: Produktreihe}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T208_Reihen/g_art_content_26_produkt_von_reihen.meta.xml}{content_26_produkt_von_reihen}
+\end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/16436}{Ticket 16436}
+\end{block}
+  \title{
+    \lang{en}{Ü03: Produktreihe}
+    \lang{de}{Übung 3}
+  }
+  \lang{en}{}
+  \lang{de}{Entwickeln Sie $f(z)=\exp(z)\cdot \frac{1}{1-z}$ in eine Potenzreihe mit Entwicklungspunkt $z_0=0$. Welchen Konvergenzradius besitzt sie?} 
+  \begin{tabs*}[\initialtab{0}\class{exercise}]   
+    \tab{
+      \lang{en}{a}
+      \lang{de}{Lösung}
+    }
+    \begin{incremental}[\initialsteps{1}]
+      \step
+Wir kennen die Potenzreihenentwicklungen beider Faktoren, sodass wir die des Produkts durch 
+deren \ref[content_26_produkt_von_reihen][Cauchy-Produkt]{def:cauchy-prod} bestimmen können:
+  Es gilt
+\[\exp(z)= \sum_{k=0}^{\infty} \frac{z^k}{k !}\]
+f\"ur alle $z\in\mathbb{C}$, und für $\vert z\vert < 1$ gilt
+\[
+\frac{1}{1-z} = \sum_{k=0}^\infty z^k.
+\]
+\step 
+Damit erhalten wir
+\begin{align*}
+f(z) = \exp(z) \frac{1}{1-z} &=& \left(\sum_{l=0}^{\infty} \frac{z^l}{l !}\right)
+\left(\sum_{k=0}^{\infty} z^k\right) \\
+&=&\sum_{n=0}^{\infty} \sum_{m=0}^n \frac{z^{m}}{m !} \cdot z^{n-m} \\
+&=& \sum_{n=0}^\infty \left( \sum_{m=0}^n \frac{1}{m!}\right) z^n
+\end{align*}
+für alle $z$ mit $\vert z \vert < 1$. 
+Die Rechnung gilt nach dem \ref[content_26_produkt_von_reihen][Cauchy-Produkt-Satz]{thm:cauchy-prod} für alle $z$ mit $\vert z \vert <1$.
+Für diese Werte ist die entstehende Potenzreihe in jedem Fall konvergent. Der Konvergenzradius ist also mindestens $1$.
+Grundsätzlich könnte sich der Konvergenzbereich auch vergrößern. Wir betrachten den Fall, dass $z=1$ ist.
+Die Reihe in $z=1$ ist
+\[
+\sum_{n=0}^\infty \left( \sum_{m=0}^n \frac{1}{m!}\right)
+\]
+und diese ist nicht konvergent, da $\left(  \sum_{m=0}^n \frac{1}{m!}\right)_{n\in \N}$ keine Nullfolge ist. Wäre der Konvergenzradius größer als $1$, müsste die Potenzreihe in $z=1$ konvergieren.
+Daraus folgern wir, dass der Konvergenzradius höchstens $1$ sein kann.
+Zusammen mit obiger Überlegung ergibt sich, dass der Konvergenzradius genau $1$ sein muss.
+    \end{incremental}
+  \end{tabs*}
+\end{content}
+

@@ -1,0 +1,1048 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ableitungsregeln}
+    \lang{en}{Differentiation rules}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T301_Differenzierbarkeit/g_art_content_02_ableitungsregeln.meta.xml}{content_02_ableitungsregeln}
+    \link{generic_article}{content/rwth/HM1/T301_Differenzierbarkeit/g_art_content_01_differenzenquotient.meta.xml}{diffbarkeit}
+    \link{generic_article}{content/rwth/HM1/T210_Stetigkeit/g_art_content_31_grenzwerte_von_funktionen.meta.xml}{grenzw-funk}
+    \link{generic_article}{content/rwth/HM1/T204_Abbildungen_und_Funktionen/g_art_content_11_injektiv_surjektiv_bijektiv.meta.xml}{umkehrfkt}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{1}
+\ombarticle{2}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Ableitungsregeln und Ableitung der Umkehrfunktion und wichtige Formeln}
+       \lang{en}{Differentiation rules}}
+ 
+\begin{block}[annotation]
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10032}{Ticket 10032}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{\lang{de}{Ableitungsregeln für zusammengesetzte Funktionen}
+         \lang{en}{Derivative of sums and products of functions}}
+% Kopie aus Teil1, content_20 + Begründungen + Quotientenregel
+
+\lang{de}{
+In diesem Paragraph beschäftigen wir uns mit den Ableitungen von Summen, Differenzen, Produkten und Quotienten differenzierbarer Funktionen.
+}
+\lang{en}{
+In this paragraph we consider the derivatives of sums, differences, products and quotients of 
+differentiable functions.
+}
+
+\begin{rule}[\lang{de}{Summenregel und Faktorregel}
+             \lang{en}{Sum and constant factor rules}] \label{rule:summenregel}
+\lang{de}{
+Sind $f$ und $g$ zwei auf einer Teilmenge $D\subseteq \R$ differenzierbare Funktionen und $c\in \R$, so sind auch die Funktionen
+$f+g$, $f-g$ und $cf$ auf $D$ differenzierbar und es gelten für alle $x\in D$:
+}
+\lang{en}{
+Let $f$ and $g$ be two functions differentiable on a subset $D\subseteq \R$, and let $c\in \R$. Then 
+the functions $f+g$, $f-g$ and $cf$ are also differentiable on $D$, and for all $x\in D$:
+}
+\begin{align*}
+(f+g)'(x) &= f'(x) + g'(x)  &\quad & \text{\lang{de}{Summenregel}\lang{en}{Sum rule}} \\
+(f-g)'(x) &= f'(x) - g'(x) && \\
+(cf)'(x) &= c\cdot  f'(x)  &\quad & \text{\lang{de}{Faktorregel}\lang{en}{Constant factor rule}}
+\end{align*}
+\lang{de}{
+Induktiv erhält man dadurch auch, dass jede endliche Summe von differenzierbaren Funktionen $f_1, f_2, \ldots , f_n$ wieder differenzierbar ist
+und die Ableitungsfunktion summandenweise berechnet werden kann.\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=510}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{
+By induction we get that every finite sum of differentiable functions $f_1, f_2, \ldots , f_n$ is 
+itself differentiable, and that its derivative can be calculated as the sum of the summands' 
+derivatives.
+}
+\end{rule}
+
+\begin{proof*}[\lang{de}{Beweis der Summen- und Faktorregel}
+               \lang{en}{Proof of the sum and constant factor rules}]
+\begin{incremental}[\initialsteps{0}]
+\step
+\lang{de}{Sind $f$ und $g$ bei $x_0$ differenzierbar, so existieren die Grenzwerte}
+\lang{en}{Let $f$ and $g$ be differentiable at $x_0$, so the following limits exist:}
+\[ f'(x_0)=\lim_{h\rightarrow 0} \frac{f(x_0+h)-f(x_0)}{h}\quad 
+\text{\lang{de}{und}\lang{en}{and}}\quad 
+g'(x_0)=\lim_{h\rightarrow 0} \frac{g(x_0+h)-g(x_0)}{h}. \]
+\step
+\lang{de}{
+Mit den \ref[grenzw-funk][Grenzwertregeln]{sec:grenzwertregeln} erhält man dann für die Ableitung von $f+g$:
+}
+\lang{en}{
+Using the \ref[grenzw-funk][rules for limits]{sec:grenzwertregeln} we obtain the derivative of $f+g$:
+}
+\begin{eqnarray*}
+(f+g)'(x_0) &=& \lim_{h\rightarrow 0} \frac{(f+g)(x_0+h)-(f+g)(x_0)}{h} \\
+&=& \lim_{h\rightarrow 0}  \frac{f(x_0+h)+g(x_0+h)-f(x_0)-g(x_0)}{h} \\
+&=& \lim_{h\rightarrow 0} \frac{f(x_0+h)-f(x_0)}{h} + \lim_{h\rightarrow 0} \frac{g(x_0+h)-g(x_0)}{h} \\
+&=& f'(x_0)+ g'(x_0).
+\end{eqnarray*}
+
+\step
+\lang{de}{
+Ebenfalls mit den \ref[grenzw-funk][Grenzwertregeln]{sec:grenzwertregeln} erhält man die Ableitung von $cf$:
+}
+\lang{en}{
+Likewise by using the \ref[grenzw-funk][rules for limits]{sec:grenzwertregeln} we obtain the 
+derivative of $cf$:
+}
+\begin{eqnarray*}
+(cf)'(x_0) &=&  \lim_{h\rightarrow 0}\frac{(cf)(x_0+h)-(cf)(x_0)}{h} \\
+&=& \lim_{h\rightarrow 0}  \frac{c\cdot f(x_0+h)-c\cdot f(x_0)}{h} \\
+&=& c\cdot \lim_{h\rightarrow 0} \frac{f(x_0+h)-f(x_0)}{h}= c\cdot f'(x_0).
+\end{eqnarray*}
+
+\step
+\lang{de}{
+Das Resultat f\"ur $f-g$ kann man \"ahnlich zeigen. Man erh\"alt es aber auch wie folgt schrittweise aus der Summenregel 
+und der Faktorregel, die man auf die geeigneten Funktionen anwendet. 
+Deshalb wird die Regel f\"ur Differenzen in der Literatur meist weggelassen.\\
+Nach der Faktorregel, angewandt auf $g$ und $c=-1$, ist n\"amlich mit $g$ auch $-g$ differenzierbar und $(-g)'(x)=-g'(x)$. Nach der Summenregel, 
+angewandt auf $f$ und $-g$, ist dann $f-g=f+(-g)$ differenzierbar und
+}
+\lang{en}{
+The result for $f-g$ can be shown similarly. We may also obrain it as follows by applying the sum and 
+the constant factor rules to the appropriate functions. For this reason, this result is often not 
+mentioned as its own case in the literature.\\ 
+By the constant factor rule applied to $g$ and $c=-1$, $-g$ is differentiable with $(-g)'(x)=-g'(x)$. 
+The sum rule applied to $f$ and $-g$ then gives us the differentiability of $f-g=f+(-g)$, with
+}
+\[ (f-g)'(x)= f'(x)+ (-g)'(x)=f'(x) - g'(x). \]
+
+\end{incremental}
+\end{proof*}
+
+
+
+\begin{example}%\textit{Beispiel:}\\
+\lang{de}{
+Wir berechnen die Ableitung der Funktion $f(x)=x^3+2x+1$. Diese Funktion ist die Summe der 
+Funktionen $x^3$ und $2x$ und der konstanten Funktion $1$. Nach der Faktorregel und dem \ref[diffbarkeit][Beispiel im vorigen Abschnitt]{sec:abl-elem-funk}
+ist die Ableitung der Funktion $g(x)=2x$ gegeben durch
+}
+\lang{en}{
+We calculate the derivative of the function $f(x)=x^3+2x+1$. This function is the sum of the 
+functions $x^3$ and $2x$ and the constant function $1$. By the constant factor rule and the 
+\ref[diffbarkeit][example in the previous section]{sec:abl-elem-funk}, the derivative of the function 
+$g(x)=2x$ is given by
+}
+\[  g'(x)=2\cdot 1=2. \]
+\lang{de}{Anschließend kann die Summenregel angewandt werden:}
+\lang{en}{Finally we apply the sum rule:}
+\[f'(x)=3x^2+2+0=3x^2+2.\]
+\end{example}
+
+\begin{tabs*}[\initialtab{0}] \label{tab:potenzreihen-ableitung}
+\tab{\lang{de}{Ableitung von Potenzreihen}\lang{en}{Derivative of power series}}
+\lang{de}{
+Auch für Funktionen, die durch Potenzreihen gegeben sind, ist die Ableitung durch
+summandenweises ableiten gegeben. Dies ist aus der obigen Regel zwar nicht direkt ersichtlich, weil 
+die Regel zur summandenweisen Ableitung allgemein nur für Summen aus endlich vielen Funktionen gilt, 
+soll aber hier ohne Begründung angenommen werden. Formal lautet die Aussage für Potenzreihen also:
+}
+\lang{en}{
+Functions given by power series can also be differentiated term-by-term. This does not in fact follow 
+directly from the above rule, as the rule only applies to the derivative of finite sums, but we may 
+use this fact here without dealing with the proof. Formally, the statement for power series is as 
+follows.
+}
+
+
+
+\begin{theorem}\label{thm:potenzreihen-ableitung}
+\lang{de}{
+Seien $x_0\in \R$, $f(x)= \sum_{n=0}^\infty c_n(x-x_0)^n$, $r> 0$ der Konvergenzradius von $f$ und 
+$I=(x_0-r;x_0+r)$.  Dann ist $f$ auf $I$ differenzierbar und die Ableitung von $f$ ist auf 
+$I$ durch summandenweises Ableiten gegeben, d.h.
+}
+\lang{en}{
+Let $x_0\in \R$, $f(x)= \sum_{n=0}^\infty c_n(x-x_0)^n$. Let $r> 0$ be the convergence radius of $f$ 
+and let $I=(x_0-r;x_0+r)$. Then $f$ is differentiable on $I$ and the derivative of $f$ is given by 
+termwise differentiation on $I$, that is,
+}
+\[  f'(x)= \sum_{n=1}^\infty n\cdot c_n(x-x_0)^{n-1}\quad 
+\text{\lang{de}{für alle}\lang{en}{for all} }x\in I.  \]
+\lang{de}{$f'$ konvergiert auf $I$ als Potzenzreihe absolut.}
+\lang{en}{The power series $f'$ converges absolutely on $I$.}
+\end{theorem}
+\end{tabs*}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{2}
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\randint[Z]{n}{-9}{9}
+			\randint[Z]{a}{2}{9}
+			\randint[Z]{b}{-6}{9}
+		    \function[normalize]{f}{a*sin(x)+b*x^n}
+			\function[normalize]{ff}{a*cos(x)+n*b*x^(n-1)}
+            \function[normalize]{g}{n*x^(n-1)}
+		\end{variables}
+		
+		\text{\lang{de}{Die Ableitungsfunktion der Funktion $f(x)=\var{f}$ ist $f'(x)= $\ansref.}
+          \lang{en}{The derivative function of $f(x)=\var{f}$ is $f'(x)= $\ansref.}}
+		
+		\begin{answer}
+			\solution{ff}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\explanation{\lang{de}{
+    Die Ableitungsfunktion von $\sin(x)$ ist $\cos(x)$ und die von $x^{\var{n}}$ 
+    ist $\var{g}$. Dann muss man die Summen- und Faktorregel anwenden.
+    }
+		\lang{en}{
+    The derivative function of $\sin(x)$ is $\cos(x)$ and the derivative of $x^{\var{n}}$ 
+    is $\var{g}$. We then simply apply the sum and constant factor rules.
+    }}
+	\end{quickcheck}
+    
+   \begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\randint[Z]{n}{-9}{9}
+			\randint[Z]{a}{2}{9}
+			\randint[Z]{b}{-6}{9}
+		    \function[normalize]{f}{a*cos(x)+b*x^n}
+			\function[normalize]{ff}{-a*sin(x)+n*b*x^(n-1)}
+            \function[normalize]{g}{n*x^(n-1)}
+		\end{variables}
+		
+		\text{\lang{de}{Die Ableitungsfunktion der Funktion $f(x)=\var{f}$ ist $f'(x)= $\ansref.}
+          \lang{en}{The derivative function of $f(x)=\var{f}$ is $f'(x)= $\ansref.}}
+		
+		\begin{answer}
+			\solution{ff}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\explanation{\lang{de}{
+    Die Ableitungsfunktion von $\cos(x)$ ist $-\sin(x)$ und die von $x^{\var{n}}$ 
+    ist $\var{g}$. Dann muss man die Summen- und Faktorregel anwenden.
+    }
+    \lang{en}{
+    The derivative function of $\cos(x)$ is $-\sin(x)$ and the derivative of $x^{\var{n}}$ 
+    is $\var{g}$. We then simply apply the sum and constant factor rules.
+    }}
+	\end{quickcheck}
+    
+    
+\end{quickcheckcontainer} 
+
+\lang{de}{
+Wie Produkte und Quotienten differenzierbarer Funktionen abgeleitet werden, beschreiben die Produktregel und die Quotientenregel.
+}
+\lang{en}{
+The derivatives of the product and quotient of differentiable functions are given by the product and 
+quotient rules respectively.
+}
+\begin{rule}[\lang{de}{Produktregel und Quotientenregel}
+             \lang{en}{Product and quotient rules}]\label{rule:produkt_quotient_regel}
+\lang{de}{
+Sind $f$ und $g$ zwei auf einer Teilmenge $D\subseteq \R$ differenzierbare Funktionen, so ist auch deren Produkt $f\cdot g$ auf $D$ differenzierbar
+und f\"ur alle $x\in D$ gilt:
+}
+\lang{en}{
+Let $f$ and $g$ be two functions differentiable on a subset $D\subseteq \R$. Then their product 
+$f\cdot g$ auf $D$ is also differentiable on $D$, and for all $x\in D$:
+}
+\[(f\cdot g)'(x)=f'(x)\cdot g(x)+f(x)\cdot g'(x).\]
+\lang{de}{
+Des Weiteren ist auch ihr Quotient $\frac{f}{g}$ auf der Menge $\{x\in D\,|\, g(x)\ne 0\}$ differenzierbar  
+und f\"ur alle $x\in D$ gilt:
+}
+\lang{en}{
+Furthermore, their quotient $\frac{f}{g}$ is differentiable on the set $\{x\in D\,|\, g(x)\ne 0\}$ 
+and for all $x\in D$:
+}
+\[ \left(\frac{f}{g}\right)'(x)= \frac{f'(x)\cdot g(x)-f(x)\cdot g'(x)}{g(x)^2}. \]
+\lang{de}{
+\floatright{\href{https://www.hm-kompakt.de/video?watch=511}{\image[75]{00_Videobutton_schwarz}}\href{https://www.hm-kompakt.de/video?watch=512}{\image[75]{00_Videobutton_schwarz}}}\\
+\\
+}
+\lang{en}{}
+\end{rule}
+ 
+ 
+ 
+ 
+ 
+ 
+\begin{proof*}[\lang{de}{Beweis der Produkt- und Quotientenregel}
+               \lang{en}{Proof of the product and quotient rules}]
+\begin{incremental}[\initialsteps{0}]
+\step \lang{de}{
+F\"ur das Produkt berechnet man mit Hilfe der \ref[grenzw-funk][Grenzwertregeln]{sec:grenzwertregeln}:
+}
+\lang{en}{
+For the product we use the \ref[grenzw-funk][rules for limits]{sec:grenzwertregeln} to calculate the 
+following:
+}
+\begin{eqnarray*}
+(f\cdot g)'(x)&=&\lim_{h\rightarrow 0}\frac{(f\cdot g)(x+h)-(f\cdot g)(x)}{h}\\
+&=&\lim_{h\rightarrow 0}\frac{f(x+h)\cdot g(x+h)-f(x)\cdot g(x)}{h}\\
+&=&\lim_{h\rightarrow 0}\frac{f(x+h)\cdot g(x+h)\textcolor{#CC6600}{-f(x)\cdot g(x+h)+f(x)\cdot g(x+h)}-f(x)\cdot g(x)}{h}\\
+&=&\lim_{h\rightarrow 0}\frac{(f(x+h)-f(x))\cdot g(x+h)+f(x) \cdot (g(x+h) -g(x))}{h}\\
+&=&\lim_{h\rightarrow 0} \bigg(\frac{f(x+h)- f(x)}{h}\cdot g(x+h)+f(x)\cdot \frac{g(x+h) -g(x)}{h}\bigg)\\
+&=&
+f'(x)\cdot g(x)+f(x)\cdot g'(x).
+\end{eqnarray*} 
+
+\step
+\lang{de}{F\"ur die Quotientenregel berechnet man ganz \"ahnlich wie oben:}
+\lang{en}{For the quotient rule we calculate, in a similar fashion to above,}
+\begin{eqnarray*}
+\left(\frac{f}{g}\right)(x+h) - \left(\frac{f}{g}\right)(x) &=& \frac{f(x+h)}{g(x+h)}-\frac{f(x)}{g(x)} \\
+&=& \frac{f(x+h)g(x)-f(x)g(x+h)}{g(x+h)g(x)} \\
+&=& \frac{f(x+h)g(x) \textcolor{#CC6600}{-f(x)g(x) +f(x)g(x)}-f(x)g(x+h)}{g(x+h)g(x)} \\
+&=& \frac{(f(x+h)-f(x))\cdot g(x)-f(x) \cdot (g(x+h) -g(x))}{g(x+h)g(x)} 
+\end{eqnarray*} 
+\lang{de}{Daher gilt}
+\lang{en}{Hence}
+\begin{eqnarray*}
+\left(\frac{f}{g}\right)'(x)&=&\lim_{h\rightarrow 0} \frac{1}{h} \bigg( \left(\frac{f}{g}\right)(x+h) - \left(\frac{f}{g}\right)(x)\bigg) \\
+&=&\lim_{h\rightarrow 0} \frac{(f(x+h)-f(x))\cdot g(x)-f(x) \cdot (g(x+h) -g(x))}{h\cdot g(x+h)g(x)}\\ 
+&=&\lim_{h\rightarrow 0}\frac{1}{g(x+h)g(x)} \frac{(f(x+h)-f(x))\cdot g(x)-f(x) \cdot (g(x+h) -g(x))}{h}\\ 
+%&=&\lim_{h\rightarrow 0}\frac{f(x+h)\cdot g(x+h)-f(x)\cdot g(x+h)+f(x)\cdot g(x+h)-f(x)\cdot g(x)}{h}\\
+%&=&\lim_{h\rightarrow 0}\frac{(f(x+h)-f(x))\cdot g(x+h)+f(x) \cdot (g(x+h) -g(x))}{h}\\
+&=&\lim_{h\rightarrow 0}\frac{1}{g(x+h)g(x)} \cdot  \bigg(\frac{f(x+h)- f(x)}{h}\cdot g(x)-f(x)\cdot \frac{g(x+h) -g(x)}{h}\bigg)\\
+&=& \frac{f'(x)\cdot g(x)-f(x)\cdot g'(x)}{g(x)^2}
+\end{eqnarray*}
+
+\end{incremental}
+\end{proof*}
+
+
+ \begin{example}%\textit{Beispiel:}\\
+ \begin{tabs*}[\initialtab{0}]
+\tab{$x^2\cdot \sin(x)$}
+\lang{de}{
+Wir berechnen als erstes Beispiel die Ableitung der Funktion $F(x)={x^2}\cdot \sin (x)$. Diese ist 
+das Produkt $F(x)=f(x)\cdot g(x)$ der differenzierbaren Funktionen 
+$f(x)={x^2}$ und $g(x)=\sin (x)$. Die Ableitung von $f(x)$ ist $2x$, die Ableitung von $g(x)$ ist $\cos (x)$. Dann ist
+}
+\lang{en}{
+As a first example we calculate the derivative of the function $F(x)={x^2}\cdot \sin (x)$. This is 
+the product $F(x)=f(x)\cdot g(x)$ of the differentiable functions $f(x)={x^2}$ and $g(x)=\sin (x)$. 
+The derivative of $f(x)$ is $2x$ and the derivative of $g(x)$ is $\cos (x)$. Hence
+}
+\[F'(x)=f'(x)\cdot g(x)+f(x)\cdot g'(x)=2x\cdot\sin (x)+{x^2}\cdot \cos (x).\]
+\tab{\lang{de}{Tangens $\tan(x)$ und Kotangens $\cot(x)$}
+     \lang{en}{Tangent $\tan(x)$ and cotangent $\cot(x)$}}
+\lang{de}{
+Die Tangensfunktion $\tan(x)$ ist der Quotient von Sinus und Kosinus. Da Sinus und Kosinus auf ganz $\R$ differenzierbar sind, ist also der Tangens
+auf seiner ganzen Definitionsmenge differenzierbar. Setzt man $f(x)=\sin(x)$ und $g(x)=\cos(x)$, so kann man
+mit den Ableitungen $f'(x)=\sin'(x)=\cos(x)$ und $g'(x)=\cos'(x)=-\sin(x)$ und der Quotientenregel, 
+die Ableitung des Tangens bestimmen:
+}
+\lang{en}{
+The tangent function $\tan(x)$ is the quotient of the sine and cosine functions. As sine and cosine 
+are both differentiable on all of $\R$, the tangent function is differentiable on its whole domain. 
+If we set $f(x)=\sin(x)$ and $g(x)=\cos(x)$, we may use the derivatives $f'(x)=\sin'(x)=\cos(x)$ and 
+$g'(x)=\cos'(x)=-\sin(x)$, together with the quotient rule, to determine the derivative of the 
+tangent function:
+}
+\begin{eqnarray*}
+\tan'(x) &=& \left( \frac{\sin}{\cos}\right)'(x) = \frac{\sin'(x)\cos(x)-\sin(x)\cos'(x)}{\cos(x)^2} \\
+&=& \frac{\cos(x)\cos(x)-\sin(x)\cdot (-\sin(x))}{\cos(x)^2} = \frac{\cos(x)^2+\sin(x)^2}{\cos(x)^2}.
+\end{eqnarray*}
+\lang{de}{
+Letzteres kann man auf zwei Arten vereinfachen. Zum einen kann man den trigonometrischen Pythagoras $\cos(x)^2+\sin(x)^2=1$ anwenden, und erh\"alt
+}
+\lang{en}{
+Finally we may simplify this in two ways. One way is to apply the Pythagorean theorem 
+$\cos(x)^2+\sin(x)^2=1$ and obtain
+}
+\[ \tan'(x)  =\frac{1}{\cos(x)^2}. \]
+\lang{de}{Zum anderen kann man aber auch den Bruch aufteilen und erh\"alt}
+\lang{en}{Otherwise we can also seperate the resulting fraction into two, then simplify to obtain}
+\[  \tan'(x)  = \frac{\cos(x)^2}{\cos(x)^2} + \frac{\sin(x)^2}{\cos(x)^2} = 1+ \tan(x)^2. \]
+\lang{de}{F\"ur den Kotangens rechnet man ganz entsprechend:}
+\lang{en}{For the cotangent we similarly calculate:}
+\begin{eqnarray*}
+\cot'(x) &=& \left( \frac{\cos}{\sin}\right)'(x) = \frac{\cos'(x)\sin(x)-\cos(x)\sin'(x)}{\sin(x)^2} \\
+&=& \frac{-\sin(x)\sin(x)-\cos(x) \cos(x))}{\sin(x)^2} = - \frac{\sin(x)^2+\cos(x)^2}{\sin(x)^2}.
+\end{eqnarray*}
+\lang{de}{Auch hier erh\"alt man durch Vereinfachen zum einen}
+\lang{en}{Here too we arrive, after simplification, at the derivative}
+\[ \cot'(x)= -\frac{1}{\sin(x)^2} \]
+\lang{de}{und zum anderen}
+\lang{en}{and at another way of writing it,}
+\[ \cot'(x)= -1-\cot(x)^2. \]
+\end{tabs*}
+\end{example}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{1}
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\randint[Z]{a}{-2}{2}
+			\randint[Z]{b}{1}{4}
+			\randint{l}{1}{4}
+			\function[calculate]{l1}{l-1}
+			
+			\randint{k}{1}{4}	% Zufallsvariable zum Vertauschen:
+			\function[calculate]{d1}{-(k-2)*(k-3)*(k-4)/6}  % "Dirac"-funktionen
+			\function[calculate]{d2}{(k-1)*(k-3)*(k-4)/2}
+			\function[calculate]{d3}{-(k-1)*(k-2)*(k-4)/2}
+			\function[calculate]{d4}{(k-1)*(k-2)*(k-3)/6}
+			
+			\function[normalize]{f1}{sin(x)}
+			\function[normalize]{f2}{cos(x)}
+			\function[normalize]{f3}{exp(x)}
+			\function[normalize]{f4}{ln(x)}
+
+			\function[expand,normalize]{g}{d1*f1+d2*f2+d3*f3+d4*f4}						
+			\function[expand,normalize]{dg}{d1*f2+d2*(-f1)+d3*f3+d4*(1/x)}
+
+			\function[normalize]{p}{a*x^l+b}
+			\function[normalize]{dp}{l*a*x^(l-1)}
+		    \function[normalize]{f}{p*g}
+			\function[normalize]{df}{dp*g+p*dg}
+		\end{variables}
+
+			\text{\lang{de}{
+      Bestimmen Sie mit Hilfe der Formeln und der Ableitungsregeln die Ableitung der
+			Funktion $f(x)=\var{f}$.\\ Die Ableitungsfunktion ist: $f'(x)=$ \ansref.
+      }
+      \lang{en}{
+      Use the formulas and rules for differentiation to determine the derivative of the function 
+      $f(x)=\var{f}$.\\ The derivative function is: $f'(x)=$ \ansref.
+      }}
+
+		\begin{answer}
+			\solution{df}
+			\checkAsFunction{x}{-2}{2}{20}
+		\end{answer}
+		\explanation{\lang{de}{
+    Mit der Produktregel ist zun\"achst $f'(x)=(\var{p})'\cdot \var{g}+(\var{p})\cdot (\var{g})'$.\\
+		F\"ur $(\var{p})'$ rechnet man:\\
+    }
+    \lang{en}{
+    Firstly we apply the product rule, $f'(x)=(\var{p})'\cdot \var{g}+(\var{p})\cdot (\var{g})'$.\\
+    We can then calculate 
+    }
+		$(\var{p})'=\var{a}\cdot (x^{\var{l}})'+ (\var{b})'=\var{a}\cdot \var{l}\cdot x^{\var{l1}}+0=\var{dp}$\\
+		\lang{de}{
+    und $(\var{g})'=\var{dg}$ mit obiger Formel. Also insgesamt:\\
+    }
+    \lang{en}{
+    and we already know $(\var{g})'=\var{dg}$ from the previous section. Hence we have:\\
+    }
+		$f'(x)=\var{df}$.
+		}
+		
+	\end{quickcheck}
+\end{quickcheckcontainer}
+
+\begin{remark}%\textit{Bemerkung:}\\
+\lang{de}{
+Im vorigen Abschnitt ist dargelegt, dass die Ableitung jeder konstanten Funktion $0$ ist. Nach der 
+Produktregel ist also, falls $g(x)=c$ konstant ist:
+}
+\lang{en}{
+In the earlier section we stated that the derivative of every constant function is $0$. According to 
+the product rule, if we treat $g(x)=c$ as a constant function:
+}
+\[(c\cdot f)'(x)=(g\cdot f)'(x)=g'(x)\cdot f(x)+g(x)\cdot f'(x)=0 \cdot f(x)+c \cdot f'(x)=c \cdot f'(x).\]
+\lang{de}{
+Die Faktorregel ist also ein Spezialfall der Produktregel.
+}
+\lang{en}{
+From this example we can see that the constant rule is simply a special case of the product rule.
+}
+\end{remark}
+
+\begin{remark}
+\lang{de}{
+Als Spezialfall der Quotientenregel kann man auch die Ableitung von Funktionen der Form 
+$\frac{1}{g(x)}$ bestimmen, wenn man die Ableitung von $g(x)$ kennt, n\"amlich:
+}
+\lang{en}{
+We can consider derivatives of function of the form $\frac{1}{g(x)}$ as a special case of the 
+quotient rule, if we know the derivative of $g(x)$. That is,
+}
+\[ \left( \frac{1}{g}\right)'(x)= \frac{0\cdot g(x)-1\cdot g'(x)}{g(x)^2}= -\frac{g'(x)}{g(x)^2}.\]
+\lang{de}{Diese Formel werden wir unten auch mit der Kettenregel herleiten.}
+\lang{en}{We will also derive these formulas using the chain rule below.}
+\end{remark}
+
+\begin{example}\label{bsp:negative-potenzen}
+\lang{de}{
+F\"ur $n\in \N$ betrachten wir die Potenzfunktion $f(x)=x^{-n}=\frac{1}{x^n}$. 
+Mit $g(x)=x^n$ gilt nach der eben gemachten Bemerkung
+}
+\lang{en}{
+Let $n\in \N$ and consider the power function $f(x)=x^{-n}=\frac{1}{x^n}$.
+Setting $g(x)=x^n$ lets us apply the previous remark, yielding
+}
+\[  f'(x)=-\frac{g'(x)}{g(x)^2}=-\frac{nx^{n-1}}{x^{2n}}=-nx^{-n-1}. \]
+\end{example}
+
+
+
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\randint[Z]{n}{-9}{9}
+			\randint[Z]{a}{-9}{9}
+			\randint[Z]{b}{-6}{9}
+			\randint[Z]{c}{-6}{9}
+			\randint[Z]{d}{-6}{9}
+		    \function[normalize]{f}{(x^2+a*x+b)/(c*x+d)} 
+            \function[normalize] {f_1}{x^2+a*x+b}
+            \function[normalize] {f_2}{c*x+d}
+			\derivative[normalize]{df}{f}{x}
+            \function[normalize]{dfz}{(2*x+a)*(c*x+d)-(x^2+a*x+b)*c}
+            \function[normalize]{dfn}{(c*x+d)^2}
+		\end{variables}
+		
+		\text{\lang{de}{
+      Bestimmen Sie mit Hilfe der Quotientenregel die Ableitung der
+			Funktion $f(x)=\var{f}$.\\ Die Ableitungsfunktion ist $f'(x)=$ \ansref.
+      }
+      \lang{en}{
+      Use the quotient rule to determine the derivative of the function $f(x)=\var{f}$.\\
+      The derivative function is $f'(x)=$ \ansref.
+      }}
+		\begin{answer}
+			\solution{df}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+        \explanation{\lang{de}{
+        Wir wenden die Quotientenregel auf die Zählerfunktion $\var{f_1}$
+        und die Nennerfunktion $\var{f_2}$ an.
+        }
+        \lang{en}{
+        We apply the quotient rule with $\var{f_1}$ as the numerator and $\var{f_2}$ as the 
+        denominator.
+        }}
+		%\explanation{Nach der Quotientenregel ist die Ableitungsfunktion gegeben durch
+        %$\frac{\var{dfz}}{\var{dfn}}$, worin man noch Terme zusammenfassen könnte.
+        %}
+	\end{quickcheck}
+
+\section{\lang{de}{Ableitung der Verkettung von Funktionen}
+         \lang{en}{Derivative of the composition of functions}}\label{sec:kettenregel}
+% Kopie aus Teil1, content_21 + Begr\"undung
+
+
+\lang{de}{Die Ableitung der Verkettung zweier Funktionen f\"uhrt auf die Kettenregel.}
+\lang{en}{The derivative of the composition of two functions is described by the chain rule.}
+\begin{rule}[\lang{de}{Kettenregel}\lang{en}{Chain rule}]
+\label{rule:kettenregel}\\
+\lang{de}{
+Sind $f$ und $g$ Funktionen und $x_0\in \R$ eine Stelle, so dass $g$ bei $x_0$ differenzierbar ist 
+und $f$ bei $g(x_0)$ differenzierbar ist , so ist die Verkettung $f\circ g$ bei $x_0$ differenzierbar 
+und es gilt
+}
+\lang{en}{
+Let $f$ and $g$ be functions and $x_0\in \R$ be a point such that $g$ is differentiable at $x_0$, 
+and $f$ is differentiable at $g(x_0)$. Then the composition of the two functions $f\circ g$ is 
+differentiable at $x_0$ and we have
+}
+\[(f\circ g)'(x_0)=f'(g(x_0))\cdot g'(x_0).\]
+\lang{de}{
+\floatright{\href{https://www.hm-kompakt.de/video?watch=513}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{}
+\end{rule}
+\lang{de}{
+Man bildet also $f'$ an der Stelle $g(x_0)$ sowie $g'$ an der Stelle $x_0$ und multipliziert diese beiden Werte miteinander.
+}
+\lang{en}{
+We evaluate $f'$ at the point $g(x_0)$ and $g'$ at the point $x_0$, then multiply these results together.
+}
+
+\begin{proof*}[\lang{de}{Beweis der Kettenregel}\lang{en}{Proof of the chain rule}]
+\begin{incremental}[\initialsteps{0}]
+\step \lang{de}{
+Um diese Regel einzusehen, schreiben wir den Differenzenquotienten f\"ur $f\circ g$ zun\"achst etwas komplizierter:
+}
+\lang{en}{
+Firstly we consider the quotient for $f\circ g$ whose limit we take to find its derivative, and 
+express it in a slightly longer form:
+}
+\[ \frac{(f\circ g)(x)-(f\circ g)(x_0)}{x-x_0}= \frac{f(g(x))-f(g(x_0))}{g(x)-g(x_0)}\cdot \frac{g(x)-g(x_0)}{x-x_0}. \]
+\step
+\lang{de}{Nun gilt}
+\lang{en}{This allows us to recognise}
+\[ \lim_{x\to x_0} \frac{g(x)-g(x_0)}{x-x_0} =g'(x_0), \]
+\lang{de}{
+da $g$ bei $x_0$ differenzierbar ist. 
+Wegen der Differenzierbarkeit von $f$ gilt
+}
+\lang{en}{
+as $g$ is differentiable at $x_0$. 
+By the differentiability of $f$ we have
+}
+\[  \lim_{y\to g(x_0)} \frac{f(y)-f(g(x_0))}{y-g(x_0)}= f'(g(x_0)). \]
+\step \lang{de}{
+Da $g$ bei $x_0$ aber auch stetig ist (vgl. Abschnitt ...), gilt
+}
+\lang{en}{
+As $g$ is continuous at $x_0$ (it must be, to be differentiable), we have 
+}
+\[  \lim_{x\to x_0} g(x) = g(x_0), \]
+\lang{de}{und daher insbesondere}
+\lang{en}{so in particular}
+\[ \lim_{x\to x_0} \frac{f(g(x))-f(g(x_0))}{g(x)-g(x_0)}= f'(g(x_0)). \]
+\step \lang{de}{
+Insgesamt also:
+}
+\lang{en}{
+In general,
+}
+\begin{eqnarray*}
+(f\circ g)'(x_0) &=&  \lim_{x\to x_0} \frac{(f\circ g)(x)-(f\circ g)(x_0)}{x-x_0} \\
+&=&  \lim_{x\to x_0}  \frac{f(g(x))-f(g(x_0))}{g(x)-g(x_0)} \cdot  \lim_{x\to x_0} \frac{g(x)-g(x_0)}{x-x_0} \\
+&=& f'(g(x_0))\cdot g'(x_0).
+\end{eqnarray*}
+\lang{de}{
+\textbf{Achtung:} Diese Begr\"undung ist nicht formal korrekt, da wir einen Term $g(x)-g(x_0)$ im 
+Nenner eingef\"ugt haben, welcher nur f\"ur $g(x)\neq g(x_0)$ definiert ist. Sie zeigt aber die 
+Hauptidee f\"ur die Regel, weshalb wir in diesem Kurs auf einen formal korrekten Beweis verzichten.
+}
+\lang{en}{
+\textbf{Warning:} This reasoning is not entirely formal, as we have a denominator $g(x)-g(x_0)$ which 
+is only non-zero for $g(x)\neq g(x_0)$. We do not cover a formal proof in this course, 
+as the above is sufficient for understanding the spirit of the rule, and certainly suffices for 
+applying it.
+}
+
+\end{incremental}
+\end{proof*}
+
+
+
+
+
+
+
+\begin{example}%\textit{Beispiel:}\\
+ \begin{tabs*}[\initialtab{0}]
+\tab{$\sin(x^2)$}
+\lang{de}{
+Wir berechnen als Beispiel die Ableitung der Funktion $\sin(x^2)$. Setzen wir als \"{a}u{\ss}ere 
+Funktion $f(y)=\sin y$ und als innere Funktion $g(x)=x^2$, so ist $f(g(x))=\sin(x^2)$. Wir k\"{o}nnen 
+also die Kettenregel benutzen. Zun\"{a}chst ist $f'(y)=\cos y$. F\"{u}r $y=g(x)=x^2$ ergibt das:
+}
+\lang{en}{
+As an example, we will calculate the derivative of the function $\sin(x^2)$. First we let the outer 
+function be $f(y)=\sin y$ and the inner function be $g(x)=x^2$, so that $f(g(x))=\sin(x^2)$. Since 
+this is the composition of two functions, we may use the chain rule here. 
+We already know that $f'(y)=\cos y$. For $y=g(x)=x^2$ we get that:
+}
+\[f'(g(x))=\cos (g(x))=\cos(x^2).\] 
+\lang{de}{Nun m\"{u}ssen wir noch die Ableitung von $g$ berechnen. Wir erhalten:}
+\lang{en}{We still need to find the derivative of $g$. We get:}
+\[g'(x)=2x.\]
+\lang{de}{Nach der Kettenregel ist dann die Ableitung von $f(g(x))=\sin(x^2)$:}
+\lang{en}{According to the chain rule, the derivative of $f(g(x))=\sin(x^2)$ is:}
+\[(f\circ g)'(x)=f'(g(x))\cdot g'(x)=\cos (x^2)\cdot 2x=2x\cos (x^2).\]
+\lang{de}{
+Wenn man ein wenig Erfahrung beim Ableiten von Funktionen gesammelt hat, braucht man nat\"{u}rlich 
+nicht mehr diese vielen kleinen Einzelschritte zu gehen! Die Rechnung kann man in etwa auf die letzte 
+Zeile des Beispieles reduzieren.
+}
+\lang{en}{
+Once we have gained enough experience differentiating functions, we no longer need to perform every 
+small step. In practice, we may only write the last line of the example.
+}
+\tab{$\frac{1}{f(x)}$}
+\lang{de}{
+Kennt man die Ableitung einer Funktion $f(x)$, so kennt man auch die Ableitung von $\frac{1}{f(x)}$. 
+Sei $f$ differenzierbar und $f(x)\neq 0$ und sei $h(y)=\frac{1}{y}$. Dann ist 
+$\frac{1}{f(x)}=(h\circ f)(x)$ nach der Kettenregel differenzierbar und
+}
+\lang{en}{
+If we know the derivative of a function $f(x)$, then we also know the derivative of $\frac{1}{f(x)}$. 
+If $f$ is differentiable and $f(x)\neq 0$, if we let $h(y)=\frac{1}{y}$ then 
+$\frac{1}{f(x)}=(h\circ f)(x)$ is differentiable by the chain rule, and
+}
+\[
+\label{gleichung2}\left(\frac{1}{f(x)}\right)'=h'(f(x))\cdot f'(x)=-\frac{1}{(f(x))^2}\cdot f'(x)=-\frac{f'(x)}{(f(x))^2}.
+\]
+
+
+\tab{$x^{-n}$}
+\lang{de}{
+Als Spezialfall der Regel für $\frac{1}{f(x)}$ bekommt man auch die Ableitungen der Potenzfunktionen 
+$F(x)=x^{-n}$ mit nat\"urlichen Zahlen $n\in \N$ (vgl. 
+\lref{bsp:negative-potenzen}{obiges Beispiel}). Hierzu w\"ahlt man zum Beispiel als \"außere Funktion 
+$f(y)=y^{-1}$ und als innere Funktion $g(x)=x^n$. Dann gilt wegen $f'(y)=-\frac{1}{y^2}$ und 
+$g'(x)=nx^{n-1}$ f\"ur alle $x\neq 0$:
+}
+\lang{en}{
+We may consider the derivative of the function $F(x)=x^{-n}$ for natural numbers $n\in \N$ as a 
+special case of the rule for $\frac{1}{f(x)}$ (see \lref{bsp:negative-potenzen}{above example}). 
+For example, if we take $f(y)=y^{-1}$ to be the outer function and $g(x)=x^n$ to be the inner 
+function. Then as $f'(y)=-\frac{1}{y^2}$ and $g'(x)=nx^{n-1}$ for all $x\neq 0$, we have
+}
+\begin{eqnarray*}
+F'(x) &=& f'(g(x))\cdot g'(x) = -\frac{1}{g(x)^2}\cdot nx^{n-1} \\
+&=& -n\cdot \frac{x^{n-1}}{x^{2n}}= -n\cdot x^{-n-1}.
+\end{eqnarray*}
+\tab{$a^x$}
+\lang{de}{
+F\"ur allgemeine Exponentialfunktionen $f(x)=a^x$ lassen sich nun auch die Ableitungen bestimmen. 
+Hierzu beachte man, dass die reelle Potenz $a^x$ definiert ist als $\exp(x\cdot \ln(a))$. Setzt man 
+$g(x)=\exp(x)$ als \"au"sere Funktion und $h(x)=x\cdot \ln(a)$ als innere Funktion, so ist
+}
+\lang{en}{
+We may now find the derivative of a general exponential function $f(x)=a^x$. To do this, we note that 
+the real power $a^x$ is defined as $\exp(x\cdot \ln(a))$. If we set $g(x)=\exp(x)$ as the outer 
+function and $h(x)=x\cdot \ln(a)$ as the inner function, then
+}
+\[ f'(x)=g'(h(x))\cdot h'(x)=\exp(h(x))\cdot \ln(a)=\exp(x\cdot \ln(a))\cdot \ln(a) =a^x\cdot \ln(a). \]
+
+\end{tabs*}
+\end{example}
+
+
+
+
+
+
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\randint{k}{1}{4}	% Zufallsvariable f\"ur Auswahl:
+			\function[calculate]{d1}{-(k-2)*(k-3)*(k-4)/6}  % "Dirac"-funktionen
+			\function[calculate]{d2}{(k-1)*(k-3)*(k-4)/2}
+			\function[calculate]{d3}{-(k-1)*(k-2)*(k-4)/2}
+			\function[calculate]{d4}{(k-1)*(k-2)*(k-3)/6}
+
+			\randint{l}{1}{2}   %Zufallsvariable f\"ur Auswahl
+			\function[calculate]{l1}{-(l-2)}  % "Dirac"-funktionen
+			\function[calculate]{l2}{(l-1)}
+
+			\function{h0}{x^2+1}
+			\function[normalize]{h}{l1*x+l2*h0}
+
+			\function[normalize]{f1}{sin(h)}
+			\function[normalize]{f2}{cos(h)}
+			\function[normalize]{f3}{exp(h)}
+			\function[normalize]{f4}{(h^3+1)}
+			\function[expand,normalize]{f}{d1*f1+d2*f2+d3*f3+d4*f4}
+			\function[normalize]{df}{d1*f2+d2*(-f1)+d3*f3+d4*3*h^2}  % Ableitung von f an der Stelle h
+
+			% g=h0°f (falls l1=1) oder g=f°h0 (falls l2=1) mit f in fi
+			\function[normalize]{g}{l2*f+l1*(f^2+1)}
+			\function[expand,normalize]{dg}{l2*df*2*x+l1*(2*df*f)}
+            \function[normalize]{ss}{l2*h0+l1*f}            
+		\end{variables}
+
+			\text{\lang{de}{
+        Bestimmen Sie mit der Kettenregel die Ableitung der Funktion $h(x)=\var{g}$.\\
+				Die Ableitung ist $h'(x)=$ \ansref.
+        }
+        \lang{en}{
+        Use the chain rule to determine the derivative of the function $h(x)=\var{g}$.\\
+        The derivative is $h'(x)=$ \ansref.
+        }}
+
+     \begin{answer}
+          \solution{dg}
+%		  \allowForInput[false]{)}
+          \checkAsFunction{x}{-2}{2}{20}
+      \end{answer}
+      \explanation{\lang{de}{
+      Die Kettenregel sagt aus, dass für $(f\circ g)(x_0) = f(g(x_0))$ die Ableitung durch 
+      $f'(g(x_0))\cdot g'(x_0)$ gegeben wird.
+      }
+      \lang{en}{
+      The chain rule tells us that the derivative of $(f\circ g)(x_0) = f(g(x_0))$ is given by the 
+      function $f'(g(x_0))\cdot g'(x_0)$.
+      }}
+\end{quickcheck}
+
+
+\begin{example}
+\lang{de}{
+Mit Hilfe der Ableitung des Logarithmus 
+\ref[content_02_ableitungsregeln][(siehe hier)]{ex:abl-umkehrfunktion} und der Kettenregel lassen 
+sich auch die Ableitungen reeller Potenzfunktionen $f(x)=x^r$ bestimmen. Hierzu beachte man, dass die 
+reelle Potenz $x^r$ definiert ist als $\exp(r\cdot \ln(x))$. Damit gilt f\"ur die Ableitung
+}
+\lang{en}{
+Using the \ref[content_02_ableitungsregeln][derivative of the logarithm]{ex:abl-umkehrfunktion} and 
+the chain rule, we can also find the derivative of power functions $f(x)=x^r$ by expressing it as 
+$\exp(r\cdot \ln(x))$. Using this, we have the derivative
+}
+\begin{eqnarray*}
+f'(x) &=& \exp'(r\ln(x))\cdot r\cdot \ln'(x) \\
+&=&  \exp(r\ln(x))\cdot r\cdot \frac{1}{x}\\ 
+&=& x^r\cdot r\cdot x^{-1}=rx^{r-1}
+\end{eqnarray*}
+\end{example}
+
+
+
+\section{\lang{de}{Ableitung von Umkehrfunktionen}\lang{en}{Derivative of an inverse}}
+
+\lang{de}{
+Mit Hilfe der Kettenregel l\"asst sich auch eine Formel f\"ur die Ableitung der 
+\ref[umkehrfkt][Umkehrfunktion]{def:partielle-umkehrfunktion} finden.
+}
+\lang{en}{
+Using the chain rule we may derive a formula for the 
+\ref[umkehrfkt][inverse function]{def:partielle-umkehrfunktion}.
+}
+
+\begin{rule}\label{rule:abl-umkehrfkt}
+\lang{de}{
+Ist $f:D\to W$ umkehrbar und differenzierbar in $x_0$ mit $f'(x_0)\neq 0$, so ist die Umkehrfunktion 
+$f^{-1}$ differenzierbar in $y_0=f(x_0)$ und es gilt
+}
+\lang{en}{
+If $f:D\to W$ is invertible and differentiable at $x_0$ with $f'(x_0)\neq 0$, then the inverse 
+function $f^{-1}$ is differentiable at $y_0=f(x_0)$ and we have
+}
+\[  (f^{-1})'(y_0)=\frac{1}{f'(x_0)}=\frac{1}{f'(f^{-1}(y_0))}. \]
+\lang{de}{
+\floatright{\href{https://www.hm-kompakt.de/video?watch=518}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{}
+\end{rule}
+
+\begin{proof*}[\lang{de}{Beweis der Ableitungsregel für die Umkehrfunktion}
+               \lang{en}{Proof of the derivative rule for the inverse function}]
+\begin{incremental}[\initialsteps{0}]
+\step \lang{de}{
+Nach Definition der Umkehrfunktion ist $x=(f^{-1}\circ f)(x)$ f\"ur alle $x\in D$. Unter der Annahme, 
+dass die Umkehrfunktion in $y_0$ differenzierbar ist, bildet man auf beiden Seiten die Ableitungen an 
+der Stelle $x_0$, und erh\"alt man mit der Kettenregel
+}
+\lang{en}{
+By definition, the inverse function satisfies $x=(f^{-1}\circ f)(x)$ for all $x\in D$. Under the 
+assumption that the inverse is differentiable at $y_0$, we differentiate both sides of this 
+equation at $x_0$, and using the chain rule obtain 
+}
+\[ 1= (f^{-1})'(f(x_0))\cdot f'(x_0). \]
+\step 
+\lang{de}{Also}
+\lang{en}{So}
+\[ (f^{-1})'(f(x_0))=\frac{1}{f'(x_0)}=\frac{1}{f'(f^{-1}(y_0))}. \]
+\lang{de}{
+Den technischen Beweis, dass die Umkehrfunktion wirklich bei $y_0$ differenzierbar ist, lassen wir weg.
+}
+\lang{en}{
+We omit here the technical proof that the inverse function is in fact differentiable at $y_0$.
+}
+\end{incremental}
+\end{proof*}
+
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\randint[Z]{a0}{1}{5}
+            \number{a1}{1}
+            \function[calculate]{a}{1+a0/a1}
+            \function[calculate]{b}{a+1/a}
+		    \function[normalize]{f}{x+1/x}            
+			\derivative[normalize]{df}{f}{x}
+            \function[calculate]{dgb}{a^2/(a^2-1)}
+		\end{variables}
+		
+		\text{\lang{de}{
+        Die Funktion $f:(2,\infty)\to \R$ mit $f(x)=x+\frac{1}{x}$ besitzt eine reelle
+        Umkehrfunktion $g:(2,\infty)\to \R$. Bestimmen Sie die Ableitung von $g$ an der 
+        Stelle $y=f(\var{a})=\var{b}$.\\ Die Ableitungsfunktion von $f$ ist $f'(x)=$ \ansref.\\
+        Damit ist $g'(\var{b})=$\ansref.
+        }
+        \lang{en}{
+        The function $f:(2,\infty)\to \R$ defined by $f(x)=x+\frac{1}{x}$ has a real inverse function 
+        $g:(2,\infty)\to \R$. Determine the derivative of $g$ at the point $y=f(\var{a})=\var{b}$.\\ 
+        The derivative of $f$ is $f'(x)=$ \ansref.\\
+        Hence $g'(\var{b})=$\ansref.
+        }}
+		\begin{answer}
+			\solution{df}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\begin{answer}
+			\solution{dgb}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\explanation{\lang{de}{Nach der Regel für die Ableitung der Umkehrfunktion ist}
+        \lang{en}{By the rule for differentiating an inverse function,}
+        $g'(\var{b})=\frac{1}{f'(\var{a})}=\frac{1}{1-\frac{1}{\var{a}^2}}=\frac{\var{a}^2}{\var{a}^2-1}$.
+        }
+	\end{quickcheck}
+    
+    
+\begin{remark}
+\lang{de}{
+Die Formel f\"ur die Ableitung der Umkehrfunktion l\"asst sich auch gut veranschaulichen, wenn man 
+sich erinnert, dass man den Graphen der Umkehrfunktion $f^{-1}$ dadurch bekommt, dass man den Graphen 
+der Funktion $f$ an der ersten Winkelhalbierenden spiegelt. Die Tangente an den Funktionsgraphen an 
+der Stelle $x_0$ wird dann beim Spiegeln eine Tangente an den Graphen der Umkehrfunktion an der 
+Stelle $y_0=f(x_0)$, und deren Steigung ist genau der Kehrbruch der Steigung der urspr\"unglichen 
+Tangente.
+}
+\lang{en}{
+The formula for the derivative of the inverse function can be justified by recalling that the graph 
+of the inverse function $f^{-1}$ is the reflection of the graph of the function $f$ in the line 
+$x=y$. The tangent of the function $f$ at a point $x_0$ is hence transformed into a tangent of the 
+inverse function $f^{-1}$ at the point $y_0=f(x_0)$, whose gradient is the reciprocal of the 
+gradient of the original tangent.
+}
+
+%BILD EINFÜGEN
+	\begin{genericGWTVisualization}[550][1000]{mathlet1}
+		\begin{variables}
+			\randint{randomA}{1}{2}
+			\function{f}{real}{exp(x)}
+			\function{g}{real}{ln(x)}
+			\pointOnCurve[0.1,4]{P}{real}{var(g)}{0.5}
+			\number{x0}{real}{var(P)[x]}
+			\number{y0}{real}{var(P)[y]}
+			\number{t}{real}{1/var(x0)}
+			\point{Q}{real}{var(x0)+1, var(y0)+var(t)}
+			\point{R}{real}{var(x0)+1, var(y0)}
+			\line{l}{real}{var(P),var(Q)}
+			\segment{h}{real}{var(P),var(R)}
+			\segment{v}{real}{var(Q),var(R)}
+			\point{P2}{real}{var(P)[y], var(P)[x]}
+			\point{Q2}{real}{var(Q)[y], var(Q)[x]}
+			\point{R2}{real}{var(R)[y], var(R)[x]}
+			\line{l2}{real}{var(P2),var(Q2)}
+			\segment{h2}{real}{var(P2),var(R2)}
+			\segment{v2}{real}{var(Q2),var(R2)}
+			\function{d}{real}{x}
+		\end{variables}
+		\color{P}{#0066CC}
+		\color{P2}{#0066CC}
+		\color{l}{#0066CC}
+		\color{h}{#0066CC}
+		\color{v}{#0066CC}
+		\color{l2}{#0066CC}
+		\color{h2}{#0066CC}
+		\color{v2}{#0066CC}
+		\color{d}{LIGHT_GRAY}
+		\label{P}{$\textcolor{#0066CC}{P}$}
+
+		\begin{canvas}
+			\plotSize{300}
+			\plotLeft{-3}
+			\plotRight{3}
+			\plot[coordinateSystem]{f,g,d, l,h,v,l2,h2,v2, P, P2}
+		\end{canvas}
+		\lang{de}{\text{
+    Die Umkehrfunktion erh\"alt man durch Spiegeln an der Diagonalen. Ebenso das Steigungsdreieck am 
+    gespiegelten Punkt.
+    }}
+    \lang{en}{\text{
+    The inverse function is obtained by a reflection in the diagonal, as is the triangle by which we 
+    calculate the gradient of the tangent.
+    }}
+\end{genericGWTVisualization}
+\end{remark}
+
+\begin{example}\label{ex:abl-umkehrfunktion}
+\begin{tabs*}[\initialtab{0}]
+\tab{$\sqrt[n]{x}$}
+\lang{de}{
+Die $n$-te Wurzelfunktion $g(x)=\sqrt[n]{x}=x^{\frac{1}{n}}$ ist die Umkehrfunktion der $n$-ten 
+Potenzfunktion $f:\R_+\to \R_+$ mit $f(x)=x^n$. F\"ur $x>0$ ist letztere differenzierbar mit 
+$f'(x)=nx^{n-1}\neq 0$. Also ist auch die Wurzelfunktion f\"ur alle $x>0$ differenzierbar und es 
+gilt:
+}
+\lang{en}{
+The $n$th root function $g(x)=\sqrt[n]{x}=x^{\frac{1}{n}}$ is the inverse function of the $n$th 
+power function $f:\R_+\to \R_+$ where $f(x)=x^n$. For $x>0$, the latter is differentiable with 
+$f'(x)=nx^{n-1}\neq 0$. Therefore the $n$th root function is differentiable for all $x>0$ and we have:
+}
+\begin{eqnarray*}
+g'(x) &=& \frac{1}{f'(g(x))}=\frac{1}{n(g(x))^{n-1}} \\
+&=& \frac{1}{n\cdot \sqrt[n]{x}^{n-1}}=\frac{1}{n}\cdot x^{- \frac{n-1}{n}}\\
+&=& \frac{1}{n}\cdot x^{\frac{1}{n}-1}.
+\end{eqnarray*} 
+\lang{de}{
+Für den Punkt $x=0$ lässt sich die Regel nicht Anwenden, da dort $f'(0) = 0$ gilt. Zudem ist die 
+Wurzelfunktion in $x=0$ gar nicht differenzierbar.
+}
+\lang{en}{
+The rule may not be applied for $x=0$, as $f'(0) = 0$. Hence the $n$th root function is simply not 
+differentiable at $x=0$.
+}
+\tab{$\ln(x)$}
+\lang{de}{
+Der nat\"urliche Logarithmus $g(x)=\ln(x)$ ist die Umkehrfunktion der Exponentialfunktion 
+$\exp(x)=e^x$. Wegen $\exp'(x)=\exp(x)>0$ f\"ur alle $x\in \R$ ist auch der nat\"urliche Logarithmus 
+auf seinem gesamten Definitionsbereich $\R_{>0}=\{ x\in \R\,|\, x>0\}$ differenzierbar und es gilt
+}
+\lang{en}{
+The natural logarithm $g(x)=\ln(x)$ is the inverse function of the exponential function 
+$\exp(x)=e^x$. Because $\exp'(x)=\exp(x)>0$ for all $x\in \R$, the natural logarithm is also 
+differentiable on its entire domain $\R_{>0}=\{ x\in \R\,|\, x>0\}$ and we have
+}
+\[ \ln'(x) =  \frac{1}{f'(g(x))}= \frac{1}{\exp(\ln(x))}=\frac{1}{x}. \]
+\tab{$\arctan(x)$}
+\lang{de}{
+Der Hauptzweig der Tangensfunktion $\tan:(-\frac{\pi}{2},\frac{\pi}{2})\to \R$ ist auf dem ganzen 
+Definitionsbereich differenzierbar mit $\tan'(x)=1+\tan(x)^2>0$. Also ist deren Umkehrfunktion, der 
+Arkustangens $\arctan$, auch auf ganz $\R$ differenzierbar und dessen Ableitung berechnet sich als
+}
+\lang{en}{
+The \emph{principal branch} of the tangent function $\tan:(-\frac{\pi}{2},\frac{\pi}{2})\to \R$ is 
+differentiable on its entire domain with $\tan'(x)=1+\tan(x)^2>0$. Therefore its inverse function 
+$\arctan$ is also differntiable on its entire domain $\R$ with derivative
+}
+\[  \arctan'(y)=\frac{1}{\tan'(\arctan(y))} 
+=\frac{1}{1+\tan(\arctan(y))^2}=\frac{1}{1+y^2}. \]
+\end{tabs*}
+\end{example}
+
+\lang{de}{
+Dieses abschließende Video fasst einige Ableitungsregeln zusammen.
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10758&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+}
+\lang{en}{}
+
+\end{visualizationwrapper}
+
+
+\end{content}

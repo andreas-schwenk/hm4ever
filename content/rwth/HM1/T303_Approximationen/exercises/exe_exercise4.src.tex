@@ -1,0 +1,155 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü05: Newton}
+    \lang{en}{Exercise 5}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Ü05: Newton}}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10495}{Ticket 10495}
+\end{block}
+
+%######################################################FRAGE_TEXT
+\lang{de}{ Gegeben sei die Funktion $f(x)=x+\cos(x)$ (siehe Grafik).
+\begin{enumerate}[a)]
+\item a) Anhand der Grafik sieht man, dass $f$ genau eine Nullstelle besitzt. Mit welchen
+Kriterien lässt sich dies zeigen?
+\item b) Untersuchen Sie anhand der Grafik, zwischen welchen ganzen Zahlen die Nullstelle von 
+$f(x)=x+\cos(x)$ liegt, und bestätigen Sie dies rechnerisch.
+\item c) Bestimmen Sie (mit Hilfe des Taschenrechners) die ersten Folgeglieder des Newton-Verfahrens, bis sie sich in den ersten 6 Nachkommastellen nicht mehr unterscheiden, und zwar startend mit
+\begin{enumerate}[1.]
+\item 1) der kleineren der in b) bestimmten Zahlen bzw.
+\item 2) der größeren der in b) bestimmten Zahlen.
+\end{enumerate}
+Runden Sie die Zwischenergebnisse auf $8$ Stellen nach dem Komma.
+\end{enumerate}
+}
+
+%##################################################ANTWORTEN_TEXT
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+   %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{   Lösung a)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{ In diesem (und vielen anderen Fällen) lässt sich die Existenz genau einer Nullstelle wie folgt zeigen:
+    Wenn die  Funktion $f$     streng monoton  ist, dann hat sie höchstens eine Nullstelle.
+    Wenn  sie stetig ist und außerdem $\lim_{x\to \infty} f(x)=\infty$ und
+$\lim_{x\to -\infty} f(x)=-\infty$ gilt, dann muss sie nach dem Zwischenwertsatz auch mindestens eine Nullstelle haben.
+
+
+Hier ist $f$ sogar differenzierbar, also sehen wir $f'(x)=1-\sin(x)$ und wegen $|\sin(x)|\leq 1$ ist also $f'(x)\geq 0$ für alle $x\in \R$. 
+Also ist $f$ monoton wachsend. Wäre $f$ nicht streng monoton wachsend, so wäre $f$ auf einem (kleinen) Intervall konstant, auf welchem dann $f'(x)=0$ gälte. Jedoch ist $f'(x)=0$ nur für
+$x\in \{ 2k\pi+\frac{\pi}{2} | k\in \Z\}$. Daher ist $f$ sogar streng monoton wachsend.
+
+Weiter gilt für alle $x\in \R$:
+\[  x-1\leq x+\cos(x)\leq x+1 \]
+und damit
+\[ \lim_{x\to \infty} f(x)\geq \lim_{x\to \infty} (x-1)=\infty \]
+sowie
+\[ \lim_{x\to -\infty} f(x)\leq \lim_{x\to -\infty} x+1=-\infty. \] }
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+  
+   %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{   Lösung b)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{ 
+Anhand der Grafik sieht man, dass die Nullstelle im Intervall $[-1, 0]$ liegt.
+Rechnerisch bestätigt man dies, indem man die Funktionswerte bei $x=-1$ und bei $x=0$ betrachtet:
+\begin{eqnarray*}
+f(-1) &=& (-1)+\cos(-1)< -1+1=0,\quad \text{da }\cos(-1)\neq 1, \\
+f(0) &=& 0+\cos(0)=1>0. 
+\end{eqnarray*}
+Da $f(-1)<0$ und $f(0)>0$ ist, und die Funktion stetig ist, gibt es nach dem Zwischenwertsatz eine
+Stelle $x_0$ im Intervall $[-1, 0]$ mit $f(x_0)=0$, also eine Nullstelle.\\
+Das gegebene Intervall ist ein Beispiel. Andere Intervalle wären möglich.
+ }
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+  
+   %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{   Lösung c)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{ 
+Die Rekursionsformel für das Newton-Verfahren lautet:
+\[ x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}=x_n-\frac{x_n+\cos(x_n)}{1-\sin(x_n)}=\frac{x_n-x_n\sin(x_n)-x_n-\cos(x_n)}{1-\sin(x_n)}=-\frac{x_n\sin(x_n)+\cos(x_n)}{1-\sin(x_n)}. \]
+
+Für $x_0=-1$ erhält man daher:
+\begin{eqnarray*}
+x_1&=& -\frac{-1\cdot \sin(-1)+\cos(-1)}{1-\sin(-1)}\approx -0,75036387 \\
+x_2&=& -\frac{x_1\sin(x_1)+\cos(x_1)}{1-\sin(x_1)}\approx -0,73911289 \\
+x_3&=& -\frac{x_2\sin(x_2)+\cos(x_2)}{1-\sin(x_2)}\approx -0,73908513 \\
+x_4&=& -\frac{x_3\sin(x_3)+\cos(x_3)}{1-\sin(x_3)}\approx -0,73908513
+\end{eqnarray*}
+Auf 6 Stellen nach dem Komma liegt die Nullstelle also bei $-0,739085$.
+
+Für $x_0=0$ erhält man entsprechend:
+\[  x_1= -\frac{0\cdot \sin(0)+\cos(0)}{1-\sin(0)}=-1. \]
+Die weiteren Folgeglieder sind daher die obigen, jedoch im Index um $1$ verschoben.
+}
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+%#############################################################ENDE
+\end{tabs*}
+
+\begin{genericGWTVisualization}[700][1000]{mathlet1}
+\lang{de}{\title{Die Funktion cos(x)+x}}
+\begin{variables}
+	
+	\function{f}{real}{x+cos(x)}
+
+		
+ \color{f}{#0066CC}
+ 
+	
+\end{variables}
+\begin{canvas}
+	\plotSize{600}
+	\plotLeft{-10}
+	\plotRight{10}
+	\plot[coordinateSystem]{f}
+\end{canvas}
+
+
+\end{genericGWTVisualization}
+
+\end{visualizationwrapper}
+\end{content}

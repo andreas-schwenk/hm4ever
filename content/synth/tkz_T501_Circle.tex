@@ -1,0 +1,36 @@
+%This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)
+%https://creativecommons.org/licenses/by/4.0/legalcode
+\documentclass[rgb]{standalone}
+\usepackage{tkz-euclide}
+\definecolor{myorange}{hsb}{0.0833, 1, 0.8}
+\definecolor{mygreen}{hsb}{0.3333, 1, 0.8}
+\definecolor{myblue}{hsb}{0.5833, 1, 0.8}
+\definecolor{mymagenta}{hsb}{0.8333, 1, 0.8}
+\begin{document}
+\begin{tikzpicture}[scale=1.5, font=\Large]
+	% Coordinate system
+	\tkzInit[xmin=-3,xmax=3,ymin=-3,ymax=3]
+	\tkzGrid[color=lightgray]
+	\tkzDrawX[thick,label=$x_1$]
+	\tkzDrawY[thick,label=$x_2$]
+	% Unit circle
+	\draw[very thick,domain=0:135, smooth, variable=\x, myblue, -latex] plot ({2*cos(\x)}, {2*sin(\x)});
+	\draw[very thick,domain=130:365, smooth, variable=\x, myblue] plot ({2*cos(\x)}, {2*sin(\x)});
+	% Tangent
+	\draw[very thick,myorange, -latex] ({2*cos(60)},{2*sin(60)}) -- ({2*cos(60)-2*sin(60)},{2*sin(60)+2*cos(60)});
+	% Angle
+	\tkzDefPoint(0,0){O}
+	\tkzDefPoint(2*cos(pi/3),2*sin(pi/3)){A}
+	\tkzDefPoint(1,0){B}
+	\draw[thick,fill,fill opacity=0.1] (0,0) -- (0.75,0) arc (0:60:0.75);
+	\tkzDrawSegment[thick](O,A)
+    \node[very thick, draw, circle,fill,myblue,inner sep=2] at (A) {};
+	% Labels
+	\node[below=0.5mm] at (2,0){$1$};
+	\node[below=0.5mm] at (-2,0){$-1$};
+	\node[left=0.5mm] at (0,2){$1$};
+	\node[left=0.5mm] at (0,-2){$-1$};
+	\node[above, color=myorange] at (0.45,2.2){$\varphi'(t)$};
+    \node[above] at (0.375,0.05){$t$};
+\end{tikzpicture}	
+\end{document}

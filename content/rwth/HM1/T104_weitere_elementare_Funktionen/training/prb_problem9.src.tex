@@ -1,0 +1,125 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Simplification of logarithmic terms}
+    \lang{de}{A09: Rechnen mit Logarithmen}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+  \begin{taxonomy}
+        \difficulty{1}
+        \usage{HM4Mint}
+        \objectives{apply}
+        \topic{analysis1/elementary_functions/real_logarithmic_function}
+  \end{taxonomy}
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/30101}{Ticket 30101}
+\end{block}
+\begin{block}[annotation]
+Copy of : /home/mumie/checkin/content/playground/TimJacobs/prb_H4MintLogExp.src.tex
+\end{block}
+
+\usepackage{mumie.genericproblem}
+\lang{de}{
+	\title{A09: Rechnen mit Logarithmen}
+}
+\embedmathlet{gwtmathlet}
+\begin{problem}
+    \begin{question}
+ 
+      \begin{variables}
+        \randint{a}{2}{99}
+        \randint{b}{2}{99}
+        \randadjustIf{b}{a = b}
+        \randint{c}{2}{99}
+        \randadjustIf{c}{c=a OR c=b}
+        \randint{d}{2}{99}
+        \randadjustIf{d}{d=c OR d=b OR d=a }
+        \function{f1}{log(d)}
+        \function{f2}{ln(d)}
+      \end{variables}
+ 
+      \type{input.function}
+      \field{real}
+      \lang{en}{\text{Simplify as much as possible:}}
+      \lang{de}{\text{Vereinfachen Sie soweit wie möglich:}}     
+      
+ 
+      \begin{answer}
+          \text{$\log_{\var{a}}\left(\var{b}^{\log_{\var{b}}( \var{c})} \right) \cdot \log_{\var{c}}\left(\var{d}^{\ln(\var{a})} \right) = $}
+          \inputAsFunction{x}{g}
+          \solution{f2}
+          \checkStringsForRelation{equal(g,f1) OR equal(g,f2)}
+          \explanation{Benutzen Sie die Logarithmusgesetze. Geben Sie Ihr Ergebnis in der Form $\ln(a)$ ein.} 
+      \end{answer}
+ 
+  \end{question}
+  
+  \begin{question} 
+    \begin{variables}
+        \randint{a}{2}{3}
+        \randint{c}{4}{10}
+        \randint{d}{4}{10}
+        \randadjustIf{d}{c=d}
+        \function[calculate]{b}{c*d}
+        \function{f}{a}
+        \function[calculate]{CA}{c^a}
+    \end{variables}
+    \lang{en}{\text{Simplify as much as possible:}}
+    \lang{de}{\text{Vereinfachen Sie soweit wie möglich:}}
+    \type{input.function}
+     \field{real}
+    \begin{answer}
+        \text{$\log_{\var{b}}(e) \cdot \ln(\var{CA}) + \var{a}  \cdot \ln(\var{d})\cdot \log_{\var{b}}(e)=$}
+         \solution{f}
+         \inputAsFunction{x}{g}
+         \checkStringsForRelation{equal(g,f)}
+         \explanation{Benutzen Sie die Logarithmusgesetze. }
+    \end{answer}
+  \end{question}
+  
+  \begin{question}
+    \begin{variables}
+        \randint{c}{2}{5}
+        \randint{r}{2}{4}
+        \randint{a}{2}{10}
+        \randadjustIf{a,c,r}{c^r>=a^2}
+        \function[calculate]{XX}{a^2-c^r}
+        \function{b}{sqrt(XX)}
+        \function{f}{r}
+    \end{variables}
+    \type{input.function}
+      \field{real}
+      \lang{en}{\text{Simplify as much as possible:}}
+      \lang{de}{\text{Vereinfachen Sie soweit wie möglich:}}     
+      \explanation{} 
+      \begin{answer}
+        \text{$\log_{\var{c}}(\var{a}-\var{b}) + \log_{\var{c}}(\var{a}+\var{b})=$}
+        \solution{f}
+        \inputAsFunction{x}{g}
+        \checkStringsForRelation{equal(g,f)}
+         \explanation{Benutzen Sie die Logarithmusgesetze. }
+      \end{answer}
+  \end{question}
+\end{problem}
+
+\end{content}

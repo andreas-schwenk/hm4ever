@@ -1,0 +1,191 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Aufgabe 3}
+    \lang{en}{input numbers}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22764}{Ticket 22764}
+\end{block}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{Aufgabe 3}}
+\lang{en}{\title{Problem 3}}
+
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9645}{Ticket 9645}
+\end{block}
+
+
+
+
+\begin{problem}
+
+	\begin{question}
+		\lang{de}{\text{
+			Gegeben sei die Gerade
+			$ g= \left\{\begin{pmatrix}\var{a1}\\ \var{a2} \end{pmatrix}+ \lambda \begin{pmatrix}\var{b1}\\ \var{b2}\end{pmatrix} \vert \lambda \in \R \right\}. $
+			Bestimmen Sie einen Normalenvektor $\vec{n}$ von $g$.
+ 			}
+		}
+	\explanation[edited]{Ein Normalenvektor einer Gerade steht senkrecht zu dieser und damit auch zu allen möglichen Richtungsvektoren der Gerade.
+    Ein Normalenvektor der Geraden $g$ ist also ein zum gegebenen Richtungsvektor senkrecht stehender Vektor, so dass das Skalarprodukt des Richtungsvektors mit
+    dem gesuchten Normalenvektor Null ergibt.}
+		
+		\type{input.function}
+		\field{real}
+		
+		
+		\begin{variables}
+			\randint{a1}{-15}{15}
+			\randint{a2}{-15}{15}
+			
+			\randadjustIf{a1,a2}{a1^2+a2^2=0}
+			\randint{b1}{-9}{9}
+			\randint{b2}{-9}{9}
+			
+			\randadjustIf{b1,b2}{b^2+b2^2=0}
+			
+			\function[calculate]{n1}{-b2}
+			\function[calculate]{n2}{b1}
+		\end{variables}
+		
+		\begin{answer}
+			\text{$n_1 = $}
+			\solution{n1}
+			\inputAsFunction{x}{nx}
+		\end{answer}
+		
+		\begin{answer}
+			\text{$n_2 = $}
+			\solution{n2}
+			\inputAsFunction{x}{ny}
+			\checkFuncForZero{n1*ny-nx*n2}{-10}{10}{100}
+		\end{answer}
+		
+	\end{question}
+	
+	\begin{question}
+		\lang{de}{\text{
+			Gegeben sei die Ebene 
+			$ E= \left\{ \begin{pmatrix}\var{a1}\\\var{a2}\\\var{a3}\end{pmatrix} + r \begin{pmatrix}\var{b1}\\\var{b2}\\\var{b3}\end{pmatrix} + s\begin{pmatrix}\var{c1}\\\var{c2}\\\var{c3}\end{pmatrix} \vert \, r,s\in \R \right\}. $
+			Bestimmen Sie einen Normalenvektor $\vec{n} = \begin{pmatrix} n_1 \\ n_2 \\ n_3 \end{pmatrix}$ der Ebene und geben Sie $E$ in 
+			Koordinatenform an, das heißt geben Sie Koordinaten $z_1, z_2, z_3, z_4, z_5$ und $z_6$ an, so dass \\
+			$E = \left\{ x\in \R^3 \vert z_1 x_1 + z_2 x_2 +z_3 x_3 =  z_1  z_4 + z_2 z_5 + z_3 z_6   \right\}$.
+			}
+		}
+	\explanation[edited]{Ein Normalenvektor einer Ebene steht senkrecht zu dieser. Damit steht ein Normlenvektor einer Ebene auch senkrecht
+    zu den durch die Ebene aufgespannten Richtungsvektoren. Man erhält einen zu den Richtungsvektoren senkrecht stehenden Vektor, indem man
+    das Vektorprodukt der beiden Richtungsvektoren bildet.}
+		
+		\type{input.function}
+		\field{real}
+		
+		
+		\begin{variables}
+			
+			\randint{a1}{-15}{15}
+			\randint{a2}{-15}{15}
+			\randint{a3}{-15}{15}
+			\randadjustIf{a1,a2,a3}{a1^2+a2^2+a3^2=0}
+			\randint{b1}{-9}{9}
+			\randint{b2}{-9}{9}
+			\randint{b3}{-9}{9}
+			\randadjustIf{b1,b2,b3}{b1^2+b2^2+b3^2=0}
+			\randint{c1}{-9}{9}
+			\randint{c2}{-9}{9}
+			\randint{c3}{-9}{9}
+			\randadjustIf{c1,c2,c3}{c1^2+c2^2+c3^2=0}
+			\randadjustIf{c1,c2,c3}{(b1*c2-c1*b2)^2+(b2*c3-c2*b3)^2+(b1*c3-b3*c1)^2=0}
+			\function[calculate]{n1}{b2*c3-b3*c2}
+			\function[calculate]{n2}{b3*c1-b1*c3}
+			\function[calculate]{n3}{b1*c2-b2*c1}
+			\function[calculate]{z1}{n1}
+			\function[calculate]{z2}{n2}
+			\function[calculate]{z3}{n3}
+			\function[calculate]{z4}{a1}
+			\function[calculate]{z5}{a2}
+			\function[calculate]{z6}{a3}
+		\end{variables}
+		
+		\begin{answer}
+			\text{$n_1 = $}
+			\solution{n1}
+			\inputAsFunction{x}{nx}
+		\end{answer}
+		
+		\begin{answer}
+			\text{$n_2 = $}
+			\solution{n2}
+			\inputAsFunction{x}{ny}
+		\end{answer}
+		
+		\begin{answer}
+			\text{$n_3 = $}
+			\solution{n3}
+			\inputAsFunction{x}{nz}
+		\end{answer}
+		\begin{answer}
+			\text{$z_1 = $}
+			\solution{z1}
+			\inputAsFunction{x}{z11}
+		\end{answer}
+		
+		\begin{answer}
+			\text{$z_2 = $}
+			\solution{z2}
+			\inputAsFunction{x}{z22}
+		\end{answer}
+		
+		\begin{answer}
+			\text{$z_3 = $}
+			\solution{z3}
+			\inputAsFunction{x}{z33}
+			
+		\end{answer}
+		
+		\begin{answer}
+			\text{$z_4 = $}
+			\solution{z4}
+			\inputAsFunction{x}{z44}
+		\end{answer}
+		
+		\begin{answer}
+			\text{$z_5 = $}
+			\solution{z5}
+			\inputAsFunction{x}{z55}
+			
+		\end{answer}
+		\begin{answer}
+			\text{$z_6 = $}
+			\solution{z6}
+			\inputAsFunction{x}{z66}
+			\checkFuncForZero{(z44*n1+z55*n2+z66*n3-(n1*z4+n2*z5+n3*z6))^2+(n1*z22-z11*n2)^2+(n2*z33-z22*n3)^2+(n1*z33-n3*z11)^2+(n1*ny-nx*n2)^2+(n2*nz-ny*n3)^2+(n1*nz-n3*nx)^2}{-10}{10}{100}
+            	\explanation{Die Komponenten eines Normalenvektors entsprechen den Vorfaktoren der $x_i$ der Koordinatengleichung der Ebene. Die rechte Seite der Koordinatengleichung der Ebene
+    ergibt sich durch Einsetzen eines auf der Ebene liegenden Punktes, der die Koordinatengleichung erfüllen muss.}
+		\end{answer}
+	\end{question}
+	
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

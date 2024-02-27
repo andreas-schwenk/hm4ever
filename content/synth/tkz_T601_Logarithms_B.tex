@@ -1,0 +1,32 @@
+%This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)
+%https://creativecommons.org/licenses/by/4.0/legalcode
+% Copy of T104_Logarithms_B
+\documentclass[rgb]{standalone}
+\usepackage{tkz-euclide}
+\definecolor{myorange}{hsb}{0.0833, 1, 0.8}
+\definecolor{mygreen}{hsb}{0.3333, 1, 0.8}
+\definecolor{myblue}{hsb}{0.5833, 1, 0.8}
+\definecolor{mymagenta}{hsb}{0.8333, 1, 0.8}
+\begin{document}
+	\begin{tikzpicture}[scale=1.5, font=\Large]
+		% Coordinate system
+		\tkzInit[xmin=-3,xmax=3,ymin=-3,ymax=3]
+		\tkzGrid[color=lightgray]
+		\tkzDrawX[thick,label=$x$]
+		\tkzDrawY[thick,label=$y$]
+		% Graphs
+		\draw[very thick,domain={exp(-3)}:{3}, samples=500,smooth, variable=\x, myblue] plot ({\x}, {ln(\x)});
+		\draw[very thick,domain={-3}:{ln(3)}, samples=500,smooth, variable=\x, myblue, dashed] plot ({\x}, {exp(\x)});
+		\draw[very thick,domain={10^(-3)}:{3}, samples=500,smooth, variable=\x, myorange] plot ({\x}, {ln(\x)/ln(10)});
+	    \draw[very thick,domain={ln(3)/ln(10)}:{-3}, samples=500,smooth, variable=\x, myorange, dashed] plot ({\x}, {10^\x});
+		% Labels
+		\node[below=0.5mm] at (-2,0){$-2$};
+		\node[below=0.5mm] at (2,0){$2$};
+		\node[left=0.5mm] at (0,-2){$-2$};
+		\node[left=0.5mm] at (0,2){$2$};
+		\node[right,myblue] at (1.4,1.3){$y=\ln(x)$};
+		\node[left,myblue] at (-1.8,0.35){$y=e^x$};
+		\node[right,myorange] at (-1.5,-2.5){$y=\lg(x)$};
+		\node[left,myorange] at (0.4,2.5){$y=10^x$};
+	\end{tikzpicture}	
+\end{document}

@@ -1,0 +1,92 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A03: Konsumenten- und Produzentenrente}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A03: Konsumenten- und Produzentenrente}}
+\lang{en}{\title{A03: Consumer and producer surplus}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24086}{Ticket 24086}
+\end{block}
+\usepackage{mumie.genericproblem}
+
+
+\begin{problem}
+
+%\randomquestionpool{1}{2}
+
+
+     \begin{variables}
+        \function{fa}{135+5*x^2}
+        \function{fn}{360-4*x^2}
+        \function[expand,normalize]{solx}{5}
+        \function[expand,normalize]{solp}{260}
+        \function[calculate]{pr}{1300-(135*5+5/3*5^3)}
+        \function[calculate]{kr}{360*5-4/3*5^3-1300}
+     \end{variables}
+          \begin{question}
+          \lang{de}{\text{Es seien die  Angebotsfunktion: $p_A(x)=135+5x^2$ und die  Nachfragefunktion $p_N(x)=360-4x^2$ gegeben.
+           Bestimmen Sie den (positiven) Gleichgewichtspunkt und den Marktpreis.}}
+         \lang{en}{\text{Suppose the supply function $p_A(x)=135+5x^2$ and the demand function $p_N(x)=360-4x^2$ are given.
+           Determine the (positive) equilibrium point and the market price}}.
+          \type{input.number}
+               \begin{answer}
+                 \text{$x^{\ast}=$ }
+                 \solution{solx}
+               \end{answer} 
+               \begin{answer}
+                 \text{$p^{\ast}=$}   
+                 \solution{solp}  
+               \end{answer}     
+           \lang{de}{\explanation[edited]{Die Gleichung $p_A(x)=p_N(x)$ ist zu lösen.}}
+            \lang{en}{\explanation[edited]{The equation $p_A(x)=p_N(x)$ is to be solved.}}
+          \end{question} 
+          
+           \begin{question}
+            \lang{de}{\text{Berechnen Sie nun die Konsumenten- und Produzentenrente.}}
+            \lang{en}{\text{Now calculate the consumer and producer surplus.}}
+            \correctorprecision{2}
+            %\explanation{...}
+                \begin{answer}
+                    \type{input.number}
+                    \text{$KR=$}
+                    \solution{kr}
+                    %\checkAsFunction[1e-2]{x}{-10}{10}{10}
+                    \explanation{$KR=\int_0^5p_N(x)dx-5\cdot 260$
+                    %=360\cdot 5-\frac{4}{3}5^3-1300=333\frac{1}{3}$
+                    }
+                \end{answer}
+                \begin{answer}
+                    \type{input.number}
+                    \text{$PR=$}
+                    \solution{pr}
+                    %\checkAsFunction[1e-2]{x}{-10}{10}{10}
+                    \explanation{$PR=1300-\int_0^5p_A(x)dx$
+                    %=1300-(135\cdot 5 +\frac{5}{3}5^3)=416\frac{2}{3}$
+                    }
+                \end{answer}
+                
+           \end{question}          
+     \end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

@@ -1,0 +1,77 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A06: arithmetische Reihe der Restbuchwerte}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A06: arithmetische Reihe der Restbuchwerte}}
+\lang{en}{\title{A06: arithmetic series of residual book values}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/23654}{Ticket 23654}
+\end{block}
+
+\usepackage{mumie.genericproblem}
+% $A_1<\frac{2(K_0-K_m)}{m}\iff m<\frac{2(K_0-K_m)}{A_1}$
+     \begin{problem}
+        \begin{variables}
+            \randint{a}{1}{4}
+            \randint{b}{1}{3}
+            \drawFromSet{p}{11,12,13,14,15,16}
+            \function[calculate]{k0}{a*300000}
+            \function[calculate]{km}{a*b*10000}
+            \function{m}{2*(k0-km)/(p*0.01*k0)}
+            \function[calculate]{mtrunc}{floor(m)+1}
+        \end{variables}
+          \begin{question}
+               \type{input.number} 
+               \lang{de}{\explanation{Hier sollte man die Abschätzung 
+               $\frac{K_0-K_m}{m}<A_1<\frac{2(K_0-K_m)}{m}$ und $A_1=\frac{p}{100}\cdot K_0$ benutzen.
+                Der rechte Teil der Ungleichung wird dann zu:
+                $m<\frac{2(K_0-K_m)}{A_1}=\frac{200(K_0-K_m)}{p\cdot K_0}$}}
+               \lang{en}{\explanation{Here one should use the bounds
+               $\frac{K_0-K_m}{m}<A_1<\frac{2(K_0-K_m)}{m}$ and $A_1=\frac{p}{100}\cdot K_0$.
+                The right-hand part of the inequality then becomes:
+                $m<\frac{2(K_0-K_m)}{A_1}=\frac{200(K_0-K_m)}{p\cdot K_0}$}}
+                \lang{de}{\text{In spätestens wieviel Jahren ist eine Fabrikeinrichtung mit einem 
+               Anschaffungswert von $\var{k0}$ \euro bei geometrisch-degressiver Abschreibung
+               mit einem Abschreibungsprozentsatz von $p=\var{p}$ \% auf einen Restwert
+               von $\var{km}$ \euro abgeschrieben?\\
+               $m<$ \ansref Jahre
+               }}
+               \lang{en}{\text{In how many years will a piece of factory equipment with an 
+               acquisition value of $\var{k0}$ \euro have depreciated to a residual value of
+               at most $\var{km}$ \euro, assuming geometric degressive depreciation
+               with a depreciation rate of $p=\var{p}$ \%? \\
+               $m<$ \ansref years
+               }}
+               
+               \begin{answer}
+                    \solution{mtrunc}
+               \end{answer}          
+          \end{question}     
+     \end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

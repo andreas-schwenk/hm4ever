@@ -1,0 +1,1120 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A05: Orthogonalbasen / ONB}
+    \lang{en}{P05: Orthogonal basis und orthonormal basis}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/14280}{Ticket 14280}
+\end{block}
+\usepackage{mumie.genericproblem}
+\usepackage{mumie.ombplus}
+
+\lang{de}{
+	\title{A05: Orthogonalbasen / Orthonormalbasen}
+}
+\lang{en}{
+	\title{P05: Orthogonal basis and orthonormal basis}
+}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/}{Ticket }
+\end{block}
+
+\lang{de}{
+\begin{problem}   
+     \randomquestionpool{1}{4}
+%     \randomquestionpool{1}{2}
+%     \randomquestionpool{3}{4}
+     %Q1
+     \begin{question}
+     
+       \text{Gegeben seien die Vektoren $v_1=\var{a}, v_2= \var{b}, v_3=\var{c} \in \R^3$. 
+       Wir betrachten den Vektorraum $\R^3$ zusammen mit dem Standard-Skalarprodukt. 
+       Wählen Sie alle korrekten Antworten aus.
+       
+     %Test Q1: det=$\var{det}$, m=$\var{m}$, norm=$\var{norm}$, orth=$\var{orthog}$
+       
+       }
+   
+       \permutechoices{1}{4}
+       \type{mc.yesno}
+       \field{real}
+       
+        \begin{variables}
+             \randint{m}{0}{4}
+             \begin{switch}
+                \begin{case}{m=0}
+                    \function{x}{0}
+                    \function{y}{-1}
+                \end{case}
+                \begin{case}{m=1}
+                    \function{x}{1/2}
+                    \function{y}{-sqrt(3)/2}
+                \end{case}
+                \begin{case}{m=3}
+                    \function{x}{sqrt(3)/2}
+                    \function{y}{-1/2}
+                \end{case}
+                \begin{case}{m=4}
+                    \function{x}{1}
+                    \function{y}{0}
+                \end{case}
+                \begin{default}%m=2
+                    \function{x}{sqrt(2)/2}
+                    \function{y}{-sqrt(2)/2}
+                \end{default}
+             \end{switch}
+             
+             \randint[Z]{z}{-1}{2}
+             \pmatrix{a}{0 \\ 1 \\ 0}
+             \pmatrix{b}{x \\ 0 \\ y}
+             \pmatrix{c}{z \\ 0 \\ 0}
+             \function[calculate]{det}{y*z}
+             \function[calculate]{norm}{abs(z)}
+             \function[calculate]{orthog}{(m+1)*norm}%nur orthonormal, falls m=0 und z=+-1
+         \end{variables}
+%
+% Erklärung bei Fehler 
+% keine Basis
+
+                
+                \explanation[[det=0] AND [equalChoice(111?)]]{
+                $\{v_1;v_2;v_3\}$ bildet keine Basis und somit auch keine Orthogonal- und keine Orthonormalbasis von $\R^3$.
+                }
+                \explanation[[det=0] AND [equalChoice(101?)]]{
+                $\{v_1;v_2;v_3\}$ bildet keine Basis und somit auch keine Orthonormalbasis von $\R^3$.
+                }
+                \explanation[[det=0] AND [equalChoice(110?)]]{
+                $\{v_1;v_2;v_3\}$ bildet keine Basis und somit auch keine Orthogonalbasis von $\R^3$.
+                }
+                \explanation[[det=0] AND [equalChoice(100?)]]{
+                $\{v_1;v_2;v_3\}$ bildet keine Basis von $\R^3$.
+                }
+                \explanation[[det=0] AND [equalChoice(011?)]]{
+                $\{v_1;v_2;v_3\}$ bildet keine Orthogonal- und auch keine Orthonormalbasis von $\R^3$.
+                }
+                \explanation[[det=0] AND [equalChoice(001?)]]{
+                $\{v_1;v_2;v_3\}$ bildet keine Orthonormalbasis von $\R^3$.
+                }
+                \explanation[[det=0] AND [equalChoice(010?)]]{
+                $\{v_1;v_2;v_3\}$ bildet keine Orthogonalbasis von $\R^3$.
+                }
+% Basis aber nicht orthogonal 
+                \explanation[[equalChoice(011?)] AND NOT [det=0] AND NOT [m=0]]{   
+                $\{v_1;v_2;v_3\}$ bildet eine Basis, aber keine Orthogonal- und damit auch keine Orthonormalbasis von $\R^3$.
+                }
+                \explanation[[equalChoice(010?)] AND NOT [det=0] AND NOT [m=0]]{   
+                $\{v_1;v_2;v_3\}$ bildet eine Basis, aber keine Orthogonalbasis von $\R^3$.
+                }
+                \explanation[[equalChoice(001?)] AND NOT [det=0] AND NOT [m=0] AND NOT [orthog=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet eine Basis, aber keine Orthonormalbasis von $\R^3$.
+                }
+                \explanation[[equalChoice(111?)] AND NOT [det=0] AND NOT [m=0] AND NOT [orthog=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet keine Orthogonal- und damit auch keine Orthonormalbasis von $\R^3$.
+                }
+                \explanation[[equalChoice(110?)] AND NOT [det=0] AND NOT [m=0]]{   
+                $\{v_1;v_2;v_3\}$ bildet keine Orthogonalbasis von $\R^3$.
+                }
+                \explanation[[equalChoice(101?)] AND NOT [det=0] AND NOT [m=0] AND NOT [orthog=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet keine Orthogonalbasis von $\R^3$.
+                }
+                \explanation[[equalChoice(000?)] AND NOT [det=0] AND NOT [m=0] AND NOT [orthog=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet eine Basis von $\R^3$.
+                } 
+% Basis orthogonal
+                \explanation[[equalChoice(001?)] AND NOT [det=0] AND [m=0] AND NOT [orthog=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet eine Orthogonalbasis, also auch eine Basis von $\R^3$ aber keine Orthonormalbasis.
+                }                
+% Basis orthonormal 
+                \explanation[[[equalChoice(0???)] OR [equalChoice(?0??)] OR [equalChoice(??0?)]] AND NOT [det=0] AND [m=0] AND [orthog=1]]{ 
+                $\{v_1;v_2;v_3\}$ bildet eine Orthonormalbasis, also insbesondere auch
+                eine Orthogonalbasis und eine Basis von $\R^3$.
+                }
+% Vektoren normiert?
+                \explanation[[equalChoice(???0)] AND [norm=1]]{   
+                Die Vektoren $v_1, v_2, v_3$ sind alle bez\"uglich des Standard-Skalarprodukts normiert.
+                }                                              
+                \explanation[[equalChoice(???1)] AND NOT [norm=1]]{
+                Der Vektor $v_3$ ist nicht normiert.
+                % bez\"uglich des Standard-Skalarprodukts normiert.
+                }
+% Ende
+%
+        \begin{choice}
+              \text{$\{v_1;v_2;v_3\}$ bildet eine Basis von $\R^3$.}
+              \solution{compute}
+              \iscorrect{det}{!=}{0}
+        \end{choice}
+         \begin{choice}
+               \text{$\{v_1;v_2;v_3\}$ bildet eine Orthogonalbasis von $\R^3$.}
+               \solution{compute}
+               \iscorrect{m}{=}{0}
+         \end{choice}
+         \begin{choice}
+               \text{$\{v_1;v_2;v_3\}$ bildet eine Orthonormalbasis von $\R^3$.}
+               \solution{compute}
+               \iscorrect{orthog}{=}{1}
+         \end{choice}
+         \begin{choice}
+               \text{Die Vektoren $v_1, v_2, v_3$ sind alle bezüglich des Standard-Skalarprodukts normiert,
+               d.h. $\langle v_i,v_i \rangle = 1$ für $i=1,2,3$.}
+               \solution{compute}     
+               \iscorrect{norm}{=}{1}
+         \end{choice}
+    \end{question}
+    %Q2
+    \begin{question}
+       \text{Gegeben seien die Vektoren $v_1=\var{a}, v_2= \var{b}, v_3=\var{c} \in \R^3$. 
+       Wir betrachten den Vektorraum $\R^3$ zusammen mit dem Standard-Skalarprodukt. 
+       Wählen Sie alle korrekten Antworten aus.
+       
+     %Test Q2: det=$\var{det}$, m=$\var{m}$, norm=$\var{norm}$, orth=$\var{orthog}$
+       
+       }     
+
+       \permutechoices{1}{4}
+       \type{mc.yesno}
+       \field{real}
+       
+        \begin{variables}
+             \randint{m}{0}{4}
+             \begin{switch}
+                \begin{case}{m=0}
+                    \function{x}{0}
+                    \function{y}{-1}
+                \end{case}
+                \begin{case}{m=1}
+                    \function{x}{1/2}
+                    \function{y}{-sqrt(3)/2}
+                \end{case}
+                \begin{case}{m=3}
+                    \function{x}{sqrt(3)/2}
+                    \function{y}{-1/2}
+                \end{case}
+                \begin{case}{m=4}
+                    \function{x}{1}
+                    \function{y}{0}
+                \end{case}
+                \begin{default}%m=2
+                    \function{x}{sqrt(2)/2}
+                    \function{y}{-sqrt(2)/2}
+                \end{default}
+             \end{switch}
+             
+             \randint[Z]{z}{-1}{2}
+             \pmatrix{a}{0 \\ 0 \\ 1}
+             \pmatrix{b}{0 \\ z \\ 0}
+             \pmatrix{c}{y \\ 0 \\ x}
+             %\function[calculate]{det}{x*z}  dies ist falsch
+             \function[calculate]{det}{-y*z}
+             \function[calculate]{norm}{abs(z)}
+             \function[calculate]{orthog}{(m+1)*norm}%nur orthonormal, falls m=4 und z=+-1
+         \end{variables}
+%
+% Erklärung bei Fehler 
+% keine Basis
+                \explanation[[det=0] AND [equalChoice(111?)]]{
+                $\{v_1;v_2;v_3\}$ bildet keine Basis und somit auch keine Orthogonal- und keine Orthonormalbasis von $\R^3$.
+                }
+                \explanation[[det=0] AND [equalChoice(101?)]]{
+                $\{v_1;v_2;v_3\}$ bildet keine Basis und somit auch keine Orthonormalbasis von $\R^3$.
+                }
+                \explanation[[det=0] AND [equalChoice(110?)]]{
+                $\{v_1;v_2;v_3\}$ bildet keine Basis und somit auch keine Orthogonalbasis von $\R^3$.
+                }
+                \explanation[[det=0] AND [equalChoice(100?)]]{
+                $\{v_1;v_2;v_3\}$ bildet keine Basis von $\R^3$.
+                }
+                \explanation[[det=0] AND [equalChoice(011?)]]{
+                $\{v_1;v_2;v_3\}$ bildet keine Orthogonal- und auch keine Orthonormalbasis von $\R^3$.
+                }
+                \explanation[[det=0] AND [equalChoice(001?)]]{
+                $\{v_1;v_2;v_3\}$ bildet keine Orthonormalbasis von $\R^3$.
+                }
+                \explanation[[det=0] AND [equalChoice(010?)]]{
+                $\{v_1;v_2;v_3\}$ bildet keine Orthogonalbasis von $\R^3$.
+                }
+% Basis aber nicht orthogonal 
+                \explanation[[equalChoice(011?)] AND NOT [det=0] AND NOT [m=0]]{   
+                $\{v_1;v_2;v_3\}$ bildet eine Basis, aber keine Orthogonal- und damit auch keine Orthonormalbasis von $\R^3$.
+                }
+                \explanation[[equalChoice(010?)] AND NOT [det=0] AND NOT [m=0]]{   
+                $\{v_1;v_2;v_3\}$ bildet eine Basis, aber keine Orthogonalbasis von $\R^3$.
+                }
+                \explanation[[equalChoice(001?)] AND NOT [det=0] AND NOT [m=0] AND NOT [orthog=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet eine Basis, aber keine Orthonormalbasis von $\R^3$.
+                }
+                \explanation[[equalChoice(111?)] AND NOT [det=0] AND NOT [m=0] AND NOT [orthog=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet keine Orthogonal- und damit auch keine Orthonormalbasis von $\R^3$.
+                }
+                \explanation[[equalChoice(110?)] AND NOT [det=0] AND NOT [m=0]]{   
+                $\{v_1;v_2;v_3\}$ bildet keine Orthogonalbasis von $\R^3$.
+                }
+                \explanation[[equalChoice(101?)] AND NOT [det=0] AND NOT [m=0] AND NOT [orthog=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet keine Orthogonalbasis von $\R^3$.
+                }
+                \explanation[[equalChoice(000?)] AND NOT [det=0] AND NOT [m=0] AND NOT [orthog=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet eine Basis von $\R^3$.
+                } 
+% Basis orthogonal
+                \explanation[[equalChoice(001?)] AND NOT [det=0] AND [m=0] AND NOT [orthog=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet eine Orthogonalbasis, also auch eine Basis von $\R^3$ aber keine Orthonormalbasis.
+                }                
+% Basis orthonormal 
+                \explanation[[[equalChoice(0???)] OR [equalChoice(?0??)] OR [equalChoice(??0?)]] AND NOT [det=0] AND [m=0] AND [orthog=1]]{ 
+                $\{v_1;v_2;v_3\}$ bildet eine Orthonormalbasis, also insbesondere auch
+                eine Orthogonalbasis und eine Basis von $\R^3$.
+                }
+% Vektoren normiert?
+                \explanation[[equalChoice(???0)] AND [norm=1]]{   
+                Die Vektoren $v_1, v_2, v_3$ sind alle bez\"uglich des Standard-Skalarprodukts normiert.
+                }                                              
+                \explanation[[equalChoice(???1)] AND NOT [norm=1]]{
+                Der Vektor $v_2$ ist nicht normiert.
+                % bez\"uglich des Standard-Skalarprodukts normiert.
+                }
+% Ende
+%
+ 
+        \begin{choice}
+              \text{$\{v_1;v_2;v_3\}$ bildet eine Basis von $\R^3$.}
+              \solution{compute}
+              \iscorrect{det}{!=}{0}
+        \end{choice}
+         \begin{choice}
+               \text{$\{v_1;v_2;v_3\}$ bildet eine Orthogonalbasis von $\R^3$.}
+               \solution{compute}
+               \iscorrect{m}{=}{0}
+         \end{choice}
+         \begin{choice}
+               \text{$\{v_1;v_2;v_3\}$ bildet eine Orthonormalbasis von $\R^3$.}
+               \solution{compute}
+               \iscorrect{orthog}{=}{1}
+         \end{choice}
+         \begin{choice}
+               \text{Die Vektoren $v_1;v_2;v_3$ sind alle bezüglich des Standard-Skalarprodukts normiert,
+               d.h. $\langle v_i,v_i \rangle = 1$ für $i=1,2,3$.}
+               \solution{compute}     
+               \iscorrect{norm}{=}{1}
+         \end{choice}
+    \end{question}
+    
+    %-----------------------
+    %Q3
+    \begin{question}
+       \text{Gegeben seien die Vektoren $v_1=\var{a}, v_2= \var{b}, v_3=\var{c} \in \R^3$. 
+       Wir betrachten den Vektorraum $\R^3$ zusammen mit dem Standard-Skalarprodukt. 
+       Wählen Sie alle korrekten Antworten aus.
+     %Test  Teil Q3
+       }
+       \permutechoices{1}{4}
+       \type{mc.yesno}
+       \field{real}
+  
+        \begin{variables}
+             \randint{m}{0}{4}
+             \begin{switch}
+                \begin{case}{m=0}
+                    \function{x}{0}
+                    \function{y}{-1}
+                    \function{y1}{1}
+                \end{case}
+                \begin{case}{m=1}
+                    \function{x}{1/2}
+                    \function{y}{sqrt(3)/2}
+                    \function{y1}{-sqrt(3)/2}
+                \end{case}
+                \begin{case}{m=3}
+                    \function{x}{sqrt(3)/2}
+                    \function{y}{1/2}
+                    \function{y1}{-1/2}
+                \end{case}
+                \begin{case}{m=4}
+                    \function{x}{1}
+                    \function{y}{0}
+                    \function{y1}{0}
+                \end{case}
+                \begin{default}%m=2
+                    \function{x}{sqrt(2)/2}
+                    \function{y}{sqrt(2)/2}
+                    \function{y1}{-sqrt(2)/2}
+                \end{default}
+             \end{switch}
+             
+             \randint[Z]{z}{-2}{2}
+             \pmatrix{a}{z \\ 0 \\ 0}
+             \pmatrix{b}{0 \\ x \\ y}
+             \pmatrix{c}{0 \\ y1 \\ x}
+             \function[calculate]{norm}{abs(z)}
+         \end{variables}
+%
+% Erklärung bei Fehler 
+%
+                \explanation[[equalChoice(010?)] AND NOT [norm=1]]{
+                $\{v_1;v_2;v_3\}$ bildet auch eine Basis von $\R^3$.
+                }
+                \explanation[[equalChoice(100?)] AND NOT [norm=1]]{
+                $\{v_1;v_2;v_3\}$ bildet auch eine Orthogonalbasis von $\R^3$.
+                }
+                \explanation[[equalChoice(000?)] AND NOT [norm=1]]{
+                $\{v_1;v_2;v_3\}$ bildet eine Basis und auch eine Orthogonalbasis von $\R^3$.
+                }
+
+                \explanation[[equalChoice(000?)] AND [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet eine Orthonormalbasis und somit auch eine Orthogonalbasis
+                und eine Basis von $\R^3$.
+                }
+                \explanation[[equalChoice(100?)] AND [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet eine Orthonormalbasis und somit auch eine Orthogonalbasis
+                von $\R^3$.
+                }
+                \explanation[[equalChoice(010?)] AND [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet eine Orthonormalbasis und somit auch eine Basis von $\R^3$.
+                }
+                \explanation[[equalChoice(001?)] AND [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet auch eine Orthogonalbasis und eine Basis von $\R^3$.
+                }
+                \explanation[[equalChoice(101?)] AND [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet auch eine Orthogonalbasis von $\R^3$.
+                }
+                \explanation[[equalChoice(011?)] AND [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet auch eine Basis von $\R^3$.
+                }
+                \explanation[[equalChoice(110?)] AND [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet eine Orthonormalbasis von $\R^3$.
+                }
+                
+                \explanation[[equalChoice(001?)] AND NOT [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet eine Basis und auch eine Orthogonalbasis, aber
+                keine Orthonormalbasis von $\R^3$.
+                }
+                \explanation[[equalChoice(011?)] AND NOT [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet eine Basis, aber keine Orthonormalbasis von $\R^3$.
+                }
+                \explanation[[equalChoice(101?)] AND NOT [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet eine Orthogonalbasis, aber keine Orthonormalbasis von $\R^3$.
+                }
+                \explanation[[equalChoice(111?)] AND NOT [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet keine Orthonormalbasis von $\R^3$.
+                }
+
+                \explanation[[equalChoice(???0)] AND [norm=1]]{   
+                Die Vektoren $v_1, v_2, v_3$ sind alle bez\"uglich des Standard-Skalarprodukts normiert.
+                }                                              
+                \explanation[[equalChoice(???1)] AND NOT [norm=1]]{
+                Der Vektor $v_1$ ist nicht normiert.
+                % bez\"uglich des Standard-Skalarprodukts normiert.
+                }
+% Ende
+ 
+        \begin{choice}
+              \text{$\{v_1;v_2;v_3\}$ bildet eine Basis von $\R^3$.}
+              \solution{true}
+        \end{choice}
+         \begin{choice}
+               \text{$\{v_1;v_2;v_3\}$ bildet eine Orthogonalbasis von $\R^3$.}
+               \solution{true}
+         \end{choice}
+         \begin{choice}
+               \text{$\{v_1;v_2;v_3\}$ bildet eine Orthonormalbasis von $\R^3$.}
+               \solution{compute}
+               \iscorrect{norm}{=}{1}
+         \end{choice}
+         \begin{choice}
+               \text{Die Vektoren $v_1;v_2;v_3$ sind alle bezüglich des Standard-Skalarprodukts normiert,
+               d.h. $\langle v_i,v_i \rangle = 1$ für $i=1,2,3$.}
+               \solution{compute}     
+               \iscorrect{norm}{=}{1}
+         \end{choice}
+    \end{question}
+    
+    %Q4
+    \begin{question}
+       \text{Gegeben seien die Vektoren $v_1=\var{a}, v_2= \var{b}, v_3=\var{c} \in \R^3$. 
+       Wir betrachten den Vektorraum $\R^3$ zusammen mit dem Standard-Skalarprodukt. 
+       Wählen Sie alle korrekten Antworten aus.
+     %Test  Teil Q4
+       }
+       \permutechoices{1}{4}
+       \type{mc.yesno}
+       \field{real}
+  
+        \begin{variables}
+             \randint{m}{0}{4}
+             \begin{switch}
+                \begin{case}{m=0}
+                    \function{x}{0}
+                    \function{y}{-1}
+                    \function{y1}{1}
+                \end{case}
+                \begin{case}{m=1}
+                    \function{x}{1/2}
+                    \function{y}{sqrt(3)/2}
+                    \function{y1}{-sqrt(3)/2}
+                \end{case}
+                \begin{case}{m=3}
+                    \function{x}{sqrt(3)/2}
+                    \function{y}{1/2}
+                    \function{y1}{-1/2}
+                \end{case}
+                \begin{case}{m=4}
+                    \function{x}{1}
+                    \function{y}{0}
+                    \function{y1}{0}
+                \end{case}
+                \begin{default}%m=2
+                    \function{x}{sqrt(2)/2}
+                    \function{y}{sqrt(2)/2}
+                    \function{y1}{-sqrt(2)/2}
+                \end{default}
+             \end{switch}
+             
+             \randint[Z]{z}{-2}{2}
+             \pmatrix{a}{x \\ 0 \\ y}
+             \pmatrix{b}{0 \\ z \\ 0}
+             \pmatrix{c}{y1 \\ 0 \\ x}
+             \function[calculate]{norm}{abs(z)}
+         \end{variables}
+%
+% Erklärung bei Fehler 
+%
+                \explanation[[equalChoice(010?)] AND NOT [norm=1]]{
+                $\{v_1;v_2;v_3\}$ bildet auch eine Basis von $\R^3$.
+                }
+                \explanation[[equalChoice(100?)] AND NOT [norm=1]]{
+                $\{v_1;v_2;v_3\}$ bildet auch eine Orthogonalbasis von $\R^3$.
+                }
+                \explanation[[equalChoice(000?)] AND NOT [norm=1]]{
+                $\{v_1;v_2;v_3\}$ bildet eine Basis und auch eine Orthogonalbasis von $\R^3$.
+                }
+
+                \explanation[[equalChoice(000?)] AND [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet eine Orthonormalbasis und somit auch eine Orthogonalbasis
+                und eine Basis von $\R^3$.
+                }
+                \explanation[[equalChoice(100?)] AND [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet eine Orthonormalbasis und somit auch eine Orthogonalbasis
+                von $\R^3$.
+                }
+                \explanation[[equalChoice(010?)] AND [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet eine Orthonormalbasis und somit auch eine Basis von $\R^3$.
+                }
+                \explanation[[equalChoice(001?)] AND [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet auch eine Orthogonalbasis und eine Basis von $\R^3$.
+                }
+                \explanation[[equalChoice(101?)] AND [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet auch eine Orthogonalbasis von $\R^3$.
+                }
+                \explanation[[equalChoice(011?)] AND [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet auch eine Basis von $\R^3$.
+                }                
+                \explanation[[equalChoice(110?)] AND [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet eine Orthonormalbasis von $\R^3$.
+                }
+                
+                \explanation[[equalChoice(001?)] AND NOT [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet eine Basis und auch eine Orthogonalbasis, aber
+                keine Orthonormalbasis von $\R^3$.
+                }
+                \explanation[[equalChoice(011?)] AND NOT [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet eine Basis, aber keine Orthonormalbasis von $\R^3$.
+                }
+                \explanation[[equalChoice(101?)] AND NOT [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet eine Orthogonalbasis, aber keine Orthonormalbasis von $\R^3$.
+                }
+                \explanation[[equalChoice(111?)] AND NOT [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ bildet keine Orthonormalbasis von $\R^3$.
+                }
+
+                \explanation[[equalChoice(???0)] AND [norm=1]]{   
+                Die Vektoren $v_1, v_2, v_3$ sind alle bez\"uglich des Standard-Skalarprodukts normiert.
+                }                                              
+                \explanation[[equalChoice(???1)] AND NOT [norm=1]]{
+                Der Vektor $v_2$ ist nicht normiert.
+                % bez\"uglich des Standard-Skalarprodukts normiert.
+                }
+% Ende
+
+
+        \begin{choice}
+              \text{$\{v_1;v_2;v_3\}$ bildet eine Basis von $\R^3$.} 
+              \solution{true}
+        \end{choice}
+         \begin{choice}
+               \text{$\{v_1;v_2;v_3\}$ bildet eine Orthogonalbasis von $\R^3$.}
+               \solution{true}
+         \end{choice}
+         \begin{choice}
+               \text{$\{v_1;v_2;v_3\}$ bildet eine Orthonormalbasis von $\R^3$.}
+               \solution{compute}
+               \iscorrect{norm}{=}{1}
+         \end{choice}
+         \begin{choice}
+               \text{Die Vektoren $v_1;v_2;v_3$ sind alle bezüglich des Standard-Skalarprodukts normiert,
+               d.h. $\langle v_i,v_i \rangle = 1$ für $i=1,2,3$.}
+               \solution{compute}     
+               \iscorrect{norm}{=}{1}
+         \end{choice}
+    \end{question}
+    
+\end{problem}}
+
+
+
+
+
+\lang{en}{
+\begin{problem}   
+     \randomquestionpool{1}{4}
+%     \randomquestionpool{1}{2}
+%     \randomquestionpool{3}{4}
+     %Q1
+     \begin{question}
+     
+       \text{Given are the vectors $v_1=\var{a}, v_2= \var{b}, v_3=\var{c} \in \R^3$. 
+       We consider the vector space $\R^3$ with the standard scalar product. 
+       Choose the correct answers.
+       
+     %Test Q1: det=$\var{det}$, m=$\var{m}$, norm=$\var{norm}$, orth=$\var{orthog}$
+       
+       }
+   
+       \permutechoices{1}{4}
+       \type{mc.yesno}
+       \field{real}
+       
+        \begin{variables}
+             \randint{m}{0}{4}
+             \begin{switch}
+                \begin{case}{m=0}
+                    \function{x}{0}
+                    \function{y}{-1}
+                \end{case}
+                \begin{case}{m=1}
+                    \function{x}{1/2}
+                    \function{y}{-sqrt(3)/2}
+                \end{case}
+                \begin{case}{m=3}
+                    \function{x}{sqrt(3)/2}
+                    \function{y}{-1/2}
+                \end{case}
+                \begin{case}{m=4}
+                    \function{x}{1}
+                    \function{y}{0}
+                \end{case}
+                \begin{default}%m=2
+                    \function{x}{sqrt(2)/2}
+                    \function{y}{-sqrt(2)/2}
+                \end{default}
+             \end{switch}
+             
+             \randint[Z]{z}{-1}{2}
+             \pmatrix{a}{0 \\ 1 \\ 0}
+             \pmatrix{b}{x \\ 0 \\ y}
+             \pmatrix{c}{z \\ 0 \\ 0}
+             \function[calculate]{det}{y*z}
+             \function[calculate]{norm}{abs(z)}
+             \function[calculate]{orthog}{(m+1)*norm}%nur orthonormal, falls m=0 und z=+-1
+         \end{variables}
+%
+% Erklärung bei Fehler 
+% keine Basis
+
+                
+                \explanation[[det=0] AND [equalChoice(111?)]]{
+                $\{v_1;v_2;v_3\}$ is not a basis and therefore neither a orthogonal basis nor a orthonormal basis of$\R^3$.
+                }
+                \explanation[[det=0] AND [equalChoice(101?)]]{
+                $\{v_1;v_2;v_3\}$ is not a basis and therefore no orthonormal basis of $\R^3$.
+                }
+                \explanation[[det=0] AND [equalChoice(110?)]]{
+                $\{v_1;v_2;v_3\}$ is not a basis and therefore not an orthogonal basis $\R^3$.
+                }
+                \explanation[[det=0] AND [equalChoice(100?)]]{
+                $\{v_1;v_2;v_3\}$ is not a basis of $\R^3$.
+                }
+                \explanation[[det=0] AND [equalChoice(011?)]]{
+                $\{v_1;v_2;v_3\}$ is neither an orthogonal nor an orthonormal basis of $\R^3$.
+                }
+                \explanation[[det=0] AND [equalChoice(001?)]]{
+                $\{v_1;v_2;v_3\}$ is not an orthonormal basis of $\R^3$.
+                }
+                \explanation[[det=0] AND [equalChoice(010?)]]{
+                $\{v_1;v_2;v_3\}$ is not an orthogonal basis of $\R^3$.
+                }
+% Basis aber nicht orthogonal 
+                \explanation[[equalChoice(011?)] AND NOT [det=0] AND NOT [m=0]]{   
+                $\{v_1;v_2;v_3\}$ is a basis, but not an orthogonal and therefore not an orthonormal basis of $\R^3$.
+                }
+                \explanation[[equalChoice(010?)] AND NOT [det=0] AND NOT [m=0]]{   
+                $\{v_1;v_2;v_3\}$ forms a basis, but not an orthognal basis of $\R^3$.
+                }
+                \explanation[[equalChoice(001?)] AND NOT [det=0] AND NOT [m=0] AND NOT [orthog=1]]{   
+                $\{v_1;v_2;v_3\}$ forms a basis, but not an orthonormal basis of $\R^3$.
+                }
+                \explanation[[equalChoice(111?)] AND NOT [det=0] AND NOT [m=0] AND NOT [orthog=1]]{   
+                $\{v_1;v_2;v_3\}$ is not an orthogonal and therefore not an orthonormal basis of $\R^3$.
+                }
+                \explanation[[equalChoice(110?)] AND NOT [det=0] AND NOT [m=0]]{   
+                $\{v_1;v_2;v_3\}$ is not an orthogonal basis of $\R^3$.
+                }
+                \explanation[[equalChoice(101?)] AND NOT [det=0] AND NOT [m=0] AND NOT [orthog=1]]{   
+                $\{v_1;v_2;v_3\}$ is not an orthgonal basis of $\R^3$.
+                }
+                \explanation[[equalChoice(000?)] AND NOT [det=0] AND NOT [m=0] AND NOT [orthog=1]]{   
+                $\{v_1;v_2;v_3\}$ forms a basis of $\R^3$.
+                } 
+% Basis orthogonal
+                \explanation[[equalChoice(001?)] AND NOT [det=0] AND [m=0] AND NOT [orthog=1]]{   
+                $\{v_1;v_2;v_3\}$ is a orthogonal basis, so also a basis of $\R^3$ but not an orthonormal basis.
+                }                
+% Basis orthonormal 
+                \explanation[[[equalChoice(0???)] OR [equalChoice(?0??)] OR [equalChoice(??0?)]] AND NOT [det=0] AND [m=0] AND [orthog=1]]{ 
+                $\{v_1;v_2;v_3\}$ forms a orthonormal basis, so especially an orthogonal basis and a basis of $\R^3$.
+                }
+% Vektoren normiert?
+                \explanation[[equalChoice(???0)] AND [norm=1]]{   
+                The vectors $v_1, v_2, v_3$ are normalised with respect of the standard basis.
+                }                                              
+                \explanation[[equalChoice(???1)] AND NOT [norm=1]]{
+                The vecotr is $v_3$ not normalised.
+                % bez\"uglich des Standard-Skalarprodukts normiert.
+                }
+% Ende
+%
+        \begin{choice}
+              \text{$\{v_1;v_2;v_3\}$ forms a basis of $\R^3$.}
+              \solution{compute}
+              \iscorrect{det}{!=}{0}
+        \end{choice}
+         \begin{choice}
+               \text{$\{v_1;v_2;v_3\}$ is an orthogonal basis of von $\R^3$.}
+               \solution{compute}
+               \iscorrect{m}{=}{0}
+         \end{choice}
+         \begin{choice}
+               \text{$\{v_1;v_2;v_3\}$ is an orthonormal basis of $\R^3$.}
+               \solution{compute}
+               \iscorrect{orthog}{=}{1}
+         \end{choice}
+         \begin{choice}
+               \text{The vectors $v_1, v_2, v_3$ are all normalised with respect to the standard basis,
+               so $\langle v_i,v_i \rangle = 1$ for $i=1,2,3$.}
+               \solution{compute}     
+               \iscorrect{norm}{=}{1}
+         \end{choice}
+    \end{question}
+    %Q2
+    \begin{question}
+       \text{Given are the vectors $v_1=\var{a}, v_2= \var{b}, v_3=\var{c} \in \R^3$. 
+       We consider the vector space $\R^3$ with the standard scalar product. 
+       Choose all the correct answers.
+       
+     %Test Q2: det=$\var{det}$, m=$\var{m}$, norm=$\var{norm}$, orth=$\var{orthog}$
+       
+       }     
+
+       \permutechoices{1}{4}
+       \type{mc.yesno}
+       \field{real}
+       
+        \begin{variables}
+             \randint{m}{0}{4}
+             \begin{switch}
+                \begin{case}{m=0}
+                    \function{x}{0}
+                    \function{y}{-1}
+                \end{case}
+                \begin{case}{m=1}
+                    \function{x}{1/2}
+                    \function{y}{-sqrt(3)/2}
+                \end{case}
+                \begin{case}{m=3}
+                    \function{x}{sqrt(3)/2}
+                    \function{y}{-1/2}
+                \end{case}
+                \begin{case}{m=4}
+                    \function{x}{1}
+                    \function{y}{0}
+                \end{case}
+                \begin{default}%m=2
+                    \function{x}{sqrt(2)/2}
+                    \function{y}{-sqrt(2)/2}
+                \end{default}
+             \end{switch}
+             
+             \randint[Z]{z}{-1}{2}
+             \pmatrix{a}{0 \\ 0 \\ 1}
+             \pmatrix{b}{0 \\ z \\ 0}
+             \pmatrix{c}{y \\ 0 \\ x}
+             %\function[calculate]{det}{x*z}  dies ist falsch
+             \function[calculate]{det}{-y*z}
+             \function[calculate]{norm}{abs(z)}
+             \function[calculate]{orthog}{(m+1)*norm}%nur orthonormal, falls m=4 und z=+-1
+         \end{variables}
+%
+% Erklärung bei Fehler 
+% keine Basis
+                \explanation[[det=0] AND [equalChoice(111?)]]{
+                $\{v_1;v_2;v_3\}$ does not form a basis and therefore neither an orthogonal nor an orthonormal basis of $\R^3$.
+                }
+                \explanation[[det=0] AND [equalChoice(101?)]]{
+                $\{v_1;v_2;v_3\}$ is not a basis and therefore not an orthonormal basis of $\R^3$.
+                }
+                \explanation[[det=0] AND [equalChoice(110?)]]{
+                $\{v_1;v_2;v_3\}$ does not form a basis and therefore not an orthogonal basis of $\R^3$.
+                }
+                \explanation[[det=0] AND [equalChoice(100?)]]{
+                $\{v_1;v_2;v_3\}$ bildet keine Basis von $\R^3$.
+                }
+                \explanation[[det=0] AND [equalChoice(011?)]]{
+                $\{v_1;v_2;v_3\}$ is neither an orthogonal nor an orthonormal basis of $\R^3$.
+                }
+                \explanation[[det=0] AND [equalChoice(001?)]]{
+                $\{v_1;v_2;v_3\}$ is not a orthonormal basis of $\R^3$.
+                }
+                \explanation[[det=0] AND [equalChoice(010?)]]{
+                $\{v_1;v_2;v_3\}$ is not an orthogonal basis of $\R^3$.
+                }
+% Basis aber nicht orthogonal 
+                \explanation[[equalChoice(011?)] AND NOT [det=0] AND NOT [m=0]]{   
+                $\{v_1;v_2;v_3\}$ forms a basis, but not an orthogonal and thereofore not an orthonormal basis of $\R^3$.
+                }
+                \explanation[[equalChoice(010?)] AND NOT [det=0] AND NOT [m=0]]{   
+                $\{v_1;v_2;v_3\}$ is a bsis, but not an orthogonal basis of $\R^3$.
+                }
+                \explanation[[equalChoice(001?)] AND NOT [det=0] AND NOT [m=0] AND NOT [orthog=1]]{   
+                $\{v_1;v_2;v_3\}$ forms a basis, but not an orthonormal basis of $\R^3$.
+                }
+                \explanation[[equalChoice(111?)] AND NOT [det=0] AND NOT [m=0] AND NOT [orthog=1]]{   
+                $\{v_1;v_2;v_3\}$ is neither a orthogonal nor an orthonormal basis of $\R^3$.
+                }
+                \explanation[[equalChoice(110?)] AND NOT [det=0] AND NOT [m=0]]{   
+                $\{v_1;v_2;v_3\}$ does not form a orthogonal basis of $\R^3$.
+                }
+                \explanation[[equalChoice(101?)] AND NOT [det=0] AND NOT [m=0] AND NOT [orthog=1]]{   
+                $\{v_1;v_2;v_3\}$ does not form an orthogonal basis of $\R^3$.
+                }
+                \explanation[[equalChoice(000?)] AND NOT [det=0] AND NOT [m=0] AND NOT [orthog=1]]{   
+                $\{v_1;v_2;v_3\}$ forms a basis of $\R^3$.
+                } 
+% Basis orthogonal
+                \explanation[[equalChoice(001?)] AND NOT [det=0] AND [m=0] AND NOT [orthog=1]]{   
+                $\{v_1;v_2;v_3\}$ is an orthogonal basis, so also a basis of $\R^3$ but not an orthonormal basis.
+                }                
+% Basis orthonormal 
+                \explanation[[[equalChoice(0???)] OR [equalChoice(?0??)] OR [equalChoice(??0?)]] AND NOT [det=0] AND [m=0] AND [orthog=1]]{ 
+                $\{v_1;v_2;v_3\}$ is an orthonormal basis, so also an orthogonal basis and a basis of $\R^3$.
+                }
+% Vektoren normiert?
+                \explanation[[equalChoice(???0)] AND [norm=1]]{   
+                The vectors $v_1, v_2, v_3$ are all normalised with respect of the standard scalar product.
+                }                                              
+                \explanation[[equalChoice(???1)] AND NOT [norm=1]]{
+                The vector $v_2$ is not normalised.
+                % bez\"uglich des Standard-Skalarprodukts normiert.
+                }
+% Ende
+%
+ 
+        \begin{choice}
+              \text{$\{v_1;v_2;v_3\}$ is a basis of $\R^3$.}
+              \solution{compute}
+              \iscorrect{det}{!=}{0}
+        \end{choice}
+         \begin{choice}
+               \text{$\{v_1;v_2;v_3\}$ is an orthogonal basis of $\R^3$.}
+               \solution{compute}
+               \iscorrect{m}{=}{0}
+         \end{choice}
+         \begin{choice}
+               \text{$\{v_1;v_2;v_3\}$ is an orthonormal basis of $\R^3$.}
+               \solution{compute}
+               \iscorrect{orthog}{=}{1}
+         \end{choice}
+         \begin{choice}
+               \text{The vectors $v_1;v_2;v_3$ are normalised with respect of the standard basis,
+               so $\langle v_i,v_i \rangle = 1$ for $i=1,2,3$.}
+               \solution{compute}     
+               \iscorrect{norm}{=}{1}
+         \end{choice}
+    \end{question}
+    
+    %-----------------------
+    %Q3
+    \begin{question}
+       \text{Given are the vectors $v_1=\var{a}, v_2= \var{b}, v_3=\var{c} \in \R^3$. 
+       We consider the vector space $\R^3$ with the standard scalar product. 
+       Choose all the right answers.
+     %Test  Teil Q3
+       }
+       \permutechoices{1}{4}
+       \type{mc.yesno}
+       \field{real}
+  
+        \begin{variables}
+             \randint{m}{0}{4}
+             \begin{switch}
+                \begin{case}{m=0}
+                    \function{x}{0}
+                    \function{y}{-1}
+                    \function{y1}{1}
+                \end{case}
+                \begin{case}{m=1}
+                    \function{x}{1/2}
+                    \function{y}{sqrt(3)/2}
+                    \function{y1}{-sqrt(3)/2}
+                \end{case}
+                \begin{case}{m=3}
+                    \function{x}{sqrt(3)/2}
+                    \function{y}{1/2}
+                    \function{y1}{-1/2}
+                \end{case}
+                \begin{case}{m=4}
+                    \function{x}{1}
+                    \function{y}{0}
+                    \function{y1}{0}
+                \end{case}
+                \begin{default}%m=2
+                    \function{x}{sqrt(2)/2}
+                    \function{y}{sqrt(2)/2}
+                    \function{y1}{-sqrt(2)/2}
+                \end{default}
+             \end{switch}
+             
+             \randint[Z]{z}{-2}{2}
+             \pmatrix{a}{z \\ 0 \\ 0}
+             \pmatrix{b}{0 \\ x \\ y}
+             \pmatrix{c}{0 \\ y1 \\ x}
+             \function[calculate]{norm}{abs(z)}
+         \end{variables}
+%
+% Erklärung bei Fehler 
+%
+                \explanation[[equalChoice(010?)] AND NOT [norm=1]]{
+                $\{v_1;v_2;v_3\}$ forms a basis of $\R^3$.
+                }
+                \explanation[[equalChoice(100?)] AND NOT [norm=1]]{
+                $\{v_1;v_2;v_3\}$ forms an orthogonal basis of $\R^3$.
+                }
+                \explanation[[equalChoice(000?)] AND NOT [norm=1]]{
+                $\{v_1;v_2;v_3\}$ is a basis and also an orthogonal basis of $\R^3$.
+                }
+
+                \explanation[[equalChoice(000?)] AND [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ is an orthonormal basis and therefore also orthogonal basis and basis of $\R^3$.
+                }
+                \explanation[[equalChoice(100?)] AND [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ forms an orthonormal basis and therefore also an orthogonal basis of $\R^3$.
+                }
+                \explanation[[equalChoice(010?)] AND [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ is an orthonormal basis and therefore also basis of $\R^3$.
+                }
+                \explanation[[equalChoice(001?)] AND [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ is an orthogonal basis and a basis of $\R^3$.
+                }
+                \explanation[[equalChoice(101?)] AND [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ forms an orthogonal basis of $\R^3$.
+                }
+                \explanation[[equalChoice(011?)] AND [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ forms a basis of $\R^3$.
+                }
+                \explanation[[equalChoice(110?)] AND [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ is an orthonormal basis of $\R^3$.
+                }
+                
+                \explanation[[equalChoice(001?)] AND NOT [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ forms a basis and also an orthogonal basis, but not an orthonormal basis of $\R^3$.
+                }
+                \explanation[[equalChoice(011?)] AND NOT [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ is basis, but not an orthonormal basis of $\R^3$.
+                }
+                \explanation[[equalChoice(101?)] AND NOT [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ forms an orthogonal basis, but not an orthonormal basis of $\R^3$.
+                }
+                \explanation[[equalChoice(111?)] AND NOT [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ does not form an orthonormal basis of $\R^3$.
+                }
+
+                \explanation[[equalChoice(???0)] AND [norm=1]]{   
+                The vectors $v_1, v_2, v_3$ are all normalised with respect of the standard basis.
+                }                                              
+                \explanation[[equalChoice(???1)] AND NOT [norm=1]]{
+                The vector $v_1$  is not normalised.
+                % bez\"uglich des Standard-Skalarprodukts normiert.
+                }
+% Ende
+ 
+        \begin{choice}
+              \text{$\{v_1;v_2;v_3\}$ forms a basis of $\R^3$.}
+              \solution{true}
+        \end{choice}
+         \begin{choice}
+               \text{$\{v_1;v_2;v_3\}$ is an orthogonal basis of $\R^3$.}
+               \solution{true}
+         \end{choice}
+         \begin{choice}
+               \text{$\{v_1;v_2;v_3\}$ forms an orthonormal basis of $\R^3$.}
+               \solution{compute}
+               \iscorrect{norm}{=}{1}
+         \end{choice}
+         \begin{choice}
+               \text{The vectors $v_1;v_2;v_3$ are all normalised with respect to the standard scalar product,
+               so $\langle v_i,v_i \rangle = 1$ for $i=1,2,3$.}
+               \solution{compute}     
+               \iscorrect{norm}{=}{1}
+         \end{choice}
+    \end{question}
+    
+    %Q4
+    \begin{question}
+       \text{Given are the vectors $v_1=\var{a}, v_2= \var{b}, v_3=\var{c} \in \R^3$. 
+       We consider the vector space $\R^3$ with the standard scalar product. 
+       Choose all the correct answers.
+     %Test  Teil Q4
+       }
+       \permutechoices{1}{4}
+       \type{mc.yesno}
+       \field{real}
+  
+        \begin{variables}
+             \randint{m}{0}{4}
+             \begin{switch}
+                \begin{case}{m=0}
+                    \function{x}{0}
+                    \function{y}{-1}
+                    \function{y1}{1}
+                \end{case}
+                \begin{case}{m=1}
+                    \function{x}{1/2}
+                    \function{y}{sqrt(3)/2}
+                    \function{y1}{-sqrt(3)/2}
+                \end{case}
+                \begin{case}{m=3}
+                    \function{x}{sqrt(3)/2}
+                    \function{y}{1/2}
+                    \function{y1}{-1/2}
+                \end{case}
+                \begin{case}{m=4}
+                    \function{x}{1}
+                    \function{y}{0}
+                    \function{y1}{0}
+                \end{case}
+                \begin{default}%m=2
+                    \function{x}{sqrt(2)/2}
+                    \function{y}{sqrt(2)/2}
+                    \function{y1}{-sqrt(2)/2}
+                \end{default}
+             \end{switch}
+             
+             \randint[Z]{z}{-2}{2}
+             \pmatrix{a}{x \\ 0 \\ y}
+             \pmatrix{b}{0 \\ z \\ 0}
+             \pmatrix{c}{y1 \\ 0 \\ x}
+             \function[calculate]{norm}{abs(z)}
+         \end{variables}
+%
+% Erklärung bei Fehler 
+%
+                \explanation[[equalChoice(010?)] AND NOT [norm=1]]{
+                $\{v_1;v_2;v_3\}$ forms also a basis of $\R^3$.
+                }
+                \explanation[[equalChoice(100?)] AND NOT [norm=1]]{
+                $\{v_1;v_2;v_3\}$ forms also an orthogonal basis of $\R^3$.
+                }
+                \explanation[[equalChoice(000?)] AND NOT [norm=1]]{
+                $\{v_1;v_2;v_3\}$ forms a basis and also na orthogonal basis of $\R^3$.
+                }
+
+                \explanation[[equalChoice(000?)] AND [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ forms an orthonormal basis and therefore also
+                an orthogonalbasis and a basis of $\R^3$.
+                }
+                \explanation[[equalChoice(100?)] AND [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ forms an orthonormal basis and therefore also an orthogonal basis of
+                von $\R^3$.
+                }
+                \explanation[[equalChoice(010?)] AND [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ is an orthonormal basis and therefore also a basis of $\R^3$.
+                }
+                \explanation[[equalChoice(001?)] AND [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ ist also an orthogonal basis and a basis of $\R^3$.
+                }
+                \explanation[[equalChoice(101?)] AND [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ is also an orthogonal basis of $\R^3$.
+                }
+                \explanation[[equalChoice(011?)] AND [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ forms also a basis of $\R^3$.
+                }                
+                \explanation[[equalChoice(110?)] AND [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ forms an orthonormal basis of $\R^3$.
+                }
+                
+                \explanation[[equalChoice(001?)] AND NOT [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ forms a basis and also an orthogonal basis, but not an orthonormal basis of $\R^3$.
+                }
+                \explanation[[equalChoice(011?)] AND NOT [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ forms a basis, but not an orthonormal basis of $\R^3$.
+                }
+                \explanation[[equalChoice(101?)] AND NOT [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ forms an orthogonal basis, but not an orthonormal basis of $\R^3$.
+                }
+                \explanation[[equalChoice(111?)] AND NOT [norm=1]]{   
+                $\{v_1;v_2;v_3\}$ does not form an orthonormal basis of $\R^3$.
+                }
+
+                \explanation[[equalChoice(???0)] AND [norm=1]]{   
+                The vectors $v_1, v_2, v_3$ are all normalised with respect of the standard scalar product.
+                }                                              
+                \explanation[[equalChoice(???1)] AND NOT [norm=1]]{
+                The vector $v_2$ is not normalised.
+                % bez\"uglich des Standard-Skalarprodukts normiert.
+                }
+% Ende
+
+
+        \begin{choice}
+              \text{$\{v_1;v_2;v_3\}$ forms a basis of $\R^3$.} 
+              \solution{true}
+        \end{choice}
+         \begin{choice}
+               \text{$\{v_1;v_2;v_3\}$ forms an orthogonal basis of $\R^3$.}
+               \solution{true}
+         \end{choice}
+         \begin{choice}
+               \text{$\{v_1;v_2;v_3\}$ forms an orthonormal basis of $\R^3$.}
+               \solution{compute}
+               \iscorrect{norm}{=}{1}
+         \end{choice}
+         \begin{choice}
+               \text{The vectors $v_1;v_2;v_3$ are all normalised respect to the standard basis,
+               so $\langle v_i,v_i \rangle = 1$ for $i=1,2,3$.}
+               \solution{compute}     
+               \iscorrect{norm}{=}{1}
+         \end{choice}
+    \end{question}
+    
+\end{problem}}
+
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

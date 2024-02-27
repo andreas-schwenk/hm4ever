@@ -1,0 +1,597 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A03: Stufenform}
+    \lang{en}{P03: Row echelon form}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A03: Stufenform} \lang{en}{P03: Row echelon form}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/11518}{Ticket 11518}
+\end{block}
+
+\begin{problem}
+	\randomquestionpool{1}{3}
+    \randomquestionpool{4}{4}
+
+    \begin{question}
+		 
+		\begin{variables}
+		
+			\randint{l1}{-3}{5}
+			\randint{l2}{-3}{5}
+			\randint{l3}{-3}{5}
+			\randint{b}{-3}{5}
+			\randint{f}{-3}{5}
+			\randint[Z]{a}{-3}{5}
+		
+        	\matrix[calculate]{aa}{2 & 2 & 4\\ -1 & a-1 & b-2 \\ f & -2*a + f  & -2*b + 2*f + 1}
+        	\matrix[calculate]{bb}{2*l1 + 2*l2 + 4*l3 \\ 
+a*l2 + b*l3 - l1 - l2 - 2*l3\\ 
+-2*a*l2 - 2*b*l3 + f*l1 + f*l2 + 2*f*l3 + l3}
+        	
+        	\function{s11}{1}
+        	\function{s12}{0}
+        	\function{s13}{0}
+        	\function{s14}{l1}
+        	\function{s21}{0}
+        	\function{s22}{1}
+        	\function{s23}{0}
+        	\function{s24}{l2}
+        	\function{s31}{0}
+        	\function{s32}{0}
+        	\function{s33}{1}
+        	\function{s34}{l3}
+		\end{variables}
+		
+		\type{input.number}
+        \field{real}
+		\correctorprecision{3}
+		\displayprecision{3}
+		\lang{de}{
+	    \text{Wir betrachten das folgende lineare Gleichungssystem:\\ 
+        $\var{aa}\cdot \left(\begin{smallmatrix}
+x_1\\ x_2\\ x_3\end{smallmatrix}  \right) = \var{bb}$\\
+Bestimmen Sie zur zugehörigen erweiterten Koeffizientenmatrix die reduzierte Stufenform.
+In Ihrer Lösung sollen die Koeffizienten vor den verbleibenden Variablen
+immer genau 1 sein.\\ 
+
+%Die reduzierte Stufenform ist: \\
+\ansref  \ansref  \ansref |  \ansref \\
+\ansref  \ansref  \ansref |  \ansref \\
+\ansref  \ansref  \ansref | \ansref 
+    }
+    }
+
+\lang{en}{
+	    \text{Consider the following linear system:\\ 
+        $\var{aa}\cdot \left(\begin{smallmatrix}
+x_1\\ x_2\\ x_3\end{smallmatrix}  \right) = \var{bb}$\\
+Determine the reduced row echelon form for the corresponding augmented matrix.
+In your solution the coefficients of the remaining variables should all be exactly $1$.\\
+
+%Die reduzierte Stufenform ist: \\
+\ansref  \ansref  \ansref |  \ansref \\
+\ansref  \ansref  \ansref |  \ansref \\
+\ansref  \ansref  \ansref | \ansref 
+    }
+    }
+
+
+	    \begin{answer}
+			\solution{s11}
+	    \end{answer}    
+	    \begin{answer}
+			\solution{s12}
+	    \end{answer}    
+	    
+	    \begin{answer}
+			\solution{s13}
+	    \end{answer}    
+	    
+	    \begin{answer}
+			\solution{s14}
+	    \end{answer}    
+	    \begin{answer}
+			\solution{s21}
+	    \end{answer}    
+	    \begin{answer}
+			\solution{s22}
+	    \end{answer}    
+	    
+	    \begin{answer}
+			\solution{s23}
+	    \end{answer}    
+	    
+	    \begin{answer}
+			\solution{s24}
+	    \end{answer}    
+	    
+	    \begin{answer}
+			\solution{s31}
+	    \end{answer}    
+	    \begin{answer}
+			\solution{s32}
+	    \end{answer}    
+	    
+	    \begin{answer}
+			\solution{s33}
+	    \end{answer}    
+	    
+	    \begin{answer}
+			\solution{s34}
+	    \end{answer}    
+	    
+        \lang{de}{\explanation{
+            Zunächst ermittelt man die allgemeine Stufenform mittels der Regeln
+            des Gauß-Verfahrens (Zeilentausch, Addition eines Vielfachen
+            einer anderen Zeile zu einer Zeile und Multiplikation einer Zeile
+            mit einem Faktor).
+            Nun sind alle Einträge unterhalb der Hauptdiagonalen 0.
+            Jetzt werden die Einträge oberhalb der Hauptdiagonalen
+            mittels Zeilenumformungen eliminiert, also auf 0 gesetzt.
+            Man erhält die reduzierte Stufenform.
+            Diese ist jedoch noch nicht eindeutig und muss noch normiert werden:
+            Für alle Zeilen der linken Seite, die einen Eintrag haben, der ungleich 0 und
+            ungleich 1 ist, dividiert man alle Einträge der entsprechenden Zeile durch
+            diesen Koeffizienten.
+        }}
+
+          \lang{en}{\explanation{
+          For determining the row echelon form we use the "tools" of Gaussian elimination (swapping rows, adding rows, multiplying rows
+          with a factor).
+          All the entries below the main diagonal equal now 0.
+          The next step is to eliminate the entries above the main diagonal by transforming the rows.
+          We end up with the reduced row echelon form.
+          Since it is not unique, we need to norm ist:
+          For all non-zero rows with entries unequal to 1, we divide all entries of this row by this entry.
+        }}
+	  
+	\end{question}
+
+
+    \begin{question}
+		
+		\begin{variables}
+        	
+			\randint{l1}{-3}{5}
+			\randint{l2}{-3}{5}
+			\randint{l3}{-3}{5}
+			\randint{b}{-3}{5}
+			\randint{f}{-3}{5}
+			\randint{s}{-3}{5}
+			\randint{t}{-3}{5}
+			\randint[Z]{a}{-3}{5}
+		
+        	\matrix[calculate]{aa}{2&2& 2*s+2*t \\ -1 & a-1&a*t-s-t \\ f & -2*a+f & -2*a*t + f*s + f*t}
+        	\matrix[calculate]{bb}{2*l1 + 2*l2 + 4*l3 \\
+ a*l2 + b*l3 - l1 - l2 - 2*l3\\
+ -2*a*l2 - 2*b*l3 + f*l1 + f*l2 + 2*f*l3 + l3}
+        	
+        	\function{s11}{1}
+        	\function{s12}{0}
+        	\function{s13}{s}
+        	\function{s14}{l1}
+        	\function{s21}{0}
+        	\function{s22}{1}
+        	\function{s23}{t}
+        	\function{s24}{l2}
+        	\function{s31}{0}
+        	\function{s32}{0}
+        	\function{s33}{0}
+        	\function{s34}{l3}
+        	
+        	\function{h}{|sign(l3)|}
+		\end{variables}
+		
+		\type{input.generic}
+        \field{real}
+		\correctorprecision{3}
+		\displayprecision{3}
+		\lang{de}{
+	    \text{Wir betrachten das folgende lineare Gleichungssystem:\\ $\var{aa}\cdot \left(\begin{smallmatrix}
+x_1\\ x_2\\ x_3\end{smallmatrix}  \right) = \var{bb}$\\
+Bestimmen Sie zur zugehörigen erweiterten Koeffizientenmatrix die reduzierte Stufenform:
+In Ihrer Lösung sollen die Koeffizienten vor den verbleibenden Variablen
+immer genau 1 sein.\\ 
+
+%Die reduzierte Stufenform ist: \\
+\ansref  \ansref  \ansref |  \ansref \\
+\ansref  \ansref  \ansref |  \ansref \\
+\ansref  \ansref  \ansref | \ansref 
+	    }}
+
+\lang{en}{
+	    \text{Consider the following linear system:\\ $\var{aa}\cdot \left(\begin{smallmatrix}
+x_1\\ x_2\\ x_3\end{smallmatrix}  \right) = \var{bb}$\\
+Determine the reduced row echelon form of the corresponding augmented matrix. The coefficients of the remaining variables in your solutions
+should all be exactly $1$.\\ 
+
+%Die reduzierte Stufenform ist: \\
+\ansref  \ansref  \ansref |  \ansref \\
+\ansref  \ansref  \ansref |  \ansref \\
+\ansref  \ansref  \ansref | \ansref 
+	    }}
+     
+	    \begin{answer}
+	    	\type{input.number}
+			\solution{s11}
+	    \end{answer}    
+	    \begin{answer}
+	    	\type{input.number}
+			\solution{s12}
+	    \end{answer}    
+	    
+	    \begin{answer}
+	    	\type{input.number}
+			\solution{s13}
+	    \end{answer}    
+	    
+	    \begin{answer}
+	    	\type{input.function}
+			\solution{s14}
+			\inputAsFunction{x}{k1}
+			\checkFuncForZero{(1-h)*(k1-l1)}{-1}{1}{10}
+	    \end{answer}    
+	    \begin{answer}
+	    	\type{input.number}
+			\solution{s21}
+	    \end{answer}    
+	    \begin{answer}
+	    	\type{input.number}
+			\solution{s22}
+	    \end{answer}    
+	    
+	    \begin{answer}
+	    	\type{input.number}
+			\solution{s23}
+	    \end{answer}    
+	    
+	    \begin{answer}
+	    	\type{input.function}
+			\solution{s24}
+			\inputAsFunction{x}{k2}
+			\checkFuncForZero{(1-h)*(k2-l2)}{-1}{1}{10}
+	    \end{answer}    
+	    
+	    \begin{answer}
+	    	\type{input.number}
+			\solution{s31}
+	    \end{answer}    
+	    \begin{answer}
+	    	\type{input.number}
+			\solution{s32}
+	    \end{answer}    
+	    
+	    \begin{answer}
+	    	\type{input.number}
+			\solution{s33}
+	    \end{answer}    
+	    
+	    \begin{answer}
+	    	\type{input.function}
+			\solution{s34}
+			\inputAsFunction{x}{k3}
+			\checkFuncForZero{|sign(k3)|-h}{-1}{1}{10}
+	    \end{answer}    
+
+        \lang{de}{\explanation{
+            Zunächst ermittelt man die allgemeine Stufenform mittels der Regeln
+            des Gauß-Verfahrens (Zeilentausch, Addition eines Vielfachen
+            einer anderen Zeile zu einer Zeile und Multiplikation einer Zeile
+            mit einem Faktor).
+            Nun sind alle Einträge unterhalb der Hauptdiagonalen 0.
+            Jetzt werden die Einträge oberhalb der Hauptdiagonalen
+            mittels Zeilenumformungen eliminiert, also auf 0 gesetzt.
+            Man erhält die reduzierte Stufenform.
+            Diese ist jedoch noch nicht eindeutig und muss noch normiert werden:
+            Für alle Zeilen der linken Seite, die einen Eintrag haben, der ungleich 0 und
+            ungleich 1 ist, dividiert man alle Einträge der entsprechenden Zeile durch
+            diesen Koeffizienten.
+        }}
+
+        \lang{en}{\explanation{
+          For determining the row echelon form we use the "tools" of Gaussian elimination (swapping rows, adding rows, multiplying rows
+          with a factor).
+          All the entries below the main diagonal equal now 0.
+          The next step is to eliminate the entries above the main diagonal by transforming the rows.
+          We end up with the reduced row echelon form.
+          Since it is not unique, we need to norm ist:
+          For all non-zero rows with entries unequal to 1, we divide all entries of this row by this entry.
+        }}
+	  
+	\end{question}
+
+    \begin{question}
+		
+		\begin{variables}
+        	
+			\randint{l1}{-3}{5}
+			\randint{l2}{-3}{5}
+			\randint{l3}{-3}{5}
+			\randint{b}{-3}{5}
+			\randint{f}{-3}{5}
+			\randint{s}{-3}{5}
+			\randint{t}{-3}{5}
+			\randint[Z]{a}{-3}{5}
+		
+        	\matrix[calculate]{aa}{2& 2*s & 2\\ -1& -s & a-1 \\ f & f*s & -2*a+f}
+        	\matrix[calculate]{bb}{2*l1 + 2*l2 + 4*l3\\ 
+a*l2 + b*l3 - l1 - l2 - 2*l3\\ 
+ -2*a*l2 - 2*b*l3 + f*l1 + f*l2 + 2*f*l3 + l3}
+        	
+        	\function{s11}{1}
+        	\function{s12}{s}
+        	\function{s13}{0}
+        	\function{s14}{l1}
+        	\function{s21}{0}
+        	\function{s22}{0}
+        	\function{s23}{1}
+        	\function{s24}{l2}
+        	\function{s31}{0}
+        	\function{s32}{0}
+        	\function{s33}{0}
+        	\function{s34}{l3}
+        	
+        	\function{h}{|sign(l3)|}
+		\end{variables}
+		
+		\type{input.generic}
+        \field{real}
+		\correctorprecision{3}
+		\displayprecision{3}
+		\lang{de}{
+	    \text{Wir betrachten das folgende lineare Gleichungssystem\\ $\var{aa}\cdot \left(\begin{smallmatrix}
+x_1\\ x_2\\ x_3\end{smallmatrix}  \right) = \var{bb}$:\\
+Bestimmen Sie zur zugehörigen erweiterten Koeffizientenmatrix die reduzierte Stufenform.
+In Ihrer Lösung sollen die Koeffizienten vor den verbleibenden Variablen
+immer genau 1 sein.\\ 
+
+%Die reduzierte Stufenform ist: \\
+\ansref  \ansref  \ansref |  \ansref \\
+\ansref  \ansref  \ansref |  \ansref \\
+\ansref  \ansref  \ansref | \ansref 
+	    }}
+
+\lang{en}{
+	    \text{Consider the following linear system:\\ $\var{aa}\cdot \left(\begin{smallmatrix}
+x_1\\ x_2\\ x_3\end{smallmatrix}  \right) = \var{bb}$:\\
+Determine the reduced row echelon form of corresponding augmented matrix.
+The coefficients of the remaining variables in your solutions
+should all be exactly $1$.\\
+
+%Die reduzierte Stufenform ist: \\
+\ansref  \ansref  \ansref |  \ansref \\
+\ansref  \ansref  \ansref |  \ansref \\
+\ansref  \ansref  \ansref | \ansref 
+	    }}
+     
+	    \begin{answer}
+		\type{input.number}
+			\solution{s11}
+	    \end{answer}    
+	    \begin{answer}
+		\type{input.number}
+			\solution{s12}
+	    \end{answer}    
+	    
+	    \begin{answer}
+		\type{input.number}
+			\solution{s13}
+	    \end{answer}    
+	    
+	    \begin{answer}
+		\type{input.function}
+			\solution{s14}
+			\inputAsFunction{x}{k1}
+			\checkFuncForZero{(1-h)*(k1-l1)}{-1}{1}{10} 
+	    \end{answer}    
+	    \begin{answer}
+		\type{input.number}
+			\solution{s21}
+	    \end{answer}    
+	    \begin{answer}
+		\type{input.number}
+			\solution{s22}
+	    \end{answer}    
+	    
+	    \begin{answer}
+		\type{input.number}
+			\solution{s23}
+	    \end{answer}    
+	    
+	    \begin{answer}
+		\type{input.function}
+			\solution{s24}
+			\inputAsFunction{x}{k2}
+			\checkFuncForZero{(1-h)*(k2-l2)}{-1}{1}{10}
+	    \end{answer}    
+	    
+	    \begin{answer}
+		\type{input.number}
+			\solution{s31}
+	    \end{answer}    
+	    \begin{answer}
+		\type{input.number}
+			\solution{s32}
+	    \end{answer}    
+	    
+	    \begin{answer}
+		\type{input.number}
+			\solution{s33}
+	    \end{answer}    
+	    
+	    \begin{answer}
+		\type{input.function}
+			\solution{s34}
+			\inputAsFunction{x}{k3}
+			\checkFuncForZero{|sign(k3)|-h}{-1}{1}{10}
+	    \end{answer}    
+        
+        \lang{de}{\explanation{
+            Zunächst ermittelt man die allgemeine Stufenform mittels der Regeln
+            des Gauß-Verfahrens (Zeilentausch, Addition eines Vielfachen
+            einer anderen Zeile zu einer Zeile und Multiplikation einer Zeile
+            mit einem Faktor).
+            Nun sind alle Einträge unterhalb der Hauptdiagonalen 0.
+            Jetzt werden die Einträge oberhalb der Hauptdiagonalen
+            mittels Zeilenumformungen eliminiert, also auf 0 gesetzt.
+            Man erhält die reduzierte Stufenform.
+            Diese ist jedoch noch nicht eindeutig und muss noch normiert werden:
+            Für alle Zeilen der linken Seite, die einen Eintrag haben, der ungleich 0 und
+            ungleich 1 ist, dividiert man alle Einträge der entsprechenden Zeile durch
+            diesen Koeffizienten.
+        }}
+
+        \lang{en}{\explanation{
+          For determining the row echelon form we use the "tools" of Gaussian elimination (swapping rows, adding rows, multiplying rows
+          with a factor).
+          All the entries below the main diagonal equal now 0.
+          The next step is to eliminate the entries above the main diagonal by transforming the rows.
+          We end up with the reduced row echelon form.
+          Since it is not unique, we need to norm ist:
+          For all non-zero rows with entries unequal to 1, we divide all entries of this row by this entry.
+        }}
+	    
+	\end{question}
+
+
+
+    \begin{question}
+		 
+		\begin{variables}
+		
+            % draw some random numbers in range [-2,2] \ { 0 }, ti in ZZ
+			\randint[Z]{t1}{-2}{2}
+            \randint[Z]{t2}{-2}{2}
+            \randint[Z]{t3}{-2}{2}
+            \randint[Z]{t4}{-2}{2}
+            \randint[Z]{t5}{-2}{2}
+            \randint[Z]{t6}{-2}{2}
+            \randint[Z]{t7}{-2}{2}
+            
+            % generate elements for the following system:
+            % [ a b | c
+            %   d e | f ]
+            \function[calculate]{a}{t1+t2*i}
+            \function[calculate]{b}{t3}
+            \function[calculate]{c}{0}
+            \function[calculate]{d}{t4+t5*i}
+            \function[calculate]{e_}{t6}
+            \function[calculate]{f}{t7*i}
+
+            % setup matrix A (-> alias AA)
+            \matrix[calculate]{AA}{a & b\\ d & e_}
+            % setup right-hand side b (-> alias bb)
+            \matrix[calculate]{bb}{c\\ f}
+
+            % calculate the solution in form:
+            % [ u v | w 
+            %   x y | z ]
+            \function[calculate]{u}{1}
+            \function[calculate]{v}{0}
+            \function[calculate]{x}{0}
+            \function[calculate]{y}{1}
+            \function[calculate]{w}{((-b*(-d/a*c+f))/(-d/a*b+e_)+c)/a}
+            \function[calculate]{z}{(-d/a*c+f)/(-d/a*b+e_)}
+            
+            % setup solution matrix X (-> alias XX)
+            \matrix[calculate]{XX}{u & v\\ x & y}
+            % setup solution vector u (-> alias uu)
+            \matrix[calculate]{uu}{w\\ z}
+                    
+		\end{variables}
+		
+		\type{input.matrix}
+        \field{complex-rational}
+		\correctorprecision[rounded]{2}
+		\displayprecision{5}
+		\lang{de}{
+	    \text{Wir betrachten das folgende lineare Gleichungssystem über den komplexen Zahlen.
+        Wie üblich ist $i \in \C$ die imaginäre Einheit.\\ 
+        $\var{AA}\cdot \left( \begin{smallmatrix} x_1\\ x_2 \end{smallmatrix}  \right) = \var{bb}$\\
+Bestimmen Sie die reduzierte Stufenform.
+Ihre Lösung hat zunächst die Form $(A|b)$. 
+In den Eingabefeldern geben Sie die Koeffizientenmatrix $A$,
+sowie die rechte Seite $b$ separat an.
+Wählen Sie zunächst das richtige Format, 
+und geben Sie dann die Elemente wertmäßig an.
+In Ihrer Lösung sollen die Einträge vor den verbleibenden Variablen
+immer genau 1 sein.%$\var{XX}$, $\var{uu}$
+}}
+
+\lang{en}{
+	    \text{We consider the following linear system over the field of the complex numbers.
+         $i \in \C$ is the imaginary unit.\\ 
+        $\var{AA}\cdot \left( \begin{smallmatrix} x_1\\ x_2 \end{smallmatrix}  \right) = \var{bb}$\\
+Determine the redcued row echelon form. First of all your solution has the form $(A|b)$.
+Enter the coefficient matrix $A$ and the right side $b$ in the input boxes seperatly.
+First off all choose the right form, then enter the elements by value.
+The entries of the remaining variables in your solution should all have the value $1$.
+}}
+
+	    \begin{answer}
+            \text{$A=$}
+            \type{input.matrix}
+			\solution{XX}
+            \lang{de}{\explanation{
+                Zunächst ermittelt man die allgemeine Stufenform mittels der Regeln
+                des Gaußverfahrens (Zeilentausch, Addition eines Vielfachen
+                einer anderen Zeile zu einer Zeile und Multiplikation einer Zeile
+                mit einem Faktor).
+                Nun sind alle Einträge unterhalb der Hauptdiagonalen 0.
+                Jetzt werden die Einträge oberhalb der Hauptdiagonalen
+                mittels Zeilenumformungen eliminiert, also auf 0 gesetzt.
+                Man erhält die reduzierte Stufenform.
+                Diese ist jedoch noch nicht eindeutig und muss noch normiert werden:
+                Für alle Zeilen der linken Seite, die einen Eintrag haben, der ungleich 0 und
+                ungleich 1 ist, dividiert man alle Einträge der entsprechenden Zeile durch
+                diesen Koeffizienten.
+            }}
+
+            \lang{en}{\explanation{
+          For determining the row echelon form we use the "tools" of Gaussian elimination (swapping rows, adding rows, multiplying rows
+          with a factor).
+          All the entries below the main diagonal equal now 0.
+          The next step is to eliminate the entries above the main diagonal by transforming the rows.
+          We end up with the reduced row echelon form.
+          Since it is not unique, we need to norm ist:
+          For all non-zero rows with entries unequal to 1, we divide all entries of this row by this entry.
+        }}
+            
+	    \end{answer}  
+
+	    \begin{answer}
+            \text{$b=$}
+            \type{input.matrix}
+			\solution{uu}
+	    \end{answer}  
+
+	\end{question}
+
+
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

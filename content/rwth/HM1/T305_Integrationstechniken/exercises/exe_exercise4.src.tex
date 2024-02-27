@@ -1,0 +1,115 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü04: Partielle Integration}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Hier die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T209_Potenzreihen/g_art_content_28_exponentialreihe.meta.xml}{link1}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\title{
+  \lang{de}{Ü04: Partielle Integration}
+}
+
+
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10922}{Ticket 10922}
+\end{block}
+
+Bestimmen Sie mit Hilfe von partieller Integration eine Stammfunktion von \\
+a) $\ f(x)=\sin(x)\cos(x)$ und \\
+b) $\ g(x)=\exp(x)\sin(x)$.
+
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+ \tab{\lang{de}{Antwort}
+ \lang{en}{Answer}}
+
+a) Mögliche Stammfunktionen von $f$ sind $F(x)=\frac{1}{2}\sin(x)^2+C$ oder $F(x)=-\frac{1}{2}\cos(x)^2+C$ mit $C \in \R$.\\
+b) Eine mögliche Stammfunktion von $g$ ist $G(x)=\frac{1}{2}\exp(x)\cdot(\sin(x)-\cos(x))$.
+
+\tab{\lang{de}{L"osung zu a)}
+\lang{en}{Solution}
+}
+
+ \begin{incremental}[\initialsteps{1}]
+  \step Wir führen eine partielle Integration aus. Wir wählen $u(x)=\sin(x)$ und $v'(x)=\cos(x)$. Wir werden gleich
+  noch die Rollen vertauschen und sehen, dass eine Vertauschung der beiden Rollen von $u$ und $v'$ auch zum Ziel führt.
+  
+  \step Also sei $u(x)=\sin(x)$ und $v'(x)=\cos(x)$. Dann sind $u'(x)=\cos(x)$ und $v(x)=\sin(x)$.
+  Damit gilt für $a<b$ nach partieller Integration:
+  \[
+  \int_a^b \textcolor{#0066CC}{\sin(x)\cos(x)} \, dx = \int_a^b u(x)v'(x)\, dx = [\sin(x)\sin(x)]_a^b - \int_a^b \cos(x)\sin(x)\, dx
+  = [\sin(x)^2]_a^b - \int_a^b \textcolor{#0066CC}{\sin(x)\cos(x)}\, dx.
+\]
+ 
+\step Wir haben nun eine Gleichung, die wir auflösen können, um eine Stammfunktion zu erhalten:
+\[
+2 \int_a^b \textcolor{#0066CC}{\sin(x)\cos(x)}\, dx = [\sin(x)^2]_a^b.
+\]
+\step Eine Stammfunktion ist also durch $F_1(x)=\frac{1}{2}\sin(x)^2$ gegeben.
+
+\step Nun vergleichen wir dieses Ergebnis mit dem, das wir erhalten, wenn wir $u(x)=\cos(x)$ und $v'(x) = \sin(x)$ gewählt hätten.
+Dann ist $u'(x) = -\sin(x)$ und $v(x)= -\cos(x)$.
+
+\step Damit gilt für $a<b$
+\[
+\int_a^b \textcolor{#0066CC}{\sin(x)\cos(x)} \, dx = \int_a^b u(x)v'(x)\, dx = [\cos(x)(-\cos(x))]_a^b - \int_a^b (-\sin(x))(-\cos(x))\, dx
+  = [-\cos(x)^2]_a^b - \int_a^b \textcolor{#0066CC}{\sin(x)\cos(x)}\, dx.
+\]
+\step Wenn wir hier die Gleichung auflösen, dann erhalten wir eine mögliche Stammfunktion
+\[
+F_2(x)=-\frac{1}{2}\cos(x)^2.
+\]
+\step Wir haben nun zwei verschiedene Stammfunktionen von $f$ bestimmt. Wie passt das zusammen? Haben wir einen Fehler gemacht?
+Wir wissen bereits, dass Stammfunktionen eindeutig bis auf Addition einer Konstanten sind.
+Das heißt, es müsste ein $C \in \R$ geben, sodass
+\[
+C= F_1(x)-F_2(x)=\frac{1}{2} \sin(x)^2 - \left(-\frac{1}{2}\cos(x)^2\right)= \frac{1}{2}(\sin(x)^2+\cos(x)^2).
+\]
+Wir haben aber auch schon \ref[link1][kennengelernt]{rem:sin_cos_exp}, dass $\sin(x)^2+\cos(x)^2=1$ für alle $x\in \R$ gilt. Damit ist $C=\frac{1}{2}$ und beide Ergebnisse sind kein Widerspruch.
+\end{incremental}
+
+\tab{Lösung zu b)}
+\begin{incremental}[\initialsteps{1}]
+\step Wir führen eine partielle Integration durch mit $u(x)=\sin(x)$ und $v'(x)=\exp(x)$. (Sie können die beiden Wahlen aber auch vertauschen. Dies führt zum gleichen Ergebnis.)
+Dann ist $u'(x)=\cos(x)$ und $v(x)=\exp(x)$.
+\step Damit gilt für $a<b$
+\[
+\int_a^b \textcolor{#0066CC}{\exp(x)\sin(x)}\, dx = [\exp(x)\sin(x)]_a^b - \int_a^b \textcolor{#CC6600}{\cos(x)\exp(x)}\, dx.
+\]
+\step Das ursprüngliche Integral erkennen wir hier noch nicht wieder. Wir führen eine erneute partielle Integration durch.
+Nun setzen wir $u(x)=\cos(x)$ und $v'(x)=\exp(x)$. Wichtig ist hier, dass wir wieder $v'(x)=\exp(x)$ setzen, ansonsten würden wir wieder zum Anfangspunkt zurückkehren und so gesehen unsere partielle Integration rückgängig machen.
+Wir haben dann $u'(x)=-\sin(x)$ und $v(x)=\exp(x)$. Und für $a<b$ haben wir dann
+\[
+\int_a^b \textcolor{#CC6600}{\cos(x)\exp(x)}\, dx = [\cos(x)\exp(x)]_a^b-\int_a^b (-\sin(x))\exp(x)\, dx = [\cos(x)\exp(x)]_a^b + \int_a^b \textcolor{#0066CC}{\exp(x)\sin(x)}\, dx.
+\]
+
+\step Setzen wir dies zusammen, gilt
+\[
+\int_a^b \textcolor{#0066CC}{\exp(x)\sin(x)}\, dx = [\exp(x)\sin(x) - \exp(x)\cos(x)]_a^b - \int_a^b \textcolor{#0066CC}{\exp(x)\sin(x)}\, dx.
+\]
+Die Gleichung ergibt
+\[
+\int_a^b \textcolor{#0066CC}{\exp(x)\sin(x)}\, dx = \frac{1}{2}[\exp(x)\sin(x)-\exp(x)\cos(x)]_a^b.
+\]
+Damit ist $\frac{1}{2}\exp(x)\cdot(\sin(x)-\cos(x))$ eine gesuchte Stammfunktion.
+\end{incremental}
+\end{tabs*}
+
+
+\end{content}

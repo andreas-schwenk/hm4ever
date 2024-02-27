@@ -1,0 +1,930 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Newton-Verfahren}
+    \lang{en}{Newton's method}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T303_Newton.meta.xml}{T303_Newton}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+    \component{generic_image}{content/rwth/HM1/images/g_img_hm-newton-verfahren.meta.xml}{newton-verfahren}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T301_Differenzierbarkeit/g_art_content_01_differenzenquotient.meta.xml}{diffbarkeit}
+    \link{generic_article}{content/rwth/HM1/T301_Differenzierbarkeit/g_art_content_02_ableitungsregeln.meta.xml}{abl-reg}
+    \link{generic_article}{content/rwth/HM1/T303_Approximationen/g_art_content_04_taylor_polynom.meta.xml}{taylor-poly}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{2}
+\ombarticle{2}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Newton-Verfahren}\lang{en}{Newton's Method}}
+ 
+\begin{block}[annotation]
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10034}{Ticket 10034}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+\section{\lang{de}{Newton-Verfahren}\lang{en}{Newton's method}}\label{newton}
+\lang{de}{
+\textbf{Motivation:} Viele praktische Probleme in den Ingenieur- und Naturwissenschaften lassen sich nicht 
+analytisch exakt lösen. Sind Näherungswerte (Approximationen) für eine gesuchte Lösung ausreichend,
+können sogenannte numerische Verfahren verwendet werden. Numerische Verfahren sind als gezielte 
+Rate-Algorithmen zu verstehen, die zumeist einen wiederholenden (iterativen) Charakter besitzen. 
+Mit zunehmender Anzahl an Iterationen sollte die numerische Lösung gegen die analytische Lösung 
+laufen (konvergieren).\\
+Im Rahmen dieses Abschnitts wollen wir uns mit der numerischen Nullstellenberechnung $f(x)=0$ beschäftigen.
+Im Speziellen beschränken wir uns auf differenzierbare Funktionen und wollen deren Nullstellen mit dem
+sogenannten Newton-Verfahren lösen.
+}
+\lang{en}{
+\textbf{Motivation:} Many practical problems in engineering and science cannot be solved analytically 
+and do not need exact solutions. If approximations are sufficient for such an application, we may 
+apply so-called numerical methods. Numerical methods are algorithms, often iterative, that give 
+approximate solutions to a problem which converge on the analytical solutions by iteration. \\
+In this section we consider the equation $f(x)=0$. In particular, we consider the case where $f$ is 
+differentiable, and use the so-called Newton's method to find the roots of $f$.
+}
+\begin{center}
+    \image{T303_Newton}
+\end{center}
+\lang{de}{
+\textbf{Idee:} Die grundlegende Idee des Newton-Verfahrens lässt sich mit Hilfe der oben dargestellten Abbildung wie folgt zusammenfassen:\\
+}
+\lang{en}{
+\textbf{Idea:} The underlying idea of Newton's method can be understood using the above diagram: \\
+}
+\begin{enumerate}
+  \item \lang{de}{
+        Wähle einen Startwert $x_0$ in der Nähe der gesuchten Nullstelle $x^\ast$ (Schätzung anhand 
+        einer Skizze der Funktion $f$).
+        }
+        \lang{en}{
+        Choose a starting point $x_0$ somewhere near the root $x^\ast$ that we wish to find (we may 
+        choose this by sketching $f$).
+        }
+  \item \lang{de}{
+        Lege die Tangente $T_{x_0}(x)$ im Punkt $P_0=(x_0,f(x_0))$ an $f$.
+        }
+        \lang{en}{
+        Consider the tangent $T_{x_0}(x)$ of $f$ at the point $P_0=(x_0,f(x_0))$.
+        }
+  \item \lang{de}{
+        Bestimme die Nullstelle $x_1$ der Tangente $T_{x_0}(x)$.
+        }
+        \lang{en}{
+        Determine the root $x_1$ of the tangent $T_{x_0}(x)$ (its intersection with the x-axis).
+        }
+  \item \lang{de}{
+        Wiederhole die Schritte 2 und 3, ausgehend von der Nullstelle $x_1$ als neuer Berührstelle 
+        der Tangente $T_{x_1}(x)$.
+        }
+        \lang{en}{
+        Repeat steps 2 and 3, starting with the approximation $x_1$ and considering the tangent 
+        $T_{x_1}(x)$.
+        }
+  \item \lang{de}{
+        Ausgehend von der jeweils zuletzt ermittelten Nullstelle $x_n$ wiederhole man die Schritte 2 
+        und 3 solange, bis ein Abbruchkriterium erfüllt ist. Mögliche Abbruchkriterien sind:
+        }
+        \lang{en}{
+        Repeat steps 2 and 3 from the last determined approximation $x_n$ until a chosen stopping 
+        criterion is fulfilled. Possible stopping criteria are:
+        }
+  \begin{enumerate}
+     \item \lang{de}{
+           Der Funktionswert $f(x_n)$ weicht betragsmäßig nicht mehr als ein vorgegebenes 
+           $\epsilon_1$ von $f(x_n)=0$ ab, so dass $|f(x_n)|<\epsilon_1$ gilt.
+           }
+           \lang{en}{
+           The difference between $f(x_n)=0$ and the value $f(x_n)$ smaller than a pre-chosen 
+           $\epsilon_1$, that is, $|f(x_n)|<\epsilon_1$ gilt.
+           }
+     \item \lang{de}{
+           Der Abstand zweier aufeinanderfolgender Näherungswerte $x_n$ und $x_{n+1}$ wird 
+           unterschritten: $|x_{n+1}-x_n|<\epsilon_2$.
+           }
+           \lang{en}{
+           The difference between two consecutive approximations $x_n$ und $x_{n+1}$ is sufficiently 
+           small: $|x_{n+1}-x_n|<\epsilon_2$.
+           }
+  \end{enumerate}
+\end{enumerate}
+\lang{de}{
+Aufbauend auf dieser Idee lässt sich eine Berechnungsvorschrift für das 
+Newton-Verfahren entwicklen. Für einen gewählten Startpunkt $x_0$ berechnet sich die Tangente zu
+}
+\lang{en}{
+Building on this idea, we can be more precise in our rules. For a chosen starting point $x_0$, the 
+tangent can be found by
+}
+\[ 
+    T_{x_0}(x)=f(x_0)+f'(x_0)(x-x_0). 
+\]
+\lang{de}{
+Die Nullstelle dieser Tangente wird als erste Näherungslösung des ursprünglichen Problems aufgefasst
+}
+\lang{en}{
+The root of this tangent, and our first approximation to the root of the function $f$, is hence
+}
+\begin{align*}
+   & T_{x0}(x)&=0\\
+   \Leftrightarrow\quad & f(x_0)+f'(x_0)(x-x_0)&=0\\
+  \Leftrightarrow\quad &  f'(x_0)(x-x_0) &=-f(x_0) \\
+  \Leftrightarrow\quad & x-x_0  &=-\frac{f(x_0)}{f'(x_0)} \\
+  \Leftrightarrow\quad & x  &= x_0-\frac{f(x_0)}{f'(x_0)}:=x_1.
+\end{align*}
+\lang{de}{
+Mit Hilfe der Nullstellen-Approximation $x_1$ kann die nächste Iteration durchgeführt werden.
+Die allgemeine Berechnungsvorschrift für eine beliebige Iteration des Newton-Verfahrens lautet somit
+}
+\lang{en}{
+Using the root approximation $x_1$, we can reiterate these steps. A general iteration of Newton's 
+method can be written
+}
+\begin{align*}
+   x_{n+1}  &= x_n-\frac{f(x_n)}{f'(x_n)}.
+\end{align*}
+
+\begin{theorem}[\lang{de}{Newton-Verfahren}\lang{en}{Newton's method}]\label{theo:newton-verfahren}
+\lang{de}{
+Sei $f:I\rightarrow\R$ eine auf einem Intervall $I$ (nicht konstante) differenzierbare Funktion, die 
+eine Nullstelle $x^*\in I$ hat.\\
+Für einen Startwert $x_0$, der \textit{nahe genug} bei $x^*$ liegt, konvergiert die Folge 
+$(x_n)_{n\in \N}$ mit
+}
+\lang{en}{
+Let $f:I\rightarrow\R$ be a (non-constant) differentiable function on an interval $I$, that has a 
+root $x^*\in I$.\\
+For a starting point $x_0$, which lies \textit{lies sufficiently close to} to $x^*$, the sequence 
+$(x_n)_{n\in \N}$ where
+}
+\[ x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)} \]
+\lang{de}{gegen die Nullstelle $x^*$.}
+\lang{en}{converges towards the root $x^*$.}\\
+\end{theorem}
+
+%Eine alternative Erklärung des \lref{newton}{Newton-Verfahrens} ist folgendem Video zu entnehmen:\\
+
+
+\begin{remark}
+\begin{enumerate}
+\item \lang{de}{
+    Es gibt viele (komplizierte) hinreichende Bedingungen, die die
+    Konvergenz des Newton-Verfahrens sicherstellen. Eine M\"oglichkeit, die
+    Bedingung "`$x_0$ liegt nahe bei $x^*$"' zu pr\"azisieren, ist im \lref{sec:konv-geschw}{folgenden
+    Paragraphen} gegeben.
+    \\\\
+    In der Praxis probiert man oft den Algorithmus aus und sieht sich das Resultat an.
+    }
+    \lang{en}{
+    There exist many (complicated) sufficient conditions which guarantee the convergence of Newton's 
+    method. A possible way to make the condition '$x_0$ lies sufficiently close to $x^*$' can be made 
+    precise \lref{sec:konv-geschw}{as described in the following paragraphs}.
+    \\\\
+    In practice, we may simply try the algorithm several times until a good starting point is found.
+    }
+\item \lang{de}{
+    Wenn $f$ mehr als eine Nullstelle hat, dann hängt es meist von $x_0$ ab, gegen welche Nullstelle 
+    die Iteration strebt.
+    }
+    \lang{en}{
+    If $f$ has more than one root, then it is mostly the choice of $x_0$ that determines which root 
+    the algorithm will converge to.
+    }
+\end{enumerate}
+\end{remark}
+
+
+\begin{example}
+\begin{tabs*}[\initialtab{0}]
+\tab{$f(x)=x-e^{-x}$}
+ 	\begin{genericGWTVisualization}[550][1000]{mathlet1}
+ 		% \title{$f(x)=x-e^{-x}$}
+ 		\begin{variables}
+			\pointOnCurve{st}{real}{0}{-1}  % verschiebbarer Punkt auf x-Achse, Anfangswert (-1,0)
+ 			\number{x0}{real}{var(st)[x]}
+			\function{f}{real}{x-exp(-x)}
+			\number{y0}{real}{var(x0)-exp(-var(x0))}
+			\number{m}{real}{1+exp(-var(x0))}
+			\number{q0}{real}{var(y0)-var(m)*var(x0)}
+			\point{P}{real}{var(x0),var(y0)}
+			\point{R}{real}{var(x0)+1,var(y0)+var(m)}
+			\line{T}{real}{var(P),var(R)}
+			\point{P2}{real}{var(x0)-var(y0)/var(m) ,0}
+			\segment{v}{real}{var(st),var(P)}
+		\end{variables}
+ 		\color{P}{#0066CC}
+		\color{T}{#0066CC}
+		\color{st}{#CC6600}
+		\color{P2}{#00CC00}
+		\color{v}{#CC6600}
+		\begin{canvas}
+			\plotSize{400}
+			\plotLeft{-2}
+			\plotRight{6}
+			\plot[coordinateSystem]{f,T,v, P, st, P2}
+		\end{canvas}
+		
+		\lang{de}{\text{
+    Hier können Sie sich für das folgende Beispiel $f=\var{f}$ den Funktionsgraphen und zu einem 
+		\textcolor{#CC6600}{Näherungswert} (aktuell $\var{st}[x]$) der Nullstelle jeweils den nächsten 
+    \textcolor{#00CC00}{Näherungswert} (aktuell $\var{P2}[x]$) anzeigen lassen.
+    }}
+    \lang{en}{\text{
+    Here is an opportunity to visualise Newton's method with the example $f=\var{f}$, using 
+    \textcolor{#CC6600}{approximation} (currently $\var{st}[x]$) as a starting point, used to find 
+    the next \textcolor{#00CC00}{approximation} (currently $\var{P2}[x]$).
+    }}
+ 		
+\end{genericGWTVisualization}
+
+\lang{de}{
+Wir betrachten die Funktion $f(x)=x-e^{-x}$.
+Wegen $f'(x)=1+e^{-x}>0$ für alle $x\in \R$ ist sie streng monoton wachsend. Da außerdem
+}
+\lang{en}{
+We consider the function $f(x)=x-e^{-x}$.
+As $f'(x)=1+e^{-x}>0$ for all $x\in \R$, it is strictly monotone increasing. As 
+}
+\[ \lim_{x\to -\infty} f(x)=  \lim_{x\to -\infty} (x-e^{-x}) =-\infty \]
+\lang{de}{und}
+\lang{en}{and}
+\[ \lim_{x\to \infty} f(x)=  \lim_{x\to \infty} (x-e^{-x}) =\infty, \]
+\lang{de}{
+besitzt $f$ genau eine Nullstelle. Diese Nullstelle wollen wir mit dem Newton-Verfahren 
+näherungsweise berechnen. Die Rekursionsformel lautet hier
+}
+\lang{en}{
+the function $f$ has exactly one root. We want to approximate this root using Newton's method. The 
+recursion formula in this case is
+}
+\begin{eqnarray*}
+x_{n+1} &=& x_n-\frac{f(x_n)}{f'(x_n)} = x_n-\frac{x_n-e^{-x_n}}{1+e^{-x_n}} \\
+&=& \frac{x_n(1+e^{-x_n})-x_n+e^{-x_n}}{1+e^{-x_n}} =\frac{(x_n+1)e^{-x_n}}{1+e^{-x_n}} \\
+&=& \frac{x_n+1}{e^{x_n}+1}.
+\end{eqnarray*} 
+
+\lang{de}{Starten wir mit $x_0=0$, so folgen}
+\lang{en}{We begin with $x_0=0$. Then}
+\begin{align*}
+x_1 &= \frac{x_0+1}{e^{x_0}+1}&=\frac{0+1}{1+1}&=\frac{1}{2}=0,5 \, , \\
+x_2 &= \frac{x_1+1}{e^{x_1}+1}=\frac{\frac{1}{2}+1}{e^{\frac{1}{2}}+1}&=\frac{3}{2\sqrt{e}+2}& \approx 0,5663110 \, , \\
+x_3 &= \frac{x_2+1}{e^{x_2}+1} &=  \frac{\frac{3}{2\sqrt{e}+2}+1}{e^{\frac{3}{2\sqrt{e}+2}}+1}& \approx 0,5671431 \, , \\
+x_4 &=  \frac{x_3+1}{e^{x_3}+1}& \qquad &\approx 0,5671432
+\end{align*}
+\lang{de}{
+Das vierte Folgeglied unterscheidet sich also vom dritten nur noch in der siebten Nachkommastelle.
+}
+\lang{en}{
+The fourth approximation only differs from the third on the seventh digit after the decimal point.
+}
+
+\tab{$f(x)=x^3-3x^2+1$}
+ 	\begin{genericGWTVisualization}[550][1000]{mathlet1}
+ 		%\title{$f(x)=x^3-3x^2+1$}
+ 			\begin{variables}
+			\pointOnCurve{st}{real}{0}{-1}
+ 			\number{x0}{real}{var(st)[x]}
+			\function{f}{real}{x^3-3*x^2+1}
+			\number{y0}{real}{var(x0)^3-3*var(x0)^2+1}
+			\number{m}{real}{3*var(x0)^2-6*var(x0)}
+			\number{q0}{real}{var(y0)-var(m)*var(x0)}
+			\point{P}{real}{var(x0),var(y0)}
+			\point{R}{real}{var(x0)+1,var(y0)+var(m)}
+			\line{T}{real}{var(P),var(R)}
+			\point{P2}{real}{var(x0)-var(y0)/var(m) ,0}
+			\segment{v}{real}{var(st),var(P)}
+		\end{variables}
+ 		\color{P}{#0066CC}
+		\color{T}{#0066CC}
+		\color{st}{#CC6600}
+		\color{P2}{#00CC00}
+		\color{v}{#CC6600}
+		\begin{canvas}
+			\plotSize{400}
+			\plotLeft{-2}
+			\plotRight{6}
+			\plot[coordinateSystem]{f,T,v, P, st, P2}
+		\end{canvas}
+		\lang{de}{\text{
+    Hier können Sie für die Funktion $f(x)=\var{f}$ zu einer Stelle die nächste Stelle im 
+    Newton-Verfahren berechnen lassen. Den orangenen Punkt auf der $x$-Achse können Sie verschieben.\\
+		Für $x_0=\var{st}[x]$ ist die nächste Stelle $x_1=\var{P2}[x]$ (siehe grüner Punkt).
+    }}
+    \lang{en}{\text{
+    For the function $f(x)=\var{f}$ we can calculate an approximation from the previous one using 
+    Newton's method. The orange point on the $x$-axis can be moved.\\
+    If $x_0=\var{st}[x]$, the next approximation is $x_1=\var{P2}[x]$ (the green point).
+    }}
+\end{genericGWTVisualization}
+
+\lang{de}{
+Die Polynomfunktion $f(x)=x^3-3x^2+1$ hat $3$ verschiedene Nullstellen, wie man anhand der Grafik sieht.
+\\\\
+Anschaulich erkennt man auch Folgendes:\\
+Wird das Newton-Verfahren mit einem Anfangswert $x_0$ gestartet, welcher kleiner als die kleinste 
+Nullstelle $x^*_{min}$ ist, so ist sichergestellt, dass die numerische Lösung gegen die exakte 
+Nullstelle konvergiert. Eine mögliche Erklärung liefert der Funktionsverlauf. Wie zu erkennen ist, 
+weist die Funktion im betrachteten Bereich für alle Anfangswerte $x_0<x^*_{min}$ eine Rechtskurve 
+auf. Diese Rechtskurve stellt sicher, dass erstens alle Anfangswerte gegen die exakte Lösung gedrückt 
+werden und zweitens, dass alle Folgewerte kleiner-gleich der exakten Lösung sind. In Summe ist also 
+sichergestellt, dass das Newton-Verfahren konvergiert.
+\\\\
+Bei einem Anfangswert $x_0$ zwischen der kleinsten Nullstelle und dem lokalen Maximum liegt der 
+zweite Wert $x_1$ wieder links von der kleinsten Nullstelle. Auch in diesem Fall nähert man sich dann 
+im Weiteren der kleinsten Nullstelle an.
+\\\\
+Entsprechend konvergiert das Newton-Verfahren gegen die größte Nullstelle, wenn man einen Anfangswert 
+rechts des lokalen Minimums wählt.
+\\\\
+Um eine Iteration zu erhalten, die gegen die mittlere Nullstelle konvergiert, muss man daher schon 
+einen Wert wählen, der zwischen den beiden Extrema liegt. Jedoch nicht zu nah an den Extrema, da der 
+Wert sonst nach dem ersten Schritt wieder zu klein bzw. zu groß wird.
+}
+\lang{en}{
+The polynomials $f(x)=x^3-3x^2+1$ has $3$ distinct roots, which can be seen on the graph.
+\\\\
+Visually we also recognise the following:\\
+If we perform Newton's method with a starting point of $x_0$ that is smaller than the smallest root 
+$x^*_{min}$, then the numerical approximations converge on the root. A possible explanation is given 
+by the shape of the graph. We can see that the function is 'concave', or has a decreasing derivative, 
+for all starting points $x_0<x^*_{min}$. This ensures that Newton's method will converge to the same 
+root for every starting point, and that each approximation is smaller than or equal to the root 
+itself.
+\\\\
+If we choose a starting point $x_0$ between the smallest root and the local maximum, the second 
+approximation $x_1$ will lie to the left of the smallest root. In this case, as above, the 
+approximations converge to the smallest root.
+\\\\
+Correspondingly, Newton's method converges to the largest root if we choose a starting point to the 
+right of the local minimum.
+\\\\
+For the approximations to converge to the middle root of the function, we must choose a starting 
+point that lies between the two extrema. Not only this, but we cannot choose a point too close to 
+either extrema, lest the second approximation be once more too large or too small.
+}
+\tab{$f(x)=\arctan(x)$}
+\lang{de}{
+Bei diesem Beispiel kennen wir natürlich die einzige Nullstelle, nämlich $x^*=0$ schon. Dieses 
+Beispiel soll aber illustrieren, dass es durchaus auch Situationen gibt, in denen ein schlechter 
+Anfangswert eine nicht konvergente Folge liefert.
+}
+\lang{en}{
+We already know that the unique root for this example is $x^*=0$. This example is intended to 
+illustrate the situations in which a bad choice of starting point leads to a non-convergent 
+sequence of approximations.
+}
+
+	\begin{genericGWTVisualization}[550][1000]{mathlet1}
+ 		% \title{$f(x)=\arctan(x)$}
+ 		\begin{variables}
+			\pointOnCurve{st}{real}{0}{2}  % verschiebbarer Punkt auf x-Achse, Anfangswert (-1,0)
+ 			\number{x0}{real}{var(st)[x]}
+			\function{f}{real}{arctan(x)}
+			\number{y0}{real}{arctan(var(x0))}
+			\number{m}{real}{1/(1+var(x0)^2)}
+			\number{q0}{real}{var(y0)-var(m)*var(x0)}
+			\point{P}{real}{var(x0),var(y0)}
+			\point{R}{real}{var(x0)+1,var(y0)+var(m)}
+			\line{T}{real}{var(P),var(R)}
+			\point{P2}{real}{var(x0)-var(y0)/var(m) ,0}
+			\segment{v}{real}{var(st),var(P)}
+		\end{variables}
+ 		\color{P}{#0066CC}
+		\color{T}{#0066CC}
+		\color{st}{#CC6600}
+		\color{P2}{#00CC00}
+		\color{v}{#CC6600}
+		\begin{canvas}
+			\plotSize{400}
+			\plotLeft{-4}
+			\plotRight{4}
+			\plot[coordinateSystem]{f,T,v, P, st, P2}
+		\end{canvas}
+		
+		\lang{de}{\text{
+    Hier können Sie sich für das folgende Beispiel $f=\var{f}$ den Funktionsgraphen und zu einem 
+		\textcolor{#CC6600}{Näherungswert} (aktuell $\var{st}[x]$) der Nullstelle jeweils den nächsten 
+    \textcolor{#00CC00}{Näherungswert} (aktuell $\var{P2}[x]$) anzeigen lassen.
+    }}
+    \lang{en}{\text{
+    Here is an opportunity to visualise Newton's method with the example $f=\var{f}$, using 
+    \textcolor{#CC6600}{approximation} (currently $\var{st}[x]$) as a starting point, used to find 
+    the next \textcolor{#00CC00}{approximation} (currently $\var{P2}[x]$).
+    }}
+ 		
+\end{genericGWTVisualization}
+\lang{de}{
+Die \ref[abl-reg][Ableitung von $f(x)=\arctan(x)$]{ex:abl-umkehrfunktion} ist 
+$f'(x)=\frac{1}{1+x^2}$, weshalb die Rekursionsformel im Newton-Verfahren hier
+}
+\lang{en}{
+The \ref[abl-reg][derivative of $f(x)=\arctan(x)$]{ex:abl-umkehrfunktion} is $f'(x)=\frac{1}{1+x^2}$, 
+so in this case
+}
+\[ x_{n+1} = x_n-\frac{f(x_n)}{f'(x_n)} = x_n-\frac{\arctan(x_n)}{(1+x_n^2)^{-1}}=x_n-\arctan(x_n)\cdot (1+x_n^2) \]
+\lang{de}{lautet. Ist nun $x_n\geq \sqrt{3}$ und damit $\arctan(x_n)\geq 1$, so gilt}
+\lang{en}{is the recursion formula. If $x_n\geq \sqrt{3}$ and hence $\arctan(x_n)\geq 1$, we have}
+\[  x_{n+1} = x_n-\arctan(x_n)\cdot (1+x_n^2)\leq x_n- (1+x_n^2)=-x_n - (1-2x_n+x_n^2)=-x_n-(1-x_n)^2<-x_n. \]
+\lang{de}{Entsprechend gilt für $x_n\leq -\sqrt{3}$ und damit $\arctan(x_n)\leq -1$ die Ungleichung}
+\lang{en}{Similarly, if $x_n\leq -\sqrt{3}$ and hence $\arctan(x_n)\leq -1$, we have}
+\[ x_{n+1} = x_n-\arctan(x_n)\cdot (1+x_n^2)\geq x_n+(1+x_n^2)=-x_n+(1+2x_n+x_n^2)=-x_n+(1+x_n)^2>-x_n. \]
+\lang{de}{
+Insgesamt erhält man also für $|x_n|\geq \sqrt{3}$, dass $|x_{n+1}|>|x_n|$ ist.
+\\\\
+Startet man also das Newton-Verfahren mit einem Wert $x_0$ mit $|x_0|\geq \sqrt{3}$, so springt die 
+Folge $(x_n)_{n\in \N}$ immer von positiv nach negativ (und umgekehrt) und entfernt sich dabei auch 
+immer weiter von der Nullstelle $x^*=0$.
+}
+\lang{en}{
+In general, for $|x_n|\geq \sqrt{3}$ we get $|x_{n+1}|>|x_n|$.
+\\\\
+If we begin Newton's method with a value $x_0$ where $|x_0|\geq \sqrt{3}$, then the sequence 
+$(x_n)_{n\in \N}$ switches between positive and negative values, whilst diverging from the root 
+$x^*=0$.
+}
+\end{tabs*}
+\end{example}
+
+
+
+	\begin{quickcheck}	
+	\begin{variables}
+		
+			\randint[Z]{a}{1}{4}
+			
+			\function[expand,normalize]{f}{x^2-a*cos(x)}
+			\derivative[normalize]{f1}{f}{x}   %2*x+a*sin(x)
+			
+			\function{g}{x-(f/f1)}
+			
+ 			\function[calculate]{x1}{1}
+ 			\substitute[calculate]{x2}{g}{x}{x1}
+ 			\substitute[calculate]{x3}{g}{x}{x2}
+% 			\function[calculate]{x2}{x1-(x1^2-a*cos(x1))/(2*x1+a*sin(x1))}
+% 			\function[calculate]{x3}{x2-(x2^2-a*cos(x2))/(2*x2+a*sin(x2))}
+									
+	\end{variables}
+
+		
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++
+		
+		\field{real}
+		\precision{2}
+		\type{input.function} 
+		
+	    \lang{de}{\text{
+      Eine Nullstelle der Funktion $f(x)=\var{f}$ soll mit dem Newton-Verfahren
+	    angenähert werden.\\
+	    Geben Sie die Rekursionsformel für das Newton-Verfahren an.\\
+	    $x_{n+1}= $\ansref   (schreiben sie lediglich $x$ statt $x_n$) \\ \\
+	    Berechnen Sie anschließend mit Hilfe des Taschenrechners die ersten Folgenglieder des Verfahrens,
+	    wenn als Startwert $x_0=\var{x1}$ gewählt wird (auf drei Stellen hinter dem Komma genau).\\
+	    $x_{1}= $\ansref, \\
+	    $x_{2}= $\ansref .
+	    }}
+      \lang{en}{\text{
+      We approximate a root of the function $f(x)=\var{f}$ using Newton's method.\\
+      Give the recursion formula of Newton's formula.\\
+      $x_{n+1}= $\ansref   (simply write $x$ instead of $x_n$). \\ \\
+      Determine, using a calculator, the first approximations given by the method, if we use the 
+      starting point $x_0=\var{x1}$ (to three decimal places).\\
+      $x_{1}= $\ansref, \\
+	    $x_{2}= $\ansref .
+      }}
+
+	    \begin{answer}
+			\solution{g}
+			\checkAsFunction[1E-3]{x}{-10}{10}{10} 
+	    \end{answer}  
+    		
+	    \begin{answer}
+	    	\solution{x2}
+			\checkAsFunction[1E-3]{x}{-10}{10}{10} 
+		\end{answer}
+
+		\begin{answer}
+			\solution{x3}
+			\checkAsFunction[1E-2]{x}{-10}{10}{10} 
+		\end{answer}  
+    
+	\end{quickcheck}   
+
+
+
+\begin{remark}
+\lang{de}{
+Das Newton-Verfahren lässt sich - etwas abgeändert - auch verwenden, um lokale Extremstellen von 
+zweimal differenzierbaren Funktionen zu berechnen. Extremstellen sind ja Stellen, an denen die 
+Ableitungsfunktion Nullstellen hat, weshalb man das Newton-Verfahren auf die Ableitungsfunktion 
+anwenden kann, also die Rekursion
+}
+\lang{en}{
+Newton's method can also be used - with slight modification - to find local extrema of 
+twice-differentiable functions. Extrema are, after all, points at which the derivative of a function 
+has a root. Thus we can use Newton's method on the derivative, i.e. iterate
+}
+    \begin{equation*}
+      x_{n+1}=x_n-\frac{f'\left(x_n\right)}{f''\left(x_n\right)}
+    \end{equation*}
+\lang{de}{
+benutzt, um Kandidaten f\"ur Extremstellen näherungsweise zu berechnen.
+}
+\lang{en}{
+to converge on some candidates for extrema.
+}
+\end{remark}
+
+	\begin{quickcheck}	
+	\begin{variables}
+		
+			\randint[Z]{a}{1}{4}
+			
+			\function[expand,normalize]{f}{x^2-a*sin(x)}
+			\derivative[normalize]{f1}{f}{x}   
+			\derivative[normalize]{f2}{f1}{x}   
+			
+			\function{g}{x-(f1/f2)}
+			
+									
+	\end{variables}
+
+		
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++
+		
+		\field{rational}
+		\type{input.function} 
+		
+	    \lang{de}{\text{
+      Wie lautet die Rekursionsformel des Newton-Verfahrens, wenn eine mögliche Extremstelle 
+      der Funktion $f(x)=\var{f}$ angenähert werden soll?\\
+	    $x_{n+1}= $\ansref   (Schreiben sie lediglich $x$ statt $x_n$.)
+      }}
+      \lang{en}{\text{
+      What is the recursion formula for Newton's method if we wish to find an extremum of the 
+      function $f(x)=\var{f}$?\\
+      $x_{n+1}= $\ansref   (simply write $x$ instead of $x_n$).
+      }}
+
+	    \begin{answer}
+			\solution{g}
+			\checkAsFunction{x}{-10}{10}{10} 
+	    \end{answer}  
+    	\explanation{\lang{de}{
+      Die Ableitung von $f(x)=\var{f}$ ist $f'(x)=\var{f1}$ und die zweite Ableitung ist 
+    	$f''(x)=\var{f2}$. Die Rekursionsformel für die Extremstelle ist allgemein 
+        $x_{n+1}=x_n-\frac{f'(x_n)}{f''(x_n)}$,
+   		wofür nur noch die Funktionen eingesetzt werden müssen.
+    	}
+      \lang{en}{
+      The derivative of $f(x)=\var{f}$ is $f'(x)=\var{f1}$, and the second derivative of 
+      $f''(x)=\var{f2}$. The recursion formula for the extrema is 
+        $x_{n+1}=x_n-\frac{f'(x_n)}{f''(x_n)}$,
+      which we then substitute the functions into.
+      }}	    
+	\end{quickcheck}   
+\lang{de}{
+Zusammenfassungen der angesprochenen Themen aus Abschnitt \ref{newton} können den folgenden Videos entnommen werden:\\
+\floatright{
+    \href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10741&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}
+    \href{https://www.hm-kompakt.de/video?watch=532}{\image[75]{00_Videobutton_schwarz}} 
+}\\
+}
+\lang{en}{}
+
+\section{\lang{de}{Konvergenzgeschwindigkeit des Newton-Verfahren}
+         \lang{en}{Rate of convergence of Newton's method}}\label{sec:konv-geschw}
+
+\lang{de}{
+Bei der Vorstellung des Newton-Verfahrens wurde gesagt, dass das Verfahren konvergiert, wenn der 
+Anfangswert $x_0$ "`nahe genug"' bei der Nullstelle $x^*$ liegt. Hier soll ein Kriterium gegeben werden,
+was "`nahe genug"' heißt, und auch erklärt werden, dass das Newton-Verfahren in diesem Fall "`schnell"'
+konvergiert.
+}
+\lang{en}{
+In our introduction to Newton's method, we asserted that the sequence of approximations it provides 
+converges if the starting value $x_0$ is 'sufficiently close' to a root $x^*$. Now we give a 
+criterion for a point being 'sufficiently close', and explain that if Newton's method converges, 
+it does so 'quickly'.
+}
+
+\begin{theorem}\label{theo:konv-geschw}
+\lang{de}{
+Sei $f:D\rightarrow\R$ eine zweimal differenzierbare Funktion, die eine Nullstelle $x^*\in D$ hat.\\
+Wir nehmen an, dass es eine Umgebung $I=U_\epsilon(x^*)\subseteq D$ von $x^*$ gibt, so dass 
+}
+\lang{en}{
+Let $f:D\rightarrow\R$ be a twice-differentiable function with a root at $x^*\in D$.\\
+We assume that there exists a neighbourhood $I=U_\epsilon(x^*)\subseteq D$ of $x^*$ such that
+}
+\[ |f'(x)|\geq m_1>0 \text{ f\"ur alle }x\in I \]
+\lang{de}{
+für eine geeignete reelle Zahl $m_1>0$.
+Weiter sei $M_2>0$ eine obere Schranke f\"ur den Betrag der zweiten Ableitung:
+}
+\lang{en}{
+for some real number $m_1>0$.
+Furthermore, let $M_2>0$ be an upper bound for the absolute value of the second derivative:
+}
+ \[ |f''(x)|\leq M_2 \text{\lang{de}{ f\"ur alle }\lang{en}{ for all }} x\in I.\]
+\lang{de}{
+Für einen Startwert $x_0\in I$ mit 
+}
+\lang{en}{
+For a starting point $x_0\in I$ with
+}
+\[ {|x_0-x^*|}<\frac{2m_1}{M_2} \]
+\lang{de}{
+konvergiert das Newton-Verfahren \textit{quadratisch}, d.h. es gilt die Abschätzung
+}
+\lang{en}{
+Newton's method converges \textit{quadratically}, that is, we have
+}
+\[  {|x_{n+1}-x^*|} \leq {|x_n-x^*|}^2 \cdot \frac{M_2}{2m_1} \]
+\lang{de}{für alle $n\in \N$.}
+\lang{en}{for all $n\in \N$.}
+\end{theorem}
+
+\begin{proof}[\lang{de}{Beweis}\lang{en}{Proof}]
+  \begin{showhide}
+    \lang{de}{
+    Nach Definition der \lref{theo:newton-verfahren}{Berechnungsvorschrift des Newton-Verfahrens} gilt
+    }
+    \lang{en}{
+    By the definition of \lref{theo:newton-verfahren}{Newton's method},
+    }
+    \begin{eqnarray*}
+    |x_{n+1}-x^*| &=& | x_n-\frac{f(x_n)}{f'(x_n)}-x^*| =| \frac{f(x_n)-(x_n-x^*)f'(x_n)}{f'(x_n)} | \\
+    &=& \frac{1}{|f'(x_n)|}\cdot \left| f(x_n)-(x_n-x^*)f'(x_n)-f(x^*)\right| ,
+    \end{eqnarray*}
+    \lang{de}{
+    da $f(x^*)=0$ ist. Nun ist aber $f(x_n)-(x_n-x^*)f'(x_n)-f(x^*)=R_{f,1,x^*}(x_n)$ das 
+    \ref[taylor-poly][Restglied zum Taylor-Polynom]{sec:restglied} der Ordnung $1$, welches wir auch mit der zweiten Ableitung
+    darstellen können:
+    }
+    \lang{en}{
+    as $f(x^*)=0$. Now we have $f(x_n)-(x_n-x^*)f'(x_n)-f(x^*)=R_{f,1,x^*}(x_n)$ the 
+    \ref[taylor-poly][remainder of the Taylor polynomial]{sec:restglied} of order $1$, which can also 
+    be expressed using the second derivative:
+    }
+    \[  R_{f,1,x^*}(x_n) =\frac{f''(\xi_n)}{2}(x_n-x^*)^2 \]
+    \lang{de}{
+    mit einem geeigneten Wert $\xi_n$ zwischen $x^*$ und $x_n$, insbesondere also im Intervall $I$.
+    Damit folgt unter Berücksichtigung der \lref{theo:konv-geschw}{oben definierten Schranken} $m_1$ und $M_2$
+    }
+    \lang{en}{
+    for some $\xi_n$ between $x^*$ and $x_n$, in particular, in the interval $I$. Hence by 
+    considering the \lref{theo:konv-geschw}{bounds} $m_1$ and $M_2$,
+    }
+    \begin{eqnarray*}
+    {|x_{n+1}-x^*|} &=& \frac{|R_{f,1,x^*}(x_n)|}{|f'(x_n)|} = \frac{|f''(\xi_n)|}{2|f'(x_n)|} \cdot {|x_n-x^*|}^2 \\
+    &\leq & {|x_n-x^*|}^2 \cdot \frac{M_2}{2m_1}.
+    \end{eqnarray*}
+    \lang{de}{
+    Wir haben also die oben angegebene rekursive Abschätzung. Aus dieser folgt auch die Konvergenz:\\
+    Setzt man nämlich $c:=\frac{|x_0-x^*| M_2}{2m_1}<1$, so erhält man induktiv aus der rekursiven Abschätzung
+    }
+    \lang{en}{
+    We therefore have the recursive bounds given above. From these we get convergence:\\
+    if we set $c:=\frac{|x_0-x^*| M_2}{2m_1}<1$, via recursion we obtain
+    }
+    \[  {|x_n-x^*|} \leq c^{2^{n-1}-1}\cdot {|x_0-x^*|}. \]
+  \end{showhide}
+\end{proof}
+
+
+
+\begin{remark}
+\begin{enumerate}
+\item \lang{de}{
+Ist $f$ auf einer Umgebung von $x^*$ definiert, und $f'(x^*)\neq 0$, so lässt sich eine Umgebung $I$ 
+wie im \lref{sec:konv-geschw}{Satz} immer finden. Wie oben schon erwähnt, wird in der Praxis aber 
+lediglich $x_0$ nahezu beliebig gewählt und das Newton-Verfahren angewandt. 
+Wenn sich keine Konvergenz absehen lässt, wird mit einem neuen Startwert begonnen.
+}
+\lang{en}{
+If $f$ is defined on a neighbourhood of $x^*$, and $f'(x^*)\neq 0$, then a neighbourhood $I$ as in 
+the \lref{sec:konv-geschw}{theorem} can always be found. As has already been mentioned, in practice 
+we often choose some practically arbitrary $x_0$ and run through Newton's method. If this does not 
+converge, we can simply choose another starting value and try again.
+}
+\item \lang{de}{
+Dass die Umgebung im \lref{sec:konv-geschw}{Satz} symmetrisch um $x^*$ gewählt ist, hat den Grund, 
+dass damit - und mit den folgenden Bedingungen - garantiert  ist, dass mit $x_0$ auch alle anderen 
+Folgeglieder in $I$ liegen. Um wirklich eine symmetrische Umgebung zu finden, müsste man aber die 
+Nullstelle schon genau kennen. Der Satz gilt jedoch auch mit Intervallen $I$, die $x^*$ enthalten, 
+aber nicht symmetrisch sind, sofern für $x\in I$ auch $x-\frac{f(x)}{f'(x)}$ in $I$ liegt.
+}
+\lang{en}{
+The neighbourhood from the \lref{sec:konv-geschw}{theorem} can be chosen to be symmetric about 
+$x^*$ because then it is guaranteed that not only $x_0$, but all other approximations, lie in $I$. To 
+find such a symmetric neighbourhood, we would need to know where the root is. However, the theorem 
+still holds for intervals $I$ that contain $x^*$ but are not symmetric about it, provided that for 
+all $x\in I$, the point $x-\frac{f(x)}{f'(x)}$ also lies in $I$.
+}
+\item \lang{de}{
+Ist die Nullstelle auch kritischer Punkt, d.h. $f'(x^*)=0$, so konvergiert das Newtonverfahren 
+nicht so gut. In diesem Fall kann man aber das Newton-Verfahren auf $f'$ anwenden.
+}
+\lang{en}{
+If the root is also a critical point, i.e. $f'(x^*)=0$, then Newton's method does not converge too 
+well. In this case, we can apply Newton's method to $f'$.
+}
+\end{enumerate}
+\end{remark}
+
+\begin{example}
+%\begin{tabs*}[\initialtab{0}]
+%\tab{$f(x)=x-e^{-x}$}
+\lang{de}{
+Im obigen Beispiel $f(x)=x-e^{-x}$ sind $f'(x)=1+e^{-x}$ und $f''(x)=-e^{-x}$. Da 
+$f(0)=0-e^{-0}=-1<0$ und $f(1)=1-e^{-1}>0$ ist, liegt die Nullstelle von $f$ im Intervall $I=[0,1]$. 
+Damit haben wir die Abschätzungen
+}
+\lang{en}{
+In the above example $f(x)=x-e^{-x}$ we have $f'(x)=1+e^{-x}$ and $f''(x)=-e^{-x}$. As 
+$f(0)=0-e^{-0}=-1<0$ and $f(1)=1-e^{-1}>0$, the root of $f$ lies in the interval $I=[0,1]$. Thus we 
+have the bounds
+}
+\[  f'(x)=1+e^{-x}\geq 1+e^{-1}=:m_1 \text{\lang{de}{ f\"ur alle }\lang{en}{ for all }}x\in I \]
+\lang{de}{und}
+\lang{en}{and}
+\[ |f''(x)|=|-e^{-x}|\leq 1=:M_2 \text{\lang{de}{ f\"ur alle }\lang{en}{ for all }}x\in I. \]
+\lang{de}{
+Ist nun $x^*\in I$ die Nullstelle und $x_0\in I$ ein Anfangswert, so gilt $|x_0-x^*|<1$, da beide in 
+$I$ liegen. Andererseits ist:
+}
+\lang{en}{
+If $x^*\in I$ is the root and $x_0\in I$ a starting point, then $|x_0-x^*|<1$ as both lie in $I$. 
+Moreover:
+}
+\[ \frac{2m_1}{M_2}=2+\frac{2}{e}>1. \]
+\lang{de}{
+Für jeden Startwert im Intervall $I$ konvergiert damit das Newton-Verfahren nach obigem Satz.
+\\\\
+Man sieht an diesem Beispiel auch gut, dass das Kriterium nur eine hinreichende Bedingung für die 
+Konvergenz gibt und kein notwendiges Kriterium: Das Newton-Verfahren konvergiert nämlich für jeden 
+reellen Startwert $x_0$, obwohl die im Satz angegebende Bedingung für betragsmäßig große $x_0$ nicht 
+erfüllt ist:
+\\\\
+Falls $x_0>-1$ ist, liegt nämlich nach \lref{ex:newton-exp}{obiger Rechnung} 
+}
+\lang{en}{
+By the above theorem, Newton's method converges for every starting point in the interval $I$.
+\\\\
+This example illustrates that the given criterium is a sufficient condition but not a necessary 
+condition for convergence: Newton's method actually converges for all real starting values $x_0$, not 
+just those fulfilling the condition on the absolute value:
+\\\\
+If $x_0>-1$, then \lref{ex:newton-exp}{by the above calculation}
+}
+\[  x_1=\frac{x_0+1}{e^{x_0}+1} \]
+\lang{de}{
+im Intervall $[0,1]$, weshalb das Newton-Verfahren dann konvergiert.
+\\\\
+Falls $x_0\leq -1$ ist, gilt
+}
+\lang{en}{
+in the interval $[0,1]$, so Newton's method converges in this case.
+\\\\
+If $x_0\leq -1$, then
+}
+\[ x_1=\frac{x_0+1}{e^{x_0}+1}\geq x_0+1, \]
+\lang{de}{
+weshalb für diese Startwerte die Folgenglieder zunächst sukzessiv um mindestens $1$ größer werden, 
+bis irgendwann $x_n>-1$ gilt, woraufhin nach dem ersten Fall das Newton-Verfahren konvergiert.
+}
+\lang{en}{
+and so for these starting values, each approximation is at least $1$ greater than the last, until 
+eventually $x_0\leq -1$, the first case. Hence Newton's method converges for all real starting points.
+}
+%\end{tabs*}
+\end{example}
+
+
+\section{\lang{de}{Approximation von Wurzeln}
+         \lang{en}{Approximation of roots}}\label{sec:n-te-wurzeln}
+
+\lang{de}{
+Als Spezialfall des Newton-Verfahrens lassen sich $n$-te Wurzeln 
+%ganzer Zahlen durch rationale Zahlen 
+annähern.
+Die $n$-te Wurzel einer positiven Zahl $b$ lässt sich auf die Nullstelle des Polynoms $f(x)=x^n-b$ zurückführen
+}
+\lang{en}{
+As a special case of Newton's method, we can approximate $n$th roots. The $n$th root of a positive 
+number $b$ can be viewed as the root of the polynomial $f(x)=x^n-b$:
+}
+\begin{align*}
+    \sqrt[n]{b}=x \quad\Rightarrow\quad b=x^n \quad\Rightarrow\quad 0=x^n-b.
+\end{align*}
+
+\begin{theorem}
+\lang{de}{Sei $b>0$ und $n\in \N$ mit $n\geq 2$. Die rekursiv definierte Folge}
+\lang{en}{Let $b>0$ and $n\in \N$ with $n\geq 2$. The recursively defined sequence}
+\begin{eqnarray}
+x_0 &\coloneq & 1\\
+x_{m+1}&\coloneq & \left( 1- \frac{1}{n}\right) \cdot x_{m} + \frac{b}{n\cdot x_{m}^{n-1}}, \quad  m \geq 1 \\
+\end{eqnarray}
+\lang{de}{
+konvergiert gegen $\sqrt[n]{b}$.\\
+Ist $b$ eine rationale Zahl, so sind alle Folgeglieder rationale Zahlen.
+}
+\lang{en}{
+converges towards $\sqrt[n]{b}$.\\
+If $b$ is a rational number then every approximation in the sequence is a rational number.
+}
+\end{theorem}
+
+\begin{proof*}[\lang{de}{Begründung}\lang{en}{Reasoning}]
+\lang{de}{
+Wendet man das Newton-Verfahren zur Nullstellenbestimmung auf die Funktion $f(x)=x^n-b$ an,
+so erhält man wegen $f'(x)=nx^{n-1}$ die Rekursionsformel
+}
+\lang{en}{
+Applying Newton's method to find the roots of the function $f(x)=x^n-b$, we get (thanks to 
+$f'(x)=nx^{n-1}$) the recursion formula
+}
+\[ x_{m+1} =x_m -\frac{f(x_m)}{f'(x_m)}=x_m -\frac{x_m^n-b}{nx_m^{n-1}}
+= \left( 1- \frac{1}{n}\right) \cdot x_{m} + \frac{b}{n\cdot x_{m}^{n-1}}. \]
+
+\lang{de}{
+Auf den Beweis, dass das Newton-Verfahren hier auch tatsächlich konvergiert, wollen wir verzichten.
+}
+\lang{en}{
+We do not provide the proof of the convergence of Newton's method in this case.
+}
+\end{proof*}
+
+\begin{remark}\label{rem:heron-verfahren}
+\lang{de}{
+Im Spezialfall $n=2$ ist diese Folge auch als \emph{Heron-Verfahren} zur Berechnung von 
+Quadratwurzeln bekannt.
+}
+\lang{en}{
+In the special case $n=2$, the so-called \emph{Heron's formula} is known for finding square roots.
+}
+\end{remark}
+
+\begin{example}
+\lang{de}{
+Wir wollen die dritte Wurzel von $2$ berechnen. In diesem Fall ist also $n=3$ und $b=2$ und wir 
+erhalten die Folge $(x_m)_{m\in \N}$ mit $x_0=1$ und
+}
+\lang{en}{
+Suppose we want to find the third root of $2$. In this case, $n=3$, $b=2$, and we obtain the 
+sequence $(x_m)_{m\in \N}$ with $x_0=1$ and
+}
+\[ x_{m+1}= \frac{2x_m}{3}+\frac{2}{3x_m^2} \]
+\lang{de}{für alle $m\geq 1$. Die ersten Folgeglieder lauten also}
+\lang{en}{for all $m\geq 1$. The first terms of the sequence are therefore}
+\begin{align*} 
+x_0 &=  1 &&& \\
+x_1 &= \frac{2x_0}{3}+\frac{2}{3x_0^2} &=\frac{2}{3}+\frac{2}{3} &=\frac{4}{3} &=1,\bar{3}\, , \\
+x_2 &= \frac{2x_1}{3}+\frac{2}{3x_1^2} &=\frac{8}{9}+\frac{3}{8}&=\frac{91}{72}&=1,263\bar{8}\, , \\
+x_3 &= \frac{2x_2}{3}+\frac{2}{3x_2^2}&                                  &=\frac{1126819}{894348} &\approx 1,259933\, , \\
+x_4 &= \frac{2x_3}{3}+\frac{2}{3x_3^2}&		&		 &\approx 1,259921\, .
+\end{align*}
+\lang{de}{
+Das letzte berechnete Folgeglied $x_4$ stimmt mit $\sqrt[3]{2}$ sogar in den angegebenen Stellen 
+überein, wie man durch das Berechnen von $x_5$ feststellen könnte.
+}
+\lang{en}{
+The last term $x_4$ that we calculated even corresponds to $\sqrt[3]{2}$ in the given decimal places.
+}
+\end{example}
+\lang{de}{
+Eine Zusammenfassung der in den Abschnitten \ref{sec:konv-geschw} und \ref{sec:n-te-wurzeln} 
+angesprochenen Themen kann dem folgenden Video entnommen werden:\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10742&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+}
+\lang{en}{}
+
+
+\end{visualizationwrapper}
+\end{content}

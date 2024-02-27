@@ -1,0 +1,74 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A07: Grenzwertberechnung}
+    \lang{en}{input numbers}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A07: Grenzwertberechnung}}
+\lang{en}{\title{Problem 7}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9864}{Ticket 9864}
+\end{block}
+
+\begin{problem}
+
+	\begin{question}
+		\lang{de}{
+			\text{
+			Gegeben sei die Folge $(a_{n})_{n\in\N}$ mit $a_{1}=1$ und $a_{n+1}=\frac{\var{xx}}{a_n+\var{x}}$ für alle $n\in\N$. 
+			Geben Sie den Grenzwert $a$ der konvergenten Folge an.\\\\
+            \textit{Hinweis: Geben Sie den Grenzwert $a$ der Folge exakt ein. Verwenden Sie dazu ggfls. Brüche und Wurzelausdrücke 
+            (Eingabe: sqrt(Zahl))}
+		}
+		}
+		\explanation{Verwenden Sie statt der Folgenglieder $a_{n+1}$ und $a_n$ den gesuchten Grenzwert 
+        $a$ in der Gleichung und formen Sie nach $a$ um.}
+		\type{input.function}
+		\field{rational}
+		
+
+    
+		
+		\begin{variables}
+			
+			\randint{x}{1}{20}
+			\function[calculate]{xx}{x*x}
+			\function{null}{x/2*(sqrt(5)-1)}
+		
+			
+		\end{variables}
+		
+		\begin{answer}
+			\text{$a = $}
+			\solution{null}
+            \checkAsFunction{c}{-10}{10}{100}
+		\end{answer}
+		
+	\end{question}
+	
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

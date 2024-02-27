@@ -1,0 +1,590 @@
+
+
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Rentenrechnung}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T602_Rentenwerte_vs.meta.xml}{T602_Rentenwerte_vs}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T602_Barwert_ns.meta.xml}{T602_Barwert_ns}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T602_Rentenendwert_ns.meta.xml}{T602_Rentenendwert_ns}
+
+  \end{components}
+  \begin{links}
+\link{generic_element}{content/rwth/HM1/T602_Elementare_Finanzmathematik/content_07_exercises/g_exe_03_Ratensparen.meta.xml}{03_Ratensparen}
+\link{generic_article}{content/rwth/HM1/T601_GrundlagenWiWi/g_art_content_03_Folgen_Reihen.meta.xml}{content_03_Folgen_Reihen}
+\end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{2}
+\ombarticle{2}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\lang{de}{\title{Rentenrechnung}}
+\lang{en}{\title{annuity calculation}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22688}{Ticket 22688}
+
+\end{block}
+
+\begin{block}[annotation]
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section {\lang{de}{Grundbegriffe} \lang{en}{Basic terminology}}
+\lang{de}{Renten sind in fast allen praktischen finanziellen Vorgängen nicht wegzudenken. Eine Rente selbst beschreibt eine regelmäßige Zahlung, 
+wie zum Beispiel Zinszahlungen, Lohn- und Gehaltszahlungen, Rückzahlungen von Krediten oder auch Mietzahlungen. 
+Somit ist der finanzmathematische Umgang mit einer Rente lediglich ein Auf- oder Abzinsen von regelmäßigen Zahlungen.} 
+\lang{en}{Annuities are indispensable in almost all practical financial processes. An annuity itself describes a regular payment, 
+such as interest payments, wage and salary payments, loan repayments or rent payments. 
+In financial mathematics, annuities are handled simply by compounding or discounting regular payments.} \\
+
+\begin{definition}
+\lang{de}{Die \textbf{Rentenrechnung} in der Finanzmathematik bezieht sich auf 
+eine Folge von Zahlungen in regelmäßigen, gleichgroßen Zeitabständen.}
+\lang{en}{The \textbf{calculation of an annuity} in financial mathematics involves
+a sequence of payments at regular, equal intervals.}
+\\
+
+\lang{de}{Der Begriff \textbf{Rente} wird sowohl für Einzahlungen als auch für Auszahlungen verwendet.}
+\lang{en}{The term \textbf{annuity} is used for both deposits and withdrawals.}
+\\
+
+\lang{de}{Wird die Zahlung zu Beginn einer Periode geleistet, handelt es sich um \textbf{vorschüssige Rente}. 
+Wird die Zahlung hingegen am Ende einer Periode geleistet, handelt es sich um \textbf{nachschüssige Rente}.}
+\lang{en}{If the payments are made at the beginning of the period, it is an \textbf{annuity in advance}.
+On the other hand, if the payments are made at the end of the period, it is an \textbf{annuity in arrears}. }
+\\
+
+\lang{de}{Die \textbf{Laufzeit $n$} beschreibt die Zeit, in der die \textbf{Zahlungen $r$} geleistet werden. }
+\lang{en}{The \textbf{duration $n$} describes the time over which the \textbf{payments $r$} are made. }
+\\
+
+\lang{de}{Der \textbf{Rentenendwert $R_n$} gibt das Kapital an, zu dem die jährlichen Zahlungen einer Rente nach $n$ Zeitperioden führen. }
+\lang{en}{The \textbf{future value $R_n$} of the annuity indicates the sum of the annual payments after $n$ time periods. }
+\\
+
+\lang{de}{Der \textbf{Barwert} einer Rente, auch \textbf{Rentenbarwert $R_0$} genannt, bezieht sich auf den Wert des Kapitals nach $n$ Zeitperioden zum heutigen Zeitpunkt.}
+\lang{en}{The \textbf{present value} of the annuity, also called its \textbf{cash value $R_0$}, refers to the value at the present time of the capital after $n$ time periods.}
+\\
+
+\end{definition}
+
+\begin{example}
+\begin{itemize}
+\item \lang{de}{Monatlich werden $10$ € auf ein Bankkonto eingezahlt.}
+        \lang{en}{$10$ € is paid monthly into a bank account.}
+\item \lang{de}{Monatlich werden $10$ € von einem Bankkonte abgehoben.}
+    \lang{en}{$10$ € is withdrawn monthly from a bank account.}
+\end{itemize}
+\lang{de}{Beide Vorgänge werden als Rente bezeichnet. Es findet jeweils eine regelmäßige Zahlung statt, wobei es für eine Rente unerheblich ist, ob es sich um eine Ein- oder Auszahlung handelt.}
+\lang{en}{Both transactions are called annuities. A regular payment is made in each case, regardless of whether it is a deposit or a withdrawal. }
+\end{example}
+
+
+\section{\lang{de}{Nachschüssige Rente} \lang{en}{Annuities in arrears}}
+\lang{de}{Wir nehmen an, dass jährlich der konstante Betrag $r$ gezahlt wird. 
+Zur Berechnung des Endwertes müssen wir die gezahlten Beträge nach jeder Periode zum Zinssatz $i$ verzinsen bzw. mit dem Zinsfaktor $q$ multiplizieren.}
+\lang{en}{We assume that the constant amount $r$ is paid annually. 
+To calculate the future value, we have to add interest to the amounts paid after each period at the interest rate $i$ or multiply them by the interest factor $q$.}
+
+\begin{center}
+\image{T602_Rentenendwert_ns}
+\end{center}
+
+\lang{de}{Die Abbildung zeigt, wie sich bei einer nachschüssig gezahlten Rente der Endwert der Zahlungen ergibt.}
+\lang{en}{The figure shows how the final value of the payments is calculated for an annuity paid in arrears.}
+\\
+\lang{de}{Bei nachschüssiger Rente werden die Zahlungen immer zum Ende eines Zeitabschnittes (z.\,B. 1 Jahr) geleistet.} 
+\lang{en}{In the case of annuities in arrears, payments are always made at the end of the time period (e.g. 1 year).}
+\\
+
+\begin{rule}
+\lang{de}{Der \textbf{Rentenendwert $R_n$} berechnet sich bei nachschüssiger Rente als Summe der jeweiligen Endwerte der Zahlungen: }
+\lang{en}{The \textbf{future value $R_n$} of the annuity is calculated as the sum of the respective future values of the payments: }
+\\
+\[
+R_n = r \cdot q^{n-1} + r \cdot q^{n-2} + r \cdot q^{n-3} + \ldots + r
+\]
+\lang{de}{Die letzte Zahlung wird am Ende der Laufzeit $n$ geleistet und somit nicht mehr verzinst.}
+\lang{en}{The last payment is made at the end of the term $n$ and thus no longer accrues interest.}
+\\ 
+
+\lang{de}{Die Summanden lassen sich als geometrische Reihe zusammenführen:}
+\lang{en}{The summands can be combined to a geometric series:}
+\[
+R_n = \sum_{k=0}^{n-1}{r\cdot q^k} = r\cdot \frac{q^n-1}{q-1}
+\]
+
+\lang{de}{Der \textbf{Rentenbarwert $R_0$}, der Zeitwert zu Beginn des Rentenzeitraumes, ergibt sich durch die Multiplikation von $R_n$ mit dem Faktor $\frac{1}{q^n}$:}
+\lang{en}{The \textbf{present value $R_0$} of the annuity, its value at the beginning of the annuity period, is obtained by multiplying $R_n$ by the factor $\frac{1}{q^n}$:}
+\[
+R_0  = r\cdot \frac{q^n-1}{q-1}\cdot \frac{1}{q^n}
+\]
+\end{rule}
+
+
+\begin{proof*}[
+\lang{de}{Herleitung}
+\lang{en}{Derivation}]
+\lang{de}{Für den Rentenbarwert $R_0$ gilt, dass er bei jährlicher Verzinsung ebenfalls zum 
+Rentenendwert $R_n$ führt, also gilt $R_0 \cdot q^n = R_n$. Das führt uns zu}
+\lang{en}{The present value $R_0$ also leads to the future
+annuity value $R_n$ if it accumulates interest annually, so $R_0 \cdot q^n = R_n$. This leads us to}
+\[
+R_0  = R_n \cdot \frac{1}{q^n} =  r\cdot \frac{q^n-1}{q-1} \cdot \frac{1}{q^n}.
+\]
+\lang{de}{Alternativ können auch die einzelnen Barwerte mit Hilfe der geometrischen Reihe 
+summiert werden. Dies führt auf die gleiche Formel.} 
+\lang{en}{Alternatively, the individual present values can also be summed up with the help of the geometric series 
+can be summed up. This leads to the same formula.} 
+
+%Wir wollen die Formel für den {Rentenbarwert $R_0$} nachfolgend mit Hilfe eines Zahlenstrahls beweisen. 
+\begin{center}
+\image{T602_Barwert_ns}
+\end{center}
+%Zur Berechnung des {Rentenbarwerts $R_0$} werden die einzelnen Barwerte der Zahlungen aufsummiert:
+%\[
+%R_0 = r \cdot  \frac{1}{q} + r \cdot  \frac{1}{q^2} + r \cdot  \frac{1}{q^3} + ... + r \cdot  \frac{1}{q^n}
+%\]
+%
+%Diese Summanden lassen sich wiederum zu einer geometrischen Reihe zusammenführen:
+%\[
+%R_0 = \sum_{k=1}^{n}{r\cdot \frac{1}{q^k}}
+%\]
+%Diese Reihe startet bei $k=1$ und kann so nicht aufgelöst werden. Mit Hilfe der Indexverschiebung lassen wir die Reihe bei $k=0$ starten und ziehen am Ende das nullte Folgenglied ab. \\
+%\[
+%\sum_{k=1}^{n}{r\cdot \frac{1}{q^k}} = \sum_{k=0}^{n}{r\cdot \frac{1}{q^k}} - r\cdot \frac{1}{q^0} 
+%\]
+%\[
+%R_0 = \sum_{k=0}^{n}{r\cdot \frac{1}{q^k}} - r
+%\]
+%Diese goemetrische Reihe lässt sich wie gewohnt umformen.
+%\[
+%\sum_{k=0}^{n}{r\cdot \frac{1}{q^k}} - r = r \cdot \frac{\frac{1}{q^{n+1}}-1}{\frac{1}{q}-1} - r
+%\]
+%Diesen Therm werden wir nun mathematisch umformen. 
+%\begin{align*}
+%R_0 &\ =\ & r \cdot \frac{\frac{1}{q^{n+1}}-1}{\frac{1}{q}-1} - r &\ \text{|}\ \text{$r$ ausklammern} \\
+%R_0 &\ =\ & r\cdot(\frac{\frac{1}{q^{n+1}}-1}{\frac{1}{q}-1} - 1) &\ \text{|}\ \text{Bruch mit $q$ erweitern}\\
+%R_0 &\ =\ & r\cdot(\frac{\frac{1}{q^{n}}-q}{1-q} - 1) &\ \text{|}\ \text{Haupnenner bilden}\\
+%R_0 &\ =\ & r\cdot(\frac{\frac{1}{q^{n}}-q}{1-q} - \frac{1-q}{1-q}) &\ \text{|}\ \text{Brüche zusammenfassen}\\
+%R_0 &\ =\ & r\cdot(\frac{\frac{1}{q^{n}}-1}{1-q}) &\ \text{|}\ \text{$\frac{1}{q^n}$ im Zähler ausklammern}\\
+%R_0 &\ =\ & r\cdot \frac{q^n-1}{q-1}\cdot \frac{1}{q^n} &\ \text{}\ \text{}
+%\end{align*}
+\end{proof*}
+
+\begin{example}
+\lang{de}{Ihre Versicherung bietet Ihnen nach einem Unfall zwei Auszahlungsmodalitäten an:}
+\lang{en}{Your insurance company offers you two payment modalities after an accident:}
+\begin{itemize}
+\item \lang{de}{eine direkte, einmalige Sofortzahlung von $70.000$ €,}
+      \lang{en}{a direct, one-off immediate payment of $70,000$ €,}
+\item \lang{de}{im ersten Jahr eine einmalige Sofortzahlung von $50.000$ € und zusätzlich eine 40-jährige Rente in Höhe von 
+$1.000$ €, die jeweils zum Jahresende ausgezahlt wird.}
+\lang{en}{in the first year, a one-off immediate payment of $50,000$ €, and in addition a 40-year annuity of. 
+$1,000$ €, which is paid out at the end of each year.}
+\end{itemize}
+
+\lang{de}{Für welche Zahlung würden Sie sich, bei einem Zinssatz von $5$\%, entscheiden?}
+\lang{en}{Which payment would you choose, given an interest rate of $5$\%?}
+\\
+
+\lang{de}{Als Grundlage für eine solche Entscheidung berechnen wir die \textbf{Barwerte} der beiden Zahlungsmodalitäten.}
+\lang{en}{As a basis for such a decision, we calculate the \textbf{cash values} of the two payment modalities.}
+\\
+
+\lang{de}{Der {Barwert} der ersten Option entspricht der Sofortzahlung und ist somit
+\[
+R_{0,1} = 70.000 \text{\ [€]}.
+\]}
+\lang{en}{The {cash value} of the first option corresponds to the immediate payment and is therefore
+\[
+R_{0,1} = 70,000 \text{\ [€]}.
+\]}
+
+
+\lang{de}{Der {Barwert} der zweiten Option entspricht der Sofortzahlung und der  Rente, die 40 Jahre lang ausgezahlt wird:
+\begin{align*}
+R_{0,2} &\ =\ & 50.000 + 1.000\cdot\frac{1,05^{40}-1}{1,05-1}\cdot\frac{1}{1,05^{40}} \\
+&\ =\ & 50.000 + 17.159,09 \\
+&\ =\ & 67.159,09 \text{\ [€]}
+\end{align*}}
+\lang{en}{The {cash value} of the second option corresponds to the immediate payment and the annuity paid out for 40 years:
+\begin{align*}
+R_{0,2} &\ =\ & 50,000 + 1,000\cdot\frac{1.05^{40}-1}{1.05-1}\cdot\frac{1}{1.05^{40}} \\
+&\ =\ & 50,000 + 17,159.09 \\
+&\ =\ & 67,159.09 \text{\ [€]}
+\end{align*}}
+
+
+\lang{de}{Aufgrund des höheren Barwertes entscheiden Sie sich für die einmalige Sofortzahlung von $70.000$ €.}
+\lang{en}{Due to the higher cash value, you opt for the one-off immediate payment of $70,000$ €.}
+\end{example}
+
+\begin{quickcheck}
+		\field{real}
+		\type{input.function}
+		\begin{variables}
+			
+		 
+            \function{Rn}{472799,21}
+          
+           
+  		\end{variables}
+		
+		\lang{de}{\text{%\notion{Kurztest:}\\
+        Berechnen Sie den \textbf{Rentenendwert} der zweiten Auszahlungsmodalität des oben genannten Beispiels.
+        \\
+        Der Rentenendwert (gerundet auf zwei Nachkommastellen) beträgt: \ansref €}}
+    \lang{en}{\text{%\notion{Kurztest:}\\
+        Calculate the \textbf{future value} of the second payment modality of the above example.
+        \\
+        The future value of the annuity (rounded to two decimal places) is: \ansref €}} 
+		
+		\begin{answer}
+			\solution{Rn}
+		\end{answer}
+        
+         
+        
+        \lang{de}{\explanation{
+        Der Rentenendwert wird mit der Formel $r\cdot\frac{q^n-1}{q-1}$ berechnet. Zusätzlich kommt hier jedoch die
+        Sofortzahlung hinzu, diese wird $n$-mal verzinst, da diese zu Beginn des ersten Jahres gezahlt wird.     
+        $R_{n} = 50.000\cdot1,05^{40} + 1.000\cdot\frac{1,05^{40}-1}{1,05-1} = 472.799,21 \text{[€]}$}
+        }
+          \lang{en}{\explanation{
+        The final pension value is calculated with the formula $r\cdot\frac{q^n-1}{q-1}$. In addition, however, the
+        In addition, however, the immediate payment is added here, this is interest-bearing $n$ times, since it is paid at the beginning of the first year.     
+        $R_{n} = 50,000\cdot1.05^{40} + 1,000\cdot\frac{1.05^{40}-1}{1.05-1} = 472,799.21 \text{[€]}$}
+        }
+		
+\end{quickcheck}
+
+\section {\lang{de}{Vorschüssige Rente} \lang{en}{Annuities in advance}}
+\lang{de}{Werden die Rentenzahlungen jeweils zu Beginn eines Zeitabschnittes geleistet, sprechen wir von einer vorschüssigen Rente. \\
+Die nachstehende Abbildung zeigt, wie sich die \textbf{Rentenendwerte} und \textbf{Rentenbarwerte} der einzelnen Zahlungen 
+einer vorschüssigen Rente ergeben.}
+\lang{en}{If the annuity payments are made at the beginning of each period, we refer to it as an annuity in advance. \\
+The figure below shows how the \textbf{future values} and \textbf{cash values} of the individual payments
+are calculated.}
+\begin{center}
+\image{T602_Rentenwerte_vs}
+\end{center}
+
+\begin{rule}
+\lang{de}{Der \textbf{Rentenendwert} wird, wie auch bei der nachschüssigen Rente, durch die Addition der 
+jeweiligen Endwerte der Zahlungen gebildet:}
+\lang{en}{The \textbf{future value} of an annuity in advance, similarly to an annuity in arrears, is formed by the addition of the 
+respective final values of the payments:}
+\\
+\[
+R_n = r\cdot q^n + r\cdot q^{n-1} +  r\cdot q^{n-2} + \ldots +  r\cdot q
+\]
+
+\lang{de}{Diese Summe lässt sich wiederum als geometrische Summe schreiben:}
+\lang{en}{This sum can again be written as a geometric sum:}
+\[
+R_n = r\cdot \sum_{k=1}^{n}{q^k} = r\cdot \left(\sum_{k=0}^{n}{q^k} - 1\right)
+\]
+\lang{de}{Nach der geometrischen Summenformel erhalten wir den {Rentenendwert}}
+\lang{en}{According to the geometric sum formula, we obtain the {future value}}
+\[
+R_n = r \cdot \frac{q^n-1}{q-1}\cdot q.
+\]
+
+\lang{de}{Der \textbf{Rentenbarwert} wird ebenfalls durch die Addition der 
+jeweiligen Barwerte der Zahlungen gebildet:}
+\lang{en}{The \textbf{cash value} is also formed by adding the 
+respective present values of the payments:}
+\\
+
+\[
+R_0 = r + r\cdot \frac{1}{q} + r\cdot \frac{1}{q^{2}} + ... + r\cdot \frac{1}{q^{n-1}}
+\]
+
+\lang{de}{Die geometrische Summe dazu lautet}
+\lang{en}{The geometric sum is}
+\[
+R_0 = r\cdot \sum_{k=0}^{n-1}{\frac{1}{q^k}} = r \cdot \frac{1 - \frac{1}{q^n} }{1 - \frac{1}{q} }
+\]
+
+\lang{de}{und nach Umformung}
+\lang{en}{and after a transformation}
+\[
+R_0 = r \cdot \frac{q^n-1}{q-1}\cdot\frac{1}{q^{n-1}}.
+\]
+
+\end{rule}
+
+\begin{example}
+\lang{de}{Sie benötigen Ihr Wohnmobil nicht mehr und wollen gerne den größtmöglichen Preis für Ihr Wohnmobil erlangen. \\
+Hierzu fallen Ihnen zwei Möglichkeiten ein:} 
+\lang{en}{You no longer need your motorhome and would like to obtain the highest possible price for it. \\
+You can think of two ways to do this:} 
+\begin{itemize}
+\item \lang{de}{Sie verkaufen das Wohnmobil direkt für $20.000$ €.}
+      \lang{en}{You sell the motorhome directly for $20,000$ €.}
+\item \lang{de}{Sie vermieten das Wohnmobil fest für einen Zeitraum von 10 Jahren. 
+Die jährliche Miete beträgt $2.500$ € und ist jeweils zu Beginn des Jahres zu leisten. 
+Im Anschluss können Sie das Wohnmobil für einen Preis von $1.000$ € verschrotten lassen.}
+      \lang{en}{You rent the motorhome on a fixed basis for a period of 10 years. 
+The annual rent is $2,500$ € and is payable at the beginning of each year. 
+Afterwards, you can have the motorhome scrapped for a price of $1,000$€.}
+\end{itemize}
+\lang{de}{Gehen Sie von einem Kalkulationszins von $2$\% aus.}
+\lang{en}{Assume an interest rate of $2$\%.}
+
+\lang{de}{Als Basis der Entscheidung dient hier wieder der \textbf{Rentenbarwert} der beiden Möglichkeiten.}
+\lang{en}{The basis of the decision here is again the \textbf{annuity cash value} of the two options.}
+
+\lang{de}{Möglichkeit 1: Der {Rentenbarwert} entspricht dem direkten Verkaufspreis:
+\[
+R_{0,1} = 20.000 \text{[€]}
+\]}
+\lang{en}{Possibility 1: The {annuity cash value} corresponds to the direct sales price:
+\[
+R_{0,1} = 20,000 \text{[€]}
+\]}
+
+
+\lang{de}{Möglichkeit 2: Da die jährliche Miete jeweils zu Jahresbeginn gezahlt wird, handelt es sich um eine \textbf{vorschüssige Rente} mit der Laufzeit $n=10$.
+Der Schrottwert von $1.000$ € muss zur Berechnung des Barwertes $10$-mal abgezinst werden, denn er wird erst nach dem letzten Vermietungsjahr ausgezahlt.
+\[
+R_{0,2} = 2.500 \cdot \frac{1,02^{10}-1}{1,02-1}\cdot\frac{1}{1,02^{10-1}} + 1.000\cdot\frac{1}{1,02^{10}} = 23.725,94 \text{[€]}
+\]
+}
+\lang{en}{Possibility 2: Since the annual rent is paid at the beginning of each year, it is an \textbf{annuity in advance} with duration $n=10$.
+The scrap value of $1,000$ € must be discounted $10$ times to calculate the present value, because it will only be paid after the last year of renting it.
+\[
+R_{0,2} = 2,500 \cdot \frac{1.02^{10}-1}{1.02-1}\cdot\frac{1}{1.02^{10-1}} + 1.000\cdot\frac{1}{1.02^{10}} = 23,725.94 \text{[€]}
+\]
+}
+
+
+
+\lang{de}{Aus finanzmathematischer Sicht entscheiden Sie sich für den größeren Barwert und somit für Möglichkeit 2.}
+\lang{en}{From the point of view of mathematical finance, you opt for the larger cash value and thus for option 2.}
+\end{example}
+
+\section{\lang{de}{Ewige Rente} \lang{en}{Eternal annuity} }
+\lang{de}{Eine \textbf{ewige Rente} bezeichnet eine Rente, bei der eine zeitlich unbegrenzte Ratenzahlung stattfindet.}
+\lang{en}{An \textbf{eternal annuity} or \textbf{perpetuity} means an annuity where there is are payments over an indefinite period of time.}
+\\
+
+\lang{de}{Der {Rentenendwert} einer {ewigen Rente} steigt ins Unermessliche und ist daher nicht relevant.} 
+\lang{en}{The {future value} of a {eternal annuity} increases infinitely and is therefore not relevant.} 
+\\
+\lang{de}{Im Gegensatz zum Rentenendwert lässt sich jedoch ein aussagekräftiger {Rentenbarwert} einer {ewigen Rente} berechnen.} 
+\lang{en}{Unlike the future value, however, a meaningful {present value} of a {perpetuity} can be calculated.}\\
+\begin{rule}
+\lang{de}{Zur Berechnung des \textbf{Rentenbarwertes} der \textbf{ewigen Rente} wird $n=\infty$ gesetzt und der Grenzwert berechnet.}
+\lang{en}{To calculate the \textbf{annuity cash value} of a \textbf{perpetuity}, we set $n=\infty$ and calculate the limit value.}\\
+\lang{de}{Bei \textbf{nachschüssiger Rente} ergibt sich:}
+\lang{en}{For an \textbf{annuity in arrears}, this yields:}
+\[
+R_0 = \lim_{n\to \infty}\left( r \cdot \frac{q^n-1}{q-1}\cdot \frac{1}{q^n} \right) = \frac{r}{q-1}
+\]
+
+\lang{de}{Bei \textbf{vorschüssiger Rente} ergibt sich: }
+\lang{en}{For an \textbf{annuity in advance}, this yields: }
+\[
+R_0 = \lim_{n\to \infty}\left( r \cdot \frac{q^n-1}{q-1}\cdot \frac{1}{q^{n-1}} \right) = \frac{r\cdot q}{q-1}
+\]
+\end{rule}
+
+\begin{proof*}[
+\lang{de}{Herleitung}
+\lang{en}{Derivation}]
+\lang{de}{Um die Grenzwerte mit den uns bekannten \ref[content_03_Folgen_Reihen][Grenzwertregeln]{grenzwertregeln} zu berechnen, kürzen wir im ersten Fall $q^n$ bzw. erweitern 
+wir im zweiten Fall mit $q$. Wir setzen einen 
+positiven Zinssatz $i$ voraus, sodass $q = i+1$ größer als 1 ist. Damit wächst $q^n$ für größer werdendes $n$ unbeschränkt.}
+\lang{en}{To calculate the limits with the \ref[content_03_Folgen_Reihen][limit rules]{grenzwertregeln}, we subtract $q^n$ in the first case and add $q$ in the second case. 
+ We assume a positive interest rate $i$, so that $q = i+1$ is greater than 1. Hence, $q^n$ grows unboundedly for increasing $n$.}
+\[
+\lim_{n\to \infty}\left( r \cdot \frac{q^n-1}{q-1}\cdot \frac{1}{q^n} \right) = 
+\lim_{n\to \infty}\left( r \cdot \frac{1-\frac{1}{q^n}}{q-1}\right) = r \cdot \frac{1-0}{q-1} = \frac{r}{q-1},
+\]
+\[
+\lim_{n\to \infty}\left( r \cdot \frac{q^n-1}{q-1}\cdot \frac{1}{q^{n-1}} \right)  = 
+\lim_{n\to \infty}\left( r \cdot q \cdot \frac{q^n-1}{q-1}\cdot \frac{1}{q^{n}} \right) = \frac{r\cdot q}{q-1}.
+\]
+
+\end{proof*}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			
+		 
+            \function{Rn}{1000000}
+            \function{Rv}{1001000}
+          
+           
+  		\end{variables}
+		
+		\lang{de}{\text{%\notion{Kurztest:}\\
+        Berechnen Sie den \textbf{Rentenbarwert} einer \textbf{ewigen Rente}, wenn bei einem Zinssatz von $i=0,1$\% jährlich $1.000$ € gezahlt werden.\\
+        
+        \\
+        Der Rentenbarwert bei \textbf{nachschüssiger Rente} beträgt: \ansref €.\\
+        Der Rentenbarwert bei \textbf{vorschüssiger Rente} beträgt: \ansref €.}}   
+			\lang{en}{\text{%\notion{Kurztest:}\\
+        Calculate the \textbf{present value} of a \textbf{perpetual annuity} if $1,000$ € is paid annually at an interest rate of $i=0.1$\%.
+        
+        \\
+        The present value if the annuity is paid \textbf{in arrears} is: \ansref €.\\
+        The present value if the annuity is paid \textbf{in advance} is: \ansref €.}}   
+		\begin{answer}
+			\solution{Rn}
+		\end{answer}
+        \begin{answer}
+			\solution{Rv}
+		\end{answer}
+        
+         
+        
+        \lang{de}{\explanation{
+        Wir verwenden die Formeln aus Regel 2.2.7.
+        }}
+		   \lang{en}{\explanation{
+        We use the formulas from rule 2.2.7.
+        }}
+\end{quickcheck}
+
+\section{\lang{de}{Jährliche Verzinsung mit unterjähriger Ratenzahlung} \lang{en}{Annual interest with instalments during the year}}
+
+\lang{de}{In den bisherigen Abschnitten wurde die Rentenperiode immer mit der Zinsperiode gleichgesetzt.}
+\lang{en}{In the previous sections, the annuity period has always been set equal to the interest period. }
+
+\\
+\lang{de}{In diesem Abschnitt betrachten wir die Berechnung des {Rentenendwertes} und {Rentenbarwertes} 
+einer unterjährig geleisteten Rente (z.\,B. monatlich, pro Quartal oder halbjährlich) in Verbindung mit einem jährlichen Zinssatz.}
+\lang{en}{In this section, we consider the calculation of the {future value} and {present value}
+an annuity paid during the year (e. g. monthly, quarterly or half-yearly) together with an annual interest rate. }\\
+
+\begin{rule}
+\lang{de}{Zur Berechnung des \textbf{Rentenendwertes} berechnen wir zuerst eine sogenannte \textbf{Ersatzrente $r_e$}, die 
+die unterjährig gezahlten Rentenraten $r$ zu einer Jahresrente vereint. 
+Die {Ersatzrente} wird dann mit dem Rentenendwertsfaktor $\frac{q^n-1}{q-1}$ multipliziert und ergibt so den gewünschten {Rentenendwert}.}
+\lang{en}{To calculate the \textbf{annuity future value}, we first calculate a so-called \textbf{equivalent annual annuity $r_e$}, which 
+combines the annuity instalments $r$ paid during the year into an annual annuity. 
+The {equivalent annual annuity} is then multiplied by the future value factor $\frac{q^n-1}{q-1}$ to give the {future value}.}
+\\
+
+\lang{de}{Bei \textbf{nachschüssiger Rente}:} 
+\lang{en}{In the case of an \textbf{annuity in arrears}:} 
+\[
+R_n = r_e \cdot \frac{q^n-1}{q-1}
+\]
+
+\lang{de}{mit}
+\lang{en}{with}
+\[
+r_e = r \cdot \left( k + \frac{(k-1)\cdot(q-1)}{2} \right),
+\]
+\lang{de}{wobei $k$ die Anzahl der unterjährigen Zahlungen angibt.}
+\lang{en}{where $k$ is the number of payments during the year}.\\
+\lang{de}{Die Herleitung von $r_e$ kann \ref[03_Ratensparen][hier (in Lösung a)]{Ratensparen_re} eingesehen werden.}
+\lang{en}{The derivation of $r_e$ can be seen \ref[03_Ratensparen][here (in Solution a)]{Ratensparen_re}.}
+
+\lang{de}{Bei \textbf{vorschüssiger Rente}:} 
+\lang{en}{For \textbf{annuities in advance}:} 
+\[
+R_n = r_e \cdot \frac{q^n-1}{q-1}
+\]
+
+\lang{de}{mit}
+\lang{en}{with}
+\[
+r_e = r \cdot \left( k + \frac{(k+1)\cdot(q-1)}{2} \right),
+\]
+\lang{de}{wobei $k$ die Anzahl der unterjährigen Zahlungen angibt.}
+\lang{en}{where $k$ is the number of payments during the year.}\\
+\lang{de}{Die Herleitung von $r_e$ kann \ref[03_Ratensparen][hier (in Lösung b)]{Ratensparen_re} eingesehen werden.}
+\lang{en}{The derivation of $r_e$ can be seen \ref[03_Ratensparen][here (in Solution b)]{Ratensparen_re}.}
+\lang{de}{Der \textbf{Rentenbarwert} $R_0$ lässt sich sowohl bei {nachschüssiger} als auch bei {vorschüssiger Rente} 
+durch Division des Rentenendwertes $R_n$ durch $q^n$ bestimmen:}
+\lang{en}{The \textbf{present value} $R_0$ can be determined for both types of annuity
+by dividing the future value $R_n$ by $q^n$:}
+\[
+R_0 = \frac{R_n}{q^n}
+\]
+\end{rule}
+
+\begin{example}
+\lang{de}{Wir wollen den Betrag berechnen, der sich auf unserem Sparkonto befindet, 
+wenn wir sechs Jahre lang monatlich $50$ € 
+zu einem Zinssatz von $5,5$\% einzahlen.}
+\lang{en}{We want to calculate the amount in our savings account 
+if we deposit $50$ € a month for six years 
+at an interest rate of $5.5$\%.} \\
+
+
+\lang{de}{Bei \textbf{vorschüssiger Rente}:
+\[
+r_e = 50 \cdot \left(12+\frac{(12+1)\cdot(1,055-1)}{2}\right) = 617,88 \text{[€]}
+\]}
+\lang{en}{If the payments occur \textbf{in advance}:
+\[
+r_e = 50 \cdot \left(12+\frac{(12+1)\cdot(1.055-1)}{2}\right) = 617.88 \text{[€]}
+\]}
+
+\lang{de}{und somit
+\[
+R_6 = 617,88 \cdot \frac{1,055^6-1}{1,055-1} = 4,255.99 \text{[€]}.
+\]}
+\lang{en}{and thus
+\[
+R_6 = 617.88 \cdot \frac{1.055^6-1}{1.055-1} = 4,255.99 \text{[€]}.
+\]}
+
+
+\lang{de}{Bei \textbf{nachschüssiger Rente}:
+\[
+r_e = 50 \cdot \left(12+\frac{(12-1)\cdot(1,055-1)}{2}\right) = 615,13 \text{[€]}
+\]}
+\lang{en}{If the payments occur \textbf{in arrears}:
+\[
+r_e = 50 \cdot \left(12+\frac{(12-1)\cdot(1.055-1)}{2}\right) = 615.13 \text{[€]}
+\]}
+
+\lang{de}{und somit
+\[
+R_6 = 615,13 \cdot \frac{1,055^6-1}{1,055-1} = 4.237,05 \text{[€]}.
+\]}
+\lang{en}{and thus
+\[
+R_6 = 615.13 \cdot \frac{1.055^6-1}{1.055-1} = 4,237.05 \text{[€]}.
+\]}
+
+
+\lang{de}{Genauer und besser wäre es, den Wert der Ersatzrente nicht zu runden, da so weitere Rundungsungenauigkeiten auftreten.}
+\lang{en}{It would be better and more accurate not to round the value of the equivalent annual annuity, 
+as this would otherwise introduce further rounding errors.}
+\end{example}
+
+\end{visualizationwrapper}
+
+\end{content}
+

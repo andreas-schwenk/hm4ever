@@ -1,0 +1,463 @@
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Cramersche Regel}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T306_Reelle_Quadratische_Matrizen/g_art_content_15_inverse_matrix.meta.xml}{content_15_inverse_matrix}
+\link{generic_article}{content/rwth/HM1/T306_Reelle_Quadratische_Matrizen/g_art_content_16_determinante.meta.xml}{content_16_determinante}
+\end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{5}
+\ombarticle{4}
+
+\title{Cramersche Regel}
+
+\begin{block}[annotation]
+
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/11620}{Ticket 11620}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+\section{Lineare Gleichungssysteme mit invertierbarer Koeffizientenmatrix}\label{sec:cramsche-regel}
+
+Die Aussagen über Invertierbarkeit von Matrizen aus den vorigen Abschnitten sollen nun
+verwendet werden, um Aussagen über Lösungsmengen linearer Gleichungssysteme zu machen.
+
+Wir betrachten also im Folgenden das lineare Gleichungssystem $Ax=b$ mit quadratischer Koeffizientenmatrix $A$, d.h. mit gleich vielen Variablen wie Gleichungen.
+
+\begin{theorem}\label{thm:lgs-mit-quadrat-matrix}
+Sei ein lineares Gleichungssystem $A  x =b$ mit $A \in M(n;\R)$, $b \in \R^n$, gegeben. Dann sind \"aquivalent 
+\begin{enumerate}
+ \item Das LGS hat genau eine L\"osung.
+ \item Die Matrix $A$ ist invertierbar.
+ \item Es gilt $\det(A) \neq 0 $.
+ \item Die Matrix $A$ hat vollen Rang.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof*}
+\begin{showhide}
+Wir hatten schon gesehen, dass $A$ genau dann invertierbar ist, wenn sie vollen Rang (also Rang $n$) hat, 
+und dass auch $\det(A) \neq 0 $ genau dann gilt, wenn $A$ vollen Rang hat.
+
+Hat die Matrix $A$ nun vollen Rang, dann erhält man die reduzierte Stufenform der Begleitmatrix $(A\mid b)$
+als $(E_n\mid \tilde{b})$ und man erhält eine eindeutige Lösung des LGS, nämlich
+\[ x=\tilde{b}=A^{-1} \cdot b.\]
+Hat die Matrix $A$ keinen vollen Rang, dann besitzt die linke Seite  in der reduzierten Stufenform der Begleitmatrix weniger als 
+$n$ Stufen und  enthält daher mindestens eine Nullzeile. 
+Damit ist die Lösungsmenge entweder leer (wenn der entsprechende Eintrag der rechten Seite nicht $0$ ist), 
+oder es gibt Lösungen und die Variablen, zu denen keine Stufen gehören, können als freie Parameter gewählt werden. 
+Damit gibt es aber mehrere Lösungen.
+
+Das LGS hat also genau dann genau eine Lösung, wenn die Matrix $A$ vollen Rang hat.
+\end{showhide}
+\end{proof*}
+\begin{example}
+Benötigt man zu einer bestimmten invertierbaren Matrix $A\in M(n;\R)$ die Lösungen des LGS $A\cdot x=b$ zu mindestens $n$ 
+verschiedenen Werten von $b$, dann ist es sinnvoll, die Inverse von $A$ zu berechnen. 
+\\
+Sollen etwa zu 
+$A=\begin{pmatrix} 2&5\\1&3\end{pmatrix}$ die Lösungen der LGS  $A\cdot x=b_j$ für $b_1=\begin{pmatrix}1\\1\end{pmatrix}$, $b_2=\begin{pmatrix}1\\-1\end{pmatrix}$,
+$b_3=\begin{pmatrix}2\\1\end{pmatrix}$ und $b_4=\begin{pmatrix}5\\-2\end{pmatrix}$ bestimmt werden,
+dann erhält man mit $A^{-1}=\begin{pmatrix}3&-5\\-1&2\end{pmatrix}$ dazu die 
+Lösungen $x_1=A^{-1}\cdot b_1=\begin{pmatrix}-2\\1\end{pmatrix}$, $x_2=A^{-1}\cdot b_2=\begin{pmatrix}8\\-3\end{pmatrix}$, 
+$x_3=A^{-1}\cdot b_3=\begin{pmatrix}1\\0\end{pmatrix}$ und $x_4=A^{-1}\cdot b_4=\begin{pmatrix}25\\-9\end{pmatrix}$ durch einfache Matrix-Vektor-Multiplikation, 
+ohne vier LGS lösen zu müssen.
+\end{example}
+
+
+Um die eindeutige Lösung des LGS $A \cdot x=b$ im Fall einer invertierbaren Matrix zu berechnen, gibt es noch eine Formel, 
+die sogenannte \emph{Cramersche Regel}.
+Für größere Gleichungssysteme (d.h. $n\geq 4$) ist sie im Allgemeinen unpraktisch,
+weil der Rechenaufwand der Cramerschen Regel deutlich höher ist als der des Gaußalgorithmus.
+Für kleine Gleichungssysteme (d.h. $n=2$ oder $3$) lässt sich die Lösung damit recht flott berechnen. 
+\\
+Im Fall $n=2$  ist die Benutzung der Formel für die inverse Matrix (wie im obigen Beispiel)
+etwa ebenso aufwändig wie die Cramerschen Regel.
+\\
+Im Fall $n=3$ bedeutet die Cramersche Regel schon mehr Rechenaufwand als der Gauß-Algorithmus. 
+Dass man sie mit Papier und Bleistift  trotzdem verwendet, hat einen bestechenden Grund: Bei der Cramerschen Regel  
+wird erst im allerletzten Schritt eine Division durchgeführt, ansonsten nur Multiplikationen und Additionen.
+Beim Gauß-Algorithmus  muss im Allgemeinen schon im ersten Schritt auch eine Division durchgeführt werden, 
+was beim Kopfrechnen für viele Studierende eine Fehlerquelle darstellt.
+\\
+Übrigens liegt genau in dieser einen Division im letzten Schritt der Grund verborgen, weshalb Mathematiker diese Regel (in der Theoriebildung, nicht praktisch!)
+verwenden: Die auftretenden Nenner sind allesamt Teiler der Determinante von $A$. 
+
+
+\begin{rule}[Cramersche Regel] \label{cramersche_regel}
+Sei $A \in M(n;\R)$ invertierbar, $b \in \R^n$, und $A \cdot x=b$ das zugeh\"orige LGS. 
+Schreibt man $x=\left(\begin{smallmatrix}
+x_1\\ \vdots \\ x_n
+\end{smallmatrix}\right)$ und bezeichnet f\"ur alle $k \in \{ 1, \ldots ,n \}$ mit 
+$A_{k|b}$ die Matrix, die aus $A$ entsteht, indem man die $k$-te Spalte von $A$ durch $b$ ersetzt, so ist die eindeutig bestimmte L\"osung $x$ von $A \cdot x =b$
+gegeben durch
+\[
+x_k = \frac{\det(A_{k|b})}{\det(A)} \text{ f\"ur alle } k \in {\{ 1, \ldots ,n \} }.
+\]
+\end{rule}
+
+
+\begin{example}\label{ex:cramer_LGS}
+Wir betrachten das lineare Gleichungssystem 
+\[ \begin{mtable}[\cellaligns{ccrcrcrcr}]
+\text{(I)}&&x_{1}&+&2x_{2}&+&x_{3}&=&4\\
+\text{(II)}&&x_{1}&-&x_{2}&+&\frac{3}{2}x_{3}&=&-7\\
+\text{(III)}&\qquad-&4x_{1}&+&2x_{2}&&&=&-2.
+\end{mtable} \]
+\begin{incremental}[\initialsteps{0}]
+\step
+Es hat als Koeffizientenmatrix
+$ A=\begin{pmatrix} 1 & 2 & 1 \\ 1 & -1 & \frac{3}{2} \\ -4 & 2 & 0\end{pmatrix} $
+und als rechte Seite $b=\begin{pmatrix} 4 \\ -7 \\ -2 \end{pmatrix} $.
+Zunächst einmal berechnet man mit der Regel von Sarrus
+\begin{eqnarray*} \det(A)&=& 1\cdot (-1)\cdot 0+2\cdot\frac{3}{2}\cdot (-4)+1\cdot 1\cdot 2-(-4)\cdot (-1)\cdot 1
+-2\cdot \frac{3}{2}\cdot 1-0\cdot 1\cdot 2\\
+&=& 0-12+2-4-3-0=-17.\end{eqnarray*}
+Die Determinante ist also ungleich $0$ und daher besitzt das LGS eine eindeutige Lösung, die wir im
+Folgenden mit der Cramerschen Regel berechnen werden. 
+\step
+Dazu benötigen wir die Matrizen $A_{1|b}$, $A_{2|b}$
+und $A_{3|b}$ bzw. ihre Determinanten. Die Matrix $A_{1|b}$ erhält man aus der Matrix $A$, indem man die
+erste Spalte durch den Spaltenvektor $b$ ersetzt. Also gilt:
+\[
+\det(A_{1|b}) = \det \Big(\begin{pmatrix} 4 & 2 & 1 \\ -7 & -1 & \frac{3}{2} \\ -2 & 2 & 0\end{pmatrix}\Big)
+= 0+(-6)+(-14)-2-12-0=-34 \]
+und daher 
+\[ x_1=\frac{\det(A_{1|b})}{\det(A)}=\frac{-34}{-17}=2.\]
+Entsprechend berechnen wir
+\begin{eqnarray*}
+\det(A_{2|b}) &=& \det \Big(\begin{pmatrix} 1 & 4 & 1 \\ 1 & -7 & \frac{3}{2} \\ -4 & -2 & 0\end{pmatrix}\Big)
+= 0+(-24)+(-2)-28-(-3)-0=-51, \\
+\det(A_{3|b}) &=& \det \Big(\begin{pmatrix} 1 & 2 & 4 \\ 1 & -1 & -7 \\ -4 & 2 & -2\end{pmatrix}\Big)
+= 2+56+8-16-(-14)-(-4)=68.
+\end{eqnarray*}
+Damit erhält man weiter
+\[  x_2=\frac{-51}{-17}=3\quad \text{und}\quad x_3=\frac{68}{-17}=-4.\]
+\step
+Die Lösungsmenge besteht also aus der eindeutigen Lösung
+\[ \left( \begin{smallmatrix}x_1\\ x_2\\ x_3\end{smallmatrix}\right)
+=\left( \begin{smallmatrix}2\\ 3\\ -4\end{smallmatrix}\right). \]
+\end{incremental}
+\end{example}
+
+
+\begin{quickcheck}
+\text{Es sei $A=\begin{pmatrix}2&-1&1\\0&1&0\\0&0&3\end{pmatrix}$. Welcher der folgenden Ausdrücke
+bestimmt die zweite Komponente der Lösung $x=\begin{pmatrix}x_1\\x_2\\x_3\end{pmatrix}$ des LGS $A\cdot x=\begin{pmatrix}4\\4\\4\end{pmatrix}$?}
+\begin{choices}{unique}
+\begin{choice}
+\text{$x_2=\frac{1}{6}\det\Big( \left( \begin{smallmatrix} 2&4&1\\0&4&0\\0&4&3\end{smallmatrix}\right)\Big)$}
+\solution{true}
+\end{choice}
+\begin{choice}
+\text{$x_2=\frac{1}{6}\det\Big( \left( \begin{smallmatrix} 2&1&4\\0&0&4\\0&3&4\end{smallmatrix}\right)\Big)$}
+\solution{false}
+\end{choice}
+\begin{choice}
+\text{$x_2=\frac{1}{6}\det\Big( \left( \begin{smallmatrix} 2&-1&1&4\\0&1&0&4\\0&0&3&4\end{smallmatrix}\right)\Big)$}
+\solution{false}
+\end{choice}
+\end{choices}
+\explanation{Der letzte Ausdruck ist gar nicht wohldefiniert, denn Determinanten kann man nur von quadratischen Matrizen bilden.
+Beim zweiten Ausdruck ist zwar die zweite Spalte gestrichen, aber der Vektor $b$ wurde nur hinten angehängt. Er gehört hingegebn wie im ersten Ausdruck in die zweite Spalte.}
+\end{quickcheck}
+
+
+
+
+\section{Berechnung der inversen Matrix mit Cramerscher Regel}
+
+Da man zu einer invertierbaren Matrix $A$ die Spalten der inversen Matrix $A^{-1}$ als
+Lösungen von Gleichungssystemen bekommt, lässt sich auch die inverse Matrix mit Hilfe der
+Cramerschen Regel berechnen.
+
+
+\begin{rule}[Cramersche Regel und inverse Matrizen]\label{rule:inverse_via_cramer}
+Sei $A \in M(n;\R)$ invertierbar. Mit Hilfe der Cramerschen Regel l\"asst sich die inverse Matrix berechnen, indem man f\"ur $b$ in der Gleichung $Ax=b$
+der Reihe nach die Vektoren 
+\[
+e_1 := \begin{pmatrix} 1 \\ 0 \\ 0 \\ \vdots \\ 0 \\ 0 \end{pmatrix} , \ e_2 := \begin{pmatrix} 0 \\ 1 \\ 0 \\ \vdots \\ 0 \\ 0 \end{pmatrix}, \ \cdots \ , e_m := \begin{pmatrix} 0 \\ 0 \\ 0 \\ \vdots \\ 0 \\ 1 \end{pmatrix} \in \R^n,
+\]
+einsetzt und die erhaltenen L\"osungen $x$ (abh\"angig von $e_i$, $1 \leq i \leq n$) nebeneinander in eine Matrix schreibt.
+
+Explizit ergibt sich dabei der $(i,j)$-Eintrag von $A^{-1}$ als
+\[   (-1)^{i+j} \frac{\det(A_{ji})}{\det(A)}, \]
+wobei $A_{ji}$ die $(n-1)\times (n-1)$-Matrix ist, die man aus $A$ durch Streichen der $j$-ten Zeile und $i$-ten Spalte erhält.
+\end{rule}
+
+\begin{proof*}
+Wir benutzen die Cramersche Regel und berechnen die auftretenden Determinanten durch Laplace-Entwicklung.
+\begin{incremental}[\initialsteps{0}]
+\step
+Mit der Cramerschen Regel für die Lösung eines linearen Gleichungssystems erhält man für den 
+$(i,j)$-Eintrag von $A^{-1}$ zunächst den Wert
+\[  \frac{\det(A_{i|e_j})}{\det(A)}. \]
+\step
+Die Matrix $A_{i|e_j}$ entsteht aus $A$, indem man die $i$-te \emph{Spalte} durch $e_j$ ersetzt.
+Entwickeln wir ihre Determinante mit dem 
+\ref[content_16_determinante][Laplaceschen Entwicklungssatz]{rule:Laplace}  nach der $i$-ten Spalte,
+so ist darin nur der $j$-te Summand von null verschieden. Er besteht aus dem Produkt des Vorzeichen $(-1)^{i+j}$ mit
+der Determinante der Matrix, die aus $A$ durch Streichen der $i$-ten \emph{Spalte} und $j$-ten \emph{Zeile} entsteht,
+\[\det(A_{i|e_j})=(-1)^{i+j}\det(A_{ji}).\]
+% Vertauscht man nun aber zur Berechnung von $\det(A_{i|e_j})$ die $i$-te Zeile nacheinander mit den darüberliegenden
+% und dann die $j$-te Spalte nacheinander mit den links davon liegenden, so erhält man eine Block-Dreiecksmatrix der Form
+% \[  \begin{pmatrix} 1 & * \\ 0 & B\end{pmatrix},\]
+% wobei $*$ irgendeine $1\times (n-1)$-Matrix (=Zeilenvektor) ist und $0$ die $(n-1)\times 1$-Nullmatrix. Die Matrix $B$
+% ist jedoch nichts anderes als die Matrix $A_{ji}$, die man aus $A$ durch Streichen der $j$-ten Zeile und 
+% $i$-ten Spalte erhält.
+% \step
+% Insgesamt wurden $i-1$ Zeilenvertauschungen und $j-1$ Spaltenvertauschungen vorgenommen. Also ist
+% \[  \det(A_{i|e_j})=(-1)^{i-1+j-1}\cdot \det\big( \begin{pmatrix} 1 & * \\ 0 & A_{ji}\end{pmatrix} \big)
+% = (-1)^{i+j}\cdot 1\cdot \det(A_{ji}), \]
+% wie behauptet.
+\end{incremental}
+\end{proof*}
+
+
+
+
+\begin{example}
+Wir betrachten wieder die Matrix $ A=\begin{pmatrix} 1 & 2 & 1 \\ 1 & -1 & \frac{3}{2} \\ -4 & 2 & 0\end{pmatrix} $
+aus  Beispiel \ref{ex:cramer_LGS}. Deren Determinante war $\det(A)=-17\neq 0$. Die Matrix ist also invertierbar und wir
+können mit der Cramerschen Regel die inverse Matrix berechnen.
+\begin{incremental}[\initialsteps{0}]
+\step
+Dazu müssen wir also die Determinanten der Teilmatrizen berechnen, die man erhält, wenn man eine Zeile und eine Spalte
+streicht. Für den $(1,1)$-Eintrag von $A^{-1}$ benötigen wir also
+\[ \det(A_{11})=\det\big( \begin{pmatrix}-1 & \frac{3}{2} \\ 2 & 0 \end{pmatrix} \big)
+=-1\cdot 0-2\cdot \frac{3}{2}=-3,\]
+und erhalten den Eintrag als
+\[ (-1)^{1+1}\cdot \frac{\det(A_{11})}{\det(A)}=1\cdot \frac{-3}{-17}=\frac{3}{17}.\]
+\step
+Für den $(1,2)$-Eintrag benötigen wir die Matrix $A_{21}$, bei der die zweite Zeile und die erste Spalte von $A$
+gestrichen wurden, also $A_{21}=\left(\begin{smallmatrix}2 & 1 \\ 2 & 0\end{smallmatrix}\right)$.
+Dann erhalten wir als $(1,2)$-Eintrag den Wert
+\[ (-1)^{1+2}\cdot \frac{\det(A_{21})}{\det(A)}=-1\cdot \frac{-2}{-17}=-\frac{2}{17}. \]
+\step
+Entsprechend berechnet man die anderen Einträge und erhält
+\begin{eqnarray*} A^{-1} &=&\frac{1}{\det(A)}\cdot
+\begin{pmatrix} \det(A_{11}) & -\det(A_{21}) &\det(A_{31})\\
+-\det(A_{12}) &\det(A_{22}) & -\det(A_{32})\\
+\det(A_{13}) & -\det(A_{23}) &\det(A_{33})
+  \end{pmatrix}\\
+&=& -\frac{1}{17}\cdot  \begin{pmatrix} -3 & 2 & 4\\ -6 & 4 & -\frac{1}{2}\\ -2 & -10 & -3
+  \end{pmatrix}=\frac{1}{17}\cdot \begin{pmatrix} 3 & -2 & -4\\ 6 & -4 & \frac{1}{2}\\ 2 & 10 & 3
+  \end{pmatrix}. \end{eqnarray*}
+\end{incremental}
+\end{example}  
+  
+\begin{example}
+Mit Hilfe der Cramerschen Regel erhalten wir die  \ref[content_15_inverse_matrix][uns bekannte Formel]{rule:inverse-2x2}  für die inverse Matrix einer $2 \times 2$ Matrix.
+\begin{incremental}[\initialsteps{0}]
+\step
+Gegeben sei also die Matrix $A= \begin{pmatrix}a &  b \\ c & d\end{pmatrix}$ mit Einträgen $a,b,c,d \in \R$.
+Wir setzen natürlich voraus, dass $A$ invertierbar ist, d.h. $\det(A) \neq 0$.
+\step
+Da wir beim Streichen einer Zeile und Spalte eine $1 \times 1$ Matrix, also eine Zahl, erhalten,
+liefert die Cramersche Regel
+\[
+A^{-1} = \begin{pmatrix}\frac{d}{\det(A)} & - \frac{b}{\det(A)} \\ -\frac{c}{\det(A)} & \frac{a}{\det(A)}\end{pmatrix}
+= \frac{1}{\det(A)} \cdot \begin{pmatrix} d & -b \\ -c & a\end{pmatrix} = \frac{1}{ad-bc}\begin{pmatrix}d & -b \\ -c & a\end{pmatrix}.
+\]
+\end{incremental}
+\end{example}
+
+
+Das folgende Video fasst das vorliegende Kapitel zusammen.
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10881&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+
+
+% \section{Lineare Gleichungssysteme mit invertierbarer Koeffizientenmatrix}
+
+% Die Aussagen über Invertierbarkeit von Matrizen aus den vorigen Abschnitten sollen nun
+% verwendet werden, um Aussagen über Lösungsmengen linearer Gleichungssysteme zu machen.
+
+% Wir betrachten also im Folgenden lineare Gleichungssystem $Ax=b$ mit quadratischer Koeffizientenmatrix $A$, d.h. mit gleich vielen Variablen wie Gleichungen.
+
+% \begin{theorem}\label{thm:lgs-mit-quadrat-matrix}
+% Sei ein lineares Gleichungssystem $A \cdot x =b$ mit $A \in M(n;\R)$, $b \in \R^n$, gegeben. Dann sind \"aquivalent 
+% \begin{enumerate}
+%  \item Das LGS hat genau eine L\"osung.
+%  \item Die Matrix $A$ ist invertierbar.
+%  \item Es gilt $\det(A) \neq 0 $.
+% \end{enumerate}
+% \end{theorem}
+
+
+% %\begin{block}[explanation]
+% \begin{tabs}
+% \tab{Erklärung}
+% Wir hatten schon gesehen, dass $A$ genau dann invertierbar ist, wenn sie vollen Rang (also Rang $n$) hat, und dass auch $\det(A) \neq 0 $ genau dann gilt, wenn $A$ vollen Rang hat.
+
+% Hat die Matrix $A$ nun vollen Rang, dann ist in der reduzierten Stufenform die linke Seite die 
+% Einheitsmatrix $E_n$ und man erhält eine eindeutige Lösung des LGS, nämlich
+% \[ x=A^{-1} \cdot b.\]
+% Hat die Matrix $A$ keinen vollen Rang, dann besitzt die linke Seite  in der reduzierten Stufenform weniger als 
+% $n$ Stufen und  enthält daher mindestens eine Nullzeile. 
+% Damit ist die Lösungsmenge entweder leer (wenn die entsprechende rechte Seite nicht $0$ ist), 
+% oder es gibt Lösungen und die Variablen, zu der keine Stufe gehören, können als freie Parameter gewählt werden. 
+% Damit gibt es aber mehrere Lösungen.
+
+% Das LGS hat also genau dann genau eine Lösung, wenn die Matrix $A$ vollen Rang hat.
+% \tab{Erklärung}
+% Wir hatten schon gesehen, dass $A$ genau dann invertierbar ist, wenn sie vollen Rang (also Rang $n$) hat, und dass auch $\det(A) \neq 0 $ genau dann gilt, wenn $A$ vollen Rang hat.
+
+% Hat die Matrix $A$ nun vollen Rang, dann ist in der reduzierten Stufenform die linke Seite die 
+% Einheitsmatrix $E_n$ und man erhält eine eindeutige Lösung des LGS, nämlich
+% \[ x=A^{-1} \cdot b.\]
+% Hat die Matrix $A$ keinen vollen Rang, dann besitzt die linke Seite  in der reduzierten Stufenform weniger als 
+% $n$ Stufen und  enthält daher mindestens eine Nullzeile. 
+
+% \end{tabs}
+% %\end{block}
+
+
+% Um die eindeutige Lösung des LGS $A \cdot x=b$ im Fall einer invertierbaren Matrix zu berechnen, gibt es auch eine Formel, die sogenannte \emph{Cramersche Regel}.
+% Für kleine Gleichungssysteme (d.h. $n=2$ oder $3$) lässt sich die Lösung damit schnell berechnen. Für größere Gleichungssysteme (d.h. große $n$) ist sie im Allgemeinen unpraktisch,
+% da mehrere Determinanten berechnet werden müssen.
+
+
+% \begin{rule}[Cramersche Regel] \label{cramersche_regel}
+% Sei $A \in M(n;\R)$ invertierbar, $b \in \R^n$, und $A \cdot x=b$ das zugeh\"orige LGS. 
+% Schreibt man $x=\left(\begin{smallmatrix}
+% x_1\\ \vdots \\ x_n
+% \end{smallmatrix}\right)$ und bezeichnet f\"ur alle $k \in \{ 1, \ldots ,n \}$ mit 
+% $A_{k|b}$ die Matrix, die aus $A$ entsteht, indem man die $k$-te Spalte von $A$ durch $b$ ersetzt, so ist die eindeutig bestimmte L\"osung $x$ von $A \cdot x =b$
+% gegeben durch
+% \[
+% x_k = \frac{\det(A_{k|b})}{\det(A)} \text{ f\"ur alle } k \in {\{ 1, \ldots ,n \} }.
+% \]
+% \end{rule}
+
+% \begin{example}
+% Wir betrachten das lineare Gleichungssystem 
+% \[ \begin{mtable}[\cellaligns{ccrcrcrcr}]
+% \text{(I)}&&x_{1}&+&2x_{2}&+&x_{3}&=&4\\
+% \text{(II)}&&x_{1}&-&x_{2}&+&\frac{3}{2}x_{3}&=&-7\\
+% \text{(III)}&\qquad-&4x_{1}&+&2x_{2}&&&=&-2.
+% \end{mtable} \]
+% Es hat als Koeffizientenmatrix
+% $ A=\begin{pmatrix} 1 & 2 & 1 \\ 1 & -1 & \frac{3}{2} \\ -4 & 2 & 0\end{pmatrix} $
+% und als rechte Seite $b=\begin{pmatrix} 4 \\ -7 \\ -2 \end{pmatrix} $.
+% Zunächst einmal berechnet man mit der Regel von Sarrus
+% \begin{eqnarray*} \det(A)&=& 1\cdot (-1)\cdot 0+2\cdot\frac{3}{2}\cdot (-4)+1\cdot 1\cdot 2-(-4)\cdot (-1)\cdot 1
+% -2\cdot \frac{3}{2}\cdot 1-0\cdot 1\cdot 2\\
+% &=& 0-12+2-4-3-0=-17.\end{eqnarray*}
+% Die Determinante ist also ungleich $0$ und daher besitzt das LGS eine eindeutige Lösung, die wir im
+% folgenden mit der Cramerschen Regel berechnen werden. Dazu benötigen wir die Matrizen $A_{1|b}$, $A_{2|b}$
+% und $A_{3|b}$ bzw. ihre Determinanten. Die Matrix $A_{1|b}$ erhält man aus der Matrix $A$, indem man die
+% erste Spalte durch den Spaltenvektor $b$ ersetzt. Also gilt:
+% \[
+% \det(A_{1|b}) = \det \Big(\begin{pmatrix} 4 & 2 & 1 \\ -7 & -1 & \frac{3}{2} \\ -2 & 2 & 0\end{pmatrix}\Big)
+% = 0+(-6)+(-14)-2-12-0=-34 \]
+% und daher 
+% \[ x_1=\frac{\det(A_{1|b})}{\det(A)}=\frac{-34}{-17}=2.\]
+% Entsprechend berechnen wir
+% \begin{eqnarray*}
+% \det(A_{2|b}) &=& \det \Big(\begin{pmatrix} 1 & 4 & 1 \\ 1 & -7 & \frac{3}{2} \\ -4 & -2 & 0\end{pmatrix}\Big)
+% = 0+(-24)+(-2)-28-(-3)-0=-51, \\
+% \det(A_{3|b}) &=& \det \Big(\begin{pmatrix} 1 & 2 & 4 \\ 1 & -1 & -7 \\ -4 & 2 & -2\end{pmatrix}\Big)
+% = 2+56+8-16-(-14)-(-4)=68.
+% \end{eqnarray*}
+% Damit erhält man weiter
+% \[  x_2=\frac{-51}{-17}=3\quad \text{und}\quad x_3=\frac{68}{-17}=-4.\]
+% Die Lösungsmenge besteht also aus der eindeutigen Lösung
+% \[ \left( \begin{smallmatrix}x_1\\ x_2\\ x_3\end{smallmatrix}\right)
+% =\left( \begin{smallmatrix}2\\ 3\\ -4\end{smallmatrix}\right). \]
+% \end{example}
+
+
+% \section{Berechnung der inversen Matrix mit Cramerscher Regel}
+
+% Da man zu einer invertierbaren Matrix $A$ die Spalten der inversen Matrix $A^{-1}$ als
+% Lösungen von Gleichungssystemen bekommt, lässt sich auch die inverse Matrix mit Hilfe der
+% Cramerschen Regel berechnen.
+
+
+% \begin{rule}[Cramersche Regel und inverse Matrizen]
+% Sei $A \in M(n;\R)$ invertierbar. Mit Hilfe der Cramer'schen Regel l\"asst sich die inverse Matrix berechnen, indem man f\"ur $b$ in der Gleichung $Ax=b$
+% der Reihe nach die Vektoren 
+% \[
+% e_1 := \begin{pmatrix} 1 \\ 0 \\ 0 \\ \vdots \\ 0 \\ 0 \end{pmatrix} , \ e_2 := \begin{pmatrix} 0 \\ 1 \\ 0 \\ \vdots \\ 0 \\ 0 \end{pmatrix}, \ \cdots \ , e_m := \begin{pmatrix} 0 \\ 0 \\ 0 \\ \vdots \\ 0 \\ 1 \end{pmatrix} \in \R^n,
+% \]
+% einsetzt und die erhaltenen L\"osungen $x$ (abh\"angig von $e_i$, $1 \leq i \leq n$) nebeneinander in eine Matrix schreibt.
+
+% Expliziter ergibt sich der $(i,j)$-Eintrag von $A^{-1}$ als
+% \[   (-1)^{i+j} \frac{\det(A_{ji})}{\det(A)}, \]
+% wobei $A_{ji}$ die $(n-1)\times (n-1)$-Matrix ist, die man aus $A$ durch Streichen der $j$-ten Zeile und $i$-ten Spalte erhält.
+% \end{rule}
+
+
+% %\begin{block}[explanation]
+% \begin{tabs*}[\initialtab{1}]
+% \tab{Erklärung}
+% Mit der Cramerschen Regel für die Lösung eines linearen Gleichungssystems erhält man für den 
+% $(i,j)$-Eintrag von $A^{-1}$ zunächst den Wert
+% \[  \frac{\det(A_{i|e_j})}{\det(A)}. \]
+% Vertauscht man nun aber zur Berechnung von $\det(A_{i|e_j})$ die $i$-te Zeile nacheinander mit den darüberliegenden
+% und dann die $j$-te Spalte nacheinander mit den links davon liegenden, so erhält man eine Block-Dreiecksmatrix der Form
+% \[  \begin{pmatrix} 1 & * \\ 0 & B\end{pmatrix},\]
+% wobei $*$ irgendeine $1\times (n-1)$-Matrix (=Zeilenvektor) ist und $0$ die $(n-1)\times 1$-Nullmatrix. Die Matrix $B$
+% ist jedoch nichts anderes als die Matrix $A_{ji}$, die man aus $A$ durch Streichen der $j$-ten Zeile und 
+% $i$-ten Spalte erhält.
+
+% Insgesamt wurden $i-1$ Zeilenvertauschungen und $j-1$ Spaltenvertauschungen vorgenommen. Also ist
+% \[  \det(A_{i|e_j})=(-1)^{i-1+j-1}\cdot \det\big( \begin{pmatrix} 1 & * \\ 0 & A_{ji}\end{pmatrix} \big)
+% = (-1)^{i+j}\cdot 1\cdot \det(A_{ji}), \]
+% wie behauptet.
+% \end{tabs*}
+% %\end{block}
+
+% \begin{example}
+% Wir betrachten wieder die Matrix $ A=\begin{pmatrix} 1 & 2 & 1 \\ 1 & -1 & \frac{3}{2} \\ -4 & 2 & 0\end{pmatrix} $
+% aus obigem Beispiel. Deren Determinante war $\det(A)=-17\neq 0$. Die Matrix ist also invertierbar und wir
+% können mit der Cramerschen Regel die inverse Matrix berechnen.
+
+% Dazu müssen wir also die Determinanten der Teilmatrizen berechnen, die man erhält, wenn man eine Zeile und eine Spalte
+% streicht. Für den $(1,1)$-Eintrag von $A^{-1}$ benötigen wir also
+% \[ \det(A_{11})=\det\big( \begin{pmatrix}-1 & \frac{3}{2} \\ 2 & 0 \end{pmatrix} \big)
+% =1\cdot 0-2\cdot \frac{3}{2}=-3,\]
+% und erhalten den Eintrag als
+% \[ (-1)^{1+1}\cdot \frac{\det(A_{11})}{\det(A)}=1\cdot \frac{-3}{-17}=\frac{3}{17}.\]
+% Für den $(1,2)$-Eintrag benötigen wir die Matrix $A_{21}$, bei der die zweite Zeile und die erste Spalte von $A$
+% gestrichen wurden, also $A_{21}=\left(\begin{smallmatrix}2 & 1 \\ 2 & 0\end{smallmatrix}\right)$.
+% Dann erhalten wir als $(1,2)$-Eintrag den Wert
+% \[ (-1)^{1+2}\cdot \frac{\det(A_{21})}{\det(A)}=-1\cdot \frac{-2}{-17}=-\frac{2}{17}. \]
+% Entsprechend berechnet man die anderen Einträge und erhält
+% \begin{eqnarray*} A^{-1} &=&\frac{1}{\det(A)}\cdot
+% \begin{pmatrix} \det(A_{11}) & -\det(A_{21}) &\det(A_{31})\\
+% -\det(A_{12}) &\det(A_{22}) & -\det(A_{32})\\
+% \det(A_{13}) & -\det(A_{23}) &\det(A_{33})
+%   \end{pmatrix}\\
+% &=& -\frac{1}{17}\cdot  \begin{pmatrix} -3 & 2 & 4\\ -6 & 4 & -\frac{1}{2}\\ -2 & -10 & -3
+%   \end{pmatrix}=\frac{1}{17}\cdot \begin{pmatrix} 3 & -2 & -4\\ 6 & -4 & \frac{1}{2}\\ 2 & 10 & 3
+%   \end{pmatrix}. \end{eqnarray*}
+% \end{example}
+
+
+\end{content}

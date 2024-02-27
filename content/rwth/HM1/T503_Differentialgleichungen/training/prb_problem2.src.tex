@@ -1,0 +1,177 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A02: AWA}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21914}{Ticket 21914}
+\end{block}
+\usepackage{mumie.genericproblem}
+\lang{de}{\title{A02: AWA}}
+\begin{block}[annotation]
+Pool mit drei Aufgaben zu homogenen linearen Anfangswertproblemen mit unterschiedlichen
+Koeffizienten: Polynom zweiten Grades,  $cos(ax+b)$, oder $ 1/(ax+b)$.
+\\
+Hier ist differenziertes Feedback bereits eingebaut, aber nicht abrufbar: 
+Dazu ist die Weiterverarbeitung von Eingabefunktionen noch zu arm implementiert.
+\end{block}
+\begin{problem}
+	\randomquestionpool{1}{3}
+%% Erste Aufgabe: Koeffizient ist Polynom zweiten Grades
+	\begin{question}
+		
+		\begin{variables}
+    %Anfangswert:
+    \randint[Z]{x0}{-3}{3}
+    \randint[Z]{y0}{-10}{10}
+    %Koeffizienten des Koeffizienten-Polynoms
+    \randint[Z]{a}{-3}{3}
+    \randint{b}{-5}{5}
+    \randint[Z]{c}{-5}{5}
+    %Koeffizienten-Polynom
+	\function[normalize]{pol}{a*x^2+b*x+c}
+    \function[calculate]{polx0}{1/3*a*x0^3+1/2*b*x0^2+c*x0}
+    %Lösung selbst:
+    \function{phi}{y0*exp(1/3*a*x^3+1/2*b*x^2+c*x-polx0)}
+    %ausgewertet in Null:
+    \function{null}{0}
+    \substitute{const}{phi}{x}{null}
+    %Intervall
+    \function{l1}{-infty}
+    \function{l2}{infty}
+        \end{variables}
+      \lang{de}{\text{Lösen Sie das Anfangswertproblem $y'=(\var{pol})\cdot y\:$ mit $y(\var{x0})=\var{y0}$.\\
+      \textit{Geben Sie Ihre Lösung exakt, nicht gerundet ein. Achten Sie im Zweifel auf $\ast$-Zeichen in Produkten.}}}
+    
+	\begin{answer}
+        \type{input.function}
+		\text{ Die Lösung des Anfangswertproblems ist $\phi(x)=$}
+		\solution{phi}
+        \inputAsFunction{x}{t1}
+        \checkFuncForZero{phi/const-t1/const}{-1}{1}{10}
+        %Die bedingten Explanations funktionieren noch nicht, weil die Weiterverarbeitung der Funktion t1 noch nicht ausgereift implementiert ist.
+        %Falls dies einmal, der Fall sein sollte, ist differenziertes Feedback möglich.
+        %Wenn DGL erfüllt, aber nicht Anfangswert:
+        \explanation[NOT[equal(y0,t1[x0,x])]AND [equal(t1,pol*D[t1,x])]]{Ihre Funktion erfüllt die Differentialgleichung, aber nicht die Anfangswertbedingung.}
+        %Wenn Anfangswert erfüllt, aber nicht DGL:
+        \explanation[[equal(y0,t1[x0,x])]AND NOT[equal(t1,pol*D[t1,x])]]{Ihre Funktion erfüllt die Anfangswertbedingung, aber nicht die Differentialgleichung.}
+        %Wenn weder Anfangswert noch DGL erfüllt:
+        \explanation[NOT[equal(y0,t1[x0,x])]AND NOT[equal(t1,pol*D[t1,x])]]{Es handelt sich um ein lineares, 
+        homogenes Anfangswertproblem mit nicht konstantem Koeffizienten $\var{pol}$.}
+	\end{answer}
+    \begin{answer}
+        \type{input.interval}
+        \text{Was ist das maximale Existenzintervall dieser Lösung?}
+        \solution{(l1;l2)}
+        \explanation{Das maximale Lösungsintervall einer linearen Differentialgleichung ist gegeben durch das Definitionsintervall $I$ seiner Koeffizienten mit $x_0\in I$.}
+    \end{answer}  
+     \end{question}
+%%
+%% Zweite Aufgabe: Koeffizient ist cos
+     \begin{question}			
+		\begin{variables}
+    %Anfangswert:
+    \randint[Z]{x0}{-10}{10}
+    \randint[Z]{y0}{-10}{10}
+    %Koeffizienten der Koeffizienten-Funktion
+    \randint[Z]{a}{-10}{10}
+    \randint[Z]{b}{-10}{10}
+    %Koeffizienten-Funktion
+	\function{F}{cos(a*pi*x+b*pi)}
+    %Lösung selbst:
+    \function{phi}{y0*exp(1/(a*pi)*(sin(a*pi*x+b*pi)))}
+    \function{l1}{-infty}
+    \function{l2}{infty}
+        \end{variables}
+      \lang{de}{\text{Lösen Sie das Anfangswertproblem $y'=(\var{F})\cdot y\:$ mit $y(\var{x0})=\var{y0}$.\\
+      \textit{Geben Sie Ihre Lösung exakt, nicht gerundet ein. Achten Sie im Zweifel auf $\ast$-Zeichen in Produkten.}}}
+    
+	\begin{answer}
+        \type{input.function}
+		\text{ Die Lösung des Anfangswertproblems ist $\phi(x)=$}
+		\solution{phi}
+        \inputAsFunction{x}{t1}
+        \checkFuncForZero{phi-t1}{-1}{1}{10}
+        %Die bedingten Explanations funktionieren noch nicht, weil die Weiterverarbeitung der Funktion t1 noch nicht ausgereift implementiert ist.
+        %Falls dies einmal, der Fall sein sollte, ist differenziertes Feedback möglich.
+        %Wenn DGL erfüllt, aber nicht Anfangswert:
+        \explanation[NOT[equal(y0,t1[x0,x])]AND [equal(t1,F*D[t1,x])]]{Ihre Funktion erfüllt die Differentialgleichung, aber nicht die Anfangswertbedingung.}
+        %Wenn Anfangswert erfüllt, aber nicht DGL:
+        \explanation[[equal(y0,t1[x0,x])]AND NOT[equal(t1,F*D[t1,x])]]{Ihre Funktion erfüllt die Anfangswertbedingung, aber nicht die Differentialgleichung.}
+        %Wenn weder Anfangswert noch DGL erfüllt:
+        \explanation[NOT[equal(y0,t1[x0,x])]AND NOT[equal(t1,F*D[t1,x])]]{Es handelt sich um ein lineares, 
+        homogenes Anfangswertproblem mit nicht konstantem Koeffizienten $\var{F}$.}
+	\end{answer}
+    \begin{answer}
+        \type{input.interval}
+        \text{Was ist das maximale Existenzintervall dieser Lösung?}
+        \solution{(l1;l2)}
+        \explanation{Das maximale Lösungsintervall einer linearen Differentialgleichung ist gegeben durch das Definitionsintervall $I$ seiner Koeffizienten mit $x_0\in I$.}
+    \end{answer} 
+     \end{question}
+%%
+%% Dritte Aufgabe: Koeffizient ist 1/(ax+b)
+     \begin{question}			
+		\begin{variables}
+    %Anfangswert:
+    \randint[Z]{x0}{1}{10}
+    \randint[Z]{y0}{-10}{10}
+    %Koeffizienten der Koeffizienten-Funktion
+    \randint[Z]{a}{1}{10}
+    \randint[Z]{b}{-10}{10}
+    \randadjustIf{a,b,x0}{a*x0+b<0}
+    %Koeffizienten-Funktion
+	\function[normalize]{F}{1/(a*x+b)}
+    %Lösung selbst:
+    \function{phi}{(y0/(a*x0+b)^(1/a))*(a*x+b)^(1/a)}
+    \function{l1}{-b/a}
+    \function{l2}{infty}
+        \end{variables}
+      \lang{de}{\text{Lösen Sie das Anfangswertproblem $y'=(\var{F})\cdot y\:$ mit $y(\var{x0})=\var{y0}$.\\
+      \textit{Geben Sie Ihre Lösung exakt, nicht gerundet ein. Achten Sie im Zweifel auf $\ast$-Zeichen in Produkten.}}}
+    
+	\begin{answer}
+        \type{input.function}
+		\text{ Die Lösung des Anfangswertproblems ist $\phi(x)=$}
+		\solution{phi}
+        \inputAsFunction{x}{t1}
+        \checkFuncForZero{phi-t1}{11}{12}{10}
+        %Die bedingten Explanations funktionieren noch nicht, weil die Weiterverarbeitung der Funktion t1 noch nicht ausgereift implementiert ist.
+        %Falls dies einmal, der Fall sein sollte, ist differenziertes Feedback möglich.
+        %Wenn DGL erfüllt, aber nicht Anfangswert:
+        \explanation[NOT[equal(y0,t1[x0,x])]AND [equal(t1,F*D[t1,x])]]{Ihre Funktion erfüllt die Differentialgleichung, aber nicht die Anfangswertbedingung.}
+        %Wenn Anfangswert erfüllt, aber nicht DGL:
+        \explanation[[equal(y0,t1[x0,x])]AND NOT[equal(t1,F*D[t1,x])]]{Ihre Funktion erfüllt die Anfangswertbedingung, aber nicht die Differentialgleichung.}
+        %Wenn weder Anfangswert noch DGL erfüllt:
+        \explanation[NOT[equal(y0,t1[x0,x])]AND NOT[equal(t1,F*D[t1,x])]]{Es handelt sich um ein lineares, 
+        homogenes Anfangswertproblem mit nicht konstantem Koeffizienten $\var{F}$.}
+	\end{answer}
+    \begin{answer}
+        \type{input.interval}
+        \text{Was ist das maximale Existenzintervall dieser Lösung?}
+        \solution{(l1;l2)}
+        \explanation{Das maximale Lösungsintervall einer linearen Differentialgleichung ist gegeben durch das Definitionsintervall $I$ seiner Koeffizienten mit $x_0\in I$.}
+    \end{answer} 
+     \end{question}     
+\end{problem}
+\embedmathlet{gwtmathlet}
+
+\end{content}

@@ -1,0 +1,324 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A02: Matrixmultiplikation}
+    \lang{en}{P02: Matrix multiplication}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Rechnen mit Matrizen}
+    \lang{en}{Calculating with matrices}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{
+	\title{A02: Matrixmultiplikation}
+}
+
+\lang{en}{
+	\title{P02: Matrix multiplication}
+}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/11102}{Ticket 11102}
+\end{block}
+
+
+
+\begin{problem}
+    
+\begin{question}
+
+	\begin{variables}
+		\randint[Z]{a}{-5}{5}
+		\randint[Z]{b}{-5}{5}
+		\randint[Z]{c}{-5}{5}
+		\randint[Z]{d}{-5}{5}
+		
+		\randint[Z]{ee}{-5}{5}
+		\randint[Z]{f}{-5}{5}
+		\randint[Z]{g}{-5}{5}
+		\randint[Z]{h}{-5}{5}
+		
+			\matrix[calculate]{aa}{
+  			a & b \\ 
+  			c & d
+      	}
+      	
+      	\matrix[calculate]{bb}{
+  			ee & f \\ 
+  			g & h
+      	}
+		
+		\matrix[calculate]{m}{
+		a*ee+b*g & a*f+b*h \\
+		c*ee+d*g & c*f+d*h
+      } 
+	\end{variables}
+
+	\type{input.matrix}
+	\displayprecision{3}
+    \correctorprecision{2}
+    \field{integer}
+    
+    \lang{de}{
+	    \text{Bestimmen Sie das Produkt der folgenden Matrizen über $\R$.\\
+$\var{aa}\cdot\var{bb}$}}
+
+\lang{en}{
+	    \text{Determine the product of the following matrices over $\R$.\\
+$\var{aa}\cdot\var{bb}$}}
+    
+    \begin{answer}
+	    \solution{m}
+      \format{2}{2}
+      \lang{de}{
+      \explanation{
+            Die Matrixmultiplikation zweier quadratischer Matrizen,
+            also Matrizen mit gleicher Zeilen- und Spaltenanzahl ist 
+            immer erlaubt. Die Ergebnismatrix hat dann ebensoviele
+            Zeilen und Spalten.
+            Man bestimmt die Ergebnismatrix, indem man für den
+            $(i,j)$-ten Eintrag das Skalarprodukt aus der
+            $i$-ten Zeile der ersten Matrix und der $j$-ten
+            Spalte der zweiten Matrix bestimmt.}}
+      \lang{en}{
+      \explanation{
+      The given matrices are square matrices (same number of rows and columns), which is why matrix multiplication is defined here.
+      The result matrix will then have the same number of rows and columns. Its entries are calculated as follows:
+      The $(i,j)$th entry in the result matrix is the scalar product (dot product) of the $i$th row of the first matrix with the
+      $j$th column of the second matrix.}}
+	\end{answer}
+    
+\end{question}
+
+\begin{question}
+
+	\begin{variables}
+		\randint[Z]{a}{-3}{3}
+		\randint[Z]{b}{-3}{3}
+		\randint[Z]{c}{-3}{3}
+		\randint[Z]{d}{-3}{3}
+		\randint[Z]{ai}{-3}{3}
+		\randint[Z]{bi}{-3}{3}
+		\randint[Z]{ci}{-3}{3}
+		\randint[Z]{di}{-3}{3}
+		
+		\randint[Z]{ee}{-3}{3}
+		\randint[Z]{f}{-3}{3}
+		\randint[Z]{g}{-3}{3}
+		\randint[Z]{h}{-3}{3}
+		\randint[Z]{eei}{-3}{3}
+		\randint[Z]{fi}{-3}{3}
+		\randint[Z]{gi}{-3}{3}
+		\randint[Z]{hi}{-3}{3}
+		
+			\matrix[calculate]{aa}{
+  			a+ai*i & b+bi*i \\ 
+  			c+ci*i & d+di*i
+      	}
+      	
+      	\matrix[calculate]{bb}{
+  			ee+eei*i & f+fi*i \\ 
+  			g+gi*i & h+hi*i
+      	}
+		
+		\matrix[calculate]{m}{
+		(a+ai*i)*(ee+eei*i)+(b+bi*i)*(g+gi*i) & (a+ai*i)*(f+fi*i)+(b+bi*i)*(h+hi*i) \\
+		(c+ci*i)*(ee+eei*i)+(d+di*i)*(g+gi*i) & (c+ci*i)*(f+fi*i)+(d+di*i)*(h+hi*i)
+      } 
+	\end{variables}
+
+	\type{input.matrix}
+	\displayprecision{3}
+    \correctorprecision{2}
+    \field{complex}
+    
+    \lang{de}{
+	    \text{
+	    Bestimmen Sie das Produkt der folgenden Matrizen über $\C$:\\
+$\var{aa}\cdot\var{bb}$}}
+
+\lang{en}{
+	    \text{
+	    Determine the product of the following matrices over $\C$:\\
+$\var{aa}\cdot\var{bb}$}}
+    
+    \begin{answer}
+	    \solution{m}
+      \format{2}{2}
+      \lang{de}{
+      \explanation{
+            Die Matrixmultiplikation zweier quadratischer Matrizen,
+            also Matrizen mit gleicher Zeilen- und Spaltenanzahl ist 
+            immer erlaubt. Die Ergebnismatrix hat dann ebensoviele
+            Zeilen und Spalten.
+            Man bestimmt die Ergebnismatrix, indem man für den
+            $(i,j)$-ten Eintrag das Skalarprodukt aus der
+            $i$-ten Zeile der ersten Matrix und der $j$-ten
+            Spalte der zweiten Matrix bestimmt.
+            In dieser Aufgabe wird über dem Körper der komplexen
+            Zahlen gearbeit. Also ist jede Multiplikation
+            auch komplexwertig durchzuführen.}}
+      \lang{en}{
+      \explanation{
+      The given matrices are square matrices (same number of rows and columns), which is why matrix multiplication is defined here.
+      The result matrix will then have the same number of rows and columns. Its entries are calculated as follows:
+      The $(i,j)$th entry in the result matrix is the scalar product (dot product) of the $i$th row of the first matrix with the
+      $j$th column of the second matrix. 
+      Since the matrices contain complex entries, each multiplication must be done as known for complex numbers.}}
+	\end{answer}
+    
+\end{question}
+
+%\begin{question}
+%
+%	\begin{variables}
+%		\randint[Z]{x11}{-5}{5}
+%		\randint[Z]{x12}{-5}{5}
+%		\randint[Z]{x13}{-5}{5}
+%		\randint[Z]{x21}{-5}{5}
+%		\randint[Z]{x22}{-5}{5}
+%		\randint[Z]{x23}{-5}{5}
+%		\randint[Z]{x31}{-5}{5}
+%		\randint[Z]{x32}{-5}{5}
+%		\randint[Z]{x33}{-5}{5}
+%	
+%		\randint[Z]{y11}{-5}{5}
+%		\randint[Z]{y12}{-5}{5}
+%		\randint[Z]{y13}{-5}{5}
+%		\randint[Z]{y21}{-5}{5}
+%		\randint[Z]{y22}{-5}{5}
+%		\randint[Z]{y23}{-5}{5}
+%		\randint[Z]{y31}{-5}{5}
+%		\randint[Z]{y32}{-5}{5}
+%		\randint[Z]{y33}{-5}{5}
+%		
+%			\matrix[calculate]{a}{
+%  			x11 & x12 & x13 \\ 
+%  			x21 & x22 & x23 \\
+%  			x31 & x32 & x33
+%      	}
+%      		\matrix[calculate]{b}{
+%  			y11 & y12 & y13 \\ 
+%  			y21 & y22 & y23 \\
+%  			y31 & y32 & y33
+%      	}
+%      		\matrix[calculate]{c}{
+%  			x11*y11 +x12*y21 + x13*y31 & x11*y12 +x12*y22+x13*y32 & x11*y13 +x12*y23+x13*y33\\ 
+%  x21*y11 +x22*y21 + x23*y31 & x21*y12 +x22*y22 + x23*y32 & x21*y13 +x22*y23 + x23*y33\\
+%  x31*y11 +x32*y21 + x33*y31 & x31*y12 +x32*y22 + x33*y32 & x31*y13 +x32*y23 + x33*y33
+%      	}
+%	\end{variables}
+%
+%	\type{input.matrix}
+%	\displayprecision{3}
+%    \correctorprecision{2}
+%    \field{integer}
+%    
+%    \lang{de}{
+%	    \text{Bestimmen Sie das Produkt der folgenden Matrizen über $\R$:\\
+%$\var{a}\cdot\var{b}$}}
+%    
+%    \begin{answer}
+%	    \solution{c}
+%      \format{3}{3}
+%	\end{answer}
+%    
+%\end{question}
+
+\begin{question}
+
+	\begin{variables}
+		\randint[Z]{x11}{-5}{5}
+		\randint[Z]{x12}{-5}{5}
+		\randint[Z]{x21}{-5}{5}
+		\randint[Z]{x22}{-5}{5}
+		\randint[Z]{x31}{-5}{5}
+		\randint[Z]{x32}{-5}{5}
+	
+		\randint[Z]{y11}{-5}{5}
+		\randint[Z]{y12}{-5}{5}
+		\randint[Z]{y13}{-5}{5}
+		\randint[Z]{y21}{-5}{5}
+		\randint[Z]{y22}{-5}{5}
+		\randint[Z]{y23}{-5}{5}
+		
+			\matrix[calculate]{a}{
+  			x11 & x12  \\ 
+  			x21 & x22  \\
+  			x31 & x32 
+      	}
+      		\matrix[calculate]{b}{
+  			y11 & y12 & y13 \\ 
+  			y21 & y22 & y23
+      	}
+      		\matrix[calculate]{c}{
+  			x11*y11 +x12*y21  & x11*y12 +x12*y22 & x11*y13 +x12*y23\\ 
+  x21*y11 +x22*y21 & x21*y12 +x22*y22 & x21*y13 +x22*y23\\
+  x31*y11 +x32*y21 & x31*y12 +x32*y22 & x31*y13 +x32*y23	}
+	\end{variables}
+
+	\type{input.matrix}
+	\displayprecision{3}
+    \correctorprecision{2}
+    \field{integer}
+    
+    \lang{de}{
+	    \text{Bestimmen Sie das Produkt der folgenden Matrizen über $\R$:\\
+$\var{a}\cdot\var{b}$}}
+
+\lang{en}{
+	    \text{Determine the product of the following matrices over $\R$:\\
+$\var{a}\cdot\var{b}$}}
+    
+    \begin{answer}
+	    \solution{c}
+        \lang{de}{
+        \explanation{
+            Die Matrixmultiplikation ist dann erlaubt,
+            wenn die Anzahl der Spalten der ersten Matrix
+            mit der Anzahl der Zeilen der zweiten Matrix
+            übereinstimmt. Dies ist hier gegeben.
+            Nun muss das Format bestimmt werden:
+            Die Anzahl der Zeilen der Ergebnismatrix
+            entspricht der Anzahl der Zeilen der ersten Matrix,
+            also hier 3.
+            Die Anzahl der Spalten der Ergebnismatrix
+            entspricht der Anzahl der Zeilen der zweiten Matrix,
+            also hier 3.
+            Man bestimmt die Komponenten der Ergebnismatrix,
+            indem man für den $(i,j)$-ten Eintrag das Skalarprodukt 
+            aus der $i$-ten Zeile der ersten Matrix und der $j$-ten
+            Spalte der zweiten Matrix bestimmt.}}
+      \lang{en}{
+      \explanation{
+      Matrix multiplication is defined, wenn the number of columns of the first matrix is the same as the number of rows 
+      of the second matrix. This is given here. Now the dimensions need to be determined:
+      The number of rows in the result matrix is the number of rows in the first matrix, so 3.
+      The number of columns in the result matrix is the number of rows in the second matrix, so 3.
+      The entries are calculated as follows:
+      The $(i,j)$th entry in the result matrix is the scalar product (dot product) of the $i$th row of the first matrix with the
+      $j$th column of the second matrix. }}
+	\end{answer}
+    
+\end{question}
+
+\end{problem}
+
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

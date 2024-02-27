@@ -1,0 +1,2428 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Lösen elementarer Gleichungen und Gleichungssysteme}
+    \lang{en}{Solving elementary equations and systems of equations}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}      
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+   \link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_01_zahlenmengen.meta.xml}{content_01_zahlenmengen}
+   \link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_02_rechengrundlagen_terme.meta.xml}{link-01-terme}  
+   \link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_03_bruchrechnung.meta.xml}{bruchrechnung}   
+   \link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_04_aussagen_aequivalenzumformungen.meta.xml}{content_04_aussagen_aequivalenzumformungen}  
+   \link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_05_loesen_gleichungen_und_lgs.meta.xml}{content_05_loesen_gleichungen_und_lgs}
+   \link{generic_article}{content/rwth/HM1/T112neu_Lineare_Gleichungssysteme/g_art_content_40_lineare_gleichungssysteme.meta.xml}{lineare_gleichungssysteme}
+   \link{generic_article}{content/rwth/HM1/T112neu_Lineare_Gleichungssysteme/g_art_content_41_gauss_verfahren.meta.xml}{gauss-verfahren}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+
+%
+% 
+% In diesem Modul sind zusammengefasst Teile aus ursprünglich
+%   
+%  1. T102_Einfache_Funktionen,_grundlegende_Begriffe/art_content_04_lineare_funktionen {Ticket 8973}
+%  2. T102_Einfache_Funktionen,_grundlegende_Begriffe/g_art_content_07_nullstellen_quadratischer_funktionen {Ticket 8975}
+%
+% und das komplette Modul
+%
+%  3. T111_Matrizen,_lineare_Gleichungssysteme/art_content_38b_adhoc_methoden {Ticket 9378}
+%
+% 
+% Ticket neu: 
+%
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21146}{Ticket 21146}
+\end{block}
+
+\usepackage{mumie.ombplus}
+\ombchapter{1}
+\ombarticle{5}
+\usepackage{mumie.genericvisualization}
+\begin{visualizationwrapper}
+
+\lang{de}{\title{Lösen elementarer Gleichungen und Gleichungssysteme}}
+\lang{en}{\title{Solving elementary equations and systems of equations}}
+ 
+\begin{block}[annotation]
+  In diesem Kapitel sind die Verfahren zur Lösung elementarer Gleichungen und 
+  Gleichungssysteme zusammengefasst.
+  Die Verfahren zur Lösung linearer und quadratischer Gleichungen wurden zuvor 
+  im Rahmen der Nullstellenberechnung linearer bzw. quadratischer Funktionen beschrieben.
+  Die ad hoc Methoden zur Lösung einfacher linearer Gleichungssysteme mit maximal
+  zwei oder drei Gleichungen und Unbekannten wurden aus Kapitel 12 in das 
+  Grundlagenkapitel vorgezogen.
+\end{block}
+
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+%
+% Motivation
+%
+\lang{de}{
+Das Lösen von Gleichungen ist eine wichtige mathematische Fähigkeit,
+die in fast allen Teilgebieten der Mathematik zur Anwendung kommt. Abhängig 
+vom Typ einer Gleichung gibt es hierzu viele verschiedene Lösungsansätze 
+und Verfahren, die zumeist auf der Anwendung geeigneter 
+\ref[content_04_aussagen_aequivalenzumformungen][Äquivalenzumformungen]{aequivalenzumformungen} 
+basieren. Ziel der Umformungen ist dabei jeweils das Isolieren der Variablen zur Bestimmung
+der \emph{Lösung} der Gleichung bzw. ihrer \emph{Lösungsmenge}.
+}
+\lang{en}{
+Solving equations is an important skillset in mathematics, used in almost every field. 
+Depending on the type of equation, there are various approaches and methods to solve them, most of which 
+are based on
+\ref[content_04_aussagen_aequivalenzumformungen][equivalence transformations]{aequivalenzumformungen}. 
+The aim of these transformations is often to isolate the variables and make the \emph{solution} or 
+\emph{solution set} of the equation easier to find.
+}
+
+%
+%%% Video K.M.
+%
+\lang{de}{
+Ein wichtiger Aspekt bei der Bestimmung der Lösungsmenge einer Gleichung ist die Festlegung einer
+sogenannten \emph{Grundmenge}, in der die Lösungen enthalten sein sollen. 
+Dies wird in nachstehendem Video veranschaulicht:
+\\
+%QS  \floatright
+     \center{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10811&mode=iframe&speed=true}
+    {\image[75]{00_video_button_schwarz-blau}}}\\
+}
+\lang{en}{
+An important aspect of determining the solution set of an equation is determining a \emph{'base set'} 
+which the solutions may belong to. This is often $\Z$, $\Q$ or $\R$.
+}
+\\
+%
+
+\lang{de}{
+Im folgenden Abschnitt werden die elementaren Verfahren zur Lösung von \emph{"`linearen"'} 
+und \emph{"`quadratischen Gleichungen"'} sowie einfache Methoden zur Lösung 
+\emph{"`linearer Gleichungssysteme"'} eingeführt.
+}
+\lang{en}{
+In the following section we introduce the basic methods for solving \emph{'linear equations'} and 
+\emph{'quadratic equations'}, and for solving \emph{'linear systems of equations'}.
+}
+%
+%%% Ergänzung zum Video K.M.
+%
+\lang{de}{
+Als \emph{Grundmenge} wird hierbei, soweit nicht anders spezifiziert, 
+die Menge der reellen Zahlen (bzw. \ref[content_05_loesen_gleichungen_und_lgs][n-Tupel]{def:lgs} aus reellen Zahlen)
+zugrundegelegt. 
+}
+\lang{en}{
+Unless otherwise specified, our \emph{base set} will be the set of real numbers $\R$ (or the set of 
+\ref[content_05_loesen_gleichungen_und_lgs][n-tuples]{def:lgs} of real numbers, $\R^n$).
+}
+%
+
+\section{\lang{de}{Lösen linearer Gleichungen}\lang{en}{Linear equations}}\label{sec:linear}
+
+\begin{definition}[\lang{de}{Lineare Gleichung}\lang{en}{Linear equation}] \label{def:lin_gleichung}
+\lang{de}{
+Eine Gleichung der Form $bx+c=0$, wobei $b$ und $c$ reelle Zahlen mit $b \neq 0$ sind und
+$x$ die gesuchte reelle \emph{Unbekannte} ist, heißt \emph{\notion{lineare Gleichung (in $x$)}.}
+\\
+% Die Begriffe \emph{"`Variable"'} und  \emph{"`Unbekannte"'}  werden hier synonym verwendet.
+%
+Die \emph{Unbekannte} $x$ wird synonym auch als \emph{Variable} bezeichnet. Die konstanten reellen
+Zahlen $b$ und $c$ nennt man \emph{Koeffizienten}. 
+}
+\lang{en}{
+An equation of the form $bx+c=0$, where $b$ and $c$ are real numbers with $b \neq 0$ and $x$ is the 
+\emph{indeterminate}, is called a \notion{\emph{linear equation (in $x$)}}.
+\\
+The \emph{indeterminate} $x$ is also called a \emph{variable}. The constant real numbers $b$ and $c$ 
+are called \emph{coefficients}.
+}
+\end{definition}
+
+\lang{de}{
+Generell bezeichnet man konstante Faktoren vor einer \emph{"`Unbekannten"' } $x$,
+wie auch vor Potenzen dieser Unbekannten (also $x^0(=1)$, $x^1 (=x)$,
+$x^2, \ldots\,$), als \emph{"`Koeffizienten"' }.
+}
+\lang{en}{
+Constant factors in front of an \emph{'indeterminate'} $x$ or any its powers $x^0(=1)$, $x^1 (=x)$, 
+$x^2, \ldots\,$ are always called \emph{'coefficients'}.
+}
+
+\begin{algorithm}[\lang{de}{Lösung linearer Gleichungen}
+                  \lang{en}{Solving linear equations}] \label{alg:lin_gleichung}
+  \lang{de}{
+  Jede lineare Gleichung lässt sich durch elementare
+  \ref[content_04_aussagen_aequivalenzumformungen][Äquivalenzumformungen]{aequivalenzumformungen} 
+  nach der Variablen $x$ auflösen:
+  }
+  \lang{en}{
+  Every linear equation can be rearranged for the variable $x$ using basic 
+  \ref[content_04_aussagen_aequivalenzumformungen][equivalence transformations]{aequivalenzumformungen};
+  }
+
+  \begin{align*}
+  &&\quad	                bx+c \,&=\,& 0 \quad &\vert -c \\
+  &\Leftrightarrow &\quad  bx     &=\,& -c \quad &\vert \lang{de}{:}\lang{en}{/}\lang{fr}{/}b \; (\neq 0)\\
+  &\Leftrightarrow &\quad  x      &=\,& - \frac{c}{b}&\\
+  \end{align*}
+
+  \lang{de}{
+  Im letzten Schritt ist die Variable $x$ isoliert und wir können sehen, 
+  dass eine lineare Gleichung in $x$ immer die \notion{eindeutige} Lösung 
+  $x=- \frac{c}{b}$ besitzt. Die Lösungsmenge der Gleichung stellt sich daher wie folgt dar
+  }
+  \lang{en}{
+  In the final step, the variable $x$ is isolated and we see that a linear equation in $x$ always has 
+  the \emph{unique} solution $x=- \frac{c}{b}$. The solution set of the equation is hence 
+  }
+  \begin{align*}
+  \mathbb{L}= \{x \in \R \mid -\frac{c}{b} \}= \{ -\frac{c}{b} \}. \\
+  \end{align*}
+\end{algorithm}
+
+\begin{example}
+\lang{de}{
+Wir schauen uns noch einmal die Gleichung $\;5(3x-5)+2x	= 7(3-2x)+16\;$ aus
+dem \ref[content_04_aussagen_aequivalenzumformungen][Kapitel zu Äquivalenzumformungen]{proposition.example.3}
+an. Auch diese Gleichung bezeichnet man als \emph{linear}, denn sie lässt sich durch
+Äquivalenzumformungen in eine lineare Gleichung gemäß Definition \ref{def:lin_gleichung}
+überführen:
+}
+\lang{en}{
+We once more look at the equation $\;5(3x-5)+2x	= 7(3-2x)+16\;$ from the 
+\ref[content_04_aussagen_aequivalenzumformungen][chapter on equivalence transformations]{proposition.example.3}. 
+This equation is also considered to be \emph{linear}, as it can be manipulated using equivalence 
+transformations into the form given by definition \ref{def:lin_gleichung}:
+}
+
+\begin{align*}
+&&\quad					5(3x-5)+2x	&=7(3-2x)+16		&		&&\\
+&\Leftrightarrow&\quad 	15x-25+2x	&=21-14x+16			&		&&\\
+&\Leftrightarrow&\quad 	17x-25		&=37-14x			&		&\vert +14x&\\
+&\Leftrightarrow&\quad 	31x-25		&=37				& 		&\vert -37&\\
+&\Leftrightarrow&\quad 	31x	-62		&=0				    &		&&
+\end{align*}
+
+\lang{de}{
+Die Lösungsmenge ist dann 
+}
+\lang{en}{
+The solution set is then 
+}
+$\quad \mathbb{L}= \{ \frac{62}{31} \} = \{ 2 \}.$
+
+\end{example}
+%
+%%% Video K.M. *** NEU: 11272 ((Un)Gleichungen2_neu) ***
+%
+\lang{de}{
+Eine allgemeiner gehaltene Beschreibung zur Lösung linearer Gleichungen finden Sie
+in folgendem Video. Hier wird zusätzlich untersucht, welche Lösungsmenge man erhält,
+wenn der Koeffizient vor der Variablen $x$ Null ist oder wenn die \emph{Grundmenge}
+%(hier auch \emph{Grundgesamtheit} genannt) 
+eingeschränkt wird.
+\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11272&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+}
+\lang{en}{
+If the coefficient $b$ of the variable $x$ is zero in a linear equation, the equation becomes $c=0$, 
+which is no longer dependent on $x$. It is either true for all $x$ if $c$ really is zero, or false for 
+all $x$ if $c$ was some non-zero number. That is, the solution set is $\mathbb{L} = \R$ if $c=0$, and 
+$\mathbb{L} = \emptyset$ if $c\neq0$.
+}
+\\
+%
+
+\lang{de}{
+Das Charakteristische an einer \emph{linearen Gleichung} ist, dass $1$ die 
+höchste Potenz der Variablen $x$ ist. Eine Gleichung der Form $ax^2+bx=c$  
+mit $a, b, c \in \R$ und $a \neq 0$ ist demnach nicht linear,
+da die höchste Potenz der Variablen $x$ hier $2$ ist. Eine solche Gleichung 
+bezeichnet man als \emph{quadratische Gleichung}. 
+}
+\lang{en}{
+An identifying feature of a \emph{linear equation} is that $1$ is the highest power of the variable 
+$x$. An equation of the form $ax^2+bx=c$ with $a, b, c \in \R$ and $a \neq 0$ is not linear, as the 
+highest power of $x$ here is $2$. This is called a \emph{quadratic equation}.
+}
+
+\section{\lang{de}{Lösen quadratischer Gleichungen}\lang{en}{Quadratic equations}}\label{sec:quadratic}
+
+%
+%%% Video K.M. *** NEU: 11273 ((Un-)Gleichungen_3_a) ***
+% 
+%
+%  \floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11273&mode=iframe&speed=true}
+%  {\image[75]{00_video_button_schwarz-blau}}}\\
+%  \\
+%  \\
+%
+
+
+\begin{definition}[\lang{de}{Quadratische Gleichung und Normalform}
+                   \lang{en}{Quadratic equation and leading coefficient}]\label{quadratic.definition.2}
+
+    \lang{de}{
+    Eine Gleichung in $x$ der Form \[ax^2+bx+c=0\] mit den reellen Koeffizienten $a (\neq 0)$, 
+    $b$ und $c$, heißt \notion{\emph{quadratische Gleichung}}.
+    \\
+    Speziell bezeichnet man quadratische Gleichungen der Form \[x^2+px+q=0\]
+    mit $p,q \in \mathbb{R}$ als \notion{\emph{quadratische Gleichung in Normalform}}.
+    Dabei sind die Bezeichnungen $p$ und $q$ als Koeffizienten für die Normalform natürlich 
+    willkürlich, haben sich aber im deutschen und englischen Sprachraum durchgesetzt.
+    }
+
+    \lang{en}{
+    An equation in $x$ of the form \[ax^2+bx+c=0\] with real coefficients $a (\neq 0)$, 
+    $b$ and $c$ is called a \notion{\emph{quadratic equation}}.
+    \\
+    Quadratic equations of the form \[x^2+px+q=0\] with $p,q \in \mathbb{R}$ are called 
+    \notion{\emph{monic quadratic equations}}, or more descriptively, \notion{\emph{quadratic 
+    equations with leading coefficient $1$}}, as the coefficient of the highest power of $x$, that is 
+    $x^2$, is $1$. The letters $p$ and $q$ are of course arbitrary, but are often used to denote 
+    coefficients of a quadratic equation in this form.
+    }
+
+\end{definition} 
+
+\lang{de}{
+Eine quadratische Gleichung in Normalform ist in der Regel einfacher zu lösen 
+als eine allgemeine quadratische Gleichung. Wie das nachfolgende Verfahren 
+zeigt, lässt sich jedoch jede quadratische Gleichung äquivalent in eine Normalform 
+überführen.
+}
+\lang{en}{
+A quadratic equation with leading coefficient $1$ is, as a rule, easier to solve than a general 
+quadratic equation. Having said this, it is shown in the following method how every quadratic equation 
+can be manipulated to have leading coefficient $1$.
+}
+
+\begin{algorithm}[\lang{de}{Überführung quadratischer Gleichungen in Normalform}
+                  \lang{en}{Getting a leading coefficient $1$}] \label{alg:normalform}
+  \lang{de}{
+  Nach Division durch $\,a\,$ erhält man für jede quadratische Gleichung $\,ax^2+bx+c=0\,$ die quadratische 
+  Gleichung $\,x^2+\frac{b}{a}x+\frac{c}{a}=0\,$ in Normalform mit $\, p=\frac{b}{a} \,$ und $\, q=\frac{c}{a}.\;$
+  Da $a \neq 0\,$ ist, handelt es sich hierbei um eine 
+  \ref[content_04_aussagen_aequivalenzumformungen][Äquivalenzumformung]{sec:aequivalenz}, also hat die Normalform 
+  die gleiche Lösungsmenge wie die ursprüngliche quadratische Gleichung.
+  }
+  \lang{en}{
+  Any quadratic equation $\,ax^2+bx+c=0\,$ can simply be divided by $\,a\,$ on both sides to obtain 
+  $\,x^2+\frac{b}{a}x+\frac{c}{a}=0\,$, which has leading coefficient $1$. As $a \neq 0\,$, this is 
+  an \ref[content_04_aussagen_aequivalenzumformungen][equivalence transformation]{sec:aequivalenz}, so 
+  the new equation has the same solution set as the original.
+  }
+\end{algorithm}
+
+\begin{example}\label{ex:normalform}
+\textit{\lang{de}{Allgemeine Form und Normalform}\lang{en}{Changing the leading coefficient to $1$}}
+              %
+              % Das Beispiel ist nicht mehr erforderlich, nach der vorstehenden Bemerkung
+              % in Kombination mit dem anschließenden Quickcheck.
+              %
+              % \begin{align*}
+              % 2x^2-26x-44&=&0 \quad \vert :2\\
+              % \Leftrightarrow \quad x^2-13x-22&=&0
+              % \end{align*}
+              %
+              % Die quadratischen Gleichung $2x^2-26x-44=0$ hat also dieselbe Lösungsmenge 
+              % wie die Normalform $x^2-13x-22=0$. Folglich genügt es, zur Bestimmung der Lösungsmenge 
+              % die Normalform zu lösen.
+              % \end{example}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{1}
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{a}{-3}{3}
+			\randint[Z]{b}{1}{4}
+			\randint{c}{-4}{4}
+		    \function[normalize]{f}{a*x^2+b*x+c}
+			\function[calculate]{p}{b/a}
+			\function[calculate]{q}{c/a}
+		\end{variables}
+		
+			\text{\lang{de}{Bestimmen Sie die Normalform der quadratischen Gleichung $\var{f}=0$.}
+            \lang{en}{Transform the quadratic equation $\var{f}=0$ into its monic form.} \\
+			 $x^2 +($\ansref $)x +($\ansref $)= 0$}
+		
+		\begin{answer}
+			\solution{p}
+		\end{answer}
+		\begin{answer}
+			\solution{q}
+		\end{answer}
+	\end{quickcheck}
+\end{quickcheckcontainer}
+\end{example}
+
+
+\lang{de}{
+Wir werden nun die folgenden drei Methoden zur Lösung quadratischer 
+Gleichungen behandeln:
+}
+\lang{en}{
+We will now introduce three methods for solving quadratic equations.
+}
+
+\begin{enumerate}
+    \item \lang{de}{die \ref[content_05_loesen_gleichungen_und_lgs][quadratische Ergänzung]{alg:quadr_erg},}
+          \lang{en}{\ref[content_05_loesen_gleichungen_und_lgs][Completing the square]{alg:quadr_erg},}
+    \item \lang{de}{die \ref[content_05_loesen_gleichungen_und_lgs][p-q-Formel]{rule:pqFormel},}
+          \lang{en}{\ref[content_05_loesen_gleichungen_und_lgs][The p-q formula]{alg:quadr_erg},}
+    \item \lang{de}{den \ref[content_05_loesen_gleichungen_und_lgs][Satz von Viëta]{thm:Satz_von_Vieta}.}
+          \lang{en}{\ref[content_05_loesen_gleichungen_und_lgs][Vieta's formulas]{thm:Satz_von_Vieta}.}
+\end{enumerate}
+
+\lang{de}{
+Wir können uns dabei, aufgrund des Verfahrens \ref{alg:normalform}, ohne 
+Einschränkung der Allgemeingültigkeit auf die Betrachtung \emph{quadratischer 
+Gleichungen in Normalform} beschränken.
+}
+\lang{en}{
+We can, thanks to algorithm \ref{alg:normalform}, suppose that every quadratic equation is 
+\emph{monic} before any of the following algorithms are applied.
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{algorithm}[\lang{de}{quadratische Ergänzung}\lang{en}{Completing the square}] \label{alg:quadr_erg}
+
+  \lang{de}{
+  Gegeben sei eine quadratische Gleichung in Normalform $x^2+px+q=0$ mit $p, q \in \R$.
+  \\
+  Die Summe $\;x^2+px\;$ kann durch Addition einer Konstanten zu einem vollständigen Quadrat
+  ergänzt werden. Anschließend kann die 
+  \ref[link-01-terme][erste binomische Formel]{rule:binomische_formeln} angewandt werden:
+  }
+  \lang{en}{
+  Consider the monic quadratic equation $x^2+px+q=0$ with $p, q \in \R$.
+  \\
+  The sum $\;x^2+px\;$ can be fully expressed as an (expanded) square by adding a constant. Specifically, 
+  it is the \ref[link-01-terme][square of a binomial]{rule:binomische_formeln}:
+  }
+  
+    \begin{align*}
+         &\; x^2+px &\\
+        =&\; \underbrace{x^2+2 \frac{p}{2}x+ \Big{(}\frac{p}{2} \Big{)}^2} %_{=}  
+            &-\Big{(}\frac{p}{2} \Big{)}^2\\
+        =&\; \phantom{x^2+}\Big{(}x+\frac{p}{2}\Big{)}^2 &-\Big{(}\frac{p}{2} \Big{)}^2
+    \end{align*}
+
+  \lang{de}{
+  Dieses Verfahren nennt man \emph{\notion{quadratische Ergänzung}}. Es wird 
+  wie folgt zur äquivalenten Umformung von quadratischen Gleichungen verwendet:
+  }
+  \lang{en}{
+  This procedure is called \notion{\emph{completing the square}}, as it involves adding a constant to 
+  turn an expression into a square. It is applied to quadratic equations as an equivalence 
+  transformation:
+  }
+
+  \begin{align*}
+  &\quad x^2+px+q &=&\; 0 &\qquad \vert -q\\
+   \Leftrightarrow &\quad x^2+px &=&\; -q \quad &\qquad \vert +\Big{(}\frac{p}{2} \Big{)}^2\\
+   \Leftrightarrow &\quad \underbrace{x^2+2 \frac{p}{2}x+ \Big{(}\frac{p}{2} \Big{)}^2} %_{=} 
+                            &=&\; -q+\Big{(}\frac{p}{2} \Big{)}^2&\\ %\qquad \vert \, \text{1.\, binomische \, Formel}\\
+   \Leftrightarrow &\quad \phantom{x^2+}\Big{(}x+\frac{p}{2}\Big{)}^2 &=&\; -q+\Big{(}\frac{p}{2} \Big{)}^2 &
+  \end{align*}
+
+   \lang{de}{
+   Die letzte Gleichung in dieser Umformung wird dann als die \emph{\notion{quadratisch ergänzte
+   Form }} $\,$ von $\; x^2+px+q=0\,$ bezeichnet. Sie ermöglicht eine Auflösung 
+   nach der Unbekannten $x$, sofern die rechte Seite der Gleichung größer oder gleich Null ist. 
+   Man unterscheidet daher die folgenden drei Fälle:
+   }
+   \lang{en}{
+   The final equation is called the \notion{\emph{completed square form}} of $\; x^2+px+q=0\,$. Provided 
+   the right hand side is greater than or equal to zero, it lets us solve the equation for $x\in\R$. We 
+   distinguish between the folloving three cases:
+   }
+                                                        
+ \\	\begin{table}[\class{layout} \cellvaligns{mm}]
+		& \colspan{2} 1. $\; $ \lang{de}{Falls}\lang{en}{If} 
+    $\,-q+\Big{(}\frac{p}{2} \Big{)}^2 < 0 \;$ \lang{de}{gilt}\lang{en}{holds}, \\
+        & \phantom{ 1. $\; $ \lang{de}{Falls}\lang{en}{If}} & 
+        \lang{de}{ist die Gleichung nicht lösbar, da der quadratische Term auf der linken 
+                      Seite der Gleichung für kein reelles $x$ negativ sein kann.}
+        \lang{en}{the equation is not solvable, as the square on the left side of the equation 
+        cannot be negative for any real $x$.} \\
+				
+		& \colspan{2} 2. $\; $ \lang{de}{Falls}\lang{en}{If} 
+    $\,-q+\Big{(}\frac{p}{2} \Big{)}^2 = 0 \;$ \lang{de}{gilt}\lang{en}{holds}, \\
+        & \phantom{ 2. $\; $ \lang{de}{Falls}\lang{en}{If}} & 
+        \lang{de}{gibt es genau eine Lösung, nämlich $x=-\frac{p}{2}\,$.} 
+        \lang{en}{there is precisely one solution, namely $x=-\frac{p}{2}\,$.} \\
+		
+    & \colspan{2} 3. $\; $ \lang{de}{Falls}\lang{en}{If} 
+    $\,-q+\Big{(}\frac{p}{2} \Big{)}^2 > 0 \;$ \lang{de}{gilt}\lang{en}{holds}, \\
+        & \phantom{ 3. $\; $ \lang{de}{Falls}\lang{en}{If}} & 
+        \lang{de}{kann auf beiden Seiten der Gleichung die Wurzel gezogen werden. In diesem
+                      Fall gibt es zwei Lösungen für $x$.}
+        \lang{en}{there are precisely two solutions, as both the positive and the negative square root of 
+        the right hand side can be considered.}
+
+\begin{showhide}[\buttonlabels{\lang{de}{Zeige Erklärung}\lang{en}{Show explanation}}
+                              {\lang{de}{Verstecke Erklärung}\lang{en}{Hide explanation}}]
+
+\lang{de}{
+Überträgt man die \ref[link-01-terme][Definition der Wurzel]{def:wurzel} auf Terme, so gilt
+}
+\lang{en}{
+Applying the \ref[link-01-terme][definition of a square root]{def:wurzel} to the left hand side gives:
+}
+\[
+\displaystyle{\sqrt{\Big{(}x+\frac{p}{2}\Big{)}^2}=\abs{x+\frac{p}{2}},}
+\]
+\lang{de}{
+denn wegen der Variablen $x$ in dem Term können wir nur durch den Betrag sicherstellen, dass 
+das Ergebnis der Wurzel positiv ist.
+Gemäß der \ref[content_01_zahlenmengen][Definition von Beträgen]{def:betrag} ist
+}
+\lang{en}{
+as due to the variable $x$ in the epression, the square root may otherwise be positive or negative.
+The \ref[content_01_zahlenmengen][definition of the absolute value]{def:betrag} gives
+}
+
+\[\abs{x+\frac{p}{2}}\ =
+    \begin{cases}
+        \Big{(}x+\frac{p}{2}\Big{)} & \text{falls} \;  \Big{(}x+\frac{p}{2}\Big{)} \geq 0\\
+        -\Big{(}x+\frac{p}{2}\Big{)} & \text{falls} \;   \Big{(}x+\frac{p}{2}\Big{)} < 0.
+    \end{cases}
+\]
+\lang{de}{
+Dies führt zu zwei Lösungen für unsere Gleichung.
+}
+\lang{en}{
+This provides two solutions to our equation.
+}
+%, und zwar eine mit $\, x < -\frac{p}{2}\,$  
+% und die zweite mit $\, x > -\frac{p}{2}\,$ (da in diesem Fall $\,x \neq -\frac{p}{2}\,$).
+\end{showhide}                     
+                      
+	    \begin{align*}
+        &\quad \Big{(}x+\frac{p}{2}\Big{)}^2 \;=\; -q+\Big{(}\frac{p}{2} \Big{)}^2 &\quad \vert \sqrt{\ldots}\\
+        & &\\ 
+       
+        \Leftrightarrow &\quad x +\frac{p}{2} =  + \sqrt{\Big{(}\frac{p}{2} \Big{)}^2-q} \quad \text{oder}
+                    &\quad x +\frac{p}{2} = - \sqrt{\Big{(}\frac{p}{2} \Big{)}^2-q}
+        \end{align*}
+    
+	\end{table}
+
+
+
+%
+%       Dies gilt nur unter Beachtung des Vorzeichens
+%
+%         \begin{align*}
+%          \Leftrightarrow &\quad  x_{1,2} +\frac{p}{2}\; = \; \pm{} \sqrt{\Big{(}\frac{p}{2} \Big{)}^2-q} &\quad \vert - \frac{p}{2} \\
+%          \Leftrightarrow &\quad  x_1 \; = \; -\frac{p}{2} + \sqrt{\Big{(}\frac{p}{2} \Big{)}^2 -q}\quad  \text{und} 
+%                           \quad  x_2 \; = \; -\frac{p}{2} - \sqrt{\Big{(}\frac{p}{2} \Big{)}^2 -q}&
+%
+%         \end{align*}
+%
+\end{algorithm}  
+
+
+\begin{example}\label{ex:quadr_erg}
+    \lang{de}{
+    Wir lösen die quadratische Gleichung (in Normalform) $x^2+8x+7=0$ mittels \emph{quadratischer Ergänzung:}
+    }
+    \lang{en}{
+    We solve the monic quadratic equation $x^2+8x+7=0$ by \emph{completing the square}:
+    }
+	\begin{align*}
+		&					&\quad	x^2+8x+7			&\, =\,0					&	&			&\\
+		&\Leftrightarrow	&\quad	x^2+8x+4^2-4^2+7	&\, =\,0					&	&			&\\
+		&\Leftrightarrow	&\quad	(x+4)^2-16+7		&\, =\,0					&	&			&\\
+		&\Leftrightarrow	&\quad	(x+4)^2-9			&\, =\,0					&	&\quad \vert +9	&\\
+		&\Leftrightarrow	&\quad	(x+4)^2				&\, =\,9					&	&\quad \vert \sqrt{\ldots} &\\
+		&\Leftrightarrow    &\quad	x+4					&\, =\,{}\pm{}\sqrt{9}	&	&			&\\
+		&\Leftrightarrow	&\quad	x =\,-4+3=-1 		&\,	\text{ oder }
+		&            		 \quad	x			    	\, =\,-4-3=-7				&			&\\
+	\end{align*}
+    \lang{de}{
+    Es gibt also zwei Lösungen und die Lösungsmenge ist
+    }
+    \lang{en}{
+    Hence there are two solutions, and the solution set is
+    }
+  	\begin{align*}
+        &\quad	\mathbb{L} 			&\, =\,\{-1;\;-7\}.		&	&			&
+	\end{align*}
+\end{example}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\number{a}{1}			
+			\randint{b}{-4}{4}
+			\randint{c}{-4}{4}
+		    \function[normalize]{f}{a*x^2+b*x+c}
+			\function[calculate]{d}{b/(2*a)}
+			\function[calculate]{h}{-c+b^2/(4*a^2)}
+			\function[calculate]{anz}{sign(h)+1}
+		\end{variables}
+		
+			\text{\lang{de}{Bestimmen Sie für die Gleichung $\var{f}=0$ die quadratisch ergänzte Form:\\
+		        $(x+$\ansref$)^2=$\ansref.\\ 
+		        Die Gleichung besitzt damit \ansref reelle Lösung(en).}
+            \lang{en}{Determine the monic form of the equation $\var{f}=0$:\\
+            $(x+$\ansref$)^2=$\ansref.\\
+            The equation then has \ansref distinct real solutions.
+            }}
+		       
+		\begin{answer}
+			\solution{d}
+		\end{answer}
+		\begin{answer}
+			\solution{h}
+		\end{answer}
+		\begin{answer}
+			\solution{anz}
+		\end{answer}
+	\end{quickcheck}
+
+\lang{de}{
+Die Auflösung der \emph{quadratisch ergänzten Form$\,$}  
+$\; \Big{(}x+\frac{p}{2}\Big{)}^2 = -q+\Big{(}\frac{p}{2} \Big{)}^2 \;$ 
+nach $x$ gemäß dem in \ref{alg:quadr_erg} beschriebenen
+Verfahren liefert die folgende allgemeine Lösungsformel für quadratische 
+Gleichungen in Normalform.
+}
+\lang{en}{
+Solving the \emph{monic quadratic equation} 
+$\; \Big{(}x+\frac{p}{2}\Big{)}^2 = -q+\Big{(}\frac{p}{2} \Big{)}^2 \;$ 
+for $x$ as in algorithm \ref{alg:quadr_erg} immediately gives us the following 
+formula for solving quadratic equations.
+}
+
+% \begin{align*}   
+%                  &\quad  \Big{(}x+\frac{p}{2}\Big{)}^2 = \Big{(}\frac{p}{2} \Big{)}^2 -q  & \\
+%  \Leftrightarrow &\quad  x_{1,2} +\frac{p}{2}\; = \; \pm{} \sqrt{\Big{(}\frac{p}{2} \Big{)}^2-q} &\quad \vert - \frac{p}{2} \\
+%  \Leftrightarrow &\quad  x_{1,2}  \; = \; -\frac{p}{2} \; \pm{}  \sqrt{\Big{(}\frac{p}{2} \Big{)}^2 -q}\quad  & 
+% \end{align*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{rule}[\lang{de}{p-q-Formel}\lang{en}{The p-q formula}] \label{rule:pqFormel}
+
+    \lang{de}{
+    Die Lösungen einer quadratischen Gleichung $\;x^2+px+q=0\;$ in Normalform sind gegeben durch
+    die sogenannte \emph{\notion{p-q-Formel}}
+    }
+    \lang{en}{
+    The solutions of a monic quadratic equation $\;x^2+px+q=0\;$ are given by the so-called 
+    \notion{\emph{p-q formula}}
+    }
+    \[x_{1,2}=-\frac{p}{2}{}\pm{}\sqrt{\Big{(}\frac{p}{2}\Big{)}^2-q}.\]
+
+    \lang{de}{
+    Dabei gibt der Term unter der Wurzel, die sogenannte \emph{\notion{Diskriminante}}
+    }
+    \lang{en}{
+    The expression under the square root, called the \notion{\emph{discriminant}}
+    }
+    \[D:=\Big{(}\frac{p}{2}\Big{)}^2-q, \]
+    \lang{de}{
+    Aufschluss über die Anzahl der Lösungen der quadratischen Gleichung. 
+    Man unterscheidet, analog zu \ref{alg:quadr_erg}, die folgenden drei Fälle:
+    }
+    \lang{en}{
+    gives information about the number of real solutions of the quadratic equation.
+    As in \ref{alg:quadr_erg}, a distinction is made between the following three cases:
+    }
+    
+    
+    \begin{align*}
+    1. \quad D &\,<\,& 0 \quad \Rightarrow \quad &\text{
+    \lang{de}{Die quadratische Gleichung hat keine Lösung, also}
+    \lang{en}{The quadratic equation has no real solutions, so}}\\
+    &&& \mathbb{L}= \emptyset .  \\         
+    2. \quad D &\,=\,& 0 \quad \Rightarrow \quad &\text{
+    \lang{de}{Die quadratische Gleichung hat eine Lösung, nämlich}
+    \lang{en}{The quadratic equation has a single real solution,}}\\
+    &&& \mathbb{L}=\{-\frac{p}{2}\} \\  
+    3. \quad D &\,>\,& 0 \quad \Rightarrow \quad &\text{
+    \lang{de}{Die quadratische Gleichung hat zwei Lösungen,}
+    \lang{en}{The quadratic equation has two real solutions,}}\\
+    &&& \mathbb{L}=\{-\frac{p}{2}-\sqrt{\Big{(}\frac{p}{2}\Big{)}^2-q}; \: -\frac{p}{2}+\sqrt{\Big{(}\frac{p}{2}\Big{)}^2-q}\} \\  
+    \end{align*}
+
+\end{rule}  
+
+%
+%%% Video K.M. *** NEU: 11273 ((Un-)Gleichungen_3_a) ***
+%
+\lang{de}{
+Das folgende Video beschreibt noch einmal die Herleitung der p-q-Formel und ihre Verwendung zur Lösung
+quadratischer Gleichungen.
+\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11273&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}\\\\
+}
+\lang{en}{
+\\
+}
+%
+
+
+\begin{example} \label{ex:pqFormel}
+    \lang{de}{
+    Wir berechnen die Lösung der quadratischen Gleichung $\; x^2-6x+5=0 \;$ mithilfe
+    der \emph{p-q-Formel}
+    }
+    \lang{en}{
+    We calculate the solution of the quadratic equation $\; x^2-6x+5=0 \;$ using the 
+    \emph{p-q formula}
+    }
+    \begin{align*}
+    x_{1,2}&\;=&\; 3{}\pm{}\sqrt{9-5}\\
+    \Rightarrow \quad x_1&\;=&\; 3-2=1 \; \text{\lang{de}{und}\lang{en}{and}} \; x_2=3+2=5    
+    \end{align*}
+
+    \lang{de}{Die Lösungsmenge ist}\lang{en}{The solution set is} $\quad \mathbb{L} =\{1;\;5\}.$
+\end{example}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{1}
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{a}{-3}{3}
+			\randint[Z]{b}{1}{4}
+			\randint{c}{-4}{4}
+		    \function[normalize]{f}{a*x^2+b*x+c}
+			\function[calculate]{p}{b/a}
+			\function[calculate]{q}{c/a}
+			\function[calculate]{l1}{-p/2}
+			\function[calculate]{l2}{(p/2)^2}
+			\function[calculate]{l3}{q}			
+		\end{variables}
+		
+			\text{\lang{de}{Die p-q-Formel für Lösungen der quadratischen Gleichung $\var{f}=0$ lautet}
+            \lang{en}{The p-q formula for solving the quadratic equation $\var{f}=0$ is}\\
+			 $x_{1,2}=$\ansref $\pm \sqrt{}($\ansref $-$\ansref $)$.}
+		
+		\begin{answer}
+			\solution{l1}
+		\end{answer}
+		\begin{answer}
+			\solution{l2}
+		\end{answer}
+		\begin{answer}
+			\solution{l3}
+		\end{answer}
+
+	\end{quickcheck}
+\end{quickcheckcontainer}
+
+\begin{remark} \label{rem:mitternachtsformel}
+\begin{itemize}
+  \item \lang{de}{In der Mathematik wird häufig auch der Term $p^2-4q$ als \textit{Diskriminante} in  
+    der p-q-Formel bezeichnet. Der Grund dafür ist eine andere Schreibweise der p-q-Formel,
+    in der ein Faktor $\frac{1}{2}$ aus der Gleichung ausgeklammert wurde:
+    }
+    \lang{en}{
+    In other literature, $p^2-4q$ is often called the discriminant, due to the 
+    existence of a different (but equivalent) form of the p-q formula in which a 
+    factor $\frac{1}{2}$ is taken out of the expression:
+    }
+    \begin{align*}
+    x_{1,2}= \frac{1}{2}\Big{(}-p \pm \sqrt{p^2-4q}\Big{)}.
+    \end{align*}
+
+  \item \lang{de}{
+    Für allgemeine quadratische Gleichungen der Form $\,ax^2+bx+c=0\,$ (mit $a \neq 0$)
+    gibt es eine ähnliche Lösungsformel, die sogenannte \emph{\notion{Mitternachtsformel}}
+    }
+    \lang{en}{
+    For a general quadratic equation of the form $\,ax^2+bx+c=0\,$ (with $a \neq 0$), 
+    there is a more general version of the p-q formula, called the 
+    \notion{\emph{quadratic formula}},
+    }
+    \[
+    x_{1,2}= \frac{-b \pm \sqrt{b^2-4ac}}{2a}.
+    \]
+    \begin{showhide}[\buttonlabels{
+    \lang{de}{Zeige weitere Details zur Mitternachtsformel}
+    \lang{en}{Show further information about the quadratic formula}}{
+    \lang{de}{Verstecke weitere Details zur  Mitternachtsformel}
+    \lang{en}{Hide further information about the quadratic formula}}]
+    \lang{de}{
+    Ebenso wie bei der \emph{p-q-Formel} gibt auch in der \emph{Mitternachtsformel}
+    die \emph{Diskriminante}, also der Term unter der Wurzel, Aufschluss über die Anzahl 
+    der Lösungen der quadratischen Gleichung.
+    }
+    \lang{en}{
+    Just like the \emph{p-q formula}, the \emph{quadratic formula} also has a 
+    \emph{discriminant} - the expression under the square root sign that determines 
+    the number of solutions to the quadratic equation.
+    }
+
+      \begin{enumerate}
+        \item \lang{de}{
+              Für $\,b^2-4ac<0 \,$  besitzt die quadratische Gleichung keine Lösung, 
+                                    also $\mathbb{L}= \emptyset$.
+              }
+              \lang{en}{
+              If $\,b^2-4ac<0 \,$   the quadratic equation has no real solutions, so 
+                                    $\mathbb{L}= \emptyset$.
+              }
+        \item \lang{de}{
+              Für $\,b^2-4ac=0 \,$  besitzt die quadratische Gleichung eine Lösung, 
+                                    nämlich $\mathbb{L}=\{-\frac{b}{2a}\}$.
+              }
+              \lang{en}{
+              If $\,b^2-4ac=0 \,$   the quadratic equation has one real solution, so 
+                                    $\mathbb{L}=\{-\frac{b}{2a}\}$.
+              }
+        \item \lang{de}{
+              Für $\,b^2-4ac>0 \,$  besitzt die quadratische Gleichung zwei Lösungen:
+              $\mathbb{L}=\{\frac{-b - \sqrt{b^2-4ac}}{2a}; \frac{-b + \sqrt{b^2-4ac}}{2a}\}$.
+              }
+              \lang{en}{
+              If $\,b^2-4ac>0 \,$ the quadratic equation has two real solutions, so 
+              $\mathbb{L}=\{\frac{-b - \sqrt{b^2-4ac}}{2a}; \frac{-b + \sqrt{b^2-4ac}}{2a}\}$.
+              }
+      \end{enumerate}
+
+    \end{showhide}
+
+  \item \lang{de}{
+        Generell gilt, dass eine quadratische Gleichung maximal 
+        zwei reelle Lösungen hat.
+        }
+        \lang{en}{
+        In general, any quadratic equation has a maximum of two real solutions.
+        }
+\end{itemize}
+\end{remark}
+
+%%%%%%%%
+\lang{de}{
+Weitere Möglichkeiten zur Lösung quadratischer Gleichungen (in Normalform)
+liefert der \emph{\notion{Satz von Viëta}}, der auf der sogenannten \emph{Linearfaktorzerlegung} 
+ basiert. Als \emph{Linearfaktor} bezeichnet man dabei
+einen Faktor der Form $(x-a)$, wobei $a$ eine reelle Zahl ist.
+}
+\lang{en}{
+A further method for solving (monic) quadratic equations is derived from 
+\notion{\emph{Vieta's formulas}}, which come from finding the linear factors of 
+a quadratic equation. A \emph{linear factor} in this case is defined to be a factor 
+of the form $(x-a)$, where $a$ is a real number.
+}
+
+\begin{theorem}[\lang{de}{Satz von Viëta / Linearfaktorzerlegung}
+                \lang{en}{Vieta's formulas / linear factors}] \label{thm:Satz_von_Vieta}
+  \lang{de}{
+  Es sei $x^2+px+q=0$ eine quadratische Gleichung in Normalform und es
+  seien $x_1$ und $x_2$ die Lösungen dieser Gleichung. Dann gilt
+  }
+  \lang{en}{
+  Let $x^2+px+q=0$ be a monic quadratic equation with solutions $x_1$ and $x_2$. 
+  Then
+  }
+  \begin{align*}
+      x^2+px+q = (x-x_1)\cdot(x-x_2),
+  \end{align*}
+  \lang{de}{
+  d.\,h. die Normalform $x^2+px+q$ ist zerlegbar in die \emph{Linearfaktoren} $(x-x_1)$
+  und $(x-x_2)$.
+  \\
+  Zwischen den Koeffizienten $p$ und $q$ und den Lösungen $x_1$ und $x_2$ gelten dabei
+  die folgenden Beziehungen:
+  }
+  \lang{en}{
+  so the equation $x^2+px+q$ can be decomposed into its \emph{linear factors} 
+  $(x-x_1)$ and $(x-x_2)$.
+  \\
+  The following relationships exist between the coefficients $p$ and $q$ and the 
+  solutions $x_1$ and $x_2$:
+  }
+
+    \begin{align*}
+      &p=-(x_1+x_2),\\
+      &q=x_1 \cdot x_2.
+    \end{align*}
+
+  \lang{de}{
+  Hat die quadratische Gleichung nur eine Lösung, so setzt man $x_1=x_2$.
+  }
+  \lang{en}{
+  If the quadratic equation only has one solution, we simply set $x_1=x_2$.
+  }
+\end{theorem}
+
+% Dabei bezeichnet man $(x-x_1)\cdot(x-x_2)$ als die \emph{\notion{Linearfaktorzerlegung}} von $x^2+px+q$.
+
+
+\begin{proof*}[\lang{de}{Beweis des Satzes von Viëta}\lang{en}{Proof of Vieta's formulas}]
+\begin{showhide}
+\lang{de}{
+Multipliziert man das Produkt der Linearfaktoren $(x-x_1)\cdot(x-x_2)\,$ aus, so erhält 
+man eine quadratische Gleichung in Normalform mit dem Koeffizienten $\, -(x_1+x_2)\,$ vor
+$\,x\,$ und dem konstanten Summanden $\, x_1 \cdot x_2$, der formal dem Koeffizienten vor
+$\, x^0(=1) \,$ entspricht:
+}
+\lang{en}{
+Multiply out the product $(x-x_1)\cdot(x-x_2)\,$ to obtain a quadratic equation with 
+an $x$-coefficient of $\, -(x_1+x_2)\,$ and a constant of $\, x_1 \cdot x_2$, which 
+is formally the coefficient of $\, x^0(=1) \,$.
+}
+\begin{align*}
+    (x-x_1)(x-x_2)\, &= x^2 &\,- x_1 x -x x_2 &\,+ x_1 x_2  \\
+                     &= x^2 &\,+ \underbrace{(-x_1-x_2)}_{=p}x &\,+ \underbrace{x_1 x_2}_{=q}\\
+                     &= x^2 &\,+\phantom{(-x_1} px &\,+\phantom{x_1}q
+\end{align*}
+
+\lang{de}{
+Die Formeln von Viëta ergeben sich nun aus dem sogenannten \emph{\notion{Koeffizientenvergleich}},
+der besagt, dass zwei quadratische Gleichungen identisch sind, wenn sie jeweils gleiche 
+Koeffizienten vor $x^2$, $x^1$ und $x^0$ haben. In diesem Fall gilt also $-(x_1+x_2)=p$ und $x_1 \cdot x_2=q$.
+}
+\lang{en}{
+Vieta's formulas are now obtained by the principle of 
+\notion{\emph{comparing coefficients}}, which states that two quadratic equations 
+are identical if they have the same coefficients of $x^2$, $x^1$ and $x^0$. In this 
+case, we have $-(x_1+x_2)=p$ and $x_1 \cdot x_2=q$.
+}
+
+\end{showhide}
+\end{proof*}
+
+\lang{de}{
+Dieser Satz hat im Wesentlichen drei wichtige Anwendungen, von denen zwei zur Lösung
+quadratischer Gleichungen in Normalform genutzt werden können:
+}
+\lang{en}{
+This statement has three important applications, of which two are helpful for solving 
+monic quadratic equations:
+}
+\begin{enumerate}
+
+  \item \lang{de}{
+  Ist eine der beiden Lösungen von $x^2+px+q=0\;$ (z.\,B. $x_1$) 
+  schon bekannt, so lässt sich die zweite Lösung bequem mittels der Formeln von Viëta 
+  berechnen, z.\,B. durch $\,x_2=-p-x_1\,$ oder, falls $x_1\ne 0$, auch durch $x_2=q/x_1$.
+  }
+  \lang{en}{
+  If we know one of the solutions of $x^2+px+q=0\;$ (say $x_1$), the second 
+  solution can easily be found using one of Vieta's formulas. For example we have
+  $\,x_2=-p-x_1\,$, or if $x_1\ne 0$, we have $x_2=q/x_1$.
+  }
+
+  \item \lang{de}{
+  Vermutet man, dass die Lösungen einer Gleichung $x^2+px+q=0$ mit ganzen Zahlen $p$ und $q$ auch 
+  ganzzahlig sind, so kann man die Lösungen leicht raten. In diesem Fall müssen
+  nämlich wegen $x_1 \cdot x_2=q$ beide Lösungen Teiler der Zahl $q$ sein.
+  }
+  \lang{en}{
+  If we suspect that the solutions of a quadratic $x^2+px+q=0$ with integer $p$ and 
+  $q$ are integers themselves, then we may be able to guess them. This is because 
+  $x_1 \cdot x_2=q$ so both solutions have to divide $q$, and then their sum can 
+  be checked to see if $-(x_1+x_2)=p$.
+  }
+
+  \item \lang{de}{
+  Sind die beiden Lösungen $x_1$ und $x_2$ bekannt (weil man sie z.\,B. mit
+  der p-q-Formel schon berechnet hat), so kann man den Term $x^2+px+q$ 
+  durch den Term $(x-x_1)(x-x_2)$ ersetzen, was in größeren Ausdrücken möglicherweise weitere Termvereinfachungen 
+  zulässt, etwa beim \ref[bruchrechnung][Rechnen mit Bruchtermen]{add}.
+  }
+  \lang{en}{
+  If two solutions $x_1$ and $x_2$ are known (we may have found them with the 
+  p-q formula or quadratic equation), then the expression $x^2+px+q$ can be replaced 
+  by the expression $(x-x_1)(x-x_2)$. This form of the quadratic may be useful in 
+  longer expressions, where it could for example lead to a 
+  \ref[bruchrechnung][fraction being simplified]{add}.
+  }
+%
+%%% Video K.M. *** NEU: 11275 (Un)Gleichungen_4a_Faktorisierung ***
+% 
+\lang{de}{
+  Man spricht in diesem Zusammenhang auch von einer \emph{Faktorisierung} der quadratischen Gleichung bzw.
+  ihrer \emph{Zerlegung in Linearfaktoren}.
+\\
+  \floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11275&mode=iframe&speed=true}
+  {\image[75]{00_video_button_schwarz-blau}}}\\
+}
+\lang{en}{
+We call this a \emph{factorisation} or a \emph{decomposition into linear factors}.
+}
+  \\
+  \\
+%
+
+\end{enumerate}
+
+
+\begin{example}\label{ex:vieta_2lsg}
+\lang{de}{
+Wir lösen die Gleichung $x^2 - x - 6 = 0$ mit Hilfe des Satz von Viëta.
+Hierzu lesen wir zunächst $\,p\,$ und $\,q\,$ aus der Gleichung ab und erhalten
+}
+\lang{en}{
+We solve the equation $x^2 - x - 6 = 0$ using Vieta's formulas. 
+Firstly we read $\,p\,$ and $\,q\,$ from the equation and obtain
+}
+
+  \begin{align*}
+    &p=-1 &\; \text{\lang{de}{und}\lang{en}{and}}\\
+    &q=-6. &
+  \end{align*}
+
+\lang{de}{
+Wir suchen also Werte für $x_1$ und $x_2$, für die gilt:
+}
+\lang{en}{
+We need values for $x_1$ and $x_2$ that satisfy:
+}
+
+  \begin{align*}
+    &p=-(x_1 + x_2) &\; = -1    &\; \text{\lang{de}{und}\lang{en}{and}}\\
+    &q= x_1 \cdot x_2 &\; = -6.  &
+  \end{align*}
+
+\lang{de}{
+Da $\,q=-6<0\,$ ist, erkennen wir, dass entweder $\,x_1\,$ oder $\,x_2\,$ negativ sein muss.
+Durch Ausprobieren finden wir heraus, dass
+}
+\lang{en}{
+As $\,q=-6<0\,$, we recognise that either $\,x_1\,$ or $\,x_2\,$ must be negative. 
+By trial and error, we find that
+}
+
+  \begin{align*}
+    &3 + (-2) &\; = 1        &\; \text{\lang{de}{und}\lang{en}{and}}\\
+    &3 \cdot (-2) &\; = -6.  &
+  \end{align*}
+
+\lang{de}{
+Die ermittelten Werte sind daher $x_1=3$ und $x_2=-2$, folglich ist die 
+Lösungsmenge der quadratischen Gleichung
+}
+\lang{en}{
+satisfy Vieta's formulas. The solutions are therefore $x_1=3$ und $x_2=-2$, so the solution set is
+}
+\[\mathbb{L} =\{-2;3\}.\]
+
+ \begin{showhide}[\buttonlabels{\lang{de}{Zeige Rückrechnung}
+                                \lang{en}{Show reverse calculation}}{
+                                \lang{de}{Verstecke Rückrechnung}
+                                \lang{en}{Hide reverse calculation}}]
+  \lang{de}{
+  Ausgehend von bereits bekannten Lösungen $x_1=3$ und $x_2=-2$, lässt sich hieraus mittels 
+  der Formeln von Viëta auch die quadratische Gleichung wieder
+  bestimmen.
+  \\
+  Rückrechnung:
+  }
+  \lang{en}{
+  Starting with only the known solutions $x_1=3$ and $x_2=-2$, Vieta's formulas can 
+  be used to reconstruct the original quadratic equation:
+  }
+  \begin{align*}
+      &p =-(x_1 + x_2) =-(3 -2) = -1,\\
+      &q = x_1 \cdot x_2 = 3\cdot (-2) = -6.
+  \end{align*}
+  \lang{de}{
+  Einsetzen in die Normalform ergibt
+  }
+  \lang{en}{
+  Substituting this $p$ and $q$ into the general monic form of a quadratic equation 
+  yields
+  }
+  
+  \[x^2 - x - 6 = 0.\]
+ \end{showhide}
+\end{example}
+
+
+\begin{example}\label{ex:vieta_1lsg}
+
+\lang{de}{
+Es sei $\quad x^2+4x+4=0$. Wir haben also
+}
+\lang{en}{
+Let $\quad x^2+4x+4=0$. Hence
+}
+
+  \begin{align*}
+    p = 4,\\
+    q = 4.
+  \end{align*}
+
+\lang{de}{
+Da $q$ positiv ist, müssen $x_1$ und $x_2$ beide negativ oder beide positiv sein.
+\\
+Durch Ausprobieren erhalten wir
+}
+\lang{en}{
+As $q$ is positive, $x_1$ and $x_2$ must either both be negative or both be positive. 
+\\
+Through trial and error we obtain
+}
+
+  \begin{align*}
+    p = -((-2)+(-2)) = 4,\\
+    q =  (-2)\cdot (-2) = 4.
+  \end{align*}
+
+\lang{de}{
+Es gilt hier $x_1=x_2=-2$. Die Gleichung $x^2+4x+4=0$ hat also nur eine Lösung,
+}
+\lang{en}{
+Thus $x_1=x_2=-2$. The equation $x^2+4x+4=0$ hence has only one solution,
+}
+
+\[\mathbb{L} =\{-2\}.\]
+
+ \begin{showhide}[\buttonlabels{\lang{de}{Zeige Rückrechnung}
+                                \lang{en}{Show reverse calculation}}{
+                                \lang{de}{Verstecke Rückrechnung}
+                                \lang{en}{Hide reverse calculation}}]
+\lang{de}{
+Die Lösungen sind
+}
+\lang{en}{
+The solutions are
+}
+  \begin{align*}
+  x_1 = -2 \quad \text{\lang{de}{und}\lang{en}{and}} \quad x_2 = -2.\\
+  \end{align*}
+\lang{de}{
+Mit den Formeln von Viëta kriegen wir
+}
+\lang{en}{
+Using Vieta's formulas we obtain
+}
+  \begin{align*}
+        p &\; =-(x_1 + x_2) = -((-2)+(-2)) = 4, \\
+  q &= x_1 \cdot x_2 = (-2)\cdot(-2) = 4.
+  \end{align*}
+  \lang{de}{
+  Einsetzen in die Normalform ergibt
+  }
+  \lang{en}{
+  Substituting these into the general form of a monic quadratic equation yields
+  }
+  \begin{align*}
+   x^2+4x+4 = 0.
+  \end{align*}
+ \end{showhide}
+\end{example}
+
+
+
+\begin{example}\label{ex:vieta_0lsg}
+
+\lang{de}{
+Es sei $x^2-2x+3=0$, d.\,h.
+}
+\lang{en}{
+Let $x^2-2x+3=0$, so
+}
+
+\begin{align*}
+  p = -2,\\
+  q = 3.
+\end{align*}
+
+\lang{de}{
+Durch Ausprobieren lassen sich keine Lösungen für $x_1$ und $x_2$ finden, die 
+als Summe $\,2\,$ und als Produkt $\,3\,$ ergeben. Da die Vorgehensweise des Ausprobierens
+zum Auffinden nicht-ganzzahliger Lösungen für $x_1$ und $x_2$ nicht geeignet ist, verwenden wir
+für die weiteren Untersuchungen die p-q-Formel:
+}
+\lang{en}{
+In this case, trial and error does not yield any integer solutions $x_1$ und $x_2$ 
+that sum to $\,2\,$ and have product $\,3\,$. As this is unsuccessful in finding 
+integers, we apply the p-q formula:
+}
+
+\[
+    x_{1,2} = -1{}\pm{}\sqrt{1-3}.
+\]
+
+\lang{de}{
+Die Diskriminante ist $-2$, also $<0$, also gibt tatsächlich keine Lösung für diese quadratische Gleichung.
+Es gilt daher
+}
+\lang{en}{
+The discriminant is $-2$, a negative number, so there really is no solution to this 
+quadratic equation. Hence
+}
+\[\mathbb{L} =\emptyset.\]
+
+\end{example}
+
+	\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{x1}{-3}{3}
+			\randint[Z]{x2}{-5}{5}
+		    \function[expand, normalize]{f}{(x-x1)*(x-x2)}
+			\function[calculate]{nx1}{-x1}
+			\function[calculate]{nx2}{-x2}
+		\end{variables}
+		
+			\text{\lang{de}{
+      Bestimmen Sie die ganzzahligen Nullstellen der Funktion $f(x)=\var{f}$
+			durch Raten. Geben Sie dabei die kleinere zuerst an: $x_1=$\ansref und $x_2=$\ansref.\\
+			Die Linearfaktorzerlegung von $\var{f}$ ist damit:\\
+			$\var{f}=(x+$\ansref$)(x+$\ansref$)$.			
+			}
+      \lang{en}{
+      Determine the integer $x$-values for the function $f(x)=\var{f}$ by guessing. 
+      Enter the smaller one first: $x_1=$\ansref und $x_2=$\ansref.\\
+      The factorisation of $\var{f}$ is therefore:\\
+      $\var{f}=(x+$\ansref$)(x+$\ansref$)$.
+      }}
+		       
+		\begin{answer}
+			\solution{x1}
+		\end{answer}
+		\begin{answer}
+			\solution{x2}
+		\end{answer}
+		\begin{answer}
+			\solution{nx1}
+		\end{answer}
+		\begin{answer}
+			\solution{nx2}
+		\end{answer}
+	\end{quickcheck}
+%\end{supplement}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{\lang{de}{Lösen linearer Gleichungssysteme}\lang{en}{Systems of linear equations}}\label{sec:lgs}
+
+\lang{de}{
+Häufig erfordern mathematische Probleme die \emph{gleichzeitige} Lösung \emph{mehrerer} 
+linearer Gleichungen mit \emph{mehreren} Variablen, also Gleichungen der Form
+}
+\lang{en}{
+Often mathematical problems require solutions that \emph{simultaneously} satisfy 
+several linear equations with \emph{multiple} variables, of the form 
+}
+\[a_1 x_1 + a_2 x_2+ \ldots + a_n x_n=b\]
+\lang{de}{
+mit reellen Koeffizienten $a_1, \ldots, a_n$, %alle $\neq 0$  
+in denen jede der Variablen $x_1, \ldots, x_n$ die Potenz $1$ hat.
+}
+\lang{en}{
+with real coefficients $a_1, \ldots, a_n$ and where every variable 
+$x_1, \ldots, x_n$ has power $1$.
+}
+
+\begin{definition}[\lang{de}{Lineares Gleichungssystem}
+                   \lang{en}{Linear systems}] \label{def:lgs}
+\lang{de}{
+Ein System von linearen Gleichungen, die alle zugleich
+erfüllt sein sollen, wird \notion{\emph{lineares Gleichungssystem (LGS)}} genannt.
+\\
+Eine \emph{Lösung} eines linearen Gleichungssystems mit $n$ Unbekannten ist ein
+$n$-Tupel $(x_1; x_2; \ldots; x_n)$ bestehend aus $n$ reellen Zahlen $x_1$, 
+$x_2$, $\ldots$, $x_n$, die \notion{alle} Gleichungen des Systems erfüllen.
+}
+\lang{en}{
+A collection of linear equations that must all be satisfied at once by a solution 
+is called a \notion{\emph{system of linear equations}}, often shortened to 
+\notion{\emph{linear system}}.
+\\
+A \emph{solution} to a system of linear equations with $n$ invariants is an $n$-tuple 
+$(x_1; x_2; \ldots; x_n)$ consisting of $n$ real numbers $x_1$, $x_2$, $\ldots$, 
+$x_n$ that satisfy $all$ equations in the system.
+}
+\end{definition}
+
+% Wie bereits in Definition \ref{def:lin_gleichung} erwähnt, werden auch hier die Begriffe "Variable"
+% und "{Unbekannte}" synonym verwendet.
+       
+  \begin{tabs*}[\initialtab{0}] 
+  \tab{\lang{de}{Erl\"auterung zum Begriff $n$-Tupel}
+       \lang{en}{Definition of an $n$-tuple}}
+    \lang{de}{
+    Zwei Zahlen $(x_1; x_2)$ bezeichnet man als Paar, \\
+    drei Zahlen $(x_1; x_2; x_3)$ als Tripel, \\
+    vier Zahlen $(x_1; x_2; x_3; x_4)$ als Quadrupel, \\
+    fünf Zahlen $(x_1; x_2; x_3; x_4; x_5)$ als Quintupel \mbox{usw.} \\
+    Ist die Anzahl der Zahlen durch eine natürliche Zahl $n$ gegeben, 
+    die nicht konkret bekannt ist, so spricht man bei $(x_1; x_2; \ldots; x_n)$ 
+    von einem $n$\textit{-Tupel}.
+    \\
+    Dabei ist zu beachten, dass bei einem $n$-Tupel, im Gegensatz zu einer 
+    $n$-elementigen Menge, die \emph{Reihenfolge der Zahlen} eine Rolle spielt. 
+    So sind zum Beispiel die Mengen $\,\{1;5;4\}\,$ und $\,\{5;1;4\}\,$ gleich,
+    die Tripel $\,(1;5;4)\,$ und $\,(5;1;4)\,$ sind jedoch verschieden.
+    }
+    \lang{en}{
+    A $2$-tuple $(x_1; x_2)$ is called a double or a pair, \\
+    A $3$-tuple $(x_1; x_2; x_3)$ is called a treble or a triplet, \\
+    A $4$-tuple $(x_1; x_2; x_3; x_4)$ is called a quad or a quartet, \\
+    A $5$-tuple $(x_1; x_2; x_3; x_4; x_5)$ is called a pentuplet, \mbox{etc.} \\
+    Of course an $n$-tuple is $(x_1; x_2; x_3;... ;x_{n-1}; x_n)$, and this term is 
+    also used whenever the number of entries is unknown.
+    \\
+    Attention must be paid to the distinction between an $n$-tuple and a set 
+    containing $n$ elements. The \emph{order} of the entries of a tuple matters - 
+    the triplets $\,(1;5;4)\,$ and $\,(5;1;4)\,$ are distinct, as their elements 
+    are in different orders.
+    }
+  \end{tabs*}
+\lang{de}{
+Bei kleineren LGS heißen die Variablen häufig auch z.\,B. $x$, $y$, $z$, $\ldots \,$ 
+statt $\,x_1$, $x_2$, $x_3$, $\ldots$. In dem Fall erfolgt die Angabe der Lösung 
+als $n$-Tupel in alphabetischer Reihenfolge.
+\\
+Üblich ist im Allgemeinen auch, dass die Gleichungen in einem LGS nummeriert sind, 
+so wie in den nachfolgenden Beispielen. Dies dient der besseren Referenzierbarkeit
+auf einzelne Gleichungen.
+}
+\lang{en}{
+In smaller linear systems, the variables are often called $x$, $y$, $z$, $\ldots \,$ 
+instead of $\,x_1$, $x_2$, $x_3$, $\ldots$. In that case a tuple representing 
+variable values does so in alphabetical order.
+\\
+It is typical for the equations in a system to be numbered, as they are in the 
+following example. This is done so that any of the equations may be unambiguously 
+referred to.
+}
+
+\begin{example} \label{ex:bsp_lgs_1}
+%\textbf{Beispiel 1}
+%
+
+  \begin{displaymath}
+  \begin{mtable}[\cellaligns{crcrcr}]
+  \text{(I)}&\quad  3x&-&4y&=&2\\
+  \text{(II)}&\quad 2x&+&3y&=&7
+  \end{mtable}
+  \end{displaymath}
+\lang{de}{
+Dies ist ein lineares Gleichungssystem mit zwei Gleichungen und zwei Unbekannten 
+$x$ und $y$. Das Zahlenpaar $(x;y)=(2; 1)$ erfüllt sowohl die Gleichung \textbf{(I)} 
+als auch die Gleichung \textbf{(II)} und ist somit eine Lösung für dieses LGS.
+}
+\lang{en}{
+This is a linear system with two equations and two variables $x$ and $y$. The tuple 
+$(x;y)=(2; 1)$ satisfies both equation \textbf{(I)} and equation \textbf{(II)}, thus 
+is a solution to this system.
+}
+
+
+%  Wir suchen zunächst eine Lösung der Gleichung \textbf{(I)}
+%  und lösen diese hierzu gemäß dem Verfahren \ref{alg:lin_gleichung} nach $x$ auf.
+%  \begin{align*}
+%      &&\quad					3x-4y	&=2		                    &		&\vert +4y&\\
+%      &\Leftrightarrow&\quad 	3x 	    &=2 + 4y		            &		&\vert :3&\\
+%      &\Leftrightarrow&\quad 	x		&=\frac{2}{3}+\frac{4}{3} y	&		&&
+%    \end{align*}
+%  Setzen wir nun für $y$ zum Beispiel den Wert $1$ ein, so erhalten wir $x=2$. 
+
+\end{example}
+
+
+\begin{example}\label{ex:bsp_lgs_2}
+%\textbf{Beispiel 2}
+%
+\begin{displaymath}
+\begin{mtable}[\cellaligns{ccrcrcrcr}]
+\text{(I)}&&x_{1}&+&2x_{2}&+&x_{3}&=&4\\
+\text{(II)}&&x_{1}&-&x_{2}&+&\frac{3}{2}x_{3}&=&-7\\
+\text{(III)}&\qquad-&4x_{1}&+&2x_{2}&&&=&-2
+\end{mtable}
+\end{displaymath}
+\lang{de}{
+Es handelt sich um ein lineares Gleichungssystem mit drei Gleichungen und drei Unbekannten.
+Das Zahlentripel $(x_1;x_2;x_3)=(2; 3; -4)$ ist eine Lösung des linearen Gleichungssystems, 
+da für $\,x_{1}=2$, $x_{2}=3$ und $x_{3}=-4$ alle drei Gleichungen erfüllt sind.
+}
+\lang{en}{
+This is a linear system with three equations and three variables. The tuple 
+$(x_1;x_2;x_3)=(2; 3; -4)$ is a solution of the linear system, as all three 
+equations are satisfied if we set $\,x_{1}=2$, $x_{2}=3$ and $x_{3}=-4$.
+}
+\end{example}
+
+\begin{remark} \label{rem:lgs}
+\lang{de}{
+Ein lineares Gleichungssystem hat 
+% ähnlich wie eine lineare Gleichung (s. \ref{alg:lin_gleichung}), 
+entweder \emph{genau eine Lösung},
+wie in den beiden vorstehenden Beispielen \ref{ex:bsp_lgs_1} und \ref{ex:bsp_lgs_2},
+oder es besitzt \emph{keine} oder \emph{unendlich viele} Lösungen, wie das Beispiel \ref{ex:nicht-eindeutig-loesbar} 
+oder auch das folgende Video zeigt. 
+%
+%%% Video K.M.
+% 
+\center{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10840&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}\\
+%
+Eine mathematische Erklärung hierzu ist in dem vertiefenden Kapitel zu 
+\link{lineare_gleichungssysteme}{Linearen Gleichungssystemen} zu finden.
+}
+\lang{en}{
+A linear system has either \emph{precisely one solution}, like in the previous 
+examples \ref{ex:bsp_lgs_1} and \ref{ex:bsp_lgs_2}, or it has \emph{no solutions}, 
+or it has \emph{infinitely many solutions}, like in the following example 
+\ref{ex:nicht-eindeutig-loesbar}.
+\\
+A mathematical explanation for this can be found in the more advanced chapter on 
+\link{lineare_gleichungssysteme}{systems of linear equations}.
+}
+\end{remark}
+
+
+\begin{example}\label{ex:nicht-eindeutig-loesbar}
+\begin{tabs*}[\initialtab{0}]
+%
+  \tab{\lang{de}{LGS ohne Lösung}\lang{en}{Linear system with no solutions}}
+  \[ \begin{mtable}[\cellaligns{crcrcr}]
+  \text{(I)}&\qquad 2 \cdot  x & - & 4 \cdot  y & = & 10 \\
+  \text{(II)}&-3 \cdot  x & + & 6\cdot y & =  & -10
+  \end{mtable} \]
+  \lang{de}{
+  L"ost man die erste Gleichung nach $x$ auf, erh"alt man $x=5+2y$.
+  \\
+  Einsetzen in die zweite Gleichung ergibt:
+  }
+  \lang{en}{
+  Rearranging the first equation for $x$ yields $x=5+2y$.
+  \\
+  Substituting this into the second equation gives:
+  }
+  
+  \[
+  \begin{mtable}[\cellaligns{crcr}]
+  & -3 \cdot  (5+2y)  +  6\cdot y & =  & -10 \\
+  \Leftrightarrow & \quad -15-6y +6y &=& -10\\
+  \Leftrightarrow & \quad  -15 &=& -10 
+  \end{mtable}\]
+
+  \lang{de}{
+  Diese Gleichung ist nie erf"ullt. Es gibt also kein Zahlenpaar $(x;y)$, das das Gleichungssystem erfüllt, d.\,h.
+  }
+  \lang{en}{
+  This equation is never satisfied, so there does not exist a tuple $(x;y)$ that 
+  satisfies both equation, that is
+  }
+  \[ \mathbb{L}=\{ \}. \]
+%
+  \tab{\lang{de}{LGS mit unendlich vielen Lösungen}
+       \lang{en}{Linear systems with infinitely many solutions}}
+  \[  
+  \begin{mtable}[\cellaligns{crcrcr}]
+  \text{(I)}&\qquad 2 \cdot  x & - & 4 \cdot  y & = & 10 \\
+  \text{(II)}&-3 \cdot  x & + & 6\cdot y & =  & -15
+  \end{mtable} \]
+  \lang{de}{
+  L"ost man die erste Gleichung nach $x$ auf, erh"alt man
+  }
+  \lang{en}{
+  Rearranging the first equation for $x$ yields
+  }
+      \begin{displaymath}
+           \text{(I*)}  \qquad x=5+2y.  
+      \end{displaymath}
+
+  \lang{de}{
+  Einsetzen in die zweite Gleichung ergibt:
+  }
+  \lang{en}{
+  Substituting this into the second equation gives:
+  }
+  \[\begin{mtable}[\cellaligns{crcr}]
+  & -3 \cdot  (5+2y)  +  6\cdot y & =  & -15 \\
+  \Leftrightarrow & \quad -15-6y +6y &=& -15\\
+  \Leftrightarrow & \quad  -15 &=& -15 
+  \end{mtable}\]
+
+  \lang{de}{
+  Diese Gleichung ist immer erf"ullt. Es bleibt also nur die Bedingung $\, x=5+2y\,$ aus 
+  \textbf{(I*)}, d.\,h.
+  für jede beliebige reelle Zahl $y$ ist das Paar $(5+2y;y)$ eine Lösung 
+  des linearen Gleichungssystems. Die Lösungsmenge ist somit
+  }
+  \lang{en}{
+  This equation is always satisfied. Hence the only condition needed for our $(x;y)$ 
+  to satisfy both equations is $\, x=5+2y\,$ from \textbf{(I*)}. Therefore for any 
+  real number $y$, the tuple $(5+2y;y)$ is a solution of the linear system. The 
+  solution set is therefore 
+  }
+  % \[ \mathbb{L}=\left\{ \left(\begin{smallmatrix} 5+2y \\ y \end{smallmatrix}\right) \mid\, y\in \R \right\}
+  % = \left\{ \begin{pmatrix}5\\ 0 \end{pmatrix}+r\cdot \begin{pmatrix} 2 \\ 1 \end{pmatrix} \mid\, r\in \R \right\} \] 
+
+  \[ \mathbb{L}=\left\{ (5+2y;y) \mid\, y\in \R \right\}. \]
+
+\end{tabs*}
+\end{example}
+
+\lang{de}{
+Zur Bestimmung der Lösungsmenge eines linearen Gleichungssystems gibt es, wie wir in den Beispielen und dem Video
+bereits erkennbar, verschiedene Ansätze und Verfahren, die wir uns nachfolgend noch einmal genauer anschauen werden.
+Dabei beschränken wir uns im Rahmen dieses Kapitels zunächst auf die Einführung der folgenden elementaren 
+Lösungsverfahren:
+}
+\lang{en}{
+As we have seen in the examples, there are several approaches and methods for solving 
+systems of linear equations, which we will look at more closely now. 
+In this chapter the methods that we will examine are the following:
+}
+
+\begin{itemize}
+    \item \lang{de}{\ref[content_05_loesen_gleichungen_und_lgs][Additionsverfahren]{alg:additionsverfahren},}
+          \lang{en}{\ref[content_05_loesen_gleichungen_und_lgs][addition method]{alg:additionsverfahren},}
+    \item \lang{de}{\ref[content_05_loesen_gleichungen_und_lgs][Einsetzungsverfahren]{alg:einsetzungsverfahrene},}
+          \lang{en}{\ref[content_05_loesen_gleichungen_und_lgs][substitution method]{alg:einsetzungsverfahrene} and}
+    \item \lang{de}{\ref[content_05_loesen_gleichungen_und_lgs][Gleichsetzungsverfahren]{alg:gleichsetzungsverfahren}.}
+          \lang{en}{\ref[content_05_loesen_gleichungen_und_lgs][equality method]{alg:gleichsetzungsverfahren}.}
+\end{itemize}
+
+\lang{de}{
+Bei allen drei Verfahren handelt es sich um Methoden, um das lineare 
+Gleichungssystem schrittweise auf eine lineare Gleichung (mit nur einer Variablen) zu reduzieren, die dann 
+gemäß \ref{alg:lin_gleichung} gelöst werden kann. Diese Verfahren eignen sich gut zur Lösung kleiner 
+linearer Gleichungssysteme. Deshalb verwenden wir zur Einführung der drei Verfahren lineare Gleichungssysteme 
+mit 2 Gleichungen und 2 Unbekannten, die zudem genau eine Lösung haben, und erläutern anhand eines 
+Beispiels mit 3 Gleichungen und 3 Unbekannten, wie das Verfahren bei größeren LGS anzuwenden ist.
+Für größere Gleichungssysteme und solche, in denen die Anzahl der Gleichungen von der Anzahl der Variablen
+abweicht, gibt es allgemeinere und effektivere Lösungsverfahren, wie zum Beispiel das 
+\ref[gauss-verfahren][Gauß-Verfahren]{ezu}, die später im vertiefenden Kapitel über 
+Linearen Gleichungssysteme eingeführt werden.
+}
+\lang{en}{
+Each of these three methods aims to reduce a system of linear equations into a single 
+linear equation in one variable. This can then be solved using algorithm 
+\ref{alg:lin_gleichung}. The methods are only practical for solving small linear 
+systems, so systems with two equations, two variables and a single solution are used 
+to introduce them. Examples are then given using systems with three equations and 
+three variables. 
+There are more general and efficient algorithms for solving larger systems of linear 
+equations, and those with a different number of equations from the number of 
+variables. For example, there is \ref[gauss-verfahren][Gaussian elimination]{ezu}, 
+an algorithm covered in the more advanced chapter about linear systems.
+}
+\\
+
+% \section{\lang{de}{Das Additionsverfahren}\lang{en}{The Addition Method (the Elimination Method)}} \label{sec:additionsverfahren}
+\lang{de}{
+Zur Beschreibung der Lösungsverfahren betrachten wir das LGS aus \ref{ex:bsp_lgs_1}.
+}
+\lang{en}{
+To introduce the methods for solving linear systems, we use the system from example 
+\ref{ex:bsp_lgs_1}.
+}
+
+\begin{algorithm}[\lang{de}{Additionsverfahren}
+                  \lang{en}{Addition method}] \label{alg:additionsverfahren}
+
+\begin{displaymath}
+  \begin{mtable}[\cellaligns{crcrcr}]
+    \text{(I)}&\qquad3x&-&4y&=&2\\
+    \text{(II)}&\qquad2x&+&3y&=&7
+  \end{mtable}
+  \end{displaymath}
+
+%    Die Zielsetzung bei der Anwendung des Additionsverfahrens ist also die Eliminierung einer der beiden
+%    Variablen und die Reduktion um eine Gleichungen, um die zweite Variable als Lösung einer linearen
+%    Gleichung zu bestimmen.
+
+\begin{enumerate}
+\item[\notion{\lang{de}{1. Schritt}\lang{en}{First step}}]
+    \lang{de}{
+    Zuerst wird, falls erforderlich, eine oder beide Gleichungen jeweils mit einer 
+    Zahl $c\neq0\,$ so multipliziert, dass nach anschließender Addition der beiden Gleichungen 
+    (mindestens) eine Variable nicht mehr vorkommt.
+    \\
+    In unserem Beispiel multiplizieren wir etwa die Gleichung \textbf{(I)} mit $\,-2\,$ 
+    und die Gleichung \textbf{(II)} mit $\,3\,$, so dass die neuen
+    Koeffizienten vor der Variablen $\,x\,$ aufaddiert $0$ ergeben.
+    }
+    \lang{en}{
+    Firstly, if it is necessary, we multiply one or both of the equations by a number 
+    $c\neq0\,$ such that subsequently summing the two equations will cancel out (at 
+    least) one of the variables.
+    \\
+    In our example, we multiply equation \textbf{(I)} by $\,-2\,$ and equation 
+    \textbf{(II)} by $\,3\,$, so that the new coefficients of the variable $x$ sum to 
+    $0$.
+    }
+      \begin{displaymath}
+      \begin{mtable}[\cellaligns{ccrcrcrl}]
+      \text{(I)}&\phantom{\qquad-}&3x&-&4y&=&\phantom{-}2&\qquad|\,\cdot(-2)\\
+      \text{(II)}&&2x&+&3y&=&7&\qquad|\,\cdot3
+      \end{mtable}
+      \end{displaymath}
+      \begin{center}
+      ________________________________________________
+      \end{center}
+      \begin{displaymath}
+      \begin{mtable}[\cellaligns{ccrcrcrl}]
+      \phantom{\text{(I)}}&\qquad-&6x&+&8y&=&-4&\phantom{\qquad|\,\cdot(-2)}\\
+      \phantom{\text{(II)}}&&6x&+&9y&=&21&
+      \end{mtable}
+      \end{displaymath}
+    \lang{de}{
+    Die Addition der beiden Gleichungen führt nunmehr zur Elimination der 
+    Variablen $x$.
+    }
+    \lang{en}{
+    Summing the two equations now eliminates the variable $x$.
+    }
+
+\item[\notion{\lang{de}{2. Schritt}\lang{en}{Second step}}]
+    \lang{de}{
+    Die Addition der beiden Gleichungen erfolgt, indem jeweils die Terme rechts und die Terme 
+    links des Gleichheitszeichens addiert werden. Die dadurch entstandene neue Gleichung ist, aufgrund der Elimination
+    von $x$, eine \emph{lineare Gleichung} in der Variablen $y$ und wird als solche gemäß \ref{alg:lin_gleichung} gelöst:
+    }
+    \lang{en}{
+    Summing the two equations means adding the left side of the new equation 
+    \textbf{(II)} to the left side of the new equation \textbf{(I)}, and adding the 
+    right side of the new equation \textbf{(II)} to the right side of the new 
+    equation \textbf{(I)}. The result is a \emph{linear equation} in $y$, and will 
+    be solved using algorithm \ref{alg:lin_gleichung}:
+    }
+    
+
+        \begin{displaymath}
+        17y=17 \quad \Leftrightarrow \quad y=1
+        \end{displaymath}
+      
+\item[\notion{\lang{de}{3. Schritt}\lang{en}{Third step}}]
+    \lang{de}{
+    Das Ergebnis $y=1$ wird nun in eine beliebige der beiden Ausgangsgleichungen 
+    eingesetzt, um hieraus die Variable $\,x\,$ zu bestimmen. $y=1$ eingesetzt in
+    Gleichung \textbf{(I)} ergibt
+    }
+    \lang{en}{
+    The solution $y=1$ can now be substituted into either of the two original 
+    equations to find which value for $\,x\,$ they hold for. $y=1$ substituted into 
+    equation \textbf{(I)} yields
+    }
+    
+        \begin{displaymath}
+        3x-4\cdot1=2 \quad \Leftrightarrow \quad x=2. 
+        \end{displaymath}
+
+        \lang{de}{
+        Das Einsetzen in die Gleichung \textbf{(II)} liefert selbstverständlich dasselbe Ergebnis.        
+        Somit ist das Zahlenpaar $(2; 1)$ als eindeutige Lösung des LGS bestimmt und es gilt
+        }
+        \lang{en}{
+        Substituting it into equation \textbf{(II)} yields the same solution. Thus 
+        the tuple $(2; 1)$ is the unique solution of the linear system, that is,
+        }
+        \begin{displaymath}
+        \mathbb{L}=\{(2; 1)\}.   
+        \end{displaymath}
+
+%\end{table} 
+\end{enumerate}
+\end{algorithm}
+
+
+\textbf{\lang{de}{Anmerkungen:}\lang{en}{Notes:}}
+  \begin{itemize}
+
+    \item \lang{de}{
+        Bei der Umformung in Schritt 1 gibt es viele Möglichkeiten, um zum 2. Schritt zu gelangen.
+        }
+        \lang{en}{
+        There are several ways to get from the first to the second step.
+        }
+      \begin{itemize}    
+         \item \lang{de}{
+             Um die Variable $x$ zu eliminieren, kann auch einfach die Gleichung 
+             \textbf{(I)} mit $\,-\frac{2}{3}\,$ multipliziert werden.
+             }
+             \lang{en}{
+             To eliminate the variable $x$ we can also multiply equation \textbf{(I)} 
+             by $\,-\frac{2}{3}\,$.
+             }
+             \begin{showhide}
+             \begin{enumerate}
+
+             \item \lang{de}{
+                 Dann erhält man als Ausgangspunkt für Schritt 2 das folgende LGS:
+                 }
+                 \lang{en}{
+                 Then we obtain the following system for the second step:
+                 }
+                  \begin{displaymath}
+                  \begin{mtable}[\cellaligns{ccrcrcrl}]
+                    \text{(I)}&\qquad-&2x&+&\frac{8}{3}y&=&-\frac{4}{3}&\phantom{\qquad|\,\cdot(-2)}\\
+                    \text{(II)}&&2x&+&3y&=&7&
+                  \end{mtable}
+                  \end{displaymath}
+ 
+              \item \lang{de}{
+                  Die Addition der beiden Gleichungen führt nun zu einer Gleichung,
+                  in der $x$ nicht mehr vorkommt:
+                  }
+                  \lang{en}{
+                  Summing the two equations now leads to an equation with no terms in 
+                  $x$.
+                  }
+              \begin{displaymath}
+              \frac{17}{3}y=\frac{17}{3} \quad \Leftrightarrow \quad y=1
+              \end{displaymath}
+ 
+              \item \lang{de}{
+                  Die Bestimmung von $x$ erfolgt dann analog zu Schritt 3 in \ref{alg:additionsverfahren}
+                  und wir erhalten wieder $\; \mathbb{L}=\{(2;{,} 1)\}.$
+                  }
+                  \lang{en}{
+                  The value for $x$ that solves the equation can then be found 
+                  anagolously to step 3 in algorithm \ref{alg:additionsverfahren}.
+                  }
+            \end{enumerate}
+            \end{showhide}
+
+      \item \lang{de}{
+          Man kann auch die Variable $y$ statt $x$ eliminieren, indem in Schritt 1 die Gleichung 
+          \textbf{(II)} mit $\frac{4}{3}$ multipliziert wird.
+          }
+          \lang{en}{
+          We could also eliminate the variable $y$ instead of $x$, by multiplying 
+          equation \textbf{(II)} by $\frac{4}{3}$ in the first step.
+          }
+         
+        \begin{showhide}
+
+        % \begin{example}
+        % \textbf{Beispiel 4}
+        %
+        \begin{enumerate}
+         \item \lang{de}{
+          Wir starten also mit der Multiplikation der Gleichung \textbf{(II)} mit $\frac{4}{3}$:
+          }
+          \lang{en}{
+          We begin by multiplying equation \textbf{(II)} by $\frac{4}{3}$:
+          }
+          \begin{displaymath}
+          \begin{mtable}[\cellaligns{crcrccl}]
+          \text{(I)}&\qquad3x&-&4y&=&\,\,\,2\,\,\,&\\
+          \text{(II)}&\qquad2x&+&3y&=&\,\,\,7\,\,\,&\qquad|\,\cdot\frac{4}{3}
+          \end{mtable}
+          \end{displaymath}
+          \begin{center}
+          ___________________________________________
+          \end{center}
+          \begin{displaymath}
+          \begin{mtable}[\cellaligns{crcrccl}]
+          \phantom{\text{(I)}}&\qquad3x&-&4y&=&2&\phantom{\qquad|\,\cdot\frac{4}{3}}\\
+          \phantom{\text{(II)}}&\frac{8}{3}x&+&4y&=&\frac{28}{3}&
+          \end{mtable}
+          \end{displaymath}
+          \item
+          \lang{de}{
+          Die Addition der beiden Gleichungen f\"uhrt nun zu einer Gleichung, in der $y$ nicht mehr vorkommt:
+          }
+          \lang{en}{
+          Summing the two equations now leads to an equation with no terms in $y$.
+          }
+          \begin{displaymath}
+          \frac{17}{3}x=\frac{34}{3} \quad \Leftrightarrow \quad x=2
+          \end{displaymath}
+          \item \lang{de}{
+          Wir setzen das Ergebnis in eine der Ausgangsgleichungen ein und bestimmen daraus $y$:
+          }
+          \lang{en}{
+          We substitute the result into one of the original equations and determine 
+          $y$:
+          }
+          \begin{displaymath}
+          3\cdot2-4y=2 \quad \Leftrightarrow \quad y=1
+          \end{displaymath}
+          \lang{de}{
+          Die Lösungsmenge ist also abermals
+          }
+          \lang{en}{
+          The solution set is again
+          }
+          \begin{displaymath}
+          \mathbb{L}=\{(2; 1)\}.   
+          \end{displaymath}
+        \end{enumerate}
+        \end{showhide}
+ 
+    \item \lang{de}{
+        Sofern beide Gleichungen eines LGS zu einer Variablen gleiche Koeffizienten haben, wird
+        eine der beiden Gleichungen mit $(-1)\,$ multipliziert und man startet direkt mit dem 2. Schritt.
+        Dies entspricht quasi einer Subtraktion statt einer Addition im 2. Schritt.
+        }
+        \lang{en}{
+        If two equations in a linear system have the same coefficient for one 
+        variable, we may simply multiply one of the equations by $(-1)\,$ and begin 
+        with the second step. This is equivalent to subtracting one equation from the 
+        other.
+        }
+    \end{itemize}
+
+    \item \lang{de}{
+        Zur Lösung \glqq größerer\grqq linearer Gleichungssysteme mit dem Additionsverfahren erfolgt die Addition in 
+        Schritt 2 so, dass \textbf{eine} ausgewählte Gleichung zu jeder der anderen Gleichungen addiert wird und 
+        hierdurch in allen Gleichungen \textbf{eine} ausgewählte Variable eliminiert wird. Die Schritte 1 und 2 werden
+        dann so oft wiederholt, bis das LGS auf eine lineare Gleichung mit nur noch einer Variablen reduziert ist.
+        \\
+        Schauen wir uns das beispielhaft an dem linearen Gleichungssystem 
+        mit 3 Gleichungen und 3 Unbekannten aus Beipiel \ref{ex:bsp_lgs_2} an.
+        }
+        \lang{en}{
+        For solving 'larger' systems of linear equations with the addition method, 
+        a single equation is chosen to add to all of the other equations. If they 
+        each have been multiplied by appropriate constants, a variable can be 
+        eliminated from every equation but one. Repeating this (essentially the 
+        first and second steps) yields new equations with progressively fewer 
+        variables. Once there is an equation with only one variable, we can solve 
+        this and then begin substituting back into the other equations to find the 
+        values of the other variables.
+        \\
+        Let us look at an example linear system with three equations and three 
+        variables.
+        }
+
+      \begin{example}[\lang{de}{LGS mit 3 Gleichungen und 3 Unbekannten}
+                      \lang{en}{Linear system with 3 equations and 3 variables}] \label{ex:additionsverfahren_3_3}
+%      \begin{tabs*}[\initialtab{0}] 
+%      \tab{\lang{de}{Beispiel zur Lösung eines LGS mit 3 Gleichungen und 3 Unbekannten}\lang{en}{Example}}
+      \begin{showhide}
+
+        \begin{displaymath}
+        \begin{mtable}[\cellaligns{ccrcrcrcr}]
+        \text{(I)}&&x_{1}&+&2x_{2}&+&x_{3}&=&4\\
+        \text{(II)}&&x_{1}&-&x_{2}&+&\frac{3}{2}x_{3}&=&-7\\
+        \text{(III)}&\qquad-&4x_{1}&+&2x_{2}&&&=&-2
+        \end{mtable}
+        \end{displaymath}   
+         \begin{enumerate}
+             \item \lang{de}{
+             Wir multiplizieren die Gleichungen \textbf{(I)} und \textbf{(II)} jeweils mit $4$,
+             um anschließend die Gleichung \textbf{(III)} jeweils einmal zu \textbf{(I)} und zu \textbf{(II)} 
+             zu addieren:
+             }
+             \lang{en}{
+             We multiply both equations \textbf{(I)} und \textbf{(II)} by $4$ and 
+             then add equation \textbf{(III)} to both \textbf{(I)} and \textbf{(II)}:
+             }
+             \begin{displaymath}
+              \begin{mtable}[\cellaligns{ccrcrcrcr}]
+              \text{(I)}&&4x_{1}&+&8x_{2}&+&4x_{3}&=&16\\
+              \text{(II)}&&4x_{1}&-&4x_{2}&+&6x_{3}&=&-28\\
+              \text{(III)}&\qquad-&4x_{1}&+&2x_{2}&&&=&-2
+              \end{mtable}
+             \end{displaymath}   
+             \begin{center}
+              _____________________________________________________
+             \end{center}
+             \begin{displaymath}
+              \begin{mtable}[\cellaligns{ccrcrcrcr}]
+              \text{(IV)}&=&\text{(I)}+\text{(III)}&\quad&10x_{2}&+&4x_{3}&=&14\\
+              \text{(V)}&=&\text{(II)}+\text{(III)}&\quad-&2x_{2}&+&6x_{3}&=&-30
+              \end{mtable}
+             \end{displaymath}
+             \lang{de}{
+             In diesem ersten Schritt haben wir $x_1$ eliminiert und das Gleichungssystem auf
+             ein LGS mit 2 Unbekannten ($x_2$ und $x_3$) und 2 Gleichungen (\textbf{(IV)} und \textbf{(V)})
+             reduziert. Dieses neue LGS können wir nun gemäß dem in \ref{alg:additionsverfahren} 
+             beschriebenen Verfahren lösen.
+             }
+             \lang{en}{
+             In this first step we have eliminated $x_1$ and reduced the linear 
+             system into one with two variables ($x_2$ and $x_3$) and two equations 
+             (\textbf{(IV)} and \textbf{(V)}). This new linear system can now be 
+             solved using algorithm \ref{alg:additionsverfahren}.
+             }
+             
+             \item \lang{de}{
+             Wir multiplizieren daher die Gleichung \textbf{(IV)} mit $-\frac{3}{2}$ und erhalten das folgende 
+              kleinere LGS:
+              }
+              \lang{en}{
+              We multiply equation \textbf{(IV)} by $-\frac{3}{2}$ and obtain the 
+              smaller linear system:
+              }
+             \begin{displaymath}
+              \begin{mtable}[\cellaligns{ccrcrcrcr}]
+                &&&\qquad-&15x_{2}&-&6x_{3}&=&-21\\
+                &&&\qquad-&2x_{2}&+&6x_{3}&=&-30
+              \end{mtable}
+             \end{displaymath}  
+             
+             \item \lang{de}{
+             Anschließend addieren wir die beiden Gleichungen, um $x_3$ zu eliminieren
+             und nach $x_2$ aufzulösen:
+             }
+             \lang{en}{
+             Finally we sum the two equations to eliminate $x_3$ and solve for $x_2$:
+             }
+              \begin{displaymath}
+             -17\cdot x_2=-51 \quad \Leftrightarrow \quad x_2=3
+             \end{displaymath} 
+             
+             \item \lang{de}{
+                Der Wert $x_2=3$ eingesetzt in \textbf{(IV)} oder \textbf{(V)} liefert $x_3=-4$ 
+                und diese beiden Ergebnisse eingesetzt in \textbf{(I)}, \textbf{(II)} 
+                oder \textbf{(III)} liefern $x_1=2$. Wir erhalten so das Zahlentripel $(2;3;-4)$
+                als eindeutige Lösung des LGS und schließlich
+                }
+                \lang{en}{
+                The value $x_2=3$ substituted into \textbf{(IV)} or \textbf{(V)} 
+                yields $x_3=-4$, and substituting both of these into \textbf{(I)}, 
+                \textbf{(II)} or \textbf{(III)} gives $x_1=2$. We thus obtain the 
+                triplet $(2;3;-4)$ as the unique solution of the linear system.
+                }
+          \begin{displaymath}
+          \mathbb{L}=\{(2;3;-4)\}.   
+          \end{displaymath}
+          
+         \end{enumerate}
+%        \end{tabs*}          
+        \end{showhide}
+        \end{example}
+        
+    \item \lang{de}{
+    Enthält eine der Gleichungen von Anfang an nur eine Variable, kann man das LGS ohne Addition
+    lösen. Beim LGS
+    } % Only if it has two equations and not more - Niccolo
+    \lang{en}{
+    If one of the equations contains only one variable from the beginning, a linear 
+    system with two equations can be solved without any further additions. For the 
+    linear system 
+    }
+      \begin{displaymath}
+      \begin{mtable}[\cellaligns{crcrcr}]
+      \text{(I)}&\qquad3x&-&4y&=&2\\
+      \text{(II)}&&&17y&=&17
+      \end{mtable}
+      \end{displaymath}
+    \lang{de}{
+    löst man die zweite Gleichung direkt nach $y$ auf und setzt diesen Wert anschließend 
+    in die erste Gleichung ein, um den zugehörigen Wert für $x$ zu berechnen. Hierfür wird das 
+    \emph{Einsetzungsverfahren} benutzt, das nun als Nächstes beschrieben wird.
+    }
+    \lang{en}{
+    we immediately solve the second equation for $y$ and substitute this value into 
+    the first equation to obtain the corresponding value for $x$.
+    }
+    \end{itemize}
+
+% \section{\lang{de}{Das Einsetzungsverfahren und das Gleichsetzungsverfahren}\lang{en}{The Substitution and Equality Methods}}\label{sec:einsetzungsverfahren}
+% \lang{de}{Ein weiteres Verfahren zum L\"osen eines LGS ist das \textit{Einsetzungsverfahren}. Wir gehen das Verfahren wieder schrittweise durch.}
+
+\begin{algorithm}[\lang{de}{Einsetzungsverfahren}
+                  \lang{en}{Substitution method}] \label{alg:einsetzungsverfahren}
+
+    \begin{displaymath}
+    \begin{mtable}[\cellaligns{crcrcr}]
+      \text{(I)}&\qquad3x&-&4y&=&2\\
+      \text{(II)}&\qquad2x&+&3y&=&7
+    \end{mtable}
+    \end{displaymath}
+
+  \begin{enumerate}
+   \item[\notion{\lang{de}{1. Schritt}\lang{en}{First step}}] \lang{de}{
+        Zunächst wird eine der beiden Gleichungen nach einer der beiden Variablen
+        aufgelöst. Wir wählen in unserem Beispiel die Gleichung \textbf{(II)}, lösen diese 
+        nach $x$ auf und benennen sie zur weiteren Referenzierung mit \textbf{(II*)}.
+        }
+        \lang{en}{
+        Firstly we rearrange one of the two equations for one of the variables. In 
+        the example we choose equation \textbf{(II)} and rearrange it for $x$, 
+        calling the rearranged equation \textbf{(II*)}.
+        }
+        \begin{displaymath}
+          \text{(II*)}  \qquad x=\frac{7}{2}-\frac{3}{2}y  \qquad \qquad
+        \end{displaymath}
+     
+    \item[\notion{\lang{de}{2. Schritt}\lang{en}{Second step}}] \lang{de}{
+        Nun setzt man den aufgelösten Term in die jeweils andere 
+        Gleichung ein, um diese zu lösen:
+        }
+        \lang{en}{
+        Now we substitute the rearranged expression into the other equation, and 
+        solve this for the other variable:
+        }
+        
+        \begin{displaymath}
+        3\cdot\Big(\frac{7}{2}-\frac{3}{2}y\Big)-4y=2 \quad \Leftrightarrow \quad y=1 
+        \end{displaymath} 
+        \lang{de}{
+        \textbf{(II*)} eingesetzt in Gleichung \textbf{(I)} liefert also $y=1$.
+        }
+        \lang{en}{
+        \textbf{(II*)} substituted into the equation \textbf{(I)} yields $y=1$.
+        }
+        
+   \item[\notion{\lang{de}{3. Schritt}\lang{en}{Third step}}] \lang{de}{
+        Der Wert der anderen Variablen wird bestimmt, indem man das Ergebnis aus dem 2. Schritt
+        in die aufgelöste Gleichung aus Schritt 1 einsetzt. In unserem Beispiel setzen wir daher nun
+        $y=1$ in die Gleichung \textbf{(II*)} ein und erhalten:
+        }
+        \lang{en}{
+        The values of the other variable is determined by substituting the result 
+        from the second step into the rearranged equation from the first step. In 
+        this example we substitute $y=1$ into equation \textbf{(II*)} and obtain:
+        }
+          \begin{displaymath}
+            x=\frac{7}{2}-\frac{3}{2}\cdot1=2
+          \end{displaymath}
+        \lang{de}{
+        Die Lösungsmenge ist also  
+        }
+        \lang{en}{
+        The solution set is therefore 
+        }
+        $\quad \mathbb{L}=\{(2; 1)\}.$
+      
+  \end{enumerate}
+\end{algorithm}
+
+
+\lang{de}{\textbf{Anmerkungen:}}\lang{en}{\textbf{Notes:}}
+\begin{itemize}
+
+%   Überflüssig ?
+%  \item Selbstverständlich kann man in Schritt 1 auch eine der beiden Gleichungen nach
+%      $y$ auflösen, um in Schritt 2 zunächst den Wert für $x$ zu bestimmen.
+        
+  \item \lang{de}{
+        Ähnlich wie beim Additionsverfahren ist zur Lösung \glqq größerer\grqq linearer Gleichungssysteme mit dem 
+        Einsetzungsverfahren eine Wiederholung der Schritte 1 und 2 so oft erforderlich, bis das LGS auf 
+        eine lineare Gleichung mit nur einer Variablen reduziert ist.
+        \\
+        Wir wenden das \emph{Einsetzungsverfahren} nachfolgend auf das lineare Gleichungssystem aus 
+        Beipiel \ref{ex:bsp_lgs_2} an.
+        }
+        \lang{en}{
+        Similarly to the addition method, for larger systems the first and second 
+        steps need to be repeated until the linear system is reduced to one with a 
+        single variable.
+        \\
+        We now apply the \emph{substitution method} to the linear system from example 
+        \ref{ex:bsp_lgs_2}.
+        }
+        
+      \begin{example}[\lang{de}{LGS mit 3 Gleichungen und 3 Unbekannten}
+                      \lang{en}{Linear system with 3 solutions and 3 variables}] \label{ex:einsetzungsverfahren_3_3}
+%      \begin{tabs*}[\initialtab{0}] 
+%      \tab{\lang{de}{Beispiel zur Lösung eines LGS mit 3 Gleichungen und 3 Unbekannten}\lang{en}{Example}}
+      \begin{showhide}
+      \begin{displaymath}
+      \begin{mtable}[\cellaligns{ccrcrcrcr}]
+      \text{(I)}&&x_{1}&+&2x_{2}&+&x_{3}&=&4\\
+      \text{(II)}&&x_{1}&-&x_{2}&+&\frac{3}{2}x_{3}&=&-7\\
+      \text{(III)}&\qquad-&4x_{1}&+&2x_{2}&&&=&-2
+      \end{mtable}
+      \end{displaymath}   
+       \begin{enumerate}
+         \item \lang{de}{
+             Wir wählen die Gleichung \textbf{(I)} und lösen diese nach $x_3$ auf:
+             }
+             \lang{en}{
+             We choose equation \textbf{(I)} to solve for $x_3$:
+             }
+             \begin{displaymath}
+              \text{(I*)} \qquad  x_3=4-x_1-2x_2 
+             \end{displaymath}   
+           
+          \item \lang{de}{
+            Der Term auf der rechten Seite wird nun in den beiden anderen Gleichungen
+            \textbf{(II)} und \textbf{(III)} für $x_3$ eingesetzt:
+            }
+            \lang{en}{
+            The expression on the right hand side is now substituted for $x_3$ into 
+            the other two equations, \textbf{(II)} and \textbf{(III)}.
+            }
+            \begin{displaymath}
+            \begin{mtable}[\cellaligns{ccrcrcrcr}]
+            \text{(II*)}&&x_{1}&-&x_{2}&+&\frac{3}{2} \cdot (4-x_1-2x_2)&=&-7\\
+            \text{(III*)}&\qquad-&4x_{1}&+&2x_{2}&&&=&-2
+            \end{mtable}
+            \end{displaymath}   
+
+            \lang{de}{
+            Wir vereinfachen die Gleichung \textbf{(II*)} und erhalten das folgende 
+            LGS mit 2 Gleichungen und den 2 Unbekannten $x_1$ und $x_2$:
+            }
+            \lang{en}{
+            We simplify equation \textbf{(II*)} and obtain the following linear 
+            system with 2 equations and the 2 unknowns $x_1$ and $x_2$:
+            }
+            \begin{displaymath}
+            \begin{mtable}[\cellaligns{ccrcrcrcr}]
+            \text{(II*)}&&x_{1}&+&8x_{2}&&&=&26\\
+            \text{(III*)}&\qquad-&4x_{1}&+&2x_{2}&&&=&-2
+            \end{mtable}
+            \end{displaymath}   
+
+            \lang{de}{
+             Dieses neue LGS können wir nun gemäß dem in \ref{alg:einsetzungsverfahren} 
+             beschriebenen Verfahren lösen.
+             }
+             \lang{en}{
+             This new linear system can now be solved using algorithm 
+             \ref{alg:einsetzungsverfahren}.
+             }
+
+           \item \lang{de}{
+            Lösen wir also zum Beispiel die Gleichung \textbf{(III*)} nach $x_2$ auf:
+            }
+            \lang{en}{
+            As an example we rearrange equation \textbf{(III*)} for $x_2$:
+            }
+             \begin{displaymath}
+              \text{(III**)} \qquad x_2=-1 +2x_1  
+             \end{displaymath}
+             \lang{de}{
+             Das Ergebnis setzen wir für $x_2$ in \textbf{(II*)} ein:
+             }
+             \lang{en}{
+             The result for $x_2$ is then substituted into \textbf{(II*)}:
+             }
+             \begin{displaymath}
+               x_{1} + 8 \cdot (-1+2x_1) = 26 \quad \Leftrightarrow \quad x_1=2
+            \end{displaymath}
+            \lang{de}{
+            Wir erhalten damit eine Lösung für $x_1$, die eingesetzt in \textbf{(III**)}
+            den Wert $x_2=-1+2 \cdot 2=3\,$ liefert. Einsetzen der Ergebnisse für $x_1$ und $x_2$ 
+            in \textbf{(I*)} liefert schließlich
+            }
+            \lang{en}{
+            We hence obtain a solution for $x_1$ that yields $x_2=-1+2 \cdot 2=3\,$ 
+            when substituted into \textbf{(III**)}. Finally, substituting the 
+            solutions for $x_1$ and $x_2$ into \textbf{(I*)} gives
+            }
+            \begin{displaymath}
+              x_3=4-2-2\cdot 3=-4.
+             \end{displaymath}
+             \lang{de}{
+            Das Einsetzungsverfahren liefert uns also als eindeutige Lösung das Zahlentripel
+            $(2;3;-4)$ und somit die Lösungsmenge
+            }
+            \lang{en}{
+            The substitution method gives us a unique solution $(2;3;-4)$ and hence 
+            the solution set
+            }
+            \begin{displaymath}
+                \mathbb{L}=\{(2;3;-4)\}.   
+            \end{displaymath}
+
+       \end{enumerate}
+%     \end{tabs*}
+     \end{showhide}
+     \end{example}
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \item \lang{de}{
+        Bei einem Gleichungssystem wie im folgenden Beispiel kommt man natürlich auch mit weniger
+        Wiederholungsschritten aus, da man die zweite Gleichung direkt nach $y$ auflösen kann:
+        }
+        \lang{en}{
+        In a linear system such as the one used in the following example, fewer 
+        repetitions are needed because the second equation can be immediately 
+        solved for $y$:
+        }
+
+\begin{displaymath}
+        \begin{mtable}[\cellaligns{crcrcrcr}]
+            \text{(I)}&&&y&-&2z&=&7\\
+            \text{(II)}&&-&3y&&&=&-6\\
+            \text{(III)}&\qquad3x&-&2y&&&=&-1
+        \end{mtable}
+    \end{displaymath}        
+        
+  \begin{showhide}[\buttonlabels{\lang{de}{Zeige Lösung}\lang{en}{Show solution}}
+                                {\lang{de}{Verstecke Lösung}\lang{en}{Hide solution}}]
+   	\lang{de}{
+    Es handelt sich um ein Gleichungssystem mit drei Gleichungen und drei Variablen. 
+    Da die zweite Gleichung nur eine Unbekannte enth\"alt, kann man daraus den Wert f\"ur $y$ 
+    bestimmen, nämlich 
+     \begin{displaymath}
+         \text{(II*)}  \qquad y=2.  
+    \end{displaymath}     
+	Setzen wir diesen Wert gemäß des Einsetzungsverfahrens in \textbf{(I)} und in 
+  \textbf{(III)} ein, so erhalten wir
+    daraus die Werte der anderen beiden Variablen. 
+	Die L\"osung ist eindeutig und gegeben durch das Zahlentripel $\left(1;2;-\frac{5}{2}\right)$, also}
+	\lang{en}{
+  This example has a system of equations with three equations and three variables. 
+	Because the second equation only has a single unknown, we can determine the value for $y$, here $y=2$.
+	If we substitute this value into \textbf{(I)} and \textbf{(III)}, we get the values of the other two variables.
+	The solution is unique and given by the triplet $\left(1;2;-\frac{5}{2}\right)$.
+ }
+	
+	\begin{displaymath}
+		\mathbb{L}=\left\{\left(1;2;-\frac{5}{2}\right)\right\}.
+	\end{displaymath}
+  \end{showhide} 
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \item \lang{de}{
+      Ein Vorteil des Einsetzungsverfahrens ist, dass es im Gegensatz zum 
+      Additionsverfahren auch bei einigen nichtlinearen Gleichungssystemen 
+          anwendbar ist.
+      }
+      \lang{en}{
+      An advantage of the substitution method is that unlike the addition method, it 
+      is applicable to systems of non-linear equations.
+      }
+
+    \begin{example}[\lang{de}{nichtlineares Gleichungssystems}
+                    \lang{en}{System of non-linear equations}]
+%      \begin{tabs*}[\initialtab{0}] 
+%      \tab{\lang{de}{Beispiel zur Lösung eines nichtlinearen Gleichungssystems}\lang{en}{Example}}
+    \begin{showhide}
+        \begin{displaymath}
+        \begin{mtable}[\cellaligns{crcrcrcr}]
+          \text{(I)}&\qquad x^2&+&2x&+&y&=&0\\
+          \text{(II)}&&&x&+&y&=&-2
+        \end{mtable}
+        \end{displaymath}
+
+      \lang{de}{
+      Dieses Gleichungssystem ist nichtlinear, da in der ersten Gleichung ein quadratischer Term in $x$ vorkommt.
+      Wir wenden das Einsetzungsverfahren an, um das Gleichungssystem zu lösen.
+      }
+      \lang{en}{
+      This system is non-linear, as in the first equation there appears a quadratic 
+      term in $x$. We apply the substitution method in order to solve the system of 
+      equations.
+      }
+      \begin{enumerate}
+        \item \lang{de}{Die zweite Gleichung wird nach $y$ aufgelöst:}
+              \lang{en}{The second equation is solved for $y$:}
+          \begin{displaymath}
+          y=-x-2
+          \end{displaymath}
+
+        \item \lang{de}{
+        Der Term auf der rechten Seite wird für $y$ in Gleichung \textbf{(I)} eingesetzt.
+        Daraus bestimmt man den Wert der Variablen $x$:
+        }
+        \lang{en}{
+        The expression on the right hand side is substituted for $y$ in equation 
+        \textbf{(I)}. From this we get the value of the variable $x$:
+        }
+          \begin{displaymath}
+          x^2+2x+(-x-2)=x^2+x-2=0 \quad \Leftrightarrow \quad (x=1 \quad \text{oder} \quad x=-2)
+          \end{displaymath}
+        \item \lang{de}{
+          Mit der aufgel\"osten Gleichung aus Schritt 1 lassen sich die Werte für 
+          $y$ berechnen:
+          }
+          \lang{en}{
+          With the solved equation from step 1, the values of $y$ can be calculated.
+          }
+          \begin{displaymath}
+          \begin{mtable}[\cellaligns{rcrcrcr}]
+            x&=&1\qquad&\Rightarrow&\qquad y&=&-3,\\
+            x&=&-2\qquad&\Rightarrow&\qquad y&=&0.
+          \end{mtable}
+          \end{displaymath}
+          Und wir erhalten als Lösungsmenge 
+          \begin{displaymath}
+              \mathbb{L}=\{(1, -3),(-2, 0)\}.
+          \end{displaymath}
+          \lang{de}{
+          Da das Gleichungssystem nichtlinear ist, kann es auch genau zwei Lösungen 
+          besitzen.
+          }
+          \lang{en}{
+          As the system is non-linear, it can also have precisely two solutions.
+          }
+
+      \end{enumerate}
+%      \end{tabs*}
+      \end{showhide}
+      \end{example}
+\end{itemize}
+
+\lang{de}{
+Ein weiteres Verfahren, das mit dem Einsetzungsverfahren eng verwandt ist,
+ist das \emph{Gleichsetzungsverfahren}. 
+Auch dieses Verfahren ist nicht nur bei linearen Gleichungssystemen anwendbar.
+}
+\lang{en}{
+Another method that is closely related to substitution is what we call here the 
+\emph{equality method}. This is also applicable to non-linear systems.
+}
+
+\begin{algorithm}[\lang{de}{Gleichsetzungsverfahren}
+                  \lang{en}{Equality method}]\label{alg:gleichsetzungsverfahren}
+% Wir verwenden hier wieder das lineare Gleichungssystem aus Beispiel \ref{ex:bsp_lgs_1}
+ \begin{displaymath}
+  \begin{mtable}[\cellaligns{crcrcr}]
+   \text{(I)}&\qquad3x&-&4y&=&2\\
+    \text{(II)}&\qquad2x&+&3y&=&7
+  \end{mtable}
+ \end{displaymath}
+% um dieses mithilfe des Gleichsetzungsverfahrens zu lösen. 
+
+\begin{enumerate}
+  \item[\notion{\lang{de}{1. Schritt}\lang{en}{First step}}] 
+    \lang{de}{
+    Zunächst werden beide Gleichungen nach derselben Variablen aufgelöst. 
+    Wir wählen hier beispielhaft die Variable $x$.
+    }
+    \lang{en}{
+    Firstly we rearrange both equations for the same variable. In this example, we 
+    choose $x$.
+    }
+    \begin{displaymath}
+    \begin{mtable}[\cellaligns{crcccr}]
+        \text{(I*)}&\quad x&=&\frac{2}{3}&+&\frac{4}{3}y\\
+        \text{(II*)}&\quad x&=&\frac{7}{2}&-&\frac{3}{2}y
+    \end{mtable}
+    \end{displaymath}
+  \item[\notion{\lang{de}{2. Schritt}\lang{en}{Second step}}] 
+    \lang{de}{
+    Die beiden aufgelösten Terme auf der rechten Seite werden gleichgesetzt und 
+    diese Gleichung wird schließlich gelöst:
+    }
+    \lang{en}{
+    The two rearranged equations on the right hand side are equated and this new 
+    equation is then solved:
+    }
+    \begin{displaymath}
+    \frac{2}{3}+\frac{4}{3}y=\frac{7}{2}-\frac{3}{2}y \quad \Leftrightarrow \quad y=1
+    \end{displaymath}
+  \item[\notion{\lang{de}{3. Schritt}\lang{en}{Third step}}] 
+    \lang{de}{
+    Dieses Ergebnis wird anschließend in eine der beiden Gleichungen  
+    \textbf{(I*)} oder \textbf{(II*)} eingesetzt, um daraus den Wert für die zweite 
+    Variable zu ermitteln. Wir wählen hier  \textbf{(I*)} und setzen $y=1$ ein:
+    }
+    \lang{en}{
+    This result is finally substituted into equation \textbf{(I*)} or \textbf{(II*)} 
+    to get the value for the second variable. Here we choose \textbf{(I*)} and 
+    substitute into it $y=1$.
+    }
+    \begin{displaymath}
+     x=\frac{2}{3}+\frac{4}{3}\cdot1=2
+    \end{displaymath}
+    \lang{de}{
+    Wir haben hier die Gleichung \textbf{(I*)} verwendet, aber auch die zweite 
+    Gleichung \textbf{(II*)} liefert für $y=1$ dasselbe Resultat. Die Lösungsmenge 
+    ist daher
+    }
+    \lang{en}{
+    We have changed equation \textbf{(I*)} here, but the second equation 
+    \textbf{(II*)} yields the same result for $y=1$. The solution set is therefore
+    }
+    \begin{displaymath}
+    \mathbb{L}=\{(2; 1)\}.
+    \end{displaymath}
+\end{enumerate}
+
+\end{algorithm}
+
+% \lang{de}{\textbf{Anmerkungen:}}\lang{en}{\textbf{Notes:}}
+%  \begin{itemize}
+%
+%    \item In Schritt 1 des Verfahrens kann man auch beide Gleichungen nach $y$ 
+%        aufzulösen, um in Schritt 2 zunächst den Wert für die Variable $x$ 
+%        zu bestimmen.
+%
+%    \item Mit Hilfe der oben vorgestellten Verfahren kann man u. U. auch 
+%        einfache lineare Gleichungssysteme lösen, die mehr als zwei Variablen 
+%        oder Gleichungen enthalten.                
+%  \end{itemize}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Der nachfolgende Abschnitt wurde in Zshg. mit Viedeo-Einbau vorgezogen (zu Bemerkung \label{rem:lgs}) 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Bisher haben wir in diesem Kapitel nur Beispiele von linearen Gleichungssystemen betrachtet, die
+% eine eindeute Lösung hatten. Im Gegensatz zu linearen Gleichungen gemäß Definition \ref{def:lin_gleichung} 
+% sind aber lineare Gleichungssysteme
+% % wie in \ref{rem:lgs} bereits erwähnt, 
+% nicht immer eindeutig lösbar. Sie können auch unlösbar sein oder auch unendlich viele Lösungen haben. 
+
+
+% \begin{example}%\label{ex:nicht-eindeutig-loesbar}
+% \begin{tabs*}
+%
+%  \tab{LGS ohne Lösung}
+%  \[ \begin{mtable}[\cellaligns{crcrcr}]
+%  \text{(I)}&\qquad 2 \cdot  x & - & 4 \cdot  y & = & 10 \\
+%  \text{(II)}&-3 \cdot  x & + & 6\cdot y & =  & -10
+%  \end{mtable} \]
+%  L"ost man die erste Gleichung nach $x$ auf, erh"alt man $x=5+2y$.
+%
+%  Einsetzen in die zweite Gleichung ergibt:
+%  \[
+%  \begin{mtable}[\cellaligns{crcr}]
+%  & -3 \cdot  (5+2y)  +  6\cdot y & =  & -10 \\
+%  \Leftrightarrow & \quad -15-6y +6y &=& -10\\
+%  \Leftrightarrow & \quad  -15 &=& -10 
+%  \end{mtable}\]
+%
+%  Diese Gleichung ist nie erf"ullt. Es gibt also kein Zahlenpaar $(x;y)$, das das Gleichungssystem erfüllt, d.\,h.
+%  \[ \mathbb{L}=\{ \}. \]
+%
+%  \tab{LGS mit unendlich vielen Lösungen}
+%  \[  
+ % \begin{mtable}[\cellaligns{crcrcr}]
+%  \text{(I)}&\qquad 2 \cdot  x & - & 4 \cdot  y & = & 10 \\
+%  \text{(II)}&-3 \cdot  x & + & 6\cdot y & =  & -15
+%  \end{mtable} \]
+%  L"ost man die erste Gleichung nach $x$ auf, erh"alt man 
+%      \begin{displaymath}
+%           \text{(I*)}  \qquad x=5+2y.  
+%      \end{displaymath}
+%
+%
+%  Einsetzen in die zweite Gleichung ergibt:
+%  \[\begin{mtable}[\cellaligns{crcr}]
+%  & -3 \cdot  (5+2y)  +  6\cdot y & =  & -15 \\
+%  \Leftrightarrow & \quad -15-6y +6y &=& -15\\
+%  \Leftrightarrow & \quad  -15 &=& -15 
+%  \end{mtable}\]
+%
+%  Diese Gleichung ist immer erf"ullt. Es bleibt also nur die Bedingung $\, x=5+2y\,$ aus 
+%  \textbf{(I*)}, d.\,h.
+%  für jede beliebige reelle Zahl $y$ ist das Paar $(5+2y;y)$ eine Lösung 
+%  des linearen Gleichungssystems. Die Lösungsmenge ist somit
+%  % \[ \mathbb{L}=\left\{ \left(\begin{smallmatrix} 5+2y \\ y \end{smallmatrix}\right) \mid\, y\in \R \right\}
+%  % = \left\{ \begin{pmatrix}5\\ 0 \end{pmatrix}+r\cdot \begin{pmatrix} 2 \\ 1 \end{pmatrix} \mid\, r\in \R \right\} \] 
+%
+%  \[ \mathbb{L}=\left\{ (5+2y;y) \mid\, y\in \R \right\}. \]
+%
+% \end{tabs*}
+% \end{example}
+
+\end{visualizationwrapper}
+
+\end{content}

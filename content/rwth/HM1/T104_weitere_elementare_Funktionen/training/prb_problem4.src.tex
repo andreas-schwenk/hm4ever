@@ -1,0 +1,109 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A04: Potenzgesetze}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Rechnen mit Potenzen}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+\usepackage{mumie.ombplus}
+
+\lang{de}{
+	\title{A04: Potenzgesetze}
+}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9414}{Ticket 9414}
+\end{block}
+
+
+\begin{problem}
+	\begin{question}
+      \text{Schreiben Sie die folgenden Ausdrücke als Potenzen $a^q$ mit rationalen
+      Zahlen $a$ und $q\geq 0$. Berechnen Sie keine Potenzen, sondern verwenden Sie dazu lediglich
+      die Rechenregeln für Potenzen und Wurzeln.\\
+      $\var{fa}=a^q$ mit $a=$\ansref, $q=$\ansref,\\
+      $\var{fb}=a^q$ mit $a=$\ansref, $q=$\ansref,\\
+      $\var{fc}=a^q$ mit $a=$\ansref, $q=$\ansref.\\ }
+      \explanation{Haben Sie eine Lösung mit $q\geq 0$ gewählt?}
+
+
+      \begin{variables}
+                   \randint{b}{-4}{-1}
+                   \randint[Z]{a}{2}{5}
+                   \randint[Z]{x}{2}{7}
+                   \randint[Z]{f}{2}{10}
+                   \randint[Z]{g}{2}{7}
+                   \randadjustIf{a,b}{a = -b}
+                   
+                   \function[calculate]{saa}{1/x}
+                   \function[calculate]{saq}{-b/a}
+                   
+                   \function[calculate]{sba}{1/f}
+                   \function[calculate]{sbq}{1/2}
+                   
+                   \function[calculate]{sca}{a}
+                   \function[calculate]{scq}{(g-2)/(2*g)}
+                  
+                   \function[normalize]{q1}{b/a}
+                   \function{fa}{x^(q1)}
+                   \function{fb}{sqrt(f)/f}
+                   \function{fc}{a/(sqrt(a)*a^(1/g))}
+                   
+                   
+       \end{variables}
+
+      \type{input.number}
+      \field{rational}
+
+      \begin{answer}
+            \solution{saa}
+      \end{answer}
+
+      \begin{answer}
+            \solution{saq}
+      \end{answer}
+
+
+      \begin{answer}
+            \solution{sba}
+      \end{answer}
+
+      \begin{answer}
+            \solution{sbq}
+      \end{answer}
+
+
+      \begin{answer}
+            \solution{sca}
+      \end{answer}
+
+      \begin{answer}
+            \solution{scq}
+      \end{answer}
+
+      
+	\end{question}
+	
+	
+\end{problem}
+\embedmathlet{gwtmathlet}
+
+
+\end{content}

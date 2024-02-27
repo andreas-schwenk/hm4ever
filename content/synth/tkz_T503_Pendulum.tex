@@ -1,0 +1,39 @@
+%This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)
+%https://creativecommons.org/licenses/by/4.0/legalcode
+\documentclass[rgb]{standalone}
+\usepackage{tkz-euclide}
+\definecolor{myorange}{hsb}{0.0833, 1, 0.8}
+\definecolor{mygreen}{hsb}{0.3333, 1, 0.8}
+\definecolor{myblue}{hsb}{0.5833, 1, 0.8}
+\definecolor{mymagenta}{hsb}{0.8333, 1, 0.8}
+\usetikzlibrary{patterns}
+\begin{document}
+\begin{tikzpicture}[scale=1.5, font=\Large]
+	\tkzDefPoint(0,2){A}
+	\tkzDefPoint(0,-1.05){B}
+	\tkzDefPoint(-3*sin(pi/5),2-3*cos(pi/5)){P}
+	\tkzDefPoint(-3*sin(pi/5),0.5-3*cos(pi/5)){G}
+	\tkzDefMidPoint(P,G)
+	\tkzGetPoint{PG}
+	\tkzDefPoint(sin(pi/5)*(1.5*cos(pi/5)-3),2-3*cos(pi/5)-1.5*sin(pi/5)*sin(pi/5)){T}
+	\tkzDefMidPoint(P,T)
+	\tkzGetPoint{PT}
+	\draw[dashed,domain=36:0, smooth, variable=\x] plot ({-3*sin(\x)}, {2-3*cos(\x)});
+	\tkzDrawSegment[dashed](A,B)
+	\draw[thick, draw=none,fill,fill opacity=0.1] (0,2) -- (0,1.25) arc (-90:-125:0.75);
+	\draw[] (0,1.25) arc (-90:-126:0.75);
+	\draw[fill,fill opacity=0.1] (G) -- ({-3*sin(36)},{1.25-3*cos(36)}) arc (90:54:0.75);
+	\tkzDrawSegment[very thick](A,P)
+	\node[circle,fill,inner sep=3] at (P) {};
+	\path[fill,pattern=north east lines] (-2,2) -- (2,2) -- (2,2.5) -- (-2,2.5) -- cycle;
+	\draw[] (-2,2) -- (2,2);
+	\tkzDrawSegment[line width=2.5pt,myblue,-latex](P,G)	
+	\tkzDrawSegment[line width=2.5pt,myorange,-latex](P,T)	
+	\tkzDrawSegment[line width=2.5pt,mygreen,-latex](T,G)
+	% Labels
+	\node[] at (-0.175,1.5){$\varphi$};
+	\node[] at (-1.575,-1.4){$\varphi$};
+	\node[left=-0.05 cm, color=myblue] at (PG){$F_G$};
+	\node[above right=-0.1cm, color=myorange] at (PT){$F_{tan}=F_G\cdot \sin \varphi$};
+\end{tikzpicture}	
+\end{document}

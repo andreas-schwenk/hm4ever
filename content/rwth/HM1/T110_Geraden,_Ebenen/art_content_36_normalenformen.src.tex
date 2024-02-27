@@ -1,0 +1,851 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Normalenformen von Geraden und Ebenen}
+    \lang{en}{Normal form of lines and planes}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+     \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T110_UmwandlungEbenen.meta.xml}{T110_UmwandlungEbenen}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T110_NormalFormPlane_B.meta.xml}{T110_NormalFormPlane_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T110_NormalFormPlane_A.meta.xml}{T110_NormalFormPlane_A}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T110_PointNormalFormLine.meta.xml}{T110_PointNormalFormLine}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T110_NormalFormLine.meta.xml}{T110_NormalFormLine}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T109_Skalar-_und_Vektorprodukt/g_art_content_34_vektorprodukt.meta.xml}{vektorprodukt}
+    \link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_05_loesen_gleichungen_und_lgs.meta.xml}{lgs}
+    \link{generic_article}{content/rwth/HM1/T109_Skalar-_und_Vektorprodukt/g_art_content_33_winkel.meta.xml}{winkel}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{10}
+\ombarticle{2}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Normalenformen von Geraden und Ebenen}\lang{en}{Normal form of lines and planes}}
+ 
+\begin{block}[annotation]
+  übungsinhalt
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9053}{Ticket 9053}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{\lang{de}{Normalenform einer Geraden im $\R^2$}
+         \lang{en}{Normal form of a line in $\R^2$}}\label{sec:normalform_geraden}
+
+\begin{definition}\label{def:norm_vec_gerade}
+\lang{de}{
+Es sei $g$ eine Gerade im $\R^2$.\\ Ein \emph{Normalenvektor} der Geraden $g$ ist ein vom Nullvektor 
+verschiedener Vektor $\vec{n}$, der senkrecht auf $g$ steht, also orthogonal zum Richtungsvektor von 
+$g$ ist. Ist die L\"ange des Vektors $\vec{n}$ gleich $1$, so spricht man auch von einem 
+\emph{Einheitsnormalenvektor} oder \emph{normierten Nomalenvektor} und schreibt h\"aufig 
+$\vec{n}_{0}$.
+}
+\lang{en}{
+Let $g$ be a line in $\R^2$.\\ A \emph{normal vector} of the line $g$ is a non-zero vector $\vec{n}$ 
+that is orthogonal to $g$, that is, orthogonal to the direction vector of $g$. A normal vector of 
+length $1$ is called a \emph{unit normal vector} or \emph{normalised normal vector}, and is often 
+denoted by $\vec{n}_{0}$.
+}
+\end{definition}
+
+\begin{example}
+\lang{de}{
+F"ur $g = \left\{\begin{pmatrix} 1 \\ 2 \end{pmatrix} + 
+r \begin{pmatrix} 3/2 \\ 1/2 \end{pmatrix} \, \mid \, r \in \R \right\}$ 
+ist $\vec{n}= \begin{pmatrix} -1/2 \\ 3/2 \end{pmatrix} $ ein Normalenvektor, aber auch jedes 
+Vielfache von diesem Vektor, also zum Beispiel
+}
+\lang{en}{
+The vector $\vec{n}= \begin{pmatrix} -1/2 \\ 3/2 \end{pmatrix} $ is a normal vector of the line given 
+by $g = \left\{\begin{pmatrix} 1 \\ 2 \end{pmatrix} + 
+r \begin{pmatrix} 3/2 \\ 1/2 \end{pmatrix} \, \mid \, r \in \R \right\}$, as is any multiple of this 
+vector, i.e.
+}
+\[ \vec{n}_1 =  \begin{pmatrix} -1 \\ 3 \end{pmatrix}  \]
+
+\begin{center}
+\image{T110_NormalFormLine}
+\end{center}
+\end{example}
+
+\begin{rule}
+\lang{de}{
+Einen Normalenvektor zu $g = \{  \begin{pmatrix} p_1\\ p_2 \end{pmatrix} + 
+r  \begin{pmatrix} v_1 \\ v_2 \end{pmatrix}  \, \mid \, r\in \R \}$ zu finden, ist einfach.\\
+Ein Vektor ist ja senkrecht zu einem anderen Vektor, wenn das Skalarprodukt der beiden gleich $0$ ist 
+(vgl. Abschnitt \link{winkel}{Winkel zwischen Vektoren}).\\
+Der Normalenvektor steht senkrecht auf der Geraden, somit muss das Skalarprodukt zwischen 
+Normalenvektor und Richtungsvektor der Geraden gleich $0$ sein.\\
+Da
+}
+\lang{en}{
+It is easy to find a normal vector to $g = \{  \begin{pmatrix} p_1\\ p_2 \end{pmatrix} + 
+r  \begin{pmatrix} v_1 \\ v_2 \end{pmatrix}  \, \mid \, r\in \R \}$.\\
+A vector is orthogonal to another vector when their scalar product is equal to zero 
+(see \link{winkel}{the section on angles between vectors}).\\
+A normal vector is orthogonal to the line, so the scalar product of a normal vector with the 
+direction vector of the line is equal to $0$.\\
+As
+}
+\[ \begin{pmatrix} v_1 \\ v_2 \end{pmatrix}\bullet \begin{pmatrix}-v_2 \\ v_1  \end{pmatrix}= v_1\cdot (-v_2)+v_2\cdot v_1=0, \]
+\lang{de}{kann man}\lang{en}{we may choose}
+\[ \vec{n}=\begin{pmatrix}-v_2 \\ v_1  \end{pmatrix} \]
+\lang{de}{wählen.}\lang{en}{as a normal vector.}
+\end{rule}
+
+\begin{definition}\label{def:pkt_norm_form_gerade}\label{def:koord_form_gerade}
+\lang{de}{
+Sei $g=\{ \vec{p}+r\vec{v} \mid r\in \R \}$ eine Gerade im $\R^2$ und $\vec{n}$ ein Normalenvektor 
+zu $g$. Dann l"asst sich die Gerade $g$ auch beschreiben durch
+}
+\lang{en}{
+Let $g=\{ \vec{p}+r\vec{v} \mid r\in \R \}$ be a line in $\R^2$ and $\vec{n}$ a normal vector of $g$. 
+Then the line $g$ can be described as
+}
+\[ g= \{ \vec{x}\in \R^2 \mid (\vec{x}-\vec{p})\bullet \vec{n}=0 \}. \]
+\lang{de}{Diese Darstellung der Geraden nennt man \emph{Punkt-Normalenform} von $g$.}
+\lang{en}{This is called a \emph{point-normal form} of the line $g$.}
+
+\begin{center}
+\image{T110_PointNormalFormLine}
+\end{center}
+
+\lang{de}{Durch Umformen erh"alt man}
+\lang{en}{By rearranging we obtain}
+\[g= \{ \vec{x}\in \R^2 \mid \vec{x} \bullet \vec{n}=d \} \quad 
+  \text{\lang{de}{mit}\lang{en}{with}} 
+  \quad d= \vec{p} \bullet \vec{n},\]
+\lang{de}{
+welche \emph{Normalenform} genannt wird.
+\\
+Durch Ausschreiben des Skalarprodukts erh\"alt man die \emph{Koordinatenform} der Geraden
+}
+\lang{en}{
+which is called the \emph{normal form} of $g$.
+\\\\
+By the definition of the scalar product, the \emph{coordinate form} of the line is
+}
+\[ g=\left\{  \begin{pmatrix}x_1 \\ x_2 \end{pmatrix}\in \R^2\, \mid\, n_1x_1+n_2x_2=d \right\}. \]
+
+\end{definition}
+
+
+\begin{example}
+\lang{de}{
+F"ur $g = \left\{\begin{pmatrix} 1 \\ 2 \end{pmatrix} + 
+r \begin{pmatrix} 3/2 \\ 1/2 \end{pmatrix}   \, \mid \, r \in \R \right\}$ 
+hatten wir einen Normalenvektor $\vec{n}= \begin{pmatrix} -1 \\ 3 \end{pmatrix} $ und daher
+}
+\lang{en}{
+For $g = \left\{\begin{pmatrix} 1 \\ 2 \end{pmatrix} + 
+r \begin{pmatrix} 3/2 \\ 1/2 \end{pmatrix}   \, \mid \, r \in \R \right\}$ 
+we have a normal vector $\vec{n}= \begin{pmatrix} -1 \\ 3 \end{pmatrix} $ and hence
+}
+\begin{eqnarray*} g &=&  \{ \begin{pmatrix}x_1 \\ x_2 \end{pmatrix}\in \R^2 
+\mid \Big(\begin{pmatrix}x_1 \\ x_2 \end{pmatrix}- \begin{pmatrix} 1 \\ 2 \end{pmatrix} \Big)\bullet 
+\begin{pmatrix}-1 \\ 3 \end{pmatrix}=0 \} \\
+ &=&  \{ \begin{pmatrix}x_1 \\ x_2 \end{pmatrix}\in \R^2 
+\mid \begin{pmatrix}x_1 \\ x_2 \end{pmatrix} \bullet \begin{pmatrix}-1 \\ 3 \end{pmatrix}
+=  \begin{pmatrix} 1 \\ 2 \end{pmatrix}\bullet \begin{pmatrix}-1 \\ 3 \end{pmatrix}= 5 \} \\
+ &=&  \{ \begin{pmatrix}x_1 \\ x_2 \end{pmatrix}\in \R^2 \mid
+-x_1+3x_2=5 \}.
+\end{eqnarray*}
+\end{example}
+
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			
+		 
+            \function{x}{5}
+            \function{y}{2}
+            
+            \function{e}{24}
+           
+  		\end{variables}
+		
+		\text{\lang{de}{%\notion{Kurztest:}\\
+          Eine Gerade geht durch den Punkt $\begin{pmatrix}4 \\ 2 \end{pmatrix}$ und besitzt den 
+          Normalenvektor $\vec{n}= \begin{pmatrix}5 \\ 2 \end{pmatrix}$.\\
+          Geben Sie die Gleichung der Geraden in der Koordinatenform an. \\
+          (Tipp: Stellen Sie zuerst die Punkt-Normalenform auf und wandeln Sie diese anschließend in 
+          die Koordinatenform um.)
+          }
+          \lang{en}{
+          A line passes through the point $\begin{pmatrix}4 \\ 2 \end{pmatrix}$ and has a normal 
+          vector  $\vec{n}= \begin{pmatrix}5 \\ 2 \end{pmatrix}$.\\
+          Give the coordinate form of the equation of the line.\\
+          (Tip: first find the point-normal form and then transform this into the coordinate form.)
+          }\\
+          $g = \{ \begin{pmatrix}x_1 \\ x_2 \end{pmatrix}\in \R^2 \mid$ 
+          \ansref $x_1+$ \ansref $x_2=$\ansref $ \}$
+        }
+        
+		
+		\begin{answer}
+			\solution{x}
+		\end{answer}
+        \begin{answer}
+			\solution{y}
+		\end{answer}
+         \begin{answer}
+			\solution{e}
+		\end{answer}
+         
+        
+        \explanation{\lang{de}{Die Punkt-Normalenform lautet:}
+        \lang{en}{The point-normal form is:}\\
+        $g= \{ \vec{x}\in \R^2 \mid (\vec{x}-\vec{p})\bullet \vec{n}=0 \}$.\\
+        \lang{de}{Nach dem Einsetzen von Punkt und Normalenvektor erhält man:}
+        \lang{en}{By substituting the points into this we obtain:}\\
+        $g= \{ \vec{x}\in \R^2 \mid (\begin{pmatrix}x_1 \\ x_2 \end{pmatrix}-\begin{pmatrix}4 \\ 2 \end{pmatrix})\bullet \begin{pmatrix}5 \\ 2 \end{pmatrix}=0 \}$.\\
+        \lang{de}{Die Umwandlung in die Koordinatenform entsteht durch das Lösen des Skalarproduktes:}
+        \lang{en}{This is changed into the coordinate form by evaluating the scalar product:}\\
+        $g   =  \{ \begin{pmatrix}x_1 \\ x_2 \end{pmatrix}\in \R^2 \mid \Big(\begin{pmatrix}x_1 \\ x_2 \end{pmatrix}- \begin{pmatrix} 4 \\ 2 \end{pmatrix} \Big)\bullet \begin{pmatrix}5 \\ 2 \end{pmatrix}=0 \} $\\
+         $g    =  \{ \begin{pmatrix}x_1 \\ x_2 \end{pmatrix}\in \R^2 
+\mid \begin{pmatrix}x_1 \\ x_2 \end{pmatrix} \bullet \begin{pmatrix} 5\\ 2 \end{pmatrix}
+=  \begin{pmatrix} 4 \\ 2 \end{pmatrix}\bullet \begin{pmatrix}5 \\2 \end{pmatrix}= 24 \} $
+        $ g   =  \{ \begin{pmatrix}x_1 \\ x_2 \end{pmatrix}\in \R^2 \mid
+5x_1+2x_2=24 \}.$    
+        }
+		
+\end{quickcheck}
+
+
+
+
+\begin{rule}
+\lang{de}{
+Wird der Normalenvektor $\vec{n}$ durch seine L\"ange bzw. durch seinen Betrag $|\vec{n}|$ geteilt, 
+so erhält man den normierten Normalenvektor $\vec{n}_0$, der die Länge $1$ besitzt.
+}
+\lang{en}{
+If we divide a normal vector $\vec{n}$ by its length $|\vec{n}|$, we obtain the unit normal vector 
+$\vec{n}_0$ which has length $1$.
+}\\
+\[ \vec{n}_0 = \frac{\vec{n}}{|\vec{n}|} \]
+\end{rule}
+
+\begin{definition}
+\lang{de}{Die \emph{Hessesche Normalenform}}
+\lang{en}{The \emph{Hessian normal form}}\label{def:hesse_nf_gerade}
+\[g= \{ \vec{x}\in \R^2 \mid \vec{x} \bullet \vec{n}_0=d_0 \} \quad 
+  \text{\lang{de}{mit}\lang{en}{with}} 
+  \quad d_0= \vec{p} \bullet \vec{n}_0,\]
+\lang{de}{
+einer Geraden $g$ wird durch die Division der \emph{Normalenform} durch den Betrag des 
+Normalenvektors $|\vec{n}|$ erreicht.
+\\\\
+Durch Ausschreiben des Skalarprodukts erh"alt man die \emph{Hessesche Normalenform in Koordinaten} 
+der Geraden
+}
+\lang{en}{
+of a line $g$ is found by dividing the \emph{normal form} by the length of the normal vector 
+$|\vec{n}|$.
+\\\\
+Evaluating the scalar product yields the \emph{Hessian normal form in coordinates} of the line,
+}
+\[ g=\left\{  \begin{pmatrix}x_1 \\ x_2 \end{pmatrix}\in \R^2\, \mid\, {n_0}_1x_1+{n_0}_2x_2=d_0 \right\}. \]
+
+\lang{de}{
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10795&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+}
+\lang{en}{}
+\end{definition}
+
+\begin{example}
+\lang{de}{
+Mit $g = \{ \begin{pmatrix}x_1 \\ x_2 \end{pmatrix}\in \R^2 \mid -x_1+3x_2=5 \}$ ist die 
+\emph{Normalenform} der Geraden $g$ gegeben.\\
+Ihr Normalenvektor $\vec{n}= \begin{pmatrix} -1 \\ 3 \end{pmatrix}$ ist als Koeffizienten vor $x_1$ 
+und $x_2$ abzulesen.
+\\\\
+Zur Berechnung der \emph{Hesseschen Normalenform} wird die Gleichung der \emph{Normalenform} durch den Betrag von $\vec{n}$ dividiert.
+}
+\lang{en}{
+Consider a line $g$ with normal form 
+$g = \{ \begin{pmatrix}x_1 \\ x_2 \end{pmatrix}\in \R^2 \mid -x_1+3x_2=5 \}$.\\
+Its normal vector $\vec{n}= \begin{pmatrix} -1 \\ 3 \end{pmatrix}$ can be read from the coefficients 
+of $x_1$ and $x_2$.
+\\\\
+To find the \emph{Hessian normal form} we divide the equation of the \emph{normal form} by the length 
+of the normal vector $\vec{n}$.
+}\\
+\[ |\vec{n}| = \sqrt{(-1)^2+(3)^2} = \sqrt{10} \]
+\lang{de}{Somit ist}\lang{en}{Thus}
+\[g =  \{ \begin{pmatrix}x_1 \\ x_2 \end{pmatrix}\in \R^2 \mid -\frac{1}{\sqrt{10}}x_1+\frac{3}{\sqrt{10}}x_2=\frac{5}{\sqrt{10}} \}\]
+\lang{de}{die Hessesche Normalenform von $g$.}
+\lang{en}{is the Hessian normal form of $g$.}
+\end{example}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			
+		 
+            \function{n}{5}
+            \function{x}{3/5}
+            \function{y}{0}
+            \function{z}{-4/5}
+            \function{e}{2}
+           
+  		\end{variables}
+		
+		\text{\lang{de}{%\notion{Kurztest:}\\
+        Bestimmen Sie die Hessesche Normalenform der Ebene $E: 3x_1-4x_3=10$. \\
+        Der Betrag des Normalenvektors $|\vec{n}|= $\ansref. \\
+        Somit ist die Ebene in der Hesseschen Normalenform  
+        }
+        \lang{en}{
+        Determine the Hessian normal form of the plane $E: 3x_1-4x_3=10$. \\
+        The length of the normal vector is $|\vec{n}|= $\ansref. \\
+        Using this, the plane in Hessian normal form is
+        }
+        $E_0$: \ansref $x_1 + $\ansref $x_2 +$ \ansref $x_3 =$ \ansref.
+        }
+        
+		
+		\begin{answer}
+			\solution{n}
+		\end{answer}
+        \begin{answer}
+			\solution{x}
+		\end{answer}
+         \begin{answer}
+			\solution{y}
+		\end{answer}
+         \begin{answer}
+			\solution{z}
+		\end{answer}
+         \begin{answer}
+			\solution{e}
+		\end{answer}
+        
+        \explanation{\lang{de}{
+        Der Normalenvektor wird von den Vorfaktoren von $x_1$, $x_2$ und $x_3$ definiert. \\
+        $\vec{n}=\begin{pmatrix}3 \\0 \\ -4 \end{pmatrix}$.\\
+        Sein Betrag berechnet sich mit $|\vec{n}|=\sqrt{3^2+(-4)^2}=\sqrt{25}=5$.\\
+        Zur Umwandlung der Ebenengleichung in die Hessesche Normalenform, muss die Koordinatenform 
+        durch den Betrag des Normalenvektors geteilt werden. 
+        Diese Division führt zum Endergebnis: $E_0: \frac{3}{5}x_1-\frac{4}{5}x_3=2$.
+        }
+        \lang{en}{
+        The normal vector can be read from the coefficients of $x_1$, $x_2$ and $x_3$. \\
+        $\vec{n}=\begin{pmatrix}3 \\0 \\ -4 \end{pmatrix}$.\\
+        Its length is $|\vec{n}|=\sqrt{3^2+(-4)^2}=\sqrt{25}=5$.\\
+        To transform the equation of the plane into Hessian normal form, the coordinate form must be 
+        divided by the length of the normal vector. 
+        This yields $E_0: \frac{3}{5}x_1-\frac{4}{5}x_3=2$.
+        }}
+		
+\end{quickcheck}
+
+
+\begin{block}[warning]
+\lang{de}{
+Eine Normalenform, Hessesche Normalenform und Koordinatenform einer Geraden gibt es nur im $\R^2$. Im 
+$\R^3$ (oder im $\R^n$ mit $n\geq 3$) gibt es zu Geraden keine Normalenform, da es viele verschiedene 
+Richtungen gibt, die zur Geraden senkrecht sind.
+}
+\lang{en}{
+The normal form, Hessian normal form and coordinate form of a line only exist in $\R^2$. In $\R^3$ 
+(or in $\R^n$ with $n\geq 3$) there cannot be a normal form of a line, as there are multiple 
+directions to which the line is orthogonal.
+}
+\end{block}
+
+
+\section{\lang{de}{Umrechnungen der Darstellungsformen von Geraden}
+         \lang{en}{Converting between representations of a line}}\label{sec:umrechng_geradenform}
+
+\lang{de}{
+Wie man aus einer Parameterform eine Normalenform und eine Koordinatenform bekommt, war ja oben schon 
+zu sehen. Hier wird noch erklärt, wie man aus einer Koordinatenform der Geraden im $\R^2$ eine 
+Parameterform erhält.
+\\\\
+Um aus der Koordinatenform 
+$g=\left\{  \begin{pmatrix}x_1 \\ x_2 \end{pmatrix}\in \R^2\, \mid\, n_1x_1+n_2x_2=d \right\}$ 
+einer Geraden $g$ wieder eine Parameterform zu bekommen, 
+kann man zum einen die L"osungsmenge des Gleichungssystems $n_1x_1+n_2x_2=d$ (1 Gleichung, 
+2 Variablen) bestimmen (vgl. Abschnitt \link{lgs}{Lineare Gleichungssysteme}).
+}
+\lang{en}{
+We have already seen above the conversion of a parametrised line into normal form or coordinate form. 
+Now we explain how to find the parametrised form from the coordinate form of a line in $\R^2$.
+\\\\
+To obtain the parametrised form of a line in coordinate form 
+$g=\left\{  \begin{pmatrix}x_1 \\ x_2 \end{pmatrix}\in \R^2\, \mid\, n_1x_1+n_2x_2=d \right\}$,
+we find the solution set of the linear system $n_1x_1+n_2x_2=d$ (1 equation, 2 variables) using 
+\link{lgs}{methods from an earlier chapter}.
+}
+
+\begin{example}
+\lang{de}{
+Die \emph{Koordinatenform} 
+$g =  \{ \begin{pmatrix}x_1 \\ x_2 \end{pmatrix}\in \R^2 \mid -x_1+3x_2=5 \}$ liefert die Gleichung:
+}
+\lang{en}{
+The \emph{coordinate form} 
+$g =  \{ \begin{pmatrix}x_1 \\ x_2 \end{pmatrix}\in \R^2 \mid -x_1+3x_2=5 \}$ uses the equation:
+}
+
+\[-x_1 + 3x_2 = 5.\]
+
+\lang{de}{Löst man diese Gleichung nach $x_1$ auf, erhält man}
+\lang{en}{Rearranging this for $x_1$ gives}\\
+
+\[x_1 = - 5 + 3x_2.\]
+
+\lang{de}{
+Die Parameterabhängigkeit zwischen $x_1$ und $x_2$ kann durch einen Parameter $s$ veranschaulicht 
+werden.\\
+Setzt man $x_2 = s$, dann erhält man das lineare Gleichungssstem
+}
+\lang{en}{
+The relationship between $x_1$ and $x_2$ can be represented via a parameter $s$.\\
+Set $x_2 = s$, so we obtain the linear system
+}
+\begin{align*}x_2 &= s \\ x_1 &= 3s - 5\end{align*}
+
+\lang{de}{Das Ergebnis von $x_1$ und $x_2$ nun als Vektor notiert ist}
+\lang{en}{The parametrised $x_1$ and $x_2$ can be written as a vector,}
+
+\[
+\begin{pmatrix}x_1 \\ x_2 \end{pmatrix} = \begin{pmatrix}-5 + 3s \\ s \end{pmatrix} = 
+\begin{pmatrix}-5 \\ 0 \end{pmatrix} + s \begin{pmatrix}3 \\ 1 \end{pmatrix},
+\]
+\lang{de}{also lautet die \emph{Parameterform}}
+\lang{en}{so the \emph{parametrised form} of the line is}
+\[g=\left\{  \begin{pmatrix} -5 \\ 0 \end{pmatrix}  + s \begin{pmatrix} 3 \\ 1 \end{pmatrix} \, \mid 
+  \, s \in \R \right\}. \]
+\end{example}
+
+\lang{de}{
+Alternativ kann man auch einen Punkt auf $g$ berechnen (indem man z.B. $x_1=0$ w"ahlt und 
+$x_2=\frac{d}{n_2}$ bzw. $x_2=0$ w"ahlt und $x_1=\frac{d}{n_1}$, je nachdem, ob $n_1$ oder $n_2$ 
+nicht $0$ ist) und einen Richtungsvektor von $g$ berechnen, z.B. 
+$\vec{v}= \begin{pmatrix}n_2 \\ -n_1\end{pmatrix}$.
+}
+\lang{en}{
+Alternatively we can also find a point on $g$ (by choosing for example $x_1=0$ and 
+$x_2=\frac{d}{n_2}$, or $x_2=0$ and $x_1=\frac{d}{n_1}$ depending on which of $n_1$ or $n_2$ is 
+non-zero) and a direction vector of $g$, i.e. $\vec{v}= \begin{pmatrix}n_2 \\ -n_1\end{pmatrix}$.
+}
+
+\begin{example}
+\lang{de}{
+F"ur $g =  \{ \begin{pmatrix}x_1 \\ x_2 \end{pmatrix}\in \R^2 \mid -x_1+3x_2=5 \}$ bestimmt man 
+zuerst den Normalenvektor
+}
+\lang{en}{
+A normal vector of $g =  \{ \begin{pmatrix}x_1 \\ x_2 \end{pmatrix}\in \R^2 \mid -x_1+3x_2=5 \}$ is
+}
+\[\vec{n} = \begin{pmatrix}-1 \\ 3 \end{pmatrix}.\]
+
+\lang{de}{
+Der Normalenvektor steht senkrecht auf dem Richtungsvektor der Geraden, daher wäre ein passender 
+Richtungsvektor
+}
+\lang{en}{
+The normal vector is orthogonal to the direction vector of the line, so an appropriate direction 
+vector would be
+}
+
+\[ \vec{v} = \begin{pmatrix}3 \\ 1 \end{pmatrix}.\]
+
+\lang{de}{
+Zur Berechnung des Stützpunktes kann in der \emph{Koordinatengleichung} $-x_1 + 3x_2 = 5$ die Variable $x_2 = 0$ gesetzt werden, dann berechnet man $x_1$.\\
+Dann erhält man $x_1 = -5$.
+\\\\
+Somit liegt der Stützpunkt bei $P=(-5; 0)$.
+\\\\
+Eine mögliche \emph{Parameterform} lautet also
+}
+\lang{en}{
+To find a constant point on the line we can set $x_2 = 0$ in the equation $-x_1 + 3x_2 = 5$, and find 
+$x_1$.\\
+We obtain $x_1 = -5.$
+\\\\
+Hence we can choose $P=(-5; 0)$ as our constant point.
+\\\\
+A \emph{parametrisation} of the line is therefore
+}
+
+\[ g=\left\{  \begin{pmatrix} -5 \\ 0 \end{pmatrix}  + s  \begin{pmatrix} 3 \\ 1 \end{pmatrix}   \, \mid \, s \in \R \right\}. \]
+\end{example}
+
+\section{\lang{de}{Normalenform einer Ebene im $\R^3$}
+         \lang{en}{Normal form of a plane in $\R^3$}}\label{sec:ebenen}
+
+
+\begin{definition}\label{def:norm_vec_ebene}
+\lang{de}{
+Es sei $E$ eine Ebene im $\R^3$. Ein \emph{Normalenvektor} der Ebene $E$ ist ein vom Nullvektor 
+verschiedener Vektor $\vec{n}$, der senkrecht auf $E$ steht, also orthogonal zu den beiden 
+Richtungsvektoren der Ebene ist. Ist die L\"ange des Vektors $\vec{n}$ gleich $1$, so spricht man 
+auch von einem \emph{Einheitsnormalenvektor} und schreibt h\"aufig $\vec{n}_{0}$.
+}
+\lang{en}{
+Let $E$ be a plane in $\R^3$. A \emph{normal vector} of the plane $E$ is a non-zero vector $\vec{n}$ 
+that is orthogonal to $E$, that is, orthogonal to both direction vectors of the plane. If the length 
+of $\vec{n}$ is equal to $1$, then we call it a \emph{unit normal vector} or a \emph{normalised 
+normal vector} and often denote it by $\vec{n}_{0}$.
+}
+
+\begin{center}
+\image{T110_NormalFormPlane_A}
+\end{center}
+\end{definition} 
+
+\begin{rule}
+\lang{de}{
+Einen Normalenvektor zu einer Ebene zu bestimmen, ist einfach, wenn man zwei Richtungsvektoren kennt.
+Sind nämlich $\vec{v}$ und $\vec{w}$ Richtungsvektoren von $E$, so liefert das Vektorprodukt 
+$\vec{v} \times \vec{w}$ einen Normalenvektor (vgl. \ref[vektorprodukt][Eigenschaften des Vektorprodukts]{sec:eigenschaften}).
+}
+\lang{en}{
+It is easy to find a normal vector to a plane if we have two non-zero non-parallel direction vectors. 
+If $\vec{v}$ and $\vec{w}$ are such direction vectors of $E$, the cross product 
+$\vec{v} \times \vec{w}$ immediately yields a normal vector (see 
+\ref[vektorprodukt][properties of the cross product]{sec:eigenschaften}).
+}
+\end{rule}
+
+\begin{example}
+\lang{de}{
+Eine Ebene besitze die zwei Richtungsvektoren $\vec{v} = \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix}$ 
+und $\vec{w} = \begin{pmatrix} 2 \\ 2 \\ 4 \end{pmatrix}$.
+\\\\
+Der Normalenvektor $\vec{n}$ der Ebene steht senkrecht auf $\vec{v}$ und $\vec{w}$ und wird durch das 
+Vektorprodukt berechnet.
+}
+\lang{en}{
+Suppose a plane has two direction vectors $\vec{v} = \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix}$ and 
+$\vec{w} = \begin{pmatrix} 2 \\ 2 \\ 4 \end{pmatrix}$.
+\\\\
+The normal vector $\vec{n}$ of the plane is orthogonal to both $\vec{v}$ and $\vec{w}$ and is found 
+via the cross product of these vectors.
+}
+
+\[\vec{n} = 
+  \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix} \times \begin{pmatrix} 2 \\ 2 \\ 4 \end{pmatrix} = 
+  \begin{pmatrix} 0 \cdot 4 - 2 \cdot 2 \\ 2 \cdot 2 - 1 \cdot 4 \\ 1 \cdot 2 - 0 \cdot 2 \end{pmatrix} = 
+  \begin{pmatrix} -4 \\ 0 \\ 2 \end{pmatrix}.\]
+
+\end{example}
+
+\begin{definition}\label{def:norm_form_ebene}\label{def:hesse_nf_ebene}
+\lang{de}{
+Sei $E=\left\{ \vec{p}+r\vec{v}+s\vec{w} \mid r,s\in \R \right\}$ eine Ebene und $\vec{n}$ ein 
+Normalenvektor zu $E$ (z.B. $\vec{n}=\vec{v}\times \vec{w}$). Dann l"asst sich die Ebene $E$ auch 
+beschreiben durch
+}
+\lang{en}{
+Let $E=\left\{ \vec{p}+r\vec{v}+s\vec{w} \mid r,s\in \R \right\}$ be a plane and $\vec{n}$ a normal 
+vector of $E$ (e.g. $\vec{n}=\vec{v}\times \vec{w}$). Then the plane $E$ can also be described by
+}
+\[ E=\{ \vec{x}\in \R^3 \mid (\vec{x}- \vec{p}) \bullet \vec{n}=0 \}. \]
+\lang{de}{Diese Darstellung der Ebene nennt man \emph{Punkt-Normalenform} von $E$.}
+\lang{en}{This representation of a plane is called the \emph{point-normal form} of $E$.}
+
+\begin{center}
+\image{T110_NormalFormPlane_B}
+\end{center}
+
+\lang{de}{Durch Umformen erh"alt man}
+\lang{en}{Rearranging gives us}
+\[ E= \{ \vec{x}\in \R^3 \mid \vec{x} \bullet \vec{n}=d \} \quad 
+\text{\lang{de}{mit}\lang{en}{with}} 
+\quad d = \vec{p} \bullet \vec{n},\]
+\lang{de}{
+welche \emph{Normalenform} genannt wird, bzw. \emph{Hessesche Normalenform}, wenn der Normalenvektor 
+$\vec{n}$ die L"ange $1$ hat.
+\\\\
+Durch Ausschreiben des Skalarprodukts erh"alt man die \emph{Koordinatenform} der Ebene
+}
+\lang{en}{
+which is called the \emph{normal form}, or the \emph{Hessian normal form} if the normal vector 
+$\vec{n}$ has length $1$.
+\\\\
+By evaluating the scalar product we obtain the \emph{coordinate form} of the plane,
+}
+\[E = \left\{   \begin{pmatrix}x_1 \\ x_2\\ x_3 \end{pmatrix}\in \R^3\, \mid\, 
+  n_1x_1+n_2x_2+n_3x_3=d \right\}. \]
+
+\lang{de}{
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10796&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}
+\href{https://www.hm-kompakt.de/video?watch=732}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{}
+\end{definition}
+
+\begin{example}\label{bsp:Ebene:ParameterKoordinatenform}
+\lang{de}{F"ur }\lang{en}{For }
+$E=\left\{  \begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix}  
++ r  \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix}  
++ s  \begin{pmatrix} 2 \\ 2 \\ 4 \end{pmatrix}  \mid r, \ s \in \R \right\}$ 
+\lang{de}{ist}\lang{en}{we have a normal vector}
+\[ \vec{n}=  \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix} \times 
+ \begin{pmatrix} 2 \\ 2 \\ 4 \end{pmatrix}  
+=\begin{pmatrix} -4 \\ 0 \\ 2 \end{pmatrix} \]
+\lang{de}{ein Normalenvektor und daher ist}\lang{en}{and hence}
+\begin{eqnarray*}
+E &=& \left\{   \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} \in \R^3 \, \mid\,
+\Big(    \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} -  \begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix}  \Big)
+\bullet \begin{pmatrix} -4 \\ 0 \\ 2 \end{pmatrix} =0 \right\}\\
+ &=&  \left\{   \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} \in \R^3 \, \mid\,
+  \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} \bullet \begin{pmatrix} -4 \\ 0 \\ 2 \end{pmatrix} 
+  =  \begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix} \bullet \begin{pmatrix} -4 \\ 0 \\ 2 \end{pmatrix} = -4 \right\}\\
+ &=&  \left\{   \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} \in \R^3 \, \mid\,
+ -4x_1+2x_3=-4 \right\}.
+\end{eqnarray*}
+\end{example}
+
+
+\begin{block}[warning]
+\lang{de}{
+Eine Normalenform und eine Koordinatenform einer Ebene gibt es nur im $\R^3$. Im $\R^n$ mit $n>3$ 
+gibt es zu Ebenen keine Normalenform, da es viele Richtungen gibt, die zur Ebene senkrecht sind.
+}
+\lang{en}{
+The normal form and the coordinate form of a plane only exist in $\R^3$. In $\R^n$ with $n>3$ there 
+cannot be a normal form of a plane, as there are multiple directions to which the plane is orthogonal.
+}
+\end{block}
+
+\section{\lang{de}{Umrechnungen der Darstellungsformen von Ebenen}
+         \lang{en}{Converting between representations of a plane}}\label{sec:umrechng_ebenenform}
+
+\lang{de}{
+Die nun bekannten Darstellungsformen der Ebenen, wie \emph{Parameterform}, \emph{Punkt-Normalenform}, 
+\emph{Hessesche Normalenform} und \emph{Koordinatenform} lassen sich problemlos ineinander umformen.\\
+Die folgende Abbildung soll die Umformung verdeutlichen.
+}
+\lang{en}{
+Now that we have introduced the different ways of representing a plane in $\R^3$, i.e. the 
+\emph{parametrised form}, \emph{point-normal form}, \emph{Hessian normal form} and 
+\emph{coordinate form}, they can be converted between.\\
+The following figure illustrates how this is done in each case.
+}
+
+\begin{center}
+\image{T110_UmwandlungEbenen}
+\end{center}
+
+\lang{de}{
+Wie man aus der Parameterform eine Normalenform und eine Koordinatenform bekommt, ist in Beispiel 
+\ref{bsp:Ebene:ParameterKoordinatenform} zu sehen. Hier wird noch erklärt, wie man aus einer 
+Koordinatenform der Ebene im $\R^3$ eine Parameterform erhält.
+}
+\lang{en}{
+The conversion from a parametrised equation of a plane in $\R^3$ to normal form and to coordinate 
+form is shown in example \ref{bsp:Ebene:ParameterKoordinatenform}. Below we explain how to convert 
+from coordinate form to parametrised form.
+}
+
+\begin{rule}
+\lang{de}{
+Um aus der Koordinatenform 
+$E=\left\{\begin{pmatrix}x_1 \\ x_2\\x_3 \end{pmatrix}\in \R^3\, \mid 
+\, n_1x_1+n_2x_2+n_3x_3=d \right\}$ 
+wieder eine Parameterform zu bekommen, ist eine Möglichkeit, die L"osungsmenge des Gleichungssystems 
+$n_1x_1+n_2x_2+n_3x_3=d$ (1 Gleichung, 3 Variablen) zu bestimmen (vgl. Abschnitt 
+\link{lgs}{Lineare Gleichungssysteme}).
+\\\\
+Alternativ kann man auch
+}
+\lang{en}{
+To parametrise the coordinate equation 
+$E=\left\{\begin{pmatrix}x_1 \\ x_2\\x_3 \end{pmatrix}\in \R^3\, \mid 
+\, n_1x_1+n_2x_2+n_3x_3=d \right\}$ 
+we can again find the solution set of the linear system $n_1x_1+n_2x_2+n_3x_3=d$ (1 equation, 3 
+variables) \link{lgs}{using methods from an earlier chapter}.
+\\\\
+Alternatively we can
+}
+\begin{itemize}
+\item \lang{de}{
+      einen Punkt auf $E$ berechnen, indem man z.B. $x_1=x_2=0$ w"ahlt und $x_3=\frac{d}{n_3}$ 
+      bzw. $x_1=x_3=0$ w"ahlt und $x_2=\frac{d}{n_2}$ bzw. $x_2=x_3=0$ w"ahlt und 
+      $x_1=\frac{d}{n_1}$, je nachdem, ob $n_1$, $n_2$ oder $n_3$ nicht $0$ ist,
+      }
+      \lang{en}{
+      find a point on $E$ (by choosing  for example $x_1=x_2=0$ and $x_3=\frac{d}{n_3}$, or 
+      $x_1=x_3=0$ and $x_2=\frac{d}{n_2}$, or $x_2=x_3=0$ and $x_1=\frac{d}{n_1}$, depending on which 
+      of $n_1$, $n_2$ or $n_3$ is non-zero),
+      }
+\item \lang{de}{und zwei Richtungsvektoren von $E$ berechnen, z.B. zwei der drei Vektoren}
+      \lang{en}{and find two direction vectors of $E$, i.e. any two of the three vectors}
+      \[\begin{pmatrix} n_2 \\ -n_1\\ 0\end{pmatrix},
+        \quad \begin{pmatrix} n_3 \\ 0\\ -n_1\end{pmatrix}\quad 
+        \text{\lang{de}{und}\lang{en}{and}} \quad \begin{pmatrix} 0 \\ n_3\\ -n_2\end{pmatrix} \]
+      \lang{de}{(je nachdem welche zwei linear unabhängig sind).}
+      \lang{en}{that are linearly independent.}
+\end{itemize}
+\end{rule}
+
+\lang{de}{Eine Parameterform der Ebene}
+\lang{en}{Suppose we want to find the parametrised form of the plane given by}
+\[ E =  \left\{   \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} \in \R^3 \, \mid\,
+ -4x_1+2x_3=-4 \right\}\] 
+\lang{de}{
+soll bestimmt werden.\\
+Hier gibt es analog zur Berechnung der Parameterform einer Geraden zwei Möglichkeiten:
+}
+\lang{en}{
+in coordinate form.\\
+Like when parametrising a line, we have two possible strategies:
+}
+
+\begin{example}
+
+\lang{de}{
+Der Normalenvektor, den man aus der Koordinatengleichung abliest, ist 
+$\vec{n}=\begin{pmatrix}-4\\ 0\\ 2 \end{pmatrix}$.
+\\\\
+Um einen Punkt auf $E$ zu bekommen, wählt man z.B. $x_1=x_2=0$ und erhält für $x_3$ die Gleichung 
+$2x_3=-4$, also $x_3=-2$.\\
+Ein Punkt auf $E$ ist also z.B. $P=(0;0;-2)$.\\
+\emph{Achtung:} Hier konnte man z.B. nicht $x_1=x_3=0$ wählen, weil dies zur unlösbaren Gleichung 
+$0+0=-4$ führt.
+\\\\
+Um zwei Richtungsvektoren zu bekommen, betrachtet man am einfachsten die oben angegebenen drei 
+Vektoren
+}
+\lang{en}{
+The normal vector $\vec{n}=\begin{pmatrix}-4\\ 0\\ 2 \end{pmatrix}$ can be read from the coefficients 
+of the coordinates.
+\\\\
+To find a point on $E$, we choose for example $x_1=x_2=0$ and obtain for $x_3$ the equation 
+$2x_3=-4$, so $x_3=-2$.\\
+Hence $P=(0;0;-2)$ is a point on $E$.\\
+\emph{Beware:} we cannot choose i.e. $x_1=x_3=0$ here, as this leads to the unsolvable equation 
+$0+0=-4$.
+\\\\
+To find two direction vectors, we simply choose from the three vectors given in the above rule,
+}
+\[\begin{pmatrix} n_2 \\ -n_1\\ 0\end{pmatrix} = \begin{pmatrix} 0 \\ 4\\ 0\end{pmatrix},
+  \quad \begin{pmatrix} n_3 \\ 0\\ -n_1\end{pmatrix}=\begin{pmatrix} 2 \\ 0\\ 4\end{pmatrix}\quad 
+  \text{\lang{de}{und}\lang{en}{and}} 
+  \quad \begin{pmatrix} 0 \\ n_3\\ -n_2\end{pmatrix}=\begin{pmatrix} 0 \\ 2\\ 0\end{pmatrix}. \]
+\lang{de}{
+Der dritte ist ein Vielfaches des ersten, aber der zweite und der erste sind linear unabhängig. Eine 
+Parameterform von $E$ ist daher gegeben durch
+}
+\lang{en}{
+The third vector is a multiple of the first, but the second and the first are linearly independent. 
+$E$ can hence be parametrised as
+}
+\[ E=\left\{  \begin{pmatrix} 0 \\ 0 \\ -2 \end{pmatrix}  
++ r  \begin{pmatrix} 0 \\ 4 \\ 0 \end{pmatrix}  
++ s  \begin{pmatrix} 2 \\ 0 \\ 4 \end{pmatrix}  \mid r, \ s \in \R \right\}. \]
+\end{example}
+
+\lang{de}{Alternativ kann man auch hier das lineare Gleichungssystem mit zwei Unbekannten lösen:}
+\lang{en}{Alternatively we can also solve the linear system with two unknowns:}\\
+
+\begin{example}
+\lang{de}{Die Gleichung der Koordinatenform war}
+\lang{en}{The equation in coordinate form was}
+\[
+-4x_1 + 2x_3 = -4.
+\]
+
+\lang{de}{
+Da in dieser Gleichung die unbekannte $x_2$ nicht auftaucht, kann sie als Variable $x_2=r$ angesehen 
+werden.
+\\\\
+Löst man die oben stehende Gleichung nun nach $x_3$ auf, erhält man:
+}
+\lang{en}{
+As the unknown $x_2$ does not appear in this equation, we can view it as a parameter $x_2=r$.
+\\\\
+Rearranging the above equation for $x_3$ gives:
+}
+
+\[
+x_3 = -2 +2x_1.
+\]
+
+\lang{de}{
+Die Parameterabhängigkeit zwischen $x_1$ und $x_3$ kann durch den Parameter $s$ veranschaulicht 
+werden.\\
+Setzt man $x_1=s$, dann erhält man das Gleichungssystem
+}
+\lang{en}{
+The relationship between $x_1$ and $x_3$ can be represented via a parameter $s$.\\
+Setting $x_1=s$ we obtain the system
+}
+
+\begin{align*}
+	  x_1 &= s\\
+    x_2 &= r\\
+	  x_3 &= -2+2s
+\end{align*}
+
+\lang{de}{Das Ergebnis von $x_1$, $x_2$ und $x_3$ wird nun als Vektor notiert}
+\lang{en}{The parametrised $x_1$, $x_2$ and $x_3$ can now be written as a vector,}
+
+\[ \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} = \begin{pmatrix} s \\ r \\ -2+2s \end{pmatrix}  
+= \begin{pmatrix} 0 \\ 0 \\ -2 \end{pmatrix}  + r \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix} 
++ s \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix},
+\]
+
+\lang{de}{also lautet die Parameterform}
+\lang{en}{so the \emph{parametrised form} of the plane is}
+
+\[E=\left\{  \begin{pmatrix} 0 \\ 0 \\ -2 \end{pmatrix}  + 
+  r  \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix} + 
+  s  \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix}  \mid r, \ s \in \R \right\}. \]
+
+\lang{de}{
+Auf dem ersten Blick sind die beiden errechneten Parameterformen nicht identisch - jedoch fällt 
+schnell auf, dass die Richtungsvektoren $\begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}$ und 
+$\begin{pmatrix} 0 \\ 4 \\ 0 \end{pmatrix}$, sowie 
+$\begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix}$ und $\begin{pmatrix} 2 \\ 0 \\ 4 \end{pmatrix}$ jeweils 
+linear abhängig sind. Daher sind die Ebenen identisch.
+}
+\lang{en}{
+At first glance, the two parametrised equations are not the same - however, it is easy to see that 
+the direction vectors $\begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}$ and 
+$\begin{pmatrix} 0 \\ 4 \\ 0 \end{pmatrix}$, and the direction vectors 
+$\begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix}$ and $\begin{pmatrix} 2 \\ 0 \\ 4 \end{pmatrix}$ are 
+linearly dependent. Hence the planes described by the two parametrisations are identical.
+}
+
+
+
+\end{example}
+
+
+
+
+\end{visualizationwrapper}
+
+
+\end{content}

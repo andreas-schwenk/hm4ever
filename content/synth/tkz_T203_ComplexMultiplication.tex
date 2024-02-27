@@ -1,0 +1,41 @@
+%This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)
+%https://creativecommons.org/licenses/by/4.0/legalcode
+\documentclass[rgb]{standalone}
+\usepackage{tkz-euclide}
+\definecolor{myorange}{hsb}{0.0833, 1, 0.8}
+\definecolor{mygreen}{hsb}{0.3333, 1, 0.8}
+\definecolor{myblue}{hsb}{0.5833, 1, 0.8}
+\definecolor{mymagenta}{hsb}{0.8333, 1, 0.8}
+\begin{document}
+	\begin{tikzpicture}[scale=1.5, font=\Large]
+		% Coordinate system
+		\tkzInit[xmin=-1,xmax=4,ymin=0,ymax=6]
+		\tkzGrid[color=lightgray]
+		\draw[fill,fill opacity=0.1, mygreen] (0,0) -- (1.5,0) arc (0:20:1.5);
+		\draw[fill,fill opacity=0.1, mygreen] (0,0) -- ({1.5*cos(50)},{1.5*sin(50)}) arc (50:70:1.5);
+		\draw[fill,fill opacity=0.1, myblue] (0,0) -- (1,0) arc (0:50:1);
+		\tkzDrawX[thick,label=Re]
+		\tkzDrawY[thick,label=Im]
+		\draw[line width=2.5pt, mygreen, -latex] (0,0) -- ({3*cos(20)},{3*sin(20)});
+		\draw[line width=2.5pt, myblue, -latex] (0,0) -- ({4*cos(50)},{4*sin(50)});
+		\draw[line width=2.5pt, myorange, -latex] (0,0) -- ({6*cos(70)},{6*sin(70)});
+		\node[very thick, draw,circle,fill,myorange,inner sep=2] at ({6*cos(70)},{6*sin(70)}) {};
+		\node[very thick, draw, circle,fill,myblue,inner sep=2] at ({4*cos(50)},{4*sin(50)}) {};
+		\node[very thick, draw, circle,fill,mygreen,inner sep=2] at ({3*cos(20)},{3*sin(20)}) {};
+		% Labels
+		\node[below=0.5mm] at (1,0){$1$};
+		\node[below=0.5mm] at (3,0){$3$};
+		\node[left=0.5mm] at (0,1){$1$};
+		\node[left=0.5mm] at (0,3){$3$};
+		\node[left=0.5mm] at (0,5){$5$};
+		\node[above right, color=myorange] at ({6*cos(70)},{6*sin(70)}){$z\cdot w$};
+		\node[above right, color=myblue] at ({4*cos(50)},{4*sin(50)}){$z$};
+		\node[above right, color=mygreen] at ({3*cos(20)},{3*sin(20)}){$w$};
+		\node[anchor=center, color=mygreen] at (1.25,0.2){$\alpha$};
+		\node[anchor=center, color=mygreen] at (0.625,1.1){$\alpha$};
+		\node[anchor=center, color=myblue] at (0.65,0.3){$\beta$};
+		\node[above left=-1mm, color=myorange] at ({4*cos(70)},{4*sin(70)}){$\vert z\vert\cdot\vert w\vert$};
+		\node[above left=-1mm, color=myblue] at ({8/3*cos(50)},{8/3*sin(50)}){$\vert z\vert$};
+		\node[above left=-1mm, color=mygreen] at ({2*cos(20)},{2*sin(20)}){$\vert w\vert$};
+	\end{tikzpicture}	
+\end{document}

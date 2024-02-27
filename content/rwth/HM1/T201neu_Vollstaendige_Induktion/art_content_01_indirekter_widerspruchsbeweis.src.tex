@@ -1,0 +1,309 @@
+%$Id: art_content.src.tex 158928 2020-11-27 16:35:18Z mmwebclient $
+\documentclass{mumie.article}
+%$Id: art_content.src.tex 158928 2020-11-27 16:35:18Z mmwebclient $
+\begin{metainfo}
+  \name{
+    \lang{de}{Formen mathematischer Beweisführung}
+    \lang{en}{Methods of mathematical proof}
+    }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+    
+    \link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_01_zahlenmengen.meta.xml}{link-ec-roots}
+    \link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_02_rechengrundlagen_terme.meta.xml}{link-rechengrundlagen}
+    \link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_04_aussagen_aequivalenzumformungen.meta.xml}{link-Inferenz}
+
+  \end{links}
+  \creategeneric
+\end{metainfo}
+
+% Besipiel für Beweis:
+% api.stream24.net/vod/getVideo.php?id=10962-2-10748&mode=iframe
+% Beweisarten:
+% api.stream24.net/vod/getVideo.php?id=10962-2-10939&mode=iframe
+
+%
+% 
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22233}{Ticket 22233}
+Copy of \href{http://team.mumie.net/issues/7777}{Ticket 7777}: content/TU9/modul_logic/mathematical_proofs/art_content.src.tex
+ bis auf den Teil "Beweis durch vollständige Induktion".
+\end{block}
+
+  
+  \usepackage{mumie.ombplus}
+  \ombchapter{1}
+  \ombarticle{1}
+
+  \lang{de}{\title{Formen mathematischer Beweisführung}}
+  \lang{en}{\title{Methods of mathematical proof}}
+
+
+  \begin{block}[info-box]
+    \tableofcontents
+  \end{block}
+
+  
+  
+  \lang{de}{
+    Im Abschnitt über 
+    \ref[link-Inferenz][Folgerung/Implikation und Äquivalenz ]{sec:folgerung}
+    wurden die Implikation und die Äquivalenz schon vorgestellt. Im folgenden Abschnitt werden wir mathematische Sätze betrachten, 
+    die oft die Form einer Implikation, d. h.
+    \[ \text{Voraussetzung} \Rightarrow \text{Behauptung}, \]
+    annehmen, und besprechen, wie man sie bewiesen kann. Der Beweis eines solchen Satzes besteht darin, zu zeigen, dass diese Implikation wahr ist. 
+    Es gibt mehrere Möglichkeiten, einen solchen Beweis zu führen. Die grundlegenden Hauptmethoden sollen hier vorgestellt werden.
+  }
+  \lang{en}{
+    In the section about \ref[link-Inferenz][Implication and Equivalence ]{sec:folgerung}, we introduced implications and equivalence.
+    In the following section we will consider mathematical statements which often have the form of an implication, i.e.
+    \[ \text{Hypothesis} \Rightarrow \text{Conclusion}, \]
+    and we will discuss how one can prove them. The proof of such a statement consists in showing that this implication is true.
+    There are various ways of forming such a proof. The main methods will be introduced here.
+  }
+  
+  \section{\lang{de}{Direkter Beweis}\lang{en}{Direct Proof}}\label{sec:direkterbeweis}  
+  
+  \lang{de}{Beim \emph{direkten Beweis} wird die zu beweisende Implikation in eine Kette von Implikationen aufgeteilt, z.B.
+  \[ \text{Voraussetzung} \Rightarrow A_1 \Rightarrow A_2 \Rightarrow A_3 \Rightarrow \text{Behauptung} \] 
+  mit gewissen Aussagen $A_1$, $A_2$ und $A_3$, wobei von jeder einzelnen dieser Implikationen der Wahrheitswert W bereits 
+  bekannt oder unmittelbar einsichtig ist.}
+  \lang{en}{In a \emph{direct proof}, the implication to be proved is split into a chain of implications, e.g.
+  \[ \text{Hypothesis} \Rightarrow A_1 \Rightarrow A_2 \Rightarrow A_3 \Rightarrow \text{Conclusion} \] 
+  with certain propositions $A_1$, $A_2$ und $A_3$, for which the truth T of each implication is known or immediately obvious.
+  }
+   
+  \begin{example}
+    \lang{de}{  Für $n\in \N$ gilt:
+    \[ n \text{ ungerade} \Rightarrow n^2-1 \text{ ist durch }4\text{ teilbar} \]
+    Ein Beweis dieser Aussage geht zum Beispiel so:}
+    \lang{en}{  For $n\in \N$ it is true that:
+    \[ n \text{ odd} \Rightarrow n^2-1 \text{ is divisible by }4 \]
+    An example of a proof of this statement is:
+    }
+
+
+    \begin{eqnarray*}
+      n \text{ \lang{de}{ungerade} } 
+        &\Rightarrow & \text{\lang{de}{Es gibt ein }\lang{en}{There is a }}k\in \N\text{\lang{de}{ mit }\lang{en}{ with }}n=2k-1 \\
+        &\Rightarrow & \text{\lang{de}{Es gibt ein }\lang{en}{There is a }} k\in \N\text{\lang{de}{ mit }\lang{en}{ with }} n^2-1=(2k-1)^2-1=(4k^2-4k+1)-1=4k^2-4k=4\cdot (k^2-k) \\
+        &\Rightarrow & \text{\lang{de}{Es gibt ein }\lang{en}{There is a }} l\in \N\text{\lang{de}{ mit }\lang{en}{ with }} n^2-1=4l \quad (\text{\lang{de}{nämlich}\lang{en}{ namely } }l=k^2-k)\\
+        &\Rightarrow & n^2-1 \text{\lang{de}{ ist durch $4$ teilbar}\lang{en}{ is divisible by $4$}} 
+    \end{eqnarray*}
+
+    
+    \lang{de}{(Bei der Umformung in der zweiten Zeile wurde übrigens die 
+    \ref[link-rechengrundlagen][zweite Binomische Formel ]{rule:binomische_formeln}
+    $(a-b)^2=a^2-2ab+b^2$ benutzt.)
+    Da jede einzelne Implikation in der Kette wahr ist, ist auch die Implikation des Satzes wahr.}
+    \lang{en}{For the rearrangement in the second line we used the 
+    \ref[link-rechengrundlagen][second binomial identity ]{rule:binomische_formeln}
+    $(a-b)^2=a^2-2ab+b^2$.)
+    Since every implication in the chain is true, the implication of the original statement is also true.}
+    
+   \end{example}
+
+\begin{proof*}[\lang{de}{Begründung für das Verfahren}\lang{en}{Justification for the procedure}]
+     \begin{showhide}
+    
+    \lang{de}{Um festzustellen, dass die gesamte Implikation wahr ist, 
+    wenn die einzelnen Implikationen wahr sind, vergleicht man am
+    besten die Wahrheitstafeln von}
+    \lang{en}{To confirm that the entire implication is true when the individual implications are true,
+    we can compare the truth table of}
+       
+    \[ (A\Rightarrow A_1) \wedge (A_1\Rightarrow A_2) \wedge \ldots \wedge (A_n \Rightarrow B) \]
+    
+    \lang{de}{ und von }
+    \lang{en}{ to that of  }
+    
+    \[ A \Rightarrow B \]
+    
+    \lang{de}{ Hier beispielhaft der Fall eines Zwischenschritts:}
+    \lang{en}{ For example, in the case of a single intermediate implication step:}
+    
+    \begin{table}[\align{c}\cellaligns{ccccccccc}] % {c|c|c||c|c|c||c}
+      \head
+      $A$ & $A_1$ & $B$ && $A\Rightarrow A_1$ & $A_1 \Rightarrow B$ & $(A\Rightarrow A_1) \wedge (A_1\Rightarrow B)$ 
+      && $A \Rightarrow B$ 
+      \body
+      \lang{de}{W} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} && \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} && \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} \\
+      \lang{de}{W} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} && \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} && \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} \\
+      \lang{de}{W} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} && \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} && \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} \\
+      \lang{de}{W} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} && \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} && \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} \\
+      \lang{de}{F} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} && \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} && \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} \\
+      \lang{de}{F} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} && \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} && \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} \\
+      \lang{de}{F} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} && \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} && \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} \\
+      \lang{de}{F} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} && \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} && \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$}
+    \end{table}
+
+    \lang{de}{Wenn in der Tabelle die Aussageform $(A\Rightarrow A_1) \wedge (A_1\Rightarrow B)$ den Wahrheitswert W hat, hat auch
+    $A \Rightarrow B$ den Wahrheitswert W, also folgt die Richtigkeit der gesamten Implikation aus der Richtigkeit der
+    einzelnen Implikationen.}
+    \lang{en}{When in the table the proposition of the form $(A\Rightarrow A_1) \wedge (A_1\Rightarrow B)$ has the truth value T,
+    $A \Rightarrow B$ also has the truth value T. Thus the correctness of the whole implication follows from the correctness of the individual implications.}
+    
+    \end{showhide}
+\end{proof*}
+
+  \section{\lang{de}{Indirekter Beweis und Widerspruchsbeweis}\lang{en}{Indirect Proof and Proof by Contradiction}}\label{sec:indirekterbeweis}
+  
+  \lang{de}{Manchmal ist es sehr schwer oder gar unmöglich, einen direkten Beweis zu führen. Dann ersetzt man die eigentlich zu
+  zeigende Implikation durch eine dazu äquivalente Aussage.}
+  \lang{en}{Sometimes it is very difficult or even impossible to do a direct proof. One can then replace the implication to be proved with an equivalent proposition.}
+    
+  \begin{theorem} \label{thm:equiv-to-implication}
+    \lang{de}{Für beliebige Aussagen $A$ und $B$ sind die folgenden Aussagen zueinander äquivalent:}
+    \lang{en}{For any propositions $A$ and $B$, the following propositions are equivalent to each other:}
+       
+    \begin{enumerate}
+      \item $A\Rightarrow B$ (\lang{de}{entspricht dem \notion{\emph{direkten Beweis}}}\lang{en}{corresponding to \notion{\emph{direct proof}}})
+      \item $\neg B \Rightarrow \neg A$ (\lang{de}{entspricht dem \notion{\emph{indirekter Beweis}}}\lang{en}{corresponding to \notion{\emph{indirect proof}}})
+      \item $\neg(A\wedge \neg B)$ (\lang{de}{entspricht dem \notion{\emph{Widerspruchsbeweis}}}\lang{en}{corresponding to \notion{\emph{proof by contradiction}}})
+    \end{enumerate}
+  \end{theorem}
+  
+\begin{proof*}[\lang{de}{Beweis des Satzes}\lang{en}{Proof of the theorem}]
+\begin{showhide}
+        
+    \lang{de}{Um zu sehen, dass die Implikationen "aquivalent sind, betrachtet man die zugeh"origen Wahrheitstafeln:}
+    \lang{en}{To see that the implications are equivalent, consider the relevant truth tables:}
+   
+    \begin{table}[\align{c}\cellaligns{cccc}] % {c|c|c||c|c|c||c}
+      \head
+      $A$ & $B$ && $A\Rightarrow B$
+      \body
+      \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} && \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} \\
+      \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} && \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} \\
+      \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} && \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} \\
+      \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} && \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$}
+    \end{table}
+    
+    \begin{table}[\align{c}\cellaligns{cccccc}] % {c|c|c||c|c|c||c}
+      \head
+      $A$ & $B$ &&  $\neg B$ & $\neg A$ & $\neg B \Rightarrow \neg A$ 
+      \body
+      \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} && \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$}\\
+      \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} && \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$}\\
+      \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} && \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$}\\
+      \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} && \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$}
+    \end{table}
+    
+    \begin{table}[\align{c}\cellaligns{cccccc}] % {c|c|c||c|c|c||c}
+      \head
+      $A$ & $B$ && $\neg B$ & $A\wedge \neg B$ & $\neg(A\wedge \neg B)$
+      \body
+      \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} && \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} \\
+      \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} && \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} \\
+      \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} && \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} \\
+      \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} && \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$} & \lang{de}{F}\lang{en}{F}\lang{zh}{F}\lang{fr}{$\text{F}$} & \lang{de}{W}\lang{en}{T}\lang{zh}{T}\lang{fr}{$\text{V}$}
+    \end{table}
+    
+    \lang{de}{Dass jeweils die letzten Spalten der drei Wahrheitstafeln identisch sind, zeigt, dass für jeden Wahrheitswert von $A$ 
+    und $B$ alle drei Implikationen denselben Wahrheitswert haben. Also sind sie "aquivalent.}
+    \lang{en}{In each of the three truth tables the final columns are identical. This shows that for each truth value of $A$ and $B$ all three implications have the same truth value. Thus they are equivalent.}
+    \end{showhide}
+\end{proof*}
+
+  \lang{de}{Beim sogenannten \emph{indirekten Beweis} (oder \emph{Beweis durch Kontraposition}) wird nun statt der Implikation
+  $\text{Voraussetzung} \Rightarrow \text{Behauptung}$ die dazu äquivalente Implikation 
+  \[ \text{Negation der Behauptung} \Rightarrow \text{Negation der Voraussetzung} \]
+  gezeigt. Dies macht man dann üblicherweise in mehreren Schritten, wie es beim direkten Beweis erklärt wurde.}
+  \lang{en}{For so-called \emph{indirect proof} (or \emph{proof by contraposition}, instead of the implication 
+  $\text{Hypothesis} \Rightarrow \text{Conclusion}$, the equivalent implication
+  \[ \text{Negation of the hypothesis} \Rightarrow \text{Negation of the conclusion} \]
+  is shown. This is usually done in multiple steps, as was explained for direct proofs.
+  }
+
+
+\begin{example}
+    \lang{de}{Für $n,m\in \N$ gilt: $\quad nm \text{ ungerade } \Rightarrow n \text{ ungerade und } m \text{ ungerade}$.\\
+    Dies kann man durch einen indirekten Beweis zeigen, indem man also für $n,m\in \N$ die Aussage:
+    \begin{center}\textit{Wenn nicht $n$ und $m$ beide ungerade sind, ist $nm$ nicht ungerade.}
+    \end{center}
+
+    zeigt:}
+    \lang{en}{For $n,m\in \N$ it is true that: $\quad nm \text{ odd } \Rightarrow n \text{ odd and } m \text{ odd}$.\\
+    One can show this with an indirect proof, by showing the proposition:
+    \begin{center}\textit{Wenn nicht $n$ und $m$ beide ungerade sind, ist $nm$ nicht ungerade.}
+    \end{center}
+
+    to be true for $n,m\in \N$:}
+   
+    \lang{de}{  $n$ und $m$ nicht beide ungerade\\ $\Rightarrow$ $n$ gerade oder $m$ gerade \\
+    $\Rightarrow$ es gibt $k\in \N$ mit $n=2k$ oder es gibt $l\in \N$ mit $m=2l$\\
+    $\Rightarrow$ es gibt $k\in \N$ mit $nm=2km$ oder es gibt $l\in \N$ mit $nm=2nl$ \\
+    $\Rightarrow$ es gibt $j\in \N$ mit $nm=2j$ (nämlich $j=km$ oder $j=ln$) \\
+    $\Rightarrow$ $nm$ gerade, d.h. nicht ungerade.}
+    \lang{en}{  $n$ and $m$ not both odd\\ $\Rightarrow$ $n$ even or $m$ even \\
+    $\Rightarrow$ there is a $k\in \N$ with $n=2k$ or there is an $l\in \N$ with $m=2l$\\
+    $\Rightarrow$ there is a $k\in \N$ with $nm=2km$ or there is an $l\in \N$ mit $nm=2nl$ \\
+    $\Rightarrow$ there is a $j\in \N$ with $nm=2j$ (namely $j=km$ or $j=ln$) \\
+    $\Rightarrow$ $nm$ even, i.e. not odd.}
+  \end{example}
+
+
+%Video
+
+\lang{de}{
+\begin{example}
+Im folgenden Video finden Sie ein anderes Beispiel für direkten und indirekten Beweis:
+
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10748&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+
+\end{example}
+}
+
+  \lang{de}{Eine dritte Möglichkeit des Beweises der Implikation $\text{Voraussetzung} \Rightarrow \text{Behauptung}$ ergibt sich
+  aus der dritten Implikation in Satz \ref{thm:equiv-to-implication}. Man zeigt dabei, die Implikation
+  \[ \text{Voraussetzung und Negation der Behauptung} \Rightarrow \text{F}, \] 
+  d.h. aus der Annahme, dass die Voraussetzung und die Negation der Behauptung beide wahr sind, leitet man eine Aussage
+  her, die bekanntermaßen falsch ist (d.h. den Wahrheitswert F hat), also einen Widerspruch.
+  Diese Form des Beweises heißt daher auch \emph{Beweis durch Widerspruch} oder \emph{Widerspruchsbeweis}.}
+  \lang{en}{A third method to prove the implication $\text{Hypothesis} \Rightarrow \text{Conclusion}$ arises from the third implication in Theorem \ref{thm:equiv-to-implication}.
+  For this, one shows the implication
+  \[ \text{Hypothesis and negation of the conclusion} \Rightarrow \text{F}, \]
+  i.e. from the assumption that both the hypothesis and the negation of the conclusion are true, we derive a statement which 
+  is known to be false (i.e. has the truth value F), thus a contradiction. This type of proof is called \emph{proof by contradiction}.
+  }
+  
+  \begin{example}
+    \lang{de}{Es soll die Implikation 
+    \[ x^2=2 \Rightarrow x\not\in \Q \]
+    gezeigt werden. (Oder anders ausgedrückt: $\sqrt{2}$ ist keine rationale Zahl.)
+
+    Hier führt man den Beweis am besten als Widerspruchsbeweis. Man zeigt also, dass die Aussage
+    $x^2=2 \wedge x\in \Q$ eine (offensichtlich) falsche Aussage impliziert. D.h. man nimmt an, dass eine rationale
+    Zahl $x$ die Gleichung $x^2=2$ erfüllt, und leitet daraus eine falsche Aussage her.
+
+    Der ausführliche Beweis kann im \ref[link-ec-roots][Beweis, dass $\sqrt{2}$ nicht rational ist]{proof:sqrt2}, nachgelesen werden.}
+    \lang{en}{We wish to prove the implication:
+    \[ x^2=2 \Rightarrow x\not\in \Q \]
+    (or stated differently: $\sqrt{2}$ is not a rational number.)
+    
+    Here the best approach is a proof by contradiction. To do this, one shows that the proposition  $x^2=2 \wedge x\in \Q$ implies a (clearly) false proposition.
+    That is, one assumes that a rational number $x$ satisfies the equation $x^2=2$, and derives a false statement from that assumption.
+    The detailed proof can be read in \ref[link-ec-roots][Proof that $\sqrt{2}$ is not rational]{proof:sqrt2}.
+    }
+  \end{example}
+
+%Video
+\lang{de}{
+Neben einer Zusammenfassung der verschiedenen Arten von Beweisen enthält das folgende Video ein Beispiel für einen indirekten Beweis und ein 
+Beispiel für einen Widerspruchsbeweis:
+
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10939&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+}
+
+\end{content}

@@ -1,0 +1,813 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Kurvendiskussion}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T603_Example_D.meta.xml}{T603_Example_D}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T603_Example_C.meta.xml}{T603_Example_C}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T603_Example_B.meta.xml}{T603_Example_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T603_Example_A.meta.xml}{T603_Example_A}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T104_weitere_elementare_Funktionen/g_art_content_14_potenzregeln.meta.xml}{power-rules}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{3}
+\ombarticle{4}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\lang{de}{\title{Kurvendiskussion}}
+\lang{en}{\title{Analyzing functions}}
+
+\begin{block}[annotation]
+Im Ticket-System: \href{https://team.mumie.net/issues/22700}{Ticket 22700}\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+\section{
+\lang{de}{Extrempunkte und Wendepunkte}
+\lang{en}{Extrema and inflection points}
+}
+\lang{de}{
+Im letzten Kapitel haben wir bereits gesehen, dass das Monotonieverhalten einer Funktion, also ob sie steigt oder fällt, 
+mit Hilfe der 1. Ableitung  beschrieben werden kann. Steigen die Funktionswerte, so gilt $f'(x) \geq 0$. Bei fallenden 
+Funktionswerten gilt hingegen $f'(x) \leq 0$. Von besonderer Bedeutung sind die Punkte, an denen sich dieses Verhalten 
+ändert. Typischerweise sind dies die \emph{Extrempunkte} des Graphen.
+}
+\lang{en}{
+In the last chapter, we saw that the monotonicity behavior of a function, i.e.
+whether it increases or decreases, is governed by its first derivative.
+If the function is increasing, then $f'(x) \geq 0$; for decreasing functions,
+on the other hand, $f'(x) \leq 0$. The points where this behavior changes are especially important.
+These are typically the \emph{extrema} of the graph.
+}
+
+  \lang{de}{	\begin{definition}[Extrempunkt] 
+  Es sei $f$ eine auf einem Intervall $I$ definierte stetige Funktion.
+  
+  Die Stelle $x_0 \in I$ nennen wir ...
+		\begin{itemize}
+		  \item[] ... \notion{globale Maximalstelle} von $f$, falls $f(x) \leq f(x_0)$ für alle $x \in I$ gilt. 
+		  \item[] ... \notion{lokale Maximalstelle} von $f$, falls $f(x) \leq f(x_0)$ zumindest für alle $x$ in einem kleinen offenen Intervall um $x_0$ gilt.
+		  \item[] ... \notion {globale Minimalstelle} von $f$, falls $f(x) \geq f(x_0)$ für alle $x \in I$ gilt.
+		  \item[] ...  \notion{lokale Minimalstelle} von $f$, falls $f(x) \geq f(x_0)$ zumindest für alle $x$ in einem kleinen offenen Intervall um $x_0$ gilt.
+          \end{itemize}
+
+		  Eine lokale/globale Maximal- oder Minimalstelle bezeichnet man
+		        auch als lokale/globale \notion{Extremalstelle}. 
+         
+          Ist $x_0$ eine Extremalstelle, so nennen wir den Punkt $(x_0; f(x_0))$ \notion{Extrempunkt}. Ein Extrempunkt an einer Minimalstelle heißt \notion{Tiefpunkt}, ein Extrempunkt an einer Maximalstelle heißt \notion{Hochpunkt}.
+	 \end{definition}}
+
+  \lang{en}{	\begin{definition}[Extrema] 
+  Let $f$ be a continuous function defined on an interval $I$.
+  
+  A point $x_0 \in I$ is called a...
+  
+		\begin{itemize}
+		  \item[] ... \notion{global maximum point} of $f$ if $f(x) \leq f(x_0)$ for all $x \in I$. 
+		  \item[] ... \notion{local maximum point} of $f$ if $f(x) \leq f(x_0)$ for at least all $x$ in a small open interval containing $x_0$.
+		  \item[] ... \notion {global mimimum point} of $f$ if $f(x) \geq f(x_0)$ for all $x \in I$.
+		  \item[] ...  \notion{local minimum point} of $f$ if $f(x) \geq f(x_0)$ for at least all $x$ in a small open interval containing $x_0$.
+          \end{itemize}
+
+      A local (global) maximum or minimum point is also called a local (global) \notion{extremum} or \notion{extreme point}.
+
+      Both $x_0$ and the point $(x_0, f(x_0))$ are referred to as \notion{extrema}.
+	 \end{definition}}
+\lang{de}{Diese Definition gilt auch für Funktionen, die gar keine Ableitung besitzen. Wir werden uns aber meist mit differenzierbaren Funktionen 
+befassen. Für solche Funktionen haben wir das folgende Kriterium, um Extremalstellen aufzuspüren.}
+\lang{en}{
+This definition remains valid for functions that do not have a derivative at all.
+However, we will usually be discussing differentiable functions. For differentiable functions,
+we have the following criterion to detect extrema.
+}
+\begin{theorem}[
+\lang{de}{Hinreichendes Kriterium für Extremalstellen I}
+\lang{en}{Sufficient criterion for extrema I}]
+	\lang{de}{
+    Es sei $f$ differenzierbar. Ist $f'(x_0)=0$ und wechselt $f'$ in $x_0$ das Vorzeichen, so ist 
+	 $x_0$ eine Extremalstelle. 
+     
+     Ist dies der Fall, dann gilt: 
+     \begin{itemize}
+     \item $x_0$ ist eine Maximalstelle, wenn sich das Vorzeichen von $+$ nach $-$ ändert. 
+     \item $x_0$ ist eine Minimalstelle, wenn sich das Vorzeichen von $-$ nach $+$ ändert.
+     \end{itemize}
+     }
+  \lang{en}{
+    Let $f$ be differentiable. If $f'(x_0)=0$ and $f'$ changes sign in $x_0$,
+    then $x_0$ is an extremum.
+
+    In this case,
+    \begin{itemize}
+     \item $x_0$ is a maximum point if the sign changes from $+$ to $-$. 
+     \item $x_0$ is a minimum point if the sign changes from $-$ to $+$. 
+     \end{itemize}
+  }
+\end{theorem}
+\lang{de}{
+Meist benutzt man jedoch das folgende Kriterium, weil es leichter nachzuprüfen ist.
+}
+\lang{en}{
+The following criterion is used more often because its conditions are easier to verify.
+}
+\begin{theorem}[
+\lang{de}{Hinreichendes Kriterium für Extremalstellen II}
+\lang{en}{Sufficient criterion for extrema II}]
+	\lang{de}{
+    Es sei $f$ zweimal differenzierbar. 
+    \begin{itemize}
+    \item  Ist $f'(x_0)=0$ und $f''(x_0) < 0$, so ist  $x_0$ eine Maximalstelle. 
+    \item  Ist $f'(x_0)=0$ und $f''(x_0) > 0$, so ist  $x_0$ eine Minimalstelle. 
+     \end{itemize}
+}
+\lang{en}{
+    Suppose $f$ is twice differentiable.
+    \begin{itemize}
+    \item  If $f'(x_0)=0$ and $f''(x_0) < 0$ then  $x_0$ is a maximum point. 
+    \item  If $f'(x_0)=0$ and $f''(x_0) > 0$ then  $x_0$ is a minimum point. 
+     \end{itemize}
+}
+\end{theorem}
+ \begin{block}[warning]
+\lang{de}{Eine Stelle $x_0$ mit $f'(x_0) = 0$ wird auch \notion{stationäre} Stelle genannt. Extremalstellen können nur an stationären Stellen liegen. 
+Also: Gilt $f'(x_0) \neq 0$, liegt keine Extremalstelle vor. }
+\lang{en}{
+A point $x_0$ for which $f'(x_0) = 0$ is also called a \notion{stationary} point.
+Extrema can only occur at stationary points. That is: if $f'(x_0) \neq 0$, then $x_0$
+is not an extremum.
+}
+
+\lang{de}{
+Gilt jedoch $f'(x) = 0 $ und $f''(x) = 0$, dann kann trotzdem eine Extremalstelle vorliegen (muss aber nicht).  
+}
+\lang{en}{
+On the other hand, extrema can (but do not have to) occur even if $f'(x) = 0 $ and $f''(x) = 0$.
+}
+ \end{block}
+
+\begin{example}
+
+\lang{de}{Wir wollen die gewinnmaximierende Menge $x$ bei gegebener Preis-Absatz-Funktion $p(x)$ und gegebener Kostenfunktion $K(x)$ berechnen.
+Dazu sei 
+\begin{align*}
+p(x) &\ =\ & -2x + 400, \\
+K(x) &\ =\ & 4x + 10000.
+\end{align*}
+}
+\lang{en}{
+Given a fixed price-demand function $p(x)$ and a cost function $K(x)$, we want to
+find the quantity $x$ that maximizes profit. Suppose
+\begin{align*}
+p(x) &\ =\ & -2x + 400, \\
+K(x) &\ =\ & 4x + 10000.
+\end{align*}
+}
+
+\lang{de}{Hierzu stellen wir zuerst die Gewinnfunktion $G(x)$ auf: \\
+Gewinn wird als Erlös minus Kosten definiert, wobei der Erlös $E(x)$ mit der Preis-Absatzfunktion mal der Menge berechnet wird, also konkret \\
+\begin{align*}
+E(x) &\ =\ & p(x) \cdot x \\
+  &\ =\ & -2x^2 + 400x,\\
+
+G(x) &\ =\ & E(x) - K(x)\\
+  &\ =\ & -2x^2 + 396x - 10000.\\
+\end{align*}
+}
+\lang{en}{
+First we determine the profit function $G(x)$. \\
+Profit is defined as revenue minus costs, where the revenue $E(x)$ is the product
+of price and quantity, i.e.
+\begin{align*}
+E(x) &\ =\ & p(x) \cdot x \\
+  &\ =\ & -2x^2 + 400x,\\
+
+G(x) &\ =\ & E(x) - K(x)\\
+  &\ =\ & -2x^2 + 396x - 10000.\\
+\end{align*}
+}
+
+\lang{de}{Zur Berechnung der gewinnmaximierenden Menge berechnen wir nun die Extremstellen der Gewinnfunktion mit Hilfe des hinreichenden Kriteriums. Die 
+ersten beiden Ableitungen sind\\
+\begin{align*}
+G'(x) &\ =\ & -4x + 396,\\
+G''(x) &\ =\ & -4.
+\end{align*}
+}
+\lang{en}{
+To compute the quantity that maximizes profit, we will find the extrema of the
+profit function using the above sufficient criterion. The first two derivatives are
+\begin{align*}
+G'(x) &\ =\ & -4x + 396,\\
+G''(x) &\ =\ & -4.
+\end{align*}
+}
+
+\lang{de}{Die erste Ableitung der Gewinnfunktion muss jetzt gleich Null gesetzt werden: \\
+\begin{align*}
+& G'(x) &\ =\ & 0 \\
+ &\Leftrightarrow \ 0 &\ =\ & -4x + 396\\
+ &\Leftrightarrow \ 4x &\ =\ & 396\\
+ &\Leftrightarrow \ x &\ =\ & 99.
+\end{align*}
+}
+
+\lang{en}{The first derivative of the profit function should be set equal to zero:
+\begin{align*}
+& G'(x) &\ =\ & 0 \\
+ &\Leftrightarrow \ 0 &\ =\ & -4x + 396\\
+ &\Leftrightarrow \ 4x &\ =\ & 396\\
+ &\Leftrightarrow \ x &\ =\ & 99.
+\end{align*}
+}
+
+\lang{de}{Der Kandidat für eine Extremalstelle ist also $x = 99$. Dieser Wert muss nun in die zweite Ableitung der Gewinnfunktion 
+eingesetzt werden: 
+
+\begin{align*}
+G''(99) &\ =\ & -4 <0. \\
+\end{align*}
+}
+
+\lang{en}{
+So the candidate for an extremum is $x=99$. Now we need to evaluate the second
+derivative of the profit function at this point:
+
+\begin{align*}
+G''(99) &\ =\ & -4 <0. \\
+\end{align*}
+}
+
+\lang{de}{Die zweite Ableitung an der Stelle $x=99$ ist negativ, d.\,h. es liegt ein lokales Maximum vor. \\
+
+Die maximale Gewinn liegt somit bei $G(99) = 9602$. 
+
+Das Unternehmen erzielt den maximalen Gewinn von $9602$ € bei $99$ verkauften Gütern. 
+}
+
+\lang{en}{
+The second derivative at $x=99$ is negative, so this is a local maximum.
+
+Therefore, the maximal profit is $G(99) = 9602$.
+
+The company earns the maximal profit of $9602$ € if it sells $99$ units.
+}
+
+\end{example}
+
+
+ \begin{quickcheckcontainer}
+\randomquickcheckpool{1}{2}
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\number{k}{1}
+%			\randint{k}{1}{2}  % Vorzeichen des höchsten Koeff (-1)^k
+			\randint{l}{1}{2}  % Vorzeichen der Extremstelle: (-1)^(l+1)
+			\function[calculate]{l1}{2-l}  % Dirac-Funktionen
+			\function[calculate]{l2}{l-1}
+			
+			\randint{a}{1}{3}
+			\randint{b}{1}{4}
+			\randint{c}{-4}{4}
+		    \function[normalize]{f}{(-1)^k*(a*x^4+(-1)^l*b*x^3+c)}
+		    \number{n1}{0}
+			\function[calculate]{n2}{(-1)^(l+1)*3*b/(4*a)}
+			
+			\function[calculate]{ns1}{l1*n1+l2*n2}
+			\function[calculate]{ns2}{l1*n2+l2*n1}
+			
+			\function[expand,normalize]{df}{(-1)^k*(4*a*x^3+3*(-1)^l*b*x^2)}
+			\function[expand,normalize]{lin}{4*a*x+3*(-1)^l*b}
+			\function[normalize]{x2}{(-1)^k*x^2}
+% 			\function[calculate]{vz}{(-1)^(l+1)}
+% 			\function[calculate]{zae}{3*b}
+% 			\function[calculate]{nen}{4*a}
+		\end{variables}
+
+      \lang{de}{
+			\text{Bestimmen Sie die möglichen Extremalstellen der Funktion $f(x)=\var{f}$, indem Sie
+			die Nullstellen ihrer Ableitungsfunktion bestimmen.
+            
+			Die möglichen Extremalstellen sind (in aufsteigender Reihenfolge): \ansref und \ansref.\\
+			Von diesen beiden Stellen können wir mit unseren Kriterien nur die Stelle \ansref 
+            als Extremalstelle identifizieren.\\
+			Hat $f$ dort (1) ein Maximum oder (2) ein Minimum? \ansref}}
+
+      \lang{en}{
+      \text{Determine the potential extrema of the function $f(x)=\var{f}$
+      by finding the zeros of its derivative.
+      
+      The potential extrema (in increasing order) are: \ansref und \ansref.\\
+      Using our criteria, we are only able to show that the point \ansref is an extremum.\\
+      Does $f$ have (1) a maximum or (2) a minimum there? \ansref
+      }
+      }
+		
+		\begin{answer}
+			\solution{ns1}
+		\end{answer}
+		\begin{answer}
+			\solution{ns2}
+		\end{answer}
+		\begin{answer}
+			\solution{n2}
+		\end{answer}
+		\begin{answer}
+			\solution{k}
+		\end{answer}
+    \lang{de}{
+		\explanation{Die Ableitung von $f$ ist $f'(x)=\var{df}=\var{x2}\cdot (\var{lin})$.\\
+		Die Funktion hat also die möglichen Extremalstellen $x=0$ und $x=\var{n2}$.\\
+		Bei $x=\var{n2}$ wechselt die Ableitung ihr Vorzeichen von positiv nach negativ, die
+		Funktion $f$ hat dort also ein Maximum. Um $x=0$ bleibt das Vorzeichen der Ableitung
+		das gleiche. Hier können wir das Kriterium also nicht anwenden. (Tatsächlich liegt hier  
+        keine Extremalstelle vor, wie man etwa durch Grenzwertbetrachtungen nachweisen kann.)
+		}}
+    \lang{en}{
+    \explanation{The derivative of $f$ is $f'(x)=\var{df}=\var{x2}\cdot (\var{lin})$.\\
+    This function has $x=0$ and $x=\var{n2}$ as possible extrema.
+    At $x=\var{n2}$, the derivative changes its sign from positive to negative,
+    and therefore $f$ has a maximum there. The sign of the derivative stays the same
+    near $x=0$, so we cannot apply the criterion there.
+    (In fact, $x=0$ is not an extremum, as one can show by considering limits.)}
+    }
+	\end{quickcheck}
+	
+	\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\number{k}{2}
+%			\randint{k}{1}{2}  % Vorzeichen des höchsten Koeff (-1)^k
+			\randint{l}{1}{2}  % Vorzeichen der Extremstelle: (-1)^(l+1)
+			\function[calculate]{l1}{2-l}  % Dirac-Funktionen
+			\function[calculate]{l2}{l-1}
+			
+			\randint{a}{1}{3}
+			\randint{b}{1}{4}
+			\randint{c}{-4}{4}
+		    \function[normalize]{f}{(-1)^k*(a*x^4+(-1)^l*b*x^3+c)}
+		    \number{n1}{0}
+			\function[calculate]{n2}{(-1)^(l+1)*3*b/(4*a)}
+			
+			\function[calculate]{ns1}{l1*n1+l2*n2}
+			\function[calculate]{ns2}{l1*n2+l2*n1}
+			
+			\function[expand,normalize]{df}{(-1)^k*(4*a*x^3+3*(-1)^l*b*x^2)}
+			\function[expand,normalize]{lin}{4*a*x+3*(-1)^l*b}
+			\function[normalize]{x2}{(-1)^k*x^2}
+% 			\function[calculate]{vz}{(-1)^(l+1)}
+% 			\function[calculate]{zae}{3*b}
+% 			\function[calculate]{nen}{4*a}
+		\end{variables}
+		
+			\lang{de}{
+			\text{Bestimmen Sie die möglichen Extremalstellen der Funktion $f(x)=\var{f}$, indem Sie
+			die Nullstellen ihrer Ableitungsfunktion bestimmen.
+            
+			Die möglichen Extremalstellen sind (in aufsteigender Reihenfolge): \ansref und \ansref.\\
+			Von diesen beiden Stellen können wir mit unseren Kriterien nur die Stelle \ansref 
+            als Extremalstelle identifizieren.\\
+			Hat $f$ dort (1) ein Maximum oder (2) ein Minimum? \ansref}}
+
+      \lang{en}{
+      \text{Determine the potential extrema of the function $f(x)=\var{f}$
+      by finding the zeros of its derivative.
+      
+      The potential extrema (in increasing order) are: \ansref und \ansref.\\
+      Using our criteria, we are only able to show that the point \ansref is an extremum.\\
+      Does $f$ have (1) a maximum or (2) a minimum there? \ansref
+      }
+      }
+		
+		\begin{answer}
+			\solution{ns1}
+		\end{answer}
+		\begin{answer}
+			\solution{ns2}
+		\end{answer}
+		\begin{answer}
+			\solution{n2}
+		\end{answer}
+		\begin{answer}
+			\solution{k}
+		\end{answer}
+    \lang{de}{
+		\explanation{Die Ableitung von $f$ ist $f'(x)=\var{df}=\var{x2}\cdot (\var{lin})$.\\
+		Die Funktion hat also die möglichen Extremalstellen $x=0$ und $x=\var{n2}$.\\
+		Bei $x=\var{n2}$ wechselt die Ableitung ihr Vorzeichen von negativ nach positiv, die
+		Funktion $f$ hat dort also ein Minimum. Um $x=0$ bleibt das Vorzeichen der Ableitung
+		das gleiche. Hier können wir das Kriterium also nicht anwenden.	(Tatsächlich liegt hier  
+        keine Extremalstelle vor, wie man etwa durch Grenzwertbetrachtungen nachweisen kann.)			
+		}}
+  \lang{en}{
+    \explanation{The derivative of $f$ is $f'(x)=\var{df}=\var{x2}\cdot (\var{lin})$.\\
+    This function has $x=0$ and $x=\var{n2}$ as possible extrema.
+    At $x=\var{n2}$, the derivative changes its sign from negative to positive,
+    and therefore $f$ has a minimum there. The sign of the derivative stays the same
+    near $x=0$, so we cannot apply the criterion there.
+    (In fact, $x=0$ is not an extremum, as one can show by considering limits.)}
+    }
+	\end{quickcheck}		
+\end{quickcheckcontainer}     
+
+\lang{de}{
+Im letzten Kapitel haben wir auch gesehen, dass die Krümmung des Funktionsgraphen mit Hilfe der 2. Ableitung 
+ermittelt werden kann. Für $f''(x) >0$ ist der Graph linksgekrümmt bzw. konvex, für $f''(x) <0$ entsprechend rechtsgekrümmt 
+bzw. konkav. Die Punkte, an denen sich die Krümmung ändert, sind für uns besonders interessant:
+}
+\lang{en}{
+We also saw in the last chapter that the convexity of the graph of a function
+can be described using the second derivative. The graph is concave up (or convex)
+where $f''(x) > 0$ and concave down (or simply concave) where $f''(x) < 0$.
+The points at which this behavior changes are especially important:
+}
+
+\begin{definition}[
+\lang{de}{Wendepunkt}
+\lang{en}{Inflection point}]
+
+\lang{de}{Es sei $f$ eine zweimal differenzierbare Funktion. }
+\lang{en}{Let $f$ be a twice differentiable function.}
+
+\lang{de}{Einen Punkt $P$, an dem sich die Krümmung des Graphen von $f$ ändert, nennen wir \notion{Wendepunkt} von $f$.
+Die x-Koordinate eines solchen Punktes $P$ nennen wir \emph{Wendestelle} von $f$.}
+\lang{en}{
+A point $P$ at which the concavity of the graph of $f$ changes direction
+is called an \notion{inflection point} of $f$.
+}
+
+\lang{de}{Beträgt die Steigung an einer Wendestelle $0$, so nennen wir den zugehörigen Wendepunkt auch \notion{Sattelpunkt}.
+}
+\lang{en}{
+An inflection point at which the slope is $0$ is also called a \notion{saddle point}.
+}
+\end{definition}
+
+\begin{example}
+	\lang{de}{Der Graph der Funktion $f(x)=x^4-2x^3+2x+1$ beschreibt eine Linkskurve f\"{u}r $x<0$, eine Rechtskurve f\"{u}r $0<x<1$ und wieder eine 
+	Linkskurve f\"{u}r $x>1$. Die Wendestellen liegen damit bei $x=0$ und $x=1$.}
+   \lang{en}{
+    The graph of the function $f(x)=x^4-2x^3+2x+1$ is concave up for $x < 0$, down for $0<x<1$, and up again for $x>1$.
+    The inflection points are therefore at $x=0$ and $x=1$.
+   }
+	
+	\begin{center}
+    \image{T603_Example_A}
+    \end{center}
+    
+	\lang{de}{Die Ableitung berechnet sich zu }
+  \lang{en}{The derivative is}
+	$f'(x)=4x^3-6x^2+2$.  
+	
+	\begin{center}
+    \image{T603_Example_B}
+    \end{center}
+	
+	\lang{de}{Man sieht an den Nullstellen von $f'$, wo die Steigung von $f$ den Wert $0$ besitzt.  Dies sind die Orte, wo ein 
+    Extrempunkt von $f$ liegen könnte. Bei der ersten Nullstelle besitzt $f$ ein lokales Minimum, bei der zweiten Nullstelle $x=1$ von $f'$ ist dies nicht der Fall. Hier 
+    ändert die Funktion $f'$ auch nicht ihr Vorzeichen.}
+  \lang{en}{
+  The zeros of $f'$ are the points where the slope of $f$ is zero. These are the potential
+  extrema of $f$. The first zero corresponds to a local minimum. This is not the case for the second zero in $x=1$,
+  where the function $f'$ does not change its sign.
+  }
+	\begin{center}
+    \image{T603_Example_C}
+    \end{center}
+	
+	\lang{de}{Die zweite Ableitung hat die Gleichung $f''(x)=12x^2-12x=
+	12x(x-1)$. Die Funktion $f''(x)$ ist positiv f\"{u}r $x<0$ und $x>1$ ($f$ linksgekrümmt) und negativ f\"{u}r $0<x<1$ ($f$ rechtsgekrümmt). An den Stellen $x=0$ und 
+    $x=1$ ändert sich also die Krümmung, weshalb wir hier Wendestellen gefunden haben. Weil auch $f'(1)=0$ gilt, besitzt $f$ an der Stelle $x=1$ 
+    sogar einen Sattelpunkt.}
+  \lang{en}{
+  The second derivative is $f''(x)=12x^2-12x=	12x(x-1)$.
+  The function $f''(x)$ is positive for $x<0$ and $x>1$ (where $f$ is concave up) and negative for $0<x<1$ (where $f$ is concave down).
+  The direction changes at $x=0$ and $x=1$, which is why we found inflection points there.
+  Since $f'(1)=0$, the point at $x=1$ is actually a saddle point.
+  }
+    \end{example}
+\lang{de}{Diese Beobachtung nutzen wir, um ein Kriterium für das Vorliegen von Wendestellen zu erhalten.
+}
+\lang{en}{
+We will use this observation to obtain a criterion for the existence of inflection points.
+}
+
+\begin{theorem}[
+\lang{de}{Hinreichendes Kriterium für Wendestellen I}
+\lang{en}{Sufficient criterion for inflection points I}]
+	\lang{de}{
+    Es sei $f$ zweimal differenzierbar. Ist $f''(x_0)=0$ und wechselt $f''$ in $x_0$ das Vorzeichen, so ist 
+	 $x_0$ eine Wendestelle. 
+     
+     Ist dies der Fall, dann gilt:
+     \begin{itemize}
+     \item An $x_0$ wechselt die Krümmung von rechts nach links (bzw. von konkav zu konvex), wenn sich das Vorzeichen von $f''$ von $-$ nach $+$ ändert.
+     
+     \item An $x_0$ wechselt die Krümmung von links nach rechts (bzw. von konvex zu konkav), wenn sich das Vorzeichen von $f''$ von $+$ nach $-$ ändert.
+     \end{itemize}
+     }
+  \lang{en}{
+    Let $f$ be twice differentiable. Suppose $f''(x_0)=0$ and that $f''$ changes sign in $x_0$.
+    Then $f$ has an inflection point at $x_0$, and:
+    \begin{itemize}
+      \item If the sign of $f$ changes from $-$ to $+$, then the direction changes
+      from concave down to concave up in $x_0$.
+     
+     \item If the sign of $f$ changes from $+$ to $-$, then the direction changes
+      from concave up to concave down in $x_0$.\end{itemize}
+  }
+\end{theorem}
+\lang{de}{
+In der Praxis benutzt man häufig das folgende Kriterium, weil es leichter nachzuprüfen ist.
+}
+\lang{en}{
+In practice, the following criterion is used often because its conditions
+are easier to verify.
+}
+\begin{theorem}[
+\lang{de}{Hinreichendes Kriterium für Wendestellen II}
+\lang{en}{Sufficient criterion for inflection points II}]
+	\lang{de}{
+    Es sei $f$ dreimal differenzierbar. 
+    \begin{itemize}
+    \item Ist $f''(x_0)=0$ und $f'''(x_0) > 0$, so ist 
+	 $x_0$ eine Wendestelle mit Krümmungswechsel von rechts nach links (bzw. von konkav zu konvex).
+     \item Ist $f''(x_0)=0$ und $f'''(x_0) < 0$, so ist 
+	 $x_0$ eine Wendestelle mit Krümmungswechsel von links nach rechts (bzw. von konvex zu konkav).
+    \end{itemize}
+     }
+  \lang{en}{
+    Let $f$ be three times differentiable.
+     \begin{itemize}
+    \item If $f''(x_0)=0$ and $f'''(x_0) > 0$, then
+	 $x_0$ is an inflection point in which the graph of $f$ changes from concave down to concave up.
+  \item If $f''(x_0)=0$ and $f'''(x_0) < 0$, then
+	 $x_0$ is an inflection point in which the graph of $f$ changes from concave up to concave down.
+  \item Is\end{itemize}
+  }
+\end{theorem}
+\lang{de}{
+Wir sehen, dass die Kriterien für Wendestellen und Extremalstellen sehr ähnlich lauten. Wir können Wendestellen auch
+als die Extremalstellen der ersten Ableitung auffassen und nur mit dem Kriterium für Extremalstellen arbeiten. 
+}
+\lang{en}{
+Observe that the criteria for inflection points and extrema are very similar.
+It is possible to view inflection points as the extrema of the first derivative and to
+work only with the criteria for extrema.
+}
+ \begin{block}[warning]
+
+\lang{de}{Gilt $f''(x_0) \neq 0$, liegt keine Wendestelle vor.
+
+Gilt jedoch $f''(x) = 0$ und $f'''(x) = 0$, so kann eine Wendestelle vorliegen (muss aber nicht).  
+}
+\lang{en}{
+If $f''(x_0) \neq 0$, then $x_0$ is not an inflection point.
+
+On the other hand, if $f''(x)$ and $f'''(x) = 0$, then $x$ can still
+be an inflection point (although it might not be one).
+}
+ 
+ \end{block}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\number{c}{12}   % schönere Zahlen mit c=12 (auf jeden Fall muss c>0 sein.)
+			\randint{ns1}{-2}{0}
+			\randint{ns2}{1}{2}
+			\randint{a}{-3}{3}
+			\function[normalize]{dfak}{c*(x-ns1)*(x-ns2)}
+			\function[expand,normalize]{d}{c*(x-ns1)*(x-ns2)}
+			\function[normalize]{dd}{(c/3)*x^3-(c/2)*(ns1+ns2)*x^2+c*ns1*ns2*x+a}
+			\function[normalize]{d3}{(c/12)*x^4-(c/6)*(ns1+ns2)*x^3+(c/2)*ns1*ns2*x^2+a*x}
+		
+		\end{variables}
+
+      \lang{de}{
+			\text{Bestimmen Sie die Wendestellen der Funktion $f(x)=\var{d3}$.
+            
+			Die Wendestellen (in aufsteigender Reihenfolge) sind \ansref und \ansref.}
+      }
+      \lang{en}{
+      \text{Determine the inflection points of the function $f(x)=\var{d3}$.
+      
+      The inflection points (in increasing order) are \ansref and \ansref.}
+      }
+		
+		\begin{answer}
+			\solution{ns1}
+		\end{answer}
+		\begin{answer}
+			\solution{ns2}
+		\end{answer}
+    \lang{de}{
+		\explanation{Kandidaten für Wendestellen sind die Stellen $x_0$, an denen die zweite Ableitung gleich $0$ ist. Wegen
+		$f'(x)=\var{dd}$ und $f''(x)=\var{d}=\var{dfak}$ sind die Kandidaten die Stellen $\var{ns1}$ und $\var{ns2}$. Nun muss noch $f'''(\var{ns1})\neq 0$ und $f'''(\var{ns2})\neq 0$ geprüft werden.}
+  	}
+     \lang{en}{
+    \explanation{The candidate inflection points are the points $x_0$ at which the second derivative is $0$.
+    Since $f'(x)=\var{dd}$ and $f''(x)=\var{d}=\var{dfak}$, the candidate points are $\var{ns1}$ and $\var{ns2}$. Now we need to check whether $f'''(\var{ns1})\neq 0$ and $f'''(\var{ns2})\neq 0$.
+    }
+     }
+ \end{quickcheck}
+
+
+\section{
+\lang{de}{Kurvendiskussion}
+\lang{en}{Analyzing functions}
+}
+\lang{de}{Bei einer Kurvendiskussion wird eine Funktion $f$ auf ihre wesentlichen Merkmale \"{u}berpr\"{u}ft. Was zu einer Kurvendiskussion \glqq gehört\grqq, variiert
+von Autor zu Autor. Die folgenden Aspekte sind jedoch am weitesten verbreitet.}
+\lang{en}{
+To analyze a function $f$ means to investigate the significant features of its graph.
+What exactly that entails varies from author to author, but the aspects below are the most common.
+}
+
+\begin{block}[info]
+\lang{de}{
+\textbf{Schritte bei der Kurvendiskussion:}
+}
+\lang{en}{
+\textbf{Steps when analyzing a function:}
+}
+\begin{enumerate}
+\item \lang{de}{\textbf{Festlegung des Definitionsbereichs}\\
+        Gemeint ist hier der maximal mögliche Definitionsbereich, der für das gegebene 
+        Problem sinnvoll ist. (Negative Produktionsmengen sind beispielsweise nicht sinnvoll.)
+      }
+      \lang{en}{\textbf{Determining the domain}\\
+      Here we mean the largest possible domain that makes sense in the context
+      of the given problem. (For example, negative quantities of production are not reasonable.)
+      }
+
+\item \lang{de}{\textbf{Untersuchung des asymptotischen Verhaltens}\\
+        Wenn der Definitionsbereich unbegrenzt ist, meinen wir mit asymptotischem Verhalten die Grenzwerte
+        $\lim_{x \to \pm \infty} f(x)$. Ist der Definitionsbereich in eine oder beide Richtungen begrenzt, 
+        berechnen wir den Funktionswert am Rand.
+        }
+      \lang{en}{\textbf{Describing the asymptotic behavior}\\
+      If the domain is unbounded then the asymptotic behavior means the limits
+      $\lim_{x \to \pm \infty} f(x)$. If the domain is bounded in one or both directions
+      then we determine the value of the function at the boundary.
+      }
+
+\item \lang{de}{\textbf{Bestimmung der Nullstellen}\\
+        Zwischen je zwei Nullstellen kann auch noch interessant sein, ob der Funktionsgraph oberhalb oder 
+        unterhalb der x-Achse verläuft.}
+      \lang{en}{\textbf{Finding the zeros}\\
+      It is also often useful to know whether the graph of the function
+      lies above or below the x-axis between any two zeros.}
+        
+
+\item \lang{de}{\textbf{Bestimmung der Extremalstellen}\\
+        Mit Hilfe der Extremalstellen kann auch angegeben werden, auf welchen Teilintervallen des Definitionsbereichs
+        die Funktion steigt oder fällt. }
+      \lang{en}{\textbf{Finding the extrema}\\
+      Using the extrema, one can also determine the subintervals of the domain on which
+      the function is increasing or decreasing.
+      }
+        
+
+\item \lang{de}{\textbf{Bestimmung der Wendestellen}\\
+        Zusätzlich kann auch angegeben werden, wie sich das Krümmungsverhalten an den Wendestellen ändert.
+        }
+        \lang{en}{\textbf{Finding the inflection points}\\
+        In addition, one can determine whether the graph of the function is
+        concave up or down between any two inflection points.}
+\end{enumerate}
+\end{block}
+
+\begin{example}
+	\lang{de}{Es sei $f(x)=x^4+4x^3+4x^2$ die zu untersuchende Funktion. 
+    
+    Der Definitionsbereich ist $D_f = \R$, da die Funktion für alle reellen Zahlen einen Funktionswert liefert. 
+    
+    Das asymptotische Verhalten berechnen wir über 
+    \begin{align*}
+     & \lim_{x \to \infty} x^4+4x^3+4x^2 = \lim_{x \to \infty} x^4 (1+\frac{4}{x}+\frac{4}{x^2}) = \infty, \\
+     & \lim_{x \to -\infty} x^4+4x^3+4x^2 = \lim_{x \to -\infty} x^4 (1+\frac{4}{x}+\frac{4}{x^2}) = \infty.
+    \end{align*}
+    }
+  \lang{en}{
+  Consider the function $f(x)=x^4+4x^3+4x^2$.
+
+  Its domain is $D_f = \R$ because $f$ is defined for all real numbers.
+
+  The asymptotic behavior is described by
+  \begin{align*}
+     & \lim_{x \to \infty} x^4+4x^3+4x^2 = \lim_{x \to \infty} x^4 (1+\frac{4}{x}+\frac{4}{x^2}) = \infty, \\
+     & \lim_{x \to -\infty} x^4+4x^3+4x^2 = \lim_{x \to -\infty} x^4 (1+\frac{4}{x}+\frac{4}{x^2}) = \infty.
+    \end{align*}
+  }
+    
+    \lang{de}{
+    Die Nullstellen von $f$ berechnen wir, indem wir $x^2$ ausklammern. Dann erhalten wir die Gleichung 
+    \[
+    x^2 \cdot (x^2+4x+4) = 0,
+    \]
+    und sehen damit, dass $x_0=0$ eine (doppelte) Nullstelle ist. Die anderen Nullstellen berechnen wir mit der pq-Formel
+    und erhalten
+    \[
+    x_{1} = - \frac{4}{2} \pm \sqrt{\left(\frac{4}{2}\right)^2 - 4} = -2 \pm 0 = -2,
+    \]
+    also liegt an $x_1 = -2$ wieder eine doppelte Nullstelle. An den Nullstellen ändert sich das Vorzeichen der Funktionswerte 
+    nicht. (Für große oder besonders negative $x$ wissen wir aus dem asymptotischen Verhalten, dass die Funktionswerte positiv sind. Wenn wir 
+    z.\,B. $x=-1$ in die Funktion einsetzen, erhalten wir wieder einen positiven Funktionswert zwischen den Nullstellen, also 
+    kann die Funktion wegen Stetigkeit keine negativen Werte annehmen.)
+    }
+    \lang{en}{
+    We will find the zeros of $f$ by factoring out $x^2$. This leaves us with the equation
+    \[
+    x^2 \cdot (x^2+4x+4) = 0,
+    \]
+    from which one can see that $x_0=0$ is a (double) zero. The other zeros can be found with the quadratic formula:
+    \[
+    x_{1} = - \frac{4}{2} \pm \sqrt{\left(\frac{4}{2}\right)^2 - 4} = -2 \pm 0 = -2,
+    \]
+    so $x_1 = -2$ is another double zero. The sign of $f$ does not change near either zero.
+    (For large or highly negative values of $x$, the asymptotic behavior shows that the function is positive.
+    Plugging in a point that lies between the zeros, e.g. $x=-1$, also yields a positive value of $f$.
+    Since $f$ is continuous, this shows that it is never negative.)
+    }
+
+    \lang{de}{
+    Wir berechnen die Ableitung, um anschließend Extremal- und Wendestellen zu suchen: 
+    \begin{align*}
+     f'(x) &= 4x^3+12x^2+8x=4x(x^2+3x+2)=4x(x+1)(x+2), \\
+     f''(x) &= 12x^2+24x+8, \\
+     f'''(x) &= 24x.
+    \end{align*}
+    Die Funktion $f'$ hat die Nullstellen $x_2=0$, $x_3=-1$ und $x_4=-2$. An diesen können Extrempunkte liegen. Es gilt 
+    $f''(0) = 8 > 0$, weshalb an $x_2 = 0$ ein lokales Minimum vorliegt. Wegen $f''(-1) = -4 < 0$ und $f''(-2) = 8 >0$ liegt an 
+    $x_3 = -1$ ein lokales Maximum und an $x_4 = -2$ ein lokales Minimum. 
+    
+    Da es sich bei den Minimalstellen auch um Nullstellen von $f$ handelt und wir schon
+    ermittelt haben, dass die Funktion $f$ keine negativen Werte annimmt, handelt es sich bei den Minimalstellen sogar um globale Minimalstellen, an denen 
+    das globale Minimum $f(0) = f(-2) = 0$ angenommen wird. Ein globales Maximum existiert nicht, da wir schon aus dem asymptotischen Verhalten wissen, dass
+    die Funktionswerte von $f$ über alle Schranken hinweg steigen werden.
+    
+    Die Nullstellen von $f''$ berechnen sich nach der pq-Formel zu 
+	$x_5=-1-\frac{1}{\sqrt{3}}$ und $x_6=-1+\frac{1}{\sqrt{3}}$. Einsetzen in $f'''$ liefert uns $f'''(x_5) <0$ und $f'''(x_6) >0$, womit wir zwei 
+    Wendestellen nachgewiesen haben. An $x_5$ wechselt die Krümmung von links nach rechts, an $x_6$ ist es genau umgekehrt. 
+    
+    Mit Hilfe dieser Informationen können wir den Verlauf des Funktionsgraphen jetzt auch zeichnen:
+	}
+   \lang{en}{
+    We will compute derivatives in order to determine the extrema and inflection points later:
+    \begin{align*}
+     f'(x) &= 4x^3+12x^2+8x=4x(x^2+3x+2)=4x(x+1)(x+2), \\
+     f''(x) &= 12x^2+24x+8, \\
+     f'''(x) &= 24x.
+    \end{align*}
+    $f'$ has zeros $x_2=0$, $x_3=1$ and $x_4=-2$ and this is where extrema may occur.
+    Since $f''(0) = 8 > 0$, there is a local minimum at $x_2 = 0$. Since $f''(-1) = -4 < 0$ and $f''(-2) = 8 > 0$,
+    $x_3 = -1$ is a local maximum and $x_4 = -2$ is a local minimum.
+
+    The minima are also zeros of $f$, and we saw above that $f$ never takes on negative values.
+    Therefore, the minima are actually global minima of $f$, and the minimal value of $f$ is $f(0) = f(-2) = 0$.
+    There is no global maximum, because we know from its asymptotic behavior that the
+    value of $f$ grows beyond any fixed bound.
+
+    The zeros of $f''$ can be shown with the quadratic formula to be
+    $x_5=-1-\frac{1}{\sqrt{3}}$ and $x_6=-1+\frac{1}{\sqrt{3}}$. When we substitute these into $f'''$, we find
+    $f'''(x_5) <0$ and $f'''(x_6) >0$, so both $x_5$ and $x_6$ are inflection points.
+    At $x_5$, the graph changes from concave up to down and at $x_6$ it changes back to concave up.
+
+    We can now use this information to sketch a graph of the function:
+   }
+    \begin{center}
+    \image{T603_Example_D}
+    \end{center}
+\end{example} 
+
+
+\end{visualizationwrapper}
+
+
+\end{content}

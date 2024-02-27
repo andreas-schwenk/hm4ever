@@ -1,0 +1,1230 @@
+
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Funktionen}
+%
+    \lang{en}{Functions}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_Signum.meta.xml}{T601_Signum}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_Graph_B.meta.xml}{T601_Graph_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_Graph_A.meta.xml}{T601_Graph_A}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_FunctionGraph.meta.xml}{T601_FunctionGraph}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_Map_F.meta.xml}{T601_Map_F}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_Map_E.meta.xml}{T601_Map_E}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_Map_D.meta.xml}{T601_Map_D}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_Map_C.meta.xml}{T601_Map_C}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_Map_B.meta.xml}{T601_Map_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_Map_A.meta.xml}{T601_Map_A}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_blau.meta.xml}{00_Videobutton_blau}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_05_loesen_gleichungen_und_lgs.meta.xml}{content_05_loesen_gleichungen_und_lgs}
+    \link{generic_article}{content/rwth/HM1/T102neu_Einfache_Reelle_Funktionen/g_art_content_06_funktionsbegriff_und_lineare_funktionen.meta.xml}{content_06_funktionsbegriff_und_lineare_funktionen}
+    \link{generic_article}{content/rwth/HM1/T102neu_Einfache_Reelle_Funktionen/g_art_content_07_geradenformen.meta.xml}{content_07_geradenformen}
+    \link{generic_article}{content/rwth/HM1/T102neu_Einfache_Reelle_Funktionen/g_art_content_08_quadratische_funktionen.meta.xml}{content_08_quadratische_funktionen}
+    \link{generic_article}{content/rwth/HM1/T103_Polynomfunktionen/g_art_content_09_polynome.meta.xml}{content_09_polynome}
+    \link{generic_article}{content/rwth/HM1/T403a_Vektorraum/g_art_content_10b_lineare_abb.meta.xml}{content_10b_lineare_abb}
+    \link{generic_article}{content/rwth/HM1/T204_Abbildungen_und_Funktionen/g_art_content_10_abbildungen_verkettung.meta.xml}{content_10_abbildungen_verkettung}
+\end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22668}{Ticket 22668}
+\end{block}
+
+\usepackage{mumie.ombplus}
+\ombchapter{1}
+\ombarticle{4}
+
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{
+\lang{de}{Der Funktionsbegriff}
+\lang{en}{Functions}
+}
+
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+\section{\lang{de}{Funktionen} \lang{en}{Functions}}\label{sec:funktion} 
+
+\lang{de}{Bevor wir uns mit den wichtigsten Funktionen und ihren Eigenschaften befassen, definieren wir zunächst, 
+was wir generell unter einer Funktion verstehen und welche Begriffe wir im Zusammenhang
+mit Funktionen verwenden werden.}
+\lang{en}{
+Before we begin to study the most important functions and their properties,
+we will clarify what is meant by a function in general, as well as some
+terminology that is used when working with functions.
+}
+
+\lang{de}{Eine Funktion ist dabei ein wichtiges Werkzeug, um verschiedene Größen (oder allgemeiner
+Mengen) in Beziehung zueinander zu setzen. }
+\lang{en}{
+Functions are an important tool for describing relationships between
+different quantities (or, more generally, sets).
+}
+
+
+  \begin{definition}[\lang{de}{Funktion} \lang{en}{Function}] \label{def:funktion}
+    \lang{de}{Es seien $D$ und $Z$ zwei Mengen.}
+    \lang{en}{Let $D$ and $Z$ be two sets.}
+    \begin{itemize}
+    
+    \item \lang{de}{Eine \notion{Funktion} $f: D \rightarrow Z$ ist eine Vorschrift, die jedem 
+    Element $x$ aus $D$ genau ein Element $y$ der Menge $Z$ zuordnet. }
+      \lang{en}{ A \notion{function} $f: D \rightarrow Z$ is a rule 
+    that assigns an element $y$ of the set $Z$ to every element $x$ of $D$.
+}
+    \item 
+    \lang{de}{Die Menge $D$ heißt in diesem Fall \notion{Definitionsbereich} von $f$. 
+    }
+    \lang{en}{The set $D$ is called the \notion{domain} of $f$.}
+    \item 
+    \lang{de}{Die Menge $Z$ heißt \notion{Zielbereich} von $f$.}
+    \lang{en}{The set $Z$ is called the \notion{codomain} of $f$.}
+    
+    \item 
+    \lang{de}{Für den zugeordneten Funktionswert $y$ schreiben wir auch \notion{$f(x)$}. Statt 
+    $y = f(x)$ schreiben wir manchmal auch $x \mapsto f(x)$. Die Variable $x$ nennen wir auch \notion{Argument}.
+    }
+    \lang{en}{
+    The assigned value $y$ is written \notion{$f(x)$}. Instead of
+    $y = f(x)$, we sometimes write $x \mapsto f(x)$.
+    The variable $x$ is also called the \notion{argument}.
+    }
+    
+    \item 
+    \lang{de}{Die Menge aller Funktionswerte von $f$ 
+    \[ 
+      W_f := \{f(x) \mid x\in D\} \subseteq Z 
+	\]
+    ist eine Teilmenge des Zielbereichs von $f$ und wird als \notion{{Bildmenge}}
+    oder \notion{{Wertemenge}} von $f$ bezeichnet. Sind die Funktionswerte reelle Zahlen, so
+    nennen wir die Funktion $f$ auch \notion{reellwertig}.}
+    \lang{en}{The set of values of $f$,
+    \[ 
+      W_f := \{f(x) \mid x\in D\} \subseteq Z 
+	\]
+    is a subset of the codomain $f$ and is called the \notion{{image}}
+    or \notion{{range}} of $f$. If the values of $f$ are real, then
+    we call $f$ \notion{real-valued}.}
+    
+    \end{itemize}
+	 \end{definition}
+
+    \lang{de}{
+     Eine Funktion besteht also aus folgenden Angaben: Was in die Funktion eingesetzt werden darf (Definitionsbereich), was
+     herauskommen kann (Zielmenge) und wie die Zuordnung geschieht (Funktionsgleichung). 
+     }
+    \lang{en}{
+      Altogether, a function consists of the following data:
+      what can be plugged into the function (its domain), what can come out
+      of it (its codomain), and how the function acts (function rule).
+    }
+
+     \lang{de}{
+     Häufig geben wir der Einfachheit halber den Definitionsbereich und die Zielmenge nicht an und schreiben einfach die 
+     Funktionsgleichung $f(x) = \ldots$, um eine Funktion anzugeben. Es ist jedoch wichtig, einen Definitionsbereich anzugeben, 
+     wenn nicht jede Zahl in die Funktion eingesetzt werden darf/soll. 
+    }
+    \lang{en}{
+    For the sake of simplicity, we will often omit the domain and codomain
+    and simply write an equation $f(x)=...$ when defining a function.
+    However, it is important to specify a domain if there are numbers that
+    cannot or should not be plugged into the function.
+    }
+
+   
+
+\begin{example}\label{example:bereiche}
+\begin{enumerate}
+
+\item \lang{de}{Für $M=\{0;1;3\}$ und $N=\{1;2\}$ und die Funktion $f$ mit
+\[ f(0) = 1, \ f(1) = 1, \ f(3) = 2\]
+können wir die Situation folgendermaßen veranschaulichen:}
+\lang{en}{
+Let $M=\{0,1,3\}$ and $N=\{1,2\}$ and consider the function $f$
+with \[ f(0) = 1, \ f(1) = 1, \ f(3) = 2.\]
+This situation can be visualized as follows:
+}
+
+\begin{center}
+\image{T601_Map_A}
+\end{center}
+
+\lang{de}{Bei Funktionen muss von jedem Element des Definitionsbereichs genau ein Pfeil starten.}
+\lang{en}{
+Functions have the property that every element in the domain
+is the beginning of exactly one arrow.
+}
+
+\item 
+\lang{de}{Das folgende Beispiel ist \notion{keine Funktion}: $f$ sei definiert durch $f(0) = 1, \ f(0) =2, \ f(1)=2$.}
+\lang{en}{
+The following example is \notion{not a function}: let $f$ be defined
+by $f(0) = 1, \ f(0) =2, \ f(1)=2$.
+}
+
+\begin{center}
+\image{T601_Map_B}
+\end{center}
+\lang{de}{Für die Zahl $3$, 
+die im Definitionsbereich liegt, existiert kein Funktionswert. Außerdem ist der Funktionswert $f(0)$ nicht 
+eindeutig - es darf immer nur genau einen Wert geben! Beides ist bei Funktionen nicht zulässig.}
+\lang{en}{
+The number $3$, which lies in the domain, is not mapped to any value.
+In addition, the value of $f(0)$ is not unique - there can only be
+exactly one value! Neither of these is allowed for a function.
+}
+
+\item 
+\lang{de}{Die Funktion $f:\R\to \R,\, f(x)= x^2$ hat als Definitionsbereich die Menge $\,D_f=\R$, da jede reelle 
+Zahl eingesetzt werden kann. Die Wertemenge besteht jedoch nur aus den nicht-negativen reellen Zahlen, 
+denn für jede relle Zahl $\, x\,$ ist $\, x^2 \geq 0$. Deshalb gilt für die Wertemenge $W_f=[0,\infty)$.}
+\lang{en}{
+The function $f:\R\to \R,\, f(x)=x^2$ has the set $\,D_f=\R$ as its domain, as
+any real number can be plugged into it. The range, however, consists only of the nonnegative realnumbers,
+because for every real number $\, x\,$ we have $\, x^2 \geq 0$. The range is therefore $W_f=[0,\infty)$.
+}
+
+\item 
+\lang{de}{Die Funktion mit der Funktionsgleichung $g(x) = \frac{1}{1-x}$ hat als Definitionsbereich die
+Menge $\,D_g=\R\setminus \{1\}$ (\glqq $\R$ ohne $1$\grqq), da die Division durch $0$ nicht erlaubt ist. Die Wertemenge 
+enthält in diesem Beispiel alle reellen Zahlen außer $\,0$, denn \glqq $1$ geteilt durch eine Zahl\grqq\ kann kann nicht
+$0$ sein. Die Wertemenge ist folglich $\, W_g=\R\setminus \{0\}$.}
+\lang{en}{
+The function defined by the equation $g(x) = \frac{1}{1-x}$ has the set
+$\, D_g = \R \setminus \{1\}$ ("$\R$ without $1$") as its domain, because
+dividing by $0$ is not allowed. In this case, the range consists of all
+real numbers other than $\, 0$, because "1 over a number" can never be $0$.
+So the range is $W_g = \R\setminus \{0\}$.}
+
+\end{enumerate}
+\end{example}
+
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{d}{-5}{5}
+			\randint{c}{-4}{4}
+			\randint[Z]{b}{1}{4}
+			\function[calculate]{a}{b*sign(d)*sign(c)}
+			\function[calculate]{y}{d}
+		    \function[normalize]{f}{a*x+d}
+		    \function{g}{c-x}		    
+		\end{variables}
+
+      \lang{de}{
+			\text{Welche reelle Zahl liegt nicht im maximalen Definitionsbereich der Funktion
+			$f(x)=\frac{\var{f}}{\var{g}}$?\\ Die Zahl \ansref.}
+       }
+     \lang{en}{
+			\text{Which real number does not lie in the maximal domain of
+			$f(x)=\frac{\var{f}}{\var{g}}$?\\ The number \ansref.}
+       }
+		
+		\begin{answer}
+			\solution{c}
+		\end{answer}
+    \lang{de}{
+		\explanation{Die einzige Zahl, die in die Vorschrift nicht eingesetzt werden darf, ist die, für die
+		der Nenner $\var{g}$ gleich $0$ wird, hier also $\,x=\var{c}$.}}
+    \lang{en}{
+    \explanation{The only number that cannot be plugged into this expression
+    is the number that makes the denominator $\var{g}$ equal $0$, i.e. $\,x=\var{c}$.    
+    }}
+	\end{quickcheck}
+
+    \lang{de}{
+    Zusammenhänge zwischen verschiedenen Größen werden oft in einer \emph{(Werte-) Tabelle}
+    oder \emph{graphisch} in einem zweidimensionalen Koordinatensystem dargestellt.  
+    Eine \emph{Wertetabelle} ist dabei eine Tabelle mit zwei Zeilen (oder Spalten), in die einzelne
+    Werte des Definitionsbereichs und die dazugehörigen Funktionswerte eingetragen werden. 
+    }
+    \lang{en}{
+    Relationships between different quantities can often be represented by
+    a \emph{table of values}, or \emph{graphically} in a two-dimensional
+    coordinate system. By a \emph{table of values}, we mean a table
+    with two rows (or columns), in which the values in the domain
+    and the associated function values are to be entered.
+    }
+    \begin{table}[\align{c} \cellaligns{ccccccc}]
+        $\;\mathbf{x}\;$ && $\,x_1\,$ & $\,x_2\,$ & $\,x_3\,$ & $\,x_4\,$ & ...\\
+        $\;\mathbf{f(x)}\;$ && $\,y_1\,$ & $\,y_2\,$ & $\,y_3\,$ & $\,y_4\,$ & ...\\
+     \end{table}
+
+   \lang{de}{Sie dient in der Regel zur Erstellung der \emph{graphischen} Darstellung der Funktion im
+   zweidimensionalen Koordinatensystem.}
+   \lang{en}{This is mostly used when creating the \emph{graphical}
+    representation of a function in the two-dimensional
+    coordinate system.
+   }
+
+    \begin{center}
+        \image{T601_FunctionGraph}
+    \end{center}
+
+ \lang{de}{Die waagerechte Achse des Koordinatensystems heißt \emph{x-Achse} oder auch \notion{\emph{Abszisse}} 
+ und die senkrechte Achse ist die \emph{y-Achse} oder auch die \notion{\emph{Ordinate}}. 
+}
+\lang{en}{The horizontal axis of the coordinate system is called
+the \emph{x-axis} or the \notion{\emph{abscissa}} and the vertical
+axis is called the \emph{y-axis} or the \notion{\emph{ordinate}}.
+}
+
+\begin{definition} \label{def:graph}
+  	\lang{de}{
+    Als \notion{\emph{Funktionsgraph}} oder kurz als \notion{\emph{Graph}} einer Funktion 
+    $f:D\to \R$ bezeichnet man die Menge aller geordneten Paare $\,(x;f(x))$, also 
+    \[ \text{Graph}(f):=\{ (x;y) \mid x\in D, y=f(x) \}=\{ (x;f(x)) \mid x\in D \} \subseteq \R^2.\] 
+    }
+    \lang{en}{
+    The \notion{\emph{graph}} of a function $f:D\to \R$
+    is the set of all ordered pairs $\,(x;f(x))$, i.e. 
+    \[ \text{Graph}(f):=\{ (x,y) \mid x\in D, y=f(x) \}=\{ (x,f(x)) \mid x\in D \} \subseteq \R^2.\] 
+    }
+\end{definition}   
+
+\lang{de}{
+Übertragen wir die Punkte der Menge \notion{Graph}$(f)\,$ in ein Koordinatensystem, mit
+dem Argument $\,x\,$ als Wert auf der \emph{x-Achse} und dem zugehörigen Funktionswert $\,f(x)\,$
+als Wert auf der \emph{y-Achse}, so erhalten wir die graphische Darstellung der Funktion $f$.
+}
+\lang{en}{
+By transferring the points of the set \notion{Graph}$(f)\,$ to a
+coordinate system with the argument $x$ as the value on the \emph{x-axis}
+and the associated function value $f(x)$ as the value on the \emph{y-axis},
+we obtain a graphical representation of the function $f$.
+}
+
+\begin{example}
+  \lang{de}{
+  Wir schauen uns die graphische Darstellung für unsere Funktionen $f$ und $g$ 
+  aus Beispiel \ref{example:bereiche} an:}
+  \lang{en}{
+  Let us look at the graphical representations of the functions $f$ and $g$
+  that we considered in Example \ref{example:bereiche}:
+  }
+  
+  \begin{tabs*}[\initialtab{1}\class{example}]
+   \tab{$f(x)=x^2$}  
+          \lang{de}{Der Funktionsgraph der Funktion $f:\R\to \R,\, x\mapsto x^2$ wird beschrieben durch die Menge 
+           \[ \text{Graph}(f) =\{ (x;x^2) \mid x\in \R \}\]
+           
+          oder beispielhaft durch die Wertetabelle
+          \begin{table}[\align{c} \cellaligns{ccrrrrr}]
+              $\;\mathbf{x}\;$ && $-2$ & $\textcolor{#0066CC}{-1}$ & $\,\textcolor{#0066CC}{0}\,$ & $\,1\,$ & $\,\textcolor{#0066CC}{2}\,$ \\
+              $\;\mathbf{f(x)}\;$ && $\,4\,$ & $\,\textcolor{#0066CC}{1}\,$ & $\,\textcolor{#0066CC}{0}\,$ & $\,1\,$ & $\,\textcolor{#0066CC}{4}\,$ \\
+          \end{table} 
+          und hat die folgende Darstellung im zweidimensionalen Koordinatensystem:
+            \begin{center}
+               \image{T601_Graph_A}
+            \end{center}
+          }
+          \lang{en}{The graph of the function $f:\R\to \R,\, x\mapsto x^2$ can be described by the set 
+           \[ \text{Graph}(f) =\{ (x,x^2) \mid x\in \R \}\]
+          or, for example, by the table of values
+          \begin{table}[\align{c} \cellaligns{ccrrrrr}]
+              $\;\mathbf{x}\;$ && $-2$ & $\textcolor{#0066CC}{-1}$ & $\,\textcolor{#0066CC}{0}\,$ & $\,1\,$ & $\,\textcolor{#0066CC}{2}\,$ \\
+              $\;\mathbf{f(x)}\;$ && $\,4\,$ & $\,\textcolor{#0066CC}{1}\,$ & $\,\textcolor{#0066CC}{0}\,$ & $\,1\,$ & $\,\textcolor{#0066CC}{4}\,$ \\
+          \end{table} 
+          and it has the following representation in the two-dimensional
+          coordinate system:
+            \begin{center}
+               \image{T601_Graph_A}
+            \end{center}
+          }
+
+
+   \tab{$g(x)=\frac{1}{1-x}$}
+        \lang{de}{Der Funktionsgraph von $\,g:\R\setminus \{1\}\to \R\setminus \{0\},\, x\mapsto \frac{1}{1-x}\,$ wird beschrieben durch die Menge 
+        \[ \text{Graph}(g) =\{\displaystyle \Big(x;\frac{1}{1-x}\Big) \mid x\in \R \setminus \{1\} \} \]
+           
+         und hat die folgende Darstellung im zweidimensionalen Koordinatensystem:
+
+            \begin{center}
+              \image{T601_Graph_B}
+            \end{center}
+        }
+        \lang{en}{
+          The graph of $\,g:\R\setminus \{1\}\to \R\setminus \{0\},\, x\mapsto \frac{1}{1-x}\,$
+          can be described by the set
+          \[ \text{Graph}(g) =\{\displaystyle \Big(x;\frac{1}{1-x}\Big) \mid x\in \R \setminus \{1\} \} \]
+        and it has the following representation in the two-dimensional
+        coordinate system:
+          \begin{center}
+            \image{T601_Graph_B}
+          \end{center}
+        }
+  \end{tabs*}
+\end{example}
+
+
+
+\section{\lang{de}{Rechenoperationen mit Funktionen}
+\lang{en}{Arithmetic with functions}}
+
+\lang{de}{Wenn verschiedene Funktionen mit gleichem Definitionsbereich gegeben sind, können wir auch die gewöhnlichen
+Rechenoperationen auf diese anwenden.}
+\lang{en}{
+If different functions have the same domain then we can apply the usual
+operations of arithmetic to them.
+}
+
+\begin{definition}
+\lang{de}{Es seien $f$ und $g$ zwei reellwertige Funktionen mit gleichem Definitionsbereich.  Dann 
+können wir die Funktionen addieren, subtrahieren, multiplizieren oder auch dividieren. \\
+Es gilt:
+}
+\lang{en}{
+Let $f$ and $g$ be two real-valued functions with the same domain.
+Then we can define the operations of addition, subtraction, multiplication and division by
+}
+\begin{itemize}
+\item $\left( f + g \right) (x) = f(x) + g(x)$,
+
+\item $\left( f - g \right) (x) = f(x) - g(x)$,
+
+\item $\left( f \cdot g \right) (x) = f(x) \cdot g(x)$,
+
+\item 
+\lang{de}{$\left( \frac{f}{g} \right) (x) = \frac{f(x)}{g(x)}$, wobei hier $g(x) \neq 0$ gelten muss.}
+\lang{en}{$\left( \frac{f}{g} \right) (x) = \frac{f(x)}{g(x)}$, if $g(x) \neq 0$.}
+
+\end{itemize}
+\lang{de}{Man sagt auch, dass die Rechenoperationen \emph{punktweise} definiert sind.}
+\lang{en}{The arithmetic operations are said to be defined \emph{pointwise}.}
+
+\end{definition}
+
+\begin{example}
+\lang{de}{Bei der Produktion eines Gutes entstehen Kosten in Abhängigkeit der produzierten Menge $x$ gemäß der Kostenfunktion $K(x) = 3x^2 + 5x$. 
+Die Preis-Absatz-Funktion lautet $p(x) = x^2 + 18x - 1$. \\
+
+Wir bestimmen die Erlösfunktion $E(x)$ als Produkt von Preis-Absatz-Funktion mit der Menge $x$:\\
+}
+\lang{en}{
+The production of a good entails costs that depend on the produced quantity $x$
+according to the cost function $K(x) = 3x^2 + 5x$.
+The price-demand function is $p(x) = x^2 + 18x - 1$. \\
+
+We will calculate the revenue function $E(x)$ as the product of the price-demand function and the quantity $x$:\\ }
+\begin{align*}
+E(x) &\ =\ & p(x) \cdot x \\
+ &\ =\ & (x^2 + 18x - 1)\cdot x \\
+ &\ =\ & x^3 +18x^2 - x.
+\end{align*}
+
+\lang{de}{Mit Hilfe der Erlösfunktion lässt sich nun die Gewinnfunktion $G(x)$ aus der Subtraktion von Erlös und Kosten bestimmen:
+}
+\lang{en}{
+The profit function can now be determined as the difference between
+the revenue and cost functions: \\
+}
+\begin{align*}
+G(x) &\ =\ & E(x) - K(x)\\
+ &\ =\ & (x^3 +18x^2 - x) - (3x^2 + 5x) \\
+ &\ =\ & x^3 + 15x^2 - 6x.
+\end{align*}
+
+\lang{de}{Zur Beurteilung der Wirtschaftlichkeit ist es üblich, die Produktivitätsfunktion $P(x)$ als Quotient aus Erlös und Kosten zu betrachten.
+}
+\lang{en}{
+When determining profitability, one usually considers the productivity function $P(x)$, which is 
+defined as the ratio of revenue to cost:
+}
+\begin{align*}
+P(x) &\ =\ & \frac{E(x)}{K(x)}\\
+ &\ =\ & \frac{x^3 +18x^2 - x}{3x^2 + 5x}.
+\end{align*}
+
+\lang{de}{Zuletzt bestimmen wir den mathematischen und ökonomisch sinnvollen Definitionsbereich der Produktivitätsfunktion.\\
+Hierzu muss der Nenner der Funktion ungleich Null sein.\\
+Wir setzen den Nenner gleich Null, um die nicht definierten Werte zu bestimmen:}
+\lang{en}{
+Finally, we will determine the mathematically and
+economically meaningful domains of the productivity function.
+First of all, the denominator of the function must be nonzero. \\
+We set the denominator equal to zero to find the values for which the function is undefined:
+}
+
+\lang{de}{\begin{align*}
+0 &\ =\ & 3x^2 + 5x \\
+\Leftrightarrow 0 &\ =\ & x\cdot(3x+5)\\
+\Leftrightarrow 0 &\ =\ & x_1 \text{ oder } 0 \ =\  3x_2 +5 \\
+\Leftrightarrow 0 &\ =\ & x_1 \text{ oder } -\frac{5}{3} \ =\ x_2
+\end{align*}}
+\lang{en}{\begin{align*}
+0 &\ =\ & 3x^2 + 5x \\
+\Leftrightarrow 0 &\ =\ & x\cdot(3x+5)\\
+\Leftrightarrow 0 &\ =\ & x_1 \text{ or } 0 \ =\  3x_2 +5 \\
+\Leftrightarrow 0 &\ =\ & x_1 \text{ or } -\frac{5}{3} \ =\ x_2
+\end{align*}}
+\lang{de}{Der mathematische Definitionsbereich von $P(x)$ ist $\,D_{P_m}=\R\setminus \{-\frac{5}{3};0\}$.\\
+Ökonomisch gesehen muss die Menge $x$ jedoch stets größer oder gleich $0$ sein, wobei hier $x=0$ mathematisch nicht definiert ist. Also
+$\,D_{P_o}=\R^+$.}
+
+\lang{en}{
+The mathematical domain of $P(x)$ is $\,D_{P_m}=\R\setminus \{-\frac{5}{3},0\}$.\\
+From the economist's point of view, however, the quantity $x$ must always be greater than or equal to $0$.
+Here, the function is mathematically undefined at $x=0$. So
+$\,D_{P_o}=\R^+$.}
+
+
+
+\end{example}
+
+\lang{de}{Eine weitere wichtige Operation ist die \emph{Komposition} von Funktionen, mit der man eine ganze Funktion 
+sinngemäß in eine andere Funktion einsetzt. }
+\lang{en}{
+Another important operation is composition of functions, in which
+an entire function is essentially plugged into another function.
+}
+
+\begin{definition}[\lang{de}{Komposition} \lang{en}{Composition}]\label{kompositionv}
+\lang{de}{Sind $T:L\to M$ und $S:M\to N$ Funktionen, dann ist die \emph{\notion{Komposition} $V= S\circ T$}
+eine Funktion mit Definitionsbereich $L$ und Zielmenge $N$ und
+\[   V(x) =  \left(S\circ T \right)(x) = S(T(x)). \]}
+\lang{en}{
+Suppose $T:L\to M$ and $S:M\to N$ are functions. The \emph{composition} $V= S\circ T$
+is a function with domain $L$ and codomain $N$ defined by
+\[   V(x) =  \left(S\circ T \right)(x) = S(T(x)). \]
+}
+\end{definition}
+\lang{de}{Man berechnet also erst den Funktionswert unter der Funktion $T$ und setzt diesen dann in die Funktion $S$ ein.
+Daher ist es wichtig, dass die Funktionswerte von $T$ im Definitionsbereich von $S$ liegen.}
+\lang{en}{
+That is, the value of the function $T$ is first calculated, then
+plugged into the function $S$. It is therefore important that the
+values of $T$ lie in the domain of $S$.
+}
+
+\lang{de}{Statt Komposition spricht man auch häufig von \emph{Verkettung} oder \emph{Hintereinanderausführung} der Funktionen.}
+
+
+
+\begin{example}\label{ex:kompositionen}
+\begin{enumerate}
+\item \lang{de}{Es seien $f:\R\to \R, x\mapsto x^2$ und $g:\R\to \R, x\mapsto x+1$, dann sind
+\[   (g\circ f)(x)=g(f(x))=g(x^2)=x^2+1 \]
+ und 
+\[  (f\circ g)(x)=f(g(x))=f(x+1)=(x+1)^2. \]
+für alle reellen Zahlen $x$.}
+\lang{en}{
+Let $f:\R\to \R, x\mapsto x^2$ and $g:\R\to \R, x\mapsto x+1$. Then
+\[   (g\circ f)(x)=g(f(x))=g(x^2)=x^2+1 \]
+ and 
+\[  (f\circ g)(x)=f(g(x))=f(x+1)=(x+1)^2 \]
+for all real numbers $x$.
+}
+\item \lang{de}{Für $L=\{0; 2\}$, $M=\{0;1;3\}$ und $N=\{1;2\}$ mit den Funktionen $T:L\to M$ gegeben durch
+\[ T(0) = 3,\quad T(2) = 0 \]
+und $S:M\to N$ gegeben durch
+\[ S(0) = 1,\quad S(1) = 1,\quad S(3) = 2  \]
+ist die verkettete Funktion gegeben durch
+\[ (S \circ T)(0)=  S(T(0))=S(3)=2,\quad (S \circ T)(2) = S(T(2))=S(0)=1. \]
+Grafisch sieht dies folgendermaßen aus:}
+\lang{en}{
+Let $L=\{0, 2\}$, $M=\{0,1,3\}$ and $N=\{1,2\}$ with the functions
+$T : L\to M$ given by \[ T(0) = 3,\quad T(2) = 0 \]
+and $S:M\to N$ given by \[ S(0) = 1,\quad S(1) = 1,\quad S(3) = 2.\]
+The composite function is given by
+\[ (S \circ T)(0)=  S(T(0))=S(3)=2,\quad (S \circ T)(2) = S(T(2))=S(0)=1. \]
+This is represented by the following diagram:
+}
+
+\begin{center}
+\image{T601_Map_C}
+\end{center}
+
+\end{enumerate}
+\end{example}
+
+\begin{quickcheck}
+    \begin{variables}
+      		\randint{a}{-3}{3}
+      		\randint[Z]{b}{-2}{2}
+      		\randint{c}{1}{4}
+      		\randint[Z]{d}{-2}{2}
+      		\function[normalize]{f}{x^2+a*x+b}
+      		\function[normalize]{g}{c*x+d}
+      		\function[normalize]{fg}{(c*x+d)^2+a*(c*x+d)+b}
+      		\function[normalize]{gf}{c*(x^2+a*x+b)+d}
+      \end{variables}
+
+      \type{input.function}
+      \field{real}
+      \lang{de}{\text{Bestimmen Sie die Komposition $f\circ g$ der Abbildungen\\
+      $f:\R\to \R, x\mapsto \var{f}$ und $g:\R\to \R, x\mapsto \var{g}$.\\ $(f\circ g)(x)=$\ansref}
+       }
+       \lang{en}{\text{Compute the composition $f\circ g$ of the maps \\
+      $f:\R\to \R, x\mapsto \var{f}$ and $g:\R\to \R, x\mapsto \var{g}$.\\ $(f\circ g)(x)=$\ansref}
+       }
+      \begin{answer}
+          \solution{fg}
+          \checkAsFunction{x}{-10}{10}{10}
+      \end{answer}
+\end{quickcheck}
+
+
+
+\section{\lang{de}{Eigenschaften von Funktionen}\lang{en}{Properties of functions}}\label{Nullstellen}
+
+\lang{de}{Die folgenden Eigenschaften benutzen wir, um festzustellen, wann eine Umkehrfunktion existiert.
+}
+\lang{en}{
+The following properties will be used to decide when an inverse function exists.
+}
+\begin{definition}\label{def:functionprops}
+\begin{enumerate}
+\item \lang{de}{Eine Funktion heißt \notion{injektiv}, wenn jedes Element der Zielmenge
+\textbf{\textit{höchstens einmal} als Funktionswert angenommen wird}.
+\begin{figure}
+\image{T601_Map_D}
+\caption{Injektivität: Bei jedem Element endet \textbf{höchstens ein} Pfeil.}
+\end{figure}}
+\lang{en}{A function is called \notion{injective} or \notion{one-to-one}
+if every element of the codomain occurs \textbf{\textit{at most once}}
+as a function value.
+\begin{figure}
+\image{T601_Map_D}
+\caption{Injective: Every element is the end of \textbf{at most one} arrow.}
+\end{figure}}
+
+\item \lang{de}{Eine Funktion heißt \notion{surjektiv}, wenn jedes Element der Zielmenge
+\textbf{\textit{mindestens einmal} als Funktionswert angenommen wird}.
+\begin{figure}
+\image{T601_Map_E}
+\caption{Surjektivität: Bei jedem Element endet \textbf{mindestens ein} Pfeil.}
+\end{figure}
+}
+\lang{en}{A function is called \notion{surjective} or \notion{onto}
+if every element of the codomain occurs \textbf{\textit{at least once}
+as a function value}.
+\begin{figure}
+\image{T601_Map_E}
+\caption{Surjective: Every element is the end of \textbf{at least one} arrow.}
+\end{figure}
+}
+\item \lang{de}{Eine Funktion heißt \notion{bijektiv} oder \notion{umkehrbar}, wenn jedes Element in der Zielmenge
+\textbf{\textit{genau einmal} als Funktionswert angenommen wird}.
+\begin{figure}
+\image{T601_Map_F}
+\caption{Bijektivität: Bei jedem Element endet \textbf{genau ein} Pfeil.}
+\end{figure}
+}
+\lang{en}{A function is called \notion{bijective} or \notion{invertible}
+if every element of the codomain occurs \textbf{\textit{exactly once}} as a function value.
+\begin{figure}
+\image{T601_Map_F}
+\caption{Bijective: Every element is the end of \textbf{exactly one} arrow.}
+\end{figure}
+}
+\end{enumerate}
+
+\lang{de}{Ist eine Funktion $f$ bijektiv, dann können wir die Zuordnung der Funktion $f$ rückgängig machen. Die Funktion, die 
+das erreicht, nennen wir \notion{Umkehrfunktion} und schreiben dafür $f^{-1}$. Per Definition gilt $f^{-1}(f(x)) = x$ und $f(f^{-1}(y)) = y$.}
+\lang{en}{
+If a function $f$ is bijective, then the mapping induced by $f$ can be reversed.
+The function that does this is called the \notion{inverse function},
+written $f^{-1}$. By definition, $f^{-1}(f(x)) = x$ and $f(f^{-1}(y)) = y$.
+}
+\end{definition}
+
+\lang{de}{Es bleibt natürlich noch die Frage, wie man die Umkehrfunktion berechnen kann (wenn die Funktion bijektiv ist). 
+Ist die Funktion wie oben durch Pfeile zwischen Elementen dargestellt, dann ist die Umkehrfunktion dadurch gegeben, dass man 
+die Richtung der Pfeile umdreht. (Anfang wird zu Pfeilspitze und umgekehrt.) Rechnerisch schreiben wir am einfachsten 
+$y = f(x)$ und lösen nach $x$ auf, wie im folgenden Beispiel.}
+
+\lang{en}{
+Of course, we are still left with the question of how to calculate the inverse function
+(assuming the function is bijective).
+If the function is represented by arrows between elements as above, then the inverse function
+is given by reversing the direction of the arrows.
+(The beginning becomes the end of the arrow and vice versa.)
+Algebraically, it is simplest to write $y=f(x)$ and solve for $x$
+as in the following example.
+}
+
+\begin{example}
+
+ \begin{tabs*}[\initialtab{1}\class{example}]
+   \tab{$f(x)=2+\frac{1}{x}$}  
+\lang{de}{Wir betrachten die Funktion $f:\R^*\to \R, f(x) = 2+\frac{1}{x}$.\\
+
+Wir schreiben $y =  2+\frac{1}{x}$ und versuchen, die Gleichung nach $x$ aufzulösen. Wenn dies mit 
+Äquivalenzumformungen gelingt, dann haben wir rechnerisch die Umkehrfunktion ermittelt. Es gilt:
+\begin{align*}
+ & \quad \quad y &=  2+\frac{1}{x} \\
+ &\Leftrightarrow \ y -2 &= \frac{1}{x} \\
+ &\Leftrightarrow \quad x &= \frac{1}{y-2}
+\end{align*}
+Die letzte Umformung ist nur gültig, wenn $y \neq 2$ gilt, denn sonst würden wir durch $0$ teilen.
+Da die Funktion $\frac{1}{x}$ aber den Wert $0$ nicht annimmt, nimmt die Funktion $f(x)$ den Wert $2$ 
+nicht an. Der Fall $y =2$ kann daher gar nicht auftreten. 
+
+Durch Umbenennung der Variablen ($x$ und $y$ vertauschen) erhalten wir $f^{-1}$, also
+\[ f^{-1}(x)=\frac{1}{x-2}. \]
+ }
+ \lang{en}{
+Consider the function $f:\R^*\to \R, f(x) = 2+\frac{1}{x}$.\\
+
+We write $y =  2+\frac{1}{x}$ and attempt to solve the equation for $x$.
+If the equation can be rearranged in this way then we will have found the inverse function algebraically.
+We have:
+\begin{align*}
+ & \quad \quad y &=  2+\frac{1}{x} \\
+ &\Leftrightarrow \ y -2 &= \frac{1}{x} \\
+ &\Leftrightarrow \quad x &= \frac{1}{y-2}
+\end{align*}
+The final rearrangement is only valid if $y \neq 2$, as we would otherwise be dividing by $0$.
+Since the function $\frac{1}{x}$ never takes the value $0$, $f(x)$ never takes the value $2$,
+so the case that $y=2$ never arises.
+
+After renaming the variables (swapping $x$ and $y$), we obtain $f^{-1}$, i.e.
+\[ f^{-1}(x)=\frac{1}{x-2}. \]
+ }
+            
+    \tab{\lang{de}{Preis-Absatz-Funktion} \lang{en}{Price-demand function}}
+    \lang{de}{Die Preis-Absatz-Funktion $p(x) = 5 + \frac{8}{x-4}$ beschreibt den Preis $p$ in Abhängigkeit der Menge $x$. \\
+    Wir wollen in diesem Beispiel jedoch gerne herausfinden, wie sich die Menge $x$ in Abhängigkeit des Preises $p$ verhält. 
+    Dazu benöigten wir die Funktion $x(p)$. Zur Bestimmung der Funktion $x(p)$ benötigen wir die Umkehrfunktion von $p(x)$:\\
+    
+    \begin{align*}
+    & \quad \quad p &=  5+\frac{8}{x-4} \\
+    &\Leftrightarrow \ p - 5 &= \frac{8}{x-4} \\
+    &\Leftrightarrow \ x-4 &= \frac{8}{p-5}\\
+    &\Leftrightarrow \quad x &= \frac{8}{p-5}+4\\
+    &\rightarrow \quad x(p) &= \frac{8}{p-5}+4
+    \end{align*}
+    
+    Die Funktion $x(p)$ ist nur gültig, wenn $p \neq 5$ gilt, denn sonst würden wir durch $0$ teilen.\\
+    Zudem sollten wir hier den Definitionsbereich nicht nur mathematisch, sondern auch ökonomisch betrachten:\\
+    Ökonomisch gesehen muss sowohl der Preis als auch die Menge größer $0$ sein. \\
+    
+     \begin{table}[\align{c} \cellaligns{ccccccc}]
+        $\;\mathbf{p}\;$ && $\,0\,$ & $\,1\,$ & $\,2\,$ & $\,3\,$ & $\,4\,$ &$\,5\,$ & $\,6\,$ & ... \\
+        $\;\mathbf{x(p)}\;$ && $\,2,4\,$ & $\,2\,$ & $\,1,33\,$ & $\,0\,$ & $\,-4\,$ &$\,n.D.\,$ & $\,12\,$ &$\,>0\,$\\
+     \end{table}
+    Die Tabelle zeigt, dass aus ökonomischer Sicht neben $p \neq 5$ auch $p \neq 4$ gilt, denn wenn der Preis $p=4$ ist, ergibt die Funktion $x(p)$ eine negative Menge.
+    Mathematisch gesehen liefern negative Mengen kein Problem, aus ökonomischer Sicht sind diese jedoch nicht möglich. \\
+    }
+    \lang{en}{The price-demand function $p(x) = 5 + \frac{8}{x-4}$ describes the price $p$ as a function of quantity ($x$). \\
+    In this example, however, we want to find out how the quantity $x$ behaves as a function of price ($p$). 
+    For this, we need the function $x(p)$. 
+    To determine the function $x(p)$, we need the inverse function of $p(x)$:\\
+    
+    \begin{align*}
+    & \quad \quad p &=  5+\frac{8}{x-4} \\
+    &\Leftrightarrow \ p - 5 &= \frac{8}{x-4} \\
+    &\Leftrightarrow \ x-4 &= \frac{8}{p-5}\\
+    &\Leftrightarrow \quad x &= \frac{8}{p-5}+4\\
+    &\rightarrow \quad x(p) &= \frac{8}{p-5}+4
+    \end{align*}
+    
+    The function $x(p)$ is only defined if $p \neq 5$,
+    as we would otherwise be dividing by $0$.\\
+    In addition, the domain should not only be mathematically meaningful;
+    we also need to consider its economic meaning.
+    From the point of view of economics,
+    both the price and the quantity must be greater than $0$. \\
+    
+     \begin{table}[\align{c} \cellaligns{ccccccc}]
+        $\;\mathbf{p}\;$ && $\,0\,$ & $\,1\,$ & $\,2\,$ & $\,3\,$ & $\,4\,$ &$\,5\,$ & $\,6\,$ & ... \\
+        $\;\mathbf{x(p)}\;$ && $\,2.4\,$ & $\,2\,$ & $\,1.33\,$ & $\,0\,$ & $\,-4\,$ &$\,N/A\,$ & $\,12\,$ &$\,>0\,$\\
+     \end{table}
+    The table shows that $p \neq 4$ must hold in addition to $p \neq 5$,
+    because the price $p=4$ corresponds to a negative quantity $x(p)$.
+    A negative quantity does not lead to any mathematical problems
+    but it is not economically meaningful.
+    }
+  \end{tabs*}
+\end{example}
+
+\begin{quickcheck}
+    \begin{variables}
+      		\randint[Z]{a}{-10}{10}
+      		\randint[Z]{b}{-5}{5}
+      		\randint[Z]{c}{10}{20}
+      		
+      		\function[normalize]{px}{(b/(x+a))-c}
+      		
+      		\function[normalize]{xp}{b/(p+c)-a}
+      		
+      \end{variables}
+
+      \type{input.function}
+      \field{real}
+      \lang{de}{
+      \text{Bestimmen Sie die Funktion $x(p)$ bei gegebener Preis-Absatz-Funktion $p(x) = \var{px}$\\
+      $x(p)=$\ansref .}}
+      \lang{en}{
+      \text{Determine the function $x(p)$, given the price-demand function $p(x) = \var{px}$.\\
+      $x(p)=$\ansref .}}
+   
+      \begin{answer}
+          \solution{xp}
+          \checkAsFunction{x}{-10}{10}{10}
+      \end{answer}
+      \lang{de}{
+      \explanation{Bilden Sie die Umkehrfunktion von $p(x)$.}}
+      \lang{en}{
+      \explanation{Find the inverse function of $p(x)$.}}
+\end{quickcheck}
+
+
+
+
+
+\lang{de}{Graphisch kann man die Umkehrfunktion auch folgendermaßen ermitteln:}
+\lang{en}{The inverse function can be found graphically as follows:}
+\begin{rule}
+\lang{de}{Man erhält den Graphen von $f^{-1}$ aus dem Graphen von $f$ durch Spiegelung an der Diagonalen $y=x$.  }
+\lang{en}{
+The graph of $f^{-1}$ is obtained from the graph of $f$ by reflecting across the diagonal $y=x$.
+}
+\end{rule}
+
+\lang{de}{Die nachstehende Visualisierung zeigt das oben berechnete Beispiel $f(x)=2+\frac{1}{x}$ graphisch interpretiert.\\ }
+\lang{en}{
+The visualization below shows the example $f(x)=2+\frac{1}{x}$ from above, interpreted graphically.
+}
+\begin{genericGWTVisualization}[550][800]{mathlet1}
+		\begin{variables}
+			\function{f}{rational}{2+1/x}
+			\function{g}{rational}{1/(x-2)}
+			\function{di}{rational}{x}
+
+% 			\function{axe}{rational}{0}
+% 			\pointOnCurve[1/10,6]{xa}{rational}{axe}{3/2}
+%			\number{a}{rational}{var(xa)[x]}
+
+			\number[editable]{a}{rational}{1}
+			\number{a0}{rational}{var(a)}
+			\number{fa}{rational}{2+1/var(a)}
+			
+			\point{Ax}{rational}{var(a0),0}
+			\point{Ag}{rational}{var(a0),var(fa)}
+			\point{Ay}{rational}{0,var(fa)}
+			\segment{v1}{rational}{var(Ax),var(Ag)}
+			\segment{h1}{rational}{var(Ag),var(Ay)}
+
+			\point{By}{rational}{0,var(a0)}
+			\point{Bg}{rational}{var(fa),var(a0)}
+			\point{Bx}{rational}{var(fa),0}
+			\segment{v2}{rational}{var(Bx),var(Bg)}
+			\segment{h2}{rational}{var(Bg),var(By)}
+			
+			
+			
+		\end{variables}
+		\color{f}{#0066CC}
+		\color{g}{#CC6600}
+		\color{di}{LIGHT_GRAY}
+		\color{v1}{GRAY}
+		\color{h1}{GRAY}
+		\color{Ag}{GRAY}
+		\label{Ag}{$A$}
+		%\color{Ax}{GRAY}
+		%\label{Ax}{@2d[$a$]}
+		
+% 		\color{xa}{GRAY}
+% 		\label{xa}{@2d[$a$]}
+
+		\color{v2}{GRAY}
+		\color{h2}{GRAY}
+		\color{Bg}{GRAY}
+		\label{Bg}{$B$}
+		
+		\begin{canvas}
+			\plotSize{450}
+			\plotLeft{-4}
+			\plotRight{6}
+			\plot[coordinateSystem]{di,v1,h1,v2,h2,f,g, Ax, Ag, Bg }
+		\end{canvas}
+    \lang{de}{
+		\text{Der Graph der Funktion $\textcolor{#0066CC}{f(x)=2+\frac{1}{x}}$
+        und der Umkehrfunktion $\textcolor{#CC6600}{f^{-1}(x)=\frac{1}{x-2}}$.\\\\
+		\IFELSE{var(a)=0}{Für $x=\var{a}$ ist die Funktion $f$ nicht definiert! Damit nimmt die Umkehrfunktion $f^{-1}$ diesen Wert nicht an,
+        d.h. $\var{a0}$ liegt nicht in der Wertemenge von $f^{-1}$.}{Für $x=\var{a}$ ist $f(\var{a0})=\var{fa}$, also ist $A=(\var{a0}; \var{fa})$ auf dem Graphen von $f$.\\
+		Nach Definition der Umkehrfunktion ist: $f^{-1}(\var{fa})=\var{a0}$, also $B=(\var{fa}; \var{a0})$ auf dem Graphen von $f^{-1}$.\\
+		Man erhält den Graphen von $f^{-1}$ durch Spiegelung des Graphen von $f$ an der Diagonalen $y=x\;$ (hellgrau eingezeichnet).}		
+		}}
+  \lang{en}{
+		\text{The graph of the function $\textcolor{#0066CC}{f(x)=2+\frac{1}{x}}$
+        and its inverse function $\textcolor{#CC6600}{f^{-1}(x)=\frac{1}{x-2}}$.\\\\
+		\IFELSE{var(a)=0}{At $x=\var{a}$, the function $f$ is not defined! Therefore, the inverse function $f^{-1}$
+        never takes that value, i.e. $\var{a0}$ does not lie in the range of $f^{-1}$.}{At $x=\var{a}$, we have $f(\var{a0})=\var{fa}$, so $A=(\var{a0}; \var{fa})$ lies on the graph of $f$.\\
+		The definition of the inverse function implies $f^{-1}(\var{fa})=\var{a0}$, so $B=(\var{fa}; \var{a0})$ lies on the graph of $f^{-1}$.\\
+		The graph of $f^{-1}$ is obtained by reflecting $f$ across the diagonal $y=x\;$ (colored gray).}
+		}}
+	   \end{genericGWTVisualization}
+\\ \\
+\lang{de}{Weitere Eigenschaften von Funktionen sind ähnlich wie die gleichlautenden Eigenschaften für Folgen definiert.
+}
+\lang{en}{
+Several further properties of functions are defined similarly to
+the properties of sequences of the same name.
+}
+
+\begin{definition}
+\lang{de}{Eine reellwertige Funktion $f$ heißt ...
+
+\begin{itemize}
+\item ... \notion{nach oben beschränkt}, wenn es eine reelle Zahl $C$ gibt, die größer als alle Funktionswerte ist.
+
+\item ... \notion{nach unten beschränkt}, wenn es eine reelle Zahl $c$ gibt, die kleiner als alle Funktionswerte ist.
+
+\item ... \notion{beschränkt}, wenn sie sowohl nach oben als auch nach unten beschränkt ist.
+
+\item ... \notion{monoton wachsend} bzw. \notion{streng monoton wachsend}, wenn für $x_1 < x_2$ stets $f(x_1) \leq f(x_2)$ bzw. $f(x_1) < f(x_2)$ gilt.
+
+\item ... \notion{monoton fallend} bzw. \notion{streng monoton fallend}, wenn für  $x_1 < x_2$ stets $f(x_1) \geq f(x_2)$ bzw. $f(x_1) > f(x_2)$ gilt.
+
+\end{itemize}
+}
+\lang{en}{
+A real-valued function $f$ is called
+\begin{itemize}
+\item ... \notion{bounded from above} if there exists a real number
+$C$ that is greater than every value of $f$.
+
+\item ... \notion{bounded from below} if there exists a real number
+$c$ that is less than every value of $f$.
+
+\item ... \notion{bounded} if it is bounded both from above and
+from below.
+
+\item ... \notion{monotonically increasing} or \notion{strictly monotonically increasing}
+if $x_1 < x_2$ always implies $f(x_1) \leq f(x_2)$ or $f(x_1) < f(x_2)$, respectively.
+
+\item ... \notion{monotonically decreasing} or \notion{strictly monotonically decreasing}
+if $x_1 < x_2$ always implies $f(x_1) \geq f(x_2)$ or $f(x_1) > f(x_2)$, respectively.
+\end{itemize}
+}
+\end{definition}
+
+\lang{de}{Zu guter letzt erwähnen wir hier noch besondere Punkte auf dem Funktionsgraphen: die \emph{Nullstellen}. 
+}
+\lang{en}{
+Finally, we will mention a distinguished type of point on the
+graph of a function: its \emph{zeros}.
+}
+
+\begin{definition}
+\lang{de}{Ist $f$ eine Funktion und $x_0$ ein Element des Definitionsbereichs mit $f(x_0) = 0$, dann nennen wir
+$x_0$ eine \notion{Nullstelle} von $f$.}
+\lang{en}{
+Let $f$ be a function. An element $x_0$ of the domain with $f(x_0) = 0$
+is called a \notion{zero} of $f$.
+}
+\end{definition}
+\lang{de}{Weitere besondere Punkte wie \emph{Extrempunkte} und \emph{Wendepunkte} werden wir im Teil \emph{Differentialrechnung} 
+untersuchen. Tatsächlich werden wir dabei dann im Wesentlichen die Nullstellen der ersten oder 
+zweiten Ableitung suchen.}
+\lang{en}{
+Other distinguished points such as \emph{extreme points} and
+\emph{inflection points} will be studied in the section on
+\emph{differential calculus}. This essentially amounts to looking
+for the zeros of the first or second derivative.
+}
+
+
+\section{\lang{de}{Grenzwerte und Stetigkeit} \lang{en}{Limits and continuity}}
+\lang{de}{Typischerweise betrachten wir Funktionen, die auf ganz $\R$ oder zumindest 
+Teilintervallen davon definiert sind. Häufig interessieren wir uns dafür, wie 
+sich die Funktionswerte für immer größer werdende oder immer kleiner werdende Funktionswerte
+entwickeln - oder wie sie sich in der Nähe eines bestimmten $x$-Wertes verhalten.
+Um dieses \glqq in der Nähe\grqq\ mathematisch korrekt zu formulieren, greifen wir 
+auf den Grenzwertbegriff von Folgen zurück. }
+
+\lang{en}{
+Typically, we consider functions that are defined on all of $\R$
+or at least on subintervals of it. We are often interested in the way
+the function behaves for increasing or decreasing arguments - 
+or how it behaves near a particular value of $x$. To formulate "near"
+in a mathematically precise way, we use the notion of the limit
+of a sequence.
+}
+
+\begin{definition}\label{def:funktionsgrenzwert}
+\lang{de}{Es sei $f: D\to \R$ eine Funktion. Weiter sei $x_0 \in \R$ oder $x_0 = \pm \infty$. 
+}
+\lang{en}{
+Let $f: D\to \R$ be a function and let $x_0 \in \R$ or $x_0 = \pm \infty$.
+}
+\begin{itemize}
+\item  \lang{de}{Es sei $(x_n)$ eine Folge mit Folgengliedern 
+in $D \setminus \{ x_0 \}$ und $\lim_{n \to \infty} x_n = x_0$. Wenn für jede solche Folge $(x_n)$ der 
+Grenzwert $\lim_{n \to \infty} f(x_n)$ immer den gleichen Wert $L$ liefert, dann schreiben wir 
+\[
+\lim_{x \to x_0} f(x_0) = L
+\]
+und nennen diesen Wert den \notion{Grenzwert von $f$ an $x_0$}.}
+\lang{en}{
+Let $(x_n)$ be a sequence whose terms lie in $D \backslash \{x_0\}$
+such that $\lim_{n \to \infty} x_n = x_0$. If, for every such sequence
+$(x_n)$, the limit $\lim_{n \to \infty} f(x_n)$ has the same
+value $L$, then we write
+\[
+\lim_{x \to x_0} f(x_0) = L
+\]
+and call this value the \notion{limit of $f$ at $x_0$}.
+}
+
+\item  \lang{de}{Es sei $(x_n)$ eine Folge mit Folgengliedern 
+in $D$, $\lim_{n \to \infty} x_n = x_0$ und $x_n < x_0$ (bzw. $x_n > x_0$). Wenn für jede solche Folge $(x_n)$ der 
+Grenzwert $\lim_{n \to \infty} f(x_n)$ immer den gleichen Wert $L$ liefert, dann schreiben wir 
+\[
+\lim_{x \nearrow x_0} f(x_0) = L \quad \left( \text{bzw.} \ \lim_{x \searrow x_0} f(x_0) = L\right)
+\]
+und nennen diesen Wert \notion{linksseitigen} (bzw. \notion{rechtsseitigen}) Grenzwert von $f$ an $x_0$.
+}
+\lang{en}{
+Let $(x_n)$ be a sequence whose terms lie in $D$, with
+$\lim_{n \to \infty} x_n = x_0$ and $x_n < x_0$ (or $x_n > x_0$).
+If, for every such sequence $(x_n)$, the limit $\lim_{n \to \infty} f(x_n)$
+has the same value $L$, then we write
+\[
+\lim_{x \nearrow x_0} f(x_0) = L \quad \left( \text{or} \ \lim_{x \searrow x_0} f(x_0) = L\right)
+\]
+and call this value the \notion{left-hand} (or \notion{right-hand})
+limit of $f$ at $x_0$, respectively.
+}
+
+\end{itemize}
+\lang{de}{Existiert keine Folge $(x_n)$ mit den geforderten Eigenschaften, so kann der Grenzwert von $f$ nicht gebildet werden.
+}
+\lang{en}{
+If no sequence $(x_n)$ with these properties exists,
+then the limit of $f$ does not exist.
+}
+\end{definition}
+
+\lang{de}{Dass man hier \emph{alle} Folgen mit Grenzwert $x_0$ betrachtet, liegt daran, dass der Funktionengrenzwert unabhängig davon 
+sein soll, wie man sich $x_0$ nähert.}
+\lang{en}{
+We consider \emph{all} sequences with limit $x_0$ because the
+limit of the function is supposed to be independent of the way
+we approach $x_0$.
+}
+
+\lang{de}{Mit Hilfe dieser Grenzwerte von Funktionen können wir eine weitere wichtige Eigenschaft, die Funktionen 
+haben können, definieren: }
+\lang{en}{
+Using limits of functions, we can define another important
+property that functions may have:
+}
+
+\begin{definition}[\lang{de}{Stetigkeit} \lang{en}{Continuity}]
+\begin{itemize}
+\item \lang{de}{Eine Funktion $f$ heißt \notion{stetig an $x_0$}, wenn  
+\[
+\lim_{x \to x_0} f(x) = f(x_0)
+\]
+gilt, also wenn der Grenzwert existiert und mit dem Funktionswert übereinstimmt.}
+\lang{en}{
+A function $f$ is called \notion{continuous at $x_0$}, if
+\[
+\lim_{x \to x_0} f(x) = f(x_0);
+\]
+that is, the limit exists and equals the value of the function there.
+}
+\item \lang{de}{Eine Funktion heißt \notion{stetig}, wenn sie für jedes $x_0$ des Definitionsbereichs stetig ist. 
+}
+\lang{en}{
+A function is \notion{continuous} if it is continuous at every
+point $x_0$ of the domain.
+}
+
+\end{itemize}
+\end{definition}
+
+\lang{de}{In der Praxis können wir Stetigkeit nachweisen, indem wir linksseitigen und rechtsseitigen Grenzwert
+einzeln berechnen und jeweils mit dem Funktionswert vergleichen.}
+\lang{en}{
+In practice, we can check continuity by computing the left-hand
+and right-hand limits separately and comparing them with the
+value of the function.
+}
+
+\lang{de}{Anschaulich bedeutet Stetigkeit, dass die Funktion dort, wo sie definiert ist, keine Sprünge macht. 
+}
+\lang{en}{
+Intuitively, a function being continuous means that it does not
+jump anywhere where it is defined.
+}
+
+\begin{example}
+\begin{tabs*}[\initialtab{1}\class{example}]
+   \tab{$\frac{x^2-4}{x-2}$}
+
+\lang{de}{Wir betrachten die Funktion 
+\[ f:\R\setminus { \{2\} }\to \R, x\mapsto \frac{x^2-4}{x-2} \]
+und $x_0=2\notin D$.}
+\lang{en}{
+Consider the function
+\[ f:\R\setminus { \{2\} }\to \R, x\mapsto \frac{x^2-4}{x-2} \]
+and $x_0=2\notin D$.
+}
+
+\lang{de}{Dann gilt für jede Folge $(x_n)_{n \in \N}$ mit $x_n\neq 2$ und
+$\lim_{n\to \infty} x_n=2$:
+\[ \lim_{n\to \infty} f(x_n)=\lim_{n\to \infty} \frac{x_n^2-4}{x_n-2}
+=\lim_{n\to \infty} \frac{(x_n-2)(x_n+2)}{x_n-2}
+=\lim_{n\to \infty} x_n+2 =2+2=4.\]
+
+Also ist $\lim_{x\to 2} f(x)=4$.}
+
+\lang{en}{
+For any sequence $(x_n)_{n \in \N}$ with $x_n\neq 2$ and
+$\lim_{n\to \infty} x_n=2$, we have
+\[ \lim_{n\to \infty} f(x_n)=\lim_{n\to \infty} \frac{x_n^2-4}{x_n-2}
+=\lim_{n\to \infty} \frac{(x_n-2)(x_n+2)}{x_n-2}
+=\lim_{n\to \infty} x_n+2 =2+2=4.\]
+
+Therefore, $\lim_{x\to 2} f(x)=4$.}
+
+\tab{$\frac{x^2-4}{|x-2|}$}
+\lang{de}{Wir betrachten die Funktion 
+\[ f:\R\setminus { \{2\} }\to \R, x\mapsto \frac{x^2-4}{|x-2|} \]
+und $x_0=2\notin D$.}
+\lang{en}{
+Consider the function
+\[ f:\R\setminus { \{2\} }\to \R, x\mapsto \frac{x^2-4}{|x-2|} \]
+and $x_0=2\notin D$.}
+
+\lang{de}{Ist $(x_n)$ eine Folge mit $x_n> 2$ für alle $n \in \N$ und
+$\lim_{n\to \infty} x_n=2$, so gilt:
+\[ \lim_{n\to \infty} f(x_n)=\lim_{n\to \infty} \frac{x_n^2-4}{|x_n-2|}
+=\lim_{n\to \infty} \frac{(x_n-2)(x_n+2)}{x_n-2}
+=\lim_{n\to \infty} x_n+2 =2+2=4.\]}
+\lang{en}{
+For any sequence $(x_n)$ with $x_n> 2$ for all $n \in \N$ and
+$\lim_{n\to \infty} x_n=2$, we have:
+\[ \lim_{n\to \infty} f(x_n)=\lim_{n\to \infty} \frac{x_n^2-4}{|x_n-2|}
+=\lim_{n\to \infty} \frac{(x_n-2)(x_n+2)}{x_n-2}
+=\lim_{n\to \infty} x_n+2 =2+2=4.\]
+}
+
+\lang{de}{Ist jedoch $(x_n)$ eine Folge mit $x_n< 2$ und
+$\lim_{n\to \infty} x_n=2$, so gilt:
+\[ \lim_{n\to \infty} f(x_n)=\lim_{n\to \infty} \frac{x_n^2-4}{|x_n-2|}
+=\lim_{n\to \infty} \frac{(x_n-2)(x_n+2)}{-(x_n-2)}
+=\lim_{n\to \infty} -(x_n+2) =-(2+2)=-4.\]}
+\lang{en}{
+On the other hand, if $(x_n)$ is a sequence with $x_n < 2$ and
+$\lim_{n\to \infty} x_n=2$, then
+\[ \lim_{n\to \infty} f(x_n)=\lim_{n\to \infty} \frac{x_n^2-4}{|x_n-2|}
+=\lim_{n\to \infty} \frac{(x_n-2)(x_n+2)}{-(x_n-2)}
+=\lim_{n\to \infty} -(x_n+2) =-(2+2)=-4.\]
+}
+
+\lang{de}{Damit haben wir $\lim_{x \searrow 2} f(x) = 4$ und $\lim_{x \nearrow 2} f(x) = -4$. Die Funktion ist trotzdem 
+stetig, denn an $x_0 = 2$ ist sie gar nicht definiert.}
+\lang{en}{
+It follows that $\lim_{x \searrow 2} f(x) = 4$ and $\lim_{x \nearrow 2} f(x) = -4$.
+Even so, this function is continuous, because it is not even
+defined at $x_0 = 2$.
+}
+
+\tab{sgn$(x)$}
+\lang{de}{Wir betrachten die Signumfunktion 
+\[
+\text{sgn}(x) = \left\{ 
+   \begin{matrix}
+   -1,  &\text{ falls }x <0{,}\\
+   0, &\text{ falls } x = 0 \text{,} \\
+   1, &\text{ falls } x > 0 \text{.} 
+\end{matrix} 
+ \right.
+\]}
+\lang{en}{
+Consider the sign function,
+\[
+\text{sgn}(x) = \left\{ 
+   \begin{matrix}
+   -1,  &\text{ if }x <0{,}\\
+   0, &\text{ if } x = 0 \text{,} \\
+   1, &\text{ if } x > 0 \text{.} 
+\end{matrix} 
+ \right.
+\]}
+\begin{center}
+\image{T601_Signum}
+\end{center}
+\lang{de}{Für positive Zahlen ist die Funktion konstant 1, für negative Zahlen konstant -1. 
+Entsprechend erhalten wir bei Näherung an $0$ die Grenzwerte
+\begin{align*}
+ &\lim_{t \nearrow 0} \text{sgn}(x) = \lim_{t \nearrow 0} -1 = -1, \\
+ &\lim_{t \searrow 0} \text{sgn}(x) = \lim_{t \searrow 0} 1 = 1. 
+\end{align*}
+Die beiden Werte stimmen nicht überein und stimmen auch nicht mit dem Funktionswert 
+sgn$(0)=0$ überein. Die Signumfunktion ist somit nicht stetig an der Stelle $x_0 = 0$. 
+An allen anderen Stellen ist sie stetig. }
+
+\lang{en}{
+At positive numbers, the function is the constant 1, and at negative numbers it is the constant -1.
+This means that we have the limits
+\begin{align*}
+ &\lim_{t \nearrow 0} \text{sgn}(x) = \lim_{t \nearrow 0} -1 = -1, \\
+ &\lim_{t \searrow 0} \text{sgn}(x) = \lim_{t \searrow 0} 1 = 1,
+\end{align*}
+as we approach zero.
+These values do not agree, and they also do not equal the value
+sgn$(0)=0$. Therefore, the sign function is not continuous at the point $x_0 = 0$.
+It is continuous at all other points.
+}
+\end{tabs*}
+\end{example}
+
+
+\lang{de}{Die meisten Funktionen, die wir aus der Schule kennen, sind stetig:}
+\lang{en}{Most functions that we know from school are continuous:}
+\begin{rule}
+\begin{itemize}
+\item \lang{de}{Die folgenden Funktionen sind Beispiele für stetige Funktionen:}
+\lang{en}{The following functions are examples of continuous functions:}
+$x^n$, $|x|$, $a^x$, $\ln(x)$, $\sin(x)$, $\cos(x)$.
+\item \lang{de}{Die Summe, Differenz, das Produkt, der Quotient, die Verkettung von stetigen Funktionen 
+ist wieder stetig. }
+\lang{en}{
+The sum, difference, product, quotient or composition of continous
+functions is continuous.
+}
+\item \lang{de}{Insbesondere sind alle 
+ganzrationalen Funktionen der Form $f(x) = a_n x^n + \ldots + a_1 x + a_0$ stetig.}
+\lang{en}{
+In particular, all polynomial functions of the form
+$f(x) = a_n x^n + \ldots + a_1 x + a_0$ are continuous.
+}
+\end{itemize}
+\end{rule}
+
+\end{visualizationwrapper}
+
+\end{content}

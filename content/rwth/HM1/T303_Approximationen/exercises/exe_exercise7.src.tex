@@ -1,0 +1,95 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü08: l'Hospital}
+    \lang{en}{Exercise 8}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+
+\title{\lang{de}{Ü08: l'Hospital}}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10498}{Ticket 10498}
+\end{block}
+
+%######################################################FRAGE_TEXT
+\lang{de}{ 
+Bestimmen Sie mit Hilfe der Regel von de l'Hospital die folgenden Grenzwerte:
+\begin{enumerate}[a)]
+\item a) $\lim_{x\to \infty} (\ln(x)-\sqrt{x})$,
+\item b) $\lim_{x\nearrow 1} \ln(x)\cdot \tan(\frac{\pi}{2}x)$.
+\end{enumerate}
+}
+
+%##################################################ANTWORTEN_TEXT
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+  \tab{\lang{de}{    Antworten    }}
+    \lang{de}{  
+Die gesuchten "`Grenzwerte"' sind:
+\begin{enumerate}[a)]
+\item a) $\lim_{x\to \infty} (\ln(x)-\sqrt{x})=-\infty$,
+\item b) $\lim_{x\nearrow 1} \ln(x)\cdot \tan(\frac{\pi}{2}x)=-\frac{2}{\pi}$.
+\end{enumerate} } 
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung a)    }}
+    \lang{de}{   
+Berechnet man den Grenzwert summandenweise, so erhält man den Ausdruck "`$\infty-\infty$"'.
+Wir sollten also den Term so umformen, dass die Regel von de l'Hospital angewendet werden kann, z.B.
+durch Ausklammern von $\sqrt{x}$:
+\[ \ln(x)-\sqrt{x}=\sqrt{x}\cdot (\frac{\ln(x)}{\sqrt{x}}-1). \]
+Für den Bruch $\frac{\ln(x)}{\sqrt{x}}$ prüfen wir die Voraussetzungen der Regel von de l'Hospital:
+Zähler und Nenner sind beliebig oft differenzierbar und $\lim_{x\to\infty} \ln(x)=\infty=\lim_{x\to\infty}\sqrt{x}$. Also gilt
+\[ \lim_{x\to \infty} \frac{\ln(x)}{\sqrt{x}}= \lim_{x\to \infty} \frac{1/x}{1/(2\sqrt{x})}
+=\lim_{x\to \infty} \frac{2}{\sqrt{x}}=0.\]
+Mit den Grenzwertregeln auch für uneigentliche Grenzwerte ist damit
+\begin{eqnarray*}
+  \lim_{x\to \infty} (\ln(x)-\sqrt{x})
+&=& \lim_{x\to \infty} \sqrt{x}\cdot (\frac{\ln(x)}{\sqrt{x}}-1)\\
+&=& \lim_{x\to \infty}\sqrt{x}\cdot \left(\lim_{x\to \infty}\frac{\ln(x)}{\sqrt{x}}-1\right)\\
+&=& \infty\cdot (0-1)=-\infty.
+\end{eqnarray*}    }
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung b)    }}
+     
+Berechnet man den Grenzwert faktorenweise, erhält man den Ausdruck "`$0\cdot \infty$"'.
+Wir müssen den Term daher umformen, um die Regel von de l'Hospital anwenden zu können.
+Schreiben wir
+\[\tan(\frac{\pi}{2}x)=\frac{\sin(\frac{\pi}{2}x)}{\cos(\frac{\pi}{2}x)}, \]
+so erhält man
+\[ \ln(x)\cdot \tan(\frac{\pi}{2}x)=\frac{\ln(x)}{\cos(\frac{\pi}{2}x)}\cdot \sin(\frac{\pi}{2}x).\]
+Darin ist $\lim_{x\to 1}\sin(\frac{\pi}{2}x)=1$ und 
+\[ \lim_{x\nearrow 1} \frac{\ln(x)}{\cos(\frac{\pi}{2}x)}\quad \big(= \text{\glqq{}} \frac{0}{0}\text{\grqq{}}\big).\]
+Dafür wenden wir die Regel von de l'Hospital an. Zähler und Nenner sind beliebig oft differenzierbar. 
+Wir berechnen  $(\ln(x))'=1/x$ und $(\cos(\frac{\pi}{2}x))'=-\sin(\frac{\pi}{2}x)\cdot \frac{\pi}{2}$.
+
+Damit ist
+\[ \lim_{x\nearrow 1} \frac{\ln(x)}{\cos(\frac{\pi}{2}x)}= \lim_{x\nearrow 1} \frac{1/x}{-\sin(\frac{\pi}{2}x)\cdot \frac{\pi}{2}}=\frac{1}{-1\cdot \pi/2}=-\frac{2}{\pi}. \]
+Mit der Grenzwertregel für Produkte ist also schließlich der gesuchte Grenzwert
+\[ \lim_{x\nearrow 1}\frac{\ln(x)}{\cos(\frac{\pi}{2}x)}\cdot \sin(\frac{\pi}{2}x)
+=\lim_{x\nearrow 1}\frac{\ln(x)}{\cos(\frac{\pi}{2}x)}\cdot \lim_{x\nearrow 1}\sin(\frac{\pi}{2}x)=
+-\frac{2}{\pi}\cdot 1= -\frac{2}{\pi}. \]
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+
+%#############################################################ENDE
+\end{tabs*}
+\end{content}

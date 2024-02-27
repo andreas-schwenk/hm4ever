@@ -1,0 +1,57 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A01: Reihenwert}
+    \lang{en}{Problem 1}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+\lang{de}{\title{A01: Reihenwert}}
+\lang{en}{\title{Problem 1}}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9876}{Ticket 9876}
+\end{block}
+
+\begin{problem}
+  \begin{question}
+    \begin{variables}
+    	\randint[Z]{m}{-10}{10}
+        \randadjustIf{m}{|m| <=1}
+    	\function[normalize]{q}{1/m}
+    	\function{s}{1/(1-q)}
+    	\function[normalize]{q1}{q^k}
+    \end{variables}
+    \type{input.number}
+    \field{rational}
+    \text{Bestimmen Sie den Wert der Reihe $\sum_{k=0}^{\infty} \var{q1}\,.$\\
+          Der Wert der Reihe ist  \ansref. }
+	
+	\begin{answer}
+		%\text{Der Wert der Reihe ist }
+		\solution{s}
+        
+	\end{answer}
+    \explanation{Benutzen Sie die Formel für die geometrische Reihe.}
+    
+  \end{question}
+
+\end{problem}
+
+\embedmathlet{mathlet}
+\end{content}

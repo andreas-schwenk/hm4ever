@@ -1,0 +1,72 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A07: Potenz}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21538}{Ticket 21538}
+\end{block}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A07: Potenz}}
+
+\begin{problem}
+           \begin{variables}
+                \randint{a}{-10}{-5}
+                \randint{b}{1}{2}
+                
+                \function{r}{sqrt(a^2+b^2)}
+                \function{phi}{pi+atan(b/a)}
+                \function{r4}{(a^2+b^2)^2}
+                \function[calculate,2]{phi4}{4*atan(b/a)}
+                 % z^4 bildet (157,5°;180°)auf den 4. Quadranten ab.
+           \end{variables}        
+     
+     
+          \begin{question}
+                \type{input.function}
+                \field{real}
+                    \text{Berechnen sie zu $z=\var{a}+\var{b}i$ die vierte 
+                    Potenz $z^4=re^{i\phi}$. \\Geben Sie $\phi$ mit zwei 
+                    Nachkommastellen ein und wählen Sie $\phi$ so, dass $-\pi<\phi\leq+\pi$.\\
+                    $r=$\ansref und $\phi=$\ansref}
+               \begin{answer}
+                    \solution{r4}
+                    \inputAsFunction{x}{antwortr}
+                    \checkFuncForZero{r4-antwortr}{1}{2}{1}
+               \end{answer}
+               \begin{answer}
+                    \solution{phi4}
+                    \inputAsFunction{x}{antwortr}
+                    \checkFuncForZero{r4-antwortr}{1}{2}{1}
+               \end{answer} 
+               \explanation{$r= |z|^4 = ((\var{a})^2+\var{b}^2)^2$ und 
+               $\arg(z)=\pi+\arctan(b/a)$, so dass für $\arg(z^4)$ gilt: 
+               $\phi=4\arg(z) -4\pi$. Die $4\pi$ berücksichtigen, dass $\arg(z)$
+               durch Vervierfachung so groß geworden ist.}
+               
+          \end{question}     
+     \end{problem}
+
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

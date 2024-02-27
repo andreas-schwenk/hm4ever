@@ -1,0 +1,1161 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Sets and number systems}
+    \lang{de}{Mengen und Zahlenmengen}
+   }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{Beschreibung}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_IntervalExample_B.meta.xml}{T601_IntervalExample_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_IntervalExample_C.meta.xml}{T601_IntervalExample_C}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_IntervalExample_A.meta.xml}{T601_IntervalExample_A}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_LeftOpenInterval.meta.xml}{T601_LeftOpenInterval}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_RightOpenInterval.meta.xml}{T601_RightOpenInterval}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_ClosedInterval.meta.xml}{T601_ClosedInterval}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_OpenInterval.meta.xml}{T601_OpenInterval}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_NumberLine_D.meta.xml}{T601_NumberLine_D}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_NumberSets.meta.xml}{T601_NumberSets}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_VennQuickCheck.meta.xml}{T601_VennQuickCheck}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_VennComplement.meta.xml}{T601_VennComplement}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_VennSubset.meta.xml}{T601_VennSubset}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_VennDifference_B.meta.xml}{T601_VennDifference_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_VennDifference_A.meta.xml}{T601_VennDifference_A}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_VennIntersection.meta.xml}{T601_VennIntersection}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T601_VennUnion.meta.xml}{T601_VennUnion}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{gwtviz}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T201neu_Vollstaendige_Induktion/g_art_content_01_indirekter_widerspruchsbeweis.meta.xml}{content_01_indirekter_widerspruchsbeweis}
+    \link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_01_zahlenmengen.meta.xml}{content_01_zahlenmengen}
+    \link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_02_rechengrundlagen_terme.meta.xml}{content_02_rechengrundlagen_terme}
+    \link{generic_article}{content/rwth/HM1/T202_Reelle_Zahlen_axiomatisch/g_art_content_04_koerperaxiome.meta.xml}{content_04_koerperaxiome}
+    \link{generic_article}{content/rwth/HM1/T207_Intervall_Schachtelung/g_art_content_21_intervalle.meta.xml}{intervalle}
+    %\link{generic_article}{content/rwth/HM1/T203_komplexe_Zahlen/g_art_content_08_algebraische_darstellung.meta.xml}{komplexe_Zahlen}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+
+%
+\usepackage{mumie.ombplus}
+\ombchapter{1}
+\ombarticle{1}
+
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\lang{de}{\title{Mengen und Zahlenmengen}}
+\lang{en}{\title{Sets and number systems}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22660}{Ticket 22660}
+\end{block}
+
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+\section{\lang{de}{Mengen} \lang{en}{Sets}} \label{sec:mengen}
+  \lang{de}{In diesem ersten Kapitel befassen wir uns mit dem grundlegenden mathematischen Begriff der \emph{Menge} und erinnern wir uns zunächst an die Mengen
+  der natürlichen, ganzen, rationalen und reellen Zahlen, mit denen wir auch schon in der Schule zu tun 
+  hatten.}
+  \lang{en}{
+  In this first section, we will introduce
+  the fundamental mathematical notion of a \emph{set}
+  and recall the sets of natural numbers,
+  integers, rationals and real numbers
+  that are familiar from school.
+  }
+
+\begin{definition}[\lang{de}{Menge, Definition nach Cantor}
+\lang{en}{Definition of a set according to Cantor}] \label{def:menge}
+\begin{itemize}
+
+\item \lang{de}{Eine \emph{\notion{Menge} $M$} ist eine Zusammenfassung von bestimmten, unterscheidbaren Objekten unserer 
+          Anschauung oder unseres Denkens zu einem Ganzen. Die Objekte dieser Zusammenfassung nennt man 
+          \emph{die \notion{Elemente} von $M$}. }
+      \lang{en}{
+      A \emph{\notion{set} $M$} is a collection of well-defined, distinguishable objects
+      that we can perceive or think of to a single whole.
+      The objects of the collection are called \emph{\notion{elements} of $M$}.
+      }
+          
+\item \lang{de}{Ist $x$ ein Element der Menge $M$, so schreibt man $x\in M$, andernfalls schreibt man $x\notin M$. 
+      }
+      \lang{en}{If $x$ is an element of $M$, then we write $x \in M$.
+      Otherwise, we write $x \notin M$.}
+
+\item \lang{de}{Angenommen, wir haben zwei Mengen $A$ und $B$. Wir nennen $A$ eine \emph{\notion{Teilmenge} von $B$}, wenn jedes Element von $A$ auch Element von $B$ ist. 
+  $B$ bezeichnet man in diesem Fall als \emph{\notion{Obermenge} von $A$}. Man schreibt dafür $A\subseteq B$ (oder $B \supseteq A$).
+  }
+  \lang{en}{Suppose $A$ and $B$ are two sets. $A$ is called a \emph{\notion{subset} of $B$}
+  if every element of $A$ is also an element of $B$.
+  In this case, $B$ is called a \emph{\notion{superset} of $A$}.
+  We denote this by $A \subseteq B$ (or $B \supseteq A$).}
+  
+\item \lang{de}{Wenn $A$ eine Teilmenge von $B$ ist und $A$ und $B$ nicht gleich sind, 
+  so bezeichnet man $A$ auch als \emph{\notion{echte Teilmenge} von $B$} und schreibt$A\subsetneq B$. 
+  }
+  \lang{en}{
+  If $A$ is a subset of $B$ and if $A$ and $B$ are not equal,
+  then we call $A$ a \emph{\notion{proper subset} of $B$}
+  and write $A \subsetneq B$.
+  }
+
+\item \lang{de}{Als \emph{\notion{Mächtigkeit}} einer Menge $A$ bezeichnet man die Anzahl ihrer Elemente und schreibt dafür $|A|$.
+          }
+      \lang{en}{The \emph{\notion{cardinality}} of a set $A$,
+      written $|A|$, is the number of its elements.
+      }
+          
+\end{itemize}          
+\end{definition}
+
+\lang{de}{Diese anschauliche Definition ist zwar aus mathematischer Sicht nicht sehr präzise, aber für die Einführung 
+          der Zahlenmengen zunächst ausreichend.}
+\lang{en}{
+This intuitive definition is not very precise from a mathematical point of view, but it is
+sufficient to introduce the number systems.
+}
+
+\begin{remark}
+   \lang{de}{Mengen können auf verschiedene Weisen beschrieben werden. Es gibt folgende {Darstellungsformen}:}
+   \lang{en}{Sets can be described in different ways. We have the following forms of {set notation}:}
+   \begin{itemize}
+        \item \lang{de}{\textbf{Aufzählende Darstellung}: Die Elemente der Menge werden zwischen geschweifte Klammern gesetzt und jeweils durch Semikolon getrennt. 
+              So beschreibt beispielsweise \[  M:=\{a; b; c\}  \] die Menge, die die Buchstaben $a,b,c$ enthält. Die Reihenfolge der Elemente spielt dabei keine Rolle. 
+              
+              Das Zeichen  $:= \,$  steht für \emph{\glqq wird definiert durch\grqq\ } und bedeutet hier, dass $M$ als Bezeichnung für die 
+              Menge $\{a; b; c\}$ festgelegt wird. Der Doppelpunkt steht dabei immer auf der zu definierenden Seite.}
+              \lang{en}{\textbf{Roster notation}: the elements of the set are separated by commas and surrounded by curly brackets.
+              For example, the notation \[  M:=\{a, b, c\}  \] describes the set consisting of the letters $a, b, c$.
+              The order of the elements does not play any role.
+              
+              The symbol $:=\,$ stands for \emph{"is defined by"} and means that $M$ is being used as a label for the
+              set $\{a, b, c\}$. The colon is always placed on the side that is being defined.}
+
+        \item \lang{de}{\textbf{Beschreibende Darstellung}: Dabei werden die Elemente der Menge
+              durch eine Bedingung beschrieben, die hinter einem senkrechten Trennstrich \glqq $\mid$\grqq
+              angegeben wird, z.\,B.
+              \[  M:=\{ h \;  \text{ist ein Haus} \mid  h \; \text{hat mehr als 2 Etagen} \}  \]
+              bedeutet \glqq $M$ ist die Menge aller Häuser, die mehr als 2 Etagen haben\grqq.}
+
+              \lang{en}{\textbf{Set-builder notation}: Elements of the set are described by a
+              condition given behind a vertical bar "$\mid$"; for example
+              \[  M:=\{ h \;  \text{is a house} \mid  h \; \text{has more than 2 floors} \}  \]
+              means that "$M$ is the set of all houses with more than 2 floors."
+              }
+              
+        \item \lang{de}{Eine Menge, die keine Elemente enthält, heißt \textbf{leere Menge} und wird mit $\emptyset$ oder $\{\}$ bezeichnet.}
+              \lang{en}{The set that does not contain any elements is called
+              the \textbf{empty set}, denoted $\emptyset$ or $\{\}$.}
+           
+     \end{itemize}    
+\end{remark} 
+
+\lang{de}{Mit den folgenden Mengenoperationen können wir genauer untersuchen, in welcher Beziehung zwei Mengen zueinander stehen, und
+weitere Mengen definieren.}
+\lang{en}{The following set operations can be used to examine the relationships that hold
+between two sets in more detail and to define other examples of sets.}
+
+
+\begin{definition}[\lang{de}{Mengenoperationen} \lang{en}{Set operators}] \label{def:mengenoperationen}
+
+  \lang{de}{Für zwei Mengen $A$ und $B$ definieren wir}
+  \lang{en}{For two sets $A$ and $B$, we define}
+
+  \begin{itemize}
+  
+    \item
+    \lang{de}{die \emph{\notion{Vereinigung} $A\cup B$ von $A$ und $B$} als die Menge, die alle Elemente
+    von $A$ und alle Elemente von $B$ enthält: 
+    \[
+      A\cup B :=\{x\mid x\in A \text{ oder }\; x\in B\},
+    \]}
+    \lang{en}{the \emph{\notion{union} $A\cup B$ of $A$ and $B$} to be the set consisting of the
+    elements of $A$ and the elements of $B$.
+    \[
+      A\cup B :=\{x\mid x\in A \text{ or }\; x\in B\};
+    \]}
+
+    \item
+    \lang{de}{den \emph{\notion{Durchschnitt} $A\cap B$ von $A$ und $B$} als die Menge aller Elemente,
+    die sowohl in $A$ als auch in $B$ liegen:
+    \[
+      A\cap B :=\{x\mid x\in A \text{ und }\; x\in B\},
+    \]}
+    \lang{en}{the \emph{\notion{intersection} $A\cap B$ of $A$ and $B$} to be the set consisting
+    of the elements that lie in both $A$ and $B$:
+    \[
+      A\cap B :=\{x\mid x\in A \text{ and }\; x\in B\},
+    \]}
+
+    \item
+    \lang{de}{und die \emph{\notion{Differenz(menge)} $A\setminus B\,$} (\glqq $A$ ohne $B$\grqq) als die Menge der Elemente von $A$,
+    die nicht in $B$ liegen:  
+    \[
+      A\setminus B :=\{x\mid x\in A \text{ und }\; x\notin B\}.
+    \]}
+    \lang{en}{the \emph{\notion{(set) difference} $A\setminus B\,$} ("$A$ minus $B$")
+    to be the set consisting of elements of $A$ that do not lie in $B$:
+    \[
+      A\setminus B :=\{x\mid x\in A \text{ and }\; x\notin B\}.
+    \]}
+%
+    \lang{de}{Gilt zusätzlich $\, B\subseteq A, \;$ dann nennt man diese Differenzmenge auch das
+    \emph{\notion{Komplement}} von $\,B\,$ in $\,A\,$ und schreibt 
+    \[ \complement_A(B):=A\setminus B . \]}
+    \lang{en}{If $\, B\subseteq A, \;$ holds then we also call the set difference the
+    \emph{\notion{complement}} of $\,B\,$ in $\,A\,$, written
+    \[ \complement_A(B):=A\setminus B . \]}
+\\
+    \item
+    \lang{de}{Die \emph{\notion{Produktmenge} $A \times B$ von $A$ und $B \,$} ist die Menge aller \emph{geordneten Paare $(x,y)$}
+    mit $x \in A$ und $y \in B$. Man schreibt: \\
+    \[
+      A \times B :=\{(x,y) \mid x\in A \text{ und }\; y \in B\}.
+    \]
+    Man bezeichnet $A \times B$ auch als \emph{\notion{kartesisches Produkt} von $A$ und $B$.}
+    }
+    \lang{en}{The \emph{\notion{product set} $A \times B$ of $A$ and $B \,$} is the
+    set of all \emph{ordered pairs $(x,y)$} with $x \in A$ and $y \in B$. We write \\
+    \[
+      A \times B :=\{(x,y) \mid x\in A \text{ and }\; y \in B\}.
+    \]
+    $A \times B$ is also called the \emph{\notion{Cartesian product} of $A$ and $B$.}
+    }
+    
+    \end{itemize}
+
+\end{definition}
+
+
+\begin{remark}[\lang{de}{Logische Verknüpfung} \lang{en}{Logical connectives}]
+\lang{de}{In obiger Definition haben wir die Wörter \emph{und} und \emph{oder} ausgeschrieben, auch wenn sie 
+in einem Formelausdruck vorkamen. In Formeln werden für logische Verknüpfungen meist die 
+folgenden Symbole benutzt: 
+    \begin{enumerate} 
+      \item[$\mathbf{\wedge}$] \notion{und} \emph{(Konjunktion)},
+      \item[$\mathbf{\vee}$] \notion{oder} \emph{(Disjunktion)},
+      \item[$\mathbf{\Rightarrow}$] \notion{Folgerung} \emph{(Implikation)},
+      \item[$\mathbf{\Leftrightarrow}$] \notion{Äquivalenz}, 
+      \item[$\mathbf{\neg}$] \notion{nicht} \emph{(Negation)}.
+    \end{enumerate}
+}
+\lang{en}{In the definition above, we wrote out the words \emph{and} and \emph{or}
+even when they appeared in a mathematical expression. Logical connectives are usually written
+in formulas with the following symbols: 
+    \begin{enumerate} 
+      \item[$\mathbf{\wedge}$] \notion{and} \emph{(conjunction)},
+      \item[$\mathbf{\vee}$] \notion{or} \emph{(disjunction)},
+      \item[$\mathbf{\Rightarrow}$] \notion{implies} \emph{(implication)},
+      \item[$\mathbf{\Leftrightarrow}$] \notion{is equivalent to} \emph{(biconditional)}, 
+      \item[$\mathbf{\neg}$] \notion{not} \emph{(negation)}.
+    \end{enumerate}
+}
+\end{remark}
+
+\lang{de}{Mengenrelationen lassen sich durch sogenannte \emph{Venn-Diagramme} grafisch veranschaulichen, wie
+im nachfolgenden Beispiel dargestellt.}
+
+\lang{en}{
+Set relationships can be visualized by means of so-called \emph{Venn diagrams}, as depicted
+in the following example.
+}
+
+
+\begin{example} \label{bsp:venndiagramm}
+  \begin{tabs*}[\initialtab{0}]
+  \tab{\lang{de}{Mengenoperationen, -relationen und Venn-Diagramme}
+  \lang{en}{Set operations, relations, and Venn diagrams}}
+
+
+    \lang{de}{Für die Mengen $\; A=\{1;2;3;4\},\;$ $B=\{3;4;5\}\;$ und $\; C=\{2;3\}\;$ gilt:}
+    \lang{en}{
+    Consider the sets $\; A=\{1,2,3,4\},\;$ $B=\{3,4,5\}\;$ und $\; C=\{2,3\}.$
+    }
+
+
+  \begin{enumerate}
+   \item \lang{de}{Die Vereinigung von $A$ und $B \;$ ist die Menge $\;  A\cup B= \{ 1; 2; 3; 4; 5 \} .$}
+   \lang{en}{The union of $A$ and $B \;$ is the set $\;  A\cup B= \{ 1, 2, 3, 4, 5 \} .$}
+    \begin{center}
+    \image{T601_VennUnion}
+    \end{center}
+%
+   \item \lang{de}{Der Durchschnitt von $A$ und $B \;$ ist die Menge $\;  A\cap B= \{ 3; 4\}. $}
+   \lang{en}{The intersection of $A$ and $B \;$ is the set $\;  A\cap B= \{ 3, 4\}. $}
+    \begin{center}
+    \image{T601_VennIntersection}
+    \end{center}
+%        
+   \item \lang{de}{Die Differenz von $A$ ohne $B \;$ ist die Menge $\; A\setminus B=\{ 1; 2\}.$}
+     \lang{en}{The set difference $A$ minus $B\;$ is the set $\; A\setminus B=\{ 1, 2\}.$}
+    \begin{center}
+    \image{T601_VennDifference_A}
+    \end{center}
+%       
+   \item \lang{de}{Die Differenz $B$ ohne $A \;$ ist die Menge $\; B\setminus A=\{ 5\}.$}
+     \lang{en}{The set difference $B$ minus $A \;$ is the set $\; B\setminus A=\{ 5\}.$}
+    \begin{center}
+    \image{T601_VennDifference_B}
+    \end{center}
+%        
+  \item \lang{de}{$C = \{2 ; 3\} \;$ ist Teilmenge von $A$, aber nicht von $B: \;$ $\; C \subseteq A \quad \text{und} \quad C  \not\subseteq B.$}
+    \lang{en}{$C = \{2, 3\}$ is a subset of $A$, but not of $B: \;$ $\; C \subseteq A \quad \text{and} \quad C  \not\subseteq B.$}
+    \begin{center}
+    \image{T601_VennSubset}
+    \end{center}
+% 
+  \item \lang{de}{Das Komplement von $C\,$ in $A\,$ ist $A\setminus C=\{ 1;4\}$.}
+    \lang{en}{The complement of $C\,$ in $A\,$ is $A\setminus C=\{ 1,4\}$.}
+    \begin{center}
+    \image{T601_VennComplement}
+    \end{center}   
+    
+  \end{enumerate}
+ \end{tabs*} 
+\end{example}
+
+%
+\lang{de}{Aus den Definitionen \ref{def:menge} und \ref{def:mengenoperationen} lassen sich direkt folgende Aussagen über Mengen ableiten: 
+}
+\lang{en}{Definitions \ref{def:menge} and \ref{def:mengenoperationen}
+immediately yield the following facts:}
+
+\begin{itemize}
+     \item \lang{de}{Für jede Menge $M$ gilt:} \lang{en}{Every set $M$ satisfies}
+        
+        \begin{itemize}    
+         \item[a)] $M \subseteq M$,
+         \item[b)] $M \cap M = M = M \cup M$,
+         \item[c)] $M \setminus M = \emptyset$.
+        \end{itemize}
+        
+      \item \lang{de}{$A \subseteq B$ und $B \subseteq A$ ergeben zusammen $A=B$. }
+      \lang{en}{If $A \subseteq B$ and $B \subseteq A$ then $A=B$.}
+%
+      \item \lang{de}{Der Durchschnitt zweier Mengen ist eine (gemeinsame) Teilmenge der beiden Mengen.}
+            \lang{en}{The intersection of two sets is a (common) subset of both of the sets.}
+%
+      \item \lang{de}{Folglich ist die leere Menge $\emptyset$ Teilmenge einer jeden Menge (denn es gilt $A \cap \emptyset = \emptyset $). }
+            \lang{en}{The empty set $\emptyset$ is therefore a subset of every set (because $A \cap \emptyset = \emptyset $).}
+%
+      \item \lang{de}{Die Vereinigung zweier Mengen ist eine (gemeinsame) Obermenge der beiden Mengen.}
+            \lang{en}{The union of two sets is a (common) superset of both of the sets.}
+%
+      \item \lang{de}{Ist $T$ eine Teilmenge von $O$, so ist auch das Komplement $ O\setminus T \;$ Teilmenge von $O\;$ 
+            und es gilt: \[ (O\setminus T ) \cap T = \emptyset\quad \text{und} \quad (O\setminus T ) \cup T = O.\] 
+            Zwei Mengen mit leerem Durchschnitt wie hier $T$ und $O \setminus T$ bezeichnet man auch als \emph{disjunkte Mengen.}}
+            \lang{en}{If $T$ is a subset of $O$ then its complement $O\setminus T\;$ is also a subset of $O$,
+            and \[ (O\setminus T ) \cap T = \emptyset\quad \text{and} \quad (O\setminus T ) \cup T = O.\] 
+            Two sets whose intersection is empty (such as $T$ and $O \setminus T$ here) are called \emph{disjoint sets}.
+            }
+%
+\end{itemize}
+
+
+
+\begin{quickcheckcontainer}
+
+\randomquickcheckpool{1}{4}  % vier verschiedene Terme mit randomisierten Zahlen
+
+%1
+\begin{quickcheck}
+    
+    \lang{de}{\text{Gegeben seien die Mengen $\; A=\{-1;1;3;4;6;7\},$ $\;B=\{3;7;8\}, \;$ 
+          $C=\{-4;1;3;5\}\;$ und ihre Venn-Darstellung: 
+          \begin{center}
+          \image{T601_VennQuickCheck}
+          \end{center}  
+          Welche der folgenden Aussagen treffen zu? 
+  		  }}
+    \lang{en}{
+      \text{Suppose we are given the sets $\; A=\{-1;1;3;4;6;7\}, \;B=\{3;7;8\}, \; 
+          C=\{-4;1;3;5\}\;$ and their Venn diagram
+          \begin{center}
+          \image{T601_VennQuickCheck}
+          \end{center}  
+          Which of the following is true?}
+    }
+     
+    \begin{variables}                             % r1=0 und r2=0
+      \randint{r1}{0}{1}
+      \randint{r2}{0}{2}
+      \function[calculate]{a}{1}            
+      \function[calculate]{b}{3}             
+      \function[calculate]{c}{3}             
+      \function[calculate]{d}{7}             
+    \end{variables}
+
+
+    \begin{choices}{multiple}
+    
+      \begin{choice}
+      \text{$B\cap C= \emptyset$}
+      \solution{false}
+		\end{choice}
+		
+      \begin{choice}
+      \lang{de}{\text{$A\setminus (C\cup B)=\{-1; 4; 6\}$ }}
+      \lang{en}{\text{$A\setminus (C\cup B)=\{-1; 4; 6\}$ }}
+      \solution{true}
+		\end{choice}
+		
+      \begin{choice}
+      \lang{de}{\text{$C\cap A=\{\var{a}; \var{b} \}$ }}
+      \lang{en}{\text{$C\cap A=\{\var{a}; \var{b} \}$ }}
+      \solution{true}
+		\end{choice}
+
+      \begin{choice}
+      \lang{de}{\text{$A\setminus C=\{4; 6; \var{d}; -1 \}$ }}
+      \lang{en}{\text{$A\setminus C=\{4; 6; \var{d}; -1 \}$ }}
+      \solution{true}
+		\end{choice}
+
+      \begin{choice}
+      \text{$(B\cap C)\subseteq A$}
+      \solution{true}
+		\end{choice}
+		
+      \begin{choice}
+      \text{$\var{c}\in (B\setminus C)$ }
+      \solution{false}
+		\end{choice}
+     
+  \end{choices}{multiple} 
+
+\end{quickcheck}
+
+%2
+\begin{quickcheck}
+    \lang{de}{\text{Gegeben seien die Mengen $\; A=\{-1;1;3;4;6;7\}, \;B=\{3;7;8\}, \; 
+          C=\{-4;1;3;5\}\;$ und ihre Venn-Darstellung: 
+          \begin{center}
+          \image{T601_VennQuickCheck}
+          \end{center}  
+          Welche der folgenden Aussagen treffen zu? 
+  		  }}
+    \lang{en}{
+      \text{Suppose we are given the sets $\; A=\{-1;1;3;4;6;7\}, \;B=\{3;7;8\}, \; 
+          C=\{-4;1;3;5\}\;$ and their Venn diagram
+          \begin{center}
+          \image{T601_VennQuickCheck}
+          \end{center}  
+          Which of the following is true?}
+    }
+
+
+    \begin{variables}                             % r1=1,2 und r2=0
+      \randint{r1}{1}{2}
+      \randint{r2}{0}{0}
+      \function[calculate]{a}{1+r1*3}             % = 4 oder 7           
+      \function[calculate]{b}{2+r1*3}             % = 5 oder 8       
+      \function[calculate]{c}{3}             
+      \function[calculate]{d}{8}            
+    \end{variables}
+
+    \begin{choices}{multiple}
+    
+      \begin{choice}
+      \text{$B\cap C= \{3\}$}
+      \solution{true}
+		\end{choice}
+        
+      \begin{choice}
+      \text{$\var{a}\in (A\setminus C)$ }
+      \solution{true}
+		\end{choice}
+
+      \begin{choice}
+      \lang{de}{\text{$A\setminus (C\cup B)=\{-1; 4; 6; 7\}$ }}
+      \lang{en}{\text{$A\setminus (C\cup B)=\{-1; 4; 6; 7\}$ }}
+      \solution{false}
+		\end{choice}
+		
+      \begin{choice}
+      \lang{de}{\text{$B\cap A=\{\var{a}; \var{b} \}$ }}
+      \lang{en}{\text{$B\cap A=\{\var{a}; \var{b} \}$ }}
+      \solution{false}
+		\end{choice}
+
+      \begin{choice}
+      \lang{de}{\text{$A\setminus C=\{4; 6; \var{b}; -1 \}$ }}
+      \lang{en}{\text{$A\setminus C=\{4; 6; \var{b}; -1 \}$ }}
+      \solution{false}
+		\end{choice}
+
+      \begin{choice}
+      \text{$\var{c}\in (B\setminus C)$ }
+      \solution{false}
+		\end{choice}
+     
+  \end{choices}{multiple} 
+
+\end{quickcheck}
+
+%3
+\begin{quickcheck}
+
+    \lang{de}{\text{Gegeben seien die Mengen $\; A=\{-1;1;3;4;6;7\}, \;B=\{3;7;8\}, \; 
+          C=\{-4;1;3;5\}\;$ und ihre Venn-Darstellung: 
+          \begin{center}
+          \image{T601_VennQuickCheck}
+          \end{center}  
+          Welche der folgenden Aussagen treffen zu? 
+  		  }}
+    \lang{en}{
+      \text{Suppose we are given the sets $\; A=\{-1;1;3;4;6;7\}, \;B=\{3;7;8\}, \; 
+          C=\{-4;1;3;5\}\;$ and their Venn diagram
+          \begin{center}
+          \image{T601_VennQuickCheck}
+          \end{center}  
+          Which of the following is true?}
+    }
+
+   	     
+    \begin{variables}                             % r1=0 und r2=1,2
+      \randint{r1}{0}{0}
+      \randint{r2}{1}{2}
+      \function[calculate]{a}{1+r1*3}             % = 1
+      \function[calculate]{b}{3+r1*2}             % = 3
+      \function[calculate]{c}{3+5*r2-3*r2*(r2-1)} % = 8 oder 7
+      \function[calculate]{d}{7}            
+    \end{variables}
+
+    \begin{choices}{multiple}
+ 		
+      \begin{choice}
+      \lang{de}{\text{$C\cap A=\{\var{a}; \var{b} \}$ }}
+      \lang{en}{\text{$C\cap A=\{\var{a}; \var{b} \}$ }}
+      \solution{true}
+		\end{choice}
+		
+      \begin{choice}
+      \lang{de}{\text{$A\setminus (C\cup B)=\{-1; 4; 6\}$ }}
+      \lang{en}{\text{$A\setminus (C\cup B)=\{-1; 4; 6\}$ }}
+      \solution{true}
+		\end{choice}
+
+      \begin{choice}
+      \lang{de}{\text{$A\setminus C=\{4; 6; \var{d}; -1 \}$ }}
+      \lang{en}{\text{$A\setminus C=\{4; 6; \var{d}; -1 \}$ }}
+      \solution{true}
+		\end{choice}
+   
+      \begin{choice}
+      \text{$A\cap C \cap B= \{1; 3; 7\}$}
+      \solution{false}
+		\end{choice}
+
+      \begin{choice}
+      \text{$(B\cap C)\subseteq A$}
+      \solution{true}
+		\end{choice}
+		
+      \begin{choice}
+      \text{$\var{c}\in (B\setminus C)$ }
+      \solution{true}
+		\end{choice}
+     
+  \end{choices}{multiple} 
+
+\end{quickcheck}
+
+%4
+\begin{quickcheck}
+
+    \lang{de}{\text{Gegeben seien die Mengen $\; A=\{-1;1;3;4;6;7\}, \;B=\{3;7;8\}, \; 
+          C=\{-4;1;3;5\}\;$ und ihre Venn-Darstellung: 
+          \begin{center}
+          \image{T601_VennQuickCheck}
+          \end{center}  
+          Welche der folgenden Aussagen treffen zu? 
+  		  }}
+    \lang{en}{
+      \text{Suppose we are given the sets $\; A=\{-1;1;3;4;6;7\}, \;B=\{3;7;8\}, \; 
+          C=\{-4;1;3;5\}\;$ and their Venn diagram
+          \begin{center}
+          \image{T601_VennQuickCheck}
+          \end{center}  
+          Which of the following is true?}
+    }
+
+   	     
+    \begin{variables}                             % r1=1,2 und  r2=1,2
+      \randint{r1}{1}{2}
+      \randint{r2}{1}{2}
+      \function[calculate]{a}{1+r1*3}             % = 4 oder 7           
+      \function[calculate]{b}{3+r1*2}             % = 5 oder 7
+      \function[calculate]{c}{3+5*r2-3*r2*(r2-1)} % = 8 oder 7            
+      \function[calculate]{d}{8}            
+    \end{variables}
+
+    \begin{choices}{multiple}
+    
+      \begin{choice}
+      \lang{de}{\text{$A\setminus (C\cap B)=\{-1; 1; 4; 6\}$ }}
+      \lang{en}{\text{$A\setminus (C\cap B)=\{-1; 1; 4; 6\}$ }}
+      \solution{false}
+		\end{choice}
+		
+      \begin{choice}
+      \lang{de}{\text{$\var{a} \in (A \setminus C) \}$ }}
+      \lang{en}{\text{$\var{a} \in (A \setminus C) \}$ }}
+      \solution{true}
+		\end{choice}
+
+      \begin{choice}
+      \lang{de}{\text{$A\setminus C=\{4; 6; \var{d}; -1 \}$ }}
+      \lang{en}{\text{$A\setminus C=\{4; 6; \var{d}; -1 \}$ }}
+      \solution{false}
+		\end{choice}
+
+        
+      \begin{choice}
+      \text{$B\cap C= \emptyset$}
+      \solution{false}
+		\end{choice}
+				
+      \begin{choice}
+      \text{$\var{c}\in (B\setminus C)$ }
+      \solution{true}
+		\end{choice}
+
+      \begin{choice}
+      \text{$(B\cap C)\subseteq A$}
+      \solution{true}
+		\end{choice}     
+  \end{choices}{multiple} 
+
+\end{quickcheck}
+\end{quickcheckcontainer}
+% \end{tabs*}
+%%%
+
+
+\lang{de}{Auch wenn die Mengenlehre auf den ersten Blick keinen direkten Anwendungsbezug hat, wird sie 
+in der Stochastik verwendet, um Zufallsexperimente zu beschreiben. }
+\lang{en}{
+Set theory may seem to have few direct applications at a first glance.
+However, it is used in probability theory to describe random experiments.
+}
+
+\begin{example}
+\lang{de}{Wir führen ein Zufallsexperiment durch, in dem wir einen Würfel werfen. Die Menge der Ausgänge dieses Zufallsexperiments ist
+$\Omega = \{1; 2; 3; 4; 5; 6\}$ und jeder dieser Ausgänge ist \emph{gleich wahrscheinlich}. (Wir gehen davon aus, dass der Würfel \emph{fair} ist.)
+
+Ein \emph{Ereignis} im Sinne der Wahrscheinlichkeitsrechnung ist nun eine (beliebige) Teilmenge der Menge $\Omega$. 
+Beispielsweise können wir die Teilmenge $\{2; 4; 6\} \subseteq \Omega$ auch deuten als das Ereignis \emph{\glqq Es wird eine gerade Zahl gewürfelt\grqq}.
+
+Um die Wahrscheinlichkeit $P(A)$ eines Ereignisses $A \subseteq \Omega$ wie oben zu berechnen, muss nur die Anzahl der 
+Elemente von $A$ durch die Anzahl der Elemente von $\Omega$ geteilt werden, also im Beispiel
+\[
+P(A) = \frac{|A|}{|\Omega|} = \frac{3}{6} = 0,5 = 50\%.
+\]
+Wenn wir zwei Ereignisse $A$ und $B$ haben, so ist $P(A \cap B)$ die Wahrscheinlichkeit dafür, dass $A$ und $B$ gleichzeitig eintreten, während
+$P(A \cup B)$ die Wahrscheinlichkeit dafür ist, dass mindestens eines der beiden Ereignisse eintritt.}
+
+\lang{en}{
+We will carry out a random experiment by throwing a die. The set of outcomes of the experiment is
+$\Omega = \{1, 2, 3, 4, 5, 6\}$ and each of these outcomes is \emph{equally probable}. (We are assuming that the die is \emph{fair}.)
+
+An \emph{event} in the sense of probability theory is an (arbitrary) subset of the set $\Omega$.
+For example, we can take the subset $\{2, 4, 6\} \subseteq \Omega$ and interpret it as the event \emph{"the die comes up even"}.
+
+To calculate the probability $P(A)$ of an event $A \subseteq \Omega$ such as the above, we simply
+divide the number of elements of $A$ by the number of elements of $\Omega$; in the above example,
+\[
+P(A) = \frac{|A|}{|\Omega|} = \frac{3}{6} = 0.5 = 50\%.
+\]
+Given two events $A$ and $B$, $P(A \cap B)$ is the probability of $A$ and $B$ occuring at the same time, while
+$P(A \cup B)$ is the probability of at least one of the two events occuring.
+}
+\end{example}
+
+
+\section{\lang{de}{Zahlenmengen} \lang{en}{Number systems}} \label{sec:zahlenmengen}
+
+\lang{de}{Wir werden nun die Mengen der natürlichen, der ganzen, der rationalen und der reellen Zahlen 
+          als Beispiele für \emph{Mengen} einführen. Dies sind für uns die gebräuchlichsten Mengen.}
+\lang{en}{
+We will now introduce the systems of natural numbers, integers, rationals and real numbers as
+examples of \emph{sets}. These are the most common sets that we will encounter.
+}
+
+\begin{definition}[\lang{de}{Zahlenmengen} \lang{en}{Number systems}]  \label{def:zahlenmengen}
+   \lang{de}{Die \emph{Menge der \notion{nat\"urlichen Zahlen ohne $\; 0$}} ist  
+            \[\mathbb{N}:=\{1; 2; 3; 4;\ldots\}.\]
+            Nimmt man die Null hinzu, erhalten wir die 
+            \emph{Menge der \notion{nat\"urlichen Zahlen mit $\; 0$}}
+            \[\mathbb{N}_0:=\mathbb{N} \cup \{0\}=\{0; 1; 2; 3; 4;\ldots\}.\]
+   }
+   \lang{en}{The \emph{set of \notion{nonzero natural numbers}} is  
+            \[\mathbb{N}:=\{1, 2, 3, 4,\ldots\}.\]
+            If we include $0$ then we obtain the 
+            \emph{set of \notion{natural numbers including $\; 0$}}
+            \[\mathbb{N}_0:=\mathbb{N} \cup \{0\}=\{0, 1, 2, 3, 4,\ldots\}.\]
+   }
+
+  \lang{de}{Die \emph{Menge der \notion{ganzen Zahlen}} ist 
+            \[\mathbb{Z}:=\mathbb{N}_0 \cup \{ -1; -2; -3; \ldots\}=\{\ldots; -2; -1; 0; 1; 2; \ldots\}.\] 
+  }
+  \lang{en}{The \emph{set of \notion{integers}} is 
+            \[\mathbb{Z}:=\mathbb{N}_0 \cup \{ -1, -2, -3, \ldots\}=\{\ldots, -2, -1, 0, 1, 2, \ldots\}.\] 
+  }
+
+  \lang{de}{Die \emph{Menge der \notion{rationalen Zahlen}} ist 
+            \[\mathbb{Q}:=\Big\{\,\frac{p}{q}\,\Big|\,p\in\mathbb{Z},\~q\in \mathbb{N}\,\Big\}.\] 
+            Hierbei nennt man $p$ den \strong{Z"ahler} und $q$ den \strong{Nenner} des \strong{Bruches} $\, \frac{p}{q}.$
+            Jeder Bruch kann auch als Dezimalzahl geschrieben werden und hat dann entweder nur endlich viele Nachkommastellen 
+            oder wird periodisch (d.\,h. die gleiche Ziffernfolge wiederholt sich immer wieder). 
+  }
+  \lang{en}{The \emph{set of \notion{rational numbers}} is
+            \[\mathbb{Q}:=\Big\{\,\frac{p}{q}\,\Big|\,p\in\mathbb{Z},\~q\in \mathbb{N}\,\Big\}.\] 
+            Here, $p$ is called the \strong{numerator} and $q$ the \strong{denominator} of the \strong{fraction} $\, \frac{p}{q}.$
+            Any fraction can be written as a decimal number, upon which it only has finitely many digits after the decimal point
+            or it becomes periodic (i.e. a sequence of digits is repeated forever). 
+  }
+  
+    \lang{de}{Die Menge der \emph{\notion{reellen Zahlen}} $\R$ umfasst schließlich alle Dezimalzahlen. Für unsere Zwecke ist dies 
+    die größte Menge von Zahlen. 
+  }
+    \lang{en}{The set of \emph{\notion{real numbers}} $\R$ contains all decimal numbers. For our purposes,
+    this is the largest set of numbers.}
+    
+\end{definition}
+
+\lang{de}{Wir sehen, dass jede natürliche Zahl zugleich eine ganze Zahl ist. Die Menge der ganzen Zahlen ist jedoch eine \emph{echte Obermenge} zur
+Menge der natürlichen Zahlen, da beispielsweise $-7\in \Z$, aber $-7\notin \N$ gilt. Ferner ist jede ganze, und damit auch jede natürliche
+Zahl $z$ aufgrund ihrer Darstellung als Bruch \strong{$z=\frac{z}{1}$} zugleich eine rationale Zahl.}
+
+\lang{en}{
+Observe that every natural number is also an integer. The set of integers is a \emph{proper superset}
+of the set of natural numbers, because (for example) $-7\in \Z$ but $-7 \notin \N$. In addition, every
+integer and therefore every natural number $z$ is a rational number due to its representation
+as a fraction \strong{$z=\frac{z}{1}$}.
+}
+
+\begin{center}
+\image{T601_NumberSets}
+\end{center} 
+
+\lang{de}{Es gelten also die Inklusionen}
+\lang{en}{Therefore, we have the inclusions}
+$ \N\subsetneq \N_0\subsetneq \Z\subsetneq \Q \subsetneq \R.$
+
+\lang{de}{Reelle Zahlen, die keine rationalen Zahlen sind, nennt man auch \emph{irrationale Zahlen}. Sie haben unendlich viele Nachkommastellen und 
+werden nicht periodisch. Ein Beispiel hierfür ist die positive Zahl $\sqrt{2}$. 
+Auch die Kreiszahl $\pi = 3,14\ldots$ oder die Eulersche Zahl $e = 2,71\ldots$ sind irrationale Zahlen.
+}
+\lang{en}{
+Real numbers that are not rational numbers are called \emph{irrational numbers}.
+They have infinitely many digits in their decimal representation and they never become periodic.
+An example of this is the positive number $\sqrt{2}$.
+The constant $\pi = 3.14\ldots$ and Euler's number $e = 2.71\ldots$ are also irrational.
+}
+
+\begin{proof*}[
+\lang{de}{Beweis dass $\sqrt{2}$ nicht rational ist}
+\lang{en}{Proof that $\sqrt{2}$ is irrational}] \label{proof:sqrt2}
+\begin{showhide}
+
+\lang{de}{Dass $\sqrt{2}$ keine rationale Zahl ist, kann man leicht durch einen sogenannten
+\ref[content_01_indirekter_widerspruchsbeweis][indirekten Beweis]{sec:indirekterbeweis} 
+zeigen. Hierzu nimmt man zunächst das Gegenteil an, nämlich $\sqrt{2}\in\mathbb{Q}$, und führt diese Annahme zu einem Widerspruch. }
+\lang{en}{
+It is easy to show that $\sqrt{2}$ is not a rational number by means of a so-called
+\ref[content_01_indirekter_widerspruchsbeweis][indirect proof]{sec:indirekterbeweis}.
+Here we assume the opposite, i.e. $\sqrt{2}\in \mathbb{Q}$, and use this assumption to derive a contradiction.
+}
+
+
+\lang{de}{Aus der Annahme folgt nach Definition \ref{def:zahlenmengen}, \, dass es ganze Zahlen $p$ und $q$ \, ($q \neq 0$) gibt, so dass 
+}
+\lang{en}{
+By Definition \ref{def:zahlenmengen}, the assumption means that there are integers $p$ and $q$ \, ($q \neq 0$) such that
+}
+
+\[\sqrt{2}= \frac{p}{q}\lang{en}{.}\] 
+
+\lang{de}{gilt. Dabei seien $p$ und $q$ so gewählt, dass sie keinen gemeinsamen Teiler haben, der Bruch $\frac{p}{q}$ also vollständig gekürzt ist.
+Man bezeichnet $p$ und $q$ dann auch als \emph{teilerfremd}. Da $\sqrt{2}$ die positive Zahl ist, deren Quadrat gleich $2$ ist, folgt:}
+\lang{en}{
+Here we may choose $p$ and $q$ such that they have no divisor in common; that is, the fraction $\frac{p}{q}$ is completely reduced.
+$p$ and $q$ are then called \emph{coprime}. Since $\sqrt{2}$ is the positive number whose square is $2$, we have:
+}
+
+\[2= \left( \frac{p}{q} \right) ^2=\frac{p^2}{q^2}
+\]
+\lang{de}{und damit} \lang{en}{and therefore} \center{$2 \cdot q^2=p^2.$}
+
+\lang{de}{$p^2$ ist also eine gerade Zahl, was wiederum nur möglich ist, wenn auch $p$ selbst eine gerade Zahl ist.
+Somit gibt es eine natürliche Zahl $n \in \mathbb{N}$, so dass $p=2\cdot n$ gilt. Hieraus folgt:}
+\lang{en}{
+Then $p^2$ is an even number, which in turn is only possible if $p$ itself is even.
+Therefore, there is a natural number $n \in \mathbb{N}$ for which $p=2\cdot n$. Then:
+}
+
+\[2 \cdot q^2 = p^2 = (2n)^2 = 4\cdot n^2= 2 \cdot (2n^2), 
+\]
+
+\lang{de}{also $q^2=2n^2$. \, Folglich sind $q^2$ und damit auch $q$ ebenfalls gerade Zahlen.}
+\lang{en}{so $q^2=2n^2$. \, This means that $q^2$ and therefore $q$ is an even number.}
+
+\lang{de}{Insbesondere sind also $q$ und $p$ beide durch $2$ teilbar, was im Widerspruch zu unserer 
+anf\"anglichen Annahme steht, dass $p$ und $q$ teilerfremd sind.}
+\lang{en}{
+In particular, both $q$ and $p$ are divisible by $2$. This contradicts our earlier assumption
+that $p$ and $q$ are coprime.
+}
+
+\lang{de}{Damit ist gezeigt, dass $\sqrt{2}$ nicht rational sein kann.}
+\lang{en}{This proves that $\sqrt{2}$ cannot be rational.}
+
+\end{showhide}
+\end{proof*}
+
+
+\begin{remark}[Notation]
+ \lang{de}{Für die folgenden besonderen Teilmengen von $\R$ gibt es spezielle Notationen, die in der Literatur 
+ nicht immer einheitlich sind. Deshalb legen wir für diesen Kurs folgende Notation fest:}
+ \lang{en}{
+  The following special subsets of $\R$ have specific notation that is not always consistent in the literature.
+  Therefore, we will fix the following notation in this course:
+ }
+
+ \lang{de}{
+ \begin{table}[\class{layout}]
+  $\qquad \R^\ast \;$ & bezeichnet die Menge der reellen Zahlen ohne Null, also  $\, \R\setminus \{ 0 \}$, \\
+  $\qquad \R_+ \;$    & bezeichnet die Menge der positiven reellen Zahlen (ohne Null), \\ 
+  $\qquad \R_-   \;$  &bezeichnet die Menge der negativen reellen Zahlen (ohne Null), \\ 
+  $\qquad \R_{\geq 0} \; $ & bezeichnet die \emph{nicht-negativen} reellen Zahlen, also $\, \R_+ \cup \{0\},$ \\
+  $\qquad \R_{\leq 0} \;$ & bezeichnet die \emph{nicht-positiven} reellen Zahlen, also $\, \R_- \cup \{0\}.$
+ \end{table} }
+ \lang{en}{
+ \begin{table}[\class{layout}]
+  $\qquad \R^\ast \;$ & is the set of nonzero real numbers,  $\, \R\setminus \{ 0 \}$, \\
+  $\qquad \R_+ \;$    & is the set of positive real numbers (not including 0), \\ 
+  $\qquad \R_-   \;$  & is the set of negative real numbers (not including 0), \\ 
+  $\qquad \R_{\geq 0} \; $ & is the set of \emph{nonnegative} real numbers, $\, \R_+ \cup \{0\},$ \\
+  $\qquad \R_{\leq 0} \;$ & is the set of \emph{nonpositive} real numbers, $\, \R_- \cup \{0\}.$
+ \end{table} }
+\end{remark}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% NEU: Anordnung der Zahlen, Vorzeichen und Betrag
+%
+\section{\lang{de}{Anordnung von Zahlen und Betrag} \lang{en}{Orderings of numbers and the absolute value}}
+\lang{de}{Ordnet man die reellen Zahlen (und damit auch die darin enthaltenen rationalen, ganzen und natürlichen Zahlen)
+auf der \emph{Zahlengerade} an, können wir auch Zahlen miteinander vergleichen. Die Zahl, die weiter rechts 
+auf der Zahlengerade liegt, betrachten wir als \glqq größere\grqq\ Zahl.}
+\lang{en}{
+We can compare real numbers (and the rational numbers, integers and natural numbers they contain
+) with one another by ordering them on the \emph{number line}. Numbers that lie further to the right
+on the number line are considered to be "greater".
+}
+
+	\begin{center}
+	\image{T601_NumberLine_D}
+	\end{center}
+\lang{de}{Das führt zur folgenden Definition.}
+\lang{en}{This leads to the following definition.}
+\begin{definition}[\lang{de}{Anordnung von Zahlen} \lang{en}{Ordering of numbers}]
+\lang{de}{Für beliebige reelle Zahlen $a$ und $b$ gilt:}
+\lang{en}{Let $a$ and $b$ be real numbers.}
+\begin{enumerate}
+\item \lang{de}{Eine Zahl $\,a\,$ ist kleiner als eine Zahl $\,b$, wenn  $\,a\,$ auf der Zahlengeraden 
+    weiter links liegt als $\,b$. Man schreibt
+    \begin{center}
+        $a < b \quad $ (bzw. $\;a \leq b$, wenn $\,a\,$ kleiner oder gleich $\,b\,$ ist).
+    \end{center}
+    }
+    \lang{en}{$\,a\,$ is less than $\,b$ if $\,a\,$ lies to the left
+    of $\,b$ on the number line. We write
+    \begin{center}
+        $a < b \quad $ ($\;a \leq b$) if $\,a\,$ is less than $\,b\,$ (or less than or equal to $\, b\,$).
+    \end{center}
+    }
+    
+ \item \lang{de}{Eine Zahl  $\,a\,$ ist größer als eine Zahl  $\,b$, wenn  $\,a\,$ auf der Zahlengeraden 
+    weiter rechts liegt als $\,b$. Man schreibt
+    \begin{center}
+        $a > b \quad $ (bzw. $\;a \geq b$, wenn $\,a\,$ größer oder gleich $\,b\,$ ist).
+    \end{center}}
+    \lang{en}{$\,a\,$ is greater than $\,b$ if $\,a\,$ lies to the right
+    of $\,b$ on the number line. We write
+    \begin{center}
+        $a > b \quad $ ($\;a \geq b$) if $\,a\,$ is greater than $\,b\,$ (or greater than or equal to $\, b\,$).
+    \end{center}
+    }
+\end{enumerate}
+
+\end{definition}
+
+\lang{de}{Jede Zahl (natürlich, ganz, rational oder reell)  hat ein \emph{Vorzeichen} und einen \emph{Betrag}. 
+Eine Zahl, die auf dem rechten Abschnitt der Zahlengeraden liegt, hat ein \emph{positives Vorzeichen} 
+(das Vorzeichen „$+$“). Eine Zahl auf der linken Seite der Zahlengeraden hat ein 
+\emph{negatives Vorzeichen} (das Vorzeichen „$-$“). Die Null ist ihre eigene Gegenzahl, d.\,h.$\, 0=-0\,$
+und das Vorzeichen kann frei gewählt werden.}
+
+\lang{en}{
+Every number (natural, integral, rational or real) possesses a \emph{sign} and an \emph{absolute value}.
+Numbers that lie on the right half of the number line have a \emph{positive sign}
+(the sign "$+$"). Numbers that lie on the left half of the number line have a
+\emph{negative sign} (the sign "$-$"). Zero is its own additive inverse, i.e. $\, 0=-0\,$
+and its sign can be chosen arbitrarily.
+}
+
+\begin{definition}[\lang{de}{Betrag} \lang{en}{Absolute value}] \label{def:betrag}
+\lang{de}{Der \notion{\emph{Betrag}} einer Zahl $a$ (wir schreiben $|a|$) ist der Abstand von $\,a\,$ zur Null
+auf der Zahlengeraden. In einer Formel ausgedrückt bedeutet das:
+ \[
+      {\abs{a}} = 
+      \begin{cases}
+        a  & \text{falls} \;  a \geq 0,\\
+        -a & \text{falls} \;  a < 0.
+      \end{cases}
+ \]}
+\lang{en}{
+The \notion{\emph{absolute value}} of a number $a$ (written $|a|$) is the distance from $\,a\,$ to zero
+on the number line. Expressed as a formula,
+\[
+      {\abs{a}} = 
+      \begin{cases}
+        a  & \text{if} \;  a \geq 0,\\
+        -a & \text{if} \;  a < 0.
+      \end{cases}
+ \]}
+\end{definition}
+
+\lang{de}{Mit $|a|$ können wir den Abstand einer Zahl $a$ zu $0$ beschreiben. Mit $|a-b|$ können wir auch den Abstand zwischen den Zahlen 
+$a$ und $b$ auf der Zahlengerade beschreiben. }
+\lang{en}{
+$|a|$ describes the distance of a number $a$ to $0$. The distance between the numbers $a$ and $b$
+on the number line is given by $|a-b|$.
+}
+
+\lang{de}{Beim Rechnen mit Beträgen gibt es einige Rechenregeln, die beim Vereinfachen von Beträgen helfen können.}
+\lang{en}{
+There are several rules for computing with absolute values that help simplify expressions involving them.
+}
+\begin{rule}[\lang{de}{Rechenregeln für Beträge} \lang{en}{Rules for absolute values}]
+\lang{de}{Es gelten die folgenden Rechenregeln für alle reellen Zahlen $a$ und $b$:}
+\lang{en}{The following rules hold for all real numbers $a$ and $b$:}
+\begin{itemize}
+\item $-|a| \leq \pm a \leq |a|$,  
+\item \lang{de}{$|a| \geq 0$ und $|a| = 0$ gilt nur für $a = 0$,}
+      \lang{en}{$|a| \geq 0$, and $|a| = 0$ if and only if $a = 0$,}
+\item \lang{de}{$|a \cdot b| = |a| \cdot |b|$ und $\big|\frac{a}{b}\big| = \frac{|a|}{|b|}$ (wenn $b \neq 0$),}
+      \lang{en}{$|a \cdot b| = |a| \cdot |b|$ and $\big|\frac{a}{b}\big| = \frac{|a|}{|b|}$ (as long as $b \neq 0$),}
+\item \lang{de}{$\big| |a| - |b| \big| \leq |a\pm b| \leq |a| + |b| \quad$ (Dreiecksungleichungen).}
+      \lang{en}{$\big| |a| - |b| \big| \leq |a\pm b| \leq |a| + |b| \quad$ (Triangle inequalities)}
+\end{itemize}
+\end{rule}
+
+ \begin{example}
+   \begin{tabs*}[\initialtab{0}]
+  \tab{\lang{de}{Betrag von Zahlen} \lang{en}{Absolute values of numbers}}
+	\lang{de}{Nach obiger Definition haben wir $|5| = 5$ und  $|-4| = -(-4) = 4$.}
+  \lang{en}{Using the above definition, we find $|5| = 5$ and $|-4| = -(-4) = 4$.}
+    
+    \lang{de}{Wenn $|x| = 15$ gilt, wissen wir noch nicht, ob $x=15$ oder $x = -15$ gilt.}
+    \lang{en}{Knowing only $|x| = 15$, we cannot decide whether $x=15$ or $x = -15$.}
+    
+   \tab{\lang{de}{Betrag auflösen} \lang{en}{Removing the absolute value}}
+   \lang{de}{Wenn wir die Bedingung $|x-5| <10$ lesen, heißt das, dass der Abstand von $x$ zu $5$ kleiner als $10$ sein soll. 
+   Die Zahlen, die diese Bedingung erfüllen, erfüllen also die 
+   Bedingung $x<15$ und $x>-5$. }
+   \lang{en}{
+    The condition $|x-5| <10$ means that the distance between $x$ and $5$ is less than $10$.
+    The numbers that satisfy this condition are those that satisfy $x<15$ and $x>-5$.
+   }
+   
+   \lang{de}{In Formeln kann die Ungleichung $|x-5| <10$ in die beiden 
+   Fälle $x-5 <10$ für $x \geq 5$ und $-(x-5) <10$ für $x < 5$ aufgelöst werden. Diese können wir dann einzeln lösen. }
+   \lang{en}{
+    Symbolically, we can solve the inequality $|x-5| < 10$ by rewriting it in the cases
+    $x-5 < 10$ for $x \geq 5$ and $-(x-5) <10$ for $x < 5$. These can then be solved separately.
+   }
+    \end{tabs*}
+ 
+ \end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{\lang{de}{Intervalle} \lang{en}{Intervals}} \label{sec:intervall}
+
+\lang{de}{Weitere spezielle Teilmengen der reellen Zahlen sind die \emph{Intervalle}. 
+% Referenz auf Kapitel 2.7 ?  \ref[intervalle][Intervalle]{section.intervals}
+Sie beschreiben einen zusammenhängenden Abschnitt zwischen zwei Zahlen auf der Zahlengerade (oder $\pm\infty$). 
+Dabei unterscheiden wir, ob die \emph{Randpunkte} dazugehören oder nicht. }
+\lang{en}{
+\emph{Intervals} are another type of special subset of the real numbers.
+They describe a connected segment between two numbers (or $\pm\infty$) on the number line.
+We distinguish cases based on whether or not the \emph{endpoints} are included.
+}
+
+\begin{definition}[\lang{de}{Intervalle} \lang{en}{Intervals}] \label{def:intervall}
+	
+	\lang{de}{Es seien $a,b \in \R$ mit $a < b. \;$  Dann heißen }
+  \lang{en}{Let $a,b \in \R$ with $a < b. \;$ We call}
+    
+    \lang{de}{$\qquad(a;b):=\{\,x\in\R\,|\,a< x< b\,\}\qquad$ \notion{offenes Intervall}, \\ $\qquad$ ($a$ und $b$ gehören nicht zum Intervall)}
+    \lang{en}{$\qquad(a,b):=\{\,x\in\R\,|\,a< x< b\,\}\qquad$ an \notion{open interval}, \\ $\qquad$ ($a$ and $b$ are not included in the interval)}
+      \begin{center}
+      \image{T601_OpenInterval}
+      \end{center}
+      \\
+      
+    \lang{de}{$\qquad[a;b]:=\{\,x\in\R\,|\,a\leq x\leq b\,\}\qquad$ \notion{abgeschlossenes Intervall}, \\ $\qquad$ ($a$ und $b$ gehören zum Intervall)}
+    \lang{en}{$\qquad[a,b]:=\{\,x\in\R\,|\,a\leq x\leq b\,\}\qquad$ a \notion{closed interval}, \\ $\qquad$ ($a$ and $b$ are included in the interval)}
+      \begin{center}      
+      \image{T601_ClosedInterval}
+      \end{center}  
+      \\
+      
+    \lang{de}{$\qquad[a;b):=\{\,x\in\R\,|\,a\leq x < b\,\}\qquad$ \notion{rechtsoffenes Intervall}, \\ $\qquad$($a$ gehört zum Intervall, $b$ nicht)}
+    \lang{en}{$\qquad[a,b):=\{\,x\in\R\,|\,a\leq x < b\,\}\qquad$ a \notion{right-open interval}, \\ $\qquad$($a$ is included in the interval but $b$ is not)}
+      \begin{center}
+      \image{T601_RightOpenInterval}
+      \end{center}  
+      \\
+            
+    \lang{de}{$\qquad(a;b]:=\{\,x\in\R\,|\,a < x\leq b\,\}\qquad$ \notion{linksoffenes Intervall}. \\ $\qquad$ ($b$ gehört zum Intervall, $a$ nicht)}
+    \lang{en}{$\qquad(a,b]:=\{\,x\in\R\,|\,a < x\leq b\,\}\qquad$ a \notion{left-open interval}. \\ $\qquad$ ($b$ is included in the interval but $a$ is not)}
+      \begin{center}
+      \image{T601_LeftOpenInterval}
+      \end{center}  
+      
+    \lang{de}{Als Randpunkte von Intervallen sind auch  $\infty$ (\emph{unendlich}) und  $-\infty$ (\emph{minus unendlich}) erlaubt. Diese Symbole gehören 
+    nie zum Intervall dazu und stehen deshalb bei einer runden Klammer. Diese Intervalle sind}
+    \lang{en}{$\infty$ (\emph{infinity}) and $-\infty$ (\emph{negative infinity}) are also allowed to be endpoints of an interval.
+    These symbols are never contained in the interval and are therefore used with a round bracket.
+    These intervals are
+    }
+            \[
+             \begin{mtable}[\cellaligns{cclccl}]
+               (a;\infty)   &:=& \{\,x\in\R\,|\, x>a \,\}, &\quad
+               [a;\infty)   &:=& \{\,x\in\R\,|\,x \geq a \,\},\\
+               (-\infty;b)  &:=& \{\,x\in\R\,|\,x< b\,\},  &\quad
+               (-\infty;b]  &:=& \{\,x\in\R\,|\,x \leq b\,\}, \\ 
+               (-\infty;\infty) &:=& \R. & & &
+            \end{mtable}           
+            \]
+ 
+\begin{showhide}[\lang{de}{\textbf{Anmerkung zu weiteren Notationen}}
+\lang{en}{\textbf{Comment on other notation}}]	
+  \lang{de}{Während die Notation zu abgeschlossenen Intervallen in der Literatur als $[a;b]$ einheitlich ist, gibt
+  es für rechts-, links- bzw. offene Intervalle auch eine weitere Notation, nämlich anstelle der runden Klammer die nach außen 
+  geöffnete eckige Klammer, d.\,h. das rechtsoffene Intervall von $a$ bis $b$ wird auch mit $[a;b[$ bezeichnet, das linksoffene
+  mit $]a;b]$ und das offene Intervall von $a$ bis $b$ mit $]a;b[$.\\
+  In diesem Kurs wird aber durchgängig die Notation mit runden Klammern verwendet.}
+  \lang{en}{
+  While $[a,b]$ is used consistently as the notation for closed intervals in the literature,
+  there is another convention for right-open, left-open and open intervals, in which the round brackets
+  are replaced by outward-facing square brackets. In other words, the right-open interval from $a$ to $b$
+  is denoted by $[a,b[$, the left-open interval by $]a,b]$, and the open interval by $]a,b[$.\\
+  In this course, we will always use the convention with round brackets.
+  }
+\end{showhide}   
+\end{definition}
+
+\begin{example}
+
+		\lang{de}{Rechtsoffenes Intervall: Die linke Grenze gehört zur Menge, die rechte Grenze nicht.}
+    \lang{en}{A right-open interval: the left endpoint belongs to the set but the right endpoint does not.}
+		$\qquad \big[-\frac{3}{2}\lang{de}{;}\lang{en}{,}\frac{3}{2}\big)=\big\{\,x \in\R\,\big|\,-\frac{3}{2}\leq x<\frac{3}{2}\,\big\}$
+		\begin{center}
+			\image{T601_IntervalExample_A}
+		\end{center}
+		
+		\lang{de}{Linksoffenes Intervall: Die rechte Grenze gehört zur Menge, die linke Grenze nicht.}
+  \lang{en}{A left-open interval: the right endpoint belongs to the set but the left endpoint does not.}
+		$\qquad (-2\lang{de}{;}\lang{en}{,}1]=\{\,x\in\R\,|\,-2< x\leq 1\,\}$
+		\begin{center}
+		\image{T601_IntervalExample_B}
+		\end{center}
+\end{example}
+
+%%%
+% Kurztzest zu Intervallen
+%
+%%%%
+\begin{quickcheck}
+		\type{input.interval}
+        \field{rational}
+		\lang{de}{
+		\text{Welche der folgenden Mengen beschreibt die auf der Zahlengerade in blau dargestellte
+              Teilmenge von $\R$?
+           \begin{center}
+                 \image{T601_IntervalExample_C}
+            \end{center}                   
+            }
+            }
+    \lang{en}{
+		\text{Which of the following sets describes the subset of $\R$ that is shaded in
+            blue on the number line?
+           \begin{center}
+                 \image{T601_IntervalExample_C}
+            \end{center}                   
+            }
+            }
+
+    \begin{variables}                   
+      \randint{r1}{1}{2}
+    \end{variables}
+    
+    \begin{choices}{multiple}
+
+       \begin{choice}
+          \lang{de}{\text{$\Big\{\,-\frac{1}{2} ; \, 3\,\Big\}$}}
+          \lang{en}{\text{$\Big\{\,-\frac{1}{2} , \, 3\,\Big\}$}}
+		\solution{false}
+	\end{choice}
+               
+  \begin{choice}
+     \lang{de}{\text{$\bigg(-\frac{1}{2} ; \, 3\bigg]$}}
+     \lang{en}{\text{$\bigg(-\frac{1}{2} , \, 3\bigg]$}}
+	\solution{false}
+\end{choice}
+                
+        \begin{choice}
+            \text{$\Big\{\,x\in\R\,\Big|\,-\frac{1}{2}\leq x\leq 3\,\Big\}$}
+			\solution{true}
+		\end{choice}
+        
+        \begin{choice}
+            \lang{de}{\text{$\bigg[-\frac{1}{2} ;  \, 3\bigg]$}}
+            \lang{en}{\text{$\bigg[-\frac{1}{2} ,  \, 3\bigg]$}}
+			\solution{true}
+		\end{choice}
+        
+        \begin{choice}
+            \text{$\Big\{\,x\in\R\,\Big|\,-\frac{1}{2} < x\leq 3\,\Big\}$}
+			\solution{false}
+		\end{choice}
+       
+    \end{choices}{multiple}
+           			
+	\end{quickcheck}
+
+%%%%
+
+
+\end{visualizationwrapper}
+
+\end{content}
+

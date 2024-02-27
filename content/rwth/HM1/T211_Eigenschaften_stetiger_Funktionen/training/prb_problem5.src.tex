@@ -1,0 +1,95 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A05: komplexe Wurzeln}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21449}{Ticket 21449}
+\end{block}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A05: komplexe Wurzeln}}
+
+\begin{problem}
+            \begin{variables}
+                \function{z1}{3*exp(-pi*i/3)} 
+                \function{z2}{3*exp(pi*i/3)}
+                \function{z3}{3*exp(pi*i)}
+                \function{phi1}{-60}
+                \function{phi2}{60}
+                \function{phi3}{180}
+                
+            \end{variables}
+        \begin{question}
+            %\calculate: 1,5+2,6i wird NICHT als gleich zu 3e^(i*pi/3) erkannt.
+            %\checkAsFunction geht nicht bei komplexen Zahlen.
+            \field{complex}
+            \type{input.function}
+            \text{Berechnen sie die drei komplexen Lösungen der Gleichung\\
+            $z^3=27e^{i\pi}$. \\Als Winkelbereich nehmen Sie $(-\pi,\pi]$. Geben Sie die Lösungen 
+            bitte in der Form $re^{i\phi}$ und mit aufsteigendem Winkel an. Tragen Sie den Winkel bitte für die bessere
+            Vorstellung auch noch in der °Grad-Schreibweise ein:\\
+            $w_1=$\ansref und $\phi_1=$\ansref°\\
+            $w_2=$\ansref und $\phi_2=$\ansref°\\
+            $w_3=$\ansref und $\phi_3=$\ansref°.}
+            %\permuteAnswers{1,2,3} geht nicht bei inputAsFunction
+                \begin{answer}
+                    \solution{z1}
+                    \inputAsFunction{x}{antwort1}
+                    \checkFuncForZero{z1-antwort1}{1}{2}{1}
+               \end{answer}
+               \begin{answer}
+                    \solution{phi1}
+                    \inputAsFunction{x}{antwort1w}
+                    \checkFuncForZero{phi1-antwort1w}{1}{2}{1}
+               \end{answer}
+               \begin{answer}
+                    \solution{z2}
+                    \inputAsFunction{x}{antwort2}
+                    \checkFuncForZero{z2-antwort2}{1}{2}{1}
+               \end{answer}
+               \begin{answer}
+                    \solution{phi2}
+                    \inputAsFunction{x}{antwort2w}
+                    \checkFuncForZero{phi2-antwort2w}{1}{2}{1}
+               \end{answer}
+               \begin{answer}
+                    \solution{z3}
+                    \inputAsFunction{x}{antwort3}
+                    \checkFuncForZero{z3-antwort3}{1}{2}{1}
+               \end{answer}
+               \begin{answer}
+                    \solution{phi3}
+                    \inputAsFunction{x}{antwort3w}
+                    \checkFuncForZero{phi3-antwort3w}{1}{2}{1}
+               \end{answer}
+               \explanation[edited]{$r=\sqrt[3]{27}=3$; die Winkel sind 
+               $\phi_1=\pi/3$, $ \ \phi_2=3\pi/3 = \pi$ und $\phi_3^*=5\pi/3$, wobei der letzte Winkel 
+               als $\phi_3=-\pi/3$ angegeben und daher als Erster oben eingegeben werden muss.}    
+          \end{question}
+     \end{problem}
+
+
+     
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

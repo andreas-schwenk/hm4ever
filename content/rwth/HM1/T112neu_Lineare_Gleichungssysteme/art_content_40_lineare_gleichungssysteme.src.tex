@@ -1,0 +1,753 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Struktur der Lösungsmenge}
+    \lang{en}{The solution set of a linear system}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+  \link{generic_article}{content/rwth/HM1/T108_Vektorrechnung/g_art_content_30_basen_eigenschaften.meta.xml}{content_30_basen_eigenschaften}
+  
+    \link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_05_loesen_gleichungen_und_lgs.meta.xml}{lgs}
+    \link{generic_article}{content/rwth/HM1/T111neu_Matrizen/g_art_content_39b_matrizen.meta.xml}{matrizen}
+    \link{generic_article}{content/rwth/HM1/T108_Vektorrechnung/g_art_content_29_linearkombination.meta.xml}{lin-komb}
+    \link{generic_article}{content/rwth/HM1/T112neu_Lineare_Gleichungssysteme/g_art_content_41_gauss_verfahren.meta.xml}{gauss-verfahren}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21349}{Ticket 21349}
+\end{block}
+\begin{block}[annotation]
+Copy of \href{http://team.mumie.net/issues/9057}{Ticket 9057}: content/rwth/HM1/T111_
+
+
+
+,_lineare_Gleichungssysteme/art_content_40_lineare_gleichungssysteme.src.tex
+\end{block}
+
+\usepackage{mumie.ombplus}
+\ombchapter{12}
+\ombarticle{1}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Struktur der Lösungsmenge linearer Gleichungssysteme}
+       \lang{en}{The solution set of a linear system}}
+ 
+\begin{block}[annotation]
+  übungsinhalt
+  
+\end{block}
+% \begin{block}[annotation]
+%   Im Ticket-System: \href{http://team.mumie.net/issues/9057}{Ticket 9057}\\
+% \end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+\lang{de}{
+Am Anfang dieses Kurses haben wir \link{lgs}{Lineare Gleichungssysteme} mit zwei Unbekannten 
+kennengelernt. Dabei lag der Fokus vor allem auf den verschiedenen Lösungsverfahren.
+\\\\
+In diesem Kapitel werden lineare Gleichungssysteme beliebiger Größe im Zusammenhang mit Matrizen
+betrachtet. Anschließend wird auf die allgemeine Lösungsstruktur eingegangen.
+%Diese Lösungsstruktur wird im nachfolgenden Abschnitt explizit angewandt.
+\\\\
+Mit der Einführung des Gauß-Verfahrens wird im nächsten Unterkapitel die Grundlage gelegt,
+die Lösung eines linearen Gleichungssystems systematisch zu bestimmen.
+\\\\
+Als Letztes betrachten wir den Rang einer Matrix.
+Dieser kann ebenfalls mit dem Gauß-Verfahren berechnet werden.\\
+%und Auskunft darüber gibt, wieviele Lösungen das zugehörige LGS besitzt.
+Auch im Alltag begegnen uns lineare Gleichungssysteme. Als Einstieg finden Sie dazu einige Beispiele 
+in dem folgenden Video.\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10839&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\\\
+}
+\lang{en}{
+At the beginning of this course we introduced \link{lgs}{systems of linear equations} in two 
+variables. In that chapter we focused on the methods by which these \emph{'linear systems'} can be 
+solved.
+\\\\
+In this chapter we will consider systems of linear equations in arbitrarily many variables, and 
+their link with matrices as introduced in the previous chapter. This will allow us to consider the 
+structure of the solution set of the system.
+\\\\
+In the next section, we will use an algorithm called \emph{Gaussian elimination} to systematically 
+calculate the solution of a linear system.
+\\\\
+Finally we will introduce the concept of the \emph{rank} of a matrix. This can also be calculated 
+using Gaussian elimination.
+}
+\begin{definition}[\lang{de}{LGS}\lang{en}{Linear system}]\label{def:lgs}
+\lang{de}{
+Ein System von linearen Gleichungen mit mehr als einer Variablen wird 
+\notion{lineares Gleichungssystem (LGS)} genannt.
+}
+\lang{en}{
+A system of linear equations with more than one variable is called a \notion{linear system}.
+}
+%\lang{en}{A system of linear equations with more than one variable is called a \notion{linear system of equations}.\\
+%In the following we'll use the terms "variable" und "{unknown}" interchangeably.}
+\end{definition}
+
+\lang{de}{
+Die Begriffe \textit{Variable} und \textit{Unbekannte} werden in diesem Kapitel synonym verwendet.
+}
+\lang{en}{
+The terms \textit{variable} and \textit{unknown} are synonymous in this chapter.
+}
+
+\section{\lang{de}{Matrix-Darstellung linearer Gleichungssysteme}
+         \lang{en}{Matrix representation of linear systems}}\label{sec:matrix}
+
+\lang{de}{
+Für die Bestimmung der Lösungsstruktur sowie für die systematische Bestimmung der Lösung legen wir 
+in der folgenden Definition eine kanonische Form (Standardform) für lineare Gleichungssysteme fest.
+}
+\lang{en}{
+With the aim of determining the structure of the solution set and being able to systematically 
+calculate this, in the following definition we provide a canonical (standard) form for a linear 
+system.
+}
+
+\begin{definition}[\lang{de}{Koeffizientenmatrix}
+                   \lang{en}{Coefficient matrix}]\label{def:koeffizientenmatrix}
+
+\lang{de}{
+Ein lineares Gleichungssystem (kurz LGS) mit $m$ Gleichungen und $n$ Unbekannten $x_1,\ldots, x_n$ 
+kann durch Umformungen der einzelnen Gleichungen stets in die folgende Form gebracht werden:
+}
+\lang{en}{
+Any linear system with $m$ equations and in $n$ unknowns $x_1,\ldots, x_n$ can, by manipulating each 
+individual equation, be written in the following form:
+}
+\[
+\begin{mtable}[\cellaligns{ccccccccc}]
+ a_{11} x_1 & + & a_{12} x_2 & + & \cdots & + & a_{1n} x_n & = & b_1 \\
+ a_{21} x_1 & + & a_{22} x_2 & + & \cdots & + & a_{2n} x_n & = & b_2 \\
+ \vdots     &   & \vdots     &   &        &   & \vdots     &   & \vdots \\
+ a_{m1} x_1 & + & a_{m2} x_2 & + & \cdots & + & a_{mn} x_n & = & b_m
+\end{mtable}
+\]
+\lang{de}{
+Die Einträge $a_{ij}$ und $b_i$ mit $1 \leq i \leq m$ und $1 \leq j \leq n$ sind reellwertig.\\
+%gebracht werden, mit reellen Zahlen $a_{ij}$ für $1 \leq i \leq m$ und $1 \leq j \leq n$, sowie reellen Zahlen $b_1, \ldots, b_m$.
+%Sei
+%\[ 
+%\begin{mtable}[\cellaligns{ccccccccc}]
+% a_{11} x_1 & + & a_{12} x_2 & + & \cdots & + & a_{1n} x_n & = & b_1 \\
+% a_{21} x_1 & + & a_{22} x_2 & + & \cdots & + & a_{2n} x_n & = & b_2 \\
+% \vdots     &   & \vdots     &   &        &   & \vdots     &   & \vdots \\
+% a_{m1} x_1 & + & a_{m2} x_2 & + & \cdots & + & a_{mn} x_n & = & b_m
+%\end{mtable}
+%\]
+%ein lineares Gleichungssystem. 
+Wir definieren nun die \notion{Koeffizientenmatrix} $A$ und die 
+\notion{erweiterte Koeffizientenmatrix} $(A \ \mid \ b)$ wie folgt:
+%werden die zum linearen Gleichungssystem geh"origen 
+}
+\lang{en}{
+The entries $a_{ij}$ and $b_i$ with $1 \leq i \leq m$ and $1 \leq j \leq n$ are real-valued.\\
+We now define the \notion{coefficient matrix} $A$ and the \notion{augmented matrix} 
+$(A \ \mid \ b)$ as follows:
+}
+\begin{equation*}
+A=\underbrace{\left( \begin{smallmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{smallmatrix} \right)}_{ \in M(m,n;\R)}
+\end{equation*}
+\begin{equation*}
+%\quad \text{ und } \quad 
+(A ~\mid~ b) = \underbrace{\left(  \begin{smallmatrix}
+                                      a_{11} & a_{12} & \cdots & a_{1n} & | & b_1\\
+                                      a_{21} & a_{22} & \cdots & a_{2n} & | &b_2\\
+                                      \vdots & \vdots & \ddots & \vdots & \mid &\vdots\\
+                                      a_{m1} & a_{m2} & \cdots & a_{mn} &| & b_m
+                                      \end{smallmatrix} \right) }_{
+\in M(m,n+1;\R)}
+\end{equation*}
+%\notion{Koeffizientenmatrix} und \notion{erweiterte Koeffizientenmatrix} genannt. 
+\lang{de}{
+Die Trennstriche bei der erweiterten Koeffizientenmatrix dienen nur der besseren Übersicht und 
+dürfen auch weggelassen werden
+}
+\lang{en}{
+The vertical dividing line in the augmented matrix is useful notation, but may also be omitted.
+}\\
+\end{definition}
+
+\lang{de}{
+Mit der \ref[matrizen][Matrix-Vektor-Multiplikation]{sec:produkt} kann das obige lineare 
+Gleichungssystem dann kompakt geschrieben werden als
+}
+\lang{en}{
+Using \ref[matrizen][matrix-vector multiplication]{sec:produkt} we can write the above linear 
+system much more compactly as
+}
+\[ A\cdot x = b \qquad \text{mit}\quad b=\left(  \begin{smallmatrix}  b_1 \\    \vdots\\ b_m  \end{smallmatrix} \right) \quad \text{und}\quad x=\left(  \begin{smallmatrix}  x_1 \\    \vdots\\ x_n  \end{smallmatrix} \right). \]
+\lang{de}{Diese Schreibweise werden wir im Folgenden stets benutzen.}
+\lang{en}{This way of writing a linear system will be used henceforth.}
+
+\begin{example}
+\begin{tabs*}
+\tab{\lang{de}{1. Beispiel}\lang{en}{Example 1}}
+\lang{de}{
+Im Abschnitt \ref[lgs][Lineare Gleichungssysteme]{ex:nicht-eindeutig-loesbar} haben wir als Beispiel 
+das folgende lineare Gleichungssystem betrachtet:
+}
+\lang{en}{
+We used the following linear system in an example from the initial section on 
+\ref[lgs][linear systems]{ex:nicht-eindeutig-loesbar}:
+}
+\[ \begin{mtable}[\cellaligns{crcrcr}]
+(I)&\qquad 2 \cdot  x & - & 4 \cdot  y & = & 10 \\
+(II)&-3 \cdot  x & + & 6\cdot y & =  & -15
+\end{mtable} \]
+\lang{de}{
+Es hat als Koeffizientenmatrix $A=\begin{pmatrix} 2 & -4 \\ -3 & 6\end{pmatrix}$ und als rechte 
+Seite $b=\begin{pmatrix} 10\\ -15\end{pmatrix}$ sowie die erweiterte Koeffizientenmatrix
+}
+\lang{en}{
+It has the coefficient matrix $A=\begin{pmatrix} 2 & -4 \\ -3 & 6\end{pmatrix}$ and the vector 
+$b=\begin{pmatrix} 10\\ -15\end{pmatrix}$ on the right-hand side, hence the corresponding augmented 
+matrix is
+}
+\[ (A \mid b )= \begin{pmatrix} 2 & -4& | & 10 \\ -3 & 6& | & -15\end{pmatrix}  .\]
+\lang{de}{In Matrixschreibweise lautet das LGS daher}
+\lang{en}{Expressed using the matrix, the linear system is}
+\[   \begin{pmatrix} 2 & -4 \\ -3 & 6\end{pmatrix}\cdot \begin{pmatrix} x\\ y\end{pmatrix}= \begin{pmatrix} 10\\ -15\end{pmatrix}.\]
+\tab{\lang{de}{2. Beispiel}\lang{en}{Example 2}}
+\lang{de}{Das lineare Gleichungssystem}
+\lang{en}{The linear system}
+\[ \begin{mtable}[\cellaligns{ccrcrcrcr}]
+(I)&&x_{1}&+&2x_{2}&+&x_{3}&=&4\\
+(II)&&x_{1}&-&x_{2}&+&\frac{3}{2}x_{3}&=&-7\\
+(III)&\qquad-&4x_{1}&+&2x_{2}&&&=&-2
+\end{mtable} \]
+\lang{de}{hat als Koeffizientenmatrix }
+\lang{en}{has the coefficient matrix }
+$ A=\begin{pmatrix} 1 & 2 & 1 \\ 1 & -1 & \frac{3}{2} \\ -4 & 2 & 0\end{pmatrix} $
+\lang{de}{
+und als rechte Seite $b=\begin{pmatrix} 4 \\ -7 \\ -2 \end{pmatrix} $ sowie die erweiterte 
+Koeffizientenmatrix
+}
+\lang{en}{
+and the vector $b=\begin{pmatrix} 4 \\ -7 \\ -2 \end{pmatrix} $ on the right-hand side, hence the 
+corresponding augmented matrix is
+}
+\[ (A \mid b )= \begin{pmatrix} 1 & 2 & 1 & | & 4 \\ 1 & -1 & \frac{3}{2}& | & -7\\ -4 & 2 & 0& | &-2\end{pmatrix}.\]
+\lang{de}{In Matrixschreibweise lautet das LGS daher}
+\lang{en}{Expressed using the matrix, the linear system is}
+\[ \begin{pmatrix} 1 & 2 & 1 \\ 1 & -1 & \frac{3}{2} \\ -4 & 2 & 0\end{pmatrix}\cdot \begin{pmatrix}x_1 \\x_2\\ x_3\end{pmatrix}
+= \begin{pmatrix} 4 \\ -7 \\ -2 \end{pmatrix}. \]
+\end{tabs*}
+\end{example}
+\lang{de}{
+Um eine Struktur der Lösungsmenge anzugeben, unterscheiden wir zwischen homogenen und inhomogenen 
+linearen Gleichungssystemen:
+}
+\lang{en}{
+In order to determine the structure of the solution set, we must distinguish between homogeneous and 
+inhomogeneous linear systems \emph{(note that this is \textbf{not} the same word as 
+\textbf{homogenous})}:
+}\\
+\begin{definition}[\lang{de}{Homogenes/Inhomogenes LGS}
+                   \lang{en}{Homogeneous/inhomogeneous linear system}]\label{def:homog_lgs}
+\lang{de}{
+Ein lineares Gleichungssystem $Ax=b$ heißt \notion{homogenes} LGS, wenn $b$ gleich dem Nullvektor 
+ist, also $b_1= \cdots = b_m =0$ gilt, anderenfalls spricht man von einem \notion{inhomogenen} LGS.
+\\\\
+Ist $Ax=b$ ein inhomogenes LGS, so nennt man das lineare Gleichungssystem $Ax=0$ das 
+\notion{zugehörige homogene LGS}.
+}
+\lang{en}{
+A linear system $Ax=b$ is called a \notion{homogeneous} linear system if $b$ is the zero vector, so 
+$b_1= \cdots = b_m =0$, otherwise it is called an \notion{inhomogeneous} linear system.
+\\\\
+If $Ax=b$ is an inhomogeneous linear system, then the linear system $Ax=0$ is called the 
+\notion{associated homogeneous linear system}.
+}
+\end{definition}
+
+\begin{example}
+\begin{tabs*}
+\tab{\lang{de}{1. Beispiel}\lang{en}{Example 1}}
+\lang{de}{Das obige LGS}
+\lang{en}{The above linear system}
+\[\begin{pmatrix} 2 & -4 \\ -3 & 6\end{pmatrix}\cdot \begin{pmatrix} x\\ y\end{pmatrix} = 
+  \begin{pmatrix} 10\\ -15\end{pmatrix}\]
+\lang{de}{
+ist inhomogen, da die rechte Seite $b=\begin{pmatrix} 10\\ -15\end{pmatrix}$ nicht der Nullvektor 
+ist. Das zugehörige homogene LGS lautet
+}
+\lang{en}{
+is inhomogeneous, as the right-hand side $b=\begin{pmatrix} 10\\ -15\end{pmatrix}$ is not equal to 
+the zero vector. The associated homogeneous linear system is
+}
+\[\begin{pmatrix} 2 & -4 \\ -3 & 6\end{pmatrix}\cdot \begin{pmatrix} x\\ y\end{pmatrix} = 
+  \begin{pmatrix} 0\\ 0\end{pmatrix}.\]
+\tab{\lang{de}{2. Beispiel}\lang{en}{Example 2}}
+\lang{de}{Das obige LGS}
+\lang{en}{The above linear system}
+\[\begin{pmatrix} 1 & 2 & 1 \\ 1 & -1 & \frac{3}{2} \\ -4 & 2 & 0\end{pmatrix}\cdot 
+  \begin{pmatrix}x_1 \\x_2\\ x_3\end{pmatrix} = 
+  \begin{pmatrix} 4 \\ -7 \\ -2 \end{pmatrix} \]
+\lang{de}{
+ist inhomogen, da die rechte Seite $b=\begin{pmatrix} 4 \\ -7 \\ -2 \end{pmatrix}$ nicht der 
+Nullvektor ist. Das zugehörige homogene LGS lautet
+}
+\lang{en}{
+is inhomogeneous, as the right-hand side $b=\begin{pmatrix} 4 \\ -7 \\ -2 \end{pmatrix}$ is not 
+equal to the zero vector. The associated homogeneous linear system is
+}
+\[ \begin{pmatrix} 1 & 2 & 1 \\ 1 & -1 & \frac{3}{2} \\ -4 & 2 & 0\end{pmatrix}\cdot \begin{pmatrix}x_1 \\x_2\\ x_3\end{pmatrix}
+= \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}. \]
+\end{tabs*}
+\end{example}
+
+
+\begin{quickcheck}
+		\type{input.interval}
+        \field{rational}
+        \precision{3}
+      \field{real}
+      \begin{variables}
+           \randint[Z]{a}{2}{6}
+           \randint[Z]{b}{2}{8}
+           \randint[Z]{c}{2}{8}
+           \randint[Z]{d}{2}{8}
+           \end{variables}
+      \text{\lang{de}{Das folgende lineare Gleichungssystem}
+            \lang{en}{The linear system}
+            \[\begin{mtable}[\cellaligns{crcrcr}]
+              (I)&\qquad \var{a} \cdot  x & - & \var{b}  & = & -\var{b} \\
+              (II)&   &  & \var{c}\cdot y & =  &-\var{d} \cdot  x 
+              \end{mtable} \]
+\lang{de}{ist}
+\lang{en}{is}
+        } 
+    \begin{choices}{unique}
+
+        \begin{choice}
+            \text{\lang{de}{homogen.}\lang{en}{homogeneous.}}
+			\solution{true}
+		\end{choice}
+                    
+        \begin{choice}
+            \text{\lang{de}{inhomogen.}\lang{en}{inhomogeneous.}}
+			\solution{false}
+		\end{choice}
+    \end{choices}{unique}
+ \explanation{\lang{de}{
+ Das lineare Gleichungssystem ist homogen, da es sich in der folgenden Form darstellen lässt:
+ }
+ \lang{en}{
+ The linear system is homogeneous, as it can be written in the following form:
+ }\\
+ $ \begin{mtable}[\cellaligns{crcrcr}]
+(I)&\qquad \var{a} \cdot  x &  &   & = & 0 \\
+(II)&  \var{d} \cdot  x & + & \var{c}\cdot y & =&0
+\end{mtable} $
+ }
+	\end{quickcheck}
+
+\lang{de}{Im Folgenden betrachten wir die Struktur der Lösungsmenge genauer.}
+\lang{en}{We now examine the structure of the solution set in more detail.}\\
+\begin{definition}[\lang{de}{Lösungsmenge}\lang{en}{Solution set}]\label{def:loesmenge_lgs}
+\lang{de}{
+Eine \notion{L\"osung} eines linearen Gleichungssystems mit $n$ Unbekannten ist ein $n$-Tupel 
+$(x_1; x_2; \ldots; x_n)$, wobei $x_1,..., x_n$ alle Gleichungen des Systems erf\"ullen müssen.\\
+In Matrixschreibweise ist der {Spaltenvektor} 
+$x=\left(\begin{smallmatrix} x_1\\ \vdots \\ x_n\end{smallmatrix}\right)$ damit eine Lösung von 
+$A\cdot x=b$.
+\\\\
+Die \notion{Lösungsmenge} eines reellen LGS enthält alle Lösungen $x\in \R^n$, also alle Vektoren 
+$x$, die $A \cdot x = b$ erfüllen:
+}
+\lang{en}{
+A \notion{solution} of a linear system in $n$ variables is an $n$-tuple $(x_1; x_2; \ldots; x_n)$, 
+where $x_1,..., x_n$ satisfy all equations in the linear system.\\
+If the linear system is written in matrix form, the (column vector) 
+$x=\left(\begin{smallmatrix} x_1\\ \vdots \\ x_n\end{smallmatrix}\right)$ is a solution of 
+$A\cdot x=b$.
+\\\\
+The \notion{solution set} of a linear system in $\R$ contains all solutions $x\in \R^n$, that is, 
+all vectors $x$ that satisfy $A \cdot x = b$:
+}
+\[\mathbb{L}=\{\left(\begin{smallmatrix} x_1\\ \vdots \\ x_n\end{smallmatrix}\right)\in \R^n ~|~ \left(\begin{smallmatrix} x_1\\ \vdots \\ x_n\end{smallmatrix}\right) 
+\text{\lang{de}{ ist L"osung des LGS}\lang{en}{ is a solution of the linear system}}\}\]
+\end{definition}
+
+\lang{de}{
+Im folgenden Video wird ein lineares Gleichungssystem in Matrixschreibweise dargestellt und anschließend mit den bereits \link{lgs}{bekannten Methoden} gelöst. \\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10840&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\\\
+}
+\lang{en}{}
+
+\section{\lang{de}{Die L"osungsmenge homogener linearer Gleichungssysteme}
+         \lang{en}{The solution set of a homogeneous linear system}}\label{sec:homogen}
+
+\lang{de}{
+Die Lösungsmenge eines homogenen linearen Gleichungssystems $Ax=0$ kann als Kombination ihrer 
+\link{content_30_basen_eigenschaften}{linear unabhängigen Lösungsvektoren} $x$ dargestellt werden. 
+Hierfür gelten folgende Regeln.
+}
+\lang{en}{
+The solution set $\mathbb{L}$ of a homogeneous linear system $Ax=0$ can be written as a linear 
+combination of \link{content_30_basen_eigenschaften}{linearly independent solution vectors} $x$.
+}
+
+\begin{rule}
+\lang{de}{Für  ein homogenes LGS $Ax=0$ mit $m$ Gleichungen und $n$ Variablen gilt:}
+\lang{en}{Given a homogeneous linear system $Ax=0$ with $m$ equations and in $n$ variables:}
+\begin{enumerate}
+\item \lang{de}{
+      Es besitzt stets die Lösung $x_1=\ldots=x_n=0$. Diese wird die \notion{triviale Lösung} 
+      genannt.
+      }
+      \lang{en}{
+      The vector $x_1=\ldots=x_n=0$ is always a solution of the system, called the 
+      \notion{trivial solution}.
+      }
+\item \lang{de}{
+      Entweder ist $\mathbb{L}=\{ 0\}$ (d.\,h. es existiert nur die triviale Lösung) oder 
+      es gibt %eine natürliche Zahl
+      $k\leq n$ linear unabhängige Lösungen% $v_i \in \R^n$ ($1 \leq i < k$)
+      }
+      \lang{en}{
+      Either $\mathbb{L}=\{ 0\}$ (so we only have the trivial solution) or there exist $k\leq n$ 
+      linearly independent solutions
+      }
+      \[v_1=\begin{pmatrix}v_{11}\\ \vdots \\ v_{1n} \end{pmatrix},
+        \quad v_2=\begin{pmatrix}v_{21}\\ \vdots \\ v_{2n} \end{pmatrix},
+        \quad \ldots \quad v_k=\begin{pmatrix}v_{k1}\\ \vdots \\ v_{kn}\end{pmatrix}, \]
+      \lang{de}{so dass}
+      \lang{en}{such that}
+      \[\mathbb{L}= \left\{ r_1v_1+r_2v_2+\cdots + r_kv_k \mid r_1,r_2,\ldots, r_k\in \R \right\}.\]
+%Die Lösungsmenge bildet damit einen \ref[lin-komb][Untervektorraum]{supp:allg-vektorraum} des $\mathbb{R}^n$.
+\item \lang{de}{
+      Jedes homogene LGS mit mehr Variablen als Gleichungen hat mindestens eine nichttriviale 
+      L"osung.
+      }
+      \lang{en}{
+      Every homogeneous linear system with more variables than equations has at least one 
+      non-trivial solution.
+      }
+\end{enumerate}
+\lang{de}{
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11012&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+}
+\lang{en}{}
+\end{rule}
+
+\begin{proof*}[\lang{de}{Beweis Regel}\lang{en}{Proof of rules}]
+\begin{showhide}
+\begin{enumerate}
+\item \lang{de}{
+      Bei einem homogenen LGS entspricht $b$ dem Nullvektor. Wählt man nun für $x$ ebenfalls den 
+      Nullvektor, so ist die Gleichung
+      }
+      \lang{en}{
+      In a homogeneous linear system, $b$ is the zero vector. If we set $x$ to also be the zero 
+      vector, the equation
+      }
+      \[Ax=A\cdot \begin{pmatrix} 0 \\ 0 \\ \vdots \\ 0 \end{pmatrix} = 
+        \begin{pmatrix} 0 \\ 0 \\ \vdots \\ 0 \end{pmatrix}=b\]
+      \lang{de}{stets erfüllt.}
+      \lang{en}{is clearly satisfied.}
+\item \lang{de}{
+      Sind $v_1,\ldots, v_k$ $(k \leq n)$ Lösungen des LGS $Ax=0$, dann sieht man aufgrund der 
+      \ref[matrizen][Rechenregeln für die Matrix-Vektor-Multiplikation]{sec:rechenregeln}, dass für 
+      beliebige reelle Zahlen $r_1,\ldots, r_k$ die Gleichung
+      }
+      \lang{en}{
+      If $v_1,\ldots, v_k$ $(k \leq n)$ are solutions of the linear system $Ax=0$, then by the 
+      \ref[matrizen][distributivity of matrix-vector multiplication]{sec:rechenregeln}, we also have
+      }
+      \[ A(r_1v_1+\ldots +r_k v_k)=r_1\cdot Av_1+\ldots + r_k\cdot Av_k=0+\ldots +0=0 \]
+      \lang{de}{
+      erfüllt ist. Damit ist jede Linearkombination der $v_1,\ldots, v_k$ auch eine Lösung.
+      \\\\
+      Um alle Lösungen darzustellen, müssen genügend linear unabhängige Vektoren gefunden werden, so 
+      dass alle Lösungen als Linearkombination dieser Vektoren geschrieben werden können. Praktisch 
+      wird dies mit dem \link{gauss-verfahren}{Gauß-Verfahren} durchgeführt.
+      }
+      \lang{en}{
+      for any real numbers $r_1,\ldots, r_k$. Hence any linear combination of the solutions 
+      $v_1,\ldots, v_k$ is also a solution.
+      \\\\
+      To be able to obtain all solutions as such linear combinations, we must first find 
+      sufficiently many linearly independent solutions. This is achieved efficiently by 
+      \link{gauss-verfahren}{Gaussian elimination.}
+      }
+      
+\item \lang{de}{
+      Hat ein homogenes LGS $m$ Gleichungen und $n$ Variablen mit $m<n$, so lässt sich das LGS 
+      höchstens nach $m$ Variablen auflösen. Die übrigen Variablen lassen sich frei wählen. Damit 
+      besitzt ein solches LGS mindestens eine nichttriviale Lösung. \\
+      Im nächsten Kapitel \link{gauss-verfahren}{Gauß-Verfahren} werden wir diese Variablen genauer 
+      kennenlernen.
+      }
+      \lang{en}{
+      A homogeneous linear system with $m$ equations and in $n$ variables where $m<n$ can be solved 
+      for at most $m$ variables. The remaining variables may be freely chosen, and so such a linear 
+      system has at least one non-trivial solution (obtained by setting one of the remaining 
+      variables to be any non-zero real number).\\
+      \link{gauss-verfahren}{In the next section} we will study these variables further.
+      }
+
+\end{enumerate}
+\end{showhide}
+\end{proof*}
+
+\begin{example}\label{ex:lsgsmenge-homogen}
+\begin{tabs*}
+\tab{\lang{de}{1. Beispiel}\lang{en}{Example 1}}
+\lang{de}{Das homogene LGS}
+\lang{en}{The homogeneous linear system}
+\[\begin{pmatrix} 2 & -4 \\ -3 & 6\end{pmatrix}\cdot \begin{pmatrix} x\\ y\end{pmatrix} = 
+  \begin{pmatrix} 0\\ 0\end{pmatrix}\]
+\lang{de}{hat als Lösungsmenge}
+\lang{en}{has the solution set}
+\[\mathbb{L}=\left\{ r\cdot \begin{pmatrix} 2 \\ 1 \end{pmatrix} \, \big| \, r\in \R \right\}.\]
+\lang{de}{
+Hier ist also $k=1$ und $v_1=\begin{pmatrix} 2 \\ 1 \end{pmatrix}$ eine Lösung, so dass die 
+Lösungsmenge des LGS geschrieben werden kann als 
+}
+\lang{en}{
+Here we have $k=1$ linearly independent solution $v_1=\begin{pmatrix} 2 \\ 1 \end{pmatrix}$, so the 
+solution set of the linear system may be written as 
+}
+$\mathbb{L}= \left\{ r_1v_1 \, \big| \, r_1\in \R \right\}$.
+\tab{\lang{de}{2. Beispiel}\lang{en}{Example 2}}
+\lang{de}{Für das homogene LGS}
+\lang{en}{The homogeneous linear system}
+\[ \begin{pmatrix} 1 & 2 & 1 \\ 1 & -1 & \frac{3}{2} \\ -4 & 2 & 0\end{pmatrix}\cdot \begin{pmatrix}x_1 \\x_2\\ x_3\end{pmatrix}
+= \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix} \]
+\lang{de}{
+kann durch Rechnung (siehe Abschnitt \link{gauss-verfahren}{Gauß-Verfahren}) gezeigt werden, dass 
+die Lösungsmenge nur aus der trivialen Lösung besteht, also $\mathbb{L}=\{ 0\}$.
+%es nur die triviale Lösung als Lösung besitzt. 
+%Damit ist die Lösungsmenge $\mathbb{L}=\{ 0\}$.
+}
+\lang{en}{
+can be shown (using \link{gauss-verfahren}{Gaussian elimination}) to have only the trivial solution 
+in its solution set, so $\mathbb{L}=\{ 0\}$.
+}
+
+\end{tabs*}
+\end{example}
+
+
+\section{\lang{de}{Die L"osungsmenge inhomogener linearer Gleichungssysteme}
+         \lang{en}{The solution set of an inhomogeneous linear system}}\label{sec:inhomogen}
+
+\lang{de}{
+Die Lösungsmenge eines inhomogenen LGS kann mit Hilfe der Lösungsmenge des zugehörigen homogenen 
+LGS dargestellt werden. Für die Beziehung zwischen diesen beiden Lösungsmengen gilt:
+}
+\lang{en}{
+The solution set of an inhomogeneous linear system can be determined with the help of the associated 
+homogeneous linear system. The following rules show how they are related:
+}
+
+\begin{rule}
+\lang{de}{
+Es sei $Ax=b$ ein inhomogenes LGS mit $m$ Gleichungen und $n$ Variablen und $\mathbb{L}_0$ die
+Lösungsmenge des zugehörigen homogenen LGS $Ax=0$. 
+\\\\
+Dann gilt für die Lösungsmenge $\mathbb{L}$ des inhomogenen LGS:
+}
+\lang{en}{
+Let $Ax=b$ be an inhomogeneous linear system with $m$ equations and in $n$ variables. Let 
+$\mathbb{L}_0$ be the solution set of the associated homogeneous linear system $Ax=0$.
+\\\\
+If $\mathbb{L}$ is the solution set of the inhomogeneous linear system, then:
+}
+\begin{itemize}
+    \item \lang{de}{Entweder ist die Lösungsmenge leer, d.\,h.~$\mathbb{L}=\emptyset$, oder es gilt}
+          \lang{en}{Either the solution set is empty, i.e.~$\mathbb{L}=\emptyset$, or}
+    \item $ \mathbb{L}= v+\mathbb{L}_0=\left\{ v+ w \mid w\in \mathbb{L}_0 \right\}$, 
+          \lang{de}{wobei $v$ eine beliebige Lösung des inhomogenen LGS $Ax=b$ ist.}
+          \lang{en}{where $v$ is an arbitrary solution of the inhomogeneous linear system $Ax=b$.}
+\end{itemize}
+\lang{de}{
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11013&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+}
+\lang{en}{}
+\end{rule}
+
+
+\begin{proof*}[\lang{de}{Beweis Regel}\lang{en}{Proof of rule}]
+\begin{showhide}
+\lang{de}{
+Diese Aussage erhält man wieder aus den 
+\ref[matrizen][Rechenregeln für die Matrix-Vektor-Multiplikation]{sec:rechenregeln}.
+Wenn nämlich die Lösungsmenge $\mathbb{L}$ nicht leer ist und $v\in \mathbb{L}$ eine beliebige 
+Lösung ist, dann gilt $Av=b$.\\
+Für jede Lösung $w\in \mathbb{L}_0$ des zugehörigen homogenen LGS $Ax=0$ gilt dann
+}
+\lang{en}{
+This statement also follows from the 
+\ref[matrizen][distributivity of matrix-vector multiplication]{sec:rechenregeln}. 
+If the solution set $\mathbb{L}$ of the inhomogeneous linear system is not empty and 
+$v\in \mathbb{L}$ is a solution, then by definition $Av=b$.\\
+Thus for every solution $w\in \mathbb{L}_0$ of the associated homogeneous linear system $Ax=0$, we 
+have
+}
+\[  A(v+w)=Av+Aw=b+0=b. \]
+\lang{de}{
+Also ist $v+w\in \mathbb{L}$.
+\\\\
+Ist andererseits $v'\in \mathbb{L}$ eine weitere Lösung des LGS $Ax=b$, so gilt
+}
+\lang{en}{
+Hence $v+w\in \mathbb{L}$.
+\\\\
+Conversely, if $v'\in \mathbb{L}$ is a solution of $Ax=b$, we have
+}
+\[  A(v'-v)=Av'-Av=b-b=0. \]
+\lang{de}{
+Die Differenz $w=v'-v$ ist also eine Lösung des zugehörigen homogenen LGS $Ax=0$. Damit gilt 
+$v'=v+(v'-v)=v+w$ und folglich lässt sich jede Lösung $v'$ des inhomogenen Systems als Summe einer 
+festen inhomogenen Lösung $v$ und einer homogenen Lösung $w$ schreiben.
+}
+\lang{en}{
+The difference $w=v'-v$ is a solution of the associated homogeneous linear system $Ax=0$. Hence 
+$v'=v+(v'-v)=v+w$ can be expressed as a sum of the fixed inhomogeneous solution $v$ and a 
+homogeneous solution $w$. That is to say, every inhomogeneous solution is obtained this way.
+}
+\end{showhide}
+\end{proof*}
+
+
+\begin{example}
+\begin{tabs*}
+\tab{\lang{de}{1. Beispiel}\lang{en}{Example 1}}
+\lang{de}{Das inhomogene LGS}
+\lang{en}{The inhomogeneous linear system}
+\[ \begin{mtable}[\cellaligns{crcrcr}]
+(I)&\qquad 2 \cdot  x & - & 4 \cdot  y & = & 10 \\
+(II)&-3 \cdot  x & + & 6\cdot y & =  & -15
+\end{mtable} \]
+\lang{de}{bzw. in Matrixform}
+\lang{en}{expressed in matrix form as}
+\[   \begin{pmatrix} 2 & -4 \\ -3 & 6\end{pmatrix}\cdot \begin{pmatrix} x\\ y\end{pmatrix}= \begin{pmatrix} 10\\ -15\end{pmatrix}\]
+\lang{de}{hat die Lösungsmenge}
+\lang{en}{has the solution set}
+\[ \mathbb{L}=\left\{ \begin{pmatrix}5\\ 0 \end{pmatrix}+r\cdot \begin{pmatrix} 2 \\ 1 \end{pmatrix} \, \big| \, r\in \R \right\} \]
+\lang{de}{
+(vgl. Abschnitt \ref[lgs][Lineare Gleichungssysteme]{ex:nicht-eindeutig-loesbar}).
+Hierbei ist $v=\begin{pmatrix}5\\ 0 \end{pmatrix}$ eine spezielle Lösung und die Lösungsmenge des 
+zugehörigen homogenen LGS lautet
+}
+\lang{en}{
+(see \ref[lgs][the section where linear systems were first introduced]{ex:nicht-eindeutig-loesbar}). 
+Here $v=\begin{pmatrix}5\\ 0 \end{pmatrix}$ is a fixed solution, and the solution set of the 
+associated homogeneous linear system is
+}
+\[ \mathbb{L}_0=\left\{ r\cdot \begin{pmatrix} 2 \\ 1 \end{pmatrix} \, \big| \, r\in \R \right\} \]
+\lang{de}{(siehe \lref{ex:lsgsmenge-homogen}{oben}).}
+\lang{en}{(see the \lref{ex:lsgsmenge-homogen}{previous example}).}
+\tab{\lang{de}{2. Beispiel}\lang{en}{Example 2}}
+\lang{de}{Das LGS}
+\lang{en}{The linear system}
+\[\begin{pmatrix} 1 & 2 & 1 \\ 1 & -1 & \frac{3}{2} \\ -4 & 2 & 0\end{pmatrix}\cdot 
+  \begin{pmatrix}x_1 \\x_2\\ x_3\end{pmatrix} = \begin{pmatrix} 4 \\ -7 \\ -2 \end{pmatrix} \]
+\lang{de}{
+besitzt die Lösung $\begin{pmatrix} 2 \\ 3 \\ -4 \end{pmatrix}$, wie man leicht nachrechnet.
+Das zugehörige homogene LGS
+}
+\lang{en}{
+has a solution $\begin{pmatrix} 2 \\ 3 \\ -4 \end{pmatrix}$, as is easily verified. The associated 
+homogeneous linear system
+}
+\[ \begin{pmatrix} 1 & 2 & 1 \\ 1 & -1 & \frac{3}{2} \\ -4 & 2 & 0\end{pmatrix}\cdot 
+  \begin{pmatrix}x_1 \\x_2\\ x_3\end{pmatrix} = \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix} \]
+\lang{de}{
+besitzt nur die triviale Lösung als Lösung (siehe \lref{ex:lsgsmenge-homogen}{oben}). Also ist die 
+Lösungsmenge des inhomogenen LGS
+}
+\lang{en}{
+only has the trivial solution in its solution set (see the 
+\lref{ex:lsgsmenge-homogen}{previous example}). Hence the solution set of the inhomogeneous linear 
+system is
+}
+\[ \mathbb{L}=\{ \begin{pmatrix} 2 \\ 3 \\ -4 \end{pmatrix} \}. \]
+\end{tabs*}
+\end{example}
+
+\begin{quickcheck}
+
+    \begin{variables}
+    
+      \randint[Z]{a}{2}{2}
+      \randint[Z]{b}{6}{9}
+      \randint[Z]{c}{2}{5}
+      
+    
+      \function[calculate]{a3}{a*3}
+      \function[calculate]{b3}{b*3}
+      \function[calculate]{c2}{c*2}
+       \function[calculate]{c4}{c*4}
+      \function[calculate]{x}{(c2-b*2)/a}
+     
+    \end{variables}
+       \text{\lang{de}{Betrachte das folgende Gleichungssystem:}
+             \lang{en}{Consider the linear system}
+             \[\begin{mtable}[\cellaligns{crcrcr}]
+               (I)& \var{a} \cdot  x & + & \var{b} \cdot y & = & \var{c2} \\
+               (II)& \var{a3} \cdot  x & + & \var{b3} \cdot y & = & \var{c4} \\
+               \end{mtable}\]
+             \lang{de}{Was gilt für die dazugehörige Lösungsmenge?}
+             \lang{en}{What is its solution set?}
+        } 
+    \begin{choices}{unique}
+
+      \begin{choice}
+        \text{$\mathbb{L}=\left\{ r\cdot \begin{pmatrix} \var{x} \\ 2 \end{pmatrix} \mid\, r\in \R \right\}$}
+        \solution{false}
+      \end{choice}
+
+      \begin{choice}
+        \text{\text{$\mathbb{L}=\left\{\begin{pmatrix} \var{x} \\ 2 \end{pmatrix}\right\}$}}
+        \solution{false}
+        \end{choice}
+      \begin{choice}
+        \text{\text{$\mathbb{L}=\emptyset$}}
+        \solution{true}
+      \end{choice}
+\end{choices}{unique}
+\explanation{\lang{de}{
+Die Lösungsmenge entspricht der leeren Menge, da durch $\text{(II)}-3\cdot\text{(I)}$ die Gleichung 
+$0=-\var{c2}$ entsteht. Somit besitzt das LGS keine Lösung.
+}
+\lang{en}{
+The empty set is the solution set, as $\text{(II)}-3\cdot\text{(I)}$ yields the equation 
+$0=-\var{c2}$. Hence the linear system has no solutions.
+}}
+\end{quickcheck}
+
+
+\end{visualizationwrapper}
+
+
+\end{content}

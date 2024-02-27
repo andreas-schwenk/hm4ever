@@ -1,0 +1,610 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Länge von Vektoren}
+    \lang{en}{Length of a vector}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T109_Distance3D.meta.xml}{T109_Distance3D}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T109_Parallelogram.meta.xml}{T109_Parallelogram}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T109_VectorSum.meta.xml}{T109_VectorSum}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T109_Length3D.meta.xml}{T109_Length3D}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T108_Vektorrechnung/g_art_content_27_vektoren.meta.xml}{vektor-ansch}
+    \link{generic_article}{content/rwth/HM1/T105_Trigonometrische_Funktionen/g_art_content_17_trigonometrie_im_dreieck.meta.xml}{dreiecks-trig}
+    \link{generic_article}{content/rwth/HM1/T109_Skalar-_und_Vektorprodukt/g_art_content_33_winkel.meta.xml}{winkel}
+    \link{generic_article}{content/rwth/HM1/T109_Skalar-_und_Vektorprodukt/g_art_content_31_skalarprodukt.meta.xml}{skalarprodukt}
+    \link{generic_article}{content/rwth/HM1/T110_Geraden,_Ebenen/g_art_content_36_normalenformen.meta.xml}{normalenformen}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{9}
+\ombarticle{2}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Länge von Vektoren, Abstände von Punkten}\lang{en}{Length of a vector}}
+ 
+\begin{block}[annotation]
+  übungsinhalt: Norm/Länge eines Vektors; Norm bei Skalierung, Dreiecksungleichung und Cauchy-Schwarz;
+  Abstände von Punkten\\
+  TODO: Beispiel zu Eigenschaften der Norm; quickchecks
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9049}{Ticket 9049}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+\section{\lang{de}{Länge eines Vektors}\lang{en}{Length of a vector}}\label{sec:euklidische_norm}
+
+\lang{de}{
+Im Abschnitt \link{vektor-ansch}{Vektoren im Anschauungsraum} wurden anschaulich Vektoren als Objekte 
+mit Länge und Richtung im $\R^n$ definiert und erst später mit Spaltenvektoren identifiziert.
+\\\\
+Für mathematische Zwecke ist es praktischer mit Spaltenvektoren zu starten (bzw. allgemein mit 
+Elementen in einem Vektorraum). Mit Hilfe des Skalarprodukts kann man dann die Länge eines Vektors 
+definieren.
+}
+\lang{en}{
+\link{vektor-ansch}{In the previous section} we graphically defined vectors as objects with length 
+(magnitude) and direction in $\R^n$, and then identified these with their representation as column 
+vectors.
+\\\\
+It is more practical to consider column vectors for mathematical purposes (or more generally, 
+elements of a vector space). Using the scalar product we can define the length of a vector.
+}
+
+\begin{definition}\label{def:euklidische_norm}
+\lang{de}{
+Es sei $\vec{v}=\begin{pmatrix}v_1\\ v_2\\ \vdots\\ v_n \end{pmatrix} \in \R^n$. Die \emph{L{\"a}nge}
+von $\vec{v}$ (auch \emph{Norm} oder \emph{Betrag} genannt) ist die nicht-negative reelle Zahl 
+}
+\lang{en}{
+Let $\vec{v}=\begin{pmatrix}v_1\\ v_2\\ \vdots\\ v_n \end{pmatrix} \in \R^n$. The \emph{length} of 
+$\vec{v}$ (also called its \emph{magnitude} or its \emph{norm}) is the non-negative real number
+}
+\[
+ \left\| \vec{v}\right\| \, := \, \sqrt{v \bullet v}\, = \, \sqrt{\sum_{i=1}^{n} v_i^2} \, = \, \sqrt{v_1^2 + v_2^2 + \cdots + v_n^2} 
+. 
+\]
+\lang{de}{
+\floatright{\href{https://www.hm-kompakt.de/video?watch=714}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{}
+\end{definition}
+
+\begin{example}
+\lang{de}{
+F"ur $\vec{v}=\left( \begin{smallmatrix} 1 \\ 3\\ 2 \end{smallmatrix}\right)$ ist zum Beispiel
+}
+\lang{en}{
+For example, for $\vec{v}=\left( \begin{smallmatrix} 1 \\ 3\\ 2 \end{smallmatrix}\right)$ we have
+}
+\[ \left\| \vec{v}\right\|=
+\left\| \left( \begin{smallmatrix} 1 \\ 3\\2 \end{smallmatrix}\right) \right\| 
+= \sqrt{1^2 + 3^2+2^2} = \sqrt{1 + 9 + 4} = \sqrt{14}. \] 
+\end{example}
+
+\begin{remark}
+\lang{de}{
+Mit Hilfe des \ref[dreiecks-trig][Satzes des Pythagoras]{satz-des-pythagoras} sieht man ein, dass 
+diese Definition der Länge im $\R^2$ und $\R^3$ mit der anschaulichen Länge übereinstimmt. 
+Für den Ortsvektor $\vec{p}=\begin{pmatrix}p_1\\ p_2\\ p_3 \end{pmatrix}$ des Punktes 
+$P=(p_1;p_2;p_3)$ ist nämlich die anschauliche Länge genau der Abstand von $P$ zum Ursprung, welcher 
+sich berechnet durch
+}
+\lang{en}{
+\ref[dreiecks-trig][The Pythagorean theorem]{satz-des-pythagoras} makes it clear that the above 
+definition of the length of a vector in $\R^2$ and $\R^3$ corresponds to the length of the 
+arrow representing the vector in space. 
+The length of the position vector $\vec{p}=\begin{pmatrix}p_1\\ p_2\\ p_3 \end{pmatrix}$ of the point 
+$P=(p_1;p_2;p_3)$ is precisely the distance of $P$ from the origin, which is calculated by
+}
+\[ d(P,O)=\sqrt{\left(\sqrt{p_1^2+p_2^2}\right)^2+p_3^2 }=\sqrt{p_1^2+p_2^2+p_3^2 }.\]
+
+\begin{center}
+\image{T109_Length3D}
+\end{center}
+
+\lang{de}{Also ist auch anschaulich}
+\lang{en}{Correspondingly,}
+\[ \left\| \vec{p}\right\|= \sqrt{p_1^2+p_2^2+p_3^2 }=\sqrt{\vec{p}\bullet \vec{p}}.\]
+\end{remark}
+
+\begin{remark}
+\lang{de}{
+Oft werden für die Länge eines Vektors statt $\|\vec{v}\|$ auch einfache Betragsstriche $|\vec{v}|$ 
+verwendet.
+}
+\lang{en}{
+Often the length of a vector $\|\vec{v}\|$ is also written using the absolute value notation 
+$|\vec{v}|$.
+}
+\end{remark}
+
+\begin{quickcheck}
+		\field{real}
+		\type{input.function}
+		\begin{variables}
+			\randint{v1}{-5}{5}
+			\randint{v2}{-5}{5}
+			\randint{v3}{-5}{5}
+% 			\randint{w1}{-5}{5}
+% 			\randint{w2}{-5}{5}
+% 			\randint{w3}{-5}{5}
+			\function[calculate]{nv2}{(v1)^2+(v2)^2+(v3)^2}
+			\function{s}{sqrt(nv2)}
+			\function{slong}{(v1)^2+(v2)^2+(v3)^2}
+		\end{variables}
+		
+			\text{\lang{de}{
+      Bestimmen Sie die Länge des Vektors 
+      $\vec{v}=\begin{pmatrix} \var{v1}\\ \var{v2} \\ \var{v3} \end{pmatrix}$.\\
+			Die Länge ist $\left\|\vec{v}\right\|=$\ansref.\\
+			(Verwenden Sie \emph{sqrt(..)} für die Wurzel einer Zahl.)
+      }
+      \lang{en}{
+      Determine the length of the vectors 
+      $\vec{v}=\begin{pmatrix} \var{v1}\\ \var{v2} \\ \var{v3} \end{pmatrix}$.\\
+      The length is $\left\|\vec{v}\right\|=$\ansref.\\
+      (Use \emph{sqrt(..)} for the root of a number.)
+      }}
+			
+		
+		\begin{answer}
+			\solution{s}
+			\checkAsFunction{x}{-2}{2}{20}
+		\end{answer}
+		\explanation{\lang{de}{Die Länge berechnet sich durch }
+                 \lang{en}{The length is calculated by }
+		$\left\| \begin{pmatrix} \var{v1}\\ \var{v2} \\ \var{v3}
+			\end{pmatrix} \right\| = \sqrt{\var{slong}} =\var{s}$.
+		}
+	\end{quickcheck}
+
+
+
+\section{\lang{de}{Eigenschaften der Norm}\lang{en}{Properties of the norm}}
+
+\begin{theorem}[\lang{de}{Eigenschaften der Norm}
+                \lang{en}{Properties of the norm}]\label{thm:eigenschaften-norm}
+\lang{de}{Für Vektoren $\vec{v}$ und $\vec{w}$ im $\R^n$ und eine reelle Zahl $r$ gelten:}
+\lang{en}{For vectors $\vec{v}$ and $\vec{w}$ in $\R^n$ and a real number $r$ we have:}
+\begin{enumerate}
+\item $\left\| r\cdot \vec{v}\right\| = \left|r\right| \cdot \left\|\vec{v}\right\|$,
+\item $\left\| \vec{v}+\vec{w}\right\| \leq \left\| \vec{v}\right\| + \left\| \vec{w}\right\|$ (\emph{\lang{de}{Dreiecksungleichung}\lang{en}{Triangle inequality}}),
+\item $\left| \vec{v}\bullet \vec{w}\right| \leq \left\| \vec{v}\right\| \cdot \left\| \vec{w}\right\|$ 
+(\emph{\lang{de}{Cauchy-Schwarz-Ungleichung}\lang{en}{Cauchy-Schwartz inequality}}).
+\end{enumerate}
+\lang{de}{
+\floatright{\href{https://www.hm-kompakt.de/video?watch=715}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{}
+\end{theorem}
+
+\begin{remark}
+\begin{enumerate}
+\item \lang{de}{
+Die erste Eigenschaft, entspricht genau der Anschauung, dass die Multiplikation eines Vektors mit 
+einer reellen Zahl $r$ die Länge um $|r|$ skaliert.
+}
+\lang{en}{
+The first property states that multiplication of a vector by a real number $r$ corresponds with 
+the scaling of the length of a vector's arrow by $|r|$
+}
+\item \lang{de}{
+Die Bedeutung der Dreiecksungleichung wird klar, wenn man sich die Definition der Summe 
+$\vec{v}+\vec{w}$ vor Augen führt:
+}
+\lang{en}{
+The meaning of the triangle inequality is clear upon seeing the sum $\vec{v}+\vec{w}$ represented 
+graphically:
+}
+
+\begin{center}
+\image{T109_VectorSum}
+\end{center}
+
+\lang{de}{\textit{Merkhilfe:} Der direkte Weg ist immer der Kürzeste.}
+\lang{en}{\textit{Just remember: the direct path is always the shortest.}}
+\item \lang{de}{
+Die Cauchy-Schwarz-Ungleichung wird im Abschnitt \link{winkel}{Winkel} wichtig werden.
+}
+\lang{en}{
+The Cauchy-Schwartz inequality becomes relevant in the \link{winkel}{next section}, which is about 
+angles.
+}
+\end{enumerate}
+\end{remark}
+
+\begin{example}
+\lang{de}{
+Zu dem Vektor $\vec{v}=\left( \begin{smallmatrix} 6 \\ 3\\ 2 \end{smallmatrix}\right)$ ist ein Vektor 
+gesucht, der in die gleiche Richtung zeigt, aber die Länge $1$ hat.
+\\\\
+Man sucht also einen Vektor der Form $r\cdot \vec{v}$ mit $r>0$ der Länge $1$. Mit obiger Regel 
+bedeutet das, dass $\left\| r\cdot \vec{v}\right\| = \left|r\right| \cdot \left\|\vec{v}\right\|=1$ 
+sein soll, d.h. (wegen $r>0$) dass $r=\frac{1}{\left\|\vec{v}\right\|}$.\\
+Wegen
+}
+\lang{en}{
+Consider the vector $\vec{v}=\left( \begin{smallmatrix} 6 \\ 3\\ 2 \end{smallmatrix}\right)$ and 
+suppose we want to find a vector that points in the same direction, but has length $1$.
+\\\\
+Hence we want a vector of the form $r\cdot \vec{v}$ with $r>0$ that has length $1$. Using the first 
+property from above, 
+$\left\| r\cdot \vec{v}\right\| = \left|r\right| \cdot \left\|\vec{v}\right\|=1$. 
+As $r>0$, we can rearrange, $r=\frac{1}{\left\|\vec{v}\right\|}$.\\
+Hence, since
+}
+\[ \left\|\vec{v}\right\|=\sqrt{6^2+3^2+2^2}=\sqrt{49}=7, \]
+\lang{de}{ist also $r=\frac{1}{7}$ und der gesuchte Vektor ist}
+\lang{en}{we have $r=\frac{1}{7}$ and the desired vector is}
+\[ \frac{1}{7}\cdot \begin{pmatrix} 6 \\ 3\\ 2 \end{pmatrix}=\begin{pmatrix} 6/7 \\ 3/7 \\ 2/7 \end{pmatrix}. \]
+\end{example}
+
+\begin{remark}
+\lang{de}{
+Das Bestimmen eines Vektors der Länge $1$ wie im vorherigen Beispiel wird bei den 
+\link{normalenformen}{Normalenformen} von Geraden im $\R^2$ oder von Ebenen im $\R^3$ benötigt, wo man
+einen sogenannten \emph{Einheitsnormalenvektor} bestimmen muss.
+}
+\lang{en}{
+The above strategy for finding a vector of length $1$ is used, for example, for finding the 
+\emph{unit normal vector} needed to find the \link{normalenformen}{normal form of a line or a plane}.
+}
+\end{remark}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\randint{v1}{-6}{6}
+			\randint{v2}{-6}{6}
+			\randint[Z]{v3}{-2}{2}
+			\randint{l}{2}{5}
+			\function[calculate]{nv2}{(v1)^2+(v2)^2+(v3)^2}
+			\function{s}{sqrt(nv2)}
+			\function[calculate]{q1}{(v1*l)}
+			\function[calculate]{q2}{(v2*l)}
+			\function[calculate]{q3}{(v3*l)}
+			\function{s1}{q1/s}
+			\function{s2}{q2/s}
+			\function{s3}{q3/s}
+		\end{variables}
+		
+			\text{\lang{de}{
+      Bestimmen Sie den Vektor $\vec{w}$, der die gleiche Richtung
+			wie der Vektor $\vec{v}=\begin{pmatrix} \var{v1}\\ \var{v2} \\ \var{v3}
+			\end{pmatrix}$ hat und $\left\| \vec{w} \right\|=\var{l}$ erfüllt.
+			\begin{table}[\class{no-padding}]
+			\rowspan[l][m]{3} Der Vektor ist
+      }
+      \lang{en}{
+      Determine the vector $\vec{w}$ that points in the same direction as the vector 
+      $\vec{v}=\begin{pmatrix} \var{v1}\\ \var{v2} \\ \var{v3} \end{pmatrix}$ and satisfies 
+      $\left\| \vec{w} \right\|=\var{l}$. \begin{table}[\class{no-padding}]\rowspan[l][m]{3} 
+      The vector is
+      }
+      $\vec{w}=\left(\begin{matrix} \\ \\ \\ \\ \end{matrix}\right.$ &  
+			\ansref & \rowspan[l][m]{3} $\left.\begin{matrix} \\ \\ \\ \\ \end{matrix}\right)$. & \\ 
+			\ansref & \\ 
+			\ansref & 
+			\end{table}\\
+			\lang{de}{(Verwenden Sie \emph{sqrt(..)} für die Wurzel einer Zahl.)}
+      \lang{en}{(Use \emph{sqrt(..)} for the root of a number.)}
+			}
+		
+		\begin{answer}
+			\solution{s1}
+			\checkAsFunction{x}{-2}{2}{20}
+		\end{answer}
+		\begin{answer}
+			\solution{s2}
+			\checkAsFunction{x}{-2}{2}{20}
+		\end{answer}
+		\begin{answer}
+			\solution{s3}
+			\checkAsFunction{x}{-2}{2}{20}
+		\end{answer}
+		\explanation{\lang{de}{
+    Um einen Vektor mit der gleichen Richtung und Länge $\var{l}$ zu bekommen, muss man	den 
+    ursprünglichen Vektor $\vec{v}$ mit 
+    $\frac{\var{l}}{\left\|\vec{v}\right\|}=\frac{\var{l}}{\var{s}}$ skalieren.
+    }
+    \lang{en}{
+    To get a vector pointing in the same direction, with length $\var{l}$, we scale the original 
+    vector $\vec{v}$ by $\frac{\var{l}}{\left\|\vec{v}\right\|}=\frac{\var{l}}{\var{s}}$.
+    }}
+	\end{quickcheck}
+
+\section{\lang{de}{Abstände von Punkten}\lang{en}{Distances between points}}
+
+\lang{de}{Der Abstand zwischen Punkten lässt sich bequem auf die Länge von Vektoren zurückführen.}
+\lang{en}{The distance between two points can be easily determined by finding the length of a vector.}
+
+\begin{theorem}\label{thm:abst_pkte}
+\lang{de}{
+Der \emph{Abstand} $d(Q,R)$ von zwei Punkten $Q$ und $R$ im $\R^n$ ist gleich der 
+L"ange des Verbindungsvektors $\overrightarrow{QR}$.\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=716}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{
+The \emph{distance} $d(Q,R)$ between two points $Q$ and $R$ in $\R^n$ is equal to the length of the 
+vector between them, $\overrightarrow{QR}$.\\
+}
+\end{theorem}
+
+%\begin{tabs*}[\initialtab{0}]
+%\tab{Erläuterung für den Fall $n=3$}
+%\begin{proof*}[Erklärung]
+\begin{proof*}[\lang{de}{Erläuterung für den Fall $n=3$}
+               \lang{en}{Explanation for the case $n=3$}]
+\begin{showhide}
+\lang{de}{
+Zur Erläuterung betrachten wir den Abstand $d(Q,R)$ von zwei Punkten $Q=(q_1;q_2;q_3)$ und 
+$R=(r_1;r_2;r_3)$ in $\mathbb{R}^3$.\\
+Dazu denken wir uns die Punkte $Q=(q_1;q_2;q_3)$ und $R=(r_1;r_2;r_3)$ als Eckpunkte eines 
+achsenparallelen Quaders im kartesischen Koordinatensystem. Der Abstand der beiden Punkte entspricht 
+dann der Raumdiagonale.
+}
+\lang{en}{
+Suppose we want to find the distance $d(Q,R)$ between two points $Q=(q_1;q_2;q_3)$ and 
+$R=(r_1;r_2;r_3)$ in $\mathbb{R}^3$.\\
+Consider the points $Q=(q_1;q_2;q_3)$ and $R=(r_1;r_2;r_3)$ as two corner points of a cuboid parallel 
+to the axes of the $3$-dimensional Cartesian coordinates, so that the distance between them is the 
+length of the diagonal of the cuboid.
+}\\\\
+\begin{center}
+\image{T109_Distance3D}
+\end{center}
+\lang{de}{
+Die Kantenlängen $a_1,a_2,a_3$ des Quaders entsprechen dem Betrag der Koordinatendifferenzen:
+}
+\lang{en}{
+The edge lengths $a_1,a_2,a_3$ of the cuboid correspond to the differences of each coordinate of the 
+two points:
+}
+\begin{align*}
+a_1&=q_1-p_1\\
+a_2&=q_2-p_2\\
+a_3&=q_3-p_3
+\end{align*}
+\lang{de}{
+Innerhalb des Quaders sind die Dreiecke $QAB$ sowie $QBR$ rechtwinklig, so dass man zur Berechnung 
+der Länge der Diagonlen $d$ sowie der Raumdiagonalen $\vec{QR}$ (eben des gesuchten Abstand von $Q$ 
+und $R$) den \ref[dreiecks-trig][Satz des Pythagoras]{satz-des-pythagoras} anwenden kann:
+}
+\lang{en}{The triangles $QAB$ and $QBR$ within the cuboid are right-angled, so to calculate the 
+length of the diagonal $d$ and the length of the cuboid's diagonal $\vec{QR}$ (which is the distance 
+between $Q$ and $R$ that we want), we simply apply the 
+\ref[dreiecks-trig][Pythagorean theorem]{satz-des-pythagoras}:
+}
+\begin{align*}
+\left\|\overrightarrow{QR}\right\|^2&=d^2+a_3^2\\
+d^2&=a_1^2+a_2^2
+\end{align*}
+\lang{de}{
+Nun setzt man die letzte Gleichung in die davor ein und ersetzt die Koordinatendifferenzen $a_i$:
+}
+\lang{en}{
+Now we substitute the second equation into the first and substitute in the differences in coordinates 
+for $a_i$:
+}
+\begin{align*}
+\left\|\overrightarrow{QR}\right\|^2&=d^2+a_3^2\\
+&=a_1^2+a_2^2+a_3^2\\
+&=(q_1-p_1)^2+(q_2-p_2)^2+(q_3-p_3)^2
+\end{align*}
+\lang{de}{
+Durch Wurzelziehen ergibt sich für den Abstand der beiden Punkte $Q$ und $R$ in $\mathbb{R}^3$:
+}
+\lang{en}{
+Taking the square root yields the distance between the two points $Q$ and $R$ in $\mathbb{R}^3$:
+}
+\[d(Q,R)=\left\|\overrightarrow{QR}\right\|=\sqrt{(q_1-p_1)^2+(q_2-p_2)^2+(q_3-p_3)^2}\]
+
+\lang{de}{
+Analog kann man sich den Sachverhalt für den Abstand zweier Punkte in $\mathbb{R}^n$ für $n\neq 3$ 
+herleiten.
+}
+\lang{en}{
+An analogous method may be used to find the distance between two points in $\mathbb{R}^n$ for any 
+$n\neq 3$.
+}
+\end{showhide}
+\end{proof*}
+%\end{tabs*}
+
+\begin{example}
+\lang{de}{Der Abstand der Punkte $Q=(\frac{1}{2};1)$ und $R=(\frac{3}{2};3)$ ist}
+\lang{en}{The distance between the points $Q=(\frac{1}{2};1)$ and $R=(\frac{3}{2};3)$ is}
+\[ d(Q,R)=\left\|\overrightarrow{QR}\right\|=\left\| \begin{pmatrix}\frac{3}{2}- \frac{1}{2}\\ 3-1 \end{pmatrix} \right\|
+= \sqrt{1^2+2^2}=\sqrt{5}. \]
+\end{example}
+
+
+\begin{example}
+\lang{de}{
+Im $\R^2$ ist das Viereck $ABCD$ mit den Eckpunkten $A=(0; 0)$, $B=(6; 1)$,  $C=(10; 6)$ und 
+$D=(4; 5)$ gegeben. Ist dieses Viereck ein Parallelogramm oder sogar eine Raute?
+}
+\lang{en}{
+Consider the quadrilateral $ABCD$ in $\R^2$ with corners at $A=(0; 0)$, $B=(6; 1)$,  $C=(10; 6)$ and 
+$D=(4; 5)$. Is this quadrilateral a parallelogram or a diamond?
+}
+
+\begin{center}
+\image{T109_Parallelogram}
+\end{center}
+
+\begin{tabs*}[\initialtab{0}]
+\tab{\lang{de}{Definition Parallelogramm}\lang{en}{Definition of a parallelogram}}
+\lang{de}{
+Ein ebenes Viereck ist ein \emph{Parallelogramm}, wenn eine der folgenden "aquivalenten Bedingungen erf"ullt ist:
+}
+\lang{en}{
+A quadrilateral (a shape on a plane with four corners/vertices and four straight sides/edges) is a 
+\emph{parallelogram} if one of the following equivalent conditions is met:
+}
+
+\begin{enumerate}
+\item \lang{de}{Gegen"uberliegende Seiten sind parallel.}
+      \lang{en}{Opposite edges are parallel to each other.}
+\item \lang{de}{
+      Die Diagonalen des Vierecks halbieren sich gegenseitig (d.h. ihr Schnittpunkt ist Mittelpunkt 
+      beider Diagonalen).
+      }
+      \lang{en}{
+      The diagonals of the quadrilateral intersect each other at their centres.
+      }
+\item \lang{de}{Zwei Seiten sind parallel und gleich lang.}
+      \lang{en}{Two of the quadrilateral's edges are parallel to each other and the same length.}
+\item \lang{de}{Gegen"uberliegende Seiten sind gleich lang.}
+      \lang{en}{Opposite edges are the same length as each other.}
+\item \lang{de}{Die Winkel an gegen"uberliegenden Ecken sind gleich gro"s.}
+      \lang{en}{The interior angles at opposite vertices are the same.}
+\item \lang{de}{Die Winkel an benachbarten Ecken erg"anzen sich zu $180^\circ$.}
+      \lang{en}{The angles at any two vertices that share an edge add up to $180^\circ$.}
+\end{enumerate}
+
+\lang{de}{
+\textbf{Bemerkung}: Abgesehen von 4. und 5. implizieren die Bedingungen sogar, dass das Viereck eben 
+ist.
+}
+\lang{en}{} %A quadrilateral is always assumed to be on a plane in English
+
+\tab{\lang{de}{Definition Raute}\lang{en}{Definition of a diamond}}
+\lang{de}{
+Eine \emph{Raute} (oder \emph{Rhombus}) ist ein Parallelogramm, dessen Seiten alle gleich lang sind.
+}
+\lang{en}{
+A \emph{diamond} (or \emph{rhombus}) is a parallelogram whose edges are all the same length.
+}
+\end{tabs*}
+
+\lang{de}{
+Um zu untersuchen, ob das Viereck ein Parallelogramm ist, ist am einfachsten zu untersuchen, 
+ob zwei Seiten parallel und gleich lang sind. Dies bedeutet n"amlich, dass die Vektoren 
+$\overrightarrow{AB}$ und $\overrightarrow{DC}$ gleich sein m"ussten (bzw. die  Vektoren 
+$\overrightarrow{AD}$ und $\overrightarrow{BC}$). 
+Wir haben
+}
+\lang{en}{
+The simplest method to determine whether $ABCD$ is a parallelogram is to see if two opposite 
+edges are parallel and have the same length. That is, if the vectors $\overrightarrow{AB}$ and 
+$\overrightarrow{DC}$ are the same (or the vectors $\overrightarrow{AD}$ and $\overrightarrow{BC}$). 
+We have
+}
+\[ \overrightarrow{AB}=\left( \begin{smallmatrix} 6-0 \\ 1-0 \end{smallmatrix} \right)
+=\left( \begin{smallmatrix} 6 \\ 1 \end{smallmatrix} \right) \quad
+\text{und}\quad  \overrightarrow{DC}=\left( \begin{smallmatrix} 10-4 \\ 6-5 \end{smallmatrix} \right)
+=\left( \begin{smallmatrix} 6 \\ 1 \end{smallmatrix} \right). \]
+\lang{de}{
+Also ist das Viereck $ABCD$ ein Parallelogramm.
+\\\\
+Um zu sehen, ob es eine Raute ist, muss man noch testen, ob $d(A,B)=d(A,D)$ ist, d.h. ob 
+$\left\|\overrightarrow{AB}\right\|=\left\|\overrightarrow{AD}\right\|$ gilt.
+}
+\lang{en}{
+Hence the quadrilateral $ABCD$ is a parallelogram.
+\\\\
+To determine if it is a diamond, we also check if $d(A,B)=d(A,D)$, that is, if 
+$\left\|\overrightarrow{AB}\right\|=\left\|\overrightarrow{AD}\right\|$:
+}
+\[ \left\|\overrightarrow{AB}\right\|= 
+     \sqrt{6^2+1^2}=\sqrt{37} 
+       \quad \text{\lang{de}{und}\lang{en}{and}} \quad 
+         \left\|\overrightarrow{AD}\right\| = 
+           \left\|\left( \begin{smallmatrix} 4 \\ 5 \end{smallmatrix} \right) \right\| = 
+             \sqrt{4^2+5^2}=\sqrt{41}. \]
+\lang{de}{Die Seiten sind verschieden lang, also handelt es sich um keine Raute.}
+\lang{en}{These edges have different lengths, so $ABCD$ is not a diamond.}
+
+\end{example}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\randint{a1}{-6}{1}
+			\randint{a2}{0}{3}
+			\randint{b1}{3}{6}
+			\randint{b2}{-3}{1}
+			\randint{c1}{0}{3}
+			\randint{c2}{3}{6}
+			\randint[Z]{v3}{-2}{2}
+			\function[calculate]{nab2}{(a1-b1)^2+(a2-b2)^2}
+			\function[calculate]{nac2}{(a1-c1)^2+(a2-c2)^2}
+			\function[calculate]{nbc2}{(c1-b1)^2+(c2-b2)^2}
+			\function{ab}{sqrt(nab2)}
+			\function{ac}{sqrt(nac2)}
+			\function{bc}{sqrt(nbc2)}
+		\end{variables}
+		
+			\text{\lang{de}{
+      Bestimmen Sie die Seitenlängen des Dreiecks $ABC$ mit
+			$A=(\var{a1};\var{a2})$, $B=(\var{b1};\var{b2})$ und $C=(\var{c1};\var{c2})$.\\
+			Die Seitenlängen sind
+			$\overline{AB}=$\ansref, $\overline{AC}=$\ansref und $\overline{BC}=$\ansref.\\
+			(Verwenden Sie \emph{sqrt(..)} für die Wurzel einer Zahl.)
+      }
+      \lang{en}{
+      Determine the edge lengths of the triangle $ABC$ with 
+      $A=(\var{a1};\var{a2})$, $B=(\var{b1};\var{b2})$ and $C=(\var{c1};\var{c2})$.\\
+      The edge lengths are 
+      $\overline{AB}=$\ansref, $\overline{AC}=$\ansref and $\overline{BC}=$\ansref.\\
+      (Use \emph{sqrt(..)} for the root of a number.)
+      }}
+		
+		\begin{answer}
+			\solution{ab}
+			\checkAsFunction{x}{-2}{2}{20}
+		\end{answer}
+		\begin{answer}
+			\solution{ac}
+			\checkAsFunction{x}{-2}{2}{20}
+		\end{answer}
+		\begin{answer}
+			\solution{bc}
+			\checkAsFunction{x}{-2}{2}{20}
+		\end{answer}
+		\explanation{\lang{de}{
+    Die Seitenlängen sind genau die Abstände der entsprechenden Eckpunkte, also gleich der
+		Länge der Verbindungsvektoren. Also ist 
+    }
+    \lang{en}{
+    The edge lengths are precisely the distances between the connected vertices, so they are equal 
+    to the lengths of the vectors connecting the vertices.
+    }
+    $\overline{AB}=\left\|\overrightarrow{AB}\right\|=\var{ab}$,
+		$\overline{AC}=\left\|\overrightarrow{AC}\right\|=\var{ac}$ \lang{de}{und}\lang{en}{and} 
+		$\overline{BC}=\left\|\overrightarrow{BC}\right\|=\var{bc}$.
+		}
+	\end{quickcheck}
+
+
+\end{visualizationwrapper}
+
+
+\end{content}

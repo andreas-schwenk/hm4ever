@@ -1,0 +1,243 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A03: AWA}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A03: AWA}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21956}{Ticket 21956}
+\end{block}
+\usepackage{mumie.genericproblem}
+
+\begin{block}[annotation]
+Pool mit zwei Aufgaben zu separierten, nicht linearen Anfangswertproblemen mit unterschiedlichen
+Koeffizienten.
+
+Differenziertes Feedback enthalten, verschiedene mögliche Wahlen der Funktionen (können sich um multiplikative Konstanten unterscheiden) berücksichtigt.
+\end{block}
+\begin{problem}
+\randomquestionpool{1}{2}
+%% Erste Aufgabe: g=exp(-bx), f=alpha x+beta, also DGL y'=f *g(y) mit AW y(0)=y0
+	\begin{question}
+		
+		\begin{variables}
+    %Anfangswert:
+    %x0=0
+    \randint[Z]{y0}{1}{5}
+    %Koeffizienten von g
+    \randint[Z]{b}{2}{10}
+    %Funktion g in y
+    \function{g}{exp(-b*y)}
+    %Koeffizient von f
+    \randint[Z]{alpha}{1}{10}
+    \randint[Z]{beta}{-10}{10}
+    \randadjustIf{beta}{beta^2-2*alpha*e^(b*y0)>0}%Stellt sicher, dass Diskriminante<0, also das Polynom im ln-Argument der Lösung keine Nullstellen hat.
+    %Funktion f
+    \function{f}{alpha*x+beta}
+    % Stammfunktion H von 1/g
+    \function{H}{1/b*exp(b*y)-1/b*exp(b*y0)}
+    %Stammfunktion F von f:
+    \function{F}{alpha/2*x^2+beta*x}
+    %Lösung selbst:
+    \function{phi}{1/b*ln(b*(alpha/2*x^2+beta*x)+exp(b*y0))}
+    %Intervallgrenzen von J' und I'
+    \function{l1}{-infty}
+    \function{l2}{infty}
+    \function{l3}{-1/b*exp(b*y0)}
+    \function{null}{0}
+        \end{variables}
+        
+      \lang{de}{\text{Lösen Sie das Anfangswertproblem $y'=(\var{f})\cdot \var{g}\:$ mit $y(0)=\var{y0}$.
+      \\
+      (a) Geben Sie dazu zunächst  Funktionen $f$ und $g$ an, so dass die DGL die Form $y'=f\cdot g(y)$ hat, 
+      sowie die durch das Problem bestimmten Stammfunktionen $F$ von $f$ und $H$ von $\frac{1}{g}$.\\
+      $f(x)=$\ansref mit $F(x)=$\ansref, sowie $g(y)=$\ansref mit $H(y)=$\ansref.
+      \\
+      (b) Bestimmen Sie nun die Lösung $\phi$ des Anfangswertproblems $\phi(x)=$\ansref.
+       \\
+       (c) Bestimmen Sie das maximale Definitionsintervall $J'$ von $H$, sein Bild $H(J')$ und das maximale Definitionsintervall $I'$
+       der Lösung $\phi$.
+       $J'=$\ansref, $H(J')=$\ansref, $I'=$\ansref.
+       }}
+      \explanation[NOT[edited]]{Es handelt sich um ein separierbares Anfangswertproblem.}
+    %Teil (a)
+	\begin{answer}    
+        \type{input.function}
+		\solution{f}
+        \inputAsFunction{x}{f1}
+        \checkFuncForZero{f1-f}{-1}{1}{10}
+        \explanation[edited]{Ihre Wahl von $f$ ist nicht die einfachste, möglicherweise aber trotzdem korrekt.
+        Ihre Wahl wird im folgenden berücksichtigt.}
+     \end{answer}
+     \begin{answer}
+        \type{input.function}
+        \solution{F}
+        \inputAsFunction{x}{F1}
+        % Prüfe, ob F1 mit Erwartung übereinstimmt oder  ausgehend von der Eingabe f1 die korrekte Stammfunktion mit Wert 0 in x0=0 ist:
+        \checkFuncForZero{(F-F1)*(|D[F1,x]-f1|+|F1[null,x]|)}{-1}{1}{10}
+        \explanation[edited]{Die Stammfunktion $F$ ergibt sich eindeutig durch die Forderung $F(x_0)=0$.}
+     \end{answer}
+     \begin{answer}
+        \type{input.function}
+        \solution{g}
+        \inputAsFunction{y}{g1}
+        % Prüfe, ob g1 mit Erwartung übereinstimmt oder eine mit Eingabe f1 konsistente Wahl ist:
+        \checkFuncForZero{(g-g1)*(f*g-f1*g1)}{-1}{1}{10}
+        \explanation[edited]{Ihre Wahl von $g$ ist nicht kompatibel mit Ihrer Wahl von $f$.}
+     \end{answer}
+     \begin{answer}
+        \type{input.function}
+        \solution{H}
+        \inputAsFunction{y}{H1}
+        % Prüfe, ob H1 mit Erwartung übereinstimmt oder ausgehend von der Eingabe g1  die korrekte Stammfunktion mit Wert 0 in y0 ist:
+        \checkFuncForZero{(H-H1)*(|D[H1,y]-1/g1|+|H1[y0,y]|)}{-1}{1}{10}     
+        \explanation[edited]{Die Stammfunktion $H$ ergibt sich eindeutig durch die Forderung $H(y_0)=0$.}
+	\end{answer}
+    %Teil (b)
+    \begin{answer}    
+        \type{input.function}
+        \solution{phi}
+        \inputAsFunction{x}{phi1}
+        \checkFuncForZero{phi-phi1}{-1}{1}{10}
+        \explanation[edited]{Die Lösung $\phi$ eines separierbaren Anfangswertproblems ergibt sich als $H^{-1}\circ F(x)$.}
+    \end{answer}
+    %Teil (c)
+    \begin{answer}    
+        \type{input.interval}
+        \solution{(l1;l2)}
+        \explanation{Das Definitionsintervall $J'$ von $H$ ist das größte Intervall, auf dem $g$ definiert ist und das $y_0$ enthält, aber keine Nullstelle von $g$.}   
+     \end{answer}  
+     \begin{answer}    
+        \type{input.interval}
+        \solution{(l3;l2)}
+     \end{answer} 
+     \begin{answer}    
+        \type{input.interval}
+        \solution{(l1;l2)}
+        \explanation{Das maximale Lösungsintervall $I'$ von $\phi$ ist maximal mit der Eigenschaft, dass $x_0\in I'$ und $F(I')\subset H(J')$.}
+     \end{answer} 
+    \end{question}
+    
+    
+%% Zweite Aufgabe: g=1/(y^2^k), f=a*exp(bx), also DGL y'=f *g(y) mit AW y(0)=y0
+	\begin{question}
+		
+		\begin{variables}
+    %Anfangswert:
+    %x0=0; y0 soll groß genug sein, so dass das Existenzintervall nicht zu schwierig wird:
+    \randint[Z]{y0}{2}{10}
+    %Exponent von g
+    \randint[Z]{k}{1}{10}
+    \function[normalize]{l}{2*k+1}
+    %Funktion g in y
+    \function[normalize]{g}{1/y^(2*k)}
+    %Koeffizient von f: Es soll a<=b gelten, damit Existenzintervall nicht zu schwierig wird
+    \randint[Z]{a}{1}{5}
+    \randint[Z]{b}{5}{10}
+    %Funktion f
+    \function{f}{a*exp(b*x)}
+    % Stammfunktion H von 1/g
+    \function{H}{1/l*(y^l-y0^l)}
+    %Stammfunktion F von f:
+    \function{F}{a/b*(exp(b*x)-1)}
+    %Lösung selbst:
+    \function{phi}{(l*a/b*(exp(b*x)-1)+y0^l)^(1/l)}
+    %Intervallgrenzen von J' und I'
+    \function{l1}{-infty}
+    \function{l2}{infty}
+    \function{l3}{-1/l*y0^l}
+    \function{null}{0}
+        \end{variables}
+        
+      \lang{de}{\text{Lösen Sie das Anfangswertproblem $y'=\var{f}\cdot \var{g}\:$ mit $y(0)=\var{y0}$.
+      \\
+      (a) Geben Sie dazu zunächst  Funktionen $f$ und $g$ an, so dass die DGL die Form $y'=f\cdot g(y)$ hat, 
+      sowie die durch das Problem bestimmten Stammfunktionen $F$ von $f$ und $H$ von $\frac{1}{g}$.\\
+      $f(x)=$\ansref mit $F(x)=$\ansref, sowie $g(y)=$\ansref mit $H(y)=$\ansref.
+      \\
+      (b) Bestimmen Sie nun die Lösung $\phi$ des Anfangswertproblems $\phi(x)=$\ansref.
+       \\
+       (c) Bestimmen Sie das maximale Definitionsintervall $J'$ von $H$, sein Bild $H(J')$ und das maximale Definitionsintervall $I'$
+       der Lösung $\phi$.
+       $J'=$\ansref, $H(J')=$\ansref, $I'=$\ansref.
+       }}
+      \explanation[NOT[edited]]{Es handelt sich um ein separierbares Anfangswertproblem.}
+    %Teil (a)
+	\begin{answer}    
+        \type{input.function}
+		\solution{f}
+        \inputAsFunction{x}{f1}
+        \checkFuncForZero{f1-f}{-1}{1}{10}
+        \explanation[edited]{Ihre Wahl von $f$ ist nicht die einfachste, möglicherweise aber trotzdem korrekt.
+        Ihre Wahl wird im folgenden berücksichtigt.}
+     \end{answer}
+     \begin{answer}
+        \type{input.function}
+        \solution{F}
+        \inputAsFunction{x}{F1}
+        % Prüfe, ob F1 mit Erwartung übereinstimmt oder  ausgehend von der Eingabe f1 die korrekte Stammfunktion mit Wert 0 in x0=0 ist:
+        \checkFuncForZero{(F-F1)*(|D[F1,x]-f1|+|F1[null,x]|)}{-1}{1}{10}
+        \explanation[edited]{Die Stammfunktion $F$ ergibt sich eindeutig durch die Forderung $F(x_0)=0$.}
+     \end{answer}
+     \begin{answer}
+        \type{input.function}
+        \solution{g}
+        \inputAsFunction{y}{g1}
+        % Prüfe, ob g1 mit Erwartung übereinstimmt oder eine mit Eingabe f1 konsistente Wahl ist:
+        \checkFuncForZero{(g-g1)*(f*g-f1*g1)}{-1}{1}{10}
+        \explanation[edited]{Ihre Wahl von $g$ ist nicht kompatibel mit Ihrer Wahl von $f$.}
+     \end{answer}
+     \begin{answer}
+        \type{input.function}
+        \solution{H}
+        \inputAsFunction{y}{H1}
+        % Prüfe, ob H1 mit Erwartung übereinstimmt oder ausgehend von der Eingabe g1  die korrekte Stammfunktion mit Wert 0 in y0 ist:
+        \checkFuncForZero{(H-H1)*(|D[H1,y]-1/g1|+|H1[y0,y]|)}{-1}{1}{10}     
+        \explanation[edited]{Die Stammfunktion $H$ ergibt sich eindeutig durch die Forderung $H(y_0)=0$.}
+	\end{answer}
+    %Teil (b)
+    \begin{answer}    
+        \type{input.function}
+        \solution{phi}
+        \inputAsFunction{x}{phi1}
+        \checkFuncForZero{phi-phi1}{-1}{1}{10}
+        \explanation[edited]{Die Lösung $\phi$ eines separierbaren Anfangswertproblems ergibt sich als $H^{-1}\circ F(x)$.}
+    \end{answer}
+    %Teil (c)
+    \begin{answer}    
+        \type{input.interval}
+        \solution{(null;l2)}
+        \explanation{Das Definitionsintervall $J'$ von $H$ ist das größte Intervall, auf dem $g$ definiert ist und das $y_0$ enthält, aber keine Nullstelle von $g$.}   
+     \end{answer}  
+     \begin{answer}    
+        \type{input.interval}
+        \solution{(l3;l2)}
+     \end{answer} 
+     \begin{answer}    
+        \type{input.interval}
+        \solution{(l1;l2)}
+        \explanation{Das maximale Lösungsintervall $I'$ von $\phi$ ist maximal mit der Eigenschaft, dass $x_0\in I'$ und $F(I')\subset H(J')$.}
+     \end{answer} 
+    \end{question}    
+\end{problem}
+\embedmathlet{gwtmathlet}
+
+\end{content}

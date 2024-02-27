@@ -1,0 +1,84 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A08: Cauchy-Produkt}
+    \lang{en}{Problem 8}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/18132}{Ticket 18132}
+\end{block}
+\usepackage{mumie.genericproblem}
+\lang{de}{\title{A08: Cauchy-Produkt}}
+\lang{en}{\title{Problem 8}}
+
+\begin{problem}
+  \begin{question}
+    \begin{variables}
+    \function{s}{n*(n+1)/2^(n+1)}
+    \number{n0}{0}
+    \substitute{c0}{s}{n}{n0}
+    \number{n1}{1}
+    \substitute{c1}{s}{n}{n1}
+    \number{n2}{2}
+    \substitute{c2}{s}{n}{n2}
+    \end{variables}
+    \type{input.generic}
+    \field{rational}
+    \text{Gegeben sind die Reihen $\sum_{n=0}^\infty {\frac{n}{2^n}}$ und 
+          $\sum_{n=0}^\infty {\frac{1}{2^n}}$. Berechnen Sie für das Cauchy-Produkt 
+          $\sum_{n=0}^\infty c_n$ dieser Reihen die ersten Koeffizienten und geben Sie anschließend die allgemeine Formel für $c_n$ an.\\
+          $c_0=$ \ansref,\\
+          $c_1=$ \ansref,\\
+          $c_2=$ \ansref,\\
+          $c_n=$ \ansref.}
+	
+    \begin{answer}
+    \type{input.number}
+        %\text{$c_0=$ }
+        \solution{c0}
+    \end{answer}
+    
+    \begin{answer}
+    \type{input.number}
+        %\text{$c_0=$ }
+        \solution{c1}
+    \end{answer}
+    
+    \begin{answer}
+    \type{input.number}
+        %\text{$c_0=$ }
+        \solution{c2}
+    \end{answer}
+	\begin{answer}
+    \type{input.function}
+        		%\text{$c_n=$ }
+		\solution{s}
+        \checkAsFunction{n}{-10}{10}{100}
+	\end{answer}
+    \explanation{Die Formel für die Koeffizienten 
+        des Cauchy-Produkts ist $c_n=\sum_{k=0}^n \frac{k}{2^k}\cdot\frac{1}{2^{n-k}}
+        =\frac{1}{2^n}\cdot\sum_{k=1}^nk=\frac{n(n+1)}{2^{n+1}}$.}
+    
+  \end{question}
+
+\end{problem}
+
+\embedmathlet{mathlet}
+\end{content}

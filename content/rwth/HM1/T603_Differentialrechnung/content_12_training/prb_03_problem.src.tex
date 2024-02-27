@@ -1,0 +1,219 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A03: Extremstellen I}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A03: Extremstellen I}}
+\lang{en}{\title{A03: Extreme points I}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24070}{Ticket 24070}
+\end{block}
+\usepackage{mumie.genericproblem}
+\usepackage{mumie.ombplus}
+
+\begin{block}[annotation]
+Kopie: hm4mint/T106_Differentialrechnung/training 10 
+
+Im Ticket-System: \href{http://team.mumie.net/issues/9475}{Ticket 9475}
+\end{block}
+
+
+\begin{problem}
+  	
+\randomquestionpool{1}{1}
+\randomquestionpool{2}{2}
+\randomquestionpool{3}{4}
+\randomquestionpool{5}{5}
+  	
+\begin{variables}
+	\randint[Z]{s}{-1}{1}
+    \randint{p}{2}{8}
+	\randint{q}{1}{9}
+	\randint[Z]{r}{-9}{9}
+	\function[calculate]{v}{s*p}
+	\function[calculate]{w}{2*p*q}
+	\function[calculate]{ext}{-s*q}
+	\function{f}{v * x^2  + w * x + r} 
+\end{variables}
+
+%Frage 1 von 5
+\begin{question}
+	\lang{de}{
+		\text{Gegeben ist die Funktion $f(x)=\var{f}$. Wo hat $f$ eine station\"{a}re Stelle?}
+	    \explanation{Zur Bestimmung der stationären Stellen müssen die Nullstellen der ersten 
+        Ableitung bestimmt werden. In dieser Aufgabe muss also ein Polynom abgeleitet werden.}
+	}
+	\lang{en}{
+		\text{Given the function $f(x)=\var{f}$, where does $f$ have a critical point?}
+	}
+	\type{input.number}
+	\begin{answer}
+  		\lang{de}{\text{$f$ hat eine stationäre Stelle in $x_0$ = }}
+   		\lang{en}{\text{$f$ has a critical point at $x_0$ =}}
+		\solution{ext}
+	\end{answer}
+\end{question}
+
+%Frage 2 von 5
+\begin{question}
+    \lang{de}{
+		\text{Liegt in dieser stationären Stelle $x_0$ ein Extremum vor? Falls ja, welcher Art ist es?}
+		\explanation{Um zu prüfen, ob die stationären Stellen Extrema sind kann geprüft werden, ob die erste Ableitung
+        in den Punkten das Vorzeichen wechselt. Eine andere Möglichkeit wäre es zu prüfen, ob die zweite Ableitung 
+        in den stationären Stellen poisitiv oder negativ ist.}
+	}
+	\lang{en}{
+		\text{Is the above critical point $x_0$ an extremum? If so, what type of extremum is it?}
+	}
+    \type{mc.unique}
+	\begin{choice}
+		\lang{de}{\text{In $x_0$ liegt kein Extremum vor.}}
+		\lang{en}{\text{$x_0$ is not an extremum.}}
+  		\solution{false}
+	\end{choice}
+	\begin{choice}
+   		\lang{de}{\text{In $x_0$ liegt ein lokales Minimum vor.}}
+   		\lang{en}{\text{$x_0$ is a local minimum.}}
+   		\solution{compute}
+ 		\iscorrect{s}{=}{1}
+ 	\end{choice}
+ 	\begin{choice}
+ 		\lang{de}{\text{In $x_0$ liegt ein lokales Maximum vor.}}
+   		\lang{en}{\text{$x_0$ is a local maximum.}}	
+   		\solution{compute}
+ 		\iscorrect{s}{=}{-1}
+ 	\end{choice}
+\end{question}
+	
+%Frage 3 von 5
+\begin{question}
+	\lang{de}{
+		\text{Gegeben $f(x) = \frac{1}{3}x^3-\frac{\var{vfe}}{2}x^2+\var{vfz}x+\var{idc}$. Wo hat $f$ ein lokales Maximum, wo ein lokales
+		 Minimum?}
+		\explanation{Zur Bestimmung der stationären Stellen müssen die Nullstellen der ersten 
+        Ableitung bestimmt werden. In dieser Aufgabe muss also ein Polynom abgeleitet werden.
+        Um zu prüfen, ob die stationären Stellen Extrema sind kann geprüft werden, ob die erste Ableitung
+        in den Punkten das Vorzeichen wechselt. Eine andere Möglichkeit wäre es zu prüfen, ob die zweite Ableitung 
+        in den stationären Stellen poisitiv oder negativ ist.}
+	}
+	\lang{en}{
+		\text{Let $f(x) = \frac{1}{3}x^3-\frac{\var{vfe}}{2}x^2+\var{vfz}x+\var{idc}$. Where does $f$ have a local maximum? A local minimum?}
+	}
+	\begin{variables}
+        \randint{a}{1}{2}
+		\randint[Z]{b}{3}{4}
+ 		\randint{c}{1}{9}
+		\function[calculate]{ida}{a}
+		\function[calculate]{idb}{b}
+		\function[calculate]{idc}{c}
+		\function[calculate]{eins}{2*a}
+		\function[calculate]{zwei}{2*b+1}
+		\function[calculate]{vfe}{2*a+2*b+1}
+		\function[calculate]{vfz}{2*a*(2*b+1)}
+	\end{variables}
+	\type{input.number}
+	\begin{answer}
+    	\lang{de}{\text{ $f$ hat ein lokales Maximum in:}}
+       	\lang{en}{\text{$f$ has a local maximum at $x=$}}
+		\solution{eins}
+	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{ $f$ hat ein lokales Minimum in:}}
+       	\lang{en}{\text{$f$ has a local minimum at $x=$}}
+		\solution{zwei}			
+	\end{answer}
+\end{question}
+	
+%Frage 4 von 5
+\begin{question}
+	\lang{de}{
+		\text{Gegeben $f(x) = -\frac{1}{3}x^3+\frac{\var{vfe}}{2}x^2-\var{vfz}x-\var{idc}$. Wo hat $f$ ein lokales Maximum, wo ein lokales
+		 Minimum?}
+		\explanation{Zur Bestimmung der stationären Stellen müssen die Nullstellen der ersten 
+        Ableitung bestimmt werden. In dieser Aufgabe muss also ein Polynom abgeleitet werden.
+        Um zu prüfen, ob die stationären Stellen Extrema sind kann geprüft werden, ob die erste Ableitung
+        in den Punkten das Vorzeichen wechselt. Eine andere Möglichkeit wäre es zu prüfen, ob die zweite Ableitung 
+        in den stationären Stellen poisitiv oder negativ ist.}
+	}
+	\lang{en}{
+		\text{Let $f(x) = -\frac{1}{3}x^3+\frac{\var{vfe}}{2}x^2-\var{vfz}x-\var{idc}$. Where does $f$ have a local maximum? A local minimum?}
+	}
+	\begin{variables}
+        \randint{a}{1}{2}
+		\randint[Z]{b}{3}{4}
+ 		\randint{c}{1}{9}
+		\function[calculate]{ida}{a}
+		\function[calculate]{idb}{b}
+		\function[calculate]{idc}{c}
+		\function[calculate]{eins}{2*a}
+		\function[calculate]{zwei}{2*b+1}
+		\function[calculate]{vfe}{2*a+2*b+1}
+		\function[calculate]{vfz}{2*a*(2*b+1)}
+	\end{variables}
+	\type{input.number}
+	\begin{answer}
+  		\lang{de}{\text{ $f$ hat ein lokales Maximum in:}}
+   		\lang{en}{\text{$f$ has a local maximum at $x=$}}
+		\solution{zwei}			
+	\end{answer}
+	\begin{answer}
+  		\lang{de}{\text{ $f$ hat ein lokales Minimum in:}}
+   		\lang{en}{\text{$f$ has a local minimum at $x=$}}
+		\solution{eins}		
+	\end{answer}
+\end{question}
+	
+%Frage 5 von 5
+\begin{question}
+	\lang{de}{
+		\text{Gegeben sei $f(x)=\var{vfe}x^4-\var{vfz}x+\var{idc}$. Wo hat $f$ ein lokales Minimum?}
+		\explanation{Zur Bestimmung der stationären Stellen müssen die Nullstellen der ersten 
+        Ableitung bestimmt werden. In dieser Aufgabe muss also ein Polynom abgeleitet werden.
+        Um zu prüfen, ob die stationären Stellen Extrema sind kann geprüft werden, ob die erste Ableitung
+        in den Punkten das Vorzeichen wechselt. Eine andere Möglichkeit wäre es zu prüfen, ob die zweite Ableitung 
+        in den stationären Stellen poisitiv oder negativ ist.}
+	}
+	\lang{en}{
+	 	\text{Let $f(x)=\var{vfe}x^4-\var{vfz}x+\var{idc}$. Where does $f$ have a local minimum?}
+	}
+	\begin{variables}
+        \randint{a}{1}{3}
+		\randint[Z]{b}{2}{4}
+ 		\randint{c}{1}{9}
+		\function[calculate]{idc}{c}
+		\function[calculate]{vfe}{2*a^3}
+		\function[calculate]{vfz}{b^3}
+		\function[calculate]{loes}{0.5*b*a^(-1)}
+	\end{variables}
+	\type{input.number}
+	\begin{answer}
+  		\lang{de}{\text{ $f$ hat ein lokales Minimum in:}}
+   		\lang{en}{\text{$f$ has a local minimum at $x=$}}
+		\solution{loes}				
+	\end{answer}
+\end{question}
+	
+	
+\end{problem}
+
+\embedmathlet{mathlet}
+\end{content}
+

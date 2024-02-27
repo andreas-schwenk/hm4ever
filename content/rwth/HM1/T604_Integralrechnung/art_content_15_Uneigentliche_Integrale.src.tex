@@ -1,0 +1,714 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Uneigentliche Integrale}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T604_Area_D.meta.xml}{T604_Area_D}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T301_Differenzierbarkeit/g_art_content_02_ableitungsregeln.meta.xml}{content_02_ableitungsregeln}
+    \link{generic_article}{content/rwth/HM1/T304_Integrierbarkeit/g_art_content_08_integral_eigenschaften.meta.xml}{int-barkeit}
+    \link{generic_article}{content/rwth/HM1/T304_Integrierbarkeit/g_art_content_09_integrierbare_funktionen.meta.xml}{stammfunktion}
+    \link{generic_article}{content/rwth/HM1/T305_Integrationstechniken/g_art_content_12_substitutionsregel.meta.xml}{substitution}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericvisualization}
+\ombchapter{4}
+\ombarticle{3}
+
+\begin{visualizationwrapper}
+\lang{de}{\title{Uneigentliche Integrale}}
+\lang{en}{\title{Improper integrals}}
+ 
+
+\begin{block}[annotation]
+
+\end{block}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22701}{Ticket 22701}
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+\section{
+\lang{de}{Uneigentliche Integrale}
+\lang{en}{Improper integrals}
+}
+\lang{de}{
+Wir haben in den vorigen Kapiteln Integrale $\int_a^b f(x)\, dx$ kennengelernt und mit Hilfe von Stammfunktionen
+berechnet. 
+Eine wichtige Voraussetzung war, dass  das Intervall $[a;b]$ ein endliches Intervall ist und dass $f$ auf dem ganzen Intervall $[a;b]$ definiert und beschränkt ist.
+In diesem Abschnitt wollen wir den Begriff etwas erweitern und auch Integrale über unendlichen Intervallen definieren sowie Integrale, bei denen die Funktion $f$ unbeschränkt oder an einer Integralgrenze gar nicht definiert ist.
+Da diese keine Integrale im eigentlichen Sinn sind, heißen sie \emph{uneigentliche Integrale}.
+}
+\lang{en}{
+In the previous chapters, we introduced integrals
+$\int_a^b f(x) \, dx$ and learned how to calculate them
+by means of antiderivatives.
+Up to now, we have always required the interval $[a, b]$ to be
+finite and $f$ to be defined and bounded on the entire interval $[a, b]$.
+In this chapter, we will relax those conditions and define both
+integrals over infinite intervals and integrals of functions $f$
+that may be unbounded or even undefined at the bounds of integration.
+Since these are not true integrals in the strict sense,
+we call them \emph{improper integrals}.
+}
+
+
+\begin{definition}
+ 
+\lang{de}{Das \notion{uneigentliche Integral} der Funktion $f$ \"uber dem Intervall $[a;\infty)$ ist definiert als Grenzwert}
+\lang{en}{
+The \notion{improper integral} of the function $f$ over the integral $[a, \infty)$
+is defined as the limit
+}
+  \\
+\[ \int_a^\infty f\left(x\right) \; dx \coloneq
+ \lim\limits_{d \to  \infty} \int_a^d f\left(x\right) \; dx,
+ \]
+ \lang{de}{
+ sofern der Grenzwert und die Integrale über dem Intervall $[a; d]$ existieren. 
+ (Andernfalls sagen wir: Das uneigentliche Integral $\int_a^\infty f\left(x\right) \; dx$ existiert nicht.)
+ }
+ \lang{en}{
+  if both the integrals over the intervals $[a, d]$ and the limit exist.
+  (Otherwise, we say that the improper integral $\int_a^\infty f\left(x\right) \; dx$ does not exist.)
+ }
+
+\lang{de}{
+Auf die gleiche Weise definieren wir das uneigentliche Integral
+  \[ \int_{-\infty}^b f(x)\, dx :=\lim_{a\to -\infty}  \int_{a}^b f(x)\, dx, \]
+  sofern Integrale und Grenzwert auf der rechten Seite existieren, sowie 
+\[  \int_{-\infty}^\infty f(x)\, dx:= \int_{-\infty}^0 f(x)\, dx +   \int_{0}^\infty f(x)\, dx. \]
+Statt das Integral an der Stelle $0$ aufzuteilen, kann auch jede andere reelle Zahl gewählt werden.
+}
+\lang{en}{
+Similarly, we define the improper integral
+\[ \int_{-\infty}^b f(x)\, dx :=\lim_{a\to -\infty}  \int_{a}^b f(x)\, dx, \]
+if the integrals and limit on the right-hand side exist, as well as
+\[  \int_{-\infty}^\infty f(x)\, dx:= \int_{-\infty}^0 f(x)\, dx +   \int_{0}^\infty f(x)\, dx. \]
+The integral can also be split at any other real number,
+not only at $0$.
+}
+
+
+ %\floatright{\href{https://www.hm-kompakt.de/video?watch=609}{\image[75]{00_Videobutton_schwarz}}}\\\\
+\end{definition}
+
+\lang{de}{
+Die folgende Bemerkung gibt eine Bedingung, die für die Existenz eines uneigentlichen Integrals
+wie in der Definition erfüllt sein muss. 
+}
+\lang{en}{
+The remark below gives a necessary criterion for an 
+improper integrals in the sense of the above definition to exist.
+}
+
+\begin{remark}
+\lang{de}{
+Damit für eine stetige Funktion $f:[a;\infty)\to\R$ das uneigentliche Integral $\int_a^\infty f(x)\, dx$ existieren kann,
+muss notwendigerweise $\lim_{x\to\infty}f(x) = 0$ gelten.
+Ansonsten kann der Flächeninhalt unter dem Graphen beliebig groß werden.
+In den nächsten Beispielen betrachten wir uneigentliche Integrale von Funktionen mit $\lim_{x\to\infty}f(x) = 0$.
+Wir werden sehen, dass die Bedingung für die Existenz nicht ausreicht. Dies ist vergleichbar mit der Reihenkonvergenz.
+}
+\lang{en}{
+For the improper integral $\int_a^{\infty} f(x) \, dx$
+of a continuous function $f : [a, \infty) \to\R$ to exist,
+we must have $\lim_{x\to\infty}f(x) = 0$.
+Otherwise, the area under the graph will become
+infinitely large. In the examples below, we will
+consider the improper integrals of functions with
+$\lim_{x\to\infty} f(x) = 0$ and we will see that
+this condition is not sufficient. The situation
+is comparable to the convergence of series.
+}
+\end{remark}
+
+\begin{example}\label{ex1}
+\begin{tabs*}
+\tab{$\int_1^\infty \frac{1}{x}\,dx$}
+\lang{de}{
+Für die Funktion $f(x)=\frac{1}{x}$ existiert das uneigentliche Integral
+$ \int_1^\infty \frac{1}{x}\, dx$ nicht, d.\,h. }
+\lang{en}{
+For the function $f(x)=\frac{1}{x}$, the improper integral
+$ \int_1^\infty \frac{1}{x}\, dx$ does not exist; that is,
+}
+\[
+  \lim\limits_{b\rightarrow \infty}\;\int_1^b \frac{1}{x}\, dx \quad \text{\lang{de}{existiert nicht}\lang{en}{does not exist}}.
+ \]
+
+ \lang{de}{
+ Da die Funktion $f(x)=\frac{1}{x}$ für positive reelle Zahlen nämlich genau die Ableitung des Logarithmus ist, ist $\ln(x)$ eine Stammfunktion für $f$. Damit gilt:
+ }
+ \lang{en}{
+  Since $f(x)=\frac{1}{x}$ is the derivative of the logarithm
+  for positive real numbers, $\ln(x)$ is an antiderivative of $f$. Therefore,
+ }
+ \begin{eqnarray*}
+  \lim\limits_{b\rightarrow \infty}\;\int_1^b \frac{1}{x}\, dx
+  &=&\lim\limits_{b\rightarrow \infty} \;\left[ \ln(x)\right]_1^b\\
+  &=&\lim\limits_{b\rightarrow \infty} \;\ln(b) =\infty \, .
+  \end{eqnarray*}
+  \lang{de}{Die bestimmten Integrale wachsen also unbeschränkt für $b \rightarrow \infty$, weshalb das uneigentliche Integral
+  $ \int_1^\infty \frac{1}{x}\, dx$ nicht existiert.
+  }
+  \lang{en}{
+  The definite integrals grow infinitely large as $b \to \infty$, so
+  the improper integral $ \int_1^\infty \frac{1}{x}\, dx$ does not exist.
+  }
+\tab{$\int_1^\infty \frac{1}{x^2}\,dx$}
+\lang{de}{Wir betrachten die Funktion $f:(0;\infty)\to \R$ mit $f(x)=\frac{1}{x^2}=x^{-2}$. Eine Stammfunktion für $f$ ist die Funktion
+\[ F(x)=-{x^{-1}}, \]
+wie man durch Ableiten von $F(x)$ sieht. Für $b>1$ ist damit
+\begin{eqnarray*}
+\int_1^b \;\frac{1}{x^2}\, dx &=&  \left[ -x^{-1}\right]_1^b\\
+&=& -b^{-1} -   (-1). 
+\end{eqnarray*} 
+}
+\lang{en}{
+Consider the function $f:(0,\infty)\to\R$, $f(x)=\frac{1}{x^2}=x^{-2}$.
+An antiderivative of $f$ is given by the function
+\[ F(x)=-{x^{-1}}, \]
+as one can see by differentiating $F(x)$. Therefore, for $b>1$,
+\begin{eqnarray*}
+\int_1^b \;\frac{1}{x^2}\, dx &=&  \left[ -x^{-1}\right]_1^b\\
+&=& -b^{-1} -   (-1). 
+\end{eqnarray*} 
+}
+
+\lang{de}{
+Es folgt
+}
+\lang{en}{
+It follows that
+}
+\begin{eqnarray*}
+\int_1^\infty \;\frac{1}{x^2}\, dx &=& 
+\lim_{b\to \infty} \int_1^b \;\frac{1}{x^2}\, dx \\
+&=& \lim_{b\to \infty}  -\frac{1}{b} -   (-1) \\
+&=&1.
+\end{eqnarray*}
+\lang{de}{
+Das uneigentliche Integral $\int_1^\infty \;\frac{1}{x^2}\, dx$ existiert in diesem Fall also.
+}
+\lang{en}{
+So in this case, the improper integral $\int_1^\infty \;\frac{1}{x^2}\, dx$ exists.
+}
+\end{tabs*}
+\end{example}
+\begin{quickcheck}
+    \begin{variables}
+        \randint{a}{-1}{1}
+        \randint[Z]{b}{-3}{3}
+        \function[normalize]{f}{b*x^(a/2)}
+    \end{variables}
+    \lang{de}{
+    \text{Existiert das uneigentliche Integral $\int_1^\infty \var{f} \, dx$?}
+    }
+    \lang{en}{
+    \text{Does the improper integral $\int_1^\infty \var{f} \, dx$ exist?}
+    }
+    \lang{de}{
+    \explanation{Finden Sie eine Stammfunktion und berechnen Sie den Grenzwert.}
+    }
+    \lang{en}{
+    \explanation{Find an antiderivative and compute the limit.}
+    }
+    \begin{choices}{unique}
+        \begin{choice}
+            \lang{de}{
+            \text{Ja.}
+            }
+            \lang{en}{
+            \text{Yes.}
+            }
+            \solution{false}
+        \end{choice}
+        \begin{choice}
+            \lang{de}{
+            \text{Nein.}
+            }
+            \lang{en}{
+            \text{No.}
+            }
+            \solution{true}
+        \end{choice}
+    \end{choices}
+\end{quickcheck}
+
+
+\lang{de}{
+Ein weiterer Typ von uneigentlichen Integralen hat zwar endliche Integralgrenzen, aber 
+dafür ist die Funktion an einer der Grenzen nicht beschränkt oder sogar nicht definiert. 
+In diesem Fall nähern wir uns der problematischen Integralgrenze von oben bzw. unten an. 
+}
+\lang{en}{
+Another kind of improper integrals are those for which
+the bounds of integration are finite, but where the function is unbounded
+or even undefined at one or both of the bounds. In this case,
+we approach the problematic bound from above (or below).
+}
+
+\begin{definition}
+\lang{de}{
+Es sei $f$  eine Funktion, die an $a \in \R$ nicht definiert ist oder deren Funktionswerte für $x \searrow a$ unbeschränkt wachsen. 
+Weiter sei $b > a$.
+}
+\lang{en}{
+Let $f$ be a function that is either undefined in $a \in \R$
+or that is unbounded as $x \searrow a$. Let $b > a$.
+}
+\lang{de}{
+Das \notion{uneigentliche Integral} der Funktion $f$ \"uber dem Intervall $( a;b]$ ist definiert als Grenzwert
+\[ \int_a^b f\left(x\right)\; dx =
+ \lim_{c \searrow a} \int_c^b f\left(x\right) \; dx, \]
+  sofern der Grenzwert und die Integrale auf der rechten Seite existieren. (Andernfalls sagen wir:
+ Das uneigentliche Integral $\int_a^b f\left(x\right) \; dx$ existiert nicht.)
+}
+\lang{en}{
+The \notion{improper integral} of $f$ over the interval $(a,b]$ is defined
+as the limit
+\[ \int_a^b f\left(x\right)\; dx =
+ \lim_{c \searrow a} \int_c^b f\left(x\right) \; dx, \]
+  if the integrals on the right-hand side and their limit exist.
+  (Otherwise, we say that the improper integral $\int_a^b f\left(x\right) \; dx$ does not exist.)
+}
+\lang{de}{
+Ist $f$ an $b$ nicht definiert oder unbeschränkt für $x \nearrow b$, so definieren wir entsprechend  
+  \[ \int_a^b f(x)\, dx :=\lim_{d\nearrow b}  \int_{a}^d f(x)\, dx, \]
+  sofern Grenzwert und Integrale auf der rechten Seite existieren.
+}
+\lang{en}{
+Similarly, if $f$ is undefined at $b$ or unbounded as $x\nearrow b$,
+then we define
+\[ \int_a^b f(x)\, dx :=\lim_{d\nearrow b}  \int_{a}^d f(x)\, dx, \]
+  if the integrals and limit on the right-hand side exist.
+}
+\lang{de}{
+Ist $f$ sowohl an $a$ als auch $b$ nicht definiert (oder unbeschränkt), definieren wir 
+\[  \int_{a}^b f(x)\, dx= \int_{a}^c f(x)\, dx +   \int_{c}^b f(x)\, dx, \]
+mit einer beliebigen Wahl von $c\in (a;b)$.
+}
+\lang{en}{
+If $f$ is neither defined (or bounded) at $a$ nor at $b$,
+then we define
+\[  \int_{a}^b f(x)\, dx= \int_{a}^c f(x)\, dx +   \int_{c}^b f(x)\, dx, \]
+for an arbitrary choice of $c\in (a,b)$.
+}
+\end{definition}
+
+\begin{example}\label{ex2}
+\begin{tabs*}
+\tab{$\int_0^1 \frac{1}{\sqrt{x}}\, dx$}
+\lang{de}{
+Für die Funktion $f(x)=\frac{1}{\sqrt{x}}$ existiert das uneigentliche Integral
+$ \int_0^1 \frac{1}{\sqrt{x}}\, dx$ und es gilt
+\[  \int_0^1 \frac{1}{\sqrt{x}}\, dx =2 .\]
+}
+\lang{en}{
+For the function $f(x)=\frac{1}{\sqrt{x}}$, the improper
+integral $ \int_0^1 \frac{1}{\sqrt{x}}\, dx$ exists and is given by
+\[  \int_0^1 \frac{1}{\sqrt{x}}\, dx =2 .\]
+}
+
+\lang{de}{
+Eine Stammfunktion für $f(x)=\frac{1}{\sqrt{x}}=x^{-\frac{1}{2}}$ ist nämlich $F(x)=2x^{\frac{1}{2}}=2\sqrt{x}$. Damit folgt für $0<c<1$
+\begin{eqnarray*}
+ \int_c^1 \frac{1}{\sqrt{x}}\, dx &=& \left[ 2\sqrt{x}\right]_c^1 \\
+ &=&  2\sqrt{1}-2\sqrt{c}=2-2\sqrt{c}. 
+\end{eqnarray*}
+Also ist
+\[  \int_0^1 \frac{1}{\sqrt{x}}\, dx=\lim_{c\searrow 0} \int_c^1 \frac{1}{\sqrt{x}}\, dx
+=\lim_{c\searrow 0} 2-2\sqrt{c} =2.\]
+}
+\lang{en}{
+Namely, as an antiderivative of
+$f(x)=\frac{1}{\sqrt{x}}=x^{-\frac{1}{2}}$, we can take
+$F(x)=2x^{\frac{1}{2}}=2\sqrt{x}$.
+Therefore, for $0 < c < 1$,
+\begin{eqnarray*}
+ \int_c^1 \frac{1}{\sqrt{x}}\, dx &=& \left[ 2\sqrt{x}\right]_c^1 \\
+ &=&  2\sqrt{1}-2\sqrt{c}=2-2\sqrt{c}. 
+\end{eqnarray*}
+So \[  \int_0^1 \frac{1}{\sqrt{x}}\, dx=\lim_{c\searrow 0} \int_c^1 \frac{1}{\sqrt{x}}\, dx
+=\lim_{c\searrow 0} 2-2\sqrt{c} =2.\]
+}
+
+\tab{$\int_0^1 \frac{1}{x}\, dx$}
+\lang{de}{
+Für die Funktion $f(x)=\frac{1}{x}$ existiert das uneigentliche Integral
+$ \int_0^1 \frac{1}{x}\, dx$ nicht, d.\,h. 
+\[
+  \lim\limits_{c\searrow 0}\;\int_c^1 \frac{1}{x}\, dx \quad \text{\lang{de}{existiert nicht}\lang{en}{does not exist}}.
+ \]
+ Da die Funktion $f(x)=\frac{1}{x}$ für positive reelle Zahlen nämlich genau die Ableitung des Logarithmus ist, ist $\ln(x)$ eine Stammfunktion für $f$. Damit gilt:
+ \begin{eqnarray*}
+  \lim\limits_{c\searrow 0}\;\int_c^1 \frac{1}{x}\, dx
+  &=&\lim\limits_{c\searrow 0} \;\left[ \ln(x)\right]_c^1\\
+  &=&\lim\limits_{c\searrow 0} \; 0-\ln(c) =+\infty \, .
+  \end{eqnarray*}
+}
+\lang{en}{
+For the function $f(x)=\frac{1}{x}$, the improper integral
+$ \int_0^1 \frac{1}{x}\, dx$ does not exist; that is,
+\[
+  \lim\limits_{c\searrow 0}\;\int_c^1 \frac{1}{x}\, dx \quad \text{\lang{de}{existiert nicht}\lang{en}{does not exist}}.
+ \]
+ Since $f(x)=\frac{1}{x}$ is the derivative of the logarithm for
+ positive real numbers, $\ln(x)$ is an antiderivative of $f$. So
+ \begin{eqnarray*}
+  \lim\limits_{c\searrow 0}\;\int_c^1 \frac{1}{x}\, dx
+  &=&\lim\limits_{c\searrow 0} \;\left[ \ln(x)\right]_c^1\\
+  &=&\lim\limits_{c\searrow 0} \; 0-\ln(c) =+\infty \, .
+  \end{eqnarray*}
+}
+  \lang{de}{Die bestimmten Integrale divergieren also gegen $+\infty$ im Grenzwert $c\searrow 0$, weshalb das uneigentliche Integral
+  $ \int_0^1 \frac{1}{x}\, dx$ nicht existiert.
+  }
+  \lang{en}{
+  The definite integrals diverge to $+\infty$ in the limit $c\searrow 0$,
+  such that the improper integral $ \int_0^1 \frac{1}{x}\, dx$ does not exist.
+  }
+  
+ \tab{$\int_0^1 \frac{1}{x^2}\, dx$}
+\lang{de}{
+Wir betrachten die Funktion $f:(0;\infty)\to \R$ mit $f(x)=\frac{1}{x^2}=x^{-2}$. Eine Stammfunktion für $f$ ist die Funktion
+\[ F(x)=-{x^{-1}}, \]
+wie man durch Ableiten von $F(x)$ sieht. Für $0<c<1$ ist damit
+\begin{eqnarray*}
+\int_c^1 \;\frac{1}{x^2}\, dx &=&  \left[ -x^{-1}\right]_c^1\\
+&=& -1 -   (-{c^{-1}}). 
+\end{eqnarray*} 
+}
+\lang{en}{
+Consider the function $f:(0,\infty)\to \R$, $f(x)=\frac{1}{x^2}=x^{-2}$.
+We can take the function \[ F(x)=-{x^{-1}}\]
+as an antiderivative of $f$, as one can see by differentiating $F$.
+Hence, for $0 < c < 1$,
+\begin{eqnarray*}
+\int_c^1 \;\frac{1}{x^2}\, dx &=&  \left[ -x^{-1}\right]_c^1\\
+&=& -1 -   (-{c^{-1}}). 
+\end{eqnarray*} 
+}
+\lang{de}{
+Es folgt
+\begin{eqnarray*}
+\int_0^1 \;\frac{1}{x^2}\, dx &=& 
+\lim_{c\searrow 0} \int_c^1 \;\frac{1}{x^2}\, dx \\
+&=& \lim_{c\searrow 0}  -1 + \frac{1}{c} =+\infty.
+\end{eqnarray*} 
+In diesem Fall existiert das uneigentliche  Integral $\int_0^1 \;\frac{1}{x^2}\, dx$
+also nicht.
+}
+\lang{en}{
+It follows that
+\begin{eqnarray*}
+\int_0^1 \;\frac{1}{x^2}\, dx &=& 
+\lim_{c\searrow 0} \int_c^1 \;\frac{1}{x^2}\, dx \\
+&=& \lim_{c\searrow 0}  -1 + \frac{1}{c} =+\infty.
+\end{eqnarray*} 
+Therefore, the improper integral $\int_0^1 \;\frac{1}{x^2}\, dx$ does not
+exist in this case.
+}
+\end{tabs*}
+\end{example}
+
+\lang{de}{
+Bei uneigentlichen Integralen mit festen Zahlen als Grenzen, an denen die Funktion nicht
+definiert ist, könnte man auf die Idee kommen, einfach einen Funktionswert an den Grenzen
+vorzugeben. Die folgende Bemerkung zeigt, dass dies möglich ist, aber das Problem der 
+Berechnung des Integrals nicht verändert.
+}
+\lang{en}{
+Suppose we want to compute an improper integral
+with finite bounds of integration at which the function
+is undefined. We might come up with the idea of simply
+defining arbitrary values of the function at the bounds.
+The following remark shows that that is possible, but 
+does not lessen the problem of computing the integral.
+}
+
+\begin{remark}
+\lang{de}{
+Ist die Funktion $f:(a;b]\to \R$ beschränkt, so kann man einen beliebigen Wert $w\in \R$ wählen und eine Funktion $g:[a;b]\to \R$ definieren mittels
+\[  g(x)=\left\{ \begin{mtable} w, \quad & x=a, \\ f(x), & x \neq a. \end{mtable} \right. \] 
+Das uneigentliche Integral $\int_a^b f(x)\, dx$ existiert genau dann, wenn das (eigentliche) Integral $\int_a^b g(x)\, dx$ existiert, und im Falle der Existenz sind sie auch beide gleich.
+}
+\lang{en}{
+If the fuunction $f:(a,b]\to \R$ is bounded, then we can choose an
+arbitrary value $w\in \R$ and define a function $g:[a,b]\to\R$ by setting
+\[  g(x)=\left\{ \begin{mtable} w, \quad & x=a, \\ f(x), & x \neq a. \end{mtable} \right. \] 
+The improper integral $\int_a^b f(x)\, dx$ exists if and only if
+the (proper) integral $\int_a^b g(x)\, dx$ existiert, and in that case
+they are equal.
+}
+\lang{de}{
+Das bedeutet, dass der Wert des Integrals nicht von einem einzelnen Funktionswert abhängt.
+}
+\lang{en}{
+This means that the value of the integral does not depend on the value
+of the function at any single point.
+}
+\end{remark}
+
+
+\section{
+\lang{de}{Anwendung der Integralrechnung}
+\lang{en}{Applications of integrals}
+}
+
+\lang{de}{
+Wenn die momentane Änderungsrate einer Funktion 
+(d.\,h. ihre Ableitung) gegeben ist, so liefert die Integration der Ableitung die ursprünglichen Funktionswerte, 
+oder genauer gesagt: Das Integral von $f'(x)$ in den Grenzen von $a$ bis $b$ 
+ergibt die gesamte Änderung $f(b)-f(a)$ der Funktionswerte.
+}
+\lang{en}{
+If the instantaneous rate of change (i.e. the derivative)
+of a function is given, then integrating the derivative
+recovers the original function.
+More precisely: the integral of $f'(x)$ between the bounds $a$ and $b$
+yields the overall change $f(b)-f(a)$ of the function.
+}
+
+
+\begin{rule}
+\lang{de}{Wenn die momentane Änderungsrate $f'(x)$ einer Funktion $f(x)$ gegeben ist, so bietet die Integration
+von $f'(x)$ eine 
+Möglichkeit der Bestimmung oder Rekonstruktion der Funktion. Sofern ein Anfangswert $c = f(a)$ gegeben ist, lässt sich 
+jeder Wert $f(b)$ ausrechnen:
+\[ f(b) = c +  \int_a^b f'(x)\, dx . \]
+}
+\lang{en}{
+Given the instantaneous rate of change $f'(x)$ of a function,
+the function itself can be determined or reconstructed
+by integrating $f(x)$. Once an initial value $c = f(a)$ is given,
+any value $f(b)$ can be calculated with
+\[ f(b) = c +  \int_a^b f'(x)\, dx . \]
+}
+\end{rule}
+
+\lang{de}{
+Dabei ist das Integral eigentlich nichts anderes als ein stetiges Aufsummieren von 
+Werten, ähnlich wie bei einer Reihe. 
+}
+\lang{en}{
+Here, the integral is essentially a continuous sum of function values,
+similar to a series.
+}
+
+\begin{example}[\lang{de}{Anwendungen}
+\lang{en}{Applications}]
+
+%Beispiele aus den Naturwissenschaften
+\begin{tabs*}[\initialtab{0}] %\class{exercise}
+ % \tab{Arbeit, Kraft}
+ % Das Integral über die Kraft $F$ längs eines Weges ergibt die verrichtete Arbeit $W$
+ % \[  W = \int_{s_0}^{s_1} F(s)\, ds \]
+
+
+\tab{\lang{de}{Volumen}\lang{en}{Volume}}
+	\lang{de}{Die Zulaufrate eines Wasserbehälters sei $f(t)$ (Volumen pro Zeiteinheit, d.\,h. die Ableitung des Volumens nach der Zeit). 
+	Das Integral über $f(t)$ ergibt das Volumen $V$ (die Wassermenge im Behälter) zum Zeitpunkt $T$, sofern der Behälter bei
+	$t=0$ leer war (Anfangswert gleich $0$):}
+ \lang{en}{
+  Suppose a container of water is filled at the rate $f(t)$ (Unit volume per unit of time; i.e. the derivative
+  of volume with respect to time).
+  Integrating $f(t)$ yields the volume $V$ (the amount of water in the container) at time $T$,
+  assuming that the container is empty at time $t=0$ (initial value $0$):
+ }
+	\[ V = \int_0^T f(t)\, dt . \]
+%begin-cosh
+\tab{\lang{de}{Zahlungsstrom}
+\lang{en}{Cash flow}}
+	\lang{de}{
+    In manchen Modellen wird angenommen, dass ein Zahlungsstrom stetig bzw. kontinuierlich fließt. 
+    Dies ist etwa sinnvoll, wenn sich der Zahlungsstrom zu sehr vielen Zeitpunkten ändert.
+    
+    Es sei $f(t) = t^2 - 4t + 1000$ eine Funktion, die den Zahlungsstrom eines Unternehmens an einem
+    Werktag beschreibt mit $t \in [9; 19]$. Der Gesamtumsatz zwischen 14 Uhr und 18 Uhr kann dann als 
+    Integral berechnet werden:
+    \[
+    U = \int_{14}^{18} t^2 - 4t + 1000 \, dt = \left[ \frac{1}{3}t^3 - 2t^2 + 1000t \right]_{14}^{18} =  4773,33.
+    \]
+	}
+ \lang{en}{
+  Many models assume that a cash flow is continuous.
+  For example, this is useful if the cash flow changes at many points in time.
+
+  Suppose the function $f(t) = t^2 - 4t + 1000$, $t \in [9, 19]$ describes the cash flow of a company
+  on a workday. The total revenue between 2:00 PM ($t = 14$) and 6:00 PM ($t = 18$)
+  can be computed as an integral:
+  \[
+    U = \int_{14}^{18} t^2 - 4t + 1000 \, dt = \left[ \frac{1}{3}t^3 - 2t^2 + 1000t \right]_{14}^{18} =  4,773.33.
+    \]
+ }
+%ende-cosh
+\end{tabs*}
+\end{example}
+
+\lang{de}{
+Eine wichtige geometrische Anwendung besteht darin, die Fläche zwischen zwei Funktionsgraphen 
+rechnerisch zu ermitteln. 
+}
+\lang{en}{
+An important geometric application is computing the area
+between the graphs of two functions.
+}
+  
+  \begin{rule}[\lang{de}{Fläche zwischen zwei Graphen} \lang{en}{Area between Two Graphs}]
+  %\emph{Satz:} 
+  \lang{de}{Die Fläche zwischen den Graphen von zwei stetigen Funktionen $f(x)$
+   und $g(x)$ im Intervall $[a;b]$ beträgt
+   \[ \int_a^b \,{\big|\, f(x) - g(x) \, \big|} \, dx \]
+  und kann auf die folgende Weise berechnet werden: }
+  \lang{en}{The area contained between the graphs of two continuous functions
+  $f(x)$ and $g(x)$ in the interval $[a, b]$ is
+  \[ \int_a^b \,{\big|\, f(x) - g(x) \, \big|} \, dx \]
+  and it can be computed as follows.}
+  
+  \begin{enumerate}
+  \item \lang{de}{Bestimme die Nullstellen von $f(x)-g(x)$ im Intervall $[a;b]$. Dies sind die Schnittstellen.}
+  \lang{en}{Determine the zeros of $f(x)-g(x)$ in the interval $[a,b]$. These are the points of intersection.}
+  \item \lang{de}{Integriere $f(x)-g(x)$ abschnittsweise zwischen dem linken Rand $a$, 
+  den Nullstellen von $f(x)-g(x)$ im Intervall $(a;b)$ (sofern vorhanden)
+   und dem rechten Rand $b$.}
+   \lang{en}{
+    Compute the separate integrals of $f(x)-g(x)$ over the intervals between
+    the left endpoint $a$, the zeros of $f(x)-g(x)$ in the interval $(a, b)$ (if any exist),
+    and the right endpoint $b$.
+   }
+   \item \lang{de}{Addiere die Beträge der einzelnen Integrale.}
+   \lang{en}{Add the absolute values of the integrals together.}
+   \end{enumerate}
+\end{rule}
+
+\lang{de}{Bei der beschriebenen abschnittsweisen  Integration darf der Betrag  \emph{nach} 
+der Integration angewendet werden, so dass keine gesonderte Überlegung zum Vorzeichen
+von $f(x)-g(x)$ erforderlich ist.}
+\lang{en}{
+When the integrals are computed separately as described above,
+the absolute value may be taken \emph{after} integrating,
+such that the sign of $f(x)-g(x)$ does not need to be considered.
+}
+
+ \begin{example}
+ %\emph{ Beispiel:} 
+ \lang{de}{Es seien $f(x)=x^3-x^2$ und $g(x)=2x$. 
+Gesucht ist die Fläche zwischen den Graphen von
+$f(x)$ und $g(x)$. Wir bestimmen zunächst die Nullstellen von 
+\[ f(x)-g(x)=x^3-x^2-2x=x(x^2-x-2)=x(x+1)(x-2) . \]
+Die Nullstellen (Schnittstellen von $f(x)$ und $g(x)$) sind daher $x=-1$, $x=0$ und $x=2$. 
+Die Fläche zwischen den Graphen von  $f(x)$ und $g(x)$ 
+im Intervall $[-1;2]$ ist dann die Summe der Beträge von zwei Integralen:
+\[ \int_{-1}^2 {\big|\, x^3-x^2-2x\, \big|}\, dx = 
+\big| \int_{-1}^0 (x^3-x^2-2x)\, dx \big| + \big| \int_0^2 (x^3-x^2-2x)\,
+dx \big| \, . \]
+
+
+
+Eine Stammfunktion von $f(x)-g(x)=x^3-x^2-2x$ ist $\frac{1}{4} x^4 - \frac{1}{3} x^3 - x^2$.
+Die gesuchte Fläche beträgt dann}
+\lang{en}{
+Let $f(x)=x^3-x^2$ and $g(x) = 2x$. We want to find the area
+enclosed by the graphs of $f(x)$ and $g(x)$. First, we find the zeros of
+\[ f(x)-g(x)=x^3-x^2-2x=x(x^2-x-2)=x(x+1)(x-2) . \]
+The zeros (where $f(x)$ and $g(x)$ intersect) are therefore $x=-1$, $x=0$ and $x=2$.
+The area between the graphs of $f(x)$ and $g(x)$ in the interval $[-1, 2]$
+is the sum of the absolute values of two integrals:
+\[ \int_{-1}^2 {\big|\, x^3-x^2-2x\, \big|}\, dx = 
+\big| \int_{-1}^0 (x^3-x^2-2x)\, dx \big| + \big| \int_0^2 (x^3-x^2-2x)\,
+dx \big| \, . \]
+For $f(x)-g(x)=x^3-x^2-2x$, we can take the antiderivative
+$\frac{1}{4} x^4 - \frac{1}{3} x^3 - x^2$.
+The area is then
+}
+
+\[ \big| \Big[\frac{1}{4} x^4 - \frac{1}{3} x^3 - x^2 \Big]_{-1}^0 \big| + 
+\big| \Big[\frac{1}{4} x^4 - \frac{1}{3} x^3 - x^2 \Big]_{0}^2 \big| = 
+\big| \frac{5}{12} \big| + \big| - \frac{8}{3} \big| = \frac{37}{12} .\]
+\begin{center}
+\image{T604_Area_D}
+\end{center}
+\end{example}
+
+    \begin{quickcheck}
+	\field{rational}
+		\type{input.number}
+		\begin{variables}
+			%\randint[Z]{c}{-2}{2}
+			\number{c}{1}   % einfacher zu rechnen mit c=1
+			\randint{ns1}{-2}{0}
+			\randint{ns2}{1}{2}
+			\function[expand,normalize]{d}{c*(x-ns1)*(x-ns2)}
+			\randint[Z]{a}{-2}{2}
+			\randint[Z]{b}{-2}{2}
+			\function{g}{a*x+b}
+			\function[normalize,sort]{f}{d+g}
+			\function[normalize]{dd}{(c/3)*x^3-(c/2)*(ns1+ns2)*x^2+c*ns1*ns2*x}
+			\function[calculate]{F1}{(c/3)*ns1^3-(c/2)*(ns1+ns2)*ns1^2+c*ns1*ns2*ns1}
+			\function[calculate]{F2}{(c/3)*ns2^3-(c/2)*(ns1+ns2)*ns2^2+c*ns1*ns2*ns2}
+			% Stammfunktion ist: c/3*x^3-c/2*(ns1+ns2)*x^2+c*ns1*ns2*x
+			\function[calculate]{F}{|F2-F1|} % int_ns1^ns2 |d(x)| 
+
+		\end{variables}
+		
+		\lang{de}{\text{Bestimmen Sie den Inhalt der Fläche, die die Graphen der Funktion $f(x)=\var{f}$ und
+		der Funktion $g(x)=\var{g}$ einschließen.\\
+		Die Schnittstellen der Graphen liegen bei \ansref (kleinere Stelle) und \ansref (größere Stelle).\\
+		Der Flächeninhalt ist dann \ansref.}}
+    \lang{en}{
+    \text{Determine the area of the region enclosed by the graphs of the functions
+    $f(x)=\var{f}$ and $g(x)=\var{g}$. \\
+    The graphs intersect in the points \ansref (smaller) and \ansref (greater). \\
+    The area is \ansref.}
+    }
+        
+
+		\begin{answer}
+			\solution{ns1}
+		\end{answer}
+		\begin{answer}
+			\solution{ns2}
+		\end{answer}
+		\begin{answer}
+			\solution{F}
+		\end{answer}
+
+		\explanation{\lang{de}{Die Schnittstellen sind die Nullstellen der Differenzfunktion $(\var{f})-(\var{g})=\var{d}$.
+		Diese sind $\var{ns1}$ und $\var{ns2}$ (Lösen der quadratischen Gleichung $\var{d}=0$).\\
+		Der Flächeninhalt ergibt sich dann als 
+		$\int_{\var{ns1}}^{\var{ns2}} |\var{d}| dx=| [ \var{dd} ]_{\var{ns1}}^{\var{ns2}}| =|\var{F2}-\var{F1}|=\var{F}$.
+		} 
+    \lang{en}{The points of intersection are the zeros of the difference function $(\var{f})-(\var{g})=\var{d}$.
+    These are $\var{ns1}$ and $\var{ns2}$ (solutions of the quadratic equation $\var{d}=0$).\\
+    The area is given by
+    $\int_{\var{ns1}}^{\var{ns2}} |\var{d}| dx=| [ \var{dd} ]_{\var{ns1}}^{\var{ns2}}| =|\var{F2}-\var{F1}|=\var{F}$.
+    }
+        } 
+	\end{quickcheck}
+
+\end{visualizationwrapper}
+\end{content}

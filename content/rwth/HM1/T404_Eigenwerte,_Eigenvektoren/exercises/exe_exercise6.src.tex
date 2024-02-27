@@ -1,0 +1,83 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Ex06: Principal axes}
+    \lang{de}{Ü06: Hauptachsen}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\title{\lang{de}{Ü06: Hauptachsen}\lang{en}{Ex06: Principal axes}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22656}{Ticket 22656}
+\end{block}
+\lang{de}{
+Gegeben ist die quadratische Gleichung
+\[7x^2+8xy+y^2=1,\]
+die einen Kegelschnitt im $\R^2$ beschreibt.
+Bestimmen Sie die symmetrische Matrix $A\in\M(2;\R)$ so, dass
+\[7x^2+8xy+y^2=1\:\Leftrightarrow\: \begin{pmatrix} x&y\end{pmatrix}\cdot A\cdot\begin{pmatrix} x\\y\end{pmatrix}=1.\]
+Transformieren Sie diese Gleichung auf Hauptachsenform und bestimmen Sie die Richtungen der Hauptachsen.
+Welche Art Kegelschnitt wird beschrieben?}
+
+\lang{en}{
+Given is the quadratic equation
+\[7x^2+8xy+y^2=1,\]
+which describes a conic section in $\R^2$.
+Determine the symmetric matrix $A\in\M(2;\R)$ such, that
+\[7x^2+8xy+y^2=1\:\Leftrightarrow\: \begin{pmatrix} x&y\end{pmatrix}\cdot A\cdot\begin{pmatrix} x\\y\end{pmatrix}=1.\]
+Transform this equation into principal axes form and determine the directions of the principal axes.
+What type of conic section is described?}
+
+%##################################################ANTWORTEN_TEXT
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+%++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{   Lösung    }\lang{en}{   Solution    }}
+For determining the symmetric matrix $A=\left(\begin{smallmatrix}a_{11}&a_{12}\\a_{12}&a_{22}\end{smallmatrix}\right)$,
+we expand the right equation (by multiplying)
+\[
+1=\begin{pmatrix} x&y\end{pmatrix}\cdot A\cdot\begin{pmatrix} x\\y\end{pmatrix}\\
+=a_{11}x^2+2a_{12}xy+a_{22}y^2.
+\]
+The result of a coefficient comparision with the first equation is
+$a_{11}=7$, $a_{12}=\frac{8}{2}=4$, $a_{22}=1$.
+So the matrix $A$ is
+\[A=\begin{pmatrix} 7&4\\4&1\end{pmatrix}.\]
+For the principal axes transformation we need the eigenvalues of the matrix. So we determine its characteristic
+polynomial
+\[\det\big(\begin{pmatrix}7-t&4\\4&1-t\end{pmatrix}\big)=t^2-8t-9.\]
+The zeros of this characteristic polynomials are $\lambda_1=9$ and $\lambda_2=-1$.
+(We may use the$pq$-formula for finding those, if we do not see them right away.)
+Those are the eigenvalues of $A$. So the principal axes form is
+\[1=\begin{pmatrix} x&y\end{pmatrix}\cdot\begin{pmatrix} 9&0\\0&-1\end{pmatrix}\cdot\begin{pmatrix} x\\y\end{pmatrix}=9x^2-y^2\]
+with respect of the basis $B$ consisting of the normalised eigenvectors $v_1$ and $v_2$ for the eigenvalues $\lambda_1$ respectively $\lambda_2$.\\
+The numbering of the eigenvalues is random. Likewise 
+$1=\begin{pmatrix} x&y\end{pmatrix}\cdot\begin{pmatrix} -1&0\\0&9\end{pmatrix}\cdot\begin{pmatrix} x\\y\end{pmatrix}=-x^2+9y^2$
+is a principal axes form, for the transformed basis $\tilde{B}$, so $v_2$, $v_1$.
+\\
+Because one eigenvalues is positive and the other is negative, the quadratic equation described a hyperbola.
+\\
+The directions of the principal axes are determined by the eigenvectors $v_1$ and $v_2$. So let us calculate those.
+\[Av_1=\lambda_1v_1\:\Leftrightarrow\:\begin{pmatrix}-2&4\\4&-8\end{pmatrix}v_1=\begin{pmatrix}0\\0\end{pmatrix}\:
+\Leftrightarrow v_1\in\R\cdot \begin{pmatrix}2\\1\end{pmatrix},\]
+as well as
+\[Av_2=\lambda_2v_2\:\Leftrightarrow\:\begin{pmatrix}8&4\\4&2\end{pmatrix}v_2=\begin{pmatrix}0\\0\end{pmatrix}\:
+\Leftrightarrow v_2\in\R\cdot \begin{pmatrix}1\\-2\end{pmatrix}.\]
+If we want to give normalised eigenvectors, so $|\!| v_j|\!|=1$,then the eigenvectors are unambiguous (exept for the sign)
+\[v_1=\frac{\pm 1}{\sqrt{5}}\begin{pmatrix}2\\1\end{pmatrix} \quad\text{ und }\quad v_2=\frac{\pm 1}{\sqrt{5}}\begin{pmatrix}1\\-2\end{pmatrix}.\]
+ 
+\end{tabs*}
+\end{content}
+

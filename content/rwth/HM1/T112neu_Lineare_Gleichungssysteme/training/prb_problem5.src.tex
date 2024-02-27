@@ -1,0 +1,240 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A05: Rang}
+    \lang{en}{mc yes-no}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{description}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21357}{Ticket 21357}
+\end{block}
+\begin{block}[annotation]
+Copy of \href{http://team.mumie.net/issues/9673}{Ticket 9673}: content/rwth/HM1/T112_Rechnen_mit_Matrizen/training/prb_problem6.src.tex
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+\lang{de}{
+	\title{A05: Rang}
+}
+
+
+
+\begin{problem}
+% 	
+
+
+
+
+
+     \begin{question} 
+     
+     
+     \begin{variables}
+		\randint[Z]{a}{-9}{9}
+		\randint[Z]{b}{-9}{9}
+		\randint[Z]{c}{-9}{9}
+		\randint[Z]{d}{-9}{9}
+		\randint[Z]{ee}{-9}{9}
+		\randint[Z]{f}{-9}{9}
+		\randint[Z]{k}{-9}{9}
+        \randint[Z]{l}{-9}{9}
+		
+			%\matrix[calculate]{m1}{
+  			%a & a & k*a \\
+     %0 & a & k*a \\
+     %0 & a & k*a 
+     % 	}
+      		\matrix[calculate]{m2}{
+  			 a & -l*a & -(l+1)*a \\
+             a & -l*a & -(l+1)*a \\
+             0 & (l+1)*a & (l+1)*a 
+      	}
+     % 		\matrix[calculate]{m3}{
+  		%	a & b & c \\
+     %0 & 0 & c \\
+     %0 & b & 0 
+     % 	}
+      	\matrix[calculate]{m4}{
+  			a & b & c \\
+            d & ee & f \\
+            0 & 0 & 0
+      	}
+      	\matrix[calculate]{m5}{
+  			a & 0 & 0 & 0\\
+            0 & b & b & 0 \\
+            0 & 2*b & 3*b & 4*b \\
+            0 & c & c & 5*c
+      	}
+        \matrix[calculate]{m6}{
+  			a & b & c \\
+            a*2 & b*4 & c*5
+      	}
+	\end{variables}
+     
+     
+     \lang{de}{ 
+      	\text{Entscheiden Sie, ob folgende Matrizen vollen Rang besitzen.}
+      }
+    	\permutechoices{1}{3}
+    	\type{mc.yesno}
+		%\begin{choice}
+  		%	\text{$\var{m1}$}
+  		%	\solution{false}
+		%\end{choice}
+		\begin{choice}
+  			\text{$\var{m2}$}
+  			\solution{false}
+		\end{choice}
+		\begin{choice}
+  			\text{$\var{m4}$}
+  			\solution{false}
+		\end{choice}
+		%\begin{choice}
+  		%	\text{$\var{m3}$}
+  		%	\solution{true}
+		%\end{choice}
+		\begin{choice}
+  			\text{$\var{m5}$}
+  			\solution{true}
+		\end{choice}
+                
+        \explanation{
+         Bringen Sie die jeweilige Matrix zunächst mit Hilfe des Gauß-Verfahrens in Stufenform.
+         Der Rang enspricht dann der Anzahl an Zeilen, die ungleich der Nullzeile sind.
+         Eine $(n \times n)$-Matrix $A$ hat dann vollen Rang, wenn der Rang von $A$ gleich $n$ ist.
+        }
+        
+    \end{question}
+    
+    
+    
+    
+\begin{question} 
+   \begin{variables}
+      \randint[Z]{a}{-9}{9}
+      \randint[Z]{b}{-9}{9}
+      \randint[Z]{c}{-9}{9}
+      \randint[Z]{d}{-9}{9}
+      \randint[Z]{ee}{-9}{9}
+      \randint[Z]{f}{-9}{9}
+      \randint[Z]{k}{-9}{9}
+      \matrix[calculate]{m6}{
+          a & b & c \\
+          a*2 & b*3 & c*4
+      }
+    \end{variables}
+    \lang{de}{ 
+        \text{Entscheiden Sie, ob die folgende Matrix vollen Rang besitzt.}
+    }
+    %\permutechoices{1}{3}
+    \type{mc.yesno}
+    \begin{choice}
+        \text{$\var{m6}$}
+        \solution{true}
+    \end{choice}      
+    \explanation{
+     Bringen Sie die Matrix zunächst mit Hilfe des Gauß-Verfahrens in Stufenform.
+     Der Rang enspricht dann der Anzahl an Zeilen, die ungleich der Nullzeile sind.
+     Eine $(m \times n)$-Matrix $A$ hat dann vollen Rang, wenn der Rang von $A$ gleich $\min\{m,n\}$ ist.
+     Der Rang ist hier 2 und entspricht $\min\{2, 3\}=2$.
+    }        
+\end{question}    
+    
+    
+    
+    
+\begin{question}
+  \begin{variables}
+    \randint[Z]{a}{-9}{9}
+    \randint[Z]{b}{-9}{9}
+    \randint[Z]{c}{-9}{9}
+    \randint[Z]{d}{-9}{9}
+    \randint[Z]{ee}{-9}{9}
+    \randint[Z]{f}{-9}{9}
+    \randint[Z]{k}{-9}{9}
+    \matrix[calculate]{r1}{
+      a & a & k*a \\
+      0 & a & k*a \\
+      0 & a & k*a 
+    }
+    \number{r1s}{2}
+  \end{variables}
+  \type{input.number}
+  \displayprecision{3}
+  \correctorprecision{2}
+  \field{integer}
+  \lang{de}{
+      \text{Geben Sie den Rang für die folgende Matrix an:\\
+      $A=\var{r1}$}
+  }
+  \begin{answer}
+      \text{Rang(A)=}\solution{r1s}
+      \explanation{
+         Bringen Sie die Matrix zunächst mit Hilfe des Gauß-Verfahrens in Stufenform.
+         Sie stellen fest, dass die dritte Zeile in dieser Aufgabe dann eine Nullzeile ist.
+         Der Rang enspricht dann der Anzahl an Zeilen, die ungleich der Nullzeile sind,
+         also hier 2.
+      }
+  \end{answer}
+\end{question} 
+
+
+\begin{question}
+  \begin{variables}
+    \randint[Z]{a}{-9}{9}
+    \randint[Z]{b}{-9}{9}
+    \randint[Z]{c}{-9}{9}
+    \randint[Z]{d}{-9}{9}
+    \randint[Z]{ee}{-9}{9}
+    \randint[Z]{f}{-9}{9}
+    \randint[Z]{k}{-9}{9}
+    \matrix[calculate]{r2}{
+      a & b & c \\
+      0 & 0 & c \\
+      0 & b & 0 
+    }    
+    \number{r2s}{3}
+  \end{variables}
+  \type{input.number}
+  \displayprecision{3}
+  \correctorprecision{2}
+  \field{integer}
+  \lang{de}{
+      \text{Geben Sie den Rang für die folgende Matrix an:\\
+      $B=\var{r2}$}
+  }
+  \begin{answer}
+      \text{Rang(B)=}\solution{r2s}
+      \explanation{
+        Bringen Sie die Matrix zunächst mit Hilfe des Gauß-Verfahrens in Stufenform.
+        Am einfachsten tauscht man hier die zweite und die dritte Zeile.
+        Der Rang enspricht dann der Anzahl an Zeilen, die ungleich der Nullzeile sind,
+        also hier 3.
+      }
+  \end{answer}
+\end{question} 
+
+    
+    
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

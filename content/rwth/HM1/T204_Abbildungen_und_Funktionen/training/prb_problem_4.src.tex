@@ -1,0 +1,446 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A04: Eigenschaften}
+    \lang{en}{Problem 4}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+\lang{de}{\title{A04: Eigenschaften}}
+\lang{en}{\title{Problem 4}}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9815}{Ticket 9815}
+\end{block}
+
+\begin{problem}
+
+	\randomquestionpool{1}{6}
+	\randomquestionpool{7}{12}
+%1. Frage, von Pool 1 
+	\begin{question}
+    %\explanation{Abbildungen sind Zuordnungen zwischen zwei Mengen, die jedem Element des 
+    %Definitionsbereich genau ein Element des Zielbereichs zuordnet.\\ 
+    %Eine Abbildung ist injektiv, wenn für verschiedene Elemente $m_1$ und $m_2$ des 
+    %Definitionsbereichs stets die Bilder $f(m_1)$ und $f(m_2)$ verschieden sind.\\
+    %Eine Abbildung ist surjektiv, wenn Zielbereich und Wertemenge sind identisch.\\
+    %Eine Abbildung ist bijektiv, wenn die Abbildung injektiv und surjektiv ist.}
+		\begin{variables}
+			\randint[Z]{k}{-10}{10}
+			\function[expand, normalize]{f}{n+k}
+		\end{variables}
+		\text{Entscheiden Sie, welche Aussagen für die Zuordnung 
+        $f: \mathbb{N} \to \mathbb{Z} , n \mapsto \var{f}$ korrekt sind und kreuzen Sie wahre Aussagen an.}
+		\type{mc.multiple}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist keine Abbildung.}}
+  			\solution{false}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist eine Abbildung.}}
+  			\solution{true}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist injektiv.}}
+  			\solution{true}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist surjektiv.}}
+  			\solution{false}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist bijektiv.}}
+  			\solution{false}			
+		\end{choice}
+        \explanation[equalChoice(00???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(11???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(10???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(??0??)]{Die Abbildung ist injektiv, weil aus $f(m_1)=f(m_2)$ bereits $m_1=m_2$ folgt.}
+        \explanation[equalChoice(???1?)]{Die Zahl $-42\in \Z$, ein Element des Zielbereichs, wird nicht von $f$ zugeordnet, somit kann $f$ nicht surjektiv sein.}
+        \explanation[equalChoice(????1)]{Eine Abbildung ist bijektiv, wenn die Abbildung injektiv und surjektiv ist.}
+	\end{question}
+	
+%2. Frage, von Pool 1 
+	\begin{question}
+  		\begin{variables}
+			\randint{l}{-10}{10}
+			\function[calculate]{s}{l^2}
+			\function[expand, normalize]{f}{l*n}
+		\end{variables}
+		\text{Entscheiden Sie, welche Aussagen für die Zuordnung $f: \mathbb{N} \to \mathbb{Z} , n \mapsto \var{f}$ korrekt sind und kreuzen Sie wahre Aussagen an.}
+		\type{mc.multiple}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist keine Abbildung.}}
+  			\solution{false}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist eine Abbildung.}}
+  			\solution{true}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist injektiv.}}
+  			\solution{compute}
+			\iscorrect{s}{>}{0}	
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist surjektiv.}}
+  			\solution{false}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist bijektiv.}}
+  			\solution{false}			
+		\end{choice}
+        \explanation[equalChoice(00???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(11???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(10???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(??0??) AND s > 0]{Die Abbildung ist injektiv, weil aus $f(m_1)=f(m_2)$ bereits $m_1=m_2$ folgt.}
+        \explanation[equalChoice(??1??) AND s = 0]{Die Abbildung bildet alle natürlichen Zahlen auf $0$ ab. Verschiedene Elemente des Definitionsbereichs werden also nicht auf verschiedene Elemente des Zielbereichs abgebildet.}
+        \explanation[equalChoice(???1?)]{Surjektiv ist die Abbildung, wenn Wertemenge und Zielbereich übereinstimmen. Beispielsweise ist die Zahl $-11\in \Z$ ein Element des Zielbereichs, wird aber nicht von $f$ zugeordnet, somit kann $f$ nicht surjektiv sein.}
+        \explanation[equalChoice(????1)]{Eine Abbildung ist bijektiv, wenn die Abbildung injektiv und surjektiv ist.}
+
+	\end{question}	
+	
+%3. Frage, von Pool 1 
+	\begin{question}
+  		\text{Entscheiden Sie, welche Aussagen für die Zuordnung $f: \mathbb{R} \to \mathbb{R} , x \mapsto x^2$ korrekt sind und kreuzen Sie wahre Aussagen an.}
+		\type{mc.multiple}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist keine Abbildung.}}
+  			\solution{false}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist eine Abbildung.}}
+  			\solution{true}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist injektiv.}}
+  			\solution{false}
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist surjektiv.}}
+  			\solution{false}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist bijektiv.}}
+  			\solution{false}			
+		\end{choice}
+        \explanation[equalChoice(00???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(11???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(10???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(??1??)]{Es ist $f(-1)=1=f(1)$. Das Element $1$ des Zielbereichs wird also mindestens zweimal angesprochen, folglich kann keine injektive Abbildung vorliegen.}
+        \explanation[equalChoice(???1?)]{$-1\in \R$ ist ein Element des Zielbereichs, wird aber nicht von $f$ zugeordnet, somit kann $f$ nicht surjektiv sein.}
+        \explanation[equalChoice(????1)]{Eine Abbildung ist bijektiv, wenn die Abbildung injektiv und surjektiv ist.}
+
+	\end{question}
+	%4. Frage, von Pool 1 
+	\begin{question}
+    	\text{Entscheiden Sie, welche Aussagen für die Zuordnung $f: \mathbb{R} \to \mathbb{R}_{\leq 0} , x \mapsto x^2$ korrekt sind und kreuzen Sie wahre Aussagen an.}
+		\type{mc.multiple}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist keine Abbildung.}}
+  			\solution{true}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist eine Abbildung.}}
+  			\solution{false}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist injektiv.}}
+  			\solution{false}
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist surjektiv.}}
+  			\solution{false}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist bijektiv.}}
+  			\solution{false}			
+		\end{choice}
+        \explanation[equalChoice(00???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(11???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(01???)]{Schauen Sie noch einmal auf den angegebenen Zielbereich!}
+    \end{question}
+	%5. Frage, von Pool 1 
+	\begin{question}
+  		\text{Entscheiden Sie, welche Aussagen für die Zuordnung $f: \mathbb{R} \to \mathbb{R}_{\geq 0} , x \mapsto x^2$ korrekt sind und kreuzen Sie wahre Aussagen an.}
+		\type{mc.multiple}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist keine Abbildung.}}
+  			\solution{false}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist eine Abbildung.}}
+  			\solution{true}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist injektiv.}}
+  			\solution{false}
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist surjektiv.}}
+  			\solution{true}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist bijektiv.}}
+  			\solution{false}			
+		\end{choice}
+        \explanation[equalChoice(00???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(11???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(10???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(??1??)]{Es ist $f(-1)=1=f(1)$. Das Element $1$ des Zielbereichs wird also mindestens zweimal angesprochen, folglich kann keine injektive Abbildung vorliegen.}
+        \explanation[equalChoice(???0?)]{Jede nicht-negative Zahl ist ein Quadrat einer reellen Zahl.}
+        \explanation[equalChoice(????1)]{Eine Abbildung ist bijektiv, wenn die Abbildung injektiv und surjektiv ist.}
+
+	\end{question}
+%6. Frage, von Pool 1 
+	\begin{question}
+    	\text{Entscheiden Sie, welche Aussagen für die Zuordnung $f: \mathbb{R} \to \mathbb{Z} , x \mapsto x^2$ korrekt sind und kreuzen Sie wahre Aussagen an.}
+		\type{mc.multiple}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist keine Abbildung.}}
+  			\solution{true}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist eine Abbildung.}}
+  			\solution{false}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist injektiv.}}
+  			\solution{false}
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist surjektiv.}}
+  			\solution{false}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist bijektiv.}}
+  			\solution{false}			
+		\end{choice}
+        \explanation[equalChoice(00???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(11???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(01???)]{Schauen Sie noch einmal auf den Zielbereich! Bildet $f$ die reelle Zahl $\frac{1}{2}$ auf eine ganze Zahl ab?}
+	\end{question}
+
+	%7. Frage (Pool 2)
+	\begin{question}
+    	\text{Entscheiden Sie, welche Aussagen für die Zuordnung $f: \mathbb{R} \to \mathbb{R} , x \mapsto x^3$ korrekt sind und kreuzen Sie wahre Aussagen an.}
+		\type{mc.multiple}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist keine Abbildung.}}
+  			\solution{false}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist eine Abbildung.}}
+  			\solution{true}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist injektiv.}}
+  			\solution{true}
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist surjektiv.}}
+  			\solution{true}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist bijektiv.}}
+  			\solution{true}			
+		\end{choice}
+        \explanation[equalChoice(00???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(11???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(10???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(??0??)]{Die Abbildung ist injektiv, weil aus $f(m_1)=f(m_2)$ bereits $m_1=m_2$ folgt.}
+        \explanation[equalChoice(???0?)]{Surjektiv ist die Abbildung, wenn die Wertemenge mit dem Zielbereich übereinstimmt.}
+        \explanation[equalChoice(????0)]{Eine Abbildung ist bijektiv, wenn die Abbildung injektiv und surjektiv ist.}
+
+	\end{question}
+	
+	%8. Frage (Pool 2)
+	\begin{question}
+   		\text{Entscheiden Sie, welche Aussagen für die Zuordnung $f: \mathbb{R}_- \to \mathbb{R} , x \mapsto x^3$ korrekt sind und kreuzen Sie wahre Aussagen an.
+		Hierbei ist $\mathbb{R}_-:=\{x \in \mathbb{R} \vert x < 0\}$.}
+		\type{mc.multiple}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist keine Abbildung.}}
+  			\solution{false}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist eine Abbildung.}}
+  			\solution{true}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist injektiv.}}
+  			\solution{true}
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist surjektiv.}}
+  			\solution{false}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist bijektiv.}}
+  			\solution{false}			
+		\end{choice}
+        \explanation[equalChoice(00???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(11???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(10???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(??0??)]{Die Abbildung ist injektiv, weil aus $f(m_1)=f(m_2)$ bereits $m_1=m_2$ folgt.}
+        \explanation[equalChoice(???1?)]{Die reelle Zahl $1\in \R$, ein Element des Zielbereichs, wird von $f$ nicht zugeordnet, da $f(x)<0$ für alle Elemente $x$ des Definitionsbereichs, somit kann $f$ nicht surjektiv sein.}
+        \explanation[equalChoice(????1)]{Eine Abbildung ist bijektiv, wenn die Abbildung injektiv und surjektiv ist.}
+
+	\end{question}
+%9. Frage (Pool 2)
+	\begin{question}
+    	\text{Entscheiden Sie, welche Aussagen für die Zuordnung $f: \mathbb{R}_+ \to \mathbb{R} , x \mapsto x^3$ korrekt sind und kreuzen Sie wahre Aussagen an.
+		Hierbei ist $\mathbb{R}_+:=\{x \in \mathbb{R} \vert x > 0\}$.}
+		\type{mc.multiple}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist keine Abbildung.}}
+  			\solution{false}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist eine Abbildung.}}
+  			\solution{true}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist injektiv.}}
+  			\solution{true}
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist surjektiv.}}
+  			\solution{false}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist bijektiv.}}
+  			\solution{false}			
+		\end{choice}
+        \explanation[equalChoice(00???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(11???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(10???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(??0??)]{Die Abbildung ist injektiv, weil aus $f(m_1)=f(m_2)$ bereits $m_1=m_2$ folgt.}
+        \explanation[equalChoice(???1?)]{Die Zahl $-1\in \R$, ein Element des Zielbereichs, wird nicht von $f$ zugeordnet, da $f(x)>0$ für alle Elemente $x$ des Definitionsbereichs, somit kann $f$ nicht surjektiv sein.}
+        \explanation[equalChoice(????1)]{Eine Abbildung ist bijektiv, wenn die Abbildung injektiv und surjektiv ist.}
+
+	\end{question}
+	%10. Frage (Pool 2)
+	\begin{question}
+    	\text{Entscheiden Sie, welche Aussagen für die Zuordnung $f: \mathbb{Z} \to \mathbb{R} , x \mapsto x^3$ korrekt sind und kreuzen Sie wahre Aussagen an.}
+		\type{mc.multiple}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist keine Abbildung.}}
+  			\solution{false}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist eine Abbildung.}}
+  			\solution{true}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist injektiv.}}
+  			\solution{true}
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist surjektiv.}}
+  			\solution{false}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist bijektiv.}}
+  			\solution{false}			
+		\end{choice}
+        \explanation[equalChoice(00???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(11???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(10???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(??0??)]{Die Abbildung ist injektiv, weil aus $f(m_1)=f(m_2)$ bereits $m_1=m_2$ folgt.}
+        \explanation[equalChoice(???1?)]{Die Zahl $2 \in \R$, ein Element des Zielbereichs, wird von $f$ nicht zugeordnet, da $\sqrt[3]{2}\not\in \Z$, somit kann $f$ nicht surjektiv sein.}
+        \explanation[equalChoice(????1)]{Eine Abbildung ist bijektiv, wenn die Abbildung injektiv und surjektiv ist.}
+
+	\end{question}
+	%11.Frage (Pool 2)
+	\begin{question}
+    	\begin{variables}
+			\randint{a}{-10}{-1}
+			\randint{b}{-10}{10}
+			\function[normalize]{f}{a*(x+b)^4}
+		\end{variables}
+		\text{Entscheiden Sie, welche Aussagen für die Zuordnung $f: \mathbb{R} \to \mathbb{R}_+ , x \mapsto \var{f}$ korrekt 
+        sind und kreuzen Sie wahre Aussagen an.}
+		\type{mc.multiple}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist keine Abbildung.}}
+  			\solution{true}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist eine Abbildung.}}
+  			\solution{false}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist injektiv.}}
+  			\solution{false}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist surjektiv.}}
+  			\solution{false}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist bijektiv.}}
+  			\solution{false}			
+		\end{choice}
+        \explanation[equalChoice(00???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(11???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(01???)]{Schauen Sie sich noch einmal den Zielbereich an! Wird auch wirklich dorthin abgebildet?}
+	\end{question}
+	%12.Frage (Pool 2)
+    \begin{question}
+    	\begin{variables}
+			\randint{a}{1}{10}
+			\randint{b}{-10}{10}
+			\function[normalize]{f}{a*(x+b)^4}
+            \function[calculate]{help1}{-b-1}
+            \function[calculate]{help2}{-b+1}
+		\end{variables}
+		\text{Entscheiden Sie, welche Aussagen für die Zuordnung $f: \mathbb{R} \to \mathbb{R}_{\geq 0} , x \mapsto \var{f}$ korrekt 
+        sind und kreuzen Sie wahre Aussagen an.}
+		\type{mc.multiple}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist keine Abbildung.}}
+  			\solution{false}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist eine Abbildung.}}
+  			\solution{true}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist injektiv.}}
+  			\solution{false}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist surjektiv.}}
+  			\solution{true}			
+		\end{choice}
+		\begin{choice}
+  			\lang{de}{\text{$f$ ist bijektiv.}}
+  			\solution{false}			
+		\end{choice}
+        \explanation[equalChoice(00???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(11???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(10???)]{Eine Abbildung ist eine Zuordnung zwischen zwei Mengen, die jedem Element des Definitionsbereichs genau ein Element des Zielbereichs zuordnet.}
+        \explanation[equalChoice(??1??)]{Es ist $f(\var{help1})=\var{a}=f(\var{help2})$. Kann $f$ dann injektiv sein?}
+        \explanation[equalChoice(???0?)]{Surjektiv ist die Abbildung, falls die Wertemenge mit dem Zielbereich übereinstimmt.}
+        \explanation[equalChoice(????1)]{Eine Abbildung ist bijektiv, wenn die Abbildung injektiv und surjektiv ist.}
+	\end{question}
+\end{problem}
+
+\embedmathlet{mathlet}
+\end{content}

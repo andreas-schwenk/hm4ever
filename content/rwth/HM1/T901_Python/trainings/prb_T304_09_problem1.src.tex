@@ -1,0 +1,72 @@
+\documentclass{mumie.problem.python}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/PythonCorrector.meta.xml}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/19325}{Ticket 19325}
+\end{block}
+
+\title{Integration: Mittelpunktsregel}
+
+\begin{question}
+
+Einige Funktionen lassen sich nur sehr aufwändig oder gar nicht explizit integrieren.
+In dieser Programmieraufgabe berechnen Sie Integrale \textbf{numerisch}.
+
+Ein Integral 
+\[I = \int_a^b f(x) \,dx\]
+kann durch die \textbf{Mittelpunktsregel} wie folgt approximativ gelöst werden:
+\[ I \approx M = h \sum_{i=0}^{n-1} f\left(a+\left(i+0.5\right) \cdot h\right) \]
+Dabei beschreibt $n \in \N$ die Anzahl der Schritte und $h := \frac{b-a}{n}$ die Schrittweite.
+
+Implementieren Sie eine \textbf{Funktion} \texttt{def int_sinc(a, b, n)} in Python, 
+um das folgende Integral nährungsweise zu bestimmen:
+\[ \int_a^b \frac{sin(x)}{x} dx \]
+.
+
+\pythonanswer{int_sinc}
+
+\begin{pythonsolution}{int_sinc}   
+import numpy
+
+def int_sinc(a, b, n):
+    h = (b-a)/n
+    M = 0
+    for i in range(0, n):
+        x = a + (i+0.5)*h
+        fx = numpy.sin(x) / x
+        M = M + fx
+    M = h * M
+    return M
+\end{pythonsolution}
+
+\begin{pythonevaluator}
+if abs(int_sinc(0,1,10000) - 0.9460830) > 1e-3:
+    exit(11)
+exit(0)                                                   	
+\end{pythonevaluator}
+
+\pythongrading{11}{0.5}{Dein Code liefert das falsche Ergebnis}
+
+\end{question}
+
+
+\end{content}

@@ -1,0 +1,128 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü06: Konvergenz}
+    \lang{en}{Exercise 6}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T208_Reihen/g_art_content_24_reihen_und_konvergenz.meta.xml}{content_24_reihen_und_konvergenz}
+\link{generic_article}{content/rwth/HM1/T208_Reihen/g_art_content_25_konvergenz_kriterien.meta.xml}{content_25_konvergenz_kriterien}
+\end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+
+\title{
+\lang{de}{Ü06: Konvergenz}
+\lang{en}{Exercise 6}
+}
+ \begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9872}{Ticket 9872}
+\end{block}
+ 
+ Untersuchen Sie, ob die folgenden Reihen konvergieren.
+\begin{table}[\class{items}]
+ \nowrap{a) $\displaystyle \ \sum_{k\in\mathbb{N}}{\frac{2+(-1)^{k}}{2^{k-1}}}$} \\
+ \nowrap{b) $\displaystyle \ \sum_{k=2}^{\infty}{\frac{1}{(\ln k)^{k}}}$} \\
+ \nowrap{c) $\displaystyle \ \sum_{k=1}^{\infty}{\left(\sqrt{4k^{2}+2k}-2k\right)}$} \\
+ \nowrap{d) $\displaystyle \ \sum_{k=1}^{\infty}{\left(\sqrt{k^{4}+1}-k^{2}\right)}$} \\
+ \nowrap{e) $\displaystyle \ \sum_{k=1}^{\infty}{\frac{1}{(2k)!}}$} \\
+ \nowrap{f) $\displaystyle \ \sum_{k=0}^{\infty}{\left(\frac{3}{2}\right)^{k}}$}
+\end{table}
+ 
+
+
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+\tab{\lang{de}{    Antworten    }}
+    \lang{de}{ \begin{enumerate}[a)]
+\item[a)] Die Reihe konvergiert.
+\item[b)] Die Reihe konvergiert.
+\item[c)] Die Reihe divergiert.
+\item[d)] Die Reihe konvergiert.
+\item[e)] Die Reihe konvergiert.
+\item[f)] Die Reihe divergiert.
+\end{enumerate} }
+
+
+  \tab{
+  \lang{de}{Lösung a)}
+  }
+\lang{de}{Es gilt nach der Dreiecksungleichung 
+\[ |\frac{2+(-1)^{k}}{2^{k-1}}|=\frac{|2+(-1)^{k}|}{2^{k-1}}\leq
+\frac{2 + |(-1)^k|}{2^{k-1}} = \frac{3}{2^{k-1}}=\frac{6}{2^k}
+\] für alle $k\in\N$. Damit ist die \ref[content_24_reihen_und_konvergenz][geometrische Reihe]{ex:konvergenz-geo-reihe} 
+$6\cdot\sum_{k=1}^\infty \left(\frac{1}{2}\right)^k$ eine konvergente Majorante. Also konvergiert die Reihe nach dem 
+\ref[content_25_konvergenz_kriterien][Majorantenkriterium]{thm:majoranten-krit}.}
+
+Alternativ bemerkt man direkt, dass die Reihe Summe von konvergenten geometrischen Reihen ist. 
+
+\tab{
+\lang{de}{Lösung b)}}
+\lang{de}{Es gilt $\lim_{k\to\infty}{\sqrt[k]{|\frac{1}{(\ln k)^{k}}|}}=\lim_{k\to\infty}{\frac{1}{\ln k}}=0$. 
+ Insbesondere gibt es also ein $k_0$ so, dass für alle 
+ $k\geq k_0$ die Abschätzung $\sqrt[k]{|\frac{1}{(\ln k)^{k}}|}<\frac{1}{2}$ gilt. 
+ Daher ist die Reihe absolut konvergent nach dem \ref[content_25_konvergenz_kriterien][Wurzelkriterium]{thm:wurzelkriterium}.}
+
+\tab{
+\lang{de}{Lösung c)}}
+Es gilt
+\begin{align*}\sqrt{4k^{2}+2k}-2k &=
+\frac{\textcolor{#0066CC}{\sqrt{4k^{2}+2k}+2k}}{\sqrt{4k^{2}+2k}+2k} (\textcolor{#0066CC}{\sqrt{4k^{2}+2k}-2k})\\
+&=\frac{\textcolor{#0066CC}{(\sqrt{4k^{2}+2k})^2-(2k)^2}}{\sqrt{4k^{2}+2k}+2k} \\
+&=\frac{4k^2+\textcolor{#00CC00}{2k}-4k^2}{\textcolor{#00CC00}{k}\cdot (\sqrt{4+\frac{2}{k}}+2)} \\
+&=\frac{\textcolor{#00CC00}{2}}{\sqrt{4+\frac{2}{k}}+2}\xrightarrow[k\to\infty]{} \frac{2}{\sqrt{4}+2}=\frac{1}{2} \,.
+\end{align*}
+Somit ist $\sqrt{4k^{2}+2k}-2k$ keine Nullfolge und die Reihe divergiert.
+
+\tab{
+\lang{de}{Lösung d)}}
+Es gilt
+\begin{align*}
+0& \leq
+\sqrt{k^{4}+1}-k^{2}
+=\textcolor{#0066CC}{(\sqrt{k^{4}+1}-k^{2})}\frac{\textcolor{#0066CC}{\sqrt{k^4+1}+k^2}}{\sqrt{k^4+1}+k^2}
+=\frac{\textcolor{#0066CC}{k^4+1-(k^2)^2}}{\sqrt{k^4+1}+k^2}
+=\frac{1}{\textcolor{#CC6600}{\sqrt{k^{4}+1}}+k^{2}}\\
+&\leq \frac{1}{\textcolor{#CC6600}{k^2}+k^{2}}=\frac{1}{2k^2}
+\end{align*}
+für alle $k\in\mathbb{N}$.
+Die Reihe $\displaystyle\sum_{k\in\mathbb{N}}{\frac{1}{k^2}}$ \ref[content_25_konvergenz_kriterien][konvergiert]{ex:weitere-reihen}.
+Nach dem \ref[content_25_konvergenz_kriterien][Majorantenkriterium]{thm:majoranten-krit} ist auch die zu untersuchende Reihe  konvergent.
+
+\tab{
+\lang{de}{Lösung e)}}
+Wir benutzen hier das \ref[content_25_konvergenz_kriterien][Quotientenkriterium]{thm:quotientenkriterium}, man könnte aber auch z.\,B. das Majorantenkriterium benutzen. Es gilt \[\frac{\frac{1}{(2k+2)!}}{\frac{1}{(2k)!}}=
+\frac{(2k)!}{(2k+2)!} = \frac{(2k)!}{(2k)! (2k+1) (2k+2)}
+=\frac{1}{(2k+1)(2k+2)}\leq \frac{1}{12}<1\,.\]
+Also konvergiert die Reihe nach dem Quotientenkriterium.
+
+\tab{
+\lang{de}{Lösung f)}}
+Da hier eine Folge summiert wird, die nicht gegen $0$ konvergiert, kann die Reihe nicht konvergieren. 
+
+Man kann zur Lösung auch das \ref[content_25_konvergenz_kriterien][Quotientenkriterium]{thm:quotientenkriterium} nutzen: Es gilt
+\[\frac{(\frac{3}{2})^{k+1}}{(\frac{3}{2})^{k}}=
+\frac{(\frac{3}{2})^{k}\cdot \frac{3}{2}}{(\frac{3}{2})^{k}}=\frac{3}{2}\xrightarrow[k\to\infty]{}\frac{3}{2}.\]
+Damit divergiert die Reihe nach dem Quotientenkriterium.
+
+(Alternativ kann man auch bemerken, dass dies die geometrische Reihe für $q=\frac{3}{2}\geq 1$ ist. 
+\ref[content_24_reihen_und_konvergenz][Diese divergiert]{ex:konvergenz-geo-reihe}.)
+
+
+  %  \tab{\lang{de}{Video: ähnliche Übungsaufgabe}}	
+  % \youtubevideo[500][300]{uEuAqH3Jq44}\\
+
+\end{tabs*}
+
+\end{content}

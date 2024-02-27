@@ -1,0 +1,309 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+ \name{
+  \lang{de}{A07: Bruchterme}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22305}{Ticket 22305}
+\end{block}
+
+\begin{block}[annotation]
+	Vereinfachen von Bruchtermen
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+\lang{de}{
+	\title{A07: Bruchterme}
+}
+
+\begin{problem}
+%
+%
+  \randomquestionpool{1}{2}
+  \randomquestionpool{3}{4}
+  \randomquestionpool{5}{6}
+  \permutequestions
+%
+% Q1 
+%
+  \begin{question}
+    \text{Vereinfachen Sie den folgenden Ausdruck:
+    $\frac{\var{b1}}{\var{f1}} +\frac{\var{b2}}{\var{f2}}$.
+    }
+    
+    \explanation{Bringen Sie beide Brüche auf den Hauptnenner und addieren Sie anschließend die Zähler.}
+
+    \type{input.function}
+    \field{real}
+
+    \begin{variables}
+      \randint{a1}{1}{4}
+      \randint{b1}{1}{4}
+      \randint{c1}{1}{5}
+      \randint{a2}{1}{4}
+      \randint{b2}{1}{4}
+      \randint{c2}{1}{5}
+      \function[normalize]{f1}{c1*x-a1}
+      \function[normalize]{f2}{c2*x+a2}
+      \function[normalize]{z}{b1*f2+b2*f1}
+      \function[normalize]{n}{f1*f2}
+      \function[normalize]{s}{z/n}
+    \end{variables}
+
+    \begin{answer}
+      \text{Berechnen Sie erst den Nenner: }
+      \solution{n}
+      \inputAsFunction{x}{gn}
+    \end{answer}    
+    
+    \begin{answer}
+      \text{Berechnen Sie jetzt den Zähler:}
+      \solution{z}
+      \inputAsFunction{x}{gz}
+      \checkFuncForZero{gz/gn-s}{-10}{10}{100}
+    \end{answer}
+  \end{question}
+  
+%
+% Q2 
+%
+  \begin{question}
+    \text{Vereinfachen Sie den folgenden Ausdruck:
+    $\frac{\var{b1}}{\var{f1}} -\frac{\var{b2}}{\var{f2}}$.
+    }
+    
+    \explanation{Bringen Sie beide Brüche auf den Hauptnenner und addieren Sie anschließend die Zähler.}
+
+    \type{input.function}
+    \field{real}
+
+    \begin{variables}
+      \randint{a1}{1}{4}
+      \randint{b1}{1}{4}
+      \randint{c1}{1}{5}
+      \randint{a2}{1}{4}
+      \randint{b2}{1}{4}
+      \randint{c2}{1}{5}
+      \function[normalize]{f1}{c1*x-a1}
+      \function[normalize]{f2}{c2*x+a2}
+      \function[normalize]{z}{b1*f2-b2*f1}
+      \function[normalize]{n}{f1*f2}
+      \function[normalize]{s}{z/n}  
+    \end{variables}
+
+    \begin{answer}
+      \text{Berechnen Sie zuerst den Nenner: }
+      \solution{n}
+      \inputAsFunction{x}{gn}
+    \end{answer}  
+    
+    \begin{answer}
+      \text{Berechnen Sie jetzt den Zähler: }
+      \solution{z}
+      \inputAsFunction{x}{gz}
+      \checkFuncForZero{gz/gn-s}{-10}{10}{100}
+    \end{answer}
+  \end{question}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%
+% Q3
+%
+  \begin{question}
+    \text{Kürzen Sie den Bruchterm 
+    $\quad \frac{\var{fz}}{\var{fn}} \quad$ so weit wie möglich. 
+    }
+    
+   \explanation{Finden Sie gemeinsame Faktoren in Zähler und Nenner, die Sie durch Anwendung 
+               des Distributivgesetzes ausklammern. Kürzen Sie anschließend den Bruch.}
+    
+    \type{input.function}
+    \field{real}
+
+    \begin{variables}
+      \randint{a}{1}{8}
+      \randint{n}{1}{3}
+      \randint{m}{1}{5}
+      \randadjustIf{m}{m=n}
+      
+      \function[calculate]{b}{n*a}
+      \function[calculate]{c}{m*a}
+      \function[normalize]{fz}{a*x^2-b*x}
+      \function[normalize]{fn}{a*x*y+c*x}
+      \function[normalize]{gz}{x-n}
+      \function[normalize]{gn}{y+m}
+    \end{variables}  
+    
+    \begin{answer}
+      \text{Zähler des gekürzten Bruchterms ist: $\quad$}
+      \solution{gz}
+      \checkAsFunction{x,y}{-10}{10}{100}
+    \end{answer}
+
+    \begin{answer}
+      \text{Nenner des gekürzten Bruchterms ist: $\quad$}
+      \solution{gn}
+      \checkAsFunction{x,y}{-10}{10}{100}
+    \end{answer}  
+
+  \end{question}
+  
+
+%
+% Q4
+%
+  \begin{question}
+    \text{Kürzen Sie den Bruchterm 
+    $\quad \frac{\var{fz}}{\var{fn}} \quad$ so weit wie möglich. 
+    }
+    
+    \explanation{Finden Sie gemeinsame Faktoren in Zähler und Nenner, die Sie durch Anwendung 
+                 des Distributivgesetzes ausklammern. Kürzen Sie anschließend den Bruch.}
+    
+    \type{input.function}
+    \field{real}
+
+    \begin{variables}
+      \randint{a}{1}{8}
+      \randint[Z]{n1}{-2}{2}
+      \randint{n2}{1}{3}
+      \randint[Z]{m1}{-3}{3}
+      \randint{m2}{1}{5}
+      \randadjustIf{m2}{m2=n2}
+      
+      \function[calculate]{b1}{n1*a}
+      \function[calculate]{b2}{n2*a}
+      \function[calculate]{c1}{m1*a}      
+      \function[calculate]{c2}{m2*a}
+      \function[normalize]{fz}{b1*x^2+b2*x}
+      \function[normalize]{fn}{c1*x*y-c2*x}
+      \function[normalize]{gz}{n1*x+n2}
+      \function[normalize]{gn}{m1*y-m2}
+    \end{variables}  
+    
+    \begin{answer}
+      \text{Zähler des gekürzten Bruchterms ist: $\quad$}
+      \solution{gz}
+      \checkAsFunction{x,y}{-10}{10}{100}
+    \end{answer}
+
+    \begin{answer}
+      \text{Nenner des gekürzten Bruchterms ist: $\quad$}
+      \solution{gn}
+      \checkAsFunction{x,y}{-10}{10}{100}
+    \end{answer}  
+
+  \end{question}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%
+% Q5
+%
+  \begin{question}
+    \text{Kürzen Sie den Bruchterm 
+    $\quad \frac{\var{fz}}{\var{fn}} \quad$ so weit wie möglich. 
+    }
+    
+    \explanation{Faktorisieren Sie Zähler und Nenner durch Anwendung der binomischen Formeln 
+                 und kürzen Sie anschließend den Bruch.}
+    
+    \type{input.function}
+    \field{real}
+
+    \begin{variables}
+      \drawFromSet{a}{1,5,7}
+      \drawFromSet{b}{2,3,4,9}
+      
+      \function[calculate]{a2}{a^2}
+      \function[calculate]{b2}{b^2}
+      \function[calculate]{c}{2*a*b}
+      \function[normalize]{fz}{a2*x^2-b2*y^2}
+      \function[normalize]{fn}{a2*x^2-c*x*y+b2*y^2}
+      \function[normalize]{gz}{a*x+b*y}
+      \function[normalize]{gn}{a*x-b*y}
+    \end{variables}  
+    
+    \begin{answer}
+      \text{Zähler des gekürzten Bruchterms ist: $\quad$}
+      \solution{gz}
+      \checkAsFunction{x,y}{-10}{10}{100}
+    \end{answer}
+
+    \begin{answer}
+      \text{Nenner des gekürzten Bruchterms ist: $\quad$}
+      \solution{gn}
+      \checkAsFunction{x,y}{-10}{10}{100}
+    \end{answer}  
+
+  \end{question}
+
+
+%
+% Q6
+%
+  \begin{question}
+    \text{Kürzen Sie den Bruchterm 
+    $\quad \frac{\var{fz}}{\var{fn}} \quad$ so weit wie möglich. 
+    }
+    
+    \explanation{Faktorisieren Sie Zähler und Nenner durch Anwendung der binomischen Formeln 
+                 und/oder des Distributivgesetzes und kürzen Sie anschließend den Bruch.}
+    
+    \type{input.function}
+    \field{real}
+
+    \begin{variables}
+      \drawFromSet{a}{5,7,11}
+      \drawFromSet{b}{2,3,4,9}
+      
+      \function[calculate]{ab}{a*b}
+      \function[calculate]{b2}{b^2}
+      \function[normalize]{fz}{a*z+ab}
+      \function[normalize]{fn}{z^2-b2}
+      \function[normalize]{gz}{a}
+      \function[normalize]{gn}{z-b}
+    \end{variables}  
+    
+    \begin{answer}
+      \text{Zähler des gekürzten Bruchterms ist: $\quad$}
+      \solution{gz}
+      \checkAsFunction{z}{-10}{10}{100}
+    \end{answer}
+
+    \begin{answer}
+      \text{Nenner des gekürzten Bruchterms ist: $\quad$}
+      \solution{gn}
+      \checkAsFunction{z}{-10}{10}{100}
+    \end{answer}  
+
+  \end{question}
+
+
+%
+%
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

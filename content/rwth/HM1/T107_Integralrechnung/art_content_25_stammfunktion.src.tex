@@ -1,0 +1,632 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Stammfunktionen}
+    \lang{en}{Antiderivatives}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T107_Antiderivative_A.meta.xml}{T107_Antiderivative_A}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T107_Antiderivative_B.meta.xml}{T107_Antiderivative_B}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T106_Differentialrechnung/g_art_content_21_kettenregel.meta.xml}{content_21_kettenregel}
+    \link{generic_article}{content/rwth/HM1/T305_Integrationstechniken/g_art_content_11_partielle_integration.meta.xml}{content_11_partielle_integration}
+    \link{generic_article}{content/rwth/HM1/T107_Integralrechnung/g_art_content_24_integral_als_flaeche.meta.xml}{link1}
+    \link{generic_article}{content/rwth/HM1/T106_Differentialrechnung/g_art_content_20_ableitung_als_tangentensteigung.meta.xml}{link2}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{7}
+\ombarticle{2}
+
+
+\lang{de}{\title{Stammfunktionen}}
+\lang{en}{\title{Antiderivatives}} 
+ 
+\begin{block}[annotation]
+
+  Stammfunktionen von x^k, exp(x), sin(x), cos(x)
+    mit Nachweis durch Ableitung,
+   Linearität der Stammfunktion,
+   Unbestimmtes Integral als Menge von Stammfunktionen,
+   Bestimmtes Integral und Stammfunktion
+
+\end{block}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9036}{Ticket 9036}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+\section{\lang{de}{Stammfunktionen und ihre Eigenschaften}
+         \lang{en}{Antiderivatives and their properties}}\label{stamm}
+
+\lang{de}{
+Im \link{link1}{vorigen Abschnitt} haben wir bereits einen Zusammenhang zwischen Integral und
+Ableitung kennengelernt: Das Integral der momentanen Änderungsrate (d.\,h. 
+der Ableitung $f'(x)$) einer Funktion kann zur Rekonstruktion der Funktion $f(x)$
+verwendet werden. Die Integration macht auf diese Weise die Ableitung 
+rückgängig.
+\\\\
+\emph{Stammfunktionen} sind Umkehrungen der Ableitung:
+}
+\lang{en}{
+In the \link{link1}{previous section} we dealt with the relationship between integrals and 
+derivatives: the instantaneous rate of change (the derivative) $f'(x)$ of a function $f(x)$ can be 
+integrated to reconstruct $f(x)$. Integration is, in some sense, the inverse process of 
+differentiation.
+\\\\
+\emph{Antiderivatives} are inverses of derivatives:
+}
+
+
+\begin{definition}\label{def:stammfkt}
+\lang{de}{
+Eine differenzierbare Funktion $F(x)$ heißt \emph{Stammfunktion} von $f(x)$ auf einem Intervall $I$, 
+falls gilt:
+}
+\lang{en}{
+A differentiable function $F(x)$ is called an \emph{antiderivative} of $f(x)$ on an interval $I$ if
+}
+\[ F'(x) = f(x) \, \, \text{\lang{de}{ für alle }\lang{en}{ for all }} x \in I . \]
+\end{definition}
+
+\begin{example}
+%\emph{Beispiel:} 
+\lang{de}{
+Sei $f(x)=x^2+1$. Dann ist $F(x)=\frac{1}{3}x^3+x$ eine Stammfunktion
+von $f(x)$ auf $\mathbb{R}$, denn es gilt $F'(x)=x^2+1=f(x)$.
+}
+\lang{en}{
+If $f(x)=x^2+1$ then $F(x)=\frac{1}{3}x^3+x$ is an antiderivative of $f(x)$ on $\mathbb{R}$, since
+$F'(x)=x^2+1=f(x)$.
+}
+\end{example} 
+\lang{de}{
+Wie bestimmt man eine Stammfunktion $F(x)$, wenn nur $f(x)$ gegeben ist? Durch Umkehrung der 
+Ableitung, d.\,h., man sucht eine Funktion, deren Ableitung $f(x)$ ist. \\
+}
+\lang{en}{
+To calculate an antiderivative $F(x)$ of a function $f(x)$ we work backwards from derivatives, i.e. 
+we look for a function whose derivative is $f(x)$. \\
+}
+ 
+ 
+ 
+\begin{block}[warning]
+\lang{de}{
+Stammfunktionen sind aber (anders als Ableitungen) nicht eindeutig! Falls $F(x)$ eine Stammfunktion 
+von $f(x)$ ist, dann ist für jede beliebige reelle Zahl $C$ auch $F(x)+C$ eine Stammfunktion, denn 
+beim Ableiten fällt diese Konstante weg.
+}
+\lang{en}{
+One important thing to note is that antiderivatives are (unlike derivatives) not unique! If $F(x)$ is 
+an antiderivative of $f(x)$, then $F(x)+C$ is also an antiderivative for any given real number $C$ 
+since the derivative of any constant is $0$.
+}
+\end{block}  
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{1}
+\begin{quickcheck}
+		\field{real}
+		\type{input.function}
+		\begin{variables}
+			\randint{v}{0}{1}
+			\randint[Z]{a}{-5}{5}
+			\randint[Z]{b}{1}{4}
+			\randint{c}{-4}{4}
+		    \function[normalize]{ff}{a*x^3+v*b*sin(x)+(1-v)*b*cos(x)+c*exp(x)}
+			\function[normalize]{sol}{3*a*x^2+v*b*cos(x)-(1-v)*b*sin(x)+c*exp(x)}
+		\end{variables}
+
+
+         \text{\lang{de}{
+         Zu welcher Funktion ist $F(x)=\var{ff}$ eine Stammfunktion?\\
+         Antwort: Zu der Funktion $f(x)=$\ansref.
+         }
+         \lang{en}{
+         For which function is $F(x)=\var{ff}$ an antiderivative?\\
+         Answer: for $f(x)=$\ansref.
+         }}
+			
+
+		\begin{answer}
+			\solution{sol}
+			\checkAsFunction{x}{-5}{5}{50}
+		\end{answer}
+		\explanation{\lang{de}{
+    $F(x)$ ist nach Definition eine Stammfunktion von $f(x)$, wenn $f(x)$ die Ableitungsfunktion von 
+    $F(x)$ ist. Also ist $f(x)=F'(x)=\var{sol}$.
+    }
+    \lang{en}{
+    $F(x)$ is by definition an antiderivative of $f(x)$ if $f(x)$ is the derivative of $F(x)$. So 
+    $f(x) = F'(x) = \var{sol}$.
+    }}
+	\end{quickcheck}
+\end{quickcheckcontainer}
+ 
+\section{\lang{de}{Bestimmung einiger Stammfunktionen}
+         \lang{en}{Antiderivates of some common functions}}\label{sec:elementare_Stammfunktionen}
+
+\lang{de}{
+Stammfunktionen einiger grundlegender Funktionen lassen sich einfach angeben. Der Nachweis erfolgt 
+durch Ableitung.
+\\
+\begin{table}\label{def:stammfkt}
+Funktion $f(x)$ & Stammfunktion $F(x)$ & Bedingung\\
+$x^k$ mit $k\in \mathbb{Z}$ und $k \neq -1$ & $\frac{1}{k+1} x^{k+1} $ & $x \neq 0$, falls $k<0$ \\
+$x^{-1}$ & $\ln|x|$ & $x \neq 0$ \\
+$e^x$ & $e^x $ & $x \in \mathbb{R}$\\
+$\sin(x)$ & $-\cos(x) $ & $x \in \mathbb{R}$\\
+$\cos(x)$ & $\sin(x)$ &$x \in \mathbb{R}$
+\end{table}
+}
+\lang{en}{
+Antiderivatives of basic functions are easy to calculate. For each example, the proof simply involves 
+taking the derivative of the antiderivative, and noting that we arrive back at the function $f(x)$.
+\\
+\begin{table}\label{base_stammfkt}
+Function $f(x)$ & Antiderivative $F(x)$ & Conditions \\
+$x^k$ with $k\in \mathbb{Z}$ and $k \neq -1$ & $\frac{1}{k+1} x^{k+1} $ & $x \neq 0$ if $k<0$ \\
+$x^{-1}$ & $\ln|x|$ & $x \neq 0$ \\
+$e^x$ & $e^x $ & $x \in \mathbb{R}$\\
+$\sin(x)$ & $-\cos(x) $ & $x \in \mathbb{R}$\\
+$\cos(x)$ & $\sin(x)$ &$x \in \mathbb{R}$
+\end{table}
+}
+
+
+\begin{tabs*}[\initialtab{0}] %\class{exercise}
+  \tab{\lang{de}{Ableitung von $\ln |x|$}\lang{en}{The derivative of $\ln |x|$}}
+  \lang{de}{
+  Für $x>0$ gilt $\ln|x|=\ln(x)$ und die Ableitung ist $\frac{1}{x}$. \\
+  Für $x<0$ gilt $\ln|x|=\ln(-x)$. Die Ableitung wird mit Hilfe der 
+  \ref[content_21_kettenregel][Kettenregel]{Kettenregel}
+  der Differentialrechnung bestimmt:
+  }
+  \lang{en}{
+  For all $x>0$, $\ln|x|=\ln(x)$ and the derivative is $\frac{1}{x}$. \\
+  For all $x<0$, $\ln|x|=\ln(-x)$. The derivative can be calculated with the help of the 
+  \ref[content_21_kettenregel][chain rule]{chain rule}:
+  }
+  \[ \big(\ln(-x)\big)' = \frac{1}{-x} \cdot (-1) = \frac{1}{x} . \]
+  \lang{de}{Daher ist $\frac{1}{x}=x^{-1}$ die Ableitung von $\ln|x|$ für beliebige $x \neq 0$.}
+  \lang{en}{Hence $\frac{1}{x}=x^{-1}$ is the derivative of $\ln|x|$ for any $x \neq 0$.}
+\end{tabs*}   
+
+\begin{example}
+%\emph{Beispiel:} 
+\lang{de}{
+Sei $f(x)=\frac{1}{x^2} = x^{-2}$. Dann ist $F(x)=\frac{1}{-2+1} x^{-2+1} = -x^{-1} = - \frac{1}{x}$ 
+eine Stammfunktion von $f(x)$ für $x\neq 0$.
+}
+\lang{en}{
+Let $f(x)=\frac{1}{x^2} = x^{-2}$. The function 
+$F(x)=\frac{1}{-2+1} x^{-2+1} = -x^{-1} = - \frac{1}{x}$ is an antiderivative of $f(x)$ for $x\neq 0$.
+}
+\end{example}
+
+\lang{de}{
+Für Stammfunktionen gilt eine \emph{Summen- und Faktorregel}, die man durch Ableiten einfach 
+nachrechnen kann:
+}
+\lang{en}{
+Antiderivatives also have \emph{sum and constant rules} which can easily be proved via 
+differentiation.
+}
+
+\begin{rule}[\lang{de}{Summen- und Faktorregel}\lang{en}{Sum and Constant Rules}]\label{rule:sum_fakt_regeln}
+\begin{itemize}
+\item \lang{de}{
+Wenn $F(x)$ eine Stammfunktion von $f(x)$ ist und $G(x)$ eine Stammfunktion von $g(x)$, so ist 
+$F(x)+G(x)$ eine Stammfunktion von $f(x)+g(x)$.
+}
+\lang{en}{
+If $F(x)$ is an antiderivative of $f(x)$ and $G(x)$ is an antiderivative of $g(x)$, then $F(x)+G(x)$ 
+is an antiderivative of $f(x)+g(x)$.
+}
+\item \lang{de}{
+Wenn $c \in \mathbb{R}$ eine Konstante ist und $F(x)$ eine Stammfunktion von $f(x)$, so ist 
+$c\cdot F(x)$ eine Stammfunktion von $c \cdot f(x)$.
+}
+\lang{en}{
+If $c \in \mathbb{R}$ is a constant and $F(x)$ is an antiderivative of $f(x)$, then $c\cdot F(x)$ is 
+an antiderivative of $c \cdot f(x)$.
+}
+\end{itemize}
+\end{rule}
+
+\begin{example}
+%\emph{Beispiel:} 
+\lang{de}{Ist $f(x)=2 \sin(x)- 3 \cos(x) + 4x$, dann ist}
+\lang{en}{Let $f(x)=2 \sin(x)- 3 \cos(x) + 4x$. Then the function}
+\[ F(x) =  2 \big(-\cos(x)\big) - 3 \sin(x) + 4 \cdot \big(\frac{1}{2} x^2 \big)
+ = -2 \cos(x) - 3 \sin(x) + 2x^2 \]
+ \lang{de}{eine Stammfunktion von $f(x)$.}
+ \lang{en}{is an antiderivative of $f(x)$.}
+ \end{example}
+ 
+ \begin{block}[warning]
+ \lang{de}{
+ Die Faktorregel gilt für \emph{nur} für das Produkt einer 
+ konstanten Zahl mit einer Funktion, aber \emph{nicht} (!!!) für Produkte von
+ zwei Funktionen! Betrachtet man z.\,B. $f(x)=x \cdot x = x^2$, so ist 
+ $\frac{1}{3}x^3$ eine Stammfunktion von $f(x)$, aber nicht $\frac{1}{2}x^2 
+ \cdot \frac{1}{2}x^2 = \frac{1}{4} x^4$. \\
+ Für die Integration von Produkten von Funktionen existiert keine allgemein gültige
+ Regel. Für viele wichtige Fälle, wie z.\,B. für
+ $f(x)=x \cdot e^x$, existiert eine eigene Technik (partielle Integration), 
+ %siehe untenstehendes Video),
+ die hier nicht behandelt wird, aber im \link{content_11_partielle_integration}{Vertiefungsteil}.
+ }
+ \lang{en}{
+ The constant rule \emph{only} works for the product of a constant with a function and \emph{not} 
+ with the product of two functions! If we consider for example $f(x)=x \cdot x = x^2$, then 
+ $\frac{1}{3}x^3$ is an antiderivative of $f(x)$, not 
+ $\frac{1}{2}x^2 \cdot \frac{1}{2}x^2 = \frac{1}{4} x^4$. 
+ In order to integrate the products of functions, there is no general rule. For particular functions 
+ like $f(x)=x \cdot e^x$ there is a technique (called integration by parts) that we do not cover in 
+ this part of the course, but rather in an \link{content_11_partielle_integration}{later part}.
+ }
+\end{block}
+% \begin{center}
+% \lang{de}{
+%  \iframe[400][225][S]{https://www.stream24.net/vod/getVideo.php?id=10962-1-5530&mode=iframe}
+% }
+% \end{center}
+
+
+
+
+
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{1}
+\begin{quickcheck}
+	\field{real}
+		\type{input.function}
+		\begin{variables}
+			\randint{v}{0}{1}
+			\randint[Z]{a}{-5}{5}
+			\randint[Z]{b}{1}{4}
+			\randint{c}{-4}{4}
+			\randint[Z]{d}{1}{4}
+			\function[calculate]{y0}{(1-v)*b+c}
+		    \function[normalize]{f0}{d*x+(a/4)*x^4+v*b*sin(x)+(1-v)*b*cos(x)+c*exp(x)}
+		    \function[normalize]{ff}{f0-y0}
+			\function[normalize]{f}{d+a*x^3+v*b*cos(x)-(1-v)*b*sin(x)+c*exp(x)}
+		\end{variables}
+		
+        \text{\lang{de}{
+              Bestimmen Sie diejenige Stammfunktion $F(x)$ von $f(x)=\var{f}$, für welche $F(0)=0$ 
+              gilt.\\
+              $F(x)=$\ansref.
+              }
+              \lang{en}{
+              Determine the antiderivative $F(x)$ of $f(x) = \var{f}$ for which $F(0) = 0$ 
+              holds. \\
+              $F(x) = $ \ansref.         
+              }}
+
+		\begin{answer}
+			\solution{ff}
+			\checkAsFunction{x}{-5}{5}{50}
+		\end{answer}
+		\explanation{
+    \lang{de}{
+    Mit der Summen-	und der Faktorregel, sowie den Formeln für Stammfunktionen von Potenzen, Sinus, 
+    Kosinus und Exponentialfunktion erhält man zunächst als Stammfunktion $G(x)=\var{f0}$.\\
+		Also ist $F(x)=G(x)-C$, wobei die Konstante $C$ so gewählt werden muss, dass $F(0)=0$ gilt.\\
+		Also $C=G(0)=\var{y0}$, und daher $F(x)=\var{ff}$.
+    }
+    \lang{en}{
+    With the sum and the constant rule, as well as the formulas for antiderivatives of powers, sine, 
+    cosine and the exponential function, one obtains the antiderivative $G(x) = \var{f0}$. \\
+    So $F(x) = G(x)-C $, where the constant $C$ must be chosen such that $F(0) = 0 $. \\
+    Hence, $C = G(0) = \var{y0}$, and therefore $ F(x) = \var{ff}$.
+    }}
+	\end{quickcheck}
+\end{quickcheckcontainer}
+
+
+
+\section{\lang{de}{Das unbestimmte Integral}\lang{en}{The indefinite integral}}\label{unbestimmt}
+
+\lang{de}{
+Im letzten Abschnitt haben wir bereits gesehen, dass eine Stammfunktion nicht eindeutig ist, weil 
+Konstanten addiert werden können.
+}
+\lang{en}{
+In the last section we saw that an antiderivative is not unique, since a constant can always be added 
+to it.
+}
+
+\begin{example}
+
+%\emph{Beispiel:}
+\lang{de}{
+$F_1(x)= -\cos(x)$ und $F_2(x)=-\cos(x)+5$ sind Stammfunktionen von $f(x)=\sin(x)$. Alle Funktionen 
+der Form $-\cos(x)+C$ mit $C \in \mathbb{R}$ sind Stammfunktionen von $\sin(x)$.
+}
+\lang{en}{
+$F_1(x)= -\cos(x)$ and $F_2(x)=-\cos(x)+5$ are antiderivatives of $f(x)=\sin(x)$. All functions of 
+the form $-\cos(x)+C$ with $C \in \mathbb{R}$ are antiderivatives of $\sin(x)$.
+}
+
+\end{example}
+
+
+\lang{de}{
+Die Menge aller Stammfunktionen von $f(x)$ lässt sich genau beschreiben: Wenn $F_1(x)$ und $F_2(x)$ 
+zwei beliebige Stammfunktionen von $f(x)$ auf dem Intervall $I$ sind, so gilt
+}
+\lang{en}{
+The set of all antiderivatives of $f(x)$ can be described via the following rule: if $F_1(x)$ and 
+$F_2(x)$ are two given antiderivatives of $f(x)$ on an interval $I$, then
+}
+\[ \left(F_1(x) - F_2(x) \right)' =F_1'(x) - F_2'(x)= f(x) - f(x) = 0 . \]
+\lang{de}{
+Die Ableitung von $F_1(x)-F_2(x)$ ist also konstant gleich $0$. Die Funktion $F_1(x)-F_2(x)$ ändert 
+sich daher auf dem Intervall $I$ nicht und ist somit eine konstante Funktion, d.\,h. 
+$F_1(x)-F_2(x) = C$ bzw. $F_1(x)=F_2(x)+C$. Zwei Stammfunktionen unterscheiden sich also auf dem 
+Intervall $I$ nur um eine konstante Verschiebung des Funktionswertes. \\
+}
+\lang{en}{
+The derivative of $F_1(x)-F_2(x)$ is constant and always equal to $0$. Thus the function 
+$F_1(x)-F_2(x)$ does not change at all on the inverval $I$ and is hence just equal to a constant 
+function $F_1(x)-F_2(x) = C$, or $F_1(x)=F_2(x)+C$. Two antiderivatives on an inverval $I$ differ 
+only by a constant. \\
+}
+
+\label{def:unbest_Integral}
+\begin{definition}
+%\emph{Definition:}  
+\lang{de}{
+Die Menge der Stammfunktionen einer integrierbaren Funktion $f(x)$ bezeichnet man als 
+\emph{unbestimmtes Integral} und man schreibt
+}
+\lang{en}{
+The set of antiderivatives of an integrable function $f(x)$ is called the \emph{indefinite integral} 
+and is written as
+}
+\[ \int f(x)\, dx = F(x) + C , \ C \in \mathbb{R},  \]
+\lang{de}{
+wobei $F(x)$ eine beliebige Stammfunktion von $f(x)$ ist. Der Zusatz $C \in \mathbb{R}$
+wird auch häufig weggelassen.
+}
+\lang{en}{
+where $F(x)$ is any given antiderivative of $f(x)$. In most cases $C \in \mathbb{R}$ is omitted.
+}
+\end{definition}
+
+% \begin{center}
+%   \lang{de}{\iframe[400][225][S]{https://www.stream24.net/vod/getVideo.php?id=10962-1-5527&mode=iframe}}
+% \end{center}
+% \begin{block}[warning]
+% \lang{de}{Bei einem unbestimmten Integral ist der Name der Integrationsvariablen (z.B. $x$)
+% üblicherweise auch der Name der unabhängigen Variablen der Stammfunktionen.}
+% \lang{en}{With indefinite integrals, the variable that we choose as the integration variable (e.g. $x$)
+% is usually also the same variable as appears in the antiderivative.}
+% \end{block}
+
+\lang{de}{
+Bei einem unbestimmten Integral lässt man also die Integrationsgrenzen weg und erhält eine Menge von 
+Stammfunktionen. Den Zusammenhang zum bestimmten Integral besprechen wir dann im \lref{bestimmt} 
+{nächsten Abschnitt}.
+}
+\lang{en}{
+Indefinite integrals have no limits of integration, as they comprise a whole set of antiderivatives. 
+The relationship between indefinite and definite integrals will be discussed in the 
+\lref{bestimmt}{next section}.
+}
+
+\begin{block}[warning]
+\lang{de}{
+Bei der Verwendung des unbestimmten Integrals ist grundsätzlich Vorsicht geboten. Wenn die Funktion 
+$f$ Definitionslücken aufweist, ist die Stammfunktion nur auf jeweils einem der Teilintervalle 
+definiert. An der Schreibweise $\int f(x)\, dx$ ist das Intervall zunächst nicht ablesbar! Wir geben 
+ein Beispiel an.
+}
+\lang{en}{
+Exercise caution with indefinite integrals! If the function $f$ has gaps in its domain, the 
+antiderivative is only defined on one of the subintervals. This interval is not denoted in the 
+notation $\int f(x) \, dx $! Below is an example.
+}
+\end{block}
+\begin{example}
+\lang{de}{Es gilt}
+\lang{en}{We have}
+%\emph{Beispiel:} 
+\[ \int \Big(\frac{2}{x^2} - 6 x^2\Big)\, dx = - \frac{2}{x} - 2x^3 + C . \]
+
+\lang{de}{
+Das Integral und die Stammfunktionen sind nur für Intervalle definiert, die nicht die Null enthalten, 
+z.\,B. auf $(-\infty;0)$ und $(0;\infty)$. Die Stammfunktion und die Konstante $C$ kann für positive 
+und negative $x$-Werte unabhängig gewählt werden. Die folgende Abbildung stellt auf jedem der 
+Intervalle $(-\infty;0)$ und $(0;\infty)$ zwei verschiedene Stammfunktionen von 
+$f(x)=\frac{2}{x^2} - 6 x^2$ dar. Diese könnte man zu vier Stammfunktionen von $f(x)$ kombinieren.
+}
+\lang{en}{
+The integral and the antiderivatives of the above example are only defined on intervals that do not 
+contain $0$, e.g. on $(-\infty, 0)$ and $(0,\infty)$. The antiderivatives and the constant $C$ can be 
+chosen independently of the interval (positive or negative $x$-values). The following image shows two 
+different antiderivatives of $f(x)=\frac{2}{x^2} - 6 x^2$ on the intervals $(-\infty, 0)$ and 
+$(0,\infty)$.
+}
+\begin{center}
+\image{T107_Antiderivative_A}
+\end{center}
+
+\end{example} 
+
+\section{\lang{de}{Der Hauptsatz der Differential- und Integralrechnung}
+         \lang{en}{The fundamental theorem of calculus}}\label{bestimmt}
+
+\lang{de}{
+In diesem Abschnitt stellen wir nun die Verbindung zwischen dem \emph{bestimmten Integral} 
+$\big\int_a^b f(x)\, dx$ und den Stammfunktionen her. Dies erklärt dann auch, warum wir die Menge der 
+Stammfunktionen als \emph{unbestimmtes Integral} bezeichnet haben.
+}
+\lang{en}{
+In this section we will develop the connection between the \emph{definite integral} 
+$\big\int_a^b f(x)\, dx$ and the antiderivative. This will also clarify why the set of 
+antiderivatives is called the \emph{indefinite integral}.
+}
+
+\begin{theorem}[\lang{de}{Hauptsatz der Differential- und Integralrechnung}
+                \lang{en}{The fundamental theorem of calculus}]
+\lang{de}{
+Ist $f(x)$ auf dem Intervall $[a;b]$ stetig, dann 
+%(d.h. eine kontinuierliche Funktion ohne Sprungstellen oder Lücken), dann 
+existiert eine Stammfunktion $F(x)$ von $f(x)$ (d.\,h. eine Funktion $F(x)$ mit $F'(x)=f(x)$) und 
+für eine beliebige Stammfunktion $F(x)$ gilt
+\[ \int_a^b f(x)\, dx = F(b) - F(a) .\]
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10771&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}
+\href{https://www.hm-kompakt.de/video?watch=615}{\image[75]{00_Videobutton_schwarz}}
+}\\~
+}
+\lang{en}{
+If $f(x)$ is continuous on an interval $[a,b]$, then 
+%(d.h. eine kontinuierliche Funktion ohne Sprungstellen oder Lücken), dann 
+there exists an antiderivative $F(x)$ of $f(x)$ (i.e. a function $F(x)$ with $F'(x)=f(x)$) and for 
+any antiderivative $F(x)$ of $f(x)$ we have
+\[ \int_a^b f(x)\, dx = F(b) - F(a) .\]
+}
+\end{theorem}
+
+\lang{de}{
+Das bestimmte Integral kann also durch Einsetzen der Grenzen in eine Stammfunktion 
+ausgerechnet werden. Für die Differenz $F(b)-F(a)$ schreibt man auch $\big[F(x)\big]_a^b$. Der Hauptsatz
+der Differential- und Integralrechnung besagt also
+}
+\lang{en}{
+Using the fundamental theorem of calculus, we can evaluate the definite integral of a function by 
+evaluating any antiderivative at its upper and lower bound. A commonly used notation for the 
+difference difference $F(b)-F(a)$ is $\big[F(x)\big]_a^b$. The fundamental theorem
+of calculus can then be restated as
+}
+\[ \int_a^b f(x)\, dx = \Big[\, F(x)\, \Big]_a^b  . \]
+\lang{de}{
+Der Wert hängt nicht von der Wahl einer Stammfunktion ab. In der Tat würde eine konstante
+Verschiebung von $F(x)$ (d.\,h. $F(x)+C$ statt $F(x)$) bei der Bildung der Differenz wieder wegfallen!
+\\\\
+Der Aussage des Hauptsatzes sind wir in etwas anderer Form bereits im 
+\link{link1}{vorigen Abschnitt} begegnet.
+Das Integral der momentanen Änderungsrate (Ableitung) einer Funktion ergibt die gesamte Änderung zwischen
+den Integrationsgrenzen.
+Nun hat die Stammfunktion $F(x)$ die Ableitung $f(x)$, so dass das Integral von $f(x)$ von $a$
+bis $b$ die gesamte Änderung von $F(x)$ ergibt, d.\,h. die Funktionsdifferenz $F(b)-F(a)$.
+}
+\lang{en}{
+The value of the definite integral does not depend on the choice of the antiderivative. Any constant 
+added to an antiderivative $F(x)$ (i.e. using $F(x)+C$ instead of $F(x)$) will be canceled out in the 
+subtraction.
+\\\\
+We already encountered the fundamental theorem of calculus in another form in a theorem from the 
+\link{link1}{previous section}: integrating the instantaneous rate of change ($F'$) of a function 
+between $a$ and $b$ yields the difference $F(b)-F(a)$.
+Since the antiderivative $F(x)$ has derivative $f(x)$, the integral of $f(x)$ from $a$
+to $b$ results in the total change in $F(x)$, i.e. the difference $F(b)-F(a)$.
+}
+
+
+
+
+\begin{example}
+%\emph{Beispiel:} 
+\lang{de}{
+Die Funktion $f(x)=\frac{2}{x^2} - 6 x^2$ ist auf dem Intervall $[1;2]$ stetig, 
+$F(x)=- \frac{2}{x} - 2x^3 + 20$ ist eine Stammfunktion und
+}
+\lang{en}{
+The function $f(x)=\frac{2}{x^2} - 6 x^2$ is continuous on the interval $[1, 2]$, with an 
+antiderivative $F(x)=- \frac{2}{x} - 2x^3 + 20$. We can use this to evaluate
+}
+\[ \int_1^2 \Big(\frac{2}{x^2} - 6 x^2 \Big)\, dx =
+\Big[- \frac{2}{x} - 2x^3 + 20 \Big]_1^2 = 3 - 16 = -13. \]
+\lang{de}{
+Die Funktion $f(x)$, die Stammfunktion $F(x)$ und der orientierte Flächeninhalt der Größe 
+$\big\int_1^2 f(x)\, dx = F(2)-F(1)=-13$ sind
+in der folgenden Abbildung dargestellt:
+}
+\lang{en}{
+The function $f(x)$, the antiderivative $F(x)$ and the signed area of size 
+$\big\int_1^2 f(x)\, dx = F(2)-F(1)=-13$ are depicted
+in the following image:
+}
+
+
+
+\begin{center}
+\image{T107_Antiderivative_B}
+\end{center}
+\end{example}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{1}
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{a}{-2}{-1}
+			\randint[Z]{b}{1}{2}
+			\randint[Z]{c3}{-4}{4}
+			%\randint[Z]{c1}{-4}{4}
+			\number{c1}{0}		% mit c1=0 wird es einfacher.
+			\randint[Z]{c0}{-4}{4}
+		    \function[normalize]{f}{c3*x^3+c1*x-c0}
+			\function[normalize]{ff}{(c3/4)*x^4+(c1/2)*x^2-c0*x}
+			\function[calculate]{ffa}{(c3/4)*a^4+(c1/2)*a^2-c0*a}
+			\function[calculate]{ffb}{(c3/4)*b^4+(c1/2)*b^2-c0*b}
+			\function[calculate]{sol}{ffb-ffa}
+		\end{variables}
+        
+            \text{\lang{de}{
+                  Bestimmen Sie den Wert des folgenden Integrals:\\
+            			$\int_{\var{a}}^{\var{b}} (\var{f})dx=$\ansref.
+                  }
+                  \lang{en}{
+                  Determine the value of the following integral:\\
+            			$\int_{\var{a}}^{\var{b}} (\var{f})dx=$\ansref.
+                  }}
+			
+
+		\begin{answer}
+			\solution{sol}
+		\end{answer}
+		\explanation{\lang{de}{
+    Eine Stammfunktion von $f(x)=\var{f}$ ist $F(x)=\var{ff}$.\\
+		Damit ist 
+    $\int_{\var{a}}^{\var{b}} (\var{f})dx=F(\var{b})-F(\var{a})=\var{ffb}-(\var{ffa})=\var{sol}$.
+    }
+    \lang{en}{
+    An antiderivative of $f(x)=\var{f}$ is $F(x)=\var{ff}$.\\
+		Using this and the fundamental theorem of calculus, we have 
+    $\int_{\var{a}}^{\var{b}} (\var{f})dx=F(\var{b})-F(\var{a})=\var{ffb}-(\var{ffa})=\var{sol}$.
+    }}
+	\end{quickcheck}
+\end{quickcheckcontainer}
+
+
+
+
+
+\end{content}

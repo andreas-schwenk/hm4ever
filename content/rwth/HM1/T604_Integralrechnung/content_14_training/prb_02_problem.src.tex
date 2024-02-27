@@ -1,0 +1,284 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A02: Integration durch Substitution}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A02: Integration durch Substitution}}
+\lang{en}{\title{A02: Integration by substitution}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24091}{Ticket 24091}
+\end{block}
+\usepackage{mumie.genericproblem}
+
+
+
+\begin{block}[annotation]
+    Kopie von hm4mint/T305_Integrationstechniken/training 3
+    
+    Im Ticket-System: \href{http://team.mumie.net/issues/11220}{Ticket 11220}
+\end{block}
+
+
+\begin{problem}
+	\randomquestionpool{1}{3}
+	\begin{question}	
+		\begin{variables}
+		%g = ax 3 + bx 2 + d mit b, d ∈ {− 4; 4 } \ { 0 } und a ∈ { 0; 1 }
+			
+			\begin{pool}
+				\begin{variables}
+					\function{Fy}{cos(y)}
+				\end{variables}
+				\begin{variables}
+					\function{Fy}{sin(y)}
+				\end{variables}
+				\begin{variables}
+					\function{Fy}{exp(y)}
+				\end{variables}
+			\end{pool}
+
+			\randint[Z]{b}{-4}{4}
+			\randint[Z]{d}{-4}{4}
+			\randint{a}{0}{1}
+
+
+			\function{g}{a*x^3+b*x^2+d}
+			\derivative{fy}{Fy}{y}
+			\derivative{g1}{g}{x}
+			\substitute[expand,normalize]{fg}{fy}{y}{g}
+			\substitute[expand,normalize]{H}{Fy}{y}{g}
+			\function[expand,normalize]{h}{g1*fg}
+            
+		\end{variables}
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		  \type{input.function}
+      \field{rational}
+		\correctorprecision{3}
+		\displayprecision{3}
+	    \lang{de}{\text{Es sei $h(x)=\var{h}$. Bestimmen Sie geeignete Funktionen $f$ 
+        und $g$ so, dass
+$h(x)=g'(x)\cdot f(g(x))$ und finden Sie eine Stammfunktion $F(y)$ von $f(y)$.\\
+$f(y)= $\ansref,  $g(x)=$\ansref  und $F(y)= $\ansref.\\
+Bestimmen Sie damit eine Stammfunktion $H(x)$ von $h(x)$.\\ $H(x)= $\ansref \\
+}} 
+ \lang{en}{\text{Let $h(x)=\var{h}$. Determine suitable functions $f$ 
+        and $g$ such that
+$h(x)=g'(x)\cdot f(g(x))$ and find a primitive function $F(y)$ of $f(y)$.\\
+$f(y)= $\ansref, $g(x)=$\ansref and $F(y)= $\ansref.\\
+Use this to determine a primitive function $H(x)$ of $h(x)$.\\ $H(x)= $\ansref \\
+}} 
+
+	    \begin{answer}
+%	    	\text{$f(x)=$}
+			\solution{fy}
+          \inputAsFunction{y}{s1}
+	    \end{answer}  
+	    \begin{answer}
+%	    	\text{$g(x)=$}
+			\solution{g}
+          \inputAsFunction{x}{s2}
+          \checkFuncForZero{D[s2]*s1[s2,y]-g1*fg}{-1}{1}{100}
+          \lang{de}{\explanation{Sie haben $f$ und $g$ nicht richtig gewählt.}}
+          \lang{en}{\explanation{You have not chosen $f$ and $g$ correctly.}}
+          \score{2.0}
+	    \end{answer}
+	    \begin{answer}
+%	    	\text{$F(x)=$}
+			\solution{Fy}
+          \inputAsFunction{y}{s3}
+          \checkFuncForZero{D[s3,y]-s1}{-1}{1}{100}
+          \lang{de}{\explanation{$F$ ist keine Stammfunktion von $f$.}}
+          \lang{en}{\explanation{$F$ is not a primitive function of $f$.}}
+	    \end{answer}
+	    \begin{answer}
+%	    	\text{$H(x)=$}
+			\solution{H}
+          \inputAsFunction{x}{s4}
+          \checkFuncForZero{D[s4]-g1*fg}{-1}{1}{100}
+          \lang{de}{\explanation{Eine Stammfunktion von $h$ ist nach Substitutionsregel durch $F(g(x))$ gegeben.}}
+          \lang{en}{\explanation{By the substitution rule, $F(g(x))$ is a primitive function of $h$.}}
+	    \end{answer}
+        
+\end{question}
+	
+	
+	
+
+
+
+
+
+	\begin{question}	
+		\begin{variables}
+		%g = ax 3 + bx 2 + d mit b, d ∈ {− 4; 4 } \ { 0 } und a ∈ { 0; 1 }
+
+			\randint[Z]{b}{1}{4}
+			\randint[Z]{d}{1}{4}
+			\randint{n}{1}{3}
+			
+			\function{g}{b*x^2+d}
+			\function{Fy}{1/y^n}
+			\derivative{fy}{Fy}{y}
+			\derivative{g1}{g}{x}
+			\substitute[normalize]{fg}{fy}{y}{g}
+			\substitute[normalize]{H}{Fy}{y}{g}
+			\function[normalize]{h}{g1*fg}
+		\end{variables}
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		  \type{input.function}
+      \field{rational}
+		\correctorprecision{3}
+		\displayprecision{3}
+	    \lang{de}{\text{Es sei $h(x)=\var{h}$. Bestimmen Sie geeignete Funktionen $f$ 
+        und $g$ so, dass
+$h(x)=g'(x)\cdot f(g(x))$ und finden Sie eine Stammfunktion $F(y)$ von $f(y)$.\\
+$f(y)= $\ansref,  $g(x)=$\ansref  und $F(y)= $\ansref.\\
+Bestimmen Sie damit eine Stammfunktion $H(x)$ von $h(x)$.\\ $H(x)= $\ansref
+}} 
+\lang{en}{\text{Let $h(x)=\var{h}$. Determine suitable functions $f$ 
+        and $g$ such that
+$h(x)=g'(x)\cdot f(g(x))$ and find a primitive function $F(y)$ of $f(y)$.\\
+$f(y)= $\ansref, $g(x)=$\ansref and $F(y)= $\ansref.\\
+Use this to determine a primitive function $H(x)$ of $h(x)$.\\ $H(x)= $\ansref
+}} 
+	    \begin{answer}
+%	    	\text{$f(x)=$}
+			\solution{fy}
+          \inputAsFunction{y}{s1}
+	    \end{answer}  
+	    \begin{answer}
+%	    	\text{$g(x)=$}
+			\solution{g}
+          \inputAsFunction{x}{s2}
+          \checkFuncForZero{D[s2]*s1[s2,y]-g1*fg}{-1}{1}{100}
+          \lang{de}{\explanation{Sie haben $f$ und $g$ nicht richtig gewählt.}}
+          \lang{en}{\explanation{You have not chosen $f$ and $g$ correctly.}}
+          \score{2.0}
+	    \end{answer}
+	    \begin{answer}
+%	    	\text{$F(x)=$}
+			\solution{Fy}
+          \inputAsFunction{y}{s3}
+          \checkFuncForZero{D[s3,y]-s1}{-1}{1}{100}
+          \lang{de}{\explanation{$F$ ist keine Stammfunktion von $f$.}}
+          \lang{en}{\explanation{$F$ is not a primitive function of $f$.}}
+
+	    \end{answer}
+	    \begin{answer}
+%	    	\text{$H(x)=$}
+			\solution{H}
+          \inputAsFunction{x}{s4}
+          \checkFuncForZero{D[s4]-g1*fg}{-1}{1}{100}
+          \lang{de}{\explanation{Eine Stammfunktion von $h$ ist nach Substitutionsregel durch $F(g(x))$ gegeben.}}
+          \lang{en}{\explanation{By the substitution rule, $F(g(x))$ is a primitive function of $h$.}}
+	    \end{answer}
+	\end{question}
+	
+	\begin{question}	
+		\begin{variables}
+			
+			\begin{pool}
+			
+				\begin{variables}
+			\function{g}{cos(x)}
+				\end{variables}
+				
+				\begin{variables}
+			\function{g}{sin(x)}
+				\end{variables}
+			
+			\end{pool}
+
+            \randint[Z]{b}{-4}{4}
+			\randint[Z]{d}{-4}{4}
+			\randint{n}{1}{3}
+			\randint{a}{0}{1}
+
+			\function{Fy}{a*y^3+b*y^2+d}
+			\derivative{fy}{Fy}{y}
+			\derivative{g1}{g}{x}
+%            \function{l}{y}
+%            \substitute{fy}{f}{x}{l}
+%            \substitute{Fy}{F}{x}{l}
+			\substitute[normalize]{fg}{fy}{y}{g}
+			\substitute[normalize]{H}{Fy}{y}{g}
+			\function[expand,normalize]{h}{g1*fg}
+		\end{variables}
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		  \type{input.function}
+      \field{rational}
+		\correctorprecision{3}
+		\displayprecision{3}
+	    \lang{de}{\text{Es sei $h(x)=\var{h}$. Bestimmen Sie geeignete Funktionen $f$ 
+        und $g$ so, dass
+$h(x)=g'(x)\cdot f(g(x))$ und finden Sie eine Stammfunktion $F(y)$ von $f(y)$.\\
+$f(y)= $\ansref,  $g(x)=$\ansref  und $F(y)= $\ansref.\\
+Bestimmen Sie damit eine Stammfunktion $H(x)$ von $h(x)$.\\ $H(x)= $\ansref
+}} 
+\lang{en}{\text{Let $h(x)=\var{h}$. Determine suitable functions $f$ 
+        and $g$ such that
+$h(x)=g'(x)\cdot f(g(x))$ and find a primitive function $F(y)$ of $f(y)$.\\
+$f(y)= $\ansref, $g(x)=$\ansref and $F(y)= $\ansref.\\
+Use this to determine a primitive function $H(x)$ of $h(x)$.\\ $H(x)= $\ansref
+}} 
+	    \begin{answer}
+%	    	\text{$f(y)=$}
+			\solution{fy}
+          \inputAsFunction{y}{s1}
+	    \end{answer}  
+	    \begin{answer}
+%	    	\text{$g(x)=$}
+			\solution{g}
+          \inputAsFunction{x}{s2}
+          \checkFuncForZero{D[s2]*s1[s2,y]-g1*fg}{-1}{1}{100}
+          \lang{de}{\explanation{Sie haben $f$ und $g$ nicht richtig gewählt.}}
+          \lang{en}{\explanation{You have not chosen $f$ and $g$ correctly.}}
+          \score{2.0}
+	    \end{answer}
+	    \begin{answer}
+%	    	\text{$F(y)=$}
+			\solution{Fy}
+          \inputAsFunction{y}{s3}
+          \checkFuncForZero{D[s3,y]-s1}{-1}{1}{100}
+          \lang{de}{\explanation{$F$ ist keine Stammfunktion von $f$.}}
+          \lang{en}{\explanation{$F$ is not a primititve function of $f$.}}
+          
+
+	    \end{answer}
+	    \begin{answer}
+%	    	\text{$H(x)=$}
+			\solution{H}
+          \inputAsFunction{x}{s4}
+          \checkFuncForZero{D[s4]-g1*fg}{-1}{1}{100}
+          \lang{de}{\explanation{Eine Stammfunktion von $h$ ist nach Substitutionsregel durch $F(g(x))$ gegeben.}}
+          \lang{en}{\explanation{By the substitution rule, $F(g(x))$ is a primitive function of $h$.}}
+	    \end{answer}
+	\end{question}
+
+	
+	
+\end{problem}
+
+
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

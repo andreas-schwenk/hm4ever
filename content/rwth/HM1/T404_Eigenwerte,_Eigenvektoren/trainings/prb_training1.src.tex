@@ -1,0 +1,100 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A01: Eigenvektor}
+    \lang{en}{P03: Eigenvector}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A01: Eigenvektor}}
+\lang{en}{\title{P01: Eigenvector}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/11626}{Ticket 11626}
+\end{block}
+
+\begin{problem}
+	%\randomquestionpool{}{}
+	\begin{question}
+		
+		\begin{variables}
+		
+		\randint{a}{-2}{2}
+		\randint{b}{-2}{2}
+		\randint{c}{-2}{2}
+		\randint{d}{-2}{2}
+		\randint{f}{-2}{2}
+		\randint{g}{-2}{2}
+		\drawFromSet{l0}{-4,-3,-2,1,2}
+		\function[calculate]{l}{l0+1}
+
+        	\matrix[calculate]{aa}{(a*c-b)*(d*f*(1-l) + g*l)+ a*d*(1-l) + 1  & c*d*f*l - c*d*f - c*g*l + d*l - d  & -d*f*l + d*f + g*l\\
+a^2*(-c*d*f*l + c*d*f + c*g*l - d*l + d) + a*b*d*f*l - a*b*d*f - a*b*g*l + a*c*f - a*l + a - b*f  & a*c*d*f*l - a*c*d*f - a*c*g*l + a*d*l - a*d - c*f + l &  -a*d*f*l + a*d*f + a*g*l + f\\
+-a*b*c*d*f*l + a*b*c*d*f + a*b*c*g*l - a*b*d*l + a*b*d + a*c^2*f + a*c + b^2*d*f*l - b^2*d*f - b^2*g*l - b*c*f - b*l & b*c*d*f*l - b*c*d*f - b*c*g*l + b*d*l - b*d - c^2*f - c  & -b*d*f*l + b*d*f + b*g*l + c*f + l + 1}
+     \matrix[calculate]{v1}{d\\ a*d+1 \\ b*d+c}
+     \matrix[calculate]{v2}{1+d\\ a+a*d+1 \\ b+b*d+c}
+     \matrix[calculate]{v3}{g+1\\ a*g+f+a \\ b*g+c*f+1+b}
+
+			%\end{pool}
+		\end{variables}
+		
+		\type{input.generic}
+        \field{rational}
+		\lang{de}{
+	    \text{Welcher der folgenden Vektoren ist ein Eigenvektor der Matrix $A=\var{aa}$?}
+	    }
+     \lang{en}{
+	    \text{Which of the following vector is an eigenvector of the matrix $A=\var{aa}$?}
+	    }
+	    %\permuteAnswers{1, 2, 3} 
+	    %http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+	    \begin{answer}
+            \type{mc.unique}
+            \permutechoices{1}{3}
+			\begin{choice}
+			\text{$\var{v1}$}
+			\solution{true}
+			\end{choice}
+			\begin{choice}
+			\text{$\var{v2}$}
+			\solution{false}
+			\end{choice}
+			\begin{choice}
+			\text{$\var{v3}$}
+			\solution{false}
+			\end{choice}
+	    \end{answer}    
+	    
+	    \begin{answer}
+	    	\type{input.number}
+	    	\lang{de}{\text{Geben Sie zu diesem Eigenvektor den zugehörigen Eigenwert an: }}
+      \lang{en}{\text{Give for this eigenvector the corresponding eigenvalue:}}
+			\solution{l}
+	    \end{answer}
+	    
+	    %generic viz: http://team.mumie.net/projects/support/wiki/Example
+	    \lang{de}{\explanation{Hier kann die Eigenvektoreigenschaft $A\cdot v=\lambda v$ direkt nachgerechnet werden.}}
+	\lang{en}{\explanation{Here we can check the eigenvector property $A\cdot v=\lambda v$ right away.}}
+ \end{question}
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

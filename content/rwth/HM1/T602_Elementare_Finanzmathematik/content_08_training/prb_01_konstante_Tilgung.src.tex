@@ -1,0 +1,170 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A01: konstante Tilgung}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A01: konstante Tilgung}}
+\lang{en}{\title{A01: constant amortization}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22694}{Ticket 22694}
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+     \begin{problem}
+     \begin{variables}
+        
+        \drawFromSet{b}{10000, 20000, 30000}
+        \drawFromSet{p}{7,7.5,8,8.5,9,9.5}
+        \function[calculate]{K}{3*b}
+        
+        \function[calculate]{RS1}{3*b}
+        \function[calculate]{Z1}{RS1*p/100}
+        \function[calculate]{t1}{b}
+        \function[calculate]{A1}{Z1+t1}
+        \function[calculate]{S1}{RS1-t1}
+        
+        \function[calculate]{RS2}{2*b}
+        \function[calculate]{Z2}{RS2*p/100}
+        \function[calculate]{t2}{b}
+        \function[calculate]{A2}{Z2+t2}
+        \function[calculate]{S2}{RS2-t2}
+        
+        \function[calculate]{RS3}{1*b}
+        \function[calculate]{Z3}{RS3*p/100}
+        \function[calculate]{t3}{b}
+        \function[calculate]{A3}{Z3+t3}
+        \function[calculate]{S3}{RS3-t3}
+        
+     \end{variables}
+         \begin{question}
+         \type{input.number}
+         \lang{de}{\text{Für die Anschaffung einer Strickmaschine hat ein Betrieb einen Kredit
+     über $\var{K}$ \euro aufgenommen, der bei einer jährlichen Verzinsung von 
+     $i=\var{p}$ \% in $n=3$ Jahren durch jährlich gleich hohe Tilgungsraten 
+     getilgt werden soll.\\
+     Erstellen Sie den Tilgungsplan.
+     \begin{table}
+     k & $S_{k-1}$ & $Z_k$ & $T$ & $A_k$ & $S_k$\\
+     \textbf{1}&\ansref&\ansref&\ansref&\ansref&\ansref \\
+     \textbf{2}&\ansref&\ansref&\ansref&\ansref&\ansref \\
+     \textbf{3}&\ansref&\ansref&\ansref&\ansref&\ansref
+     
+     \end{table}
+     }}
+     \lang{en}{\text{For the purchase of a knitting machine, a company has taken out a loan of
+     for $\var{K}$ \euro, which is to be amortized over $n=3$ years
+     with an annual interest rate of 
+     $i=\var{p}$ \% by equal annual payments. 
+     Draw up the amortization schedule.
+     \begin{table}
+     k & $S_{k-1}$ & $Z_k$ & $T$ & $A_k$ & $S_k$\\
+     \textbf{1}&\ansref&\ansref&\ansref&\ansref&\ansref \\
+     \textbf{2}&\ansref&\ansref&\ansref&\ansref&\ansref \\
+     \textbf{3}&\ansref&\ansref&\ansref&\ansref&\ansref
+     
+     \end{table}
+     }}
+     %1.
+               \begin{answer}
+               \solution{RS1}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{Z1}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{t1}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{A1}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{S1}
+               \end{answer}
+               
+               
+    %2.           
+               \begin{answer}
+               \solution{RS2}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{Z2}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{t2}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{A2}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{S2}
+               \end{answer}
+               
+    %3.           
+               \begin{answer}
+               \solution{RS3}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{Z3}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{t3}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{A3}
+               \end{answer}
+               
+               \begin{answer}
+               \solution{S3}
+               \end{answer}
+               
+               \lang{de}{\explanation{Bei der Ratentilgung gilt: $S_0=\var{RS1}$, $S_1=\var{RS2}$ und
+               $S_2=\var{RS3}$. Darauf berechnen sich dann die jährlichen Zinsen $Z_k$.
+               Die Tilgungsrate beträgt: $T_k=\frac{\var{RS1}}{3}$. Sie ist konstant.\\
+               Die zu zahlende Annuität ist dann: $A_k=Z_k+T_k$. Sie wird jedes Jahr geringer.
+               }}
+               \lang{en}{\explanation{For repayment of an instalment loan, $S_0=\var{RS1}$, $S_1=\var{RS2}$ and
+               $S_2=\var{RS3}$. The annual interest $Z_k$ is then calculated on this.
+               The amortization rate is: $T_k=\frac{\var{RS1}}{3}$. It is constant.
+               The annuity to be paid is then: $A_k=Z_k+T_k$. It decreases every year.
+               }}
+               
+          \end{question}     
+     \end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

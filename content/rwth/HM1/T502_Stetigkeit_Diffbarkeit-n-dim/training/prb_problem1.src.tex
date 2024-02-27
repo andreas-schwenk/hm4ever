@@ -1,0 +1,188 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Exercise 1}
+    \lang{de}{A01: Stetigkeit}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{Exercise 1}
+    \lang{de}{A01: Stetigkeit}  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22643}{Ticket 22643}
+\end{block}
+\usepackage{mumie.genericproblem}
+
+ \title{
+    \lang{en}{}
+    \lang{de}{A01: Stetigkeit}
+  }
+%Stetigkeit 
+
+\begin{problem}
+
+  \begin{question}   %Q1
+     \type{mc.multiple}    
+
+      \begin{variables}
+        \randint{a}{2}{4}
+        \randint{c}{-1}{1}          
+        \function[normalize]{g}{a*x^2}  
+        \function[normalize]{h}{x^2+y^2}
+      \end{variables}
+
+      \text{ Untersuchen Sie die Funktion $\; f:\R^2\to \R, \; \begin{pmatrix}x \\ y\end{pmatrix} \;
+            \mapsto \begin{cases} \frac{\var{g}}{\sqrt{\var{h}}}, & (x,y)\neq(0,0) \\ \var{c}, & (x,y)=(0,0) 
+            \end{cases}$\\ 
+            \\
+            
+             auf Stetigkeit und geben Sie an, welche der folgenden Aussagen wahr sind.
+             \\
+             
+            }
+
+
+    %C1          
+          \begin{choice}
+              \text{$f$ ist stetig auf $\R^2 \setminus \{(0,0)\}$.}
+              \solution{true}
+          \end{choice}
+    %C2   
+          \begin{choice}
+              \text{$f$ ist stetig in $(0,0)$, denn für jedes $\epsilon >0$ ist mit 
+                    $\delta = \frac{1}{\var{a}} \epsilon\;(>0)\;$ das $\epsilon -\delta -$Kriterium erfüllt.
+                   }
+             \solution{compute}
+             \iscorrect{c}{=}{0}                   
+          \end{choice}
+    %C3             
+          \begin{choice}
+              \text{$f$ ist stetig in $(0,0)$, da für die Nullfolge $(\frac{1}{n},\frac{1}{n})_{n \in \N}$ 
+                    gilt, dass $\lim_{n\to\infty} f(\frac{1}{n},\frac{1}{n})=f(0,0)=\var{c} \;$ ist.
+                   }
+              \solution{false}
+          \end{choice}
+    %C4    
+           \begin{choice}
+              \text{$f$ ist stetig auf dem ganzen Definitionsbereich $\R^2$.}
+             \solution{compute}
+             \iscorrect{c}{=}{0}
+          \end{choice}
+    %C5    
+           \begin{choice}
+              \text{$f$ ist nicht stetig in $(0,0)$.}
+             \solution{compute}
+             \iscorrect{c}{!=}{0}
+          \end{choice}
+          
+    %expl 
+          \explanation[equalChoice(0????)]{$f$ ist auf $\R^2 \setminus {(0,0)}$ stetig als Verküpfung stetiger Funktionen.} 
+          \explanation[equalChoice(???11) OR equalChoice(?1??1) OR equalChoice(??1?1)]
+                      {Ihre Auswahl bzgl. der Stetigkeit in $(0,0)$ enthält widersprüchliche Aussagen.}          
+          \explanation[equalChoice(?0000)]{Überprüfen Sie die Stetigkeit von $f$ in $(0,0)$ mittels $\epsilon -\delta -$ oder dem Folgekriterium.} 
+                      
+          \explanation[c != 0 AND [equalChoice(?1???) OR equalChoice(??1??) OR equalChoice(???1?) OR equalChoice(????0)]]           
+                      {Für die Nullfolge $(\frac{1}{n},\frac{1}{n})_{n \in \N} \;$ 
+                       ist $\lim_{n\to\infty} f(\frac{1}{n},\frac{1}{n})=0 \neq \var{c} = f(0,0).$
+                       Daher ist $f$ nicht stetig in $(0,0)$.
+                      }
+                             
+          \explanation[c = 0 AND equalChoice(?0001)]
+                      {$f$ ist stetig in $(0,0)$, denn für beliebige Nullfolgen $x^{(n)}, y^{(n)}$ gilt
+                      $\abs{f(x^{(n)},y^{(n)})}=\abs{\frac{\var{a}(x^{(n)})^2}{\sqrt{(x^{(n)})^2+(y^{(n)})^2}}} 
+                      \leq \abs{\frac{\var{a}(x^{(n)})^2+\var{a}(y^{(n)})^2}{\sqrt{(x^{(n)})^2+(y^{(n)})^2}}}
+                      = \var{a} \cdot \sqrt{(x^{(n)})^2+(y^{(n)})^2} \quad \xrightarrow{n\to\infty} \; 0 = f(0,0)$\\
+                      \\
+                      
+                      und für $\epsilon >0$ und $(x,y)^T \in \R^2$ mit 
+                      $\abs{\abs{(x,y)^T-(0,0)^T}}=\sqrt{x^2+y^2} < \frac{1}{\var{a}} \epsilon\; (:=\delta)\;$
+                      gilt  entsprechend
+                     $\abs{\abs{f(x,y)-f(0,0)}}=\abs{\frac{\var{a}x^2}{\sqrt{x^2+y^2}}-0} 
+                      \leq \abs{\frac{\var{a} x^2+\var{a} y^2}{\sqrt{x^2+y^2}}}
+                      = \var{a} \cdot \sqrt{x^2+y^2} < \var{a} \cdot \frac{1}{\var{a}} \epsilon = \epsilon.$
+                      }
+                    
+          \explanation[c = 0 AND equalChoice(??1?0)]
+                      {Der Nachweis der Stetigkeit von $f$ in $(0,0)$ mittels Folgenkriterium muss für beliebige Nullfolgen
+                       $(x^{(n)}, y^{(n)})_{n \in \N}$ erfolgen. $\lim_{n\to\infty} f(\frac{1}{n},\frac{1}{n})=0 = f(0,0)$
+                       reicht als Begründung nicht aus. 
+                      }
+ 
+          \explanation[c = 0 AND [equalChoice(???0?) OR equalChoice(?0???)] AND NOT equalChoice(????1)]
+                      {Ihre Auswahl ist noch unvollständig.}
+ 
+  \end{question} %Q1
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \begin{question}   %Q2
+     \type{input.number}    
+     \field{rational}
+
+      \begin{variables}
+        \randint[Z]{a}{2}{4}
+        \randint[Z]{b}{-1}{1}
+        \function[normalize]{c}{b/a}              
+          
+        \function[normalize]{g}{b*sin(x^2+y^2)} 
+        \function[normalize]{gn}{b*sin((x^{(n)})^2+(y^{(n)})^2)}        
+        \function[normalize]{h}{x^2+y^2}
+      \end{variables}
+
+      \text{Die Funktion $\; g:\R^2\to \R, \; \begin{pmatrix}x \\ y\end{pmatrix} \;
+%            \mapsto \begin{cases} \frac{\var{b}\sin(\var{g})}{\var{a}\cdot (\var{h})}, & (x,y)\neq(0,0) \\ c, & (x,y)=(0,0) 
+            \mapsto \begin{cases} \frac{\var{g}}{\var{a}\cdot (\var{h})}, & (x,y)\neq(0,0) \\ c, & (x,y)=(0,0) 
+            \end{cases}$\\ 
+            \\
+            
+             ist auf $\R^2 \setminus \{(0,0)\}$ stetig als Komposition stetiger Funktionen. Die Stetigkeit von $g$
+             in $(0,0)$ hängt von der Wahl des Parameters $c \in \R$ ab.     
+            }
+            
+%         \explanation{$g$ ist nur stetig in $(0,0)$, wenn $g(0,0)=c=\frac{\var{b}}{\var{a}}$, denn für jede
+%                       beliebige Nullfolge $(x^{(n)}, y^{(n)})_{n \in \N} \;$ gilt\\
+%                       \\
+
+%                      $ \lim_{n\to\infty} g(x^{(n)}, y^{(n)})
+%                        =\lim_{n\to\infty} \frac{\var{b}\cdot \sin((x^{(n)})^2+(y^{(n)})^2)}{\var{a}\cdot (x^{(n)})^2+(y^{(n)})^2)} 
+%                        =\var{c} \cdot \lim_{n\to\infty} \frac{\sin((x^{(n)})^2+(y^{(n)})^2)}{(x^{(n)})^2+(y^{(n)})^2)}
+%                        =\var{c}.
+%                      $\\
+%                       \\
+
+%                     Im letzten Schritt wird verwendet, dass $\lim_{r \to 0} \frac{\sin(r^2)}{r^2}=1\;$ ist, was man 
+%                     mithilfe der Regel von de L'Hospital nach zuvoriger Umwandlung der kartesischen Koordinaten
+%                     $(x,y)$ in Polarkoordinaten $(r \cos(\phi), r \sin(\phi))$ zeigen kann.
+%                     }
+          
+%FS: Vorschlag für besseres Feedback, das nicht sofort die Lösung vorgibt:
+\explanation{Damit $g$ in stetig in $(0,0)$ ist, muss für jede beliebige Nullfolge $(x^{(n)}, y^{(n)})_{n \in \N} \;$ gelten: \\
+$\lim_{n\to\infty} g(x^{(n)}, y^{(n)})= g(0,0)=c$.\\
+\\
+Verwenden Sie bei der Grenzwertbetrachtung $\lim_{r \to 0} \frac{\sin(r^2)}{r^2}=1\;$, was man 
+mithilfe der Regel von de L'Hospital nach zuvoriger Umwandlung der kartesischen Koordinaten
+$(x,y)$ in Polarkoordinaten $(r \cos(\phi), r \sin(\phi))$ zeigen kann.}
+
+          \begin{answer}
+              \text{$g$ ist stetig in $(0,0)$ für $c=$}
+              \solution{c}
+         \end{answer}
+ 
+  \end{question} %Q2
+
+\end{problem}
+\embedmathlet{gwtmathlet}
+
+\end{content}

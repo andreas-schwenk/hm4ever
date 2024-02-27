@@ -1,0 +1,410 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Injektivität, Surjektivität und Bijektivität}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T204_InverseFunctions.meta.xml}{T204_InverseFunctions}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T204_Graph_D.meta.xml}{T204_Graph_D}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T204_Map_F.meta.xml}{T204_Map_F}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T204_Map_E.meta.xml}{T204_Map_E}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T204_Map_D.meta.xml}{T204_Map_D}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T201neu_Vollstaendige_Induktion/g_art_content_01_indirekter_widerspruchsbeweis.meta.xml}{content_01_indirekter_widerspruchsbeweis}
+\end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{4}
+\ombarticle{2}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\lang{de}{\title{Injektivität, Surjektivität und Bijektivität}}
+ 
+\begin{block}[annotation]
+  
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9653}{Ticket 9653}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{Injektivität, Surjektivität und Bijektivität} \label{sec:in-sur-bi}
+
+Wir hatten gesehen, dass eine Abbildung $f:M\to N$ eine Zuordnung ist, die jedem Element aus $M$ genau ein Element aus $N$ zuordnet.
+Eine solche Abbildung kann aber noch weitere Eigenschaften haben, die im Folgenden behandelt werden.
+
+\begin{definition}[Injektivität, Surjektivität und Bijektivität] \label{def:in-sur-bi}
+Eine Abbildung $f:M\to N$ heißt
+\begin{itemize}
+\item \emph{\notion{injektiv}}, wenn für verschiedene Elemente $m_1$ und $m_2$ in $M$ stets die Bilder $f(m_1)$ und $f(m_2)$ verschieden sind.
+\item \emph{\notion{surjektiv}}, wenn jedes Element $n$ in $N$ in der Wertemenge von $f$ liegt, d.h. Zielbereich und Wertemenge sind identisch.
+\item \emph{\notion{bijektiv}}, wenn $f$ injektiv und surjektiv ist.
+\end{itemize}
+\floatright{\href{https://www.hm-kompakt.de/video?watch=147}{\image[75]{00_Videobutton_schwarz}}}\\\\
+\end{definition}
+%Eine Wiederholung der in Definition \ref{def:in-sur-bi} gegebenen Zusammenhänge ist folgendem Video zu entnehmen:\\
+
+
+\begin{example}
+Man betrachte die Mengen $L=\{0; 2\}$, $M=\{0;1;3\}\, $ und $\, N=\{1;2\} \,$ 
+mit den Abbildungen
+\[ T:L\to M,\quad 0\mapsto 3,\quad 2\mapsto 0, \]
+\[ S:M\to N,\quad 0\mapsto 1,\quad 1\mapsto 1,\quad 3\mapsto 2  \]
+und deren Komposition
+\[ S\circ T:L\to N,\quad 0\mapsto 2,\quad 2\mapsto 1. \] 
+Die Abbildung $T$ ist injektiv, denn die zwei verschiedenen Elemente $0$ und $2$ 
+aus $L$ werden auf verschiedene Elemente in $M$ abgebildet. $T$ ist aber nicht 
+surjektiv, denn die Wertemenge von $T$ ist  
+$\{ T(0); T(2)\}=\{ 3; 2\}$, weshalb das Element $1\in M$ nicht in der Wertemenge von $T$ liegt.\\
+%
+% - QS-Vorschlag
+$W_T=\{ T(0); T(2)\}=\{3;0\} \subsetneq \{0;1;3\}=M. \,$ Es gibt also ein Element
+im Zielbereich (n"amlich $1$), welches nicht in der Wertemenge liegt. \\
+
+Die Abbildung $S$ hingegen ist surjektiv, denn beide Elemente $1$ und $2$ des 
+Zielbereiches $N$ von $S$ sind Bilder von Elementen aus $M$ unter $S$, und liegen 
+daher in der Wertemenge von $S$. $S$ ist jedoch nicht injektiv, da es verschiedene
+Elemente in $M$ gibt (n"amlich $0$ und $1$), die das gleiche Bild 
+unter $S$ (n"amlich $1$) haben.\\
+
+Die Komposition $S\circ T$ ist jedoch sowohl injektiv als auch surjektiv und somit 
+sogar bijektiv.
+\end{example}
+
+
+\begin{example}\label{ex:inj-surj}
+Wir betrachten die Abbildung $f:\R^*\to \R, x\mapsto 2+\frac{1}{x}$. 
+Zunächst erinnern wir an die Definition $\R^*:= \R\setminus \{ 0\}$.\\
+Um zu sehen, dass die Abbildung injektiv ist, betrachtet man Elemente 
+$x_1,x_2\in \R^*$ mit $f(x_1)=f(x_2)$, und muss nach dem Prinzip des
+\ref[content_01_indirekter_widerspruchsbeweis][indirekten Beweises]{thm:equiv-to-implication}
+zeigen, dass $x_1=x_2$ gilt. 
+So wird sichergestellt wird, dass zwei Funktionswerte nur dann gleich sein können, 
+wenn die Argumente gleich sind.
+\begin{align*}
+                  & \; f(x_1) &\; =f(x_2) \\
+ \Leftrightarrow  & \; 2+\frac{1}{x_1} &\; = 2+\frac{1}{x_2} \\
+ \Leftrightarrow  & \; \frac{1}{x_1}   &\; = \frac{1}{x_2} \\
+ \Leftrightarrow  & \;  x_1 &\; = x_2.
+\end{align*}
+Also ist $f$ injektiv.\\
+
+Um zu untersuchen, ob $f$ surjektiv ist, versucht man, für $y$ im Zielbereich (hier also $y\in \R$) ein $x$ im Definitionsbereich
+ (hier also $x\in \R^*$) zu finden, mit $f(x)=y$:
+ \begin{align*}
+                  & \; y    & \; = f(x) \\
+  \Leftrightarrow & \; y    & \; = 2+\frac{1}{x}\\
+  \Leftrightarrow & \; y-2  & \; = \frac{1}{x}\\
+  \Leftrightarrow & \; (y-2)x & \; = 1.
+\end{align*}
+Für $y=2$ ist die letzte Gleichung $0\cdot x=1$ unerfüllbar. Deshalb ist $y=2$ 
+nicht Element der Wertemenge von $f$, und daher ist die Wertemenge nicht 
+identisch mit dem Zielbereich (hier $\R$), $f$ ist also nicht surjektiv.
+
+Für alle $y\neq 2$ ist die Gleichung jedoch für $x=\frac{1}{y-2}$ erfüllt. Die Wertemenge von $f$ ist also
+\[ W_f=\R\setminus \{2\}. \]
+\end{example}
+
+
+Die drei Eigenschaften kann man bei Abbildungen endlicher Mengen in der grafischen Darstellung sehr leicht nachvollziehen:
+\begin{rule}
+\begin{enumerate}
+\item Eine Abbildung ist injektiv, wenn \textbf{bei jedem Element} in der Zielmenge
+\textbf{\textit{höchstens ein} Pfeil endet}.
+\begin{figure}
+\image{T204_Map_D}
+\caption{Injektivität: Bei jedem Element endet \textbf{höchstens ein} Pfeil.}
+\end{figure}
+\item Eine Abbildung ist surjektiv, wenn \textbf{bei jedem Element} in der Zielmenge
+\textbf{\textit{mindestens ein} Pfeil endet}.
+\begin{figure}
+\image{T204_Map_E}
+\caption{Surjektivität: Bei jedem Element endet \textbf{mindestens ein} Pfeil.}
+\end{figure}
+\item Eine Abbildung ist bijektiv, wenn \textbf{bei jedem Element} in der Zielmenge
+\textbf{\textit{genau ein} Pfeil endet}.
+\begin{figure}
+\image{T204_Map_F}
+\caption{Bijektivität: Bei jedem Element endet \textbf{genau ein} Pfeil.}
+\end{figure}
+
+\end{enumerate}
+\end{rule}
+
+Bei Abbildungen zwischen Teilmengen reeller Zahlen, kann man die drei Eigenschaften am Graphen
+erkennen.
+
+\begin{rule}
+Sind $M$ und $N$ Teilmengen der reellen Zahlen und $f:M\to N$ eine Abbildung, so kann man 
+anhand des Graphen von $f$ erkennen, welche der obigen Eigenschaften $f$ erfüllt, indem man
+waagrechte Geraden (also Parallelen zur $x$-Achse) betrachtet:
+\begin{enumerate}
+\item Die Abbildung ist genau dann injektiv, wenn f"ur jedes $b\in N$ die waagrechte Gerade durch den Punkt $(0;b)$, den 
+Graphen in \emph{höchstens} einem Punkt schneidet.
+\item Die Abbildung ist genau dann surjektiv, wenn f"ur jedes $b\in N$ die waagrechte Gerade durch den Punkt $(0;b)$, den 
+Graphen in \emph{mindestens} einem Punkt schneidet.
+\item Die Abbildung ist genau dann bijektiv, wenn f"ur jedes $b\in N$ die waagrechte Gerade durch den Punkt $(0;b)$, den 
+Graphen in \emph{genau} einem Punkt schneidet.
+\end{enumerate}
+\end{rule}
+
+\begin{example}
+In der Grafik sind die Graphen der Abbildungen
+\[ \textcolor{#0066CC}{f:\R\to \R_{\geq 0},\, x\mapsto x^2} \quad \text{ und }\]
+%\quad \text{(in blau) und } \quad 
+%und
+\[ \textcolor{#CC6600}{g:\R\to \R,\, x\mapsto \frac{3}{2}(x-1)} \] %\text{(in rot)} \]
+zu sehen.
+
+\begin{center}
+\image{T204_Graph_D}
+\end{center}
+
+\begin{tabs*}[\initialtab{0}]
+\tab{Abbildung $f$} Die Abbildung $f$ ist nicht injektiv, denn manche waagrechte Geraden schneiden den Graphen in zwei Punkten. 
+Da der Zielbereich von $f$ die Menge $\R_{\geq 0}=\{ y\in \R | y\geq 0\}$ ist, ist die Abbildung $f$ aber surjektiv,
+denn jede waagrechte Gerade durch einen Punkt $(0;b)$ mit $b\in \R_{\geq 0}$, also jede waagrechte Gerade oberhalb oder auf der $x$-Achse
+schneidet den Graphen auch.
+
+Dass die waagrechten Geraden unterhalb der $x$-Achse den Graphen gar nicht schneiden, ist in diesem Fall unerheblich, denn diese gehören
+zu $y$-Werten kleiner $0$, welche aber nicht im Zielbereich liegen.
+
+\tab{Abbildung $g$}
+Die Abbildung $g$ ist bijektiv, denn jede waagrechte Gerade $y=b$ schneidet den Graphen in genau einem Punkt. Durch Gleichsetzen der $y$-Werte
+kann man den Schnittpunkt auch ausrechnen:
+\[ b=\frac{3}{2}(x-1) \Leftrightarrow \frac{2}{3}b=x-1 \Leftrightarrow 1+\frac{2}{3}b=x. \]
+Der Schnittpunkt des Graphen mit der Geraden $y=b$ ist also $(1+\frac{2}{3}b; b)$.
+\end{tabs*}
+\end{example}
+
+\begin{quickcheck}
+    \begin{variables}
+        \randint{a}{1}{10}
+        \function[normalize]{f}{x^4-a}
+    \end{variables}
+    \text{Welche Eigenschaften besitzt $f:\R_{+}\to \R, x \mapsto \var{f}$?}
+    \begin{choices}{multiple}
+        \begin{choice}
+            \text{$f$ ist injektiv}
+            \solution{true}
+        \end{choice}
+        \begin{choice}
+            \text{$f$ ist surjektiv}
+            \solution{false}
+         \end{choice}
+         \begin{choice}
+            \text{$f$ ist bijektiv}
+            \solution{false}
+        \end{choice}
+    \end{choices}
+    \explanation{$f$ ist injektiv, da der Definitionsbereich auf die positiven 
+                 reellen Zahlen beschränkt wurde. Surjektiv ist $f$ nicht, da 
+                 der Zielbereich nicht auf die Wertemenge eingeschränkt wurde. 
+                 Der Wert $-\var{a}$ ist beispielsweise nicht in der Wertemenge 
+                 enthalten.}
+  
+\end{quickcheck}
+Eine erneute Wiederholung der in Abschnitt \ref{sec:in-sur-bi} angesprochenen Themen kann dem folgenden Video entnommen werden:\\ 
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10807&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+\\
+Ein anschauliches Beispiel einer Abbildung wird im folgenden Video mit Hilfe von Gummibären gegeben:\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10757&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+
+\section{Umkehrabbildungen}\label{sec:umkehrabbildung}
+Die grundlegende Idee einer Umkehrabbildung lässt sich wie folgt veranschaulichen:\\
+\begin{center}
+\image{T204_InverseFunctions}
+\end{center}
+
+Wird als Eingangsgröße ein Element $a$ des Definitionsbreichs in eine
+Abbildung $f$ eingesetzt, lässt sich der Funktionswert $b=f(a)$ bestimmen. 
+Die Umkehrabbildung $f^{-1}$ wird herangezogen, um aus dem Funktionswert $b$ 
+den ursprünglichen Eingangswert $a$ zu bestimmen. \\
+
+Die rechte Hälfte der Visualisierung zeigt mit $f(x)=x^3$ und $a=2$ 
+ein konkretes Rechenbeispiel.
+\begin{block}[warning]
+Für eine gegebene Abbildung $f$ verwenden wir für die Darstellung der Umkehrabbildung die Notation $f^{-1}$.
+Diese Notation findet zudem auch in der Potenzrechnung Anwendung, hat dort aber eine andere Bedeutung. Bei der Interpretation der "hoch minus eins"-Notation muss also immer der Kontext berücksichtigt werden.
+\end{block}
+
+\begin{definition}[Umkehrabbildung] \label{def:umkehrabbildung}
+Sei $f:M\to N$ eine bijektive Abbildung. \\
+
+Die \emph{\notion{Umkehrabbildung} von $f$} ist die Abbildung $f^{-1}:N\to M$, die jedem $n\in N$ genau das Element $m\in M$ zuordnet,
+für welches $f(m)=n$ gilt, d.h.
+\[   f^{-1}(n)=m \Leftrightarrow f(m)=n. \]
+\end{definition}
+
+Ein wesentliche Prämisse für diese Definition ist die Bijektivität von $f$, denn 
+diese besagt bereits, dass zu jedem $n\in N$ genau ein $m\in M$ mit $f(m)=n$ existiert.
+
+%Diese Definition ist sinnvoll, da es wegen der Bijektivität von $f$ zu 
+%jedem $n\in N$ genau ein $m\in M$ mit $f(m)=n$ gibt.
+
+\begin{quickcheck}
+    \begin{variables}
+        \randint{a}{1}{5}
+        \randint[Z]{b}{-3}{3}
+        \function[normalize]{f}{a*x+b}
+        \function[normalize]{g}{(y-b)/a}
+     \end{variables}
+     \type{input.function}
+     \text{Bestimmen Sie die Umkehrfunktion zu $f:\R \to \R, x \mapsto\var{f}$.\\ Es ist $f^{-1}:\R \to \R, y \mapsto $\ansref}
+     \begin{answer}
+        \solution{g}
+        \checkAsFunction{y}{-10}{10}{10}
+     \end{answer}
+     \explanation{Lösen Sie die Gleichung $y=\var{f}$ nach $x$ auf.}
+\end{quickcheck}
+
+Injektive Abbildungen kann man künstlich bijektiv machen, indem man den Zielbereich auf die Wertemenge einschränkt:
+
+\begin{remark}\label{rem:einschr}
+Ist $f:M\to N$ eine injektive Abbildung, so erhält man daraus eine bijektive Abbildung, indem man den Zielbereich $N$ auf die Wertemenge $W_f$
+einschränkt, d.h. die Abbildung $\tilde{f}:M\to W_f, x\mapsto f(x)$ betrachtet.
+\end{remark}
+
+Man kann deshalb injektive Abbildungen partiell umkehren.
+
+\begin{definition}[Partielle Umkehrabbildung]\label{def:partielle-umkehrfunktion}
+Sei $f:M\to N$ eine injektive Abbildung mit Wertemenge $W:=W_f$.\\
+
+Die \emph{\notion{partielle Umkehrabbildung} von $f$} ist die Abbildung 
+$f^{-1}:W\to M$, die jedem $w\in W$ genau das Element $m\in M$ zuordnet,
+für welches $f(m)=w$ gilt, d.h.
+\[   f^{-1}(w)=m \Leftrightarrow f(m)=w. \]
+\end{definition}
+
+%Diese Definition ist sinnvoll, da es wegen der Injektivität von $f$ zu jedem $w\in W$ höchstens ein $m\in M$
+%mit $f(m)=w$ gibt, aber wegen der Definition der Wertemenge auch mindestens ein $m\in M$
+%mit $f(m)=w$.
+
+\begin{example}
+Betrachte die Abbildung $f:\R^*\to \R, x\mapsto 2+\frac{1}{x}$ aus obigem Beispiel \ref{ex:inj-surj}.\\
+
+Wir hatten gesehen, dass die Abbildung $f$ injektiv und ihre Wertemenge $W_f=\R\setminus\{2\}$ ist. Also besitzt $f$ eine partielle Umkehrfunktion
+\[ f^{-1}:\R\setminus\{2\}\to \R^*. \]
+Die Funktionsvorschrift von $f^{-1}$ hatten wir im Prinzip auch schon berechnet, denn wir hatten die Gleichung $f(x)=y$ nach $x$ aufgelöst,
+und so zu jedem $y$ in der Wertemenge $\R\setminus\{2\}$ das $x$ mit $\, f(x)=y \,$ berechnet, 
+nämlich $\, x=\frac{1}{y-2}$. \\
+
+Also ist die partielle Umkehrfunktion $f^{-1}$ gegeben durch
+\[ f^{-1}(x)=\frac{1}{x-2}. \]
+ 	\begin{genericGWTVisualization}[550][800]{mathlet1}
+		\begin{variables}
+			\function{f}{rational}{2+1/x}
+			\function{g}{rational}{1/(x-2)}
+			\function{di}{rational}{x}
+
+% 			\function{axe}{rational}{0}
+% 			\pointOnCurve[1/10,6]{xa}{rational}{axe}{3/2}
+%			\number{a}{rational}{var(xa)[x]}
+
+			\number[editable]{a}{rational}{1}
+			\number{a0}{rational}{var(a)}
+			\number{fa}{rational}{2+1/var(a)}
+			
+			\point{Ax}{rational}{var(a0),0}
+			\point{Ag}{rational}{var(a0),var(fa)}
+			\point{Ay}{rational}{0,var(fa)}
+			\segment{v1}{rational}{var(Ax),var(Ag)}
+			\segment{h1}{rational}{var(Ag),var(Ay)}
+
+			\point{By}{rational}{0,var(a0)}
+			\point{Bg}{rational}{var(fa),var(a0)}
+			\point{Bx}{rational}{var(fa),0}
+			\segment{v2}{rational}{var(Bx),var(Bg)}
+			\segment{h2}{rational}{var(Bg),var(By)}
+			
+			
+			
+		\end{variables}
+		\color{f}{#0066CC}
+		\color{g}{#CC6600}
+		\color{di}{LIGHT_GRAY}
+		\color{v1}{GRAY}
+		\color{h1}{GRAY}
+		\color{Ag}{GRAY}
+		\label{Ag}{$A$}
+		\color{Ax}{GRAY}
+		\label{Ax}{@2d[$a$]}
+		
+% 		\color{xa}{GRAY}
+% 		\label{xa}{@2d[$a$]}
+
+		\color{v2}{GRAY}
+		\color{h2}{GRAY}
+		\color{Bg}{GRAY}
+		\label{Bg}{$B$}
+		
+		\begin{canvas}
+			\plotSize{450}
+			\plotLeft{-4}
+			\plotRight{6}
+			\plot[coordinateSystem]{di,v1,h1,v2,h2,f,g, Ax, Ag, Bg }
+		\end{canvas}
+		\text{Der Graph der Funktion $\textcolor{#0066CC}{f(x)=2+\frac{1}{x}}$
+        und der Umkehrfunktion $\textcolor{#CC6600}{f^{-1}(x)=\frac{1}{x-2}}$.\\\\
+		
+		\IFELSE{var(a)=0}{Für $a=\var{a}$ ist die Funktion $f$ nicht definiert! Damit nimmt die Umkehrfunktion $f^{-1}$ diesen Wert nicht an,
+        d.h. $\var{a0}$ liegt nicht in der Wertemenge von $f^{-1}$.}{Für $a=\var{a}$ ist $f(a)=f(\var{a0})=\var{fa}$, also ist $A=(\var{a0}; \var{fa})$ auf dem Graphen von $f$.\\
+		Nach Definition der Umkehrfunktion ist: $f^{-1}(\var{fa})=\var{a0}$, also $B=(\var{fa}; \var{a0})$ auf dem Graphen von $f^{-1}$.\\
+		Man erhält den Graphen von $f^{-1}$ durch Spiegelung des Graphen von $f$ an der Diagonalen $y=x\;$ (grau eingezeichnet).}		
+		}
+	    	\end{genericGWTVisualization}
+\end{example}
+
+Aus der einfachen Beobachtung, dass für bijektive Abbildungen $f:M\to N$ mit $M,N\subset \R$
+\[ \text{Graph}(f)=\{ (x;y)\in \R^2 | y=f(x) \}= \{ (x;y)\in \R^2 | f^{-1}(y)=x \} \]
+und
+\[ \text{Graph}(f^{-1})=\{ (y;x)\in \R^2 | f^{-1}(y)=x \}= \{ (y;x)\in \R^2 | y=f(x) \}\]
+gelten, erhält man:
+\begin{rule}
+Ist $f:M\to N$ eine bijektive Abbildung mit $M,N\subset \R$ und $f^{-1}$ die Umkehrabbildung, so gilt für $(x;y)\in \R^2$:
+\[    (x;y) \in \text{Graph}(f)   \Leftrightarrow (y;x) \in \text{Graph}(f^{-1}). \]
+Man erhält also den Graphen von $f^{-1}$ aus dem Graphen von $f$ durch Spiegelung an der Diagonalen $y=x$.  
+\end{rule}
+Zwei Videos zur Wiederholung der grundlegenden Idee der \lref{def:umkehrabbildung}{Umkehrabbildung} sind nachfolgend gegeben:\\
+
+\floatright{
+      \href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10809&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}
+      \href{https://www.hm-kompakt.de/video?watch=148}{\image[75]{00_Videobutton_schwarz}}
+}\\\\
+
+\begin{remark}
+Ist $f:M\to N$ injektiv mit Wertemenge $W=W_f$. So gelten für die partielle Umkehrabbildung $f^{-1}:W\to M$:
+\begin{enumerate}
+\item $f^{-1}$ ist bijektiv,
+\item $f^{-1}\circ f:M\to M$ ist die \emph{\notion{Identitätsabbildung}}, d.h. $(f^{-1}\circ f)(m)=f^{-1}(f(m))=m$ für alle $m\in M$,
+\item $f\circ f^{-1}:W\to N$ ist die \emph{\notion{Inklusionsabbildung}}, d.h. $(f\circ f^{-1})(w)=f(f^{-1}(w))=w\in N$ für alle $w\in W$,
+\item $(f^{-1})^{-1}:M\to W$ ist gegeben durch $(f^{-1})^{-1}(m)=f(m)$ für alle $m\in M$.
+\end{enumerate}
+\end{remark}
+
+\end{visualizationwrapper}
+\end{content}

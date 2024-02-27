@@ -1,0 +1,180 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A07: Nullstellen/Linearfaktoren}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22080}{Ticket 22080}
+\end{block}
+
+\begin{block}[annotation]
+	Trainingsaufgaben zur Nullstellenbestimmung, hier speziell mit 
+    Anwendung des Satzes von Viëta und zur Linearfaktorzerlegung.
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+\lang{de}{
+	\title{A07: Nullstellen/Linearfaktoren}
+}
+\lang{en}{
+	\title{Problem 7}
+}
+
+
+\begin{problem}
+
+\randomquestionpool{1}{2}
+\randomquestionpool{3}{3}
+
+
+% Frage 1 von 2 im 1. Questionpool)
+\begin{question}
+%
+ 	\type{input.number}
+    \field{rational} 
+%    
+    \text{Die quadratische Funktion $f:\, \R \rightarrow \R$, $\;f(x)= \var{f1}+c\;$ liegt
+          in Normalform vor und besitzt eine Nullstellen in $\, x_1=\var{ns1}. \;$
+          Bestimmen Sie den Parameter $\,c\,$ sowie die zweite Nullstelle $\,x_2\,$ 
+          von $\,f\,$ unter Verwendung des Satzes von Viëta. 
+          Geben Sie die Ergebnisse in ganzen Zahlen oder in Brüchen an.}
+%
+%
+%
+    \begin{variables}
+	    \randint{a}{1}{1}   %  quadratische Funktion in Normalform !
+	    \randint{b}{1}{6}  
+	    \randint{c}{1}{1}   %  quadratische Funktion in Normalform !
+	    \randint{d}{1}{6}
+	    \function[calculate]{ns1}{-b/a}
+	    \function[calculate]{ns2}{-d/c}
+	    \function{c_0}{b*d}
+	    \function[calculate]{p}{c*b+d*a}
+	    \function[calculate]{q}{b*d}          
+	    \function[expand, normalize]{f}{(c*x+d)*(a*x+b)}
+	    \function[expand, normalize]{f1}{(c*x+d)*(a*x+b)-b*d}
+	\end{variables}
+%    
+    \begin{answer}
+    	\lang{de}{\text{Die zweite Nullstelle liegt in $\;x_2=$}}
+     	\solution{ns2}
+        \explanation{Nach dem Satz von Viëta gilt für den Koeffizienten 
+                    vor $\,x\,$ in $\,f(x)\,$: $\; b=-(x_1+x_2).$ }
+    \end{answer}
+%	
+    \begin{answer}
+    	\lang{de}{\text{Der Parameter ist $c=$}}
+   		\solution{c_0}
+        \explanation{Nach dem Satz von Viëta ist $\,c =x_1 \cdot x_2 .\,$ 
+                    Berechnen Sie also zunächst $\,x_2 .$}
+    \end{answer}
+
+\end{question}
+
+
+% Frage 2 von 2 im 1. Questionpool)
+\begin{question}
+%
+ 	\type{input.number}
+    \field{rational} 
+%    
+    \text{Die quadratische Funktion $f:\, \R \rightarrow \R$, $\;f(x)= \var{f1}+c\,$ 
+          hat eine Nullstellen in $\, x_1=\var{ns1}$. 
+          Bestimmen Sie den Parameter $\,c\,$ sowie die zweite Nullstelle $\,x_2\,$ 
+          dieser Funktion. \\
+          Geben Sie die Ergebnisse in ganzen Zahlen oder in Brüchen an.  }
+%
+    \explanation{Berechnen Sie zunächst den Parameter $\,c\,$ aus $f(x_1)=f(\var{ns1})=0$.
+                Die zweite Nullstelle kann dann nach einem der bekannten 
+                Verfahren bestimmt werden.}
+%
+    \begin{variables}
+	    \randint{a}{1}{6}
+	    \randint{b}{1}{6}
+	    \randint{c}{1}{6}
+	    \randint{d}{1}{6}
+	    \function[calculate]{ns1}{-b/a}
+	    \function{ns2}{-d/c}
+	    \function{c_0}{b*d}
+	    \function[expand, normalize]{f}{(c*x+d)*(a*x+b)}
+	    \function[expand, normalize]{f1}{(c*x+d)*(a*x+b)-b*d}
+	\end{variables}
+	
+    \begin{answer}
+    	\lang{de}{\text{Der Parameter ist $\, c=$}}
+   		\solution{c_0}
+    \end{answer}
+    
+    \begin{answer}
+    	\lang{de}{\text{Die zweite Nullstelle liegt in $\,x_2=$}}
+     	\solution{ns2}
+    \end{answer}
+\end{question}
+
+% Frage 3
+\begin{question}
+%
+ 	\type{input.function}
+    \field{rational} 
+%    
+    \text{$f:\, \R \rightarrow \R$, $\;f(x)= \var{f}\,$ ist eine quadratische Funktion
+          in Normalform. Bestimmen Sie die Linearfaktorzerlegung von $\,f\,$.\\
+          
+          $f(x)=($\ansref$)\cdot ($\ansref$)$
+          }
+%
+    \explanation{Die Linearfaktorzerlegung ist 
+                $\, f(x)=(x-x_1) \cdot (x-x_2)\,$, wobei $\,x_1\,$ und $\,x_2\,$
+                die Nullstellen von $\,f\,$ sind.  }
+%
+%
+    \begin{variables}
+        \randrat{a}{-10}{10}{1}{8}
+        \randrat{b}{-10}{10}{1}{8}
+	    \function[normalize]{p}{-(b+a)}
+	    \function[normalize]{q}{b*a}          
+	    \function[normalize]{f}{x^2+p*x+q}
+	    \function[normalize]{linfak1}{x-(a)}
+        \function[normalize]{linfak2}{x-(b)}
+	\end{variables}
+    
+    \permuteAnswers{1, 2} 
+    \begin{answer}
+    	\lang{de}{\text{$\qquad f(x)=$}}
+     	\solution{linfak1}
+	    \checkAsFunction{x}{-10}{10}{100}        
+    \end{answer}
+    
+    \begin{answer}
+    	\lang{de}{\text{$\qquad f(x)=$}}
+     	\solution{linfak2}
+	    \checkAsFunction{x}{-10}{10}{100}        
+    \end{answer}
+	
+\end{question}
+
+\end{problem}
+
+
+\embedmathlet{mathlet}
+
+\end{content}

@@ -1,0 +1,185 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A03 + JSX: Lage einer Geraden}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{Bestimmung der Parameter einer Geraden}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/32290}{Ticket 32290}
+\end{block}
+\begin{block}[annotation]
+Copy of : /home/mumie/checkin/content/playground/HM4mint-Testaufgaben/T102neu_Einfache_Reelle_Funktionen/prb_jsx_Gerade_bestimmen.src.tex
+\end{block}
+
+%
+
+\begin{block}[annotation]
+(B. Guyet)\\
+Basis ist Problem 3:\\
+Copy of : /home/mumie/checkin/content/rwth/HM1/T102neu_Einfache_Reelle_Funktionen/training/prb_problem3.src.tex
+\\
+Ergänzt um Grapfik aus: \\
+/home/mumie/checkin/content/playground/Andreas_Maurischat/grafischeAufgaben/prb_Linear_A1.1.src.tex
+\end{block}
+
+
+\usepackage{mumie.genericproblem}
+
+\begin{block}[annotation]
+Weiterentwicklung der Aufgabe 3:\\
+ Bestimmung der Parameter und der Nullstelle einer Geraden aus 
+ gegebener Geradengleichung 
+        
+\end{block}
+
+\lang{de}{\title{A03 + JSX: Lage einer Geraden}}
+\lang{en}{\title{Problem 3}}
+
+\begin{visualizationwrapper}
+
+
+\begin{genericJSXVisualization}
+	\begin{variables}
+  		\point[editable]{Q}{integer}{2,1}
+  		\point[editable]{P}{integer}{1,1}
+      \number{m}{rational}{(P[y]-Q[y])/(P[x]-Q[x])}
+      \function{g}{real}{m*(x-Q[x])+Q[y]}
+	\end{variables}
+\color{g}{RED}
+\answer{g}{3,1}
+
+	\begin{canvas}
+        \snapToGrid{0.05,0.05}
+        \plotSize{400,400}
+        \plotLeft{-5}
+        \plotRight{5}
+        \plot[coordinateSystem,showPointCoords]{Q,P,g}
+	\end{canvas}
+
+\end{genericJSXVisualization}
+
+\end{visualizationwrapper}
+
+\\
+Geben Sie im folgenden alle Zahlen als Brüche oder ganze Zahlen an und kürzen Sie Brüche soweit wie möglich.
+
+\begin{problem}
+
+
+%++++++++++++++++++_Frage_1_von_3_+++++++++++++++++++++++++++++	
+
+ 
+      \begin{variables}
+          \randint[Z]{p}{-10}{10}
+          \drawFromSet{q}{2,4,5}
+          \randint[Z]{cc}{-5}{5} 
+          \function[calculate]{c}{cc*p}              	       	  	   	
+          \function[calculate]{b}{-(c/q)}  
+          \function[calculate]{m}{-(p/q)}
+          \function[calculate]{nst}{-(b/m)}
+          \function[normalize]{f}{p * x + q * y + c}
+          \function[normalize]{g}{m * x + b}   	           	        	
+      \end{variables}
+
+  \begin{question}  
+  
+      \text{Überführen Sie die lineare Gleichung $\,\var{f}= 0\,$
+            in die Punkt-Steigungsform einer Geraden. 
+          }
+            
+        \type{input.function}
+        \field{rational} 
+ 
+%++++++++++++++++++++++ANSWERS++++++++++++++++++++++++    
+
+      
+	\begin{answer}
+        \text{$\qquad g: y=mx+b=$}
+        \solution{g}
+        \checkAsFunction{x}{-10}{10}{100}
+        \explanation{Die Geradengleichung erhält man durch Aufl"osen von $\var{f}= 0$ nach $y$.}
+   \end{answer}
+
+ \end{question}		
+
+%++++++++++++++++++_Frage_2_von_3_+++++++++++++++++++++++++++++	
+
+  \begin{question}  
+  
+      \text{Beschreiben Sie die Lage dieser Geraden anhand der
+            charakteristischen Eigenschaften, die sich aus der 
+            Geradengleichung ableiten lassen.
+      }
+
+
+    \type{input.number} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+    \field{rational} 
+    \precision{2}
+           
+
+ 	\begin{answer}
+       \text{$\quad$ Die Gerade hat die Steigung $\,m=$}
+       \solution{m}
+       \explanation{Die Steigung der Geraden kann direkt aus der Geradengleichung abgelesen werden.}        
+   \end{answer}
+%
+ 	\begin{answer}
+        \text{$\quad$ Sie schneidet die $y-$Achse in $\,y_0=$}
+        \solution{b}       
+        \explanation{Die Schnittstelle mit der $y-$Achse entspricht dem $y-$Achsenabschnitt $b$ 
+        der Geraden und kann daher direkt aus der Geradengleichung abgelesen werden.}        
+    \end{answer}
+%
+ 	\begin{answer}
+       \text{$\quad$ und schneidet die $x-$Achse in $\,x_0=$}
+       \solution{nst}
+       \explanation[NOT equal(ans, nst)]{Die Schnittstelle mit der $x-$Achse entspricht der Nullstelle der Geraden. 
+        Sie berchnet sich aus $\,-\frac{b}{m}.$}        
+    \end{answer}
+      
+\end{question}		
+
+%++++++++++++++++++_Frage_3_von_3_+++++++++++++++++++++++++++++	
+%
+% grafischen Teil
+%
+\begin{question}
+    \field{rational}
+
+    \lang{de}{
+         \text{Verschieben Sie in der Grafik die eingezeichneten Punkte so, dass der Funktionsgraph 
+               Gerade $g$ entsteht.}}        
+    \begin{answer}
+          \type{graphics.function}
+          \solution{g}
+          \checkAsFunction[2e-1]{x}{-10}{10}{100}
+    \end{answer}
+    \explanation{Wählen Sie zum Beispiel den Schnittpunkt mit der $y$-Achse als einen Punkt und 
+            den Schnittpunkt mit der $x$-Achse als den zweiten Punkt.}
+\end{question}
+
+%######################################################QUESTION_END
+
+
+\end{problem}
+
+\embedmathlet{gwtmathlet}                                         
+
+\end{content}

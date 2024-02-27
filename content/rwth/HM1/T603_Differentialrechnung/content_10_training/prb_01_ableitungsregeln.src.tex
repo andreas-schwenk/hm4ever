@@ -1,0 +1,104 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A01: Ableitungen}
+    \lang{en}{problem_2}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A01: Ableitungen}}
+\lang{en}{\title{A01: Derivatives}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24013}{Ticket 24013}
+\end{block}
+
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+
+
+\begin{block}[annotation]
+ Kopie: hm4mint/T106_Differentialrechnung/training 2
+
+Im Ticket-System: \href{http://team.mumie.net/issues/9468}{Ticket 9468}
+     
+\end{block}
+
+\begin{problem}
+ 
+ \randomquestionpool{1}{3}
+    \begin{question}
+      \lang{de}{\text{Bestimmen Sie die Ableitung von $f(x)=\var{f1}$.}}
+       \lang{en}{\text{Determine the derivative of $f(x)=\var{f1}$.}}
+      \type{input.function}
+ 
+      \begin{variables}
+            \randint{n}{1}{6}
+            \function[expand,normalize]{f1}{sin(x)*x^n+e^x}
+            \function{s1}{cos(x)*x^n+n*sin(x)*x^(n-1)+e^x}
+      \end{variables}
+      
+      \begin{answer}
+      		\text{$f'(x)=$}
+			\solution{s1}
+			\checkAsFunction{x}{-10}{10}{100}
+		\end{answer}
+\end{question}
+
+\begin{question}
+      \lang{de}{\text{Bestimmen Sie die Ableitung von $f(x)=\var{f2}$.}}
+      \lang{en}{\text{Determine the derivative of $f(x)=\var{f2}$.}}
+      \type{input.function}
+ 
+      \begin{variables}
+            \randint{n}{-10}{10}
+            \function[expand,normalize]{f2}{n*ln(x)*cos(x)+sqrt(x)}
+            \function{s2}{n/x*cos(x)-n*ln(x)*sin(x)+1/(2*sqrt(x))}
+      \end{variables}
+      
+      \begin{answer}
+      		\text{$f'(x)=$}
+			\solution{s2}
+			\checkAsFunction{x}{-10}{10}{100}
+		\end{answer}
+\end{question}
+
+\begin{question}
+      \lang{de}{\text{Bestimmen Sie die Ableitung von $f(x)=\var{f3}$.}}
+      \lang{en}{\text{Determine the derivative of $f(x)=\var{f3}$.}}
+      \type{input.function}
+ 
+      \begin{variables}
+            \randint{n}{1}{10}
+            \function[expand,normalize]{f3}{x^n*sin(x)}
+            \function{s3}{n*x^(n-1)*sin(x)+x^n*cos(x)}
+      \end{variables}
+      
+      \begin{answer}
+      		\text{$f'(x)=$}
+			\solution{s3}
+			\checkAsFunction{x}{-10}{10}{100}
+		\end{answer}
+\end{question}
+\end{problem}
+
+\embedmathlet{mathlet}
+
+
+
+\end{content}

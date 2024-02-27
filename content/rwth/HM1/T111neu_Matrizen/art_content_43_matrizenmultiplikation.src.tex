@@ -1,0 +1,886 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Matrixmultiplikation}
+    \lang{en}{Matrix multiplication}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T111_FalksScheme.meta.xml}{T111_FalksScheme}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T111_MatrixProduct.meta.xml}{T111_MatrixProduct}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+    \component{generic_image}{content/rwth/HM1/images/g_img_T112_Falk.meta.xml}{T112_Falk}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T403a_Vektorraum/g_art_content_10b_lineare_abb.meta.xml}{content_10b_lineare_abb}
+    \link{generic_article}{content/rwth/HM1/T111neu_Matrizen/g_art_content_42_matrixaddition.meta.xml}{matrixaddition}
+    \link{generic_article}{content/rwth/HM1/T111neu_Matrizen/g_art_content_39b_matrizen.meta.xml}{matrizen}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21334}{Ticket 21334}
+\end{block}
+\begin{block}[annotation]
+Copy of \href{http://team.mumie.net/issues/9060}{Ticket 9060}: content/rwth/HM1/T112_Rechnen_mit_Matrizen/art_content_43_matrizenmultiplikation.src.tex
+\end{block}
+
+\usepackage{mumie.ombplus}
+\ombchapter{11}
+\ombarticle{4}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Matrixmultiplikation}\lang{en}{Matrix multiplication}}
+ 
+% \begin{block}[annotation]
+%   Im Ticket-System: \href{http://team.mumie.net/issues/9060}{Ticket 9060}\\
+% \end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{\lang{de}{Multiplikation zweier Matrizen}\lang{en}{Multiplication of two matrices}}
+
+%Abgesehen von der \link{matrixaddition}{Addition zweier Matrizen und der skalaren Multiplikation einer reellen Zahl mit einer Matrix}, gibt es auch noch die
+
+\lang{de}{
+Die Multiplikation von Matrizen ist eine Verallgemeinerung 
+der \ref[matrizen][Matrix-Vektor-Multiplikation]{sec:matrix-vektor-mult}
+aus dem letzten Teilkapitel.
+}
+\lang{en}{
+Multiplication of matrices is a generalisation of the 
+\ref[matrizen][matrix-vektor multiplication]{sec:matrix-vektor-mult} 
+defined in a previous section of this chapter.
+}
+
+\begin{example}
+%   Praktische Beispiele zur Rechnung mit Matrizen.
+  \begin{tabs*}[\initialtab{0}]
+    \tab{\lang{de}{Rohstoffkalkulation}\lang{en}{Calculating raw material requirements}}
+  \lang{de}{
+  Ein Unternehmen fertigt die \textit{Endprodukte} $P_1$, $P_2$ und $P_3$.
+  Es soll ermittelt werden, welcher Bedarf an Rohstoffen je Endprodukt besteht.
+  }
+  \lang{en}{
+  A company produces \textit{end products} $P_1$, $P_2$ and $P_3$.
+  The company wants to find how many of each raw material it neeeds per product.
+  }
+    \begin{itemize}
+        \item \lang{de}{
+              Jedes Endprodukt setzt sich aus den \textit{Zwischenprodukten} $Z_1$, $Z_2$ und $Z_3$ 
+              zusammen.
+              }
+              \lang{en}{
+              Each end product is assembled from the \textit{components} $Z_1$, $Z_2$ and $Z_3$.
+              }
+        \item \lang{de}{
+              Die Zwischenprodukte bestehen aus den \textit{Rohstoffen} $R_1$, $R_2$, $R_3$ und $R_4$.
+              }
+              \lang{en}{
+              The components are manufactured from the \textit{raw materials} $R_1$, $R_2$, $R_3$ and 
+              $R_4$.
+              }
+    \end{itemize}
+\lang{de}{
+Die folgende Tabelle 1 gibt den Rohstoffbedarf für jedes Zwischenprodukt in der Einheit Kilogramm an:
+}
+\lang{en}{
+The following table 1 gives the raw material requirements for each component in kilograms.
+}
+\begin{center}
+\begin{table}[\cellaligns{ccc}]
+    \head
+      & $Z_1$ & $Z_2$ & $Z_3$
+    \body
+  $R_1$ & 1 & 2 & 5 \\
+  $R_2$ & 3 & 6 & 4 \\
+  $R_3$ & 0 & 1 & 3 \\
+  $R_4$ & 2 & 1 & 0
+\end{table}
+\end{center}
+\lang{de}{
+Weiterhin liegt eine Tabelle 2 vor, welche die Stückzahl der Zwischenprodukte je Endprodukt auflistet:
+}
+\lang{en}{
+Table 2 gives the amount of each component required for each end product.
+}
+\begin{table}[\cellaligns{ccc}]
+    \head
+      & $P_1$ & $P_2$ & $P_3$
+    \body
+  $Z_1$ & 3 & 0 & 5 \\
+  $Z_2$ & 1 & 3 & 4 \\
+  $Z_3$ & 6 & 1 & 7
+\end{table}
+\lang{de}{
+Zur Ermittlung der Rohstoffmenge $R_1$ für das Endprodukt $P_1$ in Kilogramm ist die erste Zeile von 
+Tabelle 1 sowie die erste Spalte von Tabelle 2 relevant:
+}
+\lang{en}{
+To determine the amount of the raw material $R_1$ is needed for the end product $P_1$, the first row 
+of table 1 and the first column of table 2 are relevant.
+}
+\begin{itemize}
+    \item \lang{de}{
+          Durch Rechnung erhält man den Bedarf von $1 \cdot 3 + 2 \cdot 1 + 5 \cdot 6 = 35$ Kilogramm.
+          }
+          \lang{en}{
+          A simple calculation yields a requirement of $1 \cdot 3 + 2 \cdot 1 + 5 \cdot 6 = 35$ 
+          kilograms.
+          }
+\end{itemize}
+
+\lang{de}{
+\textit{In diesem Kapitel lernen Sie Probleme dieser Art strukturiert zu lösen.}
+\\\\
+Es seien $A \in M(4, 3;\R)$ und $B \in M(3, 3;\R)$ Matrizen, deren Koeffizienten den Einträgen aus 
+den oben gezeigten Tabellen entsprechen:
+}
+\lang{en}{
+\textit{In this chapter we learn to solve problems similar to this one.}
+\\\\
+Let $A \in M(4, 3;\R)$ and $B \in M(3, 3;\R)$ be matrices whose entries correspond to the entries of 
+the above tables:
+}
+
+\begin{equation*}
+A = 
+	\begin{pmatrix}
+		1 & 2 & 5 \\
+		3 & 6 & 4 \\
+		0 & 1 & 3 \\
+		2 & 1 & 0
+	\end{pmatrix},
+ ~~~~~ B=
+	\begin{pmatrix}
+		3 & 0 & 5 \\
+		1 & 3 & 4 \\
+		6 & 1 & 7
+	\end{pmatrix}.
+\end{equation*}
+
+\lang{de}{
+Dann gibt die folgende Matrix $C \in M(4, 3;\R)$ den Rohstoffbedarf für jedes Endprodukt an, 
+wobei die Spalten den Endprodukten und die Zeilen den Rohstoffen zugeordnet werden können.
+\\\\
+\textbf{Rechnung:}
+}
+\lang{en}{
+Then the following matrix $C \in M(4, 3;\R)$ gives the raw material requirements for each end 
+product, where the columns represent the end products and the rows represent the raw materials.
+\\\\
+\textbf{Calculation:}
+}
+
+
+\begin{eqnarray*}
+	C = A \cdot B
+	&=&
+	\begin{pmatrix}
+		1 & 2 & 5 \\
+		3 & 6 & 4 \\
+		0 & 1 & 3 \\
+		2 & 1 & 0
+	\end{pmatrix}
+	\cdot
+	\begin{pmatrix}
+		3 & 0 & 5 \\
+		1 & 3 & 4 \\
+		6 & 1 & 7
+	\end{pmatrix} 
+    \\
+	&=&
+	\begin{pmatrix}
+		1 \cdot 3 + 2 \cdot 1 + 5 \cdot 6 & 1 \cdot 0 + 2 \cdot 3 + 5 \cdot 1 & 1 \cdot 5 + 2 \cdot 4 + 5 \cdot 7 \\
+		3 \cdot 3 + 6 \cdot 1 + 4 \cdot 6 & 3 \cdot 0 + 6 \cdot 3 + 4 \cdot 1 & 3 \cdot 5 + 6 \cdot 4 + 4 \cdot 7 \\
+		0 \cdot 3 + 1 \cdot 1 + 3 \cdot 6 & 0 \cdot 0 + 1 \cdot 3 + 3 \cdot 1 & 0 \cdot 5 + 1 \cdot 4 + 3 \cdot 7 \\
+		2 \cdot 3 + 1 \cdot 1 + 0 \cdot 6 & 2 \cdot 0 + 1 \cdot 3 + 0 \cdot 1 & 2 \cdot 5 + 1 \cdot 4 + 0 \cdot 7 
+	\end{pmatrix}
+    \\
+	&=&
+    \begin{pmatrix}
+   35 &  11  & 48 \\
+   39 &  22  & 67 \\
+   19 &   6  & 25 \\
+    7 &   3  & 14
+	\end{pmatrix}
+\end{eqnarray*}
+
+% DAS FOLGENDE BEISPIEL WIRD GGF SPÄTER INTEGRIERT
+
+%    \tab{Künstliche Neuronale Netze}
+
+%\textbf{Künstliche Neuronale Netze (KNN)} finden heute weite Einsatzgebiete. 
+%Sie werden zum Beispiel zur Klassifikation von Objekten in Bildern eingesetzt. 
+
+%Vereinfacht betrachtet, approximiert ein KNN eine unbekannte Funktion, 
+%die durch eine Menge von Parametern, den sogenannten Gewichten, definiert wird.
+%Die Gewinnung dieser Gewichte geschieht durch einen Trainingsprozess, der hier nicht weiter betrachtetet wird.
+
+%Strukturell gesehen besteht ein neuronales Netz aus einer endlichen Menge von Neuronen. 
+%Jedes dieser Neuronen berechnet aus mehreren Eingaben eine Ausgabe. 
+%Dabei wird eine bestimmte Berechnungsvorschrift angewendet. 
+%Die berechnete Ausgabe eines Neurons dient wiederum als Eingabe für andere Neuronen.
+
+%Wir bezeichnen nun den Eingabevektor eines Neurons mit $x$.
+%Bei $m$ Eingängen ist $x \in \R^m$.
+%Ebenfalls liegt für jeden Eingang $x_i$ weiterhin ein Gewicht $w_i$ vor, also $w \in \R^m$.
+%In vielen Fällen wird der Ausgang $y$ des Neurons wie folgt berechnet:
+%\begin{equation}
+%	y = \max\{0, \sum_{i=1}^{m} x_i \cdot w_i \}
+%\end{equation}
+%TODO: (Wir vernachlässigen hier, dass überlicherweise ein zusätzlicher, statischer Eingang ) 
+
+%In der folgenden Abbildung ist ein einfaches künstliches neuronales Netz, 
+%bestehend aus 6 Neuronen, dargestellt.
+%Wendet man die oben dargestellte Rechnung für jedes Neuron (von links nach rechts) an, 
+%so erhält man die Gesamtausgabe des Netzes.
+
+%TODO: ABBDILUNG
+
+%Ein KNN besteht in der Praxis aus einer sehr großen Anzahl an Neuronen,
+%sodass der insgesamt anfallende Rechenaufwand immens ist.
+%Spezielle Computerprozessoren arbeiten sehr effizient bei der Berechnung von \textbf{Matrizenmultiplikationen}.
+%Um dies auszunutzen, muss die Problemstellung entsprechend aufbereitet werden.
+
+%XXX TODO
+
+    \end{tabs*}
+\end{example}
+
+
+
+
+\begin{definition}\label{def:matizen_mult}
+\lang{de}{
+Eine $(m\times n)$-Matrix $A=(a_{ij})_{1 \leq i \leq m, 1 \leq j \leq n}$ kann mit einer 
+$(n\times k)$-Matrix $B=(b_{ij})_{1 \leq i \leq n, 1 \leq j \leq k}$ wie folgt multipliziert werden. 
+Das Ergebnis ist dann eine $(m\times k)$-Matrix:% $C=(c_{ij})_{1 \leq i \leq m, 1 \leq j \leq k}$:
+}
+\lang{en}{
+An $(m\times n)$-matrix $A=(a_{ij})_{1 \leq i \leq m, 1 \leq j \leq n}$ can be multiplied with an 
+$(n\times k)$-Matrix $B=(b_{ij})_{1 \leq i \leq n, 1 \leq j \leq k}$ as follows. The result is then 
+a $(m\times k)$-matrix:
+}
+\[A \cdot B = 
+  \left( \sum_{\ell=1}^n a_{i\ell} \cdot b_{\ell j} \right)_{1 \leq i \leq m, 1 \leq j \leq k} \]
+
+\lang{de}{Ausführliche Schreibweise:}
+\lang{en}{More explicitly:}
+
+\begin{eqnarray*}
+ A\cdot B &=&
+\begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{pmatrix} \cdot  \begin{pmatrix}
+b_{11} & b_{12} & \cdots & b_{1k} \\
+b_{21} & b_{22} & \cdots & b_{2k} \\
+\vdots & \vdots & \ddots & \vdots \\
+b_{n1} & b_{n2} & \cdots & b_{nk}
+\end{pmatrix} \\ && \\
+&=& \begin{pmatrix}
+\sum_{j=1}^n a_{1j}b_{j1}\, & \sum_{j=1}^n a_{1j}b_{j2}\, & \cdots & \,\sum_{j=1}^n a_{1j}b_{jk} \\
+\sum_{j=1}^n a_{2j}b_{j1}\, & \sum_{j=1}^n a_{2j}b_{j2}\, & \cdots & \,\sum_{j=1}^n a_{2j}b_{jk} \\
+\vdots & \vdots & \ddots & \vdots \\
+\sum_{j=1}^n a_{mj}b_{j1}\, & \sum_{j=1}^n a_{mj}b_{j2}\, & \cdots &\, \sum_{j=1}^n a_{mj}b_{jk}
+\end{pmatrix}
+%                                      = \begin{pmatrix}
+%                                      a_{11} b_{11} + a_{12} b_{21} + \cdots + a_{1n} b_{n1} &  a_{11} b_{12} + a_{12} b_{22} + \cdots + a_{1n} b_{n2} & \cdots &
+%                                      a_{11} b_{1k} + a_{12} b_{2k} + \cdots + a_{1n} b_{nk}
+%                                      \\
+%                                      a_{21} b_{11} + a_{22} b_{21} + \cdots + a_{2n} b_{n1} & & & \vdots \\
+%                                      \vdots  & & & \vdots \\
+%                                      a_{m1} b_{11} + a_{m2} b_{21} + \cdots + a_{mn} b_{n1} & \cdots  & \cdots & a_{m1} b_{1k} + a_{m2} b_{2k} + \cdots + a_{mn} b_{nk}
+%                                      \end{pmatrix}.
+\end{eqnarray*}
+
+\lang{de}{
+Wie bei Multiplikationen üblich wird der Mal-Punkt auch oft weggelassen und $AB$ statt $A\cdot B$ geschrieben.\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=819}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{
+Again, we often omit the multiplication symbol and write $AB$ instead of $A\cdot B$.
+}
+\end{definition}
+
+
+\begin{quickcheck}
+    \type{input.number}
+      \precision{3}
+      \field{real}
+      \begin{variables}
+           \randint[Z]{m}{2}{4}
+           \randint[Z]{n}{5}{6}
+           \randint[Z]{k}{7}{8}
+       \end{variables}
+      \text{\lang{de}{
+            Wird eine $(\var{m}\times \var{n})$-Matrix
+            mit einer $(\var{n}\times \var{k})$-Matrix multipliziert,\\
+            so ist das Ergebnis eine \ansref $\times$ \ansref-Matrix.
+            }
+            \lang{en}{
+            If a $(\var{m}\times \var{n})$-matrix
+            is multiplied with a $(\var{n}\times \var{k})$-matrix,\\
+            the result is a \ansref $\times$ \ansref-matrix.
+            }}
+%      \explanation{}
+      \begin{answer}
+            \solution{m}
+      \end{answer}
+       \begin{answer}
+            \solution{k}
+      \end{answer}
+\end{quickcheck}
+
+
+\begin{block}[warning]
+\begin{enumerate}
+\item \lang{de}{
+      Das Produkt $AB$ zweier Matrizen $A$ und $B$ ist nur definiert, wenn die Anzahl der Spalten von 
+      $A$ mit der Anzahl der Zeilen von $B$ übereinstimmt.
+      }
+      \lang{en}{
+      The product $AB$ of two matrices $A$ and $B$ is only defined if $A$ has as many columns as $B$ 
+      has rows.
+      }
+
+\begin{center}
+\image{T111_MatrixProduct}
+\end{center}
+
+\item \lang{de}{
+      Die Matrizenmultiplikation ist nicht kommutativ, d.\,h. im Allgemeinen gilt $AB\ne BA$, selbst 
+      wenn beide Seiten definiert sind.
+      }
+      \lang{en}{
+      Matrix multiplication is not commutative, that is, we do not have $AB = BA$ in general, even 
+      if both sides are defined.
+      }
+\end{enumerate}
+\end{block}
+
+\begin{remark}\label{rem:falk_schema}
+\lang{de}{
+Die Multiplikation zweier Matrizen kann über das \textbf{Falksche Schema} veranschaulicht werden:
+}
+\lang{en}{
+Multiplication of two matrices is illustrated by the following table: 
+}
+
+\begin{center}
+\image{T111_FalksScheme}
+\end{center}
+
+\lang{de}{
+\floatright{\href{https://www.hm-kompakt.de/video?watch=820}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{}
+
+\end{remark}
+
+\begin{example}
+\begin{tabs*}[\initialtab{0}]
+\tab{\lang{de}{Produkt einer $(2\times 3)$-Matrix und einer $(3\times 2)$-Matrix}
+     \lang{en}{Product of a $(2\times 3)$-matrix with a $(3\times 2)$-matrix}} 
+\lang{de}{F\"ur}
+\lang{en}{The product $A\cdot B$ of the matrices}
+\[A = \begin{pmatrix}
+1 & 3 & 5 \\ 2 & 4 & 6
+\end{pmatrix} \quad
+\text{\lang{de}{und}\lang{en}{and}} \quad
+B = \begin{pmatrix}
+12 & 11\\ 10 & 9 \\8 & 7
+\end{pmatrix} 
+\]
+\lang{de}{
+ist das Produkt $A\cdot B$ definiert, da $A$ drei Spalten hat und $B$ genau so viele Zeilen. 
+Das Produkt einer $(2\times 3)$-Matrix mit einer $(3\times 2)$-Matrix ergibt dann eine $(2\times 2)$-Matrix und es ist
+}
+\lang{en}{
+is defined, as $A$ has three columns and $B$ has three rows. The product of a 
+$(2\times 3)$-matrix with a $(3\times 2)$-matrix yields a $(2\times 2)$-matrix,
+}
+\begin{eqnarray*} AB &=& \begin{pmatrix} 1\cdot 12+3\cdot 10+5\cdot 8 & 1\cdot 11+3\cdot 9+5\cdot 7 \\
+  2\cdot 12+4\cdot 10+6\cdot 8 & 2\cdot 11+4\cdot 9+6\cdot 7  \end{pmatrix}\\
+  &=&  \begin{pmatrix}
+12+30+40 & 11+27+35 \\ 24+40+48 & 22+36+42
+\end{pmatrix}
+ =  \begin{pmatrix}
+82 & 73 \\ 112 & 100
+\end{pmatrix}.\end{eqnarray*}
+\end{tabs*}
+\begin{tabs*}[\initialtab{0}]
+\tab{\lang{de}{Produkt einer $(3\times 1)$-Matrix und einer $(1\times 2)$-Matrix}
+     \lang{en}{Product of a $(3\times 1)$-matrix with a $(1\times 2)$-matrix}} 
+\lang{de}{F\"ur}
+\lang{en}{The product $B\cdot C$ of the matrices}
+\[B=\begin{pmatrix} 1 \\ 3 \\ -2\end{pmatrix}\quad
+  \text{\lang{de}{und}\lang{en}{and}} \quad C=\begin{pmatrix} 2 & -3 \end{pmatrix} \]
+\lang{de}{
+ist das Produkt $B\cdot C$ definiert, da $B$ eine Spalte hat und $C$ genau so viele Zeilen. Das 
+Produkt ist dann eine $(3\times 2)$-Matrix, da $B$ drei Zeilen hat und $C$ zwei Spalten hat. Es ist
+}
+\lang{en}{
+is defined, as $B$ has one column and $C$ has one row. The product is a 
+$(3\times 2)$-matrix, as $B$ has three rows and $C$ has two columns. It is
+}
+ \[ B\cdot C= \begin{pmatrix} 1\cdot 2 & 1\cdot (-3) \\ 3\cdot 2 & 3\cdot (-3)\\ -2\cdot 2 & -2\cdot (-3) \end{pmatrix}
+ = \begin{pmatrix} 2 & -3 \\ 6 & -9\\ -4 & 6 \end{pmatrix}.\]
+\end{tabs*}
+\begin{tabs*}[\initialtab{0}]
+\tab{\lang{de}{$AB$ und $BA$ definiert, aber verschieden groß}
+     \lang{en}{$AB$ and $BA$ defined but different sizes}} 
+\lang{de}{F\"ur die beiden Matrizen}
+\lang{en}{The product $A\cdot B$ of the matrices}
+\[A = \begin{pmatrix}
+  1 & 3 & 5 \\ 2 & 4 & 6
+  \end{pmatrix} \quad
+  \text{\lang{de}{und}\lang{en}{and}} \quad
+  B = \begin{pmatrix}
+  12 & 11\\ 10 & 9 \\8 & 7
+  \end{pmatrix}\]
+\lang{de}{
+ist auch das Produkt $B\cdot A$ definiert, da $B$ zwei Spalten hat und $A$ genau so viele Zeilen. Das 
+Ergebnis ist dann aber die $(3\times 3)$-Matrix
+}
+\lang{en}{
+is defined, and also the product $B\cdot A$, as $B$ has two columns and $A$ has two rows. The result 
+of $A\cdot C$ is the $(2\times 2)$-matrix shown two examples earlier, whereas the result of 
+$B\cdot A$ is the $(3\times 3)$-matrix
+}
+\[ BA= \begin{pmatrix}12+22 & 36+44 & 60+66\\ 10+18 & 30+36 & 50+54 \\ 8+14 & 24+28 & 40+42 \end{pmatrix} 
+=\begin{pmatrix}  
+34 & 80 & 126 \\ 28 & 66 & 104 \\ 22 & 52 & 82\end{pmatrix}. \]
+\end{tabs*}
+\begin{tabs*}[\initialtab{0}]
+\tab{\lang{de}{$AB$ nicht definiert, aber $BA$ definiert}
+     \lang{en}{$AB$ not defined, but $BA$ defined}} 
+\lang{de}{F\"ur}
+\lang{en}{The product $A\cdot B$ of the matrices}
+\[A = \begin{pmatrix}
+1 & 3 & 5 \\ 2 & 4 & 6
+\end{pmatrix} \quad
+ \text{\lang{de}{und}\lang{en}{and}} \quad B = \begin{pmatrix}
+12 & 11\\ 10 & 9 \\8 & 7 \\ 6& 5
+\end{pmatrix} 
+\]
+\lang{de}{
+ist das Produkt $A\cdot B$ nicht definiert, da $A$ nur drei Spalten hat, $B$ jedoch vier Zeilen.
+\\\\
+Das Produkt $B\cdot A$ ist jedoch definiert, da $B$ zwei Spalten hat und $A$ zwei Zeilen, und es gilt
+}
+\lang{en}{
+is not defined, as $A$ only has three columns where $B$ has four rows.
+\\\\
+However, the product $B\cdot A$ is defined, as $B$ has two columns and $A$ has two rows. We have
+}
+\begin{eqnarray*} B\cdot A &=& \begin{pmatrix}
+12 & 11\\ 10 & 9 \\8 & 7 \\ 6& 5
+\end{pmatrix} \cdot \begin{pmatrix}
+1 & 3 & 5 \\ 2 & 4 & 6
+\end{pmatrix}\\
+&=& \begin{pmatrix}
+12+22 & 36+44 & 60+66\\ 10+18 & 30+36 & 50+54 \\ 8+14 & 24+28 & 40+42 \\ 6+10 & 18+20 & 30+30
+\end{pmatrix} =\begin{pmatrix}  
+34 & 80 & 126 \\ 28 & 66 & 104 \\ 22 & 52 & 82 \\ 16 & 38 & 60
+\end{pmatrix} \in M(4, 3;\R). \end{eqnarray*}
+\end{tabs*}
+\begin{tabs*}[\initialtab{0}]
+\tab{\lang{de}{Quadratische Matrizen $A,B$ mit $AB\neq BA$}
+     \lang{en}{Square matrices $A,B$ with $AB\neq BA$}}
+\lang{de}{
+Selbst für \emph{quadratische} Matrizen (d.\,h. mit gleicher Zeilenzahl wie Spaltenzahl) sind $AB$ 
+und $BA$ meist verschieden. Zum Beispiel gilt f\"ur
+}
+\lang{en}{
+Even for \emph{square} matrices (which have the same number of rows and columns), $AB$ and $BA$ are 
+usually distinct. For example, for
+}
+$A = \begin{pmatrix}
+1 & 2 \\ 0& 1
+\end{pmatrix} \, $ 
+\lang{de}{und}\lang{en}{and} 
+$ \,B = \begin{pmatrix}
+2 & 0\\ 1&1 \end{pmatrix} \in M(2, 2;\R): 
+$
+\[ AB=\begin{pmatrix}
+1 & 2 \\ 0& 1
+\end{pmatrix}\cdot \begin{pmatrix}
+2 & 0\\ 1&1 \end{pmatrix}=\begin{pmatrix} 4&2\\ 1&1\end{pmatrix}, \]
+\lang{de}{aber}
+\lang{en}{but}
+\[ BA=\begin{pmatrix}
+2 & 0\\ 1&1 \end{pmatrix}\cdot\begin{pmatrix}
+1 & 2 \\ 0& 1
+\end{pmatrix}=\begin{pmatrix} 2&4\\ 1&3\end{pmatrix}. \]
+\end{tabs*}
+\end{example}
+
+
+\begin{remark}
+\lang{de}{
+Die Matrix-Vektor-Multiplikation wurde im \link{matrizen}{letzten Kapitel} eingeführt. Die $j$-te 
+Spalte des Matrizenprodukts $A\cdot B$ ist nichts anderes als das Matrix-Vektor-Produkt von $A$ mit 
+der $j$-ten Spalte von $B$:
+}
+\lang{en}{
+Matrix-vector multiplication was introduced \link{matrizen}{in a previous section}. The $j$th column 
+of the matrix product $A\cdot B$ is nothing more than the matrix-vector product of $A$ with the 
+$j$th column of $B$:
+}
+
+\begin{itemize}
+    \item \lang{de}{
+          Eine Matrix $A \in {M}(m,n;\R)$ besitze die Spaltenvektoren 
+          $a_1, a_2, \ldots, a_n \in \R^m$.
+          }
+          \lang{en}{
+          A matrix $A \in {M}(m,n;\R)$ 'contains' the column vectors
+          $a_1, a_2, \ldots, a_n \in \R^m$.
+          }
+    \[
+        A =
+        \begin{pmatrix}
+            | & | & & | \\
+            a_1 & a_2 & \cdots & a_n \\
+            | & | & & |
+        \end{pmatrix}
+    \]
+          \lang{de}{
+          Ein Spaltenvektor $x \in \R^n$ habe die Komponenten $x_1, x_2, \ldots, x_n$. Dann ist
+          }
+          \lang{en}{
+          Consider a column vector $x \in \R^n$ with components $x_1, x_2, \ldots, x_n$. Then
+          }
+    \[
+        A \cdot x = x_1 a_1 + x_2 a_2 + \cdots + x_n a_n \in \R^m
+    \] 
+          \lang{de}{
+          eine Linearkombination der Spaltenvektoren von $A$. Die Gewichte der einzelnen Vektoren 
+          sind durch den Vektor $x$ gegeben.
+          \\\\
+          \textit{Ausblick: $\, f(x)=A \cdot x$ definiert eine lineare Abbildung $\, f$ von 
+          $\, \R^n$ nach $\, \R^m$. Lineare Abbildungen über einem Körper $\, \K$ werden im Kursteil 
+          \link{content_10b_lineare_abb}{3b} (Lineare Algebra) vertieft.}
+          }
+          \lang{en}{
+          is a linear combination of the column vectors in $A$. The 'weights' (coefficient) of each 
+          vector are given by the coefficients of $x$.
+          \\\\
+          \textit{Preview: $\, f(x)=A \cdot x$ defines a linear map $\, f$ from $\, \R^n$ to 
+          $\, \R^m$. Linear maps over a field $\, \K$ are covered in section 
+          \link{content_10b_lineare_abb}{3b}}
+          }
+
+          
+
+    \item \lang{de}{
+          Eine Matrix $B \in {M}(n,k;\R)$ besitze die Spaltenvektoren 
+          $b_1, b_2, \ldots, b_k \in \R^n$, also
+          }
+          \lang{en}{
+          A matrix $B \in {M}(n,k;\R)$ contains the column vectors $b_1, b_2, \ldots, b_k \in \R^n$, 
+          so
+          }
+    \[
+      B=\begin{pmatrix}
+      | & | & & | \\
+      b_1 & b_2 & \cdots & b_k \\
+      | & | & & | 
+      \end{pmatrix}.
+    \]
+          \lang{de}{Dann ist}
+          \lang{en}{Hence}
+    \[
+        A \cdot B =
+        \begin{pmatrix}
+        | & | & & | \\
+            A \cdot b_1 & A \cdot b_2 & \cdots & A \cdot b_k \\
+            | & | & & |
+        \end{pmatrix}.
+    \]
+\end{itemize}
+
+\end{remark}
+
+\begin{example}
+  %\begin{tabs*}[\initialtab{0}]
+  
+   % \tab{Beispiel zur Bemerkung}
+
+   \lang{de}{Wir verdeutlichen die Bemerkung mit einem Beispiel. Wir möchten}
+   \lang{en}{We clarify the remark with an example. Suppose we want to calculate}
+   \[
+   \begin{pmatrix}
+              1 & 2 \\
+              3 & 4
+          \end{pmatrix}
+          \cdot
+          \begin{pmatrix}
+              \textcolor{#CC6600}{5} & \textcolor{#0066CC}{6} \\
+              \textcolor{#CC6600}{7} & \textcolor{#0066CC}{8}
+          \end{pmatrix}
+   \]
+   \lang{de}{
+   berechnen.
+   \\\\
+   Die erste Spalte des Matrizenprodukts können wir durch
+   }
+   \lang{en}{
+   The first column of the matrix product can be calculated to be
+   }
+   \[
+   \begin{pmatrix}
+                  1 & 2 \\
+                  3 & 4
+              \end{pmatrix}
+              \cdot
+              \textcolor{#CC6600}{\begin{pmatrix}
+                  5 \\
+                  7
+              \end{pmatrix}} = \textcolor{#CC6600}{\begin{pmatrix}
+            1 \cdot 5 + 2 \cdot 7 \\
+            3 \cdot 5 + 4 \cdot 7 
+        \end{pmatrix}}= \textcolor{#CC6600}{\begin{pmatrix}
+            19 \\ 43
+        \end{pmatrix}}
+   \]
+   \lang{de}{berechnen und die zweite Spalte ist durch}
+   \lang{en}{and the second column to be}
+   \[
+    \begin{pmatrix}
+                  1 & 2 \\
+                  3 & 4
+              \end{pmatrix}
+              \cdot\textcolor{#0066CC}{\begin{pmatrix}
+                  6 \\
+                  8
+              \end{pmatrix}}
+               = \textcolor{#0066CC}{\begin{pmatrix}
+              1 \cdot 6 + 2 \cdot 8 \\
+              3 \cdot 6 + 4 \cdot 8 
+        \end{pmatrix}}= \textcolor{#0066CC}{\begin{pmatrix}
+             22 \\ 50
+        \end{pmatrix}}
+   \]
+   \lang{de}{
+   gegeben.
+   \\\\
+   Also ist
+   }
+   \lang{en}{
+   Therefore
+   }
+   \[
+   \begin{pmatrix}
+              1 & 2 \\
+              3 & 4
+          \end{pmatrix}
+          \cdot
+          \begin{pmatrix}
+              5 & 6 \\
+              7 & 8
+          \end{pmatrix} = 
+          \begin{pmatrix}
+             \textcolor{#CC6600}{19} & \textcolor{#0066CC}{22} \\
+            \textcolor{#CC6600}{43} & \textcolor{#0066CC}{50}
+          \end{pmatrix}.
+   \]
+  
+%       \begin{eqnarray*}
+%           \begin{pmatrix}
+%               1 & 2 \\
+%               3 & 4
+%           \end{pmatrix}
+%           \cdot
+%           \begin{pmatrix}
+%               5 & 6 \\
+%               7 & 8
+%           \end{pmatrix}
+%           &=&
+%           \begin{pmatrix}
+%               \begin{pmatrix}
+%                   1 & 2 \\
+%                   3 & 4
+%               \end{pmatrix}
+%               \cdot
+%               \begin{pmatrix}
+%                   5 \\
+%                   7
+%               \end{pmatrix}
+%               &
+%               \begin{pmatrix}
+%                   1 & 2 \\
+%                   3 & 4
+%               \end{pmatrix}
+%               \cdot
+%               \begin{pmatrix}
+%                   6 \\
+%                   8
+%               \end{pmatrix}
+%           \end{pmatrix}
+%         \\
+%         &&
+%         \begin{pmatrix}
+%             1 \cdot 5 + 2 \cdot 7 & 1 \cdot 6 + 2 \cdot 8 \\
+%             3 \cdot 5 + 4 \cdot 7 & 3 \cdot 6 + 4 \cdot 8 
+%         \end{pmatrix}
+%         =
+%         \begin{pmatrix}
+%             19 & 22 \\
+%             43 & 50
+%         \end{pmatrix}
+%       \end{eqnarray*}
+      
+    %\end{tabs*}
+\end{example}
+
+
+\section{\lang{de}{Rechenregeln}\lang{en}{Rules for matrix multiplication}}\label{sec:rechenregeln}
+
+\lang{de}{Abgesehen von der Vertauschung gelten für die Matrixmultiplikation die üblichen Regeln.}
+\lang{en}{Besides not being able to swap matrices, the usual rules for multiplication hold.}
+
+\begin{rule}\label{rule:rechenregeln}
+\begin{enumerate}
+\item \lang{de}{
+      \textbf{(Assoziativregel)} Für alle $A\in M(m,n;\R)$, $B \in M(n,k;\R)$ und $C \in M(k,l;\R)$ 
+      gilt
+      }
+      \lang{en}{
+      \textbf{(Associativity)} For all $A\in M(m,n;\R)$, $B \in M(n,k;\R)$ und $C \in M(k,l;\R)$ 
+      we have
+      }
+      \[ A \cdot (B\cdot C) = (A\cdot B)\cdot C \in M(m,l;\R). \]
+\item \lang{de}{
+      \textbf{(Distributivregeln)} Für alle $A,D \in M(m,n;\R)$ und $B,C \in M(n,k;\R)$  gelten
+      }
+      \lang{en}{
+      \textbf{(Distributivity over addition)} For all $A,D \in M(m,n;\R)$ and $B,C \in M(n,k;\R)$ 
+      we have
+      }
+      \[ A\cdot (B+C) =AB+ AC \quad \text{und}\quad (A+D)\cdot B=AB+DB. \]
+\item \lang{de}{
+      \textbf{(Verträglichkeit mit Skalaren)} Für alle $A\in M(m,n;\R)$, $B \in M(n,k;\R)$ und 
+      reelle Zahlen $r\in \R$ gilt
+      }
+      \lang{en}{
+      \textbf{(Compatibility with scalar multiplication)} For all $A\in M(m,n;\R)$, $B \in M(n,k;\R)$ 
+      and real numbers $r\in \R$ we have
+      }
+      \[ r(AB)=(rA)\cdot B= A\cdot (rB). \]
+\end{enumerate}
+\lang{de}{
+\floatright{\href{https://www.hm-kompakt.de/video?watch=823}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{}
+\end{rule}
+
+\begin{block}[warning]
+\lang{de}{
+Bei der letzten Regel muss die Reihenfolge von $A$ und $B$ stets gleich bleiben. Lediglich der Skalar 
+$r$ darf mit $A$ vertauscht werden.
+}
+\lang{en}{
+When applying the final rule, the order of $A$ and $B$ must remain the same. Only the scalar $r$ may 
+be swapped with $A$.
+}
+\end{block}
+
+\begin{quickcheck}
+  \field{rational}
+  \type{input.number}
+  \begin{variables}
+  \end{variables}
+      \text{\lang{de}{
+      Welche der folgenden Aussagen sind für alle Matrizen $A, B, C \in \mathbb{M}(n,n;\mathbb{R})$ 
+      wahr?\\
+      }
+      \lang{en}{
+      Which of the following statements are true for all matrices 
+      $A, B, C \in \mathbb{M}(n,n;\mathbb{R})$?\\
+      }}
+      \begin{choices}{multiple}
+          \begin{choice}
+            \text{$(A \cdot B) \cdot C = A \cdot (B \cdot C)$}
+            \solution{true}
+          \end{choice}
+          \begin{choice}
+            \text{$(A + B) \cdot C = AC + BC$}
+            \solution{true}
+          \end{choice}
+          \begin{choice}
+            \text{$A \cdot B \cdot C = A \cdot C \cdot B$}
+            \solution{false}
+          \end{choice}
+       \end{choices}
+  \explanation{\lang{de}{Achtung: die Matrizenmultiplikation ist \textbf{nicht} kommutativ!}
+               \lang{en}{Warning: matrix multiplication is \textbf{not} commutative!}}
+\end{quickcheck}
+
+
+\begin{example}
+\begin{tabs*}
+\tab{$A (B C) = (A B) C$}
+\lang{de}{Wir betrachten}
+\lang{en}{Consider}
+\[A=\begin{pmatrix} 2 & -3 & 1 \\ 0 & \frac{4}{3} & 5 \end{pmatrix}, \quad 
+  B=\begin{pmatrix} 1 \\ 3 \\ -2\end{pmatrix}\quad
+  \text{\lang{de}{und}\lang{en}{and}} \quad 
+  C=\begin{pmatrix} 2 & -3 \end{pmatrix}.\]
+\lang{de}{Dann sind}
+\lang{en}{Then we have}
+ \begin{eqnarray*} A(BC)&=& \begin{pmatrix} 2 & -3 & 1 \\ 0 & \frac{4}{3} & 5 \end{pmatrix}\cdot \Big( \begin{pmatrix} 1 \\ 3 \\ -2\end{pmatrix} \cdot
+ \begin{pmatrix} 2 & -3 \end{pmatrix} \Big) \\
+ &=& \begin{pmatrix} 2 & -3 & 1 \\ 0 & \frac{4}{3} & 5 \end{pmatrix}\cdot \begin{pmatrix} 2 & -3 \\ 6 & -9\\ -4 & 6 \end{pmatrix} \\
+ &=& \begin{pmatrix} -18 & 27 \\ -12 & 18 \end{pmatrix}
+ \end{eqnarray*}
+\lang{de}{und}\lang{en}{and}
+ \begin{eqnarray*} (AB)C &=& \Big( \begin{pmatrix} 2 & -3 & 1 \\ 0 & \frac{4}{3} & 5 \end{pmatrix}\cdot \begin{pmatrix} 1 \\ 3 \\ -2\end{pmatrix}\Big) \cdot
+ \begin{pmatrix} 2 & -3 \end{pmatrix}  \\
+ &=& \begin{pmatrix} 2\cdot 1 + (-3)\cdot 3 + 1\cdot (-2) \\ 0\cdot 1 + \frac{4}{3} \cdot 3 + 5\cdot (-2) \end{pmatrix}\cdot
+ \begin{pmatrix} 2 & -3 \end{pmatrix} = \begin{pmatrix} -9\\ -6 \end{pmatrix} \cdot
+ \begin{pmatrix} 2 & -3 \end{pmatrix} \\
+ &=& \begin{pmatrix} -18 & 27 \\ -12 & 18 \end{pmatrix}.
+ \end{eqnarray*}
+\tab{$A(B+C)=AB+AC$}
+\lang{de}{Wir betrachten}
+\lang{en}{Consider}
+\[ A= \begin{pmatrix} 2 & -3 & 1 \\ 0 & \frac{4}{3} & 5 \end{pmatrix}, \quad B=\begin{pmatrix} 1 \\ 3 \\ -2\end{pmatrix}\quad
+ \text{und} \quad C=\begin{pmatrix} 2 \\ -3 \\ 1\end{pmatrix}.\]
+\lang{de}{Dann sind}
+\lang{en}{Then we have}
+ \begin{eqnarray*} A(B+C) &=& \begin{pmatrix} 2 & -3 & 1 \\ 0 & \frac{4}{3} & 5 \end{pmatrix}\cdot \begin{pmatrix} 1+2 \\ 3-3 \\ -2+1\end{pmatrix}\\
+ &=& \begin{pmatrix} 2\cdot 3+(-3)\cdot 0+1\cdot (-1) \\ 0\cdot 3+\frac{4}{3} \cdot 0+5\cdot (-1) \end{pmatrix} =\begin{pmatrix} 5\\ -5 \end{pmatrix}
+ \end{eqnarray*}
+\lang{de}{und}\lang{en}{and}
+  \begin{eqnarray*} AB+AC &=& \begin{pmatrix} 2\cdot 1 + (-3)\cdot 3 + 1\cdot (-2) \\ 0\cdot 1 + \frac{4}{3} \cdot 3 + 5\cdot (-2) \end{pmatrix}
+   +\begin{pmatrix} 2\cdot 2 + (-3)\cdot (-3) + 1\cdot 1 \\ 0\cdot 2 + \frac{4}{3}\cdot (-3)+ 5\cdot 1 \end{pmatrix} \\
+ &=& \begin{pmatrix} -9\\ -6 \end{pmatrix}+ \begin{pmatrix} 14 \\ 1\end{pmatrix} = \begin{pmatrix} 5\\ -5 \end{pmatrix}.
+ \end{eqnarray*}
+ \end{tabs*}
+ \end{example}
+
+
+\end{visualizationwrapper}
+
+
+\end{content}

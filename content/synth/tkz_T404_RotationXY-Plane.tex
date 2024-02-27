@@ -1,0 +1,27 @@
+%This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)
+%https://creativecommons.org/licenses/by/4.0/legalcode
+\documentclass[rgb]{standalone}
+\usepackage{pgfplots}
+\definecolor{myorange}{hsb}{0.0833, 1, 0.8}
+\definecolor{mygreen}{hsb}{0.3333, 1, 0.8}
+\definecolor{myblue}{hsb}{0.5833, 1, 0.8}
+\definecolor{mymagenta}{hsb}{0.8333, 1, 0.8}
+\begin{document}
+	\begin{tikzpicture}[font=\Large]
+		\begin{axis}[scale=1.5,clip=false,hide axis,view={45}{45}, xmin=-2,xmax=3, ymin=-2,ymax=3, zmin=-0, zmax=3, ztick={0,1,2}, xlabel=$x_1$, ylabel=$x_2$, zlabel=$x_3$]	
+			\addplot [domain=0:360,samples=100, draw=none, fill, opacity=0.1]  ({2*sin(x)},{2*cos(x)}); 
+				\addplot [thick,domain=60:90,samples=100]  ({0.75*sin(x)},{0.75*cos(x)}); 
+				\addplot [thick,domain=0:-30,samples=100]  ({0.75*sin(x)},{0.75*cos(x)}); 
+			\draw[line width=2.5pt,myblue, -latex] (axis cs:0,0,0) -- (axis cs:2,0,0);
+			\draw[line width=2.5pt,myblue, -latex] (axis cs:0,0,0) -- (axis cs:0,2,0);
+			\draw[line width=2.5pt,myorange, -latex] (axis cs:0,0,0) -- (axis cs:{2*cos(30)},{2*sin(30)},0);
+			\draw[line width=2.5pt,myorange, -latex] (axis cs:0,0,0) -- (axis cs:{-2*sin(30)},{2*cos(30)},0);
+			\draw[line width=2.5pt,myblue!50!myorange, -latex] (axis cs:0,0,0) -- (axis cs:0,0,2);
+			\node at (axis cs:0,0,2.2) [] {${\color{myblue}{\vec{e}_3}}={\color{myorange}{A\vec{e}_3}}$};	
+			\node at (axis cs:2.3,0,0) [myblue] {$\vec{e}_1$};
+			\node at (axis cs:{2.3*cos(30)},{2.3*sin(30)},0) [myorange] {$A\vec{e}_1$};
+			\node at (axis cs:0,2.3,0) [myblue] {$\vec{e}_2$};	
+			\node at (axis cs:{-2.3*sin(30)},{2.3*cos(30)},0) [myorange] {$A\vec{e}_2$};	
+		\end{axis}
+	\end{tikzpicture}
+\end{document}

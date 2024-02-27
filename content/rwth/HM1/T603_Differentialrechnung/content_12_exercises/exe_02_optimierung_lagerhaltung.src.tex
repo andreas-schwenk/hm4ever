@@ -1,0 +1,160 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Exercise 2: Cost minimization}
+    \lang{de}{Ü02: Kostenminimierung}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\title{\lang{en}{Exercise 2: Cost minimization}
+    \lang{de}{Ü02: Kostenminimierung}
+    \lang{zh}{...}
+    \lang{fr}{...}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24033}{Ticket 24033}
+\end{block}
+
+\lang{de}{
+Die Lagerhaltungskosten einer Firma für ein bestimmtes Produkt 
+sollen minimiert werden. Pro Woche besteht ein Bedarf von 400 Stück. 
+Pro Lieferung entstehen Kosten von 100 \euro, unabhängig von der 
+gelieferten Anzahl. Die Firma hat 2 \euro Kosten pro Stück und Woche.
+Für jedes Stück wird dieselbe (durchschnittliche) Lagerzeit angenommen.
+
+Bestimmen Sie die bestellte Stückzahl je Lieferung.}
+
+\lang{en}{
+A company seeks to minimze the cost of storing a particular product.
+It requires 400 units per week. Each delivery of the product entails
+a cost of 100 \euro regardless of the number of delivered units.
+Storing the product costs 2 \euro per unit. Each unit is assumed to
+be stored (on average) for the same length of time.
+
+Determine how many units should be ordered in each delivery.
+}
+
+  \begin{tabs*}[\initialtab{0}\class{exercise}]
+    \tab{
+      \lang{en}{Solution}
+      \lang{de}{Lösung}
+      \lang{zh}{...}
+      \lang{fr}{...}
+    }
+    \begin{incremental}[\initialsteps{1}]
+      \step
+        \lang{en}{200 units should be ordered in each delivery.}
+        \lang{de}{Es sind 200 Stück je Lieferung zu bestellen.}
+        \lang{zh}{...}
+        \lang{fr}{...}
+      \step
+        \lang{en}{Data: \\
+        \begin{table}
+        Demand per week: & 400 units\\
+        Weekly costs per unit: & 2\euro\\
+        Cost per delivery:& 100\euro\\
+        Average storage time: & m weeks
+        \end{table}
+        }
+        \lang{de}{Angaben: \\
+        \begin{table}
+        Bedarf pro Woche: & 400 Stück\\
+        Kosten pro Woche und Stück: & 2\euro\\
+        Kosten je Lieferung:& 100\euro\\
+        mittlere Lagerzeit: & m Wochen
+        \end{table}
+        }
+        \lang{zh}{...}
+        \lang{fr}{...}
+      \step
+      \lang{de}{Lieferkosten:\\
+      Wenn jede Lieferung $x$ Stück enthält, kostet die Lieferung pro Stück $\frac{100}{x}$. In dem Zeitraum von 
+      m Wochen werden $400\cdot m$ Stück benötigt.\\
+      $K_{\text{Liefer}}=\frac{100}{x}\cdot 400\cdot m$\\
+      Mit diesem alleinigen Kriterium sollte die Menge des Gutes möglichst groß gewählt werden. Mit zunehmendem Lagerbestand
+      wachsen allerdings auch die Lagerkosten, so dass hier ein Optimum gesucht werden muss.
+      Lagerhaltungskosten:\\
+      Betrachten wir einen Zeitraum zwischen zwei Lieferungen (m Wochen), so ist der Bestand zu Beginn x Stück, 
+      am Ende ist das Lager jedoch leer. D.\,h. der mittlere Bestand beträgt genau $\frac{x}{2}$ Stück.\\
+      $K_{\text{Lager}}=\frac{x}{2}\cdot 2\cdot m$\\ }
+       \lang{en}{Delivery costs:\\
+       If each delivery contains $x$ units, then the delivery cost per unit is $\frac{100}{x}$.
+       Over $m$ weeks, the demand is $400 \cdot m$ units.
+      $K_{\text{Delivery}}=\frac{100}{x}\cdot 400\cdot m$\\
+      If this were the only cost, then the number of units per delivery would be chosen as large as possible.
+      However, increasing the inventory incurs storage costs, so we have to look for an optimum value.
+      Consider the time between two deliveries (m weeks). In the beginning, the inventory is x units,
+      while at the end the inventory is empty. The average inventory is therefore $\frac{x}{2}$ units. \\
+      $K_{\text{Storage}} = \frac{x}{2} \cdot 2 \cdot m.$\\ }
+      
+      \step
+      \lang{de}{Die Gesamtkosten sind also:
+      \[K(x)=\frac{40.000\cdot m}{x}+x\cdot m\]
+      Wir suchen das Minimum der Kostenfunktion, d.\,h. wir bilden 
+      $K'(x)$ und $K''(x)$:
+      \begin{align*}
+      K'(x)&=&\frac{-40.000\cdot m}{x^2}+m\\
+      K''(x)&=&\frac{80.000\cdot m}{x^3}
+      \end{align*}
+      $K'(x)=0$ liefert:
+      \begin{align*}
+      -\frac{40.000\cdot m}{x^2}+m&=&0\\
+      -40.000+x^2&=&0\\
+      x^2&=&40.000\\
+      x_{1/2}&=&\pm 200
+      \end{align*}
+      Die negative Lösung schließen wir aus, wir berechnen noch $K''(200)>0$, 
+      d.\,h. bei $x=200$ liegt ein lokles Minimum vor. Wegen $\lim_{x\searrow 0}K(x)=\infty$ 
+      sowie $\lim_{x\to\infty}K(x)=\infty$
+      handelt es sich um ein globale Minimalstelle.
+      
+      Also werden pro Lieferung 200
+      Stück geliefert.}
+      \lang{en}{The total costs are:
+      \[K(x)=\frac{40,000\cdot m}{x}+x\cdot m.\]
+      We want to minimize the cost function, so we consider
+      $K'(x)$ und $K''(x)$:
+      \begin{align*}
+      K'(x)&=&\frac{-40,000\cdot m}{x^2}+m\\
+      K''(x)&=&\frac{80,000\cdot m}{x^3}
+      \end{align*}
+      $K'(x)=0$ yields:
+      \begin{align*}
+      -\frac{40,000\cdot m}{x^2}+m&=&0\\
+      -40,000+x^2&=&0\\
+      x^2&=&40,000\\
+      x_{1/2}&=&\pm 200
+      \end{align*}
+      The negative solution can be eliminated. We calculate $K''(200)>0$ and conclude
+      that $K(x)$ has a local minimum at $x=200$. Since $\lim_{x\searrow 0}K(x)=\infty$ 
+      and $\lim_{x\to\infty}K(x)=\infty$,
+      this is a global minimum.
+      
+      Therefore, each delivery should contain 200 units.}
+    \end{incremental}
+    
+    
+  \end{tabs*}
+
+
+
+
+
+\end{content}
+

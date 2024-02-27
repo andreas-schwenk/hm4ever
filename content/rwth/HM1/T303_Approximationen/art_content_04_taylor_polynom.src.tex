@@ -1,0 +1,1987 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Taylor-Entwicklung}
+    \lang{en}{Taylor expansions}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T303_TaylorCosine.meta.xml}{T303_TaylorCosine}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T303_TaylorParabola.meta.xml}{T303_TaylorParabola}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T303_TaylorSine.meta.xml}{T303_TaylorSine}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T303_TrigApprox_B.meta.xml}{T303_TrigApprox_B}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T303_TrigApprox_A.meta.xml}{T303_TrigApprox_A}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+\end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T207_Intervall_Schachtelung/g_art_content_21_intervalle.meta.xml}{content_21_intervalle}
+    \link{generic_article}{content/rwth/HM1/T301_Differenzierbarkeit/g_art_content_02_ableitungsregeln.meta.xml}{content_02_ableitungsregeln}
+    \link{generic_article}{content/rwth/HM1/T303_Approximationen/g_art_content_04_taylor_polynom.meta.xml}{content_04_taylor_polynom}
+    \link{generic_article}{content/rwth/HM1/T209_Potenzreihen/g_art_content_27_konvergenzradius.meta.xml}{content_27_konvergenzradius}
+    \link{generic_article}{content/rwth/HM1/T201neu_Vollstaendige_Induktion/g_art_content_02_vollstaendige_induktion.meta.xml}{content_02_vollstaendige_induktion}
+    %\link{generic_article}{content/rwth/HM1/T503_Differentialgleichungen/g_art_content_57_gewoehnliche_DGL_erster_Ordnung.meta.xml}{content_57_gewoehnliche_DGL_erster_Ordnung}
+    \link{generic_article}{content/rwth/HM1/T103_Polynomfunktionen/g_art_content_10_polynomdivision.meta.xml}{content_10_polynomdivision}
+    \link{generic_article}{content/rwth/HM1/T209_Potenzreihen/g_art_content_28_exponentialreihe.meta.xml}{content_28_exponentialreihe}
+    \link{generic_article}{content/rwth/HM1/T301_Differenzierbarkeit/g_art_content_01_differenzenquotient.meta.xml}{diffbarkeit}
+    \link{generic_article}{content/rwth/HM1/T211_Eigenschaften_stetiger_Funktionen/g_art_content_34_exp_und_log.meta.xml}{exp-und-log}
+    \link{generic_article}{content/rwth/HM1/T303_Approximationen/g_art_content_06_de_l_hospital.meta.xml}{l-hospital}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{2}
+\ombarticle{1}
+
+\title{\lang{de}{Taylor-Entwicklung}\lang{en}{Taylor expansions}}
+ 
+\begin{block}[annotation]
+  
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10035}{Ticket 10035}\\
+\end{block}
+\begin{block}[annotation]
+  ToDo wen JSX-Graphs auf den Servern läuft: Kleinwinkelnäherung neu einpflegen.\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\lang{de}{
+Häufig ist eine durch die Analysis bereitgestellte Lösungsfunktion in der Praxis nur schwer zu 
+handhaben, weil die beteiligten Gleichungen zu kompliziert sind oder die explizite Berechnung des 
+Funktionsausdrucks zu teuer oder unmöglich ist. Dann ist eine näherungsweise Darstellung der 
+Funktion durch möglichst einfache Ausdrücke wünschenswert.
+\\\\
+Wir betrachten in diesem Abschnitt ein Approximationsverfahren, die \notion{Taylor-Entwicklung}, das 
+eine solche Näherungsdarstellung mit Hilfe von Polynomen erzeugt. Polynome haben den Vorteil, dass 
+sie sich einfach ableiten und integrieren lassen und dass es effektive Auswertungswerkzeuge für sie 
+gibt, zum Beispiel das \ref[content_10_polynomdivision][Horner-Schema]{sec:poly-div-mit-horner}. 
+% Referenz kontrollieren, wenn Polynom-Kapitel fertig entwickelt ist.
+Man verwendet die sogenannten \notion{Taylor-Polynome}, um Funktionen in der Umgebung einer Stelle 
+$x_0$ zu approximieren, und spricht dann auch von \notion{Taylor-Näherung}.
+\\\\
+Ein Beispiel für eine Taylor-Näherung ist die Kleinwinkelnäherung, die sich zunächst durch eine 
+einfache Betrachtung am Einheitskreis finden lässt. Für große Winkel weichen $\sin x$ und $\tan x$ 
+deutlich von $x$ ab. Für kleine Winkel $x$ sind sie Näherungsweise gleich diesem.
+}
+\lang{en}{
+Often a function defined by its own properties is difficult to work with in practice, simply 
+because its definition may be complicated, or it may be computationally difficult to even compute 
+the values of the function. In these cases, an approximation to the function using some simpler 
+functions is useful.
+\\\\
+In this section we consider a method of approximating functions, the so-called 
+\notion{Taylor series}, which give such an approximate representation of a function in terms of 
+polynomials. Polynomials have the advantage of being easy to differentiate and integrate, and 
+computationally efficient to evaluate, for example using 
+\ref[content_10_polynomdivision][Horner's method]{sec:poly-div-mit-horner}. 
+So-called \notion{Taylor polynomials} are used to approximate functions in a neighbourhood of a 
+point $x_0$, in a process sometimes called finding the \notion{Taylor expansion} of the function at 
+the point.
+\\\\
+An example of a Taylor approximation is the approximation for small angles that can be justified 
+using a simple visual argument on the unit circle. For larger angles, $\sin x$ and $\tan x$ diverge 
+considerably from $x,$ but for small angles $x$ they are approximated well by $x$ itself.
+}
+\begin{table}[\class{item}]
+ \lang{de}{\image{T303_TrigApprox_A}} & \lang{de}{\image{T303_TrigApprox_B}}
+ \lang{en}{\image{T303_TrigApprox_A}} & \lang{en}{\image{T303_TrigApprox_B}}
+\end{table}
+%Abbildungen werden durch einen jsx-graph ersetzt, wenn diese auf den normalen Servern laufen.
+\lang{de}{
+Dabei wird angenommen, dass der Winkel $x$ so klein ist, dass man dessen Sinus oder Tangens durch 
+den Winkel selbst ersetzen kann
+}
+\lang{en}{
+Clearly the assumption being made for this approximation is that the angle $x$ is so small that its 
+sine or cosine may be approximated by the angle itself:
+}
+\[\sin x\approx x\quad \text{\lang{de}{ bzw. }\lang{en}{ or }}\quad\tan x\approx x.\]
+\lang{de}{
+Wir ersetzen also die Funktionen $\sin x$ bzw. $\tan x$ durch das Polynom $x$ vom Grad eins.
+Wir werden sehen, dass die Kleinwinkelnäherung nichts anderes ist als die nach dem ersten Glied 
+abgebrochene Taylor-Entwicklung des Sinus bzw. Tangens an der Stelle $x_0=0$. Diese ist wiederum 
+identisch mit der ersten Partialsumme der 
+\ref[content_28_exponentialreihe][Potenzreihe des Sinus]{sec:sinus-kosinus} 
+bzw. Tangens. Der Zusammenhang zwischen Potenzreihenentwicklung und Taylor-Reihenentwicklung ergibt 
+sich im weiteren Verlauf dieses Abschnitts.
+\\\\
+Anschaulich handelt es sich bei dieser ersten Näherung um die Tangente an den Funktionsgraphen, die
+bereits eine gute Näherung einer differenzierbaren Funktion $f$ in einer ausreichend kleinen 
+Umgebung der Stelle $x_0=0$ darstellt.
+}
+\lang{en}{
+We replace the function $\sin x$ or the function $\tan x$ by the polynomial $x$ of degree one. We 
+will see that this small angle approximation is nothing more than the Taylor series of the sine or 
+cosine function about the point $x_0$ respectively truncated after their first terms. This is 
+in fact identical to the first partial sum of the 
+\ref[content_28_exponentialreihe][power series of the sine function]{sec:sinus-kosinus} 
+or tangent function respectively. The relationship between power series and Taylor series is 
+revealed later in this section.
+\\\\
+Visually, this first approximation of the sine graph corresponds to the tangent of the sine graph 
+at the point $x_0=0$, which approximates the graph well in a neighbourhood of $0$.
+}
+\begin{center}
+\image{T303_TaylorSine}
+\end{center}
+
+\lang{de}{
+Anwendung findet diese Näherung kleiner Winkel zum Beispiel beim (mathematischen) Fadenpendel. 
+% Referenz setzen, wenn Teil Mehrdimensionale Analysis eingebunden wird: \ref[content_57_gewoehnliche_DGL_erster_Ordnung][(mathematischen) Fadenpendel]{ex:fadenpendel}
+Dort wird eine elementar nicht lösbare nichtlineare Differentialgleichung in Näherung
+durch eine explizit lösbare lineare Differentialgleichung ersetzt, 
+deren Lösung die Bewegung des Fadenpendels für kleine Auslenkungen sehr gut approximiert.
+\\\\
+Die Näherung einer mehrfach differenzierbaren Funktion $f$ lässt sich dadurch verbessern, dass wir 
+den Grad des Taylor-Polynoms erhöhen. Letzteres werden wir nun erst einmal definieren.
+}
+\lang{en}{
+This approximation has an application when modelling a (mathematical) pendulum. 
+A non-solvable non-linear differential equation can be replaced by a solvable approximation, whose 
+solution accurately describes the movement of the pendulum when a small pertubation is applied to it.
+\\\\
+The approximation of a multiple times differentiable function $f$ may be improved by increasing the 
+degree of the Taylor polynomial used in the approximation. We now give a definition of the latter.
+}
+
+
+
+
+\section{\lang{de}{Taylor-Polynom}\lang{en}{Taylor polynomial}}\label{sec:polynom}
+
+\begin{definition}[\lang{de}{Taylor-Polynom $\text{n}$-ter Ordnung}
+                   \lang{en}{$n$th order Taylor polynomial}]\label{def:taylorpoly}
+
+\lang{de}{
+Sei $f:[a,b]\rightarrow\R$ eine im Innern des Intervalls $[a,b]\subset\R\;$ $n$-mal differenzierbare Funktion, wobei $n\in\N_0$ ist. 
+Dann heißt das Polynom
+}
+\lang{en}{
+Let $f:[a,b]\rightarrow\R$ be a function that is $n$ times differentiable on the interior of the 
+interval $[a,b]\subset\R\;$ for some $n\in\N_0$. 
+Then the polynomial
+}
+%\lang{en}{Let $n \in \N_0$  and let $f$ be a 
+%real valued function defined on the interval $(b,c)$.  Assuming that $f$ is $n$ times differentiable at 
+%$\,a \in (b,c)\,$ we denote by$\, f^{(k)}(a)\,$ the \nowrap{$k$-th} derivative of $\, f\,$ at $\, a, \; 0 \leq k \leq n$.}
+%\begin{eqnarray*}
+  \[ T_n(x)\coloneq T_{f,x_0,n}(x) \coloneq\sum_{k=0}^{n} \frac{f^{(k)}(x_0)}{k!}(x-x_0)^k \] %\\
+ %       &=& f(x_0)+\frac{f'(x_0)}{1!}(x-x_0)+\frac{f''(x_0)}{2!}(x-x_0)^2+\ldots +\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n
+%\end{eqnarray*}
+%  \lang{en}{is called \notion{Taylor Polynomial} of $f$ of order $n$ at $a$.\\
+%   The coefficients of the Taylor Polynomial are called \notion{Taylor coefficients}.}
+\lang{de}{
+\notion{Taylor-Polynom $n$-ter Ordnung} von $f$ zur \notion{Entwicklungsstelle} 
+$x_0\in (a,b)$.\\\newline
+Dabei bezeichnet $f^{(k)}(x_0)$ die $k$-te Ableitung von $f$ an der Entwicklungsstelle $x_0$ für 
+$0 \leq k \leq n$.\\
+Die Koeffizienten $\frac{f^{(k)}(x_0)}{k!}$ des Taylor-Polynoms heißen 
+\notion{Taylor-Koeffizienten}.\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10738&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}\href{https://www.hm-kompakt.de/video?watch=536}{\image[75]{00_Videobutton_schwarz}}}
+}
+\lang{en}{
+is called the \notion{$n$th order Taylor polynomial} of $f$ at a point $x_0\in (a,b)$.\\\newline
+Here $\frac{f^{(k)}(x_0)}{k!}$ denotes the $k$th derivative of $f$ at the point $x_0$ for 
+$0 \leq k \leq n$.\\
+The coefficients $\frac{f^{(k)}(x_0)}{k!}$ of the Taylor polynomial are called \notion{Taylor 
+coefficients}.
+}
+\end{definition}
+
+%Alternative Erklärungen des Taylor-Polynoms aus Definition \ref{def:taylorpoly} können den folgenden Videos entnommen werden:\\
+
+\begin{remark}
+\begin{itemize}
+\item[(i)] \lang{de}{
+Das Taylor-Polynom $T_n$ der Ordnung $n$ einer Funktion ist ein Polynom vom Grad höchstens $n$. 
+Ist die $n$-te Ableitung von $f$ an der Stelle $x_0$ gleich Null, $f^{(n)}(x_0)=0$,
+so hat es echt einen kleineren Grad als Ordnung. Das Taylor-Polynom $n$-ter Ordnung zieht die 
+Ableitungen der Funktion kleiner gleich $n$-ter Ordnung heran.
+}
+\lang{en}{
+The $n$th order Taylor polynomial $T_n$ of a function $f$ is a polynomial of degree at most $n$. If 
+the $n$th derivative of $f$ at the point $x_0$ is equal to zero, $f^{(n)}(x_0)=0$, then $T_n$ has a 
+degree smaller than the order. The expression for the $n$th order Taylor polynomial is built using 
+the higher derivatives of the function $f$ up to the $n$th of these.
+}
+\item[(ii)] \lang{de}{
+Wir unterdrücken in der Notation $T_n=T_{f,x_0,n}$ im folgenden der Lesbarkeit halber meist sowohl 
+$f$ als auch $x_0$, wenn klar ist, um welche Funktion und welche Entwicklungsstelle $x_0$ es sich 
+handelt. Dass aber gerade diese von Bedeutung für die Gestalt des Taylor-Polynoms ist, zeigt 
+untenstehendes einfaches Beispiel für ein Polynom.
+}
+\lang{en}{
+We will often surpress $f$ and $x_0$ in the notation for $T_n=T_{f,x_0,n}$ when it is clear which 
+function and point $x_0$ we are referring to. The below example shows the importance of the latter 
+to the Taylor polynomial obtained.
+}
+\end{itemize}
+\end{remark}
+
+\begin{example}\label{ex:taylorpoly-exp}\label{ex:taylorpoly-geom-reihe}\label{ex:taylorpoly-ln}
+\begin{tabs*}[\initialtab{0}]
+\tab{\lang{de}{Polynom}\lang{en}{Polynomial}}
+\lang{de}{
+Wir bestimmen die Taylor-Polynome erster Ordnung der Funktion $f:\R\to\R$, $f(x)=x^2$, zu den zwei 
+Entwicklungsstellen $x_0=0$ und $x_0=1$. Für $x_0=0$ finden wir
+}
+\lang{en}{
+We determine the first order Taylor polynomials of the function $f:\R\to\R$, $f(x)=x^2$, at the two 
+points $x_0=0$ und $x_0=1$. For $x_0=0$ we find
+}
+\[T_{f,0,1}(x)=f(0)+f'(0)\cdot(x-0)=0+0\cdot x=0,\]
+\lang{de}{
+also die Nullfunktion. Insbesondere hat es nicht den Grad Eins, sondern den Grad Null.\\
+Für $x_0=1$ erhalten wir
+}
+\lang{en}{
+i.e. the zero function. In particular, this is a polynomial of degree zero rather than degree one.\\
+For $x_0=1$ we obtain
+}
+\[T_{f,1,1}(x)=f(1)+f'(1)\cdot(x-1)=1+2\cdot (x-1)\neq T_{f,0,1}(x).\]
+\tab{\lang{de}{Natürliche Exponentialfunktion}
+     \lang{en}{Natural exponent function}}%\label{ex:taylorpoly-exp}
+\lang{de}{
+Wir betrachten die Exponentialfunktion $f:\R\to\R$, $f(x)=e^x$, an der Entwicklungsstelle $x_0=0$.
+Da sich $f$ beim Ableiten repliziert, $f^{(k)}(x)=e^x$ für alle $k\in\N_0$, und $f(0)=e^0=1$ ist, 
+erhalten wir das Taylor-Polynom $n$-ter Ordnung an der Stelle $x_0=0$ zu
+}
+\lang{en}{
+We consider the exponential function $f:\R\to\R$, $f(x)=e^x$ and the point $x_0=0$. As the 
+derivative of $f$ is $f$ itself, $f^{(k)}(x)=e^x$ for all $k\in\N_0$, and as $f(0)=e^0=1$, we obtain 
+for the $n$th order Taylor polynomial:
+}
+\[ T_n(x)=T_{f,0,n}(x)=\sum_{k=0}^n \frac{1}{k!}x^k .\]
+%\end{example}
+%\begin{example}
+\tab{\lang{de}{Gebrochenrationale Funktion}
+     \lang{en}{Fractional rational function}}%\label{ex:taylorpoly-geom-reihe}
+\lang{de}{
+Wir betrachten die Funktion $f:\R\setminus\{1\}\to\R$, $f(x)=\frac{1}{1-x}$ an der Stelle $x_0=0$.
+Schreibt man $f(x)$ als $f(x)=(1-x)^{-1}$, erhält man mit der Kettenregel für die ersten Ableitungen
+}
+\lang{en}{
+We consider the function $f:\R\setminus\{1\}\to\R$, $f(x)=\frac{1}{1-x}$ at the point $x_0=0$. 
+If we write $f(x)$ as $f(x)=(1-x)^{-1}$, we may use the chain rule to obtain
+}
+\begin{eqnarray*}
+ f'(x) &=& (-1)\cdot (-1)\cdot (1-x)^{-2}=(1-x)^{-2}, \\
+f''(x) &=&  (-1)\cdot (-2)\cdot (1-x)^{-3}=2 (1-x)^{-3} ,\\
+f'''(x) &=& 2\cdot (-1)\cdot (-3)\cdot (1-x)^{-4}=3!\cdot  (1-x)^{-4} ,
+\end{eqnarray*}
+\lang{de}{und induktiv dann allgemein}
+\lang{en}{and by induction we have the general expression}
+\[  f^{(k)}(x)= k! (1-x)^{-k-1}=\frac{k!}{(1-x)^{k+1}} .\]
+\lang{de}{
+Somit ist $f^{(k)}(0)=\frac{k!}{(1-0)^{k+1}}=k!$, und daher das Taylor-Polynom $n$-ter Ordnung zum 
+Entwicklungspunkt $x_0=0$ gegeben durch
+}
+\lang{en}{
+Therefore $f^{(k)}(0)=\frac{k!}{(1-0)^{k+1}}=k!$ and hence the $n$th order Taylor polynomial at the 
+point $x_0=0$ is given by
+}
+\[ T_n(x)=\sum_{k=0}^n \frac{k!}{k!}x^k=\sum_{k=0}^n x^k .\]
+\tab{\lang{de}{Natürlicher Logarithmus}\lang{en}{Natural logarithm}}%\label{ex:taylorpoly-ln}
+\lang{de}{
+Wir betrachten die natürliche Logarithmusfunktion $f:\R_{>0}\to\R$, $x\mapsto \ln (x)$, an der 
+Entwicklungsstelle $x_0=1$. Die ersten Ableitungen ergeben sich zu
+}
+\lang{en}{
+We consider the natural logarithm function $f:\R_{>0}\to\R$, $x\mapsto \ln (x)$, at the point 
+$x_0=1$. The first few derivatives are given by
+}
+\begin{eqnarray*}
+ f'(x) &=& \frac{1}{x}=x^{-1} ,\\
+f''(x) &=&  -x^{-2},\\
+f'''(x) &=& 2\cdot x^{-3},\\
+f^{(4)}(x)&=&-6\cdot x^{-4}.
+\end{eqnarray*}
+\lang{de}{Daraus findet man induktiv die $k$-te Ableitung, $k\in\N$}
+\lang{en}{By induction we find an expression for the $k$th derivative for $k\in\N$}
+\[ f^{(k)}(x)=(-1)^{k-1}\cdot (k-1)!\cdot x^{-k} .\]
+\lang{de}{
+Die $k$-te Ableitung ausgewertet an der Stelle $x_0=1$ ist also 
+$f^{(k)}(1)=(-1)^{k-1}\cdot (k-1)!$.\\
+Das Taylor-Polynom $n$-ter Ordnung um die Stelle $x_0=1$ lautet somit
+}
+\lang{en}{
+The $k$th derivative evaluated at the point $x_0=1$ is therefore 
+$f^{(k)}(1)=(-1)^{k-1}\cdot (k-1)!$.\\
+This gives us the $n$th order Taylor polynomial at the point $x_0=1$,
+}
+\[ T_n(x)=\ln(1)+\sum_{k=1}^n (-1)^{k-1}\cdot\frac{(k-1)!}{k!}\cdot (x-1)^k= \sum_{k=1}^n (-1)^{k-1}\cdot\frac{1}{k}\cdot (x-1)^k .\]
+\tab{\lang{de}{Anwendungsbeispiel}\lang{en}{Application}} \%\label{ex:taylorpoly-Anwendung}
+\lang{de}{
+Ein Anwendungsbeispiel zur Bestimmung der relativistischen kinetischen Energie ist nachfolgend gegeben:\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11278&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}
+}
+\lang{en}{
+A Taylor expansion can be used to find a formula for the kinetic energy of a particle. In 
+particular, the relativistic kinetic energy may be approximated using a Taylor series, and higher 
+order Taylor expansions give higher degree terms that only become relevant at relativistic speeds.
+}
+
+
+\end{tabs*}
+\end{example}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\function{b}{6}
+		    \function{f}{1/(x-5)}
+            \function{df1}{-1/(x-5)^2}
+            \function[normalize]{df2}{2/(x-5)^3}
+            \function{fb}{1}
+            \function{df1b}{-1}
+            \function{df2b}{2}
+%             \substitute[calculate]{dfb}{df}{x}{b}
+%             \substitute[calculate]{ddfb}{ddf}{x}{b}
+%             \substitute[calculate]{dfb3}{df3}{x}{b}
+            \function{p0}{1}
+            \function{p1}{1-(x-6)}
+            \function{p2}{1-(x-6)+(x-6)^2}
+		\end{variables}
+		
+		\text{\lang{de}{
+        Bestimmen Sie die Taylor-Polynome nullter, erster und zweiter Ordnung der Funktion 
+        $f(x)=\var{f}$ um die Stelle $x_0=\var{b}$.\\ 
+        Die Ableitungen der Funktion $f(x)=\var{f}$ sind\\ $f'(x)= $\ansref und $\quad f''(x)= $\ansref. \\
+        Daraus ergeben sich die Werte $f(\var{b})=$\ansref, $f'(\var{b})=$\ansref und $\quad f''(\var{b})=$\ansref.\\
+        Die Taylor-Polynome sind daher\\
+        }
+        \lang{en}{
+        Determine the zeroth, first and second order Taylor polynomial of the function 
+        $f(x)=\var{f}$ at the point $x_0=\var{b}$.\\
+        The derivatives of the function $f(x)=\var{f}$ are\\ $f'(x)= $\ansref and $\quad f''(x)= $\ansref. \\
+        From this we get the values $f(\var{b})=$\ansref, $f'(\var{b})=$\ansref und $\quad f''(\var{b})=$\ansref.\\
+        The Taylor polynomials are thus
+        }
+        $T_0(x)=$ \ansref,\\                
+        $T_1(x)=$ \ansref,\\                
+        $T_2(x)=$ \ansref.                  
+        }
+		
+		\begin{answer}
+			\solution{df1}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\begin{answer}
+			\solution{df2}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\begin{answer}
+			\solution{fb}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\begin{answer}
+			\solution{df1b}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+        \begin{answer}
+			\solution{df2b}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\begin{answer}
+			\solution{p0}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\begin{answer}
+			\solution{p1}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\begin{answer}
+			\solution{p2}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\explanation{\lang{de}{Benutzen Sie die Formel für die Taylorpolynome.}
+                 \lang{en}{Use the formula for the Taylor polynomials.}}
+\end{quickcheck}
+
+%      \begin{quickcheck}
+% 		\field{rational}
+% 		\type{input.function}
+% 		\begin{variables}
+% 			\randint[Z]{a}{-3}{5}
+% 			\randint[Z]{a0}{-3}{1}
+%            \function[calculate]{b}{a+a0}
+% 		    \function[normalize]{f}{(x-a)/(x+a)}
+%             \function[normalize]{df}{(2*a)/(x+a)^2}
+%             \derivative[normalize]{ddf}{df}{x}
+%             \derivative[normalize]{df3}{ddf}{x}
+%             \substitute[calculate]{fb}{f}{x}{b}
+%             \substitute[calculate]{dfb}{df}{x}{b}
+%             \substitute[calculate]{ddfb}{ddf}{x}{b}
+%             \substitute[calculate]{dfb3}{df3}{x}{b}
+%             \function[normalize]{p1}{fb+dfb*(x-b)^1}
+%             \function[normalize]{p2}{p1+ddfb/2*(x-b)^2}
+%             \function[normalize]{p3}{p2+dfb3/6*(x-b)^3}
+% 		\end{variables}
+		
+% 		\text{Zu bestimmen sind die Taylorpolynome 1., 2. und 3. Grades der Funktion $f(x)=\var{f}$ um die Stelle $x_0=\var{b}$.\\ 
+%         Die höheren Ableitungen der Funktion $f(x)=\var{f}$ sind\\ $f'(x)= $\ansref, 
+%         $\quad f''(x)= $\ansref und $\quad f'''(x)= $\ansref.\\
+%         Die Taylorpolynome sind daher\\
+%         $T_1(x)=$ \ansref,\\                %{f,1,\var{b}}
+%         $T_2(x)=$ \ansref,\\                %{f,2,\var{b}}
+%         $T_3(x)=$ \ansref.                  %{f,3,\var{b}}
+%         }
+		
+% 		\begin{answer}
+% 			\solution{df}
+% 			\checkAsFunction{x}{-1}{1}{10}
+% 		\end{answer}
+% 		\begin{answer}
+% 			\solution{ddf}
+% 			\checkAsFunction{x}{-1}{1}{10}
+% 		\end{answer}
+% 		\begin{answer}
+% 			\solution{df3}
+% 			\checkAsFunction{x}{-1}{1}{10}
+% 		\end{answer}
+% 		\begin{answer}
+% 			\solution{p1}
+% 			\checkAsFunction{x}{-1}{1}{10}
+% 		\end{answer}
+% 		\begin{answer}
+% 			\solution{p2}
+% 			\checkAsFunction{x}{-1}{1}{10}
+% 		\end{answer}
+% 		\begin{answer}
+% 			\solution{p3}
+% 			\checkAsFunction{x}{-1}{1}{10}
+% 		\end{answer}
+% 		\explanation{Es ist die Formel für die Taylorpolynome anzuwenden und einzusetzen.
+%        }
+% 	\end{quickcheck}
+\begin{remark}
+\lang{de}{
+Damit eine $n$-mal differenzierbare Funktion $f$ in der Umgebung einer Stelle $x_0$ durch das 
+Taylor-Polynom $T_n$ angenähert wird, muss dort das Verhalten des Taylor-Polynoms dem der Funktion 
+ähnlich sein. Ähnliches Verhalten heißt, dass das Taylor-Polynom zum einen im Entwicklungspunkt 
+$x_0$ denselben Wert hat wie die Funktion selbst $f(x_0)=T_n(x_0)$. Weiter soll sich $T_n$ in 
+gleicher Weise ändern wie die Funktion. Das heißt, dass die Ableitungen in $x_0$ übereinstimmen 
+müssen
+}
+\lang{en}{
+In order to approximate an $n$ times differentiable function $f$ in a neighbourhood of a point 
+$x_0$ using a Taylor polynomial $T_n$, the behaviour of the Taylor polynomial in the neighbourhood 
+must be similar to that of the function. This means that the Taylor polynomial should have the same 
+value as the function itself at the point $x_0$. Furthermore, it should change at the same rate as 
+the function, so the derivative at $x_0$ should have the same value too:
+}
+\[T_n'(x_0)= f'(x_0).\]
+\lang{de}{
+Weiter soll die Änderung der Ableitungen gleich sein, und wiederum die Änderung dieser, etc.
+Damit $f$ und das $n$-te Taylor-Polynom näherungsweise gleich sind, muss also
+}
+\lang{en}{
+The rate of change of the derivatives should also have the same values, as should the rate of change 
+of that, and etcetera. For $f$ to be well approximated by the $n$th order Taylor polynomial, we 
+hence require
+}
+\[  T_n^{(j)}(x_0)= f^{(j)}(x_0)\]
+\lang{de}{
+für jede Ableitungsordnung $j=0,1,\ldots ,n$ erfüllt sein.
+An Ableitungen höherer Ordnung als $n$ stellen wir bei der Taylor-Approximation $n$-ter Ordnung 
+keine Forderungen.
+\\\\
+Das Taylor-Polynom $n$-ter Ordnung hat also an der Stelle $x_0$ die gleichen Ableitungen 
+bis zur Ordnung $n$ wie die Funktion $f$ selbst. Das rechnen wir jetzt explizit nach durch Induktion.
+}
+\lang{en}{
+for every order of derivative $j=0,1,\ldots ,n$. We need not place restrictions on the derivatives 
+higher than the $n$th derivative of an $n$th order Taylor polynomial.
+\\\\
+Indeed, the $n$th order Taylor polynomial has the same $j$th derivative at the point $x_0$ as the 
+function $f$. We now use induction to explicitly confirm this.
+}
+%Letztere Erkenntnis müsste man als zu erfüllende Forderung an ein Polynom $n$-ten Grades der Form 
+%$T_n(x)=\sum_{k=0}^{n} a_k\cdot (x-x_0)^k$ mit $a_k\in\R$ stellen, wenn dieses eine Funktion $f$ in der 
+%Umgebung einer Stelle $x_0$ approximieren soll. Damit gelangt man gerade wieder zu \textsc{Taylor}.
+\begin{incremental}[\initialsteps{0}]
+\step 
+\begin{itemize}
+\item[$\underline{j=0}$:] \lang{de}{
+An der Stelle $x=x_0$ stimmt der Funktionswert des Taylor-Polynoms $n$-ter Ordnung mit dem der zu 
+nähernden Funktion $f$ überein, $T_n(x_0)=f(x_0)$. Das ergibt sich unmittelbar aus der 
+Definition~\ref{def:taylorpoly} des Taylor-Polynoms: 
+Alle Potenzen $(x-x_0)^k$ mit $k>0$ verschwinden, während der Summand 
+$\frac{f(x_0)}{0!}(x-x_0)^0=f(x_0)$ zu $k=0$ verbleibt. (Hier haben wir einmal mehr die Definition 
+$0^0=1$ benutzt.)
+\\\\
+Insbesondere finden wir das $0$-te Taylor-Polynom $T_0(x)=f(x_0)$ als das konstante Polynom mit Wert 
+$f(x_0)$. Anschaulich interpretiert beschreibt $T_0(x)=f(x_0)$ die horizontale Gerade, die die 
+Funktion $f$ im Punkt $(x_0,f(x_0))$ schneidet bzw. berührt. Das ist im Allgemeinen noch keine gute 
+Näherung der Funktion.
+}
+\lang{en}{
+At the point $x=x_0$ the value of the $n$th order Taylor polynomial corresponds to the value of the 
+function $f$, $T_n(x_0)=f(x_0)$. This is clear from the definition~\ref{def:taylorpoly} of the 
+Taylor polynomial: 
+every power $(x-x_0)^k$ with $k>0$ vanishes, and using the definition $0^0=1$, the $k=0$ term 
+$\frac{f(x_0)}{0!}(x-x_0)^0=f(x_0)$ equals the function evaluated at the point.
+\\\\
+In particular, the $0$th Taylor polynomial $T_0(x)=f(x_0)$ is the constant polynomial with value 
+$f(x_0)$. Visually we may interpret $T_0(x)=f(x_0)$ as the horizontal line that intersects the 
+function $f$ at the point $(x_0,f(x_0))$. In general, this is still a poor approximation of the 
+function.
+}
+% Damit ist offensichtlich, dass die Taylor-Näherung \nowrap{$0$. Ordnung} für eine \glqq gute\grqq Näherung der Funktion $f$ an der Stelle $x_0$
+% nicht hinreichend ist, das Kriterium $T_n(x_0)=f(x_0)$ aber \notion{eine} Notwendigkeit darstellt, um an der Stelle $x_0$ mit $T_n(x)$ gleiches Verhalten wie
+% die Funktion $f$ zu erreichen.
+%\link{def:taylorpoly}
+\item[$\underline{j=1}$:]
+\lang{de}{Leitet man das Taylor-Polynom $T_n$ nach $x$ ab, so erhält man}
+\lang{en}{If we differentiate the Taylor polynomial $T_n$ with respect to $x$, we obtain}
+\[T_n'(x)=\sum_{k=0}^n k\cdot \frac{f^{(k)}(x_0)}{k!}(x-x_0)^{k-1}=\sum_{k=1}^n \frac{f^{(k)}(x_0)}{(k-1)!}(x-x_0)^{k-1}.\]
+\lang{de}{
+Ausgewertet in $x_0$ ist das wie gefordert $T_n'(x_0)=f'(x_0)$, denn hier ist der Summand zu $k=0$ 
+identisch Null, während für $k>1$ die Potenz $(x_0-x_0)^k$ verschwindet.
+\\\\
+Aus dem Abschnitt \link{diffbarkeit}{Differenzierbarkeit} ist die Tangente an den Graphen von $f$ an 
+der Stelle $x_0$ als lineare Funktion
+}
+\lang{en}{
+Evaluating this at $x_0$ we have $T_n'(x_0)=f'(x_0)$ as required, as here the term where $k=0$ is 
+equal to zero, and for $k>1$ the expression $(x_0-x_0)^k$ is also equal to zero.
+\\\\
+As covered in the section on \link{diffbarkeit}{differentiability}, the tangent of the graph of $f$ 
+at the point $x_0$ can be expressed as a linear function
+}
+\[  T(x)=f(x_0)+f'(x_0)\cdot (x-x_0) \]
+\lang{de}{bekannt.}
+\lang{en}{of $x$.}
+%Nett, aber hier unnötiges Beiwerk: \textsc{Leibniz} definierte mit ihrer Steigung die Ableitung der Funktion $f$ an der Stelle $x_0$.
+\lang{de}{
+Diese Tangente ist identisch mit dem Taylor-Polynom $T(x)=T_1(x)$ erster Ordnung ($n=1$) von $f$ an 
+der Stelle $x_0$. Bei der Taylor-Näherung erster Ordnung stimmen also bereits der Funktionswert und 
+das Steigungsverhalten von $f$ und $T_1$ an der Stelle $x_0$ überein.
+}
+\lang{en}{
+This tangent is identical to the first order Taylor polynomial $T(x)=T_1(x)$ of $f$ at the point 
+$x_0$. As required, we note that the function value and slope of $f$ and $T_1$ are equal at 
+the point $x_0$.
+}
+\item[$\underline{j=2}$:]
+\lang{de}{Die zweite Ableitung des Taylor-Polynoms ist}
+\lang{en}{The second derivative of the Taylor polynomial is}
+\[T_n''(x)=(T_n')'(x)=\sum_{k=1}^n (k-1)\frac{f^{(k)}(x_0)}{(k-1)!}(x-x_0)^{k-2}=
+\sum_{k=2}^n \frac{f^{(k)}(x_0)}{(k-2)!}(x-x_0)^{k-1}.\]
+\lang{de}{
+Daraus liest man wiederum ab $T_n''(x_0)=f''(x_0)$.
+\\\\
+Insbesondere erhält man mit der Taylor-Entwicklung bis zur zweiten Ordnung eine verbesserte 
+Näherung von $f$ in der Umgebung der Stelle $x_0$,
+}
+\lang{en}{
+From this we immediately read $T_n''(x_0)=f''(x_0)$.
+\\\\
+In particular, the second order Taylor expansion serves as a better approximation of $f$ near the 
+point $x_0$,
+}
+\[ T_2(x)=f(x_0)+f'(x_0)\cdot (x-x_0)+\frac{f''(x_0)}{2}\cdot (x-x_0)^2. \]
+\lang{de}{
+Anschaulich schmiegt sich die durch $T_2(x)$ gegebene Näherungsparabel im Gegensatz zur Tangente an 
+den Graphen von $f$ an.\\%Einfügen einer entsprechenden Abb.
+Die Näherungsparabel berücksichtigt im Vergleich zur Tangente zusätzlich zur Steigung auch das 
+Krümmungsverhalten der Funktion $f$ an der Stelle $x_0$. Im Bild wird eine Funktion $f$ genähert 
+durch ihre Taylorpolynome nullter, erster und zweiter Ordnung im Punkt $x_0$.
+}
+\lang{en}{
+Visually, the parabola given by $T_2(x)$ is clearly a closer approximation to the graph of $f$ than 
+the tangent. It meets the graph of $f$ at the same point as the tangent does, and has the same slope 
+at that point, but in addition it takes into consideration the curvature of $f$ at $x_0$. We see 
+this clearly in the graph below, which shows the graph of the function $f$, and its approximation by 
+a zeroth, first and second order Taylor polynomial at the point $x_0$.
+}
+\begin{center}
+\image{T303_TaylorParabola}
+\end{center}
+
+% Ist mit $n>2$ der Grad des Taylorpolynoms größer als die Ableitungsordnung $j$, wie z.B.
+% im Fall von\nowrap{$\;T_3''(x)=f''(x_0)+f'''(x_0)\cdot (x-x_0)$}, dann stimmt das Krümmungsverhalten
+% der zu nähernden Funktion $f$ mit dem des Näherungspolynoms $n$-ten Grades nur an der Stelle $x_0$
+% exakt überein:$\;T_n''(x_0)=f''(x_0)$. An dieser Stelle lässt sich die Einschränkung auf die Stelle $x=x_0$ für die $j-te$ Ableitung
+% des Taylor-Polynoms $T_n^{(j)}(x_0)= f^{(j)}(x_0)$ nachvollziehen, denn $T_3''(x)$ ist offenkundig eine lineare Approximation von $f''(x)$ um die Stelle $x_0$.
+%
+\item[ $\underline{j\geq 3}$:] 
+\lang{de}{
+Wir zeigen die Gültigkeit von \[ T_n^{(j)}(x_0)= f^{(j)}(x_0) \] schließlich für beliebiges $j=0,\ldots,n$ induktiv.
+Wir zeigen dazu mehr, nämlich für alle $j\in \N_0$
+}
+\lang{en}{
+We finally show that \[ T_n^{(j)}(x_0)= f^{(j)}(x_0) \] for all $j=0,\ldots,n$ inductively. 
+Moreover, we show that for all $j\in \N_0$
+}
+\begin{equation}\label{eq:abl_taylor-pol}
+T_n^{(j)}(x)=\sum_{k=j}^n \frac{f^{(k)}(x_0)}{(k-j)!}(x-x_0)^{k-j}.
+\end{equation}
+\lang{de}{
+Wir haben dies bereits sicher verankert für die Fälle $j=0,1,2$. Ist die Behauptung richtig für ein 
+festes $j\geq 0$, dann folgt durch nochmaliges Ableiten der $j$-ten Ableitung, weglassen von 
+Nulltermen und Kürzen
+}
+\lang{en}{
+We have already covered the base cases $j=0,1,2$. If we assume that the proposition is true for a 
+fixed $j\geq 0$, then simply differentiating the $j$th derivative once more yields, after 
+simplification,
+}
+\[ T_n^{(j+1)}(x)=(T_n^{(j)})'(x)=\sum_{k=j}^n (k-j)\frac{f^{(k)}(x_0)}{(k-j)!}(x-x_0)^{k-j-1}=
+\sum_{k=j+1}^n \frac{f^{(k)}(x_0)}{(k-(j+1))!}(x-x_0)^{k-(j+1)}.\]
+\lang{de}{
+Das ist die Behauptung für $j+1$.
+In der nun bewiesenen Formel (\ref{eq:abl_taylor-pol}) setzen wir $x=x_0$ und erhalten für $j\leq n$
+}
+\lang{en}{
+This is precisely the proposition for $j+1$. 
+We set $x=x_0$ in the formula (\ref{eq:abl_taylor-pol}), which we have just justified, and obtain 
+for $j\leq n$
+}
+\[ T_n^{(j)}(x_0)=\sum_{k=j}^n \frac{f^{(k)}(x_0)}{(k-j)!}(x_0-x_0)^{k-j}=f^{(j)}(x_0),\]
+\lang{de}{
+denn in der Summe ist die Potenz $0^{k-j}=(x_0-x_0)^{k-j}$ nur dann von Null verschieden, wenn 
+$k=j$. In dem Fall ist sie gleich $0^0=1$.
+\\\\
+Für alle $j>n$ sehen wir durch (\ref{eq:abl_taylor-pol}) auch $T_n^{(j)}=0$ für alle $j>n$, 
+wie wir das von einem Polynom höchstens $n$-ten Grades erwarten.
+}
+\lang{en}{
+as in the above sum, the power $0^{k-j}=(x_0-x_0)^{k-j}$ is only non-zero when $k=j$, in which case 
+$0^0=1$.
+\\\\
+We also see by (\ref{eq:abl_taylor-pol}) that $T_n^{(j)}=0$ for all $j>n$, as is to be expected for 
+a polynomial of degree at most $n$.
+}
+\end{itemize}
+\end{incremental}
+\end{remark}  
+\begin{block}[tip]
+\lang{de}{
+Ein Taylor-Polynom $T_{f,x_0,n}$ ist durch seine Definition bereits in optimaler Form gegeben, 
+nämlich dargestellt in Potenzen des linearen Terms $(x-x_0)$ um seinen Entwicklungspunkt $x_0$.
+Belassen Sie es in dieser Darstellung!\\ 
+Sie gibt Ihnen am besten Auskunft über das Verhalten des Taylor-Polynoms in der Nähe von $x_0$, 
+durch das Sie die zugehörigen Funktion $f$ beschreiben wollen.
+Vermeiden Sie zum Beispiel auch die Umformung zu einer vermeindlich übersichtlichen Darstellung in 
+Potenzen von $x$, wenn Sie keinen ausdrücklichen Grund dazu haben.
+}
+\lang{en}{
+The Taylor polynomial $T_{f,x_0,n}$ is already given in a convenient form by its definition, that 
+is, in terms of powers of the linear expression $(x-x_0)$. There is no need to change this!\\
+The behaviour of the Taylor polynomial near $x_0$ is what interests us, as this is where it best 
+approximates the function $f$. Hence despite seeming simpler or clearer at first glance, writing 
+a Taylor polynomial in powers of $x$ is not often useful.
+}
+\end{block}
+\begin{example}
+\begin{tabs*}[\initialtab{0}]
+\tab{$\cos x$}
+\lang{de}{
+Wir berechnen das Taylor-Polynom vierter Ordnung der Funktion $f(x)=\cos x$ an der 
+Entwicklungsstelle $x_0=0$. Die Ableitungen sind
+}
+\lang{en}{
+We calculate the $4$th order Taylor polynomial of the function $f(x)=\cos x$ at the point $x_0=0$. 
+The derivatives of $f$ are
+}
+\[ f'(x)=-\sin x,\quad f''(x)=-\cos x,\quad f^{(3)}(x)=\sin x,\quad f^{(4)}(x)=\cos x.\]
+\lang{de}{Damit ergibt sich}
+\lang{en}{From these we get}
+\begin{eqnarray*}  
+T_{4}(x)&=&\cos(0)-\sin(0)(x-0)-\frac{\cos(0)}{2!}(x-0)^2+\frac{\sin(0)}{3!}(x-0)^3
++ \frac{\cos(0)}{4!}(x-0)^4 \\
+&=& 1-\frac{1}{2}x^2+\frac{1}{24}x^4
+\end{eqnarray*}
+\begin{center}
+\image{T303_TaylorCosine}\\\\
+\lang{de}{
+Weitere Informationen zu den Taylor-Polynomen von Kosinus und Sinus sind im folgenden Video gegeben:\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11277&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\ 
+}
+\lang{en}{}
+\end{center}
+\tab{\lang{de}{Polynom}\lang{en}{Polynomial}}
+\lang{de}{
+Für die Polynomfunktion $p(x)=x^3+2x^2-x+3$ berechnen wird das Taylor-Polynom fünfter Ordnung an der
+Entwicklungsstelle $x_0=0$. Die Ableitungen von $f$ sind
+}
+\lang{en}{
+We calculate the $5$th order Taylor polynomial of the function $p(x)=x^3+2x^2-x+3$ at the point 
+$x_0=0$. The derivatives of $f$ are
+}
+\[ p'(x)=3x^2+4x-1,\quad p''(x)=6x+4,\quad p^{(3)}(x)=6,\quad  p^{(4)}(x)=p^{(5)}(x)=p^{(m)}(x)=0\]
+\lang{de}{für $m\geq 4$, und}
+\lang{en}{for $m\geq 4$, and}
+\[ p(0)=3,\quad p'(0)=-1,\quad p''(0)=4,\quad p^{(3)}(0)=6,\quad  p^{(m)}(0)=0\]
+\lang{de}{$m\geq 4$. Damit ist}
+\lang{en}{$m\geq 4$. Thus}
+\begin{eqnarray*} 
+T_3(x)&=&T_4(x)=T_5(x)=\ldots=T_m(x)\\
+&=&3-1\cdot x+\frac{4}{2}x^2+\frac{6}{3!}x^3+\frac{0}{4!}x^4+\frac{0}{5!}x^5\\
+&=& x^3+2x^2-x+3=f(x).
+\end{eqnarray*}
+\lang{de}{
+Alle Taylor-Polynome $T_m$ mit $m\geq 3$ stimmen mit der Polynomfunktion $p$ dritten Grades überein! 
+Dies gilt viel allgemeiner, wie der folgende Satz zeigt.
+}
+\lang{en}{
+Every Taylor polynomial $T_m$ where $m\geq 3$ is precisely the polynomial $p$, which is of degree 
+$3$. This holds more generally, as we see in the following theorem.
+}
+\end{tabs*}
+\end{example}
+
+\begin{theorem}\label{thm:thm:polynome-taylor-entwickelt}
+\lang{de}{
+Ist $p$ eine Polynomfunktion vom Grad $n$, so stimmt das zugehörige Taylor-Polynom $T_{m}$ der 
+Ordnung $m$ (zu einer beliebigen Entwicklungsstelle $x_0$) mit $p$ überein, wann immer $m\geq n$. 
+Insbesondere ist der \emph{Grad} des Taylor-Polynoms $T_m$ dann $n$ und 
+ \[T_n=f=T_m \quad\text{ für alle } m\geq n.\]
+ \floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11276&mode=iframe&speed=true}{\image[75]{{00_video_button_schwarz-blau}}} \href{https://www.hm-kompakt.de/video?watch=539}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{
+Let $p$ be a polynomial of degree $n$. Then the corresponding $m$th order Taylor polynomial $T_{m}$ 
+(calculated at any point $x_0$) is equal to $p$ for $m\geq n$. 
+In particular, the \emph{degree} of the Taylor polynomial $T_m$ is then $n$ and 
+ \[T_n=f=T_m \quad\text{ for all } m\geq n.\]
+}
+\end{theorem}
+
+\lang{de}{
+Dieser Satz besagt, dass die beste Art, ein Polynom durch ein ein Taylor-Polynom hohen Grades zu 
+approximieren, durch das Polynom selbst gegeben ist. Das $m$-te Taylor-Polynom $T_m$ einer 
+Polynomfunktion vom Grad $n$ zu bestimmen macht also nur dann Arbeit, wenn $m<n$. Man kann aber die 
+Taylor-Entwicklung in einem Punkt $x_0$ sehr gut dazu nutzen, ein Polynom umzusummieren in Potenzen 
+$(x-x_0)^k$ mit $0 \leq k \leq n$.\\
+%Weitere Erklärungen zu Satz \ref{thm:thm:polynome-taylor-entwickelt} sind den folgenden Videos zu entnehmen:\\
+}
+\lang{en}{
+This theorem tells us that the approximation of a polynomial using a Taylor polynomial of a 
+greater degree is given simply by the polynomial itself. That is, we only need to calculate the 
+$m$th order Taylor polynomial $T_m$ of a polynomial function of degree $n$ for $m<n$: beyond this, 
+we simply take the polynomial. We can, however, use a Taylor approximation at a point $x_0$ to 
+express a polynomial in terms of powers of $(x-x_0)^k$ where $0 \leq k \leq n$.\\
+}
+
+
+
+\begin{proof*}[\lang{de}{Beweis}\lang{en}{Proof}] % von Satz \ref{thm:polynome-taylor-entwickelt}]
+\begin{incremental}[\initialsteps{1}]
+\step
+\lang{de}{Wir benutzen unser Wissen über die Ableitungen von Polynomen.}
+\lang{en}{We use our knowledge of the derivatives of polynomials.}
+\step
+\lang{de}{
+Die $k$-te Ableitung eines Monoms $m(x)=x^l$ (für $l\in\N_0$) ist gegeben durch
+}
+\lang{en}{
+The $k$-th derivative of a monomial $m(x)=x^l$ (for $l\in\N_0$) is given by
+}
+\[m^{(k)}(x)=l\cdot(l-1)\cdots(l-k)x^{l-k}\: \text{ falls }k\leq l, \quad \text{ bzw. }\quad m^{(k)}(x)=0,\:\text { falls } k>l.\]
+\lang{de}{
+Beschreibt dann $p(x)=a_nx^n+a_{n-1}x^{n-1}+\ldots+a_1x+a_0$ eine Polynomfunktion vom Grad $n$, 
+(d.h. $a_j\in\R$ für $j=0,\ldots,n$ und $a_n\neq 0$), dann gilt $p^{(k)}=0$ für alle $k>n$. Damit 
+sind im Taylor-Polynom $T_m$ von $p$ (zum Entwicklungspunkt $x_0$) alle Summanden zum Index $k>n$ 
+gleich Null. Es gilt also für alle $m\geq n$
+}
+\lang{en}{
+Now let $p(x)=a_nx^n+a_{n-1}x^{n-1}+\ldots+a_1x+a_0$ be a polynomial of degree $n$, (with $a_j\in\R$ 
+for $j=0,\ldots,n$ and $a_n\neq 0$), then we have $p^{(k)}=0$ for all $k>n$. Hence the Taylor 
+polynomial $T_m$ of $p$ (at the point $x_0$) has all terms of index $k>n$ equal to zero, and for all 
+$m\geq n$ we have
+}
+\[T_m(x)=\sum_{k=0}^m\frac{p^{(k)}(x_0)}{k!}(x-x_0)^k=\sum_{k=0}^n\frac{p^{(k)}(x_0)}{k!}(x-x_0)^k=T_n(x).\]
+\lang{de}{
+Weil $p^{(n)}(x)=a_n\cdot n!\neq 0$, ist der $n$-te Summand hier nicht identisch Null, also hat das 
+Polynom den Grad $n$.
+}
+\lang{en}{
+As $p^{(n)}(x)=a_n\cdot n!\neq 0$, the $n$th term here is not equal to zero, and so the polynomial 
+has degree $n$.
+}
+\end{incremental}
+\end{proof*}
+
+%\begin{remarks}
+%  \begin{enumerate}
+%\item 
+%    \lang{de}{Das Taylor-Polynom einer \strong{geraden Funktion an der Stelle $a=0$}  hat nur 
+%    \strong{gerade Potenzen}.\\
+%    \lang{de}{Das Taylor-Polynom einer \strong{ungeraden Funktion an der Stelle $a=0$} hat nur \strong{ungerade Potenzen}.\\ 
+%\item
+%  \lang{de}{Aus der Definition folgt unmittelbar die Linearit\"at:}
+%  \lang{en}{From the definition follows the linearity:}\\
+%
+%    \[
+%    P\left[\alpha f + \beta g ,n,a \right](x) = \alpha P\left[f ,n,a \right](x)
+%                                              + \beta  P\left[g ,n,a \right](x)
+%    \]
+%    \lang{de}{$\alpha, \beta \in \R$ Konstanten; $f,g$ differenzierbare Funktionen.} 
+%    \lang{en}{$\alpha, \beta \in \R$ constants; $f,g$ differentiable functions.} 
+%    \end{enumerate}
+%\end{remarks}
+
+
+\lang{de}{
+Es gibt Funktionen, deren Verhalten in der Umgebung bestimmter Stellen des Definitionsbereichs durch 
+das zugehörige Taylor-Polynom nicht abgebildet wird. Das heißt, eine solche Funktion kann durch ihr 
+Taylor-Polynom in der Umgebung dieser Stelle nicht ausreichend \glqq gut\grqq genähert werden. 
+Das zeigt folgendes Beispiel. Es ist also wichtig, sich auch um die Güte einer Approximation durch 
+Taylor-Polynome Gedanken zu machen. Das tun wir im nächsten Abschnitt.
+}
+\lang{en}{
+There exist functions whose behaviour near certain points of their domain is not well approximated 
+by the corresponding Taylor polynomial. The following example demonstrates this. It is important 
+to consider how well a Taylor polynomial serves as an approximation.
+}
+
+\begin{example}\label{ex:gegenbeispiel}
+\lang{de}{Gegeben ist die Funktion $f:\R\to\R$,}
+\lang{en}{Consider the function $f:\R\to\R$,}
+\begin{displaymath}
+  f(x)=
+  \begin{cases}
+    e^{-\frac{1}{x}}, & x>0,\\
+    0, & x\leq 0.
+  \end{cases}
+\end{displaymath}
+\lang{de}{
+Wir zeigen unten, dass alle Ableitungen in $x_0=0$ existieren und gleich Null sind, dass also für 
+alle $k\in\N$ gilt
+}
+\lang{en}{
+Below we show that every derivative exists at $x_0=0$ and is equal to zero, i.e. that for all 
+$k\in\N$ we have
+}
+\[f^{(k)}(0)=0.\]
+\lang{de}{
+Damit ist jedes Taylor-Polynom $T_n(x)$ um den Entwicklungspunkt $x_0=0$ identisch mit der 
+Nullfunktion. Die Nullfunktion beschreibt aber nicht, wie sich der Graph der Funktion $f$ im Bereich 
+$x>0$ verhält, zum Beispiel wie ihr Graph dort aussieht.
+}
+\lang{en}{
+Hence every Taylor polynomial $T_n(x)$ at the point $x_0=0$ is equal to the zero function. The zero 
+function does not, however, do a good job of describing how the graph of the function $f$ behaves 
+for $x>0$.
+}
+
+\begin{incremental}[\initialsteps{0}]
+\step
+\lang{de}{
+Wir betrachten zunächst die Ableitungsfunktionen im Bereich $x>0$.
+Dort haben alle Ableitungsfunktionen der Ordnung $k\in\N$ die Form
+}
+\lang{en}{
+Next we consider the derivatives in the domain $x>0$. 
+There, every derivative function of order $k\in\N$ has the form
+}
+\[ f^{(k)}(x) =\frac{p_{k-1}(x)}{x^{2k}}e^{-\frac{1}{x}}=p_{k-1}(x) x^{-2k}e^{-\frac{1}{x}}, \]
+\lang{de}{
+wobei $p_{k-1}(x)$ ein Polynom vom Grad $k-1$, für das $p_{k-1}(0)=1$ gilt.
+Sogar für $k=0$ können wir in dieser Art schreiben $f^{(0)}(x)=f(x)=p_{k-1}(x) x^{-2k}e^{-\frac{1}{x}}$, 
+wenn wir $p_{-1}(x)=1$ setzen.
+\\\\
+Für $k>0$ zeigen wir das durch vollständige Induktion.
+}
+\lang{en}{
+where $p_{k-1}(x)$ is a polynomial of degree $k-1$, for which $p_{k-1}(0)=1$ holds. 
+Even for $k=0$ we may write $f^{(0)}(x)=f(x)=p_{k-1}(x) x^{-2k}e^{-\frac{1}{x}}$ in this form, if we 
+define $p_{-1}(x)=1$.
+\\\\
+We use induction to show this for $k>0$.
+}
+\step
+\lang{de}{Für $k=1$ gilt für $x>0$}
+\lang{en}{For $k=1$ and $x>0$,}
+\[f'(x)=\frac{1}{x^2}e^{-\frac{1}{x}},\]
+\lang{de}{
+Also gilt die Behauptung mit dem Polynom $p_{0}(x)=1$ vom Grad Null. Dies ist unser 
+Induktionsanfang.
+}
+\lang{en}{
+so the proposition holds for the polynomial $p_{0}(x)=1$ of degree zero. This is our base case.
+}
+\step
+\lang{de}{
+Nehmen wir nun für ein beliebiges, festes $k\in \N$ die obige Form der Ableitung an. 
+Dann lässt sich mit Hilfe der Produkt- und Kettenregel induktiv zeigen, dass auch $f^{(k+1)}(x)$ von solcher Form  ist.
+%Undzwar deshalb, weil das in $f^{(k+1)}(x)$ enthaltene Polynom vom Grad $k$ ist und als $p_k(x)$ geschrieben werden darf:
+}
+\lang{en}{
+We fix $k\in \N$ and take the derivative of the above expression for the $k$th derivative. 
+Using the product rule and the chain rule, we show that $f^{(k+1)}(x)$ is also of this form:
+}
+\begin{eqnarray*}
+ f^{(k+1)}(x) &=& (f^{(k)})'(x)
+ =p'_{k-1}(x)\cdot  x^{-2k}\cdot e^{-\frac{1}{x}}
+ + p_{k-1}(x)\cdot (-2k)\cdot x^{-2k-1}\cdot e^{-\frac{1}{x}}
+ + p_{k-1}(x)\cdot x^{-2k}\cdot x^{-2}\cdot e^{-\frac{1}{x}} \\
+ &=& \left( x^2 p'_{k-1}(x)-2 k x p_{k-1}(x) + p_{k-1}(x)\right)x^{-2k-2}e^{-\frac{1}{x}}\\
+ &=& \left( x^2 p'_{k-1}(x)-2 k x p_{k-1}(x) + p_{k-1}(x)\right)x^{-2(k+1)}e^{-\frac{1}{x}}
+\end{eqnarray*}
+\lang{de}{Das Polynom in Klammern}
+\lang{en}{The polynomial in the parentheses}
+\[p_{k}(x):=x^2 p'_{k-1}(x)-2 k x p_{k-1}(x) + p_{k-1}(x)\]
+\lang{de}{
+hat den Grad $k$, weil nach Induktionsannahme der Grad von $p_{k-1}$ gleich $k-1$ ist. Ebenso 
+verwenden wir die Induktionsannahme $p_{k-1}(0)=1$, um den Wert $p_k(0)$ zu bestimmen
+}
+\lang{en}{
+has degree $k$, as by the induction hypothesis, $p_{k-1}$ has degree $k-1$. We also apply the 
+hypothesis $p_{k-1}(0)=1$ to determine the value of $p_k(0)$,
+}
+\[p_k(0)=0^2\cdot p'_{k-1}(0)-2 k \cdot 0\cdot p_{k-1}(0) + p_{k-1}(0)=0+0+1=1. \]
+\lang{de}{Damit ist die behauptete Gestalt der Ableitungsfunktion $f^{(k)}$ bewiesen für alle $k$.}
+\lang{en}{By induction, we have shown that $f^{(k)}$ has this form for all $k$.}
+\step
+\lang{de}{
+Im Bereich $x<0$ sind offensichtlich alle Ableitungsfunktionen $f^{(k)}(x)$ $k$-ter Ordnung mit 
+$k>0$ gleich $0$.
+}
+\lang{en}{
+For $x<0$ the $k$th derivative function $f^{(k)}(x)$ where $k>0$ is obviously simply the zero 
+function.
+}
+\step
+\lang{de}{
+Schließlich zeigen wir ebenfalls induktiv, dass $f$ in $x_0=0$ beliebig oft differenzierbar ist,
+und alle Ableitungen dort gleich $0$ sind.
+}
+\lang{en}{
+Finally we show inductively that $f$ is differentiable arbitrarily many times at $x_0=0$, and that 
+all derivatives are equal to $0$ at that point.
+}
+\step
+\lang{de}{
+Unmittelbar aus der Definition der Funktion $f$, ist klar $f^{(0)}(0) =f(0)=0$.
+Wir setzen nun voraus, dass $f^{(k)}(0)=0$ für ein beliebiges $k\in \N$ gilt. 
+Um dieselbe Aussage für $k+1$ zu zeigen, müssen wir zeigen, dass der Grenzwert des Differenzenquotienten von $f^{(k)}$
+}
+\lang{en}{
+We immediately get $f^{(0)}(0) =f(0)=0$ from the definition of the function $f$. We now assume 
+that $f^{(k)}(0)=0$ for any $k\in \N$. To prove the proposition for $k+1$, we must show that the 
+limit
+}
+\[  \lim_{h\to 0} \frac{f^{(k)}(h)-f^{(k)}(0)}{h}= \lim_{h\to 0}\frac{f^{(k)}(h)}{h}  \]
+\lang{de}{
+existiert und gleich Null ist. In dem Fall ist $f^{(k+1)}(0)=0$ bestimmt als Ableitung von 
+$f^{(k)}$ in $x_0=0$. Da für $h<0$ $f^{(k)}(h)=0$ ist, folgt für den linksseitigen Grenzwert
+}
+\lang{en}{
+exists and is equal to zero. If we show this, we will have $f^{(k+1)}(0)=0$. As $f^{(k)}(h)=0$ for 
+$h<0$, the limit from the left is given by
+}
+\[  \lim_{h\nearrow 0}\frac{f^{(k)}(h)}{h}=0. \]
+\lang{de}{Für den rechtsseitigen Grenzwert gilt}
+\lang{en}{The limit from the right is}
+\begin{eqnarray*}
+ \lim_{h\searrow 0}\frac{f^{(k)}(h)}{h} &=& 
+ \lim_{h\searrow 0}\left( p_{k-1}(h) h^{-2k}\, e^{-\frac{1}{h}}\right)\cdot h^{-1}=\lim_{h\searrow 0}p_{k-1}(h) h^{-2k-1}\, e^{-\frac{1}{h}} \\
+&=&  \lim_{h\searrow 0} p_{k-1}(h) \cdot  \lim_{h\searrow 0} (\frac{1}{h})^{2k+1}\, e^{-\frac{1}{h}} \\
+&=& 1\cdot  \lim_{r\to \infty} \frac{r^{2k+1}}{e^r}=0.
+\end{eqnarray*}
+\lang{de}{
+Der letzte Grenzwert ist hier gleich Null, weil die Exponentialfunktion schneller als jede 
+Potenzfunktion wächst  
+(siehe \ref[exp-und-log][Abschnitt "'Exponentialfunktion und Logarithmus"']{thm:exp-staerker-als-potenz}).
+Damit stimmen links- und rechtsseitiger Grenzwert an der Stelle $x_0=0$ überein, und die $(k+1)$-te 
+Ableitung von $f$ existiert dort mit Wert $f^{(k+1)}(0)=0$.
+}
+\lang{en}{
+The last limit above is equal to zero, as the exponential function grows faster than any power 
+function 
+(see the \ref[exp-und-log][section on the exponential function and logarithm]{thm:exp-staerker-als-potenz}).
+Hence the left and right sided limits agree at the point $x_0=0$, and the $(k+1)$th derivative of 
+$f$ exists at $x_0$ and has value $f^{(k+1)}(0)=0$.
+}
+\end{incremental}
+\end{example}
+
+
+%\begin{example}\label{ex:gegenbeispiel}
+% An dem folgenden Beispiel ist der Unterschied zwischen der Funktion und 
+%dem approximierenden Polynom gut zu sehen:
+%\begin{displaymath}
+%  f(x)=
+%  \begin{cases}
+%    e^{-\frac{1}{x}}, & x>0,\\
+%    0, & x\leq 0.
+%  \end{cases}
+%
+%\end{displaymath}
+%Induktiv lässt sich berechnen, dass im Bereich $x>0$ alle höheren Ableitungsfunktionen
+%$f^{(n)}(x)$ von der Form
+%\[ f^{(n)}(x) =\frac{p_n(x)}{x^{2n}}e^{-\frac{1}{x}}=p_n(x) x^{-2n}e^{-\frac{1}{x}} \]
+%ist, wobei $p_n(x)$ ein Polynom mit $p_n(0)=1$ ist.
+%\begin{incremental}[\initialsteps{0}]
+%\step Für $n=0$ ist nämlich 
+%\[ f^{(0)}(x) =f(x)=\frac{1}{x^{2\cdot 0}}e^{-\frac{1}{x}} \]
+%von dieser Form mit $p_0(x)=1$.
+%\step Ist für ein bestimmtes $n\in \N$ die Ableitung $f^{(n)}(x)$ von dieser Form,
+%so gilt mit der Produkt- und Kettenregel
+%\begin{eqnarray*}
+% f^{(n+1)}(x) &=& (f^{(n)})'(x)
+% =p'_n(x)\cdot  x^{-2n}\cdot e^{-\frac{1}{x}}
+% + p_n(x)\cdot (-2n)x^{-2n-1}\cdot e^{-\frac{1}{x}}
+% + p_n(x)\cdot x^{-2n}\cdot \frac{1}{x^2}e^{-\frac{1}{x}} \\
+% &=& \left( x^2 p'_n(x)-2nx p_n(x)+p_n(x)\right)x^{-2n-2}e^{-\frac{1}{x}} 
+%\end{eqnarray*}
+%Setzt man $p_{n+1}(x)=x^2 p'_n(x)-2nx p_n(x)+p_n(x)$, so ist also
+%$f^{(n+1)}(x)=p_{n+1}(x) x^{-2(n+1)}e^{-\frac{1}{x}}$ und $p_{n+1}(0)=p_n(0)=1$.
+%\end{incremental}
+%Im Bereich $x<0$ sind offensichtlich alle höheren Ableitungsfunktionen $f^{(n)}(x)$ gleich $0$.
+%
+%Es lässt sich schließlich induktiv zeigen, dass auch an der Stelle $x=0$ die Funktion beliebig oft differenzierbar ist und alle höheren Ableitungen gleich $0$ sind.
+%\begin{incremental}[\initialsteps{0}]
+%\step Die $0$-te Ableitung $f^{(0)}(0) =f(0)$ ist nach Definition gleich $0$.
+%\step Induktiv nehmen wir nun an, dass $f^{(n)}(0)=0$ für ein $n\in \N$.\\
+%Um $f^{(n+1)}(0)$ zu bestimmen, muss man dann den Grenzwert
+%\[  \lim_{h\to 0} \frac{f^{(n)}(h)-f^{(n)}(0)}{h}= \lim_{h\to 0}\frac{f^{(n)}(h)}{h} \]
+%berechnen.
+%
+%Da $f^{(n)}(h)=0$ für $h<0$ ist, ist der linksseitige Grenzwert
+%\[  \lim_{h\nearrow 0}\frac{f^{(n)}(h)}{h}=0. \]
+%
+%Für den rechtsseitigen Grenzwert gilt:
+%\begin{eqnarray*}
+% \lim_{h\searrow 0}\frac{f^{(n)}(h)}{h} &=& 
+% \lim_{h\searrow 0}p_n(h) h^{-2n-1}e^{-\frac{1}{h}} \\
+%&=&  \lim_{h\searrow 0} p_n(h) \cdot  \lim_{h\searrow 0} (\frac{1}{h})^{2n+1}e^{-\frac{1}{h}} \\
+%&=& 1\cdot  \lim_{r\to \infty} \frac{r^{2n+1}}{e^r} \\
+%\end{eqnarray*}
+%Im \ref[exp-und-log][Abschnitt "'Exponentialfunktion und Logarithmus"']{thm:exp-staerker-als-potenz} wurde gezeigt, dass der letzte Grenzwert gleich $0$ ist.\\
+%Also ist auch der rechtsseitige Grenzwert gleich $0$ und damit existiert die $(n+1)$-te Ableitung von $f$ an der Stelle $0$ und ist gleich $0$.
+%\end{incremental}
+%
+%Da $f^{(k)}(0)=0$ f\"ur alle $k\in\N$, sind alle Taylor-Polynome im Entwicklungspunkt $x=0$ gleich
+%  null. Diese Taylor-Polynome bilden daher nicht ab, wie der Funktionsgraph im Bereich $x>0$ aussieht.
+%\end{example}
+
+
+\section{\lang{de}{Taylor-Restglied}\lang{en}{Taylor polynomial remainder}}\label{sec:restglied}
+
+\lang{de}{
+Approximiert man eine Funktion $f$ in der Umgebung einer Stelle $x_0$ durch ein Taylor-Polynom 
+$n$-ter Ordnung, so muss man also auch die Güte dieser Approximation abschätzen können. Das heißt,
+wie stark das approximierende Taylor-Polynom $T_n$ von der gegebenen Funktion $f$ abweicht. 
+Diesen Fehler messen wir dadurch, dass wir die Differenz $f-T_n$ abschätzen. Er hängt unter anderem 
+davon ab, wie weit man sich von der gegebenen Entwicklungsstelle $x_0$ entfernt. \\
+%Hier wird eine entsprechende ABBILDUNG eingebaut. Es bietet sich z.B. die Sinusfunktion zur Approxomation an.
+}
+\lang{en}{
+If we intend to approximate a function $f$ in a neighbourhood of a point $x_0$ using an $n$th order 
+Taylor polynomial, we ought to know how good this approximation is. That is, we should know how fast 
+the Taylor polynomial $T_n$ deviates from the function $f$. This error is measured by approximating 
+the difference $f-T_n$. The error is of course dependent on how far from the point $x_0$ we are. \\ 
+}
+\begin{definition}\label{def:restglied}
+\lang{de}{
+Die Funktion $f:D\to \R$ sei (mindestens) $n$-mal differenzierbar und es sei $x_0\in D$ eine 
+Entwicklungsstelle. Die Differenz zwischen der Funktion $f(x)$ und ihrem $n$-ten Taylor-Polynom 
+$T_n$ zur Entwicklungsstelle $x_0$ heißt das \notion{Restglied} $R_n:D\to\R$,
+}
+\lang{en}{
+Let the function $f:D\to \R$ be (at least) $n$-times differentiable and let $x_0\in D$. The 
+difference between the function $f(x)$ and its $n$th order Taylor polynomial $T_n$ at the point 
+$x_0$ is called the \notion{remainder} $R_n:D\to\R$,
+}
+\[   R_{n}(x)=f(x)-T_{n}(x). \]
+% Hat man eine bestimmte Form des Restgliedes gefunden, so bezeichnet man die Gleichung 
+% \[   f(x)=T_{n}(x)+R_{n}(x) \]
+% auch als \notion{Taylorsche Formel}.
+\end{definition}
+
+     \begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\function{a}{1}
+            \function{b}{0}
+            \function{c}{1}
+            \function{d}{1/2}
+            \function{d2}{1/4}
+		    \function[normalize]{f}{1/(x+1)}
+            \function[normalize]{df}{-1/(x+1)^2}
+            \function[normalize]{ddf}{2/(x+1)^3}
+            \substitute[calculate]{fb}{f}{x}{b}
+            \substitute[calculate]{dfb}{df}{x}{b}
+            \substitute[calculate]{ddfb}{ddf}{x}{b}
+%            \function[calculate]{fb}{(b-x0)/(b+x0)}
+%            \function[calculate]{dfb}{(2*x0)/(b+x0)^2}
+%            \function[calculate]{dfb}{(-6*x0)/(b+x0)^3}
+            \function[normalize]{p1}{fb+dfb*(x-b)^1}
+            \function[normalize]{p2}{p1+ddfb/2*(x-b)^2}
+            \function[normalize]{r2}{f-p2}
+            \substitute[calculate]{r2c}{r2}{x}{c}
+            \substitute[calculate]{r2d}{r2}{x}{d}
+            \substitute[calculate]{r2d2}{r2}{x}{d2}
+  		\end{variables}
+		
+		\text{\lang{de}{
+        Bestimmen Sie für Funktion $f(x)=\var{f}$ das Taylorpolynom $T_2$ zweiter Ordnung an der 
+        Stelle $x_0=\var{b}$.\\
+        Die erste und zweite Ableitung der Funktion $f(x)=\var{f}$ sind $\quad f'(x)= $\ansref und 
+        $\quad f''(x)= $\ansref.\\
+        Damit ergibt sich das Taylorpolynom zweiter Ordnung $T_{2}(x)=$ \ansref.\\
+        Bestimmen Sie auch das zugehörige Restglied $R_{2}(x)=$ \ansref.\\
+        Bestimmen Sie weiter die drei speziellen Werte des Restglieds 
+        $R_2(1)=$\ansref, $\:R_2(\frac{1}{2})=$\ansref und $\:R_2(\frac{1}{4})=$\ansref.
+        }
+        \lang{en}{
+        Let $f(x)=\var{f}$. Determine the second order Taylor polynomial $T_2$ at the point 
+        $x_0=\var{b}$.\\
+        The first and second derivatives of the function $f(x)=\var{f}$ are $\quad f'(x)= $\ansref 
+        and $\quad f''(x)= $\ansref.\\
+        Hence the second order Taylor polynomial is $T_{2}(x)=$ \ansref.\\
+        Determine also the corresponding remainder $R_{2}(x)=$ \ansref.\\
+        Determine the following three values of the remainder: 
+        $R_2(1)=$\ansref, $\:R_2(\frac{1}{2})=$\ansref and $\:R_2(\frac{1}{4})=$\ansref.
+        }}
+		
+		\begin{answer}
+			\solution{df}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\begin{answer}
+			\solution{ddf}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\begin{answer}
+			\solution{p2}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\begin{answer}
+			\solution{r2}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+        \begin{answer}
+        \solution{r2c}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+        \begin{answer}
+        \solution{r2d}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+        \begin{answer}
+        \solution{r2d2}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+\end{quickcheck}
+\lang{de}{
+An diesem Kurztest sieht man: 
+Bei kleinerem Abstand $|\frac{1}{4}-x_0|=|\frac{1}{4}-0|=\frac{1}{4}$ liegt die Abweichung 
+$|R_{2}(\frac{1}{4})|<\!<\frac{1}{16}=\big(\frac{1}{4}\big)^2$ im niedrigsten Prozentbereich,
+für doppelten Abstand $|\frac{1}{2}-x_0|=\frac{1}{2}$ gilt noch 
+$| R_2(\frac{1}{2})|<\!<\frac{1}{4}=\big(\frac{1}{2}\big)^2$, 
+während bei größerem Abstand $|1-x_0|=1$ die Abweichung zumindest noch $| R_2(1)|<\!<1=1^2$ erfüllt.
+\\\\
+Je näher also $x$ an der Entwicklungsstelle $x_0$ liegt, desto besser approximiert das 
+Taylor-Polynom $T_n(x)$ die Funktion $f(x)$. Die Abweichung $R_n(x)$ verschwindet, wenn $x=x_0$ ist. 
+% Umgekehrt formuliert heißt das: Liegt die Stelle $x$ sehr weit von $x_0$ entfernt, so kann bei festem $n$ der Approximationsfehler $R_n(x)$ schnell
+% sehr groß werden.
+Außerdem geht die Abweichung $R_2(x)$ in diesem Beispiel stärker gegen Null  als der Abstand zum 
+Quadrat $|x-x_0|^{2}$. Das ist kein Zufall, wie uns der nächste Satz zeigt.
+}
+\lang{en}{
+From this exercise we see:
+For the $x$ closest to $x_0$, i.e. the smallest distance 
+$|\frac{1}{4}-x_0|=|\frac{1}{4}-0|=\frac{1}{4}$, the remainder 
+$|R_{2}(\frac{1}{4})|<\!<\frac{1}{16}=\big(\frac{1}{4}\big)^2$ is also the smallest.
+For $x$ twice as far, i.e. a distance of $|\frac{1}{2}-x_0|=\frac{1}{2}$ we still have
+$| R_2(\frac{1}{2})|<\!<\frac{1}{4}=\big(\frac{1}{2}\big)^2$, 
+and taking $x$ further still, i.e. a distance of $|1-x_0|=1$, the remainder is larger but at least 
+still satisfies $| R_2(1)|<\!<1=1^2$.
+}
+\begin{theorem}\label{thm:taylor-approximation}\label{thm:qual-taylor-formel}
+\lang{de}{Es sei $f:D\to\R$ eine in $x_0\in D$ $n$-mal stetig differenzierbare Funktion.}
+\lang{en}{Let $f:D\to\R$ be an $n$-times differentiable function at $x_0\in D$.}
+\begin{enumerate}
+\item[(a)]
+\notion{\lang{de}{Approximationseigenschaft des Taylor-Polynoms}
+        \lang{en}{Properties of a Taylor polynomial approximation}}\\
+%Sei $f:[a,b]\rightarrow\R$ eine im Innern des Intervalls $[a,b]\subset\R\;$ $n$-mal differenzierbare Funktion und $T_n(x)$ das $n$-te
+%Taylor-Polynom von $f$ mit Entwicklungsstelle $x_0\in (a,b)$.
+\lang{de}{Für das Restglied $R_n(x)$ zum Entwicklungspunkt $x_0$ gilt}
+\lang{en}{Let $R_n(x)$ be the remainder of the $n$th order Taylor polynomial at the point $x_0$. Then}
+\[  \lim_{x\to x_0} \frac{R_{n}(x)}{(x-x_0)^n} =\lim_{x\to x_0} \frac{f(x)-T_{n}(x)}{(x-x_0)^n}=0. \] 
+\lang{de}{
+Das Restglied geht also selbst dann noch gegen Null, wenn es durch den immer kleiner werdenden 
+Abstand $\vert x-x_0\vert$ in $n$-ter Potenz geteilt wird.
+}
+\lang{en}{
+The remainder tends towards zero even when it is divided by the progressively smaller distance 
+$\vert x-x_0\vert$ to the power $n$.
+}
+\item[(b)]
+\notion{\lang{de}{Qualitative Taylor-Formel}
+        \lang{en}{Qualitative Taylor formula}}\\
+\lang{de}{
+Es gibt eine in $x_0$ stetige Funktion $r=r_{f,x_0,n}:D\to\R$ mit $r(x_0)=0$ so, dass
+}
+\lang{en}{
+There exists a function $r=r_{f,x_0,n}:D\to\R$, continuous at $x_0$ and with $r(x_0)=0$, such that
+}
+\[f(x)=T_n(x)+(x-x_0)^n\cdot r(x).\]
+\end{enumerate}
+\end{theorem}
+
+%\begin{incremental}[\initialsteps{0}]
+%\step
+
+%\begin{block}[explanation]
+%Da $R_{f,n,a}(x)$ die Differenz zwischen $f$ und dem Taylor-Polynom $P_{f,n,a}(x)$ ist und 
+%\[  f^{(k)}(a)=P_{f,n,a}^{(k)}(a) \]
+%für alle $0\leq k\leq n$ gilt, ist somit
+%\[  R_{f,n,a}^{(k)}(a)=0 \]
+%für alle $0\leq k\leq n$. Durch mehrfache Anwendung der \link{l-hospital}{Regel von de l'Hospital}
+%erhält man dann
+%\begin{eqnarray*}
+% \lim_{x\to a} \frac{R_{f,n,a}(x)}{(x-a)^n}&=& \lim_{x\to a} \frac{R'_{f,n,a}(x)}{n(x-a)^{n-1}} \\
+% &=& \ldots =  \lim_{x\to a} \frac{R_{f,n,a}^{(n-1)}(x)}{n!\cdot (x-a)^1} \\
+% &=&  \lim_{x\to a} \frac{R_{f,n,a}^{(n)}(x)}{n!} \\
+%&=& \frac{1}{n!}  R_{f,n,a}^{(n)}(a)=0.
+%\end{eqnarray*}
+%\end{block}
+%\end{incremental}
+
+
+
+\begin{proof}\label{proof:Beweis der Taylor-Approximationseigenschaft}
+\begin{incremental}[\initialsteps{0}]
+\step
+\lang{de}{
+Zu (a):
+Für alle Ableitungsordnungen $j=0,1,\ldots ,n $ gilt 
+}
+\lang{en}{
+For (a):
+For every order of derivative $j=0,1,\ldots ,n $ we have
+}
+\[ f^{(j)}(x_0) = T_n^{(j)}(x_0)\quad\Leftrightarrow\quad f^{(j)}(x_0) - T_n^{(j)}(x_0) = R_n^{(j)}(x_0) = 0. \]
+\lang{de}{Damit erhält man durch mehrfache Anwendung der \link{l-hospital}{Regel von de l'Hospital}}
+\lang{en}{By applying \link{l-hospital}{l'Hopital's rule} multiple times, we obtain}
+\begin{eqnarray*}
+ \lim_{x\to x_0} \frac{R_{n}(x)}{(x-x_0)^n}&=& \lim_{x\to x_0} \frac{R'_{n}(x)}{n\cdot (x-x_0)^{n-1}} \\
+ &=& \lim_{x\to x_0} \frac{R''_{n}(x)}{n\cdot (n-1)\cdot (x-x_0)^{n-2}} =  \ldots \\
+ &=& \lim_{x\to x_0} \frac{R_{n}^{(n-1)}(x)}{n\cdot (n-1)\cdot\ldots\cdot 2\cdot (x-x_0)^1} \\
+ &=&  \lim_{x\to x_0} \frac{R_{n}^{(n)}(x)}{n!} \\
+&=& \frac{1}{n!} \lim_{x\to x_0} R_{n}^{(n)}(x) = \frac{1}{n!}  R_{n}^{(n)}(x_0)=0.
+\end{eqnarray*}
+\lang{de}{
+Bei der  Grenzwertbildung wurde die Stetigkeit der $j$-ten Ableitung der Restgliedfunktion $R_n(x)$ 
+in $x_0$ ausgenutzt für $j=0,\ldots,n$, die sich aus der Stetigkeit von $f^{(j)}$ und $T_n^{(j)}$ in 
+$x_0$ ergibt.
+}
+\lang{en}{
+To be able to do this, we use the continuity of the $j$th derivative of the remainder function 
+$R_n(x)$ at $x_0$ for $j=0,\ldots,n$, which comes from the continuity of $f^{(j)}$ and $T_n^{(j)}$ 
+at $x_0$.
+}
+\step
+\lang{de}{
+Zu (b): Die Funktion $r$ ist gegeben durch $r(x)=\frac{R_{n}(x)}{(x-x_0)^n}$. Die Eigenschaft stetig 
+in $x_0$ zu sein mit $r(x_0)=0$ ist genau die Aussage von Teil (a).
+}
+\lang{en}{
+For (b): The function $r$ is given by $r(x)=\frac{R_{n}(x)}{(x-x_0)^n}$. Its continuity at $x_0$, follows directly from (a) and $r(x_0)=0$.
+}
+\end{incremental}
+\end{proof}
+
+\begin{example}\label{ex:taylorrestglied-geom-reihe}
+\lang{de}{
+Für die Funktion $f(x)=\frac{1}{1-x}$ hatten wir in Beispiel \ref{ex:taylorpoly-geom-reihe} die 
+Ableitungen $ f^{(k)}(x)=\frac{k!}{(1-x)^{k+1}}$ sowie das Taylor-Polynom $n$-ter Ordnung
+}
+\lang{en}{
+Let $f(x)=\frac{1}{1-x}$. In example \ref{ex:taylorpoly-geom-reihe} we calculated its derivatives 
+$ f^{(k)}(x)=\frac{k!}{(1-x)^{k+1}}$ and $n$th order Taylor polynomial
+}
+\[ T_n(x)=\sum_{k=0}^n \frac{k!}{k!}x^k=\sum_{k=0}^n x^k \]
+\lang{de}{an der Stelle $x_0=0$ berechnet. Damit ergibt sich das $n$-te Restglied}
+\lang{en}{at the point $x_0=0$. Hence the $n$th remainder is}
+\begin{eqnarray*}
+R_{n}(x)&=&  f(x)- T_{n}(x)= \frac{1}{1-x}- \sum_{k=0}^n x^k \\
+&=&  \frac{1}{1-x} - \frac{1-x^{n+1}}{1-x} \\
+&=& \frac{1-(1-x^{n+1})}{1-x}=\frac{x^{n+1}}{1-x}.
+\end{eqnarray*} 
+\lang{de}{
+Beim Schritt in die zweite Zeile wurde die 
+\ref[content_02_vollstaendige_induktion][geometrische Summenformel]{rule:geom-summe} 
+benutzt. Berechnet man nun an der Stelle $x_0=0$ den entsprechenden Grenzwert des obiger Satzes, 
+ergibt sich das erwartete Ergebnis
+}
+\lang{en}{
+For the step in the second row, we use the 
+\ref[content_02_vollstaendige_induktion][geometric sum formula]{rule:geom-summe}. If we now 
+explicitly calculate the limit from the above theorem at $x_0=0$, we get as expected
+}
+\[     \lim_{x\to 0} \frac{R_{n}(x)}{x^n}=\lim_{x\to 0} \frac{x^{n+1}}{(1-x)x^n} =\lim_{x\to 0} \frac{x}{1-x}=0. \]
+\end{example}
+
+
+\lang{de}{
+Die Abweichung zwischen der Funktion $f(x)$ und ihrem Taylor-Polynom $T_n(x)$ an einer beliebigen 
+Stelle $x$ können wir also mittels Restglied exakt berechnen. 
+Allerdings muss man dafür die Funktion selbst \emph{und} das Taylor-Polynoms $T_n$ kennen.
+Das ist recht rechenintensiv und hilft uns in der Praxis nicht weiter, 
+denn wir möchten die Auswertung der Funktion ja eigentlich durch das 
+einfacher zu handhabende Polynom $T_n$ abkürzen.
+Deshalb sind wir interessiert daran, das Restglied $R_{n}(x)$ für alle $x$ in einer 
+\ref[content_21_intervalle][Umgebung]{sec:epsilon-umg} $U(x_0)$ abzuschätzen.
+Der erste Schritt dazu ist es, bessere Formeln für das Restglied zu entwickeln.
+Eine davon ist das Lagrange-Restglied. Der Beweis dieser Formel, auf den wir hier verzichten, beruht auf dem Mittelwertsatz.
+}
+\lang{en}{
+The remainder can be used to find the exact deviation of a Taylor polynomial $T_n(x)$ from the 
+function $f(x)$ at any point $x$. Of course, to find the remainder we need both the function itself 
+\emph{and} the Taylor polynomial $T_n$. This is computationally intensive and in practice not very 
+useful, as the Taylor polynomial was initially intended to facilitate the evaluation of the 
+function. For this reason, we are interested in estimating the remainder $R_{n}(x)$ for all $x$ in 
+a \ref[content_21_intervalle][neighbourhood]{sec:epsilon-umg} $U(x_0)$. As a first step towards 
+this, let us find a better formula for the remainder. One such formula is the Lagrange remainder. 
+The proof of the validity of this formula, which we do not cover here, uses the mean value theorem. 
+}
+\begin{theorem}[\lang{de}{Lagrange-Restgliedformel}
+                \lang{en}{Lagrange remainder formula}]\label{thm:rg-Lagrange}
+\lang{de}{
+Die Funktion $f:(a;b)\to \R$ sei $(n+1)$-mal differenzierbar. Wir betrachten das $n$-te 
+Taylor-Restglied $R_n$ zu einer Entwicklungsstelle $x_0\in (a;b)$. 
+Für jedes $x\in (a;b)$ gibt es eine Stelle $\xi$ zwischen $x_0$ und $x$, so dass gilt
+}
+\lang{en}{
+Let the function $f:(a;b)\to \R$ be $(n+1)$-times differentiable. Consider the remainder $R_n$ of 
+the $n$th order Taylor polynomial at a point $x_0\in (a;b)$. 
+For all $x\in (a;b)$ there exists a point $\xi$ between $x_0$ and $x$ such that
+}
+\[  R_{n}(x) = \frac{f^{(n+1)}(\xi)}{(n+1)!}\, (x-x_0)^{n+1} .\]
+\end{theorem}
+
+\lang{de}{
+Das Lagrange-Restglied sieht fast wie der $(n+1)$-te Summand des Taylor-Polynoms aus, 
+nur muss die Ableitung nicht bei $x_0$, sondern an einer geeigneten Stelle $\xi$ zwischen zwischen 
+$x_0$ und $x$ bestimmt werden. Da die Zwischenstelle $\xi$ zu jeweils gegebenem $x$ unbekannt ist, 
+ist es nicht möglich, den Fehler an der Stelle $x$ mit der Lagrange-Restglieddarstellung tatsächlich 
+zu berechnen. Die obige Regel sagt lediglich aus, dass eine Stelle $\xi$ existiert, an der diese 
+Restgliedformel gilt.\\
+Daraus kann man aber die meistgebrauchte Abschätzung herleiten, mit der man in vielen Fällen einen 
+Maximalwert für den Fehler $|R_{n}(x)|$ angeben kann.
+}
+\lang{en}{
+The Lagrange remainder does not look dissimilar to the $(n+1)$th term of the Taylor polynomial, 
+except that the derivative is evaluated at a point $\xi$ between $x_0$ and $x$ instead of at $x_0$. 
+As the point $\xi$ is not known for any particular $x$, it is not possible to calculate the exact 
+error at the point $x$ using only the Lagrange remainder. The above rule says only that a point 
+$\xi$ exists at which this remainder formula holds.\\
+However, we can often use this to deduce a maximal value for the error $|R_{n}(x)|$.
+}
+\begin{remark}[\lang{de}{Restglied-Abschätzung}
+               \lang{en}{Remainder approximation}]\label{rg-abschaetzung}
+\lang{de}{
+Es sei $f:(a;b)\to\R$ eine $(n+1)$-mal differenzierbare Funktion. 
+Wenn es eine obere Schranke $M>0$ für die $(n+1)$-te Ableitung von $f$ gibt, 
+wenn also für alle $x\in (a;b)$ gilt
+}
+\lang{en}{
+Let $f:(a;b)\to\R$ be a $(n+1)$-times differentiable functions. 
+If there exists an upper bound $M>0$ for the $(n+1)$th derivative of $f$, that is, 
+if for all $x\in (a;b)$ we have
+}
+\[|f^{(n+1)}(x)|\leq M ,\]
+\lang{de}{dann gilt  für das Taylor-Restglied die Abschätzung}
+\lang{en}{then we have a bound on the remainder of the $n$th order Taylor polynomial,}
+\[ {|R_{n}(x) |} 
+\leq  \frac{M}{(n+1)!}\, {|x-x_0|}^{n+1} .\]
+\begin{incremental}[\initialsteps{0}]
+\step
+\lang{de}{
+Denn durch die Schranke $M$ haben wir die Abschätzung $|f^{(n+1)}(\xi)|\leq M$ auch für das 
+spezielle $\xi$ aus dem Lagrange-Restglied. Es gilt also
+}
+\lang{en}{
+This is because the bound $M$ in particular holds for the $\xi$ given by the Lagrange remainder, so $|f^{(n+1)}(\xi)|\leq M$. Hence
+}
+\[ {|R_{n}(x) |}=  \frac{|f^{(n+1)}(\xi)|}{(n+1)!}\, {|x-x_0|}^{n+1} 
+\leq  \frac{M}{(n+1)!}\, {|x-x_0|}^{n+1} .\]
+\end{incremental}
+\end{remark}
+\lang{de}{
+Eine Zusammenfassung zur Thematik des Taylor-Restglieds inklusive Rechenbeispielen ist dem folgenden Video zu entnehmen:\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10739&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\\\
+Eine alternative Erklärung des Taylor-Restglieds und ein zusätzliches konkretes Rechenbeispiel können den folgenden zwei Videos entnommen werden:\\
+\floatright{
+    \href{https://www.hm-kompakt.de/video?watch=540}{\image[75]{00_Videobutton_schwarz}}
+    \href{https://www.hm-kompakt.de/video?watch=541}{\image[75]{00_Videobutton_schwarz}}
+}\\\\
+}
+\lang{en}{}
+
+
+\begin{example}\label{ex:taylorrestglied-exp}
+\lang{de}{Wir entwickeln die Exponentialfunktion $f(x)=e^x$ an der Stelle $x_0=0$.}
+\lang{en}{We expand the exponential function $f(x)=e^x$ at the point $x_0=0$.}
+\begin{incremental}[\initialsteps{0}]
+\step
+\lang{de}{
+Das Taylor-Polynom $n$-ten Grades $T_{n}(x)=\sum_{k=0}^n \frac{1}{k!}x^k$ zum Entwicklungspunkt 
+$x_0=0$ hatten wir bereits in Beispiel~\ref{ex:taylorpoly-exp} berechnet. Gemäß der 
+Lagrange-Restgliedformel gibt es also zu jedem $x\in (a,b)\subset\R$ eine Zahl $\xi$ zwischen $0$ 
+und $x$ mit
+}
+\lang{en}{
+We have already calculated the $n$th order Taylor polynomial $T_{n}(x)=\sum_{k=0}^n \frac{1}{k!}x^k$ 
+at the point $x_0=0$ in example~\ref{ex:taylorpoly-exp}. By the Lagrange remainder formula there 
+hence exists for each  $x\in (a,b)\subset\R$ a number $\xi$ between $0$ and $x$ such that
+}
+\[ R_{n}(x)=e^x-  T_{n}(x) =\frac{e^{\xi}}{(n+1)!}\, x^{n+1} .\]
+\lang{de}{
+Betrachten wir das Restglied $R_{n}(x)$ zu $T_{n}(x)$ von $e^x$ lediglich in der Umgebung 
+$U_{\frac{1}{2}}(0)=(-\frac{1}{2};\frac{1}{2})$ des Entwicklungspunkts $x_0=0$, 
+dann können wir eine obere Schranke $M$ für die $(n+1)$-te Ableitung angeben. 
+Wegen der strengen Monotonie der Exponentialfunktion gilt nämlich für alle $x\in U_{\frac{1}{2}}(0)$ 
+die Abschätzung $\left|e^x\right|=e^x < e^{\frac{1}{2}}=\sqrt{e}$. Wir können also $M:=\sqrt{e}$ 
+wählen. Damit ergibt sich die Restglied-Abschätzung
+}
+\lang{en}{
+Consider the remainder $R_{n}(x)$ of $T_{n}(x)$ for the function $e^x$ only in the neighbourhood 
+$U_{\frac{1}{2}}(0)=(-\frac{1}{2};\frac{1}{2})$ of the point $x_0=0$. We can give an upper bound 
+$M$ for the $(n+1)$th derivative. As the exponential function is strictly monotone increasing, we 
+have $\left|e^x\right|=e^x < e^{\frac{1}{2}}=\sqrt{e}$ for all $x\in U_{\frac{1}{2}}(0)$. We can 
+therefore choose $M:=\sqrt{e}$ and obtain
+}
+\[ \left| R_{n}(x)\right| = \left| e^x-  T_{n}(x) \right| < \frac{\sqrt{e}}{(n+1)!}\,\left| x^{n+1}\right| <  \frac{\sqrt{e}}{(n+1)!\cdot 2^{n+1}} .\]
+\lang{de}{
+Schon für $n=5$ wird der Fehler 
+$\left| R_{5}(x)\right| <\frac{\sqrt{e}}{6!\cdot  2^{6}}\approx 4\cdot 10^{-5}$ sehr klein.
+}
+\lang{en}{
+Even for $n=5$, the error 
+$\left| R_{5}(x)\right| <\frac{\sqrt{e}}{6!\cdot  2^{6}}\approx 4\cdot 10^{-5}$ is very small.
+}
+\end{incremental}
+\end{example}
+
+
+	\begin{quickcheck}
+		\field{rational}
+%		\type{mc.unique}
+		\begin{variables}
+			\randint[Z]{n}{2}{6}
+			\randint[Z]{a}{-3}{3}
+            \function[calculate]{am1}{a-1}
+            \function[calculate]{ap1}{a+1}
+            \function[calculate]{np1}{n+1}
+			\randint{v}{0}{1}
+            \function[normalize]{f}{v*sin(x)+(1-v)*cos(x)}
+		\end{variables}
+		
+		\text{\lang{de}{
+    Welche der Abschätzung des Restgliedes $R_{\var{n}}(x)$
+		der Funktion $f(x)=\var{f}$ in der Umgebung der Stelle $x_0=\var{a}$ sind korrekt?
+    }
+    \lang{en}{
+    Which of the following bounds on the Taylor remainder $R_{\var{n}}(x)$ of the function 
+    $f(x)=\var{f}$ in the neighbourhood of the point $x_0=\var{a}$ are correct?
+    }}
+%        \permutechoices{1}{3}
+\begin{choices}{multiple}
+\begin{choice}
+			\text{$|R_{\var{n}}(x)|\leq \frac{1}{\var{np1}!}$ \lang{de}{für alle}\lang{en}{for all} $x\in [\var{am1};\var{ap1}]$}
+            \solution{true}
+       	\end{choice}
+		\begin{choice}
+			\text{$|R_{\var{n}}(x)|\leq \frac{1}{\var{np1}!}$ \lang{de}{für alle}\lang{en}{for all} $x\in \R$}
+            \solution{false}
+       	\end{choice}
+		\begin{choice}
+			\text{$|R_{\var{n}}(x)|\leq \frac{1}{\var{np1}!}\big(\frac{1}{2})^{\var{np1}}$ 
+			\lang{de}{für alle}\lang{en}{for all} $x\in [-\frac{1}{2};\frac{1}{2}]$}
+            \solution{false}
+       	\end{choice}
+\end{choices}
+\explanation{\lang{de}{
+Die höheren Ableitungen von $\var{f}$ sind $\pm \sin(x)$ und $\pm\cos(x)$, weshalb für alle
+$\xi\in \R$ die Abschätzung $|f^{(\var{np1})}(\xi)|\leq 1$ gilt, und daher
+$|R_{\var{n}}(x)|\leq \frac{1}{\var{np1}!}\cdot {|x-(\var{a})|}^{\var{np1}}$ für alle $x\in \R$.
+}
+\lang{en}{
+The higher derivatives of $\var{f}$ are $\pm \sin(x)$ und $\pm\cos(x)$, so the bound 
+$|f^{(\var{np1})}(\xi)|\leq 1$ holds for all $\xi\in \R$, and therefore 
+$|R_{\var{n}}(x)|\leq \frac{1}{\var{np1}!}\cdot {|x-(\var{a})|}^{\var{np1}}$ for all $x\in \R$.
+}}
+	\end{quickcheck}
+
+
+
+\section{\lang{de}{Taylor-Reihe}\lang{en}{Taylor series}}\label{sec:reihe}
+\lang{de}{
+Bisher haben wir uns mit der Approximation von Funktionen durch Taylor-Polynome $T_n$ beschäftigt. 
+Wenn eine Funktion allerdings beliebig oft differenzierbar ist, dann können können wir auch 
+Taylor-Polynome beliebig hoher Ordnung betrachten und überlegen, ob der Grenzwertprozess 
+$\lim_{n\to\infty}T_n$ sinnvoll ist. Eigentlich erwarten wir, dass mit wachsendem $n$ die Funktion 
+um die Entwicklungsstelle $x_0$ herum immer besser durch ihre Taylor-Polynome $T_n$ ausgedrückt 
+wird. Das ist oft, aber nicht immer, der Fall, wie wir weiter unten sehen werden.
+}
+\lang{en}{
+Up to this point, we have considered approximations of functions using Taylor polynomials $T_n$. 
+However, if a function is differentiable arbitrarily many times, then a Taylor polynomial of any 
+order can be found, and consider whether it makes sense to consider the limit 
+$\lim_{n\to\infty}T_n$. An obvious expectation here is that as $n$ increases, the Taylor polynomial 
+$T_n$ approximates the function progressively better in a neighbourhood of $x_0$. As we see below, 
+this is often, but not always, the case.
+}
+
+\begin{definition}\label{def:taylorreihe}
+\lang{de}{
+Ist $f:(a;b)\to \R$ eine in $x_0\in(a;b)$ unendlich oft differenzierbare Funktion,
+dann heißt die \ref[content_27_konvergenzradius][Potenzreihe]{def:Potenzreihe}
+}
+\lang{en}{
+Let $f:(a;b)\to \R$ be a function that is infinitely differentiable on $x_0\in(a;b)$. Then 
+the \ref[content_27_konvergenzradius][power series]{def:Potenzreihe}
+}
+\[    T(x)\coloneq T_{\infty}(x)= \sum_{k=0}^\infty \frac{f^{(k)}(x_0)}{k!}(x-x_0)^k \]
+\lang{de}{
+die \notion{Taylor-Reihe} von $f$ zur Entwicklungsstelle $x_0$. Die Koeffizienten $a_k$ der 
+Potenzreihe sind genau die \ref[content_04_taylor_polynom][Taylor-Koeffizienten]{def:taylorpoly}
+}
+\lang{en}{
+is called the \notion{Taylor series} of $f$ at the point $x_0$. The coefficients $a_k$ of the power 
+series are precisely the \ref[content_04_taylor_polynom][Taylor coefficients]{def:taylorpoly}
+}
+\[a_k=\frac{f^{(k)}(x_0)}{k!}.\]
+\end{definition}
+
+\begin{remark}
+\begin{enumerate}
+\item \lang{de}{
+Der \ref[content_27_konvergenzradius][Konvergenzbereich]{thm:konvergenzbereich} der Taylor-Reihe ist 
+durch ihre Eigenschaft, eine Potenzreihe zu sein, gegeben. Er wird bestimmt durch den 
+\ref[content_27_konvergenzradius][Konvergenzradius]{def:konvergenzradius} $R$, für den wir 
+\ref[content_27_konvergenzradius][Berechnungsmethoden]{sec:konvergenzradius} kennen.\\
+Ist $R>0$, so konvergiert die Taylorreihe zum Entwicklungspunkt $x_0$ absolut auf dem Intervall 
+$(x_0-R;x_0+R)$. Ist $R=0$, so konvergiert die Taylor-Reihe nur im Entwicklungspunkt $x_0$.
+Dieses Konvergenzgebiet muss nicht mit dem ursprünglichen Definitionsbereich von $f$ übereinstimmen.
+}
+\lang{en}{
+The \ref[content_27_konvergenzradius][domain of convergence]{thm:konvergenzbereich} of the Taylor 
+series is found by considering it as a power series. It is determined by the 
+\ref[content_27_konvergenzradius][radius of convergence]{def:konvergenzradius} $R$, which we 
+\ref[content_27_konvergenzradius][have already seen how to calculate]{sec:konvergenzradius}.\\
+If $R>0$, then the Taylor series at the point $x_0$ converges absolutely on the interval 
+$(x_0-R;x_0+R)$. If $R=0$, then the Taylor series only converges at the point $x_0$. The domain in 
+which the series converges need not correspond to the original domain of $f$.
+}
+\item \lang{de}{
+Unter allen Potenzreihen ist die Taylor-Reihe zur Entwicklungsstelle $x_0$ die einzige Kandidatin, 
+die die Chance hat, die Funktion $f$ in einer Umgebung von $x_0$ darzustellen. Denn wenn $f$ in der 
+Form $f(x)= \sum_{k=0}^\infty a_k (x-x_0)^k$ darstellbar ist, auf einer geeigneten Umgebung $U(x_0)$,
+dann sind die Koeffizienten $a_k$ durch die Bedingung $a_k=\frac{f^{(k)}(x_0)}{k!}$ festgelegt.
+}
+\lang{en}{
+Out of all the power series, the Taylor series at the point $x_0$ is the only candidate with a 
+possibility of perfectly describing the function $f$ in a neighbourhood of $x_0$. After all, if $f$ 
+can be written in the form $f(x)= \sum_{k=0}^\infty a_k (x-x_0)^k$ on some neighbourhood $U(x_0)$, 
+then the coefficients $a_k$ are determined by the condition $a_k=\frac{f^{(k)}(x_0)}{k!}$.
+}
+\begin{incremental}[\initialsteps{0}]
+\step \lang{de}{
+Um das einzusehen bemerken wir zunächst, dass $f$ in diesem Fall unendlich oft differenzierbar ist, 
+weil das alle Potenzreihen auf ihrem Konvergenzbereich sind. Die Ableitungen $f^{(j)}$ von
+$f$ müssen also auf $U(x_0)$ mit denen der Potenzreihe übereinstimmen. Weil 
+\ref[content_02_ableitungsregeln][Potenzreihen gliedweise abgeleitet]{thm:potenzreihen-ableitung}
+werden, erhalten wir zunächst die erste Ableitung
+}
+\lang{en}{
+In order to show this, we note that $f$ is infinitely differentiable on $U(x_0)$ in this case, as 
+power series are infinitely differentiable on their domain of convergence. The 
+derivatives $f^{(j)}$ of $f$ must therefore correspond to those of the power series on $U(x_0)$. As 
+\ref[content_02_ableitungsregeln][power series are differentiated term-by-term]{thm:potenzreihen-ableitung}, 
+we obtain the first derivative
+}
+\[ f'(x)=\sum_{k=1}^\infty k\,a_k\,(x-x_0)^{k-1},\]
+\lang{de}{und induktiv dann die $j$-te Ableitung}
+\lang{en}{and inductively the $j$th derivative}
+\[ f^{(j)}(x)=\sum_{k=j}^\infty k\,(k-1)\cdot\ldots\cdot (k-(j-1))\,a_k\,(x-x_0)^{k-j}. \]
+\lang{de}{Die Auswertung in $x_0$ liefert daraus}
+\lang{en}{Evaluating at $x_0$ yields}
+\[f^{(j)}(x_0)=j\cdot (j-1)\cdot\ldots\cdot (j-j+1)\cdot a_j\cdot(x_0-x_0)^0=j!a_j.\]
+\lang{de}{Also sind die Koeffizienten $a_j$ genau die Taylor-Koeffizienten.}
+\lang{en}{Hence the coefficients $a_j$ are precisely the Taylor coefficients.}
+% Damit können wir die in~\ref{def:taylorreihe} definierte Taylor-Reihe $T(x)$ eindeutig auf 
+% die vorausgesetzte Potenzreihendarstellung von $f(x)$ zurückführen:
+% \[  T(x)=\sum_{k=0}^\infty \frac{f^{(k)}(x_0)}{k!}(x-x_0)^k = \sum_{k=0}^\infty \frac{k!a_k}{k!}(x-x_0)^k =\sum_{k=0}^\infty a_k (x-x_0)^k=f(x). \]
+\end{incremental}
+\item \lang{de}{
+Ob eine Funktion $f:(a;b)\to\R$ tatsächlich in einer Umgebung vom Entwicklungspunkt $x_0$ durch ihre 
+Taylor-Reihe $T$ in $x_0$ darsgestellt wird, hängt von folgenden Bedingungen ab.
+}
+\lang{en}{
+Whether a function $f:(a;b)\to\R$ is equal to its Taylor series $T$ at $x_0$ in a neighbourhood of 
+$x_0$ is conditional on the following:
+}
+\begin{enumerate}
+\item[(i)] \lang{de}{Die Taylor-Reihe benötigt einen positiven Konvergenzradius $R>0$.}
+           \lang{en}{The Taylor series must have a positive radius of convergence $R>0$.}
+\item[(ii)] \lang{de}{
+           Falls $R>0$, ist der Durchschnitt der beiden Definitionsbereiche $(a;b)\cap(x_0-R;x_0+R)$ 
+           eine Umgebung $U(x_0)$, auf der $f$ potentiell durch die Taylor-Reihe dargestellt werden 
+           könnte.
+           }
+           \lang{en}{
+           If $R>0$, the intersection of the two domains $(a;b)\cap(x_0-R;x_0+R)$ is a neighbourhood 
+           $U(x_0)$ on which $f$ may possibly be equal to its Taylor series.
+           }
+\item[(iii)] \lang{de}{
+           Für jedes Element $x$ aus dieser Umgebung $U(x_0)$ gilt es dann zu prüfen, ob 
+           }
+           \lang{en}{
+           We then need to check if, for all $x$ in this neighbourhood $U(x_0)$, we have
+           }
+           \[\lim_{n\to\infty}R_n(x)=\lim_{n\to\infty}(f(x)-T_n(x))=0.\]
+\end{enumerate}  
+\lang{de}{
+Sind diese Bedingungen allesamt erfüllt, dann wird $f$ auf $U(x_0)$ durch seine Taylor-Reihe 
+$T_{x_0}$ im Entwicklungspunkt $x_0$ dargestellt.
+}
+\lang{en}{
+If the above conditions are all fulfilled, then $f$ is given on $U(x_0)$ precisely by its Taylor 
+series $T_{x_0}$ at the point $x_0$.
+}
+\end{enumerate}
+\end{remark}
+
+\lang{de}{
+Funktionen, die die Bedingungen (i)-(iii) in obiger Bemerkung sogar in jedem Punkt $x_0$ des 
+Definitionsbereichs erfüllen, erhalten einen eigenen Namen.
+}
+\lang{en}{
+Functions that satisfy the above conditions (i)-(iii) at every point $x_0$ of its domain are given a 
+name.
+}
+
+\begin{definition}[\lang{de}{Analytische Funktionen}
+                   \lang{en}{Analytic functions}]\label{thm:reell-analyt-Fktn}\label{def:reell-analyt-Fktn}
+\lang{de}{
+Die Funktion $f:D\to \R$ sei unendlich oft differenzierbar. Gibt es zu jedem $x_0\in D$ eine 
+Umgebung $U(x_0)\subset D$, auf der $f$ durch seine Taylor-Reihe $T_{x_0}$ dargestellt wird, 
+so heißt $f$ \notion{(reell-)analytisch}.
+}
+\lang{en}{
+Let the function $f:D\to \R$ be infinitely differentiable. Suppose for all $x_0\in D$ there exists 
+a neighbourhood $U(x_0)\subset D$ on which $f$ is given precisely by its Taylor series $T_{x_0}$. 
+Them $f$ is called \notion{(real) analytic}.
+}
+\end{definition}
+\lang{de}{
+Die Eigenschaft, analytisch zu sein, ist zwar eine ganz besondere, sie wird aber von den meisten uns
+bekannten unendlich oft differenzierbaren Funktionen erfüllt.
+}
+\lang{en}{
+The property of being analytic is quite special, but many well-known infinitely differentiable 
+functions are in fact analytic.
+}
+\begin{example}\label{ex:reell-analytische-Funktionen}
+\begin{tabs*}[\initialtab{0}]
+\tab{\lang{de}{Polynome}\lang{en}{Polynomials}}
+\lang{de}{
+Die einfachsten analytischen Funktionen sind die Polynomfunktionen $p:\R\to\R$. Nach Satz 
+\ref{thm:thm:polynome-taylor-entwickelt} gilt für alle $n\geq \text{grad}(p)$, dass $p=T_n$ für 
+jedes Taylor-Polynom $T_n$ zu jedem beliebigen Entwicklungspunkt $x_0\in\R$. Also ist für alle 
+$x\in\R$
+}
+\lang{en}{
+The simplest analytic functions are the polynomials $p:\R\to\R$. By theorem 
+\ref{thm:thm:polynome-taylor-entwickelt} we have $p=T_n$ for all $n\geq \text{grad}(p)$ where 
+$T_n$ is a Taylor polynomial of $p$ at any point $x_0\in\R$. Therefore for all $x\in\R$ we have
+}
+\[\lim_{n\to\infty} R_n(x)=\lim_{n\to\infty}(f(x)- T_n(x))=\lim_{n\to\infty} 0=0\]
+\lang{de}{
+erfüllt. Ebenso hat die Taylorreihe $T=\lim_{n\to\infty}T_n=p$ als endliche Summe den 
+Konvergenzradius unendlich, ist also überall absolut konvergent. Eine Polynomfunktion stimmt in 
+jedem Punkt $x\in\R$ mit seiner Taylor-Reihe überein.
+}
+\lang{en}{
+and the Taylor series $T=\lim_{n\to\infty}T_n=p$ is a finite sum, and hence has an infinite radius 
+of convergence. That is, $T$ is absolutely convergent. A polynomial is equal to its Taylor series 
+at every point $x\in\R$.
+}
+\tab{\lang{de}{Exponentialfunktion}\lang{en}{Exponential function}}
+\lang{de}{
+Für die Exponentialfunktion $f:x\mapsto e^x$ wissen wir bereits, dass diese mit der (reellen) 
+Exponentialreihe $\exp(x)=\sum_{n=0}^\infty \frac{x^n}{n!}$ übereinstimmt. Das sieht man zunächst 
+für \ref[content_28_exponentialreihe][rationale $x\in\Q$]{thm:exp_auf_QQ}, und dann aus 
+Stetigkeitsgründen für beliebige $x\in\R$. Die Exponentialreihe hat einen 
+\ref[content_27_konvergenzradius][Konvergenzradius gleich unendlich]{ex:geom-und-exp-reihe}. 
+Die Taylor-Polynome $T_n$ von $f$ zum Entwicklungspunkt $x_0=0$ (siehe Beispiel 
+\ref{ex:taylorpoly-exp}) sind genau die Partialsummen der Exponentialreihe. Somit ist für alle 
+$x\in\R$
+}
+\lang{en}{
+We know that the exponential function $f:x\mapsto e^x$ is also given by the (real) power series 
+$\exp(x)=\sum_{n=0}^\infty \frac{x^n}{n!}$. This can be shown first for 
+\ref[content_28_exponentialreihe][rational $x\in\Q$]{thm:exp_auf_QQ}, and then extended by 
+continuity for any $x\in\R$. The series has an 
+\ref[content_27_konvergenzradius][infinite convergence ratio]{ex:geom-und-exp-reihe}. 
+The Taylor polynomials $T_n$ of $f$ at the point $x_0=0$ (see example \ref{ex:taylorpoly-exp}) are 
+precisely the partial sums of this power series. Hence for all $x\in\R$,
+}
+\[\lim_{n\to\infty}(e^x-T_n(x))=e^x-\exp(x)=0,\]
+\lang{de}{
+also: Die Taylor-Reihe in $x_0=0$ stellt überall die Exponentialfunktion dar.\\
+Auch die Taylor-Entwicklung zu einem beliebigen anderen Entwicklungspunkt $x_0\in\R$ können wir mit 
+Hilfe der 
+\ref[content_28_exponentialreihe][Funktionalgleichung der Exponentialfunktion]{thm:eigenschaften_von_exp} leicht angeben. 
+Weil für alle $x\in\R$ gilt
+}
+\lang{en}{
+so: the Taylor series expanded at $x_0=0$ is equal to the exponential function.\\
+The Taylor expansion at even an arbitrary point $x_0\in\R$ can easily be found using the 
+\ref[content_28_exponentialreihe][properties of the exponential function]{thm:eigenschaften_von_exp}. As we have
+}
+\[e^x=e^{x_0}\cdot e^{x-x_0},\]
+\lang{de}{folgt}
+\lang{en}{for all $x\in\R$, it follows that}
+\[e^x=e^{x_0}\cdot \sum_{n=0}^\infty \frac{(x-x_0)^n}{n!}=\sum_{n=0}^\infty e^{x_0}\cdot \frac{(x-x_0)^n}{n!}.\]
+\lang{de}{
+Dies ist eine Potenzreihe mit Entwicklungspunkt $x_0$, die in jedem Punkt mit der 
+Exponentialfunktion übereinstimmt. Es muss sich also um die Taylor-Reihe von $f(x)=e^x$ im 
+Entwicklungspunkt $x_0$ handeln. In der Tat ist $f^{(n)}(x_0)=e^{x_0}$.
+\\\\
+Wir haben also zu jedem $x_0\in\R$ eine auf ganz $\R$ konvergente Taylor-Reihe gefunden. 
+Die Exponentialfunktion ist analytisch.
+}
+\lang{en}{
+This is a power series expanded at a point $x_0$, whose value at every point corresponds to that of 
+the exponential function. Hence it must be the Taylor series of $f(x)=e^x$ at the point $x_0$. 
+Indeed, $f^{(n)}(x_0)=e^{x_0}$.
+\\\\
+We have found for each $x_0\in\R$ a Taylor series that converges on the whole of $\R$. The 
+exponential function is analytic.
+}
+
+
+% Um die Exponentialfunktion $f(x)=e^x$ in der Umgebung $U(x_0)$ mit $x_0=0$ näherungsweise darzustellen, hatten wir in Beispiel \ref{ex:taylorpoly-exp}
+% das Taylor-Polynom bis zum Grad $n$ berechnet:
+% \[ T_{n}(x)=\sum_{k=0}^n \frac{1}{k!}x^k .\]
+% In Beispiel~\ref{ex:taylorrestglied-exp} hatten wir dann das zugehörige Restglied gemäß \textsc{Lagrange} bestimmt:
+% \[ R_{n}(x)=\frac{e^{\xi}}{(n+1)!}\, x^{n+1} .\]
+% Dabei gibt es zu jedem $x\in (a,b)\subset\R$ eine unbekannte Zahl $\xi$ zwischen $0$ und $x$.
+
+% Mit der \ref[content_04_taylor_polynom][Abschätzung des Restgliedes]{rg-abschaetzung} folgt wegen der Monotonie der Exponentialfunktion
+% für den gesamten Definitionsbereich, d.h. für jedes $x\in \R$:
+% \[ \left|R_{n}(x)\right|\leq e^{\left| x\right|}\frac{\left| x\right|^{n+1}}{(n+1)!}\, . \]
+% Für jedes $x\in\R$ ist aber $\lim_{n\to \infty} \frac{|x|^{n+1}}{(n+1)!}=0$, womit auch $\lim_{n\to\infty} \left|R_n(x)\right|=0$ gezeigt ist.
+% Deshalb konvergiert die Taylor-Reihe
+% \[ \sum_{k=0}^\infty \frac{1}{k!}x^k  = T(x) = f(x) = e^x = \exp(x) \]
+% gegen die Funktion $f(x)=e^x$ auf deren Definitionsbereich, d.h. für jedes $x\in\R$, und stellt diese exakt und vollständig dar.  
+% Die Taylor-Reihendarstellung ist also identisch mit der bereits aus Abschnitt~\ref{sec:exp-reihe} bekannten Potenzreihendarstellung
+% für die reell analytische Exponentialfunktion $f(x)=e^x$.
+\tab{$\frac{1}{1-x}$}
+\lang{de}{
+Für die Funktion $f:\R\setminus\{1\}\to\R$, $f(x)=\frac{1}{1-x}$, hatten wir in 
+Beispiel~\ref{ex:taylorpoly-geom-reihe} das Taylor-Polynom $n$-ten Grades
+}
+\lang{en}{
+Consider the function $f:\R\setminus\{1\}\to\R$, $f(x)=\frac{1}{1-x}$. 
+In example~\ref{ex:taylorpoly-geom-reihe}, we found the $n$th order Taylor polynomial
+}
+\[ T_{n}(x)=\sum_{k=0}^n \frac{k!}{k!}x^k=\sum_{k=0}^n x^k \]
+\lang{de}{
+zur Entwicklungsstelle $x_0=0$ und in Beispiel~\ref{ex:taylorrestglied-geom-reihe} das zugehörige 
+Restglied
+}
+\lang{en}{
+at the point $x_0=0$, and in example~\ref{ex:taylorrestglied-geom-reihe} we found the corresponding 
+remainder
+}
+\[ R_{n}(x)=\frac{x^{n+1}}{1-x}\]
+\lang{de}{
+berechnet. Damit ergibt sich die Taylor-Reihe als \ref[content_27_konvergenzradius][geometrische Reihe]{ex:geom-und-exp-reihe}
+}
+\lang{en}{
+of the Taylor polynomial. Hence the Taylor series is a 
+\ref[content_27_konvergenzradius][geometric series]{ex:geom-und-exp-reihe}
+}
+\[ T(x)=\sum_{k=0}^\infty  x^k, \]
+\lang{de}{
+die den Konvergenzradius $R=1$ hat. Wählen wir also $U(0) = (-1;1)$, dann gilt für jedes $x\in U(0)$
+}
+\lang{en}{
+with radius of convergence $R=1$. If we choose $U(0) = (-1;1)$, then for all $x\in U(0)$ we have
+}
+\[\lim_{n\to \infty} R_{n}(x)=\lim_{n\to \infty} \frac{x^{n+1}}{1-x}=0.\] 
+\lang{de}{
+Die Funktion $f(x)=\frac{1}{1-x}$ wird also nur im Intervall $(-1,1)$ durch die geometrische Reihe 
+exakt dargestellt. Der Konvergenzbereich der Taylor-Reihe ist somit kleiner als der 
+Definitionsbereich der Funktion.
+\\\\
+Auch an jede andere Entwicklungsstelle $x_0\neq 1$ können wir $f$ Taylor-entwickeln. Dazu nutzen wir 
+die Ableitungen von $f$, die wir schon in Beispiel~\ref{ex:taylorpoly-geom-reihe} bestimmt hatten zu 
+$f^{(n)}(x)=\frac{N!}{(1-x)^{n+1}}$. Die Taylor-Reihe zur Entwicklungsstelle $x_0$ ist also
+}
+\lang{en}{
+The function $f(x)=\frac{1}{1-x}$ is therefore only equal to the geometric series in the interval 
+$(-1,1)$. The domain on which the Taylor series converges is thus smaller than the domain that we 
+originally defined the function on.
+\\\\
+We may also consider the Taylor expansion of $f$ at any other point $x_0\neq 1$. We use the 
+derivatives of $f$ that we determined in 
+example~\ref{ex:taylorpoly-geom-reihe} to be $f^{(n)}(x)=\frac{N!}{(1-x)^{n+1}}$. The 
+Taylor series at the point $x_0$ is therefore
+}
+\[T_{x_0}(x)=\sum_{n=0}^\infty \frac{(x-x_0)^n}{(1-x_0)^{n+1}}.\]
+\lang{de}{
+Auch das ist eine geometrische Reihe, nämlich $\frac{1}{1-x_0}\cdot\sum_{n=0}^\infty q^n$ für 
+$q=\frac{x-x_0}{1-x_0}$. Sie konvergiert absolut genau für $| q|<1$, also für $|x-x_0|<|1-x_0|$. 
+Damit ist der Konvergenzradius von $T_{x_0}$ gleich $R_{x_0}=|1-x_0|$. Berechnen wir für 
+$x\in U(x_0):=(x_0-R_{x_0};x_0+R_{x_0})$ den Grenzwert
+}
+\lang{en}{
+This is also a geometric series, namely $\frac{1}{1-x_0}\cdot\sum_{n=0}^\infty q^n$ for 
+$q=\frac{x-x_0}{1-x_0}$. It converges absolutely exactly when $| q|<1$, that is, $|x-x_0|<|1-x_0|$. 
+The convergence radius of $T_{x_0}$ is therefore $R_{x_0}=|1-x_0|$. We calculate, for 
+$x\in U(x_0):=(x_0-R_{x_0};x_0+R_{x_0})$, the limits
+}
+\begin{align*}
+\lim_{n\to\infty}(f(x)-T_{x_0,n})=&\frac{1}{1-x}-\frac{1}{1-x_0}\cdot\frac{1}{1-q}\\
+=&
+\frac{1}{1-x}-\frac{1}{(1-x_0)(1-\frac{x-x_0}{1-x_0})}=
+\frac{1}{1-x}-\frac{1}{1-x}=0,
+\end{align*}
+\lang{de}{
+so folgt, dass $f$ auf $U(x_0)$ durch die Taylor-Reihe $T_{x_0}$ dargestellt wird.
+Auch $f$ ist somit analytisch.
+}
+\lang{en}{
+from which we deduce that $f$ is given exactly by the Taylor series $T_{x_0}$ in the neighbourhood 
+$U(x_0)$. $f$ is therefore analytic.
+}
+
+\end{tabs*}
+\end{example}
+\lang{de}{
+Aber auch eine unendlich oft differenzierbare Funktion, die nicht analytisch ist, ist kennen wir 
+bereits:
+}
+\lang{en}{
+We even know of an infinitely differentiable function which is not analytic:
+}
+\begin{example}
+\lang{de}{Die Funktion $f:\R\to\R$,}
+\lang{en}{The function $f:\R\to\R$,}
+\begin{displaymath}
+  f(x)=
+  \begin{cases}
+    e^{-\frac{1}{x}}, & x>0,\\
+    0, & x\leq 0,
+  \end{cases}
+ \end{displaymath}
+  \lang{de}{
+  ist nicht reell-analytisch, denn die Taylor-Reihe zum Entwicklungspunkt $x_0=0$ stellt 
+  in keiner Umgebung von $x_0$ die Funktion dar.
+  }
+  \lang{en}{
+  is not real-analytic, as the Taylor series at the point $x_0=0$ does not equal the function in 
+  any neighbourhood of $x_0$.
+  }
+  \begin{incremental}[\initialsteps{0}]
+  \step
+\lang{de}{
+Im Beispiel~\ref{ex:gegenbeispiel} hatten wir gesehen, $f$ in $x_0=0$ unendlich oft differenzierbar 
+ist mit $f^{(k)}(0)=0$ für alle $k\in\N_0$. Deshalb ist an der Entwicklungsstelle $x_0=0$ die 
+Taylor-Reihe 
+}
+\lang{en}{
+In example~\ref{ex:gegenbeispiel} we saw that $f$ is infinitely differentiable at $x_0=0$, with 
+$f^{(k)}(0)=0$ for all $k\in\N_0$. Hence the Taylor series at the point $x_0=0$ is
+}
+\[ T(x)= \sum_{k=0}^\infty \frac{0}{k!}x^k =0 \]
+\lang{de}{
+die Nullfunktion. Natürlich stellt diese Taylor-Reihe die Funktion $f$ im Bereich $(-\infty;0]$ dar.
+Für jedes $x>0$ ist aber $f(x)-T(x)=e^{-\frac{1}{x}}>0$. Es gibt also keine Umgebung von $x_0$, in 
+der $T$ und $f$ vollständig übereinstimmen. Die Funktion $f$ ist also nicht analytisch.
+}
+\lang{en}{
+the zero function. Of course this Taylor series represents the function $f$ on $(-\infty;0]$. 
+However, for all $x>0$ we have $f(x)-T(x)=e^{-\frac{1}{x}}>0$. There hence does not exist a 
+neighbourhood of $x_0$ in which $T$ equals $f$ for all values. The function $f$ is thus not analytic.
+}
+%Offenkundig konvergiert die Taylor-Reihe von $f(x)$ zur Entwicklungsstelle $x_0=0$ überall (gegen die Nullfunktion), für $x>0$ aber nicht gegen $f(x)$.
+\end{incremental}
+%Ein weiteres Beispiel einer überall unendlich oft differenzierbaren, aber nicht reell-analytischen Funktion ist $h:\R\to\R$, $h(x)=e^{1\frac{1}{x^2}}$ für $x\neq 0$ und $h(0)=0$.
+\end{example}
+
+\begin{quickcheck}
+		\field{rational}
+%		\type{mc.unique}
+
+		\begin{variables}
+			\randint[Z]{t}{-1}{1}
+			\randint[Z]{a}{-5}{-2}
+			\function[calculate]{a2}{t*a} 
+			\function[calculate]{a1}{-a2} 
+			\function{f}{1/(1-x)}
+            \function[normalize]{m1}{x-a1}
+            \function[normalize]{m2}{x-a2}
+            \function[calculate]{c}{1/(1-a)} 
+			
+		\end{variables}
+		
+		\text{\lang{de}{
+    Welche der folgenden Potenzreihen ist die Taylorreihe der Funktion $f(x)=\var{f}$
+		zur Entwicklungsstelle $x_0=\var{a}$?
+    }
+    \lang{en}{
+    Which of the following power series is the Taylor series of the function $f(x)=\var{f}$ at the 
+    point $x_0=\var{a}$?
+    }}
+%        \permutechoices{1}{3}
+\begin{choices}{multiple}
+		\begin{choice}
+			\text{$\sum_{n=0}^\infty x^n$}
+            \solution{false}
+       	\end{choice}
+        \begin{choice}
+			\text{$\sum_{n=0}^\infty (\var{c})^{n+1}(\var{m1})^n$}
+            \solution[compute]{t = -1}
+       	\end{choice}
+		\begin{choice}
+			\text{$\sum_{n=0}^\infty (\var{c})^{n+1}(\var{m2})^n$}
+            \solution[compute]{t = 1}
+       	\end{choice}
+\end{choices}
+\explanation{\lang{de}{
+Die Taylorreihe von $f$ mit Entwicklungsstelle $x_0$ ist eine Potenzreihe in
+Potenzen des Linearfaktors $(x-(\var{a}))$.
+}
+\lang{en}{
+The Taylor series of $f$ at the point $x_0$ is a power series in powers of the linear factor 
+$(x-(\var{a}))$.
+}}
+	\end{quickcheck}
+    
+\lang{de}{
+Eine Zusammenfassung der in Abschnitt \ref{sec:reihe} angesprochenen Themen kann dem folgenden Video 
+entnommen werden:\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10740&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}
+}
+\lang{en}{}
+
+\end{content}

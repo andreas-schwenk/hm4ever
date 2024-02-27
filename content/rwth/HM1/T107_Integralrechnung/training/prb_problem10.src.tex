@@ -1,0 +1,121 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Problem 10}
+    \lang{de}{A10: Anwendungsaufgabe}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{Problem 10}
+    \lang{de}{A10: Anwendungsaufgabe}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T107_Problem10.meta.xml}{T107_Problem10}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+
+
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/18762}{Ticket 18762}
+\end{block}
+\usepackage{mumie.genericproblem}
+
+
+\lang{de}{
+	\title{A10: Anwendungsaufgabe}
+}
+\lang{en}{
+	\title{Problem 10}
+}
+
+
+\begin{problem}
+
+    \begin{variables}
+    \randint{a1}{5}{10} %a/2 in image
+    \randint{b1}{1}{4} %b/2 in image
+    \randint{L}{5}{10}
+    \function[calculate]{a}{2*a1}
+    \function[calculate]{b}{2*b1}
+    \function[calculate]{H}{a^2/4}
+    \function[calculate]{h}{(a/2)^2 - (b/2)^2}
+    \function[calculate]{sol1}{-2/3*(a/2)^3+(a^2/4)*a - (-2/3*(b/2)^3 + (a^2/4-h)*b)}
+    \function[calculate]{sol}{sol1*L}
+    \end{variables}
+
+    \begin{question}
+    \type{input.number}
+    \field{rational}
+
+    \lang{de}{
+    \text{Ein wasserführender Stollen habe einen parabelförmigen Querschnitt, 
+    der sich durch die Funktion 
+    $ f(x)=-\left(x-\frac{a}{2}\right)\left(x+\frac{a}{2}\right)  $ 
+    mit $a=\var{a}$, $b=\var{b}$, $H=\var{H}$,
+    und $h=\var{h}$ beschreiben lasse 
+    (Bezeichnungen wie in der Abbildung und Maße in Meter).
+    \\
+    Der Stollen ist bis zu einer Höhe von $h=\var{h}$ mit Wasser gefüllt.
+\begin{figure}
+\image{T107_Problem10}
+\end{figure}
+    \\
+    Bestimmen Sie das Volumen des Wassers in $m^3$, das durch den Stollen fließen kann, wenn dieser \var{L} Meter lang ist!
+    }
+    }
+    
+    \lang{en}{
+    \text{A waterbearing tunnel has a parabola shaped cross-section, 
+    which can be described by the function 
+    $     f(x)=-\left(x-\frac{a}{2}\right)\left(x+\frac{a}{2}\right)   $
+    with $a=\var{a}$, $b=\var{b}$, $H=\var{H}$,
+    and $h=\var{h}$ 
+    (labels as in the illustration and units in meter).
+    \\
+    The tunnel is filled with water up to a height of $h=\var{h}$.
+    \image{T107_Problem10_Stollen}
+    \\
+    Determine the volume of water in $m^3$ that can flow through the tunnel if the tunnel is $\var{L}$ meters long!
+    }
+    }
+        \begin{answer}
+        \lang{de}{
+        \text{Das Volumen beträgt }
+        }
+        \lang{en}{
+        \text{The volume is }
+        }
+        \solution{sol}
+        \end{answer}
+        
+        \lang{de}{
+        \explanation{Berechnen Sie zuerst den Flächeninhalt des Querschnitts des Stollens $\int_{-\frac{a}{2}}^{\frac{a}{2}} f(x) \, dx$ und subtrahieren Sie von diesem den Flächeninhalt des nicht wasserführenden Teils $\int_{-\frac{b}{2}}^{\frac{b}{2}} f(x) \, dx -h\cdot b$. Beachten Sie dann noch die gegebene Länge des Stollens, um das Volumen zu bestimmen.}
+        }
+        \lang{en}{
+        \explanation{First calculate the area of the cross-section of the tunnel $\int_{-\frac{a}{2}}^{\frac{a}{2}} f(x) \, dx$ and then subtract the area of the part of the cross-section that is not waterbearing $\int_{-\frac{b}{2}}^{\frac{b}{2}} f(x) \, dx -h\cdot b$. After that, take the length of the tunnel into account, to calculate the volume.}
+        }
+    \end{question}
+\end{problem}
+    
+
+\embedmathlet{gwtmathlet}
+
+\end{content}
+
+
+
+
+
+
+
+

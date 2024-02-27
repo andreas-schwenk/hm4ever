@@ -1,0 +1,202 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A01: Folgen}
+    \lang{en}{mc yes-no}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{description}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A01: Folgen}}
+\lang{en}{\title{A01: Sequences}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/23797}{Ticket 23797}
+\end{block}
+
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+\begin{block}[annotation]
+Kopie: hm4mint/T205_Konvergenz_von_Folgen/training 1
+
+Im Ticket-System: \href{http://team.mumie.net/issues/9865}{Ticket 9865}
+\end{block}
+
+
+\begin{problem}
+\randomquestionpool{1}{4}
+
+     \begin{question} %fall q zwischen 0 und 1
+     \lang{de}{ 
+      	\text{Untersuchen Sie die Folge $(a_{n})_{n\in\N}$ 
+      	mit $a_{n}=\var{u} \cdot (\var{q})^{n}$ für alle $n\in\N$ auf Monotonie und Beschränktheit.
+		}
+    	}
+     \lang{en}{\text{Decide whether the sequence $(a_{n})_{n\in\N}$ 
+      	with $a_{n}=\var{u} \cdot (\var{q})^{n}$ for all $n\in\N$
+       is monotonic and/or bounded.}}
+    	\type{mc.yesno}
+    	\precision[false]{3}
+    	\displayprecision{3}
+    
+    	\begin{variables}
+    	\randint[Z]{u}{-10}{10}
+    	%\randint[Z]{q}{-5}{5}
+    	
+    	\randint{qqnenner}{6}{10}
+    	\randint{qqzahler}{1}{5}
+    	\function{q}{qqzahler/qqnenner}
+    	
+    	
+    	\end{variables}
+		\begin{choice}
+			\lang{de}{\text{$(a_{n})_{n\in\N}$ ist monoton fallend.}}
+      \lang{en}{\text{$(a_{n})_{n\in\N}$ is monotonically decreasing}}
+			\solution{compute}
+			\iscorrect{u}{>}{0}
+		\end{choice}
+		\begin{choice}
+			\lang{de}{\text{$(a_{n})_{n\in\N}$ ist monoton steigend.}}
+      \lang{en}{\text{$(a_{n})_{n\in\N}$ is monotonically increasing}}
+			\solution{compute}
+			\iscorrect{u}{<}{0}
+		\end{choice}
+		\begin{choice}
+			\lang{de}{\text{$(a_{n})_{n\in\N}$ ist beschränkt}}
+      \lang{en}{\text{$(a_{n})_{n\in\N}$ is bounded}}
+			\solution{compute}
+			\iscorrect{abs(q)}{<=}{1}
+		\end{choice}
+    \end{question}
+   
+   \begin{question} %fall q zwischen -1 und 0
+     \lang{de}{ 
+      	\text{Untersuchen Sie die Folge $(a_{n})_{n\in\N}$ 
+      	mit $a_{n}=\var{u} \cdot (\var{q})^{n}$ für alle $n\in\N$ auf Monotonie und Beschränktheit.
+		}
+    	}
+     \lang{en}{\text{Decide whether the sequence $(a_{n})_{n\in\N}$ 
+      	with $a_{n}=\var{u} \cdot (\var{q})^{n}$ for all $n\in\N$ is monotonic and/or bounded.}}
+    	\type{mc.yesno}
+    	\precision[false]{3}
+    	\displayprecision{3}
+    
+    	\begin{variables}
+    	\randint[Z]{u}{-10}{10}
+    	%\randint[Z]{q}{-5}{5}
+    	
+    	\randint{qqnenner}{6}{10}
+    	\randint{qqzahler}{1}{5}
+    	\function{q}{-qqzahler/qqnenner}
+    	\end{variables}
+		\begin{choice}
+			\lang{de}{\text{$(a_{n})_{n\in\N}$ ist monoton fallend}}
+      \lang{en}{\text{$(a_{n})_{n\in\N}$ is monotonically decreasing}}
+			\solution{false}
+			
+		\end{choice}
+		\begin{choice}
+		\lang{de}{\text{$(a_{n})_{n\in\N}$ ist monoton steigend}}
+    \lang{en}{\text{$(a_{n})_{n\in\N}$ is monotonically increasing}}
+			\solution{false}
+			
+		\end{choice}
+		\begin{choice}
+			\lang{de}{\text{$(a_{n})_{n\in\N}$ ist beschränkt}}
+      \lang{en}{\text{$(a_{n})_{n\in\N}$ is bounded}}
+			\solution{compute}
+			\iscorrect{abs(q)}{<=}{1}
+		\end{choice}
+    \end{question}
+    
+    \begin{question} %fall q zwischen 1 und 3
+     \lang{de}{ 
+      	\text{Untersuchen Sie die Folge $(a_{n})_{n\in\N}$ 
+      	mit $a_{n}=\var{u} \cdot (\var{q})^{n}$ für alle $n\in\N$ auf Monotonie und Beschränktheit.
+		}
+    	}
+     \lang{en}{\text{Decide whether the sequence $(a_{n})_{n\in\N}$ 
+      	with $a_{n}=\var{u} \cdot (\var{q})^{n}$ for all $n\in\N$ is monotonic and/or bounded.}}
+    	\type{mc.yesno}
+    	\precision[false]{3}
+    	\displayprecision{3}
+    
+    	\begin{variables}
+    	\randint[Z]{u}{-10}{10}
+    	\randint[Z]{q}{2}{4}
+    	
+    	\end{variables}
+		\begin{choice}
+			\lang{de}{\text{$(a_{n})_{n\in\N}$ ist monoton fallend}}
+      \lang{en}{\text{$(a_{n})_{n\in\N}$ is monotonically decreasing}}
+			\solution{compute}
+			\iscorrect{u}{<}{0}
+		\end{choice}
+		\begin{choice}
+			\lang{de}{\text{$(a_{n})_{n\in\N}$ ist monoton steigend}}
+    \lang{en}{\text{$(a_{n})_{n\in\N}$ is monotonically increasing}}
+			\solution{compute}
+			\iscorrect{u}{>}{0}
+		\end{choice}
+		\begin{choice}
+		\lang{de}{\text{$(a_{n})_{n\in\N}$ ist beschränkt}}
+      \lang{en}{\text{$(a_{n})_{n\in\N}$ is bounded}}
+			\solution{compute}
+			\iscorrect{abs(q)}{<=}{1}
+		\end{choice}
+    \end{question}
+	
+	\begin{question} %fall q zwischen -3 und -1
+     \lang{de}{ 
+      	\text{Untersuchen Sie die Folge $(a_{n})_{n\in\N}$ 
+      	mit $a_{n}=\var{u} \cdot (\var{q})^{n}$ für alle $n\in\N$ auf Monotonie und Beschränktheit.
+		}
+    	}
+     \lang{en}{\text{Decide whether the sequence $(a_{n})_{n\in\N}$ 
+      	with $a_{n}=\var{u} \cdot (\var{q})^{n}$ for all $n\in\N$ is monotonic and/or bounded.}}
+    	\type{mc.yesno}
+    	\precision[false]{3}
+    	\displayprecision{3}
+    
+    	\begin{variables}
+    	\randint[Z]{u}{-10}{10}
+    	\randint[Z]{q}{-3}{-1}
+    	
+    	\end{variables}
+		\begin{choice}
+			\lang{de}{\text{$(a_{n})_{n\in\N}$ ist monoton fallend}}
+      \lang{en}{\text{$(a_{n})_{n\in\N}$ is monotonically decreasing}}
+			\solution{false}
+		\end{choice}
+		\begin{choice}
+		\lang{de}{\text{$(a_{n})_{n\in\N}$ ist monoton steigend}}
+    \lang{en}{\text{$(a_{n})_{n\in\N}$ is monotonically increasing}}
+			\solution{false}
+		\end{choice}
+		\begin{choice}
+			\lang{de}{\text{$(a_{n})_{n\in\N}$ ist beschränkt}}
+      \lang{en}{\text{$(a_{n})_{n\in\N}$ is bounded}}
+			\solution{compute}
+			\iscorrect{abs(q)}{<=}{1}
+		\end{choice}
+    \end{question}
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+
+\end{content}

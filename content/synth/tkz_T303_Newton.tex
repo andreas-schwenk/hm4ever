@@ -1,0 +1,44 @@
+%This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)
+%https://creativecommons.org/licenses/by/4.0/legalcode
+\documentclass[rgb]{standalone}
+\usepackage{tkz-euclide}
+\definecolor{myorange}{hsb}{0.0833, 1, 0.8}
+\definecolor{mygreen}{hsb}{0.3333, 1, 0.8}
+\definecolor{myblue}{hsb}{0.5833, 1, 0.8}
+\definecolor{mymagenta}{hsb}{0.8333, 1, 0.8}
+\begin{document}
+	\begin{tikzpicture}[scale=1.5, font=\Large]
+		% Coordinate system
+		\tkzInit[xmin=0,xmax=7,ymin=-2,ymax=4]
+		\tkzGrid[color=lightgray]
+		\tkzDrawX[thick]
+		\tkzDrawY[thick]
+		\draw[dashed] (6.5,0) -- (6.5,2.60159);
+		\draw[dashed] (4.67032,0) -- (4.67032,1.1864);
+		\draw[dashed] (1.12086,0) -- (1.12086,-1.21144);
+		\draw[very thick,domain=0.73127:7, smooth, variable=\x,myblue] plot ({\x}, {1+1/4*(\x-4)+1/16*(\x-4)*(\x-4)*(\x-4)});
+		\draw[very thick ,myorange] (7, 3.31253) -- (4.67032,0);
+		\draw[very thick ,myorange] (1.12086, 0) -- (5.5,1.4637235);
+		\draw[very thick ,myorange] (0.683811, -2) -- (1.792293,0);
+		\node[very thick, draw, circle,fill,inner sep=2] at (6.5,0) {};
+		\node[very thick, draw, circle,fill,inner sep=2] at (6.5,2.60159) {};
+		\node[very thick, draw, circle,fill,inner sep=2] at (4.67032,0) {};
+		\node[very thick, draw, circle,fill,inner sep=2] at (4.67032,1.1864) {};
+		\node[very thick, draw, circle,fill,inner sep=2] at (1.12086,0) {};
+		\node[very thick, draw, circle,fill,inner sep=2] at (1.12086,-1.21144) {};
+		\node[very thick, draw, circle,fill,inner sep=2] at (1.79229,0) {};
+		\node[very thick, draw, circle,fill,inner sep=2, myblue] at (2,0) {};
+		% Labels
+		\node[below=0.5mm] at (6.5,0){$x_0$};
+		\node[above left=-1mm] at (6.5,2.60159){$P_0$};
+		\node[below=0.5mm] at (4.67032,0){$x_1$};
+		\node[above] at (4.67032,1.1864){$P_1$};
+		\node[below=0.5mm, myblue] at (2.1,0.05){$x^*$};
+		\node[above=0.5mm] at (1.12086,0){$x_2$};
+		\node[below right=-1mm] at (1.12086,-1.21144){$P_2$};
+		\node[above=0.5mm] at (1.792293,0){$x_3$};
+		\node[anchor=center,myorange] at (6,1){$T_{x_0}(x)$};
+		\node[anchor=center,myorange] at (3.8,0.5){$T_{x_1}(x)$};
+		\node[anchor=center,myorange] at (0.6,-1){$T_{x_2}(x)$};
+	\end{tikzpicture}	
+\end{document}

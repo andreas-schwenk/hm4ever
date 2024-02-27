@@ -1,0 +1,130 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü04: Lineare Abbildungen}
+    \lang{en}{Ex04: Linear maps}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Hier die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+      \link{generic_article}{content/rwth/HM1/T403a_Vektorraum/g_art_content_10b_lineare_abb.meta.xml}{10b_lineare_abb}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/14367}{Ticket 14367}
+\end{block}
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/}{Ticket }
+\end{block}
+
+\title{
+\lang{de}{Ü04: Lineare Abbildungen}
+\lang{en}{Ex04: Linear maps}
+}
+
+ 
+\lang{de}{Eine Basis des $\R^3$ sei gegeben durch 
+$C:=\left\{ \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix}; 
+\begin{pmatrix} 3 \\ 0 \\ 5 \end{pmatrix}; 
+\begin{pmatrix} 3 \\ 1\\ 7 \end{pmatrix} \right\}$ und eine Basis des $\R^2$ sei gegeben durch
+$B:=\left\{ \begin{pmatrix} 1 \\ 3\end{pmatrix}; \begin{pmatrix} 2 \\ 7 \end{pmatrix} \right\}$.
+Wir betrachten die lineare Abbildung
+\[
+f \colon \R^3 \to \R^2, \begin{pmatrix}x \\ y \\ z \end{pmatrix} \mapsto \begin{pmatrix}2 & -1 & 0 \\ -3 & 6 & 5\end{pmatrix}\cdot \begin{pmatrix}x \\ y \\ z \end{pmatrix}.
+\]
+Bestimmen Sie ${\,}_B f_C$.
+}
+
+\lang{en}{A basis of $\R^3$ is given by
+$C:=\left\{ \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix}; 
+\begin{pmatrix} 3 \\ 0 \\ 5 \end{pmatrix}; 
+\begin{pmatrix} 3 \\ 1\\ 7 \end{pmatrix} \right\}$ and a basis of $\R^2$ is given by
+$B:=\left\{ \begin{pmatrix} 1 \\ 3\end{pmatrix}; \begin{pmatrix} 2 \\ 7 \end{pmatrix} \right\}$.
+We consider the linear map
+\[
+f \colon \R^3 \to \R^2, \begin{pmatrix}x \\ y \\ z \end{pmatrix} \mapsto \begin{pmatrix}2 & -1 & 0 \\ -3 & 6 & 5\end{pmatrix}\cdot \begin{pmatrix}x \\ y \\ z \end{pmatrix}.
+\]
+Determine ${\,}_B f_C$.
+}
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+  \tab{
+  \lang{de}{Antwort}
+  \lang{en}{Answer}
+  }
+\[
+    \begin{pmatrix}0 & 10 & -29 \\ 1 & -2 & 17\end{pmatrix}
+    \]
+
+  \tab{
+  \lang{de}{Lösung}
+  \lang{en}{Solution}}
+  
+  \begin{incremental}[\initialsteps{1}]
+    \step \lang{de}{Wir müssen zunächst $f(v)$ für $v \in C$ bestimmen und dann davon die Koordinatendarstellung ausrechnen.}
+    \lang{en}{First of all we need to determine $f(v)$ for $v \in C$ and then calculate their coordinate representation.}
+    \[
+%    f\left( \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix} \right)= \begin{pmatrix}2 \\ 7\end{pmatrix},
+     f( \begin{pmatrix} 1 \\ 0 \\ 2 \end{pmatrix} )= \begin{pmatrix}2 \\ 7\end{pmatrix},
+    \]
+    \[
+%    f\left( \begin{pmatrix} 3 \\ 0 \\ 5 \end{pmatrix} \right) = \begin{pmatrix}6 \\ 16\end{pmatrix},
+     f( \begin{pmatrix} 3 \\ 0 \\ 5 \end{pmatrix} ) = \begin{pmatrix}6 \\ 16\end{pmatrix},
+    \]
+    \[
+%    f\left( \begin{pmatrix} 3 \\ 1\\ 7 \end{pmatrix} \right) = \begin{pmatrix}5 \\ 32 \end{pmatrix}
+     f( \begin{pmatrix} 3 \\ 1\\ 7 \end{pmatrix} ) = \begin{pmatrix}5 \\ 32 \end{pmatrix}
+    \]
+    \lang{de}{Damit ist \[{\,}_S f_C =\begin{pmatrix}2 & 6 & 5\\ 7 & 16 & 32\end{pmatrix}.\]}
+    \lang{en}{With that, it is \[{\,}_S f_C =\begin{pmatrix}2 & 6 & 5\\ 7 & 16 & 32\end{pmatrix}.\]}
+    
+    \step \lang{de}{Man liest die Basiswechsel-Matrix
+    \[
+    {\,}_S T_B= \begin{pmatrix}1 & 2\\ 3 & 7\end{pmatrix}
+    \]
+    ab.}
+    \lang{en}{We read off the basis transformation matrix
+    \[
+    {\,}_S T_B= \begin{pmatrix}1 & 2\\ 3 & 7\end{pmatrix}.
+    \]
+    }
+    \step \lang{de}{Nun gilt nach den \ref[10b_lineare_abb][Regeln zum Basiswechsel]{regel_bw}:
+    \[
+    {\,}_B f_C= {\,}_B T_S \cdot {\,}_S f_C = ({\,}_S T_B)^{-1} \cdot {\,}_S f_C .
+    \]
+    Die Inverse ist
+    \[
+    ({\,}_S T_B)^{-1} = \begin{pmatrix}7 & -2 \\ -3 & 1 \end{pmatrix}.
+    \]
+    Wir erhalten das Ergebnis
+    \[
+    \begin{pmatrix}7 & -2 \\ -3 & 1 \end{pmatrix} \cdot \begin{pmatrix}2 & 6 & 5 \\ 7 & 16 & 32\end{pmatrix}
+    = \begin{pmatrix}0 & 10 & -29 \\ 1 & -2 & 17\end{pmatrix}
+    \]}
+    \lang{en}{Now it holds because of the \ref[10b_lineare_abb][rules for the basis transformation]{regel_bw}:
+    \[
+    {\,}_B f_C= {\,}_B T_S \cdot {\,}_S f_C = ({\,}_S T_B)^{-1} \cdot {\,}_S f_C .
+    \]
+    The inverse matrixi is
+    \[
+    ({\,}_S T_B)^{-1} = \begin{pmatrix}7 & -2 \\ -3 & 1 \end{pmatrix}.
+    \]
+    We get the result
+    \[
+    \begin{pmatrix}7 & -2 \\ -3 & 1 \end{pmatrix} \cdot \begin{pmatrix}2 & 6 & 5 \\ 7 & 16 & 32\end{pmatrix}
+    = \begin{pmatrix}0 & 10 & -29 \\ 1 & -2 & 17\end{pmatrix}
+    \]}
+  \end{incremental}
+
+\end{tabs*}
+
+\end{content}

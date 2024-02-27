@@ -1,0 +1,169 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A03: Potenzgesetze}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Rechnen mit Potenzen}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+\usepackage{mumie.ombplus}
+
+\lang{de}{
+	\title{A03: Potenzgesetze}
+}
+
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9291}{Ticket 9291}
+\end{block}
+
+
+\begin{problem}
+	\begin{question}
+      \text{Berechne:}
+      \explanation{Einfach ausrechnen}
+
+
+      \begin{variables}
+                   \randint[Z]{n}{1}{5}
+                   \randint[Z]{m}{2}{3}
+                   \randint[Z]{b}{-4}{-1}
+                   \randint[Z]{c}{2}{4}
+                   \randint[Z]{a}{1}{5}
+                   \randint[Z]{z}{-3}{-1}
+                   
+                   \function[calculate]{fa}{n^m}
+                   \function[calculate]{fb}{b^c}
+                   \function[calculate]{fc}{a^z}
+                   
+       \end{variables}
+
+      \type{input.number}
+      \field{rational}
+
+      \begin{answer}
+            \text{$\var{n}^{\var{m}}=$ }
+            \solution{fa}
+      \end{answer}
+      
+      \begin{answer}
+            \text{$(\var{b})^{\var{c}}=$ }
+            \solution{fb}
+      \end{answer}
+      \begin{answer}
+            \text{$\var{a}^{\var{z}}=$ }
+            \solution{fc}
+      \end{answer}
+	\end{question}
+	
+	
+		\begin{question}
+      \text{Verwenden Sie die Potenzregeln, um die folgenden Ausdrücke als \textit{eine} Potenz 
+      der Form $a^b$ mit $b>0$ zu schreiben:\\
+      $\var{fa}=a^b$ mit $\, a=$\ansref, $b=$\ansref \\
+      $\var{fb}=a^b$ mit $\, a=$\ansref, $b=$\ansref \\
+      $\var{fc}=a^b$ mit $\, a=$\ansref, $b=$\ansref \\
+      $\var{fd}=a^b$ mit $\, a=$\ansref, $b=$\ansref \\
+      }
+      \explanation{}
+
+      \begin{variables}
+                   \randint[Z]{n}{2}{5}
+                   \randint[Z]{m}{2}{3}
+                   \randint[Z]{b}{-4}{4}
+                   \randint[Z]{c}{2}{4}
+                   \randint[Z]{a}{2}{5}
+                   \randint[Z]{z}{-3}{-1}
+                   \randint[Z]{x}{2}{7}
+                   \randint[Z]{d}{2}{7}
+                   
+                   \randadjustIf{m}{m = a}
+                   \randadjustIf{d,x}{d = x OR d=4 OR x=4 }
+                   \function[calculate]{aa}{n}
+                   \function[calculate]{ab}{m+a}
+                   \function[calculate]{ba}{d*x}
+                   \function[calculate]{bb}{n}
+                   \function[calculate]{ca}{d/x}
+                   \function[calculate]{cb}{a}
+                   \function[calculate]{da}{x}
+                   \function[calculate]{db}{d*n}
+%                   \function[calculate]{ea}{x}
+%                   \function[calculate]{eb}{a}
+                   
+                   \function{fa}{n^m * n^a}
+                   \function{fb}{d^n * x^n}
+                   \function{fc}{d^a * x^(-a)}
+                   \function{fd}{(x^d)^n}
+%                   \function{fe}{x^(-a)*(x^2)^a}
+                   
+       \end{variables}
+
+      \type{input.number}
+      \field{rational}
+
+      \begin{answer}
+            \solution{aa}
+      \end{answer}
+      \begin{answer}
+            \solution{ab}
+      \end{answer}
+      
+      
+      \begin{answer}
+            \solution{ba}
+      \end{answer}
+      \begin{answer}
+            \solution{bb}
+      \end{answer}
+      
+     
+      \begin{answer}
+            \solution{ca}
+      \end{answer}
+      \begin{answer}
+            \solution{cb}
+      \end{answer}
+      
+      
+      \begin{answer}
+            \solution{da}
+      \end{answer}
+      \begin{answer}
+            \solution{db}
+      \end{answer}
+      
+      
+      
+%      \begin{answer}
+%            \solution{ea}
+%      \end{answer}
+%      \begin{answer}
+%            \solution{eb}
+%      \end{answer}
+           
+      
+	\end{question}
+	%TODO AUFGABE 2
+	
+	
+\end{problem}
+\embedmathlet{gwtmathlet}
+
+
+\end{content}

@@ -1,0 +1,145 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Exercise 2: Fixed annuity}
+    \lang{de}{Ü02: exakte Annuität}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22681}{Ticket 22681}
+\end{block}
+
+
+
+\title{
+    \lang{en}{Exercise 2: Fixed annuity}
+    \lang{de}{Ü02: exakte Annuität}
+    \lang{zh}{...}
+    \lang{fr}{...}
+}
+
+\lang{de}{Ein Kredit von 36.000 \euro soll innerhalb von drei Jahren mittels jährlicher
+Annuitätentilgung zurückgezahlt werden. Der Kreditzins beträgt $i=10$ \%.\\
+Stellen Sie den Tilgungsplan auf.}
+\lang{en}{A loan of 36,000 \euro will be paid off in three years
+through yearly annuity payments. The interest rate on the loan
+is $i=10$ \%. \\
+Set up an amortization schedule.
+}
+
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+\tab{\lang{de}{benötigte Gleichungen}  \lang{en}{Equations}}
+\lang{de}{Wir betrachten jetzt den Fall, dass die Annuität konstant ist. Wir sprechen dann auch von 
+\notion{exakter Annuität}: $A_1=A_2=\ldots=A_n=A$.
+
+Dann entspricht die Bestimmung der Annuität genau der Berechnung einer jährlichen nachschüssigen 
+Rentenzahlung konstanter Höhe $A$ aus einem Rentenbarwert $S_0$ bei der Laufzeit $n$. Hierbei ist 
+$S_0$ die Kreditsumme. Aus der Rentenrechnung ergibt sich daher:
+
+\[A=S_0\frac{q^n(q-1)}{q^n-1}\]
+
+Die Restschuld $S_k$ lässt sich dann als Differenz von zinsbedingt angewachsener 
+Schuld $S_0q^{k-1}$ und den gezahlten Annuitäten $A\frac{q^k-1}{q-1}$ darstellen. Nach längerer
+Rechnung ergibt sich:
+\[S_k=S_0q^{k-1}-A\frac{q^k-1}{q-1}=S_0\frac{q^n-q^{k-1}}{q^n-1}\]
+
+Mit $T_1=S_0\frac{q-1}{q^n-1}$ ergibt sich:
+\[T_k=T_1q^{k-1}\text{ und }Z_k=A-T_1q^{k-1}\text{ sowie }S_k=S_0-T_1\frac{q^{k-1}-1}{q-1}.\]
+}
+
+\lang{en}{In the case considered here, the annuity payments are constant.
+We refer to this as a
+\notion{fixed annuity}: $A_1=A_2=\ldots=A_n=A$.
+
+Determining the payments is equivalent to computing the constant annual payments $A$ of an annuity
+in arrears with present value $S_0$ over a period of $n$ years.
+Here, $S_0$ is the loan amount. Using the annuity formulas, we find
+
+\[A=S_0\frac{q^n(q-1)}{q^n-1}\]
+
+The remaining debt $S_k$ can be computed as the difference between the
+debt with accrued interest $S_0q^{k-1}$ and the accumulated annuity
+$A \frac{q^k-1}{q-1}$. After some long calculations, we find:
+
+
+\[S_k=S_0q^{k-1}-A\frac{q^k-1}{q-1}=S_0\frac{q^n-q^{k-1}}{q^n-1}.\]
+
+Using $T_1=S_0\frac{q-1}{q^n-1}$, we find:
+\[T_k=T_1q^{k-1}\text{ and }Z_k=A-T_1q^{k-1}\text{ as well as }S_k=S_0-T_1\frac{q^{k-1}-1}{q-1}.\]
+}
+
+
+\tab{\lang{de}{Lösung} \lang{en}{Solution}}
+    \begin{incremental}[\initialsteps{1}]
+        \step \lang{de}{Die Lösung ist:
+        \begin{table}
+            \head
+            k   & $S_{k-1}$  &  $Z_k$   &   $T_k$  & $A$    & $S_k$\\
+            \body
+            \textbf{1} & 36.000 &    3.600      &  10.876,13 &  14.476,13    & 25.123,87\\
+            \textbf{2} & 25.123,87 &    2.512,39   &  11.963,75 &  14.476,13    & 13.160,12\\
+            \textbf{3} & 13.160,12 &    1.316,01   &  13.160,12 &  14.476,13    & 0\\
+        \end{table}}
+        \lang{en}{The solution is:
+        \begin{table}
+            \head
+            k   & $S_{k-1}$  &  $Z_k$   &   $T_k$  & $A$    & $S_k$\\
+            \body
+            \textbf{1} & 36,000 &    3,600      &  10,876.13 &  14,476.13    & 25,123.87\\
+            \textbf{2} & 25,123.87 &    2,512.39   &  11,963.75 &  14,476.13    & 13,160.12\\
+            \textbf{3} & 13,160.12 &    1,316.01   &  13,160.12 &  14,476.13    & 0\\
+        \end{table}}
+        \step
+        \lang{de}{Mit $S_0=36.000$ \euro und $n=3$ Jahre ergibt sich die Annuität $A$ zu:
+        \[A=S_0\frac{q^3(q-1)}{q^3-1}=14.476,13 \text{\euro}\]
+        Mit $Z_1=3.600$ ergibt sich für die Tilgungen...
+        \begin{align*}
+        T_1&=A-Z_1&=10.876,13 \text{ \euro }\\
+        T_2&=T_1\cdot q&=11.963,75\text{ \euro }\\
+        T_3&=T_1\cdot q^2&=13.160,12\text{ \euro }
+        \end{align*}
+        ... und für die Restschulden:
+        \begin{align*}
+        S_0&=S_0-T_1\frac{q^0-1}{q-1}&=S_0-0&=36.000 \text{ \euro }\\
+        S_1&=S_0-T_1\frac{q^1-1}{q-1}&=S_0-T_1&=25.123,87\text{ \euro }\\
+        S_2&=S_0-T_1\frac{q^2-1}{q-1}&=S_0-2,1T_1&=13.160,12\text{ \euro }
+        \end{align*}}
+        \lang{en}{Since $S_0=36,000$ \euro and the time is $n=3$ years,
+        the annuity $A$ is given by:
+        \[A=S_0\frac{q^3(q-1)}{q^3-1}=14,476.13 \text{\euro}\]
+        Since $Z_1=3,600$, the loan repayments are
+        \begin{align*}
+        T_1&=A-Z_1&=10,876.13 \text{ \euro }\\
+        T_2&=T_1\cdot q&=11,963.75\text{ \euro }\\
+        T_3&=T_1\cdot q^2&=13,160.12\text{ \euro }
+        \end{align*}
+        and the remaining debt is
+        \begin{align*}
+        S_0&=S_0-T_1\frac{q^0-1}{q-1}&=S_0-0&=36,000 \text{ \euro }\\
+        S_1&=S_0-T_1\frac{q^1-1}{q-1}&=S_0-T_1&=25,123.87\text{ \euro }\\
+        S_2&=S_0-T_1\frac{q^2-1}{q-1}&=S_0-2,1T_1&=13,160.12\text{ \euro }
+        \end{align*}}
+    \end{incremental}
+\end{tabs*}
+
+\end{content}
+

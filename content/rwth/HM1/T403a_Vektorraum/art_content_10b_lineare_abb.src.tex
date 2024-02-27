@@ -1,0 +1,1215 @@
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Lineare Abbildungen}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T403a_Basis_A.meta.xml}{T403a_Basis_A}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T403a_Basis_B.meta.xml}{T403a_Basis_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T403a_Basis_C.meta.xml}{T403a_Basis_C}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T403a_LinearMaps.meta.xml}{T403a_LinearMaps}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T403a_Rotation.meta.xml}{T403a_Rotation}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}        
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T401_Matrizenrechnung/g_art_content_02_matrizenmultiplikation.meta.xml}{content_02_matrizenmultiplikation}
+    \link{generic_article}{content/rwth/HM1/T306_Reelle_Quadratische_Matrizen/g_art_content_15_inverse_matrix.meta.xml}{inverse_matrix}
+    \link{generic_article}{content/rwth/HM1/T403a_Vektorraum/g_art_content_10a_vektorraum.meta.xml}{vektorraum-basis}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/}{Ticket }
+\end{block}
+\usepackage{mumie.ombplus}
+\ombchapter{4}
+\ombarticle{2}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+
+\lang{de}{\title{Lineare Abbildungen}}
+\lang{en}{\title{Linear maps}}
+  
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/13355}{Ticket 13355}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{\lang{de}{Lineare Abbildungen} \lang{en}{Linear maps}}
+
+\begin{definition}[\lang{de}{Lineare Abbildungen} \lang{en}{Linear maps}] \label{def_lin_abb}
+\lang{de}{
+ Gegeben seien zwei Vektorräume $V,W$ über einem Körper $\K$. Eine Funktion $f: V \to W$ heißt \emph{lineare Abbildung}, falls für alle $u,v \in V$ und alle $\alpha \in \K$ gilt:}
+\lang{en}{
+ Given are two vector spaces $V,W$ over a field $\K$. A function $f: V \to W$ is called \emph{linear maps}, if for all $u,v \in V$ and all $\alpha \in \K$ holds:}
+\[
+  f(u+v) = f(u) + f(v)
+ \]
+ \lang{de}{und} \lang{en}{and}
+ \[
+  f(\alpha v) = \alpha f(v).
+ \]
+\end{definition}
+
+\begin{example}
+\begin{tabs}
+\tab{\lang{de}{Matrixmultiplikation} \lang{en}{Matrix multiplication}}
+\lang{de}{
+Die Multiplikation mit einer $(m\times n)$-Matrix $A$ ist eine lineare Abbildung:
+\[  f:\mathbb{K}^n\to \mathbb{K}^m, \left( \begin{smallmatrix}
+x_1\\ x_2\\ \vdots \\ x_n
+\end{smallmatrix}\right) \mapsto A\cdot  \left( \begin{smallmatrix}
+x_1\\ x_2\\ \vdots \\ x_n
+\end{smallmatrix}\right) .\]
+Wie wir leicht mit den Eigenschaften der Matrizenrechnung verifizieren können, gilt
+\[
+ f(u+v)= A \cdot (u+v) = A \cdot u + A \cdot v = f(u) + f(v) 
+\]
+und
+\[
+  f(\alpha u)= A \cdot (\alpha u)= \alpha \cdot A \cdot u = \alpha f(u)
+\]
+für alle $u,v \in \K^n$ und $\alpha \in \K$.}
+\lang{en}{
+Multiplication with a $(m\times n)$-matrix $A$ is a linear map:
+\[  f:\mathbb{K}^n\to \mathbb{K}^m, \left( \begin{smallmatrix}
+x_1\\ x_2\\ \vdots \\ x_n
+\end{smallmatrix}\right) \mapsto A\cdot  \left( \begin{smallmatrix}
+x_1\\ x_2\\ \vdots \\ x_n
+\end{smallmatrix}\right) .\]
+With the help of the characteristics of matrix multiplication we can easily verify, that it holds:
+\[
+ f(u+v)= A \cdot (u+v) = A \cdot u + A \cdot v = f(u) + f(v) 
+\]
+and
+\[
+  f(\alpha u)= A \cdot (\alpha u)= \alpha \cdot A \cdot u = \alpha f(u)
+\]
+for all $u,v \in \K^n$ and $\alpha \in \K$.}
+
+\tab{$\R$}
+\lang{de}{
+Für den Vektorraum $\R$ gilt, dass die linearen Abbildungen $f:\R \to \R$ alle von der Form $f(x)=c\cdot x$ 
+mit einem beliebigen $c \in \R$ sind.
+
+Zunächst zeigen wir, dass für beliebige $c \in \R$ die Funktion $f:\R \to \R, f(x)=c\cdot x$ 
+die Eigenschaften einer linearen Abbildung gemäß Definition \ref{def_lin_abb} erfüllt:
+\[
+ f(x+y) = c\cdot (x+y) = cx + cy = f(x) + f(y) 
+\]
+und
+\[
+  f(\alpha x)= c \cdot (\alpha x)= \alpha (cx) = \alpha f(x)
+\]
+für alle $x,y \in \R$ und $\alpha \in \R$.}
+
+\lang{en}{
+Für den Vektorraum $\R$ gilt, dass die linearen Abbildungen $f:\R \to \R$ alle von der Form $f(x)=c\cdot x$ 
+mit einem beliebigen $c \in \R$ sind.
+
+Zunächst zeigen wir, dass für beliebige $c \in \R$ die Funktion $f:\R \to \R, f(x)=c\cdot x$ 
+die Eigenschaften einer linearen Abbildung gemäß Definition \ref{def_lin_abb} erfüllt:
+\[
+ f(x+y) = c\cdot (x+y) = cx + cy = f(x) + f(y) 
+\]
+und
+\[
+  f(\alpha x)= c \cdot (\alpha x)= \alpha (cx) = \alpha f(x)
+\]
+für alle $x,y \in \R$ und $\alpha \in \R$.}
+
+\lang{de}{
+Betrachten wir nun umgekehrt eine beliebige lineare Abbildung $f:\R \to \R$ im Vektorraum $\R$ 
+mit $x \mapsto f(x)$, so gilt aufgrund der Eigenschaften von linearen Abbildungen:
+\[ f(x)= f(x \cdot 1)\overset{x\in\R}{=}x\cdot f(1).\]
+
+Wir haben hierbei $x\in \R$ als einen Skalar interpretiert. 
+Wählen wir nun $c:=f(1)\in\R,$ so erhalten wir nunmehr als Funktionsvorschrift für $f$:\[f(x)=c \cdot x.\]}
+
+\lang{en}{
+For the vector space $\R$ holds, that the linear maps $f:\R \to \R$ are all of the form $f(x)=c\cdot x$ 
+with any $c \in \R$.
+
+First of all we check, that the functions $f:\R \to \R, f(x)=c\cdot x$ fufills the characteristics of a linear
+maps according to definition \ref{def_lin_abb} for any $c\in\R$:
+\[
+ f(x+y) = c\cdot (x+y) = cx + cy = f(x) + f(y) 
+\]
+and
+\[
+  f(\alpha x)= c \cdot (\alpha x)= \alpha (cx) = \alpha f(x)
+\]
+for all $x,y \in \R$ und $\alpha \in \R$.
+
+If we have a look at any linear map $f:\R \to \R$ in the vector space $\R$ 
+with $x \mapsto f(x)$, because of the characteristics of linear maps holds:
+\[ f(x)= f(x \cdot 1)\overset{x\in\R}{=}x\cdot f(1).\} \]
+
+Here we interpret $x\in\R$ as a skalar. 
+Now we set $c:=f(1)\in\R,$ and receive the function specification $f$:\[f(x)=c \cdot x.\]}
+
+\end{tabs}
+\end{example}
+
+\begin{block}[warning] 
+\lang{de}{
+In der Schulmathematik bezeichnet man Funktionen $f(x)=ax+b$ oft als lineare Funktionen.
+Sie sind aber keine linearen Abbildung. Die linearen Abbildungen müssen nämlich alle $f(0)=0$ erfüllen.
+Dies sieht man am einfachsten, wenn man $\alpha=0$ in der Definition wählt.
+Es müsste dann nämlich gelten:}
+\lang{en}{
+In school mathematics, functions like $f(x)=ax+b$ are often called linear functions. But they are not,
+since all linear maps need to fulfill $f(0)=0$. This is easy to unterstand, if we choose $\alpha=0$ 
+in the definition.
+Because then it would have to hold:}
+\[
+f(0)= f(0 \cdot x)= 0 \cdot f(x) = 0.
+\]
+\end{block}
+
+
+\section{\lang{de}{Abbildungsmatrizen} \lang{en}{Transformation matrix}}\label{sec:abbildungsmatrizen}
+\lang{de}{Wir haben gesehen, dass die Matrixmultiplikation eine lineare Abbildung ist.
+Nun zeigen wir, dass sich jede lineare Abbildung als Matrixmultiplikation interpretieren lässt.}
+\lang{en}{
+We already know, that matrix multiplication is a linear map. Now we will see, that every linear map can be interpret
+as matrix multiplication.}
+%%% Video K.M. -  1.Teil des Videos 10829 = 11284 Koordinaten_3a
+%
+\lang{de}{\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11284&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}}\\
+\\
+
+
+\lang{de}{Sei nun $f : V \to W$ eine lineare Abbildung zwischen den endlich-erzeugten
+$\K$-Vektorräumen $V$ mit Basis $B= \{v_1; . . .; v_n\}$ und $W$ mit Basis $C = \{w_1 ; . . .; w_m \}$.
+Wir nehmen nun ein Element $v = \sum_{j=1}^n \alpha_j v_j$ mit passenden $\alpha_j \in \K$ her. Dann gilt
+\[
+ f(v) = f\left( \sum_{j=1}^n \alpha_j v_j \right) =  \sum_{j=1}^n \alpha_j f(v_j).
+\]
+Wir können also das Abbildungsverhalten einer linearen Abbildung $f$ eindeutig beschreiben durch das Abbildungsverhalten der Basisvektoren $v_j$, $j=1,...n$.}
+\lang{en}{Let $f : V \to W$ be a linear map between the finitely generated $\K$-vector spaces $V$ with basis $B= \{v_1; . . .; v_n\}$ and $W$ with basis $C = \{w_1 ; . . .; w_m \}$.
+Now we use an element $v = \sum_{j=1}^n \alpha_j v_j$ with a suitable $\alpha_j \in \K$. Then it holds
+\[
+ f(v) = f\left( \sum_{j=1}^n \alpha_j v_j \right) =  \sum_{j=1}^n \alpha_j f(v_j).
+\]
+So we can describe a linear map $f$ uniquely by the mapping the basis vectors $v_j$, $j=1,...n$.}
+
+\lang{de}{
+Nun kann man $f(v_j)$ natürlich auch als Linearkombination der Basiselemente $w_k$ von $W$ darstellen.
+Wir schreiben $f(v_j) = \sum_{i=1}^m a_{ij} w_i$. Dann heißt $A= (a_{ij})$ die \emph{Abbildungsmatrix} bezüglich der Basen $B$ und $C$. Wir schreiben auch $A= {\,}_Cf_B$.}
+
+\lang{en}{
+Now we can represent $f(v_j)$ also as a linear combination of the basis elements $w_k$ of $W$.
+We note $f(v_j) = \sum_{i=1}^m a_{ij} w_i$. Then $A= (a_{ij})$ is called the \emph{transformation map} regarding the bases $B$ and $C$. We also write $A= {\,}_Cf_B$.}
+
+\begin{theorem}[\lang{de}{Eindeutigkeit der Abbildungsmatrix} \lang{en}{Uniqueness of the transformation matrix}] \label{abb_matrix}
+\lang{de}{Eine lineare Abbildung $f : V \to W$ zwischen endlich-erzeugten Vektorr\"aumen $V$ und $W$ \"uber $\K$ ist nach Festlegung von Basen $B$ von $V$ und $C$
+von $W$ durch die entsprechende Abbildungsmatrix $A = {\,}_Cf_B \in M(m,n;\K)$ eindeutig festgelegt.}
+\lang{en}{A linear map $f : V \to W$ between the finitely generated vector spaces $V$ and $W$ over $\K$
+is after choosing the bases $B$ of $V$ und $C$ of $W$ unique specified by the corresponding transformation matrix $A = {\,}_Cf_B \in M(m,n;\K)$.}
+\end{theorem}
+
+
+\begin{block}[warning]
+\lang{de}{Die Notation für die Abbildungsmatrix ist nicht einheitlich. Es gibt hier viele verschiedene Notationen. Eine
+weitere häufig benutzte Notation ist $M(f,B,C)$.}
+\lang{den}{The notation for the transformation matrix is not uniform. It exist several different notations. Another
+commonly used notation is $M(f,B,C)$.}
+\end{block}
+
+\lang{de}{Auf den Vorteil der in Satz \ref{abb_matrix} gewählten Notation gehen wir im nächsten Abschnitt (Regeln \ref{Basiswechsel} und \ref{regel_bw}) ein.}
+\lang{en}{We will discuss the advantage of the in theorem \ref{abb_matrix} chosen notation in the next section (rules \ref{Basiswechsel} and \ref{regel_bw}).}
+
+\begin{remark}
+\lang{de}{
+In der $j$-ten Spalte der Abbildungsmatrix ${\,}_Cf_B$ befindet sich der Vektor
+$\begin{pmatrix} a_{1j} \\ \vdots \\ a_{mj} \end{pmatrix}$. \\
+Dieser ist der Koordinatenvektor von $f(v_j)$ bezüglich der Basis $C$, wobei $B=\{v_1;\ldots ;v_n\}$ die Basis des Definitionsbereiches ist.}
+\lang{en}{
+The $j$th coloumn of the transformation matrix ${\,}_Cf_B$ is the vector
+$\begin{pmatrix} a_{1j} \\ \vdots \\ a_{mj} \end{pmatrix}$. \\
+This is the coordinate vector of $f(v_j)$ regarding the basis $C$, whereat $B=\{v_1;\ldots ;v_n\}$ is the basis of the domain of definition.}
+\end{remark}
+
+%%% Video K.M. 
+%
+\lang{de}{
+\begin{example}
+Das Beispiel im Video verdeutlicht, dass die Abbildungsmatrix zu einer linearen Abbildung $f: V \to W$ maßgelblich
+von der Festlegung der Basen für die Vektorräume $V$ und $W$ abhängt.
+
+\center{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10830&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+\end{example}}
+
+\begin{example}\label{bsp:lin_abb}
+\lang{de}{Gegeben sei die lineare Abbildung}
+\lang{en}{Given is a linear map}
+ \[
+ f: \R^3 \to \R^2, \begin{pmatrix}x \\ y\\ z \end{pmatrix} \mapsto \begin{pmatrix}-2x-3y+2z \\x-y+2z\end{pmatrix}.
+ \]
+
+\\
+\begin{incremental}
+
+\step %1
+\lang{de}{
+Bevor wir die Abbildungsmatrix bestimmen, überzeugen wir uns kurz davon, dass $f$ tatsächlich eine
+ lineare Abbildung ist.}
+ \lang{en}{
+Before we determine the transformation matrix, we check, that $f$ really is a linear map.}
+
+ \lang{de}{
+ Es gilt
+ \[
+ f(\begin{pmatrix}x \\ y\\ z \end{pmatrix}+\begin{pmatrix}\tilde{x} \\ \tilde{y}\\ \tilde{z} \end{pmatrix})
+ = f(\begin{pmatrix}x+\tilde{x} \\ y+\tilde{y}\\ z+\tilde{z} \end{pmatrix})
+ = \begin{pmatrix}-2(x+\tilde{x})-3(y+\tilde{y})+2(z+\tilde{z}) \\(x+\tilde{x})-(y+\tilde{y})+2(z+\tilde{z})\end{pmatrix}
+ = \begin{pmatrix}-2x-3y+2z \\x-y+2z\end{pmatrix}+\begin{pmatrix}-2\tilde{x} -3\tilde{y} +2\tilde{z} \\\tilde{x}-\tilde{y} +2\tilde{z}\end{pmatrix}
+ = f(\begin{pmatrix}x \\ y\\ z \end{pmatrix})+f(\begin{pmatrix}\tilde{x} \\ \tilde{y}\\ \tilde{z} \end{pmatrix})
+ \]
+ und
+ \[
+ f(\alpha \begin{pmatrix}x \\ y\\ z \end{pmatrix}) 
+ = f(\begin{pmatrix} \alpha x \\ \alpha y\\ \alpha z \end{pmatrix})
+ = \begin{pmatrix}-2\alpha x-3\alpha y+2\alpha z \\\alpha x-\alpha y+2\alpha z\end{pmatrix}
+ = \begin{pmatrix}\alpha(-2x-3y+2z) \\\alpha(x-y+2z)\end{pmatrix}
+ = \alpha \cdot \begin{pmatrix}-2x-3y+2z \\x-y+2z\end{pmatrix} = \alpha f( \begin{pmatrix}x \\ y\\ z \end{pmatrix}) .
+ \]}
+
+  \lang{en}{
+ It holds
+ \[
+ f(\begin{pmatrix}x \\ y\\ z \end{pmatrix}+\begin{pmatrix}\tilde{x} \\ \tilde{y}\\ \tilde{z} \end{pmatrix})
+ = f(\begin{pmatrix}x+\tilde{x} \\ y+\tilde{y}\\ z+\tilde{z} \end{pmatrix})
+ = \begin{pmatrix}-2(x+\tilde{x})-3(y+\tilde{y})+2(z+\tilde{z}) \\(x+\tilde{x})-(y+\tilde{y})+2(z+\tilde{z})\end{pmatrix}
+ = \begin{pmatrix}-2x-3y+2z \\x-y+2z\end{pmatrix}+\begin{pmatrix}-2\tilde{x} -3\tilde{y} +2\tilde{z} \\\tilde{x}-\tilde{y} +2\tilde{z}\end{pmatrix}
+ = f(\begin{pmatrix}x \\ y\\ z \end{pmatrix})+f(\begin{pmatrix}\tilde{x} \\ \tilde{y}\\ \tilde{z} \end{pmatrix})
+ \]
+ and
+ \[
+ f(\alpha \begin{pmatrix}x \\ y\\ z \end{pmatrix}) 
+ = f(\begin{pmatrix} \alpha x \\ \alpha y\\ \alpha z \end{pmatrix})
+ = \begin{pmatrix}-2\alpha x-3\alpha y+2\alpha z \\\alpha x-\alpha y+2\alpha z\end{pmatrix}
+ = \begin{pmatrix}\alpha(-2x-3y+2z) \\\alpha(x-y+2z)\end{pmatrix}
+ = \alpha \cdot \begin{pmatrix}-2x-3y+2z \\x-y+2z\end{pmatrix} = \alpha f( \begin{pmatrix}x \\ y\\ z \end{pmatrix}) .
+ \]}
+
+\step %2
+
+\lang{de}{
+Wir wollen nun die Abbildungsmatrix $A={\,}_Cf_B$ bestimmen mit den Basen $B=  \textcolor{gray}{\underbrace{\textcolor{black}{\left\{\begin{pmatrix}
+ 1 \\ 0 \\ 0 \end{pmatrix}; \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}; \begin{pmatrix} 1 \\ 1  \\ 1\end{pmatrix}\right\}}}_{\textcolor{gray}{=\left\{v_1;v_2;v_3\right\}}}}$ des $\R^3$
+ und $C=\textcolor{gray}{\underbrace{\textcolor{black}{\left\{ \begin{pmatrix} 1\\ 0 \end{pmatrix}; \begin{pmatrix} 1\\ 1\end{pmatrix}\right\}}}_{\textcolor{gray}{=\left\{w_1;w_2\right\}}}}$ des $\R^2$.}
+\lang{en}{
+We will now determine the transformation matrix $A={\,}_Cf_B$ with the bases $B=  \textcolor{gray}{\underbrace{\textcolor{black}{\left\{\begin{pmatrix}
+ 1 \\ 0 \\ 0 \end{pmatrix}; \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}; \begin{pmatrix} 1 \\ 1  \\ 1\end{pmatrix}\right\}}}_{\textcolor{gray}{=\left\{v_1;v_2;v_3\right\}}}}$ des $\R^3$
+ und $C=\textcolor{gray}{\underbrace{\textcolor{black}{\left\{ \begin{pmatrix} 1\\ 0 \end{pmatrix}; \begin{pmatrix} 1\\ 1\end{pmatrix}\right\}}}_{\textcolor{gray}{=\left\{w_1;w_2\right\}}}}$ des $\R^2$.}
+
+
+\lang{de}{
+ Wir bestimmen also zunächst $f(\begin{pmatrix}1 \\ 0 \\ 0\end{pmatrix})\textcolor{gray}{=f(v_1)}$
+ \[
+ f(\begin{pmatrix}1 \\ 0 \\ 0\end{pmatrix})= \begin{pmatrix}-2\cdot 1 -3 \cdot 0 +2 \cdot 0 \\ 1 \cdot 1 - 1 \cdot 0 +2 \cdot 0\end{pmatrix} = 
+ \begin{pmatrix} -2 \\ 1\end{pmatrix}\textcolor{gray}{=f(v_1)}
+ \]
+ Den Vektor auf der rechten Seite müssen wir nun als Koordinatenvektor bezüglich der Basis $C$ schreiben  \, 
+ (wie im  
+ \ref[vektorraum-basis][Beispiel zu $\R^2 $]{koord_vec} im vorherigen Kapitel)\textcolor{gray}{, d.h. als} \textcolor{gray}{$f(v_1)=\sum_{i=1}^{m=2}a_{i1}w_i=a_{11}w_1+a_{21}w_2$.}}
+ \lang{en}{
+Therefore we determine $f(\begin{pmatrix}1 \\ 0 \\ 0\end{pmatrix})\textcolor{gray}{=f(v_1)}$
+ \[
+ f(\begin{pmatrix}1 \\ 0 \\ 0\end{pmatrix})= \begin{pmatrix}-2\cdot 1 -3 \cdot 0 +2 \cdot 0 \\ 1 \cdot 1 - 1 \cdot 0 +2 \cdot 0\end{pmatrix} = 
+ \begin{pmatrix} -2 \\ 1\end{pmatrix}\textcolor{gray}{=f(v_1)}
+ \]
+ We need to write the vector on the right side as a coordinate vector regarding the basis $C$  \, 
+ (like we have done it in the
+ \ref[vektorraum-basis][example for $\R^2 $]{koord_vec} in the previous chapter)\textcolor{gray}{, so als} \textcolor{gray}{$f(v_1)=\sum_{i=1}^{m=2}a_{i1}w_i=a_{11}w_1+a_{21}w_2$.}}
+
+
+ \lang{de}{
+ Es gilt
+ \[
+ \begin{pmatrix} -2 \\ 1\end{pmatrix} = \textcolor{gray}{\underbrace{\textcolor{#CC6600}{-3}}_{=a_{11}}} \cdot \textcolor{gray}{\underbrace{\textcolor{black}{\begin{pmatrix} 1 \\ 0 \end{pmatrix}}}_{=w_1}}+\textcolor{gray}{\underbrace{\textcolor{#CC6600}{1}}_{=a_{21}}} \cdot \textcolor{gray}{\underbrace{\textcolor{black}{\begin{pmatrix} 1 \\ 1 \end{pmatrix}}}_{=w_2}}
+ \]
+ Der Koordinatenvektor von $\begin{pmatrix} -2 \\ 1\end{pmatrix}$ bezüglich $C$ ist somit gegeben durch 
+ $\textcolor{#CC6600}{\begin{pmatrix}-3 \\ 1 \end{pmatrix}}$.
+ Dies ist dann schon die erste Spalte der Matrix $A$.}
+ \lang{en}{
+ It holds
+ \[
+ \begin{pmatrix} -2 \\ 1\end{pmatrix} = \textcolor{gray}{\underbrace{\textcolor{#CC6600}{-3}}_{=a_{11}}} \cdot \textcolor{gray}{\underbrace{\textcolor{black}{\begin{pmatrix} 1 \\ 0 \end{pmatrix}}}_{=w_1}}+\textcolor{gray}{\underbrace{\textcolor{#CC6600}{1}}_{=a_{21}}} \cdot \textcolor{gray}{\underbrace{\textcolor{black}{\begin{pmatrix} 1 \\ 1 \end{pmatrix}}}_{=w_2}}
+ \]
+ The coordinate vector of $\begin{pmatrix} -2 \\ 1\end{pmatrix}$ regarding $C$ is given by 
+ $\textcolor{#CC6600}{\begin{pmatrix}-3 \\ 1 \end{pmatrix}}$.
+ So this is the first column of the matrix $A$.}
+
+\lang{de}{
+ Nun verfahren wir mit der zweiten Spalte von $A$ genauso fort.
+ Wir bestimmen $f(\begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix})\textcolor{gray}{=f(v_2)}$:
+ \[
+ f(\begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}) = \begin{pmatrix}-2 \cdot 0 - 3 \cdot 1 + 2 \cdot 0 \\ 1 \cdot 0 - 1 \cdot 1 + 2 \cdot 0 \end{pmatrix}
+ = \begin{pmatrix}-3 \\ -1 \end{pmatrix}\textcolor{gray}{=f(v_2)}
+ \]
+ Wir schreiben den Vektor auf der rechten Seite bezüglich der Basis $C$\textcolor{gray}{, d.h. als} \textcolor{gray}{$f(v_2)=\sum_{i=1}^{m=2}a_{i2}w_i=a_{12}w_1+a_{22}w_2$.}
+ \[
+ \begin{pmatrix}-3 \\ -1 \end{pmatrix} = \textcolor{gray}{\underbrace{\textcolor{#0066CC}{-2}}_{=a_{12}}} \cdot \textcolor{gray}{\underbrace{\textcolor{black}{\begin{pmatrix} 1 \\ 0 \end{pmatrix}}}_{=w_1}}\textcolor{gray}{\underbrace{\textcolor{#0066CC}{-1}}_{=a_{22}}} \cdot \textcolor{gray}{\underbrace{\textcolor{black}{\begin{pmatrix} 1 \\ 1 \end{pmatrix}}}_{=w_2}}
+ \]
+ Dann ist also die zweite Spalte von $A$ gegeben durch
+ $\textcolor{#0066CC}{\begin{pmatrix}-2 \\ -1 \end{pmatrix}}$.}
+
+ \lang{en}{
+ We proceed with the second column of $A$ the same way.
+ We determine $f(\begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix})\textcolor{gray}{=f(v_2)}$:
+ \[
+ f(\begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}) = \begin{pmatrix}-2 \cdot 0 - 3 \cdot 1 + 2 \cdot 0 \\ 1 \cdot 0 - 1 \cdot 1 + 2 \cdot 0 \end{pmatrix}
+ = \begin{pmatrix}-3 \\ -1 \end{pmatrix}\textcolor{gray}{=f(v_2)}
+ \]
+ We write the vector of the right side regarding the basis $C$\textcolor{gray}{, so as} \textcolor{gray}{$f(v_2)=\sum_{i=1}^{m=2}a_{i2}w_i=a_{12}w_1+a_{22}w_2$.}
+ \[
+ \begin{pmatrix}-3 \\ -1 \end{pmatrix} = \textcolor{gray}{\underbrace{\textcolor{#0066CC}{-2}}_{=a_{12}}} \cdot \textcolor{gray}{\underbrace{\textcolor{black}{\begin{pmatrix} 1 \\ 0 \end{pmatrix}}}_{=w_1}}\textcolor{gray}{\underbrace{\textcolor{#0066CC}{-1}}_{=a_{22}}} \cdot \textcolor{gray}{\underbrace{\textcolor{black}{\begin{pmatrix} 1 \\ 1 \end{pmatrix}}}_{=w_2}}
+ \]
+ Then the second column von $A$ is given by
+ $\textcolor{#0066CC}{\begin{pmatrix}-2 \\ -1 \end{pmatrix}}$.}
+
+ \lang{de}{
+ Schließlich bestimmen wir die dritte Spalte von $A$:
+ \[
+ f(\begin{pmatrix} 1 \\ 1 \\ 1 \end{pmatrix}) = \begin{pmatrix}-2 \cdot 1 - 3 \cdot 1 + 2 \cdot 1 \\ 1 \cdot 1 - 1 \cdot 1 + 2 \cdot 1 \end{pmatrix}
+ = \begin{pmatrix}-3 \\ 2 \end{pmatrix}\textcolor{gray}{=f(v_3)}
+ \]
+ Der Vektor auf der rechten Seite wird nun bezüglich der Basis $C$ ausgedrückt\textcolor{gray}{, d.h. als} \textcolor{gray}{$f(v_3)=\sum_{i=1}^{m=2}a_{i3}w_i=a_{13}w_1+a_{23}w_2$.}
+ \[
+ \begin{pmatrix}-3 \\ 2 \end{pmatrix} = \textcolor{gray}{\underbrace{\textcolor{#00CC00}{-5}}_{=a_{13}}} \cdot \textcolor{gray}{\underbrace{\textcolor{black}{\begin{pmatrix} 1 \\ 0 \end{pmatrix}}}_{=w_1}}+\textcolor{gray}{\underbrace{\textcolor{green}{2}}_{=a_{23}}} \cdot \textcolor{gray}{\underbrace{\textcolor{black}{\begin{pmatrix} 1 \\ 1 \end{pmatrix}}}_{=w_2}}
+ \]
+ Damit ist die Abbildungsmatrix $A$ gegeben durch
+ \[
+A={\,}_Cf_B=\begin{pmatrix}\textcolor{#CC6600}{-3} & \textcolor{#0066CC}{-2} & \textcolor{#00CC00}{-5} \\ \textcolor{#CC6600}{1} & \textcolor{#0066CC}{-1} & \textcolor{#00CC00}{2}\end{pmatrix}\textcolor{gray}{=\begin{pmatrix}a_{11}& a_{12}& a_{13}\\a_{21} & a_{22} & a_{23}\end{pmatrix}}
+ \]}
+ \lang{en}{
+Eventually we determine the third column of $A$:
+ \[
+ f(\begin{pmatrix} 1 \\ 1 \\ 1 \end{pmatrix}) = \begin{pmatrix}-2 \cdot 1 - 3 \cdot 1 + 2 \cdot 1 \\ 1 \cdot 1 - 1 \cdot 1 + 2 \cdot 1 \end{pmatrix}
+ = \begin{pmatrix}-3 \\ 2 \end{pmatrix}\textcolor{gray}{=f(v_3)}
+ \]
+ We note the vector on the right side now regarding the basis $C$ \textcolor{gray}{, so as} \textcolor{gray}{$f(v_3)=\sum_{i=1}^{m=2}a_{i3}w_i=a_{13}w_1+a_{23}w_2$.}
+ \[
+ \begin{pmatrix}-3 \\ 2 \end{pmatrix} = \textcolor{gray}{\underbrace{\textcolor{#00CC00}{-5}}_{=a_{13}}} \cdot \textcolor{gray}{\underbrace{\textcolor{black}{\begin{pmatrix} 1 \\ 0 \end{pmatrix}}}_{=w_1}}+\textcolor{gray}{\underbrace{\textcolor{green}{2}}_{=a_{23}}} \cdot \textcolor{gray}{\underbrace{\textcolor{black}{\begin{pmatrix} 1 \\ 1 \end{pmatrix}}}_{=w_2}}
+ \]
+ Therefore the transformations matrix $A$ is given by
+ \[
+A={\,}_Cf_B=\begin{pmatrix}\textcolor{#CC6600}{-3} & \textcolor{#0066CC}{-2} & \textcolor{#00CC00}{-5} \\ \textcolor{#CC6600}{1} & \textcolor{#0066CC}{-1} & \textcolor{#00CC00}{2}\end{pmatrix}\textcolor{gray}{=\begin{pmatrix}a_{11}& a_{12}& a_{13}\\a_{21} & a_{22} & a_{23}\end{pmatrix}}
+ \]}
+\end{incremental}
+\end{example}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{example} \label{ex:lin_abb_drehung}
+\lang{de}{
+Im $\R^2 \,$ lassen sich einige lineare Abbidungen gut veranschaulichen.}
+\lang{en}{
+In $\R^2 \,$ we can easily illustrate some linear maps.}
+
+  \begin{enumerate}
+  
+    \item \lang{de}{So ist beispielsweise eine Drehung um den Winkel $\alpha$ gegen den Uhrzeigersinn darstellbar durch die lineare Abbildung
+     \[
+     f_{\alpha}: \R^2 \to \R^2, \begin{pmatrix} x \\ y \end{pmatrix} \mapsto \begin{pmatrix} \cos(\alpha) & -\sin(\alpha) \\\sin(\alpha) & \cos(\alpha)\end{pmatrix} \cdot \begin{pmatrix} x \\ y \end{pmatrix},
+     \]
+
+    mit der Abbildungsmatrix  
+     $
+     A(\alpha)={\,}\begin{pmatrix} \cos(\alpha) & -\sin(\alpha) \\ \sin(\alpha) & \cos(\alpha)\end{pmatrix}
+     $}
+
+     \lang{en}{A rotation counterclockwiese through the angle $\alpha$ can be represented by the linear map
+     \[
+     f_{\alpha}: \R^2 \to \R^2, \begin{pmatrix} x \\ y \end{pmatrix} \mapsto \begin{pmatrix} \cos(\alpha) & -\sin(\alpha) \\\sin(\alpha) & \cos(\alpha)\end{pmatrix} \cdot \begin{pmatrix} x \\ y \end{pmatrix},
+     \]
+
+    with the transformation matrix  
+     $
+     A(\alpha)={\,}\begin{pmatrix} \cos(\alpha) & -\sin(\alpha) \\ \sin(\alpha) & \cos(\alpha)\end{pmatrix}
+     $}
+
+    \\
+%    \begin{showhide}[\buttonlabels{Zeige Beispiel}{Verstecke Beispiel}]
+    
+    \lang{de}{Betrachten wir den konkreten Fall $\alpha= \frac{\pi}{2}$, dann lautet die Abbildungsmatrix 
+     $
+     A\left(\frac{\pi}{2}\right)={\,}\begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}.
+     $
+    Sie bildet einen beliebigen Vektor $\begin{pmatrix} x \\ y \end{pmatrix} \in \R^2 \,$ auf den Vektor 
+    $\; \begin{pmatrix} 0 & -1 \\ 1 & 0\end{pmatrix} \cdot \begin{pmatrix} x \\ y \end{pmatrix}= \begin{pmatrix} -y \\ x \end{pmatrix}$ ab,
+    was genau einer Drehung des Vektors um $\frac{\pi}{2}$ gegen den Uhrzeigersinn entspricht, so zum Beispiel
+    \[
+       \begin{pmatrix} 4 \\ 2 \end{pmatrix}{\,} \mapsto {\,} \begin{pmatrix} 0 & -1 \\ 1 & 0\end{pmatrix} \cdot \begin{pmatrix} 4 \\ 2 \end{pmatrix}= \begin{pmatrix} -2 \\ 4 \end{pmatrix}
+    \]}
+
+    \lang{en}{For the concrete case $\alpha= \frac{\pi}{2}$, the transformationmatrix is 
+     $
+     A\left(\frac{\pi}{2}\right)={\,}\begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}.
+     $
+    The matrix maps any vector $\begin{pmatrix} x \\ y \end{pmatrix} \in \R^2 \,$ onto the vector
+    $\; \begin{pmatrix} 0 & -1 \\ 1 & 0\end{pmatrix} \cdot \begin{pmatrix} x \\ y \end{pmatrix}= \begin{pmatrix} -y \\ x \end{pmatrix}$,
+    which is exactly a counterclockwise rotation of the vector through the angle $\frac{\pi}{2}$, for example
+    \[
+       \begin{pmatrix} 4 \\ 2 \end{pmatrix}{\,} \mapsto {\,} \begin{pmatrix} 0 & -1 \\ 1 & 0\end{pmatrix} \cdot \begin{pmatrix} 4 \\ 2 \end{pmatrix}= \begin{pmatrix} -2 \\ 4 \end{pmatrix}
+    \]}
+
+        \begin{center}
+         \image{T403a_Rotation}
+        \end{center}  
+ 
+%    \end{showhide}
+    
+    \item \lang{de}{Weitere Beispiele für lineare Abbildungen im $\R^2$ sind} \lang{en}{More examples for linear maps in $\R^2$ are}
+    
+    \begin{enumerate}
+      \item \lang{de}{die \textcolor{#00CC00}{Spiegelung an der x-Achse}, gegeben durch die Abbildungsmatrix  $ \begin{pmatrix}  1 & 0 \\ 0 & -1 \end{pmatrix}.$ 
+            \\ Der Vektor $(4;2)$ wird hiermit abgebildet auf
+           \[
+           \begin{pmatrix} 4 \\ 2 \end{pmatrix}{\,} \mapsto {\,} \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} \cdot \begin{pmatrix} 4 \\ 2 \end{pmatrix}
+           = \textcolor{#00CC00}{\begin{pmatrix} 4 \\ -2 \end{pmatrix}}
+           \]}
+           \lang{en}{the \textcolor{#00CC00}{reflection along the $x$-axis}, given by the transformation matrix $ \begin{pmatrix}  1 & 0 \\ 0 & -1 \end{pmatrix}.$ 
+            \\ The vectors $(4;2)$ is mapped to
+           \[
+           \begin{pmatrix} 4 \\ 2 \end{pmatrix}{\,} \mapsto {\,} \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} \cdot \begin{pmatrix} 4 \\ 2 \end{pmatrix}
+           = \textcolor{#00CC00}{\begin{pmatrix} 4 \\ -2 \end{pmatrix}}
+           \]}
+
+      
+      \item \lang{de}{die \textcolor{#0066CC}{Spiegelung an der y-Achse}, gegeben durch die Abbildungsmatrix  $ \begin{pmatrix} -1 & 0 \\ 0 &  1 \end{pmatrix}.$
+            \\ Der Vektor $(4;2)$ wird hiermit abgebildet auf
+           \[
+           \begin{pmatrix} 4 \\ 2 \end{pmatrix}{\,} \mapsto {\,} \begin{pmatrix} -1 & 0 \\ 0 & 1 \end{pmatrix} \cdot \begin{pmatrix} 4 \\ 2 \end{pmatrix}
+           = \textcolor{#0066CC}{\begin{pmatrix} -4 \\ 2 \end{pmatrix}}
+           \]}
+           \lang{en}{the \textcolor{#0066CC}{reflection along the $y$-axis}, given b the transformation matrix  $ \begin{pmatrix} -1 & 0 \\ 0 &  1 \end{pmatrix}.$
+            \\ The vector $(4;2)$ is mapped to
+           \[
+           \begin{pmatrix} 4 \\ 2 \end{pmatrix}{\,} \mapsto {\,} \begin{pmatrix} -1 & 0 \\ 0 & 1 \end{pmatrix} \cdot \begin{pmatrix} 4 \\ 2 \end{pmatrix}
+           = \textcolor{#0066CC}{\begin{pmatrix} -4 \\ 2 \end{pmatrix}}
+           \]}
+
+
+      \item \lang{de}{eine \textcolor{#CC6600}{Streckung der y-Koordinate} um den Faktor $\lambda \in \R$, 
+            gegeben durch die Abbildungsmatrix $ \begin{pmatrix} 1 & 0 \\ 0 & \lambda \end{pmatrix}.$
+            \\ Der Vektor $(4;2)$ wird für $\lambda = 2$ hiermit abgebildet auf
+           \[
+           \begin{pmatrix} 4 \\ 2 \end{pmatrix}{\,} \mapsto {\,} \begin{pmatrix} 1 & 0 \\ 0 & 2 \end{pmatrix} \cdot \begin{pmatrix} 4 \\ 2 \end{pmatrix}
+           = \textcolor{#CC6600}{\begin{pmatrix} 4 \\ 4 \end{pmatrix}}
+           \]}
+           \lang{en}{a \textcolor{#CC6600}{extension of the $y$-coordinate} iwith the factor $\lambda \in \R$, 
+            given by the transformation matrix $ \begin{pmatrix} 1 & 0 \\ 0 & \lambda \end{pmatrix}.$
+            \\ For $\lambda = 2$ the vector $(4;2)$ is mapped to
+           \[
+           \begin{pmatrix} 4 \\ 2 \end{pmatrix}{\,} \mapsto {\,} \begin{pmatrix} 1 & 0 \\ 0 & 2 \end{pmatrix} \cdot \begin{pmatrix} 4 \\ 2 \end{pmatrix}
+           = \textcolor{#CC6600}{\begin{pmatrix} 4 \\ 4 \end{pmatrix}}
+           \]}
+
+
+          \begin{center}
+           \image{T403a_LinearMaps}
+          \end{center}  
+
+    \end{enumerate}
+  \end{enumerate}
+
+
+\end{example}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{example}
+\lang{de}{
+Wir betrachten den Vektorraum $P_n$ der reellen Polynomfunktionen $p$ mit $\text{grad} (p)\leq n$. \\
+Der sogenannte Differentialoperator
+\[
+D: P_n \to P_{n-1}, p \mapsto p\prime,
+\]
+der jedem Polynom aus $ P_n $ seine erste Ableitung $p\prime $ zuordnet.}
+\lang{en}{
+We consider the vector space $P_n$, which consists of the real polynomial functions $p$ with $\text{grad} (p)\leq n$. \\
+The so-called differential operator
+\[
+D: P_n \to P_{n-1}, p \mapsto p\prime,
+\]
+maps each polynomial function in $ P_n $ to its first derivative $p\prime $.}
+
+\\
+\begin{incremental}
+
+\step %1
+\lang{de}{
+Der Diffentialoperator $D$ ist eine lineare Abbildung, 
+denn nach den Ableitungsregeln gilt für je zwei Polynome $p$ und $q$ 
+\[
+D(p+q)=(p+q)\prime =p\prime +q\prime = D(p)+D(q).
+\]
+Außerdem ist 
+\[ 
+D(\alpha p)=(\alpha p)\prime = \alpha p\prime=\alpha D(p).
+\]}
+\lang{en}{
+The differential operator $D$ is a linear map, 
+because with the differential rule holds for zwo polynomial functions $p$ and $q$ 
+\[
+D(p+q)=(p+q)\prime =p\prime +q\prime = D(p)+D(q).
+\]
+Futhermore it is 
+\[ 
+D(\alpha p)=(\alpha p)\prime = \alpha p\prime=\alpha D(p).
+\]}
+
+\step %2
+
+\lang{de}{Für Polynomfunktionen können wir zudem genau angeben, wie die Ableitung aussieht.
+Ist 
+\[p(x)=\sum_{j=0}^n a_j x^j, \] dann ist \[p'(x)=\sum_{j=0}^{n-1} (j+1) \cdot a_{j+1} x^j.\]
+
+Wir wollen die Abbildungsmatrix bezüglich der Standardbasis $S:= \{p_0(x)=x^0=1; p_1(x)=x^1=x; ...; p_n(x)=x^n \}$ 
+auf dem Raum der Polynomfunktionen bestimmen.
+Dazu müssen wir also das Abbildungsverhalten der Polynomfunktionen $p_0(x),...,p_n(x)$ betrachten.
+Es ist}
+
+\lang{en}{We can give the exact form of the derivative of polynomial functions.
+Is
+\[p(x)=\sum_{j=0}^n a_j x^j, \] then it is \[p'(x)=\sum_{j=0}^{n-1} (j+1) \cdot a_{j+1} x^j.\]
+
+We want to determine the transformation matrix for the standard basis $S:= \{p_0(x)=x^0=1; p_1(x)=x^1=x; ...; p_n(x)=x^n \}$ 
+of the vector space of polynomial functions.
+Therefore we discuss how the polynomial functions $p_0(x),...,p_n(x)$ are mapped.
+It is}
+
+\begin{align*}
+    D(p_0)(x) &= p_0'(x)= 0 \\
+    D(p_1)(x) &= p_1'(x)=1 \\
+    D(p_2)(x) &= p_2'(x)=2x \\
+    & \vdots \\
+    D(p_n)(x) &= p_n'(x)=n x^{n-1}
+\end{align*}
+
+\lang{de}{Diese Funktionen müssen wir nun als Koordinatenvektoren bezüglich der Standardbasis des Vektorraums $P_{n-1}$ schreiben.
+Wir betrachten ein paar Beispiele:
+\[
+D(p_0)(x)= 0 = \textcolor{#CC6600}{0} \cdot 1 + \textcolor{#CC6600}{0} \cdot x + ... + \textcolor{#CC6600}{0} \cdot x^{n-1}
+\]
+Deshalb ist der Koordinatenvektor von $D(p_0)$ gegeben durch $\textcolor{#CC6600}{\begin{pmatrix}0 \\ 0 \\ \vdots \\ 0 \end{pmatrix}}$.}
+\lang{en}{We need to write those functions as coordinate vectore regarding to standard basis of the vector space $P_{n-1}$.
+We consider some examples:
+\[
+D(p_0)(x)= 0 = \textcolor{#CC6600}{0} \cdot 1 + \textcolor{#CC6600}{0} \cdot x + ... + \textcolor{#CC6600}{0} \cdot x^{n-1}
+\]
+Therefore is the coordinate vector of $D(p_0)$ given by $\textcolor{#CC6600}{\begin{pmatrix}0 \\ 0 \\ \vdots \\ 0 \end{pmatrix}}$.}
+
+\lang{de}{
+\[
+D(p_1)(x)= 1 = \textcolor{#0066CC}{1} \cdot 1 + \textcolor{#0066CC}{0} \cdot x + ... + \textcolor{#0066CC}{0} \cdot x^{n-1}
+\]
+Deshalb ist der Koordinatenvektor von $D(p_1)$ gegeben durch $\textcolor{#0066CC}{\begin{pmatrix} 1 \\ 0 \\ \vdots \\ 0 \end{pmatrix}}$.}
+\lang{en}{
+\[
+D(p_1)(x)= 1 = \textcolor{#0066CC}{1} \cdot 1 + \textcolor{#0066CC}{0} \cdot x + ... + \textcolor{#0066CC}{0} \cdot x^{n-1}
+\]
+Therefore the coordinate vector of $D(p_1)$ is given by $\textcolor{#0066CC}{\begin{pmatrix} 1 \\ 0 \\ \vdots \\ 0 \end{pmatrix}}$.}
+
+\lang{de}{Dies führt man nun fort bis zum letzten Polynom:
+\[
+D(p_n)(x)= n x^{n-1} = \textcolor{#00CC00}{0} \cdot 1 + \textcolor{#00CC00}{0} \cdot x + ... + \textcolor{#00CC00}{n} \cdot x^{n-1}
+\]
+Deshalb ist der Koordinatenvektor von $D(p_n)$ gegeben durch $\textcolor{#00CC00}{\begin{pmatrix}0 \\ \vdots \\ 0 \\ n \end{pmatrix}}$.}
+\lang{en}{We continue likes this until the last polynomial function:
+\[
+D(p_n)(x)= n x^{n-1} = \textcolor{#00CC00}{0} \cdot 1 + \textcolor{#00CC00}{0} \cdot x + ... + \textcolor{#00CC00}{n} \cdot x^{n-1}
+\]
+Therefore the coordinate vector of $D(p_n)$ is given by $\textcolor{#00CC00}{\begin{pmatrix}0 \\ \vdots \\ 0 \\ n \end{pmatrix}}$.}
+
+
+
+\lang{de}{
+Die Abbildungsmatrix ist damit gegeben durch}
+\lang{en}{
+The transformation matrix is given by}
+\[
+A={\,}_SD_S=\begin{pmatrix} \textcolor{#CC6600}{0} & \textcolor{#0066CC}{1} & 0 & 0 & \ldots & \textcolor{#00CC00}{0}
+\\ \textcolor{#CC6600}{0} & \textcolor{#0066CC}{0} & 2 & 0 & \ldots & \textcolor{#00CC00}{0}
+\\ \textcolor{#CC6600}{0} & \textcolor{#0066CC}{0} & 0 & 3 & & \textcolor{#00CC00}{0}
+\\ \vdots & \vdots & \vdots &  & \ddots  & \vdots
+\\ \textcolor{#CC6600}{0} & \textcolor{#0066CC}{0} & 0 & 0 & \ldots & \textcolor{#00CC00}{n}
+\end{pmatrix}.
+\]
+\end{incremental}
+
+%%% Video K.M. -  2.Teil des Videos 10829 = 11285 Koordinaten_3b
+%
+\lang{de}{\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11285&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}}\\
+\\
+
+
+\end{example}
+
+\section{\lang{de}{Basiswechsel und Koordinatentransformation} \lang{en}{Basis transformation and coordinate transformation}} \label{sec:basiswechsel}
+
+\lang{de}{In Beispiel \ref{bsp:lin_abb} war es nicht sehr schwer, die Vektoren bezüglich der Basis $C$ zu schreiben.
+In höheren Dimensionen jedoch wird das Bestimmen der Koordinatenvektoren schwierig. Um in solchen Fällen
+den Koordinatenvektor zu bestimmen, bedienen wir uns folgender Tatsache:}
+\lang{en}{In example \ref{bsp:lin_abb} is was easy to note the vectors with respect of the basis $C$.
+But in higher dimensions it gets more difficult to determine the coordinate vectors.
+For those cases, we may use the following fact:}
+
+\begin{rule}[\lang{de}{Basiswechsel} \lang{en}{Basis transformation}] \label{Basiswechsel}
+\lang{de}{Es seien $V,W,U$ drei $\K$-Vektorräume und $f:V \to W$ und $g: W \to U$ lineare Abbildungen. \\
+ Desweiteren seien $B$ eine Basis von $V$, $C$ eine Basis von $W$ und $D$ eine Basis von $U$. Dann gilt
+ \[
+  {\,}_D (g \circ f)_B = {\,}_D{g}_C \cdot _C{f}_B.
+ \]}
+ \lang{en}{Let $V,W,U$ be three $\K$-vector spaces and $f:V \to W$ and $g: W \to U$ linear maps. \\
+ Furthermore is $B$ a basis of $V$, $C$ a basis of $W$ and $D$ a basis of $U$. Then holds
+ \[
+  {\,}_D (g \circ f)_B = {\,}_D{g}_C \cdot _C{f}_B.
+ \]}
+\end{rule}
+
+\begin{proof*}[\lang{de}{Beweis} \lang{en}{Proof}]
+% \begin{block}[explanation]
+\lang{de}{
+Seien $B = \{v_1 ; . . . ; v_n \}$, $C=\{ w_1;...;w_m \}$ und $D=\{ u_1;...;u_l\}.$ 
+Wir betrachten nun die Spalte $i$ der Matrix ${\,}_D (g \circ f)_B.$
+Dies entspricht der Koordinatendarstellung von $(g\circ f)(v_j)$ bezüglich der Basis $D.$}
+\lang{en}{
+Let be $B = \{v_1 ; . . . ; v_n \}$, $C=\{ w_1;...;w_m \}$ and $D=\{ u_1;...;u_l\}.$  
+We consider now the column $i$ of the matrix ${\,}_D (g \circ f)_B.$
+This corresponds to the coordinate representation of $(g\circ f)(v_j)$ with respect of the basis $D.$}
+
+\lang{de}{Nun l\"asst sich $f(v_j)$ schreiben als
+\[
+f(v_j)= \sum_{i=1}^m a_{ij} w_i
+\]
+wobei $A=(a_{ij})$ die Abbildungsmatrix ${\,}_C{f}_B$ ist.  Da $g$ eine lineare Abbildung ist, gilt 
+\[
+(g\circ f)(v_j) = g(\sum_{i=1}^m a_{ij} w_i)= \sum_{i=1}^m a_{ij} g(w_i).
+\]
+Nun l\"asst sich auch $g(w_i)$ schreiben als
+
+\[g(w_i)=\sum_{k=1}^l \tilde{a}_{ki} u_k,
+\]
+wobei $\tilde{A}=(\tilde{a}_{ki})$ die Abbildungsmatrix von ${\,}_D{g}_C$ ist. Daher folgt
+\[
+(g\circ f)(v_j) = \sum_{i=1}^m a_{ij} \cdot g(w_i)
+    = \sum_{i=1}^m a_{ij} \cdot \left( \sum_{k=1}^l \tilde{a}_{ki} u_k \right)
+    = \sum_{i=1}^m \sum_{k=1}^l a_{ij} \tilde{a}_{ki} u_k 
+    = \sum_{k=1}^l \left( \sum_{i=1}^m  a_{ij} \tilde{a}_{ki}\right) u_k
+\]}
+\lang{en}{Now we can write $f(v_j)$ as
+\[
+f(v_j)= \sum_{i=1}^m a_{ij} w_i
+\]
+with the transformation matrix $A=(a_{ij})$ of ${\,}_C{f}_B$.  Since $g$ is a linear map, it holds 
+\[
+(g\circ f)(v_j) = g(\sum_{i=1}^m a_{ij} w_i)= \sum_{i=1}^m a_{ij} g(w_i).
+\]
+Now we can also write $g(w_i)$ as
+
+\[g(w_i)=\sum_{k=1}^l \tilde{a}_{ki} u_k,
+\]
+with the tranformation matrix $\tilde{A}=(\tilde{a}_{ki})$ of ${\,}_D{g}_C$. Therefore concludes
+\[
+(g\circ f)(v_j) = \sum_{i=1}^m a_{ij} \cdot g(w_i)
+    = \sum_{i=1}^m a_{ij} \cdot \left( \sum_{k=1}^l \tilde{a}_{ki} u_k \right)
+    = \sum_{i=1}^m \sum_{k=1}^l a_{ij} \tilde{a}_{ki} u_k 
+    = \sum_{k=1}^l \left( \sum_{i=1}^m  a_{ij} \tilde{a}_{ki}\right) u_k
+\]}
+
+\lang{de}{
+Die Behauptung der Regel ist nun äquivalent dazu, dass der Eintrag $(k,i)$ der 
+Matrix ${\,}_D{g}_C \cdot _C{f}_B$ gleich $\sum_{i=1}^m  a_{ij} \tilde{a}_{ki}$.
+Dies ist richtig, wenn man sich an die 
+\ref[content_02_matrizenmultiplikation][Regel für Matrixmultiplikation]{sec:matrix-matrix-mult}
+ zurück erinnert.}
+ \lang{en}{
+The claim of the rule s equivalent to the thesis that, the entry $(k,i)$ of the matrix ${\,}_D{g}_C \cdot _C{f}_B$ 
+is equal to $\sum_{i=1}^m  a_{ij} \tilde{a}_{ki}$.
+This is correct, since we know the 
+\ref[content_02_matrizenmultiplikation][rules for matrix multiplication]{sec:matrix-matrix-mult}.}
+% \end{block}
+\end{proof*}
+
+\lang{de}{Aus Regel \ref{Basiswechsel} lässt sich nun einiges folgern. Als erste Anwendung beschäftigen wir uns mit Koordinatenwechseln.}
+\lang{en}{There are several things we can conclude from rule \ref{Basiswechsel}. The first application we want to look at is the coordinate transformation.}
+
+\lang{de}{
+Bezüglich einer Basis $B = \{v_1 ; . . . ; v_n \}$ von $\K^n$ besitze der Vektor $v \in \K^n$ 
+die Koordinatendarstellung \[\begin{pmatrix} b_{1} \\ \vdots \\ b_{n} \end{pmatrix},\] 
+wobei
+$
+ v= \sum_{j=1}^n b_j v_j
+$
+gelte.}
+\lang{en}{
+With respect to a basis $B = \{v_1 ; . . . ; v_n \}$ of $\K^n$ the vector $v \in \K^n$ 
+has the coordinate respresentation \[\begin{pmatrix} b_{1} \\ \vdots \\ b_{n} \end{pmatrix},\] 
+whereat
+$
+ v= \sum_{j=1}^n b_j v_j
+$
+holds.}
+
+\lang{de}{
+Gehen wir zu einer neuen Basis $C = \{w_1 ; . . . ; w_n\}$ über, in der $v$ sich linear darstellen lässt
+durch $v = \sum_{j=1}^n c_j w_j ,$
+so besitzt derselbe Vektor bezüglich der neuen Basis $C$ die Koordinatendarstellung 
+\[\begin{pmatrix} c_{1} \\ \vdots \\ c_{n} \end{pmatrix}.\]}
+\lang{en}{
+If we transform to a new basis $C = \{w_1 ; . . . ; w_n\}$, in which $v$ can be displayed as $v = \sum_{j=1}^n c_j w_j ,$
+the coordinate representation of the same vector with respect to the new basis $C$ is 
+\[\begin{pmatrix} c_{1} \\ \vdots \\ c_{n} \end{pmatrix}.\]}
+
+\lang{de}{
+Nun können wir die Identitätsabbildung $id$ auf einem beliebigen Vektorraum $V$, d.h. $id: \, V \to V, v \mapsto v$ als 
+lineare Abbildung wählen und $B=\{v_1;...;v_n\}$ und $C=\{w_1;...;w_n\}$ zwei Basen des Vektorraums $V$.
+Dann nennen wir die zugehörige Abbildungsmatrix ${\,}_C T_B \, (= {\,}_C id_B)$ auch \emph{Basistransformation} von der Basis $B$ in die Basis $C$. 
+In dieser Abbildungsmatrix lässt sich dann in der Spalte $j$ die Koordinatendarstellung des Basisvektors $v_j$ 
+bezüglich der Basis $C$ ablesen.}
+\lang{en}{
+We may utilise the identity map $id$ on any vector space, i.e. $id: \, V \to V, v \mapsto v$ as
+as liner map. Furthermore may $B=\{v_1;...;v_n\}$ and $C=\{w_1;...;w_n\}$ be two bases of the vector space $V$.
+Then we call the corresponding transformation matrix ${\,}_C T_B \, (= {\,}_C id_B)$ \emph{basis transformation} from the basis $B$ to the basis $C$. 
+In this transformations matrix we find the coordine representation of the basis vector $v_j$ with respect to the basis $C$ in the $j$th column.}
+
+%
+
+\begin{example} \label{bsp:basiswechsel}
+
+ \lang{de}{Wir betrachten die Identitätsabbildung auf dem $\R^2$
+ \[
+ id: \R^2 \to \R^2, \begin{pmatrix}x \\ y \end{pmatrix} \mapsto \begin{pmatrix}x \\ y\end{pmatrix}.
+ \]
+ die, wie man leicht erkennen kann, eine lineare Abbildung ist. Hiermit bestimmen wir nun die \emph{Basistransformation} 
+ ${\,}_C T_S$ von der Standardbasis $S$ des $\R^2$ 
+ in die Basis $C=\left\{ \begin{pmatrix} 1\\ 0 \end{pmatrix}; \begin{pmatrix} 1\\ 1\end{pmatrix}\right\}$ des $\R^2$, \, 
+ die der Abbildungsmatrix ${\,}_C id_S$ entspricht.}
+ \lang{en}{We consider the identity map of $\R^2$
+ \[
+ id: \R^2 \to \R^2, \begin{pmatrix}x \\ y \end{pmatrix} \mapsto \begin{pmatrix}x \\ y\end{pmatrix}.
+ \]
+ which is a linear map, as we can easily check. Here we determine the \emph{basis transformation} 
+ ${\,}_C T_S$ of the standard basis $S$ of $\R^2$ 
+ into the basis $C=\left\{ \begin{pmatrix} 1\\ 0 \end{pmatrix}; \begin{pmatrix} 1\\ 1\end{pmatrix}\right\}$ of $\R^2$, \, 
+ which corresponds to the transformation map ${\,}_C id_S$.}
+
+\\
+%
+% Klappfunktion entfernt, da Beispiel mit Anschauung wichtig zum Verständnis
+%
+%\begin{incremental}
+
+%\step %1
+
+ \lang{de}{Aus 
+ \[ id(\begin{pmatrix} 1\\ 0 \end{pmatrix})=\begin{pmatrix} 1\\ 0 \end{pmatrix}
+    = \textcolor{#00CCCC}{1} \cdot \begin{pmatrix} 1\\ 0 \end{pmatrix} + \textcolor{#00CCCC}{0} \cdot \begin{pmatrix} 1\\ 1\end{pmatrix}
+ \]
+ und
+ \[id(\begin{pmatrix} 0\\ 1 \end{pmatrix})=\begin{pmatrix} 0\\ 1 \end{pmatrix}
+    = \textcolor{#CC00CC}{-1} \cdot \begin{pmatrix} 1\\ 0 \end{pmatrix} + \textcolor{#CC00CC}{1} \cdot \begin{pmatrix} 1\\ 1\end{pmatrix} 
+ \] 
+ ergibt sich die Abbildungsmatrix (mit der Koordinatendarstellung des Basisvektors $v_j$ 
+bezüglich der Basis $C$ in der Spalte $j\,$)
+ \[
+ {\,}_C id_S= \begin{pmatrix} \textcolor{#00CCCC}{1} & \textcolor{#CC00CC}{-1} \\ \textcolor{#00CCCC}{0} & \textcolor{#CC00CC}{1} \end{pmatrix}={\,}_C T_S.
+ \]}
+
+ \lang{en}{The transformationmatrix ${\,}_C id_S $ consists of  
+ \[ id(\begin{pmatrix} 1\\ 0 \end{pmatrix})=\begin{pmatrix} 1\\ 0 \end{pmatrix}
+    = \textcolor{#00CCCC}{1} \cdot \begin{pmatrix} 1\\ 0 \end{pmatrix} + \textcolor{#00CCCC}{0} \cdot \begin{pmatrix} 1\\ 1\end{pmatrix}
+ \]
+ and
+ \[id(\begin{pmatrix} 0\\ 1 \end{pmatrix})=\begin{pmatrix} 0\\ 1 \end{pmatrix}
+    = \textcolor{#CC00CC}{-1} \cdot \begin{pmatrix} 1\\ 0 \end{pmatrix} + \textcolor{#CC00CC}{1} \cdot \begin{pmatrix} 1\\ 1\end{pmatrix}. 
+ \] 
+The $j$th column represents the coordinate representation of the basis vector $v_j$ with respect of the basis $C$.
+The transformation matrix is then
+ \[
+ {\,}_C id_S= \begin{pmatrix} \textcolor{#00CCCC}{1} & \textcolor{#CC00CC}{-1} \\ \textcolor{#00CCCC}{0} & \textcolor{#CC00CC}{1} \end{pmatrix}={\,}_C T_S.
+ \]}
+
+%%%%%%%%%%
+%\\
+%\step %2
+
+\lang{de}{Mit der Basistransformation kann nun jeder beliebige Vektor $\begin{pmatrix} x\\ y \end{pmatrix} \in \R^2$ aus der Standardbasis $S$ in seine
+Koordinatendarstellung bezüglich der Basis $C$ umgerechnet werden. Betrachten wir als Beispiel den Vektor $\textcolor{#00CC00}{\begin{pmatrix} 4\\ 2 \end{pmatrix}}$.
+Dieser hat bzgl. der Standardbasis die Koordinatendarstellung $\textcolor{#0066CC}{\begin{pmatrix} 4\\ 2 \end{pmatrix}}$, denn es gilt:
+\[
+   \textcolor{#00CC00}{\begin{pmatrix} 4\\ 2 \end{pmatrix}}=\textcolor{#0066CC}{4} \cdot \begin{pmatrix} 1\\ 0 \end{pmatrix} + \textcolor{#0066CC}{2} \cdot \begin{pmatrix} 0\\ 1 \end{pmatrix}
+\]
+Graphisch dargestellt, in dem von der Standardbasis $S$ aufgespannten Koordinatensystem, erhalten wir
+    \begin{center}
+     \image{T403a_Basis_A}
+    \end{center}  }
+
+\lang{en}{The basis transformation transforms any vector $\begin{pmatrix} x\\ y \end{pmatrix} \in \R^2$ from the standard basis $S$ 
+into its coordinate representation regarding the basies $C$. Let us consider the vector $\textcolor{#00CC00}{\begin{pmatrix} 4\\ 2 \end{pmatrix}}$ as an example.
+The coordinate representation with respect to the standard basis is $\textcolor{#0066CC}{\begin{pmatrix} 4\\ 2 \end{pmatrix}}$, because it holds:
+\[
+   \textcolor{#00CC00}{\begin{pmatrix} 4\\ 2 \end{pmatrix}}=\textcolor{#0066CC}{4} \cdot \begin{pmatrix} 1\\ 0 \end{pmatrix} + \textcolor{#0066CC}{2} \cdot \begin{pmatrix} 0\\ 1 \end{pmatrix}
+\]
+In the coordinate system, set up by the standard basis $S$, we have graphically represented
+    \begin{center}
+     \image{T403a_Basis_A} %Sprache anpassen!!
+    \end{center} }
+
+%\step %3
+
+\lang{de}{
+Mithilfe der Transformationsmatrix ${\,}_C T_S \,$ zum Basiswechsel berechnen wir nun die Koodinatendarstellung
+des Vektors $ \textcolor{#00CC00}{\begin{pmatrix} 4\\ 2 \end{pmatrix}}$ bzgl. der Basis $C=\left\{ \begin{pmatrix} 1\\ 0 \end{pmatrix}; \begin{pmatrix} 1\\ 1\end{pmatrix}\right\}$
+\[
+   {\,}_C T_S \, \cdot \begin{pmatrix} 4\\ 2 \end{pmatrix}=\begin{pmatrix} 1 & -1 \\ 0 & 1 \end{pmatrix}\cdot \begin{pmatrix} 4\\ 2 \end{pmatrix}
+   = \textcolor{#CC6600}{\begin{pmatrix} 2\\ 2 \end{pmatrix}}
+\]
+Es ist also 
+\[
+   \textcolor{#00CC00}{\begin{pmatrix} 4\\ 2 \end{pmatrix}}=\textcolor{#CC6600}{2} \cdot \begin{pmatrix} 1\\ 0 \end{pmatrix} + \textcolor{#CC6600}{2} \cdot \begin{pmatrix} 1\\ 1 \end{pmatrix},
+\] 
+was man auch grapisch ablesen kann
+    \begin{center}
+     \image{T403a_Basis_B}
+    \end{center}}   
+
+\lang{en}{
+With the help of the transformation matrix ${\,}_C T_S \,$ of this basis transformation we may now calculate
+the coordinate representation of the vector $ \textcolor{#00CC00}{\begin{pmatrix} 4\\ 2 \end{pmatrix}}$
+regarding the basis $C=\left\{ \begin{pmatrix} 1\\ 0 \end{pmatrix}; \begin{pmatrix} 1\\ 1\end{pmatrix}\right\}$
+\[
+   {\,}_C T_S \, \cdot \begin{pmatrix} 4\\ 2 \end{pmatrix}=\begin{pmatrix} 1 & -1 \\ 0 & 1 \end{pmatrix}\cdot \begin{pmatrix} 4\\ 2 \end{pmatrix}
+   = \textcolor{#CC6600}{\begin{pmatrix} 2\\ 2 \end{pmatrix}}
+\]
+So we have 
+\[
+   \textcolor{#00CC00}{\begin{pmatrix} 4\\ 2 \end{pmatrix}}=\textcolor{#CC6600}{2} \cdot \begin{pmatrix} 1\\ 0 \end{pmatrix} + \textcolor{#CC6600}{2} \cdot \begin{pmatrix} 1\\ 1 \end{pmatrix},
+\] 
+which we can also read from the graphic.
+    \begin{center}
+     \image{T403a_Basis_B}
+    \end{center}}   
+
+%\step %4
+\lang{de}{
+Die graphische Darstellung in dem von der Basis $C$ aufgespannten Koordinatensystem ist dann
+
+    \begin{center}
+     \image{T403a_Basis_C}
+    \end{center}} 
+
+\lang{en}{
+The graphic representation of the coordinate system, set up by the basis $C$, is now
+
+    \begin{center}
+     \image{T403a_Basis_C} %Sprache anpassen!
+    \end{center}} 
+%\end{incremental}
+
+\end{example}
+%%%%%%%%%
+\\
+\begin{example}
+\lang{de}{
+ Wir betrachten nun noch einmal die lineare Abbildung aus Beispiel \ref{bsp:lin_abb}:
+ \[
+ f: \R^3 \to \R^2, \begin{pmatrix}x \\ y\\ z \end{pmatrix} \mapsto \begin{pmatrix}-2x-3y+2z \\x-y+2z\end{pmatrix}.
+ \]}
+
+ \lang{en}{
+ We consider again the linear map from example \ref{bsp:lin_abb}:
+ \[
+ f: \R^3 \to \R^2, \begin{pmatrix}x \\ y\\ z \end{pmatrix} \mapsto \begin{pmatrix}-2x-3y+2z \\x-y+2z\end{pmatrix}.
+ \]}
+\\
+\begin{incremental}
+ 
+\step %1
+\lang{de}{
+ Bezüglich der Standardbasis des $\R^2=\left\{ \begin{pmatrix}1 \\ 0 \end{pmatrix}; \begin{pmatrix}0 \\ 1 \end{pmatrix} \right\}$ 
+ lassen sich die Berechnungen zunächst einfach darstellen:
+ \[
+  f(\begin{pmatrix}1 \\ 0 \\ 0\end{pmatrix})=\begin{pmatrix}-2\cdot 1 -3 \cdot 0 +2 \cdot 0 \\ 1 \cdot 1 - 1 \cdot 0 +2 \cdot 0\end{pmatrix} 
+  = \begin{pmatrix} -2 \\ 1\end{pmatrix}
+  = \textcolor{#CC6600}{-2} \cdot \begin{pmatrix} 1 \\ 0 \end{pmatrix} + \textcolor{#CC6600}{1} \cdot \begin{pmatrix} 0 \\ 1 \end{pmatrix}
+ \]
+ \[
+ f(\begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}) = \begin{pmatrix}-2 \cdot 0 - 3 \cdot 1 + 2 \cdot 0 \\ 1 \cdot 0 - 1 \cdot 1 + 2 \cdot 0 \end{pmatrix}
+ = \begin{pmatrix}-3 \\ -1 \end{pmatrix}
+ = \textcolor{#0066CC}{-3} \cdot \begin{pmatrix} 1 \\ 0 \end{pmatrix} + (\textcolor{#0066CC}{-1}) \cdot \begin{pmatrix} 0 \\ 1 \end{pmatrix}
+
+ \]
+ \[
+ f(\begin{pmatrix} 1 \\ 1 \\ 1 \end{pmatrix}) = \begin{pmatrix}-2 \cdot 1 - 3 \cdot 1 + 2 \cdot 1 \\ 1 \cdot 1 - 1 \cdot 1 + 2 \cdot 1 \end{pmatrix}
+ = \begin{pmatrix}-3 \\ 2 \end{pmatrix}
+ = \textcolor{#00CC00}{-3} \cdot \begin{pmatrix} 1 \\ 0 \end{pmatrix} + \textcolor{#00CC00}{2} \cdot \begin{pmatrix} 0 \\ 1 \end{pmatrix}
+ \]
+ 
+ Damit ist
+ \[
+ {\,}_S f_B = \begin{pmatrix} \textcolor{#CC6600}{-2} & \textcolor{#0066CC}{-3} & \textcolor{#00CC00}{-3}\\ \textcolor{#CC6600}{1} & \textcolor{#0066CC}{-1} & \textcolor{#00CC00}{2}\end{pmatrix}.
+ \]}
+
+ \lang{en}{
+ Regarding the standard basis of $\R^2=\left\{ \begin{pmatrix}1 \\ 0 \end{pmatrix}; \begin{pmatrix}0 \\ 1 \end{pmatrix} \right\}$ 
+ we can easily display our calculations:
+ \[
+  f(\begin{pmatrix}1 \\ 0 \\ 0\end{pmatrix})=\begin{pmatrix}-2\cdot 1 -3 \cdot 0 +2 \cdot 0 \\ 1 \cdot 1 - 1 \cdot 0 +2 \cdot 0\end{pmatrix} 
+  = \begin{pmatrix} -2 \\ 1\end{pmatrix}
+  = \textcolor{#CC6600}{-2} \cdot \begin{pmatrix} 1 \\ 0 \end{pmatrix} + \textcolor{#CC6600}{1} \cdot \begin{pmatrix} 0 \\ 1 \end{pmatrix}
+ \]
+ \[
+ f(\begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}) = \begin{pmatrix}-2 \cdot 0 - 3 \cdot 1 + 2 \cdot 0 \\ 1 \cdot 0 - 1 \cdot 1 + 2 \cdot 0 \end{pmatrix}
+ = \begin{pmatrix}-3 \\ -1 \end{pmatrix}
+ = \textcolor{#0066CC}{-3} \cdot \begin{pmatrix} 1 \\ 0 \end{pmatrix} + (\textcolor{#0066CC}{-1}) \cdot \begin{pmatrix} 0 \\ 1 \end{pmatrix}
+
+ \]
+ \[
+ f(\begin{pmatrix} 1 \\ 1 \\ 1 \end{pmatrix}) = \begin{pmatrix}-2 \cdot 1 - 3 \cdot 1 + 2 \cdot 1 \\ 1 \cdot 1 - 1 \cdot 1 + 2 \cdot 1 \end{pmatrix}
+ = \begin{pmatrix}-3 \\ 2 \end{pmatrix}
+ = \textcolor{#00CC00}{-3} \cdot \begin{pmatrix} 1 \\ 0 \end{pmatrix} + \textcolor{#00CC00}{2} \cdot \begin{pmatrix} 0 \\ 1 \end{pmatrix}
+ \]
+ 
+ With that it is
+ 
+ \[
+ {\,}_S f_B = \begin{pmatrix} \textcolor{#CC6600}{-2} & \textcolor{#0066CC}{-3} & \textcolor{#00CC00}{-3}\\ \textcolor{#CC6600}{1} & \textcolor{#0066CC}{-1} & \textcolor{#00CC00}{2}\end{pmatrix}.
+ \]}
+
+\step %2
+
+\lang{de}{Nach vorstehender Regel \ref{Basiswechsel} und gilt nun für die lineare Abbildung $f$ mit den Basen 
+
+\\
+$B= \left\{ \begin{pmatrix}
+ 1 \\ 0 \\ 0 \end{pmatrix}; \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}; \begin{pmatrix} 1 \\ 1  \\ 1\end{pmatrix}\right\}$ von $\R^3$
+ und $C=\left\{ \begin{pmatrix} 1\\ 0 \end{pmatrix}; \begin{pmatrix} 1\\ 1\end{pmatrix}\right\}$ von $\R^2$: 
+
+\[{\,}_C{f}_B = {\,}_C (id \circ f)_B = {\,}_C{id}_S \cdot _S{f}_B= {\,}_CT_S \cdot _S{f}_B \]
+
+\[
+   = \begin{pmatrix} 1 & -1 \\ 0 & 1 \end{pmatrix} \cdot \begin{pmatrix} -2 & -3 & -3 \\ 1 & -1 & 2 \end{pmatrix}
+   = \begin{pmatrix} -3 & -2 & -5 \\ 1 & -1 & 2 \end{pmatrix}.
+ \]
+ Wir erhalten also das gleiche Ergebnis wie in Beispiel \ref{bsp:lin_abb}.}
+
+ \lang{en}{With rule \ref{Basiswechsel} now holds for the linear map $f$ with the bases 
+
+\\
+$B= \left\{ \begin{pmatrix}
+ 1 \\ 0 \\ 0 \end{pmatrix}; \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}; \begin{pmatrix} 1 \\ 1  \\ 1\end{pmatrix}\right\}$ von $\R^3$
+ and $C=\left\{ \begin{pmatrix} 1\\ 0 \end{pmatrix}; \begin{pmatrix} 1\\ 1\end{pmatrix}\right\}$ von $\R^2$: 
+
+\[{\,}_C{f}_B = {\,}_C (id \circ f)_B = {\,}_C{id}_S \cdot _S{f}_B= {\,}_CT_S \cdot _S{f}_B \]
+
+\[
+   = \begin{pmatrix} 1 & -1 \\ 0 & 1 \end{pmatrix} \cdot \begin{pmatrix} -2 & -3 & -3 \\ 1 & -1 & 2 \end{pmatrix}
+   = \begin{pmatrix} -3 & -2 & -5 \\ 1 & -1 & 2 \end{pmatrix}.
+ \]
+ So we receive the same result as in example \ref{bsp:lin_abb}.}
+
+\end{incremental}
+
+\end{example}
+%%%%%%%%%%%%%%%
+
+\lang{de}{Desweiteren ergeben sich folgende nützliche Konsequenzen,
+%%% Video K.M. -  11286 = Schnitt aus Videos 10831
+%
+die auch das Beispiel in folgendem Video zeigt:
+
+
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-11286&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}}\\
+\\
+
+
+\begin{rule}[\lang{de}{Regeln zum Basiswechsel} \lang{en}{Rules for the basis transformation}] \label{regel_bw}
+\lang{de}{Gegeben seien ein Vektorraum $V$ mit zwei Basen $B$ und $C$, 
+ein Vektorraum $W$ mit Basen $D$ und $G$,
+ein Vektor $v \in V$ und eine lineare Abbildung $\phi: V \to W$. Dann gilt}
+\lang{en}{Given are a vector space $V$ with two bases $B$ and $C$,
+a vector space $W$ with basis $D$ and $G$, a vector $v\in V$ and a linear map $\phi: V \to W$.
+Then holds}
+\begin{enumerate}
+  \item ${\,}_C v = {\,}_{C} {T}_B \cdot {\,}_B v$
+  \item ${\,}_C {T}_B = \left({\,}_B {T}_{C}\right)^{-1}$
+  \item ${\,}_{G}\phi_C = {\,}_{G}{T}_D \cdot  {\,}_D\phi_B \cdot {\,}_B{T}_C$
+\end{enumerate}
+
+\end{rule}
+
+\lang{de}{An den beiden Regeln lässt sich nun der Vorteil der hier verwendeten Notation erkennen:}
+\lang{de}{Those rules point out the advantage of the used notation:}
+
+\lang{de}{
+Um zwei Abbildungsmatrizen sinnvoll miteinander multiplizieren zu können oder einen Koordinatenwechsel richtig auszuführen,
+müssen die ''aufeinander treffenden'' Basen übereinstimmen, d.h.
+\[
+{\,}_D g_{\textcolor{#0066CC}{C}} \cdot {\,}_{\textcolor{#0066CC}{C}} f_B \text{ und } {\,}_{\textcolor{#00CC00}{C}} v = {\,}_{\textcolor{#00CC00}{C}}{T}_{\textcolor{#0066CC}{B}} \cdot {\,}_{\textcolor{#0066CC}{B}} v.
+\]
+Eine Multiplikation
+\[
+{\,}_{G} g_{\textcolor{#CC6600}{D}} \cdot {\,}_{\textcolor{#CC6600}{C}} f_B
+\]
+ergibt \textcolor{#CC6600}{keinen} Sinn.}
+\lang{en}{
+To multiply two transformation matrices or to perform the coordinate transformation right,
+the ''meeting''' bases must match, i.e.
+\[
+{\,}_D g_{\textcolor{#0066CC}{C}} \cdot {\,}_{\textcolor{#0066CC}{C}} f_B \text{ und } {\,}_{\textcolor{#00CC00}{C}} v = {\,}_{\textcolor{#00CC00}{C}}{T}_{\textcolor{#0066CC}{B}} \cdot {\,}_{\textcolor{#0066CC}{B}} v.
+\]
+A multiplication
+\[
+{\,}_{G} g_{\textcolor{#CC6600}{D}} \cdot {\,}_{\textcolor{#CC6600}{C}} f_B
+\]
+does \textcolor{#CC6600}{not} make sense.}
+
+\lang{de}{
+Diese Überlegung zeigt auch, warum es hier sinnvoll ist, die Eingangsbasis auf der rechten Seite zu notieren.
+Als weitere Eselsbrücke kann man nennen, dass man standardmäßig $f(x)$ schreibt. Das Funktionsargument $x$ steht rechts der Abbildung.}
+\lang{en}{
+This consideration shows, why it is reasonable, to note the starting basis on the right side.
+Here is a little trick to remember the right order: We usually note $f(x)$. The argument $x$ is on the right side of the map.}
+
+\lang{de}{In den Beispielen \ref{bsp:lin_abb} \, und \ref{bsp:basiswechsel} \, konnte man schon erkennen, dass es deutlich einfacher ist,
+die Abbildungsmatrix $A$ bezüglich der Standardbasis zu bestimmen. Da man in diesem
+Fall den Vektor $f(v_1)$ direkt in die erste Spalte von $A$ hineinschreiben kann, den Vektor $f(v_2)$ 
+in die zweite Spalte, usw.,
+falls $\{v_1;v_2;...;v_n\}$ eine Basis der Vektorraums des Definitionsbereiches ist.}
+\lang{en}{We already saw in the examples \ref{bsp:lin_abb} \, and \ref{bsp:basiswechsel}, that it is easier
+to determine the transformation matrix $A$ regarding to the standard basis.
+In this case we can note the vector $f(v_1)$ in the first column of $A$, the vector $f(v_2)$ 
+in the second column, and so on, if $\{v_1;v_2;...;v_n\}$ is a basis of the vector space
+of the domain of definition.}
+
+\lang{de}{
+Ein Basiswechsel von einer beliebigen Basis in die Standardbasis ist genauso einfach zu bestimmen.
+Man schreibt die Basisvektoren der beliebig gewählten Basis einfach in der richtigen Reihenfolge in die 
+Basistransformationsmatrix.
+Mit Hilfe der Regeln können wir nun die Abbildungsmatrizen für beliebig komplizierte Basen
+berechnen. Der rechenintensive Schritt ist nun das Invertieren der Transformationsmatrix.}
+\lang{en}{
+A basis tranformation vom any basis to the standard basis is also
+easy to determine. We note the basis vectors of the random basis in the right order into the
+basis transformation matrix. With help of the rules we may calculate the transformation matrix for
+any complicated bases. The inverting of the transformation matrix comes with a lot of calculations.}
+
+
+\begin{example}
+
+ \lang{de}{Wir betrachten nun noch einmal die lineare Abbildung aus Beispiel \ref{bsp:lin_abb}:
+ \[
+ f: \R^3 \to \R^2, \begin{pmatrix}x \\ y\\ z \end{pmatrix} \mapsto \begin{pmatrix}-2x-3y+2z \\x-y+2z\end{pmatrix}.
+ \]
+ und bestimmen, wie in Beispiel \ref{bsp:basiswechsel}, die Abbildungsmatrix $A={\,}_Cf_B$ mit den Basen 
+ 
+ \\
+ $B= \left\{ \begin{pmatrix}
+ 1 \\ 0 \\ 0 \end{pmatrix}; \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}; \begin{pmatrix} 1 \\ 1  \\ 1\end{pmatrix}\right\}$ von $\R^3$
+ und $C=\left\{ \begin{pmatrix} 1\\ 0 \end{pmatrix}; \begin{pmatrix} 1\\ 1\end{pmatrix}\right\}$.}
+ \lang{en}{We consider again the linear map from example \ref{bsp:lin_abb}:
+ \[
+ f: \R^3 \to \R^2, \begin{pmatrix}x \\ y\\ z \end{pmatrix} \mapsto \begin{pmatrix}-2x-3y+2z \\x-y+2z\end{pmatrix}.
+ \]
+ and determine, like in example \ref{bsp:basiswechsel}, the tranformation matrix $A={\,}_Cf_B$ with the bases 
+ 
+ \\
+ $B= \left\{ \begin{pmatrix}
+ 1 \\ 0 \\ 0 \end{pmatrix}; \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}; \begin{pmatrix} 1 \\ 1  \\ 1\end{pmatrix}\right\}$ von $\R^3$
+ and $C=\left\{ \begin{pmatrix} 1\\ 0 \end{pmatrix}; \begin{pmatrix} 1\\ 1\end{pmatrix}\right\}$.}
+
+\\ 
+\begin{incremental}
+ \step %1
+ 
+ \lang{de}{Zur weiteren Vereinfachung wenden wir nun die letze Regel \ref{regel_bw} noch an:
+ \[
+ {\,}_C f_B = {\,}_C {T}_S \cdot {\,}_S f_B = ({\,}_S {T}_C)^{-1} \cdot {\,}_S f_B
+ \] 
+ Der Vorteil ist, dass sich auch hier bezüglich der Standardbasis die Basistransformation von $C$ sofort hinschreiben lässt:
+ \[
+ {\,}_S {T}_C = \begin{pmatrix} 1& 1\\ 0 & 1\end{pmatrix}.
+ \]
+ In der ersten Spalte steht der Koordinatenvektor des ersten Basiselements von $C$ (bezüglich der Standardbasis) 
+ und in der zweiten Spalte der Vektor des zweiten Basiselements von $C$.}
+ \lang{en}{For further simplification we will apply the last rule \ref{regel_bw}:
+ \[
+ {\,}_C f_B = {\,}_C {T}_S \cdot {\,}_S f_B = ({\,}_S {T}_C)^{-1} \cdot {\,}_S f_B
+ \] 
+ The benefit is, that we can note the basis transformation regarding the standard basis $C$ right away:
+ \[
+ {\,}_S {T}_C = \begin{pmatrix} 1& 1\\ 0 & 1\end{pmatrix}.
+ \]
+ In the first column we have the coordinate vector of the first basis element of $C$ (standard basis) and in the second
+ column the vector of the second element of $C$.}
+ 
+ \step %2
+ 
+ \lang{de}{Das Berechnen der Abbildungsmatrix läuft nun auf das Invertieren dieser Matrix hinaus.
+ Die Inverse bestimmen wir mit der
+ \ref[inverse_matrix][Formel für $2 \times 2$ Matrizen]{rule:inverse-2x2}, die aus der Cramerschen Regel folgt:
+ \[
+ ({\,}_S {T}_C)^{-1} = \frac{1}{1\cdot 1 - 1 \cdot 0} \cdot \begin{pmatrix}1 & -1 \\ 0 & 1\end{pmatrix}
+ \]}
+ \lang{en}{To calculate the transformation matrix we need to invert {\,}_S {T}_C)^{-1}.
+ We determine the inverse with the
+ \ref[inverse_matrix][formula for $2 \times 2$ matrix]{rule:inverse-2x2}, which results from Cramer's rule:
+ \[
+ ({\,}_S {T}_C)^{-1} = \frac{1}{1\cdot 1 - 1 \cdot 0} \cdot \begin{pmatrix}1 & -1 \\ 0 & 1\end{pmatrix}
+ \]}
+
+ \step %3
+ 
+ \lang{de}{Schließlich erhalten wir mit
+ \[
+ {\,}_C f_B = \begin{pmatrix}1 & -1 \\ 0 & 1\end{pmatrix} \cdot \begin{pmatrix} -2 & -3 & -3\\ 1 & -1 & 2\end{pmatrix}
+ = \begin{pmatrix} -2 -1 & -3+1 & -3-2 \\ 1 & -1 & 2 \end{pmatrix} 
+ = \begin{pmatrix} -3 & -2 & -5 \\ 1 & -1 & 2\end{pmatrix},
+ \]
+ das gleiche Ergebnis wie in \ref{bsp:lin_abb} \, bzw. \ref{bsp:basiswechsel} \,.}
+
+ \lang{en}{Finally we end up with
+ \[
+ {\,}_C f_B = \begin{pmatrix}1 & -1 \\ 0 & 1\end{pmatrix} \cdot \begin{pmatrix} -2 & -3 & -3\\ 1 & -1 & 2\end{pmatrix}
+ = \begin{pmatrix} -2 -1 & -3+1 & -3-2 \\ 1 & -1 & 2 \end{pmatrix} 
+ = \begin{pmatrix} -3 & -2 & -5 \\ 1 & -1 & 2\end{pmatrix},
+ \]
+ the same result as in \ref{bsp:lin_abb} \, rather \ref{bsp:basiswechsel} \,.}
+ 
+ \end{incremental}
+ 
+\end{example}
+
+
+\end{visualizationwrapper}
+
+
+
+\end{content}

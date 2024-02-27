@@ -1,0 +1,553 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü09: Aussageformen bewerten}
+    \lang{en}{Ex09: Evaluating propositions}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Aussageformen und Wahrheitstafeln}
+    \lang{en}{Propositional formulas and truth tables}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_04_aussagen_aequivalenzumformungen.meta.xml}{content_04_aussagen_aequivalenzumformungen}
+\end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21979}{Ticket 21979}
+\end{block}
+
+  \begin{block}[annotation]
+%
+    Neue Übung zum Berechnen bzw. Bewerten von Formeln 
+    unter Verwendung von Wahrheitstafeln
+%
+  \end{block}
+
+  \title{
+    \lang{de}{Ü09: Aussageformen bewerten}
+    \lang{en}{Ex09: Evaluating propositions}
+    }
+
+
+  \lang{de}{
+  Untersuchen Sie die folgenden Aussageformen mithilfe von Wahrheitstafeln:
+  }
+  \lang{en}{
+  Fill in truth tables for the following propositional formulas and consider what can be deduced from 
+  them:
+  }
+  \begin{enumerate}[alph]  
+  \item $ (A \Rightarrow B) \Leftrightarrow (\neg A \vee B) $
+  \item $ ((A\wedge B) \vee C) \Leftrightarrow ((A \vee C) \wedge (B \vee C)) $
+  \end{enumerate}
+  \lang{de}{mit Aussagenvariablen $A$, $B$ und $C$.}
+  \lang{en}{with variables $A$, $B$ and $C$.}
+  
+  \begin{tabs*}[\initialtab{0}\class{exercise}]
+    \tab{\lang{de}{Antwort}\lang{en}{Answer}} 
+  \begin{enumerate}[alph]  
+  \item \lang{de}{
+        Die Aussageform $ (A \Rightarrow B) \Leftrightarrow (\neg A \vee B) $
+        ist für alle Bewertungskonstellationen der Variablen $A$ und $B$ 
+        \emph{wahr}.
+        }
+        \lang{en}{
+        The propositional formula $ (A \Rightarrow B) \Leftrightarrow (\neg A \vee B) $ 
+        is \emph{true} for all truth-values of the variables $A$ and $B$.
+        }
+    \lang{de}{
+    \begin{table}[\align{c}\cellaligns{ccccccc}] % {c|c|c||c}
+      \head
+      $A$ & $B$ && $\neg A$ & $A \Rightarrow B$ &  $\neg A \vee B $ & $(A \Rightarrow B) \Leftrightarrow (\neg A \vee B)$ \\
+      \body
+      W & W && F & W &  W & W \\
+      W & F && F & F &  F & W \\
+      F & W && W & W &  W & W \\
+      F & F && W & W &  W & W 
+    \end{table}
+    }
+    \lang{en}{
+    \begin{table}[\align{c}\cellaligns{ccccccc}] % {c|c|c||c}
+      \head
+      $A$ & $B$ && $\neg A$ & $A \Rightarrow B$ &  $\neg A \vee B $ & $(A \Rightarrow B) \Leftrightarrow (\neg A \vee B)$ \\
+      \body
+      T & T && F & T &  T & T \\
+      T & F && F & F &  F & T \\
+      F & T && T & T &  T & T \\
+      F & F && T & T &  T & T 
+    \end{table}
+    }
+        \lang{de}{
+        Daher gilt, dass die beiden Formeln $\,(A \Rightarrow B)\,$ und $\,(\neg A \vee B)\,$ stets 
+        äquivalent sind.
+        }
+        \lang{en}{
+        Therefore the two formulas $\,(A \Rightarrow B)\,$ and $\,(\neg A \vee B)\,$ are always 
+        equivalent.
+        }
+    
+ \item \lang{de}{
+    Auch die Aussageform $ ((A\wedge B) \vee C) \Leftrightarrow ((A \vee C) \wedge (B \vee C)) $
+    ist für alle Bewertungskonstellationen der Variablen $A$, $B$ und $C$ \emph{wahr}.
+    }
+    \lang{en}{
+    The propositional formula $ ((A\wedge B) \vee C) \Leftrightarrow ((A \vee C) \wedge (B \vee C)) $ 
+    is also \emph{true} for all truth-values of the variables $A$, $B$ and $C$.
+    }
+    \lang{de}{
+    \begin{table}[\align{c}\cellaligns{cccccccccc}] % {c|c|c||c}
+      \head
+      $A$ & $B$ & $C$ && $A\wedge B$ & $\textcolor{#0066CC}{D}:=((A\wedge B) \vee C)$ & $A \vee C$ & $B \vee C$ 
+      & $E=((A \vee C) \wedge (B \vee C))$ & $D \Leftrightarrow E$ \\
+      \body
+      W & W & W && W & W &  W & W & W & W \\
+      W & W & F && W & W &  W & W & W & W \\
+      W & F & W && F & W &  W & W & W & W \\
+      W & F & F && F & F &  W & F & F & W \\ 
+      F & W & W && F & W &  W & W & W & W \\
+      F & W & F && F & F &  F & W & F & W \\
+      F & F & W && F & W &  W & W & W & W \\
+      F & F & F && F & F &  F & F & F & W \\       
+    \end{table}
+    }
+    \lang{en}{
+    \begin{table}[\align{c}\cellaligns{cccccccccc}] % {c|c|c||c}
+      \head
+      $A$ & $B$ & $C$ && $A\wedge B$ & $\textcolor{#0066CC}{D}:=((A\wedge B) \vee C)$ & $A \vee C$ & $B \vee C$ 
+      & $E=((A \vee C) \wedge (B \vee C))$ & $D \Leftrightarrow E$ \\
+      \body
+      T & T & T && T & T &  T & T & T & T \\
+      T & T & F && T & T &  T & T & T & T \\
+      T & F & T && F & T &  T & T & T & T \\
+      T & F & F && F & F &  T & F & F & T \\ 
+      F & T & T && F & T &  T & T & T & T \\
+      F & T & F && F & F &  F & T & F & T \\
+      F & F & T && F & T &  T & T & T & T \\
+      F & F & F && F & F &  F & F & F & T \\       
+    \end{table}
+    }
+    \lang{de}{
+    Die beiden Formeln $\,D=((A\wedge B) \vee C)\,$
+    und $\,E=((A \vee C) \wedge (B \vee C))\,$ sind also äquivalent.
+    \\\\    
+    \textbf{Bemerkung:}\\
+    Dasselbe gilt im Übrigen
+    auch, wenn man die Junktoren "`$\,\vee\,$"' und "`$\,\wedge\,$"' vertauscht, also 
+    \[((A\vee B) \wedge C) \Leftrightarrow ((A \wedge C) \vee (B \wedge C)) .\]
+    Für Aussagen gilt daher das \notion{\emph{Distributivgesetz}} bzgl. der
+    Junktoren "`$\,\vee\,$"' und "`$\,\wedge$"'.
+    }
+    \lang{en}{
+    The two formulas $\,D=((A\wedge B) \vee C)\,$ and $\,E=((A \vee C) \wedge (B \vee C))\,$ are 
+    therefore equivalent.
+    \\\\
+    \textbf{Remark:}\\
+    In fact, the same holds if we swap disjunction '$\,\vee\,$' with conjunction '$\,\wedge\,$', i.e.
+    \[((A\vee B) \wedge C) \Leftrightarrow ((A \wedge C) \vee (B \wedge C)) .\]
+    This is why the \notion{\emph{distributivity law}} holds between '$\,\vee\,$' and '$\,\wedge$'.
+    }
+    
+  \end{enumerate}
+
+    \tab{\lang{de}{Lösung a)}\lang{en}{Solution for a)}}
+
+    \begin{incremental}[\initialsteps{1}]
+      \step 
+      \lang{de}{
+      In der Wahrheitstafel müssen alle W/F-Kombinationen der Variablen auftreten. 
+      Bei $2$ Variablen sind das $2\cdot 2=2^2=4$ Möglichkeiten, die wir in den ersten 3 Spalten
+      der Wahrheitstafel eintragen. Jeder Teilaussage der zu untersuchenden Aussageform, die sich durch 
+      schrittwiese Verknüfung aus den Basis-Variablen $A$, $B$ und $C$ ergibt, wird eine weitere Spalte
+      in der Wahrheitstafel gewidmet, in der die berechnete Bewertung eingetragen wird.
+      Die Ausgangstabelle ist also:
+      }
+      \lang{en}{
+      In the truth table we must account for all T/F combinations of the variables. As we have $2$ 
+      variables, this corresponds to $2\cdot 2=2^2=4$ rows. We add a column for each sub-formula 
+      that arises in the evaluation of the main formula. The table is therefore initially:
+      }
+
+    \lang{de}{
+    \begin{table}[\align{c}\cellaligns{ccccccc}] % {c|c|c||c}
+      \head
+      $A$ & $B$ && $\neg A$ & $A \Rightarrow B$ &  $\neg A \vee B $ 
+              & $(A \Rightarrow B) \Leftrightarrow (\neg A \vee B)$ \\
+      \body
+      W & W &&  &  &  &  \\
+      W & F &&  &  &  &  \\
+      F & W &&  &  &  &  \\
+      F & F &&  &  &  &  \\
+    \end{table}
+    }
+    \lang{en}{
+    \begin{table}[\align{c}\cellaligns{ccccccc}] % {c|c|c||c}
+      \head
+      $A$ & $B$ && $\neg A$ & $A \Rightarrow B$ &  $\neg A \vee B $ 
+              & $(A \Rightarrow B) \Leftrightarrow (\neg A \vee B)$ \\
+      \body
+      T & T &&  &  &  &  \\
+      T & F &&  &  &  &  \\
+      F & T &&  &  &  &  \\
+      F & F &&  &  &  &  \\
+    \end{table}
+    }
+      
+      \step 
+      \lang{de}{
+      Wir berechnen zunächst die \emph{Implikation} aus Basis-Aussagen $A$ und $B$,
+      die Formel $\,\textcolor{#0066CC}{A \Rightarrow B}. \,$ Wir wissen aus dem Skript, dass
+      die \ref[content_04_aussagen_aequivalenzumformungen][Implikation]{def:implikation}
+      $\, A \Rightarrow B\,$ nur dann \emph{falsch} ist, wenn die Prämisse $A$ \emph{wahr}
+      und die Konklusion $B$ \emph{falsch} ist. Daher gilt
+      }
+      \lang{en}{
+      First we calculate the truth-values of the \emph{implication} between the variables $A$ and 
+      $B$, $\,\textcolor{#0066CC}{A \Rightarrow B}$. We know from the notes that the 
+      \ref[content_04_aussagen_aequivalenzumformungen][implication]{def:implikation} 
+      $\, A \Rightarrow B\,$ is only ever \emph{false} if the premise $A$ is \emph{true} and the 
+      conclusion $B$ is \emph{false}. Therefore we may fill in this column:
+      }
+      
+    \lang{de}{
+    \begin{table}[\align{c}\cellaligns{ccccccc}] % {c|c|c||c}
+      \head
+      $\textcolor{#0066CC}{A}$ & $\textcolor{#0066CC}{B}$ && $\neg A$ & $\textcolor{#0066CC}{A \Rightarrow B}$ &  $\neg A \vee B $ & $(A \Rightarrow B) \Leftrightarrow (\neg A \vee B)$ \\
+      \body
+      \textcolor{#0066CC}{W} & \textcolor{#0066CC}{W} &&  & \textcolor{#0066CC}{W} &  &  \\
+      \textcolor{#0066CC}{W} & \textcolor{#0066CC}{F} &&  & \textcolor{#0066CC}{F} &  &  \\
+      \textcolor{#0066CC}{F} & \textcolor{#0066CC}{W} &&  & \textcolor{#0066CC}{W} &  &  \\
+      \textcolor{#0066CC}{F} & \textcolor{#0066CC}{F} &&  & \textcolor{#0066CC}{W} &  &  \\
+    \end{table}
+    }
+    \lang{en}{
+    \begin{table}[\align{c}\cellaligns{ccccccc}] % {c|c|c||c}
+      \head
+      $\textcolor{#0066CC}{A}$ & $\textcolor{#0066CC}{B}$ && $\neg A$ & $\textcolor{#0066CC}{A \Rightarrow B}$ &  $\neg A \vee B $ & $(A \Rightarrow B) \Leftrightarrow (\neg A \vee B)$ \\
+      \body
+      \textcolor{#0066CC}{T} & \textcolor{#0066CC}{T} &&  & \textcolor{#0066CC}{T} &  &  \\
+      \textcolor{#0066CC}{T} & \textcolor{#0066CC}{F} &&  & \textcolor{#0066CC}{F} &  &  \\
+      \textcolor{#0066CC}{F} & \textcolor{#0066CC}{T} &&  & \textcolor{#0066CC}{T} &  &  \\
+      \textcolor{#0066CC}{F} & \textcolor{#0066CC}{F} &&  & \textcolor{#0066CC}{T} &  &  \\
+    \end{table}
+    }
+           
+      \step 
+      \lang{de}{
+      Zur Berechnung der Formel $\,\textcolor{#0066CC}{\neg A \vee B } \,$ schreiben wir uns 
+      zuerst die Werte für $\neg A$ in eine Hilfs-Spalte. Die Bewertung der Variablen
+      $\neg A$ und $B$ liefert dann den Wert für die gesuchte \emph{Disjunktion}:
+      }
+      \lang{en}{
+      In order to evaluate the formula $\,\textcolor{#0066CC}{\neg A \vee B } \,$ we firstly 
+      fill in the values for $\neg A$. Knowing the values for $\neg A$ and $B$ makes it easy to 
+      find the required values for the \emph{disjunction}:
+      }
+
+    \lang{de}{
+    \begin{table}[\align{c}\cellaligns{ccccccc}] % {c|c|c||c}
+      \head
+      $A$ & $\textcolor{#0066CC}{B}$ && $\textcolor{#0066CC}{\neg A}$ & $A \Rightarrow B$ &  $\textcolor{#0066CC}{\neg A \vee B} $ & $(A \Rightarrow B) \Leftrightarrow (\neg A \vee B)$ \\
+      \body
+      W & \textcolor{#0066CC}{W} && \textcolor{#0066CC}{F} & W &  \textcolor{#0066CC}{W} &  \\
+      W & \textcolor{#0066CC}{F} && \textcolor{#0066CC}{F} & F &  \textcolor{#0066CC}{F} &  \\
+      F & \textcolor{#0066CC}{W} && \textcolor{#0066CC}{W} & W &  \textcolor{#0066CC}{W} &  \\
+      F & \textcolor{#0066CC}{F} && \textcolor{#0066CC}{W} & W &  \textcolor{#0066CC}{W} &  
+    \end{table}
+    }
+    \lang{en}{
+    \begin{table}[\align{c}\cellaligns{ccccccc}] % {c|c|c||c}
+      \head
+      $A$ & $\textcolor{#0066CC}{B}$ && $\textcolor{#0066CC}{\neg A}$ & $A \Rightarrow B$ &  $\textcolor{#0066CC}{\neg A \vee B} $ & $(A \Rightarrow B) \Leftrightarrow (\neg A \vee B)$ \\
+      \body
+      T & \textcolor{#0066CC}{T} && \textcolor{#0066CC}{F} & T &  \textcolor{#0066CC}{T} &  \\
+      T & \textcolor{#0066CC}{F} && \textcolor{#0066CC}{F} & F &  \textcolor{#0066CC}{F} &  \\
+      F & \textcolor{#0066CC}{T} && \textcolor{#0066CC}{T} & T &  \textcolor{#0066CC}{T} &  \\
+      F & \textcolor{#0066CC}{F} && \textcolor{#0066CC}{T} & T &  \textcolor{#0066CC}{T} &  
+    \end{table}
+    }
+    
+    \step
+    \lang{de}{
+    Aus der Bewertung der Formeln $\,\textcolor{#0066CC}{A \Rightarrow B}$ und 
+    $\,\textcolor{#0066CC}{\neg A \vee B } \,$ können wir nun direkt die Werte für
+    die Äquivalenz dieser beiden Formeln ablesen und so die letzte Spalte der
+    Wertetafel ausfüllen:
+    }
+    \lang{en}{
+    As we now know the values for the formulas $\,\textcolor{#0066CC}{A \Rightarrow B}$ and 
+    $\,\textcolor{#0066CC}{\neg A \vee B } \,$, we can immediately write down the values for the 
+    equivalence of these two formulas and hence fill in the last column of the truth table:
+    }
+
+    \lang{de}{
+    \begin{table}[\align{c}\cellaligns{ccccccc}] % {c|c|c||c}
+      \head
+      $A$ & $B$ && $\neg A$ & $\textcolor{#0066CC}{A \Rightarrow B}$ &  $\textcolor{#0066CC}{\neg A \vee B } $ 
+      & $\textcolor{#0066CC}{(A \Rightarrow B) \Leftrightarrow (\neg A \vee B)}$ \\
+      \body
+      W & W && F & \textcolor{#0066CC}{W} &  \textcolor{#0066CC}{W} & \textcolor{#0066CC}{W} \\
+      W & F && F & \textcolor{#0066CC}{F} &  \textcolor{#0066CC}{F} & \textcolor{#0066CC}{W} \\
+      F & W && W & \textcolor{#0066CC}{W} &  \textcolor{#0066CC}{W} & \textcolor{#0066CC}{W} \\
+      F & F && W & \textcolor{#0066CC}{W} &  \textcolor{#0066CC}{W} & \textcolor{#0066CC}{W} 
+    \end{table}
+    }
+    \lang{en}{
+    \begin{table}[\align{c}\cellaligns{ccccccc}] % {c|c|c||c}
+      \head
+      $A$ & $B$ && $\neg A$ & $\textcolor{#0066CC}{A \Rightarrow B}$ &  $\textcolor{#0066CC}{\neg A \vee B } $ 
+      & $\textcolor{#0066CC}{(A \Rightarrow B) \Leftrightarrow (\neg A \vee B)}$ \\
+      \body
+      T & T && F & \textcolor{#0066CC}{T} &  \textcolor{#0066CC}{T} & \textcolor{#0066CC}{T} \\
+      T & F && F & \textcolor{#0066CC}{F} &  \textcolor{#0066CC}{F} & \textcolor{#0066CC}{T} \\
+      F & T && T & \textcolor{#0066CC}{T} &  \textcolor{#0066CC}{T} & \textcolor{#0066CC}{T} \\
+      F & F && T & \textcolor{#0066CC}{T} &  \textcolor{#0066CC}{T} & \textcolor{#0066CC}{T} 
+    \end{table}
+    }
+    \lang{de}{
+    Das Ergebnis bestätigt die Äquivalenz der beiden Formeln,  
+ %   $\,\textcolor{blue}{A \Rightarrow B}$ und $\,\textcolor{blue}{\neg A \vee B }, \,$
+    da die letzte Spalte der Wahrheitstafel ausschließlich den Wahrheitswert "`$W$"' enthält.
+    }
+    \lang{en}{
+    The resulting truth table confirms the equivalence of the two formulas, as the last column of the 
+    truth table only contains the truth-value '$T$'.
+    }
+    
+    \end{incremental}
+
+    \tab{\lang{de}{Lösung b)}\lang{en}{Solution for b)}}
+
+    \begin{incremental}[\initialsteps{1}]
+      \step 
+      \lang{de}{
+      In der Wahrheitstafel m"ussen alle W/F-Kombinationen der Variablen auftreten. 
+      Bei $3$ Variablen sind das $2\cdot 2\cdot 2=2^3=8$ Möglichkeiten, die wir in den ersten 3 Spalten
+      der Wahrheitstafel eintragen. Jeder Teilaussage der zu untersuchenden Aussageform, die sich durch 
+      schrittwiese Verknüfung aus den Basis-Variablen $A$, $B$ und $C$ ergibt, wird eine weitere Spalte
+      in der Wahrheitstafel gewidmet, in der die berechnete Bewertung eingetragen wird.
+      Die Ausgangstabelle ist also:
+      }
+      \lang{en}{
+      In the truth table we must account for all T/F combinations of the variables. As we have $3$ 
+      variables, this corresponds to $2\cdot 2\cdot 2=2^3=8$ rows. We add a column for each 
+      sub-formula that arises in the evaluation of the main formula. The table is therefore initially:
+      }
+      
+    \lang{de}{
+    \begin{table}[\align{c}\cellaligns{cccccccccc}] % {c|c|c||c}
+      \head
+      $A$ & $B$ & $C$ && $A\wedge B$ & $D=((A\wedge B) \vee C)$ & $A \vee C$ & $B \vee C$ 
+      & $E=((A \vee C) \wedge (B \vee C))$ & $D \Leftrightarrow E$ \\
+      \body
+      W & W & W &&  &  &  &  &  &  \\
+      W & W & F &&  &  &  &  &  &  \\
+      W & F & W &&  &  &  &  &  &  \\
+      W & F & F &&  &  &  &  &  &  \\ 
+      F & W & W &&  &  &  &  &  &  \\
+      F & W & F &&  &  &  &  &  &  \\
+      F & F & W &&  &  &  &  &  &  \\
+      F & F & F &&  &  &  &  &  &  \\       
+    \end{table}
+    }
+    \lang{en}{
+    \begin{table}[\align{c}\cellaligns{cccccccccc}] % {c|c|c||c}
+      \head
+      $A$ & $B$ & $C$ && $A\wedge B$ & $D=((A\wedge B) \vee C)$ & $A \vee C$ & $B \vee C$ 
+      & $E=((A \vee C) \wedge (B \vee C))$ & $D \Leftrightarrow E$ \\
+      \body
+      T & T & T &&  &  &  &  &  &  \\
+      T & T & F &&  &  &  &  &  &  \\
+      T & F & T &&  &  &  &  &  &  \\
+      T & F & F &&  &  &  &  &  &  \\ 
+      F & T & T &&  &  &  &  &  &  \\
+      F & T & F &&  &  &  &  &  &  \\
+      F & F & T &&  &  &  &  &  &  \\
+      F & F & F &&  &  &  &  &  &  \\       
+    \end{table}
+    }
+      
+      \step 
+      \lang{de}{
+      Wir berechnen nun zunächst die Formel $\,\textcolor{#0066CC}{D=((A\wedge B) \vee C)}, \,$ indem
+      wir im ersten Schritt die \emph{Konjunktion} der Basis-Aussagen $A$ und $B$,
+      also $\,A\wedge B\,$ bewerten. Anschließend bewerten wir die \emph{Disjunktion} der 
+      Basis-Aussage $C$ mit der im ersten Schritt bewerteten Teilaussage $A\wedge B.$
+      }
+      \lang{en}{
+      In order to find the truth-values of the formula 
+      $\,\textcolor{#0066CC}{D=((A\wedge B) \vee C)}$, we first find the values for the 
+      \emph{conjunction} of the variables $A$ and $B$, i.e. $\,A\wedge B$. We then find the values 
+      for the \emph{disjunction} of the variable $C$ with $\,A\wedge B$.
+      }
+      
+    \lang{de}{
+    \begin{table}[\align{c}\cellaligns{cccccccccc}] % {c|c|c||c}
+      \head
+      $A$ & $B$ & $\textcolor{#0066CC}{C}$ && $\textcolor{#0066CC}{A\wedge B}$ & $\textcolor{#0066CC}{D=((A\wedge B) \vee C)}$ & $A \vee C$ & $B \vee C$ 
+      & $E=((A \vee C) \wedge (B \vee C))$ & $D \Leftrightarrow E$ \\
+      \body
+      W & W & \textcolor{#0066CC}{W} && \textcolor{#0066CC}{W} & \textcolor{#0066CC}{W} &  &  &  &  \\
+      W & W & \textcolor{#0066CC}{F} && \textcolor{#0066CC}{W} & \textcolor{#0066CC}{W} &  &  &  &  \\
+      W & F & \textcolor{#0066CC}{W} && \textcolor{#0066CC}{F} & \textcolor{#0066CC}{W} &  &  &  &  \\
+      W & F & \textcolor{#0066CC}{F} && \textcolor{#0066CC}{F} & \textcolor{#0066CC}{F} &  &  &  &  \\
+      F & W & \textcolor{#0066CC}{W} && \textcolor{#0066CC}{F} & \textcolor{#0066CC}{W} &  &  &  &  \\
+      F & W & \textcolor{#0066CC}{F} && \textcolor{#0066CC}{F} & \textcolor{#0066CC}{F} &  &  &  &  \\
+      F & F & \textcolor{#0066CC}{W} && \textcolor{#0066CC}{F} & \textcolor{#0066CC}{W} &  &  &  &  \\
+      F & F & \textcolor{#0066CC}{F} && \textcolor{#0066CC}{F} & \textcolor{#0066CC}{F} &  &  &  &  \\
+    \end{table}
+    }
+    \lang{en}{
+    \begin{table}[\align{c}\cellaligns{cccccccccc}] % {c|c|c||c}
+      \head
+      $A$ & $B$ & $\textcolor{#0066CC}{C}$ && $\textcolor{#0066CC}{A\wedge B}$ & $\textcolor{#0066CC}{D=((A\wedge B) \vee C)}$ & $A \vee C$ & $B \vee C$ 
+      & $E=((A \vee C) \wedge (B \vee C))$ & $D \Leftrightarrow E$ \\
+      \body
+      T & T & \textcolor{#0066CC}{T} && \textcolor{#0066CC}{T} & \textcolor{#0066CC}{T} &  &  &  &  \\
+      T & T & \textcolor{#0066CC}{F} && \textcolor{#0066CC}{T} & \textcolor{#0066CC}{T} &  &  &  &  \\
+      T & F & \textcolor{#0066CC}{T} && \textcolor{#0066CC}{F} & \textcolor{#0066CC}{T} &  &  &  &  \\
+      T & F & \textcolor{#0066CC}{F} && \textcolor{#0066CC}{F} & \textcolor{#0066CC}{F} &  &  &  &  \\
+      F & T & \textcolor{#0066CC}{T} && \textcolor{#0066CC}{F} & \textcolor{#0066CC}{T} &  &  &  &  \\
+      F & T & \textcolor{#0066CC}{F} && \textcolor{#0066CC}{F} & \textcolor{#0066CC}{F} &  &  &  &  \\
+      F & F & \textcolor{#0066CC}{T} && \textcolor{#0066CC}{F} & \textcolor{#0066CC}{T} &  &  &  &  \\
+      F & F & \textcolor{#0066CC}{F} && \textcolor{#0066CC}{F} & \textcolor{#0066CC}{F} &  &  &  &  \\
+    \end{table}
+    }
+
+      \step
+      \lang{de}{
+      Analog verfahren wir zur Berechnung der Formel 
+      $\textcolor{#0066CC}{E=((A \vee C) \wedge (B \vee C))}$. Wir berechnen zunächst die elementaren
+      Verknüpfungen $A \vee C$ und $B \vee C$ aus den bewerteten Basis-Aussagen $A$, $B$ und 
+      $C$ und erst im zweiten Schritt die \emph{Konjunktion} dieser beiden Teilaussagen.
+      Die Wahrheitstafel wird entsprechend fortgeschrieben:
+      }
+      \lang{en}{
+      We use a similar strategy to find the truth-values of the formula 
+      $\textcolor{#0066CC}{E=((A \vee C) \wedge (B \vee C))}$. Firstly we find the values for 
+      $A \vee C$ and $B \vee C$, and then find the values for the \emph{conjunction} of these two 
+      sub-formulas. The truth table is written as follows:
+      }
+
+    \lang{de}{
+    \begin{table}[\align{c}\cellaligns{cccccccccc}] % {c|c|c||c}
+      \head
+      $A$ & $B$ & $C$ && $A\wedge B$ & $D=((A\wedge B) \vee C)$ & $\textcolor{#0066CC}{A \vee C}$ & $\textcolor{#0066CC}{B \vee C}$ 
+      & $\textcolor{#0066CC}{E=((A \vee C) \wedge (B \vee C))}$ & $D \Leftrightarrow E$ \\
+      \body
+      W & W & W && W & W &  \textcolor{#0066CC}{W} & \textcolor{#0066CC}{W} & \textcolor{#0066CC}{W} &  \\
+      W & W & F && W & W &  \textcolor{#0066CC}{W} & \textcolor{#0066CC}{W} & \textcolor{#0066CC}{W} &  \\
+      W & F & W && F & W &  \textcolor{#0066CC}{W} & \textcolor{#0066CC}{W} & \textcolor{#0066CC}{W} &  \\
+      W & F & F && F & F &  \textcolor{#0066CC}{W} & \textcolor{#0066CC}{F} & \textcolor{#0066CC}{F} &  \\ 
+      F & W & W && F & W &  \textcolor{#0066CC}{W} & \textcolor{#0066CC}{W} & \textcolor{#0066CC}{W} &  \\
+      F & W & F && F & F &  \textcolor{#0066CC}{F} & \textcolor{#0066CC}{W} & \textcolor{#0066CC}{F} &  \\
+      F & F & W && F & W &  \textcolor{#0066CC}{W} & \textcolor{#0066CC}{W} & \textcolor{#0066CC}{W} &  \\
+      F & F & F && F & F &  \textcolor{#0066CC}{F} & \textcolor{#0066CC}{F} & \textcolor{#0066CC}{F} &  \\       
+    \end{table}
+    }
+    \lang{en}{
+    \begin{table}[\align{c}\cellaligns{cccccccccc}] % {c|c|c||c}
+      \head
+      $A$ & $B$ & $C$ && $A\wedge B$ & $D=((A\wedge B) \vee C)$ & $\textcolor{#0066CC}{A \vee C}$ & $\textcolor{#0066CC}{B \vee C}$ 
+      & $\textcolor{#0066CC}{E=((A \vee C) \wedge (B \vee C))}$ & $D \Leftrightarrow E$ \\
+      \body
+      T & T & T && T & T &  \textcolor{#0066CC}{T} & \textcolor{#0066CC}{T} & \textcolor{#0066CC}{T} &  \\
+      T & T & F && T & T &  \textcolor{#0066CC}{T} & \textcolor{#0066CC}{T} & \textcolor{#0066CC}{T} &  \\
+      T & F & T && F & T &  \textcolor{#0066CC}{T} & \textcolor{#0066CC}{T} & \textcolor{#0066CC}{T} &  \\
+      T & F & F && F & F &  \textcolor{#0066CC}{T} & \textcolor{#0066CC}{F} & \textcolor{#0066CC}{F} &  \\ 
+      F & T & T && F & T &  \textcolor{#0066CC}{T} & \textcolor{#0066CC}{T} & \textcolor{#0066CC}{T} &  \\
+      F & T & F && F & F &  \textcolor{#0066CC}{F} & \textcolor{#0066CC}{T} & \textcolor{#0066CC}{F} &  \\
+      F & F & T && F & T &  \textcolor{#0066CC}{T} & \textcolor{#0066CC}{T} & \textcolor{#0066CC}{T} &  \\
+      F & F & F && F & F &  \textcolor{#0066CC}{F} & \textcolor{#0066CC}{F} & \textcolor{#0066CC}{F} &  \\       
+    \end{table}
+    }
+
+      \step
+      \lang{de}{
+      Der letzte Schritt ist die Bewertung der \emph{Äquivalenz} der beiden Teilaussagen
+      $\,D=((A\wedge B) \vee C)\,$ und $\,E=((A \vee C) \wedge (B \vee C)),\,$
+      die wir nun direkt aus den entsprechenden Spalten herleiten können:
+      }
+      \lang{en}{
+      The final step is to evaluate the \emph{equivalence} of the two sub-formulas 
+      $\,D=((A\wedge B) \vee C)\,$ and $\,E=((A \vee C) \wedge (B \vee C))$, 
+      which can now be directly read from the corresponding columns:
+      }
+
+    \lang{de}{
+    \begin{table}[\align{c}\cellaligns{cccccccccc}] % {c|c|c||c}
+      \head
+      $A$ & $B$ & $C$ && $A\wedge B$ & $\textcolor{#0066CC}{D=((A\wedge B) \vee C)}$ & $A \vee C$ & $B \vee C$ 
+      & $\textcolor{#0066CC}{E=((A \vee C) \wedge (B \vee C))}$ & $\textcolor{#0066CC}{D \Leftrightarrow E}$ \\
+      \body
+      W & W & W && W & \textcolor{#0066CC}{W} &  W & W & \textcolor{#0066CC}{W} & \textcolor{#0066CC}{W} \\
+      W & W & F && W & \textcolor{#0066CC}{W} &  W & W & \textcolor{#0066CC}{W} & \textcolor{#0066CC}{W} \\
+      W & F & W && F & \textcolor{#0066CC}{W} &  W & W & \textcolor{#0066CC}{W} & \textcolor{#0066CC}{W} \\
+      W & F & F && F & \textcolor{#0066CC}{F} &  W & F & \textcolor{#0066CC}{F} & \textcolor{#0066CC}{W} \\ 
+      F & W & W && F & \textcolor{#0066CC}{W} &  W & W & \textcolor{#0066CC}{W} & \textcolor{#0066CC}{W} \\
+      F & W & F && F & \textcolor{#0066CC}{F} &  F & W & \textcolor{#0066CC}{F} & \textcolor{#0066CC}{W} \\
+      F & F & W && F & \textcolor{#0066CC}{W} &  W & W & \textcolor{#0066CC}{W} & \textcolor{#0066CC}{W} \\
+      F & F & F && F & \textcolor{#0066CC}{F} &  F & F & \textcolor{#0066CC}{F} & \textcolor{#0066CC}{W} \\       
+    \end{table}
+    }
+    \lang{en}{
+    \begin{table}[\align{c}\cellaligns{cccccccccc}] % {c|c|c||c}
+      \head
+      $A$ & $B$ & $C$ && $A\wedge B$ & $\textcolor{#0066CC}{D=((A\wedge B) \vee C)}$ & $A \vee C$ & $B \vee C$ 
+      & $\textcolor{#0066CC}{E=((A \vee C) \wedge (B \vee C))}$ & $\textcolor{#0066CC}{D \Leftrightarrow E}$ \\
+      \body
+      T & T & T && T & \textcolor{#0066CC}{T} &  T & T & \textcolor{#0066CC}{T} & \textcolor{#0066CC}{T} \\
+      T & T & F && T & \textcolor{#0066CC}{T} &  T & T & \textcolor{#0066CC}{T} & \textcolor{#0066CC}{T} \\
+      T & F & T && F & \textcolor{#0066CC}{T} &  T & T & \textcolor{#0066CC}{T} & \textcolor{#0066CC}{T} \\
+      T & F & F && F & \textcolor{#0066CC}{F} &  T & F & \textcolor{#0066CC}{F} & \textcolor{#0066CC}{T} \\ 
+      F & T & T && F & \textcolor{#0066CC}{T} &  T & T & \textcolor{#0066CC}{T} & \textcolor{#0066CC}{T} \\
+      F & T & F && F & \textcolor{#0066CC}{F} &  F & T & \textcolor{#0066CC}{F} & \textcolor{#0066CC}{T} \\
+      F & F & T && F & \textcolor{#0066CC}{T} &  T & T & \textcolor{#0066CC}{T} & \textcolor{#0066CC}{T} \\
+      F & F & F && F & \textcolor{#0066CC}{F} &  F & F & \textcolor{#0066CC}{F} & \textcolor{#0066CC}{T} \\       
+    \end{table}
+    }
+ 
+    \lang{de}{
+    Die letzte Spalte der Wahrheitstafel enthält nur noch den Wahrheitswert "`$W$"'. Das bedeutet,
+    dass die Äquivalenz der beiden Formeln $\,D=((A\wedge B) \vee C)\,$
+    und $\,E=((A \vee C) \wedge (B \vee C))\,$ für alle möglichen Bewertungs-Kombinationen der
+    Basis-Variablen $A$, $B$ und $C$ gegeben ist.
+    \\\\
+    \textbf{Bemerkung:}\\
+    Dasselbe gilt im Übrigen
+    auch, wenn man die Junktoren "`$\,\vee\,$"' und "`$\,\wedge\,$"' vertauscht, also 
+    \[((A\vee B) \wedge C) \Leftrightarrow ((A \wedge C) \vee (B \wedge C)) .\]
+    Für Aussagen gilt daher das \notion{\emph{Distributivgesetz}} bzgl. der
+    Junktoren "`$\,\vee\,$"' und "`$\,\wedge$"'.
+    }
+    \lang{en}{
+    The resulting truth table confirms the equivalence of the two formulas, as the last column of the 
+    truth table only contains the truth-value '$T$'. This means that the equivalence between the two 
+    formulas $\,D=((A\wedge B) \vee C)\,$ and $\,E=((A \vee C) \wedge (B \vee C))\,$ holds for all 
+    possible combinations of truth-values of the variables $A$, $B$ and $C$.
+    \\\\
+    \textbf{Remark:}\\
+    In fact, the same holds if we swap  disjunction '$\,\vee\,$' with conjunction '$\,\wedge\,$', 
+    i.e.
+    \[((A\vee B) \wedge C) \Leftrightarrow ((A \wedge C) \vee (B \wedge C)) .\]
+    This is why the \notion{\emph{distributivity law}} holds between '$\,\vee\,$' and '$\,\wedge$'.
+    }
+      
+    \end{incremental}
+  \end{tabs*}
+
+
+
+
+
+
+\end{content}
+

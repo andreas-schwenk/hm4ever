@@ -1,0 +1,120 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A05: Häufungspunkte}
+    \lang{en}{mc yes-no}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{description}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A05: Häufungspunkte}}
+\lang{en}{\title{Problem 5}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9862}{Ticket 9862}
+\end{block}
+
+
+\begin{problem}
+
+  	\begin{question}
+        \begin{variables}
+			\drawFromSet{a}{3,5,7}
+            \randint{b}{6}{8}
+            \randint{c}{2}{3}
+            \randint{d}{2}{8}
+            \function{loes1}{1*e}
+            \number{loes2}{1}
+            \function[calculate]{loes3}{d*e}
+        \end{variables}
+		\type{input.finite-number-set}
+		\field{real}
+        \correctorprecision{2}
+        
+		\lang{de}{\text{Bestimmen Sie die Häufungspunkte bzw. den Grenzwert der nachstehenden beiden Folgen $(a_n)_{n\in\mathbb{N}}$
+        und $(b_n)_{n\in\mathbb{N}}$ mit\\\\
+        $a_{n}=\begin{cases}
+         \left(1+\frac{1}{\var{a}n+1}\right)^{\var{a}n+1}&\text{ , falls }n \text{ gerade}\\
+	     1+\var{b}^{-n}&\text{ , falls }n \text{ ungerade.}
+        \end{cases} $\\\\
+        sowie\\\\
+         $b_{n}=\var{d}~(1+\frac{1}{n^2+\var{c}})^{n^2}$
+        }}
+        \explanation{Untersuchen Sie die Folge $a_n$ auf Teilfolgen. Denken Sie an Folgen, die den Grenzwert $e$ besitzen.}
+    
+		\begin{answer}
+			\text{Die Häufungspunkte bzw. der Grenzwert von $a_n$ lauten/lautet:}
+			\solution{loes1,loes2}
+		\end{answer}
+		\begin{answer}
+			\text{Die Häufungspunkte bzw. der Grenzwert von $b_n$ lauten/lautet:}
+			\solution{loes3}
+		\end{answer}
+		
+	\end{question}
+
+  \begin{question}
+    \lang{de}{\text{Kreuzen Sie alle Aussagen an, die auf die Folgen $(a_n)_{n\in\mathbb{N}}$ und $(b_n)_{n\in\mathbb{N}}$ von Aufgabenteil $a)$ zutreffen.}}
+    \explanation{Beachten Sie, dass der Grenzwert einer konvergenten Folge eindeutig bestimmt ist.}
+    \type{mc.multiple}
+    \permutechoices{1}{5}
+    
+       \begin{choice}
+      \lang{de}{\text{
+      Die Folge $(a_n)_{n\in\mathbb{N}}$ konvergiert.
+      }}
+      \solution{false}
+    \end{choice}  
+    
+    \begin{choice}
+      \lang{de}{\text{
+      Die Folge $(a_n)_{n\in\mathbb{N}}$ hat zwei Häufungspunkte.
+      }}
+      \solution{true}
+    \end{choice}
+    
+      \begin{choice}
+      \lang{de}{\text{
+      Die Folge $(b_n)_{n\in\mathbb{N}}$ hat genau einen Häufungspunkt und konvergiert.
+      }}
+      \solution{true}
+    \end{choice}
+    
+      \begin{choice}
+      \lang{de}{\text{
+      Die Folge $(b_n)_{n\in\mathbb{N}}$ besitzt keinen Häufungspunkt.
+      }}
+      \solution{false}
+    \end{choice}
+    
+      \begin{choice}
+      \lang{de}{\text{
+      Beide Folgen besitzen mindestens eine konvergente Teilfolge.
+      }}
+      \solution{true}
+    \end{choice}
+       
+   \end{question}
+
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

@@ -1,0 +1,664 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Der Ableitungsbegriff}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T603_AbsoluteValue.meta.xml}{T603_AbsoluteValue}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T603_Tangent_B.meta.xml}{T603_Tangent_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T603_Tangent_A.meta.xml}{T603_Tangent_A}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T601_GrundlagenWiWi/g_art_content_04_Funktionsbegriff.meta.xml}{content_04_Funktionsbegriff}
+    \link{generic_article}{content/rwth/HM1/T601_GrundlagenWiWi/g_art_content_03_Folgen_Reihen.meta.xml}{content_03_Folgen_Reihen}
+    \link{generic_article}{content/rwth/HM1/T601_GrundlagenWiWi/g_art_content_05_Wichtige_Funktionen.meta.xml}{content_05_Wichtige_Funktionen}
+    \link{generic_article}{content/rwth/HM1/T603_Differentialrechnung/g_art_content_09_Ableitungsbegriff.meta.xml}{content_09_Ableitungsbegriff}
+    \link{generic_article}{content/rwth/HM1/T301_Differenzierbarkeit/g_art_content_01_differenzenquotient.meta.xml}{content_01_differenzenquotient}
+    \link{generic_article}{content/rwth/HM1/T210_Stetigkeit/g_art_content_31_grenzwerte_von_funktionen.meta.xml}{grenzw-funk}
+    \link{generic_article}{content/rwth/HM1/T209_Potenzreihen/g_art_content_28_exponentialreihe.meta.xml}{expreihe}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{3}
+\ombarticle{1}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{
+\lang{de}{Der Ableitungsbegriff}
+\lang{en}{The derivative}
+}
+\begin{block}[annotation]
+  
+  
+\end{block}
+\begin{block}[annotation]
+Im Ticket-System: \href{https://team.mumie.net/issues/21578}{Ticket 21578}\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{
+	\lang{de}{Definition der Ableitung}
+	\lang{en}{Definition of the derivative}
+}
+
+\lang{de}{Sehr häufig haben wir es mit der Situation zu tun, dass wir zwei Größen betrachten und der Wert der 
+einen Größe von der anderen abhängt. Wie wir schon in Kapitel 1 gesehen haben, können wir solche 
+Zusammenhänge gut durch Funktionen $y = f(x)$ darstellen. Besonders wichtig ist häufig die Frage, 
+wie sich der Wert von Größe $y$ ändert, ob der Wert beispielsweise in der Tendenz fällt oder wächst.}
+\lang{en}{
+We often find ourselves in the situation where we have to consider two variables, one of whose
+values depends on the other's. As we saw in Chapter 1, relationships of this type can be
+modeled by functions $y = f(x)$. Often, a particularly important question is how the value of
+$y$ changes; for example, whether it tends to increase or decrease.
+}
+
+\lang{de}{Solche Änderungsraten kennen Sie aus den Naturwissenschaften (z.\,B. Beschleunigung als Änderung der Geschwindigkeit), 
+aber auch in den Wirtschaftswissenschaften sind sie unerlässlich, um ökonomische 
+Sachverhalte korrekt zu verstehen. }
+\lang{en}{
+The concept of rate of change is well-known from the natural sciences (e.g. acceleration
+as the change of velocity), but it is also indispensible for understanding
+economical issues correctly.
+}
+
+\begin{example}[\lang{de}{Grenzkosten} \lang{en}{Marginal cost}]\label{ex:grenzkosten}
+\lang{de}{Wir bezeichnen mit $K(x)$ die Produktionskosten für $x$ Einheiten eines Gutes und fassen $K$ als Funktion auf. 
+Wir nehmen an, dass aktuell $x_0$ Einheiten produziert werden und dass die Produktion um $h$ Einheiten erhöht werden soll. 
+Der Kostenzuwachs ist dann $K(x_0+h) - K(x_0)$, also die Kosten für die Produktion von $x_0+h$ Einheiten abzüglich der 
+bisherigen Kosten. Diese Mehrkosten verteilen sich auf $h$ Einheiten, also 
+ist der Kostenzuwachs pro zusätzlich produzierter Einheit }
+\lang{en}{
+Let $K(x)$ be the cost of producing $x$ unit of a good. We view $K$ as a function. Suppose
+$x_0$ units are currently being produced, but the production then increases by $h$ units.
+The increase in cost is then $K(x_0+h)-K(x_0)$, that is, the cost of producing $x_0+h$ units
+minus the cost of producing $x_0$ units. These additional costs are distributed over $h$ units,
+so the increase in cost per additionally produced unit is
+}
+\[
+\frac{K(x_0+h)-K(x_0)}{h}.
+\]
+\lang{de}{Bei den \emph{Grenzkosten} handelt es sich um den Kostenzuwachs, der durch die Mehrproduktion einer Einheit des Gutes entsteht. Ist $h$ eine 
+\glqq große\grqq Zahl, etwa $h=1000$, dann können wir über die Grenzkosten nicht viel aussagen. Es ist z.\,B. möglich, dass die Produktion 
+von $700$ weiteren Einheiten recht kostengünstig möglich war, für die nächsten $300$ Einheiten jedoch teure Maschinen angeschafft werden mussten. 
+Der oben berechnete Kostenzuwachs pro zusätzlich produzierter Einheit ist lediglich ein Mittelwert, die \emph{mittlere Änderungsrate} der 
+Kostenfunktion. }
+\lang{en}{
+The \emph{marginal cost} is the increase of cost that arises by producing an additional unit
+of the good. If $h$ is "large", say $h=1000$, then the quotient above does not say much
+about the marginal cost. For example, it is possible that producing an additional 700 units
+is very cost-efficient but the remaining 300 units require expensive machines to be purchased.
+The cost growth calculated above is merely an average,
+the \emph{average rate of change} of the cost function.
+}
+
+\lang{de}{Um die Grenzkosten zu beziffern, sollte $h$ also möglichst klein sein. Hohe Grenzkosten bei $x_0$ äußern sich dadurch, dass die Kostenfunktion 
+$K$ bei $x_0$ stark ansteigt.}
+\lang{en}{
+To quantify the marginal cost, we want $h$ to be as small as possible.
+A high marginal cost in $x_0$ is reflected in a strong increase of the cost function $K$ in $x_0$.
+}
+\end{example}
+
+
+\lang{de}{Unser erstes Ziel besteht darin, die Steigung einer Funktion an einer bestimmten Stelle messbar zu machen.
+Den Begriff \glqq Steigung\grqq im mathematischen Zusammenhang kennen wir bisher
+nur von \ref[content_05_Wichtige_Funktionen][Geraden]{sec:linear}, daher werden wir Geraden als Hilfsmittel benutzen. }
+\lang{en}{
+Our first goal will be to measure the slope of a function at a given point.
+The notion of \emph{slope} in a mathematical context has only been introduced for
+\ref[content_05_Wichtige_Funktionen][lines]{sec:linear}, so we will reduce our problem to lines.
+}
+
+\lang{de}{Eine \emph{Tangente} an einen Funktionsgraphen ist eine Gerade, die sich an den Graphen \glqq anschmiegt\grqq, man sagt \emph{in einem Punkt berührt}. Die Steigung 
+der Tangente werden wir als Steigung des Funktionsgraphen verwenden. Das Problem dabei ist, dass wir nicht wissen, wie man die Tangente 
+berechnen kann, da wir dafür \emph{zwei} Punkte bräuchten. Die Lösung des Problems besteht darin, dass man die Tangente durch andere Geraden annähert, die man immerhin 
+berechnen könnte. }
+\lang{en}{
+A \emph{tangent} to the graph of a function is a line that "hugs" the graph;
+we say that it \emph{touches it in only one point}. The slope of the tangent will be taken
+to be the slope of the graph. The problem here is that we do not know how to compute the tangent,
+since we need \emph{two} points to determine it. The solution is to approximate the
+tangent by other lines that can be computed.
+}
+
+\lang{de}{Um rechnerisch zu verstehen, was das bedeutet, betrachten wir zunächst die Gerade durch die beiden Punkte $P_0=(x_0;f(x_0))$ und 
+$Q = (x_0+h; f(x_0+h))$. Eine solche Gerade, die durch (mindestens) zwei Punkte einer Kurve verläuft, nennt man auch \emph{Sekante}. 
+}
+\lang{en}{
+To understand what this means numerically, first consider the line through the two points
+$P_0 = (x_0, f(x_0))$ and $Q = (x_0+h, f(x_0+h))$. Any such line that goes through (at least)
+two points of the curve is called a \emph{secant}.
+}
+
+\begin{center}
+\image{T603_Tangent_A}
+\end{center}
+
+\lang{de}{Die Steigung der Sekante durch die beiden Punkte können wir (wie im \ref[content_05_Wichtige_Funktionen][ersten Teil des Kurses]{rule:geradengleichung}) berechnen: Sie ist
+\[m = \frac{f(x_0+h)-f(x_0)}{(x_0+h)-x_0}=\frac{f(x_0+h)-f(x_0)}{h}.\]
+Weil $m$ ein Quotient (d.\,h. ein Bruch) von Differenzen ist, hat sich für die Formel von $m$ auch die Bezeichnung \emph{Differenzenquotient} 
+durchgesetzt. Die Formel für die Steigung ist übrigens die gleiche Formel, die wir in Beispiel \ref{ex:grenzkosten} zur Näherung der Grenzkosten gefunden haben.}
+\lang{en}{
+The slope of the secant line through the two points can be calculated (as in the \ref[content_05_Wichtige_Funktionen][first part of the course]{rule:geradengleichung}):
+it is
+\[m = \frac{f(x_0+h)-f(x_0)}{(x_0+h)-x_0}=\frac{f(x_0+h)-f(x_0)}{h}.\]
+Since $m$ is a quotient (fraction) of differences, the formula for $m$ is commonly called a
+\emph{difference quotient}. Incidentally, the formula for the slope is the same formula
+that we found in Example \ref{ex:grenzkosten} for approximating marginal cost.
+}
+
+\lang{de}{Wir bewegen den Punkt $Q$ nun langsam auf den Punkt $P_0$ zu. Das erreichen wir, indem wir für $h$ verschiedene Werte $h_1, h_2, \ldots$ wählen, die immer näher an $0$ liegen. 
+Im folgenden Bild sehen wir, dass sich dann die jeweiligen
+Sekanten immer weiter der Tangente an den Graphen n\"{a}hern. Auch die Steigungen der Sekanten n\"{a}hern sich der Steigung der Tangente an.}
+\lang{en}{
+Now, we slowly move the point $Q$ towards the point $P_0$. This is done by substituting values
+$h_1,h_2,...$ for $h$ that get closer and closer to zero. The image below shows how the
+secant lines then approach the tangent to the graph more and more closely.
+The slopes of the secant lines also approach the slope of the tangent.
+}
+
+\begin{center}
+\image{T603_Tangent_B}
+\end{center}
+
+\lang{de}{Wenn diese Annäherung beliebig gut geht, die Sekantensteigung sich für $h \to 0$ also immer besser der Tangentensteigung annähert, werden wir die 
+Tangentensteigung als \glqq Ableitung\grqq bezeichnen. Mathematisch präzise:}
+\lang{en}{
+If these approximations become arbitrarily close, such that the slope of the secant
+approximates the slope of the tangent arbitrarily well, then we call the slope of the
+tangent the "derivative". Stated rigorously:
+}
+
+\begin{definition}
+\lang{de}{Es sei $I$ ein offenes Intervall, $f \colon I \to \R$ eine Funktion und $x_0 \in I$.}
+\lang{en}{Let $I$ be an open interval, $f\colon I \to \R$ a function and $x_0 \in I$.}
+\begin{itemize}
+\item \lang{de}{Wenn der folgende \ref[content_03_Folgen_Reihen][Grenzwert]{def:folgenkonvergent} existiert ($\pm \infty$ nicht erlaubt!), 
+definieren wir 
+\[f'(x_0):= \lim_{h\to 0} \frac{f(x_0+h)-f(x_0)}{h} \quad \left( =\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0} \right)\]
+und nennen den Wert $f'(x_0)$ die \notion{Ableitung von $f$ in $x_0$}. Wir sagen auch, dass die Funktion $f$ 
+\notion{in $x_0$ differenzierbar} ist. }
+\lang{en}{
+If the \ref[content_03_Folgen_Reihen][limit]{def:folgenkonvergent} below exists ($\pm \infty$ are not allowed),
+then we define
+\[f'(x_0):= \lim_{h\to 0} \frac{f(x_0+h)-f(x_0)}{h} \quad \left( =\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0} \right)\]
+and call the value $f'(x_0)$ the \notion{derivative of $f$ in $x_0$}.
+We say that the function $f$ is \notion{differentiable in $x_0$}.
+}
+
+\item \lang{de}{Ist $f$ in jedem $x \in I$ differenzierbar, so nennen wir $f$ \notion{differenzierbar} und bezeichnen mit  
+$f'$ die Funktion, die an $x \in I$ den Wert $f'(x)$ besitzt. Wir nennen $f'$ 
+\notion{Ableitungsfunktion} oder auch \notion{erste Ableitung} von $f$.}
+\lang{en}{
+If $f$ is differentiable in every point $x \in I$, then we call $f$ \notion{differentiable}
+and write $f'$ for the function whose value in $x \in I$ is $f'(x)$.
+WE call $f'$ the \notion{derivative}, or \notion{first derivative}, of $f$.
+}
+\end{itemize}
+\end{definition}
+\begin{remark}
+\lang{de}{Eine andere Schreibweise für die Ableitungsfunktion $f'(x)$ ist $\frac{df}{dx}$. 
+Ein Vorteil dieser Schreibweise ist, dass der Name der Variable immer klar ist. 
+Für $f'(x_0)$ wird  $\frac{df}{dx}(x_0)$ oder auch $\frac{df}{dx}|_{x=x_0}$ geschrieben. }
+\lang{en}{
+Another way to write the derivative $f'(x)$ is $\frac{df}{dx}$. One advantage of this
+notation is that the name of the variable is always clear.
+To write $f'(x_0)$, one uses $\frac{df}{dx}(x_0)$ or $\frac{df}{dx}|_{x=x_0}$.
+}
+\end{remark}
+\lang{de}{Mit der Deutung der Ableitung als Steigung der Tangente an den Funktionsgraphen können wir auch direkt die
+ganze Tangentengleichung bestimmen: }
+\lang{en}{
+Using the interpretation of the derivative as the slope of the tangent to the graph,
+we can compute the entire equation of the tangent line:
+}
+ \begin{theorem}
+\lang{de}{Die Tangente an den Graphen einer differenzierbaren Funktion $f$ im Punkt $(x_0;f(x_0))$ ist
+gegeben durch 
+\[T(x)=f'(x_0)\cdot(x-x_0)+f(x_0).\]
+}
+\lang{en}{
+The tangent line to the graph of a differentiable function $f$ at the point $(x_0;f(x_0))$
+is given by \[T(x)=f'(x_0)\cdot(x-x_0)+f(x_0).\]
+}
+\end{theorem}
+ 
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{a}{-2}{-1}
+			\randint[Z]{b}{-1}{1}
+			\randint{c}{4}{4}
+			\function[normalize]{f}{x^3+a*x^2+b*x+c}
+			\randint[Z]{p}{1}{2}
+			\function[calculate]{x0}{p}
+			\function[calculate]{m}{3*x0^2+2*a*x0+b}
+            \function[calculate]{fx0}{x0^3+a*x0^2+b*x0+c}
+            \function[calculate]{n}{fx0-x0*m}
+		\end{variables}
+        
+      \lang{de}{
+			\text{     
+            In der folgenden Visualisierung können Sie sich für ganzrationale Funktionen vom Grad 3 die Werte der
+            Ableitung an einer Stelle anzeigen lassen.  }
+            }
+      \lang{en}{
+      \text{
+            The visualization below shows the value of the derivative at a point for
+            polynomials of degree 3.
+      }
+      }
+            
+        \begin{genericGWTVisualization}[550][1000]{mathlet}
+		\begin{variables}
+			\number[editable]{a}{rational}{1}
+			\number[editable]{b}{rational}{1}
+			\number[editable]{c}{rational}{1}
+			\number[editable]{x0}{rational}{0}
+			\function{f}{rational}{x^3+var(a)*x^2+var(b)*x+var(c)}
+			\number{y0}{rational}{var(x0)^3+var(a)*var(x0)^2+var(b)*var(x0)+var(c)}
+			\number{m}{rational}{3*var(x0)^2+2*var(a)*var(x0)+var(b)}
+			\number{q0}{rational}{var(y0)-var(m)*var(x0)}
+			\point{P}{rational}{var(x0),var(y0)}
+			\point{Q}{rational}{var(x0)+1,var(y0)}
+			\point{R}{rational}{var(x0)+1,var(y0)+var(m)}
+			\line{T}{rational}{var(P),var(R)}
+			\segment{s1}{rational}{var(P),var(Q)}
+			\segment{s2}{rational}{var(Q),var(R)}
+		\end{variables}
+% 		\color{P}{BLUE}
+% 		\label{P}{$\textcolor{BLUE}{P}$}
+		\color{s1}{#00CC00}
+		\color{s2}{#00CC00}
+		\color{T}{#0066CC}
+%		\label{s1}{$\textcolor{BLUE}{1}$}
+%		\label{s2}{$\textcolor{BLUE}{\var{m}}$}
+		\begin{canvas}
+			\plotSize{300}
+			\plotLeft{-1}
+			\plotRight{3}
+			\plot[coordinateSystem]{f,T,P, s1,s2}
+		\end{canvas}
+		\lang{de}{\text{Die Funktion  $f$ mit $f(x)=x^3+\var{a}\cdot x^2+\var{b}\cdot x+\var{c}$ hat an der Stelle $x_0=\var{x0}$
+		die \textcolor{#0066CC}{Ableitung} \textcolor{BLUE}{$f'(x_0)=\var{m}$}.}
+    }
+    \lang{en}{\text{The function $f$ given by $f(x)=x^3+\var{a}\cdot x^2+\var{b}\cdot x+\var{c}$
+    has\textcolor{#0066CC}{derivative} \textcolor{BLUE}{$f'(x_0)=\var{m}$} in the point $x_0=\var{x0}$.
+    }}
+	    	\end{genericGWTVisualization}             
+            
+     \lang{de}{\text{       Wir betrachten nun die Funktion $f(x)=\var{f}$ an der Stelle $x_0=\var{x0}$. 
+			Bestimmen Sie mit Hilfe der Visualisierung die Geradengleichung der Tangente an den Graphen von $f$ an der Stelle $x_0 = \var{x0}$.\\            
+			$T(x)= $ \ansref  $ \cdot x +  $ \ansref . }}
+     \lang{en}{\text{ Consider the function $f(x)=\var{f}$.
+     Using the visualization, determine the equation of the tangent line to the graph of $f$
+     in the point $x_0 = \var{x0}$.}}
+		
+		\begin{answer}
+			\solution{m}
+		\end{answer}
+        \begin{answer}
+			\solution{n}
+		\end{answer}
+        
+		\lang{de}{\explanation{Der Ableitungswert $f'(\var{x0}) = \var{m}$ ist die Steigung der gesuchten Tangente. Außerdem ist $f(\var{x0}) = \var{fx0}$. Eingesetzt in die Gleichung für die Tangente 
+        ergibt sich 
+        \begin{align*}
+        T(x) &= \var{m} \cdot (x - \var{x0}) + \var{fx0} =  \var{m} \cdot x + \left(\var{m} \cdot (-\var{x0}) + \var{fx0}\right) \\
+           & = \var{m} \cdot x + \var{n} .
+        \end{align*}
+        }}
+    \lang{en}{\explanation{The derivative $f'(\var{x0}) = \var{m}$ is the slope of the
+    tangent that we are looking for. Also, $f(\var{x0}) = \var{fx0}$. Substituting this into the equation of the tangent line yields
+        \begin{align*}
+        T(x) &= \var{m} \cdot (x - \var{x0}) + \var{fx0} =  \var{m} \cdot x + \left(\var{m} \cdot (-\var{x0}) + \var{fx0}\right) \\
+           & = \var{m} \cdot x + \var{n} .
+        \end{align*}
+        }}
+	\end{quickcheck}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{
+	\lang{de}{Einseitige Differenzierbarkeit}
+	\lang{en}{One-sided differentiability}
+    }
+
+\lang{de}{In der Definition der Ableitung bedeutet $h \to 0$, dass $h$ sich auf jede erdenkliche Weise dem Wert $0$ nähern können muss. Das heißt auch,
+dass $h$ negativ sein kann. Im \ref[content_04_Funktionsbegriff][Kapitel zum Funktionsbegriff]{def:funktionsgrenzwert} haben wir auch die Schreibweisen $h \searrow 0$ und $h \nearrow 0$
+kennengelernt, die ausdrücken, dass sich der Wert $h$ nur von oben bzw. unten dem Wert $0$ annähert. Damit erhalten wir folgende Variante der
+Ableitung:}
+\lang{en}{
+The limit $h \to 0$ in the definition of the derivative means that $h$ is allowed to approach $0$ in
+any possible way. The \ref[content_04_Funktionsbegriff][chapter on functions]{def:funktionsgrenzwert} introduced
+the notation $h \searrow 0$ and $h \nearrow 0$, which express the fact that $h$ can only approach $0$ from above
+or from below, respectively. This leads to the following variant of the derivative:
+}
+
+\begin{definition}
+\lang{de}{Es sei $I$ ein offenes Intervall, $x_0 \in I$ und $f \colon I\to \R$ eine Funktion.}
+\lang{en}{Let $I$ be an open interval, $x_0 \in I$ and let $f \colon I\to \R$ be a function.}
+\begin{itemize}
+\item \lang{de}{Die \notion{rechtsseitige Ableitung} von $f$ an $x_0$ ist der Grenzwert 
+\[
+f^'_r(x_0) := \lim_{h\searrow 0} \frac{f(x_0+h)-f(x_0)}{h} , 
+\]
+vorausgesetzt dieser Grenzwert existiert. Ist dies der Fall, dann heißt $f$ \notion{rechtsseitig differenzierbar} an $x_0$.}
+\lang{en}{The \notion{right-hand derivative} of $f$ in $x_0$ is the limit
+\[
+f^'_r(x_0) := \lim_{h\searrow 0} \frac{f(x_0+h)-f(x_0)}{h} , 
+\]
+if this limit exists. In this case, $f$ is called \notion{right differentiable} in $x_0$.}
+
+\item \lang{de}{Entsprechend ist die \notion{linksseitige Ableitung} von $f$ an $x_0$ der Grenzwert 
+\[
+f^'_l(x_0) := \lim_{h\nearrow 0} \frac{f(x_0+h)-f(x_0)}{h} , 
+\]
+falls dieser Grenzert existiert. Entsprechend heißt dann $f$ \notion{linksseitig differenzierbar} an $x_0$.}
+\lang{en}{
+Similarly, the \notion{left-hand derivative} of $f$ in $x_0$ is the limit
+\[
+f^'_r(x_0) := \lim_{h\searrow 0} \frac{f(x_0+h)-f(x_0)}{h} , 
+\]
+if this limit exists. In this case, $f$ is called \notion{left differentiable} in $x_0$.}
+\end{itemize}
+\end{definition}
+\lang{de}{Es kann hilfreich sein, zunächst die rechts- und linksseitige Ableitung auszurechnen, etwa wenn die Funktion $f$ für  $x < x_0$ 
+anders definiert ist als für $x>x_0$.  Mit Hilfe von $f^'_r(x_0)$ und $f^'_l(x_0)$ kann man entscheiden, ob $f$ überhaupt eine Ableitung 
+besitzt:}
+\lang{en}{
+It is sometimes useful to compute the right- and left-hand derivatives separately; for example,
+if the function $f$ is defined differently for $x < x_0$ than for $x > x_0$.
+$f^'_r(x_0)$ and $f^'_l(x_0)$ can then be used to decide whether $f$ has a derivative at all:
+}
+
+\begin{theorem}
+\lang{de}{Es sei $f$ eine an $x_0$ links- und rechtsseitig differenzierbare Funktion. 
+
+Die Funktion $f$ ist genau dann an $x_0$ differenzierbar, wenn $f^'_l(x_0) = f^'_r(x_0)$ gilt. In diesem Fall ist  $f'(x_0) = f^'_l(x_0) = f^'_r(x_0)$.}
+
+\lang{en}{
+Let $f$ be a function that is both left and right differentiable in $x_0$.
+
+$f$ is differentiable in $x_0$ if and only if $f^'_l(x_0) = f^'_r(x_0)$. In that case, $f'(x_0) = f^'_l(x_0) = f^'_r(x_0)$.
+}
+\end{theorem}
+
+\lang{de}{Unterschiedliche Werte für rechts- und linksseitige Ableitung bedeuten anschaulich, dass der Funktionsgraph einen \glqq Knick\grqq hat. Solche 
+Knickstellen sind typisch für stetige Funktionen, die nicht differenzierbar sind. }
+
+\lang{en}{
+Intuitively, a function having different values for its right-hand and left-hand derivatives means that its graph
+has a cusp. Cusps are typical for continuous functions that are not differentiable.
+}
+
+\begin{example}[für nicht-differenzierbar]\label{ex:nichtdiffbar}
+\begin{center}
+\image{T603_AbsoluteValue}
+\end{center}
+
+\lang{de}{Wir betrachten die Betragsfunktion, welche ja gegeben ist durch eine Funktionsvorschrift mit Fallunterscheidung}
+\lang{en}{
+Consider the absolute value, given by the following assignment involving a case distinction:
+}
+\[
+	{\abs{x}} = 
+	\begin{cases}
+		\quad x, & \text{falls }x \geq 0,\\
+		\ -x, & \text{falls }x < 0.
+	\end{cases}
+\]
+\lang{de}{Für $x<0$ ist der Funktionsgraph eine Gerade mit Steigung $-1$, für $x>0$ eine Gerade mit Steigung $1$. An der Stelle $x_0 = 0$ gilt }
+\lang{en}{
+For $x<0$, the graph is a line of slope $-1$, and for $x>0$, the graph is a line of slope $1$. In the point $x_0=0$, we have
+}
+
+\begin{align*}
+f^'_r(x_0) &=  \lim_{h\searrow 0} \frac{|0+h| - |0|}{h}  =  \lim_{h\searrow 0} \frac{h}{h} = \lim_{h\searrow 0} 1 = 1,   \\
+f^'_l(x_0) &= \lim_{h\nearrow 0} \frac{|0+h|-|0|}{h}  \lim_{h\nearrow 0} \frac{-h}{h} =  \lim_{h\nearrow 0} -1 = -1,
+\end{align*}
+\lang{de}{denn $h$ ist im ersten Fall positiv und im zweiten Fall negativ (nähert sich von unten an $0$). Da sich die beiden Werte unterscheiden, 
+ist die Betragsfunktion an $x_0=0$ somit nicht differenzierbar. }
+\lang{en}{
+because $h$ is positive in the first case and negative in the second (as it approaches $0$ from below).
+Since these two values are different, the absolute value function is not differentiable in $x_0=0$.
+}
+\end{example}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\section{
+\lang{de}{Ableitungen elementarer Funktionen}
+\lang{en}{Derivatives of elementary functions}
+}\label{sec:abl-elem-funk}
+%Teilweise von OMB+-Kap. VII.3
+\lang{de}{Nachdem wir nun wissen, wie die Ableitung $f'$ einer Funktion $f$ mathematisch definiert ist, n\"{a}mlich als der 
+Grenzwert des Differenzenquotienten, wollen wir für einige Funktionen die Ableitung berechnen.}
+\lang{en}{
+Now that we know how the derivative $f'$ of a function $f$ is defined mathematically as
+a limit of difference quotients, we want to compute the derivatives of some functions.
+} 
+\begin{example}
+\begin{tabs*}[\initialtab{0}]
+\tab{$f(x)=3x+7$}
+\lang{de}{Wir betrachten die lineare Funktion $f(x)=3x+7$. Wir berechnen die Ableitung an einer beliebigen Stelle $x$:}
+\lang{en}{
+Consider the linear function $f(x)=3x+7$. We will calculate the derivative at an arbitrary point $x$:
+}
+\begin{align*}
+f'(x)&=\lim_{h\rightarrow 0}\frac{f(x+h)-f(x)}{h}=\lim_{h\rightarrow 0}\frac{3(x+h)+7-(3x+7)}{h} \\ &=\lim_{h\rightarrow 0}\frac{3h}{h}=
+\lim_{h\rightarrow 0} 3=3.
+\end{align*}
+\lang{de}{Die Ableitungsfunktion einer linearen Funktion mit Steigung $3$ ist also die konstante Funktion $f'(x)=3$.
+Dies stimmt mit der Anschauung auch überein, dass der Funktionsgraph von $f$ eine Gerade mit Steigung $3$ ist. }
+\lang{en}{
+The derivative of a linear function of slope $3$ is therefore the constant function $f'(x)=3$.
+This matches our intuition, because the graph of $f$ is a line of slope $3$.
+}
+\tab{$f(x)=x^2$}
+\lang{de}{Um die Ableitung der Potenzfunktion $f(x)=x^2$ zu bestimmen, benötigen wir die 
+binomische Formel}
+\lang{en}{
+To determine the derivative of the power function $f(x)=x^2$, we will need the binomial formula
+}
+\[    (a+b)^2=a^2+2ab+b^2. \]
+\lang{de}{Wir berechnen die Ableitung wieder an einer (beliebigen) Stelle $x$:}
+\lang{en}{We will compute the derivative in an (arbitrary) point $x$:}
+		\begin{align*}
+		f'(x)&=\lim_{h\rightarrow 0}\frac{f(x+h)-f(x)}{h}=\lim_{h\rightarrow 0}\frac{(x+h)^2-x^2}{h}\\
+		&=\lim_{h\rightarrow 0}\frac{x^2+2xh+h^2-x^2}{h}=\lim_{h\rightarrow 0}\frac{2xh+h^2}{h}\\
+		&=\lim_{h\rightarrow 0}2x+h=2x.
+		\end{align*}
+
+
+\tab{$f(x)=\frac{1}{x}$}
+\lang{de}{Die Funktion $f(x)=\frac{1}{x}$ ist für $x\in\R\setminus\{0\}$ definiert. Es sei $x\neq 0$ beliebig und $h$ \glqq gen\"{u}gend klein\grqq 
+(d.\,h. $|h| < |x|$, damit $x \pm h \neq 0$ nicht passieren kann).
+Dann ist}
+\lang{en}{
+The function $f(x)=\frac{1}{x}$ is only defined for $x\in\R\setminus\{0\}$.
+Let $x \ne 0$ be arbitrary and let $h$ be "small enough" (that is, $|h| < |x|$,
+so that $x\pm h$ cannot be zero). Then
+}
+\begin{eqnarray*}
+\frac{f(x+h)-f(x)}{h}&=&\frac{\frac{1}{x+h}-\frac{1}{x}}{h} = \frac{1}{h} \cdot \left(\frac{1}{x+h} - \frac{1}{x} \right)
+=\frac{1}{h}\cdot \frac{x-(x+h)}{(x+h)x}\\&=&\frac{1}{h}\cdot\frac{-h}{(x+h)x}=-\frac{1}{(x+h)x} \ ,
+\end{eqnarray*}
+\lang{de}{also} \lang{en}{and therefore}
+\[f'(x)=\lim_{h\rightarrow 0}-\frac{1}{(x+h)x}=-\frac{1}{x^2}.\]
+\end{tabs*}
+\end{example}
+
+\begin{remark}
+\lang{de}{
+Lust auf kompliziertere Beispiele? Die gibt es \ref[content_01_differenzenquotient][hier]{ex:abl-elem-funk}.
+}
+\lang{en}{
+Would you like to try more complicated examples?
+There are some \ref[content_01_differenzenquotient][here]{ex:abl-elem-funk}.
+}
+
+
+\lang{de}{In den allermeisten Fällen wird man Ableitungen mit Hilfe von \notion{Ableitungsregeln} berechnen, die wir im nächsten 
+Kapitel behandeln werden. }
+\lang{en}{
+In most cases, derivatives are computed using the \notion{differentiation rules}
+that will be treated in the next chapter.
+}
+
+\lang{de}{Bei Funktionen mit Fallunterscheidungen bleibt einem jedoch häufig nichts anderes übrig, als die 
+Ableitung an den kritischen Stellen wie oben mit der Definition der Ableitung zu berechnen.  }
+\lang{en}{
+However, for functions that involve case distinctions, we often have no choice but to
+resort to the definition to compute derivatives in the critical points, as above.
+}
+\end{remark}
+
+\lang{de}{Unser bisheriges Wissen über die Ableitung können wir auch schon in wirtschaftswissenschaftlichem Kontext nutzen: 
+}
+\lang{en}{
+What we have learned about the derivative so far can already be applied to an economic context:
+}
+
+\begin{quickcheck}
+	\field{rational}
+	\type{input.function}
+	\begin{variables}
+		\function[normalize]{k}{3x^2-5x+9}
+		\function[normalize]{dk}{6x-5}
+        \function[normalize]{k10}{6*10-5}
+	\end{variables}
+
+  \lang{de}{
+	\text{
+        Gegeben ist die Kostenfunktion $K(x)=\var{k}$ (Kosten in €). Bestimmen Sie mit Hilfe des Differenzenquotienten die Grenzkostenfunktion $K'(x)$.
+        Wie hoch sind die Grenzkosten bei $10$ Mengeneinheiten? \\         
+        Die Grenzkostenfunktion ist $K'(x)= $\ansref . \\ Bei $10$ Mengeneinheiten betragen die Grenzkosten $K'(10) = $ \ansref .        
+     }
+     }
+  \lang{en}{
+  \text{
+        We are given the cost function $K(x)=\var{k}$ (in €). Use difference quotients to
+        determine the marginal cost function $K'(x)$. What is the marginal cost at $10$ units?\\
+        The marginal cost function is $K'(x)= $\ansref . \\
+        The marginal cost at $10$ units is $K'(10) = $ \ansref .
+  }
+  }
+		
+	\begin{answer}
+		\solution{dk}            
+	\end{answer}
+    \begin{answer}
+        \solution{k10}
+    \end{answer}
+	
+    \lang{de}{\explanation{
+     Die Grenzkostenfunktion ist die Ableitung der Kostenfunktion und berechnet sich durch   
+        \begin{align*}
+	    	K'(x)&=\lim_{h\rightarrow 0}\frac{k(x+h)-k(x)}{h}\\
+            &=\lim_{h\rightarrow 0}\frac{3(x+h)^2-5(x+h)+9-(3x^2-5x+9)}{h}\\
+	    	&=\lim_{h\rightarrow 0}\frac{3(x^2+2xh+h^2)-5x-5h+9-3x^2+5x-9}{h}\\
+            &=\lim_{h\rightarrow 0}\frac{3x^2+6xh+3h^2-5h-3x^2}{h}\\
+            &=\lim_{h\rightarrow 0}\frac{6xh+3h^2-5h}{h}\\
+		    &=\lim_{h\rightarrow 0}6x+3h-5=6x-5.
+		\end{align*}
+        Die Grenzkosten bei $10$ Mengeneinheiten erhalten wir durch Einsetzen: $K'(10) = 6 \cdot 10 -5 = 55$ €/Mengeneinheit.
+		}}
+    \lang{en}{\explanation{
+     The marginal cost function is the derivative of the cost function and is computed as follows:   
+        \begin{align*}
+	    	K'(x)&=\lim_{h\rightarrow 0}\frac{k(x+h)-k(x)}{h}\\
+            &=\lim_{h\rightarrow 0}\frac{3(x+h)^2-5(x+h)+9-(3x^2-5x+9)}{h}\\
+	    	&=\lim_{h\rightarrow 0}\frac{3(x^2+2xh+h^2)-5x-5h+9-3x^2+5x-9}{h}\\
+            &=\lim_{h\rightarrow 0}\frac{3x^2+6xh+3h^2-5h-3x^2}{h}\\
+            &=\lim_{h\rightarrow 0}\frac{6xh+3h^2-5h}{h}\\
+		    &=\lim_{h\rightarrow 0}6x+3h-5=6x-5.
+		\end{align*}
+        The marginal cost at $10$ units is obtained by setting $x=10$: $K'(10) = 6 \cdot 10 -5 = 55$ €/unit.
+		}}
+\end{quickcheck}
+
+
+\lang{de}{In der folgenden Tabelle sind die wichtigsten Ableitungen zusammengefasst. Im nächsten Kapitel werden wir einige dieser
+Regeln auch begründen und weitere Regeln behandeln, mit denen zusammengesetzte Funktionen abgeleitet werden können. 
+}
+\lang{en}{
+The table below contains the most important derivatives. In the next chapter, we will
+justify some of these rules and consider further rules that can be used to differentiate
+compositions of functions.
+}
+\begin{rule}\label{rule:diffregeln}
+\begin{align*}
+\underline{\text{\lang{de}{Funktion}\lang{en}{Function}}\; f(x)}&\hspace{20pt}&  \underline{\text{\lang{de}{Ableitung}\lang{en}{Derivative}}\; f'(x)}&\hspace{20pt}&\underline{\text{\lang{de}{Bedingung an }\lang{en}{Conditions on }}\, x}\\
+c \;(c\in\R) &&0&&\\
+x^n\;( n\in\N)&&nx^{n-1}&&\\
+x^n\;(n\in\Z, n<0)&&nx^{n-1}&& x\neq 0\\
+x^r\;( r\in\R)&&rx^{r-1}&& x>0\\
+\sqrt{x}=x^{1/2} &&\frac{1}{2\sqrt{x}}=\frac{1}{2}x^{-1/2}&& x>0\\
+e^x&&e^x&&\\
+\ln(x)&&\frac{1}{x}&&x>0\\
+a^x \;(a>0)&&\ln a\cdot a^x&&\\
+\sin(x)&&\cos(x)&&\\
+\cos(x)&&-\sin(x)&&\\
+\tan(x)&& \frac{1}{\cos(x)^2} = 1 + \tan(x)^2 && \cos(x) \neq 0 
+\end{align*}
+\end{rule}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\randint[Z]{n}{2}{9}
+		    \function[normalize]{f}{1/x^n}
+			\function[normalize]{df}{-n/x^(n+1)}
+		\end{variables}
+		
+			\lang{de}{\text{
+            Mit den Funktionen aus der obigen Tabelle kennen Sie schon einige wichtige
+            Ableitungen. Zeigen Sie hier zum Ende des Kapitels, dass Sie die Tabelle 
+            auch benutzen können: \\ \\            
+            Die Ableitungsfunktion der Funktion $f(x)=\var{f}$ ist $f'(x)= $\ansref.
+            }}
+      \lang{en}{
+        \text{Now that you have the functions in the table above, you already know
+        several important derivatives. Now end the chapter by showing that you can
+        use the table: \\ \\
+        The derivative of $f(x)=\var{f}$ is $f'(x)= $\ansref.}
+      }
+		
+		\begin{answer}
+			\solution{df}
+            \checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\lang{de}{\explanation{Es gilt $\var{f} = x^{-\var{n}}$. Dann kann man die Regel für ganzzahlige Potenzen (dritte Zeile) anwenden.
+		}}
+    \lang{en}{\explanation{Since $\var{f} = x^{-\var{n}}$, we can use the rule for differentiating integral powers (row 3).
+		}}
+	\end{quickcheck}
+
+
+
+\end{visualizationwrapper}
+
+
+\end{content}

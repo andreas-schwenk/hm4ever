@@ -1,0 +1,221 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Exercise 3: sub-annual amortization}
+    \lang{de}{Ü03: unterjährige Tilgung}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\title{
+    \lang{en}{Exercise 3: sub-annual amortization}
+    \lang{de}{Ü03: unterjährige Tilgung}
+    \lang{zh}{...}
+    \lang{fr}{...}
+}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22687}{Ticket 22687}
+\end{block}
+
+
+
+
+
+\lang{de}{
+Wir behandeln hier noch den Fall der \notion{sofortigen 
+Tilgungsverrechnung}, d.h. innerhalb einer Zinsperiode werden mehrere Tilgungen 
+geleistet, die sofort mit der noch zu zahlenden Restschuld verrechnet werden. 
+
+Dabei ist bei einer Zinsperiode von einem Jahr:
+\begin{table}
+$T_{i,n}$&  die Tilgungsrate der Periode i im Jahr m, $i=1,\ldots,k$\\
+$A_{i,n}=a$&  die konstante Annuität für die Periode i im Jahr m, $i=1,\ldots,k$\\
+$Z_n$ & die nachschüssige Zinszahlung für Jahr m\\
+$S_{i,n}$& der Schuldenstand zu Beginn der i-ten Periode im Jahr m\\
+$k$& Anzahl der Perioden (Tilgungen) im Jahr m
+\end{table}
+}
+
+\lang{en}{
+We will consider the case of \notion{immediate settlement},
+i.e. where multiple amortization payments occur within a single interest period
+and are immediately deducted from the outstanding debt.
+
+For an interest period of one year, define
+\begin{table}
+$T_{i,n}$&  the i-th amortization payment in the year n, $i=1,\ldots,k$\\
+$A_{i,n}=a$&  the constant annuity for the i-th period of year n, $i=1,\ldots,k$\\
+$Z_n$ & the interest payment (in arrears) for year n\\
+$S_{i,n}$& outstanding debt at the beginning of the i-th period of year n\\
+$k$& number of periods (payments) in year n
+\end{table}
+}
+
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+
+\tab{\lang{de}{benötigte Gleichungen} \lang{en}{Equations}}
+
+\lang{de}{
+Dann ergibt sich im Jahr n ein Zins von:\\
+\[Z_n=\sum_{i=1}^k Z_{i,n}=\sum_{i=1}^k \frac{p}{100k}S_{i,n}
+=\frac{p}{100k}\sum_{i=1}^k[S_{1,n}-(i-1)a]\]
+(Der Faktor $(i-1)$ ist der Tatsache geschuldet, dass es bei nachschüssigen Zahlungen auf die letzte Zahlung keine Zinsen gibt.)
+Unter Verwendung der Gauss'schen Sumenformel kann $Z_n$ dann noch weiter umgeformt werden zu:\\
+\[Z_n=\frac{p}{100k}\left(k\cdot S_{1,n}-\frac{a\cdot(k-1)\cdot k}{2}\right)\]
+Der \notion{konforme Jahreszins} beläuft sich dann also auf:
+\[Z_n=\frac{p}{100}S_{1,n}-\frac{a\cdot(k-1)\cdot p}{200}\]
+also der Jahreszins auf die Kreditsumme vermindert um die einfache Verzinsung der Annuitäten $a$.
+Wir können so eine \notion{konforme Ersatzannuität} berechnen mit
+\[A=a\left(k+\frac{(k-1)\cdot p}{200}\right) . \]
+Dann lässt sich die Restschuld folgendermaßen berechnen:
+\[S_{1,n+1}=q\cdot S_{1,n}-A\]
+}
+
+\lang{en}{
+In year n, the interest is:\\
+\[Z_n=\sum_{i=1}^k Z_{i,n}=\sum_{i=1}^k \frac{p}{100k}S_{i,n}
+=\frac{p}{100k}\sum_{i=1}^k[S_{1,n}-(i-1)a]\]
+(The factor $(i-1)$ appears due to the fact that the final payment
+in an annuity in arrears does not accrue interest.)
+Using the Gauss summation formula, $Z_n$ can be further simplified to\\
+\[Z_n=\frac{p}{100k}\left(k\cdot S_{1,n}-\frac{a\cdot(k-1)\cdot k}{2}\right)\]
+The \notion{conformal annual interest rate} is therefore
+\[Z_n=\frac{p}{100}S_{1,n}-\frac{a\cdot(k-1)\cdot p}{200},\]
+i.e. the annual interest on the debt minus the simple interest $a$ on the annuities.
+In this way, we can compute a conformal alternative annuity as
+\[A=a\left(k+\frac{(k-1)\cdot p}{200}\right) . \]
+The debt remaining can now be calculated as follows:
+\[S_{1,n+1}=q\cdot S_{1,n}-A\]
+}
+
+
+\tab{\lang{de}{Aufgabe} \lang{en}{Problem}}
+
+\lang{de}{Ein Kredit von 10.000 \euro soll bei jährlicher Verzinsung von 9\% in zwei Jahren
+durch vierteljährlich-nachschüssig zu zahlende konstante Annuitäten zurückgezahlt werden.
+Bei der Verzinsung sollen die unterjährig gezahlten Tilgungsbeträge berücksichtigt werden.
+Geben Sie den Tilgungsplan für das erste Jahr an. }
+
+\lang{en}{
+A loan of 10,000 \euro with an annual interest rate of 9\% is to be repaid
+over two years with constant quarterly annuity payments in arrears.
+The sub-annual amortization payments are taken into account as the
+interest is calculated. Write out an amortization schedule for the first year.
+}
+
+\tab{\lang{de}{Rechnung} \lang{en}{Calculations}}
+
+\lang{de}{Mit $n=2$, $k=4$, $p=9$, $S_{1,1}=10.000$ und  $q=1,09$
+berechnet sich $A$ zu
+\[ A=a\left(4+\frac{9\cdot 3}{200}\right)=4,135\cdot a\]
+
+Iterativ können wir nun $a$ berechnen, da nach zwei Jahren die Restschuld
+0 sein muss:
+\begin{eqnarray*}
+S_{1,2}=&1,09\cdot 10.000-4,135\cdot a&=5215,326\\
+S_{1,3}=&1,09\cdot S_{1,2}-4,135\cdot a&=0\\
+=& 1,09 (1,09\cdot 10.000 -4,136\cdot a)-4,135\cdot a&=0\\
+=& 1,09^2\cdot 10.000-4,135\cdot a(1+1,09)&=0\\
+=&11.881&=4,135\cdot a\cdot 2,09\\
+\iff&a&=1374,78
+\end{eqnarray*}
+
+Mit $A=4,135\cdot a$ ist:
+\[A=5684,69 \text{ und } S_{1,2}=5215,32\]
+Somit ist der Zins fürs erste Jahr:
+\begin{align*}
+Z_1&=&900-1374,78\cdot 0,135 \\
+&=&714,41
+\end{align*}
+
+Da unterjährig einfach verzinst wird, entfällt auf ein Quartal der Zins $z=178,60$.
+}
+
+\lang{en}{With $n=2$, $k=4$, $p=9$, $S_{1,1}=10,000$ and  $q=1.09$,
+we compute
+\[ A=a\left(4+\frac{9\cdot 3}{200}\right)=4.135\cdot a.\]
+We can now compute $a$ iteratively, since the debt remaining after two
+years must be 0:
+\begin{eqnarray*}
+S_{1,2}=&1.09\cdot 10,000-4.135\cdot a&=5215.326\\
+S_{1,3}=&1.09\cdot S_{1,2}-4.135\cdot a&=0\\
+=& 1.09 (1.09\cdot 10,000 -4.136\cdot a)-4.135\cdot a&=0\\
+=& 1.09^2\cdot 10,000-4.135\cdot a(1+1.09)&=0\\
+=&11,881&=4.135\cdot a\cdot 2.09\\
+\iff&a&=1374.78
+\end{eqnarray*}
+
+Since $A=4.135\cdot a$, we find
+\[A=5684.69 \text{ and } S_{1,2}=5215.32\]
+So the interest in the first year is:
+\begin{align*}
+Z_1&=&900-1374.78\cdot 0.135 \\
+&=&714.41
+\end{align*}
+
+Since sub-annual interest is calculated as simple interest,
+the interest accrued in each quarter is $z=178,60$.
+
+
+}
+
+
+
+\tab{\lang{de}{Lösung} \lang{en}{Solution}}
+
+\lang{de}{
+Damit sieht der Tilgungsplan folgendermaßen aus:
+
+\begin{table}
+\head
+n&RS&a&z&t
+\body
+\textbf{1} & 10.000 & 1374,78 & 178,60 & 1196,17\\
+\textbf{2} & 8.803,83 & 1374,78 & 178,60 & 1196,17\\
+\textbf{3} & 7607,66 & 1374,78 & 178,60 & 1196,17\\
+\textbf{4} & 6412,49 & 1374,78 & 178,60 & 1196,17\\
+\textbf{5} & 5215,32 &        &       &
+\end{table}
+
+Der Check auf Richtigkeit ist hier, dass die Restschuld zu Beginn der 5. Periode
+gleich dem berechneten Wert für $S_{1,2}=5215,326$ ist.
+}
+
+\lang{en}{
+The amorization schedule is therefore:
+
+\begin{table}
+\head
+n&RS&a&z&t
+\body
+\textbf{1} & 10,000 & 1374.78 & 178.60 & 1196.17\\
+\textbf{2} & 8,803,83 & 1374.78 & 178.60 & 1196.17\\
+\textbf{3} & 7607.66 & 1374.78 & 178.60 & 1196.17\\
+\textbf{4} & 6412.49 & 1374.78 & 178.60 & 1196.17\\
+\textbf{5} & 5215.32 &        &       &
+\end{table}
+
+As a sanity check, observe that the debt remaining at the beginning
+of the 5th period equals the value we computed for $S_{1,2}=5215.326$.
+
+}
+\end{tabs*}
+\end{content}
+

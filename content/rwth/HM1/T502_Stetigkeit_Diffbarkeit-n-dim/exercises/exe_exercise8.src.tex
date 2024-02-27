@@ -1,0 +1,73 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Exercise 15}
+    \lang{de}{Ü15: lok. Umkehrbarkeit}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{Exercise 8}
+    \lang{de}{Ü15: lok. Umkehrbarkeit}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T502_Stetigkeit_Diffbarkeit-n-dim/g_art_content_55_Lokale_Umkehrbarkeit.meta.xml}{content_55_Lokale_Umkehrbarkeit}
+\end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22642}{Ticket 22642}
+\end{block}
+  \title{
+    \lang{en}{Exercise 15}
+    \lang{de}{Ü15: lok. Umkehrbarkeit}
+  }
+  Betrachten Sie die Gleichung
+    \[
+  x^2+xy+y^2= 3.
+  \]
+  Nun ist $(x,y)^T=(1,1)^T$ eine Lösung der Gleichung. Zeigen Sie, dass sich die Gleichung in einer Umgebung 
+  von $(1,1)^T\in \R^2$ eindeutig nach $y$ auflösen lässt.
+%QS Änderung:
+  Gesucht ist also eine offene Teilmenge $U$ von $\R$ mit $1 \in U$ und eine in $U$ stetig differenzierbare
+  Funktion $g:U\to \R$ (die sogenannte Auflösung) mit der Eigenschaft
+%QS Es sei $U\subset \R$ offen und $g:U\to \R$ eine Funktion mit der Eigenschaft
+  \[
+  x^2+x g(x)+g(x)^2=3.
+  \]
+  Bestimmen Sie die Ableitung $g'(1)$.
+  
+  \begin{tabs*}[\initialtab{0}\class{exercise}]
+    \tab{Lösung}
+    \begin{incremental}[\initialsteps{1}]
+     \step 
+      Wir definieren 
+      \[F:\R^{2}\to\R\quad,\quad F(x,y)=x^{2}+xy+y^{2}-3\,.\]
+      Dann ist $F$ als Polynomfunktion stetig differenzierbar. Die partielle Ableitung von $F$ nach $y$ ist
+      \[D_{y}F(x,y)=x+2y\]
+      und es gilt $F(c)=0$ für $c=(1,1)^T \in\R^{2}.$ \\
+
+      Da $\,D_{y}F(c)=3\neq 0\,$ (also invertierbar), gibt es nach dem  
+      \ref[content_55_Lokale_Umkehrbarkeit][Satz über implizite Funktionen]{thm:implizite_fkten }
+      offene Mengen $U,V\subset \R$ mit $1\in U$ und $1 \in V$ und eine stetig differenzierbare Funktion $g:U\to V$ 
+      mit der Eigenschaft
+      \[F(x,g(x))=0\quad\text{f"ur alle }x\in U\,.\]
+%QS neuer Satz:      
+      Mit $U \times V$ ist also die gesuchte Umgebung von $(1,1)^T$ gefunden, in der sich die betrachtete Gleichung eindeutig
+      nach $y=g(x)$ auflösen lässt.
+%QS
+     \step Weiter gilt nach dem Satz über implizite Funktionen für alle $x\in U$
+      \[Dg(x)=-\left[D_{y}F(x,g(x))\right ]^{-1} \left[D_{x}F(x,g(x))\right]=-\frac{2x+g(x)}{x+2g(x)}\,\]
+      
+      und wegen $g(1)=1$ gilt insbesondere  $g'(1)=Dg(1)=-1.$
+%QS      Insbesondere hat man $Dg(1)=-1$, denn nach dem Satz über implizite Funktion hat $g$ die Eigenschaft $g(1)=1$. 
+    \end{incremental}
+  \end{tabs*}
+\end{content}
+

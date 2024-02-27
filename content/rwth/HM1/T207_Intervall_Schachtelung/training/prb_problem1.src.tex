@@ -1,0 +1,282 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A01: Mengen und Intervalle}
+    \lang{en}{mc yes-no}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{description}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A01: Mengen und Intervalle}}
+\lang{en}{\title{Problem 1}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9991}{Ticket 9991}
+\end{block}
+
+
+\begin{problem}
+
+	\begin{variables}
+    	\randint{a}{-30}{30}
+    	\randint{b}{-30}{30}
+    	\randint{c}{-30}{30}
+    	\randint{d}{-30}{30}
+    	\randint{e}{-30}{30}
+    	\randadjustIf{d,e}{d=e}
+    	\randint{q}{-30}{30}
+    	\randint[Z]{t}{0}{30}
+    	\end{variables}
+    	
+    	
+    	
+    	\randomquestionpool{1}{2}
+    	\randomquestionpool{3}{4}
+    	\randomquestionpool{5}{6}
+    	\randomquestionpool{7}{9}
+    	%%%a
+    	%1
+    \begin{question} 
+     
+     	\lang{de}{ 
+      	\text{Kreuzen Sie an, ob die Menge ein Intervall ist.
+      	\\
+		}
+    	}
+    	\type{mc.yesno}
+    	\precision[false]{3}
+    	\displayprecision{3}
+        \explanation[edited]{}
+		\begin{choice}
+			\text{ $\{ x\in \mathbb{R} \vert \:x < \var{a}  \}$}
+			\solution{true}
+		\end{choice}
+		
+		\end{question}
+		
+		\begin{question} 
+     
+     	\lang{de}{ 
+      	\text{Kreuzen Sie an, ob die Menge ein Intervall ist.
+      	\\ 
+		}
+    	}
+    	\type{mc.yesno}
+    	\precision[false]{3}
+    	\displayprecision{3}
+
+		\begin{choice}
+			\text{ $\{ x\in \mathbb{R} \vert \:x > \var{a}  \}$}
+			\solution{true}
+		\end{choice}
+		
+		\end{question}
+		
+		\begin{question} 
+     
+     	\lang{de}{ 
+      	\text{Kreuzen Sie an, ob die Menge ein Intervall ist.
+      	\\ 
+		}
+    	}
+    	\type{mc.yesno}
+    	\precision[false]{3}
+    	\displayprecision{3}
+    	
+
+		\begin{choice}
+			\text{ $\{ x\in \mathbb{R} \vert \:x \leq \var{a}  \}$}
+			\solution{true}
+		\end{choice}
+		
+		\end{question}
+		
+		\begin{question} 
+     
+     	\lang{de}{ 
+      	\text{Kreuzen Sie an, ob die Menge ein Intervall ist.
+      	\\
+		}
+    	}
+    	\type{mc.yesno}
+    	\precision[false]{3}
+    	\displayprecision{3}
+
+		\begin{choice}
+			\text{ $\{ x\in \mathbb{R} \vert\: x \geq \var{a}  \}$}
+			\solution{true}
+		\end{choice}
+
+    	\end{question}
+    	
+    	  %%%b
+    %5
+    \begin{question} 
+     
+     \lang{de}{ 
+      	\text{Kreuzen Sie an, ob die Menge ein Intervall ist.
+		}
+    	}
+    	\explanation[edited]{Selbst wenn man die Zahlen in aufsteigende Reihenfolge bringt Hier gibt es zwischen den Zahlen Lücken.}
+    	\type{mc.yesno}
+    	\precision[false]{3}
+    	\displayprecision{3}
+
+		\begin{choice}
+			\text{$\{ \var{b}, \var{c}, \var{d}, \var{e} \}$}
+			\solution{false}
+            \end{choice}
+    \end{question}
+    
+        
+   	\begin{question} 
+     
+     \lang{de}{ 
+      	\text{ Kreuzen Sie an, ob die Menge ein Intervall ist.
+		}
+    	}
+    	\explanation[edited]{Dies ist das sehr kleine Intervall $[\var{b1};\var{b1}]$.}
+    	\type{mc.yesno}
+    	\precision[false]{3}
+    	\displayprecision{3}
+
+    	\begin{variables}
+    	\randint{b1}{-30}{30}
+    	\end{variables}
+
+		\begin{choice}
+			\text{$\{ \var{b1} \}$}
+			\solution{true}   
+		\end{choice}
+    \end{question}
+    
+     %%%c
+    %7
+    \begin{question} 
+     
+    	\lang{de}{ 
+      	\text{ Kreuzen Sie an, ob die Menge ein Intervall ist.
+		}
+    	}
+    	\type{mc.yesno}
+    	\precision[false]{3}
+    	\displayprecision{3}
+
+		\begin{choice}
+			\text{$\{ x\in \mathbb{R} \vert \:x^3 > \var{t} \}$}
+			\solution{true}
+		\end{choice}
+    \end{question}
+    %8
+	   
+    \begin{question} 
+     \lang{de}{ 
+      	\text{ Kreuzen Sie an, ob die Menge ein Intervall ist.
+		}
+    	}
+    	\explanation[edited]{Die Lösungsmenge besteht aus zwei disjunkten Teilmengen:
+            $\{x\vert\:x\geq\var{t}\}$ und $\{x\vert\:\leq\var{t}\}$. Deshalb ist die Lösungsmenge 
+            kein Intervall. }
+    	\type{mc.yesno}
+    	\precision[false]{3}
+    	\displayprecision{3}
+
+		\begin{choice}
+			\text{$\{ x\in \mathbb{R} \vert \:|x| \geq \var{t} \}$}
+			\solution{compute}
+			\iscorrect{t}{=}{0}
+            \end{choice}
+    \end{question}
+   %9
+   
+  
+         \begin{question} 
+     \lang{de}{ 
+      	\text{ Kreuzen Sie an, ob die Menge ein Intervall ist.
+		}
+    	}
+    	
+    	\type{mc.yesno}
+    	\precision[false]{3}
+    	\displayprecision{3}
+ 
+		\begin{choice}
+			\text{$\{ x\in \mathbb{R} \vert \:|x| \leq \var{t} \}$}
+			\solution{true}
+		\end{choice}
+    \end{question}
+    
+    %%%d
+   %10 
+     \begin{question} 
+     \lang{de}{ 
+      	\text{ Kreuzen Sie an, ob die Menge ein Intervall ist.
+		}
+    	}
+    	
+    	\type{mc.yesno}
+    	\precision[false]{3}
+    	\displayprecision{3}
+
+		\begin{choice}
+			\text{$\{ x\in \mathbb{R} \vert \:x > \var{q} \}$}
+			\solution{true}
+		\end{choice}
+    \end{question}
+  %11  
+    \begin{question} 
+     \lang{de}{ 
+      	\text{ Kreuzen Sie an, ob die Menge ein Intervall ist.
+		}
+    	}
+    	
+    	\type{mc.yesno}
+    	\precision[false]{3}
+    	\displayprecision{3}
+
+		\begin{choice}
+			\text{$\{ x\in \mathbb{R} \vert\: x \leq \var{q} \}$}
+			\solution{true}
+		\end{choice}
+    \end{question}
+    %12
+    \begin{question} 
+     \lang{de}{ 
+      	\text{ Kreuzen Sie an, ob die Menge ein Intervall ist.
+		}
+    	}
+    	
+    	\type{mc.yesno}
+    	\precision[false]{3}
+    	\displayprecision{3}
+
+		\begin{choice}
+			\text{$\{ x\in \mathbb{R} \vert \:x \geq \var{q} \}$}
+			\solution{true}
+		\end{choice}
+    \end{question}
+	
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+
+
+\end{content}

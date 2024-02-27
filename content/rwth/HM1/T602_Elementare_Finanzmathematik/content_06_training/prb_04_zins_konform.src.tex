@@ -1,0 +1,84 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A04: konformer Zinssatz}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A04: konformer Zinssatz}}
+\lang{en}{\title{A04: conformal interest rate}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22671}{Ticket 22671}
+\end{block}
+
+
+\usepackage{mumie.genericproblem}
+
+     \begin{problem}
+        \begin{variables}
+            \drawFromSet{p}{1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6}
+            \function[calculate,3]{pkonform2}{((1+p/100)^(1/2)-1)*100}
+            \function[calculate,3]{pkonform4}{((1+p/100)^(1/4)-1)*100}
+            \function[calculate,3]{inom}{p/100}
+            \function[calculate,3]{icalc}{1+inom}
+        \end{variables}
+          \begin{question}
+                \type{input.number}
+                \lang{de}{\text{Wie hoch ist der sogenannte konforme Zinssatz $i'$, also der 
+                Zinssatz, der zu derselben Verzinsung führt wie ein nomineller 
+                Jahreszins von $i_{\text{nom}}=\var{p}$\%?\\
+                - bei $2$ Zinsperioden pro Jahr: $i'_2=$ \ansref \% \\
+                - bei $4$ Zinsperioden pro Jahr: $i'_4=$ \ansref \%}}
+                \lang{en}{\text{What is the conformal interest rate $i'$, i.e. the 
+                interest rate that leads to the same interest as a nominal 
+                annual interest rate of $i_{\text{nom}}=\var{p}$\%?\\
+                - for $2$ interest periods per year: $i'_2=$ \ansref \% \\
+                - for $4$ interest periods per year: $i'_4=$ \ansref \%}}
+               \begin{answer}
+                    \solution{pkonform2}
+               \end{answer} 
+               \begin{answer}
+                    \solution{pkonform4}
+               \end{answer}
+               \lang{de}{\explanation[edited]{
+               Nomineller Jahreszins: $i_{\text{nom}}=\var{p}$ \%. Der konforme Periodenzins $i'$ liefert 
+               denselben Kapitalbetrag  bei einer Verzinsung mit mehreren Perioden,
+               hier $2$ bzw. $4$:\\
+               $\left(1+\var{inom}\right)=\left(1+i'_2\right)^2$, bzw.\\
+               $\left(1+\var{inom}\right)=\left(1+i'_4\right)^4$.}}
+               \lang{en}{\explanation[edited]{
+               Nominal annual interest rate: $i_{\text{nom}}=\var{p}$ \%. The conformal period interest rate $i'$ yields 
+               the same principal amount in the case of interest with several periods,
+               here $2$ or $4$:\\
+               $\left(1+\var{inom}\right)=\left(1+i'_2\right)^2$, and \\
+               $\left(1+\var{inom}\right)=\left(1+i'_4\right)^4$.}}
+               %Also:\\
+               %$i'_2=\sqrt[2]{\var{icalc}}-1=\var{pkonform2}$\%, bzw. \\
+               %$i'_4=\sqrt[4]{\var{icalc}}-1=\var{pkonform4}$\%.
+               
+          \end{question}     
+     \end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

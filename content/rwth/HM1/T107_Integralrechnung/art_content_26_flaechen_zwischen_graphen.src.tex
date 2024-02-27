@@ -1,0 +1,636 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Fläche zwischen Graphen}
+    \lang{en}{Computing integrals and areas}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T107_Area_D.meta.xml}{T107_Area_D}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T107_Area_C.meta.xml}{T107_Area_C}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T107_Area_B.meta.xml}{T107_Area_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T107_Area_A.meta.xml}{T107_Area_A}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T107_Integralrechnung/g_art_content_24_integral_als_flaeche.meta.xml}{link2}
+    \link{generic_article}{content/rwth/HM1/T106_Differentialrechnung/g_art_content_21_kettenregel.meta.xml}{link1}
+    \link{generic_article}{content/rwth/HM1/T106_Differentialrechnung/g_art_content_20_ableitung_als_tangentensteigung.meta.xml}{link0}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{7}
+\ombarticle{3}
+
+\lang{de}{\title{Berechnung von Integralen und Flächen}}
+\lang{en}{\title{Computing integrals and areas}}
+ 
+
+\begin{block}[annotation]
+  übungsinhalt
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9037}{Ticket 9037}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{\lang{de}{Berechnung von bestimmten Integralen}
+         \lang{en}{Computing definite integrals}}\label{berechnung}
+
+\lang{de}{
+Im \link{link2}{vorigen Abschnitt} wurde behandelt, wie man bestimmte Integrale mit Hilfe des
+\emph{Hauptsatzes der Differential- und Integralrechnung} berechnen kann:
+}
+\lang{en}{
+In the \link{link2}{previous section} we introduced how to calculate definite integrals using 
+the \emph{fundamental theorem of calculus}:
+}
+\[ \int_a^b f(x)\, dx = \Big[F(x)\Big]_a^b \, . \]
+\lang{de}{
+Die Berechnung eines Integrals $\big\int_a^b f(x)\, dx$ reduziert sich daher im 
+Wesentlichen auf die Bestimmung einer Stammfunktion $F(x)$.
+% beziehungsweise auf die
+%Lösung des unbestimmten Integrals $\int f(x)\, dx$.
+\\
+Im vorigen Abschnitt wurden auch bereits Stammfunktionen zu mehreren 
+wichtigen Funktionen wie $x^k$, $\sin(x)$, $\cos(x)$ und $e^x$ vorgestellt. 
+Außerdem gilt die Summen- und Faktorregel für Integrale.
+}
+\lang{en}{
+Calculating the integral $\big\int_a^b f(x)\, dx$ becomes the problem of finding an antiderivative of 
+the integrand, which can then be evaluated at the limits of the integral.
+\\
+In the previous section we also covered the antiderivatives of some important functions such as 
+$x^k$, $\sin(x)$, $\cos(x)$, and $e^x$, and we saw the sum and constant rules for integrals.
+}
+
+\begin{example}
+
+%\emph{Beispiel:} 
+\lang{de}{Sei $f(x)=e^x-x-1$. Dann gilt $\big\int f(x)\, dx = e^x - \frac{1}{2} x^2 - x +C$ und}
+\lang{en}{Let $f(x)=e^x-x-1$. Then $\big\int f(x)\, dx = e^x - \frac{1}{2} x^2 - x +C$ and}
+\begin{align*} \int_{-1}^1 (e^x-x-1)\, dx  & \ = \ & \Big[  e^x - \frac{1}{2} x^2 - x \Big]_{-1}^1 \\
+ & \ = \ &
+ (e - \frac{1}{2} -1)-(e^{-1} - \frac{1}{2} +1 ) \\ & \ = \ & e-\frac{1}{e} -2 \approx 0{,}35 .
+\end{align*}
+
+ \begin{center}
+ \image{T107_Area_A}
+ \end{center}
+ \end{example}  
+ 
+ \lang{de}{
+ Die Bestimmung einer Stammfunktion  kann eine schwierige Aufgabe sein. Es existieren hierzu
+ verschiedene Regeln, die in diesem Kurs nur teilweise behandelt werden. Im Unterschied zur 
+ Ableitung führt die Anwendung der Regeln aber nicht automatisch auf eine Lösung, obwohl 
+ jede stetige Funktion eine Stammfunktion besitzt.
+ \\\\
+ Wenn eine mögliche Stammfunktion gegeben ist, so kann man durch Ableiten überprüfen, ob es 
+ sich wirklich um eine solche handelt.
+ }
+ \lang{en}{
+ Calculating or determining the antiderivative of a function ('integrating the function') can be a 
+ very challenging task. There are several different strategies for doing this that will not be dealt 
+ with in this course. In comparison to differentiation, these strategies do not guarantee us a 
+ solution, even though every continuous function has an antiderivative.
+ \\\\
+ If we are given a candidate antiderivative, we can easily check it by differentiating it to see 
+ if its derivative is indeed our integrand.
+ }
+ \begin{example}
+ %\emph{Beispiel: } 
+ \lang{de}{Das Integral}
+ \lang{en}{Suppose we want to check if}
+ 
+ \[ \int \sin^2(x)\, dx = \frac{1}{2}x - \frac{1}{2} \sin(x) \cos(x) + C \]
+ 
+ \lang{de}{
+ soll durch Ableiten überprüft werden. Man verwendet 
+ für den zweiten Summanden die Produktregel
+ (siehe Abschnitt \link{link0}{Ableitung und Ableitungsformeln}) und erhält
+ }
+ \lang{en}{
+ by differentiating the right-hand side. We use the product rule for the second summand (see the 
+ section on \link{link0}{derivatives}) and get
+ }
+ 
+ \begin{align*} & \big(\frac{1}{2}x - \frac{1}{2} \sin(x) \cos(x)\big)'  =  \frac{1}{2} 
+  - \frac{1}{2} \big( \cos(x) \cos(x) - \sin(x) \sin(x) \big)  \\
+ & = \frac{1}{2} - \frac{1}{2} \big( 1 - \sin^2(x) -  \sin^2(x) \big)  =  \sin^2(x) .
+ \end{align*}
+ 
+ \lang{de}{
+ Man beachte hierbei, dass $\sin^2(x) + \cos^2(x) = 1$ gilt. Der Strich $'$ bezeichnet wie üblich die 
+ Ableitung nach dem Argument.
+ \\\\
+ Das folgende Integral lässt sich dann leicht berechnen:
+ }
+ \lang{en}{
+ We also used the identity $\sin^2(x) + \cos^2(x) = 1$. The small stroke $'$ denotes the 
+ derivative with respect to the argument, and $f'(x)$ is read: "f prime of x".
+ \\\\
+ The right-hand side was indeed the integral of $\sin^2(x)$ with respect to $x$, so the following 
+ integral can then be calculated easily:
+ }
+ 
+ \[ \int_0^{2\pi} \sin^2(x)\, dx =  \Big[ \frac{1}{2}x - \frac{1}{2} \sin(x) \cos(x) \Big]_0^{2\pi}
+  = \pi - 0  = \pi . \]
+
+  \end{example}
+ 
+ \begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{a}{1}{4}			
+			\randint{b}{-4}{4}			
+			\randint{c}{-4}{4}			
+			\function[normalize]{g}{a*x^2+b*x+2*a*x+c+b}  %ge^x=((a*x^2+b*x+c)e^x)'
+			\randint{k}{1}{4}	% Zufallsvariable zum Vertauschen:
+			\function[calculate]{d1}{-(k-2)*(k-3)*(k-4)/6}  % "Dirac"-funktionen
+			\function[calculate]{d2}{(k-1)*(k-3)*(k-4)/2}
+			\function[calculate]{d3}{-(k-1)*(k-2)*(k-4)/2}
+			\function[calculate]{d4}{(k-1)*(k-2)*(k-3)/6}
+			\function{r}{a*x^2+b*x+c}	% richtiger Term
+			\function{f1}{b*x+c}		% falsche Terme
+			\function{f2}{a*x^2+(b-4)*x+c}	
+			\function{f3}{a*x^3+b*x}	
+
+			\function[expand,normalize]{G1}{d1*r+d2*f1+d3*f2+d4*f3}
+			\function[expand,normalize]{G2}{d1*f1+d2*r+d3*f3+d4*f2}
+			\function[expand,normalize]{G3}{d1*f3+d2*f2+d3*r+d4*f1}
+			\function[expand,normalize]{G4}{d1*f2+d2*f3+d3*f1+d4*r}
+			
+		\end{variables}
+		
+        \text{\lang{de}{
+              Welche der folgenden Funktionen $F(x)$ ist eine Stammfunktion von $f(x)=(\var{g})e^x$? 
+              (Geben Sie die entsprechende Nummer an.)\\
+              }
+              \lang{en}{
+              Which of the following functions $F(x)$ is an antiderivative of $f(x)=(\var{g})e^x$? 
+              (Enter the corresponding number.)\\
+              }
+          		\begin{table}[\class{items}]
+          			\nowrap{1) $F(x)=(\var{G1})e^x$} & \nowrap{2) $F(x)=(\var{G2})e^x$} \\
+          			\nowrap{3) $F(x)=(\var{G3})e^x$} & \nowrap{4) $F(x)=(\var{G4})e^x$}
+          		\end{table}
+              \lang{de}{Richtig ist \ansref.}
+              \lang{en}{The correct answer is \ansref.}
+          		}
+
+		
+		\begin{answer}
+			\solution{k}
+		\end{answer}
+		\explanation{\lang{de}{
+    Man bestimme mit der Produktregel die Ableitungen der angegebenen Funktionen $F(x)$. 
+		Die Funktion, deren Ableitung gleich $f(x)$ ist, ist die gesuchte Stammfunktion.
+    }
+    \lang{en}{
+    Use the product rule to determine the derivatives. The function whose derivative equals $f(x)$ is 
+    an antiderivative.
+    }}
+
+	\end{quickcheck}
+	
+ 
+ \section{\lang{de}{Die lineare Substitution}\lang{en}{Linear substitution}}\label{subst}
+ 
+ \lang{de}{
+ Bei der Ableitung verketteter (zusammengesetzter) Funktionen wird die \emph{Kettenregel} verwendet, 
+ die im Abschnitt \link{link1}{Kettenregel} behandelt wurde. Für $h(x)=f\big(g(x)\big)$ gilt:
+ }
+ \lang{en}{
+ When taking the derivative of a composite function we use the \link{link1}{chain rule}. For 
+ $h(x)=f\big(g(x)\big)$ we have:
+ }
+ \[ h'(x)=\Big(f\big(g(x)\big)\Big)' = f'\big(g(x)\big) \cdot g'(x) . \]
+ 
+ %\begin{tabs*} % [\initialtab{0}]
+ % \tab{\lang{de}{Beispiele} }
+  
+ % \tab{\lang{de}{Beispiel 1}}
+ % Sei $h(x)=f(g(x))=e^{2x+1}$. Die äußere Funktion ist $f(x)=e^x$ mit $f'(x)=e^x$ und die innere Funktion ist
+ % $g(x)=2x+1$ mit $g'(x)=2$. Die Ableitung von $h(x)$ ist daher:
+ % \[ h'(x) = e^{2x+1} \cdot 2 \]
+  
+  %\tab{\lang{de}{Beispiel 2}}
+  %Sei $h(x)=\sin^3(x)$. Die äußere Funktion ist $f(x)=x^3$ mit $f'(x)=3x^2$ 
+  %und die innere Funktion ist $g(x)=\sin(x)$ mit $g'(x)=\cos(x)$.
+  %Die Ableitung von $h(x)$ ist daher:
+  %\[ h'(x) = 3 \sin^2(x) \cos(x) \]
+%\end{tabs*}
+ 
+ \lang{de}{
+ Ein Spezialfall sind zusammengesetzte Funktionen vom Typ $h(x)=f(mx+b)$.
+ Die innere Funktion  $g(x)=mx+b$ beschreibt eine Gerade und ihre
+ Ableitung ist eine Konstante. Die Ableitung von $h(x)$ ist daher
+ }
+ \lang{en}{
+ One special case of composite functions are those of the form $h(x)=f(mx+b)$.
+ The inner function $g(x)=mx+b$ is the equation of a line and its derivative is constant.
+ The derivative of $h(x)$ is thus
+ }
+ \[ h'(x) = f'\big(g(x)\big) \cdot g'(x) = f'(mx+b) \cdot m .\]
+ \lang{de}{
+ Wie kann man nun $h(x)=f(mx+b)$ integrieren, wenn nur eine Stammfunktion $F(x)$
+ von $f(x)$ bekannt ist?
+ }
+ \lang{en}{ 
+ How can we integrate $h(x)=f(mx+b)$ if an antiderivative $F(x)$
+ of $f(x)$ is known?
+ }
+ 
+ %Mit Hilfe der Kettenregel überprüft man leicht, dass 
+ 
+ 
+ %\[ (\frac{1}{m} F(mx+b))' = \frac{1}{m} F'(mx+b) \cdot m = f(mx+b) = h(x)  \]
+ 
+ %gilt. 
+ %Man erkennt dann: $\frac{1}{m} F(mx+b)$ ist eine Stammfunktion von $f(mx+b)$.
+ 
+ \begin{rule}[\lang{de}{Lineare Substitution}\lang{en}{Linear substitution}]\label{rule:lin-sub}
+ %\emph{Satz:} 
+ \lang{de}{
+ Wenn $F(x)$ eine Stammfunktion von $f(x)$ ist und Konstanten $m \neq 0$ und $b \in \mathbb{R}$ 
+ gegeben sind, so gilt
+ }
+ \lang{en}{
+ If $F(x)$ is an antiderivative of $f(x)$, given constants $m \neq 0$ and $b \in \mathbb{R}$, 
+ }
+ \[ \int f(mx+b)\, dx = \frac{1}{m} F(mx+b) + C . \]
+ \end{rule}
+ 
+ \lang{de}{
+ Die Regel kann man durch Ableiten leicht überprüfen.
+ %, da sich der Ausdruck $mx+b$
+ %durch eine neue Variable substitutieren (ersetzen) ließe.
+  %und $dz=m\cdot dx$, d.h. $dx=\frac{1}{m} dz$, und integriert dann nach der neuen Variablen $z$.
+ %\[ \int f(mx+b)\, dx = \int f(z) \frac{1}{m}\, dz = \frac{1}{m} F(z) + C = 
+ %\frac{1}{m} F(mx+b) + C \]
+ Die lineare Substitution ist ein Spezialfall
+ einer allgemeineren Substitutionsregel, die hier nicht behandelt wird.\\
+ }
+ \lang{en}{
+ This rule can easily be checked by taking the derivative. 
+ Linear substitution is a special case of general substitution which will not be dealt with here.\\
+ }
+ 
+ %\begin{block}[example]
+ %\emph{Beispiele:} 
+ \begin{tabs*}  %[\initialtab{1}]
+ \tab{\lang{de}{Beispiel 1}\lang{en}{Example 1}}
+ \[ \int e^{2x+1}\, dx = \frac{1}{2} e^{2x+1} + C \]
+ \tab{\lang{de}{Beispiel 2}\lang{en}{Example 2}}
+ \[ \int_0^1 \sin(\pi x)\, dx = \Big[ - \frac{1}{\pi} \cos(\pi x) \Big]_0^1 =
+ -\frac{1}{\pi}\cos(\pi) - \big(- \frac{1}{\pi} \cos(0)\big) = \frac{2}{\pi} \]
+
+ \end{tabs*}
+ 
+\begin{quickcheck}
+	\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\randint[Z]{a}{-5}{5}
+			\randint[Z]{b}{1}{4}
+			\randint{c}{2}{4}
+			\function{l}{a*x+b}
+			\function[calculate]{t}{-b/a}
+			%\function[calculate]{t}{0}
+
+			\randint{k}{1}{4}	% Zufallsvariable zum Vertauschen:
+			\function[calculate]{d1}{-(k-2)*(k-3)*(k-4)/6}  % "Dirac"-funktionen
+			\function[calculate]{d2}{(k-1)*(k-3)*(k-4)/2}
+			\function[calculate]{d3}{-(k-1)*(k-2)*(k-4)/2}
+			\function[calculate]{d4}{(k-1)*(k-2)*(k-3)/6}
+			
+			
+			\function[normalize]{f1}{sin(l)}
+			\function[normalize]{f2}{cos(l)}
+			\function[normalize]{f3}{exp(l)}
+			\function[normalize]{f4}{l^c}
+
+			\function[normalize]{g}{d1*f1+d2*f2+d3*f3+d4*f4}
+			\function[normalize]{gg}{(d1*(-f2)+d2*f1+d3*f3+d4*(f4*l/(c+1)))/a}
+			\function[calculate]{y0}{(d1*(-1)+d3)/a}			
+		    \function[normalize]{ff}{gg-y0}
+		\end{variables}
+		
+        \text{\lang{de}{
+              Bestimmen Sie mittels linearer Substitution diejenige Stammfunktion $F(x)$ von 
+              $f(x)=\var{g}$, für welche $F(\var{t})=0$ gilt.\\
+          		$F(x)=$\ansref.}
+              \lang{en}{
+              Use linear substitution to determine the antiderivative $F(x)$ of $f(x)=\var{g}$ for 
+              which	$F(\var{t})=0$ holds.\\
+          		$F(x)=$\ansref.
+              }}
+		
+
+		\begin{answer}
+			\solution{ff}
+			\checkAsFunction{x}{-5}{5}{50}
+		\end{answer}
+
+		\explanation{\lang{de}{
+    Verwenden Sie lineare Substitution, sowie die Formeln für Stammfunktionen von Potenzen, Sinus, 
+		Kosinus und Exponentialfunktion.
+    }
+    \lang{en}{
+    Use linear substitution as well as the formulas for antiderivatives of powers, sine, cosine and 
+    exponential function.
+    }}   
+	\end{quickcheck}
+
+ 
+ \section{\lang{de}{Berechnung von Flächen zwischen zwei Graphen}
+          \lang{en}{Calculating the area between two graphs}}\label{flaeche}
+ 
+  \lang{de}{
+  Schließlich betrachten wir noch die Berechnung von \emph{Flächen} (positiven Flächeninhalten) 
+  zwischen dem Graph einer Funktion und der $x$-Achse oder allgemeiner die Berechnung der Fläche 
+  zwischen zwei Graphen.
+  \\\\
+  Das Integral berechnet den \emph{orientierten Flächeninhalt}: die Flächen erhalten dabei ein 
+  positives oder ein negatives Vorzeichen. Flächeninhalte mit entgegengesetztem Vorzeichen können 
+  sich gegenseitig aufheben. Bei der Berechnung der Fläche zwischen zwei Graphen sollen nun aber alle 
+  Flächeninhalte positiv zählen.
+  \\\\
+  Wir setzen voraus, dass $a$ und $b$ reelle Zahlen mit $a<b$ sind und dass $f(x)$ und $g(x)$ auf dem 
+  Intervall $[a;b]$ integrierbar sind. Bei der Berechnung des positiven Flächeninhalts zwischen den 
+  Graphen von $f(x)$ und $g(x)$  kommt es nun auf die Lage der beiden Funktionsgraphen an. Im 
+  Spezialfall $f(x)=0$ oder $g(x)=0$ ist der entsprechende Graph die $x$-Achse. 
+  \\\\
+  Besonders einfach ist die Situation dann, wenn $f(x) \geq g(x)$ 
+  im \emph{gesamten} Integrationsintervall $[a;b]$ gilt:
+  }
+  \lang{en}{
+  Finally, we will consider how to calculate the area between the graph of a function and the 
+  $x$-axis, or more generally, the area between two graphs.
+  \\\\
+  The integral gives us the \emph{signed area}: the areas we get from our calculations can be either 
+  negative or positive. Areas with opposite signs can cancel each other out, so when calculating the 
+  area between two graphs we need to make sure that all areas count positively.
+  \\\\
+  First, we need $f(x)$ and $g(x)$ to both be integrable on the interval $[a, b]$ for some $a$ and 
+  $b$ with $a<b$. When calculating the positive area between the graphs of $f(x)$ and $g(x)$, we must 
+  pay attention to the relative position of the graphs of both functions. In the special case that 
+  $f(x)=0$ or $g(x)=0$, the corresponding graph of that function is the $x$-axis.   
+  \\\\
+  The case when $f(x) \geq g(x)$ for all $x \in [a, b]$ is especially simple:
+  }
+  \begin{rule} 
+  %\emph{Satz:} 
+  \lang{de}{
+  Falls $f(x) \geq g(x)$ für alle $x \in [a;b]$  gilt, so beträgt die Fläche zwischen den Graphen von 
+  $f(x)$ und $g(x)$ im Intervall von $a$ bis $b$
+  }
+  \lang{en}{
+  If $f(x) \geq g(x)$ for all $x \in [a, b]$, then the area between the two graphs of $f(x)$ and 
+  $g(x)$ on the interval from $a$ to $b$ is
+  }
+  \[ \int_a^b \big(f(x)-g(x)\big)\, dx \, . \]
+
+  % Nach der Integration von $f(x)-g(x)$ (oder auch $g(x)-f(x)$) liefert also der Betrag die gesuchte Fläche.
+  \end{rule}
+  
+  { }\\
+  
+  %\begin{block}[example]
+  \begin{tabs*} % [\initialtab{0}]
+ % \tab{\lang{de}{Beispiele} }
+  { } \\
+  
+  \tab{\lang{de}{Beispiel 1}\lang{en}{Example 1}}
+  \lang{de}{
+  Die Fläche zwischen dem Graphen von $g(x)=x^2-1$ und der $x$-Achse soll bestimmt werden. Gesucht 
+  ist die Fläche zwischen den Schnittpunkten. Dann gilt $f(x)=0$ und Gleichsetzen $f(x)=g(x)$ ergibt 
+  die Integrationsgrenzen $a=-1$ und $b=1$. Im Intervall $[-1;1]$ gilt $0 \geq x^2-1$.
+  \\\\
+  Die gesuchte Fläche beträgt dann
+  }
+  \lang{en}{
+  In this example we are looking for the area bounded by the graph of $g(x)=x^2-1$ and the $x$-axis, 
+  hence the area between their intersection points. The first function is the $x$-axis, i.e. 
+  $f(x)=0$, and setting $f(x)=g(x)$ gives us the limits of integration $a=-1$ and $b=1$. On the 
+  interval $[-1, 1]$, we have $0 \geq x^2-1$.
+  \\\\
+  The area is therefore:
+  }
+  \[  \int_a^b \big(f(x)-g(x)\big)\, dx = \int_{-1}^1 -(x^2 -1)\, dx  =
+   \big[ -\frac{1}{3} x^3 +x \big]_{-1}^1 = 
+    \big(-\frac{1}{3} + 1\big)-\big(\frac{1}{3} -1 \big)  =  \frac{4}{3} . \]
+
+  \begin{center}
+   \image{T107_Area_B}
+  \end{center}
+    
+  \tab{\lang{de}{Beispiel 2}\lang{en}{Example 2}}
+   
+  \lang{de}{
+  Die Fläche zwischen den Graphen von $f(x)=\cos(x)$ und $g(x)=\sin(x)$ soll im Intervall 
+  $[-\frac{3}{4} \pi ; \frac{1}{4} \pi]$ berechnet werden. In diesem Intervall gilt 
+  $\cos(x) \geq \sin(x)$.
+  %, also $\cos(x)-\sin(x) \geq 0$.
+  %Der Betrag kann weggelassen werden und 
+  \\\\
+  Die Fläche beträgt dann
+  }
+  \lang{en}{
+  In this example we are looking for the area between the graphs of $f(x)=\cos(x)$ and $g(x)=\sin(x)$ 
+  on the interval $[-\frac{3}{4} \pi , \frac{1}{4} \pi]$. On this interval $\cos(x) \geq \sin(x)$. 
+  %, also $\cos(x)-\sin(x) \geq 0$.
+  %Der Betrag kann weggelassen werden und 
+  \\\\
+  The area is therefore
+  }
+   \[
+    \int_{-\frac{3}{4}\pi}^{\frac{1}{4}\pi} \big(\cos(x)-\sin(x) \big)\, dx  =
+    \Big[ \sin(x)+\cos(x) \Big]_{-\frac{3}{4}\pi}^{\frac{1}{4}\pi}  =
+    \Big(\frac{\sqrt{2}}{2} + \frac{\sqrt{2}}{2}\Big) - 
+   \Big(-\frac{\sqrt{2}}{2}-\frac{\sqrt{2}}{2}\Big)  = 2 \sqrt{2} . \]
+   
+   \begin{center}  
+    \image{T107_Area_C}
+    \end{center}  
+  \end{tabs*} 
+  %\end{block}
+  
+  
+  
+  \lang{de}{
+  Etwas schwieriger ist die Situation, wenn das Vorzeichen von $f(x)-g(x)$ 
+  im Integrationsintervall $[a;b]$ wechselt. Der Betrag 
+  $|f(x)-g(x)|$ beschreibt dann den senkrechten Abstand zwischen den Graphen und das Integral
+  darüber ergibt die gesuchte Fläche.
+  }
+  \lang{en}{
+  The situation becomes a bit trickier when the sign of $f(x)-g(x)$ changes on the interval $[a, b]$. 
+  The absolute value $|f(x)-g(x)|$ will give us the the positive distance between both graphs, and 
+  the integral gives us the area desired.
+  }
+  %In dem Fall müssen die 
+  %positiven und negativen Anteile getrennt integriert und die Beträge dann addiert
+  %werden.   
+  
+  \begin{rule}[\lang{de}{Fläche zwischen zwei Graphen}\lang{en}{Area between two graphs}]
+  %\emph{Satz:} 
+  \lang{de}{
+  Die Fläche zwischen den Graphen von zwei stetigen Funktionen $f(x)$ und $g(x)$ im Intervall 
+  $[a;b]$ beträgt
+  }
+  \lang{en}{
+  The area between the graphs of two continuous functions $f(x)$ and $g(x)$ on the interval $[a, b]$ 
+  is
+   }
+   \[ \int_a^b \,{\big|\, f(x) - g(x) \, \big|} \, dx \]
+  \lang{de}{und kann auf die folgende Weise berechnet werden: }
+  \lang{en}{and can be calculated in the following way: }
+  
+  \begin{enumerate}
+  \item \lang{de}{
+        Bestimme die Nullstellen von $f(x)-g(x)$ im Intervall $[a;b]$. Dies sind die Schnittstellen.
+        }
+        \lang{en}{
+        Determine the roots of the function $f(x)-g(x)$ on the interval $[a, b]$. These are the 
+        intersection points of $f(x)$ and $g(x)$ (or the points where the two graphs simply touch).
+        }
+  \item \lang{de}{
+        Integriere $f(x)-g(x)$ abschnittsweise zwischen dem linken Rand $a$, den Nullstellen von 
+        $f(x)-g(x)$ im Intervall $(a;b)$ (sofern vorhanden) und dem rechten Rand $b$.
+        }
+       \lang{en}{
+       Integrate $f(x)-g(x)$ piecewise between the left bound $a$, the roots of $f(x)-g(x)$ on the 
+       interval $(a,b)$ (if any exist) and the right bound $b$.
+       }
+  \item \lang{de}{Addiere die Beträge der einzelnen Integrale.}
+        \lang{en}{Add the absolute value of each integral.}
+  \end{enumerate}
+\end{rule}
+
+\lang{de}{
+Bei der beschriebenen abschnittsweisen  Integration darf der Betrag  \emph{nach} 
+der Integration angewendet werden, so dass keine gesonderte Überlegung zum Vorzeichen
+von $f(x)-g(x)$ erforderlich ist.
+}
+\lang{en}{
+When doing the piece-by-piece integration we can use the absolute value \emph{after} the integration 
+so that we do not have to think about the sign of $f(x)-g(x)$ while performing the integration.
+}
+ 
+\begin{example}
+%\emph{ Beispiel:} 
+\lang{de}{
+Seien $f(x)=x^3-x^2$ und $g(x)=2x$. Gesucht ist die positive Fläche zwischen den Schnittpunkten der 
+Graphen von $f(x)$ und $g(x)$. Man bestimmt zunächst die Nullstellen von
+}
+\lang{en}{
+Let $f(x)=x^3-x^2$ and $g(x)=2x$. We are looking for the area bounded by the two graphs. This is 
+between the intersection points of the graphs of $f(x)$ and $g(x)$. Firstly we need to find the roots 
+of the function
+}
+\[ f(x)-g(x)=x^3-x^2-2x=x(x^2-x-2)=x(x+1)(x-2) . \]
+\lang{de}{
+Die Nullstellen (Schnittstellen von $f(x)$ und $g(x)$) sind daher $x=-1$, $x=0$ und $x=2$. 
+Die Fläche zwischen den Graphen von  $f(x)$ und $g(x)$ im Intervall $[-1;2]$ ist dann die Summe der 
+Beträge von zwei Integralen:
+}
+\lang{en}{
+The roots (the intersection points of $f(x)$ and $g(x)$) are $x=-1$, $x=0$ and $x=2$. The area 
+between the graphs of $f(x)$ and $g(x)$ on the interval $[-1, 2]$ is the sum of the absolute values 
+of two integrals:
+}
+\[ \int_{-1}^2 {\big|\, x^3-x^2-2x\, \big|}\, dx = 
+\big| \int_{-1}^0 (x^3-x^2-2x)\, dx \big| + \big| \int_0^2 (x^3-x^2-2x)\,
+dx \big| \, . \]
+\lang{de}{
+Eine Stammfunktion von $f(x)-g(x)=x^3-x^2-2x$ ist $\frac{1}{4} x^4 - \frac{1}{3} x^3 - x^2$.
+Die gesuchte Fläche beträgt dann
+}
+\lang{en}{
+An antiderivative of $f(x)-g(x)=x^3-x^2-2x\;$ is $\; \frac{1}{4} x^4 - \frac{1}{3} x^3 - x^2$, and hence
+the area can be calculated as
+}
+
+\[ \big| \Big[\frac{1}{4} x^4 - \frac{1}{3} x^3 - x^2 \Big]_{-1}^0 \big| + 
+\big| \Big[\frac{1}{4} x^4 - \frac{1}{3} x^3 - x^2 \Big]_{0}^2 \big| = 
+\big| \frac{5}{12} \big| + \big| - \frac{8}{3} \big| = \frac{37}{12} .\]
+\begin{center}
+\image{T107_Area_D}
+\end{center}
+\end{example}
+
+    \begin{quickcheck}
+	\field{rational}
+		\type{input.number}
+		\begin{variables}
+			%\randint[Z]{c}{-2}{2}
+			\number{c}{1}   % einfacher zu rechnen mit c=1
+			\randint{ns1}{-2}{0}
+			\randint{ns2}{1}{2}
+			\function[expand,normalize]{d}{c*(x-ns1)*(x-ns2)}
+			\randint[Z]{a}{-2}{2}
+			\randint[Z]{b}{-2}{2}
+			\function{g}{a*x+b}
+			\function[normalize,sort]{f}{d+g}
+			\function[normalize]{dd}{(c/3)*x^3-(c/2)*(ns1+ns2)*x^2+c*ns1*ns2*x}
+			\function[calculate]{F1}{(c/3)*ns1^3-(c/2)*(ns1+ns2)*ns1^2+c*ns1*ns2*ns1}
+			\function[calculate]{F2}{(c/3)*ns2^3-(c/2)*(ns1+ns2)*ns2^2+c*ns1*ns2*ns2}
+			% Stammfunktion ist: c/3*x^3-c/2*(ns1+ns2)*x^2+c*ns1*ns2*x
+			\function[calculate]{F}{|F2-F1|} % int_ns1^ns2 |d(x)| 
+
+		\end{variables}
+		
+		\text{\lang{de}{
+    Bestimmen Sie den Inhalt der Fläche, die die Graphen der Funktion $f(x)=\var{f}$ und der Funktion 
+    $g(x)=\var{g}$ einschließen.\\
+		Die Schnittstellen der Graphen liegen bei \ansref (kleinere Stelle) und \ansref (größere 
+    Stelle).\\
+		Der Flächeninhalt ist dann \ansref.
+    }
+    \lang{en}{
+    Determine the size of the area enclosed by the graphs of $f(x)=\var{f}$ and $g(x)=\var{g}$.\\
+		The intersection points of the graphs are at \ansref (smaller $x$-value) and \ansref 
+    (larger $x$-value).\\
+		The size of the area is \ansref.
+    }}
+
+		\begin{answer}
+			\solution{ns1}
+		\end{answer}
+		\begin{answer}
+			\solution{ns2}
+		\end{answer}
+		\begin{answer}
+			\solution{F}
+		\end{answer}
+
+		\explanation{\lang{de}{
+    Die Schnittstellen sind die Nullstellen der Differenzfunktion $(\var{f})-(\var{g})=\var{d}$.
+		Diese sind $\var{ns1}$ und $\var{ns2}$ (Lösen der quadratischen Gleichung $\var{d}=0$).\\
+		Der Flächeninhalt ergibt sich dann als 
+		$\int_{\var{ns1}}^{\var{ns2}} |\var{d}| dx=| [ \var{dd} ]_{\var{ns1}}^{\var{ns2}}| =|\var{F2}-\var{F1}|=\var{F}$.
+		}
+    \lang{en}{
+    The intersection points are the roots of the function $(\var{f})-(\var{g})=\var{d}$.
+    These are $\var{ns1}$ and $\var{ns2}$ (solutions of the quadratic equation $\var{d}=0$).\\
+    Hence the size of the area is 
+		$\int_{\var{ns1}}^{\var{ns2}} |\var{d}| dx=| [ \var{dd} ]_{\var{ns1}}^{\var{ns2}}| =|\var{F2}-\var{F1}|=\var{F}$.
+		}} 
+	\end{quickcheck}
+  
+\end{content}

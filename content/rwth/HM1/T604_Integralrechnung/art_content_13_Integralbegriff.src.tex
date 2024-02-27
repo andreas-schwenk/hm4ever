@@ -1,0 +1,791 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Der Integralbegriff}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T604_Integral_B.meta.xml}{T604_Integral_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T604_Integral_A.meta.xml}{T604_Integral_A}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T604_Integral_C.meta.xml}{T604_Integral_C}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T304_Integrierbarkeit/g_art_content_07_ober_und_untersumme.meta.xml}{content_07_ober_und_untersumme}
+    \link{generic_article}{content/rwth/HM1/T304_Integrierbarkeit/g_art_content_10_uneigentliches_integral.meta.xml}{content_10_uneigentliches_integral}
+    \link{generic_article}{content/rwth/HM1/T107_Integralrechnung/g_art_content_25_stammfunktion.meta.xml}{link2}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{4}
+\ombarticle{1}
+
+\lang{de}{\title{Der Integralbegriff}}
+\lang{en}{\title{The integral}}
+
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{https://team.mumie.net/issues/22702}{Ticket 22702}
+\end{block}
+
+\begin{block}[info-box]
+  \tableofcontents
+\end{block}
+
+\lang{de}{Nach der Differentialrechnung widmen wir uns nun der Integralrechnung. Integrale können als Umkehrung der Ableitung angesehen 
+werden. Ähnlich wie die Ableitung als Steigung eines Funktionsgraphen interpretiert werden kann, besitzen auch Integrale 
+eine geometrische Anschauung, nämlich als Flächeninhalt.}
+
+\lang{en}{
+Now that we are familiar with differential calculus, we will begin to study integral calculus.
+Integration can be viewed as the inverse of differentiation.
+Similarly to how the derivative can be interpreted as the slope of a function's graph,
+the integral also has a geometric interpretation - it measures area.
+}
+
+\section{\lang{de}{Das bestimmte Integral als Flächeninhalt mit Vorzeichen}
+\lang{en}{The definite integral as a signed area}
+}
+\lang{de}{Im Folgenden nehmen wir stets an, dass $a$ und $b$ reelle Zahlen sind und $a<b$ gilt.
+Das bestimmte Integral $\big\int_a^b f(x)\, dx$ einer Funktion $f(x)$
+gibt den \emph{Flächeninhalt mit Vorzeichen} (orientierter Flächeninhalt) an, den der Graph der Funktion mit der
+$x$-Achse zwischen den Integrationsgrenzen $a$ und $b$ einschließt. Die Flächenteile oberhalb der $x$-Achse
+werden dabei \emph{positiv} und die Flächenteile unterhalb der $x$-Achse \emph{negativ}
+gewertet.}
+\lang{en}{
+Here and in what follows, let $a$ and $b$ be real numbers with $a<b$.
+The definite integral $\big\int_a^b f(x)\, dx$ of a function $f(x)$
+describes the \emph{signed area} (or oriented area) enclosed by the graph of the function
+and the $x$-axis between the bounds $a$ and $b$. Here, the parts of the area above the $x$-axis
+are counted \emph{positively} and those below the $x$-axis are counted \emph{negatively}.
+}
+
+\lang{de}{Das Integral $\big\int_a^b f(x)\, dx$ ist in der folgenden Abbildung beispielsweise die Summe von drei orientierten
+Flächeninhalten. Der erste und dritte Flächeninhalt oberhalb der $x$-Achse zählen positiv, der zweite Flächeninhalt 
+unterhalb der $x$-Achse zählt negativ.}
+\lang{en}{
+For example, in the figure below, the integral $\big\int_a^b f(x)\, dx$ is the sum of three
+areas. The first and the third areas above the $x$-axis are counted positively and the second
+area under the $x$-axis is counted negatively.
+}
+\begin{center}
+\image{T604_Integral_C}
+\end{center}
+
+\lang{de}{Im Allgemeinen ist es ohne Weiteres nicht möglich, diese Flächeninhalte zu bestimmen. Unser Ansatz ist daher, die Fläche näherungsweise
+zu bestimmen. Dazu zerlegen wir das Intervall $[a;b]$ auf beliebige Art und Weise und zeichnen Rechtecke so ein, dass die gesuchte Fläche 
+durch die Flächen der Rechtecke eingeschlossen ist. Das führt uns zur \emph{Ober- und Untersumme}.
+}
+\lang{en}{
+In general, there is no immediate way to determine these areas.
+Our approach will therefore be to approximate them. We will partition the interval $[a,b]$
+in an arbitrary way and then draw in rectangles according to the partition such that the
+area in question is approximated by that of the union of the rectangles.
+This leads to the notion of \emph{upper and lower Riemann sums}.
+}
+
+
+\begin{example}\label{zweizerl}
+%\emph {Beispiel:} 
+
+\lang{de}{
+Wir betrachten die Funktion $f(x)=x^2+1$ auf dem Intervall $[a;b] = [0;2]$ und versuchen, die 
+Fläche zwischen $x$-Achse und Funktionsgraph anzunähern. In der Abbildung 
+links wird das Intervall $[0;2]$ in zwei 
+Teilintervalle, in der Abbildung rechts in 
+zehn Teilintervalle aufgeteilt. Die Teilintervalle sind hier alle gleich breit (man spricht dann von
+einer \emph{äquidistanten Zerlegung} des Intervalls). 
+
+Wenn wir allgemein ein Intervall $[a;b]$ in $n$ gleich breite 
+Teilintervalle aufteilen wollen, so hätte übrigens jedes Teilintervall die Breite $\frac{b-a}{n}$.
+}
+\lang{en}{
+Consider the function $f(x)=x^2+1$ on the interval $[a,b] = [0, 2]$.
+We will try to approximate the area between its graph and the $x$-axis.
+In the left image, the interval $[0, 2]$ has been partitioned into two subintervals;
+in the right image, there are ten subintervals. The subintervals here all have the same length.
+(This is sometimes called an \emph{equipartition} of the interval.)
+
+In general, when we divide an interval $[a, b]$ into $n$ subintervals of equal length,
+each subinterval will have length $\frac{b-a}{n}$.
+}
+
+\begin{center}
+\image{T604_Integral_A}\hspace{1cm}\image{T604_Integral_B}
+\end{center}
+
+\lang{de}{Die \emph{Untersumme} ist die dunkel gefärbte Fläche. Sie besteht aus lauter Rechtecken, die genau so hoch sind wie der kleinste 
+Funktionswert auf dem Teilintervall. Die \emph{Obersumme} ist die hell gefärbte plus die dunkel gefärbte Fläche. Die Obersumme besteht aus Rechtecken, 
+die genau so hoch sind wie der größte Funktionswert auf dem Teilintervall.
+}
+\lang{en}{
+The \emph{lower Riemann sum} is the area of the darkly shaded region.
+That region is made up of rectangles whose height is the smallest value that the
+function attains on the corresponding interval. The \emph{upper Riemann sum} is the area of both the
+lightly and darkly shaded regions. This region consists of rectangles whose
+height is the largest value that the function attains on the corresponding interval.
+}
+
+\lang{de}{Der Flächeninhalt unter dem Graphen liegt stets zwischen der Untersumme und der Obersumme. 
+Je mehr Teilintervalle wir haben, desto genauer wird die Annäherung an die gesuchte Fläche. }
+\lang{en}{
+The area under the curve will always lie between the lower and upper Riemann sums.
+As we increase the number of intervals, we obtain a better and better
+approximation to the area that we are looking for.
+}
+
+
+\lang{de}{
+Beim linken Graph wird 
+das Intervall $[0;2]$ 
+in die zwei Teilintervalle $[0;1]$ und $[1;2]$ zerlegt. Wir berechnen die Untersumme $U(Z_2)$ und die
+Obersumme $O(Z_2)$ wie folgt: Die Intervalllänge ist $1$, der kleinste Funktionswert liegt am linken Rand, der größte am rechten Rand, also
+\[ U(Z_2)= f(0)\cdot 1 + f(1)\cdot 1 = 1+2 = 3 \, \, \, \text{ und } \, \, \,
+O(Z_2)=f(1) \cdot 1 + f(2)\cdot 1 = 2+5 = 7 . \]
+}
+\lang{en}{
+In the graph on the left, the interval $[0, 2]$ has been split into the subintervals
+$[0, 1]$ and $[0, 2]$. We can compute the lower and upper Riemann sums $U(Z_2)$ and $O(Z_2)$
+as follows. The length of each subinterval is $1$, and the smallest and greatest values of the function
+occur at the left and right endpoints, respectively. So
+\[ U(Z_2)= f(0)\cdot 1 + f(1)\cdot 1 = 1+2 = 3 \, \, \, \text{ and } \, \, \,
+O(Z_2)=f(1) \cdot 1 + f(2)\cdot 1 = 2+5 = 7 . \]
+}
+
+\lang{de}{Bei der Zerlegung in zehn gleich große Teilintervalle ist die Intervalllänge jeweils $\frac{2}{10}=0,2$. 
+Für Unter- und Obersumme erhalten wir daher
+\begin{eqnarray*}
+U(Z_{10}) &=& f(0)\cdot 0,2+ f(0,2)\cdot 0,2+\ldots + f(1,8)\cdot 0,2=(1+1,04+1,16+\ldots + 4,24)\cdot 0,2=4,28\, , \\
+O(Z_{10}) &=& f(0,2)\cdot 0,2+ f(0,4)\cdot 0,2+\ldots + f(2)\cdot 0,2=(1,04+1,16+\ldots + 4,24+5)\cdot 0,2=5,08\, . \\
+\end{eqnarray*} 
+Diese Werte sind schon deutlich genauer und sagen uns, dass die Fläche zwischen Graph und $x$-Achse zwischen 4,28 und 5,08
+Flächeneinheiten groß ist.}
+\lang{en}{
+For the partition into ten equal subintervals, the length of each subinterval is $\frac{2}{10}=0.2$.
+We find that the upper and lower Riemann sums, respectively, are
+\begin{eqnarray*}
+U(Z_{10}) &=& f(0)\cdot 0.2+ f(0.2)\cdot 0.2+\ldots + f(1.8)\cdot 0,2=(1+1.04+1.16+\ldots + 4.24)\cdot 0.2=4.28\, , \\
+O(Z_{10}) &=& f(0.2)\cdot 0.2+ f(0.4)\cdot 0.2+\ldots + f(2)\cdot 0,2=(1.04+1.16+\ldots + 4.24+5)\cdot 0.2=5.08\, . \\
+\end{eqnarray*} 
+The values obtained in this way are considerably more precise
+and they tell us that the area enclosed between the graph and the $x$-axis lies between
+$4.28$ and $5.08$ units of area.
+}
+\end{example}
+
+\begin{block}[warning]
+\lang{de}{
+Im Beispiel haben wir eine streng monoton 
+steigende Funktion betrachtet. In diesem Fall können Ober- und Untersumme leicht berechnet werden, weil 
+kleinster und größter Funktionswert immer am Rand der Teilintervalle angenommen werden. 
+
+Bei komplizierteren Funktionen wissen wir im Vorfeld 
+gar nicht, wo der kleinste und größte Funktionswert angenommen werden. 
+}
+\lang{en}{
+In the example above, the function was strictly
+monotonically increasing. This made it easy to compute
+the upper and lower Riemann sums because the smallest
+and greatest values of the function were always attained
+at the endpoints of the subintervals in the partition.
+
+When the functions are more complicated, it is not at all clear in advance
+where the largest and smallest values of the function occur.
+}
+
+\end{block}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{2}
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{a}{-3}{1}
+            \randint{b}{2}{8}
+            \function[calculate]{l}{(b-a)/4}
+			\function[calculate]{sol1}{a+l}
+            \function[calculate]{sol2}{a+2*l}
+            \function[calculate]{sol3}{a+3*l}
+		\end{variables}
+
+    \lang{de}{
+		\text{Das Intervall $[\var{a};\var{b}]$ soll in vier äquidistante Teilintervalle zerlegt werden.
+        Die Zerlegungsstellen sind gegeben durch: \\
+        $\var{a} <$ \ansref $<$ \ansref $<$ \ansref $< \var{b}$}
+		}
+    \lang{en}{
+    \text{Suppose we partition the interval [\var{a},\var{b}] into four subintervals
+    of equal length. The points of the partition are: \\
+    $\var{a} <$ \ansref $<$ \ansref $<$ \ansref $< \var{b}$}
+    }
+		\begin{answer}
+			\solution{sol1}
+		\end{answer}
+        \begin{answer}
+			\solution{sol2}
+		\end{answer}
+        \begin{answer}
+			\solution{sol3}
+		\end{answer}
+    \lang{de}{
+		\explanation{Die Länge jedes Teilintervalls ist $\var{l}$.}
+    }
+    \lang{en}{
+    \explanation{The length of each subinterval is $\var{l}$.}
+    }
+	\end{quickcheck}
+	
+	\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{a}{-3}{1}
+            \randint{b}{2}{8}
+            \function[calculate]{l}{(b-a)/5}
+			\function[calculate]{sol1}{a+l}
+            \function[calculate]{sol2}{a+2*l}
+            \function[calculate]{sol3}{a+3*l}
+            \function[calculate]{sol4}{a+4*l}
+		\end{variables}
+		\lang{de}{
+		\text{Das Intervall $[\var{a};\var{b}]$ soll in fünf äquidistante Teilintervalle zerlegt werden.
+        Die Zerlegungsstellen sind gegeben durch: \\
+        $\var{a} <$ \ansref $<$ \ansref $<$ \ansref $<$ \ansref $< \var{b}$}
+        }
+    \lang{en}{
+    \text{Suppose we partition the interval [\var{a},\var{b}] into five subintervals
+    of equal length. The points of the partition are: \\
+    $\var{a} <$ \ansref $<$ \ansref $<$ \ansref $<$ \ansref $< \var{b}$}
+    }
+		
+		\begin{answer}
+			\solution{sol1}
+		\end{answer}
+        \begin{answer}
+			\solution{sol2}
+		\end{answer}
+        \begin{answer}
+			\solution{sol3}
+		\end{answer}
+        \begin{answer}
+			\solution{sol4}
+		\end{answer}
+		\lang{de}{
+		\explanation{Die Länge jedes Teilintervalls ist $\var{l}$.}
+    }
+    \lang{en}{
+    \explanation{The length of each subinterval is $\var{l}$.}
+    }
+	\end{quickcheck}
+\end{quickcheckcontainer}
+
+
+\lang{de}{
+Wenn Ober- und Untersumme einander für immer feinere Zerlegungen des Intervalls 
+immer weiter annähern (und damit auch der gesuchten Fläche), werden wir die 
+Funktion als \emph{integrierbar} bezeichnen.
+}
+\lang{en}{
+If the upper and lower Riemann sums approach each other (and therefore the area in question as well)
+as the partitions of the interval become increasingly fine
+then we call the function \emph{integrable}.
+}
+
+\begin{definition}
+\label{def:integral}
+%\emph{Definition:} 
+\lang{de}{
+Es sei $f(x)$ eine auf dem Intervall $[a;b]$ beschränkte Funktion (z.\,B. eine stetige Funktion).
+}
+\lang{en}{
+Let $f(x)$ be a function that is bounded on the interval $[a, b]$.
+(For example, $f$ can be any continuous function.)
+}
+\lang{de}{
+Wir nennen $f$ \notion{integrierbar} auf dem Intervall $[a;b]$, falls sich Untersumme und Obersumme
+durch Verfeinerung der Zerlegung beliebig genau annähern, d.\,h. falls es zu jeder
+vorgegebenen Zahl $\epsilon>0$ (und sei sie noch so klein) eine Zerlegung $Z$ des
+Intervalls $[a;b]$ gibt, sodass
+\[ 0 \leq O(Z) - U(Z) \leq \epsilon \]
+gilt.
+}
+\lang{en}{
+We call $f$ \notion{integrable} on the interval $[a, b]$ if the lower and upper Riemann sums
+can be made arbitrarily close by choosing a fine enough partition;
+that is, for any given (arbitrarily small) number $\epsilon > 0$, there exists a
+partition $Z$ of the interval $[a, b]$ for which
+\[ 0 \leq O(Z) - U(Z) \leq \epsilon.\]
+}
+
+\lang{de}{
+Ist $f$ integrierbar auf $[a;b]$, so gibt es eine eindeutige reelle Zahl, die bei allen
+Zerlegungen des Intervalls in endlich viele Teilintervalle zwischen den Werten von Ober- und Untersumme liegt. 
+Wir bezeichnen diese Zahl als \notion{bestimmtes Integral von $f$ von $a$ nach $b$} und  
+schreiben dafür $\big\int_a^b f(x)\, dx$. Diese Zahl können wir als orientierten Flächeninhalt interpretieren.
+}
+\lang{en}{
+If $f$ is integrable on $[a, b]$, then there is a unique real number that lies between
+the upper and lower Riemann sums attached to any partition of the interval into finitely
+many subintervals. We call this number the \notion{definite integral of $f$ from $a$ to $b$}
+and denote it $\big\int_a^b f(x)\, dx$.
+This number can be interpreted as the signed area.
+}
+\end{definition}
+
+\lang{de}{
+Die obere Integralgrenze muss nicht zwangsläufig größer als die untere Grenze sein: 
+}
+\lang{en}{
+The upper bound of the integral does not necessarily have to be greater
+than the lower bound:
+}
+\begin{definition} 
+%\emph{Definition:} 
+\lang{de}{Wenn $f(x)$ auf dem Intervall $[a;b]$ mit $a<b$ integrierbar ist, dann definiert man 
+auf folgende Weise das Integral mit vertauschten Grenzen:
+\[ \int_b^a f(x)\, dx = - \int_a^b f(x)\, dx \, . \]
+Außerdem setzt man $\big\int_a^a f(x)\, dx = 0$.
+}
+\lang{en}{
+If $f(x)$ is integrable on the interval $[a, b]$ where $a < b$, then the integral
+with swapped bounds is defined as follows:
+\[ \int_b^a f(x)\, dx = - \int_a^b f(x)\, dx \, . \]
+Also, we define $\big\int_a^a f(x)\, dx = 0$.
+}
+\end{definition}
+%Beispiel: 
+
+  
+
+
+
+\begin{block}[warning]
+\lang{de}{Über Definitionslücken darf nicht hinweg integriert werden und auch 
+Integrale über unbeschränkte Intervalle wie z.\,B. $[0;\infty)$ 
+oder Integrale unbeschränkter Funktionen sind 
+zunächst nicht zugelassen. Wir werden solche Integrale im Kapitel über 
+\emph{uneigentliche Integrale} untersuchen. 
+}
+\lang{en}{
+It is not valid to integrate a function across a gap where it is not defined.
+Also, integrals over unbounded intervals such as $[0, \infty)$ are not allowed
+for now. We will investigate integrals of this type in the chapter on
+\emph{improper integrals}.
+}
+\end{block}
+
+
+\lang{de}{Der Integrationsbereich kann auch geteilt oder aus Teilen zusammengesetzt werden:}
+
+\lang{en}{
+The range of integration can also be split into pieces or put back together:
+}
+
+\begin{rule}
+\lang{de}{Für reelle Zahlen $a<b<c$ und eine auf dem Intervall $[a;c]$ integrierbare Funktion $f(x)$ gilt:}
+\lang{en}{
+For real numbers $a<b<c$ and a function $f$ that is integrable on the interval $[a, c]$, 
+}
+
+\[ \int_a^b f(x)\, dx + \int_b^c f(x)\, dx = \int_a^c f(x)\, dx \,  . \]
+\end{rule}
+
+\section{
+\lang{de}{Stammfunktionen}
+\lang{en}{Antiderivatives}
+}
+
+\lang{de}{
+Die Integration hat eine enge Beziehung zur Ableitung einer Funktion und kann als ihre 
+Umkehrung angesehen werden, wie wir beim \emph{Hauptsatz der Differential- und Integralrechnung} sehen werden.
+
+Zur Vorbereitung des Satzes brauchen wir noch einen neuen Begriff, nämlich den der \emph{Stammfunktion}.
+}
+
+\lang{en}{
+Integration is closely related to differentiation and can be viewed as its inverse operation,
+as we will see in the \emph{fundamental theorem of calculus}.
+
+To state the theorem, we will need to discuss a new concept, \emph{antiderivatives}.
+}
+
+\begin{definition}\label{def:stammfkt}
+\begin{itemize}
+\item \lang{de}{Eine auf einem Intervall $I$ differenzierbare Funktion $F$ heißt \notion{Stammfunktion} von $f$, wenn
+\[ F'(x) = f(x) \]
+für alle $x \in I$ erfüllt ist. }
+\lang{en}{
+A function $F$ that is differentiable on an interval $I$ is called an
+\notion{antiderivative}, or \notion{primitive function} of $f$ if 
+\[ F'(x) = f(x) \]
+for all $x \in I$. 
+}
+\item \lang{de}{Die Menge aller Stammfunktionen von $f$ bezeichnet man als \notion{unbestimmtes Integral} und schreibt dafür
+\[ \int f(x)\, dx = F(x) + C , \ C \in \mathbb{R},  \]
+wobei $F(x)$ eine beliebige Stammfunktion von $f(x)$ ist.}
+\lang{en}{The set of all antiderivatives of $f$ is called the \notion{indefinite integral},
+written \[ \int f(x)\, dx = F(x) + C , \ C \in \mathbb{R},  \]
+where $F(x)$ denotes an arbitrary antiderivative of $f(x)$.
+}
+\end{itemize}
+\end{definition}
+\lang{de}{
+Der Unterschied zwischen einem bestimmten und einem unbestimmten Integral besteht dem Aussehen nach nur darin, ob 
+unter und über dem Integralzeichen Zahlen stehen oder nicht. Mathematisch unterscheiden sich bestimmtes und 
+unbestimmtes Ingeral hingegen sehr stark: Das bestimmte Integral ist eine Zahl (ein Flächeninhalt), während das 
+unbestimmte Integral die Menge der Stammfunktionen bezeichnet.
+}
+\lang{en}{
+The only difference in notation between definite and indefinite integrals is the
+presence or lack of numbers above and below the integral sign.
+However, definite and indefinite integrals are very different mathematically:
+a definite integral is a number (describing an area), whereas an indefinite integral
+describes a set of antiderivatives.
+}
+
+\begin{example}
+%\emph{Beispiel:} 
+\lang{de}{Es sei $f(x)=x^2+1$. Dann ist $F(x)=\frac{1}{3}x^3+x$ eine Stammfunktion
+von $f(x)$ auf $\mathbb{R}$, denn es gilt $F'(x)=x^2+1=f(x)$.}
+\lang{en}{Let $f(x)=x^2+1$. Then $F(x) = \frac{1}{3}x^3 + x$ is an antiderivative
+of $f(x)$ on $\mathbb{R}$ because $F'(x) = x^2+1 = f(x)$.}
+\end{example} 
+\lang{de}{Wie bestimmt man eine Stammfunktion
+$F(x)$, wenn nur $f(x)$ gegeben ist? Durch Umkehrung der Ableitung, d.\,h., man
+ sucht eine Funktion, deren Ableitung $f(x)$ ist. \\
+ }
+ \lang{en}{
+How do we determine an antiderivative $F(x)$ if only $f(x)$ is given?
+By differentiating in reverse, i.e. we look for a function whose derivative is $f(x)$. \\
+ }
+ 
+ 
+ 
+\begin{block}[warning]
+\lang{de}{Stammfunktionen sind (anders als Ableitungen) nicht eindeutig! 
+Falls $F(x)$ eine Stammfunktion von $f(x)$ ist, dann ist auch $F(x)+1$ eine
+Stammfunktion, denn beim Ableiten fällt diese 
+Konstante weg. 
+
+Umgekehrt unterscheiden sich zwei Stammfunktionen zur gleichen 
+Funktion immer nur um Addition einer Konstante.}
+\lang{en}{
+Antiderivatives (unlike derivatives) are not unique!
+If $F(x)$ is an antiderivative of $f(x)$ then $F(x)+1$ is also an antiderivative,
+because the constant disappears upon differentiating.
+
+Conversely, two antiderivatives of the same function always differ only by a constant.
+}
+\end{block}  
+
+
+\lang{de}{Wie für die Differentiation gilt bei der Bildung der Stammfunktion auch die Summen- und Faktorregel: 
+}
+\lang{en}{
+Similarly to derivatives, antiderivatives respect addition and scalar multiplication:
+}
+
+\begin{rule}
+\lang{de}{
+Sind $F(x)$ und $G(x)$ Stammfunktionen der Funktionen $f(x)$ bzw. $g(x)$, und sind $\alpha$
+und $\beta$ reelle Zahlen, so ist eine Stammfunktion der Funktion $\alpha f(x)+\beta g(x)$ gegeben durch
+\[  \alpha F(x)+\beta G(x). \]}
+\lang{en}{
+If $F(x)$ and $G(x)$ are antiderivatives of the functions $f(x)$ and $g(x)$, and if
+$\alpha$ and $\beta$ are real numbers, then an antiderivative of the function $\alpha f(x)+\beta g(x)$
+is given by 
+\[  \alpha F(x)+\beta G(x). \]
+}
+\end{rule}
+\lang{de}{
+Der Beweis erfolgt durch Ableiten der Funktion $\alpha F(x)+\beta G(x)$ mit Hilfe der 
+Summen- und Faktorregel für die Ableitung.
+}
+\lang{en}{
+This is proved by differentiating the function $\alpha F(x)+\beta G(x)$ using the addition
+and scalar multiplication rules for derivatives.
+}
+\begin{block}[warning]
+\lang{de}{
+Die anderen Ableitungsregeln wie Produktregel, Quotientenregel und Kettenregel lassen sich nicht direkt auf die Integration übertragen, da zum Beispiel die Ableitung eines Produkts $u(x)\cdot v(x)$ gegeben ist durch
+\[  (u(x)v(x))'= u'(x)v(x)+u(x)v'(x), \]
+was jedoch kein Produkt, sondern die Summe zweier Produkte ist. 
+
+In diesen Fällen werden kompliziertere Integrationsmethoden gebraucht, 
+die wir im nächsten Kapitel behandeln werden.}
+\lang{en}{
+The other rules of differentiation, such as the product rule, quotient rule and chain rule,
+cannot be transformed directly into rules for antiderivatives. For example, the derivative
+of a product $u(x)\cdot v(x)$ is
+\[  (u(x)v(x))'= u'(x)v(x)+u(x)v'(x); \]
+however, this is no longer a product, but rather the sum of two products.
+
+For these cases, we will need more complicated methods of integration
+that will be described in the next chapter.
+}
+\end{block}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{1}
+\begin{quickcheck}
+		\field{real}
+		\type{input.function}
+		\begin{variables}
+			\randint{v}{0}{1}
+			\randint[Z]{a}{-5}{5}
+			\randint[Z]{b}{1}{4}
+			\randint{c}{-4}{4}
+		    \function[normalize]{ff}{a*x^3+v*b*sin(x)+(1-v)*b*cos(x)+c*exp(x)}
+			\function[normalize]{sol}{3*a*x^2+v*b*cos(x)-(1-v)*b*sin(x)+c*exp(x)}
+		\end{variables}
+
+
+         \lang{de}{\text{Zu welcher Funktion ist $F(x)=\var{ff}$ eine Stammfunktion?\\ Antwort: Zu der Funktion
+			$f(x)=$\ansref.}}
+         \lang{en}{\text{
+          For which function is $F(x)=\var{ff}$ an antiderivative?\\
+          Answer: $f(x)=$\ansref.
+         }}
+
+		\begin{answer}
+			\solution{sol}
+			\checkAsFunction{x}{-5}{5}{50}
+		\end{answer}
+		\lang{de}{\explanation{ $F(x)$ ist nach Definition eine Stammfunktion von $f(x)$, wenn $f(x)$ die 
+		Ableitungsfunktion von $F(x)$ ist. Also ist $f(x)=F'(x)=\var{sol}$.}  } 
+    \lang{en}{\explanation{
+    By definition, $F(x)$ is an antiderivative of $f(x)$ if $f(x)$ is the derivative of $F(x)$.
+    Therefore, $f(x)=F'(x)=\var{sol}$.
+    }}
+	\end{quickcheck}
+\end{quickcheckcontainer}
+ 
+
+\lang{de}{Stammfunktionen einiger grundlegender Funktionen lassen sich
+einfach angeben. Der Nachweis erfolgt durch Ableitung.}
+\lang{en}{
+It is not difficult to find antiderivatives of some basic functions.
+These can be verified by differentiating.
+}
+\lang{de}{
+\begin{table}
+Funktion $f(x)$ & Stammfunktion $F(x)$ & Bedingung\\
+$x^k$ mit $k\in \mathbb{Z}$ und $k \neq -1$ & $\frac{1}{k+1} x^{k+1} $ & $x \neq 0$, falls $k<0$ \\
+$x^{-1}$ & $\ln(|x|)$ & $x \neq 0$ \\
+$e^x$ & $e^x $ & $x \in \mathbb{R}$\\
+$\sin(x)$ & $-\cos(x) $ & $x \in \mathbb{R}$\\
+$\cos(x)$ & $\sin(x)$ &$x \in \mathbb{R}$
+\end{table}}
+\lang{en}{
+\begin{table}
+Function $f(x)$ & Antiderivative $F(x)$ & Conditions \\
+$x^k$ with $k\in \mathbb{Z}$ and $k \neq -1$ & $\frac{1}{k+1} x^{k+1} $ & $x \neq 0$ if $k<0$ \\
+$x^{-1}$ & $\ln(|x|)$ & $x \neq 0$ \\
+$e^x$ & $e^x $ & $x \in \mathbb{R}$\\
+$\sin(x)$ & $-\cos(x) $ & $x \in \mathbb{R}$\\
+$\cos(x)$ & $\sin(x)$ &$x \in \mathbb{R}$
+\end{table}
+}
+
+\begin{example}
+%\emph{Beispiel:} 
+\lang{de}{
+In einem Unternehmen seien die Grenzkosten $K'(x)$ für die Produktion von $x$ Einheiten
+eines Guts gegeben durch die Funktionsgleichung $K'(x) = 0,4 \cdot x^3 -4x + 5$.
+
+Wenn wir hieraus die Kostenfunktion $K(x)$ berechnen wollen, müssen wir eine Stammfunktion der 
+Grenzkostenfunktion finden. Mit anderen Worten: Wir müssen Ableiten rückgängig machen, um von 
+$K'(x)$ zu $K(x)$ zu kommen. 
+
+Indem wir uns die einzelnen Summanden in der Gleichung von $K'(x)$ separat anschauen, erhalten wir 
+als Stammfunktion $K_0 (x) = 0,1 \cdot x^4 - 2 x^2 + 5x$. Dies wird jedoch nicht die gesuchte Kostenfunktion 
+$K(x)$ sein. Es gilt nämlich $K_0(0) = 0$, also betragen die Kosten 0 Euro, wenn keine Einheit des Guts
+produziert wird. In der Praxis ist das nahezu ausgeschlossen, da auch dann, wenn Unternehmen nichts
+produzieren können, Fixkosten anfallen.
+
+Wie wir oben schon gesehen haben, sind Stammfunktionen nicht eindeutig, sondern unterscheiden sich 
+dadurch, dass man eine Konstante addiert. Diese Konstante sind hier die Fixkosten. 
+
+Die Kostenfunktion ist daher gegeben durch 
+\[
+K(x) = 0,1 \cdot x^4 - 2 x^2 + 5x + K_{fix}.
+\]
+}
+
+\lang{en}{
+Suppose the marginal costs $K'(x)$ for a company to produce $x$ units of a good
+are described by the function $K'(x)=0.4 \cdot x^3 - 4x + 5$.
+
+To determine the cost function $K(x)$ using this, we must find an antiderivative of the
+marginal cost function. In other words: we must undo the derivative to go from $K'(x)$ to $K(x)$.
+
+By looking at the summands in the definition of $K'(x)$ separately, we find the antiderivative
+$K_0(x) = 0.1 \cdot x^4 - 2x^2 + 5x$. This will not be the cost function that we are looking for, however.
+Since $K_0(0)$, the costs of producing no units at all would be $0$ euros.
+This is almost impossible in practice, since fixed costs apply even when companies are unable to produce anything.
+
+As we have already seen, antiderivatives are not unique; instead, they depend on the addition of a constant.
+Here, the constant represents fixed costs. So the cost function is
+\[
+K(x) = 0.1 \cdot x^4 - 2 x^2 + 5x + K_{fix}.
+\]
+}
+
+\end{example}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{1}
+\begin{quickcheck}
+	\field{real}
+		\type{input.function}
+		\begin{variables}
+			\randint{v}{0}{1}
+			\randint[Z]{a}{-5}{5}
+			\randint[Z]{b}{1}{4}
+			\randint{c}{-4}{4}
+			\randint[Z]{d}{1}{4}
+			\function[calculate]{y0}{(1-v)*b+c}
+		    \function[normalize]{f0}{d*x+(a/4)*x^4+v*b*sin(x)+(1-v)*b*cos(x)+c*exp(x)}
+		    \function[normalize]{ff}{f0-y0}
+			\function[normalize]{f}{d+a*x^3+v*b*cos(x)-(1-v)*b*sin(x)+c*exp(x)}
+		\end{variables}
+		
+		\lang{de}{
+        \text{Bestimmen Sie diejenige Stammfunktion $F(x)$ von $f(x)=\var{f}$, für welche $F(0)=0$ gilt.\\
+		$F(x)=$\ansref.} }
+    \lang{en}{
+        \text{Determine the antiderivative $F(x)$ of $f(x)=\var{f}$, for which $F(0)=0$.\\
+        $F(x)=$\ansref.}
+    }
+		\begin{answer}
+			\solution{ff}
+			\checkAsFunction{x}{-5}{5}{50}
+		\end{answer}
+		\lang{de}{\explanation{
+        Mit der Summen-
+		und der Faktorregel, sowie den Formeln für Stammfunktionen von Potenzen, Sinus, Kosinus und 
+		Exponentialfunktion erhält man zunächst als Stammfunktion $G(x)=\var{f0}$.\\
+		Also ist $F(x)=G(x)-C$, wobei die Konstante $C$ so gewählt werden muss, dass $F(0)=0$ gilt.\\
+		Also $C=G(0)=\var{y0}$, und daher $F(x)=\var{ff}$.}
+		}
+    \lang{en}{\explanation{
+        Using the rules for antiderivatives of sums and scalar multiples,
+        as well as the formulas for the antiderivatives of powers, sine, cosine and exp,
+        we first obtain the antiderivative $G(x)=\var{f0}$. \\
+        Then $F(x)=G(x)-C$, where the constant $C$ must be chosen such that $F(0)=0$. \\
+        Therefore, $C=G(0)=\var{y0}$ and $F(x)=\var{ff}$.
+    }}
+	\end{quickcheck}
+\end{quickcheckcontainer}
+
+
+\section{
+\lang{de}{Der Hauptsatz der Differential- und Integralrechnung}
+\lang{en}{Fundamental theorem of calculus}
+}\label{sec:hauptsatz}
+\lang{de}{
+Das folgende Theorem wird uns in die Lage versetzen, Integrale und Flächeninhalte exakt auszurechnen. 
+}
+\lang{en}{
+The theorem below will enable us to compute integrals and areas exactly.
+}
+\begin{theorem}[\lang{de}{Hauptsatz}
+\lang{en}{Fundamental theorem of calculus}]
+\lang{de}{Ist $f(x)$ auf dem Intervall $[a;b]$ stetig, dann  
+existiert eine Stammfunktion $F(x)$ von $f(x)$ (d.\,h. $F'(x)=f(x)$) und 
+für jede beliebige Stammfunktion $F(x)$ gilt
+\[ \int_a^b f(x)\, dx =  F(b) - F(a) .\]
+}
+\lang{en}{
+Suppose $f(x)$ is continuous on the interval $[a, b]$.
+Then there exists an antiderivative $F(x)$ of $f(x)$ (i.e. $F'(x)=f(x)$),
+and for any antiderivative $F(x)$,
+\[ \int_a^b f(x)\, dx =  F(b) - F(a) .\]
+}
+\end{theorem}
+\lang{de}{
+Der Hauptsatz der Differential- und Integralrechnung beantwortet damit die Frage, wie man die Fläche zwischen einem
+Funktionsgraphen und der $x$-Achse berechnen kann: Wir müssen dazu eine Stammfunktion finden und dann die 
+Grenzen einsetzen und subtrahieren. Wir werden auch häufig die Schreibweise
+\[
+\Big[\, F(x)\, \Big]_a^b = F(b) - F(a)
+\]
+benutzen, um Rechnungen übersichtlicher zu gestalten.
+}
+\lang{en}{
+The fundamental theorem of calculus answers the question of how to find the area enclosed
+between the graph of a function and the $x$-axis: we have to find an antiderivative, 
+substitute the bounds into it and then subtract. We will often use the notation
+\[
+\Big[\, F(x)\, \Big]_a^b = F(b) - F(a)
+\]
+to make calculuations easier to follow.
+}
+
+\begin{example}
+\lang{de}{Die Funktion $f(x)=\frac{2}{x^2} - 6 x^2$ ist auf dem Intervall $[1;2]$ stetig, 
+$F(x)=- \frac{2}{x} - 2x^3 + 20$ ist eine Stammfunktion und mit Hilfe des Hauptsatzes können wir das 
+Integral 
+\[ \int_1^2 \Big(\frac{2}{x^2} - 6 x^2 \Big)\, dx =
+\Big[- \frac{2}{x} - 2x^3 + 20 \Big]_1^2 = 3 - 16 = -13 \]
+berechnen.
+}
+\lang{en}{
+The function $f(x)=\frac{2}{x^2} - 6x^2$ is continuous on the interval $[1, 2]$.
+$F(x)=-\frac{2}{x} - 2x^3 + 20$ is an antiderivative. Using the fundamental theorem,
+we can evaluate the integral:
+\[ \int_1^2 \Big(\frac{2}{x^2} - 6 x^2 \Big)\, dx =
+\Big[- \frac{2}{x} - 2x^3 + 20 \Big]_1^2 = 3 - 16 = -13 .\]
+}
+\end{example}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{1}
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{a}{-2}{-1}
+			\randint[Z]{b}{1}{2}
+			\randint[Z]{c3}{-4}{4}
+			%\randint[Z]{c1}{-4}{4}
+			\number{c1}{0}		% mit c1=0 wird es einfacher.
+			\randint[Z]{c0}{-4}{4}
+		    \function[normalize]{f}{c3*x^3+c1*x-c0}
+			\function[normalize]{ff}{(c3/4)*x^4+(c1/2)*x^2-c0*x}
+			\function[calculate]{ffa}{(c3/4)*a^4+(c1/2)*a^2-c0*a}
+			\function[calculate]{ffb}{(c3/4)*b^4+(c1/2)*b^2-c0*b}
+			\function[calculate]{sol}{ffb-ffa}
+		\end{variables}
+        
+            \lang{de}{\text{Bestimmen Sie den Wert des folgenden Integrals:\\ 
+			$\int_{\var{a}}^{\var{b}} (\var{f})dx=$\ansref.}}
+           \lang{en}{\text{Find the value of the following integral:\\
+           $\int_{\var{a}}^{\var{b}} (\var{f})dx=$\ansref.}}
+			
+
+		\begin{answer}
+			\solution{sol}
+		\end{answer}
+		\lang{de}{\explanation{ Eine Stammfunktion von $f(x)=\var{f}$ ist $F(x)=\var{ff}$.\\
+		Damit ist $\int_{\var{a}}^{\var{b}} (\var{f})dx=F(\var{b})-F(\var{a})=\var{ffb}-(\var{ffa})=\var{sol}$.}
+		}
+    \lang{en}{
+    \explanation{$F(x)=\var{ff}$ is an antiderivative of $f(x)=\var{f}$.\\
+    Therefore, $\int_{\var{a}}^{\var{b}} (\var{f})dx=F(\var{b})-F(\var{a})=\var{ffb}-(\var{ffa})=\var{sol}$.}
+		}
+	\end{quickcheck}
+\end{quickcheckcontainer}
+
+\end{content}

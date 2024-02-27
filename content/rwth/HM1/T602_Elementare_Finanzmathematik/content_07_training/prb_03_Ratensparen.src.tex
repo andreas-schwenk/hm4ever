@@ -1,0 +1,87 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A03: Rentenendwert}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+\link{generic_element}{content/rwth/HM1/T602_Elementare_Finanzmathematik/content_07_exercises/g_exe_03_Ratensparen.meta.xml}{03_Ratensparen}
+\end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A03: Rentenendwert}}
+\lang{en}{\title{A03: Future value of an annuity}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22697}{Ticket 22697}
+\end{block}
+
+
+\usepackage{mumie.genericproblem}
+
+     \begin{problem}
+     \begin{variables}
+            \randint{n}{5}{7}
+            \randint{r}{45}{55}
+            \randint{p}{1}{4}
+            \function[calculate,2]{rsub}{r*(12+p*13/200)}
+            \function[calculate,2]{q}{1+p/100}
+            \function[calculate,2]{rm}{rsub*(q^n-1)/(q-1)}
+           
+     \end{variables}
+          \begin{question}
+          \type{input.number}
+          \lang{de}{\text{Für einen vermögenswirksamen Sparvertrag werden $\var{n}$ Jahre lang jeweils am
+          Monatsanfang \var{r} \euro eingezahlt. Der Zins beträgt während der gesamten Laufzeit $\var{p}$ \%.
+          Wie hoch ist die jährliche Ersatzzahlung und wie lautet der Kontostand $R_n$ nach $\var{n}$ Jahren?\\
+          Jährliche Ersatzzahlung \ansref \euro\\
+          Rentenendwert:\ansref \euro\\
+          }}
+          \lang{en}{\text{For a capital-forming savings contract, $\var{n}$ is paid out \euro at the beginning of each month. 
+          The interest is $\var{p}$ \% over the entire term.
+          What is the annual replacement payment and what is the account balance $R_n$ after $\var{n}$ years?\\
+          Annual replacement payment \ansref \euro\\
+          Final future value of the annuity:\ansref \euro\\
+          }}
+               \begin{answer}
+                    \solution{rsub}
+               \end{answer}
+               \begin{answer}
+                    \solution{rm}
+               \end{answer}               
+               \lang{de}{\explanation[edited]{Die monatliche Zahlung ist vorschüssig, so dass sich für die 
+               jährliche Ersatzzahlung ergibt:
+               $r_e=\var{r}\cdot(12+\frac{13\cdot\var{p}}{200})=\var{rsub}$ \euro. \\
+               ($r_e$ ergibt sich aus den eingezahlten monatlichen Raten mit einfacher Verzinsung).
+               %Damit ergibt sich mit dem Zinsfaktor $q=\var{q}$ der 
+               %Rentenendwert zu: $R_n=r_e\frac{q^n-1}{q-1}=\var{rm}$ \euro.
+               }}
+               \lang{en}{\explanation[edited]{The monthly payment is in advance, so that for the 
+               annual replacement payment:
+               $r_e=\var{r}\cdot(12+\frac{13\cdot\var{p}}{200})=\var{rsub}$ \euro. \\
+               ($r_e$ results from the paid-in monthly instalments with simple interest).
+               %With the interest factor $q=\var{q}$ this gives the 
+               %final future value to: $R_n=r_e\frac{q^n-1}{q-1}=\var{rm}$ \euro.
+               }}
+          \end{question}     
+     \end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

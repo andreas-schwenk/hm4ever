@@ -1,0 +1,166 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A01: Partielle Integration}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A01: Partielle Integration}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/11218}{Ticket 11218}
+\end{block}
+
+\begin{problem}
+	%\randomquestionpool{}{}
+	%Variablen wurden uneinheitlich benannt...
+    %Grund dafür ist, dass die Rollen bei ln genau umgekehrt sind.
+    %Die einzige Auswirkung ist, dass die Lösung, die den Studierenden nicht sichtbar ist,
+    %bei der ln-Aufgabe falsch angezeigt wird.
+	\begin{question}	
+		\begin{variables}
+
+						
+			\randint[Z]{b}{-4}{4}
+			\randint[Z]{d}{-4}{4}
+			\function[normalize]{v}{x^3+b*x^2+d*x}
+			
+			%u ∈ {− cos ( x ) , sin ( x ) , exp ( x ) , ln ( x )}
+            %u0 ist Stammfunktion von u
+            %u00 ist Stammfunktion von u0
+            %u01 ist Stammfunktion von u00
+            %u0, u00, u01 werden nur für die Angabe der Lösung gebraucht
+            %für die Korrektur komplett irrelevant
+            %Die Variable help ist für die explanations nötig, um den Fall ln gesondert zu betrachten
+			\begin{pool}
+        \begin{variables}
+            \function[normalize]{u}{-1*cos(x)}
+            \function{u0}{-1*sin(x)}
+            \function{u00}{cos(x)}
+            \function{u01}{sin(x)}
+            \number{ex}{0}
+        \end{variables}
+        \begin{variables}
+            \function{u}{sin(x)}
+            \function{u0}{-1*cos(x)}
+            \function{u00}{-1*sin(x)}
+            \function{u01}{cos(x)}
+            \number{ex}{0}
+        \end{variables}
+        \begin{variables}    
+            \function{u}{ln(x)}
+            \function{u0}{x*(ln(x)-1)}
+            \function{u00}{1/2*x^2*(ln(x)-3/2)}
+            \function{u01}{1/6*x^3*(ln(x)-11/6)}
+            \number{ex}{1}
+        \end{variables}
+        \begin{variables}
+            \function{u}{exp(x)}
+            \function{u0}{exp(x)}
+            \function{u00}{exp(x)}
+            \function{u01}{exp(x)}
+            \number{ex}{0}
+        \end{variables}
+
+    \end{pool}
+        %f = u * v'
+    	    \derivative[normalize]{u1}{u}{x}
+            \derivative[normalize]{v1}{v}{x}
+            \derivative[normalize]{v2}{v1}{x}
+            \derivative[normalize]{v3}{v2}{x}           
+			\function{f}{u*v1}
+			\function[expand,normalize]{f_dis}{u*v1}
+			\function[normalize]{d5}{u0*v1}
+			\function[normalize]{d6}{u0*v2}
+            % Endergebnis ist u0*v1-u00*v2+u01*v3 (v3 ist eine Konstante)
+            \function[normalize,expand]{d7}{u0*v1-u00*v2+u01*v3}
+           
+			
+		\end{variables}
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		  \type{input.function}
+      \field{rational}
+		\precision{3}
+		\displayprecision{3}
+	    \lang{de}{\text{Zerlegen Sie die Funktion $f(x)=\var{f_dis}$ passend in ein Produkt $f(x)=u(x)v'(x)$,
+so dass Sie partielle Integration anwenden können:\\
+	$u(x)= $\ansref, $v'(x)=$\ansref mit $u'(x)=$\ansref, $v(x)=$\ansref. \\
+Dann ist \\
+	$\int_a^b f(x) \; dx = [$ \ansref $]_a^b -\int_a^b $ \ansref $dx$. \\
+    Damit ist $\int_a^b f(x) \; dx = [$ \ansref $]_a^b$.\\
+    \textit{Hinweis: Es kann eine zweite partielle Integration nötig sein, um die endgültige Stammfunktion zu erhalten.}}} 
+	    \begin{answer}
+%	    	\text{$u(x)= $}
+			\solution{v1} %Variablen sind in Lösung vertauscht!
+          \inputAsFunction{x}{s1}
+	    \end{answer}  
+	    \begin{answer}
+%	    	\text{$v'(x)=$}
+			\solution{u} %Variablen sind in Lösung vertauscht!
+          \inputAsFunction{x}{s2}
+          \checkFuncForZero{s1*s2-f}{-10}{10}{100}
+          \explanation{Bei Ihrer Eingabe gilt nicht $f(x)=u(x)v'(x)$.}
+          \score{2.0}
+	    \end{answer}
+	    \begin{answer}
+%	    	\text{$u'(x)=$}
+			\solution{v2}
+          \inputAsFunction{x}{s3}
+          \checkFuncForZero{D[s1]-s3}{-10}{10}{100}
+          \explanation{Sie haben eine falsche Ableitung von $u(x)$ angegeben.}
+        \end{answer}
+	    \begin{answer}
+%	    	\text{$v(x)=$}
+			\solution{u0}
+          \inputAsFunction{x}{s4}
+          \checkFuncForZero{D[s4]-s2}{-10}{10}{100}
+          \explanation{Sie haben eine falsche Stammfunktion von $v'(x)$ angegeben.}
+        \end{answer}
+	    \begin{answer}
+%	    	\text{$f1=$}
+			\solution{d5}
+          \inputAsFunction{x}{s5}
+          \checkFuncForZero{s1*s4-s5}{-10}{10}{100}
+          \explanation{Sie haben die Formel für die partielle Integration nicht richtig angewendet. In dieses Feld kommt $u(x)v(x)$.}
+	    \end{answer}
+	    \begin{answer}
+%	    	\text{$f2=$}
+			\solution{d6}
+          \inputAsFunction{x}{s6}
+          \checkFuncForZero{s3*s4-s6}{-10}{10}{100}
+          \explanation{Sie haben die Formel für die partielle Integration nicht richtig angewendet. Der neue Integrand ist $u'(x)v(x)$.}
+	    \end{answer}
+        \begin{answer}
+            \solution{d7}
+            \inputAsFunction{x}{s7}
+            %Folgefehler werden hier berücksichtigt
+            \checkFuncForZero{s6-D[s5]+D[s7]}{-1}{1}{100}
+            \explanation[ex<=0]{Die beste Wahl ist $v'(x)=\var{u}$ und $u(x)$ ein geeignetes Polynom.\\ Der neue Integrand nach partieller Integration ist dann wieder ein Produkt. Man führt noch eine zweite partielle Integration, dann mit $u(x)$ als einem Polynom von Grad $1$, durch.}
+            \explanation[ex>=1]{Die beste Wahl ist $u(x)=\ln(x)$ und $v'(x)$ ein geeignetes Polynom.\\ Der neue Integrand nach partieller Integration ist dann ein Polynom. Es ist keine erneute partielle Integration nötig.}
+            \score{3.0}
+          \end{answer}
+	\end{question}
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

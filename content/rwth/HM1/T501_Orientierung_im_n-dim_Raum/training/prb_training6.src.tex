@@ -1,0 +1,115 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Training 6}
+    \lang{de}{A06: Grenzwerte}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24115}{Ticket 24115}
+\end{block}
+\usepackage{mumie.genericproblem}
+\title{
+    \lang{en}{Training 6}
+    \lang{de}{A06: Grenzwerte}
+  }
+  
+  
+  \begin{problem}
+
+
+
+\begin{question} 
+  
+     
+
+    \begin{variables}
+        
+    \randint[Z]{a}{-8}{12}
+    \randint[Z]{b}{1}{12}
+    \randint[Z]{c}{-15}{10}
+    \randint[Z]{d}{2}{8}
+    \randint[Z]{e}{9}{19}
+    \randint[Z]{f}{-12}{12}
+    \randint[Z]{g}{-8}{10}
+    \randint[Z]{h}{2}{8}
+    \randint[Z]{k}{-8}{8}
+    \randint[Z]{i}{3}{12}
+    \function[calculate]{j}{i-2}
+    \randint[Z]{l}{1}{12}
+    \function[calculate]{m}{2*g}
+    \function[calculate]{p}{g*g}
+    \function[calculate]{q}{p/2}
+    
+    
+    
+    \matrix[calculate]{A}{a\\ 0}
+    \matrix{B}{0\\ k\\ k}
+    \matrix[calculate]{C}{0\\ q\\ -abs(g) }
+    
+    
+    \end{variables}
+    
+    \type{input.matrix}
+    \field{real}
+	\displayprecision{1}
+    \correctorprecision{1}
+    
+    \lang{de}{\text{Berechnen Sie die Grenzwerte der unten stehenden konvergenten Folgen.\\
+    $x^{(n)} :=\begin{pmatrix}{\frac{\var{a}n^2+\var{b}}{n^2+\var{b}n+(\var{c})}}\\
+                                    \frac{\var{c}}{\var{d}^n}\end{pmatrix}$, $
+    y^{(n)} :=\begin{pmatrix}\var{f}\cdot (\frac{\var{h}}{\var{e}})^n\\
+                                    \var{k}\\\var{k}\end{pmatrix}$ und $
+    z^{(n)} :=\begin{pmatrix}\frac{\var{g}n+1}{n^2+n+1}\\
+                             \frac{n(\var{m}n-\var{l})^2}{(2n+1)^3}\\
+                             \sqrt{\frac{n^2}{\var{p}}+\var{j}n}-\sqrt{\frac{n^2}{\var{p}}+\var{i}n}
+                             \end{pmatrix}$.}}
+    
+    \begin{answer}
+    \text{$\lim_{n\to\infty}x^{(n)}=$}
+    \solution{A}
+    \format{2}{1}
+    \explanation{}
+    \end{answer}  
+    
+    \begin{answer}
+    \text{$\lim_{n\to\infty}y^{(n)}=$}
+    \solution{B}
+    \format{3}{1}
+    \explanation{}
+    \end{answer}  
+    
+    \begin{answer}
+    \text{$\lim_{n\to\infty}z^{(n)}=$}
+    \solution{C}
+    \format{3}{1}
+    \explanation{Benutzen Sie die Grenzwertregeln und berechnen Sie die Grenzwerte komponentenweise. Bei der dritten Komponente von $z^{(n)}$ erweitern Sie den Term so, dass Sie die dritte 
+    binomische Formel anwenden können, und verwenden Sie anschließend die Grenzwertregeln.}
+    \end{answer}
+    
+
+     
+\end{question}    
+
+\end{problem}
+\embedmathlet{gwtmathlet}
+
+\end{content}

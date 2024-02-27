@@ -1,0 +1,167 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Exercise 10}
+    \lang{de}{Ü10: Diff'barkeit}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{Exercise 3}
+    \lang{de}{Ü03: Diff'barkeit}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T502_Stetigkeit_Diffbarkeit-n-dim/g_art_content_54_Differentiation.meta.xml}{content_54_Differentiation}
+\link{generic_article}{content/rwth/HM1/T502_Stetigkeit_Diffbarkeit-n-dim/g_art_content_53_Stetigkeit.meta.xml}{content_53_Stetigkeit}
+\end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22637}{Ticket 22637}
+\end{block}
+  \title{
+    \lang{en}{Exercise 10}
+    \lang{de}{Ü10: Diff'barkeit}
+  }
+  
+  Untersuchen Sie die folgenden Funktionen auf Stetigkeit, partielle Differenzierbarkeit und totale Differenzierbarkeit.
+  \begin{enumerate}[alph]
+    
+    \item $p: \R^3 \to \R^2, x \mapsto \begin{pmatrix} x_1^4 x_3+ x_2x_3^3 \\ (x_1 x_2 x_3 + x_1^2 x_2)^2\end{pmatrix}$.
+
+    \item $g: \R^2\to \R, x \mapsto \begin{cases}\frac{x_1^3}{x_1^2+x_2^2}, & x\neq (0,0)^T, \\ 0,& x=(0,0)^T.\end{cases}$.
+
+%QS c) $h: \R^2\to \R, x \mapsto \begin{cases}\frac{x_1^4+x_2^4}{(x_1+x_2)^2}, & x\neq (0,0)^T, \\ 1,& x=(0,0)^T.\end{cases}$.
+%QS Änderung f(x) statt h(x) und Quadrate im _Nenner ergänzt ...
+%QS
+    \item $f: \R^2\to \R, x \mapsto \begin{cases}\frac{x_1^4+x_2^4}{(x_1^2+x_2^2)^2}, & x\neq (0,0)^T, \\ 1,& x=(0,0)^T.\end{cases}$.
+    
+  \end{enumerate}
+  \\
+  
+  
+  \begin{tabs*}[\initialtab{0}\class{exercise}]
+    \tab{Lösung a)}
+    Beide Komponenten von $p$ sind Polynomfunktionen. Polynomfunktionen sind auf dem gesamten Definitionsbereich 
+    stetig partiell differenzierbar. Daraus folgt, dass $p$ total differenzierbar, partiell differenzierbar und 
+    stetig ist.
+    \tab{Lösung b)}
+    \begin{incremental}[\initialsteps{1}]
+      \step
+        In $a\neq 0$ ist $g$ als rationale Funktion stetig partiell differenzierbar und damit insbesondere stetig, partiell differenzierbar und total differenzierbar.
+        
+        \step Betrachten wir also $g$ an der Stelle $a=0$: \\
+        
+        Für $x\neq 0$ gilt
+        \begin{align*}
+        \displaystyle
+        \abs{g(x)} = \frac{|x_1|^3}{x_1^2+x_2^2} 
+        = \frac{\left(\sqrt{x_1^2} \right)^3}{x_1^2+x_2^2}\leq \frac{\left(\sqrt{x_1^2+x_2^2}\right)^3}{x_1^2+x_2^2} 
+        = \frac{\Vert x \Vert^3}{\Vert x \Vert^2}
+        =\Vert x \Vert.
+        \end{align*}
+%QS        
+%QS     Damit folgt $|f(x)| \to 0$ für $x \to 0$ und $f$ ist stetig.   
+%QS        
+        Hieraus folgt, dass $|g(x)|$ und damit auch $g(x)$ für $x \to 0$ ebenfalls gegen $0$ konvergiert. 
+        Nach dem \ref[content_53_Stetigkeit][Folgenkriterium]{thm:äquivalent-zu-stetig} ist $g$ daher stetig.
+        
+        \step Für die partiellen Ableitungen rechnen wir
+        \[
+        \frac{\partial g}{\partial x_1}(0)=\lim_{h \to 0} \frac{g(0+h,0)-g(0)}{h}=\lim_{h \to 0} \frac{\frac{h^3}{h^2}}{h}= 1
+        \]
+        und 
+        \[
+        \frac{\partial g}{\partial x_2}(0)=\lim_{h \to 0} \frac{g(0,0+h)-g(0)}{h}= 0.
+        \]
+        Die partiellen Ableitungen existieren also in $0$ und damit ist $g$ auf ganz $\R^2$ partiell differenzierbar.
+        
+        \step Wäre $g$ in $0$ total differenzierbar, dann wäre $L=Dg(0)=\left(1 , 0\right)$ und
+        \[
+%QS        \lim_{x\to a}\frac{f(x)-f(a)-L\cdot(x-a)}{\vert\!\vert x-a\vert\!\vert}=0.
+%QS a=0 und f=g ersetzen ...
+%QS
+        \lim_{x\to 0}\frac{g(x)-g(0)-L\cdot(x-0)}{\Vert x-0\Vert}=\lim_{x\to 0}\frac{g(x)-Dg(0)\cdot x}{\Vert x\Vert}=0.
+        \]
+        \step Nun ist aber
+        \begin{align*}
+        \displaystyle
+%QS        \frac{f(x)-f(a)-L\cdot(x-a)}{\vert\!\vert x-a\vert\!\vert}&= \frac{f(x)-Df(0)x}{\Vert x \Vert} \\
+%QS        &= \frac{\frac{x_1^3}{x_1^2+x_2^2}-x_1}{\Vert x \Vert} \\
+%QS        &= \frac{\frac{x_1^3-x_1^3-x_1x_2^2}{x_1^2+x_2^2}}{\Vert x \Vert}= - \frac{x_1 x_2^2}{\Vert x \Vert^3}.
+%QS neu ...
+          \frac{g(x)-Dg(0)\cdot x}{\Vert x\Vert} 
+          &= \frac{1}{\Vert x\Vert} \cdot \left(\frac{x_1^3}{x_1^2+x_2^2}-\begin{pmatrix}1 & 0\end{pmatrix} \cdot \begin{pmatrix}x_1\\ x_2\end{pmatrix} \right) \\
+          &= \frac{1}{\Vert x\Vert} \cdot \left(\frac{x_1^3}{x_1^2+x_2^2} - x_1 \right) \\
+          &= \frac{1}{\Vert x\Vert} \cdot \frac{x_1^3 - x_1^3 - x_1 x_2^2}{x_1^2+x_2^2} \\
+          &= \frac{1}{\Vert x\Vert} \cdot \frac{- x_1 x_2^2}{\Vert x\Vert^2} \\
+          &= - \frac{x_1 x_2^2}{\Vert x\Vert^3} \\
+        \end{align*}
+%QS
+%QS        \step Nun geht die rechte Seite aber nicht gegen Null für alle $x\in \R^2$. Dazu betrachten wir die Folge $x^{(k)} = (\frac{1}{k},\frac{1}{k})^T$:
+%QS
+        und die rechte Seite der Gleichung geht nicht gegen Null für alle $x\in \R^2$. 
+        Betrachten wir beispielsweise die Nullfolge $x^{(k)} = (\frac{1}{k},\frac{1}{k})^T$, dann ist
+        \[- \frac{\frac{1}{k} \cdot \frac{1}{k^2}}{\sqrt{\frac{2}{k^2}}^3} = - \frac{1}{\sqrt{2^3}}
+        = - \frac{1}{k^3} \cdot \frac{1}{\sqrt{2^3}} \cdot k^3 \]
+        und somit 
+        \[
+        \lim_{k\to infty} \frac{g(x^{(k)})-Dg(0)\cdot x^{(k)}}{\Vert x^{(k)}\Vert}
+        = - \frac{1}{\sqrt{2^3}} \neq 0.        
+        \]
+        Folglich ist $g$ in $0$ nicht total differenzierbar.
+    \end{incremental}
+    \tab{
+      Lösung c)
+    }
+    \begin{incremental}[\initialsteps{1}]
+%QS In Anlehnung an Lösung  b) 1. Step ergänzt
+%QS
+      \step In $a\neq 0$ ist $f$ als rationale Funktion stetig partiell differenzierbar und damit insbesondere stetig,
+            partiell differenzierbar und total differenzierbar.
+            
+      \step Untersuchen wir nun $f$ an der Stelle $a=0$. \\
+                      
+            Wir vermuten, die Funktion ist nicht stetig in $a=0$, was durch die Wahl einer geeigneten Nullfolge $x^{(n)}$
+            nachweisbar ist.\\
+%QS Ende Änderungsvorschlag
+%QS         Zur Stetigkeit: Wähle ...
+            
+            Wir wählen hierzu die Folge $(x^{(n)})_{n \in \N}=\left(\frac{1}{n},\frac{1}{n}\right)_{n \in \N}$. 
+            Damit gilt für alle $n \in \N$
+            \begin{align*}
+            \displaystyle
+                f(x^{(n)}) = \frac{\left(\frac{1}{n}\right)^4+\left(\frac{1}{n}\right)^4}{\left(\left(\frac{1}{n}\right)^2+\left(\frac{1}{n}\right)^2\right)^2} = \frac{\frac{2}{n^4}}{\frac{4}{n^4}} = \frac{1}{2},
+            \end{align*}
+            und folglich  $\qquad \qquad \lim_{n \rightarrow \infty}{f(x^{(n)})} = \frac{1}{2} \neq 1 = f(0,0)=f(\lim_{n \rightarrow \infty}x^{(n)})$.
+            \\
+            
+            Damit ist gezeigt, dass $f$ nicht stetig ist in $(0,0)^T$.\\ 
+    \step Folglich kann $f$ nach dem 
+        \ref[content_54_Differentiation][Theorem zur Totalen Differenzierbarkeit]{thm:zshg_total_diffbar-Differential}
+        in $0$ auch nicht total differenzierbar sein.
+            
+	\step Die partiellen Ableitungen von $f$ in $a=0$ berechnen wir aus 
+	\[
+		\frac{\partial f}{\partial x_1}(0)=\lim_{h \rightarrow 0}{\frac{f(0+h,0)-h(0,0)}{h}} % \overset{h \neq 0}{=} 
+        = \lim_{h \rightarrow 0}{\frac{\frac{h^4+0}{(h^2+0)^2}-1}{h}} = \lim_{h \rightarrow 0}{\frac{1-1}{h}} = 0
+	\]
+	und analog  $\displaystyle \qquad \qquad \frac{\partial f}{\partial x_2}(0)=\lim_{h \rightarrow 0}{\frac{f(0,0+h)-h(0,0)}{h}} = 0.$
+	\\
+    
+    Die partiellen Ableitungen existieren also in $(0,0)^T$ und damit ist $f$ auf ganz $\R^2$ 
+    sowohl nach $x_1$ als auch nach $x_2$ partiell differenzierbar.
+    
+%QS    \step In allen anderen Punkten ist $h$ als rationale Funktion partiell differenzierbar.
+    
+    
+    \end{incremental}
+  \end{tabs*}
+\end{content}
+

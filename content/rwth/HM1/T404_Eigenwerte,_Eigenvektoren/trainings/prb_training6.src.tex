@@ -1,0 +1,88 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A06: Eigenwerte, -vektoren}
+    \lang{en}{P06: Eigenvalues and eigenvectors}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A06: Eigenwerte, -vektoren}}
+\lang{en}{\title{P06: Eigenvalues and eigenvectors}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/11631}{Ticket 11631}
+\end{block}
+
+\begin{problem}
+
+	\begin{question}
+		
+		\begin{variables}
+\randint{l1}{-3}{2}
+\randint{l0}{1}{4}
+\function[calculate]{l2}{l1+l0}
+\randint{a1}{-3}{5}
+\randint{a2}{-3}{5}
+\randadjustIf{a1}{a1^2+a2^2=0}
+\function[calculate]{b1}{-a2}
+\function[calculate]{b2}{a1}
+\function[calculate]{d}{a1*b2-a2*b1}
+\matrix[calculate]{aa}{(l1*a1*b2-l2*b1*a2)/d & ((l2-l1)*a1*b1)/d \\ ((l1-l2)*a2*b2)/d & (l2*a1*b2-l1*b1*a2)/d}
+\matrix[calculate]{vv}{a1\\a2}
+		\end{variables}
+		
+		\type{input.generic}
+        \field{rational}
+		\lang{de}{
+	    	\text{Die Matrix $A=\var{aa}$ hat einen Eigenvektor $v_1=\var{vv}$. Bestimmen Sie die Eigenwerte von $A$ und einen zu $v_1$ linear unabhängigen Eigenvektor von $A$:\\
+				Die Menge der Eigenwerte ist \ansref \\
+				Ein zu $v_1$ linear unabhängiger Eigenvektor von $A$ ist: $($ \ansref , \ansref $)^T$}
+		}
+  		\lang{en}{
+	    	\text{The matrix $A=\var{aa}$ has an eigenvector $v_1=\var{vv}$. Determine the eigenvalues of $A$ and an eigenvector $A$, which is linearly independent of $v_1$:\\
+				The set of eigenvalues is \ansref \\
+				An eigenvector of $A$ linearly independent of $v_1$ is: $($ \ansref , \ansref $)^T$}
+		}
+
+	    \begin{answer}
+            \type{input.finite-number-set}
+			\solution{l1,l2}
+            \explanation{\lang{en}{The set of eigenvalues is not correct determined. Determine the eigenvalue of $v_1$ immediate or determine the characteristic polynomial.}
+            \lang{de}{Die Menge der Eigenwerte ist nicht korrekt bestimmt. Berechnen Sie den Eigenwert von $v_1$ direkt oder bestimmen Sie das charakteristische Polynom.}}
+	    \end{answer}    
+	    \begin{answer}
+            \type{input.function}
+			\solution{b1}
+			\inputAsFunction{x}{w1}
+	    \end{answer}    
+	    \begin{answer}
+            \type{input.function}
+			\solution{b2}
+			\inputAsFunction{x}{w2}
+			\checkFuncForZero{(w1*b2-w2*b1)^2+1-|sign(w1^2+w2^2)|}{-1}{1}{10}
+%			\score{2}
+            \explanation{\lang{de}{Der zweite Eigenvektor ist nicht korrekt.} \lang{en}{The second eigenvector is not correct.}}
+	    \end{answer}   
+	\end{question}
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

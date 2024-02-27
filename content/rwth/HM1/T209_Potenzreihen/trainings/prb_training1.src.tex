@@ -1,0 +1,102 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A01: Konvergenzradius}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{
+	\title{A01: Konvergenzradius}
+}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9921}{Ticket 9921}
+\end{block}
+
+
+
+\begin{problem}
+
+\randomquestionpool{1}{2}
+%Frage 1 von 7
+\begin{question}
+
+	
+\begin{variables}
+	\randint[Z]{q}{-9}{9}
+	\function[calculate]{sol}{1/abs(q)}
+	
+\end{variables}
+
+	\type{input.number}
+	\field{rational} 
+	\precision{3}
+    \lang{de}{
+	    \text{
+	     Bestimmen Sie den Konvergenzradius der Potenzreihe
+        $\sum_{k=0}^{\infty} ( \var{q} \cdot z )^{k}.$\\
+        %Geben Sie die Antwort auf drei Nachkommastellen genau an.
+    }}
+    
+    \begin{answer}
+    \text{Der Konvergenzradius ist gegeben durch r =}
+	    \solution{sol}
+      \explanation{Der Konvergenzradius der geometrischen Reihe $\sum_{k=0}^\infty z^k$ ist $1$.
+    Daher ist für $b\neq 0$ der Konvergenzradius der  Reihe $\sum_{k=0}^\infty (bz)^k$ gleich $r=\frac{1}{\vert b\vert}$.}    
+    \end{answer}
+    
+\end{question}
+
+\begin{question}
+	
+\begin{variables}
+	\randint[Z]{q}{2}{5}
+    \randint[Z]{a}{-3}{3}
+	\function[calculate]{sol}{(1/q)^a}
+	\function[normalize]{f}{a*k}
+\end{variables}
+
+	\type{input.number}
+	\field{rational} 
+	\precision{3}
+    \lang{de}{
+	    \text{
+	     Bestimmen Sie den Konvergenzradius der Potenzreihe
+        $\sum_{k=0}^{\infty} \var{q}^{\var{f}} \cdot z^{k}.$\\
+        %Geben Sie die Antwort auf drei Nachkommastellen genau an.
+    }}
+    
+    \begin{answer}
+    \text{Der Konvergenzradius ist gegeben durch r =}
+	    \solution{sol}
+    \explanation{Der Konvergenzradius der geometrischen Reihe $\sum_{k=0}^\infty z^k$ ist $1$.
+    Daher ist für $a\neq 0$ der Konvergenzradius der  Reihe $\sum_{k=0}^\infty (az)^k$ gleich $r=\frac{1}{\vert a\vert}$. 
+    Man muss die Reihe allerdings vorher in diese Form bringen.}
+    \end{answer}
+    
+\end{question}
+    
+\end{problem}
+
+
+\embedmathlet{mathlet}
+
+\end{content}

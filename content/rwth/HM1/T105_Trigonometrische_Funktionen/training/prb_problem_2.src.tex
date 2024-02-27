@@ -1,0 +1,81 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A02: Bogen- und Gradmaß}
+    \lang{en}{Problem 2}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+    \component{generic_image}{content/rwth/HM1/images/g_img_right-angled-abb1.meta.xml}{image1}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{
+	\title{A02: Bogen- und Gradmaß}
+}
+\lang{en}{
+	\title{Problem 2}
+	}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9727}{Ticket 9727}
+\end{block}
+
+\begin{problem}
+\begin{variables}
+	\randint{z1}{0}{360}
+	\function{s1}{z1/180}
+	
+	\randint{z2}{1}{9}
+	\randint{z3}{1}{9}
+	\function{k}{z2/z3}
+	\randadjustIf{z2,z3}{k > 2}
+	\function{s2}{180*k}
+\end{variables}
+\begin{question}
+    \explanation{Ausgehend von $\pi=180^\circ$ lässt sich diese Aufgabe über einen Dreisatz lösen.}
+	\type{input.number}
+	\field{rational}
+\lang{de}{\text{Gegeben ist der folgende Winkel in Gradmaß. Bestimmen Sie den zugehörigen Winkel in Bogenmaß. 
+Geben Sie das Ergebnis als gekürzten Bruch an.\\
+$\var{z1}^\circ =$\ansref $\cdot \pi$}}
+\begin{answer}
+	\solution{s1}
+\end{answer}
+\end{question}
+
+
+\begin{question}
+    \explanation{Ausgehend von $\pi=180^\circ$ lässt sich diese Aufgabe über einen Dreisatz lösen.}
+	\type{input.number}
+	\field{rational}
+\lang{de}{\text{Gegeben ist der folgende Winkel in Bogenmaß. Bestimmen Sie den zugehörigen Winkel in Gradmaß. 
+Geben Sie das Ergebnis als gekürzten Bruch an.
+$\var{k}\pi= x^\circ$}}
+\begin{answer}
+	\text{$x=$}
+	\solution{s2}
+\end{answer}
+\end{question}
+
+\end{problem}
+
+\embedmathlet{mathlet}
+%\embedapplet{applet}
+
+\end{content}

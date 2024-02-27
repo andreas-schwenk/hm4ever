@@ -1,0 +1,156 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A01: Intervallzerlegung}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A01: Intervallzerlegung}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/10585}{Ticket 10585}
+\end{block}
+
+\begin{problem}
+	\randomquestionpool{1}{2}
+	
+%######################################################QUESTION_START	
+	\begin{question}	
+	%+++++++++++++++++++VARIABLES++++++++++++++++++++++
+		\begin{variables}
+			\randint[Z]{a}{1}{4}
+			\randint[Z]{d1}{1}{40}
+			\randint[Z]{d2}{1}{40}
+			\randint[Z]{d3}{1}{40}
+			\randint[Z]{d4}{1}{40}
+			\function[calculate,2]{dx1}{d1/20}
+			\function[calculate,2]{dx2}{d2/20}
+			\function[calculate,2]{dx3}{d3/20}
+			\function[calculate,2]{dx4}{d4/20}
+			\function[calculate, display, normalize]{x1}{a+dx1}
+			\function[calculate,2]{x2}{x1+dx2}
+			\function[calculate,2]{x3}{x2+dx3}
+			\function[calculate,2]{x4}{x3+dx4}
+			\function[calculate,2]{b}{x4}
+			\function[calculate]{m1}{(dx1+dx2+|dx1-dx2|)/2} %=max(dx1,dx2)
+			\function[calculate]{m2}{(dx3+dx4+|dx3-dx4|)/2}
+			\function[calculate]{m}{(m1+m2+|m1-m2|)/2}  %=max(dx1,dx2,dx3,dx4)
+			
+		\end{variables}
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		\type{input.number} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+		\field{real} 
+
+		\precision{2}
+
+	%+++++++++++++++++++TITLE++++++++++++++++++++++++++	
+	    \lang{de}{\text{Für das Intervall $[\var{a};\var{b}]$ betrachten wir die
+Zerlegung $\var{a}<\var{x1}<\var{x2}<\var{x3}<\var{b}$. Bestimmen Sie die Längen der
+Teilintervalle und die Feinheit der Zerlegung. Die Längen der Teilintervalle sind dann.}}
+	%+++++++++++++++++++ANSWERS++++++++++++++++++++++++    
+	    \begin{answer}
+	    	\text{$\Delta {x_1}=$}
+			\solution{dx1}
+            \explanation{Das erste Teilintervall ist $[\var{a};\var{x1}]$.}
+	    \end{answer}
+	    \begin{answer}
+	    	\text{$\Delta {x_2}=$}
+			\solution{dx2}
+            \explanation{Das zweite Teilintervall ist $[\var{x1};\var{x2}]$.}
+	    \end{answer}
+	    \begin{answer}
+	    	\text{$\Delta {x_3}=$}
+			\solution{dx3}
+            \explanation{Das dritte Teilintervall ist $[\var{x2};\var{x3}]$.}
+	    \end{answer}
+	    \begin{answer}
+	    	\text{$\Delta {x_4}=$}
+			\solution{dx4}
+            \explanation{Das vierte Teilintervall ist $[\var{x3};\var{b}]$.}
+	    \end{answer} 
+	    \begin{answer}
+	    	\text{Die Feinheit der Zerlegung beträgt:}
+			\solution{m}
+            \explanation{Die Feinheit ist gegeben durch $\max(\Delta x_1,\Delta x_2, \Delta x_3, \Delta x_4)$.}
+	    \end{answer}
+	\end{question}
+%######################################################QUESTION_END
+
+%######################################################QUESTION_START	
+	\begin{question}	
+	%+++++++++++++++++++VARIABLES++++++++++++++++++++++
+		\begin{variables}
+			\randint[Z]{a}{1}{4}
+			\randint[Z]{d1}{1}{40}
+			\randint[Z]{d2}{1}{40}
+			\randint[Z]{d3}{1}{40}
+			\randint[Z]{d4}{1}{40}
+			\function[calculate,display]{dx1}{d1/20}
+			\function[calculate,display]{dx2}{d2/20}
+			\function[calculate,display]{dx3}{d3/20}
+			\function[calculate,display]{dx4}{d4/20}
+			\function[calculate]{x1}{a+dx1}
+			\function[calculate]{x2}{x1+dx2}
+			\function[calculate]{x3}{x2+dx3}
+			\function[calculate]{x4}{x3+dx4}
+			\function[calculate, display]{b}{x4}
+			%\function{sol}{max(dx1,dx2,dx3,dx4)}
+			
+		\end{variables}
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		\type{input.number} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+		\field{real} 
+		\displayprecision{2} % <- dieser command gibt die Stellenzahl für numbers. Für functions muss bei
+        % calculate noch "display" ergänzt werden, damit auf die Stellenzahl gerundet wird.
+    	\correctorprecision{2}
+	%+++++++++++++++++++TITLE++++++++++++++++++++++++++	
+	    \lang{de}{\text{Für das Intervall $[\var{a};\var{b}]$ betrachten wir die
+Zerlegung in $4$ Teilintervalle der Längen $\var{dx1}$, $\var{dx2}$, $\var{dx3}$ und $\var{dx4}$.
+Bestimmen Sie die Teilungsstellen.
+Diese sind\\
+$ \var{a}< $\ansref $<$\ansref $<$\ansref $<\var{b}$.}}
+	%+++++++++++++++++++ANSWERS++++++++++++++++++++++++    
+	    \begin{answer}
+%	    	\text{$a=$}
+			\solution{x1}
+            \explanation{Die Lösung ergibt sich durch Addition der ersten Länge zum linken Rand.}
+
+	    \end{answer}
+	    \begin{answer}
+%	    	\text{$b=$}
+			\solution{x2}
+            \explanation{Die Lösung ergibt sich durch Addition der ersten beiden Längen zum linken Rand.}
+            
+	    \end{answer}
+	    \begin{answer}
+%	    	\text{$c=$}
+			\solution{x3}
+            \explanation{Die Lösung ergibt sich durch Addition der ersten drei Längen zum linken Rand.}
+            
+	    \end{answer}
+	\end{question}
+%######################################################QUESTION_END
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

@@ -1,0 +1,98 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A08: l'Hospital}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A08: l'Hospital}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/10411}{Ticket 10411}
+\end{block}
+\begin{block}[annotation]
+Pool mit zwei randomisierten Aufgaben zur Regel von de l'Hospital.
+\end{block}
+
+\begin{problem}
+	%\randomquestionpool{}{}
+	\randomquestionpool{1}{2}
+%######################################################QUESTION_START	
+	\begin{question}	
+	%+++++++++++++++++++VARIABLES++++++++++++++++++++++
+		\begin{variables}
+			\randint{x0}{1}{3}
+			\randint[Z]{n}{1}{3}
+			\function{sol}{0}
+			\function[normalize]{h}{(x-(x0-1))}
+			\function{f}{1/(x-x0)} 
+			\function{g}{x-x0}
+		\end{variables}
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		\type{input.function} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+		\field{rational}
+		
+	%+++++++++++++++++++TITLE++++++++++++++++++++++++++	
+	    \lang{de}{\text{Bestimmen Sie den Grenzwert\\
+        $ \lim_{x\searrow \var{x0}} \ln(\var{f})\cdot (\var{g}) = $\ansref \\
+        Schreiben Sie ~\texttt{infty}~ bzw. ~\texttt{-infty}~, falls die Funktion
+bestimmt gegen unendlich (bzw. minus unendlich) divergieren sollte.}}
+	%+++++++++++++++++++ANSWERS++++++++++++++++++++++++    
+	    \begin{answer}
+			\solution{sol}
+            \checkAsFunction{x}{-10}{10}{10}
+	    \end{answer}  
+        \explanation{Formen Sie geeignet um, um die Regel von de l'Hospital anwenden zu können.}
+	\end{question}
+%######################################################QUESTION_END
+
+%######################################################QUESTION_START	
+	\begin{question}	
+	%+++++++++++++++++++VARIABLES++++++++++++++++++++++
+		\begin{variables}
+			\function{x0}{infinity}
+			\randint[Z]{n}{2}{4}
+			\function{f}{e^((x^n))}
+			\function{g}{(e^x)^n}
+			\function{sol}{infinity}
+		\end{variables}
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		\type{input.function} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+		\field{rational}
+		\precision{3}
+	%+++++++++++++++++++TITLE++++++++++++++++++++++++++	
+	    \lang{de}{\text{Bestimmen Sie den Grenzwert \\$ \lim_{x\to \var{x0}} (\var{f}-\var{g}) = $\ansref \\
+        Schreiben Sie ~\texttt{infty}~ bzw.~\texttt{-infty}~, falls die Funktion
+bestimmt gegen unendlich (bzw. minus unendlich) divergieren sollte.}}
+	%+++++++++++++++++++ANSWERS++++++++++++++++++++++++    
+	    \begin{answer}
+			\solution{sol}
+			\checkAsFunction{x}{-10}{10}{10}
+	    \end{answer} 
+        \explanation{Formen Sie geeignet um, um die Regel von de l'Hospital anwenden zu können.}
+	\end{question}
+%######################################################QUESTION_END
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

@@ -1,0 +1,304 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A03: Stammfunktion}
+    \lang{en}{problem 3}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+
+\lang{de}{
+	\title{A03: Stammfunktion}
+}
+\lang{en}{
+	\title{Problem 3}
+}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9611}{Ticket 9611}
+\end{block}
+
+\begin{problem}
+
+\randomquestionpool{1}{1}
+\randomquestionpool{2}{2}
+\randomquestionpool{3}{5}
+
+	\begin{variables}
+	 	\randint[Z]{a}{-5}{3}
+	 	\randint[Z]{b}{-5}{4}
+	 	\randint[Z]{c}{-3}{5}
+	 	\randint[Z]{d}{-4}{5}
+	 	\randint[Z]{r}{-20}{20}
+
+		\function{f}{a*cos(x)+ b*x^3+c*sin(x)+d*ln(x)}
+		\function{f_7}{a*cos(x)+ b*x^3+c*sin(x)+d*ln(x)+r}
+		\derivative[normalize]{f_1}{f}{x}
+		\functionNormalize{f_1}
+        \functionNormalize{f_7}
+
+	\end{variables}
+
+
+	\begin{question}%1
+		\lang{de}{
+			\text{
+
+
+			Gegeben sei die Funktion $f(x) = \var{f_1}$. \\
+		      Bestimmen Sie für $x>0$ eine Stammfunktion $F(x)$ von $f(x)$:}
+		}
+		 \lang{en}{\text{
+      Given is the function $f(x) = \var{f_1}$. \\
+      For $x > 0$, determine an antiderivative $F(x)$ of $f(x)$:
+     }}
+		\type{input.function}
+
+		\begin{answer}
+			\text{ $F(x) = $}
+			\solution{f}
+			\inputAsFunction{x}{inp}
+			\checkFuncForZero{D[inp]-f_1}{-10}{10}{100}
+            
+            \lang{en}{
+            \explanation{Determine an antiderivative for each summand and note that an antiderivative
+            of $f$ is then given by the sum of these functions. }
+            }
+            
+            \lang{de}{
+            \explanation{Bestimmen Sie für jeden Summanden eine Stammfunktion und beachten Sie, dass eine Stammfunktion
+            von $f$ dann durch die Summe dieser Stammfunktionen gegeben ist. }            
+            }
+		\end{answer}
+	\end{question}%1
+
+
+	\begin{question}%2
+		\lang{de}{
+			\text{Gegeben sei nun die Funktion $g(x) = \var{f_7}$ für $x>0$. \\
+		       Leiten Sie $g(x)$ ab!}
+     \explanation{Beachten Sie, dass die Ableitung einer Summe von Funktionen durch die Summe der 
+     Ableitungen der Summanden gegeben ist (Additivität der Ableitung).}               
+               
+		}
+	 \lang{en}{\text{
+      Given is the function $g(x) = \var{f_7}$, $x>0$. \\
+      Find the derivative of $g(x)$!
+     }
+     \explanation{Note that the derivative of a sum of functions is the sum of the derivatives 
+         of these functions (additivity of the derivative).}
+     }
+         
+		\type{input.function}
+
+		\begin{answer}
+			\text{ $g'(x) = $}
+			\solution{f_1}
+			\checkAsFunction{x}{-10}{10}{100}
+            
+
+		\end{answer}
+
+	\end{question}%2
+
+	\begin{question}%3
+    \type{input.generic}
+    
+	   \lang{de}{
+	     \text{Vergleichen Sie nun $g'(x)$ mit $f(x)$.\\
+	     Wie können Sie die Gleichheit erklären, obwohl $g(x)$ und $F(x)$ unterschiedlich sind? }
+	   }
+	    \lang{en}{\text{
+        Now compare $g'(x)$ with $f(x)$. \\
+        How can we explain the fact that they are the same, even though $g(x)$ and $F(x)$ are different?
+      }}
+      \begin{answer}
+      
+	   %\permutechoices{1}{4}
+	   \type{mc.multiple}
+	   \begin{choice}
+      \lang{de}{\text{Es ist Zufall.}}
+       \lang{en}{\text{It is coincidence.}}
+	    \solution{false}
+	   \end{choice}
+
+	   \begin{choice}
+      \lang{de}{\text{Es kann passieren, dass durch Rechenfehler die gleiche Stammfunktion entsteht.}}
+       \lang{en}{\text{It can happen that by calculation error we get the same antiderivatives.}}
+	    \solution{false}
+	   \end{choice}
+
+	   \begin{choice}
+      \lang{de}{	    \text{Stammfunktionen sind nicht eindeutig, es können Konstanten addiert werden.}
+}
+      \lang{en}{\text{Antiderivatives are not unique, we can always add a constant.}}
+      \solution{true}
+	   \end{choice}
+
+	   \begin{choice}
+      \lang{de}{	    \text{Es gibt immer genau zwei verschiedene Stammfunktionen zu einer Funktion.}
+}
+ \lang{en}{\text{There are always exactly two different antiderivatives for a function.}}
+      \solution{false}
+	   \end{choice}
+       
+       \lang{de}{
+       \explanation[equalChoice(1???)]{Zufall ist in diesem Fall nicht die gesuchte Erklärung.}
+       \explanation[equalChoice(?1??)]{Rechenfehler erklären hier nicht die beobachtete Gleichheit.}
+       \explanation[equalChoice(??0?)]{Die Ableitung einer Konstanten ist $0$, daher können sich Stammfunktionen um eine additive Konstante unterscheiden.}
+       \explanation[equalChoice(???1)]{Wenn es eine Stammfunktion gibt, dann gibt es direkt unendlich viele.}
+       }
+       
+       \lang{en}{
+       \explanation[equalChoice(1???)]{In this case, the explanation you are looking for is not "coincidence".}
+       \explanation[equalChoice(?1??)]{Calculation or rounding errors do not explain the observed equality here.}
+       \explanation[equalChoice(??0?)]{Deriving a constant yields $0$, so two antiderivatives can differ by a constant.}
+       \explanation[equalChoice(???1)]{If there is an antiderivative, there are infinitely many.}
+       }       
+\end{answer}
+	\end{question}%3
+
+\begin{question}%4
+    \type{input.generic}
+    
+	   \lang{de}{
+	     \text{Vergleichen Sie nun $g'(x)$ mit $f(x)$.\\
+	     Wie können Sie die Gleichheit erklären, obwohl $g(x)$ und $F(x)$ unterschiedlich sind? }
+	   }
+	    \lang{en}{\text{
+        Now compare $g'(x)$ with $f(x)$. \\
+        How can we explain the fact that they are the same, even though $g(x)$ and $F(x)$ are different?
+      }}
+      \begin{answer}
+      
+	   %\permutechoices{1}{4}
+	   \type{mc.multiple}
+	   \begin{choice}
+      \lang{de}{\text{Es ist Zufall.}}
+       \lang{en}{\text{It is coincidence.}}
+	    \solution{false}
+	   \end{choice}
+       
+	   \begin{choice}
+      \lang{de}{	    \text{Stammfunktionen sind nicht eindeutig, es können Konstanten addiert werden.}
+}
+      \lang{en}{\text{Antiderivatives are not unique, we can always add a constant.}}
+      \solution{true}
+	   \end{choice}
+
+	   \begin{choice}
+      \lang{de}{\text{Es kann passieren, dass durch Rechenfehler die gleiche Stammfunktion entsteht.}}
+       \lang{en}{\text{It can happen that by calculation error we get the same antiderivatives.}}
+	    \solution{false}
+	   \end{choice}
+
+
+
+	   \begin{choice}
+      \lang{de}{	    \text{Es gibt immer genau zwei verschiedene Stammfunktionen zu einer Funktion.}
+}
+ \lang{en}{\text{There are always exactly two different antiderivatives for a function.}}
+      \solution{false}
+	   \end{choice}
+       
+       \lang{de}{
+       \explanation[equalChoice(1???)]{Zufall ist in diesem Fall nicht die gesuchte Erklärung.}
+       \explanation[equalChoice(?0??)]{Die Ableitung einer Konstanten ist $0$, daher können sich Stammfunktionen um eine additive Konstante unterscheiden.}
+       \explanation[equalChoice(??1?)]{Rechenfehler erklären hier nicht die beobachtete Gleichheit.}
+       \explanation[equalChoice(???1)]{Wenn es eine Stammfunktion gibt, dann gibt es direkt unendlich viele.}
+       }
+       
+       \lang{en}{
+       \explanation[equalChoice(1???)]{In this case, the explanation you are looking for is not "coincidence".}
+       \explanation[equalChoice(?0??)]{Deriving a constant yields $0$, so two antiderivatives can differ by a constant.}
+       \explanation[equalChoice(??1?)]{Calculation or rounding errors do not explain the observed equality here.}
+       \explanation[equalChoice(???1)]{If there is an antiderivative, there are infinitely many.}
+       }       
+\end{answer}
+	\end{question}%4
+
+
+\begin{question}%5
+    \type{input.generic}
+    
+	   \lang{de}{
+	     \text{Vergleichen Sie nun $g'(x)$ mit $f(x)$.\\
+	     Wie können Sie die Gleichheit erklären, obwohl $g(x)$ und $F(x)$ unterschiedlich sind? }
+	   }
+	    \lang{en}{\text{
+        Now compare $g'(x)$ with $f(x)$. \\
+        How can we explain the fact that they are the same, even though $g(x)$ and $F(x)$ are different?
+      }}
+      \begin{answer}
+      
+	   %\permutechoices{1}{4}
+	   \type{mc.multiple}
+       
+\begin{choice}
+      \lang{de}{	    \text{Es gibt immer genau zwei verschiedene Stammfunktionen zu einer Funktion.}
+}
+ \lang{en}{\text{There are always exactly two different antiderivatives for a function.}}
+      \solution{false}
+	   \end{choice}
+       
+	   \begin{choice}
+      \lang{de}{\text{Es ist Zufall.}}
+       \lang{en}{\text{It is coincidence.}}
+	    \solution{false}
+	   \end{choice}
+
+	   \begin{choice}
+      \lang{de}{\text{Es kann passieren, dass durch Rechenfehler die gleiche Stammfunktion entsteht.}}
+       \lang{en}{\text{It can happen that by calculation error we get the same antiderivatives.}}
+	    \solution{false}
+	   \end{choice}
+
+	   \begin{choice}
+      \lang{de}{	    \text{Stammfunktionen sind nicht eindeutig, es können Konstanten addiert werden.}
+}
+      \lang{en}{\text{Antiderivatives are not unique, we can always add a constant.}}
+      \solution{true}
+	   \end{choice}
+
+
+       
+       \lang{de}{
+       \explanation[equalChoice(1???)]{Wenn es eine Stammfunktion gibt, dann gibt es direkt unendlich viele.}
+       \explanation[equalChoice(?1??)]{Zufall ist in diesem Fall nicht die gesuchte Erklärung.}
+       \explanation[equalChoice(??1?)]{Rechenfehler erklären hier nicht die beobachtete Gleichheit.}
+       \explanation[equalChoice(???0)]{Die Ableitung einer Konstanten ist $0$, daher können sich Stammfunktionen um eine additive Konstante unterscheiden.}
+       }
+       
+       \lang{en}{
+       \explanation[equalChoice(1???)]{If there is an antiderivative, there are infinitely many.}
+       \explanation[equalChoice(?1??)]{In this case, the explanation you are looking for is not "coincidence".}
+       \explanation[equalChoice(??1?)]{Calculation or rounding errors do not explain the observed equality here.}
+       \explanation[equalChoice(???0)]{Deriving a constant yields $0$, so two antiderivatives can differ by a constant.}
+       }
+
+\end{answer}
+	\end{question}%5
+
+\end{problem}
+
+
+\embedmathlet{mathlet}
+\end{content}

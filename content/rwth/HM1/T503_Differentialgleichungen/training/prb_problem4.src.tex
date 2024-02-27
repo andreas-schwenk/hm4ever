@@ -1,0 +1,79 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A04: Pandemie}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+\lang{de}{\title{A04: Pandemie}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21997}{Ticket 21997}
+\end{block}
+
+
+\begin{block}[annotation]
+Textaufgabe zum langfristigen, ungedämpften Pandemieverlauf.
+Lösungsfunktion ist eine logistische Funktion. 
+Bei Einbindung in einen Kurs bietet es sich an, den Graph der Lösung zu diskutieren.
+\end{block}
+\begin{problem}
+%\randomquestionpool{1}{2}
+%%  DGL y'=k*y(1-y) mit AW y(0)=y0
+	\begin{question}
+    
+    \begin{variables}
+    %Feste Proportionalitätskonstante
+    \randint{j}{1}{50}
+    \function[normalize]{k}{j/10}
+    %Anfangswert y0
+    \function{y0}{z}
+    %Rechte Seite der DGL
+    \function{RS}{k*y*(1-y)}
+    %Lösung
+    \function{phi}{1/(1+z/(1-z)*exp(-k*x))}
+    \end{variables}
+    \text{Die langfristige Änderung des Anteils der infizierten Bevölkerung während einer Pandemie ist proportional abhängig 
+    vom Anteil der infizierten Bevölkerung selbst, als auch vom Anteil der (noch) nicht infizierten Bevölkerung.
+    Werden keine Maßnahmen gegen die Pandemie ergriffen (Infektionsschutz, Impfung o.ä.) und wird von einer Immunität nach einmaliger Ansteckung ausgegangen,
+    dann lassen sich die übrigen Einflüsse auf den Pandemieverlauf in einer einzigen Proportionalitätskonstante zusammen fassen. Nehmen Sie an,
+    diese Konstante sei $\var{k}$. Stellen Sie die Differentialgleichung für den Anteil der infizierten Bevölkerung auf und lösen Sie
+    sie unter der Annahme, dass zum Zeitpunkt $t_0=0$ ein Anteil $1>y_0:=z>0$ der Bevölkerung infiziert ist.}
+    \begin{answer}
+            \type{input.function}
+		    \text{Die Differentialgleichung lautet $y'=$}
+		    \solution{RS}
+            \inputAsFunction{y}{t}
+            \checkFuncForZero{RS-t}{-1}{1}{10}
+        \explanation{Die rechte Seite der Differentialgleichung ist das Produkt der obengenannten Faktoren. 
+        Bezeichnen Sie die Gesamtbevölkerung mit $1$,  den  Anteil der infizierten Bevölkerung mit $y$.}
+    \end{answer}
+    \begin{answer}
+            \type{input.function}
+		    \text{Die Lösung des Anfangswertproblems lautet $\phi(x)=$}
+		    \solution{phi}
+            \inputAsFunction{x,z}{f1}
+            \checkFuncForZero{phi-f1}{-1}{1}{10}
+            \explanation{Es handelt sich um eine separierbare Differentialgleichung, für die Sie ein Lösungsverfahren kennen sollten.}
+    \end{answer}
+    \end{question}
+\end{problem}
+\embedmathlet{gwtmathlet}
+
+\end{content}

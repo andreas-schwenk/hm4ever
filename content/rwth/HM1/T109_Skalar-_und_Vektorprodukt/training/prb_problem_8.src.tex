@@ -1,0 +1,146 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A09: Textaufgabe}
+    \lang{en}{mc yes-no}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{description}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21556}{Ticket 21556}
+\end{block}
+
+\usepackage{mumie.genericproblem}
+\lang{de}{
+	\title{A09: Textaufgabe}
+}
+
+\textit{Hinweis: Benutzen Sie sqrt() um die Wurzel einzugeben.}
+
+\begin{problem}
+
+%
+% Frage 2a)
+%
+	\begin{question}
+		\lang{de}{\text{Berechnen Sie den Flächeninhalt $F$ des Parallelogramms, das durch die beiden Vektoren \\\\
+  			$\vec{a} = \begin{pmatrix} \var{a_1}\\ \var{a_2}\\ \var{a_3} \end{pmatrix}$ ~ und ~
+            $\vec{b} = \begin{pmatrix} \var{b_1}\\ \var{b_2}\\ \var{b_3} \end{pmatrix}$ aufgespannt wird.\\
+            Geben Sie das Endergebnis als Wurzelausdruck $\sqrt{n}$ an.\\ }}
+            
+              \explanation[edited]{Im Dreidimensionalen entspricht die Länge des Vektorprodukts der beiden Vektoren $\vec{a}$ und $\vec{b}$ 
+              der von ihnen aufgespannten Parallelogrammfläche.}
+            
+		\type{input.function}
+           \field{rational}
+           
+      \begin{variables}
+            
+            \randint[Z]{a_1}{-5}{5}
+            \randint[Z]{a_2}{-5}{5}
+            \randint[Z]{a_3}{-5}{5}
+            
+            \randint[Z]{b_1}{-5}{5}
+            \randint[Z]{b_2}{-5}{5}
+            \randint[Z]{b_3}{-5}{5}
+            
+            \function[calculate]{x1}{a_2*b_3-a_3*b_2}
+            \function[calculate]{x2}{a_3*b_1-a_1*b_3}
+            \function[calculate]{x3}{a_1*b_2-a_2*b_1}
+            
+% Wenn das Vektorprodukt gleich dem Nullvektor ist, sind a und b linear abhängig und spannen kein Parallelogramm auf            
+            \randadjustIf{a_1,a_2,a_3,b_1,b_2,b_3}{x1=0 AND x2=0 AND x3=0}
+            
+            \function[normalize]{A}{sqrt(x1*x1+x2*x2+x3*x3)}
+
+      \end{variables}
+      
+      \begin{answer}
+            \text{$F=$}
+            \solution{A}
+            \checkAsFunction{x}{-10}{10}{100}
+      \end{answer}
+
+\end{question}
+
+%
+% Frage 2b)
+%
+	\begin{question}
+		\lang{de}{\text{
+			Berechnen Sie den Flächeninhalt $F$ des Dreiecks mit den Eckpunkten 
+  			$A = \begin{pmatrix} \var{a_1}\\ \var{a_2} \end{pmatrix}$ , 
+            $B = \begin{pmatrix} \var{b_1}\\ \var{b_2} \end{pmatrix}$ ~ und ~
+            $C = \begin{pmatrix} \var{c_1}\\ \var{c_2} \end{pmatrix}$ .\\ }}
+            
+              \explanation[edited]{Eine Möglichkeit, um die Dreiecksfläche bestimmen zu können, ist, die beiden Verbindungsvektoren $\vec{AB}$ und 
+              $\vec{AC}$ um eine dritte Komponente (gleich Null) zu ergänzen und sie so ins Dreidimensionale einzubetten.
+              Anschließend lässt sich die Fläche des Dreiecks als \textbf{halbe} Parallelogrammfläche mit Hilfe der Länge des Vektorprodukts der
+              Vektoren $\vec{AB}$ und $\vec{AC}$ bestimmen.}
+              
+		\type{input.function}
+ 
+      \begin{variables}
+            
+            \randint{a_1}{-5}{5}
+            \randint{a_2}{-5}{5}
+            
+            \randint{b_1}{-5}{5}
+            \randint{b_2}{-5}{5}
+
+            \randint{c_1}{-5}{5}
+            \randint{c_2}{-5}{5}
+            
+            \randadjustIf{a_1,b_1,a_2,b_2}{a_1=b_1 AND a_2=b_2}
+            \randadjustIf{a_1,c_1,a_2,c_2}{a_1=c_1 AND a_2=c_2}
+            \randadjustIf{b_1,c_1,b_2,c_2}{b_1=c_1 AND b_2=c_2}
+
+            \function{y_1}{b_1-a_1}
+            \function{y_2}{b_2-a_2}
+            \function{y_3}{0}
+            
+            \function{z_1}{c_1-a_1}
+            \function{z_2}{c_2-a_2}
+            \function{z_3}{0}
+            
+            \function[calculate]{x1}{y_2*z_3-y_3*z_2}%Ist immer gleich 0
+            \function[calculate]{x2}{y_3*z_1-y_1*z_3}%Ist immer gleich 0
+            \function[calculate]{x3}{y_1*z_2-y_2*z_1}
+
+% Wenn das Vektorprodukt gleich dem Nullvektor ist, sind y und z linear abhängig und die Punkte A, B und C bilden kein Dreieck            
+            \randadjustIf{a_1,a_2,b_1,b_2,c_1,c_2}{x3=0}
+
+            \function[calculate]{A}{sqrt(x3*x3)/2}
+
+      \end{variables}
+      
+      \begin{answer}
+            \text{$F=$}
+            \solution{A}
+      \end{answer}
+
+\end{question}
+
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+
+
+\end{content}

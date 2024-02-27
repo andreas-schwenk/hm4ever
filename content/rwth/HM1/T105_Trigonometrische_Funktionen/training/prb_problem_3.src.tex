@@ -1,0 +1,360 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A03: Funktionseigenschaften}
+    \lang{en}{Problem 3}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+    \component{generic_image}{content/rwth/HM1/images/g_img_right-angled-abb1.meta.xml}{image1}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T105_Trigonometrische_Funktionen/g_art_content_19_allgemeiner_sinus_cosinus.meta.xml}{link1}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{
+	\title{A03: Funktionseigenschaften}
+}
+\lang{en}{
+	\title{Problem 3}
+	}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9728}{Ticket 9728}
+\end{block}
+
+\lang{en}{If needed, when inputting your answer, use the following text-to-math equivalents:\\
+sin(x), cos(x) etc. for the functions,\\
+infinity for $\infty$,\\
+sqrt(x) for $\sqrt{x} $,\\
+pi for $\pi$,\\
+input exact $x$-values as multiples of $\pi$,\\ 
+e.g. sqrt(3)/2 pi or sqrt(3) pi/2 for $\frac{\sqrt{3}}{2} \pi $.}
+\lang{de}{Bei Bedarf verwenden Sie bitte in Ihren Antworten:\\
+sin(x), cos(x) etc. für die Funktionen,\\
+sqrt(x) für $\sqrt{x} $,\\
+pi für $\pi$.}
+
+
+\begin{problem}
+\begin{variables}
+	\randint{c1}{0}{1}
+\end{variables}
+
+\randomquestionpool{1}{1}
+\randomquestionpool{2}{5}
+\randomquestionpool{6}{6}
+\randomquestionpool{7}{7}
+
+% Frage 1 von 7
+\begin{question}
+\explanation{Schauen Sie sich noch einmal die Funktionsverläufe von $\sin$ und $\cos$ im Skript an.}
+    \begin{pool}
+	    \begin{variables}
+		    \function{f}{cos(x)}
+		    \function{g}{sin(x)}
+	    \end{variables}
+	    \begin{variables}
+		    \function{f}{sin(x)}
+		    \function{g}{cos(x)}
+	    \end{variables}
+    \end{pool}
+
+    \plotF{1}{f} % % the function a1 is defined below in 'variables' in the usual way
+    \plotFrom{1}{-10} % % and is plotted starting from 0.0
+    \plotTo{1}{10} % % and ending in 1.0 , it's a quarter of a circle
+    \plotColor{1}{blue} % % colored blu
+    \plotF{2}{g} % % the function a1 is defined below in 'variables' in the usual way
+    \plotFrom{2}{-10} % % and is plotted starting from 0.0
+    \plotTo{2}{10} % % and ending in 1.0 , it's a quarter of a circle
+    \plotColor{2}{red} % % colored blu
+    \plotLeft{-5.0} % % defines the canvas bound left
+    \plotRight{5.0} % % and right
+    \plotSize{400}
+    \type{input.function}
+    \field{real}
+
+    \lang{de}{
+	    \text{Welche trigonometrischen Funktionen sind unten abgebildet?}
+    }
+    \lang{en}{
+    	\text{Which trigonometric functions are depicted below?}
+    }
+    \begin{answer}
+	    \lang{de}{\text{Der blaue Funktionsgraph gehört zu $f(x) = $ }}
+	    \lang{en}{\text{The blue graph is the graph of $f(x) = $ }}
+	    \solution{f}
+	    \checkAsFunction{x}{-10}{10}{100}
+    \end{answer}
+
+    \begin{answer}
+	    \lang{de}{\text{Der rote Funktionsgraph gehört zu $g(x) = $ }}
+	    \lang{en}{\text{The red graph is the graph of $g(x) = $ }}
+	    \solution{g}
+	    \checkAsFunction{x}{-10}{10}{100}
+    \end{answer}
+\end{question} %1
+
+%Frage 2, 2 von 7
+\begin{question}
+    \lang{de}{
+	    \text{Welche Nullstellen hat die Funktion $\var{f}$ im Intervall
+	    $\left[\var{fx01};\, \var{k6}\pi \right]$? }
+    }
+    \lang{en}{
+    	\text{What are the roots of the function $\var{f}$ on the interval $\left[ \var{k1}\pi,\, \var{k6}\pi \right]$? \\
+    	Input your answers in increasing order.}
+    }
+    \begin{variables}
+        \function{f}{sin(x)}
+        \randint{k1}{-4}{-1}
+        \function[calculate]{k2}{k1+1}
+        \function[calculate]{k3}{k1+2}
+        \function[calculate]{k4}{k1+3}
+        \function[calculate]{k5}{k1+4}
+        \function[calculate]{k6}{k1+5}
+
+        \function[normalize]{fx01}{k1*pi}
+        \function[normalize]{fx02}{k2*pi}
+        \function[normalize]{fx03}{k3*pi}
+        \function[normalize]{fx04}{k4*pi}
+        \function[normalize]{fx05}{k5*pi}
+        \function[normalize]{fx06}{k6*pi}
+    \end{variables}
+    \type{input.finite-number-set}
+    \field{real}
+    \explanation{Es gilt $\sin(k\pi)=0$ für alle $k \in \Z$. Sie sollten sechs Nullstellen 
+                        im Intervall  $\left[ \var{k1}\pi,\, \var{k6}\pi \right]$ finden können.}
+    \begin{answer}
+	    \text{Die gesuchte Nullstellenmenge ist}
+        \allowForInput{pi + - * /}
+	    \solution{fx01, fx02, fx03, fx04, fx05, fx06}
+    \end{answer}
+
+\end{question} %2
+
+%Frage 2, 3 von 7
+\begin{question}
+    \lang{de}{
+	    \text{Welche Nullstellen hat die Funktion $\var{f}$ im Intervall  $\left[ \var{k0}\pi;\, \var{k7}\pi \right]$?}
+	    \explanation{}
+    }
+    \lang{en}{
+	    \text{What are the roots of the function $\var{f}$ on the interval $\left[\var{k0}\pi,\, \var{k7}\pi \right]$? \\
+    	Input your answers in increasing order.}
+	    \explanation{}
+    }
+	\begin{variables}
+    	\function{f}{cos(x)}
+        \randint{k0}{-5}{-1}
+        \function[calculate]{k1}{k0+1/2}
+        \function[calculate]{k2}{k1+1}
+        \function[calculate]{k3}{k1+2}
+        \function[calculate]{k4}{k1+3}
+        \function[calculate]{k5}{k1+4}
+        \function[calculate]{k6}{k1+5}
+        \function[calculate]{k7}{k0+6}
+
+        \function[normalize]{fx00}{k0*pi}
+        \function[normalize]{fx01}{k1*pi}
+        \function[normalize]{fx02}{k2*pi}
+        \function[normalize]{fx03}{k3*pi}
+        \function[normalize]{fx04}{k4*pi}
+        \function[normalize]{fx05}{k5*pi}
+        \function[normalize]{fx06}{k6*pi}
+        \function[normalize]{fx07}{k7*pi}
+
+    \end{variables}
+    \type{input.finite-number-set}
+    \field{real}
+    \explanation{Es gilt $\cos(\frac{\pi}{2}+k\pi)=0$ für alle $k \in \Z$. Sie sollten sechs Nullstellen 
+                        im Intervall  $\left[ \var{k0}\pi,\, \var{k7}\pi \right]$ finden können.}
+
+    \begin{answer}
+	    \text{Die gesuchte Nullstellenmenge ist}
+        \allowForInput{pi + - * /}
+	    \solution{fx01, fx02, fx03, fx04, fx05, fx06}
+    \end{answer}
+\end{question} %3
+
+%Frage 2, 4 von 7
+\begin{question}
+%\explanation{Zur Beantwortung dieser Frage empfiehlt es sich die im Vorlesungsteil dargestellte Herleitung der trigonometrischen Funktionen im Einheitskreis parat zu haben.}
+    \lang{de}{
+	    \text{Welche Nullstellen hat die Funktion $\var{f}$ im Intervall
+	    $\left[\var{k1}\pi;\, \var{k5}\pi \right]$? }
+	    \explanation{}
+    }
+    \lang{en}{
+    	\text{What are the roots of the function $\var{f}$ on the interval $\left[ \var{k1}\pi,\, \var{k5}\pi \right]$? \\
+    	Input your answers in increasing order.}
+    	\explanation{}
+    }
+    \begin{variables}
+        \function{f}{sin(x)}
+        \randint{k1}{-3}{-1}
+        \function[calculate]{k2}{k1+1}
+        \function[calculate]{k3}{k1+2}
+        \function[calculate]{k4}{k1+3}
+        \function[calculate]{k5}{k1+4}
+
+        \function[normalize]{fx01}{k1*pi}
+        \function[normalize]{fx02}{k2*pi}
+        \function[normalize]{fx03}{k3*pi}
+        \function[normalize]{fx04}{k4*pi}
+        \function[normalize]{fx05}{k5*pi}
+    \end{variables}
+    \type{input.finite-number-set}
+    \field{real}
+    \explanation{Es gilt $\sin(k\pi)=0$ für alle $k \in \Z$. Sie sollten fünf Nullstellen 
+                        im Intervall  $\left[ \var{k1}\pi,\, \var{k5}\pi \right]$ finden können.}
+
+    \begin{answer}
+	    \text{Die gesuchte Nullstellenmenge ist}
+        \allowForInput{pi + - * /}
+	    \solution{fx01, fx02, fx03, fx04, fx05}
+    \end{answer}
+
+\end{question} %4
+
+%Frage 2, 5 von 7
+\begin{question}
+%\explanation{Zur Beantwortung dieser Frage empfiehlt es sich die im Vorlesungsteil dargestellte Herleitung der trigonometrischen Funktionen im Einheitskreis parat zu haben.}
+    \lang{de}{
+	    \text{Welche Nullstellen hat die Funktion $\var{f}$ im Intervall  $\left[ \var{k0}\pi;\, \var{k6}\pi \right]$?}
+	    \explanation{}
+    }
+    \lang{en}{
+	    \text{What are the roots of the function $\var{f}$ on the interval $\left[\var{k0}\pi,\, \var{k6}\pi \right]$? \\
+    	Input your answers in increasing order.}
+	    \explanation{}
+    }
+	\begin{variables}
+    	\function{f}{cos(x)}
+        \randint{k0}{-4}{-1}
+        \function[calculate]{k1}{k0+1/2}
+        \function[calculate]{k2}{k1+1}
+        \function[calculate]{k3}{k1+2}
+        \function[calculate]{k4}{k1+3}
+        \function[calculate]{k5}{k1+4}
+        \function[calculate]{k6}{k0+5}
+
+        \function[normalize]{fx00}{k0*pi}
+        \function[normalize]{fx01}{k1*pi}
+        \function[normalize]{fx02}{k2*pi}
+        \function[normalize]{fx03}{k3*pi}
+        \function[normalize]{fx04}{k4*pi}
+        \function[normalize]{fx05}{k5*pi}
+        \function[normalize]{fx06}{k6*pi}
+
+    \end{variables}
+    \type{input.finite-number-set}
+    \field{real}
+    \explanation{Es gilt $\cos(\frac{\pi}{2}+k\pi)=0$ für alle $k \in \Z$. Sie sollten fünf Nullstellen 
+                        im Intervall  $\left[ \var{k0}\pi,\, \var{k6}\pi \right]$ finden können.}
+
+    \begin{answer}
+	    \text{Die gesuchte Nullstellenmenge ist }
+        \allowForInput{pi + - * /}
+	    \solution{fx01, fx02, fx03, fx04, fx05}
+    \end{answer}
+
+\end{question} %5
+ 
+%Frage 3, 6 von 7, bei globaler Variabler c1=0: cos, bei c1=1 sin, f= (1-c1) cos + c1 sin
+\begin{question}
+    \explanation{Schauen Sie sich die Graphen der trigonometrischen Funktionen noch einmal an.  
+                         Sie sollten drei Maximalstelen im angegebenen Intervall finden können.}
+	\lang{de}{
+		\text{Für welche $x$-Werte im Intervall $\left[ \var{k00}\pi ;\,\var{k11}\pi \right]$ hat die Funktion $\var{f}$ ihren maximalen Wert?}
+
+    }
+    \lang{en}{
+    	\text{For which $x$-values on the interval  $\left[ \var{k00}\pi ,\,\var{k11}\pi \right]$  does the function $\var{f}$ reach its maximum?\\
+    	Input the $x$-values in increasing order.}
+
+    }
+	\begin{variables}
+	    \randint{k0}{0}{1}
+	    \randint{k01}{0}{2}
+    	\randint{kleft}{0}{1}
+    	\randint{kright}{0}{1}
+    	\function[normalize]{f}{(1-c1)*cos(x) + c1*sin(x)}
+    	\function[calculate]{k1}{(1-c1)*(-4+2*k01)+c1*(-7/2+2*k0)}
+    	\function[calculate]{k2}{k1+2}
+    	\function[calculate]{k3}{k1+4}
+        \function{fx01}{k1*pi}
+        \function{fx02}{k2*pi}
+        \function{fx03}{k3*pi}
+        \function[calculate]{k00}{(1-c1)*(k1-kleft)+c1*(-4+2*k0-kleft)}
+        \function[calculate]{k11}{(1-c1)*(k3+kright)+c1*(1+2*k0+kright)}
+        \function[normalize]{fxleft}{k00*pi}
+        \function[normalize]{fxright}{k11*pi}
+    \end{variables}
+    \type{input.finite-number-set}
+    \field{real} 
+
+    \begin{answer}
+	    \text{Die gesuchte Menge der x-Werte ist}
+        \allowForInput{pi + - * /}
+	    \solution{fx01, fx02, fx03} 
+    \end{answer}
+\end{question} 
+ 
+%Frage 4, 7 von 7, bei globaler Variabler c1=1: cos, bei c1=0 sin, f= c1 cos + (1-c1) sin
+\begin{question}
+\explanation{Schauen Sie sich die Graphen der trigonometrischen Funktionen noch einmal an. 
+                     Sie sollten drei Minimalstelen im angegebenen Intervall finden können.}
+	\lang{de}{
+		\text{Für welche $x$-Werte im Intervall $\left[ \var{k00}\pi ;\,\var{k11}\pi \right]$ hat die Funktion $\var{f}$ ihren minimalen Wert? }
+    }
+    \lang{en}{
+    	\text{For which $x$-values on the interval  $\left[ \var{k00}\pi ,\,\var{k11}\pi \right]$  does the function $\var{f}$ reach its minimum?\\
+    	Input the $x$-values in increasing order.}
+	}
+	\begin{variables}
+	    \randint{k0}{0}{1}
+    	\randint{kleft}{0}{1}
+    	\randint{kright}{0}{1}
+    	\function[normalize]{f}{c1*cos(x)+(1-c1)*sin(x)}
+    	\function[calculate]{k1}{c1*(-3+2*k0)+(1-c1)*(-5/2+2*k0)}
+    	\function[calculate]{k2}{k1+2}
+    	\function[calculate]{k3}{k1+4}
+        \function{fx01}{k1*pi}
+        \function{fx02}{k2*pi}
+        \function{fx03}{k3*pi}
+        \function[calculate]{k00}{-3+2*k0-kleft}
+        \function[calculate]{k11}{2-c1+2*k0+kright}
+        \function[normalize]{fxleft}{k00*pi}
+        \function[normalize]{fxright}{k11*pi}
+    \end{variables}
+   \type{input.finite-number-set}
+    \field{real}
+
+    \begin{answer}
+	    \text{Die gesuchte Menge der x-Werte ist}
+        \allowForInput{pi + - * /}
+	    \solution{fx01, fx02, fx03} 
+    \end{answer} 
+\end{question} 
+
+\end{problem} 
+
+\embedmathlet{mathlet}
+%\embedapplet{applet}
+
+\end{content}

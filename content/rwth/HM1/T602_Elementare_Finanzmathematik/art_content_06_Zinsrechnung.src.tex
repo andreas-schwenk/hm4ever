@@ -1,0 +1,508 @@
+
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Zinsrechnung}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{2}
+\ombarticle{1}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\lang{de}{\title{Zinsrechnung}}
+\lang{en}{\title{interest calculation}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22675}{Ticket 22675}
+
+\end{block}
+
+\begin{block}[annotation]
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section
+{\lang{de}{Zins und Zinseszins}
+\lang{en}{Interest and compound interest}}
+\lang{de}{Wir beginnen das Kapitel mit Zinsrechnung. Unter Zinsen verstehen wir den Preis für die Leihgabe von Kapital. In der Regel 
+werden Zinsen als prozentualer Anteil vom Kapital berechnet, also abhängig von der Höhe des bereitgestellten Kapitals. Der 
+\emph{Zinssatz} gibt diesen prozentualen Anteil an. Häufig wird das Kapital über einen \glqq längeren\grqq Zeitraum zur Verfügung
+gestellt, womit wir lediglich mehrere Abrechnungsperioden meinen. (Meist ist eine Periode ein Jahr.)}
+
+\lang{en}{We start the chapter with interest calculation. By interest, we mean the price paid for the loan of capital. As a rule, 
+interest is calculated as a percentage of the capital, i.e. it depends on the amount of capital provided. The 
+\emph{interest rate} indicates this percentage share. Often, the capital is provided over a longer period of time,
+by which we only mean that there are several accounting periods. (Usually, one period is one year.)}
+
+\lang{de}{Wir treffen ein paar Festlegungen für Begriffe.}
+\lang{en}{First, we fix some terminology.}
+
+\begin{definition}
+\begin{itemize}
+\item \lang{de}{Der \notion{Zinssatz} wird meist mit \notion{i} (von engl. \emph{interest}) bezeichnet und häufig 
+in Prozent angegeben, etwa $i = 5 \%$. Wir erinnern daran, dass als Dezimalzahl $i = 0,05$ gilt.}
+\lang{en}{The interest rate is usually denoted by \notion{i} and is often
+expressed as a percentage, e.g. $i = 5 \%$. Recall that $i = 0.05$ as a decimal.}
+
+\item \lang{de}{Bei Angabe des Zinssatzes in Prozent nennen wir die Zahl vor dem Prozentzeichen \notion{Zinsfuß} und bezeichnen ihn mit 
+$p$ (von engl. \emph{percent}). Ist $i = 2\%$, dann ist $p=2$. Es gilt immer $i = \frac{p}{100}$.}
+\lang{en}{When expressing the interest rate as a percentage, we call the number before the percent sign the \notion{percentage rate}
+and denote it by $p$ (for \emph{percent}). If $i = 2\%$, then $p=2$. It is always $i = \frac{p}{100}$.}
+
+\item \lang{de}{Die Zahl $q = 1+i$ bezeichnen wir als \notion{Zinsfaktor}. Er stimmt überein mit dem \emph{Wachstumsfaktor} 
+bei Exponentialfunktionen im mathematischen Kontext.} 
+\lang{en}{The number $q = 1+i$ is called the \notion{interest factor}. It coincides with the \emph{growth factor} 
+of an exponential function in mathematics.}
+
+\item \lang{de}{Abhängig davon, ob die Zinsen zu Beginn oder am Ende der Periode fällig werden, spricht man von 
+\notion{vorschüssigen} oder \notion{nachschüssigen} Zinsen. Wir betrachten hier in der Regel den Fall 
+nachschüssiger Zinsen.}
+\lang{en}{Depending on whether the interest is due at the beginning or at the end of the period, one speaks of 
+interest in \notion{advance} or in \notion{arrears}. Here, we usually consider the case of 
+of interest in arrears.}
+\end{itemize}
+\end{definition}
+%Für Vor- und Nachschüssigkeit gibt es viele Beispiele aus dem Alltag. Ein Gehalt wird in der Regel zum 
+%Monatsende ausgezahlt, während etwa die Kosten für eine Fahrkarte im Abo zu Beginn des Monats fällig 
+%werden. 
+
+\lang{de}{Zinsen können nach Ablauf der Periode ausgezahlt werden oder sie werden zum bereitsgestellten Kapital hinzugerechnet (also selbst
+wieder verliehen) und in der nächsten Periode mitverzinst. In letzterem Fall sprechen wir auch von \emph{Zinseszins}. Dies 
+ist z.\,B. bei Geld auf einem Sparkonto üblich.} 
+\lang{en}{The interest can be paid out at the end of the period or it can be added to the capital provided (i.e. it is itself lent out again) and earns interest in the next period.
+The latter case is called \emph{compound interest}. This is common for money in a savings account, for example.}
+
+
+\begin{rule}[
+\lang{de}{Zinsformeln}
+\lang{en}{Interest rate formula}
+]
+
+\lang{de}{Das Kapital $K_0$ wird zum Zinssatz $i = p \%$ verzinst. Die Zinsen werden im Jahresrhythmus nachschüssig fällig.}
+\lang{en}{Interest is paid on the capital $K_0$ at the interest rate $i = p \%$. The interest is payable in arrears at annual intervals.}
+\begin{itemize}
+\item 
+     \lang{de}{Die Zinsen nach einem Jahr betragen $K_0 \cdot i$.}
+     \lang{en}{The interest after one year is $K_0 \cdot i$.}
+\item 
+     \lang{de}{Werden die Zinsen ausgezahlt und nicht mitverzinst, erhalten wir 
+             nach $n$ Jahren das Gesamtkapital $K_n = K_0 + n \cdot K_0 \cdot i = K_0 \cdot (1+n \cdot i)$.}
+      \lang{en}{If the interest is paid out and not compounded, then
+             after $n$ years, we obtain the total capital $K_n = K_0 + n \cdot K_0 \cdot i = K_0 \cdot (1+n \cdot i)$.}
+\item
+\lang{de}{Werden die Zinsen jeweils mitverzinst, erhalten wir nach $n$ Jahren das Gesamtkapital}
+\lang{en}{If the interest accumulates interest as well, then we get the total capital after $n$ years}
+\[
+K_n = K_0 \cdot q^n = K_0 \cdot (1+i)^n = K_0 \cdot (1+\frac{p}{100})^n.
+\]
+\end{itemize}
+\end{rule}
+
+\begin{proof*}
+\lang{de}{Werden die Zinsen nicht mitverzinst, wächst das Kapital jedes Jahr um den Zinsbetrag $i \cdot K_0$. 
+Nach $n$ Jahren erhalten wir $K_n = K_0 + n \cdot K_0 \cdot i = K_0 \cdot (1+n \cdot i)$.}
+\lang{en}{If the interest does not accumulate interest, then
+the capital grows every year by the interest amount $i \cdot K_0$. 
+After $n$ years we get $K_n = K_0 + n \cdot K_0 \cdot i = K_0 \cdot (1+n \cdot i)$.}
+
+\lang{de}{Wenn die Zinsen mitverzinst werden, ändert sich nach jeder Zinsperiode das zu verzinsende Kapital. 
+Um aus $K_0$ den Wert $K_1$ zu erhalten, müssen wir zu $K_0$ die Zinsen $i\cdot K_0$ hinzuzählen und erhalten 
+$K_1 = K_0 \cdot (1+i)$. Nach einem weiteren Jahr sind wir entsprechend bei $K_2 = K_1 \cdot (1+i) = K_0 \cdot (1+i)^2$.
+Nach $n$ Jahren erhalten wir schließlich}
+\lang{en}{If the interest does accumulate interest, 
+then the interest-bearing capital changes after each interest period. 
+To get the value $K_1$ from $K_0$, we have to add the interest $i\cdot K_0$ to $K_0$ to get 
+$K_1 = K_0 \cdot (1+i)$. After another year, we are at $K_2 = K_1 \cdot (1+i) = K_0 \cdot (1+i)^2$.
+After $n$ years we finally get}
+\[
+K_n = K_{n-1} \cdot (1+i) = \ldots = K_0 \cdot (1+i)^n.
+\]
+\lang{de}{Hierbei handelt es sich  übrigens um eine geometrische Reihe.}
+\lang{en}{By the way, this is a geometric series.}
+\end{proof*}
+
+\begin{example}
+\lang{de}{Das Kapital $K_0 = 10.000$ € wird zu jährlich 3\% Zinsen angelegt. 
+Die Zinsen werden am Ende eines Jahres fällig und im folgenden Jahr 
+mitverzinst. 
+Nach 5 Jahren beträgt das Kapital dann $K_5 = 10.000 \ \text{€} \cdot (1+0,03)^5 \approx 11.592,74 $ €.}
+\lang{en}{The capital $K_0 = 10,000$ € is invested at 3\% interest per year. 
+The interest is paid at the end of a year and it is compounded in the following year
+with interest. 
+After 5 years, the capital is then $K_5 = 10,000 \ \text{€} \cdot (1+0.03)^5 \approx 11,592.74 $ €.}
+
+\lang{de}{Der Faktor $(1+0,03)^5$ wird in diesem Zusammenhang auch als \emph{Aufzinsungsfaktor} bezeichnet.}
+\lang{en}{The factor $(1+0.03)^5$ is also called the \emph{accumulation factor} in this context.}
+
+\end{example}
+
+\lang{de}{Anstatt dass wir von einem Kapital $K_0$ zum gegenwärtigen Zeitpunkt ausgehen und das Kapital 
+$K_n$ nach $n$ Jahren berechnen, können wir auch umgekehrt das Ziel-Kapital nach $n$ Jahren
+festlegen und berechnen, welches Kapital $K_0$ wir in der Gegenwart brauchen, um das Ziel 
+zu erreichen. Dies führt uns zum Begriff des \emph{Barwerts}.}
+\lang{en}{Instead of starting from a capital $K_0$ at the present time and calculating the capital 
+$K_n$ after $n$ years, we can also set the target capital after $n$ years
+and calculate what capital $K_0$ we need in the present to reach the target. 
+This leads us to the notion of \emph{cash value}.}
+
+\begin{definition}
+\lang{de}{Unter dem \notion{Barwert} verstehen wir den Wert, den eine Zahlung in der Zukunft zum 
+gegewärtigen Zeitpunkt besitzt.}
+\lang{en}{By the \notion{cash value} we mean the value that a payment in the future has at the present time. 
+}
+\end{definition}
+\lang{de}{Wenn wir zu einem zukünftigen Zeitpunkt ein Zielkapital erreichen wollen, beschreibt der 
+Barwert, wie groß die Summe ist, die wir dafür gegenwärtig investieren müssen.}
+\lang{en}{If we want to reach a target capital at a future point in time, the net present value describes how much we have to invest at present.}
+
+\lang{de}{Den Barwert können wir mit der folgenden Formel berechnen.}
+\lang{en}{We can calculate the cash value with the following formula.}
+\begin{rule}
+\lang{de}{Ein Kapital $K_0$ wird zum Zinssatz $i = p \%$ verzinst. Die Zinsen werden im Jahresrhythmus nachschüssig fällig und mitverzinst. 
+Nach $n$ Jahren soll das vorgegebene Kapital $K_n$ erreicht werden. Dann gilt}
+\lang{en}{Interest is paid on a capital $K_0$ at the rate $i = p \%$. The interest is earned in arrears at annual intervals and is compounded. 
+After $n$ years, we want to have the sum $K_n$. Then}
+\[
+K_0 = K_n \cdot \left(\frac{1}{q}\right)^n = K_n \cdot \left(\frac{1}{1+i}\right)^n.
+\]
+\end{rule}
+\begin{proof*}
+\lang{de}{Wir müssen lediglich die Gleichung $K_n = K_0 \cdot (1+i)^n$ auf beiden Seiten durch $(1+i)^n$ teilen.}
+\lang{en}{We only have to divide both sides of the equation $K_n = K_0 \cdot (1+i)^n$ by $(1+i)^n$.}
+\end{proof*}
+
+\begin{example}
+\lang{de}{Ein Kapital $K_0$ wird zu jährlich 3\% Zinsen angelegt. 
+Die Zinsen werden am Ende eines Jahres fällig und im folgenden Jahr 
+mitverzinst. 
+Nach 5 Jahren soll das Kapital dann $K_5 = 20.000 \ \text{€}$ betragen. Um dieses Ziel zu 
+erreichen, müssen wir
+\[
+K_0 = 20.000 \ \text{€} \cdot \left( \frac{1}{1+0,03} \right)^5 \approx 17252,18 \ \text{€}
+\] investieren.}
+\lang{en}{A capital $K_0$ is invested at 3\% interest annually. 
+The interest is paid at the end of each year and it earns interest in the following year.
+After 5 years, we want to have $K_5 = 20,000 \text{€}$. To achieve this,
+we must invest
+\[
+K_0 = 20,000 \ \text{€} \cdot \left( \frac{1}{1+0.03} \right)^5 \approx 17252.18 \ \text{€}
+\]}
+
+\lang{de}{Der Faktor $\left(\frac{1}{1+0,03}\right)^5$ wird hier auch als \emph{Abzinsungsfaktor} bezeichnet.}
+\lang{en}{The factor $\left(\frac{1}{1+0.03}\right)^5$ is also referred to here as the \emph{discount factor}.}
+
+\end{example}
+
+\lang{de}{Sind $K_0$ und das Zielkapital $K$ gegeben, können wir auch Zinssatz oder Laufzeit berechnen, wenn die 
+jeweils andere Größe bekannt ist.}
+\lang{en}{If $K_0$ and the target capital $K$ are given, we can also calculate either the interest rate or the duration
+as long as the other quantity is known.}
+
+\begin{rule}{\lang{de}{[Berechnung von Laufzeit und Zinssatz]}\lang{en}{[Calculation of duration and interest rate]}}
+
+\lang{de}{Ein Kapital $K_0$ wird angelegt und soll den Wert $K$ erreichen. 
+          Die Zinsen werden im Jahresrhythmus nachschüssig fällig und mitverzinst.} 
+\lang{en}{A capital $K_0$ is invested and is to reach the value $K$. 
+          Interest is payable in arrears at annual intervals and is compounded.}
+          
+\begin{itemize}
+\item
+\lang{de}{Der Zinssatz betrage $i = p \%$. Dann wird eine Laufzeit von mindestens}
+\lang{en}{Suppose the interest rate is $i = p \%$. Then we need a duration of at least}
+\[
+n = \frac{\ln(\frac{K}{K_0})}{\ln(q)} = \frac{\ln({K})-\ln(K_0)}{\ln(1+i) \lang{en}{.}} 
+\]
+\lang{de}{Jahren gebraucht. (Ist der Wert nicht ganzzahlig, muss aufgerundet werden.)}
+\lang{en}{(If this value is not an integer, then it must be rounded up.)}
+\item 
+\lang{de}{Die Laufzeit betrage $n$ Jahre. Dann beträgt der Zinssatz}
+\lang{en}{Suppose the duration is $n$ years. Then the interest rate must be}
+\[
+i = \sqrt[n]{\frac{K}{K_0}}-1.
+\]
+
+\end{itemize}
+\end{rule}
+
+\begin{proof*}
+\lang{de}{Für beide Formeln reicht es, die Formel $K = K_0 \cdot q^n = K_0 \cdot (1+i)^n$
+nach der gesuchten Größe aufzulösen.}
+\lang{en}{For both formulas, it is enough to solve the formula $K = K_0 \cdot q^n = K_0 \cdot (1+i)^n$
+for the quantity we are looking for.}
+\end{proof*}
+
+\begin{example}
+\lang{de}{Das Kapital $K_0$ wird zu 1\% Zinsen verzinst. Wann hat sich das Kapital durch 
+den Zinseszinseffekt verdoppelt? Erstaunlicherweise hängt die Antwort gar nicht 
+vom Wert des Kapitals $K_0$ ab, sondern nur vom Zinssatz.}
+\lang{en}{The capital $K_0$ earns interest at 1\%. When did the capital double due to 
+the compound interest effect? Surprisingly, the answer does not depend 
+on the value of $K_0$, but only on the interest rate.}
+
+\lang{de}{Das Zielkapital hat in diesem Fall den Wert $2K_0$ und, eingesetzt in die Formel, ergibt sich
+\[
+n = \frac{\ln(\frac{2K_0}{K_0})}{\ln(1,01)} = \frac{\ln(2)}{\ln(1,01)} \approx 70.
+\]}
+\lang{en}{The target capital in this case is $2K_0$ and, after inserting that into the formula, we find
+\[
+n = \frac{\ln(\frac{2K_0}{K_0})}{\ln(1.01)} = \frac{\ln(2)}{\ln(1.01)} \approx 70.
+\]}
+
+\lang{de}{Nach 70 Jahren hat sich das ursprünglich eingesetzte Kapital verdoppelt.}
+\lang{en}{After 70 years, the original capital invested has doubled.}
+\end{example}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{a}{1}{4}
+			\randint{b}{1}{4}
+            \randint{n}{2}{5}
+            \function[calculate]{K0}{1000*b}
+			\function[calculate]{K}{floor(K0*(1+a/100)^n)} 
+		\end{variables}
+		
+			\lang{de}{\text{Ein Kapital in Höhe von $\var{K0}$ € wird für $\var{n}$ Jahre zu einem konstanten Zinssatz angelegt. Die Zinsen werden jeweils mitverzinst. 
+            Wie hoch ist der Zinssatz, wenn das Kapital am Ende auf $\var{K}$ € angewachsen ist? Runden Sie
+            das Ergebnis auf eine ganze Zahl.
+            \\
+			$i=$\ansref \%.}}
+   \lang{en}{\text{A capital of $\var{K0}$ is invested for $\var{n}$ years at a constant interest rate. The interest is compounded annually. 
+            What is the interest rate if the capital has grown to $\var{K}$ € at the end? Round
+            the result to a whole number.
+            \\
+			$i=$\ansref \%.}}
+		
+		\begin{answer}
+			\solution{a}
+		\end{answer}
+		\lang{de}{\explanation{Nutzen Sie direkt die Formel für den Zinssatz oder machen Sie einen
+                    Ansatz der Form $\var{K} = \var{K0} \cdot (1+\frac{p}{100})^\var{n}$.}}
+    \lang{en}{\explanation{Use the formula for the interest rate directly, or use an
+                    approach of the form $\var{K} = \var{K0} \cdot (1+\frac{p}{100})^\var{n}$.}}
+	\end{quickcheck}
+
+\section
+{\lang{de}{Unterjährige Verzinsung}
+\lang{en}{Intra-year compounding}}
+
+\lang{de}{Wenn die Zinsperiode nicht ein Jahr, sondern nur ein Quartal, einen Monat 
+oder einen Tag umfasst, benötigen wir verschiedene Begriffe, um die jeweilige
+Situation korrekt zu beschreiben und zu verstehen.} 
+\lang{en}{If the interest period is not a year but only a quarter, a month 
+or a day, then we need different terms to correctly describe and understand the situation.}
+\begin{definition}
+\lang{de}{Pro Jahr gebe es $m$ Zinsperioden (z.\,B. $m = 12$, wenn monatlich Zinsen anfallen).}
+\lang{en}{Suppose there are $m$ interest periods per year (e.g. $m = 12$ if interest accrues monthly).}
+\begin{itemize}
+\item \lang{de}{Der \notion{relative Periodenzinssatz} $i_m$ ist der Zinssatz, der nach 
+jeder Verzinsungsperiode angewendet wird.}
+\lang{en}{The \notion{relative period interest rate} $i_m$ is the interest rate that is applied after 
+each interest period.}
+\item \lang{de}{Der \notion{nominelle Jahreszinssatz} ist $i = m \cdot i_m$.}
+\lang{en}{The \notion{nominal annual interest rate} is $i = m \cdot i_m$.}
+\item \lang{de}{Der \notion{effektive Jahreszinssatz} $i_{\text{eff}}$ ist der Zinssatz, der bei jährlicher Verzinsung
+ zum gleichen Endkapital führt wie die (mehrfache) unterjährige Verzinsung zum relativen 
+ Periodenzinssatz.}
+ \lang{en}{The \notion{effective annual interest rate} $i_{\text{eff}}$ is the interest rate which, if interest is charged annually
+ leads to the same final capital as the (multiple) interest during the year at the relative 
+ period interest rate.}
+ \item \lang{de}{Der \notion{konforme Zinssatz} $i'$ ist der Zinssatz, der für die unterjährige Verzinsung
+ angewendet werden müsste, um das gleiche Endkapital zu erhalten wie bei jährlicher Anwendung
+ des nominellen Jahreszinssatzes.}
+ \lang{en}{The \notion{conformal interest rate} $i'$ is the interest rate that would have to be applied to the intra-year interest rate
+ to obtain the same final capital as if the nominal annual interest rate were applied annually.}
+\end{itemize}
+\end{definition}
+
+\lang{de}{Der nominelle Jahreszinssatz ist nur sinnvoll, wenn zugleich bekannt ist, wie viele Zinsperioden 
+es pro Jahr gibt! Der nominelle Jahreszins wird dann auf die Zahl der 
+kürzeren Zinsperioden aufgeteilt und ergibt so den relativen Periodenzinssatz.}
+\lang{en}{The nominal annual interest rate is only meaningful if it is known how many interest periods there are per year! 
+The nominal annual interest rate is then divided among the number of 
+shorter interest periods and thus results in the relative period interest rate.}
+
+\lang{de}{Mit Hilfe des effektiven Jahreszinssatzes können wir Zinssätze zu unterschiedlichen Verzinsungsperioden vergleichbar zu machen.
+Hier müssen wir berücksichtigen, dass innerhalb des Jahres angefallene Zinsen mitverzinst werden. Dadurch 
+wächst das Kapital schneller als bei Anwendung des nominellen Jahreszinssatzes.}
+\lang{en}{With the help of the effective annual interest rate, we can make compare interest rates with different interest periods.
+Here, we have to take into account that interest accrued within the year also accumulates interest. As a result,
+the capital grows faster than when applying the nominal annual interest rate.}
+
+\begin{rule}\lang{de}{[Effektiver Jahreszins]}
+\lang{en}{[Effective annual interest rate]}
+\lang{de}{Ein Kapital $K_0$ wird zum nominellen Jahreszinssatz $i = p\%$ verzinst. Pro Jahr gebe es 
+$m$ Zinsperioden. Der relative Periodenzinssatz ist dann}
+\lang{en}{A capital $K_0$ earns interest at the nominal annual interest rate $i = p\%$. Per year there are 
+$m$ interest periods. The relative period interest rate is then}
+\[
+i_m = \frac{i}{m} = \frac{p}{100 \cdot m}.
+\]
+
+\lang{de}{Der effektive Jahreszins berechnet sich durch}
+\lang{en}{The effective annual interest rate is calculated as}
+\[
+i_{\text{eff}}= \left( 1 + i_m\right)^m - 1 = \left( 1 + \frac{p}{100 \cdot m}\right)^m - 1.
+\]
+\lang{de}{Umgekehrt liegt der konforme Zinssatz bei}
+\lang{en}{On the other hand, the conformal interest rate is}
+\[
+i'= \sqrt[m]{1 + i} - 1.
+\]
+
+\end{rule}
+
+\begin{proof*}
+\lang{de}{Nach einem Jahr ist das Kapital $K_0$ auf $K_0 \cdot (1+i_m)^m$ angewachsen. Nach Definition 
+des effektiven Jahreszinssatzes gilt} m
+\lang{en}{After one year, the capital $K_0$ has grown to $K_0 \cdot (1+i_m)^m$. According to the definition 
+of effective annual interest,}
+\[
+K_0 \cdot (1+i_m)^m = K_0 \cdot (1+i_{\text{eff}}),
+\]
+\lang{de}{also gilt}
+\lang{en}{and therefore}
+$(1+i_m)^m  =i_{\text{eff}} + 1 $ bzw. $(1+i_m)^m -1  =i_{\text{eff}}$.
+
+\lang{de}{Für den konformen Zinssatz suchen wir den Zinssatz $i'$, der nach jeder Zinsperiode
+angewendet werden muss, um letztendlich das gleiche Ergebnis wie bei Anwendung des nominellen
+Jahreszinssatzes zu erhalten. Es gilt also}
+\lang{en}{For the conformal interest rate, we look for the interest rate $i'$ that must be applied after each interest period
+to obtain the same result as if the nominal annual interest rate were applied.
+Thus}
+\[
+K_0 \cdot (1+i')^m = K_0 \cdot (1+i),
+\]
+\lang{de}{woraus wir $1+i' = \sqrt[m]{1+i}$ erhalten. Indem wir auf beiden Seiten $1$ subtrahieren, 
+erhalten wir die angegebene Formel.}
+\lang{en}{from which we get $1+i' = \sqrt[m]{1+i}$. By subtracting $1$ on both sides, 
+we get the formula given above.}
+\end{proof*}
+
+\begin{example}
+\lang{de}{Ein Kapital wird zum nominellen Jahreszinssatz von $i = 12\% = 0,12$ angelegt, wobei monatlich 
+Zinsen anfallen. Der relative Periodenzinssatz beträgt folglich $1\% = 0,01$.}
+\lang{en}{A sum is invested at the nominal annual interest rate of $i = 12\% = 0.12$, with interest accrued monthly. The relative period interest rate is therefore $1\% = 0.01$.}
+
+\lang{de}{Der effektive Jahreszinssatz $i_{\text{eff}}$ beträgt dann
+
+i_{\text{eff}} = \left( 1 + \frac{1}{100} \right)^12 -1 \approx 0,1268 = 12,68\%.
+\]}
+\lang{en}{The effective annual interest rate $i_{\text{eff}}$ is then
+\[
+i_{\text{eff}} = \left( 1 + \frac{1}{100} \right)^12 -1 \approx 0.1268 = 12.68\%.
+\]}
+\lang{de}{Dies liegt deutlich über dem nominellen Jahreszinssatz.}
+\lang{en}{This is significantly higher than the nominal annual interest rate.}
+\end{example}
+
+\lang{de}{Vom effektiven Jahreszinssatz sprechen wir auch, wenn der Zinssatz nicht 
+konstant ist und sich beispielsweise jährlich ändert. Auch hier gibt der 
+effektive Jahreszinssatz den Zinssatz an, der bei jährlicher Verzinsung zum 
+gleichen Endkapital führt.} 
+\lang{en}{We also speak of the effective annual interest rate if the interest rate is not
+constant and, for example, changes annually. The
+effective is interest rate here is also the interest rate that
+would lead to the same final capital if the interest were compounded annually.}
+
+\begin{example}
+\lang{de}{Ein Kapital $K_0 = 10.000$ € wird über 5 Jahre angelegt. In den ersten drei Jahren beträgt der Zinssatz 1\% und steigt dann 
+für die Restlaufzeit auf 2\%.}
+\lang{en}{A capital of $K_0 = 10,000$ € is invested over 5 years. In the first three years the interest rate is 1\%,
+and for the remainder it is 2\%. }
+
+\lang{de}{Das Kapital ist dann angewachsen auf 
+\begin{align*}
+K_5 &= K_0 \cdot \left( 1 + \frac{1}{100} \right)^3 \cdot \left( 1 + \frac{2}{100} \right)^2 \\
+    &= 10.719,25 \text{€}.
+\end{align*}}
+\lang{en}{The capital will have grown to
+\begin{align*}
+K_5 &= K_0 \cdot \left( 1 + \frac{1}{100} \right)^3 \cdot \left( 1 + \frac{2}{100} \right)^2 \\
+    &= 10,719.25 \text{€}.
+\end{align*}}
+\lang{de}{Wir wollen nun wissen, welcher Jahreszinssatz zum gleichen Ergebnis geführt hätte, also sodass}
+\lang{en}{We now want to know which annual interest rate would have led to the same result, i.e.}
+\[
+K_5 = K_0 \cdot \left(1+i_{\text{eff}}\right)^5\lang{en}{.}
+\]
+\lang{de}{gilt. Es folgt
+\[
+i_{\text{eff}} = \sqrt[5]{\frac{K_5}{K_0}} -1 \approx 0,014 = 1,4\%.
+\]}
+\lang{en}{We have
+\[
+i_{\text{eff}} = \sqrt[5]{\frac{K_5}{K_0}} -1 \approx 0.014 = 1.4\%.
+\]}
+
+\end{example}
+
+
+\lang{de}{Je kürzer die Verzinsungsperiode ist, desto häufiger werden  Zinsen fällig, auch 
+wenn diese dann jeweils geringer ausfallen als bei jährlicher Verzinsung. 
+In Hinblick auf den Zinseszinseffekt könnte man aber auf die Idee kommen, dass das 
+Kapital trotzdem immer schneller wachsen wird, da die Zinsen immer mitverzinst werden.}
+\lang{en}{The shorter the interest period, the more frequently interest is earned,  
+even if it is lower than if the interest is paid annually. 
+In view of the compound interest effect, one might think that the
+capital will grow faster and faster, since the interest is always compounded.}
+
+\lang{de}{Die folgende Bemerkung zeigt, dass das Endkapital aber nicht unbeschränkt wächst.} 
+\lang{en}{The following remark shows that the final capital, however, does not grow infinitely.} 
+
+\begin{remark}
+\lang{de}{Wenn die Anzahl der Zinsperioden pro Jahr immer weiter steigt, gilt für das Kapital $K_n$
+nach $n$ Jahren}
+\lang{en}{As the number of interest periods per year tends to infinity, the capital $K_n$
+after $n$ yearsbecomes}
+\[
+K_n = \lim_{m \to \infty} K_0\left(1+\frac{i}{m}\right)^{nm} = K_0 \cdot e^{i \cdot n},
+\]
+\lang{de}{wobei $e$ die Eulersche Zahl bezeichnet. Hieraus können wir ebenfalls einen effektiven 
+Jahreszins berechnen durch den Ansatz}
+\lang{en}{where $e$ denotes the Euler number. From this, we can also calculate an effective 
+annual interest rate using}
+\[
+K_0 \cdot e^{i \cdot n} = K_0 \cdot \left(1+ i_{\text{eff}} \right)^n.
+\]
+\lang{de}{Umstellen der Gleichung ergibt}
+\lang{en}{Reversing the equation gives us}
+\[
+i_{\text{eff}} = \sqrt[n]{e^{i \cdot n}} - 1 = e^i -1.
+\]
+\lang{de}{Da praktisch zu jedem Zeitpunkt Zinsen anfallen, spricht man hier auch von 
+\emph{stetiger Verzinsung}. Für $i = 0,01 = 1\%$ wäre beispielsweise 
+der effektive Jahreszinssatz bei stetiger Verzinsung ungefähr $i_{\text{eff}} = 1,005\%$.}
+\lang{en}{Since interest accrues practically at every time, one also speaks here of the
+\emph{continuous interest rate}. For example, for $i = 0. 01 = 1\%$
+the annual effective interest rate with constant interest is approximately $i_{\text{eff}} = 1.005\%$. }
+\end{remark}
+
+
+
+\end{visualizationwrapper}
+
+\end{content}

@@ -1,0 +1,204 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{...}
+   }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+    \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/19291}{Ticket 19291}
+\end{block}
+
+
+\begin{block}[annotation]
+    T401_01: Matrizenrechnung - Matrizen
+\end{block}
+\begin{block}[annotation]
+    Die hiesigen Programmierbeispiele und -aufgaben werden später 
+    in den Hauptkurs in die entsprechenden Kapitel am Ende eingebunden.
+    Die Sichtbarkeit ist zurnächst "verborgen".
+\end{block}
+
+
+\textbf{Ausblick: Programmierung mit Python}
+\begin{showhide}
+
+\begin{tabs*}[\initialtab{1}\class{example}]
+
+\tab{Einführung}
+\begin{itemize}
+  \item In \textbf{Python} kann eine Matrix durch die Datenstruktur 
+    \textbf{array} aus der Bibliothek \href{https://numpy.org}{\textbf{NumPy}} ausgedrückt werden. 
+  \item \textbf{Beispiel} zur Erzeugung zweier Matrizen 
+    $A \in {M}(2,2;\mathbb{R})$, $B \in {M}(2,3;\mathbb{C})$:
+
+
+\begin{block}[code]
+import numpy
+A = numpy.array( [[1, 2], [3, 4]] )
+B = numpy.array( [[5+2.j, 6, 7], [8, 9-7.j, 10]] )
+\end{block} 
+
+\begin{block}[code-output]
+\begin{equation*}
+        A :=
+        \begin{pmatrix}
+            1 & 2\\
+            3 & 4
+        \end{pmatrix},\quad
+        B :=
+        \begin{pmatrix}
+            5+2i & 6 & 7\\
+            8 & 9-7i & 10
+        \end{pmatrix}
+    \end{equation*}
+\end{block}
+
+
+  \item Die Anzahl an Zeilen $m$ und Spalten $n$ von $A$ erhält man durch:
+
+\begin{block}[code]
+m, n = A.shape
+\end{block} 
+
+\end{itemize}
+
+
+\tab{Skalare Multiplikation}
+
+    Beispiel zur \textbf{skalaren Multiplikation} eines Skalars $a \in \R$
+    und einer Matrix $B \in {M}(2,2;\mathbb{R})$:
+    \begin{block}[code]
+import numpy
+a = 2
+B = numpy.array( [[5, 6], [7, 8]] )
+C = a * B
+    \end{block}
+
+    \begin{block}[code-output]
+     \[
+        C :=
+        2
+        \cdot
+        \begin{pmatrix}
+            5 & 6\\
+            7 & 8
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            10 & 12\\
+            14 & 16
+        \end{pmatrix}
+    \]
+    \end{block}
+    
+
+\tab{Addition und Multiplikation}
+
+    Beispiel zur \textbf{Addition} und \textbf{Multiplikation} zweier Matrizen $A \in {M}(2,2;\mathbb{R})$, $B \in {M}(2,2;\mathbb{R})$:
+    \begin{block}[code]
+import numpy
+A = numpy.array( [[1, 2], [3, 4]] )
+B = numpy.array( [[5, 6], [7, 8]] )
+C = A + B
+D = A * B
+    \end{block}
+    \begin{block}[code-output]
+     \[
+        C :=
+        \begin{pmatrix}
+            1 & 2\\
+            3 & 4
+        \end{pmatrix}
+        +
+        \begin{pmatrix}
+            5 & 6\\
+            7 & 8
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            6 & 8\\
+            10 & 12
+        \end{pmatrix}
+    \]
+     \[
+        D :=
+        \begin{pmatrix}
+            1 & 2\\
+            3 & 4
+        \end{pmatrix}
+        \cdot
+        \begin{pmatrix}
+            5 & 6\\
+            7 & 8
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            5 & 12 \\
+            21 & 32
+        \end{pmatrix}
+    \]
+    \end{block}
+    
+    \begin{block}[warning]
+    Man erhält keine Fehlermeldung, wenn die Matrizen bezüglich der Operation
+    nicht kompatibel zueinander sind.
+    Für die Multipliation zweier Matrizen $A$ und $B$ kann man alternativ
+    auch die Funktion \texttt{numpy.matmul(A,B)} nutzen. 
+    Hier erhält man eine Meldung, wenn die Dimensionen nicht passen.
+    \end{block}
+
+
+\tab{Transponierte Matrix}
+
+    Eine zu einer Matrix $A$ transponierte Matrix $A^T$
+    erhält man wie folgt:
+    \begin{block}[code]
+import numpy
+A = numpy.array( [[1, 2], [3, 4]] )
+B = numpy.transpose( A )
+    \end{block}
+    \begin{block}[code-output]
+     \[
+        B :=
+        \begin{pmatrix}
+            1 & 2\\
+            3 & 4
+        \end{pmatrix}
+        ^T
+        =
+        \begin{pmatrix}
+            1 & 3\\
+            2 & 4
+        \end{pmatrix}
+    \]
+    \end{block}
+    
+
+
+% TODO: komplexe Matrix
+
+
+\end{tabs*}
+
+\end{showhide}
+
+
+
+\end{content}
+

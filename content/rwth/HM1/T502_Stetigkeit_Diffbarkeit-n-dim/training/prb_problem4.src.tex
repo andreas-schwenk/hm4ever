@@ -1,0 +1,115 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Problem 4}
+    \lang{de}{A04: Kettenregel}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{Problem 4}
+    \lang{de}{Aufgabe 4}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+
+\title{A04: Kettenregel}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22595}{Ticket 22595}
+\end{block}
+
+
+\usepackage{mumie.genericproblem}
+
+\embedmathlet{gwtmathlet}
+\begin{problem}
+    \begin{question}
+        \type{input.matrix}
+        \begin{variables}
+            \randint[Z]{a}{-4}{4}
+            \randint[Z]{b}{-4}{4}
+            \randint[Z]{c}{-5}{5}
+            \randint{d}{-4}{4}
+            \function[normalize]{f1}{a*u*v+cos(u)}
+            \function[normalize]{f2}{b*v^2}
+            \function[normalize]{g1}{c*x*y^2}
+            \function[normalize]{g2}{a*x^3+d}
+            
+            
+            \pmatrix{ff}{f1 \\ f2}
+            \pmatrix{gg}{g1 \\ g2}
+            
+            %Lösungen werden alle mit MUMIE berechnet
+            %damit können die Funktionen f,g auch beliebig geändert werden, ohne dass die Lösung neu geschrieben werden muss
+            %ACHTUNG: Zu viele Substitutionen MÜSSEN vermieden werden, weil das die MUMIE überfordert. Variablen von f MÜSSEN deshalb u,v sein.
+            \derivative[normalize]{df11}{f1}{u}
+            \derivative[normalize]{df12}{f1}{v}
+            \derivative[normalize]{df21}{f2}{u}
+            \derivative[normalize]{df22}{f2}{v}
+            
+            \derivative[normalize]{dg11}{g1}{x}
+            \derivative[normalize]{dg12}{g1}{y}
+            \derivative[normalize]{dg21}{g2}{x}
+            \derivative[normalize]{dg22}{g2}{y}
+            
+            \matrix{df}{df11 & df12 \\ df21 & df22}
+            \matrix{dg}{dg11 & dg12 \\ dg21 & dg22}
+            
+            %nun berechne df(g(x,y))
+            \substitute{helpdfg11}{df11}{u}{g1}
+            \substitute[normalize]{dfg11}{helpdfg11}{v}{g2}
+            \substitute{helpdfg12}{df12}{u}{g1}
+            \substitute[normalize]{dfg12}{helpdfg12}{v}{g2}
+            \substitute{helpdfg21}{df21}{u}{g1}
+            \substitute[normalize]{dfg21}{helpdfg21}{v}{g2}
+            \substitute{helpdfg22}{df22}{u}{g1}
+            \substitute[normalize]{dfg22}{helpdfg22}{v}{g2}
+            
+            \matrix{dfg}{dfg11 & dfg12 \\ dfg21 & dfg22}
+            \matrix[normalize]{dh}{dfg11*dg11+dfg12*dg21 & dfg11*dg12+dfg12*dg22 \\ dfg21*dg11+dfg22*dg21 & dfg21*dg12+dfg22*dg22}
+
+        \end{variables}
+        
+        \text{Seien $f:\R^2\to \R^2,\begin{pmatrix}u\\ v\end{pmatrix}\mapsto \var{ff}$ und $g:\R^2\to \R^2, \begin{pmatrix}x\\ y\end{pmatrix}\mapsto \var{gg}$.\\ Berechnen Sie:}
+        \begin{answer}
+            \solution{df}
+            \format{2}{2}
+            \text{$Df(u,v)=$}
+            \checkAsFunction{u,v}{-10}{10}{100}
+            \explanation{In der ersten Spalte wird $f$ nach $u$ abgeleitet, in der zweiten Spalte nach $v$.}
+        \end{answer}
+        \begin{answer}
+            \solution{dg}
+            \format{2}{2}
+            \text{$Dg(x,y)=$}
+            \checkAsFunction{x,y}{-10}{10}{100}
+            \explanation{In der ersten Spalte wird $g$ nach $x$ abgeleitet, in der zweiten Spalte nach $y$.}
+        \end{answer}
+        \begin{answer}
+            \solution{dfg}
+            \format{2}{2}
+            \text{$Df(g(x,y))=$}
+            \checkAsFunction{x,y}{-10}{10}{100}
+            \explanation{Setzen Sie in $Df(u,v)$ für $u$ die erste Koordinate von $g(x,y)$ ein, für $v$ die zweite Koordinate von $g$.}
+        \end{answer}
+        \begin{answer}
+            \solution{dh}
+            \format{2}{2}
+            \text{$D(f\circ g)(x,y)=$}
+            \checkAsFunction{x,y}{-10}{10}{100}
+            \explanation{Wenden Sie die Kettenregel $D(f\circ g)(x,y)= Df(g(x,y))\cdot Dg(x,y)$ an.}
+        \end{answer}
+    \end{question}
+\end{problem}
+
+\end{content}

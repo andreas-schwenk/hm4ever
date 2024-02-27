@@ -1,0 +1,515 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Reelle Funktionen und Monotonie}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T204_Example_D.meta.xml}{T204_Example_D}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T204_Example_C.meta.xml}{T204_Example_C}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T204_Example_B.meta.xml}{T204_Example_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T204_Example_A.meta.xml}{T204_Example_A}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T106_SquareRootFunction.meta.xml}{T106_SquareRootFunction}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T106_Cubic.meta.xml}{T106_Cubic}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T106_LinearFunction_A.meta.xml}{T106_LinearFunction_A}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T102neu_Einfache_Reelle_Funktionen/g_art_content_06_funktionsbegriff_und_lineare_funktionen.meta.xml}{reelle-funktionen}
+% alt    \link{generic_article}{content/rwth/HM1/T102_Einfache_Funktionen,_grundlegende_Begriffe/g_art_content_04_lineare_funktionen.meta.xml}{reelle-funktionen}
+    \link{generic_article}{content/rwth/HM1/T202_Reelle_Zahlen_axiomatisch/g_art_content_06_supremum_infimum.meta.xml}{beschr-mengen}
+    \link{generic_article}{content/rwth/HM1/T202_Reelle_Zahlen_axiomatisch/g_art_content_05_anordnungsaxiome.meta.xml}{anordnung}
+    \link{generic_article}{content/rwth/HM1/T202_Reelle_Zahlen_axiomatisch/g_art_content_07_vollstaendigkeit.meta.xml}{vollst}
+    \link{generic_article}{content/rwth/HM1/T103_Polynomfunktionen/g_art_content_09_polynome.meta.xml}{polynome}
+    \link{generic_article}{content/rwth/HM1/T103_Polynomfunktionen/g_art_content_10_polynomdivision.meta.xml}{poly-div}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{4}
+\ombarticle{3}
+
+\lang{de}{\title{Reelle Funktionen und Monotonie}}
+ 
+\begin{block}[annotation]
+  Inhalt: Definition reelle Funktion (vgl. Vorkursteil, content_04) ; Verknüpfung reeller Funktionen ($+,-,\cdot,/$);
+  Beschränktheit;
+   Monotonie (vgl. auch diffrechnung/content_22), sowie Folgerung der Injektivität
+    aus der Monotonie; (partielle) Umkehrabbildung
+  
+%  kopiert aus: OMB+-Kap. VI.1,Stens-Skript
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9654}{Ticket 9654}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+Im folgenden Abschnitt werden wir uns mit speziellen Abbildungen beschäftigen, 
+nämlich mit den \emph{reellen Funktionen}, bei denen Definitions- und Zielbereich 
+Teilmengen der reellen Zahlen sind. Diese wurden im Abschnitt 
+% QS-Änderung (Vorschlag)
+% \link{reelle-funktionen}{"`Reelle Funktionen"'} betrachtet und 
+%
+\ref[reelle-funktionen]["`Reelle Funktionen"']{sec:funktion} bereits eingeführt und 
+werden hier nun weiter vertieft.
+
+\section{\lang{de}{Reelle Funktionen}\label{funktion} }\label{sec:reelle_funk}
+
+ \lang{de}{\begin{definition}[Reelle Funktion]
+	 Eine Abbildung $f:D\to N$, für welche der Definitionsbereich $D$ und der
+	 Zielbereich $N$ Teilmengen von $\R$ sind, heißt \emph{reelle Funktion}.
+     \end{definition}
+	 
+     \begin{definition}[Nullstellen reeller Funktionen]
+	 Die \emph{Nullstellen} einer reellen Funktion $f$ sind die Stellen $x\in D$ im Definitionsbereich,
+		an denen die Funktion den Wert $f(x)=0$ annimmt.
+	 \end{definition} }
+	 
+\begin{remark}	 
+Da eine Vergrößerung des Zielbereichs für die meisten Belange unerheblich ist,
+ werden wir fast immer annehmen, dass $N=\R$ ist.	 
+\end{remark}
+
+Die bekanntesten Beispiele für reelle Funktionen sind solche, die durch einfache Funktionsvorschriften definiert sind, 
+wie 
+% QS-Änderung (Vorschlag)
+% \link{polynome}{Polynomfunktionen} oder \link{poly-div}{rationale Funktionen},
+%
+\ref[polynome][Polynomfunktionen]{sec:polynomfkt} oder 
+\ref[poly-div][rationale Funktionen]{sec:rationale_fkt},
+und deren Graphen sich leicht zeichnen lassen. 
+Es gibt aber durchaus auch andere reelle Funktionen (siehe folgendes Beispiel \ref{ex:unstetige-funktionen}).
+
+\begin{example}\label{ex:unstetige-funktionen}
+\begin{enumerate}
+\item Die durch die Gauß-Klammer gegebene Funktion
+\[   [\cdot ]:\R\to \Z, x\mapsto [x]:=\max\{ n\in \Z | n\leq x\}, \]
+ist eine reelle Funktion, deren Graph viele \emph{Sprünge} aufweist. 
+
+\begin{center}
+\image{T204_Example_A}
+\end{center}
+
+Die dicken Punkte an den Streckenenden sollen andeuten, dass dieser Endpunkt zum Graphen gehört,
+während die anderen Endpunkte nicht zum Graphen gehören.
+
+
+\item Die \emph{Dirichletsche Sprungfunktion}
+\[  D:\R\to {\{0;1\}}, x \mapsto \begin{cases} 1 & \text{falls }x\in \Q \\
+0 & \text{falls }x\notin \Q \end{cases}\]
+ist ebenfalls eine reelle Funktion.
+Ihr Graph lässt sich nicht zeichnen, da er genau aus den Punkten $(a;1)$ mit rationalen Zahlen $a$
+und aus Punkten $(b;0)$ mit irrationalen Zahlen $b$ besteht. Beim Versuch, alle Punkte 
+$(a;1)$ mit rationalen Zahlen $a$ zu markieren, würde man nämlich die komplette Gerade $y=1$ zeichnen,
+und beim Versuch, alle Punkte 
+$(b;0)$ mit irrationalen Zahlen $b$ zu markieren, würde man die komplette Gerade $y=0$ zeichnen.
+\end{enumerate}
+\end{example}
+
+Reelle Funktionen können addiert, subtrahiert, multipliziert und in manchen Fällen
+auch dividiert werden, indem man die Funktionswerte addiert, subtrahiert, multipliziert
+ bzw. dividiert.
+
+\begin{definition}[Verknüpfungen reeller Funktionen]\label{def:reelleFkt}
+Sei $D\subseteq \R$ nicht-leer und $f,g:D\to \R$ reelle Funktionen 
+und $r\in \R$.\\
+Dann definiert man die reellen Funktionen
+\begin{enumerate}
+\item   $\; f+g:D\to \R$,\, $\; f-g:D\to \R \; $ und $\; r\cdot f:D\to \R \; $ durch
+    \begin{eqnarray*}
+       (f+g)(x) &:=& f(x)+g(x) \quad \text{für alle}\quad x\in D, \\
+       (f-g)(x) &:=& f(x)-g(x) \quad  \text{für alle}\quad x\in D, \\
+       (r\cdot f)(x) &:=& r\cdot f(x) \qquad \text{für alle}\quad x\in D,
+     \end{eqnarray*}
+ \item  $\; f\cdot g:D\to \R \;$ durch 
+    \[  (f\cdot g)(x):=f(x) \cdot g(x) \quad \text{für alle}\quad x\in D. \]
+ \item  $\;$ Falls $g(x)\neq 0$ für alle $x\in D$ ist, definiert man 
+        $\frac{f}{g}:D\to \R \; $ durch
+    \[  \left( \frac{f}{g} \right) (x):= \frac{f(x)}{g(x)} \quad  \text{für alle}\quad x\in D. \]
+\end{enumerate}
+Auf den rechten Seiten der Definitionen wird jeweils die Operation in $\R$ verwendet.
+\end{definition}
+Eine Zusammenfassung der bisher angesprochenen Themen kann dem folgenden Video entnommen werden:\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10889&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+
+\begin{example}
+Für $\; f:\R\to \R, \, x\mapsto 2x^3$, $\; g:\R\to \R, \, x\mapsto x^2+1\;$ 
+und $\;r=\frac{1}{2} \,$ sind
+  \begin{tabs*}[\initialtab{1}\class{example}]
+    \tab{$f+g$}
+      \begin{align*}
+       f+g :\,\R\to \R,\, x\mapsto f(x)+g(x)=2 x^3+x^2+1
+      \end{align*}
+    \tab{$f-g$}
+      \begin{align*}
+       f-g :\,\R\to \R,\, x\mapsto f(x)-g(x)=2 x^3-x^2-1
+      \end{align*}
+    \tab{$r\cdot f$}
+      \begin{align*}
+       r\cdot f :\,\R\to \R,\, x\mapsto r\cdot f(x)=\frac{1}{2}\cdot 2 x^3=x^3
+      \end{align*}
+    \tab{$f\cdot g$}
+      \begin{align*}
+       f\cdot g :\,\R\to \R,\, x\mapsto f(x)\cdot g(x)=2x^3\cdot (x^2+1)=2x^5+2x^3
+      \end{align*}
+    \tab{$\frac{f}{g}$}    
+      Da $g(x)\neq 0$ für alle $x\in \R$ gilt, ist auch $\frac{f}{g}$ auf $\R$ definiert 
+      \[  \frac{f}{g}:\, \R\to \R,\, x\mapsto \frac{f(x)}{g(x)}=\frac{2x^3}{x^2+1} \]
+  \end{tabs*}
+\end{example}
+
+
+\begin{remark}
+\begin{enumerate}
+\item Die so definierten Verknüpfungen auf der Menge der reellen Funktionen $D\to \R$
+erfüllen die üblichen Rechenregeln, wie sich leicht nachrechnen lässt.
+\item Oft definiert man auch Verknüpfungen für reelle Funktionen 
+$f:D_1\to \R$ und $g:D_2\to \R$, deren Definitionsbereiche also nicht gleich sind. In diesem
+Fall ist der Definitionsbereich von $f+g$, von $f-g$ und von $f\cdot g$ die Schnittmenge
+$D_1\cap D_2$. Zu beachten ist jedoch, dass die Schnittmenge dann nicht leer sein sollte.
+
+Ebenso kann man den Quotienten $\frac{f}{g}$ auch definieren, wenn die Funktionswerte
+von $g$ nicht alle von Null verschieden sind. Der Definitionsbereich ist dann jedoch lediglich
+die Menge $\{ x\in D_1\cap D_2 | g(x)\neq 0\}$. Auch hier ist zu beachten, dass für 
+eine sinnvolle Funktion diese Menge nicht leer sein sollte.
+
+Man erhält die gleichen Funktionen, wenn man zunächst $f$ und $g$ auf die Menge 
+$D_1\cap D_2$ bzw. auf $\{ x\in D_1\cap D_2 | g(x)\neq 0\}$ einschränkt, d.h. als
+Funktionen $D_1\cap D_2\to \R$ bzw. $\{ x\in D_1\cap D_2 | g(x)\neq 0\}\to \R$ auffasst,
+und dann die obigen Definitionen für die eingeschränkten Funktionen verwendet.
+Wir werden daher den allgemeinen Fall nicht weiter behandeln.
+\end{enumerate}
+\end{remark}
+
+
+Eine Eigenschaft, die später noch wichtig wird, ist die Folgende:
+
+\begin{definition}[Beschränktheit reeller Funktionen]\label{def:bounded}
+%Eine reelle Funktion $f:D\to \R$ heißt \notion{nach oben beschränkt} bzw.
+%\notion{nach unten beschränkt} bzw. \notion{beschränkt}, wenn die Wertemenge $W_f$ von $f$
+%die bereits bekannten \link{beschr-mengen}{Eigenschaften} aufweist.
+%Nach \textcolor{red}{oben beschränkt} bzw. nach \textcolor{green}{unten beschränkt} bzw. \textcolor{blue}{beschränkt} ist eine reelle Funktion dann, wenn es eine reelle Zahl $c\in \R$ gibt, so dass für alle $x\in D$
+% \[  \textcolor{red}{f(x)\leq c} \quad \text{bzw.}\quad \textcolor{green}{f(x)\geq c}\quad \text{bzw.}\quad \textcolor{blue}{|f(x)|\leq c} \]
+% gilt.
+% 
+%%%%%%%%%%%%%%% QS-Vorschlag %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\\
+%--------------- QS-Vorschlag -------------------------------------------------------------
+%\\
+Eine reelle Funktion $f:D\to \R\, $ heißt \emph{nach oben, nach unten} oder  
+generell \emph{beschränkt}, wenn die Wertemenge $W_f$ von $f$ die entsprechende
+\ref[beschr-mengen][Eigenschaft als Menge]{def:beschraenkt} aufweist.\\
+
+Das bedeutet
+\begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \item $f$ heißt \emph{\notion{nach oben beschränkt}}, wenn es eine Zahl $c \in \R$ gibt, 
+        so dass $f(x) \leq c \;$ für alle $x \in D$ gilt.
+    \item $f$ heißt \emph{\notion{nach unten beschränkt}}, wenn es eine Zahl $c \in \R$ gibt, 
+        so dass $f(x) \geq c \;$ für alle $x \in D$ gilt.
+    \item $f$ heißt \emph{\notion{beschränkt}}, wenn es eine Zahl $c \in \R$ gibt, 
+        so dass $\abs{f(x)} \leq c \;$ für alle $x \in D$ gilt.        
+\end{description}
+
+%%%%%%%%%%%%% Ende QS-Vorschlag %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{definition}
+
+\begin{example}
+  \begin{tabs*}[\initialtab{1}\class{example}]
+      \tab{$f(x)=x^2$} Die Funktion $f:\R\to \R, x\mapsto x^2$ ist nach unten beschränkt, da $f(x)=x^2\geq 0$ für
+      alle $x\in \R$. Sie ist jedoch nicht nach oben beschränkt.\\
+      Diese Überlegungen werden auch vom Funktionsgraphen bestätigt. 
+      \begin{center}
+      \image{T204_Example_B}
+      \end{center}
+      \tab{$f(x)=\frac{1}{1+x^2}$} Die Funktion $f:\R\to \R, x\mapsto \frac{1}{1+x^2}$ ist beschränkt, denn für alle $x\in \R$ gilt 
+      \begin{align*}
+          x^2\geq 0\quad\Rightarrow\quad 1+x^2\geq 1>0 \quad\Rightarrow\quad f(x)=\frac{1}{1+x^2}>0
+      \end{align*} 
+      und zum anderen existiert ein Maximum bei $x_{max}=0$
+      \begin{align*}
+          x_{max}^2 = 0\quad\Rightarrow\quad 1+x_{max}^2= 1 \quad\Rightarrow\quad f(x_{max})=\frac{1}{1+x_{max}^2}= 1\leq 1.
+      \end{align*} 
+      Kombiniert man diese Erkenntnisse gilt für alle $x\in \R$: $|f(x)|\leq 1$. Diese Überlegungen werden auch vom Funktionsgraphen bestätigt. 
+      \begin{center}
+      \image{T204_Example_C}
+      \end{center}
+    \end{tabs*}
+\end{example}
+
+	 
+\section{\lang{de}{Monotonie und Umkehrfunktion}\lang{en}{Monotonicity and inverse function}\label{Monotonie} }
+
+
+  \lang{de}{\begin{definition}[monoton, streng monoton]\label{def:monotonie}
+		 Eine reelle Funktion $f:D\to \R$ ist \notion{monoton wachsend},
+		 wenn für ein beliebiges Paar $x_1, x_2\in D$, für die die Ungleichung $x_1 \leq x_2$ gilt, 
+		 die Ungleichung $f(x_1)\leq f(x_2)$ für die zugehörigen Funktionswerte folgt.\\
+		
+		 Sie heißt \notion{streng monoton wachsend}, falls aus der strengeren Ungleichung $x_1 < x_2$ 
+		 die strengere Ungleichung $f(x_1) < f(x_2)$ folgt.\\
+		 
+		 Eine reelle Funktion $f:D\to \R$  ist \notion{monoton fallend}, 
+		 wenn für ein beliebiges Paar $x_1, x_2\in D$, für die die Ungleichung $x_1 \leq x_2$ gilt, 
+		 die Ungleichung $f(x_1)\geq f(x_2)$ für die zugehörigen Funktionswerte folgt.\\
+		 
+		 Sie heißt \notion{streng monoton fallend}, falls die strengere Folgerung 
+		 $x_1<x_2 \Rightarrow f(x_1)> f(x_2)$ gilt.
+		 
+		 Eine reelle Funktion heißt \notion{monoton}, wenn sie monoton wachsend oder fallend ist. 
+	 \end{definition} }
+	 
+  \lang{en}{\begin{definition}[Monotonic, Strictly monotonic]
+		 A function $f:D\to \R$ is said to be \notion{monotonically increasing} if for any given 
+		 pair of arguments $x_1, x_2\in D$  such that $x_1 \leq x_2$,
+		 the inequality $f(x_1)\leq f(x_2)$ is satisfied.
+		 
+		 A function $f:D\to \R$ is said to be \notion{strictly monotonically increasing} if, 
+		 for the strict inequality $x_1 < x_2$ the strict inequality $f(x_1) < f(x_2)$ is satisfied. 
+		 Note here that
+		 strict is meant in an inequality sense: strictly less than vs. less than or equal to.
+		 
+		 A function $f:D\to \R$ is said to be \notion{monotonically decreasing} if for any given 
+		 pair of arguments $x_1, x_2\in D$ such that $x_1 \leq x_2$,
+		 the inequality $f(x_1)\geq f(x_2)$ is satisfied.
+		 
+		 A function $f:D\to \R$ is said to be \notion{strictly monotonically decreasing} if, 
+		 for the strict inequality $x_1 < x_2$ the strict inequality $f(x_1) > f(x_2)$ is satisfied. 
+		 Note here as well that
+		 strict is meant in an inequality sense: strictly greater than vs. greater than or equal to.
+
+		A function $f:D\to \R$ is called \notion{monotone} or \notion{monotonic} if it is either 
+		monotonically increasing or monotonically decreasing.
+	 \end{definition} }
+
+\begin{example}\label{ex:monotone_funktionen}
+\begin{tabs*}[\initialtab{1}\class{example}]
+\tab{$f(x) = a x + b$}
+
+	\lang{de}{Der Funktionsgraph einer linearen Funktion $\;f(x) = a x + b$ 
+	    ist eine Gerade mit der Steigung $a$ und $y$-Achsenabschnitt
+		$b$ (Schnittpunkt mit der $y$-Achse). Die linearen Funktionen $f(x) = ax+b$ sind \textcolor{#0066CC}{streng 
+		monoton wachsend}, wenn die Steigung größer Null ist, d.h. \textcolor{#0066CC}{$a > 0$} und 
+		\textcolor{#CC6600}{streng monoton fallend}, wenn die Steigung negativ ist, d.h. \textcolor{#CC6600}{$a<0$}. 
+		Für $a=0$ sind sie konstant und damit sowohl monoton wachsend als auch monoton fallend. }
+    
+    \lang{en}{The graph of a linear function  $\;f(x)=a x + b$ is a line with slope $a$ and $y$-intercept $b$ (the intersection point with the $y$-axis).
+    	Linear functions $f(x) = ax+b$ are \textcolor{#0066CC}{strictly monotonically increasing} if the slope is greater than zero \textcolor{#0066CC}{($a>0$)} and \textcolor{blue}{strictly monotonically decreasing} if the slope is negative \textcolor{blue}{($a<0$)}. 
+    	If $a=0$ linear functions are constant and hence both monotonically increasing and monotonically decreasing. }
+\begin{center}
+\image{T106_LinearFunction_A}
+\end{center}
+
+\tab{$f(x) = a x^3$}
+    \lang{de}{	Eine Funktion der Form $f(x) = a x^3$ (Polynom 3. Grades) ist \textcolor{#0066CC}{streng monoton wachsend}, wenn der Koeffizient 
+		$a$ positiv ist, \textcolor{#0066CC}{$a > 0$}, und \textcolor{#CC6600}{streng monoton fallend},
+		 wenn \textcolor{#CC6600}{$a < 0$} ist.}
+	
+	 \lang{en}{A function of the form $f(x) = ax^3$ (a third degree polynomial) is \textcolor{#0066CC}{strictly monotonically increasing} if the coefficient $a$ is positive \textcolor{#0066CC}{($a>0$)} and \textcolor{#CC6600}{strictly monotonically decreasing} if \textcolor{#CC6600}{$a<0$}.}
+	 
+\begin{center}
+\image{T106_Cubic}
+\end{center}
+\tab{$f(x) = \sqrt{x}$}
+    \lang{de}{Die Quadratwurzelfunktion $f(x) = \sqrt{x}$ ist \textcolor{#0066CC}{streng monoton wachsend}.}
+    
+     \lang{en}{The square root $f(x) = \sqrt{x}$ is \textcolor{#0066CC}{strictly monotonically increasing}.}
+\begin{center}
+\image{T106_SquareRootFunction}
+\end{center}
+\tab{$f(x)=[x]$}
+Die Funktion $f(x)=[x]=\max\{ n\in \Z | n\leq x\}$ ist monoton wachsend, denn für
+$x_1\leq x_2$ ist auch 
+\[ [x_1]=\max\{ n\in \Z | n\leq x_1\}\leq \max\{ n\in \Z | n\leq x_2\}=[x_2]. \]
+Sie ist jedoch nicht streng monoton wachsend, da zum Beispiel $0<\frac{1}{2}$, aber $[0]=0=[\frac{1}{2}]$.
+\begin{center}
+\image{T204_Example_A}
+\end{center}
+\end{tabs*}
+\end{example}
+
+\begin{quickcheckcontainer}
+ 
+\randomquickcheckpool{1}{4}
+% \begin{quickcheck}
+%     \explanation{Eine Funktion $f:D\rightarrow \R$ ist monoton wachsend, wenn für ein beliebiges Paar $x_1,x_2\in D$, für die die Ungleichung $x_1\leq x_2$ gilt, die Ungleichung $f(x_1)\leq f(x_2)$ für die zugehörigen Funktionswerte folgt.}		\type{mc.unique}
+% 		\begin{variables}
+% 			\randint[Z]{a}{-5}{5}
+% 			\randint{b}{2}{3}
+% 			\function[normalize]{f}{a*x^b}
+% 		\end{variables}
+		
+% 		\text{$f: \R_+ \to \R, x\mapsto \var{f}$ ist monoton wachsend.}
+% 		\begin{choices}{unique}
+%          \begin{choice}
+% 			\text{Wahr}
+% 			\solution[compute]{a > 0}
+% 		\end{choice}
+% 		\begin{choice}
+% 			\text{Falsch}
+% 			\solution[compute]{a < 0}
+% 		\end{choice}
+%         \end{choices}
+% 	\end{quickcheck}	
+
+	\begin{quickcheck}    
+    \explanation{Eine Funktion $f:D\rightarrow \R$ ist monoton wachsend, wenn für ein beliebiges Paar $x_1,x_2\in D$, für die die Ungleichung $x_1\leq x_2$ gilt, die Ungleichung $f(x_1)\leq f(x_2)$ für die zugehörigen Funktionswerte folgt.}		\type{mc.unique}
+		\begin{variables}
+			\randint[Z]{a}{-5}{5}
+			\function[normalize]{f}{a*x^2}
+		\end{variables}
+		
+		\text{$f: \R_- \to \R, x\mapsto \var{f}$ ist monoton wachsend.}
+		\begin{choices}{unique}
+        \begin{choice}
+			\text{Wahr}
+			\solution[compute]{a < 0}
+		\end{choice}
+		\begin{choice}
+			\text{Falsch}
+			\solution[compute]{a > 0}
+		\end{choice}
+        \end{choices}
+	\end{quickcheck}
+    
+	\begin{quickcheck}
+    \explanation{Eine Funktion $f:D\rightarrow \R$ ist monoton wachsend, wenn für ein beliebiges Paar $x_1,x_2\in D$, für die die Ungleichung $x_1\leq x_2$ gilt, die Ungleichung $f(x_1)\leq f(x_2)$ für die zugehörigen Funktionswerte folgt.}		\type{mc.unique}
+		\begin{variables}
+			\randint[Z]{a}{-5}{5}
+			\function[normalize]{f}{a*x^3}
+		\end{variables}
+		
+		\text{$f: \R_- \to \R, x\mapsto \var{f}$ ist monoton wachsend.}
+		\begin{choices}{unique}
+        \begin{choice}
+			\text{Wahr}
+			\solution[compute]{a > 0}
+		\end{choice}
+		\begin{choice}
+			\text{Falsch}
+			\solution[compute]{a < 0}
+		\end{choice}
+        \end{choices}
+	\end{quickcheck}
+	
+	\begin{quickcheck}
+    \explanation{Eine Funktion $f:D\rightarrow \R$ ist monoton wachsend, wenn für ein beliebiges Paar $x_1,x_2\in D$, für die die Ungleichung $x_1\leq x_2$ gilt, die Ungleichung $f(x_1)\leq f(x_2)$ für die zugehörigen Funktionswerte folgt.}		\type{mc.unique}
+		\begin{variables}
+			\randint[Z]{a}{-5}{5}
+			\randint{d}{-10}{10}
+			\function[normalize]{f}{a*x^2+a*x+d}
+		\end{variables}
+		
+		\text{$f: \R_+ \to \R, x\mapsto \var{f}$ ist monoton wachsend.}
+		\begin{choices}{unique}
+        \begin{choice}
+			\text{Wahr}
+			\solution[compute]{a > 0}
+		\end{choice}
+		\begin{choice}
+			\text{Falsch}
+			\solution[compute]{a < 0}
+		\end{choice}
+        \end{choices}
+	\end{quickcheck}
+	
+	\begin{quickcheck}
+        \explanation{Eine Funktion $f:D\rightarrow \R$ ist monoton fallend, wenn für ein beliebiges Paar $x_1,x_2\in D$, für die die Ungleichung $x_1\leq x_2$ gilt, die Ungleichung $f(x_1)\geq f(x_2)$ für die zugehörigen Funktionswerte folgt.}
+		
+		\begin{variables}
+			\randint[Z]{c}{-5}{5}
+			\randint{d}{-10}{10}
+			\function[normalize]{f}{c*x^3+d}
+		\end{variables}
+		
+		\text{$f: \R_+ \to \R, x\mapsto \var{f}$ ist monoton fallend.}
+		\begin{choices}{unique}
+        \begin{choice}
+			\text{Wahr}
+			\solution[compute]{c < 0}
+		\end{choice}
+		\begin{choice}
+			\text{Falsch}
+			\solution[compute]{c > 0}
+		\end{choice}
+        \end{choices}
+	\end{quickcheck}
+
+\end{quickcheckcontainer}
+
+\begin{theorem}\label{thm:inversmonoton}
+\begin{enumerate}
+\item Ist $f:D\to \R$ eine streng monoton wachsende reelle Funktion und $W=W_f$ ihre Wertemenge,
+dann ist $f$ injektiv und die partielle Umkehrfunktion $f^{-1}:W\to D$ ist ebenfalls
+streng monoton wachsend.
+\item Ist $f:D\to \R$ eine streng monoton fallende reelle Funktion und $W=W_f$ ihre Wertemenge,
+dann ist $f$ injektiv und die partielle Umkehrfunktion $f^{-1}:W\to D$ ist ebenfalls
+streng monoton fallend.
+\end{enumerate}
+\end{theorem}	 
+
+\begin{proof}[Beweis]
+Per Definition ist eine Funktion $f:D\to \R$ injektiv, wenn für alle $x_1,x_2\in D$ mit $x_1\neq x_2$
+die Funktionswerte $f(x_1)$ und $f(x_2)$ verschieden sind. 
+  \begin{incremental}
+      \step Sind nun $x_1,x_2\in D$ mit $x_1\neq x_2$, dann ist entweder $x_1<x_2$ oder $x_1>x_2$. 
+  Ist nun $f$ streng monoton wachsend, dann folgt aus der Definition, dass im ersten Fall 
+  $f(x_1)<f(x_2)$ gilt und im zweiten Fall $f(x_1)>f(x_2)$. In beiden Fällen ist also 
+  $f(x_1)\neq f(x_2)$. Daher ist $f$ injektiv.
+      \step Für eine streng monoton fallende Funktion $f$ drehen sich lediglich die Vergleichszeichen $<$ und $>$
+  bei den Funktionswerten um, weshalb man auch in diesem Fall die Injektivität bekommt.
+      \step Um zu zeigen, dass die Umkehrfunktion $f^{-1}:W\to D$ ebenfalls streng monoton wachsend ist, falls
+  $f$ streng monoton wachsend ist, seien $w,w'\in W$ mit $w<w'$, und $x=f^{-1}(w)$ und $x'=f^{-1}(w')$.
+      \step Wäre $x'\leq x$, so wäre wegen der Monotonie von $f$: $f(x')\leq f(x)$. Allerdings ist
+  \[ f(x')=f(f^{-1}(w'))=w'>w=f(f^{-1}(w))=f(x). \]
+  Also ist $x<x'$. Da $w,w'\in W$ mit $w<w'$ beliebig waren, ist somit $f^{-1}$ streng monoton wachsend.\\
+  Für eine streng monoton fallende Funktion $f$ drehen sich lediglich manche der Vergleichszeichen 
+  $<$ und $>$ um, weshalb man entsprechend zeigt, dass in diesem Fall $f^{-1}$ streng monoton fallend
+  ist.
+  \end{incremental}
+\end{proof}
+
+\begin{example}\label{ex:n-te-wurzel}
+Für $n\in \N$ betrachten wird die $n$-te Potenzfunktion 
+\[ f:\R_+\to \R, x\mapsto x^n \]
+als Funktion auf der Menge der nicht-negativen reellen Zahlen $\R_+$.
+
+Nach den \ref[anordnung][Anordnungsregeln zu Potenzen]{rule:potenzen} ist für
+$0\leq x_1<x_2$ auch $x_1^n< x_2^n$. Also ist die Funktion $f$ streng monoton steigend.
+
+Die Wertemenge der Funktion $f$ ist $W_f=\R_+$, denn zum einen ist für $x\geq 0$ auch $x^n\geq 0$,
+d.h. die Wertemenge ist Teilmenge von $\R_+$, und zum anderen gibt es nach dem
+\ref[vollst][Satz zur Existenz $n$-ter Wurzeln]{thm:n-te-wurzel} zu jedem 
+$y\in \R_+$ eine Zahl $x\in \R_+$ mit $\,x^n=y\;$ (genannt $\,\sqrt[n]{y}\,$), d.h. 
+$y\in W_f$.
+
+Die Umkehrfunktion zur $n$-ten Potenzfunktion ist daher die \emph{$n$-te Wurzel-Funktion}
+\[ f^{-1}:\R_+\to \R_+, y\mapsto \sqrt[n]{y}. \]
+Die zugehörigen Graphen sind in der nachfolgenden Abbildung dargestellt.\\
+\begin{center}
+\image{T204_Example_D}
+\end{center}
+Die Umkehrfunktion ist ebenfalls streng monoton wachsend.
+\end{example}
+
+Der \lref{def:monotonie}{Monotoniebegriff} und die Zusammenhänge können auch dem folgenden Video entnommen werden:\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10890&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+	 
+\end{content}

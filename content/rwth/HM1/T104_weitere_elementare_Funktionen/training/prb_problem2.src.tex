@@ -1,0 +1,144 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A02: Wurzeln}
+    \lang{en}{Problem 2}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Multiplikation und Division von Potenzen und Wurzeln}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+\usepackage{mumie.ombplus}
+
+\lang{de}{
+	\title{A02: Wurzeln}
+}
+\lang{en}{
+	\title{Problem 2}
+	}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9286}{Ticket 9286}
+\end{block}
+
+
+
+\begin{problem}
+
+\begin{question}
+      \lang{de}{\text{Berechnen Sie $x=\sqrt{(-\var{a})^\var{b}}$ und $y=\sqrt[3]{(-\var{a})^\var{c}}$.}}
+      \lang{en}{\text{Calculate $x=\sqrt{(-\var{a})^\var{b}}$ and $y=\sqrt[3]{(-\var{a})^\var{c}}$.}}
+      \explanation{}
+
+      \type{input.number}
+      \precision{3}
+      \field{real}
+
+      \begin{variables}
+                   \randint[Z]{a}{2}{7}
+                   \randint[Z]{n}{1}{4}
+                   \randint[Z]{m}{1}{2}
+                   \function[calculate]{b}{2*n}
+                   \function[calculate]{c}{6*m}
+                   \function[calculate]{x}{a^n}
+                   \function[calculate]{y}{a^(2*m)}
+       \end{variables}
+
+      \begin{answer}
+            \text{$x=$ }
+            \solution{x}
+      \end{answer}
+       \begin{answer}
+            \text{$y=$ }
+            \solution{y}
+      \end{answer}
+	\end{question}
+	
+	\begin{question}
+      \lang{de}{\text{Finden Sie die kleinsten natürlichen Zahlen $x,y$, für die $\sqrt[\var{mn}]{\var{a}^{\var{n}}}\cdot 
+            \sqrt[\var{m}]{\var{a}^{\var{mp}}}:\var{a}^{\var{p1}}=\sqrt[x]{\var{a}^y}$ ist.}}
+      \lang{en}{\text{Find the smallest natural numbers $x,y$ for which $\sqrt[\var{mn}]{\var{a}^{\var{n}}}\cdot 
+            \sqrt[\var{m}]{\var{a}^{\var{mp}}}/\var{a}^{\var{p1}}=\sqrt[x]{\var{a}^y}$.}}
+      \explanation{}
+
+      \type{input.number}
+      \precision{3}
+      \field{real}
+
+      \begin{variables}
+                   \randint[Z]{a}{2}{7}
+                   \randint[Z]{n}{3}{12}
+                   \randint[Z]{m}{3}{12}
+                   \randint[Z]{p}{3}{12}
+                   \function[calculate]{p1}{p-1}
+                   \function[calculate]{mn}{m*n}
+                   \function[calculate]{mp}{m*p}
+                   \function[calculate]{m1}{m+1}
+       \end{variables}
+
+      \begin{answer}
+            \text{$x=$ }
+            \solution{m}
+      \end{answer}
+       \begin{answer}
+            \text{$y=$ }
+            \solution{m1}
+      \end{answer}
+	\end{question}
+	
+	\begin{question}
+      \lang{de}{\text{W\"{a}hlen Sie alle richtigen Antworten für $x,y > 0$ aus:}}
+      \lang{en}{\text{Select all of the correct answers for $x,y > 0$:}}
+      \explanation{}
+
+      \permutechoices{1}{4}
+      \type{mc.multiple}
+      \field{real}
+
+      \begin{variables}
+            \randint{a}{2}{25}
+            \randint{b}{2}{25}
+            \randint{n}{3}{35}
+            \randint{m}{3}{9}
+            \function[calculate]{mn}{n*m}
+            \function[calculate]{d}{n/m}
+            \randadjustIf{a,b}{a=b} % see Part 9 http://team.mumie.net/projects/support/wiki/GenericTexProblems 
+      \end{variables}
+      \begin{choice}
+            \text{$\sqrt[\var{mn}]{x^{\var{n}}}=\sqrt[\var{m}]{x}$}
+            \solution{true}
+      \end{choice}
+       \begin{choice}
+            \text{$\sqrt[\var{m}]{x^{\var{n}}}=x^{\frac{\var{n}}{\var{m}}}$}
+            \solution{true}
+      \end{choice}
+            \begin{choice}
+            \text{$\sqrt[\var{m}]{x^{\var{n}}}=(\sqrt[\var{m}]{x})^{\var{n}}$}
+            \solution{true}
+      \end{choice}
+       \begin{choice}
+            \text{$(x\cdot y)^{\frac{1}{\var{m}}}=x\cdot \sqrt[\var{m}]{y}$}
+            \solution{false}
+      \end{choice}
+\end{question}
+	
+\end{problem}
+\embedmathlet{gwtmathlet}
+ 
+
+
+\end{content}

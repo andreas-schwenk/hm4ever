@@ -1,0 +1,1067 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Logarithmen}
+    \lang{en}{Logarithms}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T104_Logarithms_B.meta.xml}{T104_Logarithms_B}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T104_Logarithms_A.meta.xml}{T104_Logarithms_A}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T104_Logarithms_C.meta.xml}{T104_Logarithms_C}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+     \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T104_weitere_elementare_Funktionen/g_art_content_15_exponentialfunktionen.meta.xml}{link2}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{4}
+\ombarticle{4}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Logarithmen}\lang{en}{Logarithms}}
+
+\begin{block}[annotation]
+  Definition Logarithmus, Basis $e$ und $10$, Rechenregeln, Transformationsgesetz;
+  Logarithmusfunktion, Definitions- und Wertemenge, Umkehrbarkeit, Exponentialfunktion als Umkehrfunktion,
+  Exponentialgleichungen.  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9012}{Ticket 9012}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+\section{\lang{de}{Einf"uhrung }\lang{en}{Introduction to logarithms}}
+
+\lang{de}{
+Die Frage, wie zu einer positiven Zahl $a$ und reellen Zahlen $x$ die Potenzen 
+$u = a^x$ zu definieren sind, hat uns zu den \link{link2}{Exponentialfunktionen} 
+geführt. Nun stellen wir die Frage umgekehrt: Gegeben sind zwei positive Zahlen $a$ und 
+$u$, wie lösen wir die Gleichung $u=a^x$ nach $x$ auf? 
+Das führt uns zu  den Logarithmen. 
+\\ 
+Dazu benutzen wir die \ref[link2][fundamentalen Eigenschaften aller Exponentialfunktionen]{ex:eigenschaften_exp}:
+Für jede positive Basis $a$  (mit $a\neq 1$) ist die Funktion $a^x$ streng monoton. 
+Das heißt, dass es höchstens eine Lösung $x$ der Gleichung $u=a^x$ geben kann.
+Die Wertemenge der Funktion $a^x$ ist gleich der Menge der positiven Zahlen. 
+Damit wissen wir, der Wert $u>0$ wird von $a^x$ wirklich angenommen.\\
+Zusammen heißt das: Es gibt genau eine Lösung $x$ der Gleichung $u=a^x$. Diese Lösung nennen wir den Logarithmus $x = \log_a(u)$ von $u$ zur Basis $a$.
+\\
+% Sei $a\neq 1$ eine positive reelle Zahl. Der
+% Logarithmus kann definiert werden, weil es für jedes $u > 0$ jeweils \lref{uniqueness}{genau einen} 
+% Exponenten $x$ gibt, sodass die Gleichung $u = a^x$ gilt. Für dieses $x$ schreiben wir dann 
+% $x = \log_a(u)$ und nennen diesen Ausdruck den Logarithmus von $u$ zur Basis $a$.
+%\\
+% Dass es jeweils genau einen Exponenten $x$ gibt mit diesen Eigenschaften, folgt wiederum aus zwei 
+% \ref[link2][fundamentalen Eigenschaften aller Exponentialfunktionen]{ex:eigenschaften_exp} mit positiver Basis $a$ und $a\neq 1$: 
+% Sie sind streng monoton und ihre Wertemengen sind gleich der Menge der positiven Zahlen.\\ 
+\\
+Für $u \leq 0$ gibt es keinen Exponenten $x$, so dass die Gleichung $u = a^x$ erfüllt 
+ist, denn alle Potenzen einer positiven Zahl sind positiv.
+}
+\lang{en}{
+The question of how a positive number $a$ can be raised to a real exponent $x$ was 
+answered in the previous section where \link{link2}{exponential functions} such as 
+$u = a^x$ were introduced. Now we ask the inverse question: given two positive numbers 
+$a$ and $u$, how do we rearrange the equation $u=a^x$ for $x$? 
+This brings us to logarithms.
+\\
+We use
+\ref[link2][fundamental properties of exponential functions]{ex:eigenschaften_exp}: 
+for every positive base $a$ (with $a\neq 1$), the function $a^x$ is strictly 
+monotonous. This means that there is no more than one solution to the equation $u=a^x$. 
+The image of the function $a^x$ is the set of positive real numbers. Hence there exists 
+at least one solution $x$ to $u=a^x$ for all $u>0$. \\
+Combining these two statements, there exists exactly one solution $x$ to the equation 
+$u=a^x$. We call this solution the logarithm $x = \log_a(u)$ of $u$ to base $a$.
+\\\\
+For $u \leq 0$ there exists no exponent $x$ satisfying the equation $u = a^x$, as the 
+power of a positive number is always positive.
+}
+
+\begin{definition}[\lang{de}{Logarithmus}\lang{en}{Logarithms}]\label{ln}
+    \lang{de}{
+    Zu vorgegebener Basis $a>0$ und $u>0$ ist der \notion{\emph{Logarithmus $x$ zur 
+    Basis $a$ von $u$}} die eindeutige Lösung der Gleichung $a^x = u$. 
+    Wir schreiben dafür $x=\log_a(u)$.
+    \\\\
+    Die folgenden oft benutzten Logarithmen erhalten besondere Namen: \\ 
+     {Den \emph{Logarithmus zur Basis $e$}} nennen wir \notion{\emph{natürlichen 
+     Logarithmus}} und schreiben dafür $\ln$. \\
+     {Den \emph{Logarithmus zur Basis $10$}} nennen wir 
+     \notion{\emph{Zehnerlogarithmus}} oder \notion{\emph{dekadischen Logarithmus}} 
+     und schreiben dafür $\lg$. \\
+     {Den \emph{Logarithmus zur Basis $2$}} nennen wir \notion{\emph{binären 
+     Logarithmus}} und schreiben dafür $\text{lb}$.
+    }
+    \lang{en}{
+    For a given base $a>0$ and $u>0$, the \notion{\emph{logarithm of $u$ to base 
+    $a$}} is the unique solution $x$ to the equation $a^x = u$. 
+    We denote it as $x=\log_a(u)$.
+    \\\\
+    The following commonly used logarithms have special names: \\
+     {The \emph{logarithm to base $e$}} is called the \notion{\emph{natural logarithm}} 
+     and denoted as $\ln$. \\
+     {The \emph{logarithm to base $10$}} is called the \notion{\emph{common logarithm}} 
+     or the \notion{\emph{decadic logarithm}} or the \notion{\emph{decimal logarithm}} 
+     and denoted as $\lg$. \\
+     {The \emph{logarithm to base $2$}} is called the \notion{\emph{binary logarithm}} 
+     and denoted as $\text{lb}$.
+    }    
+    
+\end{definition}
+
+\lang{de}{Es gilt also }
+\lang{en}{Hence we have }
+
+  	\begin{align*}	
+  		\ln(u) = x\quad \Leftrightarrow \quad e^x= u.
+  	\end{align*}
+
+\begin{remark}\label{logid}\label{bem:exp_ln}
+	\lang{de}{
+  Unmittelbar aus der Definition des Logarithmus folgt für alle $x\in\R$ \\ 
+  }
+	\lang{en}{
+  The following identities follow directly from the definition of the logarithm:\\ 
+  }
+    \[\quad \ln(e^x)=x,\]
+  \lang{de}{sowie für alle $u>0$}\lang{en}{and for all $u>0$}
+    \[ e^{\ln(u)}=u.\]
+  \lang{de}{
+  Dasselbe gilt für alle anderen Basen.
+  \\
+  Für $x=0$ finden wir insbesondere $\log_a(1)=\log_a(a^0)=0$. Weil $a^x=1$ genau eine 
+  Lösung hat, ist $\log_a(u)=0$ genau für $u=1$ erfüllt.
+  }
+  \lang{en}{
+  The same holds for bases other than $e$.
+  \\
+  For $x=0$ we always have $\log_a(1)=\log_a(a^0)=0$. As $a^x=1$ has exactly one 
+  solution, $\log_a(u)=0$ is satisfied precisely by $u=1$.
+  } %The reason it is satisfied precisely by u=1 should be 'as a^0=1' - Niccolo
+\end{remark}
+
+\begin{example}
+	\begin{eqnarray*}
+        e^{-1} = \frac{1}{e} &\Leftrightarrow & \ln\left(\frac{1}{e} \right) = -1, \\
+		10^4 = 10\;\!000 &\Leftrightarrow & \lg(10\;\!000) = 4,\\
+		10^{-3} = \frac{1}{1\;\!000}  &\Leftrightarrow & \lg\left(\frac{1}{1\;\!000}\right) = -3,\\
+		e^{-\frac{1}{2}} = \frac{1}{\sqrt{e}} &\Leftrightarrow & \ln\left(\frac{1}{\sqrt{e}}\right)= -\frac{1}{2} .
+	\end{eqnarray*}
+\end{example}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{2}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{a}{1}{4}
+			\randint{k}{1}{2}
+			\function[calculate]{n}{k*a+1}
+			\function[calculate]{b}{10^a}
+			\function[calculate]{c}{a/n}
+		\end{variables}
+		
+			\text{\lang{de}{Bestimmen Sie}
+            \lang{en}{Calculate }$\lg(\sqrt[\var{n}]{\var{b}})=$\ansref.}
+		
+		\begin{answer}
+			\solution{c}
+		\end{answer}
+		\explanation{
+    \lang{de}{Es ist}\lang{en}{As}
+    $\sqrt[\var{n}]{\var{b}}=10^{\var{c}}$, 
+    \lang{de}{und daher}\lang{en}{we have} 
+		$\lg(\sqrt[\var{n}]{\var{b}})=\var{c}$.
+    }
+	\end{quickcheck}
+	
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{n}{2}{4}
+			\randint{k}{1}{2}
+			\function[calculate]{a}{k*n+1}
+			\function[calculate]{b}{10^a}
+			\function[calculate]{c}{a/n}
+		\end{variables}
+		
+			\text{\lang{de}{Bestimmen Sie}
+            \lang{en}{Calculate} 
+            $\lg(\sqrt[\var{n}]{\var{b}})=$\ansref.}
+		
+		\begin{answer}
+			\solution{c}
+		\end{answer}
+		\explanation{\lang{de}{Es ist}\lang{en}{As} 
+    $\sqrt[\var{n}]{\var{b}}=10^{\var{c}}$, 
+    \lang{de}{und daher}\lang{en}{we have} 
+		$\lg(\sqrt[\var{n}]{\var{b}})=\var{c}$.}
+
+	\end{quickcheck}
+\end{quickcheckcontainer}
+
+
+\lang{de}{
+Das folgende Video behandelt den natürlichen Logarithmus, dabei werden auch Stetigkeit, Differenzierbarkeit und die Stammfunktion behandelt. Diese Themen 
+werden aber erst später eingeführt.
+\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10863&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}
+\\
+\\
+Das folgende Video verdeutlicht den Umgang mit dem Logarithmus zu einer bestimmten Basis $a$:
+\\
+\floatright{
+\href{https://www.hm-kompakt.de/video?watch=152}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{
+\\
+}
+
+\section{\lang{de}{Rechenregeln und Transformationsformel}
+         \lang{en}{Rules for calculating with logarithms}}\label{sec:log_rules}
+
+\lang{de}{
+	Es gibt eine Reihe einfacher Rechenregeln für die Logarithmen, die unmittelbar aus den 
+ 	\ref[link2][Potenzgesetzen für Exponentialfunktionen]{functional_eqn_exp} folgen. 
+ 	Von der Diskussion der Exponentialfunktionen wissen Sie, dass sich bei der 
+  Multiplikation zweier Potenzen mit der gleichen Basis $a>0$ die Exponenten addieren. 
+ 	Daraus ergeben sich die folgenden beiden Anwendungen. 
+\\
+  Weil (für beliebige reelle Zahlen $x$ und $y$) gilt $\log_a(a^x)=x$ und 
+  $\log_a (a^y)=y$, ist 
+}
+\lang{en}{
+	There are a series of rules for calculating with logarithms that follow directly from 
+  the \ref[link2][power rules for exponential functions]{functional_eqn_exp}. 
+	From the discussion with exponential functions, we know that to multiply powers 
+  with the same	base $a>0$ we simply add their exponents. TFrom this we derive the 
+  following results about logarithms:
+}
+    \[
+    x+y= \log_a(a^x)+\log_a(a^y).
+    \]
+    \lang{de}{Andererseits gilt aber auch}\lang{en}{Similarly we have}
+    \[x+y= \log_a(a^{x+y})=\log_a(a^x\cdot a^y).
+    \]
+    \lang{de}{Indem wir diese beiden Gleichungen vergleichen, folgt}
+    \lang{en}{equating the above two equations yields}
+    \[
+    \log_a(a^x)+\log_a(a^y)=\log_a(a^x\cdot a^y).
+    \]
+    \lang{de}{Wir machen dasselbe Spiel mit $x-y= \log_a(a^x)-\log_a(a^y)$ und }
+    \lang{en}{We can do the same with $x-y= \log_a(a^x)-\log_a(a^y)$ and }
+    $
+    x-y=\log_a(a^{x-y})=\log_a\left(\frac{a^x}{a^y}\right)
+    $
+    \lang{de}{und erhalten}\lang{en}{to obtain}
+    \[
+    \log_a(a^x)-\log_a(a^y)=\log_a\left(\frac{a^x}{a^y}\right).
+    \]
+
+
+% \begin{align*}
+% 	\lg(10^3) &=& 3\\
+% 	\lg(10^5) &=& 5\\
+% 	\lg(10^3\cdot 10^5) = \lg(10^{3 + 5}) &=& 3+5 = \lg(10^3) + \lg(10^5)\\
+%  	\lg\left(\frac{10^3}{10^5}\right) = \lg\left(10^{3-5}\right) &=& 3-5 = \lg(10^3) - \lg(10^5)
+% \end{align*}
+
+\lang{de}{
+So, wie die \ref[link2][Exponentialfunktionen]{functional_eqn_exp} Addition in Multiplikation überführen,
+überführen umgekehrt Logarithmen Multiplikation in Addition. Das gilt natürlich ebenso für Division und Subtraktion.
+Denn Division ist lediglich die Multiplikation mit dem Kehrwert und Subtraktion die Addition des Negativen.
+\\\\
+Jetzt erinnern wir uns noch daran, dass beliebige positiven Zahlen $u$ und $v$ als 
+Potenzen $u=a^x$ and $v=a^y$ geschrieben werden können mit (sogar eindeutig bestimmten) 
+reellen Zahlen $x$ und $y$. Damit können wir unsere Beobachtungen von eben 
+zusammenfassen: 
+}
+\lang{en}{
+	Logarithms connect multiplication with addition by mapping the product of two 
+  arguments to the sum of their logarithms.
+	This is just the reverse of the relationship between addition and multiplication in 
+	\ref[link2][exponential functions]{functional_eqn_exp}, where the sum of the 
+  arguments becomes the product of the logarithms. 
+	The same relationship exists between division and subtraction.
+  \\\\
+  Now recall that given $a>0$, any positive numbers $u$ and $v$ can be written as 
+  powers $u=a^x$ and $v=a^y$ for some unique $x$ and $y$. Hence we can rephrase our 
+  identities from above: 
+}
+\\
+
+\begin{theorem}[\lang{de}{Multiplikationstheorem}
+                \lang{en}{Product theorem}]\label{functional_eqn_log}
+	\lang{de}{Für alle $u,v>0$ und alle Basen $a\neq 1$, $a>0$, gilt:}
+	\lang{en}{For $u,v>0$, we have:}\\
+    \begin{itemize}
+    \item[(a)]
+    $\log_a(u\cdot v)=\log_a(u)+\log_a(v)$,
+    \item[(b)]
+    $\log_a\left(\frac{u}{v}\right)=\log_a(u)-\log_a(v)$.
+    \end{itemize}
+% 	\begin{align*}
+% 		\lang{de}{
+% 		\text{a)}&\quad\ln(u \cdot v)&=& \ln(u) + \ln(v),\\
+% 		\text{b)}& \quad\;\ln\left(\frac{u}{v}\right)&=& \ln(u) - \ln(v), \quad \text{insbesondere gilt}\\
+% 			     & \quad\;\ln\left(\frac{1}{v}\right)&=& - \ln(v).\\
+% 		\text{c)}&\quad\lg(u \cdot v)&=& \lg(u) + \lg(v),\\
+% 		\text{d)}& \quad\;\lg\left(\frac{u}{v}\right)&=& \lg(u) - \lg(v), \quad \text{insbesondere gilt}\\
+% 			     & \quad\;\lg\left(\frac{1}{v}\right)&=& - \lg(v).}
+% 		\lang{en}{
+% 		\text{a)}&\quad\ln(u \cdot v)&=& \ln(u) + \ln(v),\\
+% 		\text{b)}& \quad\;\ln\left(\frac{u}{v}\right)&=& \ln(u) - \ln(v), \quad \text{and in particular}\\
+% 			     & \quad\;\ln\left(\frac{1}{v}\right)&=& - \ln(v).\\
+% 		\text{c)}&\quad\lg(u \cdot v)&=& \lg(u) + \lg(v),\\
+% 		\text{d)}& \quad\;\lg\left(\frac{u}{v}\right)&=& \lg(u) - \lg(v), \quad \text{and in particular}\\
+% 			     & \quad\;\lg\left(\frac{1}{v}\right)&=& - \lg(v).}
+% 	\end{align*}
+\lang{de}{\floatright{\href{https://www.hm-kompakt.de/video?watch=153}{\image[75]{00_Videobutton_schwarz}}}}
+\\	
+\end{theorem}
+
+% \begin{proof*}[\lang{de}{Beweis Multiplikationstheorem} \lang{en}{Proof Product Theorem}]
+% \begin{showhide}
+% \begin{tabs*}[\initialtab{0}\class{example}]
+% 		\tab{\lang{de}{Beweis a)}\lang{en}{Proof of a)}}
+% 		\begin{align*}
+% 			&\ln(u) &=& s \;\Leftrightarrow\; e^s = u& \\
+% 			\text{\lang{de}{und}\lang{en}{and}}\quad &&&&\\
+% 			&\ln(v) &=& t \;\Leftrightarrow\; e^t = v &\\
+% 			&&&& \\
+% 			&\ln(u \cdot v) &=& \ln (e^s \cdot e^t) &\\
+% 			&&=& \ln (e^{s + t}) = s+t& \\
+% 			&&&&\\
+% 			& &=& \ln(u) + \ln(v)  &
+% 		\end{align*}
+		
+% 		\tab{\lang{de}{Beweis b)}\lang{en}{Proof of b)}}
+% 		\begin{align*}
+% 			&\ln(u) &=& s \;\Leftrightarrow\; e^s = u& \\
+% 			\text{\lang{de}{und}\lang{en}{and}}\quad &&&& \\
+% 			&\ln(v) &=& t \;\Leftrightarrow\; e^t = v &\\
+% 			&&&& \\
+% 			&\ln\left(\frac{u}{v}\right) &=& \ln \left(\frac{e^s}{e^t}\right)& \\
+% 			&&=& \ln (e^{s - t}) = s-t& \\
+% 			&&&&\\
+% 			& &=& \ln(u) - \ln(v)  &
+% 		\end{align*}
+% 	\end{tabs*}
+%     \end{showhide}
+% \end{proof*}
+
+ 
+
+\begin{example}
+%  \textbf{\lang{de}{Multiplikationstheorem:}\lang{en}{Product Theorem}}\\
+%  \\
+\begin{tabs*}[\initialtab{1}\class{example}]
+\tab{\lang{de}{Beispiel a)}\lang{en}{Example a)}}
+\[
+\lg(20) + \lg(0\lang{de}{,}\lang{en}{.}5) = \lg (20\cdot 0\lang{de}{,}\lang{en}{.}5) = \lg(10)=1.
+\]
+\tab{\lang{de}{Beispiel b)}\lang{en}{Example b)}}
+\[
+\ln (2 e^5) = \ln 2 + \ln e^5 = \ln (2) + 5 
+\]
+\tab{\lang{de}{Beispiel c)}\lang{en}{Example c)}}\lang{de}{Für $-5<x<5$ gilt}\lang{en}{Given $-5<x<5$:}
+\begin{eqnarray*}
+	\lg (5-x) + \lg(5+x) 
+	& =& \lg\left((5-x)\cdot(5+x)\right)\\
+	& =& \lg(25-x^2).
+\end{eqnarray*}
+\tab{\lang{de}{Beispiel d)}\lang{en}{Example d)}}
+\lang{de}{Für $x>3$ gilt}\lang{en}{For $x>3$:}
+\begin{eqnarray*}
+	\ln (x^2 -6x +9) - \ln (x-3) 
+	&=& \ln\left( \frac{x^2 -6x +9}{x-3}\right)\\
+	&=&  \ln\left( \frac{(x-3)^2}{x-3}\right) \\
+	&=& \ln (x-3).
+\end{eqnarray*}
+
+ \end{tabs*}
+ \end{example}
+
+\lang{de}{
+Aus der \ref[link2][Potenzregel]{power_exp_fcn} $(a^x)^y=a^{x\cdot y}$ leiten wir die 
+zweite Rechenregel für Logarithmen ab:
+}
+\lang{en}{
+The rule for \ref[link2][taking powers of an exponential function]{power_exp_fcn} 
+$(a^x)^y=a^{x\cdot y}$ carries over into a rule for logarithms which connects taking 
+powers with multiplication.
+}
+
+\begin{theorem}[\lang{de}{Potenzregel}\lang{en}{Power Rules}]\label{thm:log-power_rule}
+	\lang{de}{
+  Für $u>0$ und alle reellen Zahlen $t$, sowie für alle Basen $a\neq 1$ ($a>0$) gilt
+  }
+	\lang{en}{
+  The following rules hold for $u>0$, any real number $t$ and for any natural number 
+  $n$:
+  }    
+    \[
+    \log_a (u^t)=t\cdot \log_a(u).
+    \]
+\end{theorem}
+\lang{de}{
+Diese Regel kann man insbesondere für $t=\frac{1}{n}$ für eine natürliche Zahl $n$ anwenden. Dann erhält man 
+}
+\lang{en}{
+In particular we can apply these rules to $t=\frac{1}{n}$ for a natural number $n$ to 
+get 
+}
+\[\log_a(\sqrt[n]{u})=\log_a(u^{\frac{1}{n}})=\frac{1}{n}\log_a(u).
+\]
+%     und alle natürlichen Zahlen $n$ gelten die Regeln:}
+
+% 	\begin{align*}
+% 		a)& \ln(u^t) &=& t\, \ln(u) \\
+% 		b)& \ln(\sqrt[n]{u}) &=& \frac{1}{n} \cdot \ln(u) \\
+% 		c)& \lg(u^t) &=& t\, \lg(u) \\
+% 		d)& \lg(\sqrt[n]{u}) &=& \frac{1}{n} \cdot \lg(u)
+% 	\end{align*}
+	
+	
+
+\begin{proof*}[\lang{de}{Beweis Potenzregel}\lang{en}{Proof of the power rule}]
+\lang{de}{
+Wir drücken $u$ aus durch $u=a^s$ mit passenden $s\in\R$ und benutzen $(a^{s})^t=a^{s\cdot t}$ sowie die Umkehreigenschaft \ref{bem:exp_ln}:
+}
+\lang{en}{
+We express $u$ as $u=a^s$ for some $s\in\R$ and use $(a^{s})^t=a^{s\cdot t}$ and 
+remark \ref{bem:exp_ln}:
+}
+\[
+\log_a(u^t)=\log_a((a^s)^t)=\log_a(a^{s\cdot t})=s\cdot t=t\cdot \log_a(u).
+\]
+\end{proof*}
+
+  \begin{example}
+\begin{tabs*}[\initialtab{1}\class{example}]
+\tab{\lang{de}{Beispiel a)}\lang{en}{Example a)}}
+ \begin{eqnarray*} 
+\lg \left( \frac{1}{1000^{3}}\right) &=& \lg (1000^{-3}) \\
+&=& -3 \lg (1000) \\
+&=& -3 \lg (10^3) \\
+&=& -3 \cdot 3 \\
+&=& -9
+\end{eqnarray*}
+\tab{\lang{de}{Beispiel b)}\lang{en}{Example b)}}
+ \[
+ \ln \left( \sqrt{e}^{\;5} \right) =\ln \left( e^{\frac{5}{2}} \right) 
+= \frac{5}{2}\ln (e)= \frac{5}{2}
+\]
+\end{tabs*}
+\end{example}
+ 
+ \begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{k}{2}{5}
+			\randint{m}{2}{5}
+			\randint{n}{2}{5}
+			\function[calculate]{k2}{k^2}
+			\function[calculate]{c}{2*n-m}
+		\end{variables}
+		
+			\text{\lang{de}{Vereinfachen Sie den Ausdruck }\lang{en}{Simplify the expression }
+      			$2\cdot \ln(\var{k}e^\var{n})-\ln(\var{k2}e^\var{m})=$\ansref.}
+		
+		\begin{answer}
+			\solution{c}
+		\end{answer}
+		\explanation{\lang{de}{Mit obigen Rechenregeln ist }
+                 \lang{en}{Using the rules from this section: }\\
+		\begin{align*}
+		2\cdot \ln(\var{k}e^\var{n})-\ln(\var{k2}e^\var{m}) 
+		&=2\cdot \big( \ln(\var{k})+\ln(e^\var{n})\big)-\ln (\var{k}^2)-\ln(e^\var{m}) \\
+		&=2\cdot \ln(\var{k}) + 2\cdot \var{n} - 2\cdot \ln(\var{k}) - \var{m}\\
+		&=2\cdot \var{n} -\var{m} = \var{c}
+		\end{align*}
+		}
+	\end{quickcheck}
+ 
+%\section{\lang{de}{Die Transformationsformel}\lang{en}{The Change of Base Formula}}
+\lang{de}{
+Logarithmen zu verschiedenen Basen können ineinander umgerechnet werden:
+}
+\lang{en}{
+The natural logarithm can be transformed into the logarithm with base $10$ and vice 
+versa by the following rule for the change of base:
+}
+ 
+\begin{theorem}[\lang{de}{Transformationsformel}
+                \lang{en}{Change of base}]\label{change-base}
+\lang{de}{
+Für alle $u>0$ und beliebige Basen $a$ und $b$ (ungleich $1$ und größer $0$) gilt 
+}
+\lang{en}{
+Given $u>0$ and some bases $a$ and $b$ (not equal to $1$ and larger than $0$), we have 
+}
+\[
+\log_a(u)=\frac{\log_b(u)}{\log_b(a)}.
+\]
+
+\lang{de}{
+Insbesondere ist kann jeder Logarithmus durch den natürlichen ausgedrückt werden,
+}
+\lang{en}{In particular:}
+\[
+\log_a(u)=\frac{\ln(u)}{\ln(a)}.
+\]
+\end{theorem}
+\begin{proof*}[\lang{de}{Beweis Transformationsformel}
+               \lang{en}{Proof of change of base formula}]
+\lang{de}{
+Nach der Potenzregel für Logarithmen \ref{thm:log-power_rule} ist 
+$\log_a(u)\cdot \log_b(a)=\log_b(a^{\log_a(u)})$. 
+Wegen \ref{bem:exp_ln} ist $a^{\log_a(u)}=u$. Also gilt
+}
+\lang{en}{
+By the power rule for logarithms \ref{thm:log-power_rule}, 
+$\log_a(u)\cdot \log_b(a)=\log_b(a^{\log_a(u)})$. 
+By remark \ref{bem:exp_ln}, $a^{\log_a(u)}=u$. Hence
+}
+\[
+\log_a(u)\cdot \log_b(a)=\log_b(u).
+\]
+\lang{de}{
+Diese Gleichung dürfen wir durch $\log_b(a)$ teilen (denn $a\neq 1$). Damit erhalten wir die Behauptung.
+}
+\lang{en}{
+This equation can be divided by $\log_b(a)$ on both sides (as $a\neq 1$) to complete 
+the proof.
+}
+% \begin{align*}
+% c) &\ln(10) &=& \frac{1}{\lg(e)}.
+% \end{align*}
+
+% \begin{tabs*}[\initialtab{0}\class{example}]
+% \tab{\lang{de}{Beweis a)}\lang{en}{Proof of a)}}
+%  \lang{de}{Multiplikation mit $\lg(e)$ ergibt die äquivalente Gleichung:}
+%  \lang{en}{Multiplication with $\lg(e)$ gives us the equivalent equation:} 
+
+%  \begin{eqnarray*}
+% \ln(u)\,\lg(e) &=& \lg(u),
+%  \end{eqnarray*}
+%  \lang{de}{die linke Seite ist nach der Potenzregel und Bemerkung \ref{logid}:}
+%  \lang{en}{By the power rules and remark \ref{logid} this is:}
+%  \begin{eqnarray*}
+%   \ln(u)\,\lg(e) &=& \lg(e^{\ln(u)})\\
+%    &=& \lg(u).
+%  \end{eqnarray*}
+
+%  \tab{\lang{de}{Beweis c)}\lang{en}{Proof of c)}}
+%  \lang{de}{Setze $u=10$ in Gleichung a).}
+%  \lang{en}{In equation a) set $u=10$.}
+
+% \end{tabs*}
+\end{proof*}
+ 
+\begin{example}
+ \begin{tabs*}[\initialtab{1}\class{example}] 
+ \tab{\lang{de}{Beispiel a)}\lang{en}{Example a)}}
+ 
+ \[
+\lg (\text{e}^x) =\frac{\ln(e^x)}{\ln(10)} = \frac{x}{\ln(10)}
+\]
+\tab{\lang{de}{Beispiel b)}\lang{en}{Example b)}}
+\lang{de}{Für $x>-2$ gilt}\lang{en}{For all $x>-2$:} 
+ 
+\begin{eqnarray*} 
+\ln (x+2) + \lg (x+2) &=& \ln(x+2) + \frac{\ln(x+2)}{\ln(10)}  \\
+&=& \ln(x+2) \left(1 + \frac{1}{\ln(10)}\right)
+\end{eqnarray*}
+\end{tabs*}
+ \end{example} 
+
+\begin{quickcheck}
+		\field{real}
+		\displayprecision{3}
+  		\correctorprecision{3}
+		\type{input.number}
+		\begin{variables}
+			\randint{k}{-3}{3}
+			\function[calculate]{b}{10^k}
+%			\function[calculate]{a}{2*n-m}
+		\end{variables}
+		
+			\text{\lang{de}{
+       Bestimmen Sie $a$ so, dass $\ln(\var{b})=\frac{a}{\lg(e)}$ gilt.\\ $a=$\ansref.
+       }
+       \lang{en}{
+       Determine $a$ such that $\ln(\var{b})=\frac{a}{\lg(e)}$.\\ $a=$\ansref.}
+       }
+		
+		\begin{answer}
+			\solution{k}
+		\end{answer}
+		\explanation{\lang{de}{Nach dem Transformationsgesetz ist}
+                 \lang{en}{By the change of base formula,} 
+                 $\ln(\var{b})=\frac{\lg(\var{b})}{\lg(e)}$. 
+                 \lang{de}{Also ist}\lang{en}{Thus} 
+                 $a= \lg(\var{b})=\lg(10^{\var{k}})=\var{k}$. }
+	\end{quickcheck}
+    
+    
+    
+    
+    
+
+\section{\lang{de}{Logarithmusfunktionen}\lang{en}{Logarithmic functions}}\label{sec:log_fkt}
+
+\lang{de}{
+Wir haben bereits gesehen, dass die Logarithmen $\log_a(x)$ für jede positive reelle Zahl $x$ wohldefiniert sind.
+Wir können also Logarithmusfunktionen definieren. 
+Wir benutzen hier anders als bisher die gewöhnliche Funktionsvariable $x$ statt $u$.
+Ebenso wissen wir, dass  jeder Wert $y\in\R$ als Logarithmus darstellbar ist, nämlich $y=\log_a(a^y)$.
+}
+\lang{en}{
+As per Definition \ref{ln}, the natural logarithm $\ln(x)$ of $x > 0$ is the number
+$s$ such that $e^s = x$. Since there is exactly one such number $s$, we can write 
+$s = \ln(x)$ as a function of the variable $x$. This leads us to the following definition:
+}
+
+\begin{definition}
+\lang{de}{
+Für jede Zahl $a>0$ ($a\neq 1$) heißt die Funktion  
+\[f:\R^{+}\to\R,\quad x\mapsto f(x)=\log_a(x)\]
+die \notion{Logarithmusfunktion} zur Basis $a$. \\
+Sie nimmt jeden Wert in $\R$ an.
+}
+\lang{en}{For any $a>0$ ($a\neq 1$) we call the function
+\[f:\R^{+}\to\R,\quad x\mapsto f(x)=\log_a(x)\]
+the \emph{logarithm function to base $a$}.
+\\\\
+This notation means that the domain of the natural logarithm $f$ is the set of positive 
+real  numbers, $D_f_{\ln} = R^{+} $, its codomain is the set of real numbers 
+$W_f_{\ln} = R$, and it maps each $x$ in the domain to $f(x) = \ln(x)\,$.
+}
+\end{definition}
+
+% \lang{de}{Entsprechendes gilt für den Zehnerlogarithmus:}
+% \lang{en}{Correspondingly we have for the logarithm with base $10$:}
+
+% \begin{definition}
+% \lang{de}{Die Funktion mit der Funktionsgleichung
+% \begin{center}
+% $f(x) = \lg(x)\, ,\quad x > 0,$
+% \end{center}
+% heißt \emph{Zehner-Logarithmusfunktion}.
+% Ihr Definitionsbereich ist die Menge der positiven reellen Zahlen, 
+% $D_f_{\lg} = \mathbb{R}^+ $, und die Wertemenge umfasst alle 
+% reellen  Zahlen, $W_f_{\lg} = \mathbb{R}$.}
+
+% \lang{en}{The function with the equation
+% \begin{center}
+% $f(x) = \lg(x)\, ,\quad x > 0,$
+% \end{center}
+% is called \emph{the logarithm} with base $10$.
+% The domain of the log function with base is $10$ is again the set of positive real  numbers,
+% $D_f_{\lg} = \mathbb{R}^+ $ and its range is all real numbers $W_f_{\lg} = \mathbb{R}$.}
+% \end{definition}
+
+\lang{de}{
+Die Graphen der natürlichen Logarithmusfunktion und der Zehner-Logarithmusfunktion 
+sehen so aus:
+}
+\lang{en}{
+The graphs of the natural logarithm and common logarithm functions look as follows:
+}
+
+\begin{center}
+\image{T104_Logarithms_A}
+\end{center}
+
+\lang{de}{
+Die Bemerkung \ref{bem:exp_ln} liefert uns wichtige Eigenschaften von 
+Logarithmusfunktionen: Die Logarithmusfunktion $x\mapsto \log_a(x)$ ist die 
+\emph{Umkehrfunktion} der Exponentialfunktion $x\mapsto a^x$.
+Dies ist die elegante Formulierung davon, dass wir alle Rechengesetzte für Logarithmen 
+aus denen der Exponentialfunktionen gefolgert haben. Jede Logarithmusfunktion hat eine 
+einzige Nullstelle, nämlich $x=1$.\\
+Die Funktionsgraphen sehen wie folgt aus:
+}
+\lang{en}{
+Remark \ref{bem:exp_ln} tells us that the natural logarithm function is the 
+\emph{inverse function} of the exponential function $f(x)=e^x$. The logarithm function 
+to base $10$ is the \emph{inverse function} of $f(x)=10^x$. This is the reason why the 
+rules for powers transferred to rules for logarithms so easily. \\
+The graphs of the functions are shown below, note the single root at $x=1$:
+}
+\begin{center}
+\image{T104_Logarithms_B}
+\end{center}
+\lang{de}{
+In der folgenden Tabelle fassen wir  wichtige Eigenschaften des natürlichen Logarithmus zusammen.
+Sie gelten genauso für jede Logarithmusfunktion $\log_a(x)$ mit Basis $a>1$. 
+Dies gilt wegen $\log_a(x)=\frac{\ln(x)}{\ln(a)}$ und $\ln(a)>0$ für $a>1$.
+}
+\lang{en}{
+In the following table we present some important properties of natural logarithms. 
+They also apply to every logarithm function $\log_a(x)$ with base $a>1$, because 
+$\log_a(x)=\frac{\ln(x)}{\ln(a)}$ and $\ln(a)>0$ for $a>1$.
+}
+\begin{table}
+  \head
+  $f(x) = \ln (x)$ & $ $ 
+  \body
+  $D_f = \mathbb{R}^+$ & 
+    \lang{de}{Definitionsbereich ist die Menge der positiven Zahlen.}
+    \lang{en}{The domain is the set of all positive numbers.} \\
+  $W_f = \mathbb{R}$ & 
+    \lang{de}{Wertemenge ist die Menge der reellen Zahlen.}
+    \lang{en}{The range is the set of all real numbers.}  \\
+  $f(1) = 0$& 
+    $x=1$ \lang{de}{ist die einzige Nullstelle.}
+          \lang{en}{is the only zero.}\\
+  $f(x_1) < f(x_2)\,$ \lang{de}{für}\lang{en}{for} $x_1 < x_2$& 
+    \lang{de}{Die Funktion ist streng monoton wachsend.}
+    \lang{en}{The functions are strictly monotonically increasing.}\\
+  \lang{de}{Die Steigung von $f$ nimmt ständig ab.}
+  \lang{en}{The slope is decreasing.} & 
+    \lang{de}{Rechtskurve}
+    \lang{en}{The graph is concave down.} \\
+  \lang{de}{für $ x \rightarrow 0$ gilt $\;f(x) \rightarrow -\infty$}
+  \lang{en}{$\;f(x) \rightarrow -\infty$ as $ x \rightarrow 0$} & 
+    \lang{de}{y-Achse ist Asymptote.}
+    \lang{en}{The y-axis is an asymptote.}
+\end{table}
+
+\begin{example}[\lang{de}{Wertetabellen (gerundet)}
+                \lang{en}{Table of values - with rounded values}]
+\begin{tabs*}[\initialtab{0}\class{example}]
+ 
+\tab{$ \ln $}
+ \begin{center}
+  \lang{de}{
+   \begin{table}
+  \body[\cellaligns{cccccccc}]
+ $x$& $\frac{1}{8}$ & $\frac{1}{4}$ & $\frac{1}{2}$ & $1$ & $2$ & $3$ & $4$\\
+  $\;\ln (x)\;$ & $\;-2,1\;$ & $\;-1,4\;$ & $\;-0,7\;$ & $\;0\;$ & $\;0,7\;$ & $\;1,1\;$ & $\;1,4\;$ \\
+  \end{table}
+  }
+  \lang{en}{
+   \begin{table}
+  \body[\cellaligns{cccccccc}]
+ $x$& $\frac{1}{8}$ & $\frac{1}{4}$ & $\frac{1}{2}$ & $1$ & $2$ & $3$ & $4$\\
+  $\;\ln (x)\;$ & $\;-2.1\;$ & $\;-1.4\;$ & $\;-0.7\;$ & $\;0\;$ & $\;0.7\;$ & $\;1.1\;$ & $\;1.4\;$ \\
+  \end{table}
+  }
+\end{center}
+\tab{$ \lg$ }
+ \begin{center}
+  \lang{de}{
+   \begin{table}
+  \body[\cellaligns{cccccccc}]
+ $x$& $\frac{1}{8}$ & $\frac{1}{4}$ & $\frac{1}{2}$ & $1$ & $2$ & $3$ & $4$\\
+ $\;\lg (x)\;$ & $\;-0,9\;$ & $\;-0,6\;$& $\;-0,3\;$ & $\;0\;$ & $\;0,3\;$ & $\;0,48\;$ & $\;0,6\;$
+   \end{table}
+  }
+  \lang{en}{
+   \begin{table}
+  \body[\cellaligns{cccccccc}]
+ $x$& $\frac{1}{8}$ & $\frac{1}{4}$ & $\frac{1}{2}$ & $1$ & $2$ & $3$ & $4$\\
+ $\;\lg (x)\;$ & $\;-0.9\;$ & $\;-0.6\;$& $\;-0.3\;$ & $\;0\;$ & $\;0.3\;$ & $\;0.48\;$ & $\;0.6\;$
+   \end{table}
+  }
+\end{center}
+\end{tabs*}
+\end{example}
+\lang{de}{
+Die Graphen von Logarithmusfunktionen $\log_a(x)$ zu Basen $0<a<1$ entstehen aus solchen zu Basen 
+$>1$ durch Spiegelung an der $x$-Achse.
+Wegen \ref{functional_eqn_log} gilt nämlich $\ln(a)=-\ln(\frac{1}{a})$, und somit folgt
+}
+\lang{en}{
+The graph of a logarithm function $\log_a(x)$ to a base $0<a<1$ is like for a base $a>1$, 
+but reflected in the $x$ axis. This is thanks to theorem \ref{functional_eqn_log}, by which 
+$\ln(a)=-\ln(\frac{1}{a})$ and hence
+}
+\[
+\log_a(x)=\frac{\ln(x)}{\ln(a)}=\frac{\ln(x)}{-\ln(\frac{1}{a})}=-\log_{\frac{1}{a}}(x).
+\]
+\begin{center}
+\image{T104_Logarithms_C}
+\end{center}
+\lang{de}{
+Zum Abschluss fassen wir die korrespondierenden Regeln für Exponentialfunktionen und Logarithmusfunktionen zusammen:
+}
+\lang{en}{
+To summarize, we present the rules for exponential functions alongside the corresponding rules 
+for logarithmic functions:
+}
+\begin{rule}[\lang{de}{Zusammenfassung}\lang{en}{Summary}]
+\begin{table}
+  \head
+  \lang{de}{Eigenschaft}\lang{en}{Property} & 
+    \lang{de}{Für}\lang{en}{For} $x,y\in\R$ & 
+      \lang{de}{Für}\lang{en}{For} $u,v>0$
+  \body
+  $\:\mathbb{R}$ & 
+    \lang{de}{Definitionsbereich von $e^x$}\lang{en}{Domain of $e^x$} &  
+      \lang{de}{Wertebereich von $\ln(u)$}\lang{en}{Image of $ln(u)$}\\
+  $\:\R_{>0} $ 
+    & \lang{de}{Wertebereich von $e^x$}\lang{en}{Image of $e^x$} & 
+      \lang{de}{Definitionsbereich von $\ln(u)$}\lang{en}{Domain of $\ln{u}$}\\
+  \lang{de}{Umkehrfunktionen}\lang{en}{Inverse function} & 
+    $\:\ln(e^x)=x$ & 
+      $\:e^{\ln(u)}=u$\\
+  \lang{de}{spezielle Werte}\lang{en}{Special values} & 
+    $\:e^0=1$ & 
+      $\:\ln(1)=0$\\
+  \lang{de}{Multiplikation/Addition}\lang{en}{Multiplication/addition} & 
+    $\:e^x\cdot e^y=e^{x+y}\quad$ & 
+      $\:\ln(u)+\ln(v)=\ln(u\cdot v)$\\
+  \lang{de}{Kehrwert/Negatives}\lang{en}{Reciprical/negatives} & 
+    $\:e^{-x}=\frac{1}{e^x}$ & 
+      $\:-\ln(u)=\ln(\frac{1}{u})$\\
+  \lang{de}{Potenzen}\lang{en}{Powers} & 
+    $\:(e^x)^y=e^{x\cdot y}$ & 
+      $\:\ln(u^t)=t\cdot \ln(u)\:$ für $t\in\R$\\
+  \lang{de}{Transformation für $a>0$}\lang{en}{Change to natural base $a>0$}, $a\neq 1$ & 
+    $\:a^x=e^{x\ln(a)}$ & 
+      $\:\log_a(u)=\frac{\ln(u)}{\ln(a)}$
+  \end{table}
+\end{rule}
+
+\section{\lang{de}{Exponential- und Logarithmusgleichungen}
+         \lang{en}{Exponential and logarithmic equations}}\label{sec:exp_log_equation}
+\anchor{uniqueness}{}
+
+ \lang{de}{
+ Die Definition der Potenzen und Logarithmen bzw. der zugehörigen Funktionen liefert direkt einen 
+ Weg, um Gleichungen mit Potenzen bzw. Logarithmen zu lösen. Sowohl die Exponentialfunktionen als 
+ auch die Logarithmusfunktionen sind streng monoton wachsend oder fallend. Daher gelten für alle 
+ $a>0,\; a\ne 1$ die wichtigen Äquivalenzen
+ }
+ \lang{en}{
+ The definition of powers and logarithms and their respective functions give us a direct way to 
+ solve equations involving powers and logarithms. Both exponential functions and logarithmic 
+ functions are strictly monotonically increasing or decreasing. From this we get some important 
+ equivalencies: for all $a>0,\; a\ne 1$,
+ }
+ 
+ \begin{align*}
+	a^{x_1} &=& a^{x_2} \qquad&\Leftrightarrow&\qquad x_1=x_2 \quad\text{\lang{de}{für}\lang{en}{for}}\; x_1,x_2\in\R,\\
+	\log_a(x_1)&=&\log_a(x_2) \qquad&\Leftrightarrow&\qquad x_1=x_2 \quad\text{\lang{de}{für}\lang{en}{for}}\; x_1,x_2 >0.
+ \end{align*}
+  
+\lang{de}{
+Die Rechenregeln für Logarithmen und  Potenzen helfen, Potenz- und Logarithmusgleichungen 
+umzuformen, um die Gleichungen zu vereinfachen und zu lösen:\\
+}
+\lang{en}{
+The rules for calculating with logarithms and powers help us to transform, simplify and solve 
+exponential and logarithmic equations.\\
+}
+ 
+\begin{rule}[\lang{de}{Lösen von Potenzgleichungen}\lang{en}{Solving exponential equations}]\label{rule:potenz_glg}
+	\lang{de}{Für $u > 0$ und jede Basis $a>0$, $a\neq 1$, gilt:}
+	\lang{en}{For $a,u > 0,\; a\neq 1$, we can rearrange an exponential equation as follows:}
+    \[
+    a^x=u \:\Leftrightarrow\: \ln(a^x)=\ln(u) \:\Leftrightarrow\: x\ln(a)=\ln(u) 
+    \:\Leftrightarrow\: x = \frac{\ln(u)}{\ln(a)}.
+    \]
+    \lang{de}{
+    Statt des natürlichen Logarithmus zur Basis $e$ kann hier auch jede andere Basis $b$ benutzt 
+    werden (\lref{change-base}{Transformationsformel}!).
+    }
+    \lang{en}{
+    Instead of the natural logarithm (base $e$), the above holds for any other base $b$ 
+    (\lref{change-base}{change of base}!). 
+    }
+% 	\begin{eqnarray*}
+% 		\text{a)}\quad &&a^x = u \qquad | \qquad \ln\\
+% 		&\Leftrightarrow& \ln (a^x) = \ln(u)\\
+% 		&\Leftrightarrow& x\ln(a) = \ln(u)\\
+% 		&\Leftrightarrow& x = \frac{\ln(u)}{\ln(a)} \,,\\
+% 		\text{b)}\quad &&a^x = u \qquad | \qquad \lg\\
+% 		&\Leftrightarrow& \lg (a^x) = \lg(u)\\
+% 		&\Leftrightarrow& x\lg(a) = \lg(u)\\
+% 		&\Leftrightarrow& x = \frac{\lg(u)}{\lg(a)} \,.
+% 	\end{eqnarray*}
+\end{rule}
+% \lang{en}{The equality $\;\frac{\ln(u)}{\ln(a)}= \frac{\lg(u)}{\lg(a)}\;$ 
+% also follows from the \lref{change-base}{change of base rule}.}
+% \lang{de}{Die Gleichung $\;\frac{\ln(u)}{\ln(a)}= \frac{\lg(u)}{\lg(a)}\;$ 
+% folgt auch aus dem \lref{change-base}{Transformationsformel}.}
+\begin{rule}[\lang{de}{Lösen von Logarithmusgleichungen}\lang{en}{Logarithmic equations}]\label{rule:log_glg}
+ \lang{de}{
+ Für $x > 0$, $r\in\R$, und jede Basis $a>0$, $a\neq 1$, gilt:
+ }
+ \lang{en}{
+ For $a,x > 0$, $a\neq 1$ and $r\in\R$, we can rearrange a logarithmic equation as follows:
+ }
+ \[
+ \log_a(x)=r \:\Leftrightarrow\: a^{\log_a(x)}=a^r \:\Leftrightarrow\: x=a^r.
+ \]
+%  \begin{align*}
+%  \text{a)}&&&\ln (x) = u \qquad | \qquad  e^{(\cdot)}\\
+%  &&\Leftrightarrow& e^{\ln(x)}= e^u\\
+%  &&\Leftrightarrow& x = e^u .\\
+%  \text{b)}&&&\lg (x) = u \qquad | \qquad  10^{(\cdot)}\\
+%  &&\Leftrightarrow& 10^{\lg (x)}= 10^u\\
+%  &&\Leftrightarrow& x = 10^u .
+% \end{align*}
+\end{rule}
+\lang{de}{
+Auch Logarithmusgleichungen kann man mit Hilfe beliebiger Basen lösen, z.B. mit $e$:
+}
+\lang{en}{
+Logarithmic equations can also be solved in different bases, for instance to base $e$:
+}
+\[
+\log_a(x)=r\:\Leftrightarrow \:x=a^r=(e^{\ln(a)})^r=e^{r\cdot\ln(a)}.
+\]
+
+\begin{example}[\lang{de}{Exponentialgleichungen:}\lang{en}{Exponential Equations}]\label{rule:exp_glg}
+ \begin{tabs*}[\initialtab{1}\class{example}] 
+ \tab{\lang{de}{Beispiel a)}\lang{en}{Example a)}}
+ \begin{eqnarray*}
+ e^{2x + 3} = 4 &\Leftrightarrow& \ln ( e^{2x + 3}) = \ln 4 \\
+ &\Leftrightarrow& 2x + 3 = \ln 4 \\
+  &\Leftrightarrow& x = \frac{1}{2} (\ln(4) -3 ).
+ \end{eqnarray*}
+ \tab{\lang{de}{Beispiel b)}
+ \lang{en}{Example b)}}
+ \lang{de}{Für Parameter $b>0$, $b\neq 1$ und $a$:}
+ \lang{en}{For $b>0,\;b\neq 1$:}
+ \begin{eqnarray*}
+ \sqrt[4]{b^{x-a}} = \sqrt[5]{b^{x+a}} &\Leftrightarrow& b^{\frac{x - a}{4}} = b^{\frac{x + a}{5}}\\
+ &\Leftrightarrow& \ln (b^{\frac{x - a}{4}}) = \ln (b^{\frac{x + a}{5}})\\
+  &\Leftrightarrow& \frac{x - a}{4} \cdot\ln(b) = \frac{x + a}{5}\cdot\ln(b)\\
+  &\Leftrightarrow& 5 (x - a) = 4 (x + a)\\
+  &\Leftrightarrow& 5x -5a = 4x + 4a \\
+  &\Leftrightarrow& x = 9a\,.
+ \end{eqnarray*}
+ \lang{de}{Die Lösung ist also unabhängig von $b$.}
+ \lang{en}{The solution is in fact independent from $b$.}
+  \tab{\lang{de}{Beispiel c)}\lang{en}{Example c)}}
+ \begin{eqnarray*}
+ \left( 2^{3 - x} \right)^{2-x} = 1  &\Leftrightarrow& 2^{(3-x)(2-x)} = 1 \\
+ &\Leftrightarrow& \ln \left(2^{(3-x)(2-x)}\right) = \ln (1) \\
+ &\Leftrightarrow& (3-x)(2-x)\ln(2)=0 \\
+ &\Leftrightarrow& x = 3\;\;\; \text{\lang{de}{oder}\lang{en}{or}} \;\;\; x = 2.
+ \end{eqnarray*}
+ \end{tabs*}
+\end{example}
+
+\begin{example}[\lang{de}{Logarithmusgleichungen}\lang{en}{Logarithmic Equations}]
+ 	\begin{tabs*}[\initialtab{1}\class{example}] 
+ 	\tab{\lang{de}{Beispiel a)}\lang{en}{Example a)}}
+	 	\lang{de}{Für $x>-2$ gilt:}\lang{en}{For $x>-2$:} 
+	 	\begin{eqnarray*}
+	 	\ln \frac{1}{2+x} = 0 &\Leftrightarrow& \text{e}^{ \ln \frac{1}{2+x}} = \text{e}^0 \\
+	 								    &\Leftrightarrow& \frac{1}{2+x} = 1 \\
+	 									&\Leftrightarrow& 2 + x = 1 \\ 
+	 									&\Leftrightarrow& x = -1.
+	 	\end{eqnarray*}
+	 	
+ 	\tab{\lang{de}{Beispiel b)}\lang{en}{Example b)}}
+ 		\lang{de}{Für $x>0$ gilt:}\lang{en}{For $x>0$:} 
+		\begin{eqnarray*}
+			\lg (x^3) + 2 \lg (x^2) = 21  
+			&\Leftrightarrow& \lg (x^3) +  \lg \left((x^2)^2\right) = 21\\
+			&\Leftrightarrow& \lg (x^3\cdot x^4) = 21\\
+			&\Leftrightarrow& \lg (x^7) = 21\\
+			&\Leftrightarrow& 10^{ \lg (x^7)} = 10^{21}\\ 
+			&\Leftrightarrow& x^7 = 10^{21}\\
+			&\Leftrightarrow& \sqrt[7]{x^7} = \sqrt[7]{10^{21}}\\
+			&\Leftrightarrow& x = 10^{\frac{21}{7}}\\
+			&\Leftrightarrow& x = 10^{3} .
+		\end{eqnarray*}
+		
+	\tab{\lang{de}{Beispiel c)}\lang{en}{Example c)}}
+	  	\lang{de}{Für $x>0$ gilt:}\lang{en}{For $x>0$:} 
+	 	\begin{eqnarray*}
+	 		5^{\lg x} = 2 \cdot 3^{\lg x} &\Leftrightarrow& \frac{ 5^{\lg x}}{3^{\lg x}} = 2 \\
+	  		&\Leftrightarrow& \left(\frac{5}{3} \right)^{\lg x} = 2 \\
+	  		&\Leftrightarrow&  \ln \left(\left(\frac{5}{3} \right)^{\lg x}\right) = \ln 2\\
+	   		&\Leftrightarrow& \lg x \cdot \ln \left(\frac{5}{3} \right) = \ln 2\\
+	    	&\Leftrightarrow& \lg x =  \frac{\ln 2}{\ln \left(\frac{5}{3} \right)}\\
+	     	&\Leftrightarrow& \lg x =  \frac{\ln 2}{\left( \ln 5 - \ln 3 \right)}\\
+	    	&\Leftrightarrow& 10^{\lg x} =  10^{\frac{\ln 2}{ \ln 5 - \ln 3}}\\
+	    	&\Leftrightarrow& x = 10^{\frac{\ln 2}{\ln 5 - \ln 3}}\,.
+	 \end{eqnarray*}
+ 	\end{tabs*}
+\end{example}
+
+
+\begin{quickcheck}
+		\field{real}
+		\displayprecision{2}
+ 		\correctorprecision{2}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{c}{-2}{4}
+			\randint[Z]{k}{-3}{3}
+		    \function[normalize]{f}{x-k}
+			\function[calculate]{ls}{k+10^c}
+		\end{variables}
+
+			\text{\lang{de}{
+      Bestimmen Sie die Lösung der Gleichung $\lg(\var{f})=\var{c}$.\\ Die Lösung ist \ansref.
+      }
+      \lang{en}{
+      The solution of the equation $\lg(\var{f})=\var{c}$ is\\ \ansref.
+      }}
+
+		\begin{answer}
+			\solution{ls}
+		\end{answer}
+		\explanation{\lang{de}{Umformen ergibt:}\lang{en}{Rearranging the equation gives:}
+		\begin{align*}
+			& \lg(\var{f}) &=\var{c} &\quad &\\
+			\Leftrightarrow & \var{f} & =10^\var{c}  &\quad & 
+      (\text{\lang{de}{und }\lang{en}{and }}\var{f}>0) \\
+			\Leftrightarrow & x & =\var{k}+ 10^\var{c}= \var{ls}.&&
+		\end{align*} }
+	\end{quickcheck}
+
+% 	\begin{genericGWTVisualization}[550][1000]{mathlet1}
+% 		\begin{variables}
+% 			\randint{randomA}{1}{2}
+% 			
+% 			\point[editable]{P}{rational}{var(randomA),var(randomA)}
+% 		\end{variables}
+% 		\color{P}{BLUE}
+% 		\label{P}{$\textcolor{BLUE}{P}$}
+% 
+% 		\begin{canvas}
+% 			\plotSize{300}
+% 			\plotLeft{-3}
+% 			\plotRight{3}
+% 			\plot[coordinateSystem]{P}
+% 		\end{canvas}
+% 		\text{Der Punkt hat die Koordinaten $(\var{P}[x],\var{P}[y])$.}
+% 	    	\end{genericGWTVisualization}
+
+\end{visualizationwrapper}
+
+\end{content}

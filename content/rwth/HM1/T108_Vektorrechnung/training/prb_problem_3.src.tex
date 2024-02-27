@@ -1,0 +1,97 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A03: Vektorrechnung}
+    \lang{en}{mc unique}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A03: Vektorrechnung}}
+\lang{en}{\title{Problem 3}}
+
+\begin{block}[annotation]
+	Rechnen mit Vektoren 
+\end{block}
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9508}{Ticket 9508}
+\end{block}
+
+\begin{problem}
+%Frage 1 von 1
+	\begin{question} 
+	    \lang{de}{ 
+	    	\text{Berechnen Sie die Komponenten des Vektors
+	      	$\var{lv}\cdot\begin{pmatrix} \var{vx} \\\var{vy} \\ \var{vz}\end{pmatrix} 
+	      	- \var{lw}\cdot\begin{pmatrix} \var{wx} \\\var{wy} \\ \var{wz}\end{pmatrix}
+	      	+ \var{lu}\cdot\begin{pmatrix} \var{ux} \\\var{uy} \\ \var{uz}\end{pmatrix}$.
+	      	}
+	    	\explanation{Addition und skalare Multiplikation lassen sich komponentenweise ausrechnen.}
+	    }
+	    \lang{en}{
+	      	\text{Calculate the components of the vector
+	      	$\var{lv}\cdot\begin{pmatrix} \var{vx} \\\var{vy} \\ \var{vz}\end{pmatrix} 
+	      	- \var{lw}\cdot\begin{pmatrix} \var{wx} \\\var{wy} \\ \var{wz}\end{pmatrix}
+	      	+ \var{lu}\cdot\begin{pmatrix} \var{ux} \\\var{uy} \\ \var{uz}\end{pmatrix}$.
+	      	}
+	      	\explanation{Addition and scalar multiplication of vectors can be performed component wise.}
+	    }
+		\type{input.number}
+        \field{integer}
+	    \begin{variables}
+	    	\randint[Z]{lv}{-5}{5}
+	    	\randint[Z]{lw}{1}{8}
+	    	\randint[Z]{lu}{1}{8}
+	    		
+			\randint{vx}{-5}{5}
+			\randint{vy}{-5}{5}
+			\randint{vz}{-5}{5}
+			\randint{wx}{-5}{5}
+			\randint{wy}{-5}{5}
+			\randint{wz}{-5}{5}
+			\randint{ux}{-5}{5}
+			\randint{uy}{-5}{5}
+			\randint{uz}{-5}{5}
+			
+			\function[calculate]{x_result}{lv*vx-lw*wx+lu*ux}
+			\function[calculate]{y_result}{lv*vy-lw*wy+lu*uy}
+			\function[calculate]{z_result}{lv*vz-lw*wz+lu*uz}
+		\end{variables}
+
+    	\begin{answer}
+    		\lang{de}{\text{$x$-Komponente: }}
+    		\lang{en}{\text{$x$-component: }}
+    		\solution{x_result}
+    	\end{answer}
+    	\begin{answer}
+    		\lang{de}{\text{$y$-Komponente: }}
+    		\lang{en}{\text{$y$-component: }}
+    		\solution{y_result}
+    	\end{answer}
+    	\begin{answer}
+    		\lang{de}{\text{$z$-Komponente: }}
+    		\lang{en}{\text{$z$-component: }}
+    		\solution{z_result}
+    	\end{answer}
+	\end{question}
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

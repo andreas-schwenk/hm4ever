@@ -1,0 +1,119 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{P10: Determinant and inverse matrix}
+    \lang{de}{A10: Determinante, Inverse Matrix}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{Bestimmung von Determinante und Inverser eine komplexwertigen $(2\times 2)$-Matrix.}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21824}{Ticket 21824}
+\end{block}
+\usepackage{mumie.genericproblem}
+
+
+
+\lang{de}{\title{A10: Determinante, Inverse Matrix}}
+\lang{en}{\title{P10: Determinant and inverse matrix}}
+
+
+\begin{problem}
+	%\randomquestionpool{}{}
+	
+		
+\begin{variables}
+
+    % Einträge der (2x2)-Matrix:
+    \randint[Z]{a1}{-2}{2}
+    \randint[Z]{a2}{-2}{2}
+    \randint[Z]{b1}{-2}{2}
+    \randint[Z]{b2}{0}{3}
+    \randint[Z]{c2}{0}{2}
+
+    %Matrix A
+    \matrix[calculate]{A}{a1+i*a2&b1-i*b2\\-b1-i*c2&a1-i*a2}
+    % Determinante von A
+    \function[calculate]{det}{a1^2+a2^2+b1^2+b2*c2+i*b1*(c2-b2)}
+    %Inverses der Determinante von A
+    \function[calculate]{dinv}{(a1^2+a2^2+b1^2+b2*c2-i*b1*(c2-b2))/((a1^2+a2^2+b1^2+b2*c2)^2+(b1*(c2-b2))^2)}
+    % Inverse von A
+    \matrix[calculate]{B}{(a1-i*a2)/det&(-b1+i*b2)/det\\(b1+i*c2)/det&(a1+i*a2)/det}
+
+\end{variables}
+
+\begin{question}		
+		\type{input.function}
+        \field{complex-rational}
+		\correctorprecision{3}
+		\displayprecision{3}
+		\lang{de}{
+	    \text{Berechnen Sie die Determinante und die inverse Matrix der Matrix $A=\var{A}\in\C$. 
+        Geben Sie komplexen Zahlen in der Form $a+b \cdot i$ mit gekürzten Brüchen $a,b$ an.
+        \\
+        $\det(A)=$\ansref, also ist $\frac{1}{\det(A)}=$\ansref und
+        \\
+        $A^{-1}=$\ansref.}}
+    \lang{en}{
+	    \text{Calculate the determinant and the inverse matrix of the matrix $A=\var{A}\in\C$. 
+        Write the complex numbers as $a+b \cdot i$ with reduced fractions $a,b$.
+        \\
+        $\det(A)=$\ansref, therefore it is $\frac{1}{\det(A)}=$\ansref and
+        \\
+        $A^{-1}=$\ansref.}}
+
+        \lang{de}{
+        \begin{answer}
+         \type{input.number}
+         \solution{det}
+         \explanation{Benutzen Sie eine bekannte Formel für die Determinante einer $(2\times 2)$-Matrix.}
+         \end{answer}
+         \begin{answer}
+         \type{input.number}
+         \solution{dinv}
+         \explanation{Erinnern Sie sich an die Formel $z^{-1}=\frac{\bar{z}}{z\cdot \bar{z}}$ für $z\neq 0$.}
+         \end{answer}
+	    \begin{answer}
+            \type{input.matrix}
+            \format{2}{2}
+            \solution{B}
+            \explanation{Auch für die Inverse einer $(2\times 2)$-Matrix gibt es eine bekannte Formel, 
+            die Sie benutzen können.}
+         \end{answer}}
+
+         \lang{en}{
+        \begin{answer}
+         \type{input.number}
+         \solution{det}
+         \explanation{Use one of the formulas you know to calculate the determinant of a $(2\times 2)$-matrix.}
+         \end{answer}
+         \begin{answer}
+         \type{input.number}
+         \solution{dinv}
+         \explanation{Recap the formula $z^{-1}=\frac{\bar{z}}{z\cdot \bar{z}}$ for $z\neq 0$.}
+         \end{answer}
+	    \begin{answer}
+            \type{input.matrix}
+            \format{2}{2}
+            \solution{B}
+            \explanation{There is also a familiar formular for the inverse matrix of a $(2\times 2)$-matrix.}
+         \end{answer}}
+          
+\end{question}
+\end{problem}
+\embedmathlet{gwtmathlet}
+\end{content}

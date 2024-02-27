@@ -1,0 +1,381 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A02: Kettenregel}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A02: Kettenregel}}
+\lang{en}{\title{A02: Chain rule}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24015}{Ticket 24015}
+\end{block}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+
+
+\begin{block}[annotation]
+Kopie: hm4mint/T106_Differentialrechnung/training 5
+
+Im Ticket-System: \href{http://team.mumie.net/issues/9470}{Ticket 9470}      
+\end{block}
+
+\begin{problem}	
+
+\randomquestionpool{1}{2}
+\randomquestionpool{3}{5}
+\randomquestionpool{6}{8}
+%begin-cosh
+%Frage 1 von 8
+\begin{question}
+	\lang{de}{
+		\text{Verwenden Sie die Kettenregel, um die Ableitung der Funktion\\
+		$h(x) = f\circ g (x) = f(g(x)) = \var{h} ,\quad x \in\R$ zu bestimmen.}
+	}
+	\lang{en}{
+		\text{Use the chain rule to find the derivative of the function \\
+		$h(x) = f\circ g(x) = f(g(x)) = \var{h} , \quad x \in\R$.}
+	}
+ 	\begin{variables}
+ 	    \randint{n}{2}{9}
+ 	    \randint{l}{1}{9}
+ 	    \function[calculate]{p}{2*n}
+  		\function{f}{cos(y)}
+ 		\function{g}{n*x^2+l}
+ 		\function{h}{cos(n*x^2+l)}
+ 	   	\function{df}{-sin(y)}
+   		\function{dg}{p*x}
+    	\function{Dfg}{-p*x*sin(n*x^2+l)}
+    	\function{dfg}{-sin(n*x^2+l)}
+ 	\end{variables}
+	\type{input.function}
+ 	\field{real}
+ 	\begin{answer}
+      	\lang{de}{\text{Äußere Funktion: $f(y) = $}}
+      	\lang{en}{\text{Outer function: $f(y) = $}}
+ 		\solution{f}
+ 		\inputAsFunction{y}{f_s0}
+ 	\end{answer}
+ 	\begin{answer}
+      	\lang{de}{\text{Innere Funktion: $g(x) = $}}
+      	\lang{en}{\text{Inner function: $g(x) = $}}
+ 		\solution{g}
+ 		\inputAsFunction{x}{g_s0}
+ 		\checkFuncForZero{f_s0[g_s0] - h}{-10}{10}{100}
+		\score{0.2}
+ 	\end{answer}
+ 	\begin{answer}
+      	\lang{de}{\text{Äußere Ableitung: $f\prime(y) = $}}
+      	\lang{en}{\text{Outer derivative: $f\prime(y) = $}}
+ 		\solution{df}
+ 		\inputAsFunction{y}{f_s1}
+ 		\checkFuncForZero{f_s1 - D[f_s0]}{-10}{10}{100}
+ 		\score{0.2}
+ 	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{Einsetzen: $\quad f\prime(g(x)) = $}}
+      	\lang{en}{\text{Substitute: $\quad f\prime(g(x)) = $}}
+ 		\solution{dfg}
+ 		\inputAsFunction{x}{f_s2}
+ 		\checkFuncForZero{f_s2 - f_s1[g_s0]}{-10}{10}{100}
+ 		\score{0.2}
+ 	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{Innere Ableitung: $g\prime(x) = $}}
+      	\lang{en}{\text{Inner derivative: $g\prime(x) = $}}
+ 		\solution{dg}
+ 		\inputAsFunction{x}{g_s1}
+ 		\checkFuncForZero{g_s1 - D[g_s0]}{-10}{10}{100}
+ 		\score{0.2}
+ 	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{Ableitung der Komposition: $(f \circ g)\prime(x) = $}}
+      	\lang{en}{\text{Derivative of the composition: $(f\circ g)\prime(x) = $}}
+ 		\solution{Dfg}
+ 		\checkAsFunction{x}{-1}{1}{100}
+ 		\score{0.2}
+ 	\end{answer}
+\end{question}
+                 	
+%Frage 2 von 8
+\begin{question}
+	\lang{de}{
+		\text{Verwenden Sie die Kettenregel, um die Ableitung der Funktion\\
+		$h(x) = f\circ g (x) = f(g(x)) = \var{h} ,\quad x \in\R$ zu bestimmen.}
+	}
+	\lang{en}{
+		\text{Use the chain rule to find the derivative of the function \\
+		$h(x) = f\circ g(x) = f(g(x)) = \var{h} , \quad \in\R$.}
+	}
+ 	\begin{variables}
+ 	\randint{n}{2}{6}
+ 	    \randint{l}{1}{9}
+ 	    \function[calculate]{p}{4*n}
+  		\function{f}{ln(y)}
+ 		\function{g}{n*x^4+l}
+ 		\function{h}{ln(n*x^4+l)}
+ 	   	\function{df}{1/y}
+   		\function{dg}{p*x^3}
+    	\function{Dfg}{p*x^3/(n*x^4+l)}
+    	\function{dfg}{1/(n*x^4+l)}
+ 	\end{variables}
+	\type{input.function}
+ 	\field{real}
+ 	\begin{answer}
+      	\lang{de}{\text{Äußere Funktion: $f(y) = $}}
+      	\lang{en}{\text{Outer function: $f(y) = $}}
+ 		\solution{f}
+ 		\inputAsFunction{y}{f_s0}
+ 	\end{answer}
+ 	\begin{answer}
+      	\lang{de}{\text{Innere Funktion: $g(x) = $}}
+      	\lang{en}{\text{Inner function: $g(x) = $}}
+ 		\solution{g}
+ 		\inputAsFunction{x}{g_s0}
+ 		\checkFuncForZero{f_s0[g_s0] - h}{1.1}{10}{100}
+		\score{0.2}
+ 	\end{answer}
+ 	\begin{answer}
+      	\lang{de}{\text{Äußere Ableitung: $f\prime(y) = $}}
+      	\lang{en}{\text{Outer derivative: $f\prime(y) = $}}
+ 		\solution{df}
+ 		\inputAsFunction{y}{f_s1}
+ 		\checkFuncForZero{f_s1 - D[f_s0]}{1.1}{10}{100}
+ 		\score{0.2}
+ 	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{Einsetzen: $\quad f\prime(g(x)) = $}}
+      	\lang{en}{\text{Substitute: $\quad f\prime(g(x)) = $}}
+ 		\solution{dfg}
+ 		\inputAsFunction{x}{f_s2}
+ 		\checkFuncForZero{f_s2 - f_s1[g_s0]}{1.1}{10}{100}
+ 		\score{0.2}
+ 	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{Innere Ableitung: $g\prime(x) = $}}
+      	\lang{en}{\text{Inner derivative: $g\prime(x) = $}}
+ 		\solution{dg}
+ 		\inputAsFunction{x}{g_s1}
+ 		\checkFuncForZero{g_s1 - D[g_s0]}{1.1}{10}{100}
+ 		\score{0.2}
+ 	\end{answer}
+	\begin{answer}
+      	\lang{de}{\text{Ableitung der Komposition: $(f \circ g)\prime(x) = $}}
+      	\lang{en}{\text{Derivative of the composition: $(f\circ g)\prime(x) = $}}
+ 		\solution{Dfg}
+ 		\checkAsFunction{x}{1.1}{10}{100}
+ 		\score{0.2}
+ 	\end{answer}
+\end{question}
+          
+%ende-cosh    
+%Frage 3 von 8
+\begin{question}
+	\lang{de}{
+		\text{Gegeben sei $f(x) = (\var{p})\cdot \var{h}$. Berechnen Sie $f'(x)$ und geben Sie Ihr Ergebnis ein.}
+		\explanation{}
+	}
+	\lang{en}{
+		\text{Let $f(x) = (\var{p})\cdot \var{h}$. Find $f'(x)$ and input your answer below.}
+	}
+	\begin{variables}
+        \randint[Z]{a}{2}{10}
+		\randint[Z]{b}{2}{10}
+ 		\randint[Z]{m}{3}{7}
+		\function[calculate]{s}{2*m}
+	    \function{p}{a*x+b}
+		\function{h}{ln(x^s+1)}
+ 		\derivative[normalize]{f_1}{p}{x}	       
+ 		\derivative[normalize]{f_3}{h}{x}
+ 		\function{sol}{f_1*h+p*f_3}
+ 		\functionNormalize{sol}  
+	\end{variables}
+	\type{input.function}
+	\begin{answer}
+		\text{ $f'(x) = $}
+		\solution{sol}
+		\checkAsFunction{x}{-10}{10}{100}		
+	\end{answer}
+\end{question}
+	
+%Frage 4 von 8   
+\begin{question}
+	\lang{de}{
+		\text{Gegeben sei $f(x) = \var{p}\cdot \var{q}$. Berechnen Sie $f'(x)$ und geben Sie Ihr Ergebnis ein.}
+		\explanation{}
+	}
+	\lang{en}{
+		\text{Let $f(x) = \var{p}\cdot \var{q}$. Find $f'(x)$ and input your answer below. }
+	}
+	\begin{variables}
+        \randint[Z]{a}{2}{10}
+		\randint[Z]{b}{2}{10}
+ 		\randint[Z]{d}{3}{7}
+ 		\randint[Z]{m}{3}{7}
+ 		\randint[Z]{n}{3}{7}
+		\function[calculate]{s}{2*m}
+	    \function{p}{(a*x+b)^s}
+        %\function{f_1}{s*(a*x+b)^(s-1)*a}
+		\function{q}{cos(x^n)}
+        %\function{f_2}{-sin(x^n)*n*x^(n-1)}
+ 		\derivative[normalize]{f_1}{p}{x}	    
+ 		\derivative[normalize]{f_2}{q}{x}	    
+ 		\function{sol}{f_1*q+p*f_2}
+ 		\functionNormalize{sol} 
+	\end{variables}
+	\type{input.function}
+	\begin{answer}
+		\text{ $f'(x) = $}
+		\solution{sol}
+		\checkAsFunction{x}{-1}{-0.8}{100}		
+	\end{answer}
+\end{question}^5^5
+	
+%Frage 5 von 8   
+\begin{question}
+	\lang{de}{
+		\text{Gegeben sei $f(x) = \var{q}\cdot \var{h}$. Berechnen Sie $f'(x)$ und geben Sie Ihr Ergebnis ein.}
+		\explanation{}
+	}
+	\lang{en}{
+		\text{Let $f(x) = \var{q}\cdot \var{h}$. Find $f'(x)$ and input your answer below.}
+	}
+	\begin{variables}
+ 		\randint[Z]{d}{3}{7}
+ 		\randint[Z]{m}{3}{7}
+ 		\randint[Z]{n}{3}{7}
+		\function[calculate]{s}{2*m}
+		\function{h}{ln(x^s+1)}
+		\function{q}{sin(x)}  
+ 		\derivative[normalize]{f_2}{q}{x}	    
+ 		\derivative[normalize]{f_3}{h}{x}
+ 		\function{sol}{f_2*h+q*f_3}
+ 		\functionNormalize{sol}  
+	\end{variables}
+	\type{input.function}
+	\begin{answer}
+		\text{ $f'(x) = $}
+		\solution{sol}
+		\checkAsFunction{x}{0.01}{10}{100}		
+	\end{answer}
+\end{question}
+	
+%Frage 6 von 8
+\begin{question}
+	\lang{de}{
+		\text{Gegeben sei $f(x) = (\var{p})\cdot \var{q}+\var{h}$. Berechnen Sie $f'(x)$ und geben Sie Ihr Ergebnis ein.}
+		\explanation{}
+	}
+	\lang{en}{
+		\text{Let $f(x) = (\var{p})\cdot \var{q}+\var{h}$. Find $f'(x)$ and input your answer below.}
+	}
+	\begin{variables}
+        \randint[Z]{a}{2}{10}
+		\randint[Z]{b}{2}{10}
+ 		\randint[Z]{d}{3}{7}
+ 		\randint[Z]{l}{3}{7}
+ 		\randint[Z]{m}{3}{7} 
+	    \function{p}{a*x+b}
+		\function{q}{(cos(x))^l}
+		\function{h}{e^(x^m)}
+ 		\derivative[normalize]{f_1}{p}{x}	    
+ 		\derivative[normalize]{f_2}{q}{x}	    
+ 		\derivative[normalize]{f_3}{h}{x}
+ 		\function{sol}{f_1*q+p*f_2+f_3}
+ 		\functionNormalize{sol}  
+	\end{variables}
+	\type{input.function}
+	\begin{answer}
+		\text{ $f'(x) = $}
+		\solution{sol}
+		\checkAsFunction{x}{-1}{1}{100}		
+	\end{answer}
+\end{question}
+	
+%Frage 7 von 8
+\begin{question}
+	\lang{de}{
+		\text{Gegeben sei $f(x) = \var{h}\cdot \var{q}+\var{p}$. Berechnen Sie $f'(x)$ und geben Sie Ihr Ergebnis ein.}
+		\explanation{}
+	}
+	\lang{en}{
+		\text{Let $f(x) = \var{h}\cdot \var{q}+\var{p}$. Find $f'(x)$ and input your answer below.}
+	}
+	\begin{variables}
+        \randint[Z]{a}{2}{10}
+		\randint[Z]{b}{2}{10}
+ 		\randint[Z]{d}{3}{7}
+ 		\randint[Z]{l}{3}{7}
+ 		\randint[Z]{m}{3}{7}
+		\function[calculate]{s}{2*m}
+		\function{p}{a*x+b}
+		\function{q}{x^l}
+		\function{h}{ln(x^s+1)}
+ 		\derivative[normalize]{f_1}{h}{x}	    
+ 		\derivative[normalize]{f_2}{q}{x}	    
+ 		\derivative[normalize]{f_3}{p}{x}
+ 		\function{sol}{f_1*q+h*f_2+f_3}
+ 		\functionNormalize{sol} 
+	\end{variables}
+	\type{input.function}
+	\begin{answer}
+		\text{ $f'(x) = $}
+		\solution{sol}
+		\checkAsFunction{x}{-1}{1}{100}		
+	\end{answer}
+\end{question} 
+
+%Frage 8 von 8
+\begin{question}
+	\lang{de}{
+		\text{Gegeben sei $f(x) = (\var{p})\cdot \var{q}+\var{h}$. Berechnen Sie $f'(x)$ und geben Sie Ihr Ergebnis ein.}
+		\explanation{}
+	}
+	\lang{en}{
+		\text{Let $f(x) = (\var{p})\cdot \var{q}+\var{h}$. Find $f'(x)$ and input your answer below.}
+	}
+	\begin{variables}
+        \randint[Z]{a}{2}{10}
+		\randint[Z]{b}{2}{10}
+ 		\randint[Z]{d}{3}{7}
+ 		\randint[Z]{l}{3}{7}
+ 		\randint[Z]{m}{3}{7}
+	    \function{p}{a*x+b}
+		\function{h}{(sin(x))^l}
+		\function{q}{e^(x^m)}
+ 		\derivative[normalize]{f_1}{p}{x}	    
+ 		\derivative[normalize]{f_2}{q}{x}	    
+ 		\derivative[normalize]{f_3}{h}{x}
+ 		\function{sol}{f_1*q+p*f_2+f_3}
+ 		\functionNormalize{sol}
+	\end{variables}
+	\type{input.function}
+	\begin{answer}
+		\text{ $f'(x) = $}
+		\solution{sol}
+		\checkAsFunction{x}{-1}{1}{100}		
+	\end{answer}
+\end{question}
+	
+	
+\end{problem}	
+
+\embedmathlet{mathlet}
+\end{content}

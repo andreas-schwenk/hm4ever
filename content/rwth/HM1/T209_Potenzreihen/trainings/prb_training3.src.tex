@@ -1,0 +1,130 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Problem 3}
+    \lang{de}{A03: Konvergenzradius}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/16438}{Ticket 16438}
+\end{block}
+\usepackage{mumie.genericproblem}
+\lang{de}{
+	\title{A03: Konvergenzradius}
+}
+
+
+\begin{problem}
+
+\randomquestionpool{1}{2}
+\randomquestionpool{3}{4}
+
+
+\begin{question}
+    \text{Berechnen Sie den Konvergenzradius der  Potenzreihe\\
+    $\sum_{n=0}^\infty (\var{f}) x^n$.\\
+    Der Konvergenzradius ist gegeben durch \ansref .}
+    \begin{variables}
+        \randint[Z]{a}{-10}{10}
+        \randint{b}{-10}{10}
+        \randint{c}{-10}{10}
+        \function[normalize]{f}{a*n^2+b*n+c}
+        \number{s}{1}
+    \end{variables}
+    
+    \type{input.number}
+    \field{rational}
+    
+    \begin{answer}
+        %\text{Der Konvergenzradius ist gegeben durch}
+        \solution{s}
+        \explanation{Benutze die Quotientenregel. Auch möglich: Abelsches Lemma.}
+    \end{answer}
+    
+\end{question}
+%2
+\begin{question}
+    \begin{variables}
+        \randint[Z]{a}{-10}{10}
+        \randint{b}{-10}{10}
+        \randint{c}{-10}{10}
+        \function[normalize]{f}{a*n^3+b*n+c}
+        \number{s}{1}
+    \end{variables}
+    \text{Berechnen Sie den Konvergenzradius der  Potenzreihe\\
+    $\sum_{n=1}^\infty \frac{\var{f}}{n^2} x^n$.\\
+    Der Konvergenzradius ist gegeben durch \ansref .}
+    \type{input.number}
+    \field{rational}
+    
+    \begin{answer}
+        %\text{Der Konvergenzradius ist gegeben durch}
+        \solution{s}
+        \explanation{Benutze die Quotientenregel oder das Abelsche Lemma.}
+    \end{answer}
+\end{question}
+%3
+\begin{question}
+    \begin{variables}
+        \randint{a}{2}{6}
+        \randint{b}{2}{6}
+        \randint[Z]{c}{-5}{5}
+        \function[calculate]{s}{(b/a)^2}
+    \end{variables}
+    \text{Berechnen Sie den Konvergenzradius der  Potenzreihe\\
+    $\sum_{n=0}^\infty \left(\frac{\var{c}+\var{a}^n}{\var{b}^n}\right)^2 x^n$.\\
+    Der Konvergenzradius ist gegeben durch \ansref .}
+    \type{input.number}
+    \field{rational}
+    
+    \begin{answer}
+        %\text{Der Konvergenzradius ist gegeben durch}
+        \solution{s}
+        \explanation{Benutze die Quotientenregel. Siehe Beispielaufgabe 2.}
+    \end{answer}
+\end{question}
+%4
+\begin{question}
+    \begin{variables}
+        \randint{a}{2}{6}
+        \randint[Z]{c}{-5}{5}
+        \randint[Z]{aa}{1}{5}
+        \randint[Z]{bb}{1}{5}
+        \randint[Z]{v}{-1}{1}
+        \function[normalize]{f}{v*aa*n^2+v*bb}
+        \function[calculate]{s}{1/a}
+    \end{variables}
+    \text{Berechnen Sie den Konvergenzradius der  Potenzreihe\\
+    $\sum_{n=0}^\infty \frac{\var{c}+\var{a}^n}{\var{f}} x^n$.\\
+    Der Konvergenzradius ist gegeben durch \ansref .}
+    \type{input.number}
+    \field{rational}
+    
+    \begin{answer}
+        %\text{Der Konvergenzradius ist gegeben durch}
+        \solution{s}
+        \explanation{Benutze die Quotientenregel oder betrachte verwandte geometrische Reihen.}
+    \end{answer}
+\end{question}
+
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

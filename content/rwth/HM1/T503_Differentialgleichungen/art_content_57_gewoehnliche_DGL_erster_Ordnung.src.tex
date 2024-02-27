@@ -1,0 +1,271 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{Gewöhnliche Differentialgleichungen erster Ordnung}
+   }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \begin{components}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T503_Pendulum.meta.xml}{T501_Pendulum}
+\end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T404_Eigenwerte,_Eigenvektoren/g_art_content_11_eigenwerte.meta.xml}{content_11_eigenwerte}
+\link{generic_article}{content/rwth/HM1/T503_Differentialgleichungen/g_art_content_56_Separierbare_Differentialgleichungen.meta.xml}{content_56_Separierbare_Differentialgleichungen}
+\end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21659}{Ticket 21659}
+\end{block}
+\usepackage{mumie.ombplus}
+\ombchapter{3}
+\ombarticle{2}
+\usepackage{mumie.genericvisualization}
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\title{Gewöhnliche Differentialgleichungen erster Ordnung}
+\section{Gewöhnliche Differentialgleichungen erster Ordnung}
+Im Abschnitt über \ref[content_56_Separierbare_Differentialgleichungen][separierbare und lineare Differentialgleichungen]{sec:sep_lin_DGL} haben wir bereits
+einige einfache Typen von Differentialgleichungen kennengelernt.
+Jetzt werden wir allgemein Systeme von gewöhnlichen Differentialgleichungen erster Ordnung definieren, 
+eine fundamentale Aussage
+über ihre Lösbarkeit treffen und Beispiele angeben.
+\begin{definition}[Gewöhnliche DGL erster Ordnung]\label{def:ODE}
+\begin{enumerate}
+\item[(a)]
+Es sei $D\subset \R\times \R^n$ eine offene Teilmenge, und es sei $f:D\to\R^n$, $(x,y)\mapsto f(x,y)$ eine stetige Funktion.
+(Dabei seien $x\in\R$ und $y\in\R^n$.)
+Dann heißt
+\[y'=f(x,y)\]
+ein \notion{System von $n$ gewöhnlichen Differentialgleichungen erster Ordnung}.
+\item[(b)]
+Eine  \notion{Lösung} dieses Systems ist eine Kurve $\phi:I\to\R^n$, wobei $I$ ein nichtausgeartetes Intervall ist, mit den folgenden Eigenschaften.
+\begin{enumerate}
+\item[(i)] $\phi$ ist differenzierbar.
+\item[(ii)] Für alle $x\in I$ ist $(x,\phi(x))\in D$.
+\item[(iii)] Für alle $x\in I$ gilt $\phi'(x)=f(x,\phi(x))$.
+\end{enumerate}
+\item[(c)]
+Für $(x_0,y_0)\in D$ ist $\phi$ eine Lösung des \notion{Anfangwertproblems}
+\[y'=f(x,y), \quad y(x_0)=y_0,\]
+wenn $\phi$ eine Lösung des Systems ist und $\phi(x_0)=y_0$ erfüllt.
+\end{enumerate}
+\end{definition}
+Oft spricht man lediglich von einer (mehrdimensionalen) gewöhnlichen Differentialgleichung ersten Grades, statt von einem System.
+Dabei bezieht sich der Begriff \glqq erster Ordnung\grqq{} darauf, dass die Differentialgleichung nur erste Ableitungen enthält.
+\glqq Gewöhnlich\grqq{} heißt eine Differentialgleichung, wenn wie hier nur Ableitungen nach einer Variablen vorkommen. 
+%%
+\begin{quickcheck}
+\text{Markiere alle (Systeme von) gewöhnlichen Differentialgleichungen erster Ordnung.}
+\begin{choices}{multiple}
+    \begin{choice}
+      \text{$y'=x^2y^2+xy^2$.}
+      \solution{true}
+    \end{choice} 
+    \begin{choice}
+      \text{$\begin{pmatrix}\frac{\partial y}{\partial x_1}\\\frac{\partial y}{\partial x_2}\\
+      \frac{\partial y}{\partial x_3}\end{pmatrix}=(x_1^2+x_2x_3+\cos x_3)\cdot y+18x_2^5$.}
+      \solution{false}
+    \end{choice}
+    \begin{choice}
+      \text{$\begin{pmatrix}y_1'\\y_2'\\y_3'\end{pmatrix}=\begin{pmatrix}18x^2y_3\\x_1x_3y_2
+      \\x_2^3y_3y_1+1\end{pmatrix}$.}
+      \solution{true}
+    \end{choice}
+    \begin{choice}
+      \text{$y'-y''=y$.}
+      \solution{false}
+    \end{choice}      
+  \end{choices}
+\end{quickcheck}
+%%
+Das Fundament zur Untersuchung gewöhnlicher Differentialgleichungen ist der folgende Satz.
+\begin{theorem}[Lösbarkeit des gewöhnlichen Anfangswertproblems erster Ordnung]\label{thm:ODE}
+Es sei $D\subset\R\times\R^n$ eine offene Teilmenge, und es sei $f:D\to\R^n$, $(x,y)\mapsto f(x,y)$, eine stetige Funktion.
+Wenn alle partiellen Ableitungen $\frac{\partial f_i}{\partial y_j}$, $1\leq i,j\leq n$, existieren und stetig sind,
+dann besitzt das Anfangswertproblem 
+\[y'=f(x,y),\quad y(x_0)=y_0\]
+für jeden Anfangswert $(x_0,y_0)\in D$ eine eindeutig bestimmte Lösung $\phi:I\to\R^n$ auf einem geeigneten Intervall $I$, das $x_0$ enthält.
+\end{theorem}
+%%
+Der Beweis des Satzes liegt jenseits der Möglichkeiten dieses Kurses. Er ist aber äußerst nützlich für die Anwendung. 
+Als Existenz- und Eindeutigkeitsaussage legt er die Grundlage für eine näherungsweise, numerische Bestimmung der Lösung. 
+%%
+Im folgenden illustrieren wir anhand verschiedener Beispiele die Vielfalt gewöhnlicher Differentialgleichungen.
+Bei allen ist die Existenz und Eindeutigkeit der Lösung durch Satz \ref{thm:ODE} garantiert. 
+Die Lösungsmethoden sind allerdings verschieden,
+manchmal ist es gar nicht möglich, eine explizite Lösungsformel anzugeben.
+%
+\begin{remark}\label{rem:existenz_auf_intervallen}
+Weshalb beschreiben wir die Lösung eines Anfangswertproblems stets auf einem Intervall $I$,
+obwohl der Definitionsbereich des Funktionsterms der Lösung oft viel größer ist als dieses Intervall und auch dort
+die Differentialgleichung erfüllt ist?
+Der Grund hierfür liegt in der Eindeutigkeit der Lösung, die nur durch Erfüllung der Anfangswertbedingung gegeben ist. Die Differentialgleichung selbst
+hat viele Lösungen, durch die Wahl des Anfangswertes suchen wir eine davon aus.
+Wollen wir das Anfangswertproblem auf $I\cup I_1$ betrachten, wobei $I_1$ ein weiteres Intervall
+mit $I_1\cap I=\emptyset$ ist, dann können wir auf $I_1$ \emph{irgendeine} Lösung wählen und durch sie die (eindeutige) 
+Lösung auf $I$ des Anfangswertproblems  fortsetzen auf $I_1$. 
+Auf solchen \glqq nicht zusammenhängenden\grqq{} Mengen wird die Lösung also niemals eindeutig bestimmt sein.
+\end{remark}
+%Video
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10754&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+
+%%
+\begin{example}[Separierbare und lineare Differentialgleichungen]
+Separierbare und lineare Differentialgleichungen sind gewöhnliche Differentialgleichungen erster Ordnung.
+Ihre Lösungsmethodik  haben wir im 
+\ref[content_56_Separierbare_Differentialgleichungen][vorigen Abschnitt]{sec:sep_lin_DGL} kennengelernt.
+\end{example}
+%%
+\begin{example}[Bernoullische Differentialgleichungen]\label{ex:bernoullische-dgl}
+Es sei $D\subset \R\times \R$.
+Bernoullische Differentialgleichungen sind vom Typ 
+\[y'=a(x)\cdot y+b(x)\cdot y^k,\]
+also $f:D\to\R$, $(x,y)\mapsto a(x)\cdot y+b(x)\cdot y^k$, wobei $a,b:I\to\R$ stetige Funktionen auf einem nichtausgearteten
+Intervall sind und der Exponent $k\in\Z\setminus\{0,1\}$.
+Insbesondere sind Bernoullische Differentialgleichungen weder linear noch separierbar (außer im Fall $a=\text{const.}\cdot b$).
+
+Das Anfangswertproblem mit $(x_0,y_0)\in D$ und $y_0>0$ wird formal gelöst, indem man substituiert $z=y^{1-k}$.
+So erhält man  mit Hilfe der formalen Ableitung $z'=\frac{(1-k)y'}{y^{k}}$
+eine lineare Differentialgleichung in $z$
+\[z'=(1-k)a(x)z+(1-k)b(x),\]
+für die man mit dem \ref[content_56_Separierbare_Differentialgleichungen][entsprechenden Satz]{thm:lin_DG} eine Lösung $\psi$ zum Anfangswert 
+$(x_0,y_0^{1-k})$ findet. 
+Schränkt man den Definitionsbereich
+von $\psi$ so ein, dass $\psi$ keine Nullstellen hat, so ist -- wenn wohldefiniert -- $\phi=\psi^{\frac{1}{1-k}}$ eine Lösung des ursprünglichen Problems. 
+
+%Video
+Das folgende Video enthält neben der Einführung in die Bernoullischen Differentialgleichungen 
+ein Beispiel dafür.
+
+\center{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10755&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+
+\end{example}
+
+%%
+\begin{quickcheck}
+\type{input.function}
+  \begin{variables}
+  \function{Z}{1/y}
+  \function{DG}{-x*z-1}
+  \end{variables}
+\text{Wir betrachten die Bernoullische Differentialgleichung $y'=xy+y^2$.
+Gib eine Funktion $z$ an, mit deren Hilfe die Differentialgleichung in eine lineare überführt werden kann.\\
+Mit $z=$\ansref wird die Differentialgleichung zu $z'=$\ansref.}
+\begin{answer}
+\solution{Z}
+\end{answer}
+\begin{answer}
+\solution{DG}
+\end{answer}
+\end{quickcheck}
+%%
+\begin{definition}[Autonome DGL]\label{def:autonom_DGL}
+(Systeme von) Differentialgleichungen $y'=f(x,y)$ heißen \notion{autonom}, wenn der Funktionsterm $f(x,y)$ nicht explizit von $x$ abhängt.
+\end{definition}
+%%
+\begin{example}[Autonome lineare Differentialgleichungen]
+Es sei $A\in M(n,n,;\R)$ eine quadratische Matrix. 
+Dann ist
+\[y'=A\cdot y.\]
+eine autonome lineare Differentialgleichung.
+Hier stellt die lineare Algebra (in voller Allgemeinheit allerdings weiterführende  als die, 
+die in diesem Kurs behandelt  wird)  eine allgemeine Lösungsmethodik bereit.
+Wir beschränken uns auf einen speziellen Fall, der mit den Kenntnissen aus dem 
+\ref[content_11_eigenwerte][Kapitel 
+Eigenwerte und Eigenvektoren]{sec:eigenwerte_eigenvektoren} des Vertiefungsteils 3b Lineare Algebra verstanden werden kann.
+Beginnen wir mit einem Beispiel:
+\begin{incremental}[\initialsteps{0}]
+\step
+ Sei
+\[A=\begin{pmatrix}0&1\\4&0\end{pmatrix}\in\R^2.\]
+Wir bestimmen die Eigenwerte und Eigenvektoren von $A$. Das charakteristische Polynom
+ist
+\[\det(A-X\cdot E_2)=X^2-4=(X-2)(X+2).\]
+Also sind die Eigenwerte $\lambda=2$ und $\mu=-2$. Dazu findet man Eigenverktoren
+$v_\lambda=\begin{pmatrix}1\\2\end{pmatrix}$ und $v_\mu=\begin{pmatrix}1\\-2\end{pmatrix}$.
+Man rechnet sofort nach, dass für alle $\alpha,\beta\in\R$
+\[\phi_{\alpha,\beta}(x)=\alpha e^{\lambda x}\cdot v_\lambda +\beta e^{\mu x}\cdot v_\mu\]
+eine Lösung der Gleichung $y'=A\cdot y$ ist.
+Die Koeffizienten $\alpha$ und $\beta$ können dann dafür genutzt werden, eine Anfangswertbedingung $y(x_0)=y_0$ 
+zu erfüllen: Das lineare Gleichungssystem 
+\[\alpha e^{\lambda x_0}\cdot v_\lambda +\beta e^{\mu x_0}\cdot v_\mu=y_0\]
+besitzt eine eindeutige Lösung $(\alpha,\beta)\in\R^2$, weil Eigenvektoren zu verschiedenen Eigenwerten linear unabhängig sind.
+\step
+Dieses Konzept funktioniert immer dann, wenn die Matrix $A\in M(n,n;\R)$ über  $n$ linear unabhängige Eigenvektoren verfügt, 
+also zum Beispiel, wenn $A=A^T$ symmetrisch ist.
+Sind $v_{\lambda_j}$ linear unabhängige Eigenvektoren zu reellen Eigenwerten $\lambda_j$, $j=1,\ldots, n$,
+dann ist
+\[\phi(x)=\sum_{j=1}^n\alpha_j e^{\lambda_j x}v_{\lambda_j}\]
+die Lösung des Anfangswertproblems $y'=Ay$, $y(x_0)=y_0$, wenn $(\alpha_1,\ldots,\alpha_n)\in\R^n$ die eindeutig bestimmte
+Lösung des LGS $\sum_{j=1}^n\alpha_j e^{\lambda_j x_0}v_{\lambda_j}=y_0$ ist.
+\end{incremental}
+
+%Video
+\center{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10756&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+\end{example}
+
+%%
+\begin{quickcheck}
+\type{input.function}
+\begin{variables}
+\function{phi}{exp(3*x)*v+2exp(x)*w}
+\end{variables}
+\text{Bestimme die Lösung $\phi:\R\to\R^2$ des Anfangswertproblems $y'=\begin{pmatrix}3&0\\0&1\end{pmatrix}\cdot y\:$ mit $y(0)=v+2w$.
+Schreibe sie bezüglich der Basis $v=\begin{pmatrix}1\\0\end{pmatrix}$, $w=\begin{pmatrix}0\\1\end{pmatrix}$.
+Es ist $\phi(x)=$\ansref.}
+\begin{answer}
+\solution{phi}
+\end{answer}
+
+
+\end{quickcheck}
+%%
+\begin{example}[Fadenpendel]\label{ex:fadenpendel}
+\begin{center}
+\image{T501_Pendulum}
+\end{center}
+Die Bewegung eines ungedämpften Fadenpendels wird beschrieben durch den Winkel $\phi(t)$ und die 
+Winkelgeschwindigkeit $\omega(t)$, die die Änderung des Winkels mit der Zeit $t$ angibt: $\dot{\phi}(t)=\omega(t)$.
+(Hier ersetzt also die Zeitvariable $t$ unsere übliche Variable $x$, 
+und wir  verwenden wie in der Physik üblich die Schreibweise $\dot{\phi}$ für die Ableitung nach $t$.)
+Die Änderung der Winkelgeschwindigkeit ist proportional zu dem Anteil $F_{tan}$ der Gewichtskraft $F_G$, 
+der tangential an die Pendelbahn wirkt.
+Setzen wir die Proportionalitätskonstante der Einfachheit halber gleich eins, dann erhalten wir $\dot{\omega}(t)=-\sin(\phi(t))$.
+Definieren wir nun $y=(y_1,y_2)^T=(\phi,\omega)^T$, dann ist die Differentialgleichung des Fadenpendels $y'=f(t,y)$ mit  
+\[f(t,y)=\begin{pmatrix}y_2\\-\sin y_1\end{pmatrix}\]
+mit $D=\R\times\R^2$. 
+\\
+Während man für sehr kleine Auslenkungen des Pendels noch einfache Näherungslösungen angeben kann, ist für realistische
+größere Auslenkungen die Lösung der Differentialgleichung nicht mehr elementar erreichbar, 
+sondern benötigt elliptische Funktionen.
+%%
+% Infinitesimale Auslenkungen: Lösung diskutieren??
+%
+\end{example}
+%%
+\begin{example}[Lorenz-Gleichung]
+Es sei $D=\R\times \R^2$. Für positive Parameter $\sigma,\rho,\beta>0$ sei $f:D\to \R$
+\[f(x,y)=\begin{pmatrix}\sigma(y_2-y_1)\\\rho y_1-y_2-y_1y_3\\y_1y_2-\beta y_3\end{pmatrix}.\]
+Die Differentialgleichung $y'=f(x,y)$ ist autonom. 
+Sie heißt Lorenz-Gleichung und wurde bei der Modellierung von Strömungsphänomenen entdeckt. 
+Für bestimmte Parameterbereiche zeigen die Lösungen ein sehr wildes, quasi chaotisches Verhalten.
+Explizite Lösungsformeln gibt es für diese Differentialgleichung nicht, obwohl die Funktion $f$ nur polynomial vom Grad $2$ ist.
+\end{example}\end{content}

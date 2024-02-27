@@ -1,0 +1,149 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A05: logistisches Wachstum}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A05: logistisches Wachstum}}
+\lang{en}{\title{A05: logistic growth }}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24036}{Ticket 24036}
+\end{block}
+
+
+\usepackage{mumie.genericproblem}
+
+\embedmathlet{gwtmathlet}
+
+     \begin{problem}
+
+        \begin{variables}
+            \randint{a}{8}{10}
+            \randint{b}{2}{5}
+            \randint{c}{2}{3}
+            \function{f}{a/(1+b*e^(-c*x))}
+            \function{xw}{ln(b)/c}
+            \derivative{f_1}{f}{x}
+            \function[normalize]{ff_1}{a*b*c*e^(c*x)/(b+e^(c*x))^2}
+            \function[normalize]{f_2}{a*b*c^2*e^(c*x)(b-e^(c*x))/(b+e^(c*x))^3}
+            \function[normalize]{m}{a/(1+b)}
+            \function{M}{a}
+        \end{variables}
+           
+          \begin{question}
+            \lang{de}{\text{ Die logistische Funktion $f(x)=\var{f}$ beschreibe den kumulierten Absatz y 
+eines Produktes in Abhängigkeit von der Zeit x (Dabei sei $x>0$).\\
+$f(x)$ gibt also an, welche Menge insgesamt bis zur Zeit x insgesamt verkauft wurde. 
+            \\Wir betrachten die Funktion $f(x)$ für $x>0$:}}
+            \lang{en}{\text{Suppose the logistic function $f(x)=\var{f}$ describes the cumulative sales y 
+of a product as a function of time x (where $x>0$).\\
+That is, $f(x)$ indicates the total quantity sold by time x. 
+            \\We will consider the function $f(x)$ for $x>0$:}}
+            \lang{de}{\explanation{Der Zähler von f(x) hat keine Nullstellen.\\
+            Die erste Ableitung ist: $f'(x)=\var{f_1}=\var{ff_1}$.}}
+             \lang{en}{\explanation{The numerator of f(x) has no zeros.\\
+            The first derivative is: $f'(x)=\var{f_1}=\var{ff_1}$.}}
+            \type{mc.yesno}
+            
+            \begin{choice}
+                \lang{de}{\text{Die Funktion hat Nullstellen.}}
+                \lang{en}{\text{The function has zeros.}}
+                \solution{false}
+            \end{choice}
+            \begin{choice}
+                \lang{de}{\text{Die Funktion hat Extremstellen.}}
+                \lang{en}{\text{The function has extrema.}}
+                \solution{false}
+            \end{choice}
+          \end{question}
+          
+         \begin{question}
+            \lang{de}{\text{Bestimmen Sie die Wendestelle $x_w=$\ansref}}
+            \lang{en}{\text{Determine the inflection point $x_w=$\ansref}}
+            \type{input.function}
+            \lang{de}{\explanation{Die zweite Ableitung ist: $f''(x)=\var{f_2}$. Sie kann mit Hilfe
+            der Quotientenregel aus der ersten Ableitung errechnet werden. Die Wendestelle ergibt
+            sich durch Bestimmen der Nullstelle des Zählers.}}
+           \lang{en}{\explanation{The second derivative is: $f''(x)=\var{f_2}$. This can be calculated 
+            by the quotient rule using the first derivative. The point of inflection is found
+            by determining the zero of the numerator.}}
+            \begin{answer}
+                \solution{xw}
+                \checkAsFunction{x}{1}{3}{1}
+            \end{answer}
+         \end{question}
+         
+         \begin{question}
+            \lang{de}{\text{Wir betrachten $f(x)=\var{f}$ für $x<x_w$:}}
+           \lang{en}{\text{We will consider $f(x)=\var{f}$ for $x<x_w$:}}
+            \lang{de}{\explanation{Für $x<x_w$ ist die Funktion linksgekrümmt, also progressiv steigend
+            und somit $f''(x)>0$.}}
+            \lang{en}{\explanation{The function is concave up for $x<x_w$, so its rate of change is increasing
+            and $f''(x)>0$.}}
+            
+            \type{mc.yesno}
+            
+            \begin{choice}
+                \lang{de}{\text{Die Funktion ist progressiv steigend.}}
+                \lang{en}{\text{The rate of change of the function is increasing.}}
+                \solution{true}
+            \end{choice}
+            \begin{choice}
+                \lang{de}{\text{Die Funktion ist rechtsgekrümmt.}}
+                \lang{en}{\text{The function is concave down.}}
+                \solution{false}
+            \end{choice}
+            \begin{choice}
+                \text{$f''(x)<0$}
+                \solution{false}
+            \end{choice}
+         \end{question}
+         
+         \begin{question}
+            \lang{de}{\text{Berechnen Sie die untere und obere Schranke der Funktion:\\
+            $f(0)=$\ansref\\
+            $\lim_{x\to\infty}f(x)=$\ansref
+            }}
+            \lang{en}{\text{Calculate the lower and upper bounds of the function:\\
+            $f(0)=$\ansref\\
+            $\lim_{x\to\infty}f(x)=$\ansref
+            }}
+            \type{input.function}
+            \explanation{$e^0=1$
+                 \lang{de}{\text{und}}
+                 \lang{en}{\text{and}}
+                $\lim_{x\to\infty}e^{-x}=0$.}
+            \begin{answer}
+                \solution{m}
+                \checkAsFunction{x}{1}{3}{1}
+            \end{answer}
+            \begin{answer}
+                \solution{M}
+                \checkAsFunction{x}{1}{3}{1}
+            \end{answer}
+         \end{question}
+     \end{problem}
+
+
+\end{content}

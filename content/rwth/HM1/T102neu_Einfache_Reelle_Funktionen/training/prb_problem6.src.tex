@@ -1,0 +1,140 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A06: Quadratische Funktionen}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22079}{Ticket 22079}
+\end{block}
+
+\begin{block}[annotation]
+	Trainingsaufgaben zur Bestimmung der Nullstellen quadratischer Funktionen
+    mittels pq-Formel, Mitternachtsformel oder quadratischer Ergänzung
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+\lang{de}{
+	\title{A06: Quadratische Funktionen}
+}
+\lang{en}{
+	\title{Problem 6}
+}
+
+\begin{problem}
+
+\randomquestionpool{1}{2}
+
+% Frage 1 (1 von 2 im Questionpool)
+\begin{question}
+	
+\begin{variables}
+	\randint[Z]{b}{-10}{10}
+	\randint[Z]{c}{-10}{10}
+	\function[calculate]{d}{b*b-4*c}
+	\randadjustIf{b,c}{d<=0}
+	
+	\function[calculate]{s}{(-b+sqrt(d))/(2)}
+	\function[calculate]{y}{(-b-sqrt(d))/(2)}
+	
+	\function[expand, normalize]{aa}{x^2+b*x+c}
+	
+\end{variables}
+
+	\type{input.number}
+	\field{real} 
+	\precision{3}
+%
+	\text{
+	    Bestimmen Sie die Nullstellen 
+        der folgenden quadratischen Funktion.\\
+	    $f:\, \R \rightarrow  \R \, $, $f(x)=\var{aa}$\\
+	    Geben Sie die gerundeten Ergebnisse bis auf drei Nachkommastellen an.}
+%
+    \explanation{Die Nullstellen können z.B. durch quadratische Ergänzung oder mit der p-q-Formel
+                 berechnet werden. Runden Sie das Ergebnis auf drei Nachkommastellen. 
+                 } 
+%
+   \permuteAnswers{1, 2}
+%
+    \begin{answer}
+	    \text{$x_1 =$}
+	    \solution{s}
+    \end{answer}
+        \begin{answer}
+	    \text{$x_2 =$}
+	    \solution{y}
+    \end{answer}
+    
+\end{question}
+
+% Frage 2 (2 von 2 im Questionpool)
+\begin{question}
+
+\begin{variables}
+    \randint[Z]{v}{-1}{1}
+	\randint[Z]{a}{1}{10}
+	\randint[Z]{b}{-10}{10}
+	\randint[Z]{c}{-10}{10}
+	\function[calculate]{d}{b^2-4*a*c}
+	
+	\randadjustIf{a,b,c}{d<=0}
+	
+	\function[calculate]{s}{(-b+sqrt(d))/(2*a)}
+	\function[calculate]{y}{(-b-sqrt(d))/(2*a)}
+	
+	\function[expand, normalize]{ab}{v*(a*x^2+b*x+c)}
+	
+\end{variables}
+
+	\type{input.number}
+	\field{real} 
+	\precision{3}
+%
+	    \text{
+	    Bestimmen Sie die Nullstellen 
+        der folgenden quadratischen Funktion.\\
+	    $f:\, \R \rightarrow  \R\ $, $f(x)=\var{ab}$\\
+	    Geben Sie die gerundeten Ergebnisse bis auf drei Nachkommastellen an.} 
+%
+    \explanation{Die Nullstellen können z.B. mit der Mitternachtsformel berechnet werden. 
+                Runden Sie das Ergebnis auf drei Nachkommastellen.
+                }
+%
+   \permuteAnswers{1, 2}
+%    
+    \begin{answer}
+	    \text{$x_1 =$}
+	    \solution{s}
+    \end{answer}
+        \begin{answer}
+	    \text{$x_2 =$}
+	    \solution{y}
+    \end{answer}
+    
+\end{question}
+
+\end{problem}
+
+
+\embedmathlet{mathlet}
+
+\end{content}

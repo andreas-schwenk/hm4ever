@@ -1,0 +1,33 @@
+%This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)
+%https://creativecommons.org/licenses/by/4.0/legalcode
+\documentclass[rgb]{standalone}
+\usepackage{tkz-euclide}
+\definecolor{myorange}{hsb}{0.0833, 1, 0.8}
+\definecolor{mygreen}{hsb}{0.3333, 1, 0.8}
+\definecolor{myblue}{hsb}{0.5833, 1, 0.8}
+\definecolor{mymagenta}{hsb}{0.8333, 1, 0.8}
+\begin{document}
+	\begin{tikzpicture}[scale=1, font=\Large]
+		% Coordinate system
+		\tkzInit[xmin=-6,xmax=6,ymin=-6,ymax=6]
+		\tkzGrid[color=lightgray]
+		\tkzDrawX[thick,label=$x$]
+		\tkzDrawY[thick,label=$y$]
+		% Graphs
+		\draw[very thick,myblue,smooth,domain={-6}:{-2.41},samples=100, variable=\x] plot ({\x}, {((\x+3)*(\x-3)*(\x-1)/((\x+2)*(\x-2))});
+		\draw[very thick,myblue,smooth,domain={-1.125}:{1.7985},samples=100, variable=\x] plot ({\x}, {((\x+3)*(\x-3)*(\x-1)/((\x+2)*(\x-2))});
+        \draw[very thick,myblue,smooth,domain={2.198}:{6},samples=100, variable=\x] plot ({\x}, {((\x+3)*(\x-3)*(\x-1)/((\x+2)*(\x-2))});
+        \draw[myorange,,densely dashed] (-2,-6) -- (-2,6);
+        \draw[myorange,,densely dashed] (2,-6) -- (2,6);
+		% Labels
+	    \node[below=0.5mm] at (-4,0){$-4$};
+	    \node[below=0.5mm] at (-2,0){$-2$};
+		\node[below=0.5mm] at (2,0){$2$};
+		\node[below=0.5mm] at (4,0){$4$};
+		\node[left=0.5mm] at (0,-4){$-4$};
+		\node[left=0.5mm] at (0,-2){$-2$};
+		\node[left=0.5mm] at (0,2){$2$};
+		\node[left=0.5mm] at (0,4){$4$};
+	%	\node[right,myblue] at (3,-3){$p(x)=\frac{x^3-x^2-9x+9}{x^2-4}$};
+	\end{tikzpicture}	
+\end{document}

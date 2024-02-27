@@ -1,0 +1,132 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A07: l'Hospital}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A07: l'Hospital}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/10410}{Ticket 10410}
+\end{block}
+
+\begin{block}[annotation]
+Aufgabenpool mit 3 leicht randomisierten Aufgaben.
+\end{block}
+
+\begin{problem}
+	%\randomquestionpool{}{}
+	\randomquestionpool{1}{3}
+%######################################################QUESTION_START	
+	\begin{question}	
+	%+++++++++++++++++++VARIABLES++++++++++++++++++++++
+		\begin{variables}
+			\randint[Z]{x0}{0}{3}
+			\randint[Z]{n}{2}{5}
+			\function{sol}{1/n}
+			\function[normalize]{h}{(x-(x0-1))}
+			\function{f}{e^(h)-e} 
+			\function{g}{e^(h^n)-e}
+		\end{variables}
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		\type{input.function} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+		\field{rational}
+		\precision{3}
+	%+++++++++++++++++++TITLE++++++++++++++++++++++++++	
+	    \lang{de}{
+	    	\text{Bestimmen Sie den folgenden Grenzwert\\ $ \lim_{x\to \var{x0}} \frac{\var{f}}{\var{g}} = $\ansref.
+            \\
+            Überlegen Sie sich insbesondere auch, was Ihr Vorgehen rechtfertigt.}
+	    }
+	%+++++++++++++++++++ANSWERS++++++++++++++++++++++++    
+	    \begin{answer}
+			\solution{sol}
+	    	\checkAsFunction{x}{-1}{1}{10} 
+	    \end{answer}  
+        \explanation{Wenden Sie die Regel von de l'Hospital an.}
+	\end{question}
+%######################################################QUESTION_END
+
+%######################################################QUESTION_START	
+	\begin{question}	
+	%+++++++++++++++++++VARIABLES++++++++++++++++++++++
+		\begin{variables}
+			\randint{b}{-3}{3}
+			\function[calculate]{x0}{b}
+			\randint[Z]{n}{1}{2}
+			\function[normalize]{sol}{((-1)^(n+b))/pi}
+			\function[normalize]{f}{(-1)^n*(x-b)}
+			\function{g}{sin(pi*x)}
+		\end{variables}
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		\type{input.function} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+		\field{rational}
+		\precision{3}
+	%+++++++++++++++++++TITLE++++++++++++++++++++++++++	
+	    \lang{de}{
+	    	\text{Bestimmen Sie den folgenden Grenzwert\\ $ \lim_{x\to \var{x0}} \frac{\var{f}}{\var{g}} = $\ansref.
+            \\
+            Überlegen Sie sich insbesondere auch, was Ihr Vorgehen rechtfertigt.}
+	    }
+	%+++++++++++++++++++ANSWERS++++++++++++++++++++++++    
+	    \begin{answer}
+			\solution{sol}
+			\checkAsFunction{x}{-1}{1}{10} 
+	    \end{answer} 
+        \explanation{Wenden Sie die Regel von de l'Hospital an. }
+	\end{question}
+%######################################################QUESTION_END
+
+%######################################################QUESTION_START	
+	\begin{question}	
+	%+++++++++++++++++++VARIABLES++++++++++++++++++++++
+		\begin{variables}
+			\randint{b}{-3}{3}
+			\number{n}{2}%n=1 funktioniert nicht, FS
+			\function[normalize]{x0}{(-1)^n*infinity}
+			\function{sol}{0}
+			\function[normalize]{f}{((-1)^n)*(x-b)}
+			\function[normalize]{g}{sqrt(((-1)^n)*(x-b))}
+		\end{variables}
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		\type{input.number} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+		\field{rational}
+		\precision{3}
+	%+++++++++++++++++++TITLE++++++++++++++++++++++++++	
+	    \lang{de}{
+	    	\text{Bestimmen Sie den folgenden Grenzwert\\ $ \lim_{x\to \var{x0}} \frac{\ln(\var{f})}{\var{g}} = $\ansref.
+            \\
+            Zusatz: Überlegen Sie sich auch, was Ihr Vorgehen rechtfertigt.}
+	    }    
+    %+++++++++++++++++++ANSWERS++++++++++++++++++++++++    
+	    \begin{answer}
+			\solution{sol}
+	    \end{answer} 
+        \explanation{Wenden Sie die Regel von de l'Hospital an. }
+	\end{question}
+%######################################################QUESTION_END
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

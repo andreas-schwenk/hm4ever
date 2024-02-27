@@ -1,0 +1,120 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A05: Symmetrie}
+    \lang{en}{P05: Symmetry}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A05: Symmetrie}}
+\lang{en}{\title{P05: Symmetry}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/11630}{Ticket 11630}
+\end{block}
+
+\begin{problem}
+	%\randomquestionpool{}{}
+	\begin{question}
+		
+		\begin{variables}
+% $a,b,d\in \{-4,\ldots, 4\}$, $l\in \{-1,0,1\}$, $c=b+l$,\\
+% $aa=\begin{pmatrix} a&b\\ c&d\end{pmatrix}$,\\
+	\randint{a}{-4}{4}
+	\randint{b}{-4}{4}
+	\randint{d}{-4}{4}
+	\randint{l}{-1}{1}
+	\function[calculate]{c}{b+l}
+	\matrix[calculate]{aa}{ a&b\\ c&d}
+% $b11,b12,b13,b22,b23,b33\in \{-4,\ldots, 4\}$, $k1,k2\in \{0,1\}$, $k3=k1-k2$, $k=k1+k2$,\\
+% $s1,s2,s3\in \{-4,\ldots, 4\}\setminus\{0\}$,\\
+% $bb=\begin{pmatrix} b11&b12&b13\\ b12+k1*s1 & b22 & b23\\
+% b13+k2*s2 & b23+k3*s3 & b33\end{pmatrix}$,\\
+	\randint{b11}{-4}{4}
+	\randint{b12}{-4}{4}
+	\randint{b13}{-4}{4}
+	\randint{b22}{-4}{4}
+	\randint{b23}{-4}{4}
+	\randint{b33}{-4}{4}
+	\randint{k1}{0}{1}
+	\randint{k2}{0}{1}
+	\function[calculate]{k3}{k1-k2}
+	\function[calculate]{k}{k1+k2}
+	\randint[Z]{s1}{-4}{4}
+	\randint[Z]{s2}{-4}{4}
+	\randint[Z]{s3}{-4}{4}
+	\matrix[calculate]{bb}{b11&b12&b13\\ b12+k1*s1 & b22 & b23\\
+                                b13+k2*s2 & b23+k3*s3 & b33}
+	
+% $c11,c12,c13,c22\in \{-4,\ldots, 4\}$, $m1,m2\in \{0,1\}$, $m=m1+m2$,\\
+% $t1,t2\in \{-4,\ldots, 4\}\setminus\{0\}$,\\
+% $cc=\begin{pmatrix} c11&c12&c13\\ c12+m1*t1 & c22 & c12\\
+% c13+m2*t2 & c12+m1*t1 & c11\end{pmatrix}$,
+	\randint{c11}{-4}{4}
+	\randint{c12}{-4}{4}
+	\randint{c13}{-4}{4}
+	\randint{c22}{-4}{4}
+	\randint{m1}{0}{1}
+	\randint{m2}{0}{1}
+	\function[calculate]{m}{m1+m2}
+	\randint[Z]{t1}{-4}{4}
+	\randint[Z]{t2}{-4}{4}
+	\matrix[calculate]{cc}{c11&c12&c13\\ c12+m1*t1 & c22 & c12\\
+                           c13+m2*t2 & c12+m1*t1 & c11}
+		\end{variables}
+		
+            \type{mc.yesno}
+        \field{real}
+		\correctorprecision{3}
+		\displayprecision{3}
+		\lang{de}{
+	    \text{Welche der folgenden Matrizen sind symmetrisch?}
+	    }
+     	\lang{en}{
+	    \text{Which of the following matrices are symmetric?}
+	    }
+	    %\permuteAnswers{1, 2, 3} 
+	    %http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+            \permutechoices{2}{3}
+			\begin{choice}
+			\text{$\var{aa}$}
+			\solution{compute}
+			\iscorrect{l}{=}{0}
+			\end{choice}
+			\begin{choice}
+			\text{$\var{bb}$}
+			\solution{compute}
+			\iscorrect{k}{=}{0}
+			\end{choice}
+			\begin{choice}
+			\text{$\var{cc}$}
+			\solution{compute}
+			\iscorrect{m}{=}{0}
+			\end{choice}
+	    
+	    %generic viz: http://team.mumie.net/projects/support/wiki/Example
+	    \lang{en}{\explanation{Recap the definition of a symmetric matrix.}}
+     \lang{de}{\explanation{Wiederholen Sie die Definition einer symmetrischen Matrix.}}
+	\end{question}
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

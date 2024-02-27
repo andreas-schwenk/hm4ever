@@ -1,0 +1,21 @@
+%This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)
+%https://creativecommons.org/licenses/by/4.0/legalcode
+\documentclass[rgb]{standalone}
+\usepackage{tkz-euclide}
+\definecolor{myorange}{hsb}{0.0833, 1, 0.8}
+\definecolor{mygreen}{hsb}{0.3333, 1, 0.8}
+\definecolor{myblue}{hsb}{0.5833, 1, 0.8}
+\definecolor{mymagenta}{hsb}{0.8333, 1, 0.8}
+\begin{document}
+	\begin{tikzpicture}[scale=1.5, font=\Large]
+		% Coordinate system
+		\tkzInit[xmin=-1,xmax=5,ymin=-1,ymax=5]
+		\tkzGrid[color=lightgray]
+		\tkzDrawX[thick,label=$x$]
+		\tkzDrawY[thick,label=$y$]
+		\draw[very thick,domain=0:{sqrt(5)}, smooth, samples=300, variable=\x, myblue] plot ({\x}, {\x*\x});
+		\draw[very thick,domain=0:5, smooth, samples=300, variable=\x, myorange] plot ({\x}, {sqrt(\x)});
+		\node[anchor=center, myblue] at (3,4.5){$f(x)=x^n$};
+		\node[anchor=center, myorange] at (3.9,1.45){$f^{-1}(x)=\sqrt[n]{x}$};
+	\end{tikzpicture}	
+\end{document}

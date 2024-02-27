@@ -1,0 +1,75 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Problem 11}
+    \lang{de}{A11: Logarithmus}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+  \begin{taxonomy}
+        \difficulty{4}
+        \usage{FH Aachen, Mathematische Grundlagen}
+        \objectives{apply,getting_routine}
+        \topic{analysis1/elementary_functions/real_logarithmic_function}
+  \end{taxonomy}
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/30082}{Ticket 30082}
+\end{block}
+\begin{block}[annotation]
+Copy of : /home/mumie/checkin/content/rwth/HM1/T104_weitere_elementare_Funktionen/training/prb_problem11a.src.tex
+\end{block}
+
+\begin{block}[annotation]
+Copy of : /home/mumie/checkin/content/rwth/HM1/T104_weitere_elementare_Funktionen/training/prb_problem10.src.tex
+\end{block}
+
+\begin{block}[annotation]
+Copy of : /home/mumie/checkin/content/pool/fh_aachen/MGI/Logarithmusfunktionen/prb_Log_A7.1.src.tex
+\end{block}
+\lang{de}{\title{A11: Logarithmus}}
+
+\usepackage{mumie.genericproblem}
+
+     \begin{problem}
+          \begin{question}
+                \begin{variables}
+                    \randint{c}{2}{4}
+                    \drawFromSet{a}{2,3,6}
+                    \function{d}{a^2/c}
+                    \randint{k}{2}{3}
+                    \function{f}{ln(a^4*x^2-d^2)-(ln((c*x+1)^k)+k*ln(a/c))/ln(e^k)-ln(c^(-2))}
+                    \function{sol}{3*ln(a)+ln(c)+ln(c*x-1)}
+                 \end{variables}
+                 \field{real}
+                 \lang{de}{\text{Vereinfachen Sie den folgenden Term, sodass nur an einer Stelle $x$ auftritt 
+                 und keine negativen Potenzen und keine Brüche auftreten: $f(x)=\var{f}$=\ansref}}
+                 \begin{answer}
+                    \type{input.function}
+                    \solution{sol}
+                    \checkAsFunction[1E-3]{x}{0}{1}{10}
+                    \checkStringsForRelation{count(x,ans_1)<2 AND count(/,ans_1)=0 AND equal(ans_1,f)}
+                 \end{answer}
+                 %\debug[f,sol,a,c]
+                 \explanation[count(x,ans_1)>1]{Es sollte am Ende nur noch ein $x$ auftauchen.}
+                 \explanation[count(/,ans_1)>0]{Sie können den Ausdruck noch weiter vereinfachen oder haben sich verrechnet.}
+                 \explanation[count(x,ans_1)<2 AND count(/,ans_1)=0]{Sie haben beim Vereinfachen einen Fehler gemacht.}
+          \end{question}     
+     \end{problem}
+\embedmathlet{gwtmathlet}
+
+\end{content}

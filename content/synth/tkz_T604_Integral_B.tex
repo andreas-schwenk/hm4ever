@@ -1,0 +1,31 @@
+%This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)
+%https://creativecommons.org/licenses/by/4.0/legalcode
+% Copy of T304_Integral_B
+\documentclass[rgb]{standalone}
+\usepackage{tkz-euclide}
+\definecolor{myorange}{hsb}{0.0833, 1, 0.8}
+\definecolor{mygreen}{hsb}{0.3333, 1, 0.8}
+\definecolor{myblue}{hsb}{0.5833, 1, 0.8}
+\definecolor{mymagenta}{hsb}{0.8333, 1, 0.8}
+\begin{document}
+	\begin{tikzpicture}[scale=1.5, font=\Large]
+		% Coordinate system
+		\tkzInit[xmin=0,xmax=4,ymin=0,ymax=5]
+		\tkzGrid[color=lightgray]
+		\tkzDrawX[thick]
+		\tkzDrawY[thick]	
+		\foreach \i in {1,...,10}
+		{
+			\draw[fill,myblue, fill opacity=0.1] ({(\i-1)*0.4},0) -- ({(\i-1)*0.4},{1+(\i)^2/25}) -- ({\i*0.4},{1+(\i)^2/25}) -- ({\i*0.4},0);
+			\draw[fill,myblue,fill opacity=0.3] ({(\i-1)*0.4},0) -- ({(\i-1)*0.4},{1+(\i-1)^2/25}) -- ({\i*0.4},{1+(\i-1)^2/25}) -- ({\i*0.4},0);
+		}	
+		\draw[very thick,domain=0:4, smooth,variable=\x,myblue] plot ({\x}, {1+0.25*\x*\x});		
+		% Labely
+		\node[below=0.5mm] at (0,0){$0$};
+		\node[below=0.5mm] at (2,0){$1$};
+		\node[below=0.5mm] at (4,0){$2$};
+		\node[left=0.5mm] at (0,1){$1$};
+		\node[left=0.5mm] at (0,3){$3$};
+		\node[left=0.5mm] at (0,5){$5$};
+	\end{tikzpicture}	
+\end{document}

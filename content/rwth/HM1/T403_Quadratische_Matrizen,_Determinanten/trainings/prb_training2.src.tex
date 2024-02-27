@@ -1,0 +1,131 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A02: Matrizenoperationen}
+    \lang{en}{P02: Matrix operations}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A02: Matrizenoperationen}}
+\lang{en}{\title{P02: Matrix operations}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/11436}{Ticket 11436}
+\end{block}
+
+\begin{problem}
+
+\begin{question}
+
+
+	\begin{variables}
+		\randint[Z]{a}{-9}{9}
+		\randint[Z]{b}{-9}{9}
+		\randint[Z]{c}{-9}{9}
+		\randint[Z]{d}{-9}{9}
+		
+		\randint[Z]{ee}{-9}{9}
+		\randint[Z]{f}{-9}{9}
+		\randint[Z]{g}{-9}{9}
+		\randint[Z]{h}{-9}{9}
+		
+		\randint[Z]{u}{-9}{9}
+		\randint[Z]{v}{-9}{9}
+		\randint[Z]{w}{-9}{9}
+		\randint[Z]{x}{-9}{9}
+		
+		\randint[Z]{y}{-9}{9}
+		\randint[Z]{z}{-9}{9}
+		
+		\randint[Z]{r}{-9}{-1}
+		
+		\matrix[calculate]{aa}{
+  			a & b \\ 
+  			c & d
+      	}
+      	
+      	\matrix[calculate]{bb}{
+  			ee & f \\ 
+  			g & h
+      	}
+		
+		\matrix[calculate]{zz}{
+			u & v\\
+			w & x
+		}
+			
+		\matrix[calculate]{uu}{
+			y\\
+			z
+		}	
+		
+		\matrix[calculate]{m}{
+  			((a+ee*r)*u+(b+f*r)*w)*y+((a+ee*r)*v+(b+f*r)*x)*z\\
+  			((c+g*r)*u+(d+h*r)*w)*y+((c+g*r)*v+(d+h*r)*x)*z
+      	} 
+		
+		
+		
+	\end{variables}
+
+	\type{input.matrix}
+	
+    \field{rational}
+    
+    \lang{de}{
+	    \text{Führen Sie die Matrizenrechnung aus:
+        \\
+        $
+\left(\var{aa}+(\var{r})\cdot\var{bb}\right)\cdot\var{zz}\cdot\var{uu}=$\ansref
+\\
+Tipp: Hier können Sie in den Komponenten auch Summen und Produkte eingeben ohne diese auszurechnen.}}
+
+
+\lang{en}{
+	    \text{Perform the following matric calculation:
+        \\
+        $
+\left(\var{aa}+(\var{r})\cdot\var{bb}\right)\cdot\var{zz}\cdot\var{uu}=$\ansref
+\\
+Hint: Here you can entweder sums and products without calculating them.}}
+
+    \lang{de}{
+    \begin{answer}
+	    \solution{m}
+      \format{2}{1}
+     \explanation{Führen Sie die Addition und die Multiplikationen Schritt für Schritt den Rechengesetzen entsprechend durch.}
+     \end{answer}
+}
+
+\lang{en}{
+    \begin{answer}
+	    \solution{m}
+      \format{2}{1}
+     \explanation{Perform addition and multiplications step by step with the help of the calculating rules.}
+     \end{answer}
+}
+	
+    
+\end{question}
+
+\end{problem}
+\embedmathlet{mathlet}
+
+\end{content}

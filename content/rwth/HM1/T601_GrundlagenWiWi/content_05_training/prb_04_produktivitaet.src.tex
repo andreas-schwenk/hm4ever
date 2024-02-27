@@ -1,0 +1,287 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A04: Stückzahl und Zeitdauer}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A04: Stückzahl und Zeitdauer}}
+\lang{en}{\title{A04: Quantity and duration}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/23791}{Ticket 23791}
+\end{block}
+\usepackage{mumie.genericproblem}
+
+\begin{problem}
+    
+ 
+  \randomquestionpool{1}{5}
+  %\randomquestionpool{3}{3}
+  %\permutequestions
+ 
+  \begin{question} % Question 1 
+        \begin{variables}
+            \function[calculate]{sol}{1400*(1,015)^11}
+            \function[calculate]{sol2}{floor(sol)}
+            \string{s}{September}
+            \string{j}{Juni}
+            \string{o}{Oktober}
+        \end{variables}
+        \lang{de}{\text{In einem Betrieb soll innerhalb eines Jahres die Arbeitsproduktivität
+        monatlich um 1,5 \% gesteigert werden. Im Januar betrug die Produktion 1400
+        Stück.}}
+        \lang{en}{\text{In a company, labour productivity is to increase by 1.5 \% per month over one year.
+        In January the production was 1400 pieces.}}
+        
+  \lang{de}{\explanation{Stückzahl im Dezember: $1400\cdot(1,015)^{11}$; 
+  es sind nur 11 Steigerungen.\\ Bedenken Sie: Errechnen Sie z.B. 1 Monat, dann landen Sie im Februar.
+  %\\Monat: $n=\log_{1,015}\frac{1577}{1400}$; es beginnt mit dem Januar,
+  %so dass nach 8 Monaten der September erreicht ist.
+  }}
+  \lang{en}{\explanation{Number of units produced in December: $1400\cdot(1.015)^{11}$; 
+  there are only 11 increments.\\ Remember: if you calculate e.g. 1 month, then you end up in February.
+  %\\month: $n=\log_{1,015}\frac{1577}{1400}$; it starts with January,
+  %so after 8 months you reach September.
+  }}
+  \begin{answer}
+        \type{input.number}
+        \lang{de}{\text{Welche Produktion wird im Monat Dezember erreicht?\\
+        \textit{(Runden Sie bitte auf eine ganze Zahl.)}\\
+        \\produzierte Stückzahl im Dezember =}}
+        \lang{en}{\text{What will the production in the month of December be?\\
+        \textit{(Please round to a whole number.)}\\
+        \\Number of pieces produced in December =}}
+        \solution{sol2}
+  \end{answer}
+  
+  \begin{answer}
+    \type{input.text}
+    \lang{de}{\text{\\ In welchem Monat werden 1577 Stück produziert?\\
+    \textit{(Geben Sie den Monat bitte als Wort ein.)}\\
+    \\Monat =}}
+    \lang{en}{\text{\\ In which month will 1577 pieces be produced?\\
+    \textit{(Please enter the month as a word)}\\
+    \\Month =}}
+    \inputAsString{t}
+    \solution{s}
+    \checkStringsForRelation{equal(s,t)}
+  \end{answer}
+  
+  \end{question}
+  
+   \begin{question} % Question 2 
+        \begin{variables}
+            \function[calculate]{sol}{1500*(1,014)^11}
+            \function[calculate]{sol2}{floor(sol)}
+            \string{j}{Juni}
+        \end{variables}
+        \lang{de}{\text{In einem Betrieb soll innerhalb eines Jahres die Arbeitsproduktivität
+        monatlich um 1,4 \% gesteigert werden. Im Januar betrug die Produktion 1500
+        Stück.}}
+        \lang{en}{\text{In a company, labour productivity is to increase by 1.4 \% per month over one year.
+        In January the production was 1500
+        pieces.}}
+        
+  \lang{de}{\explanation{Stückzahl im Dezember: $1500\cdot(1,014)^{11}$; 
+  es sind nur 11 Steigerungen.\\ Bedenken Sie: Errechnen Sie z.B. 1 Monat, dann landen Sie im Februar.
+  %\\Monat: $n=\log_{1,014}\frac{1608}{1500}$; es beginnt mit dem Januar,
+  %so dass nach 5 Monaten der Juni erreicht ist.
+  }}
+  \lang{en}{\explanation{Number of pieces in December: $1500\cdot(1.014)^{11}$; 
+  there are only 11 increments.\\ Remember: if you calculate 1 month, for example, then you end up in February.
+  %\\Month: $n=\log_{1,014}\frac{1608}{1500}$; it starts with January,
+  %so after 5 months you reach June.
+  }}
+  \begin{answer}
+        \type{input.number}
+        \lang{de}{\text{Welche Produktion wird im Monat Dezember erreicht?\\
+        \textit{(Runden Sie bitte auf eine ganze Zahl.)}\\
+        \\produzierte Stückzahl im Dezember =}}
+        \lang{en}{\text{What will the production in the month of December be?\\
+        \textit{(Please round to a whole number.)}\\
+        \\Number of pieces produced in December =}}
+        \solution{sol2}
+  \end{answer}
+  
+  \begin{answer}
+    \type{input.text}
+    \lang{de}{\text{\\ In welchem Monat werden 1608 Stück produziert?\\
+    \textit{(Geben Sie den Monat bitte als Wort ein.)}\\
+    \\Monat =}}
+    \lang{en}{\text{\\ In which month will 1608 pieces be produced?\\
+    \textit{(Please enter the month as a word)}\\
+    \\Month =}}
+    \inputAsString{t}
+    \solution{j}
+    \checkStringsForRelation{equal(j,t)}
+  \end{answer}
+  
+  \end{question}
+  
+   \begin{question} % Question 3 
+        \begin{variables}
+            \function[calculate]{sol}{1300*(1,016)^11}
+            \function[calculate]{sol2}{floor(sol)}
+            \string{s}{September}
+        \end{variables}
+        \lang{de}{\text{In einem Betrieb soll innerhalb eines Jahres die Arbeitsproduktivität
+        monatlich um 1,6 \% gesteigert werden. Im Januar betrug die Produktion 1300
+        Stück.}}
+        \lang{en}{\text{In a company, labour productivity is to increase by 1.6 \% per month over one year.
+        In January the production was 1300
+        pieces.}}
+        
+  \lang{de}{\explanation{Stückzahl im Dezember: $1300\cdot(1,016)^{11}$; 
+  es sind nur 11 Steigerungen.\\ Bedenken Sie: Errechnen Sie z.B. 1 Monat, dann landen Sie im Februar.
+  %\\Monat: $n=\log_{1,016}\frac{1476}{1300}$; es beginnt mit dem Januar,
+  %so dass nach 8 Monaten der September erreicht ist.
+  }}
+  \lang{en}{\explanation{Number of pieces in December: $1300\cdot(1.016)^{11}$;
+  there are only 11 increments.\\ Remember: if you calculate 1 month, for example, then you end up in February.
+  %\\Month: $n=\log_{1,016}\frac{1476}{1300}$; it starts with January,
+  %so that after 8 months you reach September.
+  }}
+  \begin{answer}
+        \type{input.number}
+        \lang{de}{\text{Welche Produktion wird im Monat Dezember erreicht?\\
+        \textit{(Runden Sie bitte auf eine ganze Zahl.)}\\
+        \\produzierte Stückzahl im Dezember =}}
+        \lang{en}{\text{What will the production in the month of December be?\\
+        \textit{(Please round to a whole number.)}\\
+        \\Number of pieces produced in December =}}
+        \solution{sol2}
+  \end{answer}
+  
+  \begin{answer}
+    \type{input.text}
+    \lang{de}{\text{\\ In welchem Monat werden 1476 Stück produziert?\\
+    \textit{(Geben Sie den Monat bitte als Wort ein.)}\\
+    \\Monat =}}
+    \lang{en}{\text{\\In which month will 1476 pieces be produced?\\
+    \textit{(Please enter the month as a word)}\\
+    \\Month =}}
+    \inputAsString{t}
+    \solution{s}
+    \checkStringsForRelation{equal(s,t)}
+  \end{answer}
+  
+  \end{question}
+  
+   \begin{question} % Question 4 
+        \begin{variables}
+            \function[calculate]{sol}{1600*(1,017)^11}
+            \function[calculate]{sol2}{floor(sol)}
+            \string{s}{September}
+        \end{variables}
+        \lang{de}{\text{In einem Betrieb soll innerhalb eines Jahres die Arbeitsproduktivität
+        monatlich um 1,7 \% gesteigert werden. Im Januar betrug die Produktion 1600
+        Stück.}}
+        \lang{en}{\text{In a company, labour productivity is to increase by 1.7 \% per month over one year.
+        In January the production was 1600
+        pieces.}}
+        
+  \lang{de}{\explanation{Stückzahl im Dezember: $1600\cdot(1,017)^{11}$; 
+  es sind nur 11 Steigerungen.\\ Bedenken Sie: Errechnen Sie z.B. 1 Monat, dann landen Sie im Februar.
+  %\\Monat: $n=\log_{1,017}\frac{1831}{1600}$; es beginnt mit dem Januar,
+  %so dass nach 8 Monaten der September erreicht ist.
+  }}
+   \lang{en}{\explanation{Number of pieces in December: $1600\cdot(1.017)^{11}$; 
+  there are only 11 increments.\\ Remember: if you calculate 1 month, for example, then you end up in February.
+  %\\Month: $n=\log_{1,017}\frac{1831}{1600}$; it starts with January,
+  %so that after 8 months you reach September.
+  }}
+  \begin{answer}
+        \type{input.number}
+        \lang{de}{\text{Welche Produktion wird im Monat Dezember erreicht?\\
+        \textit{(Runden Sie bitte auf eine ganze Zahl.)}\\
+        \\produzierte Stückzahl im Dezember =}}
+         \lang{en}{\text{What will the production in the month of December be?\\
+        \textit{(Please round to a whole number.)}\\
+        \\Number of pieces produced in December =}}
+        \solution{sol2}
+  \end{answer}
+  
+  \begin{answer}
+    \type{input.text}
+    \lang{de}{\text{\\ In welchem Monat werden 1831 Stück produziert?\\
+    \textit{(Geben Sie den Monat bitte als Wort ein.)}\\
+    \\Monat =}}
+     \lang{en}{\text{\\ In which month will 1831 pieces be produced?\\
+    \textit{(Please enter the month as a word)}\\
+    \\Month =}}
+    \inputAsString{t}
+    \solution{s}
+    \checkStringsForRelation{equal(s,t)}
+  \end{answer}
+  
+  \end{question}
+  
+   \begin{question} % Question 5 
+        \begin{variables}
+            \function[calculate]{sol}{1200*(1,012)^11}
+            \function[calculate]{sol2}{floor(sol)}
+            \string{o}{Oktober}
+        \end{variables}
+        \lang{de}{\text{In einem Betrieb soll innerhalb eines Jahres die Arbeitsproduktivität
+        monatlich um 1,2 \% gesteigert werden. Im Januar betrug die Produktion 1200
+        Stück.}}
+        \lang{en}{\text{In a company, labour productivity is to increase by 1.2 \% per month over one year.
+        In January the production was 1200
+        pieces.}}
+        
+  \lang{de}{\explanation{Stückzahl im Dezember: $1200\cdot(1,012)^{11}$; 
+  es sind nur 11 Steigerungen.\\ Bedenken Sie: Errechnen Sie z.B. 1 Monat, dann landen Sie im Februar.
+  %\\Monat: $n=\log_{1,012}\frac{1336}{1200}$; es beginnt mit dem Januar,
+  %so dass nach 9 Monaten der Oktober erreicht ist.
+  }}
+  \lang{en}{\explanation{Number of pieces in December: $1200\cdot(1,012)^{11}$; 
+  there are only 11 increments.\\ Remember: if you calculate 1 month, for example, then you end up in February.
+  %\\Month: $n=\log_{1,012}\frac{1336}{1200}$; it starts with January,
+  %so that after 9 months you reach Oktober.
+  }}
+  \begin{answer}
+        \type{input.number}
+        \lang{de}{\text{Welche Produktion wird im Monat Dezember erreicht?\\
+        \textit{(Runden Sie bitte auf eine ganze Zahl.)}\\
+        \\produzierte Stückzahl im Dezember =}}
+         \lang{en}{\text{What will the production in the month of December be?\\
+        \textit{(Please round to a whole number.)}\\
+        \\Number of pieces produced in December =}}
+        \solution{sol2}
+  \end{answer}
+  
+  \begin{answer}
+    \type{input.text}
+    \lang{de}{\text{ \\In welchem Monat werden 1476 Stück produziert?\\
+    \textit{(Geben Sie den Monat bitte als Wort ein.)}\\
+    \\Monat =}}
+     \lang{en}{\text{\\In which month will 1476 pieces be produced?\\
+    \textit{(Please enter the month as a word)}\\
+    \\Month =}}
+    \inputAsString{t}
+    \solution{o}
+    \checkStringsForRelation{equal(o,t)}
+  \end{answer}
+  
+  \end{question}
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

@@ -1,0 +1,744 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Folgen von Funktionswerten}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T210_gebrochen_rat_2.meta.xml}{T210_gebrochen_rat_2}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T210_gebrochen_rat_1.meta.xml}{T210_gebrochen_rat_1}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T210_xSine1x.meta.xml}{T210_xSine1x}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T210_Sine1x.meta.xml}{T210_Sine1x}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T206_Folgen_II/g_art_content_19_bestimmte_divergenz.meta.xml}{content_19_bestimmte_divergenz}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_14_konvergenz.meta.xml}{content_14_konvergenz}
+    \link{generic_article}{content/rwth/HM1/T210_Stetigkeit/g_art_content_29_stetigkeit_definitionen.meta.xml}{content_29_stetigkeit_definitionen}
+    \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_16_konvergenzkriterien.meta.xml}{konv-krit}
+  \end{links}
+  
+  % Alte Components/Links:  
+  % \begin{components}
+  %   \component{generic_image}{content/rwth/HM1/images/g_tkz_T210_xSine1x.meta.xml}{T210_xSine1x}
+  %   \component{generic_image}{content/rwth/HM1/images/g_tkz_T210_Sine1x.meta.xml}{T210_Sine1x}
+  %   \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+  %   \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  %   \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  % \end{components}
+  % \begin{links}
+  %   \link{generic_article}{content/rwth/HM1/T210_Stetigkeit/g_art_content_29_stetigkeit_definitionen.meta.xml}{content_29_stetigkeit_definitionen}
+  %   \link{generic_article}{content/rwth/HM1/T205_Konvergenz_von_Folgen/g_art_content_16_konvergenzkriterien.meta.xml}{konv-krit}
+  % \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{10}
+\ombarticle{3}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\lang{de}{\title{Folgen von Funktionswerten}}
+ 
+\begin{block}[annotation]
+  Das alte Kapitel "Grenzwerte von Funktionswerten" wird umgewandelt in "Folgen von Funktionswerten". Es wird VOR das Kapitel Stetigkeit (content_29) gesetzt.
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9791}{Ticket 9791}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+Wir betrachten eine reelle Folge $(x_n)_{n\in\N}$ mit Grenzwert $x^\ast$, also $\lim_{n\to\infty}x_n=x^\ast$.
+Haben wir nun zusätzlich eine reelle Funktion $f:D\to \R$, und gehören die Folgeglieder $x_n$ zum Definitionsbereich, 
+d.h. $x_n\in D$ für alle $n\in\N$, dann liegt es nahe, die Funktionswerte $f(x_n)$ der Folgeglieder zu bilden.
+\\
+Diese Funktionswerte bilden wieder eine reelle Folge $(f(x_n))_{n\in\N}$. Wie wird sich diese Folge verhalten? 
+Wird sie ebenso wie $(x_n)_{n\in\N}$ selbst konvergieren?\\
+Die Antwort hängt stark von der Funktion $f$ ab. 
+In der Tat können wir, indem wir das Verhalten vieler solcher Funktionswertfolgen $(f(x_n))_{n\in\N}$ studieren, umgekehrt auf
+Eigenschaften der Funktion $f$ schließen.
+
+\begin{example}\label{ex:erstes_bsp_Grenzwert_von_Funktionswerten}
+\begin{tabs*}
+\tab{Beispiel (a)}
+Die gebrochen rationale Funktion $f:\R\setminus\{1\}\to\R$, $x\mapsto \frac{x^2+1}{x-1}$, hat in $x^\ast=1$ eine Definitionslücke.
+Wir betrachten die Folge $x_n=1+\frac{1}{n}$ mit $\lim_{n\to\infty}x_n=1$.
+Für die Folge der Funktionswerte $f(x_n)$ finden wir
+\[
+\lim_{n\to\infty}f(x_n)=\frac{(1+\frac{1}{n})^2+1}{1+\frac{1}{n}-1}=\frac {2+\frac{2}{n}+\frac{1}{n^2}}{\frac{1}{n}}=+\infty.
+\]
+Diese Folge divergiert also bestimmt gegen $+\infty$.
+
+Wählen wir stattdessen die Folge $y_n=1-\frac{1}{n}$ ebenfalls mit $\lim_{n\to\infty}y_n=1$, dann erhalten wir
+\[
+\lim_{n\to\infty}f(y_n)=\frac{(1-\frac{1}{n})^2+1}{1-\frac{1}{n}-1}=\frac {2-\frac{2}{n}+\frac{1}{n^2}}{-\frac{1}{n}}=-\infty,
+\]
+also bestimmte Divergenz gegen $-\infty$.
+Das Verhalten der beiden Funktionswertfolgen spiegelt das Verhalten des Funktionsgraphen in der Nähe der Definitionslücke wider.
+\begin{genericJSXVisualization}[550][800]{example_b}
+ 		\begin{variables}
+ 			\function{f}{real}{(x^2+1)/(x-1)}  
+			\point{O}{real}{1,0} 			
+			\point{P}{real}{1,1} 			
+ 			\line{l}{real}{var(O),var(P)}
+ 			
+ 		\end{variables}
+ 		\color{l}{#00CC00}
+ 
+ 		\begin{canvas}
+ 			\plotSize{400,300}
+ 			\plotLeft{-4}
+ 			\plotRight{4}
+ 			\plot[coordinateSystem]{f,l }
+ 		\end{canvas}
+ \end{genericJSXVisualization}
+\tab{Beispiel (b)}
+Auch die Funktion $g:\R\setminus\{1\}\to\R$, $x\mapsto \frac{x^2-1}{x-1}$, hat in $x^\ast=1$ eine Definitionslücke.
+Für alle $x\neq 1$ gilt aber
+\[
+g(x)=\frac{x^2-1}{x-1}=\frac {(x-1)(x+1)}{x-1}=\frac{x+1}{1}=x+1.
+\]
+Somit gilt für eine Folge $(x_n)_{n\in\N}$ in $\R\setminus\{1\}$, die gegen $1$ konvergiert, $\lim_{n\to\infty}x_n=1$,
+\[
+\lim_{n\to\infty}g(x_n)=\lim_{n\to\infty}(x_n+1)=2,
+\]
+unabhängig davon, wie die Folge genau aussieht. Auch dies spiegelt das Verhalten des Funktionsgraphen wider.
+\begin{center}
+\image[400]{T210_gebrochen_rat_2}
+\end{center}
+\end{tabs*}
+\end{example}
+
+\section{Grenzwerte von Funktionswerten}\label{sec: Funktionsgrenzwerte}
+In Beispiel \ref{ex:erstes_bsp_Grenzwert_von_Funktionswerten}(b) konnten wir die Grenzwerte von 
+Funktionswertfolgen $(f(x_n))_{n\in\N}$ bestimmen unabhängig davon, wie die Folgen $(x_n)_{n\in\N}$ genau aussahen, 
+wenn sie nur den gemeinsamen Grenzwert $x^\ast$ hatten. 
+Diesen besonderen Fall beschreibt die folgende Definition.
+\begin{definition}\label{def:funktionsgrenzwert}
+Es sei $f:D\to \R$ eine reelle Funktion und es sei $L\in\R$ eine reelle Zahl.
+Es existiere mindestens eine Folge $(x_n)_{n\geq 1}$ mit $x_n\in D\setminus \{x^*\}$ für alle $n\in\N$
+und $\lim_{n\to\infty}x_n=x^\ast\in\R$.
+Wenn nun für \notion{jede} Folge $(x_n)_{n\in\N}$ mit $x_n\in D\setminus \{x^*\}$, die gegen den Grenzwert $x^*$ 
+konvergiert, gilt
+  \[ \lim_{n\to \infty} f(x_n)= L\:, \]
+dann heißt $L$ der \notion{Grenzwert der Funktion $f$ für $x$ gegen $x^\ast$}.
+\\
+Ist diese Bedingung erfüllt, dann schreiben wir abkürzend
+\[ \lim_{x\to x^*} f(x)= L. \]
+\floatright{\href{https://www.hm-kompakt.de/video?watch=400}{\image[75]{00_Videobutton_schwarz}}}\\\\
+\end{definition}
+ \begin{remark}\label{rem:funktionsgrenzwert}
+\begin{enumerate}
+\item[(a)]
+Wir bemerken, dass in Definition \ref{def:funktionsgrenzwert} der Punkt $x^*$ gar nicht zum Definitionsbereich von $f$ gehören muss. 
+Dies ist sogar ein sehr üblicher Fall!\\
+Selbst wenn $f$ in $x^*$ definiert ist, ist für den Grenzwert von $f$ für $x$ gegen $x^*$ der Funktionswert $f(x^*)$ unerheblich, 
+weil bei den Folgen stets $x_n\neq x^*$ vorausgesetzt ist. \\
+Der Grenzwert einer Funktion gegen ein $x^\ast$ gibt also Aufschluss darüber, wie sich die Funktion um $x^\ast$ herum verhält, nicht in $x^\ast$ selbst.
+\item[(b)]
+Trotzdem ist $x^\ast$ nicht völlig beliebig, sondern es muss sich mindestens um einen Randpunkt (oder wie in (c) unten um $\pm\infty$) handeln.
+Es macht zum Beispiel keinen Sinn, eine Funktion $f:(0;1)\to \R$ in der Nähe von $x^\ast=2$ zu untersuchen.
+Das wird durch die Bedingung 
+\emph{Es existiere mindestens eine Folge $(x_n)_{n\geq 1}$ mit $x_n\in D\setminus \{x^*\}$ für alle $n\in\N$
+und $\lim_{n\to\infty}x_n=x^\ast\in\R$. } 
+gewährleistet und erklärt deren Sinn.
+
+\item[(c)]
+Wir erweitern den Begriff des Funktionsgrenzwerts aus Definition \ref{def:funktionsgrenzwert}, indem wir auch $x^\ast=+\infty$ (oder $x^\ast=-\infty$) zulassen:
+Gilt für jede Folge $(x_n)_{n\in\N}$ im Definitionsbereich, die bestimmt gegen $+\infty$ divergiert, dass
+der Grenzwert $\lim_{x_n\to\infty}f(x_n)$ existiert und gleich $L$ ist, 
+dann heißt $L$ der \notion{Grenzwert von $f$ für $x$ gegen $+\infty$}. (Analog für $-\infty$.)
+
+\end{enumerate}
+\end{remark}
+
+\begin{example}\label{ex:Funktionsgrenzwerte}
+\begin{tabs*}
+\tab{Beispiel \ref{ex:erstes_bsp_Grenzwert_von_Funktionswerten}(b)}
+Wir haben bereits gezeigt, dass unabhängig vom konkreten Aussehen der Folge $(x_n)_{n\in\N}$ mit Grenzwert $\lim_{n\to\infty}x_n=1$ gilt
+$\lim_{n\to\infty}g(x_n)=2$. Also gilt das erst recht für alle solche Folgen mit $x_n\neq 1$ für alle $n\in\N$. Somit existiert der
+Grenzwert von $f$ für $x$ gegen $x^\ast=1$, und er ist
+\[
+\lim_{x\to 1}g(x)=2\:.
+\]
+\tab{$\frac{1}{x}$ für $x\to\pm\infty$}
+Für die Funktion $f:\R\setminus\{0\}\to\R$, $x\mapsto \frac{1}{x}$, gilt
+\[\lim_{x\to\infty}\frac{1}{x}=0\quad\text{ sowie }\quad \lim_{x\to-\infty}\frac{1}{x}=0.\]
+Denn für jede bestimmt divergente Folge $(x_n)_{n\in\N}$, also $\lim_{n\to\infty}x_n=+\infty$ (oder $-\infty$),
+gilt nach den \ref[content_19_bestimmte_divergenz][Rechenregeln für bestimmte Divergenz]{sec:rechenregeln}
+$\lim_{n\to\infty}\frac{1}{x_n}=0$. Also gilt auch $\lim_{x\to\pm\infty}\frac{1}{x}=0$.
+\tab{$\sin\left(\frac{1}{x}\right)$}
+Wir betrachten die Funktion \[ f:\R\setminus { \{0\} }\mapsto [-1;1], x\mapsto \sin\left(\frac{1}{x}\right), \]
+und den Punkt $x^*=0$.\\
+\begin{enumerate}
+\item[(i)]
+Für die spezielle Folge $x_n=\frac{1}{\pi n}$ ist $\lim_{n\to \infty} x_n=0=x^*$.
+Der Grenzwert der Folge der Funktionswerte $f(x_n)$ ist
+\[ \lim_{n\to \infty} f(x_n)=\lim_{n\to \infty} \sin\left(\frac{1}{x_n}\right)=\lim_{n\to \infty} \sin(\pi n)=\lim_{n\to \infty} 0=0. \]
+\item[(ii)]
+Für die Folge $x_n=\frac{2}{\pi(4n+1)}$ ist ebenfalls $\lim_{n\to \infty} x_n=0=x^*$.
+Es gilt aber 
+\[\]
+Der Grenzwert der  Funktionswertfolge $(f(x_n))_{n\in\N}$ ist jetzt aber
+\[ =\lim_{n\to \infty} \sin\left(\frac{1}{x_n}\right)=
+\lim_{n\to\infty}\sin\left(\frac{\pi}{2}+2n\pi\right)
+=\lim_{n\to\infty}1=1.
+\]
+\item[(iii)]
+Für die Folge $x_n=\frac{2}{\pi(4n+3)}$ ist ebenfalls $\lim_{n\to \infty} x_n=0=x^*$.
+Es gilt aber 
+\[\]
+Der Grenzwert der  Funktionswertfolge $(f(x_n))_{n\in\N}$ ist jetzt aber
+\[ =\lim_{n\to \infty} \sin\left(\frac{1}{x_n}\right)=
+\lim_{n\to\infty}\sin\left(\frac{\pi}{2}+(2n+1)\pi\right)
+=\lim_{n\to\infty}-1=-1.
+\]
+\end{enumerate}
+Es existiert also kein Funktionengrenzwert für $x\to 0$, denn die angegebenen Folgen zeigen, 
+dass die Grenzwerte von Folgen aus Funktionswerten davon abhängt, wie die Folgen sich $x^*=0$ annähern.\\
+So ist in obiger Definition "\notion{für jede Folge}" zu verstehen: Ein Funktionengrenzwert kann nur existieren,
+wenn er \notion{unabhängig von der gewählten Folge} ist.
+
+Der Funktionsgraph macht anschaulich, dass wir in diesem Beispiel sogar Folgen mit Grenzwert $x^\ast=0$ wählen
+könnten, deren Funktionswerte konstant einer beliebigen Zahl zwischen $-1$ und $1$ sind.
+\begin{center}
+\image{T210_Sine1x}
+\end{center}
+
+\tab{$\frac{x^2-4}{x-2}$ für $x\to 2$}
+Ähnlich zu Beispiel \ref{ex:erstes_bsp_Grenzwert_von_Funktionswerten}(b)
+betrachten wir die Funktion 
+\[ f:\R\setminus { \{2\} }\to \R, x\mapsto \frac{x^2-4}{x-2} \]
+und $x^*=2\in \R\setminus D$.
+Dann gilt für jede Folge $(x_n)_{n\geq 1}$ mit $x_n\neq 2$ und
+$\lim_{n\to \infty} x_n=2$:
+\[ \lim_{n\to \infty} f(x_n)=\lim_{n\to \infty} \frac{x_n^2-4}{x_n-2}
+=\lim_{n\to \infty} \frac{(x_n-2)(x_n+2)}{x_n-2}
+=\lim_{n\to \infty} x_n+2 =2+2=4.\]
+Also ist der Funktionsgrenzwert $\lim_{x\to 2} f(x)=4$.
+%%
+\tab{$\frac{x^2-4}{|x-2|}$ für $x\to 2$}
+Wir betrachten die Funktion 
+\[ f:\R\setminus { \{2\} }\to \R, x\mapsto \frac{x^2-4}{|x-2|} \]
+und $x^*=2\in \R\setminus D$.
+
+Ist $(x_n)_{n\in\N}$ eine Folge mit $x_n> 2$ und
+$\lim_{n\to \infty} x_n=2$, so gilt:
+\[ \lim_{n\to \infty} f(x_n)=\lim_{n\to \infty} \frac{x_n^2-4}{|x_n-2|}
+=\lim_{n\to \infty} \frac{(x_n-2)(x_n+2)}{x_n-2}
+=\lim_{n\to \infty} x_n+2 =2+2=4.\]
+
+Ist jedoch $(x_n)_{n\in\N}$ eine Folge mit $x_n< 2$ und
+$\lim_{n\to \infty} x_n=2$, so gilt:
+\[ \lim_{n\to \infty} f(x_n)=\lim_{n\to \infty} \frac{x_n^2-4}{|x_n-2|}
+=\lim_{n\to \infty} \frac{(x_n-2)(x_n+2)}{-(x_n-2)}
+=\lim_{n\to \infty} -(x_n+2) =-(2+2)=-4.\]
+Da es Folgen $(x_n)_{n\in\N}$ mit $\lim_{n\in\N} x_n=2$ gibt, bei denen die Folge $(f(x_n))_{n\in\N}$ gegen $4$ konvergiert, und
+andere Folgen, bei denen die Folge $(f(x_n))_{n\in\N}$ gegen $-4$ konvergiert,
+existiert der Grenzwert $\lim_{x\to 2} f(x)$ also nicht. 
+Denn für die Existenz des Grenzwerts $\lim_{x\to 2} f(x)$ müssen \textbf{alle} solche
+Folgen konvergieren und sogar gegen den \textbf{gleichen} Grenzwert.
+\tab{$x^2$ für $x\to 2$}
+Wir betrachten die Funktion $f:\R\to\R$, $x\mapsto x^2$ und den Punkt $x^\ast=2$.
+Für eine beliebige Folge $(x_n)_{n\in\N}$ mit $\lim_{n\to\infty}x_n=2$ gilt nach den 
+\ref[content_14_konvergenz][Grenzwertregeln]{sec:grenzwertregeln} 
+\[
+\lim_{n\to\infty}f(x_n)=\lim_{n\to\infty}x_n^2 = \left(\lim_{n\to\infty}x_n\right)^2=2^2=4.
+\]
+Insbesondere gilt das auch für alle Folgen, die den Wert $2$ nie annehmen. 
+Somit existiert der Grenzwert von f gegen $x^\ast=2$ und ist gleich vier, also $\lim_{x\to 2}x^2=4$. 
+\end{tabs*}
+\end{example}
+
+
+Das nun folgende Video behandelt Grenzwerte von Funktionen und macht den Inhalt anhand vieler unterschiedlicher
+Beispiele greifbar:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10899&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+\section{Einseitige Grenzwerte}\label{sec:einseitige-grenzwerte}
+Oft hängt das Verhalten gegen ein $x^\ast$  einer reellen Funktion nur davon ab,
+ob man sich dem kritischen Punkt $x^\ast$ von links oder rechts annähert. 
+Der vierte Tab von Beispiel \ref{ex:Funktionsgrenzwerte} ist so ein Beispiel.
+Deshalb ist folgende Definition hilfreich.
+%Wie schon bei der Stetigkeit, kann man auch bei den Grenzwerten nur links- oder rechtsseitige Grenzwerte betrachten.
+\begin{definition}
+\begin{enumerate}
+\item[(i)]
+Sei $f:D\to \R$ eine reelle Funktion und sei $x^*\in\R$ der Grenzwert 
+  von mindestens einer Folge $(x_n)_{n\geq 1}$ in $D$ mit $\lim_{n\to\infty}x_n=x^\ast$ und $x_n<x^*$ für alle $n\in \N$.
+  \\
+  Die Funktion $f$ heißt \notion{linksseitig konvergent gegen $L \in \R$ für $x \to x^*$}\\ (wir sagen auch: 
+  $f$ \notion{konvergiert von links gegen $L$ für  $x \to x^*$}), wenn gilt
+  \[ \lim_{n\to \infty} f(x_n)= L \]
+  für \notion{jede} Folge $(x_n)_{n\geq 1}$ in $D$ mit$\lim_{n\to \infty} x_n=x^*$ und  $x_n<x^*$ für alle $n\in\N$ .
+\\
+Wir schreiben dann kurz
+\[ \lim_{x\nearrow x^*} f(x)= L, \]
+und nennen $L$ den \notion{linksseitigen Grenzwert von $f$ für $x$ gegen $x^\ast$.}
+\item[(ii)]
+Sei $f:D\to \R$ eine reelle Funktion und sei $x^*\in\R$ der Grenzwert 
+  von mindestens einer Folge $(x_n)_{n\geq 1}$ in $D$ mit $\lim_{n\to\infty}x_n=x^\ast$ und $x_n>x^*$ für alle $n\in\N$.
+\\
+  Die Funktion $f$ heißt \notion{rechtsseitig konvergent gegen $L \in \R$ für $x \to x^*$}\\ (wir sagen auch: 
+  $f$ \notion{konvergiert von rechts gegen $L$ für  $x \to x^*$}), wenn
+  \[ \lim_{n\to \infty} f(x_n)= L \]
+  für jede Folge $(x_n)_{n\geq 1}$ in $D$ mit $x_n>x^*$ für alle $n\in\N$ und $\lim_{n\to \infty} x_n=x^*$.
+\\
+Wir schreiben dann kurz
+\[ \lim_{x\searrow x^*} f(x)= L,\]
+und nennen $L$ den \notion{rechtsseitigen Grenzwert von $f$ gegen $x^\ast$.}
+\end{enumerate}
+\end{definition}
+
+
+
+\begin{remark}
+In der Literatur werden oft auch die folgenden Notationen verwendet.
+\begin{enumerate}
+\item Für den linksseitigen Grenzwert:
+\[\lim_{x \nearrow x^{*}} f(x)=\lim_{x \uparrow x^{*}} f(x)=\lim_{x \to x^{*-}} f(x)
+\]
+\item Für den rechtsseitigen Grenzwert:
+\[\lim_{x \searrow x^{*}} f(x)=\lim_{x \downarrow x^{*}} f(x)=\lim_{x \to x^{*+}} f(x)
+\]
+\end{enumerate}
+\end{remark}
+
+\begin{example}
+Sei $f:\R\setminus \{0; 2\}\to \R$ gegeben durch
+\[ f(x)= \frac{|x-2|}{x^2-2x} \]
+für alle $x\in \R\setminus \{0; 2\}$.
+
+Betrachtet man die Stelle $x^*=2$, so gilt für alle $x<x^*$:
+\[ f(x)= \frac{|x-2|}{x^2-2x} =\frac{-(x-2)}{(x-2)x}
+=\frac{-1}{x},\]
+und daher
+\[ \lim_{x\nearrow 2} f(x)=\lim_{x\nearrow 2} \frac{-1}{x}=- \frac{1}{2}. \]
+Für alle $x>x^*$ gilt hingegen:
+\[ f(x)= \frac{|x-2|}{x^2-2x} =\frac{x-2}{(x-2)x}
+=\frac{1}{x},\]
+und daher
+\[ \lim_{x\searrow 2} f(x)=\lim_{x\searrow 2} \frac{1}{x}=\frac{1}{2}. \]
+Es existieren also sowohl der linksseitige Grenzwert als auch der rechtsseitige Grenzwert. 
+Da die beiden jedoch verschieden sind, existiert der Grenzwert $\lim_{x\to 2} f(x)$ nicht.
+In der folgenden Visualisierung ist der Funktionsgraph blau skizziert.
+
+\begin{genericJSXVisualization}[550][800]{seitigerGW}
+		
+		\begin{variables}
+			\function{f}{real}{|x-2|/(x^2-2*x)}%+sqrt(x)-x/sqrt(x)}   % +-sqrt(x) um auf R_+ einzuschränken.
+			\point{m1}{real}{2, -0.5}
+			\point{m2}{real}{2, 0.5}
+			
+		\end{variables}
+		\color{m1}{#0066CC}
+		\color{m2}{#0066CC}
+
+		\begin{canvas}
+			\updateOnDrag[false]
+			\plotLeft{0.7}
+			\plotRight{5.3}
+			\plotSize{400,300}
+			\plot[coordinateSystem]{m1, m2,f}
+  		\end{canvas}
+   	\end{genericJSXVisualization}
+	
+\end{example}
+
+\begin{quickcheck}
+    \field{real}
+        \type{input.number}
+            \begin{variables}
+                \drawFromSet{a}{1,3,4}
+                \function[calculate]{aa}{a^2}
+                \function[calculate]{n}{2*a}
+            \end{variables}
+            \text{Berechnen Sie: $\:\lim_{x\to \var{a}}\frac{x^2-\var{aa}}{x-\var{a}}=$\ansref}
+            \begin{answer}
+                \solution{n}
+            \end{answer}
+            \explanation{Durch Anwenden der dritten binomischen Formel im Zähler
+            kann gekürzt werden: $\frac{x^2-\var{aa}}{x-\var{a}}=
+            \frac{(x+\var{a})(x-\var{a})}{x-\var{a}}=x+\var{a}$. Nun kann der
+            Grenzwert leicht berechnet werden: $\lim_{x\to \var{a}}x+\var{a}=\var{n}$.}
+
+\end{quickcheck}
+
+Folgendes Video erläutert links- und rechtsseitige Grenzwerte sowie Schlussfolgerungen daraus für
+Funktionsgrenzwerte:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10901&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+
+\section{Grenzwertregeln}\label{sec:grenzwertregeln}
+
+Die \ref[content_14_konvergenz][Grenzwertregeln]{sec:grenzwertregeln}  für Folgen
+lassen sich direkt auf die Grenzwerte von Funktionen übertragen.
+
+\begin{rule}\label{rule:summen_und_prod_stetiger_fkt}
+Seien $f:D\to \R$ und $g:D\to \R$ reelle Funktionen, und $x^*\in \R$  (oder $x^\ast=\pm\infty$) so, dass die Grenzwerte von $f$ und $g$ für $x$ gegen $x^*$ existieren.
+Sei weiter $r\in \R$.
+
+Dann existieren auch die entsprechenden Grenzwerte für die Funktionen $f+g$, $f-g$, $f\cdot g$ und $rf$ und es gelten
+\begin{eqnarray*}
+\lim_{x\to x^*} (f+g)(x) &=& \lim_{x\to x^*} f(x)+\lim_{x\to x^*}g(x) \\
+\lim_{x\to x^*} (f-g)(x) &=&\lim_{x\to x^*} f(x)-\lim_{x\to x^*}g(x)\\
+\lim_{x\to x^*} (f\cdot g)(x) &=& \lim_{x\to x^*} f(x) \cdot \lim_{x\to x^*} g(x) \\
+\lim_{x\to x^*} (rf)(x) &=& r\cdot \lim_{x\to x^*} f(x)
+\end{eqnarray*}
+
+Ist zudem der Grenzwert von $g$ für $x$ gegen $x^*$ von $0$ verschieden, dann existiert auch der entsprechende Grenzwert von $\frac{f}{g}$ und es ist
+\[ \lim_{x\to x^*} \frac{f}{g}(x) = \frac{\lim_{x\to x^*}f(x)}{\lim_{x\to x^*}g(x)}.\]
+
+Entsprechendes erhält man für die einseitigen Grenzwerte der zusammengesetzten Funktionen, wenn für $f$ und $g$ jeweils der linksseitige bzw. rechtsseitige Grenzwert existiert.
+\end{rule}
+\begin{example}
+Für die Funktion $f:\R\to\R$, $x\mapsto\frac{x^2+2x+1}{4x^2+1}$ und die Stelle $x^\ast=1$ bemerken wir, dass
+sowohl das Zähler- als auch das Nennerpolynom nach der Regel \ref{rule:summen_und_prod_stetiger_fkt} Grenzwerte
+für $x\to 1$ besitzen,
+\[\lim_{x\to 1}(x^2+2x+1)=1+2+1=4\quad \text{ sowie }\quad \lim_{x\to 1}(4x^2+1)=4+1=5.\]
+Somit ist, wiederum nach Regel \ref{rule:summen_und_prod_stetiger_fkt},
+\[
+\lim_{x\to 1}\frac{x^2+2x+1}{4x^2+1}=\frac{\lim_{x\to 1}(x^2+2x+1)}{\lim_{x\to 1}(4x^2+1)}=\frac{4}{5}.
+\]
+\end{example}
+
+% Bei der Stetigkeit von Funktionen konvergiert die Folge von Funktionswerten $f(x_n)$ gegen $f(x^*)$, wenn die Folge $x_n$ gegen
+% den Wert $x^*$ konvergiert. Ist die Funktion bei $x^*$ definiert und stetig, dann wird der Grenzwert $\lim_{x\to x^*} f(x)$ gleich $f(x^*)$ sein. 
+% Die Definition von Stetigkeit verwendet also bereits Funktionengrenzwerte, wobei der Grenzwert der Funktionswert an der
+% betrachteten Stelle $x^*$ ist.\\ 
+
+% In diesem Abschnitt geht es darum, allgemeiner einen Grenzwert von Funktionswerten $\lim_{x\to x^*} f(x)$ zu definieren, 
+% auch (oder gerade dann) wenn $f$ bei $x^*$ nicht definiert ist. Wir erlauben jetzt beliebige Grenzwerte.\\
+
+
+% Die gebrochen rationale Funktion $f(x)=\frac{x^2-1}{x-1}=\frac {(x-1)(x+1)}{x-1}$ hat bei $x=1$ eine Definitionslücke, 
+% für $x\neq 1$ gilt $f(x)=x+1$. Die Kurve $f(x)$ ist also die bei $x=1$ unterbrochene Gerade $x+1$; $x$ darf zwar keinesfallls den Wert 1 annehmen,
+% wohl aber kann man $x$ beliebig nahe an $x^*=1$ heranrücken lassen: $\lim_{x\to 1}f(x)=1+1=2$, 
+% der Grenzwert der Funktion $f(x)$ an der Stelle $x^*=1$ ist also 2.\\
+
+% Die Funktion $f(x)=\frac{1}{x}$ hat bei $x=0$ einen Pol, sie ist dort nicht erklärt. Es ist zwar verboten, $x=0$ einzusetzen, 
+% aber keineswegs, $x$ in beliebiger Nähe der kritischen Stelle 0 anzunehmen. Die Funktion $f(x)=\frac{1}{x}$ hat für $x>0$ positive Funktionswerte, für $x<0$ negative
+% Funktionswerte. In diesem Fall spielt es also eine Rolle, wie wir uns 0 nähern: kommen wir von "rechts" ($\searrow$), 
+% also von positiven $x$-Werten oder von "links" ($\nearrow$), den negativen Funktionswerten. Wir unterscheiden also rechtsseitige Annäherung
+% bzw. linksseitige Annäherung.
+
+% Um die mathematische Korrektheit zu gewährleisten, gehen wir genauso wie bei der Stetigkeit vor:
+
+% 1. Wir betrachten Folgen $(x_n)_{n\geq1}$, die gegen die kritische Stelle $x^*$
+% konvergieren und untersuchen, wie sich die Folge der Funktionswerte $f(x_n)$ verhält:
+% was ist $\lim_{n\to \infty}f(x_n)$?
+
+% 2. Wir übernehmen die $\epsilon-\delta-$Methode und überprüfen, ob sich Toleranzen in Funktionswerten
+% durch Toleranzen in den zugehörigen x-Werten widerspiegeln lassen (siehe auch \ref[content_29_stetigkeit_definitionen][Stetigkeit]{sec:eps-delta}).
+
+
+% \section{Grenzwert von Funktionswerten gegen feste Stellen}
+
+% \begin{definition}\label{def:funktionsgrenzwert}
+% Sei $f:D\to \R$ eine reelle Funktion und sei $x^*\in\R$ der Grenzwert 
+%   von mindestens einer Folge $(x_n)_{n\geq 1}$ mit $x_n\in D\setminus \{x^*\}$.
+  
+%   Die Funktion $f$ heißt \notion{konvergent gegen $L \in \R$ für $x \to x^*$}, wenn
+%   \[ \lim_{n\to \infty} f(x_n)= L \]
+%   für jede Folge $(x_n)_{n\geq 1}$ mit $x_n\in D\setminus \{x^*\}$ und $\lim_{n\to \infty} x_n=x^*$.
+
+% Wir schreiben dann kurz:
+% \[ \lim_{x\to x^*} f(x)= L. \]
+% \floatright{\href{https://www.hm-kompakt.de/video?watch=400}{\image[75]{00_Videobutton_schwarz}}}\\\\
+% \end{definition}
+ 
+% \begin{example}
+% Wir betrachten die Funktion \[ f:\R\setminus { \{0\} }\mapsto [-1;1], x\mapsto \sin\left(\frac{\pi}{x}\right) \]
+% und $x^*=0$.\\
+% \begin{enumerate}
+% \item
+% Für die Folge $x_n=\frac{1}{n}$ ist $\lim_{n\to \infty} x_n=0=x^*$.
+% Der Funktionengrenzwert ist:
+% \[ \lim_{n\to \infty} f(x_n)=\lim_{n\to \infty} \sin\left(\frac{\pi}{x_n}\right)=\lim_{n\to \infty} \sin(n\pi)=0. \]
+% \item
+% Für die Folge $x_n=\frac{2}{2n+1}$ ist ebenfalls $\lim_{n\to \infty} x_n=0=x^*$.
+% Der Funktionengrenzwert ist jetzt aber:
+% \[ \lim_{n\to \infty} f(x_n)=\lim_{n\to \infty} \sin\left(\frac{\pi}{x_n}\right)=\lim_{n\to\infty}\sin\left(\frac{2n+1}{2}\cdot\pi\right)
+% =\lim_{n\to\infty}\sin\left(\left(n+\frac{1}{2}\right)\cdot\pi\right)=
+% \begin{cases}
+% +1&\text{für n gerade}\\
+% -1&\text{für n ungerade}\\
+% \end{cases}.
+% \]
+% \end{enumerate}
+% Es existiert kein Funktionengrenzwert für $x\to 0$, denn der Funktionengrenzwert 
+% darf natürlich nicht davon abhängen mit welcher Folge (wie unter 1. oder 2.) wir uns $x^*=0$ nähern.
+% So ist in obiger Definition "\notion{für jede Folge}" zu verstehen: ein Funktionengrenzwert kann nur existieren,
+% wenn er \notion{unabhängig von der gewählten Folge} ist.
+% \end{example}
+
+% \begin{remark}
+% \begin{enumerate}
+% \item
+% Man beachte, dass $f$ in $x^*$ gar nicht definiert sein muss (dies ist sogar der übliche Fall). Selbst wenn $f$ in $x^*$ definiert ist, ist für den Grenzwert von $f$ gegen $x^*$ der Funktionswert $f(x^*)$ unerheblich, weil bei den Folgen stets $x_n\neq x^*$ vorausgesetzt ist. 
+% \item Wie auch bei der Stetigkeit, kann man den Funktionsgrenzwert auch mit einem $\epsilon$-$\delta$-Kriterium definieren:
+
+%   Die Funktion $f$ ist konvergent gegen $L \in \R$ für $x \to x^*$, wenn es f"ur jedes $\epsilon >0$ ein $\delta >0$ gibt, so dass 
+%   \[ |f(x) - L| < \epsilon \quad \text{f"ur alle }
+%   x\in D\text{ mit } 0<|x-x^*|<\delta.
+%   \]
+%   Dies ist eine gleichwertige Alternative, falls es z.B. keine Folge mit $\lim_{n\to \infty} x_n=x^*$ gibt.
+% \end{enumerate}
+% \end{remark}
+
+
+% \begin{example}
+% \begin{enumerate}
+% \item
+% Wir betrachten die Funktion 
+% \[ f:\R\setminus { \{2\} }\to \R, x\mapsto \frac{x^2-4}{x-2} \]
+% und $x^*=2\in \R\setminus D$.
+
+% Dann gilt für jede Folge $(x_n)_{n\geq 1}$ mit $x_n\neq 2$ und
+% $\lim_{n\to \infty} x_n=2$:
+% \[ \lim_{n\to \infty} f(x_n)=\lim_{n\to \infty} \frac{x_n^2-4}{x_n-2}
+% =\lim_{n\to \infty} \frac{(x_n-2)(x_n+2)}{x_n-2}
+% =\lim_{n\to \infty} x_n+2 =2+2=4.\]
+
+% Also ist $\lim_{x\to 2} f(x)=4$.
+% \item Wir betrachten die Funktion 
+% \[ f:\R\setminus { \{2\} }\to \R, x\mapsto \frac{x^2-4}{|x-2|} \]
+% und $x^*=2\in \R\setminus D$.
+
+% Ist $(x_n)_{n\geq 1}$ eine Folge mit $x_n> 2$ und
+% $\lim_{n\to \infty} x_n=2$, so gilt:
+% \[ \lim_{n\to \infty} f(x_n)=\lim_{n\to \infty} \frac{x_n^2-4}{|x_n-2|}
+% =\lim_{n\to \infty} \frac{(x_n-2)(x_n+2)}{x_n-2}
+% =\lim_{n\to \infty} x_n+2 =2+2=4.\]
+
+% Ist jedoch $(x_n)_{n\geq 1}$ eine Folge mit $x_n< 2$ und
+% $\lim_{n\to \infty} x_n=2$, so gilt:
+% \[ \lim_{n\to \infty} f(x_n)=\lim_{n\to \infty} \frac{x_n^2-4}{|x_n-2|}
+% =\lim_{n\to \infty} \frac{(x_n-2)(x_n+2)}{-(x_n-2)}
+% =\lim_{n\to \infty} -(x_n+2) =-(2+2)=-4.\]
+% Da es Folgen $(x_n)_{n\geq 1}$ mit $\lim_{n\to \infty} x_n=2$ gibt, bei denen die Folge $(f(x_n))_{n\geq 1}$ gegen $4$ konvergiert, und
+% andere Folgen, bei denen die Folge $(f(x_n))_{n\geq 1}$ gegen $-4$ konvergiert,
+% existiert der Grenzwert $\lim_{x\to 2} f(x)$ also nicht. Denn für die Existenz des Grenzwerts $\lim_{x\to 2} f(x)$ müssen \textbf{alle} solche
+% Folgen konvergieren und sogar gegen den \textbf{gleichen} Grenzwert.
+% \end{enumerate}
+% \end{example}
+
+% Direkt unmittelbar aus der Definition der Stetigkeit und des Funktionengrenzwerts ist die folgende Aussage.
+
+% \begin{theorem}
+% Sei $f:D\to \R$ eine reelle Funktion und $x^*\in D$ der Grenzwert 
+%   von mindestens einer Folge $(x_n)_{n\geq 1}$ mit $x_n\in D\setminus \{x^*\}$. Dann ist $f$ genau dann stetig in $x^*$, wenn 
+%   \[  \lim_{x\to x^*} f(x) =f(x^*). \]
+% \end{theorem}
+
+% \begin{example}
+% Wie wir in Beispiel 3.2 gesehen haben, existiert für die Funktion 
+% $f(x)=\sin\left(\frac{\pi}{x}\right)$ kein Grenzwert an $x^*=0$. Dies gilt natürlich ebenso für
+% die Funktion $f(x)=\sin\left(\frac{1}{x}\right)$. (Die Folge wäre dann $x_n=\frac{1}{\pi\cdot n}$.)
+% Die folgende Abbildung stellt $f(x)=\sin\left(\frac{1}{x}\right)$ grafisch dar. 
+
+% \begin{center}
+% \image{T210_Sine1x}
+% \end{center}
+
+
+% Wie verhält sich $f(x)=\sin(\frac{1}{x})$ für $x^*=0$? Wir setzen $x'=\frac{1}{x}$.
+% Zwischen $x'$ und $x'+2\pi$ liegt genau eine volle Schwingung von $\sin(x')$. Nun entspricht aber dem Zuwachs $2\pi$
+% der Funktionswerte (Ordinate) der Hyperbel $x'=\frac{1}{x}$ eine Abnahme der $x$-Werte (Abszisse), die zugleich
+% mit $x$ selbst gegen 0 konvergiert, und das heißt, daß eine volle Schwingung von $\sin(\frac{1}{x})$
+% in der Nähe von $x=0$ auf einen beliebig schmalen Abszissenbereich zusammengedrängt wird. $f(x)$ nimmt in jeder noch so 
+% kleinen Umgebung des Nullpunktes jeden Wert zwischen $-1$ und $+1$ an und kann sich daher
+% keinem Grenzwert nähern.
+
+% Unser Interesse soll jetzt der Funktion $f(x)=x\cdot \sin(\frac{1}{x})$ gelten mit $x^*=0$.
+% Diese Funktion besitzt den Grenzwert $\lim_{x \to  0}f(x)=0$. 
+
+% Wir betrachten \[\vert f(x)-0\vert=\vert x\cdot \sin\left(\frac{1}{x}\right)\vert=\vert x\vert\cdot \vert\sin\left(\frac{1}{x}\right)\vert\leq\vert x\vert\cdot 1=\vert x-0\vert \]
+
+% Wir wählen $\delta=\epsilon$. Dann gilt für $\vert x-0\vert<\delta=\epsilon\Rightarrow\vert f(x)-0\vert<\epsilon$.
+% Der Grenzwert ist damit bewiesen. Die Multiplikation mit $x$ hat die Funktion $f(x)=\sin\left(\frac{1}{x}\right)$ durch den 
+% Nullpunkt gezwungen. Dies zeigt die folgende Abbildung.
+
+% \begin{center}
+% \image{T210_xSine1x}
+% \end{center}
+
+% \end{example}
+
+% Das nun folgende Video behandelt Grenzwerte von Funktionen und macht den Inhalt anhand vieler unterschiedlicher
+% Beispiele greifbar:
+% \floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10899&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+% \section{Einseitige Grenzwerte}\label{sec:einseitige-grenzwerte}
+
+% Wie schon bei der Stetigkeit, kann man auch bei den Grenzwerten nur links- oder rechtsseitige Grenzwerte betrachten.
+
+% \begin{definition}
+% \begin{enumerate}
+% \item
+% Sei $f:D\to \R$ eine reelle Funktion und sei $x^*\in\R$ der Grenzwert 
+%   von mindestens einer Folge $(x_n)_{n\geq 1}$ mit $x_n\in D$ und $x_n<x^*$.
+  
+%   Die Funktion $f$ heißt \notion{linksseitig konvergent gegen $L \in \R$ für $x \to x^*$}\\ (wir sagen auch: 
+%   $f$ \notion{konvergiert von links gegen $L$ für  $x \to x^*$}), wenn
+%   \[ \lim_{n\to \infty} f(x_n)= L \]
+%   für jede Folge $(x_n)_{n\geq 1}$ mit $x_n\in D$, $x_n<x^*$ und $\lim_{n\to \infty} x_n=x^*$.
+
+% Wir schreiben dann kurz:
+% \[ \lim_{x\nearrow x^*} f(x)= L. \]
+
+% \item
+% Sei $f:D\to \R$ eine reelle Funktion und sei $x^*\in\R$ der Grenzwert 
+%   von mindestens einer Folge $(x_n)_{n\geq 1}$ mit $x_n\in D$ und $x_n>x^*$.
+
+%   Die Funktion $f$ heißt \notion{rechtsseitig konvergent gegen $L \in \R$ für $x \to x^*$}\\ (wir sagen auch: 
+%   $f$ \notion{konvergiert von rechts gegen $L$ für  $x \to x^*$}), wenn
+%   \[ \lim_{n\to \infty} f(x_n)= L \]
+%   für jede Folge $(x_n)_{n\geq 1}$ mit $x_n\in D$, $x_n>x^*$ und $\lim_{n\to \infty} x_n=x^*$.
+
+% Wir schreiben dann kurz:
+% \[ \lim_{x\searrow x^*} f(x)= L. \]
+% \end{enumerate}
+% \end{definition}
+
+% \begin{remark}
+% \begin{enumerate}
+% \item Wie auch schon bei der Stetigkeit gilt:
+% Gibt es sowohl gegen $x^*$ konvergierende Folgen in $D$ mit $x_n>x^*$ für alle $n\in \N$ und welche mit $x_n<x^*$ für alle $n\in \N$, 
+% so ist genau dann $\lim_{x\to x^*} f(x)=L$, wenn 
+% \[ \lim_{x\nearrow x^*} f(x)=L\quad\text{und} \quad 
+% \lim_{x\searrow x^*} f(x)=L. \]
+% \item Ist zusätzlich $x^*\in D$, so ist $f$ genau dann in $x^*$ linksseitig stetig, wenn $\lim_{x\nearrow x^*} f(x)=f(x^*)$,\\
+% und $f$ ist genau dann in $x^*$ rechtsseitig stetig, wenn $\lim_{x\searrow x^*} f(x)=f(x^*)$.
+% \end{enumerate}
+% \end{remark}
+
+% \begin{remark}
+% In der Literatur werden auch oft die folgenden Notationen verwendet.
+% \begin{enumerate}
+% \item Linksseitiger Grenzwert:
+% \[L=\lim_{x \nearrow x^{*}} f(x)=\lim_{x \uparrow x^{*}} f(x)=\lim_{x \to x^{*-}} f(x)
+% \]
+% \item Rechtsseitiger Grenzwert:
+% \[L=\lim_{x \searrow x^{*}} f(x)=\lim_{x \downarrow x^{*}} f(x)=\lim_{x \to x^{*+}} f(x)
+% \]
+% \end{enumerate}
+% \end{remark}
+
+% \begin{example}
+% Sei $f:\R\setminus \{0; 2\}\to \R$ gegeben durch
+% \[ f(x)= \frac{|x-2|}{x^2-2x} \]
+% für alle $x\in \R\setminus \{0; 2\}$.
+
+% Betrachtet man die Stelle $x^*=2$, so gilt für alle $x<x^*$:
+% \[ f(x)= \frac{|x-2|}{x^2-2x} =\frac{-(x-2)}{(x-2)x}
+% =\frac{-1}{x},\]
+% und daher
+% \[ \lim_{x\nearrow 2} f(x)=\lim_{x\nearrow 2} \frac{-1}{x}=- \frac{1}{2}. \]
+% Für alle $x>x^*$ gilt hingegen:
+% \[ f(x)= \frac{|x-2|}{x^2-2x} =\frac{x-2}{(x-2)x}
+% =\frac{1}{x},\]
+% und daher
+% \[ \lim_{x\searrow 2} f(x)=\lim_{x\searrow 2} \frac{1}{x}=\frac{1}{2}. \]
+% Es existieren also sowohl der linksseitige Grenzwert als auch der rechtsseitige Grenzwert. 
+% Da die beiden jedoch verschieden sind, existiert der Grenzwert $\lim_{x\to 2} f(x)$ nicht.
+
+% \begin{genericGWTVisualization}[550][800]{mathlet1}
+		
+% 		\begin{variables}
+% 			\function{f}{real}{|x-2|/(x^2-2*x)+sqrt(x)-x/sqrt(x)}   % +-sqrt(x) um auf R_+ einzuschränken.
+% 			\point{m1}{real}{2, -0.5}
+% 			\point{m2}{real}{2, 0.5}
+			
+% 		\end{variables}
+% 		\color{m1}{#0066CC}
+% 		\color{m2}{#0066CC}
+
+% 		\begin{canvas}
+% 			\updateOnDrag[false]
+% 			\plotLeft{0.7}
+% 			\plotRight{5.3}
+% 			\plotSize{400,300}
+% 			\plot[coordinateSystem]{m1, m2,f}
+% 		\end{canvas}
+% 		\text{Die schwarze Kurve ist der Graph der Funktion $f:\R_+\setminus \{2\}\to \R$ mit $f(x)=\frac{|x-2|}{x^2-2x}$. 
+% 		Nähert man sich auf dem Graphen von rechts an die Stelle $x^*=2$, so gelangt man zum Punkt $(2;\frac{1}{2})$. 
+% 		Für eine Folge $(x_n)_{n\geq 1}$ mit $x_n>2$ und $\lim_{n\to \infty} x_n=2$ ist also der Grenzwert
+% 		$\lim_{n\to \infty} f(x_n)$ gleich $\frac{1}{2}$. Also ist $\lim_{x\searrow 2} f(x)=\frac{1}{2}$. \\
+% 		Nähert man sich auf dem Graphen von links an die Stelle $x^*=2$, so gelangt man zum Punkt $(2;-\frac{1}{2})$. 
+% 		Für eine Folge $(x_n)_{n\geq 1}$ mit $x_n<2$ und $\lim_{n\to \infty} x_n=2$ ist also der Grenzwert
+% 		$\lim_{n\to \infty} f(x_n)$ gleich $-\frac{1}{2}$. Also ist $\lim_{x\nearrow 2} f(x)=-\frac{1}{2}$.\\
+% 		Der Grenzwert $\lim_{x\to 2} f(x)$ existiert also nicht.
+% 		}
+%    	\end{genericGWTVisualization}
+
+% \end{example}
+
+% \begin{quickcheck}
+%     \field{real}
+%         \type{input.number}
+%             \begin{variables}
+%                 \drawFromSet{a}{1,2,3,4}
+%                 \function[calculate]{aa}{a^2}
+%                 \function[calculate]{n}{2*a}
+%             \end{variables}
+%             \text{Berechnen Sie:
+%                 \[\lim_{x\to \var{a}}\frac{x^2-\var{aa}}{x-\var{a}}\] \\Antwort:\ansref}
+%             \begin{answer}
+%                 \solution{n}
+%             \end{answer}
+%             \explanation{Durch Anwenden der dritten binomischen Formel im Zähler
+%             kann gekürzt werden: $\frac{x^2-\var{aa}}{x-\var{a}}=
+%             \frac{(x+\var{a})(x-\var{a})}{x-\var{a}}=x+\var{a}$. Nun kann der
+%             Grenzwert leicht berechnet werden: $\lim_{x\to \var{a}}x+\var{a}=\var{n}$.}
+
+% \end{quickcheck}
+
+% Folgendes Video erläutert links- und rechtsseitige Grenzwerte sowie Schlussfolgerungen daraus für
+% Funktionsgrenzwerte:
+% \floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10901&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+
+
+% \section{Grenzwertregeln}\label{sec:grenzwertregeln}
+
+% Die \ref[konv-krit][Grenzwertregeln]{sec:grenzwertregeln} für Folgen
+% lassen sich direkt auf die Grenzwerte von Funktionen übertragen.
+
+% \begin{rule}\label{rule:summen_und_prod_stetiger_fkt}
+% Seien $f:D\to \R$ und $g:D\to \R$ reelle Funktionen, und $x^*\in \R$ so, dass die Grenzwerte von $f$ und $g$ für $x$ gegen $x^*$ existieren.
+% Sei weiter $r\in \R$.
+
+% Dann existieren auch die entsprechenden Grenzwerte für die Funktionen $f+g$, $f-g$, $f\cdot g$ und $rf$ und es gelten
+% \begin{eqnarray*}
+% \lim_{x\to x^*} (f+g)(x) &=& \lim_{x\to x^*} f(x)+\lim_{x\to x^*}g(x) \\
+% \lim_{x\to x^*} (f-g)(x) &=&\lim_{x\to x^*} f(x)-\lim_{x\to x^*}g(x)\\
+% \lim_{x\to x^*} (f\cdot g)(x) &=& \lim_{x\to x^*} f(x) \cdot \lim_{x\to x^*} g(x) \\
+% \lim_{x\to x^*} (rf)(x) &=& r\cdot \lim_{x\to x^*} f(x)
+% \end{eqnarray*}
+
+% Ist zudem der Grenzwert von $g$ für $x$ gegen $x^*$ von $0$ verschieden, dann existiert auch der entsprechende Grenzwert von $\frac{f}{g}$ und es ist
+% \[ \lim_{x\to x^*} \frac{f}{g}(x) = \frac{\lim_{x\to x^*}f(x)}{\lim_{x\to x^*}g(x)}.\]
+
+% Entsprechendes erhält man für die einseitigen Grenzwerte der zusammengesetzten Funktionen, wenn für $f$ und $g$ jeweils der linksseitige bzw. rechtsseitige Grenzwert existiert.
+% \end{rule}
+
+
+
+\end{visualizationwrapper}
+\end{content}

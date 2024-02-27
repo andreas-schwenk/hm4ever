@@ -1,0 +1,309 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Rechnen mit transponierten Matrizen}
+    \lang{en}{Calculating with Transposes}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+  \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+\end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T111neu_Matrizen/g_art_content_44_transponierte_matrix.meta.xml}{content_44_transponierte_matrix}
+\end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{1}
+\ombarticle{3}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Transponierte Matrix und Rechenregeln} \lang{en}{Transpose of a matrix and calculation rules}}
+
+\begin{block}[annotation]
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/11068}{Ticket 11068}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+%Wie schon in den vorigen Abschnitten bezeichnet $\mathbb{K}$ einen beliebigen Körper.
+\lang{de}{
+Transponierte Matrizen über den reellen Zahlen $\R$ sind aus dem \link{content_44_transponierte_matrix}{Grundlagenteil} bekannt.
+In diesem Kapitel werden transponierte Matrizen nun über beliebige Körper $\mathbb{K}$ betrachtet.
+Weiterhin lernen wir nun Rechenregeln für transponierte Matrizen kennen.}
+
+\lang{en}{We already had a look at transposes of matrices in the \link{content_44_transponierte_matrix}{basic part}. In this chapter we
+consider them again, but now over any field $\mathbb{K}$. Further, we will learn calculation rules for transposes.}
+
+\section{\lang{de}{Transponierte Matrix} \lang{en}{Matrix transposition}}
+
+%\begin{definition}[Transponierte Matrix]
+%Sei $A=\left(a_{ij}\right) \in M(m,n;\mathbb{K})$ eine Matrix
+%\begin{equation*}
+%A :=
+%\begin{pmatrix}
+%a_{11} & a_{12} & \cdots & a_{1n} \\
+%a_{21} & a_{22} & \cdots & a_{2n} \\
+%\vdots & \vdots & \ddots & \vdots \\
+%a_{m1} & a_{m2} & \cdots & a_{mn}
+%\end{pmatrix}
+%\end{equation*}
+%Die Matrix
+%\begin{equation*}
+%A^{T} :=
+%\begin{pmatrix}
+%a_{11} & a_{21} & \cdots & a_{m1} \\
+%a_{12} & a_{22} & \cdots & a_{m2} \\
+%\vdots & \vdots & \ddots & \vdots \\
+%a_{1n} & a_{2n} & \cdots & a_{mn}
+%\end{pmatrix} = (a_{ji}) \in M(n,m;\mathbb{K})
+%\end{equation*}
+%heißt dann Transponierte der Matrix $A$. 
+%
+%Die Spalten von $A^T$ sind also die Zeilen der Matrix $A$ und die Zeilen von $A^T$ sind die Spalten von $A$. 
+%\end{definition}
+
+
+\begin{definition}[\lang{de}{Transponierte Matrix} \lang{en}{Matrix transposition}]\label{def:transponierte-matrix}
+
+\lang{de}{
+Sei $A=\left( a_{ij} \right)_{1 \leq i \leq m, 1 \leq j \leq n} \in M(m,n;\mathbb{K})$:
+%Sei $A=\left(a_{ij}\right) \in M(m,n;\R)$ eine Matrix
+\begin{equation*}
+A :=
+\begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{pmatrix}
+\end{equation*}
+%Die Matrix $A^T=\left( a_{ji} \right)_{1 \leq j \leq n, 1 \leq i \leq m} \in M(n,m;\mathbb{K})$ heißt dann Transponierte der Matrix $A$:
+%Die Matrix $A^T = B=\left( b_{ij}=a_{ji} \right)_{1 \leq i \leq n, 1 \leq j \leq m} \in M(n,m;\mathbb{K})$ heißt dann Transponierte der Matrix $A$:
+%Die Matrix $B=\left( b_{ij} \right)_{1 \leq i \leq n, 1 \leq j \leq m} \in M(n,m;\mathbb{K})$ mit $\left( b_{ij} = a_{ji} \right)_{1 \leq i \leq n, 1 \leq j \leq m}$ heißt dann Transponierte der Matrix $A$. 
+%Wir schreiben kurz $A^T$. Ausführliche Schreibweise:
+%Die Matrix $A^T=\left( a_{ij} \right)^T = \left( a_{ji} \right)_{1 \leq j \leq n, 1 \leq i \leq m} \in M(n,m;\mathbb{K})$ heißt dann Transponierte der Matrix $A$:
+Die Matrix $A^T \in M(n,m;\mathbb{K})$ heißt dann Transponierte der Matrix $A$:
+\begin{equation*}
+A^{T} = 
+%(a_{ij})^T_{1 \leq i \leq m, 1 \leq j \leq n} :=
+\begin{pmatrix}
+a_{11} & a_{21} & \cdots & a_{m1} \\
+a_{12} & a_{22} & \cdots & a_{m2} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{1n} & a_{2n} & \cdots & a_{mn}
+\end{pmatrix}% = (a_{ji}) \in M(n,m;\R)
+\end{equation*}
+Die Spalten von $A^T$ sind also die Zeilen der Matrix $A$ und die Zeilen von $A^T$ sind die Spalten von $A$.\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=824}{\image[75]{00_Videobutton_schwarz}}}}\\\\
+
+\lang{en}{
+Set $A=\left( a_{ij} \right)_{1 \leq i \leq m, 1 \leq j \leq n} \in M(m,n;\mathbb{K})$:
+%Sei $A=\left(a_{ij}\right) \in M(m,n;\R)$ eine Matrix
+\begin{equation*}
+A :=
+\begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{pmatrix}
+\end{equation*}
+%Die Matrix $A^T=\left( a_{ji} \right)_{1 \leq j \leq n, 1 \leq i \leq m} \in M(n,m;\mathbb{K})$ heißt dann Transponierte der Matrix $A$:
+%Die Matrix $A^T = B=\left( b_{ij}=a_{ji} \right)_{1 \leq i \leq n, 1 \leq j \leq m} \in M(n,m;\mathbb{K})$ heißt dann Transponierte der Matrix $A$:
+%Die Matrix $B=\left( b_{ij} \right)_{1 \leq i \leq n, 1 \leq j \leq m} \in M(n,m;\mathbb{K})$ mit $\left( b_{ij} = a_{ji} \right)_{1 \leq i \leq n, 1 \leq j \leq m}$ heißt dann Transponierte der Matrix $A$. 
+%Wir schreiben kurz $A^T$. Ausführliche Schreibweise:
+%Die Matrix $A^T=\left( a_{ij} \right)^T = \left( a_{ji} \right)_{1 \leq j \leq n, 1 \leq i \leq m} \in M(n,m;\mathbb{K})$ heißt dann Transponierte der Matrix $A$:
+The matrix $A^T \in M(n,m;\mathbb{K})$ is called the transpose of matrix $A$:
+\begin{equation*}
+A^{T} = 
+%(a_{ij})^T_{1 \leq i \leq m, 1 \leq j \leq n} :=
+\begin{pmatrix}
+a_{11} & a_{21} & \cdots & a_{m1} \\
+a_{12} & a_{22} & \cdots & a_{m2} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{1n} & a_{2n} & \cdots & a_{mn}
+\end{pmatrix}% = (a_{ji}) \in M(n,m;\R)
+\end{equation*}
+The columns of $A^T$ are the rows of $A$ and the rows of $A^T$ are the columns of $A$.}\\
+
+\end{definition}
+
+
+
+\begin{example}
+\lang{de}{
+\begin{enumerate}
+\item Die Transponierte Matrix zu
+$  \begin{pmatrix} 1 & 2 & 3  \\ 4 & 5 & 6 \end{pmatrix} $
+ist
+$  \begin{pmatrix} 1 & 4 \\ 2 & 5 \\ 3 & 6 \end{pmatrix} .$ \\
+Die Transponierte Matrix zu $ \begin{pmatrix} 1 & 4+i \\ 2+2i & 5+3i \\ 3+4i & 6+5i \end{pmatrix} $  ist $  \begin{pmatrix} 1 & 2+2i & 3+4i  \\ 4+i & 5+3i & 6+5i \end{pmatrix}$.
+\item Die Transponierte eines Spaltenvektors (also einer $(m\times 1)$-Matrix) ist ein Zeilenvektor, also eine $(1\times m)$-Matrix und umgekehrt:
+\[  \begin{pmatrix} 1 \\ -3 \\ 2 \end{pmatrix}^T =\begin{pmatrix} 1 & -3 & 2 \end{pmatrix}. \]
+\end{enumerate}}
+
+\lang{en}{
+\begin{enumerate}
+\item The transpose of
+$  \begin{pmatrix} 1 & 2 & 3  \\ 4 & 5 & 6 \end{pmatrix} $
+is
+$  \begin{pmatrix} 1 & 4 \\ 2 & 5 \\ 3 & 6 \end{pmatrix} .$ \\
+The transpose of $ \begin{pmatrix} 1 & 4+i \\ 2+2i & 5+3i \\ 3+4i & 6+5i \end{pmatrix} $  is $  \begin{pmatrix} 1 & 2+2i & 3+4i  \\ 4+i & 5+3i & 6+5i \end{pmatrix}$.
+\item The transpose of a column vector (considered as a $(m\times 1)$-matrix) is a row vector (a $(1\times m)$-matrix) and converserly:
+\[  \begin{pmatrix} 1 \\ -3 \\ 2 \end{pmatrix}^T =\begin{pmatrix} 1 & -3 & 2 \end{pmatrix}. \]
+\end{enumerate}}
+\end{example}
+
+\begin{rule}
+\lang{de}{
+Es ist leicht zu sehen, dass die Transponierte der Transponierten einer jeden Matrix wieder die Matrix selbst ist, d.h. für jede Matrix $A$ ist
+\[ (A^{T})^{T} =A. \]}
+\lang{en}{
+It is easy to see, that the transpose of a transpose is just the matrix herself again. This is for every matrix $A$ we have
+\[ (A^{T})^{T} =A. \]}
+\end{rule}
+
+\section{\lang{de}{Rechenregeln für transponierte Matrizen} \lang{en}{Calculation rules for transposes}}\label{sec:rechenregeln}
+\lang{de}{
+Im Folgenden wird erklärt, wie sich das Transponieren von Matrizen mit den Rechenoperationen verträgt.}
+\lang{en}{
+The following explains what calculation rules apply to transposes.}
+
+\begin{rule}
+\lang{de}{
+\begin{enumerate}
+\item Für alle Matrizen $A,B\in M(m,n;\mathbb{K})$ gilt
+\[   (A+B)^T=A^T+B^T. \]
+Das Transponierte der Summe ist also die Summe der transponierten Matrizen.
+\item Für alle Matrizen $A\in M(m,n;\mathbb{K})$ und Skalare $r\in\mathbb{K}$ gilt
+\[ (rA)^T=r\cdot A^T.\]
+\item Für Matrizen $A\in M(m,n;\mathbb{K})$ und $B\in M(n,k;\mathbb{K})$ gilt
+\[  (AB)^T =B^T\cdot A^T. \]
+Beim Transponieren von Matrizenprodukten dreht sich also die Reihenfolge der Faktoren um.
+\end{enumerate}}
+
+\lang{en}{
+\begin{enumerate}
+\item For all matrices $A,B\in M(m,n;\mathbb{K})$ we have
+\[   (A+B)^T=A^T+B^T. \]
+The transpose of a sum is the sum of the transposes.
+\item For all matrices $A\in M(m,n;\mathbb{K})$ and scalars $r\in\mathbb{K}$ we have
+\[ (rA)^T=r\cdot A^T.\]
+\item For $A\in M(m,n;\mathbb{K})$ and $B\in M(n,k;\mathbb{K})$ we have
+\[  (AB)^T =B^T\cdot A^T. \]
+The transposition of a matrix product rotates the order of the factors.
+\end{enumerate}}
+\end{rule}
+
+\lang{de}{
+\begin{tabs*}[\initialtab{0}]
+\tab{Herleitung der dritten Regel}%%5HERLEITUNG???!!!!!!
+\[
+    (A B)^T = \left( \sum_{\ell=1}^n a_{i\ell} \cdot b_{\ell j} \right)^T_{1 \leq i \leq n, 1 \leq j \leq k}
+\]
+\[
+    = \left( \sum_{\ell=1}^n a_{j\ell} \cdot b_{\ell i} \right)_{1 \leq i \leq n, 1 \leq j \leq k}
+    = \left( \sum_{\ell=1}^n b_{\ell i} \cdot a_{j\ell} \right)_{1 \leq i \leq n, 1 \leq j \leq k}
+    = B^T \cdot A^T
+\]
+\end{tabs*}}
+
+\lang{en}{
+\begin{tabs*}[\initialtab{0}]
+\tab{Derivation of the third rule}%%5HERLEITUNG???!!!!!!
+\[
+    (A B)^T = \left( \sum_{\ell=1}^n a_{i\ell} \cdot b_{\ell j} \right)^T_{1 \leq i \leq n, 1 \leq j \leq k}
+\]
+\[
+    = \left( \sum_{\ell=1}^n a_{j\ell} \cdot b_{\ell i} \right)_{1 \leq i \leq n, 1 \leq j \leq k}
+    = \left( \sum_{\ell=1}^n b_{\ell i} \cdot a_{j\ell} \right)_{1 \leq i \leq n, 1 \leq j \leq k}
+    = B^T \cdot A^T
+\]
+\end{tabs*}}
+
+\lang{de}{
+\begin{example}
+F\"ur
+\[A = \begin{pmatrix}
+12 & 11\\ 10 & 9 \\8 & 7 \\ 6& 5
+\end{pmatrix}\in M(4,2;\R)  \,\,\text{und } B = \begin{pmatrix}
+1 & 3 & 5 \\ 2i & 4 & 6
+\end{pmatrix}\in M(2,3;\C)
+\]
+ist das Produkt die $(4\times 3)$-Matrix
+\[ AB= \begin{pmatrix}
+12+22i & 36+44 & 60+66\\ 10+18i & 30+36 & 50+54 \\ 8+14i & 24+28 & 40+42 \\ 6+10i & 18+20 & 30+30
+\end{pmatrix} =\begin{pmatrix}  
+12+22i & 80 & 126 \\ 10+18i & 66 & 104 \\ 8+14i & 52 & 82 \\ 6+10i & 38 & 60
+\end{pmatrix} \in M(4, 3;\C), \]
+und daher 
+\[ (AB)^T= \begin{pmatrix} 12+22i & 10+18i & 8+14i & 6+10i\\ 80 & 66 & 52 & 38 \\ 126 & 104 & 82 & 60
+\end{pmatrix}\in M(3, 4;\C).\]
+Das Produkt $B^T\cdot A^T$ ist gegeben durch
+\begin{eqnarray*}
+ B^T\cdot A^T &=& \begin{pmatrix}
+1 & 2i\\ 3& 4\\ 5 & 6
+\end{pmatrix} \cdot  \begin{pmatrix}
+12  & 10 & 8 & 6\\ 11 & 9 & 7 & 5
+\end{pmatrix} \\
+&=& \begin{pmatrix}
+12+22i & 10+18i & 8+14i & 6+10i \\ 36+44 & 30+36 & 24+28 & 18+20 \\ 60+66 & 50+54  & 40+42 & 30+30
+\end{pmatrix} =\begin{pmatrix} 12+22i & 10+18i & 8+14i & 6+10i \\ 80 & 66 & 52 & 38 \\ 126 & 104 & 82 & 60
+\end{pmatrix} = (AB)^T
+\end{eqnarray*}
+\end{example}}
+
+\lang{en}{
+\begin{example}
+For
+\[A = \begin{pmatrix}
+12 & 11\\ 10 & 9 \\8 & 7 \\ 6& 5
+\end{pmatrix}\in M(4,2;\R)  \,\,\text{and } B = \begin{pmatrix}
+1 & 3 & 5 \\ 2i & 4 & 6
+\end{pmatrix}\in M(2,3;\C)
+\]
+we have, that the product is the $(4\times 3)$-matrix
+\[ AB= \begin{pmatrix}
+12+22i & 36+44 & 60+66\\ 10+18i & 30+36 & 50+54 \\ 8+14i & 24+28 & 40+42 \\ 6+10i & 18+20 & 30+30
+\end{pmatrix} =\begin{pmatrix}  
+12+22i & 80 & 126 \\ 10+18i & 66 & 104 \\ 8+14i & 52 & 82 \\ 6+10i & 38 & 60
+\end{pmatrix} \in M(4, 3;\C), \]
+hence 
+\[ (AB)^T= \begin{pmatrix} 12+22i & 10+18i & 8+14i & 6+10i\\ 80 & 66 & 52 & 38 \\ 126 & 104 & 82 & 60
+\end{pmatrix}\in M(3, 4;\C).\]
+The product $B^T\cdot A^T$ is given by
+\begin{eqnarray*}
+ B^T\cdot A^T &=& \begin{pmatrix}
+1 & 2i\\ 3& 4\\ 5 & 6
+\end{pmatrix} \cdot  \begin{pmatrix}
+12  & 10 & 8 & 6\\ 11 & 9 & 7 & 5
+\end{pmatrix} \\
+&=& \begin{pmatrix}
+12+22i & 10+18i & 8+14i & 6+10i \\ 36+44 & 30+36 & 24+28 & 18+20 \\ 60+66 & 50+54  & 40+42 & 30+30
+\end{pmatrix} =\begin{pmatrix} 12+22i & 10+18i & 8+14i & 6+10i \\ 80 & 66 & 52 & 38 \\ 126 & 104 & 82 & 60
+\end{pmatrix} = (AB)^T
+\end{eqnarray*}
+\end{example}}
+
+
+\end{visualizationwrapper}
+
+\end{content}

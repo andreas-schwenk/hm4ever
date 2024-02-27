@@ -1,0 +1,247 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A11: Kritische Stellen}
+    \lang{en}{problem_11}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+
+\lang{de}{
+	\title{A11: Kritische Stellen}
+}
+\lang{en}{
+	\title{Problem 11}
+}
+
+\begin{block}[annotation]
+      
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9476}{Ticket 9476}
+\end{block}
+
+
+\begin{problem}
+
+\begin{variables}
+	\randint[Z]{s}{-1}{1}
+    \randint{c}{2}{8}
+    \randint{a}{2}{4}
+	\randint{q}{1}{9}
+	\function[calculate]{v}{c^2}
+	\function[calculate]{d}{c*q}
+	\function[calculate]{z}{s*a}
+	\function[calculate]{w}{d^2}
+	\function[calculate]{exte}{-q}
+	\function[calculate]{extz}{q}
+	\function{f}{(z*x)/(v*x^2+w)} 
+\end{variables}
+
+%Frage 1 von 4
+ \begin{question}
+	\lang{de}{
+		\text{Gegeben ist die Funktion $f(x)=\var{f}$. Wo hat $f$ kritische Stellen?}
+	    \explanation{Um die kritischen Stellen zu bestimmen benötigt man die Nullstellen der ersten Ableitung.
+        Für die Bestimmung der ersten Ableitung bietet sich
+        hier die Quotientenregel an, da $f(x)$ ein Quotient zweier Polynome ist. Anschließend muss die so erhaltene erste Ableitung gleich Null
+        gesetzt und nach $x$ aufgelöst werden.}
+	}
+	\lang{en}{
+		\text{Let $f(x)=\var{f}$. Where does $f$ have critical points?}
+	}
+	\type{input.number}
+	\begin{answer}
+  		\lang{de}{\text{ Die kleinere der kritischen Stellen von $f$ ist $x_0=$}}
+   		\lang{en}{\text{The smaller of the critical points of $f$ is $x_0=$}}
+		\solution{exte}
+	\end{answer}		
+	\begin{answer}
+  		\lang{de}{\text{ Die gr\"{o}{\ss}ere der kritischen Stellen von $f$ ist $x_1=$}}
+   		\lang{en}{\text{The larger of the critical points of $f$ is $x_1=$}}
+		\solution{extz}
+	\end{answer}
+\end{question}
+
+%Frage 2 von 4
+\begin{question}
+    \lang{de}{
+		\text{Liegen in diesen kritischen Stellen $x_0$ und $x_1$ Extrema vor? Falls ja, welcher Art sind sie?}
+		\explanation{Um zu prüfen, ob Maxima oder Minima vorliegen, kann man 
+        prüfen, ob $f'(x)$ in den kritischen Stellen das Vorzeichen wechselt. Dazu reicht es, den Zähler 
+        der ersten Ableitung zu betrachten, da der Nenner immer positiv ist. Eine andere Möglichkeit wäre es, die zweite Ableitung zu bilden und zu schauen, 
+        ob sie in den kritischen Stellen positiv oder negativ ist.}
+	}
+	\lang{en}{
+		\text{Are there extrema at the points $x_0$ and $x_1$? If so, which type of extrema are they?}
+	}
+	\type{mc.multiple}
+	\begin{choice}
+    	\lang{de}{\text{In $x_0$ liegt kein Extremum vor.}}
+		\lang{en}{\text{There is no extremum at $x_0$.}}
+  		\solution{false}
+	\end{choice}
+	\begin{choice}
+   		\lang{de}{\text{In $x_0$ liegt ein lokales Minimum vor.}}
+   		\lang{en}{\text{There is a local minimum at $x_0$.}}
+   		\solution{compute}
+ 		\iscorrect{s}{=}{1}
+ 	\end{choice}
+ 	\begin{choice}
+ 		\lang{de}{\text{In $x_0$ liegt ein lokales Maximum vor.}}
+   		\lang{en}{\text{There is a local maximum at $x_0$.}}	
+   		\solution{compute}
+ 		\iscorrect{s}{=}{-1}
+ 	\end{choice}
+ 	\begin{choice}
+    	\lang{de}{\text{In $x_1$ liegt kein Extremum vor.}}
+		\lang{en}{\text{There is no extremum at $x_1$.}}
+  		\solution{false}
+	\end{choice}
+	\begin{choice}
+   		\lang{de}{\text{In $x_1$ liegt ein lokales Minimum vor.}}
+   		\lang{en}{\text{There is a local minimum at $x_1$.}}
+   		\solution{compute}
+ 		\iscorrect{s}{=}{-1}
+ 	\end{choice}
+ 	\begin{choice}
+ 		\lang{de}{\text{In $x_1$ liegt ein lokales Maximum vor.}}
+   		\lang{en}{\text{There is a local maximum at $x_1$.}}	
+   		\solution{compute}
+ 		\iscorrect{s}{=}{1}
+ 	\end{choice}
+\end{question}
+	
+
+\begin{variables}
+	\randint[Z]{t}{-1}{1}
+    \randint{j}{1}{3}
+    \randint{p}{2}{5}
+	\randint{l}{1}{9}
+	\function[calculate]{u}{t*2*j^2}
+	\function[calculate]{k}{p*j}
+	\function[calculate]{m}{-t*k^2}
+	\function[calculate]{ee}{-p/2}
+	\function[calculate]{ed}{p/2}
+	\number{result}{0}
+	\function{g}{u*x^4+m*x^2+l} 
+\end{variables}
+
+%Frage 3 von 4
+\begin{question}
+	\lang{de}{
+		\text{Gegeben ist die Funktion $f(x)=\var{g}$. Welche sind die kritische Stellen $x_0$, $x_1$, $x_2$ von $f$ mit $x_0<x_1<x_2$?}
+	    \explanation{Um die kritischen Stellen zu bestimmen, benötigt man die Nullstellen der ersten Ableitung. 
+        Anschließend muss die so erhaltene erste Ableitung gleich Null gesetzt und nach $x$ aufgelöst werden.}
+	}
+	\lang{en}{
+		\text{Let $f(x)=\var{g}$. What are the critical points $x_0$, $x_1$, $x_2$ of $f$ where $x_0<x_1<x_2$?}
+	}
+	\type{input.number}
+	\begin{answer}
+		\text{$x_0=$}
+		\solution{ee}
+	\end{answer}		
+	\begin{answer}
+		\text{$x_1=$}
+		\solution{result}			
+	\end{answer}
+	\begin{answer}
+		\text{$x_2=$}
+		\solution{ed}
+	\end{answer}
+\end{question}
+	 
+%Frage 4 von 4
+\begin{question}
+	\lang{de}{
+		\text{Liegen in diesen kritischen Stellen $x_0$, $x_1$ und $x_2$ Extrema vor? Falls ja, welcher Art sind sie?}
+		\explanation{Um zu prüfen, ob Maxima oder Minima vorliegen, kann man 
+        prüfen, ob $f'(x)$ in den kritischen Stellen das Vorzeichen wechselt. Eine andere Möglichkeit
+        wäre es, die zweite Ableitung zu bilden und zu schauen, 
+        ob sie in den kritischen Stellen positiv oder negativ ist. }
+	}
+	\lang{en}{
+		\text{Are there extrema at the critical points $x_0$, $x_1$, and $x_2$? If so, what type of extrema are they?}
+	}
+	\type{mc.multiple}
+	\begin{choice}
+    	\lang{de}{\text{In $x_0$ liegt kein Extremum vor.}}
+		\lang{en}{\text{There is no extremum at $x_0$.}}
+  		\solution{false}
+	\end{choice}
+	\begin{choice}
+   		\lang{de}{\text{In $x_0$ liegt ein lokales Minimum vor.}}
+   		\lang{en}{\text{There is a local minimum at $x_0$.}}	
+   		\solution{compute}
+ 		\iscorrect{t}{=}{1}
+ 	\end{choice}
+ 	\begin{choice}
+ 		\lang{de}{\text{In $x_0$ liegt ein lokales Maximum vor.}}
+   		\lang{en}{\text{There is a local maximum at $x_0$.}}	
+   		\solution{compute}
+ 		\iscorrect{t}{=}{-1}
+ 	\end{choice}
+ 	\begin{choice}
+    	\lang{de}{\text{In $x_1$ liegt kein Extremum vor.}}
+		\lang{en}{\text{There is no extremum at $x_1$.}}
+  		\solution{false}
+	\end{choice}
+	\begin{choice}
+   		\lang{de}{\text{In $x_1$ liegt ein lokales Minimum vor.}}
+  		\lang{en}{\text{There is a local minimum at $x_1$.}}
+   		\solution{compute}
+ 		\iscorrect{t}{=}{-1}
+ 	\end{choice}
+ 	\begin{choice}
+ 		\lang{de}{\text{In $x_1$ liegt ein lokales Maximum vor.}}
+   		\lang{en}{\text{There is a local maximum at $x_1$.}}	
+   		\solution{compute}
+ 		\iscorrect{t}{=}{1}
+ 	\end{choice}
+ 	\begin{choice}
+    	\lang{de}{\text{In $x_2$ liegt kein Extremum vor.}}
+		\lang{en}{\text{There is no extremum at $x_2$.}} 
+  		\solution{false}
+	\end{choice}
+	\begin{choice}
+   		\lang{de}{\text{In $x_2$ liegt ein lokales Minimum vor.}}
+   		\lang{en}{\text{There is a local minimum at $x_2$.}}	
+   		\solution{compute}
+ 		\iscorrect{t}{=}{1}
+ 	\end{choice}
+ 	\begin{choice}
+ 		\lang{de}{\text{In $x_2$ liegt ein lokales Maximum vor.}}
+ 		\lang{en}{\text{There is a local maximum at $x_2$.}}
+   		\solution{compute}
+ 		\iscorrect{t}{=}{-1}
+ 	\end{choice}
+\end{question}
+
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+
+
+
+\end{content}

@@ -1,0 +1,38 @@
+%This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)
+%https://creativecommons.org/licenses/by/4.0/legalcode
+% Copy of T104_Exponentials_B
+\documentclass[rgb]{standalone}
+\usepackage{tkz-euclide}
+\definecolor{myorange}{hsb}{0.0833, 1, 0.8}
+\definecolor{mygreen}{hsb}{0.3333, 1, 0.8}
+\definecolor{myblue}{hsb}{0.5833, 1, 0.8}
+\definecolor{mymagenta}{hsb}{0.8333, 1, 0.8}
+\begin{document}
+	\begin{tikzpicture}[scale=1.5, font=\Large]
+		% Coordinate system
+		\tkzInit[xmin=-3,xmax=3,ymin=-0,ymax=6]
+		\tkzGrid[color=lightgray]
+		\tkzDrawX[thick,label=$x$]
+		\tkzDrawY[thick,label=$y$]
+		% Graphs
+		\draw[very thick,domain={-3}:{ln(6)/2}, smooth, variable=\x, myblue] plot ({\x}, {exp(2*\x)});
+		\draw[very thick,domain={-ln(6)/2)}:{3}, smooth, variable=\x, myblue, densely dashed] plot ({\x}, {exp(-2*\x)});	
+		\draw[very thick,domain={-3}:{ln(6)}, smooth, variable=\x, myorange] plot ({\x}, {exp(\x)});
+		\draw[very thick,domain={-ln(6)}:{3}, smooth, variable=\x, myorange, densely dashed] plot ({\x}, {exp(-\x)});
+		\draw[very thick,domain={-3}:{3}, smooth, variable=\x, mygreen] plot ({\x}, {exp(0.5*\x)});
+		\draw[very thick,domain={-3}:{3}, smooth, variable=\x, mygreen, densely dashed] plot ({\x}, {exp(-0.5*\x)});
+		% Labels
+		\node[below=0.5mm] at (0,0){$0$};
+		\node[below=0.5mm] at (-2,0){$-2$};
+		\node[below=0.5mm] at (2,0){$2$};
+		\node[left=0.5mm] at (0,1){$1$};
+		\node[left=0.5mm] at (0,3){$3$};
+		\node[left=0.5mm] at (0,5){$5$};
+		\node[below,myblue, rotate=90] at (0.85,5.25){$y=e^{2x}$};
+		\node[above,myblue, rotate=90] at (-0.8,5.25){$y=e^{-2x}$};
+		\node[below,myorange, rotate=90] at (1.75,5.2){$y=e^x$};
+		\node[above,myorange, rotate=90] at (-1.65,5.2){$y=e^{-x}$};
+		\node[below,mygreen, rotate=90] at (2.425,5.3){$y=e^{\frac{1}{2}x}$};
+		\node[above,mygreen, rotate=90] at (-2.425,5.3){$y=e^{-\frac{1}{2}x}$};
+	\end{tikzpicture}	
+\end{document}

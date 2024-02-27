@@ -1,0 +1,79 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A01: Tangentengleichung}
+    \lang{en}{problem_1}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A01: Tangentengleichung}}
+\lang{en}{\title{A01: Tangent equation}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24016}{Ticket 24016}
+\end{block}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+
+
+
+\begin{block}[annotation]
+Kopie: hm4mint/T106_Differentialrechnung/training 1
+
+Im Ticket-System: \href{http://team.mumie.net/issues/9467}{Ticket 9467}
+\end{block}
+
+\begin{problem}
+ 
+    \begin{question}
+      \lang{de}{\text{Gegeben sei die Funktion $f(x)=\var{f}$. Bestimmen Sie die Gleichung der Tangente an den Graphen von 
+      $f$ im Punkt $(\var{x0},f(\var{x0}))$.}}
+      \lang{en}{\text{Suppose we are given the function $f(x)=\var{f}$. Determine the equation of the tangent to the graph of 
+      $f$ at the point $(\var{x0},f(\var{x0}))$.}}
+      \type{input.function}
+ 
+      \begin{variables}
+            \randint{n}{1}{6}
+            \randint{a}{-5}{5}
+            \randint{x0}{-1}{1}
+            \function[expand,normalize]{f}{a*e^x+x^n}
+            \function{fx0}{a*e^x0+x0^n}
+            \function{l}{(a*e^x0+n*x0^(n-1))*(x-x0)+fx0}
+      \end{variables}
+      
+      \begin{answer}
+      		\text{$T(x)=$}
+			\solution{l}
+			\checkAsFunction{x}{-10}{10}{100}
+		\end{answer}
+        \lang{de}{\explanation{Die Steigung $m$ der Tangente berechnet sich so: $m=f'(1)$. Nun braucht nur noch 
+        der angegebene Punkt in $T(x)$ eingesetzt zu werden, um den Achsenabschnitt $b$ auszurechnen:
+        $f(1)=f'(1)\cdot 1+b$.}}
+        \lang{en}{\explanation{The slope $m$ of the tangent is calculated as $m=f'(1)$. Now we only 
+        have to substitute the given point in $T(x)$ to calculate the intercept $b$:
+        $f(1)=f'(1)\cdot 1+b$.}}
+        
+	\end{question}
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+
+
+\end{content}

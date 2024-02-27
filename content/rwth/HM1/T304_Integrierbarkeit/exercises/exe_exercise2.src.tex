@@ -1,0 +1,208 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü02: Ober- und Untersummen}
+    \lang{en}{Exercise 2}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+
+\title{\lang{de}{Ü02: Ober- und Untersummen}}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10577}{Ticket 10577}
+\end{block}
+
+%######################################################FRAGE_TEXT
+\lang{de}{ Berechnen Sie die Ober- und Untersummen für die Funktion $f(x)=x^2-3$ auf dem Intervall $[-1;5]$ zu den
+ äquidistanten Zerlegungen in \\
+\[\text{ a) } 2, \qquad \text{ b) } 3,\qquad \text{ c) } 4, \qquad \text{ d) }6\] 
+Teilintervalle.}
+
+%##################################################ANTWORTEN_TEXT
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+
+  \tab{\lang{de}{    Antworten    }}
+    \lang{de}{ \begin{enumerate}[a)]
+\item a) $2$ Teilintervalle: $O(Z_2)=69$ und $U(Z_2)=-6$.
+\item b) $3$ Teilintervalle: $O(Z_3)=52$ und $U(Z_3)=2$.
+\item c) $4$ Teilintervalle: $O(Z_4)=\frac{363}{8}=45,375$ und $U(Z_4)=\frac{27}{4}=6,75$.
+\item d) $6$ Teilintervalle: $O(Z_6)=38$ und $U(Z_6)=12$.
+\end{enumerate} }
+
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung a)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+Bei der äquidistanten Zerlegung $Z_2$ in $2$ Teilintervalle sind beide Teile genau halb so lang wie das gesamte
+Intervall $[-1;5]$. Dessen Länge ist $5-(-1)=6$, weshalb die Teilintervalle die Länge $3$ haben und die 
+Zerlegung also gegeben ist durch die Teilintervalle $[-1;2]$ und $[2;5]$.
+
+\step
+Für die Ober- und Untersumme benötigen wir die Suprema und Infima von $f$ auf den Teilintervallen $[-1;2]$ und $[2;5]$.
+Da die Funktion $f$ im Bereich $[-1;0]$ monoton fallend ist und im Bereich $[0;5]$ monoton wachsend,
+wird das Supremum im Intervall $[-1;2]$ am Rand, also bei $-1$ oder bei $2$ angenommen, und das Supremum im Intervall $[2;5]$ wird bei $5$ angenommen, also
+\[  \sup\{ f(x) \,|\, x\in [-1;2]\}=\max \{ f(-1); f(2)\}=\max \{ -2; 1\}=1,\]
+sowie
+\[  \sup\{ f(x) \,|\, x\in [2;5]\}= f(5)=22.\]
+Ebenso wird das Infimum im Intervall $[-1;2]$  bei $x=0$ und das Infimum im Intervall $[2;5]$ beim linken Rand $x=2$ angenommen, also
+\[  \inf\{ f(x) \,|\, x\in [-1;2]\}=f(0)=-3,\]
+sowie
+\[  \inf\{ f(x) \,|\, x\in [2;5]\}= f(2)=1.\]
+
+\step Nach den allgemeinen Formeln für die Obersumme und Untersumme ist also
+\[  O(Z_2)=1\cdot 3 + 22\cdot 3=69 \]
+und
+\[  U(Z_2)=-3\cdot 3 + 1\cdot 3=-6, \]
+da die Längen der Teilintervalle jeweils $3$ betragen.
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung b)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+Bei der äquidistanten Zerlegung $Z_3$ in $3$ Teilintervalle sind die Längen der Teile genau ein Drittel so groß 
+wie die Länge des gesamten Intervalls $[-1;5]$. 
+Dessen Länge ist $5-(-1)=6$, weshalb die Teilintervalle die Länge $2$ haben und die 
+Zerlegung also gegeben ist durch die Teilintervalle $[-1;1]$, $[1;3]$ und $[3;5]$.
+
+\step
+Für die Ober- und Untersumme benötigen wir die Suprema und Infima von $f$ auf diesen drei Teilintervallen.
+Da die Funktion $f$ im Bereich $[-1;0]$ monoton fallend ist und im Bereich $[0;5]$ monoton wachsend,
+wird das Supremum im Intervall $[-1;1]$ am Rand, also bei $-1$ oder bei $1$ angenommen, und das Supremum in den
+anderen beiden Intervallen jeweils am rechten Rand, also
+\begin{eqnarray*}
+  \sup\{ f(x) \,|\, x\in [-1;1]\} &=& \max \{ f(-1); f(1)\}=\max \{ -2; -2\}=-2,\\
+  \sup\{ f(x) \,|\, x\in [1;3]\} &=& f(3)=6\quad \text{und}\\
+  \sup\{ f(x) \,|\, x\in [3;5]\} &=& f(5)=22.
+\end{eqnarray*}
+Ebenso wird das Infimum im Intervall $[-1;1]$  bei $0$ angenommen, und das Infimum in den anderen beiden 
+Intervallen am linken Rand, also
+\begin{eqnarray*}
+  \inf\{ f(x) \,|\, x\in [-1;1]\} &=& f(0)=-3,\\
+  \inf\{ f(x) \,|\, x\in [1;3]\} &=& f(1)=-2\quad \text{und}\\
+  \inf\{ f(x) \,|\, x\in [3;5]\} &=& f(3)=6.
+\end{eqnarray*}
+\step
+Nach den allgemeinen Formeln für die Obersumme und Untersumme ist also
+\[  O(Z_3)=-2\cdot 2 + 6\cdot 2+ 22\cdot 2=52 \]
+und
+\[  U(Z_3)=-3\cdot 2 + (-2\cdot 2)+ 6\cdot 2=2, \]
+da die Längen der Teilintervalle jeweils $2$ betragen.
+
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung c)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+Bei der äquidistanten Zerlegung $Z_4$ in $4$ Teilintervalle sind die Längen der Teile genau ein Viertel so groß 
+wie die Länge des gesamten Intervalls $[-1;5]$. 
+Dessen Länge ist $5-(-1)=6$, weshalb die Teilintervalle die Länge $\frac{3}{2}$ haben und die 
+Zerlegung also gegeben ist durch die Teilintervalle $[-1; 0,5]$, $[0,5; 2]$, $[2; 3,5]$ und $[3,5; 5]$.
+
+\step
+Für die Ober- und Untersumme benötigen wir die Suprema und Infima von $f$ auf diesen vier Teilintervallen.
+Da die Funktion $f$ im Bereich $[-1;0]$ monoton fallend ist und im Bereich $[0;5]$ monoton wachsend,
+wird das Supremum im Intervall $[-1; 0,5]$ am Rand, also bei $-1$ oder bei $0,5$ angenommen, und das Supremum in den anderen Intervallen jeweils am rechten Rand, also
+\begin{eqnarray*}
+  \sup\{ f(x) \,|\, x\in [-1; 0,5]\} &=& \max \{ f(-1); f(0,5)\}=\max \{ -2; -2,75\}=-2,\\
+  \sup\{ f(x) \,|\, x\in [0,5;2]\} &=& f(2)=1,\\
+  \sup\{ f(x) \,|\, x\in [2; 3,5]\}&=& f(\frac{7}{2})=\frac{37}{4}\quad \text{und}\\
+  \sup\{ f(x) \,|\, x\in [3,5 ;5]\}&=& f(5)=22.
+\end{eqnarray*}
+Ebenso wird das Infimum im Intervall $[-1;0,5]$  bei $0$ angenommen und das Infimum in den anderen Intervallen 
+am linken Rand, also
+\begin{eqnarray*}
+  \inf\{ f(x) \,|\, x\in [-1;0,5]\} &=& f(0)=-3,\\
+  \inf\{ f(x) \,|\, x\in [0,5;2]\}&=& f(0,5)=-2,75=-\frac{11}{4},\\
+  \inf\{ f(x) \,|\, x\in [2; 3,5]\}&=&f(2)=1 \quad \text{und}\\
+  \inf\{ f(x) \,|\, x\in [3,5 ;5]\}&=& f(\frac{7}{2})=\frac{37}{4}.
+\end{eqnarray*}
+\step
+Nach den allgemeinen Formeln für die Obersumme und Untersumme ist also
+\[  O(Z_4)=-2\cdot \frac{3}{2} + 1\cdot \frac{3}{2}+ \frac{37}{4}\cdot \frac{3}{2}+ 22\cdot \frac{3}{2}=\frac{363}{8}=45+\frac{3}{8} \]
+und
+\[  U(Z_4)=-3\cdot \frac{3}{2} + (-\frac{11}{4})\cdot \frac{3}{2}+1\cdot \frac{3}{2}+ \frac{37}{4}\cdot \frac{3}{2}=\frac{27}{4}=6+\frac{3}{4}, \]
+da die Längen der Teilintervalle jeweils $\frac{3}{2}$ betragen.
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{    Lösung d)    }}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+Bei der äquidistanten Zerlegung $Z_6$ in $6$ Teilintervalle sind die Längen der Teile genau ein Sechstel so groß 
+wie die Länge des gesamten Intervalls $[-1;5]$. 
+Dessen Länge ist $5-(-1)=6$, weshalb die Teilintervalle die Länge $1$ haben und die 
+Zerlegung also gegeben ist durch die Teilintervalle $[-1;0]$, $[0;1]$, $[1;2]$, $[2;3]$, $[3;4]$ und $[4;5]$.
+
+\step
+Für die Ober- und Untersumme benötigen wir die Suprema und Infima von $f$ auf diesen sechs Teilintervallen.
+Da die Funktion $f$ im Bereich $[-1;0]$ monoton fallend ist und im Bereich $[0;5]$ monoton wachsend,
+wird das Supremum im Intervall $[-1;0]$ am linken Rand, also bei $-1$, und das Supremum in den
+anderen Intervallen jeweils am rechten Rand angenommen, also
+\begin{eqnarray*}
+  \sup\{ f(x) \,|\, x\in [-1;0]\} &=&  f(-1)=-2,\\
+  \sup\{ f(x) \,|\, x\in [0;1]\} &=&  f(1)=-2,\\
+  \sup\{ f(x) \,|\, x\in [1;2]\} &=&  f(2)=1,\\
+  \sup\{ f(x) \,|\, x\in [2;3]\} &=&  f(3)=6,\\
+  \sup\{ f(x) \,|\, x\in [3;4]\} &=& f(4)=13\quad \text{und}\\
+  \sup\{ f(x) \,|\, x\in [4;5]\} &=& f(5)=22.
+\end{eqnarray*}
+Ebenso wird das Infimum im Intervall $[-1;0]$  am rechten Rand, also bei $0$ angenommen, und das Infimum in den 
+anderen Intervallen am linken Rand, also
+\begin{eqnarray*}
+  \inf\{ f(x) \,|\, x\in [-1;0]\} &=&  f(0)=-3,\\
+  \inf\{ f(x) \,|\, x\in [0;1]\} &=&  f(0)=-3,\\
+  \inf\{ f(x) \,|\, x\in [1;2]\} &=&  f(1)=-2,\\
+  \inf\{ f(x) \,|\, x\in [2;3]\} &=&  f(2)=1,\\
+  \inf\{ f(x) \,|\, x\in [3;4]\} &=& f(3)=6\quad \text{und}\\
+  \inf\{ f(x) \,|\, x\in [4;5]\} &=& f(4)=13.
+\end{eqnarray*}
+\step
+Nach den allgemeinen Formeln für die Obersumme und Untersumme ist also
+\[  O(Z_6)=-2\cdot 1 + (-2)\cdot 1 +1\cdot 1 +6\cdot 1+13\cdot 1 + 22\cdot 1=38 \]
+und
+\[  U(Z_6)=-3\cdot 1 + (-3)\cdot 1 +(-2)\cdot 1+1\cdot 1 + 6\cdot 1+13\cdot 1 =12, \]
+da die Längen der Teilintervalle jeweils $1$ betragen.
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+
+%#############################################################ENDE
+\end{tabs*}
+\end{content}

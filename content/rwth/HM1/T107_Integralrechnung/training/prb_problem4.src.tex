@@ -1,0 +1,118 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A04: Hauptsatz der Integralrechnung}
+    \lang{en}{problem 4}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+
+\lang{de}{
+	\title{A04: Hauptsatz der Integralrechnung}
+}
+\lang{en}{
+	\title{Problem 4}
+}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9612}{Ticket 9612}
+\end{block}
+
+\begin{problem}
+	\begin{variables}
+	 	\randint[Z]{a}{-5}{3}
+	 	\randint[Z]{b}{-5}{4}
+	 	\randint[Z]{c}{-3}{5}
+	 	\randint[Z]{d}{-4}{5}
+	 	\randint[Z]{r}{-20}{20}
+
+		\function{f}{a*sin(x)+d*cos(x)}
+		\derivative[normalize]{f_1}{f}{x}
+		\functionNormalize{f_1}
+	%Da Pi nicht geparst wird, wird das Ergebnis simuliert.
+	%Sinus(n*pi)=0 forall n. Kosinus(n*pi) = +-1. Daher (-1)^n...
+ 	 	\randint{n}{2}{8}
+		\function[calculate]{hilf}{(-1)^n}
+		\function[calculate]{L}{d*hilf-d}
+
+	\end{variables}
+
+
+	\begin{question}
+		\lang{de}{
+			\text{
+
+
+
+			Gegeben sei die Funktion $f(x) = \var{f_1}$. \\
+		      Bestimmen Sie eine Stammfunktion $F(x)$ von $f(x)$:}
+		}
+		 \lang{en}{\text{
+      Given is the function $f(x) = \var{f_1}$. \\
+      Find an antiderivate $F(x)$ of $f(x)$:
+     }}
+		\type{input.function}
+
+		\begin{answer}
+			\text{ $F(x) = $}
+			\solution{f}
+			\inputAsFunction{x}{inp}
+			\checkFuncForZero{D[inp]-f_1}{-10}{10}{100}
+            \lang{de}{
+            \explanation{Die eingegebene Funktion ist keine Stammfunktion von $f$. Beachten Sie, dass $\sin(x)\prime=\cos(x)$ und $\cos(x)\prime = -\sin(x)$ gilt.}
+	        }	
+            \lang{en}{
+            \explanation{The entered function is not an antiderivative of $f$. Note that  $\sin(x)\prime=\cos(x)$ and $\cos(x)\prime = -\sin(x)$ holds.}
+	        }	            
+        \end{answer}
+	\end{question}
+
+
+	\begin{question}
+	    \lang{de}{
+			\text{Berechnen Sie nun $\int_{0}^{\var{n}\pi} f(x) \, dx$ mit Hilfe des Hauptsatzes der \\
+			Differential- und Integralrechnung:}
+	    }
+	     \lang{en}{\text{
+        Now calculate $\int_{0}^{\var{n}\pi} f(x) \, dx$ with the help of the
+        fundamental theorem of calculus:
+       }}
+		\type{input.number}
+		\begin{answer}
+			\text{ $\int_{0}^{\var{n}\pi} f(x) \, dx = $ }
+			\solution{L}
+            
+            \lang{de}{
+            \explanation{Für eine Stammfunktion $F$ von $f$ gilt: $\int_{0}^{\var{n}\pi} f(x) \, dx=F(\var{n}\pi)-F(0)$.}
+            }
+            \lang{en}{
+            \explanation{For an antiderivative $F$ of $f$ we have  $\int_{0}^{\var{n}\pi} f(x) \, dx=F(\var{n}\pi)-F(0)$.}
+            }            
+		\end{answer}
+
+	\end{question}
+
+\end{problem}
+
+
+\embedmathlet{mathlet}
+
+\end{content}

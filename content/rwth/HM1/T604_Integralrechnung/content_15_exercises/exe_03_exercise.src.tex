@@ -1,0 +1,152 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Exercise 3: Determining parameters}
+    \lang{de}{Ü03: Parameterbestimmung}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_T604_statistik-fotos-cewe.meta.xml}{T604_statistik-fotos-cewe}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\title{\lang{en}{Exercise 3: Determining parameters}
+    \lang{de}{Ü03: Parameterbestimmung}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24092}{Ticket 24092}
+\end{block}
+
+
+\image{T604_statistik-fotos-cewe}
+
+\lang{de}{Die Digitalfotografie hat in den letzten zwei bis drei Jahrzehnten die Analogfotografie verdrängt. Die Anzahl der 
+entwickelten Fotos aus Filmrollen fiel exponentiell ab.
+Die Anzahl $n_i$ der entwickelten Fotos (Mio Stück) der Firma Cewe hat sich im Zeitraum von 
+2005 bis 2020 wie folgt entwickelt:
+\begin{table}
+\textbf{Jahr}&2005&2006&2007&2008&2009&2010&2011&2012&2013&2014&2015&2016&2017&2018&2019&2020\\
+\textbf{Stück $n_i$}&2603&1765&1277,3&828,9&588,3&367,7&251,3&162,3&114,4&88,6&70,7&56&47&41,1&37,5&27,4
+\end{table}
+
+Dieser Verlauf soll durch $f(t)=b\cdot e^{-at}$ dargestellt werden. Bestimmen Sie die Funktion $f(t)$.
+
+Die Zeit $t$ wird in Jahren gemessen und $t=0$
+entspricht dem Jahr 2005. Der Parameter $a$ soll näherungsweise aus dem uneigentlichen Integral
+$\int_0^{\infty}f(t)dt\approx \sum_{t=0}^{t=15}n_i$ berechnet werden.
+}
+
+\lang{en}{
+Digital photography has superseded analog photography over the past two or three decades. The number of film photos being developed has decreased exponentially.
+The number $n_i$ of developed photos (in millions) by the company Cewe has shrunk between 2005 and 2020 as follows:
+\begin{table}
+\textbf{Year}&2005&2006&2007&2008&2009&2010&2011&2012&2013&2014&2015&2016&2017&2018&2019&2020\\
+\textbf{$n_i$}&2603&1765&1277.3&828.9&588.3&367.7&251.3&162.3&114.4&88.6&70.7&56&47&41.1&37.5&27.4
+\end{table}
+
+We want to represent this decay in the form $f(t)=b\cdot e^{-at}$. Determine $f(t)$.
+
+The time $t$ is measured in years and $t=0$ corresponds to the year 2005.
+The parameter $a$ should be estimated using the approximation for the improper integral
+$\int_0^{\infty}f(t)dt\approx \sum_{t=0}^{t=15}n_i$.
+}
+
+ \begin{tabs*}[\initialtab{0}\class{exercise}]
+    \tab{
+      \lang{en}{Solution}
+      \lang{de}{Lösung}
+    }
+    \begin{incremental}[\initialsteps{1}]
+      \step
+        \lang{en}{\[f(t)=2603\cdot e^{-0.313\cdot t}\]}
+        \lang{de}{\[f(t)=2603\cdot e^{-0,313\cdot t}\]}
+    
+    \end{incremental}
+    \tab{
+      \lang{en}{Calculation}
+      \lang{de}{Rechnung}
+    }
+    \begin{incremental}[\initialsteps{1}]
+      \step
+        \lang{en}{If $f(t)=b\cdot e^{-at}$, then $f(0)=b=2603$. 
+        
+        We have:$ \sum_{t=0}^{t=15}n_i=8,326.5$. Since there is no data beyond the year 2020, we determine $a$ using the (approximate) equality:
+	\begin{align*}
+        \ & \int_0^{\infty}f(t)dt&=&8,326.5\\
+        \Leftrightarrow \ & \lim_{u\to\infty}2,603\int_0^{u}e^{-at}&=&8,326.5\\
+        \Leftrightarrow \ & \lim_{u\to\infty}2,603\cdot \left(\frac{-1}{a}\right)e^{-at}|_0^u&=&8,326.5\\
+        \Leftrightarrow \  & \lim_{u\to\infty}\frac{-1}{a}e^{-au}-\left(\frac{-1}{a}\right)\cdot 1&=&\frac{8,326.5}{2,603}\\
+        \Leftrightarrow \ & a&=&0.3126
+        \end{align*}
+        So the function is:
+        \[f(t)=2603\cdot e^{-0.313\cdot t}\]
+
+
+        }
+        \lang{de}{Aus $f(t)=b\cdot e^{-at}$ folgt: $f(0)=b=2603$. 
+        
+        Es gilt:$ \sum_{t=0}^{t=15}n_i=8.326,5$. Da über das Jahr 2020 hinaus keine Daten vorhanden sind, nutzen 
+        wir zur Bestimmung des Parameters $a$ die (genäherte) Gleichung:
+        \begin{align*}
+        \ & \int_0^{\infty}f(t)dt&=&8.326,5\\
+        \Leftrightarrow \ & \lim_{u\to\infty}2.603\int_0^{u}e^{-at}&=&8.326,5\\
+        \Leftrightarrow \ & \lim_{u\to\infty}2.603\cdot \left(\frac{-1}{a}\right)e^{-at}|_0^u&=&8.326,5\\
+        \Leftrightarrow \  & \lim_{u\to\infty}\frac{-1}{a}e^{-au}-\left(\frac{-1}{a}\right)\cdot 1&=&\frac{8.326,5}{2.603}\\
+        \Leftrightarrow \ & a&=&0,3126
+        \end{align*}
+        Somit lautet die Funktion:
+        \[f(t)=2603\cdot e^{-0,313\cdot t}\]
+        
+        }
+      
+    \end{incremental}
+    \tab{
+      \lang{en}{Remarks}
+      \lang{de}{Bemerkungen}
+    }
+    \begin{incremental}[\initialsteps{1}]
+      \step
+        \lang{en}{\begin{itemize}
+        \item[(1)]
+        Since we do not consider values from years after 2020, the approximation to the integral is too low,
+        and the actual value $a_{\text{real}}$ is somewhat smaller: $a_{\text{real}}<a$.
+        \item[(2)]
+        Since we consider all values $n_i$ when computing the integral, the value for $a$ is more accurate than it would be
+        if only two values $n_j$ and $n_k$ were used. In this way, fluctuations in the values are less significant.
+        \item[(3)]
+        The exponential decay already began before the year 2005. But $a$ can still be found using the arbitrary choice of 2005 as $t=0$.
+        
+        
+        \end{itemize}}
+        \lang{de}{
+        \begin{itemize}
+        \item[(1)]
+        Da Werte ab 2020 nicht berücksichtigt werden, ist durch die Näherung der Wert des 
+        Integrals etwas zu klein; der tatsächliche Wert $a_{\text{real}}$ ist also etwas kleiner:
+        $a_{\text{real}}<a$.
+        \item[(2)]
+        Da durch die Berechnung des Integrals alle Werte $n_i$ berücksichtigt werden, ist der Wert für
+        $a$ genauer als wenn a nur aus zwei Werten $n_j$ und $n_k$ berechnet wird. Schwankungen in den Werten fallen 
+        dann nicht so ins Gewicht.
+        \item[(3)]
+        Der exponentielle Abfall hat bereits vor dem Jahr 2005 begonnen. Durch die willkürliche Wahl von
+        2005 als $t=0$ kann aber dennoch $a$ bestimmt werden.
+        
+        \end{itemize}
+        
+        }
+      
+    \end{incremental}
+  \end{tabs*}
+
+\end{content}
+

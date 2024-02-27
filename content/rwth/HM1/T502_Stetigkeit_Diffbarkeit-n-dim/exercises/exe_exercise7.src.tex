@@ -1,0 +1,67 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Exercise 14}
+    \lang{de}{Ü14: lok. Umkehrbarkeit}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{Exercise 14}
+    \lang{de}{Ü14: lok. Umkehrbarkeit}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T502_Stetigkeit_Diffbarkeit-n-dim/g_art_content_54_Differentiation.meta.xml}{content_54_Differentiation}
+\link{generic_article}{content/rwth/HM1/T306_Reelle_Quadratische_Matrizen/g_art_content_16_determinante.meta.xml}{content_16_determinante}
+\link{generic_article}{content/rwth/HM1/T502_Stetigkeit_Diffbarkeit-n-dim/g_art_content_55_Lokale_Umkehrbarkeit.meta.xml}{content_55_Lokale_Umkehrbarkeit}
+\end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22641}{Ticket 22641}
+\end{block}
+  \title{
+    \lang{en}{Exercise 14}
+    \lang{de}{Ü14: lok. Umkehrbarkeit}
+  }
+  
+  Gegeben sei
+\[
+f: \R^3 \to \R^3, \begin{pmatrix}x \\ y\\ z\end{pmatrix} \mapsto \begin{pmatrix}e^{x} \cos(y)\sin(z) \\ e^{x}\sin(y)\sin(z) \\ e^{-y} \cos(z)\end{pmatrix}
+\]
+  
+  \begin{enumerate}[alph]   
+    \item Begründen Sie, dass $f$ total differenzierbar ist, und berechnen Sie das Differential.
+    \item Zeigen Sie, dass $f$ in einer Umgebung von $\left(\begin{smallmatrix}0 \\ \frac{\pi}{2} \\ \frac{\pi}{2} \end{smallmatrix}\right)$ umkehrbar ist.
+  \end{enumerate}
+  \\
+  
+  \begin{tabs*}[\initialtab{0}\class{exercise}]
+    \tab{Lösung a)}
+    Die Funktion $f$ ist in jeder Komponente stetig partiell differenzierbar als Zusammensetzung elementarer
+    Funktionen. Daher ist $f$ stetig partiell differenzierbar und damit nach dem 
+    \ref[content_54_Differentiation][Satz über totale Differenzierbarkeit]{thm:zshg_total_diffbar-Differential}
+    total differenzierbar. Das Differential ist gegeben durch 
+\[Df((x,y,z)^T)=\begin{pmatrix}
+                                  e^{x}\cos(y)\sin(z)&-e^{x}\sin(y)\sin(z)&e^{x}\cos(y)\cos(z)\\
+				  e^{x}\sin(y)\sin(z)&e^{x}\cos(y)\sin(z)&e^{x}\sin(y)\cos(z)\\
+				  0&-e^{-y}\cos(z)&-e^{-y}\sin(z)
+                                 \end{pmatrix}\,.
+\]
+    \tab{Lösung b)}
+   Mit dem in a) bestimmten Differential ist
+\[Df\left(\left(0,\frac{\pi}{2},\frac{\pi}{2}\right)^T\right)=\begin{pmatrix} 0&-1&0\\1&0&0\\0&0&-e^{-\frac{\pi}{2}}\end{pmatrix}\,.\]
+Diese Matrix ist invertierbar, denn mit der 
+\ref[content_16_determinante][Regel von Sarrus]{sec:determinanten-kleine-matrizen}
+ist sofort erkennbar, dass die Determinante der Jacobi-Matrix gleich $-e^{\frac{-\pi}{2}}\neq 0$ ist.
+
+Also ist die Funktion $f$ nach dem \ref[content_55_Lokale_Umkehrbarkeit][Umkehrsatz]{thrm:lokale_umkehrbarkeit} 
+in einer Umgebung dieses Punktes $\left(0,\frac{\pi}{2},\frac{\pi}{2}\right)^T$ umkehrbar.
+  \end{tabs*}
+\end{content}

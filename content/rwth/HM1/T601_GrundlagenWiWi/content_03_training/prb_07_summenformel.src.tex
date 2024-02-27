@@ -1,0 +1,96 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A07: Gauß'sche Summenformel}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+    \lang{zh}{...}
+    \lang{fr}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\lang{de}{\title{A07: Gauß'sche Summenformel}}
+\lang{en}{\title{A07:  Gauss' summation formula}}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/23822}{Ticket 23822}
+\end{block}
+
+
+\usepackage{mumie.genericproblem}
+
+\begin{problem}
+\begin{variables}
+        \drawFromSet{tp}{80,90,100,110,120}
+        \drawFromSet{ws}{20,30,40,50}
+        \drawFromSet{m}{10,15,20,25}
+        \function[calculate]{sum}{m*5*tp+(m-1)*m*ws/2}
+        \function{lewo}{5*tp+(m-1)ws}
+        \function[calculate]{mm}{m-1}
+\end{variables}
+
+\begin{question}
+       \type{input.number} 
+     \begin{answer}
+        \lang{de}{\text{Ein Betrieb erhält den Auftrag, $\var{sum}$ Pullover herzustellen. In der ersten
+        Woche werden täglich (5 Arbeitstage) $\var{tp}$ produziert. Bis zur Erfüllung des 
+        Auftrages ist die Produktion um $\var{ws}$  je Woche zu steigern. \\Nach wieviel Wochen $m$ ist 
+        der Auftrag erfüllt?}}
+        \lang{en}{\text{A factory receives an order to produce $\var{sum}$ jumpers. In the first
+        week (5 working days), $\var{tp}$ are produced daily. Until the 
+        order is fulfilled, production is to be increased by $\var{ws}$ per week. \\After how many weeks $m$ is 
+        the order fulfilled?}}
+        \solution{m}
+        \lang{de}{\explanation{Es muss eine arithmetische Summe gebildet werden: 
+        $\sum_{k=0}^{m-1}5\cdot\var{tp}+k\cdot \var{ws}=m\cdot 5 \cdot\var{tp}+\frac{(m-1)m}{2}\var{ws}$. Dieser Term wird gleichgesetzt
+        mit der erforderlichen Anzahl an Pullovern $\var{sum}$. Die positive Lösung dieser quadratischen Gleichung
+        liefert die Anzahl der Wochen. 
+        %$m=\var{m}$.
+        }}
+        \lang{en}{\explanation{An arithmetic sum must be formed: 
+        $\sum_{k=0}^{m-1}5\cdot\var{tp}+k\cdot \var{ws}=m\cdot 5 \cdot\var{tp}+\frac{(m-1)m}{2}\var{ws}$. This term is set equal to
+        the required number of jumpers $\var{sum}$. The positive solution of this quadratic equation
+        gives the number of weeks. 
+        %$m=\var{m}$.
+        }}
+     
+     \end{answer}
+\end{question}
+
+\begin{question}
+    \type{input.number}
+     \begin{answer}
+        \lang{de}{\text{Wieviel Stück werden in der letzten Woche hergestellt?}}
+        \lang{en}{\text{How many were produced in the last week?}}
+        \solution{lewo}
+        \lang{de}{\explanation{Bei $\var{m}$ Wochen findet die Produktionssteigerung einmal weniger statt. 
+        %Die Stückzahl
+        %der letzten Woche ist damit $5\cdot \var{tp}+\var{mm}\cdot \var{ws}$.
+        }}
+        \lang{en}{\explanation{For $\var{m}$ weeks, the production increase takes place one time less often. 
+        %The number of pieces
+        %of last week is therefore $5\cdot \var{tp}+\var{mm}\cdot \var{ws}$.
+        }}
+     
+     \end{answer}
+\end{question}
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

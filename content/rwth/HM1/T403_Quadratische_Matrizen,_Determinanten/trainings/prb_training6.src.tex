@@ -1,0 +1,95 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A06: Determinante}
+    \lang{en}{P06: The determinant}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A06: Determinante}}
+\lang{en}{\title{P06: The determinant}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/11439}{Ticket 11439}
+\end{block}
+
+\begin{problem}
+	%\randomquestionpool{}{}
+	\begin{question}
+		
+		\begin{variables}
+
+\randint{a}{-2}{2}
+\randint{b}{-2}{2}
+\randint{c}{-2}{2}
+\randint{d}{-2}{2}
+\randint{f}{-2}{2}
+\randint{g}{-2}{2}
+\randint{h}{-2}{2}
+\randint{j}{-2}{2}
+\randint{k}{-2}{2}
+\randint{x}{-2}{2}
+\randint{y}{-2}{2}
+\randint{z}{-2}{2}
+\function{s}{-b*(g*f-d*j)}
+			\matrix[calculate]{aa}{
+1 & x & y & z\\ a & a*x & a*y+g & a*z+j \\ c & c*x+b & c*y & k\\
+0 & 0 & d & f
+}
+		\end{variables}
+		
+		\type{input.number}
+        \field{rational}
+		\correctorprecision{3}
+		\displayprecision{3}
+		\lang{de}{
+	    \text{Berechnen Sie die Determinante der $(4\times 4)$-Matrix $A=\var{aa}$ durch
+elementare Zeilenumformungen.}
+	    }
+     \lang{en}{
+	    \text{Calculate the determinant of the $(4\times 4)$-matrix $A=\var{aa}$ with the help of elementary row transformations.}
+	    }
+
+\lang{de}{
+	    \begin{answer}
+            \type{input.number}
+	    	\text{$\det(A)= $}
+			\solution{s}
+        \explanation{Räumen Sie die Matrix durch elementare Zeilenumformungen unterhalb der Diagonalen aus,
+d.h. bringen Sie sie auf Dreiecksform. Die Determinante von $A$ ist nun das Produkt der Diagonalglieder der 
+Dreiecksmatrix geteilt durch das Produkt der Determinanten der elementaren Zeilenumformungen.}
+\end{answer}}
+
+\lang{en}{
+	    \begin{answer}
+            \type{input.number}
+	    	\text{$\det(A)= $}
+			\solution{s}
+        \explanation{Transform the matrix into triangular form. Now the determinant of $A$ is the product of the
+        diagonal entries of the triangular matrix divided by the product of the determinants of the elementary
+        row transformations.}
+\end{answer}}
+
+	\end{question}
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

@@ -1,0 +1,311 @@
+
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{Stetigkeit von Funktionen mehrerer Veränderlicher}
+   }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T502_Stetigkeit_Diffbarkeit-n-dim/g_art_content_53_Stetigkeit.meta.xml}{content_53_Stetigkeit}
+\link{generic_article}{content/rwth/HM1/T501_Orientierung_im_n-dim_Raum/g_art_content_52_Abstaende.meta.xml}{content_52_Abstaende}
+\link{generic_article}{content/rwth/HM1/T204_Abbildungen_und_Funktionen/g_art_content_10_abbildungen_verkettung.meta.xml}{content_10_abbildungen_verkettung}
+\link{generic_article}{content/rwth/HM1/T210_Stetigkeit/g_art_content_30_elem_funktionen.meta.xml}{content_30_elem_funktionen}
+\link{generic_article}{content/rwth/HM1/T210_Stetigkeit/g_art_content_31_grenzwerte_von_funktionen.meta.xml}{content_31_grenzwerte_von_funktionen}
+\link{generic_article}{content/rwth/HM1/T210_Stetigkeit/g_art_content_29_stetigkeit_definitionen.meta.xml}{content_29_stetigkeit_definitionen}
+\end{links}
+  \creategeneric
+\end{metainfo}
+
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21464}{Ticket 21464}
+\end{block}
+\usepackage{mumie.ombplus}
+\ombchapter{2}
+\ombarticle{1}
+\usepackage{mumie.genericvisualization}
+\lang{de}{\title{Stetigkeit}}
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+\section{Stetigkeit}
+Mit dem durch eine Norm auf dem $\R^n$ gewonnenen Abstandsbegriff können wir nun die Idee der Stetigkeit von reellen Funktionen
+übertragen auf den $\R^n$.
+Viele Aussagen und Eigenschaften aus dem eindimensionalen Fall übertragen sich in den mehrdimensionalen Fall und helfen, 
+die mehrdimensionalen  Aussagen zu begründen.
+\begin{definition}[Stetigkeit]\label{def:stetigkeit_n-dim}
+Sei $M\subset\R^n$ eine nicht leere Teilmenge. Eine Funktion $f:M\to\R^m$ heißt \notion{stetig im Punkt $a\in M$},
+wenn es zu jedem $\epsilon>0$ ein $\delta>0$ gibt, so dass für alle $x\in M$ mit $\Vert x-a\Vert<\delta$
+gilt \[\Vert f(x)-f(a)\Vert<\epsilon.\]
+Anders gesagt: $f$ ist stetig in $a$, wenn es zu jedem $\epsilon>0$ ein $\delta>0$ gibt, so dass 
+\[f( U_\delta(a)\cap M)\subset U_\epsilon(f(a)).\]
+
+Die Funktion $f$ heißt \notion{stetig} (auf ganz $M$), wenn $f$ in jedem Punkt $a\in M$ stetig ist. 
+\end{definition}
+In dieser Definition spielt es keine Rolle, welche Normen benutzt werden. 
+Zwar haben die offenen Kugeln $U_\delta(a)$ bzw.
+$U_\epsilon(f(a))$ in verschiedenen Normen unterschiedliche Gestalt. Aber weil alle  Normen äquivalent sind, gilt die Aussage für \emph{alle} $\epsilon >0$
+bezüglich der einen Norm genau dann, wenn sie für \emph{alle } $\epsilon>0$ in einer anderen gilt. Und finden wir eine
+$\delta$-Umgebung bezüglich der einen Norm, dann auch bezüglich einer anderen (mit möglicherweise kleinerem $\delta$).
+\begin{example}[Koordinatenprojektionen]
+Die Abbildung 
+\[\text{pr}_j:\R^n\to \R,\quad x=\begin{pmatrix}x_1\\\vdots\\ x_n\end{pmatrix}\:\mapsto x_j,\]
+die einen Vektor $x$ auf seine $j$-te Koordinate $x_j$ projiziert, ist stetig für $j=1,\ldots,n$.
+\begin{incremental}{0}
+\step
+Denn seien $a\in\R^n$ und $\epsilon>0$ beliebig.  Wir zeigen, dass die Funktion $\text{pr}_j$ stetig ist, weil
+die obige Definition speziell für die Wahl $\delta=\epsilon$ erfüllt ist.
+Für alle $x\in\R^n$ mit $\Vert x-a\Vert_2<\delta=\epsilon$
+ist dann nämlich
+\[
+{\vert \text{pr}_j(x)-\text{pr}_j(a)\vert}={\vert x_j-a_j\vert} =\sqrt{(x_j-a_j)^2}\leq
+\sqrt{\sum_{i=1}^n (x_i-a_i)^2}={\Vert x-a\Vert}<\epsilon.
+\]
+\end{incremental}
+\end{example}
+%%
+\begin{theorem}\label{thm:äquivalent-zu-stetig}
+Es sei $M\subset\R^n$ und $f:M\to\R^m$ eine Funktion.
+\begin{enumerate}
+\item[(a)]\notion{Komponentenweise Stetigkeit}\\
+Bezeichnet man
+\[f(x)=\begin{pmatrix}f_1(x)\\\vdots\\ f_m(x)\end{pmatrix},\]
+wo $f_i=\text{pr}_i\circ f:M\to\R$ die $i$-te Koordinatenfunktion ist,
+so ist $f$ stetig in $a\in M$ genau dann, wenn jede Koordinatenfunktion $f_i$, $i=1\ldots,m$, stetig ist in $a$.
+\item[(b)]\notion{Folgenstetigkeit}\\
+Die Funktion $f$ ist stetig in $a\in M$ genau dann, wenn für jede Folge $x^{(k)}$ in $M$ mit $\lim_{k\to\infty}x^{(k)}=a$ gilt
+\[\lim_{k\to\infty} f(x^{(k)})=f(\lim_{k\to\infty} x^{(k)})=f(a).\]
+\end{enumerate}
+\end{theorem}
+%%
+\begin{proof*}
+\begin{incremental}{0}
+\step
+Zu (a): Nehmen wir zunächst an, dass alle Komponentenfunktionen $f_j$ stetig sind in $a$. 
+Dann gibt es zu jedem $\epsilon>0$ Zahlen $\delta_j>0$ so, dass für $x\in M$ aus $\Vert x-a\Vert_2<\delta_j$
+folgt $\vert f_j(x)-f_j(a)\vert<\frac{\epsilon}{\sqrt{m}}$. Wir setzen $\delta=\min_{j=1,\ldots,m}\delta_j$
+und erhalten für alle $x\in M$ mit $\Vert x-a\Vert_2<\delta$
+\[{\Vert f(x)-f(a)\Vert_2}=\sqrt{\sum_{j=1}^m {\vert f_j(x)-f_j(a)\vert^2}}<\sqrt{m\cdot\frac{\epsilon^2}{\sqrt{m}^2}}=\epsilon.\]
+Also ist $f$ stetig in $a$.
+\step
+Nehmen wir umgekehrt an, dass $f$ stetig in $a$ ist. Weil für $j=1,\ldots,m$
+\[{\vert f_j(x)-f_j(a)\vert}\leq\sqrt{\sum_{j=1}^m {\vert f_j(x)-f_j(a)\vert^2}}={\Vert f(x)-f(a)\Vert_2}, \]
+folgt das $\epsilon$-$\delta$-Kriterium für jede Komponentenfunktion $f_j$ sofort aus dem für $f$ selbst.
+\step
+Zu (b):
+Die Äquivalenz des $\epsilon$-$\delta$-Kriteriums mit der Folgenstetigkeit beweist man wie 
+im \ref[content_29_stetigkeit_definitionen][analogen Resultat]{thm:stetigkeit_folgenkrit_aequiv_epsilon-delta} in einer Dimension.
+\end{incremental}
+\end{proof*}
+
+%Video
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10914&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+%%
+Wir wenden Satz \ref{thm:äquivalent-zu-stetig} an, um Aussagen über die Stetigkeit zusammengesetzter Funktionen zu machen.
+\begin{theorem}\label{thm:zusammensetzung_stetiger_funktionen}
+Es sei $M\subset \R^n$ eine Teilmenge, und es seien
+$f,g:M\to\R^m$ sowie $\phi:M\to\R$ Funktionen. Dann gilt:
+\begin{itemize}
+\item[(i)] Sind $f$ und $g$ stetig in $a\in M$, dann ist auch die Linearkombination $\alpha f+\beta g:M\to\R^m$ stetig in $a$ für alle Konstanten $\alpha,\beta\in\R$.
+\item[(ii)]
+Sind $f$ und $\phi$ stetig in $a$, dann ist auch das Produkt $\phi\cdot f$ stetig in $a$.
+\item[(iii)] Ist $\phi(a)\neq 0$, und sind $f$ und $\phi$ stetig in $a$, dann ist auch der Quotient $\frac{1}{\phi}\cdot f$ stetig in $a$.
+\item[(iv)] Ist weiter $h:M'\to\R^p$ eine Funktion mit $f(M)\subset M'$, und ist $f$ stetig in $a$ sowie $h$ stetig in $f(a)$, 
+dann ist auch die Komposition $h\circ f:M\to\R^p$ stetig in $a$. 
+\end{itemize}
+\end{theorem}
+\begin{proof*}
+Alle Aussagen  sind direkte Folgerungen aus der Folgenstetigkeit und den Grenzwertsätzen, siehe auch die entsprechenden $1$-dimensionalen Aussagen
+\ref[content_31_grenzwerte_von_funktionen][für Summen und Produkte]{rule:summen_und_prod_stetiger_fkt} bzw. 
+\ref[content_30_elem_funktionen][für die Komposition]{thm:komposition_stetiger_fkt}.
+\end{proof*}
+%%
+\begin{example}\label{ex:wichtige_stetige_Funktionen}
+\begin{tabs*}[\initialtab{0}]
+\tab{Polynomfunktionen}
+Eine Polynomfunktion [kurz auch: ein \notion{Polynom}] $p:\R^n\to\R$ ist eine endliche Linearkombination von \notion{Monomen}, also von Funktionen der Form $\R^n\to\R$, 
+\[x=(x_1,\ldots,x_n)^T\mapsto x_1^{\nu_1}\cdot\ldots\cdot x_n^{\nu_n}=\text{pr}_1(x)^{\nu_1}\cdot\ldots\cdot\text{pr}_n(x)^{\nu_n}\]
+mit Exponenten $\nu_1,\ldots,\nu_n\in\N_0$. 
+Ein Polynom $p$ vom \notion{Grad} $d$ lässt sich also schreiben in der Form
+\[p(x)=\sum_{(\nu_1,\ldots,\nu_n)\in\N_0^n,\\\nu_1+\cdots\nu_n\leq d}a_{\nu_1,\ldots,\nu_n}x_1^{\nu_1}\cdots x_n^{\nu_n},\]
+mit Koeffizienten $a_{\nu_1,\ldots,\nu_n}\in\R$, wobei
+mindestens einer der Koeffizienten $a_{\nu_1,\ldots,\nu_n}$ mit $\nu_1+\cdots+\nu_n=d$ von Null verschieden ist.
+% Die Existenz einer Zahl $d$ folgt dabei aus der Endlichkeit der Linearkombination, das heißt es gibt nur endlich viele Summanden.
+% Die kleinstmögliche Zahl $d$ heißt der \notion{Grad} des Polynoms $p$. Das heißt für die obige Summe, es gibt ein Tupel $(\mu_1,\ldots,\mu_n)\in\N_0^n$ mit $\mu_1+\cdots+\mu_n=d$ und 
+% $a_{\mu_1,\ldots,\mu_n}\neq 0$, aber alle $a_{\nu_1,\ldots,\nu_n}=0$ für $\nu_1+\cdots+\nu_n>d$.
+\\
+Polynome sind stetige Funktionen. Weil die Koordinatenprojektionen $\text{pr}_j$, $j=1,\ldots,n$, stetig sind, ist das eine Folgerung aus
+Satz \ref{thm:zusammensetzung_stetiger_funktionen} (i) und (ii).
+\tab{Rationale Funktionen}
+Eine Rationale Funktion $f:M\to\R$ ist eine Funktion, die gegeben ist durch $x\mapsto f(x)=\frac{p(x)}{q(x)}$, 
+wobei $p$ und $q$ Polynomfunktionen sind. Dabei ist die größtmögliche Definitionsmenge $M=\{x\in\R^n\mid q(x)\neq 0\}$ 
+diejenige, die genau die Nullstellen der Nennerfunktion $q$ auslässt.
+\\
+Rationale Funktionen sind stetig. Das folgt aus Satz \ref{thm:zusammensetzung_stetiger_funktionen}, weil Polynomfunktionen stetig sind.
+\tab{Lineare Abbildungen}
+Es sei $A=(a_{ij})_{ij}\in M(m,n;\R)$ eine Matrix. Die zugehörige lineare Abbildung $\phi:\R^n\to\R^m$, $x\mapsto \phi(x)=A\cdot x$, ist stetig.
+Denn jede der $i$-ten Koordinatenfunktionen 
+\[\phi_i(x)=(A\cdot x)_i=a_{i1}x_1+\ldots+a_{in}x_n\]
+ist eine Polynomfunktion, also stetig.
+Weil $\phi$ genau dann stetig ist, wenn \ref[content_53_Stetigkeit][seine Koordinatenfunktionen das sind]{thm:äquivalent-zu-stetig}, ist $\phi$ stetig.
+%Um das zu sehen, 
+% setzt man
+% \[{\Vert A\Vert}:=\sqrt{\sum_{i=1,\ldots,m,\\j=1,\ldots,n}a_{ij}^2},\]
+% die sogenannte Operatornorm von $A$.
+% Es gilt dann
+%\[\Vert A\cdot x\Vert_2\leq \Vert A\Vert\cdot \Vert x\Vert_2.\]
+%(Das ist eine Variante der sogenannten Cauchy-Schwarz-Ungleichung, die in der Linearen Algebra bewiesen wird. Wir nehmen sie hier als gegeben an.)
+%Für alle $x,y\in\R^n$ gilt nun unter Verwendung der Linearität
+%\[\Vert A\cdot x-A\cdot y\Vert_2= \Vert A\cdot (x-y)\Vert_2\leq \Vert A\Vert\cdot \Vert x-y\Vert_2.\]
+%Es sei nun $\epsilon>0$, und dazu $\delta:=\frac{\epsilon}{\Vert A\Vert+1}$.
+%Dann folgt aus $\Vert  x- y\Vert_2<\delta$, dass 
+%$\Vert A\cdot x-A\cdot y\Vert_2<\epsilon$.
+%(Wir haben in der Wahl von $\delta$ durch $\Vert A\Vert+1$ geteilt, 
+%um den Fall $\Vert A\Vert=0$, also $A=0$, mitbehandeln zu können. Behandelten wir diesen Fall separat, so könnten wir einfach durch $\vert\!\vert A\vert\!\vert$ teilen.)
+\end{tabs*}
+\end{example}
+%Video
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10916&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+%
+%
+\begin{quickcheck}
+\text{Welche der angegebenen Funktionen sind stetig auf ganz $\R^2$?}
+\begin{choices}{multiple}
+    \begin{choice}
+      \text{$f_1:x\mapsto \begin{pmatrix}{x_1}{x_2^2+1}\\x_1-\sin x_2\end{pmatrix}\in\R^2$}
+      \solution{true}
+    \end{choice}
+    \begin{choice}
+      \text{$f_2:x \mapsto \begin{pmatrix}\cos x_2,&5\vert\!\vert x\vert\!\vert_2\end{pmatrix}\cdot x \in\R$}
+      \solution{true}
+    \end{choice}
+    \begin{choice}
+      \text{$f_3:x\mapsto \frac{1}{1-\sin^2(x_1x_2)}\in\R$}
+      \solution{false}
+      \end{choice} 
+     \begin{choice}
+     \text{$f_4:x\mapsto \frac{2x_1x_2}{x_1^2+x_2^2}\in\R$ falls $x\neq (0,0)$ und $(0,0)\mapsto 0$}
+      \solution{false}
+     \end{choice}
+    \begin{choice}
+     \text{$f_5:x\mapsto \frac{2x_1^2x_2}{x_1^2+x_2^2}\in\R$ falls $x\neq (0,0)$ und $(0,0)\mapsto 0$}
+      \solution{true}
+     \end{choice}
+  \end{choices}
+  \explanation{In den ersten beiden Funktionen $f_1$, $f_2$ sind  alle Komponenten stetige Funktionen auf $\R^2$, weil
+  sie sich als Summe, Produkt bzw. Verkettung von Funktionen in einer Variable darstellen lassen, die wir
+  bereits als stetige Funktionen kennen.
+\\
+Bei der dritten Funktion $f_3$ greift dasselbe Argument, allerdings nur dort, wo die Funktion auch definiert ist.
+Der Definitionsbereich ist hier $\{(x_1,x_2)^T\in\R^2|\: x_1x_2\neq \pi k\text{ für alle } k\in\Z\}$.
+\\
+Ebenso sind die letzten beiden Funktionen stetig in $x\neq (0,0)$. 
+Die Funktion $f_4$ ist nicht stetig in $x=(0,0)$, denn es gilt $\lim_{t\to 0}f(t,t)=\lim_{t\to 0}1=1$, 
+während $\lim_{t\to 0}f(0,t)=\lim_{t\to 0}0=0$.
+Dagegen ist $f_5$ auch stetig in Null, denn es gilt $f_5(x)=x_1f_4(x)$, und $f_4$ ist beschränkt.
+
+}
+\end{quickcheck}
+%
+Die folgende Charakterisierung von Stetigkeit ist oft sehr praktisch. (Nebenbei: Diese Charakterisierung bietet die Möglichkeit, 
+den Stetigkeitsbegriff auf sehr viel allgemeinere Räume als den $\R^n$ zu übertragen.)
+\begin{theorem}[Charakterisierung von Stetigkeit]\label{thm:stetig_top_charakterisierung}
+Es sei $M\subset\R^n$ eine nichtleere offene Teilmenge. Eine Funktion $f:M\to\R^m$ ist genau dann stetig, 
+wenn für jede offene Menge $U\subset\R^m$ das Urbild $f^{-1}(U)\subset\R^n$ offen ist.
+\end{theorem}
+%%
+\begin{proof*}
+\begin{incremental}{0}
+\step
+Nehmen wir zunächst an, dass $f$ stetig ist. Sei $U\subset\R^m$ eine offene Teilmenge. 
+Wir müssen zeigen, dass $f^{-1}(U)$ offen ist. 
+\\
+Dazu sei $a\in M$ beliebig mit $f(a)\in U$. 
+Weil $U$ offen ist, existiert ein $\epsilon>0$ so, dass $U_\epsilon(f(a))$ ganz in $U$ enthalten ist, $U_\epsilon(f(a))\subset U$. 
+Weil $f$ stetig ist, existiert zu diesem $\epsilon$ ein $\delta>0$ so, dass $f(U_\delta(a)\cap M)\subset U_\epsilon(f(a))$. 
+Diese Menge $U_\delta(a)\cap M$ ist eine offene Umgebung von $a$, die ganz in $f^{-1}(U)$ enthalten ist. 
+Weil $a\in f^{-1}(U)$ beliebig war, ist $f^{-1}(U)$ offen.
+\step
+Nehmen wir andererseits an, dass alle Urbilder  von offenen Mengen unter $f$ wieder offene Mengen sind. 
+\\
+Sei $a\in M$ beliebig, und ebenfalls $\epsilon>0$ beliebig.
+Weil $U_\epsilon(f(a))\subset \R^m$ eine offene Menge ist, ist $f^{-1}(U_\epsilon(f(a)))$ ebenfalls offen. 
+Insbesondere gibt es also zu dem Punkt $a\in f^{-1}(U_\epsilon(f(a)))$ eine kleine Kugel $U_\delta(a)$, die ganz in dieser Urbildmenge
+enthalten ist. Es gilt also $f(U_\delta(a))\subset U_\epsilon(f(a))$. 
+Somit ist $f$ stetig in $a$, und weil dies für jedes $a\in M$ gilt, ist $f$ stetig auf $M$.
+\end{incremental}
+\end{proof*}
+%%
+\notion{Beachte:} In Satz \ref{thm:stetig_top_charakterisierung} ist es unerheblich, 
+ob die offene Teilmenge $U\subset\R^m$ des Zielbereichs
+ganz, teilweise oder gar nicht im Bild $f(M)$ der Funktion enthalten ist. 
+Ist zum Beispiel $f(M)\cap U=\emptyset$, dann ist $f^{-1}(U)=\emptyset$ per Definition des 
+\ref[content_10_abbildungen_verkettung][Urbilds]{def:urbild}, und die leere Menge ist offen. 
+
+
+
+Nun wenden wir Satz \ref{thm:stetig_top_charakterisierung} an:
+\begin{remark}
+Ist $f:\R^n\to\R$ stetig, dann sind die folgenden Teilmengen des $\R^n$ offen
+\begin{align*}
+M_1&=\{x\in\R^n\mid f(x)>0\},\\
+M_2&=\{x\in\R^n\mid f(x)<0\},\\
+M_3&=\{x\in\R^n\mid f(x)\neq 0\}.
+\end{align*}
+Denn es ist $(0;\infty)$ eine offene Teilmenge von $\R$. Also ist nach Satz \ref{thm:stetig_top_charakterisierung} das Urbild $M_1=f^{-1}((0;\infty))$ offen.
+Ebenso ist $M_2=f^{-1}((-\infty;0))$ offen, sowie $M_3=M_1\cup M_2$ als Vereinigung offener Mengen.
+\end{remark}
+\begin{example}
+Die Menge $M=\{x\in\R^3\mid x_1+x_2+x_3<1\}$ ist offen.
+Denn für die stetige Funktion $f:\R^3\to\R, x\mapsto x_1+x_2+x_3-1$ gilt $M=\{x\in\R^3\mid f(x)<0\}=f^{-1}((-\infty;0))$ 
+ist das Urbild einer offenen Menge.
+\end{example}
+%Video
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10919&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\	
+%%
+\begin{quickcheck}
+\text{Markiere die offenen Mengen:}
+\begin{choices}{multiple}
+    \begin{choice}
+      \text{$M_1=\{x\in\R^3\mid x_1^2+x_2^2> 3\}$}
+      \solution{true}
+    \end{choice}
+    \begin{choice}
+      \text{$M_2=\{x\in\R^2\mid x_1^2+x_2^2\geq 3\}$}
+      \solution{false}
+    \end{choice}
+    \begin{choice}
+      \text{$M_3=\{x\in\R^2\mid x_1^2+x_2^2\geq -1\}$}
+      \solution{true}
+    \end{choice}   
+    \begin{choice}
+      \text{$M_4=U_2(0)\cup \{x\in\R^3\mid x_1^2+x_3^2> 1\} \subset \R^3$}
+      \solution{true}
+    \end{choice}
+  \end{choices}
+  \explanation{$M_1$ ist offen, weil Urbild des offenen Intervalls $(3;\infty)$ unter der Abbildung $f:x\mapsto x_1+x_2+x_3-1$.\\
+    $M_2$ ist abgeschlossen, denn  die Randpunkte $\{x\in\R^2\mid x_1^2+x_2^2= 3\}$ gehören zu $M_2$.\\
+    $M_3$ ist offen, denn $x_1^2+x_2^2\geq 0$ ist immer erfüllt, also ist $M_3=\R^2$, und damit natürlich offen.
+    (Man kann auch so argumentieren: $M_3$ ist das Urbild der offenen Menge $\R$ unter der Abbildung $f:x\mapsto x_1^2+x_2^2$.)\\
+    $M_4$ ist als Vereinigung offener Mengen offen.}
+\end{quickcheck}
+%%
+\end{content}
+

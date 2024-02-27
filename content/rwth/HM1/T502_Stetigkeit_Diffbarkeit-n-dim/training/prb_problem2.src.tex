@@ -1,0 +1,747 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Exercise 2}
+    \lang{de}{A02: Diff'barkeit}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{Exercise 2}
+    \lang{de}{Aufgabe 2}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\title{A02: Diff'barkeit}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22006}{Ticket 22006}
+\end{block}
+\usepackage{mumie.genericproblem}
+
+\embedmathlet{gwtmathlet}
+
+\begin{problem}
+
+\randomquestionpool{1}{4}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Q1: f stetig, partiell diffbar, Richtungsableitung ungleich 0, nicht stetig partiell diffbar und nicht total diffbar 
+%
+    \begin{question}   
+
+        \begin{variables}
+          
+          %f= g/h
+          \randint[Z]{a}{0}{4}
+          \randint[Z]{b}{0}{4}
+          \function{c}{b}
+          %\randint[Z]{c}{0}{4}          
+          %\randint[Z]{n}{2}{4}
+          %QS: Vereinfachung von c und n
+          \number{n}{2}
+          \randint[Z]{nx}{1}{2}                 % Zählerpotenz > Nennerpotenz   => f stetig
+          \function[calculate]{ny}{n-nx+1}      % Zählerpotenz = Nennerpotenz+1 => Richtungsableitung ungleich 0  und 
+          \function[normalize]{g}{a*x^nx*y^ny}  %                                  partielle Ableitungen nicht stetig in 0
+          \function[normalize]{h}{b*x^n+c*y^n}
+          %partielle Ableitung nach x und y     % sind jeweils 0, da nx>0 und ny>0
+          \number{px}{0}
+          \number{py}{0}
+          %Richtungsableitung in Richtung (u,v)
+          \randint{u}{1}{2}
+          \randint{v}{1}{2}
+          \function[calculate]{pv}{(a*u^nx*v^ny)/(b*u^n+c*v^n)} % da Zählerpotenz = Nennerpotenz+1
+          %folgende Variablen werden für die MC-Fragen benötigt.
+          \number{co}{1}            % f ist stetig
+          \number{pardiff}{1}       % f ist partiell diffbar
+          \number{copar}{0}         % partielle Ableitungen nicht stetig
+          \number{totdiff}{0}       % nicht total diffbar, da Richtungsableitung ungleich 0
+         \end{variables}
+        
+        \begin{variables}
+          \function{f}{g/h}
+          \derivative[normalize]{df1}{f}{x}
+          \derivative[normalize]{df2}{f}{y}
+          \matrix{df}{df1 & df2}
+          
+          \function{totdiffhelp}{u*px+v*py} % wenn totdiffhelp ungleich pv, kann f nicht total diffbar sein !
+        \end{variables}
+
+
+% Teil a)       
+%    \begin{question}        
+        \type{input.generic}
+        \field{real}
+        \text{Sei $f:\R^2\to \R, \begin{pmatrix}x \\ y\end{pmatrix} 
+              \mapsto \begin{cases} \frac{\var{g}}{\var{h}}, & (x,y)\neq(0,0), \\ 0, & (x,y)=(0,0).\end{cases}$\\ 
+              \\
+              Bestimmen Sie das Differential von $f$ in $(x,y)^T$ für $(x,y)\neq 0:$\\ $\text{D}f(x,y)=$\ansref. \\ 
+              \\
+              Berechnen Sie jeweils im Punkt $(0,0)^T$ die partiellen Ableitungen von $f:$ \\
+              $\frac{\partial f}{\partial x}(0,0)=$\ansref $\quad$ und $\quad$ $\frac{\partial f}{\partial y}(0,0)=$\ansref,\\ 
+              \\
+              sowie die Richtungsableitung von $f$ in Richtung $v=(\var{u},\var{v})^T: \;$\\
+              $\text{D}_{(\var{u},\var{v})} f(0,0)=$\ansref .\\
+              \\
+
+              \textit{(Sollte einer der abgefragten Werte nicht existieren, geben Sie "infty" ein.)}
+              }
+              
+%  TEST:   
+%    \debug[co,pardiff,copar,totdiff]  %Funktion vom Typ MC-1100  (Zählerpotenz $=$ Nennerpotenz $+1$)
+    %\debug[df1,df2,px,py,pv]
+%         
+% Differential        
+%
+		\begin{answer}
+            \type{input.matrix}
+            \solution{df}
+            \format{1}{2}
+            \checkAsFunction{x,y}{-10}{10}{100}
+            \explanation{In der ersten Spalte des Differentials muss $f$ nach $x$ 
+                        abgeleitet werden, in der zweiten Spalte nach $y$.}
+        \end{answer}
+%         
+% Partielle Ableitungen        
+%
+        \begin{answer}
+            \type{input.number}
+            \solution{px}
+%            \explanation{Laut Definition ist $\frac{\partial f}{\partial x}(0,0)=\lim_{h\to 0}\frac{f(h,0)-f(0)}{h}$, 
+%                        sofern dieser Grenzwert existiert.}
+              \explanation{Laut Definition ist $\frac{\partial f}{\partial x}(0,0)=\lim_{h\to 0}\frac{f(h,0)-f(0)}{h}$, 
+                         sofern dieser Grenzwert existiert. Andernfalls exisitert auch die partielle Ableitung von $f$
+                         nach $x$ im Punkt $(0,0)^T$ nicht. Geben Sie in dem Fall "infty" ein.}
+        \end{answer}
+        \begin{answer}
+            \type{input.number}
+            \solution{py}
+%            \explanation{Laut Definition ist $\frac{\partial f}{\partial y}(0,0)=\lim_{h\to 0}\frac{f(0,h)-f(0)}{h}$, 
+%                        sofern dieser Grenzwert existiert.}            
+              \explanation{Laut Definition ist $\frac{\partial f}{\partial y}(0,0)=\lim_{h\to 0}\frac{f(0,h)-f(0)}{h}$,  
+                         sofern dieser Grenzwert existiert. Andernfalls exisitert auch die partielle Ableitung von $f$
+                         nach $y$ im Punkt $(0,0)^T$ nicht. Geben Sie in dem Fall "infty" ein.}
+        \end{answer}
+%        
+% Richtungsableitung       
+%   
+        \begin{answer}
+            \type{input.number}
+            \solution{pv}
+%            \explanation{Laut Definition ist $\text{D}_v f(0,0)=\lim_{h\to 0}\frac{f(hv)-f(0)}{h}$, 
+%                         sofern dieser Grenzwert existiert. \\ Bitte überprüfen Sie Ihre Rechnung.} 
+            \explanation{Laut Definition ist $\text{D}_v f(0,0)=\lim_{h\to 0}\frac{f(hv)-f(0)}{h}$, sofern dieser 
+                         Grenzwert existiert. Andernfalls exisitert auch die Richtungsableitung $\text{D}_v f(0,0) \,$ nicht. 
+                         Geben Sie in dem Fall "infty" ein.}                        
+        \end{answer}
+%
+% MC-Teil
+%    
+        
+        \begin{answer}
+            \type{mc.multiple}
+            \text{\\ Entscheiden Sie, welche der folgenden Aussagen zu $f$, jeweils bezogen auf den ganzen Definitionsbereich $\R^2$, wahr sind.\\
+                  }
+            \begin{choice}
+                \text{$f$ ist stetig.}
+                \solution{compute}
+                \iscorrect{co}{=}{1}
+            \end{choice}
+            \begin{choice}
+                \text{$f$ ist partiell differenzierbar.}
+                \solution{compute}
+                \iscorrect{pardiff}{=}{1}
+            \end{choice}
+            \begin{choice}
+                \text{$f$ ist stetig partiell differenzierbar.}
+                \solution{compute}
+                \iscorrect{copar}{=}{1}
+            \end{choice}
+            \begin{choice}
+                \text{$f$ ist total differenzierbar.}
+                \solution{compute}
+                \iscorrect{totdiff}{=}{1}                
+            \end{choice}
+            \begin{choice}
+                \text{Keine der Aussagen trifft zu.}
+                \solution{false}
+            \end{choice} 
+            
+            \explanation[NOT [edited]]{Bitte wählen Sie alle wahren Aussagen aus.}
+            \explanation[equalChoice(0????)]{Als gebrochen rationale Funktion ist $f$ stetig in allen Punkten $(x,y)^T \neq (0,0)^T$.
+                Die Stetigkeit von $f$ in $(0,0)^T$ lässt sich mittels Folgenstetigkeit nachweisen, denn für beliebige Nullfolgen 
+                $x^{(k)}$ in $\R^2$ gilt $\lim_{k\to \infty} f(x^{(k)})=f(0,0)=0.$ Hierzu ist die Abschätzung $2xy \leq x^2+y^2$ (welche aus der binomischen Formel folgt) ggfs. hilfreich.} 
+            \explanation[equalChoice(?0???)]{Der Nachweis der partiellen Differenzierbarkeit von $f$ ist im ersten Teil der Aufgabe bereits erfolgt.} 
+            \explanation[equalChoice(??1??)]{Prüfen Sie die Stetigkeit der partiellen Ableitungen von $f$ in $(0,0)^T$ durch Verwendung der
+                    Nullfolge $x^{(k)} = (\frac{1}{k},\frac{1}{k})^T$.}
+            \explanation[equalChoice(???1?)]{Wäre $f$ total differenzierbar in $(0,0)^T$, dann müsste $\text{D}_v f(0,0)=\text{D}f(0,0)\bullet v$ 
+                    für alle $v \in \R^2$ gelten. Schauen Sie sich noch einmal Ihre vorherigen Rechnungen an.}
+            \explanation[equalChoice(????1)]{Mindestens eine der Aussagen trifft zu.}
+            
+            \explanation[equalChoice(0??1?)]{Ihre Antwort ist widersprüchlich: Total differenzierbare Funktionen sind immer stetig.}
+            \explanation[equalChoice(??10?)]{Ihre Antwort ist widersprüchlich: Stetig partiell differenzierbare Funktionen sind immer total differenzierbar.}
+            \explanation[equalChoice(?0?1?)]{Ihre Antwort ist widersprüchlich: Total differenzierbare Funktionen sind immer partiell differenzierbar.}
+            
+        \end{answer}
+    \end{question}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Q2: f stetig, partiell diffbar, alle Richtungsableitungen gleich 0, stetig partiell diffbar und total diffbar 
+%
+    \begin{question}   
+
+        \begin{variables}
+
+          %f= g/h
+          \randint[Z]{a}{0}{4}
+          \randint[Z]{b}{0}{4}
+          %\randint[Z]{c}{0}{4}          
+          %\randint[Z]{n}{2}{4}
+          %QS: Vereinfachung von c und n
+          \function{c}{b}
+          \number{n}{2}
+          \randint[Z]{k}{2}{3}          
+          \randint[Z]{nx}{1}{3}                 % Zählerpotenz > Nennerpotenz   => f stetig
+          \function[calculate]{ny}{n-nx+k}      % Zählerpotenz = Nennerpotenz+k => alle Richtungsableitungen gleich 0 
+          \function[normalize]{g}{a*x^nx*y^ny}  % Zählerpotenz-1 > Nennerpotenz => partielle Ableitungen sind stetig
+          \function[normalize]{h}{b*x^n+c*y^n}
+          %partielle Ableitung nach x und y
+          \number{px}{0}
+          \number{py}{0}
+          %Richtungsableitung in Richtung (u,v)  % Richtungsableitung in beliebige Richtung v \neq (0,0) ist 0 (s.o.),                                                    
+          \randint{u}{1}{2}                      % denn pv = \lim_{h\to 0} \frac{f(hv)}{h} 
+          \randint{v}{1}{2}                      %         = f(v)* \lim_{h\to 0} h^(nx+ny)/h*h^n 
+          \number{pv}{0}                  %         = f(v)* \lim_{h\to 0} h^(k-1) = 0
+          
+          %folgende Variablen werden für die MC-Fragen benötigt.
+          \number{co}{1}            % f ist stetig
+          \number{pardiff}{1}       % f ist partiell diffbar
+          \number{copar}{1}         % partielle Ableitungen nicht stetig
+          \number{totdiff}{1}       % nicht total diffbar, da Richtungsableitung ungleich 0
+         \end{variables}
+        
+        \begin{variables}
+          \function{f}{g/h}
+          \derivative[normalize]{df1}{f}{x}
+          \derivative[normalize]{df2}{f}{y}
+          \matrix{df}{df1 & df2}
+          
+         % \function{totdiffhelp}{u*px+v*py} % wenn totdiffhelp ungleich pv, kann f nicht total diffbar sein !
+        \end{variables}
+
+
+% Teil b)       
+%    \begin{question}        
+        \type{input.generic}
+        \field{real}
+        \text{Sei $f:\R^2\to \R, \begin{pmatrix}x \\ y\end{pmatrix} 
+              \mapsto \begin{cases} \frac{\var{g}}{\var{h}}, & (x,y)\neq(0,0) \\ 0, & (x,y)=(0,0).\end{cases}$\\ 
+              \\
+              Bestimmen Sie das Differential von $f$ in $(x,y)^T$ für $(x,y)\neq 0:$\\ $\text{D}f(x,y)=$\ansref. \\ 
+              \\
+              Berechnen Sie jeweils im Punkt $(0,0)^T$ die partiellen Ableitungen von $f:$ \\
+              $\frac{\partial f}{\partial x}(0,0)=$\ansref $\quad$ und $\quad$ $\frac{\partial f}{\partial y}(0,0)=$\ansref,\\ 
+              \\
+              sowie die Richtungsableitung von $f$ in Richtung $v=(\var{u},\var{v})^T: \;$\\
+              $\text{D}_{(\var{u},\var{v})} f(0,0)=$\ansref .\\
+              \\
+
+              \textit{(Sollte einer der abgefragten Werte nicht existieren, geben Sie "infty" ein.)}
+              }
+              
+%  TEST:   
+%    \debug[co,pardiff,copar,totdiff]  %Funktion vom Typ MC-1111   (Zählerpotenz $=$ Nennerpotenz $+k$ mit $k\geq 2$)
+    %\debug[df1,df2,px,py,pv]
+
+%         
+% Differential        
+%
+		\begin{answer}
+            \type{input.matrix}
+            \solution{df}
+            \format{1}{2}
+            \checkAsFunction{x,y}{-10}{10}{100}
+            \explanation{In der ersten Spalte des Differentials muss $f$ nach $x$ 
+                        abgeleitet werden, in der zweiten Spalte nach $y$.}
+        \end{answer}
+%         
+% Partielle Ableitungen        
+%
+        \begin{answer}
+            \type{input.number}
+            \solution{px}
+%            \explanation{Laut Definition ist $\frac{\partial f}{\partial x}(0,0)=\lim_{h\to 0}\frac{f(h,0)-f(0)}{h}$, 
+%                        sofern dieser Grenzwert existiert.}
+              \explanation{Laut Definition ist $\frac{\partial f}{\partial x}(0,0)=\lim_{h\to 0}\frac{f(h,0)-f(0)}{h}$, 
+                         sofern dieser Grenzwert existiert. Andernfalls exisitert auch die partielle Ableitung von $f$
+                         nach $x$ im Punkt $(0,0)^T$ nicht. Geben Sie in dem Fall "infty" ein.}
+        \end{answer}
+        \begin{answer}
+            \type{input.number}
+            \solution{py}
+%            \explanation{Laut Definition ist $\frac{\partial f}{\partial y}(0,0)=\lim_{h\to 0}\frac{f(0,h)-f(0)}{h}$, 
+%                        sofern dieser Grenzwert existiert.}            
+              \explanation{Laut Definition ist $\frac{\partial f}{\partial y}(0,0)=\lim_{h\to 0}\frac{f(0,h)-f(0)}{h}$,  
+                         sofern dieser Grenzwert existiert. Andernfalls exisitert auch die partielle Ableitung von $f$
+                         nach $y$ im Punkt $(0,0)^T$ nicht. Geben Sie in dem Fall "infty" ein.}
+        \end{answer}
+%        
+% Richtungsableitung       
+%   
+        \begin{answer}
+            \type{input.number}
+            \solution{pv}
+%            \explanation{Laut Definition ist $\text{D}_v f(0,0)=\lim_{h\to 0}\frac{f(hv)-f(0)}{h}$, 
+%                         sofern dieser Grenzwert existiert. \\ Bitte überprüfen Sie Ihre Rechnung.} 
+            \explanation{Laut Definition ist $\text{D}_v f(0,0)=\lim_{h\to 0}\frac{f(hv)-f(0)}{h}$, sofern dieser 
+                         Grenzwert existiert. Andernfalls exisitert auch die Richtungsableitung $\text{D}_v f(0,0) \,$ nicht. 
+                         Geben Sie in dem Fall "infty" ein.}                        
+        \end{answer}
+%
+% MC-Teil
+%    
+        
+        \begin{answer}
+            \type{mc.multiple}
+            \text{\\ Entscheiden Sie, welche der folgenden Aussagen zu $f$, jeweils bezogen auf den ganzen Definitionsbereich $\R^2$, wahr sind.\\
+                  }
+            \begin{choice}
+                \text{$f$ ist stetig.}
+                \solution{compute}
+                \iscorrect{co}{=}{1}
+            \end{choice}
+            \begin{choice}
+                \text{$f$ ist partiell differenzierbar.}
+                \solution{compute}
+                \iscorrect{pardiff}{=}{1}
+            \end{choice}
+            \begin{choice}
+                \text{$f$ ist stetig partiell differenzierbar.}
+                \solution{compute}
+                \iscorrect{copar}{=}{1}
+            \end{choice}
+            \begin{choice}
+                \text{$f$ ist total differenzierbar.}
+                \solution{compute}
+                \iscorrect{totdiff}{=}{1}                
+            \end{choice}
+            \begin{choice}
+                \text{Keine der Aussagen trifft zu.}
+                \solution{false}
+            \end{choice}    
+            
+            \explanation[NOT [edited]]{Bitte wählen Sie alle wahren Aussagen aus.}            
+            \explanation[equalChoice(0????)]{Als gebrochen rationale Funktion ist $f$ stetig in allen Punkten $(x,y) \neq (0,0)$.
+                Die Stetigkeit von $f$ in $(0,0)$ lässt sich mittels Folgenstetigkeit nachweisen, denn für beliebige Nullfolgen 
+                $x^{(k)}$ in $\R^2$ gilt $\lim_{k\to \infty} f(x^{(k)})=f(0,0)=0.$} 
+            \explanation[equalChoice(?0???)]{Der Nachweis der partiellen Differenzierbarkeit von $f$ ist im ersten Teil der Aufgabe bereits erfolgt.}          
+            \explanation[equalChoice(??0??)]{Die partiellen Ableitungen von $f$ sind als gebrochen rationale Funktionen stetig 
+                in allen Punkten $(x,y) \neq (0,0)$. Die Stetigkeit in $(0,0)^T$ lässt sich mittels Folgenstetigkeit nachweisen, denn 
+                für beliebige Nullfolgen $x^{(k)}$ in $\R^2$ gilt $\lim_{k\to \infty} \frac{\partial f}{\partial x}(x^{(k)})=\frac{\partial f}{\partial x}(0,0)=0$ 
+                und $\lim_{k\to \infty} \frac{\partial f}{\partial y}(x^{(k)})=\frac{\partial f}{\partial y}(0,0)=0.$} 
+%FS: Neue Explanation zur Stetigkeit
+            \explanation[equalChoice(0?0??)]{Für den Nachweis der Stetigkeit von $f$ und der partiellen Ableitungen sind die Abschätzungen 
+            $2xy \leq x^2+y^2$ (welche aus der binomischen Formel folgt) und $x^2\leq x^2+y^2$ bzw. $y^2\leq x^2+y^2$ hilfreich.}
+%FS: Explanation auskommentiert
+            %\explanation[equalChoice(?110?)]{Da $f$ partiell differenzierbar und in $(0,0)^T$ stetig partiell differenzierbar ist, ist $f$ 
+            %    folglich in $(0,0)^T$ auch total differenzierbar.}
+            \explanation[equalChoice(????1)]{Mindestens eine der Aussagen trifft zu.}
+            \explanation[equalChoice(0??1?)]{Ihre Antwort ist widersprüchlich: Total differenzierbare Funktionen sind immer stetig.}
+            \explanation[equalChoice(??10?)]{Ihre Antwort ist widersprüchlich: Stetig partiell differenzierbare Funktionen sind immer total differenzierbar.}
+            \explanation[equalChoice(?0?1?)]{Ihre Antwort ist widersprüchlich: Total differenzierbare Funktionen sind immer partiell differenzierbar.}
+               
+        \end{answer}
+        
+    \end{question}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Q3: f nicht stetig, partiell diffbar, Richtungsableitung exist. nicht, nicht stetig partiell diffbar und nicht total diffbar 
+%
+    \begin{question}   
+    
+         \begin{variables}
+          
+          %f= g/h
+          \randint[Z]{a}{0}{4}
+          \randint[Z]{b}{0}{4}
+          \randint[Z]{c}{0}{4}
+          \randint{k1}{1}{2}
+          \randint{k2}{1}{2}
+          \function[calculate]{n1}{2*k1}
+          \function[calculate]{n2}{2*k2}
+          \randint{nx}{1}{2}
+          \randint{ny}{1}{3}
+          \randadjustIf{nx,ny}{nx+ny>n1 OR nx+ny>n2}    % Zählerpotenz =< Nennerpotenz =>      
+          \function[normalize]{g}{a*x^nx*y^ny}          %   f und partielle Abl. nicht stetig
+          \function[normalize]{h}{b*x^n1+c*y^n2}        %   und Richtungsableitung existiert nicht
+          
+          %partielle Ableitung nach x und y
+          \number{px}{0}
+          \number{py}{0}
+          
+          %Richtungsableitung in Richtung (u,v)  % Richtungsableitung in beliebige Richtung v \neq (0,0), (0,1) und (1,0)                                                    
+          \randint{u}{1}{2}                      % existiert nicht, da Zählerpotenz =< Nennerpotenz  (s.o.)  
+          \randint{v}{1}{2}                      % pv = \lim_{h\to 0} \frac{f(h*u,h*v)}{h}  
+                                                 %    = \lim_{h\to 0} (h^(nx+ny) *...) / (h*h^n1 *... + h*h^n2 *...) 
+          \number{pv}{infty}                     %    = infty, da {nx+ny<=n1 AND nx+ny<=n2}
+
+          %folgende Variablen werden für die MC-Fragen benötigt.
+          \number{co}{0}                    % f ist nicht stetig
+          \begin{switch}                    % Nullfolge zur Widerlegung der Stetikeit
+            \begin{case}{k1=k2+1}
+              \function{kx}{k}              
+              \function{ky}{k^2}             
+            \end{case}
+            \begin{case}{k1=k2-1}
+              \function{kx}{k^2}            
+              \function{ky}{k}              
+            \end{case}            
+            \begin{default}
+              \function{kx}{k}              
+              \function{ky}{k}         
+            \end{default}
+          \end{switch}          
+          \number{pardiff}{1}               % f ist partiell diffbar
+          \number{copar}{0}                 % partielle Ableitungen nicht stetig
+          \number{totdiff}{0}               % nicht total diffbar, da Richtungsableitung ungleich 0
+         \end{variables}
+        
+        \begin{variables}
+          \function{f}{g/h}
+          \derivative[normalize]{df1}{f}{x}
+          \derivative[normalize]{df2}{f}{y}
+          \matrix{df}{df1 & df2}
+          
+          \function{totdiffhelp}{u*px+v*py} % wenn totdiffhelp ungleich pv, kann f nicht total diffbar sein !
+        \end{variables}
+
+
+% Teil c)       
+%    \begin{question}        
+        \type{input.generic}
+        \field{real}
+        \text{Sei $f:\R^2\to \R, \begin{pmatrix}x \\ y\end{pmatrix} 
+              \mapsto \begin{cases} \frac{\var{g}}{\var{h}}, & (x,y)\neq(0,0) \\ 0, & (x,y)=(0,0).\end{cases}$\\ 
+              \\
+              Bestimmen Sie das Differential von $f$ in $(x,y)^T$ für $(x,y)\neq 0:$\\ $\text{D}f(x,y)=$\ansref. \\ 
+              \\
+              Berechnen Sie jeweils im Punkt $(0,0)^T$ die partiellen Ableitungen von $f:$ \\
+              $\frac{\partial f}{\partial x}(0,0)=$\ansref $\quad$ und $\quad$ $\frac{\partial f}{\partial y}(0,0)=$\ansref,\\ 
+              \\
+              sowie die Richtungsableitung von $f$ in Richtung $v=(\var{u},\var{v})^T: \;$\\
+              $\text{D}_{(\var{u},\var{v})} f(0,0)=$\ansref .\\
+              \\
+
+              \textit{(Sollte einer der abgefragten Werte nicht existieren, geben Sie "infty" ein.)}
+              }
+              
+%              
+%  TEST:   
+%    \debug[co,pardiff,copar,totdiff]  %Funktion vom Typ MC-0100  (Zählerpotenz $\leq$ Nennerpotenz)
+  %  \debug[df1,df2,px,py,pv]
+
+%         
+% Differential        
+%
+		\begin{answer}
+            \type{input.matrix}
+            \solution{df}
+            \format{1}{2}
+            \checkAsFunction{x,y}{-10}{10}{100}
+            \explanation{In der ersten Spalte des Differentials muss $f$ nach $x$ 
+                        abgeleitet werden, in der zweiten Spalte nach $y$.}
+        \end{answer}
+        
+        
+%         
+% Partielle Ableitungen        
+%
+        \begin{answer}
+            \type{input.number}
+            \solution{px}
+%            \explanation{Laut Definition ist $\frac{\partial f}{\partial x}(0,0)=\lim_{h\to 0}\frac{f(h,0)-f(0)}{h}$, 
+%                        sofern dieser Grenzwert existiert.}
+              \explanation{Laut Definition ist $\frac{\partial f}{\partial x}(0,0)=\lim_{h\to 0}\frac{f(h,0)-f(0)}{h}$, 
+                         sofern dieser Grenzwert existiert. Andernfalls exisitert auch die partielle Ableitung von $f$
+                         nach $x$ im Punkt $(0,0)^T$ nicht. Geben Sie in dem Fall "infty" ein.}
+        \end{answer}
+        \begin{answer}
+            \type{input.number}
+            \solution{py}
+%            \explanation{Laut Definition ist $\frac{\partial f}{\partial y}(0,0)=\lim_{h\to 0}\frac{f(0,h)-f(0)}{h}$, 
+%                        sofern dieser Grenzwert existiert.}            
+              \explanation{Laut Definition ist $\frac{\partial f}{\partial y}(0,0)=\lim_{h\to 0}\frac{f(0,h)-f(0)}{h}$,  
+                         sofern dieser Grenzwert existiert. Andernfalls exisitert auch die partielle Ableitung von $f$
+                         nach $y$ im Punkt $(0,0)^T$ nicht. Geben Sie in dem Fall "infty" ein.}
+        \end{answer}
+%        
+% Richtungsableitung       
+%   
+        \begin{answer}
+            \type{input.number}
+            \solution{pv}
+%            \explanation{Laut Definition ist $\text{D}_v f(0,0)=\lim_{h\to 0}\frac{f(hv)-f(0)}{h}$, 
+%                         sofern dieser Grenzwert existiert. \\ Bitte überprüfen Sie Ihre Rechnung.} 
+            \explanation{Laut Definition ist $\text{D}_v f(0,0)=\lim_{h\to 0}\frac{f(hv)-f(0)}{h}$, sofern dieser 
+                         Grenzwert existiert. Andernfalls exisitert auch die Richtungsableitung $\text{D}_v f(0,0) \,$ nicht. 
+                         Geben Sie in dem Fall "infty" ein.}                        
+        \end{answer}       
+%
+% MC-Teil
+%    \begin{question}
+        
+        \begin{answer}
+            \type{mc.multiple}
+            \text{\\ Entscheiden Sie, welche der folgenden Aussagen zu $f$, jeweils bezogen auf den ganzen Definitionsbereich $\R^2$, wahr sind.\\
+                  }
+            \begin{choice}
+                \text{$f$ ist stetig.}
+                \solution{compute}
+                \iscorrect{co}{=}{1}
+            \end{choice}
+            \begin{choice}
+                \text{$f$ ist partiell differenzierbar.}
+                \solution{compute}
+                \iscorrect{pardiff}{=}{1}
+            \end{choice}
+            \begin{choice}
+                \text{$f$ ist stetig partiell differenzierbar.}
+                \solution{compute}
+                \iscorrect{copar}{=}{1}
+            \end{choice}
+            \begin{choice}
+                \text{$f$ ist total differenzierbar.}
+                \solution{compute}
+                \iscorrect{totdiff}{=}{1}                
+            \end{choice}
+            \begin{choice}
+                \text{Keine der Aussagen trifft zu.}
+                \solution{false}
+            \end{choice}            
+           
+            \explanation[NOT [edited]]{Bitte wählen Sie alle wahren Aussagen aus.}
+            \explanation[equalChoice(1????)]{Prüfen Sie die Stetigkeit von $f$ in $(0,0)$ durch Verwendung der Nullfolge 
+                    $x^{(k)} = (\frac{1}{\var{kx}},\frac{1}{\var{ky}})^T$.}                    
+            \explanation[equalChoice(?0???)]{Der Nachweis der partiellen Differenzierbarkeit von $f$ ist im ersten Teil der Aufgabe bereits erfolgt.} 
+            \explanation[equalChoice(??1??)]{Prüfen Sie die Stetigkeit der partiellen Ableitungen von $f$ in $(0,0)^T$ durch Verwendung der
+                    Nullfolge $x^{(k)} = (\frac{1}{\var{kx}},\frac{1}{\var{ky}})^T$.}
+            \explanation[equalChoice(???1?)]{Wäre $f$ total differenzierbar in $(0,0)^T$, dann müsste $\text{D}_v f(0,0)=\text{D}f(0,0)\bullet v$ 
+                    für alle $v \in \R^2$ gelten. Schauen Sie sich noch einmal Ihre vorherigen Rechnungen an.}
+            \explanation[equalChoice(0??1?)]{Außerdem sind total differenzierbare Funktionen immer stetig.}
+            \explanation[equalChoice(????1)]{Mindestens eine der Aussagen trifft zu. Schauen Sie sich noch 
+                    einmal Ihre vorherigen Rechnungen an.}
+            
+            %\explanation[equalChoice(0??1?)]{Ihre Antwort ist widersprüchlich: Total differenzierbare Funktionen sind immer stetig.}
+            \explanation[equalChoice(??10?)]{Ihre Antwort ist widersprüchlich: Stetig partiell differenzierbare Funktionen sind immer total differenzierbar.}
+            \explanation[equalChoice(?0?1?)]{Ihre Antwort ist widersprüchlich: Total differenzierbare Funktionen sind immer partiell differenzierbar.}
+            
+        \end{answer}
+    \end{question}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Q4: f nicht stetig, nicht partiell diffbar, Richtungsableitung exist. nicht, nicht stetig partiell diffbar und nicht total diffbar 
+%
+    \begin{question}   
+
+        \begin{variables}
+          
+          %f= g/h
+          \randint[Z]{a}{0}{4}
+          \randint[Z]{b}{0}{4}
+          \randint[Z]{c}{0}{4}
+          \randint{k1}{1}{2}
+          \randint{k2}{1}{2}
+          \function[calculate]{n1}{2*k1}
+          \function[calculate]{n2}{2*k2}
+          \randint{nx}{0}{0}
+          \randint{ny}{1}{3}
+          \randadjustIf{ny}{ny>n1 OR ny>n2}             % Zählerpotenz =< Nennerpotenz =>      
+          \function[normalize]{g}{a*x^nx*y^ny}          %   f und partielle Abl. nicht stetig
+          \function[normalize]{h}{b*x^n1+c*y^n2}        %   und Richtungsableitung existiert nicht
+          
+          %partielle Ableitung nach x und y
+          \number{px}{0}
+          \number{py}{infty}                            % Richtungsableitung f_y in (0,0) existiert nicht, 
+                                                        % da wg. nx=0 x(=0) im Zähler als Faktor nicht vorkommt 
+                                                        % py = \lim_{h\to 0} \frac{f((0,h)-f(0))}{h} 
+                                                        %    = \lim_{h\to 0} (h^ny *...) / (h*h^n1 *... + h*h^n2 *...) 
+                                                        %    = infty, da {ny<=n1 AND ny<=n2}
+                                                                  
+          %Richtungsableitung in Richtung (u,v)  % Richtungsableitung in beliebige Richtung v \neq (0,0), (0,1) und (1,0)                                                    
+          \randint{u}{1}{2}                      % existiert nicht, da Zählerpotenz =< Nennerpotenz  (s.o.)  
+          \randint{v}{1}{2}                      % pv = \lim_{h\to 0} \frac{f(h*u,h*v)}{h}  
+                                                 %    = \lim_{h\to 0} (h^(nx+ny) *...) / (h*h^n1 *... + h*h^n2 *...) 
+          \number{pv}{infty}                     %    = infty, da {nx+ny<=n1 AND nx+ny<=n2}
+
+          %folgende Variablen werden für die MC-Fragen benötigt.
+          \number{co}{0}                    % f ist nicht stetig
+          \begin{switch}                    % Nullfolge zur Widerlegung der Stetikeit
+            \begin{case}{k1=k2+1}
+              \function{kx}{k}              
+              \function{ky}{k^2}             
+            \end{case}
+            \begin{case}{k1=k2-1}
+              \function{kx}{k^2}            
+              \function{ky}{k}              
+            \end{case}            
+            \begin{default}
+              \function{kx}{k}              
+              \function{ky}{k}         
+            \end{default}
+          \end{switch}          
+          \number{pardiff}{0}               % Richtungsableitung f_y in (0,0) existiert nicht (s.o.) 
+          \number{copar}{0}                 % partielle Ableitungen nicht stetig
+          \number{totdiff}{0}               % nicht total diffbar, da Richtungsableitung ungleich 0
+          \number{no}{1}                    % keine der Aussagen trifft zu
+         \end{variables}
+        
+        \begin{variables}
+          \function{f}{g/h}
+          \derivative[normalize]{df1}{f}{x}
+          \derivative[normalize]{df2}{f}{y}
+          \matrix{df}{df1 & df2}
+          
+          \function{totdiffhelp}{u*px+v*py} % wenn totdiffhelp ungleich pv, kann f nicht total diffbar sein !
+        \end{variables}
+
+
+% Teil d)       
+%    \begin{question}
+
+        \type{input.generic}
+        \field{real}
+        \text{Sei $f:\R^2\to \R, \begin{pmatrix}x \\ y\end{pmatrix} 
+              \mapsto \begin{cases} \frac{\var{g}}{\var{h}}, & (x,y)\neq(0,0) \\ 0, & (x,y)=(0,0).\end{cases}$\\ 
+              \\
+              Bestimmen Sie das Differential von $f$ in $(x,y)^T$ für $(x,y)\neq 0:$\\ $\text{D}f(x,y)=$\ansref. \\ 
+              \\
+              Berechnen Sie jeweils im Punkt $(0,0)^T$ die partiellen Ableitungen von $f:$ \\
+              $\frac{\partial f}{\partial x}(0,0)=$\ansref $\quad$ und $\quad$ $\frac{\partial f}{\partial y}(0,0)=$\ansref,\\ 
+              \\
+              sowie die Richtungsableitung von $f$ in Richtung $v=(\var{u},\var{v})^T: \;$\\
+              $\text{D}_{(\var{u},\var{v})} f(0,0)=$\ansref .\\
+              \\
+
+              \textit{(Sollten einer der abgefragten Werte nicht existieren, geben Sie "infty" ein.)}
+              }
+              
+%              
+%  TEST:   
+%    \debug[co,pardiff,copar,totdiff]  %Funktion vom Typ MC-00001  (Zählerpotenz $\leq$ Nennerpotenz und kein $x$ im Zähler)
+%    \debug[df1,df2,px,py,pv]
+
+%         
+% Differential        
+%
+		\begin{answer}
+            \type{input.matrix}
+            \solution{df}
+            \format{1}{2}
+            \checkAsFunction{x,y}{-10}{10}{100}
+            \explanation{In der ersten Spalte des Differentials muss $f$ nach $x$ 
+                        abgeleitet werden, in der zweiten Spalte nach $y$.}
+        \end{answer}
+        
+        
+%         
+% Partielle Ableitungen        
+%
+        \begin{answer}
+            \type{input.number}
+            \solution{px}
+%            \explanation{Laut Definition ist $\frac{\partial f}{\partial x}(0,0)=\lim_{h\to 0}\frac{f(h,0)-f(0)}{h}$, 
+%                        sofern dieser Grenzwert existiert.}
+              \explanation{Laut Definition ist $\frac{\partial f}{\partial x}(0,0)=\lim_{h\to 0}\frac{f(h,0)-f(0)}{h}$, 
+                         sofern dieser Grenzwert existiert. Andernfalls exisitert auch die partielle Ableitung von $f$
+                         nach $x$ im Punkt $(0,0)^T$ nicht. Geben Sie in dem Fall "infty" ein.}
+        \end{answer}
+        \begin{answer}
+            \type{input.number}
+            \solution{py}
+%            \explanation{Laut Definition ist $\frac{\partial f}{\partial y}(0,0)=\lim_{h\to 0}\frac{f(0,h)-f(0)}{h}$, 
+%                        sofern dieser Grenzwert existiert.}            
+              \explanation{Laut Definition ist $\frac{\partial f}{\partial y}(0,0)=\lim_{h\to 0}\frac{f(0,h)-f(0)}{h}$,  
+                         sofern dieser Grenzwert existiert. Andernfalls exisitert auch die partielle Ableitung von $f$
+                         nach $y$ im Punkt $(0,0)^T$ nicht. Geben Sie in dem Fall "infty" ein.}
+        \end{answer}
+%        
+% Richtungsableitung       
+%   
+        \begin{answer}
+            \type{input.number}
+            \solution{pv}
+%            \explanation{Laut Definition ist $\text{D}_v f(0,0)=\lim_{h\to 0}\frac{f(hv)-f(0)}{h}$, 
+%                         sofern dieser Grenzwert existiert. \\ Bitte überprüfen Sie Ihre Rechnung.} 
+            \explanation{Laut Definition ist $\text{D}_v f(0,0)=\lim_{h\to 0}\frac{f(hv)-f(0)}{h}$, sofern dieser 
+                         Grenzwert existiert. Andernfalls exisitert auch die Richtungsableitung $\text{D}_v f(0,0) \,$ nicht. 
+                         Geben Sie in dem Fall "infty" ein.}                        
+        \end{answer}
+%
+% MC-Teil
+%
+        
+        \begin{answer}
+            \type{mc.multiple}
+            \text{\\ Entscheiden Sie, welche der folgenden Aussagen zu $f$, jeweils bezogen auf den ganzen Definitionsbereich $\R^2$, wahr sind.\\
+                  }
+            \begin{choice}
+                \text{$f$ ist stetig.}
+                \solution{compute}
+                \iscorrect{co}{=}{1}
+            \end{choice}
+            \begin{choice}
+                \text{$f$ ist partiell differenzierbar.}
+                \solution{compute}
+                \iscorrect{pardiff}{=}{1}
+            \end{choice}
+            \begin{choice}
+                \text{$f$ ist stetig partiell differenzierbar.}
+                \solution{compute}
+                \iscorrect{copar}{=}{1}
+            \end{choice}
+            \begin{choice}
+                \text{$f$ ist total differenzierbar.}
+                \solution{compute}
+                \iscorrect{totdiff}{=}{1}                
+            \end{choice}
+            \begin{choice}
+                \text{Keine der Aussagen trifft zu.}
+                \solution{compute}
+                \iscorrect{no}{=}{1}
+            \end{choice}            
+            
+            \explanation[NOT [edited]]{Bitte wählen Sie alle wahren Aussagen aus.}
+            \explanation[equalChoice(1????)]{Prüfen Sie die Stetigkeit von $f$ in $(0,0)$ durch Verwendung der Nullfolge 
+                    $x^{(k)} = (\frac{1}{\var{kx}},\frac{1}{\var{ky}})^T$.} 
+            \explanation[equalChoice(?1???)]{Schauen Sie sich nochmal die partielle Ableitung von $f$ nach $y$ im Punkt $(0,0)$ an.} 
+            \explanation[equalChoice(??1??)]{Prüfen Sie die Stetigkeit der partiellen Ableitungen von $f$ in $(0,0)$ durch Verwendung der
+                    Nullfolge $x^{(k)} = (\frac{1}{\var{kx}},\frac{1}{\var{ky}})^T$.}
+            \explanation[equalChoice(???1?)]{Wäre $f$ total differenzierbar in $(0,0)$, dann müsste $\text{D}_v f(0,0)=\text{D}f(0,0)\bullet v$ 
+                    für alle $v \in \R^2$ gelten. Schauen Sie sich noch einmal Ihre vorherigen Rechnungen an.}
+            \explanation[equalChoice(0??1?)]{Außerdem sind total differenzierbare Funktionen immer stetig.}
+
+            %\explanation[equalChoice(0??1?)]{Ihre Antwort ist widersprüchlich: Total differenzierbare Funktionen sind immer stetig.}
+            \explanation[equalChoice(??10?)]{Ihre Antwort ist widersprüchlich: Stetig partiell differenzierbare Funktionen sind immer total differenzierbar.}
+            \explanation[equalChoice(?0?1?)]{Ihre Antwort ist widersprüchlich: Total differenzierbare Funktionen sind immer partiell differenzierbar.}
+            
+        \end{answer}
+    \end{question}
+
+\end{problem}
+
+\end{content}

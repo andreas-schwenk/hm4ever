@@ -1,0 +1,87 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü06: Newton}
+    \lang{en}{Exercise 6}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+
+\title{\lang{de}{Ü06: Newton}}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10496}{Ticket 10496}
+\end{block}
+
+%######################################################FRAGE_TEXT
+\lang{de}{ 
+1) Bestimmen Sie mit Hilfe des Newton-Verfahrens eine lokale Extremstelle der Funktion
+$f(x)=x^4-3x^3+x^2-x$.\\
+2) Bestimmen Sie die lokalen Extremstellen der Funktion $f(x)=x^3-3x+1$, skizzieren Sie mit diesen Informationen den Funktionsgraph, und bestimmen Sie (mit Hilfe eines Taschenrechners) Näherungen für sämtliche Nullstellen mittels des Newton-Verfahrens.
+ }
+
+%##################################################ANTWORTEN_TEXT
+\begin{tabs*}[\initialtab{0}\class{exercise}]
+  \tab{\lang{de}{Antworten}}
+    Aufgabe 1: 
+    \begin{itemize}
+        \item $x_{min}\approx 2,066593$
+    \end{itemize}
+    Aufgabe 2: 
+    \begin{itemize}
+        \item Extremstellen bei $x_{min}=-1$ und $x_{max}=1$
+        \item Nullstellen bei $x_{1}\approx -1,8793852$, $x_{2}\approx 0,34729636$ und $x_{3}\approx 1,53208889$
+    \end{itemize}
+
+  %++++++++++++++++++++++++++++++++++++++++++START_TAB_X
+  \tab{\lang{de}{Lösung 1)}}
+  \begin{incremental}[\initialsteps{1}]
+  
+  	 %----------------------------------START_STEP_X
+    \step 
+    \lang{de}{   
+Da die Funktion $f$ auf ganz $\R$ definiert ist, ist eine Extremstelle der Funktion $f$ 
+eine Nullstelle ihrer Ableitungsfunktion. Man wendet daher das Newton-Verfahren auf die Ableitungsfunktion $f'(x)=4x^3-9x^2+2x-1$ an.
+
+Die zweite Ableitung ist $f''(x)=12x^2-18x+2$ und daher ist die Rekursionsformel
+\[ x_{n+1}=x_n-\frac{f'(x_n)}{f''(x_n)}=x_n-\frac{4x_n^3-9x_n^2+2x_n-1}{12x_n^2-18x_n+2}. \]
+
+Nun ist ein Startwert zu wählen. Es gelten:
+\[ f'(0)=-1,\quad f'(1)=-4,\quad f'(2)=-1\quad\text{und }\:f'(3)=32. \]
+Also besitzt die Ableitung zwischen $2$ und $3$ eine Nullstelle.
+
+Wählt man nun $x_0=2$, dann erhält man:
+\begin{eqnarray*}
+x_1 &=& x_0-\frac{4x_0^3-9x_0^2+2x_0-1}{12x_0^2-18x_0+2} = \frac{29}{14}\approx 2,071429, \\
+x_2 &=& x_1-\frac{4x_1^3-9x_1^2+2x_1-1}{12x_1^2-18x_1+2} \approx 2,066615, \\
+x_3 &=& x_2-\frac{4x_2^3-9x_2^2+2x_2-1}{12x_2^2-18x_2+2} \approx 2,066593, \\
+x_4 &=& x_3-\frac{4x_3^3-9x_3^2+2x_3-1}{12x_3^2-18x_3+2} \approx 2,066593. \\
+\end{eqnarray*}
+Die Extremstelle von $f$ liegt daher bei $2,066593$.    }
+  	 %------------------------------------END_STEP_X
+ 
+  \end{incremental}
+  %++++++++++++++++++++++++++++++++++++++++++++END_TAB_X
+
+
+%#############################################################ENDE
+
+  \tab{\lang{de}{Lösungsvideo 2)}}
+    Der Lösungsweg zu Aufgabe 2 kann dem folgenden Video entnommen werden:\youtubevideo[500][300]{yB_CMXXLGKQ}\\
+  
+\end{tabs*}
+\end{content}

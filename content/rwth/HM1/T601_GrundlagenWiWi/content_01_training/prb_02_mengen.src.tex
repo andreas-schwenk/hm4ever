@@ -1,0 +1,153 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+ \name{
+  \lang{de}{A02: Mengenoperationen}
+  \lang{en}{A02: Set operations}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+\lang{de}{
+	\title{A02: Mengenoperationen}
+}
+\lang{en}{
+  \title{A02: Set operations}
+}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/23727}{Ticket 23727}
+\end{block}
+
+
+\begin{block}[annotation]
+Kopie: hm4mint/T101_neu_Elementare_REchengrundlagen/training 2
+
+Im Ticket-System: \href{https://team.mumie.net/issues/22283}{Ticket 22283}
+\end{block}
+
+\begin{block}[annotation]
+	Mengen und Mengenoperationen
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+
+
+\begin{problem}
+%
+  \begin{question}  % Q2: Mengenoperationen
+%
+      \begin{variables}                 % alle Variablen sind verschieden !!!
+        \drawFromSet{n1}{2,3,5,7,11,13,17}
+        \drawFromSet{n2}{2,3,5,7,11,13,17}
+        \randadjustIf{n2}{n2=n1}
+        \function[normalize]{n0}{n1*n2}
+      \end{variables}
+
+      \lang{de}{
+      \text{Gegeben seien die Mengen \\
+      
+       \\ $ A=\{n \in \Z \, \vert \,  \var{n1} \,$ teilt $\, n\}, $
+       $\;  B=\{n \in \Z \, \vert \,  \var{n2} \,$ teilt $\, n\} \; $ 
+       und 
+       $\; C=\{n \in \Z \, \vert \,  \var{n0} \,$ teilt $\, n\}. $\\
+        
+       \\ Welche der folgenden Beziehungen zwischen diesen Mengen trifft zu?}
+%
+            \explanation{Beachten Sie, dass $\var{n1} \cdot \var{n2}=\var{n0}\,$ ist.
+                Damit lässt sich die Menge $C$ auch beschreiben durch \\
+                $\; C =\{n \in \Z \, \vert \, (\var{n1} \cdot \var{n2}) \,$ teilt $\, n\}
+                      =\{n \in \Z \, \vert \, \var{n1} \,$ teilt $\, n \,$ 
+                            \textbf{und} $\, \var{n2} \,$ teilt $\, n \} $.}
+        }  
+
+        \lang{en}{
+      \text{Define the sets \\
+      
+       \\ $ A=\{n \in \Z \, \vert \,  \var{n1} \,$ divides $\, n\}, $
+       $\;  B=\{n \in \Z \, \vert \,  \var{n2} \,$ divides $\, n\} \; $ 
+       and 
+       $\; C=\{n \in \Z \, \vert \,  \var{n0} \,$ divides $\, n\}. $\\
+        
+       \\ Which of the following relationships between these sets hold?}
+%
+            \explanation{Note that $\var{n1} \cdot \var{n2}=\var{n0}$.
+                The set $C$ can therefore also be written in the form \\
+                $\; C =\{n \in \Z \, \vert \, (\var{n1} \cdot \var{n2}) \,$ teilt $\, n\}
+                      =\{n \in \Z \, \vert \, \var{n1} \,$ divides $\, n \,$ 
+                            \textbf{and} $\, \var{n2} \,$ divides $\, n \} $.}
+        }
+%                
+       \permutechoices{1}{7} % permutes choices {1}{2}{3} randomly.
+       \type{mc.yesno} % every choice allows a yes or no answer
+%1
+       \begin{choice}
+             \lang{de}{
+             \text{Die Schnittmenge $A \cap B$ enthält alle Zahlen aus $\Z$, 
+                die sowohl durch $\var{n1}$ als auch durch $\var{n2}$  teilbar sind.}
+                }
+            \lang{en}{
+            \text{The intersection $A \cap B$ contains all integers that are divisible by both $\var{n1}$ and $\var{n2}$.}
+            }
+                
+             \solution{true} % Correct answer is yes
+       \end{choice}      
+%2
+      \begin{choice}
+             \text{$A \cap B = C$}
+             \solution{true} % Correct answer is yes
+       \end{choice}
+%3
+      \begin{choice}
+             \text{$A \cup B = C$}
+             \solution{false} % Correct answer is yes
+       \end{choice}
+%4       
+      \begin{choice}
+             \text{$C \subset (A \cup B) $}
+             \solution{true} % Correct answer is yes
+        \end{choice}
+%5
+      \begin{choice}
+             \text{$C \setminus B = A$}
+             \solution{false} % Correct answer is yes
+       \end{choice}
+%6
+      \begin{choice}
+             \text{$C \subset A \,$ und $\, C \subset B$}
+             \solution{true} % Correct answer is yes
+       \end{choice}
+%7
+       \begin{choice}
+             \lang{de}{
+             \text{Die Menge $B \setminus A$ enthält alle Zahlen aus $\Z$, die nicht durch $\var{n1}$ teilbar sind.}
+             }
+             \lang{en}{
+              \text{The set $B \setminus A$ contains all integers that are not divisible by $\var{n1}$.}
+             }
+             \solution{false} % Correct answer is yes 
+       \end{choice}
+%      
+    \end{question}
+   
+
+
+
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

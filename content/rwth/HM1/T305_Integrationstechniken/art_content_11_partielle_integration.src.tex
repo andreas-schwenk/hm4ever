@@ -1,0 +1,394 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Partielle Integration}
+    \lang{en}{Integration by parts}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+\end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T304_Integrierbarkeit/g_art_content_09_integrierbare_funktionen.meta.xml}{stammfunktion}
+    \link{generic_article}{content/rwth/HM1/T301_Differenzierbarkeit/g_art_content_02_ableitungsregeln.meta.xml}{abl-regeln}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{4}
+\ombarticle{1}
+
+\title{\lang{de}{Partielle Integration}\lang{en}{Integration by parts}}
+ 
+\begin{block}[annotation]
+  
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10041}{Ticket 10041}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\lang{de}{
+Wir haben im Abschnitt \link{stammfunktion}{Stammfunktion} gesehen, dass
+die Bestimmung des Integrals einer Funktion $f$ über einem Intervall $[a;b]$
+am einfachsten ist, wenn man zu $f$ eine Stammfunktion $F$ kennt oder sie berechnen kann,
+weil dann nach dem \ref[stammfunktion][Hauptsatz der Differential- und Integralrechnung]{sec:hauptsatz} gilt:
+}
+\lang{en}{
+In the section on \link{stammfunktion}{antiderivatives}, we saw that computing the integral of a 
+function $f$ over an interval $[a;b]$ is made much easier if we know an antiderivative $F$ of the 
+function $f$. In this case, by the \ref[stammfunktion][fundamental theorem of calculus]{sec:hauptsatz} we have: 
+}
+\[  \int_a^b f(x)\, dx =[F(x)]_a^b=F(b)-F(a). \]
+\lang{de}{
+Für einige elementare Funktionen wie die Potenzfunktionen, die Exponentialfunktion, Sinus und 
+Kosinus haben wir dort auch die Stammfunktionen gesehen.
+\\\\
+Wie für die Differentiation gilt bei der Bildung der Stammfunktion auch die Summen- und Faktorregel:
+}
+\lang{en}{
+We gave antiderivatives of certain simple functions such as power functions, the exponential 
+function and the sine and cosine functions.
+\\\\
+As for differentiation, we may use the sum and constant factor rules for determining antiderivatives:
+}
+
+\begin{rule}\label{rule:Linear_Stammfkt}
+\lang{de}{
+Sind $F(x)$ und $G(x)$ Stammfunktionen der Funktionen $f(x)$ bzw. $g(x)$, und sind $\alpha$ und $\beta$ reelle Zahlen, so ist eine Stammfunktion der Funktion $\alpha f(x)+\beta g(x)$ gegeben durch
+}
+\lang{en}{
+Let $F(x)$ und $G(x)$ be antiderivatives of the functions $f(x)$ and $g(x)$ respectively, and let 
+$\alpha$ and $\beta$ be real numbers. Then the following function is an antiderivative of the function $\alpha f(x)+\beta g(x)$:
+}
+\[  \alpha F(x)+\beta G(x). \]
+\end{rule}
+\lang{de}{
+Der Beweis erfolgt durch Differentiation der Funktion $\alpha F(x)+\beta G(x)$ mit Hilfe der 
+\ref[abl-regeln][Summen- und Faktorregel]{rule:summenregel} für die Ableitung.
+\\\\
+Die anderen Ableitungsregeln wie Produktregel, Quotientenregel und Kettenregel lassen sich nicht 
+direkt auf die Integration übertragen, da zum Beispiel die Ableitung eines Produkts 
+$u(x)\cdot v(x)$ gegeben ist durch
+}
+\lang{en}{
+The proof follows by differentiating the function $\alpha F(x)+\beta G(x)$ using the 
+\ref[abl-regeln][sum and constant factor rules]{rule:summenregel}.
+\\\\
+The other rules for differentiation such as the product rule, quotient rule and chain rule cannot 
+be directly translated into rules for integration. For example, the derivative of a product 
+$u(x)\cdot v(x)$ is given by
+}
+\[  (u(x)v(x))'= u'(x)v(x)+u(x)v'(x), \]
+\lang{de}{
+was jedoch kein Produkt, sondern die Summe zweier Produkte ist.
+\\\\
+Die Produktregel und die Kettenregel führen jedoch auf Techniken, um Integrale bzw. Stammfunktionen dennoch zu bestimmen.
+}
+\lang{en}{
+which is not necessarily a product itself, rather the sum of two products.
+\\\\
+However, we may still derive some techniques for integrating, or rather determining antiderivatives, 
+using the product rule and the chain rule.
+}
+
+
+\section{\lang{de}{Partielle Integration}\lang{en}{Integration by parts}}\label{sec:part-int}
+
+\lang{de}{
+Wir behandeln hier zunächst die \textit{partielle Integration}, die aus der Produktregel entstanden ist.
+}
+\lang{en}{
+Firstly we introduce \textit{integration by parts}, which is derived from the product rule.
+}
+
+\begin{theorem}[\lang{de}{Partielle Integration}\lang{en}{Integration by parts}]\label{thm:partint}
+\lang{de}{
+Es seien $u,v\colon [c,d]\to \R$ stetig differenzierbar (d.\,h. differenzierbar mit stetiger 
+Ableitung). Dann gilt für alle $a,b\in [c,d]$ 
+}
+\lang{en}{
+Let $u,v\colon [c,d]\to \R$ be continuously differentiable (that is, differentiable and with a 
+continuous derivative) functions. Then for all $a,b\in [c,d]$ we have
+}
+  \[ \int_a^b u(x)\,v'(x)\;dx = \left[ u(x)\,v(x)\right]_a^b - \int_a^b u'(x)\,v(x)\;dx. \]
+\lang{de}{
+\floatright{\href{https://www.hm-kompakt.de/video?watch=624}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{}
+\end{theorem}
+
+\begin{proof*}
+\lang{de}{Nach dem Hauptsatz der Differential- und Integralrechnung gilt}
+\lang{en}{By the fundamental theorem of calculus,}
+\[ \int_a^b (u(x)v(x))'\;dx =  \left[ u(x)\,v(x)\right]_a^b. \]
+\lang{de}{Nach der Produktregel ist aber $(u(x)v(x))'= u'(x)v(x)+u(x)v'(x)$ und daher}
+\lang{en}{By the product rule $(u(x)v(x))'= u'(x)v(x)+u(x)v'(x)$ and therefore}
+\[ \int_a^b (u(x)v(x))'\;dx =\int_a^b\big(u'(x)v(x)+u(x)v'(x)\big)\;dx 
+=\int_a^b u'(x)v(x)\;dx + \int_a^b u(x)v'(x)\;dx .\]
+\lang{de}{
+Setzt man den letzten Ausdruck in die erste Gleichung ein und zieht auf beiden Seiten
+$\int_a^b u'(x)v(x)\;dx$ ab, erhält man die Gleichung aus dem Satz.
+}
+\lang{en}{
+Substituting the final expression into the first equation and subtracting $\int_a^b u'(x)v(x)\;dx$ 
+from both sides yields the equation in the statement of the theorem.
+}
+\end{proof*}
+
+\lang{de}{
+Die \textit{partielle Integration} \"uberf\"uhrt ein Integral in ein anderes, das (hoffentlich) 
+einfacher zu l\"osen ist. Manchmal muss man die partielle Integration mehrmals anwenden, um zum Ziel 
+zu kommen. Aussichtsreiche Strategien lernt man durch typische Beispiele wie die folgenden.
+}
+\lang{en}{
+\textit{Integration by parts} transforms one integral into another, which is (hopefully) easier to 
+compute. Sometimes it is necessary to apply the technique multiple times to reach a function which 
+is easy to integrate. The following examples provide some idea of which integrals are promising 
+candidates for the technique.
+}
+
+\begin{example}\label{ex:1}
+\begin{tabs*}[\initialtab{0}]
+\tab{$\int_0^{2\pi} x\cdot \cos(x)\, dx$} 
+\lang{de}{
+Wir betrachten das Integral $\int_0^{2\pi} x\cdot \cos(x)\, dx$. \\
+W\"ahlen wir $u(x)=x$ und $v'(x)=\cos x$ mit $u'(x)=1$ und $v(x)=\sin x,$ so erhalten wir
+}
+\lang{en}{
+Consider the integral $\int_0^{2\pi} x\cdot \cos(x)\, dx$. \\
+If we choose $u(x)=x$ and $v'(x)=\cos x$ we have $u'(x)=1$ and $v(x)=\sin x$, so
+}
+\[ \int_0^{2\pi} x \cos x\; dx = [x \sin x]_0^{2\pi} - \int_0^{2\pi} 1\cdot\sin x\; dx.\]
+\lang{de}{Für die Funktion $\sin(x)$ kennen wir aber eine Stammfunktion, nämlich $-\cos(x)$, d.\,h.}
+\lang{en}{We know an antiderivative of the function $\sin(x)$, namely $-\cos(x)$. Hence}
+\[ \int_0^{2\pi} x \cos x\; dx = [x \sin x]_0^{2\pi} - [-\cos x]_0^{2\pi} = [ x \sin x + \cos x]_0^{2\pi}.
+\]
+\lang{de}{
+Zum einen zeigt dies, dass $x \sin(x) + \cos( x)$ eine Stammfunktion von $x\cos(x)$ ist, und zum 
+anderen können wir schließlich das Integral berechnen als
+}
+\lang{en}{
+This proves that $x \sin(x) + \cos( x)$ is an antiderivative of $x\cos(x)$, and lets us compute 
+the integral:
+}
+\[ \int_0^{2\pi} x \cos x\; dx= 2\pi\cdot \sin(2\pi)+\cos(2\pi) -\big( 0\cdot \sin(0)+\cos(0)\big)
+= 0+1-0-1=0.\]
+
+\tab{$\int_1^2 x^2\;e^x\;dx$}
+\lang{de}{
+Wir betrachten das Integral $\int_1^2 x^2\;e^x\;dx$.\\
+Mit dem Ansatz $u(x)=x^2$ und $v'(x)=e^x$ ist $u'(x)=2x$ sowie $v(x)=e^x$ und damit
+}
+\lang{en}{
+Consider the integral $\int_1^2 x^2\;e^x\;dx$.\\
+With the substitutions $u(x)=x^2$ and $v'(x)=e^x$ we have $u'(x)=2x$ and $v(x)=e^x$, so
+}
+\[ \int_1^2 x^2\;e^x\;dx = [x^2e^x]_1^2 - \int_1^2 2x e^x\;dx= [x^2e^x]_1^2 -2\int_1^2 x e^x\;dx  .\]
+\lang{de}{
+Da wir auch keine Stammfunktion von $xe^x$ kennen, wenden wir für den letzten Term erneut partielle 
+Integration an, diesmal mit
+}
+\lang{en}{
+We do not know any antiderivatives of $xe^x$, but we may simply apply integration by parts again to 
+the last integral, this time setting
+}
+\[ u(x)=x,\, v'(x)=e^x, \quad u'(x)=1,\, v(x)=e^x, \]
+\lang{de}{und erhalten}
+\lang{en}{and obtaining}
+\[\int_1^2 x e^x\;dx =[x\cdot e^x]_1^2 - \int_1^2 1\cdot e^x\;dx =[x\cdot e^x]_1^2 
+- [e^x]_1^2 =[xe^x-e^x]_1^2. \]
+\lang{de}{Insgesamt also}
+\lang{en}{We can conclude that}
+\begin{eqnarray*}
+  \int_1^2 x^2\;e^x\;dx &=& [x^2e^x]_1^2 - 2\cdot [xe^x-e^x]_1^2=[x^2e^x-2xe^x+2e^x]_1^2\\
+&=& [(x^2-2x+2)e^x]_1^2=(2^2-4+2)e^2-(1^2-2+2)e^1=2e^2-e.
+\end{eqnarray*}
+
+\tab{$\int_1^e x\ln(x)\,dx$}
+\lang{de}{
+Um das Integral $\int_1^e x\ln(x)\,dx$ zu berechnen, führt der Ansatz mit $u(x)=x$ und
+$v'(x)=\ln(x)$ nicht zum Erfolg, weil wir keine Stammfunktion von $\ln(x)$ kennen.
+Setzen wir jedoch $u(x)=\ln(x)$ und $v'(x)=x$, so erhalten wir $u'(x)=\frac{1}{x}$ und $v(x)=\frac{x^2}{2}$ und damit mit partieller Integration
+}
+\lang{en}{
+In order to compute the integral $\int_1^e x\ln(x)\,dx$, attempting to apply the theorem with 
+$u(x)=x$ and $v'(x)=\ln(x)$ is unsuccessful, as we do not know an antiderivative of $\ln(x)$. 
+However, if we choose $u(x)=\ln(x)$ and $v'(x)=x$, we obtain $u'(x)=\frac{1}{x}$ and 
+$v(x)=\frac{x^2}{2}$, and can integrate by parts:
+}
+\begin{eqnarray*}
+ \int_1^e x\ln(x)\,dx &=& [\frac{x^2}{2}\cdot \ln(x)]_1^e -\int_1^e \frac{x^2}{2}\cdot \frac{1}{x} \, dx \\
+ &=& \left[\frac{x^2}{2}\cdot \ln(x)\right]_1^e -\frac{1}{2}\int_1^e x\, dx\\
+ &=&  \left[\frac{x^2}{2}\cdot \ln(x)\right]_1^e -\frac{1}{2}\cdot \left[\frac{x^2}{2}\right]_1^e =  \left[\frac{x^2}{2}\cdot \ln(x) -\frac{x^2}{4}\right]_1^e \\
+&=& \left( \frac{e^2}{2}\cdot 1- \frac{e^2}{4}\right) -\left( \frac{1}{2}\cdot 0- \frac{1}{4}\right) =  \frac{e^2}{4} +\frac{1}{4}.
+\end{eqnarray*}
+\lang{de}{
+Da wir die Grenzen erst am Schluss eingesetzt haben, sehen wir auch, dass 
+$F(x)=\frac{x^2}{2}\cdot \ln(x) -\frac{x^2}{4}$ eine Stammfunktion für die Funktion
+$f(x)=x\ln(x)$ ist.
+}
+\lang{en}{
+As we waited until the end to substitute in the limits of integration, we even see that 
+$F(x)=\frac{x^2}{2}\cdot \ln(x) -\frac{x^2}{4}$ is an antiderivative of the function
+$f(x)=x\ln(x)$.
+}
+\end{tabs*}
+\end{example}
+
+\begin{remark}
+\lang{de}{
+Die Vorgehensweise zur Anwendung der partiellen Integration ist also die, den Integranden
+\textit{geschickt} in ein Produkt von Funktionen zu zerlegen, so dass man von einem der Faktoren 
+eine Stammfunktion kennt. Diesen Faktor nennt man $v'(x)$ und dessen Stammfunktion ist $v(x)$, 
+während der zweite Faktor $u(x)$ genannt wird.
+\\\\
+Geschickt ist die Zerlegung dann, wenn das Integral, das neu entsteht, also das Integral über die 
+Funktion $u'(x)v(x)$, einfacher zu handhaben ist.
+\\\\
+In den ersten beiden Beispielen hatte man als $u(x)$ ein Polynom gewählt und als $v'(x)$ die 
+trigonometrische Funktion bzw. die Exponentialfunktion. Das neu entstandene Integral hatte dann als 
+Integrand das Produkt aus der Ableitung $u'(x)$ des Polynoms und einer trigonometrischen bzw.  
+Exponentialfunktion. Im ersten Beispiel war $u'(x)$ sogar konstant, weshalb man dann die 
+trigonometrische Funktion integrieren konnte. Im zweiten Beispiel musste man die partielle 
+Integration ein zweites Mal anwenden, um aus dem polynomialen Faktor einen konstanten Faktor zu 
+bekommen.
+\\\\
+Hat man allgemeiner das Produkt eines Polynoms $n$-ten Grades mit $\sin(x)$, $\cos(x)$ oder $e^x$, 
+so führt dasselbe Verfahren nach $n$-facher Anwendung der partiellen Integration zum Erfolg.
+}
+\lang{en}{
+The strategy used in integration by parts is to write the integrands as a product of two functions 
+such that we know an antiderivative of one of the two factors. We call that factor $v'(x)$ and its 
+antiderivative $v(x)$. The other factor is denoted $u(x)$.
+\\\\
+The factors are well chosen if the new integral produced by the procedure, that is, the integral of 
+the function $u'(x)v(x)$, is easier to compute than the original integral.
+\\\\
+In the first two examples, we chose a polynomial as $u(x)$ and a trigonometric or exponential 
+function as $v'(x)$. The new integrand was then the product of a lower degree polynomial $u'(x)$ and 
+the trigonometric or exponential function. In the first example $u'(x)$ was constant, so we could 
+simply integrate the trigonometric function. In the second example we applied the procedure twice 
+in order to get a constant polynomial, and be able to simply integrate the exponential function.
+\\\\
+In general, given an integral whose integrand is the product of a polynomial of degree $n$ and one 
+of $\sin(x)$, $\cos(x)$ or $e^x$, we may integrate by parts $n$ times to compute the integral.
+}
+\end{remark}
+
+\begin{quickcheck}
+\text{
+\lang{de}{
+Wie wählen Sie $u$ und $v$, um $\int_a^b \sin(x)\cdot(x+1)\, dx$ mit partieller Integration in einem 
+Schritt zu bestimmen?
+}
+\lang{en}{
+What choice of $u$ and $v$ lets us compute $\int_a^b \sin(x)\cdot(x+1)\, dx$ by parts in a single 
+step?
+}}
+%\type{mc.unique}
+\explanation{
+\lang{de}{
+Wie in obiger Bemerkung erklärt, ist es geschickt, $u$ als Polynom zu wählen, damit $u'$ eine Konstante wird.
+}
+\lang{en}{
+As explained in the above remark, it makes sense to choose $u$ as the polynomial, as then $u'$ is 
+a constant.
+}}
+\begin{choices}{unique}
+\begin{choice}
+\text{$u(x) = \sin(x)$, $v'(x)=x+1$}
+\solution{false}
+\end{choice}
+\begin{choice}
+\text{$u(x) = x+1$, $v'(x)=\sin(x)$}
+\solution{true}
+\end{choice}
+\end{choices}
+\end{quickcheck}
+
+\begin{example}\label{ex:int-ln}
+\lang{de}{
+Wir wollen eine Stammfunktion von $\ln(x)$ finden. Da es im obigen Beispiel von Erfolg gekrönt war, 
+beim Integral von $x\ln(x)$ den Faktor $\ln(x)$ als $u(x)$ zu setzen, schreiben wir 
+$\ln(x)=1\cdot \ln(x)$ und setzen $v'(x)=1$ und $u(x)=\ln(x)$. 
+Damit sind $v(x)=x$ und $u'(x)=\frac{1}{x}$ und wir erhalten
+}
+\lang{en}{
+We wish to find an antiderivative of $\ln(x)$. In the above example we successfully set $u(x)$ to 
+be the factor $\ln(x)$ of the integrand, so let us try writing $\ln(x)=1\cdot \ln(x)$ and setting 
+$v'(x)=1$ and $u(x)=\ln(x)$. Then we have $v(x)=x$ and $u'(x)=\frac{1}{x}$, and obtain
+}
+\begin{eqnarray*}
+ \int_a^b \ln(x)\,dx &=& \left[ x\ln(x)\right]_a^b - \int_a^b x\cdot \frac{1}{x} \,dx
+= \left[ x\ln(x)\right]_a^b -\int_a^b 1\, dx \\
+&=&  \left[ x\ln(x)\right]_a^b - [x]_a^b
+= \left[ x\ln(x) -x \right]_a^b. 
+\end{eqnarray*}
+\lang{de}{
+Also ist $x\ln(x) -x $ eine Stammfunktion von $\ln(x)$.
+  \floatright{\href{https://www.hm-kompakt.de/video?watch=625}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{Hence $x\ln(x) -x $ is an antiderivative of $\ln(x)$.}
+\end{example}
+
+\section{\lang{de}{Partielle Integration mit anschließender Gleichungsauflösung}
+         \lang{en}{Integration by parts to obtain an equation}}\label{sec:part-int-gleich-aufl}
+
+
+\lang{de}{
+Manchmal erhält man bei der partiellen Integration auch ein reelles Vielfaches des ursprünglichen 
+Integrals wieder. Durch Umformen der Gleichung kommt man dann auch zum Ziel (sofern der reelle 
+Faktor nicht gleich $1$ ist).
+}
+\lang{en}{
+Sometimes integration by parts yields a constant multiple of the original integral. In these cases, 
+we can rearrange the resulting equation for the integral (provided the constant factor is not $1$) 
+and solve it.
+}
+
+\begin{example}
+\lang{de}{
+Wir betrachten wieder das Integral $\int_1^e x\ln(x)\,dx$ aus dem \lref{ex:1}{obigen Beispiel }. Da 
+wir in Beispiel \ref{ex:int-ln} eine Stammfunktion $F(x)=x\ln(x) -x$ von $\ln(x)$ berechnet haben, 
+können wir zur partiellen Integration auch den Ansatz $u(x)=x$, $v'(x)=\ln(x)$ machen mit $u'(x)=1$ 
+und $v(x)=x\ln(x) -x$. Dann ist
+}
+\lang{en}{
+Consider once again the integral $\int_1^e x\ln(x)\,dx$ from the \lref{ex:1}{above example}. As we 
+found an antiderivative $F(x)=x\ln(x) -x$ of $\ln(x)$ in example \ref{ex:int-ln}, we may proceed via 
+integration by parts with $u(x)=x$ and $v'(x)=\ln(x)$, so that $u'(x)=1$ and $v(x)=x\ln(x) -x$. Then
+}
+\begin{eqnarray*}
+  \int_1^e \textcolor{#0066CC}{x\ln(x)}\,dx &=& \left[ x(x\ln(x) -x)\right]_1^e - \int_1^e 1\cdot (x\ln(x) -x)\, dx\\
+&=&  \left[ x(x\ln(x) -x)\right]_1^e - \int_1^e x\ln(x) \, dx +  \int_1^e x\, dx \\
+&=&  \left[ x(x\ln(x) -x)\right]_1^e- \int_1^e \textcolor{#0066CC}{x\ln(x)} \, dx + \left[ \frac{x^2}{2}\right]_1^e .
+\end{eqnarray*}
+\lang{de}{Damit erhält man}
+\lang{en}{We obtain}
+\[ 2\cdot  \int_1^e x\ln(x)\,dx  =\left[ x(x\ln(x) -x) +  \frac{x^2}{2}\right]_1^e, \]
+\lang{de}{d.\,h.}
+\lang{en}{that is,}
+\[   \int_1^e x\ln(x)\,dx  =\left[ \frac{x}{2}(x\ln(x) -x) +  \frac{x^2}{4}\right]_1^e. \]
+\lang{de}{Als Stammfunktion von $x\ln(x)$ erhalten wir also}
+\lang{en}{Hence we get an antiderivative of $x\ln(x)$, namely}
+\[ \frac{x}{2}(x\ln(x) -x) +  \frac{x^2}{4}= \frac{x^2}{2}\cdot\ln(x) -\frac{x^2}{4},\]
+\lang{de}{was mit dem Ergebnis \lref{ex:1}{oben} übereinstimmt.}
+\lang{en}{which confirms the result \lref{ex:1}{above}.}
+\end{example}
+
+
+\end{content}

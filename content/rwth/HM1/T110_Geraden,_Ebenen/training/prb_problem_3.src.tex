@@ -1,0 +1,197 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A03: Normalenvektor}
+    \lang{en}{input numbers}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A03: Normalenvektor}}
+\lang{en}{\title{Problem 3}}
+
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9645}{Ticket 9645}
+\end{block}
+
+
+
+
+\begin{problem}
+
+	\begin{question}
+		\lang{de}{\text{
+			Gegeben sei die Gerade $g= \left\{\begin{pmatrix}\var{a1}\\ \var{a2} \end{pmatrix}+ \lambda \begin{pmatrix}\var{b1}\\ \var{b2}\end{pmatrix} \vert \lambda \in \R \right\}. $Bestimmen Sie einen Normalenvektor $\vec{n}$ von $g$.\\$n_1=$\ansref, \\ $n_2=$\ansref.\\Bestimmen Sie nun die Koordinatenform von $g$:\\$g = \{ \vec{x}\in \R^2 | $ \ansref $x_1 +($ \ansref $x_2) = $\ansref $\}.$
+ 			}
+		}
+	
+		
+		\type{input.function}
+		\field{real}
+		
+		
+		\begin{variables}
+			\randint{a1}{-15}{15}
+			\randint{a2}{-15}{15}
+			
+			\randadjustIf{a1,a2}{a1^2+a2^2=0}
+			\randint{b1}{-9}{9}
+			\randint{b2}{-9}{9}
+			
+			\randadjustIf{b1,b2}{b1^2+b2^2=0}
+			
+			\function[calculate]{n1}{-b2}
+			\function[calculate]{n2}{b1}
+            
+            \function[calculate]{d}{n1*a1+n2*a2}
+		\end{variables}
+		
+		\begin{answer}
+			\text{$n_1 = $}
+			\solution{n1}
+			\inputAsFunction{}{nx}
+		\end{answer}
+		
+		\begin{answer}
+			\text{$n_2 = $}
+			\solution{n2}
+			\inputAsFunction{}{ny}
+			\checkFuncForZero{(n1*ny-nx*n2)^2+dirac(nx^2+ny^2)}{-10}{10}{100}
+            %Prüft, ob der Normalenvektor richtig ist. dirac(xn^2+ny^2) fängt n=(0,0) ab.
+            \explanation[edited]{Ein Normalenvektor einer Gerade steht senkrecht zu dieser und damit auch zu allen möglichen Richtungsvektoren der Gerade.
+    Ein Normalenvektor der Geraden $g$ ist also ein zum gegebenen Richtungsvektor senkrecht stehender Vektor, so dass das Skalarprodukt des Richtungsvektors mit
+    dem gesuchten Normalenvektor Null ergibt.}
+		\end{answer}
+        \begin{answer}
+			\text{$n_1 = $}
+			\solution{n1}
+			\inputAsFunction{}{ax}
+		\end{answer}
+		
+		\begin{answer}
+			\text{$n_2 = $}
+			\solution{n2}
+			\inputAsFunction{}{ay}
+			\checkFuncForZero{(ax*ny-nx*ay)^2+dirac(ax^2+ay^2)}{-10}{10}{100}
+            %Prüft, ob der Normalenvektor richtig ist. dirac(xn^2+ny^2) fängt n=(0,0) ab.
+            \explanation[edited]{Für die Koeffizienten vor $x_1$ bzw. $x_2$ können die Vektoreinträge von $\vec{n}$ genommen werden.}
+		\end{answer}
+        
+       \begin{answer}
+			\text{$d = $}
+			\solution{d}
+			\inputAsFunction{}{dd}
+			\checkFuncForZero{ax*a1+ay*a2-dd}{-10}{10}{100}
+            %Berücksichtigt Folgefehler
+            \explanation[edited]{In der Koordinatenform kann auf der rechten Seite der Gleichung $\vec{n}\bullet \vec{OP}$ für einen beliebigen Punkt $P$ auf $g$ gewählt werden.}
+		\end{answer}
+		
+	\end{question}
+	
+	\begin{question}
+		\lang{de}{\text{Gegeben sei die Ebene$ E= \left\{ \begin{pmatrix}\var{a1}\\\var{a2}\\\var{a3}\end{pmatrix} + r \begin{pmatrix}\var{b1}\\\var{b2}\\\var{b3}\end{pmatrix} + s\begin{pmatrix}\var{c1}\\\var{c2}\\\var{c3}\end{pmatrix} \vert \, r,s\in \R \right\}. $Bestimmen Sie einen Normalenvektor $\vec{n} = \begin{pmatrix} n_1 \\ n_2 \\ n_3 \end{pmatrix}$ der Ebene:\\$n_1 =$\ansref, \\ $n_2 =$\ansref, \\ $n_3=$\ansref.\\Geben Sie $E$ in Koordinatenform an: \\$E = \{ \vec{x} \in \R^3 \vert$ \ansref $x_1 + ($\ansref $x_2) +($\ansref $x_3) = $\ansref $\}$.}
+		}
+		
+		\type{input.function}
+		\field{real}
+		
+		
+		\begin{variables}
+			
+			\randint{a1}{-6}{6}
+			\randint{a2}{-6}{6}
+			\randint{a3}{-6}{6}
+			\randadjustIf{a1,a2,a3}{a1^2+a2^2+a3^2=0}
+			\randint{b1}{-6}{6}
+			\randint{b2}{-6}{6}
+			\randint{b3}{-6}{6}
+			\randadjustIf{b1,b2,b3}{b1^2+b2^2+b3^2=0}
+			\randint{c1}{-6}{6}
+			\randint{c2}{-6}{6}
+			\randint{c3}{-6}{6}
+			\randadjustIf{c1,c2,c3}{c1^2+c2^2+c3^2=0}
+			\randadjustIf{c1,c2,c3}{(b1*c2-c1*b2)^2+(b2*c3-c2*b3)^2+(b1*c3-b3*c1)^2=0}
+			\function[calculate]{n1}{b2*c3-b3*c2}
+			\function[calculate]{n2}{b3*c1-b1*c3}
+			\function[calculate]{n3}{b1*c2-b2*c1}
+			\function[calculate]{z1}{n1}
+			\function[calculate]{z2}{n2}
+			\function[calculate]{z3}{n3}
+			\function[calculate]{d}{a1*n1+a2*n2+a3*n3}
+		\end{variables}
+		
+		\begin{answer}
+			\text{$n_1 = $}
+			\solution{n1}
+			\inputAsFunction{}{nx}
+		\end{answer}
+		
+		\begin{answer}
+			\text{$n_2 = $}
+			\solution{n2}
+			\inputAsFunction{}{ny}
+		\end{answer}
+		
+		\begin{answer}
+			\text{$n_3 = $}
+			\solution{n3}
+			\inputAsFunction{}{nz}
+            \explanation[edited]{Ein Normalenvektor einer Ebene steht senkrecht zu dieser. Damit steht ein Normalenvektor einer Ebene auch senkrecht
+    zu den durch die Ebene aufgespannten Richtungsvektoren. Man erhält einen zu den Richtungsvektoren senkrecht stehenden Vektor, indem man
+    z.B. das Vektorprodukt der beiden Richtungsvektoren bildet.}
+            \checkFuncForZero{(n1*ny-nx*n2)^2+(n2*nz-ny*n3)^2+(n1*nz-n3*nx)^2+dirac(nx^2+ny^2+nz^2)}{-10}{10}{100}
+  		\end{answer}
+		\begin{answer}
+			\text{$z_1 = $}
+			\solution{z1}
+			\inputAsFunction{}{z11}
+		\end{answer}
+		
+		\begin{answer}
+			\text{$z_2 = $}
+			\solution{z2}
+			\inputAsFunction{}{z22}
+		\end{answer}
+		
+		\begin{answer}
+			\text{$z_3 = $}
+			\solution{z3}
+			\inputAsFunction{}{z33}
+			\checkFuncForZero{(nx*z22-z11*ny)^2+(ny*z33-z22*nz)^2+(nx*z33-nz*z11)^2+dirac(z11^2+z22^2+z33^2)}{-10}{10}{100}
+            %Berücksichtigt Folgefehler beim Normalenvektor
+            \explanation[edited]{Die Komponenten eines Normalenvektors entsprechen den Vorfaktoren der $x_i$ der Koordinatengleichung der Ebene.}
+		\end{answer}
+		
+		\begin{answer}
+			\text{$d = $}
+			\solution{d}
+			\inputAsFunction{}{zz}
+			\checkFuncForZero{a1*z11+a2*z22+a3*z33-zz}{-10}{10}{100}
+            %Berücksichtigt Folgefehler
+            \explanation[edited]{Die rechte Seite der Koordinatengleichung der Ebene
+    ergibt sich durch Einsetzen eines auf der Ebene liegenden Punktes, der die Koordinatengleichung erfüllen muss.}
+        \end{answer}
+	\end{question}
+	
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

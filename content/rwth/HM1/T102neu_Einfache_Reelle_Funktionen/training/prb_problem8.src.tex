@@ -1,0 +1,200 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+ \name{
+  \lang{de}{A08: Parabeleigenschaften}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22081}{Ticket 22081}
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+
+\begin{block}[annotation]
+    Eigenschaften einer Parabel und Bestimmung 
+    des Scheitelpunkt und der Scheitelpunktform
+    
+\end{block}
+
+\lang{de}{
+	\title{A08: Parabeleigenschaften}
+}
+
+
+\begin{problem}
+%
+%        
+    \begin{variables}
+% Streckungsfaktor 
+	    \randint[Z]{k}{-1}{1}
+	    \randrat{aa}{1}{5}{1}{5}      
+	    \function[calculate]{a}{k*aa}     
+
+% Parameter allgemeine Form
+	    \randint{b}{-10}{10}
+	    \randint{c}{-10}{10}
+
+
+% Scheitelpunkt
+        \function[calculate]{xs}{-b/(2*a)}
+        \function[calculate]{ys}{c-(b^2/(4*a))}
+        
+% Anzahl Nullstellen      
+        \function[calculate]{d}{b^2-4*a*c}      % Diskriminante Mitternachtsformel 
+        \randint{nst}{0}{2}                     % Anzahl Nullstellen
+        \begin{switch}  
+         \begin{case}{d<0}
+          \number{nst}{0}
+         \end{case} 
+         \begin{case}{d=0}
+          \number{nst}{1}
+         \end{case} 
+         \begin{default}
+          \number{nst}{2}
+          \end{default}         
+        \end{switch}        
+        
+	    \function{f}{a*x^2+b*x+c}    % Parabel in allgemeiner Form     
+        \function{fs}{a*(x-xs)^2+ys} % Scheitelpunktform 
+        \function[normalize]{ffs}{(x-xs)}       
+
+	\end{variables}
+%
+\begin{question}
+%
+    \text{Untersucht wird die durch $\;f(x)= \var{f}\,$ beschriebene Parabel. \\
+         Überführen Sie die quadratische Funktion zunächst in die Scheitelpunktform.\\
+         \\
+         
+         $\quad f(x)=$\ansref$\cdot \,($\ansref$)^2+$\ansref
+         }
+%
+        \explanation{Die Überführung von $\,f\,$ in ihre Scheitelpunktform erfolgt durch
+                    quadratische Ergänzung. }
+%
+    \type{input.generic}
+    \field{rational}
+%
+%\debug[fs,xs,ys]
+%
+    \begin{answer}
+        \type{input.number}
+      	\solution{a}
+    \end{answer} 
+%
+    \begin{answer}
+     	\type{input.function} 
+      	\solution{ffs}
+	    \checkAsFunction{x}{-10}{10}{100}        
+    \end{answer}
+%
+    \begin{answer}
+      	\type{input.number}
+        \solution{ys}
+    \end{answer}  
+%    
+\end{question}
+%
+\begin{question}
+% 
+    \type{input.number}
+    \field{rational} 
+%    
+    \text{Der Scheitelpunkt der Parabel liegt in $\,S=($\ansref $; $\ansref $).$}
+%
+    \explanation{Der Scheitelpunkt kann aus der Scheitelpunktform 
+                direkt abgelesen werden. }
+%
+    \begin{answer}
+      	\solution{xs}
+   \end{answer}  
+%
+    \begin{answer}
+       	\solution{ys}
+   \end{answer}  
+\end{question}
+
+%
+\begin{question}
+% 
+    \type{input.number}
+    \field{rational} 
+%       
+    \text{Die Parabel schneidet die $y-$Achse in $\,y_0=$\ansref 
+          und sie hat $\,$\ansref Nullstellen.}
+%	
+    \begin{answer}
+      	\solution{c}
+        \explanation{Die Schnittstelle mit der $y-$Achse errechnet sich aus $\,f(0)$. }
+    \end{answer}  
+\%	
+    \begin{answer}
+        \solution{nst}
+        \explanation{Die Anzahl der Nullstellen können aus der Diskriminante der
+                    Mitternachtsformel $\,(D=b^2-4ac)\,$ bestimmt werden. }
+    \end{answer}  
+\end{question}
+
+% 
+\begin{question}
+%
+    \text{Welche der folgenden Aussagen trifft zu? 
+          Wählen Sie die ALLE richtigen Antworten aus.}
+%
+    \explanation{Untersuchen Sie hierzu den Leitkoeffizienten 
+    der quadratischen Funktion. }
+%
+    \permutechoices{1}{4}
+    \type{mc.multiple}
+%    
+% c1   
+       \begin{choice}
+          \lang{de}{\text{Die Parabel ist nach oben geöffnet.}}
+          \solution{compute}
+          \iscorrect{k}{>}{0}
+      \end{choice}
+% c2   
+         \begin{choice}
+            \lang{de}{\text{Die Parabel verläuft steiler als die Normalparabel.}}
+            \solution{compute}
+            \iscorrect{aa}{>}{1}           
+        \end{choice}
+% c3   
+       \begin{choice}
+          \lang{de}{\text{Die Parabel ist nach unten geöffnet.}}
+          \solution{compute}
+          \iscorrect{k}{<}{0}
+      \end{choice}
+% c4   
+         \begin{choice}
+            \lang{de}{\text{Die Parabel verläuft flacher als die Normalparabel.}}
+            \solution{compute}
+            \iscorrect{aa}{<}{1}           
+        \end{choice}
+        
+\end{question}
+%
+
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

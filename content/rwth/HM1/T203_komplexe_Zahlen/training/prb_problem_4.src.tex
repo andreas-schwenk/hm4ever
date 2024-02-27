@@ -1,0 +1,75 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A04: Summe/Differenz}
+    \lang{en}{Problem 4}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+\lang{de}{\title{A04: Summe/Differenz}}
+\lang{en}{\title{Problem 4}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/9754}{Ticket 9754}
+\end{block}
+
+\begin{problem}
+  \begin{question}
+    \lang{de}{\text{
+    Berechnen Sie die Summe $z_1 + z_2$ und die Differenz $z_1 - z_2$
+    der beiden komplexen Zahlen \\
+    $z_1 = \var{z_1},$ \\
+    $z_2 = \var{z_2}.$
+    }}
+   \explanation{Bei der Summe werden die beiden Realteile und die beiden Imaginärteile 
+   jeweils summiert. Bei der Differenz wird ebenso 
+   die Differenz der Realteile und die Differenz der Imaginärteile gebildet.
+   
+   }
+    \type{input.number}
+    \field{complex}
+    \begin{variables}
+      \randint[Z]{a_1}{-10}{10}
+      \randint[Z]{b_1}{-10}{10}
+      \randint[Z]{a_2}{-10}{10}
+      \randint[Z]{b_2}{-10}{10}
+      \function[normalize]{z_1}{a_1+b_1*i} 
+      \function[normalize]{z_2}{a_2+b_2*i} 
+      \function[normalize]{sum}{(a_1+a_2)+(b_1+b_2)*i}
+      \function[normalize]{diff}{(a_1-a_2)+(b_1-b_2)*i}
+    \end{variables}
+
+    \begin{answer}
+      \text{Summe: $z_1 + z_2=$}
+      \solution{sum}
+    \end{answer}
+    \begin{answer}
+      \text{Differenz: $z_1 - z_2=$}
+      \solution{diff}
+    \end{answer}
+
+   
+  \end{question}
+
+ 
+
+\end{problem}
+
+\embedmathlet{mathlet}
+\end{content}

@@ -1,0 +1,147 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A09: Uneigentliches Integral}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A09: Uneigentliches Integral}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/10643}{Ticket 10643}
+\end{block}
+
+\begin{problem}
+	\randomquestionpool{1}{3}
+	
+%######################################################QUESTION_START	
+	\begin{question}	
+	%+++++++++++++++++++VARIABLES++++++++++++++++++++++
+		
+		\begin{variables}
+			\randint{k}{0}{1}
+			\randint[Z]{c}{-5}{5}
+			\randint{d}{-5}{5}
+			%\randadjustIf{}{}
+			\function[expand, normalize]{f}{c*(k*sin(x)+(1-k)*cos(x))}
+            \function[expand, normalize]{g}{c*(-k*cos(x)+(1-k)*sin(x))}
+			\function{sol}{infinity}
+		\end{variables}
+		\begin{pool}
+        \begin{variables}
+			\function[calculate]{a}{d}
+			\function{b}{infinity}
+		\end{variables}
+        \begin{variables}
+			\function[calculate]{b}{d}
+			\function{a}{-( infinity )}
+		\end{variables}
+        \begin{variables}
+        	\function{a}{-( infinity )}
+			\function{b}{infinity}
+		\end{variables}
+    \end{pool}
+		
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		\type{input.function} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+		
+	%+++++++++++++++++++TITLE++++++++++++++++++++++++++	
+	    \lang{de}{\text{Bestimmen Sie das folgende uneigentliche Integral, sofern es existiert. Falls es nicht existiert, geben Sie \textit{infinity} ein. }}
+	%+++++++++++++++++++ANSWERS++++++++++++++++++++++++    
+	    \begin{answer}
+	    	\text{$\int_{\var{a}}^{\var{b}} \var{f} dx=$}
+			\solution{sol}
+			\checkAsFunction{x}{-10}{10}{10}
+            \explanation{Das uneigentliche Integral existiert nicht, da bereits $\int_0^{\var{b}} \var{f}\, dx$ nicht existiert.}
+	    \end{answer}    
+	\end{question}
+%######################################################QUESTION_END
+
+	\begin{question}	
+	%+++++++++++++++++++VARIABLES++++++++++++++++++++++
+		\begin{variables}
+			\randint[Z]{c}{-5}{5}
+			\randint[Z]{d}{-5}{5}
+			%\randadjustIf{}{}
+			\function[expand, normalize]{f}{c*e^x}
+			\function{sol}{infinity}
+		\end{variables}
+		\begin{pool}
+        \begin{variables}
+			\function[calculate]{a}{d}
+			\function{b}{infinity}
+		\end{variables}
+        \begin{variables}
+			\function{a}{-( infinity )}
+			\function{b}{infinity}
+		\end{variables}
+    \end{pool}
+		
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		\type{input.function} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+		
+	%+++++++++++++++++++TITLE++++++++++++++++++++++++++	
+	    \lang{de}{\text{Bestimmen Sie das folgende uneigentliche Integral, sofern es existiert. Falls es nicht existiert, geben Sie \textit{infinity} ein. }}
+	%+++++++++++++++++++ANSWERS++++++++++++++++++++++++    
+	    \begin{answer}
+	    	\text{$\int_{\var{a}}^{\var{b}} \var{f} dx=$}
+			\solution{sol}
+			\checkAsFunction{x}{-10}{10}{10}
+            \explanation{Der Grenzwert des Integranden ist $\infty$ für $x\to \infty$. Damit kann das uneigentliche Integral nicht existieren.}
+	    \end{answer}    
+	\end{question}
+	
+	\begin{question}	
+	%+++++++++++++++++++VARIABLES++++++++++++++++++++++
+		
+        \begin{variables}
+			\randint[Z]{c}{-5}{5}
+			\randint{d}{-5}{5}
+			%\randadjustIf{}{}
+			\function[expand, normalize]{f}{c*e^x}
+			\function[normalize]{sol}{c*e^d}
+			
+
+			\function[calculate]{b}{d}
+			\function{a}{-( infinity )}
+		\end{variables}
+    
+		
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		\type{input.function} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+		\field{real} 
+		\precision{3}
+	%+++++++++++++++++++TITLE++++++++++++++++++++++++++	
+	    \lang{de}{\text{Bestimmen Sie das folgende uneigentliche Integral, sofern es existiert. Falls es nicht existiert, geben Sie \textit{infinity} ein. }}
+	%+++++++++++++++++++ANSWERS++++++++++++++++++++++++    
+	    \begin{answer}
+	    	\text{$\int_{\var{a}}^{\var{b}} \var{f} dx=$}
+			\solution{sol}
+	    \checkAsFunction{x}{-10}{10}{10}
+        \explanation{Eine Stammfunktion vom Integranden ist durch $\var{f}$ gegeben. Für die Stammfunktion $F$ gilt $F(x)\to 0$ für $x \to -\infty$.}
+	    \end{answer}    
+	\end{question}
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

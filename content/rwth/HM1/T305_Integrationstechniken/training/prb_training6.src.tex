@@ -1,0 +1,106 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A06: Partialbruchzerlegung}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A06: Partialbruchzerlegung}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/11223}{Ticket 11223}
+\end{block}
+
+\begin{problem}
+	%\randomquestionpool{}{}
+	\begin{question}
+		
+		\begin{variables}
+			\randint[Z]{c1}{-4}{-1} %Z heißt "ohne 0"
+			\randint[Z]{a}{-2}{2} 
+            \randint[Z]{k}{-1}{1} 
+			%\randadjustIf{}{}
+			%\derivative{g1}{g}{x}
+			%\substitute[expand,normalize]{fg}{f}{x}{gcal}
+			\function[calculate]{c2}{-c1+1}
+			\function[normalize]{g}{(x-c1)*(x-c2)}
+			\function[calculate]{b}{k*a+1}
+			\randadjustIf{a}{b=0}
+			\function[expand,normalize]{f}{a*(x-c2)+b*(x-c1)}
+		
+			\function[normalize]{xc1}{x-c1}
+			\function[normalize]{xc2}{x-c2}
+			\function{s1}{a/(xc1)}
+			\function{s2}{b/(xc2)}
+            \function{s}{s1+s2}
+			
+			\function{fdg}{f/g}
+		\end{variables}
+		
+%		\type{input.generic}
+%        \field{real}
+%		\correctorprecision{3}
+%		\displayprecision{3}
+		
+		\lang{de}{
+	    \text{Bestimmen Sie die Partialbruchzerlegung der rationalen Funktion $\var{fdg}$.\\
+        $\var{fdg}=$\ansref.
+        }
+	    }
+%	    \permuteAnswers{1, 2} 
+%	    %http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+%	    \begin{answer}
+%            \type{input.function}
+%			\solution{s1}
+%			\checkAsFunction{x}{-10}{10}{100} 
+%            %\inputAsFunction{x}{s3}
+%			%\checkFuncForZero{D[s3]-h}{-10}{10}{100}
+%	    \end{answer}    
+%	    \begin{answer}
+%            \type{input.function}
+%			\solution{s2}
+%			\checkAsFunction{x}{-10}{10}{100} 
+%            %\inputAsFunction{x}{s3}
+%			%\checkFuncForZero{D[s3]-h}{-10}{10}{100}
+%	    \end{answer}   
+%	    %generic viz: http://team.mumie.net/projects/support/wiki/Example
+%	    
+%	\end{question}
+
+	\type{input.function}
+	\field{rational}
+	\begin{answer}
+		\solution{s}
+        \inputAsFunction{x}{kk}
+        \checkAsFunction{x}{-10}{10}{100}
+        \checkStringsForRelation{count(/,kk)>1 AND count((,kk)<3 AND count(x,kk)<3 AND equal(s,kk)}
+        \explanation{Es ist der Ansatz $\frac{A}{\var{xc1}}+ \frac{B}{\var{xc2}}$ zu wählen. $A$ und $B$ sind reelle Zahlen, die mit Koeffizientenvergleich berechnet werden müssen.}
+        \explanation[count((,kk)>2)]{Nutzen Sie nur so viele Klammern wie nötig.}
+	\end{answer}
+
+  \end{question}
+
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

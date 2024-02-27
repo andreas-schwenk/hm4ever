@@ -1,0 +1,405 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A01: Parabelgleichung}
+    \lang{en}{P01: Parabola equation}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+Im Ticket-System: \href{http://team.mumie.net/issues/11292}{Ticket 11292}
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+\lang{de}{
+	\title{A01: Parabelgleichung}
+}
+\lang{en}{
+	\title{P01: Parabola equation}
+}
+
+
+
+\begin{problem}
+
+\begin{question}
+    \type{input.matrix}
+    \field{rational}
+    \begin{variables}
+        \randint{t}{1}{5}
+        \begin{switch}
+          % -- Berechnung in Octave/Matlab mittels:
+          % px=1, qx=2, rx=3, py=-1, qy=0, ry=-2
+          % [px^2 px 1; qx^2 qx 1; rx^2 rx 1]\[py;qy;ry]
+          \begin{case}{t=1}
+              \number{tpx}{1}
+              \number{tqx}{2}
+              \number{trx}{3}
+              \number{tpy}{-1}
+              \number{tqy}{0}
+              \number{try}{-2}
+              \number{ta}{-3/2}
+              \number{tb}{11/2}
+              \number{tc}{-5}
+          \end{case}
+          \begin{case}{t=2}
+              \number{tpx}{2}
+              \number{tqx}{1}
+              \number{trx}{-1}
+              \number{tpy}{0}
+              \number{tqy}{3}
+              \number{try}{-2}
+              \number{ta}{-11/6}
+              \number{tb}{5/2}
+              \number{tc}{7/3}
+          \end{case}
+          \begin{case}{t=3}
+              \number{tpx}{3}
+              \number{tqx}{-2}
+              \number{trx}{0}
+              \number{tpy}{1}
+              \number{tqy}{2}
+              \number{try}{-2}
+              \number{ta}{3/5}
+              \number{tb}{-4/5}
+              \number{tc}{-2}
+          \end{case}
+          \begin{case}{t=4}
+              \number{tpx}{1}
+              \number{tqx}{2}
+              \number{trx}{-2}
+              \number{tpy}{0}
+              \number{tqy}{1}
+              \number{try}{3}
+              \number{ta}{1/2}
+              \number{tb}{-1/2}
+              \number{tc}{0}
+          \end{case}
+          \begin{case}{t=5}
+              \number{tpx}{3}
+              \number{tqx}{0}
+              \number{trx}{-1}
+              \number{tpy}{-2}
+              \number{tqy}{2}
+              \number{try}{-2}
+              \number{ta}{-4/3}
+              \number{tb}{8/3}
+              \number{tc}{2}
+          \end{case}
+          \begin{default}
+              \number{tpx}{-100}
+              \number{tqx}{-100}
+              \number{trx}{-100}
+              \number{tpy}{-100}
+              \number{tqy}{-100}
+              \number{try}{-100}
+              \number{ta}{-100}
+              \number{tb}{-100}
+              \number{tc}{-100}
+          \end{default}          
+        \function[calculate]{px}{tpx}
+        \function[calculate]{qx}{tqx}
+        \function[calculate]{rx}{trx}
+        \function[calculate]{py}{tpy}
+        \function[calculate]{qy}{tqy}
+        \function[calculate]{ry}{try}
+        \function[calculate]{a}{ta}
+        \function[calculate]{b}{tb}
+        \function[calculate]{c}{tc}
+        \end{switch}
+    \end{variables}
+    \lang{de}{\text{Gegeben seien die Punkte 
+      $P=(\var{px}; \var{py})$, 
+      $Q=(\var{qx}; \var{qy})$ und 
+      $R=(\var{rx}; \var{ry})$ im Raum $\R^2$.
+      Gesucht ist eine durch $y=ax^2+bx+c$ beschriebene Parabel,
+      die durch die drei Punkte $P$, $Q$ und $R$ verläuft.
+      
+      Stellen Sie ein entsprechendes lineares Gleichungssystem auf und
+      bestimmen Sie die Koeffizienten $a,b,c \in \R$.
+    }
+    \explanation{
+        Zunächst bestimmt man das lineare Gleichungssytem.
+        Für jeden der angegebenen Punkte $P$, $Q$ und $R$
+        stellt man eine Gleichung auf, indem man den Punkt
+        in die Parabelgleichung $y=ax^2 + bx + c$ einsetzt.
+        Für den Punkt $P$ ist dies z.\,B. 
+        $a \cdot \var{px}^2 + b \cdot \var{px} + c = \var{py}$.
+        Insgesamt erhält man drei Gleichungen mit den drei
+        Unbekannten $a$, $b$ und $c$.
+        Mit Hilfe des Gauß-Verfahrens kann nun die Lösung für
+        die Unbekannten bestimmt werden: Dazu schreibt man
+        zunächst die Koeffizienten in die erweiterte
+        Koeffizientenmatrix und führt dann sukzessive
+        Zeilenoperationen so lange durch, bis die Stufenform
+        vorliegt. Durch Rückwärtseinsetzen bestimmt man dann
+        die Lösungen.}}
+
+    \lang{en}{\text{Given are the points
+    $P=(\var{px}; \var{py})$, 
+      $Q=(\var{qx}; \var{qy})$ and 
+      $R=(\var{rx}; \var{ry})$ in the field $\R^2$.
+      Searched for is the parabola, $y=ax^2+bx+c$, that goes through the three points $P$, $Q$ and $R$.
+      Set up the corresponding linear system and determine the coefficients $a,b,c \in\R$.}
+      \explanation{First of all we determine the linear system. For each of the given points $P$, $Q$ and $R$ we set up an equation by inserting
+    the points coordinates into the parabola equation $y=ax^2+bx+c$. This is for point $P$, e.g.$a \cdot \var{px}^2 + b \cdot \var{px} + c = \var{py}$.
+    Altogether we get three equations with the three unknowns $a$, $b$ and $c$.
+    The solution of can be found via Gaussian elimination: We set up the augmented matrix and perform row operations until
+    we have row echelon form. By back substituting we determine the solutions.}}
+      
+    \begin{answer}
+        \text{$a$=}
+        \type{input.number}
+        \solution{a}
+    \end{answer}
+    \begin{answer}
+        \text{$b$=}
+        \type{input.number}
+        \solution{b}
+    \end{answer}
+    \begin{answer}
+        \text{$c$=}
+        \type{input.number}
+        \solution{c}
+    \end{answer}
+\end{question}
+
+ \begin{question} % start of question 
+       \lang{de}{\text{Beantworten Sie die folgenden Fragen zur Parabelaufgabe:}
+       %\permutechoices{1}{3}
+       \type{mc.yesno}
+       
+       \begin{variables}
+           \randint{sx}{-5}{-4}
+            \randint{sy}{4}{5}
+       \end{variables}
+
+       \begin{choice}
+             \text{Es handelt sich um ein homogenes lineares Gleichungssystem.}
+             \solution{false}
+             \explanation{
+                Die rechte Seite $b$ wird in dieser Aufgabe durch die
+                $y$-Koordinaten der Punkte bestimmt. Da hier konkret
+                in mindestens einem der Punkte die $y$-Koordinate nicht
+                Null ist, ist das vorliegende lineare Gleichungssystem
+                inhomogen.}
+      \end{choice}
+
+      \begin{choice}
+             \text{Fügt man der Aufgabe einen weiteren Punkt
+             $S=(\var{sx}; \var{sy})$ hinzu,
+             dann besitzt das lineare Gleichungssystem unendlich
+             viele Lösungen.}
+             \solution{false}
+             \explanation{
+                Durch das Hinzufügen eines neuen Punktes können die folgenden
+                beiden Fälle eintreten: a) der Punkt liegt auf der Parabel:
+                dann hat dies keine Auswirkung für die Lösung.
+                b) der Punkt liegt nicht auf der Parabel: dann gibt es gar keine
+                Lösung.}
+       \end{choice}}
+
+
+
+       \lang{en}{\text{Answer the following questions belonging to the parabola exercise:}
+       %\permutechoices{1}{3}
+       \type{mc.yesno}
+       
+       \begin{variables}
+           \randint{sx}{-5}{-4}
+            \randint{sy}{4}{5}
+       \end{variables}
+
+       \begin{choice}
+             \text{The linear system is homogeneous.}
+             \solution{false}
+             \explanation{
+             The right side $b$ is given by the $y$-coordinates of the points. Since at least one point has
+             a non-zero $y$-coordinate the linear system is non-homogeneous.}
+      \end{choice}
+
+      \begin{choice}
+             \text{If we add the point
+             $S=(\var{sx}; \var{sy})$ to the exercise,
+             the linear system has infinitly many solutions.}
+             \solution{false}
+             \explanation{
+             There are two cases possible: (a) The graph of the parabola already goes through the point: 
+             This has no impact on the solution. (b) The parabola does not go through the point: there is no solution at all.}
+       \end{choice}}
+
+       %\begin{choice}
+       %      \text{Das lineare Gleichungssystem besitzt genau eine, eindeutige Lösung.}
+       %      \solution{true}
+       %      \explanation{
+       %         Es gibt nur eine Lösung für $a$, $b$ und $c$, die man zum
+       %         Beispiel mit dem Gaußverfahren ermitteln kann.
+       %         Würden mindestens 2 der vorgegebenen Punkte dieselben
+       %         Koordinaten haben, so hätte das lineare Gleichungssystem
+       %         undendlich viele Lösungen.
+       %      }
+       %\end{choice}
+
+       
+
+\end{question}
+
+
+    % ALTE AUFGABE (ZU EINFACH FÜR TEIL 3b; gehört in Teil 1)
+%    \begin{question} 
+%        \lang{de}{\text{Wählen Sie alle Zeilen aus, in denen das angegebene Zahlenpaar eine Lösung des angegebenen\\ linearen Gleichungssystems ist.}}
+%        \lang{en}{\text{Select all of the options for which the given pair is a solution of the system.}}
+%        \lang{de}{\explanation{Setzen Sie die angegebenen Werte für $x$ und $y$ in die Gleichungen ein. Eine Lösung muss beide Gleichungen erfüllen!}}
+%        \lang{en}{\explanation{Substitute the given values for $x$ and $y$ into the equations. A solution needs to fulfill both equations!}}
+%        \permutechoices{1}{5}
+%        \type{mc.multiple}
+
+%        \begin{variables}
+%            \randint[Z]{a1}{-10}{10}
+%            \randint[Z]{b1}{-10}{0}
+%            \randint[Z]{c1}{-10}{10}
+%            \randint[Z]{d1}{0}{10}
+%            \randadjustIf{a1,b1,c1,d1}{a1*d1-b1*c1=0}
+%            \randint{s1}{-5}{5}
+%            \randint{t1}{-5}{5}
+            
+%            \randint{p1}{0}{1}
+%            \randint{q1}{0}{1}
+
+%            \function[calculate]{e1}{a1*s1+b1*t1} 
+%            \function[calculate]{f1}{c1*s1+d1*t1}                        
+            
+%            \function[calculate]{u1}{p1*s1+(1-p1)*(s1+b1)}
+%            \function[calculate]{v1}{q1*t1+(1-q1)*((e1-a1*u1)/b1)}
+            
+            
+%            \randint[Z]{a2}{-10}{10}
+%            \randint[Z]{b2}{0}{10}
+%            \randint[Z]{c2}{-10}{10}
+%            \randint[Z]{d2}{-10}{0}
+%            \randadjustIf{a2,b2,c2,d2}{a2*d2-b2*c2=0}
+%            \randint{s2}{-5}{5}
+%            \randint{t2}{-5}{5}
+            
+%            \randint{p2}{0}{1}
+%            \randint{q2}{0}{1}
+
+%            \function[calculate]{e2}{a2*s2+b2*t2} 
+%            \function[calculate]{f2}{c2*s2+d2*t2}                        
+            
+%            \function[calculate]{u2}{p2*s2+(1-p2)*(s2+b2)}
+%            \function[calculate]{v2}{q2*t2+(1-q2)*((e2-a2*u2)/b2)}
+            
+            
+%            \randint[Z]{a3}{-10}{10}
+%            \randint[Z]{b3}{-10}{0}
+%            \randint[Z]{c3}{-10}{10}
+%            \randint[Z]{d3}{-10}{0}
+%            \randadjustIf{a3,b3,c3,d3}{a3*d3-b3*c3=0}
+%            \randint{s3}{-5}{5}
+%            \randint{t3}{-5}{5}
+            
+%            \randint{p3}{0}{1}
+%            \randint{q3}{0}{1}
+
+%            \function[calculate]{e3}{a3*s3+b3*t3} 
+%            \function[calculate]{f3}{c3*s3+d3*t3}                        
+            
+%            \function[calculate]{u3}{p3*s3+(1-p3)*(s3+b3)}
+%            \function[calculate]{v3}{q3*t3+(1-q3)*((e3-a3*u3)/b3)}
+            
+            
+%            \randint[Z]{a4}{-10}{10}
+%            \randint[Z]{b4}{0}{10}
+%            \randint[Z]{c4}{-10}{10}
+%            \randint[Z]{d4}{0}{10}
+%            \randadjustIf{a4,b4,c4,d4}{a4*d4-b4*c4=0}
+%            \randint{s4}{-5}{5}
+%            \randint{t4}{-5}{5}
+            
+%            \randint{p4}{0}{1}
+%            \randint{q4}{0}{1}
+
+%            \function[calculate]{e4}{a4*s4+b4*t4} 
+%            \function[calculate]{f4}{c4*s4+d4*t4}                        
+            
+%            \function[calculate]{u4}{p4*s4+(1-p4)*(s4+b4)}
+%            \function[calculate]{v4}{q4*t4+(1-q4)*((e4-a4*u4)/b4)}
+            
+            
+%            \randint[Z]{a5}{-10}{10}
+%            \randint[Z]{b5}{0}{10}
+%            \randint[Z]{c5}{-10}{10}
+%            \randint[Z]{d5}{0}{10}
+%            \randadjustIf{a5,b5,c5,d5}{a5*d5-b5*c5=0}
+%            \randint{s5}{-5}{5}
+%            \randint{t5}{-5}{5}
+            
+%            \randint{p5}{0}{1}
+%            \randint{q5}{0}{1}
+
+%            \function[calculate]{e5}{a5*s5+b5*t5} 
+%            \function[calculate]{f5}{c5*s5+d5*t5}                        
+            
+%            \function[calculate]{u5}{s5}
+%            \function[calculate]{v5}{t5}   
+%        \end{variables}
+
+%        \begin{choice}
+%              \lang{de}{\text{\begin{align*}\var{a1}x&\var{b1}y&=&\var{e1}&\qquad&\,\\\var{c1}x&+\var{d1}y&=&\var{f1}& , \qquad&(\var{u1};\var{v1})\end{align*}}}
+%              \lang{en}{\text{\begin{align*}\var{a1}x&\var{b1}y&=&\var{e1}&\qquad&\,\\\var{c1}x&+\var{d1}y&=&\var{f1}& , \qquad&(\var{u1},\var{v1})\end{align*}}}
+%              \solution{compute}
+%              \iscorrect{abs(a1*u1+b1*v1-e1)+abs(c1*u1+d1*v1-f1)}{=}{0}
+%        \end{choice}
+        
+%        \begin{choice}
+%              \lang{de}{\text{\begin{align*}\var{a2}x&+\var{b2}y&=&\var{e2}&\qquad&\,\\\var{c2}x&\var{d2}y&=&\var{f2}& , \qquad&(\var{u2};\var{v2}) \end{align*}}}
+%              \lang{en}{\text{\begin{align*}\var{a2}x&+\var{b2}y&=&\var{e2}&\qquad&\,\\\var{c2}x&\var{d2}y&=&\var{f2}& , \qquad&(\var{u2},\var{v2}) \end{align*}}}
+%              \solution{compute}
+%              \iscorrect{abs(a2*u2+b2*v2-e2)+abs(c2*u2+d2*v2-f2)}{=}{0}
+%        \end{choice}
+        
+%        \begin{choice}
+%              \lang{de}{\text{\begin{align*}\var{a3}x&\var{b3}y&=&\var{e3}&\qquad&\,\\\var{c3}x&\var{d3}y&=&\var{f3}& , \qquad&(\var{u3};\var{v3}) \end{align*}}}
+%              \lang{en}{\text{\begin{align*}\var{a3}x&\var{b3}y&=&\var{e3}&\qquad&\,\\\var{c3}x&\var{d3}y&=&\var{f3}& , \qquad&(\var{u3},\var{v3}) \end{align*}}}
+%              \solution{compute}
+%              \iscorrect{abs(a3*u3+b3*v3-e3)+abs(c3*u3+d3*v3-f3)}{=}{0}
+%        \end{choice}
+        
+%        \begin{choice}
+%              \lang{de}{\text{\begin{align*}\var{a4}x&+\var{b4}y&=&\var{e4}&\qquad&\,\\\var{c4}x&+\var{d4}y&=&\var{f4}& , \qquad&(\var{u4};\var{v4})\end{align*}}}
+%              \lang{en}{\text{\begin{align*}\var{a4}x&+\var{b4}y&=&\var{e4}&\qquad&\,\\\var{c4}x&+\var{d4}y&=&\var{f4}& , \qquad&(\var{u4},\var{v4})\end{align*}}}
+%              \solution{compute}
+%              \iscorrect{abs(a4*u4+b4*v4-e4)+abs(c4*u4+d4*v4-f4)}{=}{0}
+%        \end{choice}
+        
+%        \begin{choice}
+%              \lang{de}{\text{\begin{align*}\var{a5}x&+\var{b5}y&=&\var{e5}&\qquad&\,\\\var{c5}x&+\var{d5}y&=&\var{f5}& , \qquad&(\var{u5};\var{v5})\end{align*}}}
+%              \lang{en}{\text{\begin{align*}\var{a5}x&+\var{b5}y&=&\var{e5}&\qquad&\,\\\var{c5}x&+\var{d5}y&=&\var{f5}& , \qquad&(\var{u5},\var{v5})\end{align*}}}
+%              \solution{compute}
+%              \iscorrect{abs(a5*u5+b5*v5-e5)+abs(c5*u5+d5*v5-f5)}{=}{0}
+%        \end{choice}
+          
+%    \end{question}
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

@@ -1,0 +1,757 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Vektoren im Anschauungsraum}
+    \lang{en}{Vectors in space}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T108_Example.meta.xml}{T108_Example}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T108_CollinearVectors.meta.xml}{T108_CollinearVectors}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T108_VectorMultiplication.meta.xml}{T108_VectorMultiplication}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T108_VectorDifference.meta.xml}{T108_VectorDifference}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T108_VectorCommutativity.meta.xml}{T108_VectorCommutativity}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T108_VectorAddition.meta.xml}{T108_VectorAddition}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T108_LocationVector.meta.xml}{T108_LocationVector}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T108_Vectors.meta.xml}{T108_Vectors}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T108_Vector3D.meta.xml}{T108_Vector3D}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T108_Vector2D.meta.xml}{T108_Vector2D}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+  \end{components}
+  \begin{links}
+    %\link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_01_zahlenmengen.meta.xml}{content_01_zahlenmengen}
+    \link{generic_article}{content/rwth/HM1/T109_Skalar-_und_Vektorprodukt/g_art_content_31_skalarprodukt.meta.xml}{link-skalarprodukt}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{8}
+\ombarticle{1}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Vektoren im Anschauungsraum}\lang{en}{Vectors in space}}
+ 
+\begin{block}[annotation]
+  übungsinhalt
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9044}{Ticket 9044}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{\lang{de}{Vektoren}\lang{en}{Vectors in space}}
+\label{sec:1_1_Vektoren}
+
+\lang{de}{
+Viele physikalische Größen sind nicht nur durch eine Maßzahl festgelegt, sondern auch durch ihre 
+Richtung im Raum. In diesem Kapitel wollen wir uns solchen gerichteten Größen, sogenannten Vektoren, 
+widmen.
+\\\\
+Wir betrachten hierzu die Vektoren im $n$-dimensionalen \emph{euklidischen Anschauungsraum}, der 
+gegeben ist durch die Menge der Punkte des $\R^n:=\{ (x_1;\ldots; x_n) \mid x_i\in \R\}.\;$ 
+% Änderung/Ergänzung aufgrund Ticket #11:
+Die Menge $\,\R^n\,$ ist dabei definiert als das $n-$fache kartesisches Produkt%\ref[content_01_zahlenmengen][kartesische Produkt ]{def:mengenoperationen} 
+der Menge $\R$, die Vektoren sind also die \emph{n-Tupel} $\, (x_1;\ldots; x_n).$
+\\\\
+In den Beispielen beschränken wir uns dabei in der Regel auf den anschaulichen Fall des zwei- oder 
+drei-dimensionalen Raumes $\R^2$ bzw. $\R^3$. 
+}
+
+\lang{en}{
+Many physical quantities are not only determined by their magnitude, rather also by the their 
+direction in space. In this chapter we will focus on learning about these directional quantities: 
+so-called vectors.
+\\\\
+For this we consider the vectors in $n$-dimensional \emph{Euclidean space}, which is given by the set 
+$\R^n:=\{ (x_1;\ldots; x_n) \mid x_i\in \R\}.\;$ The set $\,\R^n\,$ is therefore defined as the 
+$n$-fold Cartesian product of the set $\,\R^n$, with the vectors being \emph{$n$-tuples} 
+$\, (x_1;\ldots; x_n).$
+\\\\
+In our examples we will restrict ourselves to the two- and three-dimensional spaces $\R^2$ and 
+$\R^3$. 
+}
+
+
+
+
+\begin{example}
+\begin{table}[\class{item}]
+$\underline{\text{f"ur } n=2}$    & &
+$\underline{\text{f"ur } n=3}$ \\ 
+ \lang{de}{die Ebene}\lang{en}{the plane} && 
+   \lang{de}{der $3$-dimensionale Raum}\lang{en}{$3$-dimensional space} \\ 
+\begin{center} \image{T108_Vector2D}\end{center} && \begin{center} \image{T108_Vector3D}\end{center}
+ \end{table}
+\end{example}
+
+\begin{definition}[Vektor] \label{Gegenvektor}  % Ziel des Links aus Bem. 2.2 (8.2 Rechenregeln und Linearkombination)
+\lang{de}{
+Ein \emph{Vektor} $\vec{v}$ im $n$-dimensionalen Raum ist eine Gr"o"se, die durch eine \emph{L"ange} 
+und eine \emph{Richtung} im $\R^n$ gekennzeichnet ist. \\
+Dargestellt werden Vektoren durch \emph{Pfeile} (gerichtete Strecken) im $\R^n$, deren Spitzen die 
+Richtung anzeigen. Die Länge des Vektors ist eine reelle Zahl $\geq 0$ und entspricht der Länge der 
+gerichteten Strecken.
+}
+\lang{en}{
+A \emph{vector} $\vec{v}$ in $n$-dimensional space is an object characterised by its magnitude and 
+its direction in $\R^n$.\\
+Vectors are represented on a graph by \emph{arrows} of a given length in $\R^n$, representing the 
+vector's positive real magnitude, and pointing in the direction of the vector.
+}
+\end{definition}
+
+\lang{de}{
+Ein Vektor der Länge Null heißt \emph{Nullvektor}.
+\\\\
+Ist $\vec{v}$ ein Vektor, so bezeichnen wir mit $-\vec{v}$ denjenigen Vektor, 
+der dieselbe Länge wie $\vec{v}$ besitzt, jedoch genau in die entgegengesetzte Richtung zeigt. 
+Der Vektor $-\vec{v}$ heißt \emph{Gegenvektor } 
+\ zum Vektor $\vec{v}$. 
+In der Literatur wird ein Vektor $\vec{v}$ auch oft fettgedruckt geschrieben, also mit $\mathbf{v}$ bezeichnet.
+}
+\lang{en}{
+Ein Vektor der Länge Null heißt \emph{Nullvektor}.
+\\\\
+If $\vec{v}$ is a vector, then we denote by $-\vec{v}$ the vector that has the same length as 
+$\vec{v}$ but that points in the opposite direction of $\vec{v}$. This is often called the negative 
+of the vector $\vec{v}$. In the literature, often $\mathbf{v}$ is used instead of $\vec{v}$ to 
+denote a vector.
+} %This has no formal name in English.
+
+\begin{remark} \label{rem:pfeilklasse}
+\lang{de}{
+Die Lage eines Vektors $\vec{v}$ im $\R^n$ ist nicht eindeutig.
+Alle Pfeile, die in Richtung und Länge übereinstimmen, stellen denselben Vektor dar, 
+unabhängig von ihrem Anfangs- und Endpunkt im $\R^n$. Man spricht auch von \emph{Pfeilklassen}.
+}
+\lang{en}{
+An arrow in $\R^n$ does not uniquely represent a vector. Every arrow that points in the same 
+direction and has the same length represents the same vector, regardless of its position in $\R^n$. 
+That is to say, a vector does not by default have a position assosciated with it, only a length and 
+direction.
+}
+\end{remark}
+
+\begin{example}
+\begin{center}
+\image{T108_Vectors}
+\end{center}  
+
+\lang{de}{
+Die drei orangen Pfeile gehören zur selben Pfeilklasse, da sie die gleiche L"ange und die gleiche 
+Richtung haben. Sie stellen also denselben Vektor dar. Ebenso stellen die drei blauen Pfeile 
+denselben Vektor dar. Der grüne Pfeil stellt einen anderen Vektor als die blauen Pfeile dar, da er in 
+die entgegengesetzte Richtung geht.
+}
+\lang{en}{
+The three orange arrows represent the same vector, as they have the same length and direction. 
+Similarly, the three blue arrows also represent one vector. The green arrow represents a different 
+vector to the blue arrows, as it points in the opposite direction.
+}
+\end{example}
+
+\begin{definition}[\lang{de}{Ortsvektoren und Verbindungsvektoren}
+                   \lang{en}{Position vectors}]\label{def:orts_verb_vec}
+\lang{de}{
+Ist $P$ ein Punkt im $\R^n$, so nennt man den Vektor, der durch den Pfeil mit 
+Anfang im Nullpunkt $O=(0;\ldots; 0)$ und Ende beim Punkt $P$ dargestellt wird,
+den \emph{Ortsvektor von $P$} und bezeichnet ihn mit $\overrightarrow{OP}$ oder kurz mit $\vec{p}$.\\
+\\
+Sind $Q$ und $R$ Punkte im $\R^n$, dann ist 
+der \emph{Verbindungsvektor von $Q$ nach $R$} der Vektor, der durch den
+Pfeil mit Anfang bei $Q$ und Ende bei $R$ dargestellt wird. Dieser wird mit
+$\overrightarrow{QR}$ bezeichnet.
+}
+\lang{en}{
+Let $P$ be a point in $\R^n$. Then we call the vector represented by an arrow from the origin 
+$O=(0;\ldots; 0)$ to the point $P$ the \emph{position vector of $P$} and denote it by 
+$\overrightarrow{OP}$ or $\vec{p}$.
+\\\\
+Let $Q$ and $R$ be points in $\R^n$. Then we denote the vector represented by an arrow from $Q$ to 
+$R$ by $\overrightarrow{QR}$.
+}
+\end{definition}
+
+
+\begin{example}
+\begin{center}
+\image{T108_LocationVector}
+\end{center} 
+
+\lang{de}{
+Ortsvektor $\vec{p}=\overrightarrow{OP}$ von $P$ und Verbindungsvektor $\overrightarrow{QR}$.
+}
+\lang{en}{
+The position vector $\vec{p}=\overrightarrow{OP}$ of $P$ and the vector $\overrightarrow{QR}$ from 
+$Q$ to $R$.
+}
+\end{example}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\number{s1}{1}
+			\number{s2}{2}
+		\end{variables}
+		
+			\text{\lang{de}{
+      In obigem Beispiel haben die Punkte $Q$ und $R$ die Koordinaten $Q=(\frac{1}{2};1)$ und
+			$R=(\frac{3}{2};3)$. Welche Koordinaten muss der Punkt $S$ haben, damit der Ortsvektor von $S$
+			gleich dem Verbindungsvektor $\overrightarrow{QR}$ ist?\\
+			$S=($\ansref;\ansref$)$.
+      }
+      \lang{en}{
+      In the above example, the points $Q$ and $R$ have the coordinates $Q=(\frac{1}{2};1)$ and 
+      $R=(\frac{3}{2};3)$. Which coordinates must the point $S$ have for the position vector of $S$ 
+      to be the same as the vector $\overrightarrow{QR}$?\\
+      $S=($\ansref;\ansref$)$.
+      }}
+		
+		\begin{answer}
+			\solution{s1}
+		\end{answer}
+		\begin{answer}
+			\solution{s2}
+		\end{answer}
+		\explanation{\lang{de}{
+    Damit die Vektoren dieselben sind, müssen die darstellenden Pfeile in die gleiche Richtung gehen
+		und gleich lang sein. Der Pfeil zum Verbindungsvektor $\overrightarrow{QR}$ geht von $Q=(\frac{1}{2};1)$ nach
+		$R=(\frac{3}{2};3)$, also $1$ Einheit in $x$-Richtung und $2$ Einheiten in $y$-Richtung. Daher muss auch der Pfeil zum
+		Ortsvektor von $S$ eine Einheit in $x$-Richtung und $2$ Einheiten in $y$-Richtung gehen. Da der Pfeil zum
+		Ortsvektor im Ursprung startet, muss also das Ende $S$ die Koordinaten $(1;2)$ haben.		
+		}
+    \lang{en}{
+    So that the vectors are equal, their magnitudes and directions must be equal. The arrow of the 
+    vector $\overrightarrow{QR}$ goes from $Q=(\frac{1}{2};1)$ to	$R=(\frac{3}{2};3)$, so it goes 
+    $1$ unit in the positive $x$-direction and $2$ units in the positive $y$-direction. The same 
+    arrow starting at the origin must of course end at the coordinates $(1;2)$.
+    }}
+	\end{quickcheck}
+
+%%%%%%%%%%%  ab hier Umstellung in Zusammenhang mit Einbau der Videos %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\lang{de}{
+Wir haben die Koordinaten des Verbindungsvektors hier im Beispiel aus der Anschauung hergeleitet.
+Verbindungsvektoren im $\R^n$ lassen sich aber auch berechnen, wie wir später in Satz \ref{thm:verbindungsvektor} 
+sehen werden. Hierzu führen wir zunächst die Komponentendarstellung von Vektoren im $\R^n$ ein und zeigen, 
+wie man hiermit mit Vektoren rechnen kann.
+}
+\lang{en}{
+In the above example we represent vectors using arrows on a graph. They can also be represented by 
+tuples, as we will show now, and then vectors between points can be found using theorem 
+\ref{thm:verbindungsvektor}. 
+}
+
+\section{\lang{de}{Komponentendarstellung von Vektoren}\lang{en}{Component representation of vectors}}\label{sec:kompon_spalt_darst}
+
+\lang{de}{
+Jeder Vektor $\vec{v}$ im $\R^n$ entspricht dem Ortsvektor von genau einem Punkt 
+$P=(p_1;\ldots; p_n)$.  
+Wir schreiben daher diesen Vektor auch als
+\[ \vec{v}=\overrightarrow{OP}=\left( \begin{smallmatrix} p_1 \\ p_2 \\ \vdots \\ p_n \end{smallmatrix} \right). \]
+Man verwendet die Spaltenschreibweise für Vektoren, um diese von Punkten im $\R^n$ besser unterscheiden zu können.
+\\\\
+% \begin{remark}
+Der Nullvektor $\vec{0}=\left( \begin{smallmatrix} 0 \\ 0 \\ \vdots \\ 0 \end{smallmatrix} \right)$ 
+(= Ortsvektor von $O=(0; \ldots; 0)$) wird oft auch einfach als $0$, also ohne Vektorpfeil, geschrieben.
+% \end{remark}
+}
+\lang{en}{
+Every vector $\vec{v}$ in $\R^n$ is the position vector of precisely the point $P=(p_1;\ldots; p_n)$. 
+We therefore write this vector as 
+\[ \vec{v}=\overrightarrow{OP}=\left( \begin{smallmatrix} p_1 \\ p_2 \\ \vdots \\ p_n \end{smallmatrix} \right). \]
+This vertical 'component' or tuple representation of the vector distinguishes it from the point. 
+\\\\
+% \begin{remark}
+The zero vector $\vec{0}=\left( \begin{smallmatrix} 0 \\ 0 \\ \vdots \\ 0 \end{smallmatrix} \right)$  
+(= position vector of $O=(0; \ldots; 0)$) is often simply denoted by $0$.
+% \end{remark}
+}
+
+\section{\lang{de}{Rechnen mit Vektoren}\lang{en}{Calculating with vectors}}\label{sec:rechnen}
+
+\lang{de}{
+Zwei Vektoren k"onnen addiert werden und ein Vektor kann mit einer 
+reellen Zahl multipliziert werden. Das Ergebnis ist jeweils ein neuer Vektor.
+}
+\lang{en}{
+Two vectors can be added together, and a vector can be multiplied by a real number. The result of 
+these operations is always a vector.
+}
+
+\begin{definition}[\lang{de}{Vektoraddition}\lang{en}{Vector addition}]\label{def:vec-addition}
+\lang{de}{
+Die Summe $\vec{v}+\vec{w}$ zweier Vektoren $\vec{v}$ und $\vec{w}$ ist gegeben durch Aneinanderhängen 
+der zwei Vektoren:
+}
+\lang{en}{
+The sum $\vec{v}+\vec{w}$ of two vectors $\vec{v}$ and $\vec{w}$ is represented by joining together 
+their two arrows in space.
+}
+
+\begin{center}
+\image{T108_VectorAddition}
+\end{center} 
+
+\lang{de}{In Komponentendarstellung ist diese Summe durch komponentenweise Addition gegeben:}
+\lang{en}{The sum corresponds to componentwise addition of the two tuples:}
+\[ \left( \begin{smallmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{smallmatrix} \right)+
+\left( \begin{smallmatrix} w_1 \\ w_2 \\ \vdots \\ w_n \end{smallmatrix} \right)=
+\left( \begin{smallmatrix} v_1+w_1 \\ v_2+w_2 \\ \vdots \\ v_n+w_n \end{smallmatrix} \right) \]
+\end{definition}
+
+%%%%%%%%%%%%%%% Ziel des Links aus Bemerkung 2.2, Abschnitt 8.2 Rechenregeln und Linearkombination
+\begin{remark} \label{Bem_Vektor_Addition}
+    \lang{de}{
+    Anhand der folgenden Skizze erkennt man auch, dass $\vec{v}+\vec{w} = \vec{w}+\vec{v}$ gilt.     
+    \\
+     Die Addition zweier Vektoren ist also \emph{kommutativ}, d.h. es kommt beim Addieren nicht auf die Reihenfolge an.
+     Wichtig hingegen ist die Eigenschaft (gemäß Bem. \ref{rem:pfeilklasse}), dass es sich bei Vektoren um \emph{Pfeilklassen} 
+     und nicht um \emph{Pfeile} mit festem Anfangs- und Endpunkt handelt.
+     }          
+    \lang{en}{
+    With the help of the following sketch, we can see that the addition of two vectors 
+    $\vec{v}+\vec{w} = \vec{w}+\vec{v}$ is \emph{commutative}, i.e. the order in which you add
+    two vectors does not matter. The orange and blue arrows can be connected together in either order 
+    to obtain the same green arrow.
+    }
+    \begin{center}
+\image{T108_VectorCommutativity}
+\end{center} 
+    \\
+    \lang{de}{
+    Mit Hilfe des Gegenvektors können wir auch Differenzen von Vektoren bilden: \\
+    Sind $\vec{v}$ und $\vec{w}$ Vektoren, so ist
+    $\vec{v}-\vec{w}$ der Vektor gegeben durch $\vec{v} + (-\vec{w})$, wobei $-\vec{w}$ der Gegenvektor zu $\vec{w}$ ist.
+    }
+    \lang{en}{
+    Using the negative of a vector we can also calculate the difference between two vectors: if 
+    $\vec{v}$ and $\vec{w}$ are two vectors, then $\vec{v}-\vec{w}$ is the vector given by 
+    $\vec{v} + (-\vec{w})$, where $-\vec{w}$ is simply the vector pointing in the opposite direction 
+    of $\vec{w}$.
+    }
+	\\
+    \begin{center}
+\image{T108_VectorDifference}
+\end{center} 
+    \\     
+    \lang{de}{F\"ur jeden Vektor $\vec{v}$ gilt $\vec{v} - \vec{v} = \vec{v} + (-\vec{v}) = \vec{0}$.}
+    \lang{en}{We have $\vec{v} - \vec{v} = \vec{v} + (-\vec{v}) = \vec{0}$ for any vector $\vec{v}$.}       
+\end{remark}
+
+%
+%%% Video Hoever
+%
+\lang{de}{
+Im folgenden Video wird die Definition von Vektoren sowie die Vektoraddition im 
+2-dimensionalen reellen Raum veranschaulicht:
+\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=700}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{}
+
+\begin{example}
+\lang{de}{
+  \begin{enumerate}[alph]
+  \item Wir lösen die Aufgabe aus dem vorstehenden Video: 
+   $\quad$ \floatright{\href{https://www.hm-kompakt.de/video?watch=701lsg}{\image[75]{00_Videobutton_schwarz}}}\\\\
+%
+  \item Wir berechnen nun die Summe zweier Vektoren im 3-dimensionalen 
+    \\   
+    Für $\vec{v} = \begin{pmatrix} 2\\3\\1\end{pmatrix}$
+    und
+    $\vec{w} = \begin{pmatrix} 4\\1\\-2\end{pmatrix}$ 
+    gilt
+	\[\vec{v} + \vec{w} = \begin{pmatrix} 2 + 4 \\ 3 + 1 \\ 1 + (-2) \end{pmatrix} = \begin{pmatrix} 6 \\ 4\\ -1\end{pmatrix}
+    \]
+    und
+    \[\vec{w} + \vec{v} = \begin{pmatrix} 4 + 2 \\ 1 + 3 \\ (-2) + 1 \end{pmatrix} = \begin{pmatrix} 6 \\ 4\\ -1\end{pmatrix}.
+    \]
+    Die Differenz der beiden Vektoren ist gegeben durch
+    \[\vec{v}-\vec{w} =\vec{v} + (-\vec{w})
+	= \begin{pmatrix} 2\\3\\1\end{pmatrix} + \left(-\begin{pmatrix} 4\\1\\-2\end{pmatrix}\right) 
+	% Alternativen zu \left und \right?
+	= \begin{pmatrix} 2\\3\\1\end{pmatrix} + \begin{pmatrix} -4\\-1\\2\end{pmatrix}
+	= \begin{pmatrix} -2\\2\\3\end{pmatrix}. \]
+  \end{enumerate}
+}
+\lang{en}{
+We now calculate the sum and then the difference of two vectors in $3$-dimensions.
+\\   
+Let $\vec{v} = \begin{pmatrix} 2\\3\\1\end{pmatrix}$ and 
+$\vec{w} = \begin{pmatrix} 4\\1\\-2\end{pmatrix}$. 
+Then
+\[
+\vec{v} + \vec{w} = \begin{pmatrix} 2 + 4 \\ 3 + 1 \\ 1 + (-2) \end{pmatrix} = \begin{pmatrix} 6 \\ 4\\ -1\end{pmatrix}
+\]
+and
+\[
+\vec{w} + \vec{v} = \begin{pmatrix} 4 + 2 \\ 1 + 3 \\ (-2) + 1 \end{pmatrix} = \begin{pmatrix} 6 \\ 4\\ -1\end{pmatrix}.
+\]
+The difference of the two vectors is given by
+    \[\vec{v}-\vec{w} =\vec{v} + (-\vec{w})
+	= \begin{pmatrix} 2\\3\\1\end{pmatrix} + \left(-\begin{pmatrix} 4\\1\\-2\end{pmatrix}\right) 
+	% Alternativen zu \left und \right?
+	= \begin{pmatrix} 2\\3\\1\end{pmatrix} + \begin{pmatrix} -4\\-1\\2\end{pmatrix}
+	= \begin{pmatrix} -2\\2\\3\end{pmatrix}. \]
+}
+\end{example}
+
+\begin{definition}[\lang{de}{Skalarmultiplikation}\lang{en}{Scalar multiplication}]\label{def:scalar_mult}
+    \lang{de}{
+    Die Multiplikation $\lambda \cdot \vec{v}$ eines Vektors $\vec{v}$ mit einer reellen Zahl $\lambda \in \R$ (einem sogenannten
+    \emph{Skalar}) \emph{streckt} oder \emph{verkürzt} die Länge des Vektors um den Faktor $|\lambda|$. Ist $\lambda<0$,
+    wird zusätzlich die Richtung des Vektors umgekehrt, $\lambda \cdot \vec{v}$ zeigt in diesem Fall folglich in Richtung $-\vec{v}$:
+    }
+    \lang{en}{
+    The multiple $\lambda \cdot \vec{v}$ of a vector $\vec{v}$ by a real number 
+    $\lambda \in \R$ (a so-called \emph{scalar}) is the vector $\vec{v}$, \emph{stretched} or 
+    \emph{shortened} by a factor of $|\lambda|$. If $\lambda<0$, the direction of the vector is 
+    reversed, so it is in the direction of the negative vector $-\vec{v}$:
+    }
+
+    \begin{center}
+    \image{T108_VectorMultiplication}
+    \end{center}
+
+    \lang{de}{
+    In Komponentendarstellung ist diese Multiplikation durch komponentenweise Multiplikation gegeben:
+    }
+    \lang{en}{
+    Multiplication by a scalar corresponds to componentwise multiplication by the scalar:
+    }
+    \[ \lambda \cdot \left( \begin{smallmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{smallmatrix} \right)=
+    \left( \begin{smallmatrix} \lambda v_1 \\ \lambda v_2 \\ \vdots \\ \lambda v_n \end{smallmatrix} 
+    \right)\]
+%
+%%% Video Hoever
+%  
+\lang{de}{
+\floatright{\href{https://www.hm-kompakt.de/video?watch=701}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{}
+\end{definition}
+\lang{de}{
+Die skalare Multiplikation eines Vektors $\vec{v}$ mit dem Skalar $\lambda =1$ lässt den Vektor unverändert.
+Multipliziert man $\vec{v}$ mit $\lambda =-1$, erhält man den Gegenvektor $-\vec{v}$.
+}
+\lang{en}{
+Scalar multiplication of a vector $\vec{v}$ by the scalar $\lambda =1$ leaves the vecor unchanged. 
+Multiplying $\vec{v}$ by $\lambda =-1$, we obtain the negative vector $-\vec{v}$.
+}
+
+
+\begin{block}[warning]
+    \lang{de}{
+    Es gibt auch ein \link{link-skalarprodukt}{\emph{Skalarprodukt }} zwischen zwei Vektoren. 
+  	Die Multiplikation mit Skalaren (auch als \emph{skalare Multiplikation} bezeichnet) darf nicht 
+    mit dem Skalarprodukt verwechselt werden.
+    }
+  	\lang{en}{
+    There is also a so-called \emph{scalar product}, or \emph{dot product} between two vectors. This 
+    is not to be confused with \emph{scalar multiplication} as described above.
+    }
+\end{block}
+
+\begin{example}
+    \lang{de}{Wir berechnen zwei Skalierungen des Vektors }
+    \lang{en}{Let us calculate two scalar multiples of the vector }
+    $\vec{v} = \begin{pmatrix} 2\\1\\-2\end{pmatrix}$.\\ 
+    \begin{itemize}
+        \item 
+            \lang{de}{Für $\lambda=2$ gilt:}
+            \lang{en}{by the scalar $\lambda=2$:}
+            \[2\cdot \vec{v} = 2\cdot \begin{pmatrix} 2\\1\\-2\end{pmatrix} = \begin{pmatrix} 4\\2\\-4\end{pmatrix}\]
+        \item
+            \lang{de}{Weiterhin gilt für $\lambda=-3$:}
+            \lang{en}{by the scalar $\lambda=-3$:}
+            	\[-3\cdot \vec{v} = -3 \cdot\begin{pmatrix} 2\\1\\-2\end{pmatrix} = \begin{pmatrix} -6\\-3\\6\end{pmatrix}.\]
+    \end{itemize}
+\end{example}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{q1}{-5}{5}
+			\randint{q2}{-5}{5}
+			\randint{q3}{-5}{5}
+			\randint{r1}{-5}{5}
+			\randint{r2}{-5}{5}
+			\randint{r3}{-5}{5}
+			\randint[Z]{c}{-2}{2}
+			\function[calculate]{s1}{c*r1+q1}
+			\function[calculate]{s2}{c*r2+q2}
+			\function[calculate]{s3}{c*r3+q3}
+		\end{variables}
+		
+			\text{\lang{de}{Berechnen Sie den folgenden Vektor:}
+            \lang{en}{Evaluate the following vector expression:}\\
+			\begin{table}[\class{no-padding}]
+			\rowspan[l][m]{3} $\begin{pmatrix}\var{q1}\\ \var{q2}\\ \var{q3} \end{pmatrix} 
+			+ (\var{c}) \cdot \begin{pmatrix}\var{r1}\\ \var{r2}\\ \var{r3} \end{pmatrix} = 
+			\left(\begin{matrix} \\ \\ \\ \end{matrix}\right.$ & 
+			\ansref & \rowspan[l][m]{3} $\left.\begin{matrix} \\ \\ \\ \end{matrix}\right)$. & \\ 
+			\ansref & \\ 
+			\ansref & 
+			\end{table}
+			}
+		
+		\begin{answer}
+			\solution{s1}
+		\end{answer}
+		\begin{answer}
+			\solution{s2}
+		\end{answer}
+		\begin{answer}
+			\solution{s3}
+		\end{answer}
+		\explanation{\lang{de}{Die Berechnung erfolgt komponentenweise.}
+                 \lang{en}{Both operations are componentwise.}}
+	\end{quickcheck}
+
+%
+%%% Video Hoever
+% 
+\lang{de}{
+Unter Verwendung der Vektoraddition und der Skalarmultiplikation können wir nun auch Verbindungsvektoren zwischen
+zwei Punkten im $\R^n$ berechnen. Dies wird im Video anschaulich erläutert: 
+\\
+\floatright{\href{https://www.hm-kompakt.de/video?watch=702}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+%
+\lang{en}{Now we can calculate the vector between two points in $\R^n$.}
+
+
+\begin{theorem}[\lang{de}{Verbindungsvektoren}
+                \lang{en}{Vector between two points}] \label{thm:verbindungsvektor}
+\lang{de}{
+Sind $Q=(q_1;\ldots; q_n)$ und $R=(r_1;\ldots; r_n)$ Punkte im $\R^n$, so gilt f"ur den 
+Verbindungsvektor von $Q$ \emph{(= Anfangspunkt)}  und $R$ \emph{(= Endpunkt)}:
+}
+\lang{en}{
+Let $Q=(q_1;\ldots; q_n)$ and $R=(r_1;\ldots; r_n)$ be points in $\R^n$. Then the vector from $Q$ 
+to $R$ is:
+}
+\[ \overrightarrow{QR}=\overrightarrow{OR}-\overrightarrow{OQ}
+  = \left(\begin{smallmatrix} r_1 \\ r_2 \\ \vdots \\ r_n \end{smallmatrix} \right) - \left(\begin{smallmatrix} q_1 \\ q_2 \\ \vdots \\ q_n \end{smallmatrix} \right)
+  = \left(\begin{smallmatrix} r_1-q_1 \\ r_2-q_2 \\ \vdots \\ r_n-q_n \end{smallmatrix} \right). \]
+
+\lang{de}{Man rechnet: "`Endpunkt minus Anfangspunkt"'.}
+\lang{en}{We calculate the 'end point' minus the 'starting point'.}
+
+\end{theorem}
+
+\begin{example}
+\lang{de}{
+  \begin{enumerate}[alph]
+  \item \\
+    \begin{center}
+    \image{T108_Example}
+    \end{center} 
+    In diesem Beispiel sind $Q=(1; 1)$ und $R=(4; 3)$.\\
+    Also:
+    \[ \overrightarrow{QR}=\left(\begin{smallmatrix} 4-1 \\ 3-1\end{smallmatrix} \right)=\left(\begin{smallmatrix} 3 \\ 2\end{smallmatrix} \right) \]
+%
+%%% Video Hoever
+%   
+  \item Als weiteres Beispiel sehen wir hier die Lösung zur Aufgabe aus dem vorigen Video: 
+   $\quad$ \floatright{\href{https://www.hm-kompakt.de/video?watch=702lsg}{\image[75]{00_Videobutton_schwarz}}}\\\\
+%
+  \end{enumerate}
+}
+\lang{en}{
+    \begin{center}
+    \image{T108_Example}
+    \end{center} 
+    In this example we have $Q=(1; 1)$ and $R=(4; 3)$.\\
+    Hence:
+    \[ \overrightarrow{QR}=\left(\begin{smallmatrix} 4-1 \\ 3-1\end{smallmatrix} \right)=\left(\begin{smallmatrix} 3 \\ 2\end{smallmatrix} \right) \]
+}
+\end{example}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{q1}{-5}{5}
+			\randint{q2}{-5}{5}
+			\randint{q3}{-5}{5}
+			\randint{r1}{-5}{5}
+			\randint{r2}{-5}{5}
+			\randint{r3}{-5}{5}
+			\function[calculate]{s1}{r1-q1}
+			\function[calculate]{s2}{r2-q2}
+			\function[calculate]{s3}{r3-q3}
+		\end{variables}
+		
+			\text{\lang{de}{
+      Bestimmen Sie den Verbindungsvektor $\overrightarrow{QR}$ von
+			$Q=(\var{q1};\var{q2})$ nach $R=(\var{r1};\var{r2})$.
+      }
+      \lang{en}{
+      Determine the vector $\overrightarrow{QR}$ from $Q=(\var{q1};\var{q2})$ to $R=(\var{r1};\var{r2})$.
+      }\\
+			\begin{table}[\class{no-padding}]
+			\rowspan[l][m]{2} 
+      \lang{de}{Der Vektor ist}\lang{en}{The vector is} 
+      $\overrightarrow{QR}=\left(\begin{matrix} \\ \\ \end{matrix}\right.$ &  
+			\ansref & \rowspan[l][m]{2} $\left.\begin{matrix} \\ \\ \end{matrix}\right)$. & \\ 
+			\ansref & 
+			\end{table}
+      }
+		
+		\begin{answer}
+			\solution{s1}
+		\end{answer}
+		\begin{answer}
+			\solution{s2}
+		\end{answer}
+% 		\begin{answer}
+% 			\solution{s3}
+% 		\end{answer}
+		\explanation{\lang{de}{
+    Die Berechnung folgt nach der Regel \glqq{}Endpunkt minus Anfangspunkt\grqq{}, d.h. die erste 
+		Komponente ist $\var{r1}-(\var{q1})=\var{s1}$ und die zweite ist $\var{r2}-(\var{q2})=\var{s2}$.	
+		}
+    \lang{en}{
+    The calculation follows from the 'end point' minus 'start point' rule, so the first component is 
+    $\var{r1}-(\var{q1})=\var{s1}$ and the second is $\var{r2}-(\var{q2})=\var{s2}$.
+    }}
+	\end{quickcheck}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Nachfolgendes Beispiels durch Beipielaufgabe 4c) ersetzt
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% \begin{example}
+% Die Skalierungseigenschaft kann auch benutzt werden, um Verbindungsvektoren in bestimmten Situationen zu berechnen:
+%
+% Seien $P$ und $Q$ zwei Punkte im $\R^n$ und $M$ ein Punkt auf der Strecke $PQ$, der die Strecke im Verhältnis $r:s$ teilt.
+% Dann geht der Verbindungsvektor $\overrightarrow{PM}$ in die gleiche Richtung wie der Verbindungsvektor $\overrightarrow{PQ}$,
+% aber die Längen liegen im Verhältnis $r: (r+s)$. Also gilt für die Verbindungsvektoren
+% \[ \overrightarrow{PM}=\frac{r}{r+s} \overrightarrow{PQ}.\]
+% \image[300]{teilpunkt}
+% \end{example}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{\lang{de}{Kollinearität von Vektoren}\lang{en}{Parallel vectors}}
+
+%%%%%%%%%%%  Ende der Umstellung in Zusammenhang mit Einbau der Videos %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\lang{de}{
+Mit Hilfe der skalaren Multiplikation können wir untersuchen, ob zwei Vektoren parallel zueinander 
+sind.
+}
+\lang{en}{
+With the help of scalar multiplication we can investigate whether two vectors are parallel to each 
+other.
+}
+
+\begin{definition}[\lang{de}{Kollinearität von Vektoren}\lang{en}{Parallel vectors}]\label{def:kollinear}
+    \lang{de}{
+    Zwei Vektoren $\vec{v}$ und $\vec{w}$, von denen keiner gleich dem Nullvektor ist, heißen 
+    \emph{kollinear}, wenn es ein $\lambda\in\R$ gibt, so dass
+    }
+    \lang{en}{
+    Two non-zero vectors $\vec{v}$ and $\vec{w}$ are called \emph{parallel} if there exists a 
+    $\lambda\in\R$ such that:
+    }
+  	\[\lambda\cdot\vec{v} = \vec{w}\]
+    \lang{de}{
+    gilt. Ist dabei $\lambda>0$, zeigen $\vec{v}$ und $\vec{w}$ in die gleiche Richtung, so heißen 
+    $\vec{v}$ und $\vec{w}$ auch \emph{parallel}, andernfalls nennt man sie \emph{antiparallel}.
+    }
+    \lang{en}{
+    holds. In particular, if it holds with $\lambda<0$, then $\vec{v}$ and $\vec{w}$ go in opposite 
+    directions, and are called \emph{antiparallel}.
+    }
+\end{definition}
+
+\lang{de}{
+Zwei vom Nullvektor verschiedene Vektoren sind also genau dann kollinear, wenn einer ein Vielfaches 
+des anderen ist.
+}
+\lang{en}{
+Often two vectors are called parallel or \emph{collinear} if one is a multiple of the other, 
+regardless of sign.
+}
+\begin{center}
+\image{T108_CollinearVectors}
+\end{center} 
+
+\lang{de}{
+In der Abbildung sind alle drei Vektoren $\vec{u}$, $\vec{v}$ und $\vec{w}$ paarweise kollinear. 
+Die Vektoren $\vec{u}$ und $\vec{v}$ sind zudem parallel, wohingegen der Vektor $\vec{w}$ 
+antiparallel sowohl zu $\vec{u}$, also auch zu $\vec{v}$ ist.
+}
+\emph{en}{
+In the illustration, the three vectors $\vec{u}$, $\vec{v}$ and $\vec{w}$ are pairwise parallel to 
+each other. In particular, the vectors $\vec{u}$ and $\vec{v}$ are parallel, and $\vec{w}$ is 
+antiparallel to both $\vec{u}$ and $\vec{v}$.
+}
+
+\begin{example}
+	\lang{de}{Gegeben seien die drei Vektoren}
+  \lang{en}{Consider the three vectors}  
+    $\vec{u} = \begin{pmatrix} 2 \\-1\\3\end{pmatrix}$, $\vec{v} = \begin{pmatrix} -4 \\2\\-6\end{pmatrix}$
+    \lang{de}{ und }
+    \lang{en}{and}
+    $\vec{w} = \begin{pmatrix} 4 \\-1\\5\end{pmatrix}$\lang{de}{.}
+    \lang{en}{.}\\
+    \lang{de}{Es sind $\vec{u}$ und $\vec{v}$ kollinear (und antiparallel), denn es gilt}
+    \lang{en}{$\vec{u}$ and $\vec{v}$ are (anti)parallel, as}
+	\[(-2)\cdot\vec{u} = \vec{v}.\]
+    \lang{de}{
+    Aber $\vec{u}$ ist nicht kollinear zu $\vec{w}$, denn $\lambda \cdot\vec{u} = \vec{w}$ würde 
+    bedeuten
+    }
+    \lang{en}{
+    However, $\vec{u}$ is not parallel to $\vec{w}$ because $\lambda \cdot\vec{u} = \vec{w}$ would 
+    give us
+    }
+	\[\lambda \cdot \begin{pmatrix} 2 \\-1\\3\end{pmatrix} = \begin{pmatrix} 4 \\-1\\5\end{pmatrix},\]
+    \lang{de}{d.h. die drei Gleichungen}
+    \lang{en}{i.e. that the three equations}
+	\begin{align*}
+		2\lambda & = 4 \\
+		-1\lambda & = -1 \\
+		3\lambda & = 5
+	\end{align*}
+    \lang{de}{
+    müssten alle von demselben $\lambda$ erfüllt sein. Die erste Gleichung liefert jedoch 
+    $\lambda = 2$, die zweite Gleichung $\lambda = 1$ und die dritte Gleichung 
+    $\lambda = \frac{5}{3}$.
+    }
+  	\lang{en}{
+    all need to be satisifed by the same $\lambda$. This cannot however be the case.	The first 
+    equation gives us that $\lambda = 2$, the second that $\lambda = 1$, and the third equation 
+    $\lambda = \frac{5}{3}$.
+    }	
+\end{example}
+
+
+\end{visualizationwrapper}
+
+
+\end{content}

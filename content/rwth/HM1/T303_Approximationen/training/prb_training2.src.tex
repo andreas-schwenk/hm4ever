@@ -1,0 +1,142 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A03: Taylor}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A03: Taylor}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/10407}{Ticket 10407}
+\end{block}
+
+\begin{problem}
+	%\randomquestionpool{}{}
+	
+%######################################################QUESTION_START	
+	\begin{question}	
+	%+++++++++++++++++++VARIABLES++++++++++++++++++++++
+		\begin{variables}
+			\randint[Z]{m}{1}{5}
+			\randint[Z]{b}{1}{4}
+			\randint[Z]{n}{1}{3}
+            \function[calculate]{N}{n+1}
+%			\randint[Z]{n}{2}{3}
+			\randint[Z]{k}{-2}{2}
+            %Entwicklungspunkt und Intervallgrenzen
+			\function[calculate]{a}{m-k}
+            \function[calculate]{c1}{a-1/2}
+            \function[calculate]{c2}{a+1/2}
+			
+			\function{f}{b/(m-x)}
+			
+			%ableitungen
+			\derivative{f1}{f}{x}
+			\derivative{f2}{f1}{x}
+			\derivative{f3}{f2}{x}
+            \derivative{f4}{f3}{x}
+			
+			%substitutionen
+			\substitute[calculate]{fa}{f}{x}{a}
+			\substitute[calculate]{fa1}{f1}{x}{a}
+			\substitute[calculate]{fa2}{f2}{x}{a}
+			\substitute[calculate]{fa3}{f3}{x}{a}
+			
+            %
+            %"Kronecker-deltas" für die Summanden des Taylorpolynoms und Fälle für die Abschätzung des Restglieds
+            \begin{switch}
+                  \begin{case}{n=1}
+                       \function[calculate]{d2}{0}
+			           \function[calculate]{d3}{0}
+                       \substitute[calculate]{M1}{f2}{x}{c1}
+                       \substitute[calculate]{M2}{f2}{x}{c2}
+                       \function[calculate]{M}{(M1+M2+|M1-M2|)/4}
+                       \function[normalize]{rest}{M*|x-a|^2}
+                  \end{case}
+
+                  \begin{case}{n=2}
+                       \function[calculate]{d2}{1}
+			           \function[calculate]{d3}{0}
+                       \substitute[calculate]{M1}{f3}{x}{c1}
+                       \substitute[calculate]{M2}{f3}{x}{c2}
+                       \function[calculate]{M}{(M1+M2+|M1-M2|)/12}
+                       \function[normalize]{rest}{M*(|x-a|^3)}
+                      
+                  \end{case}
+
+                  \begin{default}
+                       \function[calculate]{d2}{1}
+			           \function[calculate]{d3}{1}
+                       \substitute[calculate]{M1}{f4}{x}{c1}
+                       \substitute[calculate]{M2}{f4}{x}{c2}
+                       \function[calculate]{M}{(M1+M2+|M1-M2|)/48}
+                       \function[normalize]{rest}{M*(|x-a|^4)}
+
+                  \end{default}
+            \end{switch}
+			%d-s
+
+			\function[normalize]{p}{fa + (fa1)*(x-a) + (fa2)*(d2/2)*(x-a)^2 + (fa3)*(d3/6)*(x-a)^3}
+			\function{sol}{f-p}
+			
+		\end{variables}
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		\type{input.function} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+		\field{rational} 
+		%\precision{3}
+	%+++++++++++++++++++TITLE++++++++++++++++++++++++++	
+	    \lang{de}{\text{Bestimmen Sie das Restglied zum Taylor-Polynom $\var{n}$-ter Ordnung von $f(x)=\var{f}$ an der Stelle $x_0=\var{a}$.\\
+        Benutzen Sie die Lagrange-Restgliedformel, um eine Abschätzung des Fehlers auf dem  Intervall $(\var{c1};\var{c2})$ mit Hilfe des Abstands zum Entwicklungspunkt anzugeben.\\
+% 	    \\
+%         $\var{f}$, $\var{fa}$\\
+%         $\var{f1}$, $\var{fa1}$\\
+%         $\var{f2}$, $\var{fa2}$\\
+%         $\var{f3}$, $\var{fa3}$\\
+%         $\var{f4}$.
+}}
+	%+++++++++++++++++++ANSWERS++++++++++++++++++++++++    
+	    \begin{answer}
+	    	\text{Das Restglied ist: $R_{\var{n}}(x)= $}
+			\solution{sol}
+			\checkAsFunction{x}{-10}{10}{100} 
+	        
+	    \explanation{Das Taylor-Polynom ist in diesem Fall $T_{\var{n}}(x)=\var{p}$ und das Restglied ist die Differenz der Funktion
+	    und des Taylorpolynoms.}
+        \end{answer}
+        \begin{answer}
+        \text{Der Fehler auf $(\var{c1};\var{c2})$ ist höchstens: $| R_{\var{n}}(x)|\leq$ }
+        \solution{rest}
+        \checkAsFunction{x}{-10}{10}{100}
+        \explanation{Hier muss die Konstante in der Lagrange-Restgliedformel abgeschätzt werden.
+        Bei der Abschätzung der darin auftretenden $\var{N}$-ten Ableitung an einer Zwischenstelle $\xi$ hilft folgende Überlegung:
+        Die Funktion $f$ und alle ihre Ableitungen sind auf $[\var{c1};\var{c2}]$ stetig und monoton.
+Das können Sie benutzen, um Supremum und Infimum der $\var{N}$-ten Ableitung auf $(\var{c1};\var{c2})$ zu erhalten.\\
+Die Fehlerabschätzung hat dann die Form $const.\cdot | x-x_0|^{\var{N}}$.}
+        \end{answer}
+	\end{question}
+%######################################################QUESTION_END
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

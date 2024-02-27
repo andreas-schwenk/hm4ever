@@ -1,0 +1,209 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+ \name{
+  \lang{de}{A13: Lineare Gleichungssysteme}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22338}{Ticket 22338}
+\end{block}
+
+\begin{block}[annotation]
+	Lösen lineare Gleichungssysteme unter Verwendung des Additions- oder des Einsetzungsverfahrens
+\end{block}
+
+\usepackage{mumie.genericproblem}
+
+\lang{de}{
+	\title{A13: Lineare Gleichungssysteme}
+}
+
+\begin{problem}
+
+	\randomquestionpool{1}{3}
+%
+% Q1 - lgs2
+%		
+	\begin{question}
+		\text{Lösen Sie das folgende lineare Gleichungssystems nach einem der bekannten Verfahren.\\
+              \\
+              \begin{displaymath}
+              \begin{mtable}[\cellaligns{crcrcr}]
+                \text{(I)} &\qquad \var{a}x&+&\var{b}y&=&\var{r1}\\
+                \text{(II)}&\qquad        x&-&\var{md}y&=&\var{r2}
+              \end{mtable}
+              \end{displaymath}
+              \\
+            }
+        
+        \explanation{Verwenden Sie das \textit{Einsetzungsverfahren}, indem Sie die Gleichung (I) 
+                    nach $x$ auflösen und anschließend in (II) einsetzen. Alternativ können Sie auch
+                    das \textit{Additionsverfahren} anwenden, indem Sie die Gleichung (II) mit 
+                    $\var{ma}$ multiplizieren und anschließend (I) und (II) addieren.  
+                    In beiden Fällen kommt in der resultierenden Gleichung $x$ nicht mehr vor.
+                    }
+                    
+        \type{input.number}
+       
+        \begin{variables}
+            \randint[Z]{a}{-10}{10}
+            \randint[Z]{b}{0}{10}
+            \randint[Z]{d}{-10}{0}
+            \randadjustIf{a,b,d}{a*d-b=0 OR a*a=1 OR b*b=1 OR d*d=1 OR abs(b)=abs(d)}
+            
+            \function[calculate]{ma}{-a}
+            \function[calculate]{md}{-d}
+            
+            \randint{s}{-5}{5}
+            \randint{t}{-5}{5}
+            
+            \function[calculate]{r1}{a*s+b*t} 
+            \function[calculate]{r2}{s+d*t}
+            
+        \end{variables}
+
+        \begin{answer}
+              \text{$x=$}
+              \solution{s}
+        \end{answer}
+        
+        \begin{answer}
+        	  \text{$y=$}
+              \solution{t} 
+        \end{answer}
+        
+    \end{question}
+%
+% Q2 - lgs2
+%
+	\begin{question}
+    
+		\text{Lösen Sie das folgende lineare Gleichungssystems nach einem der bekannten Verfahren.\\
+              \\
+              \begin{displaymath}
+              \begin{mtable}[\cellaligns{crcrcr}]
+                \text{(I)} &\qquad \var{a}x&-&\var{mb}y&=&\var{r1}\\
+                \text{(II)}&\qquad \var{c}x&+&\var{d}y&=&\var{r2}
+              \end{mtable}
+              \end{displaymath}
+              \\
+            }
+        
+        \explanation{Am einfachsten multiplizieren Sie die Gleichung (I) mit $\var{q}$ und addieren 
+                    anschließend die beiden Gleichungen gemäß dem \textit{Additionsverfahren.} 
+                    In der resultierenden Gleichung kommt dann $y$ nicht mehr vor.
+                    }
+    
+        \type{input.number}
+       
+        \begin{variables}
+            \randint[Z]{a}{-10}{10}
+            \randint[Z]{b}{-5}{0}
+            \randint[Z]{c}{-10}{10}
+            \randint[Z]{q}{2}{3}
+            \randadjustIf{a,b,c,q}{-a*q*b-b*c=0 OR a*a=1 OR c*c=1 OR b*b=1 OR abs(a)=abs(c)}
+            
+            
+            \function[calculate]{mb}{-b}
+            \function[calculate]{d}{-q*b}
+            
+            \randint{s}{-5}{5}
+            \randint{t}{-5}{5}
+            
+            \function[calculate]{r1}{a*s+b*t} 
+            \function[calculate]{r2}{c*s+d*t}
+        \end{variables}
+
+        \begin{answer}
+              \text{$x=$}
+              \solution{s}
+        \end{answer}
+        
+        \begin{answer}
+        	  \text{$y=$}
+              \solution{t} 
+        \end{answer}
+        
+    \end{question}
+%
+% Q3 - lgs3
+%
+	\begin{question}
+		\text{Lösen Sie das folgende lineare Gleichungssystems nach einem der bekannten Verfahren.\\
+        \\
+        \begin{displaymath}
+        \begin{mtable}[\cellaligns{crcrcr}]
+          \text{(I)} &\qquad \var{a}x&+&\var{b}y&=&\var{r1}\\
+          \text{(II)}&\qquad \var{c}x&-&\var{md}y&=&\var{r2}
+        \end{mtable}
+        \end{displaymath}
+        \\
+        }
+        
+        \explanation{Multiplizieren Sie zum Beispiel die Gleichung (I) mit $\var{mc}$ 
+                   und (II) mit $\var{a}$ und addieren Sie anschließend die beiden 
+                   Gleichungen gemäß dem \textit{Additionsverfahren.} 
+                   In der resultierenden Gleichung kommt dann $x$ nicht mehr vor.}
+        
+        \type{input.number}
+       
+        \begin{variables}
+            \randint[Z]{a}{-10}{10}
+            \randint[Z]{b}{0}{10}
+            \randint[Z]{c}{-10}{10}
+            \randint[Z]{d}{-10}{0}
+            
+            \function[calculate]{ma}{-a}
+            \function[calculate]{mc}{-c}
+            \function[calculate]{md}{-d}
+            
+            \function[calculate]{h1}{floor(a/c)-(a/c)}
+            \function[calculate]{h2}{floor(c/a)-(c/a)}
+            \function[calculate]{h3}{floor(b/d)-(b/d)}
+            \function[calculate]{h4}{floor(d/b)-(d/b)}
+ 
+            \randadjustIf{a,b,c,d}{a*d-b*c=0 OR h1=0 OR h2=0 OR h3=0 OR h4=0}
+            
+            \randint{s}{-5}{5}
+            \randint{t}{-5}{5}
+            
+            \function[calculate]{r1}{a*s+b*t} 
+            \function[calculate]{r2}{c*s+d*t}
+        \end{variables}
+
+        \begin{answer}
+              \text{$x=$}
+              \solution{s}
+        \end{answer}
+        
+        \begin{answer}
+        	  \text{$y=$}
+              \solution{t} 
+        \end{answer}
+        
+    \end{question}
+
+%
+%
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

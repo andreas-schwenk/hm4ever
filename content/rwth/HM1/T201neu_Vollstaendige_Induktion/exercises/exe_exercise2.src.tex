@@ -1,0 +1,139 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Ü02: Beweisverfahren}
+    \lang{en}{E02: Proof}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Darstellung von Zahlen als Zweierpotenzen}
+    \lang{en}{}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22128}{Ticket 22128}
+\end{block}
+\usepackage{mumie.ombplus}
+
+\title{
+  \lang{de}{Ü02: Beweis}
+  \lang{en}{E02: Proof}
+}
+
+
+  
+
+
+  \lang{de}{Beweisen Sie, dass für jede beliebige reelle Zahl $x$ die Aussage
+  \[   x>4 \Rightarrow x^2-4x> 0 \]
+  gilt. Finden Sie einen direkten Beweis, einen indirekten und einen Widerspruchsbeweis.
+
+  \textbf{Anmerkung:} Natürlich gibt es keine eindeutige Vorgehensweise für einen Beweis. Die unten
+  angegebenen sind daher nur Beispielbeweise.}
+   
+  \begin{tabs*}[\initialtab{0}\class{exercise}]
+    \tab{
+      \lang{de}{Direkter Beweis}} 
+    
+    \begin{incremental}[\initialsteps{1}]
+      \step 
+      \lang{de}{Hier ist also die Implikation $x>4 \Rightarrow x^2-4x> 0$ direkt zu zeigen, indem man sie
+      in "`kleinere"' Implikationen zerlegt, von denen man weiß, dass sie wahr sind.}
+      
+      \step 
+      \lang{de}{Angenommen $x>4$, dann folgt insbesondere $x>0$. Also können beide Seiten der Ungleichung 
+      mit x multipliziert werden, ohne dass sich das Ungleichheitszeichen umdreht. Daher folgt: 
+      $x\cdot x>4\cdot x$, d.h. $x^2>4x$.}
+      
+      \step
+      \lang{de}{Subtraktion von $4x$ auf beiden Seiten ergibt:}
+      
+      \[ x^2-4x>0.\]
+
+      \lang{de}{\textbf{Anmerkung:} Formal geschrieben hat man also folgende Implikationskette benutzt:}
+      
+      \[ x>4\Rightarrow x>4\wedge x>0\Rightarrow x^2>4x \Rightarrow x^2-4x>0 \]  
+    \end{incremental}
+
+    \tab{
+      \lang{de}{Indirekter Beweis}
+      }
+    
+    \begin{incremental}[\initialsteps{1}]
+      \step 
+      \lang{de}{Für einen indirekten Beweis muss man also die Implikation $\neg (x^2-4x>0) \Rightarrow \neg (x>4)$
+      zeigen. Die Negation von $x^2-4x>0$ ist 
+      $x^2-4x\leq 0$ und die Negation von $x>4$ ist $x\leq 4$. Zu zeigen ist also}
+      \[ x^2-4x\leq 0 \Rightarrow x\leq 4. \]
+
+      \step 
+      \lang{de}{Angenommen es gilt $x^2-4x\leq 0$. Wegen $x^2-4x=x\cdot (x-4)$ bedeutet dies:} 
+      \[ x>4 \wedge x(x-4)\leq 0.\]
+      
+      \step 
+      \lang{de}{Ein Produkt ist aber nur dann $\leq 0$, wenn ein Faktor $0$ ist, oder der eine Faktor positiv 
+      und der andere
+      Faktor negativ ist. Aus der Bedingung $x\cdot (x-4)\leq 0$ folgt also}
+      \[ (x=0 \vee x-4=0) \vee (x>0 \wedge x-4<0) \vee (x<0 \wedge x-4>0). \]
+
+      \step 
+      \lang{de}{Die Bedingung $x<0 \wedge x-4>0$ ist aber unerfüllbar, d.h. immer falsch, also folgt}
+      \[ (x=0 \vee x=4) \vee (x>0 \wedge x<4). \]
+
+      \step 
+      \lang{de}{Sowohl $x=0$, als auch $x=4$, als auch $0<x<4$ implizieren $x\leq 4$. Daher folgt $x\leq 4$, was
+      gerade die Negation von $x>4$ ist.  
+
+      \textbf{Anmerkung:} Formal geschrieben hat man also folgende Äquivalenz-/Implikationskette benutzt:}
+      \begin{eqnarray*} 
+        \neg (x^2-4x>0) &\Leftrightarrow& x^2-4x\leq 0\Leftrightarrow x\cdot (x-4)\leq 0\\ 
+          &\Rightarrow& (x=0 \vee x-4=0) \vee (x>0 \wedge x-4<0) \vee (x<0 \wedge x-4>0)\\
+          &\Leftrightarrow&  (x=0 \vee x-4=0) \vee (x>0 \wedge x-4<0) \vee \text{F}\\
+          &\Leftrightarrow&  (x=0 \vee x=4) \vee (x>0 \wedge x<4)\\
+          &\Rightarrow& x\leq 4\Leftrightarrow \neg (x>4)
+      \end{eqnarray*}
+      
+      \end{incremental}
+      \tab{
+      \lang{de}{Widerspruchsbeweis}
+      }
+
+    \begin{incremental}[\initialsteps{1}]
+      \step 
+      \lang{de}{Für den Widerspruchsbeweis muss man die Annahme $x>4 \wedge \neg (x^2-4x>0)$ zu einem Widerspruch,
+      also einer (offensichtlich) falschen Aussage führen.}
+      
+      \step 
+      \lang{de}{Angenommen $x>4 \wedge x^2-4x\leq 0$. Wegen $x^2-4x=x\cdot (x-4)$ bedeutet dies:} 
+      \[ x>4 \wedge x(x-4)\leq 0\]
+      
+      \step 
+      \lang{de}{Ein Produkt ist aber $\leq 0$, wenn ein Faktor $0$ ist, oder der eine Faktor positiv und der andere
+      Faktor negativ ist. Wegen $x>4$ ist $(x-4)$ positiv. Also folgt aus $x>4$ und $x(x-4)\leq 0$,
+      dass $x\leq 0$ ist.}
+      
+      \step 
+      \lang{de}{$x\leq 0$ steht aber im Widerspruch zur Annahme $x>4$ (denn diese beiden Bedingungen können nicht
+      gleichzeitig erfüllt sein). Oder anders ausgedrückt:
+      Die Bedingung $x>4 \wedge x\leq 0$ ist für jede Zahl $x$ eine falsche Aussage, also ist
+      $x>4 \wedge x\leq 0$ ein Widerspruch.
+
+      \textbf{Anmerkung:} Formal geschrieben hat man also folgende Äquivalenz-/Implikationskette benutzt:}
+      \begin{eqnarray*} 
+        x>4 \wedge \neg (x^2-4x>0) &\Leftrightarrow& x>4 \wedge x^2-4x\leq 0\\ 
+          &\Leftrightarrow& x>4 \wedge x\cdot (x-4)\leq 0\\
+          &\Rightarrow& x>4 \wedge x\leq 0\\
+          &\Leftrightarrow& \text{F}
+      \end{eqnarray*}
+    \end{incremental}
+  \end{tabs*}
+\end{content}

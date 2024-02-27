@@ -1,0 +1,797 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{Geometrische Anschauung}
+   }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \begin{components}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T203_ComplexQuadrants.meta.xml}{T203_ComplexQuadrants}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T203_Circle.meta.xml}{T203_Circle}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T203_PolarCoordinates.meta.xml}{T203_PolarCoordinates}
+\component{generic_image}{content/rwth/HM1/images/g_tkz_T203_ComplexSum.meta.xml}{T203_ComplexSum}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+\component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+\component{generic_image}{content/rwth/HM1/images/g_img_T203_zgleichr.meta.xml}{T203_zgleichr}
+\component{generic_image}{content/rwth/HM1/images/g_img_komplexe-zahlen-quadranten.meta.xml}{komplexe-zahlen-quadranten}
+\component{generic_image}{content/rwth/HM1/images/g_img_komplexe-zahlen-polar.meta.xml}{komplexe-zahlen-polar}
+\component{generic_image}{content/rwth/HM1/images/g_img_vk-vektor-add-vw.meta.xml}{vk-vektor-add-vw}
+\component{generic_image}{content/rwth/HM1/images/g_img_vk-vektor-add-vw-wv.meta.xml}{vk-vektor-add-vw-wv}
+\component{generic_image}{content/rwth/HM1/images/g_img_hm-add-komplex.meta.xml}{hm-add-komplex}
+\component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+\end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T203_komplexe_Zahlen/g_art_content_08bneu_komplexeZahlen_geom.meta.xml}{content_08bneu_komplexeZahlen_geom}
+\link{generic_article}{content/rwth/HM1/T105_Trigonometrische_Funktionen/g_art_content_18_grad_und_bogenmass.meta.xml}{content_18_grad_und_bogenmass}
+\link{generic_article}{content/rwth/HM1/T211_Eigenschaften_stetiger_Funktionen/g_art_content_35_trigonom_funktionen.meta.xml}{content_35_trigonom_funktionen}
+\link{generic_article}{content/rwth/HM1/T105_Trigonometrische_Funktionen/g_art_content_17_trigonometrie_im_dreieck.meta.xml}{content_17_trigonometrie_im_dreieck}
+\end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21563}{Ticket 21563}
+\end{block}
+\begin{block}[annotation]
+Copy of \href{https://team.mumie.net/issues/20694}{Ticket 20694}: content/rwth/HM1/T203_komplexe_Zahlen/art_content_02_komplexeZahlen_geom.src.tex
+\end{block}
+
+\usepackage{mumie.ombplus}
+
+\lang{de}{\title{Geometrische Anschauung}}
+\lang{en}{\title{Geometric interpretation}}
+
+\ombchapter{3}
+\ombarticle{2}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\section{
+\lang{de}{Schreibweise als Zahlenpaare}
+\lang{en}{Complex numbers as ordered pairs}
+}\label{sec:zahlenpaare}
+\lang{de}{
+Die komplexen Zahlen $z\in\C$ bilden mit ihrem Realteil und ihrem Imaginärteil die Punkte der
+Gaußschen Zahlenebene. Die Ebene wird aber genauso durch den $\R^2$ beschrieben.
+Wir können komplexe Zahlen also als Vektoren auffassen: Der Realteil
+wird entlang der x-Achse aufgetragen, der Imaginärteil entlang der y-Achse.
+\\
+Somit kann man sie auch in der Tupel-Schreibweise darstellen:
+\[z=a+bi\hat{=}(a;b)\]
+Damit entspricht auch die Addition der komplexen Zahlen der Vektoraddition:
+\[(a+bi) \ + \ (c+di) = (a+c) + (b+d)i\]
+wird zu
+\[(a,b) + (c,d) = (a+c, b+d).\]
+}
+\lang{en}{
+The complex numbers $z\in\C$ with their real and imaginary parts make up
+the points of the complex plane. However, we can describe the plane equally well as $\R^2$.
+Hence, a complex number can be represented as a vector: its real part is plotted
+on the x-axis and its imaginary part on the y-axis. \\
+This means that complex numbers can be represented in tuple notation:
+\[z=a+bi\hat{=}(a;b)\]
+Addition of complex numbers corresponds to addition of vectors:
+\[(a+bi) \ + \ (c+di) = (a+c) + (b+d)i\]
+becomes
+\[(a,b) + (c,d) = (a+c, b+d).\]
+}
+\begin{center}
+\image{T203_ComplexSum}
+\end{center}
+
+\begin{example}
+    \lang{de}{Im folgenden interaktiven Beispiel können Sie sich die Addition zweier komplexer Zahlen
+     in der Ebene veranschaulichen. Sie können die Zahlen $z$ und $w$ in der Grafik verändern oder 
+     auch darunter eingeben.
+	Es werden dann die entsprechende komplexe Zahl $z+w$ eingezeichnet und deren Komponenten berechnet.}
+   \lang{en}{
+    In the interactive example below, you can visualize the addition of two complex numbers
+    in the plane as a so-called Argand diagram. The numbers $z$ and $w$ can be changed by dragging
+    in the diagram or by entering them below.
+    The corresponding complex number $z+w$ will also be drawn and its components calculated.
+   }
+
+	
+	\begin{genericGWTVisualization}[600][700]{mathlet1}
+      	\lang{de}{\title{Addition}}
+      	\lang{en}{\title{Addition}}
+	
+		\begin{variables}
+			\vector[editable]{v}{real}{2,1}
+			\vector[editable]{w}{real}{-1,1}
+			\vector{vw}{real}{var(v)[x]+var(w)[x],var(v)[y]+var(w)[y]}
+			\affine{mw}{real}{var(v),var(w)}
+			\affine{mz}{real}{var(w),var(v)}
+		\end{variables}
+	
+		% COLOR:
+		\color{v}{#0066CC}
+		\color{w}{#0066CC}
+		\color{mw}{#00CC00}
+		\color{mz}{#00CC00}
+		\color{vw}{#CC6600}
+	
+		%LABEL:
+		\label{v}{@2d[$\textcolor{#0066CC}{z}$]}
+		\label{w}{@2d[$\textcolor{#0066CC}{w}$]}
+		\label{vw}{@2d[$\textcolor{#CC6600}{z+w}$]}
+	
+		%PLOT
+		\begin{canvas}
+			\plot[coordinateSystem]{v,w,mw,mz, vw}
+		\end{canvas}
+		
+      	\lang{de}{\text{Zu den komplexen Zahlen $z = \var{v}[x]+\var{v}[y]i$ 
+      	und $w = \var{w}[x]+\var{w}[y]i$ ist die Summe gegeben durch}}
+       \lang{en}{\text{The sum of the complex numbers $z = \var{v}[x]+\var{v}[y]i$
+       and $w = \var{w}[x]+\var{w}[y]i$ is}}
+      	\lang{de}{\text{$z+ w = \var{vw}[x]+\var{vw}[y]i$.}}
+         \lang{en}{\text{$z+ w = \var{vw}[x]+\var{vw}[y]i$.}}
+	
+	\end{genericGWTVisualization}
+\end{example}
+
+\lang{de}{\\Die Multiplikation der komplexen Zahlen besitzt keine offensichtliche Entsprechung für Vektoren, wir können aber natürlich 
+trotzdem die Regeln für die Multiplikation übertragen: Mit $(a+bi)\cdot(c+di)=(ac-bd)+(bc+ad)i$ ergibt sich für die Multiplikation
+\[(a,b) \cdot (c,d) =(ac-bd;bc+ad).\]
+}
+\lang{en}{\\ Multiplication of complex numbers does not have an
+obvious equivalent for vectors. Of course, we can carry over the rule for multiplying complex numbers
+to tuples: since $(a+bi)\cdot(c+di)=(ac-bd)+(bc+ad)i$, we have
+\[(a,b) \cdot (c,d) =(ac-bd;bc+ad).\]
+}
+
+\section{
+\lang{de}{Betrag}
+\lang{en}{Absolute value}
+}
+\lang{de}{
+Ebenso wie jeder Vektor eine Länge hat, nämlich seinen Betrag, ordnen wir auch jeder komplexen Zahl
+ihre \glqq Länge\grqq zu:
+}
+\lang{en}{
+Just as every vector has a length, namely its magnitude, we define
+the "length" of any complex number:
+}
+
+\begin{definition}[
+\lang{de}{Betrag}
+\lang{en}{Absolute value}]\label{betragkz}\label{def:betragkz}
+
+\lang{de}{Der \notion{(Absolut-)Betrag} einer komplexen Zahl $z=a+bi$ ist die (euklidische) Entfernung 
+des Punktes in der Zahlenebene zum Ursprung. Mit dem Satz des Pythagoras ergibt sich
+\[{|z|}=\sqrt{a^2+b^2}.\]
+Für reelle Zahlen stimmt der komplexe Absolutbetrag mit dem reellen Absolutbetrag überein.
+}
+\lang{en}{
+The \notion{absolute value} of a complex number $z=a+bi$ is the (Euclidean) distance
+from the origin of the corresponding point in the complex plane.
+Using the Pythagorean theorem, we obtain
+\[{|z|}=\sqrt{a^2+b^2}.\]
+For real numbers, the complex absolute value agrees with the real absolute value.
+}
+\end{definition}
+
+\begin{example}
+\begin{eqnarray*}
+  |3+4i| &=& \sqrt{3^2+4^2}=\sqrt{25}=5, \\
+  |2-i| &=& \sqrt{2^2+(-1)^2}=\sqrt{5}, \\
+  |i|  &=&  \sqrt{0^2+1^2}=1, \\
+  |-5| &=& \sqrt{(-5)^2+0^2}=\sqrt{5^2}=5.
+\end{eqnarray*}
+\end{example}
+
+
+\begin{rule}\label{rule:betragsregeln}
+\lang{de}{
+Der Betrag hat die folgenden Eigenschaften für alle $z,w\in\C$:
+}
+\lang{en}{
+The absolute value has the following properties for all $z,w\in \C$:
+}
+\begin{enumerate}
+\item
+\lang{de}{
+$\ |z|\geq 0$ und es gilt $|z|=0 \Leftrightarrow z=0$,
+}
+\lang{en}{
+$\ |z|\geq 0$ and $|z|=0 \Leftrightarrow z=0$,
+}
+\item
+ $ \ $ \lang{de}{es gelten die Dreiecksungleichungen} \lang{en}{The triangle inequalities hold:}\\
+ $ \ |z+w|\leq |z|+|w|\quad\text{ \lang{de}{und}\lang{en}{and} }\quad \big| {|z|-|w|}\big| \leq |z-w|$,
+ \item
+$ \ |z\cdot w|=|z|\cdot|w|$,
+\item
+$ \ |z|^2=z\cdot \bar{z}$.
+\end{enumerate}
+\end{rule}
+
+\begin{proof*}
+
+\begin{incremental}{0}
+\step
+\lang{de}{
+Regel 1. Teil\\
+Mit $z=a+bi$ ist $|z|=\sqrt{a^2+b^2}\geq0$ und \\
+$|z|=0\Leftrightarrow a^2+b^2=0\Leftrightarrow a=b=0 
+\Leftrightarrow z=0$ }
+\lang{en}{
+Part 1:\\
+If $z=a+bi$, then $|z|=\sqrt{a^2+b^2}\geq0$ and \\
+$|z|=0\Leftrightarrow a^2+b^2=0\Leftrightarrow a=b=0 
+\Leftrightarrow z=0$ }
+\step
+\lang{de}{
+Regel 2. Teil}
+\lang{en}{
+Part 2:}
+\begin{enumerate}
+\item[(i)]
+\lang{de}{zu zeigen: $|z+w|\leq |z|+|w|$\\
+Da Beträge nicht-negativ sind, sind Quadrieren und Wurzelziehen der Ungleichung 
+Äquivalenzumformungen, denn bei positiven Zahlen gibt es genau eine positive Wurzel und das Zeichen $\leq$ ändert sich auch nicht
+(weil Quadrieren und Wurzelziehen streng monoton steigende Funktionen sind). So können wir die Ungleichung direkt nachrechnen:}
+\lang{en}{
+We want to show that $|z+w| \leq |z|+|w|$.\\
+Since absolute values are nonnegative, we can take squares and square roots
+without changing the inequality: positive numbers have exactly one
+positive root, and the sign $\leq$ also remains unchanged
+(as the square and square root are strictly monotonically
+increasing functions).
+}
+\begin{eqnarray*}
+|z+w|^2&=&(z+w)\cdot(\bar{z+w})=(z+w)\cdot(\bar{z}+\bar{w})\\
+&=&z\bar{z}+z\bar{w}+w\bar{z}+w\bar{w}\\
+&=&|z|^2+z\bar{w}+\bar{z\bar{w}}+|w|^2\\
+&=&|z|^2+2\Re(z\bar{w})+|w|^2\\
+&\leq&|z|^2+2|z\bar{w}|+|w|^2\\
+&=&|z|^2+2|z||w|+|w|^2\\
+&=&(|z|+|w|)^2
+\end{eqnarray*}
+\item[(ii)]
+\lang{de}{zu zeigen: $\big| {|z|-|w|}\big| \leq |z-w|$\\
+Es gilt: }
+\lang{en}{
+We want to show that $\big| {|z|-|w|}\big| \leq |z-w|$.\\
+We have:
+}
+\begin{eqnarray*}
+|z|=|(z-w)+w|&\leq&|z-w|+|w|\\
+ \Leftrightarrow \quad\quad\quad\quad |z|-|w|&\leq&|z-w|
+\end{eqnarray*}
+\lang{de}{Genauso wird mit vertauschten Rollen von $z$ und $w$ }
+\lang{en}{Similarly, after swapping the roles of $z$ and $w$,}
+\begin{eqnarray*}
+|w|-|z|&\leq&|w-z|\\
+\Leftrightarrow \quad -(|z|-|w|)&\leq&|z-w|\lang{en}{.}
+\end{eqnarray*}
+\lang{de}{gezeigt. Die beiden letzten Ungleichungen $|z|-|w|\leq|z-w|$ und $-(|z|-|w|)\leq|z-w|$
+ lassen sich dann zusammenfassen als $\big| {|z|-|w|}\big| \leq |z-w|$.
+ }
+ \lang{en}{
+The two inequalities $|z|-|w|\leq|z-w|$ and $-(|z|-|w|)\leq|z-w|$
+can be combined to $\big| {|z|-|w|}\big| \leq |z-w|$.
+ }
+%\item[(iii)]
+%Gleichheit gilt natürlich, wenn entweder $z=0$ oder $w=0$. Sind beide Zahlen aber von 0 verschieden,
+%so folgt aus (i), dass $\Re(z\bar{w})=|z\bar{w}|$ gelten muss.\\
+%Realteil und Betrag sind aber nur gleich, falls $z\bar{w}\in\R$, sogar $\in\R>0$, da der 
+%Betrag nicht negativ ist. Also gilt:\\
+%$\frac{z\cdot\bar{w}}{w\cdot\bar{w}}>0\iff\frac{z}{w}>0\iff 
+%\frac{z}{w}=\frac{1}{\lambda}$ mit $\lambda\in\R>0 \iff w=\lambda z$ 
+\end{enumerate}
+\step
+\lang{de}{Regel 3. Teil\\
+Mit $z=a+bi$ und $w=c+di$ ist }
+\lang{en}{
+Part 3. \\
+If $z=a+bi$ and $w=c+di$, then
+}
+\begin{eqnarray*}
+|z\cdot w|&=&|(a+bi)(c+di)|=\big|(ac-bd)+(ad+bc)i\big|\\
+&=&\sqrt{(ac-bd)^2+(ad+bc)^2}\\
+&=&\sqrt{(ac)^2-2abcd+(bd)^2+(ad)^2+2abcd+(bc)^2}\\
+&=&\sqrt{a^2c^2+b^2d^2+a^2d^2+b^2c^2}\\
+&=&\sqrt{a^2c^2+a^2d^2+b^2c^2+b^2d^2}\\
+&=&\sqrt{(a^2+b^2)\cdot (c^2+d^2)}\\
+&=&|z|\cdot|w|.
+\end{eqnarray*}
+\step
+\lang{de}{Regel 4. Teil\\
+Und mit $z=a+bi$ und $\bar{z}=a-bi$ ist}
+\lang{en}{
+Part 4. \\
+If $z=a+bi$ and $\bar{z}=a-bi$, then
+}
+\begin{eqnarray*}
+z\cdot \bar{z}&=&(a+bi)(a-bi)\\
+&=&a^2-(bi)^2\\
+&=&a^2+b^2\\
+&=&|z|^2.
+\end{eqnarray*}
+\end{incremental}
+\end{proof*}
+
+\lang{de}{
+Das folgende Video erläutert den bisherigen Sachverhalt zum \ref[content_08bneu_komplexeZahlen_geom][Betrag]{betragkz} komplexer Zahlen anhand kurzer Beispiele. 
+Beachten Sie das die imaginäre Einheit $i$ im Video durch $j$ repräsentiert wird:
+%\begin{center}
+%\href{https://www.hm-kompakt.de/video?watch=205}{\image[75]{00_Videobutton_schwarz}}
+%\end{center}
+\floatright{\href{https://www.hm-kompakt.de/video?watch=205}{\image[75]{00_Videobutton_schwarz}}}
+}
+\\
+\\
+
+
+\begin{quickcheck}
+\field{rational}
+\type{input.function}
+\begin{variables}
+    \randint{a}{1}{3}
+    \randint[Z]{b}{4}{6}
+    \function[expand, normalize]{z}{a+b*i}
+    \function[expand, normalize]{zquer}{a-b*i}
+    \function[expand, normalize]{zabs2}{a^2+b^2}
+    \function[expand, normalize]{zabs2_}{a^2+b^2}
+    \function[expand, normalize]{zinv}{(a-b*i)/(a^2+b^2)}
+\end{variables}
+\lang{de}{
+\text{Betrachten Sie die Zahl $z=\var{z}$ und bestimmen Sie:\\
+$\Re(z)=$\ansref, $\Im(z)=$\ansref, $\bar{z}$=\ansref. \\
+Mit Hilfe der 3. binomischen Formel 
+können Sie zügig $z\cdot\bar{z}=$\ansref berechnen.\\
+Berechnen Sie nun mit dem Satz des Pythagoras das Quadrat des Betrages: $|z|^2=$\ansref.\\
+Berechnen Sie als Letztes: $z^{-1}=$\ansref.
+}
+}
+\lang{en}{
+\text{Consider the number $z=\var{z}$. Determine
+$\Re(z)=$\ansref, $\Im(z)=$\ansref, $\bar{z}$=\ansref. \\
+Use the 3rd binomial formula to quickly find $z\cdot\bar{z}=$\ansref.\\
+Then use the Pythagorean theorem to determine the square of the absolute value: $|z|^2=$\ansref.\\
+Finally, determine $z^{-1}=$\ansref.
+}
+}
+\begin{answer}
+    \solution{a}
+\end{answer}
+\begin{answer}
+    \solution{b}
+\end{answer}
+\begin{answer}
+    \solution{zquer}
+\end{answer}
+\begin{answer}
+    \solution{zabs2}
+\end{answer}
+\begin{answer}
+    \solution{zabs2_}
+\end{answer}
+\begin{answer}
+    \solution{zinv}
+\end{answer}
+\end{quickcheck}
+
+\lang{de}{
+Die folgenden Eigenschaften sind wichtig, wenn man allgemein mit komplexen Zahlen rechnet, bei denen 
+man Real- und Imaginärteil nicht explizit angeben kann oder will, zum Beispiel wenn man mit Variablen rechnet, die komplexe Werte annehmen können.
+}
+\lang{en}{
+The following properties are useful for working with complex numbers
+for which the real and imaginary parts are not given explicitly.
+For example, this includes working with variables that can take 
+complex values.
+}
+
+
+\begin{rule}
+\lang{de}{
+Für komplexe Zahlen $z,w\in \C$ gelten:
+}
+\lang{en}{
+For complex numbers $z,w\in \C$,
+}
+\begin{enumerate}
+\item $ \ \Re (\bar{z})=\Re(z) \ $ \lang{de}{und} \lang{en}{and} $ \ \Im(\bar{z})= - \Im(z)$,
+\item $ \ \Re(z)=\frac{1}{2}(z+\bar{z}) \ $ \lang{de}{und} \lang{en}{and} $ \ \Im(z)=\frac{1}{2i}(z-\bar{z})$,
+\item $ \ \bar{z+w}=\bar{z}+\bar{w} \ $ \lang{de}{und} \lang{en}{and} $ \ \bar{z\cdot w}=\bar{z}\cdot \bar{w}$, \lang{de}{sowie} \lang{en}{and} $\overline{\bar{z}}=z \ $ \lang{de}{und} \lang{en}{and} 
+$ \ \bar{z}^{-1}=\bar{z^{-1}}$ \lang{de}{für} \lang{en}{if} $z\neq 0$,
+\item $ \ z=\bar{z} \ \Leftrightarrow \ \Im(z)=0 \ \Leftrightarrow \ z\in \R$,
+\item $ \ z\cdot \bar{z}\in \R_{\geq 0}$.
+\end{enumerate}
+\end{rule}
+
+\begin{proof*}
+\lang{de}{
+Die aufgeführten Eigenschaften lassen sich mit Hilfe der Definitionen leicht nachrechnen.
+}
+\lang{en}{
+The properties listed above are easy to check using the definitions.
+}
+\begin{incremental}{0}
+\step
+\lang{de}{Für $z=x+yi$ mit $x,y\in \R$ ist ja $\bar{z}=x-yi=x+(-y)i$ und daher
+\[ \Re(\bar{z})=x=\Re(z), \quad \text{sowie}\quad \Im(\bar{z})= -y= - \Im(z).\]
+}
+\lang{en}{
+If $z=x+iy$ with $x,y\in \R$, then $\bar{z}=x-iy=x+i(-y)$ and therefore
+\[ \Re(\bar{z})=x=\Re(z) \quad \text{and}\quad \Im(\bar{z})= -y= - \Im(z).\]
+}
+
+\step
+\lang{de}{
+Weiter ist:}
+\lang{en}{Also,}
+\begin{eqnarray*} \frac{1}{2}(z+\bar{z}) &=& \frac{1}{2}(x+yi+x-yi)=\frac{1}{2}(2x)=x=\Re(z) \quad
+\text{\lang{de}{und}\lang{en}{and}} \\
+\frac{1}{2i}(z-\bar{z}) &=& \frac{1}{2i}\big(x+yi-(x-yi)\big)=\frac{1}{2i}(2yi)=y=\Im(z).
+\end{eqnarray*}
+\lang{de}{Ähnlich erhält man auch die anderen Eigenschaften.}
+\lang{en}{The other properties are proved similarly.}
+
+\end{incremental}
+\end{proof*}
+
+\lang{de}{
+Die bisher angesprochenen Themen werden im folgenden Video nochmal erläutert:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10824&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+}
+
+\section{
+\lang{de}{Polarkoordinaten}
+\lang{en}{Polar coordinates}}\label{sec:polar}
+
+\lang{de}{
+Ein Punkt $z=a+bi\in\C\setminus\{0\}$ der komplexen Ebene wird eindeutig festgelegt durch seine Länge $|z|=r$ zusammen mit
+seinem Winkel $\phi\in (- \pi;\pi]$. Der Winkel $\phi$ heißt das \notion{Argument} $\phi=\arg(z)$ von $z$. 
+$\phi$ wird im \ref[content_18_grad_und_bogenmass][Bogenmaß]{winkelmasse} angegeben!
+}
+
+\lang{en}{
+Points $z=a+bi\in\C\setminus\{0\}$ in the complex plane are uniquely
+determined by their magnitude $|z|=r$ and their
+angle $\phi \in (-\pi,\pi]$. The angle $\phi$ is called the \notion{argument} $\phi=\arg(z)$ of $z$.
+$\phi$ is measured in \ref[content_18_grad_und_bogenmass][radians]{winkelmasse}!
+}
+
+\begin{figure}
+\image{T203_PolarCoordinates}
+\caption{
+  \lang{de}{Komplexe Zahlen als Vektoren in der Gaußschen
+  Zahlenebene}
+  \lang{en}{Complex numbers as vectors in the complex plane}
+  \label{fig:Komplexe-Zahlen-als-Zeiger}}
+\end{figure}
+
+\lang{de}{
+Aus den Definitionen der \ref[content_17_trigonometrie_im_dreieck][trigonometrischen Funktionen]{sinus} folgt, dass 
+\[ \cos(\phi)=\frac{a}{r} \ \text{  und  } \sin(\phi)=\frac{b}{r} \ \text{  und  } \tan(\phi)=\frac{b}{a}.\]
+}
+\lang{en}{
+By definition of the \ref[content_17_trigonometrie_im_dreieck][trigonometric functions]{sinus},
+\[ \cos(\phi)=\frac{a}{r} \ \text{  and  } \sin(\phi)=\frac{b}{r} \ \text{  and  } \tan(\phi)=\frac{b}{a}.\]
+}
+
+
+\begin{example}
+\lang{de}{Es sei $z=i$. Dann ist die Länge $r=|z|=\sqrt{0^2+1^2}=1$ und das Argument $\arg(z)=\phi=\frac{\pi}{2}$.
+}
+\lang{en}{
+For $z=i$, the magnitude is $r=|z|=\sqrt{0^2+1^2}=1$ and the
+argument is $\arg(z)=\phi=\frac{\pi}{2}$.
+}
+\end{example}
+
+\begin{example}
+\lang{de}{
+Gesucht sind die Zahlen $z\in\C$, die zum Koordinatenursprung einen festen Abstand $r>0$ haben: $|z|=r$. Das sind alle Zahlen 
+$z$ auf der Kreislinie um den Ursprung mit dem Radius $r$. (Für das Argument $\phi$ ergibt sich keine Einschränkung.)
+}
+\lang{en}{
+Suppose we want to find the numbers $z\in\C$ that are at a fixed distance $r>0$
+from the origin: $|z|=r$. These are the numbers on the circle of radius $r$ centered
+at the origin. (There is no restriction on the argument $\phi$.)
+}
+\begin{enumerate}
+\item \lang{de}{Schwarzer Kreis: $|z|=r=3$.} \lang{en}{Black circle: $|z|=r=3$.}
+\item \lang{de}{\textcolor{#0066CC}{Blauer Kreis mit Verschiebung des Kreismittelpunktes: $|z-(2+i)|=r=3$.}}
+\lang{en}{\textcolor{#0066CC}{Blue circle with its center shifted: $|z-(2+i)|=r=3$.}}
+\end{enumerate}
+\begin{center}
+\image{T203_Circle}
+\end{center}
+\end{example}
+
+\lang{de}{
+Der Vektor, der zur komplexen Zahl $z=a+bi\neq 0$ gehört, schließt mit der positiven reellen
+Achse einen Winkel $\varphi$ ein, den wir \notion{Argument} genannt haben und dessen Wert  
+\begin{equation*}
+  -\pi < \varphi=\arg(z)  \le \pi \label{eq:hauptwertebereich}
+\end{equation*}
+erfüllt. Das Argument der komplexen Zahl $0$ ist nicht definiert, denn jeder Winkel $\varphi$ wäre möglich.
+}
+\lang{en}{
+The vector that corresponds to the complex number $z=a+ib\neq 0$
+and the positive real axis form an angle $\phi$ that we called the
+\notion{argument}. Its value satisfies
+\begin{equation*}
+  -\pi < \varphi=\arg(z)  \le \pi. \label{eq:hauptwertebereich}
+\end{equation*}
+The argument of the complex $0$ is undefined because every angle $\phi$ would work.
+}
+
+\lang{de}{
+Mit dieser Definition des Arguments hat man die Wahl getroffen, den \notion{Phasenwinkel} 
+(möglichst) symmetrisch zur reellen Achse zu definieren. 
+ Dies ist die   meistens in der Technik getroffene Wahl, ebenso wie in der Mathematik, 
+ wo sie z.\,B. bei der Definition des komplexen Logarithmus verwendet wird. 
+ Grundsätzlich sind aber andere Phasenbereiche möglich und gebräuchlich, beispielsweise $[0;2\pi)$.
+ }
+\lang{en}{
+This definition of the argument is chosen such that the
+\notion{phase angle} is as symmetric as possible with respect
+to the real axis. This is the most common convention in engineering.
+It is also standard in mathematics, where it appears
+in the definition of the complex logarithm (for example).
+Other phase ranges, such as $[0,2\pi)$, can be and are used as well, however.
+}
+ 
+ %Kathrin Das Folgende finde ich unglücklich, denn eigentlich müsste man erstmal die Quadranten ordentlich definieren. 
+ %Und genau auf der reellen Halbachse, die man dabei zuordnen muss, ist der Sprung unlogisch verteilt...
+% Ich weiß nicht, weshalb Volker Bach die Quadraten hier gebracht hat, ohne weiter daruaf einzugehen, 
+%was dort für die Vorzeichen von Real- und Imaginärteil gilt. da fände ich es sinnvoller. 
+% Ich würde sogar dafür pädieren, die Quadranten ganz raus zu lassen -- nur habe ich in meinem Intensiv-Kurs gemerkt, 
+%dass die Teilnehmer mit dem Begriff Quadrant nichts anfangen konnten. Ich habe den in der siebten Klass gelernt.
+ \lang{de}{Im ersten und zweiten Quadranten ist der Phasenwinkel dabei positiv (oder gleich $0$),
+d.\,h. $0 \le \varphi \le \pi$. 
+Im dritten und vierten Quadranten ist er negativ, also $-\pi < \varphi < 0$.
+}
+\lang{en}{
+In the first and second quadrants, the phase angle is positive (or $0$),
+i.e. $0 \le \phi \le \pi$.
+It is negative in the third and fourth quadrants, i.e. $-\pi < \phi < 0$.
+}
+\begin{figure}
+  \image{T203_ComplexQuadrants}
+  \caption{
+  \label{fig:Hauptwertebereich-des-Phasenwink}}
+\end{figure}
+
+\lang{de}{
+Ist die komplexe Zahl $z=a+bi$ gegeben, erhält man das Argument folgendermaßen:
+}
+\lang{en}{
+For a given complex number $z=a+bi$, the argument is obtained as follows.
+}
+
+\begin{rule}
+\lang{de}{
+Für eine komplexe Zahl $z=(a;b)=a+bi\in \C\setminus \{0\}$ mit $a,b\in \R$ ist
+das Argument $\varphi = \arg(z)$ diejenige reelle Zahl $\varphi\in (-\pi;\pi]$, für welche
+\[   \cos(\varphi)= \frac{a}{\sqrt{a^2+b^2}} \quad \text{und}\quad \sin(\varphi)= \frac{b}{\sqrt{a^2+b^2}} \]
+gilt.
+}
+\lang{en}{
+Let $z=(a,b)=a+bi \in \C\setminus\{0\}$ with $a,b \in \R$.
+The argument $\phi=\arg(z)$ is the real number $\phi\in (-\pi,\pi]$
+that satisfies
+\[   \cos(\varphi)= \frac{a}{\sqrt{a^2+b^2}} \quad \text{and}\quad \sin(\varphi)= \frac{b}{\sqrt{a^2+b^2}}. \]
+}
+
+\lang{de}{
+Die komplexe Zahl $z=a+bi$ lässt sich dann auch in der sogenannten \notion{Polardarstellung} schreiben als
+\[  z=r\left(\cos(\varphi)+i\sin(\varphi)\right), \]
+wobei $r=|z|=\sqrt{a^2+b^2}$ der Betrag von $z$ ist.
+}
+\lang{en}{
+The complex number $z=a+bi$ can then be written in its
+\notion{polar representation},
+\[  z=r\left(\cos(\phi)+i\sin(\phi)\right), \]
+where $r=|z|=\sqrt{a^2+b^2}$ is the absolute value of $z$.
+}
+\end{rule}  
+
+\begin{remark}
+\begin{enumerate}
+\item[i)]
+\lang{de}{
+Das Argument $\varphi$ ist bis auf das Vorzeichen sogar schon durch $\cos(\varphi)= \frac{a}{\sqrt{a^2+b^2}}$
+bestimmt. Falls $b\neq 0$, so ist das Vorzeichen von $\varphi$ gleich dem Vorzeichen von $b$.\\
+}
+\lang{en}{
+Up to sign, the argument $\phi$ is already determined by
+$\cos(\phi)= \frac{a}{\sqrt{a^2+b^2}}$.
+If $b \ne 0$, then the sign of $\phi$ equals the sign of $b$.
+}
+\lang{de}{
+Für $b=0$ (und $a\neq 0)$ ist die Zahl reell und daher $\varphi=0$, falls $a>0,$ bzw.
+$\varphi=\pi$, falls $a<0$. Letzteres erhält man auch aus 
+\[ \cos(\varphi)= \frac{a}{|a|}= \begin{cases} 1, & \text{ falls }a>0, \\ -1, & \text{ falls }a<0,\end{cases} \]
+und der Einschränkung von $\varphi$ auf den Bereich $(-\pi;\pi]$.
+}
+\lang{en}{
+If $b=0$ (and $a\neq 0$), then the number is real. Hence, $\phi=0$
+if $a>0$ and $\phi=\pi$ if $a<0$. This also follows from
+\[ \cos(\phi)= \frac{a}{|a|}= \begin{cases} 1, & \text{ if }a>0, \\ -1, & \text{ if }a<0,\end{cases} \]
+and the fact that $\phi$ is restricted to the range $(-\pi,\pi]$.
+}
+\item[ii)]
+\lang{de}{
+Eine oft genutzte Möglichkeit, bequeme $\phi=$arg(z) zu berechnen, fußt auf der Gleichung:
+\[\tan\phi=\frac{b}{a}\] 
+}
+\lang{en}{
+One commonly used method to compute $\phi=\arg(z)$ conveniently
+is based on the equation \[\tan\phi=\frac{b}{a}.\] 
+}
+\lang{de}{
+Die \ref[content_35_trigonom_funktionen][Arkusfunktionen]{arcus.funktionen} tauchen erst in einem späteren Kapitel auf. Es ist hier ausreichend zu wissen, dass
+$\arctan(x)\in\left(-\frac{\pi}{2};+\frac{\pi}{2}\right)$. Da aber $\phi\in(-\pi;\pi]$, muss je nach Quadrant
+der Winkel "von Hand" berechnet werden zu:\\
+$\phi=\arg(z)=\begin{cases}
+\arctan\frac{b}{a},& a>0\\
+\arctan\frac{b}{a}-\pi,&a<0, b<0\\
+\arctan\frac{b}{a}+\pi,&a<0,b>0\\
+\frac{\pi}{2},&a=0, b>0\\
+-\frac{\pi}{2},&a=0,b<0.
+\end{cases}$
+}
+\lang{en}{
+The \ref[content_35_trigonom_funktionen][inverse trigonometric functions]{arcus.funktionen}
+will be introduced in a later chapter. Here, it is enough to know that
+$\arctan(x)\in\left(-\frac{\pi}{2},+\frac{\pi}{2}\right)$. However,
+since $\phi\in(-\pi,\pi]$, the angle must be computed "by hand"
+depending on the quadrant as follows:\\
+$\phi=\arg(z)=\begin{cases}
+\arctan\frac{b}{a},& a>0\\
+\arctan\frac{b}{a}-\pi,&a<0, b<0\\
+\arctan\frac{b}{a}+\pi,&a<0,b>0\\
+\frac{\pi}{2},&a=0, b>0\\
+-\frac{\pi}{2},&a=0,b<0.
+\end{cases}$
+}
+\end{enumerate}
+\end{remark}
+
+
+\begin{example}
+	\begin{genericGWTVisualization}[550][800]{mathlet1}
+		\begin{variables}
+			\point{A}{rational}{0,0}
+			\point[editable]{z}{rational}{2,3}
+%			\point{C}{rational}{1,0}
+			\number{s}{rational}{1+sign(var(z)[y])-sign(var(z)[y])^2}  %1 für var(z)[y]>=0, -1 sonst.
+			\segment{oz}{rational}{var(A),var(z)}
+			\number{betz2}{rational}{(var(z)[x])^2+(var(z)[y])^2}
+			\number{betz}{real}{sqrt(var(betz2))}
+			\number{sqbetz2}{operation}{sqrt((var(z)[x])^2+(var(z)[y])^2)}
+			\number{argu}{real}{var(s)*arccos(var(z)[x]/var(betz))}
+			\number{ug}{real}{(var(argu)-abs(var(argu)) )/2}   % min(var(argu),0)
+			\number{og}{real}{(var(argu)+abs(var(argu)) )/2}   % max(var(argu),0)
+			\angle{win}{real}{var(A), 0.7, var(ug), var(og)}
+			%\number{al}{real}{(arcsin(var(p2))-arcsin(var(p1)))*180/pi}
+			
+		\end{variables}
+
+
+		\color{A}{#0066CC}
+%		\label{A}{$\textcolor{BLUE}{A}$}
+		\color{z}{#CC6600}
+		\label{z}{$\textcolor{#CC6600}{z}$}
+		\color{oz}{#CC6600}
+		\label{oz}{$\textcolor{#CC6600}{|z|=\var{sqbetz2}}$}
+		\label{win}{$\phantom{xxx}\varphi$}
+
+		\begin{canvas}
+			\updateOnDrag[false]
+			\plotSize{400}
+			\plotLeft{-4}
+			\plotRight{4}
+			\plot[coordinateSystem]{A,z,oz,win}
+		\end{canvas}
+    \lang{de}{
+		\text{Für $z=\var{z}[x]+\var{z}[y]i$ ist $|z|=\var{sqbetz2}
+		\approx 
+		\var{betz}$ und $\varphi=\arg(z)\approx \var{argu}$.}
+    }
+    \lang{en}{
+    \text{If $z=\var{z}[x]+i\var{z}[y]$, then 
+    $|z|=\var{sqbetz2}
+		\approx 
+		\var{betz}$
+    and  $\phi=\arg(z)\approx \var{argu}$.}
+    }
+	    	\end{genericGWTVisualization}
+\end{example}            
+\end{visualizationwrapper}
+
+\begin{quickcheck}
+\field{real}
+\type{input.function}
+    \begin{variables}
+         \function{r}{1}
+         \function{phi}{pi}
+         \function{wurz}{(-1)^2+0^2}
+    \end{variables}
+    \lang{de}{
+    \text{Stellen Sie die Zahl $z=-1$ in Polarkoordinaten dar:\\
+    $\phi=$\ansref und $r=$\ansref
+    }
+    }
+    \lang{en}{
+    Express the number $z=-1$ in polar coordinates:\\
+    $\phi=$\ansref and $r=$\ansref
+    }
+    \begin{answer}
+        \solution{phi}
+    \end{answer}
+    \begin{answer}
+        \solution{r}
+    \end{answer}
+    \lang{de}{
+    \explanation{$r=\sqrt{\var{wurz}}=1$ und $\phi=\pi$, da $-\pi$ nicht im 
+    Wertebereich der Winkel liegt.}   
+    }
+    \lang{en}{
+    \explanation{$r=\sqrt{\var{wurz}}=1$ and $\phi=\pi$, because
+    $-\pi$ does not lie in the range of the argument.}
+    }
+\end{quickcheck}
+
+\begin{quickcheck}
+\field{real}
+\type{input.number}
+    \displayprecision{3}
+    \begin{variables}
+         \randint{a}{1}{4}
+         \randint{b}{1}{4}
+         \function[expand,normalize]{z}{a+b*i}
+         \function[calculate,3]{r}{sqrt(a^2+b^2)}
+         \function[calculate,3]{phi}{arctan(b/a)}
+         \function{wurz}{a^2+b^2}
+    \end{variables}
+    \lang{de}{
+    \text{Stellen Sie die Zahl $z=\var{z}$ in Polarkoordinaten dar. Runden Sie bitte 
+    auf 3 Nachkommastellen (eine 5 muss aufgerundet werden).\\
+    $\phi=$\ansref und $r=$\ansref
+    }
+    }
+    \lang{en}{
+    \text{Express the number $z=\var{z}$ in polar coordinates.
+    Round your answer to three decimal places. (5 should be rounded up.)\\
+    $\phi=$\ansref and $r=$\ansref
+    }
+    }
+    \begin{answer}
+        \solution{phi}
+    \end{answer}
+    \begin{answer}
+        \solution{r}
+    \end{answer}
+\explanation{$r=\sqrt{\var{wurz}}$ und $\tan(\phi)=\frac{\var{b}}{\var{a}}$.
+    }    
+\end{quickcheck}
+
+\lang{de}{
+Polarkoordinaten sind im folgenden Video nochmals zusammengefasst:
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10825&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+}
+\end{content}
+

@@ -1,0 +1,40 @@
+%This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)
+%https://creativecommons.org/licenses/by/4.0/legalcode
+\documentclass[rgb]{standalone}
+\usepackage{tkz-euclide}
+\definecolor{myorange}{hsb}{0.0833, 1, 0.8}
+\definecolor{mygreen}{hsb}{0.3333, 1, 0.8}
+\definecolor{myblue}{hsb}{0.5833, 1, 0.8}
+\definecolor{mymagenta}{hsb}{0.8333, 1, 0.8}
+\begin{document}
+	\begin{tikzpicture}[scale=1.5, font=\Large]
+		% Coordinate system
+		\tkzInit[xmin=-3,xmax=3,ymin=-3,ymax=3]
+		\tkzGrid[color=lightgray]
+		\tkzDrawX[thick]
+		\tkzDrawY[thick]
+		\tkzDefPoint(0,0){A}
+		\tkzDefPoint(2*cos(2*pi/9),0){B}
+		\tkzDefPoint(2*cos(2*pi/9),2*sin(2*pi/9)){C}
+		\draw[mygreen,fill,fill opacity=0.1] (0,0) -- (0.75,0) arc (0:40:0.75);
+		\draw[very thick, gray] (0,0) circle (2cm);
+		\draw[very thick, myblue] (A) -- (B) --(C) -- cycle; 
+		\node[very thick, draw, myblue,circle,fill,inner sep=2] at (A) {};	
+		\node[very thick, draw, myblue,circle,fill,inner sep=2] at (B) {};	
+		\node[very thick, draw, myblue,circle,fill,inner sep=2] at (C) {};	
+		% Labels
+		\node[myblue,below left=-0.5mm] at (A){$A$};
+		\node[myblue,below right=-0.5mm] at (B){$B$};
+		\node[myblue,above right=-0.5mm] at (C){$C=(c ;a)$};
+		\node[below,myblue] at ({cos(40)},0){$c$};
+		\node[right,myblue] at ({2*cos(40)},{sin(40)}){$a$};
+		\node[above,myblue, rotate=40] at ({cos(40)},{sin(40)}){$b=1$};
+		\node[below=0.5mm] at (2,0){$1$};
+		\node[below=0.5mm] at (-2,0){$-1$};
+		\node[left=0.5mm] at (0,2){$1$};
+		\node[left=0.5mm] at (0,-2){$-1$};
+		\node[left=0.5mm] at (0,2){$1$};
+		\node[left=0.5mm] at (0,-2){$-1$};
+		\node[above,mygreen] at (0.5,0){$\alpha$};
+	\end{tikzpicture}	
+\end{document}

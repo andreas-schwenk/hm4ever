@@ -1,0 +1,136 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A01: Integral als Flächeninhalt}
+    \lang{en}{problem_1}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+
+\lang{de}{
+	\title{A01: Integral als Flächeninhalt}
+}
+\lang{en}{
+	\title{Problem 1}
+}
+
+\begin{block}[annotation]
+  
+      
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9609}{Ticket 9609}
+\end{block}
+
+
+\begin{problem}
+
+  \begin{variables}
+	\randint{b}{-8}{-1}
+	\randint{z}{2}{8}
+	\randint{c}{1}{8}
+	\randint{d}{1}{2}
+	\function[expand, normalize]{m}{c/d}
+	\function{f}{m*x+b}
+	\function[expand, normalize]{a1}{-b/m}
+	\function[expand, normalize]{a2}{-b/m +z}
+	\function[expand, normalize]{a0}{a1+1}
+	\function{L1}{(m*(z^2))/2}
+	\function{L2}{(m*((z^2)-1))/2}
+  \end{variables}
+
+
+  \begin{question}
+
+    \lang{de}{ \text{Betrachten Sie in der gesamten Aufgabe die Gerade $f(x)=\var{m}x\var{b}$.\\
+     Bestimmen Sie (mit geometrischen Mitteln) den Wert des Integrals \\
+       $\int_{a}^{b} f(x) \, dx,$ wobei $a=\var{a1}$ und $b=\var{a2}$ sind.  }
+    }
+     \lang{en}{\text{
+      Throughout the exercise, refer back to the line $f(x)=\var{m}x\var{b}$.\\
+      Determine geometrically the value of the integral \\
+        $\int_{a}^{b} f(x) \, dx,$ where $a=\var{a1}$ and $b=\var{a2}$.
+     }}
+    \type{input.number}
+    \field{rational}
+
+	\begin{answer}
+      \lang{de}{ \text{Lösung: }}
+      \lang{en}{\text{Solution: }}
+	 \solution{L1}
+     
+     \lang{de}{
+     \explanation{ Das Integral $\int_{a}^{b} f(x) \, dx$ kann geometrisch als der Flächeninhalt, 
+     der von dem Graphen von $f$ und der $x$-Achse zwischen $a$ und $b$ eingeschlossen wird, berechnet werden. 
+     Eine Skizze der Situation könnte bei der Lösung hilfreich sein. }
+     }
+     
+     \lang{en}{ 
+     \explanation{The integral $\int_{a}^{b} f(x) \, dx$ can be calculated geometrically as the area which is enclosed 
+      by the graph of $f$ and the $x$-axis between $a$ and $b$.
+     A sketch of the situation could be helpful in solving it. }
+     }
+     
+	\end{answer}
+
+  \end{question}
+
+  \begin{question}
+    \lang{de}{ \text{Bestimmen Sie (mit geometrischen Mitteln) den Wert des Integrals
+      $\int_{a}^{b} f(x) \, dx,$\\ wobei $a=\var{a0}$ und $b=\var{a2}$ sind.  }
+    }
+     \lang{en}{\text{Determine geometrically the value of the integral
+     $\int_{a}^{b} f(x) \, dx,$\\ where $a=\var{a0}$ and $b=\var{a2}$ }}
+    \type{input.number}
+    \field{rational}
+
+	\begin{answer}
+      \lang{de}{\text{Lösung: }}
+       \lang{en}{\text{Solution: }}
+	 \solution{L2}
+     
+     \lang{de}{
+     \explanation{Das Integral $\int_{a}^{b} f(x) \, dx$ kann geometrisch als der Flächeninhalt, 
+     der von dem Graphen von $f$ und der $x$-Achse zwischen $a$ und $b$ eingeschlossen wird, berechnet werden. 
+     Eine Skizze der Situation könnte bei der Lösung hilfreich sein. Der gesuchte Wert setzt sich zusammen aus 
+     dem Flächeninhalt eines Rechtecks und eines Dreiecks.}
+     }
+     
+     \lang{en}{ 
+     \explanation{The integral $\int_{a}^{b} f(x) \, dx$ can be calculated geometrically as the area which is enclosed 
+      by the graph of $f$ and the $x$-axis between $a$ and $b$.
+     A sketch of the situation could be helpful in solving it. The area we are looking for is made up of
+     the area of a rectangle and a triangle.}   
+     }
+	\end{answer}
+
+  \end{question}
+
+
+
+\end{problem}
+
+
+\embedmathlet{mathlet}
+
+
+
+\end{content}

@@ -1,0 +1,205 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Training 5}
+    \lang{de}{A05: Normen}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24114}{Ticket 24114}
+\end{block}
+\usepackage{mumie.genericproblem}
+\title{
+    \lang{en}{Training 5}
+    \lang{de}{A05: Normen}
+  }
+  
+  
+  \begin{problem}
+
+
+
+\begin{question} 
+     \type{input.generic}
+     \field{real}
+
+    \begin{variables}
+    \randint[Z]{v11}{-8}{8}
+    \randint[Z]{v12}{-8}{8}
+    \randint[Z]{v13}{-8}{8}
+        
+    \randint[Z]{v21}{-8}{8}
+    \randint[Z]{v22}{-8}{8}
+    \randint[Z]{v23}{-8}{8}
+    \function[calculate]{v1v21a}{abs(v21-v11)}
+    \function[calculate]{v1v22a}{abs(v22-v12)}
+    \function[calculate]{v1v23a}{abs(v23-v13)}
+    \begin{switch}
+        \begin{case}{v1v21a>=v1v22a}
+          \function{max1v1v2}{v1v21a}
+        \end{case}
+        \begin{default}
+          \function{max1v1v2}{v1v22a}
+        \end{default}
+    \end{switch}
+    \function[calculate]{v1v2}{max1v1v2}
+    \begin{switch}
+        \begin{case}{v1v2>=v1v23a}
+          \function{maxv1v2}{v1v2}
+        \end{case}
+        \begin{default}
+          \function{maxv1v2}{v1v23a}
+        \end{default}
+    \end{switch}
+    \function[calculate]{v1v2-1n}{v1v21a+v1v22a+v1v23a}
+    \function[calculate]{v1v2-2n}{sqrt((v21-v11)*(v21-v11)+(v22-v12)*(v22-v12)+(v23-v13)*(v23-v13))}
+    
+    
+    \randint[Z]{a11}{-8}{12}
+    \randint[Z]{a12}{-12}{0}
+    \randint[Z]{a13}{-15}{8}
+    \randint[Z]{a21}{-15}{6}
+    \randint[Z]{a22}{-12}{8}
+    \randint[Z]{a23}{-8}{8}
+    \randint[Z]{a31}{-8}{12}
+    \randint[Z]{a32}{-12}{8}
+    \randint[Z]{a33}{-8}{8}
+    
+    
+    \randint[Z]{b11}{-8}{12}
+    \randint[Z]{b12}{-8}{8}
+    \randint[Z]{b13}{-15}{8}
+    \randint[Z]{b21}{-12}{0}
+    \randint[Z]{b22}{-8}{8}
+    \randint[Z]{b23}{-8}{8}
+    \randint[Z]{b31}{-8}{12}
+    \randint[Z]{b32}{-12}{8}
+    \randint[Z]{b33}{-8}{8}
+    \function[calculate]{ab1j}{abs(b11-a11)+abs(b12-a12)+abs(b13-a13)}
+    \function[calculate]{ab2j}{abs(b21-a21)+abs(b22-a22)+abs(b23-a23)}
+    \function[calculate]{ab3j}{abs(b31-a31)+abs(b32-a32)+abs(b33-a33)}
+    \begin{switch}
+        \begin{case}{ab1j>=ab2j}
+          \function{abinfn1}{ab1j}
+        \end{case}
+        \begin{default}
+          \function{abinfn1}{ab2j}
+        \end{default}
+    \end{switch}
+    \function[calculate]{ab1}{abinfn1}
+    \begin{switch}
+        \begin{case}{ab1>=ab3j}
+          \function{abinfn}{ab1}
+        \end{case}
+        \begin{default}
+          \function{abinfn}{ab3j}
+        \end{default}
+    \end{switch}
+    \function[calculate]{abi1}{abs(b11-a11)+abs(b21-a21)+abs(b31-a31)}
+    \function[calculate]{abi2}{abs(b12-a12)+abs(b22-a22)+abs(b32-a32)}
+    \function[calculate]{abi3}{abs(b13-a13)+abs(b23-a23)+abs(b33-a33)}
+    \begin{switch}
+        \begin{case}{abi1>=abi2}
+          \function{ab1n1}{abi1}
+        \end{case}
+        \begin{default}
+          \function{ab1n1}{abi2}
+        \end{default}
+    \end{switch}
+    \function[calculate]{ab2}{ab1n1}
+    \begin{switch}
+        \begin{case}{ab2>=abi3}
+          \function{ab1n}{ab2}
+        \end{case}
+        \begin{default}
+          \function{ab1n}{abi3}
+        \end{default}
+    \end{switch}
+    
+    \end{variables}
+     
+    \lang{de}{\text{Berechnen Sie für die folgenden Vektoren und Matrizen die angegebenen Abstände.\\
+    $v :=\begin{pmatrix}\var{v11}\\\var{v12}\\\var{v13}\end{pmatrix}$, $w :=\begin{pmatrix}\var{v21}\\\var{v22}\\ \var{v23} \end{pmatrix}$,
+    $A:=\begin{pmatrix}
+    \var{a11} & \var{a12} & \var{a13} \\
+    \var{a21} & \var{a22} & \var{a23}\\
+    \var{a31} & \var{a32} & \var{a33} 
+    \end{pmatrix}$ und $B:=\begin{pmatrix}
+    \var{b11} & \var{b12} & \var{b13} \\
+    \var{b21} & \var{b22} & \var{b23}\\
+    \var{b31} & \var{b32} & \var{b33}
+    \end{pmatrix}$ .}}
+    
+    \begin{answer}
+    \type{input.number}
+    \text{Der Abstand zwischen $v$ und $w$ mit Maximumsnorm=}
+    \solution{maxv1v2}
+    \explanation{Der Abstand zwischen $v$ und $w$ mit Maximumsnorm ist gleich mit\\ 
+    $\Vert v - w\Vert_\infty=\max_{1\leq i\leq 3}\vert v_{i}- w_{i}\vert
+    =max\{\vert v_{1}-w_1\vert;\vert v_{2}-w_2\vert;\vert v_{3}-w_3\vert\}$.}
+    \end{answer}
+    
+    \begin{answer}
+    \type{input.number}
+    \text{Der Abstand zwischen $v$ und $w$ mit 1-Norm=}
+    \solution{v1v2-1n}
+    \explanation{Der Abstand zwischen $v$ und $w$ mit 1-Norm ist gleich mit\\ 
+    $\Vert v - w\Vert_1=\sum_{i=1}^3\vert v_{i}-w_{i}\vert=\vert v_{1}-w_1\vert
+    +\vert v_{2}-w_2\vert+\vert v_{3}-w_3\vert$.}
+    \end{answer}
+    
+    \begin{answer}
+    \type{input.number}
+    \text{Der Abstand zwischen $v$ und $w$ mit 2-Norm=}
+    \solution{v1v2-2n}
+    \explanation{Der Abstand zwischen $v$ und $w$ mit 2-Norm ist gleich mit\\ 
+    ${\Vert v - w\Vert_2}=\sqrt{(v_{1}-w_1)^2+(v_{2}-w_2)^2+(v_{3}-w_3)^2}$.}
+    \end{answer}
+    
+    \begin{answer}
+    \type{input.number}
+    \text{Der Abstand zwischen $A$ und $B$ mit Maximumsnorm=}
+    \solution{abinfn}
+    \explanation{Der Abstand zwischen $A$ und $B$ mit Maximumsnorm ist gleich mit\\ 
+    $\Vert A-B\Vert_\infty=\max_{j=1,2,3}{\sum_{i=1}^{3}\vert a_{ij}-b_{ij}\vert}
+    =\max\{\vert a_{11}-b_{11}\vert+\vert a_{21}-b_{21}\vert+\vert a_{31}-b_{31}\vert;
+    \vert a_{12}-b_{12}\vert+\vert a_{22}-b_{22}\vert+\vert a_{32}-b_{32}\vert;
+    \vert a_{13}-b_{13}\vert+\vert a_{23}-b_{23}\vert+\vert a_{33}-b_{32}\vert\}$.}
+    \end{answer}
+    
+    \begin{answer}
+    \type{input.number}
+    \text{Der Abstand zwischen $A$ und $B$ mit 1-Norm=}
+    \solution{ab1n}
+    \explanation{Der Abstand zwischen $A$ und $B$ mit 1-Norm ist gleich mit\\ 
+    $\Vert A-B\Vert_1=\max_{i=1,2,3}{\sum_{j=1}^{3}\vert a_{ij}-b_{ij}\vert}
+    =\max\{\vert a_{11}-b_{11}\vert+\vert a_{12}-b_{12}\vert+\vert a_{13}-b_{13}\vert;
+    \vert a_{21}-b_{21}\vert+\vert a_{22}-b_{22}\vert+\vert a_{23}-b_{23}\vert;
+    \vert a_{31}-b_{31}\vert+\vert a_{32}-b_{32}\vert+\vert a_{33}-b_{33}\vert\}$.}
+    \end{answer}
+    
+     
+\end{question}    
+
+\end{problem}
+\embedmathlet{gwtmathlet}
+
+\end{content}

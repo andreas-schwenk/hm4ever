@@ -1,0 +1,89 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A01: Taylor}
+    \lang{en}{}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A01: Taylor}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/10406}{Ticket 10406}
+\end{block}
+
+\begin{problem}
+	%\randomquestionpool{}{}
+	
+%######################################################QUESTION_START	
+	\begin{question}	
+	%+++++++++++++++++++VARIABLES++++++++++++++++++++++
+		\begin{variables}
+			\randint[Z]{m}{1}{4}
+			\randint[Z]{b}{1}{4}
+			\randint[Z]{n}{1}{3}
+			\randint[Z]{k}{-2}{2}
+			\randadjustIf{k}{k=0}
+			\function[normalize]{a}{pi/m}
+			
+			\function[normalize]{f}{b*sin((m/k)*x)}
+			
+			%ableitungen
+			\derivative{f1}{f}{x}
+			\derivative{f2}{f1}{x}
+			\derivative{f3}{f2}{x}
+			
+			%substitutionen
+			\substitute[calculate]{fa}{f}{x}{a}
+			\substitute[calculate]{fa1}{f1}{x}{a}
+			\substitute[calculate]{fa2}{f2}{x}{a}
+			\substitute[calculate]{fa3}{f3}{x}{a}
+			
+			%d-s
+			\function[calculate]{d3}{((n-1)*(n-2))/2}
+			\function[calculate]{d2}{1-(((n-3)*(n-2))/2)}
+
+			\function[normalize]{p}{fa + (fa1)*(x-a) + (fa2)*(d2/2)*(x-a)^2 + (fa3)*(d3/6)*(x-a)^3}
+			
+		\end{variables}
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		\type{input.function} %input.text %input.cases.function %input.finite-number-set %input.interval %...http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+		\field{rational} 
+		%\precision{3}
+	%+++++++++++++++++++TITLE++++++++++++++++++++++++++	
+	    \lang{de}{\text{Bestimmen Sie das Taylor-Polynom von $f(x)=\var{f}$ der 
+	    Ordnung $\var{n}$ an der Stelle $x_0=\var{a}$. \\
+	 
+	    }}
+	%+++++++++++++++++++ANSWERS++++++++++++++++++++++++    
+	    \begin{answer}
+	    	\text{Das Taylor-Polynom ist $T_{\var{n}}(x)= $}
+			\solution{p}
+			\checkAsFunction{x}{-10}{10}{100} 
+            \explanation{Rufen Sie sich die Definition des Taylor-Polynoms in Erinnerung.}
+	    \end{answer}    
+	\end{question}
+%######################################################QUESTION_END
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

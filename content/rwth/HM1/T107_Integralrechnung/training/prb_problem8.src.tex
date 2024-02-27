@@ -1,0 +1,133 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A08: Flächen zwischen zwei Graphen}
+    \lang{en}{problem 8}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+
+\lang{de}{
+	\title{A08: Flächen zwischen zwei Graphen}
+}
+\lang{en}{
+	\title{Problem 8}
+}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9616}{Ticket 9616}
+\end{block}
+
+\begin{problem}
+
+	\begin{variables}
+	 	\randint[Z]{a}{-8}{-1}
+	 	\function{b}{-a}
+	 	\number{c}{0}
+
+		\randint{m}{2}{7}
+	 	\randint{n}{2}{7}
+
+	 	\randint{j}{2}{6}
+	 	\function[calculate]{k}{m-j*a^2}
+	 	\function{l}{n}
+
+	    \function{F}{(1/2)*m*x^2+n*x}
+		\derivative[normalize]{f_1}{F}{x}
+		\functionNormalize{f_1}
+
+    	\function{G}{(1/4)*j*x^4+(1/2)*k*x^2+l*x}
+		\derivative[normalize]{g_1}{G}{x}
+		\functionNormalize{g_1}
+
+		\function{H}{G-F}
+		\derivative[normalize]{h_1}{H}{x}
+		\functionNormalize{h_1}
+
+		\substitute[normalize]{H_b}{H}{x}{b}
+		\substitute[normalize]{H_a}{H}{x}{c}
+		\function[calculate]{L}{|H_b-H_a|}
+	\end{variables}
+
+    \begin{question}
+
+	   \lang{de}{
+	     \text{In dieser Aufgabe sind die Funktionen $f(x) = \var{m}x+\var{n}$ und $g(x)=\var{g_1}$ gegeben. 
+	     Diese beiden Funktionen schneiden sich an drei Stellen. Eine davon ist die Stelle $0$.\\
+	     Bestimmen Sie die beiden anderen Schnittstellen - es sollte je eine negative und eine positive 
+	     Schnittstelle sein. \\
+         Geben Sie die positive Schnittstelle $b$ an:}}
+	      \lang{en}{\text{
+          In this problem we are given the functions $f(x) = \var{m}x+\var{n}$ and $g(x)=\var{g_1}$. 
+          These functions intersect at three points. One of these is $x=0$.\\
+          Determine the two other intersection points, one should be negative
+          and the other positive.\\
+          Give the positive intersection point $b$:
+        }}
+	    \type{input.number}
+	   	\begin{answer}
+			\text{ $b =$ }
+			\solution{b}
+            
+            \lang{de}{
+            \explanation{Da $0$ ein Schnittpunkt ist, müssen Sie lediglich noch die positive Nullstelle von $\frac{g(x)-f(x)}{x}$ bestimmen.}
+            \explanation[ans<0]{Es ist der positive Schnittpunkt gesucht!}
+            }
+            \lang{en}{
+            \explanation{To determine the intersection points, compute the zeros of $g-f$.}
+            \explanation[ans<0]{The positive intersection point is to be determined.}
+            }
+		\end{answer}
+
+	\end{question}
+
+  \begin{question}
+
+	   \lang{de}{
+	     \text{Bestimmen Sie nun die Fläche, welche zwischen den Graphen der Funktionen $f(x) = \var{m}x+\var{n}$ 
+	     und $g(x)=\var{g_1}$ über dem Intervall $[0;b]$ eingeschlossen wird.}}
+	      \lang{en}{\text{
+          Now determine the area enclosed by the graphs of $f(x) = \var{m}x+\var{n}$ 
+          and $g(x)=\var{g_1}$ over the interval $[0, b]$.
+        }}
+	    \type{input.number}
+	    \correctorprecision[rounded]{2}
+	    \displayprecision{2}
+	   	\begin{answer}
+      \lang{de}{\text{ Fläche (auf zwei Nachkommastellen gerundet): }}
+       \lang{en}{\text{ Area (rounded to two decimal places): }}
+			\solution{L}
+            
+            \lang{de}{
+            \explanation{Der Flächeninhalt kann über das Integral $\int_0^b \left\vert g(x)-f(x)\right\vert dx$ berechnet werden. Verwenden Sie die Schnittstelle aus a), um das Integral auszurechnen. Lösen Sie den Betrag geeignet auf.}
+		    }
+            \lang{en}{
+            \explanation{The area can be computed via the integral $\int_0^b \left\vert g(x)-f(x)\right\vert dx$. Use the intersection point from a) to compute the integral and to resolve the absolute value. }
+            }
+        \end{answer}
+
+	\end{question}
+
+\end{problem}
+
+
+\embedmathlet{mathlet}
+\end{content}

@@ -1,0 +1,246 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A08: Determinante}
+    \lang{en}{P08: The determinant}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A08: Determinante}}
+\lang{en}{\title{P08: The determinant}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/11441}{Ticket 11441}
+\end{block}
+
+\begin{problem}
+	\randomquestionpool{1}{2}
+	
+
+	
+	\begin{question}
+% 	
+% 	$a2,a3,a4,a5,b3,b4,b5,c4,c5,d5\in\{-5;\ldots;5\}$\\
+%   $a1,b2,c3,d4,f5\in\{-2;\ldots;3\}\setminus\{0\}$\\
+%   $r,t\in\{-2;\ldots;3\}\setminus\{0\}$\\
+% 		
+		\begin{variables}
+		
+		\randint{a2}{-5}{5}
+		\randint{a3}{-5}{5}
+		\randint{a4}{-5}{5}
+		\randint{a5}{-5}{5}
+		\randint{b3}{-5}{5}
+		\randint{b4}{-5}{5}
+		\randint{b5}{-5}{5}
+		\randint{c4}{-5}{5}
+		\randint{c5}{-5}{5}
+		\randint{d5}{-5}{5}
+	
+		\randint[Z]{f5}{-2}{3}
+		\randint[Z]{b2}{-2}{3}
+		\randint[Z]{c3}{-2}{3}
+		\randint[Z]{d4}{-2}{3}
+		\randint[Z]{a1}{-2}{3}
+		
+		\randint[Z]{r}{-2}{3}
+		\randint[Z]{t}{-2}{3}
+		
+			\begin{pool}
+				\begin{variables}
+% \item $b1=r, c2=0, d3=t, f4=0$,
+% $s=(a1*b2-b1*a2)*(c3*d4-d3*c4)*f5$.
+		\function[calculate]{b1}{r}
+		\function[calculate]{c2}{0}
+		\function[calculate]{d3}{t}
+		\function[calculate]{f4}{0}
+		
+		\function[calculate]{s}{(a1*b2-b1*a2)*(c3*d4-d3*c4)*f5}
+		
+				\end{variables}
+				
+				\begin{variables} 				
+% \item $b1=r, c2=0, d3=0, f4=t$,
+% $s=(a1*b2-b1*a2)*c3*(d4*f5-d5*f4)$.
+		\function[calculate]{b1}{r}
+		\function[calculate]{c2}{0}
+		\function[calculate]{d3}{0}
+		\function[calculate]{f4}{t}
+		
+		\function[calculate]{s}{(a1*b2-b1*a2)*c3*(d4*f5-d5*f4)}
+				\end{variables}
+				
+				\begin{variables}
+% \item $b1=0, c2=r, d3=0, f4=t$,
+%$s=a1*(b2*c3-b3*c2)*(d4*f5-d5*f4)$.
+		\function[calculate]{b1}{0}
+		\function[calculate]{c2}{r}
+		\function[calculate]{d3}{0}
+		\function[calculate]{f4}{t}
+		
+		\function[calculate]{s}{a1*(b2*c3-b3*c2)*(d4*f5-d5*f4)}
+				
+				\end{variables}
+			\end{pool}
+
+		
+			\matrix{aa}{
+a1 & a2 & a3 & a4& a5\\ b1 & b2 & b3 & b4 & b5 \\ 0& c2 & c3 & c4 & c5\\
+0 & 0 & d3 & d4&d5 \\ 0 & 0 & 0 & f4 & f5 }
+
+		\end{variables}
+		
+		\type{input.generic}
+        \field{real}
+		\correctorprecision{3}
+		\displayprecision{3}
+		\lang{de}{
+	    \text{Bestimmen Sie die Determinante der  Matrix $A=\var{aa}$.}
+	    }
+     \lang{en}{
+	    \text{Calculate the determinant of the matrix $A=\var{aa}$.}
+	    }
+	    %\permuteAnswers{1, 2, 3} 
+	    %http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+     \lang{de}{
+	    \begin{answer}
+            \type{input.number}
+	    	\text{$\det(A)= $}
+			\solution{s}
+            \explanation{Es handelt sich um eine Blockmatrix. Führen Sie die Berechnung auf die Determinanten der Diagonalblöcke zurück.}
+	    \end{answer}} 
+
+     \lang{en}{
+	    \begin{answer}
+            \type{input.number}
+	    	\text{$\det(A)= $}
+			\solution{s}
+            \explanation{$A$ is a block matrix. Reduce the calculation to the calculation of determinants of diagonal blocks.}
+	    \end{answer}} 
+	    
+	    %generic viz: http://team.mumie.net/projects/support/wiki/Example
+	    
+	\end{question}
+	
+	\begin{question}
+		
+		\begin{variables}
+		
+		\randint{a2}{-5}{5}
+		\randint{a3}{-5}{5}
+		\randint{a4}{-5}{5}
+		\randint{a5}{-5}{5}
+		\randint{b3}{-5}{5}
+		\randint{b4}{-5}{5}
+		\randint{b5}{-5}{5}
+		\randint{c4}{-5}{5}
+		\randint{c5}{-5}{5}
+		\randint{d5}{-5}{5}
+	
+		\randint[Z]{f5}{-2}{3}
+		\randint[Z]{b2}{-2}{3}
+		\randint[Z]{c3}{-2}{3}
+		\randint[Z]{d4}{-2}{3}
+		\randint[Z]{a1}{-2}{3}
+		
+		\randint[Z]{r}{-2}{3}
+		\randint[Z]{t}{-2}{3}
+		
+			\begin{pool}
+				\begin{variables}
+% \item $b1=r, c2=0, d3=t, f4=0$,
+% $s=(a1*b2-b1*a2)*(c3*d4-d3*c4)*f5$.
+		\function[calculate]{b1}{r}
+		\function[calculate]{c2}{0}
+		\function[calculate]{d3}{t}
+		\function[calculate]{f4}{0}
+		
+		\function[calculate]{s}{(a1*b2-b1*a2)*(c3*d4-d3*c4)*f5}
+		
+				\end{variables}
+				
+				\begin{variables} 				
+% \item $b1=r, c2=0, d3=0, f4=t$,
+% $s=(a1*b2-b1*a2)*c3*(d4*f5-d5*f4)$.
+		\function[calculate]{b1}{r}
+		\function[calculate]{c2}{0}
+		\function[calculate]{d3}{0}
+		\function[calculate]{f4}{t}
+		
+		\function[calculate]{s}{(a1*b2-b1*a2)*c3*(d4*f5-d5*f4)}
+				\end{variables}
+				
+				\begin{variables}
+% \item $b1=0, c2=r, d3=0, f4=t$,
+%$s=a1*(b2*c3-b3*c2)*(d4*f5-d5*f4)$.
+		\function[calculate]{b1}{0}
+		\function[calculate]{c2}{r}
+		\function[calculate]{d3}{0}
+		\function[calculate]{f4}{t}
+		
+		\function[calculate]{s}{a1*(b2*c3-b3*c2)*(d4*f5-d5*f4)}
+				
+				\end{variables}
+			\end{pool}
+
+			
+				\matrix{aa}{
+a1 & b1 & 0 & 0 &0\\ a2&b2&c2&0&0\\ a3&b3&c3&d3&0\\ a4&b4&c4&d4&f4\\
+a5&b5&c5&d5&f5
+}
+
+		\end{variables}
+		
+		\type{input.generic}
+        \field{real}
+		\correctorprecision{3}
+		\displayprecision{3}
+		\lang{de}{
+	    \text{Bestimmen Sie die Determinante der  Matrix $A=\var{aa}$.}
+	    }
+     \lang{en}{
+	    \text{Calculate the determinant of the matrix $A=\var{aa}$.}
+	    }
+	    %\permuteAnswers{1, 2, 3} 
+	    %http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+     \lang{de}{
+	    \begin{answer}
+            \type{input.number}
+	    	\text{$\det(A)= $}
+			\solution{s}
+            \explanation{Es handelt sich um eine Blockmatrix. Führen Sie die Berechnung auf die Determinanten der Diagonalblöcke zurück.}
+	    \end{answer}}  
+
+     \lang{en}{
+	    \begin{answer}
+            \type{input.number}
+	    	\text{$\det(A)= $}
+			\solution{s}
+            \explanation{$A$ is a block matrix. Reduce the calculation to the calculation of determinants of diagonal blocks.}
+	    \end{answer}}  
+	    
+	    %generic viz: http://team.mumie.net/projects/support/wiki/Example
+	    
+	\end{question}
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

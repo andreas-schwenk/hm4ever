@@ -1,0 +1,280 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A07: Basen}
+    \lang{en}{input numbers}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+\usepackage{mumie.ombplus}
+
+\lang{de}{\title{A07: Basen}}
+\lang{en}{\title{Problem 7}}
+
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9522}{Ticket 9522}
+\end{block}
+
+
+\begin{problem}
+\randomquestionpool{1}{4}
+\randomquestionpool{5}{6}
+
+	\begin{question}
+		\lang{de}{
+			\text{Bildet die folgende Menge eine Basis des $\R^2$ ?\\
+			$ \left\{ \begin{pmatrix} \var{a1} \\\var{a2}\end{pmatrix} \right\}$}
+            \explanation{Eine Basis des $\R^2$ muss 2 Elemente haben.}
+		}
+		\lang{en}{}
+		
+		\type{mc.yesno}
+		\field{rational}
+		
+%    	\precision[false]{1}
+%    	\displayprecision{1}
+%    	\correctorprecision{1}
+		
+		\begin{variables}
+			\randint[Z]{a1}{-30}{30}
+			\randint[Z]{a2}{-30}{30}
+
+			
+		\end{variables}
+		
+		\begin{choice}
+			\text{}
+			\solution{false}
+		\end{choice}
+
+	\end{question}
+	
+	
+	
+
+    \begin{question}
+		\lang{de}{
+			\text{Bildet die folgende Menge eine Basis des $\R^2$ ?\\
+			$ \left\{ \begin{pmatrix} \var{b1} \\\var{b2}\end{pmatrix},
+			\begin{pmatrix} \var{c1} \\\var{c2} \end{pmatrix},
+			\begin{pmatrix} \var{d1} \\\var{d2} \end{pmatrix} \right\} $}
+			\explanation{Drei Vektoren im $\R^2$ können nicht linear unabhängig sein.}
+		}
+		\lang{en}{}
+		
+		\type{mc.yesno}
+		\field{rational}
+		
+%    	\precision[false]{1}    % Die Variable wird mit 1 Nachkommastelle definiert
+%    	\displayprecision{1}    % Die Variable wird mit 1 Nachkommastelle angezeigt
+%    	\correctorprecision{1}  % Die Variable wird mit 1 Nachkommastelle korrigiert
+		
+		\begin{variables}
+			\randint[Z]{b1}{-20}{20}
+			\randint{b2}{-20}{20}
+			
+			\randint{k}{1}{2}
+			\randint{klambda}{-3}{3}
+			\randint{kmu}{-3}{3}
+			\randadjustIf{klambda,kmu}{klambda=kmu}
+			\randint{l}{0}{1}
+			
+			\function{lambda}{klambda/k+l}          
+			\function{mu}{kmu/k+l}                  
+			
+			\function[normalize]{c1}{lambda*b1}    
+			\function[normalize]{c2}{lambda*b2}
+    
+			\function[normalize]{d1}{mu*b1}
+			\function[normalize]{d2}{mu*b2}			
+
+		\end{variables}
+
+		\begin{choice}
+			\text{}
+			\solution{false}
+		\end{choice}
+	\end{question}
+	
+	\begin{question}
+		\lang{de}{
+			\text{Bildet die folgende Menge eine Basis des $\R^2$ ?\\
+			$ \left\{ \begin{pmatrix} \var{m1} \\\var{m2} \end{pmatrix},
+			\begin{pmatrix} \var{n1} \\\var{n2} \end{pmatrix} \right\} $}
+			\explanation{Die beiden Vektoren sind linear abhängig.}
+		}
+		\lang{en}{}
+		
+		\type{mc.yesno}
+		\field{rational}
+		
+%    	\precision[false]{3}
+%    	\displayprecision{3}
+%    	\correctorprecision{3}
+		
+		\begin{variables}
+			\randint[Z]{m1}{-25}{25}
+			\randint{m2}{-25}{25}
+			
+			\randint{alpha}{-3}{3}                
+			
+			\function[normalize]{n1}{alpha*m1}    
+			\function[normalize]{n2}{alpha*m2}
+
+		
+		\end{variables}
+
+		\begin{choice}
+			\text{}
+			\solution{false}
+		\end{choice}
+	\end{question}
+
+	\begin{question}
+		\lang{de}{
+			\text{Bildet die folgende Menge eine Basis des $\R^2$ ?\\
+			$ \left\{ \begin{pmatrix} \var{e1} \\\var{e2} \end{pmatrix},
+			\begin{pmatrix} \var{f1} \\\var{f2} \end{pmatrix} \right\} $}
+			\explanation{Die beiden Vektoren sind linear unabhängig.}
+		}
+		\lang{en}{}
+		
+		\type{mc.yesno}
+		\field{real}
+		
+    	\precision[false]{3}
+    	\displayprecision{3}
+    	\correctorprecision{3}
+		
+		\begin{variables}
+			\randint{e1}{-25}{25}
+			\randint{e2}{-25}{25}
+			
+			\randint{f1}{-25}{25}
+			\randint{f2}{-25}{25}
+			
+			\randadjustIf{e1,e2,f1,f2}{e1*f2-e2*f1=0}
+			
+		
+		\end{variables}
+
+		\begin{choice}
+			\text{}
+			\solution{true}
+		\end{choice}
+	\end{question}
+	
+	\begin{question}
+		\lang{de}{
+			\text{Bildet die folgende Menge eine Basis des $\R^3$ ?\\
+			$ \left\{ \begin{pmatrix} \var{g1} \\\var{g2} \\\var{g3} \end{pmatrix},
+            \begin{pmatrix} \var{h1} \\\var{h2} \\\var{h3} \end{pmatrix},
+			\begin{pmatrix} \var{i1} \\\var{i2} \\\var{i3} \end{pmatrix} \right\} $}
+			\explanation{Die drei Vektoren sind linear unabhängig.}
+		}
+		\lang{en}{}
+		
+		\type{mc.yesno}
+		\field{real}
+		
+    	\precision[false]{3}
+    	\displayprecision{3}
+    	\correctorprecision{3}
+		
+		\begin{variables}
+			\randint{g1}{-15}{15}
+			\randint{g2}{-15}{15}
+			\randint{g3}{-15}{15}
+			\randint{h1}{-15}{15}
+			\randint{h2}{-15}{15}
+			\randint{h3}{-15}{15}
+			\randint{i1}{-15}{15}
+			\randint{i2}{-15}{15}
+			\randint{i3}{-15}{15}
+            
+           % Test:
+           % \function[calculate]{det}{g1*h2*i3-g1*h3*i2-g2*h1*i3+g2*h3*i1+g3*h1*i2-g3*h2*i1} 
+            
+			\randadjustIf{g1,g2,g3,h1,h2,h3,i1,i2,i3}{g1*h2*i3-g1*h3*i2-g2*h1*i3+g2*h3*i1+g3*h1*i2-g3*h2*i1=0}
+            
+		\end{variables}
+
+		\begin{choice}
+			\text{}
+			\solution{true}
+		\end{choice}
+	\end{question}
+		
+	\begin{question}
+		\lang{de}{
+			\text{Bildet die folgende Menge eine Basis des $\R^3$ ?\\
+			$ \left\{ \begin{pmatrix} \var{j1} \\\var{j2} \\\var{j3} \end{pmatrix},
+            \begin{pmatrix} \var{k1} \\\var{k2} \\\var{k3} \end{pmatrix},
+			\begin{pmatrix} \var{l1} \\\var{l2} \\\var{l3} \end{pmatrix} \right\} $}
+			\explanation{Die drei Vektoren sind linear abhängig.}
+		}
+		\lang{en}{}
+		
+		\type{mc.yesno}
+		\field{rational}
+		
+    	\precision[false]{3}
+    	\displayprecision{3}
+    	\correctorprecision{3}
+		
+		\begin{variables}
+			\randint{j1}{-20}{20}
+			\randint{j2}{-20}{20}
+			\randint{j3}{-20}{20}
+			
+			\randint{k1}{-20}{20}
+			\randint{k2}{-20}{20}
+			\randint{k3}{-20}{20}
+			
+ 			\randint[Z]{rs}{-3}{3}                         
+			\randint{rt}{-3}{3}
+			\randint{r}{1}{2}
+			\function[calculate]{s}{rs/r}                     
+			\function[calculate]{t}{rt/r}
+
+			\function[calculate]{l1}{s*j1+t*k1}           % Der Vektor (l_1, l_2, l_3) ist eine Linearkombination aus 
+			\function[calculate]{l2}{s*j2+t*k2}           % (j_1, j_2, j_3) und (k_1, k_2, k_3), folglich sind die drei
+			\function[calculate]{l3}{s*j3+t*k3}           % Vektoren linear abhängig und bilden kein Erzeugendensystem.
+                                                          
+			\randadjustIf{j1,j2,j3}{j1=0 and j2=0 and j3=0}     % Ausschluss, dass (j_1, j_2, j_3) Nullvektor ist
+			\randadjustIf{k1,k2,k3}{k1=0 and k2=0 and k3=0}     % Ausschluss, dass (k_1, k_2, k_3) Nullvektor ist
+ 			
+		\end{variables}
+
+		\begin{choice}
+			\text{}
+			\solution{false}
+		\end{choice}
+	\end{question}
+	
+	
+	
+	
+\end{problem}
+
+\embedmathlet{mathlet}
+
+
+\end{content}

@@ -1,0 +1,607 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Parameterformen von Geraden und Ebenen}
+    \lang{en}{Parametrised lines and planes}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+   \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+   \component{generic_image}{content/rwth/HM1/images/g_tkz_T110_PointTwoDirectionsPlane.meta.xml}{T110_PointTwoDirectionsPlane}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T110_ThreePointPlane.meta.xml}{T110_ThreePointPlane}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T110_PointDirectionLine.meta.xml}{T110_PointDirectionLine}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T110_TwoPointLine.meta.xml}{T110_TwoPointLine}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T104_weitere_elementare_Funktionen/g_art_content_14_potenzregeln.meta.xml}{power-rules}
+    \link{generic_article}{content/rwth/HM1/T102neu_Einfache_Reelle_Funktionen/g_art_content_06_funktionsbegriff_und_lineare_funktionen.meta.xml}{04-lineare-funktionen}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{10}
+\ombarticle{1}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Parameterformen von Geraden und Ebenen}\lang{en}{Parametrised lines and planes}}
+ 
+\begin{block}[annotation]
+  übungsinhalt
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9052}{Ticket 9052}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\lang{de}{
+Zur Motivation können Sie das folgende Beispiel anschauen, dessen
+Sachverhalt Sie nach diesem Kapitel lösen werden können:
+}
+\lang{en}{
+The following example serves as motivation for this chapter:
+}
+\begin{example}
+  \begin{tabs*}[\initialtab{0}]
+    \tab{\lang{de}{Roboter mit Teleskopgreifarm}\lang{en}{Robot with telescopic arm}}
+%       \begin{incremental}[\initialsteps{1}]
+%   \step
+    \lang{de}{Ein Roboter kann seinen Teleskoparm auf der Ebene mit der Gleichung}
+    \lang{en}{A robot can freely move its entire telescopic arm on the plane with equation}
+    \\\\
+    $E= \left\{ \begin{pmatrix} 1\\-2\\3\end{pmatrix} + \alpha \begin{pmatrix}1\\0\\2\end{pmatrix} + 
+    \beta \begin{pmatrix}0\\1\\2\end{pmatrix} \vert \alpha,\beta\in\R\right\}$\\\\ 
+    \lang{de}{
+    frei bewegen. Das Koordinatensystem ist in Dezimetern ausgelegt. Allerdings kann er seinen 
+    Teleskoparm nur senkrecht zur Ebene aus- und einfahren.
+    \\\\
+    Nach Beschäftigung mit dem folgenden Kapitel können Sie ermitteln, an welcher Position 
+    $R=(r_1;r_2;r_3)$ der Teleskoparm zum Ausfahren auf der Ebene stehen muss, um einen Gegenstand an 
+    der Position $P=(4;3;10)$ greifen zu können. Außerdem können Sie bestimmen, wie weit der Arm 
+    ausfahren muss, um diesen Gegenstand greifen zu können.
+    }
+    \lang{en}{
+    where the unit of the coordinate system is a decimetre (a tenth of a metre). The arm can then be 
+    extended orthogonally to the plane.
+    \\\\
+    Upon completion of this following chapter, we will have the tools to determine which position 
+    $R=(r_1;r_2;r_3)$ on the plane the telescopic arm would have to extend from in order to reach the 
+    point $P=(4;3;10)$. Furthermore, we will be able to tell how far the arm must extend to reach it.
+    }
+    \\
+%   \step
+\begin{showhide}
+    \lang{de}{
+    Man kann die Ebene $E$ der Einfachheit wegen von der gegebenen Parameterform in die 
+    Koordinatenschreibweise umformen. Dazu bestimmt man zunächst einen Normalenvektor. Dies können 
+    wir mit Hilfe des Kreuzproduktes aus den Spannvektoren der Ebene $E$ berechnen:
+    }
+    \lang{en}{
+    We can easily represent the plane, which is currently in a parametrised form, as an equation in 
+    the coordinates. Firstly we determine a normal vector. This can be found using the cross product 
+    of the vectors spanning the plane:
+    }
+    %einen Normalenvektor $\vec{n}$ der Ebene bestimmt und einen Punkt der Ebene $E$,
+    %z. B. den Stützvektor, in die Koordinatenform einsetzt und nach dem Parameter $f$ umformt:
+    \[\vec{n}=\begin{pmatrix} 1\\0\\2\end{pmatrix}\times\begin{pmatrix}0\\1\\2\end{pmatrix}=\begin{pmatrix}-2\\-2\\1\end{pmatrix}\]
+    \lang{de}{
+    Damit ergibt sich als Ansatz für die Gleichung der Ebene $E$ in Koordinatenform: 
+    $-2x_1-2x_2+x_3=f$.\\
+    Um den Parameter $f$ zu ermitteln, wird ein Punkt der Ebene, hier der Stützvektor, in die 
+    Koordinatenform eingesetzt und nach $f$ umgeformt:
+    }
+    \lang{en}{
+    From this we can tell that the equation of the plane $E$ in coordinate form is 
+    $-2x_1-2x_2+x_3=f$.\\
+    The parameter $f$ can be found by substituting a point on the plane into the equation, for 
+    example the position vector $\begin{pmatrix} 1\\0\\2\end{pmatrix}$ from the parametrisation:
+    }
+    \[-2\cdot 1-2\cdot (-2)+3=f\Leftrightarrow f=5\]
+    \lang{de}{Die Koordinatenform lautet also:}
+    \lang{en}{The coordinate form is therefore:}
+    \[E=\{x\in\mathbb{R}^3\vert -2x_1-2x_2+x_3=5\}\]
+    \lang{de}{
+    Wir können nun schon die Geradengleichung $g$ aufstellen, auf der der Teleskoparm aus- und 
+    einfährt, um den Punkt $P$ greifen zu können:
+    }
+    \lang{en}{
+    We can now already determine the equation of the line from which the telescopic arm must extend 
+    to reach the point $P=(4;3;10)$:
+    }
+    \[g=\{\begin{pmatrix} 4\\3\\10\end{pmatrix}+\gamma\cdot\begin{pmatrix} -2\\-2\\1\end{pmatrix}\vert
+    \gamma\in\mathbb{R}\}\]
+    \lang{de}{
+    Einsetzen der Geraden $g$ in die Koordinatenform der Ebene $E$ liefert die Position $R$, an der 
+    der Roboter stehen muss, um den Gegenstand durch Ausfahren des Teleskoparms greifen zu können:
+    }
+    \lang{en}{
+    Substituting the equation of the line $g$ into the coordinate form of the plane $E$ gives us 
+    their intersection $R$, which is the point on the plane where the robot arm must be to reach $P$:
+    }
+    \[-2\cdot(4-2\gamma)-2\cdot(3-2\gamma)+(10+\gamma)=5\Leftrightarrow\gamma=1\]
+    \lang{de}{
+    Man setzt $\gamma=1$ in die Gerade $g$ ein und erhält $R=(2;1;11)$.
+    \\\\
+    Der Abstand des Punktes $P$ zum Punkt $R$ auf der Ebene $E$ entspricht der Länge, die der 
+    Teleskoparm des Roboters ausfahren muss:
+    }
+    \lang{en}{
+    We substitute $\gamma=1$ into the line $g$ and obtain $R=(2;1;11)$.
+    }
+    \[d(P,R)=\abs{\vec{PR}}=\abs{\begin{pmatrix} 2\\1\\11\end{pmatrix} -
+      \begin{pmatrix}4\\3\\10\end{pmatrix}} = 
+      \abs{\begin{pmatrix} -2\\-2\\1 \end{pmatrix}} = 
+      \abs{\vec{n}}\]
+    \lang{de}{
+    Die Länge entspricht also dem Betrag des gewählten Normalenvektors: 
+    $d=\sqrt{(-2)^2+(-2)^2+1^2}=3$.
+    \\\\
+    Der Teleskoparm des Roboters muss also am Punkt $R=(2;1;11)$ stehen. Außerdem muss der 
+    Teleskoparm $3$ Dezimeter weit ausfahren.
+    }
+    \lang{en}{
+    The length of the arm corresponds to the magnitude of the normal vector of the line, as this is 
+    the vector from $P$ to $R$: $d=\sqrt{(-2)^2+(-2)^2+1^2}=3$.
+    \\\\
+    To summarise, the telescopic arm of the robot must extend $3$ decimetres from the point 
+    $R=(2;1;11)$ on the plane in order to reach the point $P$.
+    }
+% \end{incremental}
+\end{showhide}
+    \end{tabs*}
+\end{example}
+
+
+\section{\lang{de}{Geraden}\lang{en}{Lines}}
+\label{sec:geraden}
+
+\lang{de}{
+Zwei verschiedene Punkte $P$ und $Q$ im $n$-dimensionalen Raum $\R^n$ definieren eindeutig eine 
+Gerade $g$, die durch diese beiden Punkte verläuft.
+}
+\lang{en}{
+Two distinct points $P$ and $Q$ in $n$-dimensional space $\R^n$ uniquely determine the line $g$ 
+containing both points.
+}
+
+\begin{center}
+	\image{T110_TwoPointLine}
+\end{center}
+
+
+\begin{rule}[\lang{de}{Zwei-Punkte-Darstellung einer Geraden}
+             \lang{en}{Two-point form of a line}]\label{rule:zwei_pkt_geraden}
+  \lang{de}{
+  Die Gerade $g$ durch zwei verschiedene Punkte $P$ und $Q$ im $\R^n$ ist gegeben als die Menge aller 
+  Punkte, deren Ortsvektoren von der Form
+  }
+  \lang{en}{
+  The line $g$ through two distinct points $P$ and $Q$ in $\R^n$ is given by the set of all points 
+  whose position vectors have the form
+  }
+	\[\vec{x} = \vec{OP} + \lambda\cdot \bigg(\vec{OQ} - \vec{OP}\bigg)\]
+  \lang{de}{
+	sind, wobei $\lambda\in\R$ die reellen Zahlen durchläuft.
+	Wegen $\vec{OQ} - \vec{OP} = \vec{PQ}$ lässt sich die Gerade auch schreiben als
+  }
+  \lang{en}{
+  where $\lambda\in\R$ runs through all real numbers.
+	Because $\vec{OQ} - \vec{OP} = \vec{PQ}$, the line can also be written as
+  }
+	\[g: \vec{x} = \vec{OP} + \lambda\cdot \vec{PQ}, \quad\lambda\in\R.\]
+	\lang{de}{Oft schreibt man kürzer auch}
+  \lang{en}{We often write the set of points with these position vectors simply as a set of vectors}
+	\[g = \{\vec{OP} + \lambda\cdot \vec{PQ} \mid \lambda\in\R\},\]
+  \lang{de}{
+	wobei hier die Punkte mit den zugehörigen Ortsvektoren identifiziert werden
+	(vgl. auch den Abschnitt über \link{04-lineare-funktionen}{Lineare Funktionen}). Diese Form 
+	der Darstellung einer Geraden nennt man \emph{Parameterform}.
+  }
+  \lang{en}{
+  and identify the vectors with coordinates (see \link{04-lineare-funktionen}{linear functions}). 
+  This is a \emph{parametrised} representation, as $\lambda$ is varied to obtain the points on the 
+  line.
+  }    
+   \end{rule}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{v1}{-5}{5}
+			\randint{v2}{-5}{5}
+			\randint{v3}{-5}{0}
+			\randint{w1}{-5}{5}
+			\randint{w2}{-5}{5}
+			\randint{w3}{1}{5}
+			\function[calculate]{t1}{w1-v1}
+			\function[calculate]{t2}{w2-v2}
+			\function[calculate]{t3}{w3-v3}
+		\end{variables}
+		
+			\text{\lang{de}{
+      Bestimmen Sie mit obiger Methode eine Parameterform der Geraden $g$ 
+			durch die Punkte $P=(\var{v1}; \var{v2}; \var{v3})$ und $Q=(\var{w1}; \var{w2}; \var{w3})$.
+			\\\\
+			Man erhält die Parameterform
+      }
+      \lang{en}{
+      Determine with the above method the parametrised form of the line $g$ going through the points 
+      $P=(\var{v1}; \var{v2}; \var{v3})$ and $Q=(\var{w1}; \var{w2}; \var{w3})$.
+      \\\\
+      The parametrised form is
+      }
+      \begin{table}[\class{no-padding}]
+			\rowspan[l][m]{3} $g:\vec{x}=
+			\left(\begin{matrix} \\ \\ \\ \\ \end{matrix}\right.$ &  
+			\ansref & \rowspan[l][m]{3} $\left.\begin{matrix} \\ \\ \\ \\  \end{matrix}\right)
+			+\lambda \cdot \left(\begin{matrix} \\ \\ \\ \\ \end{matrix}\right.$& 
+			\ansref & \rowspan[l][m]{3} $\left.\begin{matrix} \\ \\ \\ \\  \end{matrix}\right), \quad \lambda\in \R  $. & \\ 
+			\ansref & \ansref & \\ 
+			\ansref & \ansref & 
+			\end{table}			
+			}
+		
+		\begin{answer}
+			\solution{v1}
+		\end{answer}
+		\begin{answer}
+			\solution{t1}
+		\end{answer}
+		\begin{answer}
+			\solution{v2}
+		\end{answer}
+		\begin{answer}
+			\solution{t2}
+		\end{answer}
+		\begin{answer}
+			\solution{v3}
+		\end{answer}
+		\begin{answer}
+			\solution{t3}
+		\end{answer}
+		\explanation{\lang{de}{
+    Als Stützvektor sollte man den Ortsvektor von $P$ nehmen, also 
+		$\begin{pmatrix} \var{v1}\\ \var{v2} \\ \var{v3} \end{pmatrix}$ und 
+		als Richtungsvektor den Verbindungsvektor $\overrightarrow{PQ}$, also
+    }
+    \lang{en}{
+    The position vector of $P$, $\begin{pmatrix} \var{v1}\\ \var{v2} \\ \var{v3} \end{pmatrix}$, is 
+    the choice used in the above method for the constant vector, and the vector $\overrightarrow{PQ}$ 
+    the parametrised direction vector,
+    }\\
+		$ \overrightarrow{PQ} = 
+    \begin{pmatrix} \var{w1}-(\var{v1})\\ \var{w2}-(\var{v2}) \\ \var{w3}-(\var{v3}) \end{pmatrix} = 
+    \begin{pmatrix}\var{t1}\\ \var{t2} \\ \var{t3} \end{pmatrix}. $
+		}
+	\end{quickcheck}
+	
+
+
+\lang{de}{
+Alternativ dazu lässt sich eine Gerade auch mittels eines Punktes und einer vom Nullvektor 
+verschiedenen Richtung beschreiben.
+}
+\lang{en}{
+Alternatively, a line in space can be described by a point in space and a non-zero direction vector.
+}
+
+\begin{center}
+\image{T110_PointDirectionLine}
+\end{center}
+
+\begin{rule}[\lang{de}{Punkt-Richtungs-Darstellung einer Geraden}
+             \lang{en}{Point-direction form of a line}]\label{rule:pkt_richt_geraden}
+  \lang{de}{
+  Die Gerade $g$ durch den Punkt $P$ in Richtung des Vektors $\vec{v}\neq \vec{0}$ ist gegeben durch
+  }
+  \lang{en}{
+  The line $g$ containing the point $P$ and extending in the direction given by the non-zero vector 
+  $\vec{v}$ is given by the set of all points whose position vectors have the form
+  }
+	\[\vec{x} = \vec{OP} + \lambda\cdot \vec{v},\]
+  \lang{de}{
+	wobei $\lambda\in\R$ die reellen Zahlen durchläuft.
+	Dabei heißt dann $\vec{OP}$ \emph{Stützvektor} und $\vec{v}$ \emph{Richtungsvektor} der Geraden.	
+	Die Gerade $g$ ist die durch diese Gleichung beschriebene Menge, d. h.
+  }
+  \lang{en}{
+  where $\lambda\in\R$ runs through all real numbers. In this form, the constant vector $\vec{OP}$ is 
+  sometimes referred to as the \emph{support vector} and $\vec{v}$ is called the \emph{direction 
+  vector} of the line. We often write the set of points with these position vectors simply as a set 
+  of vectors
+  }
+	\[g = \{\vec{OP} + \lambda\cdot \vec{v} \mid \lambda\in\R\},\]
+	\lang{de}{
+  vgl. Abschnitt über \link{04-lineare-funktionen}{Lineare Funktionen}.
+  \\\\
+  \floatright{\href{https://www.hm-kompakt.de/video?watch=726}{\image[75]{00_Videobutton_schwarz}}}\\~
+  }
+  \lang{en}{
+  and identify the vectors with coordinates (see \link{04-lineare-funktionen}{linear functions}).
+  }
+\end{rule}
+
+\lang{de}{
+Selbstverständlich lassen sich beide Darstellungen ineinander überführen. Im einen Fall ist 
+$\vec{PQ}$ ein Richtungsvektor der Geraden, im anderen Fall ist $\vec{OQ} = \vec{OP} + \vec{v}$ der 
+Ortsvektor eines zweiten Punktes auf der Geraden.
+}
+\lang{en}{
+Of course one representation can be transformed into the other representation. In the first case, we 
+can take $\vec{PQ}$ to be a direction vector of the line, and in the other case, 
+$\vec{OQ} = \vec{OP} + \vec{v}$ can be taken to be the position vector of a second point on the line.
+}
+
+\begin{example}
+	\lang{de}{
+  Zu den Punkten $P = (1;1;1)$ und $Q = (2;2;3)$ im Raum und einer gegebenen Richtung 
+  $\vec{v} = \begin{pmatrix} 2\\0\\-2\end{pmatrix}$ bestimmen wir zwei Geraden durch $P$. Die Gerade 
+  $g_1$ durch $P$ und $Q$ ist gegeben durch
+  }
+  \lang{en}{
+  Let $P = (1,1,1)$, $Q = (2,2,3)$ and $\vec{v} = \begin{pmatrix} 2\\0\\-2\end{pmatrix}$. From 
+  these, we can determine two lines that go through $P$. The first line, $g_1$, goes through both $P$ 
+  and $Q$ and is given by
+  }
+	\[g_1: \vec{x} = \vec{OP} + \lambda\cdot \vec{PQ} = 
+    \begin{pmatrix} 1\\1\\1\end{pmatrix} + \lambda\cdot\begin{pmatrix} 1\\1\\2\end{pmatrix}, 
+    \quad\lambda\in\R,\]
+  \lang{de}{denn }\lang{en}{as }
+  $\vec{PQ} = \vec{OQ} - \vec{OP} = 
+   \begin{pmatrix} 2\\2\\3\end{pmatrix} - \begin{pmatrix} 1\\1\\1\end{pmatrix} = 
+   \begin{pmatrix} 1\\1\\2\end{pmatrix}$.
+  \lang{de}{Die Gerade $g_2$ durch $P$ mit der Richtung $\vec{v}$ ist gegeben durch}
+  \lang{en}{The second line, $g_2$, goes through $P$ in the direction of $\vec{v}$ and is given by}
+	\[g_2: \vec{x} = \vec{OP} + \lambda\cdot \vec{v} = \begin{pmatrix} 1\\1\\1\end{pmatrix} + \lambda\cdot\begin{pmatrix} 2\\0\\-2\end{pmatrix}, \quad\lambda\in\R.\]
+\end{example}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{v1}{-5}{5}
+			\randint{v2}{-5}{5}
+			\randint{v3}{-5}{0}
+			\randint{w1}{-5}{5}
+			\randint{w2}{-5}{5}
+			\randint{w3}{1}{5}
+			\randint{u1}{-5}{5}
+			\randint{u2}{-5}{5}
+			\randint{u3}{-5}{0}
+			\function[calculate]{t1}{w1-v1}
+			\function[calculate]{t2}{w2-v2}
+			\function[calculate]{t3}{w3-v3}
+		\end{variables}
+		
+			\text{\lang{de}{
+      Bestimmen Sie eine Parameterform der Geraden $g$ durch den Punkt 
+      $P=(\var{v1}; \var{v2}; \var{v3})$, die parallel zur Geraden
+      }
+      \lang{en}{
+      Determine a parametrised form of the line $g$ that is parallel to the line
+      }
+			\[ h: \vec{x}=\begin{pmatrix} \var{u1}\\ \var{u2} \\ \var{u3} \end{pmatrix}+
+			r \cdot \begin{pmatrix} \var{t1}\\ \var{t2} \\ \var{t3} \end{pmatrix}, \quad r\in \R \]
+			\lang{de}{
+      verläuft.
+			\\\\
+			Man erhält am einfachsten die Parameterform
+      }
+      \lang{en}{
+      and goes through the point $P=(\var{v1}; \var{v2}; \var{v3})$.
+      \\\\
+      The easiest such parametrised form to obtain is
+      }
+			\begin{table}[\class{no-padding}]
+			\rowspan[l][m]{3} $g:\vec{x}=
+			\left(\begin{matrix} \\ \\ \\ \\ \end{matrix}\right.$ &  
+			\ansref & \rowspan[l][m]{3} $\left.\begin{matrix} \\ \\ \\ \\  \end{matrix}\right)
+			+\lambda \cdot \left(\begin{matrix} \\ \\ \\ \\ \end{matrix}\right.$& 
+			\ansref & \rowspan[l][m]{3} $\left.\begin{matrix} \\ \\ \\ \\  \end{matrix}\right), \quad \lambda\in \R $. & \\ 
+			\ansref & \ansref & \\ 
+			\ansref & \ansref & 
+			\end{table}			
+			}
+		
+		\begin{answer}
+			\solution{v1}
+		\end{answer}
+		\begin{answer}
+			\solution{t1}
+		\end{answer}
+		\begin{answer}
+			\solution{v2}
+		\end{answer}
+		\begin{answer}
+			\solution{t2}
+		\end{answer}
+		\begin{answer}
+			\solution{v3}
+		\end{answer}
+		\begin{answer}
+			\solution{t3}
+		\end{answer}
+		\explanation{\lang{de}{
+    Als Stützvektor sollte man den Ortsvektor von $P$ nehmen, also 
+		$\begin{pmatrix} \var{v1}\\ \var{v2} \\ \var{v3} \end{pmatrix}$ und 
+		als Richtungsvektor den Richtungsvektor von $h$, also
+		$\begin{pmatrix}\var{t1}\\ \var{t2} \\ \var{t3} \end{pmatrix}$.
+    }
+		\lang{en}{
+    The position vector of $P$ can be taken as the constant vector, 
+    $\begin{pmatrix} \var{v1}\\ \var{v2} \\ \var{v3} \end{pmatrix}$ and as the lines are to be 
+    parallel, the direction vector can be the same as the direction vector of $h$, 
+		$\begin{pmatrix}\var{t1}\\ \var{t2} \\ \var{t3} \end{pmatrix}$.
+    }}
+	\end{quickcheck}
+
+
+
+\section{\lang{de}{Ebenen}\lang{en}{Planes}}
+\label{sec:ebenen}
+
+\lang{de}{
+Drei paarweise verschiedene Punkte $P$, $Q$ und $R$ im Raum, die nicht auf einer Geraden liegen, definieren eindeutig eine Ebene $E$, die durch diese drei Punkte verläuft.
+}
+\lang{en}{
+Three pairwise distinct points $P$, $Q$, and $R$ in $\R^n$ that do not lie on one line uniquely 
+determine a plane $E$ that contains these three points.
+}
+
+\begin{center}
+	\image{T110_ThreePointPlane}
+\end{center}
+
+
+\begin{rule}[\lang{de}{Drei-Punkte-Darstellung einer Ebene}\lang{en}{Three-point form of a plane}]\label{rule:drei_pkt_ebenen}
+   \lang{de}{
+   Sind $P$, $Q$ und $R$ drei paarweise verschiedene Punkte, die nicht auf einer (einzigen) Geraden 
+   liegen, so ist die Ebene $E$ durch diese drei Punkte gegeben durch die Menge aller Punkte, deren 
+   Ortsvektor sich schreiben lässt als
+   }
+   \lang{en}{
+   If $P$, $Q$, and $R$ are three pairwise distinct points that do not lie on a (single) line, then 
+   the plane $E$ that goes through these points is the set of all points whose position vectors have 
+   the form 
+   }
+	 \[\vec{x} = 
+     \vec{OP} + \lambda\cdot \big(\vec{OQ} - \vec{OP}\big) + \mu\cdot \big(\vec{OR} - \vec{OP}\big), 
+     \quad\lambda,\mu\in\R.\]
+   \lang{de}{
+   Wegen $\vec{OQ} - \vec{OP} = \vec{PQ}$ und $\vec{OR} - \vec{OP} = \vec{PR}$ lässt sich die Ebene 
+   auch schreiben als
+   }
+   \lang{en}{
+   Because $\vec{OQ} - \vec{OP} = \vec{PQ}$ and $\vec{OR} - \vec{OP} = \vec{PR}$, the plane can also 
+   be written as
+   }
+	 \[E: \vec{x} = \vec{OP} + \lambda\cdot \vec{PQ} + \mu\cdot \vec{PR}, \quad\lambda,\mu\in\R.\]	
+   \lang{de}{Die Ebene $E$ ist die durch diese Gleichung beschriebene Menge, d. h.}
+   \lang{en}{We often write the set of points with these position vectors simply as a set of vectors}
+	 \[E = \{\vec{OP} + \lambda\cdot \vec{PQ} + \mu\cdot \vec{PR} \mid \lambda,\mu\in\R\}.\]
+	 \lang{de}{
+   Diese Form der Darstellung einer Ebene nennt man \emph{Parameterform der Ebene}.\\
+   \floatright{\href{https://www.hm-kompakt.de/video?watch=731}{\image[75]{00_Videobutton_schwarz}}}\\~
+   }
+   \lang{en}{This is called a \emph{parametric} representation of the plane.}
+\end{rule}
+
+\lang{de}{
+Die Tatsache, dass $P$, $Q$ und $R$ nicht auf einer Geraden liegen dürfen, entspricht genau der 
+Tatsache, dass $\vec{PQ}$ und $\vec{PR}$ nicht parallel sind.
+\\\\
+Alternativ dazu lässt sich eine Ebene im Raum auch mittels eines Punktes und zwei vom Nullvektor verschiedener nichtparalleler Richtungen beschreiben.
+}
+\lang{en}{
+The fact that $P$, $Q$, and $R$ should not lie on a single line corresponds to the need for 
+$\vec{PQ}$ and $\vec{PR}$ to not be parallel.
+\\\\
+Alternatively, planes in 3D can be described using a point and two different non-zero directions.
+}
+
+\begin{center}
+	\image{T110_PointTwoDirectionsPlane}
+\end{center}
+
+\begin{rule}[\lang{de}{Punkt-Richtungs-Darstellung einer Ebene}
+             \lang{en}{Point-direction form of a plane}]\label{rule:pkt_richt_ebenen}
+  \lang{de}{
+  Zu einem Punkt $P$ in $\R^3$ und zwei vom Nullvektor verschiedenen nichtparallelen Vektoren 
+  $\vec{v}$ und $\vec{w}$ in $\R^3$ ist die Ebene $E$ durch den Punkt $P$ mit den Richtungen 
+  $\vec{v}$ und $\vec{w}$ beschrieben durch
+  }
+  \lang{en}{
+  Given a point $P$ in $\R^3$ and two distinct non-zero non-parallel vectors $\vec{v}$ and $\vec{w}$ 
+  in $\R^3$, the plane that goes through the point $P$ with directions $\vec{v}$ and $\vec{w}$ is 
+  described by
+  }
+	\[\vec{x} = \vec{OP} + \lambda\cdot \vec{v} + \mu\cdot \vec{w}, \quad\lambda,\mu\in\R.\]
+  \lang{de}{
+	Dabei heißt dann $\vec{OP}$ \emph{Stützvektor} und die Vektoren $\vec{v}$ und $\vec{w}$ 
+  \emph{Richtungsvektoren} der Ebene.
+  \\\\
+  \floatright{\href{https://www.hm-kompakt.de/video?watch=730}{\image[75]{00_Videobutton_schwarz}}}\\~
+  }
+  \lang{en}{
+  The vector $\vec{OP}$ is called the \emph{support vector} and the vectors $\vec{v}$ and $\vec{w}$ 
+  are called \emph{direction vectors} of the plane.
+   }\\
+\end{rule}
+
+\begin{example}
+  \lang{de}{
+  Wir bestimmen die Ebene durch die Punkte $P = (1;1;1)$, $Q = (2;3;3)$ und $R = (3;1;-1)$. Wegen 
+  $\vec{PQ} = \begin{pmatrix} 1\\2\\2\end{pmatrix}$ und 
+  $\vec{PR} = \begin{pmatrix} 2\\0\\-2\end{pmatrix}$ sind $\vec{PQ}$ und $\vec{PR}$ nicht parallel. 
+	Die Ebene durch $P$, $Q$ und $R$ ist damit gegeben durch
+  }
+	\lang{en}{
+  Let us find the plane containing the points $P = (1,1,1)$, $Q = (2,3,3)$ and $R = (3,1,-1)$. 
+  Because $\vec{PQ} = \begin{pmatrix} 1\\2\\2\end{pmatrix}$ and 
+  $\vec{PR} = \begin{pmatrix} 2\\0\\-2\end{pmatrix}$, $\vec{PQ}$ and $\vec{PR}$ are not parallel. 
+	The plane through $P$, $Q$, and $R$ is thus given by
+  }
+	\[E: \vec{x} = \vec{OP} + \lambda\cdot \vec{PQ} + \mu\cdot\vec{PR} = \begin{pmatrix} 1\\1\\1\end{pmatrix} + \lambda\cdot \begin{pmatrix} 1\\2\\2\end{pmatrix} + \mu\cdot\begin{pmatrix}2\\0\\-2\end{pmatrix},\quad \lambda,\mu\in\R.\]
+\end{example}
+
+% \begin{quickcheckcontainer}
+% \randomquickcheckpool{1}{1}
+% \begin{quickcheck}
+% 		\field{rational}
+% 		\type{input.number}
+% 		\begin{variables}
+% 			\randint[Z]{a}{-5}{5}
+% 			\randint[Z]{b}{1}{4}
+% 			\randint{c}{-4}{4}
+% 			\randint[Z]{d}{1}{4}
+% 		    \function[normalize]{f}{(a/b)*x+c/d}
+% 			\function[calculate]{ns}{-(c*b)/(a*d)}
+% 		\end{variables}
+% 		
+% 			\text{Die Nullstelle der linearen Funktion $f(x)=\var{f}$ ist \ansref.}
+% 		
+% 		\begin{answer}
+% 			\solution{ns}
+% 		\end{answer}
+% 	\end{quickcheck}
+% \end{quickcheckcontainer}
+% 
+% 
+% 	\begin{genericGWTVisualization}[550][1000]{mathlet1}
+% 		\begin{variables}
+% 			\randint{randomA}{1}{2}
+% 
+% 			\point[editable]{P}{rational}{var(randomA),var(randomA)}
+% 		\end{variables}
+% 		\color{P}{BLUE}
+% 		\label{P}{$\textcolor{BLUE}{P}$}
+% 
+% 		\begin{canvas}
+% 			\plotSize{300}
+% 			\plotLeft{-3}
+% 			\plotRight{3}
+% 			\plot[coordinateSystem]{P}
+% 		\end{canvas}
+% 		\text{Der Punkt hat die Koordinaten $(\var{P}[x],\var{P}[y])$.}
+% 	    	\end{genericGWTVisualization}
+
+\end{visualizationwrapper}
+
+
+\end{content}

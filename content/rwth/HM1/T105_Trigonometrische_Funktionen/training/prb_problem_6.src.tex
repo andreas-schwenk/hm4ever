@@ -1,0 +1,155 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A06: Funktionseigenschaften}
+    \lang{en}{Problem 6}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+    \component{generic_image}{content/rwth/HM1/images/g_img_right-angled-abb1.meta.xml}{image1}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{
+	\title{A06: Funktionseigenschaften}
+}
+\lang{en}{
+	\title{Problem 6}
+	}
+
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9731}{Ticket 9731}
+\end{block}
+
+
+\begin{problem}
+
+	\begin{variables} % global variables for pool
+		\randint{c}{0}{1}c*cos(x)
+		\randint{k0}{-3}{3}
+		\randint[Z]{k1}{-1}{1}
+		\function[calculate]{k2}{2+k1}
+		\function[calculate]{k3}{k2/4} % 1/4 or 3/4
+	\end{variables}
+		
+		
+%Frage 1 von 2
+\begin{question}
+\explanation{Berücksichtigen Sie in welchen Intervallen die Funktionswerte der trigonometrischen Funktionen größer bzw. kleiner als Null sind.\\
+Für Sinus und Kosinus haben diese Intervalle eine Länge von $\pi$.}
+	\begin{variables}
+		\function[normalize]{f}{c*cos(x)+(1-c)*sin(x)} % c=1: cos, c=0: sin
+		\function[calculate]{fpl0}{-c/2+2*k0}
+		\function[normalize]{fpl}{fpl0*pi} % f positive, left boundary
+		\function[calculate]{fpr0}{fpl0+1}
+		\function[normalize]{fpr}{fpr0*pi} % f positive, right boundary
+		\function[calculate]{fpp0}{fpl0+k3}
+		\function[normalize]{fpp}{fpp0*pi} % f positive, point in interval
+		\function[normalize]{g}{(1-c)*cos(x)+c*sin(x)} % c=0: cos, c=1: sin
+		\function[calculate]{gnl0}{(1+c)/2+2*k0}
+		\function[normalize]{gnl}{gnl0*pi} % g negative, left boundary
+		\function[calculate]{gnr0}{gnl0+1}
+		\function[normalize]{gnr}{gnr0*pi} % g negative, right boundary
+		\function[calculate]{gnp0}{gnl0+k3}
+		\function[normalize]{gnp}{gnp0*pi} % g negative, point in interval
+	\end{variables}
+
+    \type{input.function}
+    \field{rational}
+\lang{de}{
+	\text{Geben Sie das größte Intervall {\Large I} ein, in dem gilt:\\
+	$\var{f}\geq 0\;$ und $\,\var{fpp0}\pi\in ${\Large I}. $\qquad$ {\Large I}={\LARGE [}\ansref ; \ansref{\LARGE ]}.
+	\\\\
+	Geben Sie das größte Intervall {\Large J} ein, in dem gilt:\\
+	$\var{g} < 0\;$ und $\,\var{gnp0}\pi\in ${\Large J}. $\qquad$ {\Large J}={\LARGE (}\ansref ; \ansref{\LARGE )}.\\
+	(Verwenden Sie bitte rationale Vielfache von $\pi$, geben Sie $\pi$ als pi ein.)}
+	\explanation{}
+	}
+\lang{en}{
+	\text{Find the largest interval {\Large I} such that:\\
+	$\var{f}\geq 0\;$ and $\,\var{fpp0}\pi\in ${\Large I}. $\qquad$ {\Large I}={\LARGE [}\ansref , \ansref{\LARGE ]}.
+	\\\\
+	Find the largest interval {\Large J} such that:\\
+	$\var{g} < 0\;$ and $\,\var{gnp0}\pi\in ${\Large J}. $\qquad$ {\Large J}={\LARGE (}\ansref , \ansref{\LARGE )}.\\
+	(When inputting your answer, use rational multiples of $\pi$, use pi for $\pi$.)}
+		\explanation{}
+	}
+	\begin{answer}
+		\solution{fpl}
+		\checkAsFunction{x}{-10}{10}{100}
+    \end{answer}
+	\begin{answer}
+		\solution{fpr}
+		\checkAsFunction{x}{-10}{10}{100}
+    \end{answer}
+	\begin{answer}
+		\solution{gnl}
+		\checkAsFunction{x}{-10}{10}{100}
+    \end{answer}
+	\begin{answer}
+		\solution{gnr}
+		\checkAsFunction{x}{-10}{10}{100}
+    \end{answer}
+
+\end{question} % 1
+     
+%Frage 2 von 2
+\begin{question}
+\explanation{Berücksichtigen Sie in welchen Intervallen die Funktionswerte der trigonometrischen Funktionen größer bzw. kleiner als Null sind.\\
+Für den Tangens haben diese Intervalle eine Länge von $\pi/2$.}
+\begin{variables}
+	\randint[Z]{k}{-7}{7}
+	\function[normalize]{left}{k*pi}
+    \function[calculate]{kpoint}{(k+1/4)}
+	\function[normalize]{point}{kpoint*pi}
+    \function[calculate]{kright}{(k+1/2)}
+	\function[normalize]{right}{kright*pi}
+\end{variables}
+	\lang{de}{
+		\text{Geben Sie das größte Intervall {\Large I} ein, in dem gilt:\\
+	Der Tangens ist definiert, $\tan(x)\geq 0\;$ und $\,\var{kpoint}\pi\in ${\Large I}.\\
+	{\Large I}={\LARGE [}\ansref ; \ansref{\LARGE )}.}
+	\explanation{}
+	}
+	\lang{en}{
+		\text{Find the largest interval {\Large I} such that:\\
+	The function tangent is defined, $\tan(x)\geq 0\;$ and $\,\var{kpoint}\pi\in ${\Large I}.\\
+	{\Large I}={\LARGE [}\ansref , \ansref{\LARGE )}.}
+	\explanation{}
+	}
+	\type{input.function}
+	\field{rational}
+	
+	\begin{answer}
+		\solution{left}
+		\checkAsFunction{x}{-10}{10}{100}
+	\end{answer}
+	
+	\begin{answer}
+		\solution{right}
+		\checkAsFunction{x}{-10}{10}{100}
+	\end{answer}
+
+\end{question} % 2
+  
+\end{problem}
+
+
+\embedmathlet{mathlet}
+
+\end{content}

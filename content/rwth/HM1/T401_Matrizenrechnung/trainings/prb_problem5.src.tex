@@ -1,0 +1,154 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A05: Matrixoperation}
+    \lang{en}{P05: Matrix operation}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Rechnen mit Matrizen}
+    \lang{en}{Calculating with matrices}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A05: Matrixoperation}}
+\lang{en}{\title{P05: Matrix operations}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/11521}{Ticket 11521}
+\end{block}
+
+\begin{problem}
+	%\randomquestionpool{}{}
+	\begin{question}
+		
+		\begin{variables}
+			\randint{c2}{1}{4}
+			\randint{a2}{2}{4}
+			\randint{r}{-1}{1}
+			\randint{t}{0}{1}
+			\function{b1}{a2}
+			\function{c1}{a2}
+			\function[calculate]{a1}{a2+r}
+			\function[calculate]{b2}{t*c1+(1-t)*c2}
+			\function[calculate]{s1}{(a2-b1)^2+(a1-c1)^2+(b2-c2)^2}
+			\function[calculate]{s2}{(a2-b1)^2+(a2-c1)^2+(b2-c2)^2}
+			\function[calculate]{s3}{(a2-b2)^2+(a1-c2)^2+(b1-c1)^2}
+			\function[calculate]{s4}{(a2-b1)^2+(b2-c1)^2}
+		\end{variables}
+		
+		\type{input.generic}
+        \field{real}
+		\correctorprecision{3}
+		\displayprecision{3}
+		\lang{de}{
+	    \text{Gegeben seien eine $(\var{a1}\times \var{a2})$-Matrix $A$, eine
+  $(\var{b1}\times \var{b2})$-Matrix $B$ und eine  $(\var{c1}\times \var{c2})$-Matrix $C$. 
+  Die Einträge aller Matrizen seien Elemente eines Körpers $\mathbb{K}$. Welche der folgenden Ausdrücke sind definiert?}
+	    }
+     \lang{en}{
+	    \text{Let a$(\var{a1}\times \var{a2})$-matrix $A$, a
+  $(\var{b1}\times \var{b2})$-matrix $B$ und eine  $(\var{c1}\times \var{c2})$-matrix $C$ be given. 
+  The entries of all matrices are elements of a field $\mathbb{K}$. Which of the following terms are defined?}
+	    }
+	    %\permuteAnswers{1, 2, 3} 
+	    %http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+	    \begin{answer}
+            \type{mc.multiple}
+
+            \begin{choice}
+	    	\text{$A\cdot B+C$}
+	    	\solution{compute}
+	    	\iscorrect{s1}{=}{0} 
+	    	\end{choice}
+            
+	    	\begin{choice}
+	    	\text{$A\cdot (B+C)$}
+	    	\solution{compute}
+	    	\iscorrect{s2}{=}{0} 
+	    	\end{choice}
+            
+	    	\begin{choice}
+	    	\text{$B+C\cdot A$}
+	    	\solution{compute}
+	    	\iscorrect{s3}{=}{0} 
+	    	\end{choice}
+            
+	    	\begin{choice}
+	    	\text{$A\cdot B\cdot C$}
+	    	\solution{compute}
+	    	\iscorrect{s4}{=}{0}
+	    	\end{choice}
+            
+            \lang{de}{
+            \explanation {
+                $A\cdot B+C$:
+                Die Spaltenanzahl von $A$ muss
+                gleich der Zeilenanzahl von $B$ sein.
+                Das Produkt muss die gleiche Dimensionierung wie Matrix $C$ haben.
+                ~\\~\\
+
+                $A\cdot (B+C)$:
+                Die Matrizen $B$ und $C$ müssen gleich dimensioniert sein.
+                Die Spaltenanzahl von $A$ muss mit der Zeilenanzahl von $B$
+                (bzw. $C$) übereinstimmen.
+                ~\\~\\
+
+                $B+C\cdot A$:
+                Die Spaltenanzahl von $C$ muss gleich der Zeilenanzahl von $A$ sein.
+                Das Produkt muss die gleiche Dimensionierung wie Matrix $B$ haben.
+                ~\\~\\
+
+                $A\cdot B\cdot C$:
+                Die Spaltenanzahl von $A$ muss 
+                gleich der Zeilenanzahl von $B$ sein.
+                Weiterhin muss die Spaltenanzahl von $B$ 
+                gleich der Zeilenanzahl von $C$ sein.
+            }}
+
+      \lang{en}{
+            \explanation {
+                $A\cdot B+C$:
+                The number of columns in $A$ must be the same as the number of rows in $B$. The product must have the
+                same dimensions as matrix $C$.
+                ~\\~\\
+
+                $A\cdot (B+C)$:
+                The matrices $B$ and $C$ must have the same dimensions.
+                The number of columns in $A$ must be the same as the number of rows in $B$ (and $C$).
+                ~\\~\\
+
+                $B+C\cdot A$:
+                The number of columns in $C$ must be the same as the number of rows in $A$.
+                The product must have the same dimensions as matrix $B$.
+                ~\\~\\
+
+                $A\cdot B\cdot C$:
+                The number of columns in $A$ must be the same as the numbers of $rows$ in $B$.
+                Furthermore, the number of columns in $B$ must be the same as the number of rows in $C$.
+            }}
+            
+	    \end{answer}    
+        
+
+	    
+	    %generic viz: http://team.mumie.net/projects/support/wiki/Example
+	    
+	\end{question}
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

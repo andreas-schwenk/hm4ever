@@ -1,0 +1,457 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Programmablauf}
+    \lang{en}{...}
+   }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Programmablauf}
+    \lang{en}{...}
+  \end{description}
+\corrector{system/problem/PythonCorrector.meta.xml}
+\begin{components}
+  \end{components}
+  \begin{links}
+%\link{generic_problem}{content/rwth/HM1/T901_Python/trainings/g_prb_content_03__problem1.meta.xml}{content_03__problem1}
+%\link{generic_article}{content/rwth/HM1/T901_Python/g_art_content_04_weiteres.meta.xml}{content_04_weiteres}
+\end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/18346}{Ticket 18346}
+\end{block}
+\usepackage{mumie.ombplus}
+%\usepackage{listings}
+\ombchapter{12}
+\ombarticle{1}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\begin{block}[annotation]
+DIESER KURSTEIL BEFINDET SICH NOCH IM AUFBAU!
+\end{block}
+
+
+\lang{de}{\title{Programmablauf}}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+
+\section{Einführung}
+
+In den letzten Kapiteln wurden Programme stets als Befehlsfolge formuliert,
+die sequentiell vom ersten bis zum letzten Befehl ausgeführt wird.
+
+Nun lernen wir \textbf{Kontrollstrukturen} kennen,
+die es uns ermöglichen werden den Programmablauf zu steuern.
+Entsprechend können komplexere Programme erstellt werden.
+
+%Zunächst definieren wir die ``strukturellen Einheiten'' eines Programms:
+
+\begin{definition}[Anweisungsblock]
+    Ein \textbf{Anweisungsblock} ist eine Folge von Anweisungen
+    $(a_1, a_2, \cdots, a_n)$.
+    
+    Die Ausführung geschieht sequentiell von $a_1$ bis $a_n$.    
+    Nach Anweisung $a_i$ wird also stets Anweisung $a_{i+1}$ ausgeführt.
+    %Innerhalb eines Blocks wird $a_{i+1}$ nach $a_i$
+    %Die Verarbeitung eines Blocks ist beendet, wenn die letzte
+    %Anweisung $a_n$ ausgeführt worden ist. 
+    %Es gibt also innerhalb eines Blocks keine Sprünge zu anderen Teilen des Programms.
+\end{definition}
+
+\begin{example}
+    Aus der Definition folgt direkt, dass alle bisherigen Beispiele nur aus 
+    einem einzigen Anweisungsblock bestehen.
+\end{example}
+
+In Python werden Anweisungsblöcke durch \textbf{Einrückungen} gruppiert,
+die im Editor durch Tabulatoren 
+(oder alternativ durch 4 aufeinanderfolgende Leerzeichen) 
+gekennzeichnet werden.
+Daraus folgt in der Regel eine gute Lesbarkeit von Programmen.
+
+\begin{block}[warning]
+    Wenn Einrückungen fehlerhaft sind, erhält man einen \textit{Syntaxfehler}.
+    Andere Programmiersprachen sind meist etwas weniger streng.
+\end{block}
+
+Die folgenden Abschnitte führen die grundlegenden \textbf{Kontrollstrukturen} ein:
+\begin{itemize}
+    \item \textbf{Bedingte Anweisungen} erlauben es, 
+        Anweisungsblöcke nur unter bestimmten Voraussetzungen 
+        auszuführen.
+    \item Durch \textbf{Schleifen} kann man einen Anweisungsblock
+        mehrfach hintereinander ausführen.
+    \item Die Umsetzung von \textbf{Programmfunktionen} ermöglicht es,
+        wiederverwendbare Programmaussschnitte zu definieren;
+        ähnlich wie mathematische Funktionen.
+\end{itemize}
+
+
+\section{Bedingte Anweisungen}
+
+Unter \textbf{bedingten Anweisungen} versteht man einen Anweisungsblock, 
+der nur dann ausgeführt wird, wenn eine \textbf{logische Bedingung} wahr ist.
+
+\begin{example}
+Das Minimum zweier Zahlen $a$ und $b$ ist gewissermaßen
+eine einfache Fallunterscheidung:
+\begin{block}[code]
+a = 4
+b = 7
+if a < b:
+    c = a
+else:
+    c = b
+\end{block}
+\begin{block}[code-output]
+c = 4
+\end{block}
+
+Ist die Bedingung in Zeile 3 wahr (\textbf{"if"}), so wird die Anweisung \texttt{c = a} ausgeführt.
+Andernfalls (\textbf{"else"}) wird die Anweisung \texttt{c = b} ausgeführt.
+Da hier $4<7$ wahr ist, wird in Variable \texttt{c} der Inhalt von \texttt{a}, also 4, geschrieben.
+
+\textit{Man beachte, dass man für dieses Beispiel in Python auch 
+kurz \texttt{c = min(a, b)} schreiben kann.}
+\end{example}
+
+Die bereits im letzten Beispiel genutzte
+\textbf{If-Anweisung} besteht mindestens 
+aus dem Schlüsselwort \texttt{if},
+hinter welchem ein logischer Ausruck steht,
+der entweder als wahr (True) oder falsch (False)
+ausgewertet werden kann.
+
+Mit dem Schlüsselwort \texttt{elif} lassen sich optional
+weitere Bedingungen formulieren.
+Diese werden nur dann ausgewertet, 
+wenn alle vorherigen Bedingungen falsch waren.
+
+Möchte man eine Anweisungsfolge nur dann ausführen,
+wenn alle vorangegangenen Bedingungen falsch waren,
+kann man noch das Schlüsselwort \texttt{else} zufügen.
+%Der Block hinter \texttt{else} wird genau dann
+%ausgeführt, wenn alle vorherigen Bedingungen falsch waren.
+
+Insgesamt ist der strukturelle Aufbau wie folgt:
+\begin{block}[code]
+if logischerAusdruck:
+    anweisungsBlock
+elif logischerAusdruck:
+    anweisungsBlock
+...
+elif logischerAusdruck:
+    anweisungsBlock
+else:
+    anweisungsblock
+\end{block}
+
+\begin{example}
+Der folgende Codeausschnitt vergleicht die beiden Variablen 
+\texttt{a} und \texttt{b} und gibt eine entsprechende Ausgabe aus:
+\begin{block}[code]
+a = 3
+b = 5
+if a < b:
+    print(" a ist kleiner b")
+elif a > b:
+    print(" a ist größer b")
+else:
+    print(" a ist gleich b")
+\end{block}
+\end{example}
+
+\begin{remark}
+If-Anweisungen können auch \textit{geschachtelt} eingesetzt werden.
+\end{remark}
+
+\begin{quickcheck}
+    \type{input.number}
+    \displayprecision{3}
+    \correctorprecision{3}
+      \begin{variables}
+            \function[calculate]{x}{1337}
+       \end{variables}
+      \text{
+\begin{verbatim}
+x = 4
+y = 5
+z = 6
+w = 7
+if x < y:
+	if x > z:
+		print("73")
+	elif x >= 0 and x < w:
+		print("1337")
+else:
+    print("4711")
+\end{verbatim}
+    Das Programm gibt \ansref aus.
+        }
+      \explanation{Von oben nach unten arbeiten. Ist eine Bedingung wahr,
+        so betrachtet man den gesamten eingerückten Block unter der Bedingung.
+        Dann die "inneren" Bedingungen prüfen usw.}
+      \begin{answer}
+            \solution{s}
+      \end{answer}
+\end{quickcheck}
+
+
+
+\section{Schleifen}
+
+Für eine Anweisungsfolge die mehrfach hintereinander
+ausgeführt werden soll verwendet man \textbf{Schleifen}.
+Die Anzahl der Durchläufe ("\textbf{Iterationen}") 
+hängt meist von einem logischen Ausdruck ab.
+
+Im Folgenden werden wir die beiden Schleifentypen \textbf{while} und 
+\textbf{for} kennenlernen.
+
+
+\subsection{While-Schleife}
+
+Eine \textbf{while}-Schleife führt einen Anweisungsblock so lange
+wiederholt aus, 
+wie eine gegebene Bedingung wahr ist.
+%wobei die Bedingung zu Beginn dieses Blocks steht.
+%Man spricht auch von \textit{kopfgesteuerten} Schleifen.
+
+\begin{example}
+Das nachstehende Python-Programm berechnet das Produkt 
+$p = a \cdot b$ zweier Zahlen $a, b \in \Z$ 
+durch \textbf{Summation}:
+\begin{block}[code]
+a = 7
+b = 9
+produkt = 0
+i = 1
+while i <= b:
+    produkt = produkt + a
+    i = i + 1
+print(produkt)
+\end{block}
+Man berechnet also die $b$-fache Addition $p = a + a + \cdots + a$.
+Die letzten beiden Zeilen werden solange (englisch "while") ausgeführt,
+wie die Bedingung $i < b$ \textit{wahr} ist.
+\end{example}
+
+%While-Schleifen werden häufig dann einsetzt, 
+%wenn Bedingungen komplex sind.
+
+\begin{block}[warning]
+Bei einer ungünstigen Formulierung der logischen Bedingung besteht die Gefahr, 
+dass die Schleife nicht mehr verlassen werden kann.
+
+Man spricht in desem Fall von einer \textbf{Endlosschleife}.
+\end{block}
+
+
+\begin{quickcheck}
+    \type{input.number}
+    \displayprecision{3}
+    \correctorprecision{3}
+      \begin{variables}
+            \function[calculate]{s}{8}
+       \end{variables}
+      \text{
+\begin{verbatim}
+x = 1
+i = 3
+while i > 0:
+	x = x * 2
+	i = i - 1
+print(x)
+\end{verbatim}
+    Das Programm gibt \ansref aus.
+    }
+      \explanation{In jedem Schleifendurchlauf wird $x$ mit dem Faktor
+        2 multipliziert. Nach 3 Durchläufen ($i=3,2,1$) erhält $x$ den Wert
+        $2^3 = 8$.}
+      \begin{answer}
+            \solution{s}
+      \end{answer}
+\end{quickcheck}
+
+
+\subsection{For-Schleife}
+
+Die Schleifenbedingung der Summation im letzten Beispiel wurde durch
+eine Zählervariable \texttt{i} verwaltet.
+Dazu wurde \texttt{i} in jedem Durchlauf um eins erhöht (\textit{"inkrementiert"}).
+Eine elegantere (=kürzere) Formulierung ist über eine \textbf{for-Schleife} möglich:
+
+\begin{example}
+\begin{block}[code]
+a = 7
+b = 9
+p = 0
+for i in range(0, b):
+    p = p + a
+\end{block}
+Variable $i$ läuft von $0$ bis ausschließlich $b$, also $i=0,1,\cdots,b-1$.
+\end{example}
+
+\begin{remark}
+    \texttt{range(x,y)} wertet zunächst die Ausdrücke $x$ und $y$ aus
+    und setzt $i$ auf $[x,y) \subset \mathbb{Z}$, also $x, x+1, x+2, \cdots, y-1$.
+    Die Ausdrücke $x$ und $y$ können beliebige Terme sein.
+\end{remark}
+
+
+
+
+
+\section{Funktionen}
+
+In der Regel möchte man Programme für Teilprobleme 
+(z.B. einen Algorithmus zur Berechnung des größten gemeinsamen Teilers) 
+nur einmal definieren und in vielen Aufgabenstellungen wiederverwenden.
+
+%Es ist wünschenswert solche Programmausschnitte so zu strukturieren,
+%sodass sie \textbf{wiederverwendbar} sind.
+Imperative Programmiersprachen bieten hierzu das Konzept der
+\textbf{Funktionen} an.
+
+\begin{example}
+Die Berechnung des Betrags $|x|$ kann in Python wie folgt als 
+\textbf{Funktion} umgesetzt werden:
+\begin{block}[code]
+def betrag(x):
+    if x >= 0:
+        return x
+    else
+        return -x
+\end{block}
+Um beispielsweise den Betrag von $-42$ zu berechnen, 
+und an Variable $y$ zuzuweisen schreibt man:
+\begin{block}[code-output]
+y = betrag(-42)
+\end{block}
+Man spricht von einem \textbf{Aufruf} der Funktion. 
+%Dabei wird für jeden übergebenen
+%Parameter der Ausdruck (hier: $-6 \cdot 7$) berechnet und übergeben.
+\end{example}
+
+\begin{remark}
+In Pyhton kann man den Betrag von $x$ durch die bereits 
+vorhandene Funktion \texttt{abs(x)} bestimmen.
+\end{remark}
+
+Eine Funktion hat in Python den folgenden Aufbau:
+\begin{block}[code]
+def funktionsname( parameter_1, parameter_2, ..., parameter_n ):
+    funktionsrumpf
+\end{block}
+\begin{itemize}
+    \item Der \textbf{Funktionsname} legt den Bezeichner fest, unter dem die Funktion bekannt ist.
+    \item Die \textbf{Parameterliste} besteht aus keinem oder endlich vielen \textbf{Parametern}.
+        Jeder Parameter wird durch einen Bezeichner definiert.
+    \item Der \textbf{Funktionsrumpf} enthält eine Folge von Anweisungen.
+    \item Ein \textbf{Rückgabewert} kann innerhalb des Funktionsrumpfes durch das Schlüsselwort \textbf{return} zurückgegeben werden.
+        Die Funktion wird an dieser Stelle unverzüglich verlassen.
+        Ist die Rückgabe nicht vorgesehen, so spricht man von einer \textbf{Prozedur}.
+\end{itemize}
+
+%\begin{remark}
+%TODO: den Begriff "Funktion" abgrenzen: Informatik vs Mathematik.
+%\end{remark}
+
+
+\begin{quickcheck}
+    \type{input.number}
+    \displayprecision{3}
+    \correctorprecision{3}
+      \begin{variables}
+            \function[calculate]{s}{13}
+       \end{variables}
+      \text{
+\begin{verbatim}
+def f1(x):
+    return x*x
+    
+def f2(z, w):
+    return z + w
+    
+print( f2( f1( 2+1 ), 4) )
+\end{verbatim}
+    Das Programm gibt \ansref aus.
+    }
+      \explanation{Die Funktion $f_2$ wird mit den beiden 
+      Parametern $f_1(3)$ und $4$ aufgerufen. Dazu muss zunächst $f_1(3)$ auswertet werden.
+      Man erhält $f_2( 3^2 ,4) = 9 + 4 = 13$.}
+      \begin{answer}
+            \solution{s}
+      \end{answer}
+\end{quickcheck}
+
+
+%\begin{example}
+%    \link{content_03__problem1}{Python-Aufgabe: Signumfunktion}
+%\end{example}
+
+
+%\begin{quickcheck}
+%
+%Die \textbf{Vorzeichenfunktion} für reelle Zahlen ist wie folgt definiert:
+%\[
+%    sgn(x) =
+%    \begin{cases}
+%        1 & \text{ falls } x > 0 \\
+%        0 & \text{ falls } x = 0 \\
+%        -1 & \text{ sonst }
+%    \end{cases}
+%\]
+%
+%Implementieren Sie eine entsprechende \textbf{Funktion} in Python.
+%Wählen Sie \textbf{sgn} als Namen für Ihre Funktion.
+%
+%\pythonfunctionanswer{sgn}{12}{80}
+%
+%\begin{hidden}
+%
+%\begin{pythonfunctionsolution}{sgn}       
+%def sgn(x):
+%    if x > 0:
+%        return 1
+%    elif x == 0:
+%        return 0
+%    else:
+%        return -1
+%\end{pythonfunctionsolution}
+%
+%\begin{pythonevaluator}
+%if sgn(1) != 1 or sgn(100) != 1 or sgn(0) != 0 or sgn(-1) != -1 or sgn(-25) != -1:
+%    exit(11)
+%exit(0)                                                   	
+%\end{pythonevaluator}
+%
+%\pythongrading{0}{1.0}{runs-and-passed-all-tests}
+%\pythongrading{1}{0.0}{code-caused-runtime-error}
+%\pythongrading{11}{0.5}{your-code-gives-the-wrong-result}
+%
+%\end{hidden}
+%
+%\end{quickcheck}
+
+
+
+
+
+\end{visualizationwrapper}
+
+\end{content}
+
+

@@ -1,0 +1,1053 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Rechnen mit Brüchen und Bruchtermen}
+    \lang{en}{Fraction arithmetic}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}  
+  \end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_02_rechengrundlagen_terme.meta.xml}{content_02_rechengrundlagen_terme}
+\link{generic_article}{content/rwth/HM1/T101neu_Elementare_Rechengrundlagen/g_art_content_01_zahlenmengen.meta.xml}{content_01_zahlenmengen}
+\end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+
+\usepackage{mumie.ombplus}
+\ombchapter{1}
+\ombarticle{3}
+
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Rechnen mit Brüchen und Bruchtermen}\lang{en}{Fraction arithmetic}}
+
+ 
+\begin{block}[annotation]
+ Multiplikation, Division, Addition und Subtraktion von Brüchen\\
+  
+\end{block}
+%
+% ursprüngliche Version: T101_Rechengrundlagen/content_03_bruchrechnung
+%
+% \begin{block}[annotation]
+%  Im Ticket-System: \href{http://team.mumie.net/issues/8971}{Ticket 8971}\\
+% \end{block}
+%
+%Ticket neu:
+%
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/19192}{Ticket 19192}
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\lang{de}{
+In \ref[content_01_zahlenmengen][Abschnitt 1]{sec:zahlenmengen} über Zahlenmengen haben wir \emph{Brüche} 
+zunächst als rationale Zahlen kennengelernt. Bei der Einführung der \emph{elementaren Grundrechenarten} in 
+\ref[content_02_rechengrundlagen_terme][Abschnitt 2]{rem:grundrechenarten} haben wir darauf hingewiesen, dass jede 
+Division als Bruch darstellbar ist, und dass beim Rechnen mit Brüchen besondere Regeln zu beachten sind.
+}
+\lang{en}{
+In \ref[content_01_zahlenmengen][section 1]{sec:zahlenmengen} we first introduced fractions alongside rational numbers. In \ref[content_02_rechengrundlagen_terme][section 2]{rem:grundrechenarten} we introduced some operators and pointed out that every division can be expressed as a fraction, and that we must follow certain rules when we use fractions.
+}
+%
+%
+% Diesen Besonderheiten wollen wir uns nun im folgenden Abschnitt widmen und die Grundrechenarten für Brüche erklären - 
+% und zwar nicht nur für Brüche mit ganzen Zahlen in Zähler und Nenner, sondern allgemein für Brüche mit beliebigen 
+% reellen Zahlen oder sogar \ref[content_02_rechengrundlagen_terme][Termen]{sec:terme} in Zähler und Nenner. Solche Brüche, 
+% die Terme im Zähler oder Nenner enthalten, werden auch Bruchterme genannt.
+%
+%
+%%% Video K.M.
+%
+\lang{de}{
+Diese Regeln sind in ihren Grundzügen aus der Schulmathematik bereits bekannt.
+Sie können mit den folgenden Videos aufgefrischt 
+\\
+\center{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10959&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+und bei Bedarf manifestiert werden:
+\\
+\center{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10732&mode=iframe&speed=true}
+{\image[75]{00_video_button_schwarz-blau}}}\\
+\\
+%
+Im folgenden Abschnitt werden die elementaren Regeln der Bruchrechnung, die zu beachtenden Besonderheiten
+und mögliche Vereinfachungen noch einmal beschrieben und vertieft. Dabei betrachten wir nicht nur Brüche mit \emph{ganzen Zahlen} in Zähler und Nenner, sondern auch solche
+mit \emph{reellen Zahlen} oder sogar mit \ref[content_02_rechengrundlagen_terme][Termen]{sec:terme} in Zähler 
+und Nenner, sogenannte \emph{Bruchterme}.
+}
+\lang{en}{
+In the following section we will cover the rules for simplifying and calculating with fractions. Besides fractions with \emph{integer} numerators and denominators, we will consider those with \emph{real} numerators and denominators, and even those containing variables.
+}
+%
+
+\section{\lang{de}{Addition und Subtraktion von Brüchen}\lang{en}{Addition and subtraction of fractions}}\label{add}
+
+\lang{de}{
+Zwei Brüche können leicht addiert oder subtrahiert werden, wenn sie den gleichen Nenner haben. Das Ergebnis ist in diesem Fall
+der Bruch, in dem der gemeinsame Nenner beibehalten und nur im Z"ahler die Summe bzw. die Differenz gebildet wird. 
+Wie aber werden Brüche addiert oder subtrahiert, deren Nenner nicht gleich sind?
+\\
+Da ein Bruch das Ergebnis einer Division ist, ist er in seiner Darstellung nicht eindeutig. Es gilt beispielsweise:
+}
+\lang{en}{
+Two fractions can easily be added or subtracted if they have the same denominator. The addition or subtraction is then performed only on the numerator, and the denominator of the result remains the same. But how do we add or subtract fractions that do not share a denominator?
+\\
+As a fraction can be seen as the result of a division, it does not have a unique representation. For example, we can write:
+}
+
+% myorange: \#D2691E 
+\[
+\begin{mtable}[\cellaligns{rcl}]
+
+                    &  \underrightarrow{\text{\lang{de}{K\"urzen durch}\lang{en}{Divide through by}} \; 3}  & \\
+    \displaystyle\frac{12}{15} = & \frac{\textcolor{\#D2691E}{\cancel{3}} \cdot 4}{\textcolor{\#D2691E}{\cancel{3}} \cdot 5}&= \frac{4}{5} \\
+                    &  \overleftarrow{\text{\lang{de}{Erweitern mit}\lang{en}{Multiply through by}}\; 3}  &\\
+
+\end{mtable}
+\]
+
+\lang{de}{
+Von links nach rechts betrachtet wird hier der Bruch $\frac{12}{15}$ durch $3$ \emph{gekürzt}.
+Umgekehrt, von rechts nach links betrachtet, wird der Bruch $\frac{4}{5}$ um den Faktor $3$ 
+\emph{erweitert.} Der Wert des Bruchs bleibt dabei jeweils unverändert.
+\\
+In gleicher Weise können auch Bruchterme gekürzt werden, wenn Zähler und Nenner denselben Term als Faktor enthalten:
+}
+\lang{en}{
+From left to right, we \emph{divide the fraction $\frac{12}{15}$ through} by $3$. That is, we divide both 
+the numerator and the denominator by 3, and so keep the value of the fraction the same. In the 
+other direction, from right to left, we \emph{multiply the fraction $\frac{4}{5}$ through} by $3$, which 
+again keeps the value of the fraction the same.
+\\
+In the same way we can also simplify fractions containing variables, as long as the numerator and the denominator share a common factor:
+}
+
+\[
+\begin{mtable}[\cellaligns{rcl}]
+
+%                    &  \underrightarrow{\text{Kürzen durch} \; (x+1)}  & \\
+    \displaystyle\frac{(x+1)(2-x)}{3(x+1)} = & \frac{\textcolor{\#D2691E}{\cancel{(x+1)}} \cdot (2-x) }{\textcolor{\#D2691E}{\cancel{(x+1)}} \cdot 3}&= \frac{2-x}{3} \\
+%                    &  \overleftarrow{\text{Erweitern mit} \; (x+1)}  &\\
+    
+\end{mtable}
+\]
+\lang{de}{
+Dabei ist allerdings zu beachten, dass der Wert des Terms, durch den gekürzt oder um den erweitert werden soll, nicht Null sein darf, denn 
+die vorstehende Gleichung gilt nur für $x \neq -1.$ 
+\\
+Wir halten fest:
+}
+\lang{en}{
+The term being divided through or multiplied through by cannot be zero, so the above equality only holds for $x \neq -1.$
+\\
+To summarise:
+}
+
+\begin{rule}[\lang{de}{Erweitern und K\"urzen}\lang{en}{Expanding and Simplifying Fractions}] \label{erweitern_kuerzen}
+
+\lang{de}{
+Br\"uche werden \notion{\emph{erweitert}}, indem Z\"ahler und Nenner mit derselben, von Null verschiedenen reellen Zahl oder mit 
+demselben Term multipliziert werden. \\
+Br\"uche werden \notion{\emph{gek\"urzt}}, indem Z\"ahler und Nenner durch dieselbe, von Null verschiedene reelle Zahl oder durch 
+denselben Term dividiert werden.
+\\
+Beim Kürzen von oder Erweitern mit Termen ist zu beachten, dass dies nur für diejenigen Werte der 
+Variablen erlaubt ist, für die der Wert des Terms ungleich Null ist.
+Grundsätzlich bleibt beim Erweitern und Kürzen von Brüchen ihr Wert unverändert.
+}
+\lang{en}{
+Fractions are \notion{\emph{simplified}} or \notion{\emph{reduced}} by dividing both the numerator and the denominator by a non-zero common factor. They can also be \notion{\emph{expanded}} by multiplying both the numerator and the denominator by a non-zero expression.
+\\
+If there are variables in a fraction, it is very important to only reduce and expand fractions for values of the variables for which the denominator is non-zero.
+\\
+Of course, reducing or expanding a fraction does not change its value.
+}
+\end{rule}
+
+
+\lang{de}{
+Diese Regel können wir nun für die Addition und Subtraktion von Brüchen mit ungleichen Nennern nutzen, 
+indem wir die beiden  Br\"uche zun\"achst so erweitern, dass sie denselben Nenner haben. 
+Die einfachste M"oglichkeit, dies zu erreichen, ist es, die beiden Brüche \glqq über Kreuz\grqq mit dem Nenner des jeweils anderen Bruchs zu erweitern.
+}
+\lang{en}{
+This rule can now be applied for addition and subtraction of two fractions that do not have the 
+same denominator, by expanding both fractions to have the same denominator. The easiest way to achieve this is to multiply each fraction's numerator and denominator by the other fraction's 
+denominator \emph{('cross-multiplying')}.
+}
+
+\begin{block}[info]
+\lang{de}{
+Will man also die Summe der beiden Br\"uche $\frac{p_1}{q_1}$ und $\frac{p_2}{q_2}$
+ermitteln, so kann man zun\"achst den ersten Bruch mit $q_2$, den zweiten mit $q_1$
+erweitern und dann die neuen Z\"ahler addieren:
+}
+\lang{en}{
+For example, if we want to add the two fractions $\frac{p_1}{q_1}$ and $\frac{p_2}{q_2}$ together, 
+we first expand the first fraction by multiplying through by $q_2$, expand the second fraction by 
+multiplying through by $q_1$, and add the resulting fractions which both have denominator $q_1q_2$.
+}
+\[\frac{p_1}{q_1}+\frac{p_2}{q_2}=\frac{p_1}{q_1}\cdot \underbrace{\frac{q_2}{q_2}}_{=1}+\frac{p_2}{q_2}\cdot \underbrace{\frac{q_1}{q_1}}_{=1}=\frac{p_1q_2}{q_1q_2}+\frac{p_2q_1}{q_1q_2}=\frac{p_1q_2+p_2q_1}{q_1q_2}.\]
+\lang{de}{Analog erhält man bei der Subtraktion:}\lang{en}{Analogously for subtraction we have:}
+\[\frac{p_1}{q_1}-\frac{p_2}{q_2}=\frac{p_1q_2}{q_1q_2}-\frac{p_2q_1}{q_1q_2}=\frac{p_1q_2-p_2q_1}{q_1q_2}.\]
+\end{block}
+
+
+%\begin{center}
+%\lang{de}{\iframe[400][225][S]{https://www.stream24.net/vod/getVideo.php?id=10962-1-5526&mode=iframe}}
+%\end{center}
+\begin{example}
+
+\lang{de}{Mit diesen Regeln berechnet man zum Beispiel:}
+\lang{en}{Using these rules, we can calculate the following:}
+\begin{enumerate}
+	\item $\quad\displaystyle \frac{2}{5}+\frac{3}{4}=\frac{2\cdot 4}{5\cdot 4}+\frac{3\cdot 5}{4\cdot 5}=\frac{8+15}{20}=\frac{23}{20}$\\\\
+	\item $\quad\displaystyle \frac{14}{9}-\frac{-7}{5}=\frac{14\cdot 5}{9\cdot 5}-\frac{-7\cdot 9}{5\cdot 9}=\frac{70-(-63)}{45}=\frac{70+63}{45}=\frac{133}{45}$\\\\
+	\item $\quad\displaystyle \frac{5}{8}+\frac{2}{3}-\frac{4}{5}=\frac{5\cdot 3\cdot 5}{8\cdot 3\cdot 5}
+		   +\frac{2\cdot 8\cdot 5}{3\cdot 8\cdot 5}-\frac{4\cdot 8\cdot 3}{5\cdot 8\cdot 3}=\frac{75+80-96}{120}=\frac{59}{120}$\\ \\
+	\item $\quad\displaystyle \frac{2a+3b+4}{5+b}-\frac{3}{7}=\frac{(2a+3b+4)\cdot 7}{(5+b)\cdot 7}-\frac{3\cdot(5+b)}{7\cdot(5+b)}$\\ \\
+	$\phantom{\quad\displaystyle \frac{2a+3b+4}{5+b}-\frac{3}{7}}\displaystyle =\frac{14a+21b+28-15-3b}{35+7b}=\frac{14a+18b+13}{35+7b}$\\ \\
+	\item $\quad\displaystyle \frac{x-2y}{x+2y}-\frac{x+2y}{x-2y}=\frac{(x-2y)^2-(x+2y)^2}{(x+2y) \cdot (x-2y)}$\\ \\
+	$\phantom{\quad\displaystyle \frac{x-2y}{x+2y}-\frac{x+2y}{x-2y}}\displaystyle =\frac{x^2-4xy+4y^2-(x^2+4xy+4y^2)}{x^2-4y^2}$\\\\
+    $\phantom{\quad\displaystyle \frac{x-2y}{x+2y}-\frac{x+2y}{x-2y}}\displaystyle =-\frac{8xy}{x^2-4y^2}$
+\end{enumerate}
+
+\end{example}
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{2}
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{a}{1}{5}
+			\randint[Z]{b}{3}{7}
+			\randint{c}{1}{5}
+			\randint[Z]{d}{3}{7}
+			\randadjustIf{b,d}{b = d}
+		    \function[calculate]{ad}{a*d}
+		    \function[calculate]{bd}{b*d}
+		    \function[calculate]{cb}{c*b}
+		    \function[calculate]{z}{ad+cb}
+			\function[calculate]{f}{(a/b)+c/d}
+		\end{variables}
+		
+			\text{\lang{de}{Berechnen Sie die folgende Summe:}\lang{en}{Evaluate the following sum:}\\ 
+			$\displaystyle\frac{\var{a}}{\var{b}}+\frac{\var{c}}{\var{d}}=$\ansref.}
+		
+		\begin{answer}
+			\solution{f}
+		\end{answer}
+		\explanation{\lang{de}{
+    Zunächst werden die Brüche über Kreuz erweitert, d.\,h. $\frac{\var{a}}{\var{b}}$
+		mit $\var{d}$ erweitert und $\frac{\var{c}}{\var{d}}$ mit $\var{b}$ erweitert. Dann haben
+		die Brüche den gleichen Nenner und man kann einfach die Zähler addieren:
+    }
+    \lang{en}{
+    Firstly we cross-multiply the fractions, that is to say we multiply through $\frac{\var{a}}{\var{b}}$ 
+    by $\var{d}$ and multiply through $\frac{\var{c}}{\var{d}}$ by $\var{b}$. Then both fractions have 
+    the same denominator, $\var{b}\cdot\var{d}$, and can be easily added.
+    }
+		\[ \frac{\var{a}}{\var{b}}+\frac{\var{c}}{\var{d}}
+		=\frac{\var{a}\cdot \var{d}}{\var{b}\cdot \var{d}}
+		+\frac{\var{c}\cdot \var{b}}{\var{d}\cdot \var{b}}=\frac{\var{ad}+\var{cb}}{\var{bd}}
+		=\frac{\var{z}}{\var{bd}}.
+		\]
+		\lang{de}{Eventuell kann man am Ende noch kürzen.}\lang{en}{Finally we can simplify our result.}
+		}
+	\end{quickcheck}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{a}{1}{5}
+			\randint[Z]{b}{3}{7}
+			\randint{c}{1}{5}
+			\randint[Z]{d}{3}{7}
+			\randadjustIf{b,d}{b = d}
+		    \function[calculate]{ad}{a*d}
+		    \function[calculate]{bd}{b*d}
+		    \function[calculate]{cb}{c*b}
+		    \function[calculate]{z}{ad-cb}
+		    \function[calculate]{f}{(a/b)-c/d}
+		\end{variables}
+		
+			\text{\lang{de}{Berechnen Sie die folgende Differenz:}\lang{en}{Evaluate the following expression:}\\ 
+            $\displaystyle\frac{\var{a}}{\var{b}}-\frac{\var{c}}{\var{d}}=$\ansref.}
+		
+		\begin{answer}
+			\solution{f}
+		\end{answer}
+		\explanation{\lang{de}{
+    Zunächst werden die Brüche über Kreuz erweitert, d.\,h. $\frac{\var{a}}{\var{b}}$
+		mit $\var{d}$ erweitert und $\frac{\var{c}}{\var{d}}$ mit $\var{b}$ erweitert. Dann haben
+		die Brüche den gleichen Nenner und man kann einfach die Zähler subtrahieren:
+    }
+    \lang{en}{
+    Firstly we cross-multiply the fractions, that is to say we multiply through $\frac{\var{a}}{\var{b}}$ 
+    by $\var{d}$ and multiply through $\frac{\var{c}}{\var{d}}$ by $\var{b}$. Then both fractions have 
+    the same denominator, $\var{b}\cdot\var{d}$, and can be easily subtracted.
+    }
+		\[ \frac{\var{a}}{\var{b}}-\frac{\var{c}}{\var{d}}
+		=\frac{\var{a}\cdot \var{d}}{\var{b}\cdot \var{d}}
+		-\frac{\var{c}\cdot \var{b}}{\var{d}\cdot \var{b}}=\frac{\var{ad}-\var{cb}}{\var{bd}}
+		=\frac{\var{z}}{\var{bd}}.
+		\]
+		\lang{de}{Eventuell kann man am Ende noch kürzen.}\lang{en}{Finally we can simplify our result.}
+		}
+	\end{quickcheck}
+\end{quickcheckcontainer}
+
+
+\lang{de}{
+Oft führt die obige Methode, die beiden Brüche \glqq über Kreuz\grqq zu erweitern, zu unnötig großen Zahlen.
+Bei der Addition $\frac{1}{16}+\frac{3}{8}$ erhielte man zum Beispiel
+}
+\lang{en}{
+Often the above method (cross-multiplying) results in needlessly large numbers. For example, 
+cross-multiplying for $\frac{1}{16}+\frac{3}{8}$ gives 
+}
+\[ \frac{1}{16}+\frac{3}{8}=\frac{8}{16\cdot 8}+\frac{16\cdot 3}{16\cdot 8}=\frac{56}{128},\]
+\lang{de}{
+was wiederum durch $8$ gek"urzt werden kann: 
+}
+\lang{en}{
+which then can be simplified by dividing through by $8$:
+}
+\[ \frac{56}{128}=\frac{7\cdot \cancel{8}}{16\cdot \cancel{8}}=\frac{7}{16}.\]
+\lang{de}{
+Schneller und einfacher wäre in diesem Fall gewesen, als gemeinsamen Nenner gleich die Zahl $16$
+zu w"ahlen:
+}
+\lang{en}{
+In this case it is much faster and easier to simply choose $16$ as the common denominator:
+}
+\[ \frac{1}{16}+\frac{3}{8}=\frac{1}{16}+\frac{3\cdot 2}{8\cdot 2}=\frac{1}{16}+\frac{6}{16}=\frac{7}{16}.\]
+\lang{de}{
+Die Zahl $16$ ist hier sogar die kleinste Zahl, die man als gemeinsamen Nenner wählen kann.
+}
+\lang{en}{
+In fact, $16$ is the smallest number that would work as a common denominator here.
+}
+
+\begin{block}[info]
+\lang{de}{
+Die kleinste Zahl, die ein Vielfaches beider Nenner ist, also das \notion{\emph{kleinste gemeinsame Vielfache}} (kurz \notion{\emph{kgV}})
+der beiden Nenner, nennt man auch den \notion{\emph{Hauptnenner}} der beiden Brüche.
+}
+\lang{en}{
+The smallest positive number that is a multiple of both denominators, i.e. the 
+\notion{\emph{least common multiple}} (shortened to \notion{\emph{LCM}}) of the denominators, is 
+called the \notion{\emph{least common denominator}}.
+}
+\end{block}
+
+\lang{de}{
+Will man zum Beispiel die Differenz $\frac{5}{12}-\frac{3}{8}$ berechnen, so ist der Hauptnenner 
+$24 = 2\cdot 12 = 3\cdot 8$ und man rechnet
+}
+\lang{en}{
+For example, to evaluate $\frac{5}{12}-\frac{3}{8}$, we can expand the fractions to their least common 
+denominator $24 = 2\cdot 12 = 3\cdot 8$, so 
+}
+
+\[ \frac{5}{12}-\frac{3}{8}=\frac{5\cdot 2}{12\cdot 2}-\frac{3\cdot 3}{8\cdot 3}
+=\frac{10}{24}-\frac{9}{24}=\frac{1}{24}.\]
+
+\lang{de}{
+Hinter dieser Rechnung steckt das im Folgenden beschriebene \emph{\glqq vereinfachte Verfahren\grqq} zur 
+Bestimmung des Hauptnenners von Brüchen. Alternativ kann der Hauptnenner auch über das kgV und
+die Primfaktorzerlegung der Nenner bestimmt werden.
+}
+\lang{en}{
+We provide a method below to algorithmically determine the least common denominator. %Should both the German methods be included even if the first is not an algorithm? - Niccolo
+}
+%%%% xxxx
+\begin{algorithm}[\lang{de}{Verfahren zur Bestimmung des Hauptnenners}\lang{en}{Finding the least common denominator}] \label{kgV}
+\begin{enumerate}
+\item \lang{de}{
+  \textbf{Vereinfachtes Verfahren zur Bestimmung des Hauptnenners}
+  \begin{showhide}[\buttonlabels{Zeige Verfahren}{Verstecke Verfahren}]   
+  \begin{block}[tip]
+    Immer wenn zwei Nenner einen gemeinsamen Teiler ungleich 1 haben, gibt es auch ein 
+    gemeinsames Vielfaches der beiden Nenner, welches kleiner als ihr Produkt ist.
+  \end{block}
+  %
+  % myblue: \#4169E1
+  % myorange: \#D2691E 
+  % mygreen: \#00FF00
+  \\
+  In unserem Beispiel sind die Nenner zerlegbar in die Produkte 
+  $12=4\cdot \,$\textcolor{\#00FF00}{$3$} und $8=4\cdot \,$\textcolor{\#4169E1}{$2$}.
+  Um ein gemeinsames Vielfaches zu erhalten, reicht es daher, die $12$ mit \textcolor{\#4169E1}{$2$} 
+  und die $8$ mit \textcolor{\#00FF00}{$3$} zu multiplizieren, denn der gemeinsame Faktor $4$ wird 
+  nach dem Erweitern gleich wieder herausgekürzt.
+  \begin{eqnarray*}
+            \displaystyle \frac{5}{12}-\frac{3}{8}&=&\frac{5}{3\cdot4}-\frac{3}{2\cdot4}\\
+            &=&\displaystyle \frac{5\cdot\textcolor{\#4169E1}{2}\cdot\textcolor{\#D2691E}{\cancel{4}}}{3\cdot 4 \cdot \textcolor{\#4169E1}{2}\cdot \textcolor{\#D2691E}{\cancel{4}}}
+            -\frac{3\cdot \textcolor{\#00FF00}{3}\cdot\textcolor{\#D2691E}{\cancel{4}}}{2\cdot 4 \cdot \textcolor{\#00FF00}{3}\cdot \textcolor{\#D2691E}{\cancel{4}}}\\
+            &=&\displaystyle \frac{5\cdot\textcolor{\#4169E1}{2}}{3\cdot 4 \cdot\textcolor{\#4169E1}{2}}-\frac{3\cdot \textcolor{\#00FF00}{3}}{2\cdot 4 \cdot \textcolor{\#00FF00}{3}}\\
+            &=&\displaystyle \frac{5\cdot\textcolor{\#4169E1}{2}}{12 \cdot\textcolor{\#4169E1}{2}}-\frac{3\cdot \textcolor{\#00FF00}{3}}{8 \cdot \textcolor{\#00FF00}{3}}=\frac{1}{24}
+        \end{eqnarray*}
+ \end{showhide}
+  }
+  \lang{en}{
+  \textbf{Easy method for finding the least common denominator}
+  \begin{showhide}[\buttonlabels{Show method}{Hide method}]
+  \begin{block}[tip]
+    Whenever two denominators share a factor that is not 1, there exists a common multiple of the two 
+    denominators that is smaller than their product.
+  \end{block}
+  \\
+    In our example the denominators can be decomposed into the products 
+    $12=4\cdot \,$\textcolor{\#00FF00}{$3$} and $8=4\cdot \,$\textcolor{\#4169E1}{$2$}. 
+    To find a common multiple it is enough to multiply $12$ by \textcolor{\#4169E1}{$2$} and $8$ by 
+    \textcolor{\#00FF00}{$3$}, as the common factor $4$ would be simplified out immediately afterwards 
+    if it was included twice.
+    \begin{eqnarray*}
+            \displaystyle \frac{5}{12}-\frac{3}{8}&=&\frac{5}{3\cdot4}-\frac{3}{2\cdot4}\\
+            &=&\displaystyle \frac{5\cdot\textcolor{\#4169E1}{2}\cdot\textcolor{\#D2691E}{\cancel{4}}}{3\cdot 4 \cdot \textcolor{\#4169E1}{2}\cdot \textcolor{\#D2691E}{\cancel{4}}}
+            -\frac{3\cdot \textcolor{\#00FF00}{3}\cdot\textcolor{\#D2691E}{\cancel{4}}}{2\cdot 4 \cdot \textcolor{\#00FF00}{3}\cdot \textcolor{\#D2691E}{\cancel{4}}}\\
+            &=&\displaystyle \frac{5\cdot\textcolor{\#4169E1}{2}}{3\cdot 4 \cdot\textcolor{\#4169E1}{2}}-\frac{3\cdot \textcolor{\#00FF00}{3}}{2\cdot 4 \cdot \textcolor{\#00FF00}{3}}\\
+            &=&\displaystyle \frac{5\cdot\textcolor{\#4169E1}{2}}{12 \cdot\textcolor{\#4169E1}{2}}-\frac{3\cdot \textcolor{\#00FF00}{3}}{8 \cdot \textcolor{\#00FF00}{3}}=\frac{1}{24}
+        \end{eqnarray*}
+ \end{showhide}
+  }
+  \\
+        
+
+\item \lang{de}{
+  \textbf{Bestimmung des kgV mittels Primfaktorzerlegung} \\
+  \begin{showhide}[\buttonlabels{Zeige Verfahren}{Verstecke Verfahren}]
+      Zur Bestimmung des kleinsten gemeinsamen Vielfachen zweier natürlicher Zahlen zerlegt man diese jeweils in die kleinstmöglichen 
+      Faktoren. Dies sind per definitionem \notion{\emph{Primzahlen}}, also Zahlen, die nur durch 1 und sich selbst teilbar sind. Da diese Zerlegung
+      für jede natürliche Zahl $n$ eindeutig ist, nennt man sie auch die \notion{\emph{Primfaktorzerlegung}} von $n$.
+      Das kgV zweier natürlicher Zahlen ist dann das Produkt aller derjenigen Primfaktoren, die im Minimum benötigt werden, um beide 
+      Zahlen zu erzeugen. Mit dem Faktor $-1\,$ lässt sich das Verfahren auch auf die ganzen Zahlen erweitern.
+\\
+        In unserem Beispiel sind
+\\
+    \begin{eqnarray*}
+              12&=& \phantom{2\cdot\,} 2 \cdot 2 \cdot 3 \\
+              8 &=& 2 \cdot 2 \cdot 2  
+    \end{eqnarray*}
+\\
+      die Primfaktorzerlegungen von $8$ und $12$. Schreibt man die Primfaktoren, wie in dieser Darstellung, sortiert untereinander,
+      so erkennt man leicht die in beiden Zerlegungen vorkommenden Primzahlen (hier mittig: $2 \cdot 2$). Diese werden zur 
+      Berechnung des kleinsten gemeinsamen Vielfachen nur einmal verwendet, also
+    \[
+    \begin{mtable}[\cellaligns{rcccl}]
+                kgV(8;12) =& 2 \cdot & 2 \cdot 2 &\cdot 3 &=24.\\
+    \end{mtable}
+    \]
+  \end{showhide}
+  }
+  \lang{en}{
+  \textbf{Finding the LCM via prime factorisation} \\
+  \begin{showhide}[\buttonlabels{Show method}{Hide method}]
+      In order to find the least common multiple of two natural numbers, we decompose them into their 
+      smallest possible factors. These are by definition \notion{\emph{prime numbers}}, i.e. numbers 
+      that have precisely two divisors - 1 and themselves. This decomposition happens to be unique for 
+      each natural $n$, and is called the \notion{\emph{prime factorisation}} of $n$. The LCM of two 
+      natural numbers is then the product of every factor of the two numbers raised to the higher of the 
+      two powers present in each number's prime factorisation. If we also factor out $-1$, we can apply 
+      this to integers too.
+\\
+      In our example,
+\\
+    \begin{eqnarray*}
+              12&=& \phantom{2\cdot\,} 2 \cdot 2 \cdot 3 \\
+              8 &=& 2 \cdot 2 \cdot 2  
+    \end{eqnarray*}
+\\
+      are the prime factorisations of $8$ and $12$. Written as they are here, in order of size, it is 
+      clear what is the largest factor shared between both numbers (here it is $2 \cdot 2$). This is 
+      only considered once in the calculation of the least common multiple,
+    \[
+    \begin{mtable}[\cellaligns{rcccl}]
+                kgV(8;12) =& 2 \cdot & 2 \cdot 2 &\cdot 3 &=24.\\
+    \end{mtable}
+    \]
+  \end{showhide}
+  }
+ \end{enumerate}
+\end{algorithm}
+
+
+\begin{example}
+\lang{de}{
+Wir berechnen die folgenden Summen von Brüchen und Bruchtermen und vereinfachen das Ergebnis soweit wie möglich.
+}
+\lang{en}{
+We evaluate the following sums of fractions and simplify the result as far as is possible.
+}
+\begin{enumerate}
+\item $\quad\displaystyle \frac{5}{6}+\frac{2}{3}=\frac{5}{6}+\frac{2\cdot2}{3\cdot2}=\frac{5+4}{6}=\frac{9}{6}=\frac{3}{2}$\\\\
+\item $\quad\displaystyle \frac{1}{2}-\frac{1}{4}-\frac{1}{8}=\frac{4}{8}-\frac{2}{8}-\frac{1}{8}
+=\frac{4-2-1}{8}=\frac{1}{8}$\\\\
+
+\item $\quad\displaystyle \frac{5}{14}-\frac{4}{21}=\frac{5}{2 \cdot 7}-\frac{4}{3 \cdot 7}
+= \frac{5 \cdot 3}{2 \cdot 7 \cdot 3}-\frac{4 \cdot 2}{3 \cdot 7 \cdot 2}=\frac{15-8}{42}=\frac{1}{6}$\\\\
+\lang{de}{
+Der Hauptnenner wird hier als $kgV$ der Nenner $14$ und $21$  mittels Primfaktorzerlegung ermittelt.
+}
+\lang{en}{
+The least common denominator here is set to be the $lcm$ of the denominators $14$ and $21$, found via their prime decomposition.
+}\\\\
+
+\item $\quad\displaystyle \frac{2-y}{xy}+\frac{x-1}{x^2}=\frac{(2-y)\cdot x}{x^2y}+\frac{(x-1)\cdot y}{x^2y}
+=\frac{2x-yx+xy-y}{x^2y}=\frac{2x-y}{x^2y}, \quad x, y \neq 0$\\\\
+
+\lang{de}{
+Der Bruch $\frac{2x-y}{x^2y}$ lässt sich nicht weiter vereinfachen.
+}
+\lang{en}{
+The fraction $\frac{2x-y}{x^2y}$ cannot be simplified further.
+}
+
+
+\item   \lang{de}{
+Ähnlich wie bei der Bestimmung des kgV von natürlichen Zahlen über die Primfaktorzerlegung wird bei Termen der Hauptnenner
+        über die kleinst-möglichen Term-Faktoren bestimmt, die benötigt werden, um beide Nenner erzeugen zu können.
+        }
+        \lang{en}{
+Similarly to how we use prime factorisation to determine the lowest common factor of a natural number, we can 'factorise' an expression containing variables.
+        }
+
+    \begin{eqnarray*}
+        \displaystyle  \frac{x}{(x+1)(x+2)}+\frac{2}{(x+2)(x-2)} &=& \frac{x \cdot(x-2)}{(x+1)(x+2) \cdot (x-2)}+\frac{2 \cdot (x+1)}{(x+2)(x-2)\cdot (x+1)}\\
+        &&\\
+        \displaystyle &=& \frac{x^2+2}{(x+1)(x+2)(x-2)}, \quad x \notin \{-2; -1; 2\}
+      \end{eqnarray*}
+
+\lang{de}{
+Der Term $(x+2)$ ist in beiden Nennern als Faktor enthalten, wird also zur Erzeugung des Hauptnenners nur einmal benötigt.
+}
+\lang{en}{
+Note that the new denominator only needs to contain the factor $(x+2)$ once in order to be a multiple of both of the summands' denominators, even though both contain $(x+2)$ as a factor.
+}
+
+\end{enumerate}
+\end{example}
+
+
+\begin{block}[warning]
+\begin{showhide}
+
+\lang{de}{
+Beim Kürzen von Brüchen ist zu beachten, dass \textbf{nur gemeinsame Faktoren} aus Zähler und Nenner gekürzt werden dürfen.
+  \\
+Beispiel: Der Bruch $\displaystyle \frac{2x-yx}{x^2y} \quad(x,y \neq 0)$ ist durch $x$, aber nicht durch $y$ kürzbar, denn
+}
+\lang{en}{
+When simplifying fractions, only \textbf{common factors} of the numerator and the denominator can be divided through by.
+\\
+Example: The fraction $\displaystyle \frac{2x-yx}{x^2y} \quad(x,y \neq 0)$ can be divided through by $x$ but not by $y$, so
+}
+  
+     \[\displaystyle \frac{2x-yx}{x^2y}=\frac{x \cdot (2-y)}{x\cdot x\cdot y}
+       =\frac{\textcolor{\#D2691E}{\cancel{x}}\cdot (2-y)}{\textcolor{\#D2691E}{\cancel{x}} \cdot x \cdot y}=\frac{2-y}{xy},\]
+\lang{de}{aber \textbf{nicht} erlaubt ist}\lang{en}{which holds for $x \neq 0$. However, we cannot reduce}
+%    \[\displaystyle \frac{2x-yx}{x^2y}= \frac{2x - \textcolor{red}{\cancel{y}}x}{x^2 \textcolor{red}{\cancel{y}}}, \] 
+    \[\displaystyle \frac{2x - \textcolor{\#D2691E}{\cancel{y}}x}{x^2 \textcolor{\#D2691E}{\cancel{y}}}, \] 
+
+\lang{de}{
+da der erste Summand des Zählers $y$ nicht als Faktor enthält.
+\\\\    
+  Es empfiehlt sich also, im Zweifel vor dem Kürzen zunächst Zähler und Nenner zu faktorisieren 
+  und nie zu vergessen:
+  \center{\textbf{Aus Summen kürzen nur die Dummen!}}
+}
+\lang{en}{
+as $y$ is not a factor of $2x$.
+\\\\
+It is therefore recommended to factor any expressions in a fraction before attempting to simplify it.
+}
+
+\end{showhide}
+\end{block}
+
+
+\begin{quickcheckcontainer}
+\randomquickcheckpool{1}{2}
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{a}{1}{5}
+			\randint[Z]{b}{3}{7}
+			\randint{c}{1}{5}
+			\randint[Z]{d}{2}{4}
+			\function[calculate]{ad}{a*d}
+			\function[calculate]{bd}{b*d}
+			\function[calculate]{z}{ad+c}
+		    \function[calculate]{f}{a/b+c/bd}
+		\end{variables}
+		
+			\text{\lang{de}{Berechnen Sie die folgende Summe:}\lang{en}{Evaluate the following sum:}\\ 
+            $\displaystyle\frac{\var{a}}{\var{b}}+\frac{\var{c}}{\var{bd}}=$\ansref.}
+		
+		\begin{answer}
+			\solution{f}
+		\end{answer}
+		\explanation{\lang{de}{
+    Der zweite Nenner $\var{bd}$ ist gerade das $\var{d}$-fache des ersten Nenners.
+		Wir müssen also nur den ersten Nenner mit $\var{d}$ erweitern, um die Brüche bequem addieren zu können.
+    }
+    \lang{en}{
+    The second denominator $\var{bd}$ is precisely $\var{d}$-times the first denominator. 
+    Hence we simply multiply the first denominator through by $\var{d}$, and can then easily add the 
+    two fractions.
+    }
+		\[ \frac{\var{a}}{\var{b}}+\frac{\var{c}}{\var{bd}}=
+		\frac{\var{a}\cdot \var{d}}{\var{b}\cdot \var{d}}+\frac{\var{c}}{\var{bd}}=
+		\frac{\var{ad}+\var{c}}{\var{bd}}=\frac{\var{z}}{\var{bd}}. \]
+		\lang{de}{Eventuell kann man am Ende noch kürzen.}\lang{en}{Finally we can simplify our result.}
+		}
+	\end{quickcheck}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint[Z]{a}{1}{5}
+			\randint[Z]{b}{3}{7}
+			\randint{c}{1}{5}
+			\randint[Z]{d}{2}{4}
+			\function[calculate]{ad}{a*d}
+			\function[calculate]{bd}{b*d}
+			\function[calculate]{z}{ad-c}
+		    \function[calculate]{f}{(a/b)-c/bd}
+		\end{variables}
+		
+			\text{\lang{de}{Berechnen Sie die folgende Differenz:}\lang{en}{Evaluate the following expression:}\\ 
+            $\displaystyle\frac{\var{a}}{\var{b}}-\frac{\var{c}}{\var{bd}}=$\ansref.}
+		
+		\begin{answer}
+			\solution{f}
+		\end{answer}
+		\explanation{\lang{de}{
+    Der zweite Nenner $\var{bd}$ ist gerade das $\var{d}$-fache des ersten Nenners.
+		Wir müssen also nur den ersten Nenner mit $\var{d}$ erweitern, um die Brüche bequem subtrahieren 
+    zu können.
+    }
+    \lang{en}{
+    The second denominator $\var{bd}$ is precisely $\var{d}$-times the first denominator. 
+    Hence we simply multiply the first denominator through by $\var{d}$, and can then easily subtract the 
+    two fractions.
+    }
+		\[ \frac{\var{a}}{\var{b}}-\frac{\var{c}}{\var{bd}}=
+		\frac{\var{a}\cdot \var{d}}{\var{b}\cdot \var{d}}-\frac{\var{c}}{\var{bd}}=
+		\frac{\var{ad}-\var{c}}{\var{bd}}=\frac{\var{z}}{\var{bd}}. \]
+		\lang{de}{Eventuell kann man am Ende noch kürzen.}\lang{en}{Finally we can simplify our result.}
+		}
+	\end{quickcheck}
+\end{quickcheckcontainer}
+
+\section{\lang{de}{Multiplikation von Brüchen}\lang{en}{Multiplication of fractions}}\label{mul}
+\lang{de}{Die Multiplikation von Brüchen ist einfacher als die Addition und Subtraktion.}
+\lang{en}{The multiplication and division of fractions is simpler than addition and subtraction.}
+
+\begin{block}[info]
+\lang{de}{
+  Der Zähler des Produktes von zwei Brüchen ist das Produkt der beiden Zähler. Der Nenner ist 
+  das Produkt der beiden Nenner. Somit ist das Produkt der beiden Br\"uche $\frac{p_1}{q_1}$ und $\frac{p_2}{q_2}$ 
+  gegeben durch 
+  \[\frac{p_1}{q_1}\cdot\frac{p_2}{q_2}=\frac{p_1\cdot p_2}{q_1\cdot q_2}.\]
+  }
+\lang{en}{
+  The numerator of the product of two fractions is the product of both numerators. The denominator is the product of both denominators.\\
+The product of the two fractions $\frac{p_1}{q_1}$ and $\frac{p_2}{q_2}$ is therefore:
+\[\frac{p_1}{q_1}\cdot\frac{p_2}{q_2}=\frac{p_1\cdot p_2}{q_1\cdot q_2}.\]
+}
+\end{block}
+
+
+\begin{example} \label{ex:mult_bruch}
+\lang{de}{
+Wir berechnen die folgenden Produkte von Brüchen und Bruchtermen und vereinfachen das Ergebnis soweit wie möglich.
+}
+\lang{en}{
+We evaluate the following products of fractions and simplify the results as far as is possible.
+}
+\begin{enumerate}
+	\item $\displaystyle \quad \frac{3}{4}\cdot\frac{2}{3}=\frac{3\cdot 2}{4\cdot 3}=\frac{2}{4}=\frac{1}{2}$\\\\
+	\item $\displaystyle \quad \frac{25}{36}\cdot\Big(-\frac{81}{35}\Big)=-\frac{25\cdot 81}{36\cdot 35}=-\frac{5\cdot\cancel{5}\cdot9\cdot\cancel{9}}
+		   {4\cdot\cancel{9}\cdot 7\cdot\cancel{5}}=-\frac{45}{28}$\\\\
+	\item $\displaystyle\quad -\frac{a}{b}\cdot\frac{3b-a}{3b+a}\cdot\Big(-\frac{4b}{7}\Big)
+	=\frac{a\cdot(3b-a)\cdot 4\cancel{b}}{7\cdot \cancel{b}\cdot(3b+a)}
+		   =\frac{12ab-4a^2}{21b+7a}$
+\end{enumerate}
+\end{example}
+
+\lang{de}{
+Wie wir im 2. Beispiel in \ref{ex:mult_bruch} sehen, sollte man beim Multiplizieren von Brüchen 
+stets prüfen, ob gekürzt werden kann, bevor man die Multiplikationen in Zähler und Nenner ausführt, 
+denn Kürzen macht die Rechnung übersichtlicher und einfacher. Dies motiviert zur Suche nach dem 
+\notion{\emph{größten gemeinsamen Teiler ($ggT$)}} von Zähler und Nenner, um den Bruch damit 
+so weit wie möglich zu kürzen. 
+\\
+Zur Bestimmung des größten gemeinsamen Teilers zweier natürlicher Zahlen gibt es folgende Verfahren:
+}
+\lang{en}{
+As we can see in the second part of example \ref{ex:mult_bruch}, it is practical to check whether fractions can be simplified before multiplying them, as simplified fractions are smaller and hence easier to multiply. This motivates the notion of a \notion{\emph{greatest common divisor (\emph{gcd})}}, or \notion{\emph{highest common factor (\emph{hcf})}}, of a numerator and a denominator. This allows us to determine whether a fraction is in its most simplified form.
+\\
+The following methods are used to find the greatest common divisor of two natural numbers:
+}
+
+%
+\begin{algorithm}[\lang{de}{ggT-Bestimmung mittels Primfaktorzerlegung}\lang{en}{gcd via prime factorisation}] \label{ggT}
+\lang{de}{
+    Wie im Verfahren \ref{kgV} zur Bestimmung des kleinsten gemeinsamen Vielfachen zweier natürlicher Zahlen
+    zerlegt man auch hier zunächst die beiden Zahlen in ihre Primfaktoren. Der ggT ist dann das Produkt 
+    aller Primfaktoren, die in beiden Zerlegungen vorkommen.
+}
+\lang{en}{
+Like we did in algorithm \ref{kgV} to find the least common multiple of two natural numbers, we must find the prime factorisation of both numbers. The greatest common divisor is then the product of all prime factors that are in both factorisations, each to the highest power found in either factorisation.
+}
+\end{algorithm}
+    
+\begin{example} 
+    \begin{showhide}[\buttonlabels{\lang{de}{Zeige Beispiel}\lang{en}{Show example}}{\lang{de}{Verstecke Beispiel}\lang{en}{Hide example}}] 
+        \lang{de}{
+        Zur Bestimmung des größten gemeinsamen Teilers von $2025$ und $1260$ zerlegen wir diese beiden Zahlen
+        also zunächst in ihre Primfaktoren:
+        }
+        \lang{en}{
+        To determine the greatest common divisor of $2025$ and $1260$, let us factorise both numbers:
+        }
+    \begin{eqnarray*}
+              2025&=& \phantom{2 \cdot 2 \cdot\,} \textcolor{\#D2691E}{3} \cdot \textcolor{\#D2691E}{3} \cdot 3 \cdot 3 \cdot \textcolor{\#D2691E}{5} \cdot 5 \phantom{7\cdot\,}  \\
+              1260&=& 2 \cdot 2 \cdot \textcolor{\#D2691E}{3} \cdot \textcolor{\#D2691E}{3} \cdot \phantom{2 \cdot 2 \cdot\,} \textcolor{\#D2691E}{5} \phantom{5\cdot\,}\cdot 7  
+    \end{eqnarray*}
+
+    \lang{de}{
+    Der größte gemeinsame Teiler ist dann das Produkt aller rot gekennzeichneten Primfaktoren, die in 
+    beiden Zerlegungen vorkommen, also
+    \[ ggT(2025;1260)=\textcolor{\#D2691E}{3} \cdot \textcolor{\#D2691E}{3} \cdot \textcolor{\#D2691E}{5} =45. \]
+    }
+    \lang{en}{
+    The greatest common divisor is then the product of all prime factors that are shared by the two factorisations (in red).
+    \[ gcd(2025;1260)=\textcolor{\#D2691E}{3} \cdot \textcolor{\#D2691E}{3} \cdot \textcolor{\#D2691E}{5} =45. \]
+    }
+    
+    
+  \end{showhide}
+\end{example}
+%    
+\begin{algorithm}[\lang{de}{Euklidischer Algorithmus}\lang{en}{Euclid's/'Euclidean' algorithm}] \label{euklid_algorithmus}
+      \lang{de}{
+      Um den grö{\ss}ten gemeinsamen Teiler zweier Zahlen zu berechnen, 
+      f\"uhrt man nacheinander mehrere Divisionen mit Rest aus. Dabei werden Divisor und Rest im 1. Schritt
+      zu Dividend und Divisor im 2. Schritt. Weiter werden Divisor und Rest im 2. Schritt
+      zu Dividend und Divisor im 3. Schritt usw. Dieses Verfahren f\"uhrt man solange durch, bis die 
+      Division ohne Rest aufgeht. Der Divisor im letzten Schritt ist der gr\"o{\ss}te gemeinsame Teiler.
+      }
+      \lang{en}{
+      To find the greatest common divisor of two numbers, we perform several divisions with remainder. 
+      The dividend and divisor of the second step are set to be the divisor and remainder of the first step. 
+      The dividend and divisor of the third step are set to be the divisor and remainder of the second step. 
+      This repeats until a division is performed with remainder zero. The divisor of the final step is the 
+      greatest common divisor.
+      }
+\end{algorithm}
+    
+\begin{example} 
+    \begin{showhide}[\buttonlabels{\lang{de}{Zeige Beispiel}\lang{en}{Show example}}{\lang{de}{Verstecke Beispiel}\lang{en}{Hide example}}]
+      \lang{de}{
+      Wir berechnen den gr\"o{\ss}ten gemeinsamen Teiler von $2025$ und $1260$ mit Hilfe des
+      Euklidischen Algorithmus:
+      }
+      \lang{en}{
+      We evaluate the greatest common divisor of $2025$ and $1260$ using Euclid's algorithm:
+      }\\ \\
+
+        \begin{table}[\cellaligns{llll}\align{c}\class{plain}]
+          $\text{\lang{en}{Step } 1. \lang{de}{Schritt:}}$\quad & $2025:1260=1\quad$	
+          &$\text{\lang{de}{Rest}\lang{en}{with remainder}}$	&$\quad 765$\\
+          $\text{\lang{en}{Step } 2. \lang{de}{Schritt:}}$ & $1260:765=1\quad$	
+          &$\text{\lang{de}{Rest}\lang{en}{with remainder}}$	&$\quad 495$\\
+          $\text{\lang{en}{Step } 3. \lang{de}{Schritt:}}$ & $ 765:495=1\quad$	
+          &$\text{\lang{de}{Rest}\lang{en}{with remainder}}$	&$\quad 270$\\
+          $\text{\lang{en}{Step } 4. \lang{de}{Schritt:}}$ & $ 495:270=1\quad$	
+          &$\text{\lang{de}{Rest}\lang{en}{with remainder}}$ &	$\quad 225$\\
+          $\text{\lang{en}{Step } 5. \lang{de}{Schritt:}}$ & $ 270:225=1\quad$	
+          &$\text{\lang{de}{Rest}\lang{en}{with remainder}}$ &	$\quad 45$\\
+          $\text{\lang{en}{Step } 6. \lang{de}{Schritt:}}$ & $ 225: 45=5\quad$	
+          &$\text{\lang{de}{Rest}\lang{en}{with remainder}}$ &	$\quad 0$. 
+        \end{table}
+
+      \lang{de}{
+      Der letzte Divisor im Verfahren ist $45$, also \[ggT(2025;1260)=45.\]
+      }
+      \lang{en}{
+      The divisor in the final iteration is $45$, so \[gcd(2025;1260)=45.\]
+      }
+      
+  \end{showhide}
+\end{example}
+  
+\lang{de}{
+Bei Brüchen mit sehr großen Zahlen in Zähler und Nenner kann das Suchen nach gemeinsamen Teilern sehr mühsam 
+sein, selbst wenn man nur nach Primzahlen sucht. In diesen F"allen wird vorzugsweise der \emph{Euklidische Algorithmus}
+verwendet, da bei diesem keine Teiler gesucht werden müssen. 
+\\
+Für den Bruch $\frac{2025}{1260}$ haben wir bereits nach beiden Verfahren den größten 
+gemeinsamen Teiler von Zähler und Nenner bestimmt, nämlich \[ggT(2025;1260)=45.\] 
+Hiermit können wir nun den Bruch % wie auch sein Kehrwert 
+maximal kürzen:
+}
+\lang{en}{
+For fractions with large numbers in the numerator and denominator, searching manually for common 
+factors can be quite long-winded, even if only primes are being checked. \emph{Euclid's algorithm} is 
+comparitavely very fast to carry out, moreso if the numbers involved are very large.
+\\
+We have found that the greatest common divisor of the numerator and denominator of the fraction $\frac{2025}{1260}$ is \[gcd(2025;1260)=45.\] 
+Hence the most simplified form of the fraction is
+}
+
+   \begin{align*}
+     \displaystyle \frac{2025}{1260}&=\frac{45\cdot \cancel{45}}{28\cdot \cancel{45}}&=\frac{45}{28}.\\
+%    \frac{1260}{2025}&=\frac{28\cdot \cancel{45}}{45\cdot \cancel{45}}&=\frac{28}{45}.
+   \end{align*}
+  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+  
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+        	\randint{k}{2}{4}
+%   		\randint[Z]{a}{-3}{5}
+%			\randint{b0}{3}{7}
+%			\randint{c0}{1}{5}
+%			\randint[Z]{d}{2}{5}
+% Einschränkung der Variablensets, damit Zähler und Nenner
+% vor Erweiterung mit k teilerfremd sind
+%
+            \drawFromSet{a}{-3,-1,1,3}
+            \drawFromSet{b0}{2,4,5}
+            \drawFromSet{c0}{1,3,7}
+            \drawFromSet{d}{2,4,5}
+			\function[calculate]{b}{k*b0}
+			\function[calculate]{c}{k*c0}			
+			\function[calculate]{db0}{b0*d}
+			\function[calculate]{ac0}{a*c0}
+		    \function[calculate]{f}{(a*c)/(b*d)}
+		\end{variables}
+		
+			\text{\lang{de}{Berechnen Sie das folgende Produkt:}\lang{en}{Evaluate the following product:}\\ 
+			$\displaystyle\frac{\var{a}}{\var{b}}\cdot \frac{\var{c}}{\var{d}}=$\ansref.}
+		
+		\begin{answer}
+			\solution{f}
+		\end{answer}
+		\explanation{
+    \lang{de}{
+    Für das Produkt müssen nur die Zähler miteinander und
+		die Nenner miteinander multipliziert werden. Um einen möglichst gekürzten Bruch zu bekommen,
+		sollte man vor dem Berechnen der Produkte noch kürzen. Hier zum Beispiel sind der Zähler des
+		zweiten Bruchs und der Nenner des ersten Bruchs beide durch $\var{k}$ teilbar, weshalb
+		man durch diesen Faktor kürzen kann:
+    }
+    \lang{en}{
+    To calculate the product, we simply multiply the numerators together and the denominators together. 
+    To find the most simple form of the fraction, we should reduce it further. For example, the numerator 
+    of the second fraction and the denominator of the first fraction are both divisible by $\var{k}$, 
+    allowing us to divide through by this factor:
+    }
+		\[ \frac{\var{a}}{\var{b}}\cdot \frac{\var{c}}{\var{d}}
+		=\frac{\var{a}\cdot \var{c}}{\var{b}\cdot \var{d}}
+		=\frac{\var{a}\cdot \var{c0}\cdot \var{k}}{\var{b0}\cdot \var{k}\cdot \var{d}}
+		=\frac{\var{a}\cdot \var{c0}}{\var{b0}\cdot \var{d}}=\frac{\var{ac0}}{\var{db0}}. \]
+		}
+	\end{quickcheck}
+
+\section{\lang{de}{Division von Brüchen}\lang{en}{Dividing fractions}}\label{sec:div}
+
+\lang{de}{Um die Divisionsvorschrift f\"ur Br\"uche formulieren zu
+k\"onnen, ben\"otigen wir den Begriff des \emph{\glqq Kehrwerts\grqq} 
+(manche sagen auch \emph{\glqq Kehrbruch\grqq}).
+}
+\lang{en}{In order to formulate the rules for dividing fractions, we need 
+the concept of a \emph{'multiplicative inverse'}, also called a \emph{'reciprocal'}.
+}
+
+\begin{definition}[\lang{de}{Kehrwert}\lang{en}{Multiplicative Inverse or Reciprocal}]\label{kehrbruch}%\textbf{Kehrwert}\\
+\lang{de}{Der Kehrwert des Bruchs $\displaystyle\frac{p}{q}$ ist der Bruch $\displaystyle\frac{q}{p}$ , 
+wobei nat\"urlich $p$ und $q$ nicht Null sein d\"urfen.\\
+}
+\lang{en}{The reciprocal of a fraction $\displaystyle\frac{p}{q}$ with non-zero $p$ and $q$ is the 
+fraction $\displaystyle\frac{q}{p}$.\\
+}
+\end{definition}
+
+\lang{de}{Man erh"alt also den Kehrwert eines Bruchs, indem man Z\"ahler und Nenner vertauscht.}
+\lang{en}{We obtain the reciprocal of a fraction by simply swapping its numerator and denominator.}
+
+\begin{example}
+
+\begin{itemize}
+  \item \lang{de}{
+  Der Kehrwert des Bruchs $\quad \frac{32}{117} \quad$ ist $\quad \frac{117}{32}$.
+  }
+  \lang{en}{
+  The reciprocal of the fraction $\quad \frac{32}{117} \quad$ is $\quad \frac{117}{32}$.
+  }
+ \\
+  \item \lang{de}{
+  Der Kehrwert des Bruchs $\quad -\frac{6}{3}\quad$ ist $\quad -\frac{3}{6}$.
+  }
+  \lang{en}{
+  The reciprocal of the fraction $\quad -\frac{6}{3}\quad$ is $\quad -\frac{3}{6}$.
+  }
+\\
+  \item \lang{de}{
+  Der Kehrwert des Bruchs $\quad \frac{(a-2b+c)(3a-4)}{7a^2-4ab^3+b} \quad $ ist $\quad \frac{7a^2-4ab^3+b}{(a-2b+c)(3a-4)}$.
+  }
+  \lang{en}{
+  The reciprocal of the fraction $\quad \frac{(a-2b+c)(3a-4)}{7a^2-4ab^3+b} \quad $ is $\quad \frac{7a^2-4ab^3+b}{(a-2b+c)(3a-4)}$.
+  }
+\end{itemize}
+
+%
+%  \lang{de}{
+%  \begin{table}[\cellaligns{cccc}\align{c}\class{plain}\cellvaligns{m}]
+%        $\quad\;$& Bruch$\;$ 				  							& $\qquad\quad\;$ 	& Kehrwert$\;$										\\	
+%        $\quad\;$& $\quad\;\quad\;\quad\;\quad\;$ 					& $\qquad\quad\;$	& $\quad\;\quad\;\quad\;\quad\;$					\\
+%      1.$\quad\;$& $\phantom{\Bigg|}\displaystyle\frac{32}{117}$ 		& $\qquad\quad\;$	& $\phantom{\Bigg|}\displaystyle\frac{117}{32}$		\\
+%      2.$\quad\;$& $\displaystyle-\frac{6}{3}$ 						& $\qquad\quad\;$ 	& $-\displaystyle\frac{3}{6}$					\\
+%      3.$\quad\;$& $\displaystyle\frac{(a-2b+c)(3a-4)}{7a^2-4ab^3+b}$	& $\qquad\quad\;$	& $\phantom{\Bigg|}\displaystyle\frac{7a^2-4ab^3+b}{(a-2b+c)(3a-4)}$\\
+%  \end{table}
+%  }
+%  \lang{en}{
+%  \begin{table}[\cellaligns{cccc}\align{c}\class{plain}\cellvaligns{m}]
+%        $\quad\;$& Fraction$\;$ 				  							& $\qquad\quad\;$ 	& Reciprocal$\;$										\\	
+%        $\quad\;$& $\quad\;\quad\;\quad\;\quad\;$ 					& $\qquad\quad\;$	& $\quad\;\quad\;\quad\;\quad\;$					\\
+%      1.$\quad\;$& $\phantom{\Bigg|}\displaystyle\frac{32}{117}$ 		& $\qquad\quad\;$	& $\phantom{\Bigg|}\displaystyle\frac{117}{32}$		\\
+%      2.$\quad\;$& $\displaystyle-\frac{6}{3}$ 						& $\qquad\quad\;$ 	& $-\displaystyle\frac{3}{6}$					\\
+%      3.$\quad\;$& $\displaystyle\frac{(a-2b+c)(3a-4)}{7a^2-4ab^3+b}$	& $\qquad\quad\;$	& $\phantom{\Bigg|}\displaystyle\frac{7a^2-4ab^3+b}{(a-2b+c)(3a-4)}$\\
+%  \end{table}
+%  }
+\end{example}
+
+\begin{block}[info]
+\lang{de}{Zwei Brüche werden dividiert, indem man den ersten Bruch (den Dividenden) mit dem Kehrwert des zweiten 
+Bruchs (des Divisors) multipliziert, also
+\[\frac{p_1}{q_1}:\frac{p_2}{q_2}=\frac{p_1}{q_1}\cdot\frac{q_2}{p_2}=\frac{p_1\cdot q_2}{q_1\cdot p_2}.\]
+}
+\lang{en}{Two fractions can be divided by multiplying the first (the dividend) by the reciprocal of the second (the divisor), that is to say
+\[\frac{p_1}{q_1}/\frac{p_2}{q_2}=\frac{p_1}{q_1}\cdot\frac{q_2}{p_2}=\frac{p_1\cdot q_2}{q_1\cdot p_2}.\]
+}
+\end{block}
+
+\lang{de}{
+Damit ist die Division von Brüchen zurückgeführt auf die Multiplikation. Alle Verfahren und Vereinfachungen 
+aus dem letzten Abschnitt sind anwendbar.
+}
+\lang{en}{
+Hence division of fractions is simply multiplication by a reciprocal, and all of the algorithms from the 
+previous section apply.
+}
+
+\begin{example}
+\lang{de}{
+Wir berechnen die folgenden Quotienten und vereinfachen das Ergebnis soweit wie möglich.
+}
+\lang{en}{
+We evaluate the following quotients and simplify the results as far as possible.
+}
+\begin{enumerate}
+	\item $\;\displaystyle \frac{13}{15}:\frac{2}{7}=\frac{13}{15}\cdot\frac{7}{2}=\frac{13\cdot 7}{15\cdot 2}
+	=\frac{91}{30}$\\\\
+	\item $\;\displaystyle \frac{256}{325}:\Big(-\frac{192}{13}\Big)=\frac{256}{325}\cdot\Big(-\frac{13}{192}\Big)
+		   =-\frac{4\cdot\cancel{64}\cdot \cancel{13}}{25\cdot \cancel{13}\cdot 3\cdot \cancel{64}}=
+		   -\frac{4}{25\cdot 3}=-\frac{4}{75}$\\\\
+	\item $\;\displaystyle \Big(\frac{7}{5}+\frac{4}{3}\Big):\frac{7}{10}=\Big(\frac{7\cdot 3+4\cdot 5}{3\cdot 5}\Big)\cdot\frac{10}{7}$\\\\
+		  $\phantom{\;\displaystyle \Big(\frac{8}{9}-\frac{3}{5}\Big):\frac{4}{15}}\displaystyle
+	       =\frac{41}{3\cdot 5}\cdot\frac{2\cdot 5}{7}
+	       =\frac{41\cdot 2\cdot \cancel{5}}{3\cdot\cancel{5}\cdot 7}=\frac{82}{21}$\\\\
+	\item $\;\displaystyle \frac{4a^2-b^2}{5+b}:\frac{2a+b}{25+10b+b^2}=\frac{(2a-b)\cdot (2a+b)}{5+b}\cdot\frac{5^2+2\cdot5\cdot b+b^2}{2a+b}$\\\\
+		  $\phantom{\;\displaystyle \frac{(4a^2-b^2}{5+b}:\frac{2a+b}{26+10b+b^2}}\displaystyle=\frac{(2a-b)\cdot\cancel{(2a+b)}\cdot(5+b)^2}{(5+b)\cdot\cancel{(2a+b)}}$\\\\
+		  $\phantom{\;\displaystyle \frac{(4a^2-b^2}{5+b}:\frac{2a+b}{26+10b+b^2}}\displaystyle
+		  =\frac{(2a-b)\cdot(5+b)\cdot\cancel{(5+b)}}{\cancel{5+b}}=(2a-b)(5+b)$
+\end{enumerate}
+\end{example}
+
+
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.number}
+		\begin{variables}
+			\randint{k}{2}{4}
+%   		\randint[Z]{a}{-3}{5}
+%			\randint{b0}{3}{7}
+%			\randint{c0}{1}{5}
+%			\randint[Z]{d}{2}{5}
+% Einschränkung der Variablensets, damit Zähler und Nenner
+% vor Erweiterung mit k teilerfremd sind
+%
+            \drawFromSet{a}{-3,-1,1,3}
+            \drawFromSet{b0}{2,4,5}
+            \drawFromSet{c0}{1,3,7}
+            \drawFromSet{d}{2,4,5}
+
+
+			\function[calculate]{b}{k*b0}
+			\function[calculate]{c}{k*c0}			
+			\function[calculate]{db0}{b0*d}
+			\function[calculate]{ac0}{a*c0}
+		    \function[calculate]{f}{(a*c)/(b*d)}
+		\end{variables}
+		
+			\text{\lang{de}{Berechnen Sie den folgenden Quotienten:}\lang{en}{Evaluate the following quotients:}\\ 
+            $\displaystyle\frac{\var{a}}{\var{b}} : \frac{\var{d}}{\var{c}}=$\ansref.}
+		
+		\begin{answer}
+			\solution{f}
+		\end{answer}
+		\explanation{\lang{de}{
+    Für den Quotienten muss man den ersten Bruch mit dem Kehrbruch des Divisors multiplizieren:
+    }
+    \lang{en}{
+    To divide fractions, the dividend must be multiplied by the reciprocal of the divisor.
+    }
+		\[ \frac{\var{a}}{\var{b}}: \frac{\var{d}}{\var{c}}
+		=\frac{\var{a}}{\var{b}}\cdot \frac{\var{c}}{\var{d}}
+		%=\frac{\var{a}\cdot \var{c}}{\var{b}\cdot \var{d}}
+		=\frac{\var{a}\cdot \var{c0}\cdot \var{k}}{\var{b0}\cdot \var{k}\cdot \var{d}}
+		=\frac{\var{a}\cdot \var{c0}}{\var{b0}\cdot \var{d}}=\frac{\var{ac0}}{\var{db0}}. \]
+		}
+	\end{quickcheck}
+
+% \begin{center}
+% \lang{de}{\iframe[400][225][S]{https://www.stream24.net/vod/getVideo.php?id=10962-1-6075&mode=iframe}}
+% \end{center}
+
+
+
+\end{visualizationwrapper}
+
+\end{content}

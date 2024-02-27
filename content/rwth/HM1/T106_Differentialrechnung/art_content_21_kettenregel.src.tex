@@ -1,0 +1,427 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Kettenregel}
+    \lang{en}{The chain rule}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+    \component{js_lib}{system/media/mathlets/GWTGenericVisualization.meta.xml}{mathlet1}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T104_weitere_elementare_Funktionen/g_art_content_14_potenzregeln.meta.xml}{power-rules}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{6}
+\ombarticle{2}
+\usepackage{mumie.genericvisualization}
+
+\begin{visualizationwrapper}
+
+\title{\lang{de}{Kettenregel}\lang{en}{The chain rule}}
+ 
+\begin{block}[annotation]
+  übungsinhalt
+  
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9032}{Ticket 9032}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{\lang{de}{Verkettung von zwei Funktionen}\lang{en}{Composition of two functions}}
+\\
+\lang{de}{
+Die Verkettung $\,f\circ g$ (sprich \nowrap{"$f$ Kringel $g$" oder \nowrap{"$f$ nach $g$"})} zweier Funktionen $f$ und $g$ 
+entsteht durch das Einsetzen der Funktionsvorschrift der Funktion $g$ als Argument in die Funktion $f$. 
+\\
+% Einfache Verkettungen haben Sie bereits im Kapitel über die \link{Transformationen}{Transformationen} kennengelernt.
+% Dort wurden horizontale Verschiebungen \nowrap{$\,(\;f(x) \rightarrow f(x + a)$,} also \nowrap{$g(x)=x + a\,)\,$}
+% bzw. horizontale Streckungen und Stauchungen \nowrap{$\,(\;f(x) \rightarrow f(a \cdot x)$,} $g(x)=a \cdot x\,)\,$ besprochen.
+% \\
+Alle Funktionswerte der in die Funktion $f$ eingesetzten Funktion $g$ müssen 
+im Definitionsbereich der Funkton $f$ liegen. Ist dies für alle Argumente der eingesetzten
+Funktion $g$ der Fall, so ist der Definitionsbereich der verketteten Funktion 
+$f \circ g$ gleich dem Definitionsbereich der Funktion $g$,
+im Allgemeinen kann er aber kleiner sein.
+}
+\lang{en}{
+The composition of two functions $f$ and $g$, $\;f \circ g\;$ (pronounced \nowrap{'f composed 
+with g' or \nowrap{'f of g'})} comes about by using the output of $g$ as the argument of the 
+function $f$. 
+\\
+% We've already encountered simple compositions in the chapter on \link{Transformationen}{transformations}. 
+% There, we discussed the horizontal shift \nowrap{$\,(\;f(x) \rightarrow f(x + a)$,} i.e. \nowrap{$g(x)=x + a\,)\,$}
+% as well as the horizontal stretchings and contractions \nowrap{$\,(\;f(x) \rightarrow f(a \cdot x)$,} $g(x)=a \cdot x\,)\,$.
+% \\
+All of the function values of the function $g$ must be in the domain of the function $f$. For this 
+reason, the domain of the composed function $f \circ g$ is either the domain of the function $g$, 
+or the largest subset of this which maps into the domain of $f$:
+}
+
+\begin{definition}[\lang{de}{Verkettung von Funktionen}\lang{en}{Composition of functions}] \label{addition.definition.1}
+  \lang{de}{Seien $f : D_f \to \R$ und $g : D_g \to \R$ zwei Funktionen. Wir setzen}
+  \lang{en}{Let $f : D_f \to \R$ and $g : D_g \to \R$ be two functions. We define}
+   \begin{align*}
+    (f \circ g)(x) &=& f\left(g(x)\right),
+   \end{align*}
+  \lang{de}{
+  wobei $ x \in D_{f \circ g} \; = \; \big\{ x \in D_g \; \big| \; g(x) \in D_f \big\}$. 
+  \\\\
+  Man nennt $f \circ g$ die \notion{\emph{Verkettung}} von $f$ und $g$. Die Funktion $f$ wird oft 
+  \notion{\emph{äußere Funktion}} und $g$ \notion{\emph{innere Funktion}} genannt.}
+  \lang{en}{
+  where $ x \in D_{f \circ g} \; = \; \big\{ x \in D_g \; \big| \; g(x) \in D_f \big\}$. 
+  \\\\
+  The function $f$ is often referred to as the \emph{outer function} and $g$ as the \emph{inner 
+  function}.
+  }
+\end{definition}
+
+\lang{de}{
+In der nachfolgenden Visualisierung können Sie zwei Funktionen miteinander verketten und den Graphen 
+darstellen. Achten Sie hierbei auf die Besonderheiten der Definitionsbereiche.
+}
+\lang{en}{
+In the following visualisation you can compose two functions and see the graphs. Pay special 
+attention to the domain of the composed function.
+} 
+\begin{example}
+\lang{de}{
+Hier können Sie die Verkettung der Funktionen $\,f(y)=\sin(y)$, $\exp(y)$ und $\sqrt{y}$ mit 
+beliebigen Funktionen $g(x)$ anschauen.
+}
+\lang{en}{
+Here you can visualise the composition of the functions $\,f(y)=\sin(y)$, $\exp(y)$, and $\sqrt{y}$ with any chosen function $g(x)$.
+}
+\begin{tabs*}[\initialtab{0}] %\class{exercise}
+\tab{$(f\circ g)(x) = \sin(g(x))$}
+
+\begin{genericGWTVisualization}[480][550]{mathlet1}
+\title{$(f \circ g)(x) = \sin(g(x))$}
+	\begin{variables}
+	
+	\function{F1}{real}{sin(x)}
+	\function[editable]{F2}{rational}{x^2/3}
+	\function{F22}{rational}{var(F2)}
+	\function{G}{real}{sin(var(F22))}
+	\function{G1}{real}{var(G)}
+	\end{variables}
+	
+	\label{F1}{\textcolor{blue}{f}}
+	\label{G}{\textcolor{#CC6600}{f\circ g}}
+	\label{F22}{\textcolor{#00CC00}{g}}
+	
+	% COLOR:
+	
+	\color{G}{#CC6600}
+	\color[0.5]{F1}{BLUE}
+	\color[0.5]{F22}{#00CC00}
+	
+		
+	\begin{canvas}
+	\plotSize{500}
+	\plotLeft{-10}
+	\plotRight{10}
+	\plot[coordinateSystem]{F1,F22,G}
+	\end{canvas}
+	\lang{de}{\text{
+  Die Grafik zeigt die Funktion \textcolor{blue}{$f(y)=\sin(y)$},\\
+  sowie die Funktion \textcolor{#00CC00}{$g(x)=$}$\var{F2}$\\
+	und deren Komposition \textcolor{#CC6600}{$(f\circ g)(x) = \sin(g(x))=$}$\var{G1}$.\\
+	Sie können für $g(x)$ andere Funktionen eingeben, z.B.  $g(x) = x^2,x^3, e^x, 
+  \sqrt{x}=sqrt(x)\ldots $.
+  }}
+  \lang{en}{\text{
+  The graph shows the function \textcolor{blue}{$f(y)=\sin(y)$},\\
+  the function \textcolor{#00CC00}{$g(x)=$}$\var{F2}$\\
+	and their composition \textcolor{#CC6600}{$(f\circ g)(x) = \sin(g(x))=$}$\var{G1}$.\\
+	Try replacing $g(x)$ with another function, e.g.  $g(x) = x^2,x^3, e^x, 
+  \sqrt{x}=sqrt(x)\ldots $.
+  }}
+ 
+\end{genericGWTVisualization}
+\tab{$(f\circ g)(x) = \exp(g(x))$}
+\begin{genericGWTVisualization}[480][550]{mathlet1}
+\title{$(f \circ g)(x) = \exp(g(x))$}
+	\begin{variables}
+	
+	\function{F1}{real}{exp(x)}
+	\function[editable]{F2}{real}{-x^2}
+	\function{F22}{real}{var(F2)}
+	\function{G}{real}{exp(var(F22))}
+	\function{G1}{real}{var(G)}	
+	\end{variables}
+	
+	\label{F1}{\textcolor{blue}{f}}
+	\label{G}{\textcolor{#CC6600}{f\circ g}}
+	\label{F22}{\textcolor{#00CC00}{g}}
+	
+	% COLOR:
+	
+	\color{G}{#CC6600}
+	\color[0.5]{F1}{BLUE}
+	\color[0.5]{F22}{#00CC00}
+	
+		
+	\begin{canvas}
+	\plotSize{500}
+	\plotLeft{-2}
+	\plotRight{2}
+	\plot[coordinateSystem]{F1,F22,G}
+	\end{canvas}
+	\lang{de}{\text{
+  Die Grafik zeigt die Funktion \textcolor{blue}{$f(y)=\exp(y)$},\\
+  sowie die Funktion \textcolor{#00CC00}{$g(x)=$}$\var{F2}$\\
+	und deren Komposition \textcolor{#CC6600}{$(f\circ g)(x) = \exp(g(x))=$}$\var{G1}$.\\
+	Sie können für $g(x)$ andere Funktionen eingeben, z.B.  $g(x) = x^2,x^3, \sqrt{x}=sqrt(x), 
+  1/x, \ldots $.
+  }}
+  \lang{en}{\text{
+  The graph shows the function \textcolor{blue}{$f(y)=\exp(y)$},\\
+  the function \textcolor{#00CC00}{$g(x)=$}$\var{F2}$\\
+	and their composition \textcolor{#CC6600}{$(f\circ g)(x) = \exp(g(x))=$}$\var{G1}$.\\
+	Try replacing $g(x)$ with another function, e.g. $g(x) = x^2,x^3, \sqrt{x}=sqrt(x), 
+  1/x, \ldots $.
+  }}
+\end{genericGWTVisualization}
+
+\tab{$(f\circ g)(x) = \sqrt{g(x)}$}
+\begin{genericGWTVisualization}[480][550]{mathlet1}
+\title{$(f \circ g)(x) = \sqrt{g(x)}$}
+	\begin{variables}
+	
+	\function{F1}{real}{sqrt(x)}
+	\function[editable]{F2}{real}{x+2}
+	\function{F22}{real}{var(F2)}
+	\function{G}{real}{sqrt(var(F2))}
+	\function{G1}{real}{var(G)}		
+	\end{variables}
+	
+	\label{F1}{\textcolor{blue}{f}}
+	\label{G}{\textcolor{#CC6600}{$f\circ g$}}
+	\label{F22}{\textcolor{#00CC00}{g}}
+	
+	% COLOR:
+	
+	\color{G}{#CC6600}
+	\color[0.5]{F1}{BLUE}
+	\color[0.5]{F22}{#00CC00}
+	
+	\begin{canvas}
+	\plotSize{500}
+	\plotLeft{-10}
+	\plotRight{10}
+	\plot[coordinateSystem]{F1,F22,G}
+	\end{canvas}
+	\lang{de}{\text{
+  Die Grafik zeigt die Funktion \textcolor{blue}{$f(y)=\sqrt{y}$},\\
+  sowie die Funktion \textcolor{\#00CC00}{$g(x)=$}$\var{F2}$\\
+	und deren Komposition \textcolor{#CC6600}{$(f\circ g)(x) = \sqrt{g(x)}=$}$\var{G1}$.\\
+	Sie können für $g(x)$ andere Funktionen eingeben, z.B.  $g(x) = x^2,x^3, e^x, 1/x, \ldots $.
+  }}
+  \lang{en}{\text{
+  The graph shows the function \textcolor{blue}{$f(y)=\sqrt{y}$},\\
+  the function \textcolor{\#00CC00}{$g(x)=$}$\var{F2}$\\
+	and their composition \textcolor{#CC6600}{$(f\circ g)(x) = \sqrt{g(x)}=$}$\var{G1}$.\\
+	Try replacing $g(x)$ with another function, e.g. $g(x) = x^2,x^3, e^x, 1/x, \ldots $.
+  }}
+\end{genericGWTVisualization}
+\end{tabs*}
+\end{example}
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\randint{k}{1}{2}   %Zufallsvariable für Auswahl
+			\function[calculate]{d1}{-(k-2)}  % "Dirac"-funktionen
+			\function[calculate]{d2}{(k-1)}
+
+			\randint[Z]{a}{-2}{2}
+			\randint[Z]{b}{1}{4}
+			\randint{c}{1}{4}
+			\randint[Z]{d}{-4}{4}
+
+
+      		\function[expand,normalize]{f1}{x^2+a*x+b}
+      		\function[expand,normalize]{f2}{c*x+d}
+      		\function[expand,normalize]{f12}{(c*x+d)^2+a*(c*x+d)+b}
+      		\function[expand,normalize]{f21}{c*(x^2+a*x+b)+d}
+
+			\function[expand,normalize]{f}{d1*f1+d2*f2}
+			\function[expand,normalize]{g}{d1*f2+d2*f1}
+      		\function[expand,normalize]{fg}{d1*f12+d2*f21}
+		\end{variables}
+
+			\text{\lang{de}{
+      Bestimmen Sie die Verkettung $f\circ g$ der Funktionen $f(x)=\var{f}$ und $g(x)=\var{g}$.\\
+			Es ist $(f\circ g)(x)= $\ansref.
+      }
+      \lang{en}{
+      Determine the composition $f\circ g$ of the functions $f(x)=\var{f}$ und $g(x)=\var{g}$.\\
+      It is $(f\circ g)(x)= $\ansref.
+      }}
+
+     \begin{answer}
+          \solution{fg}
+          \checkAsFunction{x}{-2}{2}{20}
+      \end{answer}
+	\end{quickcheck}
+
+
+\section{\lang{de}{Ableitung der Verkettung von Funktionen}
+         \lang{en}{Differentiating composite functions}}
+
+\lang{de}{Die Ableitung der Verkettung zweier Funktionen führt auf die Kettenregel.}
+\lang{en}{The differentiation of the composition of two functions is described by chain rule.}
+\begin{rule}[Kettenregel]\label{rule:kettenregel}
+%\href{https://www.hm-kompakt.de/video?watch=513}{\image[75]{00_Videobutton_schwarz}}\\
+%\textit{\lang{de}{Kettenregel:}\lang{en}{The Chain Rule}}\\
+\lang{de}{
+Sind $f$ und $g$ differenzierbare Funktionen, so gilt
+\[(f\circ g)'(x)=f'(g(x))\cdot g'(x).\]
+\floatright{\href{https://www.hm-kompakt.de/video?watch=513}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{
+If $f$ and $g$ are differentiable functions, then
+\[(f\circ g)'(x)=f'(g(x))\cdot g'(x).\]
+}
+
+%\textit{\lang{de}{Kettenregel:}\lang{en}{The Chain Rule}}\\
+\end{rule}
+
+\lang{de}{
+Man bildet also $f'$ an der Stelle $g(x)$ sowie $g'$ an der Stelle $x$ und multipliziert diese 
+beiden Werte miteinander.
+}
+\lang{en}{
+We evaluate the derivative $f'$ of $f$ and evaluate it at $g(x)$, then multiply the result by the 
+derivative $g'$ of $g$, evaluated at $x$.
+} 
+
+
+
+
+\begin{example}
+
+\lang{de}{
+Wir berechnen als Beispiel die Ableitung der Funktion $\sin(x^2)$. Setzen wir als \"{a}u{\ss}ere 
+Funktion $f(y)=\sin y$ und als innere Funktion $g(x)=x^2$, so ist $f(g(x))=\sin(x^2)$. Wir 
+k\"{o}nnen also die Kettenregel benutzen. Zun\"{a}chst ist $f'(y)=\cos y$. F\"{u}r $y=g(x)=x^2$ 
+ergibt das:
+}
+\lang{en}{
+As an example, we can calculate the derivative of the function $\sin(x^2)$. First consider an outer 
+function be $f(y)=\sin y$ and an inner function be $g(x)=x^2$, so that $f(g(x))=\sin(x^2)$. Since 
+this is the composition of two functions, we can use the chain rule here. We know that 
+$f'(y)=\cos y$, so as $y=g(x)=x^2$,
+}
+\[f'(g(x))=\cos (g(x))=\cos(x^2).\]
+\lang{de}{Nun m\"{u}ssen wir noch die Ableitung von $g$ berechnen. Wir erhalten:}
+\lang{en}{Now we calculate the derivative of $g$:}
+\[g'(x)=2x.\]
+\lang{de}{Nach der Kettenregel ist dann die Ableitung von $f(g(x))=\sin(x^2)$:}
+\lang{en}{According to the chain rule, the derivative of $f(g(x))=\sin(x^2)$ is:}
+\[(f\circ g)'(x)=f'(g(x))\cdot g'(x)=2x\cos (x^2).\]
+\lang{de}{
+Wenn man ein wenig Erfahrung beim Ableiten von Funktionen gesammelt hat, braucht man nat\"{u}rlich 
+nicht mehr diese vielen kleinen Einzelschritte zu gehen! Die Rechnung kann man in etwa auf die 
+letzte Zeile des Beispieles reduzieren.
+}
+\lang{en}{
+Once we have enough experience differentiating functions, we no longer need to perform each of these 
+small steps individually. The calculation can be shortened and the last line can be written down 
+in one step, having cited the chain rule.
+}
+
+\end{example}
+
+
+
+
+\begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\randint{k}{1}{4}	% Zufallsvariable für Auswahl:
+			\function[calculate]{d1}{-(k-2)*(k-3)*(k-4)/6}  % "Dirac"-funktionen
+			\function[calculate]{d2}{(k-1)*(k-3)*(k-4)/2}
+			\function[calculate]{d3}{-(k-1)*(k-2)*(k-4)/2}
+			\function[calculate]{d4}{(k-1)*(k-2)*(k-3)/6}
+
+			\randint{l}{1}{2}   %Zufallsvariable für Auswahl
+			\function[calculate]{l1}{-(l-2)}  % "Dirac"-funktionen
+			\function[calculate]{l2}{(l-1)}
+
+			\function{h0}{x^2+1}
+			\function[normalize]{h}{l1*x+l2*h0}
+
+			\function[normalize]{f1}{sin(h)}
+			\function[normalize]{f2}{cos(h)}
+			\function[normalize]{f3}{exp(h)}
+			\function[normalize]{f4}{ln(h)}
+			\function[normalize]{f}{d1*f1+d2*f2+d3*f3+d4*f4}
+			\function[expand,normalize]{df}{d1*f2+d2*(-f1)+d3*f3+d4*(1/h)}  % Ableitung von f an der Stelle h
+
+			% g=h0°f oder g=f°h0 mit f in fi
+			\function[expand,normalize]{g}{l2*f+l1*(f^2+1)}
+			\function[expand,normalize]{dg}{l2*df*2*x+l1*(2*df*f)}
+
+		\end{variables}
+
+			\text{\lang{de}{
+        Bestimmen Sie mit der Kettenregel die Ableitung der Funktion $f(x)=\var{g}$.\\
+				Die Ableitung ist $f'(x)=$ \ansref.
+        }
+        \lang{en}{
+        Using the chain rule, determine the derivative of the function $f(x)=\var{g}$.\\
+        The derivative is $f'(x)=$ \ansref.
+        }}
+
+     \begin{answer}
+          \solution{dg}
+%		  \allowForInput[false]{)}
+          \checkAsFunction{x}{-2}{2}{20}
+      \end{answer}
+\end{quickcheck}
+
+% 
+% 
+% 	\begin{genericGWTVisualization}[550][1000]{mathlet1}
+% 		\begin{variables}
+% 			\randint{randomA}{1}{2}
+% 
+% 			\point[editable]{P}{rational}{var(randomA),var(randomA)}
+% 		\end{variables}
+% 		\color{P}{BLUE}
+% 		\label{P}{$\textcolor{BLUE}{P}$}
+% 
+% 		\begin{canvas}
+% 			\plotSize{300}
+% 			\plotLeft{-3}
+% 			\plotRight{3}
+% 			\plot[coordinateSystem]{P}
+% 		\end{canvas}
+% 		\text{Der Punkt hat die Koordinaten $(\var{P}[x],\var{P}[y])$.}
+% 	    	\end{genericGWTVisualization}
+
+\end{visualizationwrapper}
+
+
+\end{content}

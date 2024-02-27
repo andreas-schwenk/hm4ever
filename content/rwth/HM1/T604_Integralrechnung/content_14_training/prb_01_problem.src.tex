@@ -1,0 +1,148 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A01: partielle Integration}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\title{
+\lang{de}{A01: partielle Integration}
+\lang{en}{A01: integration by parts}
+}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/24090}{Ticket 24090}
+\end{block}
+\usepackage{mumie.genericproblem}
+
+
+\begin{block}[annotation]
+   Kopie von hm4mint/T305_Integrationstechniken/training 2
+   
+   Im Ticket-System: \href{http://team.mumie.net/issues/11219}{Ticket 11219}
+\end{block}
+
+\begin{problem}
+	%\randomquestionpool{}{}
+	
+	\begin{question}	
+		\begin{variables}
+
+			%\randadjustIf{}{}
+			
+			\randint{b}{-4}{4}
+			\randint{d}{-4}{4}
+			
+			%v ∈ {− cos ( x ) , sin ( x ) , exp ( x ) , ln ( x )}
+			\begin{pool}
+        \begin{variables}
+            \function{v}{cos(x)}
+			\function{u}{exp(x)}
+        \end{variables}
+        \begin{variables}
+            \function{v}{sin(x)}
+			\function{u}{exp(x)}
+        \end{variables}
+        \begin{variables}
+            \function{v}{cos(x)}
+			\function{u}{cos(x)}
+        \end{variables}
+        \begin{variables}
+            \function{v}{sin(x)}
+			\function{u}{cos(x)}
+        \end{variables}
+    \end{pool}
+			
+        
+           \derivative{v1}{v}{x}
+			\function{f}{u*v1}
+			\function[expand,normalize]{f_dis}{u*v1}
+           \derivative{u1}{u}{x}
+           
+           \function{d5}{u*v}
+			\function{d6}{u1*v}
+		\end{variables}
+	%+++++++++++++++++++TYPE+++++++++++++++++++++++++++	
+		  \type{input.function}
+      \field{real}
+		\precision{3}
+		\displayprecision{3}
+	    \lang{de}{\text{Zerlegen Sie die Funktion $f(x)=\var{f_dis}$ passend in ein Produkt $f(x)=u(x)v'(x)$,
+so dass Sie partielle Integration anwenden können:\\
+	$u(x)= $\ansref, $v'(x)=$\ansref mit $u'(x)=$\ansref, $v(x)=$\ansref. \\
+Dann ist \\
+	$\int_a^b f(x) \; dx= [$ \ansref $]_a^b -\int_a^b $ \ansref $dx$}} 
+ \lang{en}{\text{Decompose the function $f(x)=\var{f_dis}$ suitably into a product $f(x)=u(x)v'(x)$
+so that you can integrate by parts:\\
+	$u(x)=$\ansref, $v'(x)=$\ansref with $u'(x)=$\ansref, $v(x)=$\ansref. \\
+Then \\
+	$\int_a^b f(x) \; dx= [$ \ansref $]_a^b -\int_a^b $ \ansref $dx$}}
+	    \begin{answer}
+%	    	\text{$u(x)= $}
+			\solution{u}
+          \inputAsFunction{x}{s1}
+	    \end{answer}  
+	    \begin{answer}
+%	    	\text{$v'(x)=$}
+			\solution{v1}
+          \inputAsFunction{x}{s2}
+          \checkFuncForZero{s1*s2-f}{-1}{1}{100}
+          \lang{de}{\explanation{Bei Ihrer Eingabe gilt nicht $f(x)=u(x)v'(x)$.}}
+          \lang{en}{\explanation{Your input does not satsify $f(x)=u(x)v'(x)$.}}
+          \score{2.0}
+	    \end{answer}
+	    \begin{answer}
+%	    	\text{$u'(x)=$}
+			\solution{u1}
+          \inputAsFunction{x}{s3}
+          \checkFuncForZero{D[s1]-s3}{-1}{1}{100}
+          \lang{de}{\explanation{Sie haben eine falsche Ableitung von $u(x)$ angegeben.}}
+          \lang{en}{\explanation{You have given an incorrect derivative of $u(x)$.}}
+	    \end{answer}
+	    \begin{answer}
+%	    	\text{$v(x)=$}
+			\solution{v}
+          \inputAsFunction{x}{s4}
+          \checkFuncForZero{D[s4]-s2}{-1}{1}{100}
+          \lang{de}{\explanation{Sie haben eine falsche Stammfunktion von $v'(x)$ angegeben.}}
+          \lang{en}{\explanation{You have given an incorrect antiderivative of $v'(x)$.}}
+	    \end{answer}
+	    \begin{answer}
+%	    	\text{$f1=$}
+			\solution{d5}
+          \inputAsFunction{x}{s5}
+          \checkFuncForZero{s1*s4-s5}{-1}{1}{100}
+          \lang{de}{\explanation{Sie haben die Formel für die partielle Integration nicht richtig angewendet. In dieses Feld kommt $u(x)v(x)$.}}
+          \lang{en}{\explanation{You have not applied the formula for integrating by parts correctly. $u(x)v(x)$ should be entered here.}}
+	    \end{answer}
+	    \begin{answer}
+%	    	\text{$f2=$}
+			\solution{d6}
+          \inputAsFunction{x}{s6}
+          \checkFuncForZero{s3*s4-s6}{-1}{1}{100}
+          \lang{de}{\explanation{Sie haben die Formel für die partielle Integration nicht richtig angewendet. Der neue Integrand ist $u'(x)v(x)$.}}
+          \lang{en}{\explanation{You have not applied the formula for integrating by parts correctly. The new integrand is $u'(x)v(x)$.}}
+	    \end{answer}
+	\end{question}
+
+\end{problem}
+
+\embedmathlet{mathlet}
+
+
+\end{content}

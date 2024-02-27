@@ -1,0 +1,126 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Exercise 2}
+    \lang{de}{Ü02: Ableitung}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T502_Stetigkeit_Diffbarkeit-n-dim/g_art_content_54_Differentiation.meta.xml}{content_54_Differentiation}
+\link{generic_article}{content/rwth/HM1/T502_Stetigkeit_Diffbarkeit-n-dim/g_art_content_53_Stetigkeit.meta.xml}{content_53_Stetigkeit}
+\end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22635}{Ticket 22635}
+\end{block}
+  \title{
+    \lang{en}{Exercise 2}
+    \lang{de}{Ü02: Ableitung}
+  }
+  
+  Es sei $f:\R^2 \to \R, x \mapsto \begin{cases}\displaystyle{\frac{(x_1x_2)^2}{x_1^4+x_2^2}}, & x \neq (0,0)^T \\ 0, & x=(0,0)^T.\end{cases}$.
+ 
+ a) Zeigen Sie, $f$ ist stetig.
+  
+ b) Berechnen Sie an der Stelle $a=(0,0)^T$ alle Richtungsableitungen.
+
+ c) Ist $f$ total differenzierbar?
+  \begin{tabs*}[\initialtab{0}\class{exercise}]
+    \tab{
+      Lösung a)
+    }
+    \begin{incremental}[\initialsteps{1}]
+      \step 
+    In allen Punkten $a\neq (0,0)^T$ ist $f$ als rationale Funktion stetig.
+    
+    \step Wir müssen aber noch $a=(0,0)^T$ betrachten.   \\
+    
+        Für $x=(x_1,x_2)^T\in \R^2$ mit $x_2\neq 0$ gilt
+        \begin{align*}
+        \displaystyle 
+%QS        | f(x)| =
+        \abs{f(x)} = \frac{(x_1x_2)^2}{x_1^4+x_2^2} \leq \frac{(x_1x_2)^2}{x_2^2} = x_1^2
+        \end{align*}
+        und für alle $x=(x_1,0)^T \in \R^2$ ist %QS bereits 
+        $f(x)=0$.       
+    
+   \step Für jede Nullfolge $x^{(k)}=\left(x_1^{(k)},x_2^{(k)}\right)^T \to (0,0)^T$ in $\R^2$ folgt damit nun 
+%QS     wegen $x_1^{(k)} \to 0$ 
+%QS     \[ \lim_{k\to \infty} |f(x^{(k)})| \leq \lim_{k\to \infty} x_1^{(k)} = 0, \]
+        \[ \lim_{k\to \infty} \abs{f(x^{(k)})} \leq \lim_{k\to \infty} \left( x_1^{(k)}\right)^2 = 0, \]
+        was gleichbedeutend ist mit $\; \lim_{k\to \infty} f(x^{(k)})=0. \;$
+%QS 
+        Nach dem \ref[content_53_Stetigkeit][Folgenkriterium]{thm:äquivalent-zu-stetig} 
+        ist damit die Stetigkeit von $f$ gezeigt.
+         
+    \end{incremental}
+    
+    \tab{Lösung b)}
+    Sei $a=0$ und $v\neq 0$ eine beliebige Richtung.
+    Wir nutzen die Definition der \ref[content_54_Differentiation][Richtungsableitung]{def:richtungsableitung} 
+    und erhalten
+    \begin{align*}
+        D_v f(0) &= \lim_{h \to 0} \frac{f(0+ hv)}{h} \\
+        &=  \lim_{h \to 0} \frac{(hv_1)^2(hv_2)^2}{((hv_1)^4+(hv_2)^2)\cdot h} \\
+        &=  \lim_{h \to 0} \frac{h^4 (v_1v_2)^2}{h^5(v_1)^4+h^3(v_2)^2} \\
+        &=  \lim_{h \to 0} \frac{h^4 (v_1v_2)^2}{h^3 (h^2 (v_1)^4+(v_2)^2)} \\
+        &=  \lim_{h \to 0} \frac{h (v_1v_2)^2}{h^2 (v_1)^4+(v_2)^2}.
+    \end{align*}
+    Zur Bestimmung des Grenzwertes brauchen wir eine Fallunterscheidung. Ist $v_2=0$, dann ist der Zähler, 
+    und damit der ganze Bruch, konstant $0$ und es gilt $\; D_v f(0)=0.$\\
+    
+    Im Fall von $v_2\neq 0$ können wir die Grenzwertregeln anwenden und erhalten 
+    \[D_v f(0)=\frac{\lim_{h \to 0} \; \left(h (v_1v_2)^2\right)}{\lim_{h \to 0} \left(h^2 (v_1)^4+(v_2)^2\right)}= \frac{0}{(v_2)^2}=0.\]
+
+    Zusammengefasst ist also $D_v f(0)=0$ für alle $v\neq 0$.
+    
+    \tab{Lösung c)}
+     \begin{incremental}[\initialsteps{1}]
+      \step 
+    Als rationale Funktion ist $f$ bereits in allen Punkten $a\neq 0$ stetig partiell differenzierbar und damit auch total differenzierbar.
+    Wir müssen noch den Punkt $a=0$ prüfen.
+    
+\step %QS Wir zeigen, dass ein $L\in M(1,2;\R)$ derart existiert, dass
+    Zum Nachweis der \ref[content_54_Differentiation][totalen Differenzierbarkeit]{def:total-diffbar}  
+    in $a=(0,0)^T$ suchen wir eine Matrix $L\in M(1,2;\R)$, so dass gilt
+    \begin{equation}
+    \lim_{x\to a}\frac{f(x)-f(a)-L\cdot(x-a)}{\vert\!\vert x-a\vert\!\vert}=0.
+    \end{equation}
+
+    \step Wir zeigen nun, dass wir $L=(0, \, 0)$ wählen können:
+    \begin{align*}
+    \displaystyle   
+        \frac{f(x)-f(0)-L\cdot x}{\Vert x \Vert} = \frac{f(x)}{\Vert x \Vert} \;
+        &= \frac{f(x)}{\sqrt{x_1^2+x_2^2}} \\
+        &= \frac{x_1^2 x_2^2}{(x_1^4+x_2^2)\sqrt{x_1^2+x_2^2}} \\
+%QS        &\leq \begin{cases} \frac{x_1^2 x_2^2}{x_2^2 \cdot |x_1|}, & x_1x_2\neq 0 \\ 0, & x_1x_2=0\end{cases}\\
+%QS        &\leq \Vert x \Vert.  
+        &= \frac{x_1^2 x_2^2}{(x_1^4+x_2^2)(x_1^2+x_2^2)} \sqrt{x_1^2+x_2^2} \\
+        &\leq \begin{cases} 
+                \sqrt{x_1^2+x_2^2}  , & \text{falls } x_1x_2\neq 0 \\ 
+                0, & \text{falls } x_1x_2=0
+           \end{cases}\\              
+        &\leq \Vert x \Vert.              
+    \end{align*}
+
+\step Da $x \mapsto \Vert x\Vert$ stetig ist, folgt
+\begin{equation}
+\lim_{x\to a}\frac{f(x)-f(a)-L\cdot(x-a)}{\vert\!\vert x-a\vert\!\vert}=0.
+\end{equation}
+
+\end{incremental}
+  \end{tabs*}
+\end{content}
+

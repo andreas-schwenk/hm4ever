@@ -1,0 +1,729 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{Eigenschaften und höhere Ableitungen}
+    \lang{en}{Properties and higher derivatives}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{Description}
+  \end{description}
+  \begin{components}
+    \component{generic_image}{content/rwth/HM1/images/g_tkz_T106_ParabolaTangents.meta.xml}{T106_ParabolaTangents}
+    \component{generic_image}{content/rwth/HM1/images/g_img_00_Videobutton_schwarz.meta.xml}{00_Videobutton_schwarz}
+     \component{generic_image}{content/rwth/HM1/images/g_img_00_video_button_schwarz-blau.meta.xml}{00_video_button_schwarz-blau}
+  \end{components}
+  \begin{links}
+    \link{generic_article}{content/rwth/HM1/T106_Differentialrechnung/g_art_content_22_extremstellen.meta.xml}{extremstellen}
+    \link{generic_article}{content/rwth/HM1/T207_Intervall_Schachtelung/g_art_content_23_intervallschachtelung.meta.xml}{intervallschachtelung}
+    \link{generic_article}{content/rwth/HM1/T211_Eigenschaften_stetiger_Funktionen/g_art_content_33_zwischenwertsatz.meta.xml}{zwischenwertsatz}
+    \link{generic_article}{content/rwth/HM1/T106_Differentialrechnung/g_art_content_23_kurvendiskussion.meta.xml}{kurvendiskussion}
+    \link{generic_article}{content/rwth/HM1/T211_Eigenschaften_stetiger_Funktionen/g_art_content_33_zwischenwertsatz.meta.xml}{saetze-stetig}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\ombchapter{1}
+\ombarticle{3}
+
+\title{\lang{de}{Eigenschaften differenzierbarer Funktionen und höhere Ableitungen}
+       \lang{en}{Properties of differentiable functions and higher derivatives}}
+
+\begin{block}[annotation]
+
+
+\end{block}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/10031}{Ticket 10031}\\
+\end{block}
+
+\begin{block}[info-box]
+\tableofcontents
+\end{block}
+
+\section{\lang{de}{Stetigkeit}\lang{en}{Continuity}}\label{sec:stetigkeit}
+
+\lang{de}{
+Bisher hatten wir Stetigkeit und Differenzierbarkeit von Funktionen separat behandelt. Wir werden 
+jedoch im folgenden sehen, dass Differenzierbarkeit eine stärkere Bedingung ist und Stetigkeit 
+impliziert.
+}
+\lang{en}{
+Until now we have handled continuity and differentiability of functions seperately. The following 
+theorem states that differentiability is a stronger condition and that it implies continuity.
+}
+
+\begin{theorem}\label{thm:diffstetig}
+\lang{de}{Sei $f:D\to \R$ eine Funktion.}
+\lang{en}{Let $f:D\to \R$ be a function.}
+\begin{enumerate}
+\item \lang{de}{Ist $f$ an einer Stelle $x_0\in D$ differenzierbar, so ist $f$ in $x_0$ auch stetig.}
+      \lang{en}{If $f$ is differentiable at a point $x_0\in D$, then $f$ is continuous at $x_0$.}
+\item \lang{de}{Ist $f$ auf $E\subseteq D$ differenzierbar, so ist $f$ auf $E$ stetig.}
+      \lang{en}{If $f$ is differentiable on $E\subseteq D$, then $f$ is continuous on $E$.}
+\end{enumerate}
+\lang{de}{
+\floatright{\href{https://www.hm-kompakt.de/video?watch=507}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{}
+\end{theorem}
+
+
+\begin{proof*}[\lang{de}{Beweis der Stetigkeit bei Differenzierbarkeit}
+               \lang{en}{Proof of differentiability implying continuity}]
+\begin{incremental}[\initialsteps{0}]
+\step \lang{de}{
+Die zweite Aussage ist eine direkte Folgerung aus der ersten Aussage.\\
+Sei nun $x_0\in D$ eine Stelle, an der $f$ differenzierbar ist, dann existiert also der Grenzwert
+}
+\lang{en}{
+The second statement is a direct consequence of the first.\\
+Let $x_0\in D$ be a point at which $f$ is differentiable, then the following limit exists:
+}
+\[ f'(x)= \lim_{x\to x_0} \frac{f(x)-f(x_0)}{x-x_0}. \]
+\step
+\lang{de}{Mit den Grenzwertregeln ist dann aber}
+\lang{en}{By the limit rules we hence have}
+\begin{eqnarray*}
+\lim_{x\to x_0} f(x) &=& f(x_0)+  \lim_{x\to x_0} (f(x)-f(x_0)) \\ 
+&=& f(x_0)+  \lim_{x\to x_0} \frac{f(x)-f(x_0)}{x-x_0} \cdot   \lim_{x\to x_0} (x-x_0) \\
+&=& f(x_0) + f'(x_0)\cdot 0 =f(x_0)
+\end{eqnarray*} 
+\lang{de}{Also ist $f$ an der Stelle $x_0$ stetig.}
+\lang{en}{Therefore $f$ is continuous at the point $x_0$.}
+\end{incremental}
+\end{proof*}
+
+
+
+
+\section{\lang{de}{Extrema, Monotonie und Mittelwertsatz}
+         \lang{en}{Extrema, monotonicity and mean value theorem}}\label{sec:monotonie}
+
+\lang{de}{
+Nun interessieren wir uns daf\"{u}r, in welchen Bereichen eine Funktion $f$ w\"{a}chst oder 
+f\"{a}llt. Z.B. ist dies interessant, wenn man nach Extremstellen sucht. Die detaillierteren 
+Zusammenhänge der ersten und zweiten Ableitung mit dem Verlauf der Funktion $f$ wurden schon in Teil 
+1 in den Abschnitten \link{extremstellen}{Monotonie und Extremstellen} und 
+\link{kurvendiskussion}{Kurvendiskussion} behandelt. Hier soll lediglich der im 
+\link{extremstellen}{Abschnitt Monotonie und Extremstellen} anschauliche Zusammenhang 
+mathematisch begründet werden.
+}
+\lang{en}{
+Now we consider in which regions of the domain a function $f$ increases or decreases. For example, 
+this is useful for when we search for extrema. The detailed relationship between the first and 
+second derivative and the graph of the function $f$ was already discussed in the earlier sections on 
+\link{extremstellen}{monotonicity and extrema} and \link{kurvendiskussion}{curves}. The relationship 
+introduced in \link{extremstellen}{the former} will be mathematically justified in this section.
+}
+
+\begin{theorem}[\lang{de}{Notwendige Bedingung für lokale Extrema}
+                \lang{en}{Necessary conditions for local extrema}]\label{thm:NB_extrema} 
+\lang{de}{
+Ist $f$ eine auf einem Intervall $I$ differenzierbare Funktion und $x_0$ im Inneren des Intervalls 
+$I$ eine Stelle, an der $f$ ein lokales Maximum oder lokales Minimum hat, so gilt
+}
+\lang{en}{
+If $f$ is a function that is differentiable on an an interval $I$ and $x_0$ is a point in $I$ at 
+at which $f$ has a local maximum or a local minimum, then
+}
+\[ f'(x_0)=0. \]
+\lang{de}{
+\floatright{\href{https://www.hm-kompakt.de/video?watch=522}{\image[75]{00_Videobutton_schwarz}}}\\\\
+}
+\lang{en}{}
+\end{theorem}
+
+
+\begin{proof*}[\lang{de}{Beweis der Notwendigen Bedingung für lokale Extrema}
+               \lang{en}{Proof of the necessary condition for local extrema}]
+\begin{incremental}[\initialsteps{0}]
+\step \lang{de}{
+Hat $f$ an der Stelle $x_0$ ein lokales Maximum, so gilt in einer kleinen Umgebung 
+$U_\epsilon(x_0)=(x_0-\epsilon,x_0+\epsilon)$ von $x_0$
+}
+\lang{en}{
+If $f$ has a local maximum at the point $x_0$, so in a small neighbourhood 
+$U_\epsilon(x_0)=(x_0-\epsilon,x_0+\epsilon)$ of $x_0$ we have
+}
+\[ f(x)\leq f(x_0) \quad \text{\lang{de}{für alle }\lang{en}{for all }}x\in  U_\epsilon(x_0).\]
+
+\step
+\lang{de}{Dann ist aber der Differenzenquotient}
+\lang{en}{The the quotient whose limit we define as the derivative is}
+  	\[		\frac{f(x_0+h)-f(x_0)}{h}\leq 0, \]
+\lang{de}{wenn $0<h<\epsilon$ und}
+\lang{en}{if $0<h<\epsilon$ and}
+		\[		\frac{f(x_0+h)-f(x_0)}{h}\geq 0, \]
+\lang{de}{wenn $-\epsilon<h<0$. Also gilt}
+\lang{en}{if $-\epsilon<h<0$. Thus}
+		\[  \lim_{h\nearrow 0} \frac{f(x_0+h)-f(x_0)}{h}\geq 0\geq  \lim_{h\searrow 0} \frac{f(x_0+h)-f(x_0)}{h}. \]
+\step
+\lang{de}{
+Da $f$ aber differenzierbar ist, sind beide Grenzwerte gleich und daher insbesondere gleich $0$. D.h.
+}
+\lang{en}{
+As $f$ is differentiable, the two limits are equal and in particular they are equal to $0$. Hence
+}
+\[  f'(x_0)= 	\lim_{h\to 0} \frac{f(x_0+h)-f(x_0)}{h}	=0. \]
+
+\lang{de}{
+Für ein lokales Minimum geht der Beweis genauso. Lediglich die Vergleichszeichen für die 
+Differenzenquotienten und die einseitigen Grenzwerte drehen sich alle um.
+}
+\lang{en}{
+The proof for a local minimum is analogous. Only the inequalities and one-sided limits are reversed.
+}
+\end{incremental}
+\end{proof*}
+
+
+
+\begin{quickcheck}
+		\field{rational}
+%		\type{mc.unique}
+		\begin{variables}
+			\randint[Z]{x1}{-3}{1}
+			\randint[Z]{v}{-1}{1}
+			\randint[Z]{d}{1}{3}
+            \function[calculate]{x2}{x1+2*d}
+            \function[calculate]{a}{-3/2*(x1+x2)}
+            \function[calculate]{b}{3*(x1*x2)}
+			\randint[Z]{c}{-3}{3}
+		    \function[expand, normalize]{df}{3*(x-x1)*(x-x2)}
+			\function[normalize]{f}{x^3+a*x^2+b*x+c}
+            \function[calculate]{x3}{x1+v*d}
+		\end{variables}
+		
+		\text{\lang{de}{
+        Wir betrachten die Funktion $f(x)=\var{f}$, deren Ableitungsfunktion
+        $f'(x)=\var{df}$ ist. Welche der folgenden Stellen ist mit Sicherheit keine Extremstelle
+        von $f$?
+        }
+        \lang{en}{
+        Consider the function $f(x)=\var{f}$, whose derivative is $f'(x)=\var{df}$. At which of the 
+        following points is there definitely \textbf{not} an extremum of $f$?
+        }}
+%        \permutechoices{1}{3}
+\begin{choices}{unique}
+\begin{choice}
+			\text{$x=\var{x1}$}
+            \solution{false}
+       	\end{choice}
+		\begin{choice}
+			\text{$x=\var{x2}$}
+            \solution{false}
+       	\end{choice}
+		\begin{choice}
+			\text{$x=\var{x3}$}
+            \solution{true}
+       	\end{choice}
+\end{choices}
+\explanation{\lang{de}{Verschwindet $f'(x)$ nicht, so kann in $x$ auch keine Extremstelle vorliegen.}
+             \lang{en}{If $f'(x)$ does not vanish at a point $x$, then there is no extremum at $x$.}
+		}
+	\end{quickcheck}
+
+\lang{de}{
+Monotonie beinhaltet, dass die Ableitung an allen Stellen im Intervall ein einheitliches Vorzeichen hat.
+}
+\lang{en}{
+Monotonicity on an interval implies that the slope has the same sign at every point in that interval.
+}
+
+
+\begin{theorem}\label{thm:diffmonotonie}
+\lang{de}{Ist $f$ eine auf einem Intervall $I$ differenzierbare Funktion, so gelten:}
+\lang{en}{If $f$ is a function that is differentiable on $I$, then we have:}
+\begin{align*}
+    \lang{de}{&\underline{f'(x)\;\text{ für alle }x\in I}&& \underline{\text{Monotonieverhalten von}\;f\;\text{auf}\;I}}
+    \lang{en}{&\underline{f'(x)\;\text{ on}\;I}&& \underline{\text{Monotonicity of}\;f\;\text{on}\;I}}
+    \\
+    \lang{de}{&f'(x)\geq 0 &\Leftrightarrow &\:f\;\text{monoton wachsend}}
+    \lang{en}{&f'(x)\geq 0 &\Leftrightarrow &\:f\;\text{monotonically increasing}}
+    \\
+    \lang{de}{&f'(x)\leq 0 &\Leftrightarrow &\:f\;\text{monoton fallend}}
+    \lang{en}{&f'(x)\leq 0 &\Leftrightarrow &\:f\;\text{monotonically decreasing}}
+    \\
+    \lang{de}{\text{und}&&&}
+    \lang{en}{\text{and}&&&}
+    \\
+    \lang{de}{&f'(x)> 0 &\Rightarrow &\:f\;\text{streng monoton wachsend}}
+    \lang{en}{&f'(x)> 0 &\Rightarrow &\:f\;\text{strictly monotonically increasing}}
+    \\
+    \lang{de}{&f'(x)< 0 &\Rightarrow &\:f\;\text{streng monoton fallend}}
+    \lang{en}{&f'(x)< 0 &\Rightarrow &\:f\;\text{strictly monotonically decreasing}}
+    \\
+\end{align*}
+\lang{de}{
+\floatright{\href{https://www.hm-kompakt.de/video?watch=520}{\image[75]{00_Videobutton_schwarz}}}\\~
+}
+\lang{en}{}
+\end{theorem}
+
+
+\begin{proof*}[\lang{de}{Beweis der Monotonieaussagen}\lang{en}{Proof of the monotonicity statements}]
+\begin{incremental}[\initialsteps{0}]
+\step
+	\lang{de}{Ist $f$ auf dem Intervall $I$ monoton wachsend und $x$ aus $I$. Dann ist also}
+  \lang{en}{If $f$ is monotonically increasing on the interval $I$ and $x$ is a point in $I$, then}
+	\[
+		f(x+h)-f(x)\geq 0\;\;\;\;\text{ \lang{de}{f\"{u}r alle}\lang{en}{for all}}\;\;\;h> 0\;\;\;\text{\lang{de}{ bzw.}\lang{en}{ or}}
+	\]
+	\[
+		f(x+h)-f(x)\leq 0\;\;\;\text{ \lang{de}{f\"{u}r alle}\lang{en}{for all}}\;\;\;h< 0\;\;\;\;\;\;\;
+	\] 
+	\lang{de}{mit $x+h\in I$. Dann ist aber der Differenzenquotient in jedem der beiden F\"{a}lle}
+  \lang{en}{with $x+h\in I$. In both cases the quotient whose limit is defined as the derivative is}
+	\[
+		\frac{f(x+h)-f(x)}{h}\geq 0.
+	\] 
+    
+  \lang{de}{
+  Dann ist aber auch der Grenzwert des Differenzenquotienten, als die Ableitung an der Stelle $x$
+  }
+  \lang{en}{
+  But then the limit of this quotient, i.e. the derivative at the point $x$
+  }
+\[
+f'(x) = \lim_{h\rightarrow 0} \frac{f(x+h)-f(x)}{h}
+\] 	
+\lang{de}{
+gr\"{o}{\ss}er oder gleich $0$. Das hei{\ss}t $f'(x)\geq 0$. Entsprechend ist bei einer monoton 
+fallenden Funktion der Differenzenquotient $\frac{f(x+h)-f(x)}{h}$ stets kleiner oder gleich $0$, 
+weshalb in diesem Fall $f'(x)\leq 0$ für alle $x\in I$.
+}
+\lang{en}{
+is also greater than or equal to  $0$. That is, $f'(x)\geq 0$. Similarly, if $f$ is monotonically 
+decreasing, the quotient $\frac{f(x+h)-f(x)}{h}$ is always smaller than or equal to $0$, in which 
+case $f'(x)\leq 0$ for all $x\in I$.
+}
+
+\step \lang{de}{
+Die umgekehrte Schlussrichtung, also dass es ein $x_0\in I$ gibt mit $f'(x_0)< 0$, wenn $f$ auf $I$ 
+nicht monoton wachsend ist, folgt aus dem \lref{thm:mittelwertsatz}{Mittelwertsatz}. Ist nämlich $f$ 
+nicht monoton wachsend, so gibt es Stellen $a<b$ mit $f(a)>f(b)$. Nach dem Mittelwertsatz gibt es 
+dann eine Stelle $\xi$ mit $a<\xi<b$ so, dass
+}
+\lang{en}{
+The converse implication, that there exists $x_0\in I$ with $f'(x_0)< 0$ if $f$ is not monotonically 
+increasing on $I$ follows from the \lref{thm:mittelwertsatz}{mean value theorem}. Indeed, if $f$ is 
+not monotonically increasing, there exist points $a<b$ with $f(a)>f(b)$. By the mean value theorem 
+there then exists a point $\xi$ with $a<\xi<b$ such that
+}
+\[  f'(\xi)= \frac{f(b)-f(a)}{b-a}<0. \]
+\lang{de}{
+Entsprechend gibt es für eine Funktion $f$, die nicht monoton fallend ist, Stellen $a<b$ mit 
+$f(a)<f(b)$ und daher nach dem  Mittelwertsatz eine weitere Stelle $\xi$ mit $a<\xi<b$ so, dass
+}
+\lang{en}{
+Similarly, if a function $f$ is not monotonically decreasing, there exist points $a<b$ with 
+$f(a)<f(b)$ and by the mean value theorem there exists a point $\xi$ with $a<\xi<b$ such that
+}
+\[  f'(\xi)= \frac{f(b)-f(a)}{b-a}>0. \]
+
+
+\lang{de}{
+Um schließlich zu sehen, dass die Ungleichung $f'(x)>0$ für alle $x\in I$ die strenge Monotonie 
+impliziert, nimmt man zunächst an, dass $f$ nicht streng monoton ist. 
+%Da $f'(x)\geq 0$ aber die Monotonie impliziert, wäre $f$ also monoton wachsend, aber nicht streng monoton wachsend.
+Dann gibt es aber $a,b$ in $I$ mit $a<b$ und $f(a)=f(b)$, und wieder wegen dem \lref{thm:mittelwertsatz}{Mittelwertsatz} eine Stelle $\xi$ mit $a<\xi<b$ so, dass
+}
+\lang{en}{
+To show that the inequality $f'(x)>0$ being satisfied for all $x\in I$ implies that $f$ is strictly 
+monotonically increasing, we assume towards a contradiction that $f$ is not strictly monotonically 
+increasing. But then there exist points $a,b$ in $I$ with $a<b$ and $f(a)=f(b)$, and again by the 
+\lref{thm:mittelwertsatz}{mean value theorem} there exists a point $\xi$ with $a<\xi<b$ such that
+}
+\[  f'(\xi)= \frac{f(b)-f(a)}{b-a}=0. \]
+\lang{de}{Also ist $f'(x)$ nicht für alle $x\in I$ positiv.}
+\lang{en}{Therefore $f'(x)$ is not strictly positive for all $x\in I$, a contradiction.}
+    
+
+\end{incremental}
+\end{proof*}
+
+
+%
+%\begin{example}
+%	\image{image1}
+%	\\
+%	\lang{de}{Die Funktion $f(x)=x^2$ ist monoton fallend auf $(-\infty;0]$ und monoton steigend auf $[0;\infty)$. An einer Stelle $x_0$ mit 
+%	$x_0\leq 0$ hat also die Tangente eine Steigung $f'(x_0)\leq 0$, an einer Stelle $x_1$ mit 
+%	$x_1\geq 0$ hat die Tangente eine positive Steigung $f'(x_1)\geq 0$.\\
+%	Da die Tangente in $x_0 <0$ sogar eine negative Steigung hat, ist $f'(x) <0$ f\"{u}r $x\in (-\infty;0)$, 
+%	und damit ist $f$ auf $(-\infty;0)$ streng monoton fallend. 
+%	Analog gilt $f'(x)>0$ auf $(0;\infty)$ und $f$ ist dort streng monoton steigend. }
+%	\lang{en}{The function $f(x)=x^2$ is monotonically decreasing on $(-\infty,0]$ and monotonically increasing on $[0,\infty)$. The slope of the tangent at any point $x_0$ with 
+%	$x_0\leq 0$ is $f'(x_0)\leq 0$. The slope of the tangent at any point $x_1$ with $x_1\geq 0$ is positive: $f'(x_1)\geq 0$.\\
+%	Because the tangent at $x_0<0$ has a negative slope, $f'(x) <0$ for $x\in (-\infty,0)$, and hence $f$ is strictly monotonically decreasing on $(-\infty,0)$. Analogous results
+%	hold for $f'(x)>0$ on $(0,\infty)$: $f$ is strictly monotonically increasing on $(0,\infty)$.}
+%\end{example}
+
+\begin{block}[warning]
+\lang{de}{
+Die Funktion $f$ kann streng monoton wachsen bzw. streng monoton fallen, auch wenn an manchen Stellen 
+die Ableitung gleich Null ist, wie am Beispiel $f(x)=ax^3$ (mit $a>0$ bzw. mit $a<0$) zu sehen ist.
+}
+\lang{en}{
+The function $f$ can be strictly monotonically increasing or strictly monotonically decreasing even 
+if its derivative takes the value $0$ at certain points, like for example $f(x)=ax^3$ with either 
+$a>0$ or $a<0$.
+}
+\end{block}
+
+
+\begin{example}
+\begin{center}
+\image{T106_ParabolaTangents}
+\end{center}
+	\lang{de}{
+  Die Funktion $f(x)=x^2$ ist monoton fallend auf $(-\infty;0]$ und monoton steigend auf 
+  $[0;\infty)$. An einer Stelle $x_0$ mit $x_0\leq 0$ hat also die Tangente eine Steigung 
+  $f'(x_0)\leq 0$, an einer Stelle $x_1$ mit $x_1\geq 0$ hat die Tangente eine positive Steigung 
+  $f'(x_1)\geq 0$.\\
+	Da die Tangente in $x_0 <0$ sogar eine negative Steigung hat, ist $f'(x) <0$ f\"{u}r 
+  $x\in (-\infty;0)$, und damit ist $f$ auf $(-\infty;0]$ streng monoton fallend. 
+	Analog gilt $f'(x)>0$ auf $[0;\infty)$ und $f$ ist dort streng monoton steigend.
+  }
+	\lang{en}{
+  The function $f(x)=x^2$ is monotonically decreasing on $(-\infty;0]$ and monotonically increasing 
+  on $[0;\infty)$. The slope of the tangent at any point $x_0$ with $x_0\leq 0$ is therefore 
+  $f'(x_0)\leq 0$, and the slope of the tangent at any point $x_1$ with $x_1\geq 0$ is 
+  $f'(x_1)\geq 0$.\\
+	Because the tangent of a point $x_0<0$ even has a strictly negative slope, $f$ is strictly 
+  monotonically decreasing on $(-\infty,0)$. Analogously $f'(x)>0$ on $[0,\infty)$, implying that $f$ 
+  is strictly monotonically increasing on $[0;\infty)$.
+  }
+\end{example}
+
+\lang{de}{
+Das Steigungsverhalten einer differenzierbaren Funktion steht also in engem Zusammenhang mit dem 
+Vorzeichen ihrer Ableitung. Verschwindet die Ableitung einer Funktion $f$ an einer Stelle $x_0$, so 
+ist die Tangente an den Graphen in diesem Punkt waagerecht. Die lineare Approximation steigt nicht 
+und f\"{a}llt nicht. Deswegen nennt man eine solche Stelle auch eine station\"{a}re Stelle.
+\\\\
+Wir enden diesen Paragraphen mit dem Mittelwertsatz, der im Monotoniebeweis schon benutzt wurde, und 
+welcher generell einen Zusammenhang zwischen Funktionswerten und Werten der Ableitung liefert.
+}
+\lang{en}{
+The slope of a differentiable function is closely related to the sign of its first derivative.
+If the first derivative of a function $f$ vanishes at a point $x_0$, then the tangent of the graph at 
+that point is horizontal. Points on the graph of a function where the the tangent line is horizontal 
+are called critical or stationary points.
+\\\\
+We finally see the mean value theorem, which has been applied already in the earlier proof. It gives 
+a useful relationship between values of a function and values of its derivative.
+}
+
+
+
+\begin{theorem}[\lang{de}{Mittelwertsatz}\lang{en}{Mean value theorem}]\label{thm:mittelwertsatz}
+  \lang{de}{
+  Sei $f:I\to\R$ eine  Funktion auf einem \notion{Intervall} $I \subseteq \R$, die auf ganz $I$ 
+  stetig ist und die im Inneren von $I$ differenzierbar ist. Sind $a,b \in I,\; a<b$, so gibt es eine 
+  Stelle $\xi$ zwischen $a$ und $b$ so, dass
+  }
+  \lang{en}{
+  Let $f:I\to\R$ be a function defined and continuous on an \notion{interval} $I \subseteq \R$, and 
+  suppose $f$ is differentiable on the interior of $I$. If $a,b \in I,\; a<b$ then there exists a 
+  point $\xi$ between $a$ and $b$ such that
+  }
+  \[ 
+  \frac{f(b)-f(a)}{b-a} = f'(\xi ).
+  \]
+  
+  
+\end{theorem}
+
+
+
+\begin{proof*}[\lang{de}{Beweis Mittelwertsatz}\lang{en}{Proof of the mean value theorem}]
+\begin{incremental}[\initialsteps{0}]
+\step \lang{de}{
+Betrachten wir zunächst den Fall, dass $f(b)=f(a)$ ist. In diesem Fall muss eine Stelle $\xi$
+zwischen $a$ und $b$ gefunden werden, welche $f'(\xi)=0$ erfüllt.
+\\\\
+Falls $f$ konstant ist, gilt $f'(\xi)=0$ für alle $\xi\in [a,b]$, weshalb wir im folgenden nur 
+nicht-konstante $f$ betrachten.\\
+Da $f$ auf $[a,b]$ stetig ist, nimmt die Funktion $f$ auf diesem Intervall ein Maximum und ein 
+Minimum an (siehe \link{saetze-stetig}{Abschnitt "`Sätze zu stetigen Funktionen"'}). Da $f$ nicht 
+konstant ist, liegt eines der beiden im Inneren des Intervalls, weshalb an dieser Stelle die 
+Ableitung verschwindet. Diese Stelle kann man also als $\xi$ wählen.
+}
+\lang{en}{
+First let us consider the case $f(b)=f(a)$. We look for a point $\xi$ between $a$ and $b$ such that 
+$f'(\xi)=0$.
+\\\\
+If $f$ is constant, then $f'(\xi)=0$ for all $\xi\in [a,b]$, so we suppose that $f$ is not constant.\\
+As the function $f$ is continuous on $[a,b]$, it takes a maximum and a minimum value on the interval 
+(see \link{saetze-stetig}{the section on continuous functions}). As $f$ is not constant, one of the 
+two lies on the interior of the interval, and at this point the derivative of the function vanishes. 
+This point may be chosen as $\xi$.
+}
+
+\step
+\lang{de}{Im Fall $f(b)\neq f(a)$ betrachten wir die Hilfsfunktion}
+\lang{en}{In the case where $f(b)\neq f(a)$, we consider the function}
+\[  h(x)=f(x)-\frac{f(b)-f(a)}{b-a}\cdot (x-a). \]
+\lang{de}{Für diese gilt}
+\lang{en}{We note that}
+\[ h(a)=f(a)-\frac{f(b)-f(a)}{b-a}\cdot (a-a)=f(a) \]
+\lang{de}{und}
+\lang{en}{and}
+\[ h(b)=f(b)-\frac{f(b)-f(a)}{b-a}\cdot (b-a)=f(a)=h(a). \]
+\lang{de}{Auch ist $h$ auf $I$ differenzierbar mit}
+\lang{en}{The function $h$ is also differentiable on $I$, with}
+\[  h'(x)=f'(x)-\frac{f(b)-f(a)}{b-a}. \]
+\lang{de}{
+Nach dem bisher gezeigten gibt es also eine Stelle $\xi\in (a,b)$ mit $h'(\xi)=0$, d.h.
+}
+\lang{en}{
+The function $h$ falls under the simpler case that we have proved already, so there exists a point 
+$\xi\in (a,b)$ with $h'(\xi)=0$, that is
+}
+\[ f'(\xi)=\frac{f(b)-f(a)}{b-a}. \]
+
+\end{incremental}
+\end{proof*}
+
+\lang{de}{
+Auch das folgende Video behandelt den Mittelwertsatz und Monotonie.
+\\\\
+\floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10761&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+\\\\
+}
+\lang{en}{}
+\section{\lang{de}{Höhere Ableitungen}\lang{en}{Higher derivatives}}\label{sec:hoehere-abl}
+
+\lang{de}{
+Für eine differenzierbare Funktion $f:D\to \R$ hatten wir die Ableitung auch wieder als Funktion 
+$f':D\to \R$ aufgefasst. Ist diese wieder differenzierbar, so kann man auch sie ableiten und erhält 
+eine Funktion $(f')'$. Man nennt diese dann die zweite Ableitung von $f$.
+}
+\lang{en}{
+A differentiable function $f:D\to \R$ has a derivative function $f':D\to \R$. If this derivative is 
+also differentiable, we may label its derivative  $(f')'$. This is called the second derivative of 
+$f$.
+}
+
+\begin{definition} \label{def:höhere_Ableitungen}
+  	\lang{de}{
+  	Sei $f$ eine differenzierbare Funktion mit Ableitung $f'$. Ist $f'$ an einer Stelle $x_0$ 
+    differenzierbar, d.h. existiert der Grenzwert
+    }
+    \lang{en}{
+		Let $f$ be a differentiable function with derivative $f'$. If $f'$ is differentiable at a 
+    point $x_0$, i.e. the limit
+    }
+		\[
+			\lim_{h\rightarrow 0}\frac{f'(x_0+h)-f'(x_0)}{h},
+		\]
+    \lang{de}{
+    so existiert also $(f')'(x_0)$. Wenn die Ableitungsfunktion $f'$ in allen Stellen des 
+    Definitionsbereiches differenzierbar ist, hei{\ss}t $f$ \textit{zweimal differenzierbar}. Man 
+    schreibt dann statt $(f')'$ kurz $f''$.\\
+		Die \textit{zweite Ableitung von $f$ in $x_0$} ist also die Ableitung von $f'$ und
+    }
+    \lang{en}{
+    exists, then $(f')'(x_0)$ exists too. If the first derivative $f'$ is differentiable at all 
+    of the points in its domain, then the function $f$ is called \textit{twice differentiable}. 
+    Instead of denoting its second derivative $(f')'$, we simply write $f''$.\\
+		The \textit{second derivative of $f$ at $x_0$} is just the derivative of $f'$ at $x_0$:
+  }
+		\[
+			f''(x_0)=\lim_{h\rightarrow 0}\frac{f'(x_0+h)-f'(x_0)}{h}.
+		\] 
+
+	
+\end{definition}
+
+\begin{example} 
+	\begin{enumerate}
+	\item
+	    \lang{de}{Sei $f(x)=x^3+2x^2+5$. Dann ist $f'(x)=3x^2+4x$ und $f''(x)=6x+4$.}
+	    \lang{en}{Let $f(x)=x^3+2x^2+5$. Then $f'(x)=3x^2+4x$ and $f''(x)=6x+4$.}
+	\item 
+	    \lang{de}{Sei $f(x)=\sin(x)$. Es ist $f'(x)=\cos(x)$, folglich $f''(x)=-\sin(x)$.}
+	    \lang{en}{Let $f(x)=\sin(x)$. Then $f'(x)=\cos(x)$ and $f''(x)=-\sin(x)$.}
+	\item 
+	    \lang{de}{Sei $f(x)=\cos(x)$. Wir erhalten $f'(x)=-\sin(x)$ und $f''(x)=-\cos(x)$.}
+	    \lang{en}{Let $f(x)=\cos(x)$. Then $f'(x)=-\sin(x)$ and $f''(x)=-\cos(x)$.}
+	\item 
+	    \lang{de}{Sei $f(x)=e^{2x}$. Nach der Kettenregel ist $f'(x)=2e^{2x}$ und $f''(x)=4e^{2x}$.}
+	    \lang{en}{Let $f(x)=e^{2x}$. By the chain rule, $f'(x)=2e^{2x}$ and $f''(x)=4e^{2x}$.}
+	\item 
+	    \lang{de}{Sei $f(x)=\ln(x)$. Dann ist $f'(x)=\frac{1}{x}$ und $f''(x)=-\frac{1}{x^2}$.}
+	    \lang{en}{Let $f(x)=\ln(x)$. Then $f'(x)=\frac{1}{x}$ and $f''(x)=-\frac{1}{x^2}$.}
+	\end{enumerate}
+\end{example}
+
+
+
+\begin{definition}\label{def:higher_deriv}
+\label{higher derivative}
+\lang{de}{
+Wie auch die zweite Ableitung werden die dritte, vierte, $\ldots$, $n$-te Ableitung von $f$ als 
+Ableitungen der zweiten, dritten, $\ldots$, $(n-1)$-te Ableitung von $f$ definiert, sofern letztere 
+existieren und differenzierbar sind. 
+\\\\
+Man sagt dann, dass $f$ \notion{dreimal, viermal,  $\ldots$, $n$-mal differenzierbar} ist. Die $n$-te 
+Ableitungsfunktion von $f$ wird auch mit $f^{(n)}$ bezeichnet, um zu viele Striche zu vermeiden, aber 
+auch für kleine $n$ verwendet, also z.B.
+}
+\lang{en}{
+Much like the second derivative, we may define the third, fourth, $\ldots$, $n$th derivative of $f$ 
+as the derivative of the second, third, $\ldots$, $(n-1)$th derivative of $f$ respectively, so long 
+as the latter exists and is differentiable.
+}
+\[   f^{(1)}=f',\quad f^{(2)}=f'',\quad f^{(3)}=f'''. \]
+\lang{de}{
+Existiert die $n$-te Ableitungsfunktion von $f$ und ist diese stetig, so sagt man, dass $f$ 
+\notion{$n$-mal stetig differenzierbar} ist. Wir setzen ausserdem $f^{(0)} = f$.
+}
+\lang{en}{
+If the $n$th derivative of $f$ exists and is continuous, then we say that $f$ is \notion{$n$ times 
+continuously differentiable}. We set $f^{(0)} = f$ by convention.
+}
+\end{definition}
+
+\begin{remark}
+\lang{de}{
+Damit eine Funktion $n$-mal differenzierbar sein kann, muss insbesondere eine $(n-1)$-te 
+Ableitungsfunktion existieren und diese muss differenzierbar sein, also insbesondere stetig. $n$-mal 
+differenzierbare Funktionen sind also insbesondere $(n-1)$-mal stetig differenzierbar.
+}
+\lang{en}{
+For a function to be $n$ times differentiable, the $(n-1)$th derivative must exist and be 
+differentiable, and hence continuous. $n$ times differentiable functions are therefore in particular 
+all $(n-1)$ times continuously differentiable.
+}
+\end{remark}
+
+
+
+ \begin{example}%\textit{Beispiel:}\\
+ \begin{tabs*}[\initialtab{0}]
+\tab{$x^3 + 2x^2 + 5$}
+\lang{de}{Für $f(x)=x^3+2x^2+5$ hatten wir schon $f'(x)=3x^2+4x$ und $f''(x)=6x+4$. Dann sind}
+\lang{en}{We have already seen that if $f(x)=x^3+2x^2+5$ then $f'(x)=3x^2+4x$ and $f''(x)=6x+4$. Then}
+\[ f^{(3)}(x)=(f'')'(x)=6\quad \text{\lang{de}{und}\lang{en}{and}}\quad f^{(4)}(x)=(f^{(3)})'(x)=0. \]
+\lang{de}{Alle höheren Ableitungen $f^{(n)}(x)$ mit $n>4$ sind dann aber auch konstant $0$.}
+\lang{en}{All higher derivatives $f^{(n)}(x)$ for $n>4$ are therefore constant and equal to $0$.}
+
+\tab{\lang{de}{Polynom vom Grad $k$}\lang{en}{Polynomial of degree $k$}}
+\lang{de}{
+Allgemeiner ist die Ableitung eines Polynoms vom Grad $k$ ein Polynom vom Grad $k-1$, die zweite 
+Ableitung vom Grad $k-2$ etc., bis schließlich die $k$-te Ableitung konstant ist. Alle höheren 
+Ableitungen sind dann die Nullfunktion.
+}
+\lang{en}{
+More generally, the derivative of a polynomial of degree $k$ is itself a polynomial of degree $k-1$, 
+the second derivative is a polynomial of degree $k-2$ etc., until finally the $k$th derivative is 
+constant. All higher derivatives are simply the zero function.
+}
+
+\tab{$\sin(x)$}
+\lang{de}{
+Für $f(x)=\sin(x)$ hatten wir $f'(x)=\cos(x)$ und  $f''(x)=-\sin(x)=-f(x)$. Damit sind
+}
+\lang{en}{
+We have already seen that if $f(x)=\sin(x)$ then $f'(x)=\cos(x)$ and $f''(x)=-\sin(x)=-f(x)$. Then
+}
+\[ f^{(3)}(x)=(f'')'(x)=-f'(x)=-\cos(x) \quad \text{\lang{de}{und}\lang{en}{and}}\quad f^{(4)}(x)=(f^{(3)})'(x)=-f''(x)=f(x). \]
+\lang{de}{
+Die vierte Ableitung ist also die Funktion selbst, weshalb wir generell für $k\geq 0$ die Beziehung
+}
+\lang{en}{
+The fourth derivative is therefore the function itself, so in general for $k\geq 0$ there is a 
+relationship
+}
+\[  f^{(k+4)}=f^{(k)} \]
+\lang{de}{erhalten, d.h. für alle $n\geq 0$ gilt:}
+\lang{en}{so we have for any $n\geq 0$:}
+\begin{eqnarray*}
+f^{(4n)}(x) = \; \; \; \; \;  f^{(0)}(x) &=& \sin(x), \\
+f^{(4n+1)}(x) &=& \cos(x), \\
+f^{(4n+2)}(x) &=& -\sin(x), \\
+f^{(4n+3)}(x) &=& -\cos(x). \\
+\end{eqnarray*}
+
+\tab{$e^{2x}$}
+\lang{de}{
+Für $f(x)=e^{2x}$ sind $f'(x)=2e^{2x}$ und $f''(x)=4e^{2x}$. Man sieht hier schon ein Muster für die 
+höheren Ableitungen, nämlich
+}
+\lang{en}{
+We have already seen that if $f(x)=e^{2x}$ then $f'(x)=2e^{2x}$ and $f''(x)=4e^{2x}$. Here too we see 
+a pattern for the higher derivatives,
+}
+\[  f^{(n)}(x)=2^n\cdot e^{2x}, \]
+\lang{de}{
+das man leicht mit vollständiger Induktion beweisen kann:\\
+Der Induktionsanfang $n=0$ ist richtig, denn $f^{(0)}(x)=f(x)=2^0e^{2x} = e^{2x}$.\\
+Ist nun $f^{(n)}(x)=2^n\cdot e^{2x}$ für ein $n$, so ist
+}
+\lang{en}{
+which can be easily proved by induction:\\
+The base case $n=0$ is true, as $f^{(0)}(x)=f(x)=2^0e^{2x} = e^{2x}$.\\
+Now if we assume $f^{(n)}(x)=2^n\cdot e^{2x}$ to be true, then
+}
+\[  f^{(n+1)}(x)=(f^{(n)})'(x)=(2^n\cdot e^{2x})'=2^n\cdot 2e^{2x}=2^{n+1}\cdot e^{2x}. \]
+
+
+\end{tabs*}
+\end{example}
+
+
+
+
+
+   \begin{quickcheck}
+		\field{rational}
+		\type{input.function}
+		\begin{variables}
+			\randint[Z]{a}{-3}{5}
+		    \function[normalize]{f}{(x-a)/(x+a)}
+            \function[normalize]{df}{(2*a)/(x+a)^2}
+            \derivative[normalize]{ddf}{df}{x}
+            \derivative[normalize]{df3}{ddf}{x}
+		\end{variables}
+		
+		\text{\lang{de}{Die höheren Ableitungen der Funktion $f(x)=\var{f}$ sind}
+        \lang{en}{The higher derivatives of the function $f(x)=\var{f}$ are}\\
+        $f'(x)= $\ansref, \\ $f''(x)= $\ansref, \\ $f'''(x)= $\ansref.}
+		
+		\begin{answer}
+			\solution{df}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\begin{answer}
+			\solution{ddf}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\begin{answer}
+			\solution{df3}
+			\checkAsFunction{x}{-1}{1}{10}
+		\end{answer}
+		\explanation{\lang{de}{
+        Die nächst höhere Ableitung ist stets die Ableitung der vorhergehenden 
+        höheren Ableitung.
+        }
+        \lang{en}{
+        A higher derivative can be found by differentiating the previous higher derivative. 
+        }}
+	\end{quickcheck}
+    
+\lang{de}{
+Das folgende Video behandelt noch einmal höhere Ableitungen.
+    \floatright{\href{https://api.stream24.net/vod/getVideo.php?id=10962-2-10764&mode=iframe&speed=true}{\image[75]{00_video_button_schwarz-blau}}}\\
+}
+\lang{en}{}    
+
+\end{content}

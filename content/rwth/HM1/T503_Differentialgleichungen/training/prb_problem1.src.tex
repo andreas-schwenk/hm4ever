@@ -1,0 +1,97 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{...}
+    \lang{de}{A01: AWA}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/21700}{Ticket 21700}
+\end{block}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A01: AWA}}
+\begin{block}[annotation]
+Eine einfache Anfangswertaufgabe: linear, homogen, konstanter Koeffizient.
+\\
+Hier ist differenziertes Feedback bereits eingebaut, aber nicht abrufbar: 
+Dazu ist die Weiterverarbeitung von Eingabefunktionen noch zu arm implementiert.
+\\
+tbc
+\end{block}
+\begin{problem}
+  \begin{question}
+    \begin{variables}
+    %Anfangswert:
+    \randint[Z]{vz}{-1}{1} 
+    \randint{X0}{1}{10}
+    \function[calculate]{x0}{vz*X0}
+    %Für Kosmetik der Aufgabenstellung:
+    \begin{switch}
+        \begin{case}{vz=-1}
+        \string{VZ}{-}
+        \end{case}
+        \begin{default}
+        \string{VZ}{}
+        \end{default}
+    \end{switch}
+    \randint{x00}{1}{10}     
+    \randint[Z]{y0}{-10}{10}
+    %der Koeffizienten der Lösung alpha*exp(a*x) der DGL y'=ay zu obigem Anfangswert:
+	\function{alpha}{y0/e}
+    \function{a}{1/x0} 
+    %Lösung selbst:
+    \function{phi}{alpha*exp(a*x)}
+    %ausgewertet in Null:
+    \function{null}{0}
+    \substitute{const}{phi}{x}{null}
+    %Intervall:
+    \function{l1}{-infty}
+    \function{l2}{infty}
+    \end{variables}
+        
+    \lang{de}{\text{Lösen Sie das Anfangswertproblem $y'=\var{VZ}\frac{1}{\var{X0}}\cdot y$ mit $y(\var{x0})=\var{y0}$.\\
+                    \textit{Bestimmen Sie die Lösung exakt, nicht gerundet.}}}
+    
+	\begin{answer}
+        \type{input.function}
+		\text{ Die Lösung des Anfangswertproblems ist $\phi(x)=$}
+		\solution{phi}
+        \inputAsFunction{x}{t1}
+        \checkFuncForZero{phi-t1}{-1}{1}{10}
+        %Die bedingten Explanations funktionieren noch nicht, weil die Weiterverarbeitung der Funktion t1 noch nicht ausgereift implementiert ist.
+        %Falls dies einmal, der Fall sein sollte, ist differenziertes Feedback möglich.
+        %Wenn DGL erfüllt, aber nicht Anfangswert:
+        \explanation[NOT[equal(y0,t1[x0,x])]AND [equal(t1,a*D[t1,x])]]{Ihre Funktion erfüllt die Differentialgleichung, aber nicht die Anfangswertbedingung.}
+        %Wenn Anfangswert erfüllt, aber nicht DGL:
+        \explanation[[equal(y0,t1[x0,x])]AND NOT[equal(t1,a*D[t1,x])]]{Ihre Funktion erfüllt die Anfangswertbedingung, aber nicht die Differentialgleichung.}
+        %Wenn weder Anfangswert noch DGL erfüllt:
+        \explanation[NOT[equal(y0,t1[x0,x])]AND NOT[equal(t1,a*D[t1,x])]]{Es handelt sich um ein lineares, homogenes Anfangswertproblem. Weil der Koeffizient $\var{a}$
+        konstant ist, hat die Lösung die Form $a\cdot \exp(b x)$. Wie müssen $a$ und $b$ gewählt werden?}
+	\end{answer}
+    \begin{answer}
+        \type{input.interval}
+        \text{Was ist das maximale Existenzintervall dieser Lösung?}
+        \solution{(l1;l2)}
+        \explanation{Das maximale Lösungsintervall einer linearen Differentialgleichung ist gegeben durch das Definitionsintervall $I$ seiner Koeffizienten mit $x_0\in I$.}
+    \end{answer}
+    \end{question}
+\end{problem}
+\embedmathlet{gwtmathlet}
+\end{content}

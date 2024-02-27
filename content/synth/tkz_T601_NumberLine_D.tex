@@ -1,0 +1,43 @@
+%This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)
+%https://creativecommons.org/licenses/by/4.0/legalcode
+% Copy of T101_NumberLine_D
+\documentclass[rgb]{standalone}
+\usepackage{tkz-euclide}
+\usepackage{amssymb}
+\definecolor{myorange}{hsb}{0.0833, 1, 0.8}
+\definecolor{mygreen}{hsb}{0.3333, 1, 0.8}
+\definecolor{myblue}{hsb}{0.5833, 1, 0.8}
+\definecolor{mymagenta}{hsb}{0.8333, 1, 0.8}
+\begin{document}
+	\begin{tikzpicture}[scale=1.5, font=\Large]
+		\tkzInit[xmin=-2,xmax=4]
+		\tkzDrawX[thick,label=$$]
+		\foreach \i in {-14,...,30}
+		{\node[very thick, draw,circle,fill,myblue,inner sep=2] at (\i*1/7,0) {};}
+		\foreach \i in {-2,...,0}
+		{\node[below=0.5mm] at (\i,0){$\i$};
+		\node[very thick, draw,circle,fill,myorange,inner sep=2] at (\i,0) {};
+		\draw[thick, -latex, myorange] (\i,-1) --(\i,-0.5);}
+		\foreach \i in {1,...,4}
+		{\node[below=0.5mm] at (\i,0){$\i$};
+		\node[very thick, draw,circle,fill,mygreen,inner sep=2] at (\i,0) {};
+		\draw[thick, -latex, myorange] (\i,-1) --(\i,-0.5);
+		\draw[thick, -latex, mygreen] (\i,1) --(\i,0.5);}
+		\draw[thick, -latex] ({-sqrt(3)},1) --({-sqrt(3)},0.5);
+		\draw[thick] ({-sqrt(3)},-0.07) --({-sqrt(3)},0.07);
+		\node[above=0.5mm] at ({-sqrt(3)},0){$-\sqrt{3}$};
+		\draw[thick, -latex] ({sqrt(2)},1) --({sqrt(2)},0.5);
+		\draw[thick] ({sqrt(2)},-0.07) --({sqrt(2)},0.07);
+		\node[above=0.5mm] at ({sqrt(2)},0){$\sqrt{2}$};
+		\draw[thick, -latex] ({exp(1)},1) --({exp(1)},0.5);
+		\draw[thick] ({exp(1)},-0.07) --({exp(1)},0.07);
+		\node[above=0.5mm] at ({exp(1)},0){$e$};
+		\draw[thick, -latex] ({pi},1) --({pi},0.5);
+		\draw[thick] ({pi},-0.07) --({pi},0.07);
+		\node[above=0.5mm] at ({pi},0){$\pi$};
+		\node[right] at (4.5,0){$\mathbb{R}$};
+		\node[right, mygreen] at (4.5,0.75){$\mathbb{N}$};
+		\node[right, myorange] at (4.5,-0.75){$\mathbb{Z}$};
+		\node[left,myblue] at (-0.25,0.75){$\mathbb{Q}$};
+	\end{tikzpicture}	
+\end{document}

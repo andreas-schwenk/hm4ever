@@ -1,0 +1,143 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A04: Intervallhalbierungsmethode}
+    \lang{en}{input numbers}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.ombplus}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A04: Intervallhalbierungsmethode}}
+\lang{en}{\title{Problem 4}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/9995}{Ticket 9995}
+\end{block}
+
+\begin{problem}
+%	\randomquestionpool{1}{2}
+	\begin{question}%n=2
+		
+		\text{Gegeben sei die Funktion \\
+		$ f:\mathbb{R}\to \mathbb{R}$, $\:f(x) = \var{f}. $\\
+		Führen Sie die Intervallhalbierungsmethode zur Bestimmung einer Nullstelle von $f$ beginnend mit dem 
+        Intervall $[0; \var{b}]$ durch und geben Sie die
+        ersten drei erhaltenen Intervalle an: \\
+        Intervall nach erster Halbierung: $\; [$ \ansref ; \ansref $]$\\
+        Intervall nach zweiter Halbierung: $\; [$ \ansref ; \ansref $]$\\
+        Intervall nach dritter Halbierung: $\; [$ \ansref ; \ansref $]$
+		}
+		
+		\type{input.number}
+        \field{rational}
+
+        \explanation{Die neuen Intervalle (obere Hälfte oder untere Hälfte) sind stets so zu wählen, dass die 
+        Vorzeichen der zugehörigen Funktionswerte  verschieden sind.}
+		
+		
+		\begin{variables}
+			\randint{a}{2}{7}
+			\randint[Z]{b1}{1}{3}
+            \function[calculate]{b}{4*b1}
+            \function[calculate]{b2}{2*b1}
+            \randint{k}{0}{7}
+			% c wird so gewählt, dass f eine Nullstelle zwischen b/8*(8-k-1) uund b/8(8-k) hat.
+            % außerdem ist f im Intervall [0;b] monoton fallend.
+            \function[calculate]{c}{b1^2*(a*k^2+2*k+1)/4}
+			\function[expand,normalize]{f}{a*(x-b)^2-c} 
+            \function[calculate]{l1}{floor(k/4)}
+            \function[calculate]{l2}{floor(k/2)}
+            \function[calculate]{l3}{k}
+            
+			\function[calculate]{u1}{b-b/2*(l1+1)}
+			\function[calculate]{o1}{b-b/2*l1}
+			\function[calculate]{u2}{b-b/4*(l2+1)}
+			\function[calculate]{o2}{b-b/4*l2}
+			\function[calculate]{u3}{b-b/8*(l3+1)}
+			\function[calculate]{o3}{b-b/8*l3}
+            
+            \number{null}{0}
+            \substitute[calculate]{f0}{f}{x}{null}
+		\end{variables}
+		
+		\begin{answer}
+			\solution{u1}
+		\end{answer}
+		\begin{answer}
+			\solution{o1}
+		\end{answer}
+		\begin{answer}
+			\solution{u2}
+		\end{answer}
+		\begin{answer}
+			\solution{o2}
+		\end{answer}
+		\begin{answer}
+			\solution{u3}
+		\end{answer}
+		\begin{answer}
+			\solution{o3}
+		\end{answer}
+		
+	\end{question}
+	
+%	\begin{question}%n=3
+%		\lang{de}{
+%		\text{Gegeben sei die Funktion \\
+%		$ f:\mathbb{R}\to \mathbb{R} , f(x) = \var{a3}(\var{auf})^\var{n} - \var{c3}. $\\
+%		Führen Sie die Intervallhalbierungsmethode so lange durch, bis sie eine reelle Nullstelle von 
+%		$f$ bis auf ein Intervall der Länge $< \frac{1}{4}$ bestimmt haben. 
+%		}
+%		}
+%		
+%		\type{input.function}
+%		\field{real}
+%
+%   
+%    \displayprecision{2}
+%    \correctorprecision{2}
+%		
+%		
+%		\begin{variables}
+%			\randint{a}{2}{4}
+%			\randint[Z]{b}{-5}{5}
+%			\randint{c}{1}{3}
+%			\function[normalize]{a3}{a^3}
+%			\function[normalize]{c3}{c^3}
+%			\number{n}{3}
+%			\function[calculate]{g}{1/100*floor(100*(b+c/a))}
+%			
+%			\function[normalize]{auf}{x-b}
+%		\end{variables}
+%		
+%		\begin{answer}
+%			\text{Geben Sie die linke Intervallgrenze an.}
+%			\solution{g}
+%			\inputAsFunction{x}{ag} 
+%           \checkFuncForZero{ag-g}{-10}{10}{100}
+%		\end{answer}
+%		
+%	\end{question}
+	
+\end{problem}
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

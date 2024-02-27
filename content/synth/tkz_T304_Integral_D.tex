@@ -1,0 +1,33 @@
+%This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)
+%https://creativecommons.org/licenses/by/4.0/legalcode
+\documentclass[rgb]{standalone}
+\usepackage{tkz-euclide}
+\definecolor{myorange}{hsb}{0.0833, 1, 0.8}
+\definecolor{mygreen}{hsb}{0.3333, 1, 0.8}
+\definecolor{myblue}{hsb}{0.5833, 1, 0.8}
+\definecolor{mymagenta}{hsb}{0.8333, 1, 0.8}
+\begin{document}
+	\begin{tikzpicture}[scale=1.5, font=\Large]
+		% Coordinate system
+		\tkzInit[xmin=-1,xmax=7,ymin=-2,ymax=7]
+		\tkzGrid[color=lightgray]
+		\tkzDrawX[thick]
+		\tkzDrawY[thick]	
+		\draw[draw=none, fill,fill opacity=0.4, domain=0:{pi}, smooth,variable=\x,gray] (0,0) --  plot ({2*\x}, {2*\x+cos(180*\x/pi)}) -- ({2*pi},0);		
+		\draw[very thick, domain=0:{pi}, smooth,variable=\x,gray] plot ({2*\x}, {2*\x+cos(180*\x/pi)});		
+		\draw[fill,myblue, draw=none, fill opacity=0.4] (0,0) -- ({2*pi},{2*pi}) -- ({2*pi},0);
+		\draw[very thick, myblue] (0,0) -- ({2*pi},{2*pi});
+		\draw[domain=0:{pi/2}, draw=none,smooth,variable=\x,myorange, fill, fill opacity=0.4] (0,0) -- plot ({2*\x}, {cos(180*\x/pi)});		
+		\draw[domain={pi/2}:{pi}, draw=none,smooth,variable=\x,myorange, fill, fill opacity=0.4] plot ({2*\x}, {cos(180*\x/pi)}) -- ({2*pi},0);		
+		\draw[very thick,domain=0:{pi}, smooth,variable=\x,myorange] plot ({2*\x}, {cos(180*\x/pi)});		
+		% Labely
+		\node[below=0.5mm] at (2,0){$1$};
+		\node[below=0.5mm] at (4,0){$2$};
+		\node[below=0.5mm] at (6,0){$3$};
+		\node[left=0.5mm] at (0,-1){$-1$};
+		\node[left=0.5mm] at (0,1){$1$};
+		\node[left=0.5mm] at (0,3){$3$};
+		\node[left=0.5mm] at (0,5){$5$};
+		\node[left=0.5mm] at (0,7){$7$};
+	\end{tikzpicture}	
+\end{document}

@@ -1,0 +1,137 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A02: Fakultät}
+    \lang{en}{input numbers}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Die Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22136}{Ticket 22136}
+\end{block}
+\begin{block}[annotation]
+Copy of \href{http://team.mumie.net/issues/9768}{Ticket 9768}: content/rwth/HM1/T201_Vollstaendige_Induktion_wichtige_Ungleichungen/training/prb_problem2.src.tex
+\end{block}
+
+
+\usepackage{mumie.genericproblem}
+\usepackage{mumie.ombplus}
+
+
+\lang{de}{
+	\title{A02: Fakultät}
+}
+
+\lang{en}{
+	\title{Problem 2}
+}
+
+
+
+\begin{problem}
+
+		\begin{variables}
+			
+			\randint{n}{0}{6}
+			\randint{k}{5}{15}
+			\randint{j}{1}{3}
+			\randint{l}{10}{15}
+
+
+			\function{fa}{(n)!}
+			\function[calculate]{sa}{(n)!}
+
+
+			\function[calculate]{tmp2}{(k-j)}
+
+			\function{fb}{((k)!)/((tmp2)!)}
+			\function[calculate]{sb}{((k)!)/((k-j)!)}
+
+			\function[calculate]{tmp}{(l-j)}
+
+			\function{fc}{(((l)!)-((tmp)!))/((tmp)!)}
+			\function[calculate]{sc}{(((l)!)-((l-j)!))/((l-j)!)}
+			
+		\end{variables}
+		
+
+\randomquestionpool{1}{3}
+	\begin{question}
+		\text{
+			Berechnen sie den folgenden Zahlenwert!
+		}
+		
+		\type{input.number} 
+ 
+        \field{rational}
+		
+		\begin{answer}
+			\text{$\var{fa} =$}
+			\solution{sa}
+            \explanation{Tipp: Verwenden Sie die Definition von Fakultät.}
+		\end{answer}
+		
+		
+	\end{question}
+		
+		\begin{question}
+		\text{
+			Berechnen sie den folgenden Zahlenwert!
+		}
+		
+		\type{input.number} 
+
+        \field{rational}
+		
+		\begin{answer}
+			\text{$\var{fb} =$}
+			\solution{sb}
+            \explanation{Tipp: Beachten Sie, dass für natürliche Zahlen $k,n$\\
+            $(k+n)! = k! \cdot (k+1)\cdot (k+1)\cdot \ldots \cdot (k+n)$\\
+            gilt und nutzen Sie dies zum Kürzen des Bruchs.}
+		\end{answer}
+		
+		
+	\end{question}
+	
+		\begin{question}
+		\text{
+			Berechnen sie den folgenden Zahlenwert!
+		}
+		
+		\type{input.number} 
+ 
+        \field{rational}
+		
+		\begin{answer}
+			\text{$\var{fc} =$}
+			\solution{sc}
+            \explanation{Tipp: Beachten Sie, dass für natürliche Zahlen $k,n$\\
+            $(k+n)! = k! \cdot (k+1)\cdot (k+1)\cdot \ldots \cdot (k+n)$\\
+            gilt und nutzen Sie dies zum Kürzen des Bruchs.}
+		\end{answer}
+		
+		
+	\end{question}	
+		
+\end{problem}
+
+\embedmathlet{mathlet}
+
+
+\end{content}

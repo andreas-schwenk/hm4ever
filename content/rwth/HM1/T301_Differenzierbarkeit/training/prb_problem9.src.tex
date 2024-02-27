@@ -1,0 +1,90 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Problem 9}
+    \lang{de}{A09: arcsin}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{Problem 9}
+    \lang{de}{A09: arcsin}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{gwtmathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/16449}{Ticket 16449}
+\end{block}
+\usepackage{mumie.genericproblem}
+
+\begin{problem}
+%Diese Aufgabe ist noch nicht veröffentlicht!
+\begin{question}
+    \text{Gegeben sei $f:[-1,1]\to W_f, \, x \mapsto \sin(\frac{\pi}{2}) +x^2+\var{f}$. Hierbei ist $W_f$ die Wertemenge von $f$.\\
+    Berechnen Sie $(f^{-1})'$ an der Stelle $y=f(0)=\var{y}$.}
+    \begin{variables}
+        \randint{a}{2}{10}
+        \randint{b}{0}{10}
+        \function[normalize]{f}{a*x-b/(x+2)}
+        \function[calculate]{s}{1/(a+b/4)}
+        \function[calculate]{y}{1-b/2}
+    \end{variables}
+    
+    \type{input.number}
+    \field{rational}
+    \precision{2}
+    
+    \begin{answer}
+        \text{$(f^{-1})'(y)=$}
+        \solution{s}
+    \end{answer}
+    
+\end{question}
+
+\begin{question}
+     \text{Ziel der Aufgabe ist die Berechnung der Ableitung von $\arcsin$.}
+    \type{input.function}
+    \field{real}
+    
+    \begin{variables}
+        \function{s}{1/(sqrt(1-x^2))}
+    \end{variables}
+    
+    \begin{answer}
+        \text{Nutzen Sie die Formel für die Ableitung der Umkehrfunktion und berechnen Sie $\arcsin(x)'$:}
+        \solution{s}
+        \allowForInput[false]{sqrt ^}
+        %\allowForInput[true]{cos sin asin acos}
+        \inputAsFunction{x}{g}
+        \checkFuncForZero{g[x]-s}{-0.9}{0.9}{100}
+        \explanation{Die Formel für die Ableitung der Umkehrfunktion lautet $(f^{-1})(y_0)=\frac{1}{f'(f^{-1}(y_0))}$.}
+    \end{answer}
+    
+    \begin{answer}
+        \text{Nutzen Sie nun die Identität $\sin(x)^2+\cos(x)^2=1$, um die Ableitung ohne $\sin$- und $\cos$-Terme auszudrücken.}
+        \solution{s}
+%        \allowForInput[true]{sqrt}
+        \allowForInput[false]{cos sin}
+        \inputAsFunction{x}{h}
+        \checkFuncForZero{h-s}{-0.9}{0.9}{100}
+        \explanation{Die Formel für die Ableitung der Umkehrfunktion lautet $(f^{-1})(y_0)=\frac{1}{f'(f^{-1}(y_0))}$.}
+    \end{answer}
+    
+\end{question}
+
+
+\end{problem}
+
+
+\embedmathlet{gwtmathlet}
+
+\end{content}

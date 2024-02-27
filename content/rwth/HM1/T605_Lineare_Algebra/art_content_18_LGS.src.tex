@@ -1,0 +1,418 @@
+%$Id:  $
+\documentclass{mumie.article}
+%$Id$
+\begin{metainfo}
+  \name{
+  \lang{en}{...}
+  \lang{de}{Lineare Gleichungssysteme}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{...}
+    \lang{de}{...}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/32610}{Ticket 32610}
+\end{block}
+\usepackage{mumie.ombplus}
+\ombchapter{4}
+\ombarticle{1}
+\lang{de}{\title{Lineare Gleichungssysteme}}
+\begin{block}[info-box]
+  \tableofcontents
+\end{block}
+\section{Ein Beispiel}
+\section{Lineare Gleichungssysteme}
+Wir betrachten ein allgemeines lineares Gleichungssystem
+\[
+\begin{mtable}[\cellaligns{ccccccccc}]
+ a_{11} x_1 & + & a_{12} x_2 & + & \cdots & + & a_{1n} x_n & = & b_1 \\
+ a_{21} x_1 & + & a_{22} x_2 & + & \cdots & + & a_{2n} x_n & = & b_2 \\
+ \vdots     &   & \vdots     &   &        &   & \vdots     &   & \vdots \\
+ a_{m1} x_1 & + & a_{m2} x_2 & + & \cdots & + & a_{mn} x_n & = & b_m
+\end{mtable}
+\]
+mit $m$ Gleichungen und $n$ Unbekannten (Unbestimmten) $x_1,\ldots, x_n$.
+Die Koeffizienten $a_{ij}$ und $b_i$ mit $1 \leq i \leq m$ und $1 \leq j \leq n$ 
+sind reelle Zahlen.
+\begin{example}
+Das lineare Gleichungssystem
+\[ \begin{mtable}[\cellaligns{ccrcrcrcr}]
+&&x_{1}&+&3x_{2}&-&x_{3}&=&4\\
+&&2x_{1}&-&2x_{2}&+&5x_{3}&=&-7
+\end{mtable} \]
+besteht aus zwei Gleichungen und hat drei Unbekannte.
+Die Koeffizienten sind $a_{11}=1$, $a_{12}=3$, $a_{13}=-1$, $a_{21}=2$, $a_{22}=-2$, $a_{23}=5$,
+sowie $b_1=4$ und $b_2=-7$.
+\end{example}
+\begin{quickcheck}
+\type{input.number}
+\begin{variables}
+\function{z}{3}
+\function{n}{4}
+\function{a13}{-5}
+\function{a31}{0}
+\function{b2}{2}
+\end{variables}
+\text{Das lineare Gleichungssystem\\ $\begin{matrix}
+   x_{1}&&&-&5x_{3}&+&x_4&=&0\\
+    2x_{1}&+&3x_{2}&&& -&x_{4}&=&2\\
+    &&4x_{2}&&& +&3x_{4}&=&-1\\
+  \end{matrix}$\\
+  hat \ansref Zeilen und \ansref Unbekannte. Unter den Koeffizienten sind $a_{13}=$\ansref
+  und $a_{31}=$\ansref sowie $b_2=$\ansref.
+}
+\begin{answer}
+\solution{z}
+\end{answer}
+\begin{answer}
+\solution{n}
+\end{answer}
+\begin{answer}
+\solution{a13}
+\end{answer}
+\begin{answer}
+\solution{a31}
+\end{answer}
+\begin{answer}
+\solution{b2}
+\end{answer}
+\end{quickcheck}
+Mit Hilfe von Vektoren und Matrizen können wir das lineare Gleichungssystem kompakt schreiben.
+Dazu definieren wir die \notion{Koeffizientenmatrix}
+\[
+A=\left( \begin{smallmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{smallmatrix} \right)\:\in\: M_{m,n}(\R),
+\]
+den \notion{Koeffizientenvektor der rechten Seite} $b$ und den Vektor der Unbestimmten $x$,
+\[
+b=\left( \begin{smallmatrix}
+b_{1}  \\
+b_{2} \\
+\vdots \\
+b_{m} 
+\end{smallmatrix} \right)\:\in\: \R^m\quad \text{ bzw. }\quad x=\left( \begin{smallmatrix}
+x_{1}  \\
+x_{2} \\
+\vdots \\
+x_{n} 
+\end{smallmatrix} \right)\:.
+\]
+Das lineare Gleichungssystem ist dann gleichbedeutend zur Matrix-Vektor-Gleichung
+\[A\cdot x=b.\]
+\begin{example}\label{ex:LGS_coefficient_matrix}
+Das lineare Gleichungssystem
+\[ \begin{mtable}[\cellaligns{ccrcrcrcr}]
+&&x_{1}&+&2x_{2}&+&x_{3}&=&4\\
+&&x_{1}&-&x_{2}&+&\frac{3}{2}x_{3}&=&-7\\
+&&-4x_{1}&+&2x_{2}&&&=&-2
+\end{mtable} \]
+hat die Koeffizientenmatrix 
+$ A=\begin{pmatrix} 1 & 2 & 1 \\ 1 & -1 & \frac{3}{2} \\ -4 & 2 & 0\end{pmatrix} $
+und die rechte Seite $b=\begin{pmatrix} 4 \\ -7 \\ -2 \end{pmatrix} $. Die Gleichung $A\cdot x=b$ ist also
+ \[ \begin{pmatrix} 1 & 2 & 1 \\ 1 & -1 & \frac{3}{2} \\ -4 & 2 & 0\end{pmatrix}\cdot \begin{pmatrix}x_1 \\x_2\\ x_3\end{pmatrix}
+= \begin{pmatrix} 4 \\ -7 \\ -2 \end{pmatrix}. \]
+\end{example}
+Die \notion{Lösung} des linearen Gleichungssystems $A\cdot x=b$ ist die Menge alle konkreten $x\in\R^n$
+\[
+\mathbb{L}=\{x=\left( \begin{smallmatrix}
+x_{1}  \\
+x_{2} \\
+\vdots \\
+x_{n} 
+\end{smallmatrix} \right)\in\R^n\::\: A\cdot x=b\}.
+\]
+Um die Lösung eines linearen Gleichungssystems zu bestimmen, benützen wir im folgenden oft die
+\notion{erweiterte Koeffizientenmatrix}
+\[
+(A ~\mid~ b) = \left(  \begin{smallmatrix}
+                                      a_{11} & a_{12} & \cdots & a_{1n} & | & b_1\\
+                                      a_{21} & a_{22} & \cdots & a_{2n} & | &b_2\\
+                                      \vdots & \vdots & \ddots & \vdots & \mid &\vdots\\
+                                      a_{m1} & a_{m2} & \cdots & a_{mn} &| & b_m
+                                      \end{smallmatrix} \right) \in M_{m,n+1}(\R),
+\]
+die  zusammengesetzt wird aus der Koeffizientenmatrix $A$ und der rechten Seite $b$.
+\begin{example}
+Die erweitere Koeffizientenmatrix des linearen Gleichungssystems aus Beispiel \ref{ex:LGS_coefficient_matrix}
+ist
+\[ (A \mid b )= 
+\begin{pmatrix} 1 & 2 & 1 & | & 4 \\
+1 & -1 & \frac{3}{2}& | & -7\\ -4 & 2 & 0& | &-2\end{pmatrix}.\]
+\end{example}
+\section{Elementare Zeilenumformungen}
+Um ein lineares Gleichungssystem zu lösen, müssen wir es so lange umformen, 
+bis wir die Lösung ablesen können. Bei den Umformungen darf keine Information verloren gehen,
+aber auch keine Information dazu \glqq erdichtet\grqq{} werden, denn beides
+verfäscht die Lösung.\\
+Um das sicher zustellen, lassen wir nur bestimmte Umformungen zu:
+\begin{definition}[\lang{de}{Elementare Zeilenumformungenmformungen}
+\lang{en}{Elementary row operations}]\label{def:elementare_Zeilenumformungen}
+\lang{de}{
+Die sogenannten \notion{elementaren Zeilenumformungen} sind:
+}
+\begin{itemize}
+\item \lang{de}{Vertauschen zweier Gleichungen.}
+      \lang{en}{Exchanging/swapping two equations.}
+\item \lang{de}{Multiplikation einer Gleichung mit einer Konstanten $c\neq0$.}
+      \lang{en}{Multiplication of an equation by a number $c\neq0$.}
+\item \lang{de}{
+      Addition (Subtraktion) eines $c$-fachen einer Gleichung zu (von) einer anderen.
+      }
+      \lang{en}{
+      Addition (or subtraction) of a multiple of one row to (from) another.
+      }
+\end{itemize}
+\end{definition}
+\begin{theorem}
+Elementare Zeilenumformungen verändern die Lösungsmenge eines LGS nicht.
+\end{theorem}
+\begin{example}
+\lang{de}{Wir formen das folgende lineare Gleichungssystem mit Hilfe der elementaren Zeilenumformungen um.
+Unser Vorgehen notieren wir rechts vom linearen Gleichungssystem.}
+\[  \begin{mtable}[\cellaligns{crcrcrcrcrl}]
+(I)&\qquad x_1 &+& 2x_2 &+ &\phantom{3}x_3 &-  &x_4 & = & 7 & \phantom{\qquad|\,\, -2\cdot \text{(II)}}\\
+(II)&  \textcolor{#CC6600}{x_1} &+ &3x_2 &  &    & -  & x_4 & = & 8&\qquad|\,\, -\text{(I)} \\
+(III)& \textcolor{#CC6600}{-x_1}  &  &      &  -   &3x_3 &+   &5x_4  & = & -9& \qquad|\,\, +\text{(I)}
+\end{mtable} \]
+\lang{de}{Zunächst eliminieren wir  die Variable $x_1$ aus der zweiten und dritten Gleichung und erhalten:}
+\lang{en}{First we eliminate  the variably $x_1$ from the second and third equations and obtain:}
+\[  \begin{mtable}[\cellaligns{crcrcrcrcrl}]
+(I)&\qquad \phantom{+}x_1 &+& 2x_2 &+ &\phantom{3}x_3 &-  &x_4 & = & 7 & \\
+(II)&   & &x_2 & - &  x_3  &   & & = & 1 & \\
+(III)&  &  &   \textcolor{#CC6600}{2x_2}   &  -   &2x_3 &+   &4x_4  & = & -2& \qquad|\,\, -2\cdot \text{(II)}
+\end{mtable} \]
+\lang{de}{Anschließend eliminieren wir $x_2$ aus der dritten Gleichung, und erhalten:}
+\lang{en}{Finally we eliminate $x_2$ from the third equation}
+\[  \begin{mtable}[\cellaligns{crcrcrcrcrl}]
+(I)&\qquad \phantom{+}x_1 &+& 2x_2 &+ &\phantom{3}x_3 &-  &x_4 & = & 7 & \phantom{\qquad|\,\, -2\cdot \text{(II)}} \\
+(II)&  & &x_2 & - &  x_3  &   & & = & 1 & \\
+(III)&  &  &    &     & &   &4x_4  & = & -4& \qquad|\,\, \cdot\frac{1}{4}
+\end{mtable} \]
+\lang{de}{
+Wir können noch weiter vereinfachen, indem wir von unten nach oben möglichst viele Unbekannte eleminieren.
+Das ist diesem Fall $x_4$ sowie $x_2$ in der ersten  Gleichung.
+ Dafür ist es praktisch, zunächst die dritte Gleichung durch $4$ zu teilen.
+}
+\[  \begin{mtable}[\cellaligns{crcrcrcrcrl}]
+(I)&\qquad \phantom{+}x_1 &+& 2x_2 &+ &\phantom{3}x_3 &\textcolor{#CC6600}{-}  &\textcolor{#CC6600}{x_4} & = & 7 & \qquad|\,\,+ \text{(III)} \\
+(II)&   & &x_2 & - &  x_3  &   & & = & 1 & \\
+(III)&  &  &    &     & &   &\phantom{4}x_4  & = & -1& \phantom{\qquad|\,\, -2\cdot \text{(II)}}
+\end{mtable} \]
+\lang{de}{Dann die dritte Gleichung zur ersten addieren:}
+\lang{en}{Then we add the third equation to the first}
+\[  \begin{mtable}[\cellaligns{crcrcrcrcrl}]
+(I)&\qquad \phantom{+}x_1 &+& \textcolor{#CC6600}{2x_2} &+ &\phantom{3}x_3 &\phantom{-}  & & = & 6 & \qquad|\,\,-2\cdot \text{(II)} \\
+(II)&   & &x_2 & - &  x_3  &   & & = & 1 & \\
+(III)&  &  &    &     & &   &\phantom{4}x_4  & = & -1& \phantom{\qquad|\,\, -2\cdot \text{(II)}}
+\end{mtable} \]
+\lang{de}{und zuletzt das Doppelte der zweiten Gleichung von der ersten subtrahieren:}
+\lang{en}{and finally subtract twice the second equation from the first:}
+\[  \begin{mtable}[\cellaligns{crcrcrcrcrl}]
+(I)&\qquad \phantom{+}x_1 &\phantom{+}& \phantom{2x_2} &+ &3x_3 &\phantom{-}  & & = & 4 &  \\
+(II)&   & &x_2 & - &  x_3  &   & & = & 1 & \\
+(III)&  &  &    &     & &   &\phantom{4}x_4  & = & -1& \phantom{\qquad|\,\, -2\cdot \text{(II)}}
+\end{mtable} \]
+\lang{de}{
+Damit ist $x_4=-1$ eindeutig festgelegt durch Gleichung (III). 
+Die ersten beiden Gleichungen bestimmen  $x_1,x_2,x_3$ nur in Abhängigkeit von einander.
+Durch Setzen von $x_3=t$ und Auflösen der ersten beiden Gleichungen nach $x_1$ bzw. $x_2$ erhalten wir nun
+ als Lösungsmenge
+}
+\[ \mathbb{L}
+= \left\{ \begin{pmatrix} 4-3t \\ 1+t \\t \\ -1\end{pmatrix} \, \big| \, t\in \R \right\}
+= \left\{ \begin{pmatrix} 4 \\ 1 \\ 0 \\ -1\end{pmatrix}+ t\cdot \begin{pmatrix} -3\\ 1\\ 1\\ 0 
+\end{pmatrix} \, \big| \, t\in \R \right\}\:. \]
+\lang{de}{Weil wir das letzte LGS nur durch elementare Zeilenumformungen aus dem ursprünglichen erhalten haben,
+ist $\mathbb{L}$ auch die Lösungsmenge des ursprünglichen.\\
+Mit Hilfe von Begleitmatrizen können wir dies wesentlich kompakter fassen:}
+\[  \left(\begin{mtable}
+1 & 2 &1 &-1 & | & 7 \\
+ \textcolor{#CC6600}{1} &3 &   0   & -1 & | & 8 \\
+\textcolor{#CC6600}{-1}  & 0  &  - 3  &5  & | & -9
+\end{mtable} \right)\begin{mtable}
+ \phantom{|\,\, -2\cdot \text{(II)}}\\
+|\,\, -\text{(I)} \\
+|\,\, +\text{(I)}
+\end{mtable}
+\Leftrightarrow
+\left(\begin{mtable}
+1 &2 &1 &-1 & |& 7 \\
+0 &1 & -1 &0 & | & 1  \\
+0 &   \textcolor{#CC6600}{2}   &  - 2 &+ 4  & |& -2
+\end{mtable}\right)
+\begin{mtable}
+\\\\\quad|\,\, -2\cdot \text{(II)}
+\end{mtable} 
+\]
+\[
+\Leftrightarrow
+\left(\begin{mtable}
+1 & 2 &1 &-1 & | & 7 \\
+0&1&-1  & 0& | & 1\\ 
+0&0&0  &4  & | & -4
+\end{mtable}\right)
+\begin{mtable}
+ \\
+ \\
+\quad|\,\, \cdot\frac{1}{4}
+\end{mtable}
+\Leftrightarrow
+\left(\begin{mtable}
+1 &2 &1 &\textcolor{#CC6600}{-1}   & | & 7\\ 
+0&1 & -1& 0&| & 1\\ 
+0&0&0   &1  & |& -1
+\end{mtable} \right)
+\begin{mtable}
+\quad|\,\,+ \text{(III)} \\
+\phantom{|\,\, -2\cdot \text{(II)}} \\
+\phantom{|\,\, -2\cdot \text{(II)}}
+\end{mtable} 
+\]
+\[  \Leftrightarrow
+\left(\begin{mtable}
+1 & \textcolor{#CC6600}{2} &1 &0 & | & 6 \\ 
+0&1 & - 1  & 0 & | & 1\\ 
+0&0&0&1    & | & -1  
+\end{mtable}\right) 
+\begin{mtable}
+ \quad|\,\,-2\cdot \text{(II)} \\
+  \phantom{\qquad|\,\, -2\cdot \text{(II)}}\\
+ \phantom{\qquad|\,\, -2\cdot \text{(II)}}
+\end{mtable}
+\Leftrightarrow
+ \left(\begin{mtable}[\cellaligns{crcrcrcrcrl}]
+1 &0 &3 &0 & | & 4  \\
+0 &1 & -1  & 0& | & 1  \\
+0&0&0 &1 & |& -1
+\end{mtable}\right)
+\]
+\end{example}
+\begin{remark}
+Wesentlich an den elementaren Zeilenumformungen ist, dass sie \emph{reversibel} sind: 
+Aus dem finalen linearen Gleichungssystem kann das ursprüngliche durch elementare Zeilenumformungen 
+zurück gewonnen werden.
+\\
+Es gibt viele ähnliche Umformungen, die dies nicht leisten. Einige Beispiele:
+\begin{enumerate}
+\item[(i)]
+Multiplikation einer Gleichung mit der Zahl $0$ ist irreversibel. 
+Diese Operation entspricht dem Weglassen einer Gleichung. Deren Information geht dadurch verloren.
+\begin{showhide}
+Wir betrachten das LGS
+\[  \begin{mtable}
+(I)& x_1 &+ x_2 & = & 0 \\ 
+(II)&  x_1 & +x_2 & = & 1
+\end{mtable}\quad.\]
+multiplizieren wir  die zweite Zeile mit $0$, so erhalten wir
+\[  \begin{mtable}
+(I)& x_1 &+ x_2 & = & 0 \\ 
+(II^')&  &0 & = & 0
+\end{mtable}\quad.\]
+Die Gleichung $(II')$  ist immer erfüllt. Die Lösung des zweiten Gleichungssystems ist offenbar
+$\mathbb{L}_2=\{\begin{pmatrix}t\\-t\end{pmatrix}\::\:t\in\R\}$. 
+Das ursprüngliche Gleichungssystem hat hingegen gar keine Lösung, $\mathbb{L}_1=\emptyset$, 
+denn wenn wie in $(I)$ $x_1+x_2=0$ erfüllt ist,
+dann ist eben $x_1+x_2\neq 1$, d.h. $(II)$ kann nie gleichzeit mit $(I)$ erfüllt sein.
+% Offenbar ist jedes $x=\begin{pmatrix}\frac{t}{3}\\1-2t\\t\end{pmatrix}$ mit $t\in\R$ eine Lösung.
+% Setzen wir speziell $t=3$ und setzt $\begin{pmatrix}1\\-5\\3\end{pmatrix}$ in das ursprüngliche LGS ein,
+% so erhalten wir
+% \[ \left. \begin{mtable}%[\cellaligns{crcrcrcrcrl}]
+% (I)&3 \cdot 1 &-5 &+ 3  & = & 1 \\ %& \phantom{\qquad|\,\, -2\cdot \text{(II)}}\\
+% (II)&  &-5& +2\cdot 3 & = & 1\\ %&\qquad|\,\, -\text{(I)} \\
+% (III)&  &  &        3  & = & 1 %& \qquad|\,\, +\text{(I)}
+% \end{mtable}\right\}
+% \Leftrightarrow \left\{
+% \begin{mtable}
+% (I)1 & = & 1 \\ %& \phantom{\qquad|\,\, -2\cdot \text{(II)}}\\
+% (II)1& = & 1\\ %&\qquad|\,\, -\text{(I)} \\
+% (III)      3  & = & 1 %& \qquad|\,\, +\text{(I)}
+% \end{mtable}
+% \right.
+% .\]
+% Es ist (III) offensichtlich falsch. Das zweite LGS hat mehr Lösungen als das ursprüngliche.
+% Bei der Multiplikation mit Null geht die Information (III) $x_3=1$ verloren. Denn aus der
+% Gleichung (III') $0=0$, die schlicht immer erfüllt ist, können wir diese spezielle Bedingung nicht zurückgewinnen.
+\end{showhide}
+\item[(ii)]
+Addieren wir Gleichung zu einer anderen und gleichzeitig diese andere zu der einen,
+so können wir ebenfalls die ursprünglichen Gleichungen nicht mehr rekonstruieren.
+\begin{showhide}
+Zum Beispiel entsteht so aus
+\[  \begin{mtable}
+(I)& x_1 &+ \phantom{2}x_2 & = & 1 &\qquad +(II)\\ 
+(II)&  x_1 & -2x_2 & = & 2 &\qquad +(I)
+\end{mtable}\quad\]
+das LGS mit zwei gleichen Zeilen 
+\[  \begin{mtable}
+(I)& 2x_1 &-x_2 & = & 3 \\ 
+(II)&  2x_1 &-x_2 & = & 3
+\end{mtable}\quad.\]
+Die Lösungsmenge des zweiten LGS ist $\mathbb{L}_2=\{\begin{pmatrix}t\\2t-3\end{pmatrix}\::\:t\in\R\}$, 
+während das ursprüngliche LGS die Lösung 
+$\mathbb{L}_1=\{\begin{pmatrix}\frac{4}{3}\\\frac{-1}{3}\end{pmatrix}\}$ hat.
+\end{showhide}
+\item[(iii)]
+Bei vorzeitige Spezifizierung einer Koordinate schränkt man die Lösung stärker ein als notwendig.
+Man stellt dadurch eine zusätzliche Bedingung auf.
+\begin{showhide}
+Untersucht man zum Beispiel das LGS
+\[  \begin{mtable}
+(I)& x_1 &+ \phantom{2}x_2 & = & 1 \\ 
+(II)&  x_1 & -2x_2 & = & 2 
+\end{mtable}\quad\]
+nur im Fall $x_1=1$, so erhält man $(I')$ $1+x_2=1$, also $x_2=0$, und $(II')$ $1-2x_2=2$, also $x_2=-\frac{1}{2}$.
+Diese Bedingung sind widersprüchlich, also gibt es keine Lösung der Form $\begin{pmatrix}1\\x_2\end{pmatrix}$.
+Hingegen hat das LGS aber die Lösung (siehe (ii))
+$\mathbb{L}_1=\{\begin{pmatrix}\frac{4}{3}\\\frac{-1}{3}\end{pmatrix}\}$.
+\end{showhide}
+\item[(iv)] Führt man die elementaren Operationen für Spalten statt für Zeilen aus, so verändert man 
+den Unbestimmtenvektor $x$, also das LGS. Die Lösungsmenge ist dann eine völlig andere. 
+Dieser Fehler wird häufig gemacht, wenn mit der Begleitmatrix gerechnet wird.
+\begin{showhide}
+Das LGS
+\[  \begin{mtable}
+(I)& x_1 &+ \:x_2 & = & 1 \\ 
+(II)&  x_1 & -\:x_2 & = & 2 
+\end{mtable}\quad\]
+hat die Begleitmatrix $\begin{pmatrix}1&1&|&1\\1&-1&|&2\end{pmatrix}$ und die 
+Lösung $\mathbb{L}=\{\begin{pmatrix}\frac{3}{2}\\-\frac{1}{2}\end{pmatrix}\}$.
+Addieren wir hierin die zweite \emph{Spalte} zur ersten, so entsteht die Begleitmatrix
+$\begin{pmatrix}2&1&|&1\\0&-1&|&2\end{pmatrix}$, also das LGS
+\[  \begin{mtable}
+(I^')& 2\tilde{x_1} &+ \:\tilde{x_2} & = & 1 \\ 
+(II^')&  & -\:\tilde{x_2} & = & 2 
+\end{mtable}\quad\]
+mit der Lösung $\mathbb{L'}=\{\begin{pmatrix}\frac{3}{2}\\-2\end{pmatrix}\}$.
+Die Unbestimmten stehen durch $\begin{pmatrix}x_1\\x_2
+\end{pmatrix}=\begin{pmatrix}\tilde{x_1}\\\tilde{x_1}+\tilde{x_2}\end{pmatrix}$ in Beziehung.
+
+\end{showhide}
+\end{enumerate}
+\end{remark}
+\section{Gauß-Algorithmus}
+\[ \begin{pmatrix}
+    a_{1} & \star & \cdots & \star & \star&| & b_1\\ 
+     0 & a_{2} & \cdots & \star & \star&| & b_2\\ 
+    \vdots & \, & \ddots & \, & \vdots&| & \vdots\\ 
+ 0 & 0 & \cdots & a_{k} & \star&| & b_k\\ 
+   0 & 0 & \cdots & 0 & 0&| & \vdots \\ 
+  0 & 0 & \cdots & 0 & 0&| & b_{m}\\ 
+    \end{pmatrix},\]
+\section{Rang}
+\section{Inverse Matrix}
+
+\end{content}

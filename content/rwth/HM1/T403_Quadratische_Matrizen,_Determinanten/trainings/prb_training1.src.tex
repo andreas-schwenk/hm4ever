@@ -1,0 +1,245 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A01: Matrixeigenschaften}
+    \lang{en}{P01: Matrix characteristics}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A01: Matrixeigenschaften}  \lang{en}{P01: Matrix characteristics} }
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/11435}{Ticket 11435}
+\end{block}
+
+\begin{problem}
+	\randomquestionpool{1}{2}
+	\begin{question}
+		
+		\begin{variables}
+		
+		
+% $a0,d0,b0,c0\in \{-3;\ldots;3\}$, $a1,b1,c1,d1\in \{0;1\}$,\\
+%  $a=a0\cdot a1$, $b=b0\cdot b1$, $c=c0\cdot c1$, $d=d0\cdot d1$\\
+% $s1=b^2+c^2$, $s2=c$, $s3=b$, $s4=s2\cdot s3$.
+
+		\randint{a0}{-3}{3} 
+		\randint{d0}{-3}{3} 
+		\randint{b0}{-3}{3} 
+		\randint{c0}{-3}{3} 
+		\randint{a1}{0}{1} 
+		\randint{d1}{0}{1} 
+		\randint{b1}{0}{1} 
+		\randint{c1}{0}{1} 
+		\function[calculate]{a}{a0*a1}
+		\function[calculate]{b}{b0*b1}
+		\function[calculate]{c}{c0*c1}
+		\function[calculate]{d}{d0*d1}
+		\function[calculate]{s1}{b^2+c^2}
+		\function[calculate]{s2}{c}
+		\function[calculate]{s3}{b}
+		\function[calculate]{s4}{s2*s3}
+		
+		\end{variables}
+		
+		\type{input.generic}
+        \field{real}
+		\correctorprecision{3}
+		\displayprecision{3}
+		\lang{de}{
+	    \text{Welche der folgenden Eigenschaften besitzt die Matrix $A=\begin{pmatrix}
+ \var{a} & \var{b} \\ \var{c} & \var{d} \end{pmatrix}$?}
+	    }
+     	\lang{en}{
+	    \text{Which of the following characteristics does the matrix $A=\begin{pmatrix}
+ \var{a} & \var{b} \\ \var{c} & \var{d} \end{pmatrix}$ fulfill?}
+	    }
+	    %\permuteAnswers{1, 2, 3} 
+	    %http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+     \lang{de}{
+	    \begin{answer}
+            \type{mc.multiple}
+			\begin{choice}
+			\text{$A$ ist Diagonalmatrix.}
+			\solution{compute} %
+            \iscorrect{s1}{=}{0}
+			\end{choice}
+			\begin{choice}
+			\text{ $A$ ist obere Dreiecksmatrix.}
+			\solution{compute} %
+            \iscorrect{s2}{=}{0}
+			\end{choice}
+			\begin{choice}
+			\text{ $A$ ist untere Dreiecksmatrix.}
+			\solution{compute} %
+            \iscorrect{s3}{=}{0}
+			\end{choice}
+			\begin{choice}
+			\text{$A$ erfüllt keine der drei Eigenschaften.}
+			\solution{compute} %
+            \iscorrect{s4}{!=}{0}
+			\end{choice}
+            \explanation{Rekapitulieren Sie die Definition von unteren und oberen Dreiecksmatrizen und Diagonalmatrizen. 
+            Dann können Sie die Aufgabe lösen.}
+	    \end{answer}}    
+
+
+     \lang{en}{
+	    \begin{answer}
+            \type{mc.multiple}
+			\begin{choice}
+			\text{$A$ is a diagonal matrix.}
+			\solution{compute} %
+            \iscorrect{s1}{=}{0}
+			\end{choice}
+			\begin{choice}
+			\text{ $A$ is a upper triangular matrix.}
+			\solution{compute} %
+            \iscorrect{s2}{=}{0}
+			\end{choice}
+			\begin{choice}
+			\text{ $A$ is a lower triangular matrix.}
+			\solution{compute} %
+            \iscorrect{s3}{=}{0}
+			\end{choice}
+			\begin{choice}
+			\text{$A$ does not fulfill any of those characteristics.}
+			\solution{compute} %
+            \iscorrect{s4}{!=}{0}
+			\end{choice}
+            \explanation{Recap the definition of lower and upper triangular matrix as well as the definition of diagonal matrix.
+            Then you are able to solve the exercise.}
+	    \end{answer}}  
+	    
+	    %generic viz: http://team.mumie.net/projects/support/wiki/Example
+	    
+	\end{question}
+	\begin{question}
+		
+		\begin{variables}
+		
+		
+% $a0,d0,b0,c0\in \{-3;\ldots;3\}$, $a1,b1,c1,d1\in \{0;1\}$,\\
+%  $a=a0\cdot a1$, $b=b0\cdot b1$, $c=c0\cdot c1$, $d=d0\cdot d1$\\
+% $s1=b^2+c^2$, $s2=c$, $s3=b$, $s4=s2\cdot s3$.
+% 
+% $f0\in \{-3;\ldots;3\}$, $f1\in \{0;1\}$, $f=f0\cdot f1$,\\
+% $s1=b^2+c^2+f^2$, $s2=c^2+f^2$, $s3=b$, $s4=s2\cdot s3$.
+
+		\randint{a0}{-3}{3} 
+		\randint{d0}{-3}{3} 
+		\randint{b0}{-3}{3} 
+		\randint{c0}{-3}{3} 
+		\randint{f0}{-3}{3}
+		\randint{f1}{0}{1}  
+		\randint{a1}{0}{1} 
+		\randint{d1}{0}{1} 
+		\randint{b1}{0}{1} 
+		\randint{c1}{0}{1} 
+		\function[calculate]{f}{f0*f1}
+		\function[calculate]{a}{a0*a1}
+		\function[calculate]{b}{b0*b1}
+		\function[calculate]{c}{c0*c1}
+		\function[calculate]{d}{d0*d1}
+		\function[calculate]{s1}{b^2+c^2+f^2}
+		\function[calculate]{s2}{c^2+f^2}
+		\function[calculate]{s3}{b}
+		\function[calculate]{s4}{s2*s3}
+		
+		\end{variables}
+		
+		\type{input.generic}
+        \field{real}
+		\correctorprecision{3}
+		\displayprecision{3}
+		\lang{de}{
+	    \text{Welche der folgenden Eigenschaften besitzt die Matrix $A=\begin{pmatrix}
+ \var{a} & 0 & 0 \\ \var{c}  & 2 & \var{b} \\ 0 & \var{f} & \var{d} \end{pmatrix}$?}
+	    }
+     \lang{en}{
+	    \text{Which of the following characteristics does the matrix $A=\begin{pmatrix}
+ \var{a} & 0 & 0 \\ \var{c}  & 2 & \var{b} \\ 0 & \var{f} & \var{d} \end{pmatrix}$ fulfill?}
+	    }
+	    %\permuteAnswers{1, 2, 3} 
+	    %http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+	 
+      \lang{de}{
+         \begin{answer}
+            \type{mc.multiple}
+			\begin{choice}
+			\text{$A$ ist Diagonalmatrix.}
+			\solution{compute} %
+            \iscorrect{s1}{=}{0}
+			\end{choice}
+			\begin{choice}
+			\text{ $A$ ist obere Dreiecksmatrix.}
+			\solution{compute} %
+            \iscorrect{s2}{=}{0}
+			\end{choice}
+			\begin{choice}
+			\text{ $A$ ist untere Dreiecksmatrix.}
+			\solution{compute} %
+            \iscorrect{s3}{=}{0}
+			\end{choice}
+			\begin{choice}
+			\text{$A$ erfüllt keine der drei Eigenschaften.}
+			\solution{compute} %
+            \iscorrect{s4}{!=}{0}
+			\end{choice}
+            \explanation{Rekapitulieren Sie die Definition von unteren und oberen Dreiecksmatrizen und Diagonalmatrizen. 
+            Dann können Sie die Aufgabe lösen.}
+	    \end{answer}}
+
+
+     \lang{en}{
+        \begin{answer}
+            \type{mc.multiple}
+     \begin{choice}
+			\text{$A$ is a diagonal matrix.}
+			\solution{compute} %
+            \iscorrect{s1}{=}{0}
+			\end{choice}
+			\begin{choice}
+			\text{ $A$ is a upper diagonal matrix.}
+			\solution{compute} %
+            \iscorrect{s2}{=}{0}
+			\end{choice}
+			\begin{choice}
+			\text{ $A$ is a lower diagonal matrix.}
+			\solution{compute} %
+            \iscorrect{s3}{=}{0}
+			\end{choice}
+			\begin{choice}
+			\text{$A$ does not fulfill any of those characteristics.}
+			\solution{compute} %
+            \iscorrect{s4}{!=}{0}
+			\end{choice}
+            \explanation{Recap the definition of lower and upper triangular matrix as well as the definition of diagonal matrix.
+            Then you are able to solve the exercise.}
+	    \end{answer}}
+	    
+	    %generic viz: http://team.mumie.net/projects/support/wiki/Example
+	    
+	\end{question}
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}

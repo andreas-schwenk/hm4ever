@@ -1,0 +1,78 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A05: Umkehrfunktionen}
+    \lang{en}{Problem 5}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{Beschreibung}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+\lang{de}{\title{A05: Umkehrfunktionen}}
+\lang{en}{\title{Problem 5}}
+\begin{block}[annotation]
+  Im Ticket-System: \href{http://team.mumie.net/issues/9816}{Ticket 9816}
+\end{block}
+
+\begin{problem}
+
+\randomquestionpool{1}{2}
+%1. Frage, von 1.
+	\begin{question}
+    \explanation{Lösen Sie die Gleichung $y=\var{f}$ nach $x$ auf.}
+		\begin{variables}
+			\randint[Z]{a}{-10}{10}
+			\randint{b}{-10}{10}
+			\function[calculate]{c}{a/2}
+			\function[calculate]{d}{b/2}
+			\function[expand,normalize]{f}{c*x+d}
+			\function{l}{(y-d)/c}
+		\end{variables}
+		\type{input.function}
+		\field{rational}
+		\text{Bestimmen Sie auf einem geeigneten Bereich die Umkehrfunktion der Funktion $f: \mathbb{R} \to \mathbb{R}, x \mapsto \var{f}$ und geben Sie die Funktionsvorschrift in der Variablen $y$ ein.}
+		\begin{answer}
+			\text{$f^{-1}(y)=$}
+			\solution{l}
+			\checkAsFunction{y}{-10}{10}{100}
+		\end{answer}
+	\end{question}
+
+    \begin{question}
+    \explanation{Lösen Sie die Gleichung $y=\var{f}$ nach $x$ auf.}
+        \begin{variables}
+			\randint[Z]{a}{-10}{10}
+			\randint{b}{-10}{10}
+			\function[calculate]{c}{a/2}
+			\function[calculate]{d}{b/2}
+			\randint{z}{-5}{5}
+			\function[normalize]{f}{d+c/(x-z)}
+			\function{l}{c/(y-d)+z}
+		\end{variables}
+		\type{input.function}
+		\field{rational}
+		\text{Bestimmen Sie auf einem geeigneten Bereich die Umkehrfunktion der Funktion $f: \mathbb{R} \backslash \{ \var{z} \} \to \mathbb{R}, x \mapsto \var{f}$ und geben Sie die Funktionsvorschrift in der Variablen $y$ ein.}
+		\begin{answer}
+			\text{$f^{-1}(y)=$}
+			\solution{l}
+			\checkAsFunction{y}{-10}{10}{100}
+		\end{answer}
+	\end{question}
+\end{problem}
+
+\embedmathlet{mathlet}
+\end{content}

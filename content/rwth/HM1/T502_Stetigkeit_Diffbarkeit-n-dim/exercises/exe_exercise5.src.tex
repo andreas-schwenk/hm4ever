@@ -1,0 +1,98 @@
+\documentclass{mumie.element.exercise}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{en}{Exercise 12}
+    \lang{de}{Ü12: Extremstellen}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{en}{Exercise 12}
+    \lang{de}{Übung 12}
+  \end{description}
+  \begin{components}
+  \end{components}
+  \begin{links}
+\link{generic_article}{content/rwth/HM1/T502_Stetigkeit_Diffbarkeit-n-dim/g_art_content_54_Differentiation.meta.xml}{content_54_Differentiation}
+\link{generic_article}{content/rwth/HM1/T106_Differentialrechnung/g_art_content_22_extremstellen.meta.xml}{content_22_extremstellen}
+\end{links}
+  \creategeneric
+\end{metainfo}
+
+\begin{content}
+\begin{block}[annotation]
+	Im Ticket-System: \href{https://team.mumie.net/issues/22639}{Ticket 22639}
+\end{block}
+  \title{
+    \lang{en}{Exercise 12}
+    \lang{de}{Ü12: Extremstellen}
+  }
+  Gegeben sei $f:\R^2\to \R, x \mapsto 10 (x_1-x_2^2)^2+(x_2-1)^2$.
+
+  \begin{enumerate}[alph]   
+    \item Bestimmen Sie alle Kandidaten für lokale Extremstellen von $f$.
+    \item Bestimmen Sie die globale Minimalstelle von $f$.    
+  \end{enumerate}
+
+%  Wir möchten nun die globale Minimalstelle der Funktion $f$ bestimmen. Ähnlich zum 
+%  \ref[content_22_extremstellen][eindimensionalen Fall]{thm:notw_bedg_lok_extremum} 
+%  gilt das folgende notwendige Kriterium:\\
+  
+%  Besitzt eine stetig differenzierbare Funktion $f:\R^2\to \R$ in $a\in \R^2$ ein lokales Extremum (Minimum oder Maximum),
+%  dann gilt $\nabla f (a)=0$.
+%  \begin{enumerate}[alph]   
+%    \item Bestimmen Sie alle Kandidaten für ein Extremum, d.h. bestimmen Sie alle $a\in \R^2$ mit $\nabla f(a)=0$.
+%    \item Bestimmen Sie nun die globale Minimalstelle.    
+%  \end{enumerate}
+  \\
+  
+  \begin{tabs*}[\initialtab{0}\class{exercise}]
+    \tab{Lösung a)}
+    \begin{incremental}[\initialsteps{1}]
+      \step
+        $f$ ist als Polynomfunktion auf $\R^2$ stetig partiell differenzierbar mit
+        \[
+%QS        \nabla f(x) = \begin{pmatrix}20 (x_1-x_2^2) \\ 20 (x_1-x_2^2) \cdot 2x_2 + 2(x_2-1)\end{pmatrix}= \begin{pmatrix} 20x_1 -20 x_2^2 \\ 40 x_1 x_2 -40x_2^3-2x_2-2\end{pmatrix}
+        \nabla f(x) = \begin{pmatrix}20 (x_1-x_2^2) \\ 20 (x_1-x_2^2) \cdot 2x_2 + 2(x_2-1)\end{pmatrix}= \begin{pmatrix} 20x_1 -20 x_2^2 \\ 40 x_1 x_2 -40x_2^3+2x_2-2\end{pmatrix}
+        \]
+%neu Beginn
+        Das \ref[content_54_Differentiation][notwendige Kriterium ]{thm:notwendig_Bed_lok_Extremum} für das Vorliegen einer 
+        lokalen Extremstelle von $f$ ist, dass der Gradient von $\nabla f$
+        an dieser Stelle gleich $0$ ist.
+
+%neu Ende
+      \step
+        Wir suchen daher alle Lösungen des Gleichungssystems $\nabla f(x)=0$: 
+%QS        Es muss
+        \begin{align*}
+%QS        20 x_1 -20 x_2^2 &= 0 \\ 40x_1 x_2 -40x_2^3-2x_2-2 &= 0
+        20 x_1 -20 x_2^2 &= 0 \\ 40x_1 x_2 -40x_2^3+2x_2-2 &= 0
+        \end{align*}
+%QS        gelöst werden.
+        Aus der ersten Gleichung ergibt sich $x_1 = x_2^2$. Setzen wir dies in die zweite Gleichung ein, erhalten wir
+        \[
+%QS        40x_2^3 -40x_2^3-2x_2-2 = 0 \Leftrightarrow 2 x_2 = 2 \Leftrightarrow x_2=1
+        40x_2^3 -40x_2^3+2x_2-2 = 0 \Leftrightarrow 2 x_2 = 2 \Leftrightarrow x_2=1
+        \]
+        Damit ist $x_1=1$ und der einzige Kandidat für eine lokale Extremstelle ist $a=(1,1)^T$.
+    \end{incremental}
+
+    \tab{Lösung b)}
+    
+    \begin{incremental}[\initialsteps{1}]
+      \step In a) haben wir festgestellt, dass $a=(1,1)^T$ der einzige Kandidat für eine lokale Extremstelle von $f$ ist.
+        Wir prüfen nun, ob $a$ die globale Minimalstelle von $f$ ist.
+
+%FS: Nun 10 \cdot ... (vorher kein Mal-Punkt)
+      \step Es ist $\; f((1,1)^T) = 10 \cdot (1-1^2)+(1-1)^2 = 0.\,$ Nun zeigen wir, dass $f(x)\geq 0$ für alle $x\in \R^2$ ist:
+%FS: Nun mit underbrace-Klammern
+    \begin{align*}
+      f(x) = 10 \underbrace{(x_1-x_2^2)^2}_{\geq 0}+\underbrace{(x_2-1)^2}_{\geq 0} \geq 0 + 0 = 0.
+      \end{align*}
+      Somit ist $a=(1,1)^T$ eine globale Minimalstelle.
+    \end{incremental}
+  \end{tabs*}
+\end{content}
+

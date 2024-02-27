@@ -1,0 +1,135 @@
+\documentclass{mumie.problem.gwtmathlet}
+%$Id$
+\begin{metainfo}
+  \name{
+    \lang{de}{A04: Eigenwerte, -vektoren}
+    \lang{en}{P04: Eigenvalues and eigenvectors}
+  }
+  \begin{description} 
+ This work is licensed under the Creative Commons License Attribution 4.0 International (CC-BY 4.0)   
+ https://creativecommons.org/licenses/by/4.0/legalcode 
+
+    \lang{de}{}
+    \lang{en}{}
+  \end{description}
+  \corrector{system/problem/GenericCorrector.meta.xml}
+  \begin{components}
+    \component{js_lib}{system/problem/GenericMathlet.meta.xml}{mathlet}
+  \end{components}
+  \begin{links}
+  \end{links}
+  \creategeneric
+\end{metainfo}
+\begin{content}
+\usepackage{mumie.genericproblem}
+
+\lang{de}{\title{A04: Eigenwerte, -vektoren}}
+\lang{en}{\title{P04: Eigenvalues and eigenvectors}}
+
+\begin{block}[annotation]
+	Im Ticket-System: \href{http://team.mumie.net/issues/11629}{Ticket 11629}
+\end{block}
+
+\begin{problem}
+	%\randomquestionpool{}{}
+	\begin{question}
+		
+		\begin{variables}
+		%$l1\in\{-3;\ldots ; 2\}$, $l0\in\{1,\ldots, 4\}$, $l2=l1+l0$,\\
+		\randint{l1}{-3}{2}
+		\randint{l0}{1}{4}
+		\function[calculate]{l2}{l1+l0}
+		%$a1,a2,b1,b2\in \{-3;\ldots ; 4\}$, dann
+		\randint{a1}{-3}{4}
+		\randint{a2}{-3}{4}
+		\randint{b1}{-3}{4}
+		\randint{b2}{-3}{4}
+		\function{a11}{a1}
+		\function{a22}{a2}
+		\function{b11}{b1}
+		\function{b22}{b2}
+		\randadjustIf{a1,b2}{a1*b2-a2*b1=0}
+		%$a1$ und $b2$ anpassen, falls $a1*b2-a2*b1=0$.\\
+		%$d=a1*b2-a2*b1$,\\
+		\function[calculate]{d}{a1*b2-a2*b1}
+		\matrix[calculate]{aa}{ (l1*a1*b2-l2*b1*a2)/d & ((l2-l1)*a1*b1)/d \\
+                            ((l1-l2)*a2*b2)/d & (l2*a1*b2-l1*b1*a2)/d}
+		
+		\end{variables}
+		
+		\type{input.generic}
+        \field{rational}
+		\lang{de}{
+	    \text{Bestimmen Sie die Eigenwerte der Matrix $A=\var{aa}$ und jeweils einen zugehörigen Eigenvektor.\\
+Kleinerer Eigenwert: \ansref  mit zugehörigem Eigenvektor: $($ \ansref ,  \ansref $)^T$\\
+Größerer Eigenwert:  \ansref  mit zugehörigem Eigenvektor: $($ \ansref ,  \ansref $)^T$.}
+	    }
+     \lang{en}{
+	    \text{Determine the eigenvalues of the matrix $A=\var{aa}$ and one eigenvector each.\\
+Smaller eigenvalue: \ansref  with corresponding eigenvector: $($ \ansref ,  \ansref $)^T$\\
+Greater eigenvalue:  \ansref  with corresponding eigenvector: $($ \ansref ,  \ansref $)^T$.}
+	    }
+	    %\permuteAnswers{1, 2, 3} 
+	    %http://team.mumie.net/projects/support/wiki/DifferentAnswerType
+	    \begin{answer}
+            \type{input.number}
+			\solution{l1}
+	    \end{answer}    
+	    \begin{answer}
+            \type{input.function}
+			\solution{a11}
+			\inputAsFunction{x}{v1}
+	    \end{answer}    
+	    \begin{answer}
+            \type{input.function}
+			\solution{a22}
+			\inputAsFunction{x}{v2}
+			\checkFuncForZero{(v1*a2-v2*a1)^2+1-|sign(v1^2+v2^2)|}{-1}{1}{10}
+	    \end{answer}   
+	    \begin{answer}
+            \type{input.number}
+			\solution{l2}
+	    \end{answer}    
+	    \begin{answer}
+            \type{input.function}
+			\solution{b11}
+			\inputAsFunction{x}{w1}
+	    \end{answer}    
+	    \begin{answer}
+            \type{input.function}
+			\solution{b22}
+			\inputAsFunction{x}{w2}
+			\checkFuncForZero{(w1*b2-w2*b1)^2+1-|sign(w1^2+w2^2)|}{-1}{1}{10}
+	    \end{answer}    
+	    
+	    %generic viz: http://team.mumie.net/projects/support/wiki/Example
+	    \lang{de}{\explanation[equal(ans_1,l1) AND [NOT[equal(ans_2,a11)] OR NOT[equal(ans_3,a22)]]]
+        {Der kleinere Eigenwert ist korrekt, aber nicht der zugehörige Eigenvektor.}
+        \explanation[equal(ans_4,l2) AND [NOT[equal(ans_5,b11)] OR NOT[equal(ans_6,b22)]]]
+        {Der größere Eigenwert ist korrekt, aber nicht der zugehörige Eigenvektor.}
+        \explanation[equal(ans_1,l2) AND equal(ans_4,l1)]{Sie haben die Eigenwerte korrekt bestimmt, aber nicht der Größe nach geordnet.}
+        \explanation[NOT[equal(ans_1,l1)] AND [equal(ans_2,a11) AND equal(ans_3,a22)]]
+        {Sie scheinen sich beim kleineren Eigenwert vertippt zu haben, aber  der zugehörige Eigenvektor ist korrekt.}
+        \explanation[NOT[equal(ans_4,l2)] AND [equal(ans_5,b11) ANDequal(ans_6,b22)]]
+        {Sie scheinen sich beim größeren Eigenwert vertippt zu haben, aber  der zugehörige Eigenvektor ist korrekt.}
+        \explanation[NOT[equal(ans_4,l2)] AND NOT[equal(ans_1,l1)] AND [NOT[equal(ans_2,a11)] OR NOT[equal(ans_3,a22)]] AND [NOT[equal(ans_5,b11)] OR NOT[equal(ans_6,b22)]]]
+        {Erinnern Sie sich an die Bestimmung der Eigenwerte durch das charakteristische Polynom.}}
+
+         \lang{en}{\explanation[equal(ans_1,l1) AND [NOT[equal(ans_2,a11)] OR NOT[equal(ans_3,a22)]]]
+        {The smaller eigenvalue is correct, but not the corresponding eigenvector.}
+        \explanation[equal(ans_4,l2) AND [NOT[equal(ans_5,b11)] OR NOT[equal(ans_6,b22)]]]
+        {The greater eigenvalue is correct, but not the corresponding eigenvector.}
+        \explanation[equal(ans_1,l2) AND equal(ans_4,l1)]
+        {You have determined the right eigenvalues, but you did not arrange them by size.}
+        \explanation[NOT[equal(ans_1,l1)] AND [equal(ans_2,a11) AND equal(ans_3,a22)]]
+        {You have probably made a mistake while typing in the smaller eigenvalue, but the corresponding eigenvector is correct.}
+        \explanation[NOT[equal(ans_4,l2)] AND [equal(ans_5,b11) ANDequal(ans_6,b22)]]
+        {You have probably made a mistake while typing in the greater eigenvalue, but the corresponding eigenvector is correct.}
+        \explanation[NOT[equal(ans_4,l2)] AND NOT[equal(ans_1,l1)] AND [NOT[equal(ans_2,a11)] OR NOT[equal(ans_3,a22)]] AND [NOT[equal(ans_5,b11)] OR NOT[equal(ans_6,b22)]]]
+        {Remember the determination of eigenvalues via the characteristic polynomial.}}
+ \end{question}
+\end{problem}
+
+\embedmathlet{mathlet}
+
+\end{content}
