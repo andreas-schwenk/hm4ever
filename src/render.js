@@ -13,13 +13,12 @@
 
 import { genErrorSpan, genMathSpan, genSpan } from "./dom.js";
 import { iconPageUp, iconWarning } from "./icons.js";
-import { LANG, activeIndices, debug } from "./index.js";
+import { LANG, state } from "./index.js";
 import { Question } from "./question.js";
 import { TexNode } from "./tex_node.js";
 
 export class Renderer {
   /**
-   *
    * @param {TexNode} root
    */
   constructor(root) {
@@ -127,11 +126,11 @@ export class Renderer {
         no.classList.add("chapterTitleNo");
         if (this.documentClass === "article")
           no.innerHTML =
-            (debug ? "[DEBUG] " : "") +
-            (activeIndices.chapter + 1) +
+            (state.debug ? "[DEBUG] " : "") +
+            (state.chapter + 1) +
             "." +
-            (activeIndices.subchapter + 1);
-        else no.innerHTML = "" + (activeIndices.subchapter + 1);
+            (state.document + 1);
+        else no.innerHTML = "" + (state.document + 1);
         parent.appendChild(no);
         let title = document.createElement("div");
         title.classList.add("chapterTitle");
@@ -623,6 +622,13 @@ export class Renderer {
         }
         let id = node.children[0].getText().trim();
         if (this.currentAnchor != null) this.labels[id] = this.currentAnchor;
+        break;
+      }
+      case "\\figure": {
+        // TODO: captions, ... are ignored
+        let div = document.createElement("div");
+        parent.appendChild(div);
+        this.genParagraphs(node, div);
         break;
       }
       case "\\image": {

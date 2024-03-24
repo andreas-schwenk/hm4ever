@@ -4,11 +4,13 @@
  * LICENSE: GPLv3
  */
 
+import { pushState, render, state, tree } from "./index.js";
+
 /**
  * This file implements the navigation views (index and for current chapter)
  */
 
-import { activeIndices, setState, show_chapter, tree } from "./index.js";
+export let renderedChapterNavigation = false;
 
 /**
  * shows the global navigation, i.e. parts and course selection
@@ -42,23 +44,29 @@ export function createGlobalNavigation() {
       path = "content/synth/tkz_Icon_" + path + ".svg";
       img.src = path;
       box.addEventListener("click", () => {
-        activeIndices.part = partIdx;
-        activeIndices.chapter = chapterIdx;
-        setState(false);
+        state.part = partIdx;
+        state.chapter = chapterIdx;
+        state.documentType = "";
+        state.document = -1;
+        pushState();
+        if (state.debug == false) createChapterNavigation();
+        render();
       });
     }
   }
 }
 
-// active visibility:  0 := lectures,  1 := exercises,  2 := trainings
-let unfoldedSectionIdx = 0;
-
 /**
  * shows the navigation of the current active chapter
  */
 export function createChapterNavigation() {
-  let part = tree.parts[activeIndices.part];
-  let chapter = part.chapters[activeIndices.chapter];
+  renderedChapterNavigation = true;
+
+  // active visibility:  0 := lectures,  1 := examples,  2 := trainings
+  let unfoldedSectionIdx = 0;
+
+  let part = tree.parts[state.part];
+  let chapter = part.chapters[state.chapter];
 
   let navigation = document.getElementById("navigation");
   navigation.innerHTML = "";
@@ -71,31 +79,29 @@ export function createChapterNavigation() {
   let chapterDiv = document.createElement("div");
   navigation.appendChild(chapterDiv);
   chapterDiv.classList.add("navChapter");
-  chapterDiv.innerHTML =
-    "" + (activeIndices.chapter + 1) + "&nbsp" + chapter.title;
+  chapterDiv.innerHTML = "" + (state.chapter + 1) + "&nbsp" + chapter.title;
 
   let linkDivs = [];
   let listDivs = [];
 
-  let sectionIDs = ["Vorlesung", "Beispiele", "Trainingsaufgaben"];
-  for (let k = 0; k < sectionIDs.length; k++) {
-    let sectionID = sectionIDs[k];
-    let sectionTitleDiv = document.createElement("div");
-    sectionTitleDiv.classList.add("navSectionTitle");
-    navigation.appendChild(sectionTitleDiv);
-    sectionTitleDiv.innerHTML = sectionID;
+  let documentTypes = ["Vorlesung", "Beispiele", "Trainingsaufgaben"];
+  for (let k = 0; k < documentTypes.length; k++) {
+    let documentId = documentTypes[k];
+
+    let titleDiv = document.createElement("div");
+    titleDiv.classList.add("navSectionTitle");
+    navigation.appendChild(titleDiv);
+    titleDiv.innerHTML = documentId;
 
     let listDiv = document.createElement("div");
     navigation.appendChild(listDiv);
     listDivs.push(listDiv);
     listDiv.style.display = k == unfoldedSectionIdx ? "block" : "none";
 
-    let sectionLinkDivs = [];
-
-    sectionTitleDiv.addEventListener("click", () => {
-      if (unfoldedSectionIdx != k) sectionLinkDivs[0].click();
+    titleDiv.addEventListener("click", () => {
+      document.getElementById("content").innerHTML = "";
       unfoldedSectionIdx = k;
-      for (let l = 0; l < sectionIDs.length; l++)
+      for (let l = 0; l < documentTypes.length; l++)
         listDivs[l].style.display = l == unfoldedSectionIdx ? "block" : "none";
     });
 
@@ -112,34 +118,28 @@ export function createChapterNavigation() {
         break;
     }
     if (items == undefined) continue;
+
     for (let i = 0; i < items.length; i++) {
       let lecture = items[i];
       let lectureDiv = document.createElement("div");
       linkDivs.push(lectureDiv);
-      sectionLinkDivs.push(lectureDiv);
+      linkDivs.push(lectureDiv);
       listDiv.appendChild(lectureDiv);
       lectureDiv.classList.add("navLecture");
       let html =
         '<div style="min-width: 30px">' +
-        (k == 0 ? activeIndices.chapter + 1 + "." : "") +
+        (k == 0 ? state.chapter + 1 + "." : "") +
         (i + 1) +
         " &nbsp;</div>";
       html += lecture.title;
       lectureDiv.innerHTML = html;
 
       lectureDiv.addEventListener("click", () => {
-        activeIndices.subchapter = i;
-        for (let ld of linkDivs) ld.classList.remove("navLectureSelected");
-        lectureDiv.classList.add("navLectureSelected");
-        let path = lecture.path;
-        fetch(path + "?v=" + Date.now())
-          .then((x) => x.text())
-          .then((src) => {
-            show_chapter(src);
-          });
+        state.documentType = ["lecture", "example", "training"][k];
+        state.document = i;
+        pushState();
+        render();
       });
     }
   }
-  // show first lecture
-  linkDivs[0].click();
 }
